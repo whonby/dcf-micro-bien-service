@@ -412,7 +412,7 @@
 // import { formatageSomme } from "../../../Repositories/Repository";
 
 export default {
-  name: 'besionImmolisation',
+  name: 'compte',
   data() {
     return {
       fabActions: [

@@ -4,13 +4,13 @@
     <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Type Facture</h3>
+        <button data-dismiss="modal" class="close" type="button">Ã—</button>
+        <h3>Ajouter Type Acte Depense</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">type facture</label>
+            <label class="control-label">Type Acte Depense</label>
             <div class="controls">
               <input
                 type="text"
@@ -41,17 +41,17 @@
 
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Type Facture</h3>
+        <button data-dismiss="modal" class="close" type="button">Ã—</button>
+        <h3>Modifier Type Acte Depense</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
             <div class="control-group">
-            <label class="control-label">type facture</label>
+            <label class="control-label">type Acte Depense</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="formData.libelle_type"
+                v-model="editEquipement.libelle_type"
                 class="span"
                 placeholder="Saisir le libelle_type"
               />
@@ -81,9 +81,9 @@
             class="btn btn-default pull-right"
             style="cursor:pointer;"
             :fields="json_fields"
-            title="Liste Types équipements"
+            title="Liste Types Ã©quipements"
             :data="filtre_equipement"
-            name="Liste des types équipements"
+            name="Liste des types Ã©quipements"
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
@@ -92,7 +92,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Lots</h5>
+              <h5>Liste des type Acte Depense</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -103,9 +103,8 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>numero_lot</th>
-                    <th>libelle_lot</th>
-                     <th>montant_lot</th>
+                    <th>type acte depense</th>
+                   
                    
                     <th>Action</th>
                   </tr>
@@ -132,7 +131,7 @@
 <script>
 // import { mapGetters, mapActions } from "vuex";
 export default {
-  name:'type facture',
+  name:'type acte depense',
   data() {
     return {
       fabActions: [

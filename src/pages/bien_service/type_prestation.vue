@@ -131,7 +131,7 @@
 <script>
 // import { mapGetters, mapActions } from "vuex";
 export default {
-  name:'listeEquipement',
+  name:'type prestation',
   data() {
     return {
       fabActions: [
