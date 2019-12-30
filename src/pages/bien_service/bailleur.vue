@@ -135,7 +135,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierFamilleLocal(editEquipement)"
+          @click.prevent="modifierFamilleLocal(editbailleur)"
           class="btn btn-primary"
           href="#"
         
@@ -165,7 +165,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Banques</h5>
+              <h5>Liste des Bailleur</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -176,10 +176,12 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>numero_banque</th>
-                    <th>libelle_banque</th>
-                     <th>numero_telephone</th>
-                    <th>situation_geographique_banque</th>
+                    <th>nom_bailleur</th>
+                    <th>prenoms_bailleur</th>
+                     <th>telephone_bail</th>
+                    <th>adresse_bail</th>
+                    <th>email_bail</th>
+                    
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -228,7 +230,7 @@ export default {
       formData: {
         
       },
-      editEquipement: {
+      editbailleur: {
      
       },
       search: ""
