@@ -446,7 +446,7 @@
                         <a
                           class="btn btn-primary"
                           @click.prevent="ajouterImmobilisationLocal(formData)"
-                        >Valider</a>
+                        >Modifier</a>
                         <a
                           @click.prevent="afficherTableauImmobilisation()"
                           class="btn"
