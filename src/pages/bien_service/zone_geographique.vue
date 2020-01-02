@@ -5,16 +5,16 @@
     <div id="exampleModal" class="modal hide taillemodal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Livrable</h3>
+        <h3>Ajouter Zone geographique</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
           <tr>
               <td>
               <div class="control-group">
-                <label class="control-label">zone_geographique</label>
+                <label class="control-label">region</label>
                 <div class="controls">
-                  <select v-model="formData.id_zone_geographique" >
+                  <select v-model="formData.region" >
                     <option value>Sélectionner</option>
                     <option></option>
                   </select>
@@ -24,9 +24,9 @@
             <td>
               
               <div class="control-group">
-                <label class="control-label">type_livrable</label>
+                <label class="control-label">departement</label>
                 <div class="controls">
-                  <select v-model="formData.type_livrable" >
+                  <select v-model="formData.departement" >
                     <option value>Sélectionner</option>
                     <option></option>
                   </select>
@@ -35,9 +35,9 @@
             </td>
              <td>
               <div class="control-group">
-                <label class="control-label">libelle_livrable</label>
+                <label class="control-label">sous_prefecture</label>
                 <div class="controls">
-                  <select v-model="formData.libelle_livrable">
+                  <select v-model="formData.sous_prefecture">
                     <option></option>
                     
                   </select>
@@ -48,25 +48,22 @@
            
           </tr>
           <tr>
-            <td>
+             <td>
               <div class="control-group">
-                <label class="control-label">date_livraison</label>
+                <label class="control-label">commune</label>
                 <div class="controls">
-                  <input
-                    type="date"
+                  <select v-model="formData.commune">
+                    <option></option>
                     
-                   v-model="formData.date_livraison"
-                    class="span"
-                    
-                  />
+                  </select>
                 </div>
               </div>
-              </td>
-              <td>
+            </td>
+               <td>
               <div class="control-group">
-                <label class="control-label">imputation_budgetaire</label>
+                <label class="control-label">ville</label>
                 <div class="controls">
-                  <select v-model="formData.imputation_budgetaire">
+                  <select v-model="formData.ville">
                     <option></option>
                     
                   </select>
@@ -75,9 +72,9 @@
             </td>
              <td>
               <div class="control-group">
-                <label class="control-label">district</label>
+                <label class="control-label">village</label>
                 <div class="controls">
-                  <select v-model="formData.district">
+                  <select v-model="formData.village">
                     <option></option>
                     
                   </select>
@@ -91,9 +88,9 @@
           <tr>
                <td>
               <div class="control-group">
-                <label class="control-label">departement</label>
+                <label class="control-label">longitude_ville</label>
                 <div class="controls">
-                  <select v-model="formData.departement">
+                  <select v-model="formData.longitude_ville">
                     <option></option>
                     
                   </select>
@@ -102,9 +99,9 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">localite</label>
+                <label class="control-label">latitude_ville</label>
                 <div class="controls">
-                  <select v-model="formData.localite">
+                  <select v-model="formData.latitude_ville">
                     <option></option>
                     
                   </select>
@@ -113,9 +110,9 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">commune</label>
+                <label class="control-label">version</label>
                 <div class="controls">
-                  <select v-model="formData.commune">
+                  <select v-model="formData.version">
                     <option></option>
                     
                   </select>
@@ -130,66 +127,11 @@
           <tr>
          <td>
               <div class="control-group">
-                <label class="control-label">village</label>
+                <label class="control-label">zone_modif</label>
                 <div class="controls">
                   <input
                     type="number"
-                    v-model="formData.village"
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-           <td>
-              <div class="control-group">
-                <label class="control-label">sous_prefecture</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    v-model="formData.sous_prefecture"
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">beneficiaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    v-model="formData.beneficiaire"
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-                 
-          </tr>
-           <tr>
-         <td>
-              <div class="control-group">
-                <label class="control-label">quantite</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    v-model="formData.quantite"
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-           <td>
-              <div class="control-group">
-                <label class="control-label">montant</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    v-model="formData.montant"
+                    v-model="formData.id_zone_modif"
                     class="span"
                     
                   />
@@ -197,8 +139,10 @@
               </div>
             </td>
            
+           
                  
           </tr>
+          
         </table>
       </div>
       <div class="modal-footer">
@@ -225,9 +169,9 @@
         <tr>
               <td>
               <div class="control-group">
-                <label class="control-label">zone_geographique</label>
+                <label class="control-label">region</label>
                 <div class="controls">
-                  <select v-model="editLivrable.id_zone_geographique" >
+                  <select v-model="editZoneGeographique.region" >
                     <option value>Sélectionner</option>
                     <option></option>
                   </select>
@@ -237,9 +181,9 @@
             <td>
               
               <div class="control-group">
-                <label class="control-label">type_livrable</label>
+                <label class="control-label">departement</label>
                 <div class="controls">
-                  <select v-model="editLivrable.type_livrable" >
+                  <select v-model="editZoneGeographique.departement" >
                     <option value>Sélectionner</option>
                     <option></option>
                   </select>
@@ -248,9 +192,9 @@
             </td>
              <td>
               <div class="control-group">
-                <label class="control-label">libelle_livrable</label>
+                <label class="control-label">sous_prefecture</label>
                 <div class="controls">
-                  <select v-model="editLivrable.libelle_livrable">
+                  <select v-model="editZoneGeographique.sous_prefecture">
                     <option></option>
                     
                   </select>
@@ -261,25 +205,22 @@
            
           </tr>
           <tr>
-            <td>
+             <td>
               <div class="control-group">
-                <label class="control-label">date_livraison</label>
+                <label class="control-label">commune</label>
                 <div class="controls">
-                  <input
-                    type="date"
+                  <select v-model="editZoneGeographique.commune">
+                    <option></option>
                     
-                   v-model="editLivrable.date_livraison"
-                    class="span"
-                    
-                  />
+                  </select>
                 </div>
               </div>
-              </td>
-              <td>
+            </td>
+               <td>
               <div class="control-group">
-                <label class="control-label">imputation_budgetaire</label>
+                <label class="control-label">ville</label>
                 <div class="controls">
-                  <select v-model="editLivrable.imputation_budgetaire">
+                  <select v-model="editZoneGeographique.ville">
                     <option></option>
                     
                   </select>
@@ -288,9 +229,9 @@
             </td>
              <td>
               <div class="control-group">
-                <label class="control-label">district</label>
+                <label class="control-label">village</label>
                 <div class="controls">
-                  <select v-model="editLivrable.district">
+                  <select v-model="editZoneGeographique.village">
                     <option></option>
                     
                   </select>
@@ -304,9 +245,9 @@
           <tr>
                <td>
               <div class="control-group">
-                <label class="control-label">departement</label>
+                <label class="control-label">longitude_ville</label>
                 <div class="controls">
-                  <select v-model="editLivrable.departement">
+                  <select v-model="editZoneGeographique.longitude_ville">
                     <option></option>
                     
                   </select>
@@ -315,9 +256,9 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">localite</label>
+                <label class="control-label">latitude_ville</label>
                 <div class="controls">
-                  <select v-model="editLivrable.localite">
+                  <select v-model="editZoneGeographique.latitude_ville">
                     <option></option>
                     
                   </select>
@@ -326,9 +267,9 @@
             </td>
             <td>
               <div class="control-group">
-                <label class="control-label">commune</label>
+                <label class="control-label">version</label>
                 <div class="controls">
-                  <select v-model="editLivrable.commune">
+                  <select v-model="editZoneGeographique.version">
                     <option></option>
                     
                   </select>
@@ -343,66 +284,11 @@
           <tr>
          <td>
               <div class="control-group">
-                <label class="control-label">village</label>
+                <label class="control-label">zone_modif</label>
                 <div class="controls">
                   <input
                     type="number"
-                    v-model="editLivrable.village"
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-           <td>
-              <div class="control-group">
-                <label class="control-label">sous_prefecture</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    v-model="editLivrable.sous_prefecture"
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">beneficiaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    v-model="editLivrable.beneficiaire"
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-                 
-          </tr>
-           <tr>
-         <td>
-              <div class="control-group">
-                <label class="control-label">quantite</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    v-model="editLivrable.quantite"
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-           <td>
-              <div class="control-group">
-                <label class="control-label">montant</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    v-model="editLivrable.montant"
+                    v-model="editZoneGeographique.id_zone_modif"
                     class="span"
                     
                   />
@@ -410,12 +296,13 @@
               </div>
             </td>
            
+           
                  
           </tr>
         </table>
       </div>
       <div class="modal-footer">
-        <a class="btn btn-primary" @click.prevent="modifierStockLocal(editLivrable)">Modifier</a>
+        <a class="btn btn-primary" @click.prevent="modifierStockLocal(editZoneGeographique)">Modifier</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
