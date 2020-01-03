@@ -28,10 +28,10 @@
           
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste exercice budgetaire</h5>
-             <!-- <div align="right">
+             <div align="right">
         Rechercher: <input type="text" v-model="search">
 
-          </div> -->
+          </div>
              
           </div>
          
