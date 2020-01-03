@@ -69,6 +69,7 @@ export function supprimerPrestation({commit}, id) {
 }
 
 
+
 export  function  getActeDepense({commit}) {
     queue.push(() => axios.get('/url').then((response) => {
       commit('GET_ALL_ACTE_DEPENSE', response.data)

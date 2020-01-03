@@ -21,11 +21,14 @@ const defaultState = {
     typeAnalyses:[],
     typeUa:[],
     uniteAdministratives:[],
-    uniteZones:[]
+    uniteZones:[],
+    ligneBudgetaires:[],
+    zoneGeographiques:[],
+    typeTextJuridiques:[]
 
 
-    
-    
+
+
 }
 
 export default defaultState;
