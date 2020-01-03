@@ -16,6 +16,7 @@ import MarcheExecution from "../../pages/gestion_marche/MarcheContrat/execution/
 import DetailMarcheExecution from "../../pages/gestion_marche/MarcheContrat/execution/DetailMarcheContratExecution"
 const GestionMarcheRoutes = [
     {
+        
         path:"/mode-passation",
         name:"ModePassation",
         component:ModePassation

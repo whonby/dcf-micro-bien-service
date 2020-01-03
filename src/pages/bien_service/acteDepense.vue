@@ -371,7 +371,7 @@
         </table>
       </div>
       <div class="modal-footer">
-        <a class="btn btn-primary" @click.prevent="modifierStockLocal(editActeDepense)">Modifier</a>
+        <a class="btn btn-primary" @click.prevent="modifierActeDepense(editActeDepense)">Modifier</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
@@ -427,7 +427,27 @@
                   </tr>
                 </thead>
                 <tbody>
-                    
+                       <tr class="odd gradeX" v-for="(acteDepense, index) in 
+                categorieMissionFiltre"
+                 :key="acteDepense.id">
+                 <td @dblclick="afficherModalModifierActeDepense(index)">
+                   {{acteDepense.matricule || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierActeDepense(index)">
+                   {{acteDepense.relation.type_acte_depense || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierActeDepense(index)">
+                   {{acteDepense.matricule || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierActeDepense(index)">
+                   {{acteDepense.matricule || 'Non renseigné'}}</td>
+
+
+
+                     <div class="btn-group">
+              <button @click.prevent="supprimerActeDepense(acteDepense.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+             
+            </div>
+
+                       </tr>
                 </tbody>
               </table>
             </div>
@@ -491,7 +511,7 @@ export default {
 //     )
 // },
   computed: {
-    // ...mapGetters("SuiviImmobilisation", [
+    // ...mapGetters("bienService", [ 'acteDepense'
    
      
     // ]),
@@ -522,11 +542,21 @@ export default {
     },
     // fonction pour vider l'input ajouter
        // afficher modal de modification
+
+       modifierActeDepense(){
+  this.modifierActeDepense(this.editPrestation)
+  this.$('#modifierModal').modal('hide');
+  // this.editPrestation = {
+  //   libelle_prestation:"",
+  //   libelle:"",
+   
+  // }
+},
     
 
-    formaterDate(date) {
-      return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
-    },
+    // formaterDate(date) {
+    //   return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+    // },
     
     ExporterEnExel(){
       this.$refs.excel.click()

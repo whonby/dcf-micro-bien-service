@@ -109,7 +109,7 @@ export default {
       
     ]),
 
-    	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission',
+    	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
     	 ...mapActions('planification_budgetaire', ['getAllBudgetGeneral'])
 
@@ -201,7 +201,7 @@ this.getMarcheContratExecution()
      this.getNormeMission()
    
       this.getMission()
-
+       this.getHistoriqueMission() 
 this.getAllBudgetGeneral()
       /**
        * fin missions

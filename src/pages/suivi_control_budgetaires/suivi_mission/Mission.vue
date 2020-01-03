@@ -1,7 +1,7 @@
 
 <template>
     <div class="container-fluid">
-         
+          
      <div class="quick-actions_homepage" style="position: center;">
       <ul class="quick-actions" >
         
@@ -22,10 +22,15 @@
              <a href="#">
             <i class="icon-fullscreen"></i><span class="label label-success">{{tauxDossierRejetMissions}}
                 %</span>
-             Tx de dossiers de m. rejetés.</a> </li>
+             Taux de dossiers de mission rejetés.</a> </li>
              
-            
+              <li class="bg_ly" title="Cout moyen des billets d'avion ">
+             <a href="#">
+            <i class="icon-fullscreen"></i><span class="label label-success">{{formatageSomme(parseFloat(coutMoyenDeBilletAvionDeMissions))}}
+              </span>
+             cout moyen des billets d'avion.</a> </li>
              
+
 
 
 
@@ -60,10 +65,10 @@
 
 
 
-             <li class="bg_ls" title="montant total de missions par unite administrative ">
-             <a href="#"><span style="font-size:0.8em">MT par UA</span>
+             <li class="bg_ls" title="cout total de missions effectuée par unite administrative ">
+             <a href="#"><span style="font-size:0.8em">CT par UA</span>
         <i class="icon-pencil"></i><span class="label label-important">
-            {{formatageSomme(parseFloat(montantTotalParUA(ua_id)))}}  
+            {{formatageSomme(parseFloat(coutTotalParUA(ua_id)))}}  
             </span> 
             {{NomDeMissionParUA(ua_id)}}       
               </a> </li>
@@ -79,7 +84,7 @@
              
 
     
-               <li class="bg_lg" title="cout moynen de missions des billets d'avions par unite administrative ">
+               <li class="bg_lg" title="cout moynen des billets d'avions par unite administrative ">
              <a href="#"> <span style="font-size: 0.8em;">CT. m. par UA </span>
         <i class="icon-eject"></i><span class="label label-important">
             {{formatageSomme(parseFloat(coutMoyenDeBilletAvionParUA(ua_id)))}}  
@@ -114,8 +119,8 @@
              </a> </li>
 
 
-               <li class="bg_ly" title="montant total de missions effectuée par un agent  ">
-             <a href="#"><span style="font-size:0.8em">MT par agent</span>
+               <li class="bg_ly" title="cout total de missions effectuée par un agent  ">
+             <a href="#"><span style="font-size:0.8em">CT par agent</span>
         <i class="icon-user"></i><span class="label label-success">
             {{formatageSomme(parseFloat(montantTotalParActeurDepense(acte_personnel_id)))}}  
             </span> 
@@ -131,7 +136,7 @@
              {{nomParActeurDepense(acte_personnel_id)}}
              </a> </li>
 
-         <li class="bg_ls" title="cout moyen de missions des billets d'avion par agent">
+         <li class="bg_ls" title="cout moyen des billets d'avion par agent">
              <a href="#"><span style="font-size:0.8em">CT m. par agent</span>
         <i class="icon-user"></i><span class="label label-success">
             {{formatageSomme(parseFloat(coutMoyenBilletAvionParAgent(acte_personnel_id)))}}  
@@ -177,6 +182,10 @@
           <div class="widget-title">
             <ul class="nav nav-tabs">
               <li class="active"><a data-toggle="tab" href="#tab1">Toutes les missions</a></li>
+               <!-- <li><a data-toggle="tab" href="#tab2">Tous les dossiers en attente</a></li>  -->
+               <li><a data-toggle="tab" href="#tab3">Tous les dossiers visés</a></li> 
+              <li><a data-toggle="tab" href="#tab4">Tous les dossiers differés</a></li>
+            <li><a data-toggle="tab" href="#tab5">Tous les dossiers rejetés</a></li>  
                 
               
             </ul>
@@ -219,42 +228,24 @@
                                     
                           <div class="widget-content nopadding" v-if="all_acteur_depense.length">
                                     <div class="" align="left">
-                                      <!-- <div class="span3">
-                                        Montrer: <select name="" id="">
-                                            <option value="">10</option>
-                                            <option value="">15</option>
-                                            <option value="">20</option>
-                                          </select>
-                                      </div> -->
+                                   
 
-                                       <!-- <div class="span3">
-                                          
-                           <model-list-select style="background-color: rgb(222, 222, 222);"
+                                           <div class="span3">
+
+
+                                          <model-list-select style="background-color: rgb(222, 222, 222);"
                                            class="wide"
 
-                                            :list="exercices_budgetaires"
-                                            v-model="exercice_budgetaire_id"
-                                                option-value="id"
-                                                option-text="annee"
-                                                placeholder="Exo ==> saisissez"
-                                            >
-                                        </model-list-select> 
-                                       </div> -->
-
-                                        <div class="span3">
-
-                       <model-list-select style="background-color: rgb(222, 222, 222);"
-                                           class="wide"
-                                           
                                             :list="uniteAdministratives"
                                             v-model="ua_id"
                                                 option-value="id"
                                                 option-text="libelle"
-                                                placeholder="UA ==> saisissez"
+                                                placeholder="saisissez UA"
                                             >
-                          
+                                           
                                     </model-list-select> 
-                                        </div>
+                                           
+                                                      </div> 
                                         
                                          <div class="span3">
 
@@ -266,7 +257,7 @@
                                             v-model="acte_personnel_id"
                                                 option-value="id"
                                                 option-text="matricule"
-                                                placeholder="Acte Dep ==> saisissez"
+                                                placeholder="saisissez l'acteur de depense"
                                             >
                                            
                                     </model-list-select> 
@@ -297,6 +288,7 @@
                 localisationsFiltre"
                 :style="getMissionStyles(mission)"
                  :key="mission.id">
+                 
                   <td @dblclick="afficherModalModifierMission(mission.id)">
                      {{mission.objetExerciceBudegetaire.annee}}</td> 
                   <td @dblclick="afficherModalModifierMission(mission.id)">
@@ -329,10 +321,10 @@
                                v-else-if="mission.historique_missions_count > 0 && mission.historique_missions[0].type_operation == 2" 
                                class="btn label label-important" >
                               Rejeté</span>
-
                           <span v-else class="btn label label-info" >En attente</span>
     
                          </td>
+
 
                  
                       
@@ -374,7 +366,415 @@
 
              </div>
 
+
+
+
+
+
+
+
+              <!---  deuxieme tableau  --->
+
+
+<!--         
+                        <div id="tab2" class="tab-pane">
+                           <div class="container-fluid">
+                                      <div class="row-fluid">
+                                        <div class="span12">
+                                            <div>
+
+                                        <download-excel
+                                            class="btn btn-default pull-right"
+                                            style="cursor:pointer;"
+                                              :fields = "json_fields"
+                                              title="Liste des historiques de missions"
+                                              name ="Liste des missions"
+                                              worksheet = "Missions"
+                                            :data="historiques_missions">
+                      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+
+                                                 </download-excel> 
+                                     </div> <br>
+        <div class="widget-box">
+             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+            <h5>Liste de tous les  missions visés</h5>
+             <div align="right">
+          </div>
+             
+          </div>
+         
+           <div class="widget-content nopadding">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                    <th>Type operation</th>
+                     <th>Date operation</th>
+                     <th>Motif</th>
+                     <th>Observation</th>
+                      <th>Action</th>
+                </tr>
+              </thead>
+              <tbody >
+                <tr class="odd gradeX" v-for="(historiqueMission, index) in 
+                listeHistoriqueDeTousMissionsEnAttente"
+                 :key="historiqueMission.id">
+
+                  <td  @dblclick="afficherModalModifierHistoriqueMission(index)" >
+                     <span 
+                     v-if="historiqueMission.type_operation == 0" > visé </span>
+                     <span v-else-if="historiqueMission.type_operation == 1" >Differé</span>
+                     <span v-else >Rejeté </span>
+   
+                      </td>
+
+                  <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+                      {{formaterDate(historiqueMission.date_operation) || 'Non renseigné'}}</td>
+
+                        <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+                      {{historiqueMission.motif || 'Non renseigné'}}</td>
+
+                        <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+                      {{historiqueMission.observation || 'Non renseigné'}}</td>
+                   
+                  <td>
+
+
+
+              <div class="btn-group">
+              <button @click.prevent="supprimerHistoriqueMission(historiqueMission.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+             
+            </div>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div v-if="listeHistoriqueDeTousMissionsEnAttente.length">    
+            </div>
+            <div v-else>
+              <div align="center">
+                <h6 style="color:red;">Aucune  mission Visé </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+              </div>
+            </div>
+            </div> -->
+  <!-- fin deuxieme tableau  -->
+
+
+
+
+    <!---  debut troisieme tableau  --->
+
+
+         
+                           <div id="tab3" class="tab-pane">
+                           <div class="container-fluid">
+                                      <div class="row-fluid">
+                                        <div class="span12">
+                                            <div>
+
+                                        <download-excel
+                                            class="btn btn-default pull-right"
+                                            style="cursor:pointer;"
+                                              :fields = "json_fields"
+                                              title="Liste des historiques de missions"
+                                              name ="Liste des missions"
+                                              worksheet = "Missions"
+                                            :data="historiques_missions">
+                      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+
+                                                 </download-excel> 
+                                     </div> <br>
+        <div class="widget-box">
+             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+            <h5>Liste de tous les dossiers de missions visés</h5>
+             <div align="right">
+          </div>
+             
+          </div>
+         
+           <div class="widget-content nopadding" v-if="missions.length">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                    <th>Type operation</th>
+                     <th>Date operation</th>
+                     <th>Motif</th>
+                     <th>Observation</th>
+                     <th>Objet</th>
+                      <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd gradeX" v-for="(historiqueMission, index) in 
+                historiqueVise"
+                 :key="historiqueMission.id">
+
+                  <td  @dblclick="afficherModalModifierHistoriqueMission(index)" >
+                     <span 
+                     v-if="historiqueMission.type_operation == 0" > visé </span>
+                     <span v-else-if="historiqueMission.type_operation == 1" >Differé</span>
+                     <span v-else >Rejeté </span>
+   
+                      </td>
+
+                  <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+                      {{formaterDate(historiqueMission.date_operation) || 'Non renseigné'}}</td>
+
+                        <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+                      {{historiqueMission.motif || 'Non renseigné'}}</td>
+
+                        <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+                      {{historiqueMission.observation || 'Non renseigné'}}</td>
+
+                        <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+                      {{historiqueMission.objetMission.objet || 'Non renseigné'}}</td>
+                   
+                  <td>
+
+
+
+              <div class="btn-group">
+              <button @click.prevent="supprimerHistoriqueMission(historiqueMission.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+             
+            </div>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div v-if="historiqueVise.length">    
+            </div>
+            <div v-else>
+              <div align="center">
+                <h6 style="color:red;">Aucun dossier de missions Visés </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+              </div>
+            </div>
+            </div>
+  <!---- fin troisieme  tableau  ---->
+
+
+
+    <!--- debut  quatrieme tableau  --->
+
+
+         
+                        <div id="tab4" class="tab-pane">
+                           <div class="container-fluid">
+                                      <div class="row-fluid">
+                                        <div class="span12">
+                                            <div>
+
+                                        <download-excel
+                                            class="btn btn-default pull-right"
+                                            style="cursor:pointer;"
+                                              :fields = "json_fields"
+                                              title="Liste des historiques de missions"
+                                              name ="Liste des missions"
+                                              worksheet = "Missions"
+                                            :data="historiques_missions">
+                      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+
+                                                 </download-excel> 
+                                     </div> <br>
+        <div class="widget-box">
+             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+            <h5>Liste de tous les dossiers de missions differés</h5>
+             <div align="right">
+          </div>
+             
+          </div>
+         
+           <div class="widget-content nopadding" v-if="missions.length">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                    <th>Type operation</th>
+                     <th>Date operation</th>
+                     <th>Motif</th>
+                     <th>Observation</th>
+                     <th> Objet</th>
+                      <th>Action</th>
+                </tr>
+              </thead>
+              <tbody >
+                <tr class="odd gradeX" v-for="(historiqueMission, index) in 
+                listeHistoriqueDiffere"
+                 :key="historiqueMission.id">
+
+                  <td  @dblclick="afficherModalModifierHistoriqueMission(index)" >
+                     <span 
+                     v-if="historiqueMission.type_operation == 0" > visé </span>
+                     <span v-else-if="historiqueMission.type_operation == 1" >Differé</span>
+                     <span v-else >Rejeté </span>
+   
+                      </td>
+
+                  <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+                      {{formaterDate(historiqueMission.date_operation) || 'Non renseigné'}}</td>
+
+                        <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+                      {{historiqueMission.motif || 'Non renseigné'}}</td>
+
+                        <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+                      {{historiqueMission.observation || 'Non renseigné'}}</td>
+
+                      <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+                        {{historiqueMission.objetMission.objet}}
+                      </td>
+                   
+                  <td>
+
+
+
+              <div class="btn-group">
+              <button @click.prevent="supprimerHistoriqueMission(historiqueMission.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+             
+            </div>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div v-if="listeHistoriqueDiffere.length">    
+            </div>
+            <div v-else>
+              <div align="center">
+                <h6 style="color:red;">Aucun dossier de missions differés </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+              </div>
+            </div>
+            </div>
+  <!---- fin quatrieme tableau ---->
+
+
+
+
+
+    <!--- debut  quatrieme tableau  --->
+
+
+         
+                        <div id="tab5" class="tab-pane">
+                           <div class="container-fluid">
+                                      <div class="row-fluid">
+                                        <div class="span12">
+                                            <div>
+
+                                        <download-excel
+                                            class="btn btn-default pull-right"
+                                            style="cursor:pointer;"
+                                              :fields = "json_fields"
+                                              title="Liste des historiques de missions"
+                                              name ="Liste des missions"
+                                              worksheet = "Missions"
+                                            :data="historiques_missions">
+                      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+
+                                                 </download-excel> 
+                                     </div> <br>
+        <div class="widget-box">
+             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+            <h5>Liste de tous les dossiers de missions rejetés</h5>
+             <div align="right">
+          </div>
+             
+          </div>
+         
+           <div class="widget-content nopadding" v-if="missions.length">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                    <th>Type operation</th>
+                     <th>Date operation</th>
+                     <th>Motif</th>
+                     <th>Observation</th>
+                     <th> Objet de mission</th>
+                      <th>Action</th>
+                </tr>
+              </thead>
+              <tbody >
+                <tr class="odd gradeX" v-for="(historiqueMission, index) in 
+                listeHistoriqueDeTousMissionRejete"
+                 :key="historiqueMission.id">
+
+                  <td  @dblclick="afficherModalModifierHistoriqueMission(index)" >
+                     <span 
+                     v-if="historiqueMission.type_operation == 0" > visé </span>
+                     <span v-else-if="historiqueMission.type_operation == 1" >Differé</span>
+                     <span v-else >Rejeté </span>
+   
+                      </td>
+
+                  <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+                      {{formaterDate(historiqueMission.date_operation) || 'Non renseigné'}}</td>
+
+                        <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+                      {{historiqueMission.motif || 'Non renseigné'}}</td>
+
+                        <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+                      {{historiqueMission.observation || 'Non renseigné'}}</td>
+
+                      <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+
+                        {{historiqueMission.objetMission.objet}}
+                      </td>
+                   
+                  <td>
+
+
+
+              <div class="btn-group">
+              <button @click.prevent="supprimerHistoriqueMission(historiqueMission.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+             
+            </div>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div v-if="listeHistoriqueDeTousMissionRejete.length">    
+            </div>
+            <div v-else>
+              <div align="center">
+                <h6 style="color:red;">Aucun dossier de mission rejeté </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+              </div>
+            </div>
+            </div>
+  <!---- fin quatrieme tableau ---->
                 </div>
+
+ 
+
+
+
+
+  
+
+
+
       </div>
       </div>
     </div> 
@@ -388,7 +788,7 @@
 <!----- ajouter modal   ---->
 
 
- <div id="modalDecisionCf" class="modal hide tailmodal">
+ <div id="modalDecisionCf" class="modal hide ">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Decision du controleur financier</h3>
@@ -401,13 +801,20 @@
                  <div class="control-group">
               <label class="control-label">Objet:</label>
               <div class="controls">
-                <input type="text" :value="missionAChangerLaDecision.objet"
+                <textarea type="text" :value="missionAChangerLaDecision.objet"
                 readonly
-                class="span"  /> 
+                class="span"> </textarea>
                   
                 </div>
                 
                   </div>
+
+                  <!-- <div class="control-group">
+              <label class="control-label" title="temps d'arrivé de dossier">T.T. de dossiers:</label>
+             <div class="controls">
+              <input type="time"  :value="missionAChangerLaDecision.temps_arrive" readonly >
+            </div>
+             </div> -->
            
                <div class="control-group">
               <label class="control-label">Date:</label>
@@ -423,7 +830,7 @@
                 <div class="control-group">
               <label class="control-label">Decision du cf:</label>
               <div class="controls">
-                <select v-model="formData.type_operation" class="span">
+                <select v-model="formData.type_operation" class="span">   
                   <option value="0">Viser</option>
                   <option value="1">Differer</option>
                    <option value="2">Rejeter</option>
@@ -445,6 +852,23 @@
               <textarea v-model="formData.observation" class="textarea_editor span2.5"  placeholder="Saisir l'observation ..."></textarea>
             </div>
              </div>
+            
+                 <!-- <div class="control-group">
+              <label class="control-label" title="temps du traitement de dossier">T.T. de dossiers:</label>
+             <div class="controls">
+              <input type="time"  v-model="formData.temps_traitement"  >
+            </div>
+             </div>
+
+
+              <div class="control-group">
+              <label class="control-label" title="Durée du traitement de dossier">Durée:</label>
+             <div class="controls">
+              <input type="text"   >
+            </div>
+             </div> -->
+
+
           </form>
           </div>
            <div class="modal-footer"> 
@@ -467,18 +891,23 @@
 
 
 
+ <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
+  @shortkey="AllerAPageAjouterMission()">Open</button>
+
+   <fab :actions="fabActions"
+           main-icon="apps"
+       @cache="AllerAPageAjouterMission"
+        bg-color="green"
+
+  ></fab>  
+
 
 
 
 <notifications  />
 
     
-           <fab :actions="fabActions"
-           main-icon="apps"
-       @cache="AllerAPageAjouterMission"
-        bg-color="green"
-
-  ></fab>         
+               
    </div>
 
 </template>
@@ -510,6 +939,7 @@ export default {
             'UA': 'objetUniteAdministrative.libelle',
            
         },
+        //  historiqueFiltre:"",
 
         fabActions: [
               {
@@ -527,17 +957,21 @@ export default {
 
 
      formData:{
-observation:"",
-motif:"",
-date_operation:"",
-
-type_operation:""
+        observation:"",
+        motif:"",
+        date_operation: new Date(),
+        type_operation:"",
+       
+        
      },
      editMission:{},
      missionAChangerLaDecision: {},
           
 
-    search:""
+    search:"",
+    
+    historique:""
+
     };
   },
 
@@ -551,13 +985,32 @@ type_operation:""
     //  this.getStructureActivite()
       //  var montant = this.getMissionPersonnaliser.filter(element => element.objetUniteAdministrative.id == ua_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant), 0)
    // console.log(montant)
+  
   },
   computed: {
+
+
+    // dureTraitementDuDossier(){
+
+    //   const form = this.formData
+
+    //   if(form.temps_arrive == form.temps_traitement && form.temps_arrive !=="" && form.temps_traitement !=="") return 1
+    //   if(form.temps_arrive == "" && form.temps_traitement =="") return null
+
+    //   varTA = new Time(form.temps_arrive).getTime()
+    //   varTT = new time(form.temps_traitement).getTime()
+
+    //   var diffTime = varTA - varTT
+
+    //   return diffTime
+
+
+    // },
 
    
     getMissionStyles(){
       return item => {
-        if(item.historique_missions_count == 0) return null
+        if(item.historique_missions_count == 0) return
          const style = {
         'text-decoration': item.historique_missions[0].type_operation == 2 ? 'line-through' : 'none'
       }
@@ -567,16 +1020,36 @@ type_operation:""
       }
      
     },
+
+   
+//  listeHistoriqueDeTousMissionsEnAttente(){
+  
+// return this.historiques_missions.filter( element => element.type_operation != 2 )
+//  },
+
+
+  historiqueVise(){
+   return this.getHistoriqueMissionpersonnaliser.filter(element => element.type_operation == 0)
+    
+  },
+
+  listeHistoriqueDiffere(){
+    return this.getHistoriqueMissionpersonnaliser.filter(element => element.type_operation == 1 )
+  },
+
+listeHistoriqueDeTousMissionRejete(){
+  return this.getHistoriqueMissionpersonnaliser.filter(element => element.type_operation == 2)
+},
+    
 // methode pour maper notre guetter
-   ...mapGetters('suivi_controle_budgetaire', ["categories_missions", "getMissionPersonnaliser", "missions", "historiques_missions",
+   ...mapGetters('suivi_controle_budgetaire', ["categories_missions" ,"getMissionPersonnaliser", "missions", "historiques_missions","getHistoriqueMissionpersonnaliser",
      
     "nombreTotalDeTouteMissions",
       // "calculDuCoutTotal",
       "dureeMoyenneDeTouteLesMissions",
-      // "coutMoyenDeBilletAvionDeMissions",
+       "coutMoyenDeBilletAvionDeMissions",
       "tauxDossierRejetMissions",
-      "tauxValiderDossierMissions",
-      "tauxDiffererDossiermission",
+    
       // "coutMoyenDeMissions"
   
    
@@ -610,6 +1083,7 @@ return this.getMissionPersonnaliser.filter((item) => {
    },
 
 
+
    // fonction pour filtrer historique de mission
   
 
@@ -641,7 +1115,7 @@ return this.getMissionPersonnaliser.filter((item) => {
            return duree
 
      }
-   }
+   }   
  },
 
  dureeMoyenneDemissionsParUA(){
@@ -649,23 +1123,24 @@ return this.getMissionPersonnaliser.filter((item) => {
     if(ua_id !=""){
       var dureeTotalMissionsparUA = this.DureeDeTouteMissionsParUA(ua_id)
       var nombretotalDeMissionsParUA = this.NombreDeMissionParUA(ua_id)
-      var duree = dureeTotalMissionsparUA / nombretotalDeMissionsParUA
+      var duree = (dureeTotalMissionsparUA / nombretotalDeMissionsParUA).toFixed(2)
       if(isNaN(duree)) return null
       return duree
 
       
-    }
+    }        
   }
  },
  // montant total par unite administrative
-montantTotalParUA(){
+coutTotalParUA(){
   return ua_id => {
     if(ua_id !=""){
-    var montant = this.getMissionPersonnaliser.filter(element => element.objetUniteAdministrative.id == ua_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant), 0)
+    var montant = this.getMissionPersonnaliser.filter(element => element.objetUniteAdministrative.id == ua_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.cout_total), 0)
       if(isNaN(montant)) return null
       return montant
 
     }
+    
   }
 },         
 // cout moyen par unite administrative
@@ -674,7 +1149,7 @@ coutMoyenParUA(){
 
  return ua_id => {
     if(ua_id !=""){
-     var MontantDeMissionParUA = this.montantTotalParUA(ua_id);
+     var MontantDeMissionParUA = this.coutTotalParUA(ua_id);
     var NombreDeMissionParUA  = this.NombreDeMissionParUA(ua_id);
       var cout = MontantDeMissionParUA / NombreDeMissionParUA 
       if(isNaN(cout)) return null
@@ -684,49 +1159,55 @@ coutMoyenParUA(){
   }
 },
 
-// cacul du cout total 
-coutTotalParMission(){
+
+// cout moyen des billets d'avions par unite administrative
+
+
+// la somme total des billets d'avion
+coutTotalBilletAvion(){
   return ua_id => {
     if(ua_id !=""){
-      var cout = this.getMissionPersonnaliser.filter(element => element.objetUniteAdministrative.id == ua_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.cout_total), 0)
-      if(isNaN(cout)) return null
-      return cout
-
+      var sommetotal = this.getMissionPersonnaliser.filter(element => element.objetUniteAdministrative.id == ua_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.cout_billet_avion), 0) 
+       if(isNaN(sommetotal)) return null
+       return sommetotal
     }
   }
 },
-// cout moyen des billets d'avions par unite administrative
 
 coutMoyenDeBilletAvionParUA(){
   return ua_id => {
     if(ua_id !=""){
-      var coutTotal = this.coutTotalParMission(ua_id)
+      var sommeTotalBillet = this.coutTotalBilletAvion(ua_id)
       var NombreDeMissionParUA = this.NombreDeMissionParUA(ua_id)
-       var cout =  coutTotal / NombreDeMissionParUA
-      if(isNaN(cout)) return null
-       return cout
+      var dure = this.DureeDeTouteMissionsParUA(ua_id)
+       var answer =  (sommeTotalBillet / NombreDeMissionParUA) * dure
+      if(isNaN(answer)) return null
+       return answer
 
     }
   }
 },
 
 
+
 totalDeDossierRejeterParUA(){
-return ua_id => {
-  if(ua_id !=""){
-        var total = this.getMissionPersonnaliser.filter(element => element.decision_cf == 2 && element.objetUniteAdministrative.id == ua_id).length
+return mission => {
+  if(mission !=""){
+    
+  var total = this.historiques_missions.filter(element =>element.type_operation == 2).length
 
         if(isNaN(total)) return null
        return total
  }
-
+       
 }
 },
 
 // taux de rejet par unite administrative
 tauxDeDossierRejeterParUA(){
  return ua_id => {
-   var taux = (parseFloat(this.totalDeDossierRejeterParUA(ua_id)) * 100 ) / this.NombreDeMissionParUA(ua_id)
+  
+   var taux = ((parseFloat(this.totalDeDossierRejeterParUA(ua_id)) * 100) / this.NombreDeMissionParUA(ua_id)).toFixed(2)
     if(isNaN(taux)) return null
 
    return taux
@@ -772,20 +1253,26 @@ dureeMoyenneDeMissionsParActeurDeDepense(){
     if(acte_personnel_id !=""){
       var dureetotalParActeur = this.dureetotalParAccteurDepense(acte_personnel_id)
       var nombreTotalParActeur = this.NombreDemissionsParActeurDepense(acte_personnel_id)
-      return dureetotalParActeur / nombreTotalParActeur
+       var resultat = (dureetotalParActeur / nombreTotalParActeur).toFixed(2)
+       if(isNaN(resultat)) return null
+       return resultat
     }
   }
 },
 
 
 
-// montant total par acteur de depense
+// cout  total par acteur de depense
 montantTotalParActeurDepense(){
   return acte_personnel_id => {
     if(acte_personnel_id !=""){
-      return this.getMissionPersonnaliser.filter(element => element.objetActeurDepense.id == acte_personnel_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant), 0 )
+    
+      var coutTotal = this.getMissionPersonnaliser.filter(element => element.objetActeurDepense.id == acte_personnel_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.cout_total), 0 )
+      if(isNaN(coutTotal)) return null
+
+      return coutTotal
     }
-    return 0
+    
   }
 },
 
@@ -796,18 +1283,23 @@ montantTotalParActeurDepense(){
      if(acte_personnel_id !=""){
        var montantTotalParActeurDepense = this.montantTotalParActeurDepense(acte_personnel_id)
        var NombreDemissionsParActeurDepense = this.NombreDemissionsParActeurDepense(acte_personnel_id)
-       return montantTotalParActeurDepense / NombreDemissionsParActeurDepense
+       var resultat = montantTotalParActeurDepense / NombreDemissionsParActeurDepense
+       if(isNaN(resultat)) return null
+
+         return resultat
      }
-     return 0
+   
    }
  },
 
 
-// cacul du cout toatl 
+// cacul de la somme total du billet d'avion  
 coutTotal(){
   return acte_personnel_id => {
     if(acte_personnel_id !=""){
-      return this.getMissionPersonnaliser.filter(element => element.objetActeurDepense.id == acte_personnel_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.cout_total), 0)
+      var coutTotal = this.getMissionPersonnaliser.filter(element => element.objetActeurDepense.id == acte_personnel_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.cout_billet_avion), 0)
+      if(isNaN(coutTotal)) return null
+      return coutTotal
     }
   }
 },
@@ -818,20 +1310,26 @@ coutTotal(){
    return acte_personnel_id => {
      if(acte_personnel_id !="") {
       var coutTotal = this.coutTotal(acte_personnel_id)
+      var dure = this.dureetotalParAccteurDepense(acte_personnel_id)
       var NombreDemissionsParActeurDepense = 
       this.NombreDemissionsParActeurDepense(acte_personnel_id)
-      return coutTotal / NombreDemissionsParActeurDepense
+       var resultat =  (coutTotal / NombreDemissionsParActeurDepense) * dure
+    if(isNaN(resultat)) return null
+    return resultat
+      
      }
-     return 0
+    
    }
  },
 
 // total de dossier rejeter par un agent
 
 totalDeDossierRejeterParAgent(){
-return acte_personnel_id => {
-  if(acte_personnel_id !=""){
-    return this.getMissionPersonnaliser.filter(element => element.decision_cf == 2 && element.objetActeurDepense.id == acte_personnel_id).length
+return mission => {
+  if(mission !=""){
+    var totaTaux = this.historiques_missions.filter(element => element.type_operation == 2).length
+    if(isNaN(totaTaux)) return null
+    return totaTaux
   }
 
 }
@@ -841,12 +1339,12 @@ return acte_personnel_id => {
 
   tauxDeDossierRejeterParAgent(){
  return acte_personnel_id => {
-   var taux = (parseFloat(this.totalDeDossierRejeterParAgent(acte_personnel_id)) * 100 ) / this.NombreDemissionsParActeurDepense(acte_personnel_id)
+   var taux = ((parseFloat(this.totalDeDossierRejeterParAgent(acte_personnel_id)) * 100 ) / this.NombreDemissionsParActeurDepense(acte_personnel_id)).toFixed(2)
    if(isNaN(taux)) return null
 
   return taux
    
- }
+ }     
 },
 
   },
@@ -911,22 +1409,13 @@ ajouterDecisionCfLocal(){
     observation:"",
     type_operation:"",
     date_operation:"",
-    objet:""
+ 
+    
   }
   
 },
 
-
-
-
-   changerDecision(item, decision){
-       const objet = {
-         id: item.id,
-         decision_cf: decision
-       }
-       this.MODIFIER_STATUS_MISSION(objet)
-    this.modifierMission(objet)     
-   },
+ 
 
 // formatage date
 formaterDate(date) {
@@ -939,8 +1428,4 @@ formaterDate(date) {
   }
 };
 </script>
-<style scoped>
-.tailmodal{
-  width: 60%;
-}
-</style>
+

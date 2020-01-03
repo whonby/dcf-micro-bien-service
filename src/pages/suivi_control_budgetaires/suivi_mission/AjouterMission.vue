@@ -15,6 +15,7 @@
             <div id="tab1" class="tab-pane active">
 
                   
+           
                   <table border="0px">
                
                       
@@ -46,7 +47,7 @@
                           <td> 
             <div class="control-group">
               <label class="control-label">Fonction:</label>
-              <div class="controls">
+              <div class="controls " >
      <input type="text" class="span" :value="afficherLaFonctionDActeurDepenseDynamique(formData.acte_personnel_id)" readonly >
       
               </div>
@@ -54,15 +55,7 @@
                           </td>
 
 
-                                    <!-- <td> 
-            <div class="control-group">
-              <label class="control-label">Source de financement:</label>
-              <div class="controls">
-     <input type="text" class="span" :value="afficherLaFonctionDActeurDepenseDynamique(formData.acte_personnel_id)" readonly >
-      
-              </div>
-            </div>
-                          </td> -->
+          
 
       <td> 
             <div class="control-group">
@@ -75,22 +68,21 @@
               </div>
             </div>
              </td>
-
-                  <td> 
-            <div class="control-group">
-              <label class="control-label">Exercice budgetaire:</label>
-              <div class="controls">
-           <select v-model="formData.exercice_budgetaire_id" class="span">
-               <option v-for="budget in exercices_budgetaires" :key="budget.id" 
-               :value="budget.id">{{budget.annee}}</option>
-           </select>
-              </div>
-            </div>
-             </td>
+              <td>
+                  <div class="control-group">
+                                <label class="control-label">Année Budgetaire</label>
+                                <div class="controls ">
+                             <select v-model="formData.exercice_budgetaire_id" class="span">
+                           <option v-for="exoBudget in exoEnCours" :key="exoBudget.id"
+                           :value="exoBudget.id" >{{exoBudget.annee}}</option>
+                             </select>
+                                </div>
+                                </div>
+              </td>
 
               <td> 
             <div class="control-group">
-              <label class="control-label">Cat. mission:</label>
+              <label class="control-label" title="categorie de mission">Cat.mission:</label>
               <div class="controls">
            <select v-model="formData.categorie_missions_id" class="span">
                <option v-for="budget in categories_missions" :key="budget.id" 
@@ -126,9 +118,9 @@
               <div class="controls">
                 <select v-model="formData.moyen_transport" class="span">
         
-                <option value="vehicule">Vehicule</option>
-                  <option value="avion">Avion</option>
-                  <option value="train">Train</option>
+                <option value="0">Vehicule</option>
+                  <option value="1">Avion</option>
+                  <option value="2">Train</option>
                   
                 </select>
               </div>
@@ -170,6 +162,20 @@
               </div>
             </div>
                       </td>
+
+                          <td>         
+                  
+                <div class="control-group">
+              <label class="control-label" title="mode de paiement">Md.paiement:</label>
+              <div class="controls">
+                <select v-model="formData.mode_paiement" class="span">
+                <option value="0">Virement</option>
+                  <option value="1">Chèque</option>
+                  <option value="2">Espèce</option>
+                </select>
+                 </div>
+                 </div>
+                    </td> 
                      </tr>
 
                        <tr>
@@ -201,7 +207,7 @@
                          <td>         
                   
                <div class="control-group">
-              <label class="control-label">Numero autorisation:</label>
+              <label class="control-label" title="numero autorisation">N. autorisation:</label>
               <div class="controls">
                 <input type="text" v-model="formData.numero_autorisation" 
                 class="span"  />
@@ -221,18 +227,15 @@
                       </td>
 
 
-             
-            
-                    
-                             
                  <div class="control-group">
               <label class="control-label">Fichier joint:</label>
               <div class="controls">
                 <input type="file" id="file"  @change="onFichierChange" />
               </div>
             </div>
-                            
-                   
+
+                               
+            
                        </tr>
 
 
@@ -245,8 +248,7 @@
                <div class="control-group"> 
               <label class="control-label">Frais de deplacement:</label>
               <div class="controls">
-           <input type="text"   :value="afficherSourceFinancement(formData.source_financement_id)" readonly
-                                     class="span"  />
+           <input type="text"  :value="afficherFraisDeplacementDynamique(formData.source_financement_id)" readonly  class="span"  />
                 </div>
                   </div>
                               </td>
@@ -257,7 +259,7 @@
                <div class="control-group">
               <label class="control-label">frais d'hebergement:</label>
               <div class="controls">
-                <input type="text" v-model="formData.frais_hebergement" 
+                <input type="number" v-model="formData.frais_hebergement" 
                 class="span"/>
               </div>
                 </div>
@@ -265,7 +267,7 @@
                               <td>         
                   
                <div class="control-group">
-              <label class="control-label">Frais de restauration:</label>
+              <label class="control-label" title="frais de restauration">F. restauration:</label>
               <div class="controls">
                 <input type="number" v-model="formData.frais_restauration" 
                 class="span"  />
@@ -277,16 +279,16 @@
                <div class="control-group">
               <label class="control-label">Autre frais:</label>
               <div class="controls">
-                <input type="text" v-model="formData.autre_frais" 
+                <input type="number" v-model="formData.autre_frais" 
                 class="span"/>
               </div>
                 </div>
                 </td>
 
                  
-                 <td style="width:;">           
+                 <td >           
                <div class="control-group">
-              <label class="control-label">Cout total de la mission:</label>
+              <label class="control-label" title="cout total de la mission">CT. mission:</label>
               <div class="controls">
                 <input type="text" readonly :value="calculDuCoutTotal" 
                 class="span"/>
@@ -339,7 +341,7 @@
             <div class="control-group">
               <label class="control-label">Cout du billet d'avion:</label>
               <div class="controls">
-     <input type="text" v-model="formData.cout_billet_avion" class="span" 
+     <input type="number" v-model="formData.cout_billet_avion" class="span" 
      placeholder="Saisir la cout du billet avion" />
               </div>
             </div>
@@ -348,15 +350,28 @@
                      
              <td> 
             <div class="control-group">
-              <label class="control-label">Objet de missions:</label>
-              <div class="controls">
-     <input type="text" v-model="formData.objet" class="span" 
-     placeholder="Saisir l'objet" />
-              </div>
+              <label class="control-label">Objet de mission:</label>
+             <div class="controls">
+              <textarea  v-model="formData.objet" class="textarea_editor span2.5"  placeholder="Saisir l'objet de mission ..."></textarea>
             </div>
+             </div>    
                       </td>
 
           
+                       
+
+         <!-- <td> 
+            <div class="control-group">
+              <label class="control-label" title="Temps d'arrivé du dossier"> T.T:</label>
+              <div class="controls">
+     <input type="time" v-model="formData.temps_arrive" class="span" 
+     placeholder="" />
+              </div>
+            </div>
+                     </td> -->
+
+
+
                           </tr>
 
                           <tr>
@@ -416,15 +431,6 @@
                 </div>
 
 
-<!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
-  @shortkey="tab()">Open</button>
-
- <fab :actions="fabActions"
-                main-icon="apps"
-          @cache="tab"
-        bg-color="green"
-
-  ></fab> -->
 
 <notifications  />
 
@@ -455,10 +461,38 @@ export default {
               // }
           ],
      
-        formData : {},
-        fonctionActeur:""
+        formData : {
+
+             cout_billet_avion:"",
+               objet:"",
+             date_mission: "",
+             categorie_missions_id:"",
+             numero_autorisation:"",
+             destination:"",
+             type_mission:"",
+             numero_ccm:"",
+             moyen_transport:"",
+             itineraire_retenu:"",
+             mode_paiement:"",
+             duree:"",
+             date_retour:"",
+             date_depart:"",
+             frais_deplacement:"",
+             frais_hebergement:"",
+             fichier_joint:"",
+             url_fichier_joint:"",
+             signataire:"",
+             fonction:"",
+             frais_restauration:"",
+             autre_frais:"",
+             source_financement_id:"",
+             exercice_budgetaire_id:"",
+             cout_total:"",
+             temps_arrive:""
+        },
+        fonctionActeur:"",
         
-             
+        fraisDeplacement:""     
          
     };
   },
@@ -468,6 +502,7 @@ export default {
     //  this.getStructureActivite()
    // console.log(this.formData.ua_id)
   },
+
   computed: {
 // methode pour maper notre guetter
    ...mapGetters('suivi_controle_budgetaire', ['categories_missions','missions','getNormeMissionPersonnaliser']) ,
@@ -492,46 +527,50 @@ export default {
       return diffJours;
    },
 
+
+
+
+
    getDateRetourValue(){
      return !this.formData.date_depart != ""
    },
 
 
-  //  afficherLaFonctionDActeurDepenseDynamique(){
-  //    return acte_personnel_id => {
-  //      if( acte_personnel_id != undefined) {
-  //   var acteur = this.all_acteur_depense.find(acteur => acteur.id == acte_personnel_id  )
+   afficherLaFonctionDActeurDepenseDynamique(){
+     return acte_personnel_id => {
+       if( acte_personnel_id != undefined) {
+    var acteur = this.all_acteur_depense.find(acteur => acteur.id == acte_personnel_id  )
     
-  //      this.fonctionActeur = acteur.fonction.id
-       
-  //   // console.log(acteur)
-  //    return acteur.fonction.libelle
-  //      }
-  //   return null
-  //    }
-  
-  //  },
-
-
-
-   // afficher la source de financement
-
-    afficherSourceFinancement(){
-
-     return source_financement_id => {
-       if( source_financement_id != undefined && this.fonctionActeur !=="") {
-
-
-    var norme = this.getNormeMissionPersonnaliser.find(norme => norme.objetSourceFinancement.id == source_financement_id  && norme.objetFonction.id == this.fonctionActeur)
-    
-if(norme !=="") return norme.perdiem
-
-
-       
-    console.log(norme)
-     return norme   
+     // this.fonctionActeur = acteur.fonction.id
+      // console.log(acteur)
+     return (acteur) ? acteur.fonction.libelle :null
        }
     return null
+     }
+  
+   },
+
+exoEnCours(){
+return this.exercices_budgetaires.filter(element => element.encours == 1)
+},
+
+   // calcul automatique du frais de deplacement en fonction du source de financement selectionner
+
+    afficherFraisDeplacementDynamique(){
+   
+     return source_financement_id => {
+       if( source_financement_id != undefined ) {
+
+    var norme = this.getNormeMissionPersonnaliser.find(norme => norme.objetSourceFinancement.id == source_financement_id )
+  //console.log(norme)
+  return (norme) ? norme.perdiem : null
+        
+    
+
+ //if(norme !=="") return norme.perdiem
+ 
+       }
+   return null
      }
 
     },
@@ -541,17 +580,19 @@ if(norme !=="") return norme.perdiem
     },
 
 
-
 //calcul du cout total
 
-calculDuCoutTotal(){
-  const coutTotal = parseFloat(this.afficherSourceFinancement(this.formData.source_financement_id)) + parseFloat(this.formData.frais_hebergement)
-  + parseFloat(this.formData.frais_restauration) + parseFloat(this.formData.autre_frais)
+   calculDuCoutTotal(){
+
+  const coutTotal = parseFloat(this.afficherFraisDeplacementDynamique(this.formData.source_financement_id)) + parseFloat(this.formData.frais_hebergement)
+  + parseFloat(this.formData.frais_restauration) + parseFloat(this.formData.autre_frais) 
+
   if(isNaN(coutTotal)) return null
   return parseFloat(coutTotal).toFixed(2)
      
   //console.log(coutTotal)
 },
+
 
 acteurDepenseDynamiques() {
       return id => {
@@ -582,7 +623,8 @@ acteurDepenseDynamiques() {
 
   //        }
         
-  //      },
+    
+  //      },      
    
   // fonction pour aller a la page de la liste
     AllerAPageListe(){
@@ -591,22 +633,18 @@ acteurDepenseDynamiques() {
         name: 'Mission'
     })
     },
-    
    // fonction pour vider l'input
-     ajouterMissionLocal () {
+     ajouterMissionLocal() {
        var nouvelObjet = {
          ...this.formData,
          duree: this.nombreJourCalucle,
+        cout_total: this.calculDuCoutTotal,
+       frais_deplacement: this.afficherFraisDeplacementDynamique(this.formData.source_financement_id)
 
-        //  cout_total: this.calculDuCoutTotal,
-
-        //  frais_deplacement: this.afficherSourceFinancement
-
-            }
-     this.ajouterMission(nouvelObjet)
-
+            }    
+     this.ajouterMission(nouvelObjet);
         this.formData = {
-          // cout_billet_avion:"",
+           cout_billet_avion:"",
                objet:"",
              date_mission: "",
              categorie_missions_id:"",
@@ -616,7 +654,6 @@ acteurDepenseDynamiques() {
              numero_ccm:"",
              moyen_transport:"",
              itineraire_retenu:"",
-             montant:"",
              mode_paiement:"",
              duree:"",
              date_retour:"",
@@ -624,18 +661,20 @@ acteurDepenseDynamiques() {
              frais_deplacement:"",
              frais_hebergement:"",
              fichier_joint:"",
+             url_fichier_joint:"",
              signataire:"",
-             decision_cf:"",
-             date_visa_cf:"",
-             motif:"",
              fonction:"",
              frais_restauration:"",
              autre_frais:"",
-             exercice_budgetaire_id:""
-            
+             source_financement_id:"",
+             exercice_budgetaire_id:"",
+             cout_total:"", 
+             temps_arrive:""
          }
-     },
 
+         
+// console.log(nouvelObjet)
+     },
 
   }
 };

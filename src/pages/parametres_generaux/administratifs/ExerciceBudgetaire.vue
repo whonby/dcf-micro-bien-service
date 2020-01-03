@@ -19,7 +19,7 @@
                                               title="Liste exercice budgetaire "
                                               name ="Liste exrcice budgetaire"
                                               worksheet = "Exercice budgetaire"
-                                            :data="titreFiltres">
+                                            :data="exercices_budgetaires">
                      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
@@ -28,10 +28,10 @@
           
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste exercice budgetaire</h5>
-             <div align="right">
+             <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
-          </div>
+          </div> -->
              
           </div>
          
@@ -50,7 +50,7 @@
               </thead>
               <tbody>
                 <tr class="odd gradeX" v-for="(exercice_budgetaire, index) 
-                in titreFiltres" :key="exercice_budgetaire.id">
+                in exercices_budgetaires" :key="exercice_budgetaire.id">
                   <template v-if="!exercice_budgetaire.encours">
                          <td @dblclick="afficherModalModifierExerciceBudgetaire(index)">
                     {{exercice_budgetaire.annee || 'Non renseigné'}}</td>
@@ -92,7 +92,7 @@
                 </tr>
               </tbody>
             </table>
-            <div v-if="titreFiltres.length">
+            <div v-if="exercices_budgetaires.length">
             </div>
              
             <div v-else>
@@ -294,7 +294,7 @@ export default {
                 
             
         },
-        search:""
+        // search:""
  
     };
   },
@@ -306,20 +306,20 @@ export default {
 // methode pour maper notre guetter
    ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']) ,
   
-    titreFiltres() {
+//     exercices_budgetaires() {
 
-const searchTerm = this.search.toLowerCase();
+// const searchTerm = this.search.toLowerCase();
 
-return this.exercices_budgetaires.filter((item) => {
+// return this.exercices_budgetaires.filter((item) => {
   
-    return item.annee.toLowerCase().includes(searchTerm) 
-    || item.date_debut.toLowerCase().includes(searchTerm) 
-    || item.date_fin.toLowerCase().includes(searchTerm)
+//     return item.annee.toLowerCase().includes(searchTerm) 
+//     || item.date_debut.toLowerCase().includes(searchTerm) 
+//     || item.date_fin.toLowerCase().includes(searchTerm)
 
-   }
-)
+//    }
+// )
 
-}
+// }
 
 
   },

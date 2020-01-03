@@ -12,7 +12,7 @@
           data-target="#administratif"
           class="dropdown-toggle"
         >
-          <span class="text">PARAMETRE
+          <span class="text">PARAMETRES
                </span>
           <b class="caret"></b>
         </a>
@@ -24,12 +24,7 @@
            Type de Facture
             </router-link>
           </li>
-            <li>
-            <router-link :to="{name: ''}" tag="a">
-              <i class="icon-bar-chart"></i>
-           Lot
-            </router-link>
-          </li>
+           
            <li>
             <router-link :to="{name: ''}" tag="a">
               <i class="icon-bar-chart"></i>
@@ -51,7 +46,7 @@
           <li>
             <router-link :to="{name: ''}" tag="a">
               <i class="icon-bar-chart"></i>
-           Motif de décision
+           Motifs de décision
             </router-link>
           </li>
            <li>
@@ -77,7 +72,7 @@
            <li>
             <router-link :to="{name: ''}" tag="a">
               <i class="icon-bar-chart"></i>
-           Type acteur depense
+           Type d'acte de depense
             </router-link>
           </li>
            <li>
@@ -151,7 +146,7 @@
       </li>
       <li class="dropdown" id="plant">
         <a title="passation des marchés" href="#" data-toggle="dropdown" data-target="#plant" class="dropdown-toggle">
-          <span class="text">PASSATION DES MARCHES </span>
+          <span class="text">PARAMETRE DES MARCHES </span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
@@ -182,7 +177,93 @@
               <i class="icon-key"></i> Mode de passation
             </router-link>
           </li>
+
+
+        </ul>
+      </li>
+
+
+
+<li class="dropdown" id="contractualisation">
+        <a
+          title="Contractualisation"
+          href="#"
+          data-toggle="dropdown"
+          data-target="#contratualisation"
+          class="dropdown-toggle"
+        >
+          <span class="text">CONTRACTUALISATION
+               </span>
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+       
+           <li class="divider"></li>
+          <li>
+            <router-link :to="{name: ''}" tag="a">
+              <i class="icon-key"></i> Appel d'offres
+            </router-link>
+          </li>
+
+
+         <li class="divider"></li>
+          <li>
+            <router-link :to="{name: ''}" tag="a">
+              <i class="icon-list-ul"></i> Dossier du candidature
+            </router-link>
+          </li>
+
+           <li class="divider"></li>
+          <li>
+            <router-link :to="{name: ''}" tag="a">
+              <i class=" icon-star"></i> Lettre d'invitation
+            </router-link>
+          </li>
+
           <li class="divider"></li>
+          <li>
+            <router-link :to="{name: ''}" tag="a">
+              <i class=" icon-star-half"></i> Mandate
+            </router-link>
+          </li>
+
+      <li class="divider"></li>
+          <li>
+            <router-link :to="{name: ''}" tag="a">
+              <i class=" icon-qrcode"></i> La cojo
+            </router-link>
+          </li>
+
+        <li class="divider"></li>
+          <li>
+            <router-link :to="{name: ''}" tag="a">
+              <i class=" icon-ok-sign"></i> Analyse de dossier
+            </router-link>
+          </li>
+
+      <li class="divider"></li>
+          <li>
+            <router-link :to="{name: ''}" tag="a">
+              <i class=" icon-ok-circle"></i> Demande d'ANO
+            </router-link>
+          </li>
+
+          <li class="divider"></li>
+          <li>
+            <router-link :to="{name: ''}" tag="a">
+              <i class=" icon-tint"></i> Decision de marché
+            </router-link>
+          </li>
+           <!-- <li>
+            <router-link :to="{name: ''}" tag="a">
+              <i class="icon-bar-chart"></i>
+           Lot
+            </router-link>
+          </li> -->
+
+
+
+          <!-- <li class="divider"></li>
           <li>
             <router-link :to="{name: 'EtapeMarche'}" tag="a">
               <i class="icon-check"></i>
@@ -192,19 +273,30 @@
           <li class="divider"></li>
           <li>
             <router-link :to="{name: 'MarcheContrat'}" tag="a">
-              <i class="icon-key"></i>
+              <i class="icon-reorder"></i>
               Marchés et contrats
             </router-link>
           </li>
-          
+           -->
+         
         </ul>
       </li>
+
+      
        <li class="dropdown" id="execut">
         <a title="passation des marchés" href="#" data-toggle="dropdown" data-target="#execut" class="dropdown-toggle">
           <span class="text">EXECUTION DU MARCHES </span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
+
+           <li>
+            <router-link :to="{name: 'MarcheContrat'}" tag="a">
+              <i class="icon-list-alt"></i>
+             Acte à effet financier
+            </router-link>
+          </li>
+
            <li>
             <router-link :to="{name: 'MarcheContrat'}" tag="a">
               <i class="icon-key"></i>
@@ -214,14 +306,7 @@
          
         
          
-          <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'EtapeMarche'}" tag="a">
-              <i class="icon-check"></i>
-             Etapes de marchés
-            </router-link>
-          </li>
-          <li class="divider"></li>
+          
          
           
         </ul>

@@ -15,9 +15,9 @@ export  function getStructureFonctionnelle({commit}){
 // ajouter structure fonctionnelle
 export function ajouterStructureFonctionnelle({commit}, objetAjout){
  asyncLoading(axios.post('/ajouter_Structure_fontionnelle' ,{
-    code:objetAjout.code,
+    niveau:objetAjout.niveau,
     libelle:objetAjout.libelle,
-    sigle:objetAjout.sigle
+   
 })).then(tony => {
      if(tony.status == 201){
          commit('AJOUTER_STRUCTURE_FONCTIONNELLE', tony.data)
@@ -45,9 +45,9 @@ export function supprimerStructureFonctionnelle({commit}, id){
 export function modifierStructureFonctionnelle({commit}, source_financement){
 
    asyncLoading( axios.put('/modifier_Structure_fontionnelle/' + source_financement.id ,{
-    code:source_financement.code,
+    niveau:source_financement.niveau,
     libelle:source_financement.libelle,
-    sigle:source_financement.sigle
+
 })).then(response => {
         commit('MODIFIER_STRUCTURE_FONCTIONNELLE', response.data)
 

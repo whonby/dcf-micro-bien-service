@@ -50,15 +50,23 @@
                 getNormeMissionPersonnaliser"
                  :key="norme_mission.id">
                   <td @dblclick="afficherModalModifierNormeMission(index)">
-                      {{norme_mission.objetSourceFinancement.libelle || 'Non renseigné'}}</td>
+                      {{norme_mission.objetSourceFinancement.libelle|| 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierNormeMission(index)">
                       {{norme_mission.objetFonction.libelle || 'Non renseigné'}}</td>
                    
                     <td @dblclick="afficherModalModifierNormeMission(index)">
-                      {{norme_mission.perdiem || 'Non renseigné'}}</td>
+                      {{formatageSomme(parseFloat(norme_mission.perdiem)) || 'Non renseigné'}}</td>
 
-                  <td  @dblclick="afficherModalModifierNormeMission(index)">
-                      {{norme_mission.zone || 'Non renseigné'}}</td>
+               
+                        <td  @dblclick="afficherModalModifierNormeMission(index)">
+                            <span 
+                             v-if="norme_mission.zone == 0"> Cote d'ivoire</span>
+                              <span v-else-if="norme_mission.zone == 1" > Afrique</span>
+                            
+                          <span v-else >Hors Afrique</span>
+    
+                          </td>
+                   
                   <td>
 
 
@@ -127,9 +135,9 @@
               <div class="controls">
                 <select v-model="formData.zone" class="span">
               
-                  <option value="Cote d'ivoire">Cote d'ivoire</option>
-                  <option value="Afrique">Afrique</option>
-                   <option value="hors Afrique">hors Afrique</option>
+                  <option value="0">Cote d'ivoire</option>
+                  <option value="1">Afrique</option>
+                   <option value="2">hors Afrique</option>
                 </select>
               </div>
             </div>
@@ -204,7 +212,7 @@
             </div>
               
             <div class="control-group">
-              <label class="control-label">Acteur de depense:</label>
+              <label class="control-label">Fonction:</label>
               <div class="controls">
            <select v-model="editNormeMission.fonction_id" class="span">
                <option v-for="norme in fonctions" :key="norme.id" 
@@ -215,14 +223,14 @@
             
 
 
-    <div class="control-group">
+              <div class="control-group">
               <label class="control-label">Zone:</label>
               <div class="controls">
                 <select v-model="editNormeMission.zone" class="span">
               
-                  <option value="Cote d'ivoire">Cote d'ivoire</option>
-                  <option value="Afrique">Afrique</option>
-                   <option value="hors Afrique">hors Afrique</option>
+                  <option value="0">Cote d'ivoire</option>
+                  <option value="1">Afrique</option>
+                   <option value="2">hors Afrique</option>
                 </select>
               </div>
             </div>
@@ -236,7 +244,7 @@
                   </div>
                    
                    
-                 
+              
               
         
           </form>              
@@ -260,7 +268,8 @@
         bg-color="green"
 
   ></fab>
-<notifications  />
+
+<notifications />
 
 
 
@@ -272,6 +281,7 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import {formatageSomme} from '../../../Repositories/Repository'
 export default {
   
   data() {
@@ -387,13 +397,15 @@ afficherModalModifierNormeMission(index){
 // 
 modifierModalNormeMissionLocal(){
   this.modifierNormeMission(this.editNormeMission)
-  this.editNormeMission = {
-     fonction_id:"",
-        source_financement_id: "",
-        perdiem:"",
-        zone:""
-  }
-}
+  this.$('#modifierModal').modal('hide');
+  // this.editNormeMission = {
+  //    fonction_id:"",
+  //       source_financement_id: "",
+  //       perdiem:"",
+  //       zone:""
+  // }
+},
+formatageSomme:formatageSomme
 
   }
 };
