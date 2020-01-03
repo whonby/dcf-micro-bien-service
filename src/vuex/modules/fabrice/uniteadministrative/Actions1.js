@@ -84,8 +84,8 @@ export function ajouterUniteAdministrative({ commit }, nouveau) {
     .post("/ajouter_unite_administrative", {
       type_ua_id: nouveau.type_ua_id,
       section_id: nouveau.section_id,
-      servicegest_id: nouveau.servicegest_id,
-      localisationgeo_id: nouveau.localisationgeo_id,
+      chapitre_id: nouveau.chapitre_id,
+      planfonctionnel_id: nouveau.planfonctionnel_id,
       code: nouveau.code,
       libelle: nouveau.libelle,
       date_creation: nouveau.date_creation
@@ -107,8 +107,8 @@ export function modifierUniteAdministrative({ commit }, nouveau) {
     .put("/modifier_unite_administrative/" + nouveau.id, {
       type_ua_id: nouveau.type_ua_id,
       section_id: nouveau.section_id,
-      servicegest_id: nouveau.servicegest_id,
-      localisationgeo_id: nouveau.localisationgeo_id,
+      chapitre_id: nouveau.chapitre_id,
+      planfonctionnel_id: nouveau.planfonctionnel_id,
       code: nouveau.code,
       libelle: nouveau.libelle,
       date_creation: nouveau.date_creation

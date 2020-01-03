@@ -43,49 +43,49 @@
         <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
           <a href="#">
             <i class="icon icon-th"></i>
-            <span>PERSONNEL</span>
+            <span>ACTEURS DE LA DEPENSE</span>
           </a>
         </li>
         <li @click.prevent="activate(3)" :class="{active: active_el ==3}">
           <a href="#">
             <i class="icon icon-fullscreen"></i>
-            <span>BIEN ET SERVICES</span>
+            <span>PLANIFICATION</span>
           </a>
         <li @click.prevent="activate(4)" :class="{active: active_el ==4}">
-          <a title="INVESTISSEMENT" href="#">
+          <a title="SUIVIB ET CONTROLE BUDGETAIRE 1" href="#">
             <i class="icon icon-th-list"></i>
-            <span>INVESTISSEMENT</span>
+            <span>SUIVI ET CONTRÔLE B.</span>
             <span class="label label-important"></span>
           </a>
         </li>
         
         <li @click.prevent="activate(5)" :class="{active: active_el ==5}">
-          <a title="COMPTABILITE DES MATIERE" href="#">
+          <a title="CARTOGRAPHIE DES OPERATIONS BUDGETAIRES" href="#">
             <i class="icon icon-pencil"></i>
-            <span>COMPTA DES MATIERES</span>
+            <span>CARTOGRAPHIE DES OP. B.</span>
           </a>
         </li>
         <li @click.prevent="activate(6)" :class="{active: active_el ==6}">
-          <a title="TRANSFERT" href="#">
+          <a title="CONTRÔLE AXE SUR LA PERFORMANCE" href="#">
             <i class="icon icon-file"></i>
-            <span>TRANSFERT</span>
+            <span>CONTRÔLE AXE SUR LA P.</span>
             <span class="label label-important"></span>
           </a>
         </li>
         <li  @click.prevent="activate(7)" :class="{active: active_el ==7}">
-          <a title="" href="#">
+          <a title="OPERATIONNALISATION DU RAPPORT D’ACTIVITE ET DE LA CARTOGRAPHIE DES RISQUES" href="#">
             <i class="icon icon-info-sign"></i>
-            <span>EXECUTION</span>
+            <span>OP. DU RAPPORT ACTIVITE...</span>
             <span class="label label-important"></span>
           </a>
         </li>
-        <!-- <li @click.prevent="activate(8)" :class="{active: active_el ==8}">
+        <li @click.prevent="activate(8)" :class="{active: active_el ==8}">
           <a title="OPERATIONNALISATION DU DISPOSITIF DE CONTRÔLE INTERNE" href="#">
             <i class="icon icon-heart"></i>
             <span>OP. DU DISPOSITIF DE C. I.</span>
             <span class="label label-important"></span>
           </a>
-        </li> -->
+        </li>
 
            <li @click.prevent="logoutUser()" >
           <a title="DECONNEXION" href="#">

@@ -29,15 +29,15 @@ export const jointureUaChapitreSection = (
 ) =>
   state.uniteAdministratives.map(element => {
     if (
-      element.localisationgeo_id !== null &&
-      element.servicegest_id !== null &&
+      element.chapitre_id !== null &&
+      element.planfonctionnel_id !== null &&
       element.section_id !== null &&
       element.type_ua_id !== null
     ) {
       element = {
         ...element,
-        localgeo: rootGetters["parametreGenerauxAdministratif/localisations_geographiques"].find(
-          chapitre1 => chapitre1.id == element.localisationgeo_id
+        chpitr: rootGetters["parametreGenerauxAdministratif/chapitres"].find(
+          chapitre1 => chapitre1.id == element.chapitre_id
         ),
         secti: rootGetters["parametreGenerauxAdministratif/sections"].find(
           Secti => Secti.id == element.section_id
@@ -45,9 +45,9 @@ export const jointureUaChapitreSection = (
         typeua: rootGetters[
           "parametreGenerauxAdministratif/type_Unite_admins"
         ].find(typeUadmin => typeUadmin.id == element.type_ua_id),
-        servivegest: rootGetters[
-          "parametreGenerauxAdministratif/services_gestionnaires"
-        ].find(planFonc => planFonc.id == element.servicegest_id)
+        planFont: rootGetters[
+          "parametreGenerauxFonctionnelle/plans_fonctionnels"
+        ].find(planFonc => planFonc.id == element.planfonctionnel_id)
       };
     }
     return element;

@@ -28,6 +28,40 @@
               UNITES ADMINISTRATIVES
             </router-link>
           </li>
+         
+  <li class="dropdown" id="menuBUDGET">
+        <a
+          title="CONFIGURATION DU BUDGET"
+          href="#"
+          data-toggle="dropdown"
+          data-target="#menuBUDGET"
+          class="dropdown-toggle"
+        >
+          <span class="text">CONFIGURATION DU BUDGET</span>
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <router-link :to="{name: ''}" tag="a">
+              <i class="icon-user"></i>
+              Budget unite administrative
+            </router-link>
+          </li>
+
+          <li class="divider"></li>
+          <!-- <li>
+            <router-link :to="{name: ''}" tag="a">
+              <i class="icon-key"></i>Budget global
+            </router-link>
+          </li> -->
+        </ul>
+      </li>
+
+
+
+
+
+
       <!--Source de financement-->
       <li class="dropdown" id="menu-messages">
         <a

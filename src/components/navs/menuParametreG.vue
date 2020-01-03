@@ -22,28 +22,29 @@
               Exercises budgétaires
             </router-link>
           </li>
-          <li class="divider"></li>
-          <li>
+          <!-- <li class="divider"></li> -->
+          <!-- <li>
             <router-link :to="{name: 'Titre'}" tag="a">
               <i class="icon-check"></i>
               Les Titres
             </router-link>
-          </li>
+          </li> -->
           <li class="divider"></li>
           <li>
             <router-link :to="{name:'NatureSection'}" tag="a">
-              <i class="icon-plus"></i> Les Natures de section
+              <i class="icon-plus"></i> Natures de section
             </router-link>
           </li>
+          <li class="divider"></li>
            <li>
             <router-link :to="{name:'Section'}" tag="a">
-              <i class="icon-key"></i> Les Sections
+              <i class="icon-key"></i> Sections
             </router-link>
           </li>
           <li class="divider"></li>
           <li>
             <router-link :to="{name:'StructureProgramme'}" tag="a">
-              <i class=" icon-star"></i> Les Structures progragmmes
+              <i class=" icon-star"></i> Structures programmes
             </router-link>
           </li>
           <li class="divider"></li>
@@ -61,7 +62,7 @@
           <li class="divider"></li>
           <li>
             <router-link :to="{name: 'ServiceGestionnaire'}" tag="a">
-              <i class="icon-key"></i> Service gestionnaire
+              <i class="icon-key"></i> Service gestionnaire de crédit
             </router-link>
           </li>
 
@@ -79,19 +80,20 @@
               <i class="icon-plus"></i> Localisation géographique
             </router-link>
           </li>
-           <li class="divider"></li>
-          <li>
+           <!-- <li class="divider"></li> -->
+          <!-- <li>
             <router-link :to="{name: 'Chapitre'}" tag="a">
               <i class="icon-stop"></i> Chapitre
             </router-link>
-          </li>
+          </li> -->
          
           <li class="divider"></li>
           <li>
             <router-link :to="{name: 'GrandeNature'}" tag="a">
-              <i class="icon-user"></i> Grande Nature
+              <i class="icon-user"></i> Grandes natures de depense
             </router-link>
           </li>
+          <li class="divider"></li>
             <li>
             <router-link :to="{name: 'typeUniteAdministrative'}" tag="a">
               <i class="icon-user"></i> Type unite d'administrative
@@ -110,7 +112,7 @@
 
            <li>
             <router-link :to="{name:'TypeFinancement'}" tag="a">
-              <i class="icon-key"></i> Type de Financement
+              <i class="icon-key"></i> Type de financement
             </router-link>
           </li>
              <li class="divider"></li>
@@ -118,7 +120,7 @@
           <li>
            
              <router-link :to="{name:'SourceFinancement'}" tag="a">
-              <i class="icon-check"></i> Source de Financement
+              <i class="icon-check"></i> Source de financement
             </router-link>
           </li>
          
@@ -128,7 +130,7 @@
       -->
        <li class="dropdown" id="fonctionnelle">
         <a title = "fonctionnelle" href="#" data-toggle="dropdown" data-target="#fonctionnelle" class="dropdown-toggle">
-          <span class="text">FONCTIONNEL </span>
+          <span class="text">CLASSIFICATION FONCTIONNELLE </span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
@@ -173,22 +175,22 @@
       <!-- Nature de Depense
       -->
       <li class="dropdown" id="Depense">
-        <a title="Nature de depense" href="#" data-toggle="dropdown" data-target="#Depense" class="dropdown-toggle">
-          <span class="text">NATURES DE DEPENSES </span>
+        <a title="classification economique" href="#" data-toggle="dropdown" data-target="#Depense" class="dropdown-toggle">
+          <span class="text">CLASSIFICATION ECONOMIQUE </span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
           <li class="divider"></li>
           <li>
             <router-link :to="{name: 'StructureBudgetaire'}" tag="a">
-              <i class="icon-key"></i> Structure Budgetaire
+              <i class="icon-key"></i> Structure économique
             </router-link>
           </li>
           <li class="divider"></li>
           <li>
             <router-link :to="{name: 'PlanBudgetaire'}" tag="a">
               <i class="icon-check"></i>
-              Plan Budgetaire
+              Plan économique
             </router-link>
           </li>
         </ul>
@@ -204,7 +206,7 @@
           <li class="divider"></li>
           <li>
             <router-link :to="{name: 'StructureAtivite'}" tag="a">
-              <i class="icon-key"></i> Structure Activité
+              <i class="icon-key"></i> Structure activité
             </router-link>
           </li>
           <li class="divider"></li>
@@ -229,7 +231,7 @@
           <li>
             <router-link :to="{name: 'ZoneGeographique'}" tag="a">
               <i class="icon-check"></i>
-              Zone Géographique
+              Zone géographique
             </router-link>
           </li>
         </ul>

@@ -42,14 +42,14 @@
                <td>
               
                <div class="control-group">
-                  <label class="control-label">Chapitre</label>
+                  <label class="control-label">Service gestionnaire</label>
                   <div class="controls">
-                    <select v-model="formData.chapitre_id">
+                    <select v-model="formData.servicegest_id">
                       <option
-                        v-for="chapitre in chapitres"
-                        :key="chapitre.id"
-                        :value="chapitre.id"
-                      >{{chapitre.code}}-{{chapitre.libelle}}</option>
+                        v-for="servicegest in afficheServiceGestionnaireNiveau4"
+                        :key="servicegest.id"
+                        :value="servicegest.id"
+                      >{{servicegest.code}}-{{servicegest.libelle}}</option>
                     </select>
                   </div>
                 </div>
@@ -58,14 +58,14 @@
             <tr>
               <td>
                  <div class="control-group">
-                  <label class="control-label">Plan fonctionnel</label>
+                  <label class="control-label">Localisation Geographique</label>
                   <div class="controls">
-                    <select v-model="formData.planfonctionnel_id">
+                    <select v-model="formData.localisationgeo_id">
                       <option
-                        v-for="fonctionnel in plans_fonctionnels"
-                        :key="fonctionnel.id"
-                        :value="fonctionnel.id"
-                      >{{fonctionnel.code}}-{{fonctionnel.libelle}}</option>
+                        v-for="localgeo in afficheLocalisationGeoNiveau5"
+                        :key="localgeo.id"
+                        :value="localgeo.id"
+                      >{{localgeo.code}}-{{localgeo.libelle}}</option>
                     </select>
                   </div>
                 </div>
@@ -166,14 +166,14 @@
               </td>
                <td>
                  <div class="control-group">
-                  <label class="control-label">Chapitre</label>
+                  <label class="control-label">Service gestionnaire</label>
                   <div class="controls">
-                    <select v-model="editUniteAdministrative.chapitre_id">
+                    <select v-model="editUniteAdministrative.servicegest_id">
                       <option
-                        v-for="chapitre in chapitres"
-                        :key="chapitre.id"
-                        :value="chapitre.id"
-                      >{{chapitre.code}}-{{chapitre.libelle}}</option>
+                        v-for="servicegest in services_gestionnaires"
+                        :key="servicegest.id"
+                        :value="servicegest.id"
+                      >{{servicegest.code}}-{{servicegest.libelle}}</option>
                     </select>
                   </div>
                 </div>
@@ -183,14 +183,14 @@
             <tr>
               <td>
                   <div class="control-group">
-                  <label class="control-label">Plan fonctionnel</label>
+                  <label class="control-label">Localisation geographique</label>
                   <div class="controls">
-                    <select v-model="editUniteAdministrative.planfonctionnel_id">
+                    <select v-model="editUniteAdministrative.localisationgeo_id">
                       <option
-                        v-for="fonctionnel in plans_fonctionnels"
-                        :key="fonctionnel.id"
-                        :value="fonctionnel.id"
-                      >{{fonctionnel.code}}-{{fonctionnel.libelle}}</option>
+                        v-for="localgeo in localisations_geographiques"
+                        :key="localgeo.id"
+                        :value="localgeo.id"
+                      >{{localgeo.code}}-{{localgeo.libelle}}</option>
                     </select>
                   </div>
                 </div>
@@ -292,15 +292,15 @@
 
             <div
               class="widget-content nopadding"
-              v-if="type_Unite_admins.length && sections.length && chapitres.length "
+              v-if="type_Unite_admins.length && sections.length && chapitres.length && filtre_unite_admin.length "
             >
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Type unite administrative</th>
+                    <th title="type unite administrative">Type ua</th>
                     <th>Section</th>
-                    <th>Chapitre</th>
-                     <th>Plan fonctionnel</th>
+                    <th title="service gestionnaire">Service gest</th>
+                     <th title="localisation geographique">Localisation geo</th>
                     <th>Code</th>
                     <th>Libelle</th>
                     <th>Date création</th>
@@ -314,29 +314,27 @@
                     v-for="(uniteadministrative, index) in filtre_unite_admin"
                     :key="uniteadministrative.id"
                   >
+                   
+                   <!-- <template v-if="uniteadministrative.type_ua_id = type_Unite_admins.id"> -->
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.typeua.libelle }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.secti.nom_section }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.servivegest.libelle }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.localgeo.libelle }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.code }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.libelle }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{ formaterDate(uniteadministrative.date_creation) }}</td>
                   
-                    <td
-                      @dblclick="afficherModalModifierUniteAdministrative(index)"
-                    >{{uniteadministrative.typeua.libelle || 'Non renseigné'}}</td>
-                    <td
-                      @dblclick="afficherModalModifierUniteAdministrative(index)"
-                    >{{uniteadministrative.secti.nom_section || 'Non renseigné'}}</td>
-                    <td
-                      @dblclick="afficherModalModifierUniteAdministrative(index)"
-                    >{{uniteadministrative.chpitr.libelle || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierUniteAdministrative(index)"
-                    >{{uniteadministrative.planFont.libelle || 'Non renseigné'}}</td>
-                    <td
-                      @dblclick="afficherModalModifierUniteAdministrative(index)"
-                    >{{uniteadministrative.code || 'Non renseigné'}}</td>
-                    <td
-                      @dblclick="afficherModalModifierUniteAdministrative(index)"
-                    >{{uniteadministrative.libelle || 'Non renseigné'}}</td>
-                    <td
-                      @dblclick="afficherModalModifierUniteAdministrative(index)"
-                    >{{ formaterDate(uniteadministrative.date_creation) || 'Non renseigné'}}</td>
-
+                  <!-- </template> -->
+                   <!-- <template v-else>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{'Non renseigné'}}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.secti.nom_section || 'Non renseigné'}}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.chpitr.libelle || 'Non renseigné'}}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.planFont.libelle || 'Non renseigné'}}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.code || 'Non renseigné'}}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.libelle || 'Non renseigné'}}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{ formaterDate(uniteadministrative.date_creation) || 'Non renseigné'}}</td>
+                  
+                  </template> -->
                     <td>
                       <button
                         class="btn btn-danger"
@@ -387,25 +385,26 @@ export default {
         code: "",
         libelle: "",
         section_id: "",
-        chapitre_id: "",
+        localisationgeo_id: "",
         type_ua_id: "",
         date_creation: "",
         test: "",
-        planfonctionnel_id:""
+        servicegest_id:""
       },
       editUniteAdministrative: {
         code: "",
         libelle: "",
         section_id: "",
-        chapitre_id: "",
+        localisationgeo_id: "",
         type_ua_id: "",
         date_creation: "",
-        planfonctionnel_id:""
+        servicegest_id:""
       },
       json_fields: {
         TYPE_UNIT_ADMINISTRATIVE: "typeua.libelle",
         SECTION: "secti.nom_section",
-        CHAPITRE: "chpitr.libelle",
+        SERVICE_GESTIONNAIRE: "servivegest.libelle",
+        LOCALISATION_GEO: "localgeo.libelle",
         CODE: "code",
         LIBELLE: "libelle",
         DATE_CREATION: "date_creation"
@@ -416,14 +415,19 @@ export default {
 
   computed: {
     ...mapGetters("uniteadministrative", [
-      "jointureUaChapitreSection"
+      "jointureUaChapitreSection",
+      "uniteAdministratives"
       // "chapitres",
       // "sections"
     ]),
     ...mapGetters("parametreGenerauxAdministratif", [
       "chapitres",
       "sections",
-      "type_Unite_admins"
+      "type_Unite_admins",
+      "services_gestionnaires",
+      "localisations_geographiques",
+      "afficheServiceGestionnaireNiveau4",
+      "afficheLocalisationGeoNiveau5"
     ]),
     ...mapGetters("parametreGenerauxFonctionnelle", [
       "plans_fonctionnels"
@@ -440,22 +444,22 @@ export default {
     },
     codeuniteadministrative(){
       //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
-     const chapitre = this.chapitres.find(chap => chap.id == this.formData.chapitre_id)
-    const planfonctionnel = this.plans_fonctionnels.find(chap => chap.id == this.formData.planfonctionnel_id)
-
-     if(chapitre && planfonctionnel){
-       return chapitre.code + planfonctionnel.code
+     const secti = this.sections.find(sect => sect.id == this.formData.section_id)
+    const servgest = this.services_gestionnaires.find(serviceg => serviceg.id == this.formData.servicegest_id)
+ const localisageo = this.localisations_geographiques.find(chap => chap.id == this.formData.localisationgeo_id)
+     if(secti && servgest && localisageo){
+       return secti.code_section + servgest.code + localisageo.code
      }
 
      return null
    },
    codeuniteadministrativeModifier(){
       // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
-     const chapitre = this.chapitres.find(chap => chap.id == this.editUniteAdministrative.chapitre_id)
-    const planfonctionnel = this.plans_fonctionnels.find(chap => chap.id == this.editUniteAdministrative.planfonctionnel_id)
-
-     if(chapitre && planfonctionnel ){
-       return chapitre.code + planfonctionnel.code
+     const secti = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
+    const servgest = this.services_gestionnaires.find(serviceg => serviceg.id == this.editUniteAdministrative.servicegest_id)
+ const localisageo = this.localisations_geographiques.find(chap => chap.id == this.editUniteAdministrative.localisationgeo_id)
+     if(secti && servgest && localisageo){
+       return secti.code_section + servgest.code + localisageo.code
      }
 
      return null
@@ -488,7 +492,7 @@ export default {
         code: "",
         libelle: "",
         section_id: "",
-        chapitre_id: "",
+        localisationgeo_id: "",
         type_ua_id: "",
         date_creation: ""
       };
@@ -506,7 +510,7 @@ this.$("#modificationModal").modal('hide');
       //   code: "",
       //   libelle: "",
       //   section_id: "",
-      //   chapitre_id: ""
+      //   localisationgeo_id: ""
       // };
     },
     // afficher modal de modification
@@ -534,8 +538,8 @@ this.$("#modificationModal").modal('hide');
 <style>
 
 .tailgrand{
-  width: 70%;
-  margin: 0 -35%;
+  width: 50%;
+  margin: 0 -25%;
 }
 
 </style>
