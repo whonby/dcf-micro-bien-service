@@ -112,7 +112,7 @@ export default {
     	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
        ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
-       ...mapActions('bienService', ['getActeurDepense'])
+       ...mapActions('bienService', ['getActeurDepense', 'getBailleur'])
 
   },
 
@@ -206,6 +206,7 @@ this.getMarcheContratExecution()
 this.getAllBudgetGeneral()
 
 this.getActeurDepense()
+this.getBailleur()
       /**
        * fin missions
        */

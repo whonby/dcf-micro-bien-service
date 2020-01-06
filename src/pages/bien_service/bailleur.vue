@@ -135,7 +135,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierFamilleLocal(editbailleur)"
+          @click.prevent="modifierBailleurLocal(editbailleur)"
           class="btn btn-primary"
           href="#"
         
@@ -186,7 +186,30 @@
                   </tr>
                 </thead>
                 <tbody>
-                 
+                 <tr class="odd gradeX" v-for="(bailleur, index) in 
+                bailleurFiltre"
+                 :key="bailleur.id">
+                 <td @dblclick="afficherModalModifierBailleur(index)">
+                   {{bailleur.nom_bailleur || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierBailleur(index)">
+                   {{bailleur.prenoms_bailleur || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierBailleur(index)">
+                   {{bailleur.telephone_bail || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierBailleur(index)">
+                   {{bailleur.adresse_bail || 'Non renseigné'}}</td>
+
+                    <td @dblclick="afficherModalModifierBailleur(index)">
+                   {{bailleur.email_bail || 'Non renseigné'}}</td>
+
+
+
+                     <div class="btn-group">
+              <button @click.prevent="supprimerBailleur(bailleur.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+             
+            </div>
+
+                       </tr>
                 </tbody>
               </table>
               
@@ -196,8 +219,8 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab>
- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTitre()">Open</button>
+    <fab :actions="fabActions" @cache="afficherModalAjouterBailleur" main-icon="apps" bg-color="green"></fab>
+ <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterBailleur()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
@@ -205,7 +228,7 @@
 </template>
   
 <script>
-// import { mapGetters, mapActions } from "vuex";
+ import { mapGetters, mapActions } from "vuex";
 export default {
   name:'bailleur',
   data() {
@@ -228,9 +251,18 @@ export default {
     //   },
 
       formData: {
-        
+        nom_bailleur:"",
+        prenoms_bailleur:"",
+        telephone_bail:"",
+        adresse_bail:"",
+        email_bail:""
       },
       editbailleur: {
+          nom_bailleur:"",
+        prenoms_bailleur:"",
+        telephone_bail:"",
+        adresse_bail:"",
+        email_bail:""
      
       },
       search: ""
@@ -238,44 +270,72 @@ export default {
   },
 
   computed: {
-    // ...mapGetters("SuiviImmobilisation", ["equipements","familles"]),
-    // filtre_equipement() {
-    //   const st = this.search.toLowerCase();
-    //   return this.equipements.filter(type => {
-    //     return (
-          
-    //       type.libelle.toLowerCase().includes(st)
-    //     );
-    //   });
-    // }
+    
+     ...mapGetters("bienService", ['bailleurs']),
+
+
+    bailleurFiltre() {
+     
+        const searchTerm = this.search.toLowerCase();
+
+return this.bailleurs.filter((item) => {
+  
+     return item.nom_bailleur.toLowerCase().includes(searchTerm) ||
+     item.prenoms_bailleur.toLowerCase().includes(searchTerm)
+    
+
+  
+  
+
+   }
+)
+    }
   },
   methods: {
-    // ...mapActions("SuiviImmobilisation", [
+     ...mapActions("bienService", [  'ajouterBailleur' ,'modifierBailleur', 'supprimerBailleur'
      
-    // ]),
+     ]),
     //afiicher modal ajouter
-    afficherModalAjouterTitre() {
+    afficherModalAjouterBailleur() {
       this.$("#exampleModal").modal({
         backdrop: "static",
         keyboard: false
       });
     },
     // fonction pour vider l'input ajouter
+
+    AjouterModalBailleurLocal(){
+     this.ajouterBailleur(this.formData)
+     this.formData = {
+         nom_bailleur:"",
+        prenoms_bailleur:"",
+        telephone_bail:"",
+        adresse_bail:"",
+        email_bail:""
+
+     }
+    },
     
     // afficher modal de modification
-    // afficherModalModifierFamille(index) {
-    //   this.$("#modificationModal").modal({
-    //     backdrop: "static",
-    //     keyboard: false
-    //   });
 
-    //   this.editEquipement = this.equipements[index];
-    // },
+     afficherModalModifierBailleur(index) {
+       this.$("#modificationModal").modal({
+         backdrop: "static",
+         keyboard: false
+      });
+
+       this.editbailleur = this.bailleurs[index];
+     },
     // fonction pour vider l'input modification
-    
-    alert() {
-      console.log("ok");
+
+    modifierBailleurLocal(){
+      this.modifierBailleur(this.editbailleur)
+      this.$('#modificationModal').modal('hide');
     },
+    
+    // alert() {
+    //   console.log("ok");
+    // },
      ExporterEnExel(){
       this.$refs.excel.click()
     }

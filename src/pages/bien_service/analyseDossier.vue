@@ -299,16 +299,16 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterStock" main-icon="apps" bg-color="green"></fab>
+    <fab :actions="fabActions" @cache="afficherModalAjouterAnalyseDossier" main-icon="apps" bg-color="green"></fab>
     <notifications  />
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterStock()">Open</button>
+     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterAnalyseDossier()">Open</button>
   </div>
 </template>
   
 <script>
-// import { mapGetters, mapActions } from "vuex";
-// import moment from "moment";
+ import { mapGetters, mapActions } from "vuex";
+import moment from "moment";
 // import { formatageSomme } from "../../../Repositories/Repository";
 
 export default {
@@ -338,11 +338,22 @@ export default {
 
       formData: {
        
-        
-       
+        decision:"",
+        rang_analyse:"",
+        date_analyse:"",
+        id_cojo:"",
+        id_type_analyse:"",
+        id_candidat:"",
+       id_acte:""
       },
-      editCompte: {
-       
+      editAnalyseDossier: {
+         decision:"",
+        rang_analyse:"",
+        date_analyse:"",
+        id_cojo:"",
+        id_type_analyse:"",
+        id_candidat:"",
+       id_acte:""
       },
       search: ""
     };
@@ -353,10 +364,10 @@ export default {
 //     )
 // },
   computed: {
-    // ...mapGetters("SuiviImmobilisation", [
+    ...mapGetters("bienService", [
    
      
-    // ]),
+    ]),
     // ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
     // ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
 
@@ -367,23 +378,43 @@ export default {
    
   },
   methods: {
-    // ...mapActions("SuiviImmobilisation", [
+    ...mapActions("bienService", [
     //   "getAllStock",
     //   "ajouterStock",
     //   "modifierStock",
     //   "supprimerStock"
-    // ]),
+     ]),
     // formatageSomme: formatageSomme,
 
     //afiicher modal ajouter
-    afficherModalAjouterStock() {
+    afficherModalAjouterAnalyseDossier() {
       this.$("#exampleModal").modal({
         backdrop: "static",
         keyboard: false
       });
     },
     // fonction pour vider l'input ajouter
+
+    ajouterAnalyseDossierLocal(){
+      this.analyseDossiers(this.formData)
+      this.formData = {
+           decision:"",
+        rang_analyse:"",
+        date_analyse:"",
+        id_cojo:"",
+        id_type_analyse:"",
+        id_candidat:"",
+       id_acte:""
+        
+
+      }
+    },
        // afficher modal de modification
+
+      //  afficherModalModifierAnalyseDossier(index){
+
+      //    this
+      //  },
     
 
     formaterDate(date) {
