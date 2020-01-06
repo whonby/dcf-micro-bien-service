@@ -22,9 +22,14 @@ const defaultState = {
     typeUa:[],
     uniteAdministratives:[],
     uniteZones:[],
+
     ligneBudgetaires:[],
+    DossierCandidats:[],
+    livrables:[],
+      
     zoneGeographiques:[],
-    typeTextJuridiques:[]
+    typeTextJuridiques:[],
+    realiteServiceFaits:[]
 
 
 

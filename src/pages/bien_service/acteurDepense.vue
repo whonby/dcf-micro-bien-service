@@ -152,7 +152,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterStockLocal(formData)"
+          @click.prevent="ajouterActeurDepenseLocal"
           class="btn btn-primary"
           href="#"
            
@@ -312,7 +312,7 @@
         </table>
       </div>
       <div class="modal-footer">
-        <a class="btn btn-primary" @click.prevent="modifierStockLocal(editActeurDepense)">Modifier</a>
+        <a class="btn btn-primary" @click.prevent="modifierActeDepenseLocal(editActeurDepense)">Modifier</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
@@ -365,7 +365,36 @@
                   </tr>
                 </thead>
                 <tbody>
-                    
+                           <tr class="odd gradeX" v-for="(acteurDepense, index) in 
+                acteurDepenseFiltre"
+                 :key="acteurDepense.id">
+                 <td @dblclick="afficherModalModifierActeDepense(index)">
+                   {{acteurDepense.id_fonction || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierActeDepense(index)">
+                   {{acteurDepense.nom|| 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierActeDepense(index)">
+                   {{acteurDepense.prenom || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierActeDepense(index)">
+                   {{acteurDepense.date_naissance || 'Non renseigné'}}</td>
+
+                      <td @dblclick="afficherModalModifierActeDepense(index)">
+                   {{acteurDepense.grade|| 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierActeDepense(index)">
+                   {{acteurDepense.emploi || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierActeDepense(index)">
+                   {{acteurDepense.situation_matrimoniale || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierActeDepense(index)">
+                   {{acteurDepense.date_premier_service || 'Non renseigné'}}</td>
+
+
+
+                     <div class="btn-group">
+              <button @click.prevent="supprimerActeurDepense(acteurDepense.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+             
+            </div>
+
+                       </tr>
                 </tbody>
               </table>
             </div>
@@ -375,16 +404,16 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterStock" main-icon="apps" bg-color="green"></fab>
+    <fab :actions="fabActions" @cache="afficherModalAjouterActeurDepense" main-icon="apps" bg-color="green"></fab>
     <notifications  />
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterStock()">Open</button>
+     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterActeurDepense()">Open</button>
   </div>
 </template>
   
 <script>
-// import { mapGetters, mapActions } from "vuex";
-// import moment from "moment";
+ import { mapGetters, mapActions } from "vuex";
+ import moment from "moment";
 // import { formatageSomme } from "../../../Repositories/Repository";
 
 export default {
@@ -413,11 +442,26 @@ export default {
 //       },
 
       formData: {
-       
+       id_fonction:"",
+       nom:"",
+       prenom:"",
+       date_naissance:"",
+       grade:"",
+       emploi:"",
+       situation_matrimoniale:"",
+       date_premier_service:""
         
        
       },
-      editCompte: {
+      editActeurDepense: {
+         id_fonction:"",
+       nom:"",
+       prenom:"",
+       date_naissance:"",
+       grade:"",
+       emploi:"",
+       situation_matrimoniale:"",
+       date_premier_service:""
        
       },
       search: ""
@@ -429,10 +473,25 @@ export default {
 //     )
 // },
   computed: {
-    // ...mapGetters("SuiviImmobilisation", [
+     ...mapGetters("bienService", ['acteurDepenses',
    
      
-    // ]),
+     ]),
+
+acteurDepenseFiltre(){
+  const searchTerm = this.search.toLowerCase();
+      return this.acteurDepenses.filter((item) => {
+  
+     return item.nom.toLowerCase().includes(searchTerm) ||
+
+    item.prenom.toLowerCase().includes(searchTerm)
+
+  
+  
+
+   }
+)
+}   
     // ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
     // ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
 
@@ -442,25 +501,57 @@ export default {
 
    
   },
+
+
+  
   methods: {
-    // ...mapActions("SuiviImmobilisation", [
+     ...mapActions("bienService", ['ajouterActeurDepense','modifierActeurDepense',
+     'supprimerActeurDepense'
+
     //   "getAllStock",
     //   "ajouterStock",
     //   "modifierStock",
     //   "supprimerStock"
-    // ]),
+     ]),
     // formatageSomme: formatageSomme,
 
     //afiicher modal ajouter
-    afficherModalAjouterStock() {
+    afficherModalAjouterActeurDepense() {
       this.$("#exampleModal").modal({
         backdrop: "static",
         keyboard: false
       });
     },
     // fonction pour vider l'input ajouter
+
+    ajouterActeurDepenseLocal(){
+      this.ajouterActeurDepense(this.formData)
+      this.formData = {
+           id_fonction:"",
+       nom:"",
+       prenom:"",
+       date_naissance:"",
+       grade:"",
+       emploi:"",
+       situation_matrimoniale:"",
+       date_premier_service:""
+
+      }
+    },
        // afficher modal de modification
+
+       afficherModalModifierActeurDepense(index){
+        this.$('#modificationModal').modal({
+          backdrop:'static',
+          keyboard:false
+        });
+        this.editActeurDepense = this.acteurDepenses[index]
+       },
     
+    modifierActeDepenseLocal(){
+      this.modifierActeurDepense(this.editActeurDepense)
+      this.$('#modificationModal').modal('hide');
+    },
 
     formaterDate(date) {
       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");

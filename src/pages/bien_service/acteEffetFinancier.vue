@@ -166,7 +166,7 @@
             
 
           </tr>
-         <tr>
+         <!-- <tr>
                <td>
               <div class="control-group">
                 <label class="control-label">incidence_financiere</label>
@@ -182,12 +182,12 @@
               </div>
               
             </td>
-         </tr>
+         </tr> -->
         </table>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterStockLocal(formData)"
+          @click.prevent="ajouterModalAjouterLocal"
           class="btn btn-primary"
           href="#"
            
@@ -383,7 +383,7 @@
         </table>
       </div>
       <div class="modal-footer">
-        <a class="btn btn-primary" @click.prevent="modifierStockLocal(editActeEffetFinancier)">Modifier</a>
+        <a class="btn btn-primary" @click.prevent="modifierActeEffetFinancierLocal(editActeEffetFinancier)">Modifier</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
@@ -433,7 +433,40 @@
                   </tr>
                 </thead>
                 <tbody>
-                    
+                           <tr class="odd gradeX" v-for="(acteEffetFinancier, index) in 
+                acteEffetFinancierFiltre"
+                 :key="acteEffetFinancier.id">
+                 <td @dblclick="afficherModalModificationActeEfffetFinancier(index)">
+                   {{acteEffetFinancier.relation.id_type_acte_effet_fin || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationActeEfffetFinancier(index)">
+                   {{acteEffetFinancier.relation.id_texte || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationActeEfffetFinancier(index)">
+                   {{acteEffetFinancier.code_acte || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationActeEfffetFinancier(index)">
+                   {{acteEffetFinancier.libelle_acte || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModificationActeEfffetFinancier(index)">
+                   {{acteEffetFinancier.reference_acte || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationActeEfffetFinancier(index)">
+                   {{acteEffetFinancier.objet_acte || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationActeEfffetFinancier(index)">
+                   {{acteEffetFinancier.incidence_financiere || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationActeEfffetFinancier(index)">
+                   {{acteEffetFinancier.montant_acte || 'Non renseigné'}}</td>
+
+                    <td @dblclick="afficherModalModificationActeEfffetFinancier(index)">
+                   {{acteEffetFinancier.type_doc_modifie || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationActeEfffetFinancier(index)">
+                   {{acteEffetFinancier.livrables || 'Non renseigné'}}</td>
+
+
+
+                     <div class="btn-group">
+              <button @click.prevent="supprimerTypeActeEffetFinancier(acteEffetFinancier.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+             
+            </div>
+
+                       </tr>
                 </tbody>
               </table>
             </div>
@@ -443,15 +476,15 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterStock" main-icon="apps" bg-color="green"></fab>
+    <fab :actions="fabActions" @cache="afficherModalAjouterActeEffetFinancier" main-icon="apps" bg-color="green"></fab>
     <notifications  />
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterStock()">Open</button>
+     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterActeEffetFinancier()">Open</button>
   </div>
 </template>
   
 <script>
-// import { mapGetters, mapActions } from "vuex";
+ import { mapGetters, mapActions } from "vuex";
 // import moment from "moment";
 // import { formatageSomme } from "../../../Repositories/Repository";
 
@@ -481,11 +514,33 @@ export default {
 //       },
 
       formData: {
-       
-        
+        id_type_acte_effet_fin:"",
+        id_texte:"",
+        code_acte:"",
+        libelle_acte:"",
+        reference_acte:"",
+        objet_acte:"",
+        incidence_financiere:"",
+        montant_acte:"",
+        type_doc_modifie:"",
+        livrables:"",
+
+
        
       },
-      editCompte: {
+      editActeEffetFinancier: {
+
+          id_type_acte_effet_fin:"",
+        id_texte:"",
+        code_acte:"",
+        libelle_acte:"",
+        reference_acte:"",
+        objet_acte:"",
+        incidence_financiere:"",
+        montant_acte:"",
+        type_doc_modifie:"",
+        livrables:"",
+
        
       },
       search: ""
@@ -497,10 +552,27 @@ export default {
 //     )
 // },
   computed: {
-    // ...mapGetters("SuiviImmobilisation", [
+     ...mapGetters("bienService", ['typeActeEffetFinanciers'
    
      
-    // ]),
+     ]),
+
+
+     acteEffetFinancierFiltre(){
+
+       const searchTerm = this.search.toLowerCase();
+      return this.typeActeEffetFinanciers.filter((item) => {
+  
+     return item.libelle_acte.toLowerCase().includes(searchTerm) 
+    
+
+  
+  
+
+   }
+)
+
+     },
     // ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
     // ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
 
@@ -511,28 +583,62 @@ export default {
    
   },
   methods: {
-    // ...mapActions("SuiviImmobilisation", [
+     ...mapActions("bienService", ['ajouterTypeActeEffetFinancier','modifierTypeActeEffetFinancier',
+     'supprimerTypeActeEffetFinancier'
     //   "getAllStock",
     //   "ajouterStock",
     //   "modifierStock",
     //   "supprimerStock"
-    // ]),
+     ]),
     // formatageSomme: formatageSomme,
 
     //afiicher modal ajouter
-    afficherModalAjouterStock() {
+    afficherModalAjouterActeEffetFinancier() {
       this.$("#exampleModal").modal({
         backdrop: "static",
         keyboard: false
       });
     },
     // fonction pour vider l'input ajouter
-       // afficher modal de modification
-    
 
-    formaterDate(date) {
-      return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+
+    ajouterModalAjouterLocal(){
+      this.ajouterTypeActeEffetFinancier(this.formData)
+      this.formData = {
+          id_type_acte_effet_fin:"",
+        id_texte:"",
+        code_acte:"",
+        libelle_acte:"",
+        reference_acte:"",
+        objet_acte:"",
+        incidence_financiere:"",
+        montant_acte:"",
+        type_doc_modifie:"",
+        livrables:"",
+
+      }
     },
+       // afficher modal de modification
+    afficherModalModificationActeEfffetFinancier(index){
+      this.$('#modificationModal').modal({
+        backdrop: 'static',
+         keyboard: false
+      });
+      this.editActeEffetFinancier = this.typeActeEffetFinanciers[index]
+
+    },
+
+
+ // afficher le modal modifier et vider le modal
+
+ modifierActeEffetFinancierLocal(){
+   this.modifierTypeActeEffetFinancier(this.editActeEffetFinancier)
+   this.$('#modificationModal').modal('hide');
+ },
+
+    // formaterDate(date) {
+    //   return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+    // },
     
     ExporterEnExel(){
       this.$refs.excel.click()

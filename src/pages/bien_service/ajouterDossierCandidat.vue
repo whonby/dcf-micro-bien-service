@@ -495,14 +495,14 @@ export default {
   //   //console.log(this.$router);
   // },
   computed: {
-    ...mapGetters("SuiviImmobilisation", [
+    ...mapGetters("bienService", [
      
       
     ]),
 
   },
   methods: {
-    ...mapActions("SuiviImmobilisation", [
+    ...mapActions("bienService", [
      
       
     ]),

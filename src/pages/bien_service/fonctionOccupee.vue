@@ -192,7 +192,7 @@
 </template>
   
 <script>
-// import { mapGetters, mapActions } from "vuex";
+ import { mapGetters, mapActions } from "vuex";
 export default {
   name:'banque',
   data() {
@@ -225,7 +225,7 @@ export default {
   },
 
   computed: {
-    // ...mapGetters("SuiviImmobilisation", ["equipements","familles"]),
+     ...mapGetters("bienService", []),
     // filtre_equipement() {
     //   const st = this.search.toLowerCase();
     //   return this.equipements.filter(type => {
@@ -237,7 +237,7 @@ export default {
     // }
   },
   methods: {
-    ...mapActions("SuiviImmobilisation", [
+    ...mapActions("bienService", [
      
     ]),
     //afiicher modal ajouter

@@ -166,7 +166,7 @@
 
   ></fab>
 
-<notifications  />
+<notifications />
 
 
   </div>
@@ -275,11 +275,12 @@ afficherModalModifierBudgetaire(index){
 // 
 modifierBudgetaireLocal(){
   this.modifierCategorieMission(this.editBudgetaire)
-  this.editBudgetaire = {
-    code:"",
-    libelle:"",
+  this.$('#modifierModal').modal('hide');
+  // this.editBudgetaire = {
+  //   code:"",
+  //   libelle:"",
    
-  }
+  // }
 }
 
   }

@@ -80,7 +80,7 @@ export  function  getActeDepense({commit}) {
   // action pour ajouter acte depense
   export function ajouterActeDepense({commit}, elementAjout){
     asyncLoading(axios.post('/urls',{
-      code_acte_depense:elementAjout.code_acte_depense,
+    
     matricule:elementAjout.matricule,
     id_type_acte_depense:elementAjout.id_type_acte_depense,
     montant:elementAjout.montant,
@@ -113,7 +113,7 @@ export  function  getActeDepense({commit}) {
 
  export function modifierActeDepense({commit}, element_modifie) {
     asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-      code_acte_depense:element_modifie.code_acte_depense,
+   
       matricule:element_modifie.matricule,
       id_type_acte_depense:element_modifie.id_type_acte_depense,
       montant:element_modifie.montant,
@@ -137,7 +137,7 @@ export  function  getActeDepense({commit}) {
          })
      }).catch(error => console.log(error))
  }
-  // supprimer categorie mision
+  // action pour la suppression d'acte de depense
 export function supprimerActeDepense({commit}, id) {
    this.$app.$dialog
    .confirm("Voulez vouz vraiment supprimer ?.")
@@ -151,7 +151,7 @@ export function supprimerActeDepense({commit}, id) {
 
 
 export  function  getBailleur({commit}) {
-    queue.push(() => axios.get('/url').then((response) => {
+    queue.push(() => axios.get('/bailleurs').then((response) => {
       commit('GET_ALL_BAILLEUR', response.data)
       
   }).catch(error => console.log(error)))
@@ -159,7 +159,7 @@ export  function  getBailleur({commit}) {
 
   // action pour ajouter bailleur
   export function ajouterBailleur({commit}, elementAjout){
-    asyncLoading(axios.post('/urls',{
+    asyncLoading(axios.post('/bailleurs',{
       nom_bailleur:elementAjout.nom_bailleur,
       prenoms_bailleur:elementAjout.prenoms_bailleur,
       telephone_bail:elementAjout.telephone_bail,
@@ -184,7 +184,7 @@ export  function  getBailleur({commit}) {
 
 
  export function modifierBailleur({commit}, element_modifie) {
-    asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+    asyncLoading( axios.put('/bailleurs/'+ element_modifie.id ,{
       nom_bailleur:element_modifie.nom_bailleur,
       prenoms_bailleur:element_modifie.prenoms_bailleur,
       telephone_bail:element_modifie.telephone_bail,
@@ -209,7 +209,7 @@ export function supprimerBailleur({commit}, id) {
    .then(dialog => {
       commit('SUPPRIMER_BAILLEUR', id)
      // // dialog.loading(false) // stops the proceed button's loader
-       axios.delete('/urls/' + id).then(() => dialog.close() )   
+       axios.delete('/bailleurs/' + id).then(() => dialog.close() )   
    })
  
 }
@@ -1550,6 +1550,575 @@ export function supprimerUniteZone({commit}, id) {
  .confirm("Voulez vouz vraiment supprimer ?.")
  .then(dialog => {
     commit('SUPPRIMER_UNITE_ZONE', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+     axios.delete('/urls/' + id).then(() => dialog.close() )   
+ })
+
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////
+
+
+// action for ligne budgetaire 
+
+export  function  getLigneBudgetaire({commit}) {
+  queue.push(() => axios.get('/url').then((response) => {
+    commit('GET_ALL_LIGNE_BUDGETAIRE', response.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter la ligne budgetaire
+export function ajouterLigneBudgetaire({commit}, elementAjout){
+  asyncLoading(axios.post('/urls',{
+    id_unite_administrative:elementAjout.id_unite_administrative,
+    id_texte:elementAjout.id_texte,
+    id_ligne_modifie:elementAjout.id_ligne_modifie,
+    division:elementAjout.division,
+    groupe:elementAjout.groupe,
+    classe_fonctionnelle:elementAjout.classe_fonctionnelle,
+    classe_comptable:elementAjout.classe_comptable,
+    article:elementAjout.article,
+    paragraphe:elementAjout.paragraphe,
+    ligne:elementAjout.ligne,
+    rubrique:elementAjout.rubrique,
+    sous_rubrique:elementAjout.sous_rubrique,
+    dotation_initiale:elementAjout.dotation_initiale,
+    version:elementAjout.version
+
+})).then(response =>{
+      if(response.status == 201){
+          commit('AJOUTER_LIGNE_BUDGETAIRE', response.data)
+
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier la ligne budgetaire
+
+
+export function modifierLigneBudgetaire({commit}, element_modifie) {
+  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+    id_unite_administrative:element_modifie.id_unite_administrative,
+    id_texte:element_modifie.id_texte,
+    id_ligne_modifie:element_modifie.id_ligne_modifie,
+    division:element_modifie.division,
+    groupe:element_modifie.groupe,
+    classe_fonctionnelle:element_modifie.classe_fonctionnelle,
+    classe_comptable:element_modifie.classe_comptable,
+    article:element_modifie.article,
+    paragraphe:element_modifie.paragraphe,
+    ligne:element_modifie.ligne,
+    rubrique:element_modifie.rubrique,
+    sous_rubrique:element_modifie.sous_rubrique,
+    dotation_initiale:element_modifie.dotation_initiale,
+    version:element_modifie.version
+ })).then(response => {
+       commit('MODIFIER_LIGNE_BUDGETAIRE', response.data)
+       
+
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
+// supprimer la ligne budgetaire
+export function supprimerLigneBudgetaire({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('SUPPRIMER_LIGNE_BUDGETAIRE', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+     axios.delete('/urls/' + id).then(() => dialog.close() )   
+ })
+
+}
+
+
+
+// action pour  la liste de dossier de candidat
+
+export  function  getDossierCandidat({commit}) {
+  queue.push(() => axios.get('/url').then((response) => {
+    commit('GET_DOSSIER_CANDIDAT', response.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter la liste de dosseier candidat
+
+export function ajouterDossierCandidat({commit}, elementAjout){
+  asyncLoading(axios.post('/urls',{
+    id_procedure_passation:elementAjout.id_procedure_passation,
+    type_cand:elementAjout.type_cand,
+    nom_cand:elementAjout.nom_cand,
+    prenoms_cand:elementAjout.prenoms_cand,
+    date_naiss_cand:elementAjout.date_naiss_cand,
+    telephone_cand:elementAjout.telephone_cand,
+    adresse_postal:elementAjout.adresse_postal,
+    situation_geo:elementAjout.situation_geo,
+    email_cand:elementAjout.email_cand,
+    accord_group:elementAjout.accord_group,
+    cautionnement_prov:elementAjout.cautionnement_prov,
+    pouv_habil_signataire:elementAjout.pouv_habil_signataire,
+    piece_admin:elementAjout.piece_admin,
+    reg_com:elementAjout.reg_com,
+    attest_banc:elementAjout.attest_banc,
+    formul_propo_tech:elementAjout.formul_propo_tech,
+    fiche_rsgnt_cand:elementAjout.fiche_rsgnt_cand,
+    fiche_rsgnt_mbre_group:elementAjout.fiche_rsgnt_mbre_group,
+    atcdent_marche_non_exe:elementAjout.atcdent_marche_non_exe,
+    org_travau_site:elementAjout.org_travau_site,
+    meth_real_travau:elementAjout.meth_real_travau,
+    prog_mobilisation:elementAjout.prog_mobilisation,
+    capacite_financiere:elementAjout.capacite_financiere,
+    caa_moyen_ac_entre:elementAjout.caa_moyen_ac_entre,
+    capacite_financement:elementAjout.capacite_financement,
+    capacite_tech_exp:elementAjout.capacite_tech_exp,
+    mt_offre_financiere:elementAjout.mt_offre_financiere
+    
+})).then(response =>{
+      if(response.status == 201){
+          commit('AJOUTER_DOSSIER_CANDIDAT', response.data)
+
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier la liste de dossier de candidat
+
+
+export function modifierDossierCandidat({commit}, element_modifie) {
+  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+    id_procedure_passation:element_modifie.id_procedure_passation,
+    type_cand:element_modifie.type_cand,
+    nom_cand:element_modifie.nom_cand,
+    prenoms_cand:element_modifie.prenoms_cand,
+    date_naiss_cand:element_modifie.date_naiss_cand,
+    telephone_cand:element_modifie.telephone_cand,
+    adresse_postal:element_modifie.adresse_postal,
+    situation_geo:element_modifie.situation_geo,
+    email_cand:element_modifie.email_cand,
+    accord_group:element_modifie.accord_group,
+    cautionnement_prov:element_modifie.cautionnement_prov,
+    pouv_habil_signataire:element_modifie.pouv_habil_signataire,
+    piece_admin:element_modifie.piece_admin,
+    reg_com:element_modifie.reg_com,
+    attest_banc:element_modifie.attest_banc,
+    formul_propo_tech:element_modifie.formul_propo_tech,
+    fiche_rsgnt_cand:element_modifie.fiche_rsgnt_cand,
+    fiche_rsgnt_mbre_group:element_modifie.fiche_rsgnt_mbre_group,
+    atcdent_marche_non_exe:element_modifie.atcdent_marche_non_exe,
+    org_travau_site:element_modifie.org_travau_site,
+    meth_real_travau:element_modifie.meth_real_travau,
+    prog_mobilisation:element_modifie.prog_mobilisation,
+    capacite_financiere:element_modifie.capacite_financiere,
+    caa_moyen_ac_entre:element_modifie.caa_moyen_ac_entre,
+    capacite_financement:element_modifie.capacite_financement,
+    capacite_tech_exp:element_modifie.capacite_tech_exp,
+    mt_offre_financiere:element_modifie.mt_offre_financiere
+    
+ })).then(response => {
+       commit('MODIFIER_DOSSIER_CANDIDAT', response.data)
+       
+
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
+// supprimer la liste de dossier de candidat
+
+export function supprimerDossierCandidat({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('SUPPRIMER_DOSSIER_CANDIDAT', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+     axios.delete('/urls/' + id).then(() => dialog.close() )   
+ })
+
+}
+
+
+
+// action pour obtenir les données de livrable
+
+export  function  getLivrable({commit}) {
+  queue.push(() => axios.get('/url').then((response) => {
+    commit('GET_ALL_LIVRABLE', response.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter la donnée du livrable
+export function ajouterLivrable({commit}, elementAjout){
+  asyncLoading(axios.post('/urls',{
+    id_zone_geographique:elementAjout.id_zone_geographique,
+    libelle_livrable:elementAjout.libelle_livrable,
+    type_livrable:elementAjout.type_livrable,
+    date_livraison:elementAjout.date_livraison,
+    imputation_budgetaire:elementAjout.imputation_budgetaire,
+    district:elementAjout.district,
+    departement:elementAjout.departement,
+    localite:elementAjout.localite,
+    commune:elementAjout.commune,
+    village:elementAjout.village,
+    sous_prefecture:elementAjout.sous_prefecture,
+    beneficiaire:elementAjout.beneficiaire,
+    quantite:elementAjout.quantite,
+    montant:elementAjout.montant
+    
+})).then(response =>{
+      if(response.status == 201){
+          commit('AJOUTER_LIVRABLE', response.data)
+
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier le livrable
+
+
+export function modifierLivrable({commit}, element_modifie) {
+  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+    id_zone_geographique:element_modifie.id_zone_geographique,
+    libelle_livrable:element_modifie.libelle_livrable,
+    type_livrable:element_modifie.type_livrable,
+    date_livraison:element_modifie.date_livraison,
+    imputation_budgetaire:element_modifie.imputation_budgetaire,
+    district:element_modifie.district,
+    departement:element_modifie.departement,
+    localite:element_modifie.localite,
+    commune:element_modifie.commune,
+    village:element_modifie.village,
+    sous_prefecture:element_modifie.sous_prefecture,
+    beneficiaire:element_modifie.beneficiaire,
+    quantite:element_modifie.quantite,
+    montant:element_modifie.montant
+    
+    
+ })).then(response => {
+       commit('MODIFIER_LIVRABLE', response.data)
+       
+
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
+// supprimer le livrable
+
+export function supprimerLivrable({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('SUPPRIMER_LIVRABLE', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+     axios.delete('/urls/' + id).then(() => dialog.close() )   
+ })
+
+}
+
+
+
+// action pour obtenir les données de modifier le dossier du candidat
+
+// export  function  getModifierDossierCandidat({commit}) {
+//   queue.push(() => axios.get('/url').then((response) => {
+//     commit('GET_MODIFIER_DOSSIER_CANDIDAT', response.data)
+    
+// }).catch(error => console.log(error)))
+// }
+
+// action pour ajouter la modification du dossier du candidat
+
+// export function ajouterModifierDossierCandidat({commit}, elementAjout){
+//   asyncLoading(axios.post('/urls',{
+//     signature:elementAjout.signature,
+//     debut_validite:elementAjout.debut_validite,
+//     fin_validite:elementAjout.fin_validite,
+//     version:elementAjout.version,
+//     id_signature_modifie:elementAjout.id_signature_modifie
+    
+// })).then(response =>{
+//       if(response.status == 201){
+//           commit('AJOUTER_MODIFIER_DOSSIER_CANDIDAT', response.data)
+
+//           this.$app.$notify({
+//             title: 'success ',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
+
+//   }).catch(error => console.log(error))
+// }
+
+// action pour modifier la signature
+
+
+// export function modifierSignature({commit}, element_modifie) {
+//   asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+//     signature:element_modifie.signature,
+//     debut_validite:element_modifie.debut_validite,
+//     fin_validite:element_modifie.fin_validite,
+//     version:element_modifie.version,
+//     id_signature_modifie:element_modifie.id_signature_modifie
+    
+//  })).then(response => {
+//        commit('MODIFIER_SIGNATURE', response.data)
+       
+
+//        this.$app.$notify({
+//          title: 'success ',
+//          text: 'Modification effectué !',
+//          type:"success"
+//        })
+//    }).catch(error => console.log(error))
+// }
+// supprimer la signature
+
+// export function supprimerSignature({commit}, id) {
+//  this.$app.$dialog
+//  .confirm("Voulez vouz vraiment supprimer ?.")
+//  .then(dialog => {
+//     commit('SUPPRIMER_SIGNATURE', id)
+   
+//      axios.delete('/urls/' + id).then(() => dialog.close() )   
+//  })
+
+// }
+
+
+// action pour obtenir les données de zones geographiques
+
+export  function  getZoneGeographique({commit}) {
+  queue.push(() => axios.get('/url').then((response) => {
+    commit('GET_ALL_ZONE_GEOGRAPHIQUE', response.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter les donnees de zone geographiques
+
+export function ajouterZoneGeographique({commit}, elementAjout){
+  asyncLoading(axios.post('/urls',{
+    region:elementAjout.region,
+    departement:elementAjout.departement,
+    sous_prefecture:elementAjout.sous_prefecture,
+    commune:elementAjout.commune,
+    ville:elementAjout.ville,
+    village:elementAjout.village,
+    longitude_ville:elementAjout.longitude_ville,
+    latitude_ville:elementAjout.latitude_ville,
+    version:elementAjout.version,
+    id_zone_modif:elementAjout.id_zone_modif
+})).then(response =>{
+      if(response.status == 201){
+          commit('AJOUTER_ZONE_GEOGRAPHIQUE', response.data)
+
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier la zone geographique
+
+
+export function modifierZoneGeographique({commit}, element_modifie) {
+  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+    region:element_modifie.region,
+    departement:element_modifie.departement,
+    sous_prefecture:element_modifie.sous_prefecture,
+    commune:element_modifie.commune,
+    ville:element_modifie.ville,
+    village:element_modifie.village,
+    longitude_ville:element_modifie.longitude_ville,
+    latitude_ville:element_modifie.latitude_ville,
+    version:element_modifie.version,
+    id_zone_modif:element_modifie.id_zone_modif
+    
+ })).then(response => {
+       commit('MODIFIER_ZONE_GEOGRAPHIQUE', response.data)
+       
+
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
+// action pour la suppression la zone geographique
+
+export function supprimerZoneGeographique({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('SUPPRIMER_ZONE_GEOGRAPHIQUE', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+     axios.delete('/urls/' + id).then(() => dialog.close() )   
+ })
+
+}
+
+
+// action pour obtenir les infos du type text juridique
+
+export  function  getTypeTextJurique({commit}) {
+  queue.push(() => axios.get('/url').then((response) => {
+    commit('GET_ALL_TYPE_TEXT_JURIDIQUE', response.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter les infos 
+
+export function ajouterTypeTextJuridique({commit}, elementAjout){
+  asyncLoading(axios.post('/urls',{
+    id_texte:elementAjout.id_texte,
+    libelle_type:elementAjout.libelle_type
+    
+})).then(response =>{
+      if(response.status == 201){
+          commit('AJOUTER_TYPE_TEXT_JURIDIQUE', response.data)
+
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier le type text juridique
+
+
+export function modifierTypeTextJuridique({commit}, element_modifie) {
+  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+    id_texte:element_modifie.id_texte,
+    libelle_type:element_modifie.libelle_type
+ })).then(response => {
+       commit('MODIFIER_TYPE_TEXT_JURIDIQUE', response.data)
+       
+
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
+// supprimer le type text juridique
+
+export function supprimerTypeTextJuridique({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('SUPPRIMER_TYPE_TEXT_JURIDIQUE', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+     axios.delete('/urls/' + id).then(() => dialog.close() )   
+ })
+
+}
+
+
+// action pour obtenir les données de realite du service fait
+
+export  function  getRealiteServiceFait({commit}) {
+  queue.push(() => axios.get('/url').then((response) => {
+    commit('GET_REALITE_SERVICE_FAIT', response.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter la realite du service fait
+
+export function ajouterRealiteServiceFait({commit}, elementAjout){
+  asyncLoading(axios.post('/urls',{
+    UA_CONCERNE:elementAjout.UA_CONCERNE,
+    AGENT_DCF:elementAjout.AGENT_DCF,
+    AGENT_UA:elementAjout.AGENT_UA,
+    DATE:elementAjout.DATE,
+    DECISION_AGENT_DCF:elementAjout.DECISION_AGENT_DCF,
+    ID_MOTIF:elementAjout.ID_MOTIF
+})).then(response =>{
+      if(response.status == 201){
+        commit('AJOUTER_REALITE_SERVICE_FAIT', response.data)
+
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier la realite du service fait
+
+
+export function modifierRealiteServicefait({commit}, element_modifie) {
+  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+    UA_CONCERNE:element_modifie.UA_CONCERNE,
+    AGENT_DCF:element_modifie.AGENT_DCF,
+    AGENT_UA:element_modifie.AGENT_UA,
+    DATE:element_modifie.DATE,
+    DECISION_AGENT_DCF:element_modifie.DECISION_AGENT_DCF,
+    ID_MOTIF:element_modifie.ID_MOTIF
+    
+ })).then(response => {
+       commit('MODIFIER_REALITE_SERVICE_FAIT', response.data)
+       
+
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
+// supprimer type unite administrative
+
+export function supprimerRealiteServiceFait({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('SUPPRIMER_REALITE_SERVICE_FAIT', id)
    // // dialog.loading(false) // stops the proceed button's loader
      axios.delete('/urls/' + id).then(() => dialog.close() )   
  })
