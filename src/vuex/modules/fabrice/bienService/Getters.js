@@ -21,3 +21,4 @@ export const typeAnalyses = state => state.typeAnalyses
 export const typeUa = state => state.typeUa
 export const uniteAdministratives = state => state.uniteAdministratives
 export const uniteZones = state => state.uniteZones
+export const typeProcedures = state => state.typeProcedures

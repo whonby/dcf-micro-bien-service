@@ -19,7 +19,16 @@ import typeActeEffetFinancier from '../../pages/bien_service/typeActeEffetFinanc
 import typeAnalyse from '../../pages/bien_service/typeAnalyse.vue';
 import typeFacture from '../../pages/bien_service/typeFacture.vue';
 import typeUa from '../../pages/bien_service/typeUa.vue';
+import typeProcedure from '../../pages/bien_service/typeProcedure.vue';
 const BienServiceRoutes = [
+
+    {
+        path: "/type-procedure",
+        name: "typeProcedure",
+        component: typeProcedure
+    },
+
+
     // la route pour acte de depense
 {
  path:"/creation-acte-depense",

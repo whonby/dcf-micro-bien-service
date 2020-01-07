@@ -72,9 +72,9 @@
                    <ul id="demo">
             <Tree class="item" v-for="plan in lesPlansParents"
             :key="plan.id" :item="plan"   
-              @ajouterElementEnfant="ajouterElementEnfant(plan)" 
+              @ajouterElementEnfant="ajouterElementEnfant" 
               @supprimer="supprimerPlanProgrammeLocal"
-              @modifier="afficherModalModifierPlanProgramme(plan)"></Tree>
+              @modifier="afficherMoadlModifierLocalisation"></Tree>
           </ul>
             <div v-if="lesPlansParents.length">
             </div>
@@ -143,7 +143,7 @@
  <div id="modalAjouterElementEnfant" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter plan programme</h3>
+                <h3>Ajouter plan fonctionnel</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -163,7 +163,7 @@
             </div>
 
                <div class="control-group">
-              <label class="control-label">Structure programme:</label>
+              <label class="control-label">Structure fonctionnel:</label>
               
               <div class="controls">
               <select v-model="nouvelElementEnfant.structure_fonctionnelle_id" >
@@ -191,7 +191,7 @@
           </div>
            <div class="modal-footer"> 
              <button v-show="nouvelElementEnfant.code.length && nouvelElementEnfant.libelle.length && 
-             nouvelElementEnfant.structure_programme_id"
+             nouvelElementEnfant.structure_fonctionnelle_id"
               @click.prevent="ajouterProgrammeLocalEnfant()" class="btn btn-primary"
               >Valider</button>
               <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
@@ -349,7 +349,7 @@ return this.plans_fonctionnels.filter((item) => {
         this.nouvelElementEnfant = {
                 code: "",
              libelle: "",
-          structure_programme_id:""
+          structure_fonctionnelle_id:""
         }
     },
 
@@ -360,7 +360,8 @@ return this.plans_fonctionnels.filter((item) => {
 
  //afficher modal pour ajouter element enfant
 	 ajouterElementEnfant(item) {
-    this.parentDossier = this.plans_programmes.find(plan => plan.id == item.id)
+    this.parentDossier = this.plans_fonctionnels.find(plan => plan.id == item.id)
+    this.nouvelElementEnfant.code = this.parentDossier.code
      this.nouvelElementEnfant.parent = this.parentDossier.id
 
       this.$('#modalAjouterElementEnfant').modal({
@@ -397,15 +398,15 @@ return this.plans_fonctionnels.filter((item) => {
         }
     },
 // afficher modal
-afficherMoadlModifierLocalisation(index){
+afficherMoadlModifierLocalisation(item){
 
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
 
-        this.editTitre = this.plans_fonctionnels[index];
-
+       
+this.editTitre = this.plans_fonctionnels.find(plan => plan.id == item.id);
 
         
  },

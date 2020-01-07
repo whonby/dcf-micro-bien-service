@@ -39,7 +39,7 @@ import MissionRoutes from './suivi_control/MissionRoutes';
 import planificationBudgetaireRoutes from './planification_budgetaire/planificationBudgetaireRoute';
 
 // route pour le bien et bservice
-//import BienServiceRoutes from './bien_service/BienServiceRoutes';
+import BienServiceRoutes from './bien_service/BienServiceRoutes';
 
 
 // authentitification 
@@ -70,7 +70,7 @@ const regroupementDesRoutes = [
   suiviImmobilisationRoute,
   MissionRoutes,
 planificationBudgetaireRoutes,
-//BienServiceRoutes
+BienServiceRoutes
 
 ];
 const routes = [].concat(...regroupementDesRoutes);

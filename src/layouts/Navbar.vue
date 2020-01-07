@@ -61,11 +61,7 @@ export default {
   },
 
   methods: {
-    ...mapActions("uniteadministrative", [
-      "getAllTypeTextes",
-      "getAllUniteAdministrative",
-      "getAllArchivageDocument"
-    ]),
+   
 
       ...mapActions('parametreGenerauxFonctionnelle', 
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle']),
@@ -84,7 +80,12 @@ export default {
     'getStructureAdministrative', 'getServiceGestionnaire', 'getStructureGeographique',
     'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature"]),
 
-
+ ...mapActions("uniteadministrative", [
+      "getAllTypeTextes",
+      "getAllUniteAdministrative",
+      "getAllArchivageDocument",
+      "getAllBudgetGeneral"
+    ]),
             ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
             "getClasses","getEchelons","getActeur","getGrades","getNbrActeurAcrediteTaux",
@@ -111,8 +112,8 @@ export default {
 
     	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
-    	 ...mapActions('planification_budgetaire', ['getAllBudgetGeneral'])
-
+    	//  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
+      //  ...mapActions('bienService', ['getActeurDepense','getTypeProcedure'])
   },
 
   created(){
@@ -141,10 +142,31 @@ export default {
     this.getUnite()
     this.getZone()
 
+
+
+// this.getTypeProcedure()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
       this.getAllTypeTextes();
     this.getAllUniteAdministrative();
     this.getAllArchivageDocument();
+this.getAllBudgetGeneral();
+
 
       this.getListeSalaireActuelAll()
     this.getTypeSalarie()
@@ -162,6 +184,7 @@ export default {
         this.allActeurDepense()
          this.getActeurFinContratAndActivite()
             /**Gestion des marche*/
+            
       this.getTypeMarche()
       this.getModePassation()
       this.getSecteurActivite()
@@ -202,7 +225,7 @@ this.getMarcheContratExecution()
    
       this.getMission()
        this.getHistoriqueMission() 
-this.getAllBudgetGeneral()
+
       /**
        * fin missions
        */

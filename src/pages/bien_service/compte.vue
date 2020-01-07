@@ -486,9 +486,9 @@ export default {
        // afficher modal de modification
     
 
-    formaterDate(date) {
-      return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
-    },
+    // formaterDate(date) {
+    //   return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+    // },
     
     ExporterEnExel(){
       this.$refs.excel.click()

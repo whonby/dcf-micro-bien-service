@@ -179,6 +179,23 @@ const MODIFIER_BESOIN_IMMO = (state, objetModifie) => {
   });
 };
 
+
+
+// supprimer FAMILLE
+const SUPPRIMER_BESOIN_IMMO = (state, id) => {
+  state.besoinImmobilisations = state.besoinImmobilisations.filter(
+    besoin_immo => besoin_immo.id != id
+  );
+};
+
+
+
+
+
+
+
+
+
 //modifier QUANTITE REEL
 const MODIFIER_QUANTITE_REEL = (state, objet) => {
   state.besoinImmobilisations = state.besoinImmobilisations.map(besoin_immo => {
@@ -191,6 +208,18 @@ const MODIFIER_QUANTITE_REEL = (state, objet) => {
     return besoin_immo;
   });
 };
+
+
+
+
+
+
+
+
+
+
+
+
 
 const MODIFIER_QUANTITE_EN_STOCK = (state, objet) => {
   state.besoinImmobilisations = state.besoinImmobilisations.map(STOCK => {
@@ -266,12 +295,6 @@ const MODIFIER_QTE_REALISE_BESOIN = (state, objet) => {
 
 
 
-// supprimer FAMILLE
-const SUPPRIMER_BESOIN_IMMO = (state, id) => {
-  state.besoinImmobilisations = state.besoinImmobilisations.filter(
-    besoin_immo => besoin_immo.id != id
-  );
-};
 
 /*fin mutation BESOIN_IMMO */
 
@@ -366,7 +389,18 @@ const SUPPRIMER_STOCKAGE = (state, id) => {
 
 
 
+//modifier QUANTITE REEL
+const MODIFIER_NORME_REALISE = (state, objet) => {
+  state.normeEquipements = state.normeEquipements.map(norme_real => {
+    if (norme_real.id == objet.id) {
+      norme_real.normedmd = objet.qtedmd;
 
+      // besoin_immo.montant_total = objet.montant_actu;
+    }
+
+    return norme_real;
+  });
+};
 
 
 
@@ -375,6 +409,7 @@ const SUPPRIMER_STOCKAGE = (state, id) => {
 
 
 export {
+  MODIFIER_NORME_REALISE,
   MODIFIER_QUANTITE_EN_STOCK_NORME,
   MODIFIER_QUANTITE_EN_STOCK2,
   MODIFIER_QUANTITE_EN_STOCK,

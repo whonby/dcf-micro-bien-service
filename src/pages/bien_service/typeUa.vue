@@ -127,7 +127,7 @@
 </template>
   
 <script>
-// import { mapGetters, mapActions } from "vuex";
+//import { mapGetters, mapActions } from "vuex";
 export default {
   name:'banque',
   data() {
@@ -172,9 +172,9 @@ export default {
     // }
   },
   methods: {
-    ...mapActions("SuiviImmobilisation", [
+    // ...mapActions("SuiviImmobilisation", [
      
-    ]),
+    // ]),
     //afiicher modal ajouter
     afficherModalAjouterTitre() {
       this.$("#exampleModal").modal({

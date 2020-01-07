@@ -24,7 +24,7 @@ import ModuleSuiviMission from './modules/suivi_controle_budgetaire/index'
 // planification budgetaire
 import ModulePlanificationBudgetaire from './modules/fabrice/planification_budgetaire/index'
 // bien et service
-//import ModuleBienService from './modules/fabrice/bienService/index';
+import ModuleBienService from './modules/fabrice/bienService/index';
 
 
 
@@ -47,7 +47,7 @@ export default new Vuex.Store({
       SuiviImmobilisation: ModuleSuiviImmobilisation,
       suivi_controle_budgetaire : ModuleSuiviMission,
     planification_budgetaire: ModulePlanificationBudgetaire,
-    //bienService: ModuleBienService
+    bienService: ModuleBienService
 
 
       

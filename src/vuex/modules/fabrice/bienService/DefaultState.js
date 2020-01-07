@@ -21,7 +21,8 @@ const defaultState = {
     typeAnalyses:[],
     typeUa:[],
     uniteAdministratives:[],
-    uniteZones:[]
+    uniteZones: [],
+    typeProcedures: []
 
 
     

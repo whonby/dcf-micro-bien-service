@@ -262,9 +262,9 @@ export default {
     // }
   },
   methods: {
-    ...mapActions("SuiviImmobilisation", [
+    // ...mapActions("SuiviImmobilisation", [
      
-    ]),
+    // ]),
     //afiicher modal ajouter
     afficherModalAjouterTitre() {
       this.$("#exampleModal").modal({

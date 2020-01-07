@@ -28,12 +28,13 @@ export function ajouterNormeArticle({ commit, dispatch }, nouveau) {
       equipe_id: nouveau.equipe_id,
       famil_id: nouveau.famil_id,
       fonction_id: nouveau.fonction_id,
-      montant_ttc: nouveau.montant_ttc,
+      // montant_ttc: nouveau.montant_ttc,
       quantite: nouveau.quantite,
-      total_ttc: nouveau.total_ttc,
-      articl_id: nouveau.articl_id,
-      stock_id: nouveau.stock_id,
-      qtestock: nouveau.qtestock,
+      normedmd: nouveau.normedmd,
+      // total_ttc: nouveau.total_ttc,
+      // articl_id: nouveau.articl_id,
+      // stock_id: nouveau.stock_id,
+      // qtestock: nouveau.qtestock,
       dureviearticle: nouveau.dureviearticle
     })).then(response => {
       if (response.status == 201) {
@@ -59,12 +60,13 @@ export function modifierNormeArticle({ commit, dispatch }, nouveau) {
       equipe_id: nouveau.equipe_id,
       famil_id: nouveau.famil_id,
       fonction_id: nouveau.fonction_id,
-      montant_ttc: nouveau.montant_ttc,
+      // montant_ttc: nouveau.montant_ttc,
       quantite: nouveau.quantite,
-      total_ttc: nouveau.total_ttc,
-      articl_id: nouveau.articl_id,
-      stock_id: nouveau.stock_id,
-      qtestock: nouveau.qtestock,
+      normedmd: nouveau.normedmd,
+      // total_ttc: nouveau.total_ttc,
+      // articl_id: nouveau.articl_id,
+      // stock_id: nouveau.stock_id,
+      // qtestock: nouveau.qtestock,
       dureviearticle: nouveau.dureviearticle
     }))
     .then(response => {
@@ -80,7 +82,7 @@ export function modifierNormeArticle({ commit, dispatch }, nouveau) {
 //supprimer
 export function supprimerNormeArticle({ commit, dispatch }, id) {
   this.$app.$dialog
-    .confirm("Voulez vouz vraiment supprimer ?.")
+    .confirm("Voulez vous vraiment supprimer ?.")
     .then(dialog => {
       commit("SUPPRIMER_NORME_EQUIPEMENTS", id);
       dispatch('getAllNormeArticle')
@@ -157,7 +159,7 @@ export function modifierFamille({ commit, dispatch }, nouveau) {
 //supprimer
 export function supprimerFamille({ commit }, id) {
   this.$app.$dialog
-    .confirm("Voulez vouz vraiment supprimer ?.")
+    .confirm("Voulez vous vraiment supprimer ?.")
     .then(dialog => {
       commit("SUPPRIMER_FAMILLE", id);
       //dispatch('getAllFamille')
@@ -365,21 +367,22 @@ export function ajouterBesoinImmo({ commit, dispatch }, nouveau) {
       montant_total: nouveau.montant_total,
       date_jour: nouveau.date_jour,
       historiqueqte: nouveau.historiqueqte,
-      qtestock: nouveau.qtestock,
-      qte_recu: nouveau.qte_recu,
-      qteactuelstock: nouveau.qteactuelstock,
+      // qtestock: nouveau.qtestock,
+      // qte_recu: nouveau.qte_recu,
+      // qteactuelstock: nouveau.qteactuelstock,
       motif_demande: nouveau.motif_demande,
-      service_id: nouveau.service_id,
-      norme_id: nouveau.norme_id,
-      normearticle: nouveau.normearticle,
+      // service_id: nouveau.service_id,
+      // norme_id: nouveau.norme_id,
+      // normearticle: nouveau.normearticle,
       fonction_id: nouveau.fonction_id,
-      qterealise: nouveau.qterealise,
+      // qterealise: nouveau.qterealise,
       dure_vie: nouveau.dure_vie
     })
   ).then(response => {
     if (response.status == 201) {
       commit("AJOUTER_BESOIN_IMMO", response.data);
       dispatch("getAllBesoinImmo");
+      dispatch('getAllNormeArticle');
       this.$app.$notify({
         title: "Success",
         text: "Enregistrement Effectué avec Succès!",
@@ -398,21 +401,21 @@ export function modifierBesoinImmo({ commit, dispatch }, nouveau) {
       famille_id: nouveau.famille_id,
       quantite: nouveau.quantite,
       article_id: nouveau.article_id,
-      qtestock: nouveau.qtestock,
-      qteactuelstock: nouveau.qteactuelstock,
-      date_livraison: nouveau.date_livraison,
+      // qtestock: nouveau.qtestock,
+      // qteactuelstock: nouveau.qteactuelstock,
+      // date_livraison: nouveau.date_livraison,
       prix_unitaire: nouveau.prix_unitaire,
       montant_total: nouveau.montant_total,
       date_jour: nouveau.date_jour,
       historiqueqte: nouveau.historiqueqte,
       motif_demande: nouveau.motif_demande,
-      service_id: nouveau.service_id,
-      qte_recu: nouveau.qte_recu,
+      // service_id: nouveau.service_id,
+      // qte_recu: nouveau.qte_recu,
       date_motif: nouveau.date_motif,
       motif_ua: nouveau.motif_ua,
       date_motif_ua: nouveau.date_motif_ua,
-      norme_id: nouveau.norme_id,
-      normearticle: nouveau.normearticle,
+      // norme_id: nouveau.norme_id,
+      // normearticle: nouveau.normearticle,
       fonction_id: nouveau.fonction_id,
       dure_vie: nouveau.dure_vie
     })
@@ -468,7 +471,7 @@ export function modifierQteRealisebesoin({ commit, dispatch}, objet) {
 //supprimer
 export function supprimerBesoinImmo({ commit }, id) {
   this.$app.$dialog
-    .confirm("Voulez vouz vraiment supprimer ?.")
+    .confirm("Voulez vous vraiment supprimer ?.")
     .then(dialog => {
       commit("SUPPRIMER_BESOIN_IMMO", id);
       // // dialog.loading(false) // stops the proceed button's loader
@@ -638,10 +641,10 @@ export function ajouterStock({ commit, dispatch }, nouveau) {
       famill_id: nouveau.famill_id,
       quantitestock: nouveau.quantitestock,
       articlestock_id: nouveau.articlestock_id,
-      // typeua_id: nouveau.typeua_id,
+      typeua_id: nouveau.typeua_id,
       uAdministrative_id: nouveau.uAdministrative_id,
       typeequipe_id: nouveau.typeequipe_id,
-      durevie: nouveau.durevie,
+      // durevie: nouveau.durevie,
       histo_qte: nouveau.histo_qte,
       date_entre: nouveau.date_entre
     })
@@ -666,10 +669,10 @@ export function modifierStock({ commit, dispatch }, nouveau) {
       famill_id: nouveau.famill_id,
       quantitestock: nouveau.quantitestock,
       articlestock_id: nouveau.articlestock_id,
-      // typeua_id: nouveau.typeua_id,
-      // uAdministrative_id: nouveau.uAdministrative_id,
+      typeua_id: nouveau.typeua_id,
+      uAdministrative_id: nouveau.uAdministrative_id,
       typeequipe_id: nouveau.typeequipe_id,
-      durevie: nouveau.durevie,
+      // durevie: nouveau.durevie,
       histo_qte: nouveau.histo_qte,
       date_entre: nouveau.date_entre,
       date_sortie: nouveau.date_sortie,
@@ -734,17 +737,7 @@ export function modifierQuantiteEnStockNorme({ commit, dispatch }, objet) {
 
     });
 
-
-
 }
-
-
-
-
-
-
-
-
 
 export function modifierQuantiteEnStock({ commit }, objet) {
   // console.log(id_besoinImmo_a_modifier, qte_actu);
@@ -771,3 +764,20 @@ export function modifierQuantiteReel({ commit, dispatch }, objet) {
       
     });
 }
+
+
+export function modifierQuantiteNormeDmd({ commit, dispatch }, objet) {
+  // console.log(id_besoinImmo_a_modifier, qte_actu);
+  axios
+    .put("/modifier_normeArticle/" + objet.id, {
+      normedmd : objet.qtedmd
+      // ,
+      // montant_total = objet.montant_actu
+    })
+    .then(response => {
+      commit("MODIFIER_NORME_REALISE", response.objet);
+      dispatch("getAllNormeArticle");
+
+    });
+}
+

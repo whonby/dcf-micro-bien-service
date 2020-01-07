@@ -13,26 +13,26 @@
           <tr>
                <td>
               <div class="control-group">
-                <label class="control-label">Type ua</label>
+                <label class="control-label">Type Unite administrative:</label>
                 <div class="controls">
-                  <select  v-model="formData.typeua_id">
-                    
+                  <select v-model="formData.typeua_id" >
+                    <option value>Sélectionner</option>
                     <option
-                      v-for="typeua in type_Unite_admins"
-                      :key="typeua.id"
-                      :value="typeua.id"
-                    >{{typeua.libelle}}</option>
+                      v-for="ua in type_Unite_admins"
+                      :key="ua.id"
+                      :value="ua.id"
+                    >{{ua.libelle}}</option>
                   </select>
                 </div>
               </div>
-             
             </td>
-            <td>
-             <div class="control-group">
-                <label class="control-label">Unite administrative</label>
+              <td>
+              
+              <div class="control-group">
+                <label class="control-label">Unite administrative:</label>
                 <div class="controls">
-                  <select  v-model="formData.ua_id">
-                    
+                  <select v-model="formData.ua_id" >
+                    <option value>Sélectionner</option>
                     <option
                       v-for="ua in uniteAdministrativeDynamiques(formData.typeua_id)"
                       :key="ua.id"
@@ -46,7 +46,7 @@
              <div class="control-group">
                 <label class="control-label">Fonction</label>
                <div class="controls">
-                  <select :readOnly="veifEquipementExist" v-model="formData.fonction_id">
+                  <select  v-model="formData.fonction_id">
                    
                     <option
                       v-for="fonct in fonctionDynamiques(formData.ua_id)"
@@ -57,104 +57,45 @@
                 </div>
               </div>
             </td>
-             <td>
+            
+           
+
+           
+          </tr>
+           <tr>
+               <td>
              <div class="control-group">
                 <label class="control-label">Equipement Type</label>
                 <div class="controls">
                   <select  v-model="formData.equipe_id">
                     
                     <option
-                      v-for="equipe in getAfficheStockArticle"
+                      v-for="equipe in equipements"
                       :key="equipe.id"
-                      :value="equipe.AfficheTypeequipement.id"
-                    >{{equipe.AfficheTypeequipement.libelle}}</option>
+                      :value="equipe.id"
+                    >{{equipe.libelle}}</option>
                   </select>
                 </div>
               </div>
-            </td>
-           
-
-           
-          </tr>
-           <tr>
-               
+            </td> 
           
              <td>
              <div class="control-group">
                 <label class="control-label">Famille:</label>
                <div class="controls">
-                  <select :readOnly="veifEquipementExist" v-model="formData.famil_id">
+                  <select  v-model="formData.famil_id">
                    
                     <option
                       v-for="famil in fammillesDynamiques(formData.equipe_id)"
                       :key="famil.id"
-                      :value="famil.famille.id"
-                    >{{famil.famille.libelle}}</option>
+                      :value="famil.id"
+                    >{{famil.libelle}}</option>
                   </select>
                 </div>
               </div>
             </td>
-             <td>
-             <div class="control-group">
-                <label class="control-label">Article:</label>
-               <div class="controls">
-                  <select :readOnly="veifEquipementExist" v-model="formData.articl_id">
-                   
-                    <option
-                      v-for="artic in articlesDynamiques(formData.famil_id)"
-                      :key="artic.id"
-                      :value="artic.AfficheArticle.id"
-                    >{{artic.AfficheArticle.libelle}}</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-             <td>
-           
-                  <div class="control-group">
-                <label class="control-label">Cout moyen TTC:</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                   :value="CoutMoyen(formData.famil_id)"
-                   
-                   
-                    readonly
-                    class="span"
-                    placeholder="Saisir Montant TTC"
-                  />
-                </div>
-              </div>
-             
-                  <input
-                    type="hidden"
-                   :value="qteEnStock"
-                   
-                   
-                    readonly
-                    class="span"
-                    
-                  />
-                   <input
-                    type="hidden"
-                   :value="recupererIdStock"
-                   
-                   
-                    readonly
-                    class="span"
-                    
-                  />
-                   <input
-                    type="hidden"
-                   :value="dureVieEquipement"
-                   
-                   
-                    readonly
-                    class="span"
-                    
-                  />
-               
-            </td>
+            
+            
             <td>
                <div class="control-group">
                 <label class="control-label">Norme de l'article</label>
@@ -175,24 +116,29 @@
           </tr>
           <tr>
               
-            
              <td>
-              
-            <div class="control-group">
-                <label class="control-label">Total TTC:</label>
+               <div class="control-group">
+                <label class="control-label">Duree de vie</label>
                 <div class="controls">
                   <input
                     type="number"
-                   :value="totalTTC"
-                   
-                   
-                    readonly
+                  :value="dureVieEquipement"
+                    
                     class="span"
-                   
+                    readonly
+                  />
+                   <input
+                    type="hidden"
+                 v-model="formData.normedmd"
+                    
+                    class="span"
+                    
                   />
                 </div>
               </div>
+         
             </td>
+            
             <td>
              <div class="control-group">
                 <label class="control-label">Date d'enregistrement</label>
@@ -239,37 +185,37 @@
     <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
 
     <!--///////////////////////////////////////// debut modal de modification //////////////////////////////-->
-
-   <div id="modificationModal" class="modal hide taillemodal">
+<div id="modificationModal" class="modal hide taillemodal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Modifier Norme équipement</h3>
       </div>
       <div class="modal-body">
          <table class="table table-bordered table-striped">
-          <tr>
+      
+           <tr>
                <td>
               <div class="control-group">
-                <label class="control-label">Type ua</label>
+                <label class="control-label">Type Unite administrative:</label>
                 <div class="controls">
-                  <select  v-model="editNorme.typeua_id">
-                    
+                  <select v-model="editNorme.typeua_id" >
+                    <option value>Sélectionner</option>
                     <option
-                      v-for="typeua in type_Unite_admins"
-                      :key="typeua.id"
-                      :value="typeua.id"
-                    >{{typeua.libelle}}</option>
+                      v-for="ua in type_Unite_admins"
+                      :key="ua.id"
+                      :value="ua.id"
+                    >{{ua.libelle}}</option>
                   </select>
                 </div>
               </div>
-             
             </td>
-            <td>
-             <div class="control-group">
-                <label class="control-label">Unite administrative</label>
+              <td>
+              
+              <div class="control-group">
+                <label class="control-label">Unite administrative:</label>
                 <div class="controls">
-                  <select  v-model="editNorme.ua_id">
-                    
+                  <select v-model="editNorme.ua_id" >
+                    <option value>Sélectionner</option>
                     <option
                       v-for="ua in uniteAdministrativeDynamiques(editNorme.typeua_id)"
                       :key="ua.id"
@@ -283,10 +229,10 @@
              <div class="control-group">
                 <label class="control-label">Fonction</label>
                <div class="controls">
-                  <select :readOnly="veifEquipementExist" v-model="editNorme.fonction_id">
+                  <select  v-model="editNorme.fonction_id">
                    
                     <option
-                      v-for="fonct in fonctionDynamiques(editNorme.ua_id)"
+                      v-for="fonct in fonctionDynamiquesModifier(editNorme.ua_id)"
                       :key="fonct.id"
                       :value="fonct.fonctionActeur.id"
                     >{{fonct.fonctionActeur.libelle}}</option>
@@ -294,95 +240,45 @@
                 </div>
               </div>
             </td>
-             <td>
+            
+           
+
+           
+          </tr>
+           <tr>
+               <td>
              <div class="control-group">
                 <label class="control-label">Equipement Type</label>
                 <div class="controls">
                   <select  v-model="editNorme.equipe_id">
                     
                     <option
-                      v-for="equipe in getAfficheStockArticle"
+                      v-for="equipe in equipements"
                       :key="equipe.id"
-                      :value="equipe.AfficheTypeequipement.id"
-                    >{{equipe.AfficheTypeequipement.libelle}}</option>
+                      :value="equipe.id"
+                    >{{equipe.libelle}}</option>
                   </select>
                 </div>
               </div>
-            </td>
-           
-
-           
-          </tr>
-           <tr>
-               
+            </td> 
           
              <td>
              <div class="control-group">
                 <label class="control-label">Famille:</label>
                <div class="controls">
-                  <select :readOnly="veifEquipementExist" v-model="editNorme.famil_id">
+                  <select  v-model="editNorme.famil_id">
                    
                     <option
                       v-for="famil in fammillesDynamiques(editNorme.equipe_id)"
                       :key="famil.id"
-                      :value="famil.famille.id"
-                    >{{famil.famille.libelle}}</option>
+                      :value="famil.id"
+                    >{{famil.libelle}}</option>
                   </select>
                 </div>
               </div>
             </td>
-             <td>
-             <div class="control-group">
-                <label class="control-label">Article:</label>
-               <div class="controls">
-                  <select :readOnly="veifEquipementExist" v-model="editNorme.articl_id">
-                   
-                    <option
-                      v-for="artic in articlesDynamiques(editNorme.famil_id)"
-                      :key="artic.id"
-                      :value="artic.AfficheArticle.id"
-                    >{{artic.AfficheArticle.libelle}}</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-             <td>
-           
-                  <div class="control-group">
-                <label class="control-label">Cout moyen TTC:</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                   :value="CoutMoyen(editNorme.famil_id)"
-                   
-                   
-                    readonly
-                    class="span"
-                    placeholder="Saisir Montant TTC"
-                  />
-                </div>
-              </div>
-             
-                  <input
-                    type="text"
-                   :value="qteEnStockModifier"
-                   
-                   
-                    readonly
-                    class="span"
-                    
-                  />
-                   <input
-                    type="text"
-                   :value="recupererIdStockModifier"
-                   
-                   
-                    readonly
-                    class="span"
-                    
-                  />
-               
-            </td>
+            
+            
             <td>
                <div class="control-group">
                 <label class="control-label">Norme de l'article</label>
@@ -403,24 +299,22 @@
           </tr>
           <tr>
               
-            
              <td>
-              
-            <div class="control-group">
-                <label class="control-label">Total TTC:</label>
+               <div class="control-group">
+                <label class="control-label">Duree de vie</label>
                 <div class="controls">
                   <input
                     type="number"
-                   :value="totalTTCedit"
-                   
-                   
-                    readonly
+                  :value="dureVieEquipementModifier"
+                    
                     class="span"
-                   
+                    readonly
                   />
                 </div>
               </div>
+         
             </td>
+            
             <td>
              <div class="control-group">
                 <label class="control-label">Date d'enregistrement</label>
@@ -435,24 +329,9 @@
                 </div>
               </div>
             </td>
-            <td>
-              <!-- <div class="control-group">
-                <label class="control-label">Montant TTC:</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    :value="montantTTC"
-                    readonly
-                    class="span"
-                    placeholder="Saisir Montant TTC"
-                  />
-                </div>
-              </div> -->
-            </td>
-           
+          
 
           </tr>
-          
           
         </table>
       </div>
@@ -505,15 +384,14 @@
                    <th>Equipement</th>
                     <th>Famille</th>
                     <th>Quantite</th>
-                    <th>Coût Moyen TTC</th>
-                    <th>Total TTC</th>
+                  
                    <th title="date d'enregistrement">Date</th>
                     <th>Action</th>
                 </thead>
                 <tbody>
-                  <tr
+                 <tr
                     class="odd gradeX"
-                    v-for="(article, index) in getPersoNormeArticle"
+                    v-for="(article, index) in getPersoListeDesNorme"
                     :key="article.id"
                   >
                    <!-- <td 
@@ -536,12 +414,8 @@
                    <td style="text-align: center;"
                      @dblclick="afficherModalModifierFamille(index)" 
                     > {{article.quantite || 'Non renseigné'}}</td>
-                   <td  style="text-align: center;"
-                    @dblclick="afficherModalModifierFamille(index)"
-                   > {{formatageSomme(article.montant_ttc) || 0 }}</td>
-                     <td  style="text-align: center;"
-                    @dblclick="afficherModalModifierFamille(index)"
-                   > {{formatageSomme(article.total_ttc) || 0 }}</td>
+                   
+                    
                     <td  style="text-align: center;"
                      @dblclick="afficherModalModifierFamille(index)"
                     > {{formaterDate(article.date_enregistrement) || 'Non renseigné'}}</td>
@@ -603,7 +477,8 @@ export default {
         famil_id:"",
         fonction_id:"",
         montant_ttc: "",
-        quantite:""
+        quantite:"",
+        normedmd:"0"
       },
       editNorme: {
         famil_id:"",
@@ -617,32 +492,19 @@ export default {
     };
   },
 computed: {
-    ...mapGetters("SuiviImmobilisation", ["normeEquipements","equipements",
-    "familles","getAfficheArticle","articles","getPersoNormeArticle","getAfficheStockArticle","stockageArticles"]),
+    ...mapGetters("SuiviImmobilisation", ["getPersoListeDesNorme","normeEquipements","equipements","groupeArticleParEquipement","groupeArticleParFamille",    "familles","getAfficheArticle","articles","getPersoNormeArticle","getPersoStock","stockageArticles"]),
       ...mapGetters("personnelUA", ["fonctions","personnaFonction"]),
        ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
 
-    // filtre_equipement() {
-    //   const st = this.search.toLowerCase();
-    //   return this.equipements.filter(type => {
-    //     return (
-          
-    //       type.libelle.toLowerCase().includes(st)
-    //     );
-    //   });
-    // }
-    MontantbesoinRestantParUniteAdministrative(){
-  return uniteadmin_id => {
-    if(uniteadmin_id !=""){
-    const montant = this.articles.filter(element => element.uniteAdminist.id == uniteadmin_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total), 0).toFixed(0); 
-      if(isNaN(montant)) return null
-      return montant
-
-    }
-  }
-}, 
-uniteAdministrativeDynamiques() {
+ fammillesDynamiques() {
+      return id => {
+        if (id != null && id != "") {
+          return this.familles.filter(element => element.equipemt_id == id);
+        }
+      };
+    },
+    uniteAdministrativeDynamiques() {
       return id => {
         if (id != null && id != "") {
           return this.uniteAdministratives.filter(element => element.type_ua_id == id);
@@ -653,165 +515,33 @@ uniteAdministrativeDynamiques() {
       
       return id => {
         if (id != null && id != "") {
-          return this.personnaFonction.filter(element => element.unite_administrative_id == id);
+          return this.personnaFonction.filter(element => element.unite_administrative_id == this.formData.ua_id);
         }
       };
     },
- fammillesDynamiques() {
+     fonctionDynamiquesModifier() {
+      
       return id => {
         if (id != null && id != "") {
-          return this.getAfficheStockArticle.filter(element => element.typeequipe_id == id);
+          return this.personnaFonction.filter(element => element.unite_administrative_id == this.editNorme.ua_id);
         }
       };
     },
-    
-     articlesDynamiques() {
-      return id => {
-        if (id != null && id != "") {
-          return this.getAfficheStockArticle.filter(element => element.famill_id == id);
-        }
-      };
-    },
-MontantParEquipement(){
-  return famil_id => {
-    if(famil_id !=""){
-    
-    var montant = this.equipements.filter(element => element.equipement__article.id == famil_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(0); 
-      if(isNaN(montant)) return null
-      return montant
-
-   
-    }
-  }
-  
-}, 
-
-
-
-    ArticleDynamiques() {
-      return id => {
-        if (id != null && id != "") {
-          return this.familles.filter(element => element.equipement_id == id);
-        }
-      };
-    },
-     
-    montantTTC() {
-      const val =
-        parseFloat(this.formData.prix_ht) *
-        parseFloat(this.formData.tva);
-      // parseFloat(this.formData.TVA_id);
-      if (isNaN(val)) return null;
-      return parseFloat(val).toFixed(0);
-    },
-    veifEquipementExist() {
-      return this.formData.ua_id == "";
-    },
-//   totalMontant(){
-//   return famil_id => {
-//     if(famil_id !=""){
-//     const montant = this.articles.filter(element => element.id == famil_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(2); 
-//       if(isNaN(montant)) return null
-//       return montant
-
-//     }
-//   }
-// }, 
-// totalMontant() {
-//       const TTC = this.articles.find(Qreal => Qreal.id == this.formData.famil_id);
-
-//       if (TTC) {
-//         return TTC.montant_ttc;
-//       }
-//       return 0
-//     },
-
-NombreArticle(){
-  return famil_id => {
-    if(famil_id !=""){
-    const montant = this.getAfficheArticle.filter(element => element.AfficheFamille.id == famil_id).length;
-      if(isNaN(montant)) return null
-      return montant
-
-    }
-  }
-}, 
-
- totalTTCedit() {
-      const val = parseFloat(this.editNorme.quantite) * parseFloat(this.CoutMoyen(this.editNorme.famil_id));
-      return parseFloat(val).toFixed(0);
-    },
- totalTTC() {
-      const val = parseFloat(this.formData.quantite) * parseFloat(this.CoutMoyen(this.formData.famil_id));
-      return parseFloat(val).toFixed(0);
-    },
-MontantParEquipe(){
-  
-    return famil_id => {
-    if(famil_id !=""){
-    var montant = this.getAfficheArticle.filter(element => element.AfficheFamille.id == famil_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(0); 
-      if(isNaN(montant)) return null
-      return montant
-
-     }
-  }
-  
-},  
-CoutMoyen() {
- return famil_id => {
-    if(famil_id !=""){
+    dureVieEquipementModifier() {
       
-    const val = parseFloat((this.getAfficheArticle.filter(element => element.AfficheFamille.id == famil_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(2))/this.getAfficheArticle.filter(element => element.AfficheFamille.id == famil_id).length).toFixed(0); 
-    if (isNaN(val)) return null;
-    return val;
-  
- }
-  }
-    },
- 
-     qteEnStock() {
-      
-      const norme = this.getAfficheStockArticle.find(normeEquipe => normeEquipe.AfficheArticle.id== this.formData.articl_id);
+      const norme = this.familles.find(normeEquipe => normeEquipe.id == this.editNorme.famil_id);
 
       if (norme) {
-        return norme.quantitestock;
+        return norme.dureVie;
       }
       return 0
     },
-     qteEnStockModifier() {
-      
-      const norme = this.getAfficheStockArticle.find(normeEquipe => normeEquipe.AfficheArticle.id== this.editNorme.articl_id);
-
-      if (norme) {
-        return norme.quantitestock;
-      }
-      return 0
-    },
-     recupererIdStockModifier() {
-      
-      const norme = this.getAfficheStockArticle.find(normeEquipe => normeEquipe.AfficheArticle.id== this.editNorme.articl_id);
-
-      if (norme) {
-        return norme.id
-      }
-      return 0
-    },
-     recupererIdStock() {
-      
-      const norme = this.getAfficheStockArticle.find(normeEquipe => normeEquipe.AfficheArticle.id== this.formData.articl_id);
-
-      if (norme) {
-        return norme.id
-      }
-      return 0
-    },
-
     dureVieEquipement() {
       
-      const norme = this.getAfficheStockArticle.find(normeEquipe => normeEquipe.articlestock_id == this.formData.articl_id);
+      const norme = this.familles.find(normeEquipe => normeEquipe.id == this.formData.famil_id);
 
       if (norme) {
-        return norme.durevie;
+        return norme.dureVie;
       }
       return 0
     },
@@ -835,12 +565,18 @@ CoutMoyen() {
     },
     // fonction pour vider l'input ajouter
     ajouterFamilleLocal() {
-      var nouvelObjet = {
+
+        if (this.formData.quantite == "" ) {
+        alert("veuillez saisir la quantite")
+      }
+      else
+      {
+var nouvelObjet = {
         ...this.formData,
-        montant_ttc: this.CoutMoyen(this.formData.famil_id),
-        total_ttc:this.totalTTC,
-        stock_id:this.recupererIdStock,
-        qtestock:this.qteEnStock,
+        // montant_ttc: this.CoutMoyen(this.formData.famil_id),
+        // total_ttc:this.totalTTC,
+        // stock_id:this.recupererIdStock,
+        // qtestock:this.qteEnStock,
         dureviearticle :this.dureVieEquipement
       };
       this.ajouterNormeArticle(nouvelObjet);
@@ -848,17 +584,16 @@ CoutMoyen() {
       this.formData = {
          famil_id:"",
         equipe_id:"",
-        prix_ht:"",
+     
         fonction_id: "",
-        quantite:"",
-        montant_ttc:"",
+      normedmd:"0",
         typeua_id:"",
         ua_id:"",
         date_enregistrement:"",
-        stock_id:"",
-        qtestock:"",
-        articl_id:""
+       
       };
+      }
+      
     },
     // afficher modal de modification
     afficherModalModifierFamille(index) {
@@ -873,10 +608,11 @@ CoutMoyen() {
     modifierFamilleLocal() {
       var nouvelObjet = {
         ...this.editNorme,
-        montant_ttc: this.CoutMoyen(this.editNorme.famil_id),
-         total_ttc:this.totalTTCedit,
-        stock_id:this.recupererIdStockModifier,
-        qtestock:this.qteEnStockModifier,
+        // montant_ttc: this.CoutMoyen(this.editNorme.famil_id),
+        //  total_ttc:this.totalTTCedit,
+        // stock_id:this.recupererIdStockModifier,
+        // qtestock:this.qteEnStockModifier,
+        dureviearticle :this.dureVieEquipementModifier
       };
       this.modifierNormeArticle(nouvelObjet);
       this.$("#modificationModal").modal('hide');
@@ -902,7 +638,7 @@ CoutMoyen() {
 
 <style scoped>
 .taillemodal {
-  width: 968px;
+  width: 768px;
   margin: 0 -380px;
 }
 

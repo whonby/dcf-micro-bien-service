@@ -27,19 +27,43 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Section</label>
+                  <label class="control-label">Nature section</label>
                   <div class="controls">
-                    <select v-model="formData.section_id">
+                    <select v-model="formData.nature_section_id">
                       <option
-                        v-for="section in sections"
-                        :key="section.id"
-                        :value="section.id"
-                      >{{section.code_section}}-{{section.nom_section}}</option>
+                        v-for="natsection in natures_sections"
+                        :key="natsection.id"
+                        :value="natsection.id"
+                      >{{natsection.code}}-{{natsection.libelle}}</option>
                     </select>
                   </div>
                 </div>
               </td>
                <td>
+              
+               <div class="control-group">
+                  <label class="control-label">Section</label>
+                  <div class="controls">
+                    <select v-model="formData.section_id">
+                      <option
+                        v-for="sect in sectionDynamiques(formData.nature_section_id)"
+                        :key="sect.id"
+                        :value="sect.id"
+                      >{{sect.code}}-{{sect.nom_section}}</option>
+                    </select>
+                  </div>
+                    <!-- <input
+                      type="text"
+                     :value="codeSectionNature"
+                      class="span"
+                      placeholder="Saisir le code"
+                      readonly
+                    /> -->
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
               
                <div class="control-group">
                   <label class="control-label">Service gestionnaire</label>
@@ -54,8 +78,6 @@
                   </div>
                 </div>
               </td>
-            </tr>
-            <tr>
               <td>
                  <div class="control-group">
                   <label class="control-label">Localisation Geographique</label>
@@ -71,6 +93,18 @@
                 </div>
               </td>
                <td>
+                  <div class="control-group">
+                  <label class="control-label">Date création:</label>
+                  <div class="controls">
+                    <input type="date" v-model="formData.date_creation" class="span" />
+                  </div>
+                </div>
+              </td>
+              
+            </tr>
+            <tr>
+             
+              <td>
                 <div class="control-group">
                   <label class="control-label">Code Unite administrative:</label>
                 
@@ -80,6 +114,7 @@
                      :value="codeuniteadministrative"
                       class="span"
                       placeholder="Saisir le code"
+                      readonly
                     />
                   </div>
                   </div>
@@ -98,17 +133,6 @@
                      
                     />
                </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-             
-              <td>
-                  <div class="control-group">
-                  <label class="control-label">Date création:</label>
-                  <div class="controls">
-                    <input type="date" v-model="formData.date_creation" class="span" />
-                  </div>
                 </div>
               </td>
             </tr>
@@ -150,20 +174,38 @@
                   </div>
                 </div>
               </td>
-              <td>
+               <td>
                 <div class="control-group">
-                  <label class="control-label">Section</label>
+                  <label class="control-label">Nature section</label>
                   <div class="controls">
-                    <select v-model="editUniteAdministrative.section_id">
+                    <select v-model="editUniteAdministrative.nature_section_id">
                       <option
-                        v-for="section in sections"
-                        :key="section.id"
-                        :value="section.id"
-                      >{{section.code_section}}-{{section.nom_section}}</option>
+                        v-for="natsection in natures_sections"
+                        :key="natsection.id"
+                        :value="natsection.id"
+                      >{{natsection.code}}-{{natsection.libelle}}</option>
                     </select>
                   </div>
                 </div>
               </td>
+             <td>
+              
+               <div class="control-group">
+                  <label class="control-label">Section</label>
+                  <div class="controls">
+                    <select v-model="editUniteAdministrative.section_id">
+                      <option
+                        v-for="sect in sectionDynamiques(editUniteAdministrative.nature_section_id)"
+                        :key="sect.id"
+                        :value="sect.id"
+                      >{{sect.code}}-{{sect.nom_section}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+              
+            </tr>
+            <tr>
                <td>
                  <div class="control-group">
                   <label class="control-label">Service gestionnaire</label>
@@ -179,8 +221,6 @@
                 </div>
                
               </td>
-            </tr>
-            <tr>
               <td>
                   <div class="control-group">
                   <label class="control-label">Localisation geographique</label>
@@ -195,6 +235,17 @@
                   </div>
                 </div>
               </td>
+               <td>
+                <div class="control-group">
+                  <label class="control-label">Date création:</label>
+                  <div class="controls">
+                    <input type="date" v-model="editUniteAdministrative.date_creation" class="span" />
+                  </div>
+                </div>
+              </td>
+              
+            </tr>
+            <tr>
                <td>
                 <div class="control-group">
                   <label class="control-label">Code Unite administrative:</label>
@@ -222,18 +273,8 @@
                   </div>
                 </div>
               </td>
-            </tr>
-            <tr>
-              
              
-                <td>
-                <div class="control-group">
-                  <label class="control-label">Date création:</label>
-                  <div class="controls">
-                    <input type="date" v-model="editUniteAdministrative.date_creation" class="span" />
-                  </div>
-                </div>
-              </td>
+               
             </tr>
          
         </table>
@@ -298,6 +339,7 @@
                 <thead>
                   <tr>
                     <th title="type unite administrative">Type ua</th>
+                    <th>nature Section</th>
                     <th>Section</th>
                     <th title="service gestionnaire">Service gest</th>
                      <th title="localisation geographique">Localisation geo</th>
@@ -317,6 +359,7 @@
                    
                    <!-- <template v-if="uniteadministrative.type_ua_id = type_Unite_admins.id"> -->
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.typeua.libelle }}</td>
+                      <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.naturesecti.libelle }}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.secti.nom_section }}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.servivegest.libelle }}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.localgeo.libelle }}</td>
@@ -389,7 +432,8 @@ export default {
         type_ua_id: "",
         date_creation: "",
         test: "",
-        servicegest_id:""
+        servicegest_id:"",
+        nature_section_id:""
       },
       editUniteAdministrative: {
         code: "",
@@ -398,7 +442,8 @@ export default {
         localisationgeo_id: "",
         type_ua_id: "",
         date_creation: "",
-        servicegest_id:""
+        servicegest_id:"",
+        nature_section_id:""
       },
       json_fields: {
         TYPE_UNIT_ADMINISTRATIVE: "typeua.libelle",
@@ -427,7 +472,8 @@ export default {
       "services_gestionnaires",
       "localisations_geographiques",
       "afficheServiceGestionnaireNiveau4",
-      "afficheLocalisationGeoNiveau5"
+      "afficheLocalisationGeoNiveau5",
+      "natures_sections"
     ]),
     ...mapGetters("parametreGenerauxFonctionnelle", [
       "plans_fonctionnels"
@@ -442,24 +488,53 @@ export default {
         );
       });
     },
+   
+    sectionDynamiques() {
+      return id => {
+        if (id != null && id != "") {
+          return this.sections.filter(element => element.naturesection_id == id);
+        }
+      };
+    },
+
+
+// codeSectionNature(){
+//       //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
+//       const natsect = this.natures_sections.find(natsect => natsect.id == this.formData.natsection_id)
+//      const secti = this.sections.find(sect => sect.id == this.formData.section_id)
+    
+//      if(natsect && secti){
+//        return natsect.code + secti.code 
+//      }
+
+//      return null
+//    },
+
+
+
+
+
+
     codeuniteadministrative(){
       //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
+      const natsect = this.natures_sections.find(natsect => natsect.id == this.formData.natsection_id)
      const secti = this.sections.find(sect => sect.id == this.formData.section_id)
     const servgest = this.services_gestionnaires.find(serviceg => serviceg.id == this.formData.servicegest_id)
  const localisageo = this.localisations_geographiques.find(chap => chap.id == this.formData.localisationgeo_id)
-     if(secti && servgest && localisageo){
-       return secti.code_section + servgest.code + localisageo.code
+     if(natsect && secti && servgest && localisageo){
+       return natsect.code + secti.code + servgest.code + localisageo.code
      }
 
      return null
    },
    codeuniteadministrativeModifier(){
       // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
+     const natsect = this.natures_sections.find(natsect => natsect.id == this.editUniteAdministrative.natsection_id)
      const secti = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
     const servgest = this.services_gestionnaires.find(serviceg => serviceg.id == this.editUniteAdministrative.servicegest_id)
  const localisageo = this.localisations_geographiques.find(chap => chap.id == this.editUniteAdministrative.localisationgeo_id)
-     if(secti && servgest && localisageo){
-       return secti.code_section + servgest.code + localisageo.code
+     if(natsect && secti && servgest && localisageo){
+       return natsect.code + secti.code + servgest.code + localisageo.code
      }
 
      return null

@@ -386,6 +386,7 @@ return this.plans_budgetaires.filter((item) => {
  //afficher modal pour ajouter element enfant
 	 ajouterElementEnfant(item) {
     this.parentDossier = this.plans_budgetaires.find(plan => plan.id == item.id)
+    this.nouvelElementEnfant.code = this.parentDossier.code
      this.nouvelElementEnfant.parent = this.parentDossier.id
 
       this.$('#modalAjouterElementEnfant').modal({

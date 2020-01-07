@@ -19,7 +19,7 @@
         <ul class="dropdown-menu">
          
           <li>
-            <router-link :to="{name: ''}" tag="a">
+            <router-link :to="{name: 'typeFacture'}" tag="a">
               <i class="icon-bar-chart"></i>
            Type de Facture
             </router-link>
@@ -81,12 +81,12 @@
            Condition
             </router-link>
           </li>
-           <!-- <li>
-            <router-link :to="{name: ''}" tag="a">
+           <li>
+            <router-link :to="{name: 'typeProcedure'}" tag="a">
               <i class="icon-bar-chart"></i>
-           Signature
+          Type procedure
             </router-link>
-          </li> -->
+          </li>
           
            <li>
             <router-link :to="{name: ''}" tag="a">
