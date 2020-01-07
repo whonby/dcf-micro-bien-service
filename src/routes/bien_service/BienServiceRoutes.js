@@ -19,6 +19,7 @@ import typeActeEffetFinancier from '../../pages/bien_service/typeActeEffetFinanc
 import typeAnalyse from '../../pages/bien_service/typeAnalyse.vue';
 import typeFacture from '../../pages/bien_service/typeFacture.vue';
 import typeUa from '../../pages/bien_service/typeUa.vue';
+import textJuridique from '../../pages/bien_service/textJuridique.vue';
 const BienServiceRoutes = [
     // la route pour acte de depense
 {
@@ -43,6 +44,13 @@ component:analyseDossier
     path:"/creation-bailleur",
     name:"bailleur",
     component:bailleur
+},
+
+{
+
+    path:"/creation-text-juridique",
+    name:"textJuridique",
+    component:textJuridique
 },
 // la route pour la banque
 {
@@ -143,7 +151,7 @@ component:analyseDossier
        },
        // la route pour le type de facture
        {
-       path:"/creation-facture",
+       path:"/creation-type-unite-administrative",
        name:"typeUa",
        component:typeUa
        }

@@ -29,7 +29,9 @@ const defaultState = {
       
     zoneGeographiques:[],
     typeTextJuridiques:[],
-    realiteServiceFaits:[]
+    realiteServiceFaits:[],
+    text_juridiques:[],
+    autresTexteJuridiques:[]
 
 
 

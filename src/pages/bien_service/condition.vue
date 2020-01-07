@@ -4,7 +4,7 @@
     <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">Ã—</button>
+        <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter condition</h3>
       </div>
       <div class="modal-body">
@@ -14,19 +14,20 @@
             <div class="controls">
               <input
                 type="text"
-                v-model="formData.libelle_condition"
+                v-model="formData.libelle"
                 class="span"
-                placeholder="Saisir le libelle"
+                placeholder="Saisir le libelle_type"
               />
             </div>
           </div>
+         
           
          
          </form>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterFamilleLocal(formData)"
+          @click.prevent="ajouterModalConditionLocal"
           class="btn btn-primary"
           href="#"
          
@@ -40,28 +41,28 @@
 
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">Ã—</button>
+        <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Modifier condition</h3>
       </div>
       <div class="modal-body">
-         <form class="form-horizontal">
-          <div class="control-group">
-            <label class="control-label">libelle_condition</label>
+        <form class="form-horizontal">
+            <div class="control-group">
+            <label class="control-label">libelle</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="editCondition.libelle_condition"
+                v-model="editCondition.libelle"
                 class="span"
-                placeholder="Saisir le libelle"
+                placeholder="Saisir le libelle_type"
               />
             </div>
           </div>
          
-         </form>
+        </form>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierFamilleLocal(editCondition)"
+          @click.prevent="modificationModalConditionLocal(editCondition)"
           class="btn btn-primary"
           href="#"
         
@@ -80,9 +81,9 @@
             class="btn btn-default pull-right"
             style="cursor:pointer;"
             :fields="json_fields"
-            title="Liste Types Ã©quipements"
+            title="Liste Types équipements"
             :data="filtre_equipement"
-            name="Liste des types Ã©quipements"
+            name="Liste des types équipements"
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
@@ -91,7 +92,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste condition</h5>
+              <h5>Liste des conditions</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -103,12 +104,25 @@
                 <thead>
                   <tr>
                     <th>libelle</th>
-                   
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                 
+                  <tr class="odd gradeX" v-for="(condition, index) in 
+                conditionFiltre"
+                 :key="condition.id">
+                 <td @dblclick="afficherModalCondition(index)">
+                   {{condition.libelle || 'Non renseigné'}}</td>
+                  
+
+
+                     <div class="btn-group">
+              <button @click.prevent="supprimerCondition(condition.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+             
+            </div>
+
+                       </tr>
                 </tbody>
               </table>
               
@@ -118,8 +132,8 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab>
- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTitre()">Open</button>
+    <fab :actions="fabActions" @cache="afficherModalajouterCondition" main-icon="apps" bg-color="green"></fab>
+ <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalajouterCondition()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
@@ -127,9 +141,9 @@
 </template>
   
 <script>
-// import { mapGetters, mapActions } from "vuex";
+ import { mapGetters, mapActions } from "vuex";
 export default {
-  name:'banque',
+  name:'type facture',
   data() {
     return {
       fabActions: [
@@ -146,58 +160,79 @@ export default {
       ],
     //   json_fields: {
     //     CODE: "code",
-    //     LIBELLE: "libelle"
+    //     libelle: "libelle"
     //   },
 
       formData: {
+        	libelle:""
         
       },
-      editEquipement: {
-     
+      editCondition: {
+        	libelle:""
       },
       search: ""
     };
   },
 
   computed: {
-    // ...mapGetters("SuiviImmobilisation", ["equipements","familles"]),
-    // filtre_equipement() {
-    //   const st = this.search.toLowerCase();
-    //   return this.equipements.filter(type => {
-    //     return (
-          
-    //       type.libelle.toLowerCase().includes(st)
-    //     );
-    //   });
-    // }
+     ...mapGetters("bienService", ['conditions']),
+
+    conditionFiltre()  {
+     
+        const searchTerm = this.search.toLowerCase();
+
+return this.conditions.filter((item) => {
+  
+     return item.libelle.toLowerCase().includes(searchTerm) 
+     
+    
+
+  
+  
+
+   }
+)
+    }
   },
   methods: {
-    // ...mapActions("SuiviImmobilisation", [
+    ...mapActions("bienService", ['ajouterCondition','modifierCondition',
+    'supprimerCondition'
      
-    // ]),
+    ]),
     //afiicher modal ajouter
-    afficherModalAjouterTitre() {
+    afficherModalajouterCondition() {
       this.$("#exampleModal").modal({
         backdrop: "static",
         keyboard: false
       });
     },
     // fonction pour vider l'input ajouter
+    ajouterModalConditionLocal(){
+this.ajouterCondition(this.formData)
+this.formData = {
+	libelle:"",
+}
+
+    },
     
     // afficher modal de modification
-    // afficherModalModifierFamille(index) {
-    //   this.$("#modificationModal").modal({
-    //     backdrop: "static",
-    //     keyboard: false
-    //   });
+    afficherModalCondition(index) {
+      this.$("#modificationModal").modal({
+        backdrop: "static",
+        keyboard: false
+      });
 
-    //   this.editEquipement = this.equipements[index];
-    // },
-    // fonction pour vider l'input modification
-    
-    alert() {
-      console.log("ok");
+      this.editCondition = this.conditions[index];
     },
+    // fonction pour vider l'input modification
+    modificationModalConditionLocal(){
+      this.modifierCondition(this.editCondition)
+      this.$('#modificationModal').modal('hide');
+    },
+    
+    // alert() {
+    //   console.log("ok");
+    // },
      ExporterEnExel(){
       this.$refs.excel.click()
     }

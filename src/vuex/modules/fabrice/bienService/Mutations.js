@@ -80,10 +80,10 @@ export const MODIFIER_BAILLEUR = (state, elementModif)=>{
 
 // delete all bailleur
 
-export const SUPPRIMER_BAILLEUR = (state, id)=> {
-    state.bailleurs = state.bailleurs.filter(prest => prest.id !=id)
-}
+export const SUPPRIMER_BAILLEUR = (state, id) => {
 
+ state.bailleurs = state.bailleurs.filter(bailleur => bailleur.id !=id)
+}
 
 // get all banque
 export const GET_ALL_BANQUE = (state, tableau_banques) =>{
@@ -906,4 +906,68 @@ export const MODIFIER_REALITE_SERVICE_FAIT = (state, elementModif)=>{
 
 export const SUPPRIMER_REALITE_SERVICE_FAIT = (state, id)=> {
     state.realiteServiceFaits = state.realiteServiceFaits.filter(prest => prest.id !=id)
+}
+
+
+
+// text juridique
+
+
+
+
+export const GET_TEXTJURIDIQUE = (state, tableau_text_juridique) =>{
+    state.text_juridiques = tableau_text_juridique
+}
+
+// add * realite service faire 
+
+export const AJOUTER_TEXT_JURIDIQUE = (state, elementAjouter) => {
+    state.text_juridiques.unshift(elementAjouter)
+}
+
+
+// update of realite service fait
+export const MODIFIER_TEXT_JURIDIQUE = (state, elementModif)=>{
+    state.text_juridiques = state.text_juridiques.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete the realite service fait
+
+export const SUPPRIMER_TEXT_JURIDIQUE = (state, id)=> {
+    state.text_juridiques = state.text_juridiques.filter(text => text.id !=id)
+}
+
+
+
+// autre text juridique
+
+export const GET_AUTRE_TEXT_JURIDIQUE = (state, tableau_autre_text_juridique) =>{
+    state.autresTexteJuridiques = tableau_autre_text_juridique
+}
+
+// add * realite service faire 
+
+export const AJOUTER_AUTRE_TEXT_JURIDIQUE = (state, elementAjouter) => {
+    state.autresTexteJuridiques.unshift(elementAjouter)
+}
+
+
+// update of realite service fait
+export const MODIFIER_AUTRE_TEXT_JURIDIQUE = (state, elementModif)=>{
+    state.autresTexteJuridiques = state.autresTexteJuridiques.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_AUTRE_TEXT_JURIDIQUE = (state, id)=> {
+    state.autresTexteJuridiques = state.autresTexteJuridiques.filter(autreText => autreText.id !=id)
 }

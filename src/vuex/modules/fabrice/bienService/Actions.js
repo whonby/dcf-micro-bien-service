@@ -32,7 +32,9 @@ export  function  getPrestation({commit}) {
             })
         }
 
+
     }).catch(error => console.log(error))
+
 }
 
 // action pour modifier prestation
@@ -152,24 +154,18 @@ export function supprimerActeDepense({commit}, id) {
 
 export  function  getBailleur({commit}) {
     queue.push(() => axios.get('/bailleurs').then((response) => {
-      commit('GET_ALL_BAILLEUR', response.data)
+      commit('GET_ALL_BAILLEUR', response.data.data)
       
   }).catch(error => console.log(error)))
   }
 
   // action pour ajouter bailleur
-  export function ajouterBailleur({commit}, elementAjout){
-    asyncLoading(axios.post('/bailleurs',{
-      nom_bailleur:elementAjout.nom_bailleur,
-      prenoms_bailleur:elementAjout.prenoms_bailleur,
-      telephone_bail:elementAjout.telephone_bail,
-      adresse_bail:elementAjout.adresse_bail,
-      email_bail:elementAjout.email_bail
-      
-  })).then(response =>{
+  export function ajouterBailleur({commit}, formData){
+    asyncLoading(axios.post('/bailleurs',formData)).then(response =>{
         if(response.status == 201){
+          console.log(response.data)
             commit('AJOUTER_BAILLEUR', response.data)
-
+            
             this.$app.$notify({
               title: 'success ',
               text: 'Enregistrement effectué !',
@@ -184,17 +180,8 @@ export  function  getBailleur({commit}) {
 
 
  export function modifierBailleur({commit}, element_modifie) {
-    asyncLoading( axios.put('/bailleurs/'+ element_modifie.id ,{
-      nom_bailleur:element_modifie.nom_bailleur,
-      prenoms_bailleur:element_modifie.prenoms_bailleur,
-      telephone_bail:element_modifie.telephone_bail,
-      adresse_bail:element_modifie.adresse_bail,
-      email_bail:element_modifie.email_bail
-      
-   })).then(response => {
+    asyncLoading( axios.put('/bailleurs' ,element_modifie)).then(response => {
          commit('MODIFIER_BAILLEUR', response.data)
-         
-
          this.$app.$notify({
            title: 'success ',
            text: 'Modification effectué !',
@@ -290,21 +277,17 @@ export function supprimerActeurDepense({commit}, id) {
 
 
 
-export  function  getTypeActeDepense({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_TYPE_ACTE_DEPENSE', response.data)
+export  function getTypeActeDepense({commit}) {
+  queue.push(() => axios.get('/type_acte_depenses').then((response) => {
+   // console.log(response.data.data)
+    commit('GET_ALL_TYPE_ACTE_DEPENSE', response.data.data)
     
 }).catch(error => console.log(error)))
 }
 
 // action pour ajouter type  acte depense
-export function ajouterTypeActeDepense({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-   
-    libelle_type:elementAjout.libelle_type
-
-
-})).then(response =>{
+export function ajouterTypeActeDepense({commit},formData){
+  asyncLoading(axios.post('/type_acte_depenses',formData)).then(response =>{
       if(response.status == 201){
           commit('AJOUTER_TYPE_ACTE_DEPENSE', response.data)
 
@@ -322,10 +305,7 @@ export function ajouterTypeActeDepense({commit}, elementAjout){
 
 
 export function modifierTypeActeDepense({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    
-    libelle_type:element_modifie.libelle_type
- })).then(response => {
+  asyncLoading( axios.put('/type_acte_depenses' ,element_modifie)).then(response => {
        commit('MODIFIER_TYPE_ACTE_DEPENSE', response.data)
        
 
@@ -343,26 +323,24 @@ export function supprimerTypeActeDepense({commit}, id) {
  .then(dialog => {
     commit('SUPPRIMER_TYPE_ACTE_DEPENSE', id)
    // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
+     axios.delete('/type_acte_depenses/' + id).then(() => dialog.close() )   
  })
 
 }
 
 
 export  function  getTypeFacture({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_TYPE_FACTURE', response.data)
+  queue.push(() => axios.get('/type_factures').then((response) => {
+    commit('GET_TYPE_FACTURE', response.data.data)
     
 }).catch(error => console.log(error)))
 }
 
 // action pour ajouter type facture
-export function ajouterTypeFacture({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    libelle_type:elementAjout.libelle_type
-    
-})).then(response =>{
+export function ajouterTypeFacture({commit}, formData){
+  asyncLoading(axios.post('/type_factures',formData)).then(response =>{
       if(response.status == 201){
+      console.log(response.data)
           commit('AJOUTER_TYPE_FACTURE', response.data)
 
           this.$app.$notify({
@@ -379,13 +357,8 @@ export function ajouterTypeFacture({commit}, elementAjout){
 
 
 export function modifierTypeFacture({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    libelle_type:element_modifie.libelle_type
-    
- })).then(response => {
+  asyncLoading( axios.put('/type_factures' ,element_modifie)).then(response => {
        commit('MODIFIER_TYPE_FACTURE', response.data)
-       
-
        this.$app.$notify({
          title: 'success ',
          text: 'Modification effectué !',
@@ -400,7 +373,7 @@ export function supprimerTypeFacture({commit}, id) {
  .then(dialog => {
     commit('SUPPRIMER_TYPE_FACTURE', id)
    // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
+     axios.delete('/type_factures/' + id).then(() => dialog.close() )   
  })
 
 }
@@ -408,18 +381,15 @@ export function supprimerTypeFacture({commit}, id) {
 // action pour lot && type de prestation
 
 export  function  getTypePrestation({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_TYPE_PRESTATION', response.data)
+  queue.push(() => axios.get('/type_prestations').then((response) => {
+    commit('GET_ALL_TYPE_PRESTATION', response.data.data)
     
 }).catch(error => console.log(error)))
 }
 
 // action pour ajouter type prestation
-export function ajouterTypePrestation({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    libelle_type_prestation:elementAjout.libelle_type_prestation
-    
-})).then(response =>{
+export function ajouterTypePrestation({commit}, formData){
+  asyncLoading(axios.post('/type_prestations',formData)).then(response =>{
       if(response.status == 201){
           commit('AJOUTER_TYPE_PRESTATION', response.data)
 
@@ -437,10 +407,7 @@ export function ajouterTypePrestation({commit}, elementAjout){
 
 
 export function modifierTypePrestation({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    libelle_type_prestation:element_modifie.libelle_type_prestation
-    
- })).then(response => {
+  asyncLoading( axios.put('/type_prestations',element_modifie)).then(response => {
        commit('MODIFIER_TYPE_PRESTATION', response.data)
        
 
@@ -458,7 +425,7 @@ export function supprimerTypePrestation({commit}, id) {
  .then(dialog => {
     commit('SUPPRIMER_TYPE_PRESTATION', id)
    // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
+     axios.delete('/type_prestations/' + id).then(() => dialog.close() )   
  })
 
 }
@@ -973,17 +940,15 @@ export function supprimerCojo({commit}, id) {
 // action pour la condition
 
 export  function  getCondition({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_CONDITION', response.data)
+  queue.push(() => axios.get('/conditions').then((response) => {
+    commit('GET_ALL_CONDITION', response.data.data)
     
 }).catch(error => console.log(error)))
 }
 
 // action pour ajouter la condition
-export function ajouterCondition({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    libelle_condition:elementAjout.libelle_condition
-})).then(response =>{
+export function ajouterCondition({commit}, formData){
+  asyncLoading(axios.post('/conditions',formData)).then(response =>{
       if(response.status == 201){
           commit('AJOUTER_CONDITION', response.data)
 
@@ -1001,10 +966,7 @@ export function ajouterCondition({commit}, elementAjout){
 
 
 export function modifierCondition({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    libelle_condition:element_modifie.libelle_condition
-    
- })).then(response => {
+  asyncLoading( axios.put('/conditions',element_modifie)).then(response => {
        commit('MODIFIER_CONDITION', response.data)
        
 
@@ -1022,10 +984,69 @@ export function supprimerCondition({commit}, id) {
  .then(dialog => {
     commit('SUPPRIMER_CONDITION', id)
    // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
+     axios.delete('/conditions/' + id).then(() => dialog.close() )   
  })
 
 }
+
+
+
+
+
+
+
+// action pour de text juridique
+
+export  function  getTextJuridique({commit}) {
+  queue.push(() => axios.get('/text_juridicuques').then((response) => {
+    commit('GET_TEXTJURIDIQUE', response.data.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter la condition
+export function ajouterTextJuridique({commit}, formData){
+  asyncLoading(axios.post('/text_juridicuques',formData)).then(response =>{
+      if(response.status == 201){
+          commit('AJOUTER_TEXT_JURIDIQUE', response.data)
+
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier condition
+
+
+export function modifierTextJuridique({commit}, element_modifie) {
+  asyncLoading( axios.put('/text_juridicuques',element_modifie)).then(response => {
+       commit('MODIFIER_TEXT_JURIDIQUE', response.data)
+       
+
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
+// supprimer la condition
+export function supprimerTextJuridique({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('SUPPRIMER_TEXT_JURIDIQUE', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+     axios.delete('/text_juridicuques/' + id).then(() => dialog.close() )   
+ })
+
+}
+
 
 
 
@@ -1234,18 +1255,16 @@ export function supprimerSignature({commit}, id) {
 // action pour type acte effet financier
 
 export  function  getTypeActeEffetFinancier({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_TYPE_ACTE_EFFET_FINANCIER', response.data)
+  queue.push(() => axios.get('/type_act_effets').then((response) => {
+    commit('GET_ALL_TYPE_ACTE_EFFET_FINANCIER', response.data.data)
     
 }).catch(error => console.log(error)))
 }
 
 // action pour ajouter type acte effet financier
 
-export function ajouterTypeActeEffetFinancier({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    libelle_type:elementAjout.libelle_type
-})).then(response =>{
+export function ajouterTypeActeEffetFinancier({commit}, formData){
+  asyncLoading(axios.post('/type_act_effets',formData)).then(response =>{
       if(response.status == 201){
           commit('AJOUTER_TYPE_ACTE_EFFET_FINANCIER', response.data)
 
@@ -1263,10 +1282,7 @@ export function ajouterTypeActeEffetFinancier({commit}, elementAjout){
 
 
 export function modifierTypeActeEffetFinancier({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    libelle_type:element_modifie.libelle_type
-    
- })).then(response => {
+  asyncLoading( axios.put('/type_act_effets' ,element_modifie)).then(response => {
        commit('MODIFIER_TYPE_ACTE_EFFET_FINANCIER', response.data)
        
 
@@ -1285,7 +1301,7 @@ export function supprimerTypeActeEffetFinancier({commit}, id) {
  .then(dialog => {
     commit('SUPPRIMER_TYPE_ACTE_AFFET_FINANCIER', id)
    // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
+     axios.delete('/type_act_effets/' + id).then(() => dialog.close() )   
  })
 
 }
@@ -1295,19 +1311,16 @@ export function supprimerTypeActeEffetFinancier({commit}, id) {
 // action pour type analyse
 
 export  function  getTypeAnalyse({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_TYPE_ANALYSE', response.data)
+  queue.push(() => axios.get('/type_analyses').then((response) => {
+    commit('GET_TYPE_ANALYSE', response.data.data)
     
 }).catch(error => console.log(error)))
 }
 
 // action pour ajouter type analyse
 
-export function ajouterTypeAnalyse({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    libelle_type_analyse:elementAjout.libelle_type_analyse
-    
-})).then(response =>{
+export function ajouterTypeAnalyse({commit}, formData){
+  asyncLoading(axios.post('/type_analyses',formData)).then(response =>{
       if(response.status == 201){
           commit('AJOUTER_TYPE_ANALYSE', response.data)
 
@@ -1325,9 +1338,7 @@ export function ajouterTypeAnalyse({commit}, elementAjout){
 
 
 export function modifierTypeAnalyse({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    libelle_type_analyse:element_modifie.libelle_type_analyse
- })).then(response => {
+  asyncLoading( axios.put('/type_analyses',element_modifie)).then(response => {
        commit('MODIFIER_TYPE_ANALYSE', response.data)
        
 
@@ -1346,7 +1357,7 @@ export function supprimertypeAnalyse({commit}, id) {
  .then(dialog => {
     commit('SUPPRIMER_TYPE_ANALYSE', id)
    // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
+     axios.delete('/type_analyses/' + id).then(() => dialog.close() )   
  })
 
 }
@@ -1849,71 +1860,57 @@ export function supprimerLivrable({commit}, id) {
 
 // action pour obtenir les données de modifier le dossier du candidat
 
-// export  function  getModifierDossierCandidat({commit}) {
-//   queue.push(() => axios.get('/url').then((response) => {
-//     commit('GET_MODIFIER_DOSSIER_CANDIDAT', response.data)
+export  function  getAutreTextJuridique({commit}) {
+  queue.push(() => axios.get('/autre_textes_juridiques').then((response) => {
+    commit('GET_AUTRE_TEXT_JURIDIQUE', response.data.data)
     
-// }).catch(error => console.log(error)))
-// }
+}).catch(error => console.log(error)))
+}
 
 // action pour ajouter la modification du dossier du candidat
 
-// export function ajouterModifierDossierCandidat({commit}, elementAjout){
-//   asyncLoading(axios.post('/urls',{
-//     signature:elementAjout.signature,
-//     debut_validite:elementAjout.debut_validite,
-//     fin_validite:elementAjout.fin_validite,
-//     version:elementAjout.version,
-//     id_signature_modifie:elementAjout.id_signature_modifie
-    
-// })).then(response =>{
-//       if(response.status == 201){
-//           commit('AJOUTER_MODIFIER_DOSSIER_CANDIDAT', response.data)
+export function ajouterAutreTextJuridique({commit}, formData){
+  asyncLoading(axios.post('/autre_textes_juridiques',formData)).then(response =>{
+      if(response.status == 201){
+          commit('AJOUTER_AUTRE_TEXT_JURIDIQUE', response.data)
 
-//           this.$app.$notify({
-//             title: 'success ',
-//             text: 'Enregistrement effectué !',
-//             type:"success"
-//           })
-//       }
-
-//   }).catch(error => console.log(error))
-// }
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+      
+  }).catch(error => console.log(error))
+}
 
 // action pour modifier la signature
 
 
-// export function modifierSignature({commit}, element_modifie) {
-//   asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-//     signature:element_modifie.signature,
-//     debut_validite:element_modifie.debut_validite,
-//     fin_validite:element_modifie.fin_validite,
-//     version:element_modifie.version,
-//     id_signature_modifie:element_modifie.id_signature_modifie
-    
-//  })).then(response => {
-//        commit('MODIFIER_SIGNATURE', response.data)
+export function modifierAutreTextJuridique({commit}, element_modifie) {
+  asyncLoading( axios.put('/autre_textes_juridiques',element_modifie)).then(response => {
+       commit('MODIFIER_AUTRE_TEXT_JURIDIQUE', response.data)
        
 
-//        this.$app.$notify({
-//          title: 'success ',
-//          text: 'Modification effectué !',
-//          type:"success"
-//        })
-//    }).catch(error => console.log(error))
-// }
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
 // supprimer la signature
 
-// export function supprimerSignature({commit}, id) {
-//  this.$app.$dialog
-//  .confirm("Voulez vouz vraiment supprimer ?.")
-//  .then(dialog => {
-//     commit('SUPPRIMER_SIGNATURE', id)
+export function supprimerAutreTextjuridique({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('SUPPRIMER_AUTRE_TEXT_JURIDIQUE', id)
    
-//      axios.delete('/urls/' + id).then(() => dialog.close() )   
-//  })
+     axios.delete('/autre_textes_juridiques/' + id).then(() => dialog.close() )   
+ })
 
-// }
+}
 
 
 // action pour obtenir les données de zones geographiques

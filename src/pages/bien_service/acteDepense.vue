@@ -428,7 +428,7 @@
                 </thead>
                 <tbody>
                        <tr class="odd gradeX" v-for="(acteDepense, index) in 
-                acteDepenseFiltre"
+                acteDepense"
                  :key="acteDepense.id">
                  <td @dblclick="afficherModalModifierActeDepense(index)">
                    {{acteDepense.matricule || 'Non renseigné'}}</td>
@@ -534,21 +534,21 @@ export default {
   computed: {
      ...mapGetters("bienService", [ 'acteDepense']),
 
-            acteDepenseFiltre(){
+//             acteDepenseFiltre(){
 
-     const searchTerm = this.search.toLowerCase();
+//      const searchTerm = this.search.toLowerCase();
 
-return this.acteDepense.filter((item) => {
+// return this.acteDepense.filter((item) => {
   
-     return item.matricule.toLowerCase().includes(searchTerm) 
+//      return item.matricule.toLowerCase().includes(searchTerm) 
     
 
   
   
 
-   }
-)
-   }
+//    }
+// )
+//    }
    
      
    

@@ -5,29 +5,52 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Type Facture</h3>
+        <h3>Ajouter Texte juridique</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">type facture</label>
+            <label class="control-label">libelle</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="formData.libelle"
+                v-model="formData.libelle_text"
                 class="span"
                 placeholder="Saisir le libelle_type"
               />
             </div>
           </div>
          
+          <div class="control-group">
+            <label class="control-label">Date</label>
+            <div class="controls">
+              <input
+                type="date"
+                v-model="formData.date_effet_text"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+
+           <div class="control-group">
+            <label class="control-label">Objet text juridique</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formData.objet_text"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
           
          
          </form>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterModalTypeFactureLocal"
+          @click.prevent="ajouterModalTypeAnalyseLocal"
           class="btn btn-primary"
           href="#"
          
@@ -42,16 +65,40 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Type Facture</h3>
+        <h3>Modifier Text jridique</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
             <div class="control-group">
-            <label class="control-label">type facture</label>
+            <label class="control-label">libelle</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="editTypefacture.libelle"
+                v-model="editTextJuridique.	libelle_text"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+
+           <div class="control-group">
+            <label class="control-label">Date</label>
+            <div class="controls">
+              <input
+                type="date"
+                v-model="editTextJuridique.date_effet_text"
+                class="span"
+                placeholder=""
+              />
+            </div>
+          </div>
+
+           <div class="control-group">
+            <label class="control-label">Objet</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editTextJuridique.objet_text"
                 class="span"
                 placeholder="Saisir le libelle_type"
               />
@@ -62,7 +109,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierModalTypeFactureLocal(editTypefacture)"
+          @click.prevent="modifierModalTypeAnalyseLocal(editTextJuridique)"
           class="btn btn-primary"
           href="#"
         
@@ -92,7 +139,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des type de factures</h5>
+              <h5>Liste des texts juridiques</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -104,21 +151,26 @@
                 <thead>
                   <tr>
                     <th>libelle</th>
+                    <th>Date</th>
+                    <th>Objet</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(typeFacture, index) in 
-                typeFacturesFiltre"
-                 :key="typeFacture.id">
-                 <td @dblclick="afficherModalModifierTypefactiure(index)">
-                   {{typeFacture.libelle || 'Non renseigné'}}</td>
+                  <tr class="odd gradeX" v-for="(textJuridique, index) in 
+                text_juridiques"
+                 :key="textJuridique.id">
+                 <td @dblclick="afficherModalModifiertextJuridique(index)">
+                   {{textJuridique.libelle_text || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifiertextJuridique(index)">
+                   {{formaterDate(textJuridique.date_effet_text) || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifiertextJuridique(index)">
+                   {{textJuridique.objet_text || 'Non renseigné'}}</td>
                   
 
 
-
                      <div class="btn-group">
-              <button @click.prevent="supprimerTypeFacture(typeFacture.id)"  class="btn btn-danger ">
+              <button @click.prevent="supprimerTextJuridique(textJuridique.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
@@ -133,8 +185,8 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterTypeFacture" main-icon="apps" bg-color="green"></fab>
- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTypeFacture()">Open</button>
+    <fab :actions="fabActions" @cache="afficherModalAjouTypeAnalyse" main-icon="apps" bg-color="green"></fab>
+ <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouTypeAnalyse()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
@@ -143,6 +195,7 @@
   
 <script>
  import { mapGetters, mapActions } from "vuex";
+ import moment from 'moment';
 export default {
   name:'type facture',
   data() {
@@ -161,79 +214,91 @@ export default {
       ],
     //   json_fields: {
     //     CODE: "code",
-    //     LIBELLE: "libelle"
+    //     libelle: "libelle"
     //   },
 
       formData: {
-        	libelle:""
+            libelle_text:"",
+            date_effet_text:"",
+            objet_text:""
+
         
       },
-      editTypefacture: {
-        	libelle:""
-     
+      editTextJuridique: {
+        	 libelle_text:"",
+            date_effet_text:"",
+            objet_text:""
       },
       search: ""
     };
   },
 
   computed: {
-     ...mapGetters("bienService", ['typeFactures']),
-    typeFacturesFiltre()  {
-     
-        const searchTerm = this.search.toLowerCase();
+     ...mapGetters("bienService", ['text_juridiques']),
 
-return this.typeFactures.filter((item) => {
+//     textJuridiqueFiltre()  {
+     
+//         const searchTerm = this.search.toLowerCase();
+
+// return this.text_juridiques.filter((item) => {
   
-     return item.libelle.toLowerCase().includes(searchTerm) 
+//      return item.libelle_text.toLowerCase().includes(searchTerm) 
      
     
 
   
   
 
-   }
-)
-    }
+//    }
+// )
+//     }
   },
   methods: {
-    ...mapActions("bienService", ['ajouterTypeFacture','modifierTypeFacture',
-    'supprimerTypeFacture'
+    ...mapActions("bienService", ['ajouterTextJuridique','modifierTextJuridique',
+    'supprimerTextJuridique'
      
     ]),
     //afiicher modal ajouter
-    afficherModalAjouterTypeFacture() {
+    afficherModalAjouTypeAnalyse() {
       this.$("#exampleModal").modal({
         backdrop: "static",
         keyboard: false
       });
     },
     // fonction pour vider l'input ajouter
-    ajouterModalTypeFactureLocal(){
-this.ajouterTypeFacture(this.formData)
+    ajouterModalTypeAnalyseLocal(){
+this.ajouterTextJuridique(this.formData)
 this.formData = {
-	libelle:"",
+	 libelle_text:"",
+            date_effet_text:"",
+            objet_text:""
 }
 
     },
     
     // afficher modal de modification
-    afficherModalModifierTypefactiure(index) {
+    afficherModalModifiertextJuridique(index) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editTypefacture = this.typeFactures[index];
+      this.editTextJuridique = this.text_juridiques[index];
     },
     // fonction pour vider l'input modification
-    modifierModalTypeFactureLocal(){
-      this.modifierTypeFacture(this.editTypefacture)
+    modifierModalTypeAnalyseLocal(){
+      this.modifierTextJuridique(this.editTextJuridique)
       this.$('#modificationModal').modal('hide');
     },
-    
-    alert() {
-      console.log("ok");
+
+    // formatage date
+formaterDate(date) {
+      return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
     },
+    
+    // alert() {
+    //   console.log("ok");
+    // },
      ExporterEnExel(){
       this.$refs.excel.click()
     }

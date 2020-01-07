@@ -19,7 +19,7 @@
         <ul class="dropdown-menu">
          
           <li>
-            <router-link :to="{name: ''}" tag="a">
+            <router-link :to="{name: 'typeFacture'}" tag="a">
               <i class="icon-bar-chart"></i>
            Type de Facture
             </router-link>
@@ -32,7 +32,7 @@
             </router-link>
           </li>
            <li>
-            <router-link :to="{name: ''}" tag="a">
+            <router-link :to="{name: 'textJuridique'}" tag="a">
               <i class="icon-bar-chart"></i>
            Texte juridique
             </router-link>
@@ -50,13 +50,13 @@
             </router-link>
           </li>
            <li>
-            <router-link :to="{name: ''}" tag="a">
+            <router-link :to="{name: 'typeActeEffetFinancier'}" tag="a">
               <i class="icon-bar-chart"></i>
            Type acte effet financier
             </router-link>
           </li>
           <li>
-            <router-link :to="{name: ''}" tag="a">
+            <router-link :to="{name: 'typeAnalyse'}" tag="a">
               <i class="icon-bar-chart"></i>
            Type analyse
             </router-link>
@@ -70,26 +70,26 @@
             </router-link>
           </li>
            <li>
-            <router-link :to="{name: ''}" tag="a">
+            <router-link :to="{name: 'typeActeDepense'}" tag="a">
               <i class="icon-bar-chart"></i>
            Type d'acte de depense
             </router-link>
           </li>
            <li>
-            <router-link :to="{name: ''}" tag="a">
+            <router-link :to="{name: 'condition'}" tag="a">
               <i class="icon-bar-chart"></i>
            Condition
             </router-link>
           </li>
-           <!-- <li>
-            <router-link :to="{name: ''}" tag="a">
+           <li>
+            <router-link :to="{name: 'bailleur'}" tag="a">
               <i class="icon-bar-chart"></i>
-           Signature
+               Bailleur
             </router-link>
-          </li> -->
+          </li>
           
            <li>
-            <router-link :to="{name: ''}" tag="a">
+            <router-link :to="{name: 'type_prestation'}" tag="a">
               <i class="icon-bar-chart"></i>
            Type prestation
             </router-link>
