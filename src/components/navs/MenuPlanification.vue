@@ -192,7 +192,7 @@
           data-target="#contratualisation"
           class="dropdown-toggle"
         >
-          <span class="text">CONTRACTUALISATION
+          <span class="text">PLANIFICATION
                </span>
           <b class="caret"></b>
         </a>
@@ -201,7 +201,7 @@
            <li class="divider"></li>
           <li>
             <router-link :to="{name: 'appelOffre'}" tag="a">
-              <i class="icon-key"></i> Appel d'offres
+              <i class="icon-key"></i> Marche
             </router-link>
           </li>
 
@@ -209,7 +209,7 @@
          <li class="divider"></li>
           <li>
             <router-link :to="{name: ''}" tag="a">
-              <i class="icon-list-ul"></i> Dossier du candidature
+              <i class="icon-list-ul"></i> Lot
             </router-link>
           </li>
 

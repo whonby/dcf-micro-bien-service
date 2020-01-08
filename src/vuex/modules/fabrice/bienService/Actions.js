@@ -2280,6 +2280,62 @@ export function supprimerModePassation({commit}, id) {
 
 
 
+// action appel offre
+
+
+
+export  function  getAppelOffre({commit}) {
+  queue.push(() => axios.get('/appel_offres').then((response) => {
+    commit('GET_APPEL_OFFRE', response.data.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter les infos 
+
+export function ajouterAppelOffre({commit}, elementAjout){
+  asyncLoading(axios.post('/appel_offres',elementAjout)).then(response =>{
+      if(response.status == 201){
+          commit('AJOUTER_APPEL_OFFRE', response.data)
+
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier le type text juridique
+
+
+export function modifierAppelOffre({commit}, element_modifie) {
+  asyncLoading( axios.put('/appel_offres',element_modifie)).then(response => {
+       commit('MODIFIER_APPEL_OFFRE', response.data)
+       
+
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
+// supprimer appel d'offre
+
+export function supprimerAppelOffre({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('SUPPRIMER_APPEL_OFFRE', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+     axios.delete('/appel_offres/' + id).then(() => dialog.close() )   
+ })
+
+}
+
 
 
 

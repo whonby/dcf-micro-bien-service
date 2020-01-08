@@ -5,7 +5,7 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter type marche</h3>
+        <h3>Ajouter mode de passation</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
@@ -43,7 +43,7 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Type marche</h3>
+        <h3>Modifier mode de passation</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">

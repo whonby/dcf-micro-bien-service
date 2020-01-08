@@ -337,18 +337,18 @@ export default {
     // },
 
    
-    getMissionStyles(){
-      return item => {
-        if(item.historique_missions_count == 0) return
-         const style = {
-        'text-decoration': item.historique_missions[0].type_operation == 2 ? 'line-through' : 'none'
-      }
+    // getMissionStyles(){
+    //   return item => {
+    //     if(item.historique_missions_count == 0) return
+    //      const style = {
+    //     'text-decoration': item.historique_missions[0].type_operation == 2 ? 'line-through' : 'none'
+    //   }
 
-      return style
+    //   return style
 
-      }
+    //   }
      
-    },
+    // },
 
    
 //  listeHistoriqueDeTousMissionsEnAttente(){
@@ -392,38 +392,7 @@ return this.getAppelOffresPersonnaliser.filter((item) => {
    // fonction pour filtrer historique de mission
   
 
-    NombreDeMissionParUA () {
-     return ua_id => {
-       if(ua_id != "") {
-         var nombre = this.getMissionPersonnaliser.filter(element => element.objetUniteAdministrative.id == ua_id ).length
-             if(isNaN(nombre)) return null
-             return nombre
-
-       }
-     }  
-    },
-    NomDeMissionParUA(){
-  return ua_id =>{
-    if(ua_id !=""){
-      var ObjetUA = this.uniteAdministratives.find(element => element.id == ua_id)
-      return ObjetUA.libelle
-    }
-  }
-    },
-
-    // duree moyenne par unite administrative
- 
-
-
-
-// cout moyen des billets d'avions par unite administrative
-
-
-// la somme total des billets d'avion
-
-
-
-// total de dossier rejeter par un agent
+   
 
   },
 
