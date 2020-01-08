@@ -226,7 +226,7 @@
                      <div class="btn-group">
 
                    <router-link :to="{ name: 'DetaillMarche', params: { id_marche: marche.id }}" 
-                class="btn btn-default " title="Detail marche">
+                class="btn btn-default " title="Detail marches">
                   <span class=""><i class="icon-folder-open"></i></span>
                    </router-link> 
 
