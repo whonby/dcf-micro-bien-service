@@ -26,7 +26,7 @@
           </li>
            
            <li>
-            <router-link :to="{name: ''}" tag="a">
+            <router-link :to="{name: 'typeTextJuridique'}" tag="a">
               <i class="icon-bar-chart"></i>
            Type Texte juridique
             </router-link>
@@ -214,46 +214,46 @@
           </li>
 
            <li class="divider"></li>
-          <li>
+          <!-- <li>
             <router-link :to="{name: ''}" tag="a">
               <i class=" icon-star"></i> Lettre d'invitation
             </router-link>
-          </li>
+          </li> -->
 
-          <li class="divider"></li>
+          <!-- <li class="divider"></li>
           <li>
             <router-link :to="{name: ''}" tag="a">
               <i class=" icon-star-half"></i> Mandate
             </router-link>
-          </li>
+          </li> -->
 
-      <li class="divider"></li>
+      <!-- <li class="divider"></li>
           <li>
             <router-link :to="{name: ''}" tag="a">
               <i class=" icon-qrcode"></i> La cojo
             </router-link>
-          </li>
+          </li> -->
 
-        <li class="divider"></li>
+        <!-- <li class="divider"></li>
           <li>
             <router-link :to="{name: ''}" tag="a">
               <i class=" icon-ok-sign"></i> Analyse de dossier
             </router-link>
-          </li>
+          </li> -->
 
-      <li class="divider"></li>
+      <!-- <li class="divider"></li>
           <li>
             <router-link :to="{name: ''}" tag="a">
               <i class=" icon-ok-circle"></i> Demande d'ANO
             </router-link>
-          </li>
+          </li> -->
 
-          <li class="divider"></li>
+          <!-- <li class="divider"></li>
           <li>
             <router-link :to="{name: ''}" tag="a">
               <i class=" icon-tint"></i> Decision de marché
             </router-link>
-          </li>
+          </li> -->
            <!-- <li>
             <router-link :to="{name: ''}" tag="a">
               <i class="icon-bar-chart"></i>

@@ -10,6 +10,7 @@ const AJOUTER_NORME_EQUIPEMENTS = (state, nouveau_normeArt) => {
   state.normeEquipements.unshift(nouveau_normeArt);
 };
 
+
 // modifier NORME_EQUIPEMENTS
 const MODIFIER_NORME_EQUIPEMENTS = (state, objetModifie) => {
   state.normeEquipements = state.normeEquipements.map(norme => {

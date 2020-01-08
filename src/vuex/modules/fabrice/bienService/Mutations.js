@@ -1160,3 +1160,10 @@ export const MODIFIER_AUTRE_TEXT_JURIDIQUE = (state, elementModif)=>{
 export const SUPPRIMER_AUTRE_TEXT_JURIDIQUE = (state, id)=> {
     state.autresTexteJuridiques = state.autresTexteJuridiques.filter(autreText => autreText.id !=id)
 }
+
+
+
+
+// autre text juridique
+
+SUPPRIMER_TYPE_TEXT_JURIDIQUE

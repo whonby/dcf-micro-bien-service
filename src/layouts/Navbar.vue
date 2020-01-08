@@ -115,7 +115,7 @@ export default {
        ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
        ...mapActions('bienService', ['getActeurDepense', 'getBailleur','getTypeFacture',
        'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse',
-       'getTypePrestation', 'getCondition', 'getTextJuridique', 'getAutreTextJuridique','getDecisionMarche'])
+       'getTypePrestation', 'getCondition', 'getTextJuridique','getTypeTextJuridique', 'getAutreTextJuridique'])
 
   },
 
@@ -240,7 +240,8 @@ this.getTypePrestation()
 this.getCondition()
 this.getTextJuridique()
 this.getAutreTextJuridique()
-this.getDecisionMarche()
+this.getTypeTextJuridique()
+// this.getDecisionMarche()
       /**
        * fin missions
        */
