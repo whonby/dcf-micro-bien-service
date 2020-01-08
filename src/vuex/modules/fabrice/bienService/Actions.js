@@ -2107,60 +2107,60 @@ export function supprimerTypeProcedure({commit}, id) {
 
 }
 
-// action type marche
+// action  marche
 
 
-// export  function  getTypeProcedure({commit}) {
-//   queue.push(() => axios.get('/type_procedures').then((response) => {
-//     commit('GET_TYPE_PROCEDURE', response.data.data)
+export  function  getMarche({commit}) {
+  queue.push(() => axios.get('/marches').then((response) => {
+    commit('GET_MARCHE', response.data.data)
     
-// }).catch(error => console.log(error)))
-// }
+}).catch(error => console.log(error)))
+}
 
 // action pour ajouter les infos 
 
-// export function ajouterTypeProcedure({commit}, elementAjout){
-//   asyncLoading(axios.post('/type_procedures',elementAjout)).then(response =>{
-//       if(response.status == 201){
-//           commit('AJOUTER_TYPE_PROCEDURE', response.data)
+export function ajouterMarche({commit}, elementAjout){
+  asyncLoading(axios.post('/marches',elementAjout)).then(response =>{
+      if(response.status == 201){
+          commit('AJOUTER_MARCHE', response.data)
 
-//           this.$app.$notify({
-//             title: 'success ',
-//             text: 'Enregistrement effectué !',
-//             type:"success"
-//           })
-//       }
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
 
-//   }).catch(error => console.log(error))
-// }
+  }).catch(error => console.log(error))
+}
 
 // action pour modifier le type text juridique
 
 
-// export function modifierTypeProcedure({commit}, element_modifie) {
-//   asyncLoading( axios.put('/type_procedures',element_modifie)).then(response => {
-//        commit('MODIFIER_TYPE_PROCEDURE', response.data)
+export function modifierMarche({commit}, element_modifie) {
+  asyncLoading( axios.put('/marches',element_modifie)).then(response => {
+       commit('MODIFIER_MARCHE', response.data)
        
 
-//        this.$app.$notify({
-//          title: 'success ',
-//          text: 'Modification effectué !',
-//          type:"success"
-//        })
-//    }).catch(error => console.log(error))
-// }
-// supprimer le type text juridique
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
+//supprimer le type text juridique
 
-// export function supprimerTypeProcedure({commit}, id) {
-//  this.$app.$dialog
-//  .confirm("Voulez vouz vraiment supprimer ?.")
-//  .then(dialog => {
-//     commit('SUPPRIMER_TYPE_PROCEDURE', id)
-//    // // dialog.loading(false) // stops the proceed button's loader
-//      axios.delete('/type_procedures/' + id).then(() => dialog.close() )   
-//  })
+export function supprimerMarche({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('SUPPRIMER_MARCHE', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+     axios.delete('/marches/' + id).then(() => dialog.close() )   
+ })
 
-// }
+}
 
 
 

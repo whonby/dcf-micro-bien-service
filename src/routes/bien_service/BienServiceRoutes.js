@@ -28,6 +28,8 @@ import ajouterAppelOffre from '../../pages/bien_service/contractualisation/ajout
 import modificationAppelOffre from '../../pages/bien_service/contractualisation/modificationAppelOffre.vue';
 import typeMarche from '../../pages/bien_service/Prametre_marchers/typeMarche.vue';
 import modePassation from '../../pages/bien_service/Prametre_marchers/modePassation.vue';
+import marche from '../../pages/bien_service/contractualisation/marche.vue';
+import DetaillMarche from '../../pages/bien_service/contractualisation/DetaillMarche.vue';
 
 const BienServiceRoutes = [
     // la route pour acte de depense
@@ -35,6 +37,19 @@ const BienServiceRoutes = [
  path:"/creation-acte-depense",
  name: "acteDepense",
  component:acteDepense  
+},
+
+// detail marche
+{
+    path:"/detail",
+    name:"DetaillMarche",
+    component:DetaillMarche
+},
+
+{
+    path:"/creation-marche",
+    name:"marche",
+    component:marche
 },
 // la route de mode de passation
 {

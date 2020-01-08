@@ -33,6 +33,7 @@ export const typeTypeProcedures = state => state.typeTypeProcedures
 export const procedurePassations = state => state.procedurePassations
 export const typeMarches = state => state.typeMarches
 export const modePassations = state => state.modePassations
+export const marches = state => state.marches
 
 export const appelOffres = state => state.appelOffres
 
@@ -48,6 +49,26 @@ state.appelOffres.map(element => {
            
            
            objetUniteAdministrative:rootGetters['uniteadministrative/uniteAdministratives'].find(
+               plans => plans.id == element.unite_administrative_id
+            )
+            
+        }
+        
+    }
+    return element;
+})
+
+
+
+
+export  const getMarchePersonnaliser = (state, getters,rootState, rootGetters) =>
+state.marches.map(element => {
+    if(element.unite_administrative_id !== null ){
+        element = {
+            ...element,
+           
+           
+            objetUniteAdministrative:rootGetters['uniteadministrative/uniteAdministratives'].find(
                plans => plans.id == element.unite_administrative_id
             )
             

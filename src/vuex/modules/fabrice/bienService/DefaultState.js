@@ -36,7 +36,8 @@ const defaultState = {
     procedurePassations:[],
     appelOffres:[],
     typeMarches:[],
-    modePassations:[]
+    modePassations:[],
+    marches:[]
 
 
 

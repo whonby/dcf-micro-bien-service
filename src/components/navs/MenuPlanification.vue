@@ -200,7 +200,7 @@
        
            <li class="divider"></li>
           <li>
-            <router-link :to="{name: 'appelOffre'}" tag="a">
+            <router-link :to="{name: 'marche'}" tag="a">
               <i class="icon-key"></i> Marche
             </router-link>
           </li>
@@ -213,7 +213,7 @@
             </router-link>
           </li>
 
-           <li class="divider"></li>
+           <!-- <li class="divider"></li>
           <li>
             <router-link :to="{name: ''}" tag="a">
               <i class=" icon-star"></i> Lettre d'invitation
@@ -253,7 +253,7 @@
             <router-link :to="{name: ''}" tag="a">
               <i class=" icon-tint"></i> Decision de marché
             </router-link>
-          </li>
+          </li> -->
            <!-- <li>
             <router-link :to="{name: ''}" tag="a">
               <i class="icon-bar-chart"></i>
