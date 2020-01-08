@@ -24,7 +24,7 @@
               </thead>
               <tbody>
                 <tr class="odd gradeX">
-                  <td>{{immobilisat.exoBudgetaire.annee || 'Non renseigné'}}</td> 
+                  <td>{{immobilisat.exercice_budgetaire || 'Non renseigné'}}</td> 
                   <!-- <td>{{immobilisat.TVA_id || 'Non renseigné'}} %</td> -->
                   <td>{{immobilisat.duree || 'Non renseigné'}} ans</td>
                     <td>{{immobilisat.familleImmo.libelle || 'Non renseigné'}}</td>

@@ -72,7 +72,7 @@
           <li>
             <router-link :to="{name:'immobilisation'}" tag="a">
               <!-- <i class="icon-money"></!--> 
-              <span class="text">IMMOBILISATION</span>
+              <span class="text">AFFECTATION</span>
             </router-link>
           </li>
        <li class="dropdown" id="tableau">
@@ -90,10 +90,11 @@
         <ul class="dropdown-menu">
           
           <li class="divider"></li>
-          <li>
-            <a href="login.html">
-              <i class="icon-key"></i> Simulateur Amortissement
-            </a>
+         <li>
+            <router-link :to="{name:'simulationAmortissement'}" tag="a">
+              <i class="icon-table"></i>
+              <span class="text">simulation Amortissement</span>
+            </router-link>
           </li>
            <li class="divider"></li>
          <li>
@@ -102,24 +103,24 @@
               <span class="text">Fiche d'analyse</span>
             </router-link>
           </li>
-          <li>
+          <!-- <li>
             <router-link :to="{name:'listeStructureMoinEquipe'}" tag="a" title>
               <i class="icon-home"></i>
               <span class="text">Structure Moin équipé</span>
             </router-link>
-          </li>
-          <li>
+          </li> -->
+          <!-- <li>
             <router-link :to="{name:'listeStructurePlusEquipe'}" tag="a" title>
               <i class="icon-home"></i>
               <span class="text">Structure Plus équipé</span>
             </router-link>
-          </li>
-           <li>
+          </li> -->
+           <!-- <li>
             <router-link :to="{name:'listeActeurEquipe'}" tag="a" title>
               <i class="icon-group"></i>
               <span class="text">Acteur équipé</span>
             </router-link>
-          </li>
+          </li> -->
         </ul>
       </li>
     </ul>

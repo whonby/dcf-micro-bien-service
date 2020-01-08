@@ -403,6 +403,7 @@ return this.services_gestionnaires.filter((item) => {
  //afficher modal pour ajouter element enfant
 	 ajouterElementEnfant(item) {
     this.parentDossier = this.services_gestionnaires.find(plan => plan.id == item.id)
+    this.nouvelElementEnfant.code = this.parentDossier.code
      this.nouvelElementEnfant.parent = this.parentDossier.id
 
       this.$('#modalAjouterElementEnfant').modal({

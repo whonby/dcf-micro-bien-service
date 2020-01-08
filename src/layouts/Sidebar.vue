@@ -51,6 +51,15 @@
             <i class="icon icon-fullscreen"></i>
             <span>BIEN ET SERVICES</span>
           </a>
+
+       <li @click.prevent="activate(5)" :class="{active: active_el ==5}">
+          <a title="COMPTABILITE DES MATIERE" href="#">
+            <i class="icon icon-pencil"></i>
+            <span>COMPTA DES MATIERES</span>
+          </a>
+        </li>
+
+
         <li @click.prevent="activate(4)" :class="{active: active_el ==4}">
           <a title="INVESTISSEMENT" href="#">
             <i class="icon icon-th-list"></i>
@@ -59,12 +68,7 @@
           </a>
         </li>
         
-        <li @click.prevent="activate(5)" :class="{active: active_el ==5}">
-          <a title="COMPTABILITE DES MATIERE" href="#">
-            <i class="icon icon-pencil"></i>
-            <span>COMPTA DES MATIERES</span>
-          </a>
-        </li>
+        
         <li @click.prevent="activate(6)" :class="{active: active_el ==6}">
           <a title="TRANSFERT" href="#">
             <i class="icon icon-file"></i>

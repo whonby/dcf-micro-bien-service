@@ -121,8 +121,8 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <!-- <th>Classe</th> 
-                    <th>type equipement</th>  -->
+                    <!-- <th>Classe</th>  -->
+                    <th>Annee</th> 
                     <th>Famille</th>
                     <th>Quantité requise</th>
                     <th>Quantité afféctée</th>
@@ -140,9 +140,9 @@
                     <!-- <td
                       @dblclick="afficherModalModifierImmobilisation(immobilisat.id)"
                     >{{immobilisat.BesoinImmobilisation.famille.code || 'Non renseigné'}}</td>   -->
-                    <!-- <td
+                    <td
                       @dblclick="afficherModalModifierImmobilisation(immobilisat.id)"
-                    >{{immobilisat.BesoinImmobilisation.famille.reletion__equipement.libelle || 'Non renseigné'}}</td> -->
+                    >{{immobilisat.exercice_budgetaire || 'Non renseigné'}}</td>
                     <td
                       @dblclick="afficherModalModifierImmobilisation(immobilisat.id)"
                     >{{immobilisat.familleImmo.libelle || 'Non renseigné'}}</td> 

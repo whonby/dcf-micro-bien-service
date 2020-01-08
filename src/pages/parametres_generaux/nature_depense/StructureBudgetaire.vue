@@ -26,7 +26,7 @@
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste structures budgetaires</h5>
+            <h5>Liste structures économiques</h5>
              <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -67,7 +67,7 @@
             </div>
             <div v-else>
               <div align ="center">
-                <h6 style="color:red;">Aucune structure budgetaire enregistrée </h6>
+                <h6 style="color:red;">Aucune structure économique enregistrée </h6>
               </div>
             </div>
                   
@@ -85,7 +85,7 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter structure budgetaire</h3>
+                <h3>Ajouter structure économique</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -129,7 +129,7 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier structure budgetaire</h3>
+                <h3>Modifier structure économique</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">

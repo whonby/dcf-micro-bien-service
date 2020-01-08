@@ -250,10 +250,11 @@ export function getAllImmobilisation({ commit }) {
 }
 
 // ajouter
-export function ajouterImmobilisation({ commit }, formData) {
+export function ajouterImmobilisation({ commit, dispatch}, formData) {
   asyncLoading(axios.post("/ajouter_immobilisation", formData)).then(response => {
     if (response.status == 201) {
       commit("AJOUTER_IMMOBILISATION", response.data);
+      dispatch("getAllBesoinImmo");
       this.$app.$notify({
         title: 'Success',
         text: 'Enregistrement Effectué avec Succès!',
@@ -264,7 +265,7 @@ export function ajouterImmobilisation({ commit }, formData) {
 }
 
 // modifier
-export function modifierImmobilisation({ commit }, nouveau) {
+export function modifierImmobilisation({ commit, dispatch}, nouveau) {
   asyncLoading(axios
     .put("/modifier_immobilisation/" + nouveau.id, {
       type_immo: nouveau.type_immo,
@@ -277,7 +278,7 @@ export function modifierImmobilisation({ commit }, nouveau) {
       qte_reel: nouveau.qte_reel,
       qte_affecte: nouveau.qte_affecte,
       qte_stock: nouveau.qte_stock,      
-
+      anneamortiss: nouveau.anneamortiss,
       prixUnitaire: nouveau.prixUnitaire,
       total_actuel: nouveau.total_actuel,
       valeurorigine: nouveau.valeurorigine,
@@ -301,6 +302,7 @@ export function modifierImmobilisation({ commit }, nouveau) {
  
     .then(response => {
       commit("MODIFIER_IMMOBILISATION", response.data);
+      dispatch("getAllBesoinImmo");
       this.$app.$notify({
         title: 'Success',
         text: 'Modification Effectué avec Succès!',
@@ -372,10 +374,10 @@ export function ajouterBesoinImmo({ commit, dispatch }, nouveau) {
       // qteactuelstock: nouveau.qteactuelstock,
       motif_demande: nouveau.motif_demande,
       // service_id: nouveau.service_id,
-      // norme_id: nouveau.norme_id,
-      // normearticle: nouveau.normearticle,
+      norme_id: nouveau.norme_id,
+      normearticle: nouveau.normearticle,
       fonction_id: nouveau.fonction_id,
-      // qterealise: nouveau.qterealise,
+      qterealise: nouveau.qterealise,
       dure_vie: nouveau.dure_vie
     })
   ).then(response => {
@@ -414,8 +416,8 @@ export function modifierBesoinImmo({ commit, dispatch }, nouveau) {
       date_motif: nouveau.date_motif,
       motif_ua: nouveau.motif_ua,
       date_motif_ua: nouveau.date_motif_ua,
-      // norme_id: nouveau.norme_id,
-      // normearticle: nouveau.normearticle,
+       norme_id: nouveau.norme_id,
+      normearticle: nouveau.normearticle,
       fonction_id: nouveau.fonction_id,
       dure_vie: nouveau.dure_vie
     })

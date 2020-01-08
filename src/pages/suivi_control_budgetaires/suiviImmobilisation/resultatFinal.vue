@@ -11,26 +11,26 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-                     <!-- <download-excel
+                     <download-excel
             class="btn btn-default pull-right"
             style="cursor:pointer;"
             :fields="json_fields"
-            title="Liste de demandes d'immobilisation "
-            :data="trieUaImmobilisation"
-            name="Liste de demandes d'immobilisation"
+            title="Bilan des Immobilisations"
+            :data="ressultatBesoin"
+            name="Bilan des Immobilisations"
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-          </download-excel> -->
+          </download-excel>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Fiche d'analyse</h5>
-              <div align="right">
+              <h5>Bilan Equipement</h5>
+              <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
-              </div>
+              </div> -->
             </div>
 
             <div class="widget-content nopadding" >
@@ -94,14 +94,14 @@
                     >{{stock.qterealise || '0'}}</td>
                        <td style="text-align: center;"
                       
-                    >{{stock.normearticle - stock.qterealise }}</td>
+                    >{{stock.quantite || '0'}}</td>
                     <td style="text-align: center;"
                       
-                    >{{ stock.prix_unitaire  || '0' }}</td>
+                    >{{ formatageSomme(parseFloat(stock.prix_unitaire))  || '0' }}</td>
 
                     <td style="text-align: center;"
                       
-                    >{{ stock.prix_unitaire * (stock.normearticle - stock.qterealise) || '0' }}</td>
+                    >{{ formatageSomme(parseFloat(stock.montant_total)) || '0' }}</td>
                      <!-- <td
                       
                     >{{stock.durevie || 'Non renseigné'}} Ans</td> -->
@@ -124,9 +124,9 @@
                   
                      <td ></td>
                     <td style="font-weight:bold;" title="total quantite sortant">Total non couvert</td>
-                    <!-- <td style="text-align: center;color:red;font-weight:bold;">{{ totalQteNonCouvert || 0 }}</td> -->
+                     <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(SommeQuantiteNonCouvert))}}</td>
                     
-        <td></td>
+        
                     
                   </tr>
                 </tbody>
@@ -148,7 +148,7 @@
 <script>
 import { mapGetters} from "vuex";
 // import moment from "moment";
-// import { formatageSomme } from "../../../Repositories/Repository";
+import { formatageSomme } from "../../../Repositories/Repository";
 
 export default {
   name: 'besionImmolisation',
@@ -165,15 +165,19 @@ export default {
         //   class: ""
         // }
       ],
-// json_fields: {
-//         TYPE_UNITE_ADMINISTRATIVE: "typeUniteAdmin.libelle",
-//         UNITE_ADMINISTRATIVE: "uniteAdminist.libelle",
-//         DESIGNATION: "famille.libelle",
-//         QUANTITE: "quantite",
-//         PRIX_UNITAIRE: "prix_unitaire",
-//         MONTANT_TOTAL: "montant_total",
-//          DATE_DE_DEMANDE: "date_jour",
-//       },
+json_fields: {
+      
+        UNITE_ADMINISTRATIVE: "uniteAdminist.libelle",
+        FONCTION: "afficherFonction.libelle",
+        FAMILLE: "famille.libelle",
+        ARTICLE: "afficheArticle.libelle ",
+        NORME: "normearticle",
+         QUANTITE_COUVERT: "qterealise",
+         QUANTITE_NOM_COUVERT: "quantite",
+         PRIX_UNITAITRE: "prix_unitaire ",
+         TOTAL: "montant_total",
+         MONTANT_GLOBALE:"SommeQuantiteNonCouvert"
+      },
 
     };
   },
@@ -185,7 +189,8 @@ export default {
   computed: {
     ...mapGetters("SuiviImmobilisation", [
     "ressultatBesoin",
-    "totalQteNonCouvert"
+    "totalQteNonCouvert",
+    "SommeQuantiteNonCouvert"
      
     ]),
     ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
@@ -196,7 +201,7 @@ export default {
 
   },
   methods: {
-    
+    formatageSomme:formatageSomme
   }
 };
 </script>

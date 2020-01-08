@@ -112,8 +112,11 @@ export default {
 
     	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
-    	//  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
-      //  ...mapActions('bienService', ['getActeurDepense','getTypeProcedure'])
+       ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
+       ...mapActions('bienService', ['getActeurDepense', 'getBailleur','getTypeFacture',
+       'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse',
+       'getTypePrestation', 'getCondition', 'getTextJuridique', 'getAutreTextJuridique','getDecisionMarche'])
+
   },
 
   created(){
@@ -225,7 +228,19 @@ this.getMarcheContratExecution()
    
       this.getMission()
        this.getHistoriqueMission() 
-
+this.getAllBudgetGeneral()
+ // debut du module de bien && service
+this.getActeurDepense()
+this.getBailleur()
+this.getTypeFacture()
+this.getTypeActeDepense()
+this.getTypeActeEffetFinancier()
+this.getTypeAnalyse()
+this.getTypePrestation()
+this.getCondition()
+this.getTextJuridique()
+this.getAutreTextJuridique()
+this.getDecisionMarche()
       /**
        * fin missions
        */

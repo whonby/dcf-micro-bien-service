@@ -101,10 +101,10 @@
                    
                    
                     <option
-                      v-for="Tua in type_Unite_admins"
-                      :key="Tua.id"
-                      :value="Tua.id"
-                    >{{Tua.libelle}}</option>
+                      v-for="Tua in groupUatypeNorme"
+                      :key="Tua[0].typeuniteAdminist.id"
+                      :value="Tua[0].typeuniteAdminist.id"
+                    >{{Tua[0].typeuniteAdminist.libelle}}</option>
                   </select>
                 </div>
               </div>
@@ -117,10 +117,10 @@
                   <select v-model="formData.uniteadmin_id" >
                     <option value>Sélectionner</option>
                     <option
-                      v-for="ua in groupUaNorme"
-                      :key="ua[0].id"
-                      :value="ua[0].uniteAdminist.id"
-                    >{{ua[0].uniteAdminist.libelle}}</option>
+                      v-for="ua in typeUniteAdministrativeDynamiques(formData.typeuniteadminist_id)"
+                      :key="ua.id"
+                      :value="ua.uniteAdminist.id"
+                    >{{ua.uniteAdminist.libelle}}</option>
                   </select>
                   
                 </div>
@@ -218,20 +218,26 @@
                    readonly
                   />
                   <input
-                    type="number"
+                    type="hidden"
                   :value="qtedemande"
                     class="span"
                    readonly
                   />
                    <input
-                    type="text"
+                    type="hidden"
                   :value="normeEqup"
                     class="span"
                    readonly
                   />
                    <input
-                    type="text"
+                    type="hidden"
                   :value="totalNorme"
+                    class="span"
+                   readonly
+                  />
+                   <input
+                    type="hidden"
+                  v-model="formData.qterealise"
                     class="span"
                    readonly
                   />
@@ -391,11 +397,11 @@
                 <div class="controls">
                   <select v-model="editBesoinImmo.typeuniteadminist_id" >
                    
-                    <option
-                      v-for="Tua in type_Unite_admins"
-                      :key="Tua.id"
-                      :value="Tua.id"
-                    >{{Tua.libelle}}</option>
+                   <option
+                      v-for="Tua in groupUatypeNorme"
+                      :key="Tua[0].typeuniteAdminist.id"
+                      :value="Tua[0].typeuniteAdminist.id"
+                    >{{Tua[0].typeuniteAdminist.libelle}}</option>
                   </select>
                 </div>
               </div>
@@ -815,7 +821,7 @@
                     <td ></td>
                     <td ></td>
                      <td style="font-weight:bold;">Total</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(SommeTotalBesoin))}}</td>
+                    <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(SommeQuantiteNonCouvert))}}</td>
                     
                     
                     <td ></td>
@@ -916,10 +922,11 @@ json_fields: {
       "equipements",
       "familles",
       "articles",
-      "SommeTotalBesoin",
+      "SommeQuantiteNonCouvert",
       "getAfficheArticle",
       "getPersoStock",
       "stockageArticles",
+      "groupUatypeNorme",
       "groupUaNorme",
       "groupUaNormeFamille",
       "normeEquipements",
@@ -1150,6 +1157,15 @@ montantTotalModifier() {
       }
       return 0
     },
+    typeUniteAdministrativeDynamiques() {
+     return id => {
+        if (id != null && id != "") {
+          return this.getPersoListeDesNorme.filter(
+            element => element.typeua_id == id
+          );
+        }
+      };
+    },
   },
     
   methods: {
@@ -1205,7 +1221,8 @@ montantTotalModifier() {
       historiqueqte: this.Historqte,
          prix_unitaire:this.coutMoyen,
       norme_id : this.normeEqup,
-       normearticle : this.normeequipement
+       normearticle : this.normeequipement,
+      dure_vie :this.dureVieEquipement
        };
       //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
       this.ajouterBesoinImmo(nouvelObjet);
@@ -1283,7 +1300,8 @@ montantTotalModifier() {
       historiqueqte: this.HistorqteModifier,
          prix_unitaire:this.coutMoyenModifier,
          normearticle : this.normeequipementModifier,
-         norme_id : this.normeEqup
+         norme_id : this.normeEqupmodifier,
+         dure_vie :this.dureVieEquipementModifier
       };
        this.modifierQuantiteNormeDmd(objetPourModifiernormerealise1);
       this.modifierBesoinImmo(nouvelObjetmodifier);

@@ -58,16 +58,16 @@ export const SuiviImmo = (state, getters, rootState, rootGetters) =>
   state.immobilisations.map(element => {
     if (
       element.famillearticle_id !== null &&
-      element.acteurdepense_id !== null &&
+     
       element.acteurdepense_id !== null &&
       element.uniteadministrative_id !== null &&
       element.typeuniteadminis_id !== null &&
-      element.articleImmo_id !== null
-      // element.besoinimmo_id !== null
+      element.articleImmo_id !== null 
+      // element.exercice_budgetaire_id !== null
     ) {
       element = {
         ...element,
-        exoBudgetaire: rootGetters["parametreGenerauxAdministratif/exercices_budgetaires"].find(exercice => exercice.id == element.exercice_budgetaire_id),
+        // exoBudgetaire: rootGetters["parametreGenerauxAdministratif/exercices_budgetaires"].find(exercice => exercice.id == element.exercice_budgetaire_id),
         acteurDepense: rootGetters["personnelUA/personnaliseActeurDepense"].find(auteurDep => auteurDep.id == element.acteurdepense_id),
         uniteAdminist: rootGetters["uniteadministrative/uniteAdministratives"].find(uniteAdm => uniteAdm.id == element.uniteadministrative_id),
 
@@ -142,7 +142,7 @@ export const nombreDemandeEquipement = (state, getters) =>
 //   );
 
 
-
+groupUaNorme
 
 export const listeBesoinValider = (state, getters, rootState, rootGetters) =>
          getters.getBesoinValider.map(element => {
@@ -357,13 +357,13 @@ export const nombreTotalEquipement = (state, getters) =>
     0
   );
 
-export const SommeTotalBesoin = (state, getters) =>
+
+
+export const SommeQuantiteNonCouvert = (state, getters) =>
   getters.trieUaBesoinImmo.reduce(
     (prec, cur) => parseInt(prec) + parseInt(cur.montant_total),
     0
   );
-
-
 // export const nombreTotalEquipement = (state, getters) => {
 //   const val = parseInt(
 //     getters.SommeEquipementPrevue + getters.SommeEquipementRealise
@@ -773,6 +773,10 @@ export const groupeTypeUniteAdmin1 = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.getPersoNormeArticle, "typeua_id");
 };
+export const groupUatypeNorme = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.getPersoListeDesNorme, "typeua_id");
+};
 export const groupUaNorme = (state, getters) => {
   //delete getters.trieUaImmobilisation.
   return groupBy(getters.getPersoListeDesNorme, "ua_id");
@@ -925,5 +929,3 @@ export {
 
 
 
-
-groupTriUaImmo
