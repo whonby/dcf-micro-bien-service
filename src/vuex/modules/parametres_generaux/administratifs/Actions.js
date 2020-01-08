@@ -138,7 +138,7 @@ export  function getNatureSection({commit}) {
 }
 
 // ajouter nature de section
-export function ajouterNatureSection({commit},objetAjout){
+export function ajouterNatureSection({ commit, dispatch},objetAjout){
    asyncLoading( axios.post('/ajouter_nature_section',{
     code:objetAjout.code,
     libelle:objetAjout.libelle
@@ -146,7 +146,7 @@ export function ajouterNatureSection({commit},objetAjout){
 })).then(response => {
         if(response.status == 201){
             commit('AJOUTER_NATURE_SECTION', response.data)
-
+            dispatch('getNatureSection')
             this.$app.$notify({
                 title: 'success ',
                 text: 'Enregistrement effectué avec success !',
@@ -157,14 +157,14 @@ export function ajouterNatureSection({commit},objetAjout){
 
 }
 // modififer nature de section
-export function modifierNatureSection({commit}, objetModifie){
+export function modifierNatureSection({ commit, dispatch}, objetModifie){
   asyncLoading(  axios.put('/modifier_nature_section/'+ objetModifie.id,{
 
     code:objetModifie.code,
     libelle:objetModifie.libelle
 })).then(res => {
         commit('MODIFIER_NATURE_SECTION', res.data)
-
+    dispatch('getNatureSection')
         this.$app.$notify({
             title: 'success ',
             text: 'Modification effectué avec success !',
@@ -180,7 +180,8 @@ export function supprimerNatureSection({commit}, id){
     this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
-       commit('SUPPRIMER_NATURE_SECTION', id)
+        commit('SUPPRIMER_NATURE_SECTION', id)
+        
       // // dialog.loading(false) // stops the proceed button's loader
         axios.delete('/supprimer_nature_section/' + id).then(() => dialog.close() )   
     })
@@ -201,7 +202,7 @@ export  function getSection({commit}) {
 
 
 // ajouter  section
-export function ajouterSection({commit},objetAjout){
+export function ajouterSection({ commit, dispatch},objetAjout){
    asyncLoading( axios.post('/ajouter_section',{
     code:objetAjout.code,
     nom_section:objetAjout.nom_section,
@@ -210,7 +211,7 @@ export function ajouterSection({commit},objetAjout){
 })).then(response => {
         if(response.status == 201){
             commit('AJOUTER_SECTION', response.data)
-
+            dispatch('getSection')
             this.$app.$notify({
                 title: 'success ',
                 text: 'Enregistrement effectué avec success !',
@@ -220,20 +221,25 @@ export function ajouterSection({commit},objetAjout){
     }).catch(error => console.log(error))
 
 }
-// modififer de section
-export function modifierSection({commit}, objetModifie){
-  asyncLoading(  axios.put('/modifier_section/'+ objetModifie.id,{
 
-    code:objetModifie.code,
-    nom_section:objetModifie.nom_section,
-      code_section: objetModifie.code_section,
-    naturesection_id:objetModifie.naturesection_id
-})).then(res => {
+export function modifierSection({ commit, dispatch }, objetModifie) {
+    asyncLoading(axios.put('/modifier_section/' + objetModifie.id, {
+
+        code: objetModifie.code,
+        nom_section: objetModifie.nom_section,
+        code_section: objetModifie.code_section,
+        naturesection_id: objetModifie.naturesection_id
+    })).then(res => {
         commit('MODIFIER_SECTION', res.data)
+        dispatch('getSection')
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué avec success !',
+            type: "success"
+        })
     }).catch(error => console.log(error))
-   
-}
 
+}
 
 // supprimer de setion
 

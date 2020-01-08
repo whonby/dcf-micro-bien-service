@@ -4,7 +4,7 @@ const defaultState = {
   uniteAdministratives: [],
 
   archivageDocuments: [],
-
+  budgetGeneral: [],
   // listeDocUniteAdministratives: [],
 
   // nbreUniteAdministratives: [],

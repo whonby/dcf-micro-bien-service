@@ -2,6 +2,97 @@ import axios from "../../fabrice/uniteadministrative/urls/api";
 import { asyncLoading } from 'vuejs-loading-plugin'
 var housecall = require("housecall");
 var queue = housecall({ concurrency: 2, cooldown: 1000 });
+
+
+
+
+export function getAllBudgetGeneral({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/liste_Budget_General")
+      .then(response => {
+        commit("GET_ALL_BUDGET_GENERAL", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterBudgetGeneral({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouter_Budget_General", {
+      exercicebudget_id: nouveau.exercicebudget_id,
+      gdenature_id: nouveau.gdenature_id,
+      program_id: nouveau.program_id,
+      typeua_id: nouveau.typeua_id,
+      ua_id: nouveau.ua_id,
+      section_id: nouveau.section_id,
+      fonctionnel_id: nouveau.fonctionnel_id,
+      economique_id: nouveau.economique_id,
+      Dotation_Initiale: nouveau.Dotation_Initiale,
+      version: nouveau.version
+    }))
+
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_BUDGET_GENERAL", response.data);
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+// modifier
+export function modifierBudgetGeneral({ commit }, nouveau) {
+  asyncLoading(axios
+    .put("/modifier_Budget_General/" + nouveau.id, {
+      exercicebudget_id: nouveau.exercicebudget_id,
+      gdenature_id: nouveau.gdenature_id,
+      program_id: nouveau.program_id,
+      typeua_id: nouveau.typeua_id,
+      ua_id: nouveau.ua_id,
+      section_id: nouveau.section_id,
+      fonctionnel_id: nouveau.fonctionnel_id,
+      economique_id: nouveau.economique_id,
+      Dotation_Initiale: nouveau.Dotation_Initiale,
+      version: nouveau.version
+    }))
+    .then(response => {
+      commit("MODIFIER_BUDGET_GENERAL", response.data);
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerBudgetGeneral({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_BUDGET_GENERAL", id);
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimer_Budget_General/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //////////////////////////*debut action type texte */////////////////////////////
 
 // afficher liste des type de textes
@@ -84,6 +175,7 @@ export function ajouterUniteAdministrative({ commit }, nouveau) {
     .post("/ajouter_unite_administrative", {
       type_ua_id: nouveau.type_ua_id,
       section_id: nouveau.section_id,
+      nature_section_id: nouveau.nature_section_id,
       servicegest_id: nouveau.servicegest_id,
       localisationgeo_id: nouveau.localisationgeo_id,
       code: nouveau.code,
@@ -103,24 +195,25 @@ export function ajouterUniteAdministrative({ commit }, nouveau) {
 }
 // modifier Unite administrative
 export function modifierUniteAdministrative({ commit }, nouveau) {
-  asyncLoading(axios
-    .put("/modifier_unite_administrative/" + nouveau.id, {
+  asyncLoading(
+    axios.put("/modifier_unite_administrative/" + nouveau.id, {
       type_ua_id: nouveau.type_ua_id,
       section_id: nouveau.section_id,
+      nature_section_id: nouveau.nature_section_id,
       servicegest_id: nouveau.servicegest_id,
       localisationgeo_id: nouveau.localisationgeo_id,
       code: nouveau.code,
       libelle: nouveau.libelle,
       date_creation: nouveau.date_creation
-    }))
-    .then(response => {
-      commit("MODIFIER_UNITE_ADMINISTRATIVE", response.data);
-      this.$app.$notify({
-        title: 'Success',
-        text: 'Modification Effectué avec Succès!',
-        type: "success"
-      })
+    })
+  ).then(response => {
+    commit("MODIFIER_UNITE_ADMINISTRATIVE", response.data);
+    this.$app.$notify({
+      title: "Success",
+      text: "Modification Effectué avec Succès!",
+      type: "success"
     });
+  });
 }
 //supprimer Unite administrative
 export function supprimerUniteAdministrative({ commit }, id) {

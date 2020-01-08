@@ -42,7 +42,7 @@
         </a>
         <ul class="dropdown-menu">
           <li>
-            <router-link :to="{name: ''}" tag="a">
+            <router-link :to="{name: 'budgetGenerals'}" tag="a">
               <i class="icon-user"></i>
               Budget unite administrative
             </router-link>

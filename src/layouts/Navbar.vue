@@ -61,11 +61,7 @@ export default {
   },
 
   methods: {
-    ...mapActions("uniteadministrative", [
-      "getAllTypeTextes",
-      "getAllUniteAdministrative",
-      "getAllArchivageDocument"
-    ]),
+   
 
       ...mapActions('parametreGenerauxFonctionnelle', 
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle']),
@@ -84,7 +80,12 @@ export default {
     'getStructureAdministrative', 'getServiceGestionnaire', 'getStructureGeographique',
     'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature"]),
 
-
+ ...mapActions("uniteadministrative", [
+      "getAllTypeTextes",
+      "getAllUniteAdministrative",
+      "getAllArchivageDocument",
+      "getAllBudgetGeneral"
+    ]),
             ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
             "getClasses","getEchelons","getActeur","getGrades","getNbrActeurAcrediteTaux",
@@ -114,9 +115,7 @@ export default {
        ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
        ...mapActions('bienService', ['getActeurDepense', 'getBailleur','getTypeFacture',
        'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse',
-       'getTypePrestation', 'getCondition', 'getTextJuridique', 'getAutreTextJuridique',
-       'getTypeProcedure', 'getProcedurePassation', 'getAppelOffre', 'getTypeMarche',
-       'getModePassation'])
+       'getTypePrestation', 'getCondition', 'getTextJuridique', 'getAutreTextJuridique','getDecisionMarche'])
 
   },
 
@@ -146,10 +145,31 @@ export default {
     this.getUnite()
     this.getZone()
 
+
+
+// this.getTypeProcedure()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
       this.getAllTypeTextes();
     this.getAllUniteAdministrative();
     this.getAllArchivageDocument();
+this.getAllBudgetGeneral();
+
 
       this.getListeSalaireActuelAll()
     this.getTypeSalarie()
@@ -167,6 +187,7 @@ export default {
         this.allActeurDepense()
          this.getActeurFinContratAndActivite()
             /**Gestion des marche*/
+            
       this.getTypeMarche()
       this.getModePassation()
       this.getSecteurActivite()
@@ -219,11 +240,7 @@ this.getTypePrestation()
 this.getCondition()
 this.getTextJuridique()
 this.getAutreTextJuridique()
-this.getTypeProcedure()
-this.getProcedurePassation()
-this.getAppelOffre()
-this.getTypeMarche()
-this.getModePassation()
+this.getDecisionMarche()
       /**
        * fin missions
        */

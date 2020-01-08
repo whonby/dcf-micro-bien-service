@@ -54,8 +54,8 @@
                             <label class="control-label">Motif Ua </label>
                             <div class="controls">
                               <select v-model="editBesoinImmo.motif_demande">
-                                <option value="1">En attente</option>
-                              <option value="0">Valider</option>
+                                <option value="0">En attente</option>
+                              <option value="1">Valider</option>
                              <!-- <option value="2">Rejetter</option> -->
     
     </select>
@@ -65,7 +65,7 @@
                            <div class="control-group">
                             <label class="control-label">Date Decision :</label>
                             <div class="controls">
-                              <input type="date" class="span"  v-model="editBesoinImmo.date_jour"/>
+                              <input type="date" class="span"  v-model="editBesoinImmo.date_motif"/>
                             </div>
                           </div>
                            
@@ -99,9 +99,10 @@
                 <div class="controls">
                   <select v-model="formData.typeuniteadminist_id" >
                    
+                   
                     <option
-                      v-for="Tua in groupUaNorme"
-                      :key="Tua[0].id"
+                      v-for="Tua in groupUatypeNorme"
+                      :key="Tua[0].typeuniteAdminist.id"
                       :value="Tua[0].typeuniteAdminist.id"
                     >{{Tua[0].typeuniteAdminist.libelle}}</option>
                   </select>
@@ -113,13 +114,13 @@
               <div class="control-group">
                 <label class="control-label">Unite administrative:</label>
                 <div class="controls">
-                  <select v-model="formData.uniteadmin_id" :readOnly="veifUAExist">
+                  <select v-model="formData.uniteadmin_id" >
                     <option value>Sélectionner</option>
                     <option
-                      v-for="ua in groupUaNormeEquipe"
-                      :key="ua[0].id"
-                      :value="ua[0].uniteAdminist.id"
-                    >{{ua[0].uniteAdminist.libelle}}</option>
+                      v-for="ua in typeUniteAdministrativeDynamiques(formData.typeuniteadminist_id)"
+                      :key="ua.id"
+                      :value="ua.uniteAdminist.id"
+                    >{{ua.uniteAdminist.libelle}}</option>
                   </select>
                   
                 </div>
@@ -129,12 +130,12 @@
               <div class="control-group">
                 <label class="control-label">Fonction:</label>
                 <div class="controls">
-                  <select v-model="formData.fonction_id" :readOnly="veifEquipeExist">
+                  <select v-model="formData.fonction_id">
                      <option
-                      v-for="ua1 in groupUaNormeFonction"
-                      :key="ua1[0].id"
-                      :value="ua1[0].fonctionActeur.id"
-                    >{{ua1[0].fonctionActeur.libelle}}</option>
+                      v-for="ua1 in fonctionDynamiques(formData.uniteadmin_id)"
+                      :key="ua1.id"
+                      :value="ua1.fonctionActeur.id"
+                    >{{ua1.fonctionActeur.libelle}}</option>
                   </select>
                 </div>
               </div>
@@ -143,7 +144,7 @@
               <div class="control-group">
                 <label class="control-label">Type équipement:</label>
                 <div class="controls">
-                  <select v-model="formData.equipe_id" :readOnly="veiffonctionExist1">
+                  <select v-model="formData.equipe_id" >
                      <option
                       v-for="ua2 in equipementDynamiques(formData.fonction_id)"
                       :key="ua2.id"
@@ -161,10 +162,10 @@
               <div class="control-group">
                 <label class="control-label">Famille:</label>
                 <div class="controls">
-                  <select :readOnly="veiffamilleExist" v-model="formData.famille_id">
+                  <select  v-model="formData.famille_id">
                     <option value>Sélectionner</option>
                     <option
-                      v-for="famil in fammillesDynamiques(formData.equipe_id)"
+                      v-for="famil in familleDynamiques(formData.fonction_id)"
                       :key="famil.id"
                       :value="famil.familleArt.id"
                     >{{famil.familleArt.libelle}}</option>
@@ -177,74 +178,99 @@
               <div class="control-group">
                 <label class="control-label">Article:</label>
                 <div class="controls">
-                  <select :readOnly="veifArticlesExist" v-model="formData.article_id">
+                  <select v-model="formData.article_id">
                   
                     <option
-                      v-for="articl in articlesDynamiques(formData.famille_id)"
+                      v-for="articl in articleDynamiques(formData.famille_id)"
                       :key="articl.id"
-                      :value="articl.affichierArticle.id"
+                      :value="articl.AfficheArticle.id"
                       
-                    >{{articl.affichierArticle.libelle}}</option>
+                    >{{articl.AfficheArticle.libelle}}</option>
                   </select>
                 </div>
               </div>
             </td>
-            <td>
+            <!-- <td>
               <div class="control-group">
                 <label class="control-label">Quantité en stock:</label>
                 <div class="controls">
                   <input
                     type="number"
-                   :value="QuantiteEnStock(formData.article_id)"
+                   
                     readonly
                     class="span"
                     
-                    
+                    :value="quantiteEnstock"
                   />
-                  <input
-                    type="hidden"
-                   :value="recupererIdNorme"
-                    readonly
-                    class="span"
-                    
-                    
-                  />
+                
+                
                 </div>
               </div>
-            </td>
+            </td> -->
              <td>
               <div class="control-group">
                 <label class="control-label">Norme d'article</label>
                 <div class="controls">
                   <input
                     type="number"
-                   :value="recupererNorme"
+                  :value="normeequipement"
+                    class="span"
+                   readonly
+                  />
+                  <input
+                    type="hidden"
+                  :value="qtedemande"
+                    class="span"
+                   readonly
+                  />
+                   <input
+                    type="hidden"
+                  :value="normeEqup"
+                    class="span"
+                   readonly
+                  />
+                   <input
+                    type="hidden"
+                  :value="totalNorme"
+                    class="span"
+                   readonly
+                  />
+                   <input
+                    type="hidden"
+                  v-model="formData.qterealise"
                     class="span"
                    readonly
                   />
                 </div>
               </div>
             </td>
-           
-          </tr>
-          <tr>
-             
-             <td>
+           <td>
               <div class="control-group">
                 <label class="control-label">Quantité Démande:</label>
                 <div class="controls">
                   <input
                     type="number"
                     v-model="formData.quantite"
-                    :max="recupererNorme"
+                    :max="normeequipement"
                     class="span"
                     placeholder="Saisir la quantite"
+                  />
+                  <input
+                    type="hidden"
+                   :value="Historqte"
+                    
+                    class="span"
+                   
                   />
                 </div>
               </div>
             </td>
+          </tr>
+          <tr>
+             
+             
             
-           
+          
   <td>
               <div class="control-group">
                 <label class="control-label">Coût Moyen:</label>
@@ -252,14 +278,14 @@
                   <input
                     type="number"
                     readonly
-                    :value="CoutMoyen(formData.famille_id)"
+                  :value="coutMoyen"
                     class="span"
                     placeholder="Saisir prix unitaire"
                   />
                 </div>
               </div>
             </td>
-            
+           
               <td>
               <div class="control-group">
                 <label class="control-label">Montant Total:</label>
@@ -267,7 +293,7 @@
                   <input
                     type="number"
                     readonly
-                    :value="montantTotalarticles"
+                   :value="montantTotal"
                     class="span"
                     placeholder="Saisir montant total"
                   />
@@ -289,6 +315,19 @@
                 </div>
               </div>
             </td>
+              <td>
+              <div class="control-group">
+                <label class="control-label">Durée de vie</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                  :value="dureVieEquipement"
+                    class="span"
+                   readonly
+                  />
+                </div>
+              </div>
+            </td>
              <!-- <td>
                        
 
@@ -306,29 +345,7 @@
                           </div>
                         </td> -->
                   
-             <input
-                    type="hidden"
-                   :value="Qtehistorique(formData.article_id)"
-                    readonly
-                    class="span"
-                    
-                    
-                  />
-                  <input
-                    type="hidden"
-                   :value="AfficheQtesortant"
-                    readonly
-                    class="span"
-                    
-                    
-                  />
-                   <input
-                    type="hidden"
-                   v-model="formData.qterealise"
-                    
-                    
-                   
-                  />
+           
                          <!-- <td>
                        
 
@@ -345,58 +362,12 @@
                             </div>
                           </div>
                         </td> -->
-                        <td>
-            
-                  <input
-                    type="hidden"
-                   :value="Historqte"
-                    
-                    class="span"
-                   
-                  />
-                   <input
-                    type="hidden"
-                   :value="qteRecu"
-                    
-                    class="span"
-                   
-                  />
-                   <input
-                    type="hidden"
-                   v-model="formData.motif_demande"
-                    
-                    
-                   
-                  />
-                  <input
-                    type="hidden"
-                   :value="afficheDureVie"
-
-                    class="span"
-                   
-                  />
-                
-            </td>
+                       
             
           </tr>
-          <!-- <tr>
-                   <td>
-              <div class="control-group">
-                <label class="control-label">Service Demandeur:</label>
-                <div class="controls">
-                  <select  v-model="formData.service_id">
-                  
-                    <option
-                      v-for="servi in services"
-                      :key="servi.id"
-                      :value="servi.id"
-                      
-                    >{{servi.libelle}}</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-          </tr> -->
+          <tr>
+                 
+          </tr>
         </table>
       </div>
       <div class="modal-footer">
@@ -418,16 +389,17 @@
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
-        <tr>
-             <td>
+       <tr>
+
+          <td>
               <div class="control-group">
                 <label class="control-label">Type Unite administrative:</label>
                 <div class="controls">
                   <select v-model="editBesoinImmo.typeuniteadminist_id" >
                    
-                    <option
-                      v-for="Tua in groupUaNorme"
-                      :key="Tua[0].id"
+                   <option
+                      v-for="Tua in groupUatypeNorme"
+                      :key="Tua[0].typeuniteAdminist.id"
                       :value="Tua[0].typeuniteAdminist.id"
                     >{{Tua[0].typeuniteAdminist.libelle}}</option>
                   </select>
@@ -439,13 +411,13 @@
               <div class="control-group">
                 <label class="control-label">Unite administrative:</label>
                 <div class="controls">
-                  <select v-model="editBesoinImmo.uniteadmin_id" :readOnly="veifUAExist">
+                  <select v-model="editBesoinImmo.uniteadmin_id" >
                     <option value>Sélectionner</option>
                     <option
-                      v-for="ua in groupUaNormeEquipe"
-                      :key="ua[0].id"
-                      :value="ua[0].uniteAdminist.id"
-                    >{{ua[0].uniteAdminist.libelle}}</option>
+                      v-for="ua in uniteAdministrativeDynamiques(editBesoinImmo.typeuniteadminist_id)"
+                      :key="ua.id"
+                      :value="ua.uniteAdminist.id"
+                    >{{ua.uniteAdminist.libelle}}</option>
                   </select>
                   
                 </div>
@@ -455,12 +427,12 @@
               <div class="control-group">
                 <label class="control-label">Fonction:</label>
                 <div class="controls">
-                  <select v-model="editBesoinImmo.fonction_id" :readOnly="veifEquipeExist">
+                  <select v-model="editBesoinImmo.fonction_id">
                      <option
-                      v-for="ua1 in groupUaNormeFonction"
-                      :key="ua1[0].id"
-                      :value="ua1[0].fonctionActeur.id"
-                    >{{ua1[0].fonctionActeur.libelle}}</option>
+                      v-for="ua1 in fonctionDynamiques(editBesoinImmo.uniteadmin_id)"
+                      :key="ua1.id"
+                      :value="ua1.fonctionActeur.id"
+                    >{{ua1.fonctionActeur.libelle}}</option>
                   </select>
                 </div>
               </div>
@@ -469,7 +441,7 @@
               <div class="control-group">
                 <label class="control-label">Type équipement:</label>
                 <div class="controls">
-                  <select v-model="editBesoinImmo.equipe_id" :readOnly="veiffonctionExist1">
+                  <select v-model="editBesoinImmo.equipe_id" >
                      <option
                       v-for="ua2 in equipementDynamiques(editBesoinImmo.fonction_id)"
                       :key="ua2.id"
@@ -487,10 +459,10 @@
               <div class="control-group">
                 <label class="control-label">Famille:</label>
                 <div class="controls">
-                  <select :readOnly="veiffamilleExist" v-model="editBesoinImmo.famille_id">
+                  <select  v-model="editBesoinImmo.famille_id">
                     <option value>Sélectionner</option>
                     <option
-                      v-for="famil in fammillesDynamiques(editBesoinImmo.equipe_id)"
+                      v-for="famil in familleDynamiques(editBesoinImmo.fonction_id)"
                       :key="famil.id"
                       :value="famil.familleArt.id"
                     >{{famil.familleArt.libelle}}</option>
@@ -503,74 +475,94 @@
               <div class="control-group">
                 <label class="control-label">Article:</label>
                 <div class="controls">
-                  <select :readOnly="veifArticlesExist" v-model="editBesoinImmo.article_id">
+                  <select v-model="editBesoinImmo.article_id">
                   
                     <option
-                      v-for="articl in articlesDynamiques(editBesoinImmo.famille_id)"
+                      v-for="articl in articleDynamiquesModifier(editBesoinImmo.famille_id)"
                       :key="articl.id"
-                      :value="articl.affichierArticle.id"
+                      :value="articl.AfficheArticle.id"
                       
-                    >{{articl.affichierArticle.libelle}}</option>
+                    >{{articl.AfficheArticle.libelle}}</option>
                   </select>
                 </div>
               </div>
             </td>
-            <td>
+            <!-- <td>
               <div class="control-group">
                 <label class="control-label">Quantité en stock:</label>
                 <div class="controls">
                   <input
                     type="number"
-                   :value="QuantiteEnStock(editBesoinImmo.article_id)"
+                   
                     readonly
                     class="span"
                     
-                    
+                    :value="quantiteEnstock"
                   />
-                  <input
-                    type="hidden"
-                   :value="recupererIdNormeModifier"
-                    readonly
-                    class="span"
-                    
-                    
-                  />
+                
+                
                 </div>
               </div>
-            </td>
+            </td> -->
              <td>
               <div class="control-group">
                 <label class="control-label">Norme d'article</label>
                 <div class="controls">
                   <input
                     type="number"
-                   :value="recupererNormeModifier"
+                  :value="normeequipementModifier"
+                    class="span"
+                   readonly
+                  />
+                  
+                  <input
+                    type="hidden"
+                  :value="qtedemandemodifier"
+                    class="span"
+                   readonly
+                  />
+                   <input
+                    type="hidden"
+                  :value="normeEqupmodifier"
+                    class="span"
+                   readonly
+                  />
+                   <input
+                    type="hidden"
+                  :value="totalNormemodifier"
                     class="span"
                    readonly
                   />
                 </div>
               </div>
             </td>
-           
-          </tr>
-          <tr>
-             
-             <td>
+              <td>
               <div class="control-group">
                 <label class="control-label">Quantité Démande:</label>
                 <div class="controls">
                   <input
                     type="number"
                     v-model="editBesoinImmo.quantite"
-                    :max="recupererNormeModifier"
+                    :max="normeequipementModifier"
                     class="span"
                     placeholder="Saisir la quantite"
+                  />
+                  <input
+                    type="hidden"
+                   :value="HistorqteModifier"
+                    
+                    class="span"
+                   
                   />
                 </div>
               </div>
             </td>
+          </tr>
+          <tr>
+             
+          
             
-           
+          
   <td>
               <div class="control-group">
                 <label class="control-label">Coût Moyen:</label>
@@ -578,14 +570,14 @@
                   <input
                     type="number"
                     readonly
-                    :value="CoutMoyen(editBesoinImmo.famille_id)"
+                  :value="coutMoyenModifier"
                     class="span"
                     placeholder="Saisir prix unitaire"
                   />
                 </div>
               </div>
             </td>
-            
+           
               <td>
               <div class="control-group">
                 <label class="control-label">Montant Total:</label>
@@ -593,7 +585,7 @@
                   <input
                     type="number"
                     readonly
-                    :value="montantTotalarticlesModifier"
+                   :value="montantTotalModifier"
                     class="span"
                     placeholder="Saisir montant total"
                   />
@@ -632,22 +624,7 @@
                           </div>
                         </td> -->
                   
-             <input
-                    type="hidden"
-                   :value="Qtehistorique(editBesoinImmo.article_id)"
-                    readonly
-                    class="span"
-                    
-                    
-                  />
-                  <input
-                    type="hidden"
-                   :value="AfficheQtesortant"
-                    readonly
-                    class="span"
-                    
-                    
-                  />
+           
                          <!-- <td>
                        
 
@@ -664,43 +641,22 @@
                             </div>
                           </div>
                         </td> -->
-                        <td>
+                
+             <td>
               <div class="control-group">
-               
+                <label class="control-label">Durée de vie</label>
                 <div class="controls">
                   <input
-                    type="hidden"
-                   :value="Historqte"
-                    
+                    type="number"
+                  :value="dureVieEquipementModifier"
                     class="span"
-                   
-                  />
-                   <input
-                    type="hidden"
-                   :value="qteRecu"
-                    
-                    class="span"
-                   
-                  />
-                   <input
-                    type="hidden"
-                   v-model="editBesoinImmo.motif_demande"
-                    
-                    
-                   
-                  />
-                  <input
-                    type="hidden"
-                   :value="afficheDureVieModifier"
-                    
-                    class="span"
-                   
+                   readonly
                   />
                 </div>
               </div>
             </td>
-            
           </tr>
+         
         </table>
       </div>
       <div class="modal-footer">
@@ -754,11 +710,11 @@
                     <th title="Quantité">Qté</th>
                     <th title="Prix Unitaire">PU</th>
                     <th>Total</th>
+                    <th title="date demande">Date dmde</th>
                     
-                    
-                    <th title="date validation du service">Date val sce</th>
+                    <th title="date validation du service">Date sce</th>
                     <th>Motif service</th>
-                      <th title="date validation UA">Date val UA</th>
+                      <th title="date validation UA">Date UA</th>
                     <th>Motif UA</th>
                     <th>Action</th>
                   </tr>
@@ -803,18 +759,20 @@
                     <td style="text-align: center;"
                       @dblclick="afficherModalModifierBesoinImmo(index)"
                     >{{formatageSomme(parseFloat(BesoinImmo.montant_total)) || 'Non renseigné'}}</td>
-                    <!-- <td
+                    <td
                       @dblclick="afficherModalModifierBesoinImmo(index)"
-                    >{{formaterDate(BesoinImmo.date_jour) || 'Non renseigné'}}</td> -->
+                    >{{formaterDate(BesoinImmo.date_jour) || 'Non renseigné'}}</td>
                    
                      <td
                       @dblclick="afficherModalModifierBesoinImmo(index)"
-                    >{{formaterDate(BesoinImmo.date_jour) || 'Non renseigné'}}</td>
+                    >{{formaterDate(BesoinImmo.date_motif) || 'Non renseigné'}}</td>
+
+                    
                      <td>
                         <button class="btn btn" @click="afficherModalModifierMotifDemandeservice(index)" >                        
-                     <span v-if="BesoinImmo.motif_demande == 0"   class="btn label label-success" >Valider</span>
+                     <span v-if="BesoinImmo.motif_demande == 0"  class="btn label label-info"  >En attente </span>
                       <span 
-                     v-else  class="btn label label-info"> En attente </span>
+                     v-else   class="btn label label-success"> Valider </span>
                       </button>
                     
                     </td>
@@ -863,7 +821,7 @@
                     <td ></td>
                     <td ></td>
                      <td style="font-weight:bold;">Total</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(SommeTotalBesoin))}}</td>
+                    <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(SommeQuantiteNonCouvert))}}</td>
                     
                     
                     <td ></td>
@@ -964,10 +922,11 @@ json_fields: {
       "equipements",
       "familles",
       "articles",
-      "SommeTotalBesoin",
+      "SommeQuantiteNonCouvert",
       "getAfficheArticle",
-      "getAfficheStockArticle",
+      "getPersoStock",
       "stockageArticles",
+      "groupUatypeNorme",
       "groupUaNorme",
       "groupUaNormeFamille",
       "normeEquipements",
@@ -975,448 +934,238 @@ json_fields: {
       "groupUaNormeFonction",
       "getPersoNormeArticle",
       "services",
-      "besoinEquipement"
+      "besoinEquipement",
+      "type_Unite_admins",
+      "getPersoListeDesNorme"
     ]),
     ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
 ...mapGetters("personnelUA", ["all_acteur_depense","acteur_depenses","personnaFonction"]),
 
-
-
-     filtre_besoinImmo() {
-      const st = this.search.toLowerCase();
-      return this.trieUaImmobilisation.filter(type => {
-        return (
-          // type.typeUniteAdmin.libelle.toLowerCase().includes(st) ||
-          type.uniteAdminist.libelle.toLowerCase().includes(st)||
-          type.famille.libelle.toLowerCase().includes(st)
-        );
-      });
+ uniteAdministrativeDynamiques() {
+      return id => {
+        if (id != null && id != "") {
+          return this.getPersoListeDesNorme.filter(element => element.typeua_id == id);
+        }
+      };
     },
-  typeUniteAdministrativeDynamiques() {
+fonctionDynamiques() {
+      return id => {
+        if (id != null && id != "") {
+          return this.getPersoListeDesNorme.filter(element => element.ua_id == id);
+        }
+      };
+    },
+    equipementDynamiques() {
+      return id => {
+        if (id != null && id != "") {
+          return this.getPersoListeDesNorme.filter(element => element.fonction_id == id);
+        }
+      };
+    },
+    familleDynamiques() {
+      return id => {
+        if (id != null && id != "") {
+          return this.getPersoListeDesNorme.filter(element => element.fonction_id == id);
+        }
+      };
+    },
+     normeequipement() {
+      
+      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.familleArt.id == this.formData.famille_id);
+
+      if (norme) {
+        return norme.quantite;
+      }
+      return 0
+    },
+
+qtedemande() {
+      
+      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.familleArt.id == this.formData.famille_id);
+
+      if (norme) {
+        return norme.normedmd;
+      }
+      return 0
+    },
+    qtedemandemodifier() {
+      
+      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.familleArt.id == this.editBesoinImmo.famille_id);
+
+      if (norme) {
+        return norme.normedmd;
+      }
+      return 0
+    },
+
+    totalNormemodifier() {
+      const val = parseFloat(this.qtedemandemodifier) + parseFloat(this.editBesoinImmo.quantite);
+      return parseFloat(val).toFixed(0);
+    },
+totalNorme() {
+      const val = parseFloat(this.qtedemande) + parseFloat(this.formData.quantite);
+      return parseFloat(val).toFixed(0);
+    },
+
+
+
+    normeequipementModifier() {
+      
+      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.familleArt.id == this.editBesoinImmo.famille_id);
+
+      if (norme) {
+        return norme.quantite;
+      }
+      return 0
+    },
+     dureVieEquipement() {
+      
+      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.familleArt.id == this.formData.famille_id);
+
+      if (norme) {
+        return norme.dureviearticle;
+      }
+      return 0
+    },
+     dureVieEquipementModifier() {
+      
+      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.familleArt.id == this.editBesoinImmo.famille_id);
+
+      if (norme) {
+        return norme.dureviearticle;
+      }
+      return 0
+    },
+    
+ articleDynamiques() {
+      return id => {
+        if (id != null && id != "") {
+          return this.getPersoStock.filter(element => element.famill_id == this.formData.famille_id);
+        }
+      };
+    },
+
+
+ articleDynamiquesModifier() {
+      return id => {
+        if (id != null && id != "") {
+          return this.getPersoStock.filter(element => element.famill_id == this.editBesoinImmo.famille_id);
+        }
+      };
+    },
+Historqte() {
+      const val = parseInt(this.formData.quantite);
+      return parseInt(val).toFixed(0);
+    },
+HistorqteModifier() {
+      const val = parseInt(this.editBesoinImmo.quantite);
+      return parseInt(val).toFixed(0);
+    },
+
+totalfamille(){
+  
+    const montant = this.getAfficheArticle.filter(element => element.famille_id == this.formData.famille_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(2); 
+    
+    if(montant) {
+return montant
+    }
+      
+return 0
+    
+  },
+  totalfamilleModifier(){
+  
+    const montant = this.getAfficheArticle.filter(element => element.famille_id == this.editBesoinImmo.famille_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(2); 
+    
+    if(montant) {
+return montant
+    }
+      
+return 0
+    
+  },
+  
+nombreArticle(){
+  
+    const montant = this.getAfficheArticle.filter(element => element.famille_id == this.formData.famille_id).length; 
+    
+    if(montant) {
+return montant
+    }
+      
+return 0
+    
+  },
+
+nombreArticleModifier(){
+  
+    const montant = this.getAfficheArticle.filter(element => element.famille_id == this.editBesoinImmo.famille_id).length; 
+    
+    if(montant) {
+return montant
+    }
+      
+return 0
+    
+  },
+coutMoyen() {
+      const val = parseFloat(this.totalfamille) / parseFloat(this.nombreArticle);
+      return parseFloat(val).toFixed(0);
+    },
+coutMoyenModifier() {
+      const val = parseFloat(this.totalfamilleModifier) / parseFloat(this.nombreArticleModifier);
+      return parseFloat(val).toFixed(0);
+    },
+
+montantTotal() {
+      const val = parseFloat(this.formData.quantite) * parseFloat(this.coutMoyen);
+      return parseFloat(val).toFixed(0);
+    },
+montantTotalModifier() {
+      const val = parseFloat(this.editBesoinImmo.quantite) * parseFloat(this.coutMoyenModifier);
+      return parseFloat(val).toFixed(0);
+    },
+
+
+
+  quantiteEnstock() {
+      
+      const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == this.formData.article_id);
+
+      if (norme) {
+        return norme.quantitestock;
+      }
+      return 0
+    },
+
+     normeEqup() {
+      
+      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.familleArt.id == this.formData.famille_id);
+
+      if (norme) {
+        return norme.id;
+      }
+      return 0
+    },
+     normeEqupmodifier() {
+      
+      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.familleArt.id == this.editBesoinImmo.famille_id);
+
+      if (norme) {
+        return norme.id;
+      }
+      return 0
+    },
+    typeUniteAdministrativeDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.getPersoNormeArticle.filter(
+          return this.getPersoListeDesNorme.filter(
             element => element.typeua_id == id
           );
         }
       };
     },
-    // test() {
-    //  return id => {
-    //     if (QuantiteEnStock(formData.article_id) < this.formData.quantite && this.formData.quantite > this.recupererNorme ) {
-    //       return this.getPersoNormeArticle.filter(
-    //         element => element.typeua_id == id
-    //       );
-    //     }
-    //   };
-    // },
-    fonctionDynamiques() {
-      return id => {
-        if (id != null && id != "") {
-          return this.getPersoNormeArticle.filter(element => element.ua_id == id);
-       
-       }
-      };
-    },
-equipementDynamiques() {
-      return id => {
-        if (id != null && id != "") {
-          return this.getPersoNormeArticle.filter(element => element.fonction_id == id);
-       
-       }
-      };
-    },
-    fammillesDynamiques() {
-      return id => {
-        if (id != null && id != "") {
-          return this.getPersoNormeArticle.filter(element => element.equipe_id == id);
-        }
-      };
-    },
-NombreArticle(){
-  return famille_id => {
-    if(famille_id !=""){
-    const montant = this.getAfficheArticle.filter(element => element.AfficheFamille.id == famille_id).length;
-      if(isNaN(montant)) return null
-      return montant
-
-    }
-  }
-}, 
-MontantParEquipe(){
-  
-    return famille_id => {
-    if(famille_id !=""){
-    var montant = this.getAfficheArticle.filter(element => element.AfficheFamille.id == famille_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(0); 
-      if(isNaN(montant)) return null
-      return montant
-
-     }
-  }
-  
-},  
-CoutMoyen() {
- return famille_id => {
-    if(famille_id !=""){
-      
-    const val = parseFloat((this.getAfficheArticle.filter(element => element.AfficheFamille.id == famille_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(2))/this.getAfficheArticle.filter(element => element.AfficheFamille.id == famille_id).length).toFixed(0); 
-    if (isNaN(val)) return null;
-    return val;
-  
- }
-  }
-    },
-
-acteurDynamiques() {
-      
-      return id => {
-        if (id != null && id != "") {
-          return this.personnaFonction.filter(element => element.fonction_id == id);
-        }
-      };
-    },
-
-
-
-
-
-
- montantTotalarticles() {
-   if(this.formData.famille_id !=""){
-      const val = parseFloat(this.formData.quantite) * parseFloat(this.CoutMoyen(this.formData.famille_id));
-        if (isNaN(val)) return null;
-     return parseFloat(val).toFixed(0);
-    }
-    return null
-
-},
-
-
- montantTotalarticlesModifier() {
-   if(this.editBesoinImmo.famille_id !=""){
-      const val = parseFloat(this.editBesoinImmo.quantite) * parseFloat(this.CoutMoyen(this.editBesoinImmo.famille_id));
-        if (isNaN(val)) return null;
-     return parseFloat(val).toFixed(0);
-    }
-    return null
-
-},
-
-
-
-
-   
- 
-//    fammillesModifierDynamiques() {
-//       return id => {
-//         if (id != null && id != "") {
-//           return this.familles.filter(element => element.equipemt_id == id);
-//         }
-//       };
-//     },
-//  articlesModifierDynamiques() {
-//       return id => {
-//         if (id != null && id != "") {
-//           return this.articles.filter(element => element.famille_id == id);
-//         }
-//       };
-//     },
-
-// uniteAdministrativeDynamiques() {
-//       return id => {
-//         if (id != null && id != "") {
-//           return this.getAfficheStockArticle.filter(element => element.typeua_id == id);
-//         }
-//       };
-//     },
-
- 
-   
-articlesDynamiques() {
-      return id => {
-        if (id != null && id != "") {
-          return this.getPersoNormeArticle.filter(element => element.famil_id == id);
-        }
-      };
-    },
-    
-   recupererNorme() {
-      
-      const norme = this.getPersoNormeArticle.find(normeEquipe => normeEquipe.affichierArticle.id== this.formData.article_id);
-
-      if (norme) {
-        return norme.quantite
-      }
-      return 0
-    },
-     recupererNormeModifier() {
-      
-      const norme = this.getPersoNormeArticle.find(normeEquipe => normeEquipe.affichierArticle.id== this.editBesoinImmo.article_id);
-
-      if (norme) {
-        return norme.quantite
-      }
-      return 0
-    },
-    recupererIdNormeModifier() {
-      
-      const norme = this.getPersoNormeArticle.find(normeEquipe => normeEquipe.affichierArticle.id== this.editBesoinImmo.article_id);
-
-      if (norme) {
-        return norme.id
-      }
-      return 0
-    },
-       
-    recupererIdNorme() {
-      
-      const norme = this.getPersoNormeArticle.find(normeEquipe => normeEquipe.affichierArticle.id== this.formData.article_id);
-
-      if (norme) {
-        return norme.id
-      }
-      return 0
-    },
-      AfficheQtesortant() {
-      const val = parseInt(this.Qtehistorique(this.formData.article_id)) -  parseInt(this.formData.quantite);
-      return parseInt(val).toFixed(0);
-    },
-     AfficheQteDemande() {
-      const val = parseInt(this.QuantiteEnDemande(this.formData.article_id)) -  parseInt(this.formData.quantite);
-      return parseInt(val).toFixed(0);
-    },
-
-    Qtehistorique() {
-       return id => {
-       if (id != null && id != "") {
-
-      const qteEnStock = this.getAfficheStockArticle.find(element => element.articlestock_id == id);
-       // console.log(qteEnStock)
-        if (qteEnStock) {
-      return qteEnStock.histo_qte;
-    }
-    return "0"
-     }
-         };
-
-    },
-
-
-afficheDureVie() {
-      
-      const norme = this.getPersoNormeArticle.find(normeEquipe => normeEquipe.articl_id== this.formData.article_id);
-
-      if (norme) {
-        return norme.dureviearticle
-      }
-      return 0
-    },
-
-
-afficheDureVieModifier() {
-      
-      const norme = this.getPersoNormeArticle.find(normeEquipe => normeEquipe.articl_id== this.editBesoinImmo.article_id);
-
-      if (norme) {
-        return norme.dureviearticle
-      }
-      return 0
-    },
-
-
-
-
-     QuantiteEnStock() {
-       return id => {
-       if (id != null && id != "") {
-
-      const qteEnStock = this.getAfficheStockArticle.find(element => element.articlestock_id == id);
-       // console.log(qteEnStock)
-        if (qteEnStock) {
-      return qteEnStock.quantitestock;
-    }
-    return "0"
-     }
-         };
-
-    },
-      QuantiteEnDemande() {
-       return id => {
-       if (id != null && id != "") {
-
-      const qteEnStock = this.trieUaImmobilisation.find(element => element.article_id == id);
-       // console.log(qteEnStock)
-        if (qteEnStock) {
-      return qteEnStock.quantite;
-    }
-    return "0"
-     }
-         };
-
-    },
-//     dureDeVie() {
-//        return id => {
-//        if (id != null && id != "") {
-
-//       const qteEnStock = this.getAfficheStockArticle.find(element => element.articlestock_id == id);
-//        // console.log(qteEnStock)
-//         if (qteEnStock) {
-//       return qteEnStock.durevie;
-//     }
-//     return "0"
-//      }
-//          };
-// // console.log(qteEnStock)
-// //       if (qteEnStock) {
-// //         return qteEnStock.quantitestock;
-// //       }
-// //       return "0"
-//     },
-QuantiteEnStockModifier() {
-      const qteEnStock = this.getAfficheStockArticle.find(element=> element.quantitestock == this.editBesoinImmo.article_id);
-
-      if (qteEnStock) {
-        return qteEnStock.quantitestock;
-      }
-      return "0"
-    },
-
-
-
-
-
-    veifArticlesExist() {
-      return this.formData.famille_id == "";
-    },
-    
-     
-
-
-  veifUAExist() {
-      return this.formData.typeuniteadminist_id == ""  ;
-    },
-    veifEquipeExist() {
-      return this.formData.uniteadmin_id == ""  ;
-    },
-    veiffamilleExist() {
-      return this.formData.equipe_id == ""  ;
-    },
-veiffonctionExist1() {
-      return this.formData.fonction_id == ""  ;
-    },
-
-
-
-
-
-
-
-
- qteRecu() {
-      const val = parseInt(this.formData.quantite);
-      return parseInt(val).toFixed(0);
-    },
-
-
- Historqte() {
-      const val = parseInt(this.formData.quantite);
-      return parseInt(val).toFixed(0);
-    },
-Historqtemodifier() {
-      const val = parseInt(this.editBesoinImmo.quantite);
-      return parseInt(val).toFixed(0);
-    },
-    fammillesDynamiques1() {
-      return id => {
-        if (id != null && id != "") {
-          return this.familles.filter(element => element.equipemt_id);
-        }
-      };
-    },
-
-    veifEquipementExist() {
-      return this.formData.epuipement_id == "" && this.formData.typeuniteadmin_id == "" ;
-    },
-
-    montantTotalmodif() {
-      const val =
-        parseFloat(this.editBesoinImmo.quantite) *
-        parseFloat(this.editBesoinImmo.prix_unitaire);
-      // parseFloat(this.formData.TVA_id);
-      if (isNaN(val)) return null;
-      return parseFloat(val).toFixed(2);
-    },
-    
-
-
-// afficheQteRestant() {
-      
-
-//       if (this.editBesoinImmo.qte_livre <= this.editBesoinImmo.quantite)
-//         var val =
-//           parseInt(this.editBesoinImmo.quantite) -
-//           parseInt(this.editBesoinImmo.qte_livre);
-//       if (isNaN(val)) return null;
-
-//       if (editBesoinImmo.qte_livre < 0) return (editBesoinImmo.qte_livre = "");
-
-//       return parseInt(val).toFixed(0);
-//     },
-
-afficheQteRestant() {
-      const form = this.editBesoinImmo;
-
-      if (form.qte_affecte <= this.AffichierQuantiteteReel)
-        var val =
-          parseInt(this.editBesoinImmo.quantite) -
-          parseInt(this.editBesoinImmo.qte_livre);
-      if (isNaN(val)) return null;
-
-      if (form.qte_livre < 0) return (form.qte_livre = "");
-
-      return parseInt(val).toFixed(0);
-    },
- 
-
-//  idObjetBesoinImmoAModifierEnStock2() {
-//    //console.log(qteEnStock2)
-//       const qteEnStock2 = this.getAfficheStockArticle.find(
-//         qtreel => qtreel.id == this.recupererIdNorme(this.formData.article_id),
-//        console.log(qteEnStock2)
-//       );
-
-//       if (qteEnStock2) {
-//         return qteEnStock2.id;
-//       }
-//       return 0
-//     },
-    // AfficheQteActuelEnStock() {
-    //   const val = parseInt(this.QuantiteEnStock(this.formData.article_id)) -  parseInt(this.formData.quantite);
-    //   return parseInt(val).toFixed(0);
-    // },
-
-    // filtre_famille() {
-    //   const st = this.search.toLowerCase();
-    //   return this.trieUaImmobilisation.filter(type => {
-    //     return type.designation.toLowerCase().includes(st);
-    //   });
-    // }
-
-  //  recupererIdNorme() {
-  //      return id => {
-  //      if (id != null && id != "") {
-
-  //     const qteEnStock = this.getPersoNormeArticle.find(element => element.typeuniteadminist_id == id);
-  //      // console.log(qteEnStock)
-  //       if (qteEnStock) {
-  //     return qteEnStock.id;
-  //   }
-  //   return "0"
-  //    }
-  //        };
-
-  //   },
   },
     
   methods: {
@@ -1425,7 +1174,8 @@ afficheQteRestant() {
       "ajouterBesoinImmo",
       "modifierBesoinImmo",
       "supprimerBesoinImmo",
-      "modifierQuantiteEnStock2"
+      "modifierQuantiteEnStock2",
+      "modifierQuantiteNormeDmd"
     ]),
     formatageSomme: formatageSomme,
 
@@ -1444,29 +1194,39 @@ afficheQteRestant() {
     },
     // fonction pour vider l'input ajouter
     ajouterBesoinImmoLocal() {
-       var objetPourModifierQuantiteEnStock2 = {
-        id: this.idObjetBesoinImmoAModifierEnStock2,
-        // qteactuelstock: this.AfficheQteActuelEnStock,
-        date_jour: this.formData.date_jour,
-        qte_recu: this.qteRecu,
-        
+ 
+       if (this.formData.quantite > this.normeequipement ) {
+        alert("La norme doit etre superieure au egal a la quantité demande")
       }
-      
-      var nouvelObjet = {
-        ...this.formData,
-        montant_total: this.montantTotalarticles,
-        historiqueqte: this.Historqte,
-        prix_unitaire:this.CoutMoyen(this.formData.famille_id),
-        qtestock:this.AfficheQtesortant,
-        //  qteactuelstock:this.AfficheQteActuelEnStock,
-         qte_recu:this.qteRecu,
-         dure_vie:this.afficheDureVie,
-         norme_id :this.recupererIdNorme,
-         normearticle : this.recupererNorme
-      };
-       this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
+      else if (this.normeequipement <= this.qtedemande  ){
+         alert("Demande déja Effectuer")
+      }
+      else
+      {
+ //  var objetPourModifierQuantiteEnStock2 = {
+      //   id: this.idObjetBesoinImmoAModifierEnStock2,
+      //   // qteactuelstock: this.AfficheQteActuelEnStock,
+      //   date_jour: this.formData.date_jour,
+      //   qte_recu: this.qteRecu,
+        
+      // }
+      var objetPourModifiernormerealise = {
+        id: this.normeEqup,
+        qtedmd: this.totalNorme
+      }
+      this.modifierQuantiteNormeDmd(objetPourModifiernormerealise);
+       var nouvelObjet = {
+      ...this.formData,
+       montant_total: this.montantTotal,
+      historiqueqte: this.Historqte,
+         prix_unitaire:this.coutMoyen,
+      norme_id : this.normeEqup,
+       normearticle : this.normeequipement,
+      dure_vie :this.dureVieEquipement
+       };
+      //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
       this.ajouterBesoinImmo(nouvelObjet);
-      // this.$("#exampleModal").modal('hide');
+     
       
       this.formData = {
         uniteadmin_id: "",
@@ -1486,6 +1246,9 @@ afficheQteRestant() {
         norme_id:"",
         normearticle:""
       };
+       this.$("#exampleModal").modal('hide');
+      }
+     
       // this.afficherModalAffectation()
    
 
@@ -1518,18 +1281,34 @@ afficheQteRestant() {
     },
     // fonction pour vider l'input modification
     modifierBesoinImmoLocal() {
-      var nouvelObjetmodifier = {
+        if (this.formData.quantite > this.normeequipementModifier ) {
+        alert("La norme doit etre superieure au egal a la quantité demande")
+      }
+      //  else if (this.normeequipementModifier <= this.qtedemandemodifier  ){
+      //    alert("Demande déja Effectuer")
+      // }
+      else
+      {
+         var objetPourModifiernormerealise1 = {
+        id: this.normeEqupmodifier,
+        qtedmd: this.totalNormemodifier
+      }
+     
+ var nouvelObjetmodifier = {
         ...this.editBesoinImmo,
-        montant_total: this.montantTotalarticlesModifier,
-        historiqueqte: this.Historqtemodifier,
-         qtestock:this.QuantiteEnStockModifier,
-         dure_vie:this.afficheDureVieModifier,
-         norme_id :this.recupererIdNormeModifier,
-         normearticle : this.recupererNormeModifier
+         montant_total: this.montantTotalModifier,
+      historiqueqte: this.HistorqteModifier,
+         prix_unitaire:this.coutMoyenModifier,
+         normearticle : this.normeequipementModifier,
+         norme_id : this.normeEqupmodifier,
+         dure_vie :this.dureVieEquipementModifier
       };
+       this.modifierQuantiteNormeDmd(objetPourModifiernormerealise1);
       this.modifierBesoinImmo(nouvelObjetmodifier);
       this.$("#modificationModal").modal('hide');
       this.$("#exampleModalMotif").modal('hide');
+      }
+     
     },
     alert() {
       console.log("ok");

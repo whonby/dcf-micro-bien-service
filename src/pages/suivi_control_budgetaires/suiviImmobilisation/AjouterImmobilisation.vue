@@ -281,7 +281,7 @@
                                 <option
                                   v-for="acteurDep in acteurDynamiques(formData.fonction_id)"
                                   :key="acteurDep.id"
-                                  :value="acteurDep.id"
+                                  :value="acteurDep.acteur_depense.id"
                                 >{{acteurDep.acteur_depense.matricule}}-{{acteurDep.acteur_depense.nom}}-{{acteurDep.acteur_depense.prenom}}</option>
                               </select>
                         

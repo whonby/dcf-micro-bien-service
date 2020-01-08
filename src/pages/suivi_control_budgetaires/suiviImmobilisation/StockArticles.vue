@@ -92,11 +92,6 @@
                 </div>
               </div>
             </td>
-            
-
-           
-          </tr>
-          <tr>
             <td>
               <div class="control-group">
                 <label class="control-label">Type équipement:</label>
@@ -112,6 +107,11 @@
                 </div>
               </div>
             </td>
+
+           
+          </tr>
+          <tr>
+            
              <td>
               <div class="control-group">
                 <label class="control-label">Famille:</label>
@@ -142,11 +142,6 @@
                 </div>
               </div>
             </td>
-            
-            
-
-          </tr>
-          <tr>
             <td>
               <div class="control-group">
                 <label class="control-label">Quantite en entrant</label>
@@ -161,8 +156,13 @@
                 </div>
               </div>
             </td>
+            
+
+          </tr>
+          <tr>
+            
              <td>
-              <div class="control-group">
+              <!-- <div class="control-group">
                 <label class="control-label">Durée de vie</label>
                 <div class="controls">
                   <input
@@ -173,7 +173,7 @@
                     placeholder="Durée de vie"
                   />
                 </div>
-              </div>
+              </div> -->
               <input
                     type="hidden"
                    :value="Historqte"
@@ -216,14 +216,14 @@
 
     <!--///////////////////////////////////////// debut modal de modification //////////////////////////////-->
 
-    <div id="modificationModal" class="modal hide taillemodal">
+    <div id="modificationModal" class="modal hide taillemodalMod">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Modifier stock</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
-         <tr>
+         <!-- <tr> -->
              <!-- <td>
               <div class="control-group">
                 <label class="control-label">Type Unite administrative:</label>
@@ -272,7 +272,7 @@
             </td> -->
 
            
-          </tr>
+          <!-- </tr> -->
           <tr>
             <td>
               <div class="control-group">
@@ -304,21 +304,7 @@
                 </div>
               </div>
             </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Article:</label>
-                <div class="controls">
-                  <select  v-model="editStock.articlestock_id">
-                  
-                    <option
-                      v-for="famil in articlesDynamiques(editStock.famill_id)"
-                      :key="famil.id"
-                      :value="famil.id"
-                    >{{famil.libelle}}</option>
-                  </select>
-                </div>
-              </div>
-            </td>
+           
             
             <!-- <td>
               <div class="control-group">
@@ -338,7 +324,21 @@
 
           </tr>
           <tr>
-            
+             <td>
+              <div class="control-group">
+                <label class="control-label">Article:</label>
+                <div class="controls">
+                  <select  v-model="editStock.articlestock_id">
+                  
+                    <option
+                      v-for="famil in articlesDynamiques(editStock.famill_id)"
+                      :key="famil.id"
+                      :value="famil.id"
+                    >{{famil.libelle}}</option>
+                  </select>
+                </div>
+              </div>
+            </td>
              <!-- <td>
               <div class="control-group">
                 <label class="control-label">Date d'entree :</label>
@@ -365,20 +365,7 @@
                 </div>
               </div>
             </td> -->
-             <td>
-              <div class="control-group">
-                <label class="control-label">Durée de vie</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    v-model="editStock.durevie"
-                    
-                    class="span"
-                    placeholder="Durée de vie"
-                  />
-                </div>
-              </div>
-            </td>
+             
             <td>
               
               <div class="control-group">
@@ -434,16 +421,16 @@
               </div>
             </div>
 
-            <div class="widget-content nopadding" v-if="getAfficheStockArticle.length && articles.length && familles.length && uniteAdministratives.length ">
+            <div class="widget-content nopadding" v-if="getPersoStock.length && articles.length && familles.length && uniteAdministratives.length ">
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                     <!-- <th>Type Unite administrative</th> -->
-                    <!-- <th title="unite administrative">Ua</th>-->
+                     <!-- <th>Type Unite administrative</th>  -->
+                    <th title="unite administrative">Ua</th>
                      <th>Equipement Type</th> 
                      <th>Famille</th>
                     <th>Article</th>
-                    <th>Durée de vie</th>
+                    <!-- <th>Durée de vie</th> -->
                     <th title="quantite en stock">Qté en stock</th>
                      <th>Date d'entrée</th>
                     <th title="quantite entrant">Qté entrée</th>
@@ -458,7 +445,7 @@
                 <tbody>
                      <tr
                     class="odd gradeX"
-                    v-for="(stock, index) in getAfficheStockArticle"
+                    v-for="(stock, index) in getPersoStock"
                     :key="stock.id"
                   >
 
@@ -466,10 +453,10 @@
                    
                     <!-- <td
                       @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.typeUniteAdministrative.libelle || 'Non renseigné'}}</td> -->
-                    <!-- <td
+                    >{{stock.typeuniteAdminist.libelle || 'Non renseigné'}}</td>  -->
+                    <td
                       @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.uniteAdm.libelle || 'Non renseigné'}}</td>-->
+                    >{{stock.uniteAdminist.libelle || 'Non renseigné'}}</td>
                      <td
                       @dblclick="afficherModalModifierStock(index)"
                     >{{stock.AfficheTypeequipement.libelle || 'Non renseigné'}}</td> 
@@ -479,9 +466,9 @@
                      <td
                       @dblclick="afficherModalModifierStock(index)"
                     >{{stock.AfficheArticle.libelle || 'Non renseigné'}}</td>
-                     <td style="text-align: center;"
+                     <!-- <td style="text-align: center;"
                       @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.durevie || 'Non renseigné'}}</td>
+                    >{{stock.durevie || 'Non renseigné'}}</td> -->
                     <td style="text-align: center;"
                       @dblclick="afficherModalModifierStock(index)"
                     >{{stock.quantitestock || 'Non renseigné'}}</td>
@@ -496,16 +483,16 @@
                     >{{formaterDate(stock.date_sortie) || 'Non renseigné'}}</td>
                     <td style="text-align: center;"
                       @dblclick="afficherModalModifierStock(index)"
-                    >{{ stock.histo_qte - stock.quantitestock  || '0' }}</td>
+                    >{{ '0' }}</td>
                   
                      <!-- <td
                       @dblclick="afficherModalModifierStock(index)"
                     >{{stock.durevie || 'Non renseigné'}} Ans</td> -->
 
                     <td>
-                        <button class="btn btn-inverse" @click="afficherModalStock(index)">
+                        <button class="btn btn-inverse" @click="afficherModalStock(index)" title="ajouter quantite entrant">
                         <span>
-                          <i class=" icon-signal"></i>
+                          <i class=" icon-edit"></i>
                         </span>
                       </button>
                       <button class="btn btn-danger" @click="supprimerStock(stock.id)">
@@ -617,7 +604,7 @@ quantite: {
 // },
   computed: {
     ...mapGetters("SuiviImmobilisation", [
-    "getAfficheStockArticle",
+    "getPersoStock",
       "equipements",
       "familles",
       "articles",
@@ -634,7 +621,7 @@ quantite: {
 
      filtre_Stock() {
       const st = this.search.toLowerCase();
-      return this.getAfficheStockArticle.filter(type => {
+      return this.getPersoStock.filter(type => {
         return (
           type.typeUniteAdministrative.libelle.toLowerCase().includes(st) ||
           type.uniteAdministrative.libelle.toLowerCase().includes(st)
@@ -785,7 +772,7 @@ veifArticlesExist() {
         keyboard: false
       });
 
-      this.editStock = this.getAfficheStockArticle[index];
+      this.editStock = this.getPersoStock[index];
     },
     afficherModalStock(index) {
       this.$("#exampleModalStock").modal({
@@ -793,7 +780,7 @@ veifArticlesExist() {
         keyboard: false
       });
 
-      this.editStock = this.getAfficheStockArticle[index];
+      this.editStock = this.getPersoStock[index];
     },
 
      modifierStockEntrant() {
@@ -834,6 +821,10 @@ veifArticlesExist() {
 .taillemodal {
   width: 800px;
   margin: 0 -380px;
+}
+.taillemodalMod{
+   width: 500px;
+  margin: 0 -200px;
 }
 .sommecolor{
   background-color: red;

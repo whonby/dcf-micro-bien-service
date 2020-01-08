@@ -260,10 +260,10 @@
                               >
                                 <option value>Sélectionner</option>
                                 <option
-                                  v-for="dynaFonction in fonctionDynamiques(formData.uniteadministrative_id)"
+                                  v-for="dynaFonction in fonctionDynamiques(formData.famillearticle_id)"
                                   :key="dynaFonction.id"
-                                  :value="dynaFonction.fonctionActeur.id"
-                                >{{dynaFonction.fonctionActeur.libelle}}</option>
+                                  :value="dynaFonction.afficherFonction.id"
+                                >{{dynaFonction.afficherFonction.libelle}}</option>
                               </select>
                             </div>
                           </div>
@@ -281,7 +281,7 @@
                                 <option
                                   v-for="acteurDep in acteurDynamiques(formData.fonction_id)"
                                   :key="acteurDep.id"
-                                  :value="acteurDep.id"
+                                  :value="acteurDep.acteur_depense.id"
                                 >{{acteurDep.acteur_depense.matricule}}-{{acteurDep.acteur_depense.nom}}-{{acteurDep.acteur_depense.prenom}}</option>
                               </select>
                         
@@ -739,7 +739,7 @@ export default {
         montant_evaluation:"0",
         montant_cession:"0",
         montant_amortissement_anterieur:"0",
-
+anneamortiss:""
 
       },
 
@@ -839,7 +839,15 @@ AfficheQteActuelEnStock() {
         }
       };
     },
-    
+    fonctionDynamiques() {
+      return id => {
+        if (id != null && id != "") {
+          return this.listeBesoinValider.filter(
+            element => element.famille_id == id
+          );
+        }
+      };
+    },
    
 ArticlesDynamiques() {
       return id => {
@@ -874,14 +882,14 @@ typeUniteAdministrativeDynamiques() {
         }
       };
     },
-      fonctionDynamiques() {
+    //   fonctionDynamiques() {
       
-      return id => {
-        if (id != null && id != "") {
-          return this.personnaFonction.filter(element => element.unite_administrative_id == id);
-        }
-      };
-    },
+    //   return id => {
+    //     if (id != null && id != "") {
+    //       return this.personnaFonction.filter(element => element.unite_administrative_id == id);
+    //     }
+    //   };
+    // },
     acteurDynamiques() {
       
       return id => {
@@ -921,7 +929,7 @@ veifuaExist() {
       if (dureVie1) {
         return dureVie1.dure_vie;
       }
-      console.log(dureVie1)
+      // console.log(dureVie1)
       return 0
     },
 
@@ -1197,7 +1205,7 @@ totalqteRealise() {
         montant_actu: this.AffichierTotalActuel
       }
      var objetPourModifierQteRealise = {
-        id: this.idObjetBesoinImmoAModifierQteRealise,
+        id: this.recupererIdBesoin,
          qte_real: this.totalqteRealise
       }
 
@@ -1219,7 +1227,8 @@ totalqteRealise() {
         qte_actuel: this.AfficheQteActuel,
         qte_stock:this.AffichierQuantiteEnStock,
         exercice_budgetaire:this.anneeAmort,
-      
+      duree:this.AffichierDureVie,
+      anneamortiss:this.anneeAmortissement
 
       };
 
@@ -1284,3 +1293,4 @@ fonction_id:"",
   width: 20px;
 }
 </style>
+qte_real

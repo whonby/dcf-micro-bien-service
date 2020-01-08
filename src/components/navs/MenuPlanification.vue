@@ -63,12 +63,12 @@
           </li>
          
            
-           <li>
+           <!-- <li>
             <router-link :to="{name: ''}" tag="a">
               <i class="icon-bar-chart"></i>
            Réferentiel des prix
             </router-link>
-          </li>
+          </li> -->
            <li>
             <router-link :to="{name: 'typeActeDepense'}" tag="a">
               <i class="icon-bar-chart"></i>

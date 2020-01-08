@@ -27,19 +27,25 @@ const type_Unite_admins = state => state.type_Unite_admins
 // )
 
 // }
-
+export const afficheNiveauPlanProg = state =>
+    state.plans_programmes.filter(
+        affichenaturedep => affichenaturedep.code.length ==  5
+           
+        
+        
+    );
 export const afficheNatureTransfert = state =>
     state.grandes_natures.filter(
         affichenaturedep => affichenaturedep.code != 3
     );
     export const afficheServiceGestionnaireNiveau4 = state =>
     state.services_gestionnaires.filter(
-        afficheSeviceG => afficheSeviceG.structure_administrative_id == 4
+        afficheSeviceG => afficheSeviceG.code.length == 5 
     );
     export const afficheLocalisationGeoNiveau5 = state =>
              state.localisations_geographiques.filter(
                afficheSeviceG =>
-                 afficheSeviceG.structure_localisation_geographique_id == 6
+                     afficheSeviceG.code.length == 4
              );
 
 export {

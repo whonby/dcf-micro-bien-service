@@ -498,7 +498,7 @@
                     <td ></td>
                     <td ></td>
                     <td style="font-weight:bold;">Montant Total</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(SommeTotalBesoin))}}</td>
+                    <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(SommeQuantiteNonCouvert))}}</td>
                     <td ></td>
                     <td></td>
                     
@@ -586,7 +586,7 @@ json_fields: {
       "equipements",
       "familles",
       "articles",
-      "SommeTotalBesoin",
+      "SommeQuantiteNonCouvert",
       "getAfficheArticle"
     ]),
     ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
