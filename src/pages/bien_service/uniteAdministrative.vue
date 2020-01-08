@@ -218,7 +218,7 @@
 </template>
   
 <script>
-// import { mapGetters, mapActions } from "vuex";
+ import { mapGetters, mapActions } from "vuex";
 // import moment from "moment";
 // import { formatageSomme } from "../../../Repositories/Repository";
 
@@ -264,10 +264,10 @@ export default {
 //     )
 // },
   computed: {
-    // ...mapGetters("SuiviImmobilisation", [
+     ...mapGetters("bienService", [
    
      
-    // ]),
+     ]),
     // ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
     // ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
 
@@ -278,12 +278,12 @@ export default {
    
   },
   methods: {
-    // ...mapActions("SuiviImmobilisation", [
+     ...mapActions("bienService", [
     //   "getAllStock",
     //   "ajouterStock",
     //   "modifierStock",
     //   "supprimerStock"
-    // ]),
+     ]),
     // formatageSomme: formatageSomme,
 
     //afiicher modal ajouter
@@ -297,9 +297,9 @@ export default {
        // afficher modal de modification
     
 
-    // formaterDate(date) {
-    //   return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
-    // },
+    formaterDate(date) {
+      return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+    },
     
     ExporterEnExel(){
       this.$refs.excel.click()

@@ -217,7 +217,7 @@
 </template>
   
 <script>
-// import { mapGetters, mapActions } from "vuex";
+ import { mapGetters, mapActions } from "vuex";
 export default {
   name:'banque',
   data() {
@@ -250,21 +250,21 @@ export default {
   },
 
   computed: {
-    // ...mapGetters("SuiviImmobilisation", ["equipements","familles"]),
-    // filtre_equipement() {
-    //   const st = this.search.toLowerCase();
-    //   return this.equipements.filter(type => {
-    //     return (
+     ...mapGetters("bienService", []),
+    filtre_equipement() {
+      const st = this.search.toLowerCase();
+      return this.equipements.filter(type => {
+        return (
           
-    //       type.libelle.toLowerCase().includes(st)
-    //     );
-    //   });
-    // }
+          type.libelle.toLowerCase().includes(st)
+        );
+      });
+    }
   },
   methods: {
-    // ...mapActions("SuiviImmobilisation", [
+    ...mapActions("bienService", [
      
-    // ]),
+    ]),
     //afiicher modal ajouter
     afficherModalAjouterTitre() {
       this.$("#exampleModal").modal({

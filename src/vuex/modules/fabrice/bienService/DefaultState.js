@@ -21,12 +21,26 @@ const defaultState = {
     typeAnalyses:[],
     typeUa:[],
     uniteAdministratives:[],
-    uniteZones: [],
-    typeProcedures: []
+    uniteZones:[],
+
+    ligneBudgetaires:[],
+    DossierCandidats:[],
+    livrables:[],
+      
+    zoneGeographiques:[],
+    typeTextJuridiques:[],
+    realiteServiceFaits:[],
+    text_juridiques:[],
+    autresTexteJuridiques:[],
+    typeTypeProcedures:[],
+    procedurePassations:[],
+    appelOffres:[],
+    typeMarches:[],
+    modePassations:[]
 
 
-    
-    
+
+
 }
 
 export default defaultState;

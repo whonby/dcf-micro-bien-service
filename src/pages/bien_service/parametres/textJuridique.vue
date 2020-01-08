@@ -4,60 +4,53 @@
     <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">Ã—</button>
-        <h3>Ajouter Fonction Occupe</h3>
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter Texte juridique</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">code_fonction</label>
+            <label class="control-label">libelle</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="formData.code_fonction"
+                v-model="formData.libelle_text"
                 class="span"
-                placeholder="Saisir le code_fonction"
+                placeholder="Saisir le libelle_type"
               />
             </div>
           </div>
+         
           <div class="control-group">
-            <label class="control-label">libelle_fonction</label>
+            <label class="control-label">Date</label>
+            <div class="controls">
+              <input
+                type="date"
+                v-model="formData.date_effet_text"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+
+           <div class="control-group">
+            <label class="control-label">Objet text juridique</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="formData.libelle_fonction"
+                v-model="formData.objet_text"
                 class="span"
-                placeholder="Saisir libelle_fonction"
+                placeholder="Saisir le libelle_type"
               />
             </div>
           </div>
-          <div class="control-group">
-            <label class="control-label">date_debut_fonction</label>
-            <div class="controls">
-              <input
-                type="date"
-                v-model="formData.date_debut_fonction"
-                class="span"
-                placeholder="Saisir  date_debut_fonction"
-              />
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label">date_fin_fonction</label>
-            <div class="controls">
-              <input
-                type="date"
-                v-model="formData.date_fin_fonction"
-                class="span"
-                placeholder="Saisir  date_fin_fonction"
-              />
-            </div>
-          </div>
+          
+         
          </form>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterFamilleLocal(formData)"
+          @click.prevent="ajouterModalTypeAnalyseLocal"
           class="btn btn-primary"
           href="#"
          
@@ -71,60 +64,52 @@
 
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">Ã—</button>
-        <h3>Modifier Fonction Occupe</h3>
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Modifier Text jridique</h3>
       </div>
       <div class="modal-body">
-          <form class="form-horizontal">
-          <div class="control-group">
-            <label class="control-label">code_fonction</label>
+        <form class="form-horizontal">
+            <div class="control-group">
+            <label class="control-label">libelle</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="editFonctionOccupe.code_fonction"
+                v-model="editTextJuridique.	libelle_text"
                 class="span"
-                placeholder="Saisir le code_fonction"
+                placeholder="Saisir le libelle_type"
               />
             </div>
           </div>
-          <div class="control-group">
-            <label class="control-label">libelle_fonction</label>
+
+           <div class="control-group">
+            <label class="control-label">Date</label>
+            <div class="controls">
+              <input
+                type="date"
+                v-model="editTextJuridique.date_effet_text"
+                class="span"
+                placeholder=""
+              />
+            </div>
+          </div>
+
+           <div class="control-group">
+            <label class="control-label">Objet</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="editFonctionOccupe.libelle_fonction"
+                v-model="editTextJuridique.objet_text"
                 class="span"
-                placeholder="Saisir libelle_fonction"
+                placeholder="Saisir le libelle_type"
               />
             </div>
           </div>
-          <div class="control-group">
-            <label class="control-label">date_debut_fonction</label>
-            <div class="controls">
-              <input
-                type="date"
-                v-model="editFonctionOccupe.date_debut_fonction"
-                class="span"
-                placeholder="Saisir  date_debut_fonction"
-              />
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label">date_fin_fonction</label>
-            <div class="controls">
-              <input
-                type="date"
-                v-model="editFonctionOccupe.date_fin_fonction"
-                class="span"
-                placeholder="Saisir  date_fin_fonction"
-              />
-            </div>
-          </div>
-         </form>
+         
+        </form>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierFamilleLocal(editFonctionOccupe)"
+          @click.prevent="modifierModalTypeAnalyseLocal(editTextJuridique)"
           class="btn btn-primary"
           href="#"
         
@@ -143,9 +128,9 @@
             class="btn btn-default pull-right"
             style="cursor:pointer;"
             :fields="json_fields"
-            title="Liste Types Ã©quipements"
+            title="Liste Types équipements"
             :data="filtre_equipement"
-            name="Liste des types Ã©quipements"
+            name="Liste des types équipements"
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
@@ -154,7 +139,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste fonction Occupe</h5>
+              <h5>Liste des texts juridiques</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -165,15 +150,32 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>code_fonction</th>
-                    <th>libelle_fonction</th>
-                     <th>date_debut_fonction</th>
-                    <th>date_fin_fonction</th>
+                    <th>libelle</th>
+                    <th>Date</th>
+                    <th>Objet</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                 
+                  <tr class="odd gradeX" v-for="(textJuridique, index) in 
+                text_juridiques"
+                 :key="textJuridique.id">
+                 <td @dblclick="afficherModalModifiertextJuridique(index)">
+                   {{textJuridique.libelle_text || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifiertextJuridique(index)">
+                   {{formaterDate(textJuridique.date_effet_text) || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifiertextJuridique(index)">
+                   {{textJuridique.objet_text || 'Non renseigné'}}</td>
+                  
+
+
+                     <div class="btn-group">
+              <button @click.prevent="supprimerTextJuridique(textJuridique.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+             
+            </div>
+
+                       </tr>
                 </tbody>
               </table>
               
@@ -183,8 +185,8 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab>
- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTitre()">Open</button>
+    <fab :actions="fabActions" @cache="afficherModalAjouTypeAnalyse" main-icon="apps" bg-color="green"></fab>
+ <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouTypeAnalyse()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
@@ -193,8 +195,9 @@
   
 <script>
  import { mapGetters, mapActions } from "vuex";
+ import moment from 'moment';
 export default {
-  name:'banque',
+  name:'type facture',
   data() {
     return {
       fabActions: [
@@ -211,58 +214,91 @@ export default {
       ],
     //   json_fields: {
     //     CODE: "code",
-    //     LIBELLE: "libelle"
+    //     libelle: "libelle"
     //   },
 
       formData: {
+            libelle_text:"",
+            date_effet_text:"",
+            objet_text:""
+
         
       },
-      editEquipement: {
-     
+      editTextJuridique: {
+        	 libelle_text:"",
+            date_effet_text:"",
+            objet_text:""
       },
       search: ""
     };
   },
 
   computed: {
-     ...mapGetters("bienService", []),
-    // filtre_equipement() {
-    //   const st = this.search.toLowerCase();
-    //   return this.equipements.filter(type => {
-    //     return (
-          
-    //       type.libelle.toLowerCase().includes(st)
-    //     );
-    //   });
-    // }
+     ...mapGetters("bienService", ['text_juridiques']),
+
+//     textJuridiqueFiltre()  {
+     
+//         const searchTerm = this.search.toLowerCase();
+
+// return this.text_juridiques.filter((item) => {
+  
+//      return item.libelle_text.toLowerCase().includes(searchTerm) 
+     
+    
+
+  
+  
+
+//    }
+// )
+//     }
   },
   methods: {
-    ...mapActions("bienService", [
+    ...mapActions("bienService", ['ajouterTextJuridique','modifierTextJuridique',
+    'supprimerTextJuridique'
      
     ]),
     //afiicher modal ajouter
-    afficherModalAjouterTitre() {
+    afficherModalAjouTypeAnalyse() {
       this.$("#exampleModal").modal({
         backdrop: "static",
         keyboard: false
       });
     },
     // fonction pour vider l'input ajouter
+    ajouterModalTypeAnalyseLocal(){
+this.ajouterTextJuridique(this.formData)
+this.formData = {
+	 libelle_text:"",
+            date_effet_text:"",
+            objet_text:""
+}
+
+    },
     
     // afficher modal de modification
-    // afficherModalModifierFamille(index) {
-    //   this.$("#modificationModal").modal({
-    //     backdrop: "static",
-    //     keyboard: false
-    //   });
+    afficherModalModifiertextJuridique(index) {
+      this.$("#modificationModal").modal({
+        backdrop: "static",
+        keyboard: false
+      });
 
-    //   this.editEquipement = this.equipements[index];
-    // },
-    // fonction pour vider l'input modification
-    
-    alert() {
-      console.log("ok");
+      this.editTextJuridique = this.text_juridiques[index];
     },
+    // fonction pour vider l'input modification
+    modifierModalTypeAnalyseLocal(){
+      this.modifierTextJuridique(this.editTextJuridique)
+      this.$('#modificationModal').modal('hide');
+    },
+
+    // formatage date
+formaterDate(date) {
+      return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+    },
+    
+    // alert() {
+    //   console.log("ok");
+    // },
      ExporterEnExel(){
       this.$refs.excel.click()
     }

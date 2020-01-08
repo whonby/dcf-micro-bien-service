@@ -5,29 +5,30 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Type Procedure</h3>
+        <h3>Ajouter type marche</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">type procedure</label>
+            <label class="control-label">libelle</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.libelle"
                 class="span"
-                placeholder="Saisir le libelle"
+                placeholder="Saisir le libelle_type"
               />
             </div>
           </div>
          
-          
+      
+
          
          </form>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterTypeProcedureLocal(formData)"
+          @click.prevent="ajouterModalTypeAnalyseLocal"
           class="btn btn-primary"
           href="#"
          
@@ -42,27 +43,31 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Type Procedure</h3>
+        <h3>Modifier Type marche</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
             <div class="control-group">
-            <label class="control-label">type procedure</label>
+            <label class="control-label">libelle</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="editTypeProcedure.libelle"
                 class="span"
-                placeholder="Saisir le libelle"
+                placeholder="Saisir le libelle_type"
               />
             </div>
           </div>
+
+       
+
+         
          
         </form>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierTypeProcedureLocal(editTypeProcedure)"
+          @click.prevent="modifierModalTypeAnalyseLocal(editTypeProcedure)"
           class="btn btn-primary"
           href="#"
         
@@ -77,22 +82,22 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          <download-excel
+          <!-- <download-excel
             class="btn btn-default pull-right"
             style="cursor:pointer;"
             :fields="json_fields"
-            title="Liste Types procedure"
-            :data="typeProcedures"
-            name="Liste Types procedure"
+            title="Liste Types équipements"
+            :data="filtre_equipement"
+            name="Liste des types équipements"
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-          </download-excel>
+          </download-excel> -->
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des type Procedure</h5>
+              <h5>Liste mode de passation</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -103,31 +108,27 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>type Procedure</th>
-                   
-                   
+                    <th>libelle</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr
-                    class="odd gradeX"
-                    v-for="(typeProced, index) in typeProcedures"
-                    :key="typeProced.id"
-                  >
-                    <td
-                      @dblclick="afficherModalModifiertypeProcedure(index)"
-                    >{{typeProced.libelle || 'Non renseigné'}}</td>
-                   
+                  <tr class="odd gradeX" v-for="(typeProcedure, index) in 
+                typeProcedureFiltre"
+                 :key="typeProcedure.id">
+                 <td @dblclick="afficherModalModifiertextJuridique(index)">
+                   {{typeProcedure.libelle || 'Non renseigné'}}</td>
+                  
+                  
 
-                    <td>
-                      <button class="btn btn-danger" @click="supprimerTypeProcedure(typeProced.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
-                    </td>
-                  </tr>
+
+                     <div class="btn-group">
+              <button @click.prevent="supprimerModePassation(typeProcedure.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+             
+            </div>
+
+                       </tr>
                 </tbody>
               </table>
               
@@ -137,8 +138,8 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterTypeProcedure" main-icon="apps" bg-color="green"></fab>
- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTypeProcedure()">Open</button>
+    <fab :actions="fabActions" @cache="afficherModalTypeProcedure" main-icon="apps" bg-color="green"></fab>
+ <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalTypeProcedure()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
@@ -146,9 +147,10 @@
 </template>
   
 <script>
-import { mapGetters, mapActions } from "vuex";
+ import { mapGetters, mapActions } from "vuex";
+//  import moment from 'moment';
 export default {
-  name:'typeprocedure',
+  name:'type facture',
   data() {
     return {
       fabActions: [
@@ -163,78 +165,89 @@ export default {
         //   class: ""
         // }
       ],
-      json_fields: {
-       
-        LIBELLE: "libelle"
-      },
+    //   json_fields: {
+    //     CODE: "code",
+    //     libelle: "libelle"
+    //   },
 
       formData: {
-        libelle:""
+            libelle:"",
+            
+
+        
       },
       editTypeProcedure: {
-     libelle:""
+        	 libelle:"",
+            
       },
       search: ""
     };
   },
 
   computed: {
-     ...mapGetters("bienService", ["typeProcedures"]),
-    // filtre_type_procedure() {
-    //   const st = this.search.toLowerCase();
-    //   return this.typeProcedures.filter(type => {
-    //     return (
-          
-    //       type.libelle.toLowerCase().includes(st)
-    //     );
-    //   });
-    // }
+     ...mapGetters("bienService", ['modePassations']),
+
+    typeProcedureFiltre()  {
+     
+        const searchTerm = this.search.toLowerCase();
+
+return this.modePassations.filter((item) => {
+  
+     return item.libelle.toLowerCase().includes(searchTerm) 
+     
+    
+
+  
+  
+
+   }
+)
+    }
   },
   methods: {
-    ...mapActions("bienService", [
-     "getTypeProcedure",
-     "ajouterTypeProcedure",
-     "modifierTypeProcedure",
-     "supprimerTypeProcedure"
+    ...mapActions("bienService", ['ajouterModePassation','modifierModePassation',
+    'supprimerModePassation'
+     
     ]),
-    supprimerTypeProcedure(id){
-      this.supprimerTypeProcedure(id)
-    },
-     ajouterTypeProcedureLocal() {
-      this.ajouterTypeProcedure(this.formData);
-
-      this.formData = {
-      
-        libelle: ""
-      };
-    },
-     modifierTypeProcedureLocal() {
-      this.modifierTypeProcedure(this.editTypeProcedure);
-      this.$("#modificationModal").modal('hide');
-    },
     //afiicher modal ajouter
-    afficherModalAjouterTypeProcedure() {
+    afficherModalTypeProcedure() {
       this.$("#exampleModal").modal({
         backdrop: "static",
         keyboard: false
       });
     },
     // fonction pour vider l'input ajouter
+    ajouterModalTypeAnalyseLocal(){
+this.ajouterModePassation(this.formData)
+this.formData = {
+	libelle:""
+}
+
+    },
     
     // afficher modal de modification
-    afficherModalModifiertypeProcedure(index) {
+    afficherModalModifiertextJuridique(index) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editTypeProcedure = this.typeProcedures[index];
+      this.editTypeProcedure = this.modePassations[index];
     },
     // fonction pour vider l'input modification
-    
-    alert() {
-      console.log("ok");
+    modifierModalTypeAnalyseLocal(){
+      this.modifierModePassation(this.editTypeProcedure)
+      this.$('#modificationModal').modal('hide');
     },
+
+    // formatage date
+// formaterDate(date) {
+//       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+//     },
+    
+    // alert() {
+    //   console.log("ok");
+    // },
      ExporterEnExel(){
       this.$refs.excel.click()
     }

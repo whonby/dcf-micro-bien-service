@@ -4,17 +4,17 @@
     <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">Ã—</button>
-        <h3>Ajouter Type Acte Depense</h3>
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter Type Facture</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">Type Acte Depense</label>
+            <label class="control-label">type facture</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="formData.libelle_type"
+                v-model="formData.libelle"
                 class="span"
                 placeholder="Saisir le libelle_type"
               />
@@ -27,7 +27,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterFamilleLocal(formData)"
+          @click.prevent="ajouterModalTypeFactureLocal"
           class="btn btn-primary"
           href="#"
          
@@ -41,17 +41,17 @@
 
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">Ã—</button>
-        <h3>Modifier Type Acte Depense</h3>
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Modifier Type Facture</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
             <div class="control-group">
-            <label class="control-label">type Acte Depense</label>
+            <label class="control-label">type facture</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="editEquipement.libelle_type"
+                v-model="editTypefacture.libelle"
                 class="span"
                 placeholder="Saisir le libelle_type"
               />
@@ -62,7 +62,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierFamilleLocal(editEquipement)"
+          @click.prevent="modifierModalTypeFactureLocal(editTypefacture)"
           class="btn btn-primary"
           href="#"
         
@@ -81,9 +81,9 @@
             class="btn btn-default pull-right"
             style="cursor:pointer;"
             :fields="json_fields"
-            title="Liste Types Ã©quipements"
+            title="Liste Types équipements"
             :data="filtre_equipement"
-            name="Liste des types Ã©quipements"
+            name="Liste des types équipements"
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
@@ -92,7 +92,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des type Acte Depense</h5>
+              <h5>Liste des type de factures</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -103,14 +103,27 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>type acte depense</th>
-                   
-                   
+                    <th>libelle</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                 
+                  <tr class="odd gradeX" v-for="(typeFacture, index) in 
+                typeFacturesFiltre"
+                 :key="typeFacture.id">
+                 <td @dblclick="afficherModalModifierTypefactiure(index)">
+                   {{typeFacture.libelle || 'Non renseigné'}}</td>
+                  
+
+
+
+                     <div class="btn-group">
+              <button @click.prevent="supprimerTypeFacture(typeFacture.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+             
+            </div>
+
+                       </tr>
                 </tbody>
               </table>
               
@@ -120,8 +133,8 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab>
- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTitre()">Open</button>
+    <fab :actions="fabActions" @cache="afficherModalAjouterTypeFacture" main-icon="apps" bg-color="green"></fab>
+ <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTypeFacture()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
@@ -129,9 +142,9 @@
 </template>
   
 <script>
-// import { mapGetters, mapActions } from "vuex";
+ import { mapGetters, mapActions } from "vuex";
 export default {
-  name:'type acte depense',
+  name:'type facture',
   data() {
     return {
       fabActions: [
@@ -152,9 +165,11 @@ export default {
     //   },
 
       formData: {
+        	libelle:""
         
       },
-      editEquipement: {
+      editTypefacture: {
+        	libelle:""
      
       },
       search: ""
@@ -162,40 +177,59 @@ export default {
   },
 
   computed: {
-    // ...mapGetters("SuiviImmobilisation", ["equipements","familles"]),
-    // filtre_equipement() {
-    //   const st = this.search.toLowerCase();
-    //   return this.equipements.filter(type => {
-    //     return (
-          
-    //       type.libelle.toLowerCase().includes(st)
-    //     );
-    //   });
-    // }
+     ...mapGetters("bienService", ['typeFactures']),
+    typeFacturesFiltre()  {
+     
+        const searchTerm = this.search.toLowerCase();
+
+return this.typeFactures.filter((item) => {
+  
+     return item.libelle.toLowerCase().includes(searchTerm) 
+     
+    
+
+  
+  
+
+   }
+)
+    }
   },
   methods: {
-    // ...mapActions("SuiviImmobilisation", [
+    ...mapActions("bienService", ['ajouterTypeFacture','modifierTypeFacture',
+    'supprimerTypeFacture'
      
-    // ]),
+    ]),
     //afiicher modal ajouter
-    afficherModalAjouterTitre() {
+    afficherModalAjouterTypeFacture() {
       this.$("#exampleModal").modal({
         backdrop: "static",
         keyboard: false
       });
     },
     // fonction pour vider l'input ajouter
+    ajouterModalTypeFactureLocal(){
+this.ajouterTypeFacture(this.formData)
+this.formData = {
+	libelle:"",
+}
+
+    },
     
     // afficher modal de modification
-    // afficherModalModifierFamille(index) {
-    //   this.$("#modificationModal").modal({
-    //     backdrop: "static",
-    //     keyboard: false
-    //   });
+    afficherModalModifierTypefactiure(index) {
+      this.$("#modificationModal").modal({
+        backdrop: "static",
+        keyboard: false
+      });
 
-    //   this.editEquipement = this.equipements[index];
-    // },
+      this.editTypefacture = this.typeFactures[index];
+    },
     // fonction pour vider l'input modification
+    modifierModalTypeFactureLocal(){
+      this.modifierTypeFacture(this.editTypefacture)
+      this.$('#modificationModal').modal('hide');
+    },
     
     alert() {
       console.log("ok");

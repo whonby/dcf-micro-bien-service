@@ -1,51 +1,1000 @@
+// get all prestation
+export const GET_ALL_PRESTATION = (state, tableau_prestation) =>{
+    state.prestations = tableau_prestation
+}
 
-// get all procedure
-// const GET_ALL_TYPE_PROCEDURE = (state, tableau_typeProcedure) => {
-//     state.typeProcedures = tableau_typeProcedure
+// add * presttation 
+
+export const AJOUTER_PRESTATION = (state, elementAjouter) => {
+    state.prestations.unshift(elementAjouter)
+}
+
+// update all prestation
+export const MODIFIER_PRESTATION = (state, elementModif)=>{
+    state.prestations = state.prestations.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all prestation
+
+export const DELETE_PRESTATION = (state, id)=> {
+    state.prestations = state.prestations.filter(prest => prest.id !=id)
+}
+
+
+// get all actedepense
+export const GET_ALL_ACTE_DEPENSE = (state, tableau_acte_depense) =>{
+    state.acteDepense = tableau_acte_depense
+}
+
+// add * acte depense 
+
+export const AJOUTER_ACTE_DEPENSE = (state, elementAjouter) => {
+    state.acteDepense.unshift(elementAjouter)
+}
+
+
+// update all acte depense
+export const MODIFIER_ACTE_DEPENSE = (state, elementModif)=>{
+    state.acteDepense = state.acteDepense.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all prestation
+
+export const SUPPRIMER_ACTE_DEPENSE = (state, id)=> {
+    state.acteDepense = state.acteDepense.filter(prest => prest.id !=id)
+}
+
+// get all bailleur
+export const GET_ALL_BAILLEUR = (state, tableau_bailleur) =>{
+    state.bailleurs = tableau_bailleur
+}
+
+// add * bailleur
+
+export const AJOUTER_BAILLEUR = (state, elementAjouter) => {
+    state.bailleurs.unshift(elementAjouter)
+}
+
+// update all bailleur
+export const MODIFIER_BAILLEUR = (state, elementModif)=>{
+    state.bailleurs = state.bailleurs.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all bailleur
+
+export const SUPPRIMER_BAILLEUR = (state, id) => {
+
+ state.bailleurs = state.bailleurs.filter(bailleur => bailleur.id !=id)
+}
+
+// get all banque
+export const GET_ALL_BANQUE = (state, tableau_banques) =>{
+    state.banques = tableau_banques
+}
+
+// add * acte depense 
+
+export const AJOUTER_BANQUE = (state, elementAjouter) => {
+    state.banques.unshift(elementAjouter)
+}
+
+
+// update all acte depense
+export const MODIFIER_BANQUE = (state, elementModif)=>{
+    state.banques = state.banques.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all prestation
+
+export const SUPPRIMER_BANQUE = (state, id)=> {
+    state.banques = state.banques.filter(prest => prest.id !=id)
+}
+
+
+
+// get all code fonction
+export const GET_CODE_FONCTION = (state, tableau_code_foction) =>{
+    state.codesFonctions = tableau_code_foction
+}
+
+// add * code fonction
+
+export const AJOUTER_CODE_FONCTION = (state, elementAjouter) => {
+    state.codesFonctions.unshift(elementAjouter)
+}
+
+// update all code fonction
+export const MODIFIER_CODE_FONCTION = (state, elementModif)=>{
+    state.codesFonctions = state.codesFonctions.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all code fonction
+
+export const SUPPRIMER_CODE_FONCTION = (state, id)=> {
+    state.codesFonctions = state.codesFonctions.filter(prest => prest.id !=id)
+}
+
+
+// get all compte
+export const GET_ALL_COMPTE = (state, tableau_compte) =>{
+    state.comptes = tableau_compte
+}
+
+// add * compte
+
+export const AJOUTER_COMPTE = (state, elementAjouter) => {
+    state.comptes.unshift(elementAjouter)
+}
+
+
+// update all compte
+export const MODIFIER_COMPTE = (state, elementModif)=>{
+    state.comptes = state.comptes.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all compte
+
+export const SUPPRIMER_COMPTE = (state, id)=> {
+    state.comptes = state.comptes.filter(prest => prest.id !=id)
+}
+
+
+// get all facture
+export const GET_ALL_FACTURE = (state, tableau_facture) =>{
+    state.factures = tableau_facture
+}
+
+// add * facture
+
+export const AJOUTER_FACTURE = (state, elementAjouter) => {
+    state.factures.unshift(elementAjouter)
+}
+
+// update all facture
+export const MODIFIER_FACTURE = (state, elementModif)=>{
+    state.factures = state.factures.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all facture
+
+export const SUPPRIMER_FACTURE = (state, id)=> {
+    state.factures = state.factures.filter(prest => prest.id !=id)
+}
+
+
+// get all lot
+export const GET_ALL_LOT = (state, tableau_lots) =>{
+    state.lots = tableau_lots
+}
+
+// add * lot
+
+export const AJOUTER_LOT = (state, elementAjouter) => {
+    state.lots.unshift(elementAjouter)
+}
+
+
+// update all lot
+export const MODIFIER_LOT = (state, elementModif)=>{
+    state.lots = state.lots.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all lots
+
+export const SUPPRIMER_LOT = (state, id)=> {
+    state.lots = state.lots.filter(prest => prest.id !=id)
+}
+
+
+
+// get all type_prestation
+export const GET_ALL_TYPE_PRESTATION = (state, tableau_type_prestation) =>{
+    state.typePrestations = tableau_type_prestation
+}
+
+// add * type_prestation
+
+export const AJOUTER_TYPE_PRESTATION = (state, elementAjouter) => {
+    state.typePrestations.unshift(elementAjouter)
+}
+
+// update all type_prestation
+export const MODIFIER_TYPE_PRESTATION = (state, elementModif)=>{
+    state.typePrestations = state.typePrestations.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all type_prestation
+
+export const SUPPRIMER_TYPE_PRESTATION = (state, id)=> {
+    state.typePrestations = state.typePrestations.filter(prest => prest.id !=id)
+}
+
+
+// get all type facture
+export const GET_TYPE_FACTURE = (state, tableau_type_facture) =>{
+    state.typeFactures = tableau_type_facture
+}
+
+// add * type facture
+
+export const AJOUTER_TYPE_FACTURE = (state, elementAjouter) => {
+    state.typeFactures.unshift(elementAjouter)
+}
+
+
+// update all type facture
+export const MODIFIER_TYPE_FACTURE = (state, elementModif)=>{
+    state.typeFactures = state.typeFactures.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all type facture
+
+export const SUPPRIMER_TYPE_FACTURE = (state, id)=> {
+    state.typeFactures = state.typeFactures.filter(prest => prest.id !=id)
+}
+
+
+// mutation type marcher
+
+
+// get all type facture
+export const GET_TYPE_PROCEDURE = (state, tableau_type_procedure) =>{
+    state.typeTypeProcedures = tableau_type_procedure
+}
+
+// add * type facture
+
+export const AJOUTER_TYPE_PROCEDURE = (state, elementAjouter) => {
+    state.typeTypeProcedures.unshift(elementAjouter)
+}
+
+
+// update all type facture
+export const MODIFIER_TYPE_PROCEDURE = (state, elementModif)=>{
+    state.typeTypeProcedures = state.typeTypeProcedures.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all type facture
+
+export const SUPPRIMER_TYPE_PROCEDURE = (state, id)=> {
+    state.typeTypeProcedures = state.typeTypeProcedures.filter(prest => prest.id !=id)
+}
+
+
+
+
+
+/// mutation procedure passation
+
+// get all type facture
+export const GET_PROCEDURE_PASSATION = (state, tableau_procedure_passation) =>{
+    state.procedurePassations = tableau_procedure_passation
+}
+
+// add * type facture
+
+export const AJOUTER_PROCEDURE_PASSATION = (state, elementAjouter) => {
+    state.procedurePassations.unshift(elementAjouter)
+}
+
+
+// update all type facture
+export const MODIFIER_PROCEDURE_PASSATION = (state, elementModif)=>{
+    state.procedurePassations = state.procedurePassations.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all type facture
+
+export const SUPPRIMER_PROCEDURE_PASSATION = (state, id)=> {
+    state.procedurePassations = state.procedurePassations.filter(prest => prest.id !=id)
+}
+
+
+
+
+
+// la mutation d'appel d'offre 
+
+
+
+
+
+// get all type facture
+export const GET_APPEL_OFFRE = (state, tableau_appel_offre) =>{
+    state.appelOffres = tableau_appel_offre
+}
+
+// add * type facture
+
+export const AJOUTER_APPEL_OFFRE = (state, elementAjouter) => {
+    state.appelOffres.unshift(elementAjouter)
+}
+
+
+// update all type facture
+export const MODIFIER_APPEL_OFFRE = (state, elementModif)=>{
+    state.appelOffres = state.appelOffres.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all type facture
+
+export const SUPPRIMER_APPEL_OFFRE = (state, id)=> {
+    state.appelOffres = state.appelOffres.filter(prest => prest.id !=id)
+}
+
+
+
+// mutation type marche
+
+
+// get all type facture
+export const GET_TYPE_MARCHE = (state, tableau_type_marche) =>{
+    state.typeMarches = tableau_type_marche
+}
+
+// add * type facture
+
+export const AJOUTER_TYPE_MARCHE = (state, elementAjouter) => {
+    state.typeMarches.unshift(elementAjouter)
+}
+
+
+// update all type facture
+export const MODIFIER_TYPE_MARCHE = (state, elementModif)=>{
+    state.typeMarches = state.typeMarches.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all marche
+
+export const SUPPRIMER_TYPE_MARCHE = (state, id)=> {
+    state.typeMarches = state.typeMarches.filter(marche => marche.id !=id)
+}
+
+
+
+
+
+
+// la mutation de mode bde passation
+
+// get all type facture
+export const GET_MODE_PASSATION = (state, tableau_mode_passation) =>{
+    state.modePassations = tableau_mode_passation
+}
+
+// add * type facture
+
+export const AJOUTER_MODE_PASSATION = (state, elementAjouter) => {
+    state.modePassations.unshift(elementAjouter)
+}
+
+
+// update all type facture
+export const MODIFIER_MODE_PASSATION = (state, elementModif)=>{
+    state.modePassations = state.modePassations.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all marche
+
+export const SUPPRIMER_MODE_PASSATION = (state, id)=> {
+    state.modePassations = state.modePassations.filter(passation => passation.id !=id)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// get all type acte depense
+export const GET_ALL_TYPE_ACTE_DEPENSE = (state, tableau_type_acte_depense) =>{
+    state.typeActeDepenses = tableau_type_acte_depense
+}
+
+// add * type_prestation
+
+export const AJOUTER_TYPE_ACTE_DEPENSE = (state, elementAjouter) => {
+    state.typeActeDepenses.unshift(elementAjouter)
+}
+
+// update all type_prestation
+export const MODIFIER_TYPE_ACTE_DEPENSE = (state, elementModif)=>{
+    state.typeActeDepenses = state.typeActeDepenses.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all type_acte depense
+
+export const SUPPRIMER_TYPE_ACTE_DEPENSE = (state, id)=> {
+    state.typeActeDepenses = state.typeActeDepenses.filter(prest => prest.id !=id)
+}
+
+
+
+
+
+// get all acteur depense
+export const GET_ALL_ACTEUR_DEPENSE = (state, tableau_acteur_depense) =>{
+    state.acteurDepense = tableau_acteur_depense
+}
+
+// add * type facture
+
+export const AJOUTER_ACTEUR_DEPENSE = (state, elementAjouter) => {
+    state.acteurDepense.unshift(elementAjouter)
+}
+
+
+// update all type facture
+export const MODIFIER_ACTEUR_DEPENSE = (state, elementModif)=>{
+    state.acteurDepense = state.acteurDepense.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all type facture
+
+export const SUPPRIMER_ACTEUR_DEPENSE = (state, id)=> {
+    state.acteurDepense = state.acteurDepense.filter(prest => prest.id !=id)
+}
+
+
+// action pour analyseDossier && cojo
+
+
+// get all type acte depense
+export const GET_ALL_ANALYSE_DOSSIER = (state, tableau_analyse_dossier) =>{
+    state.analyseDossiers = tableau_analyse_dossier
+}
+
+// add * analyse dossier
+
+export const AJOUTER_ANALYSE_DOSSIER = (state, elementAjouter) => {
+    state.analyseDossiers.unshift(elementAjouter)
+}
+
+// update all analyse dossier
+export const MODIFIER_ANALYSE_DOSSIER = (state, elementModif)=>{
+    state.analyseDossiers = state.analyseDossiers.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all analyse de dosssier
+
+export const SUPPRIMER_ANALYSE_DOSSIER = (state, id)=> {
+    state.analyseDossiers = state.analyseDossiers.filter(prest => prest.id !=id)
+}
+
+
+// get all la cojo
+export const GET_ALL_COJO = (state, tableau_cojo) =>{
+    state.cojos = tableau_cojo
+}
+
+// add * cojo
+
+export const AJOUTER_COJO = (state, elementAjouter) => {
+    state.cojos.unshift(elementAjouter)
+}
+
+
+// update cojo
+export const MODIFIER_COJO = (state, elementModif)=>{
+    state.cojos = state.cojos.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete cojo
+
+export const SUPRIMER_COJO = (state, id)=> {
+    state.cojos = state.cojos.filter(prest => prest.id !=id)
+}
+
+// mutation pour condition && fonction occupper
+
+
+
+
+// get all condition
+export const GET_ALL_CONDITION = (state, tableau_condition) =>{
+    state.conditions = tableau_condition
+}
+
+// add * condition
+
+export const AJOUTER_CONDITION = (state, elementAjouter) => {
+    state.conditions.unshift(elementAjouter)
+}
+
+// update condition
+export const MODIFIER_CONDITION = (state, elementModif)=>{
+    state.conditions = state.conditions.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete condition
+
+export const SUPPRIMER_CONDITION = (state, id)=> {
+    state.conditions = state.conditions.filter(prest => prest.id !=id)
+}
+
+
+// get all fonction ocupper
+export const GET_ALL_FONCTION_OCCUPPE = (state, tableau_fonction_occuppe) =>{
+    state.fonctionOccupes = tableau_fonction_occuppe
+}
+
+// add * fonction occuppe
+
+export const AJOUTER_FONCTION_OCCUPPE = (state, elementAjouter) => {
+    state.fonctionOccupes.unshift(elementAjouter)
+}
+
+
+// update fonction occuppe
+export const MODIFIER_FONCTION_OCCUPPE = (state, elementModif)=>{
+    state.fonctionOccupes = state.fonctionOccupes.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete fonction occuppe
+
+export const SUPPRIMER_FONCTION_OCCUPPE = (state, id)=> {
+    state.fonctionOccupes = state.fonctionOccupes.filter(prest => prest.id !=id)
+}
+
+
+
+// get all nature fonction
+export const GET_ALL_NATURE_FONCTION = (state, tableau_nature_fonction) =>{
+    state.natureFonctions = tableau_nature_fonction
+}
+
+// add * nature fonction
+
+export const AJOUTER_NATURE_FONCTION = (state, elementAjouter) => {
+    state.natureFonctions.unshift(elementAjouter)
+}
+
+// update all nature fonction
+
+export const MODIFIER_NATURE_FONCTION = (state, elementModif)=>{
+    state.natureFonctions = state.natureFonctions.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all nature fonction
+
+export const SUPPRIMER_NATURE_FONCTION = (state, id)=> {
+    state.natureFonctions = state.natureFonctions.filter(prest => prest.id !=id)
+}
+
+
+// get all signature
+export const GET_ALL_SIGNATURE = (state, tableau_signature) =>{
+    state.signatures = tableau_signature
+}
+
+// add * signature
+
+export const AJOUTER_SIGNATURE = (state, elementAjouter) => {
+    state.signatures.unshift(elementAjouter)
+}
+
+
+// update all signature
+export const MODIFIER_SIGNATURE = (state, elementModif)=>{
+    state.signatures = state.signatures.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete signature
+
+export const SUPPRIMER_SIGNATURE = (state, id)=> {
+    state.signatures = state.signatures.filter(prest => prest.id !=id)
+}
+
+
+
+
+
+// get all type acte effet financier
+
+export const GET_ALL_TYPE_ACTE_EFFET_FINANCIER = (state, tableau_type_acte_effet_financier) =>{
+    state.typeActeEffetFinanciers = tableau_type_acte_effet_financier
+}
+
+// add * type acte effet financier
+
+export const AJOUTER_TYPE_ACTE_EFFET_FINANCIER = (state, elementAjouter) => {
+    state.typeActeEffetFinanciers.unshift(elementAjouter)
+}
+
+// update type acte effet financier
+export const MODIFIER_TYPE_ACTE_EFFET_FINANCIER = (state, elementModif)=>{
+    state.typeActeEffetFinanciers = state.typeActeEffetFinanciers.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete type acte efffet financier
+
+export const SUPPRIMER_TYPE_ACTE_AFFET_FINANCIER = (state, id)=> {
+    state.typeActeEffetFinanciers = state.typeActeEffetFinanciers.filter(prest => prest.id !=id)
+}
+
+
+// get type analyse
+export const GET_TYPE_ANALYSE = (state, tableau_type_analyse) =>{
+    state.typeAnalyses = tableau_type_analyse
+}
+
+// add * type analyse
+
+export const AJOUTER_TYPE_ANALYSE = (state, elementAjouter) => {
+    state.typeAnalyses.unshift(elementAjouter)
+}
+
+
+// update type analyse
+export const MODIFIER_TYPE_ANALYSE = (state, elementModif)=>{
+    state.typeAnalyses = state.typeAnalyses.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete type analyse 
+
+export const SUPPRIMER_TYPE_ANALYSE = (state, id)=> {
+    state.typeAnalyses = state.typeAnalyses.filter(prest => prest.id !=id)
+}
+
+
+
+
+// get all type unite administrative
+export const GET_TYPE_UA = (state, tableau_type_ua) =>{
+    state.typeUa = tableau_type_ua
+}
+
+// add * type unite administrative
+
+export const AJOUTER_TYPE_UA = (state, elementAjouter) => {
+    state.typeUa.unshift(elementAjouter)
+}
+
+// update type unite administrative
+export const MODIFIER_TYPE_UA = (state, elementModif)=>{
+    state.typeUa = state.typeUa.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+// delete type unite administrative
+
+export const SUPPRIMER_TYPE_UA = (state, id)=> {
+    state.typeUa = state.typeUa.filter(prest => prest.id !=id)
+}
+
+// get all unite administrative
+export const GET_ALL_UNITE_ADMINISTRATIVE = (state, tableau_unite_administrative) =>{
+    state.uniteAdministratives = tableau_unite_administrative
+}
+
+// add * unite administrative
+
+export const AJOUTER_UNITE_ADMINISTRATIVE = (state, elementAjouter) => {
+    state.uniteAdministratives.unshift(elementAjouter)
+}
+
+
+// update unite administrative
+export const MODIFIER_UNITE_ADMINISTRATIVE = (state, elementModif)=>{
+    state.uniteAdministratives = state.uniteAdministratives.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete unite administrative
+
+export const SUPPRIMER_UNITE_ADMINISTRATIVE = (state, id)=> {
+    state.uniteAdministratives = state.uniteAdministratives.filter(prest => prest.id !=id)
+}
+
+
+
+
+
+
+
+// get all unite de zone 
+
+export const GET_ALL_UNITE_ZONE = (state, tableau_unite_zone) =>{
+    state.uniteZones = tableau_unite_zone
+}
+
+// add * unite zone
+
+export const AJOUTER_UNITE_ZONE = (state, elementAjouter) => {
+    state.uniteZones.unshift(elementAjouter)
+}
+
+
+// update unite zone
+export const MODIFIER_UNITE_ZONE = (state, elementModif)=>{
+    state.uniteZones = state.uniteZones.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete unite zone
+
+export const SUPPRIMER_UNITE_ZONE = (state, id)=> {
+    state.uniteZones = state.uniteZones.filter(prest => prest.id !=id)
+}
+
+
+/// la mutation pour la ligne budgetaire && dossier de candidat
+
+// get all for ligne budgetaire
+export const GET_ALL_LIGNE_BUDGETAIRE = (state, tableau_ligne_budgetaire) =>{
+    state.ligneBudgetaires = tableau_ligne_budgetaire
+}
+
+// add * for ligne budgetaire
+
+export const AJOUTER_LIGNE_BUDGETAIRE = (state, elementAjouter) => {
+    state.ligneBudgetaires.unshift(elementAjouter)
+}
+
+// update all for ligne budgetaire
+
+export const MODIFIER_LIGNE_BUDGETAIRE = (state, elementModif)=>{
+    state.ligneBudgetaires = state.ligneBudgetaires.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all for ligne budgetaire
+
+export const SUPPRIMER_LIGNE_BUDGETAIRE = (state, id)=> {
+    state.ligneBudgetaires = state.ligneBudgetaires.filter(prest => prest.id !=id)
+}
+
+
+// get all for liste dossier candidat
+export const GET_DOSSIER_CANDIDAT = (state, tableau_liste_dossier_candidat) =>{
+    state.DossierCandidats = tableau_liste_dossier_candidat
+}
+
+// add *  for liste dossier candidat
+
+export const AJOUTER_DOSSIER_CANDIDAT = (state, elementAjouter) => {
+    state.DossierCandidats.unshift(elementAjouter)
+}
+
+
+// update all for liste dossier candidat
+export const MODIFIER_DOSSIER_CANDIDAT = (state, elementModif)=>{
+    state.DossierCandidats = state.DossierCandidats.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete fopr liste dossier candidat
+
+export const SUPPRIMER_DOSSIER_CANDIDAT = (state, id)=> {
+    state.DossierCandidats = state.DossierCandidats.filter(prest => prest.id !=id)
+}
+
+
+
+// get all for livrable
+
+export const GET_ALL_LIVRABLE = (state, tableau_livrable) =>{
+    state.livrables = tableau_livrable
+}
+
+// add * for livrable
+
+export const AJOUTER_LIVRABLE = (state, elementAjouter) => {
+    state.livrables.unshift(elementAjouter)
+}
+
+// update for livrable
+export const MODIFIER_LIVRABLE = (state, elementModif)=>{
+    state.livrables = state.livrables.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete the livrable
+
+export const SUPPRIMER_LIVRABLE = (state, id)=> {
+    state.livrables = state.livrables.filter(prest => prest.id !=id)
+}
+
+
+// get all modifier dossier candidat
+// const GET_MODIFIER_DOSSIER_CANDIDAT = (state, tableau_modifier_dossier_candidat) =>{
+//     state.modifierDossierCadidats = tableau_modifier_dossier_candidat
 // }
 
-// // add * presttation 
+// add * modifier dossier candidat
 
-// const AJOUTER_TYPE_PROCEDURE = (state, elementAjouter) => {
-//     state.typeProcedures.unshift(elementAjouter)
-// }
-
-// // update all prestation
-// const MODIFIER_TYPE_PROCEDURE = (state, elementModif) => {
-//     state.typeProcedures = state.typeProcedures.map(response => {
-//         if (response.id == elementModif.id) {
-//             response = { ...elementModif }
-//         }
-//         return response
-//     })
+// const AJOUTER_MODIFIER_DOSSIER_CANDIDAT = (state, elementAjouter) => {
+//     state.modifierDossierCadidats.unshift(elementAjouter)
 // }
 
 
-// // delete all prestation
-
-// const DELETE_TYPE_PROCEDURE = (state, id) => {
-//     state.typeProcedures = state.typeProcedures.filter(prest => prest.id != id)
-// }
-
-
-
-
-
-
-// // get all prestation
-// const GET_ALL_PRESTATION = (state, tableau_prestation) =>{
-//     state.prestations = tableau_prestation
-// }
-
-// // add * presttation 
-
-// const AJOUTER_PRESTATION = (state, elementAjouter) => {
-//     state.prestations.unshift(elementAjouter)
-// }
-
-// // update all prestation
-// const MODIFIER_PRESTATION = (state, elementModif)=>{
-//     state.prestations = state.prestations.map(response => {
+// update all  modifier dossier candidat
+// const MODIFIER_DOSSIER_CANDIDAT = (state, elementModif)=>{
+//     state.modifierDossierCadidats = state.modifierDossierCadidats.map(response => {
 //         if(response.id == elementModif.id){
 //             response = {...elementModif}
 //         }
@@ -54,679 +1003,160 @@
 // }
 
 
-// // delete all prestation
+// delete the modified dossier candidat
 
-// const DELETE_PRESTATION = (state, id)=> {
-//     state.prestations = state.prestations.filter(prest => prest.id !=id)
+// const SUPPRIMER_DOSSIER_CANDIDAT = (state, id)=> {
+//     state.modifierDossierCadidats = state.modifierDossierCadidats.filter(prest => prest.id !=id)
 // }
 
+// get all zone geographique
+export const GET_ALL_ZONE_GEOGRAPHIQUE = (state, tableau_zone_geographique) =>{
+    state.zoneGeographiques = tableau_zone_geographique
+}
 
-// // get all actedepense
-// const GET_ALL_ACTE_DEPENSE = (state, tableau_acte_depense) =>{
-//     state.acteDepense = tableau_acte_depense
-// }
-
-// // add * acte depense 
-
-// const AJOUTER_ACTE_DEPENSE = (state, elementAjouter) => {
-//     state.acteDepense.unshift(elementAjouter)
-// }
-
-
-// // update all acte depense
-// const MODIFIER_ACTE_DEPENSE = (state, elementModif)=>{
-//     state.acteDepense = state.acteDepense.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
-
-
-// // delete all prestation
-
-// const SUPPRIMER_ACTE_DEPENSE = (state, id)=> {
-//     state.acteDepense = state.acteDepense.filter(prest => prest.id !=id)
-// }
-
-// // get all bailleur
-// const GET_ALL_BAILLEUR = (state, tableau_bailleur) =>{
-//     state.bailleurs = tableau_bailleur
-// }
-
-// // add * bailleur
-
-// const AJOUTER_BAILLEUR = (state, elementAjouter) => {
-//     state.bailleurs.unshift(elementAjouter)
-// }
-
-// // update all bailleur
-// const MODIFIER_BAILLEUR = (state, elementModif)=>{
-//     state.bailleurs = state.bailleurs.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
-
-
-// // delete all bailleur
-
-// const SUPPRIMER_BAILLEUR = (state, id)=> {
-//     state.bailleurs = state.bailleurs.filter(prest => prest.id !=id)
-// }
-
-
-// // get all banque
-// const GET_ALL_BANQUE = (state, tableau_banques) =>{
-//     state.banques = tableau_banques
-// }
-
-// // add * acte depense 
-
-// const AJOUTER_BANQUE = (state, elementAjouter) => {
-//     state.banques.unshift(elementAjouter)
-// }
-
-
-// // update all acte depense
-// const MODIFIER_BANQUE = (state, elementModif)=>{
-//     state.banques = state.banques.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
-
-
-// // delete all prestation
-
-// const SUPPRIMER_BANQUE = (state, id)=> {
-//     state.banques = state.banques.filter(prest => prest.id !=id)
-// }
-
-
-
-// // get all code fonction
-// const GET_CODE_FONCTION = (state, tableau_code_foction) =>{
-//     state.codesFonctions = tableau_code_foction
-// }
-
-// // add * code fonction
-
-// const AJOUTER_CODE_FONCTION = (state, elementAjouter) => {
-//     state.codesFonctions.unshift(elementAjouter)
-// }
-
-// // update all code fonction
-// const MODIFIER_CODE_FONCTION = (state, elementModif)=>{
-//     state.codesFonctions = state.codesFonctions.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
-
-
-// // delete all code fonction
-
-// const SUPPRIMER_CODE_FONCTION = (state, id)=> {
-//     state.codesFonctions = state.codesFonctions.filter(prest => prest.id !=id)
-// }
-
-
-// // get all compte
-// const GET_ALL_COMPTE = (state, tableau_compte) =>{
-//     state.comptes = tableau_compte
-// }
-
-// // add * compte
-
-// const AJOUTER_COMPTE = (state, elementAjouter) => {
-//     state.comptes.unshift(elementAjouter)
-// }
-
-
-// // update all compte
-// const MODIFIER_COMPTE = (state, elementModif)=>{
-//     state.comptes = state.comptes.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
-
-
-// // delete all compte
-
-// const SUPPRIMER_COMPTE = (state, id)=> {
-//     state.comptes = state.comptes.filter(prest => prest.id !=id)
-// }
-
-
-// // get all facture
-// const GET_ALL_FACTURE = (state, tableau_facture) =>{
-//     state.factures = tableau_facture
-// }
-
-// // add * facture
-
-// const AJOUTER_FACTURE = (state, elementAjouter) => {
-//     state.factures.unshift(elementAjouter)
-// }
-
-// // update all facture
-// const MODIFIER_FACTURE = (state, elementModif)=>{
-//     state.factures = state.factures.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
-
-
-// // delete all facture
-
-// const SUPPRIMER_FACTURE = (state, id)=> {
-//     state.factures = state.factures.filter(prest => prest.id !=id)
-// }
-
-
-// // get all lot
-// const GET_ALL_LOT = (state, tableau_lots) =>{
-//     state.lots = tableau_lots
-// }
-
-// // add * lot
-
-// const AJOUTER_LOT = (state, elementAjouter) => {
-//     state.lots.unshift(elementAjouter)
-// }
-
-
-// // update all lot
-// const MODIFIER_LOT = (state, elementModif)=>{
-//     state.lots = state.lots.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
-
-
-// // delete all lots
-
-// const SUPPRIMER_LOT = (state, id)=> {
-//     state.lots = state.lots.filter(prest => prest.id !=id)
-// }
-
-
-
-// // get all type_prestation
-// const GET_ALL_TYPE_PRESTATION = (state, tableau_type_prestation) =>{
-//     state.typePrestations = tableau_type_prestation
-// }
-
-// // add * type_prestation
-
-// const AJOUTER_TYPE_PRESTATION = (state, elementAjouter) => {
-//     state.typePrestations.unshift(elementAjouter)
-// }
-
-// // update all type_prestation
-// const MODIFIER_TYPE_PRESTATION = (state, elementModif)=>{
-//     state.typePrestations = state.typePrestations.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
-
-
-// // delete all type_prestation
-
-// const SUPPRIMER_TYPE_PRESTATION = (state, id)=> {
-//     state.typePrestations = state.typePrestations.filter(prest => prest.id !=id)
-// }
-
-
-// // get all type facture
-// const GET_TYPE_FACTURE = (state, tableau_type_facture) =>{
-//     state.typeFactures = tableau_type_facture
-// }
-
-// // add * type facture
-
-// const AJOUTER_TYPE_FACTURE = (state, elementAjouter) => {
-//     state.typeFactures.unshift(elementAjouter)
-// }
-
-
-// // update all type facture
-// const MODIFIER_TYPE_FACTURE = (state, elementModif)=>{
-//     state.typeFactures = state.typeFactures.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
-
-
-// // delete all type facture
-
-// const SUPPRIMER_TYPE_FACTURE = (state, id)=> {
-//     state.typeFactures = state.typeFactures.filter(prest => prest.id !=id)
-// }
-
-
-
-// // get all type acte depense
-// const GET_ALL_TYPE_ACTE_DEPENSE = (state, tableau_type_acte_depense) =>{
-//     state.typeActeDepense = tableau_type_acte_depense
-// }
-
-// // add * type_prestation
-
-// const AJOUTER_TYPE_ACTE_DEPENSE = (state, elementAjouter) => {
-//     state.typeActeDepense.unshift(elementAjouter)
-// }
-
-// // update all type_prestation
-// const MODIFIER_TYPE_ACTE_DEPENSE = (state, elementModif)=>{
-//     state.typeActeDepense = state.typeActeDepense.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
-
-
-// // delete all type_acte depense
+// add * zone geographique
 
-// const SUPPRIMER_TYPE_ACTE_DEPENSE = (state, id)=> {
-//     state.typeActeDepense = state.typeActeDepense.filter(prest => prest.id !=id)
-// }
-
-
-// // get all acteur depense
-// const GET_ALL_ACTEUR_DEPENSE = (state, tableau_acteur_depense) =>{
-//     state.acteurDepense = tableau_acteur_depense
-// }
-
-// // add * type facture
-
-// const AJOUTER_ACTEUR_DEPENSE = (state, elementAjouter) => {
-//     state.acteurDepense.unshift(elementAjouter)
-// }
-
-
-// // update all type facture
-// const MODIFIER_ACTEUR_DEPENSE = (state, elementModif)=>{
-//     state.acteurDepense = state.acteurDepense.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
-
-
-// // delete all type facture
-
-// const SUPPRIMER_ACTEUR_DEPENSE = (state, id)=> {
-//     state.acteurDepense = state.acteurDepense.filter(prest => prest.id !=id)
-// }
-
-
-// // action pour analyseDossier && cojo
-
-
-// // get all type acte depense
-// const GET_ALL_ANALYSE_DOSSIER = (state, tableau_analyse_dossier) =>{
-//     state.analyseDossiers = tableau_analyse_dossier
-// }
-
-// // add * analyse dossier
-
-// const AJOUTER_ANALYSE_DOSSIER = (state, elementAjouter) => {
-//     state.analyseDossiers.unshift(elementAjouter)
-// }
-
-// // update all analyse dossier
-// const MODIFIER_ANALYSE_DOSSIER = (state, elementModif)=>{
-//     state.analyseDossiers = state.analyseDossiers.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
-
-
-// // delete all analyse de dosssier
-
-// const SUPPRIMER_ANALYSE_DOSSIER = (state, id)=> {
-//     state.analyseDossiers = state.analyseDossiers.filter(prest => prest.id !=id)
-// }
-
-
-// // get all la cojo
-// const GET_ALL_COJO = (state, tableau_cojo) =>{
-//     state.cojos = tableau_cojo
-// }
-
-// // add * cojo
-
-// const AJOUTER_COJO = (state, elementAjouter) => {
-//     state.cojos.unshift(elementAjouter)
-// }
-
-
-// // update cojo
-// const MODIFIER_COJO = (state, elementModif)=>{
-//     state.cojos = state.cojos.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
-
-
-// // delete cojo
-
-// const SUPRIMER_COJO = (state, id)=> {
-//     state.cojos = state.cojos.filter(prest => prest.id !=id)
-// }
-
-// // mutation pour condition && fonction occupper
-
-
-
-
-// // get all condition
-// const GET_ALL_CONDITION = (state, tableau_condition) =>{
-//     state.conditions = tableau_condition
-// }
-
-// // add * condition
-
-// const AJOUTER_CONDITION = (state, elementAjouter) => {
-//     state.conditions.unshift(elementAjouter)
-// }
-
-// // update condition
-// const MODIFIER_CONDITION = (state, elementModif)=>{
-//     state.conditions = state.conditions.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
-
-
-// // delete condition
-
-// const SUPPRIMER_CONDITION = (state, id)=> {
-//     state.conditions = state.conditions.filter(prest => prest.id !=id)
-// }
-
-
-// // get all fonction ocupper
-// const GET_ALL_FONCTION_OCCUPPE = (state, tableau_fonction_occuppe) =>{
-//     state.fonctionOccupes = tableau_fonction_occuppe
-// }
-
-// // add * fonction occuppe
-
-// const AJOUTER_FONCTION_OCCUPPE = (state, elementAjouter) => {
-//     state.fonctionOccupes.unshift(elementAjouter)
-// }
-
-
-// // update fonction occuppe
-// const MODIFIER_FONCTION_OCCUPPE = (state, elementModif)=>{
-//     state.fonctionOccupes = state.fonctionOccupes.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
-
-
-// // delete fonction occuppe
-
-// const SUPPRIMER_FONCTION_OCCUPPE = (state, id)=> {
-//     state.fonctionOccupes = state.fonctionOccupes.filter(prest => prest.id !=id)
-// }
-
-
-
-// // get all nature fonction
-// const GET_ALL_NATURE_FONCTION = (state, tableau_nature_fonction) =>{
-//     state.natureFonctions = tableau_nature_fonction
-// }
-
-// // add * nature fonction
-
-// const AJOUTER_NATURE_FONCTION = (state, elementAjouter) => {
-//     state.natureFonctions.unshift(elementAjouter)
-// }
-
-// // update all nature fonction
-
-// const MODIFIER_NATURE_FONCTION = (state, elementModif)=>{
-//     state.natureFonctions = state.natureFonctions.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
-
-
-// // delete all nature fonction
-
-// const SUPPRIMER_NATURE_FONCTION = (state, id)=> {
-//     state.natureFonctions = state.natureFonctions.filter(prest => prest.id !=id)
-// }
-
-
-// // get all signature
-// const GET_ALL_SIGNATURE = (state, tableau_signature) =>{
-//     state.signatures = tableau_signature
-// }
-
-// // add * signature
-
-// const AJOUTER_SIGNATURE = (state, elementAjouter) => {
-//     state.signatures.unshift(elementAjouter)
-// }
-
-
-// // update all signature
-// const MODIFIER_SIGNATURE = (state, elementModif)=>{
-//     state.signatures = state.signatures.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
-
+export const AJOUTER_ZONE_GEOGRAPHIQUE = (state, elementAjouter) => {
+    state.zoneGeographiques.unshift(elementAjouter)
+}
 
-// // delete signature
+// update zone geographique
+export const MODIFIER_ZONE_GEOGRAPHIQUE = (state, elementModif)=>{
+    state.zoneGeographiques = state.zoneGeographiques.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
 
-// const SUPPRIMER_SIGNATURE = (state, id)=> {
-//     state.signatures = state.signatures.filter(prest => prest.id !=id)
-// }
-
-
-
-
-
-// // get all type acte effet financier
-
-// const GET_ALL_TYPE_ACTE_EFFET_FINANCIER = (state, tableau_type_acte_effet_financier) =>{
-//     state.typeActeEffetFinanciers = tableau_type_acte_effet_financier
-// }
-
-// // add * type acte effet financier
-
-// const AJOUTER_TYPE_ACTE_EFFET_FINANCIER = (state, elementAjouter) => {
-//     state.typeActeEffetFinanciers.unshift(elementAjouter)
-// }
+// delete zone geographique
 
-// // update type acte effet financier
-// const MODIFIER_TYPE_ACTE_EFFET_FINANCIER = (state, elementModif)=>{
-//     state.typeActeEffetFinanciers = state.typeActeEffetFinanciers.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
-
+export const SUPPRIMER_ZONE_GEOGRAPHIQUE = (state, id)=> {
+    state.zoneGeographiques = state.zoneGeographiques.filter(prest => prest.id !=id)
+}
 
-// // delete type acte efffet financier
-
-// const SUPPRIMER_TYPE_ACTE_AFFET_FINANCIER = (state, id)=> {
-//     state.typeActeEffetFinanciers = state.typeActeEffetFinanciers.filter(prest => prest.id !=id)
-// }
+// get all type text juridique
+export const GET_ALL_TYPE_TEXT_JURIDIQUE = (state, tableau_type_text_juridique) =>{
+    state.typeTextJuridiques = tableau_type_text_juridique
+}
 
+// add * type text juridique
 
-// // get type analyse
-// const GET_TYPE_ANALYSE = (state, tableau_type_analyse) =>{
-//     state.typeAnalyses = tableau_type_analyse
-// }
+export const AJOUTER_TYPE_TEXT_JURIDIQUE = (state, elementAjouter) => {
+    state.typeTextJuridiques.unshift(elementAjouter)
+}
 
-// // add * type analyse
 
-// const AJOUTER_TYPE_ANALYSE = (state, elementAjouter) => {
-//     state.typeAnalyses.unshift(elementAjouter)
-// }
+// update type text juridique
+export const MODIFIER_TYPE_TEXT_JURIDIQUE = (state, elementModif)=>{
+    state.typeTextJuridiques = state.typeTextJuridiques.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
 
 
-// // update type analyse
-// const MODIFIER_TYPE_ANALYSE = (state, elementModif)=>{
-//     state.typeAnalyses = state.typeAnalyses.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
+// delete type text juridique
 
+export const SUPPRIMER_TYPE_TEXT_JURIDIQUE = (state, id)=> {
+    state.typeTextJuridiques = state.typeTextJuridiques.filter(prest => prest.id !=id)
+}
 
-// // delete type analyse 
 
-// const SUPPRIMER_TYPE_ANALYSE = (state, id)=> {
-//     state.typeAnalyses = state.typeAnalyses.filter(prest => prest.id !=id)
-// }
 
+// get all realite service faire
 
+export const GET_REALITE_SERVICE_FAIT = (state, tableau_realite_service_fait) =>{
+    state.realiteServiceFaits = tableau_realite_service_fait
+}
 
+// add * realite service faire 
 
-// // get all type unite administrative
-// const GET_TYPE_UA = (state, tableau_type_ua) =>{
-//     state.typeUa = tableau_type_ua
-// }
+export const AJOUTER_REALITE_SERVICE_FAIT = (state, elementAjouter) => {
+    state.realiteServiceFaits.unshift(elementAjouter)
+}
 
-// // add * type unite administrative
 
-// const AJOUTER_TYPE_UA = (state, elementAjouter) => {
-//     state.typeUa.unshift(elementAjouter)
-// }
+// update of realite service fait
+export const MODIFIER_REALITE_SERVICE_FAIT = (state, elementModif)=>{
+    state.realiteServiceFaits = state.realiteServiceFaits.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
 
-// // update type unite administrative
-// const MODIFIER_TYPE_UA = (state, elementModif)=>{
-//     state.typeUa = state.typeUa.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
 
-// // delete type unite administrative
+// delete the realite service fait
 
-// const SUPPRIMER_TYPE_UA = (state, id)=> {
-//     state.typeUa = state.typeUa.filter(prest => prest.id !=id)
-// }
+export const SUPPRIMER_REALITE_SERVICE_FAIT = (state, id)=> {
+    state.realiteServiceFaits = state.realiteServiceFaits.filter(prest => prest.id !=id)
+}
 
-// // get all unite administrative
-// const GET_ALL_UNITE_ADMINISTRATIVE = (state, tableau_unite_administrative) =>{
-//     state.uniteAdministratives = tableau_unite_administrative
-// }
 
-// // add * unite administrative
 
-// const AJOUTER_UNITE_ADMINISTRATIVE = (state, elementAjouter) => {
-//     state.uniteAdministratives.unshift(elementAjouter)
-// }
+// text juridique
 
 
-// // update unite administrative
-// const MODIFIER_UNITE_ADMINISTRATIVE = (state, elementModif)=>{
-//     state.uniteAdministratives = state.uniteAdministratives.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
 
 
-// // delete unite administrative
+export const GET_TEXTJURIDIQUE = (state, tableau_text_juridique) =>{
+    state.text_juridiques = tableau_text_juridique
+}
 
-// const SUPPRIMER_UNITE_ADMINISTRATIVE = (state, id)=> {
-//     state.uniteAdministratives = state.uniteAdministratives.filter(prest => prest.id !=id)
-// }
+// add * realite service faire 
 
+export const AJOUTER_TEXT_JURIDIQUE = (state, elementAjouter) => {
+    state.text_juridiques.unshift(elementAjouter)
+}
 
 
+// update of realite service fait
+export const MODIFIER_TEXT_JURIDIQUE = (state, elementModif)=>{
+    state.text_juridiques = state.text_juridiques.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
 
 
+// delete the realite service fait
 
+export const SUPPRIMER_TEXT_JURIDIQUE = (state, id)=> {
+    state.text_juridiques = state.text_juridiques.filter(text => text.id !=id)
+}
 
-// // get all unite de zone 
 
-// const GET_ALL_UNITE_ZONE = (state, tableau_unite_zone) =>{
-//     state.uniteZones = tableau_unite_zone
-// }
 
-// // add * unite zone
+// autre text juridique
 
-// const AJOUTER_UNITE_ZONE = (state, elementAjouter) => {
-//     state.uniteZones.unshift(elementAjouter)
-// }
+export const GET_AUTRE_TEXT_JURIDIQUE = (state, tableau_autre_text_juridique) =>{
+    state.autresTexteJuridiques = tableau_autre_text_juridique
+}
 
+// add * realite service faire 
 
-// // update unite zone
-// const MODIFIER_UNITE_ZONE = (state, elementModif)=>{
-//     state.uniteZones = state.uniteZones.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
+export const AJOUTER_AUTRE_TEXT_JURIDIQUE = (state, elementAjouter) => {
+    state.autresTexteJuridiques.unshift(elementAjouter)
+}
 
 
-// // delete unite zone
+// update of realite service fait
+export const MODIFIER_AUTRE_TEXT_JURIDIQUE = (state, elementModif)=>{
+    state.autresTexteJuridiques = state.autresTexteJuridiques.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
 
-// const SUPPRIMER_UNITE_ZONE = (state, id)=> {
-//     state.uniteZones = state.uniteZones.filter(prest => prest.id !=id)
-// }
+export const SUPPRIMER_AUTRE_TEXT_JURIDIQUE = (state, id)=> {
+    state.autresTexteJuridiques = state.autresTexteJuridiques.filter(autreText => autreText.id !=id)
+}

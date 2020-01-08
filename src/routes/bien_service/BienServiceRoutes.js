@@ -13,27 +13,34 @@ import lot from '../../pages/bien_service/lot.vue';
 import natureFonction from '../../pages/bien_service/natureFonction.vue';
 import prestation from '../../pages/bien_service/prestation.vue';
 import signature from '../../pages/bien_service/signature.vue';
-import type_prestation from '../../pages/bien_service/type_prestation.vue';
-import typeActeDepense from '../../pages/bien_service/typeActeDepense.vue';
-import typeActeEffetFinancier from '../../pages/bien_service/typeActeEffetFinancier.vue';
-import typeAnalyse from '../../pages/bien_service/typeAnalyse.vue';
-import typeFacture from '../../pages/bien_service/typeFacture.vue';
+import type_prestation from '../../pages/bien_service/parametres/type_prestation.vue';
+import typeActeDepense from '../../pages/bien_service/parametres/typeActeDepense.vue';
+import typeActeEffetFinancier from '../../pages/bien_service/parametres/typeActeEffetFinancier.vue';
+import typeAnalyse from '../../pages/bien_service/parametres/typeAnalyse.vue';
+import typeFacture from '../../pages/bien_service/parametres/typeFacture.vue';
 import typeUa from '../../pages/bien_service/typeUa.vue';
-import typeProcedure from '../../pages/bien_service/typeProcedure.vue';
+import textJuridique from '../../pages/bien_service/parametres/textJuridique.vue';
+import autreTextJuridique from '../../pages/bien_service/parametres/autreTextJuridique.vue';
+import typeProcedure from '../../pages/bien_service/Prametre_marchers/typeProcedure.vue';
+import procedurePassation from '../../pages/bien_service/Prametre_marchers/procedurePassation.vue';
+import appelOffre from '../../pages/bien_service/contractualisation/appelOffre.vue';
+import ajouterAppelOffre from '../../pages/bien_service/contractualisation/ajouterAppelOffre.vue';
+import modificationAppelOffre from '../../pages/bien_service/contractualisation/modificationAppelOffre.vue';
+import typeMarche from '../../pages/bien_service/Prametre_marchers/typeMarche.vue';
+import modePassation from '../../pages/bien_service/Prametre_marchers/modePassation.vue';
+
 const BienServiceRoutes = [
-
-    {
-        path: "/type-procedure",
-        name: "typeProcedure",
-        component: typeProcedure
-    },
-
-
     // la route pour acte de depense
 {
  path:"/creation-acte-depense",
  name: "acteDepense",
  component:acteDepense  
+},
+// la route de mode de passation
+{
+ path:"/creation-mode-passation",
+ name:"modePassation",
+ component:modePassation
 },
 // la route pour acteur de depense
 {
@@ -41,6 +48,32 @@ path:"/creation-acteur-depense",
 name:"acteurDepense",
 component:acteurDepense
 },
+
+// la route pour l'appel offre
+{
+path:"/appel-offre",
+name:"appelOffre",
+component:appelOffre
+},
+// la route ajouter appel d'offre
+{
+    path:"/creation-appel-offre",
+    name:"ajouterAppelOffre",
+    component:ajouterAppelOffre
+},
+// la route du type marche
+{
+    path:"/creation-type-marche",
+    name:"typeMarche",
+    component:typeMarche
+},
+// la route modification appel d'offre
+{
+ path:"/modification-appel-offre",
+ name:"modificationAppelOffre",
+ component:modificationAppelOffre
+},
+
 // la route pour analyse de dossier
 {
 path:"/creation-analyse-de-dossier",
@@ -52,6 +85,31 @@ component:analyseDossier
     path:"/creation-bailleur",
     name:"bailleur",
     component:bailleur
+},
+
+// la route de type procedure
+{
+    path:"/creation-type-procedure",
+    name:"typeProcedure",
+    component:typeProcedure
+},
+// la route autre text juridique
+{
+    path:"/cretaion-autre-text-juridique",
+    name:"autreTextJuridique",
+    component:autreTextJuridique
+},
+// la route de procedure de passation
+{
+    path:"/creation-procedure-passation",
+    name:"procedurePassation",
+    component:procedurePassation
+},
+{
+
+    path:"/creation-text-juridique",
+    name:"textJuridique",
+    component:textJuridique
 },
 // la route pour la banque
 {
@@ -152,7 +210,7 @@ component:analyseDossier
        },
        // la route pour le type de facture
        {
-       path:"/creation-facture",
+       path:"/creation-type-unite-administrative",
        name:"typeUa",
        component:typeUa
        }

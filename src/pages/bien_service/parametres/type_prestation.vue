@@ -5,7 +5,7 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter condition</h3>
+        <h3>Ajouter Type de prestation</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
@@ -14,7 +14,7 @@
             <div class="controls">
               <input
                 type="text"
-                v-model="formData.libelle"
+                v-model="formData.libelle_type_prestation"
                 class="span"
                 placeholder="Saisir le libelle_type"
               />
@@ -27,7 +27,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterModalConditionLocal"
+          @click.prevent="ajouterModalTypePrestationLocal"
           class="btn btn-primary"
           href="#"
          
@@ -42,7 +42,7 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier condition</h3>
+        <h3>Modifier Type de prestation</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
@@ -51,7 +51,7 @@
             <div class="controls">
               <input
                 type="text"
-                v-model="editCondition.libelle"
+                v-model="editTypePrestation.libelle_type_prestation"
                 class="span"
                 placeholder="Saisir le libelle_type"
               />
@@ -62,7 +62,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modificationModalConditionLocal(editCondition)"
+          @click.prevent="modifierModalTypeprestationLocal(editTypePrestation)"
           class="btn btn-primary"
           href="#"
         
@@ -92,7 +92,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des conditions</h5>
+              <h5>Liste des types de prestations</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -108,16 +108,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(condition, index) in 
-                conditionFiltre"
-                 :key="condition.id">
-                 <td @dblclick="afficherModalCondition(index)">
-                   {{condition.libelle || 'Non renseigné'}}</td>
+                  <tr class="odd gradeX" v-for="(typePrestation, index) in 
+                typePrestationFiltre"
+                 :key="typePrestation.id">
+                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{typePrestation.libelle_type_prestation || 'Non renseigné'}}</td>
                   
 
 
                      <div class="btn-group">
-              <button @click.prevent="supprimerCondition(condition.id)"  class="btn btn-danger ">
+              <button @click.prevent="supprimerTypePrestation(typePrestation.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
@@ -132,8 +132,8 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalajouterCondition" main-icon="apps" bg-color="green"></fab>
- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalajouterCondition()">Open</button>
+    <fab :actions="fabActions" @cache="afficherModalAjoutTypaPrestation" main-icon="apps" bg-color="green"></fab>
+ <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjoutTypaPrestation()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
@@ -164,26 +164,26 @@ export default {
     //   },
 
       formData: {
-        	libelle:""
+        	libelle_type_prestation:""
         
       },
-      editCondition: {
-        	libelle:""
+      editTypePrestation: {
+        	libelle_type_prestation:""
       },
       search: ""
     };
   },
 
   computed: {
-     ...mapGetters("bienService", ['conditions']),
+     ...mapGetters("bienService", ['typePrestations']),
 
-    conditionFiltre()  {
+    typePrestationFiltre()  {
      
         const searchTerm = this.search.toLowerCase();
 
-return this.conditions.filter((item) => {
+return this.typePrestations.filter((item) => {
   
-     return item.libelle.toLowerCase().includes(searchTerm) 
+     return item.libelle_type_prestation.toLowerCase().includes(searchTerm) 
      
     
 
@@ -195,38 +195,38 @@ return this.conditions.filter((item) => {
     }
   },
   methods: {
-    ...mapActions("bienService", ['ajouterCondition','modifierCondition',
-    'supprimerCondition'
+    ...mapActions("bienService", ['ajouterTypePrestation','modifierTypePrestation',
+    'supprimerTypePrestation'
      
     ]),
     //afiicher modal ajouter
-    afficherModalajouterCondition() {
+    afficherModalAjoutTypaPrestation() {
       this.$("#exampleModal").modal({
         backdrop: "static",
         keyboard: false
       });
     },
     // fonction pour vider l'input ajouter
-    ajouterModalConditionLocal(){
-this.ajouterCondition(this.formData)
+    ajouterModalTypePrestationLocal(){
+this.ajouterTypePrestation(this.formData)
 this.formData = {
-	libelle:"",
+	libelle_type_prestation:"",
 }
 
     },
     
     // afficher modal de modification
-    afficherModalCondition(index) {
+    afficherModalModifierTypePrestation(index) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editCondition = this.conditions[index];
+      this.editTypePrestation = this.typePrestations[index];
     },
     // fonction pour vider l'input modification
-    modificationModalConditionLocal(){
-      this.modifierCondition(this.editCondition)
+    modifierModalTypeprestationLocal(){
+      this.modifierTypePrestation(this.editTypePrestation)
       this.$('#modificationModal').modal('hide');
     },
     

@@ -181,7 +181,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterStockLocal(formData)"
+          @click.prevent="ajouterActeDepenseLocal"
           class="btn btn-primary"
           href="#"
            
@@ -371,7 +371,7 @@
         </table>
       </div>
       <div class="modal-footer">
-        <a class="btn btn-primary" @click.prevent="modifierActeDepense(editActeDepense)">Modifier</a>
+        <a class="btn btn-primary" @click.prevent="modifierActeDepenseLocal(editActeDepense)">Modifier</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
@@ -428,7 +428,7 @@
                 </thead>
                 <tbody>
                        <tr class="odd gradeX" v-for="(acteDepense, index) in 
-                categorieMissionFiltre"
+                acteDepense"
                  :key="acteDepense.id">
                  <td @dblclick="afficherModalModifierActeDepense(index)">
                    {{acteDepense.matricule || 'Non renseigné'}}</td>
@@ -457,15 +457,15 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterStock" main-icon="apps" bg-color="green"></fab>
+    <fab :actions="fabActions" @cache="afficherModalAjouterActeDepense" main-icon="apps" bg-color="green"></fab>
     <notifications  />
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterStock()">Open</button>
+     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterActeDepense()">Open</button>
   </div>
 </template>
   
 <script>
-// import { mapGetters, mapActions } from "vuex";
+ import { mapGetters, mapActions } from "vuex";
 // import moment from "moment";
 // import { formatageSomme } from "../../../Repositories/Repository";
 
@@ -495,11 +495,32 @@ export default {
 //       },
 
       formData: {
-       
+       matricule:"",
+       id_type_acte_depense:"",
+       montant:"",
+       dotation_budgetaire:"",
+       engagement_anterieur:"",
+       engagement_actuel:"",
+       engagement_cumule:"",
+       disponible_budgetaire:"",
+       objet_depense:"",
+       ligne_budgetaire:"",
+       Type_de_procedure:""
         
        
       },
-      editCompte: {
+      editActeDepense: {
+         matricule:"",
+       id_type_acte_depense:"",
+       montant:"",
+       dotation_budgetaire:"",
+       engagement_anterieur:"",
+       engagement_actuel:"",
+       engagement_cumule:"",
+       disponible_budgetaire:"",
+       objet_depense:"",
+       ligne_budgetaire:"",
+       Type_de_procedure:""
        
       },
       search: ""
@@ -511,48 +532,88 @@ export default {
 //     )
 // },
   computed: {
-    // ...mapGetters("bienService", [ 'acteDepense'
+     ...mapGetters("bienService", [ 'acteDepense']),
+
+//             acteDepenseFiltre(){
+
+//      const searchTerm = this.search.toLowerCase();
+
+// return this.acteDepense.filter((item) => {
+  
+//      return item.matricule.toLowerCase().includes(searchTerm) 
+    
+
+  
+  
+
+//    }
+// )
+//    }
    
      
-    // ]),
-    // ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
-    // ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
-
-
+   
     
 
 
    
   },
   methods: {
-    // ...mapActions("SuiviImmobilisation", [
+     ...mapActions("bienService", ['ajouterActeDepense','modifierActeDepense',
+     'supprimerActeDepense'
+
     //   "getAllStock",
     //   "ajouterStock",
     //   "modifierStock",
     //   "supprimerStock"
-    // ]),
+     ]),
     // formatageSomme: formatageSomme,
 
     //afiicher modal ajouter
-    afficherModalAjouterStock() {
+    afficherModalAjouterActeDepense() {
       this.$("#exampleModal").modal({
         backdrop: "static",
         keyboard: false
       });
     },
     // fonction pour vider l'input ajouter
+ajouterActeDepenseLocal(){
+  this.ajouterActeDepense(this.formData)
+  this.formData = {
+     matricule:"",
+       id_type_acte_depense:"",
+       montant:"",
+       dotation_budgetaire:"",
+       engagement_anterieur:"",
+       engagement_actuel:"",
+       engagement_cumule:"",
+       disponible_budgetaire:"",
+       objet_depense:"",
+       ligne_budgetaire:"",
+       Type_de_procedure:""
+
+  }
+},
+
+
+
        // afficher modal de modification
 
-       modifierActeDepense(){
-  this.modifierActeDepense(this.editPrestation)
-  this.$('#modifierModal').modal('hide');
-  // this.editPrestation = {
-  //   libelle_prestation:"",
-  //   libelle:"",
-   
-  // }
+       afficherModalModifierActeDepense(index){
+ 
+ this.$('#modificationModal').modal({
+         backdrop: 'static',
+         keyboard: false
+        });
+
+        this.editActeDepense = this.acteDepense[index];
 },
     
+
+    modifierActeDepenseLocal(){
+      this.modifierActeDepense(this.editActeDepense)
+      this.$('#modificationModal').modal('hide');
+    },
+
 
     // formaterDate(date) {
     //   return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");

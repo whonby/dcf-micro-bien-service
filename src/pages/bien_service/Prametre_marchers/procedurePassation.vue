@@ -5,10 +5,20 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter condition</h3>
+        <h3>Ajouter procedure de passation</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
+             <div class="control-group">
+            <label class="control-label">Type de procedure</label>
+            <div class="controls">
+                <select v-model="formData.type_procedure_id" class="span">
+               <option v-for="varText in typeTypeProcedures" :key="varText.id" 
+               :value="varText.id">{{varText.libelle}}</option>
+           </select>
+            </div>
+          </div>
+
           <div class="control-group">
             <label class="control-label">libelle</label>
             <div class="controls">
@@ -21,13 +31,15 @@
             </div>
           </div>
          
-          
+         
+      
+
          
          </form>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterModalConditionLocal"
+          @click.prevent="ajouterModalTypeAnalyseLocal"
           class="btn btn-primary"
           href="#"
          
@@ -42,27 +54,42 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier condition</h3>
+        <h3>Modifier Type procedure</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
+
+             <div class="control-group">
+            <label class="control-label">Type de procedure</label>
+            <div class="controls">
+                <select v-model="editProcedure.type_procedure_id" class="span">
+               <option v-for="varText in typeTypeProcedures" :key="varText.id" 
+               :value="varText.id">{{varText.libelle}}</option>
+           </select>
+            </div>
+          </div>
+
             <div class="control-group">
             <label class="control-label">libelle</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="editCondition.libelle"
+                v-model="editProcedure.libelle"
                 class="span"
                 placeholder="Saisir le libelle_type"
               />
             </div>
           </div>
+
+        
+
+         
          
         </form>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modificationModalConditionLocal(editCondition)"
+          @click.prevent="modifierModalTypeAnalyseLocal(editProcedure)"
           class="btn btn-primary"
           href="#"
         
@@ -92,7 +119,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des conditions</h5>
+              <h5>Liste type de procedure</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -104,20 +131,24 @@
                 <thead>
                   <tr>
                     <th>libelle</th>
+                    <th>Type de procedure</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(condition, index) in 
-                conditionFiltre"
-                 :key="condition.id">
-                 <td @dblclick="afficherModalCondition(index)">
-                   {{condition.libelle || 'Non renseigné'}}</td>
+                  <tr class="odd gradeX" v-for="(typeProcedure, index) in 
+                typeProcedureFiltre"
+                 :key="typeProcedure.id">
+                 <td @dblclick="afficherModalModifiertextJuridique(index)">
+                   {{typeProcedure.libelle || 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifiertextJuridique(index)">
+                   {{typeProcedure.type_procedure.libelle || 'Non renseigné'}}</td>
+                  
                   
 
 
                      <div class="btn-group">
-              <button @click.prevent="supprimerCondition(condition.id)"  class="btn btn-danger ">
+              <button @click.prevent="supprimerProcedurePassation(typeProcedure.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
@@ -132,8 +163,8 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalajouterCondition" main-icon="apps" bg-color="green"></fab>
- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalajouterCondition()">Open</button>
+    <fab :actions="fabActions" @cache="afficherModalProcedurePassation" main-icon="apps" bg-color="green"></fab>
+ <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalProcedurePassation()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
@@ -142,6 +173,7 @@
   
 <script>
  import { mapGetters, mapActions } from "vuex";
+//  import moment from 'moment';
 export default {
   name:'type facture',
   data() {
@@ -164,24 +196,29 @@ export default {
     //   },
 
       formData: {
-        	libelle:""
+            libelle:"",
+            type_procedure_id:""
+            
+
         
       },
-      editCondition: {
-        	libelle:""
+      editProcedure: {
+             libelle:"",
+             type_procedure_id:""
+            
       },
       search: ""
     };
   },
 
   computed: {
-     ...mapGetters("bienService", ['conditions']),
+     ...mapGetters("bienService", ['procedurePassations','typeTypeProcedures']),
 
-    conditionFiltre()  {
+    typeProcedureFiltre()  {
      
         const searchTerm = this.search.toLowerCase();
 
-return this.conditions.filter((item) => {
+return this.procedurePassations.filter((item) => {
   
      return item.libelle.toLowerCase().includes(searchTerm) 
      
@@ -195,40 +232,46 @@ return this.conditions.filter((item) => {
     }
   },
   methods: {
-    ...mapActions("bienService", ['ajouterCondition','modifierCondition',
-    'supprimerCondition'
+    ...mapActions("bienService", ['ajouterProcedurePassation','modifierProcedurePassation',
+    'supprimerProcedurePassation'
      
     ]),
     //afiicher modal ajouter
-    afficherModalajouterCondition() {
+    afficherModalProcedurePassation() {
       this.$("#exampleModal").modal({
         backdrop: "static",
         keyboard: false
       });
     },
     // fonction pour vider l'input ajouter
-    ajouterModalConditionLocal(){
-this.ajouterCondition(this.formData)
+    ajouterModalTypeAnalyseLocal(){
+this.ajouterProcedurePassation(this.formData)
 this.formData = {
-	libelle:"",
+    libelle:"",
+    type_procedure_id:""
 }
 
     },
     
     // afficher modal de modification
-    afficherModalCondition(index) {
+    afficherModalModifiertextJuridique(index) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editCondition = this.conditions[index];
+      this.editProcedure = this.procedurePassations[index];
     },
     // fonction pour vider l'input modification
-    modificationModalConditionLocal(){
-      this.modifierCondition(this.editCondition)
+    modifierModalTypeAnalyseLocal(){
+      this.modifierProcedurePassation(this.editProcedure)
       this.$('#modificationModal').modal('hide');
     },
+
+    // formatage date
+// formaterDate(date) {
+//       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+//     },
     
     // alert() {
     //   console.log("ok");

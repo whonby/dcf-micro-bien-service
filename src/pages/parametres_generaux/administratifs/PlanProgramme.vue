@@ -121,7 +121,7 @@
             <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span3" placeholder="Saisir le libelle" />
               </div>
             </div>
            
@@ -183,7 +183,7 @@
             <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="nouvelElementEnfant.libelle" class="span3" placeholder="Saisir le libelle" />
               </div>
             </div>
            
@@ -229,7 +229,7 @@
             <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="editPlanProgramme.libelle" class="span" placeholder="" />
+                <input type="text" v-model="editPlanProgramme.libelle" class="span3" placeholder="" />
               </div>
             </div>
            

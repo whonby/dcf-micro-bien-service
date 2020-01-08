@@ -5,38 +5,29 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">x</button>
-        <h3>Ajouter Decision Marche</h3>
+        <h3>Ajouter Type Acte Depense</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">decision</label>
+            <label class="control-label">Type Acte Depense</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="formData.decision"
+                v-model="formData.libelle"
                 class="span"
-                placeholder="Saisir le decision"
+                placeholder="Saisir le libelle_type"
               />
             </div>
           </div>
-          <div class="control-group">
-                <label class="control-label">document_procedure</label>
-                <div class="controls">
-                  <select v-model="formData.document_procedure" >
-                    <option value>Sélectionner</option>
-                    <option></option>
-                  </select>
-                </div>
-              </div>
-          
          
+          
          
          </form>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterFamilleLocal(formData)"
+          @click.prevent="ajouterTypeActeDepenseLocal"
           class="btn btn-primary"
           href="#"
          
@@ -51,38 +42,27 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">x</button>
-        <h3>Modifier Decision marche</h3>
+        <h3>Modifier Type Acte Depense</h3>
       </div>
       <div class="modal-body">
-          <form class="form-horizontal">
-          <div class="control-group">
-            <label class="control-label">decision</label>
+        <form class="form-horizontal">
+            <div class="control-group">
+            <label class="control-label">type Acte Depense</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="formData.decision"
+                v-model="editTypeActeDepense.libelle"
                 class="span"
-                placeholder="Saisir le decision"
+                placeholder="Saisir le libelle_type"
               />
             </div>
           </div>
-          <div class="control-group">
-                <label class="control-label">document_procedure</label>
-                <div class="controls">
-                  <select v-model="formData.document_procedure_id" >
-                    <option value>Sélectionner</option>
-                    <option></option>
-                  </select>
-                </div>
-              </div>
-          
          
-         
-         </form>
+        </form>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierFamilleLocal(editDecisionMarche)"
+          @click.prevent="modifierModalTypeActeDepenseLocal(editTypeActeDepense)"
           class="btn btn-primary"
           href="#"
         
@@ -112,7 +92,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des decisions marches</h5>
+              <h5>Liste des type Acte Depense</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -123,14 +103,28 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Decision</th>
-                    <th>Document Procedure</th>
-                     
+                    <th>Libelle</th>
+                  
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                 
+                  <tr class="odd gradeX" v-for="(typeActe, index) in 
+                typeActeDepenseFiltre"
+                 :key="typeActe.id">
+                 <td @dblclick="afficherModalModifierTpeActeDepense(index)">
+                   {{typeActe.libelle || 'Non renseigné'}}</td>
+                  
+
+
+
+                     <div class="btn-group">
+              <button @click.prevent="supprimerTypeActeDepense(typeActe.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+             
+            </div>
+
+                       </tr>
                 </tbody>
               </table>
               
@@ -140,8 +134,8 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab>
- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTitre()">Open</button>
+    <fab :actions="fabActions" @cache="afficherModalAjouterTypeActeDepense" main-icon="apps" bg-color="green"></fab>
+ <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTypeActeDepense()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
@@ -151,7 +145,7 @@
 <script>
  import { mapGetters, mapActions } from "vuex";
 export default {
-  name:'banque',
+  name:'type acte depense',
   data() {
     return {
       fabActions: [
@@ -172,59 +166,71 @@ export default {
     //   },
 
       formData: {
-        decision:"",
-        document_procedure_id:""
+        libelle:""
       },
-      editDecisionMarche: {
-      decision:"",
-        document_procedure_id:""
+      editTypeActeDepense: {
+        libelle:""
+     
       },
       search: ""
-    };
+    };  
   },
 
   computed: {
-     ...mapGetters("bienService", []),
-    // filtre_equipement() {
-    //   const st = this.search.toLowerCase();
-    //   return this.equipements.filter(type => {
-    //     return (
-          
-    //       type.libelle.toLowerCase().includes(st)
-    //     );
-    //   });
-    // }
+     ...mapGetters("bienService", ['typeActeDepenses']),
+
+    typeActeDepenseFiltre() {
+  const searchTerm = this.search.toLowerCase();
+
+return this.typeActeDepenses.filter((item) => {
+  
+     return item.libelle.toLowerCase().includes(searchTerm) 
+     
+  
+   }
+)
+    }
   },
   methods: {
-    ...mapActions("bienService", [
-     "getDecisionMarche",
-     "ajouterDecisionMarche",
-     "modifiertDecisionMarche",
-     "supprimerDecisionMarche"
+    ...mapActions("bienService", ['ajouterTypeActeDepense','modifierTypeActeDepense',
+    'supprimerTypeActeDepense'
+     
     ]),
     //afiicher modal ajouter
-    afficherModalAjouterTitre() {
+    afficherModalAjouterTypeActeDepense() {
       this.$("#exampleModal").modal({
         backdrop: "static",
         keyboard: false
       });
     },
     // fonction pour vider l'input ajouter
+
+    ajouterTypeActeDepenseLocal(){
+      this.ajouterTypeActeDepense(this.formData)
+      this.formData = {
+        libelle:""
+      }
+    },
     
     // afficher modal de modification
-    // afficherModalModifierFamille(index) {
-    //   this.$("#modificationModal").modal({
-    //     backdrop: "static",
-    //     keyboard: false
-    //   });
+    afficherModalModifierTpeActeDepense(index) {
+      this.$("#modificationModal").modal({
+        backdrop: "static",
+        keyboard: false
+      });
 
-    //   this.editEquipement = this.equipements[index];
-    // },
-    // fonction pour vider l'input modification
-    
-    alert() {
-      console.log("ok");
+      this.editTypeActeDepense = this.typeActeDepenses[index];
     },
+    // fonction pour vider l'input modification
+
+    modifierModalTypeActeDepenseLocal(){
+      this.modifierTypeActeDepense(this.editTypeActeDepense)
+       this.$('#modificationModal').modal('hide');
+    },
+    
+    // alert() {
+    //   console.log("ok");
+    // },
      ExporterEnExel(){
       this.$refs.excel.click()
     }
