@@ -9,8 +9,8 @@
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
-           <tr>
-               <td>
+           
+              
           <div class="control-group">
             <label class="control-label">libelle</label>
             <div class="controls">
@@ -22,8 +22,7 @@
               />
             </div>
           </div>
-               </td>
-               <td>
+              
           <div class="control-group">
             <label class="control-label">Date</label>
             <div class="controls">
@@ -35,8 +34,7 @@
               />
             </div>
           </div>
-               </td>
-               <td>
+               
            <div class="control-group">
             <label class="control-label"> autre text</label>
             <div class="controls">
@@ -48,13 +46,11 @@
               />
             </div>
           </div>
-               </td>
-           </tr>
+            
 
-             <tr>
-               <td>
+             
           <div class="control-group">
-            <label class="control-label">libelle</label>
+            <label class="control-label">Version</label>
             <div class="controls">
               <input
                 type="text"
@@ -64,8 +60,7 @@
               />
             </div>
           </div>
-               </td>
-               <td>
+              
           <div class="control-group">
             <label class="control-label">Autre text modifier</label>
             <div class="controls">
@@ -77,9 +72,7 @@
               />
             </div>
           </div>
-               </td>
-
-               <td>
+              
            <div class="control-group">
             <label class="control-label"> text juridique</label>
             <div class="controls">
@@ -89,8 +82,7 @@
            </select>
             </div>
           </div>
-               </td>
-           </tr>
+           
           
          
          </form>
@@ -116,8 +108,7 @@
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
-             <tr>
-               <td>
+            
           <div class="control-group">
             <label class="control-label">libelle</label>
             <div class="controls">
@@ -129,8 +120,7 @@
               />
             </div>
           </div>
-               </td>
-               <td>
+             
           <div class="control-group">
             <label class="control-label">Date</label>
             <div class="controls">
@@ -142,8 +132,7 @@
               />
             </div>
           </div>
-               </td>
-               <td>
+               
            <div class="control-group">
             <label class="control-label"> autre text</label>
             <div class="controls">
@@ -155,11 +144,9 @@
               />
             </div>
           </div>
-               </td>
-           </tr>
+            
 
-             <tr>
-               <td>
+            
           <div class="control-group">
             <label class="control-label">version</label>
             <div class="controls">
@@ -171,10 +158,9 @@
               />
             </div>
           </div>
-               </td>
-               <td>
+              
           <div class="control-group">
-            <label class="control-label">Autre text modifier</label>
+            <label class="control-label"> text modifier</label>
             <div class="controls">
               <input
                 type="date"
@@ -184,19 +170,17 @@
               />
             </div>
           </div>
-               </td>
-               <td>
+               
            <div class="control-group">
             <label class="control-label"> text juridique</label>
             <div class="controls">
-              <select v-model="formData.text_juridique_id" class="span">
+              <select v-model="editTextJuridique.text_juridique_id" class="span">
                <option v-for="varText in text_juridiques" :key="varText.id" 
                :value="varText.id">{{varText.libelle_text}}</option>
            </select>
             </div>
           </div>
-               </td>
-           </tr>
+           
           
         </form>
       </div>
@@ -232,7 +216,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des texts juridiques</h5>
+              <h5>Liste autre text juridiques</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -261,12 +245,10 @@
                    {{formaterDate(textJuridique.date_autre_texte) || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifiertextJuridique(index)">
                    {{textJuridique.desc_autre_texte || 'Non renseigné'}}</td>
-
-
                     <td @dblclick="afficherModalModifiertextJuridique(index)">
                    {{textJuridique.id_autre_texte_modifie || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifiertextJuridique(index)">
-                   {{formaterDate(textJuridique.textJuridique.text_juridique_id) || 'Non renseigné'}}</td>
+                   {{textJuridique.text_juridique.libelle_text || 'Non renseigné'}}</td>
                    
                   
 
@@ -341,7 +323,7 @@ export default {
   },
 
   computed: {
-     ...mapGetters("bienService", ['autresTexteJuridiques']),
+     ...mapGetters("bienService", ['autresTexteJuridiques','text_juridiques']),
 
     textJuridiqueFiltre()  {
      
@@ -349,7 +331,7 @@ export default {
 
 return this.autresTexteJuridiques.filter((item) => {
   
-     return item.libelle_text.toLowerCase().includes(searchTerm) 
+     return item.libelle_autre_texte.toLowerCase().includes(searchTerm) 
      
     
 
@@ -376,9 +358,12 @@ return this.autresTexteJuridiques.filter((item) => {
     ajouterModalTypeAnalyseLocal(){
 this.ajouterAutreTextJuridique(this.formData)
 this.formData = {
-	 libelle_text:"",
-            date_effet_text:"",
-            objet_text:""
+		libelle_autre_texte:"",
+            date_autre_texte:"",
+            desc_autre_texte:"",
+             version:"",
+             id_autre_texte_modifie:"",
+             text_juridique_id:""
 }
 
     },

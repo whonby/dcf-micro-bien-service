@@ -294,21 +294,207 @@ export const SUPPRIMER_TYPE_FACTURE = (state, id)=> {
 }
 
 
+// mutation type marcher
+
+
+// get all type facture
+export const GET_TYPE_PROCEDURE = (state, tableau_type_procedure) =>{
+    state.typeTypeProcedures = tableau_type_procedure
+}
+
+// add * type facture
+
+export const AJOUTER_TYPE_PROCEDURE = (state, elementAjouter) => {
+    state.typeTypeProcedures.unshift(elementAjouter)
+}
+
+
+// update all type facture
+export const MODIFIER_TYPE_PROCEDURE = (state, elementModif)=>{
+    state.typeTypeProcedures = state.typeTypeProcedures.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all type facture
+
+export const SUPPRIMER_TYPE_PROCEDURE = (state, id)=> {
+    state.typeTypeProcedures = state.typeTypeProcedures.filter(prest => prest.id !=id)
+}
+
+
+
+
+
+/// mutation procedure passation
+
+// get all type facture
+export const GET_PROCEDURE_PASSATION = (state, tableau_procedure_passation) =>{
+    state.procedurePassations = tableau_procedure_passation
+}
+
+// add * type facture
+
+export const AJOUTER_PROCEDURE_PASSATION = (state, elementAjouter) => {
+    state.procedurePassations.unshift(elementAjouter)
+}
+
+
+// update all type facture
+export const MODIFIER_PROCEDURE_PASSATION = (state, elementModif)=>{
+    state.procedurePassations = state.procedurePassations.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all type facture
+
+export const SUPPRIMER_PROCEDURE_PASSATION = (state, id)=> {
+    state.procedurePassations = state.procedurePassations.filter(prest => prest.id !=id)
+}
+
+
+
+
+
+// la mutation d'appel d'offre 
+
+
+
+
+
+// get all type facture
+export const GET_APPEL_OFFRE = (state, tableau_appel_offre) =>{
+    state.appelOffres = tableau_appel_offre
+}
+
+// add * type facture
+
+export const AJOUTER_APPEL_OFFRE = (state, elementAjouter) => {
+    state.appelOffres.unshift(elementAjouter)
+}
+
+
+// update all type facture
+export const MODIFIER_APPEL_OFFRE = (state, elementModif)=>{
+    state.appelOffres = state.appelOffres.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all type facture
+
+export const SUPPRIMER_APPEL_OFFRE = (state, id)=> {
+    state.appelOffres = state.appelOffres.filter(prest => prest.id !=id)
+}
+
+
+
+// mutation type marche
+
+
+// get all type facture
+export const GET_TYPE_MARCHE = (state, tableau_type_marche) =>{
+    state.typeMarches = tableau_type_marche
+}
+
+// add * type facture
+
+export const AJOUTER_TYPE_MARCHE = (state, elementAjouter) => {
+    state.typeMarches.unshift(elementAjouter)
+}
+
+
+// update all type facture
+export const MODIFIER_TYPE_MARCHE = (state, elementModif)=>{
+    state.typeMarches = state.typeMarches.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all marche
+
+export const SUPPRIMER_TYPE_MARCHE = (state, id)=> {
+    state.typeMarches = state.typeMarches.filter(marche => marche.id !=id)
+}
+
+
+
+
+
+
+// la mutation de mode bde passation
+
+// get all type facture
+export const GET_MODE_PASSATION = (state, tableau_mode_passation) =>{
+    state.modePassations = tableau_mode_passation
+}
+
+// add * type facture
+
+export const AJOUTER_MODE_PASSATION = (state, elementAjouter) => {
+    state.modePassations.unshift(elementAjouter)
+}
+
+
+// update all type facture
+export const MODIFIER_MODE_PASSATION = (state, elementModif)=>{
+    state.modePassations = state.modePassations.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all marche
+
+export const SUPPRIMER_MODE_PASSATION = (state, id)=> {
+    state.modePassations = state.modePassations.filter(passation => passation.id !=id)
+}
+
+
+
+
+
+
+
+
+
+
+
 
 // get all type acte depense
 export const GET_ALL_TYPE_ACTE_DEPENSE = (state, tableau_type_acte_depense) =>{
-    state.typeActeDepense = tableau_type_acte_depense
+    state.typeActeDepenses = tableau_type_acte_depense
 }
 
 // add * type_prestation
 
 export const AJOUTER_TYPE_ACTE_DEPENSE = (state, elementAjouter) => {
-    state.typeActeDepense.unshift(elementAjouter)
+    state.typeActeDepenses.unshift(elementAjouter)
 }
 
 // update all type_prestation
 export const MODIFIER_TYPE_ACTE_DEPENSE = (state, elementModif)=>{
-    state.typeActeDepense = state.typeActeDepense.map(response => {
+    state.typeActeDepenses = state.typeActeDepenses.map(response => {
         if(response.id == elementModif.id){
             response = {...elementModif}
         }
@@ -320,8 +506,11 @@ export const MODIFIER_TYPE_ACTE_DEPENSE = (state, elementModif)=>{
 // delete all type_acte depense
 
 export const SUPPRIMER_TYPE_ACTE_DEPENSE = (state, id)=> {
-    state.typeActeDepense = state.typeActeDepense.filter(prest => prest.id !=id)
+    state.typeActeDepenses = state.typeActeDepenses.filter(prest => prest.id !=id)
 }
+
+
+
 
 
 // get all acteur depense

@@ -38,7 +38,7 @@
             </router-link>
           </li>
           <li>
-            <router-link :to="{name: ''}" tag="a">
+            <router-link :to="{name: 'autreTextJuridique'}" tag="a">
               <i class="icon-bar-chart"></i>
            Autre texte juridique
             </router-link>
@@ -152,28 +152,28 @@
         <ul class="dropdown-menu">
           <li class="divider"></li>
           <li>
-            <router-link :to="{name: 'TypeMarche'}" tag="a">
+            <router-link :to="{name: 'typeMarche'}" tag="a">
               <i class="icon-check"></i>
              Type de marché
             </router-link>
           </li>
           <li class="divider"></li>
            <li>
-            <router-link :to="{name: ''}" tag="a">
+            <router-link :to="{name: 'typeProcedure'}" tag="a">
               <i class="icon-bar-chart"></i>
            Type de procedure
             </router-link>
           </li>
           <li class="divider"></li>
            <li>
-            <router-link :to="{name: ''}" tag="a">
+            <router-link :to="{name: 'procedurePassation'}" tag="a">
               <i class="icon-bar-chart"></i>
            Procedure de passation
             </router-link>
           </li>
           <li class="divider"></li>
           <li>
-            <router-link :to="{name: 'ModePassation'}" tag="a">
+            <router-link :to="{name: 'modePassation'}" tag="a">
               <i class="icon-key"></i> Mode de passation
             </router-link>
           </li>
@@ -200,7 +200,7 @@
        
            <li class="divider"></li>
           <li>
-            <router-link :to="{name: ''}" tag="a">
+            <router-link :to="{name: 'appelOffre'}" tag="a">
               <i class="icon-key"></i> Appel d'offres
             </router-link>
           </li>

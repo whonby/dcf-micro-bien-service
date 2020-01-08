@@ -31,7 +31,12 @@ const defaultState = {
     typeTextJuridiques:[],
     realiteServiceFaits:[],
     text_juridiques:[],
-    autresTexteJuridiques:[]
+    autresTexteJuridiques:[],
+    typeTypeProcedures:[],
+    procedurePassations:[],
+    appelOffres:[],
+    typeMarches:[],
+    modePassations:[]
 
 
 

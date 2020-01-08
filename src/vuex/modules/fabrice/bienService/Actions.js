@@ -2053,6 +2053,298 @@ export function supprimerTypeTextJuridique({commit}, id) {
 }
 
 
+////////////////////
+
+export  function  getTypeProcedure({commit}) {
+  queue.push(() => axios.get('/type_procedures').then((response) => {
+    commit('GET_TYPE_PROCEDURE', response.data.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter les infos 
+
+export function ajouterTypeProcedure({commit}, elementAjout){
+  asyncLoading(axios.post('/type_procedures',elementAjout)).then(response =>{
+      if(response.status == 201){
+          commit('AJOUTER_TYPE_PROCEDURE', response.data)
+
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier le type text juridique
+
+
+export function modifierTypeProcedure({commit}, element_modifie) {
+  asyncLoading( axios.put('/type_procedures',element_modifie)).then(response => {
+       commit('MODIFIER_TYPE_PROCEDURE', response.data)
+       
+
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
+// supprimer le type text juridique
+
+export function supprimerTypeProcedure({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('SUPPRIMER_TYPE_PROCEDURE', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+     axios.delete('/type_procedures/' + id).then(() => dialog.close() )   
+ })
+
+}
+
+// action type marche
+
+
+// export  function  getTypeProcedure({commit}) {
+//   queue.push(() => axios.get('/type_procedures').then((response) => {
+//     commit('GET_TYPE_PROCEDURE', response.data.data)
+    
+// }).catch(error => console.log(error)))
+// }
+
+// action pour ajouter les infos 
+
+// export function ajouterTypeProcedure({commit}, elementAjout){
+//   asyncLoading(axios.post('/type_procedures',elementAjout)).then(response =>{
+//       if(response.status == 201){
+//           commit('AJOUTER_TYPE_PROCEDURE', response.data)
+
+//           this.$app.$notify({
+//             title: 'success ',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
+
+//   }).catch(error => console.log(error))
+// }
+
+// action pour modifier le type text juridique
+
+
+// export function modifierTypeProcedure({commit}, element_modifie) {
+//   asyncLoading( axios.put('/type_procedures',element_modifie)).then(response => {
+//        commit('MODIFIER_TYPE_PROCEDURE', response.data)
+       
+
+//        this.$app.$notify({
+//          title: 'success ',
+//          text: 'Modification effectué !',
+//          type:"success"
+//        })
+//    }).catch(error => console.log(error))
+// }
+// supprimer le type text juridique
+
+// export function supprimerTypeProcedure({commit}, id) {
+//  this.$app.$dialog
+//  .confirm("Voulez vouz vraiment supprimer ?.")
+//  .then(dialog => {
+//     commit('SUPPRIMER_TYPE_PROCEDURE', id)
+//    // // dialog.loading(false) // stops the proceed button's loader
+//      axios.delete('/type_procedures/' + id).then(() => dialog.close() )   
+//  })
+
+// }
+
+
+
+// action pour l'appel d'offre
+
+
+
+
+export  function  getTypeMarche({commit}) {
+  queue.push(() => axios.get('/type_marches').then((response) => {
+    commit('GET_TYPE_MARCHE', response.data.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter les infos 
+
+export function ajouterTypeMarche({commit}, elementAjout){
+  asyncLoading(axios.post('/type_marches',elementAjout)).then(response =>{
+      if(response.status == 201){
+          commit('AJOUTER_TYPE_MARCHE', response.data)
+
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier le type text juridique
+
+
+export function modifierTypeMarche({commit}, element_modifie) {
+  asyncLoading( axios.put('/type_marches',element_modifie)).then(response => {
+       commit('MODIFIER_TYPE_MARCHE', response.data)
+       
+
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
+// supprimer appel d'offre
+
+export function supprimerTypeMarche({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('SUPPRIMER_TYPE_MARCHE', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+     axios.delete('/type_marches/' + id).then(() => dialog.close() )   
+ })
+
+}
+
+
+// action pour le mode de passation
+
+
+
+export  function  getModePassation({commit}) {
+  queue.push(() => axios.get('/mode_passations').then((response) => {
+    commit('GET_MODE_PASSATION', response.data.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter les infos 
+
+export function ajouterModePassation({commit}, elementAjout){
+  asyncLoading(axios.post('/mode_passations',elementAjout)).then(response =>{
+      if(response.status == 201){
+          commit('AJOUTER_MODE_PASSATION', response.data)
+
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier le type text juridique
+
+
+export function modifierModePassation({commit}, element_modifie) {
+  asyncLoading( axios.put('/mode_passations',element_modifie)).then(response => {
+       commit('MODIFIER_MODE_PASSATION', response.data)
+       
+
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
+// supprimer appel d'offre
+
+export function supprimerModePassation({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('SUPPRIMER_MODE_PASSATION', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+     axios.delete('/mode_passations/' + id).then(() => dialog.close() )   
+ })
+
+}
+
+
+
+
+
+
+export  function  getProcedurePassation({commit}) {
+  queue.push(() => axios.get('/procedure_passations').then((response) => {
+    commit('GET_PROCEDURE_PASSATION', response.data.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter les infos 
+
+export function ajouterProcedurePassation({commit}, elementAjout){
+  asyncLoading(axios.post('/procedure_passations',elementAjout)).then(response =>{
+      if(response.status == 201){
+          commit('AJOUTER_PROCEDURE_PASSATION', response.data)
+
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier le type text juridique
+
+
+export function modifierProcedurePassation({commit}, element_modifie) {
+  asyncLoading( axios.put('/procedure_passations',element_modifie)).then(response => {
+       commit('MODIFIER_PROCEDURE_PASSATION', response.data)
+       
+
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
+// supprimer le type text juridique
+
+export function supprimerProcedurePassation({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('SUPPRIMER_PROCEDURE_PASSATION', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+     axios.delete('/procedure_passations/' + id).then(() => dialog.close() )   
+ })
+
+}
+
+
+
+
+
+
+
+
+
+
+
 // action pour obtenir les données de realite du service fait
 
 export  function  getRealiteServiceFait({commit}) {

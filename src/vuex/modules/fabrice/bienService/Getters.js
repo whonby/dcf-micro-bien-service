@@ -29,3 +29,30 @@ export const typeTextJuridiques = state => state.typeTextJuridiques
 export const realiteServiceFaits = state => state.realiteServiceFaits
 export const text_juridiques = state => state.text_juridiques
 export const autresTexteJuridiques = state => state.autresTexteJuridiques
+export const typeTypeProcedures = state => state.typeTypeProcedures
+export const procedurePassations = state => state.procedurePassations
+export const typeMarches = state => state.typeMarches
+export const modePassations = state => state.modePassations
+
+export const appelOffres = state => state.appelOffres
+
+
+// gettes  personnaliser d'appel d'offres
+
+
+export  const getAppelOffresPersonnaliser = (state, getters,rootState, rootGetters) =>
+state.appelOffres.map(element => {
+    if(element.unite_administrative_id !== null ){
+        element = {
+            ...element,
+           
+           
+           objetUniteAdministrative:rootGetters['uniteadministrative/uniteAdministratives'].find(
+               plans => plans.id == element.unite_administrative_id
+            )
+            
+        }
+        
+    }
+    return element;
+})
