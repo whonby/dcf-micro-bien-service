@@ -1259,3 +1259,29 @@ export const MODIFIER_AUTRE_TEXT_JURIDIQUE = (state, elementModif)=>{
 export const SUPPRIMER_AUTRE_TEXT_JURIDIQUE = (state, id)=> {
     state.autresTexteJuridiques = state.autresTexteJuridiques.filter(autreText => autreText.id !=id)
 }
+
+/*Mutation lettre d'invitation*/
+
+export const GET_LETTRE_INVITATION = (state, tableau_autre_text_juridique) =>{
+    state.lettreInvitation = tableau_autre_text_juridique
+}
+
+export const AJOUTER_LETTRE_INVITATION = (state, elementAjouter) => {
+    state.lettreInvitation.unshift(elementAjouter)
+}
+
+
+
+export const MODIFIER_LETTRE_INVITATION = (state, elementModif)=>{
+    state.lettreInvitation = state.lettreInvitation.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_LETTRE_INVITATION = (state, id)=> {
+    state.lettreInvitation = state.lettreInvitation.filter(autreText => autreText.id !=id)
+}
+/*fin Mutation lettre d'invitation*/

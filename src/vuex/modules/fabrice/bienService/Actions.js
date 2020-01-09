@@ -2512,4 +2512,58 @@ export function supprimerRealiteServiceFait({commit}, id) {
 }
 
 
+/*Action lettre d'invitation*/
+
+export  function  getLettreInvitation({commit}) {
+    queue.push(() => axios.get('/lettre_invitations').then((response) => {
+        commit('GET_LETTRE_INVITATION', response.data.data)
+
+    }).catch(error => console.log(error)))
+}
+
+// action pour ajouter les infos
+
+export function ajouterLettreInvitation({commit}, elementAjout){
+    asyncLoading(axios.post('/lettre_invitations',elementAjout)).then(response =>{
+        if(response.status == 201){
+            commit('AJOUTER_LETTRE_INVITATION', response.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
+// action pour modifier le type text juridique
+
+
+export function modifierLettreInvitation({commit}, element_modifie) {
+    asyncLoading( axios.put('/lettre_invitations',element_modifie)).then(response => {
+        commit('MODIFIER_LETTRE_INVITATION', response.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}
+// supprimer le type text juridique
+
+export function supprimerLettreInvitation({commit}, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_LETTRE_INVITATION', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/lettre_invitations/' + id).then(() => dialog.close() )
+        })
+
+}
+/*Action lettre d'invitation*/
+
+
 

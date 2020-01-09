@@ -604,8 +604,46 @@
 
               </div>
 
-            <div id="tab21" class="tab-pane"> <img src="img/demo/demo-image2.jpg" alt="demo-image">
-              <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment.</p>
+            <div id="tab21" class="tab-pane">
+<div align="right">
+                <div class="widget-content">
+
+                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+
+                </div>
+
+</div>
+                <table class="table table-bordered table-striped" v-if="marcheid">
+                    <thead>
+                    <tr>
+
+                        <th>Date lettre</th>
+                        <th>Ref lettre </th>
+                        <th>Destination</th>
+                        <th>Date cojo</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="odd gradeX" v-for="(appelOffre, index) in lettreInvitationAMarche(marcheid)"
+                        :key="appelOffre.id">
+                        <td @click="afficheBouttonTechFinInvitation(index)">
+                            {{appelOffre.date_lettre || 'Non renseigné'}}</td>
+                        <td @click="afficheBouttonTechFinInvitation(index)">
+                            {{appelOffre.ref_lettre || 'Non renseigné'}}</td>
+                        <td @click="afficheBouttonTechFinInvitation(index)">
+                            {{appelOffre.destination || 'Non renseigné'}}</td>
+                        <td @click="afficheBouttonTechFinInvitation(index)">
+                            {{appelOffre.date_cojo || 'Non renseigné'}}</td>
+                        <div class="btn-group">
+                            <button @click.prevent="supprimerLettreInvitation(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
+                                <span class=""><i class="icon-trash"></i></span></button>
+
+                        </div>
+
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div id="tab31" class="tab-pane">
@@ -1021,13 +1059,176 @@
                 <a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
-
-
-
-
         <!--Fin dossier candidature-->
 
+           <!--Lettre d'invitation-->
+        <div id="ajouterLettreInvitation" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter lettre d'invitation</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
 
+
+                    <div class="control-group">
+                        <label class="control-label">Appel d'offre</label>
+                        <div class="controls">
+                            <select v-model="formLettre.appel_offre_id" class="span">
+                                <option v-for="plans in listeAppelOffre(marcheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.objet_appel}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="control-group">
+                        <label class="control-label">Date lettre</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="formLettre.date_lettre"
+                                    class="span"
+                                    placeholder="Saisir le nom_bailleur"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Refernece lettre</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formLettre.ref_lettre"
+                                    class="span"
+                                    placeholder="Saisir l"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Destinantion</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formLettre.destination"
+                                    class="span"
+                                    placeholder="Saisir "
+                            />
+                        </div>
+                    </div>
+
+
+                    <div class="control-group">
+                        <label class="control-label">Date cojo</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="formLettre.date_cojo"
+                                    class="span"
+                                    placeholder="Saisir email bailleur"
+                            />
+                        </div>
+                    </div>
+                    <!-- <div class="control-group">
+                         <label class="control-label">Appel d'offre</label>
+                         <div class="controls">
+                             <input
+                                     type="text"
+                                     v-model="formData.appel_offre"
+                                     class="span"
+                                     placeholder="saisir le contact"
+                             />
+                         </div>
+                     </div>-->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterLettreInv()" href="#">Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        </div>
+        <div id="modificationLettreInvitation" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Modification lettre invitation</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+
+
+                    <div class="control-group">
+                        <label class="control-label">Appel d'offre</label>
+                        <div class="controls">
+                            <select v-model="edite_lettre_invitation.appel_offre_id" class="span">
+                                <option v-for="plans in listeAppelOffre(marcheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.objet_appel}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="control-group">
+                        <label class="control-label">Date lettre</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="edite_lettre_invitation.date_lettre"
+                                    class="span"
+                                    placeholder="Saisir le nom_bailleur"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Refernece lettre</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="edite_lettre_invitation.ref_lettre"
+                                    class="span"
+                                    placeholder="Saisir l"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Destinantion</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="edite_lettre_invitation.destination"
+                                    class="span"
+                                    placeholder="Saisir "
+                            />
+                        </div>
+                    </div>
+
+
+                    <div class="control-group">
+                        <label class="control-label">Date cojo</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="edite_lettre_invitation.date_cojo"
+                                    class="span"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+                    <!-- <div class="control-group">
+                         <label class="control-label">Appel d'offre</label>
+                         <div class="controls">
+                             <input
+                                     type="text"
+                                     v-model="formData.appel_offre"
+                                     class="span"
+                                     placeholder="saisir le contact"
+                             />
+                         </div>
+                     </div>-->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationLettreInvitation()" href="#">Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        </div>
+        <!--Fin lettre d'invitation-->
         <!--Fin contratualisation-->
     </div>
 </template>
@@ -1048,6 +1249,7 @@
                     }
 
                 ],
+                edite_lettre_invitation:"",
                 detail_dossier_candidature:"",
                 detail_offre_technique:"",
                 detail_offre_finnancier:"",
@@ -1152,6 +1354,12 @@ formOffreFinanciere:{
                     imputation:"",
                     marche_id:"",
                 },
+                formLettre: {
+                    appel_offre_id:"",
+                    date_lettre:"",
+                    ref_lettre:"",
+                    destination:"",
+                },
                 edite_appel_offre: "",
                 search: "",
                 edite_lot:{
@@ -1175,7 +1383,8 @@ created() {
 },
         computed: {
             ...mapGetters("bienService", [ 'acteDepense',"getMarchePersonnaliser","appelOffres",
-                "lots","modePassations", "procedurePassations","getterDossierCandidats","getterOffreFinanciers","gettersOffreTechniques"]),
+                "lots","modePassations", "procedurePassations","getterDossierCandidats",
+                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation"]),
             listeAppelOffre(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -1201,6 +1410,13 @@ created() {
                     }
                 }
             },
+            lettreInvitationAMarche: function () {
+                return marche_id => {
+                    if (marche_id != "") {
+                        return this.getterLettreInvitation.filter(idmarche => idmarche.appel_offre.marche.id == marche_id)
+                    }
+                }
+            }
             // filtre_equipement() {
             //   const st = this.search.toLowerCase();
             //   return this.equipements.filter(type => {
@@ -1233,7 +1449,9 @@ created() {
                 'ajouterAppelOffre','modifierAppelOffre',"supprimerAppelOffre","modifierAppelOffre",
                 "ajouterLot","modifierLot","supprimerLot","ajouterDossierCandidat","getDossierCandidat",
                 "modifierDossierCandidat","supprimerDossierCandidat","ajouterOffreTechnique","modifierOffreTechnique",
-                "supprimerOffreTechnique","ajouterOffreFinancier","modifierOffreFinancier","supprimerOffreFinancier"
+                "supprimerOffreTechnique","ajouterOffreFinancier","modifierOffreFinancier","supprimerOffreFinancier",
+                "ajouterLettreInvitation",
+                "modifierLettreInvitation","supprimerLettreInvitation"
 
                 //   "getAllStock",
                 //   "ajouterStock",
@@ -1283,6 +1501,15 @@ created() {
                         marche_id:"",
                         appel_offre_id:"",
                         mode_passation_id:""
+                }
+            },
+            ajouterLettreInv(){
+                this.ajouterLettreInvitation(this.formLettre)
+                this.formLettre= {
+                    appel_offre_id:"",
+                        date_lettre:"",
+                        ref_lettre:"",
+                        destination:"",
                 }
             },
             ajouterOffreT(){
@@ -1418,6 +1645,17 @@ created() {
             // eslint-disable-next-line no-unused-vars
             afficheBouttonTechFin(index){
              this.isOffreTechniqueFinancier=true
+            },
+            afficheBouttonTechFinInvitation(index){
+                this.$('#modificationLettreInvitation').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+
+                this.edite_lettre_invitation = this.getterLettreInvitation[index];
+            },
+            modificationLettreInvitation(){
+                this.modifierLettreInvitation(this.edite_lettre_invitation)
             },
             // formaterDate(date) {
             //   return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
