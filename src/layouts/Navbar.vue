@@ -91,7 +91,7 @@ export default {
             "getClasses","getEchelons","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite"]),
 
-      ...mapActions('gestionMarche',['getTypeMarche','getModePassation',"getSecteurActivite",
+      ...mapActions('gestionMarche',['getTypeMarche','s',"getSecteurActivite",
         "getEntreprise","getEtapeMarche","getDocumentPTBAPPM","getMarcheContrat","getPresenceCF",
         "getDocumentPresence","getNombreMarcheByProcedure","sourcePersonnalise",
         "getSourceFinnancementByMarche","getMarcheContratExecution"]),
@@ -116,7 +116,8 @@ export default {
        ...mapActions('bienService', ['getActeurDepense', 'getBailleur','getTypeFacture',
        'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse',
        'getTypePrestation', 'getCondition', 'getTextJuridique', 
-       'getAutreTextJuridique','getDecisionMarche', 'getMarche'])
+       'getAutreTextJuridique','getDecisionMarche', 'getMarche', 'getTypeMarches',
+       'getModePassations', 'getTypeProcedures', 'getProcedurePassation'])
 
   },
 
@@ -190,7 +191,7 @@ this.getAllBudgetGeneral();
             /**Gestion des marche*/
             
       this.getTypeMarche()
-      this.getModePassation()
+      this.s()
       this.getSecteurActivite()
       this.getEntreprise()
       this.getEtapeMarche()
@@ -242,7 +243,14 @@ this.getCondition()
 this.getTextJuridique()
 this.getAutreTextJuridique()
 this.getDecisionMarche()
+this.getTypeProcedures()
+this.getTypeMarches()
 this.getMarche()
+this.getModePassations()
+this.getProcedurePassation()
+
+
+
       /**
        * fin missions
        */

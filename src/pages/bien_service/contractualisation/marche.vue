@@ -102,7 +102,7 @@
             </div>
           </div>
 
-              <div class="control-group">
+          <div class="control-group">
             <label class="control-label">Type marche</label>
             <div class="controls">
             <select v-model="editMarche.type_marche_id" class="span">
@@ -200,7 +200,7 @@
                     <th>Type marche</th>
                     <th>Objet</th>
                     <th>Reference marche</th>
-                    <th>Montatant</th>
+                    <th>Montant</th>
                     <th>Action</th>
                   </tr>
                 </thead>

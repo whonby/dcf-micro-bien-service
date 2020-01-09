@@ -2055,7 +2055,7 @@ export function supprimerTypeTextJuridique({commit}, id) {
 
 ////////////////////
 
-export  function  getTypeProcedure({commit}) {
+export  function  getTypeProcedures({commit}) {
   queue.push(() => axios.get('/type_procedures').then((response) => {
     commit('GET_TYPE_PROCEDURE', response.data.data)
     
@@ -2169,7 +2169,7 @@ export function supprimerMarche({commit}, id) {
 
 
 
-export  function  getTypeMarche({commit}) {
+export  function  getTypeMarches({commit}) {
   queue.push(() => axios.get('/type_marches').then((response) => {
     commit('GET_TYPE_MARCHE', response.data.data)
     
@@ -2226,7 +2226,7 @@ export function supprimerTypeMarche({commit}, id) {
 
 
 
-export  function  getModePassation({commit}) {
+export  function  getModePassations({commit}) {
   queue.push(() => axios.get('/mode_passations').then((response) => {
     commit('GET_MODE_PASSATION', response.data.data)
     
@@ -2390,14 +2390,6 @@ export function supprimerProcedurePassation({commit}, id) {
  })
 
 }
-
-
-
-
-
-
-
-
 
 
 

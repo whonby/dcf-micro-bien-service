@@ -59,7 +59,7 @@
 
       <td> 
             <div class="control-group">
-              <label class="control-label">Source de financement:</label>
+              <label class="control-label" title="Source de financement">S. financement:</label>
               <div class="controls">
            <select v-model="formData.source_financement_id" class="span">
                <option v-for="sourceFinancement in sources_financements" :key="sourceFinancement.id" 
