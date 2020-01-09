@@ -140,7 +140,6 @@
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>
-
             <div class="widget-content nopadding">
               <table class="table table-bordered table-striped">
                 <thead>

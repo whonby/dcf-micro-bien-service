@@ -723,21 +723,15 @@ export function supprimerFacture({commit}, id) {
 // action pour lot
 
 export  function  getLot({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_LOT', response.data)
+  queue.push(() => axios.get('/lots').then((response) => {
+    commit('GET_ALL_LOT', response.data.data)
     
 }).catch(error => console.log(error)))
 }
 
 // action pour ajouter lot
 export function ajouterLot({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    code_lot:elementAjout.code_lot,
-    numero_lot:elementAjout.numero_lot,
-    libelle_lot:elementAjout.libelle_lot,
-    montant_lot:elementAjout.montant_lot
-    
-})).then(response =>{
+  asyncLoading(axios.post('/lots',elementAjout)).then(response =>{
       if(response.status == 201){
           commit('AJOUTER_LOT', response.data)
 
@@ -755,12 +749,7 @@ export function ajouterLot({commit}, elementAjout){
 
 
 export function modifierLot({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    numero_lot:element_modifie.numero_lot,
-    libelle_lot:element_modifie.libelle_lot,
-    montant_lot:element_modifie.montant_lot
-    
- })).then(response => {
+  asyncLoading( axios.put('/lots/' ,element_modifie)).then(response => {
        commit('MODIFIER_LOT', response.data)
        
 
@@ -779,7 +768,7 @@ export function supprimerLot({commit}, id) {
  .then(dialog => {
     commit('SUPPRIMER_LOT', id)
    // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
+     axios.delete('/lots/' + id).then(() => dialog.close() )
  })
 
 }
@@ -2226,7 +2215,7 @@ export function supprimerTypeMarche({commit}, id) {
 
 
 
-export  function  getModePassation({commit}) {
+export  function  getModePassations({commit}) {
   queue.push(() => axios.get('/mode_passations').then((response) => {
     commit('GET_MODE_PASSATION', response.data.data)
     

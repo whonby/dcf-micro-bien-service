@@ -116,7 +116,7 @@ export default {
        ...mapActions('bienService', ['getActeurDepense', 'getBailleur','getTypeFacture',
        'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse',
        'getTypePrestation', 'getCondition', 'getTextJuridique', 
-       'getAutreTextJuridique','getDecisionMarche', 'getMarche'])
+       'getAutreTextJuridique','getDecisionMarche', 'getMarche',"getAppelOffre","getLot","getModePassations"])
 
   },
 
@@ -242,7 +242,10 @@ this.getCondition()
 this.getTextJuridique()
 this.getAutreTextJuridique()
 this.getDecisionMarche()
+    this.getAppelOffre()
 this.getMarche()
+    this.getLot()
+    this.getModePassations()
       /**
        * fin missions
        */

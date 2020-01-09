@@ -1,0 +1,633 @@
+<template>
+    <div>
+
+
+        <div class="container-fluid">
+            <h4 v-if="detail_marche">Detail Marche : {{detail_marche.objet}} </h4>
+            <hr />
+
+            <div class="widget-box">
+                <div class="widget-content">
+                    <div class="widget-content nopadding">
+                        <table class="table table-striped table-bordered" v-if="detail_marche">
+                            <thead>
+                            <tr>
+                                <th>Objet marche</th>
+                                <th>Reference marche</th>
+                                <th>Montant marche</th>
+                                <th>Type de marche</th>
+                                <th>Unite administrative</th>
+                                <th>Exercie Budgetaire</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="taskDesc">{{detail_marche.objet}}</td>
+                                <td class="taskStatus">{{detail_marche.reference_marche}}</td>
+                                <td class="taskOptions">
+                                    {{detail_marche.montant_marche}}
+                                </td>
+                                <td class="taskOptions">
+                                    {{detail_marche.type_marche.libelle}}
+                                </td>
+                                <td class="taskOptions">
+                                    {{detail_marche.objetUniteAdministrative.libelle}}
+                                </td>
+                                <td class="taskOptions">
+                                    Ok
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span3">
+
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+
+
+
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#tab1">Appel Offre</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li>
+                            </ul>
+                        </div>
+                        <div class="widget-content tab-content">
+                            <div id="tab1" class="tab-pane active">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right"> <a href="#myAlert" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+
+                                <table class="table table-bordered table-striped" v-if="marcheid">
+                                    <thead>
+                                    <tr>
+
+                                        <th>Reference appel</th>
+                                        <th> Type apple</th>
+                                        <th>Financement</th>
+                                        <th>Nom bailleur</th>
+                                        <th>Date emmission</th>
+                                        <th>Date limite</th>
+                                        <th>Objet appel</th>
+                                        <th>Imputation</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="odd gradeX" v-for="(appelOffre, index) in listeAppelOffre(marcheid)"
+                                        :key="appelOffre.id">
+                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.ref_appel || 'Non renseigné'}}</td>
+                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.type_appel || 'Non renseigné'}}</td>
+                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.financement || 'Non renseigné'}}</td>
+                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.nom_bailleurs || 'Non renseigné'}}</td>
+                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.date_emission || 'Non renseigné'}}</td>
+                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.date_limite || 'Non renseigné'}}</td>
+                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.objet_appel || 'Non renseigné'}}</td>
+                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.imputation || 'Non renseigné'}}</td>
+                                        <div class="btn-group">
+                                            <button @click.prevent="supprimerAppelOffre(appelOffre.id)"  class="btn btn-danger ">
+                                                <span class=""><i class="icon-trash"></i></span></button>
+
+                                        </div>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="tab2" class="tab-pane">
+                                <div class="widget-box">
+                                    <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+                                        <h5>Liste des Lots</h5>
+                                        <div align="right">
+                                            Search:
+                                            <input type="search" placeholder v-model="search" />
+                                        </div>
+                                    </div>
+                                    <div class="widget-content nopadding">
+                                        <div class="span4"></div>
+                                        <div class="span4"></div>
+                                        <div class="span4" align="right"><a href="#myModal2" data-toggle="modal"
+                                                                            class="btn btn-info">Ajouter lot</a></div>
+                                        <table class="table table-bordered table-striped" v-if="marcheid">
+                                            <thead>
+                                            <tr>
+                                                <th>numero lot</th>
+                                                <th>libelle lot</th>
+                                                <th>montant lot</th>
+                                                <th>Mode de passation</th>
+                                                <th>Appel Offres</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="odd gradeX" v-for="(lot_marche, index) in listeLots(marcheid)"
+                                                :key="lot_marche.id">
+                                                <td @dblclick="afficherModaleModifier(index)">
+                                                    {{lot_marche.numero_lot || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModaleModifier(index)">
+                                                    {{lot_marche.libelle_lot || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModaleModifier(index)">
+                                                    {{lot_marche.montant_lot || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModaleModifier(index)">
+                                                    {{lot_marche.mode_passation.libelle || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModaleModifier(index)">
+                                                    {{lot_marche.appel_offre.objet_appel || 'Non renseigné'}}
+                                                </td>
+
+                                                <div class="btn-group">
+                                                    <button @click.prevent="supprimerLot(lot_marche.id)"  class="btn btn-danger ">
+                                                        <span class=""><i class="icon-trash"></i></span></button>
+
+                                                </div>
+
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab3" class="tab-pane">
+                                <p>full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end. </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+<!-- Ajouter appel offres --->
+        <div id="myAlert" class="modal hide" aria-hidden="true" style="display: none;">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter Appel offre</h3>
+            </div>
+            <div class="modal-body">
+                <div class="widget-box">
+                    <form action="#" method="get">
+                        <div class="control-group">
+
+                            <div class="controls">
+                                <input type="text" class="span5" placeholder="Reference d'appel" v-model="formData.ref_appel">
+                            </div>
+                        </div>
+                        <div class="control-group">
+
+                            <div class="controls">
+                                <input type="text" class="span5" placeholder="Type appel" v-model="formData.type_appel">
+                            </div>
+                        </div>
+                        <div class="control-group">
+
+                            <div class="controls">
+                                <input type="text" class="span5" placeholder="Financement" v-model="formData.financement">
+                            </div>
+                        </div>
+                        <div class="control-group">
+
+                            <div class="controls">
+                                <input type="text" class="span5" placeholder="Nom bailleurs" v-model="formData.nom_bailleurs">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Date emission</label>
+                                <input type="date" class="span5" placeholder="Date emision" v-model="formData.date_emission">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Date limite</label>
+                                <input type="date" class="span5" placeholder="Date limite" v-model="formData.date_limite">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <input type="text" class="span5" placeholder="Objet appel offre" v-model="formData.objet_appel">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <input type="text" class="span5" placeholder="Imputation" v-model="formData.imputation">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">  <a @click.prevent="ajouter" class="btn btn-primary"
+                                           href="#">Valider</a> <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        </div>
+
+        <!-- Fin ajouter appel offres --->
+
+        <!--<fab :actions="fabActions" @cache="afficherModalAjouterActeDepense" main-icon="apps" bg-color="green"></fab>-->
+        <notifications  />
+        <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+        <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterActeDepense()">Open</button>
+
+        <!-- Modification appel offres --->
+
+        <div id="modificationModal" class="modal hide taillemodal">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Modification appel offre</h3>
+            </div>
+            <div class="modal-body">
+                <div class="widget-box">
+                    <form action="#" method="get">
+                        <div class="control-group">
+
+                            <div class="controls">
+                                <input type="text" class="span7" placeholder="Reference d'appel" v-model="edite_appel_offre.ref_appel">
+                            </div>
+                        </div>
+                        <div class="control-group">
+
+                            <div class="controls">
+                                <input type="text" class="span7" placeholder="Type appel" v-model="edite_appel_offre.type_appel">
+                            </div>
+                        </div>
+                        <div class="control-group">
+
+                            <div class="controls">
+                                <input type="text" class="span7" placeholder="Financement" v-model="edite_appel_offre.financement">
+                            </div>
+                        </div>
+                        <div class="control-group">
+
+                            <div class="controls">
+                                <input type="text" class="span7" placeholder="Nom bailleurs" v-model="edite_appel_offre.nom_bailleurs">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Date emission</label>
+                                <input type="date" class="span7" placeholder="Date emision" v-model="edite_appel_offre.date_emission">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Date limite</label>
+                                <input type="date" class="span7" placeholder="Date limite" v-model="edite_appel_offre.date_limite">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <input type="text" class="span7" placeholder="Objet appel offre" v-model="edite_appel_offre.objet_appel">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <input type="text" class="span7" placeholder="Imputation" v-model="edite_appel_offre.imputation">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" @click.prevent="modfications()">Modifier</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div>
+        </div>
+
+        <!-- Modification fin appel offres --->
+
+        <!--Gestion de Lot-->
+        <div id="myModal2" class="modal hide" aria-hidden="true" style="display: none;">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter lot </h3>
+            </div>
+            <div class="modal-body">
+                <div class="widget-box">
+                    <form action="#" method="get" v-if="marcheid">
+                        <div class="control-group">
+
+                            <div class="controls">
+                                <input type="text" class="span5" placeholder="Numero lo" v-model="formLot.numero_lot">
+                            </div>
+                        </div>
+                        <div class="control-group">
+
+                            <div class="controls">
+                                <input type="text" class="span5" placeholder="Libelle lot" v-model="formLot.libelle_lot">
+                            </div>
+                        </div>
+                        <div class="control-group">
+
+                            <div class="controls">
+                                <input type="text" class="span5" placeholder="Montant lot" v-model="formLot.montant_lot">
+                            </div>
+                        </div>
+                        <label>Appel Offre</label>
+                        <div class="controls">
+                            <select v-model="formLot.appel_offre_id" class="span">
+                                <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
+                                        :value="varText.id">{{varText.objet_appel}}</option>
+                            </select>
+                        </div>
+                        <label>Mode de passation</label>
+                        <div class="controls">
+
+                            <select v-model="formLot.mode_passation_id" class="span">
+                                <option v-for="varText in modePassations" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" @click.prevent="ajouterL()">Ajouter</a>
+                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+            </div>
+        </div>
+        <!--Fin gestion de lot-->
+
+        <div id="modificationModal1" class="modal hide taillemodal">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Modification de lot</h3>
+            </div>
+            <div class="modal-body">
+                <div class="widget-box">
+                    <form action="#" method="get">
+                        <div class="control-group">
+
+                            <div class="controls">
+                                <input type="text" class="span5" placeholder="Numero lo" v-model="edite_lot.numero_lot">
+                            </div>
+                        </div>
+                        <div class="control-group">
+
+                            <div class="controls">
+                                <input type="text" class="span5" placeholder="Libelle lot" v-model="edite_lot.libelle_lot">
+                            </div>
+                        </div>
+                        <div class="control-group">
+
+                            <div class="controls">
+                                <input type="text" class="span5" placeholder="Montant lot" v-model="edite_lot.montant_lot">
+                            </div>
+                        </div>
+                        <label>Appel Offre</label>
+                        <div class="controls">
+                            <select v-model="edite_lot.appel_offre_id" class="span">
+                                <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
+                                        :value="varText.id">{{varText.objet_appel}}</option>
+                            </select>
+                        </div>
+                        <label>Mode de passation</label>
+                        <div class="controls">
+
+                            <select v-model="edite_lot.mode_passation_id" class="span">
+                                <option v-for="varText in modePassations" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" @click.prevent="modficationsLot()">Modifier</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import { mapGetters, mapActions } from "vuex";
+    // import moment from "moment";
+    // import { formatageSomme } from "../../../Repositories/Repository";
+
+    export default {
+        name: 'compte',
+        data() {
+            return {
+                fabActions: [
+                    {
+                        name: "cache",
+                        icon: "add"
+                    }
+
+                ],
+                detail_marche:"",
+                marcheid:"",
+                appel_offre_marche:"",
+               formLot:{
+                   numero_lot:"",
+                   libelle_lot:"",
+                   montant_lot:"",
+                   marche_id:"",
+                   appel_offre_id:"",
+                   mode_passation_id:""
+               },
+
+                formData: {
+                    ref_appel:"",
+                    type_appel:"",
+                    financement:"",
+                    nom_bailleurs:"",
+                    date_emission:"",
+                    date_limite:"",
+                    objet_appel:"",
+                    imputation:"",
+                    marche_id:"",
+                },
+                edite_appel_offre: "",
+                search: "",
+                edite_lot:{
+                    numero_lot:"",
+                    libelle_lot:"",
+                    montant_lot:"",
+                    marche_id:"",
+                    appel_offre_id:"",
+                    mode_passation_id:""
+                }
+            };
+        },
+created() {
+            this.marcheid=this.$route.params.id
+   this.detail_marche = this.getMarchePersonnaliser.find(
+       idmarche => idmarche.id == this.$route.params.id
+   )
+  /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
+    console.log(this.appel_offre_marche)*/
+},
+        computed: {
+            ...mapGetters("bienService", [ 'acteDepense',"getMarchePersonnaliser","appelOffres","lots","modePassations"]),
+            listeAppelOffre(){
+                return  marche_id=>{
+                    if (marche_id!="") {
+                        return this.appelOffres.filter( idmarche => idmarche.marche.id == marche_id)
+                    }
+                }
+
+            },
+            listeLots(){
+                return  marche_id=>{
+                    if (marche_id!="") {
+                       // let listeLotMarche =this.lots.filter( idmarche => idmarche.marche.id == marche_id)
+                       // const searchTerm = this.search.toLowerCase();
+                        //return this.lots.filter( idmarche => idmarche.marche.id == marche_id)
+                        return this.lots.filter( idmarche => idmarche.marche.id == marche_id)
+                    }
+                }
+            }
+            // filtre_equipement() {
+            //   const st = this.search.toLowerCase();
+            //   return this.equipements.filter(type => {
+            //     return (
+
+            //       type.libelle.toLowerCase().includes(st)
+            //     );
+            //   });
+            // }
+//             acteDepenseFiltre(){
+
+//      const searchTerm = this.search.toLowerCase();
+
+// return this.acteDepense.filter((item) => {
+
+//      return item.matricule.toLowerCase().includes(searchTerm)
+
+
+
+
+
+//    }
+// )
+//    }
+
+
+        },
+        methods: {
+            ...mapActions("bienService", [
+                'ajouterAppelOffre','modifierAppelOffre',"supprimerAppelOffre","modifierAppelOffre","ajouterLot","modifierLot","supprimerLot"
+
+                //   "getAllStock",
+                //   "ajouterStock",
+                //   "modifierStock",
+                //   "supprimerStock"
+            ]),
+            // formatageSomme: formatageSomme,
+
+            //afiicher modal ajouter
+            afficherModalAjouterActeDepense() {
+                this.$("#exampleModal").modal({
+                    backdrop: "static",
+                    keyboard: false
+                });
+            },
+            // fonction pour vider l'input ajouter
+            ajouter(){
+                this.formData.marche_id=this.marcheid
+                this.ajouterAppelOffre(this.formData)
+                this.formData = {
+                    ref_appel:"",
+                    type_appel:"",
+                    financement:"",
+                    nom_bailleurs:"",
+                    date_emission:"",
+                    date_limite:"",
+                    objet_appel:"",
+                    imputation:"",
+                    marche_id:"",
+
+                }
+            },
+            ajouterL(){
+                this.formLot.marche_id=this.marcheid
+                this.ajouterLot(this.formLot)
+                this.formLot={
+                    numero_lot:"",
+                        libelle_lot:"",
+                        montant_lot:"",
+                        marche_id:"",
+                        appel_offre_id:"",
+                        mode_passation_id:""
+                }
+            },
+
+
+
+            // afficher modal de modification
+
+            afficherModalModifierActeDepense(index){
+                this.$('#modificationModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+
+                this.edite_appel_offre = this.appelOffres[index];
+            },
+
+            afficherModaleModifier(index){
+                this.$('#modificationModal1').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+
+             this.edite_lot = this.lots[index];
+                //this.edite_lot.appel_offre_id=this.edite_lot.
+            },
+            modfications(){
+                this.modifierAppelOffre(this.edite_appel_offre)
+                this.$('#modificationModal').modal('hide');
+            },
+
+            modficationsLot(){
+                this.modifierLot(this.edite_lot)
+                this.$('#modificationModal1').modal('hide');
+            },
+
+            // formaterDate(date) {
+            //   return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+            // },
+
+            ExporterEnExel(){
+                this.$refs.excel.click()
+            }
+        }
+    };
+</script>
+<style scoped>
+    .taillemodal {
+        width: 800px;
+        margin: 0 -380px;
+    }
+    .sommecolor{
+        background-color: red;
+        color:red;
+        font-size: 120%;
+        text-align: center;
+        font-weight:bold;
+    }
+</style>

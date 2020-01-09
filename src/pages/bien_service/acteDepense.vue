@@ -427,8 +427,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                       <tr class="odd gradeX" v-for="(acteDepense, index) in 
-                acteDepense"
+                <tr class="odd gradeX" v-for="(acteDepense, index) in acteDepense"
                  :key="acteDepense.id">
                  <td @dblclick="afficherModalModifierActeDepense(index)">
                    {{acteDepense.matricule || 'Non renseigné'}}</td>
@@ -438,9 +437,6 @@
                    {{acteDepense.matricule || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierActeDepense(index)">
                    {{acteDepense.matricule || 'Non renseigné'}}</td>
-
-
-
                      <div class="btn-group">
               <button @click.prevent="supprimerActeDepense(acteDepense.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
