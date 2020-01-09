@@ -20,11 +20,78 @@ export const MODIFIER_PRESTATION = (state, elementModif)=>{
 }
 
 
+
 // delete all prestation
 
 export const DELETE_PRESTATION = (state, id)=> {
     state.prestations = state.prestations.filter(prest => prest.id !=id)
 }
+
+// mutzation offre technique
+
+// get all prestation
+export const GET_ALL_OFFRE_TECHNIQUE = (state, tableau_prestation) =>{
+    state.offreTechniques = tableau_prestation
+}
+
+// add * presttation
+
+export const AJOUTER_OFFRE_TECHNIQUE = (state, elementAjouter) => {
+    state.offreTechniques.unshift(elementAjouter)
+}
+
+// update all prestation
+export const MODIFIER_OFFRE_TECHNIQUE = (state, elementModif)=>{
+    state.offreTechniques = state.offreTechniques.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+
+// delete all prestation
+
+export const DELETE_OFFRE_TECHNIQUE = (state, id)=> {
+    state.offreTechniques = state.offreTechniques.filter(prest => prest.id !=id)
+}
+
+// mutation pour offre financier
+
+
+// get all prestation
+export const GET_ALL_OFFRE_FINANCIER = (state, tableau_prestation) =>{
+    state.offreFinanciers = tableau_prestation
+}
+
+// add * presttation
+
+export const AJOUTER_OFFRE_FINANCIER = (state, elementAjouter) => {
+    state.offreFinanciers.unshift(elementAjouter)
+}
+
+// update all prestation
+export const MODIFIER_OFFRE_FINANCIER = (state, elementModif)=>{
+    state.offreFinanciers = state.offreFinanciers.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+
+// delete all prestation
+
+export const DELETE_OFFRE_FINANCIER = (state, id)=> {
+    state.offreFinanciers = state.offreFinanciers.filter(prest => prest.id !=id)
+}
+
+
+
 
 
 // get all actedepense

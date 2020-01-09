@@ -120,7 +120,8 @@ export default {
        'getAutreTextJuridique','getDecisionMarche', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation',
 
-       'getAutreTextJuridique','getDecisionMarche', 'getMarche',"getAppelOffre","getLot","getModePassations"])
+       'getAutreTextJuridique','getDecisionMarche', 'getMarche',"getAppelOffre","getLot","getModePassations",
+         "getDossierCandidat", "getOffreFinancier", "getOffreTechnique"])
 
 
   },
@@ -261,6 +262,9 @@ this.getProcedurePassation()
 this.getMarche()
     this.getLot()
     this.getModePassations()
+    this.getDossierCandidat()
+    this.getOffreFinancier()
+    this.getOffreTechnique()
 
       /**
        * fin missions

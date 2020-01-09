@@ -22,7 +22,7 @@ export const typeUa = state => state.typeUa
 export const uniteAdministratives = state => state.uniteAdministratives
 export const uniteZones = state => state.uniteZones
 export const ligneBudgetaires = state => state.ligneBudgetaires
-export const DossierCandidats = state => state.DossierCandidats
+export const getterDossierCandidats = state => state.DossierCandidats
 export const livrables = state => state.livrables
 export const zoneGeographiques = state => state.zoneGeographiques
 export const typeTextJuridiques = state => state.typeTextJuridiques
@@ -36,7 +36,8 @@ export const modePassations = state => state.modePassations
 export const marches = state => state.marches
 
 export const appelOffres = state => state.appelOffres
-
+export const gettersOffreTechniques = state => state.offreTechniques
+export const getterOffreFinanciers = state => state.offreFinanciers
 
 // gettes  personnaliser d'appel d'offres
 

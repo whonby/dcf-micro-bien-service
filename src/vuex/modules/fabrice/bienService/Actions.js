@@ -1648,8 +1648,8 @@ export function supprimerLigneBudgetaire({commit}, id) {
 // action pour  la liste de dossier de candidat
 
 export  function  getDossierCandidat({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_DOSSIER_CANDIDAT', response.data)
+  queue.push(() => axios.get('/dossier_candidats').then((response) => {
+    commit('GET_DOSSIER_CANDIDAT', response.data.data)
     
 }).catch(error => console.log(error)))
 }
@@ -1657,36 +1657,7 @@ export  function  getDossierCandidat({commit}) {
 // action pour ajouter la liste de dosseier candidat
 
 export function ajouterDossierCandidat({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    id_procedure_passation:elementAjout.id_procedure_passation,
-    type_cand:elementAjout.type_cand,
-    nom_cand:elementAjout.nom_cand,
-    prenoms_cand:elementAjout.prenoms_cand,
-    date_naiss_cand:elementAjout.date_naiss_cand,
-    telephone_cand:elementAjout.telephone_cand,
-    adresse_postal:elementAjout.adresse_postal,
-    situation_geo:elementAjout.situation_geo,
-    email_cand:elementAjout.email_cand,
-    accord_group:elementAjout.accord_group,
-    cautionnement_prov:elementAjout.cautionnement_prov,
-    pouv_habil_signataire:elementAjout.pouv_habil_signataire,
-    piece_admin:elementAjout.piece_admin,
-    reg_com:elementAjout.reg_com,
-    attest_banc:elementAjout.attest_banc,
-    formul_propo_tech:elementAjout.formul_propo_tech,
-    fiche_rsgnt_cand:elementAjout.fiche_rsgnt_cand,
-    fiche_rsgnt_mbre_group:elementAjout.fiche_rsgnt_mbre_group,
-    atcdent_marche_non_exe:elementAjout.atcdent_marche_non_exe,
-    org_travau_site:elementAjout.org_travau_site,
-    meth_real_travau:elementAjout.meth_real_travau,
-    prog_mobilisation:elementAjout.prog_mobilisation,
-    capacite_financiere:elementAjout.capacite_financiere,
-    caa_moyen_ac_entre:elementAjout.caa_moyen_ac_entre,
-    capacite_financement:elementAjout.capacite_financement,
-    capacite_tech_exp:elementAjout.capacite_tech_exp,
-    mt_offre_financiere:elementAjout.mt_offre_financiere
-    
-})).then(response =>{
+  asyncLoading(axios.post('/dossier_candidats',elementAjout)).then(response =>{
       if(response.status == 201){
           commit('AJOUTER_DOSSIER_CANDIDAT', response.data)
 
@@ -1704,36 +1675,7 @@ export function ajouterDossierCandidat({commit}, elementAjout){
 
 
 export function modifierDossierCandidat({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    id_procedure_passation:element_modifie.id_procedure_passation,
-    type_cand:element_modifie.type_cand,
-    nom_cand:element_modifie.nom_cand,
-    prenoms_cand:element_modifie.prenoms_cand,
-    date_naiss_cand:element_modifie.date_naiss_cand,
-    telephone_cand:element_modifie.telephone_cand,
-    adresse_postal:element_modifie.adresse_postal,
-    situation_geo:element_modifie.situation_geo,
-    email_cand:element_modifie.email_cand,
-    accord_group:element_modifie.accord_group,
-    cautionnement_prov:element_modifie.cautionnement_prov,
-    pouv_habil_signataire:element_modifie.pouv_habil_signataire,
-    piece_admin:element_modifie.piece_admin,
-    reg_com:element_modifie.reg_com,
-    attest_banc:element_modifie.attest_banc,
-    formul_propo_tech:element_modifie.formul_propo_tech,
-    fiche_rsgnt_cand:element_modifie.fiche_rsgnt_cand,
-    fiche_rsgnt_mbre_group:element_modifie.fiche_rsgnt_mbre_group,
-    atcdent_marche_non_exe:element_modifie.atcdent_marche_non_exe,
-    org_travau_site:element_modifie.org_travau_site,
-    meth_real_travau:element_modifie.meth_real_travau,
-    prog_mobilisation:element_modifie.prog_mobilisation,
-    capacite_financiere:element_modifie.capacite_financiere,
-    caa_moyen_ac_entre:element_modifie.caa_moyen_ac_entre,
-    capacite_financement:element_modifie.capacite_financement,
-    capacite_tech_exp:element_modifie.capacite_tech_exp,
-    mt_offre_financiere:element_modifie.mt_offre_financiere
-    
- })).then(response => {
+  asyncLoading( axios.put('/dossier_candidats/',element_modifie)).then(response => {
        commit('MODIFIER_DOSSIER_CANDIDAT', response.data)
        
 
@@ -1752,8 +1694,126 @@ export function supprimerDossierCandidat({commit}, id) {
  .then(dialog => {
     commit('SUPPRIMER_DOSSIER_CANDIDAT', id)
    // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
+     axios.delete('/dossier_candidats/' + id).then(() => dialog.close() )
  })
+
+}
+
+
+
+// action pour offre technique
+
+
+// action pour  la liste de dossier de candidat
+
+export  function  getOffreTechnique({commit}) {
+    queue.push(() => axios.get('/offre_techniques').then((response) => {
+        commit('GET_ALL_OFFRE_TECHNIQUE', response.data.data)
+
+    }).catch(error => console.log(error)))
+}
+
+// action pour ajouter la liste de dosseier candidat
+
+export function ajouterOffreTechnique({commit}, elementAjout){
+    asyncLoading(axios.post('/offre_techniques',elementAjout)).then(response =>{
+        if(response.status == 201){
+            commit('AJOUTER_OFFRE_TECHNIQUE', response.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
+// action pour modifier la liste de dossier de candidat
+
+
+export function modifierOffreTechnique({commit}, element_modifie) {
+    asyncLoading( axios.put('/offre_techniques/',element_modifie)).then(response => {
+        commit('MODIFIER_OFFRE_TECHNIQUE', response.data)
+
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}
+// supprimer la liste de dossier de candidat
+
+export function supprimerOffreTechnique({commit}, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('DELETE_OFFRE_TECHNIQUE', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/offre_techniques/' + id).then(() => dialog.close() )
+        })
+
+}
+
+
+// action pour offre finanicier
+
+
+
+// action pour  la liste de dossier de candidat
+
+export  function  getOffreFinancier({commit}) {
+    queue.push(() => axios.get('/offre_financieres').then((response) => {
+        commit('GET_ALL_OFFRE_FINANCIER', response.data.data)
+
+    }).catch(error => console.log(error)))
+}
+
+// action pour ajouter la liste de dosseier candidat
+
+export function ajouterOffreFinancier({commit}, elementAjout){
+    asyncLoading(axios.post('/offre_financieres',elementAjout)).then(response =>{
+        if(response.status == 201){
+            commit('AJOUTER_OFFRE_FINANCIER', response.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
+// action pour modifier la liste de dossier de candidat
+
+
+export function modifierOffreFinancier({commit}, element_modifie) {
+    asyncLoading( axios.put('/offre_financieres/',element_modifie)).then(response => {
+        commit('MODIFIER_OFFRE_FINANCIER', response.data)
+
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}
+// supprimer la liste de dossier de candidat
+
+export function supprimerOffreFinancier({commit}, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('DELETE_OFFRE_FINANCIER', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/offre_financieres/' + id).then(() => dialog.close() )
+        })
 
 }
 
