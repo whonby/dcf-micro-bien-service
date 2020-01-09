@@ -30,6 +30,9 @@ import typeMarche from '../../pages/bien_service/Prametre_marchers/typeMarche.vu
 import modePassation from '../../pages/bien_service/Prametre_marchers/modePassation.vue';
 import typeTextJuridique from '../../pages/bien_service/parametres/typeTextJuridique.vue';
 // import typeTextJuridique from '../../pages/bien_service/typeTextJuridique.vue';
+import marche from '../../pages/bien_service/contractualisation/marche.vue';
+import DetaillMarche from '../../pages/bien_service/contractualisation/DetaillMarche.vue';
+
 const BienServiceRoutes = [
 
     {
@@ -42,6 +45,19 @@ const BienServiceRoutes = [
  path:"/creation-acte-depense",
  name: "acteDepense",
  component:acteDepense  
+},
+
+// detail marche
+{
+    path:"/detail",
+    name:"DetaillMarche",
+    component:DetaillMarche
+},
+
+{
+    path:"/creation-marche",
+    name:"marche",
+    component:marche
 },
 // la route de mode de passation
 {

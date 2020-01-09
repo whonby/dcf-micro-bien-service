@@ -69,7 +69,7 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Text jridique</h3>
+        <h3>Modifier Text juridique</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
@@ -160,8 +160,9 @@
                 <thead>
                   <tr>
                     <th>Type text juridique</th>
-                    <th width="50%">Objet</th>
                     <th>Date</th>
+                    <th width="50%">Objet</th>
+                    
                     
                     <th>Action</th>
                   </tr>
@@ -171,12 +172,12 @@
                  :key="textJuridique.id">
                  <td @dblclick="afficherModalModifiertextJuridique(index)">
                    {{textJuridique.AfficheTypeTextJuridique.libelle || 'Non renseigné'}}</td>
-                
+                 <td @dblclick="afficherModalModifiertextJuridique(index)">
+                   {{formaterDate(textJuridique.date_effet_text) || 'Non renseigné'}}</td>
                    
                     <td @dblclick="afficherModalModifiertextJuridique(index)">
                    {{textJuridique.objet_text || 'Non renseigné'}}</td>
-                   <td @dblclick="afficherModalModifiertextJuridique(index)">
-                   {{formaterDate(textJuridique.date_effet_text) || 'Non renseigné'}}</td>
+                  
 
 <td>
     <div class="btn-group">
@@ -294,7 +295,7 @@ this.formData = {
         keyboard: false
       });
 
-      this.editTextJuridique = this.text_juridiques[index];
+      this.editTextJuridique = this.textJuridiqueFiltre[index];
     },
     // fonction pour vider l'input modification
     modifierModalTypeAnalyseLocal(){

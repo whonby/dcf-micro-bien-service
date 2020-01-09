@@ -103,7 +103,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>libelle</th>
+                    <th width="90%">libelle</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -115,13 +115,15 @@
                    {{typeFacture.libelle || 'Non renseigné'}}</td>
                   
 
-
-
-                     <div class="btn-group">
+<td>
+  <div class="btn-group">
               <button @click.prevent="supprimerTypeFacture(typeFacture.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
+</td>
+
+                     
 
                        </tr>
                 </tbody>

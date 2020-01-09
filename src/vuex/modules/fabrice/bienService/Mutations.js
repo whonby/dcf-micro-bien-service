@@ -436,6 +436,38 @@ export const SUPPRIMER_TYPE_MARCHE = (state, id)=> {
 
 
 
+// mutation marche
+
+
+
+export const GET_MARCHE = (state, tableau_marche) =>{
+    state.marches = tableau_marche
+}
+
+// add * type facture
+
+export const AJOUTER_MARCHE = (state, elementAjouter) => {
+    state.marches.unshift(elementAjouter)
+}
+
+
+// update all type facture
+export const MODIFIER_MARCHE = (state, elementModif)=>{
+    state.marches = state.marches.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all marche
+
+export const SUPPRIMER_MARCHE = (state, id)=> {
+    state.marches = state.marches.filter(marche => marche.id !=id)
+}
+
 
 
 
