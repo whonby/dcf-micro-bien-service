@@ -13,7 +13,7 @@ export const acteurDepenses = state => state.acteurDepenses.sort((a,b)=>(a.code>
 export const getterCojos = state => state.cojos
 export const conditions = state => state.conditions
 export const fonctionOccupes = state => state.fonctionOccupes
-export const analyseDossiers = state => state.analyseDossiers
+export const getterAnalyseDossiers = state => state.analyseDossiers
 export const natureFonctions = state => state.natureFonctions
 export const signatures = state => state.signatures
 export const typeActeEffetFinanciers = state => state.typeActeEffetFinanciers

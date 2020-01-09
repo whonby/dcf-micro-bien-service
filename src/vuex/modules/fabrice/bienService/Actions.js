@@ -778,24 +778,15 @@ export function supprimerLot({commit}, id) {
 // action pour analyse dossier
 
 export  function  getAnalyseDossier({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_ANALYSE_DOSSIER', response.data)
+  queue.push(() => axios.get('/analyse_dossier').then((response) => {
+    commit('GET_ALL_ANALYSE_DOSSIER', response.data.data)
     
 }).catch(error => console.log(error)))
 }
 
 // action pour ajouter analyse dossier
 export function ajouterAnalyseDossier({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    id_acte:elementAjout.id_acte,
-    id_candidat:elementAjout.id_candidat,
-    id_type_analyse:elementAjout.id_type_analyse,
-    id_cojo:elementAjout.id_cojo,
-    date_analyse:elementAjout.date_analyse,
-    rang_analyse:elementAjout.rang_analyse,
-    decision:elementAjout.decision
-    
-})).then(response =>{
+  asyncLoading(axios.post('/analyse_dossier',elementAjout)).then(response =>{
       if(response.status == 201){
           commit('AJOUTER_ANALYSE_DOSSIER', response.data)
 
@@ -813,18 +804,8 @@ export function ajouterAnalyseDossier({commit}, elementAjout){
 
 
 export function modifierAnalyseDossier({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    id_acte:element_modifie.id_acte,
-    id_candidat:element_modifie.id_candidat,
-    id_type_analyse:element_modifie.id_type_analyse,
-    id_cojo:element_modifie.id_cojo,
-    date_analyse:element_modifie.date_analyse,
-    rang_analyse:element_modifie.rang_analyse,
-    decision:element_modifie.decision
-    
- })).then(response => {
+  asyncLoading( axios.put('/analyse_dossier' ,element_modifie)).then(response => {
        commit('MODIFIER_ANALYSE_DOSSIER', response.data)
-       
 
        this.$app.$notify({
          title: 'success ',
@@ -841,7 +822,7 @@ export function supprimerAnalyseDossier({commit}, id) {
  .then(dialog => {
     commit('SUPPRIMER_ANALYSE_DOSSIER', id)
    // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
+     axios.delete('/analyse_dossier/' + id).then(() => dialog.close() )
  })
 
 }

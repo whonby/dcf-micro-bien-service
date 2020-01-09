@@ -722,7 +722,7 @@
                           <td @click="afficheBouttonTechCojo(index)">
                               {{appelOffre.nbr_participant || 'Non renseigné'}}</td>
                           <td @click="afficheBouttonTechCojo(index)">
-                              {{appelOffre.condition.libelle || 'Non renseigné'}}</td> lettre_invitation
+                              {{appelOffre.condition.libelle || 'Non renseigné'}}</td>
                           <td @click="afficheBouttonTechCojo(index)">
                               {{appelOffre.lettre_invitation.ref_lettre || 'Non renseigné'}}</td>
                           <div class="btn-group">
@@ -736,9 +736,59 @@
                   </table>
             </div>
 
-            <div id="tab32²" class="tab-pane">
-              <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment. </p>
-              <img src="img/demo/demo-image3.jpg" alt="demo-image">
+            <div id="tab32" class="tab-pane">
+
+                <div align="right">
+                    <div class="widget-content">
+
+                        <a href="#ajouterMP" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+
+                    </div>
+
+                </div>
+                <table class="table table-bordered table-striped" v-if="marcheid">
+                    <thead>
+                    <tr>
+
+                        <th>Dossier candidat </th>
+                        <th>Date Analyse </th>
+                        <th>Rang d'analyse</th>
+                        <th>Type d'analyse</th>
+                        <th>Controller finnancier</th>
+                        <th>Autorite contractante</th>
+                        <th>DMP</th>
+                        <th>Numero dossier APPEL offre</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="odd gradeX" v-for="(appelOffre, index) in listeAnalyseDossier(marcheid)"
+                        :key="appelOffre.id">
+                        <td @click="afficheAnnalyseDossier(index)">
+                            {{appelOffre.dossier_candidature.nom_cand || 'Non renseigné'}}</td>
+                        <td @click="afficheAnnalyseDossier(index)">
+                            {{appelOffre.date_analyse || 'Non renseigné'}}</td>
+                        <td @click="afficheAnnalyseDossier(index)">
+                            {{appelOffre.rang_analyse || 'Non renseigné'}}</td>
+                        <td @click="afficheAnnalyseDossier(index)">
+                            {{appelOffre.type_analyse.libelle || 'Non renseigné'}}</td>
+                        <td @click="afficheAnnalyseDossier(index)">
+                            {{appelOffre.cojo.controleur_finnancier || 'Non renseigné'}}</td>
+                        <td @click="afficheAnnalyseDossier(index)">
+                            {{appelOffre.cojo.autorite_contractante || 'Non renseigné'}}</td>
+                        <td @click="afficheAnnalyseDossier(index)">
+                            {{appelOffre.cojo.num_dossier_appel_offre || 'Non renseigné'}}</td>
+                        <td @click="afficheAnnalyseDossier(index)">
+                            {{appelOffre.cojo.dmp || 'Non renseigné'}}</td>
+                        <div class="btn-group">
+                            <button @click.prevent="supprimerAnalyseDossier(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
+                                <span class=""><i class="icon-trash"></i></span></button>
+
+                        </div>
+
+                    </tr>
+                    </tbody>
+                </table>
               </div>
 
           </div>
@@ -1678,6 +1728,159 @@
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
         <!--Fin mandater-->
+
+        <!--Analyse dossier-->
+        <div id="ajouterMP" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter dossier analyse</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">Dossier candidat</label>
+                        <div class="controls">
+                            <select v-model="formAnalyseDossier.dossier_candidat_id" class="span">
+                                <option v-for="plans in dossierCandidature(marcheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.nom_cand}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Cojo</label>
+                        <div class="controls">
+                            <select v-model="formAnalyseDossier.cojo_id" class="span">
+                                <option v-for="plans in listeCojo(marcheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.controleur_finnancier}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Type analyse</label>
+                        <div class="controls">
+                            <select v-model="formAnalyseDossier.type_analyse_id" class="span">
+                                <option v-for="plans in typeAnalyses" :key="plans.id"
+                                        :value="plans.id">{{plans.libelle}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formAnalyseDossier.rang_analyse"
+                                    class="span"
+                                    placeholder="Rang d'analyse"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <input type="date"
+                                   v-model="formAnalyseDossier.date_analyse"
+                                   class="span"
+                                   placeholder="date"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formAnalyseDossier.decision"
+                                    class="span"
+                                    placeholder="Decision "
+                            />
+                        </div>
+                    </div>
+
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterAnalyseD()" href="#">Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        </div>
+        <div id="modificationAajouterAnalys01" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Modification du dossier Analyse</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+
+
+                    <div class="control-group">
+                        <label class="control-label">Dossier candidat</label>
+                        <div class="controls">
+                            <select v-model="edite_analyse_dossier.dossier_candidat_id" class="span">
+                                <option v-for="plans in dossierCandidature(marcheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.nom_cand}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Cojo</label>
+                        <div class="controls">
+                            <select v-model="edite_analyse_dossier.cojo_id" class="span">
+                                <option v-for="plans in listeCojo(marcheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.controleur_finnancier}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Type analyse</label>
+                        <div class="controls">
+                            <select v-model="edite_analyse_dossier.type_analyse_id" class="span">
+                                <option v-for="plans in typeAnalyses" :key="plans.id"
+                                        :value="plans.id">{{plans.libelle}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="edite_analyse_dossier.rang_analyse"
+                                    class="span"
+                                    placeholder="Rang d'analyse"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <input type="date"
+                                   v-model="edite_analyse_dossier.date_analyse"
+                                   class="span"
+                                   placeholder="date"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="edite_analyse_dossier.decision"
+                                    class="span"
+                                    placeholder="Decision "
+                            />
+                        </div>
+                    </div>
+
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationDossierAnalyse()" href="#">Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        </div>
+        <!--Fin cojo-->
         <!--Fin contratualisation-->
     </div>
 </template>
@@ -1698,6 +1901,7 @@
                     }
 
                 ],
+                edite_analyse_dossier:"",
                 edite_cojo:"",
                 editer_mandater:"",
                 edite_lettre_invitation:"",
@@ -1720,6 +1924,14 @@
                     date_id:"",
                     nom_mandat:"",
                     prenom_nom:""
+                },
+                formAnalyseDossier:{
+                    date_analyse:"",
+                    rang_analyse:"",
+                    decision:"",
+                    dossier_candidat_id:"",
+                    type_analyse_id: "",
+                    cojo_id:""
                 },
                 formDataCojo:{
                     lettre_invitation_id:"",
@@ -1851,7 +2063,8 @@ created() {
         computed: {
             ...mapGetters("bienService", [ 'acteDepense',"getMarchePersonnaliser","appelOffres",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats",
-                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions"]),
+                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
+                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses"]),
             listeAppelOffre(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -1898,7 +2111,15 @@ created() {
                         return this.getterCojos.filter(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid)
                     }
                 }
+            },
+
+        listeAnalyseDossier: function () {
+            return marcheid => {
+                if (marcheid != "") {
+                    return this.getterAnalyseDossiers.filter(idmarche => idmarche.dossier_candidature.appel_offre.marche_id == marcheid)
+                }
             }
+        }
             // filtre_equipement() {
             //   const st = this.search.toLowerCase();
             //   return this.equipements.filter(type => {
@@ -1934,7 +2155,8 @@ created() {
                 "supprimerOffreTechnique","ajouterOffreFinancier","modifierOffreFinancier","supprimerOffreFinancier",
                 "ajouterLettreInvitation",
                 "modifierLettreInvitation","supprimerLettreInvitation","getMandater","ajouterMandater",
-                "modifierMandater","supprimerMandater","ajouterCojo","modifierCojo","supprimerCojo"
+                "modifierMandater","supprimerMandater","ajouterCojo","modifierCojo","supprimerCojo","ajouterAnalyseDossier",
+                "modifierAnalyseDossier","supprimerAnalyseDossier"
             ]),
             // formatageSomme: formatageSomme,
             ajouterBudgetaireLocal(){
@@ -1988,6 +2210,17 @@ created() {
                         date_lettre:"",
                         ref_lettre:"",
                         destination:"",
+                }
+            },
+            ajouterAnalyseD(){
+              this.ajouterAnalyseDossier(this.formAnalyseDossier)
+                this.formAnalyseDossier={
+                        date_analyse:"",
+                        rang_analyse:"",
+                        decision:"",
+                        dossier_candidat_id:"",
+                        type_analyse_id: "",
+                        cojo_id:""
                 }
             },
             ajouterOffreT(){
@@ -2122,6 +2355,14 @@ created() {
 
                 this.edite_appel_offre = this.appelOffres[index];
             },
+            afficheAnnalyseDossier(index){
+                this.$('#modificationAajouterAnalys01').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+
+                this.edite_analyse_dossier = this.getterAnalyseDossiers[index];
+            },
 
             afficherModaleModifier(index){
                 this.$('#modificationModal1').modal({
@@ -2152,6 +2393,10 @@ created() {
             modificationMandater(){
                 this.modifierMandater(this.editer_mandater)
                 this.$('#modificationMantater').modal('hide');
+            },
+            modificationDossierAnalyse(){
+                this.modifierAnalyseDossier(this.edite_analyse_dossier)
+                this.$('#modificationAajouterAnalys01').modal('hide');
             },
             modfications(){
                 this.modifierAppelOffre(this.edite_appel_offre)
