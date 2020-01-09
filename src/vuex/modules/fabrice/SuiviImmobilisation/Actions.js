@@ -442,8 +442,6 @@ export function modifierBesoinImmo({ commit, dispatch }, nouveau) {
 
 
 
-
-
 export function modifierMontantActuel({ commit, dispatch }, objet) {
   // console.log(id_besoinImmo_a_modifier, qte_actu);
   axios.put("/modifier_besoin_immo/" + objet.id, {
@@ -458,7 +456,8 @@ export function modifierMontantActuel({ commit, dispatch }, objet) {
 export function modifierQteRealisebesoin({ commit, dispatch}, objet) {
   // console.log(id_besoinImmo_a_modifier, qte_actu);
   axios.put("/modifier_besoin_immo/" + objet.id, {
-    qterealise: objet.qte_real
+    qterealise: objet.qte_real,
+    quantite : objet.qte_actu
     // ,
     // montant_total = objet.montant_actu
   })

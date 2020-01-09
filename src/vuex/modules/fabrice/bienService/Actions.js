@@ -778,24 +778,15 @@ export function supprimerLot({commit}, id) {
 // action pour analyse dossier
 
 export  function  getAnalyseDossier({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_ANALYSE_DOSSIER', response.data)
+  queue.push(() => axios.get('/analyse_dossier').then((response) => {
+    commit('GET_ALL_ANALYSE_DOSSIER', response.data.data)
     
 }).catch(error => console.log(error)))
 }
 
 // action pour ajouter analyse dossier
 export function ajouterAnalyseDossier({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    id_acte:elementAjout.id_acte,
-    id_candidat:elementAjout.id_candidat,
-    id_type_analyse:elementAjout.id_type_analyse,
-    id_cojo:elementAjout.id_cojo,
-    date_analyse:elementAjout.date_analyse,
-    rang_analyse:elementAjout.rang_analyse,
-    decision:elementAjout.decision
-    
-})).then(response =>{
+  asyncLoading(axios.post('/analyse_dossier',elementAjout)).then(response =>{
       if(response.status == 201){
           commit('AJOUTER_ANALYSE_DOSSIER', response.data)
 
@@ -813,18 +804,8 @@ export function ajouterAnalyseDossier({commit}, elementAjout){
 
 
 export function modifierAnalyseDossier({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    id_acte:element_modifie.id_acte,
-    id_candidat:element_modifie.id_candidat,
-    id_type_analyse:element_modifie.id_type_analyse,
-    id_cojo:element_modifie.id_cojo,
-    date_analyse:element_modifie.date_analyse,
-    rang_analyse:element_modifie.rang_analyse,
-    decision:element_modifie.decision
-    
- })).then(response => {
+  asyncLoading( axios.put('/analyse_dossier' ,element_modifie)).then(response => {
        commit('MODIFIER_ANALYSE_DOSSIER', response.data)
-       
 
        this.$app.$notify({
          title: 'success ',
@@ -841,7 +822,7 @@ export function supprimerAnalyseDossier({commit}, id) {
  .then(dialog => {
     commit('SUPPRIMER_ANALYSE_DOSSIER', id)
    // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
+     axios.delete('/analyse_dossier/' + id).then(() => dialog.close() )
  })
 
 }
@@ -851,8 +832,8 @@ export function supprimerAnalyseDossier({commit}, id) {
 // action pour cojo
 
 export  function  getCojo({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_COJO', response.data)
+  queue.push(() => axios.get('/cojo').then((response) => {
+    commit('GET_ALL_COJO', response.data.data)
     
 }).catch(error => console.log(error)))
 }
@@ -860,17 +841,7 @@ export  function  getCojo({commit}) {
 // action pour ajouter la cojo
 
 export function ajouterCojo({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    id_condition:elementAjout.id_condition,
-    controleur_financier:elementAjout.controleur_financier,
-    dmp:elementAjout.dmp,
-    autorite_contractante:elementAjout.autorite_contractante,
-    date_composition:elementAjout.date_composition,
-    date_invitation:elementAjout.date_invitation,
-    num_dossier_appel_offre:elementAjout.num_dossier_appel_offre,
-    nbre_participant:elementAjout.nbre_participant
-    
-})).then(response =>{
+  asyncLoading(axios.post('/cojo',elementAjout)).then(response =>{
       if(response.status == 201){
           commit('AJOUTER_COJO', response.data)
 
@@ -888,20 +859,8 @@ export function ajouterCojo({commit}, elementAjout){
 
 
 export function modifierCojo({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    id_condition:element_modifie.id_condition,
-    controleur_financier:element_modifie.controleur_financier,
-    dmp:element_modifie.dmp,
-    autorite_contractante:element_modifie.autorite_contractante,
-    date_composition:element_modifie.date_composition,
-    date_invitation:element_modifie.date_invitation,
-    num_dossier_appel_offre:element_modifie.num_dossier_appel_offre,
-    nbre_participant:element_modifie.nbre_participant
-    
- })).then(response => {
+  asyncLoading( axios.put('/cojo',element_modifie)).then(response => {
        commit('MODIFIER_COJO', response.data)
-       
-
        this.$app.$notify({
          title: 'success ',
          text: 'Modification effectué !',
@@ -917,7 +876,7 @@ export function supprimerCojo({commit}, id) {
  .then(dialog => {
     commit('SUPRIMER_COJO', id)
    // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
+     axios.delete('/cojo/' + id).then(() => dialog.close() )
  })
 
 }
@@ -2567,3 +2526,55 @@ export function supprimerLettreInvitation({commit}, id) {
 
 
 
+/*Action mandater*/
+
+export  function  getMandater({commit}) {
+    queue.push(() => axios.get('/mondates').then((response) => {
+        commit('GET_MANDATER', response.data.data)
+
+    }).catch(error => console.log(error)))
+}
+
+// action pour ajouter les infos
+
+export function ajouterMandater({commit}, elementAjout){
+    asyncLoading(axios.post('/mondates',elementAjout)).then(response =>{
+        if(response.status == 201){
+            commit('AJOUTER_MANDATER', response.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
+// action pour modifier le type text juridique
+
+
+export function modifierMandater({commit}, element_modifie) {
+    asyncLoading( axios.put('/mondates',element_modifie)).then(response => {
+        commit('MODIFIER_MANDATER', response.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}
+// supprimer le type text juridique
+
+export function supprimerMandater({commit}, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_MANDATER', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/mondates/' + id).then(() => dialog.close() )
+        })
+
+}
+/**Fin madate*/

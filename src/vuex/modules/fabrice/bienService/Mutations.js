@@ -1288,6 +1288,31 @@ export const MODIFIER_LETTRE_INVITATION = (state, elementModif)=>{
 }
 
 export const SUPPRIMER_LETTRE_INVITATION = (state, id)=> {
-    state.lettreInvitation = state.lettreInvitation.filter(autreText => autreText.id !=id)
+    state.mandate = state.mandate.filter(autreText => autreText.id !=id)
 }
 /*fin Mutation lettre d'invitation*/
+
+/*Mandate mutation*/
+export const GET_MANDATER = (state, tableau_autre_text_juridique) =>{
+    state.mandate = tableau_autre_text_juridique
+}
+
+export const AJOUTER_MANDATER = (state, elementAjouter) => {
+    state.mandate.unshift(elementAjouter)
+}
+
+
+
+export const MODIFIER_MANDATER = (state, elementModif)=>{
+    state.mandate = state.mandate.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_MANDATER= (state, id)=> {
+    state.mandate = state.mandate.filter(autreText => autreText.id !=id)
+}
+/*Fin mandate mutation*/

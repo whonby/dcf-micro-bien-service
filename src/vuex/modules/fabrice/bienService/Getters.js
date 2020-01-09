@@ -10,10 +10,10 @@ export const typePrestations = state => state.typePrestations.sort((a,b)=>(a.cod
 export const typeFactures = state => state.typeFactures.sort((a,b)=>(a.code>b.code)? 1:-1)
 export const typeActeDepenses = state => state.typeActeDepenses
 export const acteurDepenses = state => state.acteurDepenses.sort((a,b)=>(a.code>b.code)? 1:-1)
-export const cojos = state => state.cojos
+export const getterCojos = state => state.cojos
 export const conditions = state => state.conditions
 export const fonctionOccupes = state => state.fonctionOccupes
-export const analyseDossiers = state => state.analyseDossiers
+export const getterAnalyseDossiers = state => state.analyseDossiers
 export const natureFonctions = state => state.natureFonctions
 export const signatures = state => state.signatures
 export const typeActeEffetFinanciers = state => state.typeActeEffetFinanciers
@@ -39,6 +39,7 @@ export const appelOffres = state => state.appelOffres
 export const gettersOffreTechniques = state => state.offreTechniques
 export const getterOffreFinanciers = state => state.offreFinanciers
 export const getterLettreInvitation = state => state.lettreInvitation
+export const getterMandate = state => state.mandate
 // gettes  personnaliser d'appel d'offres
 
 

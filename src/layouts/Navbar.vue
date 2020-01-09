@@ -114,17 +114,11 @@ export default {
     'getMission']),
        ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
        ...mapActions('bienService', ['getActeurDepense', 'getBailleur','getTypeFacture',
-       'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse',
-       'getTypePrestation', 'getCondition', 'getTextJuridique','getTypeTextJuridique', 'getAutreTextJuridique',
-       'getTypePrestation', 'getCondition', 'getTextJuridique', 
-       'getAutreTextJuridique', 'getMarche',
-
-       'getAutreTextJuridique','getDecisionMarche', 'getMarche', 'getTypeMarches',
-       'getModePassations', 'getTypeProcedures', 'getProcedurePassation',
-       'getAutreTextJuridique','getDecisionMarche', 'getMarche',"getAppelOffre","getLot","getModePassations",
-         "getDossierCandidat", "getOffreFinancier", "getOffreTechnique","getLettreInvitation"])
-
-
+       'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
+         'getTypePrestation', 'getCondition', 'getTextJuridique','getDecisionMarche', 'getMarche', 'getTypeMarches',
+       'getModePassations', 'getTypeProcedures', 'getProcedurePassation','getDecisionMarche', "getAppelOffre","getLot",
+         "getDossierCandidat", "getOffreFinancier", "getOffreTechnique","getLettreInvitation","getMandater",
+         "getCojo","getAnalyseDossier"])
   },
 
   created(){
@@ -270,6 +264,9 @@ this.getMarche()
     this.getOffreFinancier()
     this.getOffreTechnique()
 this.getLettreInvitation()
+    this.getMandater()
+    this.getCojo()
+    this.getAnalyseDossier()
       /**
        * fin missions
        */

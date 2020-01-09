@@ -4,7 +4,6 @@
     
     <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
    
-    afficherModalAjouterStock
     
     <!-- Default Light Table -->
     <div class="container-fluid">

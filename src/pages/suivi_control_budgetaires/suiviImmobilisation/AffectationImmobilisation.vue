@@ -296,8 +296,15 @@
                                :value="AfficheQteActuelEnStock"
                                readonly
                               />
+    
                           
-                          
+                            <input
+                                type="hidden"
+                                class="span"
+                                placeholder="Saisir Num identification"
+                               :value="alertAnneeAmortissement"
+                               readonly
+                              />
                         </td>
                       
                             
@@ -398,6 +405,7 @@
                                 placeholder="Saisir "
                                :value="stockSortant"
                               />
+                              
                               
                             </div>
                             
@@ -568,7 +576,7 @@
                       </tr>
                         <tr>
                          
-                        
+                         
                       
                         
                           
@@ -1250,6 +1258,26 @@ totalqteRealise() {
       }
       return 0
     },
+
+
+     alertMessage() {
+      const typeUniteA = this.SuiviImmo.find(typeUa=> typeUa.acteurDepense.id == this.formData.acteurdepense_id);
+
+      if (typeUniteA) {
+        return typeUniteA.anneamortiss;
+        
+      }
+      return 0
+    },
+    alertAnneeAmortissement() {
+      const typeUniteA = this.SuiviImmo.find(typeUa=> typeUa.acteurDepense.id == this.formData.acteurdepense_id);
+
+      if (typeUniteA) {
+        return typeUniteA.acteurdepense_id;
+        
+      }
+      return 0
+    },
   },
   methods: {
     ...mapActions("SuiviImmobilisation", [
@@ -1279,7 +1307,12 @@ totalqteRealise() {
     // fonction pour vider l'input ajouter
 
     ajouterImmobilisationLocal() {
-     if (this.formData.qte_affecte > 1 ) {
+      if (this.AlertAnneeAmortissement > 0 && this.AlertMessage > this.anneeAmort)
+      {
+        alert("acteur deja equipé")
+      }
+     
+     else if (this.formData.qte_affecte > 1 ) {
         alert("Quantite affecté doit etre egal a 1")
       }
       else
@@ -1311,6 +1344,7 @@ var objetPourModifierQuantiteEnStock = {
       var objetPourModifierQuantiteReel = {
         id: this.idObjetBesoinImmoAModifierLaQuantite,
         qte_actu: this.AfficheQteActuel
+        
       }
       var objetPourModifierMontantActuel = {
         id: this.idObjetBesoinImmoAModifierMontantActuel,
@@ -1318,7 +1352,8 @@ var objetPourModifierQuantiteEnStock = {
       }
      var objetPourModifierQteRealise = {
         id: this.recupererIdBesoin,
-         qte_real: this.totalqteRealise
+         qte_real: this.totalqteRealise,
+         qte_actu: this.AfficheQteActuel
       }
 
 

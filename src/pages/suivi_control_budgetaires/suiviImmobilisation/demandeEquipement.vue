@@ -987,7 +987,7 @@ fonctionDynamiques() {
     },
      normeequipement() {
       
-      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.familleArt.id == this.formData.famille_id);
+      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.fonctionActeur.id == this.formData.fonction_id);
 
       if (norme) {
         return norme.quantite;
