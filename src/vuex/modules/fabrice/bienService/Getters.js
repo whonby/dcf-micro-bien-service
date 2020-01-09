@@ -39,6 +39,7 @@ export const appelOffres = state => state.appelOffres
 export const gettersOffreTechniques = state => state.offreTechniques
 export const getterOffreFinanciers = state => state.offreFinanciers
 export const getterLettreInvitation = state => state.lettreInvitation
+export const getterMandate = state => state.mandate
 // gettes  personnaliser d'appel d'offres
 
 

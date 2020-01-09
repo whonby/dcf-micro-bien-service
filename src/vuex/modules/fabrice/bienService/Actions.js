@@ -2567,3 +2567,55 @@ export function supprimerLettreInvitation({commit}, id) {
 
 
 
+/*Action mandater*/
+
+export  function  getMandater({commit}) {
+    queue.push(() => axios.get('/mondates').then((response) => {
+        commit('GET_MANDATER', response.data.data)
+
+    }).catch(error => console.log(error)))
+}
+
+// action pour ajouter les infos
+
+export function ajouterMandater({commit}, elementAjout){
+    asyncLoading(axios.post('/mondates',elementAjout)).then(response =>{
+        if(response.status == 201){
+            commit('AJOUTER_MANDATER', response.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
+// action pour modifier le type text juridique
+
+
+export function modifierMandater({commit}, element_modifie) {
+    asyncLoading( axios.put('/mondates',element_modifie)).then(response => {
+        commit('MODIFIER_MANDATER', response.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}
+// supprimer le type text juridique
+
+export function supprimerMandater({commit}, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_MANDATER', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/mondates/' + id).then(() => dialog.close() )
+        })
+
+}
+/**Fin madate*/

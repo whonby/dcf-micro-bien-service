@@ -40,7 +40,8 @@ const defaultState = {
     marches:[],
     offreTechniques:[],
     offreFinanciers:[],
-    lettreInvitation:[]
+    lettreInvitation:[],
+    mandate:[],
 
 
 
