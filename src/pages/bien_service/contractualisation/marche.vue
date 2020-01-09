@@ -102,7 +102,7 @@
             </div>
           </div>
 
-              <div class="control-group">
+          <div class="control-group">
             <label class="control-label">Type marche</label>
             <div class="controls">
             <select v-model="editMarche.type_marche_id" class="span">
@@ -200,7 +200,7 @@
                     <th>Type marche</th>
                     <th>Objet</th>
                     <th>Reference marche</th>
-                    <th>Montatant</th>
+                    <th>Montant</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -225,7 +225,7 @@
 
                      <div class="btn-group">
 
-                   <router-link :to="{ name: 'DetaillMarche', params: { id_marche: marche.id }}" 
+                   <router-link :to="{ name: 'DetaillMarche', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail marches">
                   <span class=""><i class="icon-folder-open"></i></span>
                    </router-link> 

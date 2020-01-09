@@ -190,23 +190,7 @@
                 </div>
               </div>
             </td>
-            <!-- <td>
-              <div class="control-group">
-                <label class="control-label">Quantité en stock:</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                   
-                    readonly
-                    class="span"
-                    
-                    :value="quantiteEnstock"
-                  />
-                
-                
-                </div>
-              </div>
-            </td> -->
+           
              <td>
               <div class="control-group">
                 <label class="control-label">Norme d'article</label>
@@ -216,6 +200,22 @@
                   :value="normeequipement"
                     class="span"
                    readonly
+                  />
+                  <input
+                    type="hidden"
+                   
+                    readonly
+                    class="span"
+                    
+                    :value="quantiteEnstock"
+                  />
+                 <input
+                    type="hidden"
+                   
+                    readonly
+                    class="span"
+                    
+                    :value="quantiteEnstockid"
                   />
                   <input
                     type="hidden"
@@ -366,7 +366,19 @@
             
           </tr>
           <tr>
-                 
+                 <td>
+              <div class="control-group">
+                <label class="control-label">Quantite en Stock</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                  :value="quantiteEnstock"
+                    class="span"
+                   readonly
+                  />
+                </div>
+              </div>
+            </td>
           </tr>
         </table>
       </div>
@@ -963,6 +975,9 @@ fonctionDynamiques() {
         }
       };
     },
+
+
+    
     familleDynamiques() {
       return id => {
         if (id != null && id != "") {
@@ -1138,6 +1153,46 @@ montantTotalModifier() {
       }
       return 0
     },
+quantiteEnstockid() {
+      
+      const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == this.formData.article_id);
+
+      if (norme) {
+        return norme.id;
+      }
+      return 0
+    },
+quantiteEnstockidModifier() {
+      
+      const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == this.editBesoinImmo.article_id);
+
+      if (norme) {
+        return norme.id;
+      }
+      return 0
+    },
+
+ quantiteEnstockModifier() {
+      
+      const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == this.editBesoinImmo.article_id);
+
+      if (norme) {
+        return norme.quantitestock;
+      }
+      return 0
+    },
+
+
+
+
+
+
+
+
+
+
+
+
 
      normeEqup() {
       
@@ -1166,6 +1221,7 @@ montantTotalModifier() {
         }
       };
     },
+     
   },
     
   methods: {
@@ -1199,7 +1255,7 @@ montantTotalModifier() {
         alert("La norme doit etre superieure au egal a la quantité demande")
       }
       else if (this.normeequipement <= this.qtedemande  ){
-         alert("Demande déja Effectuer")
+         alert("Demande déja Effectuée")
       }
       else
       {
@@ -1222,8 +1278,9 @@ montantTotalModifier() {
          prix_unitaire:this.coutMoyen,
       norme_id : this.normeEqup,
        normearticle : this.normeequipement,
-      dure_vie :this.dureVieEquipement
-       };
+      dure_vie :this.dureVieEquipement,
+      stock_id:this.quantiteEnstockid   ,
+      qtestock : this.quantiteEnstock    };
       //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
       this.ajouterBesoinImmo(nouvelObjet);
      
@@ -1301,7 +1358,9 @@ montantTotalModifier() {
          prix_unitaire:this.coutMoyenModifier,
          normearticle : this.normeequipementModifier,
          norme_id : this.normeEqupmodifier,
-         dure_vie :this.dureVieEquipementModifier
+         dure_vie :this.dureVieEquipementModifier,
+          stock_id:this.quantiteEnstockidModifier  ,
+      qtestock : this.quantiteEnstockModifier
       };
        this.modifierQuantiteNormeDmd(objetPourModifiernormerealise1);
       this.modifierBesoinImmo(nouvelObjetmodifier);

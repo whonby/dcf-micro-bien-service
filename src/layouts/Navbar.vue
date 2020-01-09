@@ -91,7 +91,7 @@ export default {
             "getClasses","getEchelons","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite"]),
 
-      ...mapActions('gestionMarche',['getTypeMarche','getModePassation',"getSecteurActivite",
+      ...mapActions('gestionMarche',['getTypeMarche','s',"getSecteurActivite",
         "getEntreprise","getEtapeMarche","getDocumentPTBAPPM","getMarcheContrat","getPresenceCF",
         "getDocumentPresence","getNombreMarcheByProcedure","sourcePersonnalise",
         "getSourceFinnancementByMarche","getMarcheContratExecution"]),
@@ -117,7 +117,13 @@ export default {
        'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse',
        'getTypePrestation', 'getCondition', 'getTextJuridique','getTypeTextJuridique', 'getAutreTextJuridique',
        'getTypePrestation', 'getCondition', 'getTextJuridique', 
-       'getAutreTextJuridique', 'getMarche'])
+       'getAutreTextJuridique', 'getMarche',
+
+       'getAutreTextJuridique','getDecisionMarche', 'getMarche', 'getTypeMarches',
+       'getModePassations', 'getTypeProcedures', 'getProcedurePassation',
+       'getAutreTextJuridique','getDecisionMarche', 'getMarche',"getAppelOffre","getLot","getModePassations",
+         "getDossierCandidat", "getOffreFinancier", "getOffreTechnique","getLettreInvitation"])
+
 
   },
 
@@ -191,7 +197,7 @@ this.getAllBudgetGeneral();
             /**Gestion des marche*/
             
       this.getTypeMarche()
-      this.getModePassation()
+      this.s()
       this.getSecteurActivite()
       this.getEntreprise()
       this.getEtapeMarche()
@@ -245,7 +251,25 @@ this.getAutreTextJuridique()
 this.getTypeTextJuridique()
 // this.getDecisionMarche()
 
+this.getDecisionMarche()
+
+this.getTypeProcedures()
+this.getTypeMarches()
 this.getMarche()
+this.getModePassations()
+this.getProcedurePassation()
+
+
+
+
+    this.getAppelOffre()
+this.getMarche()
+    this.getLot()
+    this.getModePassations()
+    this.getDossierCandidat()
+    this.getOffreFinancier()
+    this.getOffreTechnique()
+this.getLettreInvitation()
       /**
        * fin missions
        */

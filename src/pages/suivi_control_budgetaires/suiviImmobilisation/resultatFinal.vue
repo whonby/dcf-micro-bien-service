@@ -4,7 +4,7 @@
     
     <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
    
-    
+    afficherModalAjouterStock
     
     <!-- Default Light Table -->
     <div class="container-fluid">
@@ -44,9 +44,9 @@
                     <th>Article</th>
                     <th>Norme</th>
                     <!-- <th title="quantite en stock">Qté en stock</th> -->
-                    <th title="quantite couvert">Qté Couvert</th>
+                    <th title="quantite couvert">Qté Couverte</th>
                    
-                    <th title="quantite non couvert">Qté non Couvert</th>
+                    <th title="quantite non couvert">Qté non Couverte</th>
                    
                     <th title="Prix unitaire">Prix unitaire</th>
                      <th title="total">Total</th>
@@ -138,10 +138,10 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterStock" main-icon="apps" bg-color="green"></fab>
+    <!-- <fab :actions="fabActions" @cache="afficherModalAjouterStock" main-icon="apps" bg-color="green"></fab> -->
     <notifications  />
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterStock()">Open</button>
+     <!-- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterStock()">Open</button> -->
   </div>
 </template>
   

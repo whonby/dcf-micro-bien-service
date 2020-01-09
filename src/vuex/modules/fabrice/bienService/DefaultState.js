@@ -37,7 +37,10 @@ const defaultState = {
     appelOffres:[],
     typeMarches:[],
     modePassations:[],
-    marches:[]
+    marches:[],
+    offreTechniques:[],
+    offreFinanciers:[],
+    lettreInvitation:[]
 
 
 

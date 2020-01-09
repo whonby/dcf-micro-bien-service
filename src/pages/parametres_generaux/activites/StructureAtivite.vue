@@ -249,6 +249,8 @@ return this.structures_activites.filter((item) => {
     },
    // fonction pour vider l'input
     ajouterBudgetaireLocal () {
+
+  
       this.ajouterStructureActivite(this.formData)
 
         this.formData = {

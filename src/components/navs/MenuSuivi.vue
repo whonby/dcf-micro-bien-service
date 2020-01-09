@@ -237,12 +237,12 @@
             </router-link>
           
           </li>
-          <li class="divider"></li>
+          <!-- <li class="divider"></li>
             <li> 
               <router-link :to ="{name: 'Imputation'}" tag="a">
                 <i class="icon-user"></i> Imputation budget en mission
               </router-link>
-            </li>
+            </li> -->
           <li class="divider"></li>
           <li>
             <router-link :to ="{name: 'Mission'}" tag="a">

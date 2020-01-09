@@ -49,7 +49,7 @@ const BienServiceRoutes = [
 
 // detail marche
 {
-    path:"/detail",
+    path: '/detail-marche/:id',
     name:"DetaillMarche",
     component:DetaillMarche
 },

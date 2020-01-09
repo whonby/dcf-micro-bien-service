@@ -294,7 +294,7 @@ export default {
       "services",
       // "besoinImmobilisations",
       "personBesoinImmo",
-
+"groupTriUaImmo",
       // "tauxbesoinimmoUa",
       "SommeEquipementPrevue",
       "SommeEquipementActuel",

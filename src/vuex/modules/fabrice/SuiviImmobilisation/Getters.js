@@ -62,8 +62,8 @@ export const SuiviImmo = (state, getters, rootState, rootGetters) =>
       element.acteurdepense_id !== null &&
       element.uniteadministrative_id !== null &&
       element.typeuniteadminis_id !== null &&
-      element.articleImmo_id !== null 
-      // element.exercice_budgetaire_id !== null
+      element.articleImmo_id !== null &&
+       element.fonction_id !== null
     ) {
       element = {
         ...element,
@@ -73,7 +73,7 @@ export const SuiviImmo = (state, getters, rootState, rootGetters) =>
 
         familleImmo: rootGetters["SuiviImmobilisation/familles"].find(Famileimmo => Famileimmo.id == element.famillearticle_id),
 
-        serviceImmo: rootGetters["SuiviImmobilisation/services"].find(servImmo => servImmo.id == element.service_id),
+        fonctionImmo: rootGetters["personnelUA/fonctions"].find(fonctImmo => fonctImmo.id == element.fonction_id),
         typeUniteAdministrative: rootGetters["parametreGenerauxAdministratif/type_Unite_admins"].find(typeUniteAdmin => typeUniteAdmin.id == element.typeuniteadminis_id
         ),
 
@@ -427,7 +427,7 @@ export const persoEquipement = (state, getters, rootState, rootGetters) =>
   });
 
 
-
+getPersoStock
 
 
 
@@ -691,7 +691,7 @@ export const getPersoStock = (state, getters, rootState, rootGetters) =>
   });
 
 
-
+SuiviImmo
 
 
 

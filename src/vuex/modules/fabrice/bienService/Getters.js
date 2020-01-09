@@ -5,7 +5,7 @@ export const banques = state => state.banques.sort((a,b)=>(a.code>b.code)? 1:-1)
 export const codesFonctions = state => state.codesFonctions.sort((a,b)=>(a.code>b.code)? 1:-1)
 export const comptes = state => state.comptes.sort((a,b)=>(a.code>b.code)? 1:-1)
 export const factures = state => state.factures.sort((a,b)=>(a.code>b.code)? 1:-1)
-export const lots = state => state.lots.sort((a,b)=>(a.code>b.code)? 1:-1)
+export const lots = state => state.lots
 export const typePrestations = state => state.typePrestations.sort((a,b)=>(a.code>b.code)? 1:-1)
 export const typeFactures = state => state.typeFactures.sort((a,b)=>(a.code>b.code)? 1:-1)
 export const typeActeDepenses = state => state.typeActeDepenses
@@ -22,7 +22,7 @@ export const typeUa = state => state.typeUa
 export const uniteAdministratives = state => state.uniteAdministratives
 export const uniteZones = state => state.uniteZones
 export const ligneBudgetaires = state => state.ligneBudgetaires
-export const DossierCandidats = state => state.DossierCandidats
+export const getterDossierCandidats = state => state.DossierCandidats
 export const livrables = state => state.livrables
 export const zoneGeographiques = state => state.zoneGeographiques
 export const typeTextJuridiques = state => state.typeTextJuridiques
@@ -36,8 +36,9 @@ export const modePassations = state => state.modePassations
 export const marches = state => state.marches
 
 export const appelOffres = state => state.appelOffres
-
-
+export const gettersOffreTechniques = state => state.offreTechniques
+export const getterOffreFinanciers = state => state.offreFinanciers
+export const getterLettreInvitation = state => state.lettreInvitation
 // gettes  personnaliser d'appel d'offres
 
 

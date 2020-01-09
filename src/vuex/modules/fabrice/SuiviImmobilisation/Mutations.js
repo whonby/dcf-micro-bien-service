@@ -280,6 +280,7 @@ const MODIFIER_QTE_REALISE_BESOIN = (state, objet) => {
     if (besoinRealise.id == objet.id) {
       // besoin_immo.montant_total = objet.qte_actu;
       besoinRealise.qterealise = objet.qte_real;
+      
     }
 
     return besoinRealise;

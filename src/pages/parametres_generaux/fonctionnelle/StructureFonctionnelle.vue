@@ -246,13 +246,33 @@ return this.structures_fonctionnelles.filter((item) => {
     },
    // fonction pour vider l'input
     ajouterTypeLocal () {
-      this.ajouterStructureFonctionnelle(this.formData)
+
+
+// if(this.structures_fonctionnelles.indexOf(this.formData.niveau) !== -1){
+//        alert("La valeur existe!")
+// } else{
+//        alert("La valeur n'existe pas!")
+// }
+
+
+//           if(this.structures_fonctionnelles.indexOf(this.formData.niveau) > -1){
+//        alert("La valeur existe!")
+// } else{
+//        alert("La valeur n'existe pas!")
+
+
+
+
+       
+        this.ajouterStructureFonctionnelle(this.formData)
 
         this.formData = {
                 niveau: "",
              libelle: "",
            
         }
+// }
+     
     },
 // afficher modal
 afficherModalModifierType(index){

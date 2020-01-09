@@ -62,7 +62,7 @@
              <div class="control-group">
             <label class="control-label">Type de procedure</label>
             <div class="controls">
-                <select v-model="editProcedure.type_procedure_id" class="span">
+                <select v-model="editProcedure.	type_procedure_id" class="span">
                <option v-for="varText in typeTypeProcedures" :key="varText.id" 
                :value="varText.id">{{varText.libelle}}</option>
            </select>
@@ -197,14 +197,14 @@ export default {
 
       formData: {
             libelle:"",
-            type_procedure_id:""
+            	type_procedure_id:""
             
 
         
       },
       editProcedure: {
              libelle:"",
-             type_procedure_id:""
+             	type_procedure_id:""
             
       },
       search: ""
@@ -248,7 +248,7 @@ return this.procedurePassations.filter((item) => {
 this.ajouterProcedurePassation(this.formData)
 this.formData = {
     libelle:"",
-    type_procedure_id:""
+    	type_procedure_id:""
 }
 
     },

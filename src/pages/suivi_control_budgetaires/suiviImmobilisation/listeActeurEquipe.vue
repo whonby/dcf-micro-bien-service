@@ -37,25 +37,25 @@
                      <th>Matricule</th> 
                        <th>Nom</th>
                      <th>Prénoms</th> 
-                      <th>Type unite administrative</th> 
+                      <!-- <th>Type unite administrative</th>  -->
                        <th>Unite administrative</th>
-                    <th>Service</th> 
+                    <th>Fonction</th> 
                         <th>Designation</th>
-                         <!-- <th>Dure</th>  -->
+                         <th>Annee Amortissement</th> 
                   </tr>
                 </thead>
                 <tbody>
                   <tr class="odd gradeX" v-for="immobilisat in SuiviImmo" :key="immobilisat.id">
                       
-                      <td>{{immobilisat.exoBudgetaire.annee || 'Non renseigné'}}</td>
+                      <td>{{immobilisat.exercice_budgetaire|| 'Non renseigné'}}</td>
                       <td>{{immobilisat.acteurDepense.matricule || 'Non renseigné'}}</td>
                       <td>{{immobilisat.acteurDepense.nom || 'Non renseigné'}}</td>
                        <td>{{immobilisat.acteurDepense.prenom || 'Non renseigné'}}</td>
-                   <td>{{immobilisat.typeUniteAdministrative.libelle || 'Non renseigné'}}</td>
+                   <!-- <td>{{immobilisat.typeUniteAdministrative.libelle || 'Non renseigné'}}</td> -->
                       <td>{{immobilisat.uniteAdminist.libelle || 'Non renseigné'}}</td>
-                      <td>{{immobilisat.serviceImmo.libelle || 'Non renseigné'}}</td>
+                      <td>{{immobilisat.fonctionImmo.libelle || 'Non renseigné'}}</td>
                        <td>{{immobilisat.familleImmo.libelle|| 'Non renseigné'}}</td>
-                   <!-- <td>{{immobilisat.duree || 'Non renseigné'}}</td> -->
+                       <td>{{immobilisat.anneamortiss || 'Non renseigné'}}</td>
                   </tr>
                 </tbody>
               </table>

@@ -483,7 +483,7 @@
                     >{{formaterDate(stock.date_sortie) || 'Non renseigné'}}</td>
                     <td style="text-align: center;"
                       @dblclick="afficherModalModifierStock(index)"
-                    >{{ '0' }}</td>
+                    >{{ stock.qtesortie ||'0' }}</td>
                   
                      <!-- <td
                       @dblclick="afficherModalModifierStock(index)"
