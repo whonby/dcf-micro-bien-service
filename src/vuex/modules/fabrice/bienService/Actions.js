@@ -851,8 +851,8 @@ export function supprimerAnalyseDossier({commit}, id) {
 // action pour cojo
 
 export  function  getCojo({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_COJO', response.data)
+  queue.push(() => axios.get('/cojo').then((response) => {
+    commit('GET_ALL_COJO', response.data.data)
     
 }).catch(error => console.log(error)))
 }
@@ -860,17 +860,7 @@ export  function  getCojo({commit}) {
 // action pour ajouter la cojo
 
 export function ajouterCojo({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    id_condition:elementAjout.id_condition,
-    controleur_financier:elementAjout.controleur_financier,
-    dmp:elementAjout.dmp,
-    autorite_contractante:elementAjout.autorite_contractante,
-    date_composition:elementAjout.date_composition,
-    date_invitation:elementAjout.date_invitation,
-    num_dossier_appel_offre:elementAjout.num_dossier_appel_offre,
-    nbre_participant:elementAjout.nbre_participant
-    
-})).then(response =>{
+  asyncLoading(axios.post('/cojo',elementAjout)).then(response =>{
       if(response.status == 201){
           commit('AJOUTER_COJO', response.data)
 
@@ -888,20 +878,8 @@ export function ajouterCojo({commit}, elementAjout){
 
 
 export function modifierCojo({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    id_condition:element_modifie.id_condition,
-    controleur_financier:element_modifie.controleur_financier,
-    dmp:element_modifie.dmp,
-    autorite_contractante:element_modifie.autorite_contractante,
-    date_composition:element_modifie.date_composition,
-    date_invitation:element_modifie.date_invitation,
-    num_dossier_appel_offre:element_modifie.num_dossier_appel_offre,
-    nbre_participant:element_modifie.nbre_participant
-    
- })).then(response => {
+  asyncLoading( axios.put('/cojo',element_modifie)).then(response => {
        commit('MODIFIER_COJO', response.data)
-       
-
        this.$app.$notify({
          title: 'success ',
          text: 'Modification effectué !',
@@ -917,7 +895,7 @@ export function supprimerCojo({commit}, id) {
  .then(dialog => {
     commit('SUPRIMER_COJO', id)
    // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
+     axios.delete('/cojo/' + id).then(() => dialog.close() )
  })
 
 }

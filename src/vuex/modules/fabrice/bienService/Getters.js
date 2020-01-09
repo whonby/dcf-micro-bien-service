@@ -10,7 +10,7 @@ export const typePrestations = state => state.typePrestations.sort((a,b)=>(a.cod
 export const typeFactures = state => state.typeFactures.sort((a,b)=>(a.code>b.code)? 1:-1)
 export const typeActeDepenses = state => state.typeActeDepenses
 export const acteurDepenses = state => state.acteurDepenses.sort((a,b)=>(a.code>b.code)? 1:-1)
-export const cojos = state => state.cojos
+export const getterCojos = state => state.cojos
 export const conditions = state => state.conditions
 export const fonctionOccupes = state => state.fonctionOccupes
 export const analyseDossiers = state => state.analyseDossiers

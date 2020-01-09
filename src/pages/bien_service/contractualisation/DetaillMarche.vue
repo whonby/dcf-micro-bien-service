@@ -680,8 +680,60 @@
 
               </div>
 
-              <div id="tab22" class="tab-pane"> <img src="img/demo/demo-image2.jpg" alt="demo-image">
-              <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment.</p>
+              <div id="tab22" class="tab-pane">
+                  <div align="right">
+                      <div class="widget-content">
+
+                          <a href="#ajouterCojo" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+
+                      </div>
+
+                  </div>
+                  <table class="table table-bordered table-striped" v-if="marcheid">
+                      <thead>
+                      <tr>
+
+                          <th>Controleur Finnancier </th>
+                          <th>DMP </th>
+                          <th>Autorite Contractante</th>
+                          <th>Date Composition</th>
+                          <th>Date invitation</th>
+                          <th>Numero dossier Appel Offre</th>
+                          <th>Nmbr particiapnt</th>
+                          <th>Condition</th>
+                          <th>Action</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr class="odd gradeX" v-for="(appelOffre, index) in listeCojo(marcheid)"
+                          :key="appelOffre.id">
+                          <td @click="afficheBouttonTechCojo(index)">
+                              {{appelOffre.controleur_finnancier || 'Non renseigné'}}</td>
+                          <td @click="afficheBouttonTechCojo(index)">
+                              {{appelOffre.dmp || 'Non renseigné'}}</td>
+                          <td @click="afficheBouttonTechCojo(index)">
+                              {{appelOffre.autorite_contractante || 'Non renseigné'}}</td>
+                          <td @click="afficheBouttonTechCojo(index)">
+                              {{appelOffre.date_composition || 'Non renseigné'}}</td>
+                          <td @click="afficheBouttonTechCojo(index)">
+                              {{appelOffre.date_invitation || 'Non renseigné'}}</td>
+                          <td @click="afficheBouttonTechCojo(index)">
+                              {{appelOffre.num_dossier_appel_offre || 'Non renseigné'}}</td>
+                          <td @click="afficheBouttonTechCojo(index)">
+                              {{appelOffre.nbr_participant || 'Non renseigné'}}</td>
+                          <td @click="afficheBouttonTechCojo(index)">
+                              {{appelOffre.condition.libelle || 'Non renseigné'}}</td> lettre_invitation
+                          <td @click="afficheBouttonTechCojo(index)">
+                              {{appelOffre.lettre_invitation.ref_lettre || 'Non renseigné'}}</td>
+                          <div class="btn-group">
+                              <button @click.prevent="supprimerCojo(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
+                                  <span class=""><i class="icon-trash"></i></span></button>
+
+                          </div>
+
+                      </tr>
+                      </tbody>
+                  </table>
             </div>
 
             <div id="tab32²" class="tab-pane">
@@ -1399,6 +1451,233 @@
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
         <!--Fin mandater-->
+
+        <!--Mandater-->
+        <div id="ajouterCojo" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter Cojo</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+
+
+                    <div class="control-group">
+                        <label class="control-label">Lettre Invitation</label>
+                        <div class="controls">
+                            <select v-model="formDataCojo.lettre_invitation_id" class="span">
+                                <option v-for="plans in lettreInvitationAMarche(marcheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.ref_lettre}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Condition</label>
+                        <div class="controls">
+                            <select v-model="formDataCojo.condition_id" class="span">
+                                <option v-for="plans in conditions" :key="plans.id"
+                                        :value="plans.id">{{plans.libelle}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formDataCojo.controleur_finnancier"
+                                    class="span"
+                                    placeholder="Controller Finnancier"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <input type="text"
+                                   v-model="formDataCojo.dmp"
+                                   class="span"
+                                   placeholder="DMP"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formDataCojo.autorite_contractante"
+                                    class="span"
+                                    placeholder="Autorite contractante "
+                            />
+                        </div>
+                    </div>
+
+
+                    <div class="control-group">
+                        <label class="control-label">Date composition</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="formDataCojo.date_composition"
+                                    class="span"
+
+                            />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Date invitation</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="formDataCojo.date_invitation"
+                                    class="span"
+
+                            />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Numero dossier APPEL OFFRE</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formDataCojo.num_dossier_appel_offre"
+                                    class="span"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">NBR participant</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formDataCojo.nbr_participant"
+                                    class="span"
+                            />
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterCojoMarche()" href="#">Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        </div>
+        <div id="modificationCojo" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Modification de mandater</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+
+
+                    <div class="control-group">
+                        <label class="control-label">Lettre Invitation</label>
+                        <div class="controls">
+                            <select v-model="edite_cojo.lettre_invitation_id" class="span">
+                                <option v-for="plans in lettreInvitationAMarche(marcheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.ref_lettre}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Condition</label>
+                        <div class="controls">
+                            <select v-model="edite_cojo.condition_id" class="span">
+                                <option v-for="plans in conditions" :key="plans.id"
+                                        :value="plans.id">{{plans.libelle}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="edite_cojo.controleur_finnancier"
+                                    class="span"
+                                    placeholder="Controller Finnancier"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <input type="text"
+                                   v-model="edite_cojo.dmp"
+                                   class="span"
+                                   placeholder="DMP"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="edite_cojo.autorite_contractante"
+                                    class="span"
+                                    placeholder="Autorite contractante "
+                            />
+                        </div>
+                    </div>
+
+
+                    <div class="control-group">
+                        <label class="control-label">Date composition</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="edite_cojo.date_composition"
+                                    class="span"
+
+                            />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Date invitation</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="edite_cojo.date_invitation"
+                                    class="span"
+
+                            />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Numero dossier APPEL OFFRE</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="edite_cojo.num_dossier_appel_offre"
+                                    class="span"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">NBR participant</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="edite_cojo.nbr_participant"
+                                    class="span"
+                            />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationCojo()" href="#">Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        </div>
+        <!--Fin mandater-->
         <!--Fin contratualisation-->
     </div>
 </template>
@@ -1419,6 +1698,7 @@
                     }
 
                 ],
+                edite_cojo:"",
                 editer_mandater:"",
                 edite_lettre_invitation:"",
                 detail_dossier_candidature:"",
@@ -1440,6 +1720,17 @@
                     date_id:"",
                     nom_mandat:"",
                     prenom_nom:""
+                },
+                formDataCojo:{
+                    lettre_invitation_id:"",
+                    condition_id:'',
+                    controleur_finnancier:"",
+                    dmp:"",
+                    autorite_contractante:"",
+                    date_invitation:"",
+                    date_composition:"",
+                    num_dossier_appel_offre:"",
+                    nbr_participant:""
                 },
             isFormulaireDossierCandidature:false,
                 isDetailDossierCandidature:false,
@@ -1560,7 +1851,7 @@ created() {
         computed: {
             ...mapGetters("bienService", [ 'acteDepense',"getMarchePersonnaliser","appelOffres",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats",
-                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate"]),
+                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions"]),
             listeAppelOffre(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -1600,6 +1891,14 @@ created() {
                     }
                 }
             }
+            ,
+            listeCojo: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                        return this.getterCojos.filter(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid)
+                    }
+                }
+            }
             // filtre_equipement() {
             //   const st = this.search.toLowerCase();
             //   return this.equipements.filter(type => {
@@ -1634,7 +1933,8 @@ created() {
                 "modifierDossierCandidat","supprimerDossierCandidat","ajouterOffreTechnique","modifierOffreTechnique",
                 "supprimerOffreTechnique","ajouterOffreFinancier","modifierOffreFinancier","supprimerOffreFinancier",
                 "ajouterLettreInvitation",
-                "modifierLettreInvitation","supprimerLettreInvitation","getMandater","ajouterMandater","modifierMandater","supprimerMandater"
+                "modifierLettreInvitation","supprimerLettreInvitation","getMandater","ajouterMandater",
+                "modifierMandater","supprimerMandater","ajouterCojo","modifierCojo","supprimerCojo"
             ]),
             // formatageSomme: formatageSomme,
             ajouterBudgetaireLocal(){
@@ -1725,16 +2025,29 @@ created() {
                         prix_unitaire:"",
                         montant_total_ht:"",
                         montant_total_ttc:"",
-
                 }
             },
             ajouterMandaterA(){
                this.ajouterMandater(this.formMandater)
                 this.formMandater={
-                      lettre_invitation_id:"",
+                        lettre_invitation_id:"",
                         date_id:"",
                         nom_mandat:"",
                         prenom_nom:""
+                }
+            },
+            ajouterCojoMarche(){
+              this.ajouterCojo(this.formDataCojo)
+                this.formDataCojo={
+                        lettre_invitation_id:"",
+                        condition_id:'',
+                        controleur_finnancier:"",
+                        dmp:"",
+                        autorite_contractante:"",
+                        date_invitation:"",
+                        date_composition:"",
+                        num_dossier_appel_offre:"",
+                        nbr_participant:""
                 }
             },
             ajouterDossierCandidature(){
@@ -1819,6 +2132,15 @@ created() {
              this.edite_lot = this.lots[index];
                 //this.edite_lot.appel_offre_id=this.edite_lot.
             },
+            afficheBouttonTechCojo(index){
+        this.$('#modificationCojo').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+
+        this.edite_cojo = this.getterCojos[index];
+        //this.edite_lot.appel_offre_id=this.edite_lot.
+    },
             afficheBouttonTechFinMandater(index){
                 this.$('#modificationMantater').modal({
                     backdrop: 'static',
@@ -1835,7 +2157,10 @@ created() {
                 this.modifierAppelOffre(this.edite_appel_offre)
                 this.$('#modificationModal').modal('hide');
             },
-
+            modificationCojo(){
+                this.modifierCojo(this.edite_cojo)
+                this.$('#modificationModal').modal('hide');
+            },
             modficationsLot(){
                 this.modifierLot(this.edite_lot)
                 this.$('#modificationModal1').modal('hide');
