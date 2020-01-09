@@ -115,12 +115,12 @@
               <span class="text">Structure Plus équipé</span>
             </router-link>
           </li> -->
-           <!-- <li>
+           <li>
             <router-link :to="{name:'listeActeurEquipe'}" tag="a" title>
               <i class="icon-group"></i>
               <span class="text">Acteur équipé</span>
             </router-link>
-          </li> -->
+          </li>
         </ul>
       </li>
     </ul>

@@ -65,7 +65,7 @@
               </div>-->
             </div>
             <div v-else>
-              <p style="text-align:center;font-size:20px;color:red;">Pas d'Immobilisation</p>
+              <p style="text-align:center;font-size:20px;color:red;">Pas d'enregistrement</p>
             </div>
           </div>
         </div>
