@@ -240,8 +240,8 @@
                          <td @click="afficheBouttonTechFin(index)">
                              {{appelOffre.procdure_passation.libelle || 'Non renseigné'}}</td>
                          <div class="btn-group">
-                             <button   class="btn  " title="Detail">
-                                 <span class=""><i class="icon-folder-open"></i></span></button>
+                             <button   class="btn  " title="Detail" @click.prevent="isDetailDossierCandi(appelOffre.id)">
+                                 <span class=""><i class="icon-folder-open" ></i></span></button>
                              <a href="#offreT" data-toggle="modal" @click.prevent="modaleOffreTechnique(index)"  class="btn" title="Offre technique">
                                  <span class=""><i class="icon-wrench"></i></span></a>
                              <a href="#offreF" data-toggle="modal" @click.prevent="modaleOffreFinnanciere(index)"  class="btn  " title="Offre financière">
@@ -469,7 +469,128 @@
                     </table>
                 </div>
 
-                <!--fin ajouter dossier candidature-->
+                <!--Detail dossier candidat  -->
+                <div v-if="isDetailDossierCandidature">
+                    <h6 v-if="detail_dossier_candidature">
+                      </h6>
+
+
+                    <div class="widget-box" v-if="detail_dossier_candidature">
+                        <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+                            <h5>Dossier du candidat : {{detail_dossier_candidature.nom_cand}} {{detail_dossier_candidature.prenom_cand}}</h5>
+                            <button class="btn" title="Affiche la liste des candidats" @click="NotisFormulaireDossierCand" v-if="!isButtunAddDossierCandidat"><span class=""><i class="icon-eye-open"></i></span></button></div>
+                        <div class="widget-content nopadding">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Type candidat</th>
+                                    <th>Telephone </th>
+                                    <th>adresse </th>
+                                    <th>Situation geographique</th>
+                                    <th>Email</th>
+                                    <th>Meth reat traveau</th>
+                                    <th>Accord groupe</th>
+                                    <th>Pauv habil signataire</th>
+                                    <th>Caution</th>
+                                    <th>Registe de commerce</th>
+                                </tr>
+                                </thead>
+
+                                <tr>
+                                    <td>{{detail_dossier_candidature.type_candidat || "Non renseigne"}}</td>
+                                    <td>{{detail_dossier_candidature.telephone_cand || "Non renseigne"}}</td>
+                                    <td>{{detail_dossier_candidature.adresse_post || "Non renseigne"}}</td>
+                                    <td>{{detail_dossier_candidature.situation_geo || "Non renseigne"}}</td>
+                                    <td>{{detail_dossier_candidature.email_cand || "Non renseigne"}}</td>
+                                    <td>{{detail_dossier_candidature.meth_real_travau || "Non renseigne"}}</td>
+                                    <td>{{detail_dossier_candidature.accord_group || "Non renseigne"}}</td>
+                                    <td>{{detail_dossier_candidature.pouv_habil_signataire || "Non renseigne"}}</td>
+                                    <td>{{detail_dossier_candidature.cautionnement_prov || "Non renseigne"}}</td>
+                                    <td>{{detail_dossier_candidature.reg_com || "Non renseigne"}}</td>
+
+                                </tr>
+
+
+                            </table>
+                        </div>
+                    </div>
+                    <div class="widget-box" v-if="detail_offre_technique">
+                        <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+                            <h5>Offre technique du candidat</h5>
+                            </div>
+                        <div class="widget-content nopadding">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Programme mobilisation</th>
+                                    <th>Capacite financiere </th>
+                                    <th>CAA Moyenn</th>
+                                    <th>Capacite financement</th>
+                                    <th>Capacite technique exper </th>
+                                    <th>Meth reat traveau</th>
+                                    <th>Accord groupe</th>
+                                    <th>Pauv habil signataire</th>
+                                    <th>Caution</th>
+                                    <th>Registe de commerce</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+
+                                <tr>
+                                    <td>{{detail_offre_technique.prog_mobilisation || "Non renseigne"}}</td>
+                                    <td>{{detail_offre_technique.capacite_financiere || "Non renseigne"}}</td>
+                                    <td>{{detail_offre_technique.caa_moyen_ac_entre || "Non renseigne"}}</td>
+                                    <td>{{detail_offre_technique.capacite_financiere || "Non renseigne"}}</td>
+                                    <td>{{detail_offre_technique.capacite_tech_exp || "Non renseigne"}}</td>
+                                    <td>{{detail_offre_technique.meth_real_travau || "Non renseigne"}}</td>
+                                    <td>{{detail_offre_technique.accord_group || "Non renseigne"}}</td>
+                                    <td>{{detail_offre_technique.pouv_habil_signataire || "Non renseigne"}}</td>
+                                    <td>{{detail_offre_technique.cautionnement_prov || "Non renseigne"}}</td>
+                                    <td>{{detail_offre_technique.reg_com || "Non renseigne"}}</td>
+                                    <td><button @click.prevent="supprimerOffreTechnique(detail_offre_technique.id)"  class="btn btn-danger " title="Supprimer">
+                                        <span class=""><i class="icon-trash"></i></span></button></td>
+                                </tr>
+
+
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="widget-box" v-if="detail_offre_finnancier">
+                        <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+                            <h5>Offre financiere</h5>
+                        </div>
+                        <div class="widget-content nopadding">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Designation</th>
+                                    <th>Unite </th>
+                                    <th>Quantite</th>
+                                    <th>Prix unitaire</th>
+                                    <th>Montant total ht </th>
+                                    <th>Montant total ttc </th>
+                                    <th>Action </th>
+                                </tr>
+                                </thead>
+
+                                <tr>
+                                    <td>{{detail_offre_finnancier.designation || "Non renseigne"}}</td>
+                                    <td>{{detail_offre_finnancier.unite || "Non renseigne"}}</td>
+                                    <td>{{detail_offre_finnancier.quantite || "Non renseigne"}}</td>
+                                    <td>{{detail_offre_finnancier.prix_unitaire || "Non renseigne"}}</td>
+                                    <td>{{detail_offre_finnancier.montant_total_ht || "Non renseigne"}}</td>
+                                    <td>{{detail_offre_finnancier.montant_total_ttc || "Non renseigne"}}</td>
+                                    <td><button @click.prevent="supprimerOffreFinancier(detail_offre_finnancier.id)"  class="btn btn-danger " title="Supprimer">
+                                        <span class=""><i class="icon-trash"></i></span></button></td>
+                                </tr>
+
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--fin dossier candidat-->
 
 
 
@@ -876,7 +997,6 @@
                             </div>
                         </div>
                         <div class="control-group">
-                            <label>Date de naissance</label>
                             <div class="controls">
                                 <input type="text" class="span5" placeholder="prix unitaire" v-model="formOffreFinanciere.prix_unitaire">
                             </div>
@@ -928,6 +1048,9 @@
                     }
 
                 ],
+                detail_dossier_candidature:"",
+                detail_offre_technique:"",
+                detail_offre_finnancier:"",
                 detail_marche:"",
                 marcheid:"",
                 appel_offre_marche:"",
@@ -941,6 +1064,7 @@
                },
 
             isFormulaireDossierCandidature:false,
+                isDetailDossierCandidature:false,
                 isButtunAddDossierCandidat:true,
           formDossierCadidature:{
               type_candidat:"",
@@ -1243,10 +1367,23 @@ created() {
             isFormulaireDossierCand(){
                 this.isFormulaireDossierCandidature=true
                 this.isButtunAddDossierCandidat=false
+                this.isDetailDossierCandidature=false
             },
             NotisFormulaireDossierCand(){
                 this.isFormulaireDossierCandidature=false
                 this.isButtunAddDossierCandidat=true
+                this.isDetailDossierCandidature=false
+            },
+            isDetailDossierCandi(id){
+                this.isDetailDossierCandidature=true,
+                    this.isButtunAddDossierCandidat=false
+                this.isButtunAddDossierCandidat=false
+
+                this.detail_dossier_candidature=this.getterDossierCandidats.find(dossier=>dossier.id==id)
+                this.detail_offre_finnancier=this.getterOffreFinanciers.find(offre => offre.dossier_candidature.id ==id)
+                this.detail_offre_technique =this.gettersOffreTechniques.find(offre =>offre.dossier_candidature.id ==id)
+                console.log(this.detail_offre_finnancier)
+
             },
             // afficher modal de modification
 
