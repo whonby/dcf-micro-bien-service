@@ -241,6 +241,7 @@
                     class="span"
                    readonly
                   />
+                 
                 </div>
               </div>
             </td>
@@ -703,10 +704,10 @@
                 <i class="icon-th"></i>
               </span>
               <h5>Liste des Bessoins Immobilisations de UA</h5>
-              <div align="right">
+              <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
-              </div>
+              </div> -->
             </div>
 
             <div class="widget-content nopadding" >
@@ -948,7 +949,8 @@ json_fields: {
       "services",
       "besoinEquipement",
       "type_Unite_admins",
-      "getPersoListeDesNorme"
+      "getPersoListeDesNorme",
+      "besoinEquipement"
     ]),
     ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
@@ -1366,6 +1368,7 @@ quantiteEnstockidModifier() {
       this.modifierBesoinImmo(nouvelObjetmodifier);
       this.$("#modificationModal").modal('hide');
       this.$("#exampleModalMotif").modal('hide');
+      this.$("#exampleModalMotifservice").modal('hide');
       }
      
     },

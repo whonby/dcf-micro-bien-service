@@ -457,7 +457,10 @@ export function modifierQteRealisebesoin({ commit, dispatch}, objet) {
   // console.log(id_besoinImmo_a_modifier, qte_actu);
   axios.put("/modifier_besoin_immo/" + objet.id, {
     qterealise: objet.qte_real,
-    quantite : objet.qte_actu
+    quantite: objet.qte_actu,
+    totalrealise: objet.total_qte_real,
+    montant_total : objet.montant_actu
+    
     // ,
     // montant_total = objet.montant_actu
   })
@@ -653,7 +656,8 @@ export function ajouterStock({ commit, dispatch }, nouveau) {
       typeequipe_id: nouveau.typeequipe_id,
       // durevie: nouveau.durevie,
       histo_qte: nouveau.histo_qte,
-      date_entre: nouveau.date_entre
+      date_entre: nouveau.date_entre,
+      qtesortie: nouveau.qtesortie
     })
   ).then(response => {
     if (response.status == 201) {
@@ -683,7 +687,8 @@ export function modifierStock({ commit, dispatch }, nouveau) {
       histo_qte: nouveau.histo_qte,
       date_entre: nouveau.date_entre,
       date_sortie: nouveau.date_sortie,
-      qteentrant: nouveau.qteentrant
+      qteentrant: nouveau.qteentrant,
+      qtesortie: nouveau.qtesortie
     })
   ).then(response => {
     commit("MODIFIER_STOCKAGE", response.data);

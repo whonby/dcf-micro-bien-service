@@ -141,7 +141,7 @@ export const nombreDemandeEquipement = (state, getters) =>
 //     AfficherAnneeEnCours => AfficherAnneeEnCours.exoBudgetaire.encours == 1
 //   );
 
-
+besoinEquipement
 groupUaNorme
 
 export const listeBesoinValider = (state, getters, rootState, rootGetters) =>
@@ -357,7 +357,11 @@ export const nombreTotalEquipement = (state, getters) =>
     0
   );
 
-
+export const SommeQuantiteRealise = (state, getters) =>
+  getters.besoinImmobilisations.reduce(
+    (prec, cur) => parseInt(prec) + parseInt(cur.totalrealise),
+    0
+  );
 
 export const SommeQuantiteNonCouvert = (state, getters) =>
   getters.trieUaBesoinImmo.reduce(
@@ -850,12 +854,54 @@ export const groupStockFammile = (state, getters) => {
 
 //     return element;
 //   });
-
+SommeQuantiteNonCouvert
 
 export const besoinEquipement1 = state =>
   state.besoinImmobilisations.filter(
     trieUaBesoin => trieUaBesoin.quantite !== 0
   );
+
+export const besoinEquipementRealise = state =>
+  state.besoinImmobilisations.filter(
+    trieUaBesoin => trieUaBesoin.qterealise !== 0
+  );
+
+export const besoinRealiseEquipement = (state, getters, rootState, rootGetters) =>
+  getters.besoinEquipementRealise.map(element => {
+    if (
+      element.equipe_id !== null &&
+      element.uniteadmin_id !== null &&
+      element.fonction_id !== null &&
+      element.article_id !== null
+    ) {
+      element = {
+        ...element,
+
+
+        AfficheEquipement: rootGetters["SuiviImmobilisation/equipements"].find(Equipe => Equipe.id == element.equipe_id
+        ),
+        Afficheua: rootGetters["uniteadministrative/uniteAdministratives"].find(Equipe => Equipe.id == element.uniteadmin_id
+        ),
+        Affichefamille: rootGetters["SuiviImmobilisation/familles"].find(Equipe => Equipe.id == element.famille_id
+        ),
+
+        Affichefonction: rootGetters["personnelUA/fonctions"].find(Equipe => Equipe.id == element.fonction_id
+        ),
+        AfficheArticle: rootGetters["SuiviImmobilisation/articles"].find(Equipe => Equipe.id == element.article_id
+        ),
+      };
+    }
+
+    return element;
+  });
+
+
+
+
+
+
+
+
 
 
 

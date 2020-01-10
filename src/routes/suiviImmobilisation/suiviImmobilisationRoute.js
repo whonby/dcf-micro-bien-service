@@ -27,7 +27,14 @@ import DetailBesoinImmo from '../../pages/suivi_control_budgetaires/suiviImmobil
 import StockArticles from '../../pages/suivi_control_budgetaires/suiviImmobilisation/StockArticles.vue'
 import demandeEquipement from '../../pages/suivi_control_budgetaires/suiviImmobilisation/demandeEquipement.vue'
 import ficheAnalyse from '../../pages/suivi_control_budgetaires/suiviImmobilisation/resultatFinal.vue'
+import listeBesoinRealise from '../../pages/suivi_control_budgetaires/suiviImmobilisation/listeBesoinRealise.vue'
 const suiviImmobilisationRoutes = [
+ 
+  {
+    path: "/liste-Besoin-Realise",
+    name: "listeBesoinRealise",
+    component: listeBesoinRealise
+  },
   {
     path: "/ficheAnalyse",
     name: "ficheAnalyse",

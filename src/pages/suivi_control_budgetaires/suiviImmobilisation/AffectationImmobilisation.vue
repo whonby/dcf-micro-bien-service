@@ -406,7 +406,12 @@
                                :value="stockSortant"
                               />
                               
-                              
+                               <input
+                                type="hidden"
+                                class="span"
+                                placeholder="Saisir "
+                               :value="AfficheMontantRealise"
+                              />
                             </div>
                             
                             
@@ -959,12 +964,12 @@ typeUniteAdministrativeDynamiques() {
 veifuaExist() {
       return this.formData.typeuniteadminis_id == "";
     },
-    // AfficheQteActuel() {
-    //   const val =
-    //     parseInt(this.AffichierQuantiteteReel) -
-    //     parseInt(this.formData.qte_affecte);
-    //   return parseInt(val).toFixed(0);
-    // },
+    AfficheMontantRealise() {
+      const val =
+        parseInt(this.totalqteRealise) *
+        parseInt(this.AffichiercoutMoyen);
+      return parseInt(val).toFixed(0);
+    },
  
   
      AffichierDureVie() {
@@ -1173,16 +1178,16 @@ idObjetStockModifierEnStock() {
 
 
 
-    idObjetBesoinImmoAModifierMontantActuel() {
-      const montantActuel = this.listeBesoinValider.find(
-        totalActuel => totalActuel.id == this.formData.articleImmo_id,
-      );
+    // idObjetBesoinImmoAModifierMontantActuel() {
+    //   const montantActuel = this.listeBesoinValider.find(
+    //     totalActuel => totalActuel.id == this.formData.articleImmo_id,
+    //   );
 
-      if (montantActuel) {
-        return montantActuel.id;
-      }
-      return 0
-    },
+    //   if (montantActuel) {
+    //     return montantActuel.id;
+    //   }
+    //   return 0
+    // },
     idObjetBesoinImmoAModifierQteRealise() {
       const qte_affecte = this.listeBesoinValider.find(
         quantRealise => quantRealise.id == this.formData.articleImmo_id,
@@ -1278,6 +1283,16 @@ totalqteRealise() {
       }
       return 0
     },
+
+      alertArticle() {
+      const typeUniteA = this.SuiviImmo.find(typeUa=> typeUa.acteurDepense.id == this.formData.acteurdepense_id);
+
+      if (typeUniteA) {
+        return typeUniteA.articleImmo_id;
+        
+      }
+      return 0
+    },
   },
   methods: {
     ...mapActions("SuiviImmobilisation", [
@@ -1307,9 +1322,9 @@ totalqteRealise() {
     // fonction pour vider l'input ajouter
 
     ajouterImmobilisationLocal() {
-      if (this.AlertAnneeAmortissement > 0 && this.AlertMessage > this.anneeAmort)
+      if (this.AlertAnneeAmortissement > 0 && this.AlertMessage > this.anneeAmort && this.alertArticle == this.formData.articleImmo_id )
       {
-        alert("acteur deja equipé")
+        alert("Personnel deja equipé")
       }
      
      else if (this.formData.qte_affecte > 1 ) {
@@ -1346,21 +1361,23 @@ var objetPourModifierQuantiteEnStock = {
         qte_actu: this.AfficheQteActuel
         
       }
-      var objetPourModifierMontantActuel = {
-        id: this.idObjetBesoinImmoAModifierMontantActuel,
-        montant_actu: this.AffichierTotalActuel
-      }
+      // var objetPourModifierMontantActuel = {
+      //   id: this.idObjetBesoinImmoAModifierMontantActuel,
+      //   montant_actu: this.AffichierTotalActuel
+      // }
      var objetPourModifierQteRealise = {
         id: this.recupererIdBesoin,
          qte_real: this.totalqteRealise,
-         qte_actu: this.AfficheQteActuel
+         qte_actu: this.AfficheQteActuel,
+         total_qte_real: this.AfficheMontantRealise,
+         montant_actu: this.AffichierTotalActuel
       }
 
 
       //console.log(objetPourModifierpersoEquipe)
 
      this.modifierQuantiteReel(objetPourModifierQuantiteReel);
-     this.modifierMontantActuel(objetPourModifierMontantActuel);
+    //  this.modifierMontantActuel(objetPourModifierMontantActuel);
     this.modifierQteRealisebesoin(objetPourModifierQteRealise);
     this.modifierQuantiteEnStock(objetPourModifierQuantiteEnStock);
    this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2);

@@ -15,6 +15,8 @@
                             <div class="controls">
                               <input type="text" class="span"  v-model="editStock.qteentrant1"/>
                                <input type="hidden" class="span"  :value="quantiteEnt"/>
+                                <input type="hidden" class="span"  v-model="editStock.histo_qte"/>
+                                <input type="hidden" class="span"  :value="nouvelleQte"/>
                             </div>
                           </div>
                            <div class="control-group">
@@ -177,6 +179,20 @@
               <input
                     type="hidden"
                    :value="Historqte"
+                    
+                    class="span"
+                    
+                  />
+                  <input
+                    type="hidden"
+                   :value="HistorqteModifier"
+                    
+                    class="span"
+                    
+                  />
+                   <input
+                    type="hidden"
+                   v-model="formData.qtesortie"
                     
                     class="span"
                     
@@ -415,10 +431,10 @@
                 <i class="icon-th"></i>
               </span>
               <h5>Gestion des stocks</h5>
-              <div align="right">
+              <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
-              </div>
+              </div> -->
             </div>
 
             <div class="widget-content nopadding" v-if="getPersoStock.length && articles.length && familles.length && uniteAdministratives.length ">
@@ -581,6 +597,7 @@ quantite: {
         durevie: "",
         articlestock_id: "",
         quantitestock: "",
+        qtesortie:"0"
         
        
       },
@@ -639,6 +656,15 @@ quantiteActuel() {
       
       return 0
     },
+    nouvelleQte() {
+      const val = parseInt(this.editStock.histo_qte) + parseInt(this.editStock.qteentrant1);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
 
 
 quantiteenstock() {
@@ -676,6 +702,10 @@ quantiteEnt() {
     },
     Historqte() {
       const val = parseInt(this.formData.quantitestock);
+      return parseInt(val).toFixed(0);
+    },
+     HistorqteModifier() {
+      const val = parseInt(this.editStock.quantitestock);
       return parseInt(val).toFixed(0);
     },
     // nvelleQuantiteEnStock(){
@@ -763,6 +793,7 @@ veifArticlesExist() {
         durevie: "",
         articlestock_id: "",
         quantitestock: "",
+        qtesortie:"0"
       };
     },
     // afficher modal de modification
@@ -788,6 +819,7 @@ veifArticlesExist() {
         ...this.editStock,
        quantitestock: this.quantiteActuel,
         qteentrant: this.quantiteEnt,
+        histo_qte:this.nouvelleQte
       
       };
       this.modifierStock(nouvelObjet);
@@ -799,8 +831,13 @@ veifArticlesExist() {
     },
     // fonction pour vider l'input modification
     modifierStockLocal() {
-     
-      this.modifierStock(this.editStock);
+      var nouvelObjet = {
+        ...this.editStock,
+       histo_qte: this.HistorqteModifier,
+      
+      
+      };
+      this.modifierStock(nouvelObjet);
       this.$("#modificationModal").modal('hide');
     },
     alert() {
