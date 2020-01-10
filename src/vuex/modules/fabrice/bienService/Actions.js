@@ -2001,9 +2001,9 @@ export function supprimerZoneGeographique({commit}, id) {
 
 // action pour obtenir les infos du type text juridique
 
-export  function  getTypeTextJurique({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_TYPE_TEXT_JURIDIQUE', response.data)
+export function getTypeTextJuridique({commit}) {
+  queue.push(() => axios.get('/type_text_juridiques').then((response) => {
+    commit('GET_ALL_TYPE_TEXT_JURIDIQUE', response.data.data)
     
 }).catch(error => console.log(error)))
 }
@@ -2011,13 +2011,13 @@ export  function  getTypeTextJurique({commit}) {
 // action pour ajouter les infos 
 
 export function ajouterTypeTextJuridique({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    id_texte:elementAjout.id_texte,
-    libelle_type:elementAjout.libelle_type
+  asyncLoading(axios.post('/type_text_juridiques',{
+    
+    libelle:elementAjout.libelle
     
 })).then(response =>{
       if(response.status == 201){
-          commit('AJOUTER_TYPE_TEXT_JURIDIQUE', response.data)
+        commit('AJOUTER_TYPE_TEXT_JURIDIQUE', response.data)
 
           this.$app.$notify({
             title: 'success ',
@@ -2033,11 +2033,11 @@ export function ajouterTypeTextJuridique({commit}, elementAjout){
 
 
 export function modifierTypeTextJuridique({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    id_texte:element_modifie.id_texte,
-    libelle_type:element_modifie.libelle_type
+  asyncLoading(axios.put('/type_text_juridiques/'+ element_modifie.id ,{
+    
+    libelle:element_modifie.libelle
  })).then(response => {
-       commit('MODIFIER_TYPE_TEXT_JURIDIQUE', response.data)
+   commit('MODIFIER_TYPE_TEXT_JURIDIQUE', response.data)
        
 
        this.$app.$notify({
@@ -2051,11 +2051,11 @@ export function modifierTypeTextJuridique({commit}, element_modifie) {
 
 export function supprimerTypeTextJuridique({commit}, id) {
  this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
+ .confirm("Voulez vous vraiment supprimer ?.")
  .then(dialog => {
-    commit('SUPPRIMER_TYPE_TEXT_JURIDIQUE', id)
+   commit('SUPPRIMER_TYPE_TEXT_JURIDIQUE', id)
    // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
+   axios.delete('/type_text_juridiques/' + id).then(() => dialog.close() )   
  })
 
 }

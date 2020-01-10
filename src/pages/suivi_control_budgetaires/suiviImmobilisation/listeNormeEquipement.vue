@@ -368,10 +368,10 @@
                 <i class="icon-th"></i>
               </span>
               <h5>Liste des normes équipements</h5>
-              <div align="right">
+              <!-- <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
-              </div>
+              </div> -->
             </div>
 
             <div class="widget-content nopadding">

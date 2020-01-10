@@ -4,22 +4,12 @@
     <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">Ã—</button>
+        <button data-dismiss="modal" class="close" type="button">x</button>
         <h3>Ajouter type texte juridique</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
-            <td>
-              <div class="control-group">
-                <label class="control-label">text</label>
-                <div class="controls">
-                  <select v-model="formData.id_texte" >
-                    <option value>Sélectionner</option>
-                    <option></option>
-                  </select>
-                </div>
-              </div>
-            </td>
+           
           <div class="control-group">
             <label class="control-label">libelle</label>
             <div class="controls">
@@ -37,7 +27,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterFamilleLocal(formData)"
+          @click.prevent="ajouterModalTypeTextJuridiqueLocal(formData)"
           class="btn btn-primary"
           href="#"
          
@@ -51,22 +41,13 @@
 
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">Ã—</button>
+        <button data-dismiss="modal" class="close" type="button">x</button>
         <h3>Modifier type texte juridique</h3>
       </div>
       <div class="modal-body">
          <form class="form-horizontal">
-              <td>
-              <div class="control-group">
-                <label class="control-label">texte</label>
-                <div class="controls">
-                  <select v-model="editTypeTextJuridique.id_texte" >
-                    <option value>Sélectionner</option>
-                    <option></option>
-                  </select>
-                </div>
-              </div>
-            </td>
+              
+              
           <div class="control-group">
             <label class="control-label">libelle</label>
             <div class="controls">
@@ -83,7 +64,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierFamilleLocal(editTypeTextJuridique)"
+          @click.prevent="modifierModalTypeJuridiqueLocal(editTypeTextJuridique)"
           class="btn btn-primary"
           href="#"
         
@@ -124,13 +105,29 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>texte</th>
-                    <th>libelle</th>
+                    
+                    <th width="90%">libelle</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                 
+      <tr class="odd gradeX" v-for="(typeFacture, index) in filtre_typeTextJuridique"
+                 :key="typeFacture.id">
+                 <td @dblclick="afficherModalModifierFamille(index)">
+                   {{typeFacture.libelle || 'Non renseigné'}}</td>
+                  
+
+<td>
+       <div class="btn-group">
+              <button @click.prevent="supprimerTypeTextJuridique(typeFacture.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+             
+            </div>
+</td>
+
+                
+
+                       </tr>
                 </tbody>
               </table>
               
@@ -172,30 +169,34 @@ export default {
     //   },
 
       formData: {
-        
+        libelle:""
       },
-      editEquipement: {
-     
+      editTypeTextJuridique: {
+     libelle:""
       },
       search: ""
     };
   },
 
   computed: {
-     ...mapGetters("bienService", []),
-    // filtre_equipement() {
-    //   const st = this.search.toLowerCase();
-    //   return this.equipements.filter(type => {
-    //     return (
+     ...mapGetters("bienService", ["typeTextJuridiques"]),
+
+    filtre_typeTextJuridique() {
+      const st = this.search.toLowerCase();
+      return this.typeTextJuridiques.filter(type => {
+        return (
           
-    //       type.libelle.toLowerCase().includes(st)
-    //     );
-    //   });
-    // }
+          type.libelle.toLowerCase().includes(st)
+        );
+      });
+    }
   },
   methods: {
     ...mapActions("bienService", [
-     
+     "getTypeTextJurique",
+     "ajouterTypeTextJuridique",
+     "modifierTypeTextJuridique",
+     "supprimerTypeTextJuridique"
     ]),
     //afiicher modal ajouter
     afficherModalAjouterTitre() {
@@ -205,17 +206,27 @@ export default {
       });
     },
     // fonction pour vider l'input ajouter
-    
-    // afficher modal de modification
-    // afficherModalModifierFamille(index) {
-    //   this.$("#modificationModal").modal({
-    //     backdrop: "static",
-    //     keyboard: false
-    //   });
+    ajouterModalTypeTextJuridiqueLocal(){
+this.ajouterTypeTextJuridique(this.formData)
+this.formData = {
+	libelle:"",
+}
 
-    //   this.editEquipement = this.equipements[index];
-    // },
-    // fonction pour vider l'input modification
+    },
+      modifierModalTypeJuridiqueLocal(){
+      this.modifierTypeTextJuridique(this.editTypeTextJuridique)
+      this.$('#modificationModal').modal('hide');
+    },
+   // afficher modal de modification
+    afficherModalModifierFamille(index) {
+      this.$("#modificationModal").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+      this.editTypeTextJuridique = this.typeTextJuridiques[index];
+    },
+    //fonction pour vider l'input modification
     
     alert() {
       console.log("ok");

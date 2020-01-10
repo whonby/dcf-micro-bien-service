@@ -144,7 +144,7 @@
                                 <option
                                   v-for="arti in ArticlesDynamiques(formData.famillearticle_id)"
                                   :key="arti.id"
-                                  :value="arti.id"
+                                  :value="arti.afficheArticle.id"
                                 >{{arti.afficheArticle.libelle}}</option>
                               </select>
                             </div>
@@ -296,8 +296,15 @@
                                :value="AfficheQteActuelEnStock"
                                readonly
                               />
+    
                           
-                          
+                            <input
+                                type="hidden"
+                                class="span"
+                                placeholder="Saisir Num identification"
+                               :value="alertAnneeAmortissement"
+                               readonly
+                              />
                         </td>
                       
                             
@@ -372,13 +379,13 @@
                                 type="hidden"
                                 class="span"
                                 placeholder="Saisir Num identification"
-                               :value="AffichierIdStock"
+                               :value="quantiteEnstock"
                               />
                                 <input
                                 type="hidden"
                                 class="span"
                                 placeholder="Saisir Num identification"
-                               :value="AffichierqteStock"
+                               :value="quantiteEnstockID"
                               />
                                <input
                                 type="hidden"
@@ -390,9 +397,21 @@
                                 type="hidden"
                                 class="span"
                                 placeholder="Saisir "
-                               :value="AffichierIdNorme"
+                               :value="sortantEnstock"
+                              />
+                               <input
+                                type="hidden"
+                                class="span"
+                                placeholder="Saisir "
+                               :value="stockSortant"
                               />
                               
+                               <input
+                                type="hidden"
+                                class="span"
+                                placeholder="Saisir "
+                               :value="AfficheMontantRealise"
+                              />
                             </div>
                             
                             
@@ -472,16 +491,16 @@
                             </div>
                           </div>
                         </td>
+                       
                         <td>
-                          <label class="control-label">N°facture:</label>
-                          <div class="controls">
-                            <input
-                              type="text"
-                              class="span"
-                              placeholder="Saisir le Numero facture"
-                              v-model="formData.numero_facture"
-                            />
+                           <div class="control-group">
+                            <label class="control-label">Date du jour</label>
+                            <div class="controls">
+                              <input type="date" class="span" v-model="formData.date_enregis" />
+                            </div>
                           </div>
+                           
+                         
                         </td>
                       </tr>
                     </div>
@@ -562,7 +581,7 @@
                       </tr>
                         <tr>
                          
-                        
+                         
                       
                         
                           
@@ -674,6 +693,23 @@
                     
                   />
                         </td>
+                         <td>
+                          <label class="control-label">N°facture:</label>
+                          <div class="controls">
+                            <input
+                              type="text"
+                              class="span"
+                              placeholder="Saisir le Numero facture"
+                              v-model="formData.numero_facture"
+                            />
+                             <!-- <input
+                              type="text"
+                              class="span"
+                              
+                              :value="AffichierStock(this.formData.articleImmo_id)"
+                            /> -->
+                          </div>
+                        </td>
                          <!-- <td>
                            <div class="control-group">
                             <label class="control-label">Date de mise en service:</label>
@@ -739,7 +775,8 @@ export default {
         montant_evaluation:"0",
         montant_cession:"0",
         montant_amortissement_anterieur:"0",
-anneamortiss:""
+anneamortiss:"",
+date_enregis:""
 
       },
 
@@ -766,7 +803,9 @@ anneamortiss:""
       "SuiviImmo",
       "listeBesoinValider",
       "getAfficheStockArticle",
-      "getPersoNormeArticle"
+      "getPersoNormeArticle",
+      "getPersoStock",
+      "stockageArticle"
       
     ]),
 
@@ -775,6 +814,17 @@ anneamortiss:""
     ...mapGetters("personnelUA", ["all_acteur_depense","personnaliseActeurDepense","acteur_depenses","personnaFonction"]),
     ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
     ...mapGetters("gestionMarche", ["entreprises"]),
+
+// AffichierStock() {
+//       const qtereel = this.getPersoStock.find(qtreel => qtreel.AfficheArticle.id == id);
+
+//       if (qtereel) {
+//         return qtereel.quantitestock;
+//       }
+//       return 0
+//     },
+
+
 exoEnCours(){
 return this.exercices_budgetaires.filter(element => element.encours == 1)
 },
@@ -914,17 +964,17 @@ typeUniteAdministrativeDynamiques() {
 veifuaExist() {
       return this.formData.typeuniteadminis_id == "";
     },
-    // AfficheQteActuel() {
-    //   const val =
-    //     parseInt(this.AffichierQuantiteteReel) -
-    //     parseInt(this.formData.qte_affecte);
-    //   return parseInt(val).toFixed(0);
-    // },
+    AfficheMontantRealise() {
+      const val =
+        parseInt(this.totalqteRealise) *
+        parseInt(this.AffichiercoutMoyen);
+      return parseInt(val).toFixed(0);
+    },
  
   
      AffichierDureVie() {
       
-      const dureVie1 = this.listeBesoinValider.find(dureEquipe => dureEquipe.id == this.formData.articleImmo_id);
+      const dureVie1 = this.listeBesoinValider.find(dureEquipe => dureEquipe.famille.id == this.formData.famillearticle_id);
 
       if (dureVie1) {
         return dureVie1.dure_vie;
@@ -943,8 +993,38 @@ veifuaExist() {
 //       return 0
 //     },
 
+ quantiteEnstock() {
+      
+      const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == this.formData.articleImmo_id);
+
+      if (norme) {
+        return norme.quantitestock;
+      }
+      return 0
+    },
+
+sortantEnstock() {
+      
+      const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == this.formData.articleImmo_id);
+
+      if (norme) {
+        return norme.qtesortie;
+      }
+      return 0
+    },
 
 
+
+
+quantiteEnstockID() {
+      
+      const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == this.formData.articleImmo_id);
+
+      if (norme) {
+        return norme.id;
+      }
+      return 0
+    },
 
 
 
@@ -952,7 +1032,7 @@ veifuaExist() {
 
     normeEquipement() {
       
-      const norme = this.listeBesoinValider.find(normeEquipe => normeEquipe.id== this.formData.articleImmo_id);
+      const norme = this.listeBesoinValider.find(normeEquipe => normeEquipe.afficherFonction.id== this.formData.fonction_id);
 
       if (norme) {
         return norme.normearticle;
@@ -960,7 +1040,7 @@ veifuaExist() {
       return 0
     },
     AffichierQuantiteteReel() {
-      const qtereel = this.listeBesoinValider.find(qtreel => qtreel.id == this.formData.articleImmo_id);
+      const qtereel = this.listeBesoinValider.find(qtreel => qtreel.afficheArticle.id == this.formData.articleImmo_id);
 
       if (qtereel) {
         return qtereel.quantite;
@@ -975,6 +1055,32 @@ veifuaExist() {
       }
       return 0
     },
+
+//  quantiteEnstock() {
+      
+//       const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == id);
+
+//       if (norme) {
+//         return norme.quantitestock;
+//       }
+//       return 0
+//     },
+
+
+// quantiteEnstock() {
+//       return id => {
+//         if (id != null && id != "") {
+//           return this.getPersoStock.find(
+//             element => element.articlestock_id == id
+//           );
+//         }
+//       };
+//     },
+
+
+
+
+
 
 AffichierIdNorme() {
       const qtereel = this.listeBesoinValider.find(qtreel => qtreel.id == this.formData.articleImmo_id);
@@ -997,15 +1103,15 @@ AffichierIdNorme() {
       return 0
     },
     AffichierQuantiteEnStock() {
-      const qtereel = this.listeBesoinValider.find(qtreel => qtreel.id == this.formData.articleImmo_id);
-//  console.log(qtereel)
+      const qtereel = this.listeBesoinValider.find(qtreel => qtreel.afficheArticle.id == this.formData.articleImmo_id);
+//  console.log(qtereel)afficheArticle
       if (qtereel) {
         return qtereel.qte_recu;
       }
       return 0
     },
     AffichiercoutMoyen() {
-      const cout = this.listeBesoinValider.find(qtreel => qtreel.id == this.formData.articleImmo_id);
+      const cout = this.listeBesoinValider.find(qtreel => qtreel.afficheArticle.id == this.formData.articleImmo_id);
 // console.log(cout)
       if (cout) {
         return cout.prix_unitaire;
@@ -1024,7 +1130,7 @@ AffichierIdNorme() {
 
 
  stockRestant() {
-      const val = parseInt(this.AffichierqteStock) - parseInt(this.formData.qte_affecte);
+      const val = parseInt(this.quantiteEnstock) - parseInt(this.formData.qte_affecte);
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -1032,7 +1138,15 @@ AffichierIdNorme() {
       
       return 0
     },
-
+stockSortant() {
+      const val = parseInt(this.formData.qte_affecte) + parseInt(this.sortantEnstock);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
 
 
     idObjetBesoinImmoAModifierLaQuantite() {
@@ -1048,15 +1162,11 @@ AffichierIdNorme() {
     },
 
 
-idObjetBesoinImmoAModifierEnStock() {
-      const qteEnStock = this.listeBesoinValider.find(
-        qtreel => qtreel.id == this.formData.articleImmo_id,
-        // console.log(qteEnStock)
-       
-      );
+idObjetStockModifierEnStock() {
+       const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == this.formData.articleImmo_id);
 
-      if (qteEnStock) {
-        return qteEnStock.id;
+      if (norme) {
+        return norme.id;
       }
       return 0
     },
@@ -1068,17 +1178,16 @@ idObjetBesoinImmoAModifierEnStock() {
 
 
 
+    // idObjetBesoinImmoAModifierMontantActuel() {
+    //   const montantActuel = this.listeBesoinValider.find(
+    //     totalActuel => totalActuel.id == this.formData.articleImmo_id,
+    //   );
 
-    idObjetBesoinImmoAModifierMontantActuel() {
-      const montantActuel = this.listeBesoinValider.find(
-        totalActuel => totalActuel.id == this.formData.articleImmo_id,
-      );
-
-      if (montantActuel) {
-        return montantActuel.id;
-      }
-      return 0
-    },
+    //   if (montantActuel) {
+    //     return montantActuel.id;
+    //   }
+    //   return 0
+    // },
     idObjetBesoinImmoAModifierQteRealise() {
       const qte_affecte = this.listeBesoinValider.find(
         quantRealise => quantRealise.id == this.formData.articleImmo_id,
@@ -1099,15 +1208,15 @@ idObjetBesoinImmoAModifierEnStock() {
       }
       return 0
     },
-    idObjetBesoinImmoAModifierEnStockNorme() {
-   //console.log(qteEnStock2)
-      const qtereel = this.listeBesoinValider.find(qtreel => qtreel.id == this.formData.articleImmo_id);
+  //   idObjetBesoinImmoAModifierEnStockNorme() {
+  //  //console.log(qteEnStock2)
+  //     const qtereel = this.listeBesoinValider.find(qtreel => qtreel.id == this.formData.articleImmo_id);
 
-      if (qtereel) {
-        return qtereel.norme_id;
-      }
-      return 0
-    },
+  //     if (qtereel) {
+  //       return qtereel.norme_id;
+  //     }
+  //     return 0
+  //   },
     // AffichiercoutMoyen(){
     //   const prixUnitaire = this.listeBesoinValider.find(prixUnit => prixUnit.id == 27)
      
@@ -1147,10 +1256,40 @@ totalqteRealise() {
     
      recupererIdBesoin() {
       
-      const norme = this.listeBesoinValider.find(normeEquipe => normeEquipe.id== this.formData.articleImmo_id);
+      const norme = this.listeBesoinValider.find(normeEquipe => normeEquipe.afficheArticle.id== this.formData.articleImmo_id);
 
       if (norme) {
         return norme.id
+      }
+      return 0
+    },
+
+
+     alertMessage() {
+      const typeUniteA = this.SuiviImmo.find(typeUa=> typeUa.acteurDepense.id == this.formData.acteurdepense_id);
+
+      if (typeUniteA) {
+        return typeUniteA.anneamortiss;
+        
+      }
+      return 0
+    },
+    alertAnneeAmortissement() {
+      const typeUniteA = this.SuiviImmo.find(typeUa=> typeUa.acteurDepense.id == this.formData.acteurdepense_id);
+
+      if (typeUniteA) {
+        return typeUniteA.acteurdepense_id;
+        
+      }
+      return 0
+    },
+
+      alertArticle() {
+      const typeUniteA = this.SuiviImmo.find(typeUa=> typeUa.acteurDepense.id == this.formData.acteurdepense_id);
+
+      if (typeUniteA) {
+        return typeUniteA.articleImmo_id;
+        
       }
       return 0
     },
@@ -1163,7 +1302,8 @@ totalqteRealise() {
       "modifierQteRealisebesoin",
       "modifierQuantiteEnStock",
       "modifierQuantiteEnStock2",
-      "modifierQuantiteEnStockNorme"
+    
+      "modifierQuantiteEnStock3",
       
     ]),
 
@@ -1182,8 +1322,28 @@ totalqteRealise() {
     // fonction pour vider l'input ajouter
 
     ajouterImmobilisationLocal() {
+      if (this.AlertAnneeAmortissement > 0 && this.AlertMessage > this.anneeAmort && this.alertArticle == this.formData.articleImmo_id )
+      {
+        alert("Personnel deja equipé")
+      }
+     
+     else if (this.formData.qte_affecte > 1 ) {
+        alert("Quantite affecté doit etre egal a 1")
+      }
+      else
+      {
 
-       var objetPourModifierQuantiteEnStock = {
+var objetQuantiteEnStock = {
+        id: this.quantiteEnstockID,
+        qteactuelstock: this.stockRestant,
+        date_jour: this.formData.date_enregis,
+        qte_recu: this.stockSortant,
+      }
+
+
+
+
+var objetPourModifierQuantiteEnStock = {
         id: this.idObjetBesoinImmoAModifierEnStock,
         qte_stock: this.AfficheQteActuelEnStock
       }
@@ -1191,33 +1351,38 @@ totalqteRealise() {
         id: this.idObjetBesoinImmoAModifierEnStock2,
         qteactuelstock: this.stockRestant
       }
-    var objetPourModifierQuantiteEnNorme = {
-        id: this.idObjetBesoinImmoAModifierEnStockNorme,
-        qteactuelstock: this.stockRestant
-      }
+    // var objetPourModifierQuantiteEnNorme = {
+    //     id: this.idObjetBesoinImmoAModifierEnStockNorme,
+    //     qteactuelstock: this.stockRestant
+    //   }
 
       var objetPourModifierQuantiteReel = {
         id: this.idObjetBesoinImmoAModifierLaQuantite,
         qte_actu: this.AfficheQteActuel
+        
       }
-      var objetPourModifierMontantActuel = {
-        id: this.idObjetBesoinImmoAModifierMontantActuel,
-        montant_actu: this.AffichierTotalActuel
-      }
+      // var objetPourModifierMontantActuel = {
+      //   id: this.idObjetBesoinImmoAModifierMontantActuel,
+      //   montant_actu: this.AffichierTotalActuel
+      // }
      var objetPourModifierQteRealise = {
         id: this.recupererIdBesoin,
-         qte_real: this.totalqteRealise
+         qte_real: this.totalqteRealise,
+         qte_actu: this.AfficheQteActuel,
+         total_qte_real: this.AfficheMontantRealise,
+         montant_actu: this.AffichierTotalActuel
       }
 
 
       //console.log(objetPourModifierpersoEquipe)
 
      this.modifierQuantiteReel(objetPourModifierQuantiteReel);
-     this.modifierMontantActuel(objetPourModifierMontantActuel);
+    //  this.modifierMontantActuel(objetPourModifierMontantActuel);
     this.modifierQteRealisebesoin(objetPourModifierQteRealise);
     this.modifierQuantiteEnStock(objetPourModifierQuantiteEnStock);
    this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2);
-   this.modifierQuantiteEnStockNorme(objetPourModifierQuantiteEnNorme);
+  //  this.modifierQuantiteEnStockNorme(objetPourModifierQuantiteEnNorme);
+   this.modifierQuantiteEnStock3(objetQuantiteEnStock);
       var nouvelObjet = {
         ...this.formData,
         qte_reel: this.AffichierQuantiteteReel,
@@ -1269,6 +1434,8 @@ fonction_id:"",
         montant_amortissement_anterieur: "",
         date_amortissement_anterieur: ""
       };
+      }
+       
     },
 
     // // fonction pour vider l'input modification

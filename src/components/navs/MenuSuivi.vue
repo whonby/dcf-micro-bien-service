@@ -257,7 +257,7 @@
       
       <!-- Activite
       -->
-     <li class="dropdown" id="tableau">
+     <!-- <li class="dropdown" id="tableau">
         <a
           title="Suivi des immobilisations"
           href="#"
@@ -266,7 +266,7 @@
           class="dropdown-toggle"
         >
           <span class="text">SUIVI DES IMMOBILISATIONS </span>
-          <!-- <span  class="badge badge-important">{{nombreDemandeEquipement}}</span>  -->
+          <span  class="badge badge-important">{{nombreDemandeEquipement}}</span> 
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
@@ -353,14 +353,14 @@
               <span class="text">Acteur équipé</span>
             </router-link>
           </li>
-     <!-- <li>
+     <li>
             <router-link :to="{name:'listeImmobilisationParUa'}" tag="a" title>
               <i class="icon-search"></i>
               <span class="text">Recherche Immobilisation</span>
             </router-link>
-          </li> -->
+          </li>
         </ul>
-      </li>
+      </li> -->
       <li>
         <router-link
               :to="{name:'TableauBordImmo'}"

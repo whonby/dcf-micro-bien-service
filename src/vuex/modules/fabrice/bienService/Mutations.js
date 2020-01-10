@@ -1260,6 +1260,12 @@ export const SUPPRIMER_AUTRE_TEXT_JURIDIQUE = (state, id)=> {
     state.autresTexteJuridiques = state.autresTexteJuridiques.filter(autreText => autreText.id !=id)
 }
 
+
+
+
+// autre text juridique
+
+SUPPRIMER_TYPE_TEXT_JURIDIQUE
 /*Mutation lettre d'invitation*/
 
 export const GET_LETTRE_INVITATION = (state, tableau_autre_text_juridique) =>{

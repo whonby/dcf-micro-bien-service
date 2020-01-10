@@ -9,17 +9,21 @@
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
-          <div class="control-group">
-            <label class="control-label">libelle</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="formData.libelle_text"
-                class="span"
-                placeholder="Saisir le libelle_type"
-              />
-            </div>
-          </div>
+         <td>
+              <div class="control-group">
+                <label class="control-label">Type text juridique:</label>
+                <div class="controls">
+                  <select  v-model="formData.type_text_juridique_id">
+                    <option value>Sélectionner</option>
+                    <option
+                      v-for="famil in getTypeTextJuridique"
+                      :key="famil.id"
+                      :value="famil.AfficheTypeTextJuridique.id"
+                    >{{famil.AfficheTypeTextJuridique.libelle}}</option>
+                  </select>
+                </div>
+              </div>
+            </td>
          
           <div class="control-group">
             <label class="control-label">Date</label>
@@ -65,21 +69,26 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Text jridique</h3>
+        <h3>Modifier Text juridique</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
-            <div class="control-group">
-            <label class="control-label">libelle</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="editTextJuridique.	libelle_text"
-                class="span"
-                placeholder="Saisir le libelle_type"
-              />
-            </div>
-          </div>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Type text juridique:</label>
+                <div class="controls">
+                  <select  v-model="editTextJuridique.type_text_juridique_id">
+                    <option value>Sélectionner</option>
+                    <option
+                      v-for="famil in getTypeTextJuridique"
+                      :key="famil.id"
+                      :value="famil.AfficheTypeTextJuridique.id"
+                    >{{famil.AfficheTypeTextJuridique.libelle}}</option>
+                  </select>
+                </div>
+              </div>
+            </td>
+         
 
            <div class="control-group">
             <label class="control-label">Date</label>
@@ -134,7 +143,7 @@
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
-          <div class="widget-box">
+          <div class="widget-box" v-if="getTypeTextJuridique.length && text_juridiques.length">
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
@@ -150,30 +159,34 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>libelle</th>
+                    <th>Type text juridique</th>
                     <th>Date</th>
-                    <th>Objet</th>
+                    <th width="50%">Objet</th>
+                    
+                    
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(textJuridique, index) in 
-                text_juridiques"
+                  <tr class="odd gradeX" v-for="(textJuridique, index) in  textJuridiqueFiltre"
                  :key="textJuridique.id">
                  <td @dblclick="afficherModalModifiertextJuridique(index)">
-                   {{textJuridique.libelle_text || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifiertextJuridique(index)">
+                   {{textJuridique.AfficheTypeTextJuridique.libelle || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModalModifiertextJuridique(index)">
                    {{formaterDate(textJuridique.date_effet_text) || 'Non renseigné'}}</td>
+                   
                     <td @dblclick="afficherModalModifiertextJuridique(index)">
                    {{textJuridique.objet_text || 'Non renseigné'}}</td>
                   
 
-
-                     <div class="btn-group">
+<td>
+    <div class="btn-group">
               <button @click.prevent="supprimerTextJuridique(textJuridique.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
+</td>
+                   
 
                        </tr>
                 </tbody>
@@ -218,14 +231,14 @@ export default {
     //   },
 
       formData: {
-            libelle_text:"",
+            type_text_juridique_id:"",
             date_effet_text:"",
             objet_text:""
 
         
       },
       editTextJuridique: {
-        	 libelle_text:"",
+        	 type_text_juridique_id:"",
             date_effet_text:"",
             objet_text:""
       },
@@ -234,24 +247,23 @@ export default {
   },
 
   computed: {
-     ...mapGetters("bienService", ['text_juridiques']),
+     ...mapGetters("bienService", ['text_juridiques','getTypeTextJuridique']),
 
-//     textJuridiqueFiltre()  {
+    textJuridiqueFiltre()  {
      
-//         const searchTerm = this.search.toLowerCase();
+        const searchTerm = this.search.toLowerCase();
 
-// return this.text_juridiques.filter((item) => {
+return this.getTypeTextJuridique.filter((item) => {
   
-//      return item.libelle_text.toLowerCase().includes(searchTerm) 
-     
+     return item.objet_text.toLowerCase().includes(searchTerm) 
     
 
   
   
 
-//    }
-// )
-//     }
+   }
+)
+    }
   },
   methods: {
     ...mapActions("bienService", ['ajouterTextJuridique','modifierTextJuridique',
@@ -269,7 +281,7 @@ export default {
     ajouterModalTypeAnalyseLocal(){
 this.ajouterTextJuridique(this.formData)
 this.formData = {
-	 libelle_text:"",
+	 type_text_juridique_id:"",
             date_effet_text:"",
             objet_text:""
 }
@@ -283,7 +295,7 @@ this.formData = {
         keyboard: false
       });
 
-      this.editTextJuridique = this.text_juridiques[index];
+      this.editTextJuridique = this.textJuridiqueFiltre[index];
     },
     // fonction pour vider l'input modification
     modifierModalTypeAnalyseLocal(){

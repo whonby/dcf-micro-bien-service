@@ -28,10 +28,18 @@ import ajouterAppelOffre from '../../pages/bien_service/contractualisation/ajout
 import modificationAppelOffre from '../../pages/bien_service/contractualisation/modificationAppelOffre.vue';
 import typeMarche from '../../pages/bien_service/Prametre_marchers/typeMarche.vue';
 import modePassation from '../../pages/bien_service/Prametre_marchers/modePassation.vue';
+import typeTextJuridique from '../../pages/bien_service/parametres/typeTextJuridique.vue';
+// import typeTextJuridique from '../../pages/bien_service/typeTextJuridique.vue';
 import marche from '../../pages/bien_service/contractualisation/marche.vue';
 import DetaillMarche from '../../pages/bien_service/contractualisation/DetaillMarche.vue';
 
 const BienServiceRoutes = [
+
+    {
+        path: "/type-Text-Juridique",
+        name: "typeTextJuridique",
+        component: typeTextJuridique
+    },
     // la route pour acte de depense
 {
  path:"/creation-acte-depense",

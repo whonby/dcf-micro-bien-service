@@ -12,15 +12,15 @@
         <li class="bg_lo">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-success">{{nombreArchivageDocument}}</span>Nombre Archivage document
+            <span class="label label-success">{{formatageSomme(parseFloat(montantBudgetGeneral))}}</span>Somme des lignes Budgetaires
           </a>
         </li>
-        <li class="bg_ly">
+        <!-- <li class="bg_ly">
           <a href="#">
             <i class="icon-list-ol"></i>
             <span class="label label-important">{{nombreTypeText}}</span>Nombre de type texte
           </a>
-        </li>
+        </li> -->
       
       </ul>
     </div>
@@ -29,6 +29,8 @@
   
 <script>
 import { mapGetters } from "vuex";
+
+import { formatageSomme } from "../../../src/Repositories/Repository";
 export default {
   name:'tableaudebord',
   data() {
@@ -47,13 +49,16 @@ export default {
       "nombreTypeText",
       "nombreUniteAdministratives",
       "nombreArchivageDocument",
+      "montantBudgetGeneral"
       // "nbreNouveauProjet"
 
       // "nbreArchivageNotes"
     ]),
   
   },
-  methods: {}
+  methods: {
+    formatageSomme:formatageSomme
+  }
 };
 </script>
 

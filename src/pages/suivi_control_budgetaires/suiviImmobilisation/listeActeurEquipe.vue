@@ -37,25 +37,25 @@
                      <th>Matricule</th> 
                        <th>Nom</th>
                      <th>Prénoms</th> 
-                      <th>Type unite administrative</th> 
+                      <!-- <th>Type unite administrative</th>  -->
                        <th>Unite administrative</th>
-                    <th>Service</th> 
+                    <th>Fonction</th> 
                         <th>Designation</th>
-                         <!-- <th>Dure</th>  -->
+                         <th>Annee Amortissement</th> 
                   </tr>
                 </thead>
                 <tbody>
                   <tr class="odd gradeX" v-for="immobilisat in SuiviImmo" :key="immobilisat.id">
                       
-                      <td>{{immobilisat.exoBudgetaire.annee || 'Non renseigné'}}</td>
+                      <td>{{immobilisat.exercice_budgetaire|| 'Non renseigné'}}</td>
                       <td>{{immobilisat.acteurDepense.matricule || 'Non renseigné'}}</td>
                       <td>{{immobilisat.acteurDepense.nom || 'Non renseigné'}}</td>
                        <td>{{immobilisat.acteurDepense.prenom || 'Non renseigné'}}</td>
-                   <td>{{immobilisat.typeUniteAdministrative.libelle || 'Non renseigné'}}</td>
+                   <!-- <td>{{immobilisat.typeUniteAdministrative.libelle || 'Non renseigné'}}</td> -->
                       <td>{{immobilisat.uniteAdminist.libelle || 'Non renseigné'}}</td>
-                      <td>{{immobilisat.serviceImmo.libelle || 'Non renseigné'}}</td>
+                      <td>{{immobilisat.fonctionImmo.libelle || 'Non renseigné'}}</td>
                        <td>{{immobilisat.familleImmo.libelle|| 'Non renseigné'}}</td>
-                   <!-- <td>{{immobilisat.duree || 'Non renseigné'}}</td> -->
+                       <td>{{immobilisat.anneamortiss || 'Non renseigné'}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -65,7 +65,7 @@
               </div>-->
             </div>
             <div v-else>
-              <p style="text-align:center;font-size:20px;color:red;">Pas d'Immobilisation</p>
+              <p style="text-align:center;font-size:20px;color:red;">Pas d'enregistrement</p>
             </div>
           </div>
         </div>
@@ -132,10 +132,8 @@ export default {
     filtre_immobilisation() {
       const st = this.search.toLowerCase();
       return this.SuiviImmo.filter(immo => {
-        return immo.acteurDepense.matricule.toLowerCase().includes(st) ||
-          immo.serviceImmo.libelle.toLowerCase().includes(st)||
-          immo.uniteAdminist.libelle.toLowerCase().includes(st)||
-          immo.BesoinImmobilisation.famille.reletion__equipement.libelle.toLowerCase().includes(st)
+        return immo.acteurDepense.matricule.toLowerCase().includes(st)
+         
       });
     },
     

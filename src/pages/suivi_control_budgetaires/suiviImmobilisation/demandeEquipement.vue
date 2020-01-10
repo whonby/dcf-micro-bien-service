@@ -190,23 +190,7 @@
                 </div>
               </div>
             </td>
-            <!-- <td>
-              <div class="control-group">
-                <label class="control-label">Quantité en stock:</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                   
-                    readonly
-                    class="span"
-                    
-                    :value="quantiteEnstock"
-                  />
-                
-                
-                </div>
-              </div>
-            </td> -->
+           
              <td>
               <div class="control-group">
                 <label class="control-label">Norme d'article</label>
@@ -216,6 +200,22 @@
                   :value="normeequipement"
                     class="span"
                    readonly
+                  />
+                  <input
+                    type="hidden"
+                   
+                    readonly
+                    class="span"
+                    
+                    :value="quantiteEnstock"
+                  />
+                 <input
+                    type="hidden"
+                   
+                    readonly
+                    class="span"
+                    
+                    :value="quantiteEnstockid"
                   />
                   <input
                     type="hidden"
@@ -241,6 +241,7 @@
                     class="span"
                    readonly
                   />
+                 
                 </div>
               </div>
             </td>
@@ -366,7 +367,19 @@
             
           </tr>
           <tr>
-                 
+                 <td>
+              <div class="control-group">
+                <label class="control-label">Quantite en Stock</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                  :value="quantiteEnstock"
+                    class="span"
+                   readonly
+                  />
+                </div>
+              </div>
+            </td>
           </tr>
         </table>
       </div>
@@ -691,10 +704,10 @@
                 <i class="icon-th"></i>
               </span>
               <h5>Liste des Bessoins Immobilisations de UA</h5>
-              <div align="right">
+              <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
-              </div>
+              </div> -->
             </div>
 
             <div class="widget-content nopadding" >
@@ -936,7 +949,8 @@ json_fields: {
       "services",
       "besoinEquipement",
       "type_Unite_admins",
-      "getPersoListeDesNorme"
+      "getPersoListeDesNorme",
+      "besoinEquipement"
     ]),
     ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
@@ -963,6 +977,9 @@ fonctionDynamiques() {
         }
       };
     },
+
+
+    
     familleDynamiques() {
       return id => {
         if (id != null && id != "") {
@@ -972,7 +989,7 @@ fonctionDynamiques() {
     },
      normeequipement() {
       
-      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.familleArt.id == this.formData.famille_id);
+      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.fonctionActeur.id == this.formData.fonction_id);
 
       if (norme) {
         return norme.quantite;
@@ -1138,6 +1155,46 @@ montantTotalModifier() {
       }
       return 0
     },
+quantiteEnstockid() {
+      
+      const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == this.formData.article_id);
+
+      if (norme) {
+        return norme.id;
+      }
+      return 0
+    },
+quantiteEnstockidModifier() {
+      
+      const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == this.editBesoinImmo.article_id);
+
+      if (norme) {
+        return norme.id;
+      }
+      return 0
+    },
+
+ quantiteEnstockModifier() {
+      
+      const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == this.editBesoinImmo.article_id);
+
+      if (norme) {
+        return norme.quantitestock;
+      }
+      return 0
+    },
+
+
+
+
+
+
+
+
+
+
+
+
 
      normeEqup() {
       
@@ -1166,6 +1223,7 @@ montantTotalModifier() {
         }
       };
     },
+     
   },
     
   methods: {
@@ -1199,7 +1257,7 @@ montantTotalModifier() {
         alert("La norme doit etre superieure au egal a la quantité demande")
       }
       else if (this.normeequipement <= this.qtedemande  ){
-         alert("Demande déja Effectuer")
+         alert("Demande déja Effectuée")
       }
       else
       {
@@ -1222,8 +1280,9 @@ montantTotalModifier() {
          prix_unitaire:this.coutMoyen,
       norme_id : this.normeEqup,
        normearticle : this.normeequipement,
-      dure_vie :this.dureVieEquipement
-       };
+      dure_vie :this.dureVieEquipement,
+      stock_id:this.quantiteEnstockid   ,
+      qtestock : this.quantiteEnstock    };
       //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
       this.ajouterBesoinImmo(nouvelObjet);
      
@@ -1301,12 +1360,15 @@ montantTotalModifier() {
          prix_unitaire:this.coutMoyenModifier,
          normearticle : this.normeequipementModifier,
          norme_id : this.normeEqupmodifier,
-         dure_vie :this.dureVieEquipementModifier
+         dure_vie :this.dureVieEquipementModifier,
+          stock_id:this.quantiteEnstockidModifier  ,
+      qtestock : this.quantiteEnstockModifier
       };
        this.modifierQuantiteNormeDmd(objetPourModifiernormerealise1);
       this.modifierBesoinImmo(nouvelObjetmodifier);
       this.$("#modificationModal").modal('hide');
       this.$("#exampleModalMotif").modal('hide');
+      this.$("#exampleModalMotifservice").modal('hide');
       }
      
     },

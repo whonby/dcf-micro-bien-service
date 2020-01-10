@@ -10,6 +10,7 @@ const AJOUTER_NORME_EQUIPEMENTS = (state, nouveau_normeArt) => {
   state.normeEquipements.unshift(nouveau_normeArt);
 };
 
+
 // modifier NORME_EQUIPEMENTS
 const MODIFIER_NORME_EQUIPEMENTS = (state, objetModifie) => {
   state.normeEquipements = state.normeEquipements.map(norme => {
@@ -277,8 +278,10 @@ const MODIFIER_MONTANT_ACTUEL = (state, objet) => {
 const MODIFIER_QTE_REALISE_BESOIN = (state, objet) => {
   state.besoinImmobilisations = state.besoinImmobilisations.map(besoinRealise => {
     if (besoinRealise.id == objet.id) {
-      // besoin_immo.montant_total = objet.qte_actu;
+      besoinRealise.quantite = objet.qte_actu;
       besoinRealise.qterealise = objet.qte_real;
+      besoinRealise.totalrealise = objet.total_qte_real;
+      besoinRealise.montant_total = objet.montant_actu
     }
 
     return besoinRealise;

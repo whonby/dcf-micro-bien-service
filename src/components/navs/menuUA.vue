@@ -63,7 +63,7 @@
 
 
       <!--Source de financement-->
-      <li class="dropdown" id="menu-messages">
+      <!-- <li class="dropdown" id="menu-messages">
         <a
           title="Documentation"
           href="#"
@@ -89,10 +89,10 @@
             </router-link>
           </li>
         </ul>
-      </li>
+      </li> -->
       <!--Paramètres programmes
       -->
-
+<!-- 
       <li class="dropdown" id="listeua">
         <a
           title="Out put"
@@ -126,15 +126,15 @@
           </li>
         </ul>
       </li>
-   
+    -->
 
       <!--- tableau de bord -->
-        <li>
+        <!-- <li>
             <router-link :to="{name: 'tableaudebord'}" tag="a">
               TABLEAU DE BOARD
             </router-link>
           </li>
-     
+      -->
     </ul>
   </div>
 </template>

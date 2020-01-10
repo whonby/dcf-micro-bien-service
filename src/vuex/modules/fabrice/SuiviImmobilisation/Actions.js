@@ -244,6 +244,7 @@ export function getAllImmobilisation({ commit }) {
       .get("/liste_immobilisation")
       .then(response => {
         commit("GET_ALL_IMMOBILISATION", response.data);
+       
       })
       .catch(error => console.log(error));
   });
@@ -255,6 +256,7 @@ export function ajouterImmobilisation({ commit, dispatch}, formData) {
     if (response.status == 201) {
       commit("AJOUTER_IMMOBILISATION", response.data);
       dispatch("getAllBesoinImmo");
+      dispatch("getAllStock");
       this.$app.$notify({
         title: 'Success',
         text: 'Enregistrement Effectué avec Succès!',
@@ -268,6 +270,7 @@ export function ajouterImmobilisation({ commit, dispatch}, formData) {
 export function modifierImmobilisation({ commit, dispatch}, nouveau) {
   asyncLoading(axios
     .put("/modifier_immobilisation/" + nouveau.id, {
+      date_enregis : nouveau.date_enregis,
       type_immo: nouveau.type_immo,
       besoinimmo_id: nouveau.besoinimmo_id,
       identification: nouveau.identification,
@@ -303,6 +306,7 @@ export function modifierImmobilisation({ commit, dispatch}, nouveau) {
     .then(response => {
       commit("MODIFIER_IMMOBILISATION", response.data);
       dispatch("getAllBesoinImmo");
+      dispatch("getAllStock");
       this.$app.$notify({
         title: 'Success',
         text: 'Modification Effectué avec Succès!',
@@ -374,6 +378,7 @@ export function ajouterBesoinImmo({ commit, dispatch }, nouveau) {
       // qteactuelstock: nouveau.qteactuelstock,
       motif_demande: nouveau.motif_demande,
       // service_id: nouveau.service_id,
+      stock_id: nouveau.stock_id,
       norme_id: nouveau.norme_id,
       normearticle: nouveau.normearticle,
       fonction_id: nouveau.fonction_id,
@@ -411,6 +416,7 @@ export function modifierBesoinImmo({ commit, dispatch }, nouveau) {
       date_jour: nouveau.date_jour,
       historiqueqte: nouveau.historiqueqte,
       motif_demande: nouveau.motif_demande,
+      stock_id: nouveau.stock_id,
       // service_id: nouveau.service_id,
       // qte_recu: nouveau.qte_recu,
       date_motif: nouveau.date_motif,
@@ -436,8 +442,6 @@ export function modifierBesoinImmo({ commit, dispatch }, nouveau) {
 
 
 
-
-
 export function modifierMontantActuel({ commit, dispatch }, objet) {
   // console.log(id_besoinImmo_a_modifier, qte_actu);
   axios.put("/modifier_besoin_immo/" + objet.id, {
@@ -452,7 +456,11 @@ export function modifierMontantActuel({ commit, dispatch }, objet) {
 export function modifierQteRealisebesoin({ commit, dispatch}, objet) {
   // console.log(id_besoinImmo_a_modifier, qte_actu);
   axios.put("/modifier_besoin_immo/" + objet.id, {
-    qterealise: objet.qte_real
+    qterealise: objet.qte_real,
+    quantite: objet.qte_actu,
+    totalrealise: objet.total_qte_real,
+    montant_total : objet.montant_actu
+    
     // ,
     // montant_total = objet.montant_actu
   })
@@ -648,7 +656,8 @@ export function ajouterStock({ commit, dispatch }, nouveau) {
       typeequipe_id: nouveau.typeequipe_id,
       // durevie: nouveau.durevie,
       histo_qte: nouveau.histo_qte,
-      date_entre: nouveau.date_entre
+      date_entre: nouveau.date_entre,
+      qtesortie: nouveau.qtesortie
     })
   ).then(response => {
     if (response.status == 201) {
@@ -678,7 +687,8 @@ export function modifierStock({ commit, dispatch }, nouveau) {
       histo_qte: nouveau.histo_qte,
       date_entre: nouveau.date_entre,
       date_sortie: nouveau.date_sortie,
-      qteentrant: nouveau.qteentrant
+      qteentrant: nouveau.qteentrant,
+      qtesortie: nouveau.qtesortie
     })
   ).then(response => {
     commit("MODIFIER_STOCKAGE", response.data);
@@ -723,6 +733,37 @@ export function modifierQuantiteEnStock2({ commit,dispatch }, objet) {
     
     
 }
+
+
+
+export function modifierQuantiteEnStock3({ commit, dispatch }, objet) {
+  // console.log(id_besoinImmo_a_modifier, qte_actu);
+  axios
+    .put("/modifier_Stockage/" + objet.id, {
+      quantitestock: objet.qteactuelstock,
+      date_sortie: objet.date_jour,
+      qtesortie: objet.qte_recu,
+      // ,
+      // montant_total = objet.montant_actu
+    })
+    .then(response => {
+      commit("MODIFIER_QUANTITE_EN_STOCK2", response.data);
+      dispatch("getAllStock");
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+
+
 
 export function modifierQuantiteEnStockNorme({ commit, dispatch }, objet) {
   // console.log(id_besoinImmo_a_modifier, qte_actu);

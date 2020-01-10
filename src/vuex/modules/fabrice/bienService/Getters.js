@@ -60,7 +60,21 @@ state.appelOffres.map(element => {
     return element;
 })
 
+export const getTypeTextJuridique = (state, getters) =>
+    state.text_juridiques.map(element => {
+        if (element.type_text_juridique_id !== null) {
+            element = {
+                ...element,
 
+                AfficheTypeTextJuridique: getters.typeTextJuridiques.find(fam => fam.id == element.type_text_juridique_id
+                )
+
+
+            };
+        }
+
+        return element;
+    });
 
 
 export  const getMarchePersonnaliser = (state, getters,rootState, rootGetters) =>

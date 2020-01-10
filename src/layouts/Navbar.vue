@@ -114,11 +114,9 @@ export default {
     'getMission']),
        ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
        ...mapActions('bienService', ['getActeurDepense', 'getBailleur','getTypeFacture',
-       'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse',
-       'getTypePrestation', 'getCondition', 'getTextJuridique',
-       'getAutreTextJuridique','getDecisionMarche', 'getMarche', 'getTypeMarches',
-       'getModePassations', 'getTypeProcedures', 'getProcedurePassation',
-       'getAutreTextJuridique','getDecisionMarche', 'getMarche',"getAppelOffre","getLot","getModePassations",
+       'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
+         'getTypePrestation', 'getCondition', 'getTextJuridique','getDecisionMarche', 'getMarche', 'getTypeMarches',
+       'getModePassations', 'getTypeProcedures', 'getProcedurePassation','getDecisionMarche', "getAppelOffre","getLot",
          "getDossierCandidat", "getOffreFinancier", "getOffreTechnique","getLettreInvitation","getMandater",
          "getCojo","getAnalyseDossier"])
   },
@@ -244,6 +242,9 @@ this.getTypePrestation()
 this.getCondition()
 this.getTextJuridique()
 this.getAutreTextJuridique()
+this.getTypeTextJuridique()
+// this.getDecisionMarche()
+
 this.getDecisionMarche()
 
 this.getTypeProcedures()
