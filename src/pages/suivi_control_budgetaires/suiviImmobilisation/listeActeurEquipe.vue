@@ -132,10 +132,8 @@ export default {
     filtre_immobilisation() {
       const st = this.search.toLowerCase();
       return this.SuiviImmo.filter(immo => {
-        return immo.acteurDepense.matricule.toLowerCase().includes(st) ||
-          immo.serviceImmo.libelle.toLowerCase().includes(st)||
-          immo.uniteAdminist.libelle.toLowerCase().includes(st)||
-          immo.BesoinImmobilisation.famille.reletion__equipement.libelle.toLowerCase().includes(st)
+        return immo.acteurDepense.matricule.toLowerCase().includes(st)
+         
       });
     },
     
