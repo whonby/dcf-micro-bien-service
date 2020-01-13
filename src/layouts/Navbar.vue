@@ -119,7 +119,7 @@ export default {
          'getTypePrestation', 'getCondition', 'getTextJuridique','getDecisionMarche', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation','getDecisionMarche', "getAppelOffre","getLot",
          "getDossierCandidat", "getOffreFinancier", "getOffreTechnique","getLettreInvitation","getMandater",
-         "getCojo","getAnalyseDossier", 'getMotifDecision'])
+         "getCojo","getAnalyseDossier", 'getMotifDecision', 'getDocumentProcedure'])
   },
 
   created(){
@@ -245,6 +245,7 @@ this.getTextJuridique()
 this.getAutreTextJuridique()
 this.getTypeTextJuridique()
 this.getMotifDecision()
+this.getDocumentProcedure()
 // this.getDecisionMarche()
 
 this.getDecisionMarche()

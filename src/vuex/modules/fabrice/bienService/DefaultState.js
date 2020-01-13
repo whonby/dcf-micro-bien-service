@@ -44,6 +44,7 @@ const defaultState = {
     offreFinanciers:[],
     lettreInvitation:[],
     mandate:[],
+documentProcedures:[]
 
 
 

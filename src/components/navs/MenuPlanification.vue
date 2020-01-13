@@ -51,6 +51,7 @@
           </li>
            <li>
             <router-link :to="{name: 'typeActeEffetFinancier'}" tag="a">
+             
               <i class="icon-bar-chart"></i>
            Type acte effet financier
             </router-link>
@@ -85,6 +86,13 @@
             <router-link :to="{name: 'bailleur'}" tag="a">
               <i class="icon-bar-chart"></i>
                Bailleur
+            </router-link>
+          </li>
+
+           <li>
+            <router-link :to="{name: 'documentProcedure'}" tag="a">
+              <i class="icon-bar-chart"></i>
+               Document procedure
             </router-link>
           </li>
           

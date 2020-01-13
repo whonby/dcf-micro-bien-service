@@ -64,6 +64,45 @@ export const DELETE_MOTIF_DECISION = (state, id)=> {
 
 
 
+
+
+// get all  motif de decision
+export const GET_DOCUMENT_PROCEDURE = (state, tableau_document_procedure) =>{
+    state.documentProcedures = tableau_document_procedure
+}
+
+// add * document procedure p
+
+export const AJOUTER_DOCUMENT_PROCEDURE = (state, elementAjouter) => {
+    state.documentProcedures.unshift(elementAjouter)
+}
+
+// update all document procedure
+export const MODIFIER_DOCUMENT_PROCEDURE = (state, elementModif)=>{
+    state.documentProcedures = state.documentProcedures.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+
+// delete all document procedure
+
+export const DELETE_DOCUMENT_PROCEDURE = (state, id)=> {
+    state.documentProcedures = state.documentProcedures.filter(motif => motif.id !=id)
+}
+
+
+
+
+
+
+
+
+
 // mutation offre technique
 
 // get all prestation

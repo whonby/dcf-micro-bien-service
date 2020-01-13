@@ -256,6 +256,75 @@ export function supprimerMotifDecision({commit}, id) {
 
 
 
+// action pour le document procedure
+
+
+
+
+export  function  getDocumentProcedure({commit}) {
+  queue.push(() => axios.get('/document_procedures').then((response) => {
+    commit('GET_DOCUMENT_PROCEDURE', response.data.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter bailleur
+export function ajouterDocumentProcedure({commit}, formData){
+  asyncLoading(axios.post('/document_procedures',formData)).then(response =>{
+      if(response.status == 201){
+        console.log(response.data)
+          commit('AJOUTER_DOCUMENT_PROCEDURE', response.data)
+          
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier motif de decision
+
+
+export function modifierDocumentProcedure({commit}, element_modifie) {
+  asyncLoading( axios.put('/document_procedures' ,element_modifie)).then(response => {
+       commit('MODIFIER_DOCUMENT_PROCEDURE', response.data)
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
+// supprimer categorie mision
+export function supprimerDocumentProcedure({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('DELETE_DOCUMENT_PROCEDURE', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+     axios.delete('/document_procedures/' + id).then(() => dialog.close() )   
+ })
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
