@@ -13,6 +13,7 @@ const defaultState = {
     acteurDepenses:[],
     analyseDossiers:[],
     cojos:[],
+    motifDecisions:[],
     conditions:[],
     fonctionOccupes:[],
     natureFonctions:[],
@@ -22,6 +23,7 @@ const defaultState = {
     typeUa:[],
     uniteAdministratives:[],
     uniteZones:[],
+
 
     ligneBudgetaires:[],
     DossierCandidats:[],
@@ -42,7 +44,7 @@ const defaultState = {
     offreFinanciers:[],
     lettreInvitation:[],
     mandate:[],
-
+    demandeAno:[]
 
 
 

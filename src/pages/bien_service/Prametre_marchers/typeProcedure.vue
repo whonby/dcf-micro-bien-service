@@ -182,7 +182,7 @@ export default {
       },
       search: ""
     };
-  },
+  },  
 
   computed: {
      ...mapGetters("bienService", ['typeTypeProcedures']),

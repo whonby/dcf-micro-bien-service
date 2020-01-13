@@ -4,21 +4,12 @@
     <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter procedure de passation</h3>
+        <button data-dismiss="modal" class="close" type="button">x</button>
+        <h3>Ajouter le motif de decision</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
-             <div class="control-group">
-            <label class="control-label">Type de procedure</label>
-            <div class="controls">
-                <select v-model="formData.type_procedure_id" class="span">
-               <option v-for="varText in typeTypeProcedures" :key="varText.id" 
-               :value="varText.id">{{varText.libelle}}</option>
-           </select>
-            </div>     
-          </div>
-
+           
           <div class="control-group">
             <label class="control-label">libelle</label>
             <div class="controls">
@@ -26,20 +17,17 @@
                 type="text"
                 v-model="formData.libelle"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder="Saisir le libelle"
               />
             </div>
           </div>
-         
-         
-      
-
+          
          
          </form>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterModalTypeAnalyseLocal"
+          @click.prevent="ajouterModalMotifDecisionLocal(formData)"
           class="btn btn-primary"
           href="#"
          
@@ -53,43 +41,30 @@
 
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Type procedure</h3>
+        <button data-dismiss="modal" class="close" type="button">x</button>
+        <h3>Modifier motif de decision</h3>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal">
-
-             <div class="control-group">
-            <label class="control-label">Type de procedure</label>
-            <div class="controls">
-                <select v-model="editProcedure.	type_procedure_id" class="span">
-               <option v-for="varText in typeTypeProcedures" :key="varText.id" 
-               :value="varText.id">{{varText.libelle}}</option>
-           </select>
-            </div>
-          </div>
-
-            <div class="control-group">
+         <form class="form-horizontal">
+              
+              
+          <div class="control-group">
             <label class="control-label">libelle</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="editProcedure.libelle"
+                v-model="editMotifDecision.libelle"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder="Saisir le libelle"
               />
             </div>
           </div>
-
-        
-
          
-         
-        </form>
+         </form>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierModalTypeAnalyseLocal(editProcedure)"
+          @click.prevent="modifierModalMotifDecisionLocal(editMotifDecision)"
           class="btn btn-primary"
           href="#"
         
@@ -108,9 +83,9 @@
             class="btn btn-default pull-right"
             style="cursor:pointer;"
             :fields="json_fields"
-            title="Liste Types équipements"
+            title="Liste Types Ã©quipements"
             :data="filtre_equipement"
-            name="Liste des types équipements"
+            name="Liste des types Ã©quipements"
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
@@ -119,7 +94,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste type de procedure</h5>
+              <h5>Liste motif de decision</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -130,28 +105,27 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>libelle</th>
-                    <th>Type de procedure</th>
+                    
+                    <th width="90%">libelle</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(typeProcedure, index) in 
-                typeProcedureFiltre"
-                 :key="typeProcedure.id">
-                 <td @dblclick="afficherModalModifiertextJuridique(index)">
-                   {{typeProcedure.libelle || 'Non renseigné'}}</td>
-                   <td @dblclick="afficherModalModifiertextJuridique(index)">
-                   {{typeProcedure.type_procedure.libelle || 'Non renseigné'}}</td>
-                  
+      <tr class="odd gradeX" v-for="(motifDecision, index) in motifDecisionFiltre"
+                 :key="motifDecision.id">
+                 <td @dblclick="afficherModalMotifDecision(index)">
+                   {{motifDecision.libelle || 'Non renseigné'}}</td>
                   
 
-
-                     <div class="btn-group">
-              <button @click.prevent="supprimerProcedurePassation(typeProcedure.id)"  class="btn btn-danger ">
+<td>
+       <div class="btn-group">
+              <button @click.prevent="supprimerMotifDecision(motifDecision.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
+</td>
+
+                
 
                        </tr>
                 </tbody>
@@ -163,8 +137,8 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalProcedurePassation" main-icon="apps" bg-color="green"></fab>
- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalProcedurePassation()">Open</button>
+    <fab :actions="fabActions" @cache="afficherModalAjoutMotifDecision" main-icon="apps" bg-color="green"></fab>
+ <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjoutMotifDecision()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
@@ -173,9 +147,8 @@
   
 <script>
  import { mapGetters, mapActions } from "vuex";
-//  import moment from 'moment';
 export default {
-  name:'type facture',
+  name:'banque',
   data() {
     return {
       fabActions: [
@@ -192,86 +165,68 @@ export default {
       ],
     //   json_fields: {
     //     CODE: "code",
-    //     libelle: "libelle"
+    //     LIBELLE: "libelle"
     //   },
 
       formData: {
-            libelle:"",
-            	type_procedure_id:""
-            
-
-        
+        libelle:""
       },
-      editProcedure: {
-             libelle:"",
-             	type_procedure_id:""
-            
+      editMotifDecision: {
+     libelle:""
       },
       search: ""
     };
   },
 
   computed: {
-     ...mapGetters("bienService", ['procedurePassations','typeTypeProcedures']),
+     ...mapGetters("bienService", ["motifDecisions"]),
 
-    typeProcedureFiltre()  {
-     
-        const searchTerm = this.search.toLowerCase();
-
-return this.procedurePassations.filter((item) => {
-  
-     return item.libelle.toLowerCase().includes(searchTerm) 
-     
-    
-
-  
-  
-
-   }
-)
+    motifDecisionFiltre() {
+      const st = this.search.toLowerCase();
+      return this.motifDecisions.filter(type => {
+        return (
+          
+          type.libelle.toLowerCase().includes(st)
+        );
+      });
     }
   },
   methods: {
-    ...mapActions("bienService", ['ajouterProcedurePassation','modifierProcedurePassation',
-    'supprimerProcedurePassation'
-     
+    ...mapActions("bienService", [
+     "ajouterMotifDecision",
+     "modifierMotifDecision",
+     "supprimerMotifDecision"
     ]),
     //afiicher modal ajouter
-    afficherModalProcedurePassation() {
+    afficherModalAjoutMotifDecision() {
       this.$("#exampleModal").modal({
         backdrop: "static",
         keyboard: false
       });
     },
     // fonction pour vider l'input ajouter
-    ajouterModalTypeAnalyseLocal(){
-this.ajouterProcedurePassation(this.formData)
+    ajouterModalMotifDecisionLocal(){
+this.ajouterMotifDecision(this.formData)
 this.formData = {
-    libelle:"",
-    	type_procedure_id:""
+	libelle:"",
 }
 
     },
-    
-    // afficher modal de modification
-    afficherModalModifiertextJuridique(index) {
+      modifierModalMotifDecisionLocal(){
+      this.modifierMotifDecision(this.editMotifDecision)
+      this.$('#modificationModal').modal('hide');
+    },
+   // afficher modal de modification
+    afficherModalMotifDecision(index) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editProcedure = this.procedurePassations[index];
+      this.editMotifDecision = this.motifDecisions[index];
     },
-    // fonction pour vider l'input modification
-    modifierModalTypeAnalyseLocal(){
-      this.modifierProcedurePassation(this.editProcedure)
-      this.$('#modificationModal').modal('hide');
-    },
-
-    // formatage date
-// formaterDate(date) {
-//       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
-//     },
+    //fonction pour vider l'input modification
+    
     
     // alert() {
     //   console.log("ok");

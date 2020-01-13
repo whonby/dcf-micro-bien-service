@@ -4,7 +4,7 @@ import { asyncLoading } from 'vuejs-loading-plugin'
 var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
 
-// action for print all to p^restation
+// action for print all to prestation
 
 export  function  getPrestation({commit}) {
     queue.push(() => axios.get('/url').then((response) => {
@@ -200,6 +200,66 @@ export function supprimerBailleur({commit}, id) {
    })
  
 }
+
+
+// action pour le motif de decision
+
+
+export  function  getMotifDecision({commit}) {
+  queue.push(() => axios.get('/motif_dessions').then((response) => {
+    commit('GET_MOTIF_DECISION', response.data.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter bailleur
+export function ajouterMotifDecision({commit}, formData){
+  asyncLoading(axios.post('/motif_dessions',formData)).then(response =>{
+      if(response.status == 201){
+        console.log(response.data)
+          commit('AJOUTER_MOTIF_DECISION', response.data)
+          
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier motif de decision
+
+
+export function modifierMotifDecision({commit}, element_modifie) {
+  asyncLoading( axios.put('/motif_dessions' ,element_modifie)).then(response => {
+       commit('MODIFIER_MOTIF_DECISION', response.data)
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
+// supprimer categorie mision
+export function supprimerMotifDecision({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('DELETE_MOTIF_DECISION', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+     axios.delete('/motif_dessions/' + id).then(() => dialog.close() )   
+ })
+
+}
+
+
+
+
+
+
+
 
 
 // actions pour acteur depense
@@ -2574,6 +2634,62 @@ export function supprimerMandater({commit}, id) {
             commit('SUPPRIMER_MANDATER', id)
             // // dialog.loading(false) // stops the proceed button's loader
             axios.delete('/mondates/' + id).then(() => dialog.close() )
+        })
+
+}
+/**Fin madate*/
+
+
+
+
+
+/*Action demande ANO*/
+
+export  function  getDemandeAno({commit}) {
+    queue.push(() => axios.get('/demande_ano').then((response) => {
+        commit('GET_DEMANDE_ANO', response.data.data)
+
+    }).catch(error => console.log(error)))
+}
+
+
+
+export function ajouterDemandeAno({commit}, elementAjout){
+    asyncLoading(axios.post('/demande_ano',elementAjout)).then(response =>{
+        if(response.status == 201){
+            commit('AJOUTER_DEMANDE_ANO', response.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
+
+
+export function modifierDemandeAno({commit}, element_modifie) {
+    asyncLoading( axios.put('/demande_ano',element_modifie)).then(response => {
+        commit('MODIFIER_DEMANDE_ANO', response.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}
+
+
+export function supprimerDemandeAno({commit}, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_DEMANDE_ANO', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/demande_ano/' + id).then(() => dialog.close() )
         })
 
 }

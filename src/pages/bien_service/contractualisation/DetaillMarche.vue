@@ -128,7 +128,7 @@
                                     <div class="widget-content nopadding">
                                         <div class="span4"></div>
                                         <div class="span4"></div>
-                                        <div class="span4" align="right"><a href="#myModal2" data-toggle="modal"
+                                        <div class="span4" align="right"><a href="#4" data-toggle="modal"
                                                                             class="btn btn-info">Ajouter lot</a></div>
                                         <table class="table table-bordered table-striped" v-if="marcheid">
                                             <thead>
@@ -182,6 +182,9 @@
               <li class=""><a data-toggle="tab" href="#tab31">Mandate</a></li>
               <li class=""><a data-toggle="tab" href="#tab22">Cojo</a></li>
               <li class=""><a data-toggle="tab" href="#tab32">Dossier analyse</a></li>
+               <li class=""><a data-toggle="tab" href="#tab33">Demande ANO</a></li>
+                <li class=""><a data-toggle="tab" href="#tab34">Analyse DMP</a></li>
+                 <li class=""><a data-toggle="tab" href="#tab35">ANO Bailleur</a></li>
             </ul>
           </div>
 
@@ -202,7 +205,7 @@
                  <table class="table table-bordered table-striped" v-if="marcheid">
                      <thead>
                      <tr>
-
+                         <th>Numero dossier</th>
                          <th>Type candidat</th>
                          <th>Nom </th>
                          <th>Prenom</th>
@@ -293,7 +296,7 @@
 
                                 <div class="control-group">
                                     <div class="controls">
-                                        Date de naissance  <input type="date" class="" placeholder="" v-model="formDossierCadidature.date_nais_cand">
+                                        <input type="text" class="" placeholder="Numero dossier" v-model="formDossierCadidature.numero_dossier">
                                     </div>
                                 </div>
                             </td>
@@ -460,9 +463,62 @@
                                     </select>
                                 </div>
                             </td>
-
-
+                            <td>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        Date de naissance  <input type="date" class="" placeholder="" v-model="formDossierCadidature.date_nais_cand">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Capacite financiere" v-model="formDossierCadidature.capacite_financiere">
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <input type="Text" class="" placeholder="Programme mobilisation" v-model="formDossierCadidature.prog_mobilisation">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="CAA moyen ac entre" v-model="formDossierCadidature.caa_moyen_ac_entre">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Capacite financement" v-model="formDossierCadidature.capacite_financement">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Capacite tech exp" v-model="formDossierCadidature.capacite_tech_exp">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                         <tr>
+                             <td>
+                                 <div class="control-group">
+                                     <div class="controls">
+                                         <input type="text" class="" placeholder="Mont offre financiere" v-model="formDossierCadidature.mt_offre_financiere">
+                                     </div>
+                                 </div>
+                             </td>
+                         </tr>
+
+
                         <a @click.prevent="ajouterDossierCandidature" class="btn btn-primary"
                            href="#">Enregistre dossier candidature</a>
                         </tbody>
@@ -477,12 +533,13 @@
 
                     <div class="widget-box" v-if="detail_dossier_candidature">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Dossier du candidat : {{detail_dossier_candidature.nom_cand}} {{detail_dossier_candidature.prenom_cand}}</h5>
+                            <h5>Nom du candidat : {{detail_dossier_candidature.nom_cand}} {{detail_dossier_candidature.prenom_cand}}  Numero dossier :{{detail_dossier_candidature.numero_dossier}} </h5>
                             <button class="btn" title="Affiche la liste des candidats" @click="NotisFormulaireDossierCand" v-if="!isButtunAddDossierCandidat"><span class=""><i class="icon-eye-open"></i></span></button></div>
                         <div class="widget-content nopadding">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
+                                    <th>Numero dossier</th>
                                     <th>Type candidat</th>
                                     <th>Telephone </th>
                                     <th>adresse </th>
@@ -497,6 +554,7 @@
                                 </thead>
 
                                 <tr>
+                                    <td>{{detail_dossier_candidature.numero_dossier || "Non renseigne"}}</td>
                                     <td>{{detail_dossier_candidature.type_candidat || "Non renseigne"}}</td>
                                     <td>{{detail_dossier_candidature.telephone_cand || "Non renseigne"}}</td>
                                     <td>{{detail_dossier_candidature.adresse_post || "Non renseigne"}}</td>
@@ -629,7 +687,6 @@
                         <div class="btn-group">
                             <button @click.prevent="supprimerLettreInvitation(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
-
                         </div>
 
                     </tr>
@@ -736,6 +793,7 @@
                   </table>
             </div>
 
+
             <div id="tab32" class="tab-pane">
 
                 <div align="right">
@@ -749,7 +807,7 @@
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
-
+                        <th>Numero dossier</th>
                         <th>Dossier candidat </th>
                         <th>Date Analyse </th>
                         <th>Rang d'analyse</th>
@@ -764,6 +822,8 @@
                     <tbody>
                     <tr class="odd gradeX" v-for="(appelOffre, index) in listeAnalyseDossier(marcheid)"
                         :key="appelOffre.id">
+                        <td @click="afficheAnnalyseDossier(index)">
+                            {{appelOffre.dossier_candidature.numero_dossier || 'Non renseigné'}}</td>
                         <td @click="afficheAnnalyseDossier(index)">
                             {{appelOffre.dossier_candidature.nom_cand || 'Non renseigné'}}</td>
                         <td @click="afficheAnnalyseDossier(index)">
@@ -790,6 +850,329 @@
                     </tbody>
                 </table>
               </div>
+
+
+
+
+
+
+
+
+       <div id="tab33" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+
+                        <a href="#ajouterDemandeAno" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+
+                    </div>
+
+                </div>
+                <table class="table table-bordered table-striped" v-if="marcheid">
+                    <thead>
+                    <tr>
+                        <th>Numero dossier Candidat</th>
+                        <th>Rang Analyse</th>
+                        <th>Reference marché </th>
+                        <th>Date demande</th>
+                        <th>Numero courrier</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="odd gradeX" v-for="(appelOffre, index) in demandeAno(marcheid)"
+                        :key="appelOffre.id">
+                        <td @click="afficheDemandeDAO(index)">
+                            {{appelOffre.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td>
+                        <td @click="afficheDemandeDAO(index)">
+                            {{appelOffre.annalyse_dossier.rang_analyse || 'Non renseigné'}}</td>
+                        <td @click="afficheDemandeDAO(index)">
+                            {{appelOffre.ref_marche || 'Non renseigné'}}</td>
+                        <td @click="afficheDemandeDAO(index)">
+                            {{appelOffre.date_demande || 'Non renseigné'}}</td>
+                        <td @click="afficheDemandeDAO(index)">
+                            {{appelOffre.num_courrier || 'Non renseigné'}}</td>
+                        <div class="btn-group">
+                            <button @click.prevent="supprimerDemandeAno(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
+                                <span class=""><i class="icon-trash"></i></span></button>
+
+                        </div>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+            
+
+            <div id="tab34" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+
+                        <a href="#ajouterDmp" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+
+                    </div>
+
+                </div>
+                <table class="table table-bordered table-striped" v-if="marcheid">
+                    <thead>
+                    <tr>
+
+                        <th>Date avis</th>
+                        <th>Avis bail </th>
+                        <th>Observation</th>
+                        <th>Document procedure</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="odd gradeX" v-for="(document, index) in listeMantater(marcheid)"
+                        :key="document.id">
+                        <td @click="afficheBouttonTechFinMandater(index)">
+                            {{document.date_id || 'Non renseigné'}}</td>
+                        <td @click="afficheBouttonTechFinMandater(index)">
+                            {{document.matricule_m || 'Non renseigné'}}</td>
+                        <td @click="afficheBouttonTechFinMandater(index)">
+                            {{document.nom_mandat || 'Non renseigné'}}</td>
+                        <td @click="afficheBouttonTechFinMandater(index)">
+                            {{document.prenom_nom || 'Non renseigné'}}</td>
+                        <div class="btn-group">
+                            <button @click.prevent="supprimerMandater(document.id)"  class="btn btn-danger " title="Supprimer">
+                                <span class=""><i class="icon-trash"></i></span></button>
+
+                        </div>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+              </div>
+
+
+<!--- debut analyse dmp  --->
+
+
+
+  <div id="ajouterDmp" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter analyse dmp</h3>
+      </div>
+      <div class="modal-body">
+       <form class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label">Date avis</label>
+            <div class="controls">
+              <input
+                type="date"
+                v-model="formAnalyse.date_avis_bail"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+            <div class="control-group">
+            <label class="control-label">reference marché</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formAnalyse.avis_bail	"
+                class="span"
+                placeholder="Saisir le ref marche"
+              />
+            </div>
+          </div>
+         
+           <div class="control-group">
+            <label class="control-label"> procedure document</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formAnalyse.observation"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+
+
+
+
+      <div class="control-group">
+            <label class="control-label">document procedure</label>
+            <div class="controls">
+              <select v-model="formAnalyse.document_procedure_id" class="span">
+             <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
+                           :value="varText.id">{{varText.objet_appel}}</option>
+                 </select>
+            </div>
+          </div>
+
+
+
+         
+         </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterDemandeAnoLocal"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+
+
+
+
+<!-- fin analyse dmp  -->
+
+
+
+
+
+
+
+
+
+               <div id="tab35" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+
+                        <a href="#ajouterAno" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+
+                    </div>
+
+                </div>
+                <table class="table table-bordered table-striped" v-if="marcheid">
+                    <thead>
+                    <tr>
+
+                        <th>Date </th>
+                        <th>Reference ano </th>
+                        <th>Numero courrier</th>
+                       
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="odd gradeX" v-for="(anoDmp, index) in listeMantater(marcheid)"
+                        :key="anoDmp.id">
+                        <td @click="afficheBouttonTechFinMandater(index)">
+                            {{anoDmp.date_id || 'Non renseigné'}}</td>
+                        <td @click="afficheBouttonTechFinMandater(index)">
+                            {{anoDmp.matricule_m || 'Non renseigné'}}</td>
+                        <td @click="afficheBouttonTechFinMandater(index)">
+                            {{anoDmp.nom_mandat || 'Non renseigné'}}</td>
+                        <td @click="afficheBouttonTechFinMandater(index)">
+                            {{anoDmp.prenom_nom || 'Non renseigné'}}</td>
+                        <div class="btn-group">
+                            <button @click.prevent="supprimerMandater(anoDmp.id)"  class="btn btn-danger " title="Supprimer">
+                                <span class=""><i class="icon-trash"></i></span></button>
+
+                        </div>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+              </div>
+
+
+
+
+<!--- debut ano -->
+
+
+ <div id="ajouterAno" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter ano dmp</h3>
+      </div>
+      <div class="modal-body">
+       <form class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label">Date ano</label>
+            <div class="controls">
+              <input
+                type="date"
+                v-model="formAno.date_ano_dmp"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+            <div class="control-group">
+            <label class="control-label">reference ano dmp</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formAno.ref_ano_dmp	"
+                class="span"
+                placeholder="Saisir le ref marche"
+              />
+            </div>
+          </div>
+         
+           <div class="control-group">
+            <label class="control-label">Numero courrier</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formAno.numero_courie"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+
+
+
+
+
+
+         
+         </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterDemandeAnoLocal"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+
+
+
+
+<!--- fin ano  -->
+
+
+
+<!--modification ano  -->
+
+<!--  fin modification ano --->
+
+
+
+
+
+
 
           </div>
         </div>
@@ -950,7 +1333,7 @@
         <!-- Modification fin appel offres --->
 
         <!--Gestion de Lot-->
-        <div id="myModal2" class="modal hide" aria-hidden="true" style="display: none;">
+        <div id="4" class="modal hide" aria-hidden="true" style="display: none;">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter lot </h3>
@@ -1881,6 +2264,142 @@
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
         <!--Fin cojo-->
+
+        <!--  debut modal ajout demande ano   -->
+
+
+        <div id="ajouterDemandeAno" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter demande DAO</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">Dossier candidat</label>
+                        <div class="controls">
+                            <select v-model="formDemande.analyse_dossier_id" class="span">
+                                <option v-for="plans in listeAnalyseDossier(marcheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.dossier_candidature.numero_dossier}} - {{plans.dossier_candidature.nom_cand}} {{plans.dossier_candidature.prenom_cand}} </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+
+                        <label class="control-label">Date de demande</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="formDemande.date_demande"
+                                    class="span"
+                                    placeholder="Saisir le libelle_type"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">reference marché</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formDemande.ref_marche	"
+                                    class="span"
+                                    placeholder="Saisir le ref marche"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Numero du courrier</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formDemande.num_courrier"
+                                    class="span"
+                                    placeholder="Saisir le libelle_type"
+                            />
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a
+                        @click.prevent="ajouterDemandeAnoLocal()"
+                        class="btn btn-primary"
+                        href="#"
+
+                >Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div>
+        </div>
+
+
+        <div id="modifDemandeAno" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Modification DAO</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">Dossier candidat</label>
+                        <div class="controls">
+                            <select v-model="edite_demande_dao.analyse_dossier_id" class="span">
+                                <option v-for="plans in listeAnalyseDossier(marcheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.dossier_candidature.numero_dossier}} - {{plans.dossier_candidature.nom_cand}} {{plans.dossier_candidature.prenom_cand}} </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+
+                        <label class="control-label">Date de demande</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="edite_demande_dao.date_demande"
+                                    class="span"
+                                    placeholder="Saisir le libelle_type"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">reference marché</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="edite_demande_dao.ref_marche	"
+                                    class="span"
+                                    placeholder="Saisir le ref marche"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Numero du courrier</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="edite_demande_dao.num_courrier"
+                                    class="span"
+                                    placeholder="Saisir le libelle_type"
+                            />
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a
+                        @click.prevent="editDemandeDAO()"
+                        class="btn btn-primary"
+                        href="#"
+
+                >Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div>
+        </div>
+        <!---  fin modal ajout demande ano  -->
+
         <!--Fin contratualisation-->
     </div>
 </template>
@@ -1911,6 +2430,7 @@
                 detail_marche:"",
                 marcheid:"",
                 appel_offre_marche:"",
+                edite_demande_dao:"",
                formLot:{
                    numero_lot:"",
                    libelle_lot:"",
@@ -1975,6 +2495,8 @@
               caa_moyen_ac_entre:"",
               capacite_tech_exp:"",
               mt_offre_financiere:"",
+              numero_dossier:"",
+              capacite_financement:"",
 
           },
          formOffreTechnique:{
@@ -2005,6 +2527,40 @@ formOffreFinanciere:{
     montant_total_ht:"",
     montant_total_ttc:"",
     dossier_candidat_id:"",
+},
+formDemande:{
+date_demande:"",
+ref_marche:"",
+num_courrier:"",
+    analyse_dossier_id:""
+
+},
+
+formAnalyse:{
+date_avis_bail:"",
+    avis_bail:"",
+    observation:"",
+    document_procedure_id:""
+
+},
+
+formAno:{
+date_ano_dmp:"",
+ref_ano_dmp:"",
+numero_courie:""
+},
+
+editAno:{
+date_ano_dmp:"",
+ref_ano_dmp:"",
+numero_courie:""
+},
+
+editDemamnde:{
+    date_demande:"",
+ref_marche:"",
+num_courrier:""
+
 },
           editDossier:{
               type_candidat:"",
@@ -2064,7 +2620,7 @@ created() {
             ...mapGetters("bienService", [ 'acteDepense',"getMarchePersonnaliser","appelOffres",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
-                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses"]),
+                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno"]),
             listeAppelOffre(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -2119,7 +2675,15 @@ created() {
                     return this.getterAnalyseDossiers.filter(idmarche => idmarche.dossier_candidature.appel_offre.marche_id == marcheid)
                 }
             }
-        }
+        },
+
+            demandeAno: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                        return this.getterDemandeAno.filter(idmarche => idmarche.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
+                    }
+                }
+            }
             // filtre_equipement() {
             //   const st = this.search.toLowerCase();
             //   return this.equipements.filter(type => {
@@ -2156,7 +2720,7 @@ created() {
                 "ajouterLettreInvitation",
                 "modifierLettreInvitation","supprimerLettreInvitation","getMandater","ajouterMandater",
                 "modifierMandater","supprimerMandater","ajouterCojo","modifierCojo","supprimerCojo","ajouterAnalyseDossier",
-                "modifierAnalyseDossier","supprimerAnalyseDossier"
+                "modifierAnalyseDossier","supprimerAnalyseDossier","ajouterDemandeAno","modifierDemandeAno","supprimerDemandeAno"
             ]),
             // formatageSomme: formatageSomme,
             ajouterBudgetaireLocal(){
@@ -2284,6 +2848,8 @@ created() {
                 }
             },
             ajouterDossierCandidature(){
+                console.log(this.formDossierCadidature)
+
                 this.ajouterDossierCandidat(this.formDossierCadidature)
                 this.formDossierCadidature={
                     type_candidat:"",
@@ -2317,10 +2883,20 @@ created() {
                 }
                 this.NotisFormulaireDossierCand()
             },
+            ajouterDemandeAnoLocal(){
+                this.ajouterDemandeAno(this.formDemande)
+                this.formDemande={
+                        date_demande:"",
+                        ref_marche:"",
+                        num_courrier:"",
+                        analyse_dossier_id:""
 
+                }
+            },
             modaleOffreTechnique(index){
               this.edite_offre_technique=this.getterDossierCandidats[index]
             },
+
             modaleOffreFinnanciere(index){
                 this.edite_offre_financiere=this.getterDossierCandidats[index]
             },
@@ -2355,6 +2931,14 @@ created() {
 
                 this.edite_appel_offre = this.appelOffres[index];
             },
+            afficheDemandeDAO(index){
+
+                this.$('#modifDemandeAno').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                this.edite_demande_dao=this.getterDemandeAno[index]
+            },
             afficheAnnalyseDossier(index){
                 this.$('#modificationAajouterAnalys01').modal({
                     backdrop: 'static',
@@ -2380,7 +2964,7 @@ created() {
         });
 
         this.edite_cojo = this.getterCojos[index];
-        //this.edite_lot.appel_offre_id=this.edite_lot.
+        //this.edite_lot.appel_offre_id=this.edite_lot. modifierDemandeAno
     },
             afficheBouttonTechFinMandater(index){
                 this.$('#modificationMantater').modal({
@@ -2393,6 +2977,11 @@ created() {
             modificationMandater(){
                 this.modifierMandater(this.editer_mandater)
                 this.$('#modificationMantater').modal('hide');
+            },
+
+            editDemandeDAO(){
+                this.modifierDemandeAno(this.edite_demande_dao)
+                this.$('#modifDemandeAno').modal('hide');
             },
             modificationDossierAnalyse(){
                 this.modifierAnalyseDossier(this.edite_analyse_dossier)

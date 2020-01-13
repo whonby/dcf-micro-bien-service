@@ -58,12 +58,17 @@
                     {{formaterDate(exercice_budgetaire.date_debut) || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierExerciceBudgetaire(index)">
                     {{formaterDate(exercice_budgetaire.date_fin) || 'Non renseigné'}}</td>
-                    <td>{{exercice_budgetaire.encours ? 'Oui' : 'Non'}}</td>
+                    <!-- <td>{{exercice_budgetaire.encours ? 'Oui' : 'Non'}}</td> -->
                     <!-- <td v-if="exercice_budgetaire.encours">Oui</td>
             <td v-else>non</td> -->
-            <!-- <td>
+            <td>
               <input type="checkbox" v-model="exercice_budgetaire.encours" />
-            </td> -->
+            </td>
+<!-- <input type='checkbox' id='id1' onclick='decocher("id2","id3")'>Cliquer<br> -->
+
+
+
+
                   </template>
 
 
@@ -74,12 +79,14 @@
                     {{formaterDate(exercice_budgetaire.date_debut) || 'Non renseigné'}}</td>
                   <td >
                     {{formaterDate(exercice_budgetaire.date_fin) || 'Non renseigné'}}</td>
-                  <td>{{exercice_budgetaire.encours ? 'Oui' : 'Non'}}</td>
+                  <!-- <td>{{exercice_budgetaire.encours ? 'Oui' : 'Non'}}</td> -->
                    <!-- <td v-if="exercice_budgetaire.encours">Oui</td>
             <td v-else>non</td> -->
-            <!-- <td>
+            <td>
               <input type="checkbox" v-model="exercice_budgetaire.encours" />
-            </td> -->
+            </td>
+
+       <!-- <input type='checkbox' id='id1' onclick='decocher("id2","id3")'>Cliquer<br> -->
                   </template>
                   
                   <td>
@@ -320,6 +327,12 @@ export default {
 // )
 
 // }
+
+
+  // decocher(a,b) {
+  //       document.getElementById(a).checked=false;
+  //       document.getElementById(b).checked=false;
+  //     },
 
 
   },

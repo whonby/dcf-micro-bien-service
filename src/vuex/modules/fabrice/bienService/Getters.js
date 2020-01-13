@@ -34,12 +34,14 @@ export const procedurePassations = state => state.procedurePassations
 export const typeMarches = state => state.typeMarches
 export const modePassations = state => state.modePassations
 export const marches = state => state.marches
+export const motifDecisions = state => state.motifDecisions
 
 export const appelOffres = state => state.appelOffres
 export const gettersOffreTechniques = state => state.offreTechniques
 export const getterOffreFinanciers = state => state.offreFinanciers
 export const getterLettreInvitation = state => state.lettreInvitation
 export const getterMandate = state => state.mandate
+export const getterDemandeAno = state => state.demandeAno
 // gettes  personnaliser d'appel d'offres
 
 
