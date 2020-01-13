@@ -71,7 +71,7 @@ export default {
     ]),
    ...mapActions( 'parametreGenerauxBudgetaire', ['getStructureBudgetaire',
    'getPlanBudgetaire']),
-   ...mapActions('parametreGenerauxActivite', [ 'getStructureActivite']),
+   ...mapActions('parametreGenerauxActivite', [ 'getStructureActivite','getPlanActivite']),
    ...mapActions('parametreGenerauxProgrammeUnite',['getUnite', 'getZone']),
 
     ...mapActions('parametreGenerauxAdministratif',
@@ -112,11 +112,11 @@ export default {
 
     	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
-       ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
+      //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
        ...mapActions('bienService', ['getActeurDepense', 'getBailleur','getTypeFacture',
        'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
          'getTypePrestation', 'getCondition', 'getTextJuridique','getDecisionMarche', 'getMarche', 'getTypeMarches',
-       'getModePassations', 'getTypeProcedures', 'getProcedurePassation','getDecisionMarche', "getAppelOffre","getLot",
+       'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",
          "getDossierCandidat", "getOffreFinancier", "getOffreTechnique","getLettreInvitation","getMandater",
          "getCojo","getAnalyseDossier"])
   },
@@ -141,6 +141,7 @@ export default {
    this.getStructureBudgetaire()
    this.getPlanBudgetaire()
     this.getStructureActivite()
+    this.getPlanActivite()
     this.getGrandeNature()
     this.getTypeUniteAdministrative()
     // this. getPlanActivite()
@@ -170,7 +171,7 @@ export default {
       this.getAllTypeTextes();
     this.getAllUniteAdministrative();
     this.getAllArchivageDocument();
-this.getAllBudgetGeneral();
+
 
 
       this.getListeSalaireActuelAll()

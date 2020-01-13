@@ -56,32 +56,33 @@
                <td>
               
                <div class="control-group">
-                   <label class="control-label">Type Unite administrative</label>
-                  <div class="controls">
-                    <select v-model="formData.typeua_id">
-                      <option
-                        v-for="type in type_Unite_admins"
-                        :key="type.id"
-                        :value="type.id"
-                      >{{type.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-                 <td>
-              
-               <div class="control-group">
                   <label class="control-label">Unite administrative</label>
                   <div class="controls">
                     <select v-model="formData.ua_id">
                         <option value>Sélectionner</option>
                     <option
-                      v-for="ua in uniteAdministrativeDynamiques(formData.typeua_id)"
+                      v-for="ua in uniteAdministratives"
                       :key="ua.id"
                       :value="ua.id"
                     >{{ua.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+               
+            </tr>
+            <tr>
+                 <td>
+              
+               <div class="control-group">
+                   <label class="control-label">Type Unite administrative</label>
+                  <div class="controls">
+                    <select v-model="formData.typeua_id">
+                      <option
+                        v-for="type in uniteAdministrativeDynamiques(formData.ua_id)"
+                        :key="type.id"
+                        :value="type.id"
+                      >{{type.typeua.libelle}}</option>
                     </select>
                   </div>
                 </div>
@@ -229,24 +230,7 @@
                   </div>
                 </div>
               </td>
-               <td>
-              
-               <div class="control-group">
-                   <label class="control-label">Type Unite administrative</label>
-                  <div class="controls">
-                    <select v-model="editBudgetGeneral.typeua_id">
-                      <option
-                        v-for="type in type_Unite_admins"
-                        :key="type.id"
-                        :value="type.id"
-                      >{{type.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-                 <td>
+                <td>
               
                <div class="control-group">
                   <label class="control-label">Unite administrative</label>
@@ -254,7 +238,7 @@
                     <select v-model="editBudgetGeneral.ua_id">
                         <option value>Sélectionner</option>
                     <option
-                      v-for="ua in uniteAdministrativeDynamiques(editBudgetGeneral.typeua_id)"
+                      v-for="ua in uniteAdministratives"
                       :key="ua.id"
                       :value="ua.id"
                     >{{ua.libelle}}</option>
@@ -262,6 +246,24 @@
                   </div>
                 </div>
               </td>
+            </tr>
+            <tr>
+              <td>
+              
+               <div class="control-group">
+                   <label class="control-label">Type Unite administrative</label>
+                  <div class="controls">
+                    <select v-model="editBudgetGeneral.typeua_id">
+                      <option
+                        v-for="type in uniteAdministrativeDynamiques(editBudgetGeneral.ua_id)"
+                        :key="type.id"
+                        :value="type.typeua.id"
+                      >{{type.typeua.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+                
                <td>
               
                <div class="control-group">
@@ -373,8 +375,8 @@
           <div class="widget-box">
             <div class="widget-title">
               <div align="right">
-                Recherche:
-                <input type="search" placeholder="Saisie section ou libelle" v-model="search" />
+                <!-- Recherche:
+                <input type="search" placeholder="Saisie section ou libelle" v-model="search" /> -->
 
                 <!-- <div class="span3">
                   <model-list-select
@@ -592,7 +594,7 @@ export default {
     uniteAdministrativeDynamiques() {
       return id => {
         if (id != null && id != "") {
-          return this.uniteAdministratives.filter(element => element.type_ua_id == id);
+          return this.jointureUaChapitreSection.filter(element => element.id == id);
         }
       };
     },
