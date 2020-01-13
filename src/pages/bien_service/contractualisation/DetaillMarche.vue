@@ -202,7 +202,7 @@
                  <table class="table table-bordered table-striped" v-if="marcheid">
                      <thead>
                      <tr>
-
+                         <th>Numero dossier</th>
                          <th>Type candidat</th>
                          <th>Nom </th>
                          <th>Prenom</th>
@@ -293,7 +293,7 @@
 
                                 <div class="control-group">
                                     <div class="controls">
-                                        Date de naissance  <input type="date" class="" placeholder="" v-model="formDossierCadidature.date_nais_cand">
+                                        <input type="text" class="" placeholder="Numero dossier" v-model="formDossierCadidature.numero_dossier">
                                     </div>
                                 </div>
                             </td>
@@ -460,9 +460,62 @@
                                     </select>
                                 </div>
                             </td>
-
-
+                            <td>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        Date de naissance  <input type="date" class="" placeholder="" v-model="formDossierCadidature.date_nais_cand">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Capacite financiere" v-model="formDossierCadidature.capacite_financiere">
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <input type="Text" class="" placeholder="Programme mobilisation" v-model="formDossierCadidature.prog_mobilisation">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="CAA moyen ac entre" v-model="formDossierCadidature.caa_moyen_ac_entre">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Capacite financement" v-model="formDossierCadidature.capacite_financement">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Capacite tech exp" v-model="formDossierCadidature.capacite_tech_exp">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                         <tr>
+                             <td>
+                                 <div class="control-group">
+                                     <div class="controls">
+                                         <input type="text" class="" placeholder="Mont offre financiere" v-model="formDossierCadidature.mt_offre_financiere">
+                                     </div>
+                                 </div>
+                             </td>
+                         </tr>
+
+
                         <a @click.prevent="ajouterDossierCandidature" class="btn btn-primary"
                            href="#">Enregistre dossier candidature</a>
                         </tbody>
@@ -477,12 +530,13 @@
 
                     <div class="widget-box" v-if="detail_dossier_candidature">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Dossier du candidat : {{detail_dossier_candidature.nom_cand}} {{detail_dossier_candidature.prenom_cand}}</h5>
+                            <h5>Nom du candidat : {{detail_dossier_candidature.nom_cand}} {{detail_dossier_candidature.prenom_cand}}  Numero dossier :{{detail_dossier_candidature.numero_dossier}} </h5>
                             <button class="btn" title="Affiche la liste des candidats" @click="NotisFormulaireDossierCand" v-if="!isButtunAddDossierCandidat"><span class=""><i class="icon-eye-open"></i></span></button></div>
                         <div class="widget-content nopadding">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
+                                    <th>Numero dossier</th>
                                     <th>Type candidat</th>
                                     <th>Telephone </th>
                                     <th>adresse </th>
@@ -497,6 +551,7 @@
                                 </thead>
 
                                 <tr>
+                                    <td>{{detail_dossier_candidature.numero_dossier || "Non renseigne"}}</td>
                                     <td>{{detail_dossier_candidature.type_candidat || "Non renseigne"}}</td>
                                     <td>{{detail_dossier_candidature.telephone_cand || "Non renseigne"}}</td>
                                     <td>{{detail_dossier_candidature.adresse_post || "Non renseigne"}}</td>
@@ -629,7 +684,6 @@
                         <div class="btn-group">
                             <button @click.prevent="supprimerLettreInvitation(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
-
                         </div>
 
                     </tr>
@@ -749,7 +803,7 @@
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
-
+                        <th>Numero dossier</th>
                         <th>Dossier candidat </th>
                         <th>Date Analyse </th>
                         <th>Rang d'analyse</th>
@@ -764,6 +818,8 @@
                     <tbody>
                     <tr class="odd gradeX" v-for="(appelOffre, index) in listeAnalyseDossier(marcheid)"
                         :key="appelOffre.id">
+                        <td @click="afficheAnnalyseDossier(index)">
+                            {{appelOffre.dossier_candidature.numero_dossier || 'Non renseigné'}}</td>
                         <td @click="afficheAnnalyseDossier(index)">
                             {{appelOffre.dossier_candidature.nom_cand || 'Non renseigné'}}</td>
                         <td @click="afficheAnnalyseDossier(index)">
@@ -1975,6 +2031,8 @@
               caa_moyen_ac_entre:"",
               capacite_tech_exp:"",
               mt_offre_financiere:"",
+              numero_dossier:"",
+              capacite_financement:"",
 
           },
          formOffreTechnique:{
@@ -2284,6 +2342,8 @@ created() {
                 }
             },
             ajouterDossierCandidature(){
+                console.log(this.formDossierCadidature)
+
                 this.ajouterDossierCandidat(this.formDossierCadidature)
                 this.formDossierCadidature={
                     type_candidat:"",
