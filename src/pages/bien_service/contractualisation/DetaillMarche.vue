@@ -870,15 +870,16 @@
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
-
-                        <th>Date demande </th>
+                        <th>Numero dossier Candidat</th>
+                        <th>Rang Analyse</th>
                         <th>Reference marché </th>
+                        <th>Date demande</th>
                         <th>Numero courrier</th>
-                        
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
+
                     <tr class="odd gradeX" v-for="(demandeAno, index) in listeMantater(marcheid)"
                         :key="demandeAno.id">
                         <td @click="afficherModalModifierDemandeAno(index)">
@@ -890,15 +891,17 @@
                        
                         <div class="btn-group">
                             <button @click.prevent="supprimerMandater(demandeAno.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span></button>
 
+                            </button>
                         </div>
+
 
                     </tr>
                     </tbody>
                 </table>
 
               </div>
+
 
 <!--  debut modal ajout demande ano   -->
 
@@ -959,6 +962,8 @@
     </div>
 
 <!---  fin modal ajout demande ano  -->
+
+
 
 
 
@@ -2433,6 +2438,142 @@
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
         <!--Fin cojo-->
+
+        <!--  debut modal ajout demande ano   -->
+
+
+        <div id="ajouterDemandeAno" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter demande DAO</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">Dossier candidat</label>
+                        <div class="controls">
+                            <select v-model="formDemande.analyse_dossier_id" class="span">
+                                <option v-for="plans in listeAnalyseDossier(marcheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.dossier_candidature.numero_dossier}} - {{plans.dossier_candidature.nom_cand}} {{plans.dossier_candidature.prenom_cand}} </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+
+                        <label class="control-label">Date de demande</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="formDemande.date_demande"
+                                    class="span"
+                                    placeholder="Saisir le libelle_type"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">reference marché</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formDemande.ref_marche	"
+                                    class="span"
+                                    placeholder="Saisir le ref marche"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Numero du courrier</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formDemande.num_courrier"
+                                    class="span"
+                                    placeholder="Saisir le libelle_type"
+                            />
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a
+                        @click.prevent="ajouterDemandeAnoLocal()"
+                        class="btn btn-primary"
+                        href="#"
+
+                >Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div>
+        </div>
+
+
+        <div id="modifDemandeAno" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Modification DAO</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">Dossier candidat</label>
+                        <div class="controls">
+                            <select v-model="edite_demande_dao.analyse_dossier_id" class="span">
+                                <option v-for="plans in listeAnalyseDossier(marcheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.dossier_candidature.numero_dossier}} - {{plans.dossier_candidature.nom_cand}} {{plans.dossier_candidature.prenom_cand}} </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+
+                        <label class="control-label">Date de demande</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="edite_demande_dao.date_demande"
+                                    class="span"
+                                    placeholder="Saisir le libelle_type"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">reference marché</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="edite_demande_dao.ref_marche	"
+                                    class="span"
+                                    placeholder="Saisir le ref marche"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Numero du courrier</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="edite_demande_dao.num_courrier"
+                                    class="span"
+                                    placeholder="Saisir le libelle_type"
+                            />
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a
+                        @click.prevent="editDemandeDAO()"
+                        class="btn btn-primary"
+                        href="#"
+
+                >Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div>
+        </div>
+        <!---  fin modal ajout demande ano  -->
+
         <!--Fin contratualisation-->
     </div>
 </template>
@@ -2463,6 +2604,7 @@
                 detail_marche:"",
                 marcheid:"",
                 appel_offre_marche:"",
+                edite_demande_dao:"",
                formLot:{
                    numero_lot:"",
                    libelle_lot:"",
@@ -2563,8 +2705,8 @@ formOffreFinanciere:{
 formDemande:{
 date_demande:"",
 ref_marche:"",
-num_courrier:""
-
+num_courrier:"",
+    analyse_dossier_id:""
 
 },
 
@@ -2663,7 +2805,7 @@ created() {
             ...mapGetters("bienService", [ 'acteDepense',"getMarchePersonnaliser","appelOffres",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
-                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses"]),
+                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno"]),
             listeAppelOffre(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -2718,7 +2860,15 @@ created() {
                     return this.getterAnalyseDossiers.filter(idmarche => idmarche.dossier_candidature.appel_offre.marche_id == marcheid)
                 }
             }
-        }
+        },
+
+            demandeAno: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                        return this.getterDemandeAno.filter(idmarche => idmarche.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
+                    }
+                }
+            }
             // filtre_equipement() {
             //   const st = this.search.toLowerCase();
             //   return this.equipements.filter(type => {
@@ -2755,7 +2905,7 @@ created() {
                 "ajouterLettreInvitation",
                 "modifierLettreInvitation","supprimerLettreInvitation","getMandater","ajouterMandater",
                 "modifierMandater","supprimerMandater","ajouterCojo","modifierCojo","supprimerCojo","ajouterAnalyseDossier",
-                "modifierAnalyseDossier","supprimerAnalyseDossier"
+                "modifierAnalyseDossier","supprimerAnalyseDossier","ajouterDemandeAno","modifierDemandeAno","supprimerDemandeAno"
             ]),
             // formatageSomme: formatageSomme,
             ajouterBudgetaireLocal(){
@@ -2918,10 +3068,20 @@ created() {
                 }
                 this.NotisFormulaireDossierCand()
             },
+            ajouterDemandeAnoLocal(){
+                this.ajouterDemandeAno(this.formDemande)
+                this.formDemande={
+                        date_demande:"",
+                        ref_marche:"",
+                        num_courrier:"",
+                        analyse_dossier_id:""
 
+                }
+            },
             modaleOffreTechnique(index){
               this.edite_offre_technique=this.getterDossierCandidats[index]
             },
+
             modaleOffreFinnanciere(index){
                 this.edite_offre_financiere=this.getterDossierCandidats[index]
             },
@@ -2956,6 +3116,14 @@ created() {
 
                 this.edite_appel_offre = this.appelOffres[index];
             },
+            afficheDemandeDAO(index){
+
+                this.$('#modifDemandeAno').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                this.edite_demande_dao=this.getterDemandeAno[index]
+            },
             afficheAnnalyseDossier(index){
                 this.$('#modificationAajouterAnalys01').modal({
                     backdrop: 'static',
@@ -2981,7 +3149,7 @@ created() {
         });
 
         this.edite_cojo = this.getterCojos[index];
-        //this.edite_lot.appel_offre_id=this.edite_lot.
+        //this.edite_lot.appel_offre_id=this.edite_lot. modifierDemandeAno
     },
             afficheBouttonTechFinMandater(index){
                 this.$('#modificationMantater').modal({
@@ -2994,6 +3162,11 @@ created() {
             modificationMandater(){
                 this.modifierMandater(this.editer_mandater)
                 this.$('#modificationMantater').modal('hide');
+            },
+
+            editDemandeDAO(){
+                this.modifierDemandeAno(this.edite_demande_dao)
+                this.$('#modifDemandeAno').modal('hide');
             },
             modificationDossierAnalyse(){
                 this.modifierAnalyseDossier(this.edite_analyse_dossier)
@@ -3013,12 +3186,12 @@ created() {
             },
 // afficher modification demande ano
 
-afficherModalModifierDemandeAno(index){
-    this.$('#modificationDemandeAno').modal({
-        backdrop:'static',
-        keyboard:false
-    })
-},
+// afficherModalModifierDemandeAno(index){
+//     this.$('#modificationDemandeAno').modal({
+//         backdrop:'static',
+//         keyboard:false
+//     })
+// },
 
             // eslint-disable-next-line no-unused-vars
             afficheBouttonTechFin(index){

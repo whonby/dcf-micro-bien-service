@@ -1392,3 +1392,29 @@ export const SUPPRIMER_MANDATER= (state, id)=> {
     state.mandate = state.mandate.filter(autreText => autreText.id !=id)
 }
 /*Fin mandate mutation*/
+
+
+/*Mandate demande ano*/
+export const GET_DEMANDE_ANO = (state, tableau_autre_text_juridique) =>{
+    state.demandeAno = tableau_autre_text_juridique
+}
+
+export const AJOUTER_DEMANDE_ANO = (state, elementAjouter) => {
+    state.demandeAno.unshift(elementAjouter)
+}
+
+
+
+export const MODIFIER_DEMANDE_ANO= (state, elementModif)=>{
+    state.demandeAno = state.demandeAno.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_DEMANDE_ANO= (state, id)=> {
+    state.demandeAno = state.demandeAno.filter(autreText => autreText.id !=id)
+}
+/*Fin mandate mutation*/
