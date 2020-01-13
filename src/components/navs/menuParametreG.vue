@@ -199,18 +199,22 @@
       -->
       <li class="dropdown" id="Activite">
         <a title="Activité" href="#" data-toggle="dropdown" data-target="#Activite" class="dropdown-toggle">
-          <span class="text">ACTIVITES </span>
+          <span class="text">CHAINE PROGRAMMATIQUE </span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
           <li class="divider"></li>
           <li>
             <router-link :to="{name: 'StructureAtivite'}" tag="a">
-              <i class="icon-key"></i> Structure activité
+              <i class="icon-key"></i> Structure programmatique
             </router-link>
           </li>
           <li class="divider"></li>
-         
+          <!-- <li>
+            <router-link :to="{name: 'PlanActivite'}" tag="a">
+              <i class="icon-key"></i> Plan programmatique
+            </router-link>
+          </li> -->
         </ul>
       </li>
       <!-- Généraux

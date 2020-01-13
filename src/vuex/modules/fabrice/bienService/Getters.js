@@ -35,6 +35,7 @@ export const typeMarches = state => state.typeMarches
 export const modePassations = state => state.modePassations
 export const marches = state => state.marches
 export const motifDecisions = state => state.motifDecisions
+export const documentProcedures = state => state.documentProcedures
 
 export const appelOffres = state => state.appelOffres
 export const gettersOffreTechniques = state => state.offreTechniques

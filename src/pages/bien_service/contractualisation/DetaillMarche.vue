@@ -879,23 +879,22 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for="(appelOffre, index) in demandeAno(marcheid)"
-                        :key="appelOffre.id">
-                        <td @click="afficheDemandeDAO(index)">
-                            {{appelOffre.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td>
-                        <td @click="afficheDemandeDAO(index)">
-                            {{appelOffre.annalyse_dossier.rang_analyse || 'Non renseigné'}}</td>
-                        <td @click="afficheDemandeDAO(index)">
-                            {{appelOffre.ref_marche || 'Non renseigné'}}</td>
-                        <td @click="afficheDemandeDAO(index)">
-                            {{appelOffre.date_demande || 'Non renseigné'}}</td>
-                        <td @click="afficheDemandeDAO(index)">
-                            {{appelOffre.num_courrier || 'Non renseigné'}}</td>
-                        <div class="btn-group">
-                            <button @click.prevent="supprimerDemandeAno(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span></button>
 
+                    <tr class="odd gradeX" v-for="(demandeAno, index) in listeMantater(marcheid)"
+                        :key="demandeAno.id">
+                        <td @click="afficherModalModifierDemandeAno(index)">
+                            {{demandeAno.date_demande || 'Non renseigné'}}</td>
+                        <td @click="afficherModalModifierDemandeAno(index)">
+                            {{demandeAno.ref_marche || 'Non renseigné'}}</td>
+                        <td @click="afficherModalModifierDemandeAno(index)">
+                            {{demandeAno.num_courrier || 'Non renseigné'}}</td>
+                       
+                        <div class="btn-group">
+                            <button @click.prevent="supprimerMandater(demandeAno.id)"  class="btn btn-danger " title="Supprimer">
+
+                            </button>
                         </div>
+
 
                     </tr>
                     </tbody>
@@ -904,6 +903,130 @@
               </div>
 
 
+<!--  debut modal ajout demande ano   -->
+
+
+  <div id="ajouterDemandeAno" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter demande ano</h3>
+      </div>
+      <div class="modal-body">
+       <form class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label">Date de demande</label>
+            <div class="controls">
+              <input
+                type="date"
+                v-model="formDemande.date_demande"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+            <div class="control-group">
+            <label class="control-label">reference marché</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formDemande.ref_marche	"
+                class="span"
+                placeholder="Saisir le ref marche"
+              />
+            </div>
+          </div>
+         
+           <div class="control-group">
+            <label class="control-label">Numero du courrier</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formDemande.num_courrier"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+         
+         </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterDemandeAnoLocal"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+
+<!---  fin modal ajout demande ano  -->
+
+
+
+
+
+
+
+<!-- debut modification demande ano  -->
+
+  <div id="modificationDemandeAno" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter demande ano</h3>
+      </div>
+      <div class="modal-body">
+       <form class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label">Date de demande</label>
+            <div class="controls">
+              <input
+                type="date"
+                v-model="editDemandeAno.date_demande"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+            <div class="control-group">
+            <label class="control-label">reference marché</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editDemandeAno.ref_marche	"
+                class="span"
+                placeholder="Saisir le ref marche"
+              />
+            </div>
+          </div>
+         
+           <div class="control-group">
+            <label class="control-label">Numero du courrier</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editDemandeAno.num_courrier"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+         
+         </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierDemandeAnoLocal"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+
+<!-- fin modification demande ano  --->
 
 
 
@@ -1039,7 +1162,9 @@
 
 <!-- fin analyse dmp  -->
 
+<!--- debut analyse dmp   --->
 
+<!--  fin modification analyse dmp ---->
 
 
 
@@ -1068,18 +1193,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for="(anoDmp, index) in listeMantater(marcheid)"
-                        :key="anoDmp.id">
+                    <tr class="odd gradeX" v-for="(anoBailleur, index) in listeMantater(marcheid)"
+                        :key="anoBailleur.id">
                         <td @click="afficheBouttonTechFinMandater(index)">
-                            {{anoDmp.date_id || 'Non renseigné'}}</td>
+                            {{anoBailleur.date_id || 'Non renseigné'}}</td>
                         <td @click="afficheBouttonTechFinMandater(index)">
-                            {{anoDmp.matricule_m || 'Non renseigné'}}</td>
+                            {{anoBailleur.matricule_m || 'Non renseigné'}}</td>
                         <td @click="afficheBouttonTechFinMandater(index)">
-                            {{anoDmp.nom_mandat || 'Non renseigné'}}</td>
+                            {{anoBailleur.nom_mandat || 'Non renseigné'}}</td>
                         <td @click="afficheBouttonTechFinMandater(index)">
-                            {{anoDmp.prenom_nom || 'Non renseigné'}}</td>
+                            {{anoBailleur.prenom_nom || 'Non renseigné'}}</td>
                         <div class="btn-group">
-                            <button @click.prevent="supprimerMandater(anoDmp.id)"  class="btn btn-danger " title="Supprimer">
+                            <button @click.prevent="supprimerMandater(anoBailleur.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
 
                         </div>
@@ -1138,12 +1263,6 @@
             </div>
           </div>
 
-
-
-
-
-
-         
          </form>
       </div>
       <div class="modal-footer">
@@ -1165,6 +1284,61 @@
 
 
 <!--modification ano  -->
+
+
+ <div id="ajouterAno" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Modifier ano dmp</h3>
+      </div>
+      <div class="modal-body">
+       <form class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label">Date ano</label>
+            <div class="controls">
+              <input
+                type="date"
+                v-model="editAno.date_ano_dmp"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+            <div class="control-group">
+            <label class="control-label">reference ano dmp</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editAno.ref_ano_dmp	"
+                class="span"
+                placeholder="Saisir le ref marche"
+              />
+            </div>
+          </div>
+         
+           <div class="control-group">
+            <label class="control-label">Numero courrier</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editAno.numero_courie"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+         </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ModifierAnoDmpLocal"
+          class="btn btn-primary"
+          href="#"
+         
+        >Modifier</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
 
 <!--  fin modification ano --->
 
@@ -2536,6 +2710,17 @@ num_courrier:"",
 
 },
 
+
+editDemandeAno:{
+date_demande:"",
+ref_marche:"",
+num_courrier:""
+
+
+},
+
+
+
 formAnalyse:{
 date_avis_bail:"",
     avis_bail:"",
@@ -2999,7 +3184,14 @@ created() {
                 this.modifierLot(this.edite_lot)
                 this.$('#modificationModal1').modal('hide');
             },
+// afficher modification demande ano
 
+// afficherModalModifierDemandeAno(index){
+//     this.$('#modificationDemandeAno').modal({
+//         backdrop:'static',
+//         keyboard:false
+//     })
+// },
 
             // eslint-disable-next-line no-unused-vars
             afficheBouttonTechFin(index){

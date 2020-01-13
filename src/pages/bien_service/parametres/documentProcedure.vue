@@ -5,56 +5,61 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Texte juridique</h3>
+        <h3>Ajouter document procedure</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
-         <td>
-              <div class="control-group">
-                <label class="control-label">Type text juridique:</label>
-                <div class="controls">
-                  <select  v-model="formData.type_text_juridique_id">
-                    <option value>Sélectionner</option>
-                    <option
-                      v-for="famil in getTypeTextJuridique"
-                      :key="famil.id"
-                      :value="famil.AfficheTypeTextJuridique.id"
-                    >{{famil.AfficheTypeTextJuridique.libelle}}</option>
-                  </select>
-                </div>
-              </div>
-            </td>
+          <div class="control-group">
+            <label class="control-label">Libelle document</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formData.libelle_doc"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
          
           <div class="control-group">
-            <label class="control-label">Date</label>
+            <label class="control-label">Date debut</label>
             <div class="controls">
               <input
                 type="date"
-                v-model="formData.date_effet_text"
+                v-model="formData.date_deb_proc"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder=""
               />
             </div>
           </div>
 
            <div class="control-group">
-            <label class="control-label">Objet text juridique</label>
+            <label class="control-label">Date fin </label>
             <div class="controls">
               <input
-                type="text"
-                v-model="formData.objet_text"
+                type="date"
+                v-model="formData.date_fin_proc"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder=""
               />
             </div>
           </div>
           
+
+
+       <div class="control-group">
+              <label class="control-label">Commentaire:</label>
+             <div class="controls">
+              <textarea  v-model="formData.commentaires" class="textarea_editor span2.5"  placeholder="Saisir l'objet de mission ..."></textarea>
+            </div>
+             </div> 
+
          
          </form>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterModalTypeAnalyseLocal"
+          @click.prevent="ajouterModalDocumentprocedureLocal"
           class="btn btn-primary"
           href="#"
          
@@ -69,33 +74,30 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Text juridique</h3>
+        <h3>Modifier document procedure</h3>
       </div>
+
       <div class="modal-body">
         <form class="form-horizontal">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Type text juridique:</label>
-                <div class="controls">
-                  <select  v-model="editTextJuridique.type_text_juridique_id">
-                    <option value>Sélectionner</option>
-                    <option
-                      v-for="famil in getTypeTextJuridique"
-                      :key="famil.id"
-                      :value="famil.AfficheTypeTextJuridique.id"
-                    >{{famil.AfficheTypeTextJuridique.libelle}}</option>
-                  </select>
-                </div>
-              </div>
-            </td>
+            
+               <div class="control-group">
+            <label class="control-label">Libelle document</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editDocument.libelle_doc"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
          
-
-           <div class="control-group">
-            <label class="control-label">Date</label>
+          <div class="control-group">
+            <label class="control-label">Date debut</label>
             <div class="controls">
               <input
                 type="date"
-                v-model="editTextJuridique.date_effet_text"
+                v-model="editDocument.date_deb_proc"
                 class="span"
                 placeholder=""
               />
@@ -103,13 +105,26 @@
           </div>
 
            <div class="control-group">
-            <label class="control-label">Objet</label>
+            <label class="control-label">Date fin </label>
+            <div class="controls">
+              <input
+                type="date"
+                v-model="editDocument.date_fin_proc"
+                class="span"
+                placeholder=""
+              />
+            </div>
+          </div>
+          
+
+         <div class="control-group">
+            <label class="control-label">Commentaire </label>
             <div class="controls">
               <input
                 type="text"
-                v-model="editTextJuridique.objet_text"
+                v-model="editDocument.commentaires"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder=""
               />
             </div>
           </div>
@@ -118,7 +133,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierModalTypeAnalyseLocal(editTextJuridique)"
+          @click.prevent="modifierModalDocumentProcedure(editDocument)"
           class="btn btn-primary"
           href="#"
         
@@ -143,12 +158,12 @@
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel> -->
-          <div class="widget-box" v-if="getTypeTextJuridique.length && text_juridiques.length">
+          <div class="widget-box" >
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des texts juridiques</h5>
+              <h5>Liste des documents de procedures</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -159,29 +174,31 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Type text juridique</th>
-                    <th>Date</th>
-                    <th width="50%">Objet</th>
-                    
-                    
+                    <th>Libelle document</th>
+                    <th>Date debut</th>
+                    <th>Date fin</th>
+                    <th>Commentaire</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(textJuridique, index) in  textJuridiqueFiltre"
-                 :key="textJuridique.id">
-                 <td @dblclick="afficherModalModifiertextJuridique(index)">
-                   {{textJuridique.AfficheTypeTextJuridique.libelle || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifiertextJuridique(index)">
-                   {{formaterDate(textJuridique.date_effet_text) || 'Non renseigné'}}</td>
+                  <tr class="odd gradeX" v-for="(documentProcedure, index) in  documentProcedureFiltre"
+                 :key="documentProcedure.id">
+                 <td @dblclick="afficherModalModifierDocumentProcedure(index)">
+                   {{documentProcedure.libelle_doc || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModalModifierDocumentProcedure(index)">
+                   {{formaterDate(documentProcedure.date_deb_proc	) || 'Non renseigné'}}</td>
                    
-                    <td @dblclick="afficherModalModifiertextJuridique(index)">
-                   {{textJuridique.objet_text || 'Non renseigné'}}</td>
+            <td @dblclick="afficherModalModifierDocumentProcedure(index)">
+                   {{formaterDate(documentProcedure.date_fin_proc	) || 'Non renseigné'}}</td>
+
+                    <td @dblclick="afficherModalModifierDocumentProcedure(index)">
+                   {{documentProcedure.commentaires || 'Non renseigné'}}</td>
                   
 
 <td>
     <div class="btn-group">
-              <button @click.prevent="supprimerTextJuridique(textJuridique.id)"  class="btn btn-danger ">
+              <button @click.prevent="supprimerDocumentProcedure(documentProcedure.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
@@ -198,8 +215,8 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouTypeAnalyse" main-icon="apps" bg-color="green"></fab>
- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouTypeAnalyse()">Open</button>
+    <fab :actions="fabActions" @cache="afficherModalAjoutDocumentProcedure" main-icon="apps" bg-color="green"></fab>
+ <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjoutDocumentProcedure()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
@@ -231,31 +248,33 @@ export default {
     //   },
 
       formData: {
-            type_text_juridique_id:"",
-            	date_effet_text:"",
-            objet_text:""
+            	libelle_doc:"",
+            	date_deb_proc:"",
+                date_fin_proc:"",
+                	commentaires:""
 
         
       },
-      editTextJuridique: {
-        	 type_text_juridique_id:"",
-            	date_effet_text:"",
-            objet_text:""
+      editDocument: {
+        		libelle_doc:"",
+            	date_deb_proc:"",
+                date_fin_proc:"",
+                	commentaires:""
       },
       search: ""
     };
   },
 
   computed: {
-     ...mapGetters("bienService", ['text_juridiques','getTypeTextJuridique']),
+     ...mapGetters("bienService", ['documentProcedures']),
 
-    textJuridiqueFiltre()  {
+    documentProcedureFiltre()  {
      
         const searchTerm = this.search.toLowerCase();
 
-return this.getTypeTextJuridique.filter((item) => {
+return this.documentProcedures.filter((item) => {
   
-     return item.objet_text.toLowerCase().includes(searchTerm) 
+     return item.libelle_doc.toLowerCase().includes(searchTerm) 
     
 
   
@@ -266,40 +285,42 @@ return this.getTypeTextJuridique.filter((item) => {
     }
   },
   methods: {
-    ...mapActions("bienService", ['ajouterTextJuridique','modifierTextJuridique',
-    'supprimerTextJuridique'
+    ...mapActions("bienService", ['ajouterDocumentProcedure','modifierDocumentProcedure',
+    'supprimerDocumentProcedure'
      
     ]),
     //afiicher modal ajouter
-    afficherModalAjouTypeAnalyse() {
+    afficherModalAjoutDocumentProcedure() {
       this.$("#exampleModal").modal({
         backdrop: "static",
         keyboard: false
       });
     },
     // fonction pour vider l'input ajouter
-    ajouterModalTypeAnalyseLocal(){
-this.ajouterTextJuridique(this.formData)
+    ajouterModalDocumentprocedureLocal(){
+this.ajouterDocumentProcedure(this.formData)
 this.formData = {
-	 type_text_juridique_id:"",
-            	date_effet_text:"",
-            objet_text:""
+
+		libelle_doc:"",
+            	date_deb_proc:"",
+                date_fin_proc:"",
+                	commentaires:""
 }
 
     },
     
     // afficher modal de modification
-    afficherModalModifiertextJuridique(index) {
+    afficherModalModifierDocumentProcedure(index) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editTextJuridique = this.textJuridiqueFiltre[index];
+      this.editDocument = this.documentProcedures[index];
     },
     // fonction pour vider l'input modification
-    modifierModalTypeAnalyseLocal(){
-      this.modifierTextJuridique(this.editTextJuridique)
+    modifierModalDocumentProcedure(){
+      this.modifierDocumentProcedure(this.editDocument)
       this.$('#modificationModal').modal('hide');
     },
 
