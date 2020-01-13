@@ -32,6 +32,7 @@ import typeTextJuridique from '../../pages/bien_service/parametres/typeTextJurid
 // import typeTextJuridique from '../../pages/bien_service/typeTextJuridique.vue';
 import marche from '../../pages/bien_service/contractualisation/marche.vue';
 import DetaillMarche from '../../pages/bien_service/contractualisation/DetaillMarche.vue';
+import motifDecision from '../../pages/bien_service/parametres/motifDecision.vue';
 
 const BienServiceRoutes = [
 
@@ -46,6 +47,15 @@ const BienServiceRoutes = [
  name: "acteDepense",
  component:acteDepense  
 },
+
+// la route du motif de decision
+{
+    path:"/creation-motif-decision",
+    name:"motifDecision",
+    component:motifDecision
+},
+
+
 
 // detail marche
 {

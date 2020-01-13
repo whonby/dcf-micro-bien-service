@@ -44,7 +44,7 @@
             </router-link>
           </li>
           <li>
-            <router-link :to="{name: ''}" tag="a">
+            <router-link :to="{name: 'motifDecision'}" tag="a">
               <i class="icon-bar-chart"></i>
            Motifs de décision
             </router-link>

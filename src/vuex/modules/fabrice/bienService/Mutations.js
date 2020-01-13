@@ -27,7 +27,44 @@ export const DELETE_PRESTATION = (state, id)=> {
     state.prestations = state.prestations.filter(prest => prest.id !=id)
 }
 
-// mutzation offre technique
+
+// mutation pour le motif de decision
+
+
+
+// get all  motif de decision
+export const GET_MOTIF_DECISION = (state, tableau_motif_decision) =>{
+    state.motifDecisions = tableau_motif_decision
+}
+
+// add * motif de decision 
+
+export const AJOUTER_MOTIF_DECISION = (state, elementAjouter) => {
+    state.motifDecisions.unshift(elementAjouter)
+}
+
+// update all motif de decision
+export const MODIFIER_MOTIF_DECISION = (state, elementModif)=>{
+    state.motifDecisions = state.motifDecisions.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+
+// delete all motif de decision
+
+export const DELETE_MOTIF_DECISION = (state, id)=> {
+    state.motifDecisions = state.motifDecisions.filter(motif => motif.id !=id)
+}
+
+
+
+
+// mutation offre technique
 
 // get all prestation
 export const GET_ALL_OFFRE_TECHNIQUE = (state, tableau_prestation) =>{

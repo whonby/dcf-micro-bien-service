@@ -113,12 +113,13 @@ export default {
     	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
        ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
+
        ...mapActions('bienService', ['getActeurDepense', 'getBailleur','getTypeFacture',
        'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
          'getTypePrestation', 'getCondition', 'getTextJuridique','getDecisionMarche', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation','getDecisionMarche', "getAppelOffre","getLot",
          "getDossierCandidat", "getOffreFinancier", "getOffreTechnique","getLettreInvitation","getMandater",
-         "getCojo","getAnalyseDossier"])
+         "getCojo","getAnalyseDossier", 'getMotifDecision'])
   },
 
   created(){
@@ -243,6 +244,7 @@ this.getCondition()
 this.getTextJuridique()
 this.getAutreTextJuridique()
 this.getTypeTextJuridique()
+this.getMotifDecision()
 // this.getDecisionMarche()
 
 this.getDecisionMarche()
