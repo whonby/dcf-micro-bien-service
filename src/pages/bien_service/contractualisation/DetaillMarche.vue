@@ -2271,7 +2271,7 @@
         <div id="ajouterDemandeAno" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter demande DAO</h3>
+                <h3>Ajouter demande ANO</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -2337,7 +2337,7 @@
         <div id="modifDemandeAno" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification DAO</h3>
+                <h3>Modification ANO</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
