@@ -227,7 +227,7 @@
                   <div class="controls">
                     <select v-model="editUniteAdministrative.localisationgeo_id">
                       <option
-                        v-for="localgeo in localisations_geographiques"
+                        v-for="localgeo in afficheLocalisationGeoNiveau5"
                         :key="localgeo.id"
                         :value="localgeo.id"
                       >{{localgeo.code}}-{{localgeo.libelle}}</option>
@@ -255,6 +255,7 @@
                      :value="codeuniteadministrativeModifier"
                       class="span"
                       placeholder="Saisir le code"
+                      readonly
                     />
                   </div>
                 </div>
@@ -517,7 +518,7 @@ export default {
 
     codeuniteadministrative(){
       //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
-      const natsect = this.natures_sections.find(natsect => natsect.id == this.formData.natsection_id)
+      const natsect = this.natures_sections.find(natsect => natsect.id == this.formData.nature_section_id)
      const secti = this.sections.find(sect => sect.id == this.formData.section_id)
     const servgest = this.services_gestionnaires.find(serviceg => serviceg.id == this.formData.servicegest_id)
  const localisageo = this.localisations_geographiques.find(chap => chap.id == this.formData.localisationgeo_id)
@@ -529,7 +530,7 @@ export default {
    },
    codeuniteadministrativeModifier(){
       // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
-     const natsect = this.natures_sections.find(natsect => natsect.id == this.editUniteAdministrative.natsection_id)
+     const natsect = this.natures_sections.find(natsect => natsect.id == this.editUniteAdministrative.nature_section_id)
      const secti = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
     const servgest = this.services_gestionnaires.find(serviceg => serviceg.id == this.editUniteAdministrative.servicegest_id)
  const localisageo = this.localisations_geographiques.find(chap => chap.id == this.editUniteAdministrative.localisationgeo_id)

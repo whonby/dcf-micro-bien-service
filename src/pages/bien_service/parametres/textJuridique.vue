@@ -232,14 +232,14 @@ export default {
 
       formData: {
             type_text_juridique_id:"",
-            date_effet_text:"",
+            	date_effet_text:"",
             objet_text:""
 
         
       },
       editTextJuridique: {
         	 type_text_juridique_id:"",
-            date_effet_text:"",
+            	date_effet_text:"",
             objet_text:""
       },
       search: ""
@@ -282,7 +282,7 @@ return this.getTypeTextJuridique.filter((item) => {
 this.ajouterTextJuridique(this.formData)
 this.formData = {
 	 type_text_juridique_id:"",
-            date_effet_text:"",
+            	date_effet_text:"",
             objet_text:""
 }
 

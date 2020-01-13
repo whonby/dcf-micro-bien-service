@@ -1,7 +1,7 @@
 const defaultstate = {
 
     structures_activites :[],
-    // plans_activites:[]
+    plans_activites:[]
     
     
     

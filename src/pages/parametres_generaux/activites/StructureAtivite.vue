@@ -147,7 +147,7 @@
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button 
+             <button  
              @click.prevent="modifierBudgetaireLocal(editBudgetaire)" class="btn btn-primary"
               href="#">Modifier</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
