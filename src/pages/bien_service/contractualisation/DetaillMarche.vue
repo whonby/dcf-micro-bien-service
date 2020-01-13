@@ -128,7 +128,7 @@
                                     <div class="widget-content nopadding">
                                         <div class="span4"></div>
                                         <div class="span4"></div>
-                                        <div class="span4" align="right"><a href="#myModal2" data-toggle="modal"
+                                        <div class="span4" align="right"><a href="#4" data-toggle="modal"
                                                                             class="btn btn-info">Ajouter lot</a></div>
                                         <table class="table table-bordered table-striped" v-if="marcheid">
                                             <thead>
@@ -182,6 +182,9 @@
               <li class=""><a data-toggle="tab" href="#tab31">Mandate</a></li>
               <li class=""><a data-toggle="tab" href="#tab22">Cojo</a></li>
               <li class=""><a data-toggle="tab" href="#tab32">Dossier analyse</a></li>
+               <li class=""><a data-toggle="tab" href="#tab33">Demande ANO</a></li>
+                <li class=""><a data-toggle="tab" href="#tab34">Analyse DMP</a></li>
+                 <li class=""><a data-toggle="tab" href="#tab35">ANO Bailleur</a></li>
             </ul>
           </div>
 
@@ -790,6 +793,7 @@
                   </table>
             </div>
 
+
             <div id="tab32" class="tab-pane">
 
                 <div align="right">
@@ -846,6 +850,385 @@
                     </tbody>
                 </table>
               </div>
+
+
+
+
+
+
+
+
+       <div id="tab33" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+
+                        <a href="#ajouterDemandeAno" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+
+                    </div>
+
+                </div>
+                <table class="table table-bordered table-striped" v-if="marcheid">
+                    <thead>
+                    <tr>
+
+                        <th>Date demande </th>
+                        <th>Reference marché </th>
+                        <th>Numero courrier</th>
+                        
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="odd gradeX" v-for="(appelOffre, index) in listeMantater(marcheid)"
+                        :key="appelOffre.id">
+                        <td @click="afficheBouttonTechFinMandater(index)">
+                            {{appelOffre.date_demande || 'Non renseigné'}}</td>
+                        <td @click="afficheBouttonTechFinMandater(index)">
+                            {{appelOffre.ref_marche || 'Non renseigné'}}</td>
+                        <td @click="afficheBouttonTechFinMandater(index)">
+                            {{appelOffre.num_courrier || 'Non renseigné'}}</td>
+                       
+                        <div class="btn-group">
+                            <button @click.prevent="supprimerMandater(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
+                                <span class=""><i class="icon-trash"></i></span></button>
+
+                        </div>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+              </div>
+
+<!--  debut modal ajout demande ano   -->
+
+
+  <div id="ajouterDemandeAno" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter type de procedure</h3>
+      </div>
+      <div class="modal-body">
+       <form class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label">Date de demande</label>
+            <div class="controls">
+              <input
+                type="date"
+                v-model="formDemande.date_demande"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+            <div class="control-group">
+            <label class="control-label">reference marché</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formDemande.ref_marche	"
+                class="span"
+                placeholder="Saisir le ref marche"
+              />
+            </div>
+          </div>
+         
+           <div class="control-group">
+            <label class="control-label">Numero du courrier</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formDemande.num_courrier"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+         
+         </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterDemandeAnoLocal"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+
+<!---  fin modal ajout demande ano  -->
+
+
+
+
+
+
+
+
+
+
+            
+
+            <div id="tab34" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+
+                        <a href="#ajouterDmp" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+
+                    </div>
+
+                </div>
+                <table class="table table-bordered table-striped" v-if="marcheid">
+                    <thead>
+                    <tr>
+
+                        <th>Date avis</th>
+                        <th>Avis bail </th>
+                        <th>Observation</th>
+                        <th>Document procedure</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="odd gradeX" v-for="(document, index) in listeMantater(marcheid)"
+                        :key="document.id">
+                        <td @click="afficheBouttonTechFinMandater(index)">
+                            {{document.date_id || 'Non renseigné'}}</td>
+                        <td @click="afficheBouttonTechFinMandater(index)">
+                            {{document.matricule_m || 'Non renseigné'}}</td>
+                        <td @click="afficheBouttonTechFinMandater(index)">
+                            {{document.nom_mandat || 'Non renseigné'}}</td>
+                        <td @click="afficheBouttonTechFinMandater(index)">
+                            {{document.prenom_nom || 'Non renseigné'}}</td>
+                        <div class="btn-group">
+                            <button @click.prevent="supprimerMandater(document.id)"  class="btn btn-danger " title="Supprimer">
+                                <span class=""><i class="icon-trash"></i></span></button>
+
+                        </div>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+              </div>
+
+
+<!--- debut analyse dmp  --->
+
+
+
+  <div id="ajouterDmp" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter analyse dmp</h3>
+      </div>
+      <div class="modal-body">
+       <form class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label">Date avis</label>
+            <div class="controls">
+              <input
+                type="date"
+                v-model="formAnalyse.date_avis_bail"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+            <div class="control-group">
+            <label class="control-label">reference marché</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formAnalyse.avis_bail	"
+                class="span"
+                placeholder="Saisir le ref marche"
+              />
+            </div>
+          </div>
+         
+           <div class="control-group">
+            <label class="control-label"> procedure document</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formAnalyse.observation"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+
+
+
+
+      <div class="control-group">
+            <label class="control-label">document procedure</label>
+            <div class="controls">
+              <select v-model="formAnalyse.document_procedure_id" class="span">
+             <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
+                           :value="varText.id">{{varText.objet_appel}}</option>
+                 </select>
+            </div>
+          </div>
+
+
+
+         
+         </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterDemandeAnoLocal"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+
+
+
+
+<!-- fin analyse dmp  -->
+
+
+
+
+
+
+
+
+
+               <div id="tab35" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+
+                        <a href="#ajouterAno" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+
+                    </div>
+
+                </div>
+                <table class="table table-bordered table-striped" v-if="marcheid">
+                    <thead>
+                    <tr>
+
+                        <th>Date </th>
+                        <th>Reference ano </th>
+                        <th>Numero courrier</th>
+                       
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="odd gradeX" v-for="(anoDmp, index) in listeMantater(marcheid)"
+                        :key="anoDmp.id">
+                        <td @click="afficheBouttonTechFinMandater(index)">
+                            {{anoDmp.date_id || 'Non renseigné'}}</td>
+                        <td @click="afficheBouttonTechFinMandater(index)">
+                            {{anoDmp.matricule_m || 'Non renseigné'}}</td>
+                        <td @click="afficheBouttonTechFinMandater(index)">
+                            {{anoDmp.nom_mandat || 'Non renseigné'}}</td>
+                        <td @click="afficheBouttonTechFinMandater(index)">
+                            {{anoDmp.prenom_nom || 'Non renseigné'}}</td>
+                        <div class="btn-group">
+                            <button @click.prevent="supprimerMandater(anoDmp.id)"  class="btn btn-danger " title="Supprimer">
+                                <span class=""><i class="icon-trash"></i></span></button>
+
+                        </div>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+              </div>
+
+
+
+
+<!--- debut ano -->
+
+
+ <div id="ajouterAno" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter ano dmp</h3>
+      </div>
+      <div class="modal-body">
+       <form class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label">Date ano</label>
+            <div class="controls">
+              <input
+                type="date"
+                v-model="formAno.date_ano_dmp"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+            <div class="control-group">
+            <label class="control-label">reference ano dmp</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formAno.ref_ano_dmp	"
+                class="span"
+                placeholder="Saisir le ref marche"
+              />
+            </div>
+          </div>
+         
+           <div class="control-group">
+            <label class="control-label">Numero courrier</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formAno.numero_courie"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+
+
+
+
+
+
+         
+         </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterDemandeAnoLocal"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+
+
+
+
+<!--- fin ano  -->
+
+
+
+<!--modification ano  -->
+
+<!--  fin modification ano --->
+
+
+
+
+
+
 
           </div>
         </div>
@@ -1006,7 +1389,7 @@
         <!-- Modification fin appel offres --->
 
         <!--Gestion de Lot-->
-        <div id="myModal2" class="modal hide" aria-hidden="true" style="display: none;">
+        <div id="4" class="modal hide" aria-hidden="true" style="display: none;">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter lot </h3>
@@ -2063,6 +2446,40 @@ formOffreFinanciere:{
     montant_total_ht:"",
     montant_total_ttc:"",
     dossier_candidat_id:"",
+},
+formDemande:{
+date_demande:"",
+ref_marche:"",
+num_courrier:""
+
+
+},
+
+formAnalyse:{
+date_avis_bail:"",
+    avis_bail:"",
+    observation:"",
+    document_procedure_id:""
+
+},
+
+formAno:{
+date_ano_dmp:"",
+ref_ano_dmp:"",
+numero_courie:""
+},
+
+editAno:{
+date_ano_dmp:"",
+ref_ano_dmp:"",
+numero_courie:""
+},
+
+editDemamnde:{
+    date_demande:"",
+ref_marche:"",
+num_courrier:""
+
 },
           editDossier:{
               type_candidat:"",
