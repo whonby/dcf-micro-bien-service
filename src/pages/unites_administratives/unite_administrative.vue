@@ -345,7 +345,7 @@
                     <th title="service gestionnaire">Service gest</th>
                      <th title="localisation geographique">Localisation geo</th>
                     <th>Code</th>
-                    <th>Libelle</th>
+                    <th title="unite administrative">UA</th>
                     <th>Date création</th>
 
                     <th>Action</th>
