@@ -507,7 +507,7 @@ export function getAllEquipement({ commit }) {
 export function ajouterEquipement({ commit, dispatch }, nouveau) {
   asyncLoading(axios
     .post("/ajouter_equipement", {
-     
+      code: nouveau.code,
       libelle: nouveau.libelle
     }))
  
@@ -528,7 +528,7 @@ export function ajouterEquipement({ commit, dispatch }, nouveau) {
 export function modifierEquipement({ commit, dispatch }, nouveau) {
   asyncLoading(axios
     .put("/modifier_equipement/" + nouveau.id, {
-     
+      code: nouveau.code,
       libelle: nouveau.libelle
     }))
     .then(response => {
