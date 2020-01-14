@@ -81,7 +81,7 @@
                       <option
                         v-for="type in uniteAdministrativeDynamiques(formData.ua_id)"
                         :key="type.id"
-                        :value="type.id"
+                        :value="type.typeua.id"
                       >{{type.typeua.libelle}}</option>
                     </select>
                   </div>
