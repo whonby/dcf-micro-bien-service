@@ -133,7 +133,34 @@
               
             </tr>
             <tr>
-               
+               <!-- <td>
+                 <div class="control-group">
+                  <label class="control-label">Action</label>
+                  <div class="controls">
+                    <select v-model="formData.fonctionnel_id">
+                      <option
+                        v-for="planfonct in afficheNiveauAction"
+                        :key="planfonct.id"
+                        :value="planfonct.id"
+                      >{{planfonct.code}}-{{planfonct.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+             <td>
+                 <div class="control-group">
+                  <label class="control-label">Activite</label>
+                  <div class="controls">
+                    <select v-model="formData.economique_id">
+                      <option
+                        v-for="Bgeneral in ActiviteDynamiques(formData.fonctionnel_id)"
+                        :key="Bgeneral.id"
+                        :value="Bgeneral.structure_activites_id"
+                      >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td> -->
                
               <td>
                 <div class="control-group">
@@ -574,6 +601,9 @@ export default {
       "afficheNiveauPlanFonctionnel"
      
     ]),
+  //   ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
+  // 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
+
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
     // filtre_unite_admin() {
     //   const st = this.search.toLowerCase();
@@ -591,6 +621,13 @@ export default {
         }
       };
     },
+    // ActiviteDynamiques() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //       return this.afficheNiveauActivite.filter(element => element.id == id);
+    //     }
+    //   };
+    // },
     uniteAdministrativeDynamiques() {
       return id => {
         if (id != null && id != "") {

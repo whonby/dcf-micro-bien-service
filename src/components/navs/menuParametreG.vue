@@ -210,11 +210,11 @@
             </router-link>
           </li>
           <li class="divider"></li>
-          <!-- <li>
+          <li>
             <router-link :to="{name: 'PlanActivite'}" tag="a">
               <i class="icon-key"></i> Plan programmatique
             </router-link>
-          </li> -->
+          </li>
         </ul>
       </li>
       <!-- Généraux
