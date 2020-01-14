@@ -35,9 +35,9 @@
                   <td>{{immobilisat.familleImmo.reletion__equipement.code || 'Non renseigné'}}</td>  
                     <td>{{immobilisat.familleImmo.reletion__equipement.libelle || 'Non renseigné'}}</td>
                     <td>{{immobilisat.familleImmo.libelle || 'Non renseigné'}}</td>
-                  <td>{{immobilisat.qte_reel || 'Non renseigné'}}</td>
-                  <td>{{immobilisat.qte_affecte || 'Non renseigné'}}</td>
-                  <td>{{immobilisat.qte_actuel || 'Non renseigné'}}</td>
+                  <td>{{immobilisat.qte_reel || 0}}</td>
+                  <td>{{immobilisat.qte_affecte || 0}}</td>
+                  <td>{{immobilisat.qte_actuel || 0}}</td>
                   <td>{{formatageSomme(immobilisat.prixUnitaire)|| 'Non renseigné'}}</td>
                   
                 </tr>
