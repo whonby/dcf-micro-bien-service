@@ -910,11 +910,6 @@
 
 <!--  debut modal ajout demande ano   -->
 
-
-
-
-            
-
             <div id="tab34" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
@@ -992,7 +987,7 @@
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
-
+                        <th>Numero candidat</th>
                         <th>Date </th>
                         <th>Reference ano </th>
                         <th>Numero courrier</th>
@@ -1000,18 +995,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for="(anoBailleur, index) in listeMantater(marcheid)"
+                    <tr class="odd gradeX" v-for="(anoBailleur, index) in listeAnoDMPBailleur(marcheid)"
                         :key="anoBailleur.id">
                         <td @click="afficheBouttonTechFinMandater(index)">
-                            {{anoBailleur.date_id || 'Non renseigné'}}</td>
+                            {{anoBailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td>
                         <td @click="afficheBouttonTechFinMandater(index)">
-                            {{anoBailleur.matricule_m || 'Non renseigné'}}</td>
+                            {{anoBailleur.date_ano_dmp || 'Non renseigné'}}</td>
                         <td @click="afficheBouttonTechFinMandater(index)">
-                            {{anoBailleur.nom_mandat || 'Non renseigné'}}</td>
+                            {{anoBailleur.ref_ano_dmp || 'Non renseigné'}}</td>
                         <td @click="afficheBouttonTechFinMandater(index)">
-                            {{anoBailleur.prenom_nom || 'Non renseigné'}}</td>
+                            {{anoBailleur.numero_courie || 'Non renseigné'}}</td>
                         <div class="btn-group">
-                            <button @click.prevent="supprimerMandater(anoBailleur.id)"  class="btn btn-danger " title="Supprimer">
+                            <button @click.prevent="supprimerAnoDMPBailleur(anoBailleur.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
 
                         </div>
@@ -1025,68 +1020,7 @@
 
 
 
-<!--- debut ano -->
 
-
- <div id="ajouterAnoDMPBAILLEUR" class="modal hide">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter ano dmp</h3>
-      </div>
-      <div class="modal-body">
-       <form class="form-horizontal">
-          <div class="control-group">
-            <label class="control-label">Date ano</label>
-            <div class="controls">
-              <input
-                type="date"
-                v-model="formAno.date_ano_dmp"
-                class="span"
-                placeholder="Saisir le libelle_type"
-              />
-            </div>
-          </div>
-            <div class="control-group">
-            <label class="control-label">reference ano dmp</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="formAno.ref_ano_dmp	"
-                class="span"
-                placeholder="Saisir le ref marche"
-              />
-            </div>
-          </div>
-         
-           <div class="control-group">
-            <label class="control-label">Numero courrier</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="formAno.numero_courie"
-                class="span"
-                placeholder="Saisir le libelle_type"
-              />
-            </div>
-          </div>
-
-         </form>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="ajouterDemandeAnoLocal"
-          class="btn btn-primary"
-          href="#"
-         
-        >Valider</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
-
-
-
-
-<!--- fin ano  -->
 
 
 
@@ -2524,6 +2458,76 @@
             </div>
         </div>
         <!--Fin annalyse-->
+
+        <!--- debut ano -->
+
+
+        <div id="ajouterAnoDMPBAILLEUR" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter ano dmp</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">Date ano</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="formAno.date_ano_dmp"
+                                    class="span"
+                                    placeholder="Saisir le libelle_type"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">reference ano dmp</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formAno.ref_ano_dmp	"
+                                    class="span"
+                                    placeholder="Saisir le ref marche"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Numero courrier</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formAno.numero_courie"
+                                    class="span"
+                                    placeholder="Saisir le libelle_type"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Analyse DMP</label>
+                        <div class="controls">
+                            <select v-model="formAno.analyse_dmp_id" class="span">
+                                <option v-for="varText in listeAnalyseDPM(marcheid)" :key="varText.id"
+                                        :value="varText.id">{{varText.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a
+                        @click.prevent="ajouterDemandeAnoLocal"
+                        class="btn btn-primary"
+                        href="#"
+
+                >Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div>
+        </div>
+
+        <!--- fin ano  -->
         <!--Fin contratualisation-->
     </div>
 </template>
@@ -2683,7 +2687,8 @@ num_courrier:""
 formAno:{
 date_ano_dmp:"",
 ref_ano_dmp:"",
-numero_courie:""
+numero_courie:"",
+    analyse_dmp_id:""
 },
 
 editAno:{
@@ -2756,7 +2761,7 @@ created() {
             ...mapGetters("bienService", [ 'acteDepense',"getMarchePersonnaliser","appelOffres",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
-                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno","documentProcedures","getterAnalyseDMP"]),
+                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno","documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur"]),
             listeAppelOffre(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -2826,8 +2831,15 @@ created() {
                         return this.getterAnalyseDMP.filter(idmarche => idmarche.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
                     }
                 }
+            },
+            listeAnoDMPBailleur: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                        return this.getterAnoDMPBailleur.filter(idmarche => idmarche.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
+                    }
+                }
             }
-            // filtre_equipement() {
+            // filtre_equipement() { getterAnoDMPBailleur
             //   const st = this.search.toLowerCase();
             //   return this.equipements.filter(type => {
             //     return (
