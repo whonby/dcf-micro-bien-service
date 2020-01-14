@@ -15,8 +15,8 @@
             <ul class="nav nav-tabs">
               <li class="active"><a data-toggle="tab" href="#tab1" title="Tableau de bord de mission">T. bord mission</a></li>
                <!-- <li><a data-toggle="tab" href="#tab2">Tous les dossiers en attente</a></li>  -->
-               <li><a data-toggle="tab" href="#tab3" title="Tableau de bord immobilisation">T.bord immobilisation</a></li> 
-              <li><a data-toggle="tab" href="#tab4" title="Tableau de bord d'execution de marché">T. de bord d'execution de marché</a></li>
+               <li><a data-toggle="tab" href="#tab3" title="Tableau de bord d'acteur de depense">T.bord acteur de depense</a></li> 
+              <!-- <li><a data-toggle="tab" href="#tab4" title="Tableau de bord d'execution de marché">T. de bord d'execution de marché</a></li> -->
             <!-- <li><a data-toggle="tab" href="#tab5">Tous les dossiers rejetés</a></li>   -->
                 
               
@@ -88,85 +88,30 @@
 
          
                            <div id="tab3" class="tab-pane">
-                           <div class="container-fluid">
-
-
-                           
-    <div class="quick-actions_homepage">
-      <ul class="quick-actions">
-        <!-- <li class="bg_lb" title="nombre de famille d'immobilisation">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-important">{{nombreFamilleArticle}}</span> Nbre familles immo
-          </a>
-        </li>-->
-
-        <!-- <li class="bg_ly" title="nombre de service">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-success">{{nombreServices}}</span> Nbre de service
-          </a>
-        </li>-->
-        <!-- <li class="bg_lo" title="total amortissement">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-success">{{nombreAmortissement}}</span> Nbre Amortissement
-          </a>
-        </li>-->
-         <li class="bg_lb" title="Total equipement">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-important">{{nombreTotalEquipement}}</span> Nbre Global d'équipement
-          </a>
-        </li> 
-
-        
-        <li class="bg_ly" title="nombre immobilisation prévue">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-success">{{SommeEquipementPrevue}}</span>Nbre Equipement Global prévue
-          </a>
-        </li>
-        <li class="bg_ls" title="Total equipement">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-important">{{SommeEquipementRealise}}</span> Nbre Equipement Global Réalise
-          </a>
-        </li> 
-        <li class="bg_lg" title="volume d'immobilisation réalise">
-          <a href="#">
-            <i class="icon-fullscreen"></i>
-            <span class="label label-warning">{{tauxEquipementRealise}}%</span>Taux équipement Global réalisé
-          </a>
-        </li>
-        <li class="bg_lg">
-          <a href="#">
-            <i class="icon-fullscreen"></i>
-            <span class="label label-warning">{{tauxEquipementPrevue}}%</span>Taux équipement Global prévue
-          </a>
-        </li>
-        <!-- <li class="bg_lr" >
-          <a href="#">
-            <i class="icon-info-sign"></i>
-            <span class="label label-success">{{tauxGlobalEquipement}}%</span>Taux Global d'equipement
-          </a>
-        </li> -->
-        <!-- <li class="bg_lr" title="Taux immobilisation de UA">
-          <a href="#">
-            <i class="icon-info-sign"></i>
-            <span class="label label-success">{{tauxbesoinimmoUa}}%</span>Taux Besoin immobilisation de ua
-          </a>
-        </li>-->
-      </ul>
+                       <div class="container-fluid">
+        <div class="quick-actions_homepage span12" >
+            <ul class="quick-actions" style="margin: 0px !important;">
+                <li class="bg_lb">
+                    <a href="#">
+                        <i class="icon-dashboard"></i> <span class="label label-important">{{totalActeurDepense}}</span> Total acteur depense
+                    </a>
+                </li>
+                <li class="bg_lg">
+                    <a href="#"> <i class="icon-signal"></i> <span class="label label-important">{{totalActeurEnctivite}}</span> Total acteur en activité
+                    </a>
+                </li>
+                <li class="bg_ly">
+                    <a href="#">
+                        <i class="icon-inbox"></i><span class="label label-important">{{totalActeurAccredite}}</span> Total acteur accredité
+                    </a>
+                </li>
+                <li class="bg_lb"> <a href="#"> <i class="icon-th"></i> <span class="label label-important">{{totalActeurNonAccredite}}</span> Total acteur non accredité</a> </li>
+                <li class="bg_ls"> <a href="#"> <i class="icon-fullscreen"></i> <span class="label label-important" v-if="tauxActeurAccredite!='NaN'">{{tauxActeurAccredite || '0' }} %</span>
+                    Taux acteurs acredité
+                </a> </li>
+            </ul>
+        </div>
     </div>
-
-    <div class="quick-actions_homepage">
-      <ul class="quick-actions"></ul>
-    </div>
-    <div class="quick-actions_homepage">
-      <ul class="quick-actions"></ul>
-    </div>
-  </div>
                                   
             
             </div>
@@ -178,11 +123,7 @@
 
 
          
-                        <div id="tab4" class="tab-pane">
-                           <div class="container-fluid">
-                      
-            </div>
-            </div>
+                    
   <!---- fin quatrieme tableau ---->
 
 
@@ -260,13 +201,23 @@ export default {
   },
 
   computed: {
+
+  ...mapGetters('personnelUA', ['acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions",
+                "grades","niveau_etudes","nbr_acteur_actredite_taux","all_acteur_depense",
+                "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
+
+
+
+
     ...mapGetters("suivi_controle_budgetaire", [
       "nombreTotalDeTouteMissions",
       "coutTotalDemission",
       "dureeMoyenneDeTouteLesMissions",
       "coutMoyenDeBilletAvionDeMissions",
       "tauxDossierRejetMissions",
-      "coutMoyenDeMission"
+      "coutMoyenDeMission",
+
+      
  
 
       // "nbreArchivageNotes"
@@ -301,6 +252,8 @@ export default {
     // }
   },
   methods: {
+
+    
     formatageSomme:formatageSomme
   }
 };

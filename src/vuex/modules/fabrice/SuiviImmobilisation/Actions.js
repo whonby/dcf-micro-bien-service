@@ -507,7 +507,7 @@ export function getAllEquipement({ commit }) {
 export function ajouterEquipement({ commit, dispatch }, nouveau) {
   asyncLoading(axios
     .post("/ajouter_equipement", {
-     
+      code: nouveau.code,
       libelle: nouveau.libelle
     }))
  
@@ -528,7 +528,7 @@ export function ajouterEquipement({ commit, dispatch }, nouveau) {
 export function modifierEquipement({ commit, dispatch }, nouveau) {
   asyncLoading(axios
     .put("/modifier_equipement/" + nouveau.id, {
-     
+      code: nouveau.code,
       libelle: nouveau.libelle
     }))
     .then(response => {
@@ -582,6 +582,7 @@ export function ajouterArticles({ commit, dispatch }, nouveau) {
       if (response.status == 201) {
         commit("AJOUTER_ARTICLES", response.data);
         dispatch('getAllArticles')
+        dispatch('getAllFamille')
         this.$app.$notify({
           title: 'Success',
           text: 'Enregistrement Effectué avec Succès!',
@@ -610,6 +611,7 @@ export function modifierArticles({ commit, dispatch }, nouveau) {
     .then(response => {
       commit("MODIFIER_ARTICLES", response.data);
       dispatch('getAllArticles')
+      dispatch('getAllFamille')
       this.$app.$notify({
         title: 'Success',
         text: 'Modification Effectué avec Succès!',
@@ -618,13 +620,13 @@ export function modifierArticles({ commit, dispatch }, nouveau) {
     });
 }
 //supprimer
-export function supprimerArticles({ commit}, id) {
+export function supprimerArticles({ commit, dispatch}, id) {
   this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
       commit("SUPPRIMER_ARTICLES", id);
-      // dispatch('getAllArticles')
-
+      dispatch('getAllArticles')
+      dispatch('getAllFamille')
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete("/supprimer_Articles/" + id).then(() => dialog.close());
     });

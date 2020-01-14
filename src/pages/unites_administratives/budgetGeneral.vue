@@ -81,7 +81,7 @@
                       <option
                         v-for="type in uniteAdministrativeDynamiques(formData.ua_id)"
                         :key="type.id"
-                        :value="type.id"
+                        :value="type.typeua.id"
                       >{{type.typeua.libelle}}</option>
                     </select>
                   </div>
@@ -133,7 +133,34 @@
               
             </tr>
             <tr>
-               
+               <!-- <td>
+                 <div class="control-group">
+                  <label class="control-label">Action</label>
+                  <div class="controls">
+                    <select v-model="formData.fonct_id">
+                      <option
+                        v-for="planfonct in afficheNiveauAction"
+                        :key="planfonct.id"
+                        :value="planfonct.id"
+                      >{{planfonct.code}}-{{planfonct.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+             <td>
+                 <div class="control-group">
+                  <label class="control-label">Activite</label>
+                  <div class="controls">
+                    <select v-model="formData.economique_id">
+                      <option
+                        v-for="Bgeneral in ActiviteDynamiques(formData.fonct_id)"
+                        :key="Bgeneral.id"
+                        :value="Bgeneral.structure_activites_id"
+                      >{{Bgeneral.children.code}}-{{Bgeneral.children.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td> -->
                
               <td>
                 <div class="control-group">
@@ -434,7 +461,7 @@
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{Bgeneral.afficheProgramme.code || 'Non renseigné'}}-{{Bgeneral.afficheProgramme.libelle || 'Non renseigné'}}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{Bgeneral.afficheFonctionnel.code || 'Non renseigné'}}-{{Bgeneral.afficheFonctionnel.libelle || 'Non renseigné'}}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{ Bgeneral.afficheEconomique.code || 'Non renseigné'}}-{{ Bgeneral.afficheEconomique.libelle || 'Non renseigné'}}</td>
-                  <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{ Bgeneral.Dotation_Initiale || 0}}</td>
+                  <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{formatageSomme(parseFloat(Bgeneral.Dotation_Initiale)) || 0}}</td>
                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">
                      
                      
@@ -574,6 +601,9 @@ export default {
       "afficheNiveauPlanFonctionnel"
      
     ]),
+  //   ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
+  // 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
+
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
     // filtre_unite_admin() {
     //   const st = this.search.toLowerCase();
@@ -591,6 +621,13 @@ export default {
         }
       };
     },
+    // ActiviteDynamiques() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //       return this.afficheNiveauAction.filter(element => element.children.parent == id);
+    //     }
+    //   };
+    // },
     uniteAdministrativeDynamiques() {
       return id => {
         if (id != null && id != "") {

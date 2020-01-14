@@ -212,6 +212,7 @@ export function ajouterSection({ commit, dispatch},objetAjout){
         if(response.status == 201){
             commit('AJOUTER_SECTION', response.data)
             dispatch('getSection')
+            dispatch('getNatureSection')
             this.$app.$notify({
                 title: 'success ',
                 text: 'Enregistrement effectué avec success !',
@@ -232,6 +233,7 @@ export function modifierSection({ commit, dispatch }, objetModifie) {
     })).then(res => {
         commit('MODIFIER_SECTION', res.data)
         dispatch('getSection')
+        dispatch('getNatureSection')
         this.$app.$notify({
             title: 'success ',
             text: 'Modification effectué avec success !',
@@ -243,12 +245,14 @@ export function modifierSection({ commit, dispatch }, objetModifie) {
 
 // supprimer de setion
 
-export function supprimerSection({commit}, id){
+export function supprimerSection({ commit, dispatch}, id){
   
     this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
-       commit('SUPPRIMER_SECTION', id)
+        commit('SUPPRIMER_SECTION', id)
+        dispatch('getSection')
+        dispatch('getNatureSection')
       // // dialog.loading(false) // stops the proceed button's loader
         axios.delete('/supprimer_section/' + id).then(() => dialog.close() )   
     })
