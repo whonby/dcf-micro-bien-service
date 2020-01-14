@@ -137,7 +137,7 @@
                  <div class="control-group">
                   <label class="control-label">Action</label>
                   <div class="controls">
-                    <select v-model="formData.fonctionnel_id">
+                    <select v-model="formData.fonct_id">
                       <option
                         v-for="planfonct in afficheNiveauAction"
                         :key="planfonct.id"
@@ -153,10 +153,10 @@
                   <div class="controls">
                     <select v-model="formData.economique_id">
                       <option
-                        v-for="Bgeneral in ActiviteDynamiques(formData.fonctionnel_id)"
+                        v-for="Bgeneral in ActiviteDynamiques(formData.fonct_id)"
                         :key="Bgeneral.id"
                         :value="Bgeneral.structure_activites_id"
-                      >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
+                      >{{Bgeneral.children.code}}-{{Bgeneral.children.libelle}}</option>
                     </select>
                   </div>
                 </div>
@@ -461,7 +461,7 @@
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{Bgeneral.afficheProgramme.code || 'Non renseigné'}}-{{Bgeneral.afficheProgramme.libelle || 'Non renseigné'}}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{Bgeneral.afficheFonctionnel.code || 'Non renseigné'}}-{{Bgeneral.afficheFonctionnel.libelle || 'Non renseigné'}}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{ Bgeneral.afficheEconomique.code || 'Non renseigné'}}-{{ Bgeneral.afficheEconomique.libelle || 'Non renseigné'}}</td>
-                  <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{ Bgeneral.Dotation_Initiale || 0}}</td>
+                  <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{formatageSomme(parseFloat(Bgeneral.Dotation_Initiale)) || 0}}</td>
                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">
                      
                      
@@ -624,7 +624,7 @@ export default {
     // ActiviteDynamiques() {
     //   return id => {
     //     if (id != null && id != "") {
-    //       return this.afficheNiveauActivite.filter(element => element.id == id);
+    //       return this.afficheNiveauAction.filter(element => element.children.parent == id);
     //     }
     //   };
     // },
