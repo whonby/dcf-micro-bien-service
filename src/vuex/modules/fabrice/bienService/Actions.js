@@ -2716,6 +2716,7 @@ export function supprimerMandater({commit}, id) {
 
 export  function  getDemandeAno({commit}) {
     queue.push(() => axios.get('/demande_ano').then((response) => {
+        console.log(response.data.data)
         commit('GET_DEMANDE_ANO', response.data.data)
 
     }).catch(error => console.log(error)))
@@ -2763,3 +2764,109 @@ export function supprimerDemandeAno({commit}, id) {
 
 }
 /**Fin madate*/
+
+
+
+/*Analyse DPM*/
+
+export  function  getAnalyseDMP({commit}) {
+    queue.push(() => axios.get('/analyse_dmp').then((response) => {
+        commit('GET_ANALYSE_DMP', response.data.data)
+
+    }).catch(error => console.log(error)))
+}
+
+
+
+export function ajouterAnalyseDMP({commit}, elementAjout){
+    asyncLoading(axios.post('/analyse_dmp',elementAjout)).then(response =>{
+        if(response.status == 201){
+            commit('AJOUTER_ANALYSE_DMP', response.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
+
+
+export function modifierAnalyseDMP({commit}, element_modifie) {
+    asyncLoading( axios.put('/analyse_dmp',element_modifie)).then(response => {
+        commit('MODIFIER_ANALYSE_DMP', response.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}
+
+
+export function supprimerAnalyseDMP({commit}, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_ANALYSE_DMP', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/analyse_dmp/' + id).then(() => dialog.close() )
+        })
+
+}
+/*FIN Analyse DPM*/
+
+
+
+
+
+/*Analyse ano DMP bailleur*/
+
+export  function  getAnoDMPBailleur({commit}) {
+    queue.push(() => axios.get('/ano_dmp_bailleurs').then((response) => {
+        commit('GET_ANO_DMP_BAILLEUR', response.data.data)
+
+    }).catch(error => console.log(error)))
+}
+
+export function ajouterAnoDMPBailleur({commit}, elementAjout){
+    asyncLoading(axios.post('/ano_dmp_bailleurs',elementAjout)).then(response =>{
+        if(response.status == 201){
+            commit('AJOUTER_ANO_DMP_BAILLEUR', response.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
+export function modifierAnoDMPBailleur({commit}, element_modifie) {
+    asyncLoading( axios.put('/ano_dmp_bailleurs',element_modifie)).then(response => {
+        commit('MODIFIER_ANO_DMP_BAILLEUR', response.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}
+
+
+export function supprimerAnoDMPBailleur({commit}, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_ANO_DMP_BAILLEUR', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/ano_dmp_bailleurs/' + id).then(() => dialog.close() )
+        })
+
+}
+/*FIN Analyse DPM*/

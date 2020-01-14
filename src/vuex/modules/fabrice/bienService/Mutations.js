@@ -1396,17 +1396,17 @@ export const SUPPRIMER_MANDATER= (state, id)=> {
 
 /*Mandate demande ano*/
 export const GET_DEMANDE_ANO = (state, tableau_autre_text_juridique) =>{
-    state.demandeAno = tableau_autre_text_juridique
+    state.stateDemandeAno = tableau_autre_text_juridique
 }
 
 export const AJOUTER_DEMANDE_ANO = (state, elementAjouter) => {
-    state.demandeAno.unshift(elementAjouter)
+    state.stateDemandeAno.unshift(elementAjouter)
 }
 
 
 
 export const MODIFIER_DEMANDE_ANO= (state, elementModif)=>{
-    state.demandeAno = state.demandeAno.map(response => {
+    state.stateDemandeAno = state.stateDemandeAno.map(response => {
         if(response.id == elementModif.id){
             response = {...elementModif}
         }
@@ -1415,6 +1415,59 @@ export const MODIFIER_DEMANDE_ANO= (state, elementModif)=>{
 }
 
 export const SUPPRIMER_DEMANDE_ANO= (state, id)=> {
-    state.demandeAno = state.demandeAno.filter(autreText => autreText.id !=id)
+    state.stateDemandeAno = state.stateDemandeAno.filter(autreText => autreText.id !=id)
 }
-/*Fin mandate mutation*/
+/*Fin ano mutation*/
+
+
+/*Mandate demande ano*/
+export const GET_ANALYSE_DMP = (state, tableau_autre_text_juridique) =>{
+    state.analyseDMP = tableau_autre_text_juridique
+}
+
+export const AJOUTER_ANALYSE_DMP = (state, elementAjouter) => {
+    state.analyseDMP.unshift(elementAjouter)
+}
+
+
+
+export const MODIFIER_ANALYSE_DMP= (state, elementModif)=>{
+    state.analyseDMP = state.analyseDMP.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_ANALYSE_DMP= (state, id)=> {
+    state.analyseDMP = state.analyseDMP.filter(autreText => autreText.id !=id)
+}
+/*Fin ano mutation*/
+
+
+
+/*Muttation ano DMP Bailleur*/
+export const GET_ANO_DMP_BAILLEUR = (state, tableau_autre_text_juridique) =>{
+    state.stateAnoDmpBailleur = tableau_autre_text_juridique
+}
+
+export const AJOUTER_ANO_DMP_BAILLEUR = (state, elementAjouter) => {
+    state.stateAnoDmpBailleur.unshift(elementAjouter)
+}
+
+
+
+export const MODIFIER_ANO_DMP_BAILLEUR= (state, elementModif)=>{
+    state.stateAnoDmpBailleur = state.stateAnoDmpBailleur.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_ANO_DMP_BAILLEUR= (state, id)=> {
+    state.stateAnoDmpBailleur = state.stateAnoDmpBailleur.filter(autreText => autreText.id !=id)
+}
+/*Fin ano dmpBailleur mutation*/

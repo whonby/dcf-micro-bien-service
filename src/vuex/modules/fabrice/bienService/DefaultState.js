@@ -45,9 +45,9 @@ const defaultState = {
     lettreInvitation:[],
     mandate:[],
 documentProcedures:[],
-
-
-    demandeAno:[]
+    stateDemandeAno:[],
+    analyseDMP:[],
+    stateAnoDmpBailleur:[]
 
 
 

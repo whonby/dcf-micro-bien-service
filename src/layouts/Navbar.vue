@@ -119,7 +119,7 @@ export default {
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",
          "getDossierCandidat", "getOffreFinancier", "getOffreTechnique","getLettreInvitation","getMandater",
 
-         "getCojo","getAnalyseDossier", 'getMotifDecision', 'getDocumentProcedure', 'getDemandeAno'])
+         "getCojo","getAnalyseDossier", 'getMotifDecision', 'getDocumentProcedure', 'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur"])
 
 
 
@@ -275,6 +275,8 @@ this.getLettreInvitation()
     this.getCojo()
     this.getAnalyseDossier()
     this.getDemandeAno()
+    this.getAnalyseDMP()
+    this.getAnoDMPBailleur()
       /**
        * fin missions
        */
