@@ -18,7 +18,8 @@
                 <thead>
                   <tr>
                     <!-- <th>code</th> -->
-                    <th style="width:100%">famille acticles</th>
+                    <th style="width:90%">famille acticles</th>
+                     <th style="width:10%">Duree de vie</th>
                     
                    
                     <th>Action</th>

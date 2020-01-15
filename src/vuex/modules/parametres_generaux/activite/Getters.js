@@ -3,14 +3,14 @@ const structures_activites = state=> state.structures_activites.sort((a,b)=>(a.n
 const plans_activites = state => state.plans_activites.sort((a, b) => (a.code > b.code) ? 1 : -1)
 
 
-// export const afficheNiveauAction= state =>
-//     state.plans_activites.filter(
-//         affichenaturedep => affichenaturedep.code.length == 7
-//     );
-// export const afficheNiveauActivite = state =>
-//     state.plans_activites.filter(
-//         affichenaturedep => affichenaturedep.code.length == 11
-//     );
+export const afficheNiveauAction= state =>
+    state.plans_activites.filter(
+        affichenaturedep => affichenaturedep.code.length == 7
+    );
+export const afficheNiveauActivite = state =>
+    state.plans_activites.filter(
+        affichenaturedep => affichenaturedep.code.length == 11
+    );
 
 
 

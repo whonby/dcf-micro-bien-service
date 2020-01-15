@@ -227,12 +227,23 @@ export default {
     },
     // fonction pour vider l'input ajouter
     ajouterFamilleLocal() {
-      this.ajouterEquipement(this.formData);
+       if (this.formData.code =="" ) {
+        alert("veuillez remplir le code")
+        
+      }
+      else if (this.formData.libelle =="" ) {
+alert("veuillez remplir le libelle")
+      }
+      else
+      {
+           this.ajouterEquipement(this.formData);
 
       this.formData = {
         code: "",
         libelle: ""
       };
+      }
+     
     },
     // afficher modal de modification
     afficherModalModifierFamille(index) {
@@ -245,8 +256,18 @@ export default {
     },
     // fonction pour vider l'input modification
     modifierFamilleLocal() {
-      this.modifierEquipement(this.editEquipement);
+       if (this.editEquipement.code =="" ) {
+        alert("veuillez remplir le code")
+      }
+      else if (this.editEquipement.libelle =="" ) {
+alert("veuillez remplir le libelle")
+      }
+      else
+      {
+this.modifierEquipement(this.editEquipement);
       this.$("#modificationModal").modal('hide');
+      }
+      
     },
     alert() {
       console.log("ok");
