@@ -1,3 +1,12 @@
+
+
+
+
+
+
+
+
+
 const GET_ALL_BUDGET_GENERAL = (state, tableauBudgetGeneral) => {
   state.budgetGeneral = tableauBudgetGeneral;
 };

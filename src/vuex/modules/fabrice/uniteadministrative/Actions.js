@@ -5,7 +5,6 @@ var queue = housecall({ concurrency: 2, cooldown: 1000 });
 
 
 
-
 export function getAllBudgetGeneral({ commit }) {
   queue.push(() => {
     axios
@@ -30,7 +29,9 @@ export function ajouterBudgetGeneral({ commit }, nouveau) {
       fonctionnel_id: nouveau.fonctionnel_id,
       economique_id: nouveau.economique_id,
       Dotation_Initiale: nouveau.Dotation_Initiale,
-      version: nouveau.version
+      version: nouveau.version,
+      
+      codebudget: nouveau.codebudget
     }))
 
     .then(response => {
@@ -58,7 +59,8 @@ export function modifierBudgetGeneral({ commit }, nouveau) {
       fonctionnel_id: nouveau.fonctionnel_id,
       economique_id: nouveau.economique_id,
       Dotation_Initiale: nouveau.Dotation_Initiale,
-      version: nouveau.version
+      version: nouveau.version,
+      codebudget: nouveau.codebudget
     }))
     .then(response => {
       commit("MODIFIER_BUDGET_GENERAL", response.data);
@@ -180,7 +182,8 @@ export function ajouterUniteAdministrative({ commit }, nouveau) {
       localisationgeo_id: nouveau.localisationgeo_id,
       code: nouveau.code,
       libelle: nouveau.libelle,
-      date_creation: nouveau.date_creation
+      date_creation: nouveau.date_creation,
+      code_ua: nouveau.code_ua
     }))
     .then(response => {
       if (response.status == 201) {
@@ -204,7 +207,8 @@ export function modifierUniteAdministrative({ commit }, nouveau) {
       localisationgeo_id: nouveau.localisationgeo_id,
       code: nouveau.code,
       libelle: nouveau.libelle,
-      date_creation: nouveau.date_creation
+      date_creation: nouveau.date_creation,
+      code_ua: nouveau.code_ua
     })
   ).then(response => {
     commit("MODIFIER_UNITE_ADMINISTRATIVE", response.data);
