@@ -177,7 +177,7 @@
         },
         methods: {
             // methode pour notre action
-            ...mapActions('personnelUA', ['getClasses',"ajouterClasses","supprimerClasse"]),
+            ...mapActions('personnelUA', ['getClasses',"ajouterClasses","supprimerClasse", "modifierClasse"]),
             afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',

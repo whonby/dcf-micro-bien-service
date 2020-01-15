@@ -138,7 +138,7 @@
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="editTitre.code.length && editTitre.libelle.length" 
+             <button
              @click.prevent="modifierGrandeNatureLocal(editTitre)" class="btn btn-primary"
               href="#">Modifier</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
@@ -158,7 +158,7 @@
 
   ></fab>
 
-
+<notifications/>
 
 
 
@@ -264,10 +264,11 @@ afficherModalModifierGrande(index){
  },
 modifierGrandeNatureLocal(){
   this.modifierGrandeNature(this.editTitre)
-  this.editTitre = {
-    code:"",
-    libelle:""
-  }
+  this.$('#modifierModal').modal('hide');
+  // this.editTitre = {
+  //   code:"",
+  //   libelle:""
+  // }
 }
 
   }

@@ -979,7 +979,7 @@
                 <div align="right">
                     <div class="widget-content">
 
-                        <a href="#ajouterAnoDMPBAILLEUR" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+                        <a href="#ajouterAnoDMPBAILLEURModal" data-toggle="modal" class="btn btn-warning">Ajouter</a>
 
                     </div>
 
@@ -995,15 +995,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for="(anoBailleur, index) in listeAnoDMPBailleur(marcheid)"
+                    <tr class="odd gradeX" v-for="anoBailleur in listeAnoDMPBailleur(marcheid)"
                         :key="anoBailleur.id">
-                        <td @click="afficheBouttonTechFinMandater(index)">
+                        <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             {{anoBailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td>
-                        <td @click="afficheBouttonTechFinMandater(index)">
+                        <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             {{anoBailleur.date_ano_dmp || 'Non renseigné'}}</td>
-                        <td @click="afficheBouttonTechFinMandater(index)">
+                        <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             {{anoBailleur.ref_ano_dmp || 'Non renseigné'}}</td>
-                        <td @click="afficheBouttonTechFinMandater(index)">
+                        <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             {{anoBailleur.numero_courie || 'Non renseigné'}}</td>
                         <div class="btn-group">
                             <button @click.prevent="supprimerAnoDMPBailleur(anoBailleur.id)"  class="btn btn-danger " title="Supprimer">
@@ -2462,7 +2462,7 @@
         <!--- debut ano -->
 
 
-        <div id="ajouterAnoDMPBAILLEUR" class="modal hide">
+        <div id="ajouterAnoDMPBAILLEURModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter ano dmp</h3>
@@ -2509,7 +2509,7 @@
                         <div class="controls">
                             <select v-model="formAno.analyse_dmp_id" class="span">
                                 <option v-for="varText in listeAnalyseDPM(marcheid)" :key="varText.id"
-                                        :value="varText.id">{{varText.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
+                                        :value="varText.id">{{varText.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
                             </select>
                         </div>
                     </div>
@@ -2518,7 +2518,7 @@
             </div>
             <div class="modal-footer">
                 <a
-                        @click.prevent="ajouterDemandeAnoLocal"
+                        @click.prevent="ajouterAnoDMPBailleurLocal"
                         class="btn btn-primary"
                         href="#"
 
@@ -2528,6 +2528,73 @@
         </div>
 
         <!--- fin ano  -->
+
+        <!---->
+        <div id="editeAnoDmpBailleurModal" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Edite ano DMP Bailleur</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">Date ano</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="edite_ano_bailleur_dmp.date_ano_dmp"
+                                    class="span"
+                                    placeholder="Saisir le libelle_type"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">reference ano dmp</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="edite_ano_bailleur_dmp.ref_ano_dmp	"
+                                    class="span"
+                                    placeholder="Saisir le ref marche"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Numero courrier</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="edite_ano_bailleur_dmp.numero_courie"
+                                    class="span"
+                                    placeholder="Saisir le libelle_type"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Analyse DMP</label>
+                        <div class="controls">
+                            <select v-model="edite_ano_bailleur_dmp.analyse_dmp_id" class="span">
+                                <option v-for="varText in listeAnalyseDPM(marcheid)" :key="varText.id"
+                                        :value="varText.id">{{varText.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a
+                        @click.prevent="editeAnoDMPBailleurLocal"
+                        class="btn btn-primary"
+                        href="#"
+
+                >Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div>
+        </div>
+        <!---->
         <!--Fin contratualisation-->
     </div>
 </template>
@@ -2717,6 +2784,7 @@ num_courrier:""
 
 
           },
+                edite_ano_bailleur_dmp:"",
                 edite_offre_technique:"",
                 edite_offre_financiere:"",
                 formData: {
@@ -3060,7 +3128,15 @@ created() {
                     avis_bail:"",
                     date_avis_bail:""
             }
-        },
+        },ajouterAnoDMPBailleurLocal(){
+               this.ajouterAnoDMPBailleur(this.formAno)
+                this.formAno={
+                    date_ano_dmp:"",
+                        ref_ano_dmp:"",
+                        numero_courie:"",
+                        analyse_dmp_id:""
+                }
+            },
             modaleOffreTechnique(index){
               this.edite_offre_technique=this.getterDossierCandidats[index]
             },
@@ -3119,6 +3195,16 @@ created() {
                     annalyseDP => annalyseDP.id == index
                 )
             },
+
+            afficheAnoDPMBailleurModale(index){
+                this.$('#editeAnoDmpBailleurModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                this.edite_ano_bailleur_dmp=this.getterAnoDMPBailleur.find(
+                    resp => resp.id == index
+                )
+                 },
             afficheAnnalyseDossier(index){
                 this.$('#modificationAajouterAnalys01').modal({
                     backdrop: 'static',
@@ -3183,6 +3269,11 @@ created() {
             modficationsAnalyseDMP(){
                 this.modifierAnalyseDMP(this.edite_analyse_dpm)
                 this.$('#editeDMP').modal('hide');
+            },
+
+            editeAnoDMPBailleurLocal(){
+                this.modifierAnoDMPBailleur(this.edite_ano_bailleur_dmp)
+                this.$('#editeAnoDmpBailleurModal').modal('hide');
             },
 // afficher modification demande ano
 

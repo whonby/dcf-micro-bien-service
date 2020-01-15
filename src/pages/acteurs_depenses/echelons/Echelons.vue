@@ -130,7 +130,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <a @click.prevent="modifierTitre(editTitre)" class="btn btn-primary"
+                <a @click.prevent="modifierEchelonsLocal(editTitre)" class="btn btn-primary"
                    href="#">Modifier</a>
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
         </div>
@@ -192,7 +192,7 @@
         },
         methods: {
             // methode pour notre action
-            ...mapActions('personnelUA', ['getEchelons',"ajouterEchelons","supprimerEchelons","getClasses"]),
+            ...mapActions('personnelUA', ['getEchelons',"ajouterEchelons","supprimerEchelons","getClasses", "modifierEchelons"]),
             afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',
@@ -214,8 +214,14 @@
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.editTitre = this.titres[index];
+                this.editTitre = this.echellons[index];
 
+            },
+
+
+            modifierEchelonsLocal(){
+                this.modifierEchelons(this.editTitre)
+                this.$('#modifierModal').modal('hide');
             },
 
 

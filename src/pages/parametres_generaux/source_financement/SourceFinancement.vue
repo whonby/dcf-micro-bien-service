@@ -283,11 +283,12 @@ afficherModalModifierFinancement(index){
 // 
 modifierFinancementLocal(){
   this.modifierFinancement(this.editFinancement)
-  this.editFinancement = {
-    code:"",
-    libelle:"",
-    sigle:""
-  }
+  this.$('#modifierModal').modal('hide');
+  // this.editFinancement = {
+  //   code:"",
+  //   libelle:"",
+  //   sigle:""
+  // }
 }
 
   }

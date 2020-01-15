@@ -42,7 +42,7 @@
                   <th>Niveau</th>
                   <th>Libelle</th>
                    <th>Action</th>
-                </tr>
+                </tr>     
               </thead>
               <tbody>
                 <tr class="odd gradeX" v-for="(structure_fonctionnelle, index) in
@@ -144,8 +144,7 @@
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="editFonctionnelle.niveau.length &&
-              editFonctionnelle.libelle.length" 
+             <button 
              @click.prevent="modifierTypeLocal(editFonctionnelle)" class="btn btn-primary"
               >Modifier</button>
               <button data-dismiss="modal" class="btn" >Fermer</button> </div>
@@ -246,33 +245,13 @@ return this.structures_fonctionnelles.filter((item) => {
     },
    // fonction pour vider l'input
     ajouterTypeLocal () {
-
-
-// if(this.structures_fonctionnelles.indexOf(this.formData.niveau) !== -1){
-//        alert("La valeur existe!")
-// } else{
-//        alert("La valeur n'existe pas!")
-// }
-
-
-//           if(this.structures_fonctionnelles.indexOf(this.formData.niveau) > -1){
-//        alert("La valeur existe!")
-// } else{
-//        alert("La valeur n'existe pas!")
-
-
-
-
-       
-        this.ajouterStructureFonctionnelle(this.formData)
+      this.ajouterStructureFonctionnelle(this.formData)
 
         this.formData = {
                 niveau: "",
              libelle: "",
            
         }
-// }
-     
     },
 // afficher modal
 afficherModalModifierType(index){
@@ -290,10 +269,11 @@ afficherModalModifierType(index){
 
 modifierTypeLocal(){
   this.modifierStructureFonctionnelle(this.editFonctionnelle)
-  this.editFonctionnelle = {
-    niveau:"",
-    libelle:""
-  }
+  this.$('#modifierModal').modal('hide');
+  // this.editFonctionnelle = {
+  //   niveau:"",
+  //   libelle:""
+  // }
 }
   }
 };
