@@ -143,7 +143,7 @@
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="editTitre.code.length && editTitre.libelle.length"
+             <button 
              @click.prevent="modifierUniteLocal(editTitre)" class="btn btn-primary"
               >Modifier</button>
               <button data-dismiss="modal" class="btn">Fermer</button> </div>
@@ -266,10 +266,11 @@ afficherModalModifierunite(index){
  },
 modifierUniteLocal(){
   this.modifierZone(this.editTitre)
-  this.editTitre = {
-        code: "",
-             libelle: ""
-  }
+  this.$('#modifierModal').modal('hide');
+  // this.editTitre = {
+  //       code: "",
+  //            libelle: ""
+  // }
 }
 
   }

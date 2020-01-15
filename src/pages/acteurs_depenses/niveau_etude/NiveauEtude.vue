@@ -198,6 +198,7 @@
             modifier(){
                 this.modifierNiveauEtude(this.editTitre)
                 //this.getNiveauEtude()
+                this.$('#modifierModal').modal('hide');
             }
 
 

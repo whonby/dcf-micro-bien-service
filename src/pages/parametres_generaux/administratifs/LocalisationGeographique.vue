@@ -233,7 +233,7 @@
           </div>
            <div class="modal-footer"> 
              <button v-show=" nouvelElementEnfant.libelle.length && 
-             nouvelElementEnfant.structure_programme_id"
+             nouvelElementEnfant.structure_localisation_geographique_id"
               @click.prevent="ajouterProgrammeLocalEnfant()" class="btn btn-primary"
               >Valider</button>
               <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>

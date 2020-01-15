@@ -158,8 +158,7 @@
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="editTitre.source_financement_id && editTitre.code.length && 
-             editTitre.libelle.length"
+             <button 
               @click.prevent="modifierLocalisationLocal(editTitre)" class="btn btn-primary"
               >Modifier</button>
               <button data-dismiss="modal" class="btn">Fermer</button> </div>
@@ -286,11 +285,12 @@ afficherModalModifierTypefinancement(index){
  },
 modifierLocalisationLocal(){
   this.modifierTypeFinancement(this.editTitre)
-  this.editTitre = {
-                code: "",
-             libelle: "",
-             source_financement_id:""
-  }
+  this.$('#modifierModal').modal('hide');
+  // this.editTitre = {
+  //               code: "",
+  //            libelle: "",
+  //            source_financement_id:""
+  // }
 },
 //   sup(id){
 // this.supprimerChapitre(id)

@@ -29,7 +29,7 @@
 
                                     
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste structures activites</h5>
+            <h5>Liste structures programmatiques</h5>
              <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -89,7 +89,7 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter structure activites</h3>
+                <h3>Ajouter structure programmatiques</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -125,7 +125,7 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier structure activites</h3>
+                <h3>Modifier structure programmatiques</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -147,7 +147,7 @@
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button  
+             <button 
              @click.prevent="modifierBudgetaireLocal(editBudgetaire)" class="btn btn-primary"
               href="#">Modifier</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
@@ -166,7 +166,8 @@
         bg-color="green"
 
   ></fab>
-<notifications  />
+
+<notifications />
 
   </div>
   
@@ -249,8 +250,6 @@ return this.structures_activites.filter((item) => {
     },
    // fonction pour vider l'input
     ajouterBudgetaireLocal () {
-
-  
       this.ajouterStructureActivite(this.formData)
 
         this.formData = {
@@ -275,11 +274,12 @@ afficherModalModifierBudgetaire(index){
 // 
 modifierBudgetaireLocal(){
   this.modifierStructureActivite(this.editBudgetaire)
-  this.editBudgetaire = {
-    niveau:"",
-    libelle:"",
+  this.$('#modifierModal').modal('hide');
+  // this.editBudgetaire = {
+  //   niveau:"",
+  //   libelle:"",
    
-  }
+  // }
 }
 
   }

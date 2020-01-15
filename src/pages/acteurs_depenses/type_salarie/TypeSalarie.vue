@@ -7,7 +7,7 @@
         <!-- End Page Header -->
         <!-- Default Light Table -->
         <div class="container-fluid">
-            <hr>
+            <hr> 
             <div class="row-fluid">
                 <div class="span12">
                     <div class="widget-box">
@@ -220,6 +220,7 @@
             },
             modifier(){
                 this.modifieTypeSalaire(this.editTitre)
+                this.$('#modifierModal').modal('hide');
                // this.getTypeSalarie()
             }
 

@@ -2716,7 +2716,7 @@ export function supprimerMandater({commit}, id) {
 
 export  function  getDemandeAno({commit}) {
     queue.push(() => axios.get('/demande_ano').then((response) => {
-        console.log(response.data.data)
+        // console.log(response.data.data)
         commit('GET_DEMANDE_ANO', response.data.data)
 
     }).catch(error => console.log(error)))

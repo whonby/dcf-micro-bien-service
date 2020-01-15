@@ -465,6 +465,7 @@ export default {
 
              cout_billet_avion:"",
                objet:"",
+               ua_id:"",
              date_mission: "",
              categorie_missions_id:"",
              numero_autorisation:"",
