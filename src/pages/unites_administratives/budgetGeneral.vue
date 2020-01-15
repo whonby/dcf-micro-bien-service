@@ -161,7 +161,20 @@
                   </div>
                 </div>
               </td> -->
-               
+                <td>
+                <div class="control-group">
+                  <label class="control-label">Code Budget general</label>
+                  <div class="controls">
+                    <input
+                      type="text"
+                     :value="codeBudgetGeneral"
+                      class="span3"
+                      placeholder="Saisir le code"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </td>
               <td>
                 <div class="control-group">
                   <label class="control-label">Dotation Initiale</label>
@@ -339,7 +352,20 @@
             </tr>
             <tr>
                
-               
+                <td>
+                <div class="control-group">
+                  <label class="control-label">Code Budget general</label>
+                  <div class="controls">
+                    <input
+                      type="text"
+                     :value="codeBudgetGeneralModifier"
+                      class="span3"
+                      placeholder="Saisir le code"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </td>
               <td>
                 <div class="control-group">
                   <label class="control-label">Dotation Initiale</label>
@@ -430,8 +456,8 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                       <th>Exercice Budgetaire</th>
-                    <!-- <th title="type unite administrative">Type ua</th> -->
+                       <th>Exercice</th>
+                    <th title="">Code Budget</th>
                      <th title="unite administrative">ua</th>
                     <th>Section</th>
                     <th title="grande nature depense">Gde nature</th>
@@ -454,6 +480,7 @@
                    
                   
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{Bgeneral.exercicebudget_id || 'Non renseigné'}}</td>
+                      <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{Bgeneral.codebudget || 'Non renseigné'}}</td>
                       <!-- <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{Bgeneral.affichetypeua.libelle || 'Non renseigné'}}</td> -->
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{Bgeneral.afficheUA.libelle || 'Non renseigné'}}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{Bgeneral.afficheSection.code_section || 'Non renseigné'}}-{{Bgeneral.afficheSection.nom_section || 'Non renseigné'}}</td>
@@ -490,7 +517,7 @@
                     <td ></td>
                     <td></td>
                     <td ></td>
-                   
+                   <td ></td>
                      <td style="font-weight:bold;">Montant Total</td>
                     <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(montantBudgetGeneral))}}</td>
                     
@@ -614,6 +641,33 @@ export default {
     //     );
     //   });
     // },
+    codeBudgetGeneralModifier(){
+      // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
+    const sectionBudget = this.sections.find(serviceg => serviceg.id == this.editBudgetGeneral.section_id)
+   const programmeBudget = this.plans_programmes.find(serviceg => serviceg.id == this.editBudgetGeneral.program_id)
+     const uaBudget = this.uniteAdministratives.find(serviceg => serviceg.id == this.editBudgetGeneral.ua_id)
+    const fonctionnelBudget = this.plans_fonctionnels.find(serviceg => serviceg.id == this.editBudgetGeneral.fonctionnel_id)
+ const economiqueBudget = this.plans_budgetaires.find(chap => chap.id == this.editBudgetGeneral.economique_id)
+     if(sectionBudget && programmeBudget && uaBudget && fonctionnelBudget && economiqueBudget){
+       return sectionBudget.code_section + programmeBudget.code + uaBudget.code_ua + fonctionnelBudget.code  + economiqueBudget.code
+     }
+
+     return null
+   },
+    codeBudgetGeneral(){
+      // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
+    const sectionBudget = this.sections.find(serviceg => serviceg.id == this.formData.section_id)
+   const programmeBudget = this.plans_programmes.find(serviceg => serviceg.id == this.formData.program_id)
+     const uaBudget = this.uniteAdministratives.find(serviceg => serviceg.id == this.formData.ua_id)
+    const fonctionnelBudget = this.plans_fonctionnels.find(serviceg => serviceg.id == this.formData.fonctionnel_id)
+ const economiqueBudget = this.plans_budgetaires.find(chap => chap.id == this.formData.economique_id)
+     if(sectionBudget && programmeBudget && uaBudget && fonctionnelBudget && economiqueBudget){
+       return sectionBudget.code_section + programmeBudget.code + uaBudget.code_ua + fonctionnelBudget.code  + economiqueBudget.code
+     }
+
+     return null
+   },
+
     sectionDynamiques() {
       return id => {
         if (id != null && id != "") {
@@ -664,7 +718,8 @@ anneeAmort() {
     ajouterUniteAdministrativeLocal() {
      var nouvelObjet = {
       ...this.formData,
-       exercicebudget_id: this.anneeAmort
+       exercicebudget_id: this.anneeAmort,
+       codebudget : this.codeBudgetGeneral
       
        };
       this.ajouterBudgetGeneral(nouvelObjet);
@@ -679,14 +734,16 @@ anneeAmort() {
       fonctionnel_id: "",
       economique_id: "",
       Dotation_Initiale: "",
-      version: ""
+      version: "",
+      codebudget : ""
       };
     },
     // fonction pour vider l'input modifier
     modifierUniteAdministrativeLocal() {
        var nouvelObjet = {
       ...this.editBudgetGeneral,
-       exercicebudget_id: this.anneeAmort
+       exercicebudget_id: this.anneeAmort,
+       codebudget : this.codeBudgetGeneralModifier
       
        };
       this.modifierBudgetGeneral(nouvelObjet);
@@ -723,8 +780,8 @@ this.$("#modificationModal").modal('hide');
 <style >
 
 .tailgrand12{
-  width: 70%;
-  margin: 0 -30%;
+  width: 75%;
+  margin: 0 -35%;
 }
 
 </style>

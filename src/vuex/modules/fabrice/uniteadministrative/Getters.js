@@ -6,12 +6,16 @@ const uniteAdministratives = state =>
 const archivageDocuments = state =>
   state.archivageDocuments.sort((a, b) => (a.reference > b.reference ? 1 : -1));
 
+
+
 export const nombreUniteAdministratives = state =>
   state.uniteAdministratives.length;
 export const nombreArchivageDocument = state => state.archivageDocuments.length;
 export const nombreTypeText = state => state.typeTextes.length;
 const budgetGeneral = state =>
   state.budgetGeneral.sort((a, b) => (a.code > b.code ? 1 : -1));
+
+  
 // const listeDocUniteAdministratives = state =>
 //   state.listeDocUniteAdministratives;
 // const nbreUniteAdministratives = state => state.nbreUniteAdministratives;

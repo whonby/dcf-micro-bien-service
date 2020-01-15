@@ -135,6 +135,21 @@
                </div>
                 </div>
               </td>
+               <td>
+                <div class="control-group">
+                  <!-- <label class="control-label">Code</label> -->
+                
+                  <div class="controls">
+                    <input
+                      type="hidden"
+                     :value="codeuniteadministrative2"
+                      class="span"
+                      placeholder="Saisir le code"
+                      readonly
+                    />
+                  </div>
+                  </div>
+              </td>
             </tr>
           
         </table>
@@ -275,7 +290,20 @@
                 </div>
               </td>
              
-               
+                <td>
+                <div class="control-group">
+                  <!-- <label class="control-label">Code</label> -->
+                  <div class="controls">
+                    <input
+                      type="hidden"
+                     :value="codeuniteadministrativeModifier2"
+                      class="span"
+                      placeholder="Saisir le code"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </td>
             </tr>
          
         </table>
@@ -512,9 +540,29 @@ export default {
 //    },
 
 
+codeuniteadministrative2(){
+      //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
+    
+    const servgest = this.services_gestionnaires.find(serviceg => serviceg.id == this.formData.servicegest_id)
+ const localisageo = this.localisations_geographiques.find(chap => chap.id == this.formData.localisationgeo_id)
+     if(servgest && localisageo){
+       return servgest.code + localisageo.code
+     }
 
+     return null
+   },
 
+ codeuniteadministrativeModifier2(){
+      // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
+    
+    const servgest = this.services_gestionnaires.find(serviceg => serviceg.id == this.editUniteAdministrative.servicegest_id)
+ const localisageo = this.localisations_geographiques.find(chap => chap.id == this.editUniteAdministrative.localisationgeo_id)
+     if(servgest && localisageo){
+       return servgest.code + localisageo.code
+     }
 
+     return null
+   },
 
     codeuniteadministrative(){
       //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
@@ -559,7 +607,8 @@ export default {
     ajouterUniteAdministrativeLocal() {
       var nouvelObjet = {
         ...this.formData,
-        code: this.codeuniteadministrative
+        code: this.codeuniteadministrative,
+         code_ua: this.codeuniteadministrative2
        
       };
       this.ajouterUniteAdministrative(nouvelObjet);
@@ -570,15 +619,16 @@ export default {
         section_id: "",
         localisationgeo_id: "",
         type_ua_id: "",
-        date_creation: ""
+        date_creation: "",
+         code_ua: ""
       };
     },
     // fonction pour vider l'input modifier
     modifierUniteAdministrativeLocal() {
          var nouvelObjet = {
         ...this.editUniteAdministrative,
-        code: this.codeuniteadministrativeModifier
-       
+        code: this.codeuniteadministrativeModifier,
+        code_ua: this.codeuniteadministrativeModifier2
       };
       this.modifierUniteAdministrative(nouvelObjet);
 this.$("#modificationModal").modal('hide');

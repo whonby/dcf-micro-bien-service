@@ -84,6 +84,7 @@ export default {
       "getAllTypeTextes",
       "getAllUniteAdministrative",
       "getAllArchivageDocument",
+      
       "getAllBudgetGeneral"
     ]),
             ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons",
