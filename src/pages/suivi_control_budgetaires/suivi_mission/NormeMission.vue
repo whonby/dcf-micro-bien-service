@@ -50,9 +50,9 @@
                 normeMissionFiltre"
                  :key="norme_mission.id">
                   <td @dblclick="afficherModalModifierNormeMission(index)">
-                      {{norme_mission.objetSourceFinancement.libelle|| 'Non renseigné'}}</td>
+                      {{norme_mission.varObjetSourceFinancement.libelle|| 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierNormeMission(index)">
-                      {{norme_mission.objetFonction.libelle || 'Non renseigné'}}</td>
+                      {{norme_mission.varObjetFonction.libelle || 'Non renseigné'}}</td>
                    
                     <td @dblclick="afficherModalModifierNormeMission(index)">
                       {{formatageSomme(parseFloat(norme_mission.perdiem)) || 'Non renseigné'}}</td>
@@ -325,7 +325,7 @@ export default {
   },
   computed: {
 //  parcourir le getters personnaliser
-   ...mapGetters('suivi_controle_budgetaire', ['getNormeMissionPersonnaliser']) ,
+   ...mapGetters('suivi_controle_budgetaire', ['getNormeMissionPersonnaliser', 'normes_missions']) ,
 
 
 
@@ -346,9 +346,6 @@ return this.getNormeMissionPersonnaliser.filter((item) => {
     //  ||
     //         item.libelle.toLowerCase().includes(searchTerm)
     
-
-   
-  
 
    }
 )

@@ -126,11 +126,11 @@
           element = { 
               ...element,
               
-             objetFonction:rootGetters['personnelUA/fonctions'].find(
+             varObjetFonction:rootGetters['personnelUA/fonctions'].find(
                 depens => depens.id == element.fonction_id
              ),
             
-              objetSourceFinancement:rootGetters['parametreGenerauxSourceDeFinancement/sources_financements'].find(
+              varObjetSourceFinancement:rootGetters['parametreGenerauxSourceDeFinancement/sources_financements'].find(
                norme => norme.id == element.source_financement_id
               )
           }

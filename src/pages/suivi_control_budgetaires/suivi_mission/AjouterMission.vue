@@ -562,7 +562,7 @@ return this.exercices_budgetaires.filter(element => element.encours == 1)
      return source_financement_id => {
        if( source_financement_id != undefined ) {
 
-    var norme = this.getNormeMissionPersonnaliser.find(norme => norme.objetSourceFinancement.id == source_financement_id )
+    var norme = this.getNormeMissionPersonnaliser.find(norme => norme.varObjetSourceFinancement.id == source_financement_id )
   //console.log(norme)
   return (norme) ? norme.perdiem : null
         
