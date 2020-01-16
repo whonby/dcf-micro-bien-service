@@ -295,7 +295,7 @@
                   <!-- <label class="control-label">Code</label> -->
                   <div class="controls">
                     <input
-                      type="hidden"
+                      type="text"
                      :value="codeuniteadministrativeModifier2"
                       class="span"
                       placeholder="Saisir le code"
