@@ -137,7 +137,7 @@
                  <div class="control-group">
                   <label class="control-label">Action</label>
                   <div class="controls">
-                    <select v-model="formData.fonct_id">
+                    <select v-model="formData.action_id">
                       <option
                         v-for="planfonct in afficheNiveauAction"
                         :key="planfonct.id"
@@ -146,21 +146,8 @@
                     </select>
                   </div>
                 </div>
-              </td>
-             <td>
-                 <div class="control-group">
-                  <label class="control-label">Activite</label>
-                  <div class="controls">
-                    <select v-model="formData.economique_id">
-                      <option
-                        v-for="Bgeneral in ActiviteDynamiques(formData.fonct_id)"
-                        :key="Bgeneral.id"
-                        :value="Bgeneral.structure_activites_id"
-                      >{{Bgeneral.children.code}}-{{Bgeneral.children.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
               </td> -->
+            
                 <td>
                 <div class="control-group">
                   <label class="control-label">Code Budget general</label>
@@ -203,8 +190,24 @@
                             </div>
                           </div>
                         </td>
+
             </tr>
-          
+          <!-- <tr>
+             <td>
+                 <div class="control-group">
+                  <label class="control-label">Activite</label>
+                  <div class="controls">
+                    <select v-model="formData.activite_id">
+                      <option
+                        v-for="Bgeneral in afficheNiveauActivite"
+                        :key="Bgeneral.id"
+                        :value="Bgeneral.id"
+                      >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+          </tr> -->
         </table>
       </div>
       <div class="modal-footer">
@@ -351,7 +354,20 @@
               
             </tr>
             <tr>
-               
+                <!-- <td>
+                 <div class="control-group">
+                  <label class="control-label">Action</label>
+                  <div class="controls">
+                    <select v-model="editBudgetGeneral.action_id">
+                      <option
+                        v-for="planfonct in afficheNiveauAction"
+                        :key="planfonct.id"
+                        :value="planfonct.id"
+                      >{{planfonct.code}}-{{planfonct.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td> -->
                 <td>
                 <div class="control-group">
                   <label class="control-label">Code Budget general</label>
@@ -395,6 +411,22 @@
                           </div>
                         </td>
             </tr>
+             <!-- <tr>
+             <td>
+                 <div class="control-group">
+                  <label class="control-label">Activite</label>
+                  <div class="controls">
+                    <select v-model="editBudgetGeneral.activite_id">
+                      <option
+                        v-for="Bgeneral in afficheNiveauActivite"
+                        :key="Bgeneral.id"
+                        :value="Bgeneral.id"
+                      >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+          </tr> -->
         </table>
       </div>
       <div class="modal-footer">
@@ -461,7 +493,9 @@
                      <th title="unite administrative">ua</th>
                     <th>Section</th>
                     <th title="grande nature depense">Gde nature</th>
-                    <th>Programme</th>
+                      <th>Programme</th>
+                    <!--<th>Action</th> -->
+                    <!-- <th>Activite</th> -->
                      <th title="classification fonctionnel">Clsse Fontionnel</th>
                      <th title="classification Economique">Clsse Economique</th>
                     <th>Dotation Initial</th>
@@ -486,7 +520,9 @@
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{Bgeneral.afficheSection.code_section || 'Non renseigné'}}-{{Bgeneral.afficheSection.nom_section || 'Non renseigné'}}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{Bgeneral.afficheGdeNature.code || 'Non renseigné'}}-{{Bgeneral.afficheGdeNature.libelle || 'Non renseigné'}}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{Bgeneral.afficheProgramme.code || 'Non renseigné'}}-{{Bgeneral.afficheProgramme.libelle || 'Non renseigné'}}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{Bgeneral.afficheFonctionnel.code || 'Non renseigné'}}-{{Bgeneral.afficheFonctionnel.libelle || 'Non renseigné'}}</td>
+                    <!-- <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{Bgeneral.afficheAction.code || 'Non renseigné'}}-{{Bgeneral.afficheAction.libelle || 'Non renseigné'}}</td>
+                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{Bgeneral.afficheActivite.code || 'Non renseigné'}}-{{Bgeneral.afficheActivite.libelle || 'Non renseigné'}}</td> -->
+                      <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{Bgeneral.afficheFonctionnel.code || 'Non renseigné'}}-{{Bgeneral.afficheFonctionnel.libelle || 'Non renseigné'}}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{ Bgeneral.afficheEconomique.code || 'Non renseigné'}}-{{ Bgeneral.afficheEconomique.libelle || 'Non renseigné'}}</td>
                   <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{formatageSomme(parseFloat(Bgeneral.Dotation_Initiale)) || 0}}</td>
                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">
@@ -628,8 +664,8 @@ export default {
       "afficheNiveauPlanFonctionnel"
      
     ]),
-  //   ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
-  // 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
+    ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
+  'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
     // filtre_unite_admin() {
@@ -677,9 +713,10 @@ export default {
     },
     // ActiviteDynamiques() {
     //   return id => {
-    //     if (id != null && id != "") {
-    //       return this.afficheNiveauAction.filter(element => element.children.parent == id);
-    //     }
+    //     if (formData.action_id != null && formData.action_id != "") {
+    //       return this.plans_activites.filter(element => element.children.parent == this.formData.action_id);
+       
+    //    }
     //   };
     // },
     uniteAdministrativeDynamiques() {
