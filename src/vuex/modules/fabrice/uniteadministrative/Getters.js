@@ -37,9 +37,11 @@ export const getPersonnaliseBudgetGeneral = (
       element.ua_id !== null &&
       element.typeua_id !== null &&
       element.fonctionnel_id !== null &&
-      element.economique_id !== null 
-      // element.action_id !== null &&
-      // element.activite_id !== null
+      element.economique_id !== null &&
+
+      element.economique_id !== null
+
+    
     ) {
       element = {
         ...element,

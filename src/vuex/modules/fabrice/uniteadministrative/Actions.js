@@ -32,8 +32,7 @@ export function ajouterBudgetGeneral({ commit }, nouveau) {
       version: nouveau.version,
       
       codebudget: nouveau.codebudget,
-      // action_id: nouveau.action_id,
-      // activite_id: nouveau.activite_id
+  
     }))
 
     .then(response => {
