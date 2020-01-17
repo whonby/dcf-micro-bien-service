@@ -52,7 +52,7 @@
             <span>BIEN ET SERVICES</span>
           </a>
 
-       <li @click.prevent="activate(5)" :class="{active: active_el ==5}">
+       <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">
           <a title="COMPTABILITE DES MATIERE" href="#">
             <i class="icon icon-pencil"></i>
             <span>COMPTA DES MATIERES</span>
@@ -140,6 +140,13 @@ export default {
         this.activate(11)
         this.$router.push({
           name: 'ExerciceBudgetaire'
+        })
+      },
+      
+       navigateToComptaMatiere(){
+        this.activate(5)
+        this.$router.push({
+          name: 'TableauBordImmo2'
         })
       }
 

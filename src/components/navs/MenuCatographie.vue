@@ -127,6 +127,12 @@
               <span class="text">Listes Besoins Realisés</span>
             </router-link>
           </li>
+           <li>
+            <router-link :to="{name:'historiqueDemande'}" tag="a" title>
+              <i class="icon-group"></i>
+              <span class="text">Historique Besoins</span>
+            </router-link>
+          </li>
         </ul>
       </li>
     </ul>

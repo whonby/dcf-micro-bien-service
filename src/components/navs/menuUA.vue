@@ -58,7 +58,33 @@
       </li>
 
 
+<li class="dropdown" id="rechbudget">
+        <a
+          title="OUT PUT"
+          href="#"
+          data-toggle="dropdown"
+          data-target="#rechbudget"
+          class="dropdown-toggle"
+        >
+          <span class="text">OUT PUT</span>
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <router-link :to="{name: 'budgetGeneralParUa'}" tag="a">
+              <i class="icon-user"></i>
+              Budget par unite administrative
+            </router-link>
+          </li>
 
+          <li class="divider"></li>
+          <!-- <li>
+            <router-link :to="{name: ''}" tag="a">
+              <i class="icon-key"></i>Budget global
+            </router-link>
+          </li> -->
+        </ul>
+      </li>
 
 
 

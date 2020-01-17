@@ -5,10 +5,16 @@ import archivagedocument from "../../pages/unites_administratives/archivage_docu
 import listeuniteadministrative from "../../pages/unites_administratives/liste_unite_administrative.vue";
 import listetypetexte from "../../pages/unites_administratives/liste_type_texte.vue";
 import ordonnedocua from "../../pages/unites_administratives/ordonne_doc_ua.vue";
-import budgetGenerals from "../../pages/unites_administratives/budgetGeneral.vue"
+import budgetGenerals from "../../pages/unites_administratives/budgetGeneralComponent.vue";
+import budgetGeneralParUa from "../../pages/unites_administratives/budgetGeneral.vue"
 
 
 const UniteAdministativeRoutes = [
+  {
+    path: "/budget-General-Par-Ua",
+    name: "budgetGeneralParUa",
+    component: budgetGeneralParUa
+  },
   {
     path: "/budget-General",
     name: "budgetGenerals",

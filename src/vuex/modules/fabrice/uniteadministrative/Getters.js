@@ -38,10 +38,8 @@ export const getPersonnaliseBudgetGeneral = (
       element.typeua_id !== null &&
       element.fonctionnel_id !== null &&
       element.economique_id !== null &&
-
-      element.economique_id !== null
-
-    
+      element.action_id !== null &&
+      element.activite_id !== null
     ) {
       element = {
         ...element,
@@ -66,13 +64,12 @@ export const getPersonnaliseBudgetGeneral = (
         afficheEconomique: rootGetters[
           "parametreGenerauxBudgetaire/plans_budgetaires"
         ].find(planEconomiq => planEconomiq.id == element.economique_id),
-
-        // afficheAction: rootGetters[
-        //   "parametreGenerauxActivite/plans_activites"
-        // ].find(planaction => planaction.id == element.action_id),
-        // afficheActivite: rootGetters[
-        //   "parametreGenerauxActivite/plans_activites"
-        // ].find(planactivite => planactivite.id == element.activite_id)
+        afficheAction: rootGetters[
+          "parametreGenerauxActivite/plans_activites"
+        ].find(planaction => planaction.id == element.action_id),
+        afficheActivite: rootGetters[
+          "parametreGenerauxActivite/plans_activites"
+        ].find(planactivite => planactivite.id == element.activite_id)
       };
     }
     return element;

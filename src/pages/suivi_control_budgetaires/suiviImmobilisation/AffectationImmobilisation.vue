@@ -305,6 +305,20 @@
                                :value="alertAnneeAmortissement"
                                readonly
                               />
+                              <input
+                                type="hidden"
+                                class="span"
+                                placeholder="Saisir Num identification"
+                               :value="alertArticle"
+                               readonly
+                              />
+                              <input
+                                type="hidden"
+                                class="span"
+                                placeholder="Saisir Num identification"
+                               :value="alertMessage"
+                               readonly
+                              />
                         </td>
                       
                             
@@ -1120,7 +1134,7 @@ AffichierIdNorme() {
       return 0
     },
     AffichierQuantiteRealise() {
-      const qtereali = this.listeBesoinValider.find(Qreal => Qreal.id == this.formData.articleImmo_id);
+      const qtereali = this.listeBesoinValider.find(Qreal => Qreal.afficheArticle.id == this.formData.articleImmo_id);
 
       if (qtereali) {
         return qtereali.qterealise;
@@ -1322,7 +1336,7 @@ totalqteRealise() {
     // fonction pour vider l'input ajouter
 
     ajouterImmobilisationLocal() {
-      if (this.AlertAnneeAmortissement > 0 && this.AlertMessage > this.anneeAmort && this.alertArticle == this.formData.articleImmo_id )
+      if (this.AlertAnneeAmortissement > 0 && this.AlertMessage > this.anneeAmort && this.alertArticle > this.formData.articleImmo_id )
       {
         alert("Personnel deja equipé")
       }

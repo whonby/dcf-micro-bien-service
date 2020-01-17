@@ -1,5 +1,5 @@
 import { groupBy } from "../../../../Repositories/Repository";
-
+besoinRealiseEquipement
 
 const familles = state =>
   state.familles.sort((a, b) => (a.code > b.code ? 1 : -1));
@@ -117,7 +117,7 @@ export const personBesoinImmo = (state, getters, rootState, rootGetters) =>
 
     return element;
   });
-besoinEquipement
+
 export const trieUaBesoinImmo = state =>
   state.besoinImmobilisations.filter(
     trieUaBesoin => trieUaBesoin.quantite !== 0
@@ -141,8 +141,7 @@ export const nombreDemandeEquipement = (state, getters) =>
 //     AfficherAnneeEnCours => AfficherAnneeEnCours.exoBudgetaire.encours == 1
 //   );
 
-besoinEquipement
-groupUaNorme
+
 
 export const listeBesoinValider = (state, getters, rootState, rootGetters) =>
          getters.getBesoinValider.map(element => {
@@ -356,13 +355,37 @@ export const nombreTotalEquipement = (state, getters) =>
     (prec, cur) => parseInt(prec) + parseInt(cur.historiqueqte),
     0
   );
-
+listeBesoinValider
 export const SommeQuantiteRealise = (state, getters) =>
   getters.besoinImmobilisations.reduce(
     (prec, cur) => parseInt(prec) + parseInt(cur.totalrealise),
     0
   );
 
+  export const nbreQuantiteDemande = (state, getters) =>
+           getters.besoinImmobilisations.reduce(
+             (prec, cur) => parseInt(prec) + parseInt(cur.historiqueqte),
+             0
+  );
+           
+
+   export const nbreQuantiteNonCouvert = (state, getters) =>
+            getters.besoinImmobilisations.reduce(
+              (prec, cur) => parseInt(prec) + parseInt(cur.quantite),
+              0
+  );
+            
+
+   export const nbreQuantiteCouvert = (state, getters) =>
+            getters.besoinImmobilisations.reduce(
+              (prec, cur) => parseInt(prec) + parseInt(cur.qterealise),
+              0
+            );
+         
+
+
+
+  
 export const SommeQuantiteNonCouvert = (state, getters) =>
   getters.trieUaBesoinImmo.reduce(
     (prec, cur) => parseInt(prec) + parseInt(cur.montant_total),
@@ -958,6 +981,58 @@ export const getPersoListeDesNorme = (state, getters, rootState, rootGetters) =>
 
     return element;
   });
+SommeQuantiteRealise
+
+
+
+
+export const historiqueDemande = (state, getters, rootState, rootGetters) =>
+  getters.besoinImmobilisations.map(element => {
+    if (
+      element.equipe_id !== null &&
+      element.uniteadmin_id !== null &&
+      element.fonction_id !== null &&
+      element.article_id !== null
+    ) {
+      element = {
+        ...element,
+
+
+        AfficheEquipement: rootGetters["SuiviImmobilisation/equipements"].find(Equipe => Equipe.id == element.equipe_id
+        ),
+        Afficheua: rootGetters["uniteadministrative/uniteAdministratives"].find(Equipe => Equipe.id == element.uniteadmin_id
+        ),
+        Affichefamille: rootGetters["SuiviImmobilisation/familles"].find(Equipe => Equipe.id == element.famille_id
+        ),
+
+        Affichefonction: rootGetters["personnelUA/fonctions"].find(Equipe => Equipe.id == element.fonction_id
+        ),
+        AfficheArticle: rootGetters["SuiviImmobilisation/articles"].find(Equipe => Equipe.id == element.article_id
+        ),
+      };
+    }
+
+    return element;
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
