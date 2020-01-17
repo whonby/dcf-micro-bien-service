@@ -214,14 +214,14 @@
           </li>
 
 
-         <li class="divider"></li>
+         <!-- <li class="divider"></li>
           <li>
             <router-link :to="{name: ''}" tag="a">
               <i class="icon-list-ul"></i> Lot
             </router-link>
           </li>
 
-           <li class="divider"></li>
+           <li class="divider"></li> -->
           <!-- <li>
             <li class="divider"></li>
           <li>

@@ -9,7 +9,7 @@ import compte from '../../pages/bien_service/compte.vue';
 import condition from '../../pages/bien_service/condition.vue';
 import facture from '../../pages/bien_service/facture.vue';
 import fonctionOccupee from '../../pages/bien_service/fonctionOccupee.vue';
-import lot from '../../pages/bien_service/lot.vue';
+// import lot from '../../pages/bien_service/lot.vue';
 import natureFonction from '../../pages/bien_service/natureFonction.vue';
 import prestation from '../../pages/bien_service/prestation.vue';
 import signature from '../../pages/bien_service/signature.vue';
@@ -198,11 +198,11 @@ component:analyseDossier
            component:fonctionOccupee
        },
        // la route pour le lot
-       {
-           path:"/creation-lot",
-           name:"lot",
-           component:lot
-       },
+    //    {
+    //        path:"/creation-lot",
+    //        name:"lot",
+    //        component:lot
+    //    },
        // la route pour la nature fonction
        {
            path:"/creation-nature-fonction",

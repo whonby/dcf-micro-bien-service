@@ -141,7 +141,16 @@ export function ajouterNormeMission({commit},formData){
 
 // modifier mission
 export function modifierNormeMission({commit}, element_modifie){
-  asyncLoading(  axios.put('/update_norme_mission/'+ element_modifie.id, element_modifie))
+  asyncLoading(  axios.put('/update_norme_mission/'+ element_modifie.id,{
+    fonction_id:element_modifie.fonction_id,
+    source_financement_id:element_modifie.source_financement_id,
+    perdiem:element_modifie.perdiem,
+    fichier_joint:element_modifie.fichier_joint,
+    url_fichier_joint:element_modifie.url_fichier_joint,
+    zone:element_modifie.zone
+    
+
+  }))
     .then(response => {
          commit('MODIFIER_NORME_MISSION',response.data)
 

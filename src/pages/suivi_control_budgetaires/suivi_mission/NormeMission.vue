@@ -34,7 +34,7 @@
              
           </div>
          
-           <div class="widget-content nopadding">
+           <div class="widget-content nopadding" v-if="sources_financements.length && fonctions.length">
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -47,12 +47,12 @@
               </thead>
               <tbody>
                 <tr class="odd gradeX" v-for="(norme_mission, index) in 
-                getNormeMissionPersonnaliser"
+                normeMissionFiltre"
                  :key="norme_mission.id">
                   <td @dblclick="afficherModalModifierNormeMission(index)">
-                      {{norme_mission.objetSourceFinancement.libelle|| 'Non renseigné'}}</td>
+                      {{norme_mission.varObjetSourceFinancement.libelle|| 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierNormeMission(index)">
-                      {{norme_mission.objetFonction.libelle || 'Non renseigné'}}</td>
+                      {{norme_mission.varObjetFonction.libelle || 'Non renseigné'}}</td>
                    
                     <td @dblclick="afficherModalModifierNormeMission(index)">
                       {{formatageSomme(parseFloat(norme_mission.perdiem)) || 'Non renseigné'}}</td>
@@ -250,8 +250,7 @@
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="editNormeMission.source_financement_id  && editNormeMission.fonction_id && 
-             editNormeMission.perdiem.length && editNormeMission.zone "
+             <button 
              @click.prevent="modifierModalNormeMissionLocal(editNormeMission)" class="btn btn-primary"
               href="#">Modifier</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
@@ -326,7 +325,7 @@ export default {
   },
   computed: {
 //  parcourir le getters personnaliser
-   ...mapGetters('suivi_controle_budgetaire', ['getNormeMissionPersonnaliser']) ,
+   ...mapGetters('suivi_controle_budgetaire', ['getNormeMissionPersonnaliser', 'normes_missions']) ,
 
 
 
@@ -337,21 +336,20 @@ export default {
   
    
     // methode pour trier un item
-//            normeMissionFiltre(){
+           normeMissionFiltre(){
 
-//       const searchTerm = this.search.toLowerCase();
+      const searchTerm = this.search.toLowerCase();
 
-// return this.getNormeMissionPersonnaliser.filter((item) => {
+return this.getNormeMissionPersonnaliser.filter((item) => {
   
-//      return item.zone.toLowerCase().includes(searchTerm) 
+     return item.zone.toLowerCase().includes(searchTerm) 
+    //  ||
+    //         item.libelle.toLowerCase().includes(searchTerm)
     
 
-   
-  
-
-//    }
-// )
-//    }
+   }
+)
+   }
   },
 
   methods: {

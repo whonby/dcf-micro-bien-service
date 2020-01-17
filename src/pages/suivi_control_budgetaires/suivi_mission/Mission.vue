@@ -1152,7 +1152,7 @@ coutMoyenParUA(){
      var MontantDeMissionParUA = this.coutTotalParUA(ua_id);
     var NombreDeMissionParUA  = this.NombreDeMissionParUA(ua_id);
       var cout = MontantDeMissionParUA / NombreDeMissionParUA 
-      if(isNaN(cout)) return null
+      if(isNaN(cout)) return 0
       return cout
     }
 
@@ -1181,7 +1181,7 @@ coutMoyenDeBilletAvionParUA(){
       var NombreDeMissionParUA = this.NombreDeMissionParUA(ua_id)
       var dure = this.DureeDeTouteMissionsParUA(ua_id)
        var answer =  (sommeTotalBillet / NombreDeMissionParUA) * dure
-      if(isNaN(answer)) return null
+      if(isNaN(answer)) return 0
        return answer
 
     }
@@ -1272,7 +1272,6 @@ montantTotalParActeurDepense(){
 
       return coutTotal
     }
-    
   }
 },
 
@@ -1284,7 +1283,7 @@ montantTotalParActeurDepense(){
        var montantTotalParActeurDepense = this.montantTotalParActeurDepense(acte_personnel_id)
        var NombreDemissionsParActeurDepense = this.NombreDemissionsParActeurDepense(acte_personnel_id)
        var resultat = montantTotalParActeurDepense / NombreDemissionsParActeurDepense
-       if(isNaN(resultat)) return null
+       if(isNaN(resultat)) return 0
 
          return resultat
      }
@@ -1314,7 +1313,7 @@ coutTotal(){
       var NombreDemissionsParActeurDepense = 
       this.NombreDemissionsParActeurDepense(acte_personnel_id)
        var resultat =  (coutTotal / NombreDemissionsParActeurDepense) * dure
-    if(isNaN(resultat)) return null
+    if(isNaN(resultat)) return 0
     return resultat
       
      }
