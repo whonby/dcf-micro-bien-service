@@ -170,6 +170,8 @@
                                     </div>
                                 </div>
                             </div>
+
+
                             <div id="tab3" class="tab-pane">
                                    
                             <ul class="nav nav-tabs">
@@ -1023,7 +1025,7 @@
 
 
 
-  <div id="tab36" class="tab-pane">
+                <div id="tab36" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
 
@@ -1035,6 +1037,8 @@
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
+                        <th>Document procedure</th>
+                        <th>ANO DMP bailleur</th>
                         <th>Date</th>
                         <th>Avis</th>
                         <th>Observation </th>
@@ -1045,6 +1049,14 @@
                     <tbody>
                     <tr class="odd gradeX" v-for="observationBailleur in obseravtionBailleurs"
                         :key="observationBailleur.id">
+
+
+                         <td @click="afficherModalObservationBailleur(observationBailleur.id)">
+                            {{observationBailleur.document_procedure_id || 'Non renseigné'}}</td>
+
+                             <td @click="afficherModalObservationBailleur(observationBailleur.id)">
+                            {{observationBailleur.ano_dmp_bailleur_id || 'Non renseigné'}}</td>
+
                         <td @click="afficherModalObservationBailleur(observationBailleur.id)">
                             {{observationBailleur.date_avis_bail || 'Non renseigné'}}</td>
                         <td @click="afficherModalObservationBailleur(observationBailleur.id)">
