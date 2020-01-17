@@ -56,6 +56,38 @@
           </li> -->
         </ul>
       </li>
+<li class="dropdown" id="Affichebudget">
+        <a
+          title="OUT PUT"
+          href="#"
+          data-toggle="dropdown"
+          data-target="#Affichebudget"
+          class="dropdown-toggle"
+        >
+          <span class="text">AFFICHAGE BUDGET</span>
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <!-- <li>
+            <router-link :to="{name: ''}" tag="a">
+              <i class="icon-user"></i>
+              Budget par UA
+            </router-link>
+          </li> -->
+<li>
+            <router-link :to="{name: 'grpeBudgetSection'}" tag="a">
+              <i class="icon-user"></i>
+              Budget General par section
+            </router-link>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'grpeBudgetProgramme'}" tag="a">
+              <i class="icon-key"></i>Budget General par Programme
+            </router-link>
+          </li>
+        </ul>
+      </li>
 
 
 <li class="dropdown" id="rechbudget">
@@ -76,7 +108,12 @@
               Budget par unite administrative
             </router-link>
           </li>
-
+<!-- <li>
+            <router-link :to="{name: 'grpeBudgetProg'}" tag="a">
+              <i class="icon-user"></i>
+              Budget par Programme
+            </router-link>
+          </li> -->
           <li class="divider"></li>
           <!-- <li>
             <router-link :to="{name: ''}" tag="a">

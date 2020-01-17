@@ -468,7 +468,7 @@
             <div class="widget-title">
               <div align="right">
                 Recherche:
-                <input type="search" placeholder="Saisie Unite administrative" v-model="search" class="span5"/>
+                <input type="search" placeholder="" v-model="search" class="span5"/>
 
                 <!-- <div class="span3">
                   <model-list-select
@@ -505,8 +505,8 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                       <th>Exercice</th>
-                    <th title="">Code Budget</th>
+                       <!-- <th>Exercice</th>
+                    <th title="">Code Budget</th> -->
                      <th title="unite administrative">ua</th>
                     <th>Section</th>
                     <th title="grande nature depense">Gde nature</th>
@@ -535,8 +535,8 @@
                   >
                    
                   
-                    <td>{{Bgeneral.exercicebudget_id || 'Non renseigné'}}</td>
-                      <td>{{Bgeneral.codebudget || 'Non renseigné'}}</td>
+                    <!-- <td>{{Bgeneral.exercicebudget_id || 'Non renseigné'}}</td>
+                      <td>{{Bgeneral.codebudget || 'Non renseigné'}}</td> -->
                       <!-- <td>{{Bgeneral.affichetypeua.libelle || 'Non renseigné'}}</td> -->
                     <td>{{Bgeneral.afficheUA.libelle || 'Non renseigné'}}</td>
                     <td>{{Bgeneral.afficheSection.code_section || 'Non renseigné'}}-{{Bgeneral.afficheSection.nom_section || 'Non renseigné'}}</td>
@@ -567,12 +567,12 @@
                   </tr>
                   <tr>
                      
-                       <td>
+                       <!-- <td>
                            
                       </td>
                        <td>
                           
-                      </td>
+                      </td> -->
                         <td>
                           
                       </td>
@@ -642,21 +642,60 @@ export default {
       json_fields: {
         // ANNEE: "exercicebudget_id",
         // CODE_BUDGET: "codebudget",
-        CODE_SECTION: "afficheSection.code_section",
-        SECTION: "afficheSection.nom_section",
+        // code_section:"afficheSection.code_section",
+        // section:"afficheSection.nom_section",
+          // 'section' : 
+        // ``
+        section: {
+          field: "afficheSection",
+          callback: (value) => {
+            return `${value.code_section} - ${value.nom_section}`
+          }
+        },
         
-        GRANDE_NATURE: "afficheGdeNature.libelle",
-        CODE_PROGRAMME: "afficheProgramme.code",
-        PROGRAMME: "afficheProgramme.libelle",
-        CODE_ACTION: "afficheAction.code",
-         ACTION: "afficheAction.libelle",
-        CODE_ACTIVITE: "afficheActivite.code",
-        ACTIVITE: "afficheActivite.libelle",
-        CODE_FONCTIONNEL: "afficheFonctionnel.code",
-        FONCTIONNEL: "afficheFonctionnel.libelle",
-        CODE_ECONOMIQUE: "afficheEconomique.code",
-        ECONOMIQUE: "afficheEconomique.libelle",
-        DOTATION_INITIAL: "Dotation_Initiale",
+        // section: `${afficheSection.code_section} - ${afficheSection.nom_section}`, 
+        grande_nature: "afficheGdeNature.libelle",
+        programme: {
+          field: "afficheProgramme",
+          callback: (value) => {
+            return `${value.code} - ${value.libelle}`
+          }
+        },
+        action: {
+          field: "afficheAction",
+          callback: (value) => {
+            return `${value.code} - ${value.libelle}`
+          }
+        },
+        activite: {
+          field: "afficheActivite",
+          callback: (value) => {
+            return `${value.code} - ${value.libelle}`
+          }
+        },
+         fonctionnel: {
+          field: "afficheFonctionnel",
+          callback: (value) => {
+            return `${value.code} - ${value.libelle}`
+          }
+        },
+         economique: {
+          field: "afficheEconomique",
+          callback: (value) => {
+            return `${value.code} - ${value.libelle}`
+          }
+        },
+          dotation_initial: "Dotation_Initiale",
+        // code_programme: "afficheProgramme.code",
+        // programme: "afficheProgramme.libelle",
+      
+        // code_activite: "afficheActivite.code",
+        // ACTIVITE: "afficheActivite.libelle",
+        // CODE_FONCTIONNEL: "afficheFonctionnel.code",
+        // FONCTIONNEL: "afficheFonctionnel.libelle",
+        // CODE_ECONOMIQUE: "afficheEconomique.code",
+        // ECONOMIQUE: "afficheEconomique.libelle",
+        // DOTATION_INITIAL: "Dotation_Initiale",
         // TOTAL_DOTATION: {
           
       
@@ -703,8 +742,7 @@ export default {
           items.afficheUA.libelle.toLowerCase().includes(st) ||
          items.afficheSection.code_section.toLowerCase().includes(st) ||
          items.afficheGdeNature.libelle.toLowerCase().includes(st) ||
-         items.afficheProgramme.code.toLowerCase().includes(st) ||
-         items.afficheUA.libelle.toLowerCase().includes(st) 
+         items.afficheProgramme.code.toLowerCase().includes(st) 
         );
       });
     },
@@ -715,8 +753,7 @@ export default {
           items.afficheUA.libelle.toLowerCase().includes(st) ||
          items.afficheSection.code_section.toLowerCase().includes(st) ||
          items.afficheGdeNature.libelle.toLowerCase().includes(st) ||
-         items.afficheProgramme.code.toLowerCase().includes(st) ||
-         items.afficheUA.libelle.toLowerCase().includes(st) 
+         items.afficheProgramme.code.toLowerCase().includes(st) 
          
         );
       }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2);
