@@ -17,7 +17,7 @@ export function getAllBudgetGeneral({ commit }) {
 }
 
 // ajouter type texte
-export function ajouterBudgetGeneral({ commit }, nouveau) {
+export function ajouterBudgetGeneral({ commit, dispatch }, nouveau) {
   asyncLoading(axios
     .post("/ajouter_Budget_General", {
       exercicebudget_id: nouveau.exercicebudget_id,
@@ -32,13 +32,15 @@ export function ajouterBudgetGeneral({ commit }, nouveau) {
       version: nouveau.version,
       
       codebudget: nouveau.codebudget,
-      // action_id: nouveau.action_id,
-      // activite_id: nouveau.activite_id
+      action_id: nouveau.action_id,
+      activite_id: nouveau.activite_id
     }))
 
     .then(response => {
       if (response.status == 201) {
         commit("AJOUTER_BUDGET_GENERAL", response.data);
+        dispatch('getAllBudgetGeneral')
+        dispatch('getAllUniteAdministrative')
         this.$app.$notify({
           title: 'Success',
           text: 'Enregistrement Effectué avec Succès!',
@@ -49,7 +51,7 @@ export function ajouterBudgetGeneral({ commit }, nouveau) {
 }
 
 // modifier
-export function modifierBudgetGeneral({ commit }, nouveau) {
+export function modifierBudgetGeneral({ commit, dispatch}, nouveau) {
   asyncLoading(axios
     .put("/modifier_Budget_General/" + nouveau.id, {
       exercicebudget_id: nouveau.exercicebudget_id,
@@ -63,11 +65,13 @@ export function modifierBudgetGeneral({ commit }, nouveau) {
       Dotation_Initiale: nouveau.Dotation_Initiale,
       version: nouveau.version,
       codebudget: nouveau.codebudget,
-      // action_id: nouveau.action_id,
-      // activite_id: nouveau.activite_id
+      action_id: nouveau.action_id,
+      activite_id: nouveau.activite_id
     }))
     .then(response => {
       commit("MODIFIER_BUDGET_GENERAL", response.data);
+      dispatch('getAllBudgetGeneral')
+      dispatch('getAllUniteAdministrative')
       this.$app.$notify({
         title: 'Success',
         text: 'Modification Effectué avec Succès!',
@@ -76,11 +80,13 @@ export function modifierBudgetGeneral({ commit }, nouveau) {
     });
 }
 //supprimer
-export function supprimerBudgetGeneral({ commit }, id) {
+export function supprimerBudgetGeneral({ commit, dispatch}, id) {
   this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
       commit("SUPPRIMER_BUDGET_GENERAL", id);
+      dispatch('getAllBudgetGeneral')
+      dispatch('getAllUniteAdministrative')
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete("/supprimer_Budget_General/" + id).then(() => dialog.close());
     });

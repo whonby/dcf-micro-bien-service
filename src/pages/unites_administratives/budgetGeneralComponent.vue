@@ -1,8 +1,13 @@
 
+
 <template>
   <div>
-    <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
-    <!-- <div id="exampleModal" class="modal hide tailgrand12">
+   
+<!----- ajouter modal   ---->
+
+
+<!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
+    <div id="exampleModal" class="modal hide tailgrand12">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter Budget par unité d'administrative</h3>
@@ -22,12 +27,12 @@
                                readonly
                               :value="anneeAmort"
                               />
-                            <input
+                              <!-- <input
                                 type="text"
                                 class="span"
                                readonly
                               :value="alertMessage"
-                              /> 
+                              /> -->
                   </div>
                   </div>
               </td>
@@ -225,10 +230,12 @@
         >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
-    </div> -->
+    </div>
     <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
-    <!--///////////////////////////////////////// debut modal modification //////////////////////////////-->
-    <!-- <div id="modificationModal" class="modal hide tailgrand12">
+
+<!--///////////////////////////////////////// debut modal de modification //////////////////////////////-->
+
+    <div id="modificationModal" class="modal hide tailgrand12">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Modifier Budget par unité d'administrative</h3>
@@ -444,230 +451,138 @@
         >Modifier</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
-    </div> -->
-    <!--///////////////////////////////////////// fin modal modification //////////////////////////////-->
+    </div>
+    <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
+    <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
     <!-- End Page Header -->
     <!-- Default Light Table -->
     <div class="container-fluid">
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          <download-excel
-            class="btn btn-default pull-right"
-            style="cursor:pointer;"
-            
-            :fields="json_fields"
-            title="Budget par Unites administratives"
-            :data="filtre_unite_admin"
-            name="Budget par Unites administratives"
-            worksheet="Budget par Unites administratives"
-          >
-            <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-          </download-excel>
+          <div>
+
+                                        <!-- <download-excel
+                                            class="btn btn-default pull-right"
+                                            style="cursor:pointer;"
+                                              :fields = "json_fields"
+                                              title="Liste Section "
+                                              name ="Liste section"
+                                              worksheet = "section"
+                                            :data="uniteAdministratives">
+                    <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+
+                                                 </download-excel>  -->
+                                     </div>
+                                     
           <div class="widget-box">
             <div class="widget-title">
-              <div align="right">
-                Recherche:
-                <input type="search" placeholder="Saisie Unite administrative" v-model="search" class="span5"/>
-
-                <!-- <div class="span3">
-                  <model-list-select
-                    v-model="formData.test"
-                    style="background-color: rgb(222, 222, 222);"
-                    :list="type_Unite_admins"
-                    option-value="id"
-                    option-text="libelle"
-                    placeholder="unite administrative"
-                  ></model-list-select>
-                </div>
-                <button>ok</button>-->
-              </div>
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Budget General par Ua</h5> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-             
-              <span class="badge badge-inverse" >Total Budget General : {{formatageSomme(parseFloat(montantBudgetGeneral))}}</span>
+              <h5>Budget general par ua</h5>
+              <!-- <div align="right">
+                Recherche:
+                <input type="search" placeholder v-model="search" />
+               
+              </div> -->
             </div>
 
-            <div
-              class="widget-content nopadding"
-             v-if="sections.length && grandes_natures.length && plans_fonctionnels.length && plans_budgetaires.length && afficheNiveauPlanProg.length"
-            >
-              <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                       <th>Exercice</th>
-                    <th title="">Code Budget</th>
-                     <th title="unite administrative">ua</th>
-                    <th>Section</th>
-                    <th title="grande nature depense">Gde nature</th>
-                      <th>Programme</th>
-                    <th>Action</th> 
-                    <th>Activite</th> 
-                     <th title="classification fonctionnel">Clsse Fontionnel</th>
-                     <th title="classification Economique">Clsse Economique</th>
-                    <th>Dotation Initial</th>
-                    <!-- <th>Version</th>
-                    
+            <div class="widget-content nopadding" v-if="uniteAdministratives.length" >
+              <budgetGeneralItemComponent v-for="equipement in uniteAdministratives"
+               :key="equipement.id"
+                :groupe="equipement"
+                @modification="afficherModalModifierUniteAdministrative" 
+                @suppression="supprimerBudget"
+                >
+              </budgetGeneralItemComponent>
 
-                    <th>Action</th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                  <!-- <tr>
-                    <td>
-                      ddddddddddddddddddd
-                    </td>
-                  </tr> -->
-                  <tr
-                    class="odd gradeX"
-                    v-for="Bgeneral in filtre_unite_admin"
-                    :key="Bgeneral.id"
-                  >
-                   
-                  
-                    <td>{{Bgeneral.exercicebudget_id || 'Non renseigné'}}</td>
-                      <td>{{Bgeneral.codebudget || 'Non renseigné'}}</td>
-                      <!-- <td>{{Bgeneral.affichetypeua.libelle || 'Non renseigné'}}</td> -->
-                    <td>{{Bgeneral.afficheUA.libelle || 'Non renseigné'}}</td>
-                    <td>{{Bgeneral.afficheSection.code_section || 'Non renseigné'}}-{{Bgeneral.afficheSection.nom_section || 'Non renseigné'}}</td>
-                    <td>{{Bgeneral.afficheGdeNature.code || 'Non renseigné'}}-{{Bgeneral.afficheGdeNature.libelle || 'Non renseigné'}}</td>
-                    <td>{{Bgeneral.afficheProgramme.code || 'Non renseigné'}}-{{Bgeneral.afficheProgramme.libelle || 'Non renseigné'}}</td>
-                    <td>{{Bgeneral.afficheAction.code || 'Non renseigné'}}-{{Bgeneral.afficheAction.libelle || 'Non renseigné'}}</td>
-                     <td>{{Bgeneral.afficheActivite.code || 'Non renseigné'}}-{{Bgeneral.afficheActivite.libelle || 'Non renseigné'}}</td>
-                      <td>{{Bgeneral.afficheFonctionnel.code || 'Non renseigné'}}-{{Bgeneral.afficheFonctionnel.libelle || 'Non renseigné'}}</td>
-                    <td>{{ Bgeneral.afficheEconomique.code || 'Non renseigné'}}-{{ Bgeneral.afficheEconomique.libelle || 'Non renseigné'}}</td>
-                  <td>{{formatageSomme(parseFloat(Bgeneral.Dotation_Initiale)) || 0}}</td>
-                   <!-- <td>
-                     
-                     
-                     <span v-if="Bgeneral.version == 0">Original </span>
-                      <span 
-                     v-else>Premiere modification</span>
-                     </td> -->
-                    <!-- <td>
-                      <button
-                        class="btn btn-danger"
-                        @click="supprimerBudgetGeneral(Bgeneral.id)"
-                      >
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
-                    </td> -->
-                  </tr>
-                  <tr>
-                     
-                       <td>
-                           
-                      </td>
-                       <td>
-                          
-                      </td>
-                        <td>
-                          
-                      </td>
-                      <td>
-                          
-                      </td>
-                      <td>
-                          
-                      </td>
-                      <td>
-                          
-                      </td>
-                      <td>
-                          
-                      </td>
-                      <td>
-                          
-                      </td>
-                      <td>
-                          
-                      </td>
-                       <td style="font-weight:bold;"> Dotation par Ua
-                      </td>
-                       <td  style="text-align: center;color:red;font-weight:bold;">
-                           {{formatageSomme(parseFloat(budgetParUa))}}
-                           
-                      </td>
-                     
-                     
-                     
-                    </tr>
-                </tbody>
-              </table>
+              <!-- <div v-if="filtre_famille.length"></div>
+              <div v-else>
+                <p style="text-align:center;font-size:20px;color:red;">Aucun Article</p>
+              </div> -->
+
+            
+              
             </div>
-           
           </div>
         </div>
       </div>
     </div>
 
-    <!-- <fab :actions="fabActions" @cache="afficherModalAjouterUniteAdministrative" main-icon="apps" bg-color="green"></fab>
-        <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterUniteAdministrative()">Open</button> -->
+    
+ <fab :actions="fabActions" @cache="afficherModalAjouterUniteAdministrative" main-icon="apps" bg-color="green"></fab>
+        <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterUniteAdministrative()">Open</button>
   <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-  <!-- <notifications  /> -->
+  <notifications  />
   </div>
+
 </template>
+
+
+
+
   
 <script>
-import { mapGetters} from "vuex";
+import { mapGetters, mapActions } from "vuex";
+import budgetGeneralItemComponent from './budgetGeneralItemComponent'
 import { formatageSomme } from "../../../src/Repositories/Repository";
-// import moment from "moment";
-// import { ModelListSelect } from "vue-search-select";
-// import "vue-search-select/dist/VueSearchSelect.css";
 export default {
-  // components: {
-  //   ModelListSelect
-  // },
+  name: 'budgetgeneral',
+ components: {
+      budgetGeneralItemComponent
+  },
   data() {
     return {
-      // fabActions: [
-      //   {
-      //     name: "cache",
-      //     icon: "add"
-      //   }
-      // ],
-    
-      json_fields: {
-        // ANNEE: "exercicebudget_id",
-        // CODE_BUDGET: "codebudget",
-        CODE_SECTION: "afficheSection.code_section",
-        SECTION: "afficheSection.nom_section",
-        
-        GRANDE_NATURE: "afficheGdeNature.libelle",
-        CODE_PROGRAMME: "afficheProgramme.code",
-        PROGRAMME: "afficheProgramme.libelle",
-        CODE_ACTION: "afficheAction.code",
-         ACTION: "afficheAction.libelle",
-        CODE_ACTIVITE: "afficheActivite.code",
-        ACTIVITE: "afficheActivite.libelle",
-        CODE_FONCTIONNEL: "afficheFonctionnel.code",
-        FONCTIONNEL: "afficheFonctionnel.libelle",
-        CODE_ECONOMIQUE: "afficheEconomique.code",
-        ECONOMIQUE: "afficheEconomique.libelle",
-        DOTATION_INITIAL: "Dotation_Initiale",
-        // TOTAL_DOTATION: {
-          
-      
-        // }
+      // json_fields: {
+      //       'NATURE_SECTION': 'groupe.libelle',
+      //       'NUMERO_ORDRE_SECTION': 'article.code',
+      //     'CODE_SECTION':'article.code_section',
+      //   'LIBELLE_SECTION':'article.nom_section'
+           
+           
+      //   },
+     fabActions: [
+              {
+                  name: 'cache',
+                  icon: 'add'
+              },
+              // {
+              //     name: 'alertMe',
+              //     icon: 'add_alert'
+              // }
+          ],
+     
+      formData: {
+       exercicebudget_id:"",
+      gdenature_id: "",
+      program_id: "",
+      typeua_id: "",
+      ua_id: "",
+      section_id: "",
+      fonctionnel_id: "",
+      economique_id: "",
+      Dotation_Initiale: "",
+      version: ""
       },
-      search: ""
+      editBudgetGeneral: {
+         exercicebudget_id:"",
+      gdenature_id: "",
+      program_id: "",
+      typeua_id: "",
+      ua_id: "",
+      section_id: "",
+      fonctionnel_id: "",
+      economique_id: "",
+      Dotation_Initiale: "",
+      version: ""
+      },
+       search:""
     };
   },
 
   computed: {
-    ...mapGetters("uniteadministrative", [
+        ...mapGetters("uniteadministrative", [
       "jointureUaChapitreSection",
       "uniteAdministratives",
       "budgetGeneral",
@@ -696,49 +611,153 @@ export default {
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
-    filtre_unite_admin() {
-      const st = this.search.toLowerCase();
-      return this.getPersonnaliseBudgetGeneral.filter(items => {
-        return (
-          items.afficheUA.libelle.toLowerCase().includes(st) ||
-         items.afficheSection.code_section.toLowerCase().includes(st) ||
-         items.afficheGdeNature.libelle.toLowerCase().includes(st) ||
-         items.afficheProgramme.code.toLowerCase().includes(st) ||
-         items.afficheUA.libelle.toLowerCase().includes(st) 
-        );
+ 
+ codeBudgetGeneralModifier(){
+      // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
+    const sectionBudget = this.sections.find(serviceg => serviceg.id == this.editBudgetGeneral.section_id)
+   const programmeBudget = this.plans_programmes.find(serviceg => serviceg.id == this.editBudgetGeneral.program_id)
+     const uaBudget = this.uniteAdministratives.find(serviceg => serviceg.id == this.editBudgetGeneral.ua_id)
+    const fonctionnelBudget = this.plans_fonctionnels.find(serviceg => serviceg.id == this.editBudgetGeneral.fonctionnel_id)
+ const economiqueBudget = this.plans_budgetaires.find(chap => chap.id == this.editBudgetGeneral.economique_id)
+     if(sectionBudget && programmeBudget && uaBudget && fonctionnelBudget && economiqueBudget){
+       return sectionBudget.code_section + programmeBudget.code + uaBudget.code_ua + fonctionnelBudget.code  + economiqueBudget.code
+     }
+
+     return null
+   },
+    codeBudgetGeneral(){
+      // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
+    const sectionBudget = this.sections.find(serviceg => serviceg.id == this.formData.section_id)
+   const programmeBudget = this.plans_programmes.find(serviceg => serviceg.id == this.formData.program_id)
+     const uaBudget = this.uniteAdministratives.find(serviceg => serviceg.id == this.formData.ua_id)
+    const fonctionnelBudget = this.plans_fonctionnels.find(serviceg => serviceg.id == this.formData.fonctionnel_id)
+ const economiqueBudget = this.plans_budgetaires.find(chap => chap.id == this.formData.economique_id)
+     if(sectionBudget && programmeBudget && uaBudget && fonctionnelBudget && economiqueBudget){
+       return sectionBudget.code_section + programmeBudget.code + uaBudget.code_ua + fonctionnelBudget.code  + economiqueBudget.code
+     }
+
+     return null
+   },
+
+    sectionDynamiques() {
+      return id => {
+        if (id != null && id != "") {
+          return this.jointureUaChapitreSection.filter(element => element.id == id);
+        }
+      };
+    },
+    // ActiviteDynamiques() {
+    //   return id => {
+    //     if (formData.action_id != null && formData.action_id != "") {
+    //       return this.plans_activites.filter(element => element.children.parent == this.formData.action_id);
+       
+    //    }
+    //   };
+    // },
+    uniteAdministrativeDynamiques() {
+      return id => {
+        if (id != null && id != "") {
+          return this.jointureUaChapitreSection.filter(element => element.id == id);
+        }
+      };
+    },
+anneeAmort() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
+    },
+// alertMessage() {
+//       const typeUniteA = this.getPersonnaliseBudgetGeneral.find(typeUa=> typeUa.afficheUA.id == this.formData.ua_id);
+
+//       if (typeUniteA) {
+//         return typeUniteA.exercicebudget_id;
+        
+//       }
+//       return 0
+//     },
+  },
+
+
+  
+  methods: {
+    ...mapActions("uniteadministrative", [
+      "getAllBudgetGeneral",
+      "ajouterBudgetGeneral",
+      "modifierBudgetGeneral",
+      "supprimerBudgetGeneral"
+    ]),
+ formatageSomme: formatageSomme,
+    afficherModalAjouterUniteAdministrative() {
+      this.$("#exampleModal").modal({
+        backdrop: "static",
+        keyboard: false
       });
     },
-    budgetParUa() {
-      const st = this.search.toLowerCase();
-      return this.getPersonnaliseBudgetGeneral.filter(items => {
-        return (
-          items.afficheUA.libelle.toLowerCase().includes(st) ||
-         items.afficheSection.code_section.toLowerCase().includes(st) ||
-         items.afficheGdeNature.libelle.toLowerCase().includes(st) ||
-         items.afficheProgramme.code.toLowerCase().includes(st) ||
-         items.afficheUA.libelle.toLowerCase().includes(st) 
-         
-        );
-      }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2);
+    // fonction pour vider l'input ajouter
+    ajouterUniteAdministrativeLocal() {
       
+//       if (this.formData.exercicebudget_id == this.alertMessage){
+// alertMessage("fffffffffffff")
+//       }
+//       else
+//       {
+var nouvelObjet = {
+      ...this.formData,
+       exercicebudget_id: this.anneeAmort,
+       codebudget : this.codeBudgetGeneral
+      
+       };
+      this.ajouterBudgetGeneral(nouvelObjet);
+
+      this.formData = {
+        exercicebudget_id:"",
+      gdenature_id: "",
+      program_id: "",
+      typeua_id: "",
+      ua_id: "",
+      section_id: "",
+      fonctionnel_id: "",
+      economique_id: "",
+      Dotation_Initiale: "",
+      version: "",
+      codebudget : ""
+      };
+      // }
+     
     },
-//    MontantbesoinRestantParUniteAdministrative(){
-//   return uniteadmin_id => {
-//     if(uniteadmin_id !=""){
-//     const montant = this.getPersonnaliseBudgetGeneral.filter(element => element.id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
-//       if(isNaN(montant)) return null
-//       return montant
+     supprimerBudget(id){
+      this.supprimerBudgetGeneral(id)
+    },
+    // fonction pour vider l'input modifier
+    modifierUniteAdministrativeLocal() {
+       var nouvelObjet = {
+      ...this.editBudgetGeneral,
+       exercicebudget_id: this.anneeAmort,
+       codebudget : this.codeBudgetGeneralModifier
+      
+       };
+      this.modifierBudgetGeneral(nouvelObjet);
+this.$("#modificationModal").modal('hide');
+      // this.editUniteAdministrative = {
+      //   code: "",
+      //   libelle: "",
+      //   section_id: "",
+      //   localisationgeo_id: ""
+      // };
+    },
+    // afficher modal de modification
+    afficherModalModifierUniteAdministrative(articles) {
+      this.$("#modificationModal").modal({
+        backdrop: "static",
+        keyboard: false
+      });
 
-//     }
-//   }
-// }, 
-
-    
-  },
-  methods: {
-    
- formatageSomme: formatageSomme,
-    
+      this.editBudgetGeneral = articles;
+    },
     alert() {
       console.log("ok");
     },

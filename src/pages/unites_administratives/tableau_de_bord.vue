@@ -12,7 +12,7 @@
         <li class="bg_lo">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-success">{{formatageSomme(parseFloat(montantBudgetGeneral))}}</span>Somme des lignes Budgetaires
+            <span class="label label-success">{{formatageSomme(parseFloat(montantBudgetGeneral))}}</span>Total des lignes Budgetaires
           </a>
         </li>
         <!-- <li class="bg_ly">

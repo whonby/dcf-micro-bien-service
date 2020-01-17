@@ -7,6 +7,7 @@ import ModifierImmobilisation from "../../pages/suivi_control_budgetaires/suiviI
 // import immobilisationParService from "../../pages/suivi_control_budgetaires/suiviImmobilisation/immobilisationParService.vue";
 // import VoirImmoParService from "../../pages/suivi_control_budgetaires/suiviImmobilisation/VoirImmoParService.vue";
 import TableauBordImmo from "../../pages/suivi_control_budgetaires/suiviImmobilisation/TableauBordImmo.vue";
+import TableauBordImmo2 from "../../pages/suivi_control_budgetaires/suiviImmobilisation/TableauBordImmo2.vue";
 import RechercheTauxParUniteAdm from "../../pages/suivi_control_budgetaires/suiviImmobilisation/RechercheTauxParUniteAdm.vue";
 import DetailImmobilisation from "../../pages/suivi_control_budgetaires/suiviImmobilisation/DetailImmobilisation.vue";
 import besionImmolisation from "../../pages/suivi_control_budgetaires/suiviImmobilisation/besionImmolisation.vue";
@@ -28,8 +29,13 @@ import StockArticles from '../../pages/suivi_control_budgetaires/suiviImmobilisa
 import demandeEquipement from '../../pages/suivi_control_budgetaires/suiviImmobilisation/demandeEquipement.vue'
 import ficheAnalyse from '../../pages/suivi_control_budgetaires/suiviImmobilisation/resultatFinal.vue'
 import listeBesoinRealise from '../../pages/suivi_control_budgetaires/suiviImmobilisation/listeBesoinRealise.vue'
+import historiqueDemande from '../../pages/suivi_control_budgetaires/suiviImmobilisation/historiqueDemande.vue'
 const suiviImmobilisationRoutes = [
- 
+  {
+    path: "/historique-Demande",
+    name: "historiqueDemande",
+    component: historiqueDemande
+  },
   {
     path: "/liste-Besoin-Realise",
     name: "listeBesoinRealise",
@@ -162,7 +168,11 @@ const suiviImmobilisationRoutes = [
   //   name: "afficherImmobilisation",
   //   component: VoirImmoParService
   // },
-  
+  {
+    path: "/TableauBordImmo2",
+    name: "TableauBordImmo2",
+    component: TableauBordImmo2
+  },
   {
     path: "/TableauBordImmo",
     name: "TableauBordImmo",
