@@ -105,7 +105,7 @@
           <li>
             <router-link :to="{name: 'budgetGeneralParUa'}" tag="a">
               <i class="icon-user"></i>
-              Budget par unite administrative
+              Budget General
             </router-link>
           </li>
 <!-- <li>
