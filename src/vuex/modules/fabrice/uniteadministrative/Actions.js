@@ -182,7 +182,7 @@ export function getAllUniteAdministrative({ commit }) {
   });
 }
 // ajouter Unite administrative
-export function ajouterUniteAdministrative({ commit }, nouveau) {
+export function ajouterUniteAdministrative({ commit, dispatch}, nouveau) {
   asyncLoading(axios
     .post("/ajouter_unite_administrative", {
       type_ua_id: nouveau.type_ua_id,
@@ -198,6 +198,7 @@ export function ajouterUniteAdministrative({ commit }, nouveau) {
     .then(response => {
       if (response.status == 201) {
         commit("AJOUTER_UNITE_ADMINISTRATIVE", response.data);
+        dispatch('getAllUniteAdministrative')
         this.$app.$notify({
           title: 'Success',
           text: 'Enregistrement Effectué avec Succès!',
@@ -207,7 +208,7 @@ export function ajouterUniteAdministrative({ commit }, nouveau) {
     });
 }
 // modifier Unite administrative
-export function modifierUniteAdministrative({ commit }, nouveau) {
+export function modifierUniteAdministrative({ commit, dispatch }, nouveau) {
   asyncLoading(
     axios.put("/modifier_unite_administrative/" + nouveau.id, {
       type_ua_id: nouveau.type_ua_id,
@@ -222,6 +223,7 @@ export function modifierUniteAdministrative({ commit }, nouveau) {
     })
   ).then(response => {
     commit("MODIFIER_UNITE_ADMINISTRATIVE", response.data);
+    dispatch('getAllUniteAdministrative')
     this.$app.$notify({
       title: "Success",
       text: "Modification Effectué avec Succès!",
@@ -230,11 +232,12 @@ export function modifierUniteAdministrative({ commit }, nouveau) {
   });
 }
 //supprimer Unite administrative
-export function supprimerUniteAdministrative({ commit }, id) {
+export function supprimerUniteAdministrative({ commit, dispatch }, id) {
   this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
       commit("SUPPRIMER_UNITE_ADMINISTRATIVE", id);
+      dispatch('getAllUniteAdministrative')
       // // dialog.loading(false) // stops the proceed button's loader
       axios
         .delete("/supprimer_unite_administrative/" + id)
