@@ -1078,6 +1078,33 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
+
+
+                             <div class="control-group">
+                        <label class="control-label">Document Procedure</label>
+                        <div class="controls">
+                          <select v-model="formObservation.document_procedure_id" class="span">
+                                <option v-for="varText in documentProcedures" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                        
+                        </div>
+                    </div>
+
+                     <div class="control-group">
+                        <label class="control-label">ANO DMP bailleur </label>
+                        <div class="controls">
+                           <select v-model="formObservation.ano_dmp_bailleur_id" class="span">
+                                <option v-for="varText in listeAnoDMPBailleur(marcheid)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+
+
                     <div class="control-group">
                         <label class="control-label">Date </label>
                         <div class="controls">
@@ -1138,6 +1165,29 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
+
+
+                        <div class="control-group">
+                        <label class="control-label">Document Procedure</label>
+                        <div class="controls">
+                          <select v-model="editObservation.document_procedure_id" class="span">
+                                <option v-for="varText in documentProcedures" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                        
+                        </div>
+                    </div>
+
+                     <div class="control-group">
+                        <label class="control-label">ANO DMP bailleur </label>
+                        <div class="controls">
+                           <select v-model="editObservation.ano_dmp_bailleur_id" class="span">
+                                <option v-for="varText in listeAnoDMPBailleur(marcheid)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="control-group">
                         <label class="control-label">Date </label>
                         <div class="controls">
@@ -2512,8 +2562,8 @@
                         <label class="control-label">Avis</label>
                         <div class="controls">
                             <select v-model="formAnalyseDMP.avis_bail" class="span">
-                                <option value="1">Visé</option>
-                                <option value="2">rejeté</option>
+                                <option value="1">Favorable</option>
+                                <option value="2">Defavorable</option>
                             </select>
                             <!-- <input
                                     type="text"
@@ -2695,8 +2745,8 @@
                         <label class="control-label">Avis</label>
                         <div class="controls">
                             <select v-model="formAno.avis_dmp" class="span">
-                                <option value="1">Visé</option>
-                                <option value="2">Rejeté</option>
+                                <option value="1">Favorable</option>
+                                <option value="2">Defavorable</option>
                             </select>
                         </div>
                     </div>
@@ -2940,15 +2990,19 @@ num_courrier:""
 formObservation:{
     date_avis_bail:"",
     avis_bail:"",
-    observations_bail:""
+    observations_bail:"",
+    ano_dmp_bailleur_id:"",
+    document_procedure_id:""
+
 
 },
 
 editObservation:{
     date_avis_bail:"",
     avis_bail:"",
-    observations_bail:""
-
+    observations_bail:"",
+    ano_dmp_bailleur_id:"",
+    document_procedure_id:""
 },
 
 
@@ -3339,8 +3393,10 @@ created() {
                 this.ajouterObseravtionBailleur(this.formObservation)
                 this.formObservation = {
                     date_avis_bail:"",
-                        avis_bail:"",
-                     observations_bail:""
+    avis_bail:"",
+    observations_bail:"",
+    ano_dmp_bailleur_id:"",
+    document_procedure_id:""
 
                 }
 
