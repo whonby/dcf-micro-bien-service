@@ -47,7 +47,8 @@ const defaultState = {
 documentProcedures:[],
     stateDemandeAno:[],
     analyseDMP:[],
-    stateAnoDmpBailleur:[]
+    stateAnoDmpBailleur:[],
+    obseravtionBailleurs:[]
 
 
 

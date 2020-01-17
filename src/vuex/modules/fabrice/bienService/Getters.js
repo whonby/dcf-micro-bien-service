@@ -45,6 +45,7 @@ export const getterMandate = state => state.mandate
 export const getterDemandeAno = state => state.stateDemandeAno
 export const getterAnalyseDMP = state => state.analyseDMP
 export const getterAnoDMPBailleur = state => state.stateAnoDmpBailleur
+export const getterObseravtionBailleurs = state => state.obseravtionBailleurs
 // gettes  personnaliser d'appel d'offres
 
 

@@ -62,7 +62,7 @@
              <div class="control-group">
             <label class="control-label">Type de procedure</label>
             <div class="controls">
-                <select v-model="editProcedure.	type_procedure_id" class="span">
+                <select v-model="editProcedure.type_procedure_id" class="span">
                <option v-for="varText in typeTypeProcedures" :key="varText.id" 
                :value="varText.id">{{varText.libelle}}</option>
            </select>
@@ -119,7 +119,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste type de procedure</h5>
+              <h5>Liste procedure de passation</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -137,7 +137,7 @@
                 </thead>
                 <tbody>
                   <tr class="odd gradeX" v-for="(typeProcedure, index) in 
-                typeProcedureFiltre"
+                procedureFiltre"
                  :key="typeProcedure.id">
                  <td @dblclick="afficherModalModifiertextJuridique(index)">
                    {{typeProcedure.libelle || 'Non renseigné'}}</td>
@@ -214,7 +214,7 @@ export default {
   computed: {
      ...mapGetters("bienService", ['procedurePassations','typeTypeProcedures']),
 
-    typeProcedureFiltre()  {
+    procedureFiltre()  {
      
         const searchTerm = this.search.toLowerCase();
 

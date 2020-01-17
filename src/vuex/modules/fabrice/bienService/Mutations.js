@@ -99,6 +99,41 @@ export const DELETE_DOCUMENT_PROCEDURE = (state, id)=> {
 
 
 
+// mmutation de l'obseravtion du bailleur
+
+
+
+
+
+// get all  obseravtion bailleur
+
+export const GET_OBSERVATION_BAILLEUR = (state, tableau_obseravtion_bailleur) =>{
+    state.obseravtionBailleurs = tableau_obseravtion_bailleur
+}
+
+// add * observation bailleur
+
+export const AJOUTER_OBSERAVTION_BAILLEUR = (state, elementAjouter) => {
+    state.obseravtionBailleurs.unshift(elementAjouter)
+}
+
+// update all observation bailleur
+export const MODIFIER_OBSERAVTION_BAILLEUR = (state, elementModif)=>{
+    state.obseravtionBailleurs = state.obseravtionBailleurs.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+
+// delete all observation bailleur
+
+export const DELETE_OBSERVATION_BAILLEUR = (state, id)=> {
+    state.obseravtionBailleurs = state.obseravtionBailleurs.filter(observation => observation.id !=id)
+}
 
 
 

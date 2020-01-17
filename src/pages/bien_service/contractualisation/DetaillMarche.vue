@@ -186,6 +186,7 @@
                <li class=""><a data-toggle="tab" href="#tab33">Demande ANO</a></li>
                 <li class=""><a data-toggle="tab" href="#tab34">Analyse DMP</a></li>
                  <li class=""><a data-toggle="tab" href="#tab35">ANO Bailleur</a></li>
+                 <li class=""><a data-toggle="tab" href="#tab36">Observation Bailleur</a></li>
             </ul>
           </div>
 
@@ -922,7 +923,7 @@
                     <tr>
                         <th>Numero dossier candidat</th>
                         <th>Date avis</th>
-                        <th>Avis bail </th>
+                        <th>Decision </th>
                         <th>Observation</th>
                         <th>Document procedure</th>
                         <th>Action</th>
@@ -1022,6 +1023,173 @@
 
 
 
+  <div id="tab36" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+
+                        <a href="#ajouterObservationBailleur" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+
+                    </div>
+
+                </div>
+                <table class="table table-bordered table-striped" v-if="marcheid">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Avis</th>
+                        <th>Observation </th>
+                        
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="odd gradeX" v-for="observationBailleur in obseravtionBailleurs"
+                        :key="observationBailleur.id">
+                        <td @click="afficherModalObservationBailleur(observationBailleur.id)">
+                            {{observationBailleur.date_avis_bail || 'Non renseigné'}}</td>
+                        <td @click="afficherModalObservationBailleur(observationBailleur.id)">
+                            {{observationBailleur.avis_bail || 'Non renseigné'}}</td>
+                        <td @click="afficherModalObservationBailleur(observationBailleur.id)">
+                            {{observationBailleur.observations_bail || 'Non renseigné'}}</td>
+                       
+                        <div class="btn-group">
+                            <button @click.prevent="supprimerObseravtionBailleur(observationBailleur.id)"  class="btn btn-danger " title="Supprimer">
+                                <span class=""><i class="icon-trash"></i></span></button>
+
+                        </div>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+              </div>
+
+
+
+
+
+<!--- debut modal ajout observation bailleur -->
+
+
+ <div id="ajouterObservationBailleur" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter obseravtion bailleur</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">Date </label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="formObservation.date_avis_bail"
+                                    class="span"
+                                    placeholder="Saisir le libelle_type"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Avis</label>
+                        <div class="controls">
+                            <select v-model="formObservation.avis_bail" class="span">
+                                <option value="1">Favorable</option>
+                                <option value="2">Defavorable</option>
+                            </select>
+                                
+                            
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Observation</label>
+                        <div class="controls">
+                            <textarea  v-model="formObservation.observations_bail"
+                                    class="span"
+                                    placeholder="Saisir l'observation"
+                            ></textarea>
+                        </div>
+                    </div>
+
+                    
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a
+                        @click.prevent="ajoutObservationBailleurLocal"
+                        class="btn btn-primary"
+                        href="#"
+
+                >Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div>
+        </div>
+<!-- fin obseravtion bailleur -->
+
+
+
+<!--- debut modification observation bailleur  -->
+
+<div id="modifierObservationBailleur" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Modifier obseravtion bailleur</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">Date </label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="editObservation.date_avis_bail"
+                                    class="span"
+                                    placeholder="Saisir le libelle_type"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Avis</label>
+                        <div class="controls">
+                            <select v-model="editObservation.avis_bail" class="span">
+                                <option value="1">Favorable</option>
+                                <option value="2">Defavorable</option>
+                            </select>
+                                
+                            
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Observation</label>
+                        <div class="controls">
+                            <textarea  v-model="editObservation.observations_bail"
+                                    class="span"
+                                    placeholder="Saisir l'observation"
+                            ></textarea>
+                        </div>
+                    </div>
+
+                   
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a
+                        @click.prevent="modifierObservationBailleurLocal"
+                        class="btn btn-primary"
+                        href="#"
+
+                >Modifier</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div>
+        </div>
+
+<!---fin modification observation bailleur   -->
+
+
+
 
 
 <!--modification ano  -->
@@ -1041,7 +1209,7 @@
                 type="date"
                 v-model="editAno.date_ano_dmp"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder=""
               />
             </div>
           </div>
@@ -1050,9 +1218,9 @@
             <div class="controls">
               <input
                 type="text"
-                v-model="editAno.ref_ano_dmp	"
+                v-model="editAno.ref_ano_dmp"
                 class="span"
-                placeholder="Saisir le ref marche"
+                placeholder="Saisir le ref ano dmp"
               />
             </div>
           </div>
@@ -1064,7 +1232,7 @@
                 type="text"
                 v-model="editAno.numero_courie"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder="Saisir le numero du courrier"
               />
             </div>
           </div>
@@ -1681,6 +1849,7 @@
 
 
                     <div class="control-group">
+                        <label class="control-label">Matricule</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -1691,6 +1860,7 @@
                         </div>
                     </div>
                     <div class="control-group">
+                        <label class="control-label">Nom</label>
                         <div class="controls">
                             <input type="text"
                                     v-model="formMandater.nom_mandat"
@@ -1700,6 +1870,7 @@
                         </div>
                     </div>
                     <div class="control-group">
+                        <label class="control-label">Prenom</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -2065,6 +2236,7 @@
                     </div>
 
                     <div class="control-group">
+                        <label class="control-label">Rang</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -2075,6 +2247,7 @@
                         </div>
                     </div>
                     <div class="control-group">
+                        <label class="control-label">Date</label>
                         <div class="controls">
                             <input type="date"
                                    v-model="formAnalyseDossier.date_analyse"
@@ -2084,6 +2257,7 @@
                         </div>
                     </div>
                     <div class="control-group">
+                        <label class="control-label">Decision</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -2230,7 +2404,7 @@
                                     type="text"
                                     v-model="formDemande.num_courrier"
                                     class="span"
-                                    placeholder="Saisir le libelle_type"
+                                    placeholder="Saisir le numero du courrier"
                             />
                         </div>
                     </div>
@@ -2296,7 +2470,7 @@
                                     type="text"
                                     v-model="edite_demande_dao.num_courrier"
                                     class="span"
-                                    placeholder="Saisir le libelle_type"
+                                    placeholder="Saisir le numero du courrier"
                             />
                         </div>
                     </div>
@@ -2335,14 +2509,18 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Avis bailleur</label>
+                        <label class="control-label">Avis</label>
                         <div class="controls">
-                            <input
+                            <select v-model="formAnalyseDMP.avis_bail" class="span">
+                                <option value="1">Visé</option>
+                                <option value="2">rejeté</option>
+                            </select>
+                            <!-- <input
                                     type="text"
                                     v-model="formAnalyseDMP.avis_bail"
                                     class="span"
-                                    placeholder="Saisir le ref marche"
-                            />
+                                    placeholder="Saisir l'avis du bailleur"
+                            /> -->
                         </div>
                     </div>
 
@@ -2352,8 +2530,8 @@
                             <input
                                     type="text"
                                     v-model="formAnalyseDMP.observation"
-                                    class="span"
-                                    placeholder="Saisir le libelle_type"
+                                   class="textarea_editor span2.5"
+                                    placeholder="Saisir l'observation"
                             />
                         </div>
                     </div>
@@ -2406,14 +2584,12 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Avis bailleur</label>
+                        <label class="control-label">Decision</label>
                         <div class="controls">
-                            <input
-                                    type="text"
-                                    v-model="edite_analyse_dpm.avis_bail"
-                                    class="span"
-                                    placeholder="Saisir le ref marche"
-                            />
+                          <select v-model="edite_analyse_dpm.avis_bail" class="span">
+                                <option value="1">Visé</option>
+                                <option value="2">rejeté</option>
+                            </select>
                         </div>
                     </div>
 
@@ -2510,6 +2686,17 @@
                             <select v-model="formAno.analyse_dmp_id" class="span">
                                 <option v-for="varText in listeAnalyseDPM(marcheid)" :key="varText.id"
                                         :value="varText.id">{{varText.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="control-group">
+                        <label class="control-label">Avis</label>
+                        <div class="controls">
+                            <select v-model="formAno.avis_dmp" class="span">
+                                <option value="1">Visé</option>
+                                <option value="2">Rejeté</option>
                             </select>
                         </div>
                     </div>
@@ -2750,6 +2937,21 @@ num_courrier:""
 },
 
 
+formObservation:{
+    date_avis_bail:"",
+    avis_bail:"",
+    observations_bail:""
+
+},
+
+editObservation:{
+    date_avis_bail:"",
+    avis_bail:"",
+    observations_bail:""
+
+},
+
+
 
 formAno:{
 date_ano_dmp:"",
@@ -2829,7 +3031,7 @@ created() {
             ...mapGetters("bienService", [ 'acteDepense',"getMarchePersonnaliser","appelOffres",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
-                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno","documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur"]),
+                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno","documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"obseravtionBailleurs"]),
             listeAppelOffre(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -2906,7 +3108,15 @@ created() {
                         return this.getterAnoDMPBailleur.filter(idmarche => idmarche.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
                     }
                 }
-            }
+            },
+            // listeObservationBailleur:function () {
+            //     return marcheid => {
+            //         if(marcheid !=""){
+            //             return this.getterObservationBailleur.filter(idmarche => idmarche.marche_id = marcheid)
+            //         }
+            //     }
+
+            // },
             // filtre_equipement() { getterAnoDMPBailleur
             //   const st = this.search.toLowerCase();
             //   return this.equipements.filter(type => {
@@ -2946,6 +3156,7 @@ created() {
                 "modifierAnalyseDossier","supprimerAnalyseDossier","ajouterDemandeAno",
                 "modifierDemandeAno","supprimerDemandeAno","ajouterAnalyseDMP","modifierAnalyseDMP",
                 "supprimerAnalyseDMP","ajouterAnoDMPBailleur","modifierAnoDMPBailleur","supprimerAnoDMPBailleur"
+                , "modifierObservationBaileur","ajouterObseravtionBailleur" , "supprimerObseravtionBailleur"
             ]),
             // formatageSomme: formatageSomme,
             ajouterBudgetaireLocal(){
@@ -3118,6 +3329,44 @@ created() {
 
                 }
             },
+
+
+            // afficherModalAjoutObservationBailleur(){
+            //     this.$('#ajouterObservationBailleur')
+            // },
+
+            ajoutObservationBailleurLocal(){
+                this.ajouterObseravtionBailleur(this.formObservation)
+                this.formObservation = {
+                    date_avis_bail:"",
+                        avis_bail:"",
+                     observations_bail:""
+
+                }
+
+              
+
+
+            },
+
+
+
+            afficherModalObservationBailleur(index){
+                 this.$('#modifierObservationBailleur').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                  this.editObservation = this.obseravtionBailleurs[index]
+
+            },
+            // vider l'input
+            modifierObservationBailleurLocal(){
+                this.modifierObservationBaileur(this.editObservation)
+                this.$('#modifierObservationBailleur').modal('hide');
+            },
+
+        
+
         ajouterAnalyseDMPB(){
                 console.log(this.formAnalyseDMP)
             this.ajouterAnalyseDMP(this.formAnalyseDMP)
@@ -3249,6 +3498,7 @@ created() {
                 this.modifierDemandeAno(this.edite_demande_dao)
                 this.$('#modifDemandeAno').modal('hide');
             },
+
             modificationDossierAnalyse(){
                 this.modifierAnalyseDossier(this.edite_analyse_dossier)
                 this.$('#modificationAajouterAnalys01').modal('hide');

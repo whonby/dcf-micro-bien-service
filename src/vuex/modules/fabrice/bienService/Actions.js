@@ -1010,6 +1010,66 @@ export function supprimerCojo({commit}, id) {
 
 }
 
+
+
+// acttion de l'obseravtion de bailleur
+
+
+
+export  function  getObservationBailleur({commit}) {
+  queue.push(() => axios.get('/cojo').then((response) => {
+    commit('GET_OBSERVATION_BAILLEUR', response.data.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter observation bailleur
+
+export function ajouterObseravtionBailleur({commit}, elementAjout){
+  asyncLoading(axios.post('/cojo',elementAjout)).then(response =>{
+      if(response.status == 201){
+          commit('AJOUTER_OBSERAVTION_BAILLEUR', response.data)
+
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier obseravtion bailleur
+
+
+export function modifierObservationBaileur({commit}, element_modifie) {
+  asyncLoading( axios.put('/cojo',element_modifie)).then(response => {
+       commit('MODIFIER_OBSERAVTION_BAILLEUR', response.data)
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
+// supprimer obseravtion bailleur
+
+export function supprimerObseravtionBailleur({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('DELETE_OBSERVATION_BAILLEUR', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+     axios.delete('/cojo/' + id).then(() => dialog.close() )
+ })
+
+}
+
+
+
+
+
 ///////////////////////////////////////////////////////////
 
 

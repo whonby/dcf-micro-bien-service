@@ -34,6 +34,7 @@ import marche from '../../pages/bien_service/contractualisation/marche.vue';
 import DetaillMarche from '../../pages/bien_service/contractualisation/DetaillMarche.vue';
 import motifDecision from '../../pages/bien_service/parametres/motifDecision.vue';
 import documentProcedure from '../../pages/bien_service/parametres/documentProcedure.vue';
+import livrable from '../../pages/bien_service/parametres/livrable.vue';
 
 const BienServiceRoutes = [
 
@@ -48,7 +49,12 @@ const BienServiceRoutes = [
  name: "acteDepense",
  component:acteDepense  
 },
-
+// la route pour le livrable
+{
+    path:"/creation-livrable",
+    name:"livrable",
+    component:livrable
+},
 
 // la route du document de procedure
 {
