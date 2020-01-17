@@ -81,11 +81,11 @@
             </router-link>
           </li>
           <li class="divider"></li>
-          <li>
+          <!-- <li>
             <router-link :to="{name: 'grpeBudgetProgramme'}" tag="a">
               <i class="icon-key"></i>Budget General par Programme
             </router-link>
-          </li>
+          </li> -->
         </ul>
       </li>
 
