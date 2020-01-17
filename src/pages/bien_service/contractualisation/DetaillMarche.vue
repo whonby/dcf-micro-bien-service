@@ -939,7 +939,10 @@
                         <td @click="afficheAnalyseDMP(document.id)">
                             {{document.avis_bail || 'Non renseigné'}}</td>
                         <td @click="afficheAnalyseDMP(document.id)">
-                            {{document.observation || 'Non renseigné'}}</td>
+
+                            <button class="btn btn-success btn-mini" v-if="document.observation==1">Aais favorable</button>
+                            <button class="btn btn-danger btn-mini" v-else>Avis defavorable</button>
+                        </td>
                         <td @click="afficheAnalyseDMP(document.id)">
                             {{document.document_procedure.libelle_doc || 'Non renseigné'}}</td>
                         <div class="btn-group">
@@ -1035,27 +1038,30 @@
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
+                        <th>Numero dossier candidat</th>
                         <th>Date</th>
                         <th>Avis</th>
                         <th>Observation </th>
-                        
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for="observationBailleur in obseravtionBailleurs"
+                    <tr class="odd gradeX" v-for="observationBailleur in listeObservationBailleurANODMP(marcheid)"
                         :key="observationBailleur.id">
                         <td @click="afficherModalObservationBailleur(observationBailleur.id)">
-                            {{observationBailleur.date_avis_bail || 'Non renseigné'}}</td>
+                            {{observationBailleur.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td>
                         <td @click="afficherModalObservationBailleur(observationBailleur.id)">
-                            {{observationBailleur.avis_bail || 'Non renseigné'}}</td>
+                            {{observationBailleur.date_avis_baill || 'Non renseigné'}}</td>
                         <td @click="afficherModalObservationBailleur(observationBailleur.id)">
-                            {{observationBailleur.observations_bail || 'Non renseigné'}}</td>
-                       
+                            <button class="btn btn-success btn-mini" v-if="observationBailleur.avis_bail==1">Avis favorable</button>
+                            <button class="btn btn-danger btn-mini" v-else>Defavorable</button>
+                        </td>
+                        <td @click="afficherModalObservationBailleur(observationBailleur.id)">
+                            {{observationBailleur.observations_bailleur || 'Non renseigné'}}</td>
                         <div class="btn-group">
                             <button @click.prevent="supprimerObseravtionBailleur(observationBailleur.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span></button>
-
+                                <span class=""><i class="icon-trash"></i></span>
+                            </button>
                         </div>
 
                     </tr>
@@ -1085,7 +1091,7 @@
                         <div class="controls">
                           <select v-model="formObservation.document_procedure_id" class="span">
                                 <option v-for="varText in documentProcedures" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle}}</option>
+                                        :value="varText.id">{{varText.libelle_doc}}</option>
                             </select>
                         
                         </div>
@@ -1096,21 +1102,16 @@
                         <div class="controls">
                            <select v-model="formObservation.ano_dmp_bailleur_id" class="span">
                                 <option v-for="varText in listeAnoDMPBailleur(marcheid)" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle}}</option>
+                                        :value="varText.id">{{varText.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
                             </select>
                         </div>
                     </div>
-
-
-
-
-
                     <div class="control-group">
                         <label class="control-label">Date </label>
                         <div class="controls">
                             <input
                                     type="date"
-                                    v-model="formObservation.date_avis_bail"
+                                    v-model="formObservation.date_avis_baill"
                                     class="span"
                                     placeholder="Saisir le libelle_type"
                             />
@@ -1131,7 +1132,7 @@
                     <div class="control-group">
                         <label class="control-label">Observation</label>
                         <div class="controls">
-                            <textarea  v-model="formObservation.observations_bail"
+                            <textarea  v-model="formObservation.observations_bailleur"
                                     class="span"
                                     placeholder="Saisir l'observation"
                             ></textarea>
@@ -1165,35 +1166,31 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
-
-
                         <div class="control-group">
                         <label class="control-label">Document Procedure</label>
                         <div class="controls">
                           <select v-model="editObservation.document_procedure_id" class="span">
                                 <option v-for="varText in documentProcedures" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle}}</option>
+                                        :value="varText.id">{{varText.libelle_doc}}</option>
                             </select>
                         
                         </div>
                     </div>
-
                      <div class="control-group">
                         <label class="control-label">ANO DMP bailleur </label>
                         <div class="controls">
                            <select v-model="editObservation.ano_dmp_bailleur_id" class="span">
                                 <option v-for="varText in listeAnoDMPBailleur(marcheid)" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle}}</option>
+                                        :value="varText.id">{{varText.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
                             </select>
                         </div>
                     </div>
-
                     <div class="control-group">
                         <label class="control-label">Date </label>
                         <div class="controls">
                             <input
                                     type="date"
-                                    v-model="editObservation.date_avis_bail"
+                                    v-model="editObservation.date_avis_baill"
                                     class="span"
                                     placeholder="Saisir le libelle_type"
                             />
@@ -1206,15 +1203,12 @@
                                 <option value="1">Favorable</option>
                                 <option value="2">Defavorable</option>
                             </select>
-                                
-                            
                         </div>
                     </div>
-
                     <div class="control-group">
                         <label class="control-label">Observation</label>
                         <div class="controls">
-                            <textarea  v-model="editObservation.observations_bail"
+                            <textarea  v-model="editObservation.observations_bailleur"
                                     class="span"
                                     placeholder="Saisir l'observation"
                             ></textarea>
@@ -1300,11 +1294,6 @@
     </div>
 
 <!--  fin modification ano --->
-
-
-
-
-
 
 
           </div>
@@ -2734,7 +2723,7 @@
                         <label class="control-label">Analyse DMP</label>
                         <div class="controls">
                             <select v-model="formAno.analyse_dmp_id" class="span">
-                                <option v-for="varText in listeAnalyseDPM(marcheid)" :key="varText.id"
+                                <option v-for="varText in listeAnalyseDMPFavorable(marcheid)" :key="varText.id"
                                         :value="varText.id">{{varText.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
                             </select>
                         </div>
@@ -2988,19 +2977,17 @@ num_courrier:""
 
 
 formObservation:{
-    date_avis_bail:"",
+    date_avis_baill:"",
     avis_bail:"",
-    observations_bail:"",
+    observations_bailleur:"",
     ano_dmp_bailleur_id:"",
     document_procedure_id:""
-
-
 },
 
 editObservation:{
-    date_avis_bail:"",
+    date_avis_baill:"",
     avis_bail:"",
-    observations_bail:"",
+    observations_bailleur:"",
     ano_dmp_bailleur_id:"",
     document_procedure_id:""
 },
@@ -3085,7 +3072,8 @@ created() {
             ...mapGetters("bienService", [ 'acteDepense',"getMarchePersonnaliser","appelOffres",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
-                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno","documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"obseravtionBailleurs"]),
+                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
+                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs"]),
             listeAppelOffre(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -3160,6 +3148,25 @@ created() {
                 return marcheid => {
                     if (marcheid != "") {
                         return this.getterAnoDMPBailleur.filter(idmarche => idmarche.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
+                    }
+                }
+            },
+
+            listeAnalyseDMPFavorable: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                        return this.getterAnalyseDMP.filter(idmarche => {
+                            if(idmarche.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid && idmarche.observation==1){
+                             return idmarche
+                            }
+                        })
+                    }
+                }
+            },
+            listeObservationBailleurANODMP: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                        return this.getterObseravtionBailleurs.filter(idmarche => idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
                     }
                 }
             },
@@ -3393,10 +3400,10 @@ created() {
                 this.ajouterObseravtionBailleur(this.formObservation)
                 this.formObservation = {
                     date_avis_bail:"",
-    avis_bail:"",
-    observations_bail:"",
-    ano_dmp_bailleur_id:"",
-    document_procedure_id:""
+               avis_bail:"",
+              observations_bail:"",
+           ano_dmp_bailleur_id:"",
+             document_procedure_id:""
 
                 }
 
