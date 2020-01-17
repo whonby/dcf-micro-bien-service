@@ -2562,8 +2562,8 @@
                         <label class="control-label">Avis</label>
                         <div class="controls">
                             <select v-model="formAnalyseDMP.avis_bail" class="span">
-                                <option value="1">Visé</option>
-                                <option value="2">rejeté</option>
+                                <option value="1">Favorable</option>
+                                <option value="2">Defavorable</option>
                             </select>
                             <!-- <input
                                     type="text"
@@ -2745,8 +2745,8 @@
                         <label class="control-label">Avis</label>
                         <div class="controls">
                             <select v-model="formAno.avis_dmp" class="span">
-                                <option value="1">Visé</option>
-                                <option value="2">Rejeté</option>
+                                <option value="1">Favorable</option>
+                                <option value="2">Defavorable</option>
                             </select>
                         </div>
                     </div>
