@@ -119,10 +119,8 @@ export default {
          'getTypePrestation', 'getCondition', 'getTextJuridique','getDecisionMarche', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",
          "getDossierCandidat", "getOffreFinancier", "getOffreTechnique","getLettreInvitation","getMandater",
-
-         "getCojo","getAnalyseDossier", 'getMotifDecision', 'getDocumentProcedure', 'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur"])
-
-
+         "getCojo","getAnalyseDossier", 'getMotifDecision', 'getDocumentProcedure',
+         'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur"])
 
   },
 
@@ -278,6 +276,7 @@ this.getLettreInvitation()
     this.getDemandeAno()
     this.getAnalyseDMP()
     this.getAnoDMPBailleur()
+    this.getObservationBailleur()
       /**
        * fin missions
        */
