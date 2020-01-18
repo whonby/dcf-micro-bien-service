@@ -189,6 +189,12 @@
                 <li class=""><a data-toggle="tab" href="#tab34">Analyse DMP</a></li>
                  <li class=""><a data-toggle="tab" href="#tab35">ANO Bailleur</a></li>
                  <li class=""><a data-toggle="tab" href="#tab36">Observation Bailleur</a></li>
+                 <li class=""><a data-toggle="tab" href="#tab37" title="Acte effet financier">Acte</a></li>
+
+            
+
+            
+
             </ul>
           </div>
 
@@ -655,7 +661,204 @@
                 <!--fin dossier candidat-->
 
 
+
+
+
+
+
               </div>
+
+
+
+     <!--- debut ajout fournisseur que information n'exist pas dans la base  --->
+
+ <div id="addFournisseurDosntBase" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>creer nouveau fournisseur</h3>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="get" class="form-horizontal" @submit.prevent="ajouterNouveauFournisseurLocal" enctype="multipart/form-data">
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="widget-box">
+                                            <div class="widget-content nopadding">
+
+                                                <div class="control-group">
+                                                    <label class="control-label">Raison social :</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Raison social" v-model="formFournisseur.raison_sociale">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Sigle :</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Sigle" v-model="formFournisseur.sigle">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Secteur activite</label>
+                                                    <div class="controls">
+                                                        <select v-model="formFournisseur.secteur_activite_id">
+                                                            <option></option>
+                                                            <option v-for="item in secteur_activites" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Numero compte contribuable :</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Numero compte contribuable" v-model="formFournisseur.numero_cc">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Numero de registe de commerce:</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Numero de registe de commerce" v-model="formFournisseur.numero_rc">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Capitale social:</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Capitale social" v-model="formFournisseur.capitale_sociale">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Banque:</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Banque"  v-model="formFournisseur.banque">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Telephone:</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Telephone" v-model="formFournisseur.telephone">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Email:</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Email" v-model="formFournisseur.email">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Pays:</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Pays" v-model="formFournisseur.pays">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Ville:</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Ville" v-model="formFournisseur.ville">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Adresse:</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11"  placeholder="Adresse" v-model="formFournisseur.adresse">
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="widget-box">
+                                            <div class="widget-content nopadding">
+                                                <div class="control-group">
+                                                    <label class="control-label">Form juridique:</label>
+                                                    <div class="controls">
+                                                        <select v-model="formFournisseur.forme_juridique">
+                                                            <option></option>
+                                                            <option value="SNC">Société en Nom Collectif</option>
+                                                            <option value="SCS">Société en Commandite Simple</option>
+                                                            <option value="SP">Société en Participation</option>
+                                                            <option value="SARL">Société à Responsabilité Limitée </option>
+                                                            <option value="SRLU">Société à Responsabilité Limitée Unipersonnelle</option>
+                                                            <option value="SA">Société Anonyme</option>
+                                                            <option value="SAU">Société Anonyme Unipersonnelle </option>
+                                                            <option value="GIE">Groupement d’intérêt Economique</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Centre import :</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Centre import" v-model="formFournisseur.centre_impot">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Service assiette :</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Service assiette" v-model="formFournisseur.service_assiette_impot">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="widget-box">
+                                            <div class="widget-content nopadding">
+                                                <div class="control-group">
+                                                    <label class="control-label">Imatriculation CNPS:</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Imatriculation CNPS" v-model="formFournisseur.immatriculation_cnps">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Date enregistrement CNPS :</label>
+                                                    <div class="controls">
+                                                        <input type="date" class="span11" placeholder="Date enregistrement CNPS" v-model="formFournisseur.date_enregistrement_cnps">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Nombre travailleur Permanent :</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Nombre travailleur Permanant" v-model="formFournisseur.nbre_travailleur_permanent">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Nombre travailleur horaire :</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Nombre travailleur horaire" v-model="formFournisseur.nbre_travailleur_horaire">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Nombre travailleur journalier :</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Nombre travailleur journalier" v-model="formFournisseur.nbre_travailleur_journalier">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <button type="submit" class="btn btn-success">Enregistrement</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+            </div>
+            <!-- <div class="modal-footer">
+                <a
+                        @click.prevent="ajoutObservationBailleurLocal"
+                        class="btn btn-primary"
+                        href="#"
+
+                >Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div> -->
+        </div>
+
+              <!--  fin ajout founisseur --->
+
+
+
+
 
             <div id="tab21" class="tab-pane">
 <div align="right">
@@ -941,7 +1144,10 @@
                         <td @click="afficheAnalyseDMP(document.id)">
                             {{document.avis_bail || 'Non renseigné'}}</td>
                         <td @click="afficheAnalyseDMP(document.id)">
-                            {{document.observation || 'Non renseigné'}}</td>
+
+                            <button class="btn btn-success btn-mini" v-if="document.observation==1">Aais favorable</button>
+                            <button class="btn btn-danger btn-mini" v-else>Avis defavorable</button>
+                        </td>
                         <td @click="afficheAnalyseDMP(document.id)">
                             {{document.document_procedure.libelle_doc || 'Non renseigné'}}</td>
                         <div class="btn-group">
@@ -1033,21 +1239,30 @@
 
                     </div>
 
+                    <div class="widget-content">
+
+                        <a href="#addFournisseurDosntBase" data-toggle="modal" class="btn btn-success" title="ajouter nouveau fournisseur">ajouter</a>
+
+                    </div>
+
                 </div>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
+
                         <th>Document procedure</th>
                         <th>ANO DMP bailleur</th>
+
+                        <th>Numero dossier candidat</th>
+
                         <th>Date</th>
                         <th>Avis</th>
                         <th>Observation </th>
-                        
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for="observationBailleur in obseravtionBailleurs"
+                    <tr class="odd gradeX" v-for="observationBailleur in listeObservationBailleurANODMP(marcheid)"
                         :key="observationBailleur.id">
 
 
@@ -1058,16 +1273,19 @@
                             {{observationBailleur.ano_dmp_bailleur_id || 'Non renseigné'}}</td>
 
                         <td @click="afficherModalObservationBailleur(observationBailleur.id)">
-                            {{observationBailleur.date_avis_bail || 'Non renseigné'}}</td>
+                            {{observationBailleur.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td>
                         <td @click="afficherModalObservationBailleur(observationBailleur.id)">
-                            {{observationBailleur.avis_bail || 'Non renseigné'}}</td>
+                            {{observationBailleur.date_avis_baill || 'Non renseigné'}}</td>
                         <td @click="afficherModalObservationBailleur(observationBailleur.id)">
-                            {{observationBailleur.observations_bail || 'Non renseigné'}}</td>
-                       
+                            <button class="btn btn-success btn-mini" v-if="observationBailleur.avis_bail==1">Avis favorable</button>
+                            <button class="btn btn-danger btn-mini" v-else>Defavorable</button>
+                        </td>
+                        <td @click="afficherModalObservationBailleur(observationBailleur.id)">
+                            {{observationBailleur.observations_bailleur || 'Non renseigné'}}</td>
                         <div class="btn-group">
                             <button @click.prevent="supprimerObseravtionBailleur(observationBailleur.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span></button>
-
+                                <span class=""><i class="icon-trash"></i></span>
+                            </button>
                         </div>
 
                     </tr>
@@ -1097,7 +1315,7 @@
                         <div class="controls">
                           <select v-model="formObservation.document_procedure_id" class="span">
                                 <option v-for="varText in documentProcedures" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle}}</option>
+                                        :value="varText.id">{{varText.libelle_doc}}</option>
                             </select>
                         
                         </div>
@@ -1108,21 +1326,16 @@
                         <div class="controls">
                            <select v-model="formObservation.ano_dmp_bailleur_id" class="span">
                                 <option v-for="varText in listeAnoDMPBailleur(marcheid)" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle}}</option>
+                                        :value="varText.id">{{varText.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
                             </select>
                         </div>
                     </div>
-
-
-
-
-
                     <div class="control-group">
                         <label class="control-label">Date </label>
                         <div class="controls">
                             <input
                                     type="date"
-                                    v-model="formObservation.date_avis_bail"
+                                    v-model="formObservation.date_avis_baill"
                                     class="span"
                                     placeholder="Saisir le libelle_type"
                             />
@@ -1143,7 +1356,7 @@
                     <div class="control-group">
                         <label class="control-label">Observation</label>
                         <div class="controls">
-                            <textarea  v-model="formObservation.observations_bail"
+                            <textarea  v-model="formObservation.observations_bailleur"
                                     class="span"
                                     placeholder="Saisir l'observation"
                             ></textarea>
@@ -1177,35 +1390,31 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
-
-
                         <div class="control-group">
                         <label class="control-label">Document Procedure</label>
                         <div class="controls">
                           <select v-model="editObservation.document_procedure_id" class="span">
                                 <option v-for="varText in documentProcedures" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle}}</option>
+                                        :value="varText.id">{{varText.libelle_doc}}</option>
                             </select>
                         
                         </div>
                     </div>
-
                      <div class="control-group">
                         <label class="control-label">ANO DMP bailleur </label>
                         <div class="controls">
                            <select v-model="editObservation.ano_dmp_bailleur_id" class="span">
                                 <option v-for="varText in listeAnoDMPBailleur(marcheid)" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle}}</option>
+                                        :value="varText.id">{{varText.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
                             </select>
                         </div>
                     </div>
-
                     <div class="control-group">
                         <label class="control-label">Date </label>
                         <div class="controls">
                             <input
                                     type="date"
-                                    v-model="editObservation.date_avis_bail"
+                                    v-model="editObservation.date_avis_baill"
                                     class="span"
                                     placeholder="Saisir le libelle_type"
                             />
@@ -1218,15 +1427,12 @@
                                 <option value="1">Favorable</option>
                                 <option value="2">Defavorable</option>
                             </select>
-                                
-                            
                         </div>
                     </div>
-
                     <div class="control-group">
                         <label class="control-label">Observation</label>
                         <div class="controls">
-                            <textarea  v-model="editObservation.observations_bail"
+                            <textarea  v-model="editObservation.observations_bailleur"
                                     class="span"
                                     placeholder="Saisir l'observation"
                             ></textarea>
@@ -1312,11 +1518,6 @@
     </div>
 
 <!--  fin modification ano --->
-
-
-
-
-
 
 
           </div>
@@ -2746,7 +2947,7 @@
                         <label class="control-label">Analyse DMP</label>
                         <div class="controls">
                             <select v-model="formAno.analyse_dmp_id" class="span">
-                                <option v-for="varText in listeAnalyseDPM(marcheid)" :key="varText.id"
+                                <option v-for="varText in listeAnalyseDMPFavorable(marcheid)" :key="varText.id"
                                         :value="varText.id">{{varText.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
                             </select>
                         </div>
@@ -2864,6 +3065,35 @@
                     }
 
                 ],
+
+
+                formFournisseur : {
+                    numero_cc: "",
+                    numero_rc: "",
+                    raison_sociale: "",
+                    sigle: "",
+                    secteur_activite_id: "",
+                    activite_principale: "",
+                    pays: "",
+                    ville: "",
+                    forme_juridique:"",
+                    centre_impot:"",
+                    regime_imposition:"",
+                    capitale_sociale:"",
+                    immatriculation_cnps:"",
+                    date_enregistrement_cnps:"",
+                    telephone:"",
+                    email:"",
+                    nbre_travailleur_permanent:"",
+                    nbre_travailleur_journalier:"",
+                    service_assiette_impot:"",
+                    adresse:"",
+                    banque:""
+                },
+
+
+
+
                 formAnalyseDMP:{
                     document_procedure_id:"",
                     demande_ano_id:"",
@@ -3000,19 +3230,17 @@ num_courrier:""
 
 
 formObservation:{
-    date_avis_bail:"",
+    date_avis_baill:"",
     avis_bail:"",
-    observations_bail:"",
+    observations_bailleur:"",
     ano_dmp_bailleur_id:"",
     document_procedure_id:""
-
-
 },
 
 editObservation:{
-    date_avis_bail:"",
+    date_avis_baill:"",
     avis_bail:"",
-    observations_bail:"",
+    observations_bailleur:"",
     ano_dmp_bailleur_id:"",
     document_procedure_id:""
 },
@@ -3097,7 +3325,8 @@ created() {
             ...mapGetters("bienService", [ 'acteDepense',"getMarchePersonnaliser","appelOffres",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
-                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno","documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"obseravtionBailleurs"]),
+                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
+                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs"]),
             listeAppelOffre(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -3175,6 +3404,25 @@ created() {
                     }
                 }
             },
+
+            listeAnalyseDMPFavorable: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                        return this.getterAnalyseDMP.filter(idmarche => {
+                            if(idmarche.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid && idmarche.observation==1){
+                             return idmarche
+                            }
+                        })
+                    }
+                }
+            },
+            listeObservationBailleurANODMP: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                        return this.getterObseravtionBailleurs.filter(idmarche => idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
+                    }
+                }
+            },
             // listeObservationBailleur:function () {
             //     return marcheid => {
             //         if(marcheid !=""){
@@ -3222,7 +3470,8 @@ created() {
                 "modifierAnalyseDossier","supprimerAnalyseDossier","ajouterDemandeAno",
                 "modifierDemandeAno","supprimerDemandeAno","ajouterAnalyseDMP","modifierAnalyseDMP",
                 "supprimerAnalyseDMP","ajouterAnoDMPBailleur","modifierAnoDMPBailleur","supprimerAnoDMPBailleur"
-                , "modifierObservationBaileur","ajouterObseravtionBailleur" , "supprimerObseravtionBailleur"
+                , "modifierObservationBaileur","ajouterObseravtionBailleur" , "supprimerObseravtionBailleur",
+                 "ajouterFournisseur"
             ]),
             // formatageSomme: formatageSomme,
             ajouterBudgetaireLocal(){
@@ -3405,10 +3654,10 @@ created() {
                 this.ajouterObseravtionBailleur(this.formObservation)
                 this.formObservation = {
                     date_avis_bail:"",
-    avis_bail:"",
-    observations_bail:"",
-    ano_dmp_bailleur_id:"",
-    document_procedure_id:""
+               avis_bail:"",
+              observations_bail:"",
+           ano_dmp_bailleur_id:"",
+             document_procedure_id:""
 
                 }
 
@@ -3512,6 +3761,40 @@ created() {
                     annalyseDP => annalyseDP.id == index
                 )
             },
+
+
+
+// vider l'input de nnouveau fournisseur
+ajouterNouveauFournisseurLocal(){
+    this.ajouterFournisseur(this.formFournisseur)
+    this.formFournisseur = {
+         numero_cc: "",
+                    numero_rc: "",
+                    raison_sociale: "",
+                    sigle: "",
+                    secteur_activite_id: "",
+                    activite_principale: "",
+                    pays: "",
+                    ville: "",
+                    forme_juridique:"",
+                    centre_impot:"",
+                    regime_imposition:"",
+                    capitale_sociale:"",
+                    immatriculation_cnps:"",
+                    date_enregistrement_cnps:"",
+                    telephone:"",
+                    email:"",
+                    nbre_travailleur_permanent:"",
+                    nbre_travailleur_journalier:"",
+                    service_assiette_impot:"",
+                    adresse:"",
+                    banque:""
+
+    }
+},
+
+
+
 
             afficheAnoDPMBailleurModale(index){
                 this.$('#editeAnoDmpBailleurModal').modal({

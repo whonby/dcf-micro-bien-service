@@ -48,7 +48,8 @@ documentProcedures:[],
     stateDemandeAno:[],
     analyseDMP:[],
     stateAnoDmpBailleur:[],
-    obseravtionBailleurs:[]
+    obseravtionBailleurs:[],
+    nouveauFournisseur:[]
 
 
 

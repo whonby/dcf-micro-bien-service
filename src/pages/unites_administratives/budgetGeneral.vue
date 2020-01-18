@@ -1,450 +1,7 @@
 
 <template>
   <div>
-    <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
-    <!-- <div id="exampleModal" class="modal hide tailgrand12">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Budget par unité d'administrative</h3>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-         
-            <tr>
-                 <td>
-                <div class="control-group">
-                  <label class="control-label">Exercice budgetaire</label>
-                
-                  <div class="controls">
-                     <input
-                                type="text"
-                                class="span"
-                               readonly
-                              :value="anneeAmort"
-                              />
-                            <input
-                                type="text"
-                                class="span"
-                               readonly
-                              :value="alertMessage"
-                              /> 
-                  </div>
-                  </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Grande nature depense</label>
-                  <div class="controls">
-                    <select v-model="formData.gdenature_id">
-                      <option
-                        v-for="gdenature in grandes_natures"
-                        :key="gdenature.id"
-                        :value="gdenature.id"
-                      >{{gdenature.code}} - {{gdenature.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Programme</label>
-                  <div class="controls">
-                    <select v-model="formData.program_id">
-                      <option
-                        v-for="natsection in afficheNiveauPlanProg"
-                        :key="natsection.id"
-                        :value="natsection.id"
-                      >{{natsection.code}}-{{natsection.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-               <td>
-              
-               <div class="control-group">
-                  <label class="control-label">Unite administrative</label>
-                  <div class="controls">
-                    <select v-model="formData.ua_id">
-                        <option value>Sélectionner</option>
-                    <option
-                      v-for="ua in uniteAdministratives"
-                      :key="ua.id"
-                      :value="ua.id"
-                    >{{ua.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-               
-            </tr>
-            <tr>
-                 <td>
-              
-               <div class="control-group">
-                   <label class="control-label">Type Unite administrative</label>
-                  <div class="controls">
-                    <select v-model="formData.typeua_id">
-                      <option
-                        v-for="type in uniteAdministrativeDynamiques(formData.ua_id)"
-                        :key="type.id"
-                        :value="type.typeua.id"
-                      >{{type.typeua.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-               <td>
-              
-               <div class="control-group">
-                  <label class="control-label">Section</label>
-                  <div class="controls">
-                    <select v-model="formData.section_id">
-                      <option
-                        v-for="sect in sectionDynamiques(formData.ua_id)"
-                        :key="sect.id"
-                        :value="sect.secti.id"
-                      >{{sect.secti.code_section}}-{{sect.secti.nom_section}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-             <td>
-                 <div class="control-group">
-                  <label class="control-label">Classification Fonctionnel</label>
-                  <div class="controls">
-                    <select v-model="formData.fonctionnel_id">
-                      <option
-                        v-for="planfonct in afficheNiveauPlanFonctionnel"
-                        :key="planfonct.id"
-                        :value="planfonct.id"
-                      >{{planfonct.code}}-{{planfonct.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-             <td>
-                 <div class="control-group">
-                  <label class="control-label">Classification Economique</label>
-                  <div class="controls">
-                    <select v-model="formData.economique_id">
-                      <option
-                        v-for="Bgeneral in derniereNivoPlanBudgetaire"
-                        :key="Bgeneral.id"
-                        :value="Bgeneral.id"
-                      >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-              
-            </tr>
-            <tr>
-               <td>
-                 <div class="control-group">
-                  <label class="control-label">Action</label>
-                  <div class="controls">
-                    <select v-model="formData.action_id">
-                      <option
-                        v-for="planfonct in afficheNiveauAction"
-                        :key="planfonct.id"
-                        :value="planfonct.id"
-                      >{{planfonct.code}}-{{planfonct.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-            
-                <td>
-                <div class="control-group">
-                  <label class="control-label">Code Budget general</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                     :value="codeBudgetGeneral"
-                      class="span3"
-                      placeholder="Saisir le code"
-                      readonly
-                    />
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Dotation Initiale</label>
-                
-                  <div class="controls">
-                    <input
-                      type="number"
-                    v-model="formData.Dotation_Initiale"
-                      class="span"
-                      placeholder="Dotation Initiale"
-                      
-                    />
-                  </div>
-                  </div>
-              </td>
-               
-              <td>
-                            <div class="control-group">
-                            <label class="control-label">Version</label>
-                            <div class="controls">
-                              <select v-model="formData.version">
-                              <option value="0">Original</option>
-                          <option value="1">Premiere modification</option>
    
-    </select>
-                            </div>
-                          </div>
-                        </td>
-
-            </tr>
-          <tr>
-             <td>
-                 <div class="control-group">
-                  <label class="control-label">Activite</label>
-                  <div class="controls">
-                    <select v-model="formData.activite_id">
-                      <option
-                        v-for="Bgeneral in afficheNiveauActivite"
-                        :key="Bgeneral.id"
-                        :value="Bgeneral.id"
-                      >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-          </tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="ajouterUniteAdministrativeLocal(formData)"
-          class="btn btn-primary"
-          href="#"
-         
-        >Valider</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div> -->
-    <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
-    <!--///////////////////////////////////////// debut modal modification //////////////////////////////-->
-    <!-- <div id="modificationModal" class="modal hide tailgrand12">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Budget par unité d'administrative</h3>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-          
-             <tr>
-                 <td>
-                <div class="control-group">
-                  <label class="control-label">Exercice budgetaire</label>
-                
-                  <div class="controls">
-                     <input
-                                type="text"
-                                class="span"
-                               readonly
-                              :value="anneeAmort"
-                              />
-                  </div>
-                  </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Grande nature depense</label>
-                  <div class="controls">
-                    <select v-model="editBudgetGeneral.gdenature_id">
-                      <option
-                        v-for="gdenature in grandes_natures"
-                        :key="gdenature.id"
-                        :value="gdenature.id"
-                      >{{gdenature.code}} - {{gdenature.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Programme</label>
-                  <div class="controls">
-                    <select v-model="editBudgetGeneral.program_id">
-                      <option
-                        v-for="natsection in afficheNiveauPlanProg"
-                        :key="natsection.id"
-                        :value="natsection.id"
-                      >{{natsection.code}}-{{natsection.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-                <td>
-              
-               <div class="control-group">
-                  <label class="control-label">Unite administrative</label>
-                  <div class="controls">
-                    <select v-model="editBudgetGeneral.ua_id">
-                        <option value>Sélectionner</option>
-                    <option
-                      v-for="ua in uniteAdministratives"
-                      :key="ua.id"
-                      :value="ua.id"
-                    >{{ua.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-              
-               <div class="control-group">
-                   <label class="control-label">Type Unite administrative</label>
-                  <div class="controls">
-                    <select v-model="editBudgetGeneral.typeua_id">
-                      <option
-                        v-for="type in uniteAdministrativeDynamiques(editBudgetGeneral.ua_id)"
-                        :key="type.id"
-                        :value="type.typeua.id"
-                      >{{type.typeua.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-                
-               <td>
-              
-               <div class="control-group">
-                  <label class="control-label">Section</label>
-                  <div class="controls">
-                    <select v-model="editBudgetGeneral.section_id">
-                      <option
-                        v-for="sect in sectionDynamiques(editBudgetGeneral.ua_id)"
-                        :key="sect.secti.id"
-                        :value="sect.secti.id"
-                      >{{sect.secti.code_section}}-{{sect.secti.nom_section}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-             <td>
-                 <div class="control-group">
-                  <label class="control-label">Classification Fonctionnel</label>
-                  <div class="controls">
-                    <select v-model="editBudgetGeneral.fonctionnel_id">
-                     <option
-                        v-for="planfonct in afficheNiveauPlanFonctionnel"
-                        :key="planfonct.id"
-                        :value="planfonct.id"
-                      >{{planfonct.code}}-{{planfonct.libelle}}</option>
-                    </select>
-                    
-                  </div>
-                </div>
-              </td>
-             <td>
-                 <div class="control-group">
-                  <label class="control-label">Classification Economique</label>
-                  <div class="controls">
-                    <select v-model="editBudgetGeneral.economique_id">
-                      <option
-                        v-for="Bgeneral in derniereNivoPlanBudgetaire"
-                        :key="Bgeneral.id"
-                        :value="Bgeneral.id"
-                      >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-              
-            </tr>
-            <tr>
-                <td>
-                 <div class="control-group">
-                  <label class="control-label">Action</label>
-                  <div class="controls">
-                    <select v-model="editBudgetGeneral.action_id">
-                      <option
-                        v-for="planfonct in afficheNiveauAction"
-                        :key="planfonct.id"
-                        :value="planfonct.id"
-                      >{{planfonct.code}}-{{planfonct.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-                <td>
-                <div class="control-group">
-                  <label class="control-label">Code Budget general</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                     :value="codeBudgetGeneralModifier"
-                      class="span3"
-                      placeholder="Saisir le code"
-                      readonly
-                    />
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Dotation Initiale</label>
-                
-                  <div class="controls">
-                    <input
-                      type="number"
-                    v-model="editBudgetGeneral.Dotation_Initiale"
-                      class="span"
-                      placeholder="Dotation Initiale"
-                      
-                    />
-                  </div>
-                  </div>
-              </td>
-              
-               <td>
-                            <div class="control-group">
-                            <label class="control-label">Version</label>
-                            <div class="controls">
-                              <select v-model="editBudgetGeneral.version">
-                              <option value="0">Original</option>
-                          <option value="1">Premiere modification</option>
-   
-    </select>
-                            </div>
-                          </div>
-                        </td>
-            </tr>
-             <tr>
-             <td>
-                 <div class="control-group">
-                  <label class="control-label">Activite</label>
-                  <div class="controls">
-                    <select v-model="editBudgetGeneral.activite_id">
-                      <option
-                        v-for="Bgeneral in afficheNiveauActivite"
-                        :key="Bgeneral.id"
-                        :value="Bgeneral.id"
-                      >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-          </tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="modifierUniteAdministrativeLocal(editBudgetGeneral)"
-          class="btn btn-primary"
-          href="#"
-         
-        >Modifier</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div> -->
     <!--///////////////////////////////////////// fin modal modification //////////////////////////////-->
     <!-- End Page Header -->
     <!-- Default Light Table -->
@@ -468,7 +25,7 @@
             <div class="widget-title">
               <div align="right">
                 Recherche:
-                <input type="search" placeholder="Saisie Unite administrative" v-model="search" class="span5"/>
+                <input type="search" placeholder="" v-model="search" class="span5"/>
 
                 <!-- <div class="span3">
                   <model-list-select
@@ -485,7 +42,8 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Budget General par Ua</h5> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <h5>Budget General</h5>
+              <!-- <h5>Budget General par Ua</h5> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -495,7 +53,7 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
              
-              <span class="badge badge-inverse" >Total Budget General : {{formatageSomme(parseFloat(montantBudgetGeneral))}}</span>
+              <span class="badge badge-inverse" >Total Budget General : {{formatageSomme(parseFloat(montantBudgetGeneral))}}</span> -->
             </div>
 
             <div
@@ -505,8 +63,8 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                       <th>Exercice</th>
-                    <th title="">Code Budget</th>
+                       <!-- <th>Exercice</th>
+                    <th title="">Code Budget</th> -->
                      <th title="unite administrative">ua</th>
                     <th>Section</th>
                     <th title="grande nature depense">Gde nature</th>
@@ -535,8 +93,8 @@
                   >
                    
                   
-                    <td>{{Bgeneral.exercicebudget_id || 'Non renseigné'}}</td>
-                      <td>{{Bgeneral.codebudget || 'Non renseigné'}}</td>
+                    <!-- <td>{{Bgeneral.exercicebudget_id || 'Non renseigné'}}</td>
+                      <td>{{Bgeneral.codebudget || 'Non renseigné'}}</td> -->
                       <!-- <td>{{Bgeneral.affichetypeua.libelle || 'Non renseigné'}}</td> -->
                     <td>{{Bgeneral.afficheUA.libelle || 'Non renseigné'}}</td>
                     <td>{{Bgeneral.afficheSection.code_section || 'Non renseigné'}}-{{Bgeneral.afficheSection.nom_section || 'Non renseigné'}}</td>
@@ -567,12 +125,12 @@
                   </tr>
                   <tr>
                      
-                       <td>
+                       <!-- <td>
                            
                       </td>
                        <td>
                           
-                      </td>
+                      </td> -->
                         <td>
                           
                       </td>
@@ -642,21 +200,60 @@ export default {
       json_fields: {
         // ANNEE: "exercicebudget_id",
         // CODE_BUDGET: "codebudget",
-        CODE_SECTION: "afficheSection.code_section",
-        SECTION: "afficheSection.nom_section",
+        // code_section:"afficheSection.code_section",
+        // section:"afficheSection.nom_section",
+          // 'section' : 
+        // ``
+        section: {
+          field: "afficheSection",
+          callback: (value) => {
+            return `${value.code_section} - ${value.nom_section}`
+          }
+        },
         
-        GRANDE_NATURE: "afficheGdeNature.libelle",
-        CODE_PROGRAMME: "afficheProgramme.code",
-        PROGRAMME: "afficheProgramme.libelle",
-        CODE_ACTION: "afficheAction.code",
-         ACTION: "afficheAction.libelle",
-        CODE_ACTIVITE: "afficheActivite.code",
-        ACTIVITE: "afficheActivite.libelle",
-        CODE_FONCTIONNEL: "afficheFonctionnel.code",
-        FONCTIONNEL: "afficheFonctionnel.libelle",
-        CODE_ECONOMIQUE: "afficheEconomique.code",
-        ECONOMIQUE: "afficheEconomique.libelle",
-        DOTATION_INITIAL: "Dotation_Initiale",
+        // section: `${afficheSection.code_section} - ${afficheSection.nom_section}`, 
+        grande_nature: "afficheGdeNature.libelle",
+        programme: {
+          field: "afficheProgramme",
+          callback: (value) => {
+            return `${value.code} - ${value.libelle}`
+          }
+        },
+        action: {
+          field: "afficheAction",
+          callback: (value) => {
+            return `${value.code} - ${value.libelle}`
+          }
+        },
+        activite: {
+          field: "afficheActivite",
+          callback: (value) => {
+            return `${value.code} - ${value.libelle}`
+          }
+        },
+         fonctionnel: {
+          field: "afficheFonctionnel",
+          callback: (value) => {
+            return `${value.code} - ${value.libelle}`
+          }
+        },
+         economique: {
+          field: "afficheEconomique",
+          callback: (value) => {
+            return `${value.code} - ${value.libelle}`
+          }
+        },
+          dotation_initial: "Dotation_Initiale",
+        // code_programme: "afficheProgramme.code",
+        // programme: "afficheProgramme.libelle",
+      
+        // code_activite: "afficheActivite.code",
+        // ACTIVITE: "afficheActivite.libelle",
+        // CODE_FONCTIONNEL: "afficheFonctionnel.code",
+        // FONCTIONNEL: "afficheFonctionnel.libelle",
+        // CODE_ECONOMIQUE: "afficheEconomique.code",
+        // ECONOMIQUE: "afficheEconomique.libelle",
+        // DOTATION_INITIAL: "Dotation_Initiale",
         // TOTAL_DOTATION: {
           
       
@@ -672,7 +269,7 @@ export default {
       "uniteAdministratives",
       "budgetGeneral",
       "getPersonnaliseBudgetGeneral",
-      "montantBudgetGeneral"
+      // "montantBudgetGeneral"
       // "chapitres",
       // "sections"
     ]),
@@ -703,8 +300,7 @@ export default {
           items.afficheUA.libelle.toLowerCase().includes(st) ||
          items.afficheSection.code_section.toLowerCase().includes(st) ||
          items.afficheGdeNature.libelle.toLowerCase().includes(st) ||
-         items.afficheProgramme.code.toLowerCase().includes(st) ||
-         items.afficheUA.libelle.toLowerCase().includes(st) 
+         items.afficheProgramme.code.toLowerCase().includes(st) 
         );
       });
     },
@@ -715,8 +311,7 @@ export default {
           items.afficheUA.libelle.toLowerCase().includes(st) ||
          items.afficheSection.code_section.toLowerCase().includes(st) ||
          items.afficheGdeNature.libelle.toLowerCase().includes(st) ||
-         items.afficheProgramme.code.toLowerCase().includes(st) ||
-         items.afficheUA.libelle.toLowerCase().includes(st) 
+         items.afficheProgramme.code.toLowerCase().includes(st) 
          
         );
       }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2);

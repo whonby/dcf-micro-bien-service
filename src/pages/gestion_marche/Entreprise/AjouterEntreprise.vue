@@ -16,6 +16,7 @@
                         </div>
 
                         <div class="widget-content nopadding">
+                            
                             <form action="#" method="get" class="form-horizontal" @submit.prevent="ajouterTitreLocal" enctype="multipart/form-data">
                                 <div class="row-fluid">
                                     <div class="span6">

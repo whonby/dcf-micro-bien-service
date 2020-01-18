@@ -88,6 +88,12 @@ export const MODIFIER_DOCUMENT_PROCEDURE = (state, elementModif)=>{
 }
 
 
+// add * nouveau fournisseur
+
+export const AJOUTER_NOUVEAU_FOURNISSEUR = (state, elementAjouter) => {
+    state.nouveauFournisseur.unshift(elementAjouter)
+}
+
 
 // delete all document procedure
 

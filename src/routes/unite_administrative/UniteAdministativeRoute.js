@@ -7,9 +7,20 @@ import listetypetexte from "../../pages/unites_administratives/liste_type_texte.
 import ordonnedocua from "../../pages/unites_administratives/ordonne_doc_ua.vue";
 import budgetGenerals from "../../pages/unites_administratives/budgetGeneralComponent.vue";
 import budgetGeneralParUa from "../../pages/unites_administratives/budgetGeneral.vue"
-
+import grpeBudgetSection from "../../pages/unites_administratives/grpeBudgetSection.vue"
+import grpeBudgetProgramme from "../../pages/unites_administratives/grpeBudgetProgramme.vue"
 
 const UniteAdministativeRoutes = [
+  {
+    path: "/budget-General-Par-Programme",
+    name: "grpeBudgetProgramme",
+    component: grpeBudgetProgramme
+  },
+  {
+    path: "/budget-General-Par-section",
+    name: "grpeBudgetSection",
+    component: grpeBudgetSection
+  },
   {
     path: "/budget-General-Par-Ua",
     name: "budgetGeneralParUa",

@@ -7,8 +7,8 @@
             <div class="accordion-heading">
               <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
-                <h5>{{groupe.code}} &nbsp; {{groupe.libelle}}</h5>
-                 <span class="badge badge-info" >{{getNombreArticle}}</span>&nbsp;&nbsp;
+                <h5>{{groupe.program_id}} &nbsp; {{groupe.program_id}}</h5>
+                 <!-- <span class="badge badge-info" >{{getNombreArticle}}</span>&nbsp;&nbsp; -->
                  <span class="badge badge-inverse" >{{formatageSomme(parseFloat(MontantTotal))}}</span>
 
                 </a> 
@@ -25,27 +25,23 @@
                     <th>Section</th>
                     <th title="grande nature depense">Gde nature</th>
                       <th>Programme</th>
-                    <!--<th>Action</th> -->
-                    <!-- <th>Activite</th> -->
+                    <th>Action</th> 
+                    <th>Activite</th> 
                      <th title="classification fonctionnel">Clsse Fontionnel</th>
                      <th title="classification Economique">Clsse Economique</th>
                     <th>Dotation Initial</th>
-                    <th>Version</th>
-                    
-
-                    <th>Action</th>
+                   
                   </tr>
                 </thead>
                 <tbody>
-                   <budgetGeneralItem
+                   <grpeBudgetProgrammeItem
                         class="item"
                         v-for="groupeElement in groupe.ua_budget_general"
                         :key="groupeElement.id"
                         :article="groupeElement"
-                      @modification="$emit('modification', $event)"
-                        @suppression="$emit('suppression', $event)"
+                    
 
-                    ></budgetGeneralItem>
+                    ></grpeBudgetProgrammeItem>
                       <!-- <tr>
                      
                        <td>
@@ -95,15 +91,15 @@
 
 <script>
 import { mapGetters} from "vuex";
-import budgetGeneralItem from './budgetGeneralItem'
+import grpeBudgetProgrammeItem from './grpeBudgetProgrammeItem'
 import { formatageSomme } from "../../../src/Repositories/Repository";
 export default {
-    name: 'budgetGeneralItemComponent',
+    name: 'grpeBudgetProgrammeItemComponent',
      props: {
     groupe: Object,
   },
   components: {
-      budgetGeneralItem
+      grpeBudgetProgrammeItem
   },
   data: function () {
     return {
@@ -125,6 +121,60 @@ export default {
       // "chapitres",
       // "sections"
     ]),
+     ...mapGetters("parametreGenerauxAdministratif", [
+      "chapitres",
+      "sections",
+      "type_Unite_admins",
+      "services_gestionnaires",
+      "localisations_geographiques",
+      "afficheServiceGestionnaireNiveau4",
+      "afficheLocalisationGeoNiveau5",
+      "natures_sections"
+    ]),
+    ...mapGetters("parametreGenerauxAdministratif", [
+      
+      "sections",
+      "type_Unite_admins",
+      "plans_programmes",
+      "natures_sections",
+      "grandes_natures",
+      "afficheNiveauPlanProg",
+      "exercices_budgetaires"
+    ]),
+    ...mapGetters("parametreGenerauxFonctionnelle", [
+      "plans_fonctionnels",
+      "afficheNiveauPlanFonctionnel"
+     
+    ]),
+    ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
+  'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
+
+    ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+  
+    afficherSection() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sections.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.nom_section;
+      }
+      return 0
+        }
+      };
+    },
+     CodeSection() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sections.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code_section;
+      }
+      return 0
+        }
+      };
+    },
     MontantTotal(){
   
     
@@ -140,11 +190,11 @@ export default {
         this.groupe.ua_budget_general.length
     },
 
-    getNombreArticle(){
-        var nombre = this.groupe.ua_budget_general.length
-        if(nombre) return nombre
-        return 'Aucun' 
-    },
+    // getNombreArticle(){
+    //     var nombre = this.groupe.ua_budget_general.length
+    //     if(nombre) return nombre
+    //     return 'Aucun' 
+    // },
     iconClasses() {
       return {
         'icon-plus': !this.isOpen && this.groupe.ua_budget_general.length,
