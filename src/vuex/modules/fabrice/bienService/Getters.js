@@ -103,21 +103,26 @@ state.marches.map(element => {
 })
 
 
+export const montantMarche = (state, getters) =>
+    getters.marches.reduce(
+        (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
+
+        0
+    );
+
+export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, rootGetters) =>
+    state.acteEffetFinanciers.map(element => {
+        if (element.entreprise_id !== null) {
+            element = {
+                ...element,
 
 
-export  const getActeEffetFinancierPersonnaliser = (state, getters,rootState, rootGetters) =>
-state.acteEffetFinanciers.map(element => {
-    if(element.entreprise_id !== null ){
-        element = {
-            ...element,
-           
-           
-            varObjetEntreprise:rootGetters['gestionMarche/entreprises'].find(
-               plans => plans.id == element.entreprise_id
-            )
-            
+                varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
+                    plans => plans.id == element.entreprise_id
+                )
+
+            }
+
         }
-        
-    }
-    return element;
-})
+        return element;
+    })

@@ -17,7 +17,7 @@
                                 <th>Montant marche</th>
                                 <th>Type de marche</th>
                                 <th>Unite administrative</th>
-                                <th>Exercie Budgetaire</th>
+                                <th>Exercice Budgetaire</th>
                             </tr>
                             </thead>
                             <tbody>

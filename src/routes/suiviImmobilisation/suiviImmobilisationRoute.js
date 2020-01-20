@@ -169,7 +169,7 @@ const suiviImmobilisationRoutes = [
   //   component: VoirImmoParService
   // },
   {
-    path: "/TableauBordImmo2",
+    path: "/Tableau-Bord-Immobilisation",
     name: "TableauBordImmo2",
     component: TableauBordImmo2
   },
