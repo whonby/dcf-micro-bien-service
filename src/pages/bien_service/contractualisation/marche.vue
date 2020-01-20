@@ -5,7 +5,7 @@
     <div id="exampleModal" class="modal hide taillModal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Marche</h3>
+        <h3>Ajouter Marché</h3>
       </div>
     <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -61,7 +61,7 @@
                   <div class="controls">
                     <select v-model="formData.Economique" :readOnly="deveroueconomiq">
                     <option
-                        v-for="eco in economiqueDynamiques(formData.activite_id)"
+                        v-for="eco in economiqueDynamiques(formData.unite_administrative_id)"
                         :key="eco.id"
                         :value="eco.afficheEconomique.id"
                       >{{eco.afficheEconomique.code}} - {{eco.afficheEconomique.libelle}}</option>
@@ -179,7 +179,7 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier marche</h3>
+        <h3>Modifier marché</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
@@ -277,7 +277,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des marches</h5>
+              <h5>Listes des marchés</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -467,7 +467,7 @@ return this.getMarchePersonnaliser.filter((item) => {
      return id => {
         if (id != null && id != "") {
           return this.getPersonnaliseBudgetGeneralParBienService.filter(
-            element => element.activite_id == id
+            element => element.ua_id == id
           );
         }
       };
