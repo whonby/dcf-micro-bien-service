@@ -51,9 +51,6 @@
             </div>
             <div class="row-fluid">
                 <div class="span12">
-
-
-
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -189,7 +186,7 @@
                 <li class=""><a data-toggle="tab" href="#tab34">Analyse DMP</a></li>
                  <li class=""><a data-toggle="tab" href="#tab35">ANO Bailleur</a></li>
                  <li class=""><a data-toggle="tab" href="#tab36">Observation Bailleur</a></li>
-                 <li class=""><a data-toggle="tab" href="#tab37" title="Acte effet financier">Acte</a></li>
+                 <li class="" v-if="acteEffetActive"><a data-toggle="tab" href="#tab37" title="Acte effet financier">Acte</a></li>
 
             
 
@@ -1239,11 +1236,11 @@
 
                     </div>
 
-                    <div class="widget-content">
+                  <!--  <div class="widget-content">
 
                         <a href="#addFournisseurDosntBase" data-toggle="modal" class="btn btn-success" title="ajouter nouveau fournisseur">ajouter fournisseur</a>
 
-                    </div>
+                    </div>-->
 
                 </div>
                 <table class="table table-bordered table-striped" v-if="marcheid">
@@ -1264,7 +1261,6 @@
                     <tbody>
                     <tr class="odd gradeX" v-for="observationBailleur in listeObservationBailleurANODMP(marcheid)"
                         :key="observationBailleur.id">
-
 
                          <td @click="afficherModalObservationBailleur(observationBailleur.id)">
                             {{observationBailleur.document_procedure_id || 'Non renseigné'}}</td>
@@ -1294,7 +1290,9 @@
 
               </div>
 
-
+              <div id="tab37" class="tab-pane">
+                  Acte
+              </div>
 
 
 
@@ -3065,8 +3063,7 @@
                     }
 
                 ],
-
-
+                acteEffetActive:"",
                 formFournisseur : {
                     numero_cc: "",
                     numero_rc: "",
@@ -3423,6 +3420,22 @@ created() {
                     }
                 }
             },
+            selectionAttributionMarche: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                        let marcherEnAction=this.getterObseravtionBailleurs.filter(idmarche => idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
+                        let marcherFavaroble=marcherEnAction.filter(idmarche=>idmarche.observations_bailleur==1).length
+                         if(marcherFavaroble>1){
+                           //  this.acteEffetActive="OK"
+                            return marcherEnAction.find(idmarche=>Math.max(idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.rang_analyse))
+                         }
+
+                         //this.acteEffetActive=marcherEnAction.length
+                        return marcherEnAction
+                    }
+                }
+            },
+
             // listeObservationBailleur:function () {
             //     return marcheid => {
             //         if(marcheid !=""){
