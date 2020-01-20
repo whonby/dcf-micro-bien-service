@@ -340,7 +340,7 @@
                       <td>
                           
                       </td>
-                       <td style="font-weight:bold;"> Total Marche
+                       <td style="font-weight:bold;"> Total Marché
                       </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
                            {{formatageSomme(parseFloat(montantMarche))}}
