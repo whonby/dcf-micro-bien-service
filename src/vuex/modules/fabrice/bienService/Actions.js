@@ -343,7 +343,7 @@ export function supprimerDocumentProcedure({commit}, id) {
 
 
 export  function  getActeEffetFinancier({commit}) {
-  queue.push(() => axios.get('/document_procedures').then((response) => {
+  queue.push(() => axios.get('/acte_effet_finnanciers').then((response) => {
     commit('GET_ALL_ACTE_EFFET_FINANCIER', response.data.data)
     
 }).catch(error => console.log(error)))
@@ -351,7 +351,7 @@ export  function  getActeEffetFinancier({commit}) {
 
 // action pour ajouter bailleur
 export function ajouterActeEffetFinancier({commit}, formData){
-  asyncLoading(axios.post('/document_procedures',formData)).then(response =>{
+  asyncLoading(axios.post('/acte_effet_finnanciers',formData)).then(response =>{
       if(response.status == 201){
         console.log(response.data)
           commit('AJOUTER_ACTE_EFFET_FINANCIER', response.data)
@@ -370,7 +370,7 @@ export function ajouterActeEffetFinancier({commit}, formData){
 
 
 export function modifierActeEffetFinancier({commit}, element_modifie) {
-  asyncLoading( axios.put('/document_procedures' ,element_modifie)).then(response => {
+  asyncLoading( axios.put('/acte_effet_finnanciers' ,element_modifie)).then(response => {
        commit('MODIFIER_ACTE_EFFET_FINANCIER', response.data)
        this.$app.$notify({
          title: 'success ',
@@ -386,7 +386,7 @@ export function supprimerActeEffetFinancier({commit}, id) {
  .then(dialog => {
     commit('DELET_ACTE_EFFET_FINANCIER', id)
    // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/document_procedures/' + id).then(() => dialog.close() )   
+     axios.delete('/acte_effet_finnanciers/' + id).then(() => dialog.close() )   
  })
 
 }
