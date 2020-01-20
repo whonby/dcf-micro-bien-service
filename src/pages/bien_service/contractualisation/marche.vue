@@ -311,7 +311,7 @@
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.reference_marche || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
-                   {{marche.montant_marche || 'Non renseigné'}}</td>
+                   {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
                   
 
 
