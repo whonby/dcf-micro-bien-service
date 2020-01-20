@@ -1,9 +1,8 @@
 <template>
     <div>
 
-
         <div class="container-fluid">
-            <h4 v-if="detail_marche">Detail Marche : {{detail_marche.objet}} </h4>
+            <h4 v-if="marcheid" >Detail Marche : {{detail_marche.objet}}  {{detail_marche.attribue}}</h4>
             <hr />
 
             <div class="widget-box">
@@ -760,7 +759,6 @@
                                                     </div>
                                                 </div>
 
-
                                             </div>
                                         </div>
                                     </div>
@@ -1463,10 +1461,10 @@
             <div id="tab37" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" v-if="selectionAttributionMarche(marcheid).entrepriseInfo!=''">Ajouter</a>
                     </div>
 
-                    <div class="widget-content">
+                    <div class="widget-content" v-if="selectionAttributionMarche(marcheid).entrepriseInfo==''">
 
                         <a href="#addFournisseurDosntBase" data-toggle="modal" class="btn btn-success" title="ajouter nouveau fournisseur">ajouter fournisseur</a>
                     </div>
@@ -1577,11 +1575,14 @@
                                     <td>
                      <div class="control-group">
                         <label class="control-label">Entreprise </label>
-                        <div class="controls">
-                           <select v-model="formEffetFinancier.entreprise_id" class="span">
-                                <option v-for="varText in entreprises" :key="varText.id"
-                                        :value="varText.id">{{varText.banque}}</option>
-                            </select>
+                        <div class="controls" v-if="selectionAttributionMarche(marcheid).entrepriseInfo!=''">
+                            <input
+                                    type="text"
+                                    v-model="selectionAttributionMarche(marcheid).entrepriseInfo.raison_sociale"
+                                    class="span"
+                                    placeholder="Saisir le libelle acte "
+                                    disabled
+                            />
                         </div>
                     </div>
                             </td>
@@ -1704,7 +1705,7 @@
             </div>
             <div class="modal-footer">
                 <a
-                        @click.prevent="ajouterModalActeEffetFinancierLocal"
+                        @click.prevent="ajouterModalActeEffetFinancierLocal(selectionAttributionMarche(marcheid).entrepriseInfo.id)"
                         class="btn btn-primary"
                         href="#"
 
@@ -1748,11 +1749,11 @@
                             </td>
                             <td>
                      <div class="control-group">
-                        <label class="control-label">Entreprise </label>
+                        <label class="control-label">Entreprise  </label>
                         <div class="controls">
                            <select v-model="editActeEffetFinancier.entreprise_id" class="span">
-                                <option v-for="varText in entreprises" :key="varText.id"
-                                        :value="varText.id">{{varText.banque}}</option>
+                                <option v-for="varText in selectionAttributionMarche(marcheid)" :key="varText.id"
+                                        :value="varText.id">{{varText.date_avis_bail}}</option>
                             </select>
                         </div>
                     </div>
@@ -3530,10 +3531,6 @@
                     adresse:"",
                     banque:""
                 },
-
-
-
-
                 formAnalyseDMP:{
                     document_procedure_id:"",
                     demande_ano_id:"",
@@ -3694,7 +3691,11 @@ num_courrier:"",
 
 },
 
-
+                editMarche: {
+                    id:"",
+                    attribue:"",
+                    numero_marche:""
+                },
 editDemandeAno:{
 date_demande:"",
 ref_marche:"",
@@ -3802,8 +3803,19 @@ created() {
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
-                "secteur_activites", "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables", "entreprises",
+                "secteur_activites", "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers"]),
+            ...mapGetters('gestionMarche', ['entreprises',"secteur_activites"]),
+            marcheDetail(){
+                return  marche_id=>{
+                    if (marche_id!="") {
+                        return  this.getMarchePersonnaliser.find(
+                            idmarche => idmarche.id == marche_id
+                        )
+                    }
+                }
+
+            },
             listeAppelOffre(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -3918,10 +3930,24 @@ created() {
                          if(marcherFavaroble>1){
                            //  this.acteEffetActive="OK"
                             return marcherEnAction.find(idmarche=>Math.max(idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.rang_analyse))
+                         }else{
+                             marcherEnAction=marcherEnAction.find(idm=>idm.id==marcherEnAction[0].id)
                          }
+                         let rcm=marcherEnAction.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.reg_com
+                         let infoEntreprise=this.entreprises.find(ent=>ent.numero_rc==rcm)
+                       console.log(this.entreprises)
+                         if(infoEntreprise==undefined){
+                             infoEntreprise=""
+                           this.formEffetFinancier.entreprise_id=infoEntreprise.id
+                         }
+                         let objetRetour={
+                             entrepriseInfo:infoEntreprise,
+                             dossierFavorable:marcherEnAction
+                         }
+                         this.formFournisseur.numero_rc=rcm
 
                          //this.acteEffetActive=marcherEnAction.length
-                        return marcherEnAction
+                        return objetRetour
                     }
                 }
             },
@@ -3974,8 +4000,9 @@ created() {
                 "modifierDemandeAno","supprimerDemandeAno","ajouterAnalyseDMP","modifierAnalyseDMP",
                 "supprimerAnalyseDMP","ajouterAnoDMPBailleur","modifierAnoDMPBailleur","supprimerAnoDMPBailleur"
                 , "modifierObservationBaileur","ajouterObseravtionBailleur" , "supprimerObseravtionBailleur",
-                 "ajouterFournisseur", "ajouterActeEffetFinancier", "modifierActeEffetFinancier","supprimerActeEffetFinancier"
+                 "ajouterFournisseur", "ajouterActeEffetFinancier", "modifierActeEffetFinancier","supprimerActeEffetFinancier","modifierMarche"
             ]),
+            ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
             // formatageSomme: formatageSomme,
             ajouterBudgetaireLocal(){
                  this.$("#myModal").modal({
@@ -4149,8 +4176,17 @@ created() {
             },
 
             // vider l'input de acte  effet financier
-ajouterModalActeEffetFinancierLocal(){
+ajouterModalActeEffetFinancierLocal(entreprise_id){
+                console.log(this.formEffetFinancier)
+    this.formEffetFinancier.marche_id=this.marcheid
+    this.formEffetFinancier.entreprise_id=entreprise_id
     this.ajouterActeEffetFinancier(this.formEffetFinancier)
+    this.editMarche={
+        id:this.marcheid,
+        attribue:1,
+        numero_marche:this.formEffetFinancier.numero_marche
+    }
+    this.modifierMarche(editMarche)
     this.formEffetFinancier = {
           code_act:"",
              libelle_act:"",
@@ -4303,7 +4339,7 @@ modifierModalActeEffetFinancierLocal(){
 
 // vider l'input de nnouveau fournisseur
 ajouterNouveauFournisseurLocal(){
-    this.ajouterFournisseur(this.formFournisseur)
+    this.ajouterEntreprise(this.formFournisseur)
     this.formFournisseur = {
          numero_cc: "",
                     numero_rc: "",
