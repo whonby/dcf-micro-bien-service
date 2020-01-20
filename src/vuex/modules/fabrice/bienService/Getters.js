@@ -100,3 +100,11 @@ state.marches.map(element => {
     }
     return element;
 })
+
+
+export const montantMarche = (state, getters) =>
+    getters.marches.reduce(
+        (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
+
+        0
+    );

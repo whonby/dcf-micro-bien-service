@@ -30,7 +30,7 @@ export function ajouterBudgetGeneral({ commit, dispatch }, nouveau) {
       economique_id: nouveau.economique_id,
       Dotation_Initiale: nouveau.Dotation_Initiale,
       version: nouveau.version,
-      
+      testgdenature: nouveau.testgdenature,
       codebudget: nouveau.codebudget,
       action_id: nouveau.action_id,
       activite_id: nouveau.activite_id
@@ -66,7 +66,8 @@ export function modifierBudgetGeneral({ commit, dispatch}, nouveau) {
       version: nouveau.version,
       codebudget: nouveau.codebudget,
       action_id: nouveau.action_id,
-      activite_id: nouveau.activite_id
+      activite_id: nouveau.activite_id,
+      testgdenature: nouveau.testgdenature,
     }))
     .then(response => {
       commit("MODIFIER_BUDGET_GENERAL", response.data);

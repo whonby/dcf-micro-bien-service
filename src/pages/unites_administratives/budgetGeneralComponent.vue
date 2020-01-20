@@ -218,6 +218,13 @@
                   </div>
                 </div>
               </td>
+               <input
+                      type="hidden"
+                     :value="codeGrdeNature"
+                      class="span"
+                      placeholder="Saisir le code"
+                      readonly
+                    />
           </tr>
         </table>
       </div>
@@ -439,6 +446,13 @@
                   </div>
                 </div>
               </td>
+               <input
+                      type="hidden"
+                     :value="codeGrdeNaturemodif"
+                      class="span"
+                      placeholder="Saisir le code"
+                      readonly
+                    />
           </tr>
         </table>
       </div>
@@ -646,6 +660,7 @@ export default {
         }
       };
     },
+    
     // ActiviteDynamiques() {
     //   return id => {
     //     if (formData.action_id != null && formData.action_id != "") {
@@ -667,6 +682,24 @@ anneeAmort() {
 
       if (norme) {
         return norme.annee;
+      }
+      return 0
+    },
+    codeGrdeNature() {
+      
+      const norme = this.grandes_natures.find(normeEquipe => normeEquipe.id == this.formData.gdenature_id);
+
+      if (norme) {
+        return norme.code;
+      }
+      return 0
+    },
+    codeGrdeNaturemodif() {
+      
+      const norme = this.grandes_natures.find(normeEquipe => normeEquipe.id == this.editBudgetGeneral.gdenature_id);
+
+      if (norme) {
+        return norme.code;
       }
       return 0
     },
@@ -708,7 +741,8 @@ anneeAmort() {
 var nouvelObjet = {
       ...this.formData,
        exercicebudget_id: this.anneeAmort,
-       codebudget : this.codeBudgetGeneral
+       codebudget : this.codeBudgetGeneral,
+       testgdenature:this.codeGrdeNature
       
        };
       this.ajouterBudgetGeneral(nouvelObjet);
@@ -737,7 +771,8 @@ var nouvelObjet = {
        var nouvelObjet = {
       ...this.editBudgetGeneral,
        exercicebudget_id: this.anneeAmort,
-       codebudget : this.codeBudgetGeneralModifier
+       codebudget : this.codeBudgetGeneralModifier,
+        testgdenature:this.codeGrdeNaturemodif
       
        };
       this.modifierBudgetGeneral(nouvelObjet);
