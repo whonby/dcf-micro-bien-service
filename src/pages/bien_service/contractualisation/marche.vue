@@ -104,7 +104,7 @@
                 <td>
               
                <div class="control-group">
-            <label class="control-label">Type marche</label>
+            <label class="control-label">Type marché</label>
             <div class="controls">
             <select v-model="formData.type_marche_id" class="span">
                <option v-for="plans in typeMarches" :key="plans.id" 
@@ -116,7 +116,7 @@
            
                <td>
                  <div class="control-group">
-            <label class="control-label">Refencence marche</label>
+            <label class="control-label">Refencence marché</label>
             <div class="controls">
               <input
                 type="text"
@@ -132,7 +132,7 @@
                
                <td>
                  <div class="control-group">
-            <label class="control-label">Montant du marche</label>
+            <label class="control-label">Montant du marché</label>
             <div class="controls">
               <input
                 type="text"
@@ -146,7 +146,7 @@
               </td>
               <td>
                <div class="control-group">
-            <label class="control-label">Objet marche</label>
+            <label class="control-label">Objet marché</label>
             <div class="controls">
               <input
                 type="text"
@@ -195,7 +195,7 @@
           </div>
 
           <div class="control-group">
-            <label class="control-label">Type marche</label>
+            <label class="control-label">Type marché</label>
             <div class="controls">
             <select v-model="editMarche.type_marche_id" class="span">
                <option v-for="plans in typeMarches" :key="plans.id" 
@@ -206,7 +206,7 @@
 
 
             <div class="control-group">
-            <label class="control-label">Refencence marche</label>
+            <label class="control-label">Refencence marché</label>
             <div class="controls">
               <input
                 type="text"
@@ -231,7 +231,7 @@
           </div>
 
           <div class="control-group">
-            <label class="control-label">Objet marche</label>
+            <label class="control-label">Objet marché</label>
             <div class="controls">
               <input
                 type="text"
@@ -289,10 +289,10 @@
                 <thead>
                   <tr>
                       <th>UA</th>
-                    <th>Type marche</th>
-                    <th>Objet</th>
-                    <th>Reference marche</th>
-                    <th>Montant</th>
+                    <th>Type marché</th>
+                    <th>Objet marché</th>
+                    <th>Reference marché</th>
+                    <th>Montant marché</th>
                     <th>Action</th>
                   </tr>
                 </thead>
