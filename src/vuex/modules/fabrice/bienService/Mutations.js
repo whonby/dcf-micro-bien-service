@@ -89,12 +89,6 @@ export const MODIFIER_DOCUMENT_PROCEDURE = (state, elementModif)=>{
 }
 
 
-// add * nouveau fournisseur
-
-export const AJOUTER_NOUVEAU_FOURNISSEUR = (state, elementAjouter) => {
-    state.nouveauFournisseur.unshift(elementAjouter)
-}
-
 
 // delete all document procedure
 
@@ -102,6 +96,50 @@ export const DELETE_DOCUMENT_PROCEDURE = (state, id)=> {
     state.documentProcedures = state.documentProcedures.filter(motif => motif.id !=id)
 }
 
+
+
+
+
+// mutation pour acte effet
+
+
+
+// get all  acte effet financier
+
+export const GET_ALL_ACTE_EFFET_FINANCIER = (state, tableau_acte_financier) =>{
+    state.acteEffetFinanciers = tableau_acte_financier
+}
+
+// add * acte effet financier
+
+export const AJOUTER_ACTE_EFFET_FINANCIER = (state, elementAjouter) => {
+    state.acteEffetFinanciers.unshift(elementAjouter)
+}
+
+// update all acte effet financier
+export const MODIFIER_ACTE_EFFET_FINANCIER = (state, elementModif)=>{
+    state.acteEffetFinanciers = state.acteEffetFinanciers.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+
+// delete acte effet financier
+
+export const DELET_ACTE_EFFET_FINANCIER = (state, id)=> {
+    state.acteEffetFinanciers = state.acteEffetFinanciers.filter(effet => effet.id !=id)
+}
+
+
+// add * nouveau fournisseur
+
+export const AJOUTER_NOUVEAU_FOURNISSEUR = (state, elementAjouter) => {
+    state.nouveauFournisseur.unshift(elementAjouter)
+}
 
 
 

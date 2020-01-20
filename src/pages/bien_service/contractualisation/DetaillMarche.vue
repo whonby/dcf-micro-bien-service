@@ -186,7 +186,7 @@
                 <li class=""><a data-toggle="tab" href="#tab34">Analyse DMP</a></li>
                  <li class=""><a data-toggle="tab" href="#tab35">ANO Bailleur</a></li>
                  <li class=""><a data-toggle="tab" href="#tab36">Observation Bailleur</a></li>
-                 <li class="" v-if="acteEffetActive"><a data-toggle="tab" href="#tab37" title="Acte effet financier">Acte</a></li>
+                 <li class=""><a data-toggle="tab" href="#tab37" title="Acte effet financier">Actes</a></li>
 
             
 
@@ -1236,11 +1236,14 @@
 
                     </div>
 
+
+    
                   <!--  <div class="widget-content">
 
                         <a href="#addFournisseurDosntBase" data-toggle="modal" class="btn btn-success" title="ajouter nouveau fournisseur">ajouter fournisseur</a>
 
                     </div>-->
+
 
                 </div>
                 <table class="table table-bordered table-striped" v-if="marcheid">
@@ -1290,9 +1293,7 @@
 
               </div>
 
-              <div id="tab37" class="tab-pane">
-                  Acte
-              </div>
+             
 
 
 
@@ -1453,6 +1454,448 @@
         </div>
 
 <!---fin modification observation bailleur   -->
+
+
+
+
+
+
+            <div id="tab37" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+                    </div>
+
+                    <div class="widget-content">
+
+                        <a href="#addFournisseurDosntBase" data-toggle="modal" class="btn btn-success" title="ajouter nouveau fournisseur">ajouter fournisseur</a>
+                    </div>
+
+                </div>
+                <table class="table table-bordered table-striped" v-if="marcheid">
+                    <thead>
+                    <tr>
+
+
+                      
+                        
+                        <th>Code</th>
+                        <th>Libelle acte</th>
+                        <th>Reference acte</th>
+                        <th>Objet acte</th>
+                        <th>Incendit financier</th>
+                        <th>Montant acte</th>
+                     <th title="type effet financier">Type E.</th>
+                        <th>Type modif doc</th>
+                        <th>Entreprise</th>
+                        <th>text juridique</th>
+                        <th>Marche</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="odd gradeX" v-for="effetFinancier in listeActeEffetFinancier(marcheid)"
+                        :key="effetFinancier.id">
+
+
+                         <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.code_acte || 'Non renseigné'}}</td>
+
+                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.libelle_acte || 'Non renseigné'}}</td>
+
+                            <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.libelle_act || 'Non renseigné'}}</td>
+                        
+                        <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.objet_acte || 'Non renseigné'}}</td>
+
+                        <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.incidence_financiere || 'Non renseigné'}}</td>
+
+                            <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.montant_acte || 'Non renseigné'}}</td>
+
+                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.id_type_acte_effet_fin || 'Non renseigné'}}</td>
+
+                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.type_doc_modifie || 'Non renseigné'}}</td>
+
+                        <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.entreprise_id || 'Non renseigné'}}</td>
+
+                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.text_juridique_id || 'Non renseigné'}}</td>
+
+
+                             
+                            
+                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.marche_id || 'Non renseigné'}}</td>
+
+
+                        <div class="btn-group">
+                            <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
+                                <span class=""><i class="icon-trash"></i></span>
+                            </button>
+                        </div>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+              </div>
+
+
+
+<!-- debut ajout acte effet financier --->
+
+
+
+<div id="ajouterActeEffetFinancier" class="modal hide grdirModalActeEffet">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter acte effet financier</h3>
+            </div>
+            <div class="modal-body">
+
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <td>
+                        <div class="control-group">
+                        <label class="control-label" title="type acte effet financier">Type A.</label>
+                        <div class="controls">
+                          <select v-model="formEffetFinancier.type_act_effet_id" class="span">
+                                <option v-for="varText in typeActeEffetFinanciers" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                        
+                        </div>
+                    </div>
+                            </td>
+                                    <td>
+                     <div class="control-group">
+                        <label class="control-label">Entreprise </label>
+                        <div class="controls">
+                           <select v-model="formEffetFinancier.entreprise_id" class="span">
+                                <option v-for="varText in entreprises" :key="varText.id"
+                                        :value="varText.id">{{varText.banque}}</option>
+                            </select>
+                        </div>
+                    </div>
+                            </td>
+
+                            <td>
+
+
+                        <div class="control-group">
+                        <label class="control-label">Text juridique </label>
+                        <div class="controls">
+                           <select v-model="formEffetFinancier.text_juridique_id" class="span">
+                                <option v-for="varText in text_juridiques" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle_text}}</option>
+                            </select>
+                        </div>
+                    </div>
+                            </td>
+                           
+                       
+                           </tr>
+                        <tr>
+                   
+                            <td>
+                    <div class="control-group">
+                        <label class="control-label">Numero du marche</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formEffetFinancier.numero_marche"
+                                    class="span"
+                                    placeholder="Saisir le libelle acte "
+                            />
+                        </div>
+                    </div>
+
+                            </td>
+                        
+                   
+                            <td>
+
+                    <div class="control-group">
+                        <label class="control-label">Code acte </label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formEffetFinancier.code_act"
+                                    class="span"
+                                    placeholder="Saisir le code acte"
+                            />
+                        </div>
+                    </div>
+                            </td>
+                            <td>
+                    <div class="control-group">
+                        <label class="control-label">Libelle acte</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formEffetFinancier.libelle_act"
+                                    class="span"
+                                    placeholder="Saisir le libelle acte "
+                            />
+                        </div>
+                    </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                    <div class="control-group">
+                        <label class="control-label">Reference acte</label>
+                        <div class="controls">
+                            <input type="text" v-model="formEffetFinancier.reference_act"
+                                    class="span"
+                                    placeholder="refence acte"
+                            />
+                        </div>
+                    </div>
+                            </td>
+                            <td>
+                     <div class="control-group">
+                        <label class="control-label">Incidence financiere</label>
+                        <div class="controls">
+                            <input type="text" v-model="formEffetFinancier.incidence_financiere"
+                                    class="span"
+                                    placeholder="incidence"
+                            />
+                        </div>
+                    </div>
+                            </td>
+                            <td>
+
+                     <div class="control-group">
+                        <label class="control-label">Montant acte</label>
+                        <div class="controls">
+                            <input type="text" v-model="formEffetFinancier.montant_act"
+                                    class="span"
+                                    placeholder="refence acte"
+                            />
+                        </div>
+                    </div>
+                            </td>
+                            <td>
+                     <div class="control-group">
+                        <label class="control-label">Type document acte</label>
+                        <div class="controls">
+                            <input type="text" v-model="formEffetFinancier.type_doc_modifie"
+                                    class="span"
+                                    placeholder="refence acte"
+                            />
+                        </div>
+                    </div>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                   
+
+                
+            </div>
+            <div class="modal-footer">
+                <a
+                        @click.prevent="ajouterModalActeEffetFinancierLocal"
+                        class="btn btn-primary"
+                        href="#"
+
+                >Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div>
+        </div>
+<!--- fin ajout acte effet financier  -->
+
+
+
+
+
+
+
+
+<!-- debut modifier acte effet financier --->
+
+
+
+<div id="modifierActeEF" class="modal hide grdirModalActeEffet">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Modier acte effet fiancier</h3>
+            </div>
+            <div class="modal-body">
+
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <td>
+                        <div class="control-group">
+                        <label class="control-label" title="type acte effet financier">Type A.</label>
+                        <div class="controls">
+                          <select v-model="formEffetFinancier.type_act_effet_id" class="span">
+                                <option v-for="varText in typeActeEffetFinanciers" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                        
+                        </div>
+                    </div>
+                            </td>
+                            <td>
+                     <div class="control-group">
+                        <label class="control-label">Entreprise </label>
+                        <div class="controls">
+                           <select v-model="formEffetFinancier.entreprise_id" class="span">
+                                <option v-for="varText in entreprises" :key="varText.id"
+                                        :value="varText.id">{{varText.banque}}</option>
+                            </select>
+                        </div>
+                    </div>
+                            </td>
+                            <td>
+
+
+                        <div class="control-group">
+                        <label class="control-label">Text juridique </label>
+                        <div class="controls">
+                           <select v-model="formEffetFinancier.text_juridique_id" class="span">
+                                <option v-for="varText in text_juridiques" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle_text}}</option>
+                            </select>
+                        </div>
+                    </div>
+                            </td>
+                          
+                       
+                           </tr>
+                        <tr>
+                               <td>
+
+                    <div class="control-group">
+                        <label class="control-label">Numero marche</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="formEffetFinancier.numero_marche"
+                                    class="span"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+                                       <td>
+                     <div class="control-group">
+                        <label class="control-label">Marche </label>
+                        <div class="controls">
+                           <select v-model="formEffetFinancier.marche_id" class="span">
+                                <option v-for="varText in entreprises" :key="varText.id"
+                                        :value="varText.id">{{varText.objet}}</option>
+                            </select>
+                        </div>
+                    </div>
+                            </td>
+                            <td>
+
+                    <div class="control-group">
+                        <label class="control-label">Code acte </label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="formEffetFinancier.code_act"
+                                    class="span"
+                                    placeholder="Saisir le code acte"
+                            />
+                        </div>
+                    </div>
+                            </td>
+                            <td>
+                    <div class="control-group">
+                        <label class="control-label">Libelle acte</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="formEffetFinancier.libelle_act"
+                                    class="span"
+                                    placeholder="Saisir le libelle acte "
+                            />
+                        </div>
+                    </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                    <div class="control-group">
+                        <label class="control-label">Reference acte</label>
+                        <div class="controls">
+                            <input type="text" v-model="formEffetFinancier.reference_act"
+                                    class="span"
+                                    placeholder="refence acte"
+                            />
+                        </div>
+                    </div>
+                            </td>
+                            <td>
+                     <div class="control-group">
+                        <label class="control-label">Incidence financiere</label>
+                        <div class="controls">
+                            <input type="text" v-model="formEffetFinancier.incidence_financiere"
+                                    class="span"
+                                    placeholder="incidence"
+                            />
+                        </div>
+                    </div>
+                            </td>
+                            <td>
+
+                     <div class="control-group">
+                        <label class="control-label">Montant acte</label>
+                        <div class="controls">
+                            <input type="text" v-model="formEffetFinancier.montant_act"
+                                    class="span"
+                                    placeholder="refence acte"
+                            />
+                        </div>
+                    </div>
+                            </td>
+                            <td>
+                     <div class="control-group">
+                        <label class="control-label">Type document acte</label>
+                        <div class="controls">
+                            <input type="text" v-model="formEffetFinancier.type_doc_modifie"
+                                    class="span"
+                                    placeholder="refence acte"
+                            />
+                        </div>
+                    </div>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                   
+
+                
+            </div>
+            <div class="modal-footer">
+                <a
+                        @click.prevent="modifierModalActeEffetFinancierLocal"
+                        class="btn btn-primary"
+                        href="#"
+
+                >Modifier</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div>
+        </div>
+<!--- fin modifier acte effet financier  -->
+
+
+
 
 
 
@@ -3198,6 +3641,41 @@
              capacite_techn_exp:"",
              dossier_candidat_id:"",
          },
+
+         formEffetFinancier:{
+             code_act:"",
+             libelle_act:"",
+             reference_act:"",
+             objet_act:"",
+             incidence_financiere:"",
+             montant_act:"",
+             type_doc_modifie:"",
+             livrable_id:"",
+             text_juridique_id:"",
+             type_act_effet_id:"",
+             analyse_dossier_id:"",
+             entreprise_id:"",
+             marche_id:"",
+             numero_marche:""
+         },
+
+         editActeEffetFinancier:{
+              code_act:"",
+             libelle_act:"",
+             reference_act:"",
+             objet_act:"",
+             incidence_financiere:"",
+             montant_act:"",
+             type_doc_modifie:"",
+             livrable_id:"",
+             text_juridique_id:"",
+             type_act_effet_id:"",
+             analyse_dossier_id:"",
+             entreprise_id:"",
+             marche_id:"",
+             numero_marche:""
+
+         },
 formOffreFinanciere:{
       numero_lot:"",
     designation:"",
@@ -3320,10 +3798,12 @@ created() {
 },
         computed: {
             ...mapGetters("bienService", [ 'acteDepense',"getMarchePersonnaliser","appelOffres",
-                "lots","modePassations", "procedurePassations","getterDossierCandidats",
+                "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
-                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs"]),
+                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
+                "secteur_activites", "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables", "entreprises",
+                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers"]),
             listeAppelOffre(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -3339,6 +3819,16 @@ created() {
                        // const searchTerm = this.search.toLowerCase();
                         //return this.lots.filter( idmarche => idmarche.marche.id == marche_id)
                         return this.lots.filter( idmarche => idmarche.marche.id == marche_id)
+                    }
+                }
+
+                
+            },
+
+            listeActeEffetFinancier(){
+                return marche_id =>{
+                    if(marche_id !=""){
+                        return this.getActeEffetFinancierPersonnaliser.filter(identreprise =>identreprise.id == marche_id)
                     }
                 }
             },
@@ -3484,7 +3974,7 @@ created() {
                 "modifierDemandeAno","supprimerDemandeAno","ajouterAnalyseDMP","modifierAnalyseDMP",
                 "supprimerAnalyseDMP","ajouterAnoDMPBailleur","modifierAnoDMPBailleur","supprimerAnoDMPBailleur"
                 , "modifierObservationBaileur","ajouterObseravtionBailleur" , "supprimerObseravtionBailleur",
-                 "ajouterFournisseur"
+                 "ajouterFournisseur", "ajouterActeEffetFinancier", "modifierActeEffetFinancier","supprimerActeEffetFinancier"
             ]),
             // formatageSomme: formatageSomme,
             ajouterBudgetaireLocal(){
@@ -3658,6 +4148,40 @@ created() {
                 }
             },
 
+            // vider l'input de acte  effet financier
+ajouterModalActeEffetFinancierLocal(){
+    this.ajouterActeEffetFinancier(this.formEffetFinancier)
+    this.formEffetFinancier = {
+          code_act:"",
+             libelle_act:"",
+             reference_act:"",
+             objet_act:"",
+             incidence_financiere:"",
+             montant_act:"",
+             type_doc_modifie:"",
+             livrable_id:"",
+             text_juridique_id:"",
+             type_act_effet_id:"",
+             analyse_dossier_id:"",
+             entreprise_id:"",
+             marche_id:"",
+
+    }
+},
+
+afficherModalModifierActeEffetFinancier(index){
+    this.$('#modifierActeEF').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+    this.editActeEffetFinancier = this.acteEffetFinanciers[index]
+},
+
+// vider l'input 
+modifierModalActeEffetFinancierLocal(){
+    this.modifierActeEffetFinancier(this.editActeEffetFinancier)
+    this.$('#modifierActeEF').modal('hide');
+},
 
             // afficherModalAjoutObservationBailleur(){
             //     this.$('#ajouterObservationBailleur')
@@ -3896,7 +4420,7 @@ ajouterNouveauFournisseurLocal(){
        backdrop:'static',
      keyboard:false
   })
-  },*/
+  },*/     
 
             // eslint-disable-next-line no-unused-vars
             afficheBouttonTechFin(index){
@@ -3933,6 +4457,14 @@ ajouterNouveauFournisseurLocal(){
  width: 1000px;
  margin: 0 -580px;
  height: 500px;
+    }
+    .grdirModalActeEffet
+    {
+
+ width: 1000px;
+ margin: 0 -580px;
+ height: 500px;
+
     }
     .sommecolor{
         background-color: red;

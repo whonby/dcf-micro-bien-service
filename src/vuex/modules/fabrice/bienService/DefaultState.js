@@ -49,7 +49,9 @@ documentProcedures:[],
     analyseDMP:[],
     stateAnoDmpBailleur:[],
     obseravtionBailleurs:[],
-    nouveauFournisseur:[]
+    nouveauFournisseur:[],
+    acteEffetFinanciers:[]
+
 
 
 

@@ -337,6 +337,66 @@ export function supprimerDocumentProcedure({commit}, id) {
 
 
 
+// action pour acte effet financier
+
+
+
+
+export  function  getActeEffetFinancier({commit}) {
+  queue.push(() => axios.get('/document_procedures').then((response) => {
+    commit('GET_ALL_ACTE_EFFET_FINANCIER', response.data.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter bailleur
+export function ajouterActeEffetFinancier({commit}, formData){
+  asyncLoading(axios.post('/document_procedures',formData)).then(response =>{
+      if(response.status == 201){
+        console.log(response.data)
+          commit('AJOUTER_ACTE_EFFET_FINANCIER', response.data)
+          
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier motif de decision
+
+
+export function modifierActeEffetFinancier({commit}, element_modifie) {
+  asyncLoading( axios.put('/document_procedures' ,element_modifie)).then(response => {
+       commit('MODIFIER_ACTE_EFFET_FINANCIER', response.data)
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
+// supprimer categorie mision
+export function supprimerActeEffetFinancier({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('DELET_ACTE_EFFET_FINANCIER', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+     axios.delete('/document_procedures/' + id).then(() => dialog.close() )   
+ })
+
+}
+
+
+
+
+
+
+
 
 
 
