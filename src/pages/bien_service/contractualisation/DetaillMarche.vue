@@ -1738,7 +1738,7 @@
                         <div class="control-group">
                         <label class="control-label" title="type acte effet financier">Type A.</label>
                         <div class="controls">
-                          <select v-model="formEffetFinancier.type_act_effet_id" class="span">
+                          <select v-model="editActeEffetFinancier.type_act_effet_id" class="span">
                                 <option v-for="varText in typeActeEffetFinanciers" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
                             </select>
@@ -1750,7 +1750,7 @@
                      <div class="control-group">
                         <label class="control-label">Entreprise </label>
                         <div class="controls">
-                           <select v-model="formEffetFinancier.entreprise_id" class="span">
+                           <select v-model="editActeEffetFinancier.entreprise_id" class="span">
                                 <option v-for="varText in entreprises" :key="varText.id"
                                         :value="varText.id">{{varText.banque}}</option>
                             </select>
@@ -1763,7 +1763,7 @@
                         <div class="control-group">
                         <label class="control-label">Text juridique </label>
                         <div class="controls">
-                           <select v-model="formEffetFinancier.text_juridique_id" class="span">
+                           <select v-model="editActeEffetFinancier.text_juridique_id" class="span">
                                 <option v-for="varText in text_juridiques" :key="varText.id"
                                         :value="varText.id">{{varText.libelle_text}}</option>
                             </select>
@@ -1781,7 +1781,7 @@
                         <div class="controls">
                             <input
                                     type="date"
-                                    v-model="formEffetFinancier.numero_marche"
+                                    v-model="editActeEffetFinancier.numero_marche"
                                     class="span"
                                     placeholder=""
                             />
@@ -1793,7 +1793,7 @@
                      <div class="control-group">
                         <label class="control-label">Marche </label>
                         <div class="controls">
-                           <select v-model="formEffetFinancier.marche_id" class="span">
+                           <select v-model="editActeEffetFinancier.marche_id" class="span">
                                 <option v-for="varText in entreprises" :key="varText.id"
                                         :value="varText.id">{{varText.objet}}</option>
                             </select>
@@ -1807,7 +1807,7 @@
                         <div class="controls">
                             <input
                                     type="date"
-                                    v-model="formEffetFinancier.code_act"
+                                    v-model="editActeEffetFinancier.code_act"
                                     class="span"
                                     placeholder="Saisir le code acte"
                             />
@@ -1820,7 +1820,7 @@
                         <div class="controls">
                             <input
                                     type="date"
-                                    v-model="formEffetFinancier.libelle_act"
+                                    v-model="editActeEffetFinancier.libelle_act"
                                     class="span"
                                     placeholder="Saisir le libelle acte "
                             />
@@ -1833,7 +1833,7 @@
                     <div class="control-group">
                         <label class="control-label">Reference acte</label>
                         <div class="controls">
-                            <input type="text" v-model="formEffetFinancier.reference_act"
+                            <input type="text" v-model="editActeEffetFinancier.reference_act"
                                     class="span"
                                     placeholder="refence acte"
                             />
@@ -1844,7 +1844,7 @@
                      <div class="control-group">
                         <label class="control-label">Incidence financiere</label>
                         <div class="controls">
-                            <input type="text" v-model="formEffetFinancier.incidence_financiere"
+                            <input type="text" v-model="editActeEffetFinancier.incidence_financiere"
                                     class="span"
                                     placeholder="incidence"
                             />
@@ -1856,7 +1856,7 @@
                      <div class="control-group">
                         <label class="control-label">Montant acte</label>
                         <div class="controls">
-                            <input type="text" v-model="formEffetFinancier.montant_act"
+                            <input type="text" v-model="editActeEffetFinancier.montant_act"
                                     class="span"
                                     placeholder="refence acte"
                             />
@@ -1867,7 +1867,7 @@
                      <div class="control-group">
                         <label class="control-label">Type document acte</label>
                         <div class="controls">
-                            <input type="text" v-model="formEffetFinancier.type_doc_modifie"
+                            <input type="text" v-model="editActeEffetFinancier.type_doc_modifie"
                                     class="span"
                                     placeholder="refence acte"
                             />
@@ -4462,7 +4462,7 @@ ajouterNouveauFournisseurLocal(){
     {
 
  width: 1000px;
- margin: 0 -580px;
+ margin: 0 -530px;
  height: 500px;
 
     }
