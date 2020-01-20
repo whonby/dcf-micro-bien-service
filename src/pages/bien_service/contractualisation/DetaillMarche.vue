@@ -672,7 +672,7 @@
 
      <!--- debut ajout fournisseur que information n'exist pas dans la base  --->
 
- <div id="addFournisseurDosntBase" class="modal hide">
+ <div id="addFournisseurDosntBase" class="modal hide gdmodelfour">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>creer nouveau fournisseur</h3>
@@ -1241,7 +1241,7 @@
 
                     <div class="widget-content">
 
-                        <a href="#addFournisseurDosntBase" data-toggle="modal" class="btn btn-success" title="ajouter nouveau fournisseur">ajouter</a>
+                        <a href="#addFournisseurDosntBase" data-toggle="modal" class="btn btn-success" title="ajouter nouveau fournisseur">ajouter fournisseur</a>
 
                     </div>
 
@@ -3914,6 +3914,12 @@ ajouterNouveauFournisseurLocal(){
     .taillemodal {
         width: 800px;
         margin: 0 -380px;
+    }
+    .gdmodelfour
+    {
+ width: 1000px;
+ margin: 0 -580px;
+ height: 500px;
     }
     .sommecolor{
         background-color: red;

@@ -14,10 +14,10 @@
             style="cursor:pointer;"
             
             :fields="json_fields"
-            title="Budget par Unites administratives"
+            title="Budget General"
             :data="filtre_unite_admin"
-            name="Budget par Unites administratives"
-            worksheet="Budget par Unites administratives"
+            name="Budget General"
+            worksheet="Budget General"
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel>
