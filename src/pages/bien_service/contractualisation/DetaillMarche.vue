@@ -186,7 +186,7 @@
                 <li class=""><a data-toggle="tab" href="#tab34">Analyse DMP</a></li>
                  <li class=""><a data-toggle="tab" href="#tab35">ANO Bailleur</a></li>
                  <li class=""><a data-toggle="tab" href="#tab36">Observation Bailleur</a></li>
-                 <li class="" v-if="acteEffetActive"><a data-toggle="tab" href="#tab37" title="Acte effet financier">Acte</a></li>
+                 <li class=""><a data-toggle="tab" href="#tab37" title="Acte effet financier">Actes</a></li>
 
             
 
@@ -1293,9 +1293,7 @@
 
               </div>
 
-              <div id="tab37" class="tab-pane">
-                  Acte
-              </div>
+             
 
 
 
@@ -1465,15 +1463,12 @@
             <div id="tab37" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
-
                         <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning">Ajouter</a>
-
                     </div>
 
                     <div class="widget-content">
 
                         <a href="#addFournisseurDosntBase" data-toggle="modal" class="btn btn-success" title="ajouter nouveau fournisseur">ajouter fournisseur</a>
-
                     </div>
 
                 </div>
