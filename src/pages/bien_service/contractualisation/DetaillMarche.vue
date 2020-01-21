@@ -2,7 +2,8 @@
     <div>
 
         <div class="container-fluid">
-            <h4 v-if="marcheid" >Detail Marche : {{detail_marche.objet}}  {{detail_marche.attribue}}</h4>
+            <h4 v-if="marcheDetail(marcheid)" >Detail Marche : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en-cours de passation</button>
+                <button class="btn btn-success btn-large" v-else>Marché attribue</button></h4>
             <hr />
 
             <div class="widget-box">
@@ -11,10 +12,10 @@
                         <table class="table table-striped table-bordered" v-if="detail_marche">
                             <thead>
                             <tr>
-                                <th>Objet marche</th>
-                                <th>Reference marche</th>
-                                <th>Montant marche</th>
-                                <th>Type de marche</th>
+                                <th>Objet marché</th>
+                                <th>Reference marché</th>
+                                <th>Montant marché</th>
+                                <th>Type de marché</th>
                                 <th>Unite administrative</th>
                                 <th>Exercice Budgetaire</th>
                             </tr>
@@ -222,12 +223,15 @@
                          <th>Situation Geo</th>
                          <th>Appel Offre</th>
                          <th>Procedure</th>
+                         <!--<th v-if="selectionAttributionMarche(marcheid)">Decision</th>-->
                          <th>Action</th>
                      </tr>
                      </thead>
                      <tbody>
                      <tr class="odd gradeX" v-for="(appelOffre, index) in dossierCandidature(marcheid)"
                          :key="appelOffre.id">
+                         <td @click="afficheBouttonTechFin(index)">
+                             {{appelOffre.numero_dossier || 'Non renseigné'}}</td>
                          <td @click="afficheBouttonTechFin(index)">
                              {{appelOffre.type_candidat || 'Non renseigné'}}</td>
                          <td @click="afficheBouttonTechFin(index)">
@@ -248,6 +252,10 @@
                              {{appelOffre.appel_offre.objet_appel || 'Non renseigné'}}</td>
                          <td @click="afficheBouttonTechFin(index)">
                              {{appelOffre.procdure_passation.libelle || 'Non renseigné'}}</td>
+                         <!--<td v-if="selectionAttributionMarche(marcheid).dossierFavorable.ano_dmp_bailleur.annalyse_d_m_p.demande_ano!=undefined">
+                             <button class="btn btn-success btn-mini" v-if="selectionAttributionMarche(marcheid).dossierFavorable.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.id==appelOffre.id">Dossier accepter</button>
+                             <button class="btn btn-danger btn-mini" v-else>Dossier refuser</button>
+                         </td>-->
                          <div class="btn-group">
                              <button   class="btn  " title="Detail" @click.prevent="isDetailDossierCandi(appelOffre.id)">
                                  <span class=""><i class="icon-folder-open" ></i></span></button>
@@ -673,8 +681,8 @@
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>creer nouveau fournisseur</h3>
             </div>
-            <div class="modal-body">
-                <form action="#" method="get" class="form-horizontal" @submit.prevent="ajouterNouveauFournisseurLocal" enctype="multipart/form-data">
+            <div class="modal-body" v-if="selectionAttributionMarche(marcheid).dossierFavorable.ano_dmp_bailleur!=undefined">
+                <form action="#" method="get" class="form-horizontal" @submit.prevent="ajouterNouveauFournisseurLocal(selectionAttributionMarche(marcheid).dossierFavorable.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.reg_com)" enctype="multipart/form-data">
                                 <div class="row-fluid">
                                     <div class="span6">
                                         <div class="widget-box">
@@ -710,10 +718,10 @@
                                                         <input type="text" class="span11" placeholder="Numero compte contribuable" v-model="formFournisseur.numero_cc">
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
+                                                <div class="control-group" >
                                                     <label class="control-label">Numero de registe de commerce:</label>
-                                                    <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Numero de registe de commerce" v-model="formFournisseur.numero_rc">
+                                                    <div class="controls" v-if="selectionAttributionMarche(marcheid)">
+                                                        <input type="text" disabled class="span11" placeholder="Numero de registe de commerce" v-model="selectionAttributionMarche(marcheid).dossierFavorable.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.reg_com">
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
@@ -1140,7 +1148,7 @@
                             {{document.avis_bail || 'Non renseigné'}}</td>
                         <td @click="afficheAnalyseDMP(document.id)">
 
-                            <button class="btn btn-success btn-mini" v-if="document.observation==1">Aais favorable</button>
+                            <button class="btn btn-success btn-mini" v-if="document.avis_bail==1">Avis favorable</button>
                             <button class="btn btn-danger btn-mini" v-else>Avis defavorable</button>
                         </td>
                         <td @click="afficheAnalyseDMP(document.id)">
@@ -1474,64 +1482,39 @@
                     <thead>
                     <tr>
 
-
-                      
-                        
-                        <th>Code</th>
-                        <th>Libelle acte</th>
                         <th>Reference acte</th>
-                        <th>Objet acte</th>
-                        <th>Incendit financier</th>
+                        <th>Libelle acte</th>
                         <th>Montant acte</th>
-                     <th title="type effet financier">Type E.</th>
-                        <th>Type modif doc</th>
-                        <th>Entreprise</th>
+                        <th>Type acte</th>
+                        <th>Objet marche.</th>
                         <th>text juridique</th>
-                        <th>Marche</th>
+                        <th>Imputation</th>
+                        <th>Entreprise</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for="effetFinancier in listeActeEffetFinancier(marcheid)"
+                    <tr class="odd gradeX" v-for="effetFinancier in listeActeEffectFinnancier(marcheid)"
                         :key="effetFinancier.id">
-
-
                          <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.code_acte || 'Non renseigné'}}</td>
-
+                            {{effetFinancier.reference_act || 'Non renseigné'}}</td>
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.libelle_acte || 'Non renseigné'}}</td>
-
-                            <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.libelle_act || 'Non renseigné'}}</td>
-                        
                         <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.objet_acte || 'Non renseigné'}}</td>
-
-                        <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.incidence_financiere || 'Non renseigné'}}</td>
-
+                            {{effetFinancier.montant_act || 'Non renseigné'}}</td>
                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.montant_acte || 'Non renseigné'}}</td>
-
-                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.id_type_acte_effet_fin || 'Non renseigné'}}</td>
-
-                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.type_doc_modifie || 'Non renseigné'}}</td>
+                            {{effetFinancier.type_acte_effet.libelle || 'Non renseigné'}}</td>
+                        <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.marche.objet || 'Non renseigné'}}</td>
 
                         <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.entreprise_id || 'Non renseigné'}}</td>
+                            {{effetFinancier.text_juridique.libelle_text || 'Non renseigné'}}</td>
 
-                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.text_juridique_id || 'Non renseigné'}}</td>
-
-
-                             
-                            
                               <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.marche_id || 'Non renseigné'}}</td>
+                            {{effetFinancier.marche.imputation || 'Non renseigné'}}</td>
 
+                        <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.varObjetEntreprise.raison_sociale || 'Non renseigné'}}</td>
 
                         <div class="btn-group">
                             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
@@ -3396,16 +3379,6 @@
                     </div>
 
 
-                    <div class="control-group">
-                        <label class="control-label">Avis</label>
-                        <div class="controls">
-                            <select v-model="formAno.avis_dmp" class="span">
-                                <option value="1">Favorable</option>
-                                <option value="2">Defavorable</option>
-                            </select>
-                        </div>
-                    </div>
-
                 </form>
             </div>
             <div class="modal-footer">
@@ -3804,13 +3777,12 @@ created() {
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
                 "secteur_activites", "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
-                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers"]),
+                "getActeEffetFinancierPersonnaliser","getterActeEffetFinanciers", "acteEffetFinanciers"]),
             ...mapGetters('gestionMarche', ['entreprises',"secteur_activites"]),
             marcheDetail(){
                 return  marche_id=>{
                     if (marche_id!="") {
-                        return  this.getMarchePersonnaliser.find(
-                            idmarche => idmarche.id == marche_id
+                        return  this.marches.find(idmarche => idmarche.id == marche_id
                         )
                     }
                 }
@@ -3908,7 +3880,7 @@ created() {
                 return marcheid => {
                     if (marcheid != "") {
                         return this.getterAnalyseDMP.filter(idmarche => {
-                            if(idmarche.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid && idmarche.observation==1){
+                            if(idmarche.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid && idmarche.avis_bail==1){
                              return idmarche
                             }
                         })
@@ -3925,41 +3897,74 @@ created() {
             selectionAttributionMarche: function () {
                 return marcheid => {
                     if (marcheid != "") {
+
                         let marcherEnAction=this.getterObseravtionBailleurs.filter(idmarche => idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
-                        let marcherFavaroble=marcherEnAction.filter(idmarche=>idmarche.observations_bailleur==1).length
+                        let marcherFavaroble=marcherEnAction.filter(idmarche=>idmarche.avis_bail==1).length
+console.log("OK pour le text")
+                        //Recherche le candidat qui a le plus gros score parmie les admin
                          if(marcherFavaroble>1){
-                           //  this.acteEffetActive="OK"
-                            return marcherEnAction.find(idmarche=>Math.max(idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.rang_analyse))
-                         }else{
-                             marcherEnAction=marcherEnAction.find(idm=>idm.id==marcherEnAction[0].id)
+
+
+                             //prendre le max et min score du premier candidat
+                             let min = marcherEnAction[0].ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.rang_analyse
+                             let max = marcherEnAction[0].ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.rang_analyse;
+
+                            //parcourie le tableau pour recupere le maxi et le minimun en conparant les valeur max et min du premie selectionner
+                             for (let i = 1, len=marcherEnAction.length; i < len; i++) {
+                                 let v = marcherEnAction[i].ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.rang_analyse;
+                                 min = (v < min) ? v : min;
+                                 max = (v > max) ? v : max;
+                             }
+                          //   console.log(min)
+
+                             marcherEnAction= marcherEnAction.filter(idmarche=>idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.rang_analyse==max)
+                             //console.log(marcherEnAction)
                          }
-                         let rcm=marcherEnAction.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.reg_com
-                         let infoEntreprise=this.entreprises.find(ent=>ent.numero_rc==rcm)
-                       console.log(this.entreprises)
-                         if(infoEntreprise==undefined){
-                             infoEntreprise=""
-                           this.formEffetFinancier.entreprise_id=infoEntreprise.id
-                         }
-                         let objetRetour={
+
+
+                         console.log(marcherEnAction)
+                            let infoEntreprise="";
+                             if(marcherEnAction.length!=0){
+                                 const rcm=marcherEnAction[0].ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.reg_com
+                                 marcherEnAction=marcherEnAction.find(idm=>idm.id==marcherEnAction[0].id)
+                                 infoEntreprise=this.entreprises.find(entrep=>entrep.numero_rc==rcm)
+
+                                 if (infoEntreprise==undefined)
+                                     infoEntreprise=""
+
+                             }else{
+                                 marcherEnAction=""
+                             }
+
+
+
+                         const objetRetour={
                              entrepriseInfo:infoEntreprise,
                              dossierFavorable:marcherEnAction
                          }
-                         this.formFournisseur.numero_rc=rcm
-
-                         //this.acteEffetActive=marcherEnAction.length
+                    console.log(objetRetour)
                         return objetRetour
                     }
                 }
             },
 
-            // listeObservationBailleur:function () {
-            //     return marcheid => {
-            //         if(marcheid !=""){
-            //             return this.getterObservationBailleur.filter(idmarche => idmarche.marche_id = marcheid)
-            //         }
-            //     }
-
-            // },
+            /*listeActeEffectFinnancier:function () {
+                return marcheid => {
+                  if(marcheid !=""){
+                      console.log("iiiiiiii"
+                          const  objet=this.getActeEffetFinancierPersonnaliser.filter(idmarche => idmarche.marche.id == marcheid)
+                      console.log(objet)
+                        return this.getActeEffetFinancierPersonnaliser.filter(idmarche => idmarche.marche.id == marcheid)
+                    }
+                }
+            },*/
+            listeActeEffectFinnancier: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                        return this.getActeEffetFinancierPersonnaliser.filter(idmarche => idmarche.marche_id == marcheid)
+                    }
+                }
+            }
             // filtre_equipement() { getterAnoDMPBailleur
             //   const st = this.search.toLowerCase();
             //   return this.equipements.filter(type => {
@@ -4177,18 +4182,17 @@ created() {
 
             // vider l'input de acte  effet financier
 ajouterModalActeEffetFinancierLocal(entreprise_id){
-                console.log(this.formEffetFinancier)
+              //  console.log(this.formEffetFinancier)
     this.formEffetFinancier.marche_id=this.marcheid
     this.formEffetFinancier.entreprise_id=entreprise_id
     this.ajouterActeEffetFinancier(this.formEffetFinancier)
-    this.editMarche={
-        id:this.marcheid,
-        attribue:1,
-        numero_marche:this.formEffetFinancier.numero_marche
-    }
-    this.modifierMarche(editMarche)
+    let marcheObjet=this.marches.find(marche=>marche.id==this.marcheid)
+    marcheObjet.attribue=1
+    marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
+    console.log(marcheObjet)
+    this.modifierMarche(marcheObjet)
     this.formEffetFinancier = {
-          code_act:"",
+             code_act:"",
              libelle_act:"",
              reference_act:"",
              objet_act:"",
@@ -4338,7 +4342,8 @@ modifierModalActeEffetFinancierLocal(){
 
 
 // vider l'input de nnouveau fournisseur
-ajouterNouveauFournisseurLocal(){
+ajouterNouveauFournisseurLocal(registeCommerce){
+                this.formFournisseur.numero_rc=registeCommerce
     this.ajouterEntreprise(this.formFournisseur)
     this.formFournisseur = {
          numero_cc: "",

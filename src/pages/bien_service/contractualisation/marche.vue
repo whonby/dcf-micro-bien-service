@@ -427,11 +427,6 @@ export default {
 return this.getMarchePersonnaliser.filter((item) => {
   
      return item.objet.toLowerCase().includes(searchTerm) 
-     
-    
-
-  
-  
 
    }
 )

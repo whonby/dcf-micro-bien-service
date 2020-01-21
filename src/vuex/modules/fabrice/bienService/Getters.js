@@ -37,7 +37,7 @@ export const marches = state => state.marches
 export const motifDecisions = state => state.motifDecisions
 export const documentProcedures = state => state.documentProcedures
  export const nouveauFournisseur = state => state.nouveauFournisseur
- export const acteEffetFinanciers = state => state.acteEffetFinanciers
+ export const getterActeEffetFinanciers = state => state.acteEffetFinanciers
 
 export const appelOffres = state => state.appelOffres
 export const gettersOffreTechniques = state => state.offreTechniques
@@ -90,8 +90,6 @@ state.marches.map(element => {
     if(element.unite_administrative_id !== null ){
         element = {
             ...element,
-           
-           
             objetUniteAdministrative:rootGetters['uniteadministrative/uniteAdministratives'].find(
                plans => plans.id == element.unite_administrative_id
             )
@@ -115,8 +113,6 @@ export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, ro
         if (element.entreprise_id !== null) {
             element = {
                 ...element,
-
-
                 varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
                     plans => plans.id == element.entreprise_id
                 )
