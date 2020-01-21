@@ -2482,7 +2482,6 @@ export function ajouterMarche({commit}, elementAjout){
 export function modifierMarche({commit}, element_modifie) {
   asyncLoading( axios.put('/marches',element_modifie)).then(response => {
        commit('MODIFIER_MARCHE', response.data)
-       
 
        this.$app.$notify({
          title: 'success ',

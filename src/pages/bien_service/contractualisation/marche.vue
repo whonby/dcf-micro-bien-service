@@ -531,11 +531,6 @@ export default {
 return this.printMarcheNonAttribue.filter((item) => {
   
      return item.objet.toLowerCase().includes(searchTerm) 
-     
-    
-
-  
-  
 
    }
 )

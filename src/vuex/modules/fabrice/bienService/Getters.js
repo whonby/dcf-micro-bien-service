@@ -40,6 +40,9 @@ export const documentProcedures = state => state.documentProcedures
  export const acteEffetFinanciers = state => state.acteEffetFinanciers
  export const executionMarches = state => state.executionMarches
 
+ export const getterActeEffetFinanciers = state => state.acteEffetFinanciers
+
+// exemple de getters
 export const appelOffres = state => state.appelOffres
 export const gettersOffreTechniques = state => state.offreTechniques
 export const getterOffreFinanciers = state => state.offreFinanciers
@@ -91,8 +94,6 @@ state.marches.map(element => {
     if (element.unite_administrative_id !== null && element.activite_id !== null  ){
         element = {
             ...element,
-           
-           
             objetUniteAdministrative:rootGetters['uniteadministrative/uniteAdministratives'].find(
                plans => plans.id == element.unite_administrative_id
             ),
@@ -179,8 +180,6 @@ export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, ro
         if (element.entreprise_id !== null && element.marche_id !== null) {
             element = {
                 ...element,
-
-
                 varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
                     plans => plans.id == element.entreprise_id
                 ),
@@ -198,5 +197,7 @@ export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, ro
 
 
 
+
     
     // exemple de teset
+
