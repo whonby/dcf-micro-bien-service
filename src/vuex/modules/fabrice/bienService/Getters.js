@@ -38,6 +38,7 @@ export const motifDecisions = state => state.motifDecisions
 export const documentProcedures = state => state.documentProcedures
  export const nouveauFournisseur = state => state.nouveauFournisseur
  export const acteEffetFinanciers = state => state.acteEffetFinanciers
+ export const executionMarches = state => state.executionMarches
 
 export const appelOffres = state => state.appelOffres
 export const gettersOffreTechniques = state => state.offreTechniques
@@ -110,19 +111,27 @@ export const montantMarche = (state, getters) =>
         0
     );
 
-export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, rootGetters) =>
-    state.acteEffetFinanciers.map(element => {
-        if (element.entreprise_id !== null) {
-            element = {
-                ...element,
+// export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, rootGetters) =>
+//     state.acteEffetFinanciers.map(element => {
+//         if (element.entreprise_id !== null) {
+//             element = {
+//                 ...element,
 
 
-                varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
-                    plans => plans.id == element.entreprise_id
-                )
+//                 varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
+//                     plans => plans.id == element.entreprise_id
+//                 ),
 
-            }
+//                 varobjetTest: rootGetters['gestionMarche/entreprises'].find(
+//                     plans => plans.id == element.entreprise_id
+//                 )
 
-        }
-        return element;
-    })
+//             }
+
+//         }
+//         return element;
+//     })
+
+
+
+    

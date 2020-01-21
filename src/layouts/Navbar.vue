@@ -92,7 +92,7 @@ export default {
             "getClasses","getEchelons","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite"]),
 
-      ...mapActions('gestionMarche',['getTypeMarche','s',"getSecteurActivite",
+      ...mapActions('gestionMarche',['getTypeMarche',"getSecteurActivite",
         "getEntreprise","getEtapeMarche","getDocumentPTBAPPM","getMarcheContrat","getPresenceCF",
         "getDocumentPresence","getNombreMarcheByProcedure","sourcePersonnalise",
         "getSourceFinnancementByMarche","getMarcheContratExecution"]),
@@ -116,12 +116,12 @@ export default {
       //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
        ...mapActions('bienService', ['getActeurDepense', 'getBailleur','getTypeFacture',
        'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
-         'getTypePrestation', 'getCondition', 'getTextJuridique','getDecisionMarche', 'getMarche', 'getTypeMarches',
+         'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",
          "getDossierCandidat", "getOffreFinancier", "getOffreTechnique","getLettreInvitation","getMandater",
          "getCojo","getAnalyseDossier", 'getMotifDecision', 'getDocumentProcedure',
          'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur",
-          'getActeEffetFinancier'])
+          'getActeEffetFinancier',"getExecutionMarche"])
 
   },
 
@@ -196,7 +196,7 @@ export default {
             /**Gestion des marche*/
             
       this.getTypeMarche()
-      this.s()
+      // this.s()
       this.getSecteurActivite()
       this.getEntreprise()
       this.getEtapeMarche()
@@ -252,7 +252,7 @@ this.getMotifDecision()
 this.getDocumentProcedure()
 // this.getDecisionMarche()
 
-this.getDecisionMarche()
+// this.getDecisionMarche()
 this.getActeEffetFinancier()
 
 this.getTypeProcedures()
@@ -260,6 +260,7 @@ this.getTypeMarches()
 this.getMarche()
 this.getModePassations()
 this.getProcedurePassation()
+this.getExecutionMarche()
 
 
 

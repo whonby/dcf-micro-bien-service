@@ -35,6 +35,8 @@ import DetaillMarche from '../../pages/bien_service/contractualisation/DetaillMa
 import motifDecision from '../../pages/bien_service/parametres/motifDecision.vue';
 import documentProcedure from '../../pages/bien_service/parametres/documentProcedure.vue';
 import livrable from '../../pages/bien_service/parametres/livrable.vue';
+import executionMarche from '../../pages/bien_service/contractualisation/executionMarche.vue';
+import actesEffet from '../../pages/bien_service/contractualisation/actesEffet.vue';
 
 const BienServiceRoutes = [
 
@@ -42,6 +44,20 @@ const BienServiceRoutes = [
         path: "/type-Text-Juridique",
         name: "typeTextJuridique",
         component: typeTextJuridique
+    },
+    // route excution marche
+    {
+        path:"/creation-execution-marche",
+        name:"executionMarche",
+        component:executionMarche
+    },
+
+    // acte effe route
+
+    {
+path:"/liste-acte-effet-financier",
+name:"actesEffet",
+component:actesEffet
     },
     // la route pour acte de depense
 {

@@ -223,6 +223,70 @@ export function supprimerBailleur({commit}, id) {
 }
 
 
+
+
+
+// action pour execution des marches
+
+
+
+
+export  function  getExecutionMarche({commit}) {
+  queue.push(() => axios.get('/bailleurs').then((response) => {
+    commit('GET_EXECUTION_MARCHE', response.data.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action 
+export function ajouterExecutionMarche({commit}, formData){
+  asyncLoading(axios.post('/bailleurs',formData)).then(response =>{
+      if(response.status == 201){
+        console.log(response.data)
+          commit('AJOUTER_EXECUTION_MARCHE', response.data)
+          
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action 
+
+
+export function modifierExecutionMarche({commit}, element_modifie) {
+  asyncLoading( axios.put('/bailleurs' ,element_modifie)).then(response => {
+       commit('MODIFIER_EXECUTION_MARCHE', response.data)
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
+// supprimer categorie mision
+export function supprimerExecutionMarche({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('DELETE_EXECUTION_MARCHE', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+     axios.delete('/bailleurs/' + id).then(() => dialog.close() )   
+ })
+
+}
+
+
+
+
+
+
+
+
 // action pour le motif de decision
 
 
