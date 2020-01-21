@@ -2,10 +2,10 @@
 <template>
   <div>
     <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
-    <div id="exampleModal" class="modal hide taillModal">
+    <!-- <div id="exampleModal" class="modal hide taillModal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Marché</h3>
+        <h3> marché en execution</h3>
       </div>
     <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -61,7 +61,7 @@
                   <div class="controls">
                     <select v-model="formData.Economique" :readOnly="deveroueconomiq">
                     <option
-                        v-for="eco in economiqueDynamiques(formData.unite_administrative_id)"
+                        v-for="eco in economiqueDynamiques(formData.activite_id)"
                         :key="eco.id"
                         :value="eco.afficheEconomique.id"
                       >{{eco.afficheEconomique.code}} - {{eco.afficheEconomique.libelle}}</option>
@@ -87,23 +87,10 @@
           </div>
               </td>
               
-              <!-- <td>
-                 <div class="control-group">
-            <label class="control-label">Montant Imputations</label>
-            <div class="controls">
-              <input
-                type="text"
-                :value="MontatantImputationBudget"
-                class="span"
-                
-               readonly
-              />
-            </div>
-          </div>
-              </td> -->
-                <td>
+             
+                <td> -->
               
-               <div class="control-group">
+               <!-- <div class="control-group">
             <label class="control-label">Type marché</label>
             <div class="controls">
             <select v-model="formData.type_marche_id" class="span">
@@ -171,115 +158,30 @@
         >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
-    </div>
+    </div> -->
     <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
 
     <!--///////////////////////////////////////// debut modal de modification //////////////////////////////-->
 
-    <div id="modificationModal" class="modal hide taillModal">
+    <!-- <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier marché</h3>
+        <h3>Modifier marche</h3>
       </div>
       <div class="modal-body">
-       <table class="table table-bordered table-striped">
-         
-            <tr>
-              <td>
-               <div class="control-group">
+        <form class="form-horizontal">
+
+              <div class="control-group">
             <label class="control-label" title="unite administrative">UA</label>
             <div class="controls">
             <select v-model="editMarche.unite_administrative_id" class="span">
-               <option v-for="plans in groupUa" 
-               :key="plans[0].id" 
-               :value="plans[0].afficheUA.id">{{plans[0].afficheUA.libelle}}</option>
+               <option v-for="plans in uniteAdministratives" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
           </div>
-              </td>
-              <!-- <td>
-                <div class="control-group">
-                  <label class="control-label">Grand Nature</label>
-                  <div class="controls">
-                    <select v-model="editMarche.grdnature_id" :readOnly="deverouGrandNature">
-                      <option
-                        v-for="gdeNature in groupgranNature"
-                        :key="gdeNature[0].id"
-                        :value="gdeNature[0].afficheGdeNature.id"
-                      >{{gdeNature[0].afficheGdeNature.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td> -->
-              
-               <td>
-              
-               <div class="control-group">
-                  <label class="control-label">Activite</label>
-                  <div class="controls">
-                    <select v-model="editMarche.activite_id" :readOnly="deverouactivite">
-                     <option
-                        v-for="activite in activiteDynamiques(editMarche.unite_administrative_id)"
-                        :key="activite.id"
-                        :value="activite.afficheActivite.id"
-                      >{{activite.afficheActivite.code}} - {{activite.afficheActivite.libelle}}</option>
-                    </select>
-                    
-                  </div>
-                   
-                </div>
-              </td>
-               <td colspan=2>
-                 <div class="control-group">
-            <label class="control-label">Imputation Budgetaire</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="editMarche.imputation"
-                class="span5"
-                placeholder="Saisir le Imputation"
-                readonly
-              />
-            </div>
-          </div>
-              </td>
-               <!-- <td>
-              
-               <div class="control-group">
-                  <label class="control-label">Classification Economique</label>
-                  <div class="controls">
-                    <select v-model="editMarche.Economique" :readOnly="deveroueconomiq">
-                    <option
-                        v-for="eco in economiqueDynamiques(editMarche.unite_administrative_id)"
-                        :key="eco.id"
-                        :value="eco.afficheEconomique.id"
-                      >{{eco.afficheEconomique.code}} - {{eco.afficheEconomique.libelle}}</option>
-                    </select>
-                  </div>
-                   
-                </div>
-              </td> -->
-            </tr>
-            <tr>
-              
-              
-              <!-- <td>
-                 <div class="control-group">
-            <label class="control-label">Montant Imputations</label>
-            <div class="controls">
-              <input
-                type="text"
-                :value="MontatantImputationBudget"
-                class="span"
-                
-               readonly
-              />
-            </div>
-          </div>
-              </td> -->
-                <td>
-              
-               <div class="control-group">
+
+          <div class="control-group">
             <label class="control-label">Type marché</label>
             <div class="controls">
             <select v-model="editMarche.type_marche_id" class="span">
@@ -288,10 +190,9 @@
            </select>
             </div>
           </div>
-              </td>
-           
-               <td>
-                 <div class="control-group">
+
+
+            <div class="control-group">
             <label class="control-label">Refencence marché</label>
             <div class="controls">
               <input
@@ -302,24 +203,21 @@
               />
             </div>
           </div>
-              </td>
-                   
-               <td>
-                 <div class="control-group">
-            <label class="control-label">Montant du marché</label>
+         
+          
+          <div class="control-group">
+            <label class="control-label">Montant</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="editMarche.montant_marche"
                 class="span"
                 placeholder="Saisir le libelle_type"
-               
               />
             </div>
           </div>
-              </td>
-              <td>
-               <div class="control-group">
+
+          <div class="control-group">
             <label class="control-label">Objet marché</label>
             <div class="controls">
               <input
@@ -330,14 +228,9 @@
               />
             </div>
           </div>
-              </td>
-            
-           
-            </tr>
-          
-            
-          
-        </table>
+         
+         
+        </form>
       </div>
       <div class="modal-footer">
         <a
@@ -348,7 +241,7 @@
         >Modifier</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
-    </div>
+    </div> -->
     <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
     <!-- End Page Header -->
     <!-- Default Light Table -->
@@ -371,7 +264,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des marchés</h5>
+              <h5>Liste des marches</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -384,24 +277,22 @@
                   <tr>
                       <th>UA</th>
                     <th>Type marché</th>
-                    <th>Activité</th>
                     <th>Objet marché</th>
                     <th>Reference marché</th>
                     <th>Montant marché</th>
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody >
                   <tr class="odd gradeX" v-for="(marche, index) in 
-                typePrestationFiltre"
+                  marcherAttribuerFiltre"
                  :key="marche.id">
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
 
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.type_marche.libelle || 'Non renseigné'}}</td>
- <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.afficheActivite.libelle || 'Non renseigné'}}</td>
+
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.objet || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -413,14 +304,14 @@
 
                      <div class="btn-group">
 
-                   <router-link :to="{ name: 'DetaillMarche', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail marches">
+                   <!-- <router-link :to="{ name: 'DetaillMarche', params: { id: marche.id }}"
+                class="btn btn-default " title="formulation de demamnde d'engagement">
                   <span class=""><i class="icon-folder-open"></i></span>
-                   </router-link> 
-  <!-- <router-link :to="{ name: 'Engagement', params: { id: marche.id }}"
+                   </router-link>  -->
+ <router-link :to="{ name: 'Engagement', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail Engagement">
                   <span class=""><i class=" icon-folder-close"></i></span>
-                   </router-link>  -->
+                   </router-link> 
               <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
@@ -429,9 +320,7 @@
                        </tr>
                         <tr>
                      
-                       <td>
-                          
-                      </td>
+                      
                       <td>
                           
                       </td>
@@ -441,7 +330,7 @@
                       <td>
                           
                       </td>
-                       <td style="font-weight:bold;"> Total Marché
+                       <td style="font-weight:bold;"> Total Marche
                       </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
                            {{formatageSomme(parseFloat(montantMarche))}}
@@ -462,7 +351,7 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjoutTypaPrestation" main-icon="apps" bg-color="green"></fab>
+    <!-- <fab :actions="fabActions" @cache="afficherModalAjoutTypaPrestation" main-icon="apps" bg-color="green"></fab> -->
  <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjoutTypaPrestation()">Open</button>
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
@@ -479,15 +368,11 @@ export default {
     return {
       fabActions: [
         {
-          name: "cache",
-          icon: "add"
+          // name: "cache",
+          // icon: "add"
         }
 
-        // {
-        //   name: "alertMe",
-        //   icon: "add_alert",
-        //   class: ""
-        // }
+      
       ],
     //   json_fields: {
     //     CODE: "code",
@@ -509,27 +394,23 @@ export default {
             reference_marche:"",
             montant_marche:"",
                 type_marche_id:"",
-                unite_administrative_id:"",
-                imputation:"",
-                 activite_id:""
+                unite_administrative_id:""
       },
       search: ""
     };
   },
 
   computed: {
-     ...mapGetters("bienService", ['marches','typeMarches', 'getMarchePersonnaliser',"montantMarche"]),
+     ...mapGetters("bienService", ['marches','typeMarches', 'getMarchePersonnaliser',"montantMarche",'engagement']),
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
       "montantBudgetGeneral"]),
-       ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
-  'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
-    typePrestationFiltre()  {
+    marcherAttribuerFiltre()  {
      
         const searchTerm = this.search.toLowerCase();
 
-return this.getMarchePersonnaliser.filter((item) => {
+return this. marcherAttribuer.filter((item) => {
   
      return item.objet.toLowerCase().includes(searchTerm) 
      
@@ -572,7 +453,7 @@ return this.getMarchePersonnaliser.filter((item) => {
      return id => {
         if (id != null && id != "") {
           return this.getPersonnaliseBudgetGeneralParBienService.filter(
-            element => element.ua_id == id
+            element => element.activite_id == id
           );
         }
       };
@@ -586,15 +467,11 @@ return this.getMarchePersonnaliser.filter((item) => {
       }
       return 0
     },
-    // ImputationBudgetModif() {
-      
-    //   const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.economique_id == this.editMarche.Economique);
 
-    //   if (norme) {
-    //     return norme.codebudget;
-    //   }
-    //   return 0
-    // },
+    marcherAttribuer(){
+      return this.getMarchePersonnaliser.filter(recuper => recuper.attribue ==1)
+      
+    },
     // MontatantImputationBudget() {
       
     //   const norme = this.getPersonnaliseBudgetGeneral.find(normeEquipe => normeEquipe.economique_id == this.formData.Economique);

@@ -29,6 +29,47 @@ export const DELETE_PRESTATION = (state, id)=> {
 }
 
 
+// mutation des executions de marché
+
+
+
+
+// get all execution marche
+export const GET_EXECUTION_MARCHE = (state, tableau_execution_marche) =>{
+    state.executionMarches = tableau_execution_marche
+}
+
+// add * execution nmarche
+
+export const AJOUTER_EXECUTION_MARCHE = (state, elementAjouter) => {
+    state.executionMarches.unshift(elementAjouter)
+}
+
+// update all execution marche
+export const MODIFIER_EXECUTION_MARCHE = (state, elementModif)=>{
+    state.executionMarches = state.executionMarches.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+
+
+// delete all execution de marche 
+
+export const DELETE_EXECUTION_MARCHE = (state, id)=> {
+    state.executionMarches = state.executionMarches.filter(marche => marche.id !=id)
+}
+
+
+
+
+
+
+
 // mutation pour le motif de decision
 
 

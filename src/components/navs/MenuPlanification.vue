@@ -301,14 +301,14 @@
         <ul class="dropdown-menu">
 
            <li>
-            <router-link :to="{name: 'MarcheContrat'}" tag="a">
+            <router-link :to="{name: 'actesEffet'}" tag="a">
               <i class="icon-list-alt"></i>
              Acte à effet financier
             </router-link>
           </li>
 
            <li>
-            <router-link :to="{name: 'MarcheContrat'}" tag="a">
+            <router-link :to="{name: 'executionMarche'}" tag="a">
               <i class="icon-key"></i>
               Marchés et contrats
             </router-link>

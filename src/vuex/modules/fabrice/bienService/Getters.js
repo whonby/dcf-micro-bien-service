@@ -1,4 +1,5 @@
-export const prestations = state => state.prestations.sort((a,b)=>(a.code>b.code)? 1:-1)
+getActeEffetFinancierPersonnaliser
+export const prestations = state => state.prestations.sort((a, b) => (a.code > b.code) ? 1 : -1)
 export const acteDepenses = state => state.acteDepenses.sort((a,b)=>(a.code>b.code)? 1:-1)
 export const bailleurs = state => state.bailleurs
 export const banques = state => state.banques.sort((a,b)=>(a.code>b.code)? 1:-1)
@@ -38,6 +39,7 @@ export const motifDecisions = state => state.motifDecisions
 export const documentProcedures = state => state.documentProcedures
  export const nouveauFournisseur = state => state.nouveauFournisseur
  export const acteEffetFinanciers = state => state.acteEffetFinanciers
+ export const executionMarches = state => state.executionMarches
 
 export const appelOffres = state => state.appelOffres
 export const gettersOffreTechniques = state => state.offreTechniques
@@ -122,11 +124,20 @@ export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, ro
 
                 varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
                     plans => plans.id == element.entreprise_id
+                ),
+
+                varobjetTest: rootGetters['gestionMarche/entreprises'].find(
+                    plans => plans.id == element.entreprise_id
                 )
+
 
             }
 
         }
         return element;
     })
-getMarchePersonnaliser
+
+
+
+    
+    // exemple de teset

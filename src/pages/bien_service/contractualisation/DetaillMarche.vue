@@ -1,6 +1,6 @@
 <template>
     <div>
-
+getActeEffetFinancierPersonnaliser
 
         <div class="container-fluid">
             <h4 v-if="detail_marche">Detail Marche : {{detail_marche.objet}} </h4>
@@ -672,7 +672,7 @@
  <div id="addFournisseurDosntBase" class="modal hide gdmodelfour">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>creer nouveau fournisseur</h3>
+                <h3>ajouter nouveau fournisseur</h3>
             </div>
             <div class="modal-body">
                 <form action="#" method="get" class="form-horizontal" @submit.prevent="ajouterNouveauFournisseurLocal" enctype="multipart/form-data">
@@ -1499,22 +1499,22 @@
 
 
                          <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.code_acte || 'Non renseigné'}}</td>
+                            {{effetFinancier.code_act || 'Non renseigné'}}</td>
 
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.libelle_acte || 'Non renseigné'}}</td>
+                            {{effetFinancier.libelle_act || 'Non renseigné'}}</td>
 
                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.libelle_act || 'Non renseigné'}}</td>
                         
                         <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.objet_acte || 'Non renseigné'}}</td>
+                            {{effetFinancier.objet_act || 'Non renseigné'}}</td>
 
                         <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.incidence_financiere || 'Non renseigné'}}</td>
 
                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.montant_acte || 'Non renseigné'}}</td>
+                            {{effetFinancier.montant_act || 'Non renseigné'}}</td>
 
                               <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.id_type_acte_effet_fin || 'Non renseigné'}}</td>
@@ -3802,8 +3802,11 @@ created() {
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
-                "secteur_activites", "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables", "entreprises",
+                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers"]),
+
+                ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
+
             listeAppelOffre(){
                 return  marche_id=>{
                     if (marche_id!="") {
