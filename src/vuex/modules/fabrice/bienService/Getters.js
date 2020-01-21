@@ -88,14 +88,17 @@ export const getTypeTextJuridique = (state, getters) =>
 
 export  const getMarchePersonnaliser = (state, getters,rootState, rootGetters) =>
 state.marches.map(element => {
-    if(element.unite_administrative_id !== null ){
+    if (element.unite_administrative_id !== null && element.activite_id !== null  ){
         element = {
             ...element,
            
            
             objetUniteAdministrative:rootGetters['uniteadministrative/uniteAdministratives'].find(
                plans => plans.id == element.unite_administrative_id
-            )
+            ),
+            afficheActivite: rootGetters[
+          "parametreGenerauxActivite/plans_activites"
+        ].find(planactivite => planactivite.id == element.activite_id)
             
         }
         
@@ -126,6 +129,7 @@ export const montantMarche = (state, getters) =>
 //                     plans => plans.id == element.entreprise_id
 //                 )
 
+
 //             }
 
 //         }
@@ -135,3 +139,4 @@ export const montantMarche = (state, getters) =>
 
 
     
+    // exemple de teset
