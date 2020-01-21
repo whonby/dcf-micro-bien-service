@@ -1,7 +1,5 @@
 <template>
-    <div>
-
-
+    
         <div class="container-fluid">
             <h4 v-if="detail_marche">Detail Marche : {{detail_marche.objet}} </h4>
             <hr />
@@ -13,6 +11,7 @@
                             <thead>
                             <tr>
                                 <th>Objet marche</th>
+                                <th>Objet marche</th>
                                 <th>Reference marche</th>
                                 <th>Montant marche</th>
                                 <th>Type de marche</th>
@@ -22,6 +21,7 @@
                             </thead>
                             <tbody>
                             <tr>
+                                <td class="taskDesc">{{detail_marche.id}}</td>
                                 <td class="taskDesc">{{detail_marche.objet}}</td>
                                 <td class="taskStatus">{{detail_marche.reference_marche}}</td>
                                 <td class="taskOptions">
@@ -51,6 +51,7 @@
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tab1">Engagement</a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab2">Mandat</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li> -->
                             </ul>
@@ -59,9 +60,13 @@
                             <div id="tab1" class="tab-pane active">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <!-- <div class="span4" align="right">
-                                    <a href="#myAlert" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
-
+                                <div class="span4" align="right">
+                                    <!-- <a href="#myAlert"  class="btn btn-success" align="rigth" >Ajouter</a></div> -->
+<router-link :to="{ name: 'AjouterEngagement',params: { id: detail_marche.id }}"
+                class="btn btn-success ">
+                  <span class="">Demande Engagement</span>
+                   </router-link> 
+                    </div>
                                 <table class="table table-bordered table-striped" v-if="marcheid">
                                     <thead>
                                     <tr>
@@ -80,7 +85,7 @@
                                    
                                     </tbody>
                                 </table>
-                            </div>
+                           
                             
 
 
@@ -116,10 +121,10 @@
 
         <!-- Fin ajouter appel offres --->
 
-        <fab :actions="fabActions" @cache="afficherModalAjouterActeDepense" main-icon="apps" bg-color="green"></fab>
-        <notifications  />
+        <!-- <fab :actions="fabActions" @cache="afficherModalAjouterImmobilisation" main-icon="apps" bg-color="green"></fab>
+        <notifications  /> -->
         <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-        <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterActeDepense()">Open</button>
+        <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterImmobilisation()">Open</button>
 
         <!-- Modification appel offres --->
 
@@ -216,14 +221,12 @@ created() {
                  "ajouterFournisseur", "ajouterActeEffetFinancier", "modifierActeEffetFinancier","supprimerActeEffetFinancier"
             ]),
         
+  afficherModalAjouterImmobilisation() {
+      this.$router.push({
+        name: "AjouterEngagement"
+      });
+    },
 
-            //afiicher modal ajouter
-            afficherModalAjouterActeDepense() {
-                this.$("#exampleModal").modal({
-                    backdrop: "static",
-                    keyboard: false
-                });
-            },
           
 
             ExporterEnExel(){

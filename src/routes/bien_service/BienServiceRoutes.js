@@ -36,10 +36,16 @@ import motifDecision from '../../pages/bien_service/parametres/motifDecision.vue
 import documentProcedure from '../../pages/bien_service/parametres/documentProcedure.vue';
 import livrable from '../../pages/bien_service/parametres/livrable.vue';
 import Engagement from '../../pages/bien_service/contractualisation/engagement.vue';
+import AjouterEngagement from '../../pages/bien_service/contractualisation/AjouterEngagement.vue';
 import executionMarche from '../../pages/bien_service/contractualisation/executionMarche.vue';
 import actesEffet from '../../pages/bien_service/contractualisation/actesEffet.vue';
 
 const BienServiceRoutes = [
+    {
+        path: "/Ajouter-Engagement/:id",
+        name: "AjouterEngagement",
+        component: AjouterEngagement
+    },
 
     {
         path: "/type-Text-Juridique",

@@ -59,7 +59,7 @@
                <div class="control-group">
                   <label class="control-label">Classification Economique</label>
                   <div class="controls">
-                    <select v-model="formData.Economique" :readOnly="deveroueconomiq">
+                    <select v-model="formData.economique_id" :readOnly="deveroueconomiq">
                     <option
                         v-for="eco in economiqueDynamiques(formData.unite_administrative_id)"
                         :key="eco.id"
@@ -385,6 +385,8 @@
                       <th>UA</th>
                     <th>Type marché</th>
                     <th>Activité</th>
+                    <th>Imputation</th>
+                    <th>Ligne Budgetaire</th>
                     <th>Objet marché</th>
                     <th>Reference marché</th>
                     <th>Montant marché</th>
@@ -402,6 +404,10 @@
                    {{marche.type_marche.libelle || 'Non renseigné'}}</td>
  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.afficheActivite.libelle || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.imputation || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.objet || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -429,6 +435,12 @@
                        </tr>
                         <tr>
                      
+                       <td>
+                          
+                      </td>
+                      <td>
+                          
+                      </td>
                        <td>
                           
                       </td>
@@ -524,7 +536,7 @@ export default {
       "montantBudgetGeneral"]),
        ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
-
+...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
     typePrestationFiltre()  {
      
         const searchTerm = this.search.toLowerCase();

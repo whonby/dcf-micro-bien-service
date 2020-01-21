@@ -89,7 +89,7 @@ export const getTypeTextJuridique = (state, getters) =>
 
 export  const getMarchePersonnaliser = (state, getters,rootState, rootGetters) =>
 state.marches.map(element => {
-    if (element.unite_administrative_id !== null && element.activite_id !== null  ){
+    if (element.unite_administrative_id !== null && element.activite_id !== null && element.economique_id !== null ){
         element = {
             ...element,
            
@@ -99,7 +99,10 @@ state.marches.map(element => {
             ),
             afficheActivite: rootGetters[
           "parametreGenerauxActivite/plans_activites"
-        ].find(planactivite => planactivite.id == element.activite_id)
+        ].find(planactivite => planactivite.id == element.activite_id),
+            afficheEconomique: rootGetters[
+                "parametreGenerauxBudgetaire/plans_budgetaires"
+            ].find(planactivite => planactivite.id == element.economique_id)
             
         }
         
