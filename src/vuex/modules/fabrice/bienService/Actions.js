@@ -2963,6 +2963,57 @@ export function supprimerAnalyseDMP({commit}, id) {
 
 
 
+export function getEngagement({ commit }) {
+  queue.push(() => axios.get('/engagement').then((response) => {
+    commit('GET_ENGAGEMENT', response.data.data)
+
+  }).catch(error => console.log(error)))
+}
+
+
+
+export function ajouterEngagement({ commit }, elementAjout) {
+  asyncLoading(axios.post('/engagement', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_ENGAGEMENT', response.data)
+
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
+  }).catch(error => console.log(error))
+}
+
+
+
+export function modifierEngagement({ commit }, element_modifie) {
+  asyncLoading(axios.put('/engagement', element_modifie)).then(response => {
+    commit('MODIFIER_ENGAGEMENT', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+
+
+export function supprimerEngagement({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_ENGAGEMENT', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/engagement/' + id).then(() => dialog.close())
+    })
+
+}
+
+
+
 
 /*Analyse ano DMP bailleur*/
 

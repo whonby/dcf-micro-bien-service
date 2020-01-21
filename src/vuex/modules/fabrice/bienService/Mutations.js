@@ -1551,3 +1551,34 @@ export const SUPPRIMER_ANO_DMP_BAILLEUR= (state, id)=> {
     state.stateAnoDmpBailleur = state.stateAnoDmpBailleur.filter(autreText => autreText.id !=id)
 }
 /*Fin ano dmpBailleur mutation*/
+
+
+
+
+
+
+
+/*Muttation ano DMP Bailleur*/
+export const GET_ENGAGEMENT = (state, tableau_autre_text_juridique) => {
+    state.engagements = tableau_autre_text_juridique
+}
+
+export const AJOUTER_ENGAGEMENT = (state, elementAjouter) => {
+    state.engagements.unshift(elementAjouter)
+}
+
+
+
+export const MODIFIER_ENGAGEMENT = (state, elementModif) => {
+    state.engagements = state.engagements.map(response => {
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_ENGAGEMENT = (state, id) => {
+    state.engagements = state.engagements.filter(autreText => autreText.id != id)
+}
+/*Fin ano dmpBailleur mutation*/

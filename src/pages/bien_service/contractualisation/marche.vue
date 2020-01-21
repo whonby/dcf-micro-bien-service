@@ -417,7 +417,10 @@
                 class="btn btn-default " title="Detail marches">
                   <span class=""><i class="icon-folder-open"></i></span>
                    </router-link> 
-
+  <router-link :to="{ name: 'Engagement', params: { id: marche.id }}"
+                class="btn btn-default " title="Detail Engagement">
+                  <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link> 
               <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              

@@ -35,7 +35,7 @@ import DetaillMarche from '../../pages/bien_service/contractualisation/DetaillMa
 import motifDecision from '../../pages/bien_service/parametres/motifDecision.vue';
 import documentProcedure from '../../pages/bien_service/parametres/documentProcedure.vue';
 import livrable from '../../pages/bien_service/parametres/livrable.vue';
-
+import Engagement from '../../pages/bien_service/contractualisation/engagement.vue';
 const BienServiceRoutes = [
 
     {
@@ -72,7 +72,12 @@ const BienServiceRoutes = [
     component:motifDecision
 },
 
-
+    // detail marche
+    {
+        path: '/Engagement/:id',
+        name: "Engagement",
+        component: Engagement
+    },
 
 // detail marche
 {
