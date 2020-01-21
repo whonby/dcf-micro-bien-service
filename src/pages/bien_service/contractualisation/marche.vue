@@ -515,10 +515,12 @@ export default {
   },
 
   computed: {
-     ...mapGetters("bienService", ['marches','typeMarches', 'getMarchePersonnaliser',"montantMarche"]),
+     ...mapGetters("bienService", ['marches','typeMarches', 'getMarchePersonnaliser',
+     "montantMarche", "printMarcheNonAttribue"]),
+
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
-      "montantBudgetGeneral"]),
+      "montantBudgetGeneral", ]),
        ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
@@ -526,7 +528,7 @@ export default {
      
         const searchTerm = this.search.toLowerCase();
 
-return this.getMarchePersonnaliser.filter((item) => {
+return this.printMarcheNonAttribue.filter((item) => {
   
      return item.objet.toLowerCase().includes(searchTerm) 
      

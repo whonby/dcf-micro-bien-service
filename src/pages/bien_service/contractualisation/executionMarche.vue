@@ -327,10 +327,10 @@
                       <td>
                           
                       </td>
-                       <td style="font-weight:bold;"> Total Marche
+                       <td style="font-weight:bold;"> Total Marche attribué
                       </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
-                           {{formatageSomme(parseFloat(montantMarche))}}
+                           {{formatageSomme(parseFloat(montantMarcheAttribue))}}
                            
                       </td>
                        <td>
@@ -398,7 +398,7 @@ export default {
   },
 
   computed: {
-     ...mapGetters("bienService", ['marches','typeMarches', 'getMarchePersonnaliser',"montantMarche"]),
+     ...mapGetters("bienService", ['marches','typeMarches', 'getMarchePersonnaliser',"montantMarcheAttribue"]),
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
       "montantBudgetGeneral"]),
@@ -466,7 +466,7 @@ return this. marcherAttribuer.filter((item) => {
     },
 
     marcherAttribuer(){
-      return this.getMarchePersonnaliser.filter(recuper => recuper.attribue ==1)
+      return this.getMarchePersonnaliser.filter(recuper => recuper.attribue == 1)
       
     },
     // MontatantImputationBudget() {

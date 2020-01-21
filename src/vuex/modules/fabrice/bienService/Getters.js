@@ -114,27 +114,87 @@ export const montantMarche = (state, getters) =>
         0
     );
 
-// export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, rootGetters) =>
-//     state.acteEffetFinanciers.map(element => {
-//         if (element.entreprise_id !== null) {
-//             element = {
-//                 ...element,
 
 
-//                 varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
-//                     plans => plans.id == element.entreprise_id
-//                 ),
-
-//                 varobjetTest: rootGetters['gestionMarche/entreprises'].find(
-//                     plans => plans.id == element.entreprise_id
-//                 )
 
 
-//             }
 
-//         }
-//         return element;
-//     })
+    export const montantMarcheAttribue = (state, getters) =>
+
+    getters.marcherAttribue.reduce( (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),
+      0    
+      
+    );
+    
+
+
+
+
+    
+    export const marcherAttribue = getters =>
+    getters.marches.filter(
+      marcheNonAttribue => marcheNonAttribue.attribue !== 0
+    );
+
+// marche non attribué 
+
+   
+
+
+
+
+    export const marcheNonattribue = getters =>
+    getters.marches.filter(
+      marcheNonAttribue => marcheNonAttribue.attribue == 0
+    );
+
+
+
+
+    export  const printMarcheNonAttribue = (state, getters,rootState, rootGetters) =>
+    getters.marcheNonattribue.map(element => {
+    if (element.unite_administrative_id !== null && element.activite_id !== null  ){
+        element = {
+            ...element,
+           
+           
+            objetUniteAdministrative:rootGetters['uniteadministrative/uniteAdministratives'].find(
+               plans => plans.id == element.unite_administrative_id
+            ),
+            afficheActivite: rootGetters[
+          "parametreGenerauxActivite/plans_activites"
+        ].find(planactivite => planactivite.id == element.activite_id)
+            
+        }
+        
+    }
+    return element;
+})
+
+
+
+
+export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, rootGetters) =>
+    state.acteEffetFinanciers.map(element => {
+        if (element.entreprise_id !== null && element.marche_id !== null) {
+            element = {
+                ...element,
+
+
+                varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
+                    plans => plans.id == element.entreprise_id
+                ),
+
+                varobjetTest: rootGetters['bienService/marches'].find(
+                    plans => plans.id == element.marche_id
+                )
+
+
+            }
+
+        }
+        return element;
+    })
 
 
 

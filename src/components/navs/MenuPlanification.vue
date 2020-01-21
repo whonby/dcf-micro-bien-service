@@ -310,7 +310,7 @@
            <li>
             <router-link :to="{name: 'executionMarche'}" tag="a">
               <i class="icon-key"></i>
-              Marchés et contrats
+              Marchés & contract attribués
             </router-link>
           </li>
          
