@@ -3,7 +3,7 @@
 
         <div class="container-fluid">
             <h4 v-if="marcheDetail(marcheid)" >Detail Marche : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en-cours de passation</button>
-                <button class="btn btn-success btn-large" v-else>Marché attribue</button></h4>
+                <button class="btn btn-success btn-large" v-else>Marché attribué</button></h4>
             <hr />
 
             <div class="widget-box">
@@ -65,7 +65,7 @@
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
                                     <a href="#myAlert" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
-
+                                   <h4>Liste appel d'offre</h4>
                                 <table class="table table-bordered table-striped" v-if="marcheid">
                                     <thead>
                                     <tr>
@@ -93,9 +93,9 @@
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.nom_bailleurs || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{appelOffre.date_emission || 'Non renseigné'}}</td>
+                                            {{formaterDate(appelOffre.date_emission) || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{appelOffre.date_limite || 'Non renseigné'}}</td>
+                                            {{formaterDate(appelOffre.date_limite) || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.objet_appel || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
@@ -239,7 +239,7 @@
                          <td @click="afficheBouttonTechFin(index)">
                              {{appelOffre.prenom_cand || 'Non renseigné'}}</td>
                          <td @click="afficheBouttonTechFin(index)">
-                             {{appelOffre.date_nais_cand || 'Non renseigné'}}</td>
+                             {{formaterDate(appelOffre.date_nais_cand) || 'Non renseigné'}}</td>
                          <td @click="afficheBouttonTechFin(index)">
                              {{appelOffre.telephone_cand || 'Non renseigné'}}</td>
                          <td @click="afficheBouttonTechFin(index)">
@@ -597,7 +597,7 @@
                                     <th>Programme mobilisation</th>
                                     <th>Capacite financiere </th>
                                     <th>CAA Moyenn</th>
-                                    <th>Capacite financement</th>
+                                    <!-- <th>Capacite financement</th> -->
                                     <th>Capacite technique exper </th>
                                     <th>Meth reat traveau</th>
                                     <th>Accord groupe</th>
@@ -612,10 +612,10 @@
                                     <td>{{detail_offre_technique.prog_mobilisation || "Non renseigne"}}</td>
                                     <td>{{detail_offre_technique.capacite_financiere || "Non renseigne"}}</td>
                                     <td>{{detail_offre_technique.caa_moyen_ac_entre || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_technique.capacite_financiere || "Non renseigne"}}</td>
+                                    <!-- <td>{{detail_offre_technique.capacite_financement || "Non renseigne"}}</td> -->
                                     <td>{{detail_offre_technique.capacite_tech_exp || "Non renseigne"}}</td>
                                     <td>{{detail_offre_technique.meth_real_travau || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_technique.accord_group || "Non renseigne"}}</td>
+                                    <td>{{detail_offre_technique.accord_groupe || "Non renseigne"}}</td>
                                     <td>{{detail_offre_technique.pouv_habil_signataire || "Non renseigne"}}</td>
                                     <td>{{detail_offre_technique.cautionnement_prov || "Non renseigne"}}</td>
                                     <td>{{detail_offre_technique.reg_com || "Non renseigne"}}</td>
@@ -637,7 +637,7 @@
                                 <thead>
                                 <tr>
                                     <th>Designation</th>
-                                    <th>Unite </th>
+                                  
                                     <th>Quantite</th>
                                     <th>Prix unitaire</th>
                                     <th>Montant total ht </th>
@@ -648,7 +648,7 @@
 
                                 <tr>
                                     <td>{{detail_offre_finnancier.designation || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_finnancier.unite || "Non renseigne"}}</td>
+                                    <!-- <td>{{detail_offre_finnancier.unite || "Non renseigne"}}</td> -->
                                     <td>{{detail_offre_finnancier.quantite || "Non renseigne"}}</td>
                                     <td>{{detail_offre_finnancier.prix_unitaire || "Non renseigne"}}</td>
                                     <td>{{detail_offre_finnancier.montant_total_ht || "Non renseigne"}}</td>
@@ -872,6 +872,7 @@
                 </div>
 
 </div>
+       <h4> Liste des lettres invitations</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
@@ -887,13 +888,13 @@
                     <tr class="odd gradeX" v-for="(appelOffre, index) in lettreInvitationAMarche(marcheid)"
                         :key="appelOffre.id">
                         <td @click="afficheBouttonTechFinInvitation(index)">
-                            {{appelOffre.date_lettre || 'Non renseigné'}}</td>
+                           {{formaterDate(appelOffre.date_lettre) || 'Non renseigné'}}</td>
                         <td @click="afficheBouttonTechFinInvitation(index)">
                             {{appelOffre.ref_lettre || 'Non renseigné'}}</td>
                         <td @click="afficheBouttonTechFinInvitation(index)">
                             {{appelOffre.destination || 'Non renseigné'}}</td>
                         <td @click="afficheBouttonTechFinInvitation(index)">
-                            {{appelOffre.date_cojo || 'Non renseigné'}}</td>
+                            {{formaterDate(appelOffre.date_cojo )|| 'Non renseigné'}}</td>
                         <div class="btn-group">
                             <button @click.prevent="supprimerLettreInvitation(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
@@ -913,6 +914,7 @@
                     </div>
 
                 </div>
+                <h4> liste des mandates</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
@@ -928,7 +930,7 @@
                     <tr class="odd gradeX" v-for="(appelOffre, index) in listeMantater(marcheid)"
                         :key="appelOffre.id">
                         <td @click="afficheBouttonTechFinMandater(index)">
-                            {{appelOffre.date_id || 'Non renseigné'}}</td>
+                            {{formaterDate(appelOffre.date_id) || 'Non renseigné'}}</td>
                         <td @click="afficheBouttonTechFinMandater(index)">
                             {{appelOffre.matricule_m || 'Non renseigné'}}</td>
                         <td @click="afficheBouttonTechFinMandater(index)">
@@ -956,6 +958,7 @@
                       </div>
 
                   </div>
+                  <h4> Liste des cojos</h4>
                   <table class="table table-bordered table-striped" v-if="marcheid">
                       <thead>
                       <tr>
@@ -981,9 +984,9 @@
                           <td @click="afficheBouttonTechCojo(index)">
                               {{appelOffre.autorite_contractante || 'Non renseigné'}}</td>
                           <td @click="afficheBouttonTechCojo(index)">
-                              {{appelOffre.date_composition || 'Non renseigné'}}</td>
+                              {{formaterDate(appelOffre.date_composition) || 'Non renseigné'}}</td>
                           <td @click="afficheBouttonTechCojo(index)">
-                              {{appelOffre.date_invitation || 'Non renseigné'}}</td>
+                              {{formaterDate(appelOffre.date_invitation) || 'Non renseigné'}}</td>
                           <td @click="afficheBouttonTechCojo(index)">
                               {{appelOffre.num_dossier_appel_offre || 'Non renseigné'}}</td>
                           <td @click="afficheBouttonTechCojo(index)">
@@ -1014,6 +1017,7 @@
                     </div>
 
                 </div>
+                <h4>Liste des dossiers analyses</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
@@ -1037,7 +1041,7 @@
                         <td @click="afficheAnnalyseDossier(index)">
                             {{appelOffre.dossier_candidature.nom_cand || 'Non renseigné'}}</td>
                         <td @click="afficheAnnalyseDossier(index)">
-                            {{appelOffre.date_analyse || 'Non renseigné'}}</td>
+                            {{formaterDate(appelOffre.date_analyse) || 'Non renseigné'}}</td>
                         <td @click="afficheAnnalyseDossier(index)">
                             {{appelOffre.rang_analyse || 'Non renseigné'}}</td>
                         <td @click="afficheAnnalyseDossier(index)">
@@ -1077,6 +1081,7 @@
                     </div>
 
                 </div>
+                <h4> Liste des demandes d'ANO</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
@@ -1099,7 +1104,7 @@
                         <td @click="afficheDemandeDAO(demande.id)">
                             {{demande.ref_marche || 'Non renseigné'}}</td>
                         <td @click="afficheDemandeDAO(demande.id)">
-                            {{demande.date_demande || 'Non renseigné'}}</td>
+                            {{formaterDate(demande.date_demande) || 'Non renseigné'}}</td>
                         <td @click="afficheDemandeDAO(demande.id)">
                             {{demande.num_courrier || 'Non renseigné'}}</td>
                        
@@ -1126,6 +1131,7 @@
                     </div>
 
                 </div>
+                <h4>Liste Analyse DMP</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
@@ -1143,7 +1149,7 @@
                         <td @click="afficheAnalyseDMP(document.id)">
                             {{document.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td>
                         <td @click="afficheAnalyseDMP(document.id)">
-                            {{document.date_avis_bail || 'Non renseigné'}}</td>
+                            {{formaterDate(document.date_avis_bail) || 'Non renseigné'}}</td>
                         <td @click="afficheAnalyseDMP(document.id)">
                             {{document.avis_bail || 'Non renseigné'}}</td>
                         <td @click="afficheAnalyseDMP(document.id)">
@@ -1196,6 +1202,8 @@
                     </div>
 
                 </div>
+                
+                <h4> Liste ANO bailleur</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
@@ -1212,7 +1220,7 @@
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             {{anoBailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td>
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
-                            {{anoBailleur.date_ano_dmp || 'Non renseigné'}}</td>
+                            {{formaterDate(anoBailleur.date_ano_dmp) || 'Non renseigné'}}</td>
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             {{anoBailleur.ref_ano_dmp || 'Non renseigné'}}</td>
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
@@ -1252,15 +1260,14 @@
 
 
                 </div>
+                <h4> Liste obseravtion bailleur</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
 
                         <th>Document procedure</th>
                         <th>ANO DMP bailleur</th>
-
                         <th>Numero dossier candidat</th>
-
                         <th>Date</th>
                         <th>Avis</th>
                         <th>Observation </th>
@@ -1280,7 +1287,7 @@
                         <td @click="afficherModalObservationBailleur(observationBailleur.id)">
                             {{observationBailleur.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td>
                         <td @click="afficherModalObservationBailleur(observationBailleur.id)">
-                            {{observationBailleur.date_avis_baill || 'Non renseigné'}}</td>
+                            {{formaterDate(observationBailleur.date_avis_baill) || 'Non renseigné'}}</td>
                         <td @click="afficherModalObservationBailleur(observationBailleur.id)">
                             <button class="btn btn-success btn-mini" v-if="observationBailleur.avis_bail==1">Avis favorable</button>
                             <button class="btn btn-danger btn-mini" v-else>Defavorable</button>
@@ -1478,6 +1485,7 @@
                     </div>
 
                 </div>
+                <h4> Liste acte effet financier </h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
@@ -3492,6 +3500,7 @@
 
 <script>
     import { mapGetters, mapActions } from "vuex";
+    import moment from 'moment';
     //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
 
 
@@ -3824,7 +3833,7 @@ created() {
             listeAppelOffre(){
                 return  marche_id=>{
                     if (marche_id!="") {
-                        return this.appelOffres.filter( idmarche => idmarche.marche.id == marche_id)
+         return this.appelOffres.filter( idmarche => idmarche.marche.id == marche_id)
                     }
                 }
 
@@ -3975,7 +3984,7 @@ console.log("OK pour le text")
                              entrepriseInfo:infoEntreprise,
                              dossierFavorable:marcherEnAction
                          }
-                    console.log(objetRetour)
+                   // console.log(objetRetour)
                         return objetRetour
                     }
                 }
@@ -4511,9 +4520,10 @@ ajouterNouveauFournisseurLocal(registeCommerce){
             modificationLettreInvitation(){
                 this.modifierLettreInvitation(this.edite_lettre_invitation)
             },
-            // formaterDate(date) {
-            //   return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
-            // },
+            // formatage de date
+            formaterDate(date) {
+              return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+            },
 
             ExporterEnExel(){
                 this.$refs.excel.click()

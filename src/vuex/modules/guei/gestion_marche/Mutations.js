@@ -99,6 +99,75 @@ const MODIFIER_SECTEUR_ACTIVITE= (state, objetModifie) => {
  * Fin secteur activite
  */
 
+
+// mutation banque
+
+
+// get all banque
+export const GET_ALL_BANQUE = (state, tableau_banques) =>{
+    state.banques = tableau_banques
+}
+
+// add * acte depense 
+
+export const AJOUTER_BANQUE = (state, elementAjouter) => {
+    state.banques.unshift(elementAjouter)
+}
+
+
+// update all acte depense
+export const MODIFIER_BANQUE = (state, elementModif)=>{
+    state.banques = state.banques.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all prestation
+
+export const SUPPRIMER_BANQUE = (state, id)=> {
+    state.banques = state.banques.filter(prest => prest.id !=id)
+}
+
+
+// mutation des comptes bancaires
+
+
+
+// get all banque
+export const GET_ALL_COMPTE = (state, tableau_compte) =>{
+    state.comptes = tableau_compte
+}
+
+// add * acte depense 
+
+export const AJOUTER_COMPTE = (state, elementAjouter) => {
+    state.comptes.unshift(elementAjouter)
+}
+
+
+// update all acte depense
+export const MODIFIER_COMPTE = (state, elementModif)=>{
+    state.comptes = state.comptes.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all comptes
+
+export const SUPPRIMER_COMPTE = (state, id)=> {
+    state.comptes = state.comptes.filter(cptes => cptes.id !=id)
+}
+
+
+
 /**
  * Entreprise
  */

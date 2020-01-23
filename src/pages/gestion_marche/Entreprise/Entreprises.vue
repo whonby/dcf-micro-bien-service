@@ -55,6 +55,11 @@
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.banque || 'Non renseigné'}}</td>
                                                 <td>
                                                     <div class="btn-group">
+
+                                   <router-link :to="{ name: 'DetaillEntreprise', params: { id: item.id }}" 
+                                    class="btn btn-default " title="Detail entreprise ">
+                                   <span class=""><i class="icon-folder-open"></i></span>
+                                         </router-link> 
                                                         <a href="#myModal2" data-toggle="modal" class="btn btn-info" @click.prevent="showEntreprise(item.id)"><i class="icon-lock"></i></a>
                                                         <button @click.prevent="supprimerEntreprise(item.id)"  class="btn btn-danger ">
                                                             <span class=""><i class="icon-trash"></i></span></button>
@@ -357,6 +362,8 @@ this.getEntreprise()
 
                 this.$router.push({ name: 'EditeEntreprise', params: { id: index } })
             },
+
+            
             modifier(){
                 this.modifierEntreprise(this.editTitre)
                 //this.getFonctions()

@@ -349,35 +349,6 @@ export const SUPPRIMER_BAILLEUR = (state, id) => {
  state.bailleurs = state.bailleurs.filter(bailleur => bailleur.id !=id)
 }
 
-// get all banque
-export const GET_ALL_BANQUE = (state, tableau_banques) =>{
-    state.banques = tableau_banques
-}
-
-// add * acte depense 
-
-export const AJOUTER_BANQUE = (state, elementAjouter) => {
-    state.banques.unshift(elementAjouter)
-}
-
-
-// update all acte depense
-export const MODIFIER_BANQUE = (state, elementModif)=>{
-    state.banques = state.banques.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
-        }
-        return response
-    })
-}
-
-
-// delete all prestation
-
-export const SUPPRIMER_BANQUE = (state, id)=> {
-    state.banques = state.banques.filter(prest => prest.id !=id)
-}
-
 
 
 // get all code fonction

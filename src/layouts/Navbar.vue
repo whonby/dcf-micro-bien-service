@@ -95,7 +95,8 @@ export default {
       ...mapActions('gestionMarche',['getTypeMarche',"getSecteurActivite",
         "getEntreprise","getEtapeMarche","getDocumentPTBAPPM","getMarcheContrat","getPresenceCF",
         "getDocumentPresence","getNombreMarcheByProcedure","sourcePersonnalise",
-        "getSourceFinnancementByMarche","getMarcheContratExecution"]),
+        "getSourceFinnancementByMarche","getMarcheContratExecution",
+        "getBanque", "getCompte"]),
 
         ...mapActions("SuiviImmobilisation", [
       
@@ -151,6 +152,8 @@ export default {
     // this. getPlanActivite()
     this.getUnite()
     this.getZone()
+    this.getBanque()
+    this.getCompte()
 
 
 

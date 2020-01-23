@@ -1,6 +1,7 @@
 import axios from "./url/api"
 var housecall = require('housecall');
 var queue = housecall({ concurrency: 2, cooldown: 1000 });
+import { asyncLoading } from 'vuejs-loading-plugin'
 /**
  *Action mode de passation
  */
@@ -212,6 +213,133 @@ export function modifierSecteurActivite({commit}, formData){
     })
 }
 /**Fin secteur**/
+
+
+// action banque 
+
+
+
+
+
+// action pour banque && compte
+
+export  function  getBanque({commit}) {
+    queue.push(() => axios.get('/banques').then((response) => {
+      commit('GET_ALL_BANQUE', response.data)
+      
+  }).catch(error => console.log(error)))
+  }
+  
+  // action pour ajouter banque
+  export function ajouterBanque({commit}, elementAjout){
+    asyncLoading(axios.post('/banques',{
+      numero_banque:elementAjout.numero_banque,
+      libelle:elementAjout.libelle,
+      telephone:elementAjout.telephone,
+      situation_geographique:elementAjout.situation_geographique
+      
+  })).then(response =>{
+        if(response.status == 201){
+            commit('AJOUTER_BANQUE', response.data)
+  
+            this.$app.$notify({
+              title: 'success ',
+              text: 'Enregistrement effectué !',
+              type:"success"
+            })
+        }
+  
+    }).catch(error => console.log(error))
+  }
+  
+  // action pour modifier banque
+  
+  
+  export function modifierBanque({commit}, element_modifie) {
+    asyncLoading( axios.put('/banques',element_modifie)).then(response => {
+         commit('MODIFIER_BANQUE', response.data)
+         
+  
+         this.$app.$notify({
+           title: 'success ',
+           text: 'Modification effectué !',
+           type:"success"
+         })
+     }).catch(error => console.log(error))
+  }
+  // supprimer banque
+  
+  export function supprimerBanque({commit}, id) {
+   this.$app.$dialog
+   .confirm("Voulez vouz vraiment supprimer ?.")
+   .then(dialog => {
+      commit('SUPPRIMER_BANQUE', id)
+     // // dialog.loading(false) // stops the proceed button's loader
+       axios.delete('/banques/' + id).then(() => dialog.close() )   
+   })
+  
+  }
+  
+
+
+// action pour compte
+
+
+export  function  getCompte({commit}) {
+    queue.push(() => axios.get('/comptes').then((response) => {
+      commit('GET_ALL_COMPTE', response.data)
+      
+  }).catch(error => console.log(error)))
+  }
+  
+  // action pour ajouter compte
+  export function ajouterCompte({commit}, elementAjout){
+    asyncLoading(axios.post('/comptes',elementAjout)).then(response =>{
+        if(response.status == 201){
+            commit('AJOUTER_COMPTE', response.data)
+  
+            this.$app.$notify({
+              title: 'success ',
+              text: 'Enregistrement effectué !',
+              type:"success"
+            })
+        }
+  
+    }).catch(error => console.log(error))
+  }
+  
+  // action pour modifier banque
+  
+  
+  export function modifierCompte({commit}, element_modifie) {
+    asyncLoading( axios.put('/comptes',element_modifie)).then(response => {
+         commit('MODIFIER_COMPTE', response.data)
+         
+  
+         this.$app.$notify({
+           title: 'success ',
+           text: 'Modification effectué !',
+           type:"success"
+         })
+     }).catch(error => console.log(error))
+  }
+  // supprimer banque
+  
+  export function supprimerCompte({commit}, id) {
+   this.$app.$dialog
+   .confirm("Voulez vouz vraiment supprimer ?.")
+   .then(dialog => {
+      commit('SUPPRIMER_COMPTE', id)
+     // // dialog.loading(false) // stops the proceed button's loader
+       axios.delete('/comptes/' + id).then(() => dialog.close() )   
+   })
+  
+  }
+  
+
+
+
+
 
 
 /**Entreprise**/

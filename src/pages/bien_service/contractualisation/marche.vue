@@ -214,10 +214,10 @@
               
                <td>
               
-               <div class="control-group">
+             <div class="control-group">
                   <label class="control-label">Activite</label>
                   <div class="controls">
-                    <select v-model="editMarche.activite_id" :readOnly="deverouactivite">
+                    <select v-model="editMarche.activite_id" >
                      <option
                         v-for="activite in activiteDynamiques(editMarche.unite_administrative_id)"
                         :key="activite.id"
@@ -238,7 +238,7 @@
                 v-model="editMarche.imputation"
                 class="span5"
                 placeholder="Saisir le Imputation"
-                readonly
+               
               />
             </div>
           </div>
@@ -269,10 +269,10 @@
             <div class="controls">
               <input
                 type="text"
-                :value="MontatantImputationBudget"
+                :value ="MontatantImputationBudget"
                 class="span"
                 
-               readonly
+               
               />
             </div>
           </div>
@@ -400,7 +400,7 @@
 
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.type_marche.libelle || 'Non renseigné'}}</td>
- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.afficheActivite.libelle || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.objet || 'Non renseigné'}}</td>
@@ -409,6 +409,7 @@
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
                   
+
 
 
                      <div class="btn-group">
@@ -589,15 +590,15 @@ return this.printMarcheNonAttribue.filter((item) => {
     //   }
     //   return 0
     // },
-    // MontatantImputationBudget() {
+    MontatantImputationBudget() {
       
-    //   const norme = this.getPersonnaliseBudgetGeneral.find(normeEquipe => normeEquipe.economique_id == this.formData.Economique);
+      const norme = this.getPersonnaliseBudgetGeneral.find(normeEquipe => normeEquipe.economique_id == this.formData.Economique);
 
-    //   if (norme) {
-    //     return norme.Dotation_Initiale;
-    //   }
-    //   return 0
-    // },
+      if (norme) {
+        return norme.Dotation_Initiale;
+      }
+      return 0
+    },
   },
   methods: {
     ...mapActions("bienService", ['ajouterMarche','modifierMarche',

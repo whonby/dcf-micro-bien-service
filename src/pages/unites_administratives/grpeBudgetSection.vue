@@ -47,6 +47,7 @@
             <div class="widget-content nopadding" v-if="uniteAdministratives.length" >
               <grpeBudgetSectionItemComponent v-for="equipement in uniteAdministratives"
                :key="equipement.id"
+     
                 :groupe="equipement"
               
                 >
