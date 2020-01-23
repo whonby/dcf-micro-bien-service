@@ -17,6 +17,9 @@ const document_presence_by_marche=state =>state.document_presence_by_marche;
 const deatil_marche_back_end=state =>state.deatil_marche_back_end;
 const financement_by_marche =state =>state.financement_by_marche;
 const detail_marche_finance=state =>state.detail_marche_finance;
+export const banques = state => state.banques;
+export const comptes = state => state.comptes
+
 const document_pyba_ppm_personnalise=(state, getters, rootState, rootGetters) =>
     state.document_ptba_ppm.map(element => {
         if (element.unite_administrative_id !== null && element.exercice_budgetaire_id!==null ) {
@@ -113,6 +116,46 @@ const presenceCFPersonnalise =(state, getters, rootState, rootGetters) =>
 
         return element;
     });
+
+
+
+
+    export const getEntreptise =(state, getters, rootState, rootGetters) =>
+    state.entreprises.map(element => {
+        if ( element.banque_id !== null && element.secteur_activite_id!== null ) {
+            element = {
+                ...element,
+                varBanque: rootGetters['gestionMarche/banques'].find(
+                    section => section.id == element.banque_id
+                ),
+                varActivite: rootGetters['gestionMarche/secteur_activites'].find(
+                    section => section.id == element.secteur_activite_id
+                )
+            };
+        }
+
+        return element;
+    });
+
+
+    export const getCompte =(state, getters, rootState, rootGetters) =>
+    state.comptes.map(element => {
+        if ( element.banque_id!== null ) {
+            element = {
+                ...element,
+                // varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
+                //     section => section.id == element.entreprise_id
+                // ),
+                varObjetBanque: rootGetters['gestionMarche/banques'].find(
+                    section => section.id == element.banque_id
+                )
+            };
+        }
+
+        return element;
+    });
+
+
 
 
 export {

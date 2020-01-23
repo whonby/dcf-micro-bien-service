@@ -24,7 +24,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des marches</h5>
+              <h5>Liste actes effets financiers</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -38,11 +38,11 @@
                      <th>Code</th>
                         <th>Libelle acte</th>
                         <th>Reference acte</th>
-                        <th>Objet acte</th>
+                        <!-- <th>Objet acte</th> -->
                         <th>Incendit financier</th>
                         <th>Montant acte</th>
                      <th title="type effet financier">Type E.</th>
-                        <th>Type modif doc</th>
+                        <!-- <th>Type modif doc</th> -->
                         <th>Entreprise</th>
                         <th>text juridique</th>
                         <th>Marche</th>
@@ -50,7 +50,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="effetFinancier in getActeEffetFinancierPersonnaliser"
+                  <tr class="odd gradeX" v-for="effetFinancier in acteEffetFiltre"
                         :key="effetFinancier.id">
 
 
@@ -60,11 +60,10 @@
                              <td @click="afficherModalModifierActeEffetFinancier(index)">
                             {{effetFinancier.libelle_act || 'Non renseigné'}}</td>
 
-                            <td @click="afficherModalModifierActeEffetFinancier(index)">
-                            {{effetFinancier.libelle_act || 'Non renseigné'}}</td>
+                           
                         
-                        <td @click="afficherModalModifierActeEffetFinancier(index)">
-                            {{effetFinancier.objet_act || 'Non renseigné'}}</td>
+                        <!-- <td @click="afficherModalModifierActeEffetFinancier(index)">
+                            {{effetFinancier.objet_act || 'Non renseigné'}}</td> -->
 
                         <td @click="afficherModalModifierActeEffetFinancier(index)">
                             {{effetFinancier.incidence_financiere || 'Non renseigné'}}</td>
@@ -73,22 +72,22 @@
                             {{effetFinancier.montant_act || 'Non renseigné'}}</td>
 
                               <td @click="afficherModalModifierActeEffetFinancier(index)">
-                            {{effetFinancier.id_type_acte_effet_fin || 'Non renseigné'}}</td>
+                            {{effetFinancier.type_acte_effet.libelle || 'Non renseigné'}}</td>
 
-                             <td @click="afficherModalModifierActeEffetFinancier(index)">
-                            {{effetFinancier.type_doc_modifie || 'Non renseigné'}}</td>
+                             <!-- <td @click="afficherModalModifierActeEffetFinancier(index)">
+                            {{effetFinancier.type_doc_modifie || 'Non renseigné'}}</td> -->
 
                         <td @click="afficherModalModifierActeEffetFinancier(index)">
                             {{effetFinancier.varObjetEntreprise.forme_juridique || 'Non renseigné'}}</td>
 
                              <td @click="afficherModalModifierActeEffetFinancier(index)">
-                            {{effetFinancier.text_juridique_id || 'Non renseigné'}}</td>
+                            {{effetFinancier.text_juridique.libelle_text || 'Non renseigné'}}</td>
 
 
                              
                             
                               <td @click="afficherModalModifierActeEffetFinancier(index)">
-                            {{effetFinancier.marche_id || 'Non renseigné'}}</td>
+                            {{effetFinancier.marche.objet || 'Non renseigné'}}</td>
 
 
                         <div class="btn-group">
@@ -159,11 +158,12 @@ export default {
             objet_act:"",
                 montant_act:"",
                 incidence_financiere:"",
-                id_type_acte_effet_fin:"",
+                type_act_effet_id:"",
                 type_doc_modifie:"",
                 entreprise_id:"",
                 text_juridique_id:"",
-                marche_id:""
+                marche_id:"",
+                
         
       },
       editacteEf: {
@@ -172,11 +172,12 @@ export default {
             objet_act:"",
                 montant_act:"",
                 incidence_financiere:"",
-                id_type_acte_effet_fin:"",
+                type_act_effet_id:"",
                 type_doc_modifie:"",
                 entreprise_id:"",
                 text_juridique_id:"",
-                marche_id:""
+                marche_id:"",
+              
       },
       search: ""
     };
@@ -186,22 +187,24 @@ export default {
      ...mapGetters("bienService", ['acteEffetFinanciers', 'marches',"getActeEffetFinancierPersonnaliser"]),
      ...mapGetters("gestionMarche",['entreprises']),
 
-//     acteEffetFiltre()  {
+    acteEffetFiltre()  {
      
-//         const searchTerm = this.search.toLowerCase();
+        const searchTerm = this.search.toLowerCase();
 
-// return this.getActeEffetFinancierPersonnaliser.filter((item) => {
+return this.getActeEffetFinancierPersonnaliser.filter((item) => {
   
-//      return item.objet_act.toLowerCase().includes(searchTerm) 
+     return item.libelle_act.toLowerCase().includes(searchTerm) ||
+             item.varObjetEntreprise.forme_juridique.toLowerCase().includes(searchTerm)
+
      
     
 
   
   
 
-//    }
-// )
-//     },
+   }
+)
+    },
     // grandNatureDynamiques() {
     //  return id => {
     //     if (id != null && id != "") {
@@ -224,7 +227,7 @@ export default {
   },
   methods: {
     ...mapActions("bienService", ['ajouterMarche','modifierMarche',
-    'supprimerMarche'
+    'supprimerMarche', "supprimerActeEffetFinancier"
      
     ]),
     //afiicher modal ajouter

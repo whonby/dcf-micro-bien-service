@@ -59,7 +59,7 @@
  
   export const coutMoyenDeBilletAvionDeMissions = (state, getters) => {
    const val = (getters.coutTotalDeBilletAvion / getters.nombreTotalDeTouteMissions)
-    if(isNaN(val)) return null
+    if(isNaN(val)) return 0
     return val
   } 
  

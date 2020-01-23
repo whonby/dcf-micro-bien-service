@@ -246,6 +246,10 @@
     <!-- End Page Header -->
     <!-- Default Light Table -->
     <div class="container-fluid">
+       <!-- <h4 v-if="marcheDetail(marcheid)" >Detail Marche : {{marcheDetail(marcheid).objet}} 
+          <button class="btn btn-success btn-large" v-if="marcheDetail(marcheid).attribue==1">Marché attribué</button>
+       </h4> -->
+           
       <hr />
       <div class="row-fluid">
         <div class="span12">
@@ -264,7 +268,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des marches</h5>
+              <h5>Liste des marches attribués</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />

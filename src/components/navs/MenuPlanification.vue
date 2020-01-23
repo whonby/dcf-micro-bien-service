@@ -120,7 +120,7 @@
         </a>
         <ul class="dropdown-menu">
         <li>
-            <router-link :to="{name: ''}" tag="a">
+            <router-link :to="{name: 'banque'}" tag="a">
               <i class="icon-bar-chart"></i>
            Banques
             </router-link>
