@@ -2482,7 +2482,6 @@ export function ajouterMarche({commit}, elementAjout){
 export function modifierMarche({commit}, element_modifie) {
   asyncLoading( axios.put('/marches',element_modifie)).then(response => {
        commit('MODIFIER_MARCHE', response.data)
-       
 
        this.$app.$notify({
          title: 'success ',
@@ -3036,11 +3035,12 @@ export function getEngagement({ commit }) {
 
 
 
-export function ajouterEngagement({ commit }, elementAjout) {
+export function ajouterEngagement({ commit, dispatch}, elementAjout) {
   asyncLoading(axios.post('/engagement', elementAjout)).then(response => {
     if (response.status == 201) {
       commit('AJOUTER_ENGAGEMENT', response.data)
 
+      dispatch('getEngagement')
       this.$app.$notify({
         title: 'success ',
         text: 'Enregistrement effectué !',
@@ -3053,9 +3053,10 @@ export function ajouterEngagement({ commit }, elementAjout) {
 
 
 
-export function modifierEngagement({ commit }, element_modifie) {
+export function modifierEngagement({ commit,dispatch }, element_modifie) {
   asyncLoading(axios.put('/engagement', element_modifie)).then(response => {
     commit('MODIFIER_ENGAGEMENT', response.data)
+    dispatch('getEngagement')
     this.$app.$notify({
       title: 'success ',
       text: 'Modification effectué !',
@@ -3065,16 +3066,104 @@ export function modifierEngagement({ commit }, element_modifie) {
 }
 
 
-export function supprimerEngagement({ commit }, id) {
+export function supprimerEngagement({ commit ,dispatch}, id) {
   this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
       commit('SUPPRIMER_ENGAGEMENT', id)
+      dispatch('getEngagement')
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete('/engagement/' + id).then(() => dialog.close())
     })
 
 }
+
+
+
+
+
+
+
+export function getMandat({ commit }) {
+  queue.push(() => axios.get('/mandat').then((response) => {
+    commit('GET_MANDAT', response.data.data)
+
+  }).catch(error => console.log(error)))
+}
+
+
+
+export function ajouterMandat({ commit, dispatch }, elementAjout) {
+  asyncLoading(axios.post('/mandat', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_MANDAT', response.data)
+
+      dispatch('getMandat')
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
+  }).catch(error => console.log(error))
+}
+
+
+
+export function modifierMandat({ commit, dispatch }, element_modifie) {
+  asyncLoading(axios.put('/mandat', element_modifie)).then(response => {
+    commit('MODIFIER_MANDAT', response.data)
+    dispatch('getMandat')
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+
+
+export function supprimerMandat({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_MANDAT', id)
+      dispatch('getMandat')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/mandat/' + id).then(() => dialog.close())
+    })
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3126,3 +3215,21 @@ export function supprimerAnoDMPBailleur({commit}, id) {
 
 }
 /*FIN Analyse DPM*/
+
+
+
+export function modifierMontantBudgetaire({ commit, dispatch }, objet) {
+  // console.log(id_besoinImmo_a_modifier, qte_actu);
+  axios.put("/modifierBudgetGeneral/" + objet.id, {
+    
+    
+    Dotation_Initiale : objet.montant_actuel
+
+    // ,
+    // montant_total = objet.montant_actu
+  })
+    .then(response => {
+      commit("MODIFIER_MONTANT_BUDGET", response.objet)
+      dispatch("getAllBudgetGeneral");
+    });
+}

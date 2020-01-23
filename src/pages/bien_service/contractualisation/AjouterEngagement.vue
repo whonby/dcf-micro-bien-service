@@ -1,4 +1,4 @@
-
+this.ajouterMarche
 <template>
   
     <!-- End Page Header -->
@@ -76,10 +76,10 @@
                             <div class="controls">
                               <select v-model="formData.ua_id">
                                  <option
-                                  v-for="gpeua in groupUa"
-                                  :key="gpeua[0].id"
-                                  :value="gpeua[0].afficheUA.id"
-                                >{{gpeua[0].afficheUA.libelle}}</option>
+                                  v-for="gpeua in uniteAdministrative(detail_marche.id)"
+                                  :key="gpeua.id"
+                                  :value="gpeua.objetUniteAdministrative.id"
+                                >{{gpeua.objetUniteAdministrative.libelle}}</option>
                                
                                
                               </select>
@@ -107,12 +107,7 @@
                           </div>
                         </td>
                        
-                       
-                       
-                      </tr>
-
-                      <tr>
-                          <td>
+                        <td>
                            <div class="control-group">
                             <label class="control-label">Action</label>
                             <div class="controls">
@@ -128,6 +123,11 @@
                             </div>
                           </div>
                         </td>
+                       
+                      </tr>
+
+                      <tr>
+                         
                         <td>
                          <div class="control-group">
                             <label class="control-label">Activite</label>
@@ -173,7 +173,7 @@
                               </div>
                           </div>
                            <input
-                                type="text"
+                                type="hidden"
                                 class="span"
                                
                              :value="detail_marche.id"
@@ -261,14 +261,7 @@
                             </div>
                           </div>
                         </td>
-                      </tr>
-                        <tr>
-                         
-                         
-                      
-                        
-                          
-                         <td>
+                          <td>
                          <div class="control-group">
                             <label class="control-label">Numero cc</label>
                             <div class="controls">
@@ -280,6 +273,14 @@
                             </div>
                           </div>
                         </td>
+                      </tr>
+                        <tr>
+                         
+                         
+                      
+                        
+                          
+                       
                        
                         <td>
                           <div class="control-group">
@@ -307,11 +308,18 @@
                              <div class="control-group">
                             <label class="control-label">Bailleur</label>
                             <div class="controls">
-                              <input type="text" class="span" v-model="formData.Bailleur" />
+                              <input type="text" class="span" v-model="formData.Bailler_id" />
                             </div>
                           </div>
                         </td>
-                       
+                        <td colspan=2>
+                         <div class="control-group">
+                            <label class="control-label">Objet de la dépense</label>
+                            <div class="controls">
+                              <input type="text" class="span" v-model="formData.objet_depense" />
+                            </div>
+                          </div>
+                        </td>
                       </tr>
                      
                       <tr>
@@ -320,14 +328,7 @@
                       
                         
                           
-                         <td colspan=4>
-                         <div class="control-group">
-                            <label class="control-label">Objet de la dépense</label>
-                            <div class="controls">
-                              <input type="text" class="span" v-model="formData.objet_depense" />
-                            </div>
-                          </div>
-                        </td>
+                        
                        
                         
                        
@@ -395,69 +396,41 @@
                         
                        
                         
-                        <td>
+                        <td colspan="2">
                            <div class="control-group">
                             <label class="control-label">Ligne Budgetaire</label>
                             <div class="controls">
-                              <select v-model="formData.type_procedure_id">
-                                <option value>Sélectionner</option>
-                               
-                               
+                              <select v-model="formData.ligne_budgetaire_id" class="span14">
+                                <option
+                                  v-for="fam in ligneBudgetaire(detail_marche.id)"
+                                  :key="fam.id"
+                                  :value="fam.afficheEconomique.id"
+                                >{{fam.afficheEconomique.code}}-{{fam.afficheEconomique.libelle}}</option>
                               </select>
                               
                             </div>
                           </div>
                         </td>
-                        <td>
+                        <td colspan="2">
                           <div class="control-group">
                             <label class="control-label">Code Budgetaire</label>
                             <div class="controls">
-                              <input type="text" class="span" :value="CodeBudgetaire" readonly/>
+                              <input type="text" class="span12" :value="CodeBudgetaire" readonly/>
                             </div>
                           </div>
                         </td>
                          
-                        <td>
-                            <div class="control-group">
-                              <label class="control-label">Réf. Engagement  juridique</label>
-                              <div class="controls">
-                                <input
-                                  type="text"
-                                  class="span"
-                                  v-model="formData.ref_juridique"
-                                />
-                              </div>
-                            </div>
-                          </td>
-                        
-                       <td>
-                         <div class="control-group">
-                            <label class="control-label">Mode de paiement</label>
-                            <div class="controls">
-                              <select v-model="formData.mod_paiement_engage">
-                                <option value>Sélectionner</option>
-                               
-                               
-                              </select>
-                              
-                            </div>
-                          </div>
-                        </td>
+                       
                       </tr>
+                     
                       <tr>
                          
                          
                       
                         
                           
-                         <td>
-                         <div class="control-group">
-                            <label class="control-label">Total général</label>
-                            <div class="controls">
-                              <input type="text" class="span" :value="sommeMontant" readonly />
-                            </div>
-                          </div>
-                        </td>
+                       
+                         
                        
                         <td>
                          <div class="control-group">
@@ -484,6 +457,17 @@
                           </div>
                         </td>
                        
+                          <td>
+                        <div class="control-group">
+                            <label class="control-label">Total général</label>
+                            <div class="controls">
+                              <input type="text" class="span" :value="sommeMontant" readonly />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                       <tr>
+ 
                       </tr>
                        <!-- <tr>
                          
@@ -574,7 +558,7 @@
                       <div data-toggle="buttons-checkbox" class="btn-group">
                         <a
                           class="btn btn-primary"
-                          @click.prevent="ajouterImmobilisationLocal(formData)"
+                          @click.prevent="ajouterEngagementLocal(formData)"
                         >Valider</a>
                         <a
                           @click.prevent="afficherTableauImmobilisation()"
@@ -735,8 +719,25 @@ grandNatureDepense() {
         }
       };
     },
+    ligneBudgetaire() {
+      return id => {
+        if (id != null && id != "") {
+          return this.getMarchePersonnaliser.filter(
+            element => element.id == this.detail_marche.id
+          );
+        }
+      };
+    },
 
-
+uniteAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+          return this.getMarchePersonnaliser.filter(
+            element => element.id == this.detail_marche.id
+          );
+        }
+      };
+    },
  NumeroFournisseur() {
       
       const norme = this.getActeEffetFinancierPersonnaliser.find(normeEquipe => normeEquipe.marche_id == this.detail_marche.id);
@@ -773,6 +774,16 @@ grandNatureDepense() {
       }
       return 0
     },
+    
+    // ligneBudgetaire() {
+      
+    //   const norme = this.getMarchePersonnaliser.find(normeEquipe => normeEquipe.id == this.detail_marche.id);
+
+    //   if (norme) {
+    //     return norme.marche.imputation;
+    //   }
+    //   return 0
+    // },
     
 
 
@@ -829,15 +840,7 @@ grandNatureDepense() {
 exoEnCours(){
 return this.exercices_budgetaires.filter(element => element.encours == 1)
 },
- anneeAmortissement() {
-      const val = parseInt(this.anneeAmort) + parseInt(this.AffichierDureVie);
-      
-       if (val) {
-        return parseInt(val).toFixed(0);
-      }
-      
-      return 0
-    },
+ 
 
  anneeAmort() {
       
@@ -851,468 +854,35 @@ return this.exercices_budgetaires.filter(element => element.encours == 1)
 
 
 
-
-
-
-
-    AfficheQteActuel() {
-      const form = this.formData;
-
-      if (form.qte_affecte <= this.AffichierQuantiteteReel)
-        var val =
-          parseInt(this.AffichierQuantiteteReel) -
-          parseInt(this.formData.qte_affecte);
-      if (isNaN(val)) return null;
-
-      if (form.qte_affecte < 0) return (form.qte_affecte = "");
-
-      return parseInt(val).toFixed(0);
-    },
-AfficheQteActuelEnStock() {
-      const form = this.formData;
-
-      if (form.qte_affecte <= this.AffichierQuantiteEnStock)
-        var val =
-          parseInt(this.AffichierQuantiteEnStock) -
-          parseInt(this.formData.qte_affecte);
-      if (isNaN(val)) return null;
-
-      if (form.qte_affecte < 0) return (form.qte_affecte = "");
-
-      return parseInt(val).toFixed(0);
-    },
-    designationDynamiques() {
-      return id => {
-        if (id != null && id != "") {
-          return this.listeBesoinValider.filter(
-            element => element.uniteadmin_id == id
-          );
-        }
-      };
-    },
-    fonctionDynamiques() {
-      return id => {
-        if (id != null && id != "") {
-          return this.listeBesoinValider.filter(
-            element => element.famille_id == id
-          );
-        }
-      };
-    },
-   
-ArticlesDynamiques() {
-      return id => {
-        if (id != null && id != "") {
-          return this.listeBesoinValider.filter(
-            element => element.famille_id == id
-          );
-        }
-      };
-    },
-
-
-typeUniteAdministrativeDynamiques() {
-     return id => {
-        if (id != null && id != "") {
-          return this.listeBesoinValider.filter(
-            element => element.typeuniteadminist_id == id
-          );
-        }
-      };
-    },
-// Historqteafecter() {
-//       const val = parseInt(this.formData.qte_affecte);
-//       return parseInt(val).toFixed(0);
-//     },
-
-    acteurDepenseDynamiques() {
-      
-      return id => {
-        if (id != null && id != "") {
-          return this.personnaFonction.filter(element => element.unite_administrative_id == id);
-        }
-      };
-    },
-    //   fonctionDynamiques() {
-      
-    //   return id => {
-    //     if (id != null && id != "") {
-    //       return this.personnaFonction.filter(element => element.unite_administrative_id == id);
-    //     }
-    //   };
-    // },
-    acteurDynamiques() {
-      
-      return id => {
-        if (id != null && id != "") {
-          return this.personnaFonction.filter(element => element.fonction_id == id);
-        }
-      };
-    },
-    // fonctionDynamiques() {
-    //   return id => {
-    //     if (id != null && id != "") {
-    //       return this.getPersoNormeArticle.filter(element => element.unite_administrative_id == id);
-    //     }
-    //   };
-    // },
-    veifEquipementExist() {
-      return this.formData.uniteadministrative_id == "";
-    },
-     veifarticleExist() {
-      return this.formData.famillearticle_id == "";
-    },
-veifuaExist() {
-      return this.formData.typeuniteadminis_id == "";
-    },
-    AfficheMontantRealise() {
-      const val =
-        parseInt(this.totalqteRealise) *
-        parseInt(this.AffichiercoutMoyen);
-      return parseInt(val).toFixed(0);
-    },
- 
-  
-     AffichierDureVie() {
-      
-      const dureVie1 = this.listeBesoinValider.find(dureEquipe => dureEquipe.famille.id == this.formData.famillearticle_id);
-
-      if (dureVie1) {
-        return dureVie1.dure_vie;
-      }
-      // console.log(dureVie1)
-      return 0
-    },
-
-// afficheDureVie() {
-      
-//       const norme = this.getPersoNormeArticle.find(normeEquipe => normeEquipe.affichierArticle.id== this.formData.article_id);
-
-//       if (norme) {
-//         return norme.dureviearticle
-//       }
-//       return 0
-//     },
-
- quantiteEnstock() {
-      
-      const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == this.formData.articleImmo_id);
-
-      if (norme) {
-        return norme.quantitestock;
-      }
-      return 0
-    },
-
-sortantEnstock() {
-      
-      const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == this.formData.articleImmo_id);
-
-      if (norme) {
-        return norme.qtesortie;
-      }
-      return 0
-    },
-
-
-
-
-quantiteEnstockID() {
-      
-      const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == this.formData.articleImmo_id);
-
-      if (norme) {
-        return norme.id;
-      }
-      return 0
-    },
-
-
-
-
-
-    normeEquipement() {
-      
-      const norme = this.listeBesoinValider.find(normeEquipe => normeEquipe.afficherFonction.id== this.formData.fonction_id);
-
-      if (norme) {
-        return norme.normearticle;
-      }
-      return 0
-    },
-    AffichierQuantiteteReel() {
-      const qtereel = this.listeBesoinValider.find(qtreel => qtreel.afficheArticle.id == this.formData.articleImmo_id);
-
-      if (qtereel) {
-        return qtereel.quantite;
-      }
-      return 0
-    },
-    AffichierIdStock() {
-      const qtereel = this.listeBesoinValider.find(qtreel => qtreel.id == this.formData.articleImmo_id);
-
-      if (qtereel) {
-        return qtereel.afficherNorme.stock_id;
-      }
-      return 0
-    },
-
-//  quantiteEnstock() {
-      
-//       const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == id);
-
-//       if (norme) {
-//         return norme.quantitestock;
-//       }
-//       return 0
-//     },
-
-
-// quantiteEnstock() {
-//       return id => {
-//         if (id != null && id != "") {
-//           return this.getPersoStock.find(
-//             element => element.articlestock_id == id
-//           );
-//         }
-//       };
-//     },
-
-
-
-
-
-
-AffichierIdNorme() {
-      const qtereel = this.listeBesoinValider.find(qtreel => qtreel.id == this.formData.articleImmo_id);
-
-      if (qtereel) {
-        return qtereel.norme_id;
-      }
-      return 0
-    },
-
-
-
-
-      AffichierqteStock() {
-      const qtereel = this.listeBesoinValider.find(qtreel => qtreel.id == this.formData.articleImmo_id);
-
-      if (qtereel) {
-        return qtereel.afficherNorme.qtestock;
-      }
-      return 0
-    },
-    AffichierQuantiteEnStock() {
-      const qtereel = this.listeBesoinValider.find(qtreel => qtreel.afficheArticle.id == this.formData.articleImmo_id);
-//  console.log(qtereel)afficheArticle
-      if (qtereel) {
-        return qtereel.qte_recu;
-      }
-      return 0
-    },
-    AffichiercoutMoyen() {
-      const cout = this.listeBesoinValider.find(qtreel => qtreel.afficheArticle.id == this.formData.articleImmo_id);
-// console.log(cout)
-      if (cout) {
-        return cout.prix_unitaire;
-      }
-      
-      return 0
-    },
-    AffichierQuantiteRealise() {
-      const qtereali = this.listeBesoinValider.find(Qreal => Qreal.afficheArticle.id == this.formData.articleImmo_id);
-
-      if (qtereali) {
-        return qtereali.qterealise;
-      }
-      return 0
-    },
-
-
- stockRestant() {
-      const val = parseInt(this.quantiteEnstock) - parseInt(this.formData.qte_affecte);
-      
-       if (val) {
-        return parseInt(val).toFixed(0);
-      }
-      
-      return 0
-    },
-stockSortant() {
-      const val = parseInt(this.formData.qte_affecte) + parseInt(this.sortantEnstock);
-      
-       if (val) {
-        return parseInt(val).toFixed(0);
-      }
-      
-      return 0
-    },
-
-
-    idObjetBesoinImmoAModifierLaQuantite() {
-      const qtereel = this.listeBesoinValider.find(
-        qtreel => qtreel.id == this.formData.articleImmo_id,
-       
-      );
-
-      if (qtereel) {
-        return qtereel.id;
-      }
-      return 0
-    },
-
-
-idObjetStockModifierEnStock() {
-       const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == this.formData.articleImmo_id);
-
-      if (norme) {
-        return norme.id;
-      }
-      return 0
-    },
-
-   
-
-
-
-
-
-
-    // idObjetBesoinImmoAModifierMontantActuel() {
-    //   const montantActuel = this.listeBesoinValider.find(
-    //     totalActuel => totalActuel.id == this.formData.articleImmo_id,
-    //   );
-
-    //   if (montantActuel) {
-    //     return montantActuel.id;
-    //   }
-    //   return 0
-    // },
-    idObjetBesoinImmoAModifierQteRealise() {
-      const qte_affecte = this.listeBesoinValider.find(
-        quantRealise => quantRealise.id == this.formData.articleImmo_id,
-      );
-
-      if (qte_affecte) {
-        return qte_affecte.id;
-      }
-      return 0
-    },
-
- idObjetBesoinImmoAModifierEnStock2() {
-   //console.log(qteEnStock2)
-      const qtereel = this.listeBesoinValider.find(qtreel => qtreel.id == this.formData.articleImmo_id);
-
-      if (qtereel) {
-        return qtereel.afficherNorme.stock_id;
-      }
-      return 0
-    },
-  //   idObjetBesoinImmoAModifierEnStockNorme() {
-  //  //console.log(qteEnStock2)
-  //     const qtereel = this.listeBesoinValider.find(qtreel => qtreel.id == this.formData.articleImmo_id);
-
-  //     if (qtereel) {
-  //       return qtereel.norme_id;
-  //     }
-  //     return 0
-  //   },
-    // AffichiercoutMoyen(){
-    //   const prixUnitaire = this.listeBesoinValider.find(prixUnit => prixUnit.id == 27)
-     
-    //  if (prixUnitaire) 
-    //   {
-        
-    //     return prixUnitaire.prix_unitaire
-    //     console.log(prixUnitaire) 
-    //     }
-    //     return 0
-    // },
-    
-    valeurOrigine() {
-      const val = parseFloat(this.formData.qte_affecte) * parseFloat(this.AffichiercoutMoyen);
-      return parseFloat(val).toFixed(2);
-    },
-
-totalqteRealise() {
-      const val = parseFloat(this.formData.qte_affecte) + parseFloat(this.AffichierQuantiteRealise);
-      return parseFloat(val).toFixed(0);
-    },
-
-
-
-    AffichierTotalActuel() {
-      const val = parseFloat(this.AfficheQteActuel) * parseFloat(this.AffichiercoutMoyen);
-      return parseFloat(val).toFixed(2);
-    },
-      AffichierTypeUa() {
-      const typeUniteA = this.listeBesoinValider.find(typeUa=> typeUa.id == this.formData.uniteadministrative_id);
-
-      if (typeUniteA) {
-        return typeUniteA.typeuniteadminist_id;
-      }
-      return 0
-    },
-    
-     recupererIdBesoin() {
-      
-      const norme = this.listeBesoinValider.find(normeEquipe => normeEquipe.afficheArticle.id== this.formData.articleImmo_id);
-
-      if (norme) {
-        return norme.id
-      }
-      return 0
-    },
-
-
-     alertMessage() {
-      const typeUniteA = this.SuiviImmo.find(typeUa=> typeUa.acteurDepense.id == this.formData.acteurdepense_id);
-
-      if (typeUniteA) {
-        return typeUniteA.anneamortiss;
-        
-      }
-      return 0
-    },
-    alertAnneeAmortissement() {
-      const typeUniteA = this.SuiviImmo.find(typeUa=> typeUa.acteurDepense.id == this.formData.acteurdepense_id);
-
-      if (typeUniteA) {
-        return typeUniteA.acteurdepense_id;
-        
-      }
-      return 0
-    },
-
-      alertArticle() {
-      const typeUniteA = this.SuiviImmo.find(typeUa=> typeUa.acteurDepense.id == this.formData.acteurdepense_id);
-
-      if (typeUniteA) {
-        return typeUniteA.articleImmo_id;
-        
-      }
-      return 0
-    },
   },
   methods: {
-    ...mapActions("SuiviImmobilisation", [
-      "ajouterImmobilisation",
-      "modifierQuantiteReel",
-      "modifierMontantActuel",
-      "modifierQteRealisebesoin",
-      "modifierQuantiteEnStock",
-      "modifierQuantiteEnStock2",
-    
-      "modifierQuantiteEnStock3",
+    ...mapActions("bienService", [
+      "ajouterEngagement",
       
+      
+     
     ]),
 afficherTableauImmobilisation() {
       this.$router.push({
         name: "Engagement"
       });
     },
-    
+     ajouterEngagementLocal(){
+      
+       var nouvelObjet = {
+      ...this.formData,
+      exercice_budget :this.anneeAmort,
+       	numero_cc_id :this.NumeroFournisseur,
+        nom_entreprise :this.nomFournisseur,
+         adresse_entreprise :this.AdresseFournisseur,
+         total_general :this.sommeMontant,
+         budget_general_id :this.CodeBudgetaire
+       
+       };
+this.ajouterEngagement(nouvelObjet)
+this.afficherTableauImmobilisation() 
+
+    },
     alert() {
       console.log("ok");
     }
@@ -1321,14 +891,4 @@ afficherTableauImmobilisation() {
 };
 </script>
 
-<style>
-.tailfenet {
-  width: 950px;
-}
-.tailtableau{
-    width: 900px;
-}
-.tailtableau1{
-    width: 1000px;
-}
-</style>
+

@@ -121,7 +121,7 @@ export default {
          "getDossierCandidat", "getOffreFinancier", "getOffreTechnique","getLettreInvitation","getMandater",
          "getCojo","getAnalyseDossier", 'getMotifDecision', 'getDocumentProcedure',
          'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur",
-          'getActeEffetFinancier','getEngagement',
+          'getActeEffetFinancier','getEngagement','getMandat',
           'getActeEffetFinancier',"getExecutionMarche"])
 
   },
@@ -263,7 +263,7 @@ this.getModePassations()
 this.getProcedurePassation()
 this.getEngagement()
 this.getExecutionMarche()
-
+this.getMandat()
 
 
 

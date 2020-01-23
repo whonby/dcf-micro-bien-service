@@ -52,7 +52,7 @@ documentProcedures:[],
     nouveauFournisseur:[],
     acteEffetFinanciers: [],
     engagements: [],
-    
+    mandats:[],
     executionMarches:[]
 
 

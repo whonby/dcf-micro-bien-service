@@ -157,7 +157,19 @@
             </div>
           </div>
               </td>
-           
+             <td>
+               <div class="control-group">
+            <label class="control-label">Numero marché</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formData.numero_marche"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+              </td>
             </tr>
           
         </table>
@@ -332,7 +344,19 @@
           </div>
               </td>
             
-           
+             <td>
+               <div class="control-group">
+            <label class="control-label">Numero marché</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editMarche.numero_marche"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
+          </div>
+              </td>
             </tr>
           
             
@@ -378,7 +402,7 @@
               </div>
             </div>
 
-            <div class="widget-content nopadding">
+            <div class="widget-content nopadding" >
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
@@ -389,6 +413,7 @@
                     <th>Ligne Budgetaire</th>
                     <th>Objet marché</th>
                     <th>Reference marché</th>
+                     <th>Numero marché</th>
                     <th>Montant marché</th>
                     <th>Action</th>
                   </tr>
@@ -407,11 +432,13 @@
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.imputation || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td>
+                  {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.objet || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.reference_marche || 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.numero_marche || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
                   
@@ -439,6 +466,9 @@
                           
                       </td>
                       <td>
+                          
+                      </td>
+                       <td>
                           
                       </td>
                        <td>
@@ -530,10 +560,12 @@ export default {
   },
 
   computed: {
-     ...mapGetters("bienService", ['marches','typeMarches', 'getMarchePersonnaliser',"montantMarche"]),
+     ...mapGetters("bienService", ['marches','typeMarches', 'getMarchePersonnaliser',
+     "montantMarche", "printMarcheNonAttribue"]),
+
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
-      "montantBudgetGeneral"]),
+      "montantBudgetGeneral", ]),
        ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
@@ -541,14 +573,9 @@ export default {
      
         const searchTerm = this.search.toLowerCase();
 
-return this.getMarchePersonnaliser.filter((item) => {
+return this.printMarcheNonAttribue.filter((item) => {
   
      return item.objet.toLowerCase().includes(searchTerm) 
-     
-    
-
-  
-  
 
    }
 )
@@ -591,7 +618,7 @@ return this.getMarchePersonnaliser.filter((item) => {
     },
      ImputationBudget() {
       
-      const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.economique_id == this.formData.Economique);
+      const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.afficheEconomique.id == this.formData.economique_id);
 
       if (norme) {
         return norme.codebudget;

@@ -275,8 +275,11 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                      <th>UA</th>
+                     <th>UA</th>
                     <th>Type marché</th>
+                    <th>Activité</th>
+                    <th>Imputation</th>
+                    <th>Ligne Budgetaire</th>
                     <th>Objet marché</th>
                     <th>Reference marché</th>
                     <th>Montant marché</th>
@@ -292,7 +295,12 @@
 
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.type_marche.libelle || 'Non renseigné'}}</td>
-
+ <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.afficheActivite.libelle || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.imputation || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.objet || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -327,13 +335,23 @@
                       <td>
                           
                       </td>
+                       
                       <td>
                           
                       </td>
-                       <td style="font-weight:bold;"> Total Marche
+                      <td>
+                          
+                      </td>
+                        <td>
+                          
+                      </td>
+                      <td>
+                          
+                      </td>
+                       <td style="font-weight:bold;"> Total Marche attribué
                       </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
-                           {{formatageSomme(parseFloat(montantMarche))}}
+                           {{formatageSomme(parseFloat(montantMarcheAttribue))}}
                            
                       </td>
                        <td>
@@ -402,6 +420,7 @@ export default {
 
   computed: {
      ...mapGetters("bienService", ['marches','typeMarches', 'getMarchePersonnaliser',"montantMarche",'engagement']),
+     ...mapGetters("bienService", ['marches','typeMarches', 'getMarchePersonnaliser',"montantMarcheAttribue"]),
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
       "montantBudgetGeneral"]),
@@ -469,7 +488,7 @@ return this. marcherAttribuer.filter((item) => {
     },
 
     marcherAttribuer(){
-      return this.getMarchePersonnaliser.filter(recuper => recuper.attribue ==1)
+      return this.getMarchePersonnaliser.filter(recuper => recuper.attribue == 1)
       
     },
     // MontatantImputationBudget() {

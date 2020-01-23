@@ -1623,3 +1623,41 @@ export const SUPPRIMER_ENGAGEMENT = (state, id) => {
     state.engagements = state.engagements.filter(autreText => autreText.id != id)
 }
 /*Fin ano dmpBailleur mutation*/
+
+
+
+
+/*Muttation ano DMP Bailleur*/
+export const GET_MANDAT = (state, tableau_autre_text_juridique) => {
+    state.mandats = tableau_autre_text_juridique
+}
+
+export const AJOUTER_MANDAT = (state, elementAjouter) => {
+    state.mandats.unshift(elementAjouter)
+}
+
+
+
+export const MODIFIER_MANDAT = (state, elementModif) => {
+    state.mandats = state.mandats.map(response => {
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_MANDAT = (state, id) => {
+    state.mandats = state.mandats.filter(autreText => autreText.id != id)
+}
+/*Fin ano dmpBailleur mutation*/
+export const MODIFIER_MONTANT_BUDGET = (state, objet) => {
+    state.budgetGeneral = state.budgetGeneral.map(besoinRealise => {
+        if (besoinRealise.id == objet.id) {
+            besoinRealise.Dotation_Initiale = objet.montant_actuel;
+           
+        }
+
+        return besoinRealise;
+    });
+};
