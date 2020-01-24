@@ -789,7 +789,7 @@ export function modifierTypeUniteAdministrative({ commit, dispatch }, typeua) {
 export function EncoursExerciceBudgetaire({ commit, dispatch }, objetAjout) {
 
     this.$app.$dialog
-        .confirm("Voulez vous vraiment changer année en cours ?.")
+        .confirm("Voulez vous changer année en cours ?.")
         .then(dialog => {
     
             asyncLoading(axios.post('/encours_exercice_budgetaire', {
