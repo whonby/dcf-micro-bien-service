@@ -42,8 +42,8 @@
                   <th>Annee</th>
                   <th>Date debut</th>
                   <th>Date fin</th>
-                  <th>Encours</th>
                   <!-- <th>Encours</th> -->
+                  <th>En cours</th>
                   <!-- <th>Date cloture </th> -->
                    <th>Action</th>
                 </tr>
@@ -58,7 +58,7 @@
                     {{formaterDate(exercice_budgetaire.date_debut) || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierExerciceBudgetaire(index)">
                     {{formaterDate(exercice_budgetaire.date_fin) || 'Non renseigné'}}</td>
-                    <td>{{exercice_budgetaire.encours ? 'Oui' : 'Non'}}</td>
+                    <!-- <td>{{exercice_budgetaire.encours ? 'Oui' : 'Non'}}</td> -->
                     <!-- <td v-if="exercice_budgetaire.encours">Oui</td>
             <td v-else>non</td> -->
             <!-- <td>
@@ -79,18 +79,18 @@
                     {{formaterDate(exercice_budgetaire.date_debut) || 'Non renseigné'}}</td>
                   <td >
                     {{formaterDate(exercice_budgetaire.date_fin) || 'Non renseigné'}}</td>
-                  <td>{{exercice_budgetaire.encours ? 'Oui' : 'Non'}}</td>
-                   <!-- <td v-if="exercice_budgetaire.encours">Oui</td>
-            <td v-else>non</td> -->
-            <!-- <td>
-              <input type="checkbox" v-model="exercice_budgetaire.encours" />
-            </td> -->
-
-       <!-- <input type='checkbox' id='id1' onclick='decocher("id2","id3")'>Cliquer<br> -->
-                  </template>
+                  <!-- <td>{{exercice_budgetaire.encours ? 'Oui' : 'Non'}}</td> -->
                   
+                  </template>
+                   <td>
+                     <button  @click.prevent="EncoursExerciceLocal(exercice_budgetaire.id)">
+                <span v-if="exercice_budgetaire.encours == 1"  class="btn  btn-success"><i class="icon-thumbs-up"></i></span>
+                <span v-else  class="btn  btn-danger"> <i class=" icon-thumbs-down"></i></span>
+                </button>
+                   </td>
                   <td>
                     
+              
               <button v-if="!exercice_budgetaire.encours" @click.prevent="supprimerExerciceBudgetaire(exercice_budgetaire.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
@@ -339,13 +339,24 @@ export default {
   methods: {
     // methode pour notre action
    ...mapActions('parametreGenerauxAdministratif', [ 'ajouterExerciceBudgetaire',
-    'supprimerExerciceBudgetaire', 'modifierExerciceBudgetaire']),   
+    'supprimerExerciceBudgetaire', 'modifierExerciceBudgetaire',"EncoursExerciceBudgetaire"]),   
    
     afficherModalExerciceBudgetaire(){
        this.$('#exampleModal').modal({
               backdrop: 'static',
               keyboard: false
              });
+    },
+     EncoursExerciceLocal (id) {
+      this.EncoursExerciceBudgetaire(id)
+
+        // this.formData = {
+        //       annee: "",
+        //         date_debut:"",
+        //         date_fin:"",
+               
+             
+        // }
     },
    // fonction pour vider l'input
     ajouterExerciceLocal () {
