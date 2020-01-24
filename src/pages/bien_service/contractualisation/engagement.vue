@@ -1284,7 +1284,7 @@
                         <tr>
                             <td>
                              <div class="control-group">
-                            <label class="control-label">Montant a paye</label>
+                            <label class="control-label">Disponible marché</label>
                             <div class="controls">
                               <input type="number" class="span" :value="montantResteApayeModifier" />
                             </div>

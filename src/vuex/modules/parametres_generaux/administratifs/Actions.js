@@ -94,6 +94,7 @@ export function ajouterExerciceBudgetaire({commit}, objetAjout){
     }).catch(error => console.log(error))
 }
 
+
 //modification exercice budgetaire
 export function modifierExerciceBudgetaire({commit}, exercice_budgetaire) {
 
@@ -126,7 +127,21 @@ export function supprimerExerciceBudgetaire({commit}, id){
         axios.delete('/delete_exercice_budgetaire/' + id).then(() => dialog.close() )   
     })
 }
+// export function EncoursExerciceBudgetaire({ commit }, id) {
 
+//     this.$app.$dialog
+//         .confirm("Voulez vouz vraiment supprimer ?.")
+//         .then(dialog => {
+//             commit('ENCOURS_EXERCICE_BUDGETAIRES', id)
+//             // dispatch('getExercicesBudgetaires')
+//             // commit('ENCOURS_EXERCICE_BUDGETAIRES', varExerciceBudgetaire.data)
+//             // // dialog.loading(false) // stops the proceed button's loader
+//             axios.post('/encours_exercice_budgetaire/' + id).then(() => dialog.close())
+//         })
+
+
+    
+// }
 // get all nature de section
 export  function getNatureSection({commit}) {
 
@@ -771,3 +786,29 @@ export function modifierTypeUniteAdministrative({ commit, dispatch }, typeua) {
     });
 }
 
+export function EncoursExerciceBudgetaire({ commit, dispatch }, objetAjout) {
+
+    this.$app.$dialog
+        .confirm("Voulez vous changer année en cours ?.")
+        .then(dialog => {
+    
+            asyncLoading(axios.post('/encours_exercice_budgetaire', {
+
+                id: objetAjout,
+
+            })).then(varExerciceBudgetaire => {
+                // if (varExerciceBudgetaire.status == 201) {
+                commit('ENCOURS_EXERCICE_BUDGETAIRES', varExerciceBudgetaire.data)
+                dispatch('getExercicesBudgetaires')
+                this.$app.$notify({
+                    title: 'success ',
+                    text: 'Option Effectué avec success !',
+                    type: "success"
+                })
+                // }
+            }).catch(error => console.log(error))
+            dialog.close()
+        });
+   
+   
+}

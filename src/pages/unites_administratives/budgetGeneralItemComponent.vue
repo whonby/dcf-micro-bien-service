@@ -143,7 +143,7 @@ export default {
     getNombreArticle(){
         var nombre = this.groupe.ua_budget_general.length
         if(nombre) return nombre
-        return 'Aucun' 
+        return '0' 
     },
     iconClasses() {
       return {
