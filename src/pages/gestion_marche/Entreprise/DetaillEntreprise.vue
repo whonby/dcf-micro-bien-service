@@ -70,18 +70,23 @@
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab1">Compte bancaire</a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab1"> Compte bancaire</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li> -->
                             </ul>
                         </div>
+                       
                         <div class="widget-content tab-content">
                             <div id="tab1" class="tab-pane active">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
-                                    <a href="#myAlert" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                    <a href="#myAlert" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter un compte</a></div>
                                    <h4>Liste des comptes </h4>
+                                   <div align="right">
+                                  Recherche:
+                             <input type="search" placeholder v-model="search" />
+                                  </div>
                                 <table class="table table-bordered table-striped" v-if="entreprises"  >
                                     <thead>
                                     <tr>
@@ -99,7 +104,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="odd gradeX" v-for="(appelOffre, index) in getCompte"
+                                    <tr class="odd gradeX" v-for="(appelOffre, index) in compteFiltre"
                                         :key="appelOffre.id">
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.varObjetBanque.libelle || 'Non renseigné'}}</td>
@@ -141,7 +146,7 @@
         </div>
 
 <!-- Ajouter appel offres --->
-        <div id="myAlert" class="modal hide" aria-hidden="true" style="display: none;">
+        <div id="myAlert" class="modal hide glcompte" aria-hidden="true" style="display: none;">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter compte bancaire</h3>
@@ -149,7 +154,8 @@
             <div class="modal-body">
                
                     <table class="table table-bordered table-striped">
-                      
+                      <tr>
+                          <td>
                         <div class="control-group">
                              <label>Banque</label>
                             <div class="controls">
@@ -161,7 +167,9 @@
                                 
                             </div>
                         </div>
-                        
+                          </td>
+
+                          <td>
                        <div class="control-group">
                              <label>Entreprise</label>
                             <div class="controls">
@@ -173,62 +181,81 @@
                                 
                             </div>
                         </div>
-                      
+                          </td>
+                          <td>
                         <div class="control-group">
-
+                          <label>Date</label>
                             <div class="controls">
-                                <input type="date" class="span5" placeholder="" v-model="formData.date_ouverture_compte">
+                                <input type="date" class="span" placeholder="" v-model="formData.date_ouverture_compte">
                             </div>
                         </div>
-                      
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>
                      
                         <div class="control-group">
-
+                          <label>Signature</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="saisir le signataire compte" v-model="formData.signataire_compte">
+                                <input type="text" class="span" placeholder="saisir le signataire compte" v-model="formData.signataire_compte">
                             </div>
                         </div>
-            
+                          </td>
+
+                          <td>
                         <div class="control-group">
                             <div class="controls">
                                 <label>Nature de compte</label>
-                                <input type="text" class="span5" placeholder="saisir la nature de compte" v-model="formData.nature_compte">
+                                <input type="text" class="span" placeholder="saisir la nature de compte" v-model="formData.nature_compte">
                             </div>
                         </div>
-                     
+                          </td>
+
+                          <td>
 
                         <div class="control-group">
                             <div class="controls">
                                 <label>Agence</label>
-                                <input type="text" class="span5" placeholder="Saisir l'agence" v-model="formData.agence">
+                                <input type="text" class="span" placeholder="Saisir l'agence" v-model="formData.agence">
                             </div>
                         </div>
-                       
+                          </td>
+                      </tr>
+
+                      <tr>
+                          <td>
                      
                         <div class="control-group">
+                            <label>Situation geographique</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="sitaution geographique" v-model="formData.situation_geographique_angence">
+                                <input type="text" class="span" placeholder="sitaution geographique" v-model="formData.situation_geographique_angence">
                             </div>
                         </div>
-                        
+                          </td>
+
+                          <td>
                         <div class="control-group">
+                            <label>Numero agence</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="saisir le numero agence" v-model="formData.numero_agence">
+                                <input type="text" class="span" placeholder="saisir le numero agence" v-model="formData.numero_agence">
                             </div>
                         </div>
-                      
+                          </td>
+                          <td>
 
                         <div class="control-group">
+                            <label>Telephone </label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="saisir le teleophone agence" v-model="formData.telephone_agence">
+                                <input type="text" class="span" placeholder="saisir le teleophone agence" v-model="formData.telephone_agence">
                             </div>
                         </div>
-                    
+                          </td>
+                      </tr>
                     </table>
                 
             </div>
             <div class="modal-footer">  <a @click.prevent="ajouterCompteLocal" class="btn btn-primary"
-                                           href="#">Valider</a> <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+ href="#">Valider</a> <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
 
         <!-- Fin ajouter appel offres --->
@@ -273,7 +300,7 @@
                         <div class="control-group">
 
                             <div class="controls">
-                                <input type="date" class="span5" placeholder="" v-model="editCompte.date_ouverture_compte">
+                                <input type="date" class="span" placeholder="" v-model="editCompte.date_ouverture_compte">
                             </div>
                         </div>
                       
@@ -281,14 +308,14 @@
                         <div class="control-group">
 
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="saisir le signataire compte" v-model="editCompte.signataire_compte">
+                                <input type="text" class="span" placeholder="saisir le signataire compte" v-model="editCompte.signataire_compte">
                             </div>
                         </div>
             
                         <div class="control-group">
                             <div class="controls">
                                 <label>Nature de compte</label>
-                                <input type="text" class="span5" placeholder="saisir la nature de compte" v-model="editCompte.nature_compte">
+                                <input type="text" class="span" placeholder="saisir la nature de compte" v-model="editCompte.nature_compte">
                             </div>
                         </div>
                      
@@ -296,27 +323,27 @@
                         <div class="control-group">
                             <div class="controls">
                                 <label>Agence</label>
-                                <input type="text" class="span5" placeholder="Saisir l'agence" v-model="editCompte.agence">
+                                <input type="text" class="span" placeholder="Saisir l'agence" v-model="editCompte.agence">
                             </div>
                         </div>
                        
                      
                         <div class="control-group">
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="sitaution geographique" v-model="editCompte.situation_geographique_angence">
+                                <input type="text" class="span" placeholder="sitaution geographique" v-model="editCompte.situation_geographique_angence">
                             </div>
                         </div>
                         
                         <div class="control-group">
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="saisir le numero agence" v-model="editCompte.numero_agence">
+                                <input type="text" class="span" placeholder="saisir le numero agence" v-model="editCompte.numero_agence">
                             </div>
                         </div>
                       
 
                         <div class="control-group">
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="saisir le teleophone agence" v-model="editCompte.telephone_agence">
+                                <input type="text" class="span" placeholder="saisir le teleophone agence" v-model="editCompte.telephone_agence">
                             </div>
                         </div>
                     
@@ -403,7 +430,7 @@
                     	banque_id:"",
 
               },
-            
+            search:""
                 
             };
         },
@@ -421,7 +448,15 @@ created() {
                 ...mapGetters("gestionMarche", [ 'entreprises','banques','comptes','getCompte', 'getEntreptise']),
 
               
-// listeCompte(){
+              compteFiltre(){
+                  const st = this.search.toLowerCase();
+                  return this.getCompte.filter((item)=>{
+                      return item.entreprise.raison_sociale.toLowerCase().includes(st) ||
+                              item.varObjetBanque.libelle.toLowerCase().includes(st) ||
+                              item.agence.toLowerCase().includes(st)
+                  })
+              },
+// listeCompte(){.
 //     return this.getCompte.filter(compt => compt.id == entreprise_id)
 // },
           
@@ -584,10 +619,10 @@ created() {
  margin: 0 -580px;
  height: 500px;
     }
-    .grdirModalActeEffet
+    .glcompte
     {
 
- width: 1000px;
+ width: 900px;
  margin: 0 -530px;
  height: 500px;
 
