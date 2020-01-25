@@ -4,6 +4,95 @@ var housecall = require("housecall");
 var queue = housecall({ concurrency: 2, cooldown: 1000 });
 
 
+export function getAllHistoriqueBudgetGeneral({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/histo_liste_Budget_General")
+      .then(response => {
+        commit("GET_ALL_HISTORIQUE_BUDGET_GENERAL", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterHistoriqueBudgetGeneral({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/histo_ajouter_Budget_General", {
+      exercicebudget_id: nouveau.exercicebudget_id,
+      gdenature_id: nouveau.gdenature_id,
+      program_id: nouveau.program_id,
+      typeua_id: nouveau.typeua_id,
+      ua_id: nouveau.ua_id,
+      section_id: nouveau.section_id,
+      fonctionnel_id: nouveau.fonctionnel_id,
+      economique_id: nouveau.economique_id,
+      Dotation_Initiale: nouveau.Dotation_Initiale,
+      version: nouveau.version,
+      testgdenature: nouveau.testgdenature,
+      codebudget: nouveau.codebudget,
+      action_id: nouveau.action_id,
+      activite_id: nouveau.activite_id
+    }))
+
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_HISTORIQUE_BUDGET_GENERAL", response.data);
+        dispatch('getAllHistoriqueBudgetGeneral')
+        dispatch('getAllUniteAdministrative')
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+// modifier
+export function modifierHistoriqueBudgetGeneral({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .put("/histo_modifier_Budget_General/" + nouveau.id, {
+      exercicebudget_id: nouveau.exercicebudget_id,
+      gdenature_id: nouveau.gdenature_id,
+      program_id: nouveau.program_id,
+      typeua_id: nouveau.typeua_id,
+      ua_id: nouveau.ua_id,
+      section_id: nouveau.section_id,
+      fonctionnel_id: nouveau.fonctionnel_id,
+      economique_id: nouveau.economique_id,
+      Dotation_Initiale: nouveau.Dotation_Initiale,
+      version: nouveau.version,
+      codebudget: nouveau.codebudget,
+      action_id: nouveau.action_id,
+      activite_id: nouveau.activite_id,
+      testgdenature: nouveau.testgdenature,
+    }))
+    .then(response => {
+      commit("MODIFIER_HISTORIQUE_BUDGET_GENERAL", response.data);
+      dispatch('getAllHistoriqueBudgetGeneral')
+      dispatch('getAllUniteAdministrative')
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerHistoriqueBudgetGeneral({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_HISTORIQUE_BUDGET_GENERAL", id);
+      dispatch('getAllHistoriqueBudgetGeneral')
+      dispatch('getAllUniteAdministrative')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/histo_supprimer_Budget_General/" + id).then(() => dialog.close());
+    });
+}
+
+
 
 export function getAllBudgetGeneral({ commit }) {
   queue.push(() => {
@@ -41,6 +130,7 @@ export function ajouterBudgetGeneral({ commit, dispatch }, nouveau) {
         commit("AJOUTER_BUDGET_GENERAL", response.data);
         dispatch('getAllBudgetGeneral')
         dispatch('getAllUniteAdministrative')
+        dispatch('getAllHistoriqueBudgetGeneral')
         this.$app.$notify({
           title: 'Success',
           text: 'Enregistrement Effectué avec Succès!',

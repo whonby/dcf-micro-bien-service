@@ -85,7 +85,8 @@ export default {
       "getAllUniteAdministrative",
       "getAllArchivageDocument",
       
-      "getAllBudgetGeneral"
+      "getAllBudgetGeneral",
+      "getAllHistoriqueBudgetGeneral"
     ]),
             ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
@@ -213,7 +214,7 @@ this.getMarcheContratExecution()
 
     this.getSourceFinnancementByMarche()
       /**Fin gestion des marche**/
-
+this.getAllHistoriqueBudgetGeneral()
       /**
        * suivi des immo
        */
