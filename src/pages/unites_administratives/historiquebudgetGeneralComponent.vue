@@ -719,10 +719,10 @@ anneeAmort() {
   
   methods: {
     ...mapActions("uniteadministrative", [
-      "getAllBudgetGeneral",
-      "ajouterBudgetGeneral",
-      "modifierBudgetGeneral",
-      "supprimerBudgetGeneral"
+      "getAllHistoriqueBudgetGeneral",
+      
+      "modifierHistoriqueBudgetGeneral",
+      "supprimerHistoriqueBudgetGeneral"
     ]),
  formatageSomme: formatageSomme,
     afficherModalAjouterUniteAdministrative() {
@@ -765,7 +765,7 @@ var nouvelObjet = {
      
     },
      supprimerBudget(id){
-      this.supprimerBudgetGeneral(id)
+      this.supprimerHistoriqueBudgetGeneral(id)
     },
     // fonction pour vider l'input modifier
     modifierUniteAdministrativeLocal() {
@@ -776,7 +776,7 @@ var nouvelObjet = {
         testgdenature:this.codeGrdeNaturemodif
       
        };
-      this.modifierBudgetGeneral(nouvelObjet);
+      this.modifierHistoriqueBudgetGeneral(nouvelObjet);
 this.$("#modificationModal").modal('hide');
       // this.editUniteAdministrative = {
       //   code: "",

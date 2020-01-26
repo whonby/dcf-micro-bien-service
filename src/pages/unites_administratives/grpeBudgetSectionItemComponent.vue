@@ -12,6 +12,7 @@
                  <span class="badge badge-inverse" >{{formatageSomme(parseFloat(MontantTotal))}}</span>
 
                 </a> 
+
             </div>
             </div>
             <div class="collapse in accordion-body"  v-if="isFolder && isOpen ">
@@ -21,15 +22,15 @@
                   <tr>
                        <!-- <th>Exercice</th> -->
                     <!-- <th title="">Code Budget</th> -->
-                     <!-- <th title="unite administrative">ua</th> -->
-                    <th>Section</th>
-                    <th title="grande nature depense">Gde nature</th>
+                     <th title="unite administrative">ua</th>
+                    <!-- <th>Section</th> -->
+                    <th title="grande nature depense">G.Nature</th>
                       <th>Programme</th>
                     <th>Action</th> 
                     <th>Activite</th> 
-                     <th title="classification fonctionnel">Clsse Fontionnel</th>
-                     <th title="classification Economique">Clsse Economique</th>
-                    <th>Dotation Initial</th>
+                     <th title="classification fonctionnel">C.Fontionnel</th>
+                     <th title="classification Economique">C.Economique</th>
+                    <th title="Dotation Initial">D.Initial</th>
                    
                   </tr>
                 </thead>

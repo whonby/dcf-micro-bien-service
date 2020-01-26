@@ -187,7 +187,7 @@
                               
                               />
                                <input
-                                type="text"
+                                type="hidden"
                                 class="span"
                                
                             :value="idBudgetaire"

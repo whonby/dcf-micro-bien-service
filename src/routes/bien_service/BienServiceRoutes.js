@@ -39,8 +39,13 @@ import Engagement from '../../pages/bien_service/contractualisation/engagement.v
 import AjouterEngagement from '../../pages/bien_service/contractualisation/AjouterEngagement.vue';
 import executionMarche from '../../pages/bien_service/contractualisation/executionMarche.vue';
 import actesEffet from '../../pages/bien_service/contractualisation/actesEffet.vue';
-
+import tableauBord from '../../pages/bien_service/contractualisation/tableauBord.vue';
 const BienServiceRoutes = [
+    {
+        path: "tableauBord",
+        name: "tableauBord",
+        component: tableauBord
+    },
     {
         path: "/Ajouter-Engagement/:id",
         name: "AjouterEngagement",
