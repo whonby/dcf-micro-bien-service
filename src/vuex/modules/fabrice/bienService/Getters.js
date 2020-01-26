@@ -54,6 +54,36 @@ export const getterDemandeAno = state => state.stateDemandeAno
 export const getterAnalyseDMP = state => state.analyseDMP
 export const getterAnoDMPBailleur = state => state.stateAnoDmpBailleur
 export const getterObseravtionBailleurs = state => state.obseravtionBailleurs
+export const nombremarches = state => state.marches.length;
+
+
+
+export const nombremarchesExecute = getters =>
+    getters.marches.filter(
+        marcheNonAttribue => marcheNonAttribue.attribue == 1
+    ).length;
+
+export const montantGlobalMarche = (state, getters) =>
+    getters.marches.reduce(
+        (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
+        0
+    );
+export const nombremarchesExecute1 = getters =>
+    getters.marches.filter(
+        marcheNonAttribue => marcheNonAttribue.attribue == 1
+    );
+
+export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
+    getters.nombremarchesExecute1.reduce(
+        (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
+        0
+    );
+
+
+
+
+
+
 
 // gettes  personnaliser d'appel d'offres
 

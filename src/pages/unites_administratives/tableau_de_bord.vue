@@ -1,6 +1,7 @@
 
 <template>
   <div class="container-fluid">
+     <!-- <h3 style="text-align:center">TABLEAU DE BORD : UNITE ADMINISTRATIVE</h3> -->
     <div class="quick-actions_homepage">
       <ul class="quick-actions">
         <li class="bg_ls">

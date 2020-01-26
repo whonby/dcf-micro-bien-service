@@ -1123,9 +1123,10 @@ export function ajouterObseravtionBailleur({commit}, elementAjout){
 // action pour modifier obseravtion bailleur
 
 
-export function modifierObservationBaileur({commit}, element_modifie) {
+export function modifierObservationBaileur({ commit, dispatch}, element_modifie) {
   asyncLoading( axios.put('/observation_bailleurs',element_modifie)).then(response => {
        commit('MODIFIER_OBSERAVTION_BAILLEUR', response.data)
+    dispatch("getObservationBailleur");
        this.$app.$notify({
          title: 'success ',
          text: 'Modification effectué !',

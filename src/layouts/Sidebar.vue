@@ -46,7 +46,7 @@
             <span>PERSONNEL</span>
           </a>
         </li>
-        <li @click.prevent="activate(3)"  :class="{active: active_el ==3}">
+        <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==3}">
           <a href="#">
             <i class="icon icon-fullscreen"></i>
             <span>BIEN ET SERVICES</span>

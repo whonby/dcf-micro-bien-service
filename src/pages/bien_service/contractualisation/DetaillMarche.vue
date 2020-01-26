@@ -1,7 +1,7 @@
 <template>
     <div>
-Liste obseravtion bailleur
-
+<!-- Liste obseravtion bailleur -->
+<!-- cojo -->
         <div class="container-fluid">
             <h4 v-if="marcheDetail(marcheid)" >Detail Marche : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en-cours de passation</button>
                 <button class="btn btn-success btn-large" v-else>Marché attribué</button></h4>
@@ -1070,7 +1070,7 @@ Liste obseravtion bailleur
 
 
 
-cojo
+
 
 
        <div id="tab33" class="tab-pane">
@@ -1267,7 +1267,7 @@ cojo
                     <tr>
 
                         <th>Document procedure</th>
-                        <th>ANO DMP bailleur</th>
+                        <!-- <th>ANO DMP bailleur</th> -->
                         <th>Numero dossier candidat</th>
                         <th>Date</th>
                         <th>Avis</th>
@@ -1276,25 +1276,25 @@ cojo
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for="observationBailleur in listeObservationBailleurANODMP(marcheid)"
+                    <tr class="odd gradeX" v-for="(observationBailleur,index) in listeObservationBailleurANODMP(marcheid)"
                         :key="observationBailleur.id">
 
-                         <td @click="afficherModalObservationBailleur(observationBailleur.id)">
-                            {{observationBailleur.document_procedure_id || 'Non renseigné'}}</td>
+                         <td @click="afficherModalObservationBailleur(index)">
+                            {{observationBailleur.document_procedure.libelle_doc || 'Non renseigné'}}</td>
 
-                             <td @click="afficherModalObservationBailleur(observationBailleur.id)">
-                            {{observationBailleur.ano_dmp_bailleur_id || 'Non renseigné'}}</td>
-
-                        <td @click="afficherModalObservationBailleur(observationBailleur.id)">
+                             <!-- <td @click="afficherModalObservationBailleur(observationBailleur.id)">
+                            {{observationBailleur.ano_dmp_bailleur_id || 'Non renseigné'}}</td> -->
+<td @click="afficherModalObservationBailleur(index)">
                             {{observationBailleur.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td>
-                        <td @click="afficherModalObservationBailleur(observationBailleur.id)">
+                        <td @click="afficherModalObservationBailleur(index)">
                             {{formaterDate(observationBailleur.date_avis_baill) || 'Non renseigné'}}</td>
-                        <td @click="afficherModalObservationBailleur(observationBailleur.id)">
+                        <td @click="afficherModalObservationBailleur(index)">
                             <button class="btn btn-success btn-mini" v-if="observationBailleur.avis_bail==1">Avis favorable</button>
                             <button class="btn btn-danger btn-mini" v-else>Defavorable</button>
                         </td>
-                        <td @click="afficherModalObservationBailleur(observationBailleur.id)">
+                        <td @click="afficherModalObservationBailleur(index)">
                             {{observationBailleur.observations_bailleur || 'Non renseigné'}}</td>
+                       
                         <div class="btn-group">
                             <button @click.prevent="supprimerObseravtionBailleur(observationBailleur.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span>
@@ -1406,7 +1406,7 @@ cojo
                         <div class="control-group">
                         <label class="control-label">Document Procedure</label>
                         <div class="controls">
-                          <select v-model="editObservation.document_procedure_id" class="span">
+                          <select v-model="editObservation1.document_procedure_id" class="span">
                                 <option v-for="varText in documentProcedures" :key="varText.id"
                                         :value="varText.id">{{varText.libelle_doc}}</option>
                             </select>
@@ -1416,7 +1416,7 @@ cojo
                      <div class="control-group">
                         <label class="control-label">ANO DMP bailleur </label>
                         <div class="controls">
-                           <select v-model="editObservation.ano_dmp_bailleur_id" class="span">
+                           <select v-model="editObservation1.ano_dmp_bailleur_id" class="span">
                                 <option v-for="varText in listeAnoDMPBailleur(marcheid)" :key="varText.id"
                                         :value="varText.id">{{varText.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
                             </select>
@@ -1427,7 +1427,7 @@ cojo
                         <div class="controls">
                             <input
                                     type="date"
-                                    v-model="editObservation.date_avis_baill"
+                                    v-model="editObservation1.date_avis_baill"
                                     class="span"
                                     placeholder="Saisir le libelle_type"
                             />
@@ -1436,7 +1436,7 @@ cojo
                     <div class="control-group">
                         <label class="control-label">Avis</label>
                         <div class="controls">
-                            <select v-model="editObservation.avis_bail" class="span">
+                            <select v-model="editObservation1.avis_bail" class="span">
                                 <option value="1">Favorable</option>
                                 <option value="2">Defavorable</option>
                             </select>
@@ -1445,7 +1445,7 @@ cojo
                     <div class="control-group">
                         <label class="control-label">Observation</label>
                         <div class="controls">
-                            <textarea  v-model="editObservation.observations_bailleur"
+                            <textarea  v-model="editObservation1.observations_bailleur"
                                     class="span"
                                     placeholder="Saisir l'observation"
                             ></textarea>
@@ -3725,7 +3725,7 @@ formObservation:{
     document_procedure_id:""
 },
 
-editObservation:{
+editObservation1:{
     date_avis_baill:"",
     avis_bail:"",
     observations_bailleur:"",
@@ -3814,7 +3814,7 @@ created() {
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
-                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
+                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
 
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers"]),
@@ -4296,12 +4296,12 @@ modifierModalActeEffetFinancierLocal(){
                     backdrop: 'static',
                     keyboard: false
                 });
-                  this.editObservation = this.obseravtionBailleurs[index]
+                  this.editObservation1 = this.getterObseravtionBailleurs[index]
 
             },
             // vider l'input
             modifierObservationBailleurLocal(){
-                this.modifierObservationBaileur(this.editObservation)
+                this.modifierObservationBaileur(this.editObservation1)
                 this.$('#modifierObservationBailleur').modal('hide');
             },
 
