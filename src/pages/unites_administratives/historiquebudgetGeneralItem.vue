@@ -27,7 +27,7 @@
                     <td>
                       <button
                         class="btn btn-danger"
-                        @click="supprimerBudgetGeneral(article.id)"
+                          @click.prevent="$emit('suppression', article.id)"
                       >
                         <span>
                           <i class="icon icon-trash"></i>

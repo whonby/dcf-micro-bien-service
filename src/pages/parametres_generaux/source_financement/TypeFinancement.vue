@@ -40,7 +40,7 @@
                 <tr>
                  <th>Code</th>
                   <th>Libelle</th>
-                  <th>Source de financement</th>
+                
                    <th>Action</th>
                 </tr>
               </thead>
@@ -52,8 +52,8 @@
                    <td @dblclick="afficherModalModifierTypefinancement(index)">
                     {{types.libelle || 'Non renseigné'}}</td>
                     
-                   <td @dblclick="afficherModalModifierTypefinancement(index)">
-                      {{types.souce_financement.libelle || 'Non renseigné'}}</td>
+                   <!-- <td @dblclick="afficherModalModifierTypefinancement(index)">
+                      {{types.souce_financement.libelle || 'Non renseigné'}}</td> -->
                   <td>
 
 
@@ -86,7 +86,7 @@
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
-                   <div class="control-group">
+                   <!-- <div class="control-group">
               <label class="control-label">Source de financement:</label>
               <div class="controls">
                 <select  v-model="formData.source_financement_id">
@@ -94,7 +94,7 @@
             :value="resultat.id">{{resultat.libelle}}</option>
                 </select>
               </div>
-            </div>
+            </div> -->
             <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
@@ -132,7 +132,7 @@
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
-                   <div class="control-group">
+                   <!-- <div class="control-group">
               <label class="control-label">Source de financement:</label>
               <div class="controls">
                 <select  v-model="editTitre.source_financement_id">
@@ -140,7 +140,7 @@
             :value="resultat.id">{{resultat.libelle}}</option>
                 </select>
               </div>
-            </div>
+            </div> -->
             <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
@@ -196,7 +196,7 @@ export default {
       json_fields:{
         'Code':'code',
         'Libelle':'libelle',
-        'source de financement':'souce_financement.libelle'
+        // 'source de financement':'souce_financement.libelle'
       },
         fabActions: [
               {

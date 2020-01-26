@@ -187,7 +187,7 @@
                               
                               />
                                <input
-                                type="hidden"
+                                type="text"
                                 class="span"
                                
                             :value="idBudgetaire"
@@ -377,6 +377,7 @@
                                
                                
                              
+
                               
                             </div>
                           </div>
@@ -385,7 +386,7 @@
                           <div class="control-group">
                             <label class="control-label">Type d'engagement Direct</label>
                             <div class="controls">
-                              <select v-model="formData.type_engagement_id">
+                              <select v-model="formData.type_engagement_id" :readOnly="veifEquipementExist">
                                   <option value="0">Marche</option>
                                     <option value="1">Régie d'avances - reservation des crédits</option>
                                        <option value="2">Régularisation d'ordre de paiement (OP)</option>
@@ -1538,19 +1539,19 @@
                              :value="MontantBudgetaire"
                               /> -->
                                  <input
-                                type="text"
+                                type="hidden"
                                 class="span"
                                
                              v-model="editEngagementAutre.motif"
                               />
                               <input
-                                type="text"
+                                type="hidden"
                                 class="span"
                                
                              v-model="editEngagementAutre.date_motif"
                               />
                               <input
-                                type="text"
+                                type="hidden"
                                 class="span"
                                
                              v-model="editEngagementAutre.observation"
@@ -2098,14 +2099,25 @@
                     <td @dblclick="afficherModalModifierEngagement(index)">{{ Engage.afficheLigneBudget.code || 'Non renseigné'}}-{{ Engage.afficheLigneBudget.libelle || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierEngagement(index)">{{formatageSomme(parseFloat(Engage.total_general)) || 0}}</td>
                   <td>
-                        <button class="btn btn" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                        <button v-if="Engage.motif == 1"  class="btn  btn-success" @click="afficherModalModifierMotifDemandeservice(index)" >                        
                      
-                      <span v-if="Engage.motif == 1"   class="btn label label-success" >Valider</span>
-                       <span v-else-if="Engage.motif == 2"   class="btn label label-danger" >Différer</span>
-                      <span v-else  class="btn label label-info"> En attente </span>
+                      <span    >Valider</span>
+                      
+                      </button>
+                       <button v-else-if="Engage.motif == 2" class="btn  btn-danger" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                     
+                      
+                       <span  >Différer</span>
+                      
                     
                       </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                     
+                      
+                       <span  >En attente</span>
+                      
                     
+                      </button>
                     </td>
                        <td>
                          <button class="btn btn-primary" @click="afficherModalNouveauEngagement(index)" >
@@ -2675,7 +2687,7 @@
        montant_tresor:"0",
 montant_don:"0",
 montant_emprunt:"0",
-
+type_procedure_id:""
       },
        editEngagement: {
        
@@ -2755,9 +2767,11 @@ created() {
   //   },
 
 
+veifEquipementExist() {
+      return this.formData.type_procedure_id == 2;
+    },
 
-
-
+ 
 
 
 dateReceptionModifier() {
@@ -3193,7 +3207,7 @@ MontantBudgetaire() {
     },
 idBudgetaire() {
       
-      const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.codebudget == this.formData.ligne_budgetaire_id);
+      const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.economique_id == this.formData.ligne_budgetaire_id);
 
       if (norme) {
         return norme.id;

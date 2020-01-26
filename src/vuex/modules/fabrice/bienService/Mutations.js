@@ -1315,6 +1315,7 @@ export const AJOUTER_TYPE_TEXT_JURIDIQUE = (state, elementAjouter) => {
 }
 
 
+
 // update type text juridique
 export const MODIFIER_TYPE_TEXT_JURIDIQUE = (state, elementModif)=>{
     state.typeTextJuridiques = state.typeTextJuridiques.map(response => {

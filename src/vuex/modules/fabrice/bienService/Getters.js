@@ -176,7 +176,7 @@ export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, ro
       marcheNonAttribue => marcheNonAttribue.attribue == 0
     );
 
-
+getTypeTextJuridique
 
 
     export  const printMarcheNonAttribue = (state, getters,rootState, rootGetters) =>

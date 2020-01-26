@@ -2301,21 +2301,35 @@ export function ajouterTypeTextJuridique({commit}, elementAjout){
 // action pour modifier le type text juridique
 
 
-export function modifierTypeTextJuridique({commit}, element_modifie) {
-  asyncLoading(axios.put('/type_text_juridiques/'+ element_modifie.id ,{
-    
-    libelle:element_modifie.libelle
- })).then(response => {
-   commit('MODIFIER_TYPE_TEXT_JURIDIQUE', response.data)
-       
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+export function modifierTypeTextJuridique({ commit }, element_modifie) {
+  asyncLoading(axios.put('/type_text_juridiques', element_modifie)).then(response => {
+    commit('MODIFIER_TYPE_TEXT_JURIDIQUE', response.data)
+
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // supprimer le type text juridique
 
 export function supprimerTypeTextJuridique({commit}, id) {

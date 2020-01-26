@@ -721,7 +721,8 @@ anneeAmort() {
       "getAllBudgetGeneral",
       "ajouterBudgetGeneral",
       "modifierBudgetGeneral",
-      "supprimerBudgetGeneral"
+      "supprimerBudgetGeneral",
+      "ajouterHistoriqueBudgetGeneral"
     ]),
  formatageSomme: formatageSomme,
     afficherModalAjouterUniteAdministrative() {
@@ -746,7 +747,7 @@ var nouvelObjet = {
       
        };
       this.ajouterBudgetGeneral(nouvelObjet);
-
+this.ajouterHistoriqueBudgetGeneral(nouvelObjet);
       this.formData = {
         exercicebudget_id:"",
       gdenature_id: "",
@@ -763,6 +764,7 @@ var nouvelObjet = {
       // }
      
     },
+    
      supprimerBudget(id){
       this.supprimerBudgetGeneral(id)
     },

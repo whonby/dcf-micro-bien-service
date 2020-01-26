@@ -1,6 +1,6 @@
 <template>
     <div>
-
+Liste obseravtion bailleur
 
         <div class="container-fluid">
             <h4 v-if="marcheDetail(marcheid)" >Detail Marche : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en-cours de passation</button>
@@ -1070,7 +1070,7 @@
 
 
 
-
+cojo
 
 
        <div id="tab33" class="tab-pane">
@@ -2725,6 +2725,7 @@
                     </div>
 
                     <div class="control-group">
+                          <label class="control-label">controleur_finnancier</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -2735,6 +2736,7 @@
                         </div>
                     </div>
                     <div class="control-group">
+                         <label class="control-label">Dmp</label>
                         <div class="controls">
                             <input type="text"
                                    v-model="formDataCojo.dmp"
@@ -2744,6 +2746,7 @@
                         </div>
                     </div>
                     <div class="control-group">
+                         <label class="control-label">autorite_contractante</label>
                         <div class="controls">
                             <input
                                     type="text"

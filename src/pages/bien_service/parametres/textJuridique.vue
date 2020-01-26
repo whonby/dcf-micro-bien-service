@@ -16,10 +16,10 @@
                   <select  v-model="formData.type_text_juridique_id">
                     <option value>Sélectionner</option>
                     <option
-                      v-for="famil in getTypeTextJuridique"
+                      v-for="famil in typeTextJuridiques"
                       :key="famil.id"
-                      :value="famil.AfficheTypeTextJuridique.id"
-                    >{{famil.AfficheTypeTextJuridique.libelle}}</option>
+                      :value="famil.id"
+                    >{{famil.libelle}}</option>
                   </select>
                 </div>
               </div>
@@ -80,10 +80,10 @@
                   <select  v-model="editTextJuridique.type_text_juridique_id">
                     <option value>Sélectionner</option>
                     <option
-                      v-for="famil in getTypeTextJuridique"
+                      v-for="famil in typeTextJuridiques"
                       :key="famil.id"
-                      :value="famil.AfficheTypeTextJuridique.id"
-                    >{{famil.AfficheTypeTextJuridique.libelle}}</option>
+                      :value="famil.id"
+                    >{{famil.libelle}}</option>
                   </select>
                 </div>
               </div>
@@ -247,7 +247,7 @@ export default {
   },
 
   computed: {
-     ...mapGetters("bienService", ['text_juridiques','getTypeTextJuridique']),
+     ...mapGetters("bienService", ['text_juridiques','getTypeTextJuridique','typeTextJuridiques']),
 
     textJuridiqueFiltre()  {
      
