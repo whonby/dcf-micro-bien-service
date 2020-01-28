@@ -235,14 +235,12 @@
 
                                           <model-list-select style="background-color: rgb(222, 222, 222);"
                                            class="wide"
-
                                             :list="uniteAdministratives"
                                             v-model="ua_id"
                                                 option-value="id"
                                                 option-text="libelle"
                                                 placeholder="saisissez UA"
                                             >
-                                           
                                     </model-list-select> 
                                            
                                                       </div> 
@@ -252,7 +250,6 @@
 
                                           <model-list-select style="background-color: rgb(222, 222, 222);"
                                            class="wide"
-
                                             :list="all_acteur_depense"
                                             v-model="acte_personnel_id"
                                                 option-value="id"
