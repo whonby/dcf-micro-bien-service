@@ -124,7 +124,7 @@ export default {
          "getCojo","getAnalyseDossier", 'getMotifDecision', 'getDocumentProcedure',
          'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur",
           'getActeEffetFinancier','getEngagement','getMandat',
-          'getActeEffetFinancier',"getExecutionMarche"])
+          'getActeEffetFinancier',"getExecutionMarche","getTypeAppel","getTypeCandidat"])
 
   },
 
@@ -170,7 +170,8 @@ export default {
 
 
 
-
+this.getTypeCandidat();
+this.getTypeAppel()
 
 
 

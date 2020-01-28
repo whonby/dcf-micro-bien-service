@@ -49,7 +49,7 @@
         <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==3}">
           <a href="#">
             <i class="icon icon-fullscreen"></i>
-            <span>BIEN ET SERVICES</span>
+            <span>BIENS ET SERVICES</span>
           </a>
 
        <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">

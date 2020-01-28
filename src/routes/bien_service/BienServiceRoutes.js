@@ -40,7 +40,19 @@ import AjouterEngagement from '../../pages/bien_service/contractualisation/Ajout
 import executionMarche from '../../pages/bien_service/contractualisation/executionMarche.vue';
 import actesEffet from '../../pages/bien_service/contractualisation/actesEffet.vue';
 import tableauBord from '../../pages/bien_service/contractualisation/tableauBord.vue';
+import typeAppel from '../../pages/bien_service/parametres/type_appel.vue';
+import typeCandidat from '../../pages/bien_service/parametres/typeCandidat.vue';
 const BienServiceRoutes = [
+    {
+        path: "type-Candidat",
+        name: "typeCandidat",
+        component: typeCandidat
+    },
+    {
+        path: "type-Appel",
+        name: "typeAppel",
+        component: typeAppel
+    },
     {
         path: "tableauBord",
         name: "tableauBord",

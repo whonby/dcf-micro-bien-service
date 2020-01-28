@@ -1,4 +1,5 @@
-getActeEffetFinancierPersonnaliser
+export const typeCandidat = state => state.typeCandidat
+export const typeAppelOffre = state => state.typeAppelOffre
 export const prestations = state => state.prestations.sort((a, b) => (a.code > b.code) ? 1 : -1)
 export const acteDepenses = state => state.acteDepenses.sort((a,b)=>(a.code>b.code)? 1:-1)
 export const bailleurs = state => state.bailleurs
@@ -79,7 +80,7 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
         0
     );
 
-
+printMarcheNonAttribue
 
 
 
@@ -87,7 +88,7 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
 
 // gettes  personnaliser d'appel d'offres
 
-printMarcheNonAttribue
+
 export  const getAppelOffresPersonnaliser = (state, getters,rootState, rootGetters) =>
 state.appelOffres.map(element => {
     if(element.unite_administrative_id !== null ){
@@ -201,16 +202,16 @@ export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, ro
 
 
 
-    export const marcheNonattribue = getters =>
-    getters.marches.filter(
-      marcheNonAttribue => marcheNonAttribue.attribue == 0
-    );
+    // export const marcheNonattribue = getters =>
+    // getters.marches.filter(
+    //   marcheNonAttribue => marcheNonAttribue.attribue == 0
+    // );
 
 getTypeTextJuridique
 
 
     export  const printMarcheNonAttribue = (state, getters,rootState, rootGetters) =>
-    getters.marcheNonattribue.map(element => {
+        getters.marches.map(element => {
         if (element.unite_administrative_id !== null
             && element.activite_id !== null
             && element.economique_id !== null && element.type_marche_id !== null) {

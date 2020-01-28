@@ -53,8 +53,9 @@ documentProcedures:[],
     acteEffetFinanciers: [],
     engagements: [],
     mandats:[],
-    executionMarches:[]
-
+    executionMarches:[],
+    typeAppelOffre: [],
+typeCandidat:[]
 
 
 
