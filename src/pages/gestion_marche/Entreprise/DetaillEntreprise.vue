@@ -393,15 +393,8 @@
                                 <input type="date" class="span" placeholder="" v-model="editCompte.date_ouverture_compte">
                             </div>
                         </div>
-                          </td>
                           <td>
                      
-                        <div class="control-group">
-                          <label>Signature</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="saisir le signataire compte" v-model="editCompte.signataire_compte">
-                            </div>
-                        </div>
                           </td>
 
                          

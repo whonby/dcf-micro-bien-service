@@ -9,7 +9,7 @@ export const bailleurs = state => state.bailleurs
 export const banques = state => state.banques.sort((a,b)=>(a.code>b.code)? 1:-1)
 export const codesFonctions = state => state.codesFonctions.sort((a,b)=>(a.code>b.code)? 1:-1)
 export const comptes = state => state.comptes.sort((a,b)=>(a.code>b.code)? 1:-1)
-export const factures = state => state.factures.sort((a,b)=>(a.code>b.code)? 1:-1)
+export const factures = state => state.factures
 export const lots = state => state.lots
 export const typePrestations = state => state.typePrestations.sort((a,b)=>(a.code>b.code)? 1:-1)
 export const typeFactures = state => state.typeFactures.sort((a,b)=>(a.code>b.code)? 1:-1)
@@ -84,7 +84,7 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
     );
 
 
-
+getEngagementPersonnaliser
 
 
 
@@ -293,7 +293,7 @@ export const getEngagementPersonnaliser = (state, getters, rootState, rootGetter
 printMarcheNonAttribue
 export const engagementValider = state =>
     state.engagements.filter(
-        Immrealise => Immrealise.motif == 1
+        Immrealise => Immrealise.decision_cf == 1
     );
 
 
@@ -344,6 +344,40 @@ export const getEngagementPersonnaliser1 = (state, getters, rootState, rootGette
         return element;
     })
 
+
+    export const getPersonnaliserFacture = (state, getters, rootState, rootGetters) =>
+    getters.engagementValider.map(element => {
+        if (
+    
+             element.activite_id !== null
+          
+            && element.ligne_budgetaire_id !== null
+            
+        ) {
+            element = {
+                ...element,
+
+
+               
+              
+              
+
+                afficheActivite: rootGetters['parametreGenerauxActivite/afficheNiveauActivite'].find(
+                    plans => plans.id == element.activite_id
+                ),
+               
+
+               
+                afficheLigneBudget: rootGetters['parametreGenerauxBudgetaire/plans_budgetaires'].find(
+                    plans => plans.id == element.ligne_budgetaire_id
+                ),
+
+
+            }
+
+        }
+        return element;
+    })
 
 
 

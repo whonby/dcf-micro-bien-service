@@ -36,7 +36,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label">Secteur activite</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.secteur_activite_id">
+                                                        <select v-model="formData.secteur_activite_id" class="span11">
                                                             <option></option>
                                                             <option v-for="item in secteur_activites" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -134,7 +134,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label">Form juridique:</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.forme_juridique">
+                                                        <select v-model="formData.forme_juridique" class="span11">
                                                             <option></option>
                                                             <option value="SNC">Société en Nom Collectif</option>
                                                             <option value="SCS">Société en Commandite Simple</option>
@@ -159,7 +159,18 @@
                                                         <input type="text" class="span11" placeholder="Service assiette" v-model="formData.service_assiette_impot">
                                                     </div>
                                                 </div>
-
+     <div class="control-group">
+                                                    <label class="control-label">Regime d'imposition</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.regime_impossition" class="span11">
+                                                            <option></option>
+                                                            <option value="0">régime de l’impôt synthétique (IS) </option>
+                                                            <option value="1">régime du réel simplifié d’imposition (RSI)</option>
+                                                            <option value="2">régime du réel normal d’imposition (RNI)</option>
+                                                            
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="widget-box">
@@ -194,18 +205,7 @@
                                                         <input type="text" class="span11" placeholder="Nombre travailleur journalier" v-model="formData.nbre_travailleur_journalier">
                                                     </div>
                                                 </div>
-                                                  <div class="control-group">
-                                                    <label class="control-label">Regime d'imposition</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.regime_impossition" class="span11">
-                                                            <option></option>
-                                                            <option value="0">régime de l’impôt synthétique (IS) </option>
-                                                            <option value="1">régime du réel simplifié d’imposition (RSI)</option>
-                                                            <option value="2">régime du réel normal d’imposition (RNI)</option>
-                                                            
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                             
                                             </div>
                                         </div>
                                          <div class="modal-footer">

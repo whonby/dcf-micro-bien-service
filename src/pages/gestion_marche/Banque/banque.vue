@@ -16,10 +16,10 @@
                                             class="btn btn-default pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
-                                              title="Liste des Missions "
-                                              name ="Liste des missions"
-                                              worksheet = "Missions"
-                                            :data="banques">
+                                              title="Liste des Banques "
+                                              name ="Liste des banques"
+                                              worksheet = "Banques"
+                                            :data="banquesFiltre">
                       <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
@@ -47,7 +47,7 @@
               </thead>
               <tbody>
                 <tr class="odd gradeX" v-for="(banque, index) in 
-                banques"
+                banquesFiltre"
                  :key="banque.id">
 
                  <td @dblclick="afficherModalModifierBanque(index)">
@@ -73,7 +73,7 @@
                 </tr>
               </tbody>
             </table>
-            <div v-if="banques.length">    
+            <div v-if="banquesFiltre.length">    
             </div>
             <div v-else>
               <div align="center">
@@ -265,21 +265,22 @@ export default {
    ...mapGetters('gestionMarche', ['banques']) ,
    
     // methode pour trier un item
-//            banques(){
 
-//      const searchTerm = this.search.toLowerCase();
+           banquesFiltre(){
 
-// return this.banques.filter((item) => {
+     const searchTerm = this.search.toLowerCase();
+
+return this.banques.filter((item) => {
   
-//  return item.situation_geographique.toLowerCase().includes(searchTerm) 
+ return item.libelle.toLowerCase().includes(searchTerm) 
     
 
   
   
 
-//    }
-// )
-//    }
+   }
+)
+   }
   },
 
   methods: {

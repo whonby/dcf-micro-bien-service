@@ -2,9 +2,11 @@
 <template>
     <div class="container-fluid">
           
-     <div class="quick-actions_homepage" style="position: center;">
+     <!-- <div class="quick-actions_homepage" style="position: center;">
       <ul class="quick-actions" >
-        
+         <table class="table table-bordered table-striped">
+        <h5>Tableau de bord de misssions globale</h5>
+        <hr>
         <li class="bg_lb" title="Nombre total de mission global">
              <a href="#">
             <i class="icon-dashboard"></i> <span class="label label-important">{{nombreTotalDeTouteMissions}}
@@ -35,17 +37,21 @@
 
 
       
-
+         </table>
         
       </ul>
-    </div>
+    </div> -->
+<hr>
 
 
           
         <div v-show="acte_personnel_id != '' || ua_id != ''" class="quick-actions_homepage" style="position: center;">
       <ul class="quick-actions" >
-
-
+          <table class="table table-bordered table-striped">
+            <tr>
+   
+        <h5 align="center"> Tableau de bord de missions par Unité Administrative</h5>
+<hr> 
         <li class="bg_lg " title="Nombre total de mission par unite administrative">
              <a href="#"> <span style="font-size:0.8em">nbre m. par UA </span>
              <i class="icon-eject"></i> <span  class="label label-important"> 
@@ -99,8 +105,12 @@
             </span> 
             {{NomDeMissionParUA(ua_id)}}
               </a> </li>
+            </tr>
+              
 
-
+<tr>
+<h5> Tableau de bord de missions par acteur de depense</h5>
+        <hr>
         <li class="bg_ly" title="Nombre total de mission par acteur ">
              <a href="#"> <span style="font-size:0.8em">nbre m. par agent.</span> 
         <i class="icon-user"></i><span class="label label-success">
@@ -155,7 +165,8 @@
 
 
 
-             
+             </tr>
+              </table>
          </ul>
         </div>
 
@@ -181,11 +192,11 @@
 
           <div class="widget-title">
             <ul class="nav nav-tabs">
-              <li class="active"><a data-toggle="tab" href="#tab1">Toutes les missions</a></li>
-               <!-- <li><a data-toggle="tab" href="#tab2">Tous les dossiers en attente</a></li>  -->
-               <li><a data-toggle="tab" href="#tab3">Tous les dossiers visés</a></li> 
-              <li><a data-toggle="tab" href="#tab4">Tous les dossiers differés</a></li>
-            <li><a data-toggle="tab" href="#tab5">Tous les dossiers rejetés</a></li>  
+              <li class="active"><a style="cursor:pointer;" @click.prevent="filter = 'all'">Toutes les missions <span class="badge"></span></a></li>
+               <li><a style="cursor:pointer;" @click.prevent="filter = 'attente'" >Dossiers en attente <span class="badge">{{total_mission_attente}}</span></a></li> 
+               <li><a style="cursor:pointer;" @click.prevent="filter = 'visés'" > Dossiers visés <span class="badge">{{total_mission_vises}}</span></a></li> 
+              <li><a style="cursor:pointer;" @click.prevent="filter = 'differés'">Dossiers differés <span class="badge">{{total_mission_differes}}</span></a></li>
+            <li><a style="cursor:pointer;" @click.prevent="filter = 'rejetés'">Dossiers rejetés <span class="badge">{{total_mission_rejetes}}</span></a></li>  
                 
               
             </ul>
@@ -203,10 +214,11 @@
                                               title="Liste des Missions "
                                               name ="Liste des missions"
                                               worksheet = "Missions"
-                                            :data="localisationsFiltre">
-                         <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+                                            :data="missionFiltre">
+                                    <i title="Exporter en excel" class="icon-table"> 
+                                       Exporter en excel</i>
 
-                                                 </download-excel> 
+                                   </download-excel> 
                                      </div> <br>
 
                                <div class="widget-box">
@@ -240,8 +252,7 @@
                                             v-model="ua_id"
                                                 option-value="id"
                                                 option-text="libelle"
-                                                placeholder="saisissez UA"
-                                            >
+                                                placeholder="saisissez UA" >
                                            
                                     </model-list-select> 
                                            
@@ -250,23 +261,19 @@
                                          <div class="span3">
 
 
-                                          <model-list-select style="background-color: rgb(222, 222, 222);"
+                                  <model-list-select style="background-color: rgb(222, 222, 222);"
                                            class="wide"
 
                                             :list="all_acteur_depense"
                                             v-model="acte_personnel_id"
                                                 option-value="id"
                                                 option-text="matricule"
-                                                placeholder="saisissez l'acteur de depense"
-                                            >
+                                           placeholder="saisissez l'acteur de depense">
                                            
                                     </model-list-select> 
                                            
-                                                      </div> 
-                                          <div align="right">
-                                          <!-- <span @click.prevent="" class="btn">
-                                            <i class="icon-search"></i></span> -->
-                                            </div>
+                                         </div> 
+                                          
                                         </div> <br>
 
                        <table class="table table-bordered table-striped">
@@ -285,7 +292,7 @@
               </thead> 
               <tbody>
                 <tr  class="odd gradeX" v-for="mission in 
-                localisationsFiltre"
+                missionFiltre"
                 :style="getMissionStyles(mission)"
                  :key="mission.id">
                  
@@ -359,9 +366,7 @@
 
 
               </div>
-              <div v-else>
-                Aucunne mission
-              </div>
+             
                </div>
 
              </div>
@@ -376,7 +381,7 @@
               <!---  deuxieme tableau  --->
 
 
-<!--         
+        
                         <div id="tab2" class="tab-pane">
                            <div class="container-fluid">
                                       <div class="row-fluid">
@@ -397,7 +402,7 @@
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste de tous les  missions visés</h5>
+            <h5>Liste de tous les missions en attente</h5>
              <div align="right">
           </div>
              
@@ -408,33 +413,34 @@
               <thead>
                 <tr>
                     <th>Type operation</th>
-                     <th>Date operation</th>
-                     <th>Motif</th>
-                     <th>Observation</th>
+                     <th>Date de mission</th>
+                     <th>Objet de mission</th>
+                     <th>Type de mission</th>
                       <th>Action</th>
                 </tr>
               </thead>
               <tbody >
                 <tr class="odd gradeX" v-for="(historiqueMission, index) in 
-                listeHistoriqueDeTousMissionsEnAttente"
+                total_mission_attente"
                  :key="historiqueMission.id">
 
                   <td  @dblclick="afficherModalModifierHistoriqueMission(index)" >
                      <span 
                      v-if="historiqueMission.type_operation == 0" > visé </span>
                      <span v-else-if="historiqueMission.type_operation == 1" >Differé</span>
-                     <span v-else >Rejeté </span>
+                     <span v-else-if="historiqueMission.type_operation == 2">Rejeté </span>
+                     <span v-else>En attente</span>
    
                       </td>
 
                   <td @dblclick="afficherModalModifierHistoriqueMission(index)">
-                      {{formaterDate(historiqueMission.date_operation) || 'Non renseigné'}}</td>
+                      {{formaterDate(historiqueMission.date_mission) || 'Non renseigné'}}</td>
 
                         <td @dblclick="afficherModalModifierHistoriqueMission(index)">
-                      {{historiqueMission.motif || 'Non renseigné'}}</td>
+                      {{historiqueMission.objet || 'Non renseigné'}}</td>
 
                         <td @dblclick="afficherModalModifierHistoriqueMission(index)">
-                      {{historiqueMission.observation || 'Non renseigné'}}</td>
+                      {{historiqueMission.type_mission || 'Non renseigné'}}</td>
                    
                   <td>
 
@@ -450,11 +456,11 @@
                 </tr>
               </tbody>
             </table>
-            <div v-if="listeHistoriqueDeTousMissionsEnAttente.length">    
+            <div v-if="total_mission_attente.length">    
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucune  mission Visé </h6>
+                <h6 style="color:red;">Aucune  mission en attente</h6>
               </div>
             </div>
           </div>
@@ -462,7 +468,7 @@
       </div>
               </div>
             </div>
-            </div> -->
+            </div>
   <!-- fin deuxieme tableau  -->
 
 
@@ -486,7 +492,8 @@
                                               name ="Liste des missions"
                                               worksheet = "Missions"
                                             :data="historiques_missions">
-                      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+                                           <i title="Exporter en excel" class="icon-table">
+                                                 Exporter en excel</i>
 
                                                  </download-excel> 
                                      </div> <br>
@@ -512,7 +519,7 @@
               </thead>
               <tbody>
                 <tr class="odd gradeX" v-for="(historiqueMission, index) in 
-                historiqueVise"
+                total_mission_vises"
                  :key="historiqueMission.id">
 
                   <td  @dblclick="afficherModalModifierHistoriqueMission(index)" >
@@ -533,7 +540,7 @@
                       {{historiqueMission.observation || 'Non renseigné'}}</td>
 
                         <td @dblclick="afficherModalModifierHistoriqueMission(index)">
-                      {{historiqueMission.objetMission.objet || 'Non renseigné'}}</td>
+                      {{historiqueMission.objet || 'Non renseigné'}}</td>
                    
                   <td>
 
@@ -549,7 +556,7 @@
                 </tr>
               </tbody>
             </table>
-            <div v-if="historiqueVise.length">    
+            <div v-if="total_mission_vises.length">    
             </div>
             <div v-else>
               <div align="center">
@@ -584,7 +591,8 @@
                                               name ="Liste des missions"
                                               worksheet = "Missions"
                                             :data="historiques_missions">
-                      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+                                         <i title="Exporter en excel" class="icon-table">
+                                         Exporter en excel</i>
 
                                                  </download-excel> 
                                      </div> <br>
@@ -610,7 +618,7 @@
               </thead>
               <tbody >
                 <tr class="odd gradeX" v-for="(historiqueMission, index) in 
-                listeHistoriqueDiffere"
+                total_mission_differes"
                  :key="historiqueMission.id">
 
                   <td  @dblclick="afficherModalModifierHistoriqueMission(index)" >
@@ -631,7 +639,7 @@
                       {{historiqueMission.observation || 'Non renseigné'}}</td>
 
                       <td @dblclick="afficherModalModifierHistoriqueMission(index)">
-                        {{historiqueMission.objetMission.objet}}
+                        {{historiqueMission.objet}}
                       </td>
                    
                   <td>
@@ -644,11 +652,12 @@
              
             </div>
 
-                  </td>
+      
+                  </td>            
                 </tr>
               </tbody>
             </table>
-            <div v-if="listeHistoriqueDiffere.length">    
+            <div v-if="total_mission_differes.length">    
             </div>
             <div v-else>
               <div align="center">
@@ -669,8 +678,6 @@
 
     <!--- debut  quatrieme tableau  --->
 
-
-         
                         <div id="tab5" class="tab-pane">
                            <div class="container-fluid">
                                       <div class="row-fluid">
@@ -685,7 +692,8 @@
                                               name ="Liste des missions"
                                               worksheet = "Missions"
                                             :data="historiques_missions">
-                      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+                                      <i title="Exporter en excel" class="icon-table"> 
+                                         Exporter en excel</i>
 
                                                  </download-excel> 
                                      </div> <br>
@@ -711,7 +719,7 @@
               </thead>
               <tbody >
                 <tr class="odd gradeX" v-for="(historiqueMission, index) in 
-                listeHistoriqueDeTousMissionRejete"
+                total_mission_rejetes"
                  :key="historiqueMission.id">
 
                   <td  @dblclick="afficherModalModifierHistoriqueMission(index)" >
@@ -733,7 +741,7 @@
 
                       <td @dblclick="afficherModalModifierHistoriqueMission(index)">
 
-                        {{historiqueMission.objetMission.objet}}
+                        {{historiqueMission.objet}}
                       </td>
                    
                   <td>
@@ -750,7 +758,7 @@
                 </tr>
               </tbody>
             </table>
-            <div v-if="listeHistoriqueDeTousMissionRejete.length">    
+            <div v-if="total_mission_rejetes.length">    
             </div>
             <div v-else>
               <div align="center">
@@ -763,7 +771,9 @@
               </div>
             </div>
             </div>
+
   <!---- fin quatrieme tableau ---->
+  
                 </div>
 
  
@@ -897,9 +907,7 @@
    <fab :actions="fabActions"
            main-icon="apps"
        @cache="AllerAPageAjouterMission"
-        bg-color="green"
-
-  ></fab>  
+        bg-color="green"></fab>  
 
 
 
@@ -970,7 +978,8 @@ export default {
 
     search:"",
     
-    historique:""
+    historique:"",
+    filter: "all"
 
     };
   },
@@ -1024,33 +1033,34 @@ export default {
    
 //  listeHistoriqueDeTousMissionsEnAttente(){
   
-// return this.historiques_missions.filter( element => element.type_operation != 2 )
+// return this.getHistoriqueMissionpersonnaliser.filter( element => element.type_operation !=0 ||element.type_operation !=1 || element.type_operation !=2   )
+
 //  },
 
 
-  historiqueVise(){
-   return this.getHistoriqueMissionpersonnaliser.filter(element => element.type_operation == 0)
+  // historiqueVise(){
+  //  return this.getHistoriqueMissionpersonnaliser.filter(element => element.type_operation == 0)
     
-  },
+  // },
 
-  listeHistoriqueDiffere(){
-    return this.getHistoriqueMissionpersonnaliser.filter(element => element.type_operation == 1 )
-  },
+  // listeHistoriqueDiffere(){
+  //   return this.getHistoriqueMissionpersonnaliser.filter(element => element.type_operation == 1 )
+  // },
 
-listeHistoriqueDeTousMissionRejete(){
-  return this.getHistoriqueMissionpersonnaliser.filter(element => element.type_operation == 2)
-},
+// listeHistoriqueDeTousMissionRejete(){
+//   return this.getHistoriqueMissionpersonnaliser.filter(element => element.type_operation == 2)
+// },
     
 // methode pour maper notre guetter
    ...mapGetters('suivi_controle_budgetaire', ["categories_missions" ,"getMissionPersonnaliser", "missions", "historiques_missions","getHistoriqueMissionpersonnaliser",
      
-    "nombreTotalDeTouteMissions",
-      // "calculDuCoutTotal",
-      "dureeMoyenneDeTouteLesMissions",
-       "coutMoyenDeBilletAvionDeMissions",
-      "tauxDossierRejetMissions",
+    // "nombreTotalDeTouteMissions",
+     
+    //   "dureeMoyenneDeTouteLesMissions",
+    //    "coutMoyenDeBilletAvionDeMissions",
+    //   "tauxDossierRejetMissions",
     
-      // "coutMoyenDeMissions"
+    
   
    
     ]) ,
@@ -1065,11 +1075,48 @@ listeHistoriqueDeTousMissionRejete(){
   //    return this.searchFormat(this.searchAnneeBudgetaire, this.searchUA, this.searchActeurDepense)
   //  },
     // methode pour trier un item
-           localisationsFiltre(){
+
+    //  listes des propriétes calculées de nombre pour les filtres
+    total_mission_attente(){
+          return this.getMissionPersonnaliser.filter(mis =>  !mis.historique_missions.length).length
+
+    },
+      total_mission_vises(){
+        return this.getMissionPersonnaliser.filter(mis => mis.historique_missions.length && mis.historique_missions[0].type_operation == 0).length
+
+    },
+      total_mission_differes(){
+        return this.getMissionPersonnaliser.filter(mis => mis.historique_missions.length && mis.historique_missions[0].type_operation == 1).length
+
+    },
+      total_mission_rejetes(){
+         return this.getMissionPersonnaliser.filter(mis => mis.historique_missions.length && mis.historique_missions[0].type_operation == 2).length
+
+    },
+
+    // fin
+
+
+
+
+      filtrerResultatMissions(){
+        if(this.filter == "attente"){
+          return this.getMissionPersonnaliser.filter(mis =>  !mis.historique_missions.length)
+        }else if(this.filter == "visés"){
+          return this.getMissionPersonnaliser.filter(mis => mis.historique_missions.length && mis.historique_missions[0].type_operation == 0)
+        }else if(this.filter == "differés"){
+          return this.getMissionPersonnaliser.filter(mis => mis.historique_missions.length && mis.historique_missions[0].type_operation == 1)
+        }else if(this.filter == "rejetés"){
+          return this.getMissionPersonnaliser.filter(mis => mis.historique_missions.length && mis.historique_missions[0].type_operation == 2)
+        }
+        return this.getMissionPersonnaliser
+
+      },
+           missionFiltre(){
 
      const searchTerm = this.search.toLowerCase();
 
-return this.getMissionPersonnaliser.filter((item) => {
+    return this.filtrerResultatMissions.filter((item) => {
   
      return item.objet.toLowerCase().includes(searchTerm) 
      || item.type_mission.toLowerCase().includes(searchTerm)
@@ -1152,7 +1199,7 @@ coutMoyenParUA(){
      var MontantDeMissionParUA = this.coutTotalParUA(ua_id);
     var NombreDeMissionParUA  = this.NombreDeMissionParUA(ua_id);
       var cout = MontantDeMissionParUA / NombreDeMissionParUA 
-      if(isNaN(cout)) return 0
+      if(isNaN(cout)) return null
       return cout
     }
 
@@ -1366,7 +1413,8 @@ return mission => {
 
 // afficher modal modifier mission
 afficherModalModifierMission(id){
-
+let mission = this.missions.find(miss => miss.id == id)
+if(mission.historique_missions.length && mission.historique_missions[0].type_operation == 2) return;
  this.$router.push({
    path:"/modifier-mission/" + id
  });

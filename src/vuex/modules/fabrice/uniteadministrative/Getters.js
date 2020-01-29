@@ -208,9 +208,63 @@ export const getPersonnaliseBudgetGeneralParBienService = (
 
 
 
+export const affichePersonnel = state =>
+  state.budgetGeneral.filter(
+    affichenaturedep => affichenaturedep.testgdenature == 1
+  );
 
 
-
+export const getPersonnaliseBudgetGeneralParPersonnel = (
+  state,
+  getters,
+  rootState,
+  rootGetters
+) =>
+  getters.affichePersonnel.map(element => {
+    if (
+      element.gdenature_id !== null &&
+      element.program_id !== null &&
+      element.section_id !== null &&
+      element.ua_id !== null &&
+      element.typeua_id !== null &&
+      element.fonctionnel_id !== null &&
+      element.economique_id !== null &&
+      element.action_id !== null &&
+      element.activite_id !== null
+    ) {
+      element = {
+        ...element,
+        afficheGdeNature: rootGetters[
+          "parametreGenerauxAdministratif/grandes_natures"
+        ].find(Gdenat => Gdenat.id == element.gdenature_id),
+        afficheSection: rootGetters["parametreGenerauxAdministratif/sections"].find(
+          Secti => Secti.id == element.section_id
+        ),
+        afficheUA: rootGetters[
+          "uniteadministrative/uniteAdministratives"
+        ].find(uniteA => uniteA.id == element.ua_id),
+        affichetypeua: rootGetters[
+          "parametreGenerauxAdministratif/type_Unite_admins"
+        ].find(typeUadmin => typeUadmin.id == element.typeua_id),
+        afficheProgramme: rootGetters[
+          "parametreGenerauxAdministratif/plans_programmes"
+        ].find(planProg => planProg.id == element.program_id),
+        afficheFonctionnel: rootGetters[
+          "parametreGenerauxFonctionnelle/plans_fonctionnels"
+        ].find(planfonct => planfonct.id == element.fonctionnel_id),
+        afficheEconomique: rootGetters[
+          "parametreGenerauxBudgetaire/plans_budgetaires"
+        ].find(planEconomiq => planEconomiq.id == element.economique_id),
+        afficheAction: rootGetters[
+          "parametreGenerauxActivite/plans_activites"
+        ].find(planaction => planaction.id == element.action_id),
+        afficheActivite: rootGetters[
+          "parametreGenerauxActivite/plans_activites"
+        ].find(planactivite => planactivite.id == element.activite_id)
+      };
+    }
+    return element;
+  });
 
 
 

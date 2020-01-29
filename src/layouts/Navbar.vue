@@ -289,6 +289,7 @@ this.getLettreInvitation()
     this.getAnalyseDMP()
     this.getAnoDMPBailleur()
     this.getObservationBailleur()
+    this.getFacture()
       /**
        * fin missions
        */

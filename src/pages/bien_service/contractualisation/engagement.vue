@@ -1,5 +1,5 @@
 <template>
-    
+  
         <div class="container-fluid">
 
 
@@ -82,22 +82,40 @@
       <div class="modal-body">
         <form class="form-horizontal" >
           <div class="control-group">
-                            <label class="control-label">Motif CF </label>
+                            <label class="control-label">Décision CF </label>
                             <div class="controls">
-                              <select v-model="editEngagement.motif">
-                                <option value="0">En attente</option>
-                              <option value="1">Valider</option>
+                              <select v-model="editEngagement.decision_cf">
+                                <option value="0">Attente</option>
+                              <option value="1">Viser</option>
                              <option value="2">Différer</option>
+                             <option value="3">Réjeter</option>
                             
     
     </select>
                            
                             </div>
                           </div>
+                            <div class="control-group">
+                            <label class="control-label">Motif CF </label>
+                            <div class="controls">
+                              <select v-model="editEngagement.motif">
+                             
+                                 <option
+                                  v-for="gpeua in motifDecisions"
+                                  :key="gpeua.id"
+                                  :value="gpeua.id"
+                                >{{gpeua.libelle}}</option>
+                               
+                               
+                              </select>
+                           
+                            </div>
+                          </div>
                           <div class="control-group">
                             <label class="control-label">Observation CF</label>
                             <div class="controls">
-                              <input type="text" class="span"  v-model="editEngagement.observation"/>
+                              <textarea  class="span" row = "6" v-model="editEngagement.observation">
+                              </textarea>
                             </div>
                           </div>
                            <div class="control-group">
@@ -143,15 +161,21 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1">Budget General</a>
+                        <a data-toggle="tab" href="#tab1">INFORMATION</a>
                       </li>
                       <li>
-                        <a data-toggle="tab" href="#tab2">Type Procedure</a>
+                        <a data-toggle="tab" href="#tab2">TYPE ENGAGEMENT DIRECT</a>
                       </li>
                       
-                       <li>
-                        <a data-toggle="tab" href="#tab30">Valeur Calculer</a>
+                      <li>
+                        <a data-toggle="tab" href="#tab12">INFO FOURNISSEUR / IMPUTATION BUDGETAIRE</a>
                       </li>
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab32">IMPUTATION BUDGETAIRE</a>
+                      </li> -->
+                       <!-- <li>
+                        <a data-toggle="tab" href="#2">Valeur Calculer</a>
+                      </li> -->
                     </ul>
                   </div>
                   <div class="widget-content tab-content tailfenet">
@@ -322,38 +346,7 @@
                         
                        
                       </tr>
-                     <tr>
-                        
-                        
-                       
-                        
-                        <td colspan="2">
-                           <div class="control-group">
-                            <label class="control-label">Ligne Budgetaire</label>
-                            <div class="controls">
-                              <select v-model="formData.ligne_budgetaire_id" class="span14">
-                                <option
-                                  v-for="fam in ligneBudgetaire(detail_marche.id)"
-                                  :key="fam.id"
-                                  :value="fam.afficheEconomique.id"
-                                >{{fam.afficheEconomique.code}}-{{fam.afficheEconomique.libelle}}</option>
-                              </select>
-                              
-                            </div>
-                          </div>
-                        </td>
-                        <td colspan="2">
-                          <div class="control-group">
-                            <label class="control-label">Code Budgetaire</label>
-                            <div class="controls">
-                              <input type="text" class="span12" :value="CodeBudgetaire" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                       
-              
-                       
-                      </tr>
+                  
                     </div>
                     <!--ongle descriptif-->
                     <div id="tab2" class="tab-pane">
@@ -384,9 +377,9 @@
                         </td>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Type d'engagement Direct</label>
+                            <label class="control-label">Type d'engagement</label>
                             <div class="controls">
-                              <select v-model="formData.type_engagement_id" :readOnly="veifEquipementExist">
+                              <select v-model="formData.type_engagement_id" :disabled="veifEquipementExist">
                                   <option value="0">Marche</option>
                                     <option value="1">Régie d'avances - reservation des crédits</option>
                                        <option value="2">Régularisation d'ordre de paiement (OP)</option>
@@ -411,8 +404,93 @@
                               </div>
                             </div>
                           </td>
+                         <td>
+                            <div class="control-group">
+                              <label class="control-label">Numero OP/AT</label>
+                              <div class="controls">
+                                <input
+                                  type="text"
+                                  class="span"
+                                  v-model="formData.piece_justificative"
+                                />
+                              </div>
+                            </div>
+                          </td>
+                
+                         
+                      </tr>
+                       
+                     
+                      <tr>
                         
-                       <td>
+                       <input
+                    type="hidden"
+                   :value="montantCumuler"
+                    
+                    class="span"
+                    
+                  />
+                      <input
+                    type="hidden"
+                   :value="montantCumulerModifier"
+                    
+                    class="span"
+                    
+                  />
+                        
+                          
+                        
+                       
+                        
+                       
+                        <!-- <td>
+                             <div class="control-group">
+                            <label class="control-label">Bailleur</label>
+                            <div class="controls">
+                              <input type="text" class="span" v-model="formData.Bailleur" />
+                            </div>
+                          </div>
+                        </td> -->
+                       
+                      </tr>
+                      <tr>
+                         
+                         
+                      
+                        
+                       
+                       
+                      </tr>
+                      <tr>
+                            <td colspan=3>
+                         <div class="control-group">
+                            <label class="control-label">Autre type engagement</label>
+                            <div class="controls">
+                              <input type="text" class="span" v-model="formData.objet_depense" :readonly="veifautreengagement"/>
+                            </div>
+                          </div>
+                        </td>
+                           <td>
+                         <div class="control-group">
+                            <label class="control-label">Date de reception dossier</label>
+                            <div class="controls">
+                              <input type="date" class="span" v-model="formData.date_reception_cf"/>
+                            </div>
+                          </div>
+                        </td>
+                             
+                      </tr>
+                    </div>
+                    <!--ongle 3 -->
+
+
+<!--ongle descriptif-->
+                    <div id="tab12" class="tab-pane">
+                      
+
+                      
+                        <tr>
+                         <td>
                          <div class="control-group">
                             <label class="control-label">Mode de paiement</label>
                             <div class="controls">
@@ -423,18 +501,14 @@
                                        <option value="2">Chèque Spécial Enregistrement</option>
                                     <option value="3">Virement</option>
                                      <option value="4">Chèque Spécial Douanes</option>
-                                      <option value="4">Paiement direct par bailleur de fonds</option>
-                                       <option value="4">Autres</option>
+                                      <option value="5">Paiement direct par bailleur de fonds</option>
+                                       <option value="6">Autres</option>
                                
                               </select>
                               
                             </div>
                           </div>
                         </td>
-                         
-                      </tr>
-                        <tr>
-                         
                          
                        <td>
                          <div class="control-group">
@@ -475,14 +549,7 @@
                             </div>
                           </div>
                         </td>
-                        <td>
-                             <div class="control-group">
-                            <label class="control-label">Bailleur</label>
-                            <div class="controls">
-                              <input type="text" class="span" v-model="formData.bailler_id" />
-                            </div>
-                          </div>
-                        </td>
+                       
                        
                       </tr>
                      
@@ -540,51 +607,29 @@
                               <label class="control-label">piece justificative</label>
                               <div class="controls">
                                 <input
-                                  type="text"
+                                  type="file"
                                   class="span"
-                                  v-model="formData.piece_justificative"
+                                 
                                 />
                               </div>
                             </div>
                           </td>
-                             
+                             <td>
+                             <div class="control-group">
+                            <label class="control-label">Bailleur</label>
+                            
+                             <select v-model="formData.bailler_id" class="span14">
+                                <option
+                                  v-for="fam in sources_financements"
+                                  :key="fam.id"
+                                  :value="fam.id"
+                                >{{fam.libelle}}</option>
+                              </select>
+                          </div>
+                        </td> 
                       </tr>
-                    </div>
-                    <!--ongle 3 -->
-                    <div id="tab30" class="tab-pane">
-                       <tr>
-                           <td>
-                <div class="control-group">
-                  <label class="control-label">Montant du marché</label>
-                
-                  <div class="controls">
-                    <input
-                      type="number"
-                    :value="MontantMarche"
-                      class="span"
-                      placeholder="Dotation Initiale"
-                      readonly
-                    />
-                  </div>
-                  </div>
-              </td>
-                          <td>
-                <div class="control-group">
-                  <label class="control-label">Dotation Initiale</label>
-                
-                  <div class="controls">
-                    <input
-                      type="number"
-                    :value="MontantBudgetaire"
-                      class="span"
-                      placeholder="Dotation Initiale"
-                      
-                    />
-                  </div>
-                  </div>
-              </td>
-                         
-                         <td>
+                      <tr>
+                       <td>
                          <div class="control-group">
                             <label class="control-label">Total général</label>
                             <div class="controls">
@@ -617,168 +662,75 @@
                             </div>
                           </div>
                         </td>
-                        <tr>
-                            <td>
-                             <div class="control-group">
-                            <label class="control-label">Montant a paye</label>
-                            <div class="controls">
-                              <input type="number" class="span" :value="montantResteApaye" />
-                            </div>
-                          </div>
-                        </td>
-                        
-                        </tr>
-                             <!-- <td>
-                <div class="control-group">
-                  <label class="control-label">Montant du marché</label>
-                
-                  <div class="controls">
-                    <input
-                      type="number"
-                    :value="MontantMarche"
-                      class="span"
-                      placeholder="Dotation Initiale"
-                      
-                    />
-                  </div>
-                  </div>
-              </td> -->
-                    
-                    </div>
-                       <!--ongle descriptif-->
-                    <!-- <div id="tab3" class="tab-pane"> -->
-                      
-
-                      
-                     
-                      <!-- <tr>
-                         
-                         
-                      
-                        
-                          
-                       
-                         
-                       
-                        <td>
-                         <div class="control-group">
-                            <label class="control-label">Trésor</label>
-                            <div class="controls">
-                              <input type="text" class="span" v-model="formData.montant_tresor" />
-                            </div>
-                          </div>
-                        </td>
-                          <td>
-                          <div class="control-group">
-                            <label class="control-label">Don</label>
-                            <div class="controls">
-                              <input type="text" class="span" v-model="formData.montant_don" />
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                             <div class="control-group">
-                            <label class="control-label">Emprunt</label>
-                            <div class="controls">
-                              <input type="text" class="span" v-model="formData.montant_emprunt" />
-                            </div>
-                          </div>
-                        </td>
-                       
-                          <td>
-                        <div class="control-group">
-                            <label class="control-label">Total général</label>
-                            <div class="controls">
-                              <input type="text" class="span" :value="sommeMontant" readonly />
-                            </div>
-                          </div>
-                        </td>
                       </tr>
-                       <tr>
- 
-                      </tr> -->
-                       <!-- <tr>
-                         
-                         
-                      
+                        <tr>
                         
-                          
-                         <td>
-                         <div class="control-group">
-                            <label class="control-label">Numero cc</label>
+                        
+                       
+                        
+                        <td colspan="2">
+                           <div class="control-group">
+                            <label class="control-label">Ligne Budgetaire</label>
                             <div class="controls">
-                              <select v-model="formData.numero_cc_id">
-                                <option value>Sélectionner</option>
-                               
-                               
+                              <select v-model="formData.ligne_budgetaire_id" class="span11">
+                                <option
+                                  v-for="fam in ligneBudgetaire(detail_marche.id)"
+                                  :key="fam.id"
+                                  :value="fam.afficheEconomique.id"
+                                >{{fam.afficheEconomique.code}}-{{fam.afficheEconomique.libelle}}</option>
                               </select>
                               
                             </div>
                           </div>
                         </td>
+                        <td colspan="2">
+                          <div class="control-group">
+                            <label class="control-label">Code Budgetaire</label>
+                            <div class="controls">
+                              <input type="text" class="span11" :value="CodeBudgetaire" readonly/>
+                            </div>
+                          </div>
+                        </td>
                        
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Nom entreprise</label>
-                            <div class="controls">
-                              <input type="text" class="span" v-model="formData.nom_entreprise" />
-                            </div>
-                          </div>
-                        </td>
-                          <td>
-                          <div class="control-group">
-                            <label class="control-label">Adresse</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                class="span"
-                                placeholder="Saisir adresse_entreprise"
-                                v-model="formData.adresse_entreprise"
-                              />
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                             <div class="control-group">
-                            <label class="control-label">Bailleur</label>
-                            <div class="controls">
-                              <input type="text" class="span" v-model="formData.Bailleur" />
-                            </div>
-                          </div>
-                        </td>
+              
                        
                       </tr>
-                     
-                      <tr>
-                         
-                         
-                      
-                        
-                          
-                         <td colspan=4>
-                         <div class="control-group">
-                            <label class="control-label">Objet de la dépense</label>
-                            <div class="controls">
-                              <input type="text" class="span" v-model="formData.objet_depense" />
-                            </div>
-                          </div>
-                        </td> -->
-                       
-                        
-                       
-                        <!-- <td>
-                             <div class="control-group">
-                            <label class="control-label">Bailleur</label>
-                            <div class="controls">
-                              <input type="text" class="span" v-model="formData.Bailleur" />
-                            </div>
-                          </div>
-                        </td> -->
-                       
-                      <!-- </tr> -->
-                    <!-- </div> -->
+                    </div>
                     <!--ongle 3 -->
-                    <!-- </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
+                       
                   </div>
                   <br />
                   <div align="right">
@@ -2099,15 +2051,22 @@
                     <td @dblclick="afficherModalModifierEngagement(index)">{{ Engage.afficheLigneBudget.code || 'Non renseigné'}}-{{ Engage.afficheLigneBudget.libelle || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierEngagement(index)">{{formatageSomme(parseFloat(Engage.total_general)) || 0}}</td>
                   <td>
-                        <button v-if="Engage.motif == 1"  class="btn  btn-success" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                        <button v-if="Engage.decision_cf == 1"  class="btn  btn-success" @click="afficherModalModifierMotifDemandeservice(index)" >                        
                      
-                      <span    >Valider</span>
+                      <span    >Viser</span>
                       
                       </button>
-                       <button v-else-if="Engage.motif == 2" class="btn  btn-danger" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                       <button v-else-if="Engage.decision_cf == 2" class="btn  btn-warning" @click="afficherModalModifierMotifDemandeservice(index)" >                        
                      
                       
                        <span  >Différer</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="Engage.decision_cf == 3" class="btn  btn-danger" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                     
+                      
+                       <span  >Réjeter</span>
                       
                     
                       </button>
@@ -2179,14 +2138,14 @@
                     :key="Manda.id"
                   >
                    
-                    <td @dblclick="afficherModalModifierEngagement(index)">{{Manda.num_bordereau || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierEngagement(index)">{{Manda.ua_id || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierEngagement(index)">{{Manda.section_id || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierEngagement(index)">{{Manda.num_engagement || 'Non renseigné'}}</td>
-                   <td @dblclick="afficherModalModifierEngagement(index)">{{Manda.num_mandat || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierMandat(index)">{{Manda.num_bordereau || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierMandat(index)">{{Manda.ua_id || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierMandat(index)">{{Manda.section_id || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierMandat(index)">{{Manda.num_engagement || 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifierMandat(index)">{{Manda.num_mandat || 'Non renseigné'}}</td>
                    
-                    <td @dblclick="afficherModalModifierEngagement(index)">{{formatageSomme(parseFloat(Manda.montant_mandat))|| 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierEngagement(index)">{{formaterDate(Manda.date_reception_cf) || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierMandat(index)">{{formatageSomme(parseFloat(Manda.montant_mandat))|| 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierMandat(index)">{{formaterDate(Manda.date_reception_cf) || 'Non renseigné'}}</td>
                                  <td>
                         <button class="btn btn" @click="afficherModalModifierMotifMandat(index)" >                        
                      
@@ -2198,7 +2157,7 @@
                     
                     </td>
                     
-                    <td @dblclick="afficherModalModifierEngagement(index)">{{formaterDate(Manda.date_val_mandat) || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierMandat(index)">{{formaterDate(Manda.date_val_mandat) || 'Non renseigné'}}</td>
                        <td>
                         
                      
@@ -2494,13 +2453,20 @@
                 <div class="control-group">
                   <label class="control-label">Num engagement</label>
                   <div class="controls">
-                    <select v-model="editMandat.num_engagement" >
+                    <!-- <select v-model="editMandat.num_engagement" >
                       <option
                                   v-for="fam in getEngagementPersonnaliser1"
                                   :key="fam.id"
                                   :value="fam.id"
                                 >{{fam.numero_engage}}</option>
-                    </select>
+                    </select> -->
+                       <input
+                type="text"
+                :value="editMandat.num_engagement"
+                class="span"
+                
+                readonly
+              />
                   </div>
                 </div>
               </td>
@@ -2511,13 +2477,13 @@
                   <div class="controls">
                      <input
                 type="text"
-                :value="AfficherUniteModifier"
+                :value="editMandat.ua_id"
                 class="span"
                 
                 readonly
               />
                       <input
-                type="text"
+                type="hidden"
                 :value="numeroEngage"
                 class="span"
                 
@@ -2534,7 +2500,7 @@
                   <div class="controls">
                      <input
                 type="text"
-              :value="AfficherSectionModifier"
+              :value="editMandat.section_id"
                 class="span"
                
                 readonly
@@ -2567,13 +2533,13 @@
             <div class="controls">
               <input
                 type="text"
-              :value="MontantMandatModifier"
+              :value="editMandat.montant_mandat"
                 class="span"
                readonly
             
               />
                <input
-                type="text"
+                type="hidden"
               :value="idBudget"
                 class="span"
                readonly
@@ -2583,26 +2549,14 @@
           </div>
               </td>
            
-               <!-- <td>
-                 <div class="control-group">
-            <label class="control-label">Date validation mandat</label>
-            <div class="controls">
-              <input
-                type="date"
-                v-model="editMandat.date_val_mandat"
-                class="span"
-                placeholder="Saisir le libelle_type"
-              />
-            </div>
-          </div>
-              </td> -->
+             
                <td>
                  <div class="control-group">
             <label class="control-label">Date reception CF</label>
             <div class="controls">
               <input
                 type="date"
-               :value="dateReceptionModifier"
+               :value="editMandat.date_reception_cf	"
                 class="span"
               
                
@@ -2611,28 +2565,10 @@
           </div>
               </td>
             </tr>
-            <!-- <tr>
-               
-              
-              <td>
-               <div class="control-group">
-            <label class="control-label">Date visa CF</label>
-            <div class="controls">
-              <input
-                type="date"
-                v-model="editMandat.objet"
-                class="span"
-                placeholder="Saisir le libelle_type"
-              />
-            </div>
-          </div>
-              </td>
-           
-            </tr> -->
+         
           
         </table>
-      </div>
-      <div class="modal-footer">
+        <div class="modal-footer">
         <a
          @click.prevent="modifierModalMandatLocal(editMandat)"
           class="btn btn-primary"
@@ -2641,6 +2577,8 @@
         >Modifier</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
+      </div>
+      
     </div>
     <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
 
@@ -2687,7 +2625,8 @@
        montant_tresor:"0",
 montant_don:"0",
 montant_emprunt:"0",
-type_procedure_id:""
+type_procedure_id:"",
+type_engagement_id:""
       },
        editEngagement: {
        
@@ -2719,7 +2658,7 @@ created() {
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
-                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
+                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats"]),
 
                 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
@@ -2756,6 +2695,7 @@ created() {
       // "sections"
        
     ]),
+ ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
   //   budgetLigne(){
   // return codebudget =>{
@@ -2767,67 +2707,11 @@ created() {
   //   },
 
 
-veifEquipementExist() {
-      return this.formData.type_procedure_id == 2;
-    },
+
 
  
 
 
-dateReceptionModifier() {
-      
-      const norme = this.getEngagementPersonnaliser1.find(normeEquipe => normeEquipe.id == this.editMandat.num_engagement);
-
-      if (norme) {
-        return norme.date_motif;
-      }
-      return ""
-    },
- numeroEngageModifier() {
-      
-      const norme = this.getEngagementPersonnaliser1.find(normeEquipe => normeEquipe.id == this.editMandat.num_engagement);
-
-      if (norme) {
-        return norme.numero_engage;
-      }
-      return ""
-    },
- AfficherUniteModifier() {
-      
-      const norme = this.getEngagementPersonnaliser1.find(normeEquipe => normeEquipe.id == this.editMandat.num_engagement);
-
-      if (norme) {
-        return norme.afficheUa.libelle;
-      }
-      return ""
-    },
-AfficherSectionModifier() {
-      
-      const norme = this.getEngagementPersonnaliser1.find(normeEquipe => normeEquipe.id == this.editMandat.num_engagement);
-
-      if (norme) {
-        return norme.afficheSection.code_section + norme.afficheSection.nom_section;
-      }
-      return ""
-    },
-MontantMandatModifier() {
-      
-      const norme = this.getEngagementPersonnaliser1.find(normeEquipe => normeEquipe.id == this.editMandat.num_engagement);
-
-      if (norme) {
-        return norme.total_general ;
-      }
-      return ""
-    },
-idBudgetModifier() {
-      
-      const norme = this.getEngagementPersonnaliser1.find(normeEquipe => normeEquipe.id == this.editMandat.num_engagement);
-
-      if (norme) {
-        return norme.ligne_id ;
-      }
-      return ""
-    },
 
 
 
@@ -2842,68 +2726,6 @@ idBudgetModifier() {
 
 
 
-
-
-
-
-
-
-dateReception() {
-      
-      const norme = this.getEngagementPersonnaliser1.find(normeEquipe => normeEquipe.id == this.formData.num_engagement);
-
-      if (norme) {
-        return norme.date_motif;
-      }
-      return ""
-    },
- numeroEngage() {
-      
-      const norme = this.getEngagementPersonnaliser1.find(normeEquipe => normeEquipe.id == this.formData.num_engagement);
-
-      if (norme) {
-        return norme.numero_engage;
-      }
-      return ""
-    },
- AfficherUnite() {
-      
-      const norme = this.getEngagementPersonnaliser1.find(normeEquipe => normeEquipe.id == this.formData.num_engagement);
-
-      if (norme) {
-        return norme.afficheUa.libelle;
-      }
-      return ""
-    },
-AfficherSection() {
-      
-      const norme = this.getEngagementPersonnaliser1.find(normeEquipe => normeEquipe.id == this.formData.num_engagement);
-
-      if (norme) {
-        return norme.afficheSection.code_section + norme.afficheSection.nom_section;
-      }
-      return ""
-    },
-MontantMandat() {
-      
-      const norme = this.getEngagementPersonnaliser1.find(normeEquipe => normeEquipe.id == this.formData.num_engagement);
-
-      if (norme) {
-        return norme.total_general ;
-      }
-      return ""
-    },
-
-
-idBudget() {
-      
-      const norme = this.getEngagementPersonnaliser1.find(normeEquipe => normeEquipe.id == this.formData.num_engagement);
-
-      if (norme) {
-        return norme.ligne_id ;
-      }
-      return ""
-    },
 
 
 
@@ -2959,7 +2781,12 @@ affichetresor2() {
 //       return parseFloat(val).toFixed(2);
 //     },
 
-
+veifEquipementExist() {
+      return this.formData.type_procedure_id !== "0";
+    },
+    veifautreengagement() {
+      return this.formData.type_engagement_id !== "4";
+    },
 
 
 
@@ -3510,6 +3337,14 @@ afficherModalModifierMotifDemandeservice(index) {
        this.editEngagement = this.getEngagementPersonnaliser[index];
     },
 
+afficherModalModifierMandat(index) {
+      this.$("#ModifierModalMandat").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+       this.editMandat = this.afficheMandatMarcheTableau(this.detail_marche.id)[index];
+    },
 
 afficherModalNouveauEngagement(index) {
       this.$("#nouveauEngagement").modal({

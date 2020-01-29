@@ -63,7 +63,7 @@
          <tr>
                <td>
                   <div class="control-group">
-                                                    <label class="control-label">N°de registe de commerce:</label>
+                                                    <label class="control-label">Numero de registe de commerce:</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Numero de registe de commerce" v-model="formData.numero_rc">
                                                     </div>
