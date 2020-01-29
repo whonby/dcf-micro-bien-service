@@ -1,3 +1,6 @@
+export const pays = state => state.pays
+export const villes = state => state.villes
+export const communes = state => state.communes
 export const typeCandidat = state => state.typeCandidat
 export const typeAppelOffre = state => state.typeAppelOffre
 export const prestations = state => state.prestations.sort((a, b) => (a.code > b.code) ? 1 : -1)
@@ -80,7 +83,7 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
         0
     );
 
-printMarcheNonAttribue
+
 
 
 

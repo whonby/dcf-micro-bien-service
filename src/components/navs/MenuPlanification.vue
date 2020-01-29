@@ -17,6 +17,24 @@
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
+           <li>
+            <router-link :to="{name: 'pays'}" tag="a">
+              <i class="icon-bar-chart"></i>
+           Pays
+            </router-link>
+          </li>
+           <li>
+            <router-link :to="{name: 'ville'}" tag="a">
+              <i class="icon-bar-chart"></i>
+           Ville
+            </router-link>
+          </li>
+           <li>
+            <router-link :to="{name: 'commune'}" tag="a">
+              <i class="icon-bar-chart"></i>
+           Commune
+            </router-link>
+          </li>
              <li>
             <router-link :to="{name: 'typeCandidat'}" tag="a">
               <i class="icon-bar-chart"></i>

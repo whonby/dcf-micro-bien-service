@@ -1704,3 +1704,98 @@ export const MODIFIER_TYPE_CANDADIT = (state, elementModif) => {
 export const SUPPRIMER_TYPE_CANDADIT = (state, id) => {
     state.typeCandidat = state.typeCandidat.filter(prest => prest.id != id)
 }
+
+
+
+// get all type text juridique
+export const GET_ALL_PAYS = (state, tableau_type_text_juridique) =>{
+    state.pays = tableau_type_text_juridique
+}
+
+// add * type text juridique
+
+export const AJOUTER_PAYS = (state, elementAjouter) => {
+    state.pays.unshift(elementAjouter)
+}
+
+
+
+// update type text juridique
+export const MODIFIER_PAYS = (state, elementModif)=>{
+    state.pays = state.pays.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete type text juridique
+
+export const SUPPRIMER_PAYS = (state, id)=> {
+    state.pays = state.pays.filter(prest => prest.id !=id)
+}
+
+
+
+// get all type text juridique
+export const GET_ALL_VILLE = (state, tableau_type_text_juridique) => {
+    state.villes = tableau_type_text_juridique
+}
+
+// add * type text juridique
+
+export const AJOUTER_VILLE = (state, elementAjouter) => {
+    state.villes.unshift(elementAjouter)
+}
+
+
+
+// update type text juridique
+export const MODIFIER_VILLE = (state, elementModif) => {
+    state.villes = state.villes.map(response => {
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
+        }
+        return response
+    })
+}
+
+
+// delete type text juridique
+
+export const SUPPRIMER_VILLE = (state, id) => {
+    state.villes = state.villes.filter(prest => prest.id != id)
+}
+
+
+// get all type text juridique
+export const GET_ALL_COMMUNES = (state, tableau_type_text_juridique) => {
+    state.communes = tableau_type_text_juridique
+}
+
+// add * type text juridique
+
+export const AJOUTER_COMMUNES = (state, elementAjouter) => {
+    state.communes.unshift(elementAjouter)
+}
+
+
+
+// update type text juridique
+export const MODIFIER_COMMUNES = (state, elementModif) => {
+    state.communes = state.communes.map(response => {
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
+        }
+        return response
+    })
+}
+
+
+// delete type text juridique
+
+export const SUPPRIMER_COMMUNES = (state, id) => {
+    state.communes = state.communes.filter(prest => prest.id != id)
+}

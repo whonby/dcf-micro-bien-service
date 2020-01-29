@@ -388,25 +388,62 @@ export function supprimerEntreprise({commit}, id){
 
 }
 
-export function modifierEntreprise({commit}, formData){
-    this.$app.$loading(true)
-    axios.put('/update_entreprise' ,formData).then(response => {
-        this.$app.$notify({
-            title: 'success',
-            text: 'Modification effectuer',
-            type:"success"
+// export function modifierEntreprise({commit}, formData){
+//     this.$app.$loading(true)
+//     axios.put('/update_entreprise' ,formData.id).then(response => {
+//         this.$app.$notify({
+//             title: 'success',
+//             text: 'Modification effectuer',
+//             type:"success"
+//         });
+//         commit('MODIFIER_ENTREPRISE', response.data)
+//         this.$app.$loading(false)
+//     })
+//     //     .catch(error => {
+//     //     console.log(error)
+//     //     this.$app.$loading(false)
+//     //     this.$app.$notify({
+//     //         title: 'Erreur',
+//     //         text: "Erreur c'est produit lors de l'enregistrement",
+//     //         type:"error"
+//     //     });
+//     // })
+// }
+export function modifierEntreprise({ commit }, formData) {
+    asyncLoading(axios
+        .put("/update_entreprise/" + formData.id, {
+
+            numero_cc: formData.numero_cc,
+            numero_rc: formData.numero_rc,
+            raison_sociale: formData.raison_sociale,
+            sigle: formData.sigle,
+            secteur_activite_id: formData.secteur_activite_id,
+            activite_principale: formData.activite_principale,
+            pays: formData.pays,
+            ville: formData.ville,
+            forme_juridique: formData.forme_juridique,
+            centre_impot: formData.centre_impot,
+            regime_impossition: formData.regime_impossition,
+            capitale_sociale: formData.capitale_sociale,
+            immatriculation_cnps: formData.immatriculation_cnps,
+            date_enregistrement_cnps: formData.date_enregistrement_cnps,
+            telephone: formData.telephone,
+            email: formData.email,
+            nbre_travailleur_permanent: formData.nbre_travailleur_permanent,
+            nbre_travailleur_journalier: formData.nbre_travailleur_journalier,
+            service_assiette_impot: formData.service_assiette_impot,
+            adresse: formData.adresse,
+
+        }))
+        .then(response => {
+            commit("MODIFIER_ENTREPRISE", response.data);
+           
+            this.$app.$notify({
+                title: 'Success',
+                text: 'Modification Effectué avec Succès!',
+                type: "success"
+            })
         });
-        commit('MODIFIER_ENTREPRISE', response.data)
-        this.$app.$loading(false)
-    }).catch(error =>{
-        console.log(error)
-        this.$app.$loading(false)
-        this.$app.$notify({
-            title: 'Erreur',
-            text: "Erreur c'est produit lors de l'enregistrement",
-            type:"error"
-        });
-    })
 }
 
 export function ajouterSanction({commit}, formData,config){

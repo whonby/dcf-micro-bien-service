@@ -3298,3 +3298,165 @@ export function supprimerTypeCandidat({ commit }, id) {
     })
 
 }
+
+
+
+
+export function getPays({ commit }) {
+  queue.push(() => axios.get('/pays').then((response) => {
+    commit('GET_ALL_PAYS', response.data.data)
+
+  }).catch(error => console.log(error)))
+}
+
+// action pour ajouter bailleur
+export function ajouterPays({ commit }, formData) {
+  asyncLoading(axios.post('/pays', formData)).then(response => {
+    if (response.status == 201) {
+      console.log(response.data)
+      commit('AJOUTER_PAYS', response.data)
+
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier bailleur
+
+
+export function modifierPays({ commit }, element_modifie) {
+  asyncLoading(axios.put('/pays', element_modifie)).then(response => {
+    commit('MODIFIER_PAYS', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+// supprimer categorie mision
+export function supprimerPays({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_PAYS', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/pays/' + id).then(() => dialog.close())
+    })
+
+}
+
+
+export function getVille({ commit }) {
+  queue.push(() => axios.get('/ville').then((response) => {
+    commit('GET_ALL_VILLE', response.data.data)
+
+  }).catch(error => console.log(error)))
+}
+
+// action pour ajouter bailleur
+export function ajouterVille({ commit, dispatch}, formData) {
+  asyncLoading(axios.post('/ville', formData)).then(response => {
+    if (response.status == 201) {
+      console.log(response.data)
+      commit('AJOUTER_VILLE', response.data)
+      dispatch('getPays')
+      dispatch('getVille')
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier bailleur
+
+
+export function modifierVille({ commit, dispatch}, element_modifie) {
+  asyncLoading(axios.put('/ville', element_modifie)).then(response => {
+    commit('MODIFIER_VILLE', response.data)
+    dispatch('getPays')
+    dispatch('getVille')
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+// supprimer categorie mision
+export function supprimerVille({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_VILLE', id)
+      dispatch('getPays')
+      dispatch('getVille')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/ville/' + id).then(() => dialog.close())
+    })
+
+}
+
+
+export function getCommune({ commit }) {
+  queue.push(() => axios.get('/commune').then((response) => {
+    commit('GET_ALL_COMMUNES', response.data.data)
+
+  }).catch(error => console.log(error)))
+}
+
+// action pour ajouter bailleur
+export function ajouterCommune({ commit, dispatch}, formData) {
+  asyncLoading(axios.post('/commune', formData)).then(response => {
+    if (response.status == 201) {
+      console.log(response.data)
+      commit('AJOUTER_COMMUNES', response.data)
+      dispatch('getCommune')
+      dispatch('getVille')
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier bailleur
+
+
+export function modifierCommune({ commit, dispatch }, element_modifie) {
+  asyncLoading(axios.put('/commune', element_modifie)).then(response => {
+    commit('MODIFIER_COMMUNES', response.data)
+    dispatch('getCommune')
+    dispatch('getVille')
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+// supprimer categorie mision
+export function supprimerCommune({ commit, dispatch}, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_COMMUNES', id)
+      dispatch('getCommune')
+      dispatch('getVille')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/commune/' + id).then(() => dialog.close())
+    })
+
+}

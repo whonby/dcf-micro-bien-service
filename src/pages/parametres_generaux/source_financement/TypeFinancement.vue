@@ -113,7 +113,7 @@
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="formData.source_financement_id && formData.code.length && 
+             <button v-show="formData.code.length && 
              formData.libelle.length"
               @click.prevent="ajouterTitreLocal" class="btn btn-primary">Valider</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>

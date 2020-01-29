@@ -20,7 +20,7 @@
                                 <th>Ville</th>
                                 <th>E-mail</th>
                                 <th>Telephone</th>
-                                <th>Banque</th>
+                                <!-- <th>Banque</th> -->
                             </tr>
                             </thead>
                             <tbody>
@@ -38,10 +38,10 @@
                                 </td> -->
 
                                 <td class="taskOptions">
-                                    {{detail_marche.pays}}
+                                    {{getPays(detail_marche.pays)}}
                                 </td>
                                 <td class="taskOptions">
-                                    {{detail_marche.ville}}
+                                    {{getVille(detail_marche.ville)}}
                                 </td>
                                  <td class="taskOptions">
                                     {{detail_marche.email}}
@@ -49,9 +49,12 @@
                                 <td class="taskOptions">
                                     {{detail_marche.telephone}}
                                 </td>
-                                <td class="taskOptions">
+                                 <!-- <td class="taskOptions">
+                                    {{detail_marche.id}}
+                                </td> -->
+                                <!-- <td class="taskOptions">
                                     {{detail_marche.banque}}
-                                </td>
+                                </td> -->
                             </tr>
 
                             </tbody>
@@ -104,7 +107,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="odd gradeX" v-for="(appelOffre, index) in compteFiltre"
+                                    <tr class="odd gradeX" v-for="(appelOffre, index) in afficheCompteEntreprise(detail_marche.id)"
                                         :key="appelOffre.id">
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.varObjetBanque.libelle || 'Non renseigné'}}</td>
@@ -139,6 +142,11 @@
 
 
                         </div>
+                          <div class="modal-footer">
+        
+        <a data-dismiss="modal" class="btn btn-danger" @click.prevent="retourListeEntreprise" href="#">Voir Tableau</a>
+       
+      </div>
                     </div>
 
                 </div>
@@ -155,6 +163,15 @@
                
                     <table class="table table-bordered table-striped">
                       <tr>
+                           <td>
+                        <div class="control-group">
+                          <label>Entreprise</label>
+                            <div class="controls">
+                                <input type="text" readonly  class="span" placeholder="" :value="detail_marche.raison_sociale">
+                                  <input type="text" readonly  class="span" placeholder="" :value="detail_marche.id">
+                            </div>
+                        </div>
+                          </td>
                           <td>
                         <div class="control-group">
                              <label>Banque</label>
@@ -168,30 +185,47 @@
                             </div>
                         </div>
                           </td>
-
-                          <td>
-                       <div class="control-group">
-                             <label>Entreprise</label>
+ <td>
+                        <div class="control-group">
                             <div class="controls">
-                              
-                            <select v-model="formData.entreprise_id" class="span">
-                                <option v-for="varText in entreprises" :key="varText.id"
-                              :value="varText.id">{{varText.raison_sociale}}</option>
-                            </select>
-                                
+                                <label>Nature de compte</label>
+                                <!-- <input type="text" class="span" placeholder="saisir la nature de compte" v-model="formData.nature_compte"> -->
+                           <select v-model="formData.nature_compte">
+                                                            <option></option>
+                                                            <option value="0">Compte courant</option>
+                                                           
+                                                            
+                                                        </select>
                             </div>
                         </div>
                           </td>
-                          <td>
+                       
+                         
+                      </tr>
+                      <tr>
+                             <td>
+                       <div class="control-group">
+                             <label>Numero compte</label>
+                            <div class="controls">
+                              
+                            <!-- <select v-model="formData.entreprise_id" class="span">
+                                <option v-for="varText in entreprises" :key="varText.id"
+                              :value="varText.id">{{varText.raison_sociale}}</option>
+                            </select> -->
+                                  <div class="controls">
+                                <input type="text" class="span" placeholder="" v-model="formData.numero_compte">
+                            </div>
+                            </div>
+                        </div>
+                          </td>
+                           <td>
                         <div class="control-group">
-                          <label>Date</label>
+                          <label>Date d'ouverture</label>
                             <div class="controls">
                                 <input type="date" class="span" placeholder="" v-model="formData.date_ouverture_compte">
                             </div>
                         </div>
                           </td>
-                      </tr>
-                      <tr>
                           <td>
                      
                         <div class="control-group">
@@ -202,15 +236,12 @@
                         </div>
                           </td>
 
-                          <td>
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Nature de compte</label>
-                                <input type="text" class="span" placeholder="saisir la nature de compte" v-model="formData.nature_compte">
-                            </div>
-                        </div>
-                          </td>
+                         
 
+                         
+                      </tr>
+
+                      <tr>
                           <td>
 
                         <div class="control-group">
@@ -220,22 +251,10 @@
                             </div>
                         </div>
                           </td>
-                      </tr>
-
-                      <tr>
-                          <td>
-                     
-                        <div class="control-group">
-                            <label>Situation geographique</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="sitaution geographique" v-model="formData.situation_geographique_angence">
-                            </div>
-                        </div>
-                          </td>
 
                           <td>
                         <div class="control-group">
-                            <label>Numero agence</label>
+                            <label>Code agence</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="saisir le numero agence" v-model="formData.numero_agence">
                             </div>
@@ -244,9 +263,48 @@
                           <td>
 
                         <div class="control-group">
-                            <label>Telephone </label>
+                            <label>Telephone agence</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="saisir le teleophone agence" v-model="formData.telephone_agence">
+                            </div>
+                        </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <div class="control-group">
+                                                    <label class="control-label">Ville:</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.ville_id">
+                                                            <option></option>
+                                                            <option v-for="item in villes" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                          </td>
+                          <td>
+                              <div class="control-group">
+                                                    <label class="control-label">Communes</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.commune_id">
+                                                            <option></option>
+                                                            <option v-for="item in communeDynamiques(formData.ville_id)" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                          </td>
+                           <td>
+                     
+                        <div class="control-group">
+                            <label>Situation geographique</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="sitaution geographique" v-model="formData.situation_geographique_angence">
                             </div>
                         </div>
                           </td>
@@ -443,7 +501,7 @@ created() {
     console.log(this.appel_offre_marche)*/
 },
         computed: {
-            ...mapGetters("bienService", [ "getMarchePersonnaliser","appelOffres", ]),
+            ...mapGetters("bienService", [ "getMarchePersonnaliser","appelOffres","villes","communes","pays" ]),
 
                 ...mapGetters("gestionMarche", [ 'entreprises','banques','comptes','getCompte', 'getEntreptise']),
 
@@ -456,6 +514,48 @@ created() {
                               item.agence.toLowerCase().includes(st)
                   })
               },
+               communeDynamiques() {
+     return id => {
+        if (id != null && id != "") {
+          return this.communes.filter(
+            element => element.ville_id == id
+          );
+        }
+      };
+    },
+    getPays() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.pays.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     getVille() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.villes.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    afficheCompteEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+          return this.getCompte.filter(
+            element => element.entreprise_id == this.detail_marche.id
+          );
+        }
+      };
+    },
 // listeCompte(){.
 //     return this.getCompte.filter(compt => compt.id == entreprise_id)
 // },
@@ -529,7 +629,13 @@ created() {
             // fonction pour vider l'input ajouter
             ajouterCompteLocal(){
                // this.formData.marche_id=this.marcheid
-                this.ajouterCompte(this.formData)
+               
+               var nouvelObjet = {
+      ...this.formData,
+      entreprise_id :this.detail_marche.id,
+      
+       };
+                this.ajouterCompte(nouvelObjet)
                 this.formData = {
                     date_ouverture_compte:"",
                     signataire_compte:"",
@@ -544,7 +650,9 @@ created() {
                 }
             },
            
-           
+             retourListeEntreprise(){
+                 this.$router.push({ name: 'Entreprise' })
+            },
       
             // afficher modal de modification
 
@@ -622,8 +730,8 @@ created() {
     .glcompte
     {
 
- width: 900px;
- margin: 0 -530px;
+ width: 800px;
+ margin: 0 -330px;
  height: 500px;
 
     }

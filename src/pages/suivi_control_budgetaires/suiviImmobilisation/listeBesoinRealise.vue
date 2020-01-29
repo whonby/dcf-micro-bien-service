@@ -161,7 +161,7 @@
                     <td ></td>
                     <td ></td>
                      <td style="font-weight:bold;">Total</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(SommeQuantiteRealise))}}</td>
+                    <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(SommeQuantiteRealise)) || 0 }}</td>
                     
                     
                     <td ></td>

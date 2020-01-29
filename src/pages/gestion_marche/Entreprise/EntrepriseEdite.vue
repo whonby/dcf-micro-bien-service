@@ -15,7 +15,7 @@
                             <h5>Formulaire de modification </h5>
                         </div>
                         <div class="widget-content nopadding">
-                            <form action="#" method="get" class="form-horizontal" @submit.prevent="ajouterTitreLocal" enctype="multipart/form-data">
+                            <form action="#" method="get" class="form-horizontal" enctype="multipart/form-data">
                                 <div class="row-fluid">
                                     <div class="span6">
                                         <div class="widget-box">
@@ -63,12 +63,12 @@
                                                         <input type="text" class="span11" placeholder="Capitale social" v-model="formData.capitale_sociale">
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
+                                                <!-- <div class="control-group">
                                                     <label class="control-label">Banque:</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Banque"  v-model="formData.banque">
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <div class="control-group">
                                                     <label class="control-label">Telephone:</label>
                                                     <div class="controls">
@@ -81,16 +81,40 @@
                                                         <input type="text" class="span11" placeholder="Email" v-model="formData.email">
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
+                                                 <div class="control-group">
+                                                    <label class="control-label">Pays:</label>
+                                                    <div class="controls">
+                                                       <select v-model="formData.pays" class="span11">
+                                                            <option></option>
+                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="control-group">
                                                     <label class="control-label">Pays:</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Pays" v-model="formData.pays">
                                                     </div>
-                                                </div>
-                                                <div class="control-group">
+                                                </div> -->
+                                                <!-- <div class="control-group">
                                                     <label class="control-label">Ville:</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Ville" v-model="formData.ville">
+                                                    </div>
+                                                </div> -->
+                                                 <div class="control-group">
+                                                    <label class="control-label">Ville:</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.ville" class="span11">
+                                                            <option></option>
+                                                            <option v-for="item in villeDynamiques(formData.pays)" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
@@ -170,11 +194,32 @@
                                                         <input type="text" class="span11" placeholder="Nombre travailleur journalier" v-model="formData.nbre_travailleur_journalier">
                                                     </div>
                                                 </div>
+                                                  <div class="control-group">
+                                                    <label class="control-label">Regime d'imposition</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.regime_impossition" class="span11">
+                                                            <option></option>
+                                                            <option value="0">régime de l’impôt synthétique (IS) </option>
+                                                            <option value="1">régime du réel simplifié d’imposition (RSI)</option>
+                                                            <option value="2">régime du réel normal d’imposition (RNI)</option>
+                                                            
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-actions">
+                                         <div class="modal-footer">
+        <a
+          @click.prevent="ajouterTitreLocal(formData)"
+          class="btn btn-primary"
+          href="#"
+        
+        >Modifier</a>
+        <a data-dismiss="modal" class="btn" @click.prevent="retourListeEntreprise" href="#">Fermer</a>
+      </div>
+                                        <!-- <div class="form-actions">
                                             <button type="submit" class="btn btn-success">Enregistrement</button>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
 
@@ -286,6 +331,7 @@
         computed: {
 // methode pour maper notre guetter
             ...mapGetters('gestionMarche', ['entreprises',"secteur_activites"]),
+            ...mapGetters("bienService", ['villes','pays']),
             titreFiltres() {
 
                 const searchTerm = this.search.toLowerCase();
@@ -299,7 +345,16 @@
                     }
                 )
 
-            }
+            },
+             villeDynamiques() {
+     return id => {
+        if (id != null && id != "") {
+          return this.villes.filter(
+            element => element.pays_id == id
+          );
+        }
+      }}
+             
         },
         methods: {
             // methode pour notre action
@@ -309,6 +364,9 @@
                     backdrop: 'static',
                     keyboard: false
                 });
+            },
+             retourListeEntreprise(){
+                 this.$router.push({ name: 'Entreprise' })
             },
             // fonction pour vider l'input
             ajouterTitreLocal () {

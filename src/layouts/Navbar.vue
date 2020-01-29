@@ -123,7 +123,7 @@ export default {
          "getDossierCandidat", "getOffreFinancier", "getOffreTechnique","getLettreInvitation","getMandater",
          "getCojo","getAnalyseDossier", 'getMotifDecision', 'getDocumentProcedure',
          'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur",
-          'getActeEffetFinancier','getEngagement','getMandat',
+          'getActeEffetFinancier','getEngagement','getMandat',"getVille","getPays","getCommune",
           'getActeEffetFinancier',"getExecutionMarche","getTypeAppel","getTypeCandidat"])
 
   },
@@ -156,7 +156,9 @@ export default {
     this.getZone()
     this.getBanque()
     this.getCompte()
-
+    this.getPays()
+this.getVille()
+this.getCommune()
 
 
 // this.getTypeProcedure()

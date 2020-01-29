@@ -454,15 +454,7 @@
           
         </table>
       </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="modifierModalTypeprestationLocal(editMarche)"
-          class="btn btn-primary"
-          href="#"
-        
-        >Modifier</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
+     
     </div>
     <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
     <!-- End Page Header -->

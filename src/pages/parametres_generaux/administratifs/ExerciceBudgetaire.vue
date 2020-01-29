@@ -85,12 +85,12 @@
                    <td>
                      <button  @click.prevent="EncoursExerciceLocal(exercice_budgetaire.id)"
                       v-if="exercice_budgetaire.encours == 1"  class="btn  btn-success">
-                <span ><i class="icon-thumbs-up"></i></span>
+                <span >Oui</span>
        
                 </button>
                    <button v-else @click.prevent="EncoursExerciceLocal(exercice_budgetaire.id)" class="btn  btn-danger">
               
-                <span > <i class=" icon-thumbs-down"></i></span>
+                <span >Non</span>
                 </button>
                    </td>
                   <td>

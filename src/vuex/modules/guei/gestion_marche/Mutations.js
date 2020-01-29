@@ -196,6 +196,7 @@ const MODIFIER_ENTREPRISE= (state, objetModifie) => {
         return entreprise
     })
 }
+
 /**
  * Fin entreprise
  */

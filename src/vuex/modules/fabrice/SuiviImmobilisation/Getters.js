@@ -24,7 +24,7 @@ const stockageArticles = state => state.stockageArticles;
 
 
 
-
+SommeQuantiteRealise
 
 
 
@@ -355,7 +355,7 @@ export const nombreTotalEquipement = (state, getters) =>
     (prec, cur) => parseInt(prec) + parseInt(cur.historiqueqte),
     0
   );
-listeBesoinValider
+
 export const SommeQuantiteRealise = (state, getters) =>
   getters.besoinImmobilisations.reduce(
     (prec, cur) => parseInt(prec) + parseInt(cur.totalrealise),

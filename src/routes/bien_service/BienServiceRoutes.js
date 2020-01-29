@@ -42,7 +42,25 @@ import actesEffet from '../../pages/bien_service/contractualisation/actesEffet.v
 import tableauBord from '../../pages/bien_service/contractualisation/tableauBord.vue';
 import typeAppel from '../../pages/bien_service/parametres/type_appel.vue';
 import typeCandidat from '../../pages/bien_service/parametres/typeCandidat.vue';
+import pays from '../../pages/bien_service/parametres/pays.vue';
+import ville from '../../pages/bien_service/parametres/groupe_ville/ville.vue';
+import commune from '../../pages/bien_service/parametres/groupe_commune/commune.vue';
 const BienServiceRoutes = [
+    {
+        path: "commune",
+        name: "commune",
+        component: commune
+    },
+     {
+        path: "ville",
+        name: "ville",
+        component: ville
+    },
+    {
+        path: "pays",
+        name: "pays",
+        component: pays
+    },
     {
         path: "type-Candidat",
         name: "typeCandidat",

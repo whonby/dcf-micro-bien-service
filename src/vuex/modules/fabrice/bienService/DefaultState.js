@@ -55,7 +55,11 @@ documentProcedures:[],
     mandats:[],
     executionMarches:[],
     typeAppelOffre: [],
-typeCandidat:[]
+    typeCandidat: [],
+    pays: [],
+    villes: [],
+    communes:[]
+
 
 
 
