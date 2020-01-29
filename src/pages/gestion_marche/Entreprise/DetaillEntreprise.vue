@@ -95,7 +95,7 @@
                                     <tr>
 
                                         <th>Banque</th>
-                                        <th>Entreprise</th>
+                                        <!-- <th>Entreprise</th> -->
                                         <th>Date</th>
                                         <th>Signataire</th>
                                         <th>Nature compte</th>
@@ -111,16 +111,17 @@
                                         :key="appelOffre.id">
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.varObjetBanque.libelle || 'Non renseigné'}}</td>
-                                        <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{appelOffre.entreprise.raison_sociale || 'Non renseigné'}}</td>
+                                        <!-- <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.entreprise.raison_sociale || 'Non renseigné'}}</td> -->
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{formaterDate(appelOffre.date_ouverture_compte) || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.signataire_compte || 'Non renseigné'}}</td>
+                                         <td v-if="appelOffre.nature_compte == 0" >Compte courant</td>
+                                         <td v-else >Non renseigné</td>
+                                            
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{appelOffre.nature_compte || 'Non renseigné'}}</td>
-                                        <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{appelOffre.	agence|| 'Non renseigné'}}</td>
+                                            {{appelOffre.agence|| 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.situation_geographique_angence || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
@@ -168,7 +169,7 @@
                           <label>Entreprise</label>
                             <div class="controls">
                                 <input type="text" readonly  class="span" placeholder="" :value="detail_marche.raison_sociale">
-                                  <input type="text" readonly  class="span" placeholder="" :value="detail_marche.id">
+                                  <input type="hidden" readonly  class="span" placeholder="" :value="detail_marche.id">
                             </div>
                         </div>
                           </td>
@@ -322,15 +323,24 @@
 
 
 
-  <div id="modifierCompte" class="modal hide" aria-hidden="true" style="display: none;">
+  <div id="modifierCompte" class="modal hide glcompte" aria-hidden="true" style="display: none;">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Modifier compte</h3>
             </div>
             <div class="modal-body">
-               
-                    <table class="table table-bordered table-striped">
-                      
+                 <table class="table table-bordered table-striped">
+                      <tr>
+                           <td>
+                        <div class="control-group">
+                          <label>Entreprise</label>
+                            <div class="controls">
+                                <input type="text" readonly  class="span" placeholder="" :value="detail_marche.raison_sociale">
+                                  <input type="hidden" readonly  class="span" placeholder="" :value="detail_marche.id">
+                            </div>
+                        </div>
+                          </td>
+                          <td>
                         <div class="control-group">
                              <label>Banque</label>
                             <div class="controls">
@@ -342,41 +352,65 @@
                                 
                             </div>
                         </div>
-                        
-                       <div class="control-group">
-                             <label>Entreprise</label>
+                          </td>
+ <td>
+                        <div class="control-group">
                             <div class="controls">
-                              
-                            <select v-model="editCompte.entreprise_id" class="span">
-                                <option v-for="varText in entreprises" :key="varText.id"
-                              :value="varText.id">{{varText.raison_sociale}}</option>
-                            </select>
-                                
+                                <label>Nature de compte</label>
+                                <!-- <input type="text" class="span" placeholder="saisir la nature de compte" v-model="editCompte.nature_compte"> -->
+                           <select v-model="editCompte.nature_compte">
+                                                            <option></option>
+                                                            <option value="0">Compte courant</option>
+                                                           
+                                                            
+                                                        </select>
                             </div>
                         </div>
-                      
+                          </td>
+                       
+                         
+                      </tr>
+                      <tr>
+                             <td>
+                       <div class="control-group">
+                             <label>Numero compte</label>
+                            <div class="controls">
+                              
+                            <!-- <select v-model="editCompte.entreprise_id" class="span">
+                                <option v-for="varText in entreprises" :key="varText.id"
+                              :value="varText.id">{{varText.raison_sociale}}</option>
+                            </select> -->
+                                  <div class="controls">
+                                <input type="text" class="span" placeholder="" v-model="editCompte.numero_compte">
+                            </div>
+                            </div>
+                        </div>
+                          </td>
+                           <td>
                         <div class="control-group">
-
+                          <label>Date d'ouverture</label>
                             <div class="controls">
                                 <input type="date" class="span" placeholder="" v-model="editCompte.date_ouverture_compte">
                             </div>
                         </div>
-                      
+                          </td>
+                          <td>
                      
                         <div class="control-group">
-
+                          <label>Signature</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="saisir le signataire compte" v-model="editCompte.signataire_compte">
                             </div>
                         </div>
-            
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Nature de compte</label>
-                                <input type="text" class="span" placeholder="saisir la nature de compte" v-model="editCompte.nature_compte">
-                            </div>
-                        </div>
-                     
+                          </td>
+
+                         
+
+                         
+                      </tr>
+
+                      <tr>
+                          <td>
 
                         <div class="control-group">
                             <div class="controls">
@@ -384,27 +418,65 @@
                                 <input type="text" class="span" placeholder="Saisir l'agence" v-model="editCompte.agence">
                             </div>
                         </div>
-                       
-                     
+                          </td>
+
+                          <td>
                         <div class="control-group">
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="sitaution geographique" v-model="editCompte.situation_geographique_angence">
-                            </div>
-                        </div>
-                        
-                        <div class="control-group">
+                            <label>Code agence</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="saisir le numero agence" v-model="editCompte.numero_agence">
                             </div>
                         </div>
-                      
+                          </td>
+                          <td>
 
                         <div class="control-group">
+                            <label>Telephone agence</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="saisir le teleophone agence" v-model="editCompte.telephone_agence">
                             </div>
                         </div>
-                    
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <div class="control-group">
+                                                    <label class="control-label">Ville:</label>
+                                                    <div class="controls">
+                                                        <select v-model="editCompte.ville_id">
+                                                            <option></option>
+                                                            <option v-for="item in villes" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                          </td>
+                          <td>
+                              <div class="control-group">
+                                                    <label class="control-label">Communes</label>
+                                                    <div class="controls">
+                                                        <select v-model="editCompte.commune_id">
+                                                            <option></option>
+                                                            <option v-for="item in communeDynamiques(editCompte.ville_id)" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                          </td>
+                           <td>
+                     
+                        <div class="control-group">
+                            <label>Situation geographique</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="sitaution geographique" v-model="editCompte.situation_geographique_angence">
+                            </div>
+                        </div>
+                          </td>
+                      </tr>
                     </table>
                 
             </div>
@@ -662,7 +734,7 @@ created() {
                     keyboard: false
                 });
 
-                this.editCompte = this.comptes[index];
+                this.editCompte = this.afficheCompteEntreprise(this.detail_marche.id)[index];
             },
 
             // vider l'input modifier 
