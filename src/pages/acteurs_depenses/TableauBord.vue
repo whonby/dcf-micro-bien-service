@@ -7,9 +7,9 @@
 
              <div class="widget-title">
             <ul class="nav nav-tabs">
-              <li class="active"><a data-toggle="tab" href="#tab1" title="Tableau de bord d'acteur de depense   "> T.bord acteur de depense</a></li>
+              <li class="active"><a data-toggle="tab" href="#tab1" title=""> Tableau de bord global acteur de depense</a></li>
                
-               <li><a data-toggle="tab" href="#tab2" title="Tableau de bord de mission">T. bord mission</a></li> 
+               <li><a data-toggle="tab" href="#tab2" title="">Tableau de bord global de missions</a></li> 
              
                 
               

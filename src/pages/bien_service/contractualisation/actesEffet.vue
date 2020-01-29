@@ -60,7 +60,8 @@
                              <td @click="afficherModalModifierActeEffetFinancier(index)">
                             {{effetFinancier.libelle_act || 'Non renseigné'}}</td>
 
-                           
+                             <td @click="afficherModalModifierActeEffetFinancier(index)">
+                            {{effetFinancier.reference_act || 'Non renseigné'}}</td>
                         
                         <!-- <td @click="afficherModalModifierActeEffetFinancier(index)">
                             {{effetFinancier.objet_act || 'Non renseigné'}}</td> -->
@@ -83,9 +84,6 @@
                              <td @click="afficherModalModifierActeEffetFinancier(index)">
                             {{effetFinancier.text_juridique.libelle_text || 'Non renseigné'}}</td>
 
-
-                             
-                            
                               <td @click="afficherModalModifierActeEffetFinancier(index)">
                             {{effetFinancier.marche.objet || 'Non renseigné'}}</td>
 
@@ -96,22 +94,8 @@
                             </button>
                         </div>
 
-                    </tr>
-                        <tr>
-                     
+                    
                       
-                      <td>
-                          
-                      </td>
-                      <td>
-                          
-                      </td>
-                      <td>
-                          
-                  
-                       <td>
-                           
-                      </td>
                        
                      
                     </tr>

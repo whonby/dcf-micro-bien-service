@@ -170,7 +170,7 @@ export const MODIFIER_HISTORIQUE_MISSION = (state, objetModifie) => {
 
 //supprimer historque mission
 export const SUPPRIMER_HISTORIQUE_MISSION = (state , id) => {
-    state.historiqueMission = state.historiqueMission.filter(history => history.id != id)
+    state.historiques_missions = state.historiques_missions.filter(history => history.id != id)
 }
 
 

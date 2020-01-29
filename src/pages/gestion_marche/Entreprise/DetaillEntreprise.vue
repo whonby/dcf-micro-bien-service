@@ -92,7 +92,7 @@
                                     <tr>
 
                                         <th>Banque</th>
-                                        <th>Entreprise</th>
+                                        <!-- <th>Entreprise</th> -->
                                         <th>Date</th>
                                         <th>Signataire</th>
                                         <th>Nature compte</th>
@@ -169,7 +169,7 @@
                         </div>
                           </td>
 
-                          <td>
+                          <!-- <td>
                        <div class="control-group">
                              <label>Entreprise</label>
                             <div class="controls">
@@ -181,7 +181,7 @@
                                 
                             </div>
                         </div>
-                          </td>
+                          </td> -->
                           <td>
                         <div class="control-group">
                           <label>Date</label>
@@ -272,6 +272,8 @@
             <div class="modal-body">
                
                     <table class="table table-bordered table-striped">
+                        <tr>
+                            <td>
                       
                         <div class="control-group">
                              <label>Banque</label>
@@ -284,8 +286,9 @@
                                 
                             </div>
                         </div>
+                            </td>
                         
-                       <div class="control-group">
+                       <!-- <div class="control-group">
                              <label>Entreprise</label>
                             <div class="controls">
                               
@@ -295,14 +298,17 @@
                             </select>
                                 
                             </div>
-                        </div>
-                      
+                        </div> -->
+                      <td>
                         <div class="control-group">
 
                             <div class="controls">
                                 <input type="date" class="span" placeholder="" v-model="editCompte.date_ouverture_compte">
                             </div>
                         </div>
+                      </td>
+
+                      <td>
                       
                      
                         <div class="control-group">
@@ -311,6 +317,10 @@
                                 <input type="text" class="span" placeholder="saisir le signataire compte" v-model="editCompte.signataire_compte">
                             </div>
                         </div>
+                      </td>
+                        </tr>
+                        <tr>
+                            <td>
             
                         <div class="control-group">
                             <div class="controls">
@@ -318,6 +328,9 @@
                                 <input type="text" class="span" placeholder="saisir la nature de compte" v-model="editCompte.nature_compte">
                             </div>
                         </div>
+                            </td>
+
+                            <td>
                      
 
                         <div class="control-group">
@@ -326,26 +339,33 @@
                                 <input type="text" class="span" placeholder="Saisir l'agence" v-model="editCompte.agence">
                             </div>
                         </div>
-                       
+                            </td>
+                            <td>
                      
                         <div class="control-group">
                             <div class="controls">
                                 <input type="text" class="span" placeholder="sitaution geographique" v-model="editCompte.situation_geographique_angence">
                             </div>
                         </div>
-                        
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                         <div class="control-group">
                             <div class="controls">
                                 <input type="text" class="span" placeholder="saisir le numero agence" v-model="editCompte.numero_agence">
                             </div>
                         </div>
-                      
+                            </td>
+                            <td>
 
                         <div class="control-group">
                             <div class="controls">
                                 <input type="text" class="span" placeholder="saisir le teleophone agence" v-model="editCompte.telephone_agence">
                             </div>
                         </div>
+                            </td>
+                        </tr>
                     
                     </table>
                 

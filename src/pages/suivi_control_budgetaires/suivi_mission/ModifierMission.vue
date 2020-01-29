@@ -14,28 +14,21 @@
           <div class="widget-content tab-content">
             <div id="tab1" class="tab-pane active">
 
-                  
-                  <table border="0px">
-                                                                     
+
+
+
+
+                 <table class="table table-bordered table-striped">
+                   <fieldset>
+                        <legend>
+                          <h4>
+                          Identification:</h4>
+                          </legend>
                       
                           <tr>
 
 
-                <td> 
-            <div class="control-group">
-              <label class="control-label">Categorie mission:</label>
-              <div class="controls">
-           <select v-model="editMission.categorie_missions_id" class="span">       
-               <option v-for="budget in categories_missions" :key="budget.id" 
-               :value="budget.id">{{budget.libelle}}</option>
-           </select>
-              </div>
-            </div>
-             </td>
-
-
-
-                  <td> 
+                                <td> 
             <div class="control-group">
               <label class="control-label">Exercice budgetaire:</label>
               <div class="controls">
@@ -48,7 +41,82 @@
              </td>
 
 
-                   <td> 
+              
+                      <td colspan="7">
+        <div class="control-group">
+          <label class="control-label">Objet de mission:</label>
+            <div class="controls">
+              <textarea  v-model="editMission.objet"  class="textarea_editor span2.5"  placeholder="Enter text ..."></textarea>
+            </div>
+          
+        </div>
+                      </td> 
+                          </tr>
+
+                          <tr>
+
+                             <td> 
+            <div class="control-group">
+              <label class="control-label" title="categorie de mission">Categorie de mission:</label>
+              <div class="controls">
+           <select v-model="editMission.categorie_missions_id" class="span">
+               <option v-for="budget in categories_missions" :key="budget.id" 
+               :value="budget.id">{{budget.libelle}}</option>
+           </select>
+              </div>
+            </div>
+             </td>
+              <td>           
+               <div class="control-group">
+              <label class="control-label">Type de mission:</label>
+              <div class="controls">
+                <select v-model="editMission.type_mission" class="span">
+       
+                  <option value="mission civ">Mission en cote d'ivoire</option>
+                  <option value="mission hors civ">Mission hors cote d'ivoire</option>
+                  
+                </select>
+              </div>
+            </div> 
+                    </td> 
+                    
+                             <td>           
+               <div class="control-group">
+              <label class="control-label">Date de mission:</label>
+              <div class="controls">
+                <input type="date" v-model="editMission.date_mission" class="span"/>
+              </div>
+                </div>
+                </td>
+
+                <td>         
+                  
+               <div class="control-group">
+              <label class="control-label" >N° autorisation:</label>
+              <div class="controls">
+                <input type="text" v-model="editMission.numero_autorisation" 
+                class="span"  />
+                </div>
+                  </div>
+                   </td>
+
+                      <td> 
+            <div class="control-group">
+              <label class="control-label">N°ccm:</label>
+              <div class="controls">
+     <input type="text" v-model="editMission.numero_ccm" class="span" 
+     placeholder="Saisir le numero" />
+              </div>
+            </div>
+                      </td>
+                          </tr>
+                   </fieldset>
+
+                   <fieldset>
+                     <legend><h4>Unité Administrative:</h4></legend>
+
+                     <tr>
+                  <td> 
             <div class="control-group">
               <label class="control-label">Unite administrative:</label>
               <div class="controls">
@@ -59,68 +127,49 @@
               </div>
             </div>
              </td>
-
-                        <td> 
+                  <td> 
             <div class="control-group">
-              <label class="control-label">Objet:</label>
+              <label class="control-label">Acteur de depense:</label>
               <div class="controls">
-     <input type="text" v-model="editMission.objet" class="span" 
-     placeholder="Saisir l'objet" />
+           <select v-model="editMission.acte_personnel_id" class="span" >
+               <option v-for="depense in all_acteur_depense" :key="depense.id" 
+               :value="depense.id">{{depense.matricule}}</option>
+           </select>
               </div>
             </div>
-                              </td>
-                              <td style="width:2px;">           
-               <div class="control-group">
-              <label class="control-label">Date de mission:</label>
-              <div class="controls">
-                <input type="date" v-model="editMission.date_mission" class="span"/>                   
+             </td>
+               
+
+                         <td> 
+            <div class="control-group">
+              <label class="control-label">Fonction:</label>
+              <div class="controls " >
+     <input type="text" class="span" :value="afficherLaFonctionDActeurDepenseDynamique(editMission.acte_personnel_id)"  >
+      
               </div>
-                </div>
-                </td>
-
-                            
-
-
-           
-                          </tr>
-
-                          <tr>
-                                    
-                              <td style="width:;">           
-               <div class="control-group">
-              <label class="control-label">Type de mission:</label>
+            </div>
+                          </td>
+      <!-- <td> 
+            <div class="control-group">
+              <label class="control-label" title="Source de financement">S. financement:</label>
               <div class="controls">
-                <input type="text" v-model="editMission.type_mission" class="span"/>
+           <select v-model="editMission.source_financement_id" class="span">
+               <option v-for="sourceFinancement in sources_financements" :key="sourceFinancement.id" 
+               :value="sourceFinancement.id">{{sourceFinancement.libelle}}</option>
+           </select>
               </div>
-                </div>
-                </td>
+            </div>
+             </td> -->
 
+              
+               </tr>
+                   </fieldset>
+                   <fieldset>
+                     <legend><h4>Transport:</h4></legend>
 
-                        <td>         
-                  
-               <div class="control-group">
-              <label class="control-label">Destination:</label>
-              <div class="controls">
-                <input type="text" v-model="editMission.destination" 
-                class="span"  />
-                </div>
-                  </div>
-                              </td>
-                          
-
-                          
-
-                         <td style="width:;">           
-               <div class="control-group">
-              <label class="control-label">Itineraire retenu:</label>
-              <div class="controls">
-                <input type="text" v-model="editMission.itineraire_retenu" 
-                class="span"/>
-              </div>
-                </div>
-                </td>
-
-                              <td>         
+                       <tr>
+                   
+                         <td>         
                   
                 <div class="control-group">
               <label class="control-label">Moyen de transport:</label>
@@ -134,9 +183,31 @@
                 </select>
               </div>
             </div>
-                    </td> 
+                    </td>  
 
-                             <td>         
+                              <td>         
+                  
+               <div class="control-group">
+              <label class="control-label">Destination:</label>
+              <div class="controls">
+                <input type="text" v-model="editMission.destination" 
+                class="span"  />
+                </div>
+                  </div>
+                    </td>
+                          
+                       <td >           
+               <div class="control-group">
+              <label class="control-label">Itineraire retenu:</label>
+              <div class="controls">
+                <input type="text" v-model="editMission.itineraire_retenu" 
+                class="span"/>
+              </div>
+                </div>
+                </td>
+
+                
+                     <td>         
                   
                <div class="control-group">
               <label class="control-label">Class voyage:</label>
@@ -146,78 +217,77 @@
                 </div>
                   </div>
                         </td>
-                      
-                     </tr>
-
-
-
-
-
-
-                     
-                          <tr>
-
-
-               
-                        <td> 
-             <div class="control-group">
-              <label class="control-label">Cout total:</label>
+                       </tr>
+                       
+                       <tr>
+                        
+                            <td>         
+                  
+               <div class="control-group"> 
+              <label class="control-label">Frais de Perdium:</label>
               <div class="controls">
-     <input type="number" v-model="editMission.cout_total" class="span" 
-     placeholder="Saisir le montant" />
-              </div>
-            </div>
+           <input type="text"  v-model="editMission.frais_deplacement"  class="span"  />
+                </div>
+                  </div>
                               </td>
-                              <td style="width:;">           
+                                    
+                      <td >           
                <div class="control-group">
-              <label class="control-label">Date depart:</label>
+              <label class="control-label">frais d'hebergement:</label>
               <div class="controls">
-                <input type="date" v-model="editMission.date_depart" class="span"/>
+                <input type="number" v-model="editMission.frais_hebergement" 
+                class="span"/>
               </div>
                 </div>
                 </td>
-
-                              <td>         
+                     <td>         
                   
                <div class="control-group">
-              <label class="control-label">Date retoure:</label>
+              <label class="control-label" title="frais de restauration">Frais de  restauration:</label>
               <div class="controls">
-                <input type="date" v-model="editMission.date_retour" 
+                <input type="number" v-model="editMission.frais_restauration" 
                 class="span"  />
                 </div>
                   </div>
                               </td>
-
-
-                     <td> 
-            <div class="control-group">
-              <label class="control-label">Duree:</label>
+                               <td >           
+               <div class="control-group">
+              <label class="control-label">Autre frais:</label>
               <div class="controls">
-     <input type="number" v-model="editMission.duree" class="span" 
-     placeholder="Saisir le numero" />
+                <input type="number" v-model="editMission.autre_frais" 
+                class="span"/>
+              </div>
+                </div>
+                </td>    
+
+                 
+               </tr>
+
+               <tr>
+
+                   <td>           
+               <div class="control-group">
+              <label class="control-label" title="cout total de la mission">Cout total  mission:</label>
+              <div class="controls">
+                <input type="text" v-model="editMission.cout_total"
+                class="span"/>
+              </div>
+                </div>
+                </td> 
+
+                      <td> 
+            <div class="control-group">
+              <label class="control-label">Cout du billet d'avion:</label>
+              <div class="controls">
+     <input type="number" v-model="editMission.cout_billet_avion" class="span" 
+     placeholder="Saisir la cout du billet avion" />
               </div>
             </div>
                      </td>
-
-
-
-                       <td>         
-                  
-               <div class="control-group">
-              <label class="control-label">Numero autorisation:</label>
-              <div class="controls">
-                <input type="number" v-model="editMission.numero_autorisation" 
-                class="span"  />
-                </div>
-                  </div>
-                              </td>
-                          </tr>
-
-                          <tr>
-                        <td>         
+                            <td>         
                   
                 <div class="control-group">
-              <label class="control-label" title="mode de paiement">Md.paiement:</label>
+              <label class="control-label" title="mode de paiement">Mode de paiement:</label>
               <div class="controls">
                 <select v-model="editMission.mode_paiement" class="span">
                 <option value="0">Virement</option>
@@ -228,115 +298,22 @@
                  </div>
                     </td> 
 
-                              <td>         
-                  
-               <div class="control-group">
-              <label class="control-label">Frais de restauration:</label>
-              <div class="controls">
-                <input type="number" v-model="editMission.frais_restauration" 
-                class="span"  />
-                </div>
-                  </div>
-                              </td>
-                          
-
-                          
-
-                         <td style="width:;">           
-               <div class="control-group">
-              <label class="control-label">frais d'hebergement:</label>
-              <div class="controls">
-                <input type="text" v-model="editMission.frais_hebergement" 
-                class="span"/>
-              </div>
-                </div>
-                </td>
-
-                              <td>         
-                  
-               <div class="control-group">
-              <label class="control-label">Frais de deplacement:</label>
-              <div class="controls">
-                <input type="text" v-model="editMission.frais_deplacement" 
-                class="span"  />
-                </div>
-                  </div>
-                              </td>
-
-                              <td> 
-            <div class="control-group">
-              <label class="control-label">Numero du commerce:</label>
-              <div class="controls">
-     <input type="number" v-model="editMission.numero_ccm" class="span" 
-     placeholder="Saisir le numero" />
-              </div>
-            </div>
-                          </td>
-
-                          </tr>
-
-                          <tr>
-
-
-
-    
-<!-- 
- <td> 
-            <div class="control-group">
- <label class="control-label" title="Source de financement">S. financement:</label>
-              <div class="controls">
-           <select v-model="editMission.source_financement_id" class="span">
-               <option v-for="sourceFinancement in sources_financements" :key="sourceFinancement.id" 
-               :value="sourceFinancement.id">{{sourceFinancement.libelle}}</option>
-           </select>
-              </div>
-            </div>
-             </td> -->
-
-           
-                       <td style="width:;">           
-               <div class="control-group">
-              <label class="control-label">Cout billet avion:</label>
-              <div class="controls">
-                <input type="text" v-model="editMission.cout_billet_avion" class="span"/>
-              </div>
-                </div>
-                </td>
-
                    
-                    <td style="width:;">           
-               <div class="control-group">
-              <label class="control-label">Signataire:</label>
+                   <td>
+                      <div class="control-group">
+              <label class="control-label"> Signataire:</label>
               <div class="controls">
-                <input type="text" v-model="editMission.signataire" class="span"/>
-              </div>
-                </div>
-                </td>
-                          </tr>
-                       </table> 
-         
-                 
-                 
-            
-                </div>
-
-            <!-- <div id="tab2" class="tab-pane">
-                  <table border="0px">
-    
-                          <tr>
-
-
-               
-                        <td> 
-             <div class="control-group">
-              <label class="control-label">Montant:</label>
-              <div class="controls">
-     <input type="number" v-model="editMission.montant" class="span" 
-     placeholder="Saisir le montant" />
+     <input type="text" v-model="editMission.signataire" class="span" 
+     placeholder="Saisir le nom du signataire" />
               </div>
             </div>
-                              </td>
-                              <td style="width:;">           
+                      </td>
+
+               </tr>
+                
+               <tr>
+
+                  <td >           
                <div class="control-group">
               <label class="control-label">Date depart:</label>
               <div class="controls">
@@ -345,136 +322,46 @@
                 </div>
                 </td>
 
-                              <td>         
+                
+                   <td>         
                   
                <div class="control-group">
-              <label class="control-label">Date retoure:</label>
+              <label class="control-label">Date retour:</label>
               <div class="controls">
-                <input type="date" v-model="editMission.date_retour" 
+                <input type="date"  v-model="editMission.date_retour" 
                 class="span"  />
                 </div>
                   </div>
-                              </td>
+                    </td>
 
-
+                    
                      <td> 
             <div class="control-group">
-              <label class="control-label">Duree:</label>
+              <label class="control-label">Durée(jours):</label>
               <div class="controls">
-     <input type="number" v-model="editMission.duree" class="span" 
-     placeholder="Saisir le numero" />
+     <input type="text" v-model="editMission.duree" class="span" 
+     placeholder="Saisir la durée" />
               </div>
             </div>
                      </td>
-                          </tr>
+                
 
-                          <tr>
-                                    
-                              <td style="width:;">           
-               <div class="control-group">
-              <label class="control-label">Mode de paiement:</label>
-              <div class="controls">
-                <input type="text" v-model="editMission.mode_paiement" class="span"/>
-              </div>
-                </div>
-                </td>
 
-                              <td>         
-                  
-               <div class="control-group">
-              <label class="control-label">Frais de restauration:</label>
-              <div class="controls">
-                <input type="number" v-model="editMission.frais_restauration" 
-                class="span"  />
-                </div>
-                  </div>
-                              </td>
-                          
-
-                          
-
-                         <td style="width:;">           
-               <div class="control-group">
-              <label class="control-label">frais d'hebergement:</label>
-              <div class="controls">
-                <input type="text" v-model="editMission.frais_hebergement" 
-                class="span"/>
-              </div>
-                </div>
-                </td>
-
-                              <td>         
-                  
-               <div class="control-group">
-              <label class="control-label">Frais de deplacement:</label>
-              <div class="controls">
-                <input type="text" v-model="editMission.frais_deplacement" 
-                class="span"  />
-                </div>
-                  </div>
-                              </td>
-
-                          </tr>
-           
-             
-       
-            </table> 
-            </div> -->
-
-            <!-- <div id="tab3" class="tab-pane">
-                  
-                  <table border="0px">
-                          <tr>
-
-                         
-                             <td>         
-                  
-               <div class="control-group">
-              <label class="control-label">Date visa du cf:</label>
-              <div class="controls">
-                <input type="date" v-model="editMission.date_visa_cf" 
-                class="span"  />
-                </div>
-                  </div>
-                  </td>
-
-            
-
-             <td style="width:;">           
-               <div class="control-group">
-              <label class="control-label">Motif:</label>
-              <div class="controls">
-                <input type="text" v-model="editMission.motif" class="span"/>
-              </div>
-                </div>
-                </td>
-                    
-                      <td style="width:;">           
-               <div class="control-group">
-              <label class="control-label">Signataire:</label>
-              <div class="controls">
-                <input type="text" v-model="editMission.signataire" class="span"/>
-              </div>
-                </div>
-                </td>
-
-                              <td>         
-                  
-               <div class="control-group">
+                 <!-- <div class="control-group">
               <label class="control-label">Fichier joint:</label>
               <div class="controls">
-                <input type="text" v-model="editMission.fichier_joint" 
-                class="span"  />
+                <input type="file" id="file"  @change="onFichierChange" />
+              </div>
+            </div> -->
+  
+               </tr>
+
+                   </fieldset>
+                      
+                       </table> 
                 </div>
-                  </div>
-                     </td>
 
-                          </tr>
-                
-       
-                      </table> 
-
-                    </div> -->
+           
 
          
 
@@ -488,7 +375,7 @@
              <button
               @click.prevent="modifierMissionLocal(editMission)" class="btn btn-primary"
               >Modifier</button> &nbsp;&nbsp;&nbsp;
-              <button @click.prevent="AllerPageListe" data-dismiss="modal" class="btn" href="#">Fermer</button> 
+              <button  data-dismiss="modal" class="btn" href="#">Fermer</button> 
                 </div>
              
 <notifications  />
@@ -530,7 +417,7 @@ export default {
              numero_ccm:"",
              moyen_transport:"",
              itineraire_retenu:"",
-             montant:"",
+             
              mode_paiement:"",
              duree:"",
              date_retour:"",
@@ -540,13 +427,15 @@ export default {
              frais_restauration:"",
              fichier_joint:"",
              signataire:"",
-             decision_cf:"",
-             date_visa_cf:"",
-             motif:"" ,
+             
+        
+            
              acte_personnel_id:"",
+            
              ua_id:"" ,
              exercice_budgetaire_id:"",
-             id:""
+             id:"",
+             autre_frais:""
 
         },
            
@@ -559,10 +448,26 @@ export default {
     this.getDetail()
   },
   computed: {
+
+
+
+     afficherLaFonctionDActeurDepenseDynamique(){
+     return acte_personnel_id => {
+       if( acte_personnel_id != undefined) {
+    var acteur = this.all_acteur_depense.find(acteur => acteur.id == acte_personnel_id  )
+    
+     // this.fonctionActeur = acteur.fonction.id
+      // console.log(acteur)
+     return (acteur) ? acteur.fonction.libelle :null
+       }
+    return null
+     }
+  
+   },
 // methode pour maper notre guetter
    ...mapGetters('suivi_controle_budgetaire', ['categories_missions','missions']) ,
     ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
-  ...mapGetters('personnelUA', ['all_acteur_depense']),
+  ...mapGetters('personnelUA', ['all_acteur_depense','fonctions']),
    ...mapGetters('uniteadministrative', ['uniteAdministratives']),
     ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
    
@@ -589,7 +494,6 @@ export default {
            this.editMission.numero_ccm = objetMissions.numero_ccm,
            this.editMission.moyen_transport = objetMissions.moyen_transport,
            this.editMission.itineraire_retenu = objetMissions.itineraire_retenu;
-           this.editMission.montant = objetMissions.montant,
            this.editMission.mode_paiement = objetMissions.mode_paiement,
            this.editMission.duree = objetMissions.duree,
            this.editMission.date_retour = objetMissions.date_retour,
@@ -597,10 +501,6 @@ export default {
            this.editMission.frais_deplacement = objetMissions.frais_deplacement,
            this.editMission.frais_hebergement = objetMissions.frais_hebergement,
            this.editMission.fichier_joint = objetMissions.fichier_joint,
-           this.editMission.signataire = objetMissions.signataire,
-           this.editMission.decision_cf = objetMissions.decision_cf,
-           this.editMission.date_visa_cf = objetMissions.date_visa_cf,
-           this.editMission.motif = objetMissions.motif,
            this.editMission.acte_personnel_id = objetMissions.acte_personnel_id,
            this.editMission.ua_id = objetMissions.ua_id,
            this.editMission.exercice_budgetaire_id = objetMissions.exercice_budgetaire_id ,
@@ -609,60 +509,62 @@ export default {
            this.editMission.frais_restauration = objetMissions.frais_restauration,
            this.editMission.cout_billet_avion = objetMissions.cout_billet_avion,
            this.editMission.source_financement_id = objetMissions.source_financement_id,
-           this.editMission.signataire = objetMissions.signataire
+           this.editMission.signataire = objetMissions.signataire,
+           this.editMission.autre_frais = objetMissions.autre_frais
     },
     // methode pour notre action
    ...mapActions('suivi_controle_budgetaire', ['getMission', 'modifierMission']),   
    
     // fonction pour aller a la page liste
-    AllerPageListe()
-    {
-      this.$router.push({
-        name:'Mission'
-      })
-    },
+    // AllerPageListe()
+    // {
+    //   this.$router.push({
+    //     name:'Mission'
+    //   })
+    //   this.$rooter.go(-1)
+    // },
 
 
 // vider l'input
 modifierMissionLocal(){  
  // console.log(this.editMission)
    this.modifierMission(this.editMission)
-   this.editMission = {
-      objet:"",
+  this.$router.push({name:'Mission'})
+  
+
+  //  this.editMission = {
+  //     objet:"",
               
-               cout_billet_avion:"",
-              classe_voyage:"",
-              source_financement_id:"",
-             date_mission: "",
-             cout_total:"",
-             categorie_missions_id:"",
-             numero_autorisation:"",
-             destination:"",
-             type_mission:"",
-             numero_ccm:"",
-             moyen_transport:"",
-             itineraire_retenu:"",
-             montant:"",
-             mode_paiement:"",
-             duree:"",
-             date_retour:"",
-             date_depart:"",
-             frais_deplacement:"",
-             frais_hebergement:"",
-             frais_restauration:"",
-             fichier_joint:"",
-             signataire:"",
-             decision_cf:"",
-             date_visa_cf:"",
-             motif:"" ,
-             acte_personnel_id:"",
-             ua_id:"" ,
-             exercice_budgetaire_id:"",
-             id:""
+  //           cout_billet_avion:"",
+  //            classe_voyage:"",
+  //             source_financement_id:"",
+  //            date_mission: "",
+  //            cout_total:"",
+  //            categorie_missions_id:"",
+  //            numero_autorisation:"",
+  //            destination:"",
+  //            type_mission:"",
+  //            numero_ccm:"",
+  //            moyen_transport:"",
+  //            itineraire_retenu:"",
+  //            mode_paiement:"",
+  //            duree:"",
+  //            date_retour:"",
+  //            date_depart:"",
+  //            frais_deplacement:"",
+  //            frais_hebergement:"",
+  //            frais_restauration:"",
+  //            fichier_joint:"",
+  //            signataire:"",
+  //            acte_personnel_id:"",
+  //            ua_id:"" ,
+            
+  //            exercice_budgetaire_id:"",
+  //            id:""
 
 
 
-   }
+  //  }
 
 
  }

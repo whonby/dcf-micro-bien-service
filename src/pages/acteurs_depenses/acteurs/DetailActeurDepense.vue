@@ -54,6 +54,7 @@
                                         <li class=""><a data-toggle="tab" href="#tab2">L’acte de nomination et du spécimen</a></li>
                                         <li class=""><a data-toggle="tab" href="#tab3">Toutes les rémunérations</a></li>
                                         <li class=""><a data-toggle="tab" href="#tab4">Tous les conges</a></li>
+                                         <li class=""><a data-toggle="tab" href="#tab5">Historique de mission par acteur</a></li>
                                     </ul>
                                 </div>
                                 <div class="widget-content tab-content">
@@ -238,6 +239,7 @@
                                             </table>
                                         </div>
                                     </div>
+
                                     <div id="tab4" class="tab-pane">
 
                                         <div class="widget-box span6" v-if="acteurDetail">
@@ -338,7 +340,93 @@
                                             </div>
                                         </div>
 
+
+
+                                        
+
                                     </div>
+
+
+
+                                   
+                           <div id="tab5" class="tab-pane">
+                           <div class="container-fluid">
+                                      <div class="row-fluid">
+                                        <div class="span12">
+                                            <!-- <div>
+
+                                        <download-excel
+                                            class="btn btn-default pull-right"
+                                            style="cursor:pointer;"
+                                              :fields = "json_fields"
+                                              title="Liste des historiques de missions"
+                                              name ="Liste des missions"
+                                              worksheet = "Missions"
+                                            :data="historiques_missions">
+                      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+
+                                                 </download-excel> 
+                                     </div> <br> -->
+        <div class="widget-box">
+             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+            <h5>Liste des missions par acteur</h5>
+             <div align="right">
+          </div>
+             
+          </div>
+         
+           <div class="widget-content nopadding" >
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                    <th>Objet</th>
+                     <th>Destination</th>
+                     <th>Date de depart</th>
+                     <th>Date de retour</th>
+                      <!-- <th>Action</th> -->
+                </tr>
+              </thead>
+              <tbody v-if="acteur_id">
+                <tr class="odd gradeX" v-for="(historiqueMission, index) in 
+                historiqueMissionParActeur(acteur_id)"
+                 :key="historiqueMission.id">
+
+                 
+
+                  <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+                      {{historiqueMission.objet || 'Non renseigné'}}</td>
+
+                        <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+                      {{historiqueMission.destination || 'Non renseigné'}}</td>
+
+                        <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+                      {{formaterDate(historiqueMission.date_depart) || 'Non renseigné'}}</td>
+
+                        <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+                      {{formaterDate(historiqueMission.date_retour) || 'Non renseigné'}}</td>
+                   
+                  <!-- <td>
+
+
+
+              <div class="btn-group">
+              <button @click.prevent="supprimerHistoriqueMission(historiqueMission.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+             
+            </div> 
+
+                  </td> -->
+                </tr>
+              </tbody>
+            </table>
+           
+            
+          </div>
+        </div>
+      </div>
+              </div>
+            </div>
+            </div>
                                 </div>
                             </div>
                         </div>
@@ -628,14 +716,32 @@
 
         },
         computed: {
+
+
+
+historiqueMissionParActeur(){
+   return acte_personnel_id =>{
+       if(acte_personnel_id !=""){
+           let objet=this.getMissionPersonnaliser.filter(element => element.acte_personnel_id==acte_personnel_id)
+          // console.log(objet)
+           return objet;
+       }
+   }
+
+ //console.log(historiqueMissionParActeur);
+},
+
+
+
 // methode pour maper notre guetter
-            ...mapGetters('personnelUA', ['acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades",
+            ...mapGetters('personnelUA', ['personnaMission','acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades",
                 "niveau_etudes","nbr_acteur_actredite_taux","detail_acteurs","salaire_actuel_acteur","all_salaires_acteurs","acte_personnels",
                 "load_act_personnel_acteur","conge_acteur_depense","temp_moyen_fin_activite_interruption","delais_mise_disposition_act",
                 "jour_conge_disponible_acteur","personnaliseActeurDepense","tous_salaire_actuel_acteur","personnaliseActeurFinContrat"]),
             ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
             ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
+            ...mapGetters('suivi_controle_budgetaire', ['getMissionPersonnaliser']),
             nomUniteAdmine(){
                 return uniteAdmin_id=>{
 

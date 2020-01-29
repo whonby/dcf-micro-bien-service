@@ -6,7 +6,7 @@
 <!-- administratifs-->
       <li class="dropdown" id="administratif">
         <a
-          title="Configurations budgetaires"
+          
           href="#"
           data-toggle="dropdown"
           data-target="#administratif"
@@ -108,7 +108,7 @@
 
 <li class="dropdown" id="excution">
         <a
-          title="Execution marchés-contrat"
+          
           href="#"
           data-toggle="dropdown"
           data-target="#excution"
@@ -153,7 +153,7 @@
         </ul>
       </li>
       <li class="dropdown" id="plant">
-        <a title="passation des marchés" href="#" data-toggle="dropdown" data-target="#plant" class="dropdown-toggle">
+        <a  href="#" data-toggle="dropdown" data-target="#plant" class="dropdown-toggle">
           <span class="text">PARAMETRE DES MARCHES </span>
           <b class="caret"></b>
         </a>
@@ -194,7 +194,7 @@
 
 <li class="dropdown" id="contractualisation">
         <a
-          title="Contractualisation"
+          
           href="#"
           data-toggle="dropdown"
           data-target="#contratualisation"
@@ -294,7 +294,7 @@
 
       
        <li class="dropdown" id="execut">
-        <a title="passation des marchés" href="#" data-toggle="dropdown" data-target="#execut" class="dropdown-toggle">
+        <a  href="#" data-toggle="dropdown" data-target="#execut" class="dropdown-toggle">
           <span class="text">EXECUTION DU MARCHES </span>
           <b class="caret"></b>
         </a>

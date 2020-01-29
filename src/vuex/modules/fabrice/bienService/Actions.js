@@ -856,26 +856,15 @@ export function supprimerCompte({commit}, id) {
 // action pour facture && lots
 
 export  function  getFacture({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_FACTURE', response.data)
+  queue.push(() => axios.get('/factures').then((response) => {
+    commit('GET_ALL_FACTURE', response.data.data)
     
 }).catch(error => console.log(error)))
 }
 
 // action pour ajouter facture
 export function ajouterFacture({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    code_acte_depense:elementAjout.code_acte_depense,
-    id_type_facture:elementAjout.id_type_facture,
-    numero_facture:elementAjout.numero_facture,
-    objet_facture:elementAjout.objet_facture,
-    ligne_budgetaire:elementAjout.ligne_budgetaire,
-    montant_facture:elementAjout.montant_facture,
-    prix_unitaire:elementAjout.prix_unitaire,
-    prix_propose_ht:elementAjout.prix_propose_ht,
-    prix_propose_ttc:elementAjout.prix_propose_ttc
-    
-})).then(response =>{
+  asyncLoading(axios.post('/factures',elementAjout)).then(response =>{
       if(response.status == 201){
           commit('AJOUTER_FACTURE', response.data)
 
@@ -893,18 +882,7 @@ export function ajouterFacture({commit}, elementAjout){
 
 
 export function modifierFacture({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    code_acte_depense:element_modifie.code_acte_depense,
-    id_type_facture:element_modifie.id_type_facture,
-    numero_facture:element_modifie.numero_facture,
-    objet_facture:element_modifie.objet_facture,
-    ligne_budgetaire:element_modifie.ligne_budgetaire,
-    montant_facture:element_modifie.montant_facture,
-    prix_unitaire:element_modifie.prix_unitaire,
-    prix_propose_ht:element_modifie.prix_propose_ht,
-    prix_propose_ttc:element_modifie.prix_propose_ttc
-    
- })).then(response => {
+  asyncLoading( axios.put('/factures',element_modifie)).then(response => {
        commit('MODIFIER_FACTURE', response.data)
        
 
@@ -922,7 +900,7 @@ export function supprimerFacture({commit}, id) {
  .then(dialog => {
     commit('SUPPRIMER_FACTURE', id)
    // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
+     axios.delete('/factures/' + id).then(() => dialog.close() )   
  })
 
 }

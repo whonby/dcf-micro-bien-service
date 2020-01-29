@@ -123,7 +123,7 @@ export default {
          "getCojo","getAnalyseDossier", 'getMotifDecision', 'getDocumentProcedure',
          'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur",
           'getActeEffetFinancier','getEngagement','getMandat',
-          'getActeEffetFinancier',"getExecutionMarche"])
+          'getActeEffetFinancier',"getExecutionMarche", "getFacture"])
 
   },
 
@@ -285,6 +285,7 @@ this.getLettreInvitation()
     this.getAnalyseDMP()
     this.getAnoDMPBailleur()
     this.getObservationBailleur()
+    this.getFacture()
       /**
        * fin missions
        */
