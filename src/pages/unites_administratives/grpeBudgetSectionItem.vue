@@ -8,8 +8,8 @@
                     <!-- <td>{{article.exercicebudget_id || 'Non renseigné'}}</td>
                       <td>{{article.codebudget || 'Non renseigné'}}</td> -->
                       <!-- <td>{{article.affichetypeua.libelle || 'Non renseigné'}}</td> -->
-                    <!-- <td>{{article.afficheUA.libelle || 'Non renseigné'}}</td> -->
-                    <td>{{CodeSection(article.section_id)|| 'Non renseigné'}}-{{afficherSection(article.section_id)|| 'Non renseigné'}}</td>
+                    <td>{{afficherUniteAdministrative(article.ua_id) || 'Non renseigné'}}</td>
+                    <!-- <td>{{CodeSection(article.section_id)|| 'Non renseigné'}}-{{afficherSection(article.section_id)|| 'Non renseigné'}}</td> -->
                     <td>{{CodeGdeNatureDep(article.gdenature_id) || 'Non renseigné'}}-{{afficherGdeNatureDep(article.gdenature_id) || 'Non renseigné'}}</td>
                     <td>{{Codeprogramme(article.program_id) || 'Non renseigné'}}-{{afficherprogramme(article.program_id) || 'Non renseigné'}}</td>
                     <td>{{Codeaction(article.action_id) || 'Non renseigné'}}-{{afficheraction(article.action_id) || 'Non renseigné'}}</td>
@@ -20,6 +20,7 @@
                  
                   
                   </tr>
+
 
 
 
@@ -46,6 +47,15 @@ export default {
       "afficheServiceGestionnaireNiveau4",
       "afficheLocalisationGeoNiveau5",
       "natures_sections"
+    ]),
+    ...mapGetters("uniteadministrative", [
+      "jointureUaChapitreSection",
+      "uniteAdministratives",
+      "budgetGeneral",
+      "getPersonnaliseBudgetGeneral",
+      // "montantBudgetGeneral"
+      // "chapitres",
+      // "sections"
     ]),
 ...mapGetters("parametreGenerauxAdministratif", [
       
@@ -126,13 +136,13 @@ export default {
 
 
 
-     afficherSection() {
+     afficherUniteAdministrative() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.sections.find(qtreel => qtreel.id == id);
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.nom_section;
+        return qtereel.libelle;
       }
       return 0
         }

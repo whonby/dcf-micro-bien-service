@@ -9,8 +9,13 @@ import budgetGenerals from "../../pages/unites_administratives/budgetGeneralComp
 import budgetGeneralParUa from "../../pages/unites_administratives/budgetGeneral.vue"
 import grpeBudgetSection from "../../pages/unites_administratives/grpeBudgetSection.vue"
 import grpeBudgetProgramme from "../../pages/unites_administratives/grpeBudgetProgramme.vue"
-
+import historiquebudgetGeneralComponent from "../../pages/unites_administratives/historiquebudgetGeneralComponent.vue";
 const UniteAdministativeRoutes = [
+  {
+    path: "/historique-budget-general-component",
+    name: "historiquebudgetGeneralComponent",
+    component: historiquebudgetGeneralComponent
+  },
   {
     path: "/budget-General-Par-Programme",
     name: "grpeBudgetProgramme",

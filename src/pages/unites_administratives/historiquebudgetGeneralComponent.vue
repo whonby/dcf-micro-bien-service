@@ -494,7 +494,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Budget general par ua</h5>
+              <h5>Historique Budget general par ua</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
@@ -502,14 +502,14 @@
               </div> -->
             </div>
 
-            <div class="widget-content nopadding" v-if="uniteAdministratives.length" >
-              <budgetGeneralItemComponent v-for="equipement in uniteAdministratives"
+            <div class="widget-content nopadding"  >
+              <historiquebudgetGeneralItemComponent v-for="equipement in uniteAdministratives"
                :key="equipement.id"
                 :groupe="equipement"
                 @modification="afficherModalModifierUniteAdministrative" 
                 @suppression="supprimerBudget"
                 >
-              </budgetGeneralItemComponent>
+              </historiquebudgetGeneralItemComponent>
 
               <!-- <div v-if="filtre_famille.length"></div>
               <div v-else>
@@ -525,9 +525,9 @@
     </div>
 
     
- <fab :actions="fabActions" @cache="afficherModalAjouterUniteAdministrative" main-icon="apps" bg-color="green"></fab>
+ <!-- <fab :actions="fabActions" @cache="afficherModalAjouterUniteAdministrative" main-icon="apps" bg-color="green"></fab>
         <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterUniteAdministrative()">Open</button>
-  <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+  <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button> -->
   <notifications  />
   </div>
 
@@ -539,12 +539,12 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
-import budgetGeneralItemComponent from './budgetGeneralItemComponent'
+import historiquebudgetGeneralItemComponent from './historiquebudgetGeneralItemComponent'
 import { formatageSomme } from "../../../src/Repositories/Repository";
 export default {
   name: 'budgetgeneral',
  components: {
-      budgetGeneralItemComponent
+      historiquebudgetGeneralItemComponent
   },
   data() {
     return {
@@ -601,7 +601,8 @@ export default {
       "uniteAdministratives",
       "budgetGeneral",
       "getPersonnaliseBudgetGeneral",
-      "montantBudgetGeneral"
+      "montantBudgetGeneral",
+      "historiquebudgetGeneral"
       // "chapitres",
       // "sections"
     ]),
@@ -718,11 +719,10 @@ anneeAmort() {
   
   methods: {
     ...mapActions("uniteadministrative", [
-      "getAllBudgetGeneral",
-      "ajouterBudgetGeneral",
-      "modifierBudgetGeneral",
-      "supprimerBudgetGeneral",
-      "ajouterHistoriqueBudgetGeneral"
+      "getAllHistoriqueBudgetGeneral",
+      
+      "modifierHistoriqueBudgetGeneral",
+      "supprimerHistoriqueBudgetGeneral"
     ]),
  formatageSomme: formatageSomme,
     afficherModalAjouterUniteAdministrative() {
@@ -747,7 +747,7 @@ var nouvelObjet = {
       
        };
       this.ajouterBudgetGeneral(nouvelObjet);
-this.ajouterHistoriqueBudgetGeneral(nouvelObjet);
+
       this.formData = {
         exercicebudget_id:"",
       gdenature_id: "",
@@ -764,9 +764,8 @@ this.ajouterHistoriqueBudgetGeneral(nouvelObjet);
       // }
      
     },
-    
      supprimerBudget(id){
-      this.supprimerBudgetGeneral(id)
+      this.supprimerHistoriqueBudgetGeneral(id)
     },
     // fonction pour vider l'input modifier
     modifierUniteAdministrativeLocal() {
@@ -777,7 +776,7 @@ this.ajouterHistoriqueBudgetGeneral(nouvelObjet);
         testgdenature:this.codeGrdeNaturemodif
       
        };
-      this.modifierBudgetGeneral(nouvelObjet);
+      this.modifierHistoriqueBudgetGeneral(nouvelObjet);
 this.$("#modificationModal").modal('hide');
       // this.editUniteAdministrative = {
       //   code: "",

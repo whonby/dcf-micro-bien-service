@@ -1,4 +1,5 @@
-getActeEffetFinancierPersonnaliser
+export const typeCandidat = state => state.typeCandidat
+export const typeAppelOffre = state => state.typeAppelOffre
 export const prestations = state => state.prestations.sort((a, b) => (a.code > b.code) ? 1 : -1)
 export const acteDepenses = state => state.acteDepenses.sort((a,b)=>(a.code>b.code)? 1:-1)
 export const bailleurs = state => state.bailleurs
@@ -54,10 +55,40 @@ export const getterDemandeAno = state => state.stateDemandeAno
 export const getterAnalyseDMP = state => state.analyseDMP
 export const getterAnoDMPBailleur = state => state.stateAnoDmpBailleur
 export const getterObseravtionBailleurs = state => state.obseravtionBailleurs
+export const nombremarches = state => state.marches.length;
+
+
+
+export const nombremarchesExecute = getters =>
+    getters.marches.filter(
+        marcheNonAttribue => marcheNonAttribue.attribue == 1
+    ).length;
+
+export const montantGlobalMarche = (state, getters) =>
+    getters.marches.reduce(
+        (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
+        0
+    );
+export const nombremarchesExecute1 = getters =>
+    getters.marches.filter(
+        marcheNonAttribue => marcheNonAttribue.attribue == 1
+    );
+
+export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
+    getters.nombremarchesExecute1.reduce(
+        (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
+        0
+    );
+
+printMarcheNonAttribue
+
+
+
+
 
 // gettes  personnaliser d'appel d'offres
 
-printMarcheNonAttribue
+
 export  const getAppelOffresPersonnaliser = (state, getters,rootState, rootGetters) =>
 state.appelOffres.map(element => {
     if(element.unite_administrative_id !== null ){
@@ -171,16 +202,16 @@ export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, ro
 
 
 
-    export const marcheNonattribue = getters =>
-    getters.marches.filter(
-      marcheNonAttribue => marcheNonAttribue.attribue == 0
-    );
+    // export const marcheNonattribue = getters =>
+    // getters.marches.filter(
+    //   marcheNonAttribue => marcheNonAttribue.attribue == 0
+    // );
 
-
+getTypeTextJuridique
 
 
     export  const printMarcheNonAttribue = (state, getters,rootState, rootGetters) =>
-    getters.marcheNonattribue.map(element => {
+        getters.marches.map(element => {
         if (element.unite_administrative_id !== null
             && element.activite_id !== null
             && element.economique_id !== null && element.type_marche_id !== null) {

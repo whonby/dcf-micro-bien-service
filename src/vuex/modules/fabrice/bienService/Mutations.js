@@ -1315,6 +1315,7 @@ export const AJOUTER_TYPE_TEXT_JURIDIQUE = (state, elementAjouter) => {
 }
 
 
+
 // update type text juridique
 export const MODIFIER_TYPE_TEXT_JURIDIQUE = (state, elementModif)=>{
     state.typeTextJuridiques = state.typeTextJuridiques.map(response => {
@@ -1632,3 +1633,74 @@ export const MODIFIER_MONTANT_BUDGET = (state, objet) => {
         return besoinRealise;
     });
 };
+
+
+
+
+
+
+
+
+
+
+// get all type text juridique
+export const GET_ALL_TYPE_APPEL = (state, tableau_type_text_juridique) => {
+    state.typeAppelOffre = tableau_type_text_juridique
+}
+
+// add * type text juridique
+
+export const AJOUTER_TYPE_APPEL = (state, elementAjouter) => {
+    state.typeAppelOffre.unshift(elementAjouter)
+}
+
+
+
+// update type text juridique
+export const MODIFIER_TYPE_APPEL = (state, elementModif) => {
+    state.typeAppelOffre = state.typeAppelOffre.map(response => {
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
+        }
+        return response
+    })
+}
+
+
+// delete type text juridique
+
+export const SUPPRIMER_TYPE_APPEL = (state, id) => {
+    state.typeAppelOffre = state.typeAppelOffre.filter(prest => prest.id != id)
+}
+
+
+
+// get all type text juridique
+export const GET_ALL_TYPE_CANDADIT = (state, tableau_type_text_juridique) => {
+    state.typeCandidat = tableau_type_text_juridique
+}
+
+// add * type text juridique
+
+export const AJOUTER_TYPE_CANDADIT = (state, elementAjouter) => {
+    state.typeCandidat.unshift(elementAjouter)
+}
+
+
+
+// update type text juridique
+export const MODIFIER_TYPE_CANDADIT = (state, elementModif) => {
+    state.typeCandidat = state.typeCandidat.map(response => {
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
+        }
+        return response
+    })
+}
+
+
+// delete type text juridique
+
+export const SUPPRIMER_TYPE_CANDADIT = (state, id) => {
+    state.typeCandidat = state.typeCandidat.filter(prest => prest.id != id)
+}

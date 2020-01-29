@@ -23,15 +23,16 @@
                     <th title="">Code Budget</th>
                      <!-- <th title="unite administrative">ua</th> -->
                     <th>Section</th>
-                    <th title="grande nature depense">Gde nature</th>
+                    <th title="grande nature depense">G.Nature</th>
                       <th>Programme</th>
                     <!--<th>Action</th> -->
                     <!-- <th>Activite</th> -->
-                     <th title="classification fonctionnel">Clsse Fontionnel</th>
-                     <th title="classification Economique">Clsse Economique</th>
-                    <th>Dotation Initial</th>
+                     <th title="classification fonctionnel">C.Fontionnel</th>
+                     <th title="classification Economique">C.Economique</th>
+                    <th>D.Initial</th>
                     <th>Version</th>
                     
+
 
                     <th>Action</th>
                   </tr>

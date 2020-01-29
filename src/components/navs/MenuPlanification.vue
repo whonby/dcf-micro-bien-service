@@ -17,7 +17,18 @@
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-         
+             <li>
+            <router-link :to="{name: 'typeCandidat'}" tag="a">
+              <i class="icon-bar-chart"></i>
+           Type Candidat
+            </router-link>
+          </li>
+           <!-- <li>
+            <router-link :to="{name: 'typeAppel'}" tag="a">
+              <i class="icon-bar-chart"></i>
+           Type d'appel offre
+            </router-link>
+          </li> -->
           <li>
             <router-link :to="{name: 'typeFacture'}" tag="a">
               <i class="icon-bar-chart"></i>
@@ -82,12 +93,12 @@
            Condition
             </router-link>
           </li>
-           <li>
+           <!-- <li>
             <router-link :to="{name: 'bailleur'}" tag="a">
               <i class="icon-bar-chart"></i>
                Bailleur
             </router-link>
-          </li>
+          </li> -->
 
            <li>
             <router-link :to="{name: 'documentProcedure'}" tag="a">

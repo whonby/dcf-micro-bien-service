@@ -85,7 +85,8 @@ export default {
       "getAllUniteAdministrative",
       "getAllArchivageDocument",
       
-      "getAllBudgetGeneral"
+      "getAllBudgetGeneral",
+      "getAllHistoriqueBudgetGeneral"
     ]),
             ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
@@ -123,7 +124,9 @@ export default {
          "getCojo","getAnalyseDossier", 'getMotifDecision', 'getDocumentProcedure',
          'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur",
           'getActeEffetFinancier','getEngagement','getMandat',
-          'getActeEffetFinancier',"getExecutionMarche", "getFacture"])
+
+          "getExecutionMarche", "getFacture", 'getActeEffetFinancier',"getTypeAppel","getTypeCandidat"])
+
 
   },
 
@@ -169,7 +172,8 @@ export default {
 
 
 
-
+this.getTypeCandidat();
+this.getTypeAppel()
 
 
 
@@ -213,7 +217,7 @@ this.getMarcheContratExecution()
 
     this.getSourceFinnancementByMarche()
       /**Fin gestion des marche**/
-
+this.getAllHistoriqueBudgetGeneral()
       /**
        * suivi des immo
        */

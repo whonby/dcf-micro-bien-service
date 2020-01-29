@@ -5,11 +5,10 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">x</button>
-        <h3>Ajouter type texte juridique</h3>
+        <h3>Ajouter type Appel</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
-           
           <div class="control-group">
             <label class="control-label">libelle</label>
             <div class="controls">
@@ -22,13 +21,12 @@
             </div>
           </div>
           
-          
          
          </form>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterModalTypeTextJuridiqueLocal(formData)"
+          @click.prevent="ajouterTypeAppelLocal(formData)"
           class="btn btn-primary"
           href="#"
          
@@ -43,18 +41,16 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">x</button>
-        <h3>Modifier type texte juridique</h3>
+        <h3>Modifier type Appel</h3>
       </div>
       <div class="modal-body">
          <form class="form-horizontal">
-              
-              
           <div class="control-group">
             <label class="control-label">libelle</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="editTypeTextJuridique.libelle"
+                v-model="editTypeAppel.libelle"
                 class="span"
                 placeholder="Saisir le libelle"
               />
@@ -65,7 +61,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierModalTypeJuridiqueLocal(editTypeTextJuridique)"
+          @click.prevent="modifierTypeAppelLocal(editTypeAppel)"
           class="btn btn-primary"
           href="#"
         
@@ -95,7 +91,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste type texte juridique</h5>
+              <h5>Liste type Appel</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -106,29 +102,32 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    
                     <th width="90%">libelle</th>
+                   
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-      <tr class="odd gradeX" v-for="(typeFacture, index) in filtre_typeTextJuridique"
-                 :key="typeFacture.id">
-                 <td @dblclick="afficherModalModifierFamille(index)">
-                   {{typeFacture.libelle || 'Non renseigné'}}</td>
-                  
+                  <tr class="odd gradeX" v-for="(typeappel, index) in 
+                filtre_equipement"
+                 :key="typeappel.id">
 
-<td>
-       <div class="btn-group">
-              <button @click.prevent="supprimerTypeTextJuridique(typeFacture.id)"  class="btn btn-danger ">
+                 <td @dblclick="afficherModalModifierFamille(index)">
+                      {{typeappel.libelle || 'Non renseigné'}}</td>
+                 
+                   
+                  <td>
+
+
+
+              <div class="btn-group">
+              <button @click.prevent="supprimerTypeAppel(typeappel.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
-</td>
 
-                
-
-                       </tr>
+                  </td>
+                </tr>
                 </tbody>
               </table>
               
@@ -170,21 +169,20 @@ export default {
     //   },
 
       formData: {
-        libelle:""
+        
       },
-      editTypeTextJuridique: {
-     libelle:""
+      editTypeAppel: {
+     
       },
       search: ""
     };
   },
 
   computed: {
-     ...mapGetters("bienService", ["typeTextJuridiques"]),
-
-    filtre_typeTextJuridique() {
+     ...mapGetters("bienService", ['typeCandidat']),
+    filtre_equipement() {
       const st = this.search.toLowerCase();
-      return this.typeTextJuridiques.filter(type => {
+      return this.typeCandidat.filter(type => {
         return (
           
           type.libelle.toLowerCase().includes(st)
@@ -194,10 +192,10 @@ export default {
   },
   methods: {
     ...mapActions("bienService", [
-     "getTypeTextJurique",
-     "ajouterTypeTextJuridique",
-     "modifierTypeTextJuridique",
-     "supprimerTypeTextJuridique"
+     "getTypeCandidat",
+     "ajouterTypeCandidat",
+     "modifierTypeCandidat",
+     "supprimerTypeCandidat"
     ]),
     //afiicher modal ajouter
     afficherModalAjouterTitre() {
@@ -206,32 +204,41 @@ export default {
         keyboard: false
       });
     },
-    // fonction pour vider l'input ajouter
-    ajouterModalTypeTextJuridiqueLocal(){
-this.ajouterTypeTextJuridique(this.formData)
-this.formData = {
-	libelle:"",
-}
+     // fonction pour vider l'input
+     ajouterTypeAppelLocal () {
+     this.ajouterTypeCandidat(this.formData)
 
-    },
-      modifierModalTypeJuridiqueLocal(){
-      this.modifierTypeTextJuridique(this.editTypeTextJuridique)
-      this.$('#modificationModal').modal('hide');
-    },
-   // afficher modal de modification
+        this.formData = {
+             
+            libelle: ""
+            
+         }
+     },
+    //fonction pour vider l'input ajouter
+    
+    //afficher modal de modification
     afficherModalModifierFamille(index) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editTypeTextJuridique = this.typeTextJuridiques[index];
+      this.editTypeAppel = this.typeAppelOffre[index];
     },
-    //fonction pour vider l'input modification
+    // fonction pour vider l'input modification
     
-    alert() {
-      console.log("ok");
-    },
+    // alert() {
+    //   console.log("ok");
+    // },
+    modifierTypeAppelLocal(){
+  this.modifierTypeCandidat(this.editTypeAppel)
+  this.$('#modificationModal').modal('hide');
+  // this.editPrestation = {
+  //   libelle_prestation:"",
+  //   libelle:"",
+   
+  // }
+},
      ExporterEnExel(){
       this.$refs.excel.click()
     }

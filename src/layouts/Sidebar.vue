@@ -46,10 +46,10 @@
             <span>PERSONNEL</span>
           </a>
         </li>
-        <li @click.prevent="activate(3)" :class="{active: active_el ==3}">
+        <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==3}">
           <a href="#">
             <i class="icon icon-fullscreen"></i>
-            <span>BIEN ET SERVICES</span>
+            <span>BIENS ET SERVICES</span>
           </a>
 
        <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">
@@ -148,9 +148,14 @@ export default {
         this.$router.push({
           name: 'TableauBordImmo2'
         })
+      },
+
+ navigateToBienEtService(){
+        this.activate(3)
+        this.$router.push({
+          name: 'tableauBord'
+        })
       }
-
-
     
 
 

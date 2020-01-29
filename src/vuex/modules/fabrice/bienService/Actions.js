@@ -1101,9 +1101,10 @@ export function ajouterObseravtionBailleur({commit}, elementAjout){
 // action pour modifier obseravtion bailleur
 
 
-export function modifierObservationBaileur({commit}, element_modifie) {
+export function modifierObservationBaileur({ commit, dispatch}, element_modifie) {
   asyncLoading( axios.put('/observation_bailleurs',element_modifie)).then(response => {
        commit('MODIFIER_OBSERAVTION_BAILLEUR', response.data)
+    dispatch("getObservationBailleur");
        this.$app.$notify({
          title: 'success ',
          text: 'Modification effectué !',
@@ -2279,21 +2280,35 @@ export function ajouterTypeTextJuridique({commit}, elementAjout){
 // action pour modifier le type text juridique
 
 
-export function modifierTypeTextJuridique({commit}, element_modifie) {
-  asyncLoading(axios.put('/type_text_juridiques/'+ element_modifie.id ,{
-    
-    libelle:element_modifie.libelle
- })).then(response => {
-   commit('MODIFIER_TYPE_TEXT_JURIDIQUE', response.data)
-       
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
+export function modifierTypeTextJuridique({ commit }, element_modifie) {
+  asyncLoading(axios.put('/type_text_juridiques', element_modifie)).then(response => {
+    commit('MODIFIER_TYPE_TEXT_JURIDIQUE', response.data)
+
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // supprimer le type text juridique
 
 export function supprimerTypeTextJuridique({commit}, id) {
@@ -3145,4 +3160,119 @@ export function modifierMontantBudgetaire({ commit, dispatch }, objet) {
       commit("MODIFIER_MONTANT_BUDGET", response.objet)
       dispatch("getAllBudgetGeneral");
     });
+}
+
+
+
+
+
+
+// action pour lot && type de prestation
+
+export function getTypeAppel({ commit }) {
+  queue.push(() => axios.get('/typeAppel').then((response) => {
+    commit('GET_ALL_TYPE_APPEL', response.data.data)
+
+  }).catch(error => console.log(error)))
+}
+
+// action pour ajouter type prestation
+export function ajouterTypeAppel({ commit }, formData) {
+  asyncLoading(axios.post('/typeAppel', formData)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_TYPE_APPEL', response.data)
+
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier type prestation
+
+
+export function modifierTypeAppel({ commit }, element_modifie) {
+  asyncLoading(axios.put('/typeAppel', element_modifie)).then(response => {
+    commit('MODIFIER_TYPE_APPEL', response.data)
+
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+// supprimer type facture
+export function supprimerTypeAppel({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_TYPE_APPEL', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/typeAppel/' + id).then(() => dialog.close())
+    })
+
+}
+
+
+
+
+
+
+
+// action pour lot && type de prestation
+
+export function getTypeCandidat({ commit }) {
+  queue.push(() => axios.get('/typeCandidat').then((response) => {
+    commit('GET_ALL_TYPE_CANDADIT', response.data.data)
+
+  }).catch(error => console.log(error)))
+}
+
+// action pour ajouter type prestation
+export function ajouterTypeCandidat({ commit }, formData) {
+  asyncLoading(axios.post('/typeCandidat', formData)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_TYPE_CANDADIT', response.data)
+
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier type prestation
+
+
+export function modifierTypeCandidat({ commit }, element_modifie) {
+  asyncLoading(axios.put('/typeCandidat', element_modifie)).then(response => {
+    commit('MODIFIER_TYPE_CANDADIT', response.data)
+
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+// supprimer type facture
+export function supprimerTypeCandidat({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_TYPE_CANDADIT', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/typeCandidat/' + id).then(() => dialog.close())
+    })
+
 }

@@ -27,8 +27,7 @@
                     <td>
                       <button
                         class="btn btn-danger"
-                        
-                        @click.prevent="$emit('suppression', article.id)"
+                          @click.prevent="$emit('suppression', article.id)"
                       >
                         <span>
                           <i class="icon icon-trash"></i>
@@ -40,13 +39,14 @@
 
   
   
+  
 </template>
 
 <script>
 import { mapGetters} from "vuex";
 import { formatageSomme } from "../../../src/Repositories/Repository";
 export default {
-    name: 'budgetGeneralItem',
+    name: 'historiquebudgetGeneralItem',
      props: {
     article: Object,
   },
