@@ -1,50 +1,7 @@
 
 <template>
     <div class="container-fluid">
-          
-     <!-- <div class="quick-actions_homepage" style="position: center;">
-      <ul class="quick-actions" >
-         <table class="table table-bordered table-striped">
-        <h5>Tableau de bord de misssions globale</h5>
-        <hr>
-        <li class="bg_lb" title="Nombre total de mission global">
-             <a href="#">
-            <i class="icon-dashboard"></i> <span class="label label-important">{{nombreTotalDeTouteMissions}}
-        </span> Nombre total de missions. </a> </li>
-              
-        <li class="bg_lg " title="Duree moyenne de mission">
-             <a href="#">
-             <i class="icon-eject"></i> <span class="label label-important">{{dureeMoyenneDeTouteLesMissions}} jrs</span>
-                 Duree moyenne de missions 
-             </a> </li>
-
-    
-
-        <li class="bg_ls" title="Taux de dossiers de missions rejetés">
-             <a href="#">
-            <i class="icon-fullscreen"></i><span class="label label-success">{{tauxDossierRejetMissions}}
-                %</span>
-             Taux de dossiers de mission rejetés.</a> </li>
-             
-              <li class="bg_ly" title="Cout moyen des billets d'avion ">
-             <a href="#">
-            <i class="icon-fullscreen"></i><span class="label label-success">{{formatageSomme(parseFloat(coutMoyenDeBilletAvionDeMissions))}}
-              </span>
-             cout moyen des billets d'avion.</a> </li>
-             
-
-
-
-
-      
-         </table>
-        
-      </ul>
-    </div> -->
-<hr>
-
-
-          
+           
         <div v-show="acte_personnel_id != '' || ua_id != ''" class="quick-actions_homepage" style="position: center;">
       <ul class="quick-actions" >
           <table class="table table-bordered table-striped">
@@ -281,6 +238,7 @@
                           <tr>
                    <th>Exercice budgetaires</th>
                   <th> Categorie mission</th>
+                  <th>Imputation </th>
                    <th>Objet</th>
                   <th> Type de mission</th>
                   <th>Date de mission</th>
@@ -297,9 +255,13 @@
                  :key="mission.id">
                  
                   <td @dblclick="afficherModalModifierMission(mission.id)">
-                     {{mission.objetExerciceBudegetaire.annee}}</td> 
+                     {{mission.exercice_budgetaire_id}}</td> 
                   <td @dblclick="afficherModalModifierMission(mission.id)">
                       {{mission.categorie_mission.libelle || 'Non renseigné'}}</td> 
+
+                       <td @dblclick="afficherModalModifierMission(mission.id)">
+                      {{mission.imputation || 'Non renseigné'}}</td> 
+
                  <td @dblclick="afficherModalModifierMission(mission.id)">
                       {{mission.objet || 'Non renseigné'}}</td>
 
@@ -316,7 +278,7 @@
 
 
                              <td @click="afficherModalDecisionCf(mission)" >
-                            <span :title=" 'Dossier Visé le ' + formaterDate(mission.historique_missions[0].date_operation)"
+                            <span :title=" 'Dossier Visé le ' + formaterDate(mission.historique_missions.date_operation)"
                              v-if="mission.historique_missions_count > 0 && mission.historique_missions[0].type_operation == 0" 
                              class="btn label label-success">
                               Visé</span>
@@ -1068,7 +1030,7 @@ export default {
   
 
        ...mapGetters('personnelUA', ['all_acteur_depense']),
-   ...mapGetters('uniteadministrative', ['uniteAdministratives']),
+   ...mapGetters('uniteadministrative', ['uniteAdministratives',"getPersonnaliseBudgetGeneralParPersonnel"]),
   ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
 
   //  format(){
@@ -1330,7 +1292,7 @@ montantTotalParActeurDepense(){
        var montantTotalParActeurDepense = this.montantTotalParActeurDepense(acte_personnel_id)
        var NombreDemissionsParActeurDepense = this.NombreDemissionsParActeurDepense(acte_personnel_id)
        var resultat = montantTotalParActeurDepense / NombreDemissionsParActeurDepense
-       if(isNaN(resultat)) return 0
+       if(isNaN(resultat)) return null
 
          return resultat
      }
@@ -1340,7 +1302,7 @@ montantTotalParActeurDepense(){
 
 
 // cacul de la somme total du billet d'avion  
-coutTotal(){
+coutTotalBilletAvionParAgent(){
   return acte_personnel_id => {
     if(acte_personnel_id !=""){
       var coutTotal = this.getMissionPersonnaliser.filter(element => element.objetActeurDepense.id == acte_personnel_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.cout_billet_avion), 0)
@@ -1355,12 +1317,12 @@ coutTotal(){
  coutMoyenBilletAvionParAgent(){
    return acte_personnel_id => {
      if(acte_personnel_id !="") {
-      var coutTotal = this.coutTotal(acte_personnel_id)
+      var coutTotal = this.coutTotalBilletAvionParAgent(acte_personnel_id)
       var dure = this.dureetotalParAccteurDepense(acte_personnel_id)
       var NombreDemissionsParActeurDepense = 
       this.NombreDemissionsParActeurDepense(acte_personnel_id)
        var resultat =  (coutTotal / NombreDemissionsParActeurDepense) * dure
-    if(isNaN(resultat)) return 0
+    if(isNaN(resultat)) return null
     return resultat
       
      }

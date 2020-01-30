@@ -32,7 +32,7 @@
               <tbody>                          
                 <tr class="odd gradeX" >
                   <td >
-                     {{mission.objetExerciceBudegetaire.annee}}</td> 
+                     {{mission.annee}}</td> 
                   <td>
                       {{mission.categorie_mission.libelle || 'Non renseigné'}}</td> 
                  <td >

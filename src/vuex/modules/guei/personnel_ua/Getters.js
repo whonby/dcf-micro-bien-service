@@ -100,6 +100,8 @@ export const personnaFonction = (state, getters, rootState, rootGetters) =>
     });
 
 
+    
+
 
 
 export {

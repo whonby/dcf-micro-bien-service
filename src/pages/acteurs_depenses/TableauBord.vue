@@ -69,9 +69,10 @@
         <i class="icon-user"></i><span class="label label-success">{{formatageSomme(parseFloat(coutTotalDemission))}}
            </span> Cout total de missions . </a> </li>
 
+
         <li class="bg_lo" title="cout moyen des billets d'avion globale de mission">
              <a href="#">
-             <i class="icon-th"></i><span class="label label-warning">{{formatageSomme(parseFloat(coutMoyenDeBilletAvionDeMissions))}}
+             <i class="icon-th"></i><span class="label label-warning">{{formatageSomme(parseFloat(coutTotalDeBilletAvion))}}
               </span> Cout moyen des billets d'avion.</a> </li>
 
         <li class="bg_ls" title="Taux de dossiers de missions rejetés">
@@ -135,7 +136,7 @@
       "nombreTotalDeTouteMissions",
       "coutTotalDemission",
       "dureeMoyenneDeTouteLesMissions",
-      "coutMoyenDeBilletAvionDeMissions",
+      "coutTotalDeBilletAvion",
       "tauxDossierRejetMissions",
       "coutMoyenDeMission",
 

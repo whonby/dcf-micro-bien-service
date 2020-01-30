@@ -6,66 +6,50 @@
       <div class="widget-box">
           <div class="widget-title">
             <ul class="nav nav-tabs">
-              <li class="active"><a data-toggle="tab" href="#tab1">Ajouter mission</a></li>
-              <!-- <li><a data-toggle="tab" href="#tab2">Description</a></li> -->
-              <!-- <li><a data-toggle="tab" href="#tab3">Decision de cf</a></li> -->
+              <li class="active"><a data-toggle="tab" href="#tab1">Identification</a></li>
+              <li><a data-toggle="tab" href="#tab2"> Unité administrative</a></li>
+              <li><a data-toggle="tab" href="#tab3"> Transport</a></li> 
             </ul>
           </div>
           <div class="widget-content tab-content">
             <div id="tab1" class="tab-pane active">
 
-                  
-           
                   <table class="table table-bordered table-striped">
                
-                      <fieldset>
-                        <legend>
-                          <h4>
-                          Identification:</h4>
-                          </legend>
+                     
+                        
                           <tr>
 
 
-
-                            <td>
+                            <td width="120">
                        <div class="control-group">
                                 <label class="control-label">Année Budgetaire</label>
                                 <div class="controls ">
-                             <select v-model="formData.exercice_budgetaire_id" class="span">
+                             <!-- <select v-model="formData.exercice_budgetaire_id" class="span">
                            <option v-for="exoBudget in exoEnCours" :key="exoBudget.id"
                            :value="exoBudget.id" >{{exoBudget.annee}}</option>
-                             </select>
+                             </select> -->
+                              <input type="text" class="span" :value="anneeBugetaire" readonly/>
                                 </div>
                                 </div>
                         </td>
 
                    
-                      <td colspan="7">
+                      <td colspan="3" width="450">
         <div class="control-group">
           <label class="control-label">Objet de mission:</label>
             <div class="controls">
-              <textarea  v-model="formData.objet"  class="textarea_editor span2.5" rows="" placeholder="Enter text ..."></textarea>
+              <textarea  v-model="formData.objet"  class="textarea_editor span" rows="3" placeholder="Enter text ..."></textarea>
             </div>
           
         </div>
                       </td>  
-                          </tr>
 
-                          <tr>
 
-                              <td> 
-            <div class="control-group">
-              <label class="control-label" title="categorie de mission">Categorie de mission:</label>
-              <div class="controls">
-           <select v-model="formData.categorie_missions_id" class="span">
-               <option v-for="budget in categories_missions" :key="budget.id" 
-               :value="budget.id">{{budget.libelle}}</option>
-           </select>
-              </div>
-            </div>
-             </td>
 
-                               <td>           
+
+
+                    <td>           
                <div class="control-group">
               <label class="control-label">Type de mission:</label>
               <div class="controls">
@@ -77,10 +61,27 @@
                 </select>
               </div>
             </div> 
-                    </td> 
+                    </td>
 
-                    
-                                     <td>           
+                          </tr>
+
+                          <tr>
+
+                              <td width="250"> 
+            <div class="control-group">
+              <label class="control-label" title="categorie de mission">Categorie de mission:</label>
+              <div class="controls">
+           <select v-model="formData.categorie_missions_id" class="span">
+               <option v-for="budget in categories_missions" :key="budget.id" 
+               :value="budget.id">{{budget.libelle}}</option>
+           </select>
+              </div>
+            </div>
+             </td>
+
+                          
+                        
+                       <td width="250">           
                <div class="control-group">
               <label class="control-label">Date de mission:</label>
               <div class="controls">
@@ -89,7 +90,9 @@
                 </div>
                 </td>
 
-                       <td>         
+
+
+                       <td width="250">         
                   
                <div class="control-group">
               <label class="control-label" title="numero autorisation">N° autorisation:</label>
@@ -103,7 +106,7 @@
                          
 
 
-                            <td> 
+                            <td colspan="2"> 
             <div class="control-group">
               <label class="control-label">N°ccm:</label>
               <div class="controls">
@@ -112,16 +115,18 @@
               </div>
             </div>
                       </td>
-                          </tr>
-                      </fieldset>
+                 </tr>
+                   
+                       </table> 
+                </div>
 
 
-                      <fieldset>
-                 <legend><h4>Unité Administrative:</h4></legend>
-                        <tr>
 
-                  <td> 
-            <div class="control-group">
+            <div id="tab2" class="tab-pane">
+                 <table class="table table-bordered table-striped">
+                   <tr>
+                     <td width="250">
+                        <div class="control-group">
               <label class="control-label">Unite administrative:</label>
               <div class="controls">
            <select v-model="formData.ua_id" class="span">
@@ -130,50 +135,105 @@
            </select>
               </div>
             </div>
-             </td>
-                  <td colspan="7"> 
-            <div class="control-group">
+                    </td>
+                     <td width="250">
+                         <div class="control-group">
               <label class="control-label">Acteur de depense:</label>
               <div class="controls">
            <select v-model="formData.acte_personnel_id" class="span" :readOnly="veifEquipementExist">
                <option v-for="depense in acteurDepenseDynamiques(formData.ua_id )" :key="depense.id" 
-               :value="depense.id">{{depense.matricule}} --{{depense.nom}}</option>
+               :value="depense.id">{{depense.matricule}}</option>
            </select>
               </div>
             </div>
-             </td>
+                    </td>
+                    <td width="250">
+                          
+               <div class="control-group">
+              <label class="control-label">Nom Prenom:</label>
+              <div class="controls">
+            
+            <input type="text"  class="span" :value="afficherNomPrenomActeurDepense(formData.acte_personnel_id)" readonly />
+              
+      
+             
+                </div>
+                  </div>
 
-                   <td colspan="7"> 
-            <div class="control-group">
+                    </td>
+                  </tr>
+
+                  <tr>
+                       <td colspan="2" width="250">
+                      <div class="control-group">
               <label class="control-label">Fonction:</label>
               <div class="controls " >
-     <input type="text"  :value="afficherLaFonctionDActeurDepenseDynamique(formData.acte_personnel_id)" readonly >
+            <input type="text"  class="span" :value="afficherLaFonctionDActeurDepenseDynamique(formData.acte_personnel_id)" readonly >
       
               </div>
             </div>
-                          </td>
-
-                        
-               
-
-               <td> 
-            <div class="control-group">
-              <label class="control-label" title="Source de financement">S. financement:</label>
-              <div class="controls">
-           <select v-model="formData.source_financement_id" class="span">
-               <option v-for="sourceFinancement in sources_financements" :key="sourceFinancement.id" 
-               :value="sourceFinancement.id">{{sourceFinancement.libelle}}</option>
-           </select>
+                    </td>
+                     <td  width="250">
+                       <div class="control-group">
+                      <label class="control-label" title="Source de financement">Source de financement:</label>
+                      <div class="controls">
+                    <select v-model="formData.source_financement_id" class="span">
+                          <option v-for="sourceFinancement in sources_financements" :key="sourceFinancement.id" 
+                         :value="sourceFinancement.id">{{sourceFinancement.libelle}}</option>
+                     </select>
               </div>
             </div>
-             </td>
-                          </tr>
-                          </fieldset>
+               </td>
+                    
+                 </tr> 
 
-                          <fieldset>
-                            <legend><h4> Transport:</h4></legend>
 
+                   <tr>
+                       <td  width="250">
+                 <div class="control-group">
+                  <label class="control-label">Classification Economique</label>
+                  <div class="controls">
+     
+                    <select v-model="formData.economique_id" :readOnly="deveroueconomiq">
+                    <option
+                        v-for="eco in economiqueDynamiques(formData.ua_id)"
+                        :key="eco.id"
+                        :value="eco.afficheEconomique.id"
+                      >{{eco.afficheEconomique.code}} - {{eco.afficheEconomique.libelle}}</option>
+                    </select>
+                  </div>
+                   
+                </div>
+                    </td>
+                    
+                    <td colspan="2" width="350">
+                      <div class="control-group">
+              <label class="control-label">Imputation budgetaire:</label>
+              <div class="controls " >
+            <input
+                type="text"
+                :value="imputationBudgetaireSurLaQuelleLaMissionSexecute"
+                class="span5"
+                placeholder=""
+                readonly
+              />
+              </div>
+            </div>
+                    </td>
+                    
+                 </tr> 
+                         
+       
+            </table> 
+            </div>
+            
+
+            <div id="tab3" class="tab-pane">
+                  
+              <table class="table table-bordered table-striped">
                           <tr>
+
+                    
                         <td>         
                   
                 <div class="control-group">
@@ -374,49 +434,9 @@
                             </td>
 
                           </tr>
-
-
-                          </fieldset>
-                          
-
-                          
-                       </table> 
-         
-              
-                 
-            
-                </div>
-            <!-- <div id="tab2" class="tab-pane">
-                  <table border="0px">
-    
-                
-
-                     
-                           <tr>
-
-                        
-                           </tr>
-       
-            </table> 
-            </div> -->
-            <!-- <div id="tab3" class="tab-pane">
-                  
-                  <table border="0px">
-                          <tr>
-
-                         
-                    
-
-                      
-
-                          </tr>
-                          
-                             
-                
-       
                       </table> 
 
-                    </div> -->
+                    </div>
 
          
 
@@ -493,7 +513,9 @@ export default {
              source_financement_id:"",
              exercice_budgetaire_id:"",
              cout_total:"",
-             temps_arrive:""
+             temps_arrive:"",
+             imputation:"",
+             	economique_id:""
         },
         fonctionActeur:"",
         
@@ -513,7 +535,7 @@ export default {
    ...mapGetters('suivi_controle_budgetaire', ['categories_missions','missions','getNormeMissionPersonnaliser']) ,
   ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
   ...mapGetters('personnelUA', ['all_acteur_depense',  'fonctions']),
-   ...mapGetters('uniteadministrative', ['uniteAdministratives']),
+   ...mapGetters('uniteadministrative', ['uniteAdministratives', 'getPersonnaliseBudgetGeneralParPersonnel']),
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
    nombreJourCalucle(){
@@ -541,6 +563,16 @@ export default {
    },
 
 
+   //reucperation annee budgetaire dynamique
+   anneeBugetaire(){
+     const anneBudget = this.exercices_budgetaires.find(anneBudg =>anneBudg.encours == 1 );
+     if(anneBudget){
+       return anneBudget.annee;
+     }
+     return 0
+   },
+
+
    afficherLaFonctionDActeurDepenseDynamique(){
      return acte_personnel_id => {
        if( acte_personnel_id != undefined) {
@@ -555,21 +587,69 @@ export default {
   
    },
 
+
+// echo de econimique
+
+ deveroueconomiq() {
+      return this.formData.ua_id == "";
+    },
+
+ economiqueDynamiques() {
+     return id => {
+        if (id != null && id != "") {
+          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(
+            element => element.ua_id == id
+          );
+          
+        }
+      };
+     
+    },
+
+
+     imputationBudgetaireSurLaQuelleLaMissionSexecute() {
+      
+      const imputMission = this.getPersonnaliseBudgetGeneralParPersonnel.find(imputMission => imputMission.afficheEconomique.id == this.formData.economique_id);
+
+      if (imputMission) { 
+        return imputMission.codebudget;
+
+      }
+     return 0
+      
+    },
+
+
+// afficher le nom et prenom de l'acteur de depense
+
+   afficherNomPrenomActeurDepense(){
+     return acte_personnel_id => {
+       if( acte_personnel_id != undefined) {
+    var acteur = this.all_acteur_depense.find(acteur => acteur.id == acte_personnel_id  )
+    
+     // this.fonctionActeur = acteur.fonction.id
+      // console.log(acteur)
+     return  acteur.nom  ;
+       }
+    return null
+     }
+  
+   },
+
+   
+
+   
+
    // affichage du cout de billet avion et de la classe voyage en fonction du moyen de transpoprt
 
    affichageDeLaClasseVoyageEtCoutBilletAvionEnFonctionDuMoyenneDeTransport(){
     
      return this.formData.moyen_transport != 1 
-
-      
-      
-     
-
    },
 
-exoEnCours(){
-return this.exercices_budgetaires.filter(element => element.encours == 1)
-},
+// exoEnCours(){
+// return this.exercices_budgetaires.filter(element => element.encours == 1)
+// },
 
    // calcul automatique du frais de deplacement en fonction du source de financement selectionner
 
@@ -655,14 +735,19 @@ acteurDepenseDynamiques() {
        var nouvelObjet = {
          ...this.formData,
          duree: this.nombreJourCalucle,
+          //economique_id: this.economiqueDynamiques,
+          exercice_budgetaire_id:this.anneeBugetaire,
         cout_total: this.calculDuCoutTotal,
+        imputation: this.imputationBudgetaireSurLaQuelleLaMissionSexecute,
        frais_deplacement: this.afficherFraisDeplacementDynamique(this.formData.source_financement_id)
 
             }    
-     this.ajouterMission(nouvelObjet);
+     this.ajouterMission(nouvelObjet);                
         this.formData = {
            cout_billet_avion:"",
                objet:"",
+               imputation:"",
+               economique_id:"",
              date_mission: "",
              classe_voyage:"",
              categorie_missions_id:"",
@@ -685,9 +770,8 @@ acteurDepenseDynamiques() {
              frais_restauration:"",
              autre_frais:"",
              source_financement_id:"",
-             exercice_budgetaire_id:"",
              cout_total:"", 
-             temps_arrive:""
+             
          }
 
          
