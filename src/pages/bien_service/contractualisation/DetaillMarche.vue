@@ -2466,7 +2466,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreT()">Ajouter</a>
+                <button @click.prevent="ajouterOffreT" class="btn btn-primary">Ajouer</button>
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
         <div id="offreF" class="modal hide">
@@ -2523,7 +2523,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>
+                <button @click.prevent="ajouterOffreF()" class="btn btn-primary">Ajouer</button>
+                <!--<a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>-->
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
         <!--Fin dossier candidature ajouterMantater-->
@@ -4569,7 +4570,7 @@ modifierModalActeEffetFinancierLocal(){
             },
 
             modaleOffreFinnanciere(index){
-                this.edite_offre_financiere=this.getterDossierCandidats[index]
+                this.edite_offre_financiere=this.getterDossierCandidats.find(item=>item.id=index);
             },
             isFormulaireDossierCand(){
                 this.isFormulaireDossierCandidature=true
