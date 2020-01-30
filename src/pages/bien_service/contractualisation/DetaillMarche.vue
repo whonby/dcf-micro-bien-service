@@ -2708,7 +2708,12 @@
                         </div>
                     </div>
 
-
+                    <!--
+                    54ABN5
+                    AMP45
+                    54ABN5
+                    AR458
+                    -->
                     <div class="control-group">
                         <label class="control-label">Matricule</label>
                         <div class="controls">
@@ -2716,7 +2721,7 @@
                                     type="text"
                                     v-model="formMandater.matricule_m"
                                     class="span"
-                                    placeholder="Matricule"
+                                    placeholder="Matricule" v-on:keyup="rechercheMandater()"
                             />
                         </div>
                     </div>
@@ -3719,7 +3724,8 @@
                     lettre_invitation_id:"",
                     date_id:"",
                     nom_mandat:"",
-                    prenom_nom:""
+                    prenom_nom:"",
+                    matricule_m:""
                 },
                 formAnalyseDossier:{
                     date_analyse:"",
@@ -3964,6 +3970,7 @@ created() {
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers","personnaliseGetterMarcheBailleur"]),
+            ...mapGetters('personnelUA', ['acteur_depenses']),
 
                 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
@@ -4227,7 +4234,22 @@ created() {
                     keyboard: false
                 });
             },
-
+           rechercheMandater(){
+             console.log(this.formMandater.matricule_m)
+              let objetMandater=this.acteur_depenses.filter(item=>item.acteur_depense.matricule==this.formMandater.matricule_m)
+               console.log(objetMandater)
+               if(objetMandater!=undefined){
+                   if (objetMandater.length==1){
+                       let acteur= this.acteur_depenses.find(item=>item.acteur_depense.matricule==this.formMandater.matricule_m)
+                       this.formMandater.prenom_nom=acteur.acteur_depense.prenom
+                       this.formMandater.nom_mandat=acteur.acteur_depense.nom
+                   }
+               }
+             if(this.formMandater.matricule_m==""){
+                 this.formMandater.prenom_nom=""
+                 this.formMandater.nom_mandat=""
+             }
+           },
             recherche() {
 
                console.log(this.search)
@@ -4354,7 +4376,8 @@ created() {
                         lettre_invitation_id:"",
                         date_id:"",
                         nom_mandat:"",
-                        prenom_nom:""
+                        prenom_nom:"",
+                    matricule_m:""
                 }
             },
             ajouterCojoMarche(){
