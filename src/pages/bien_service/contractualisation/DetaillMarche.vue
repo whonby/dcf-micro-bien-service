@@ -3853,6 +3853,7 @@ created() {
                 return  marche_id=>{
                     if (marche_id!="") {
                         const vM=this;
+                        console.log("Marche detail")
                         let Objet=this.marches.find(idmarche => idmarche.id == marche_id)
                         if(Objet!=undefined){
                            vM.formData.type_appel=Objet.procedure_passation.type_procedure.libelle;
@@ -3871,16 +3872,18 @@ created() {
             listeAppelOffre(){
                 return  marche_id=>{
                     if (marche_id!="") {
+                        console.log("Marche appel offre")
                        const vM=this;
-                        let Objet=this.appelOffres.find( idmarche => idmarche.marche.id == marche_id)
+                        let Objet=this.appelOffres.find( idmarche => idmarche.marche_id == marche_id)
+                        console.log("Marche appel offre 10")
                         if(Objet!=undefined){
                             vM.formDossierCadidature.appel_offre_id=Objet.id;
                             vM.formLot.appel_offre_id=Objet.id;
                             vM.formLettre.appel_offre_id=Objet.id;
                             vM.formDataCojo.num_dossier_appel_offre=Objet.ref_appel;
                         }
-
-         return this.appelOffres.filter( idmarche => idmarche.marche.id == marche_id)
+                        console.log(Objet)
+         return this.appelOffres.filter( idmarche => idmarche.marche_id == marche_id)
                     }
                 }
 
@@ -3888,10 +3891,11 @@ created() {
             listeLots(){
                 return  marche_id=>{
                     if (marche_id!="") {
+                        console.log("Marche lots")
                        // let listeLotMarche =this.lots.filter( idmarche => idmarche.marche.id == marche_id)
                        // const searchTerm = this.search.toLowerCase();
                         //return this.lots.filter( idmarche => idmarche.marche.id == marche_id)
-                        return this.lots.filter( idmarche => idmarche.marche.id == marche_id)
+                        return this.lots.filter( idmarche => idmarche.marche_id == marche_id)
                     }
                 }
 
@@ -3901,6 +3905,7 @@ created() {
             listeActeEffetFinancier(){
                 return marche_id =>{
                     if(marche_id !=""){
+                        console.log("Marche liste accteEffet")
                         return this.getActeEffetFinancierPersonnaliser.filter(identreprise =>identreprise.id == marche_id)
                     }
                 }
@@ -3908,6 +3913,7 @@ created() {
             dossierCandidature: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche dossier candidat")
                         return this.getterDossierCandidats.filter(idmarche => idmarche.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -3915,6 +3921,7 @@ created() {
             lettreInvitationAMarche: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche lettre inviation marche")
                         return this.getterLettreInvitation.filter(idmarche => idmarche.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -3922,6 +3929,7 @@ created() {
             listeMantater: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche liste mantater")
                         return this.getterMandate.filter(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -3930,6 +3938,7 @@ created() {
             listeCojo: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche cojo")
                         return this.getterCojos.filter(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -3938,6 +3947,7 @@ created() {
         listeAnalyseDossier: function () {
             return marcheid => {
                 if (marcheid != "") {
+                    console.log("Marche liste analyse dossier")
                     return this.getterAnalyseDossiers.filter(idmarche => idmarche.dossier_candidature.appel_offre.marche_id == marcheid)
                 }
             }
@@ -3946,6 +3956,7 @@ created() {
             demandeAno: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche demande ano")
                         return this.getterDemandeAno.filter(idmarche => idmarche.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -3953,6 +3964,7 @@ created() {
             listeAnalyseDPM: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche liste analyse dpm")
                         return this.getterAnalyseDMP.filter(idmarche => idmarche.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -3960,6 +3972,7 @@ created() {
             listeAnoDMPBailleur: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche dmp bailleur")
                         return this.getterAnoDMPBailleur.filter(idmarche => idmarche.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -3968,6 +3981,7 @@ created() {
             listeAnalyseDMPFavorable: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche analyse DMP Favorable")
                         return this.getterAnalyseDMP.filter(idmarche => {
                             if(idmarche.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid && idmarche.avis_bail==1){
                              return idmarche
@@ -3979,6 +3993,7 @@ created() {
             listeObservationBailleurANODMP: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche observation bailleur ANODMP")
                         return this.getterObseravtionBailleurs.filter(idmarche => idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -3986,7 +4001,7 @@ created() {
             selectionAttributionMarche: function () {
                 return marcheid => {
                     if (marcheid != "") {
-
+                        console.log("Marche attribution marche")
                         let marcherEnAction=this.getterObseravtionBailleurs.filter(idmarche => idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
                         let marcherFavaroble=marcherEnAction.filter(idmarche=>idmarche.avis_bail==1).length
 
@@ -4050,6 +4065,7 @@ created() {
             listeActeEffectFinnancier: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche leste acte effect finnancier")
                         return this.getActeEffetFinancierPersonnaliser.filter(idmarche => idmarche.marche_id == marcheid)
                     }
                 }
