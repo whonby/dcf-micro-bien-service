@@ -3298,3 +3298,52 @@ export function supprimerTypeCandidat({ commit }, id) {
     })
 
 }
+
+
+
+
+export  function  getMarcheBailleur({commit}) {
+    queue.push(() => axios.get('/marcheBailleurs').then((response) => {
+        commit('GET_ALL_BAILLEUR_MARCHE', response.data.data)
+
+    }).catch(error => console.log(error)))
+}
+
+export function ajouterMarcherBailleur({commit}, formData){
+    asyncLoading(axios.post('/marcheBailleurs',formData)).then(response =>{
+        if(response.status == 201){
+            console.log(response.data)
+            commit('AJOUTER_BAILLEUR_MARCHE', response.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
+
+export function modificationMarcheBailleur({commit}, element_modifie) {
+    asyncLoading( axios.put('/marcheBailleurs' ,element_modifie)).then(response => {
+        commit('MODIFIER_BAILLEUR_MARCHE', response.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}
+
+export function supprimerMarcheBailleur({commit}, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('DELETE_BAILLEUR_MARCHE', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/marcheBailleurs/' + id).then(() => dialog.close() )
+        })
+
+}

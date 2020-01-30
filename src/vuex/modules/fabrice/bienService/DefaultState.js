@@ -55,8 +55,8 @@ documentProcedures:[],
     mandats:[],
     executionMarches:[],
     typeAppelOffre: [],
-typeCandidat:[]
-
+typeCandidat:[],
+bailleurMarche:[]
 
 
 

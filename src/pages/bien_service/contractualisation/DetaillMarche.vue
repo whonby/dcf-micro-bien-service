@@ -55,13 +55,17 @@
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab1">Appel Offre</a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab01">Bailleur</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab1">Appel Offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li>
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
-                            <div id="tab1" class="tab-pane active">
+                            <div id="tab01" class="tab-pane active">
+                                bailleur
+                            </div>
+                            <div id="tab1" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">

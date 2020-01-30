@@ -57,7 +57,7 @@ export const getterAnoDMPBailleur = state => state.stateAnoDmpBailleur
 export const getterObseravtionBailleurs = state => state.obseravtionBailleurs
 export const nombremarches = state => state.marches.length;
 
-
+export const getterMarcheBailleur= state => state.bailleurMarche;
 
 export const nombremarchesExecute = getters =>
     getters.marches.filter(
@@ -79,6 +79,7 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
         (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
         0
     );
+
 
 printMarcheNonAttribue
 

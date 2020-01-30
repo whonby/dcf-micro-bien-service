@@ -1704,3 +1704,27 @@ export const MODIFIER_TYPE_CANDADIT = (state, elementModif) => {
 export const SUPPRIMER_TYPE_CANDADIT = (state, id) => {
     state.typeCandidat = state.typeCandidat.filter(prest => prest.id != id)
 }
+
+
+
+export const GET_ALL_BAILLEUR_MARCHE = (state, tableau_prestation) =>{
+    state.bailleurMarche = tableau_prestation
+}
+
+
+export const AJOUTER_BAILLEUR_MARCHE= (state, elementAjouter) => {
+    state.bailleurMarche.unshift(elementAjouter)
+}
+
+export const MODIFIER_BAILLEUR_MARCHE = (state, elementModif)=>{
+    state.bailleurMarche = state.bailleurMarche.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const DELETE_BAILLEUR_MARCHE = (state, id)=> {
+    state.bailleurMarche = state.bailleurMarche.filter(prest => prest.id !=id)
+}
