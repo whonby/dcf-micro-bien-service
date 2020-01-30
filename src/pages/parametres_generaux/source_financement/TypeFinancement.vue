@@ -113,10 +113,15 @@
           </form>              
           </div>
            <div class="modal-footer"> 
+
              <button v-show="formData.code.length && 
              formData.libelle.length"
+
+            
+
               @click.prevent="ajouterTitreLocal" class="btn btn-primary">Valider</button>
-              <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
+              <button data-dismiss="modal" class="btn" href="#">Fermer</button>
+           </div>
             </div>
 
 <!----- fin modal  ajouter  ---->

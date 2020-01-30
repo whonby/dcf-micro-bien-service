@@ -124,7 +124,10 @@ export default {
          "getCojo","getAnalyseDossier", 'getMotifDecision', 'getDocumentProcedure',
          'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur",
           'getActeEffetFinancier','getEngagement','getMandat',"getVille","getPays","getCommune",
-          'getActeEffetFinancier',"getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"])
+          'getActeEffetFinancier',"getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
+
+          ,"getMarcheBailleur"])
+
 
   },
 
@@ -289,7 +292,11 @@ this.getLettreInvitation()
     this.getAnalyseDMP()
     this.getAnoDMPBailleur()
     this.getObservationBailleur()
+
     this.getFacture()
+
+    this.getMarcheBailleur()
+
       /**
        * fin missions
        */
