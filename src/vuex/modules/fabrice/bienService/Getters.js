@@ -59,6 +59,23 @@ export const nombremarches = state => state.marches.length;
 
 export const getterMarcheBailleur= state => state.bailleurMarche;
 
+export const personnaliseGetterMarcheBailleur=(state, getters, rootState, rootGetters) =>
+    state.bailleurMarche.map(element => {
+        if (element.bailleur_id !== null && element.type_finnancement_id!==null ) {
+            element = {
+                ...element,
+                bailleur: rootGetters['parametreGenerauxSourceDeFinancement/sources_financements'].find(
+                    section => section.id == element.bailleur_id
+                ),
+                typeFinnancement: rootGetters['parametreGenerauxSourceDeFinancement/types_financements'].find(
+                    exercice => exercice.id == element.type_finnancement_id
+                ),
+            };
+        }
+
+        return element;
+    });
+
 export const nombremarchesExecute = getters =>
     getters.marches.filter(
         marcheNonAttribue => marcheNonAttribue.attribue == 1

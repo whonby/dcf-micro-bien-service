@@ -35,10 +35,9 @@
                                     {{detail_marche.objetUniteAdministrative.libelle}}
                                 </td>
                                 <td class="taskOptions">
-                                    Ok
+                                    {{detail_marche.exo_id}}
                                 </td>
                             </tr>
-
                             </tbody>
                         </table>
                     </div>
@@ -62,8 +61,80 @@
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
+
+
                             <div id="tab01" class="tab-pane active">
-                                bailleur
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <h4>Liste des bailleurs du marché</h4>
+
+                                <table class="table table-bordered table-striped" v-if="marcheid">
+                                    <thead>
+                                    <tr>
+                                        <th>Bailleur</th>
+                                        <th>Type finanncement</th>
+                                        <th>Montant</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="odd gradeX" v-for="(appelOffre, index) in listeBailleurMarche(marcheid)"
+                                        :key="appelOffre.id">
+                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.bailleur.libelle || 'Non renseigné'}}</td>
+                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.typeFinnancement.libelle || 'Non renseigné'}}</td>
+                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.montant || 'Non renseigné'}}</td>
+                                        <div class="btn-group">
+                                            <button @click.prevent="supprimerMarcheBailleur(appelOffre.id)"  class="btn btn-danger ">
+                                                <span class=""><i class="icon-trash"></i></span></button>
+                                        </div>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+
+                                <div id="addBailleurMarche" class="modal hide" aria-hidden="true" style="display: none;">
+                                    <div class="modal-header">
+                                        <button data-dismiss="modal" class="close" type="button">×</button>
+                                        <h3>Ajouter bailleur </h3>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form action="#" method="get" v-if="marcheid">
+                                            <label>Bailleur</label>
+                                            <div class="controls">
+                                                <select v-model="formBailleur.bailleur_id" class="span" >
+                                                    <option v-for="varText in sources_financements" :key="varText.id"
+                                                            :value="varText.id">{{varText.libelle}}</option>
+                                                </select>
+                                            </div>
+                                            <label>Type finnancement <code>*</code> </label>
+                                            <div class="controls">
+
+                                                <select v-model="formBailleur.type_finnancement_id" class="span">
+                                                    <option v-for="varText in types_financements" :key="varText.id"
+                                                            :value="varText.id">{{varText.libelle}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label">Montant <code>*</code> :</label>
+                                                <div class="controls">
+                                                    <input type="text" class="span5" placeholder="Libelle lot" v-model="formBailleur.montant">
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="modal-footer">
+                                            <button @click.prevent="ajouterBailleur" class="btn btn-primary">Valider</button>
+                                            <button data-dismiss="modal" class="btn" href="#">Fermer</button>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                             <div id="tab1" class="tab-pane">
                                 <div class="span4"></div>
@@ -3597,6 +3668,14 @@
                    appel_offre_id:"",
                    mode_passation_id:""
                }
+                ,
+                formBailleur:{
+                    type_finnancement_id:"",
+                    montant:"",
+                    marche_id:"",
+                    bailleur_id:"",
+
+                }
                ,formMandater:{
                     lettre_invitation_id:"",
                     date_id:"",
@@ -3844,15 +3923,12 @@ created() {
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
-
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
-                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers"]),
+                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers","personnaliseGetterMarcheBailleur"]),
 
                 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
-
-              
-
-            ...mapGetters('gestionMarche', ['entreprises',"secteur_activites"]),
+            ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
+                'types_financements']) ,
             marcheDetail(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -3872,7 +3948,16 @@ created() {
 
             },
 
+            listeBailleurMarche(){
+                return  marche_id=>{
+                    if (marche_id!="") {
+                        console.log("MarcheBailleur")
+                        return this.personnaliseGetterMarcheBailleur.filter( idmarche => idmarche.marche_id == marche_id)
+                    }
+                }
 
+
+            },
             listeAppelOffre(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -4075,63 +4160,6 @@ created() {
                 }
             },
 
-       /*     searcheEntreprise: function () {
-                return val => {
-                    const vM=this;
-                    if (val != "") {
-                        console.log(val)
-                        let entre=this.entreprises.find(item=>item.id==val);
-
-                        const vM=this;
-                        if (entre!=undefined){
-                            vM.formDossierCadidature.telephone_cand=entre.telephone
-                            vM.formDossierCadidature.adresse_post=entre.adresse
-                            vM.formDossierCadidature.nom_cand=entre.raison_sociale
-                            vM.formDossierCadidature.reg_com=entre.numero_rc
-                            vM.formDossierCadidature.email_cand=entre.email
-                            vM.formDossierCadidature.numero_cc=entre.numero_cc
-                            vM.formFournisseur.secteur_activite_id=entre.secteur_activite_id
-                            console.log(entre)
-
-                        }else{
-                            vM.formDossierCadidature.reg_com=""
-                            vM.formDossierCadidature.telephone_cand=""
-                            vM.formDossierCadidature.adresse_post=""
-                            vM.formDossierCadidature.nom_cand=""
-                            vM.formDossierCadidature.email_cand=""
-                            vM.formDossierCadidature.numero_cc=""
-                            vM.formFournisseur.secteur_activite_id=""
-                            vM.search=""
-                        }
-                    }
-                    return ""
-                }
-            }*/
-
-            // filtre_equipement() { getterAnoDMPBailleur
-            //   const st = this.search.toLowerCase();
-            //   return this.equipements.filter(type => {
-            //     return (
-
-            //       type.libelle.toLowerCase().includes(st)
-            //     );
-            //   });
-            // }
-//             acteDepenseFiltre(){
-
-//      const searchTerm = this.search.toLowerCase();
-
-// return this.acteDepense.filter((item) => {
-
-//      return item.matricule.toLowerCase().includes(searchTerm)
-
-
-
-
-
-//    }
-// )
-//    }
 
 
         },
@@ -4147,8 +4175,10 @@ created() {
                 "modifierAnalyseDossier","supprimerAnalyseDossier","ajouterDemandeAno",
                 "modifierDemandeAno","supprimerDemandeAno","ajouterAnalyseDMP","modifierAnalyseDMP",
                 "supprimerAnalyseDMP","ajouterAnoDMPBailleur","modifierAnoDMPBailleur","supprimerAnoDMPBailleur"
-                , "modifierObservationBaileur","ajouterObseravtionBailleur" , "supprimerObseravtionBailleur",
-                 "ajouterFournisseur", "ajouterActeEffetFinancier", "modifierActeEffetFinancier","supprimerActeEffetFinancier","modifierMarche"
+                , "modifierObservationBaileur","ajouterObseravtionBailleur","supprimerObseravtionBailleur",
+                 "ajouterFournisseur", "ajouterActeEffetFinancier",
+                "modifierActeEffetFinancier","supprimerActeEffetFinancier","modifierMarche","modificationMarcheBailleur",
+                "ajouterMarcherBailleur","supprimerMarcheBailleur"
             ]),
             ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
             // formatageSomme: formatageSomme,
@@ -4182,6 +4212,16 @@ created() {
                     backdrop: "static",
                     keyboard: false
                 });
+            },
+            ajouterBailleur(){
+                this.formBailleur.marche_id=this.marcheid
+               this.ajouterMarcherBailleur(this.formBailleur)
+                this.formBailleur={
+                      type_finnancement_id:"",
+                        montant:"",
+                        marche_id:"",
+                        bailleur_id:"",
+                }
             },
             // fonction pour vider l'input ajouter
             ajouter(){
