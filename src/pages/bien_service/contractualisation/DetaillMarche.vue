@@ -1504,13 +1504,10 @@
             <div id="tab37" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" v-if="selectionAttributionMarche(marcheid).entrepriseInfo!=''">Ajouter</a>
+                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" v-show="selectionAttributionMarche(marcheid).entrepriseInfo!=''">Ajouter</a>
                     </div>
 
-                    <div class="widget-content" v-if="selectionAttributionMarche(marcheid).entrepriseInfo==''">
 
-                        <a href="#addFournisseurDosntBase" data-toggle="modal" class="btn btn-success" title="ajouter nouveau fournisseur">ajouter fournisseur</a>
-                    </div>
 
                 </div>
                 <h4> Liste acte effet financier </h4>
@@ -2410,9 +2407,6 @@
                                 <input type="text" class="span5" placeholder="Montant total ttc" v-model="formOffreFinanciere.montant_total_ttc">
                             </div>
                         </div>
-
-
-
                     </form>
                 </div>
             </div>
