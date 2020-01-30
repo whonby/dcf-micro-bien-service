@@ -80,13 +80,13 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="odd gradeX" v-for="(appelOffre, index) in listeBailleurMarche(marcheid)"
+                                    <tr class="odd gradeX" v-for="appelOffre in listeBailleurMarche(marcheid)"
                                         :key="appelOffre.id">
-                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                        <td @dblclick="editeMarcheBailleur(appelOffre.id)">
                                             {{appelOffre.bailleur.libelle || 'Non renseigné'}}</td>
-                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                        <td @dblclick="editeMarcheBailleur(appelOffre.id)">
                                             {{appelOffre.typeFinnancement.libelle || 'Non renseigné'}}</td>
-                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                        <td @dblclick="editeMarcheBailleur(appelOffre.id)">
                                             {{appelOffre.montant || 'Non renseigné'}}</td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerMarcheBailleur(appelOffre.id)"  class="btn btn-danger ">
@@ -130,6 +130,43 @@
                                         </form>
                                         <div class="modal-footer">
                                             <button @click.prevent="ajouterBailleur" class="btn btn-primary">Valider</button>
+                                            <button data-dismiss="modal" class="btn" href="#">Fermer</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="editBailleuMarche" class="modal hide" aria-hidden="true" style="display: none;">
+                                    <div class="modal-header">
+                                        <button data-dismiss="modal" class="close" type="button">×</button>
+                                        <h3>Modification </h3>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form action="#" method="get" v-if="marcheid">
+                                            <label>Bailleur</label>
+                                            <div class="controls">
+                                                <select v-model="edit_bailleur_marche.bailleur_id" class="span" >
+                                                    <option v-for="varText in sources_financements" :key="varText.id"
+                                                            :value="varText.id">{{varText.libelle}}</option>
+                                                </select>
+                                            </div>
+                                            <label>Type finnancement <code>*</code> </label>
+                                            <div class="controls">
+
+                                                <select v-model="edit_bailleur_marche.type_finnancement_id" class="span">
+                                                    <option v-for="varText in types_financements" :key="varText.id"
+                                                            :value="varText.id">{{varText.libelle}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label">Montant <code>*</code> :</label>
+                                                <div class="controls">
+                                                    <input type="text" class="span5" placeholder="Libelle lot" v-model="edit_bailleur_marche.montant">
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="modal-footer">
+                                            <button @click.prevent="modificationBailleurMarche" class="btn btn-primary">Modification</button>
                                             <button data-dismiss="modal" class="btn" href="#">Fermer</button>
                                         </div>
                                     </div>
@@ -3675,7 +3712,8 @@
                     marche_id:"",
                     bailleur_id:"",
 
-                }
+                },
+                edit_bailleur_marche:""
                ,formMandater:{
                     lettre_invitation_id:"",
                     date_id:"",
@@ -4430,6 +4468,18 @@ afficherModalModifierActeEffetFinancier(index){
     });
     this.editActeEffetFinancier = this.acteEffetFinanciers[index]
 },
+            modificationBailleurMarche(){
+                this.modificationMarcheBailleur(this.edit_bailleur_marche)
+                this.$('#editBailleuMarche').modal('hide');
+            },
+            editeMarcheBailleur(index){
+                this.$('#editBailleuMarche').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                this.edit_bailleur_marche = this.personnaliseGetterMarcheBailleur.find(item=>item.id==index)
+                console.log(this.edit_bailleur_marche)
+            },
 
 // vider l'input 
 modifierModalActeEffetFinancierLocal(){
