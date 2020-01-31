@@ -621,6 +621,7 @@ export function modifierArticles({ commit, dispatch }, nouveau) {
       })
     });
 }
+
 //supprimer
 export function supprimerArticles({ commit, dispatch}, id) {
   this.$app.$dialog
@@ -794,7 +795,7 @@ export function modifierQuantiteEnStock({ commit }, objet) {
     // montant_total = objet.montant_actu
   })
     .then(response => {
-      commit("MODIFIER_QUANTITE_EN_STOCK", response.objet)
+      commit("MODIFIER_QUANTITE_EN_STOCK", response.data)
     });
 }
 export function modifierQuantiteReel({ commit, dispatch }, objet) {
@@ -806,7 +807,7 @@ export function modifierQuantiteReel({ commit, dispatch }, objet) {
       // montant_total = objet.montant_actu
     })
     .then(response => {
-      commit("MODIFIER_QUANTITE_REEL", response.objet);
+      commit("MODIFIER_QUANTITE_REEL", response.data);
       dispatch("getAllBesoinImmo");
       
     });
@@ -822,7 +823,7 @@ export function modifierQuantiteNormeDmd({ commit, dispatch }, objet) {
       // montant_total = objet.montant_actu
     })
     .then(response => {
-      commit("MODIFIER_NORME_REALISE", response.objet);
+      commit("MODIFIER_NORME_REALISE", response.data);
       dispatch("getAllNormeArticle");
 
     });

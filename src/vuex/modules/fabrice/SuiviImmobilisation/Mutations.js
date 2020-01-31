@@ -53,6 +53,7 @@ const MODIFIER_FAMILLE = (state, objetModifie) => {
   });
 };
 
+
 // supprimer FAMILLE
 const SUPPRIMER_FAMILLE = (state, id) => {
   state.familles = state.familles.filter(famille => famille.id != id);
@@ -287,6 +288,7 @@ const MODIFIER_QTE_REALISE_BESOIN = (state, objet) => {
     return besoinRealise;
   });
 };
+
 // const MODIFIER_ACT_PERSONNEL = (state, objet) => {
 //   state.acte_personnels = state.acte_personnels.map(acte_personnel => {
 //     if (acte_personnel.id == objet.id) {

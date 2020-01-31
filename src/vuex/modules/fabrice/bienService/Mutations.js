@@ -1794,8 +1794,31 @@ export const MODIFIER_COMMUNES = (state, elementModif) => {
 }
 
 
+
 // delete type text juridique
 
 export const SUPPRIMER_COMMUNES = (state, id) => {
     state.communes = state.communes.filter(prest => prest.id != id)
 }
+
+// export const MODIFIER_ENGAGEMENT_VAL = (state, elementModif) => {
+//     state.engagements = state.engagements.map(response => {
+//         if (response.id == elementModif.id) {
+//             response = { ...elementModif }
+//         }
+//         return response
+//     })
+// }
+export const MODIFIER_ENGAGEMENT_VAL = (state, objet) => {
+    state.engagements = state.engagements.map(norme_real => {
+        if (norme_real.id == objet.id) {
+            norme_real.val = objet.modVal;
+
+            // besoin_immo.montant_total = objet.montant_actu;
+        }
+
+        return norme_real;
+    });
+};
+// ajouter FAMILLE
+
