@@ -3069,8 +3069,67 @@ export function supprimerMandat({ commit, dispatch }, id) {
 
 
 
+// export function modifierEngagement_val({ commit, dispatch }, objet) {
+//   // console.log(id_besoinImmo_a_modifier, qte_actu);
+//   axios
+//     .put("/engagement/" + objet.id, {
+//       val: objet.modVal
+//       // ,
+//       // montant_total = objet.montant_actu
+//     })
+//     .then(response => {
+//       commit("MODIFIER_ENGAGEMENT_VAL", response.data);
+//       dispatch("getEngagement");
+
+//     });
+// }
 
 
+export function modifierEngagement_val({ commit, dispatch }, objet) {
+  // console.log(id_besoinImmo_a_modifier, qte_actu);
+  axios
+    .put("/engagement/" + objet.id, {
+      val: objet.modVal
+      // ,
+      // montant_total = objet.montant_actu
+    })
+    .then(response => {
+      commit("MODIFIER_ENGAGEMENT_VAL", response.data);
+      dispatch("getEngagement");
+
+    });
+}
+
+
+
+
+
+
+// export function modifierEngagement_val({ commit, dispatch }, element_modifie) {
+//   asyncLoading(axios.put('/engagement', element_modifie)).then(response => {
+//     commit('MODIFIER_ENGAGEMENT_VAL', response.data)
+//     dispatch('getMandat')
+//     this.$app.$notify({
+//       title: 'success ',
+//       text: 'Modification effectué !',
+//       type: "success"
+//     })
+//   }).catch(error => console.log(error))
+// }
+
+
+// export function modifierEngagement_val({ commit, dispatch }, element_modifie) {
+//   asyncLoading(axios.put('/engagement', element_modifie))
+//     .then(response => {
+//     commit('MODIFIER_ENGAGEMENT', response.data)
+//     dispatch('getEngagement')
+//     this.$app.$notify({
+//       title: 'success ',
+//       text: 'Modification effectué !',
+//       type: "success"
+//     })
+//   }).catch(error => console.log(error))
+// }
 
 
 

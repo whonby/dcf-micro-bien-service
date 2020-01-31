@@ -1,3 +1,4 @@
+getEngagementPersonnaliser1
 export const pays = state => state.pays
 export const villes = state => state.villes
 export const communes = state => state.communes
@@ -229,7 +230,7 @@ export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, ro
     //   marcheNonAttribue => marcheNonAttribue.attribue == 0
     // );
 
-getTypeTextJuridique
+getEngagementPersonnaliser1
 
 
     export  const printMarcheNonAttribue = (state, getters,rootState, rootGetters) =>
@@ -312,7 +313,7 @@ export const getEngagementPersonnaliser = (state, getters, rootState, rootGetter
 printMarcheNonAttribue
 export const engagementValider = state =>
     state.engagements.filter(
-        Immrealise => Immrealise.decision_cf == 1
+        Immrealise => Immrealise.val == 1
     );
 
 

@@ -1819,6 +1819,7 @@ export const MODIFIER_COMMUNES = (state, elementModif) => {
 }
 
 
+
 // delete type text juridique
 
 export const SUPPRIMER_COMMUNES = (state, id) => {
