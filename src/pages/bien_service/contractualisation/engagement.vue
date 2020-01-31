@@ -2315,7 +2315,12 @@
                     </div>
 
   
-
+<div class="modal-footer">
+        
+        <a data-dismiss="modal" class="btn btn-danger" @click.prevent="retourListeEntreprise" href="#">Voir Tableau</a>
+       
+      </div>
+  
 
 
 
@@ -3500,7 +3505,9 @@ afficherModalModifierMotifMandat(index) {
         keyboard: false
       });
     },
- 
+  retourListeEntreprise(){
+                 this.$router.push({ name: 'executionMarche' })
+            },
 
 
 
