@@ -168,7 +168,7 @@
                         <div class="control-group">
                           <label>Entreprise</label>
                             <div class="controls">
-                                <input type="text" readonly  class="span" placeholder="" :value="detail_marche.raison_sociale">
+                                <input type="text" readonly  class="span4" placeholder="" :value="detail_marche.raison_sociale">
                                   <input type="hidden" readonly  class="span" placeholder="" :value="detail_marche.id">
                             </div>
                         </div>
@@ -178,7 +178,7 @@
                              <label>Banque</label>
                             <div class="controls">
                               
-                            <select v-model="formData.banque_id" class="span">
+                            <select v-model="formData.banque_id" class="span4">
                                 <option v-for="varText in banques" :key="varText.id"
                               :value="varText.id">{{varText.libelle}}</option>
                             </select>
@@ -191,7 +191,7 @@
                             <div class="controls">
                                 <label>Nature de compte</label>
                                 <!-- <input type="text" class="span" placeholder="saisir la nature de compte" v-model="formData.nature_compte"> -->
-                           <select v-model="formData.nature_compte">
+                           <select v-model="formData.nature_compte" class="span4">
                                                             <option></option>
                                                             <option value="0">Compte courant</option>
                                                            
@@ -214,7 +214,7 @@
                               :value="varText.id">{{varText.raison_sociale}}</option>
                             </select> -->
                                   <div class="controls">
-                                <input type="text" class="span" placeholder="" v-model="formData.numero_compte">
+                                <input type="text" class="span4" placeholder="" v-model="formData.numero_compte">
                             </div>
                             </div>
                         </div>
@@ -223,7 +223,7 @@
                         <div class="control-group">
                           <label>Date d'ouverture</label>
                             <div class="controls">
-                                <input type="date" class="span" placeholder="" v-model="formData.date_ouverture_compte">
+                                <input type="date" class="span4" placeholder="" v-model="formData.date_ouverture_compte">
                             </div>
                         </div>
                           </td>
@@ -232,7 +232,7 @@
                         <div class="control-group">
                           <label>Signature</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="saisir le signataire compte" v-model="formData.signataire_compte">
+                                <input type="text" class="span4" placeholder="saisir le signataire compte" v-model="formData.signataire_compte">
                             </div>
                         </div>
                           </td>
@@ -248,7 +248,7 @@
                         <div class="control-group">
                             <div class="controls">
                                 <label>Agence</label>
-                                <input type="text" class="span" placeholder="Saisir l'agence" v-model="formData.agence">
+                                <input type="text" class="span4" placeholder="Saisir l'agence" v-model="formData.agence">
                             </div>
                         </div>
                           </td>
@@ -257,7 +257,7 @@
                         <div class="control-group">
                             <label>Code agence</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="saisir le numero agence" v-model="formData.numero_agence">
+                                <input type="text" class="span4" placeholder="saisir le numero agence" v-model="formData.numero_agence">
                             </div>
                         </div>
                           </td>
@@ -266,7 +266,7 @@
                         <div class="control-group">
                             <label>Telephone agence</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="saisir le teleophone agence" v-model="formData.telephone_agence">
+                                <input type="text" class="span4" placeholder="saisir le teleophone agence" v-model="formData.telephone_agence">
                             </div>
                         </div>
                           </td>
@@ -276,7 +276,7 @@
                               <div class="control-group">
                                                     <label class="control-label">Ville:</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.ville_id">
+                                                        <select v-model="formData.ville_id" class="span4">
                                                             <option></option>
                                                             <option v-for="item in villes" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -290,7 +290,7 @@
                               <div class="control-group">
                                                     <label class="control-label">Communes</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.commune_id">
+                                                        <select v-model="formData.commune_id" class="span4">
                                                             <option></option>
                                                             <option v-for="item in communeDynamiques(formData.ville_id)" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -305,7 +305,7 @@
                         <div class="control-group">
                             <label>Situation geographique</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="sitaution geographique" v-model="formData.situation_geographique_angence">
+                                <input type="text" class="span4" placeholder="sitaution geographique" v-model="formData.situation_geographique_angence">
                             </div>
                         </div>
                           </td>
@@ -335,8 +335,8 @@
                         <div class="control-group">
                           <label>Entreprise</label>
                             <div class="controls">
-                                <input type="text" readonly  class="span" placeholder="" :value="detail_marche.raison_sociale">
-                                  <input type="hidden" readonly  class="span" placeholder="" :value="detail_marche.id">
+                                <input type="text" readonly  class="span4" placeholder="" :value="detail_marche.raison_sociale">
+                                  <input type="hidden" readonly  class="span4" placeholder="" :value="detail_marche.id">
                             </div>
                         </div>
                           </td>
@@ -345,7 +345,7 @@
                              <label>Banque</label>
                             <div class="controls">
                               
-                            <select v-model="editCompte.banque_id" class="span">
+                            <select v-model="editCompte.banque_id" class="span4">
                                 <option v-for="varText in banques" :key="varText.id"
                               :value="varText.id">{{varText.libelle}}</option>
                             </select>
@@ -357,8 +357,8 @@
                         <div class="control-group">
                             <div class="controls">
                                 <label>Nature de compte</label>
-                                <!-- <input type="text" class="span" placeholder="saisir la nature de compte" v-model="editCompte.nature_compte"> -->
-                           <select v-model="editCompte.nature_compte">
+                                <!-- <input type="text" class="span4" placeholder="saisir la nature de compte" v-model="editCompte.nature_compte"> -->
+                           <select v-model="editCompte.nature_compte" class="span4">
                                                             <option></option>
                                                             <option value="0">Compte courant</option>
                                                            
@@ -381,7 +381,7 @@
                               :value="varText.id">{{varText.raison_sociale}}</option>
                             </select> -->
                                   <div class="controls">
-                                <input type="text" class="span" placeholder="" v-model="editCompte.numero_compte">
+                                <input type="text" class="span4" placeholder="" v-model="editCompte.numero_compte">
                             </div>
                             </div>
                         </div>
@@ -390,7 +390,7 @@
                         <div class="control-group">
                           <label>Date d'ouverture</label>
                             <div class="controls">
-                                <input type="date" class="span" placeholder="" v-model="editCompte.date_ouverture_compte">
+                                <input type="date" class="span4" placeholder="" v-model="editCompte.date_ouverture_compte">
                             </div>
                         </div>
                           <td>
@@ -408,7 +408,7 @@
                         <div class="control-group">
                             <div class="controls">
                                 <label>Agence</label>
-                                <input type="text" class="span" placeholder="Saisir l'agence" v-model="editCompte.agence">
+                                <input type="text" class="span4" placeholder="Saisir l'agence" v-model="editCompte.agence">
                             </div>
                         </div>
                           </td>
@@ -417,7 +417,7 @@
                         <div class="control-group">
                             <label>Code agence</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="saisir le numero agence" v-model="editCompte.numero_agence">
+                                <input type="text" class="span4" placeholder="saisir le numero agence" v-model="editCompte.numero_agence">
                             </div>
                         </div>
                           </td>
@@ -426,7 +426,7 @@
                         <div class="control-group">
                             <label>Telephone agence</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="saisir le teleophone agence" v-model="editCompte.telephone_agence">
+                                <input type="text" class="span4" placeholder="saisir le teleophone agence" v-model="editCompte.telephone_agence">
                             </div>
                         </div>
                           </td>
@@ -436,7 +436,7 @@
                               <div class="control-group">
                                                     <label class="control-label">Ville:</label>
                                                     <div class="controls">
-                                                        <select v-model="editCompte.ville_id">
+                                                        <select v-model="editCompte.ville_id" class="span4">
                                                             <option></option>
                                                             <option v-for="item in villes" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -450,7 +450,7 @@
                               <div class="control-group">
                                                     <label class="control-label">Communes</label>
                                                     <div class="controls">
-                                                        <select v-model="editCompte.commune_id">
+                                                        <select v-model="editCompte.commune_id" class="span4">
                                                             <option></option>
                                                             <option v-for="item in communeDynamiques(editCompte.ville_id)" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -465,7 +465,7 @@
                         <div class="control-group">
                             <label>Situation geographique</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="sitaution geographique" v-model="editCompte.situation_geographique_angence">
+                                <input type="text" class="span4" placeholder="sitaution geographique" v-model="editCompte.situation_geographique_angence">
                             </div>
                         </div>
                           </td>
@@ -677,6 +677,7 @@ created() {
 
 
         },
+        
         methods: {
           
             ...mapActions('gestionMarche', ["ajouterSanction", "ajouterCompte", "modifierCompte", "supprimerCompte"]),
@@ -788,15 +789,15 @@ created() {
     }
     .gdmodelfour
     {
- width: 1000px;
+ width: 100px;
  margin: 0 -580px;
  height: 500px;
     }
     .glcompte
     {
 
- width: 800px;
- margin: 0 -330px;
+ width: 1300px;
+ margin: 0 -630px;
  height: 500px;
 
     }
