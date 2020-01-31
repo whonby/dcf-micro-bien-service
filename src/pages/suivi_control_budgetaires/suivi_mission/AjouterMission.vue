@@ -206,7 +206,7 @@
                 </div>
                     </td>
                     
-                    <td colspan="2" width="350">
+                    <td colspan="2" width="550">
                       <div class="control-group">
               <label class="control-label">Imputation budgetaire:</label>
               <div class="controls " >
@@ -712,6 +712,7 @@ acteurDepenseDynamiques() {
 
     onFichierChange(e){
       this.formData.fichier_joint = e.target.files[0]
+     // console.log(onFichierChange);
     },
    
   //      afficherFonction(){

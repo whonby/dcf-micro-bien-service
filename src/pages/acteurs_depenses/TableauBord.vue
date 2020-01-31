@@ -72,7 +72,7 @@
 
         <li class="bg_lo" title="cout moyen des billets d'avion globale de mission">
              <a href="#">
-             <i class="icon-th"></i><span class="label label-warning">{{formatageSomme(parseFloat(coutTotalDeBilletAvion))}}
+             <i class="icon-th"></i><span class="label label-warning">{{formatageSomme(parseFloat(coutMoyenDeBilletAvionDeMissions))}}
               </span> Cout moyen des billets d'avion.</a> </li>
 
         <li class="bg_ls" title="Taux de dossiers de missions rejetés">
@@ -132,11 +132,12 @@
 // methode pour maper notre guetter
 
 
- ...mapGetters("suivi_controle_budgetaire", [
+
+ ...mapGetters("suivi_controle_budgetaire", ["missions" ,"getMissionPersonnaliser",
       "nombreTotalDeTouteMissions",
       "coutTotalDemission",
       "dureeMoyenneDeTouteLesMissions",
-      "coutTotalDeBilletAvion",
+      "coutMoyenDeBilletAvionDeMissions",
       "tauxDossierRejetMissions",
       "coutMoyenDeMission",
 

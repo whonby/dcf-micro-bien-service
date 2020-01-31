@@ -51,19 +51,21 @@
  
  export const coutTotalDeBilletAvion = (state, getters) => {
      const val =  getters.missions.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.cout_billet_avion), 0)
-      if(isNaN(val)) return null
+      if(isNaN(val)) return 
       return val
       
     }
+
+    
    // console.log(coutTotalDeBilletAvion)
  
   export const coutMoyenDeBilletAvionDeMissions = (state, getters) => {
-   const val = (getters.coutTotalDeBilletAvion / getters.nombreTotalDeTouteMissions)
+   const val = ((getters.coutTotalDeBilletAvion / getters.nombreTotalDeTouteMissions) * getters.dureeMoyenneDeTouteLesMissions).toFixed(2)
     if(isNaN(val)) return null
     return val
   } 
  
- 
+
  
  //  export const coutMoyenDeMissions = (state, getters) => {
  //    const coutMoyen = (getters.montantTotalDeToutesLesMissions / getters.nombreTotalDeTouteMissions)
