@@ -59,7 +59,7 @@
  
   export const coutMoyenDeBilletAvionDeMissions = (state, getters) => {
    const val = (getters.coutTotalDeBilletAvion / getters.nombreTotalDeTouteMissions)
-    if(isNaN(val)) return 0
+    if(isNaN(val)) return null
     return val
   } 
  
@@ -85,6 +85,7 @@
  
  
    
+  
  
   export  const getMissionPersonnaliser = (state, getters,rootState, rootGetters) =>
   state.missions.map(element => {

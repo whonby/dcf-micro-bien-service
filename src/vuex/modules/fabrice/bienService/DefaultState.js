@@ -55,11 +55,13 @@ documentProcedures:[],
     mandats:[],
     executionMarches:[],
     typeAppelOffre: [],
+
     typeCandidat: [],
     pays: [],
     villes: [],
-    communes:[]
+    communes:[],
 
+bailleurMarche:[]
 
 
 

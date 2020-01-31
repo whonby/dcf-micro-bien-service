@@ -6,43 +6,35 @@
       <div class="widget-box">
           <div class="widget-title">
             <ul class="nav nav-tabs">
-              <li class="active"><a data-toggle="tab" href="#tab1">Modification description</a></li>
-              <!-- <li><a data-toggle="tab" href="#tab2">Modification champ2</a></li>
-              <li><a data-toggle="tab" href="#tab3">Modification champ3</a></li> -->
+              <li class="active"><a data-toggle="tab" href="#tab1">Identification</a></li>
+              <li><a data-toggle="tab" href="#tab2"> Unité administrative</a></li>
+              <li><a data-toggle="tab" href="#tab3"> Transport</a></li> 
             </ul>
           </div>
           <div class="widget-content tab-content">
             <div id="tab1" class="tab-pane active">
 
-
-
-
-
-                 <table class="table table-bordered table-striped">
-                   <fieldset>
-                        <legend>
-                          <h4>
-                          Identification:</h4>
-                          </legend>
-                      
+         <table class="table table-bordered table-striped">
+                    
                           <tr>
 
 
-                                <td> 
-            <div class="control-group">
-              <label class="control-label">Exercice budgetaire:</label>
-              <div class="controls">
-           <select v-model="editMission.exercice_budgetaire_id" class="span">
-               <option v-for="exercice in exercices_budgetaires" :key="exercice.id" 
-               :value="exercice.id">{{exercice.annee}}</option>
-           </select>
-              </div>
-            </div>
-             </td>
+                <td width="120">
+                       <div class="control-group">
+                         <label class="control-label">Année Budgetaire</label>
+                                <div class="controls ">
+                             <!-- <select v-model="formData.exercice_budgetaire_id" class="span">
+                           <option v-for="exoBudget in exoEnCours" :key="exoBudget.id"
+                           :value="exoBudget.id" >{{exoBudget.annee}}</option>
+                             </select> -->
+                              <input type="text" class="span" :value="anneeBugetaire" readonly/>
+                                </div>
+                                </div>
+                        </td>
 
 
               
-                      <td colspan="7">
+                       <td colspan="3" width="450">
         <div class="control-group">
           <label class="control-label">Objet de mission:</label>
             <div class="controls">
@@ -51,22 +43,11 @@
           
         </div>
                       </td> 
+
                           </tr>
 
                           <tr>
-
-                             <td> 
-            <div class="control-group">
-              <label class="control-label" title="categorie de mission">Categorie de mission:</label>
-              <div class="controls">
-           <select v-model="editMission.categorie_missions_id" class="span">
-               <option v-for="budget in categories_missions" :key="budget.id" 
-               :value="budget.id">{{budget.libelle}}</option>
-           </select>
-              </div>
-            </div>
-             </td>
-              <td>           
+                              <td>           
                <div class="control-group">
               <label class="control-label">Type de mission:</label>
               <div class="controls">
@@ -79,8 +60,21 @@
               </div>
             </div> 
                     </td> 
+
+                          <td width="250"> 
+            <div class="control-group">
+              <label class="control-label" title="categorie de mission">Categorie de mission:</label>
+              <div class="controls">
+           <select v-model="editMission.categorie_missions_id" class="span">
+               <option v-for="budget in categories_missions" :key="budget.id" 
+               :value="budget.id">{{budget.libelle}}</option>
+           </select>
+              </div>
+            </div>
+             </td>
+            
                     
-                             <td>           
+                             <td width="250">           
                <div class="control-group">
               <label class="control-label">Date de mission:</label>
               <div class="controls">
@@ -89,7 +83,7 @@
                 </div>
                 </td>
 
-                <td>         
+                <td width="250">         
                   
                <div class="control-group">
               <label class="control-label" >N° autorisation:</label>
@@ -100,7 +94,7 @@
                   </div>
                    </td>
 
-                      <td> 
+                     <td colspan="2"> 
             <div class="control-group">
               <label class="control-label">N°ccm:</label>
               <div class="controls">
@@ -110,13 +104,16 @@
             </div>
                       </td>
                           </tr>
-                   </fieldset>
+         </table>
+            </div>
 
-                   <fieldset>
-                     <legend><h4>Unité Administrative:</h4></legend>
+             <div id="tab2" class="tab-pane">
+            
+          <table class="table table-bordered table-striped">
+                  
 
                      <tr>
-                  <td> 
+                  <td width="250">
             <div class="control-group">
               <label class="control-label">Unite administrative:</label>
               <div class="controls">
@@ -127,7 +124,8 @@
               </div>
             </div>
              </td>
-                  <td> 
+
+                  <td width="250">
             <div class="control-group">
               <label class="control-label">Acteur de depense:</label>
               <div class="controls">
@@ -138,9 +136,29 @@
               </div>
             </div>
              </td>
-               
 
-                         <td> 
+                <td width="250">
+                          
+               <div class="control-group">
+              <label class="control-label">Nom Prenom:</label>
+              <div class="controls">
+            
+            <input type="text"  class="span" 
+            :value="afficherNomPrenomActeurDepense(editMission.acte_personnel_id)"
+            readonly />
+              
+      
+             
+                </div>
+                  </div>
+
+                    </td>
+                  </tr>
+
+
+                  <tr>
+
+                 <td  width="250">
             <div class="control-group">
               <label class="control-label">Fonction:</label>
               <div class="controls " >
@@ -149,24 +167,46 @@
               </div>
             </div>
                           </td>
-      <!-- <td> 
-            <div class="control-group">
-              <label class="control-label" title="Source de financement">S. financement:</label>
-              <div class="controls">
-           <select v-model="editMission.source_financement_id" class="span">
-               <option v-for="sourceFinancement in sources_financements" :key="sourceFinancement.id" 
-               :value="sourceFinancement.id">{{sourceFinancement.libelle}}</option>
-           </select>
+     
+                  
+                <td  width="250">
+                 <div class="control-group">
+                  <label class="control-label">Classification Economique</label>
+                  <div class="controls">
+     
+                    <select v-model="editMission.economique_id" :readOnly="deveroueconomiq">
+                    <option
+                        v-for="eco in economiqueDynamiques(editMission.ua_id)"
+                        :key="eco.id"
+                        :value="eco.afficheEconomique.id"  class="span"
+                      >{{eco.afficheEconomique.code}} - {{eco.afficheEconomique.libelle}}</option>
+                    </select>
+                  </div>
+                   
+                </div>
+                    </td>
+                 
+
+                       <td width="550">
+                      <div class="control-group">
+              <label class="control-label">Imputation budgetaire:</label>
+              <div class="controls " >
+            <input
+                type="text"
+                :value="imputationBudgetaireSurLaQuelleLaMissionSexecute"
+                class="span"
+                placeholder=""
+                readonly
+              />
               </div>
             </div>
-             </td> -->
-
+                    </td>
               
                </tr>
-                   </fieldset>
-                   <fieldset>
-                     <legend><h4>Transport:</h4></legend>
-
+          </table>
+             </div>
+               <div id="tab3" class="tab-pane">
+              <table class="table table-bordered table-striped">
                        <tr>
                    
                          <td>         
@@ -307,7 +347,7 @@
      placeholder="Saisir le nom du signataire" />
               </div>
             </div>
-                      </td>
+             </td>
 
                </tr>
                 
@@ -356,7 +396,7 @@
   
                </tr>
 
-                   </fieldset>
+                  
                       
                        </table> 
                 </div>
@@ -375,7 +415,7 @@
              <button
               @click.prevent="modifierMissionLocal(editMission)" class="btn btn-primary"
               >Modifier</button> &nbsp;&nbsp;&nbsp;
-              <button  data-dismiss="modal" class="btn" href="#">Fermer</button> 
+              <button @click.prevent=" AllerPageListe" data-dismiss="modal" class="btn" href="#">Fermer</button> 
                 </div>
              
 <notifications  />
@@ -404,7 +444,8 @@ export default {
 
         editMission: {
                objet:"",
-             
+             imputation:"",
+             economique_id:"",
                cout_billet_avion:"",
               classe_voyage:"",
               source_financement_id:"",
@@ -464,11 +505,67 @@ export default {
      }
   
    },
+
+  anneeBugetaire(){
+     const anneBudget = this.exercices_budgetaires.find(anneBudg =>anneBudg.encours == 1 );
+     if(anneBudget){
+       return anneBudget.annee;
+     }
+     return 0
+   },
+
+
+   afficherNomPrenomActeurDepense(){
+     return acte_personnel_id => {
+       if( acte_personnel_id != undefined) {
+    var acteur = this.all_acteur_depense.find(acteur => acteur.id == acte_personnel_id  )
+    
+     // this.fonctionActeur = acteur.fonction.id
+      // console.log(acteur)
+     return  acteur.nom  ;
+       }
+    return null
+     }
+  
+   },
+
+
+deveroueconomiq() {
+      return this.editMission.ua_id == "";
+    },
+
+    economiqueDynamiques() {
+     return id => {
+        if (id != null && id != "") {
+          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(
+            element => element.ua_id == id
+          );
+          
+        }
+      };
+     
+    },
+
+   
+     imputationBudgetaireSurLaQuelleLaMissionSexecute() {
+      
+      const imputMission = this.getPersonnaliseBudgetGeneralParPersonnel.find(imputMission => imputMission.afficheEconomique.id == this.editMission.economique_id);
+
+      if (imputMission) { 
+        return imputMission.codebudget;
+
+      }
+     return 0
+      
+    },
+
+
+
 // methode pour maper notre guetter
    ...mapGetters('suivi_controle_budgetaire', ['categories_missions','missions']) ,
     ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
   ...mapGetters('personnelUA', ['all_acteur_depense','fonctions']),
-   ...mapGetters('uniteadministrative', ['uniteAdministratives']),
+  ...mapGetters('uniteadministrative', ['uniteAdministratives', 'getPersonnaliseBudgetGeneralParPersonnel']),
     ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
    
   
@@ -510,23 +607,27 @@ export default {
            this.editMission.cout_billet_avion = objetMissions.cout_billet_avion,
            this.editMission.source_financement_id = objetMissions.source_financement_id,
            this.editMission.signataire = objetMissions.signataire,
-           this.editMission.autre_frais = objetMissions.autre_frais
+           this.editMission.autre_frais = objetMissions.autre_frais,
+           this.editMission.imputation = objetMissions.imputation,
+           this.editMission.economique_id = objetMissions.economique_id
     },
     // methode pour notre action
-   ...mapActions('suivi_controle_budgetaire', ['getMission', 'modifierMission']),   
+   ...mapActions('suivi_controle_budgetaire', ['getMission', 'modifierMission']),  
+
    
     // fonction pour aller a la page liste
-    // AllerPageListe()
-    // {
-    //   this.$router.push({
-    //     name:'Mission'
-    //   })
-    //   this.$rooter.go(-1)
-    // },
+    AllerPageListe()
+    {
+      this.$router.push({
+        name:'Mission'
+      })
+      
+    },
 
 
 // vider l'input
-modifierMissionLocal(){  
+modifierMissionLocal(){ 
+
  // console.log(this.editMission)
    this.modifierMission(this.editMission)
   this.$router.push({name:'Mission'})

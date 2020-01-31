@@ -1707,6 +1707,7 @@ export const SUPPRIMER_TYPE_CANDADIT = (state, id) => {
 
 
 
+
 // get all type text juridique
 export const GET_ALL_PAYS = (state, tableau_type_text_juridique) =>{
     state.pays = tableau_type_text_juridique
@@ -1720,9 +1721,33 @@ export const AJOUTER_PAYS = (state, elementAjouter) => {
 
 
 
-// update type text juridique
+// update pays
 export const MODIFIER_PAYS = (state, elementModif)=>{
-    state.pays = state.pays.map(response => {
+   
+state.pays = state.pays.map(pay =>{
+    if(pay.id == elementModif.id){
+        pay = {...elementModif}
+    }
+    return pay
+})
+
+
+}
+
+
+
+export const GET_ALL_BAILLEUR_MARCHE = (state, tableau_prestation) =>{
+    state.bailleurMarche = tableau_prestation
+}
+
+
+export const AJOUTER_BAILLEUR_MARCHE= (state, elementAjouter) => {
+    state.bailleurMarche.unshift(elementAjouter)
+}
+
+export const MODIFIER_BAILLEUR_MARCHE = (state, elementModif)=>{
+    state.bailleurMarche = state.bailleurMarche.map(response => {
+
         if(response.id == elementModif.id){
             response = {...elementModif}
         }
@@ -1801,24 +1826,7 @@ export const SUPPRIMER_COMMUNES = (state, id) => {
     state.communes = state.communes.filter(prest => prest.id != id)
 }
 
-// export const MODIFIER_ENGAGEMENT_VAL = (state, elementModif) => {
-//     state.engagements = state.engagements.map(response => {
-//         if (response.id == elementModif.id) {
-//             response = { ...elementModif }
-//         }
-//         return response
-//     })
-// }
-export const MODIFIER_ENGAGEMENT_VAL = (state, objet) => {
-    state.engagements = state.engagements.map(norme_real => {
-        if (norme_real.id == objet.id) {
-            norme_real.val = objet.modVal;
-
-            // besoin_immo.montant_total = objet.montant_actu;
-        }
-
-        return norme_real;
-    });
-};
-// ajouter FAMILLE
+export const DELETE_BAILLEUR_MARCHE = (state, id)=> {
+    state.bailleurMarche = state.bailleurMarche.filter(prest => prest.id !=id)
+}
 

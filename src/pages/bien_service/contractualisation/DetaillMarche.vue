@@ -1,7 +1,6 @@
 <template>
     <div>
-<!-- Liste obseravtion bailleur -->
-<!-- cojo -->
+
         <div class="container-fluid">
             <h4 v-if="marcheDetail(marcheid)" >Detail Marche : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en-cours de passation</button>
                 <button class="btn btn-success btn-large" v-else>Marché attribué</button></h4>
@@ -35,10 +34,9 @@
                                     {{detail_marche.objetUniteAdministrative.libelle}}
                                 </td>
                                 <td class="taskOptions">
-                                    Ok
+                                    {{detail_marche.exo_id}}
                                 </td>
                             </tr>
-
                             </tbody>
                         </table>
                     </div>
@@ -55,14 +53,127 @@
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab1">Appel Offre</a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab01">Bailleur</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab1">Appel Offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab4">Facture</a></li> -->
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
-                            <div id="tab1" class="tab-pane active">
+
+
+                            <div id="tab01" class="tab-pane active">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <h4>Liste des bailleurs du marché</h4>
+
+                                <table class="table table-bordered table-striped" v-if="marcheid">
+                                    <thead>
+                                    <tr>
+                                        <th>Bailleur</th>
+                                        <th>Type finanncement</th>
+                                        <th>Montant</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="odd gradeX" v-for="appelOffre in listeBailleurMarche(marcheid)"
+                                        :key="appelOffre.id">
+                                        <td @dblclick="editeMarcheBailleur(appelOffre.id)">
+                                            {{appelOffre.bailleur.libelle || 'Non renseigné'}}</td>
+                                        <td @dblclick="editeMarcheBailleur(appelOffre.id)">
+                                            {{appelOffre.typeFinnancement.libelle || 'Non renseigné'}}</td>
+                                        <td @dblclick="editeMarcheBailleur(appelOffre.id)">
+                                            {{appelOffre.montant || 'Non renseigné'}}</td>
+                                        <div class="btn-group">
+                                            <button @click.prevent="supprimerMarcheBailleur(appelOffre.id)"  class="btn btn-danger ">
+                                                <span class=""><i class="icon-trash"></i></span></button>
+                                        </div>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+
+                                <div id="addBailleurMarche" class="modal hide" aria-hidden="true" style="display: none;">
+                                    <div class="modal-header">
+                                        <button data-dismiss="modal" class="close" type="button">×</button>
+                                        <h3>Ajouter bailleur </h3>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form action="#" method="get" v-if="marcheid">
+                                            <label>Bailleur</label>
+                                            <div class="controls">
+                                                <select v-model="formBailleur.bailleur_id" class="span" >
+                                                    <option v-for="varText in sources_financements" :key="varText.id"
+                                                            :value="varText.id">{{varText.libelle}}</option>
+                                                </select>
+                                            </div>
+                                            <label>Type finnancement <code>*</code> </label>
+                                            <div class="controls">
+
+                                                <select v-model="formBailleur.type_finnancement_id" class="span">
+                                                    <option v-for="varText in types_financements" :key="varText.id"
+                                                            :value="varText.id">{{varText.libelle}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label">Montant <code>*</code> :</label>
+                                                <div class="controls">
+                                                    <input type="text" class="span5" placeholder="Libelle lot" v-model="formBailleur.montant">
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="modal-footer">
+                                            <button @click.prevent="ajouterBailleur" class="btn btn-primary">Valider</button>
+                                            <button data-dismiss="modal" class="btn" href="#">Fermer</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="editBailleuMarche" class="modal hide" aria-hidden="true" style="display: none;">
+                                    <div class="modal-header">
+                                        <button data-dismiss="modal" class="close" type="button">×</button>
+                                        <h3>Modification </h3>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form action="#" method="get" v-if="marcheid">
+                                            <label>Bailleur</label>
+                                            <div class="controls">
+                                                <select v-model="edit_bailleur_marche.bailleur_id" class="span" >
+                                                    <option v-for="varText in sources_financements" :key="varText.id"
+                                                            :value="varText.id">{{varText.libelle}}</option>
+                                                </select>
+                                            </div>
+                                            <label>Type finnancement <code>*</code> </label>
+                                            <div class="controls">
+
+                                                <select v-model="edit_bailleur_marche.type_finnancement_id" class="span">
+                                                    <option v-for="varText in types_financements" :key="varText.id"
+                                                            :value="varText.id">{{varText.libelle}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label">Montant <code>*</code> :</label>
+                                                <div class="controls">
+                                                    <input type="text" class="span5" placeholder="Libelle lot" v-model="edit_bailleur_marche.montant">
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="modal-footer">
+                                            <button @click.prevent="modificationBailleurMarche" class="btn btn-primary">Modification</button>
+                                            <button data-dismiss="modal" class="btn" href="#">Fermer</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="tab1" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
@@ -1279,15 +1390,6 @@
                         <a href="#ajouterObservationBailleur" data-toggle="modal" class="btn btn-warning">Ajouter</a>
 
                     </div>
-
-
-    
-                  <!--  <div class="widget-content">
-
-                        <a href="#addFournisseurDosntBase" data-toggle="modal" class="btn btn-success" title="ajouter nouveau fournisseur">ajouter fournisseur</a>
-
-                    </div>-->
-
 
                 </div>
                 <h4> Liste obseravtion bailleur</h4>
@@ -2576,21 +2678,30 @@
             <div class="modal-body">
                 <div class="widget-box">
                     <form action="#" method="get" v-if="marcheid">
+                        
                         <div class="control-group">
+            
                             <label class="control-label">Numero lot <code>*</code> :</label>
-                            <div class="controls">
-
-                                <input type="text" class="span5" placeholder="Numero lo" v-model="formLot.numero_lot">
+                           <div class="control-group">
+                       <input type="text" class="span5" placeholder="Numero lo" v-model="formLot.numero_lot">
                             </div>
                         </div>
+
                         <div class="control-group">
+
+                           
+
                             <label class="control-label">Libelle lot <code>*</code> :</label>
+
                             <div class="controls">
                                 <input type="text" class="span5" placeholder="Libelle lot" v-model="formLot.libelle_lot">
                             </div>
                         </div>
                         <div class="control-group">
+
+                        
                             <label class="control-label">Montant lot <code>*</code> :</label>
+
                             <div class="controls">
                                 <input type="text" class="span5" placeholder="Montant lot" v-model="formLot.montant_lot">
                             </div>
@@ -2769,7 +2880,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreT()">Ajouter</a>
+                <button @click.prevent="ajouterOffreT" class="btn btn-primary">Ajouer</button>
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
         <div id="offreF" class="modal hide">
@@ -2826,7 +2937,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>
+                <button @click.prevent="ajouterOffreF()" class="btn btn-primary">Ajouer</button>
+                <!--<a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>-->
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
         <!--Fin dossier candidature ajouterMantater-->
@@ -3010,7 +3122,12 @@
                         </div>
                     </div>
 
-
+                    <!--
+                    54ABN5
+                    AMP45
+                    54ABN5
+                    AR458
+                    -->
                     <div class="control-group">
                         <label class="control-label">Matricule</label>
                         <div class="controls">
@@ -3018,7 +3135,7 @@
                                     type="text"
                                     v-model="formMandater.matricule_m"
                                     class="span"
-                                    placeholder="Matricule"
+                                    placeholder="Matricule" v-on:keyup="rechercheMandater()"
                             />
                         </div>
                     </div>
@@ -3945,9 +4062,12 @@
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a>
             </div>
         </div>
+
+     
         <!---->
         <!--Fin contratualisation-->
     </div>
+
 </template>
 
 <script>
@@ -4008,11 +4128,21 @@
                    appel_offre_id:"",
                    mode_passation_id:""
                }
+                ,
+                formBailleur:{
+                    type_finnancement_id:"",
+                    montant:"",
+                    marche_id:"",
+                    bailleur_id:"",
+
+                },
+                edit_bailleur_marche:""
                ,formMandater:{
                     lettre_invitation_id:"",
                     date_id:"",
                     nom_mandat:"",
-                    prenom_nom:""
+                    prenom_nom:"",
+                    matricule_m:""
                 },
                 formAnalyseDossier:{
                     date_analyse:"",
@@ -4281,19 +4411,20 @@ created() {
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
-
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
-                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "factures", "typeFactures", "getPersonnaliserFacture"]),
+
+                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "factures", "typeFactures", "getPersonnaliserFacture", "personnaliseGetterMarcheBailleur"]),
+            ...mapGetters('personnelUA', ['acteur_depenses']),
+
 
                 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
-
-              
-
-            ...mapGetters('gestionMarche', ['entreprises',"secteur_activites"]),
+            ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
+                'types_financements']) ,
             marcheDetail(){
                 return  marche_id=>{
                     if (marche_id!="") {
                         const vM=this;
+                        console.log("Marche detail")
                         let Objet=this.marches.find(idmarche => idmarche.id == marche_id)
                         if(Objet!=undefined){
                            vM.formData.type_appel=Objet.procedure_passation.type_procedure.libelle;
@@ -4308,20 +4439,31 @@ created() {
 
             },
 
+            listeBailleurMarche(){
+                return  marche_id=>{
+                    if (marche_id!="") {
+                        console.log("MarcheBailleur")
+                        return this.personnaliseGetterMarcheBailleur.filter( idmarche => idmarche.marche_id == marche_id)
+                    }
+                }
 
+
+            },
             listeAppelOffre(){
                 return  marche_id=>{
                     if (marche_id!="") {
+                        console.log("Marche appel offre")
                        const vM=this;
-                        let Objet=this.appelOffres.find( idmarche => idmarche.marche.id == marche_id)
+                        let Objet=this.appelOffres.find( idmarche => idmarche.marche_id == marche_id)
+                        console.log("Marche appel offre 10")
                         if(Objet!=undefined){
                             vM.formDossierCadidature.appel_offre_id=Objet.id;
                             vM.formLot.appel_offre_id=Objet.id;
                             vM.formLettre.appel_offre_id=Objet.id;
                             vM.formDataCojo.num_dossier_appel_offre=Objet.ref_appel;
                         }
-
-         return this.appelOffres.filter( idmarche => idmarche.marche.id == marche_id)
+                        console.log(Objet)
+         return this.appelOffres.filter( idmarche => idmarche.marche_id == marche_id)
                     }
                 }
 
@@ -4329,10 +4471,11 @@ created() {
             listeLots(){
                 return  marche_id=>{
                     if (marche_id!="") {
+                        console.log("Marche lots")
                        // let listeLotMarche =this.lots.filter( idmarche => idmarche.marche.id == marche_id)
                        // const searchTerm = this.search.toLowerCase();
                         //return this.lots.filter( idmarche => idmarche.marche.id == marche_id)
-                        return this.lots.filter( idmarche => idmarche.marche.id == marche_id)
+                        return this.lots.filter( idmarche => idmarche.marche_id == marche_id)
                     }
                 }
 
@@ -4342,6 +4485,7 @@ created() {
             listeActeEffetFinancier(){
                 return marche_id =>{
                     if(marche_id !=""){
+                        console.log("Marche liste accteEffet")
                         return this.getActeEffetFinancierPersonnaliser.filter(identreprise =>identreprise.id == marche_id)
                     }
                 }
@@ -4349,6 +4493,7 @@ created() {
             dossierCandidature: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche dossier candidat")
                         return this.getterDossierCandidats.filter(idmarche => idmarche.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -4356,6 +4501,7 @@ created() {
             lettreInvitationAMarche: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche lettre inviation marche")
                         return this.getterLettreInvitation.filter(idmarche => idmarche.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -4363,6 +4509,7 @@ created() {
             listeMantater: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche liste mantater")
                         return this.getterMandate.filter(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -4371,6 +4518,7 @@ created() {
             listeCojo: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche cojo")
                         return this.getterCojos.filter(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -4379,6 +4527,7 @@ created() {
         listeAnalyseDossier: function () {
             return marcheid => {
                 if (marcheid != "") {
+                    console.log("Marche liste analyse dossier")
                     return this.getterAnalyseDossiers.filter(idmarche => idmarche.dossier_candidature.appel_offre.marche_id == marcheid)
                 }
             }
@@ -4387,6 +4536,7 @@ created() {
             demandeAno: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche demande ano")
                         return this.getterDemandeAno.filter(idmarche => idmarche.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -4394,6 +4544,7 @@ created() {
             listeAnalyseDPM: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche liste analyse dpm")
                         return this.getterAnalyseDMP.filter(idmarche => idmarche.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -4416,6 +4567,7 @@ created() {
             listeAnoDMPBailleur: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche dmp bailleur")
                         return this.getterAnoDMPBailleur.filter(idmarche => idmarche.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -4424,6 +4576,7 @@ created() {
             listeAnalyseDMPFavorable: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche analyse DMP Favorable")
                         return this.getterAnalyseDMP.filter(idmarche => {
                             if(idmarche.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid && idmarche.avis_bail==1){
                              return idmarche
@@ -4435,6 +4588,7 @@ created() {
             listeObservationBailleurANODMP: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche observation bailleur ANODMP")
                         return this.getterObseravtionBailleurs.filter(idmarche => idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -4442,7 +4596,7 @@ created() {
             selectionAttributionMarche: function () {
                 return marcheid => {
                     if (marcheid != "") {
-
+                        console.log("Marche attribution marche")
                         let marcherEnAction=this.getterObseravtionBailleurs.filter(idmarche => idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
                         let marcherFavaroble=marcherEnAction.filter(idmarche=>idmarche.avis_bail==1).length
 
@@ -4465,6 +4619,11 @@ created() {
                              marcherEnAction= marcherEnAction.filter(idmarche=>idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.rang_analyse==max)
                              //console.log(marcherEnAction)
                          }
+
+
+
+                        // console.log(marcherEnAction)
+
 
 
                             let infoEntreprise="";
@@ -4505,68 +4664,12 @@ created() {
             listeActeEffectFinnancier: function () {
                 return marcheid => {
                     if (marcheid != "") {
+                        console.log("Marche leste acte effect finnancier")
                         return this.getActeEffetFinancierPersonnaliser.filter(idmarche => idmarche.marche_id == marcheid)
                     }
                 }
             },
 
-       /*     searcheEntreprise: function () {
-                return val => {
-                    const vM=this;
-                    if (val != "") {
-                        console.log(val)
-                        let entre=this.entreprises.find(item=>item.id==val);
-
-                        const vM=this;
-                        if (entre!=undefined){
-                            vM.formDossierCadidature.telephone_cand=entre.telephone
-                            vM.formDossierCadidature.adresse_post=entre.adresse
-                            vM.formDossierCadidature.nom_cand=entre.raison_sociale
-                            vM.formDossierCadidature.reg_com=entre.numero_rc
-                            vM.formDossierCadidature.email_cand=entre.email
-                            vM.formDossierCadidature.numero_cc=entre.numero_cc
-                            vM.formFournisseur.secteur_activite_id=entre.secteur_activite_id
-                            console.log(entre)
-
-                        }else{
-                            vM.formDossierCadidature.reg_com=""
-                            vM.formDossierCadidature.telephone_cand=""
-                            vM.formDossierCadidature.adresse_post=""
-                            vM.formDossierCadidature.nom_cand=""
-                            vM.formDossierCadidature.email_cand=""
-                            vM.formDossierCadidature.numero_cc=""
-                            vM.formFournisseur.secteur_activite_id=""
-                            vM.search=""
-                        }
-                    }
-                    return ""
-                }
-            }*/
-
-            // filtre_equipement() { getterAnoDMPBailleur
-            //   const st = this.search.toLowerCase();
-            //   return this.equipements.filter(type => {
-            //     return (
-
-            //       type.libelle.toLowerCase().includes(st)
-            //     );
-            //   });
-            // }
-//             acteDepenseFiltre(){
-
-//      const searchTerm = this.search.toLowerCase();
-
-// return this.acteDepense.filter((item) => {
-
-//      return item.matricule.toLowerCase().includes(searchTerm)
-
-
-
-
-
-//    }
-// )
-//    }
 
 
         },
@@ -4582,10 +4685,17 @@ created() {
                 "modifierAnalyseDossier","supprimerAnalyseDossier","ajouterDemandeAno",
                 "modifierDemandeAno","supprimerDemandeAno","ajouterAnalyseDMP","modifierAnalyseDMP",
                 "supprimerAnalyseDMP","ajouterAnoDMPBailleur","modifierAnoDMPBailleur","supprimerAnoDMPBailleur"
+
                 , "modifierObservationBaileur","ajouterObseravtionBailleur" , "supprimerObseravtionBailleur",
                  "ajouterFournisseur", "ajouterActeEffetFinancier", "modifierActeEffetFinancier",
                  "supprimerActeEffetFinancier","modifierMarche","supprimerFacture","modifierFacture",
                   "ajouterFacture"
+
+                , "modifierObservationBaileur","ajouterObseravtionBailleur","supprimerObseravtionBailleur",
+                 "ajouterFournisseur", "ajouterActeEffetFinancier",
+                "modifierActeEffetFinancier","supprimerActeEffetFinancier","modifierMarche","modificationMarcheBailleur",
+                "ajouterMarcherBailleur","supprimerMarcheBailleur"
+
             ]),
             ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
             // formatageSomme: formatageSomme,
@@ -4595,6 +4705,7 @@ created() {
                     keyboard: false
                 });
             },
+
 ajouterStockLocal(){
     this.ajouterFacture(this.formDataFacture)
     this.formDataFacture ={
@@ -4627,7 +4738,22 @@ modifierFactureLocal(){
     this.modifierFacture(this.editFacture)
     this.$('#modififacture').modal('hide');
 },
-
+           rechercheMandater(){
+             console.log(this.formMandater.matricule_m)
+              let objetMandater=this.acteur_depenses.filter(item=>item.acteur_depense.matricule==this.formMandater.matricule_m)
+               console.log(objetMandater)
+               if(objetMandater!=undefined){
+                   if (objetMandater.length==1){
+                       let acteur= this.acteur_depenses.find(item=>item.acteur_depense.matricule==this.formMandater.matricule_m)
+                       this.formMandater.prenom_nom=acteur.acteur_depense.prenom
+                       this.formMandater.nom_mandat=acteur.acteur_depense.nom
+                   }
+               }
+             if(this.formMandater.matricule_m==""){
+                 this.formMandater.prenom_nom=""
+                 this.formMandater.nom_mandat=""
+             }
+           },
             recherche() {
 
                console.log(this.search)
@@ -4644,6 +4770,7 @@ modifierFactureLocal(){
                     }
                 }
 
+
             },
             //afiicher modal ajouter
             afficherModalAjouterActeDepense() {
@@ -4651,6 +4778,16 @@ modifierFactureLocal(){
                     backdrop: "static",
                     keyboard: false
                 });
+            },
+            ajouterBailleur(){
+                this.formBailleur.marche_id=this.marcheid
+               this.ajouterMarcherBailleur(this.formBailleur)
+                this.formBailleur={
+                      type_finnancement_id:"",
+                        montant:"",
+                        marche_id:"",
+                        bailleur_id:"",
+                }
             },
             // fonction pour vider l'input ajouter
             ajouter(){
@@ -4744,7 +4881,8 @@ modifierFactureLocal(){
                         lettre_invitation_id:"",
                         date_id:"",
                         nom_mandat:"",
-                        prenom_nom:""
+                        prenom_nom:"",
+                    matricule_m:""
                 }
             },
             ajouterCojoMarche(){
@@ -4859,6 +4997,18 @@ afficherModalModifierActeEffetFinancier(index){
     });
     this.editActeEffetFinancier = this.acteEffetFinanciers[index]
 },
+            modificationBailleurMarche(){
+                this.modificationMarcheBailleur(this.edit_bailleur_marche)
+                this.$('#editBailleuMarche').modal('hide');
+            },
+            editeMarcheBailleur(index){
+                this.$('#editBailleuMarche').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                this.edit_bailleur_marche = this.personnaliseGetterMarcheBailleur.find(item=>item.id==index)
+                console.log(this.edit_bailleur_marche)
+            },
 
 // vider l'input 
 modifierModalActeEffetFinancierLocal(){
@@ -4948,7 +5098,7 @@ modifierModalActeEffetFinancierLocal(){
             },
 
             modaleOffreFinnanciere(index){
-                this.edite_offre_financiere=this.getterDossierCandidats[index]
+                this.edite_offre_financiere=this.getterDossierCandidats.find(item=>item.id=index);
             },
             isFormulaireDossierCand(){
                 this.isFormulaireDossierCandidature=true
