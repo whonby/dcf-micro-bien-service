@@ -3,7 +3,7 @@
 <!-- Liste obseravtion bailleur -->
 <!-- cojo -->
         <div class="container-fluid">
-            <h4 v-if="marcheDetail(marcheid)" >Detail Marche : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en-cours de passation</button>
+            <h4 v-if="marcheDetail(marcheid)" >Detail Marche : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en cours de passation</button>
                 <button class="btn btn-success btn-large" v-else>Marché attribué</button></h4>
             <hr />
 
@@ -126,10 +126,16 @@
                                                 <div class="controls">
                                                     <input type="text" class="span5" placeholder="Libelle lot" v-model="formBailleur.montant">
                                                 </div>
+                                                <div class="controls">
+                                                    <code>Reste bailleur : {{parseFloat(detail_marche.montant_marche)-montantBailleurMarcheCompare(marcheid)}}</code>
+                                                    <code v-if="montantBailleurMarcheCompare(marcheid)>parseFloat(detail_marche.montant_marche)">
+                                                        Le montant total des bailleurs ne toi etre supperier au montant du marche
+                                                    </code>
+                                                </div>
                                             </div>
                                         </form>
                                         <div class="modal-footer">
-                                            <button @click.prevent="ajouterBailleur" class="btn btn-primary">Valider</button>
+                                            <button @click.prevent="ajouterBailleur" class="btn btn-primary" v-if="montantBailleurMarcheCompare(marcheid)<parseFloat(detail_marche.montant_marche)">Valider</button>
                                             <button data-dismiss="modal" class="btn" href="#">Fermer</button>
                                         </div>
                                     </div>
@@ -2723,6 +2729,7 @@
                                     class="span"
                                     placeholder="Matricule" v-on:keyup="rechercheMandater()"
                             />
+                            <code v-if="message_mandater">{{message_mandater}}</code>
                         </div>
                     </div>
                     <div class="control-group">
@@ -3714,7 +3721,7 @@
                 ,
                 formBailleur:{
                     type_finnancement_id:"",
-                    montant:"",
+                    montant:0,
                     marche_id:"",
                     bailleur_id:"",
 
@@ -3951,6 +3958,7 @@ num_courrier:""
                     appel_offre_id:"",
                     mode_passation_id:""
                 },
+                message_mandater:'',
                 isOffreTechniqueFinancier:false
             };
         },
@@ -4004,6 +4012,35 @@ created() {
 
 
             },
+            montantBailleurMarche(){
+                return  marche_id=>{
+                    if (marche_id!="") {
+                        let initialValue = 0;
+                        let ObjetMontant =this.personnaliseGetterMarcheBailleur.filter( idmarche => idmarche.marche_id == marche_id).reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.montant) ;
+                        }, initialValue);
+                        return ObjetMontant;
+                    }
+                }
+            },
+            montantBailleurMarcheCompare(){
+                return  marche_id=>{
+                    if (marche_id!="") {
+                        let initialValue = 0;
+                        let vM=this;
+                      //  let montantSaisie=parseFloat(vM.formBailleur.montant)
+                        let ObjetMontant =this.personnaliseGetterMarcheBailleur.filter( idmarche => idmarche.marche_id == marche_id).reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.montant) ;
+                        }, initialValue);
+                        let montantConbiner=parseFloat(vM.formBailleur.montant) + parseFloat(ObjetMontant)
+
+                        return parseFloat(montantConbiner);
+                    }
+                }
+
+
+            }
+            ,
             listeAppelOffre(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -4243,11 +4280,16 @@ created() {
                        let acteur= this.acteur_depenses.find(item=>item.acteur_depense.matricule==this.formMandater.matricule_m)
                        this.formMandater.prenom_nom=acteur.acteur_depense.prenom
                        this.formMandater.nom_mandat=acteur.acteur_depense.nom
+                       this.message_mandater=""
+                   }
+                   else{
+                       this.message_mandater="Cette n'existe pas dans notre base de donnée "
                    }
                }
              if(this.formMandater.matricule_m==""){
                  this.formMandater.prenom_nom=""
                  this.formMandater.nom_mandat=""
+                 this.message_mandater=""
              }
            },
             recherche() {
@@ -4279,7 +4321,7 @@ created() {
                this.ajouterMarcherBailleur(this.formBailleur)
                 this.formBailleur={
                       type_finnancement_id:"",
-                        montant:"",
+                        montant:0,
                         marche_id:"",
                         bailleur_id:"",
                 }
