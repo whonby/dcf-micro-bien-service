@@ -213,9 +213,7 @@ export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, ro
                     plans => plans.id == element.entreprise_id
                 ),
 
-                varobjetTest: rootGetters['gestionMarche/entreprises'].find(
-                    plans => plans.id == element.entreprise_id
-                )
+               
 
 
             }
@@ -343,7 +341,7 @@ export const engagementValider = state =>
         Immrealise => Immrealise.val == 1
     );
 
-
+    
 
 export const getEngagementPersonnaliser1 = (state, getters, rootState, rootGetters) =>
     getters.engagementValider.map(element => {

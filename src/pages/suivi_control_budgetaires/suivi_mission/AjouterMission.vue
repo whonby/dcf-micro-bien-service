@@ -189,7 +189,7 @@
 
 
                    <tr>
-                       <td  width="250">
+                        <td  width="250">
                  <div class="control-group">
                   <label class="control-label">Classification Economique</label>
                   <div class="controls">
@@ -198,7 +198,7 @@
                     <option
                         v-for="eco in economiqueDynamiques(formData.ua_id)"
                         :key="eco.id"
-                        :value="eco.afficheEconomique.id"
+                        :value="eco.afficheEconomique.id" class="span"
                       >{{eco.afficheEconomique.code}} - {{eco.afficheEconomique.libelle}}</option>
                     </select>
                   </div>
@@ -206,14 +206,14 @@
                 </div>
                     </td>
                     
-                    <td colspan="2" width="550">
+                    <td colspan="2" width="250">
                       <div class="control-group">
               <label class="control-label">Imputation budgetaire:</label>
               <div class="controls " >
             <input
                 type="text"
                 :value="imputationBudgetaireSurLaQuelleLaMissionSexecute"
-                class="span5"
+                class="span"
                 placeholder=""
                 readonly
               />
@@ -241,9 +241,10 @@
               <div class="controls">
                 <select v-model="formData.moyen_transport" class="span">
         
-                <option value="0">Vehicule</option>
+                  <option value="0">Vehicule</option>
                   <option value="1">Avion</option>
-                  <option value="2">Train</option>
+                  <option value="2">Bateau</option>
+                   <option value="3">Train</option>
                   
                 </select>
               </div>
@@ -432,10 +433,8 @@
               </div>
             </div>
                             </td>
-
                           </tr>
                       </table> 
-
                     </div>
 
          
