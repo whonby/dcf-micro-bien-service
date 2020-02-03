@@ -853,58 +853,6 @@ export function supprimerCompte({commit}, id) {
 /////////////// action pour les //////////////
 
 
-// action pour facture && lots
-
-export  function  getFacture({commit}) {
-  queue.push(() => axios.get('/factures').then((response) => {
-    commit('GET_ALL_FACTURE', response.data.data)
-    
-}).catch(error => console.log(error)))
-}
-
-// action pour ajouter facture
-export function ajouterFacture({commit}, elementAjout){
-  asyncLoading(axios.post('/factures',elementAjout)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_FACTURE', response.data)
-
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
-
-  }).catch(error => console.log(error))
-}
-
-// action pour modifier facture
-
-
-export function modifierFacture({commit}, element_modifie) {
-  asyncLoading( axios.put('/factures',element_modifie)).then(response => {
-       commit('MODIFIER_FACTURE', response.data)
-       
-
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
-}
-// supprimer facture
-export function supprimerFacture({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_FACTURE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/factures/' + id).then(() => dialog.close() )   
- })
-
-}
-
 
 
 // action pour lot
@@ -3546,3 +3494,55 @@ export function supprimerMarcheBailleur({commit}, id) {
 
 }
 
+
+// action pour facture && lots
+
+export function getFacture({ commit }) {
+  queue.push(() => axios.get('/factures').then((response) => {
+    commit('GET_ALL_FACTURE', response.data.data)
+
+  }).catch(error => console.log(error)))
+}
+
+// action pour ajouter facture
+export function ajouterFacture({ commit }, elementAjout) {
+  asyncLoading(axios.post('/factures', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_FACTURE', response.data)
+
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier facture
+
+
+export function modifierFacture({ commit }, element_modifie) {
+  asyncLoading(axios.put('/factures', element_modifie)).then(response => {
+    commit('MODIFIER_FACTURE', response.data)
+
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+// supprimer facture
+export function supprimerFacture({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_FACTURE', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/factures/' + id).then(() => dialog.close())
+    })
+
+}

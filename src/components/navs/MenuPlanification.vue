@@ -165,7 +165,7 @@
           <li>
             <router-link :to="{name: 'Entreprise'}" tag="a">
               <i class="icon-check"></i>
-             Entrprises
+             Entreprises
             </router-link>
           </li>
           <li class="divider"></li>

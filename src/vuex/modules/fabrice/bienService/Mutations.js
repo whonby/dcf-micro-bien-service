@@ -410,8 +410,9 @@ export const SUPPRIMER_COMPTE = (state, id)=> {
 }
 
 
+
 // get all facture
-export const GET_ALL_FACTURE = (state, tableau_facture) =>{
+export const GET_ALL_FACTURE = (state, tableau_facture) => {
     state.factures = tableau_facture
 }
 
@@ -422,10 +423,10 @@ export const AJOUTER_FACTURE = (state, elementAjouter) => {
 }
 
 // update all facture
-export const MODIFIER_FACTURE = (state, elementModif)=>{
+export const MODIFIER_FACTURE = (state, elementModif) => {
     state.factures = state.factures.map(response => {
-        if(response.id == elementModif.id){
-            response = {...elementModif}
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
         }
         return response
     })
@@ -434,9 +435,11 @@ export const MODIFIER_FACTURE = (state, elementModif)=>{
 
 // delete all facture
 
-export const SUPPRIMER_FACTURE = (state, id)=> {
-    state.factures = state.factures.filter(prest => prest.id !=id)
+export const SUPPRIMER_FACTURE = (state, id) => {
+    state.factures = state.factures.filter(prest => prest.id != id)
 }
+
+
 
 
 // get all lot

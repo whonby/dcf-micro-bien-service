@@ -99,6 +99,11 @@
               <i class="icon-user"></i> Type unite d'administrative
             </router-link>
           </li>
+           <li>
+            <router-link :to="{name: 'taux'}" tag="a">
+              <i class="icon-user"></i> Taux
+            </router-link>
+          </li>
         </ul>
       </li>
       <!--Source de financement-->

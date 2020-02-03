@@ -5,7 +5,7 @@ const defaultState = {
     banques:[],
     codesFonctions:[],
     comptes:[],
-    factures:[],
+   
     lots:[],
     typePrestations:[],
     typeFactures:[],
@@ -23,7 +23,7 @@ const defaultState = {
     typeUa:[],
     uniteAdministratives:[],
     uniteZones:[],
-
+    factures: [],
 
     ligneBudgetaires:[],
     DossierCandidats:[],

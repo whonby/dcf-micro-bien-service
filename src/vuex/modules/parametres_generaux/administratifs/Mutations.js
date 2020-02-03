@@ -388,7 +388,78 @@ const MODIFIER_TYPE_UNITE_ADMINISTRATIVE = (state, objetModifie) => {
 
 
 
+
+// get all exercices budgétaires
+const GET_TAUX = (state, tableau_exercices_budgetaires) => {
+    state.taux = tableau_exercices_budgetaires
+}
+// ajout exercice budgetaire 
+const AJOUTER_TAUX = (state, nouvel_objet) => {
+    state.taux.unshift(nouvel_objet)
+}
+// modifier exrecice budgetaire
+const MODIFIER_TAUX = (state, objetModifie) => {
+
+    state.taux = state.taux.map(exercice_budgetaire => {
+
+        if (exercice_budgetaire.id == objetModifie.id) {
+            exercice_budgetaire = { ...objetModifie }
+        }
+        return exercice_budgetaire
+    })
+
+}
+
+// supprimer exercice budgetaire
+
+const SUPPRIMER_TAUX = (state, id) => {
+    state.taux =
+        state.taux.filter(exercice_budgetaire => exercice_budgetaire.id != id)
+
+}
+
+// ajout exercice budgetaire 
+const ENCOURS_TAUX = (state, objetModifie) => {
+    state.taux = state.taux.map(exercice_budgetaire => {
+
+        if (exercice_budgetaire.id == objetModifie.id) {
+            exercice_budgetaire = { ...objetModifie }
+        }
+        return exercice_budgetaire
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export {
+
+    GET_TAUX,
+    AJOUTER_TAUX,
+    MODIFIER_TAUX,
+    SUPPRIMER_TAUX,
+    ENCOURS_TAUX,
+
+
+
+
+
     // exportation titre
 GET_TITRES,
 AJOUTER_TITRE,

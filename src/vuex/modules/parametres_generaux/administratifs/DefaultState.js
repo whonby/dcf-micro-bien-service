@@ -14,7 +14,8 @@ const defaultstate = {
   localisations_geographiques:[],
   chapitres:[],
   grandes_natures:[],
-  type_Unite_admins: []
+  type_Unite_admins: [],
+  taux: []
 
 };
 
