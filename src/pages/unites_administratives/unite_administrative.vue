@@ -571,7 +571,7 @@ codeuniteadministrative2(){
     const servgest = this.services_gestionnaires.find(serviceg => serviceg.id == this.formData.servicegest_id)
  const localisageo = this.localisations_geographiques.find(chap => chap.id == this.formData.localisationgeo_id)
      if(natsect && secti && servgest && localisageo){
-       return natsect.code + secti.code + servgest.code + localisageo.code
+       return natsect.code + secti.code + "."+ servgest.code + "."+ localisageo.code
      }
 
      return null
@@ -583,7 +583,7 @@ codeuniteadministrative2(){
     const servgest = this.services_gestionnaires.find(serviceg => serviceg.id == this.editUniteAdministrative.servicegest_id)
  const localisageo = this.localisations_geographiques.find(chap => chap.id == this.editUniteAdministrative.localisationgeo_id)
      if(natsect && secti && servgest && localisageo){
-       return natsect.code + secti.code + servgest.code + localisageo.code
+       return natsect.code  + secti.code + "." + servgest.code + "." + localisageo.code
      }
 
      return null
