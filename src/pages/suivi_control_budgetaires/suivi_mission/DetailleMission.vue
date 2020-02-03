@@ -170,6 +170,7 @@
                              v-if="mission.moyen_transport == 0"> vehicule</span>
                        
                               <span v-else-if="mission.moyen_transport == 1"  > Avion</span>
+                              <span v-else-if="mission.moyen_transport == 2"  > Bateau</span>
                             
                           <span v-else >Train</span>
     

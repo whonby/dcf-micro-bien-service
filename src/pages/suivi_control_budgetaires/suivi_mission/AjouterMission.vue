@@ -241,9 +241,10 @@
               <div class="controls">
                 <select v-model="formData.moyen_transport" class="span">
         
-                <option value="0">Vehicule</option>
+                  <option value="0">Vehicule</option>
                   <option value="1">Avion</option>
-                  <option value="2">Train</option>
+                  <option value="2">Bateau</option>
+                   <option value="3">Train</option>
                   
                 </select>
               </div>
@@ -432,10 +433,8 @@
               </div>
             </div>
                             </td>
-
                           </tr>
                       </table> 
-
                     </div>
 
          

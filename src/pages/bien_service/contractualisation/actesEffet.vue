@@ -178,7 +178,7 @@ export default {
 return this.getActeEffetFinancierPersonnaliser.filter((item) => {
   
      return item.libelle_act.toLowerCase().includes(searchTerm) ||
-             item.varObjetEntreprise.forme_juridique.toLowerCase().includes(searchTerm)
+       item.varObjetEntreprise.forme_juridique.toLowerCase().includes(searchTerm)
 
      
     
