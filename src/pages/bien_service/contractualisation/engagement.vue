@@ -1581,7 +1581,7 @@
                                  <th>Imputation</th>
                                   <th title="ligne budgetaire">L.Budgetaire</th>
                                   <th>Montant</th>
-                                  <th>Motif CF</th>
+                                  <th>Décision CF</th>
                                 <th>Action</th>
                                     </tr>
                                     </thead>
@@ -1716,7 +1716,7 @@
                                 <th>Numero du mandat</th>
                                 <th>Montant Mandat</th>
                                 <th >Date reception CF</th>
-                                <th>Motif</th>
+                                <th>Décision CF</th>
                                 <th>Date validation mandat</th>
 
                                 
