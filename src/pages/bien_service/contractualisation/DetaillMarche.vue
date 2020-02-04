@@ -1,3 +1,4 @@
+Liste acte effet financier
 <template>
     <div>
 
@@ -1633,64 +1634,37 @@
                         <th>text juridique</th>
                         <th>Imputation</th>
                         <th>Entreprise</th>
+                       
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr class="odd gradeX" v-for="effetFinancier in listeActeEffectFinnancier(marcheid)"
                         :key="effetFinancier.id">
-                         <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-
-                            {{effetFinancier.code_act || 'Non renseigné'}}</td>
-
-                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.libelle_act || 'Non renseigné'}}</td>
-
-                            <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.libelle_act || 'Non renseigné'}}</td>
                         
-                        <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.objet_act || 'Non renseigné'}}</td>
-
-                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.reference_act || 'Non renseigné'}}</td>
-
-                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.libelle_act || 'Non renseigné'}}</td>
-
-                        <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.montant_act || 'Non renseigné'}}</td>
                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-
-                            {{effetFinancier.montant_act || 'Non renseigné'}}</td>
-
+                            {{effetFinancier.libelle_act || 'Non renseigné'}}</td>
+  <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{formatageSomme(parseFloat(effetFinancier.montant_act ))|| 'Non renseigné'}}</td>
                               <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.id_type_acte_effet_fin || 'Non renseigné'}}</td>
-
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.type_doc_modifie || 'Non renseigné'}}</td>
-
-                            <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.type_acte_effet.libelle || 'Non renseigné'}}</td>
-
-                        <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.marche.objet || 'Non renseigné'}}</td>
-
-                        <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.text_juridique.libelle_text || 'Non renseigné'}}</td>
-
-                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.marche.imputation || 'Non renseigné'}}</td>
-
-                        <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.varObjetEntreprise.raison_sociale || 'Non renseigné'}}</td>
-
-                        <div class="btn-group">
+<td>
+      <div class="btn-group">
                             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span>
                             </button>
                         </div>
-
+</td>
                     </tr>
                     </tbody>
                 </table>
@@ -4083,7 +4057,7 @@
     //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
     import {  ModelListSelect } from 'vue-search-select'
     import 'vue-search-select/dist/VueSearchSelect.css'
-
+import { formatageSomme } from "../../../../src/Repositories/Repository";
     export default {
         name: 'compte',
         components:{
@@ -4735,14 +4709,14 @@ created() {
 
             ]),
             ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
-            // formatageSomme: formatageSomme,
+            // 
             ajouterBudgetaireLocal(){
                  this.$("#myModal").modal({
                     backdrop: "static",
                     keyboard: false
                 });
             },
-
+formatageSomme: formatageSomme,
 ajouterStockLocal(){
     this.ajouterFacture(this.formDataFacture)
     this.formDataFacture ={
