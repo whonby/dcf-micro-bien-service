@@ -128,14 +128,14 @@
                                                 </div>
                                                 <div class="controls">
                                                     <code>Reste bailleur : {{parseFloat(detail_marche.montant_marche)-montantBailleurMarcheCompare(marcheid)}}</code>
-                                                    <code v-if="montantBailleurMarcheCompare(marcheid)>parseFloat(detail_marche.montant_marche)">
+                                                    <code v-if="montantBailleurMarcheCompare(marcheid)>=parseFloat(detail_marche.montant_marche)">
                                                         Le montant total des bailleurs ne toi etre supperier au montant du marche
                                                     </code>
                                                 </div>
                                             </div>
                                         </form>
                                         <div class="modal-footer">
-                                            <button @click.prevent="ajouterBailleur" class="btn btn-primary" v-if="montantBailleurMarcheCompare(marcheid)<parseFloat(detail_marche.montant_marche)">Valider</button>
+                                            <button @click.prevent="ajouterBailleur" class="btn btn-primary" v-if="montantBailleurMarcheCompare(marcheid)<=parseFloat(detail_marche.montant_marche)">Valider</button>
                                             <button data-dismiss="modal" class="btn" href="#">Fermer</button>
                                         </div>
                                     </div>
