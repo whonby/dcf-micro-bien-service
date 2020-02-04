@@ -97,7 +97,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste type de procedure</h5>
+              <h5>Familles de procedure</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -108,7 +108,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>libelle</th>
+                    <th width="95%">libelle</th>
                     <th>Action</th>
                   </tr>
                 </thead>

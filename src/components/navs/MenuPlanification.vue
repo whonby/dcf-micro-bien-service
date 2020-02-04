@@ -155,6 +155,13 @@
             </router-link>
           </li>
           <li class="divider"></li>
+           <li>
+            <router-link :to="{name: 'agence'}" tag="a">
+              <i class="icon-bar-chart"></i>
+           Agence de la banque
+            </router-link>
+          </li>
+          <li class="divider"></li>
           <li>
             <router-link :to="{name: 'SecteurActivite'}" tag="a">
               <i class="icon-user"></i>
@@ -198,7 +205,7 @@
            <li>
             <router-link :to="{name: 'typeProcedure'}" tag="a">
               <i class="icon-bar-chart"></i>
-           Type de procedure
+           Famille de procedure
             </router-link>
           </li>
           <li class="divider"></li>
@@ -208,12 +215,12 @@
            Procedure de passation
             </router-link>
           </li>
-          <li class="divider"></li>
+          <!-- <li class="divider"></li>
           <li>
             <router-link :to="{name: 'modePassation'}" tag="a">
               <i class="icon-key"></i> Mode de passation
             </router-link>
-          </li>
+          </li> -->
 
 
         </ul>

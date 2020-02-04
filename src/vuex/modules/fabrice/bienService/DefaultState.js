@@ -61,7 +61,8 @@ documentProcedures:[],
     villes: [],
     communes:[],
 
-bailleurMarche:[]
+    bailleurMarche: [],
+ 
 
 
 

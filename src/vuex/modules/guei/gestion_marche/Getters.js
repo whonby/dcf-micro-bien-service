@@ -18,7 +18,8 @@ const deatil_marche_back_end=state =>state.deatil_marche_back_end;
 const financement_by_marche =state =>state.financement_by_marche;
 const detail_marche_finance=state =>state.detail_marche_finance;
 export const banques = state => state.banques;
-export const comptes = state => state.comptes
+export const comptes = state => state.comptes;
+export const agences = state => state.agences
 
 const document_pyba_ppm_personnalise=(state, getters, rootState, rootGetters) =>
     state.document_ptba_ppm.map(element => {

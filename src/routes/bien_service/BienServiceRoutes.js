@@ -22,7 +22,7 @@ import typeUa from '../../pages/bien_service/typeUa.vue';
 import textJuridique from '../../pages/bien_service/parametres/textJuridique.vue';
 import autreTextJuridique from '../../pages/bien_service/parametres/autreTextJuridique.vue';
 import typeProcedure from '../../pages/bien_service/Prametre_marchers/typeProcedure.vue';
-import procedurePassation from '../../pages/bien_service/Prametre_marchers/procedurePassation.vue';
+import procedurePassation from '../../pages/bien_service/Prametre_marchers/groupeProcedure/procedure.vue';
 import appelOffre from '../../pages/bien_service/contractualisation/appelOffre.vue';
 import ajouterAppelOffre from '../../pages/bien_service/contractualisation/ajouterAppelOffre.vue';
 import modificationAppelOffre from '../../pages/bien_service/contractualisation/modificationAppelOffre.vue';
@@ -45,7 +45,13 @@ import typeCandidat from '../../pages/bien_service/parametres/typeCandidat.vue';
 import pays from '../../pages/bien_service/parametres/pays.vue';
 import ville from '../../pages/bien_service/parametres/groupe_ville/ville.vue';
 import commune from '../../pages/bien_service/parametres/groupe_commune/commune.vue';
+import agence from '../../pages/bien_service/parametres/groupe_agence/agence.vue';
 const BienServiceRoutes = [
+    {
+        path: "agence",
+        name: "agence",
+        component: agence
+    },
     {
         path: "commune",
         name: "commune",

@@ -97,7 +97,7 @@ export default {
         "getEntreprise","getEtapeMarche","getDocumentPTBAPPM","getMarcheContrat","getPresenceCF",
         "getDocumentPresence","getNombreMarcheByProcedure","sourcePersonnalise",
         "getSourceFinnancementByMarche","getMarcheContratExecution",
-        "getBanque", "getCompte"]),
+        "getBanque", "getCompte","getAgence"]),
 
         ...mapActions("SuiviImmobilisation", [
       
@@ -159,6 +159,7 @@ export default {
     this.getUnite()
     this.getZone()
     this.getBanque()
+    this.getAgence()
     this.getCompte()
     this.getPays()
 this.getVille()
