@@ -75,7 +75,7 @@ export default {
    ...mapActions('parametreGenerauxProgrammeUnite',['getUnite', 'getZone']),
 
     ...mapActions('parametreGenerauxAdministratif',
-     ['getExercicesBudgetaires', 'getTitres', 
+     ['getExercicesBudgetaires', 'getTitres', 'getTaux',
     'getNatureSection', 'getSection', 'getStructureProgramme', 'getPlanProgramme', 
     'getStructureAdministrative', 'getServiceGestionnaire', 'getStructureGeographique',
     'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature"]),
@@ -134,6 +134,7 @@ export default {
   created(){
 
       this.getExercicesBudgetaires()
+      this.getTaux()
    this.getTitres()
    this.getNatureSection()
    this.getSection()

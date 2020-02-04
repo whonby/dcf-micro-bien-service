@@ -410,9 +410,6 @@ const MODIFIER_NORME_REALISE = (state, objet) => {
 
 
 
-
-
-
 export {
   MODIFIER_NORME_REALISE,
   MODIFIER_QUANTITE_EN_STOCK_NORME,

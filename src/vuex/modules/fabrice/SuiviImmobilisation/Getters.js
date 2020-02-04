@@ -1,5 +1,6 @@
 import { groupBy } from "../../../../Repositories/Repository";
 
+export const factures = state => state.factures
 
 const familles = state =>
   state.familles.sort((a, b) => (a.code > b.code ? 1 : -1));

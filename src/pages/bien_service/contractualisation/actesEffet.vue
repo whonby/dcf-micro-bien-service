@@ -44,7 +44,7 @@
                      <th title="type effet financier">Type E.</th>
                         <!-- <th>Type modif doc</th> -->
                         <th>Entreprise</th>
-                        <th>text juridique</th>
+                        <!-- <th>text juridique</th> -->
                         <th>Marche</th>
                         <th>Action</th>
                   </tr>
@@ -78,8 +78,8 @@
                              <!-- <td @click="afficherModalModifierActeEffetFinancier(index)">
                             {{effetFinancier.type_doc_modifie || 'Non renseigné'}}</td> -->
 
-                        <td @click="afficherModalModifierActeEffetFinancier(index)">
-                            {{effetFinancier.varObjetEntreprise.forme_juridique || 'Non renseigné'}}</td>
+                        <!-- <td @click="afficherModalModifierActeEffetFinancier(index)">
+                            {{effetFinancier.varObjetEntreprise.forme_juridique || 'Non renseigné'}}</td> -->
 
                              <td @click="afficherModalModifierActeEffetFinancier(index)">
                             {{effetFinancier.text_juridique.libelle_text || 'Non renseigné'}}</td>

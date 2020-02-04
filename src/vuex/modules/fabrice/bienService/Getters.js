@@ -1,4 +1,4 @@
-getEngagementPersonnaliser1
+
 export const pays = state => state.pays
 export const villes = state => state.villes
 export const communes = state => state.communes
@@ -10,7 +10,7 @@ export const bailleurs = state => state.bailleurs
 export const banques = state => state.banques.sort((a,b)=>(a.code>b.code)? 1:-1)
 export const codesFonctions = state => state.codesFonctions.sort((a,b)=>(a.code>b.code)? 1:-1)
 export const comptes = state => state.comptes.sort((a,b)=>(a.code>b.code)? 1:-1)
-export const factures = state => state.factures
+
 export const lots = state => state.lots
 export const typePrestations = state => state.typePrestations.sort((a,b)=>(a.code>b.code)? 1:-1)
 export const typeFactures = state => state.typeFactures.sort((a,b)=>(a.code>b.code)? 1:-1)
@@ -110,6 +110,33 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
 
 
 // gettes  personnaliser d'appel d'offres
+
+export const getFacturePersonnaliser = (state, getters, rootState, rootGetters) =>
+    state.factures.map(element => {
+        if (element.ua !== null && element.typfacture_id !== null) {
+            element = {
+                ...element,
+
+
+                objetUA: rootGetters['uniteadministrative/uniteAdministratives'].find(
+                    plans => plans.id == element.ua
+                ),
+                objectTypefacture: rootGetters[
+                    "bienService/typeFactures"
+                ].find(planactivite => planactivite.id == element.typfacture_id)
+
+            }
+
+        }
+        return element;
+    })
+
+
+
+
+
+
+
 
 
 export  const getAppelOffresPersonnaliser = (state, getters,rootState, rootGetters) =>

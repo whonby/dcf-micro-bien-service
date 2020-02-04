@@ -812,3 +812,93 @@ export function EncoursExerciceBudgetaire({ commit, dispatch }, objetAjout) {
    
    
 }
+
+export function EncoursTaux({ commit, dispatch }, objetAjout) {
+
+    this.$app.$dialog
+        .confirm("Voulez vous changer le taux en cours ?.")
+        .then(dialog => {
+
+            asyncLoading(axios.post('/encours_taux', {
+
+                id: objetAjout,
+
+            })).then(varExerciceBudgetaire => {
+                // if (varExerciceBudgetaire.status == 201) {
+                commit('ENCOURS_TAUX', varExerciceBudgetaire.data)
+                dispatch('getTaux')
+                this.$app.$notify({
+                    title: 'success ',
+                    text: 'Option Effectué avec success !',
+                    type: "success"
+                })
+                // }
+            }).catch(error => console.log(error))
+            dialog.close()
+        });
+
+
+}
+
+// get all exercices budgetaires 
+export function getTaux({ commit }) {
+
+    queue.push(() => axios.get('/liste_taux').then((response) => {
+        commit('GET_TAUX', response.data)
+
+    }).catch(error => console.log(error)))
+
+
+}
+// ajouter execice budgetaire
+export function ajouterTaux({ commit }, objetAjout) {
+    asyncLoading(axios.post('/add_taux', {
+        libelle: objetAjout.libelle,
+        arrondit: objetAjout.arrondit,
+        encours: objetAjout.encours,
+      
+    })).then(varExerciceBudgetaire => {
+        if (varExerciceBudgetaire.status == 201) {
+            commit('AJOUTER_TAUX', varExerciceBudgetaire.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué avec success !',
+                type: "success"
+            })
+        }
+    }).catch(error => console.log(error))
+}
+
+
+//modification exercice budgetaire
+export function modifierTaux({ commit }, exercice_budgetaire) {
+
+    asyncLoading(axios.put('/update_taux/' + exercice_budgetaire.id, {
+        libelle: exercice_budgetaire.libelle,
+        arrondit: exercice_budgetaire.arrondit,
+        encours: exercice_budgetaire.encours
+    })).then(response => {
+        commit('MODIFIER_TAUX', response.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué avec success !',
+            type: "success"
+        })
+    }).catch(error => console.log(error))
+
+}
+
+
+// supprimer exercice budgetaire
+
+export function supprimerTaux({ commit }, id) {
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_TAUX', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/delete_taux/' + id).then(() => dialog.close())
+        })
+}

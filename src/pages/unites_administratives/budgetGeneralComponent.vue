@@ -158,21 +158,21 @@
                   </div>
                 </div>
               </td>
-            
-                <td>
-                <div class="control-group">
-                  <label class="control-label">Code Budget general</label>
+            <td>
+                 <div class="control-group">
+                  <label class="control-label">Activite</label>
                   <div class="controls">
-                    <input
-                      type="text"
-                     :value="codeBudgetGeneral"
-                      class="span3"
-                      placeholder="Saisir le code"
-                      readonly
-                    />
+                    <select v-model="formData.activite_id">
+                      <option
+                        v-for="Bgeneral in afficheNiveauActivite"
+                        :key="Bgeneral.id"
+                        :value="Bgeneral.id"
+                      >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
+                    </select>
                   </div>
                 </div>
               </td>
+               
               <td>
                 <div class="control-group">
                   <label class="control-label">Dotation Initiale</label>
@@ -204,17 +204,17 @@
 
             </tr>
           <tr>
-             <td>
-                 <div class="control-group">
-                  <label class="control-label">Activite</label>
+             <td colspan="2">
+                <div class="control-group">
+                  <label class="control-label">Code Budget general</label>
                   <div class="controls">
-                    <select v-model="formData.activite_id">
-                      <option
-                        v-for="Bgeneral in afficheNiveauActivite"
-                        :key="Bgeneral.id"
-                        :value="Bgeneral.id"
-                      >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
-                    </select>
+                    <input
+                      type="text"
+                     :value="codeBudgetGeneral"
+                      class="span6"
+                      placeholder="Saisir le code"
+                      readonly
+                    />
                   </div>
                 </div>
               </td>
@@ -389,19 +389,20 @@
                 </div>
               </td>
                 <td>
-                <div class="control-group">
-                  <label class="control-label">Code Budget general</label>
+                 <div class="control-group">
+                  <label class="control-label">Activite</label>
                   <div class="controls">
-                    <input
-                      type="text"
-                     :value="codeBudgetGeneralModifier"
-                      class="span3"
-                      placeholder="Saisir le code"
-                      readonly
-                    />
+                    <select v-model="editBudgetGeneral.activite_id">
+                      <option
+                        v-for="Bgeneral in afficheNiveauActivite"
+                        :key="Bgeneral.id"
+                        :value="Bgeneral.id"
+                      >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
+                    </select>
                   </div>
                 </div>
               </td>
+               
               <td>
                 <div class="control-group">
                   <label class="control-label">Dotation Initiale</label>
@@ -432,17 +433,17 @@
                         </td>
             </tr>
              <tr>
-             <td>
-                 <div class="control-group">
-                  <label class="control-label">Activite</label>
+             <td colspan="2">
+                <div class="control-group">
+                  <label class="control-label">Code Budget general</label>
                   <div class="controls">
-                    <select v-model="editBudgetGeneral.activite_id">
-                      <option
-                        v-for="Bgeneral in afficheNiveauActivite"
-                        :key="Bgeneral.id"
-                        :value="Bgeneral.id"
-                      >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
-                    </select>
+                    <input
+                      type="text"
+                     :value="codeBudgetGeneralModifier"
+                      class="span6"
+                      placeholder="Saisir le code"
+                      readonly
+                    />
                   </div>
                 </div>
               </td>
@@ -634,7 +635,7 @@ export default {
     const fonctionnelBudget = this.plans_fonctionnels.find(serviceg => serviceg.id == this.editBudgetGeneral.fonctionnel_id)
  const economiqueBudget = this.plans_budgetaires.find(chap => chap.id == this.editBudgetGeneral.economique_id)
      if(sectionBudget && programmeBudget && uaBudget && fonctionnelBudget && economiqueBudget){
-       return sectionBudget.code_section + programmeBudget.code + uaBudget.code_ua + fonctionnelBudget.code  + economiqueBudget.code
+       return sectionBudget.code_section +"-"+ programmeBudget.code +"-"+ uaBudget.code_ua +"-"+ fonctionnelBudget.code  +"-"+ economiqueBudget.code
      }
 
      return null
@@ -647,7 +648,7 @@ export default {
     const fonctionnelBudget = this.plans_fonctionnels.find(serviceg => serviceg.id == this.formData.fonctionnel_id)
  const economiqueBudget = this.plans_budgetaires.find(chap => chap.id == this.formData.economique_id)
      if(sectionBudget && programmeBudget && uaBudget && fonctionnelBudget && economiqueBudget){
-       return sectionBudget.code_section + programmeBudget.code + uaBudget.code_ua + fonctionnelBudget.code  + economiqueBudget.code
+       return sectionBudget.code_section +"-"+ programmeBudget.code +"-"+ uaBudget.code_ua +"-"+ fonctionnelBudget.code  +"-"+ economiqueBudget.code
      }
 
      return null
