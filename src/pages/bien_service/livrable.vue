@@ -62,17 +62,31 @@
                 </div>
               </div>
               </td>
-              <td>
+
+               <!-- <div class="control-group">
+                  <label class="control-label">Classification Economique</label>
+                  <div class="controls">
+     
+                    <select v-model="formData.economique_id" :readOnly="deveroueconomiq">
+                    <option
+                        v-for="eco in economiqueDynamiques(formData.ua_id)"
+                        :key="eco.id"
+                        :value="eco.afficheEconomique.id" class="span"
+                      >{{eco.afficheEconomique.code}} - {{eco.afficheEconomique.libelle}}</option>
+                    </select>
+                  </div>
+                   
+                </div> -->
+              <!-- <td>
               <div class="control-group">
-                <label class="control-label">imputation_budgetaire</label>
+                <label class="control-label">imputation budgetaire</label>
                 <div class="controls">
-                  <select v-model="formData.imputation_budgetaire">
-                    <option></option>
-                    
-                  </select>
+                  <input type="text" 
+                  :value="inputationBudgetaireSurLivrable"
+                  class="span" readonly>
                 </div>
               </div>
-            </td>
+            </td> -->
              <td>
               <div class="control-group">
                 <label class="control-label">district</label>
@@ -537,12 +551,29 @@ export default {
 //     )
 // },
   computed: {
-    // ...mapGetters("SuiviImmobilisation", [
-   
+
+//     inputationBudgetaireSurLivrable(){
+//       const imputation = this.getPersonnaliseBudgetGeneralParBienService.find(imputation => imputation.afficheEconomique.id == this.formData.economique_id)
+//     },
+
+//     deveroueconomiq() {
+//       return this.formData.ua_id == "";
+//     },
+
+//  economiqueDynamiques() {
+//      return id => {
+//         if (id != null && id != "") {
+//           return this.getPersonnaliseBudgetGeneralParBienService.filter(
+//             element => element.ua_id == id
+//           );
+          
+//         }
+//       };
      
-    // ]),
-    // ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
-    // ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
+//     },
+  
+     ...mapGetters("uniteadministrative", ["uniteAdministratives", "getPersonnaliseBudgetGeneralParBienService"]),
+  
 
 
     
