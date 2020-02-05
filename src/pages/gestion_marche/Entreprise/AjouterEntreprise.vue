@@ -21,7 +21,17 @@
              
              <td>
                  <div class="control-group">
-                                                    <label class="control-label">Numero compte contribuable :</label>
+                             <label class="control-label" title="">Numero d'identifiant unique </label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Numero IDU" v-model="formData.numero_idu">
+                                                    </div>
+                                                </div>
+                 
+             </td>
+
+                 <td>
+                 <div class="control-group">
+                             <label class="control-label">Numero compte contribuable </label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Numero compte contribuable" v-model="formData.numero_cc">
                                                     </div>
@@ -50,14 +60,7 @@
                                                     </div>
                                                 </div>
              </td>
-             <td>
- <div class="control-group">
-                                                    <label class="control-label">Raison social :</label>
-                                                    <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Raison social" v-model="formData.raison_sociale">
-                                                    </div>
-                                                </div>
-             </td>
+ 
            
          </tr>
          <tr>
@@ -143,7 +146,7 @@
              </td>
               <td>
                   <div class="control-group">
-                                                    <label class="control-label">Form juridique:</label>
+                                                    <label class="control-label">Forme juridique:</label>
                                                     <div class="controls">
                                                         <select v-model="formData.forme_juridique" class="span11">
                                                             <option></option>
@@ -164,9 +167,9 @@
             
              <td>
                   <div class="control-group">
-                                                    <label class="control-label">Centre import :</label>
+                                                    <label class="control-label">Centre d'imposition :</label>
                                                     <div class="controls">
-                                                        <input type="text" class="span11" placeholder="Centre import" v-model="formData.centre_impot">
+                                                        <input type="text" class="span11" placeholder="Centre imposition" v-model="formData.centre_impot">
                                                     </div>
                                                 </div>
              </td>
@@ -235,10 +238,17 @@
                                                     </div>
                                                 </div>
              </td>
+                 </tr>
+                       <tr>
+                        <td colspan="5" width="350">
+                  <div class="control-group">
+     <label class="control-label">Raison sociale :</label>
+            <div class="controls">
+         <input type="text" class="span11" placeholder="Raison social" v-model="formData.raison_sociale">
+                     </div>
+                 </div>
+             </td>
          </tr>
-         <!-- <tr>
-            
-         </tr> -->
         </table>
          <div class="modal-footer">
         <a
@@ -294,6 +304,7 @@
                 search:"",
                 liste:[],
                 formData : {
+                    numero_idu:"",
                     numero_cc: "",
                     numero_rc: "",
                     raison_sociale: "",
@@ -304,7 +315,7 @@
                     ville: "",
                     forme_juridique:"",
                     centre_impot:"",
-                    regime_imposition:"",
+                    regime_impossition:"",
                     capitale_sociale:"",
                     immatriculation_cnps:"",
                     date_enregistrement_cnps:"",

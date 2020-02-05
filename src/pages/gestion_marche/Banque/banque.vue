@@ -38,6 +38,7 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
+                  <th>Code banque</th>
                      <th>Numero banque</th>
                     <th>Libelle</th>
                   <th>Telephone</th>
@@ -50,6 +51,8 @@
                 banquesFiltre"
                  :key="banque.id">
 
+                  <td @dblclick="afficherModalModifierBanque(index)">
+                      {{banque.code_banque || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierBanque(index)">
                       {{banque.numero_banque || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierBanque(index)">
@@ -98,6 +101,14 @@
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
+
+                  <div class="control-group">
+              <label class="control-label">Code banque:</label>
+              <div class="controls">
+                <input type="text" v-model="formData.code_banque	" class="span" placeholder="Saisir le numero " />
+              </div>
+            </div>
+
             <div class="control-group">
               <label class="control-label">Numero banque:</label>
               <div class="controls">
@@ -150,6 +161,13 @@
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
+
+                   <div class="control-group">
+              <label class="control-label">Code banque:</label>
+              <div class="controls">
+                <input type="text" v-model="editBanque.code_banque	" class="span" placeholder="Saisir le numero " />
+              </div>
+            </div>
 
                     <div class="control-group">
               <label class="control-label">Numero banque:</label>
@@ -239,6 +257,7 @@ export default {
      
         formData : {
 
+                	code_banque:"",
                 numero_banque:"",
              	libelle: "",
              	telephone:"",
@@ -247,6 +266,7 @@ export default {
         },
 
         editBanque: {
+          	code_banque:"",
             numero_banque:"",
              	libelle: "",
              	telephone:"",
@@ -299,9 +319,12 @@ return this.banques.filter((item) => {
      this.ajouterBanque(this.formData)
 
         this.formData = {
-             libelle_prestation:"",
-            libelle: "",
-            
+          
+           	code_banque:"",
+                numero_banque:"",
+             	libelle: "",
+             	telephone:"",
+            	situation_geographique:""
          }
      },
 // afficher modal
