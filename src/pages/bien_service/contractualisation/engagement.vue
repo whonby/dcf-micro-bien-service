@@ -2432,17 +2432,32 @@
 
           </tr>
            <tr>
-               <td colspan="3"> 
+               <td colspan="2"> 
               <div class="control-group">
                 <label class="control-label">objet_facture</label>
                 <div class="controls">
                  
-                  <textarea rows="2" v-model="editFacture.objet_facture" class="span8">
+                  <textarea rows="2" v-model="editFacture.objet_facture" class="span6">
 
                   </textarea>
                 </div>
               </div>
                </td>
+                <td>
+              
+              <div class="control-group">
+                <label class="control-label">Unite administrative</label>
+                <div class="controls">
+                 <input
+                    type="text"
+                    :value="detail_marche.objetUniteAdministrative.libelle"
+                   readonly
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
                 <td>
               <div class="control-group">
                 <label class="control-label">Date de la facture</label>
@@ -2562,38 +2577,7 @@
            
                  
           </tr>
-         <tr>
-          
-             <td>
-              
-              <div class="control-group">
-                <label class="control-label">Unite administrative</label>
-                <div class="controls">
-                 <input
-                    type="text"
-                    :value="detail_marche.objetUniteAdministrative.libelle"
-                   readonly
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <!-- <td>
-              
-              <div class="control-group">
-                <label class="control-label">Fournisseur</label>
-                <div class="controls">
-                  <select v-model="editFacture.entreprise_id" class="span3">
-                    <option value>Sélectionner</option>
-                    <option></option>
-                  </select>
-                </div>
-              </div>
-            </td> -->
-            
-            
-         </tr>
+        
         </table>
       </div>
       <div class="modal-footer">
@@ -2685,17 +2669,32 @@
 
           </tr>
            <tr>
-               <td colspan="3"> 
+               <td colspan="2"> 
               <div class="control-group">
                 <label class="control-label">objet_facture</label>
                 <div class="controls">
                  
-                  <textarea rows="2" v-model="formData.objet_facture" class="span8">
+                  <textarea rows="2" v-model="formData.objet_facture" class="span6">
 
                   </textarea>
                 </div>
               </div>
                </td>
+                <td>
+              
+              <div class="control-group">
+                <label class="control-label">Unite administrative</label>
+                <div class="controls">
+                 <input
+                    type="text"
+                    :value="detail_marche.objetUniteAdministrative.libelle"
+                   readonly
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
                 <td>
               <div class="control-group">
                 <label class="control-label">Date de la facture</label>
@@ -2815,23 +2814,9 @@
            
                  
           </tr>
-         <tr>
+         <!-- <tr> -->
           
-             <td>
-              
-              <div class="control-group">
-                <label class="control-label">Unite administrative</label>
-                <div class="controls">
-                 <input
-                    type="text"
-                    :value="detail_marche.objetUniteAdministrative.libelle"
-                   readonly
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
+            
              <!-- <td>
               
               <div class="control-group">
@@ -2846,7 +2831,7 @@
             </td> -->
           
             
-         </tr>
+         <!-- </tr> -->
         </table>
       </div>
       <div class="modal-footer">
@@ -4188,7 +4173,7 @@ afficherModalModifierMandat(index) {
 <style scoped>
     .taillemodal45 {
         width: 1200px;
-        margin: 0 -680px;
+        margin: 0 -580px;
     }
     .gdmodelfour
     {

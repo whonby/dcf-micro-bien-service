@@ -442,7 +442,7 @@
                             <div class="controls">
                                 <select v-model="editCompte.numero_agence" class="span4" :readOnly="verroCodeAgence">
                                                             <option></option>
-                                                            <option v-for="item in codeAgenceDynamiques(editCompte.banq_id)" :key="item.id" :value="item.code_agence">
+                                                            <option v-for="item in codeAgenceDynamiquesModifier" :key="item.id" :value="item.code_agence">
                                                                 {{item.code_agence}}
                                                             </option>
                                 </select>
@@ -723,7 +723,22 @@ return element;
         }
         return null;
     },
-
+codeAgenceDynamiquesModifier() {
+      let vM=this;
+        if (vM.editCompte.commune_id != null && vM.editCompte.banq_id != "") {
+            // console.log(vM.editCompte.commune_id)     
+            // console.log(vM.editCompte.banq_id)     
+                return this.getPersonnaliseAgence.filter(element => {
+                if(element.commune_id == vM.editCompte.commune_id &&  element.banque_id == vM.editCompte.banq_id ){
+return element;
+                }
+                     
+          }
+            
+          );
+        }
+        return null;
+    },
   
 
 
