@@ -139,14 +139,124 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier Ville</h3>
+                <h3>Modifier Agence</h3>
               </div>
               <div class="modal-body">
+              <table class="table table-bordered table-striped">
+         
+            <tr>
+              <td>
+                <div class="control-group">
+                  <label class="control-label">Banque</label>
+                  <div class="controls">
+                    <select v-model="editAgence.banque_id">
+                      <option
+                        v-for="typeUniteA in banques"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="control-group">
+                  <label class="control-label">Code agence</label>
+                  <div class="controls">
+                     <input type="text" v-model="editAgence.code_agence" class="span" />
+                  </div>
+                </div>
+              </td>
+               <td>
               
+               <div class="control-group">
+                  <label class="control-label">Nom agence</label>
+                  <div class="controls">
+                      <input type="text" v-model="editAgence.nom_agence" class="span" />
+                  </div>
+                   
+                </div>
+              </td>
+               <td>
+              
+               <div class="control-group">
+                  <label class="control-label">Telephone agence</label>
+                  <div class="controls">
+                    <input type="number" v-model="editAgence.tel_agence" class="span" />
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+             
+              <td>
+                 <div class="control-group">
+                  <label class="control-label">Pays</label>
+                  <div class="controls">
+                    <select v-model="editAgence.pays_id">
+                      <option
+                        v-for="localgeo in pays"
+                        :key="localgeo.id"
+                        :value="localgeo.id"
+                      >{{localgeo.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+               <td>
+                  <div class="control-group">
+                  <label class="control-label">Ville</label>
+                  <div class="controls">
+                    <select v-model="editAgence.ville_id" :readOnly="verroPays">
+                      <option
+                        v-for="localgeo in VilleDynamiques(editAgence.pays_id)"
+                        :key="localgeo.id"
+                        :value="localgeo.id"
+                      >{{localgeo.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+               <td>
+                <div class="control-group">
+                  <label class="control-label">Commune</label>
+                
+                  <div class="controls">
+                   <select v-model="editAgence.commune_id" :readOnly="verroVille">
+                      <option
+                        v-for="localgeo in CommuneDynamiques(editAgence.ville_id)"
+                        :key="localgeo.id"
+                        :value="localgeo.id"
+                      >{{localgeo.libelle}}</option>
+                    </select>
+                  </div>
+                  </div>
+              </td>
+              <td>
+                <div class="control-group">
+                  <label class="control-label">Situation geographique</label>
+                    
+               
+                  <div class="controls">
+                    <input
+                      type="text"
+                      v-model="editAgence.situation_geo"
+                      class="span"
+                    
+                     
+                    />
+               </div>
+                </div>
+              </td>
+            </tr>
+          
+          
+        </table> 
           </div>
            <div class="modal-footer"> 
-             <button v-show="editSection.pays_id && editSection.libelle.length" 
-              @click.prevent="modifierSectionLocal(editSection)" class="btn btn-primary"
+             <button 
+              @click.prevent="modifierSectionLocal(editAgence)" class="btn btn-primary"
               >Modifier</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
             </div>
@@ -260,14 +370,26 @@ export default {
      
         formData : {
               
-              	ville_id:"",
-             commune_id:""
+              	code_agence:"",
+            pays_id:"",
+             nom_agence:"",
+            tel_agence:"",
+             	ville_id:"",
+            commune_id:"",
+             banque_id:"",
+            	situation_geo:""
         },
 
-        editSection: {
+        editAgence: {
            
-              libelle:"",
-              pays_id:""
+          	code_agence:"",
+            pays_id:"",
+             nom_agence:"",
+            tel_agence:"",
+             	ville_id:"",
+            commune_id:"",
+             banque_id:"",
+            	situation_geo:""
         },
        search:""
     };
@@ -333,8 +455,14 @@ export default {
 
         this.formData = {
               
-             libelle:"",
-            pays_id:""
+             	code_agence:"",
+            pays_id:"",
+             nom_agence:"",
+            tel_agence:"",
+             	ville_id:"",
+            commune_id:"",
+             banque_id:"",
+            	situation_geo:""
         }
     },
     // afficher modal de modification
@@ -344,11 +472,11 @@ export default {
         keyboard: false
       });
 
-      this.editSection = article;
+      this.editAgence = article;
     },
 
 modifierSectionLocal(){
-  this.modifierVille(this.editSection);
+  this.modifierAgence(this.editAgence);
   this.$("#modifierModal").modal('hide');
 
 },

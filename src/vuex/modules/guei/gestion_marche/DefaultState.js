@@ -21,7 +21,7 @@ const defaultstate = {
     marche_contrat_en_execution:[],
     banques:[],
     comptes:[],
-    agences: [],
+    agenceBanques: [],
 
 };
 

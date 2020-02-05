@@ -25,7 +25,7 @@ const stockageArticles = state => state.stockageArticles;
 
 
 
-SommeQuantiteRealise
+
 
 
 

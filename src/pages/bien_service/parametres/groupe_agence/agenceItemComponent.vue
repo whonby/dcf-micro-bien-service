@@ -18,8 +18,13 @@
                 <thead>
                   <tr>
                   
-                    <th width="90%">Libelle</th>
-                   
+                    <th width="20%">Code agence</th>
+                      <th width="20%">Nom agence</th>
+                        <th width="20%">tel agence</th>
+                          <th width="20%">pays_id</th>
+                            <th width="20%">ville_id</th>
+                    <th width="20%">Commune</th>
+                    <th width="20%">situation_geo</th>
                     <th>Action</th>
                   </tr>
                 </thead>

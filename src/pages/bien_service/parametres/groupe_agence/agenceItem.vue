@@ -15,15 +15,17 @@
                     > {{article.tel_agence || 'Non renseigné'}}</td>
                       <td
                     
-                    > {{article.pays_id || 'Non renseigné'}}</td>
+                    > {{paysAfficher(article.pays_id) || 'Non renseigné'}}</td>
                       <td
                     
-                    > {{article.ville_id || 'Non renseigné'}}</td>
+                    > {{villeAfficher(article.ville_id) || 'Non renseigné'}}</td>
                       <td
                     
-                    > {{article.commune_id || 'Non renseigné'}}</td>
+                    > {{communeAfficher(article.commune_id) || 'Non renseigné'}}</td>
                     
-
+      <td
+                    
+                    > {{article.situation_geo || 'Non renseigné'}}</td>
                     <td>
                       <button class="btn btn-danger" @click.prevent="$emit('suppression', article.id)">
                         <span>
@@ -40,15 +42,67 @@
 </template>
 
 <script>
-
+import { mapGetters} from "vuex";
 
 export default {
     name: 'agenceItem',
      props: {
     article: Object,
   },
- 
+ computed: {
+  ...mapGetters("bienService", ['villes','pays','communes']),
+ ...mapGetters('gestionMarche', ['banques','agenceBanques']) ,
+  paysAfficher() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.pays.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    villeAfficher() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.villes.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    banqueAfficher() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.banques.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     communeAfficher() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.communes.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+ },
+ 
+     
   filters: {
   
   	subStr: function(string, nbr) {

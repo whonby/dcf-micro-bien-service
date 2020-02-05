@@ -459,18 +459,18 @@ const GET_MARCHE_CONTRAT_EN_EXECUTION = (state, data) => {
 
 // get all facture
 export const GET_ALL_AGENCE = (state, tableau_facture) => {
-    state.agences = tableau_facture
+    state.agenceBanques = tableau_facture
 }
 
 // add * facture
 
 export const AJOUTER_AGENCE = (state, elementAjouter) => {
-    state.agences.unshift(elementAjouter)
+    state.agenceBanques.unshift(elementAjouter)
 }
 
 // update all facture
 export const MODIFIER_AGENCE = (state, elementModif) => {
-    state.agences = state.agences.map(response => {
+    state.agenceBanques = state.agenceBanques.map(response => {
         if (response.id == elementModif.id) {
             response = { ...elementModif }
         }
@@ -482,7 +482,7 @@ export const MODIFIER_AGENCE = (state, elementModif) => {
 // delete all facture
 
 export const SUPPRIMER_AGENCE = (state, id) => {
-    state.agences = state.agences.filter(prest => prest.id != id)
+    state.agenceBanques = state.agenceBanques.filter(prest => prest.id != id)
 }
 
 
