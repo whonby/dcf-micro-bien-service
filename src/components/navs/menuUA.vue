@@ -80,12 +80,12 @@
               Budget General par section
             </router-link>
           </li>
-          <li class="divider"></li>
+          <!-- <li class="divider"></li>
           <li>
             <router-link :to="{name: 'historiquebudgetGeneralComponent'}" tag="a">
               <i class="icon-key"></i>Historique Budget General 
             </router-link>
-          </li>
+          </li> -->
         </ul>
       </li>
 

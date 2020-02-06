@@ -46,6 +46,7 @@ import pays from '../../pages/bien_service/parametres/pays.vue';
 import ville from '../../pages/bien_service/parametres/groupe_ville/ville.vue';
 import commune from '../../pages/bien_service/parametres/groupe_commune/commune.vue';
 import agence from '../../pages/bien_service/parametres/groupe_agence/agence.vue';
+import DetailLivrable from '../../pages/bien_service/DetailLivrable.vue';
 const BienServiceRoutes = [
     {
         path: "agence",
@@ -87,6 +88,8 @@ const BienServiceRoutes = [
         name: "AjouterEngagement",
         component: AjouterEngagement
     },
+
+    
 
     {
         path: "/type-Text-Juridique",
@@ -148,6 +151,12 @@ component:actesEffet
     path: '/detail-marche/:id',
     name:"DetaillMarche",
     component:DetaillMarche
+},
+
+{
+    path: '/detail-livrable/:id',
+    name:"DetailLivrable",
+    component:DetailLivrable
 },
 
 {

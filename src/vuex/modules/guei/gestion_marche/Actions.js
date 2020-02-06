@@ -233,6 +233,7 @@ export  function  getBanque({commit}) {
   // action pour ajouter banque
   export function ajouterBanque({commit}, elementAjout){
     asyncLoading(axios.post('/banques',{
+        code_banque:elementAjout.code_banque,
       numero_banque:elementAjout.numero_banque,
       libelle:elementAjout.libelle,
       telephone:elementAjout.telephone,
@@ -412,7 +413,7 @@ export function supprimerEntreprise({commit}, id){
 export function modifierEntreprise({ commit }, formData) {
     asyncLoading(axios
         .put("/update_entreprise/" + formData.id, {
-
+            numero_idu:formData.numero_idu,
             numero_cc: formData.numero_cc,
             numero_rc: formData.numero_rc,
             raison_sociale: formData.raison_sociale,
@@ -440,7 +441,7 @@ export function modifierEntreprise({ commit }, formData) {
            
             this.$app.$notify({
                 title: 'Success',
-                text: 'Modification Effectué avec Succès!',
+                text: 'Modification Effectuï¿½ avec Succï¿½s!',
                 type: "success"
             })
         });

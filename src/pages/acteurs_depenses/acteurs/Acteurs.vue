@@ -24,7 +24,7 @@
             </ul>
         </div>
 
-        <div class="container-fluid">
+        <div class="container-fluid" style="heigth:100%">
 
             <hr>
             <div class="row-fluid">

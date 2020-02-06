@@ -9,8 +9,8 @@
                 <div class="widget-title">
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#tab1">LISTE DE TOUTE LES ENTREPRISES</a></li>
-                        <li><a data-toggle="tab" href="#tab2">ENTREPRISE NON SANCTIONNER</a></li>
-                        <li><a data-toggle="tab" href="#tab3">ENTREPRISE SANCTIONNER</a></li>
+                        <li><a data-toggle="tab" href="#tab2">ENTREPRISE NON SANCTIONNEE</a></li>
+                        <li><a data-toggle="tab" href="#tab3">ENTREPRISE SANCTIONNEE</a></li>
                     </ul>
                 </div>
                 <div class="widget-content tab-content">
@@ -30,6 +30,7 @@
                                         <table class="table table-bordered table-striped">
                                             <thead>
                                             <tr>
+                                                <th>IDU</th>
                                                 <th>Raison social </th>
                                                 <th>Compte contribuable</th>
                                                 <th>Registe commerce </th>
@@ -44,6 +45,7 @@
                                             </thead>
                                             <tbody>
                                             <tr class="odd gradeX" v-for="item in titreFiltres" :key="item.id">
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_idu || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.raison_sociale || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_cc || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_rc || 'Non renseigné'}}</td>
@@ -93,6 +95,7 @@
                                     <div class="widget-content nopadding"><table class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
+                                            <th>IDU</th>
                                             <th>Raison social </th>
                                             <th>Compte contribuable</th>
                                             <th>Registe commerce </th>
@@ -107,6 +110,7 @@
                                         </thead>
                                         <tbody>
                                         <tr class="odd gradeX" v-for="item in nonSanctionner" :key="item.id">
+                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_idu || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.raison_sociale || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_cc || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_rc || 'Non renseigné'}}</td>
@@ -151,7 +155,8 @@
                                         <table class="table table-bordered table-striped">
                                             <thead>
                                             <tr>
-                                                <th>Raison social </th>
+                                                <th>IDU</th>
+                                                <th>Raison sociale </th>
                                                 <th>Compte contribuable</th>
                                                 <th>Registe commerce </th>
                                                 <th>Secteur activite</th>
@@ -165,6 +170,7 @@
                                             </thead>
                                             <tbody>
                                             <tr class="odd gradeX" v-for="item in sanctionner" :key="item.id">
+                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_idu || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.raison_sociale || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_cc || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_rc || 'Non renseigné'}}</td>
@@ -226,6 +232,15 @@
                             <input type="date"  placeholder="Date fin sanction" v-model="sanction.fin_sanction">
                         </div>
                     </div>
+                     
+                      <div class="control-group">
+                        <label class="control-label">Motif de sanction:</label>
+                        <div class="controls">
+                        <textarea   placeholder="Saisir le motif" v-model="sanction.motif" class="span2.5"></textarea>
+                        </div>
+                    </div>
+
+
                     <div class="control-group">
                         <label class="control-label">Degré sanction</label>
                         <div class="controls">
@@ -275,6 +290,7 @@
                     entreprise_id: "",
                     debut_sanction: "",
                     fin_sanction:"",
+                    motif:""
                 },
                 entrepriseSetect:''
 
@@ -433,6 +449,7 @@ this.getEntreprise()
                 formData.append('entreprise_id', this.entrepriseSetect.id);
                 formData.append('debut_sanction', this.sanction.debut_sanction);
                 formData.append('fin_sanction', this.sanction.fin_sanction);
+                formData.append('motif', this.sanction.motif);
 
                 let config = {
                     header : {
@@ -444,6 +461,7 @@ this.getEntreprise()
                     entreprise_id: "",
                         debut_sanction: "",
                         fin_sanction:"",
+                        motif:""
                 }
                 this.getEntreprise()
 

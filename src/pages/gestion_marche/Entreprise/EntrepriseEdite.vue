@@ -22,6 +22,14 @@
                                             <div class="widget-content nopadding">
 
                                                 <div class="control-group">
+                                                    <label class="control-label">Numero IDU:</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="" v-model="formData.numero_idu">
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="control-group">
                                                     <label class="control-label">Raison social :</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Raison social" v-model="formData.raison_sociale">
@@ -268,6 +276,7 @@
                 liste:[],
                 formData : {
                     id:"",
+                    numero_idu:"",
                     numero_cc: "",
                     numero_rc: "",
                     raison_sociale: "",
@@ -305,6 +314,7 @@
             var ObjetEntreprise=this.entreprises.find(element=> element.id === this.$route.params.id)
             this.formData = {
                     id:ObjetEntreprise.id,
+                    numero_idu:ObjetEntreprise.numero_idu,
                     numero_cc: ObjetEntreprise.numero_cc,
                     numero_rc: ObjetEntreprise.numero_rc,
                     raison_sociale: ObjetEntreprise.raison_sociale,

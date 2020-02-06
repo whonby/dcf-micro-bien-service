@@ -6,7 +6,7 @@
     
       <!-- End Page Header -->
             <!-- Default Light Table -->
-           <div class="container-fluid">
+           <div class="container-fluid grdfont" style="heigth:1024px">
         <hr>
     <div class="row-fluid">
       <div class="span12">
@@ -398,3 +398,8 @@ formaterDate(date) {
 };
 </script>
 
+<style>
+.container-fluid{
+  height: 1000px;
+}
+</style>

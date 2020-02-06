@@ -1094,7 +1094,7 @@ export default {
 
    // fonction pour filtrer historique de mission
   
-
+// cette fonction renvoi le nombre de mission par unite administrative
     NombreDeMissionParUA () {
      return ua_id => {
        if(ua_id != "") {
@@ -1105,6 +1105,8 @@ export default {
        }
      }  
     },
+    // cette fonction affiche le nom dynamique pour chaque unite administartive slectionner 
+
     NomDeMissionParUA(){
   return ua_id =>{
     if(ua_id !=""){
