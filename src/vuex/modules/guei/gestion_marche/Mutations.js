@@ -454,6 +454,46 @@ const DETAIL_MARCHE_FINNANCEMENT=(state,{getters,id})=>{
 const GET_MARCHE_CONTRAT_EN_EXECUTION = (state, data) => {
     state.marche_contrat_en_execution = data
 }
+
+
+
+// get all facture
+export const GET_ALL_AGENCE = (state, tableau_facture) => {
+    state.agenceBanques = tableau_facture
+}
+
+// add * facture
+
+export const AJOUTER_AGENCE = (state, elementAjouter) => {
+    state.agenceBanques.unshift(elementAjouter)
+}
+
+// update all facture
+export const MODIFIER_AGENCE = (state, elementModif) => {
+    state.agenceBanques = state.agenceBanques.map(response => {
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
+        }
+        return response
+    })
+}
+
+
+// delete all facture
+
+export const SUPPRIMER_AGENCE = (state, id) => {
+    state.agenceBanques = state.agenceBanques.filter(prest => prest.id != id)
+}
+
+
+
+
+
+
+
+
+
+
 export {
     GET_MODE_PASSATION,
     AJOUTER_MODE_PASSATION,

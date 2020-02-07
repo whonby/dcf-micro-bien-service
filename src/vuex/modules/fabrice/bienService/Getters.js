@@ -1,5 +1,6 @@
 
 export const pays = state => state.pays
+
 export const villes = state => state.villes
 export const communes = state => state.communes
 export const typeCandidat = state => state.typeCandidat

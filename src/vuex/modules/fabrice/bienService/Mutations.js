@@ -1833,3 +1833,7 @@ export const DELETE_BAILLEUR_MARCHE = (state, id)=> {
     state.bailleurMarche = state.bailleurMarche.filter(prest => prest.id !=id)
 }
 
+
+
+
+

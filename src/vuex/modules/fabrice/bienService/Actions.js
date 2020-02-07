@@ -6,36 +6,36 @@ var queue = housecall({concurrency: 2, cooldown: 1000})
 
 // action for print all to prestation
 
-export  function  getPrestation({commit}) {
-    queue.push(() => axios.get('/url').then((response) => {
-      commit('GET_ALL_PRESTATION', response.data)
+// export  function  getPrestation({commit}) {
+//     queue.push(() => axios.get('/url').then((response) => {
+//       commit('GET_ALL_PRESTATION', response.data)
       
-  }).catch(error => console.log(error)))
-  }
+//   }).catch(error => console.log(error)))
+//   }
 
   // action pour ajouter prestation
-  export function ajouterPrestation({commit}, elementAjout){
-    asyncLoading(axios.post('/urls',{
-        id_type_prestation:elementAjout.id_type_prestation,
-      libelle:elementAjout.libelle,
-      date_debut:elementAjout.date_debut,
-      date_fin:elementAjout.date_fin,
-      objet_prestation:elementAjout.objet_prestation
-  })).then(response =>{
-        if(response.status == 201){
-            commit('AJOUTER_PRESTATION', response.data)
+//   export function ajouterPrestation({commit}, elementAjout){
+//     asyncLoading(axios.post('/urls',{
+//         id_type_prestation:elementAjout.id_type_prestation,
+//       libelle:elementAjout.libelle,
+//       date_debut:elementAjout.date_debut,
+//       date_fin:elementAjout.date_fin,
+//       objet_prestation:elementAjout.objet_prestation
+//   })).then(response =>{
+//         if(response.status == 201){
+//             commit('AJOUTER_PRESTATION', response.data)
 
-            this.$app.$notify({
-              title: 'success ',
-              text: 'Enregistrement effectué !',
-              type:"success"
-            })
-        }
+//             this.$app.$notify({
+//               title: 'success ',
+//               text: 'Enregistrement effectué !',
+//               type:"success"
+//             })
+//         }
 
 
-    }).catch(error => console.log(error))
+//     }).catch(error => console.log(error))
 
-}
+// }
 
 
 // action pour ajiouter nouveau fournisseur
@@ -61,35 +61,35 @@ export function ajouterFournisseur({commit}, elementAjout){
 // action pour modifier prestation
 
 
- export function modifierPrestation({commit}, element_modifie) {
-    asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-        id_type_prestation:element_modifie.id_type_prestation,
-        libelle:element_modifie.libelle,
-        date_debut:element_modifie.date_debut,
-        date_fin:element_modifie.date_fin,
-        objet_prestation:element_modifie.objet_prestation
+//  export function modifierPrestation({commit}, element_modifie) {
+//     asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+//         id_type_prestation:element_modifie.id_type_prestation,
+//         libelle:element_modifie.libelle,
+//         date_debut:element_modifie.date_debut,
+//         date_fin:element_modifie.date_fin,
+//         objet_prestation:element_modifie.objet_prestation
 
-   })).then(response => {
-         commit('MODIFIER_PRESTATION', response.data)
+//    })).then(response => {
+//          commit('MODIFIER_PRESTATION', response.data)
 
-         this.$app.$notify({
-           title: 'success ',
-           text: 'Modification effectué !',
-           type:"success"
-         })
-     }).catch(error => console.log(error))
- }
+//          this.$app.$notify({
+//            title: 'success ',
+//            text: 'Modification effectué !',
+//            type:"success"
+//          })
+//      }).catch(error => console.log(error))
+//  }
   // supprimer categorie mision
-export function supprimerPrestation({commit}, id) {
-   this.$app.$dialog
-   .confirm("Voulez vouz vraiment supprimer ?.")
-   .then(dialog => {
-      commit('DELETE_PRESTATION', id)
-     // // dialog.loading(false) // stops the proceed button's loader
-       axios.delete('/urls/' + id).then(() => dialog.close() )   
-   })
+// export function supprimerPrestation({commit}, id) {
+//    this.$app.$dialog
+//    .confirm("Voulez vouz vraiment supprimer ?.")
+//    .then(dialog => {
+//       commit('DELETE_PRESTATION', id)
+//      // // dialog.loading(false) // stops the proceed button's loader
+//        axios.delete('/urls/' + id).then(() => dialog.close() )   
+//    })
  
-}
+// }
 
 
 
@@ -2556,6 +2556,7 @@ export function supprimerAppelOffre({commit}, id) {
 
 
 
+
 export  function  getProcedurePassation({commit}) {
   queue.push(() => axios.get('/procedure_passations').then((response) => {
     commit('GET_PROCEDURE_PASSATION', response.data.data)
@@ -2565,11 +2566,12 @@ export  function  getProcedurePassation({commit}) {
 
 // action pour ajouter les infos 
 
-export function ajouterProcedurePassation({commit}, elementAjout){
+export function ajouterProcedurePassation({ commit, dispatch}, elementAjout){
   asyncLoading(axios.post('/procedure_passations',elementAjout)).then(response =>{
       if(response.status == 201){
           commit('AJOUTER_PROCEDURE_PASSATION', response.data)
-
+        dispatch('getTypeProcedures')
+        dispatch('getProcedurePassation')
           this.$app.$notify({
             title: 'success ',
             text: 'Enregistrement effectué !',
@@ -2583,10 +2585,11 @@ export function ajouterProcedurePassation({commit}, elementAjout){
 // action pour modifier le type text juridique
 
 
-export function modifierProcedurePassation({commit}, element_modifie) {
+export function modifierProcedurePassation({ commit, dispatch}, element_modifie) {
   asyncLoading( axios.put('/procedure_passations',element_modifie)).then(response => {
        commit('MODIFIER_PROCEDURE_PASSATION', response.data)
-       
+    dispatch('getTypeProcedures')
+    dispatch('getProcedurePassation')
 
        this.$app.$notify({
          title: 'success ',
@@ -2597,11 +2600,13 @@ export function modifierProcedurePassation({commit}, element_modifie) {
 }
 // supprimer le type text juridique
 
-export function supprimerProcedurePassation({commit}, id) {
+export function supprimerProcedurePassation({ commit, dispatch}, id) {
  this.$app.$dialog
  .confirm("Voulez vouz vraiment supprimer ?.")
  .then(dialog => {
-    commit('SUPPRIMER_PROCEDURE_PASSATION', id)
+   commit('SUPPRIMER_PROCEDURE_PASSATION', id)
+   dispatch('getTypeProcedures')
+   dispatch('getProcedurePassation')
    // // dialog.loading(false) // stops the proceed button's loader
      axios.delete('/procedure_passations/' + id).then(() => dialog.close() )   
  })
@@ -3546,3 +3551,5 @@ export function supprimerFacture({ commit }, id) {
     })
 
 }
+
+

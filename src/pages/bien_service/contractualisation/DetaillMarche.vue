@@ -1,4 +1,4 @@
-Liste acte effet financier
+Ajouter avis dmp
 <template>
     <div>
 
@@ -2563,6 +2563,12 @@ Liste acte effet financier
 
 
                         </div>
+                        <div class="modal-footer">
+        
+        <a data-dismiss="modal" class="btn btn-danger" @click.prevent="retourListeEntreprise" href="#">Voir Tableau Marché</a>
+       
+      </div>
+  
                     </div>
 
                 </div>
@@ -3030,58 +3036,105 @@ Liste acte effet financier
                 <button @click.prevent="ajouterOffreT" class="btn btn-primary">Ajouer</button>
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
-        <div id="offreF" class="modal hide">
+        <div id="offreF" class="modal hide modaloffreFin">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter l'offre financière</h3>
             </div>
             <div class="modal-body">
-                <div class="widget-box">
-                    <form action="#" method="get">
-                        <div class="control-group">
-                            <div class="control-group">
-                                <label>Liste lot</label>
+                   <table class="table table-bordered table-striped">
+         
+            <tr>
+              <td>
+                <div class="control-group">
+              
+                  <label>Liste lot</label>
                                 <div class="controls">
                                     <select v-model="formOffreFinanciere.numero_lot" class="span">
                                         <option v-for="varText in listeLots(marcheid)" :key="varText.numero_lot"
-                                                :value="varText.id">{{varText.numero_lot}}-{{varText.libelle_lot}}</option>
+                                                :value="varText.id">{{varText.numero_lot}}</option>
                                     </select>
                                 </div>
-                            </div>
-
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label">Designation :</label>
+                </div>
+              </td>
+              <td colspan="2">
+                <div class="control-group">
+                    <label class="control-label">Designation :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Designation" v-model="formOffreFinanciere.designation">
+                                <input type="text"  readonly   class="span6" placeholder="Designation" :value="libelleLot">
                             </div>
-                        </div>
-                        <div class="control-group">
+                </div>
+              </td>
+               
+            </tr>
+            <tr>
+                <td>
+              
+              <div class="control-group">
                             <label class="control-label">Quantite :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="quantite" v-model="formOffreFinanciere.quantite">
+                                <input type="number" class="span" placeholder="quantite" v-model="formOffreFinanciere.quantite">
                             </div>
                         </div>
-                        <div class="control-group">
+              
+              </td>
+              <td>
+              
+                <div class="control-group">
                             <label class="control-label">Prix unitaire :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="prix unitaire" v-model="formOffreFinanciere.prix_unitaire">
+                                <input type="number" class="span" placeholder="prix unitaire" v-model="formOffreFinanciere.prix_unitaire">
                             </div>
                         </div>
-                        <div class="control-group">
+              </td>
+              <td>
+                  <div class="control-group">
+                            <label class="control-label">Taux</label>
+                            <div class="controls">
+                                <input type="text" readonly  class="span" :value="affcherTauxEnCours">
+                                 <input
+                    type="hidden"
+                    :value="tauxArrondit"
+                   
+                    class="span3"
+                   
+                  />
+                            </div>
+                        </div>
+              </td>
+              
+              
+            </tr>
+            <tr>
+              <td>
+                  <div class="control-group">
+                  <label class="control-label">Tva</label>
+                  <div class="controls">
+                    <input type="number" readonly :value="montantTva" class="span" />
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="control-group">
                             <label class="control-label">Montant total ht :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Montant total HT" v-model="formOffreFinanciere.montant_total_ht">
+                                <input type="text"   readonly  class="span" placeholder="Montant total HT" :value="montantHT">
                             </div>
                         </div>
-                        <div class="control-group">
+              </td>
+              <td>
+                <div class="control-group">
                             <label class="control-label">Montant totat ttc :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Montant total ttc" v-model="formOffreFinanciere.montant_total_ttc">
+                                <input type="text"  readonly  class="span" placeholder="Montant total ttc" :value="montantHTt">
                             </div>
                         </div>
-                    </form>
-                </div>
+              </td>
+              
+            </tr>
+          
+        </table>
+                
             </div>
             <div class="modal-footer">
                 <button @click.prevent="ajouterOffreF()" class="btn btn-primary">Ajouer</button>
@@ -4046,80 +4099,76 @@ Liste acte effet financier
         <!---  fin modal ajout demande ano  -->
 
         <!--Annalyse DMP-->
-        <div id="ajouterDmp" class="modal hide">
+        <div id="ajouterDmp" class="modal hide tailDMP">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter analyse dmp</h3>
+                <h3>Ajouter avis dmp</h3>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal">
-
-                    <div class="control-group">
-                        <label class="control-label">Reference Dmp</label>
-                        <div class="controls">
-                        <input type="text" v-model="formAnalyseDMP.ref_dmp" class="span">
-                        </div>
-                    </div>
-
+                <table class="table table-bordered table-striped">
+         
+            <tr>
+              <td>
                  <div class="control-group">
-                        <label class="control-label">Demande ANO</label>
+                        <label class="control-label">Reference d'offre</label>
                         <div class="controls">
-                            <select v-model="formAnalyseDMP.demande_ano_id" class="span">
-                                <option v-for="varText in demandeAno(marcheid)" :key="varText.id"
-                                        :value="varText.id">{{varText.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
-                            </select>
+                        <input type="text" :value="afficherIdMarche(detail_marche.id)" class="span4" readonly>
                         </div>
                     </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Avis</label>
+              </td>
+               <!-- <td>
+                 <div class="control-group">
+                        <label class="control-label">Lot</label>
                         <div class="controls">
-                            <select v-model="formAnalyseDMP.avis_bail" class="span">
-                                <option value="1">Favorable</option>
-                                <option value="2">Defavorable</option>
-                            </select>
-                            <!-- <input
-                                    type="text"
-                                    v-model="formAnalyseDMP.avis_bail"
-                                    class="span"
-                                    placeholder="Saisir l'avis du bailleur"
-                            /> -->
+                        <input type="text" v-model="formAnalyseDMP.lot" class="span">
                         </div>
                     </div>
-
-                    <div class="control-group">
+              </td> -->
+               <td>
+                <div class="control-group">
+                        <label class="control-label">Reference courrier</label>
+                        <div class="controls">
+                        <input type="text" :value="recupererNumeroCourier" class="span4" readonly>
+                        </div>
+                    </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="control-group">
+                  <label class="control-label">Avis</label>
+                  <div class="controls">
+                    <select v-model="formAnalyseDMP.avis_bail" class="span4">
+                      <option value="0" >Objection</option>
+                       <option value="1" >Non objection</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+             
+               <td>
+                 <div class="control-group">
                         <label class="control-label">Date avis</label>
                         <div class="controls">
-                            <input
-                                    type="date"
-                                    v-model="formAnalyseDMP.date_avis_bail"
-                                    class="span"
-                                    placeholder="Saisir le libelle_type"
-                            />
+                        <input type="date" v-model="formAnalyseDMP.date_avis_bail" class="span4">
                         </div>
                     </div>
-                    
-
-                    <div class="control-group">
+              </td>
+            </tr>
+            <tr>
+  <td colspan="2">
+                <div class="control-group">
                         <label class="control-label">Observation</label>
                         <div class="controls">
+                       
+                        <textarea v-model="formAnalyseDMP.observation" rows="2" class="span8" :readonly="verrouObjection">
 
-              <textarea   v-model="formAnalyseDMP.observation"  class="textarea_editor span" rows="" placeholder="Enter text ..."></textarea>
-           
+                        </textarea>
                         </div>
                     </div>
-                   
-                    <!-- <div class="control-group">
-                        <label class="control-label">document procedure</label>
-                        <div class="controls">
-                            <select v-model="formAnalyseDMP.document_procedure_id" class="span">
-                                <option v-for="varText in documentProcedures" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle_doc}}</option>
-                            </select>
-                        </div>
-                    </div> -->
-
-                </form>
+              </td>
+            </tr>
+                </table>
             </div>
             <div class="modal-footer">
                 <a @click.prevent="ajouterAnalyseDMPB"
@@ -4462,6 +4511,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
                     }
 
                 ],
+                demande:{},
                 acteEffetActive:"",
                 formFournisseur : {
                     numero_cc: "",
@@ -4786,8 +4836,8 @@ created() {
     console.log(this.appel_offre_marche)*/
 },
         computed: {
-            ...mapGetters("bienService", [ 'acteDepense',"getMarchePersonnaliser","appelOffres",
-                "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
+            ...mapGetters("bienService", [ 'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+                "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
@@ -4800,6 +4850,37 @@ created() {
                 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
                 'types_financements']) ,
+                
+    ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
+            
+            
+            verrouObjection(){
+
+return this.formAnalyseDMP.avis_bail == "1";
+            },
+            
+             recupererNumeroCourier() {
+      
+      const norme = this.getterDemandeAno.find(normeEquipe => normeEquipe.ref_marche == this.detail_marche.reference_marche);
+
+      if (norme) {
+        return norme.num_courrier;
+      }
+      return ""
+    },
+      afficherIdMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.reference_marche;
+      }
+      return 0
+        }
+      };
+    },
+            
             marcheDetail(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -4818,6 +4899,73 @@ created() {
                 }
 
             },
+ libelleLot() {
+      const typeUniteA = this.lots.find(typeUa=> typeUa.id == this.formOffreFinanciere.numero_lot);
+
+      if (typeUniteA) {
+        return typeUniteA.libelle_lot;
+        
+      }
+      return ""
+    },
+
+affcherTauxEnCours() {
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
+    },
+tauxArrondit() {
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.arrondit;
+      }
+      return 0
+    },
+montantHT() {
+      const val =  parseFloat(this.formOffreFinanciere.prix_unitaire) * parseFloat(this.formOffreFinanciere.quantite);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+    montantTva() {
+      const val =   parseFloat(this.montantHT) * parseFloat(this.tauxArrondit);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+
+ montantHTt() {
+      const val = parseFloat(this.montantHT) + parseFloat(this.montantTva);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+
+
+
+
+
+
+
+
+
 
             //afficher le motif avis bailleur 
             afficherMotifBailleur(){
@@ -5208,6 +5356,9 @@ modifierFactureLocal(){
 
 
             },
+            retourListeEntreprise(){
+                 this.$router.push({ name: 'marche' })
+            },
             //afiicher modal ajouter
             afficherModalAjouterActeDepense() {
                 this.$("#exampleModal").modal({
@@ -5302,9 +5453,19 @@ modifierFactureLocal(){
                 }
             },
             ajouterOffreF(){
+
+
+                 var nouvelObjet = {
+      ...this.formOffreFinanciere,
+      montant_total_ht :this.montantHT,
+       montant_total_ttc :this.montantHTt,
+        	taux :this.affcherTauxEnCours,
+         	tva :this.montantTva,
+designation:this.libelleLot
+       };
                 console.log(this.edite_offre_financiere.id)
                 this.formOffreFinanciere.dossier_candidat_id=this.edite_offre_financiere.id
-                this.ajouterOffreFinancier(this.formOffreFinanciere)
+                this.ajouterOffreFinancier(nouvelObjet)
                 this.formOffreFinanciere={
                         numero_lot:"",
                         designation:"",
@@ -5498,8 +5659,16 @@ modifierModalActeEffetFinancierLocal(entreprise_id){
         
 
         ajouterAnalyseDMPB(){
+             var nouvelObjet = {
+        ...this.formAnalyseDMP,
+        ref_dmp: this.detail_marche.id,
+        ref_courier: this.recupererNumeroCourier,
+      
+      
+
+      };
                 console.log(this.formAnalyseDMP)
-            this.ajouterAnalyseDMP(this.formAnalyseDMP)
+            this.ajouterAnalyseDMP(nouvelObjet)
             this.formAnalyseDMP={
                      ref_dmp:"",
                     demande_ano_id:"",
@@ -5654,7 +5823,7 @@ ajouterNouveauFournisseurLocal(registeCommerce){
                     keyboard: false
                 });
 
-             this.edite_lot = this.lots[index];
+             this.edite_lot = this.listeLots(this.marcheid)[index];
                 //this.edite_lot.appel_offre_id=this.edite_lot.
             },
             afficheBouttonTechCojo(index){
@@ -5788,5 +5957,13 @@ ajouterNouveauFournisseurLocal(registeCommerce){
         font-size: 120%;
         text-align: center;
         font-weight:bold;
+    }
+    .modaloffreFin{
+width: 850px;
+ margin: 0 -480px;
+    }
+    .tailDMP{
+        width: 850px;
+ margin: 0 -490px;
     }
 </style>

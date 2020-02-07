@@ -20,7 +20,8 @@ const defaultstate = {
     detail_marche_finance:[],
     marche_contrat_en_execution:[],
     banques:[],
-    comptes:[]
+    comptes:[],
+    agenceBanques: [],
 
 };
 

@@ -99,7 +99,7 @@
                                         <th>Date</th>
                                         <th>Signataire</th>
                                         <th>Nature compte</th>
-                                        <th>Agence</th>
+                                        <th>Nom Agence</th>
                                         <th>Situation geographique</th>
                                         <th>Numero agence</th>
                                         <th>Telephone </th>
@@ -155,7 +155,7 @@
         </div>
 
 <!-- Ajouter appel offres --->
-        <div id="myAlert" class="modal hide glcompte" aria-hidden="true" style="display: none;">
+        <div id="myAlert" class="modal hide tailModal" aria-hidden="true" style="display: none;">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter compte bancaire</h3>
@@ -173,20 +173,119 @@
                             </div>
                         </div>
                           </td>
-                          <td>
+                           <td>
+                              <div class="control-group">
+                                                    <label class="control-label">Pays</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.pays_id" class="span4" >
+                                                            <option></option>
+                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                          </td>
+                           <td>
+                              <div class="control-group">
+                                                    <label class="control-label">Ville:</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.ville_id" class="span4" :readOnly="verroVille">
+                                                            <option></option>
+                                                            <option v-for="item in VilleDynamiques(formData.pays_id)" 
+                                                            :key="item.id" 
+                                                            :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                          </td>
+                        
+
+                       
+                         
+                      </tr>
+                      <tr>
+                            <td>
+                              <div class="control-group">
+                                                    <label class="control-label">Communes</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.commune_id" class="span4" :readOnly="verroCommune">
+                                                            <option></option>
+                                                            <option v-for="item in commuDynamiques(formData.ville_id)" 
+                                                            :key="item.id" 
+                                                            :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                          </td>
+                            <td>
                         <div class="control-group">
                              <label>Banque</label>
                             <div class="controls">
                               
-                            <select v-model="formData.banque_id" class="span4">
-                                <option v-for="varText in banques" :key="varText.id"
-                              :value="varText.id">{{varText.libelle}}</option>
+                            <select v-model="formData.banq_id" class="span4" :readOnly="verroBanque">
+                                <option v-for="varText in banqueDynamiques(formData.commune_id)" :key="varText.afficheBanque.id"
+                              :value="varText.afficheBanque.id">{{varText.afficheBanque.libelle}}</option>
                             </select>
                                 
                             </div>
                         </div>
                           </td>
- <td>
+                            <td>
+                        <div class="control-group">
+                            <label>Code de la  agence</label>
+                            <div class="controls">
+                                <select v-model="formData.numero_agence" class="span4" :readOnly="verroCodeAgence">
+                                                            <option></option>
+                                                            <option v-for="item in codeAgenceDynamiques" :key="item.id" :value="item.code_agence">
+                                                                {{item.code_agence}}
+                                                            </option>
+                                </select>
+                            </div>
+                        </div>
+                          </td>
+                      </tr>
+                     <tr>
+                    
+
+                        
+                                <td>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Nom de la Agence</label>
+                                <input type="text" class="span4" placeholder="Saisir l'agence" :value="AffichierNomAgence" readonly>
+                            </div>
+                        </div>
+                          </td>
+                          <td>
+
+                        <div class="control-group">
+                            <label>Telephone agence</label>
+                            <div class="controls">
+                                <input type="text"  readonly   class="span4" placeholder="saisir le teleophone agence" :value="AffichierNumeroAgence">
+                            </div>
+                        </div>
+                          </td>
+                          <td>
+                     
+                        <div class="control-group">
+                            <label>Situation geographique</label>
+                            <div class="controls">
+                                <input type="text" class="span4"  readonly  placeholder="sitaution geographique" :value="AffichierSituationGeoAgence">
+                            </div>
+                        </div>
+                          </td>
+                      </tr>
+                      <tr>
+                           <td>
                         <div class="control-group">
                             <div class="controls">
                                 <label>Nature de compte</label>
@@ -200,16 +299,13 @@
                             </div>
                         </div>
                           </td>
-                       
-                         
-                      </tr>
-                      <tr>
                              <td>
                        <div class="control-group">
+                           
                              <label>Numero compte</label>
                             <div class="controls">
                               
-                            <!-- <select v-model="formData.entreprise_id" class="span">
+                            <!-- <select v-model="formData.entrepse_id" class="span">
                                 <option v-for="varText in entreprises" :key="varText.id"
                               :value="varText.id">{{varText.raison_sociale}}</option>
                             </select> -->
@@ -227,6 +323,13 @@
                             </div>
                         </div>
                           </td>
+                        
+                         
+
+                         
+                      </tr>
+ 
+                    <tr>
                           <td>
                      
                         <div class="control-group">
@@ -237,79 +340,7 @@
                         </div>
                           </td>
 
-                         
-
-                         
-                      </tr>
-
-                      <tr>
-                          <td>
-
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Agence</label>
-                                <input type="text" class="span4" placeholder="Saisir l'agence" v-model="formData.agence">
-                            </div>
-                        </div>
-                          </td>
-
-                          <td>
-                        <div class="control-group">
-                            <label>Code agence</label>
-                            <div class="controls">
-                                <input type="text" class="span4" placeholder="saisir le numero agence" v-model="formData.numero_agence">
-                            </div>
-                        </div>
-                          </td>
-                          <td>
-
-                        <div class="control-group">
-                            <label>Telephone agence</label>
-                            <div class="controls">
-                                <input type="text" class="span4" placeholder="saisir le teleophone agence" v-model="formData.telephone_agence">
-                            </div>
-                        </div>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td>
-                              <div class="control-group">
-                                                    <label class="control-label">Ville:</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.ville_id" class="span4">
-                                                            <option></option>
-                                                            <option v-for="item in villes" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                          </td>
-                          <td>
-                              <div class="control-group">
-                                                    <label class="control-label">Communes</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.commune_id" class="span4">
-                                                            <option></option>
-                                                            <option v-for="item in communeDynamiques(formData.ville_id)" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                          </td>
-                           <td>
-                     
-                        <div class="control-group">
-                            <label>Situation geographique</label>
-                            <div class="controls">
-                                <input type="text" class="span4" placeholder="sitaution geographique" v-model="formData.situation_geographique_angence">
-                            </div>
-                        </div>
-                          </td>
-                      </tr>
+                    </tr>
                     </table>
                 
             </div>
@@ -323,41 +354,140 @@
 
 
 
-  <div id="modifierCompte" class="modal hide glcompte" aria-hidden="true" style="display: none;">
+  <div id="modifierCompte" class="modal hide tailModal" aria-hidden="true" style="display: none;">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Modifier compte</h3>
             </div>
             <div class="modal-body">
-                 <table class="table table-bordered table-striped">
+                  <table class="table table-bordered table-striped">
                       <tr>
                            <td>
                         <div class="control-group">
                           <label>Entreprise</label>
                             <div class="controls">
                                 <input type="text" readonly  class="span4" placeholder="" :value="detail_marche.raison_sociale">
-                                  <input type="hidden" readonly  class="span4" placeholder="" :value="detail_marche.id">
+                                  <input type="hidden" readonly  class="span" placeholder="" :value="detail_marche.id">
                             </div>
                         </div>
                           </td>
-                          <td>
+                           <td>
+                              <div class="control-group">
+                                                    <label class="control-label">Pays</label>
+                                                    <div class="controls">
+                                                        <select v-model="editCompte.pays_id" class="span4" >
+                                                            <option></option>
+                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                          </td>
+                           <td>
+                              <div class="control-group">
+                                                    <label class="control-label">Ville:</label>
+                                                    <div class="controls">
+                                                        <select v-model="editCompte.ville_id" class="span4" :readOnly="verroVille">
+                                                            <option></option>
+                                                            <option v-for="item in VilleDynamiques(editCompte.pays_id)" 
+                                                            :key="item.id" 
+                                                            :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                          </td>
+                        
+
+                       
+                         
+                      </tr>
+                      <tr>
+                            <td>
+                              <div class="control-group">
+                                                    <label class="control-label">Communes</label>
+                                                    <div class="controls">
+                                                        <select v-model="editCompte.commune_id" class="span4" :readOnly="verroCommune">
+                                                            <option></option>
+                                                            <option v-for="item in commuDynamiques(editCompte.ville_id)" 
+                                                            :key="item.id" 
+                                                            :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                          </td>
+                            <td>
                         <div class="control-group">
                              <label>Banque</label>
                             <div class="controls">
                               
-                            <select v-model="editCompte.banque_id" class="span4">
-                                <option v-for="varText in banques" :key="varText.id"
-                              :value="varText.id">{{varText.libelle}}</option>
+                            <select v-model="editCompte.banq_id" class="span4" :readOnly="verroBanque">
+                                <option v-for="varText in banqueDynamiques(editCompte.commune_id)" :key="varText.afficheBanque.id"
+                              :value="varText.afficheBanque.id">{{varText.afficheBanque.libelle}}</option>
                             </select>
                                 
                             </div>
                         </div>
                           </td>
- <td>
+                            <td>
+                        <div class="control-group">
+                            <label>Code de la  agence</label>
+                            <div class="controls">
+                                <select v-model="editCompte.numero_agence" class="span4" :readOnly="verroCodeAgence">
+                                                            <option></option>
+                                                            <option v-for="item in codeAgenceDynamiquesModifier" :key="item.id" :value="item.code_agence">
+                                                                {{item.code_agence}}
+                                                            </option>
+                                </select>
+                            </div>
+                        </div>
+                          </td>
+                      </tr>
+                     <tr>
+                    
+
+                        
+                                <td>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Nom de la Agence</label>
+                                <input type="text" class="span4" placeholder="Saisir l'agence" :value="AffichierNomAgenceModifier" readonly>
+                            </div>
+                        </div>
+                          </td>
+                          <td>
+
+                        <div class="control-group">
+                            <label>Telephone agence</label>
+                            <div class="controls">
+                                <input type="text"  readonly   class="span4" placeholder="saisir le teleophone agence" :value="AffichierNumeroAgenceModifier">
+                            </div>
+                        </div>
+                          </td>
+                          <td>
+                     
+                        <div class="control-group">
+                            <label>Situation geographique</label>
+                            <div class="controls">
+                                <input type="text" class="span4"  readonly  placeholder="sitaution geographique" :value="AffichierSituationGeoAgenceModifier">
+                            </div>
+                        </div>
+                          </td>
+                      </tr>
+                      <tr>
+                           <td>
                         <div class="control-group">
                             <div class="controls">
                                 <label>Nature de compte</label>
-                                <!-- <input type="text" class="span4" placeholder="saisir la nature de compte" v-model="editCompte.nature_compte"> -->
+                                <!-- <input type="text" class="span" placeholder="saisir la nature de compte" v-model="editCompte.nature_compte"> -->
                            <select v-model="editCompte.nature_compte" class="span4">
                                                             <option></option>
                                                             <option value="0">Compte courant</option>
@@ -367,16 +497,13 @@
                             </div>
                         </div>
                           </td>
-                       
-                         
-                      </tr>
-                      <tr>
                              <td>
                        <div class="control-group">
+                           
                              <label>Numero compte</label>
                             <div class="controls">
                               
-                            <!-- <select v-model="editCompte.entreprise_id" class="span">
+                            <!-- <select v-model="editCompte.entrepse_id" class="span">
                                 <option v-for="varText in entreprises" :key="varText.id"
                               :value="varText.id">{{varText.raison_sociale}}</option>
                             </select> -->
@@ -393,87 +520,29 @@
                                 <input type="date" class="span4" placeholder="" v-model="editCompte.date_ouverture_compte">
                             </div>
                         </div>
-                          <td>
-                     
                           </td>
-
+                        
                          
 
                          
                       </tr>
-
-                      <tr>
+ 
+                    <tr>
                           <td>
-
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Agence</label>
-                                <input type="text" class="span4" placeholder="Saisir l'agence" v-model="editCompte.agence">
-                            </div>
-                        </div>
-                          </td>
-
-                          <td>
-                        <div class="control-group">
-                            <label>Code agence</label>
-                            <div class="controls">
-                                <input type="text" class="span4" placeholder="saisir le numero agence" v-model="editCompte.numero_agence">
-                            </div>
-                        </div>
-                          </td>
-                          <td>
-
-                        <div class="control-group">
-                            <label>Telephone agence</label>
-                            <div class="controls">
-                                <input type="text" class="span4" placeholder="saisir le teleophone agence" v-model="editCompte.telephone_agence">
-                            </div>
-                        </div>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td>
-                              <div class="control-group">
-                                                    <label class="control-label">Ville:</label>
-                                                    <div class="controls">
-                                                        <select v-model="editCompte.ville_id" class="span4">
-                                                            <option></option>
-                                                            <option v-for="item in villes" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                          </td>
-                          <td>
-                              <div class="control-group">
-                                                    <label class="control-label">Communes</label>
-                                                    <div class="controls">
-                                                        <select v-model="editCompte.commune_id" class="span4">
-                                                            <option></option>
-                                                            <option v-for="item in communeDynamiques(editCompte.ville_id)" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                          </td>
-                           <td>
                      
                         <div class="control-group">
-                            <label>Situation geographique</label>
+                          <label>Signature</label>
                             <div class="controls">
-                                <input type="text" class="span4" placeholder="sitaution geographique" v-model="editCompte.situation_geographique_angence">
+                                <input type="text" class="span4" placeholder="saisir le signataire compte" v-model="editCompte.signataire_compte">
                             </div>
                         </div>
                           </td>
-                      </tr>
+
+                    </tr>
                     </table>
                 
             </div>
-            <div class="modal-footer">  <a @click.prevent="modifierCompteLocal" class="btn btn-primary"
+            <div class="modal-footer">  <a @click.prevent="modifierCompteLocal(editCompte)"   class="btn btn-primary"
               href="#">Modifier</a> <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
         <!-- Modification fin appel offres --->
@@ -538,8 +607,11 @@
                     	situation_geographique_angence:"",
                     	numero_agence:"",
                     telephone_agence:"",
-                    entreprise_id:"",
-                    	banque_id:"",
+                    entrepse_id:"",
+                        banq_id:"",
+                        pays_id:"",
+                        ville_id:"",
+                        commune_id:"",
                 },
               editCompte:{
                 date_ouverture_compte:"",
@@ -549,8 +621,8 @@
                     	situation_geographique_angence:"",
                     	numero_agence:"",
                     telephone_agence:"",
-                    entreprise_id:"",
-                    	banque_id:"",
+                    entrepse_id:"",
+                    	banq_id:"",
 
               },
             search:""
@@ -568,9 +640,23 @@ created() {
         computed: {
             ...mapGetters("bienService", [ "getMarchePersonnaliser","appelOffres","villes","communes","pays" ]),
 
-                ...mapGetters("gestionMarche", [ 'entreprises','banques','comptes','getCompte', 'getEntreptise']),
+                ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
 
-              
+              verroPays() {
+      return this.formData.banq_id == "";
+    },
+      verroVille() {
+      return this.formData.pays_id == "";
+    },
+     verroCommune() {
+      return this.formData.ville_id == "";
+    },
+    verroCodeAgence() {
+      return this.formData.banq_id == "";
+    },
+     verroBanque() {
+      return this.formData.commune_id == "";
+    },
               compteFiltre(){
                   const st = this.search.toLowerCase();
                   return this.getCompte.filter((item)=>{
@@ -579,7 +665,17 @@ created() {
                               item.agence.toLowerCase().includes(st)
                   })
               },
-               communeDynamiques() {
+
+                 VilleDynamiques() {
+     return id => {
+        if (id != null && id != "") {
+          return this.villes.filter(
+            element => element.pays_id == id
+          );
+        }
+      };
+    },
+            commuDynamiques() {
      return id => {
         if (id != null && id != "") {
           return this.communes.filter(
@@ -588,6 +684,163 @@ created() {
         }
       };
     },
+                 banqueDynamiques() {
+     return id => {
+        if (id != null && id != "") {
+          return this.getPersonnaliseAgence.filter(
+            element => element.afficheCommune.id == id
+          );
+        }
+      };
+    },
+
+    
+
+
+     
+    //   codeAgenceDynamiques() {
+    //  return id => {
+    //     if (id != null && id != "") {
+    //       return this.getPersonnaliseAgence.filter(
+    //         element => element.afficheBanque.id == id 
+    //       );
+    //     }
+    //   };
+    // },
+codeAgenceDynamiques() {
+      let vM=this;
+        if (vM.formData.commune_id != null && vM.formData.banq_id != "") {
+            // console.log(vM.formData.commune_id)     
+            // console.log(vM.formData.banq_id)     
+                return this.getPersonnaliseAgence.filter(element => {
+                if(element.commune_id == vM.formData.commune_id &&  element.banque_id == vM.formData.banq_id ){
+return element;
+                }
+                     
+          }
+            
+          );
+        }
+        return null;
+    },
+codeAgenceDynamiquesModifier() {
+      let vM=this;
+        if (vM.editCompte.commune_id != null && vM.editCompte.banq_id != "") {
+            // console.log(vM.editCompte.commune_id)     
+            // console.log(vM.editCompte.banq_id)     
+                return this.getPersonnaliseAgence.filter(element => {
+                if(element.commune_id == vM.editCompte.commune_id &&  element.banque_id == vM.editCompte.banq_id ){
+return element;
+                }
+                     
+          }
+            
+          );
+        }
+        return null;
+    },
+  
+
+
+
+
+
+
+
+
+     AffichierNomAgence() {
+      
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.formData.numero_agence);
+
+      if (dureVie1) {
+        return dureVie1.nom_agence;
+      }
+      // console.log(dureVie1)
+      return ""
+    },
+    AffichierNumeroAgence() {
+      
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.formData.numero_agence);
+
+      if (dureVie1) {
+        return dureVie1.tel_agence;
+      }
+      // console.log(dureVie1)
+      return ""
+    },
+AffichierSituationGeoAgence() {
+      
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.formData.numero_agence);
+
+      if (dureVie1) {
+        return dureVie1.situation_geo;
+      }
+      // console.log(dureVie1)
+      return ""
+    },
+
+AffichierIdAgence() {
+      
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.formData.numero_agence);
+
+      if (dureVie1) {
+        return dureVie1.id;
+      }
+      // console.log(dureVie1)
+      return ""
+    },
+AffichierIdAgenceModifier() {
+      
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.formData.numero_agence);
+
+      if (dureVie1) {
+        return dureVie1.id;
+      }
+      // console.log(dureVie1)
+      return ""
+    },
+
+
+AffichierNomAgenceModifier() {
+      
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.editCompte.numero_agence);
+
+      if (dureVie1) {
+        return dureVie1.nom_agence;
+      }
+      // console.log(dureVie1)
+      return ""
+    },
+    AffichierNumeroAgenceModifier() {
+      
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.editCompte.numero_agence);
+
+      if (dureVie1) {
+        return dureVie1.tel_agence;
+      }
+      // console.log(dureVie1)
+      return ""
+    },
+AffichierSituationGeoAgenceModifier() {
+      
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.editCompte.numero_agence);
+
+      if (dureVie1) {
+        return dureVie1.situation_geo;
+      }
+      // console.log(dureVie1)
+      return ""
+    },
+
+
+
+
+
+
+
+
+
+
     getPays() {
       return id => {
         if (id != null && id != "") {
@@ -596,7 +849,7 @@ created() {
       if (qtereel) {
         return qtereel.libelle;
       }
-      return 0
+      return ""
         }
       };
     },
@@ -608,7 +861,7 @@ created() {
       if (qtereel) {
         return qtereel.libelle;
       }
-      return 0
+      return ""
         }
       };
     },
@@ -616,13 +869,13 @@ created() {
       return id => {
         if (id != null && id != "") {
           return this.getCompte.filter(
-            element => element.entreprise_id == this.detail_marche.id
+            element => element.entrepse_id == this.detail_marche.id
           );
         }
       };
     },
 // listeCompte(){.
-//     return this.getCompte.filter(compt => compt.id == entreprise_id)
+//     return this.getCompte.filter(compt => compt.id == entrepse_id)
 // },
           
 
@@ -698,7 +951,11 @@ created() {
                
                var nouvelObjet = {
       ...this.formData,
-      entreprise_id :this.detail_marche.id,
+      entrepse_id :this.detail_marche.id,
+      telephone_agence:this.AffichierNumeroAgence,
+          situation_geographique_angence:this.AffichierSituationGeoAgence,
+          agence:this.AffichierNomAgence,
+         agence_id:this.AffichierIdAgence
       
        };
                 this.ajouterCompte(nouvelObjet)
@@ -710,8 +967,11 @@ created() {
                     	situation_geographique_angence:"",
                     	numero_agence:"",
                     telephone_agence:"",
-                    entreprise_id:"",
-                    	banque_id:"",
+                    entrepse_id:"",
+                        banq_id:"",
+                        pays_id:"",
+                        ville_id:"",
+                        commune_id:"",
 
                 }
             },
@@ -734,8 +994,16 @@ created() {
             // vider l'input modifier 
 
             modifierCompteLocal(){
-              
-              this.modifierCompte(this.editCompte)
+                var nouvelObjet = {
+      ...this.editCompte,
+      entrepse_id :this.detail_marche.id,
+      telephone_agence:this.AffichierNumeroAgenceModifier,
+          situation_geographique_angence:this.AffichierSituationGeoAgenceModifier,
+          agence:this.AffichierNomAgenceModifier,
+         agence_id:this.AffichierIdAgenceModifier
+      
+       };
+              this.modifierCompte(nouvelObjet)
               this.$('#modifierCompte').modal('hide');
             },
             
@@ -793,10 +1061,10 @@ created() {
  margin: 0 -580px;
  height: 500px;
     }
-    .glcompte
+    .tailModal
     {
 
- width: 1300px;
+ width: 1200px;
  margin: 0 -630px;
  height: 500px;
 

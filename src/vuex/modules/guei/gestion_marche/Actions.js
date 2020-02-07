@@ -968,3 +968,58 @@ export async function getMarcheContratExecution({commit}) {
 }*/
 
 
+
+
+export function getAgence({ commit }) {
+    queue.push(() => axios.get('/agence').then((response) => {
+        commit('GET_ALL_AGENCE', response.data)
+
+    }).catch(error => console.log(error)))
+}
+
+// action pour ajouter type facture
+export function ajouterAgence({ commit, dispatch}, formData) {
+    asyncLoading(axios.post('/agence', formData)).then(response => {
+        if (response.status == 201) {
+            console.log(response.data)
+            commit('AJOUTER_AGENCE', response.data)
+            dispatch('getAgence')
+            dispatch('getBanque')
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type: "success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
+// action pour modifier type facture
+
+
+export function modifierAgence({ commit, dispatch }, element_modifie) {
+    asyncLoading(axios.put('/agence', element_modifie)).then(response => {
+        commit('MODIFIER_AGENCE', response.data)
+        dispatch('getAgence')
+        dispatch('getBanque')
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type: "success"
+        })
+    }).catch(error => console.log(error))
+}
+// supprimer type facture
+export function supprimerAgence({ commit, dispatch }, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_AGENCE', id)
+            dispatch('getAgence')
+            dispatch('getBanque')
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/agence/' + id).then(() => dialog.close())
+        })
+
+}
