@@ -245,7 +245,7 @@
                <div class="control-group">
                   <label class="control-label">Activite</label>
                   <div class="controls">
-                    <select v-model="editMarche.activite_id" :readOnly="deverouactivite">
+                    <select v-model="editMarche.activite_id" >
                      <option
                         v-for="activite in activiteDynamiques(editMarche.unite_administrative_id)"
                         :key="activite.id"
