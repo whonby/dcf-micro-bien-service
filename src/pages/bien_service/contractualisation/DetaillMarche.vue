@@ -5454,18 +5454,24 @@ modifierFactureLocal(){
             },
             ajouterOffreF(){
 
-
-                 var nouvelObjet = {
+                this.formOffreFinanciere.dossier_candidat_id=this.edite_offre_financiere.id
+                this.formOffreFinanciere.montant_total_ht=this.montantHT
+                this.formOffreFinanciere.montant_total_ttc=this.montantHTt
+                this.formOffreFinanciere.taux=this.affcherTauxEnCours
+                this.formOffreFinanciere.tva=this.montantTva
+                this.formOffreFinanciere.designation=this.libelleLot
+              /*   var nouvelObjet = {
       ...this.formOffreFinanciere,
       montant_total_ht :this.montantHT,
        montant_total_ttc :this.montantHTt,
         	taux :this.affcherTauxEnCours,
          	tva :this.montantTva,
-designation:this.libelleLot
-       };
+designation:this.libelleLot,
+
+       };*/
                 console.log(this.edite_offre_financiere.id)
-                this.formOffreFinanciere.dossier_candidat_id=this.edite_offre_financiere.id
-                this.ajouterOffreFinancier(nouvelObjet)
+
+                this.ajouterOffreFinancier(this.formOffreFinanciere)
                 this.formOffreFinanciere={
                         numero_lot:"",
                         designation:"",
