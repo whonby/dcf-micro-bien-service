@@ -884,7 +884,7 @@ export function ajouterLot({commit}, elementAjout){
 
 
 export function modifierLot({commit}, element_modifie) {
-  asyncLoading( axios.put('/lots/' ,element_modifie)).then(response => {
+  asyncLoading( axios.put('/lots',element_modifie)).then(response => {
        commit('MODIFIER_LOT', response.data)
        
 

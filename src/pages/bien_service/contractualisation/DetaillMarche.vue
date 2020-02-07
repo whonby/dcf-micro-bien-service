@@ -299,8 +299,8 @@ Liste acte effet financier
               <li class="active"><a data-toggle="tab" href="#tab12">Dossier candidat</a></li>
               <li class=""><a data-toggle="tab" href="#tab21">Lettre invitation</a></li>
               <li class=""><a data-toggle="tab" href="#tab31">Mandate</a></li>
-              <li class=""><a data-toggle="tab" href="#tab22">Cojo</a></li>
-              <li class=""><a data-toggle="tab" href="#tab32">Analyse dossier</a></li>
+              <li class=""><a data-toggle="tab" href="#tab22">Ouverture</a></li>
+              <li class=""><a data-toggle="tab" href="#tab32">Analyse</a></li>
                <li class=""><a data-toggle="tab" href="#tab33">Demande ANO</a></li>
                 <li class=""><a data-toggle="tab" href="#tab34">Avis DMP</a></li>
                  <li class=""><a data-toggle="tab" href="#tab35">Avis Bailleur</a></li>
@@ -3097,9 +3097,10 @@ Liste acte effet financier
                 <h3>Ajouter lettre d'invitation</h3>
             </div>
             <div class="modal-body">
+           
                 <form class="form-horizontal">
-
-
+                  
+                 
                     <div class="control-group">
                         <label class="control-label">Offre</label>
                         <div class="controls">
@@ -3145,7 +3146,19 @@ Liste acte effet financier
                         </div>
                     </div>
 
-                     <div class="control-group">
+
+                      <div class="control-group">
+          <label class="control-label">Objet de lettre:</label>
+            <div class="controls">
+              <textarea  v-model="formLettre.objet_lettre"  class=" span" rows="" placeholder="Enter text ..."></textarea>
+            </div>
+          
+        </div>
+
+
+
+
+                     <!-- <div class="control-group">
                         <label class="control-label">Objet </label>
                         <div class="controls">
                             <input
@@ -3155,7 +3168,7 @@ Liste acte effet financier
                                     placeholder="Saisir "
                             />
                         </div>
-                    </div>
+                    </div> -->
 
 
                     <div class="control-group">
@@ -3169,17 +3182,13 @@ Liste acte effet financier
                             />
                         </div>
                     </div>
-                    <!-- <div class="control-group">
-                         <label class="control-label">Appel d'offre</label>
-                         <div class="controls">
-                             <input
-                                     type="text"
-                                     v-model="formData.appel_offre"
-                                     class="span"
-                                     placeholder="saisir le contact"
-                             />
-                         </div>
-                     </div>-->
+
+                   <div class="control-group">
+                   <label class="control-label">Fichier joint:</label>
+                    <div class="controls">
+                     <input type="file" id="file"  @change="onFichierChange" />
+              </div>
+            </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -3333,6 +3342,13 @@ Liste acte effet financier
                             />
                         </div>
                     </div>
+
+                     <div class="control-group">
+                   <label class="control-label">Fichier joint:</label>
+                    <div class="controls">
+                     <input type="file" id="file"  @change="onFichierChange" />
+              </div>
+            </div>
 
                 </form>
             </div>
@@ -3648,14 +3664,27 @@ Liste acte effet financier
         <!--Fin mandater-->
 
         <!--Analyse dossier-->
-        <div id="ajouterMP" class="modal hide">
+        <div id="ajouterMP" class="modal hide grdirModalAnalyse">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter dossier analyse</h3>
             </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-                    <div class="control-group">
+
+                <table class="table table-bordered table-striped">
+                        <tr>
+                            <td>
+                        <div class="control-group">
+                        <label class="control-label">Offre</label>
+                        <div class="controls">
+                            <select v-model="formAnalyseDossier.appel_offre_id" class="span" disabled>
+                                <option v-for="plans in listeAppelOffre(marcheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.ref_appel}}</option>
+                            </select>
+                        </div>
+                    </div>
+                            </td>
+                                    <td>
+                     <div class="control-group">
                         <label class="control-label">Dossier candidat</label>
                         <div class="controls">
                             <select v-model="formAnalyseDossier.dossier_candidat_id" class="span">
@@ -3664,7 +3693,12 @@ Liste acte effet financier
                             </select>
                         </div>
                     </div>
+                            </td>
 
+                            <td>
+
+
+                       
                     <div class="control-group">
                         <label class="control-label">Cojo</label>
                         <div class="controls">
@@ -3674,7 +3708,10 @@ Liste acte effet financier
                             </select>
                         </div>
                     </div>
-                    <div class="control-group">
+                            </td>
+
+                              <td>
+                        <div class="control-group">
                         <label class="control-label">Type analyse</label>
                         <div class="controls">
                             <select v-model="formAnalyseDossier.type_analyse_id" class="span">
@@ -3683,8 +3720,15 @@ Liste acte effet financier
                             </select>
                         </div>
                     </div>
-
-                    <div class="control-group">
+                            </td>
+                           
+                       
+                           </tr>
+                           
+                        <tr>
+                   
+                            <td>
+                     <div class="control-group">
                         <label class="control-label">Note</label>
                         <div class="controls">
                             <input type="text"
@@ -3694,6 +3738,11 @@ Liste acte effet financier
                             />
                         </div>
                     </div>
+
+                            </td>
+                        
+                   
+                            <td>
 
                     <div class="control-group">
                         <label class="control-label">Rang</label>
@@ -3706,6 +3755,8 @@ Liste acte effet financier
                             />
                         </div>
                     </div>
+                            </td>
+                            <td colspan="">
                     <div class="control-group">
                         <label class="control-label">Date</label>
                         <div class="controls">
@@ -3716,21 +3767,37 @@ Liste acte effet financier
                             />
                         </div>
                     </div>
+                            </td>
 
+                                  <td>
                     <div class="control-group">
                         <label class="control-label">Decision</label>
                         <div class="controls">
-                            <select v-model="formAnalyseDossier.decision">
-                                <option value="1">Favorable</option>
-                                <option value="2">Defavorable</option>
+                            <select v-model="formAnalyseDossier.decision" >
+                                <option value="1">Non objection</option>
+                                <option value="2">Objection</option>
                             </select>
                         </div>
                     </div>
-
-
-
-                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                      
+                            <td colspan="4">
+                     <div class="control-group">
+          <label class="control-label">Motif:</label>
+            <div class="controls">
+              <textarea  v-model="formAnalyseDossier.motif" :readonly="afficherMotifAnalyse"  class="textarea_editor span10" rows="4" placeholder="Enter text ..."></textarea>
             </div>
+          
+        </div>
+                            </td>
+                           
+                      
+                        </tr>
+
+                    </table>
+            
             <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterAnalyseD()" href="#">Valider</a>
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
@@ -3806,18 +3873,18 @@ Liste acte effet financier
                         </div>
                     </div>
 
+
                     <div class="control-group">
-                        <label class="control-label">Decision :</label>
+                        <label class="control-label">Decision</label>
                         <div class="controls">
-                            <input
-                                    type="text"
-                                    v-model="edite_analyse_dossier.decision"
-                                    class="span"
-                                    placeholder="Decision "
-                            />
+                            <select   v-model="edite_analyse_dossier.decision" >
+                                <option value="1">Non objection</option>
+                                <option value="2">Objection</option>
+                            </select>
                         </div>
                     </div>
 
+                   
 
 
                 </form>
@@ -4148,25 +4215,30 @@ Liste acte effet financier
         <!--- debut ano -->
 
 
-        <div id="ajouterAnoDMPBAILLEURModal" class="modal hide">
+        <div id="ajouterAnoDMPBAILLEURModal" class="modal hide tlAviBailleur">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter ano dmp</h3>
+                <h3>Ajouter avis bailleur</h3>
             </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-
-                   <!-- <div class="control-group">
-                        <label class="control-label">Refence DMP</label>
+            
+              
+                <table class="table table-bordered table-striped">
+                        <tr>
+                            <td>
+                        <div class="control-group">
+                        <label class="control-label">Offre</label>
                         <div class="controls">
-                            <select v-model="formAno.analyse_dmp_id" class="span">
-                                <option v-for="varText in getterAnalyseDMP" :key="varText.id"
-                                        :value="varText.id">{{varText.ref_dmp}}</option>
+                            <select v-model="formAnalyseDossier.appel_offre_id" class="span" disabled>
+                                <option v-for="plans in listeAppelOffre(marcheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.ref_appel}}</option>
                             </select>
                         </div>
-                    </div> -->
-                    <div class="control-group">
-                        <label class="control-label">Analyse DMP</label>
+                    </div>
+                            </td>
+
+                            <td>
+                     <div class="control-group">
+                        <label class="control-label">Numero dossier candidat</label>
                         <div class="controls">
                             <select v-model="formAno.analyse_dmp_id" class="span">
                                 <option v-for="varText in listeAnalyseDMPFavorable(marcheid)" :key="varText.id"
@@ -4174,9 +4246,13 @@ Liste acte effet financier
                             </select>
                         </div>
                     </div>
+                            </td>
 
-                    <div class="control-group">
-                        <label class="control-label">Numero courrier</label>
+                            <td>
+
+
+                     <div class="control-group">
+                        <label class="control-label">Numero courrier DMP</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -4186,18 +4262,31 @@ Liste acte effet financier
                             />
                         </div>
                     </div>
-                    <div class="control-group">
-                       <label class="control-label">Avis</label>
+                            </td>
+                           
+                       
+                           </tr>
+                           
+                        <tr>
+                   
+                            <td>
+                      <div class="control-group">
+                       <label class="control-label">Avis bailleur</label>
                        <div class="controls">
                        <select v-model="formAno.avis_bail" class="span">
-                            <option value="1">Favorable</option>
-                            <option value="2">Defavorable</option>
+                           <option value="1">Non objection</option>
+                            <option value="2">Objection</option>
                            </select> 
                        </div>
                     </div>
-                    
-                    <div class="control-group">
-                        <label class="control-label">Date ano</label>
+
+                            </td>
+                        
+                   
+                            <td>
+
+                      <div class="control-group">
+                        <label class="control-label">Date avis</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -4207,26 +4296,38 @@ Liste acte effet financier
                             />
                         </div>
                     </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Observation</label>
-                        <div class="controls">
-                            <input
-                                    type="text"
-                                    v-model="formAno.observations_bailleur"
-                                    class="span"
-                                    placeholder=""
-                            />
-                        </div>
-                    </div>
-                    
-
-                    
-
-
-
-                </form>
+                            </td>
+                            <td>
+                                
+                 <div class="control-group">
+              <label class="control-label">Fichier joint:</label>
+              <div class="controls">
+                <input type="file" id="file"  @change="onFichierChange" />
+              </div>
             </div>
+                            </td>
+                      
+
+                     
+                        </tr>
+                        <tr>
+                      
+                            <td colspan="4">
+                     <div class="control-group">
+          <label class="control-label">Motif:</label>
+            <div class="controls">
+              <textarea  v-model="formAno.observations_bailleur" :readonly="afficherMotifBailleur"  class="textarea_editor span10" rows="4" placeholder="Enter text ..."></textarea>
+            </div>
+          
+        </div>
+                            </td>
+                           
+                      
+                        </tr>
+
+                    </table>
+
+
             <div class="modal-footer">
                 <a
                         @click.prevent="ajouterAnoDMPBailleurLocal"
@@ -4410,18 +4511,21 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
                ,formMandater:{
                     lettre_invitation_id:"",
                     date_id:"",
+                    fichier_joint:"",
                     nom_mandat:"",
                     prenom_nom:"",
                     matricule_m:""
                 },
                 formAnalyseDossier:{
                     date_analyse:"",
+                    appel_offre_id:"",
                     note_analyse:"",
                     rang_analyse:"",
                     decision:"",
                     dossier_candidat_id:"",
                     type_analyse_id: "",
                     cojo_id:"",
+                    motif:""
 
                 },
                 formDataCojo:{
@@ -4653,6 +4757,7 @@ num_courrier:""
                 },
                 formLettre: {
                     appel_offre_id:"",
+                    fichier_joint:"",
                     objet_lettre:"",
                     date_lettre:"",
                     ref_lettre:"",
@@ -4714,6 +4819,11 @@ created() {
 
             },
 
+            //afficher le motif avis bailleur 
+            afficherMotifBailleur(){
+                return this.formAno.avis_bail =="1";
+            },
+
             listeBailleurMarche(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -4762,6 +4872,7 @@ created() {
                         console.log("Marche appel offre 10")
                         if(Objet!=undefined){
                             vM.formDossierCadidature.appel_offre_id=Objet.id;
+                            vM.formAnalyseDossier.appel_offre_id = Objet.id;
                             vM.formLot.appel_offre_id=Objet.id;
                             vM.formLettre.appel_offre_id=Objet.id;
                             vM.formDataCojo.num_dossier_appel_offre=Objet.ref_appel;
@@ -4772,6 +4883,12 @@ created() {
                 }
 
             },
+
+            // afficher le champ motif dynanmique
+afficherMotifAnalyse(){
+    return this.formAnalyseDossier.decision  =="1"
+},
+
             listeLots(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -5028,6 +5145,16 @@ ajouterStockLocal(){
 
 },
 
+
+    onFichierChange(e){
+      this.formLettre.fichier_joint = e.target.files[0]
+     // console.log(onFichierChange);
+    },
+//     onFichierChange(e){
+// this.formMandater.fichier_joint = e.target.files[0]
+
+//     },
+
 // afficher modal modifier facture
 afficherModalmodifierfacture(index){
     this.$('#modififacture').modal({
@@ -5131,6 +5258,7 @@ modifierFactureLocal(){
                 this.ajouterLettreInvitation(this.formLettre)
                 this.formLettre= {
                     appel_offre_id:"",
+                    fichier_joint:"",
                         date_lettre:"",
                         ref_lettre:"",
                         destination:"",
@@ -5140,8 +5268,10 @@ modifierFactureLocal(){
               this.ajouterAnalyseDossier(this.formAnalyseDossier)
                 this.formAnalyseDossier={
                         date_analyse:"",
+                        appel_offre_id:"",
                         rang_analyse:"",
                         decision:"",
+                        motif:"",
                         note_analyse:"",
                         dossier_candidat_id:"",
                         type_analyse_id: "",
@@ -5190,6 +5320,7 @@ modifierFactureLocal(){
                 this.formMandater={
                         lettre_invitation_id:"",
                         date_id:"",
+                        fichier_joint:"",
                         nom_mandat:"",
                         prenom_nom:"",
                     matricule_m:""
@@ -5514,7 +5645,7 @@ ajouterNouveauFournisseurLocal(registeCommerce){
                     keyboard: false
                 });
 
-                this.edite_analyse_dossier = this.getterAnalyseDossiers[index];
+                this.edite_analyse_dossier = this.listeAnalyseDossier(this.marcheid)[index];
             },
 
             afficherModaleModifier(index){
@@ -5566,7 +5697,7 @@ ajouterNouveauFournisseurLocal(registeCommerce){
                 this.$('#modificationModal').modal('hide');
             },
             modficationsLot(){
-            this.edite_lot.marche_id=this.marcheid
+            
                 this.modifierLot(this.edite_lot)
                 this.$('#modificationModal1').modal('hide');
             },
@@ -5632,6 +5763,17 @@ ajouterNouveauFournisseurLocal(registeCommerce){
  width: 1000px;
  margin: 0 -530px;
  height: 500px;
+
+    }
+    .grdirModalAnalyse{
+         width: 1000px;
+ margin: 0 -530px;
+ height: 450px;
+    }
+    .tlAviBailleur{
+  width: 1000px;
+ margin: 0 -530px;
+ height: 450px;
 
     }
 
