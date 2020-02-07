@@ -1,4 +1,4 @@
-Liste des Lots
+Ajouter avis dmp
 <template>
     <div>
 
@@ -2563,6 +2563,12 @@ Liste des Lots
 
 
                         </div>
+                        <div class="modal-footer">
+        
+        <a data-dismiss="modal" class="btn btn-danger" @click.prevent="retourListeEntreprise" href="#">Voir Tableau Marché</a>
+       
+      </div>
+  
                     </div>
 
                 </div>
@@ -4026,80 +4032,76 @@ Liste des Lots
         <!---  fin modal ajout demande ano  -->
 
         <!--Annalyse DMP-->
-        <div id="ajouterDmp" class="modal hide">
+        <div id="ajouterDmp" class="modal hide tailDMP">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter analyse dmp</h3>
+                <h3>Ajouter avis dmp</h3>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal">
-
-                    <div class="control-group">
-                        <label class="control-label">Reference Dmp</label>
-                        <div class="controls">
-                        <input type="text" v-model="formAnalyseDMP.ref_dmp" class="span">
-                        </div>
-                    </div>
-
+                <table class="table table-bordered table-striped">
+         
+            <tr>
+              <td>
                  <div class="control-group">
-                        <label class="control-label">Demande ANO</label>
+                        <label class="control-label">Reference d'offre</label>
                         <div class="controls">
-                            <select v-model="formAnalyseDMP.demande_ano_id" class="span">
-                                <option v-for="varText in demandeAno(marcheid)" :key="varText.id"
-                                        :value="varText.id">{{varText.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
-                            </select>
+                        <input type="text" :value="afficherIdMarche(detail_marche.id)" class="span4" readonly>
                         </div>
                     </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Avis</label>
+              </td>
+               <!-- <td>
+                 <div class="control-group">
+                        <label class="control-label">Lot</label>
                         <div class="controls">
-                            <select v-model="formAnalyseDMP.avis_bail" class="span">
-                                <option value="1">Favorable</option>
-                                <option value="2">Defavorable</option>
-                            </select>
-                            <!-- <input
-                                    type="text"
-                                    v-model="formAnalyseDMP.avis_bail"
-                                    class="span"
-                                    placeholder="Saisir l'avis du bailleur"
-                            /> -->
+                        <input type="text" v-model="formAnalyseDMP.lot" class="span">
                         </div>
                     </div>
-
-                    <div class="control-group">
+              </td> -->
+               <td>
+                <div class="control-group">
+                        <label class="control-label">Reference courrier</label>
+                        <div class="controls">
+                        <input type="text" :value="recupererNumeroCourier" class="span4" readonly>
+                        </div>
+                    </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="control-group">
+                  <label class="control-label">Avis</label>
+                  <div class="controls">
+                    <select v-model="formAnalyseDMP.avis_bail" class="span4">
+                      <option value="0" >Objection</option>
+                       <option value="1" >Non objection</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+             
+               <td>
+                 <div class="control-group">
                         <label class="control-label">Date avis</label>
                         <div class="controls">
-                            <input
-                                    type="date"
-                                    v-model="formAnalyseDMP.date_avis_bail"
-                                    class="span"
-                                    placeholder="Saisir le libelle_type"
-                            />
+                        <input type="date" v-model="formAnalyseDMP.date_avis_bail" class="span4">
                         </div>
                     </div>
-                    
-
-                    <div class="control-group">
+              </td>
+            </tr>
+            <tr>
+  <td colspan="2">
+                <div class="control-group">
                         <label class="control-label">Observation</label>
                         <div class="controls">
+                       
+                        <textarea v-model="formAnalyseDMP.observation" rows="2" class="span8" :readonly="verrouObjection">
 
-              <textarea   v-model="formAnalyseDMP.observation"  class="textarea_editor span" rows="" placeholder="Enter text ..."></textarea>
-           
+                        </textarea>
                         </div>
                     </div>
-                   
-                    <!-- <div class="control-group">
-                        <label class="control-label">document procedure</label>
-                        <div class="controls">
-                            <select v-model="formAnalyseDMP.document_procedure_id" class="span">
-                                <option v-for="varText in documentProcedures" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle_doc}}</option>
-                            </select>
-                        </div>
-                    </div> -->
-
-                </form>
+              </td>
+            </tr>
+                </table>
             </div>
             <div class="modal-footer">
                 <a @click.prevent="ajouterAnalyseDMPB"
@@ -4408,6 +4410,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
                     }
 
                 ],
+                demande:{},
                 acteEffetActive:"",
                 formFournisseur : {
                     numero_cc: "",
@@ -4729,7 +4732,7 @@ created() {
 },
         computed: {
             ...mapGetters("bienService", [ 'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
-                "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
+                "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
@@ -4744,6 +4747,35 @@ created() {
                 'types_financements']) ,
                 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
+            
+            
+            verrouObjection(){
+
+return this.formAnalyseDMP.avis_bail == "1";
+            },
+            
+             recupererNumeroCourier() {
+      
+      const norme = this.getterDemandeAno.find(normeEquipe => normeEquipe.ref_marche == this.detail_marche.reference_marche);
+
+      if (norme) {
+        return norme.num_courrier;
+      }
+      return ""
+    },
+      afficherIdMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.reference_marche;
+      }
+      return 0
+        }
+      };
+    },
+            
             marcheDetail(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -5197,6 +5229,9 @@ modifierFactureLocal(){
 
 
             },
+            retourListeEntreprise(){
+                 this.$router.push({ name: 'marche' })
+            },
             //afiicher modal ajouter
             afficherModalAjouterActeDepense() {
                 this.$("#exampleModal").modal({
@@ -5493,8 +5528,16 @@ modifierModalActeEffetFinancierLocal(entreprise_id){
         
 
         ajouterAnalyseDMPB(){
+             var nouvelObjet = {
+        ...this.formAnalyseDMP,
+        ref_dmp: this.detail_marche.id,
+        ref_courier: this.recupererNumeroCourier,
+      
+      
+
+      };
                 console.log(this.formAnalyseDMP)
-            this.ajouterAnalyseDMP(this.formAnalyseDMP)
+            this.ajouterAnalyseDMP(nouvelObjet)
             this.formAnalyseDMP={
                      ref_dmp:"",
                     demande_ano_id:"",
@@ -5776,5 +5819,9 @@ ajouterNouveauFournisseurLocal(registeCommerce){
     .modaloffreFin{
 width: 850px;
  margin: 0 -480px;
+    }
+    .tailDMP{
+        width: 850px;
+ margin: 0 -490px;
     }
 </style>
