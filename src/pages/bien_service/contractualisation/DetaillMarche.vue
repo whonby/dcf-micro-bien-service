@@ -1312,8 +1312,8 @@ Ajouter l'offre financière
                         
                         <td @click="afficheAnalyseDMP(document.id)">
 
-                            <button class="btn btn-success btn-mini" v-if="document.avis_bail==1">Avis favorable</button>
-                            <button class="btn btn-danger btn-mini" v-else>Avis defavorable</button>
+                            <button class="btn btn-success btn-mini" v-if="document.avis_bail==1">Objection</button>
+                            <button class="btn btn-danger btn-mini" v-else>Non objection</button>
                         </td>
 
                         <td @click="afficheAnalyseDMP(document.id)">
@@ -1369,11 +1369,12 @@ Ajouter l'offre financière
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
-                        <th>Numero candidat</th>
+                        <!-- <th>Reference offre</th> -->
+                        
                         <th>Date </th>
-                        <th>Reference ano </th>
+                        <th>Reference dmp </th>
                         <th>Avis</th>
-                        <th>Numero courrier</th>
+                        <th>Numero courrier dmp</th>
                         <th>Observation</th>
                         <th>Action</th>
                     </tr>
@@ -1381,17 +1382,17 @@ Ajouter l'offre financière
                     <tbody>
                     <tr class="odd gradeX" v-for="anoBailleur in listeAnoDMPBailleur(marcheid)"
                         :key="anoBailleur.id">
-                        <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
-                            {{anoBailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td>
+                        <!-- <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
+                            {{anoBailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td> -->
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             {{formaterDate(anoBailleur.date_ano_dmp) || 'Non renseigné'}}</td>
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
-                            {{anoBailleur.ref_ano_dmp || 'Non renseigné'}}</td>
+                            {{anoBailleur.numero_courie || 'Non renseigné'}}</td>
 
 
                          <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
-                            <button class="btn btn-success btn-mini" v-if="anoBailleur.avis_bail==1">Avis favorable</button>
-                            <button class="btn btn-danger btn-mini" v-else>Defavorable</button>
+                            <button class="btn btn-success btn-mini" v-if="anoBailleur.avis_bail==1">Objection</button>
+                            <button class="btn btn-danger btn-mini" v-else>Non objection</button>
                         </td>
 
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
@@ -1454,8 +1455,8 @@ Ajouter l'offre financière
                         <td @click="afficherModalObservationBailleur(index)">
                             {{formaterDate(observationBailleur.date_avis_baill) || 'Non renseigné'}}</td>
                         <td @click="afficherModalObservationBailleur(index)">
-                            <button class="btn btn-success btn-mini" v-if="observationBailleur.avis_bail==1">Avis favorable</button>
-                            <button class="btn btn-danger btn-mini" v-else>Defavorable</button>
+                            <button class="btn btn-success btn-mini" v-if="observationBailleur.avis_bail==1">Objection</button>
+                            <button class="btn btn-danger btn-mini" v-else>Non objection</button>
                         </td>
                         <td @click="afficherModalObservationBailleur(index)">
                             {{observationBailleur.observations_bailleur || 'Non renseigné'}}</td>
@@ -3789,7 +3790,7 @@ Ajouter l'offre financière
 
                        
                     <div class="control-group">
-                        <label class="control-label">Cojo</label>
+                        <label class="control-label">Ouverture</label>
                         <div class="controls">
                             <select v-model="formAnalyseDossier.cojo_id" class="span">
                                 <option v-for="plans in listeCojo(marcheid)" :key="plans.id"
@@ -4009,7 +4010,7 @@ Ajouter l'offre financière
                     </div>
 
 
-                    <div class="control-group">
+                    <!-- <div class="control-group">
                         <label class="control-label">Dossier candidat</label>
                         <div class="controls">
                             <select v-model="formDemande.analyse_dossier_id" class="span">
@@ -4017,7 +4018,7 @@ Ajouter l'offre financière
                                         :value="plans.id">{{plans.dossier_candidature.numero_dossier}} - {{plans.dossier_candidature.nom_cand}} {{plans.dossier_candidature.prenom_cand}} </option>
                             </select>
                         </div>
-                    </div>
+                    </div> -->
 
 
                      <div class="control-group">
@@ -4044,6 +4045,26 @@ Ajouter l'offre financière
                             />
                         </div>
                     </div>
+
+                    <div class="control-group">
+
+                        <label class="control-label">Avis</label>
+                        <div class="controls">
+                           <select v-model="formDemande.avis_ano" class="span">
+
+                               <option value="1"> Objection</option>
+                               <option value="2"> Non objection</option>
+                           </select>
+                        </div>
+                    </div>
+
+                  <div class="control-group">
+          <label class="control-label">Observation:</label>
+            <div class="controls">
+              <textarea  v-model="formDemande.observations_ano" :readonly="motifDemandeAno"  class="textarea_editor" rows="" placeholder="Enter text ..."></textarea>
+            </div>
+          
+        </div>
                    
 
                    
@@ -4159,7 +4180,7 @@ Ajouter l'offre financière
                         <input type="text" v-model="formAnalyseDMP.lot" class="span">
                         </div>
                     </div>
-              </td> -->
+              </td> -->  
                <td>
                 <div class="control-group">
                         <label class="control-label">Reference courrier</label>
@@ -4244,8 +4265,8 @@ Ajouter l'offre financière
                         <label class="control-label">Decision</label>
                         <div class="controls">
                           <select v-model="edite_analyse_dpm.avis_bail" class="span">
-                                <option value="1">Visé</option>
-                                <option value="2">rejeté</option>
+                                <option value="1">Objection</option>
+                                <option value="2">Non objection</option>
                             </select>
                         </div>
                     </div>
@@ -4283,7 +4304,7 @@ Ajouter l'offre financière
                                         :value="varText.id">{{varText.libelle_doc}}</option>
                             </select>
                         </div>
-                    </div> -->
+                    </div> -->   
 
                 </form>
             </div>
@@ -4313,7 +4334,7 @@ Ajouter l'offre financière
                         <div class="control-group">
                         <label class="control-label">Offre</label>
                         <div class="controls">
-                            <select v-model="formAnalyseDossier.appel_offre_id" class="span" disabled>
+                            <select v-model="formAno.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(marcheid)" :key="plans.id"
                                         :value="plans.id">{{plans.ref_appel}}</option>
                             </select>
@@ -4323,27 +4344,24 @@ Ajouter l'offre financière
 
                             <td>
                      <div class="control-group">
-                        <label class="control-label">Numero dossier candidat</label>
+                        <label class="control-label">Avis DMP</label>
                         <div class="controls">
-                            <select v-model="formAno.analyse_dmp_id" class="span">
-                                <option v-for="varText in listeAnalyseDMPFavorable(marcheid)" :key="varText.id"
-                                        :value="varText.id">{{varText.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
-                            </select>
+                            <input type="text" :value="recuperationDeAvisDmp" readonly class="span">
                         </div>
                     </div>
                             </td>
 
-                            <td>
+                            <td colspan="">
 
 
                      <div class="control-group">
-                        <label class="control-label">Numero courrier DMP</label>
+                        <label class="control-label">Reference du  courrier </label>
                         <div class="controls">
                             <input
                                     type="text"
-                                    v-model="formAno.numero_courie"
+                                  v-model="formAno.numero_courie"  
                                     class="span"
-                                    placeholder="Saisir le numero du courrier"
+                                    placeholder="saisir la reference du courrier"
                             />
                         </div>
                     </div>
@@ -4427,13 +4445,14 @@ Ajouter l'offre financière
         <!--- fin ano  -->
 
         <!---->
-        <div id="editeAnoDmpBailleurModal" class="modal hide">
+        <div id="editeAnoDmpBailleurModal" class="modal hide tlAviBailleur">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Edite ano DMP Bailleur</h3>
             </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <td>
 
                      <div class="control-group">
                         <label class="control-label">reference ano dmp</label>
@@ -4446,10 +4465,11 @@ Ajouter l'offre financière
                             />
                         </div>
                     </div>
+                            </td>
                    
                    
 
-                    <div class="control-group">
+                    <!-- <div class="control-group">
                         <label class="control-label">Analyse DMP</label>
                         <div class="controls">
                             <select v-model="edite_ano_bailleur_dmp.analyse_dmp_id" class="span">
@@ -4457,29 +4477,37 @@ Ajouter l'offre financière
                                         :value="varText.id">{{varText.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
                             </select>
                         </div>
-                    </div>
+                    </div> -->
+                      <td colspan="2">
 
-                    <div class="control-group">
-                        <label class="control-label">Numero courrier</label>
+
+                     <div class="control-group">
+                        <label class="control-label">Numero courrier DMP</label>
                         <div class="controls">
                             <input
                                     type="text"
-                                    v-model="edite_ano_bailleur_dmp.numero_courie"
-                                    class="span"
-                                    placeholder="Saisir le libelle_type"
+                                    
+                                    class="span5"
+                                    placeholder="Saisir le numero du courrier"
                             />
                         </div>
                     </div>
-
+                            </td>
+                        </tr>
+                        <tr>
+                           <td>
                       <div class="control-group">
-                       <label class="control-label">Avis</label>
+                       <label class="control-label">Avis bailleur</label>
                        <div class="controls">
                        <select v-model="edite_ano_bailleur_dmp.avis_bail" class="span">
-                            <option value="1">Favorable</option>
-                            <option value="2">Defavorable</option>
+                           <option value="1">Non objection</option>
+                            <option value="2">Objection</option>
                            </select> 
                        </div>
                     </div>
+
+                            </td>
+                            <td>
 
                      <div class="control-group">
                         <label class="control-label">Date ano</label>
@@ -4492,28 +4520,42 @@ Ajouter l'offre financière
                             />
                         </div>
                     </div>
-
-                     <div class="control-group">
-                        <label class="control-label">Observation</label>
-                        <div class="controls">
-                            <input
-                                    type="text"
-                                    v-model="edite_ano_bailleur_dmp.observations_bailleur"
-                                    class="span"
-                                    placeholder=""
-                            />
-                        </div>
-                    </div>
-
-                </form>
+                            </td>
+                                 <td>
+                                
+                 <div class="control-group">
+              <label class="control-label">Fichier joint:</label>
+              <div class="controls">
+                <input type="file" id="file"  @change="onFichierChange" />
+              </div>
             </div>
+                            </td>
+                        </tr>
+                         <tr>
+                      
+                            <td colspan="4">
+                     <div class="control-group">
+            <label class="control-label">Motif:</label>
+            <div class="controls">
+              <textarea  v-model="edite_ano_bailleur_dmp.observations_bailleur" :readonly="afficherMotifBailleur"  class="textarea_editor span10" rows="4" placeholder="Enter text ..."></textarea>
+              </div>
+          
+        </div>
+                            </td>
+                           
+                      
+                        </tr>
+                    </table>
+
+
+              
             <div class="modal-footer">
                 <a
                         @click.prevent="editeAnoDMPBailleurLocal"
                         class="btn btn-primary"
                         href="#"
 
-                >Valider</a>
+                >Modifier</a>
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a>
             </div>
         </div>
@@ -4798,7 +4840,8 @@ observations_bailleur:"",
 avis_bail:"",
 ref_ano_dmp:"",
 numero_courie:"",
-    analyse_dmp_id:""
+	appel_offre_id:""
+   // analyse_dmp_id:""
 },
 
 editAno:{
@@ -4904,6 +4947,25 @@ return this.formAnalyseDMP.avis_bail == "1";
       }
       return ""
     },
+
+
+    // affichage de l'avis DMP
+    recuperationDeAvisDmp(){
+        
+
+        let numero = this.getterAnalyseDMP.find(numeroDmp => numeroDmp.avis_bail == 1)
+        if(numero) {
+           return numero.avis_bail
+        }
+        return null
+    },
+
+// afficher le moti de demande ano
+ motifDemandeAno(){
+     return this.formDemande.avis_ano == 1
+ },
+
+
       afficherIdMarche() {
       return id => {
         if (id != null && id != "") {
@@ -4921,7 +4983,7 @@ return this.formAnalyseDMP.avis_bail == "1";
                 return  marche_id=>{
                     if (marche_id!="") {
                         const vM=this;
-                        console.log("Marche detail")
+                       // console.log("Marche detail")
                         let Objet=this.marches.find(idmarche => idmarche.id == marche_id)
                         if(Objet!=undefined){
                            vM.formData.type_appel=Objet.procedure_passation.type_procedure.libelle;
@@ -5011,7 +5073,7 @@ montantHT() {
             listeBailleurMarche(){
                 return  marche_id=>{
                     if (marche_id!="") {
-                        console.log("MarcheBailleur")
+                       // console.log("MarcheBailleur")
                         return this.personnaliseGetterMarcheBailleur.filter( idmarche => idmarche.marche_id == marche_id)
                     }
                 }
@@ -5050,18 +5112,19 @@ montantHT() {
             listeAppelOffre(){
                 return  marche_id=>{
                     if (marche_id!="") {
-                        console.log("Marche appel offre")
+                        //console.log("Marche appel offre")
                        const vM=this;
                         let Objet=this.appelOffres.find( idmarche => idmarche.marche_id == marche_id)
-                        console.log("Marche appel offre 10")
+                       // console.log("Marche appel offre 10")
                         if(Objet!=undefined){
                             vM.formDossierCadidature.appel_offre_id=Objet.id;
                             vM.formAnalyseDossier.appel_offre_id = Objet.id;
                             vM.formLot.appel_offre_id=Objet.id;
+                            vM.formAno.appel_offre_id = Objet.id
                             vM.formLettre.appel_offre_id=Objet.id;
                             vM.formDataCojo.num_dossier_appel_offre=Objet.ref_appel;
                         }
-                        console.log(Objet)
+                       // console.log(Objet)
          return this.appelOffres.filter( idmarche => idmarche.marche_id == marche_id)
                     }
                 }
@@ -5076,7 +5139,7 @@ afficherMotifAnalyse(){
             listeLots(){
                 return  marche_id=>{
                     if (marche_id!="") {
-                        console.log("Marche lots")
+                        //console.log("Marche lots")
                        // let listeLotMarche =this.lots.filter( idmarche => idmarche.marche.id == marche_id)
                        // const searchTerm = this.search.toLowerCase();
                         //return this.lots.filter( idmarche => idmarche.marche.id == marche_id)
@@ -5090,7 +5153,7 @@ afficherMotifAnalyse(){
             listeActeEffetFinancier(){
                 return marche_id =>{
                     if(marche_id !=""){
-                        console.log("Marche liste accteEffet")
+                       // console.log("Marche liste accteEffet")
                         return this.getActeEffetFinancierPersonnaliser.filter(identreprise =>identreprise.id == marche_id)
                     }
                 }
@@ -5098,7 +5161,7 @@ afficherMotifAnalyse(){
             dossierCandidature: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                        console.log("Marche dossier candidat")
+                      //  console.log("Marche dossier candidat")
                         return this.getterDossierCandidats.filter(idmarche => idmarche.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -5106,7 +5169,7 @@ afficherMotifAnalyse(){
             lettreInvitationAMarche: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                        console.log("Marche lettre inviation marche")
+                        //console.log("Marche lettre inviation marche")
                         return this.getterLettreInvitation.filter(idmarche => idmarche.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -5114,7 +5177,7 @@ afficherMotifAnalyse(){
             listeMantater: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                        console.log("Marche liste mantater")
+                       // console.log("Marche liste mantater")
                         return this.getterMandate.filter(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -5123,7 +5186,7 @@ afficherMotifAnalyse(){
             listeCojo: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                        console.log("Marche cojo")
+                       // console.log("Marche cojo")
                         return this.getterCojos.filter(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -5172,7 +5235,7 @@ afficherMotifAnalyse(){
             listeAnoDMPBailleur: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                        console.log("Marche dmp bailleur")
+                       // console.log("Marche dmp bailleur")
                         return this.getterAnoDMPBailleur.filter(idmarche => idmarche.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -5181,7 +5244,7 @@ afficherMotifAnalyse(){
             listeAnalyseDMPFavorable: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                        console.log("Marche analyse DMP Favorable")
+                       // console.log("Marche analyse DMP Favorable")
                         return this.getterAnalyseDMP.filter(idmarche => {
                             if(idmarche.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid && idmarche.avis_bail==1){
                              return idmarche
@@ -5193,7 +5256,7 @@ afficherMotifAnalyse(){
             listeObservationBailleurANODMP: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                        console.log("Marche observation bailleur ANODMP")
+                       // console.log("Marche observation bailleur ANODMP")
                         return this.getterObseravtionBailleurs.filter(idmarche => idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -5201,7 +5264,7 @@ afficherMotifAnalyse(){
             selectionAttributionMarche: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                        console.log("Marche attribution marche")
+                        //console.log("Marche attribution marche")
                         let marcherEnAction=this.getterObseravtionBailleurs.filter(idmarche => idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
                         let marcherFavaroble=marcherEnAction.filter(idmarche=>idmarche.avis_bail==1).length
 
@@ -5269,7 +5332,7 @@ afficherMotifAnalyse(){
             listeActeEffectFinnancier: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                        console.log("Marche leste acte effect finnancier")
+                       // console.log("Marche leste acte effect finnancier")
                         return this.getActeEffetFinancierPersonnaliser.filter(idmarche => idmarche.marche_id == marcheid)
                     }
                 }
@@ -5354,9 +5417,9 @@ modifierFactureLocal(){
     this.$('#modififacture').modal('hide');
 },
            rechercheMandater(){
-             console.log(this.formMandater.matricule_m)
+            // console.log(this.formMandater.matricule_m)
               let objetMandater=this.acteur_depenses.filter(item=>item.acteur_depense.matricule==this.formMandater.matricule_m)
-               console.log(objetMandater)
+              // console.log(objetMandater)
                if(objetMandater!=undefined){
                    if (objetMandater.length==1){
                        let acteur= this.acteur_depenses.find(item=>item.acteur_depense.matricule==this.formMandater.matricule_m)
@@ -5376,7 +5439,7 @@ modifierFactureLocal(){
            },
             recherche() {
 
-               console.log(this.search)
+              // console.log(this.search)
                 let entre=this.entreprises.find(item=>item.id==this.search);
                 if (entre!=undefined){
                     if(this.search!=""){
@@ -5547,7 +5610,7 @@ dossier_candidat_id : this.edite_offre_financiere.id
                 this.formFournisseur.email=this.formDossierCadidature.email_cand
                 this.formFournisseur.complet=0
 
-            console.log(this.formFournisseur)
+           // console.log(this.formFournisseur)
               let ent=  this.entreprises.find(item=>item.numero_rc==this.formFournisseur.numero_rc)
 
                 if(ent==undefined){
@@ -5609,7 +5672,7 @@ ajouterModalActeEffetFinancierLocal(entreprise_id){
     let marcheObjet=this.marches.find(marche=>marche.id==this.marcheid)
     marcheObjet.attribue=1
     marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
-    console.log(marcheObjet)
+   // console.log(marcheObjet)
     this.modifierMarche(marcheObjet)
     this.formEffetFinancier = {
              code_act:"",
@@ -5647,7 +5710,7 @@ afficherModalModifierActeEffetFinancier(index){
                     keyboard: false
                 });
                 this.edit_bailleur_marche = this.personnaliseGetterMarcheBailleur.find(item=>item.id==index)
-                console.log(this.edit_bailleur_marche)
+              //  console.log(this.edit_bailleur_marche)
             },
 
 // vider l'input 
@@ -5704,7 +5767,7 @@ modifierModalActeEffetFinancierLocal(entreprise_id){
       
 
       };
-                console.log(this.formAnalyseDMP)
+                //console.log(this.formAnalyseDMP)
             this.ajouterAnalyseDMP(nouvelObjet)
             this.formAnalyseDMP={
                      ref_dmp:"",
@@ -5714,12 +5777,16 @@ modifierModalActeEffetFinancierLocal(entreprise_id){
                     date_avis_bail:""
             }
         },ajouterAnoDMPBailleurLocal(){
+            
                this.ajouterAnoDMPBailleur(this.formAno)
                 this.formAno={
                     date_ano_dmp:"",
+                        avis_bail:"",
+                        observations_bailleur:"",
                         ref_ano_dmp:"",
                         numero_courie:"",
-                        analyse_dmp_id:""
+                        	appel_offre_id:""
+                        //analyse_dmp_id:""
                 }
             },
             modaleOffreTechnique(index){
@@ -5767,7 +5834,7 @@ modifierModalActeEffetFinancierLocal(entreprise_id){
                 this.detail_dossier_candidature=this.getterDossierCandidats.find(dossier=>dossier.id==id)
                 this.detail_offre_finnancier=this.getterOffreFinanciers.find(offre => offre.dossier_candidature.id ==id)
                 this.detail_offre_technique =this.gettersOffreTechniques.find(offre =>offre.dossier_candidature.id ==id)
-                console.log(this.detail_offre_finnancier)
+               // console.log(this.detail_offre_finnancier)
 
             },
             // afficher modal de modification
