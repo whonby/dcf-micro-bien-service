@@ -3553,3 +3553,17 @@ export function supprimerFacture({ commit }, id) {
 }
 
 
+export function ajouterChoixProcedure({ commit }, elementAjout) {
+  asyncLoading(axios.post('/ChoixProcedure', elementAjout)).then(response => {
+    if (response.status == 201) {
+      commit('AJOUTER_CHOIX_PROCEDURE', response.data)
+
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
+  }).catch(error => console.log(error))
+}

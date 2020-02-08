@@ -62,7 +62,7 @@ documentProcedures:[],
     communes:[],
 
     bailleurMarche: [],
- 
+    choixprocedure: []
 
 
 
