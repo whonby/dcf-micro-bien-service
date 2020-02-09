@@ -3510,11 +3510,11 @@ export function getFacture({ commit }) {
 }
 
 // action pour ajouter facture
-export function ajouterFacture({ commit }, elementAjout) {
+export function ajouterFacture({ commit, dispatch }, elementAjout) {
   asyncLoading(axios.post('/factures', elementAjout)).then(response => {
     if (response.status == 201) {
       commit('AJOUTER_FACTURE', response.data)
-
+      dispatch("getFacture");
       this.$app.$notify({
         title: 'success ',
         text: 'Enregistrement effectué !',
@@ -3528,10 +3528,10 @@ export function ajouterFacture({ commit }, elementAjout) {
 // action pour modifier facture
 
 
-export function modifierFacture({ commit }, element_modifie) {
+export function modifierFacture({ commit, dispatch}, element_modifie) {
   asyncLoading(axios.put('/factures', element_modifie)).then(response => {
     commit('MODIFIER_FACTURE', response.data)
-
+    dispatch("getFacture");
 
     this.$app.$notify({
       title: 'success ',
@@ -3541,11 +3541,12 @@ export function modifierFacture({ commit }, element_modifie) {
   }).catch(error => console.log(error))
 }
 // supprimer facture
-export function supprimerFacture({ commit }, id) {
+export function supprimerFacture({ commit, dispatch}, id) {
   this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
       commit('SUPPRIMER_FACTURE', id)
+      dispatch("getFacture");
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete('/factures/' + id).then(() => dialog.close())
     })
@@ -3566,4 +3567,10 @@ export function ajouterChoixProcedure({ commit }, elementAjout) {
     }
 
   }).catch(error => console.log(error))
+}
+export function getChoixProcedure({ commit }) {
+  queue.push(() => axios.get('/ChoixProcedure').then((response) => {
+    commit('GET_ALL_CHOIX_PROCEDURE', response.data.data)
+
+  }).catch(error => console.log(error)))
 }

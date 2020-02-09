@@ -1,4 +1,4 @@
-Ajouter l'offre financière
+Ajouter demande ANO
 <template>
     <div>
 
@@ -2939,7 +2939,7 @@ Ajouter l'offre financière
 
         <!--contratualisation-->
         <!--dossier candidature-->
-        <div id="offreT" class="modal hide tailleModalOffre">
+        <div id="offreT" class="modal hide tailleModalOffre2">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter l'offre technique</h3>
@@ -4061,11 +4061,22 @@ Ajouter l'offre financière
                   <div class="control-group">
           <label class="control-label">Observation:</label>
             <div class="controls">
-              <textarea  v-model="formDemande.observations_ano" :readonly="motifDemandeAno"  class="textarea_editor" rows="" placeholder="Enter text ..."></textarea>
+              <textarea  v-model="formDemande.observations_ano" :readonly="motifDemandeAno"  class="textarea_editor" rows="" placeholder="Entrer text ..."></textarea>
             </div>
           
         </div>
-                   
+                    <div class="control-group">
+
+                        <label class="control-label">Piéce jointe</label>
+                        <div class="controls">
+                            <input
+                                    type="file"
+                                  
+                                    class="span"
+                                    
+                            />
+                        </div>
+                    </div>
 
                    
 
@@ -6073,5 +6084,9 @@ width: 850px;
     .tailleModalOffre{
            width: 1200px;
  margin: 0 -490px;
+    }
+     .tailleModalOffre2{
+           width: 1300px;
+ margin: 0 -690px;
     }
 </style>
