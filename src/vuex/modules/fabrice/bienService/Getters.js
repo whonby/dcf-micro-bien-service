@@ -1,6 +1,6 @@
-
+getEngagementPersonnaliser
 export const pays = state => state.pays
-
+export const choixprocedure = state => state.choixprocedure
 export const villes = state => state.villes
 export const communes = state => state.communes
 export const typeCandidat = state => state.typeCandidat
@@ -435,3 +435,44 @@ export const getEngagementPersonnaliser1 = (state, getters, rootState, rootGette
     
     // exemple de teset
 
+export const getMandatPersonnaliser = (state, getters, rootState, rootGetters) =>
+    getters.mandats.map(element => {
+        if (
+            element.programme_id !== null
+            && element.action_id !== null
+            && element.activite_id !== null
+            && element.ua_id !== null
+            && element.grd_nature_id !== null
+            && element.ligne_budgetaire_id !== null
+        ) {
+            element = {
+                ...element,
+
+
+                afficheProgramme: rootGetters['parametreGenerauxAdministratif/plans_programmes'].find(
+                    plans => plans.id == element.programme_id
+                ),
+                afficheAction: rootGetters['parametreGenerauxActivite/afficheNiveauAction'].find(
+                    plans => plans.id == element.action_id
+                ),
+
+                afficheActivite: rootGetters['parametreGenerauxActivite/afficheNiveauActivite'].find(
+                    plans => plans.id == element.activite_id
+                ),
+                afficheUa: rootGetters['uniteadministrative/uniteAdministratives'].find(
+                    plans => plans.id == element.ua_id
+                ),
+
+                afficheGrandNature: rootGetters['parametreGenerauxAdministratif/grandes_natures'].find(
+                    plans => plans.id == element.grd_nature_id
+                ),
+                afficheLigneBudget: rootGetters['parametreGenerauxBudgetaire/plans_budgetaires'].find(
+                    plans => plans.id == element.ligne_budgetaire_id
+                ),
+
+
+            }
+
+        }
+        return element;
+    })

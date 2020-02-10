@@ -1,7 +1,7 @@
-Ajouter avis dmp
-<template>
-    <div>
 
+<template>
+    
+<div>
         <div class="container-fluid">
             <h4 v-if="marcheDetail(marcheid)" >Detail Marche : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en cours de passation</button>
                 <button class="btn btn-success btn-large" v-else>Marché attribué</button></h4>
@@ -1312,8 +1312,8 @@ Ajouter avis dmp
                         
                         <td @click="afficheAnalyseDMP(document.id)">
 
-                            <button class="btn btn-success btn-mini" v-if="document.avis_bail==1">Objection</button>
-                            <button class="btn btn-danger btn-mini" v-else>Non objection</button>
+                            <button class="btn btn-success btn-mini" v-if="document.avis_bail==1">Non objection</button>
+                            <button class="btn btn-danger btn-mini" v-else>Objection</button>
                         </td>
 
                         <td @click="afficheAnalyseDMP(document.id)">
@@ -1391,8 +1391,8 @@ Ajouter avis dmp
 
 
                          <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
-                            <button class="btn btn-success btn-mini" v-if="anoBailleur.avis_bail==1">Objection</button>
-                            <button class="btn btn-danger btn-mini" v-else>Non objection</button>
+                            <button class="btn btn-success btn-mini" v-if="anoBailleur.avis_bail==1">Non objection</button>
+                            <button class="btn btn-danger btn-mini" v-else>Objection</button>
                         </td>
 
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
@@ -1455,8 +1455,8 @@ Ajouter avis dmp
                         <td @click="afficherModalObservationBailleur(index)">
                             {{formaterDate(observationBailleur.date_avis_baill) || 'Non renseigné'}}</td>
                         <td @click="afficherModalObservationBailleur(index)">
-                            <button class="btn btn-success btn-mini" v-if="observationBailleur.avis_bail==1">Objection</button>
-                            <button class="btn btn-danger btn-mini" v-else>Non objection</button>
+                            <button class="btn btn-success btn-mini" v-if="observationBailleur.avis_bail==1">Non objection</button>
+                            <button class="btn btn-danger btn-mini" v-else>Objection</button>
                         </td>
                         <td @click="afficherModalObservationBailleur(index)">
                             {{observationBailleur.observations_bailleur || 'Non renseigné'}}</td>
@@ -1524,8 +1524,8 @@ Ajouter avis dmp
                         <label class="control-label">Avis</label>
                         <div class="controls">
                             <select v-model="formObservation.avis_bail" class="span">
-                                <option value="1">Favorable</option>
-                                <option value="2">Defavorable</option>
+                                <option value="1">Non objection</option>
+                                <option value="2">Objection</option>
                             </select>
                                 
                             
@@ -1603,8 +1603,8 @@ Ajouter avis dmp
                         <label class="control-label">Avis</label>
                         <div class="controls">
                             <select v-model="editObservation1.avis_bail" class="span">
-                                <option value="1">Favorable</option>
-                                <option value="2">Defavorable</option>
+                                <option value="1">Non objection</option>
+                                <option value="2">Objection</option>
                             </select>
                         </div>
                     </div>
@@ -2939,15 +2939,17 @@ Ajouter avis dmp
 
         <!--contratualisation-->
         <!--dossier candidature-->
-        <div id="offreT" class="modal hide">
+        <div id="offreT" class="modal hide tailleModalOffre2">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter l'offre technique</h3>
             </div>
             <div class="modal-body">
                 <div class="widget-box">
-                    <form action="#" method="get">
-                        <div class="control-group">
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <td>
+ <div class="control-group">
                             <label>Liste lot</label>
                             <div class="controls">
                                 <select v-model="formOffreTechnique.numero_lot" class="span">
@@ -2956,81 +2958,115 @@ Ajouter avis dmp
                                 </select>
                             </div>
                         </div>
-                        <div class="control-group">
+                            </td>
+                            <td>
+                                  <div class="control-group">
                             <label class="control-label">Accord groupe :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Accord groupe" v-model="formOffreTechnique.accord_groupe">
+                                <input type="text" class="span" placeholder="Accord groupe" v-model="formOffreTechnique.accord_groupe">
                             </div>
                         </div>
-                        <div class="control-group">
+                            </td>
+                            <td>
+                                 <div class="control-group">
                             <label class="control-label">Cautionnement prov :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Cautionnement prov" v-model="formOffreTechnique.cautionnement_prov">
+                                <input type="text" class="span" placeholder="Cautionnement prov" v-model="formOffreTechnique.cautionnement_prov">
                             </div>
                         </div>
-                        <div class="control-group">
+                            </td>
+                            <td>
+                                 <div class="control-group">
                             <label class="control-label">Attest banc:</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Pouv habil" v-model="formOffreTechnique.attest_banc">
+                                <input type="text" class="span" placeholder="Pouv habil" v-model="formOffreTechnique.attest_banc">
                             </div>
                         </div>
-                        <div class="control-group">
+                            </td>
+                            <td>
+                                  <div class="control-group">
                             <label class="control-label">Formil propo tech :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Piece Admin" v-model="formOffreTechnique.formil_propo_tech">
+                                <input type="text" class="span" placeholder="Piece Admin" v-model="formOffreTechnique.formil_propo_tech">
                             </div>
                         </div>
-                        <div class="control-group">
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                             <tr>
+                            <td>
+<div class="control-group">
                             <label class="control-label">Fiche rsgnt nombre groupe :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Attest banc" v-model="formOffreTechnique.fiche_rsgnt_mbre_groupe">
+                                <input type="text" class="span" placeholder="Attest banc" v-model="formOffreTechnique.fiche_rsgnt_mbre_groupe">
                             </div>
                         </div>
+                            </td>
+                            <td>
+                                 
                         <div class="control-group">
                             <label class="control-label">Atcdent marche non exe :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Org travau" v-model="formOffreTechnique.atcdent_marche_non_exe">
+                                <input type="text" class="span" placeholder="Org travau" v-model="formOffreTechnique.atcdent_marche_non_exe">
                             </div>
                         </div>
-                        <div class="control-group">
+                            </td>
+                            <td>
+                                <div class="control-group">
                             <label class="control-label">Org travau site :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Meth real travau" v-model="formOffreTechnique.org_travau_site">
+                                <input type="text" class="span" placeholder="Meth real travau" v-model="formOffreTechnique.org_travau_site">
                             </div>
                         </div>
-                        <div class="control-group">
+                            </td>
+                            <td>
+                                 <div class="control-group">
                             <label class="control-label">Meth real travau:</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Prog mobilisation" v-model="formOffreTechnique.meth_real_travau">
+                                <input type="text" class="span" placeholder="Prog mobilisation" v-model="formOffreTechnique.meth_real_travau">
                             </div>
                         </div>
-
-                        <div class="control-group">
+                            </td>
+                            <td>
+                               <div class="control-group">
                             <label class="control-label">Prog mobilisation :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Prog mobilisation" v-model="formOffreTechnique.prog_mobilisation">
+                                <input type="text" class="span" placeholder="Prog mobilisation" v-model="formOffreTechnique.prog_mobilisation">
                             </div>
-                        </div>
-                        <div class="control-group">
+                        </div> 
+                            </td>
+                           
+                        </tr>
+                        <tr>
+                             <td>
+                                <div class="control-group">
                             <label class="control-label">Capacite financiere :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Capacite financiere" v-model="formOffreTechnique.capacite_financiere">
+                                <input type="text" class="span" placeholder="Capacite financiere" v-model="formOffreTechnique.capacite_financiere">
                             </div>
                         </div>
-                        <div class="control-group">
+                            </td>
+                            <td>
+                                 <div class="control-group">
                             <label class="control-label">CAA moyen ac entre :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Caa moyen ac" v-model="formOffreTechnique.caa_moyen_ac_entre">
+                                <input type="text" class="span" placeholder="Caa moyen ac" v-model="formOffreTechnique.caa_moyen_ac_entre">
                             </div>
                         </div>
-                        <div class="control-group">
+                            </td>
+                            <td>
+                                <div class="control-group">
                             <label class="control-label">Capacite techn expe :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Capacite techn exp" v-model="formOffreTechnique.capacite_techn_exp">
+                                <input type="text" class="span" placeholder="Capacite techn exp" v-model="formOffreTechnique.capacite_techn_exp">
                             </div>
                         </div>
 
-                    </form>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <div class="modal-footer">
@@ -3601,6 +3637,7 @@ Ajouter avis dmp
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterCojoMarche()" href="#">Valider</a>
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
+
         <div id="modificationCojo" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
@@ -3856,6 +3893,8 @@ Ajouter avis dmp
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterAnalyseD()" href="#">Valider</a>
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
+
+
         <div id="modificationAajouterAnalys01" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
@@ -4025,6 +4064,7 @@ Ajouter avis dmp
                   <div class="control-group">
           <label class="control-label">Observation:</label>
             <div class="controls">
+
               <textarea  v-model="formDemande.observations_ano" :readonly="motifDemandeAno"  class="textarea_editor" rows="" placeholder="Entrer  le text ..."></textarea>
             </div>
           
@@ -4036,10 +4076,6 @@ Ajouter avis dmp
                 <input type="file" id="file"  @change="onFichierChange" />
               </div>
             </div>
-
-                   
-
-                   
 
                 </form>
             </div>
@@ -4185,7 +4221,7 @@ Ajouter avis dmp
               </td>
             </tr>
             <tr>
-  <td colspan="2">
+            <td colspan="2">
                 <div class="control-group">
                         <label class="control-label">Observation</label>
                         <div class="controls">
@@ -4417,6 +4453,7 @@ Ajouter avis dmp
         <!--- fin ano  -->
 
         <!---->
+        
         <div id="editeAnoDmpBailleurModal" class="modal hide tlAviBailleur">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
@@ -4531,11 +4568,14 @@ Ajouter avis dmp
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a>
             </div>
         </div>
+        
+
 
      
         <!---->
         <!--Fin contratualisation-->
-    </div>
+ 
+</div>
 
 </template>
 
@@ -5537,10 +5577,11 @@ modifierFactureLocal(){
        montant_total_ttc :this.montantHTt,
         	taux :this.affcherTauxEnCours,
          	tva :this.montantTva,
-designation:this.libelleLot
+designation:this.libelleLot,
+dossier_candidat_id : this.edite_offre_financiere.id
        };
-               // console.log(this.edite_offre_financiere.id)
-                this.formOffreFinanciere.dossier_candidat_id=this.edite_offre_financiere.id
+                // console.log(this.edite_offre_financiere.id)
+                // this.formOffreFinanciere.dossier_candidat_id=this.edite_offre_financiere.id
                 this.ajouterOffreFinancier(nouvelObjet)
                 this.formOffreFinanciere={
                         numero_lot:"",
@@ -6045,5 +6086,13 @@ width: 850px;
     .tailDMP{
         width: 850px;
  margin: 0 -490px;
+    }
+    .tailleModalOffre{
+           width: 1200px;
+ margin: 0 -490px;
+    }
+     .tailleModalOffre2{
+           width: 1300px;
+ margin: 0 -690px;
     }
 </style>

@@ -12,7 +12,8 @@ const defaultState = {
   normeEquipements:[],
   
   articles: [],
-  stockageArticles: []
+  stockageArticles: [],
+  
    
 };
 

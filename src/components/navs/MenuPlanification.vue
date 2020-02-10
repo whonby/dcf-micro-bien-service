@@ -236,7 +236,7 @@
           data-target="#contratualisation"
           class="dropdown-toggle"
         >
-          <span class="text">PLANIFICATION
+          <span class="text">PLANIFICATION DU MARCHES
                </span>
           <b class="caret"></b>
         </a>

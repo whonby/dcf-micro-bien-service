@@ -1,4 +1,4 @@
-
+Modifier marché
 <template>
   <div>
     <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
@@ -426,7 +426,7 @@
                <td colspan="2">
               
                <div class="control-group">
-            <label class="control-label">Type Appel Offre</label>
+            <label class="control-label">Type de procedure</label>
             <div class="controls">
             <select v-model="editMarche.typeappel_id" class="span4">
                <option v-for="plans in typeTypeProcedures" :key="plans.id" 

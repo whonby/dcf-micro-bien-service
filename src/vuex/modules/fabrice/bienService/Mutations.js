@@ -1837,3 +1837,9 @@ export const DELETE_BAILLEUR_MARCHE = (state, id)=> {
 
 
 
+export const AJOUTER_CHOIX_PROCEDURE = (state, elementAjouter) => {
+    state.choixprocedure.unshift(elementAjouter)
+}
+export const GET_ALL_CHOIX_PROCEDURE = (state, tableau_type_text_juridique) => {
+    state.choixprocedure = tableau_type_text_juridique
+}
