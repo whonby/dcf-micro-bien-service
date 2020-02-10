@@ -1,7 +1,7 @@
-Ajouter demande ANO
-<template>
-    <div>
 
+<template>
+    
+<div>
         <div class="container-fluid">
             <h4 v-if="marcheDetail(marcheid)" >Detail Marche : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en cours de passation</button>
                 <button class="btn btn-success btn-large" v-else>Marché attribué</button></h4>
@@ -827,8 +827,10 @@ Ajouter demande ANO
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>ajouter nouveau fournisseur</h3>
             </div>
-            <div class="modal-body" v-if="selectionAttributionMarche(marcheid).dossierFavorable.ano_dmp_bailleur!=undefined">
-                <form action="#" method="get" class="form-horizontal" @submit.prevent="ajouterNouveauFournisseurLocal(selectionAttributionMarche(marcheid).dossierFavorable.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.reg_com)" enctype="multipart/form-data">
+     <!--@submit.prevent="ajouterNouveauFournisseurLocal(selectionAttributionMarche(marcheid).dossierFavorable.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.reg_com)"-->
+     <!--v-if="selectionAttributionMarche(marcheid).dossierFavorable.ano_dmp_bailleur!=undefined"-->
+            <div class="modal-body" >
+                <form action="#" method="get" class="form-horizontal"  enctype="multipart/form-data">
                                 <div class="row-fluid">
                                     <div class="span6">
                                         <div class="widget-box">
@@ -867,7 +869,8 @@ Ajouter demande ANO
                                                 <div class="control-group" >
                                                     <label class="control-label">Numero de registe de commerce:</label>
                                                     <div class="controls" v-if="selectionAttributionMarche(marcheid)">
-                                                        <input type="text" disabled class="span11" placeholder="Numero de registe de commerce" v-model="selectionAttributionMarche(marcheid).dossierFavorable.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.reg_com">
+                                                        <!--v-model="selectionAttributionMarche(marcheid).dossierFavorable.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.reg_com"-->
+                                                        <input type="text" disabled class="span11" placeholder="Numero de registe de commerce" >
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
@@ -1104,46 +1107,43 @@ Ajouter demande ANO
                   <div align="right">
                       <div class="widget-content">
 
-                          <a href="#ajouterCojo" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+                          <a href="#ajouterCojo" data-toggle="modal" class="btn btn-warning" >Ajouter </a>
 
                       </div>
 
                   </div>
-                  <h4> Liste des cojos</h4>
+                  <h4> Infomation sur la cojo</h4>
                   <table class="table table-bordered table-striped" v-if="marcheid">
                       <thead>
                       <tr>
 
-                          <th>Controleur Finnancier </th>
-                          <th>DMP </th>
-                          <th>Autorite Contractante</th>
                           <th>Date Composition</th>
                           <th>Date invitation</th>
                           <th>Numero dossier Appel Offre</th>
                           <th>Nmbr particiapnt</th>
-                          <th>Condition</th>
+
                           <th>Action</th>
                       </tr>
                       </thead>
                       <tbody>
                       <tr class="odd gradeX" v-for="(appelOffre, index) in listeCojo(marcheid)"
                           :key="appelOffre.id">
-                          <td @click="afficheBouttonTechCojo(index)">
+                          <!--<td listeMembreCojo @click="afficheBouttonTechCojo(index)">
                               {{appelOffre.controleur_finnancier || 'Non renseigné'}}</td>
                           <td @click="afficheBouttonTechCojo(index)">
                               {{appelOffre.dmp || 'Non renseigné'}}</td>
                           <td @click="afficheBouttonTechCojo(index)">
-                              {{appelOffre.autorite_contractante || 'Non renseigné'}}</td>
+                              {{appelOffre.autorite_contractante || 'Non renseigné'}}</td>-->
                           <td @click="afficheBouttonTechCojo(index)">
-                              {{formaterDate(appelOffre.date_composition) || 'Non renseigné'}}</td>
+                              {{formaterDate(appelOffre.date_composition) || 'Non renseigné'}}
+                          </td>
                           <td @click="afficheBouttonTechCojo(index)">
                               {{formaterDate(appelOffre.date_invitation) || 'Non renseigné'}}</td>
                           <td @click="afficheBouttonTechCojo(index)">
                               {{appelOffre.num_dossier_appel_offre || 'Non renseigné'}}</td>
                           <td @click="afficheBouttonTechCojo(index)">
                               {{appelOffre.nbr_participant || 'Non renseigné'}}</td>
-                          <td @click="afficheBouttonTechCojo(index)">
-                              {{appelOffre.condition.libelle || 'Non renseigné'}}</td>
+
                           <td @click="afficheBouttonTechCojo(index)">
                               {{appelOffre.lettre_invitation.ref_lettre || 'Non renseigné'}}</td>
                           <div class="btn-group">
@@ -1155,6 +1155,41 @@ Ajouter demande ANO
                       </tr>
                       </tbody>
                   </table>
+                  <div class="">
+                      <div class="span9" >
+                         <h4>Liste des membres de la cojo</h4>
+                      </div>
+                      <div class="span3" align="right">
+                          <a href="#ajouter_membre_cojo" data-toggle="modal" class="btn btn-warning" >Ajouter un autre membre </a>
+                      </div>
+                      <table class="table table-bordered table-striped" v-if="marcheid">
+                          <thead>
+                          <tr>
+                              <th>Matricule</th>
+                              <th>Nom et prenom</th>
+                              <th>Role</th>
+                              <th>Action</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr class="odd gradeX" v-for="appelOffre in listeMembreCojo"
+                              :key="appelOffre.id">
+                              <td @click="afficheModaleMembreCojo(appelOffre.id)">
+                                  {{appelOffre.matricule|| 'Non renseigné'}}
+                              </td>
+                              <td @click="afficheModaleMembreCojo(appelOffre.id)">
+                                  {{appelOffre.nom_prenom || 'Non renseigné'}}</td>
+                              <td @click="afficheModaleMembreCojo(appelOffre.id)">
+                                  {{appelOffre.role || 'Non renseigné'}}</td>
+                              <div class="btn-group">
+                                  <button @click.prevent="supprimerMembreCojo(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
+                                      <span class=""><i class="icon-trash"></i></span></button>
+                              </div>
+
+                          </tr>
+                          </tbody>
+                      </table>
+                  </div>
             </div>
 
 
@@ -1312,8 +1347,8 @@ Ajouter demande ANO
                         
                         <td @click="afficheAnalyseDMP(document.id)">
 
-                            <button class="btn btn-success btn-mini" v-if="document.avis_bail==1">Objection</button>
-                            <button class="btn btn-danger btn-mini" v-else>Non objection</button>
+                            <button class="btn btn-success btn-mini" v-if="document.avis_bail==1">Non objection</button>
+                            <button class="btn btn-danger btn-mini" v-else>Objection</button>
                         </td>
 
                         <td @click="afficheAnalyseDMP(document.id)">
@@ -1365,7 +1400,7 @@ Ajouter demande ANO
 
                 </div>
                 
-                <h4> Liste ANO bailleur</h4>
+                <h4> Liste avis bailleur</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
@@ -1391,8 +1426,8 @@ Ajouter demande ANO
 
 
                          <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
-                            <button class="btn btn-success btn-mini" v-if="anoBailleur.avis_bail==1">Objection</button>
-                            <button class="btn btn-danger btn-mini" v-else>Non objection</button>
+                            <button class="btn btn-success btn-mini" v-if="anoBailleur.avis_bail==1">Non objection</button>
+                            <button class="btn btn-danger btn-mini" v-else>Objection</button>
                         </td>
 
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
@@ -1451,12 +1486,12 @@ Ajouter demande ANO
                              <!-- <td @click="afficherModalObservationBailleur(observationBailleur.id)">
                             {{observationBailleur.ano_dmp_bailleur_id || 'Non renseigné'}}</td> -->
                            <td @click="afficherModalObservationBailleur(index)">
-                            {{observationBailleur.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td>
+                          <!--  {{observationBailleur.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}--></td>
                         <td @click="afficherModalObservationBailleur(index)">
                             {{formaterDate(observationBailleur.date_avis_baill) || 'Non renseigné'}}</td>
                         <td @click="afficherModalObservationBailleur(index)">
-                            <button class="btn btn-success btn-mini" v-if="observationBailleur.avis_bail==1">Objection</button>
-                            <button class="btn btn-danger btn-mini" v-else>Non objection</button>
+                            <button class="btn btn-success btn-mini" v-if="observationBailleur.avis_bail==1">Non objection</button>
+                            <button class="btn btn-danger btn-mini" v-else>Objection</button>
                         </td>
                         <td @click="afficherModalObservationBailleur(index)">
                             {{observationBailleur.observations_bailleur || 'Non renseigné'}}</td>
@@ -1524,8 +1559,8 @@ Ajouter demande ANO
                         <label class="control-label">Avis</label>
                         <div class="controls">
                             <select v-model="formObservation.avis_bail" class="span">
-                                <option value="1">Favorable</option>
-                                <option value="2">Defavorable</option>
+                                <option value="1">Non objection</option>
+                                <option value="2">Objection</option>
                             </select>
                                 
                             
@@ -1603,8 +1638,8 @@ Ajouter demande ANO
                         <label class="control-label">Avis</label>
                         <div class="controls">
                             <select v-model="editObservation1.avis_bail" class="span">
-                                <option value="1">Favorable</option>
-                                <option value="2">Defavorable</option>
+                                <option value="1">Non objection</option>
+                                <option value="2">Objection</option>
                             </select>
                         </div>
                     </div>
@@ -3528,71 +3563,24 @@ Ajouter demande ANO
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
-                    
+                    <div class="control-group">
+                        <label class="control-label">Numero dossier APPEL OFFRE</label>
+                        <div class="controls">
+                            <input disabled
+                                   type="text"
+                                   v-model="formDataCojo.num_dossier_appel_offre"
+                                   class="span"
+                            />
+                        </div>
+                    </div>
 
                     <div class="control-group">
                         <label class="control-label">Lettre Invitation</label>
                         <div class="controls">
-                            <select v-model="formDataCojo.lettre_invitation_id" class="span">
+                            <select v-model="formDataCojo.lettre_invitation_id" class="span" disabled>
                                 <option v-for="plans in lettreInvitationAMarche(marcheid)" :key="plans.id"
                                         :value="plans.id">{{plans.ref_lettre}}</option>
                             </select>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Condition</label>
-                        <div class="controls">
-                            <select v-model="formDataCojo.condition_id" class="span">
-                                <option v-for="plans in conditions" :key="plans.id"
-                                        :value="plans.id">{{plans.libelle}}</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                          <label class="control-label">controleur_finnancier</label>
-                        <div class="controls">
-                            <input
-                                    type="text"
-                                    v-model="formDataCojo.controleur_finnancier"
-                                    class="span"
-                                    placeholder="Controller Finnancier"
-                            />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                         <label class="control-label">Dmp</label>
-                        <div class="controls">
-                            <input type="text"
-                                   v-model="formDataCojo.dmp"
-                                   class="span"
-                                   placeholder="DMP"
-                            />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                         <label class="control-label">autorite_contractante</label>
-                        <div class="controls">
-                            <input
-                                    type="text"
-                                    v-model="formDataCojo.autorite_contractante"
-                                    class="span"
-                                    placeholder="Autorite contractante "
-                            />
-                        </div>
-                    </div>
-
-
-                    <div class="control-group">
-                        <label class="control-label">Date composition</label>
-                        <div class="controls">
-                            <input
-                                    type="date"
-                                    v-model="formDataCojo.date_composition"
-                                    class="span"
-
-                            />
                         </div>
                     </div>
 
@@ -3603,21 +3591,46 @@ Ajouter demande ANO
                                     type="date"
                                     v-model="formDataCojo.date_invitation"
                                     class="span"
-
+                                       disabled
                             />
                         </div>
                     </div>
-
                     <div class="control-group">
-                        <label class="control-label">Numero dossier APPEL OFFRE</label>
+                          <label class="control-label">Controleur finnancier</label>
                         <div class="controls">
                             <input disabled
                                     type="text"
-                                    v-model="formDataCojo.num_dossier_appel_offre"
+                                    v-model="formDataCojo.controleur_finnancier"
                                     class="span"
+                                    placeholder="Controller Finnancier"
                             />
                         </div>
                     </div>
+                   <!-- <div class="control-group">
+                        <label class="control-label">Condition</label>
+                        <div class="controls">
+                            <select v-model="formDataCojo.condition_id" class="span">
+                                <option v-for="plans in conditions" :key="plans.id"
+                                        :value="plans.id">{{plans.libelle}}</option>
+                            </select>
+                        </div>
+                    </div>-->
+
+
+                    <div class="control-group">
+                        <label class="control-label">Date composition</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="formDataCojo.date_composition"
+                                    class="span"
+                 :min="formDataCojo.date_invitation"
+                            />
+                        </div>
+                    </div>
+
+
+
 
                     <div class="control-group">
                         <label class="control-label">NBR participant</label>
@@ -3637,64 +3650,45 @@ Ajouter demande ANO
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterCojoMarche()" href="#">Valider</a>
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
+
         <div id="modificationCojo" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification de mandater</h3>
+                <h3>Modification de cojo</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
 
 
                     <div class="control-group">
+                        <label class="control-label">Numero dossier APPEL OFFRE</label>
+                        <div class="controls">
+                            <input disabled
+                                    type="text"
+                                    v-model="edite_cojo.num_dossier_appel_offre"
+                                    class="span"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
                         <label class="control-label">Lettre Invitation</label>
                         <div class="controls">
-                            <select v-model="edite_cojo.lettre_invitation_id" class="span">
+                            <select v-model="edite_cojo.lettre_invitation_id" class="span" disabled>
                                 <option v-for="plans in lettreInvitationAMarche(marcheid)" :key="plans.id"
                                         :value="plans.id">{{plans.ref_lettre}}</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="control-group">
-                        <label class="control-label">Condition</label>
-                        <div class="controls">
-                            <select v-model="edite_cojo.condition_id" class="span">
-                                <option v-for="plans in conditions" :key="plans.id"
-                                        :value="plans.id">{{plans.libelle}}</option>
-                            </select>
-                        </div>
-                    </div>
 
                     <div class="control-group">
-                        <label class="control-label">Controleur finnancier:</label>
+                        <label class="control-label">Date invitation</label>
                         <div class="controls">
-                            <input
-                                    type="text"
-                                    v-model="edite_cojo.controleur_finnancier"
-                                    class="span"
-                                    placeholder="Controller Finnancier"
-                            />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">DMP :</label>
-                        <div class="controls">
-                            <input type="text"
-                                   v-model="edite_cojo.dmp"
+                            <input disabled
+                                   type="date"
+                                   v-model="edite_cojo.date_invitation"
                                    class="span"
-                                   placeholder="DMP"
-                            />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Autorite contractante :</label>
-                        <div class="controls">
-                            <input
-                                    type="text"
-                                    v-model="edite_cojo.autorite_contractante"
-                                    class="span"
-                                    placeholder="Autorite contractante "
+
                             />
                         </div>
                     </div>
@@ -3708,29 +3702,6 @@ Ajouter demande ANO
                                     v-model="edite_cojo.date_composition"
                                     class="span"
 
-                            />
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Date invitation</label>
-                        <div class="controls">
-                            <input
-                                    type="date"
-                                    v-model="edite_cojo.date_invitation"
-                                    class="span"
-
-                            />
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Numero dossier APPEL OFFRE</label>
-                        <div class="controls">
-                            <input
-                                    type="text"
-                                    v-model="edite_cojo.num_dossier_appel_offre"
-                                    class="span"
                             />
                         </div>
                     </div>
@@ -3764,7 +3735,7 @@ Ajouter demande ANO
                         <tr>
                             <td>
                         <div class="control-group">
-                        <label class="control-label">Offre</label>
+                        <label class="control-label">Reference offre</label>
                         <div class="controls">
                             <select v-model="formAnalyseDossier.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(marcheid)" :key="plans.id"
@@ -3875,9 +3846,9 @@ Ajouter demande ANO
                       
                             <td colspan="4">
                      <div class="control-group">
-          <label class="control-label">Motif:</label>
+          <label class="control-label">Obseravtion:</label>
             <div class="controls">
-              <textarea  v-model="formAnalyseDossier.motif" :readonly="afficherMotifAnalyse"  class="textarea_editor span10" rows="4" placeholder="Enter text ..."></textarea>
+              <textarea  v-model="formAnalyseDossier.motif" :readonly="afficherMotifAnalyse"  class="textarea_editor span10" rows="4" placeholder="Entrer le text ..."></textarea>
             </div>
           
         </div>
@@ -3892,6 +3863,8 @@ Ajouter demande ANO
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterAnalyseD()" href="#">Valider</a>
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
+
+
         <div id="modificationAajouterAnalys01" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
@@ -4061,24 +4034,18 @@ Ajouter demande ANO
                   <div class="control-group">
           <label class="control-label">Observation:</label>
             <div class="controls">
-              <textarea  v-model="formDemande.observations_ano" :readonly="motifDemandeAno"  class="textarea_editor" rows="" placeholder="Entrer text ..."></textarea>
+
+              <textarea  v-model="formDemande.observations_ano" :readonly="motifDemandeAno"  class="textarea_editor" rows="" placeholder="Entrer  le text ..."></textarea>
             </div>
           
         </div>
-                    <div class="control-group">
 
-                        <label class="control-label">Piéce jointe</label>
-                        <div class="controls">
-                            <input
-                                    type="file"
-                                  
-                                    class="span"
-                                    
-                            />
-                        </div>
-                    </div>
-
-                   
+         <div class="control-group">
+              <label class="control-label">Fichier joint:</label>
+              <div class="controls">
+                <input type="file" id="file"  @change="onFichierChange" />
+              </div>
+            </div>
 
                 </form>
             </div>
@@ -4184,14 +4151,6 @@ Ajouter demande ANO
                         </div>
                     </div>
               </td>
-               <!-- <td>
-                 <div class="control-group">
-                        <label class="control-label">Lot</label>
-                        <div class="controls">
-                        <input type="text" v-model="formAnalyseDMP.lot" class="span">
-                        </div>
-                    </div>
-              </td> -->  
                <td>
                 <div class="control-group">
                         <label class="control-label">Reference courrier</label>
@@ -4224,7 +4183,7 @@ Ajouter demande ANO
               </td>
             </tr>
             <tr>
-  <td colspan="2">
+            <td colspan="2">
                 <div class="control-group">
                         <label class="control-label">Observation</label>
                         <div class="controls">
@@ -4343,7 +4302,7 @@ Ajouter demande ANO
                         <tr>
                             <td>
                         <div class="control-group">
-                        <label class="control-label">Offre</label>
+                        <label class="control-label">Reference offre</label>
                         <div class="controls">
                             <select v-model="formAno.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(marcheid)" :key="plans.id"
@@ -4428,9 +4387,9 @@ Ajouter demande ANO
                       
                             <td colspan="4">
                      <div class="control-group">
-          <label class="control-label">Motif:</label>
+          <label class="control-label">Observation:</label>
             <div class="controls">
-              <textarea  v-model="formAno.observations_bailleur" :readonly="afficherMotifBailleur"  class="textarea_editor span10" rows="4" placeholder="Enter text ..."></textarea>
+              <textarea  v-model="formAno.observations_bailleur" :readonly="afficherMotifBailleur"  class="textarea_editor span10" rows="4" placeholder="Entrer le text ..."></textarea>
             </div>
           
         </div>
@@ -4456,6 +4415,7 @@ Ajouter demande ANO
         <!--- fin ano  -->
 
         <!---->
+        
         <div id="editeAnoDmpBailleurModal" class="modal hide tlAviBailleur">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
@@ -4571,10 +4531,156 @@ Ajouter demande ANO
             </div>
         </div>
 
-     
+
+
+    <div id="ajouter_membre_cojo" class="modal hide" aria-hidden="true" style="display: none;">
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button">×</button>
+            <h3>Ajouter un autre membre de la cojo </h3>
+        </div>
+        <div class="modal-body">
+            <div class="widget-box">
+                <form action="#" method="get" v-if="marcheid">
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <td>
+                                <div class="control-group">
+                                    <label>Matricule</label>
+                                    <div class="controls">
+                                        <input type="text" class="span" placeholder="Matricule " v-model="formDataMembreCojo.matricule" v-on:keyup="rechercheMembreCojo()" >
+                                        <code v-if="message_mandater">{{message_mandater}}</code>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label class="control-label">Nom et prenom <code>*</code> :</label>
+                                    <div class="control-group">
+                                        <input type="text" class="span" placeholder="Numero lo" v-model="formDataMembreCojo.nom_prenom">
+
+
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td colspan="2">
+
+                                <div class="control-group">
+
+                                    <label class="control-label span5">Role <code>*</code> :</label>
+
+                                    <div class="controls">
+                                        <select class="span4" v-model="formDataMembreCojo.role">
+                                            <option></option>
+                                            <option value="Autorité contractante">Autorité contractante</option>
+                                            <option value="DMP">Direction des marchés publique</option>
+                                            <option value="Béneficiare">Béneficiaire</option>
+                                            <option value="Rapporteur">Rapporteur</option>
+                                            <option value="Service technique">Service technique</option>
+                                            <option value="Autre">Autre</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+
+
+
+
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-primary" @click.prevent="ajouterMembreCojoM()">Ajouter</a>
+            <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+        </div>
+    </div>
+
+    <div id="modification_membre_cojo" class="modal hide" aria-hidden="true" style="display: none;">
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button">×</button>
+            <h3>modification  </h3>
+        </div>
+        <div class="modal-body">
+            <div class="widget-box">
+                <form action="#" method="get" v-if="marcheid">
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <td>
+                                <div class="control-group">
+                                    <label>Matricule</label>
+                                    <div class="controls">
+                                        <input type="text" class="span" placeholder="Matricule " v-model="edite_membre_cojo.matricule"  >
+                                        <code v-if="message_mandater">{{message_mandater}}</code>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label class="control-label">Nom et prenom <code>*</code> :</label>
+                                    <div class="control-group">
+                                        <input type="text" class="span" placeholder="Numero lo" v-model="edite_membre_cojo.nom_prenom">
+
+
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td colspan="2">
+
+                                <div class="control-group">
+
+                                    <label class="control-label span5">Role <code>*</code> :</label>
+
+                                    <div class="controls">
+                                        <select class="span4" v-model="edite_membre_cojo.role">
+                                            <option></option>
+                                            <option value="Controller finnancier">Controller finnancier</option>
+                                            <option value="Autorité contractante">Autorité contractante</option>
+                                            <option value="DMP">Direction des marchés publique</option>
+                                            <option value="Béneficiare">Béneficiaire</option>
+                                            <option value="Rapporteur">Rapporteur</option>
+                                            <option value="Service technique">Service technique</option>
+                                            <option value="Autre">Autre</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+
+
+
+
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-primary" @click.prevent="editeMembreCojoM()">Ajouter</a>
+            <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+        </div>
+    </div>
         <!---->
         <!--Fin contratualisation-->
-    </div>
+ 
+</div>
 
 </template>
 
@@ -4667,6 +4773,8 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
                     motif:""
 
                 },
+                affiche_bouton_ajouter_cojo:false,
+                idcojo:"",
                 formDataCojo:{
                     lettre_invitation_id:"",
                     condition_id:'',
@@ -4676,7 +4784,8 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
                     date_invitation:"",
                     date_composition:"",
                     num_dossier_appel_offre:"",
-                    nbr_participant:""
+                    nbr_participant:"",
+                    matricule:""
                 },
             isFormulaireDossierCandidature:false,
                 isDetailDossierCandidature:false,
@@ -4843,7 +4952,7 @@ editObservation1:{
     document_procedure_id:""
 },
 
-
+                edite_membre_cojo:"",
 
 formAno:{
 date_ano_dmp:"",
@@ -4895,6 +5004,13 @@ num_courrier:""
                     imputation:"",
                     marche_id:"",
                 },
+                formDataMembreCojo: {
+                    matricule:"",
+                    type_appel:"",
+                    nom_prenom:"",
+                    role:"",
+                    cojo_id:"",
+                },
                 formLettre: {
                     appel_offre_id:"",
                     fichier_joint:"",
@@ -4932,8 +5048,8 @@ created() {
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
-
-                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "factures", "typeFactures", "getPersonnaliserFacture", "personnaliseGetterMarcheBailleur"]),
+                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "factures", "typeFactures",
+                "getPersonnaliserFacture", "personnaliseGetterMarcheBailleur","getterMembreCojo"]),
             ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -4966,7 +5082,12 @@ return this.formAnalyseDMP.avis_bail == "1";
 
         let numero = this.getterAnalyseDMP.find(numeroDmp => numeroDmp.avis_bail == 1)
         if(numero) {
-           return numero.avis_bail
+            if(numero.avis_bail==1){
+              return "non objection"
+            }else{
+            return "objection"
+            }
+           
         }
         return null
     },
@@ -5136,7 +5257,7 @@ montantHT() {
                             vM.formDataCojo.num_dossier_appel_offre=Objet.ref_appel;
                         }
                        // console.log(Objet)
-         return this.appelOffres.filter( idmarche => idmarche.marche_id == marche_id)
+                    return this.appelOffres.filter( idmarche => idmarche.marche_id == marche_id)
                     }
                 }
 
@@ -5188,7 +5309,15 @@ afficherMotifAnalyse(){
             listeMantater: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                       // console.log("Marche liste mantater")
+                       let vM =this;
+                        let Objet =this.getterMandate.find(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid);
+                      console.log(Objet)
+                        if(Objet!=undefined){
+                            vM.formDataCojo.lettre_invitation_id=Objet.lettre_invitation_id
+                            vM.formDataCojo.controleur_finnancier=Objet.nom_mandat+" "+Objet.prenom_nom
+                            vM.formDataCojo.matricule=Objet.matricule_m
+                            vM.formDataCojo.date_invitation=Objet.lettre_invitation.date_lettre
+                        }
                         return this.getterMandate.filter(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid)
                     }
                 }
@@ -5197,12 +5326,22 @@ afficherMotifAnalyse(){
             listeCojo: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                       // console.log("Marche cojo")
+                      let Objet=  this.getterCojos.find(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid);
+                        let vM=this;
+                        if(Objet!=undefined){
+                            vM.idcojo=Objet.id
+                        }
                         return this.getterCojos.filter(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid)
                     }
                 }
             },
-
+             listeMembreCojo: function (){
+                let vM=this;
+                if( vM.idcojo!=""){
+                    return this.getterMembreCojo.filter(idmem=>idmem.cojo_id==vM.idcojo);
+                }
+                return null;
+             },
         listeAnalyseDossier: function () {
             return marcheid => {
                 if (marcheid != "") {
@@ -5247,7 +5386,7 @@ afficherMotifAnalyse(){
                 return marcheid => {
                     if (marcheid != "") {
                        // console.log("Marche dmp bailleur")
-                        return this.getterAnoDMPBailleur.filter(idmarche => idmarche.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
+                        return this.getterAnoDMPBailleur.filter(idmarche => idmarche.id == marcheid)
                     }
                 }
             },
@@ -5268,7 +5407,7 @@ afficherMotifAnalyse(){
                 return marcheid => {
                     if (marcheid != "") {
                        // console.log("Marche observation bailleur ANODMP")
-                        return this.getterObseravtionBailleurs.filter(idmarche => idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
+                        return this.getterObseravtionBailleurs.filter(idmarche => idmarche.id == marcheid)
                     }
                 }
             },
@@ -5276,7 +5415,7 @@ afficherMotifAnalyse(){
                 return marcheid => {
                     if (marcheid != "") {
                         //console.log("Marche attribution marche")
-                        let marcherEnAction=this.getterObseravtionBailleurs.filter(idmarche => idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
+                        let marcherEnAction=this.getterObseravtionBailleurs.filter(idmarche => idmarche.id == marcheid)
                         let marcherFavaroble=marcherEnAction.filter(idmarche=>idmarche.avis_bail==1).length
 
                         //Recherche le candidat qui a le plus gros score parmie les admin
@@ -5284,18 +5423,19 @@ afficherMotifAnalyse(){
 
 
                              //prendre le max et min score du premier candidat
-                             let min = marcherEnAction[0].ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.rang_analyse
-                             let max = marcherEnAction[0].ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.rang_analyse;
-
+                           /*  let min = marcherEnAction[0].ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.rang_analyse
+                             let max = marcherEnAction[0].ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.rang_analyse;*/
+                              let min=1;
+                              let max=4;
                             //parcourie le tableau pour recupere le maxi et le minimun en conparant les valeur max et min du premie selectionner
                              for (let i = 1, len=marcherEnAction.length; i < len; i++) {
-                                 let v = marcherEnAction[i].ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.rang_analyse;
+                                 let v = marcherEnAction[i].id;
                                  min = (v < min) ? v : min;
                                  max = (v > max) ? v : max;
                              }
                           //   console.log(min)
 
-                             marcherEnAction= marcherEnAction.filter(idmarche=>idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.rang_analyse==max)
+                             marcherEnAction= marcherEnAction.filter(idmarche=>idmarche.id==max)
                              //console.log(marcherEnAction)
                          }
 
@@ -5307,7 +5447,7 @@ afficherMotifAnalyse(){
 
                             let infoEntreprise="";
                              if(marcherEnAction.length!=0){
-                                 const rcm=marcherEnAction[0].ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.reg_com
+                                 const rcm=marcherEnAction[0].id
                                  marcherEnAction=marcherEnAction.find(idm=>idm.id==marcherEnAction[0].id)
                                  infoEntreprise=this.entreprises.find(entrep=>entrep.numero_rc==rcm)
 
@@ -5364,16 +5504,14 @@ afficherMotifAnalyse(){
                 "modifierAnalyseDossier","supprimerAnalyseDossier","ajouterDemandeAno",
                 "modifierDemandeAno","supprimerDemandeAno","ajouterAnalyseDMP","modifierAnalyseDMP",
                 "supprimerAnalyseDMP","ajouterAnoDMPBailleur","modifierAnoDMPBailleur","supprimerAnoDMPBailleur"
-
                 , "modifierObservationBaileur","ajouterObseravtionBailleur" , "supprimerObseravtionBailleur",
                  "ajouterFournisseur", "ajouterActeEffetFinancier", "modifierActeEffetFinancier",
                  "supprimerActeEffetFinancier","modifierMarche","supprimerFacture","modifierFacture",
                   "ajouterFacture"
-
                 , "modifierObservationBaileur","ajouterObseravtionBailleur","supprimerObseravtionBailleur",
                  "ajouterFournisseur", "ajouterActeEffetFinancier",
                 "modifierActeEffetFinancier","supprimerActeEffetFinancier","modifierMarche","modificationMarcheBailleur",
-                "ajouterMarcherBailleur","supprimerMarcheBailleur"
+                "ajouterMarcherBailleur","supprimerMarcheBailleur","ajouterMembreCojo","modificationMembreCojo","supprimerMembreCojo"
 
             ]),
             ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
@@ -5421,8 +5559,17 @@ afficherModalmodifierfacture(index){
     })
     this.editFacture = this.factures[index]
 },
-
-
+            afficheModaleMembreCojo(index){
+                this.$('#modification_membre_cojo').modal({
+                    backdrop: "static",
+                    keyboard:false
+                })
+                this.edite_membre_cojo = this.getterMembreCojo.find(item=>item.id==index);
+            },
+            editeMembreCojoM(){
+    this.modificationMembreCojo(this.edite_membre_cojo)
+    this.$('#modification_membre_cojo').modal('hide');
+},
 modifierFactureLocal(){
     this.modifierFacture(this.editFacture)
     this.$('#modififacture').modal('hide');
@@ -5448,6 +5595,29 @@ modifierFactureLocal(){
                  this.message_mandater=""
              }
            },
+            rechercheMembreCojo(){
+                // console.log(this.formMandater.matricule_m)
+
+                let objetMandater=this.acteur_depenses.filter(item=>item.acteur_depense.matricule==this.formDataMembreCojo.matricule)
+                // console.log(objetMandater)
+                if(objetMandater!=undefined){
+                    if (objetMandater.length==1){
+                        let acteur= this.acteur_depenses.find(item=>item.acteur_depense.matricule==this.formDataMembreCojo.matricule)
+                        this.formDataMembreCojo.nom_prenom=acteur.acteur_depense.nom +" "+acteur.acteur_depense.prenom
+                        this.message_mandater=" "
+
+                    }
+                    else{
+                        this.message_mandater="Cette n'existe pas dans notre base de donnée "
+                        this.formDataMembreCojo.nom_prenom=""
+                    }
+                }
+                if(this.formDataMembreCojo.matricule==""){
+                    this.formDataMembreCojo.nom_prenom=""
+                    this.message_mandater=" "
+                }
+            }
+            ,
             recherche() {
 
               // console.log(this.search)
@@ -5475,6 +5645,17 @@ modifierFactureLocal(){
                     backdrop: "static",
                     keyboard: false
                 });
+            },
+            ajouterMembreCojoM(){
+                this.formDataMembreCojo.cojo_id=this.idcojo
+              this.ajouterMembreCojo(this.formDataMembreCojo)
+                this.formDataMembreCojo= {
+                       matricule:"",
+                        type_appel:"",
+                        nom_prenom:"",
+                        role:"",
+                        cojo_id:"",
+                }
             },
             ajouterBailleur(){
                 this.formBailleur.marche_id=this.marcheid

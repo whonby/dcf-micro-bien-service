@@ -62,8 +62,8 @@ documentProcedures:[],
     communes:[],
 
     bailleurMarche: [],
-    choixprocedure: []
-
+    choixprocedure: [],
+     membre_cojo:[]
 
 
 

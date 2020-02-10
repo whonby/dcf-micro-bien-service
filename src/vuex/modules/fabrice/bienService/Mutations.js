@@ -871,7 +871,8 @@ export const MODIFIER_COJO = (state, elementModif)=>{
 // delete cojo
 
 export const SUPRIMER_COJO = (state, id)=> {
-    state.cojos = state.cojos.filter(prest => prest.id !=id)
+    state.cojos = state.cojos.filter(prest => prest.id !=id);
+    state.membre_cojo=state.membre_cojo.filter(item=>item.cojo_id!=id)
 }
 
 // mutation pour condition && fonction occupper
@@ -1843,3 +1844,29 @@ export const AJOUTER_CHOIX_PROCEDURE = (state, elementAjouter) => {
 export const GET_ALL_CHOIX_PROCEDURE = (state, tableau_type_text_juridique) => {
     state.choixprocedure = tableau_type_text_juridique
 }
+
+
+/* Mutation membre cojo**/
+export const GET_MEMBRE_COJO = (state, tableau_autre_text_juridique) =>{
+    state.membre_cojo = tableau_autre_text_juridique
+}
+
+export const AJOUTER_MEMBRE_COJO = (state, elementAjouter) => {
+    state.membre_cojo.unshift(elementAjouter)
+}
+
+
+
+export const MODIFIER_MEMBRE_COJO= (state, elementModif)=>{
+    state.membre_cojo = state.membre_cojo.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_MEMBRE_COJO= (state, id)=> {
+    state.membre_cojo = state.membre_cojo.filter(autreText => autreText.id !=id)
+}
+/**Fin mutation membre cojo**/
