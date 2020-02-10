@@ -1372,7 +1372,7 @@
                         <!-- <th>Reference offre</th> -->
                         
                         <th>Date </th>
-                        <th>Reference dmp </th>
+                        <th>Reference offre </th>
                         <th>Avis</th>
                         <th>Numero courrier dmp</th>
                         <th>Observation</th>
@@ -1387,11 +1387,11 @@
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             {{formaterDate(anoBailleur.date_ano_dmp) || 'Non renseigné'}}</td>
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
-                            {{anoBailleur.numero_courie || 'Non renseigné'}}</td>
+                            {{anoBailleur.appel_offre.ref_appel || 'Non renseigné'}}</td>
 
 
                          <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
-                            <button class="btn btn-success btn-mini" v-if="anoBailleur.avis_bail==1">Non objection</button>
+                            <button class="btn btn-success btn-mini" v-if="anoBailleur.avis_bail== 1">Non objection</button>
                             <button class="btn btn-danger btn-mini" v-else>Objection</button>
                         </td>
 
@@ -1413,7 +1413,7 @@
 
               </div>
 
-
+annalyse_d_m_p
 
 
 
@@ -1851,20 +1851,76 @@
                         </div>
                     </div>
                             </td>
-                            <!-- <td>
+                        </tr>
+                        <tr>
+
+                            <td>
                      <div class="control-group">
-                        <label class="control-label">Type document acte</label>
+                        <label class="control-label" title="date de signature attributaire">Date SA</label>
                         <div class="controls">
-                            <input type="text" v-model="formEffetFinancier.type_doc_modifie"
+                            <input type="date" v-model="formEffetFinancier.date_attributaire"
                                     class="span"
-                                    placeholder="refence acte"
+                                    placeholder=""
                             />
                         </div>
                     </div>
-                            </td> -->
+                            </td>
+
+
+                                    <td>
+                     <div class="control-group">
+                        <label class="control-label" title="date ordre de service ">Date OS</label>
+                        <div class="controls">
+                            <input type="date" v-model="formEffetFinancier.date_odre_service"
+                                    class="span"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+
+                                         <td>
+                     <div class="control-group">
+                        <label class="control-label" title=" ">Date fin execution</label>
+                        <div class="controls">
+                            <input type="date" v-model="formEffetFinancier.date_fin_exe"
+                                    class="span"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+                            </td>
+                        </tr>
+                        <tr>
+
+                                            <td>
+                     <div class="control-group">
+                        <label class="control-label" title=" ">Durée d'execution(jrs)</label>
+                        <div class="controls">
+                            <input type="date" v-model="formEffetFinancier.duree"
+                                    class="span"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+
+                                             <td>
+                     <div class="control-group">
+                        <label class="control-label" title=" ">Date de reception</label>
+                        <div class="controls">
+                            <input type="date" v-model="formEffetFinancier.date_reception"
+                                    class="span"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+                            </td>
                         </tr>
 
-                    </table>
+                    </table>  
 
                    
 
@@ -2039,9 +2095,9 @@
                         </div>
                     </div>
                             </td>
-                            <!-- <td>
+                            <td>
                      <div class="control-group">
-                        <label class="control-label">Type document acte</label>
+                        <label class="control-label">Type</label>
                         <div class="controls">
                             <input type="text" v-model="editActeEffetFinancier.type_doc_modifie"
                                     class="span"
@@ -2049,7 +2105,7 @@
                             />
                         </div>
                     </div>
-                            </td> -->
+                            </td>
                         </tr>
 
                     </table>
@@ -4570,7 +4626,7 @@
         </div>
         
 
-
+annalyse_d_m_p
      
         <!---->
         <!--Fin contratualisation-->
@@ -4743,6 +4799,11 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
              objet_act:"",
              incidence_financiere:"",
              montant_act:"",
+             date_attributaire:"",
+             date_reception:"",
+             duree:"",
+             date_fin_exe:"",
+             date_odre_service:"",
              //type_doc_modifie:"",
              livrable_id:"",
              text_juridique_id:"",
@@ -5283,7 +5344,7 @@ afficherMotifAnalyse(){
                     if (marcheid != "") {
                         //console.log("Marche attribution marche")
                         let marcherEnAction=this.getterObseravtionBailleurs.filter(idmarche => idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
-                        let marcherFavaroble=marcherEnAction.filter(idmarche=>idmarche.avis_bail==1).length
+                       let marcherFavaroble=marcherEnAction.filter(idmarche=>idmarche.avis_bail==1).length
 
                         //Recherche le candidat qui a le plus gros score parmie les admin
                          if(marcherFavaroble>1){
@@ -5698,6 +5759,11 @@ ajouterModalActeEffetFinancierLocal(entreprise_id){
              objet_act:"",
              incidence_financiere:"",
              montant_act:"",
+              date_attributaire:"",
+             date_reception:"",
+             duree:"",
+             date_fin_exe:"",
+             date_odre_service:"",
             // type_doc_modifie:"",
              livrable_id:"",
              text_juridique_id:"",
@@ -5793,7 +5859,11 @@ modifierModalActeEffetFinancierLocal(entreprise_id){
                     avis_bail:"",
                     date_avis_bail:""
             }
-        },ajouterAnoDMPBailleurLocal(){
+        },ajouterAnoDMPBailleurLocal(){  
+            var nouvelObjet = {
+                ...this.formAno,
+                 ref_ano_dmp: this.recuperationDeAvisDmp
+            }
             
                this.ajouterAnoDMPBailleur(this.formAno)
                 this.formAno={
