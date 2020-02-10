@@ -1365,7 +1365,7 @@ Ajouter avis dmp
 
                 </div>
                 
-                <h4> Liste ANO bailleur</h4>
+                <h4> Liste avis bailleur</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
@@ -3728,7 +3728,7 @@ Ajouter avis dmp
                         <tr>
                             <td>
                         <div class="control-group">
-                        <label class="control-label">Offre</label>
+                        <label class="control-label">Reference offre</label>
                         <div class="controls">
                             <select v-model="formAnalyseDossier.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(marcheid)" :key="plans.id"
@@ -3839,9 +3839,9 @@ Ajouter avis dmp
                       
                             <td colspan="4">
                      <div class="control-group">
-          <label class="control-label">Motif:</label>
+          <label class="control-label">Obseravtion:</label>
             <div class="controls">
-              <textarea  v-model="formAnalyseDossier.motif" :readonly="afficherMotifAnalyse"  class="textarea_editor span10" rows="4" placeholder="Enter text ..."></textarea>
+              <textarea  v-model="formAnalyseDossier.motif" :readonly="afficherMotifAnalyse"  class="textarea_editor span10" rows="4" placeholder="Entrer le text ..."></textarea>
             </div>
           
         </div>
@@ -4025,10 +4025,18 @@ Ajouter avis dmp
                   <div class="control-group">
           <label class="control-label">Observation:</label>
             <div class="controls">
-              <textarea  v-model="formDemande.observations_ano" :readonly="motifDemandeAno"  class="textarea_editor" rows="" placeholder="Enter text ..."></textarea>
+              <textarea  v-model="formDemande.observations_ano" :readonly="motifDemandeAno"  class="textarea_editor" rows="" placeholder="Entrer  le text ..."></textarea>
             </div>
           
         </div>
+
+         <div class="control-group">
+              <label class="control-label">Fichier joint:</label>
+              <div class="controls">
+                <input type="file" id="file"  @change="onFichierChange" />
+              </div>
+            </div>
+
                    
 
                    
@@ -4296,7 +4304,7 @@ Ajouter avis dmp
                         <tr>
                             <td>
                         <div class="control-group">
-                        <label class="control-label">Offre</label>
+                        <label class="control-label">Reference offre</label>
                         <div class="controls">
                             <select v-model="formAno.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(marcheid)" :key="plans.id"
@@ -4381,9 +4389,9 @@ Ajouter avis dmp
                       
                             <td colspan="4">
                      <div class="control-group">
-          <label class="control-label">Motif:</label>
+          <label class="control-label">Observation:</label>
             <div class="controls">
-              <textarea  v-model="formAno.observations_bailleur" :readonly="afficherMotifBailleur"  class="textarea_editor span10" rows="4" placeholder="Enter text ..."></textarea>
+              <textarea  v-model="formAno.observations_bailleur" :readonly="afficherMotifBailleur"  class="textarea_editor span10" rows="4" placeholder="Entrer le text ..."></textarea>
             </div>
           
         </div>
@@ -4919,7 +4927,12 @@ return this.formAnalyseDMP.avis_bail == "1";
 
         let numero = this.getterAnalyseDMP.find(numeroDmp => numeroDmp.avis_bail == 1)
         if(numero) {
-           return numero.avis_bail
+            if(numero.avis_bail==1){
+              return "non objection"
+            }else{
+            return "objection"
+            }
+           
         }
         return null
     },
