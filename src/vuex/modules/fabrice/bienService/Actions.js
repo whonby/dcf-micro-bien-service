@@ -978,8 +978,8 @@ export  function  getCojo({commit}) {
 export function ajouterCojo({commit}, elementAjout){
   asyncLoading(axios.post('/cojo',elementAjout)).then(response =>{
       if(response.status == 201){
-          commit('AJOUTER_COJO', response.data)
-
+          commit('AJOUTER_COJO', response.data.cojo)
+          commit('AJOUTER_MEMBRE_COJO', response.data.membre)
           this.$app.$notify({
             title: 'success ',
             text: 'Enregistrement effectué !',
@@ -3573,4 +3573,53 @@ export function getChoixProcedure({ commit }) {
     commit('GET_ALL_CHOIX_PROCEDURE', response.data.data)
 
   }).catch(error => console.log(error)))
+}
+
+
+
+
+
+export  function  getMembreCojo({commit}) {
+    queue.push(() => axios.get('/membre_cojo').then((response) => {
+        commit('GET_MEMBRE_COJO', response.data.data)
+
+    }).catch(error => console.log(error)))
+}
+
+export function ajouterMembreCojo({commit}, formData){
+    asyncLoading(axios.post('/membre_cojo',formData)).then(response =>{
+        if(response.status == 201){
+            console.log(response.data)
+            commit('AJOUTER_MEMBRE_COJO', response.data)
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
+
+export function modificationMembreCojo({commit}, element_modifie) {
+    asyncLoading( axios.put('/membre_cojo' ,element_modifie)).then(response => {
+        commit('MODIFIER_MEMBRE_COJO', response.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}
+
+export function supprimerMembreCojo({commit}, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_MEMBRE_COJO', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/membre_cojo/' + id).then(() => dialog.close() )
+        })
+
 }
