@@ -1458,52 +1458,36 @@
                 <div align="right">
                     <div class="widget-content">
 
-                        <a href="#ajouterObservationBailleur" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+                        <a href="#ajouterObservationBailleur" data-toggle="modal" class="btn btn-success">Ajouter</a>
 
                     </div>
 
                 </div>
-                <h4> Liste obseravtion bailleur</h4>
+                 <div align="left">
+                    <div class="widget-content">
+
+                        <a href="#Genere" data-toggle="modal" class="btn btn-warning">Genéré la liste du PV</a>
+
+                    </div>
+
+                </div>
+
+
+                <h4> liste de PV</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
 
-                        <th>Document procedure</th>
+                        <th></th>
                         <!-- <th>ANO DMP bailleur</th> -->
-                        <th>Numero dossier candidat</th>
+                        <th>Reference PV</th>
                         <th>Date</th>
-                        <th>Avis</th>
-                        <th>Observation </th>
+                       
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for="(observationBailleur,index) in listeObservationBailleurANODMP(marcheid)"
-                        :key="observationBailleur.id">
-
-                         <td @click="afficherModalObservationBailleur(index)">
-                            {{observationBailleur.document_procedure.libelle_doc || 'Non renseigné'}}</td>
-
-                             <!-- <td @click="afficherModalObservationBailleur(observationBailleur.id)">
-                            {{observationBailleur.ano_dmp_bailleur_id || 'Non renseigné'}}</td> -->
-                           <td @click="afficherModalObservationBailleur(index)">
-                          <!--  {{observationBailleur.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}--></td>
-                        <td @click="afficherModalObservationBailleur(index)">
-                            {{formaterDate(observationBailleur.date_avis_baill) || 'Non renseigné'}}</td>
-                        <td @click="afficherModalObservationBailleur(index)">
-                            <button class="btn btn-success btn-mini" v-if="observationBailleur.avis_bail==1">Non objection</button>
-                            <button class="btn btn-danger btn-mini" v-else>Objection</button>
-                        </td>
-                        <td @click="afficherModalObservationBailleur(index)">
-                            {{observationBailleur.observations_bailleur || 'Non renseigné'}}</td>
-                       
-                        <div class="btn-group">
-                            <button @click.prevent="supprimerObseravtionBailleur(observationBailleur.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span>
-                            </button>
-                        </div>
-
-                    </tr>
+                   
                     </tbody>
                 </table>
 
@@ -1519,64 +1503,27 @@
  <div id="ajouterObservationBailleur" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter obseravtion bailleur</h3>
+                <h3>Ajouter le PV</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
 
-
-                             <div class="control-group">
-                        <label class="control-label">Document Procedure</label>
+                 <div class="control-group">
+                        <label class="control-label">Reference PV</label>
                         <div class="controls">
-                          <select v-model="formObservation.document_procedure_id" class="span">
-                                <option v-for="varText in documentProcedures" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle_doc}}</option>
-                            </select>
-                        
+                            <input type="text" v-model="formPv.ref_pv" class="span">
+
+                           
                         </div>
                     </div>
 
                      <div class="control-group">
-                        <label class="control-label">ANO DMP bailleur </label>
-                        <div class="controls">
-                           <select v-model="formObservation.ano_dmp_bailleur_id" class="span">
-                                <option v-for="varText in listeAnoDMPBailleur(marcheid)" :key="varText.id"
-                                        :value="varText.id">{{varText.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Date </label>
-                        <div class="controls">
-                            <input
-                                    type="date"
-                                    v-model="formObservation.date_avis_baill"
-                                    class="span"
-                                    placeholder="Saisir le libelle_type"
-                            />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Avis</label>
-                        <div class="controls">
-                            <select v-model="formObservation.avis_bail" class="span">
-                                <option value="1">Non objection</option>
-                                <option value="2">Objection</option>
-                            </select>
-                                
-                            
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Observation</label>
-                        <div class="controls">
-                            <textarea  v-model="formObservation.observations_bailleur"
-                                    class="span"
-                                    placeholder="Saisir l'observation"
-                            ></textarea>
-                        </div>
-                    </div>
+              <label class="control-label">Fichier joint:</label>
+              <div class="controls">
+                <input type="file" id="file"  @change="onFichierChange" />
+              </div>
+            </div>
+                   
 
                     
 
@@ -5073,6 +5020,10 @@ editDemamnde:{
 ref_marche:"",
 num_courrier:""
 
+},
+formPv:{
+    ref_pv:"",
+    fichier_joint_pv:"",
 },
           editDossier:{
               type_candidat:"",
