@@ -443,12 +443,18 @@ export const getMandatPersonnaliser = (state, getters, rootState, rootGetters) =
             && element.activite_id !== null
             && element.ua_id !== null
             && element.grd_nature_id !== null
-            && element.ligne_budgetaire_id !== null
+            && element.ligne_budgetaire_id !== null 
+            && element.marche_id !== null 
+            && element.section_id !== null
         ) {
             element = {
                 ...element,
-
-
+                afficheSections: rootGetters['parametreGenerauxAdministratif/sections'].find(
+                    plans => plans.id == element.section_id
+                ),
+                afficheMarche: rootGetters['bienService/marches'].find(
+                    plans => plans.id == element.marche_id
+                ),
                 afficheProgramme: rootGetters['parametreGenerauxAdministratif/plans_programmes'].find(
                     plans => plans.id == element.programme_id
                 ),
