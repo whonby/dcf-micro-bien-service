@@ -125,7 +125,7 @@ export default {
          'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur",
           'getActeEffetFinancier','getEngagement','getMandat',"getVille","getPays","getCommune",
           'getActeEffetFinancier',"getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
-          ,"getMarcheBailleur","getMembreCojo"])
+          ,"getMarcheBailleur","getMembreCojo","getProceVerbal"])
 
 
   },
@@ -298,6 +298,7 @@ this.getLettreInvitation()
 
     this.getMarcheBailleur()
 this.getMembreCojo()
+    this.getProceVerbal()
       /**
        * fin missions
        */

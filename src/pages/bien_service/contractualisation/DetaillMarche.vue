@@ -22,7 +22,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
+                            <tr v-if="detail_marche">
                                 <td class="taskDesc">{{detail_marche.objet}}</td>
                                 <td class="taskStatus">{{detail_marche.reference_marche}}</td>
                                 <td class="taskOptions">
@@ -127,7 +127,7 @@
                                                 <div class="controls">
                                                     <input type="text" class="span5" placeholder="Libelle lot" v-model="formBailleur.montant">
                                                 </div>
-                                                <div class="controls">
+                                                <div class="controls" v-if="detail_marche">
                                                     <code>Reste bailleur : {{parseFloat(detail_marche.montant_marche)-montantBailleurMarcheCompare(marcheid)}}</code>
                                                     <code v-if="montantBailleurMarcheCompare(marcheid)>=parseFloat(detail_marche.montant_marche)">
                                                         Le montant total des bailleurs ne toi etre supperier au montant du marche
@@ -135,7 +135,7 @@
                                                 </div>
                                             </div>
                                         </form>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer" v-if="detail_marche">
                                             <button @click.prevent="ajouterBailleur" class="btn btn-primary" v-if="montantBailleurMarcheCompare(marcheid)<=parseFloat(detail_marche.montant_marche)">Valider</button>
                                             <button data-dismiss="modal" class="btn" href="#">Fermer</button>
                                         </div>
@@ -301,10 +301,11 @@
               <li class=""><a data-toggle="tab" href="#tab31">Mandate</a></li>
               <li class=""><a data-toggle="tab" href="#tab22">Ouverture</a></li>
               <li class=""><a data-toggle="tab" href="#tab32">Analyse</a></li>
+              <li class=""><a data-toggle="tab" href="#tab36">PV</a></li>
                <li class=""><a data-toggle="tab" href="#tab33">Demande ANO</a></li>
                 <li class=""><a data-toggle="tab" href="#tab34">Avis DMP</a></li>
                  <li class=""><a data-toggle="tab" href="#tab35">Avis Bailleur</a></li>
-                 <!-- <li class=""><a data-toggle="tab" href="#tab36">Observation Bailleur</a></li> -->
+                 
                  <li class=""><a data-toggle="tab" href="#tab37" title="Acte effet financier">Actes</a></li>
 
             
@@ -1407,7 +1408,7 @@
                         <!-- <th>Reference offre</th> -->
                         
                         <th>Date </th>
-                        <th>Reference dmp </th>
+                        <th>Reference offre </th>
                         <th>Avis</th>
                         <th>Numero courrier dmp</th>
                         <th>Observation</th>
@@ -1422,11 +1423,11 @@
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             {{formaterDate(anoBailleur.date_ano_dmp) || 'Non renseigné'}}</td>
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
-                            {{anoBailleur.numero_courie || 'Non renseigné'}}</td>
+                            {{anoBailleur.appel_offre.ref_appel || 'Non renseigné'}}</td>
 
 
                          <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
-                            <button class="btn btn-success btn-mini" v-if="anoBailleur.avis_bail==1">Non objection</button>
+                            <button class="btn btn-success btn-mini" v-if="anoBailleur.avis_bail== 1">Non objection</button>
                             <button class="btn btn-danger btn-mini" v-else>Objection</button>
                         </td>
 
@@ -1457,51 +1458,59 @@
                 <div align="right">
                     <div class="widget-content">
 
-                        <a href="#ajouterObservationBailleur" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+                        <a href="#ajouterObservationBailleur" data-toggle="modal" class="btn btn-success">Ajouter</a>
 
                     </div>
 
                 </div>
-                <h4> Liste obseravtion bailleur</h4>
+
+
+                <h4> liste de PV</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
 
-                        <th>Document procedure</th>
-                        <!-- <th>ANO DMP bailleur</th> -->
-                        <th>Numero dossier candidat</th>
-                        <th>Date</th>
+                        <!-- <th>ANO DMP bailleur</th>  -->
+                        <th>Reference Offre</th>
+                        <th>Reference PV</th>
+                        <th>Fichier</th>
                         <th>Avis</th>
-                        <th>Observation </th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for="(observationBailleur,index) in listeObservationBailleurANODMP(marcheid)"
-                        :key="observationBailleur.id">
-
-                         <td @click="afficherModalObservationBailleur(index)">
-                            {{observationBailleur.document_procedure.libelle_doc || 'Non renseigné'}}</td>
-
-                             <!-- <td @click="afficherModalObservationBailleur(observationBailleur.id)">
-                            {{observationBailleur.ano_dmp_bailleur_id || 'Non renseigné'}}</td> -->
-                           <td @click="afficherModalObservationBailleur(index)">
-                          <!--  {{observationBailleur.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}--></td>
-                        <td @click="afficherModalObservationBailleur(index)">
-                            {{formaterDate(observationBailleur.date_avis_baill) || 'Non renseigné'}}</td>
-                        <td @click="afficherModalObservationBailleur(index)">
-                            <button class="btn btn-success btn-mini" v-if="observationBailleur.avis_bail==1">Non objection</button>
-                            <button class="btn btn-danger btn-mini" v-else>Objection</button>
+                    <tr class="odd gradeX" v-for="pv in listePV(marcheid)"
+                        :key="pv.id">
+                        <!-- <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
+                            {{anoBailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td> -->
+                        <td @click="afficheAnoDPMBailleurModale(pv.id)">
+                            {{pv.appel_offre.ref_appel || 'Non renseigné'}}</td>
+                        <td @click="afficheAnoDPMBailleurModale(pv.id)">
+                            {{pv.reference || 'Non renseigné'}}</td>
+                        <td @click="afficheAnoDPMBailleurModale(pv.id)">
+                            <a v-if="pv.fichier" :href="pv.fichier" class="btn btn-default" target="_blank">
+                                <span class=""><i class="icon-book"></i>
+                                </span>
+                            </a>
                         </td>
-                        <td @click="afficherModalObservationBailleur(index)">
-                            {{observationBailleur.observations_bailleur || 'Non renseigné'}}</td>
-                       
-                        <div class="btn-group">
-                            <button @click.prevent="supprimerObseravtionBailleur(observationBailleur.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span>
-                            </button>
-                        </div>
 
+
+                        <td @click="afficheAnoDPMBailleurModale(pv.id)">
+                            <button class="btn btn-info btn-mini" v-if="pv.avie==null">En attende</button>
+                            <button class="btn btn-success btn-mini" v-else-if="pv.avie== 1">Non Objection</button>
+                            <button class="btn btn-danger btn-mini" v-else>Non Objection</button>
+                        </td>
+
+
+                        <td>
+                        <div class="btn-group">
+
+                            <a href="#infoPV" @click.prevent="infoPVAffiche(pv.reference)" data-toggle="modal" class="btn"><span class=""><i class="icon-folder-open" ></i></span></a>
+                            <button @click.prevent="supprimerAnoDMPBailleur(pv.id)"  class="btn btn-danger " title="Supprimer">
+                                <span class=""><i class="icon-trash"></i></span></button>
+
+                        </div>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -1518,64 +1527,25 @@
  <div id="ajouterObservationBailleur" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter obseravtion bailleur</h3>
+                <h3>Ajouter le PV</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
 
-
-                             <div class="control-group">
-                        <label class="control-label">Document Procedure</label>
+                    <!--  <div class="control-group">
+                        <label class="control-label">Reference PV</label>
                         <div class="controls">
-                          <select v-model="formObservation.document_procedure_id" class="span">
-                                <option v-for="varText in documentProcedures" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle_doc}}</option>
-                            </select>
-                        
+                            <input type="text" v-model="formPv.ref_pv" class="span">
                         </div>
-                    </div>
+                    </div>-->
 
                      <div class="control-group">
-                        <label class="control-label">ANO DMP bailleur </label>
-                        <div class="controls">
-                           <select v-model="formObservation.ano_dmp_bailleur_id" class="span">
-                                <option v-for="varText in listeAnoDMPBailleur(marcheid)" :key="varText.id"
-                                        :value="varText.id">{{varText.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Date </label>
-                        <div class="controls">
-                            <input
-                                    type="date"
-                                    v-model="formObservation.date_avis_baill"
-                                    class="span"
-                                    placeholder="Saisir le libelle_type"
-                            />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Avis</label>
-                        <div class="controls">
-                            <select v-model="formObservation.avis_bail" class="span">
-                                <option value="1">Non objection</option>
-                                <option value="2">Objection</option>
-                            </select>
-                                
-                            
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Observation</label>
-                        <div class="controls">
-                            <textarea  v-model="formObservation.observations_bailleur"
-                                    class="span"
-                                    placeholder="Saisir l'observation"
-                            ></textarea>
-                        </div>
-                    </div>
+              <label class="control-label">Fichier joint:</label>
+              <div class="controls">
+                <input type="file"   @change="OnchangeFichier" />
+              </div>
+            </div>
+                   
 
                     
 
@@ -1583,7 +1553,7 @@
             </div>
             <div class="modal-footer">
                 <a
-                        @click.prevent="ajoutObservationBailleurLocal"
+                        @click.prevent="ajouterPV"
                         class="btn btn-primary"
                         href="#"
 
@@ -1591,6 +1561,56 @@
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a>
             </div>
         </div>
+
+              <div id="infoPV" class="modal hide grdirModalActeEffet">
+                  <div class="modal-header">
+                      <button data-dismiss="modal" class="close" type="button">×</button>
+                      <h3>PROCES-VERBAL DE JUGEMENT DES OFFRES</h3>
+                  </div>
+                  <div class="modal-body" v-if="resultaAnalysePv">
+                      <h4 class="text-center">ATTRIBUTION DU MARCHE</h4>
+                      <div>
+                          Suivant les résultats de l’évaluation des offres présentés par le rapporteur dans le
+                          tableau ci-dessus, il apparaît que le soumissionnaire <b v-if="resultaAnalysePv.length>0">{{resultaAnalysePv[0].dossier_candidature.nom_cand }}</b> propose
+                          l’offre conforme la moins-disante.
+                      </div>
+                      <h4 class="text-center">TABLEAU RECAPITULATIF DE LA COMPARAISON DES OFFRES</h4>
+                      <table class="table table-bordered table-striped">
+                          <thead>
+                          <tr>
+                              <th>Nom des Soumissionnaires </th>
+                              <th>Note</th>
+                              <th>Classement</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr class="odd gradeX" v-for="(item, index) in resultaAnalysePv"
+                              :key="item.id">
+                              <!-- <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
+                                  {{anoBailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td> -->
+                              <td >
+                                  {{item.dossier_candidature.nom_cand || 'Non renseigné'}}</td>
+                              <td >
+                                  {{item.note_analyse || 'Non renseigné'}}</td>
+                              <td >
+                                  <p v-if="index==0">
+                                      {{index + 1}} er
+                                  </p>
+                                  <p v-else>
+                                      {{index + 1}} eme
+                                  </p>
+
+                              </td>
+
+                          </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                  <div class="modal-footer">
+
+                      <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+                  </div>
+              </div>
 <!-- fin obseravtion bailleur -->
 
 
@@ -1619,7 +1639,7 @@
                         <div class="controls">
                            <select v-model="editObservation1.ano_dmp_bailleur_id" class="span">
                                 <option v-for="varText in listeAnoDMPBailleur(marcheid)" :key="varText.id"
-                                        :value="varText.id">{{varText.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
+                                        :value="varText.id"><!--{{varText.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}--></option>
                             </select>
                         </div>
                     </div>
@@ -1678,7 +1698,7 @@
             <div id="tab37" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" v-show="selectionAttributionMarche(marcheid).entrepriseInfo!=''">Ajouter</a>
+                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning">Ajouter</a>
                     </div>
 
 
@@ -1805,25 +1825,53 @@
                            
                        
                            </tr>
-                        <tr>
-                   
-                            <td>
+                           <tr>
+                                   <td>
                     <div class="control-group">
-                        <label class="control-label">Numero du marche</label>
+                        <label class="control-label">Autorité approbatrice</label>
                         <div class="controls">
                             <input
                                     type="text"
-                                    v-model="formEffetFinancier.numero_marche"
+                                    
                                     class="span"
-                                    placeholder="Saisir le libelle acte "
+                                    placeholder=" "
                             />
                         </div>
                     </div>
 
                             </td>
-                        
-                   
-                            <td>
+
+
+                                           <td>
+                    <div class="control-group">
+                        <label class="control-label"> date d'approbation</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    
+                                    class="span"
+                                    placeholder=" "
+                            />
+                        </div>
+                    </div>
+
+                            </td>
+
+                                  <td>
+                    <div class="control-group">
+                        <label class="control-label">Numero du marche/contract</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formEffetFinancier.numero_marche"
+                                    class="span"
+                                    placeholder="Saisir le numero "
+                            />
+                        </div>
+                    </div>
+
+                            </td>
+                             <td>
 
                     <div class="control-group">
                         <label class="control-label">Code acte </label>
@@ -1837,19 +1885,23 @@
                         </div>
                     </div>
                             </td>
-                            <td colspan="2">
-                    <div class="control-group">
-                        <label class="control-label">Libelle acte</label>
-                        <div class="controls">
-                            <input
-                                    type="text"
-                                    v-model="formEffetFinancier.libelle_act"
-                                    class="span"
-                                    placeholder="Saisir le libelle acte "
-                            />
-                        </div>
-                    </div>
+
+                           </tr>
+                        <tr>
+                   
+                      
+                          <td colspan="3" width="250">
+                     <div class="control-group">
+          <label class="control-label">Libellé acte:</label>
+            <div class="controls">
+              <textarea   v-model="formEffetFinancier.libelle_act"   class="textarea_editor span12" rows="3" placeholder="Entrer le libellé ..."></textarea>
+            </div>
+          
+        </div>
                             </td>
+                   
+                           
+                          
                         </tr>
                         <tr>
                             <td>
@@ -1865,12 +1917,15 @@
                             </td>
                             <td>
                      <div class="control-group">
-                        <label class="control-label">Incidence financiere</label>
+                        <label class="control-label">Incidence financière</label>
                         <div class="controls">
-                            <input type="text" v-model="formEffetFinancier.incidence_financiere"
-                                    class="span"
-                                    placeholder="incidence"
-                            />
+                            <select  v-model="formEffetFinancier.incidence_financiere" class="span">
+                               <option value="0">Oui</option>
+                               <option value="1">Non</option>
+                            </select>
+                                    
+                                  
+                            
                         </div>
                     </div>
                             </td>
@@ -1886,20 +1941,76 @@
                         </div>
                     </div>
                             </td>
-                            <!-- <td>
-                     <div class="control-group">
-                        <label class="control-label">Type document acte</label>
+                            <td>
+
+                            <div class="control-group">
+                        <label class="control-label" >Date de signature attributaire</label>
                         <div class="controls">
-                            <input type="text" v-model="formEffetFinancier.type_doc_modifie"
+                            <input type="date" v-model="formEffetFinancier.date_attributaire"
                                     class="span"
-                                    placeholder="refence acte"
+                                    placeholder=""
                             />
                         </div>
                     </div>
-                            </td> -->
+                            </td>
+                        </tr>
+                        <tr>
+
+                    
+                     <td>
+                     <div class="control-group">
+                        <label class="control-label">Date ordre de service demarrage</label>
+                        <div class="controls">
+                            <input type="date" v-model="formEffetFinancier.date_odre_service"
+                                    class="span"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+
+                                         <td>
+                     <div class="control-group">
+                        <label class="control-label" title=" ">Date fin exécution</label>
+                        <div class="controls">
+                            <input type="date" :min="formEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValue" v-model="formEffetFinancier.date_fin_exe"
+                                    class="span"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+                            </td>
+                        
+                        
+
+                                           <td>
+                     <div class="control-group">
+                        <label class="control-label" title=" ">Durée d'exécution(jrs)</label>
+                        <div class="controls">
+                            <input type="text"  readonly :value="nombreDejourCalcule"
+                                    class="span"
+                                   
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+
+                                             <td>
+                     <div class="control-group">
+                        <label class="control-label" title=" ">Date de reception definitive</label>
+                        <div class="controls">
+                            <input type="date" v-model="formEffetFinancier.date_reception"
+                                    class="span"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+                            </td>
                         </tr>
 
-                    </table>
+                    </table>  
 
                    
 
@@ -2074,9 +2185,9 @@
                         </div>
                     </div>
                             </td>
-                            <!-- <td>
+                            <td>
                      <div class="control-group">
-                        <label class="control-label">Type document acte</label>
+                        <label class="control-label">Type</label>
                         <div class="controls">
                             <input type="text" v-model="editActeEffetFinancier.type_doc_modifie"
                                     class="span"
@@ -2084,7 +2195,7 @@
                             />
                         </div>
                     </div>
-                            </td> -->
+                            </td>
                         </tr>
 
                     </table>
@@ -3311,7 +3422,7 @@
                    <div class="control-group">
                    <label class="control-label">Fichier joint:</label>
                     <div class="controls">
-                     <input type="file" id="file"  @change="onFichierChange" />
+                     <input type="file" id="file"  @change="OnchangeFichier" />
               </div>
             </div>
                 </form>
@@ -3742,9 +3853,9 @@
                                         :value="plans.id">{{plans.ref_appel}}</option>
                             </select>
                         </div>
-                    </div>
+                        </div>
                             </td>
-                                    <td>
+                            <td>
                      <div class="control-group">
                         <label class="control-label">Dossier candidat</label>
                         <div class="controls">
@@ -3756,12 +3867,11 @@
                     </div>
                             </td>
 
-                            <td>
 
-
+                     <td>
                        
                     <div class="control-group">
-                        <label class="control-label">Ouverture</label>
+                        <label class="control-label">Cojo</label>
                         <div class="controls">
                             <select v-model="formAnalyseDossier.cojo_id" class="span">
                                 <option v-for="plans in listeCojo(marcheid)" :key="plans.id"
@@ -4677,6 +4787,7 @@
             <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
         </div>
     </div>
+
         <!---->
         <!--Fin contratualisation-->
  
@@ -4851,6 +4962,11 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
              objet_act:"",
              incidence_financiere:"",
              montant_act:"",
+             date_attributaire:"",
+             date_reception:"",
+             duree:"",
+             date_fin_exe:"",
+             date_odre_service:"",
              //type_doc_modifie:"",
              livrable_id:"",
              text_juridique_id:"",
@@ -4976,6 +5092,10 @@ ref_marche:"",
 num_courrier:""
 
 },
+formPv:{
+    ref_pv:"",
+    fichier_joint_pv:"",
+},
           editDossier:{
               type_candidat:"",
                       nom_cand:"",
@@ -5030,7 +5150,12 @@ num_courrier:""
                     //mode_passation_id:""
                 },
                 message_mandater:'',
-                isOffreTechniqueFinancier:false
+                isOffreTechniqueFinancier:false,
+                namePDF: "",
+                fichierPDF: "",
+                imagePDF:"",
+                selectedFile:"",
+                resultaAnalysePv:[]
             };
         },
 created() {
@@ -5049,7 +5174,7 @@ created() {
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "factures", "typeFactures",
-                "getPersonnaliserFacture", "personnaliseGetterMarcheBailleur","getterMembreCojo"]),
+                "getPersonnaliserFacture", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
             ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -5060,6 +5185,37 @@ created() {
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
             
             
+
+
+// calculons le nombre de jours pour acteur depense
+
+nombreDejourCalcule(){
+    const acteAffet = this.formEffetFinancier
+    if(acteAffet.date_odre_service == acteAffet.date_fin_exe &&  acteAffet.date_fin_exe !=="" && acteAffet.date_odre_service !=="") return 1
+     if(acteAffet.date_fin_exe =="" && acteAffet.date_odre_service =="") return null
+
+       var dateF = new Date(acteAffet.date_fin_exe).getTime()
+        var dateO = new Date(acteAffet.date_odre_service).getTime()
+           var resultat = dateF - dateO
+
+             var diffJour =  resultat / (1000 * 3600 * 24)
+
+               if(isNaN(diffJour)) return null
+
+               if(parseFloat(diffJour) < 0 ) return "durée invalide"
+                  
+                  return  diffJour;
+   
+},
+
+getDateFinExécutionValue(){
+    return !this.formEffetFinancier.date_odre_service !=""
+},
+
+
+
+
+
             verrouObjection(){
 
 return this.formAnalyseDMP.avis_bail == "1";
@@ -5281,7 +5437,13 @@ afficherMotifAnalyse(){
 
                 
             },
-
+             listePV(){
+               return marche_id=>{
+                   if(marche_id!=""){
+                       return this.getterProceVerballe.filter(item=>item.appel_offre.marche_id==marche_id);
+                   }
+               }
+             },
             listeActeEffetFinancier(){
                 return marche_id =>{
                     if(marche_id !=""){
@@ -5415,8 +5577,12 @@ afficherMotifAnalyse(){
                 return marcheid => {
                     if (marcheid != "") {
                         //console.log("Marche attribution marche")
-                        let marcherEnAction=this.getterObseravtionBailleurs.filter(idmarche => idmarche.id == marcheid)
-                        let marcherFavaroble=marcherEnAction.filter(idmarche=>idmarche.avis_bail==1).length
+
+                        let marcherEnAction=this.getterObseravtionBailleurs.filter(idmarche => idmarche.id== marcheid)
+                       let marcherFavaroble=marcherEnAction.filter(idmarche=>idmarche.avis_bail==1).length
+
+                     
+
 
                         //Recherche le candidat qui a le plus gros score parmie les admin
                          if(marcherFavaroble>1){
@@ -5511,7 +5677,7 @@ afficherMotifAnalyse(){
                 , "modifierObservationBaileur","ajouterObseravtionBailleur","supprimerObseravtionBailleur",
                  "ajouterFournisseur", "ajouterActeEffetFinancier",
                 "modifierActeEffetFinancier","supprimerActeEffetFinancier","modifierMarche","modificationMarcheBailleur",
-                "ajouterMarcherBailleur","supprimerMarcheBailleur","ajouterMembreCojo","modificationMembreCojo","supprimerMembreCojo"
+                "ajouterMarcherBailleur","supprimerMarcheBailleur","ajouterMembreCojo","modificationMembreCojo","supprimerMembreCojo","getProceVerbal","ajouterProceVerbal"
 
             ]),
             ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
@@ -5540,7 +5706,19 @@ ajouterStockLocal(){
     }
 
 },
+            infoPVAffiche(ref){
+                this.resultaAnalysePv=[]
+                let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==ref);
+                this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
 
+                if (this.resultaAnalysePv.length>0){
+                    this.resultaAnalysePv.sort(function (a, b) {
+                        return a.note_analyse - b.note_analyse;
+                    }).reverse()
+                }
+
+                console.log(this.resultaAnalysePv)
+            },
 
     onFichierChange(e){
       this.formLettre.fichier_joint = e.target.files[0]
@@ -5857,10 +6035,14 @@ dossier_candidat_id : this.edite_offre_financiere.id
 
             // vider l'input de acte  effet financier
 ajouterModalActeEffetFinancierLocal(entreprise_id){
+        var nouvelObjet = {
+            ...this.formEffetFinancier,
+            duree: this.nombreDejourCalcule
+        }
               //  console.log(this.formEffetFinancier)
     this.formEffetFinancier.marche_id=this.marcheid
     this.formEffetFinancier.entreprise_id=entreprise_id
-    this.ajouterActeEffetFinancier(this.formEffetFinancier)
+    this.ajouterActeEffetFinancier(nouvelObjet)
     let marcheObjet=this.marches.find(marche=>marche.id==this.marcheid)
     marcheObjet.attribue=1
     marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
@@ -5873,6 +6055,11 @@ ajouterModalActeEffetFinancierLocal(entreprise_id){
              objet_act:"",
              incidence_financiere:"",
              montant_act:"",
+              date_attributaire:"",
+             date_reception:"",
+             duree:"",
+             date_fin_exe:"",
+             date_odre_service:"",
             // type_doc_modifie:"",
              livrable_id:"",
              text_juridique_id:"",
@@ -5968,7 +6155,11 @@ modifierModalActeEffetFinancierLocal(entreprise_id){
                     avis_bail:"",
                     date_avis_bail:""
             }
-        },ajouterAnoDMPBailleurLocal(){
+        },ajouterAnoDMPBailleurLocal(){  
+            // var nouvelObjet = {
+            //     ...this.formAno,
+            //      ref_ano_dmp: this.recuperationDeAvisDmp
+            // }
             
                this.ajouterAnoDMPBailleur(this.formAno)
                 this.formAno={
@@ -6208,6 +6399,36 @@ ajouterNouveauFournisseurLocal(registeCommerce){
             ExporterEnExel(){
                 this.$refs.excel.click()
             }
+,
+            OnchangeFichier(e) {
+                const files = e.target.files;
+                this.selectedFile = event.target.files[0];
+                console.log(this.selectedFile)
+                Array.from(files).forEach(file => this.addFichierPDF(file));
+            },
+            addFichierPDF(file) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = e => {
+                    vm.imagePDF = "pdf.png";
+                    vm.namePDF = file.name;
+                    vm.fichierPDF = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
+            ajouterPV(){
+                const formData = new FormData();
+                formData.append('fichier', this.selectedFile, this.selectedFile.name);
+                formData.append('appel_offre_id', this.formLot.appel_offre_id);
+                let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }
+                console.log(formData)
+                this.ajouterProceVerbal(formData,config);
+
+            }
         }
     };
 </script>
@@ -6227,7 +6448,7 @@ ajouterNouveauFournisseurLocal(registeCommerce){
 
  width: 1000px;
  margin: 0 -530px;
- height: 500px;
+ height: 550px;
 
     }
     .grdirModalAnalyse{
