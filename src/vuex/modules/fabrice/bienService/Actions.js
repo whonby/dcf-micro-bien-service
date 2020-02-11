@@ -3639,6 +3639,7 @@ export function ajouterProceVerbal({commit}, objetAjoute,config){
         if(response.status == 201){
             console.log(response.data)
             commit('AJOUTER_PV', response.data.jugement)
+            commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
             this.$app.$notify({
                 title: 'success ',
                 text: 'Enregistrement effectué !',

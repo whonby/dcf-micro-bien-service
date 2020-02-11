@@ -1878,6 +1878,7 @@ export const GET_PV= (state, tableau_autre_text_juridique) =>{
 
 export const AJOUTER_PV = (state, elementAjouter) => {
     state.proce_verballe.unshift(elementAjouter)
+    state.analyseDossiers=[]
 }
 
 

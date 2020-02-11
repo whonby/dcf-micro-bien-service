@@ -1469,15 +1469,49 @@
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
-                        <th></th>
-                        <!-- <th>ANO DMP bailleur</th> -->
+
+                        <!-- <th>ANO DMP bailleur</th>  -->
+                        <th>Reference Offre</th>
                         <th>Reference PV</th>
-                        <th>Date</th>
+                        <th>Fichier</th>
+                        <th>Avis</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                   
+                    <tr class="odd gradeX" v-for="pv in listePV(marcheid)"
+                        :key="pv.id">
+                        <!-- <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
+                            {{anoBailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td> -->
+                        <td @click="afficheAnoDPMBailleurModale(pv.id)">
+                            {{pv.appel_offre.ref_appel || 'Non renseigné'}}</td>
+                        <td @click="afficheAnoDPMBailleurModale(pv.id)">
+                            {{pv.reference || 'Non renseigné'}}</td>
+                        <td @click="afficheAnoDPMBailleurModale(pv.id)">
+                            <a v-if="pv.fichier" :href="pv.fichier" class="btn btn-default" target="_blank">
+                                <span class=""><i class="icon-book"></i>
+                                </span>
+                            </a>
+                        </td>
+
+
+                        <td @click="afficheAnoDPMBailleurModale(pv.id)">
+                            <button class="btn btn-info btn-mini" v-if="pv.avie==null">En attende</button>
+                            <button class="btn btn-success btn-mini" v-else-if="pv.avie== 1">Non Objection</button>
+                            <button class="btn btn-danger btn-mini" v-else>Non Objection</button>
+                        </td>
+
+
+                        <td>
+                        <div class="btn-group">
+
+                            <a href="#infoPV" @click.prevent="infoPVAffiche(pv.reference)" data-toggle="modal" class="btn"><span class=""><i class="icon-folder-open" ></i></span></a>
+                            <button @click.prevent="supprimerAnoDMPBailleur(pv.id)"  class="btn btn-danger " title="Supprimer">
+                                <span class=""><i class="icon-trash"></i></span></button>
+
+                        </div>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
 
@@ -1527,6 +1561,56 @@
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a>
             </div>
         </div>
+
+              <div id="infoPV" class="modal hide grdirModalActeEffet">
+                  <div class="modal-header">
+                      <button data-dismiss="modal" class="close" type="button">×</button>
+                      <h3>PROCES-VERBAL DE JUGEMENT DES OFFRES</h3>
+                  </div>
+                  <div class="modal-body" v-if="resultaAnalysePv">
+                      <h4 class="text-center">ATTRIBUTION DU MARCHE</h4>
+                      <div>
+                          Suivant les résultats de l’évaluation des offres présentés par le rapporteur dans le
+                          tableau ci-dessus, il apparaît que le soumissionnaire <b v-if="resultaAnalysePv.length>0">{{resultaAnalysePv[0].dossier_candidature.nom_cand }}</b> propose
+                          l’offre conforme la moins-disante.
+                      </div>
+                      <h4 class="text-center">TABLEAU RECAPITULATIF DE LA COMPARAISON DES OFFRES</h4>
+                      <table class="table table-bordered table-striped">
+                          <thead>
+                          <tr>
+                              <th>Nom des Soumissionnaires </th>
+                              <th>Note</th>
+                              <th>Classement</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr class="odd gradeX" v-for="(item, index) in resultaAnalysePv"
+                              :key="item.id">
+                              <!-- <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
+                                  {{anoBailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td> -->
+                              <td >
+                                  {{item.dossier_candidature.nom_cand || 'Non renseigné'}}</td>
+                              <td >
+                                  {{item.note_analyse || 'Non renseigné'}}</td>
+                              <td >
+                                  <p v-if="index==0">
+                                      {{index + 1}} er
+                                  </p>
+                                  <p v-else>
+                                      {{index + 1}} eme
+                                  </p>
+
+                              </td>
+
+                          </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                  <div class="modal-footer">
+
+                      <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+                  </div>
+              </div>
 <!-- fin obseravtion bailleur -->
 
 
@@ -3769,9 +3853,9 @@
                                         :value="plans.id">{{plans.ref_appel}}</option>
                             </select>
                         </div>
-                    </div>
+                        </div>
                             </td>
-                                    <!-- <td>
+                            <td>
                      <div class="control-group">
                         <label class="control-label">Dossier candidat</label>
                         <div class="controls">
@@ -3781,11 +3865,10 @@
                             </select>
                         </div>
                     </div>
-                            </td> -->
-
-                            <td>
+                            </td>
 
 
+                     <td>
                        
                     <div class="control-group">
                         <label class="control-label">Cojo</label>
@@ -5071,7 +5154,8 @@ formPv:{
                 namePDF: "",
                 fichierPDF: "",
                 imagePDF:"",
-                selectedFile:""
+                selectedFile:"",
+                resultaAnalysePv:[]
             };
         },
 created() {
@@ -5353,7 +5437,13 @@ afficherMotifAnalyse(){
 
                 
             },
-
+             listePV(){
+               return marche_id=>{
+                   if(marche_id!=""){
+                       return this.getterProceVerballe.filter(item=>item.appel_offre.marche_id==marche_id);
+                   }
+               }
+             },
             listeActeEffetFinancier(){
                 return marche_id =>{
                     if(marche_id !=""){
@@ -5616,7 +5706,19 @@ ajouterStockLocal(){
     }
 
 },
+            infoPVAffiche(ref){
+                this.resultaAnalysePv=[]
+                let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==ref);
+                this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
 
+                if (this.resultaAnalysePv.length>0){
+                    this.resultaAnalysePv.sort(function (a, b) {
+                        return a.note_analyse - b.note_analyse;
+                    }).reverse()
+                }
+
+                console.log(this.resultaAnalysePv)
+            },
 
     onFichierChange(e){
       this.formLettre.fichier_joint = e.target.files[0]
