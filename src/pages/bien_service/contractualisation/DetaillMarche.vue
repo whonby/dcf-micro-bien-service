@@ -22,7 +22,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
+                            <tr v-if="detail_marche">
                                 <td class="taskDesc">{{detail_marche.objet}}</td>
                                 <td class="taskStatus">{{detail_marche.reference_marche}}</td>
                                 <td class="taskOptions">
@@ -127,7 +127,7 @@
                                                 <div class="controls">
                                                     <input type="text" class="span5" placeholder="Libelle lot" v-model="formBailleur.montant">
                                                 </div>
-                                                <div class="controls">
+                                                <div class="controls" v-if="detail_marche">
                                                     <code>Reste bailleur : {{parseFloat(detail_marche.montant_marche)-montantBailleurMarcheCompare(marcheid)}}</code>
                                                     <code v-if="montantBailleurMarcheCompare(marcheid)>=parseFloat(detail_marche.montant_marche)">
                                                         Le montant total des bailleurs ne toi etre supperier au montant du marche
@@ -135,7 +135,7 @@
                                                 </div>
                                             </div>
                                         </form>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer" v-if="detail_marche">
                                             <button @click.prevent="ajouterBailleur" class="btn btn-primary" v-if="montantBailleurMarcheCompare(marcheid)<=parseFloat(detail_marche.montant_marche)">Valider</button>
                                             <button data-dismiss="modal" class="btn" href="#">Fermer</button>
                                         </div>
@@ -1463,26 +1463,16 @@
                     </div>
 
                 </div>
-                 <div align="left">
-                    <div class="widget-content">
-
-                        <a href="#Genere" data-toggle="modal" class="btn btn-warning">Genéré la liste du PV</a>
-
-                    </div>
-
-                </div>
 
 
                 <h4> liste de PV</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
-
                         <th></th>
                         <!-- <th>ANO DMP bailleur</th> -->
                         <th>Reference PV</th>
                         <th>Date</th>
-                       
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -1508,19 +1498,17 @@
             <div class="modal-body">
                 <form class="form-horizontal">
 
-                 <div class="control-group">
+                    <!--  <div class="control-group">
                         <label class="control-label">Reference PV</label>
                         <div class="controls">
                             <input type="text" v-model="formPv.ref_pv" class="span">
-
-                           
                         </div>
-                    </div>
+                    </div>-->
 
                      <div class="control-group">
               <label class="control-label">Fichier joint:</label>
               <div class="controls">
-                <input type="file" id="file"  @change="onFichierChange" />
+                <input type="file"   @change="OnchangeFichier" />
               </div>
             </div>
                    
@@ -1531,7 +1519,7 @@
             </div>
             <div class="modal-footer">
                 <a
-                        @click.prevent="ajoutObservationBailleurLocal"
+                        @click.prevent="ajouterPV"
                         class="btn btn-primary"
                         href="#"
 
@@ -1567,7 +1555,7 @@
                         <div class="controls">
                            <select v-model="editObservation1.ano_dmp_bailleur_id" class="span">
                                 <option v-for="varText in listeAnoDMPBailleur(marcheid)" :key="varText.id"
-                                        :value="varText.id">{{varText.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
+                                        :value="varText.id"><!--{{varText.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}--></option>
                             </select>
                         </div>
                     </div>
@@ -3350,7 +3338,7 @@
                    <div class="control-group">
                    <label class="control-label">Fichier joint:</label>
                     <div class="controls">
-                     <input type="file" id="file"  @change="onFichierChange" />
+                     <input type="file" id="file"  @change="OnchangeFichier" />
               </div>
             </div>
                 </form>
@@ -5079,7 +5067,11 @@ formPv:{
                     //mode_passation_id:""
                 },
                 message_mandater:'',
-                isOffreTechniqueFinancier:false
+                isOffreTechniqueFinancier:false,
+                namePDF: "",
+                fichierPDF: "",
+                imagePDF:"",
+                selectedFile:""
             };
         },
 created() {
@@ -5098,7 +5090,7 @@ created() {
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "factures", "typeFactures",
-                "getPersonnaliserFacture", "personnaliseGetterMarcheBailleur","getterMembreCojo"]),
+                "getPersonnaliserFacture", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
             ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -5496,7 +5488,7 @@ afficherMotifAnalyse(){
                     if (marcheid != "") {
                         //console.log("Marche attribution marche")
 
-                        let marcherEnAction=this.getterObseravtionBailleurs.filter(idmarche => idmarche.ano_dmp_bailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
+                        let marcherEnAction=this.getterObseravtionBailleurs.filter(idmarche => idmarche.id== marcheid)
                        let marcherFavaroble=marcherEnAction.filter(idmarche=>idmarche.avis_bail==1).length
 
                      
@@ -5595,7 +5587,7 @@ afficherMotifAnalyse(){
                 , "modifierObservationBaileur","ajouterObseravtionBailleur","supprimerObseravtionBailleur",
                  "ajouterFournisseur", "ajouterActeEffetFinancier",
                 "modifierActeEffetFinancier","supprimerActeEffetFinancier","modifierMarche","modificationMarcheBailleur",
-                "ajouterMarcherBailleur","supprimerMarcheBailleur","ajouterMembreCojo","modificationMembreCojo","supprimerMembreCojo"
+                "ajouterMarcherBailleur","supprimerMarcheBailleur","ajouterMembreCojo","modificationMembreCojo","supprimerMembreCojo","getProceVerbal","ajouterProceVerbal"
 
             ]),
             ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
@@ -6304,6 +6296,36 @@ ajouterNouveauFournisseurLocal(registeCommerce){
 
             ExporterEnExel(){
                 this.$refs.excel.click()
+            }
+,
+            OnchangeFichier(e) {
+                const files = e.target.files;
+                this.selectedFile = event.target.files[0];
+                console.log(this.selectedFile)
+                Array.from(files).forEach(file => this.addFichierPDF(file));
+            },
+            addFichierPDF(file) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = e => {
+                    vm.imagePDF = "pdf.png";
+                    vm.namePDF = file.name;
+                    vm.fichierPDF = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
+            ajouterPV(){
+                const formData = new FormData();
+                formData.append('fichier', this.selectedFile, this.selectedFile.name);
+                formData.append('appel_offre_id', this.formLot.appel_offre_id);
+                let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }
+                console.log(formData)
+                this.ajouterProceVerbal(formData,config);
+
             }
         }
     };

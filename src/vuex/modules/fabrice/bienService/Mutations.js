@@ -1867,6 +1867,30 @@ export const MODIFIER_MEMBRE_COJO= (state, elementModif)=>{
 }
 
 export const SUPPRIMER_MEMBRE_COJO= (state, id)=> {
-    state.membre_cojo = state.membre_cojo.filter(autreText => autreText.id !=id)
+    state.proce_verballe = state.proce_verballe.filter(autreText => autreText.id !=id)
 }
 /**Fin mutation membre cojo**/
+
+
+export const GET_PV= (state, tableau_autre_text_juridique) =>{
+    state.proce_verballe = tableau_autre_text_juridique
+}
+
+export const AJOUTER_PV = (state, elementAjouter) => {
+    state.proce_verballe.unshift(elementAjouter)
+}
+
+
+
+export const MODIFIER_PV= (state, elementModif)=>{
+    state.proce_verballe = state.proce_verballe.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+export const SUPPRIMER_PV= (state, id)=> {
+    state.proce_verballe = state.proce_verballe.filter(autreText => autreText.id !=id)
+}

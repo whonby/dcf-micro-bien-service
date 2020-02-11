@@ -64,6 +64,8 @@ export const nombremarches = state => state.marches.length;
 
 export const getterMarcheBailleur= state => state.bailleurMarche;
 export const getterMembreCojo=state=>state.membre_cojo
+
+export const getterProceVerballe=state=>state.proce_verballe
 export const personnaliseGetterMarcheBailleur=(state, getters, rootState, rootGetters) =>
     state.bailleurMarche.map(element => {
         if (element.bailleur_id !== null && element.type_finnancement_id!==null ) {

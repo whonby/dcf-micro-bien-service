@@ -63,7 +63,8 @@ documentProcedures:[],
 
     bailleurMarche: [],
     choixprocedure: [],
-     membre_cojo:[]
+     membre_cojo:[],
+    proce_verballe:[]
 
 
 
