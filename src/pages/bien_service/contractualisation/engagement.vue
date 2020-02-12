@@ -3698,7 +3698,912 @@ Ajouter Facture Definitive
                <td>
               
               <div class="control-group">
-                <label class="control-label">exonere</label>
+                <label class="control-label">exonéré</label>
+                <div class="controls">
+                  <select v-model="formData1.exonere" class="span">
+                  
+                    <option value="0">Oui</option>
+                     <option value="1">Non</option>
+                  </select>
+                 <!-- <input
+                    type="hidden"
+                    
+                v-model="formData1.exonere"
+                    class="span"
+                    readonly
+                  /> -->
+                </div>
+              </div>
+            </td>           
+          </tr>
+          <tr  class="odd gradeX">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                  
+                 :value="montantHT1"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup2()" >
+                        <span>
+                          <i class=" icon-plus"></i>
+                        </span>
+                      </button>
+                       <!-- <button class="btn btn-danger"  v-on:click="showPopup20()" >
+                        <span>
+                          <i class=" icon-remove"></i>
+                        </span>
+                      </button> -->
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+        <!-- 2 ligne -->
+         <tr  class="odd gradeX" v-show="popupState2">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation2"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire2"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                   
+                       v-model="formData1.quantite2"
+                 
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT2"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup3()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState3">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation3"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire3"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite3"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT3"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup4()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState4">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation4"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire4"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite4"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT4"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup5()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState5">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation5"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire5"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite5"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT5"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup6()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState6">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation6"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire6"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite6"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT6"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup7()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState7">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation7"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire7"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite7"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT7"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup8()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState8">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation8"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire8"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite8"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT8"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup9()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState9">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation9"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire9"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite9"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT9"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup10()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState10">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation10"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire10"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite10"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                   :value="montantHT10"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup10()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Montant HT</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                :value="totalMontantHT"
+                    class="span"
+                   readonly
+                  />
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Taux</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="afficherEnorere"
+                    class="span"
+                   readonly
+                  />
+                  
+                   <input
+                    type="hidden"
+                    :value="afficherEnorere2"
+                   
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">TVA</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="montantTva"
+                    class="span"
+                   readonly
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+         
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="montantHTt"
+                    class="span"
+                   readonly
+                  />
+                
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ModifierFactureLocal(formData1)"
+          class="btn btn-primary"
+          href="#"
+           
+        >Modifier</a> 
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+
+
+
+
+
+     <div id="modatFactureAjouter" class="modal hide taillemodal45">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter Facture</h3>
+      </div>
+      <div class="modal-body" >
+        <table class="table table-bordered table-striped ">
+         
+          <tr>
+              <td>
+              
+              <div class="control-group">
+                <label class="control-label">Type facture</label>
+                <div class="controls">
+                  <select v-model="formData1.typfacture_id" class="span3" >
+                    
+                     <option
+                        v-for="typeFact in typeFactures"
+                        :key="typeFact.id"
+                        :value="typeFact.id"
+                      >{{typeFact.libelle}}</option>
+                  </select>
+                </div>
+              </div>
+            </td>
+              <td>
+              <div class="control-group">
+                <label class="control-label">Numero facture</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                   v-model="formData1.numero_facture"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+               </td>
+               <td>
+              <div class="control-group">
+                <label class="control-label">Date de la facture</label>
+                <div class="controls">
+                  <input
+                    type="date"
+                    v-model="formData1.date_facture"
+                   
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+             
+            </td>
+             <td>
+              
+              <div class="control-group">
+                <label class="control-label">Unite administrative</label>
+                <div class="controls">
+                 <input
+                    type="text"
+                    :value="detail_marche.objetUniteAdministrative.libelle"
+                   readonly
+                    class="span"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             
+             
+            
+            
+
+          </tr>
+           <tr>
+               <td colspan="2"> 
+              <div class="control-group">
+                <label class="control-label">Objet facture</label>
+                <div class="controls">
+                 
+                  <textarea rows="1" :value="detail_marche.objet" class="span5">
+
+                  </textarea>
+                </div>
+              </div>
+               </td>
+               <td>
+              <div class="control-group">
+                <label class="control-label">Fournisseur</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                 :value="nomFournisseur"
+                    class="span3"
+                    readonly
+                  />
+                </div>
+              </div>
+            </td>
+               <td>
+              
+              <div class="control-group">
+                <label class="control-label">exonéré</label>
                 <div class="controls">
                   <select v-model="formData1.exonere" class="span">
                   
@@ -4410,14 +5315,14 @@ Ajouter Facture Definitive
                   <input
                     type="number"
                     
-              :value="affcherTauxEnCours"
+              :value="afficherEnorere"
                     class="span"
                    readonly
                   />
                   
                    <input
                     type="hidden"
-                    :value="tauxArrondit"
+                    :value="afficherEnorere2"
                    
                     class="span3"
                    
@@ -4459,912 +5364,7 @@ Ajouter Facture Definitive
           <tr  class="odd gradeX" >
             <td colspan="3">
               <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">Montant HTT</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-               
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-              :value="montantHTt"
-                    class="span"
-                   readonly
-                  />
-                
-                </div>
-              </div>
-            </td>
-            
-            
-                  
-          </tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="ModifierFactureLocal(formData1)"
-          class="btn btn-primary"
-          href="#"
-           
-        >Modifier</a> 
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
-
-
-
-
-
-     <div id="modatFactureAjouter" class="modal hide taillemodal45">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Facture</h3>
-      </div>
-      <div class="modal-body" >
-        <table class="table table-bordered table-striped ">
-         
-          <tr>
-              <td>
-              
-              <div class="control-group">
-                <label class="control-label">Type facture</label>
-                <div class="controls">
-                  <select v-model="formData1.typfacture_id" class="span3" >
-                    
-                     <option
-                        v-for="typeFact in typeFactures"
-                        :key="typeFact.id"
-                        :value="typeFact.id"
-                      >{{typeFact.libelle}}</option>
-                  </select>
-                </div>
-              </div>
-            </td>
-              <td>
-              <div class="control-group">
-                <label class="control-label">Numero facture</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="formData1.numero_facture"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-               </td>
-               <td>
-              <div class="control-group">
-                <label class="control-label">Date de la facture</label>
-                <div class="controls">
-                  <input
-                    type="date"
-                    v-model="formData1.date_facture"
-                   
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-             
-            </td>
-             <td>
-              
-              <div class="control-group">
-                <label class="control-label">Unite administrative</label>
-                <div class="controls">
-                 <input
-                    type="text"
-                    :value="detail_marche.objetUniteAdministrative.libelle"
-                   readonly
-                    class="span"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             
-             
-            
-            
-
-          </tr>
-           <tr>
-               <td colspan="2"> 
-              <div class="control-group">
-                <label class="control-label">Objet facture</label>
-                <div class="controls">
-                 
-                  <textarea rows="1" :value="detail_marche.objet" class="span5">
-
-                  </textarea>
-                </div>
-              </div>
-               </td>
-               <td>
-              <div class="control-group">
-                <label class="control-label">Fournisseur</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                 :value="nomFournisseur"
-                    class="span3"
-                    readonly
-                  />
-                </div>
-              </div>
-            </td>
-               <!-- <td>
-              
-              <div class="control-group">
-                <label class="control-label">exonere</label>
-                <div class="controls">
-                  <select v-model="formData1.exonere" class="span">
-                  
-                    <option value="0">Oui</option>
-                     <option value="1">Non</option>
-                  </select>
-                 <input
-                    type="hidden"
-                    
-                v-model="formData1.exonere"
-                    class="span"
-                    readonly
-                  />
-                </div>
-              </div>
-            </td>            -->
-          </tr>
-          <tr  class="odd gradeX">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.quantite"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                  
-                 :value="montantHT1"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup2()" >
-                        <span>
-                          <i class=" icon-plus"></i>
-                        </span>
-                      </button>
-                       <!-- <button class="btn btn-danger"  v-on:click="showPopup20()" >
-                        <span>
-                          <i class=" icon-remove"></i>
-                        </span>
-                      </button> -->
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-        <!-- 2 ligne -->
-         <tr  class="odd gradeX" v-show="popupState2">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation2"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire2"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                   
-                       v-model="formData1.quantite2"
-                 
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  :value="montantHT2"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup3()" >
-                        <span>
-                          <i class=" icon-plus-sign"></i>
-                        </span>
-                      </button>
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-           <!-- 3 ligne -->
-         <tr  class="odd gradeX" v-show="popupState3">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation3"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire3"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.quantite3"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  :value="montantHT3"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup4()" >
-                        <span>
-                          <i class=" icon-plus-sign"></i>
-                        </span>
-                      </button>
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-           <!-- 3 ligne -->
-         <tr  class="odd gradeX" v-show="popupState4">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation4"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire4"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.quantite4"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                 :value="montantHT4"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup5()" >
-                        <span>
-                          <i class=" icon-plus-sign"></i>
-                        </span>
-                      </button>
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-           <!-- 3 ligne -->
-         <tr  class="odd gradeX" v-show="popupState5">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation5"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire5"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.quantite5"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                 :value="montantHT5"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup6()" >
-                        <span>
-                          <i class=" icon-plus-sign"></i>
-                        </span>
-                      </button>
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-           <!-- 3 ligne -->
-         <tr  class="odd gradeX" v-show="popupState6">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation6"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire6"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.quantite6"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  :value="montantHT6"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup7()" >
-                        <span>
-                          <i class=" icon-plus-sign"></i>
-                        </span>
-                      </button>
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-           <!-- 3 ligne -->
-         <tr  class="odd gradeX" v-show="popupState7">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation7"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire7"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.quantite7"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                 :value="montantHT7"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup8()" >
-                        <span>
-                          <i class=" icon-plus-sign"></i>
-                        </span>
-                      </button>
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-           <!-- 3 ligne -->
-         <tr  class="odd gradeX" v-show="popupState8">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation8"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire8"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.quantite8"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                 :value="montantHT8"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup9()" >
-                        <span>
-                          <i class=" icon-plus-sign"></i>
-                        </span>
-                      </button>
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-           <!-- 3 ligne -->
-         <tr  class="odd gradeX" v-show="popupState9">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation9"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire9"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.quantite9"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  :value="montantHT9"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup10()" >
-                        <span>
-                          <i class=" icon-plus-sign"></i>
-                        </span>
-                      </button>
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-           <!-- 3 ligne -->
-         <tr  class="odd gradeX" v-show="popupState10">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation10"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire10"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.quantite10"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                   :value="montantHT10"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup10()" >
-                        <span>
-                          <i class=" icon-plus-sign"></i>
-                        </span>
-                      </button>
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-          <tr  class="odd gradeX" >
-            <td colspan="3">
-              <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">Montant HT</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-               
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                :value="totalMontantHT"
-                    class="span"
-                   readonly
-                  />
-                </div>
-              </div>
-            </td>
-            
-            
-                  
-          </tr>
-          <tr  class="odd gradeX" >
-            <td colspan="3">
-              <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">Taux</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-               
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-              :value="affcherTauxEnCours"
-                    class="span"
-                   readonly
-                  />
-                  
-                   <input
-                    type="hidden"
-                    :value="tauxArrondit"
-                   
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-            
-            
-                  
-          </tr>
-          <tr  class="odd gradeX" >
-            <td colspan="3">
-              <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">TVA</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-               
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-              :value="montantTva"
-                    class="span"
-                   readonly
-                  />
-                  
-                </div>
-              </div>
-            </td>
-            
-            
-                  
-          </tr>
-         
-          <tr  class="odd gradeX" >
-            <td colspan="3">
-              <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">Montant HTT</label>
+                <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
                
               </div>
             </td>
@@ -5424,7 +5424,7 @@ Ajouter Facture Definitive
                 <div class="controls">
                   <select v-model="formData1.typfacture_id" class="span">
                   
-                    <option value="1">Facture Normalisé</option>
+                    <option value="1">Facture definitive</option>
                     
                   </select>
                  
@@ -5507,10 +5507,10 @@ Ajouter Facture Definitive
                 </div>
               </div>
             </td>
-               <!-- <td>
+               <td>
               
               <div class="control-group">
-                <label class="control-label">exonere</label>
+                <label class="control-label">exonéré</label>
                 <div class="controls">
                   <select v-model="formData1.exonere" class="span">
                   
@@ -5526,7 +5526,7 @@ Ajouter Facture Definitive
                   />
                 </div>
               </div>
-            </td>            -->
+            </td>           
           </tr>
           <tr  class="odd gradeX">
             <td>
@@ -6222,14 +6222,14 @@ Ajouter Facture Definitive
                   <input
                     type="number"
                     
-              :value="affcherTauxEnCours"
+              :value="afficherEnorere"
                     class="span"
                    readonly
                   />
                   
                    <input
                     type="hidden"
-                    :value="tauxArrondit"
+                    :value="afficherEnorere2"
                    
                     class="span3"
                    
@@ -6271,7 +6271,7 @@ Ajouter Facture Definitive
           <tr  class="odd gradeX" >
             <td colspan="3">
               <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">Montant HTT</label>
+                <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
                
               </div>
             </td>
@@ -7220,6 +7220,29 @@ created() {
        
     ]),
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+
+
+
+afficherEnorere(){
+if(this.formData1.exonere == 0){
+  return 0
+}
+else {
+  return this.affcherTauxEnCours
+  
+}
+},
+
+
+afficherEnorere2(){
+if(this.formData1.exonere == 0){
+  return 0
+}
+else {
+  return this.tauxArrondit
+  
+}
+},
 
 
  objetfacture() {
@@ -8634,7 +8657,7 @@ tauxArrondit() {
     },
 
 montantTva() {
-      const val =   parseFloat(this.totalMontantHT) * parseFloat(this.tauxArrondit);
+      const val =   parseFloat(this.totalMontantHT) * parseFloat(this.afficherEnorere2);
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -9857,9 +9880,9 @@ showPopup20: function() {
     
 </script>
 <style scoped>
- /* .taillemodal89 {
+ /* .testtaille {
         
-      height: 500px;
+      height: 1000px;
     } */
     .taillemodal45 {
         width: 1200px;
