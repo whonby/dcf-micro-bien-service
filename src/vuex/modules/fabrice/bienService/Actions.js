@@ -1830,7 +1830,7 @@ export function ajouterDossierCandidat({commit}, elementAjout){
 
 
 export function modifierDossierCandidat({commit}, element_modifie) {
-  asyncLoading( axios.put('/dossier_candidats/',element_modifie)).then(response => {
+  asyncLoading( axios.put('/dossier_candidats',element_modifie)).then(response => {
        commit('MODIFIER_DOSSIER_CANDIDAT', response.data)
        
 

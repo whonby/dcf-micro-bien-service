@@ -819,6 +819,303 @@
 
               </div>
 
+              
+
+              <!--- debut de formulaire de modification  de dossier de candidat-->
+
+               <div id="modificationDossierCandidatModal" class="modal hide tlDossierCandidat">
+                   <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Modification dossier candidat</h3>
+                 </div>
+                  <div class="modal-body">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                        <tr class="odd gradeX">
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">registre de commerce</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Registre de commerce" v-model="editDossierCadidature.reg_com">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Numero de compte contribuable</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Situation Geographique" v-model="editDossierCadidature.numero_cc">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Raison social</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Raison social" v-model="editDossierCadidature.nom_cand">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Email</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Email" v-model="editDossierCadidature.email_cand">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        <tr class="odd gradeX">
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Telephone</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Telphone" v-model="editDossierCadidature.telephone_cand">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Address </label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Adresse" v-model="editDossierCadidature.adresse_post">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+
+                                <div class="control-group">
+                                    <label class="control-label">Numero de dossier</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Numero dossier" v-model="editDossierCadidature.numero_dossier">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Type candidat</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Type Candidat" v-model="editDossierCadidature.type_candidat">
+                                    </div>
+                                </div>
+                            </td>
+
+
+
+                        </tr>
+
+
+                        <tr class="odd gradeX">
+                            <td>
+                                <label>Appel Offre</label>
+                                <div class="controls">
+                                    <select hidden v-model="editDossierCadidature.appel_offre_id" class="span" disabled>
+                                        <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
+                                                :value="varText.id">{{varText.ref_appel}}</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Accord groupe</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Accord Groupe" v-model="editDossierCadidature.accord_group">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Cautionnement prov</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Cautionnement" v-model="editDossierCadidature.cautionnement_prov">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Pouv habil signataire</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Pouv Hile Signature" v-model="editDossierCadidature.pouv_habil_signataire">
+                                    </div>
+                                </div>
+                            </td>
+
+
+                        </tr>
+
+
+                        <tr class="odd gradeX">
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Attestion banc</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Attestation banc" v-model="editDossierCadidature.attest_banc">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Formulaire proo techn</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Formul propo tech" v-model="editDossierCadidature.formul_propo_tech">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Fiche rsgnt </label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Fiche renseignement" v-model="editDossierCadidature.fiche_rsgnt_cand">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Piece admin</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Piece Admin" v-model="editDossierCadidature.piece_admin">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        <tr class="odd gradeX">
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Fiche rsgnt nombre groupe</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Fiche renseignement nombre groupe" v-model="editDossierCadidature.fiche_rsgnt_mbre_group">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Atcdent marche non exe</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Atcent marche non exe" v-model="editDossierCadidature.atcdent_marche_non_exe">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Org travau site</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Org travau" v-model="editDossierCadidature.org_travau_site">
+                                     </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Metch real travau</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Meth real travau" v-model="editDossierCadidature.meth_real_travau">
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+
+                        <tr class="odd gradeX">
+
+                            <td>
+                                <label>Procedure de passation</label>
+                                <div class="controls">
+                                    <select v-model="editDossierCadidature.procedure_passation_id" class="span" disabled>
+                                        <option v-for="varText in procedurePassations" :key="varText.id"
+                                                :value="varText.id">{{varText.libelle}}</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Date de naissance</label>
+                                    <div class="controls">
+                                          <input type="date" class="" placeholder="" v-model="editDossierCadidature.date_nais_cand">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Capacite financiere</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Capacite financiere" v-model="editDossierCadidature.capacite_financiere">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <label class="control-label">Prog mobilisation</label>
+                                        <input type="Text" class="" placeholder="Programme mobilisation" v-model="editDossierCadidature.prog_mobilisation">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">CAA moyen acc entre</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="CAA moyen ac entre" v-model="editDossierCadidature.caa_moyen_ac_entre">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Capacite finanancier</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Capacite financement" v-model="editDossierCadidature.capacite_financement">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Capacite techn exp</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Capacite tech exp" v-model="editDossierCadidature.capacite_tech_exp">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Montant offre financiere</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Mont offre financiere" v-model="editDossierCadidature.mt_offre_financiere">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        
+                        </tbody>
+                    </table>
+                  </div>
+                        
+                     <div class="modal-footer">
+                <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationDossierCandidatLocal" href="#">Modifier</a>
+                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>    
+               </div>
+
+              <!-- fin de formulaire de modification de dossier de candidat --->
+
+
+
+
 
 
      <!--- debut ajout fournisseur que information n'exist pas dans la base  --->
@@ -4935,6 +5232,44 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
               capacite_financement:"",
 
           },
+
+
+          editDossierCadidature:{
+
+               secteur_activite_id:"",
+              numero_cc:"",
+              type_candidat:"",
+              nom_cand:"",
+              prenom_cand:"",
+              date_nais_cand:"",
+              telephone_cand:"",
+              adresse_post:"",
+              situation_geo:"",
+              email_cand:"",
+              procedure_passation_id:"",
+              appel_offre_id:"",
+              accord_group:"",
+              cautionnement_prov:"",
+              pouv_habil_signataire:"",
+              piece_admin:"",
+              reg_com:"",
+              attest_banc:"",
+              formul_propo_tech:"",
+              fiche_rsgnt_cand:"",
+              fiche_rsgnt_mbre_group:"",
+              atcdent_marche_non_exe:"",
+              org_travau_site:"",
+              meth_real_travau:"",
+              prog_mobilisation:"",
+              capacite_financiere:"",
+              caa_moyen_ac_entre:"",
+              capacite_tech_exp:"",
+              mt_offre_financiere:"",
+              numero_dossier:"",
+              capacite_financement:"",
+
+
+          },
          formOffreTechnique:{
              numero_lot:"",
              accord_groupe:"",
@@ -6022,6 +6357,31 @@ dossier_candidat_id : this.edite_offre_financiere.id
 
                 this.NotisFormulaireDossierCand()
             },
+
+
+// vider l'input 
+
+   // modification de dossier candidat
+
+            modificationDossierCandidatLocal(){
+                this.formFournisseur.raison_sociale=this.editDossierCadidature.nom_cand
+                this.formFournisseur.numero_cc= this.editDossierCadidature.numero_cc
+                this.formFournisseur.numero_rc=this.editDossierCadidature.reg_com
+                this.formFournisseur.telephone=this.editDossierCadidature.telephone_cand
+                this.formFournisseur.adresse=this.editDossierCadidature.adresse_post
+                this.formFournisseur.email=this.editDossierCadidature.email_cand
+                this.formFournisseur.complet=0
+
+                let entre = this.entreprises.find(item =>item.numero_rc==this.formFournisseur.numero_rc)
+                  if(entre==undefined){
+                      this.modifierEntreprise(this.formFournisseur)
+                  }
+                  this.modifierDossierCandidat(this.editDossierCadidature)
+                  this.$('#modificationDossierCandidatModal').modal('hide');
+
+            },
+
+
             ajouterDemandeAnoLocal(){
                 this.ajouterDemandeAno(this.formDemande)
                 this.formDemande={
@@ -6379,6 +6739,13 @@ ajouterNouveauFournisseurLocal(registeCommerce){
             // eslint-disable-next-line no-unused-vars
             afficheBouttonTechFin(index){
              this.isOffreTechniqueFinancier=true
+            this.$('#modificationDossierCandidatModal').modal({
+                    backdrop:'static',
+                    keyboard:false
+                });
+                this.editDossierCadidature = this.dossierCandidature(this.marcheid)[index];
+
+
             },
             afficheBouttonTechFinInvitation(index){
                 this.$('#modificationLettreInvitation').modal({
@@ -6460,6 +6827,12 @@ ajouterNouveauFournisseurLocal(registeCommerce){
   width: 1000px;
  margin: 0 -530px;
  height: 450px;
+
+    }
+    .tlDossierCandidat{
+        width: 1000px;
+ margin: 0 -530px;
+ height: 500px;
 
     }
 
