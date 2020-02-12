@@ -1,4 +1,4 @@
-
+Selectionner l'entreprise
 <template>
     
 <div>
@@ -479,7 +479,11 @@
                                 <div class="control-group">
                                     <label class="control-label">Type candidat</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Type Candidat" v-model="formDossierCadidature.type_candidat">
+                                       
+                                         <select  v-model="formDossierCadidature.type_candidat_id" >
+                                        <option v-for="varText in typeCandidat" :key="varText.id"
+                                                :value="varText.id">{{varText.libelle}}</option>
+                                    </select>
                                     </div>
                                 </div>
                             </td>
@@ -5529,7 +5533,7 @@ created() {
     console.log(this.appel_offre_marche)*/
 },
         computed: {
-            ...mapGetters("bienService", [ 'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+            ...mapGetters("bienService", [ 'typeCandidat','acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
