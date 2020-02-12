@@ -266,7 +266,7 @@ this.getDocumentProcedure()
 
 // this.getDecisionMarche()
 this.getActeEffetFinancier()
-
+ this.getFacture()
 this.getTypeProcedures()
 this.getTypeMarches()
 this.getMarche()
@@ -294,7 +294,7 @@ this.getLettreInvitation()
     this.getAnoDMPBailleur()
     this.getObservationBailleur()
 
-    this.getFacture()
+   
 
     this.getMarcheBailleur()
 this.getMembreCojo()

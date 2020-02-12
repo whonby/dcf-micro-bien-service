@@ -1,6 +1,4 @@
-Modifier Mandat
-Modifier Engagement
-Modifier Mandat
+Ajouter Facture Definitive
 <template>
   	
         <div class="container-fluid">
@@ -98,6 +96,12 @@ Modifier Mandat
                                 class="span4"
                                readonly
                               :value="anneeAmort"
+                              />
+                              <input
+                                type="hidden"
+                                class="span4"
+                               readonly
+                            v-model="editEngagement.facture_id"
                               />
                             </div>
                           </div>
@@ -531,7 +535,7 @@ Modifier Mandat
                          <div class="control-group">
                             <label class="control-label">Objet de la dépense</label>
                             <div class="controls">
-                              <input type="text" class="span7" :value="afficherObjetMandat" readonly/>
+                              <input type="text" class="span7" :value="afficherObjetEngagement1" readonly/>
                                <input type="hidden" class="span10" v-model="editEngagement.id" readonly/>
                             </div>
                           </div>
@@ -567,7 +571,7 @@ Modifier Mandat
                          <div class="control-group">
                             <label class="control-label">Total général</label>
                             <div class="controls">
-                              <input type="number" class="span4" :value="sommeMontant" readonly/>
+                              <input type="number" class="span4" :value="sommeMontantEngagement" readonly/>
                             </div>
                           </div>
                         </td>
@@ -631,7 +635,7 @@ Modifier Mandat
                           <div class="control-group">
                             <label class="control-label">Numéro Facture</label>
                             <div class="controls">
-                              <input type="text" class="span4" :value="affichiernumMandat" readonly/>
+                              <input type="text" class="span4" :value="affichiernumEngagement1" readonly/>
                             </div>
                           </div>
                         </td>
@@ -639,7 +643,7 @@ Modifier Mandat
                           <div class="control-group">
                             <label class="control-label">Montant Facture</label>
                             <div class="controls">
-                              <input type="text" class="span4" :value="afficherMontantMandat" readonly/>
+                              <input type="text" class="span4" :value="afficherMontantEngagement1" readonly/>
                             </div>
                           </div>
                         </td>
@@ -666,7 +670,7 @@ Modifier Mandat
                           <div class="control-group">
                             <label class="control-label">Crédits Autorisés(Engagement actuel)</label>
                             <div class="controls">
-                              <input type="text" class="span4" :value="sommeMontant" readonly/>
+                              <input type="text" class="span4" :value="sommeMontantEngagement" readonly/>
                             </div>
                           </div>
                         </td>
@@ -675,7 +679,7 @@ Modifier Mandat
                                                     <div class="control-group">
                             <label class="control-label">Engagement cumulé </label>
                             <div class="controls">
-                              <input type="text" class="span4" :value="montantCumulerMandat" readonly/>
+                              <input type="text" class="span4" :value="montantCumulerMandatEngagement" readonly/>
                             </div>
                           </div>
                         </td>
@@ -688,7 +692,7 @@ Modifier Mandat
                           <div class="control-group">
                             <label class="control-label">Dotation disponible</label>
                             <div class="controls">
-                              <input type="text" class="span4" :value="montantDisponibleBudgetMandat" readonly/>
+                              <input type="text" class="span4" :value="montantDisponibleBudgetMandatEngagement" readonly/>
                             </div> 
                           </div>
                           
@@ -806,6 +810,12 @@ Modifier Mandat
                                 class="span4"
                                readonly
                               :value="anneeAmort"
+                              />
+                              <input
+                                type="hidden"
+                                class="span4"
+                               readonly
+                              v-model="editMandat.facture_id"
                               />
                             </div>
                           </div>
@@ -1288,7 +1298,7 @@ Modifier Mandat
                          <div class="control-group">
                             <label class="control-label">Total général</label>
                             <div class="controls">
-                              <input type="number" class="span4" :value="sommeMontant" readonly/>
+                              <input type="number" class="span4" :value="sommeMontantMandat" readonly/>
                             </div>
                           </div>
                         </td>
@@ -1381,7 +1391,7 @@ Modifier Mandat
                           <div class="control-group">
                             <label class="control-label">Crédits Autorisés(Engagement actuel)</label>
                             <div class="controls">
-                              <input type="text" class="span4" :value="sommeMontant" readonly/>
+                              <input type="text" class="span4" :value="sommeMontantMandat" readonly/>
                             </div>
                           </div>
                         </td>
@@ -1399,20 +1409,20 @@ Modifier Mandat
                       
                       </tr>
                         <tr>
-                           <td >
+                           <!-- <td >
                           <div class="control-group">
                             <label class="control-label">Dotation disponible</label>
                             <div class="controls">
-                              <input type="text" class="span4" :value="montantDisponibleBudgetMandat" readonly/>
+                              <input type="text" class="span4" :value="montantDisponibleBudgetMandatDirect" readonly/>
                             </div> 
                           </div>
                           
-                        </td>
+                        </td> -->
                                                  <td>
                           <div class="control-group">
-                            <label class="control-label">Dotation disponible anterieure</label>
+                            <label class="control-label">Dotation disponible</label>
                             <div class="controls">
-                              <input type="text" class="span4" :value="dotationDisponibleAnterieure" readonly/>
+                              <input type="text" class="span4" :value="dotationDisponibleAnterieureDirect" readonly/>
                             </div>
                           </div>
                         </td>
@@ -1428,7 +1438,7 @@ Modifier Mandat
                           <div class="control-group">
                             <label class="control-label">Disponible marché</label>
                             <div class="controls">
-                              <input type="text" class="span4" :value="restePayeMarche" readonly/>
+                              <input type="text" class="span4" :value="restePayeMarcheMandat" readonly/>
                             </div>
                           </div>
                         </td>
@@ -2580,7 +2590,7 @@ Modifier Mandat
                      </template>
                        <td>
                         
-                      <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterMandat(Engage.id)" title="Ajouter Mandat">
+                      <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Mandat">
                         <span>
                           <i class="icon icon-book"></i>
                         </span>
@@ -2773,7 +2783,7 @@ Modifier Mandat
                           <i class="icon   icon-folder-close"></i>
                         </span>
                       </button>
-                       <button class="btn " v-if="factu.typfacture_id == 1" @click="afficherModalAjouterMandat(factu.id)" title="Ajouter Mandat">
+                       <button class="btn " v-if="factu.typfacture_id == 1" @click="afficherModalAjouterMandatDirect(factu.id)" title="Ajouter Mandat">
                         <span>
                           <i class="icon   icon-folder-close"></i>
                         </span>
@@ -2879,14 +2889,14 @@ Modifier Mandat
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1000">INFORMATION</a>
+                        <a data-toggle="tab" href="#tab10009">INFORMATION</a>
                       </li>
                       <!-- <li>
                         <a data-toggle="tab" href="#tab2">TYPE ENGAGEMENT </a>
                       </li> -->
                       
                       <li>
-                        <a data-toggle="tab" href="#tab120">INFO FOURNISSEUR / IMPUTATION BUDGETAIRE</a>
+                        <a data-toggle="tab" href="#tab1569">INFO FOURNISSEUR / IMPUTATION BUDGETAIRE</a>
                       </li>
                       <!-- <li>
                         <a data-toggle="tab" href="#tab32">IMPUTATION BUDGETAIRE</a>
@@ -2898,7 +2908,7 @@ Modifier Mandat
                   </div>
                   <div class="widget-content tab-content tailfenet">
                     <!--ongle identification-->
-                    <div id="tab1000" class="tab-pane active">
+                    <div id="tab10009" class="tab-pane active">
                       <tr>
                         <td>
                           <div class="control-group">
@@ -3143,7 +3153,7 @@ Modifier Mandat
                          <div class="control-group">
                             <label class="control-label">Autre type engagement</label>
                             <div class="controls">
-                              <input type="text" class="span4" v-model="formData.autre_engagement" />
+                              <input type="text" class="span4" v-model="formData.autre_engagement" :readonly="veifautreengagement"/>
                             </div>
                           </div>
                         </td>
@@ -3244,7 +3254,7 @@ Modifier Mandat
 
 
 <!--ongle descriptif-->
-                    <div id="tab120" class="tab-pane">
+                    <div id="tab1569" class="tab-pane">
                       
 
                       
@@ -3357,7 +3367,7 @@ Modifier Mandat
                          <div class="control-group">
                             <label class="control-label">Objet de la dépense</label>
                             <div class="controls">
-                              <input type="text" class="span7" v-model="formData.objet_facture" readonly/>
+                              <input type="text" class="span7" v-model="afficherObjetFacture" readonly/>
                                <input type="hidden" class="span10" v-model="formData.id" readonly/>
                             </div>
                           </div>
@@ -3565,7 +3575,7 @@ Modifier Mandat
                       <div data-toggle="buttons-checkbox" class="btn-group">
                         <a
                           class="btn btn-primary"
-                          @click.prevent="ajouterMandatLocal"
+                          @click.prevent="ajouterMandatDirectLocal"
                         >Valider</a>
                         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
                       </div>
@@ -4495,7 +4505,7 @@ Modifier Mandat
         <h3>Ajouter Facture</h3>
       </div>
       <div class="modal-body" >
-        <table class="table table-bordered table-striped tailfacture">
+        <table class="table table-bordered table-striped ">
          
           <tr>
               <td>
@@ -5402,7 +5412,7 @@ Modifier Mandat
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter Facture Definitive</h3>
       </div>
-      <div class="modal-body" >
+      <div class="modal-body taillemodal89" >
         <table class="table table-bordered table-striped tailfacture">
          
           <tr>
@@ -6505,13 +6515,19 @@ Modifier Mandat
                           <div class="control-group">
                             <label class="control-label">Type de facture</label>
                             <div class="controls">
-                              <input
+                              <!-- <input
                                   type="text"
                                   class="span4"
                                   v-model="formData.typefact"
                                   readonly
-                                />
-                              
+                                /> -->
+                               <select v-model="formData.typefact" class="span4">
+                                
+                                <option value></option>
+                                    <option value="Facture definitive">Facture definitive</option>
+                                     
+                               
+                              </select>
                             </div>
                           </div>
                         </td>
@@ -6519,8 +6535,8 @@ Modifier Mandat
                          <div class="control-group">
                             <label class="control-label">Numero demande engagement</label>
                             <div class="controls">
-                              <input type="text" class="span4" v-model="formDataEngage.numero_demande_engage" readonly/>
-                              <input type="hidden" class="span4" v-model="formDataEngage.facture_id" readonly/>
+                              <input type="text" class="span4" v-model="editEngagement.numero_demande_engage" readonly/>
+                              <!-- <input type="hidden" class="span4" v-model="formDataEngage.facture_id" readonly/> -->
                            
                             </div>
                           </div>
@@ -6530,8 +6546,8 @@ Modifier Mandat
                          <div class="control-group">
                             <label class="control-label">Numero engagement</label>
                             <div class="controls">
-                              <input type="text" class="span4" v-model="formDataEngage.numero_engage" readonly/>
-                               <input type="hidden" class="span4" v-model="formDataEngage.id" readonly/>
+                              <input type="text" class="span4" v-model="editEngagement.numero_engage" readonly/>
+                               <!-- <input type="hidden" class="span4" v-model="formDataEngage.id" readonly/> -->
                               
                             </div>
                           </div>
@@ -6540,7 +6556,7 @@ Modifier Mandat
                          <div class="control-group">
                             <label class="control-label">Numero bordereau engagement</label>
                             <div class="controls">
-                              <input type="text" class="span4" v-model="formDataEngage.numero_bordereau" readonly/>
+                              <input type="text" class="span4" v-model="editEngagement.numero_bordereau" readonly/>
                             </div>
                           </div>
                         </td>
@@ -6961,7 +6977,7 @@ Modifier Mandat
                           <div class="control-group">
                             <label class="control-label">Disponible marché</label>
                             <div class="controls">
-                              <input type="text" class="span4" :value="restePayeMarche" readonly/>
+                              <input type="text" class="span4" :value="restePayeMarcheMandat" readonly/>
                             </div>
                           </div>
                         </td>
@@ -7037,7 +7053,9 @@ Modifier Mandat
                  formDataEngage:{},
                  
        editEngagement: {
-       
+        montant_tresor:0,
+montant_don:0,
+montant_emprunt:0,
 
       },
       editFacture:{},
@@ -7110,7 +7128,7 @@ formData: {
        montant_tresor:0,
 montant_don:0,
 montant_emprunt:0,  
-    typefact:"Facture definitive",
+    typefact:"",
 type_procedure_id:"",
 type_engagement_id:"",
 val:0
@@ -7276,10 +7294,37 @@ afficherNumeroEngagemnt() {
         }
       };
     },
+afficherObjetEngagement1() {
+    
+       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.editEngagement.facture_id);
 
+      if (norme) {
+       return norme.objet_facture;
+      }
+      return ""
+    },
+    affichiernumEngagement1() {
+    
+       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.editEngagement.facture_id);
+
+      if (norme) {
+       return norme.numero_facture;
+      }
+      return "0"
+    },
+
+afficherMontantEngagement1() {
+    
+       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.editEngagement.facture_id);
+
+      if (norme) {
+       return norme.prix_propose_ttc;
+      }
+      return "0"
+    },
 afficherObjetMandat() {
     
-       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.formData.facture_id);
+       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.editMandat.facture_id);
 
       if (norme) {
        return norme.objet_facture;
@@ -7288,7 +7333,7 @@ afficherObjetMandat() {
     },
 affichiernumMandat() {
     
-       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.formData.facture_id);
+       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.editMandat.facture_id);
 
       if (norme) {
        return norme.numero_facture;
@@ -7298,7 +7343,7 @@ affichiernumMandat() {
 
 afficherMontantMandat() {
     
-       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.formData.facture_id);
+       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.editMandat.facture_id);
 
       if (norme) {
        return norme.prix_propose_ttc;
@@ -7327,7 +7372,7 @@ afficherMontantMandat() {
 
 afficherObjetFactureEngagement() {
     
-       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.formDataEngage.facture_id);
+       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.editEngagement.facture_id);
 
       if (norme) {
        return norme.objet_facture;
@@ -7336,7 +7381,7 @@ afficherObjetFactureEngagement() {
     },
 affichiernumEngagement() {
     
-       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.formDataEngage.facture_id);
+       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.editEngagement.facture_id);
 
       if (norme) {
        return norme.numero_facture;
@@ -7346,7 +7391,7 @@ affichiernumEngagement() {
 
 afficherMontantEngagement() {
     
-       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.formDataEngage.facture_id);
+       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.editEngagement.facture_id);
 
       if (norme) {
        return norme.prix_propose_ttc;
@@ -7405,6 +7450,15 @@ afficherMontantFacture() {
 
 
 
+ dotationDisponibleAnterieureDirect() {
+      const val =  parseFloat(this.dotationInite(this.detail_marche.imputation).Dotation_Initiale) - parseFloat(this.sommeEgagementLigne(this.detail_marche.imputation));
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
 
 
 
@@ -7419,6 +7473,15 @@ afficherMontantFacture() {
       return 0
     },
 
+montantCumulerMandatEngagement() {
+      const val = parseFloat(this.sommeEgagementLigne(this.detail_marche.id)) + parseFloat(this.sommeMontantEngagement);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
 montantCumulerMandat() {
       const val = parseFloat(this.sommeEgagementLigne(this.detail_marche.id)) + parseFloat(this.sommeMontant);
       
@@ -7918,8 +7981,8 @@ affichetresor2() {
     },
 
 
-// restePayeMarche() { 
-//       const val = parseFloat(this.MontantMarche) - parseFloat(this.montantDisponibleAutreligne);
+// restePayeMarcheMandat() { 
+//       const val = parseFloat(this.MontantMarche) - parseFloat(this.montantCumulerMandat);
 //       return parseFloat(val).toFixed(2);
 //     },
 
@@ -7998,6 +8061,16 @@ montantResteApaye() {
 montantResteApayeModifier() { 
       const val = parseFloat(this.MontantMarche) - parseFloat(this.montantDisponible);
       return parseFloat(val).toFixed(2);
+    },
+    sommeMontantEngagement() { 
+      const val = parseFloat(this.editEngagement.montant_tresor) + parseFloat(this.editEngagement.montant_don) + parseFloat(this.editEngagement.montant_emprunt);
+      return parseFloat(val).toFixed(2);
+      
+    },
+    sommeMontantMandat() { 
+      const val = parseFloat(this.editMandat.montant_tresor) + parseFloat(this.editMandat.montant_don) + parseFloat(this.editMandat.montant_emprunt);
+      return parseFloat(val).toFixed(2);
+      
     },
 sommeMontant() { 
       const val = parseFloat(this.formData.montant_tresor) + parseFloat(this.formData.montant_don) + parseFloat(this.formData.montant_emprunt);
@@ -8236,6 +8309,10 @@ restePayeMarche() {
       const val = parseFloat(this.totalMarche) - parseFloat(this.sommeEngagementTableau(this.detail_marche.id));
       return parseFloat(val).toFixed(0);
     },
+    restePayeMarcheMandat() {
+      const val = parseFloat(this.totalMarche) - parseFloat(this.montantCumulerMandat);
+      return parseFloat(val).toFixed(0);
+    },
 
 
 MontantBudgetaire() {
@@ -8401,9 +8478,29 @@ montantDisponibleBudget() {
       
       return 0
     },
+montantDisponibleBudgetMandatEngagement() {
+      const val =  parseFloat(this.dotationDisponibleAnterieure) - parseFloat(this.sommeMontantEngagement);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+     
+      return 0
+     
+    },
 
 montantDisponibleBudgetMandat() {
       const val =  parseFloat(this.dotationDisponibleAnterieure) - parseFloat(this.sommeMontant);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+     
+      return 0
+     
+    },
+    montantDisponibleBudgetMandatDirect() {
+      const val =  parseFloat(this.dotationDisponibleAnterieureDirect) - parseFloat(this.sommeMontantMandat);
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -8704,9 +8801,9 @@ alert("Le montant engagé est superieure au montant de la facture")
       //    numero_facture:this.afficherNumeroFcture,
       // montant_facture:this.afficherMontantFacture,
       // 	objet_depense : this.formData.objet_facture,
-        facture_id:this.formDataEngage.facture_id,
+        facture_id:this.editEngagement.facture_id,
         type_procedure_id	:this.recupererTypeProcedure,
-engagement_id:this.formDataEngage.id,
+engagement_id:this.editEngagement.id,
 // numero_engage:this.formDataEngage.numero_engage,
 // numero_demande:this.formDataEngage.numero_demande_engage,
 programme_id:this.afficherProgDotId,
@@ -8719,7 +8816,7 @@ section_id:this.afficherSectId
 
        };
 this.ajouterMandat(nouvelObjet)
-this.$("#exampleModalMandat").modal('hide');
+this.$("#exampleModalMandatEngagement").modal('hide');
 this.formData= {
 
  numero_engage:"",
@@ -9040,7 +9137,7 @@ alert("Le montant engagé est superieure au montant de la facture")
          numero_facture:this.afficherNumeroFcture,
       montant_facture:this.afficherMontantFacture,
       	objet_depense : this.formData.objet_facture,
-        facture_id:this.formData.id,
+        facture_id:this.formDataEngage.facture_id,
         type_procedure_id	:this.recupererTypeProcedure,
 engagement_id:this.formDataEngage.id,
 // numero_engage:this.formDataEngage.numero_engage,
@@ -9109,12 +9206,137 @@ val:0,
 
     },
 
+
+ajouterMandatDirectLocal(){
+      if (this.afficherMontantFacture < this.sommeMontant){
+alert("Le montant engagé est superieure au montant de la facture")
+      }
+      else if (this.afficherMontantFacture > this.sommeMontant)
+      {
+        alert("Le montant engagé est Inférieure au montant de la facture")
+      }
+       else if (this.dotationDisponibleAnterieure < this.afficherMontantFacture)
+      {
+        alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
+      }
+       else if (this.detail_marche.montant_marche == this.afficherMontantFacture)
+      {
+        alert("Marché apuré")
+      }
+      else
+      {
+ var nouvelObjet = {
+      ...this.formData,
+      exercice_budget :this.anneeAmort,
+       	numero_cc_id :this.NumeroFournisseur,
+        nom_entreprise :this.nomFournisseur,
+         adresse_entreprise :this.AdresseFournisseur,
+         total_general :this.sommeMontant,
+         budget_general_id :this.CodeBudgetaire,
+         marche_id : this.detail_marche.id,
+         montant_a_paye: this.montantResteApaye,
+         montant_cumul:this.montantCumuler,
+       ligne_id:this.idBudgetaire,
+         numero_facture:this.afficherNumeroFcture,
+      montant_facture:this.afficherMontantFacture,
+      	objet_depense : this.formData.objet_facture,
+        facture_id:this.formDataFacture.id,
+        type_procedure_id	:this.recupererTypeProcedure,
+engagement_id:this.formDataEngage.id,
+// numero_engage:this.formDataEngage.numero_engage,
+// numero_demande:this.formDataEngage.numero_demande_engage,
+programme_id:this.afficherProgDotId,
+action_id:this.afficherActid,
+activite_id:this.detail_marche.activite_id,
+  ua_id:this.detail_marche.unite_administrative_id,
+  grd_nature_id:this.detail_marche.gdenature_id,
+
+section_id:this.afficherSectId
+
+       };
+this.ajouterMandat(nouvelObjet)
+this.$("#exampleModalMandat").modal('hide');
+this.formData= {
+
+ numero_engage:"",
+  total_general:0,
+       montant_tresor:0,
+montant_don:0,
+montant_emprunt:0,
+
+val:0,
+        exercice_budget:"",
+        budget_general_id:"",
+        programme_id:"",
+        action_id:"",
+        activite_id:"",
+      
+        ua_id:"",
+        grd_nature_id:"",
+        type_procedure_id:"",
+        ref_juridique:"",
+
+        type_engagement_id:"",
+        mod_paiement_engage:"",
+        numero_cc_id:"",
+        adresse_entreprise:"",
+
+         nom_entreprise:"",
+       
+        bailler_id:"",
+        objet_depense:"",
+        piece_justificative:"",
+
+         motif:"",
+        date_motif:"",
+        observation:"",
+        ligne_budgetaire_id:"",
+        section_id:"",
+        marche_id:"",
+        // montant_a_paye:"",
+        //  montant_cumul:"",
+         ligne_id:"",
+         
+         date_reception_cf:"",
+          decision_cf:"",
+           numero_demande:"",
+              numero_op:"",
+              autre_engagement:"",
+};
+
+      }
+      
+
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 afficherModalModifierMotifMandat(index) {
       this.$("#exampleModalMotifMandat").modal({
         backdrop: "static",
         keyboard: false
       })
-      this.formData = this.afficheMandatMarcheTableau(this.detail_marche.id)[index];
+      this.editMandat = this.afficheMandatMarcheTableau(this.detail_marche.id)[index];
       },
 
 
@@ -9135,15 +9357,23 @@ afficherModalModifierFacture(index) {
     },
 
 
+afficherModalAjouterMandatDirect(id) {
+      this.$("#exampleModalMandat").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+      // this.formDataEngage = this.afficheMarcheEngage(this.detail_marche.id).find(recupererObjet => recupererObjet.id == id)
+        this.formDataFacture = this.afficheFactureTableau(this.detail_marche.objetUniteAdministrative.id).find(recupererObjet => recupererObjet.id == id)
+    },
 
 
-
- afficherModalAjouterMandat(id) {
+ afficherModalAjouterMandat(index) {
       this.$("#exampleModalMandatEngagement").modal({
         backdrop: "static",
         keyboard: false
       });
-       this.formDataEngage = this.afficheMarcheEngage(this.detail_marche.id).find(recupererObjet => recupererObjet.id == id)
+      this.editEngagement = this.afficheMarcheEngage(this.detail_marche.id)[index]
+      // this.editEngagement = this.afficheMarcheEngage(this.detail_marche.id).find(recupererObjet => recupererObjet.id == id)
         // this.formDataFacture = this.afficheFactureTableau(this.detail_marche.objetUniteAdministrative.id).find(recupererObjet => recupererObjet.id == id)
     },
   retourListeEntreprise(){
@@ -9158,14 +9388,14 @@ afficherModalModifierFacture(index) {
 
 
  modifierModalMandatLocal(){
-  if (this.afficherMontantMandat < this.sommeMontant){
+  if (this.afficherMontantMandat < this.sommeMontantMandat){
 alert("Le montant engagé est superieure au montant de la facture")
       }
-      else if (this.afficherMontantMandat > this.sommeMontant)
+      else if (this.afficherMontantMandat > this.sommeMontantMandat)
       {
         alert("Le montant engagé est Inférieure au montant de la facture")
       }
-       else if (this.dotationDisponibleAnterieure < this.afficherMontantMandat)
+       else if (this.dotationDisponibleAnterieureDirect < this.afficherMontantMandat)
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
@@ -9181,7 +9411,7 @@ alert("Le montant engagé est superieure au montant de la facture")
        	numero_cc_id :this.NumeroFournisseur,
         nom_entreprise :this.nomFournisseur,
          adresse_entreprise :this.AdresseFournisseur,
-         total_general :this.sommeMontant,
+         total_general :this.sommeMontantMandat,
          budget_general_id :this.CodeBudgetaire,
          marche_id : this.detail_marche.id,
          montant_a_paye: this.montantResteApaye,
@@ -9190,7 +9420,7 @@ alert("Le montant engagé est superieure au montant de la facture")
          numero_facture:this.afficherNumeroFcture,
       montant_facture:this.afficherMontantFacture,
       	objet_depense : this.formData.objet_facture,
-        facture_id:this.formData.id,
+        facture_id:this.editMandat.facture_id,
         type_procedure_id	:this.recupererTypeProcedure,
 
 programme_id:this.afficherProgDotId,
@@ -9304,30 +9534,30 @@ val:0,
 //     },
  modifierModalEngagementLocal(){
 
- if (this.afficherMontantFacture < this.sommeMontant){
+ if (this.afficherMontantEngagement1 < this.sommeMontantEngagement){
 alert("Le montant engagé est superieure au montant de la facture")
       }
-      else if (this.afficherMontantFacture > this.sommeMontant)
+      else if (this.afficherMontantEngagement1 > this.sommeMontantEngagement)
       {
         alert("Le montant engagé est Inférieure au montant de la facture")
       }
-       else if (this.dotationDisponibleAnterieure < this.afficherMontantFacture)
+       else if (this.dotationDisponibleAnterieure < this.afficherMontantEngagement1)
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.detail_marche.montant_marche == this.afficherMontantFacture)
+       else if (this.detail_marche.montant_marche == this.afficherMontantEngagement1)
       {
         alert("Marché apuré")
       }
       else
       {
  var nouvelObjet = {
-      ...this.formData,
+      ...this.editEngagement,
       exercice_budget :this.anneeAmort,
        	numero_cc_id :this.NumeroFournisseur,
         nom_entreprise :this.nomFournisseur,
          adresse_entreprise :this.AdresseFournisseur,
-         total_general :this.sommeMontant,
+         total_general :this.sommeMontantEngagement,
          budget_general_id :this.CodeBudgetaire,
          marche_id : this.detail_marche.id,
          montant_a_paye: this.montantResteApaye,
@@ -9336,7 +9566,7 @@ alert("Le montant engagé est superieure au montant de la facture")
          numero_facture:this.afficherNumeroFcture,
       montant_facture:this.afficherMontantFacture,
       	objet_depense : this.formData.objet_facture,
-        facture_id:this.formData.id,
+        facture_id:this.editEngagement.facture_id,
         type_procedure_id	:this.recupererTypeProcedure,
 
 programme_id:this.afficherProgDotId,
@@ -9627,6 +9857,10 @@ showPopup20: function() {
     
 </script>
 <style scoped>
+ /* .taillemodal89 {
+        
+      height: 500px;
+    } */
     .taillemodal45 {
         width: 1200px;
         margin: 0 -580px;
