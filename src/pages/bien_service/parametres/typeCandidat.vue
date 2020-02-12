@@ -5,12 +5,12 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">x</button>
-        <h3>Ajouter type Appel</h3>
+        <h3>Ajouter type candidat</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">libelle</label>
+            <label class="control-label">libellé</label>
             <div class="controls">
               <input
                 type="text"
@@ -41,12 +41,12 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">x</button>
-        <h3>Modifier type Appel</h3>
+        <h3>Modifier type candidat</h3>
       </div>
       <div class="modal-body">
          <form class="form-horizontal">
           <div class="control-group">
-            <label class="control-label">libelle</label>
+            <label class="control-label">libellé</label>
             <div class="controls">
               <input
                 type="text"
@@ -81,7 +81,7 @@
             style="cursor:pointer;"
             :fields="json_fields"
             title="Liste Types Ã©quipements"
-            :data="filtre_equipement"
+            :data="typeCandidatFiltre"
             name="Liste des types Ã©quipements"
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
@@ -91,7 +91,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste type Appel</h5>
+              <h5>Liste type candidat</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -102,17 +102,17 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th width="90%">libelle</th>
+                    <th width="90%">libellé</th>
                    
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr class="odd gradeX" v-for="(typeappel, index) in 
-                filtre_equipement"
+                typeCandidatFiltre"
                  :key="typeappel.id">
 
-                 <td @dblclick="afficherModalModifierFamille(index)">
+                 <td @dblclick="afficherModalAjoutertypecandiadt(index)">
                       {{typeappel.libelle || 'Non renseigné'}}</td>
                  
                    
@@ -121,7 +121,7 @@
 
 
               <div class="btn-group">
-              <button @click.prevent="supprimerTypeAppel(typeappel.id)"  class="btn btn-danger ">
+              <button @click.prevent="supprimerTypeCandidat(typeappel.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
@@ -169,10 +169,11 @@ export default {
     //   },
 
       formData: {
+        libelle:""
         
       },
       editTypeAppel: {
-     
+      libelle:""
       },
       search: ""
     };
@@ -180,7 +181,7 @@ export default {
 
   computed: {
      ...mapGetters("bienService", ['typeCandidat']),
-    filtre_equipement() {
+    typeCandidatFiltre() {
       const st = this.search.toLowerCase();
       return this.typeCandidat.filter(type => {
         return (
@@ -191,11 +192,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions("bienService", [
-     "getTypeCandidat",
-     "ajouterTypeCandidat",
-     "modifierTypeCandidat",
-     "supprimerTypeCandidat"
+    ...mapActions("bienService", ["ajouterTypeCandidat", "modifierTypeCandidat","supprimerTypeCandidat"
     ]),
     //afiicher modal ajouter
     afficherModalAjouterTitre() {
@@ -217,13 +214,13 @@ export default {
     //fonction pour vider l'input ajouter
     
     //afficher modal de modification
-    afficherModalModifierFamille(index) {
+    afficherModalAjoutertypecandiadt(index) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editTypeAppel = this.typeAppelOffre[index];
+      this.editTypeAppel = this.typeCandidat[index];
     },
     // fonction pour vider l'input modification
     

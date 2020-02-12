@@ -7,7 +7,7 @@
           <div class="widget-title">
             <ul class="nav nav-tabs">
               <li class="active"><a data-toggle="tab" href="#tab1">Identification</a></li>
-              <li><a data-toggle="tab" href="#tab2"> Unité administrative</a></li>
+              <!-- <li><a data-toggle="tab" href="#tab2"> Unité administrative</a></li> -->
               <li><a data-toggle="tab" href="#tab3"> Transport</a></li> 
             </ul>
           </div>
@@ -35,9 +35,9 @@
                         </td>
 
                    
-                      <td colspan="3" width="450">
+                      <td colspan="2" width="150" > 
         <div class="control-group">
-          <label class="control-label">Objet de mission:</label>
+          <label class="control-label"> Objet de mission:<span style="color:red;">*</span></label>
             <div class="controls">
               <textarea  v-model="formData.objet"  class="textarea_editor span" rows="3" placeholder="Enter text ..."></textarea>
             </div>
@@ -51,7 +51,7 @@
 
                     <td>           
                <div class="control-group">
-              <label class="control-label">Type de mission:</label>
+              <label class="control-label">Type de mission:<span style="color:red;">*</span></label>
               <div class="controls">
                 <select v-model="formData.type_mission" class="span">
        
@@ -69,7 +69,7 @@
 
                               <td width="250"> 
             <div class="control-group">
-              <label class="control-label" title="categorie de mission">Categorie de mission:</label>
+              <label class="control-label" title="categorie de mission">Categorie de mission:<span style="color:red;">*</span></label>
               <div class="controls">
            <select v-model="formData.categorie_missions_id" class="span">
                <option v-for="budget in categories_missions" :key="budget.id" 
@@ -83,7 +83,7 @@
                         
                        <td width="250">           
                <div class="control-group">
-              <label class="control-label">Date de mission:</label>
+              <label class="control-label">Date de mission:<span style="color:red;">*</span></label>
               <div class="controls">
                 <input type="date" v-model="formData.date_mission" class="span"/>
               </div>
@@ -95,7 +95,7 @@
                        <td width="250">         
                   
                <div class="control-group">
-              <label class="control-label" title="numero autorisation">N° autorisation:</label>
+              <label class="control-label" title="numero autorisation">N° autorisation:<span style="color:red;">*</span></label>
               <div class="controls">
                 <input type="text" v-model="formData.numero_autorisation" 
                 class="span"  required />
@@ -108,7 +108,7 @@
 
                             <td colspan="2"> 
             <div class="control-group">
-              <label class="control-label">N°ccm:</label>
+              <label class="control-label">N°ccm:<span style="color:red;">*</span></label>
               <div class="controls">
      <input type="text" v-model="formData.numero_ccm" class="span" 
      placeholder="Saisir le numero"  required/>
@@ -116,18 +116,11 @@
             </div>
                       </td>
                  </tr>
-                   
-                       </table> 
-                </div>
 
-
-
-            <div id="tab2" class="tab-pane">
-                 <table class="table table-bordered table-striped">
-                   <tr>
+                  <tr>
                      <td width="250">
                         <div class="control-group">
-              <label class="control-label">Unite administrative:</label>
+              <label class="control-label">Unite administrative:<span style="color:red;">*</span></label>
               <div class="controls">
            <select v-model="formData.ua_id" class="span">
                <option v-for="plans in uniteAdministratives" :key="plans.id" 
@@ -161,6 +154,17 @@
                   </div>
 
                     </td>
+                     <td  width="250">
+                       <div class="control-group">
+                      <label class="control-label" title="">Source de financement:<span style="color:red;">*</span></label>
+                      <div class="controls">
+                    <select v-model="formData.source_financement_id" class="span">
+                          <option v-for="sourceFinancement in sources_financements" :key="sourceFinancement.id" 
+                         :value="sourceFinancement.id">{{sourceFinancement.libelle}}</option>
+                     </select>
+              </div>
+            </div>
+               </td>
                   </tr>
 
                   <tr>
@@ -173,23 +177,7 @@
               </div>
             </div>
                     </td>
-                     <td  width="250">
-                       <div class="control-group">
-                      <label class="control-label" title="Source de financement">Source de financement:</label>
-                      <div class="controls">
-                    <select v-model="formData.source_financement_id" class="span">
-                          <option v-for="sourceFinancement in sources_financements" :key="sourceFinancement.id" 
-                         :value="sourceFinancement.id">{{sourceFinancement.libelle}}</option>
-                     </select>
-              </div>
-            </div>
-               </td>
-                    
-                 </tr> 
-
-
-                   <tr>
-                        <td  width="250">
+                          <td  width="250">
                  <div class="control-group">
                   <label class="control-label">Classification Economique</label>
                   <div class="controls">
@@ -221,11 +209,20 @@
             </div>
                     </td>
                     
-                 </tr> 
+                    
+                 </tr>  
+                </table> 
+                </div>
+
+
+
+            <!-- <div id="tab2" class="tab-pane">
+                 <table class="table table-bordered table-striped">
+                  
                          
        
             </table> 
-            </div>
+            </div> -->
             
 
             <div id="tab3" class="tab-pane">
@@ -237,7 +234,7 @@
                         <td>         
                   
                 <div class="control-group">
-              <label class="control-label">Moyen de transport:</label>
+              <label class="control-label">Moyen de transport:<span style="color:red;">*</span></label>
               <div class="controls">
                 <select v-model="formData.moyen_transport" class="span">
         
@@ -394,7 +391,7 @@
                     
                         <td >           
                <div class="control-group">
-              <label class="control-label">Date depart:</label>
+              <label class="control-label">Date depart:<span style="color:red;">*</span></label>
               <div class="controls">
                 <input type="date" v-model="formData.date_depart" class="span"/>
               </div>
