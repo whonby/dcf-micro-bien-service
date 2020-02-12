@@ -22,7 +22,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
+                            <tr v-if="detail_marche">
                                 <td class="taskDesc">{{detail_marche.objet}}</td>
                                 <td class="taskStatus">{{detail_marche.reference_marche}}</td>
                                 <td class="taskOptions">
@@ -127,7 +127,7 @@
                                                 <div class="controls">
                                                     <input type="text" class="span5" placeholder="Libelle lot" v-model="formBailleur.montant">
                                                 </div>
-                                                <div class="controls">
+                                                <div class="controls" v-if="detail_marche">
                                                     <code>Reste bailleur : {{parseFloat(detail_marche.montant_marche)-montantBailleurMarcheCompare(marcheid)}}</code>
                                                     <code v-if="montantBailleurMarcheCompare(marcheid)>=parseFloat(detail_marche.montant_marche)">
                                                         Le montant total des bailleurs ne toi etre supperier au montant du marche
@@ -135,7 +135,7 @@
                                                 </div>
                                             </div>
                                         </form>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer" v-if="detail_marche">
                                             <button @click.prevent="ajouterBailleur" class="btn btn-primary" v-if="montantBailleurMarcheCompare(marcheid)<=parseFloat(detail_marche.montant_marche)">Valider</button>
                                             <button data-dismiss="modal" class="btn" href="#">Fermer</button>
                                         </div>
@@ -305,8 +305,8 @@
                <li class=""><a data-toggle="tab" href="#tab33">Demande ANO</a></li>
                 <li class=""><a data-toggle="tab" href="#tab34">Avis DMP</a></li>
                  <li class=""><a data-toggle="tab" href="#tab35">Avis Bailleur</a></li>
-                
-                 <li class=""><a data-toggle="tab" href="#tab37" >Actes</a></li>
+                 
+                 <li class=""><a data-toggle="tab" href="#tab37" title="Acte effet financier">Actes</a></li>
 
             
 
@@ -818,6 +818,303 @@
 
 
               </div>
+
+              
+
+              <!--- debut de formulaire de modification  de dossier de candidat-->
+
+               <div id="modificationDossierCandidatModal" class="modal hide tlDossierCandidat">
+                   <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Modification dossier candidat</h3>
+                 </div>
+                  <div class="modal-body">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                        <tr class="odd gradeX">
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">registre de commerce</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Registre de commerce" v-model="editDossierCadidature.reg_com">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Numero de compte contribuable</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Situation Geographique" v-model="editDossierCadidature.numero_cc">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Raison social</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Raison social" v-model="editDossierCadidature.nom_cand">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Email</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Email" v-model="editDossierCadidature.email_cand">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        <tr class="odd gradeX">
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Telephone</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Telphone" v-model="editDossierCadidature.telephone_cand">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Address </label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Adresse" v-model="editDossierCadidature.adresse_post">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+
+                                <div class="control-group">
+                                    <label class="control-label">Numero de dossier</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Numero dossier" v-model="editDossierCadidature.numero_dossier">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Type candidat</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Type Candidat" v-model="editDossierCadidature.type_candidat">
+                                    </div>
+                                </div>
+                            </td>
+
+
+
+                        </tr>
+
+
+                        <tr class="odd gradeX">
+                            <td>
+                                <label>Appel Offre</label>
+                                <div class="controls">
+                                    <select hidden v-model="editDossierCadidature.appel_offre_id" class="span" disabled>
+                                        <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
+                                                :value="varText.id">{{varText.ref_appel}}</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Accord groupe</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Accord Groupe" v-model="editDossierCadidature.accord_group">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Cautionnement prov</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Cautionnement" v-model="editDossierCadidature.cautionnement_prov">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Pouv habil signataire</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Pouv Hile Signature" v-model="editDossierCadidature.pouv_habil_signataire">
+                                    </div>
+                                </div>
+                            </td>
+
+
+                        </tr>
+
+
+                        <tr class="odd gradeX">
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Attestion banc</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Attestation banc" v-model="editDossierCadidature.attest_banc">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Formulaire proo techn</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Formul propo tech" v-model="editDossierCadidature.formul_propo_tech">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Fiche rsgnt </label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Fiche renseignement" v-model="editDossierCadidature.fiche_rsgnt_cand">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Piece admin</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Piece Admin" v-model="editDossierCadidature.piece_admin">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        <tr class="odd gradeX">
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Fiche rsgnt nombre groupe</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Fiche renseignement nombre groupe" v-model="editDossierCadidature.fiche_rsgnt_mbre_group">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Atcdent marche non exe</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Atcent marche non exe" v-model="editDossierCadidature.atcdent_marche_non_exe">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Org travau site</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Org travau" v-model="editDossierCadidature.org_travau_site">
+                                     </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Metch real travau</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Meth real travau" v-model="editDossierCadidature.meth_real_travau">
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+
+                        <tr class="odd gradeX">
+
+                            <td>
+                                <label>Procedure de passation</label>
+                                <div class="controls">
+                                    <select v-model="editDossierCadidature.procedure_passation_id" class="span" disabled>
+                                        <option v-for="varText in procedurePassations" :key="varText.id"
+                                                :value="varText.id">{{varText.libelle}}</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Date de naissance</label>
+                                    <div class="controls">
+                                          <input type="date" class="" placeholder="" v-model="editDossierCadidature.date_nais_cand">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Capacite financiere</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Capacite financiere" v-model="editDossierCadidature.capacite_financiere">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <label class="control-label">Prog mobilisation</label>
+                                        <input type="Text" class="" placeholder="Programme mobilisation" v-model="editDossierCadidature.prog_mobilisation">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">CAA moyen acc entre</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="CAA moyen ac entre" v-model="editDossierCadidature.caa_moyen_ac_entre">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Capacite finanancier</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Capacite financement" v-model="editDossierCadidature.capacite_financement">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Capacite techn exp</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Capacite tech exp" v-model="editDossierCadidature.capacite_tech_exp">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Montant offre financiere</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Mont offre financiere" v-model="editDossierCadidature.mt_offre_financiere">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        
+                        </tbody>
+                    </table>
+                  </div>
+                        
+                     <div class="modal-footer">
+                <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationDossierCandidatLocal" href="#">Modifier</a>
+                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>    
+               </div>
+
+              <!-- fin de formulaire de modification de dossier de candidat --->
+
+
+
 
 
 
@@ -1408,7 +1705,7 @@
                         <!-- <th>Reference offre</th> -->
                         
                         <th>Date </th>
-                        <th>Reference dmp </th>
+                        <th>Reference offre </th>
                         <th>Avis</th>
                         <th>Numero courrier dmp</th>
                         <th>Observation</th>
@@ -1423,11 +1720,11 @@
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             {{formaterDate(anoBailleur.date_ano_dmp) || 'Non renseigné'}}</td>
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
-                            {{anoBailleur.numero_courie || 'Non renseigné'}}</td>
+                            {{anoBailleur.appel_offre.ref_appel || 'Non renseigné'}}</td>
 
 
                          <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
-                            <button class="btn btn-success btn-mini" v-if="anoBailleur.avis_bail==1">Non objection</button>
+                            <button class="btn btn-success btn-mini" v-if="anoBailleur.avis_bail== 1">Non objection</button>
                             <button class="btn btn-danger btn-mini" v-else>Objection</button>
                         </td>
 
@@ -1458,25 +1755,60 @@
                 <div align="right">
                     <div class="widget-content">
 
-                        <a href="#ajouterObservationBailleur" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+                        <a href="#ajouterObservationBailleur" data-toggle="modal" class="btn btn-success">Ajouter</a>
 
                     </div>
 
                 </div>
-                <h4> Liste du PV</h4>
+
+
+                <h4> liste de PV</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
 
-                        <th>Reference du PV</th>
-                        
-                        
-                        
+                        <!-- <th>ANO DMP bailleur</th>  -->
+                        <th>Reference Offre</th>
+                        <th>Reference PV</th>
+                        <th>Fichier</th>
+                        <th>Avis</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                  
+                    <tr class="odd gradeX" v-for="pv in listePV(marcheid)"
+                        :key="pv.id">
+                        <!-- <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
+                            {{anoBailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td> -->
+                        <td @click="afficheAnoDPMBailleurModale(pv.id)">
+                            {{pv.appel_offre.ref_appel || 'Non renseigné'}}</td>
+                        <td @click="afficheAnoDPMBailleurModale(pv.id)">
+                            {{pv.reference || 'Non renseigné'}}</td>
+                        <td @click="afficheAnoDPMBailleurModale(pv.id)">
+                            <a v-if="pv.fichier" :href="pv.fichier" class="btn btn-default" target="_blank">
+                                <span class=""><i class="icon-book"></i>
+                                </span>
+                            </a>
+                        </td>
+
+
+                        <td @click="afficheAnoDPMBailleurModale(pv.id)">
+                            <button class="btn btn-info btn-mini" v-if="pv.avie==null">En attende</button>
+                            <button class="btn btn-success btn-mini" v-else-if="pv.avie== 1">Non Objection</button>
+                            <button class="btn btn-danger btn-mini" v-else>Non Objection</button>
+                        </td>
+
+
+                        <td>
+                        <div class="btn-group">
+
+                            <a href="#infoPV" @click.prevent="infoPVAffiche(pv.reference)" data-toggle="modal" class="btn"><span class=""><i class="icon-folder-open" ></i></span></a>
+                            <button @click.prevent="supprimerAnoDMPBailleur(pv.id)"  class="btn btn-danger " title="Supprimer">
+                                <span class=""><i class="icon-trash"></i></span></button>
+
+                        </div>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
 
@@ -1497,19 +1829,17 @@
             <div class="modal-body">
                 <form class="form-horizontal">
 
-                 <div class="control-group">
+                    <!--  <div class="control-group">
                         <label class="control-label">Reference PV</label>
                         <div class="controls">
                             <input type="text" v-model="formPv.ref_pv" class="span">
-
-                           
                         </div>
-                    </div>
+                    </div>-->
 
                      <div class="control-group">
               <label class="control-label">Fichier joint:</label>
               <div class="controls">
-                <input type="file" id="file"  @change="onFichierChange" />
+                <input type="file"   @change="OnchangeFichier" />
               </div>
             </div>
                    
@@ -1520,7 +1850,7 @@
             </div>
             <div class="modal-footer">
                 <a
-                        @click.prevent="ajoutObservationBailleurLocal"
+                        @click.prevent="ajouterPV"
                         class="btn btn-primary"
                         href="#"
 
@@ -1528,12 +1858,62 @@
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a>
             </div>
         </div>
+
+              <div id="infoPV" class="modal hide grdirModalActeEffet">
+                  <div class="modal-header">
+                      <button data-dismiss="modal" class="close" type="button">×</button>
+                      <h3>PROCES-VERBAL DE JUGEMENT DES OFFRES</h3>
+                  </div>
+                  <div class="modal-body" v-if="resultaAnalysePv">
+                      <h4 class="text-center">ATTRIBUTION DU MARCHE</h4>
+                      <div>
+                          Suivant les résultats de l’évaluation des offres présentés par le rapporteur dans le
+                          tableau ci-dessus, il apparaît que le soumissionnaire <b v-if="resultaAnalysePv.length>0">{{resultaAnalysePv[0].dossier_candidature.nom_cand }}</b> propose
+                          l’offre conforme la moins-disante.
+                      </div>
+                      <h4 class="text-center">TABLEAU RECAPITULATIF DE LA COMPARAISON DES OFFRES</h4>
+                      <table class="table table-bordered table-striped">
+                          <thead>
+                          <tr>
+                              <th>Nom des Soumissionnaires </th>
+                              <th>Note</th>
+                              <th>Classement</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr class="odd gradeX" v-for="(item, index) in resultaAnalysePv"
+                              :key="item.id">
+                              <!-- <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
+                                  {{anoBailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td> -->
+                              <td >
+                                  {{item.dossier_candidature.nom_cand || 'Non renseigné'}}</td>
+                              <td >
+                                  {{item.note_analyse || 'Non renseigné'}}</td>
+                              <td >
+                                  <p v-if="index==0">
+                                      {{index + 1}} er
+                                  </p>
+                                  <p v-else>
+                                      {{index + 1}} eme
+                                  </p>
+
+                              </td>
+
+                          </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                  <div class="modal-footer">
+
+                      <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+                  </div>
+              </div>
 <!-- fin obseravtion bailleur -->
 
 
 
 <!--- debut modification observation bailleur  -->
-<!-- 
+
 <div id="modifierObservationBailleur" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
@@ -1556,7 +1936,7 @@
                         <div class="controls">
                            <select v-model="editObservation1.ano_dmp_bailleur_id" class="span">
                                 <option v-for="varText in listeAnoDMPBailleur(marcheid)" :key="varText.id"
-                                        :value="varText.id">{{varText.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
+                                        :value="varText.id"><!--{{varText.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}--></option>
                             </select>
                         </div>
                     </div>
@@ -1603,7 +1983,7 @@
                 >Modifier</a>
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a>
             </div>
-        </div> -->
+        </div>
 
 <!---fin modification observation bailleur   -->
 
@@ -1701,7 +2081,7 @@
                                     <td>
                      <div class="control-group">
                         <label class="control-label">Entreprise </label>
-                        <div class="controls" >
+                        <div class="controls" v-if="selectionAttributionMarche(marcheid).entrepriseInfo!=''">
                             <input
                                     type="text"
                                     v-model="selectionAttributionMarche(marcheid).entrepriseInfo.raison_sociale"
@@ -1748,22 +2128,23 @@
                         <label class="control-label">Autorité approbatrice</label>
                         <div class="controls">
                             <input
-                                    type="text" v-model="formEffetFinancier.autorite_approbation"
+                                    type="text"
                                     
                                     class="span"
-                                    placeholder="Saisir l'autorité approbatrice "
+                                    placeholder=" "
                             />
                         </div>
                     </div>
 
                             </td>
 
+
                                            <td>
                     <div class="control-group">
                         <label class="control-label"> date d'approbation</label>
                         <div class="controls">
                             <input
-                                    type="date" v-model="formEffetFinancier.date_approbation"
+                                    type="date"
                                     
                                     class="span"
                                     placeholder=" "
@@ -1806,7 +2187,7 @@
                         <tr>
                    
                       
-                          <td colspan="4" width="250">
+                          <td colspan="3" width="250">
                      <div class="control-group">
           <label class="control-label">Libellé acte:</label>
             <div class="controls">
@@ -1890,7 +2271,7 @@
                      <div class="control-group">
                         <label class="control-label" title=" ">Date fin exécution</label>
                         <div class="controls">
-                            <input type="date" :min="formEffetFinancier.date_odre_service" :readonly="getDateRetourValue" v-model="formEffetFinancier.date_fin_exe"
+                            <input type="date" :min="formEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValue" v-model="formEffetFinancier.date_fin_exe"
                                     class="span"
                                     placeholder=""
                             />
@@ -1902,10 +2283,10 @@
 
                                            <td>
                      <div class="control-group">
-                        <label class="control-label" title=" ">Durée d'exécution</label>
+                        <label class="control-label" title=" ">Durée d'exécution(jrs)</label>
                         <div class="controls">
-                            <input type="text"  readonly :value="nombreJourCalucle"
-                                    class="span" placeholder="la duree"
+                            <input type="text"  readonly :value="nombreDejourCalcule"
+                                    class="span"
                                    
                             />
                         </div>
@@ -1979,7 +2360,7 @@
                                     <td>
                      <div class="control-group">
                         <label class="control-label">Entreprise </label>
-                        <div class="controls" >
+                        <div class="controls" v-if="selectionAttributionMarche(marcheid).entrepriseInfo!=''">
                             <input
                                     type="text"
                                     v-model="selectionAttributionMarche(marcheid).entrepriseInfo.raison_sociale"
@@ -2005,7 +2386,7 @@
                     </div>
                             </td>
 
-                              <td>
+                              <!-- <td>
                         <div class="control-group">
                         <label class="control-label">Ano bailleur dmp.</label>
                         <div class="controls">
@@ -2016,51 +2397,21 @@
                         
                         </div>
                     </div>
-                            </td>
+                            </td> -->
                            
                        
                            </tr>
                         <tr>
-                             <td>
-                    <div class="control-group">
-                        <label class="control-label">Autorité approbatrice</label>
-                        <div class="controls">
-                            <input
-                                    type="text" v-model="editActeEffetFinancier.autorite_approbation"
-                                    
-                                    class="span"
-                                    placeholder=" "
-                            />
-                        </div>
-                    </div>
-
-                            </td>
-
-
-                                           <td>
-                    <div class="control-group">
-                        <label class="control-label"> date d'approbation</label>
-                        <div class="controls">
-                            <input
-                                    type="date" v-model="editActeEffetFinancier.date_approbation"
-                                    
-                                    class="span"
-                                    placeholder=" "
-                            />
-                        </div>
-                    </div>
-
-                            </td>
                    
                             <td>
                     <div class="control-group">
-                        <label class="control-label">Numero du marche /contrat</label>
+                        <label class="control-label">Numero du marche</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="editActeEffetFinancier.numero_marche"
                                     class="span"
-                                    placeholder=" "
+                                    placeholder="Saisir le libelle acte "
                             />
                         </div>
                     </div>
@@ -2077,35 +2428,27 @@
                                     type="text"
                                     v-model="editActeEffetFinancier.code_act"
                                     class="span"
-                                    placeholder=""
+                                    placeholder="Saisir le code acte"
                             />
                         </div>
                     </div>
                             </td>
-
-
-
-                              <tr>
-                   
-                      
-                          <td colspan="4" width="250">
-                     <div class="control-group">
-          <label class="control-label">Libellé acte:</label>
-            <div class="controls">
-              <textarea   v-model="editActeEffetFinancier.libelle_act"  class="textarea_editor span12" rows="3" placeholder="Entrer le libellé ..."></textarea>
-            </div>
-          
-        </div>
-         </td>              
-        </tr>
-
-
-
-
-
-
-                 <tr>
-                <td>
+                            <td colspan="2">
+                    <div class="control-group">
+                        <label class="control-label">Libelle acte</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="editActeEffetFinancier.libelle_act"
+                                    class="span"
+                                    placeholder="Saisir le libelle acte "
+                            />
+                        </div>
+                    </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                     <div class="control-group">
                         <label class="control-label">Reference acte</label>
                         <div class="controls">
@@ -2139,70 +2482,13 @@
                         </div>
                     </div>
                             </td>
-                        <td>
-
-                            <div class="control-group">
-                        <label class="control-label" >Date de signature attributaire</label>
-                        <div class="controls">
-                            <input type="date" v-model="editActeEffetFinancier.date_attributaire"
-                                    class="span"
-                                    placeholder=""
-                            />
-                        </div>
-                    </div>
-                            </td>
-                        </tr>
-
-                              <tr>
-
-                    
-                     <td>
+                            <td>
                      <div class="control-group">
-                        <label class="control-label">Date ordre de service demarrage</label>
+                        <label class="control-label">Type</label>
                         <div class="controls">
-                            <input type="date" v-model="editActeEffetFinancier.date_odre_service"
+                            <input type="text" v-model="editActeEffetFinancier.type_doc_modifie"
                                     class="span"
-                                    placeholder=""
-                            />
-                        </div>
-                    </div>
-                            </td>
-
-
-                                         <td>
-                     <div class="control-group">
-                        <label class="control-label" title=" ">Date fin exécution</label>
-                        <div class="controls">
-                            <input type="date"   v-model="editActeEffetFinancier.date_fin_exe"
-                                    class="span"
-                                    placeholder=""
-                            />
-                        </div>
-                    </div>
-                            </td>
-                        
-                        
-
-                                           <td>
-                     <div class="control-group">
-                        <label class="control-label" title=" ">Durée d'exécution(jrs)</label>
-                        <div class="controls">
-                            <input type="text"  v-model="editActeEffetFinancier.duree"
-                                    class="span"
-                                   
-                            />
-                        </div>
-                    </div>
-                            </td>
-
-
-                                             <td>
-                     <div class="control-group">
-                        <label class="control-label" title=" ">Date de reception definitive</label>
-                        <div class="controls">
-                            <input type="date" v-model="editActeEffetFinancier.date_reception"
-                                    class="span"
-                                    placeholder=""
+                                    placeholder="refence acte"
                             />
                         </div>
                     </div>
@@ -3433,7 +3719,7 @@
                    <div class="control-group">
                    <label class="control-label">Fichier joint:</label>
                     <div class="controls">
-                     <input type="file" id="file"  @change="onFichierChange" />
+                     <input type="file" id="file"  @change="OnchangeFichier" />
               </div>
             </div>
                 </form>
@@ -3850,9 +4136,10 @@
         <div id="ajouterMP" class="modal hide grdirModalAnalyse">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>analyse du dossier</h3>
+                <h3>Ajouter dossier analyse</h3>
             </div>
- <table class="table table-bordered table-striped">
+
+                <table class="table table-bordered table-striped">
                         <tr>
                             <td>
                         <div class="control-group">
@@ -3863,9 +4150,9 @@
                                         :value="plans.id">{{plans.ref_appel}}</option>
                             </select>
                         </div>
-                    </div>
+                        </div>
                             </td>
-                                    <!-- <td>
+                            <td>
                      <div class="control-group">
                         <label class="control-label">Dossier candidat</label>
                         <div class="controls">
@@ -3875,11 +4162,10 @@
                             </select>
                         </div>
                     </div>
-                            </td> -->
-
-                            <td>
+                            </td>
 
 
+                     <td>
                        
                     <div class="control-group">
                         <label class="control-label">Cojo</label>
@@ -4798,6 +5084,7 @@
             <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
         </div>
     </div>
+
         <!---->
         <!--Fin contratualisation-->
  
@@ -4945,6 +5232,44 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
               capacite_financement:"",
 
           },
+
+
+          editDossierCadidature:{
+
+               secteur_activite_id:"",
+              numero_cc:"",
+              type_candidat:"",
+              nom_cand:"",
+              prenom_cand:"",
+              date_nais_cand:"",
+              telephone_cand:"",
+              adresse_post:"",
+              situation_geo:"",
+              email_cand:"",
+              procedure_passation_id:"",
+              appel_offre_id:"",
+              accord_group:"",
+              cautionnement_prov:"",
+              pouv_habil_signataire:"",
+              piece_admin:"",
+              reg_com:"",
+              attest_banc:"",
+              formul_propo_tech:"",
+              fiche_rsgnt_cand:"",
+              fiche_rsgnt_mbre_group:"",
+              atcdent_marche_non_exe:"",
+              org_travau_site:"",
+              meth_real_travau:"",
+              prog_mobilisation:"",
+              capacite_financiere:"",
+              caa_moyen_ac_entre:"",
+              capacite_tech_exp:"",
+              mt_offre_financiere:"",
+              numero_dossier:"",
+              capacite_financement:"",
+
+
+          },
          formOffreTechnique:{
              numero_lot:"",
              accord_groupe:"",
@@ -4968,12 +5293,15 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
          formEffetFinancier:{
              code_act:"",
              libelle_act:"",
-             autorite_approbation:"",
-             date_approbation:"",
              reference_act:"",
              objet_act:"",
              incidence_financiere:"",
              montant_act:"",
+             date_attributaire:"",
+             date_reception:"",
+             duree:"",
+             date_fin_exe:"",
+             date_odre_service:"",
              //type_doc_modifie:"",
              livrable_id:"",
              text_juridique_id:"",
@@ -5014,16 +5342,9 @@ editFacture:{
               code_act:"",
              libelle_act:"",
              reference_act:"",
-             date_approbation:"",
-             autorite_approbation:"",
              objet_act:"",
              incidence_financiere:"",
              montant_act:"",
-             duree:"",
-             date_reception:"",
-             date_fin_exe:"",
-             date_odre_service:"",
-             date_attributaire:"",
              //type_doc_modifie:"",
              livrable_id:"",
              text_juridique_id:"",
@@ -5106,9 +5427,9 @@ ref_marche:"",
 num_courrier:""
 
 },
-
 formPv:{
-    ref_pv:""
+    ref_pv:"",
+    fichier_joint_pv:"",
 },
           editDossier:{
               type_candidat:"",
@@ -5164,7 +5485,12 @@ formPv:{
                     //mode_passation_id:""
                 },
                 message_mandater:'',
-                isOffreTechniqueFinancier:false
+                isOffreTechniqueFinancier:false,
+                namePDF: "",
+                fichierPDF: "",
+                imagePDF:"",
+                selectedFile:"",
+                resultaAnalysePv:[]
             };
         },
 created() {
@@ -5183,7 +5509,7 @@ created() {
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "factures", "typeFactures",
-                "getPersonnaliserFacture", "personnaliseGetterMarcheBailleur","getterMembreCojo"]),
+                "getPersonnaliserFacture", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
             ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -5196,40 +5522,30 @@ created() {
             
 
 
+// calculons le nombre de jours pour acteur depense
 
+nombreDejourCalcule(){
+    const acteAffet = this.formEffetFinancier
+    if(acteAffet.date_odre_service == acteAffet.date_fin_exe &&  acteAffet.date_fin_exe !=="" && acteAffet.date_odre_service !=="") return 1
+     if(acteAffet.date_fin_exe =="" && acteAffet.date_odre_service =="") return null
 
+       var dateF = new Date(acteAffet.date_fin_exe).getTime()
+        var dateO = new Date(acteAffet.date_odre_service).getTime()
+           var resultat = dateF - dateO
 
-   nombreJourCalucle(){
-     const form = this.formEffetFinancier
-     if(form.date_odre_service == form.date_fin_exe && form.date_fin_exe !== "" && form.date_odre_service !== "") return 1 
-        if( form.date_fin_exe == "" && form.date_odre_service == "") return null 
-   var dateR = new Date(form.date_fin_exe).getTime()
-    var dateD = new Date(form.date_odre_service).getTime()
-    var diffTime = dateR - dateD
+             var diffJour =  resultat / (1000 * 3600 * 24)
 
-    var diffJours = diffTime / (1000 * 3600 * 24)
-          if(isNaN(diffJours)) return null
+               if(isNaN(diffJour)) return null
 
-    if(parseFloat(diffJours) < 0 ) return "durée invalide"
+               if(parseFloat(diffJour) < 0 ) return "durée invalide"
+                  
+                  return  diffJour;
+   
+},
 
-      return diffJours;
-   },
-
-
-
-
-
-   getDateRetourValue(){
-     return !this.formEffetFinancier.date_odre_service != ""
-   },
-
-
-
-
-
-
-
-
+getDateFinExécutionValue(){
+    return !this.formEffetFinancier.date_odre_service !=""
+},
 
 
 
@@ -5456,7 +5772,13 @@ afficherMotifAnalyse(){
 
                 
             },
-
+             listePV(){
+               return marche_id=>{
+                   if(marche_id!=""){
+                       return this.getterProceVerballe.filter(item=>item.appel_offre.marche_id==marche_id);
+                   }
+               }
+             },
             listeActeEffetFinancier(){
                 return marche_id =>{
                     if(marche_id !=""){
@@ -5590,8 +5912,12 @@ afficherMotifAnalyse(){
                 return marcheid => {
                     if (marcheid != "") {
                         //console.log("Marche attribution marche")
-                        let marcherEnAction=this.getterObseravtionBailleurs.filter(idmarche => idmarche.id == marcheid)
-                        let marcherFavaroble=marcherEnAction.filter(idmarche=>idmarche.avis_bail==1).length
+
+                        let marcherEnAction=this.getterObseravtionBailleurs.filter(idmarche => idmarche.id== marcheid)
+                       let marcherFavaroble=marcherEnAction.filter(idmarche=>idmarche.avis_bail==1).length
+
+                     
+
 
                         //Recherche le candidat qui a le plus gros score parmie les admin
                          if(marcherFavaroble>1){
@@ -5686,7 +6012,7 @@ afficherMotifAnalyse(){
                 , "modifierObservationBaileur","ajouterObseravtionBailleur","supprimerObseravtionBailleur",
                  "ajouterFournisseur", "ajouterActeEffetFinancier",
                 "modifierActeEffetFinancier","supprimerActeEffetFinancier","modifierMarche","modificationMarcheBailleur",
-                "ajouterMarcherBailleur","supprimerMarcheBailleur","ajouterMembreCojo","modificationMembreCojo","supprimerMembreCojo"
+                "ajouterMarcherBailleur","supprimerMarcheBailleur","ajouterMembreCojo","modificationMembreCojo","supprimerMembreCojo","getProceVerbal","ajouterProceVerbal"
 
             ]),
             ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
@@ -5715,7 +6041,19 @@ ajouterStockLocal(){
     }
 
 },
+            infoPVAffiche(ref){
+                this.resultaAnalysePv=[]
+                let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==ref);
+                this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
 
+                if (this.resultaAnalysePv.length>0){
+                    this.resultaAnalysePv.sort(function (a, b) {
+                        return a.note_analyse - b.note_analyse;
+                    }).reverse()
+                }
+
+                console.log(this.resultaAnalysePv)
+            },
 
     onFichierChange(e){
       this.formLettre.fichier_joint = e.target.files[0]
@@ -6019,6 +6357,31 @@ dossier_candidat_id : this.edite_offre_financiere.id
 
                 this.NotisFormulaireDossierCand()
             },
+
+
+// vider l'input 
+
+   // modification de dossier candidat
+
+            modificationDossierCandidatLocal(){
+                this.formFournisseur.raison_sociale=this.editDossierCadidature.nom_cand
+                this.formFournisseur.numero_cc= this.editDossierCadidature.numero_cc
+                this.formFournisseur.numero_rc=this.editDossierCadidature.reg_com
+                this.formFournisseur.telephone=this.editDossierCadidature.telephone_cand
+                this.formFournisseur.adresse=this.editDossierCadidature.adresse_post
+                this.formFournisseur.email=this.editDossierCadidature.email_cand
+                this.formFournisseur.complet=0
+
+                let entre = this.entreprises.find(item =>item.numero_rc==this.formFournisseur.numero_rc)
+                  if(entre==undefined){
+                      this.modifierEntreprise(this.formFournisseur)
+                  }
+                  this.modifierDossierCandidat(this.editDossierCadidature)
+                  this.$('#modificationDossierCandidatModal').modal('hide');
+
+            },
+
+
             ajouterDemandeAnoLocal(){
                 this.ajouterDemandeAno(this.formDemande)
                 this.formDemande={
@@ -6034,7 +6397,7 @@ dossier_candidat_id : this.edite_offre_financiere.id
 ajouterModalActeEffetFinancierLocal(entreprise_id){
         var nouvelObjet = {
             ...this.formEffetFinancier,
-            duree: this.nombreJourCalucle
+            duree: this.nombreDejourCalcule
         }
               //  console.log(this.formEffetFinancier)
     this.formEffetFinancier.marche_id=this.marcheid
@@ -6091,7 +6454,6 @@ afficherModalModifierActeEffetFinancier(index){
 
 // vider l'input 
 modifierModalActeEffetFinancierLocal(entreprise_id){
-
     this.editActeEffetFinancier.entreprise_id=entreprise_id
     this.modifierActeEffetFinancier(this.editActeEffetFinancier)
     this.$('#modifierActeEF').modal('hide');
@@ -6153,7 +6515,11 @@ modifierModalActeEffetFinancierLocal(entreprise_id){
                     avis_bail:"",
                     date_avis_bail:""
             }
-        },ajouterAnoDMPBailleurLocal(){
+        },ajouterAnoDMPBailleurLocal(){  
+            // var nouvelObjet = {
+            //     ...this.formAno,
+            //      ref_ano_dmp: this.recuperationDeAvisDmp
+            // }
             
                this.ajouterAnoDMPBailleur(this.formAno)
                 this.formAno={
@@ -6373,6 +6739,13 @@ ajouterNouveauFournisseurLocal(registeCommerce){
             // eslint-disable-next-line no-unused-vars
             afficheBouttonTechFin(index){
              this.isOffreTechniqueFinancier=true
+            this.$('#modificationDossierCandidatModal').modal({
+                    backdrop:'static',
+                    keyboard:false
+                });
+                this.editDossierCadidature = this.dossierCandidature(this.marcheid)[index];
+
+
             },
             afficheBouttonTechFinInvitation(index){
                 this.$('#modificationLettreInvitation').modal({
@@ -6393,6 +6766,36 @@ ajouterNouveauFournisseurLocal(registeCommerce){
             ExporterEnExel(){
                 this.$refs.excel.click()
             }
+,
+            OnchangeFichier(e) {
+                const files = e.target.files;
+                this.selectedFile = event.target.files[0];
+                console.log(this.selectedFile)
+                Array.from(files).forEach(file => this.addFichierPDF(file));
+            },
+            addFichierPDF(file) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = e => {
+                    vm.imagePDF = "pdf.png";
+                    vm.namePDF = file.name;
+                    vm.fichierPDF = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
+            ajouterPV(){
+                const formData = new FormData();
+                formData.append('fichier', this.selectedFile, this.selectedFile.name);
+                formData.append('appel_offre_id', this.formLot.appel_offre_id);
+                let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }
+                console.log(formData)
+                this.ajouterProceVerbal(formData,config);
+
+            }
         }
     };
 </script>
@@ -6412,7 +6815,7 @@ ajouterNouveauFournisseurLocal(registeCommerce){
 
  width: 1000px;
  margin: 0 -530px;
- height: 500px;
+ height: 550px;
 
     }
     .grdirModalAnalyse{
@@ -6424,6 +6827,12 @@ ajouterNouveauFournisseurLocal(registeCommerce){
   width: 1000px;
  margin: 0 -530px;
  height: 450px;
+
+    }
+    .tlDossierCandidat{
+        width: 1000px;
+ margin: 0 -530px;
+ height: 500px;
 
     }
 
