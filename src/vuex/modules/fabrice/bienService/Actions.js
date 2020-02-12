@@ -2800,7 +2800,7 @@ export function supprimerMandater({commit}, id) {
 /*Action demande ANO*/
 
 export  function  getDemandeAno({commit}) {
-    queue.push(() => axios.get('/demande_ano').then((response) => {
+    queue.push(() => axios.get('/rdemande_ano').then((response) => {
         // console.log(response.data.data)
         commit('GET_DEMANDE_ANO', response.data.data)
 
@@ -2809,8 +2809,8 @@ export  function  getDemandeAno({commit}) {
 
 
 
-export function ajouterDemandeAno({commit}, elementAjout){
-    asyncLoading(axios.post('/demande_ano',elementAjout)).then(response =>{
+export function ajouterDemandeAno({commit}, elementAjout,config){
+    asyncLoading(axios.post('/rdemande_ano',elementAjout,config)).then(response =>{
         if(response.status == 201){
             commit('AJOUTER_DEMANDE_ANO', response.data)
 
@@ -2826,8 +2826,8 @@ export function ajouterDemandeAno({commit}, elementAjout){
 
 
 
-export function modifierDemandeAno({commit}, element_modifie) {
-    asyncLoading( axios.put('/demande_ano',element_modifie)).then(response => {
+export function modifierDemandeAno({commit}, element_modifie,config) {
+    asyncLoading( axios.post('/rdemande_ano_update',element_modifie,config)).then(response => {
         commit('MODIFIER_DEMANDE_ANO', response.data)
         this.$app.$notify({
             title: 'success ',
@@ -2844,7 +2844,7 @@ export function supprimerDemandeAno({commit}, id) {
         .then(dialog => {
             commit('SUPPRIMER_DEMANDE_ANO', id)
             // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete('/demande_ano/' + id).then(() => dialog.close() )
+            axios.delete('/rdemande_ano/' + id).then(() => dialog.close() )
         })
 
 }
@@ -2866,8 +2866,10 @@ export  function  getAnalyseDMP({commit}) {
 export function ajouterAnalyseDMP({commit}, elementAjout){
     asyncLoading(axios.post('/analyse_dmp',elementAjout)).then(response =>{
         if(response.status == 201){
-            commit('AJOUTER_ANALYSE_DMP', response.data)
-
+            /*console.log(response.data.jugement)
+            console.log(response.data.analyse);*/
+            commit('AJOUTER_ANALYSE_DMP', response.data.analyse)
+             commit('MODIFIER_PV', response.data.jugement)
             this.$app.$notify({
                 title: 'success ',
                 text: 'Enregistrement effectué !',
@@ -2882,7 +2884,8 @@ export function ajouterAnalyseDMP({commit}, elementAjout){
 
 export function modifierAnalyseDMP({commit}, element_modifie) {
     asyncLoading( axios.put('/analyse_dmp',element_modifie)).then(response => {
-        commit('MODIFIER_ANALYSE_DMP', response.data)
+        commit('MODIFIER_ANALYSE_DMP', response.data.analyse)
+        commit('MODIFIER_PV', response.data.jugement)
         this.$app.$notify({
             title: 'success ',
             text: 'Modification effectué !',

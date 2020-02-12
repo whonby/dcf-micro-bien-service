@@ -1524,11 +1524,13 @@ export const GET_ANALYSE_DMP = (state, tableau_autre_text_juridique) =>{
 
 export const AJOUTER_ANALYSE_DMP = (state, elementAjouter) => {
     state.analyseDMP.unshift(elementAjouter)
+
 }
 
 
 
 export const MODIFIER_ANALYSE_DMP= (state, elementModif)=>{
+
     state.analyseDMP = state.analyseDMP.map(response => {
         if(response.id == elementModif.id){
             response = {...elementModif}
