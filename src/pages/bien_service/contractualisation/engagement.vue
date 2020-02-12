@@ -5412,7 +5412,7 @@ Ajouter Facture Definitive
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter Facture Definitive</h3>
       </div>
-      <div class="modal-body taillemodal89" >
+      <div class="modal-body " >
         <table class="table table-bordered table-striped tailfacture">
          
           <tr>
