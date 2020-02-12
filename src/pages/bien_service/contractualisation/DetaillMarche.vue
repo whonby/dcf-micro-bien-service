@@ -1512,9 +1512,8 @@
                         <th>Note</th>
                         <th>Type d'analyse</th>
                         <th>Controller finnancier</th>
-                        <th>Autorite contractante</th>
-                        <th>DMP</th>
-                        <th>Numero dossier APPEL offre</th>
+                        <!--<th>Avis</th>-->
+
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -1535,12 +1534,11 @@
                             {{appelOffre.type_analyse.libelle || 'Non renseigné'}}</td>
                         <td @click="afficheAnnalyseDossier(index)">
                             {{appelOffre.cojo.controleur_finnancier || 'Non renseigné'}}</td>
-                        <td @click="afficheAnnalyseDossier(index)">
-                            {{appelOffre.cojo.autorite_contractante || 'Non renseigné'}}</td>
-                        <td @click="afficheAnnalyseDossier(index)">
-                            {{appelOffre.cojo.num_dossier_appel_offre || 'Non renseigné'}}</td>
-                        <td @click="afficheAnnalyseDossier(index)">
-                            {{appelOffre.cojo.dmp || 'Non renseigné'}}</td>
+                        <!--<td @click="afficheAnnalyseDossier(index)">
+                            <button class="btn btn-info btn-mini" v-if="avisPv(appelOffre.reference_pv)==null">En attende</button>
+                            <button class="btn btn-success btn-mini" v-else-if="avisPv(appelOffre.reference_pv)== 1">Non Objection</button>
+                            <button class="btn btn-danger btn-mini" v-else>Objection</button>
+                        </td>-->
                         <div class="btn-group">
                             <button @click.prevent="supprimerAnalyseDossier(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
@@ -1572,11 +1570,13 @@
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
-                        <th>Numero dossier Candidat</th>
-                        <th>Rang Analyse</th>
-                        <th>Reference offre </th>
+                        <th>Numéro courrier</th>
+                        <th>Reference marché</th>
+                        <th>Reférence d'offre </th>
+                        <th>Reference PV</th>
                         <th>Date demande</th>
-                        <th>Numero courrier</th>
+                        <th>Avis</th>
+                        <th>Fichier</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -1585,16 +1585,26 @@
                     <tr class="odd gradeX" v-for="demande in demandeAno(marcheid)"
                         :key="demande.id" >
                         <td @click="afficheDemandeDAO(demande.id)">
-                            {{demande.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td>
-                        <td @click="afficheDemandeDAO(demande.id)">
-                            {{demande.annalyse_dossier.rang_analyse || 'Non renseigné'}}</td>
+                            {{demande.num_courrier || 'Non renseigné'}}</td>
                         <td @click="afficheDemandeDAO(demande.id)">
                             {{demande.ref_marche || 'Non renseigné'}}</td>
                         <td @click="afficheDemandeDAO(demande.id)">
-                            {{formaterDate(demande.date_demande) || 'Non renseigné'}}</td>
+                            {{demande.proce_verbal_offre.appel_offre.ref_appel || 'Non renseigné'}}</td>
                         <td @click="afficheDemandeDAO(demande.id)">
-                            {{demande.num_courrier || 'Non renseigné'}}</td>
-                       
+                            {{demande.proce_verbal_offre.reference || 'Non renseigné'}}</td>
+                        <td @click="afficheDemandeDAO(demande.id)">
+                            {{formaterDate(demande.date_demande) || 'Non renseigné'}}</td>
+                        <td>
+                            <button class="btn btn-info btn-mini" v-if="avisPv(demande.proce_verbal_offre.reference)==null">En attende</button>
+                            <button class="btn btn-success btn-mini" v-else-if="avisPv(demande.proce_verbal_offre.reference)== 1">Non Objection</button>
+                            <button class="btn btn-danger btn-mini" v-else>Objection</button>
+                        </td>
+                        <td>
+                            <a v-if="demande.fichier" :href="demande.fichier" class="btn btn-default" target="_blank">
+                                <span class=""><i class="icon-book"></i>
+                                </span>
+                            </a>
+                        </td>
                         <div class="btn-group">
                             <button @click.prevent="supprimerDemandeAno(demande.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span>
@@ -1622,12 +1632,11 @@
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
-                        <th>Reference Dmp</th>
-                        <th>Numero dossier candidat</th>
+                        <th>Numero du courrier</th>
+                        <th>Référence PV</th>
                         <th>Date avis</th>
                         <th>Decision </th>
                         <th>Observation</th>
-                        <!-- <th>Document procedure</th> -->
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -1636,10 +1645,11 @@
                         :key="document.id">
 
                         <td @click="afficheAnalyseDMP(document.id)">
-                            {{document.ref_dmp || 'Non renseigné'}}</td>
+                            {{document.demande_ano.num_courrier || 'Non renseigné'}}</td>
 
                         <td @click="afficheAnalyseDMP(document.id)">
-                            {{document.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td>
+                            {{document.demande_ano.proce_verbal_offre.reference || 'Non renseigné'}}
+                        </td>
                         <td @click="afficheAnalyseDMP(document.id)">
                             {{formaterDate(document.date_avis_bail) || 'Non renseigné'}}</td>
                         
@@ -1795,7 +1805,7 @@
                         <td @click="afficheAnoDPMBailleurModale(pv.id)">
                             <button class="btn btn-info btn-mini" v-if="pv.avie==null">En attende</button>
                             <button class="btn btn-success btn-mini" v-else-if="pv.avie== 1">Non Objection</button>
-                            <button class="btn btn-danger btn-mini" v-else>Non Objection</button>
+                            <button class="btn btn-danger btn-mini" v-else>Objection</button>
                         </td>
 
 
@@ -4390,15 +4400,14 @@
                     </div>
 
 
-                    <!-- <div class="control-group">
-                        <label class="control-label">Dossier candidat</label>
-                        <div class="controls">
-                            <select v-model="formDemande.analyse_dossier_id" class="span">
-                                <option v-for="plans in listeAnalyseDossier(marcheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.dossier_candidature.numero_dossier}} - {{plans.dossier_candidature.nom_cand}} {{plans.dossier_candidature.prenom_cand}} </option>
+                     <div class="control-group">
+                        <label class="control-label">PV</label>
+                        <div class="controls" v-if="listePVDemandePV(marcheid)">
+                            <select v-model="formDemande.proce_verbal_jugement_offre_id" class="span">
+                                <option :value="listePVDemandePV(marcheid).id">{{listePVDemandePV(marcheid).reference}}</option>
                             </select>
                         </div>
-                    </div> -->
+                    </div>
 
 
                      <div class="control-group">
@@ -4450,7 +4459,7 @@
          <div class="control-group">
               <label class="control-label">Fichier joint:</label>
               <div class="controls">
-                <input type="file" id="file"  @change="onFichierChange" />
+                <input type="file" @change="OnchangeFichierDemandeAno" />
               </div>
             </div>
 
@@ -4489,11 +4498,10 @@
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Dossier candidat</label>
-                        <div class="controls">
-                            <select v-model="edite_demande_dao.analyse_dossier_id" class="span">
-                                <option v-for="plans in listeAnalyseDossier(marcheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.dossier_candidature.numero_dossier}} - {{plans.dossier_candidature.nom_cand}} {{plans.dossier_candidature.prenom_cand}} </option>
+                        <label class="control-label">PV</label>
+                        <div class="controls" v-if="listePVDemandePV(marcheid)">
+                            <select v-model="formDemande.proce_verbal_jugement_offre_id" class="span">
+                                <option :value="listePVDemandePV(marcheid).id">{{listePVDemandePV(marcheid).reference}}</option>
                             </select>
                         </div>
                     </div>
@@ -4522,9 +4530,13 @@
                             />
                         </div>
                     </div>
-                   
+                    <div class="control-group">
+                        <label class="control-label">Fichier joint:</label>
+                        <div class="controls">
+                            <input type="file" @change="OnchangeFichierDemandeAno" />
+                        </div>
+                    </div>
 
-                    
 
                 </form>
             </div>
@@ -4560,14 +4572,23 @@
               </td>
                <td>
                 <div class="control-group">
-                        <label class="control-label">Reference courrier</label>
-                        <div class="controls">
-                        <input type="text" :value="recupererNumeroCourier" class="span4" readonly>
+                        <label class="control-label">Reference courrier ano</label>
+                        <div class="controls" v-if="demandeAnoAnalyseDMP(marcheid)">
+                        <input type="text" :value="demandeAnoAnalyseDMP(marcheid).num_courrier" class="span4" readonly>
                         </div>
                     </div>
               </td>
             </tr>
+
             <tr>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label">PV</label>
+                        <div class="controls" v-if="demandeAnoAnalyseDMP(marcheid)">
+                            <input type="text" :value="demandeAnoAnalyseDMP(marcheid).proce_verbal_offre.reference" class="span4" readonly>
+                        </div>
+                    </div>
+                </td>
               <td>
                 <div class="control-group">
                   <label class="control-label">Avis</label>
@@ -4580,22 +4601,23 @@
                 </div>
               </td>
              
-               <td>
-                 <div class="control-group">
-                        <label class="control-label">Date avis</label>
-                        <div class="controls">
-                        <input type="date" v-model="formAnalyseDMP.date_avis_bail" class="span4">
-                        </div>
-                    </div>
-              </td>
+
             </tr>
             <tr>
-            <td colspan="2">
+                <td>
+                    <div class="control-group">
+                        <label class="control-label">Date avis</label>
+                        <div class="controls">
+                            <input type="date" v-model="formAnalyseDMP.date_avis_bail" class="span4">
+                        </div>
+                    </div>
+                </td>
+            <td >
                 <div class="control-group">
                         <label class="control-label">Observation</label>
                         <div class="controls">
                        
-                        <textarea v-model="formAnalyseDMP.observation" rows="2" class="span8" :readonly="verrouObjection">
+                        <textarea v-model="formAnalyseDMP.observation" rows="2" class="span4" :readonly="verrouObjection">
 
                         </textarea>
                         </div>
@@ -4631,10 +4653,10 @@
                      <div class="control-group">
                         <label class="control-label">Demande ANO</label>
                         <div class="controls">
-                            <select v-model="edite_analyse_dpm.demande_ano_id" class="span">
+                            <!--<select v-model="edite_analyse_dpm.demande_ano_id" class="span">
                                 <option v-for="varText in demandeAno(marcheid)" :key="varText.id"
                                         :value="varText.id">{{varText.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
-                            </select>
+                            </select>-->
                         </div>
                     </div>
 
@@ -4782,7 +4804,7 @@
                  <div class="control-group">
               <label class="control-label">Fichier joint:</label>
               <div class="controls">
-                <input type="file" id="file"  @change="onFichierChange" />
+                <input type="file"  @change="onFichierChange" />
               </div>
             </div>
                             </td>
@@ -5369,7 +5391,8 @@ formDemande:{
 date_demande:"",
 ref_marche:"",
 num_courrier:"",
-    analyse_dossier_id:""
+    analyse_dossier_id:"",
+    proce_verbal_jugement_offre_id:""
 
 },
 
@@ -5490,7 +5513,11 @@ formPv:{
                 fichierPDF: "",
                 imagePDF:"",
                 selectedFile:"",
-                resultaAnalysePv:[]
+                resultaAnalysePv:[],
+                namePDFDemandeAno: "",
+                fichierPDFDemandeAno: "",
+                imagePDFDemandeAno:"",
+                selectedFileDemandeAno:"",
             };
         },
 created() {
@@ -5680,14 +5707,6 @@ montantHT() {
 
 
 
-
-
-
-
-
-
-
-
             //afficher le motif avis bailleur 
             afficherMotifBailleur(){
                 return this.formAno.avis_bail =="1";
@@ -5775,10 +5794,40 @@ afficherMotifAnalyse(){
              listePV(){
                return marche_id=>{
                    if(marche_id!=""){
-                       return this.getterProceVerballe.filter(item=>item.appel_offre.marche_id==marche_id);
+                       let objet=this.getterProceVerballe.filter(item=>item.appel_offre.marche_id==marche_id);
+                       console.log("PV est en cour10")
+                       return objet
                    }
                }
              },
+            listePVDemandePV(){
+                return marche_id=>{
+                    if(marche_id!=""){
+                        return this.getterProceVerballe.find(item=>{
+                            if(item.appel_offre.marche_id==marche_id && item.avie==null ){
+                                let vM=this;
+                                vM.formDemande.proce_verbal_jugement_offre_id=item.id
+                                return item;
+                            }
+                        });
+                    }
+                }
+            },
+            avisPv(){
+                return reference=>{
+                    if(reference!=""){
+
+                        let info=this.getterProceVerballe.find(item=>item.reference==reference);
+                        if(info.avie==null){
+                            return null
+                        }else{
+                            return info.avie
+                        }
+                    }
+                    return null;
+                }
+            }
+            ,
             listeActeEffetFinancier(){
                 return marche_id =>{
                     if(marche_id !=""){
@@ -5842,7 +5891,7 @@ afficherMotifAnalyse(){
         listeAnalyseDossier: function () {
             return marcheid => {
                 if (marcheid != "") {
-                   // console.log("Marche liste analyse dossier")
+                    console.log("Marche liste analyse dossier")
                     return this.getterAnalyseDossiers.filter(idmarche => idmarche.dossier_candidature.appel_offre.marche_id == marcheid)
                 }
             }
@@ -5851,16 +5900,38 @@ afficherMotifAnalyse(){
             demandeAno: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                        //console.log("Marche demande ano")
-                        return this.getterDemandeAno.filter(idmarche => idmarche.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
+                        console.log("Marche demande ano")
+
+                        let obje=this.getterDemandeAno.filter(idmarche => idmarche.proce_verbal_offre.appel_offre.marche_id == marcheid)
+                        console.log("Testest0101")
+                        return obje
+                    }
+                }
+            },
+            demandeAnoAnalyseDMP: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                        console.log("Marche demande ano AnalyseDmp marche_id")
+
+                        let obje=this.getterDemandeAno.find(idmarche => {
+                            if(idmarche.proce_verbal_offre.appel_offre.marche_id == marcheid && idmarche.proce_verbal_offre.avie==null){
+                                let vM=this;
+                                vM.formAnalyseDMP.demande_ano_id=idmarche.id;
+                                return idmarche;
+                            }
+                        })
+                        console.log("Marche demande 41000000")
+                        return obje
                     }
                 }
             },
             listeAnalyseDPM: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                       // console.log("Marche liste analyse dpm")
-                        return this.getterAnalyseDMP.filter(idmarche => idmarche.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid)
+                        console.log("Marche liste analyse dpm")
+                        let objet=this.getterAnalyseDMP.filter(idmarche => idmarche.demande_ano.proce_verbal_offre.appel_offre.marche_id == marcheid)
+                       console.log("ok c'est la vie 010101")
+                        return objet;
                     }
                 }
 
@@ -5882,8 +5953,10 @@ afficherMotifAnalyse(){
             listeAnoDMPBailleur: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                       // console.log("Marche dmp bailleur")
-                        return this.getterAnoDMPBailleur.filter(idmarche => idmarche.id == marcheid)
+                        console.log("Marche dmp bailleur")
+                        let objet=this.getterAnoDMPBailleur.filter(idmarche => idmarche.id == marcheid)
+                        console.log("Marche dmp bailleru 7474")
+                        return objet
                     }
                 }
             },
@@ -5891,9 +5964,9 @@ afficherMotifAnalyse(){
             listeAnalyseDMPFavorable: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                       // console.log("Marche analyse DMP Favorable")
+                       console.log("Marche analyse DMP Favorable")
                         return this.getterAnalyseDMP.filter(idmarche => {
-                            if(idmarche.demande_ano.annalyse_dossier.dossier_candidature.appel_offre.marche_id == marcheid && idmarche.avis_bail==1){
+                            if(idmarche.demande_ano.proce_verbal_offre.appel_offre.marche_id == marcheid && idmarche.avis_bail==1){
                              return idmarche
                             }
                         })
@@ -5984,7 +6057,7 @@ afficherMotifAnalyse(){
             listeActeEffectFinnancier: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                       // console.log("Marche leste acte effect finnancier")
+                       console.log("Marche leste acte effect finnancier")
                         return this.getActeEffetFinancierPersonnaliser.filter(idmarche => idmarche.marche_id == marcheid)
                     }
                 }
@@ -6381,18 +6454,6 @@ dossier_candidat_id : this.edite_offre_financiere.id
 
             },
 
-
-            ajouterDemandeAnoLocal(){
-                this.ajouterDemandeAno(this.formDemande)
-                this.formDemande={
-                        date_demande:"",
-                        ref_marche:"",
-                        num_courrier:"",
-                        analyse_dossier_id:""
-
-                }
-            },
-
             // vider l'input de acte  effet financier
 ajouterModalActeEffetFinancierLocal(entreprise_id){
         var nouvelObjet = {
@@ -6498,16 +6559,13 @@ modifierModalActeEffetFinancierLocal(entreprise_id){
         
 
         ajouterAnalyseDMPB(){
-             var nouvelObjet = {
+     /*        var nouvelObjet = {
         ...this.formAnalyseDMP,
         ref_dmp: this.detail_marche.id,
         ref_courier: this.recupererNumeroCourier,
-      
-      
-
-      };
-                //console.log(this.formAnalyseDMP)
-            this.ajouterAnalyseDMP(nouvelObjet)
+      };*/
+                console.log(this.formAnalyseDMP)
+            this.ajouterAnalyseDMP(this.formAnalyseDMP)
             this.formAnalyseDMP={
                      ref_dmp:"",
                     demande_ano_id:"",
@@ -6695,10 +6753,7 @@ ajouterNouveauFournisseurLocal(registeCommerce){
                 this.$('#modificationMantater').modal('hide');
             },
 
-            editDemandeDAO(){
-                this.modifierDemandeAno(this.edite_demande_dao)
-                this.$('#modifDemandeAno').modal('hide');
-            },
+
 
             modificationDossierAnalyse(){
                 this.modifierAnalyseDossier(this.edite_analyse_dossier)
@@ -6795,7 +6850,68 @@ ajouterNouveauFournisseurLocal(registeCommerce){
                 console.log(formData)
                 this.ajouterProceVerbal(formData,config);
 
+            },
+            OnchangeFichierDemandeAno(e) {
+                const files = e.target.files;
+                this.selectedFileDemandeAno = event.target.files[0];
+                console.log(this.selectedFileDemandeAno)
+                Array.from(files).forEach(file => this.addFichierPDFDemandeAno(file));
+            },
+            addFichierPDFDemandeAno(file) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = e => {
+                    vm.imagePDFDemandeAno = "pdf.png";
+                    vm.namePDFDemandeAno = file.name;
+                    vm.fichierPDFDemandeAno = e.target.result;
+                };
+                reader.readAsDataURL(file);
             }
+            ,
+            ajouterDemandeAnoLocal(){
+                const formData = new FormData();
+                formData.append('fichier', this.selectedFileDemandeAno, this.selectedFileDemandeAno.name);
+                formData.append('proce_verbal_jugement_offre_id', this.formDemande.proce_verbal_jugement_offre_id);
+                formData.append('date_demande', this.formDemande.date_demande);
+                formData.append('ref_marche', this.formDemande.ref_marche);
+                formData.append('num_courrier', this.formDemande.num_courrier);
+                let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }
+                console.log(formData)
+                this.ajouterDemandeAno(formData,config)
+                this.formDemande={
+                    date_demande:"",
+                    ref_marche:"",
+                    num_courrier:"",
+                    analyse_dossier_id:"",
+                    proce_verbal_jugement_offre_id:""
+
+                }
+            },
+            editDemandeDAO(){
+                console.log(this.edite_demande_dao)
+                const formData = new FormData();
+                formData.append('proce_verbal_jugement_offre_id', this.edite_demande_dao.proce_verbal_jugement_offre_id);
+                formData.append('date_demande', this.edite_demande_dao.date_demande);
+                formData.append('ref_marche', this.edite_demande_dao.ref_marche);
+                formData.append('num_courrier', this.edite_demande_dao.num_courrier);
+                formData.append('id', this.edite_demande_dao.id);
+                console.log(formData)
+                if ( this.selectedFileDemandeAno!==""){
+                    formData.append('fichier', this.selectedFileDemandeAno, this.selectedFileDemandeAno.name);
+                }
+                let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }
+
+                this.modifierDemandeAno(formData,config)
+                this.$('#modifDemandeAno').modal('hide');
+            },
         }
     };
 </script>
