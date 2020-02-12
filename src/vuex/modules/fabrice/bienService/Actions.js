@@ -40,22 +40,22 @@ var queue = housecall({concurrency: 2, cooldown: 1000})
 
 // action pour ajiouter nouveau fournisseur
 
-export function ajouterFournisseur({commit}, elementAjout){
-  asyncLoading(axios.post('/urls', elementAjout)).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_NOUVEAU_FOURNISSEUR', response.data)
+// export function ajouterFournisseur({commit}, elementAjout){
+//   asyncLoading(axios.post('/urls', elementAjout)).then(response =>{
+//       if(response.status == 201){
+//           commit('AJOUTER_NOUVEAU_FOURNISSEUR', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+//           this.$app.$notify({
+//             title: 'success ',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
 
 
-  }).catch(error => console.log(error))
+//   }).catch(error => console.log(error))
 
-}
+// }
 
 
 // action pour modifier prestation
@@ -93,84 +93,84 @@ export function ajouterFournisseur({commit}, elementAjout){
 
 
 
-export  function  getActeDepense({commit}) {
-    queue.push(() => axios.get('/url').then((response) => {
-      commit('GET_ALL_ACTE_DEPENSE', response.data)
+// export  function  getActeDepense({commit}) {
+//     queue.push(() => axios.get('/url').then((response) => {
+//       commit('GET_ALL_ACTE_DEPENSE', response.data)
       
-  }).catch(error => console.log(error)))
-  }
+//   }).catch(error => console.log(error)))
+//   }
 
   // action pour ajouter acte depense
-  export function ajouterActeDepense({commit}, elementAjout){
-    asyncLoading(axios.post('/urls',{
+//   export function ajouterActeDepense({commit}, elementAjout){
+//     asyncLoading(axios.post('/urls',{
     
-    matricule:elementAjout.matricule,
-    id_type_acte_depense:elementAjout.id_type_acte_depense,
-    montant:elementAjout.montant,
-    dotation_budgetaire:elementAjout.dotation_budgetaire,
-    engagement_anterieur:elementAjout.engagement_anterieur,
-    engagement_actuel:elementAjout.engagement_actuel,
-    engagement_cumule:elementAjout.engagement_cumule,
-    disponible_budgetaire:elementAjout.disponible_budgetaire,
-    objet_depense:elementAjout.objet_depense,
-    ligne_budgetaire:elementAjout.ligne_budgetaire,
-    Type_de_procedure:elementAjout.Type_de_procedure
+//     matricule:elementAjout.matricule,
+//     id_type_acte_depense:elementAjout.id_type_acte_depense,
+//     montant:elementAjout.montant,
+//     dotation_budgetaire:elementAjout.dotation_budgetaire,
+//     engagement_anterieur:elementAjout.engagement_anterieur,
+//     engagement_actuel:elementAjout.engagement_actuel,
+//     engagement_cumule:elementAjout.engagement_cumule,
+//     disponible_budgetaire:elementAjout.disponible_budgetaire,
+//     objet_depense:elementAjout.objet_depense,
+//     ligne_budgetaire:elementAjout.ligne_budgetaire,
+//     Type_de_procedure:elementAjout.Type_de_procedure
 
        
-  })).then(response =>{
-        if(response.status == 201){
-            commit('AJOUTER_ACTE_DEPENSE', response.data)
+//   })).then(response =>{
+//         if(response.status == 201){
+//             commit('AJOUTER_ACTE_DEPENSE', response.data)
 
-            this.$app.$notify({
-              title: 'success ',
-              text: 'Enregistrement effectué !',
-              type:"success"
-            })
-        }
+//             this.$app.$notify({
+//               title: 'success ',
+//               text: 'Enregistrement effectué !',
+//               type:"success"
+//             })
+//         }
 
-    }).catch(error => console.log(error))
-}
+//     }).catch(error => console.log(error))
+// }
 
 // action pour modifier acte depense
 
 
- export function modifierActeDepense({commit}, element_modifie) {
-    asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+//  export function modifierActeDepense({commit}, element_modifie) {
+//     asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
    
-      matricule:element_modifie.matricule,
-      id_type_acte_depense:element_modifie.id_type_acte_depense,
-      montant:element_modifie.montant,
-      dotation_budgetaire:element_modifie.dotation_budgetaire,
-      engagement_anterieur:element_modifie.engagement_anterieur,
-      engagement_actuel:element_modifie.engagement_actuel,
-      engagement_cumule:element_modifie.engagement_cumule,
-      disponible_budgetaire:element_modifie.disponible_budgetaire,
-      objet_depense:element_modifie.objet_depense,
-      ligne_budgetaire:element_modifie.ligne_budgetaire,
-      Type_de_procedure:element_modifie.Type_de_procedure
+//       matricule:element_modifie.matricule,
+//       id_type_acte_depense:element_modifie.id_type_acte_depense,
+//       montant:element_modifie.montant,
+//       dotation_budgetaire:element_modifie.dotation_budgetaire,
+//       engagement_anterieur:element_modifie.engagement_anterieur,
+//       engagement_actuel:element_modifie.engagement_actuel,
+//       engagement_cumule:element_modifie.engagement_cumule,
+//       disponible_budgetaire:element_modifie.disponible_budgetaire,
+//       objet_depense:element_modifie.objet_depense,
+//       ligne_budgetaire:element_modifie.ligne_budgetaire,
+//       Type_de_procedure:element_modifie.Type_de_procedure
 
-   })).then(response => {
-         commit('MODIFIER_ACTE_DEPENSE', response.data)
+//    })).then(response => {
+//          commit('MODIFIER_ACTE_DEPENSE', response.data)
          
 
-         this.$app.$notify({
-           title: 'success ',
-           text: 'Modification effectué !',
-           type:"success"
-         })
-     }).catch(error => console.log(error))
- }
+//          this.$app.$notify({
+//            title: 'success ',
+//            text: 'Modification effectué !',
+//            type:"success"
+//          })
+//      }).catch(error => console.log(error))
+//  }
   // action pour la suppression d'acte de depense
-export function supprimerActeDepense({commit}, id) {
-   this.$app.$dialog
-   .confirm("Voulez vouz vraiment supprimer ?.")
-   .then(dialog => {
-      commit('SUPPRIMER_ACTE_DEPENSE', id)
-     // // dialog.loading(false) // stops the proceed button's loader
-       axios.delete('/urls/' + id).then(() => dialog.close() )   
-   })
+// export function supprimerActeDepense({commit}, id) {
+//    this.$app.$dialog
+//    .confirm("Voulez vouz vraiment supprimer ?.")
+//    .then(dialog => {
+//       commit('SUPPRIMER_ACTE_DEPENSE', id)
+
+//        axios.delete('/urls/' + id).then(() => dialog.close() )   
+//    })
  
-}
+// }
 
 
 export  function  getBailleur({commit}) {
@@ -479,74 +479,74 @@ export function supprimerActeEffetFinancier({commit}, id) {
 // actions pour acteur depense
 
 
-export  function  getActeurDepense({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_ACTEUR_DEPENSE', response.data)
+// export  function  getActeurDepense({commit}) {
+//   queue.push(() => axios.get('/url').then((response) => {
+//     commit('GET_ALL_ACTEUR_DEPENSE', response.data)
     
-}).catch(error => console.log(error)))
-}
+// }).catch(error => console.log(error)))
+// }
 
 // action pour ajouter acteur depense
-export function ajouterActeurDepense({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-     id_fonction:elementAjout.id_fonction,
-     nom:elementAjout.nom,
-     prenom:elementAjout.prenom,
-     date_naissance:elementAjout.date_naissance,
-     grade:elementAjout.grade,
-     emploi:elementAjout.emploi,
-     situation_matrimoniale:elementAjout.situation_matrimoniale,
-     date_premier_service:elementAjout.date_premier_service
-})).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_ACTEUR_DEPENSE', response.data)
+// export function ajouterActeurDepense({commit}, elementAjout){
+//   asyncLoading(axios.post('/urls',{
+//      id_fonction:elementAjout.id_fonction,
+//      nom:elementAjout.nom,
+//      prenom:elementAjout.prenom,
+//      date_naissance:elementAjout.date_naissance,
+//      grade:elementAjout.grade,
+//      emploi:elementAjout.emploi,
+//      situation_matrimoniale:elementAjout.situation_matrimoniale,
+//      date_premier_service:elementAjout.date_premier_service
+// })).then(response =>{
+//       if(response.status == 201){
+//           commit('AJOUTER_ACTEUR_DEPENSE', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+//           this.$app.$notify({
+//             title: 'success ',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
 
-  }).catch(error => console.log(error))
-}
+//   }).catch(error => console.log(error))
+// }
 
 // action pour modifier acteur depense
 
 
-export function modifierActeurDepense({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    id_fonction:element_modifie.id_fonction,
-    nom:element_modifie.nom,
-    prenom:element_modifie.prenom,
-    date_naissance:element_modifie.date_naissance,
-    grade:element_modifie.grade,
-    emploi:element_modifie.emploi,
-    situation_matrimoniale:element_modifie.situation_matrimoniale,
-    date_premier_service:element_modifie.date_premier_service
+// export function modifierActeurDepense({commit}, element_modifie) {
+//   asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+//     id_fonction:element_modifie.id_fonction,
+//     nom:element_modifie.nom,
+//     prenom:element_modifie.prenom,
+//     date_naissance:element_modifie.date_naissance,
+//     grade:element_modifie.grade,
+//     emploi:element_modifie.emploi,
+//     situation_matrimoniale:element_modifie.situation_matrimoniale,
+//     date_premier_service:element_modifie.date_premier_service
       
 
- })).then(response => {
-       commit('MODIFIER_ACTEUR_DEPENSE', response.data)
+//  })).then(response => {
+//        commit('MODIFIER_ACTEUR_DEPENSE', response.data)
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
-}
+//        this.$app.$notify({
+//          title: 'success ',
+//          text: 'Modification effectué !',
+//          type:"success"
+//        })
+//    }).catch(error => console.log(error))
+// }
 // supprimer categorie mision
-export function supprimerActeurDepense({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_ACTEUR_DEPENSE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
- })
+// export function supprimerActeurDepense({commit}, id) {
+//  this.$app.$dialog
+//  .confirm("Voulez vouz vraiment supprimer ?.")
+//  .then(dialog => {
+//     commit('SUPPRIMER_ACTEUR_DEPENSE', id)
+   
+//      axios.delete('/urls/' + id).then(() => dialog.close() )   
+//  })
 
-}
+// }
 
 
 
@@ -710,143 +710,143 @@ export function supprimerTypePrestation({commit}, id) {
 
 // action pour code fonction && type de prestation
 
-export  function  getCodeFonction({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_CODE_FONCTION', response.data)
+// export  function  getCodeFonction({commit}) {
+//   queue.push(() => axios.get('/url').then((response) => {
+//     commit('GET_CODE_FONCTION', response.data)
     
-}).catch(error => console.log(error)))
-}
+// }).catch(error => console.log(error)))
+// }
 
 // action pour ajouter code fonction 
-export function ajouterCodeFonction({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    numero_code_fonction:elementAjout.numero_code_fonction,
-    entite_concernee:elementAjout.entite_concernee,
-    debut_validite:elementAjout.debut_validite,
-    fin_validite:elementAjout.fin_validite
-})).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_CODE_FONCTION', response.data)
+// export function ajouterCodeFonction({commit}, elementAjout){
+//   asyncLoading(axios.post('/urls',{
+//     numero_code_fonction:elementAjout.numero_code_fonction,
+//     entite_concernee:elementAjout.entite_concernee,
+//     debut_validite:elementAjout.debut_validite,
+//     fin_validite:elementAjout.fin_validite
+// })).then(response =>{
+//       if(response.status == 201){
+//           commit('AJOUTER_CODE_FONCTION', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+//           this.$app.$notify({
+//             title: 'success ',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
 
-  }).catch(error => console.log(error))
-}
+//   }).catch(error => console.log(error))
+// }
 
 // action pour modifier code fonction
 
 
-export function modifierCodeFonction({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    numero_code_fonction:element_modifie.numero_code_fonction,
-    entite_concernee:element_modifie.entite_concernee,
-    debut_validite:element_modifie.debut_validite,
-    fin_validite:element_modifie.fin_validite
+// export function modifierCodeFonction({commit}, element_modifie) {
+//   asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+//     numero_code_fonction:element_modifie.numero_code_fonction,
+//     entite_concernee:element_modifie.entite_concernee,
+//     debut_validite:element_modifie.debut_validite,
+//     fin_validite:element_modifie.fin_validite
     
- })).then(response => {
-       commit('MODIFIER_CODE_FONCTION', response.data)
+//  })).then(response => {
+//        commit('MODIFIER_CODE_FONCTION', response.data)
        
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
-}
+//        this.$app.$notify({
+//          title: 'success ',
+//          text: 'Modification effectué !',
+//          type:"success"
+//        })
+//    }).catch(error => console.log(error))
+// }
 // supprimer code fonction
-export function supprimerCodeFonction({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_CODE_FONCTION', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
- })
+// export function supprimerCodeFonction({commit}, id) {
+//  this.$app.$dialog
+//  .confirm("Voulez vouz vraiment supprimer ?.")
+//  .then(dialog => {
+//     commit('SUPPRIMER_CODE_FONCTION', id)
+ 
+//      axios.delete('/urls/' + id).then(() => dialog.close() )   
+//  })
 
-}
+// }
 
 
 
 // action pour  compte
 
-export  function  getCompte({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_COMPTE', response.data)
+// export  function  getCompte({commit}) {
+//   queue.push(() => axios.get('/url').then((response) => {
+//     commit('GET_ALL_COMPTE', response.data)
     
-}).catch(error => console.log(error)))
-}
+// }).catch(error => console.log(error)))
+// }
 
 // action pour ajouter compte
-export function ajouterCompte({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    numero_compte:elementAjout.numero_compte,
-    id_fournisseur:elementAjout.id_fournisseur,
-    id_banque:elementAjout.id_banque,
-    date_ouverture_compte:elementAjout.date_ouverture_compte,
-    signataire_compte:elementAjout.signataire_compte,
-    nature_compte:elementAjout.nature_compte,
-    agence:elementAjout.agence,
-    numero_agence:elementAjout.numero_agence,
-    numero_telephone:elementAjout.numero_telephone
+// export function ajouterCompte({commit}, elementAjout){
+//   asyncLoading(axios.post('/urls',{
+//     numero_compte:elementAjout.numero_compte,
+//     id_fournisseur:elementAjout.id_fournisseur,
+//     id_banque:elementAjout.id_banque,
+//     date_ouverture_compte:elementAjout.date_ouverture_compte,
+//     signataire_compte:elementAjout.signataire_compte,
+//     nature_compte:elementAjout.nature_compte,
+//     agence:elementAjout.agence,
+//     numero_agence:elementAjout.numero_agence,
+//     numero_telephone:elementAjout.numero_telephone
 
     
-})).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_COMPTE', response.data)
+// })).then(response =>{
+//       if(response.status == 201){
+//           commit('AJOUTER_COMPTE', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+//           this.$app.$notify({
+//             title: 'success ',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
 
-  }).catch(error => console.log(error))
-}
+//   }).catch(error => console.log(error))
+// }
 
 // action pour modifier compte
 
 
-export function modifierCompte({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    numero_compte:element_modifie.numero_compte,
-    id_fournisseur:element_modifie.id_fournisseur,
-    id_banque:element_modifie.id_banque,
-    date_ouverture_compte:element_modifie.date_ouverture_compte,
-    signataire_compte:element_modifie.signataire_compte,
-    nature_compte:element_modifie.nature_compte,
-    agence:element_modifie.agence,
-    numero_agence:element_modifie.numero_agence,
-    numero_telephone:element_modifie.numero_telephone
- })).then(response => {
-       commit('MODIFIER_COMPTE', response.data)
+// export function modifierCompte({commit}, element_modifie) {
+//   asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+//     numero_compte:element_modifie.numero_compte,
+//     id_fournisseur:element_modifie.id_fournisseur,
+//     id_banque:element_modifie.id_banque,
+//     date_ouverture_compte:element_modifie.date_ouverture_compte,
+//     signataire_compte:element_modifie.signataire_compte,
+//     nature_compte:element_modifie.nature_compte,
+//     agence:element_modifie.agence,
+//     numero_agence:element_modifie.numero_agence,
+//     numero_telephone:element_modifie.numero_telephone
+//  })).then(response => {
+//        commit('MODIFIER_COMPTE', response.data)
        
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
-}
+//        this.$app.$notify({
+//          title: 'success ',
+//          text: 'Modification effectué !',
+//          type:"success"
+//        })
+//    }).catch(error => console.log(error))
+// }
 // supprimer compte
 
-export function supprimerCompte({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_COMPTE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
- })
+// export function supprimerCompte({commit}, id) {
+//  this.$app.$dialog
+//  .confirm("Voulez vouz vraiment supprimer ?.")
+//  .then(dialog => {
+//     commit('SUPPRIMER_COMPTE', id)
+   
+//      axios.delete('/urls/' + id).then(() => dialog.close() )   
+//  })
 
-}
+// }
 
 
 
@@ -1204,196 +1204,196 @@ export  function  getFonctionOccuppe({commit}) {
 }
 
 // action pour ajouter la fonction occuppee
-export function ajouterFonctionOccuppe({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    code_fonction:elementAjout.code_fonction,
-    libelle_fonction:elementAjout.libelle_fonction,
-    date_debut_fonction:elementAjout.date_debut_fonction,
-    date_fin_fonction:elementAjout.date_fin_fonction
+// export function ajouterFonctionOccuppe({commit}, elementAjout){
+//   asyncLoading(axios.post('/urls',{
+//     code_fonction:elementAjout.code_fonction,
+//     libelle_fonction:elementAjout.libelle_fonction,
+//     date_debut_fonction:elementAjout.date_debut_fonction,
+//     date_fin_fonction:elementAjout.date_fin_fonction
     
-})).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_FONCTION_OCCUPPE', response.data)
+// })).then(response =>{
+//       if(response.status == 201){
+//           commit('AJOUTER_FONCTION_OCCUPPE', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+//           this.$app.$notify({
+//             title: 'success ',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
 
-  }).catch(error => console.log(error))
-}
+//   }).catch(error => console.log(error))
+// }
 
 // action pour modifier la fonction occuppe
 
 
-export function modifierFonctionOccuppe({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    code_fonction:element_modifie.code_fonction,
-    libelle_fonction:element_modifie.libelle_fonction,
-    date_debut_fonction:element_modifie.date_debut_fonction,
-    date_fin_fonction:element_modifie.date_fin_fonction
+// export function modifierFonctionOccuppe({commit}, element_modifie) {
+//   asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+//     code_fonction:element_modifie.code_fonction,
+//     libelle_fonction:element_modifie.libelle_fonction,
+//     date_debut_fonction:element_modifie.date_debut_fonction,
+//     date_fin_fonction:element_modifie.date_fin_fonction
     
- })).then(response => {
-       commit('MODIFIER_FONCTION_OCCUPPE', response.data)
+//  })).then(response => {
+//        commit('MODIFIER_FONCTION_OCCUPPE', response.data)
        
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
-}
+//        this.$app.$notify({
+//          title: 'success ',
+//          text: 'Modification effectué !',
+//          type:"success"
+//        })
+//    }).catch(error => console.log(error))
+// }
 // supprimer la fonction occuppe
 
-export function supprimerFonctionOccuppe({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_FONCTION_OCCUPPE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
- })
+// export function supprimerFonctionOccuppe({commit}, id) {
+//  this.$app.$dialog
+//  .confirm("Voulez vouz vraiment supprimer ?.")
+//  .then(dialog => {
+//     commit('SUPPRIMER_FONCTION_OCCUPPE', id)
+  
+//      axios.delete('/urls/' + id).then(() => dialog.close() )   
+//  })
 
-}
+// }
 
 
 
 // action pour la nature de fonction
 
-export  function  getNatureFonction({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_NATURE_FONCTION', response.data)
+// export  function  getNatureFonction({commit}) {
+//   queue.push(() => axios.get('/url').then((response) => {
+//     commit('GET_ALL_NATURE_FONCTION', response.data)
     
-}).catch(error => console.log(error)))
-}
+// }).catch(error => console.log(error)))
+// }
 
 // action pour ajouter la nature de fonction
-export function ajouterNatureFonction({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    id_type:elementAjout.id_type,
-    libelle_fonction:elementAjout.libelle_fonction,
-    type_fonction:elementAjout.type_fonction
+// export function ajouterNatureFonction({commit}, elementAjout){
+//   asyncLoading(axios.post('/urls',{
+//     id_type:elementAjout.id_type,
+//     libelle_fonction:elementAjout.libelle_fonction,
+//     type_fonction:elementAjout.type_fonction
     
-})).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_NATURE_FONCTION', response.data)
+// })).then(response =>{
+//       if(response.status == 201){
+//           commit('AJOUTER_NATURE_FONCTION', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+//           this.$app.$notify({
+//             title: 'success ',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
 
-  }).catch(error => console.log(error))
-}
+//   }).catch(error => console.log(error))
+// }
 
 // action pour modifier la nature de fonction
 
 
-export function modifierNatureFonction({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    id_type:element_modifie.id_type,
-    libelle_fonction:element_modifie.libelle_fonction,
-    type_fonction:element_modifie.type_fonction
+// export function modifierNatureFonction({commit}, element_modifie) {
+//   asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+//     id_type:element_modifie.id_type,
+//     libelle_fonction:element_modifie.libelle_fonction,
+//     type_fonction:element_modifie.type_fonction
     
     
- })).then(response => {
-       commit('MODIFIER_NATURE_FONCTION', response.data)
+//  })).then(response => {
+//        commit('MODIFIER_NATURE_FONCTION', response.data)
        
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
-}
+//        this.$app.$notify({
+//          title: 'success ',
+//          text: 'Modification effectué !',
+//          type:"success"
+//        })
+//    }).catch(error => console.log(error))
+// }
 // supprimer la nature de fonction
 
-export function supprimerNatureFonction({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_NATURE_FONCTION', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
- })
+// export function supprimerNatureFonction({commit}, id) {
+//  this.$app.$dialog
+//  .confirm("Voulez vouz vraiment supprimer ?.")
+//  .then(dialog => {
+//     commit('SUPPRIMER_NATURE_FONCTION', id)
+ 
+//      axios.delete('/urls/' + id).then(() => dialog.close() )   
+//  })
 
-}
+// }
 
 
 
 // action pour la signature
 
-export  function  getSignature({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_SIGNATURE', response.data)
+// export  function  getSignature({commit}) {
+//   queue.push(() => axios.get('/url').then((response) => {
+//     commit('GET_ALL_SIGNATURE', response.data)
     
-}).catch(error => console.log(error)))
-}
+// }).catch(error => console.log(error)))
+// }
 
 // action pour ajouter la signature
 
-export function ajouterSignature({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    signature:elementAjout.signature,
-    debut_validite:elementAjout.debut_validite,
-    fin_validite:elementAjout.fin_validite,
-    version:elementAjout.version,
-    id_signature_modifie:elementAjout.id_signature_modifie
+// export function ajouterSignature({commit}, elementAjout){
+//   asyncLoading(axios.post('/urls',{
+//     signature:elementAjout.signature,
+//     debut_validite:elementAjout.debut_validite,
+//     fin_validite:elementAjout.fin_validite,
+//     version:elementAjout.version,
+//     id_signature_modifie:elementAjout.id_signature_modifie
     
-})).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_SIGNATURE', response.data)
+// })).then(response =>{
+//       if(response.status == 201){
+//           commit('AJOUTER_SIGNATURE', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+//           this.$app.$notify({
+//             title: 'success ',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
 
-  }).catch(error => console.log(error))
-}
+//   }).catch(error => console.log(error))
+// }
 
 // action pour modifier la signature
 
 
-export function modifierSignature({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    signature:element_modifie.signature,
-    debut_validite:element_modifie.debut_validite,
-    fin_validite:element_modifie.fin_validite,
-    version:element_modifie.version,
-    id_signature_modifie:element_modifie.id_signature_modifie
+// export function modifierSignature({commit}, element_modifie) {
+//   asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+//     signature:element_modifie.signature,
+//     debut_validite:element_modifie.debut_validite,
+//     fin_validite:element_modifie.fin_validite,
+//     version:element_modifie.version,
+//     id_signature_modifie:element_modifie.id_signature_modifie
     
- })).then(response => {
-       commit('MODIFIER_SIGNATURE', response.data)
+//  })).then(response => {
+//        commit('MODIFIER_SIGNATURE', response.data)
        
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
-}
+//        this.$app.$notify({
+//          title: 'success ',
+//          text: 'Modification effectué !',
+//          type:"success"
+//        })
+//    }).catch(error => console.log(error))
+// }
 // supprimer la signature
 
-export function supprimerSignature({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_SIGNATURE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
- })
+// export function supprimerSignature({commit}, id) {
+//  this.$app.$dialog
+//  .confirm("Voulez vouz vraiment supprimer ?.")
+//  .then(dialog => {
+//     commit('SUPPRIMER_SIGNATURE', id)
 
-}
+//      axios.delete('/urls/' + id).then(() => dialog.close() )   
+//  })
+
+// }
 
 
 // action pour type acte effet financier
@@ -1509,207 +1509,207 @@ export function supprimertypeAnalyse({commit}, id) {
 
 
 
-export  function  getTypeUA({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_TYPE_UA', response.data)
+// export  function  getTypeUA({commit}) {
+//   queue.push(() => axios.get('/url').then((response) => {
+//     commit('GET_TYPE_UA', response.data)
     
-}).catch(error => console.log(error)))
-}
+// }).catch(error => console.log(error)))
+// }
 
 // action pour ajouter type unite administrative
 
-export function ajouterTypeUA({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    libelle:elementAjout.libelle
-})).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_TYPE_UA', response.data)
+// export function ajouterTypeUA({commit}, elementAjout){
+//   asyncLoading(axios.post('/urls',{
+//     libelle:elementAjout.libelle
+// })).then(response =>{
+//       if(response.status == 201){
+//           commit('AJOUTER_TYPE_UA', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+//           this.$app.$notify({
+//             title: 'success ',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
 
-  }).catch(error => console.log(error))
-}
+//   }).catch(error => console.log(error))
+// }
 
 // action pour modifier type unite administrative
 
 
-export function modifierTypeUA({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    libelle:element_modifie.libelle
+// export function modifierTypeUA({commit}, element_modifie) {
+//   asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+//     libelle:element_modifie.libelle
     
- })).then(response => {
-       commit('MODIFIER_TYPE_UA', response.data)
+//  })).then(response => {
+//        commit('MODIFIER_TYPE_UA', response.data)
        
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
-}
+//        this.$app.$notify({
+//          title: 'success ',
+//          text: 'Modification effectué !',
+//          type:"success"
+//        })
+//    }).catch(error => console.log(error))
+// }
 // supprimer type unite administrative
 
-export function supprimerTypeUA({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_TYPE_UA', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
- })
+// export function supprimerTypeUA({commit}, id) {
+//  this.$app.$dialog
+//  .confirm("Voulez vouz vraiment supprimer ?.")
+//  .then(dialog => {
+//     commit('SUPPRIMER_TYPE_UA', id)
+ 
+//      axios.delete('/urls/' + id).then(() => dialog.close() )   
+//  })
 
-}
+// }
 
 
 
 // action pour unite administrative
 
-export  function  getUniteAdministrative({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_UNITE_ADMINISTRATIVE', response.data)
+// export  function  getUniteAdministrative({commit}) {
+//   queue.push(() => axios.get('/url').then((response) => {
+//     commit('GET_ALL_UNITE_ADMINISTRATIVE', response.data)
     
-}).catch(error => console.log(error)))
-}
+// }).catch(error => console.log(error)))
+// }
 
 // action pour unite administrative
 
-export function ajouterUniteAdministrative({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    type_service:elementAjout.type_service,
-    service_principale:elementAjout.service_principale,
-    groupe_de_service:elementAjout.groupe_de_service,
-    numero_ordre:elementAjout.numero_ordre
-})).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_UNITE_ADMINISTRATIVE', response.data)
+// export function ajouterUniteAdministrative({commit}, elementAjout){
+//   asyncLoading(axios.post('/urls',{
+//     type_service:elementAjout.type_service,
+//     service_principale:elementAjout.service_principale,
+//     groupe_de_service:elementAjout.groupe_de_service,
+//     numero_ordre:elementAjout.numero_ordre
+// })).then(response =>{
+//       if(response.status == 201){
+//           commit('AJOUTER_UNITE_ADMINISTRATIVE', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+//           this.$app.$notify({
+//             title: 'success ',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
 
-  }).catch(error => console.log(error))
-}
+//   }).catch(error => console.log(error))
+// }
 
 // action pour modifier type analyse
 
 
-export function modifierUniteAdministrative({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-     type_service:element_modifie.type_service,
-    service_principale:element_modifie.service_principale,
-    groupe_de_service:element_modifie.groupe_de_service,
-    numero_ordre:element_modifie.numero_ordre
- })).then(response => {
-       commit('MODIFIER_UNITE_ADMINISTRATIVE', response.data)
+// export function modifierUniteAdministrative({commit}, element_modifie) {
+//   asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+//      type_service:element_modifie.type_service,
+//     service_principale:element_modifie.service_principale,
+//     groupe_de_service:element_modifie.groupe_de_service,
+//     numero_ordre:element_modifie.numero_ordre
+//  })).then(response => {
+//        commit('MODIFIER_UNITE_ADMINISTRATIVE', response.data)
        
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
-}
+//        this.$app.$notify({
+//          title: 'success ',
+//          text: 'Modification effectué !',
+//          type:"success"
+//        })
+//    }).catch(error => console.log(error))
+// }
 // supprimer unite administrative
 
-export function supprimerUniteAdministrative({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_UNITE_ADMINISTRATIVE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
- })
+// export function supprimerUniteAdministrative({commit}, id) {
+//  this.$app.$dialog
+//  .confirm("Voulez vouz vraiment supprimer ?.")
+//  .then(dialog => {
+//     commit('SUPPRIMER_UNITE_ADMINISTRATIVE', id)
+ 
+//      axios.delete('/urls/' + id).then(() => dialog.close() )   
+//  })
 
-}
+// }
 
 
 
 // action pour recuper la liste d'unite de zone
 
-export  function  getUniteZone({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_UNITE_ZONE', response.data)
+// export  function  getUniteZone({commit}) {
+//   queue.push(() => axios.get('/url').then((response) => {
+//     commit('GET_ALL_UNITE_ZONE', response.data)
     
-}).catch(error => console.log(error)))
-}
+// }).catch(error => console.log(error)))
+// }
 
 // action pour ajouter l'unite de zone
 
-export function ajouterUniteZone({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    id_zone_geographique:elementAjout.id_zone_geographique,
-    id_unite_administrative:elementAjout.id_unite_administrative,
-    id_unite_zone:elementAjout.id_unite_zone,
-    longitude:elementAjout.longitude,
-    latitude:elementAjout.latitude,
-    telephone_cel:elementAjout.telephone_cel,
-    adresse_postale:elementAjout.adresse_postale,
-    telephone_fixe:elementAjout.telephone_fixe,
-    description_localisation:elementAjout.description_localisation,
-    quartier:elementAjout.quartier
+// export function ajouterUniteZone({commit}, elementAjout){
+//   asyncLoading(axios.post('/urls',{
+//     id_zone_geographique:elementAjout.id_zone_geographique,
+//     id_unite_administrative:elementAjout.id_unite_administrative,
+//     id_unite_zone:elementAjout.id_unite_zone,
+//     longitude:elementAjout.longitude,
+//     latitude:elementAjout.latitude,
+//     telephone_cel:elementAjout.telephone_cel,
+//     adresse_postale:elementAjout.adresse_postale,
+//     telephone_fixe:elementAjout.telephone_fixe,
+//     description_localisation:elementAjout.description_localisation,
+//     quartier:elementAjout.quartier
     
-})).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_UNITE_ZONE', response.data)
+// })).then(response =>{
+//       if(response.status == 201){
+//           commit('AJOUTER_UNITE_ZONE', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+//           this.$app.$notify({
+//             title: 'success ',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
 
-  }).catch(error => console.log(error))
-}
+//   }).catch(error => console.log(error))
+// }
 
 // action pour modifier l'unite de zone
 
 
-export function modifierUniteZone({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    id_zone_geographique:element_modifie.id_zone_geographique,
-    id_unite_administrative:element_modifie.id_unite_administrative,
-    id_unite_zone:element_modifie.id_unite_zone,
-    longitude:element_modifie.longitude,
-    latitude:element_modifie.latitude,
-    telephone_cel:element_modifie.telephone_cel,
-    adresse_postale:element_modifie.adresse_postale,
-    telephone_fixe:element_modifie.telephone_fixe,
-    description_localisation:element_modifie.description_localisation,
-    quartier:element_modifie.quartier
- })).then(response => {
-       commit('MODIFIER_UNITE_ZONE', response.data)
+// export function modifierUniteZone({commit}, element_modifie) {
+//   asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+//     id_zone_geographique:element_modifie.id_zone_geographique,
+//     id_unite_administrative:element_modifie.id_unite_administrative,
+//     id_unite_zone:element_modifie.id_unite_zone,
+//     longitude:element_modifie.longitude,
+//     latitude:element_modifie.latitude,
+//     telephone_cel:element_modifie.telephone_cel,
+//     adresse_postale:element_modifie.adresse_postale,
+//     telephone_fixe:element_modifie.telephone_fixe,
+//     description_localisation:element_modifie.description_localisation,
+//     quartier:element_modifie.quartier
+//  })).then(response => {
+//        commit('MODIFIER_UNITE_ZONE', response.data)
        
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
-}
+//        this.$app.$notify({
+//          title: 'success ',
+//          text: 'Modification effectué !',
+//          type:"success"
+//        })
+//    }).catch(error => console.log(error))
+// }
 // action pour supprimer unite de zone
 
-export function supprimerUniteZone({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_UNITE_ZONE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
- })
+// export function supprimerUniteZone({commit}, id) {
+//  this.$app.$dialog
+//  .confirm("Voulez vouz vraiment supprimer ?.")
+//  .then(dialog => {
+//     commit('SUPPRIMER_UNITE_ZONE', id)
+   
+//      axios.delete('/urls/' + id).then(() => dialog.close() )   
+//  })
 
-}
+// }
 
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -1717,86 +1717,86 @@ export function supprimerUniteZone({commit}, id) {
 
 // action for ligne budgetaire 
 
-export  function  getLigneBudgetaire({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_LIGNE_BUDGETAIRE', response.data)
+// export  function  getLigneBudgetaire({commit}) {
+//   queue.push(() => axios.get('/url').then((response) => {
+//     commit('GET_ALL_LIGNE_BUDGETAIRE', response.data)
     
-}).catch(error => console.log(error)))
-}
+// }).catch(error => console.log(error)))
+// }
 
 // action pour ajouter la ligne budgetaire
-export function ajouterLigneBudgetaire({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    id_unite_administrative:elementAjout.id_unite_administrative,
-    id_texte:elementAjout.id_texte,
-    id_ligne_modifie:elementAjout.id_ligne_modifie,
-    division:elementAjout.division,
-    groupe:elementAjout.groupe,
-    classe_fonctionnelle:elementAjout.classe_fonctionnelle,
-    classe_comptable:elementAjout.classe_comptable,
-    article:elementAjout.article,
-    paragraphe:elementAjout.paragraphe,
-    ligne:elementAjout.ligne,
-    rubrique:elementAjout.rubrique,
-    sous_rubrique:elementAjout.sous_rubrique,
-    dotation_initiale:elementAjout.dotation_initiale,
-    version:elementAjout.version
+// export function ajouterLigneBudgetaire({commit}, elementAjout){
+//   asyncLoading(axios.post('/urls',{
+//     id_unite_administrative:elementAjout.id_unite_administrative,
+//     id_texte:elementAjout.id_texte,
+//     id_ligne_modifie:elementAjout.id_ligne_modifie,
+//     division:elementAjout.division,
+//     groupe:elementAjout.groupe,
+//     classe_fonctionnelle:elementAjout.classe_fonctionnelle,
+//     classe_comptable:elementAjout.classe_comptable,
+//     article:elementAjout.article,
+//     paragraphe:elementAjout.paragraphe,
+//     ligne:elementAjout.ligne,
+//     rubrique:elementAjout.rubrique,
+//     sous_rubrique:elementAjout.sous_rubrique,
+//     dotation_initiale:elementAjout.dotation_initiale,
+//     version:elementAjout.version
 
-})).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_LIGNE_BUDGETAIRE', response.data)
+// })).then(response =>{
+//       if(response.status == 201){
+//           commit('AJOUTER_LIGNE_BUDGETAIRE', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+//           this.$app.$notify({
+//             title: 'success ',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
 
-  }).catch(error => console.log(error))
-}
+//   }).catch(error => console.log(error))
+// }
 
 // action pour modifier la ligne budgetaire
 
 
-export function modifierLigneBudgetaire({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    id_unite_administrative:element_modifie.id_unite_administrative,
-    id_texte:element_modifie.id_texte,
-    id_ligne_modifie:element_modifie.id_ligne_modifie,
-    division:element_modifie.division,
-    groupe:element_modifie.groupe,
-    classe_fonctionnelle:element_modifie.classe_fonctionnelle,
-    classe_comptable:element_modifie.classe_comptable,
-    article:element_modifie.article,
-    paragraphe:element_modifie.paragraphe,
-    ligne:element_modifie.ligne,
-    rubrique:element_modifie.rubrique,
-    sous_rubrique:element_modifie.sous_rubrique,
-    dotation_initiale:element_modifie.dotation_initiale,
-    version:element_modifie.version
- })).then(response => {
-       commit('MODIFIER_LIGNE_BUDGETAIRE', response.data)
+// export function modifierLigneBudgetaire({commit}, element_modifie) {
+//   asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+//     id_unite_administrative:element_modifie.id_unite_administrative,
+//     id_texte:element_modifie.id_texte,
+//     id_ligne_modifie:element_modifie.id_ligne_modifie,
+//     division:element_modifie.division,
+//     groupe:element_modifie.groupe,
+//     classe_fonctionnelle:element_modifie.classe_fonctionnelle,
+//     classe_comptable:element_modifie.classe_comptable,
+//     article:element_modifie.article,
+//     paragraphe:element_modifie.paragraphe,
+//     ligne:element_modifie.ligne,
+//     rubrique:element_modifie.rubrique,
+//     sous_rubrique:element_modifie.sous_rubrique,
+//     dotation_initiale:element_modifie.dotation_initiale,
+//     version:element_modifie.version
+//  })).then(response => {
+//        commit('MODIFIER_LIGNE_BUDGETAIRE', response.data)
        
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
-}
+//        this.$app.$notify({
+//          title: 'success ',
+//          text: 'Modification effectué !',
+//          type:"success"
+//        })
+//    }).catch(error => console.log(error))
+// }
 // supprimer la ligne budgetaire
-export function supprimerLigneBudgetaire({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_LIGNE_BUDGETAIRE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
- })
+// export function supprimerLigneBudgetaire({commit}, id) {
+//  this.$app.$dialog
+//  .confirm("Voulez vouz vraiment supprimer ?.")
+//  .then(dialog => {
+//     commit('SUPPRIMER_LIGNE_BUDGETAIRE', id)
+ 
+//      axios.delete('/urls/' + id).then(() => dialog.close() )   
+//  })
 
-}
+// }
 
 
 
@@ -1976,89 +1976,90 @@ export function supprimerOffreFinancier({commit}, id) {
 
 // action pour obtenir les données de livrable
 
-export  function  getLivrable({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_LIVRABLE', response.data)
+// export  function  getLivrable({commit}) {
+//   queue.push(() => axios.get('/url').then((response) => {
+//     commit('GET_ALL_LIVRABLE', response.data)
     
-}).catch(error => console.log(error)))
-}
+// }).catch(error => console.log(error)))
+// }
 
 // action pour ajouter la donnée du livrable
-export function ajouterLivrable({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    id_zone_geographique:elementAjout.id_zone_geographique,
-    libelle_livrable:elementAjout.libelle_livrable,
-    type_livrable:elementAjout.type_livrable,
-    date_livraison:elementAjout.date_livraison,
-    imputation_budgetaire:elementAjout.imputation_budgetaire,
-    district:elementAjout.district,
-    departement:elementAjout.departement,
-    localite:elementAjout.localite,
-    commune:elementAjout.commune,
-    village:elementAjout.village,
-    sous_prefecture:elementAjout.sous_prefecture,
-    beneficiaire:elementAjout.beneficiaire,
-    quantite:elementAjout.quantite,
-    montant:elementAjout.montant
+
+// export function ajouterLivrable({commit}, elementAjout){
+//   asyncLoading(axios.post('/urls',{
+//     id_zone_geographique:elementAjout.id_zone_geographique,
+//     libelle_livrable:elementAjout.libelle_livrable,
+//     type_livrable:elementAjout.type_livrable,
+//     date_livraison:elementAjout.date_livraison,
+//     imputation_budgetaire:elementAjout.imputation_budgetaire,
+//     district:elementAjout.district,
+//     departement:elementAjout.departement,
+//     localite:elementAjout.localite,
+//     commune:elementAjout.commune,
+//     village:elementAjout.village,
+//     sous_prefecture:elementAjout.sous_prefecture,
+//     beneficiaire:elementAjout.beneficiaire,
+//     quantite:elementAjout.quantite,
+//     montant:elementAjout.montant
     
-})).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_LIVRABLE', response.data)
+// })).then(response =>{
+//       if(response.status == 201){
+//           commit('AJOUTER_LIVRABLE', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+//           this.$app.$notify({
+//             title: 'success ',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
 
-  }).catch(error => console.log(error))
-}
+//   }).catch(error => console.log(error))
+// }
 
 // action pour modifier le livrable
 
 
-export function modifierLivrable({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    id_zone_geographique:element_modifie.id_zone_geographique,
-    libelle_livrable:element_modifie.libelle_livrable,
-    type_livrable:element_modifie.type_livrable,
-    date_livraison:element_modifie.date_livraison,
-    imputation_budgetaire:element_modifie.imputation_budgetaire,
-    district:element_modifie.district,
-    departement:element_modifie.departement,
-    localite:element_modifie.localite,
-    commune:element_modifie.commune,
-    village:element_modifie.village,
-    sous_prefecture:element_modifie.sous_prefecture,
-    beneficiaire:element_modifie.beneficiaire,
-    quantite:element_modifie.quantite,
-    montant:element_modifie.montant
+// export function modifierLivrable({commit}, element_modifie) {
+//   asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+//     id_zone_geographique:element_modifie.id_zone_geographique,
+//     libelle_livrable:element_modifie.libelle_livrable,
+//     type_livrable:element_modifie.type_livrable,
+//     date_livraison:element_modifie.date_livraison,
+//     imputation_budgetaire:element_modifie.imputation_budgetaire,
+//     district:element_modifie.district,
+//     departement:element_modifie.departement,
+//     localite:element_modifie.localite,
+//     commune:element_modifie.commune,
+//     village:element_modifie.village,
+//     sous_prefecture:element_modifie.sous_prefecture,
+//     beneficiaire:element_modifie.beneficiaire,
+//     quantite:element_modifie.quantite,
+//     montant:element_modifie.montant
     
     
- })).then(response => {
-       commit('MODIFIER_LIVRABLE', response.data)
+//  })).then(response => {
+//        commit('MODIFIER_LIVRABLE', response.data)
        
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
-}
+//        this.$app.$notify({
+//          title: 'success ',
+//          text: 'Modification effectué !',
+//          type:"success"
+//        })
+//    }).catch(error => console.log(error))
+// }
 // supprimer le livrable
 
-export function supprimerLivrable({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_LIVRABLE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
- })
+// export function supprimerLivrable({commit}, id) {
+//  this.$app.$dialog
+//  .confirm("Voulez vouz vraiment supprimer ?.")
+//  .then(dialog => {
+//     commit('SUPPRIMER_LIVRABLE', id)
+ 
+//      axios.delete('/urls/' + id).then(() => dialog.close() )   
+//  })
 
-}
+// }
 
 
 
@@ -2119,80 +2120,80 @@ export function supprimerAutreTextjuridique({commit}, id) {
 
 // action pour obtenir les données de zones geographiques
 
-export  function  getZoneGeographique({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_ALL_ZONE_GEOGRAPHIQUE', response.data)
+// export  function  getZoneGeographique({commit}) {
+//   queue.push(() => axios.get('/url').then((response) => {
+//     commit('GET_ALL_ZONE_GEOGRAPHIQUE', response.data)
     
-}).catch(error => console.log(error)))
-}
+// }).catch(error => console.log(error)))
+// }
 
 // action pour ajouter les donnees de zone geographiques
 
-export function ajouterZoneGeographique({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    region:elementAjout.region,
-    departement:elementAjout.departement,
-    sous_prefecture:elementAjout.sous_prefecture,
-    commune:elementAjout.commune,
-    ville:elementAjout.ville,
-    village:elementAjout.village,
-    longitude_ville:elementAjout.longitude_ville,
-    latitude_ville:elementAjout.latitude_ville,
-    version:elementAjout.version,
-    id_zone_modif:elementAjout.id_zone_modif
-})).then(response =>{
-      if(response.status == 201){
-          commit('AJOUTER_ZONE_GEOGRAPHIQUE', response.data)
+// export function ajouterZoneGeographique({commit}, elementAjout){
+//   asyncLoading(axios.post('/urls',{
+//     region:elementAjout.region,
+//     departement:elementAjout.departement,
+//     sous_prefecture:elementAjout.sous_prefecture,
+//     commune:elementAjout.commune,
+//     ville:elementAjout.ville,
+//     village:elementAjout.village,
+//     longitude_ville:elementAjout.longitude_ville,
+//     latitude_ville:elementAjout.latitude_ville,
+//     version:elementAjout.version,
+//     id_zone_modif:elementAjout.id_zone_modif
+// })).then(response =>{
+//       if(response.status == 201){
+//           commit('AJOUTER_ZONE_GEOGRAPHIQUE', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+//           this.$app.$notify({
+//             title: 'success ',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
 
-  }).catch(error => console.log(error))
-}
+//   }).catch(error => console.log(error))
+// }
 
 // action pour modifier la zone geographique
 
 
-export function modifierZoneGeographique({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    region:element_modifie.region,
-    departement:element_modifie.departement,
-    sous_prefecture:element_modifie.sous_prefecture,
-    commune:element_modifie.commune,
-    ville:element_modifie.ville,
-    village:element_modifie.village,
-    longitude_ville:element_modifie.longitude_ville,
-    latitude_ville:element_modifie.latitude_ville,
-    version:element_modifie.version,
-    id_zone_modif:element_modifie.id_zone_modif
+// export function modifierZoneGeographique({commit}, element_modifie) {
+//   asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+//     region:element_modifie.region,
+//     departement:element_modifie.departement,
+//     sous_prefecture:element_modifie.sous_prefecture,
+//     commune:element_modifie.commune,
+//     ville:element_modifie.ville,
+//     village:element_modifie.village,
+//     longitude_ville:element_modifie.longitude_ville,
+//     latitude_ville:element_modifie.latitude_ville,
+//     version:element_modifie.version,
+//     id_zone_modif:element_modifie.id_zone_modif
     
- })).then(response => {
-       commit('MODIFIER_ZONE_GEOGRAPHIQUE', response.data)
+//  })).then(response => {
+//        commit('MODIFIER_ZONE_GEOGRAPHIQUE', response.data)
        
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
-}
+//        this.$app.$notify({
+//          title: 'success ',
+//          text: 'Modification effectué !',
+//          type:"success"
+//        })
+//    }).catch(error => console.log(error))
+// }
 // action pour la suppression la zone geographique
 
-export function supprimerZoneGeographique({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_ZONE_GEOGRAPHIQUE', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
- })
+// export function supprimerZoneGeographique({commit}, id) {
+//  this.$app.$dialog
+//  .confirm("Voulez vouz vraiment supprimer ?.")
+//  .then(dialog => {
+//     commit('SUPPRIMER_ZONE_GEOGRAPHIQUE', id)
+  
+//      axios.delete('/urls/' + id).then(() => dialog.close() )   
+//  })
 
-}
+// }
 
 
 // action pour obtenir les infos du type text juridique
@@ -2617,72 +2618,72 @@ export function supprimerProcedurePassation({ commit, dispatch}, id) {
 
 // action pour obtenir les données de realite du service fait
 
-export  function  getRealiteServiceFait({commit}) {
-  queue.push(() => axios.get('/url').then((response) => {
-    commit('GET_REALITE_SERVICE_FAIT', response.data)
+// export  function  getRealiteServiceFait({commit}) {
+//   queue.push(() => axios.get('/url').then((response) => {
+//     commit('GET_REALITE_SERVICE_FAIT', response.data)
     
-}).catch(error => console.log(error)))
-}
+// }).catch(error => console.log(error)))
+// }
 
 // action pour ajouter la realite du service fait
 
-export function ajouterRealiteServiceFait({commit}, elementAjout){
-  asyncLoading(axios.post('/urls',{
-    UA_CONCERNE:elementAjout.UA_CONCERNE,
-    AGENT_DCF:elementAjout.AGENT_DCF,
-    AGENT_UA:elementAjout.AGENT_UA,
-    DATE:elementAjout.DATE,
-    DECISION_AGENT_DCF:elementAjout.DECISION_AGENT_DCF,
-    ID_MOTIF:elementAjout.ID_MOTIF
-})).then(response =>{
-      if(response.status == 201){
-        commit('AJOUTER_REALITE_SERVICE_FAIT', response.data)
+// export function ajouterRealiteServiceFait({commit}, elementAjout){
+//   asyncLoading(axios.post('/urls',{
+//     UA_CONCERNE:elementAjout.UA_CONCERNE,
+//     AGENT_DCF:elementAjout.AGENT_DCF,
+//     AGENT_UA:elementAjout.AGENT_UA,
+//     DATE:elementAjout.DATE,
+//     DECISION_AGENT_DCF:elementAjout.DECISION_AGENT_DCF,
+//     ID_MOTIF:elementAjout.ID_MOTIF
+// })).then(response =>{
+//       if(response.status == 201){
+//         commit('AJOUTER_REALITE_SERVICE_FAIT', response.data)
 
-          this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
-          })
-      }
+//           this.$app.$notify({
+//             title: 'success ',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
 
-  }).catch(error => console.log(error))
-}
+//   }).catch(error => console.log(error))
+// }
 
 // action pour modifier la realite du service fait
 
 
-export function modifierRealiteServicefait({commit}, element_modifie) {
-  asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-    UA_CONCERNE:element_modifie.UA_CONCERNE,
-    AGENT_DCF:element_modifie.AGENT_DCF,
-    AGENT_UA:element_modifie.AGENT_UA,
-    DATE:element_modifie.DATE,
-    DECISION_AGENT_DCF:element_modifie.DECISION_AGENT_DCF,
-    ID_MOTIF:element_modifie.ID_MOTIF
+// export function modifierRealiteServicefait({commit}, element_modifie) {
+//   asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
+//     UA_CONCERNE:element_modifie.UA_CONCERNE,
+//     AGENT_DCF:element_modifie.AGENT_DCF,
+//     AGENT_UA:element_modifie.AGENT_UA,
+//     DATE:element_modifie.DATE,
+//     DECISION_AGENT_DCF:element_modifie.DECISION_AGENT_DCF,
+//     ID_MOTIF:element_modifie.ID_MOTIF
     
- })).then(response => {
-       commit('MODIFIER_REALITE_SERVICE_FAIT', response.data)
+//  })).then(response => {
+//        commit('MODIFIER_REALITE_SERVICE_FAIT', response.data)
        
 
-       this.$app.$notify({
-         title: 'success ',
-         text: 'Modification effectué !',
-         type:"success"
-       })
-   }).catch(error => console.log(error))
-}
+//        this.$app.$notify({
+//          title: 'success ',
+//          text: 'Modification effectué !',
+//          type:"success"
+//        })
+//    }).catch(error => console.log(error))
+// }
 // supprimer type unite administrative
 
-export function supprimerRealiteServiceFait({commit}, id) {
- this.$app.$dialog
- .confirm("Voulez vouz vraiment supprimer ?.")
- .then(dialog => {
-    commit('SUPPRIMER_REALITE_SERVICE_FAIT', id)
-   // // dialog.loading(false) // stops the proceed button's loader
-     axios.delete('/urls/' + id).then(() => dialog.close() )   
- })
+// export function supprimerRealiteServiceFait({commit}, id) {
+//  this.$app.$dialog
+//  .confirm("Voulez vouz vraiment supprimer ?.")
+//  .then(dialog => {
+//     commit('SUPPRIMER_REALITE_SERVICE_FAIT', id)
+  
+//      axios.delete('/urls/' + id).then(() => dialog.close() )   
+//  })
 
-}
+// }
 
 
 /*Action lettre d'invitation*/
@@ -3086,30 +3087,6 @@ export function modifierEngagement_val({ commit, dispatch }, objet) {
 //     })
 //   }).catch(error => console.log(error))
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*Analyse ano DMP bailleur*/
