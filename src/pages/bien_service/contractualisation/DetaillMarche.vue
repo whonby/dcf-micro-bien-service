@@ -3536,7 +3536,7 @@
                    <div class="control-group">
                    <label class="control-label">Fichier joint:</label>
                     <div class="controls">
-                     <input type="file" id="file"  @change="OnchangeFichier" />
+                     <input type="file"   @change="OnchangeFichier" />
               </div>
             </div>
                 </form>
@@ -5640,7 +5640,7 @@ afficherMotifAnalyse(){
                return marche_id=>{
                    if(marche_id!=""){
                        let objet=this.getterProceVerballe.filter(item=>item.appel_offre.marche_id==marche_id);
-                       console.log("PV est en cour10")
+                      // console.log("PV est en cour10")
                        return objet
                    }
                }
@@ -5736,7 +5736,7 @@ afficherMotifAnalyse(){
         listeAnalyseDossier: function () {
             return marcheid => {
                 if (marcheid != "") {
-                    console.log("Marche liste analyse dossier")
+                    //console.log("Marche liste analyse dossier")
                     return this.getterAnalyseDossiers.filter(idmarche => idmarche.dossier_candidature.appel_offre.marche_id == marcheid)
                 }
             }
@@ -5745,10 +5745,10 @@ afficherMotifAnalyse(){
             demandeAno: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                        console.log("Marche demande ano")
+                    //    console.log("Marche demande ano")
 
                         let obje=this.getterDemandeAno.filter(idmarche => idmarche.proce_verbal_offre.appel_offre.marche_id == marcheid)
-                        console.log("Testest0101")
+                       // console.log("Testest0101")
                         return obje
                     }
                 }
@@ -5756,7 +5756,7 @@ afficherMotifAnalyse(){
             demandeAnoAnalyseDMP: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                        console.log("Marche demande ano AnalyseDmp marche_id")
+                       // console.log("Marche demande ano AnalyseDmp marche_id")
 
                         let obje=this.getterDemandeAno.find(idmarche => {
                             if(idmarche.proce_verbal_offre.appel_offre.marche_id == marcheid && idmarche.proce_verbal_offre.avie==null){
@@ -5765,7 +5765,7 @@ afficherMotifAnalyse(){
                                 return idmarche;
                             }
                         })
-                        console.log("Marche demande 41000000")
+                       // console.log("Marche demande 41000000")
                         return obje
                     }
                 }
@@ -5773,9 +5773,9 @@ afficherMotifAnalyse(){
             listeAnalyseDPM: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                        console.log("Marche liste analyse dpm")
+                       // console.log("Marche liste analyse dpm")
                         let objet=this.getterAnalyseDMP.filter(idmarche => idmarche.demande_ano.proce_verbal_offre.appel_offre.marche_id == marcheid)
-                       console.log("ok c'est la vie 010101")
+                      // console.log("ok c'est la vie 010101")
                         return objet;
                     }
                 }
@@ -5787,7 +5787,7 @@ afficherMotifAnalyse(){
                      let objet=this.getterAnalyseDMP.find(item=>{
                          if(item.demande_ano.proce_verbal_offre.appel_offre.marche_id == marcheid && item.avis_bail==1 ){
                              let vM=this;
-                          console.log("OK AnalyseDMP")
+                         // console.log("OK AnalyseDMP")
                              vM.formAno.analyse_dmp_id=item.id;
                              vM.avis_dmp="Non objection"
                               return item;
@@ -5810,9 +5810,9 @@ afficherMotifAnalyse(){
             listeAnoDMPBailleur: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                        console.log("Marche dmp bailleur")
+                      //  console.log("Marche dmp bailleur")
                         let objet=this.getterAnoDMPBailleur.filter(idmarche => idmarche.annalyse_d_m_p.demande_ano.proce_verbal_offre.appel_offre.marche_id == marcheid)
-                        console.log("Marche dmp bailleru 7474")
+                        //console.log("Marche dmp bailleru 7474")
                         return objet
                     }
                 }
@@ -5821,7 +5821,7 @@ afficherMotifAnalyse(){
             listeAnalyseDMPFavorable: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                       console.log("Marche analyse DMP Favorable")
+                    //   console.log("Marche analyse DMP Favorable")
                         return this.getterAnalyseDMP.filter(idmarche => {
                             if(idmarche.demande_ano.proce_verbal_offre.appel_offre.marche_id == marcheid && idmarche.avis_bail==1){
 
@@ -5894,7 +5894,7 @@ afficherMotifAnalyse(){
             listeActeEffectFinnancier: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                       console.log("Marche leste acte effect finnancier")
+                      // console.log("Marche leste acte effect finnancier")
                         return this.getActeEffetFinancierPersonnaliser.filter(idmarche => idmarche.marche_id == marcheid)
                     }
                 }
