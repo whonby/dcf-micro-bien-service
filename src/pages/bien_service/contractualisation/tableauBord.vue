@@ -8,13 +8,13 @@
         <li class="bg_ls">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-important">{{nombremarches}}</span> MARCHES NON ATTRIBUE
+            <span class="label label-important">{{nombremarches}}</span> MARCHES NON ATTRIBUES
           </a>
         </li>
          <li class="bg_ls">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-important">{{nombremarchesExecute}}</span> MARCHES ATTRIBUE
+            <span class="label label-important">{{nombremarchesExecute}}</span> MARCHES ATTRIBUES
           </a>
         </li>
          <li class="bg_ls">
