@@ -5496,7 +5496,7 @@ formPv:{
                     role:"",
                     cojo_id:"",
                 },
-                detail_marche:{},
+                // detail_marche:{},
                 formLettre: {
                     appel_offre_id:"",
                     fichier_joint:"",
