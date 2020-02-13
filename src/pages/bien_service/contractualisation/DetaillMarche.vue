@@ -1587,7 +1587,7 @@
                         <th>Reférence d'offre </th>
                         <th>Reference PV</th>
                         <th>Date demande</th>
-                        <th>Avis</th>
+                       
                         <th>Fichier</th>
                         <th>Action</th>
                     </tr>
@@ -1606,11 +1606,11 @@
                             {{demande.proce_verbal_offre.reference || 'Non renseigné'}}</td>
                         <td @click="afficheDemandeDAO(demande.id)">
                             {{formaterDate(demande.date_demande) || 'Non renseigné'}}</td>
-                        <td>
+                        <!-- <td>
                             <button class="btn btn-info btn-mini" v-if="avisPv(demande.proce_verbal_offre.reference)==null">En attende</button>
                             <button class="btn btn-success btn-mini" v-else-if="avisPv(demande.proce_verbal_offre.reference)== 1">Non Objection</button>
                             <button class="btn btn-danger btn-mini" v-else>Objection</button>
-                        </td>
+                        </td> -->
                         <td>
                             <a v-if="demande.fichier" :href="demande.fichier" class="btn btn-default" target="_blank">
                                 <span class=""><i class="icon-book"></i>
@@ -4439,7 +4439,7 @@
                         </div>
                     </div>
 
-                    <div class="control-group">
+                    <!-- <div class="control-group">
 
                         <label class="control-label">Avis</label>
                         <div class="controls">
@@ -4449,8 +4449,8 @@
                                <option value="2"> Non objection</option>
                            </select>
                         </div>
-                    </div>
-
+                    </div> -->
+<!-- 
                   <div class="control-group">
           <label class="control-label">Observation:</label>
             <div class="controls">
@@ -4458,7 +4458,7 @@
               <textarea  v-model="formDemande.observations_ano" :readonly="motifDemandeAno"  class="textarea_editor" rows="" placeholder="Entrer  le text ..."></textarea>
             </div>
           
-        </div>
+        </div> -->
 
          <div class="control-group">
               <label class="control-label">Fichier joint:</label>
@@ -5644,9 +5644,9 @@ return this.formAnalyseDMP.avis_bail == "1";
     },
 
 // afficher le moti de demande ano
- motifDemandeAno(){
-     return this.formDemande.avis_ano == 1
- },
+//  motifDemandeAno(){
+//      return this.formDemande.avis_ano == 1
+//  },
 
 
       afficherIdMarche() {
