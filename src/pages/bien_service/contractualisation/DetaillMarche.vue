@@ -2416,411 +2416,10 @@
                       <!-- debut item de facture  --->
 
                                <div id="tab4" class="tab-pane">
-                                <div class="widget-box">
-                                    <div class="widget-title">
-                                   <span class="icon">
-                                   <i class="icon-th"></i>
-                                      </span>
-                                        <h5>Liste des factures</h5>
-                                        <div align="right">
-                                            Search:
-                                            <input type="search" placeholder 
-                                            v-model="search" />
-                                        </div>
-                                    </div>
-                                    <div class="widget-content nopadding">
-                                        <div class="span4"></div>
-                                        <div class="span4"></div>
-                                        <div class="span4" align="right">
-                                            <a href="#exampleModal" data-toggle="modal"
-                                         class="btn btn-info">Ajouter facture</a></div>
-                                <table class="table table-bordered table-striped" 
-                                v-if="marcheid">
-                                     <thead>
-                                   <tr>
-            
-                              <th>acte_depense</th> 
-                                 <th>type_facture</th>
-                                <th>numero_facture</th>
-                             <th>objet_facture</th>
-                           <th>montant_facture</th>
-                           <th>ligne_budgetaire</th>
-                            <th>prix_unitaire</th>
-                                <th>prix_propose_ht</th>
-                           <th>prix_propose_ttc</th>
 
-                             <th>Action</th>
-                                     </tr>
-                                    </thead>
-                                        <tbody>
-
-                                        <tr class="odd gradeX" v-for="(facture_joint, index) in factures"
-                                                :key="facture_joint.id">
-                                                <td @dblclick="afficherModalmodifierfacture(index)">
-                                                    {{facture_joint.numero_facture || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalmodifierfacture(index)">
-                                                    {{facture_joint.code_acte_depense || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalmodifierfacture(index)">
-                                                    {{facture_joint.id_type_facture || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalmodifierfacture(index)">
-                                                    {{facture_joint.objet_facture || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalmodifierfacture(index)">
-                                                    {{facture_joint.ligne_budgetaire || 'Non renseigné'}}
-                                                </td>
-                                                <td @dblclick="afficherModalmodifierfacture(index)">
-                                                    {{facture_joint.montant_facture || 'Non renseigné'}}
-                                                </td>
-                                                <td @dblclick="afficherModalmodifierfacture(index)">
-                                                    {{facture_joint.prix_unitaire || 'Non renseigné'}}
-                                                </td>
-                                                <td @dblclick="afficherModalmodifierfacture(index)">
-                                                    {{facture_joint.prix_propose_ht || 'Non renseigné'}}
-                                                </td>
-                                                <td @dblclick="afficherModalmodifierfacture(index)">
-                                                    {{facture_joint.prix_propose_ttc || 'Non renseigné'}}
-                                                </td>
-
-                                                <div class="btn-group">
-                                                    <button @click.prevent="supprimerFacture(facture_joint.id)"  class="btn btn-danger ">
-                                                        <span class=""><i class="icon-trash"></i></span></button>
-
-                                                </div>
-
-                                            </tr>
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
                             </div>
 
-                      <!---  fin item de facture -->
 
-                      <!-- debut form de facture  -->
-                      <div id="exampleModal" class="modal hide taillemodal">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Facture</h3>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-          <tr>
-              <td>
-              <div class="control-group">
-                <label class="control-label">numero_facture</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="formDataFacture.numero_facture"
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-               </td>
-            <!-- <td>
-              
-              <div class="control-group">
-                <label class="control-label">acte_depense</label>
-                <div class="controls">
-                  <select v-model="formDataFacture.code_acte_depense" >
-                     <select v-model="formDataFacture.id_type_facture" class="span">
-                 <option v-for="fature in typeFactures" :key="fature.id"
-                      :value="fature.id">{{fature.libelle}}</option>
-                            </select>
-                  </select>
-                </div>
-              </div>
-            </td> -->
-            <td>
-              
-              <div class="control-group">
-                <label class="control-label">type facture</label>
-                <div class="controls">
-                  
-                    <select v-model="formDataFacture.id_type_facture" class="span">
-                 <option v-for="fature in typeFactures" :key="fature.id"
-                      :value="fature.id">{{fature.libelle}}</option>
-                            </select>
-                 
-                </div>
-              </div>
-            </td>
-            
-
-           
-          </tr>
-          <tr>
-             <td>
-              <div class="control-group">
-                <label class="control-label">objet_facture</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="formDataFacture.objet_facture"
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-               </td>
-              <td>
-              
-              <div class="control-group">
-                <label class="control-label">ligne_budgetaire</label>
-                <div class="controls">
-                   <input
-                type="text"
-                
-                class="span5"
-                placeholder="Saisir le Imputation"
-                readonly
-              />
-              </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">montant_facture</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="formDataFacture.montant_facture"
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            
-            
-
-          </tr>
-          <tr>
-               <td>
-              <div class="control-group">
-                <label class="control-label">prix_unitaire</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="formDataFacture.prix_unitaire"
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">prix_propose_ht</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="formDataFacture.prix_propose_ht"
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">prix_propose_ttc</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    v-model="formDataFacture.prix_propose_ttc"
-                   
-                    class="span"
-                   
-                  />
-                </div>
-              </div>
-             
-            </td>
-            
-            
-           
-                 
-          </tr>
-         
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="ajouterStockLocal"
-          class="btn btn-primary"
-          href="#"
-           
-        >Valider</a> 
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
-
-                      <!-- fin form de facture  -->
-
-
-                      <!-- debut form modification facture -->
-
-                       <div id="modififacture" class="modal hide taillemodal">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Facture</h3>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-         <tr>
-              <td>
-              <div class="control-group">
-                <label class="control-label">numero_facture</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="editFacture.numero_facture"
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-               </td>
-            <!-- <td>
-              
-              <div class="control-group">
-                <label class="control-label">acte_depense</label>
-                <div class="controls">
-                  <select v-model="editFacture.code_acte_depense" >
-                    <option value>Sélectionner</option>
-                    <option></option>
-                  </select>
-                </div>
-              </div>
-            </td> -->
-            <td>
-              
-              <div class="control-group">
-                <label class="control-label">type facture</label>
-                <div class="controls">
-                  <select v-model="editFacture.id_type_facture" >
-                    <option value>Sélectionner</option>
-                    <option></option>
-                  </select>
-                </div>
-              </div>
-            </td>
-            
-
-           
-          </tr>
-          <tr>
-             <td>
-              <div class="control-group">
-                <label class="control-label">objet_facture</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="editFacture.objet_facture"
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-               </td>
-              <td>
-              
-              <div class="control-group">
-                <label class="control-label">ligne_budgetaire</label>
-                <div class="controls">
-                  <select v-model="editFacture.ligne_budgetaire" >
-                    <option value>Sélectionner</option>
-                    <option></option>
-                  </select>
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">montant_facture</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="editFacture.montant_facture"
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            
-            
-
-          </tr>
-          <tr>
-               <td>
-              <div class="control-group">
-                <label class="control-label">prix_unitaire</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="editFacture.prix_unitaire"
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">prix_propose_ht</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="editFacture.prix_propose_ht"
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">prix_propose_ttc</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    v-model="editFacture.prix_propose_ttc"
-                   
-                    class="span"
-                   
-                  />
-                </div>
-              </div>
-             
-            </td>
-            
-            
-           
-                 
-          </tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-primary" @click.prevent="modifierFactureLocal(editFacture)">Modifier</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
-
-
-                      <!---fin form modification facture --->
 
 
                         </div>
@@ -5157,18 +4756,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
 
          },
 
-editFacture:{
-     prix_propose_ttc:"",
-             prix_propose_ht:"",
-             prix_unitaire:"",
-             montant_facture:"",
-             ligne_budgetaire:"",
-             objet_facture:"",
-             id_type_facture:"",
-             code_acte_depense:"",
-             numero_facture:"",
 
-},
 
          editActeEffetFinancier:{
               code_act:"",
@@ -5353,8 +4941,7 @@ created() {
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
-                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "factures", "typeFactures",
-                "getPersonnaliserFacture", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
+                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
             ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -5563,17 +5150,6 @@ montantHT() {
 
 
             },
-            montantBailleurMarche(){
-                return  marche_id=>{
-                    if (marche_id!="") {
-                        let initialValue = 0;
-                        let ObjetMontant =this.personnaliseGetterMarcheBailleur.filter( idmarche => idmarche.marche_id == marche_id).reduce(function (total, currentValue) {
-                            return total + parseFloat(currentValue.montant) ;
-                        }, initialValue);
-                        return ObjetMontant;
-                    }
-                }
-            },
             montantBailleurMarcheCompare(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -5581,7 +5157,7 @@ montantHT() {
                         let vM=this;
                       //  let montantSaisie=parseFloat(vM.formBailleur.montant)
                         let ObjetMontant =this.personnaliseGetterMarcheBailleur.filter( idmarche => idmarche.marche_id == marche_id).reduce(function (total, currentValue) {
-                            return total + parseFloat(currentValue.montant) ;
+                                 return total + parseFloat(currentValue.montant) ;
                         }, initialValue);
                         let montantConbiner=parseFloat(vM.formBailleur.montant) + parseFloat(ObjetMontant)
 
@@ -5669,14 +5245,6 @@ montantHT() {
                 }
             }
             ,
-            listeActeEffetFinancier(){
-                return marche_id =>{
-                    if(marche_id !=""){
-                       // console.log("Marche liste accteEffet")
-                        return this.getActeEffetFinancierPersonnaliser.filter(identreprise =>identreprise.id == marche_id)
-                    }
-                }
-            },
             dossierCandidature: function () {
                 return marcheid => {
                     if (marcheid != "") {
@@ -5698,7 +5266,7 @@ montantHT() {
                     if (marcheid != "") {
                        let vM =this;
                         let Objet =this.getterMandate.find(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid);
-                      console.log(Objet)
+                      console.log("Ok c'est la vie")
                         if(Objet!=undefined){
                             vM.formDataCojo.lettre_invitation_id=Objet.lettre_invitation_id
                             vM.formDataCojo.controleur_finnancier=Objet.nom_mandat+" "+Objet.prenom_nom
@@ -5732,7 +5300,7 @@ montantHT() {
         listeAnalyseDossier: function () {
             return marcheid => {
                 if (marcheid != "") {
-                    //console.log("Marche liste analyse dossier")
+
                     return this.getterAnalyseDossiers.filter(idmarche => idmarche.dossier_candidature.appel_offre.marche_id == marcheid)
                 }
             }
@@ -5741,10 +5309,10 @@ montantHT() {
             demandeAno: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                    //    console.log("Marche demande ano")
+
 
                         let obje=this.getterDemandeAno.filter(idmarche => idmarche.proce_verbal_offre.appel_offre.marche_id == marcheid)
-                       // console.log("Testest0101")
+
                         return obje
                     }
                 }
@@ -5794,15 +5362,7 @@ montantHT() {
              }
             },
 
-    //          ImputationBudget() {
-      
-    //   const norme = this.getPersonnaliserFacture.find(normeEquipe => normeEquipe.afficheEconomique.id == this.formData.economique_id);
 
-    //   if (norme) {
-    //     return norme.codebudget;
-    //   }
-    //   return 0
-    // },
             listeAnoDMPBailleur: function () {
                 return marcheid => {
                     if (marcheid != "") {
@@ -5814,27 +5374,7 @@ montantHT() {
                 }
             },
 
-            listeAnalyseDMPFavorable: function () {
-                return marcheid => {
-                    if (marcheid != "") {
-                    //   console.log("Marche analyse DMP Favorable")
-                        return this.getterAnalyseDMP.filter(idmarche => {
-                            if(idmarche.demande_ano.proce_verbal_offre.appel_offre.marche_id == marcheid && idmarche.avis_bail==1){
 
-                             return idmarche
-                            }
-                        })
-                    }
-                }
-            },
-            listeObservationBailleurANODMP: function () {
-                return marcheid => {
-                    if (marcheid != "") {
-                       // console.log("Marche observation bailleur ANODMP")
-                        return this.getterObseravtionBailleurs.filter(idmarche => idmarche.id == marcheid)
-                    }
-                }
-            },
             selectionAttributionMarche: function () {
                 return marcheid => {
                     if (marcheid != "") {
@@ -5844,14 +5384,16 @@ montantHT() {
 
                         let marcherFavaroble=marcherEnAction.find(idmarche=>idmarche.avis_bail==1);
                         let marcherObjetction=marcherEnAction.find(idmarche=>idmarche.avis_bail==0);
-                        console.log(marcherFavaroble)
+                        console.log("14")
                         if (marcherFavaroble!=undefined){
                             vM.entreprise_vainqueur=""
-                            vM.resultaFinalCandidat=[]
+                            console.log("1411111")
+                           // vM.resultaFinalCandidat=[]
                             vM.info_avis_bailleur="Non objection";
                             vM.formEffetFinancier.ano_bailleur_id=marcherFavaroble.id
                             let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==marcherFavaroble.annalyse_d_m_p.demande_ano.proce_verbal_offre.reference);
-                            vM.resultaFinalCandidat=vM.resultaFinalCandidat.concat(resulta)
+                            console.log("OKOKOKOOKO")
+                            vM.resultaFinalCandidat=resulta
 
                             if (vM.resultaFinalCandidat.length>0){
                                 vM.resultaFinalCandidat.sort(function (a, b) {
@@ -5877,16 +5419,7 @@ montantHT() {
                 }
             },
 
-            /*listeActeEffectFinnancier:function () {
-                return marcheid => {
-                  if(marcheid !=""){
-                      console.log("iiiiiiii"
-                          const  objet=this.getActeEffetFinancierPersonnaliser.filter(idmarche => idmarche.marche.id == marcheid)
-                      console.log(objet)
-                        return this.getActeEffetFinancierPersonnaliser.filter(idmarche => idmarche.marche.id == marcheid)
-                    }
-                }
-            },*/
+
             listeActeEffectFinnancier: function () {
                 return marcheid => {
                     if (marcheid != "") {
@@ -5966,19 +5499,7 @@ ajouterStockLocal(){
       this.formLettre.fichier_joint = e.target.files[0]
      // console.log(onFichierChange);
     },
-//     onFichierChange(e){
-// this.formMandater.fichier_joint = e.target.files[0]
 
-//     },
-
-// afficher modal modifier facture
-afficherModalmodifierfacture(index){
-    this.$('#modififacture').modal({
-        backdrop: "static",
-        keyboard:false
-    })
-    this.editFacture = this.factures[index]
-},
             afficheModaleMembreCojo(index){
                 this.$('#modification_membre_cojo').modal({
                     backdrop: "static",
@@ -5991,7 +5512,7 @@ afficherModalmodifierfacture(index){
     this.$('#modification_membre_cojo').modal('hide');
 },
 modifierFactureLocal(){
-    this.modifierFacture(this.editFacture)
+
     this.$('#modififacture').modal('hide');
 },
            rechercheMandater(){
