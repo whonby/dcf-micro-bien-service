@@ -3098,11 +3098,11 @@ export  function  getAnoDMPBailleur({commit}) {
     }).catch(error => console.log(error)))
 }
 
-export function ajouterAnoDMPBailleur({commit}, elementAjout){
+export function ajouterAnoDMPBailleur({commit,dispatch}, elementAjout){
     asyncLoading(axios.post('/ano_dmp_bailleurs',elementAjout)).then(response =>{
         if(response.status == 201){
             commit('AJOUTER_ANO_DMP_BAILLEUR', response.data)
-
+            dispatch('getAnoDMPBailleur')
             this.$app.$notify({
                 title: 'success ',
                 text: 'Enregistrement effectué !',
