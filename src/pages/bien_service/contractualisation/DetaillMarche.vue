@@ -2059,7 +2059,7 @@
                             <td>
 
                      <div class="control-group">
-                        <label class="control-label">Montant acte</label>
+                        <label class="control-label">Montant acte/réel du marché</label>
                         <div class="controls">
                             <input type="text" v-model="formEffetFinancier.montant_act"
                                     class="span"
