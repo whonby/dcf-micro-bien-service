@@ -460,7 +460,7 @@
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste de tous les dossiers de missions visés</h5>
+            <h5>Liste des dossiers visés</h5>
              <div align="right">
           </div>
              
@@ -779,13 +779,6 @@
                 </div>
                 
                   </div>
-
-                  <!-- <div class="control-group">
-              <label class="control-label" title="temps d'arrivé de dossier">T.T. de dossiers:</label>
-             <div class="controls">
-              <input type="time"  :value="missionAChangerLaDecision.temps_arrive" readonly >
-            </div>
-             </div> -->
            
                <div class="control-group">
               <label class="control-label">Date:</label>
@@ -817,12 +810,7 @@
             </div>
              </div>    
     
-            <div class="control-group">
-              <label class="control-label">Observation:</label>
-             <div class="controls">
-              <textarea v-model="formData.observation" class="textarea_editor span2.5"  placeholder="Saisir l'observation ..."></textarea>
-            </div>
-             </div>
+          
             
                  <!-- <div class="control-group">
               <label class="control-label" title="temps du traitement de dossier">T.T. de dossiers:</label>
@@ -959,6 +947,7 @@ export default {
   },
   computed: {
 
+// afficher 
 
     // dureTraitementDuDossier(){
 
@@ -1115,6 +1104,18 @@ export default {
     }
   }
     },
+
+// commentatire
+
+    // afficher le nom des historiques dynamique
+      //  NomDossier(){
+      //    return id =>{
+      //      if(id !=""){
+      //        let Nom = this.historiques_missions.find(element => element.id == id)
+      //        return total_mission_rejetes 
+      //      }
+      //    }
+      //  },
 
     // duree moyenne par unite administrative
   DureeDeTouteMissionsParUA(){

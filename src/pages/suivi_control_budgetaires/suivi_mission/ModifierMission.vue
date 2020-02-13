@@ -7,7 +7,7 @@
           <div class="widget-title">
             <ul class="nav nav-tabs">
               <li class="active"><a data-toggle="tab" href="#tab1">Identification</a></li>
-              <li><a data-toggle="tab" href="#tab2"> Unité administrative</a></li>
+              <!-- <li><a data-toggle="tab" href="#tab2"> Unité administrative</a></li> -->
               <li><a data-toggle="tab" href="#tab3"> Transport</a></li> 
             </ul>
           </div>
@@ -34,7 +34,7 @@
 
 
               
-                       <td colspan="3" width="450">
+                       <td colspan="2" width="250">
         <div class="control-group">
           <label class="control-label">Objet de mission:</label>
             <div class="controls">
@@ -44,9 +44,7 @@
         </div>
                       </td> 
 
-                          </tr>
-
-                          <tr>
+                        
                               <td>           
                <div class="control-group">
               <label class="control-label">Type de mission:</label>
@@ -60,6 +58,9 @@
               </div>
             </div> 
                     </td> 
+                          </tr>
+                          
+                          <tr>
 
                           <td width="250"> 
             <div class="control-group">
@@ -104,16 +105,9 @@
             </div>
                       </td>
                           </tr>
-         </table>
-            </div>
+                          <tr>
 
-             <div id="tab2" class="tab-pane">
-            
-          <table class="table table-bordered table-striped">
-                  
-
-                     <tr>
-                  <td width="250">
+    <td width="250">
             <div class="control-group">
               <label class="control-label">Unite administrative:</label>
               <div class="controls">
@@ -137,7 +131,7 @@
             </div>
              </td>
 
-                <td width="250">
+             <td width="250">
                           
                <div class="control-group">
               <label class="control-label">Nom Prenom:</label>
@@ -153,12 +147,7 @@
                   </div>
 
                     </td>
-                  </tr>
-
-
-                  <tr>
-
-                 <td  width="250">
+                        <td  width="250">
             <div class="control-group">
               <label class="control-label">Fonction:</label>
               <div class="controls " >
@@ -167,9 +156,11 @@
               </div>
             </div>
                           </td>
-     
-                  
-                <td  width="250">
+
+                          </tr>
+
+                          <tr>
+                           <td  width="250">
                  <div class="control-group">
                   <label class="control-label">Classification Economique</label>
                   <div class="controls">
@@ -185,9 +176,8 @@
                    
                 </div>
                     </td>
-                 
 
-                       <td width="550">
+                     <td colspan="3" width="550">
                       <div class="control-group">
               <label class="control-label">Imputation budgetaire:</label>
               <div class="controls " >
@@ -201,10 +191,11 @@
               </div>
             </div>
                     </td>
-              
-               </tr>
-          </table>
-             </div>
+                          </tr>
+             </table>
+            </div>
+
+            
                <div id="tab3" class="tab-pane">
               <table class="table table-bordered table-striped">
                        <tr>
@@ -375,11 +366,11 @@
                     </td>
 
                     
-                     <td> 
+                     <td colspan="2"> 
             <div class="control-group">
               <label class="control-label">Durée(jours):</label>
               <div class="controls">
-     <input type="text" v-model="editMission.duree" class="span" 
+     <input type="text" v-model="editMission.duree" class="span10" 
      placeholder="Saisir la durée" />
               </div>
             </div>
@@ -522,7 +513,7 @@ export default {
     
      // this.fonctionActeur = acteur.fonction.id
       // console.log(acteur)
-     return  acteur.nom  ;
+     return  acteur.nom.concat('  ',  acteur.prenom)  ;
        }
     return null
      }

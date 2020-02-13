@@ -472,7 +472,7 @@ factures
                                 <div class="control-group">
                                     <label class="control-label">Numero de dossier</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Numero dossier" v-model="formDossierCadidature.numero_dossier">
+                                        <input type="text" readonly class="" placeholder="Numero dossier" v-model="formDossierCadidature.numero_dossier">
                                     </div>
                                 </div>
                             </td>
@@ -1405,7 +1405,7 @@ factures
                         <th>Reférence d'offre </th>
                         <th>Reference PV</th>
                         <th>Date demande</th>
-                        <th>Avis</th>
+                       
                         <th>Fichier</th>
                         <th>Action</th>
                     </tr>
@@ -1424,11 +1424,11 @@ factures
                             {{demande.proce_verbal_offre.reference || 'Non renseigné'}}</td>
                         <td @click="afficheDemandeDAO(demande.id)">
                             {{formaterDate(demande.date_demande) || 'Non renseigné'}}</td>
-                        <td>
+                        <!-- <td>
                             <button class="btn btn-info btn-mini" v-if="avisPv(demande.proce_verbal_offre.reference)==null">En attende</button>
                             <button class="btn btn-success btn-mini" v-else-if="avisPv(demande.proce_verbal_offre.reference)== 1">Non Objection</button>
                             <button class="btn btn-danger btn-mini" v-else>Objection</button>
-                        </td>
+                        </td> -->
                         <td>
                             <a v-if="demande.fichier" :href="demande.fichier" class="btn btn-default" target="_blank">
                                 <span class=""><i class="icon-book"></i>
@@ -1553,12 +1553,12 @@ factures
                     <tbody>
                     <tr class="odd gradeX" v-for="anoBailleur in listeAnoDMPBailleur(marcheid)"
                         :key="anoBailleur.id">
+
                          <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             {{anoBailleur.annalyse_d_m_p.demande_ano.proce_verbal_offre.appel_offre.ref_appel || 'Non renseigné'}}</td>
 
-                        <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
-                            {{anoBailleur.annalyse_d_m_p.demande_ano.proce_verbal_offre.appel_offre.ref_appel || 'Non renseigné'}}</td>
-
+                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
+                            {{afficheRef(anoBailleur.appel_offre_id) || 'Non renseigné'}}</td>
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             {{formaterDate(anoBailleur.date_ano_dmp) || 'Non renseigné'}}</td>
                          <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
@@ -3640,20 +3640,20 @@ factures
                         </div>
                     </div>
                             </td>
-                            <td colspan="">
+                            <td colspan="2">
                     <div class="control-group">
                         <label class="control-label">Date</label>
                         <div class="controls">
                             <input type="date"
                                    v-model="formAnalyseDossier.date_analyse"
-                                   class="span"
+                                   class="span5"
                                    placeholder="date"
                             />
                         </div>
                     </div>
                             </td>
 
-                                  <td>
+                                  <!-- <td>
                     <div class="control-group">
                         <label class="control-label">Decision</label>
                         <div class="controls">
@@ -3663,9 +3663,9 @@ factures
                             </select>
                         </div>
                     </div>
-                            </td>
+                            </td> -->
                         </tr>
-                        <tr>
+                        <!-- <tr>
                       
                             <td colspan="4">
                      <div class="control-group">
@@ -3678,7 +3678,7 @@ factures
                             </td>
                            
                       
-                        </tr>
+                        </tr> -->
 
                     </table>
             
@@ -3760,7 +3760,7 @@ factures
                     </div>
 
 
-                    <div class="control-group">
+                    <!-- <div class="control-group">
                         <label class="control-label">Decision</label>
                         <div class="controls">
                             <select   v-model="edite_analyse_dossier.decision" >
@@ -3768,11 +3768,7 @@ factures
                                 <option value="2">Objection</option>
                             </select>
                         </div>
-                    </div>
-
-                   
-
-
+                    </div> -->
                 </form>
             </div>
             <div class="modal-footer">
@@ -3841,7 +3837,7 @@ factures
                         </div>
                     </div>
 
-                    <div class="control-group">
+                    <!-- <div class="control-group">
 
                         <label class="control-label">Avis</label>
                         <div class="controls">
@@ -3851,8 +3847,8 @@ factures
                                <option value="2"> Non objection</option>
                            </select>
                         </div>
-                    </div>
-
+                    </div> -->
+<!-- 
                   <div class="control-group">
           <label class="control-label">Observation:</label>
             <div class="controls">
@@ -3860,7 +3856,7 @@ factures
               <textarea  v-model="formDemande.observations_ano" :readonly="motifDemandeAno"  class="textarea_editor" rows="" placeholder="Entrer  le text ..."></textarea>
             </div>
           
-        </div>
+        </div> -->
 
          <div class="control-group">
               <label class="control-label">Fichier joint:</label>
@@ -4261,10 +4257,23 @@ factures
             </div>
                     <table class="table table-bordered table-striped">
                         <tr>
+
+                               <td>
+                        <div class="control-group">
+                        <label class="control-label">Reference offre</label>
+                        <div class="controls">
+                            <select v-model="edite_ano_bailleur_dmp.appel_offre_id" class="span" disabled>
+                                <option v-for="plans in listeAppelOffre(marcheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.ref_appel}}</option>
+                            </select>
+                        </div>
+                    </div>
+                            </td>
+
                             <td>
 
                      <div class="control-group">
-                        <label class="control-label">reference ano dmp</label>
+                        <label class="control-label">Avi dmp</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -4276,17 +4285,7 @@ factures
                     </div>
                             </td>
                    
-                   
-
-                    <!-- <div class="control-group">
-                        <label class="control-label">Analyse DMP</label>
-                        <div class="controls">
-                            <select v-model="edite_ano_bailleur_dmp.analyse_dmp_id" class="span">
-                                <option v-for="varText in listeAnalyseDPM(marcheid)" :key="varText.id"
-                                        :value="varText.id">{{varText.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier}}</option>
-                            </select>
-                        </div>
-                    </div> -->
+                
                       <td colspan="2">
 
 
@@ -4319,7 +4318,7 @@ factures
                             <td>
 
                      <div class="control-group">
-                        <label class="control-label">Date ano</label>
+                        <label class="control-label">Date avis</label>
                         <div class="controls">
                             <input
                                     type="date"
@@ -4346,7 +4345,7 @@ factures
                      <div class="control-group">
             <label class="control-label">Motif:</label>
             <div class="controls">
-              <textarea  v-model="edite_ano_bailleur_dmp.observations_bailleur" :readonly="afficherMotifBailleur"  class="textarea_editor span10" rows="4" placeholder="Enter text ..."></textarea>
+              <textarea  v-model="edite_ano_bailleur_dmp.observations_bailleur"   class="textarea_editor span10" rows="4" placeholder="Enter text ..."></textarea>
               </div>
           
         </div>
@@ -4354,13 +4353,10 @@ factures
                            
                       
                         </tr>
-                    </table>
-
-
-              
+                    </table>   
             <div class="modal-footer">
                 <a
-                        @click.prevent="editeAnoDMPBailleurLocal"
+                 @click.prevent="editeAnoDMPBailleurLocal"
                         class="btn btn-primary"
                         href="#"
 
@@ -4605,11 +4601,11 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
                     appel_offre_id:"",
                     note_analyse:"",
                     rang_analyse:"",
-                    decision:"",
+                   // decision:"",
                     dossier_candidat_id:"",
                     type_analyse_id: "",
                     cojo_id:"",
-                    motif:""
+                   // motif:""
 
                 },
                 affiche_bouton_ajouter_cojo:false,
@@ -5043,9 +5039,9 @@ return this.formAnalyseDMP.avis_bail == "1";
     },
 
 // afficher le moti de demande ano
- motifDemandeAno(){
-     return this.formDemande.avis_ano == 1
- },
+//  motifDemandeAno(){
+//      return this.formDemande.avis_ano == 1
+//  },
 
 
       afficherIdMarche() {
@@ -5195,9 +5191,9 @@ montantHT() {
             },
 
             // afficher le champ motif dynanmique
-afficherMotifAnalyse(){
-    return this.formAnalyseDossier.decision  =="1"
-},
+// afficherMotifAnalyse(){
+//     return this.formAnalyseDossier.decision  =="1"
+// },
 
             listeLots(){
                 return  marche_id=>{
@@ -5657,8 +5653,8 @@ modifierFactureLocal(){
                         date_analyse:"",
                         appel_offre_id:"",
                         rang_analyse:"",
-                        decision:"",
-                        motif:"",
+                      //  decision:"",
+                       // motif:"",
                         note_analyse:"",
                         dossier_candidat_id:"",
                         type_analyse_id: "",
@@ -6312,7 +6308,7 @@ ajouterNouveauFournisseurLocal(registeCommerce){
     .grdirModalAnalyse{
          width: 1000px;
  margin: 0 -530px;
- height: 450px;
+ height: 350px;
     }
     .tlAviBailleur{
   width: 1000px;

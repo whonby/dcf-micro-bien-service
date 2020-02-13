@@ -1,6 +1,6 @@
 <template>
    <div class="container-fluid">
-        <hr>
+        
     <div class="row-fluid">
       <div class="span12">
       <div class="widget-box">
@@ -189,10 +189,9 @@
                     <!---- debut du tableau historique de mission  --->
  
                         <div id="tab2" class="tab-pane">
-                           <div class="container-fluid">
-                                      <div class="row-fluid">
+                         
                                         <div class="span12">
-                                            <div>
+                                            <!-- <div>
 
                                         <download-excel
                                             class="btn btn-default pull-right"
@@ -205,14 +204,14 @@
                       <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
-                                     </div> <br>
-        <div class="widget-box">
-             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+                                     </div> <br> -->
+        <!-- <div class="widget-box"> -->
+             <!-- <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des historiques de missions</h5>
              <div align="right">
           </div>
              
-          </div>
+          </div> -->
          
            <div class="widget-content nopadding">
             <table class="table table-bordered table-striped">
@@ -223,7 +222,7 @@
                      <th>Motif</th>
                      <th>Observation</th>
                      <!-- <th>Temps du traitement du dossier</th> -->
-                      <th>Action</th>
+                      <!-- <th>Action</th> -->
                 </tr>
               </thead>
               <tbody v-if="historique">
@@ -251,7 +250,7 @@
                         <!-- <td @dblclick="afficherModalModifierHistoriqueMission(index)">
                       {{historiqueMission.temps_traitement || 'Non renseigné'}}</td> -->
                    
-                  <td>
+                  <!-- <td>
 
 
 
@@ -261,7 +260,7 @@
              
             </div>
 
-                  </td>
+                  </td> -->
                 </tr>
               </tbody>
             </table>
@@ -273,54 +272,14 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-              </div>
-            </div>
+        <!-- </div> -->
+     
+             
+
+            
             </div>
             
   <!---- fin du tableau historique de mission  --->
-
-
-  <!---- debut  du tableau historique de temps de traitement de dossiers  --->
-
-
-
-
-
- <!-- <div id="tab3" class="tab-pane">
-                           <div class="container-fluid">
-                                      <div class="row-fluid">
-                                        <div class="span12">
-                                           
-        <div class="widget-box">
-             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>le temps du traitement des dossiers</h5>
-             <div align="right">
-          </div>
-             
-          </div>
-         
-           <div class="widget-content nopadding">
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  
-                </tr>
-              </thead>
-           
-            </table>
-         
-           
-          </div>
-        </div>
-      </div>
-              </div>
-            </div>
-            </div> -->
-
-
-    <!---- fin du tableau historique de temps de traitement de dossiers  --->
 
 
 
@@ -331,11 +290,10 @@
 
                 </div>
                 <div align="right">
-           
-             
-              <button @click.prevent="AllerAPageListe" data-dismiss="modal" class="icon icon-arrow-left" title="retour sur liste mission">Retour</button> 
+          
+              <button @click.prevent="AllerAPageListe" data-dismiss="modal" class="icon icon-arrow-left btn btn-danger" >Retour</button> 
                 </div>
-             
+    </div>  
    </div>
 </template>
 
