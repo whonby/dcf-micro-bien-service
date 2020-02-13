@@ -1,4 +1,3 @@
-
 <template>
     
 <div>
@@ -351,7 +350,7 @@
                          <td @click="afficheBouttonTechFin(index)">
                              {{appelOffre.numero_dossier || 'Non renseigné'}}</td>
                          <td @click="afficheBouttonTechFin(index)">
-                             {{appelOffre.type_candidat || 'Non renseigné'}}</td>
+                             {{afficheCandidat(appelOffre.type_candidat_id) || 'Non renseigné'}}</td>
                          <td @click="afficheBouttonTechFin(index)">
                              {{appelOffre.nom_cand || 'Non renseigné'}}</td>
                          <td @click="afficheBouttonTechFin(index)">
@@ -484,7 +483,7 @@
                                         <option v-for="varText in typeCandidat" :key="varText.id"
                                                 :value="varText.id">{{varText.libelle}}</option>
                                     </select>
-                                       
+                                     
                                     </div>
                                 </div>
                             </td>
@@ -721,7 +720,7 @@
 
                                 <tr>
                                     <td>{{detail_dossier_candidature.numero_dossier || "Non renseigne"}}</td>
-                                    <td>{{detail_dossier_candidature.type_candidat || "Non renseigne"}}</td>
+                                    <td>{{afficheCandidat(detail_dossier_candidature.type_candidat_id) || "Non renseigne"}}</td>
                                     <td>{{detail_dossier_candidature.telephone_cand || "Non renseigne"}}</td>
                                     <td>{{detail_dossier_candidature.adresse_post || "Non renseigne"}}</td>
                                     <td>{{detail_dossier_candidature.situation_geo || "Non renseigne"}}</td>
@@ -5538,7 +5537,11 @@ created() {
     console.log(this.appel_offre_marche)*/
 },
         computed: {
+
             ...mapGetters("bienService", [ "typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+
+         
+
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -5556,7 +5559,18 @@ created() {
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
             
             
+afficheCandidat() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeCandidat.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 
 // calculons le nombre de jours pour acteur depense
 
