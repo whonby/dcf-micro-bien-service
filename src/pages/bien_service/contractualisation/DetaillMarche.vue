@@ -1,6 +1,4 @@
-Liste avis bailleur
-Ajouter avis bailleur
-Edite ano DMP Bailleur
+
 <template>
     
 <div>
@@ -482,11 +480,12 @@ Edite ano DMP Bailleur
                                 <div class="control-group">
                                     <label class="control-label">Type candidat</label>
                                     <div class="controls">
-                                       
-                                         <select  v-model="formDossierCadidature.type_candidat_id" >
+
+                                         <select v-model="formDossierCadidature.type_candidat_id" class="span" >
                                         <option v-for="varText in typeCandidat" :key="varText.id"
                                                 :value="varText.id">{{varText.libelle}}</option>
                                     </select>
+                                     
                                     </div>
                                 </div>
                             </td>
@@ -903,14 +902,20 @@ Edite ano DMP Bailleur
                                     </div>
                                 </div>
                             </td>
-                            <td>
+                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Type candidat</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Type Candidat" v-model="editDossierCadidature.type_candidat">
+
+                                         <select  v-model="editDossierCadidature.type_candidat_id" class="span" >
+                                        <option v-for="varText in typeCandidat" :key="varText.id"
+                                                :value="varText.id">{{varText.libelle}}</option>
+                                    </select>
+                                       
                                     </div>
                                 </div>
                             </td>
+
 
 
 
@@ -1719,12 +1724,10 @@ Edite ano DMP Bailleur
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
-                        <!-- <th>Reference offre</th> -->
-                        
-                        <th>Date </th>
-                        <th>Reference offre </th>
+                    <th>Reference offre</th>
+                        <th>Date avis</th>
                         <th>Avis</th>
-                        <th>Numero courrier dmp</th>
+                        <th>Reference courrier</th>
                         <th>Observation</th>
                         <th>Action</th>
                     </tr>
@@ -1739,7 +1742,9 @@ Edite ano DMP Bailleur
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             {{afficheRef(anoBailleur.appel_offre_id) || 'Non renseigné'}}</td>
 
-
+                        <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
+                            {{formaterDate(anoBailleur.date_ano_dmp) || 'Non renseigné'}}</td>
+                      
                          <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             <button class="btn btn-success btn-mini" v-if="anoBailleur.avis_bail== 1">Non objection</button>
                             <button class="btn btn-danger btn-mini" v-else>Objection</button>
@@ -4855,7 +4860,7 @@ Edite ano DMP Bailleur
         <div id="editeAnoDmpBailleurModal" class="modal hide tlAviBailleur">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Edite ano DMP Bailleur</h3>
+                <h3>Modifier ano DMP Bailleur</h3>
             </div>
                     <table class="table table-bordered table-striped">
                         <tr>
@@ -4892,7 +4897,7 @@ Edite ano DMP Bailleur
                         <label class="control-label">Numero courrier DMP</label>
                         <div class="controls">
                             <input
-                                    type="text"
+                                    type="text" v-model="edite_ano_bailleur_dmp.numero_courie"
                                     
                                     class="span5"
                                     placeholder="Saisir le numero du courrier"
@@ -5229,6 +5234,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
                 isButtunAddDossierCandidat:true,
           formDossierCadidature:{
               secteur_activite_id:"",
+              type_candidat_id:"",
               numero_cc:"",
               type_candidat:"",
               nom_cand:"",
@@ -5266,6 +5272,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
           editDossierCadidature:{
 
                secteur_activite_id:"",
+               type_candidat_id:"",
               numero_cc:"",
               type_candidat:"",
               nom_cand:"",
@@ -5537,7 +5544,11 @@ created() {
     console.log(this.appel_offre_marche)*/
 },
         computed: {
-            ...mapGetters("bienService", [ 'typeCandidat','acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+
+            ...mapGetters("bienService", [ "typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+
+         
+
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
