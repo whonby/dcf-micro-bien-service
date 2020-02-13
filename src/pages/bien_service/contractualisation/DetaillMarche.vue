@@ -1,3 +1,6 @@
+Liste avis bailleur
+Ajouter avis bailleur
+Edite ano DMP Bailleur
 <template>
     
 <div>
@@ -22,6 +25,7 @@
                             </thead>
                             <tbody>
                             <tr v-if="detail_marche">
+                                
                                 <td class="taskDesc">{{detail_marche.objet}}</td>
                                 <td class="taskStatus">{{detail_marche.reference_marche}}</td>
                                 <td class="taskOptions">
@@ -1733,7 +1737,7 @@
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             {{formaterDate(anoBailleur.date_ano_dmp) || 'Non renseigné'}}</td>
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
-                            {{anoBailleur.appel_offre.ref_appel || 'Non renseigné'}}</td>
+                            {{afficheRef(anoBailleur.appel_offre_id) || 'Non renseigné'}}</td>
 
 
                          <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
@@ -5492,6 +5496,7 @@ formPv:{
                     role:"",
                     cojo_id:"",
                 },
+                detail_marche:{},
                 formLettre: {
                     appel_offre_id:"",
                     fichier_joint:"",
@@ -5549,7 +5554,18 @@ created() {
                 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
             
-            
+               afficheRef() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.appelOffres.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ref_appel;
+      }
+      return 0
+        }
+      };
+    },
 afficheCandidat() {
       return id => {
         if (id != null && id != "") {
@@ -5968,7 +5984,7 @@ afficherMotifAnalyse(){
                 return marcheid => {
                     if (marcheid != "") {
                         console.log("Marche dmp bailleur")
-                        let objet=this.getterAnoDMPBailleur.filter(idmarche => idmarche.id == marcheid)
+                        let objet=this.getterAnoDMPBailleur.filter(idmarche => idmarche.marche_id == marcheid)
                         console.log("Marche dmp bailleru 7474")
                         return objet
                     }
@@ -6588,12 +6604,13 @@ modifierModalActeEffetFinancierLocal(entreprise_id){
                     date_avis_bail:""
             }
         },ajouterAnoDMPBailleurLocal(){  
-            // var nouvelObjet = {
-            //     ...this.formAno,
-            //      ref_ano_dmp: this.recuperationDeAvisDmp
-            // }
+            var nouvelObjet = {
+                ...this.formAno,
+                 ref_ano_dmp: this.recuperationDeAvisDmp,
+                 marche_id: this.detail_marche.id
+            }
             
-               this.ajouterAnoDMPBailleur(this.formAno)
+               this.ajouterAnoDMPBailleur(nouvelObjet)
                 this.formAno={
                     date_ano_dmp:"",
                         avis_bail:"",
@@ -6793,7 +6810,12 @@ ajouterNouveauFournisseurLocal(registeCommerce){
             },
 
             editeAnoDMPBailleurLocal(){
-                this.modifierAnoDMPBailleur(this.edite_ano_bailleur_dmp)
+                 var nouvelObjet = {
+                ...this.edite_ano_bailleur_dmp,
+                 ref_ano_dmp: this.recuperationDeAvisDmp,
+                 marche_id: this.detail_marche.id
+            }
+                this.modifierAnoDMPBailleur(nouvelObjet)
                 this.$('#editeAnoDmpBailleurModal').modal('hide');
             },
 // afficher modification demande ano
