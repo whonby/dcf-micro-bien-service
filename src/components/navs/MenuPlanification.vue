@@ -228,7 +228,7 @@
 
 
 
-<li class="dropdown" id="contractualisation">
+<!-- <li class="dropdown" id="contractualisation">
         <a
           
           href="#"
@@ -250,84 +250,15 @@
           </li>
 
 
-         <!-- <li class="divider"></li>
-          <li>
-            <router-link :to="{name: ''}" tag="a">
-              <i class="icon-list-ul"></i> Lot
-            </router-link>
-          </li>
-
-           <li class="divider"></li> -->
-          <!-- <li>
-            <li class="divider"></li>
-          <li>
-            <router-link :to="{name: ''}" tag="a">
-              <i class=" icon-star"></i> Lettre d'invitation
-            </router-link>
-          </li> -->
-
-          <!-- <li class="divider"></li>
-          <li>
-            <router-link :to="{name: ''}" tag="a">
-              <i class=" icon-star-half"></i> Mandate
-            </router-link>
-          </li> -->
-
-      <!-- <li class="divider"></li>
-          <li>
-            <router-link :to="{name: ''}" tag="a">
-              <i class=" icon-qrcode"></i> La cojo
-            </router-link>
-          </li> -->
-
-        <!-- <li class="divider"></li>
-          <li>
-            <router-link :to="{name: ''}" tag="a">
-              <i class=" icon-ok-sign"></i> Analyse de dossier
-            </router-link>
-          </li> -->
-
-      <!-- <li class="divider"></li>
-          <li>
-            <router-link :to="{name: ''}" tag="a">
-              <i class=" icon-ok-circle"></i> Demande d'ANO
-            </router-link>
-          </li> -->
-
-          <!-- <li class="divider"></li>
-          <li>
-            <router-link :to="{name: ''}" tag="a">
-              <i class=" icon-tint"></i> Decision de marché
-            </router-link>
-          </li> -->
-           <!-- <li>
-            <router-link :to="{name: ''}" tag="a">
-              <i class="icon-bar-chart"></i>
-           Lot
-            </router-link>
-          </li> -->
-
-
-
-          <!-- <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'EtapeMarche'}" tag="a">
-              <i class="icon-check"></i>
-             Etapes de marchés
-            </router-link>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'MarcheContrat'}" tag="a">
-              <i class="icon-reorder"></i>
-              Marchés et contrats
-            </router-link>
-          </li>
-           -->
+         
          
         </ul>
-      </li>
-
+      </li> -->
+<li>
+            <router-link :to="{name: 'marche'}" tag="a">
+              PLANIFICATION DU MARCHES
+            </router-link>
+          </li>
       
        <li class="dropdown" id="execut">
         <a  href="#" data-toggle="dropdown" data-target="#execut" class="dropdown-toggle">
