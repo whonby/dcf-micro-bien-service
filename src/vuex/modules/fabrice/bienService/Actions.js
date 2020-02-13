@@ -3098,10 +3098,12 @@ export  function  getAnoDMPBailleur({commit}) {
     }).catch(error => console.log(error)))
 }
 
-export function ajouterAnoDMPBailleur({commit,dispatch}, elementAjout){
-    asyncLoading(axios.post('/ano_dmp_bailleurs',elementAjout)).then(response =>{
+export function ajouterAnoDMPBailleur({commit,dispatch}, elementAjout,config){
+    asyncLoading(axios.post('/ano_dmp_bailleurs',elementAjout,config)).then(response =>{
         if(response.status == 201){
-            commit('AJOUTER_ANO_DMP_BAILLEUR', response.data)
+
+            commit('AJOUTER_ANO_DMP_BAILLEUR', response.data.analyse)
+            commit('MODIFIER_PV', response.data.jugement)
             dispatch('getAnoDMPBailleur')
             this.$app.$notify({
                 title: 'success ',
@@ -3634,7 +3636,19 @@ export function ajouterProceVerbal({commit}, objetAjoute,config){
     }).catch(error => console.log(error))
 }
 
+export function supprimerProceVerbal({commit}, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_PV', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/proceVerbalJugementOffres/' + id).then(response =>{
+                commit('GET_ALL_ANALYSE_DOSSIER', response.data.data)
+                dialog.close()
+            }  )
+        })
 
+}
 /*
 export function modificationProceVerbal({commit}, element_modifie) {
     asyncLoading( axios.put('/membre_cojo' ,element_modifie)).then(response => {
@@ -3647,13 +3661,4 @@ export function modificationProceVerbal({commit}, element_modifie) {
     }).catch(error => console.log(error))
 }
 
-export function supprimerProceVerbal({commit}, id) {
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.")
-        .then(dialog => {
-            commit('SUPPRIMER_MEMBRE_COJO', id)
-            // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete('/membre_cojo/' + id).then(() => dialog.close() )
-        })
-
-}*/
+*/

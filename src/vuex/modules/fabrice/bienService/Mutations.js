@@ -1896,4 +1896,5 @@ export const MODIFIER_PV= (state, elementModif)=>{
 
 export const SUPPRIMER_PV= (state, id)=> {
     state.proce_verballe = state.proce_verballe.filter(autreText => autreText.id !=id)
+    state.analyseDossiers=[]
 }
