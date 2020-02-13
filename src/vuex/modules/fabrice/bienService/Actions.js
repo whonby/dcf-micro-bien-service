@@ -3281,6 +3281,7 @@ export function getPays({ commit }) {
   }).catch(error => console.log(error)))
 }
 
+
 // action pour ajouter bailleur
 export function ajouterPays({ commit }, formData) {
   asyncLoading(axios.post('/pays', formData)).then(response => {
@@ -3337,8 +3338,9 @@ export function ajouterVille({ commit, dispatch}, formData) {
     if (response.status == 201) {
       console.log(response.data)
       commit('AJOUTER_VILLE', response.data)
+       dispatch('getVille')
       dispatch('getPays')
-      dispatch('getVille')
+     
       this.$app.$notify({
         title: 'success ',
         text: 'Enregistrement effectué !',
@@ -3355,8 +3357,9 @@ export function ajouterVille({ commit, dispatch}, formData) {
 export function modifierVille({ commit, dispatch}, element_modifie) {
   asyncLoading(axios.put('/ville', element_modifie)).then(response => {
     commit('MODIFIER_VILLE', response.data)
-    dispatch('getPays')
     dispatch('getVille')
+    dispatch('getPays')
+    
     this.$app.$notify({
       title: 'success ',
       text: 'Modification effectué !',
@@ -3370,8 +3373,9 @@ export function supprimerVille({ commit, dispatch }, id) {
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
       commit('SUPPRIMER_VILLE', id)
-      dispatch('getPays')
       dispatch('getVille')
+      dispatch('getPays')
+     
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete('/ville/' + id).then(() => dialog.close())
     })

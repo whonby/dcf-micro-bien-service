@@ -121,7 +121,7 @@
 
 
               <div class="btn-group">
-              <button @click.prevent="supprimerTypeAppel(typeappel.id)"  class="btn btn-danger ">
+              <button @click.prevent="supprimerPays(typeappel.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
@@ -223,7 +223,7 @@ export default {
         keyboard: false
       });
 
-      this.editTypeAppel = this.typeAppelOffre[index];
+      this.editTypeAppel = this.pays[index];
     },
     // fonction pour vider l'input modification
     
