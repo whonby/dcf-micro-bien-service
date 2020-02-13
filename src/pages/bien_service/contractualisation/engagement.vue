@@ -1,4 +1,4 @@
-Ajouter Facture Definitive
+Validation CF
 <template>
   	
         <div class="container-fluid">
@@ -2488,8 +2488,8 @@ Ajouter Facture Definitive
                                 <th title="numero de bordereau">N°bordereau engagement</th>
                                  <th title="numero de l'engagement">N°engagement</th>
                                 <th title="programme/dotation">Prog/Dotat</th>
-                                <th>Action Programmatique</th>
-                                <th>Activite</th>
+                                <!-- <th>Action Programmatique</th>
+                                <th>Activite</th> -->
                                 <th title="unite administrative">Ua</th>
                                  <th>Imputation</th>
                                   <th title="ligne budgetaire">Section</th>
@@ -2510,8 +2510,8 @@ Ajouter Facture Definitive
                     <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_bordereau || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_engage || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierEngagement(index)">{{afficheProgrammeDot(Engage.programme_id) || 'Non renseigné'}}</td> 
-                     <td @dblclick="afficherModalModifierEngagement(index)">{{afficheActionProg(Engage.action_id) || 'Non renseigné'}}</td> 
-                      <td @dblclick="afficherModalModifierEngagement(index)">{{afficheAtiviteProg(Engage.activite_id) || 'Non renseigné'}}</td>
+                     <!-- <td @dblclick="afficherModalModifierEngagement(index)">{{afficheActionProg(Engage.action_id) || 'Non renseigné'}}</td> 
+                      <td @dblclick="afficherModalModifierEngagement(index)">{{afficheAtiviteProg(Engage.activite_id) || 'Non renseigné'}}</td> -->
                     <td @dblclick="afficherModalModifierEngagement(index)">{{uaMandat(Engage.ua_id) || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.budget_general_id || 'Non renseigné'}}</td>
                      
@@ -2552,8 +2552,8 @@ Ajouter Facture Definitive
                     <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_bordereau || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_engage || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierEngagement(index)">{{afficheProgrammeDot(Engage.programme_id) || 'Non renseigné'}}</td> 
-                     <td @dblclick="afficherModalModifierEngagement(index)">{{afficheActionProg(Engage.action_id)|| 'Non renseigné'}}</td> 
-                      <td @dblclick="afficherModalModifierEngagement(index)">{{afficheAtiviteProg(Engage.activite_id) || 'Non renseigné'}}</td>
+                     <!-- <td @dblclick="afficherModalModifierEngagement(index)">{{afficheActionProg(Engage.action_id)|| 'Non renseigné'}}</td> 
+                      <td @dblclick="afficherModalModifierEngagement(index)">{{afficheAtiviteProg(Engage.activite_id) || 'Non renseigné'}}</td> -->
                     <td @dblclick="afficherModalModifierEngagement(index)">{{uaMandat(Engage.ua_id) || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.budget_general_id || 'Non renseigné'}}</td>
                      
@@ -2589,7 +2589,10 @@ Ajouter Facture Definitive
                     </td>
                      </template>
                        <td>
-                        
+                        <router-link :to="{ name: 'DetailEngagement', params: {id_detail_engagement:Engage.id}}"
+                class="btn btn-default " title="Detail Engagement">
+                  <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link> 
                       <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Mandat">
                         <span>
                           <i class="icon icon-book"></i>
@@ -2695,7 +2698,10 @@ Ajouter Facture Definitive
                     
                     <td @dblclick="afficherModalModifierMandat(index)">{{formaterDate(Manda.date_motif) || 'Non renseigné'}}</td>
                        <td>
-                        
+                        <!-- <router-link :to="{ name: 'DetailEngagement', params: {id_detail_engagement:Engage.id}}"
+                class="btn btn-default " title="Detail Engagement">
+                  <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link>  -->
                      
                       <button class="btn btn-danger" @click="supprimerMandat(Manda.id)">
                         <span>
@@ -7167,9 +7173,11 @@ created() {
             this.marcheid=this.$route.params.id
    this.detail_marche = this.getMarchePersonnaliser.find(
        idmarche => idmarche.id == this.$route.params.id
-   )
+         ),
+          this.detail_engage = this.engagements.find(
+      Engage => Engage.id == this.$route.params.id)
   
-   
+  
   /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
     console.log(this.appel_offre_marche)*/
 },
