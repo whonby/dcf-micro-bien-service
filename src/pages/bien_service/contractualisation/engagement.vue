@@ -1,4 +1,3 @@
-Validation CF
 <template>
   	
         <div class="container-fluid">

@@ -2415,22 +2415,11 @@ factures
 
                       <!-- debut item de facture  --->
 
-                             
+                               <div id="tab4" class="tab-pane">
 
-                      <!---  fin item de facture -->
-
-                      <!-- debut form de facture  -->
-               
-
-                      <!-- fin form de facture  -->
+                            </div>
 
 
-                      <!-- debut form modification facture -->
-
-                     
-
-
-                      <!---fin form modification facture --->
 
 
                         </div>
@@ -4771,18 +4760,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
 
          },
 
-editFacture:{
-     prix_propose_ttc:"",
-             prix_propose_ht:"",
-             prix_unitaire:"",
-             montant_facture:"",
-             ligne_budgetaire:"",
-             objet_facture:"",
-             id_type_facture:"",
-             code_acte_depense:"",
-             numero_facture:"",
 
-},
 
          editActeEffetFinancier:{
               code_act:"",
@@ -4967,8 +4945,7 @@ created() {
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
-                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "factures", "typeFactures",
-                "getPersonnaliserFacture", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
+                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
             ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -5177,17 +5154,6 @@ montantHT() {
 
 
             },
-            montantBailleurMarche(){
-                return  marche_id=>{
-                    if (marche_id!="") {
-                        let initialValue = 0;
-                        let ObjetMontant =this.personnaliseGetterMarcheBailleur.filter( idmarche => idmarche.marche_id == marche_id).reduce(function (total, currentValue) {
-                            return total + parseFloat(currentValue.montant) ;
-                        }, initialValue);
-                        return ObjetMontant;
-                    }
-                }
-            },
             montantBailleurMarcheCompare(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -5195,7 +5161,7 @@ montantHT() {
                         let vM=this;
                       //  let montantSaisie=parseFloat(vM.formBailleur.montant)
                         let ObjetMontant =this.personnaliseGetterMarcheBailleur.filter( idmarche => idmarche.marche_id == marche_id).reduce(function (total, currentValue) {
-                            return total + parseFloat(currentValue.montant) ;
+                                 return total + parseFloat(currentValue.montant) ;
                         }, initialValue);
                         let montantConbiner=parseFloat(vM.formBailleur.montant) + parseFloat(ObjetMontant)
 
@@ -5283,14 +5249,6 @@ afficherMotifAnalyse(){
                 }
             }
             ,
-            listeActeEffetFinancier(){
-                return marche_id =>{
-                    if(marche_id !=""){
-                       // console.log("Marche liste accteEffet")
-                        return this.getActeEffetFinancierPersonnaliser.filter(identreprise =>identreprise.id == marche_id)
-                    }
-                }
-            },
             dossierCandidature: function () {
                 return marcheid => {
                     if (marcheid != "") {
@@ -5312,7 +5270,7 @@ afficherMotifAnalyse(){
                     if (marcheid != "") {
                        let vM =this;
                         let Objet =this.getterMandate.find(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid);
-                      console.log(Objet)
+                      console.log("Ok c'est la vie")
                         if(Objet!=undefined){
                             vM.formDataCojo.lettre_invitation_id=Objet.lettre_invitation_id
                             vM.formDataCojo.controleur_finnancier=Objet.nom_mandat+" "+Objet.prenom_nom
@@ -5346,7 +5304,7 @@ afficherMotifAnalyse(){
         listeAnalyseDossier: function () {
             return marcheid => {
                 if (marcheid != "") {
-                    //console.log("Marche liste analyse dossier")
+
                     return this.getterAnalyseDossiers.filter(idmarche => idmarche.dossier_candidature.appel_offre.marche_id == marcheid)
                 }
             }
@@ -5355,10 +5313,10 @@ afficherMotifAnalyse(){
             demandeAno: function () {
                 return marcheid => {
                     if (marcheid != "") {
-                    //    console.log("Marche demande ano")
+
 
                         let obje=this.getterDemandeAno.filter(idmarche => idmarche.proce_verbal_offre.appel_offre.marche_id == marcheid)
-                       // console.log("Testest0101")
+
                         return obje
                     }
                 }
@@ -5408,15 +5366,7 @@ afficherMotifAnalyse(){
              }
             },
 
-    //          ImputationBudget() {
-      
-    //   const norme = this.getPersonnaliserFacture.find(normeEquipe => normeEquipe.afficheEconomique.id == this.formData.economique_id);
 
-    //   if (norme) {
-    //     return norme.codebudget;
-    //   }
-    //   return 0
-    // },
             listeAnoDMPBailleur: function () {
                 return marcheid => {
                     if (marcheid != "") {
@@ -5428,27 +5378,7 @@ afficherMotifAnalyse(){
                 }
             },
 
-            listeAnalyseDMPFavorable: function () {
-                return marcheid => {
-                    if (marcheid != "") {
-                    //   console.log("Marche analyse DMP Favorable")
-                        return this.getterAnalyseDMP.filter(idmarche => {
-                            if(idmarche.demande_ano.proce_verbal_offre.appel_offre.marche_id == marcheid && idmarche.avis_bail==1){
 
-                             return idmarche
-                            }
-                        })
-                    }
-                }
-            },
-            listeObservationBailleurANODMP: function () {
-                return marcheid => {
-                    if (marcheid != "") {
-                       // console.log("Marche observation bailleur ANODMP")
-                        return this.getterObseravtionBailleurs.filter(idmarche => idmarche.id == marcheid)
-                    }
-                }
-            },
             selectionAttributionMarche: function () {
                 return marcheid => {
                     if (marcheid != "") {
@@ -5458,14 +5388,16 @@ afficherMotifAnalyse(){
 
                         let marcherFavaroble=marcherEnAction.find(idmarche=>idmarche.avis_bail==1);
                         let marcherObjetction=marcherEnAction.find(idmarche=>idmarche.avis_bail==0);
-                        console.log(marcherFavaroble)
+                        console.log("14")
                         if (marcherFavaroble!=undefined){
                             vM.entreprise_vainqueur=""
-                            vM.resultaFinalCandidat=[]
+                            console.log("1411111")
+                           // vM.resultaFinalCandidat=[]
                             vM.info_avis_bailleur="Non objection";
                             vM.formEffetFinancier.ano_bailleur_id=marcherFavaroble.id
                             let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==marcherFavaroble.annalyse_d_m_p.demande_ano.proce_verbal_offre.reference);
-                            vM.resultaFinalCandidat=vM.resultaFinalCandidat.concat(resulta)
+                            console.log("OKOKOKOOKO")
+                            vM.resultaFinalCandidat=resulta
 
                             if (vM.resultaFinalCandidat.length>0){
                                 vM.resultaFinalCandidat.sort(function (a, b) {
@@ -5491,16 +5423,7 @@ afficherMotifAnalyse(){
                 }
             },
 
-            /*listeActeEffectFinnancier:function () {
-                return marcheid => {
-                  if(marcheid !=""){
-                      console.log("iiiiiiii"
-                          const  objet=this.getActeEffetFinancierPersonnaliser.filter(idmarche => idmarche.marche.id == marcheid)
-                      console.log(objet)
-                        return this.getActeEffetFinancierPersonnaliser.filter(idmarche => idmarche.marche.id == marcheid)
-                    }
-                }
-            },*/
+
             listeActeEffectFinnancier: function () {
                 return marcheid => {
                     if (marcheid != "") {
@@ -5580,19 +5503,7 @@ ajouterStockLocal(){
       this.formLettre.fichier_joint = e.target.files[0]
      // console.log(onFichierChange);
     },
-//     onFichierChange(e){
-// this.formMandater.fichier_joint = e.target.files[0]
 
-//     },
-
-// afficher modal modifier facture
-afficherModalmodifierfacture(index){
-    this.$('#modififacture').modal({
-        backdrop: "static",
-        keyboard:false
-    })
-    this.editFacture = this.factures[index]
-},
             afficheModaleMembreCojo(index){
                 this.$('#modification_membre_cojo').modal({
                     backdrop: "static",
@@ -5605,7 +5516,7 @@ afficherModalmodifierfacture(index){
     this.$('#modification_membre_cojo').modal('hide');
 },
 modifierFactureLocal(){
-    this.modifierFacture(this.editFacture)
+
     this.$('#modififacture').modal('hide');
 },
            rechercheMandater(){
