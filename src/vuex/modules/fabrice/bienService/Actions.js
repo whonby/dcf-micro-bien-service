@@ -3662,3 +3662,69 @@ export function modificationProceVerbal({commit}, element_modifie) {
 }
 
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export function getAvenant({ commit }) {
+  queue.push(() => axios.get('/avenant').then((response) => {
+    commit('GET_ALL_AVENANT', response.data.data)
+
+  }).catch(error => console.log(error)))
+}
+
+// action pour ajouter bailleur
+export function ajouterAvenant({ commit }, formData) {
+  asyncLoading(axios.post('/avenant', formData)).then(response => {
+    if (response.status == 201) {
+      // console.log(response.data)
+      commit('AJOUTER_AVENANT', response.data)
+
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier bailleur
+
+
+export function modifierAvenant({ commit }, element_modifie) {
+  asyncLoading(axios.put('/avenant', element_modifie)).then(response => {
+    commit('MODIFIER_AVENANT', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+// supprimer categorie mision
+export function supprimerAvenant({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('DELETE_AVENANT', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/avenant/' + id).then(() => dialog.close())
+    })
+
+}

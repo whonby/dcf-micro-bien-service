@@ -5961,6 +5961,7 @@ ajouterModalActeEffetFinancierLocal(rcm){
     }
 },
 
+
 afficherModalModifierActeEffetFinancier(index){
     this.$('#modifierActeEF').modal({
         backdrop: 'static',

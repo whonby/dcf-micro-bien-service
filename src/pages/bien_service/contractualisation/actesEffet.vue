@@ -70,7 +70,7 @@
                             {{effetFinancier.incidence_financiere || 'Non renseigné'}}</td>
 
                             <td @click="afficherModalModifierActeEffetFinancier(index)">
-                            {{effetFinancier.montant_act || 'Non renseigné'}}</td>
+                            {{formatageSomme(parseFloat(effetFinancier.montant_act)) || 0}}</td>
 
                               <td @click="afficherModalModifierActeEffetFinancier(index)">
                             {{effetFinancier.type_acte_effet.libelle || 'Non renseigné'}}</td>
@@ -82,7 +82,7 @@
                             {{effetFinancier.varObjetEntreprise.forme_juridique || 'Non renseigné'}}</td> -->
 
                              <td @click="afficherModalModifierActeEffetFinancier(index)">
-                            {{effetFinancier.text_juridique.libelle_text || 'Non renseigné'}}</td>
+                            {{effetFinancier.varObjetEntreprise.raison_sociale || 'Non renseigné'}}</td>
 
                               <td @click="afficherModalModifierActeEffetFinancier(index)">
                             {{effetFinancier.marche.objet || 'Non renseigné'}}</td>

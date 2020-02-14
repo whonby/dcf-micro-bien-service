@@ -4,13 +4,17 @@
    
       <div class="accordion" >
           <div class="accordion-group widget-box">
-            <div class="accordion-heading">
-              <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
+            <div class="accordion-heading " >
+              <div @click="toggle()" class="widget-title "> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
-                <h5>{{groupe.code}} &nbsp; {{groupe.libelle}}</h5>
-                 <span class="badge badge-info" >{{getNombreArticle}}</span>&nbsp;&nbsp;
-                 <span class="badge badge-inverse" >{{formatageSomme(parseFloat(MontantTotal))}}</span>
+                <span class="taillegrand">{{groupe.code}} &nbsp;{{groupe.libelle}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 <!-- <span class="badge badge-info" >{{getNombreArticle}}</span>&nbsp;&nbsp; -->
+                
+                 <span class="badge badge-info">{{formatageSomme(parseFloat(MontantTotal))}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+ 
+                 <span class="badge badge-success">{{formatageSomme(parseFloat(MontantDisponibleBudget(groupe.id)))}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
 
+                 <span class="badge badge-important">{{formatageSomme(parseFloat(MontantDisponibleBudget(groupe.id)) - parseFloat(MontantTotal))}}</span>
                 </a> 
             </div>
             </div>
@@ -126,26 +130,39 @@ export default {
       // "chapitres",
       // "sections"
     ]),
+     ...mapGetters("bienService", ['getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+                "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
+                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
+                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
+                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
+                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
+                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
     MontantTotal(){
   
     
     var montant = this.groupe.ua_budget_general.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
       if(isNaN(montant)) return null
       return montant
-
-   
-  
 }, 
+MontantDisponibleBudget(){
+  return id => {
+    if(id !=""){
+    return this.getMandatPersonnaliserVise.filter(element => element.ua_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(2); 
+      
+    }
+    
+  }
+},
     isFolder: function () {
       return this.groupe.ua_budget_general &&
         this.groupe.ua_budget_general.length
     },
 
-    getNombreArticle(){
-        var nombre = this.groupe.ua_budget_general.length
-        if(nombre) return nombre
-        return '0' 
-    },
+    // getNombreArticle(){
+    //     var nombre = this.groupe.ua_budget_general.length
+    //     if(nombre) return nombre
+    //     return '0' 
+    // },
     iconClasses() {
       return {
         'icon-plus': !this.isOpen && this.groupe.ua_budget_general.length,
@@ -182,7 +199,11 @@ formatageSomme:formatageSomme
 }
 </script>
 <style>
-
+.taillegrand{
+  font-size: 16px;
+  font-weight: bold;
+ 
+}
 .bold {
   font-weight: bold;
 }
