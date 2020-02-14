@@ -7,7 +7,7 @@
             <span class="icon">
               <i class="icon-th"></i>
             </span>
-            <h5>Detail Engagement</h5>
+            <h5>Detail Mandat</h5>
           </div>
 
           <!--- PREMIERE PARTIE --->
@@ -17,47 +17,51 @@
                 <tr>
                  <th>Année</th>
                                     <th title="numero de  demande engagement">N°demande engagement</th>
-                                <th title="numero de bordereau">N°bordereau engagement</th>
+                                
                                  <th title="numero de l'engagement">N°engagement</th>
+                                 
+                                  <th title="numero de bordereau">N° mandat</th>
+                                  <th title="numero de bordereau">N°bordereau mandat</th>
                                 <th title="programme/dotation">Prog/Dotat</th>
                                 <th>Action Programmatique</th>
                                 <th>Activite</th>
                                 <th title="unite administrative">Ua</th>
                                  <th>Imputation</th>
                                   <th title="ligne budgetaire">Section</th>
-                                  <th>Montant</th>
+                                  
                                   <th>Décision CF</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd gradeX">
                   
-                  <td>{{Engage.exercice_budget || 'Non renseigné'}}</td>
-                   <td>{{Engage.numero_demande_engage || 'Non renseigné'}}</td>
-                    <td>{{Engage.numero_bordereau || 'Non renseigné'}}</td>
-                    <td>{{Engage.numero_engage || 'Non renseigné'}}</td>
-                     <td>{{afficheProgrammeDot(Engage.programme_id) || 'Non renseigné'}}</td> 
-                     <td>{{afficheActionProg(Engage.action_id)|| 'Non renseigné'}}</td> 
-                      <td>{{afficheAtiviteProg(Engage.activite_id) || 'Non renseigné'}}</td>
-                    <td>{{uaMandat(Engage.ua_id) || 'Non renseigné'}}</td>
-                     <td>{{Engage.budget_general_id || 'Non renseigné'}}</td>
-                     
-                    <td>{{CodeSection(Engage.section_id) || 'Non renseigné'}}</td> 
-                  <td>{{formatageSomme(parseFloat(Engage.total_general)) || 0}}</td>
+                  <td>{{Manda.exercice_budget || 'Non renseigné'}}</td>
+                   <td>{{Manda.engagement_id || 'Non renseigné'}}</td>
+                   <td>{{Manda.engagement_id || 'Non renseigné'}}</td>
+                    <td>{{Manda.numero_mandat || 'Non renseigné'}}</td>
+                   <td>{{Manda.numero_bordereau || 'Non renseigné'}}</td>
+<td>{{afficheProgrammeDot(Manda.programme_id) || 'Non renseigné'}}</td> 
+ <td>{{afficheActionProg(Manda.action_id)|| 'Non renseigné'}}</td> 
+                      <td>{{afficheAtiviteProg(Manda.activite_id) || 'Non renseigné'}}</td>
+ <td>{{uaMandat(Manda.ua_id) || 'Non renseigné'}}</td>
+  <td>{{Manda.budget_general_id || 'Non renseigné'}}</td>
+ <td>{{CodeSection(Manda.section_id) || 'Non renseigné'}}</td> 
+
+                   
                   <td>
-                        <button v-if="Engage.decision_cf == 1"  class="btn  btn-success">                        
+                        <button v-if="Manda.decision_cf == 1"  class="btn  btn-success">                        
                      
                       <span    >Viser</span>
                       
                       </button>
-                       <button v-else-if="Engage.decision_cf == 2" class="btn  btn-warning">                        
+                       <button v-else-if="Manda.decision_cf == 2" class="btn  btn-warning">                        
                      
                       
                        <span  >Différer</span>
                       
                     
                       </button>
-                        <button v-else-if="Engage.decision_cf == 3" class="btn  btn-danger">                        
+                        <button v-else-if="Manda.decision_cf == 3" class="btn  btn-danger">                        
                      
                       
                        <span  >Réjeter</span>
@@ -84,8 +88,10 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                 
+                  <th>Grande nature</th>
                    <th>type procedure</th>
+                   <th>Montant</th>
+                  
                   <th>mode paiement</th>
                   <th>montant don</th>
                    <th>montant tresor</th>
@@ -97,25 +103,26 @@
  <th>Bailleur</th>
                   
                <th>Object depense</th>   
-                  <th>piece_justificative</th>
-                  <th>motif</th>
+                 
                 </tr>
               </thead>
               <tbody>
                <tr class="odd gradeX">
                   
-                  <td>{{Engage.type_procedure_id || 'Non renseigné'}}</td>
-                   <td>{{Engage.mod_paiement_engage || 'Non renseigné'}}</td>
-                    <td>{{Engage.montant_don || 0}}</td>
-                    <td>{{Engage.montant_tresor || 0}}</td>
-                     <td>{{Engage.montant_emprunt || 0}}</td>
-                     <td>{{Engage.ref_juridique || 'Non renseigné'}}</td> 
-                     <td>{{Engage.numero_cc_id|| 'Non renseigné'}}</td> 
-                      <td>{{Engage.nom_entreprise || 'Non renseigné'}}</td>
-                    <td>{{afficheBailleur(Engage.bailler_id) || 'Non renseigné'}}</td>
-                     <td>{{afficheMarche(Engage.marche_id) || 'Non renseigné'}}</td> 
-                     <td>{{Engage.piece_justificative|| 'Non renseigné'}}</td> 
-                      <td>{{afficheMotif(Engage.motif) || 'Non renseigné'}}</td>
+ <td>{{afficheGrandeNature(Manda.grd_nature_id) || 'Non renseigné'}}</td>
+                    <td>{{Manda.type_procedure_id || 'Non renseigné'}}</td>             
+                  <td>{{formatageSomme(parseFloat(Manda.total_general)) || 0}}</td>
+                
+                   <td>{{Manda.mod_paiement_engage || 'Non renseigné'}}</td>
+                    <td>{{formatageSomme(parseFloat(Manda.montant_don)) || 0}}</td>
+                    <td>{{formatageSomme(parseFloat(Manda.montant_tresor)) || 0}}</td>
+                     <td>{{formatageSomme(parseFloat(Manda.montant_emprunt)) || 0}}</td>
+                     <td>{{Manda.ref_juridique || 'Non renseigné'}}</td> 
+                     <td>{{Manda.numero_cc_id|| 'Non renseigné'}}</td> 
+                      <td>{{Manda.nom_entreprise || 'Non renseigné'}}</td>
+                    <td>{{afficheBailleur(Manda.bailler_id) || 'Non renseigné'}}</td>
+                     <td>{{afficheMarche(Manda.marche_id) || 'Non renseigné'}}</td> 
+                    
                      
                   
                   
@@ -131,7 +138,8 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                 
+                  <th>piece_justificative</th>
+                  <th>motif</th>
                    <th>	date motif</th>
                   <th>observation</th>
                   <!-- <th>ligne budgetaire</th> -->
@@ -140,23 +148,26 @@
                   <th>numero op</th>
                   <th>Numero facture</th>
 
-                  <th>Numero bordereau</th>
-
+                 
+            
+<!-- <th>Numero marche</th> -->
                 </tr>
               </thead>
               <tbody>
                <tr class="odd gradeX">
-                  
-                  <td>{{Engage.date_motif || 'Non renseigné'}}</td>
-                   <td>{{Engage.observation || 'Non renseigné'}}</td>
+                   <td>{{Manda.piece_justificative|| 'Non renseigné'}}</td> 
+                      <td>{{afficheMotif(Manda.motif) || 'Non renseigné'}}</td>
+                  <td>{{Manda.date_motif || 'Non renseigné'}}</td>
+                   <td>{{Manda.observation || 'Non renseigné'}}</td>
                     <!-- <td>{{Engage.ligne_id ||'Non renseigné'}}</td> -->
                    
-                     <td>{{Engage.date_demande ||'Non renseigné'}}</td>
-                     <td>{{Engage.numero_op || 'Non renseigné'}}</td> 
-                     <td>{{afficheFacture(Engage.facture_id)|| 'Non renseigné'}}</td> 
-                      <td>{{Engage.numero_bordereau || 'Non renseigné'}}</td>
-
-                  
+                     <td>{{Manda.date_demande ||'Non renseigné'}}</td>
+                     <td>{{Manda.numero_op || 'Non renseigné'}}</td> 
+                     <td>{{afficheFacture(Manda.facture_id)|| 'Non renseigné'}}</td> 
+                      
+ 
+ 
+               <!-- <td>{{afficheMarche(Manda.marche_id) || 'Non renseigné'}}</td>    -->
                   
                 </tr>
               </tbody>
@@ -183,7 +194,7 @@ export default {
   
   data() {
     return {
-      detail_engage: undefined
+      detail_mandat: undefined
     };
   },
   created() {
@@ -243,6 +254,30 @@ export default {
     ]),
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
+ afficheMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_marche;
+      }
+      return 0
+        }
+      };
+    },
+afficheGrandeNature() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.grandes_natures.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 
  afficheFacture() {
       return id => {
@@ -367,8 +402,8 @@ uaMandat() {
   },
   methods: {
     getDetail(){
-        this.Engage = this.engagements.find(
-      Engage => Engage.id == this.$route.params.id_detail_engagement
+        this.Manda = this.mandats.find(
+      Manda => Manda.id == this.$route.params.id_detail_mandat
     );
     },
     formaterDate(date) {

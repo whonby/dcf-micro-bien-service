@@ -2630,7 +2630,7 @@
                                           <th>N° engagement</th>
                                         <th>Type procedure</th>
                                         
-                                        <th >Section</th>
+                                        <!-- <th >Section</th> -->
                                         <th title="unite administrative">Ua</th>
                                 
                               
@@ -2661,7 +2661,7 @@
                     <td @dblclick="afficherModalModifierMandat(index)">{{afficherNumeroDemandeEngagemnt(Manda.engagement_id) || 'pas numero demande'}}</td>
                      <td @dblclick="afficherModalModifierMandat(index)">{{afficherNumeroEngagemnt(Manda.engagement_id) || 'pas numero engage'}}</td>
                      <td @dblclick="afficherModalModifierMandat(index)">{{Manda.type_procedure_id || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierMandat(index)">{{CodeSection(Manda.section_id) || 'Non renseigné'}}</td>
+                    <!-- <td @dblclick="afficherModalModifierMandat(index)">{{CodeSection(Manda.section_id) || 'Non renseigné'}}</td> -->
                     <td @dblclick="afficherModalModifierMandat(index)">{{uaMandat(Manda.ua_id) || 'Non renseigné'}}</td>
                                    
                     <td @dblclick="afficherModalModifierMandat(index)">{{formatageSomme(parseFloat(Manda.total_general))|| 'Non renseigné'}}</td>
@@ -2701,7 +2701,10 @@
                 class="btn btn-default " title="Detail Engagement">
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link>  -->
-                     
+                       <router-link :to="{ name: 'DetailMandat', params: {id_detail_mandat:Manda.id}}"
+                class="btn btn-default " title="Detail Mandat">
+                  <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link> 
                       <button class="btn btn-danger" @click="supprimerMandat(Manda.id)">
                         <span>
                           <i class="icon icon-trash"></i>
@@ -7174,7 +7177,9 @@ created() {
        idmarche => idmarche.id == this.$route.params.id
          ),
           this.detail_engage = this.engagements.find(
-      Engage => Engage.id == this.$route.params.id)
+      Engage => Engage.id == this.$route.params.id),
+          this.detail_mandat = this.mandats.find(
+      Manda => Manda.id == this.$route.params.id)
   
   
   /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)

@@ -48,13 +48,13 @@ import commune from '../../pages/bien_service/parametres/groupe_commune/commune.
 import agence from '../../pages/bien_service/parametres/groupe_agence/agence.vue';
 import DetailLivrable from '../../pages/bien_service/DetailLivrable.vue';
 import DetailEngagement from '../../pages/bien_service/contractualisation/detailEngagement.vue';
-// import DetailMandat from '../../pages/bien_service/contractualisation/detailMandat.vue';
+ import DetailMandat from '../../pages/bien_service/contractualisation/detailMandat.vue';
 const BienServiceRoutes = [
-    // {
-    //     path: '/detail-Mandat/:id_detail_mandat',
-    //     name: "DetailMandat",
-    //     component: DetailMandat
-    // },
+    {
+        path: '/detail-Mandat/:id_detail_mandat',
+        name: "DetailMandat",
+        component: DetailMandat
+    },
     {
         path: '/detail-Engagement/:id_detail_engagement',
         name: "DetailEngagement",

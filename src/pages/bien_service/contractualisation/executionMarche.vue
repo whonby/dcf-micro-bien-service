@@ -477,10 +477,10 @@
                    </router-link> 
 
 
-            <router-link :to="{ name: 'DetailLivrable', params: { id: marche.id }}"
+            <!-- <router-link :to="{ name: 'DetailLivrable', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail livrable">
                   <span class=""><i class=" icon-plus"></i></span>
-                   </router-link>
+                   </router-link> -->
 
 
               <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
