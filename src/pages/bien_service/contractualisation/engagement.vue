@@ -1,4 +1,4 @@
-Ajouter Engagement
+
 <template>
   	
         <div class="container-fluid">
@@ -22,20 +22,42 @@ Ajouter Engagement
                readonly
               />
             </div>
+            </div>
             <div class="control-group">
-            <label class="control-label">Objet</label>
+            <label class="control-label">Type Acte finnancier</label>
+            <div class="controls">
+              <select v-model="formData.type_acte_financier">
+                      <option
+                        v-for="typeUniteA in typeActeEffetFinanciers"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+            </div>
+            </div>
+              <div class="control-group">
+            <label class="control-label">Numero avenant</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="formData.objet_avenant"
+                v-model="formData.numero_avenant"
                 class="span"
                
               />
+            </div>
+          </div>
+            <div class="control-group">
+            <label class="control-label">Objet</label>
+            <div class="controls">
+              <textarea rows="2"  v-model="formData.objet_avenant"  class="span" type="text">
+
+              </textarea>
+             
              
               
             </div>
           </div>
-          </div>
+         
           <div class="control-group">
             <label class="control-label">Montant</label>
             <div class="controls">
@@ -93,18 +115,39 @@ Ajouter Engagement
                readonly
               />
             </div>
-             <div class="control-group">
-            <label class="control-label">Objet</label>
+          </div>
+           <div class="control-group">
+            <label class="control-label">Type Acte finnancier</label>
+            <div class="controls">
+              <select v-model="editAvenant.type_acte_financier">
+                      <option
+                        v-for="typeUniteA in typeActeEffetFinanciers"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+            </div>
+            </div>
+              <div class="control-group">
+            <label class="control-label">Numero avenant</label>
             <div class="controls">
               <input
                 type="text"
-                v-model="editAvenant.objet_avenant"
+                v-model="editAvenant.numero_avenant"
                 class="span"
                
               />
             </div>
           </div>
+             <div class="control-group">
+            <label class="control-label">Objet</label>
+            <div class="controls">
+               <textarea rows="2"  v-model="editAvenant.objet_avenant"  class="span" type="text">
+
+              </textarea>
+            </div>
           </div>
+          
           <div class="control-group">
             <label class="control-label">Montant</label>
             <div class="controls">
@@ -2676,7 +2719,7 @@ Ajouter Engagement
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr
+                                    <tr 
                     class="odd gradeX"
                     v-for="(Engage, index) in afficheMarcheEngage(detail_marche.id)"
                     :key="Engage.id"
@@ -2802,6 +2845,8 @@ Ajouter Engagement
                                     <thead>
                                    <tr>
                     <th>Marché</th>
+                      <th>Type acte financier</th>
+                        <th>Numéro avenant</th>
                     <th>Objet Avenant</th>
                     <th>Montant Avenant</th>
                      <th>Date Avenant</th>
@@ -2811,10 +2856,16 @@ Ajouter Engagement
                                     </thead>
                                     <tbody>
                                    
-                 <tr class="odd gradeX" v-for="(type, index) in avenants" :key="type.id">
+                 <tr class="odd gradeX" v-for="(type, index) in afficheMarcheAvenant(detail_marche.id)" :key="type.id">
                     <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{afficheNumeroMarcheAttribuer(type.marche_id) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{afficheTypeActeFinancier(type.type_acte_financier) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.numero_avenant || 'Non renseigné'}}</td>
                      <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{type.objet_avenant || 'Non renseigné'}}</td>
@@ -7464,18 +7515,30 @@ created() {
 
 
 
-affichierMontantAvenant(){
- return id => {
-        if (id != null && id != "") {
-           const qtereel = this.avenants.find(qtreel => qtreel.marche_id == id);
+// affichierMontantAvenant(){
+//  return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.avenants.find(qtreel => qtreel.marche_id == id);
 
-      if (qtereel) {
-        return qtereel.montant_avenant;
-      }
-      return 0
-        }
-      };
+//       if (qtereel) {
+//         return qtereel.montant_avenant;
+//       }
+//       return 0
+//         }
+//       };
+// },
+affichierMontantAvenant(){
+  return id => {
+    if(id !=""){
+  
+        
+    return this.avenants.filter(element => element.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_avenant), 0).toFixed(2); 
+      
+    }
+    
+  }
 },
+
 montantMarcheAvecAvenant() {
       const val = parseFloat(this.afficheMontantReelMarche(this.detail_marche.id)) + parseFloat(this.affichierMontantAvenant(this.detail_marche.id));
       return parseFloat(val).toFixed(2);
@@ -7493,7 +7556,18 @@ montantMarcheAvecAvenant() {
 //  }
 
 //     },
+afficheTypeActeFinancier() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeActeEffetFinanciers.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return ""
+        }
+      };
+    },
  afficheNumeroMarcheAttribuer() {
       return id => {
         if (id != null && id != "") {
@@ -8694,7 +8768,15 @@ afficheMarcheEngage() {
         }
       };
     },
-
+afficheMarcheAvenant() {
+      return id => {
+        if (id != null && id != "") {
+          return this.avenants.filter(
+            element => element.marche_id == this.detail_marche.id
+          );
+        }
+      };
+    },
 
 afficheMandatMarcheTableau() {
       return id => {
@@ -10184,7 +10266,7 @@ this.$("#exampleModalAvenant").modal('hide');
       });
 
      
-      this.editAvenant = this.avenants[index];
+      this.editAvenant = this.afficheMarcheAvenant(this.detail_marche.id)[index];
     },
     // fonction pour vider l'input modification
     modifierTypeTexteLocal() {
