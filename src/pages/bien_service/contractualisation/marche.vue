@@ -32,7 +32,7 @@ Modifier marché
                 type="text"
                 v-model="formData.reference_marche"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder="Saisir la reference du marché"
               />
             </div>
           </div>
@@ -41,12 +41,12 @@ Modifier marché
                <div class="control-group">
             <label class="control-label">Objet marché</label>
             <div class="controls">
-              <input
-                type="text"
+              <textarea
+               
                 v-model="formData.objet"
-                class="span4"
-                placeholder="Saisir le libelle_type"
-              />
+                class="span5" rows="2"
+                placeholder="Saisir le text"
+              ></textarea>
             </div>
           </div>
               </td>
@@ -167,7 +167,7 @@ Modifier marché
                 type="text"
                 v-model="formData.montant_marche"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder="Saisir le montant"
                
               />
             </div>
@@ -194,7 +194,7 @@ Modifier marché
                <td colspan="2">
               
                <div class="control-group">
-            <label class="control-label">Type Appel Offre</label>
+            <label class="control-label">Type de procedure</label>
             <div class="controls">
             <select v-model="formData.typeappel_id" class="span4">
                <option v-for="plans in typeTypeProcedures" :key="plans.id" 
@@ -203,16 +203,32 @@ Modifier marché
             </div>
           </div>
               </td>
-             <td colspan="2">
+
+   
+             <td colspan="">
               
                <div class="control-group">
             <label class="control-label">procedure passation</label>
             <div class="controls">
            
-               <select v-model="formData.procedure_passation_id" class="span4" :readOnly="deverouPassation">
+               <select v-model="formData.procedure_passation_id" class="span" :readOnly="deverouPassation">
                <option v-for="plans in procedurePassationDynamiques(formData.typeappel_id)" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
+            </div>
+          </div>
+              </td>
+
+                          <td>
+               <div class="control-group">
+            <label class="control-label">Livrable</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formData.livrable"
+                class="span"
+                placeholder="Saisir le livrable"
+              />
             </div>
           </div>
               </td>
@@ -273,12 +289,12 @@ Modifier marché
                <div class="control-group">
             <label class="control-label">Objet marché</label>
             <div class="controls">
-              <input
-                type="text"
+              <textarea
+               
                 v-model="editMarche.objet"
-                class="span4"
-                placeholder="Saisir le libelle_type"
-              />
+                class="span5" rows="2"
+                placeholder="Saisir le text"
+              ></textarea>
             </div>
           </div>
               </td>
@@ -435,16 +451,32 @@ Modifier marché
             </div>
           </div>
               </td>
-             <td colspan="2">
+
+             
+             <td colspan="">
               
                <div class="control-group">
             <label class="control-label">procedure passation</label>
             <div class="controls">
            
-               <select v-model="editMarche.procedure_passation_id" class="span4" :readOnly="deverouPassationModi">
+               <select v-model="editMarche.procedure_passation_id" class="span" :readOnly="deverouPassationModi">
                <option v-for="plans in procedurePassationDynamiques(editMarche.typeappel_id)" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
+            </div>
+          </div>
+              </td>
+
+                <td>
+               <div class="control-group">
+            <label class="control-label">Livrable</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editMarche.livrable"
+                class="span"
+                placeholder="Saisir le livrable"
+              />
             </div>
           </div>
               </td>
@@ -642,6 +674,7 @@ export default {
 
       formData: {
             objet:"",
+            livrable:"",
             reference_marche:"",
             montant_marche:"",
                 type_marche_id:"",
@@ -652,7 +685,8 @@ export default {
         
       },
       editMarche: {
-        	 objet:"",
+           objet:"",
+           livrable:"",
             reference_marche:"",
             montant_marche:"",
                 type_marche_id:"",
@@ -823,7 +857,8 @@ anneeAmort() {
        };
 this.ajouterMarche(nouvelObjet)
 this.formData = {
-	          objet:"",
+            objet:"",
+            livrable:"",
             reference_marche:"",
             montant_marche:"",
                 type_marche_id:"",
