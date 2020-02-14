@@ -1892,6 +1892,7 @@ export const MODIFIER_PV= (state, elementModif)=>{
         }
         return response
     })
+
 }
 
 export const SUPPRIMER_PV= (state, id)=> {

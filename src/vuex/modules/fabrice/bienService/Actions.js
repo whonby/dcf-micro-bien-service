@@ -2697,8 +2697,8 @@ export  function  getLettreInvitation({commit}) {
 
 // action pour ajouter les infos
 
-export function ajouterLettreInvitation({commit}, elementAjout){
-    asyncLoading(axios.post('/lettre_invitations',elementAjout)).then(response =>{
+export function ajouterLettreInvitation({commit}, elementAjout,config){
+    asyncLoading(axios.post('/lettre_invitations',elementAjout,config)).then(response =>{
         if(response.status == 201){
             commit('AJOUTER_LETTRE_INVITATION', response.data)
 
@@ -2715,8 +2715,8 @@ export function ajouterLettreInvitation({commit}, elementAjout){
 // action pour modifier le type text juridique
 
 
-export function modifierLettreInvitation({commit}, element_modifie) {
-    asyncLoading( axios.put('/lettre_invitations',element_modifie)).then(response => {
+export function modifierLettreInvitation({commit}, element_modifie,config) {
+    asyncLoading( axios.post('/update_lettre_invitations',element_modifie,config)).then(response => {
         commit('MODIFIER_LETTRE_INVITATION', response.data)
         this.$app.$notify({
             title: 'success ',
@@ -2752,8 +2752,8 @@ export  function  getMandater({commit}) {
 
 // action pour ajouter les infos
 
-export function ajouterMandater({commit}, elementAjout){
-    asyncLoading(axios.post('/mondates',elementAjout)).then(response =>{
+export function ajouterMandater({commit}, elementAjout,config){
+    asyncLoading(axios.post('/mondates',elementAjout,config)).then(response =>{
         if(response.status == 201){
             commit('AJOUTER_MANDATER', response.data)
 
@@ -2885,8 +2885,7 @@ export function ajouterAnalyseDMP({commit}, elementAjout){
 
 export function modifierAnalyseDMP({commit}, element_modifie) {
     asyncLoading( axios.put('/analyse_dmp',element_modifie)).then(response => {
-        commit('MODIFIER_ANALYSE_DMP', response.data.analyse)
-        commit('MODIFIER_PV', response.data.jugement)
+        commit('MODIFIER_ANALYSE_DMP', response)
         this.$app.$notify({
             title: 'success ',
             text: 'Modification effectué !',
@@ -3115,9 +3114,9 @@ export function ajouterAnoDMPBailleur({commit,dispatch}, elementAjout,config){
     }).catch(error => console.log(error))
 }
 
-export function modifierAnoDMPBailleur({commit}, element_modifie) {
-    asyncLoading( axios.put('/ano_dmp_bailleurs',element_modifie)).then(response => {
-        commit('MODIFIER_ANO_DMP_BAILLEUR', response.data)
+export function modifierAnoDMPBailleur({commit}, element_modifie,config) {
+    asyncLoading( axios.post('/update_ano_dmp_bailleurs',element_modifie,config)).then(response => {
+        commit('MODIFIER_ANO_DMP_BAILLEUR', response)
         this.$app.$notify({
             title: 'success ',
             text: 'Modification effectué !',
@@ -3649,10 +3648,11 @@ export function supprimerProceVerbal({commit}, id) {
         })
 
 }
-/*
-export function modificationProceVerbal({commit}, element_modifie) {
-    asyncLoading( axios.put('/membre_cojo' ,element_modifie)).then(response => {
-        commit('MODIFIER_MEMBRE_COJO', response.data)
+export function modificationProceVerbalOffre({commit}, element_modifie,config) {
+    asyncLoading( axios.post('/update_proceVerbalJugementOffres' ,element_modifie,config)).then(response => {
+        console.log(response)
+        commit('MODIFIER_PV', response)
+        //commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
         this.$app.$notify({
             title: 'success ',
             text: 'Modification effectué !',
@@ -3661,4 +3661,3 @@ export function modificationProceVerbal({commit}, element_modifie) {
     }).catch(error => console.log(error))
 }
 
-*/
