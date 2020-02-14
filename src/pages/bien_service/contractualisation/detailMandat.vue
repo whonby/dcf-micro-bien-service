@@ -150,7 +150,7 @@
 
                  
             
-<!-- <th>Numero marche</th> -->
+<th>Numero marche</th>
                 </tr>
               </thead>
               <tbody>
@@ -167,7 +167,7 @@
                       
  
  
-               <!-- <td>{{afficheMarche(Manda.marche_id) || 'Non renseigné'}}</td>    -->
+               <td>{{afficheMarcheNumero(Manda.marche_id) || 'Non renseigné'}}</td>   
                   
                 </tr>
               </tbody>
@@ -254,7 +254,7 @@ export default {
     ]),
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
- afficheMarche() {
+ afficheMarcheNumero() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.marches.find(qtreel => qtreel.id == id);
