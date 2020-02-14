@@ -1,7 +1,164 @@
-
+Ajouter Engagement
 <template>
   	
         <div class="container-fluid">
+
+  <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
+    <div id="exampleModalAvenant" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter Avenant</h3>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label">Marché</label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="afficheNumeroMarcheAttribuer(detail_marche.id)"
+                
+                class="span"
+               readonly
+              />
+            </div>
+            <div class="control-group">
+            <label class="control-label">Objet</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formData.objet_avenant"
+                class="span"
+               
+              />
+             
+              
+            </div>
+          </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Montant</label>
+            <div class="controls">
+              <input
+                type="number"
+                v-model="formData.montant_avenant"
+                class="span"
+               
+              />
+            </div>
+          </div>
+            <div class="control-group">
+            <label class="control-label">Date avenant</label>
+            <div class="controls">
+              <input
+                type="date"
+                v-model="formData.date_avenant"
+                class="span"
+               
+              />
+            </div>
+          </div>
+            
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterTypeTexteLocal"
+          class="btn btn-primary"
+          href="#"
+        
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+    <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
+
+ <!--///////////////////////////////////////// debut modal de modification //////////////////////////////-->
+
+    <div id="modificationModalAvenant" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Modifier Avenant</h3>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label">Marché</label>
+            <div class="controls">
+            <input
+                type="text"
+                :value="afficheNumeroMarcheAttribuer(detail_marche.id)"
+                
+                class="span"
+               readonly
+              />
+            </div>
+             <div class="control-group">
+            <label class="control-label">Objet</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editAvenant.objet_avenant"
+                class="span"
+               
+              />
+            </div>
+          </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Montant</label>
+            <div class="controls">
+              <input
+                type="number"
+                v-model="editAvenant.montant_avenant"
+                class="span"
+               
+              />
+            </div>
+          </div>
+            <div class="control-group">
+            <label class="control-label">Date avenant</label>
+            <div class="controls">
+              <input
+                type="date"
+                v-model="editAvenant.date_avenant"
+                class="span"
+               
+              />
+            </div>
+          </div>
+           
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierTypeTexteLocal(editAvenant)"
+          class="btn btn-primary"
+          href="#"
+        
+        >Modifier</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+    <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -157,7 +314,7 @@
                                 type="hidden"
                                 class="span"
                                
-                             :value="totalMarche"
+                             :value="montantMarcheAvecAvenant"
                               />
                                <input
                                 type="hidden"
@@ -709,7 +866,7 @@
                           <div class="control-group">
                             <label class="control-label">Montant marché</label>
                             <div class="controls">
-                              <input type="text" class="span4" v-model="detail_marche.montant_marche" readonly/>
+                              <input type="text" class="span4" v-model="montantMarcheAvecAvenant" readonly/>
                             </div>
                           </div>
                         </td>
@@ -871,7 +1028,7 @@
                                 type="hidden"
                                 class="span"
                                
-                             :value="totalMarche"
+                             :value="montantMarcheAvecAvenant"
                               />
                                <input
                                 type="hidden"
@@ -1430,7 +1587,7 @@
                           <div class="control-group">
                             <label class="control-label">Montant marché</label>
                             <div class="controls">
-                              <input type="text" class="span4" v-model="detail_marche.montant_marche" readonly/>
+                              <input type="text" class="span4" v-model="montantMarcheAvecAvenant" readonly/>
                             </div>
                           </div>
                         </td>
@@ -1759,7 +1916,7 @@
                                 type="hidden"
                                 class="span"
                                
-                             :value="totalMarche"
+                             :value="montantMarcheAvecAvenant"
                               />
                                <input
                                 type="hidden"
@@ -2277,7 +2434,7 @@
                           <div class="control-group">
                             <label class="control-label">Montant marché</label>
                             <div class="controls">
-                              <input type="text" class="span4" v-model="detail_marche.montant_marche" readonly/>
+                              <input type="text" class="span4" v-model="montantMarcheAvecAvenant" readonly/>
                             </div>
                           </div>
                         </td>
@@ -2399,6 +2556,25 @@
       
       </ul>
     </div>
+<div class="quick-actions_homepage">
+      <ul class="quick-actions">
+        <li class="bg_ls">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-important">{{formatageSomme(parseFloat(affichierMontantAvenant(detail_marche.id)))}}</span> MONTANT AVENANT
+          </a>
+        </li>
+        <li class="bg_lo">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-success">{{formatageSomme(parseFloat(montantMarcheAvecAvenant))}}</span>MONTANT MARCHE AVEC AVENANT
+          </a>
+        </li>
+        
+        
+      
+      </ul>
+    </div>
 
 
 
@@ -2464,6 +2640,7 @@
                                <li class="active"><a data-toggle="tab" href="#tab100">Facture</a></li>
                                 <li ><a data-toggle="tab" href="#tab10">Engagement</a></li>
                                 <li><a data-toggle="tab" href="#tab20">Mandat</a></li>
+                                 <li><a data-toggle="tab" href="#tab2078">Avenant</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li> -->
                             </ul>
@@ -2610,6 +2787,57 @@
                                 </table>
                            
 
+
+
+                        </div>
+                         <div id="tab2078" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                   
+                                      <button class="btn btn-success" @click="afficherModalAjouterTitre" >Ajouter Avenant</button>
+
+                    </div>
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                   <tr>
+                    <th>Marché</th>
+                    <th>Objet Avenant</th>
+                    <th>Montant Avenant</th>
+                     <th>Date Avenant</th>
+                    
+                    <th>Action</th>
+                  </tr>
+                                    </thead>
+                                    <tbody>
+                                   
+                 <tr class="odd gradeX" v-for="(type, index) in avenants" :key="type.id">
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{afficheNumeroMarcheAttribuer(type.marche_id) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.objet_avenant || 'Non renseigné'}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.montant_avenant)) || 0}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formaterDate(type.date_avenant) || 'Non renseigné'}}</td>
+                   
+
+                    <td>
+                      <button class="btn btn-danger" @click="supprimerAvenant(type.id)">
+                        <span>
+                          <i class="icon icon-trash"></i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                                    </tbody>
+                                </table>
+                           
+                            
 
 
                         </div>
@@ -2985,7 +3213,7 @@
                                 type="hidden"
                                 class="span"
                                
-                             :value="totalMarche"
+                             :value="montantMarcheAvecAvenant"
                               />
                                <input
                                 type="hidden"
@@ -3550,7 +3778,7 @@
                           <div class="control-group">
                             <label class="control-label">Montant marché</label>
                             <div class="controls">
-                              <input type="text" class="span4" :value="afficheMontantReelMarche(detail_marche.id)" readonly/>
+                              <input type="text" class="span4" :value="montantMarcheAvecAvenant" readonly/>
                             </div>
                           </div>
                         </td>
@@ -6423,7 +6651,7 @@
                                 type="hidden"
                                 class="span"
                                
-                             :value="totalMarche"
+                             :value="montantMarcheAvecAvenant"
                               />
                                <input
                                 type="hidden"
@@ -6978,7 +7206,7 @@
                           <div class="control-group">
                             <label class="control-label">Montant marché</label>
                             <div class="controls">
-                              <input type="text" class="span4" v-model="detail_marche.montant_marche" readonly/>
+                              <input type="text" class="span4" v-model="montantMarcheAvecAvenant" readonly/>
                             </div>
                           </div>
                         </td>
@@ -7060,7 +7288,7 @@
                 
                 formDataFacture:{},
                  formDataEngage:{},
-                 
+                  editAvenant: {},
        editEngagement: {
         montant_tresor:0,
 montant_don:0,
@@ -7193,7 +7421,7 @@ created() {
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
-                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats"]),
+                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
 
                 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
 
@@ -7233,6 +7461,51 @@ created() {
        
     ]),
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+
+
+
+affichierMontantAvenant(){
+ return id => {
+        if (id != null && id != "") {
+           const qtereel = this.avenants.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.montant_avenant;
+      }
+      return 0
+        }
+      };
+},
+montantMarcheAvecAvenant() {
+      const val = parseFloat(this.afficheMontantReelMarche(this.detail_marche.id)) + parseFloat(this.affichierMontantAvenant(this.detail_marche.id));
+      return parseFloat(val).toFixed(2);
+    },
+
+// montantMarcheAvecAvenant() {
+ 
+//       return id => {
+//          if(id !=""){
+//     const val = parseFloat((this.afficheMontantReelMarche(detail_marche.id)) + this.affichierMontantAvenant(detail_marche.id)).toFixed(2); 
+//     if (isNaN(val)) return null;
+//     return val;
+//     }
+    
+//  }
+
+//     },
+
+ afficheNumeroMarcheAttribuer() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterActeEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.marche.numero_marche;
+      }
+      return "pas_numero"
+        }
+      };
+    },
 
 afficheMontantReelMarche() {
       return id => {
@@ -7540,7 +7813,7 @@ montantCumulerMandat() {
     },
 
 montantMarcheDisponible() {
-      const val = parseFloat(this.detail_marche.montant_marche) - parseFloat(this.montantCumulerMandat);
+      const val = parseFloat(this.montantMarcheAvecAvenant) - parseFloat(this.montantCumulerMandat);
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -8319,15 +8592,15 @@ return this.exercices_budgetaires.filter(element => element.encours == 1)
       }
       return 0
     },
- totalMarche() {
+//  montantMarcheAvecAvenant() {
       
-      const norme = this.acteEffetFinanciers.find(normeEquipe => normeEquipe.marche_id == this.detail_marche.id);
+//       const norme = this.acteEffetFinanciers.find(normeEquipe => normeEquipe.marche_id == this.detail_marche.id);
 
-      if (norme) {
-        return norme.montant_act;
-      }
-      return 0
-    },
+//       if (norme) {
+//         return norme.montant_act;
+//       }
+//       return 0
+//     },
     sommeEngagement(){
   return id => {
     if(id !=""){
@@ -8353,11 +8626,11 @@ sommeEngagementTableau(){
 
 
 restePayeMarche() {
-      const val = parseFloat(this.totalMarche) - parseFloat(this.sommeEngagementTableau(this.detail_marche.id));
+      const val = parseFloat(this.montantMarcheAvecAvenant) - parseFloat(this.sommeEngagementTableau(this.detail_marche.id));
       return parseFloat(val).toFixed(0);
     },
     restePayeMarcheMandat() {
-      const val = parseFloat(this.totalMarche) - parseFloat(this.montantCumulerMandat);
+      const val = parseFloat(this.montantMarcheAvecAvenant) - parseFloat(this.montantCumulerMandat);
       return parseFloat(val).toFixed(0);
     },
 
@@ -8805,7 +9078,10 @@ recupererActivite(){
                 "ajouterFacture",
                 "modifierFacture",
                 "supprimerFacture",
-                "ajouterChoixProcedure"
+                "ajouterChoixProcedure",
+                 "ajouterAvenant",
+      "modifierAvenant",
+      "supprimerAvenant",
                
                
             ]),
@@ -8827,7 +9103,7 @@ alert("Le montant engagé est superieure au montant de la facture")
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.detail_marche.montant_marche == this.afficherMontantEngagement)
+       else if (this.montantMarcheAvecAvenant == this.afficherMontantEngagement)
       {
         alert("Marché apuré")
       }
@@ -9163,7 +9439,7 @@ alert("Le montant engagé est superieure au montant de la facture")
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.detail_marche.montant_marche == this.afficherMontantFacture)
+       else if (this.montantMarcheAvecAvenant == this.afficherMontantFacture)
       {
         alert("Marché apuré")
       }
@@ -9266,7 +9542,7 @@ alert("Le montant engagé est superieure au montant de la facture")
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.detail_marche.montant_marche == this.afficherMontantFacture)
+       else if (this.montantMarcheAvecAvenant == this.afficherMontantFacture)
       {
         alert("Marché apuré")
       }
@@ -9446,7 +9722,7 @@ alert("Le montant engagé est superieure au montant de la facture")
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.detail_marche.montant_marche == this.afficherMontantMandat)
+       else if (this.montantMarcheAvecAvenant == this.afficherMontantMandat)
       {
         alert("Marché apuré")
       }
@@ -9592,7 +9868,7 @@ alert("Le montant engagé est superieure au montant de la facture")
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.detail_marche.montant_marche == this.afficherMontantEngagement1)
+       else if (this.montantMarcheAvecAvenant == this.afficherMontantEngagement1)
       {
         alert("Marché apuré")
       }
@@ -9695,7 +9971,7 @@ alert("Le montant engagé est superieure au montant de la facture")
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.detail_marche.montant_marche == this.afficherMontantFacture)
+       else if (this.montantMarcheAvecAvenant == this.afficherMontantFacture)
       {
         alert("Marché apuré")
       }
@@ -9882,7 +10158,49 @@ showPopup20: function() {
     },
 
 
+  afficherModalAjouterTitre() {
+      this.$("#exampleModalAvenant").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+    },
+    // fonction pour vider l'input ajouter
+    ajouterTypeTexteLocal() {
+      var nouvelObjet = {
+      ...this.formData,
+      marche_id :this.detail_marche.id,
+   
+       };
+      this.ajouterAvenant(nouvelObjet);
+this.$("#exampleModalAvenant").modal('hide');
+     
+    },
+    // afficher modal de modification
+    afficherModalModifierTypeTexte(index) {
 
+      this.$("#modificationModalAvenant").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+     
+      this.editAvenant = this.avenants[index];
+    },
+    // fonction pour vider l'input modification
+    modifierTypeTexteLocal() {
+      var nouvelObjet = {
+      ...this.editAvenant,
+      marche_id :this.detail_marche.id,
+   
+       };
+      this.modifierAvenant(nouvelObjet);
+this.$("#modificationModalAvenant").modal('hide');
+      // this.editTypeTexte = {
+      //   code: "",
+      //   libelle: ""
+      // };
+       
+    },
 
 
 

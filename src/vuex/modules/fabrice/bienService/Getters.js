@@ -1,4 +1,4 @@
-montantMarcheAttribue
+export const avenants = state => state.avenants
 export const pays = state => state.pays
 export const choixprocedure = state => state.choixprocedure
 export const villes = state => state.villes

@@ -1898,3 +1898,35 @@ export const SUPPRIMER_PV= (state, id)=> {
     state.proce_verballe = state.proce_verballe.filter(autreText => autreText.id !=id)
     state.analyseDossiers=[]
 }
+
+
+
+// get all prestation
+export const GET_ALL_AVENANT = (state, tableau_prestation) => {
+    state.avenants = tableau_prestation
+}
+
+// add * presttation 
+
+export const AJOUTER_AVENANT = (state, elementAjouter) => {
+    state.avenants.unshift(elementAjouter)
+}
+
+// update all prestation
+export const MODIFIER_AVENANT = (state, elementModif) => {
+    state.avenants = state.avenants.map(response => {
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
+        }
+        return response
+    })
+}
+
+
+
+
+// delete all prestation
+
+export const DELETE_AVENANT = (state, id) => {
+    state.avenants = state.avenants.filter(prest => prest.id != id)
+}
