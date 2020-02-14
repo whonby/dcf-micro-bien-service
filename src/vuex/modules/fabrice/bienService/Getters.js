@@ -1,4 +1,4 @@
-
+montantMarcheAttribue
 export const pays = state => state.pays
 export const choixprocedure = state => state.choixprocedure
 export const villes = state => state.villes
@@ -225,7 +225,12 @@ export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, ro
         return element;
     })
 
+export const montantMarcheReel = (state, getters) =>
 
+    getters.acteEffetFinanciers.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act),
+        0
+
+    );
 
 
 

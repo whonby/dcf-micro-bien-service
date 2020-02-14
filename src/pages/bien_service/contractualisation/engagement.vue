@@ -1,3 +1,4 @@
+
 <template>
   	
         <div class="container-fluid">
@@ -2359,7 +2360,7 @@
         <li class="bg_ls">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-important">{{formatageSomme(parseFloat(detail_marche.montant_marche))}}</span> MONTANT MARCHE
+            <span class="label label-important">{{formatageSomme(parseFloat(afficheMontantReelMarche(detail_marche.id)))}}</span> MONTANT MARCHE
           </a>
         </li>
         <li class="bg_lo">
@@ -2428,7 +2429,7 @@
                                 <td class="taskDesc">{{detail_marche.objet}}</td>
                                 <td class="taskStatus">{{detail_marche.reference_marche}}</td>
                                 <td class="taskOptions">
-                                    {{detail_marche.montant_marche}}
+                                    {{formatageSomme(parseFloat(afficheMontantReelMarche(detail_marche.id)))}}
                                 </td>
                                 <td class="taskOptions">
                                     {{detail_marche.type_marche.libelle}}
@@ -2763,7 +2764,7 @@
                     <td @dblclick="afficherModalModifierFacture(index)">{{factu.numero_facture || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierFacture(index)">{{factu.objet_facture || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierFacture(index)">{{factu.objetUA.libelle || 'Non renseigné'}}</td>
-                       <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ht))|| 'Non renseigné'}}</td>
+                       <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ht))|| 0}}</td>
                    <!-- <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_unitaire ))|| 'Non renseigné'}}</td>
                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.quantite || 'Non renseigné'}}</td> -->
                         <td @dblclick="afficherModalModifierFacture(index)">{{factu.tva || 'Non renseigné'}}</td>
@@ -2777,13 +2778,13 @@
                     <td @dblclick="afficherModalModifierFacture(index)">{{factu.numero_facture || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierFacture(index)">{{factu.objet_facture || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierFacture(index)">{{factu.objetUA.libelle || 'Non renseigné'}}</td>
-                       <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ht))|| 'Non renseigné'}}</td>
+                       <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ht))|| 0}}</td>
                    <!-- <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_unitaire ))|| 'Non renseigné'}}</td>
                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.quantite || 'Non renseigné'}}</td> -->
-                        <td @dblclick="afficherModalModifierFacture(index)">{{factu.tva || 'Non renseigné'}}</td>
+                        <td @dblclick="afficherModalModifierFacture(index)">{{factu.tva || 0}}</td>
                  
                      
-                     <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ttc))|| 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ttc))|| 0}}</td>
                       </template>
                      <td>
                         <button class="btn " v-if="factu.typfacture_id !== 1" @click="afficherModalAjouter(factu.id)" title="Ajouter engagement">
@@ -3549,7 +3550,7 @@
                           <div class="control-group">
                             <label class="control-label">Montant marché</label>
                             <div class="controls">
-                              <input type="text" class="span4" v-model="detail_marche.montant_marche" readonly/>
+                              <input type="text" class="span4" :value="afficheMontantReelMarche(detail_marche.id)" readonly/>
                             </div>
                           </div>
                         </td>
@@ -7233,7 +7234,18 @@ created() {
     ]),
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
+afficheMontantReelMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
 
+      if (qtereel) {
+        return qtereel.montant_act;
+      }
+      return 0
+        }
+      };
+    },
 
 afficherEnorere(){
 if(this.formData1.exonere == 0){
@@ -8309,10 +8321,10 @@ return this.exercices_budgetaires.filter(element => element.encours == 1)
     },
  totalMarche() {
       
-      const norme = this.getActeEffetFinancierPersonnaliser.find(normeEquipe => normeEquipe.marche_id == this.detail_marche.id);
+      const norme = this.acteEffetFinanciers.find(normeEquipe => normeEquipe.marche_id == this.detail_marche.id);
 
       if (norme) {
-        return norme.marche.montant_marche;
+        return norme.montant_act;
       }
       return 0
     },

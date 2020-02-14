@@ -1,4 +1,4 @@
-factures
+Ajouter acte effet financier
 <template>
     
 <div>
