@@ -12,6 +12,8 @@
             </ul>
           </div>
           <div class="widget-content tab-content">
+            
+
             <div id="tab1" class="tab-pane active">
 
                   <table class="table table-bordered table-striped">
@@ -98,7 +100,7 @@
               <label class="control-label" title="numero autorisation">N° autorisation:<span style="color:red;">*</span></label>
               <div class="controls">
                 <input type="text" v-model="formData.numero_autorisation" 
-                class="span"  required />
+                class="span"  />
                 </div>
                   </div>
                               </td>
@@ -111,7 +113,7 @@
               <label class="control-label">N°ccm:<span style="color:red;">*</span></label>
               <div class="controls">
      <input type="text" v-model="formData.numero_ccm" class="span" 
-     placeholder="Saisir le numero"  required/>
+     placeholder="Saisir le numero" />
               </div>
             </div>
                       </td>
@@ -226,6 +228,7 @@
             
 
             <div id="tab3" class="tab-pane">
+            <form  action="" enctype="multipart/form-data" method="">
                   
               <table class="table table-bordered table-striped">
                           <tr>
@@ -432,10 +435,11 @@
                             </td>
                           </tr>
                       </table> 
+                       </form>
                     </div>
 
          
-
+      
               </div>
                </div>
 
@@ -479,6 +483,7 @@ export default {
               //     icon: 'add_alert'
               // }
           ],
+          fichier_joint: null,
      
         formData : {
 
@@ -700,15 +705,15 @@ acteurDepenseDynamiques() {
 
   methods: {
     // methode pour notre action
-   ...mapActions('suivi_controle_budgetaire', ['getMission', 'ajouterMission', 
+   ...mapActions('suivi_controle_budgetaire', ['getMission', 'ajouterMission',
    'modifierMission','supprimerMission']),  
 
 
   
 
     onFichierChange(e){
-      this.formData.fichier_joint = e.target.files[0]
-     // console.log(onFichierChange);
+      this.fichier_joint = e.target.files[0]
+     // console.log(this.onFichierChange(e));
     },
    
   //      afficherFonction(){
@@ -732,13 +737,17 @@ acteurDepenseDynamiques() {
        var nouvelObjet = {
          ...this.formData,
          duree: this.nombreJourCalucle,
+         //fichier_joint: this.onFichierChange,
           //economique_id: this.economiqueDynamiques,
           exercice_budgetaire_id:this.anneeBugetaire,
         cout_total: this.calculDuCoutTotal,
         imputation: this.imputationBudgetaireSurLaQuelleLaMissionSexecute,
        frais_deplacement: this.afficherFraisDeplacementDynamique(this.formData.source_financement_id)
 
-            }    
+            } 
+            
+            // var form = new FormData();
+            // form.append('fichier_joint', this.fichier_joint)
      this.ajouterMission(nouvelObjet);                
         this.formData = {
            cout_billet_avion:"",
