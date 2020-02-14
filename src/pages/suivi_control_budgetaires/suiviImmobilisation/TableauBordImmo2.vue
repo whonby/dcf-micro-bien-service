@@ -26,7 +26,7 @@
           <li class="bg_lb" title="Nombre Global d'équipement">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-important">{{nombreTotalEquipement}}</span> QUANTITE GBOBAL
+            <span class="label label-important">{{nombreTotalEquipement}}</span> QUANTITES GBOBALES
           </a>
         </li> 
 
@@ -34,25 +34,25 @@
 <li class="bg_ly" title="Nombres d'equipement Restant">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-success">{{SommeEquipementPrevue}}</span>QUANTITE NON COUVERTE
+            <span class="label label-success">{{SommeEquipementPrevue}}</span>QUANTITES NON COUVERTES
           </a>
         </li>
        <li class="bg_ly" title="Nombre d'equipement Réalise">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-important">{{SommeEquipementRealise}}</span> QUANTITE COUVERTE
+            <span class="label label-important">{{SommeEquipementRealise}}</span> QUANTITES COUVERTES
           </a>
         </li> 
          <li class="bg_lg" title="Taux équipement  réalisé">
           <a href="#">
             <i class="icon-fullscreen"></i>
-            <span class="label label-warning">{{tauxEquipementRealise}}%</span>TAUX QUANTITE COUVERTE
+            <span class="label label-warning">{{tauxEquipementRealise}}%</span>TAUX QUANTITES COUVERTES
           </a>
         </li>
         <li class="bg_lg">
           <a href="#">
             <i class="icon-fullscreen"></i>
-            <span class="label label-warning">{{tauxEquipementPrevue}}%</span>TAUX QUANTITE NON COUVERTE
+            <span class="label label-warning">{{tauxEquipementPrevue}}%</span>TAUX QUANTITES NON COUVERTES
           </a>
         </li>
            <!-- <li class="bg_lb" title="Montant total besoin">
