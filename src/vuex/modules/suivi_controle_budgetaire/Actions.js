@@ -73,10 +73,35 @@ export  function  getMission({commit}) {
       
   }).catch(error => console.log(error)))
   }
+
+
+  // upload file of mission
+
+  // export function addFile(){
+   
+  //   let formData = new FormData();
+
+    
+  //     formData.append('file', this.fichier_joint);
+  //   asyncLoading(axios.post('/add_upload',
+  //       formData,
+  //       {
+  //         headers:{'Content-Type':'multipart/form-data'}
+  //       }
+    
+  //   )).then(function() {
+  //     console.log('succes')
+      
+
+  //   }).catch(error => console.log(error))
+  // }
+
+
 // ajouter mission
 export function ajouterMission({commit},formData){
    asyncLoading( axios.post('/add_mission',formData)).then(response => {
         commit('AJOUTER_MISSION', response.data)
+        // dispatch('ajouterFichierJoint', [fichier])
         
         this.$app.$notify({
             title: 'success ',
@@ -86,6 +111,21 @@ export function ajouterMission({commit},formData){
     }).catch(error => console.log(error))
 //  console.log(formData)
 }
+
+// ajouter le fichier joint a la mission
+// export function ajouterFichierJoint({commit}, formData){
+//   const config = {
+//     header: {
+//       'content-type': 'multipart/form-data'
+//     }
+//   }
+//    axios.post('/add_upload', formData, config).then(response => {
+//        commit('MODIFIER_MISSION', response.data)
+       
+//    }).catch(error => console.log(error))
+// }
+
+
 
 // modifier mission
 export function modifierMission({commit}, element_modifie){

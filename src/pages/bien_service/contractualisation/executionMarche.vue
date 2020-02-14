@@ -1,4 +1,4 @@
-
+Liste des marches attribués
 <template>
   <div>
     <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
@@ -437,7 +437,7 @@
                     <th>Ligne Budgetaire</th>
                     <th>Objet marché</th>
                     <th>Reference marché</th>
-                    <th>Montant Prévu</th>
+                    <th>Montant Réel</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -461,7 +461,7 @@
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.reference_marche || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
-                   {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
+                   {{formatageSomme(parseFloat(afficheMontantReelMarche(marche.id))) || 'Non renseigné'}}</td>
                   
 
 
@@ -514,7 +514,7 @@
                        <td style="font-weight:bold;"> Total Marche attribué
                       </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
-                           {{formatageSomme(parseFloat(montantMarcheAttribue))}}
+                           {{formatageSomme(parseFloat(montantMarcheReel))}}
                            
                       </td>
                        <td>
@@ -582,8 +582,8 @@ export default {
   },
 
   computed: {
-      ...mapGetters("bienService", ['marches','typeMarches', 'getMarchePersonnaliser',
-     "montantMarche", "printMarcheNonAttribue","procedurePassations","typeTypeProcedures","montantMarcheAttribue"]),
+      ...mapGetters("bienService", ['acteEffetFinanciers','marches','typeMarches', 'getMarchePersonnaliser',
+     "montantMarche", "printMarcheNonAttribue","procedurePassations","typeTypeProcedures","montantMarcheReel"]),
 
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
@@ -592,6 +592,26 @@ export default {
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
+
+
+afficheMontantReelMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.montant_act;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+
 
     marcherAttribuerFiltre()  {
      

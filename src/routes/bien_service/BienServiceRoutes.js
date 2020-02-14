@@ -49,7 +49,13 @@ import agence from '../../pages/bien_service/parametres/groupe_agence/agence.vue
 import DetailLivrable from '../../pages/bien_service/DetailLivrable.vue';
 import DetailEngagement from '../../pages/bien_service/contractualisation/detailEngagement.vue';
  import DetailMandat from '../../pages/bien_service/contractualisation/detailMandat.vue';
+import Avenant from '../../pages/bien_service/contractualisation/avenant.vue';
 const BienServiceRoutes = [
+    {
+        path: "Avenant",
+        name: "Avenant",
+        component: Avenant
+    },
     {
         path: '/detail-Mandat/:id_detail_mandat',
         name: "DetailMandat",

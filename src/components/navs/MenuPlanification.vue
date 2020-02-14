@@ -256,7 +256,7 @@
       </li> -->
 <li>
             <router-link :to="{name: 'marche'}" tag="a">
-              PLANIFICATION DU MARCHES
+              PLANIFICATION DES MARCHES
             </router-link>
           </li>
       

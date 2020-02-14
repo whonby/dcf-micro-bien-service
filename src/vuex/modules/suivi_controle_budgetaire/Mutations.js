@@ -44,6 +44,11 @@ export const SUPPRIMER_CATEGORIE_MISSION = (state, id) => {
     state.missions.unshift(nouveau_element)
 }
 
+// upload file 
+
+// export const AJOUTER_UPLOADS = (state, upload_file) => {
+//     state.missions.unshift(upload_file)
+// }
 // modifier  mission
  export const MODIFIER_MISSION = (state, element_ajout) =>{
     state.missions = state.missions.map(response =>{
