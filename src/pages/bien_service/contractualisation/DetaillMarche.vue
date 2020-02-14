@@ -1916,7 +1916,7 @@
                      <div class="control-group" v-if="selectionAttributionMarche(marcheid)">
                         <label class="control-label">Entreprise vainqueur </label>
                         <div class="controls" >
-                            <input :value="entreprise_vainqueur" readonly/>
+                            <input :value="selectionAttributionMarche(marcheid).dossier_candidature.nom_cand" readonly/>
                         </div>
 
                     </div>
@@ -2144,7 +2144,7 @@
                 
             </div>
             <div class="modal-footer">
-                <a @click.prevent="ajouterModalActeEffetFinancierLocal()"
+                <a v-if="selectionAttributionMarche(marcheid)" @click.prevent="ajouterModalActeEffetFinancierLocal(selectionAttributionMarche(marcheid).dossier_candidature.reg_com)"
                         class="btn btn-primary"
                         href="#"
                 >Valider</a>
@@ -5388,25 +5388,30 @@ montantHT() {
                         if (marcherFavaroble!=undefined){
                             vM.entreprise_vainqueur=""
                             console.log("1411111")
-                           // vM.resultaFinalCandidat=[]
+
+
                             vM.info_avis_bailleur="Non objection";
                             vM.formEffetFinancier.ano_bailleur_id=marcherFavaroble.id
                             let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==marcherFavaroble.annalyse_d_m_p.demande_ano.proce_verbal_offre.reference);
-                            console.log("OKOKOKOOKO")
-                            vM.resultaFinalCandidat=resulta
-
-                            if (vM.resultaFinalCandidat.length>0){
-                                vM.resultaFinalCandidat.sort(function (a, b) {
+                            console.log(resulta)
+                            //vM.resultaFinalCandidat=resulta
+                            let entreprise;
+                            if (resulta.length>0){
+                                resulta.sort(function (a, b) {
                                     return a.note_analyse - b.note_analyse;
                                 }).reverse()
+                                 entreprise=resulta.find(item=>item.reference_pv==marcherFavaroble.annalyse_d_m_p.demande_ano.proce_verbal_offre.reference)
+                                console.log(entreprise)
+                               /* let entreprisePremier=this.entreprises.find(item=>item.numero_rc==entreprise.dossier_candidature.reg_com)
+
+                                vM.entreprise_vainqueur=entreprise.dossier_candidature.nom_cand
+                                vM.registrecc_vainqueur=entreprise.dossier_candidature.reg_com
+                                vM.identreprise_vainqueur=entreprisePremier.id*/
+                                return entreprise;
                             }
-                             let entreprisePremier=this.entreprises.find(item=>item.numero_rc==vM.resultaFinalCandidat[0].dossier_candidature.reg_com)
+                            return marcherFavaroble
 
-                            vM.entreprise_vainqueur=vM.resultaFinalCandidat[0].dossier_candidature.nom_cand
-                            vM.registrecc_vainqueur=vM.resultaFinalCandidat[0].dossier_candidature.reg_com
-                            vM.identreprise_vainqueur=entreprisePremier.id
 
-                            return marcherFavaroble;
                         }
                         if(marcherObjetction!=undefined){
                             vM.message_setion_vainqueur="Le dossier a été rejete"
@@ -5810,14 +5815,15 @@ dossier_candidat_id : this.edite_offre_financiere.id
             },
 
 
-ajouterModalActeEffetFinancierLocal(){
+ajouterModalActeEffetFinancierLocal(rcm){
        /* var nouvelObjet = {
             ...this.formEffetFinancier,
             duree: this.nombreDejourCalcule
         }*/
+    let entreprisePremier=this.entreprises.find(item=>item.numero_rc==rcm)
               //  console.log(this.formEffetFinancier)
     this.formEffetFinancier.marche_id=this.marcheid
-    this.formEffetFinancier.entreprise_id=this.identreprise_vainqueur
+    this.formEffetFinancier.entreprise_id=entreprisePremier.id
     this.ajouterActeEffetFinancier(this.formEffetFinancier)
     let marcheObjet=this.marches.find(marche=>marche.id==this.marcheid)
     marcheObjet.attribue=1
