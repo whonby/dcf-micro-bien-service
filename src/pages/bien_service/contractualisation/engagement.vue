@@ -1,4 +1,4 @@
-
+Ajouter Mandat
 <template>
   	
         <div class="container-fluid">
@@ -5775,7 +5775,7 @@
                 <label class="control-label">Objet facture</label>
                 <div class="controls">
                  
-                  <textarea rows="1" v-model="formData1.objet_facture" class="span5">
+                  <textarea rows="1" :value="detail_marche.objet" class="span5">
 
                   </textarea>
                 </div>
@@ -8602,6 +8602,15 @@ uniteAdministrative() {
       }
       return 0
     },
+  AfficherFournisseur_id() {
+      
+      const norme = this.getActeEffetFinancierPersonnaliser.find(normeEquipe => normeEquipe.marche_id == this.detail_marche.id);
+
+      if (norme) {
+        return norme.varObjetEntreprise.id;
+      }
+      return 0
+    },
  AdresseFournisseur() {
       
       const norme = this.getActeEffetFinancierPersonnaliser.find(normeEquipe => normeEquipe.marche_id == this.detail_marche.id);
@@ -9359,7 +9368,7 @@ this.ajouterChoixProcedure(nouvelObjet1)
        
        var nouvelObjet = {
       ...this.formData1,
-    fournisseur_id: this.nomFournisseur,
+    fournisseur_id: this.AfficherFournisseur_id,
        	prix_propose_ht :this.totalMontantHT,
         prix_propose_ttc :this.montantHTt,
          taux :this.affcherTauxEnCours,
@@ -9457,7 +9466,7 @@ numero_facture:"",
        var nouvelObjet = {
       ...this.formData1,
      
-       fournisseur_id: this.nomFournisseur,
+       fournisseur_id: this.AfficherFournisseur_id,
        	prix_propose_ht :this.totalMontantHT,
         prix_propose_ttc :this.montantHTt,
          taux :this.affcherTauxEnCours,
