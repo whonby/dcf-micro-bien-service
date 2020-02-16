@@ -3800,6 +3800,8 @@ Ajouter Mandat
                             <label class="control-label">Engagement cumulé </label>
                             <div class="controls">
                               <input type="text" class="span4" :value="montantCumulerMandat" readonly/>
+                              <input type="hidden" class="span4" :value="sommeEgagementLigneTableau(detail_marche.id)" readonly/>
+                              
                             </div>
                           </div>
                         </td>
@@ -7228,6 +7230,8 @@ Ajouter Mandat
                             <label class="control-label">Engagement cumulé </label>
                             <div class="controls">
                               <input type="text" class="span4" :value="montantCumulerMandat" readonly/>
+                              <input type="hidden" class="span4" :value="sommeEgagementLigneTableau(detail_marche.id)" readonly/>
+                              
                             </div>
                           </div>
                         </td>
@@ -9194,7 +9198,7 @@ alert("Le montant engagé est superieure au montant de la facture")
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.montantMarcheAvecAvenant == this.afficherMontantEngagement)
+       else if (this.montantMarcheAvecAvenant == this.sommeEgagementLigneTableau(this.detail_marche.id))
       {
         alert("Marché apuré")
       }
@@ -9530,7 +9534,7 @@ alert("Le montant engagé est superieure au montant de la facture")
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.montantMarcheAvecAvenant == this.afficherMontantFacture)
+       else if (this.montantMarcheAvecAvenant == this.sommeEgagementLigneTableau(this.detail_marche.id))
       {
         alert("Marché apuré")
       }
@@ -9633,7 +9637,7 @@ alert("Le montant engagé est superieure au montant de la facture")
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.montantMarcheAvecAvenant == this.afficherMontantFacture)
+       else if (this.montantMarcheAvecAvenant == this.sommeEgagementLigneTableau(this.detail_marche.id))
       {
         alert("Marché apuré")
       }
@@ -9813,10 +9817,7 @@ alert("Le montant engagé est superieure au montant de la facture")
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.montantMarcheAvecAvenant == this.afficherMontantMandat)
-      {
-        alert("Marché apuré")
-      }
+    
       else
       {
  var nouvelObjet = {
@@ -9959,10 +9960,7 @@ alert("Le montant engagé est superieure au montant de la facture")
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.montantMarcheAvecAvenant == this.afficherMontantEngagement1)
-      {
-        alert("Marché apuré")
-      }
+      
       else
       {
  var nouvelObjet = {
