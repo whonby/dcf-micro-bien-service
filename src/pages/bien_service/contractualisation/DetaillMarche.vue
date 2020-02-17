@@ -193,8 +193,8 @@
 
                                         <th>Reference appel</th>
                                         <th> Type procedure</th>
-                                        <th>Financement</th>
-                                        <th>Nom bailleur</th>
+                                        <!-- <th>Financement</th>
+                                        <th>Nom bailleur</th> -->
                                         <th>Date emmission</th>
                                         <th>Date limite</th>
                                         <th>Objet appel</th>
@@ -209,10 +209,11 @@
                                             {{appelOffre.ref_appel || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.type_appel || 'Non renseigné'}}</td>
-                                        <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{appelOffre.financement || 'Non renseigné'}}</td>
-                                        <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{appelOffre.nom_bailleurs || 'Non renseigné'}}</td>
+                                        <!-- <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.financement || 'Non renseigné'}}</td> -->
+
+                                        <!-- <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.nom_bailleurs || 'Non renseigné'}}</td> -->
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{formaterDate(appelOffre.date_emission) || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
@@ -221,11 +222,13 @@
                                             {{appelOffre.objet_appel || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.imputation || 'Non renseigné'}}</td>
+                                            <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerAppelOffre(appelOffre.id)"  class="btn btn-danger ">
                                                 <span class=""><i class="icon-trash"></i></span></button>
 
                                         </div>
+                                        </td>
 
                                     </tr>
                                     </tbody>
@@ -1934,7 +1937,7 @@
                         <div class="controls">
                            <select v-model="formEffetFinancier.text_juridique_id" class="span">
                                 <option v-for="varText in text_juridiques" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle_text}}</option>
+                                        :value="varText.id">{{varText.objet_text}}</option>
                             </select>
                         </div>
                     </div>
@@ -2209,7 +2212,7 @@
                         <div class="controls">
                            <select v-model="editActeEffetFinancier.text_juridique_id" class="span">
                                 <option v-for="varText in text_juridiques" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle_text}}</option>
+                                        :value="varText.id">{{varText.objet_text}}</option>
                             </select>
                         </div>
                     </div>
@@ -2363,7 +2366,7 @@
                      <div class="control-group">
                         <label class="control-label">Date ordre de service demarrage</label>
                         <div class="controls">
-                            <input type="date" v-model="editActeEffetFinancier.date_odre_service"
+                            <input type="date" v-model="formEffetFinancier.date_odre_service"
                                     class="span"
                                     placeholder=""
                             />
@@ -2376,7 +2379,8 @@
                      <div class="control-group">
                         <label class="control-label" title=" ">Date fin exécution</label>
                         <div class="controls">
-                            <input type="date"  v-model="editActeEffetFinancier.date_fin_exe"
+                            <input type="date" :min="formEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValue" v-model="formEffetFinancier.date_fin_exe"
+                           
                                     class="span"
                                     placeholder=""
                             />
@@ -2390,7 +2394,7 @@
                      <div class="control-group">
                         <label class="control-label" title=" ">Durée d'exécution(jrs)</label>
                         <div class="controls">
-                            <input type="text"  v-model="editActeEffetFinancier.duree"
+                            <input type="text"  readonly :value="nombreDejourCalcule"
                                     class="span"
                                    
                             />
@@ -2625,7 +2629,7 @@
         <div id="modificationModal" class="modal hide taillemodal">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification appel offre</h3>
+                <h3>Modification  offre</h3>
             </div>
             <div class="modal-body">
                 <div class="widget-box">
@@ -2676,21 +2680,30 @@
                         </div>
                                 </td>
 
-                                 <td colspan="2">
+                                 <td colspan="">
 
                         <div class="control-group">
                             <div class="controls">
                                 <label>Date limite </label>
-                                <input type="date" class="span3" placeholder="Date limite" v-model="edite_appel_offre.date_limite">
+                                <input type="date" class="span" placeholder="Date limite" v-model="edite_appel_offre.date_limite">
                             </div>
                         </div>
                         </td>
+                         <td>
+                        
+                        <div class="control-group">
+                            <label>Imputation</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Imputation" v-model="edite_appel_offre.imputation">
+                            </div>
+                        </div>
+         </td>
                             </tr>
                             <tr>
 
 
 
-         <td>
+         <!-- <td>
               
                         <div class="control-group">
                              <label>Financement</label>
@@ -2706,17 +2719,9 @@
                                 <input type="text" class="span" placeholder="Nom bailleurs" v-model="edite_appel_offre.nom_bailleurs">
                             </div>
                         </div>
-         </td>
+         </td> -->
          
-         <td>
-                        
-                        <div class="control-group">
-                            <label>Imputation</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Imputation" v-model="edite_appel_offre.imputation">
-                            </div>
-                        </div>
-         </td>
+        
                             </tr>
                  </table>
                     </form>
@@ -5109,6 +5114,34 @@ getDateFinExécutionValue(){
 },
 
 
+// modifier le calcul lors de la modificatin
+// nombreModifDejourCalcule(){
+
+//               let vM=this;
+//     const acteEdit = vM.editActeEffetFinancier
+//     if(acteEdit.date_odre_service == acteEdit.date_fin_exe &&  acteEdit.date_fin_exe !=="" && acteEdit.date_odre_service !=="") return 1
+//      if(acteEdit.date_fin_exe =="" && acteEdit.date_odre_service =="") return null
+
+//        var dateF = new Date(acteEdit.date_fin_exe).getTime()
+//         var dateO = new Date(acteEdit.date_odre_service).getTime()
+//            var resultat = dateF - dateO
+
+//              var diffJour =  resultat / (1000 * 3600 * 24)
+
+//                if(isNaN(diffJour)) return null
+
+//                if(parseFloat(diffJour) < 0 ) return "durée invalide"
+//     vM.editActeEffetFinancier.duree=diffJour
+//                   return  diffJour;
+
+
+// },
+
+// getDateFinExécutionModifValue(){
+//     return !this.editActeEffetFinancier.date_odre_service !=""
+// },
+
+
 
 
 
@@ -5983,8 +6016,8 @@ afficherModalModifierActeEffetFinancier(index){
             },
 
 // vider l'input 
-modifierModalActeEffetFinancierLocal(entreprise_id){
-    this.editActeEffetFinancier.entreprise_id=entreprise_id
+modifierModalActeEffetFinancierLocal(){
+   // this.editActeEffetFinancier.entreprise_id=entreprise_id
     this.modifierActeEffetFinancier(this.editActeEffetFinancier)
     this.$('#modifierActeEF').modal('hide');
 },
