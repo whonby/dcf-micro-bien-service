@@ -5478,8 +5478,6 @@ montantHT() {
             demandeAno: function () {
                 return marcheid => {
                     if (marcheid != "") {
-
-
                         let obje=this.getterDemandeAno.filter(idmarche => idmarche.proce_verbal_offre.appel_offre.marche_id == marcheid)
 
                         return obje
@@ -5553,7 +5551,7 @@ montantHT() {
 
                         let marcherFavaroble=marcherEnAction.find(idmarche=>idmarche.avis_bail==1);
                         let marcherObjetction=marcherEnAction.find(idmarche=>idmarche.avis_bail==0);
-                        console.log("14")
+                        console.log(marcherFavaroble)
                         if (marcherFavaroble!=undefined){
                             vM.entreprise_vainqueur=""
                             console.log("1411111")
@@ -5570,15 +5568,13 @@ montantHT() {
                                     return a.note_analyse - b.note_analyse;
                                 }).reverse()
                                  entreprise=resulta.find(item=>item.reference_pv==marcherFavaroble.annalyse_d_m_p.demande_ano.proce_verbal_offre.reference)
+                                console.log("111111")
                                 console.log(entreprise)
-                               /* let entreprisePremier=this.entreprises.find(item=>item.numero_rc==entreprise.dossier_candidature.reg_com)
-
-                                vM.entreprise_vainqueur=entreprise.dossier_candidature.nom_cand
-                                vM.registrecc_vainqueur=entreprise.dossier_candidature.reg_com
-                                vM.identreprise_vainqueur=entreprisePremier.id*/
+                                console.log("222222")
                                 return entreprise;
                             }
-                            return marcherFavaroble
+
+                            return null
 
 
                         }
