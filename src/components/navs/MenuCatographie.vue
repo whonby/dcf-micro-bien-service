@@ -32,24 +32,24 @@
       
       <!--Paramètres programmes
       -->
-     <li>
+     <!-- <li>
             <router-link :to="{name:'listeEquipement'}" tag="a">
-              <!-- <i class="icon-list-ol"></i> -->
+            
               <span class="text">EQUIPEMENTS TYPE</span>
             </router-link>
           </li>
  <li>
             <router-link :to="{name:'famille'}" tag="a">
-              <!-- <i class="icon-shopping-cart"></i> -->
+       
               <span class="text">FAMILLE</span>
             </router-link>
           </li>
 <li>
             <router-link :to="{name:'ReferentielDesPrix'}" tag="a">
-              <!-- <i class="icon-shopping-cart"></i> -->
+              
               <span class="text">REFERENTIEL DES PRIX</span>
             </router-link>
-          </li>
+          </li> -->
           <li>
             <router-link :to="{name:'StockArticles'}" tag="a">
               <!-- <i class="icon-home"></i> -->
