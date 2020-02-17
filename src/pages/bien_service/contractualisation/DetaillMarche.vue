@@ -196,8 +196,6 @@ Ajouter bailleur
 
                                         <!-- <th>Financement</th>
                                         <th>Nom bailleur</th> -->
-=======
->>>>>>> ad79c49d26645a3c33d94393524aa7706ea54f1a
                                         <th>Date emmission</th>
                                         <th>Date limite</th>
                                         <th>Objet appel</th>
@@ -219,9 +217,9 @@ Ajouter bailleur
                                         <!-- <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.nom_bailleurs || 'Non renseigné'}}</td> -->
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
-=======
+
                                         <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)">
->>>>>>> ad79c49d26645a3c33d94393524aa7706ea54f1a
+
                                             {{formaterDate(appelOffre.date_emission) || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)">
                                             {{formaterDate(appelOffre.date_limite) || 'Non renseigné'}}</td>
@@ -1569,13 +1567,13 @@ Ajouter bailleur
                             {{anoBailleur.annalyse_d_m_p.demande_ano.proce_verbal_offre.appel_offre.ref_appel || 'Non renseigné'}}</td>
 
                          <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
-                            {{afficheRef(anoBailleur.appel_offre_id) || 'Non renseigné'}}</td>
+                            {{anoBailleur.numero_courie || 'Non renseigné'}}</td>
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             {{formaterDate(anoBailleur.date_ano_dmp) || 'Non renseigné'}}</td>
                          <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             <button class="btn btn-success btn-mini" v-if="anoBailleur.avis_bail== 1">Non objection</button>
                             <button class="btn btn-danger btn-mini" v-else>Objection</button>
-                        </td>
+                        </td>  
                              <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             {{anoBailleur.observations_bailleur || 'Non renseigné'}}</td>
 
@@ -2261,7 +2259,7 @@ Ajouter bailleur
                                 <div class="controls">
                                     <select v-model="editActeEffetFinancier.text_juridique_id" class="span">
                                         <option v-for="varText in text_juridiques" :key="varText.id"
-                                                :value="varText.id">{{varText.libelle_text}}</option>
+                                                :value="varText.id">{{varText.objet_text}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -3932,7 +3930,7 @@ Ajouter bailleur
                             <input disabled
                                     type="text"
                                     v-model="formDemande.ref_marche	"
-                                    class="span"
+   Ajouter avis bailleur                                 class="span"
                                     placeholder="Saisir le ref marche"
                             />
                         </div>
@@ -4354,11 +4352,11 @@ Ajouter bailleur
                                     </div>
                                 </div>
                             </td>
-                            <td >
+                            <td colspan="2">
                      <div class="control-group">
           <label class="control-label">Observation:</label>
             <div class="controls">
-              <textarea  v-model="formAno.observations_bailleur" :readonly="afficherMotifBailleur"  class="textarea_editor span3" rows="4" placeholder="Entrer le text ..."></textarea>
+              <textarea  v-model="formAno.observations_bailleur" :readonly="afficherMotifBailleur"  class="textarea_editor span7" rows="3" placeholder="Entrer le text ..."></textarea>
             </div>
           
         </div>
@@ -4425,7 +4423,7 @@ Ajouter bailleur
 
 
                      <div class="control-group">
-                        <label class="control-label">Numero courrier DMP</label>
+                        <label class="control-label">Reference du courrier</label>
                         <div class="controls">
                             <input
                                     type="text" v-model="edite_ano_bailleur_dmp.numero_courie"
@@ -5094,18 +5092,18 @@ created() {
                 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
             
-               afficheRef() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.appelOffres.find(qtreel => qtreel.id == id);
+    //            afficheRef() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.appelOffres.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.ref_appel;
-      }
-      return 0
-        }
-      };
-    },
+    //   if (qtereel) {
+    //     return qtereel.ref_appel;
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
 afficheCandidat() {
       return id => {
         if (id != null && id != "") {
@@ -5480,8 +5478,6 @@ montantHT() {
             demandeAno: function () {
                 return marcheid => {
                     if (marcheid != "") {
-
-
                         let obje=this.getterDemandeAno.filter(idmarche => idmarche.proce_verbal_offre.appel_offre.marche_id == marcheid)
 
                         return obje
@@ -5555,7 +5551,7 @@ montantHT() {
 
                         let marcherFavaroble=marcherEnAction.find(idmarche=>idmarche.avis_bail==1);
                         let marcherObjetction=marcherEnAction.find(idmarche=>idmarche.avis_bail==0);
-                        console.log("14")
+                        console.log(marcherFavaroble)
                         if (marcherFavaroble!=undefined){
                             vM.entreprise_vainqueur=""
                             console.log("1411111")
@@ -5572,15 +5568,13 @@ montantHT() {
                                     return a.note_analyse - b.note_analyse;
                                 }).reverse()
                                  entreprise=resulta.find(item=>item.reference_pv==marcherFavaroble.annalyse_d_m_p.demande_ano.proce_verbal_offre.reference)
+                                console.log("111111")
                                 console.log(entreprise)
-                               /* let entreprisePremier=this.entreprises.find(item=>item.numero_rc==entreprise.dossier_candidature.reg_com)
-
-                                vM.entreprise_vainqueur=entreprise.dossier_candidature.nom_cand
-                                vM.registrecc_vainqueur=entreprise.dossier_candidature.reg_com
-                                vM.identreprise_vainqueur=entreprisePremier.id*/
+                                console.log("222222")
                                 return entreprise;
                             }
-                            return marcherFavaroble
+
+                            return null
 
 
                         }

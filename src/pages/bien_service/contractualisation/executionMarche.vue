@@ -450,7 +450,7 @@ Liste des marches attribués
 
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.type_marche.libelle || 'Non renseigné'}}</td>
- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                     <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.afficheActivite.libelle || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.imputation || 'Non renseigné'}}</td>
