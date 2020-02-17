@@ -3719,7 +3719,7 @@ Ajouter bailleur
                      <td>
                        
                     <div class="control-group">
-                        <label class="control-label">Cojo</label>
+                        <label class="control-label">Controleur financier</label>
                         <div class="controls">
                             <select v-model="formAnalyseDossier.cojo_id" class="span">
                                 <option v-for="plans in listeCojo(marcheid)" :key="plans.id"
@@ -3843,7 +3843,7 @@ Ajouter bailleur
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Cojo</label>
+                        <label class="control-label">Controleur financier</label>
                         <div class="controls">
                             <select v-model="edite_analyse_dossier.cojo_id" class="span">
                                 <option v-for="plans in listeCojo(marcheid)" :key="plans.id"
