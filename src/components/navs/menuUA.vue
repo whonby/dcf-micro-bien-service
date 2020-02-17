@@ -28,8 +28,12 @@
               UNITES ADMINISTRATIVES
             </router-link>
           </li>
-         
-  <li class="dropdown" id="menuBUDGET">
+          <li>
+            <router-link :to="{name: 'budgetGenerals'}" tag="a">
+              BUDGET PAR UNITES ADMINISTRATIVES
+            </router-link>
+          </li>
+  <!-- <li class="dropdown" id="menuBUDGET">
         <a
           title="CONFIGURATION DU BUDGET"
           href="#"
@@ -49,13 +53,13 @@
           </li>
 
           <li class="divider"></li>
-          <!-- <li>
+          <li>
             <router-link :to="{name: ''}" tag="a">
               <i class="icon-key"></i>Budget global
             </router-link>
-          </li> -->
+          </li>
         </ul>
-      </li>
+      </li> -->
 <li class="dropdown" id="Affichebudget">
         <a
           title="OUT PUT"

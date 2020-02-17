@@ -2613,7 +2613,12 @@ Ajouter Mandat
             <span class="label label-success">{{formatageSomme(parseFloat(montantMarcheAvecAvenant))}}</span>MONTANT MARCHE AVEC AVENANT
           </a>
         </li>
-        
+          <li class="bg_lo">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-success">{{tauxFacturation}}%</span>TAUX FACTURE
+          </a>
+        </li>
         
       
       </ul>
@@ -3036,7 +3041,7 @@ Ajouter Mandat
                                             
                  <tr
                     class="odd gradeX"
-                    v-for="(factu, index) in afficheFactureTableau(detail_marche.objetUniteAdministrative.id)"
+                    v-for="(factu, index) in afficheFactureTableau(detail_marche.id)"
                     :key="factu.id"
                   >
                    <template v-if="factu.typfacture_id == 1">
@@ -3048,7 +3053,7 @@ Ajouter Mandat
                        <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ht))|| 0}}</td>
                    <!-- <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_unitaire ))|| 'Non renseigné'}}</td>
                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.quantite || 'Non renseigné'}}</td> -->
-                        <td @dblclick="afficherModalModifierFacture(index)">{{factu.tva || 'Non renseigné'}}</td>
+                        <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.tva)) || 'Non renseigné'}}</td>
                  
                      
                      <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ttc))|| 'Non renseigné'}}</td>
@@ -3062,7 +3067,7 @@ Ajouter Mandat
                        <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ht))|| 0}}</td>
                    <!-- <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_unitaire ))|| 'Non renseigné'}}</td>
                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.quantite || 'Non renseigné'}}</td> -->
-                        <td @dblclick="afficherModalModifierFacture(index)">{{factu.tva || 0}}</td>
+                        <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.tva)) || 0}}</td>
                  
                      
                      <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ttc))|| 0}}</td>
@@ -3114,8 +3119,8 @@ Ajouter Mandat
                       <th>Date</th>
                     <th>Paiement part Etat</th>
                     <th>Paiement part Bailleurs</th>
-                    <th>Reste a payer marché</th>
-                    
+                    <!-- <th>Reste a payer marché</th> -->
+                    <!-- <th>Taux facturétauxFacturation</th> -->
                   </tr>
                                     </thead>
                                     <tbody>
@@ -3128,35 +3133,48 @@ Ajouter Mandat
                    
                     <td>{{type.nom_entreprise || 'Non renseigné'}}</td>
                    
-                    <!-- <td rowspan="10000"
-                     
-                    >{{formatageSomme(parseFloat(afficheMontantReelMarche(type.marche_id))) || 0}}</td>
                    
-                   
-                   
-                    <td
                      
-                    >{{formatageSomme(parseFloat(affichierMontantAvenant(type.marche_id))) || 0}}</td>
+                     <td>{{formatageSomme(parseFloat(objetfactureMontant(type.facture_id))) || 0}}</td>
                      <td
-                     
-                    >{{formatageSomme(parseFloat(montantMarcheAvecAvenant)) || 0}}</td> -->
-                     <td
-                     
-                    >{{formatageSomme(parseFloat(objetfactureMontant(type.facture_id))) || 0}}</td>
-                     <td
-                     
+                     style="text-align: center"
                     >{{formaterDate(type.date_motif) || 0}}</td>
                      <td
-                     
+                       style="text-align: center"
                     >{{formatageSomme(parseFloat(type.montant_tresor)) || 0}}</td>
                   <td
-                     
-                    >{{formatageSomme(parseFloat(montantTotalDonEtEmprunt ))|| 0}}</td>
-                    <td>{{formatageSomme(parseFloat(restePayeMarche)) || 0}}</td>
+                       style="text-align: center"
+                    >{{formatageSomme(parseFloat(objetfactureMontant(type.facture_id)))|| 0}}</td>
+                    <!-- <td  style="text-align: center">{{formatageSomme(parseFloat(restePayeMarche)) || 0}}</td> -->
                    
-
+  <!-- <td style="text-align: center"> {{tauxFacturation || 0}}%</td>
+                     -->
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td
+                     style="text-align: center;color:red;font-weight:bold;"
+                    >{{formatageSomme(parseFloat(montantFactureParMarche(detail_marche.id))) || 0}}</td>
+                     <td  style="text-align: center;color:red;font-weight:bold;"
+                     
+                    
+                    > {{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td>
+                     <td  style="text-align: center;color:red;font-weight:bold;"> {{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td>
+                  <td
+                     
+                     style="text-align: center;color:red;font-weight:bold;"
+                    >{{formatageSomme(parseFloat(montantFactureParMarche(detail_marche.id))) || 0}}</td> 
+                    
+                    
+                      <!-- <td  style="text-align: center;color:red;font-weight:bold;"> {{tauxFacturation || 0}}%</td> -->
+                    
+                   
+ 
                     
                   </tr>
+                  
                                     </tbody>
                                 </table>
                            
@@ -4944,7 +4962,7 @@ Ajouter Mandat
                 <label class="control-label">Objet facture</label>
                 <div class="controls">
                  
-                  <textarea rows="1" :value="detail_marche.objet" class="span5">
+                  <textarea rows="3" :value="detail_marche.objet" class="span5">
 
                   </textarea>
                 </div>
@@ -5851,7 +5869,7 @@ Ajouter Mandat
                 <label class="control-label">Objet facture</label>
                 <div class="controls">
                  
-                  <textarea rows="1" :value="detail_marche.objet" class="span5">
+                  <textarea rows="3" :value="detail_marche.objet" class="span6">
 
                   </textarea>
                 </div>
@@ -7593,6 +7611,37 @@ created() {
 
 
 
+montantFactureParMarche: function () {
+                return id => {
+                    if (id != "") {
+                      let valInite=0;
+                        return  this.getFacturePersonnaliser.filter(normeEquipe => normeEquipe.marche_id == this.detail_marche.id).reduce(function(total,currentVal){
+                           return total + parseFloat(currentVal.prix_propose_ttc)
+                        },valInite);
+                    }
+                }
+            },
+            montantMandatParMarche: function () {
+                return id => {
+                    if (id != "") {
+                      let valInite=0;
+                        return  this.getMandatPersonnaliserVise.filter(normeEquipe => normeEquipe.marche_id == this.detail_marche.id).reduce(function(total,currentVal){
+                           return total + parseFloat(currentVal.montant_tresor)
+                        },valInite);
+                    }
+                }
+            },
+
+
+tauxFacturation() {
+      const val = (parseFloat(this.montantFactureParMarche(this.detail_marche.id)) / parseFloat(this.montantMarcheAvecAvenant)) * 100;
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
 // affichierMontantAvenant(){
 //  return id => {
 //         if (id != null && id != "") {
@@ -8244,7 +8293,7 @@ afficheFactureTableau() {
       return id => {
         if (id != null && id != "") {
           return this.getFacturePersonnaliser.filter(
-            element => element.ua == this.detail_marche.objetUniteAdministrative.id
+            element => element.marche_id == this.detail_marche.id
           );
         }
       };
@@ -9888,7 +9937,7 @@ afficherModalModifierFacture(index) {
         keyboard: false
       });
 
-       this.formData1 = this.afficheFactureTableau(this.detail_marche.objetUniteAdministrative.id)[index];
+       this.formData1 = this.afficheFactureTableau(this.detail_marche.id)[index];
     },
 
 
@@ -9898,7 +9947,7 @@ afficherModalAjouterMandatDirect(id) {
         keyboard: false
       });
       // this.formDataEngage = this.afficheMarcheEngage(this.detail_marche.id).find(recupererObjet => recupererObjet.id == id)
-        this.formDataFacture = this.afficheFactureTableau(this.detail_marche.objetUniteAdministrative.id).find(recupererObjet => recupererObjet.id == id)
+        this.formDataFacture = this.afficheFactureTableau(this.detail_marche.id).find(recupererObjet => recupererObjet.id == id)
     },
 
 
@@ -10028,7 +10077,7 @@ val:0,
         keyboard: false
       });
      
-       this.formDataFacture = this.afficheFactureTableau(this.detail_marche.objetUniteAdministrative.id).find(recupererObjet => recupererObjet.id == id)
+       this.formDataFacture = this.afficheFactureTableau(this.detail_marche.id).find(recupererObjet => recupererObjet.id == id)
   
    },
 
