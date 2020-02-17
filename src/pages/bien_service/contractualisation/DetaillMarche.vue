@@ -1918,7 +1918,7 @@ Ajouter bailleur
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.marche.objet || 'Non renseigné'}}</td>
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.text_juridique.libelle_text || 'Non renseigné'}}</td>
+                            {{effetFinancier.text_juridique.objet_text || 'Non renseigné'}}</td>
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.marche.imputation || 'Non renseigné'}}</td>
                               <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
