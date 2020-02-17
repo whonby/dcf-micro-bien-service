@@ -1,4 +1,4 @@
-
+Ajouter Mandat
 <template>
   	
         <div class="container-fluid">
@@ -3800,6 +3800,8 @@
                             <label class="control-label">Engagement cumulé </label>
                             <div class="controls">
                               <input type="text" class="span4" :value="montantCumulerMandat" readonly/>
+                              <input type="hidden" class="span4" :value="sommeEgagementLigneTableau(detail_marche.id)" readonly/>
+                              
                             </div>
                           </div>
                         </td>
@@ -5775,7 +5777,7 @@
                 <label class="control-label">Objet facture</label>
                 <div class="controls">
                  
-                  <textarea rows="1" v-model="formData1.objet_facture" class="span5">
+                  <textarea rows="1" :value="detail_marche.objet" class="span5">
 
                   </textarea>
                 </div>
@@ -7228,6 +7230,8 @@
                             <label class="control-label">Engagement cumulé </label>
                             <div class="controls">
                               <input type="text" class="span4" :value="montantCumulerMandat" readonly/>
+                              <input type="hidden" class="span4" :value="sommeEgagementLigneTableau(detail_marche.id)" readonly/>
+                              
                             </div>
                           </div>
                         </td>
@@ -8602,6 +8606,15 @@ uniteAdministrative() {
       }
       return 0
     },
+  AfficherFournisseur_id() {
+      
+      const norme = this.getActeEffetFinancierPersonnaliser.find(normeEquipe => normeEquipe.marche_id == this.detail_marche.id);
+
+      if (norme) {
+        return norme.varObjetEntreprise.id;
+      }
+      return 0
+    },
  AdresseFournisseur() {
       
       const norme = this.getActeEffetFinancierPersonnaliser.find(normeEquipe => normeEquipe.marche_id == this.detail_marche.id);
@@ -9185,7 +9198,7 @@ alert("Le montant engagé est superieure au montant de la facture")
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.montantMarcheAvecAvenant == this.afficherMontantEngagement)
+       else if (this.montantMarcheAvecAvenant == this.sommeEgagementLigneTableau(this.detail_marche.id))
       {
         alert("Marché apuré")
       }
@@ -9359,7 +9372,7 @@ this.ajouterChoixProcedure(nouvelObjet1)
        
        var nouvelObjet = {
       ...this.formData1,
-    fournisseur_id: this.nomFournisseur,
+    fournisseur_id: this.AfficherFournisseur_id,
        	prix_propose_ht :this.totalMontantHT,
         prix_propose_ttc :this.montantHTt,
          taux :this.affcherTauxEnCours,
@@ -9457,7 +9470,7 @@ numero_facture:"",
        var nouvelObjet = {
       ...this.formData1,
      
-       fournisseur_id: this.nomFournisseur,
+       fournisseur_id: this.AfficherFournisseur_id,
        	prix_propose_ht :this.totalMontantHT,
         prix_propose_ttc :this.montantHTt,
          taux :this.affcherTauxEnCours,
@@ -9521,7 +9534,7 @@ alert("Le montant engagé est superieure au montant de la facture")
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.montantMarcheAvecAvenant == this.afficherMontantFacture)
+       else if (this.montantMarcheAvecAvenant == this.sommeEgagementLigneTableau(this.detail_marche.id))
       {
         alert("Marché apuré")
       }
@@ -9624,7 +9637,7 @@ alert("Le montant engagé est superieure au montant de la facture")
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.montantMarcheAvecAvenant == this.afficherMontantFacture)
+       else if (this.montantMarcheAvecAvenant == this.sommeEgagementLigneTableau(this.detail_marche.id))
       {
         alert("Marché apuré")
       }
@@ -9804,10 +9817,7 @@ alert("Le montant engagé est superieure au montant de la facture")
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.montantMarcheAvecAvenant == this.afficherMontantMandat)
-      {
-        alert("Marché apuré")
-      }
+    
       else
       {
  var nouvelObjet = {
@@ -9950,10 +9960,7 @@ alert("Le montant engagé est superieure au montant de la facture")
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.montantMarcheAvecAvenant == this.afficherMontantEngagement1)
-      {
-        alert("Marché apuré")
-      }
+      
       else
       {
  var nouvelObjet = {

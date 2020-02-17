@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <!--start-top-serch-->
@@ -124,7 +125,7 @@ export default {
          "getCojo","getAnalyseDossier", 'getMotifDecision', 'getDocumentProcedure',
          'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur",
           'getActeEffetFinancier','getEngagement','getMandat',"getVille","getPays","getCommune",
-          'getActeEffetFinancier',"getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
+          "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal"])
 
 

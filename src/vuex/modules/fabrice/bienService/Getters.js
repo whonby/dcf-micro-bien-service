@@ -1,3 +1,4 @@
+montantGlobalMarche
 export const avenants = state => state.avenants
 export const pays = state => state.pays
 export const choixprocedure = state => state.choixprocedure
@@ -60,7 +61,7 @@ export const getterDemandeAno = state => state.stateDemandeAno
 export const getterAnalyseDMP = state => state.analyseDMP
 export const getterAnoDMPBailleur = state => state.stateAnoDmpBailleur
 export const getterObseravtionBailleurs = state => state.obseravtionBailleurs
-export const nombremarches = state => state.marches.length;
+// export const nombremarches = state => state.marches.length;
 
 export const getterMarcheBailleur= state => state.bailleurMarche;
 export const getterMembreCojo=state=>state.membre_cojo
@@ -83,13 +84,23 @@ export const personnaliseGetterMarcheBailleur=(state, getters, rootState, rootGe
         return element;
     });
 
+export const nombremarches = getters =>
+    getters.marches.filter(
+        marcheNonAttribue => marcheNonAttribue.attribue !== 1
+    ).length;
+
+
 export const nombremarchesExecute = getters =>
     getters.marches.filter(
         marcheNonAttribue => marcheNonAttribue.attribue == 1
     ).length;
 
+export const afficheNonMarche = getters =>
+    getters.marches.filter(
+        marcheNonAttribue => marcheNonAttribue.attribue !== 1
+    );
 export const montantGlobalMarche = (state, getters) =>
-    getters.marches.reduce(
+    getters.afficheNonMarche.reduce(
         (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
         0
     );
@@ -99,8 +110,8 @@ export const nombremarchesExecute1 = getters =>
     );
 
 export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
-    getters.nombremarchesExecute1.reduce(
-        (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
+    getters.acteEffetFinanciers.reduce(
+        (prec, cur) => parseInt(prec) + parseInt(cur.montant_act),
         0
     );
 
