@@ -2259,7 +2259,7 @@ Ajouter bailleur
                                 <div class="controls">
                                     <select v-model="editActeEffetFinancier.text_juridique_id" class="span">
                                         <option v-for="varText in text_juridiques" :key="varText.id"
-                                                :value="varText.id">{{varText.libelle_text}}</option>
+                                                :value="varText.id">{{varText.objet_text}}</option>
                                     </select>
                                 </div>
                             </div>
