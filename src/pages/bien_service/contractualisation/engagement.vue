@@ -2621,12 +2621,13 @@ Ajouter Mandat
 
 
 
-            <h4 v-if="detail_marche">Detail Marche : {{detail_marche.objet}} </h4>
+           
             <hr />
 
             <div class="widget-box">
                 <div class="widget-content">
                     <div class="widget-content nopadding">
+                       <h4 v-if="detail_marche">Detail Marche : {{detail_marche.objet}} </h4>
                         <table class="table table-striped table-bordered" v-if="detail_marche">
                             <thead>
                             <tr>
@@ -2680,10 +2681,11 @@ Ajouter Mandat
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab100">Facture</a></li>
+                               <li class="active"><a data-toggle="tab" href="#tab2078">Avenant</a></li>
+                               <li ><a data-toggle="tab" href="#tab100">Facture</a></li>
                                 <li ><a data-toggle="tab" href="#tab10">Engagement</a></li>
                                 <li><a data-toggle="tab" href="#tab20">Mandat</a></li>
-                                 <li><a data-toggle="tab" href="#tab2078">Avenant</a></li>
+                                 <li><a data-toggle="tab" href="#tab20002">Décompte</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li> -->
                             </ul>
@@ -2833,7 +2835,7 @@ Ajouter Mandat
 
 
                         </div>
-                         <div id="tab2078" class="tab-pane">
+                         <div id="tab2078" class="tab-pane active">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
@@ -2999,7 +3001,7 @@ Ajouter Mandat
 
 
                         </div>
-<div id="tab100" class="tab-pane active">
+<div id="tab100" class="tab-pane ">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
@@ -3082,6 +3084,78 @@ Ajouter Mandat
                         </span>
                       </button>
                     </td>
+                  </tr>
+                                    </tbody>
+                                </table>
+                           
+                            
+
+
+                        </div>
+
+                         <div id="tab20002" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <!-- <div class="span4" align="right">
+                                   
+                                      <button class="btn btn-success" @click="afficherModalAjouterTitre" >Ajouter Avenant</button>
+
+                    </div> -->
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                   <tr>
+                                     <th>Année budgetaire</th>
+                    <th>Objet marche</th>
+                      <th>Fournisseur</th>
+                        <!-- <th>Marché</th>
+                    <th>Avenant</th>
+                    <th>Marché + Avenant</th> -->
+                     <th>Facture (TTC)</th>
+                      <th>Date</th>
+                    <th>Paiement part Etat</th>
+                    <th>Paiement part Bailleurs</th>
+                    <th>Reste a payer marché</th>
+                    
+                  </tr>
+                                    </thead>
+                                    <tbody>
+                                   
+                 <tr class="odd gradeX" v-for="type in afficheMandatMarcheTableau(detail_marche.id)" :key="type.id">
+                   <td>{{type.exercice_budget || 'Non renseigné'}}</td>
+                    <td
+                     
+                    >{{detail_marche.objet || 'Non renseigné'}}</td>
+                   
+                    <td>{{type.nom_entreprise || 'Non renseigné'}}</td>
+                   
+                    <!-- <td rowspan="10000"
+                     
+                    >{{formatageSomme(parseFloat(afficheMontantReelMarche(type.marche_id))) || 0}}</td>
+                   
+                   
+                   
+                    <td
+                     
+                    >{{formatageSomme(parseFloat(affichierMontantAvenant(type.marche_id))) || 0}}</td>
+                     <td
+                     
+                    >{{formatageSomme(parseFloat(montantMarcheAvecAvenant)) || 0}}</td> -->
+                     <td
+                     
+                    >{{formatageSomme(parseFloat(objetfactureMontant(type.facture_id))) || 0}}</td>
+                     <td
+                     
+                    >{{formaterDate(type.date_motif) || 0}}</td>
+                     <td
+                     
+                    >{{formatageSomme(parseFloat(type.montant_tresor)) || 0}}</td>
+                  <td
+                     
+                    >{{formatageSomme(parseFloat(montantTotalDonEtEmprunt ))|| 0}}</td>
+                    <td>{{formatageSomme(parseFloat(restePayeMarche)) || 0}}</td>
+                   
+
+                    
                   </tr>
                                     </tbody>
                                 </table>
@@ -7531,6 +7605,49 @@ created() {
 //         }
 //       };
 // },
+
+partDonBailleur: function () {
+                return id => {
+                    if (id != "") {
+                      let valInite=0;
+                        return  this.getMandatPersonnaliserVise.filter(normeEquipe => normeEquipe.marche_id == this.detail_marche.id).reduce(function(total,currentVal){
+                           return total + parseFloat(currentVal.montant_don)
+                        },valInite);
+                    }
+                }
+            },
+partEmpruntBailleur: function () {
+                return id => {
+                    if (id != "") {
+                      let valInite=0;
+                        return  this.getMandatPersonnaliserVise.filter(normeEquipe => normeEquipe.marche_id == this.detail_marche.id).reduce(function(total,currentVal){
+                           return total + parseFloat(currentVal.montant_emprunt)
+                        },valInite);
+                    }
+                }
+            },
+
+
+montantTotalDonEtEmprunt() {
+      const val = parseFloat(this.partDonBailleur(this.detail_marche.id)) + parseFloat(this.partEmpruntBailleur(this.detail_marche.id));
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+
+
+
+
+
+
+
+
+
+
 affichierMontantAvenant(){
   return id => {
     if(id !=""){
