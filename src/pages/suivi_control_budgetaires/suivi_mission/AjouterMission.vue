@@ -365,7 +365,7 @@
                        <td>         
                   
                 <div class="control-group">
-              <label class="control-label" title="mode de paiement">Mode de paiement:</label>
+              <label class="control-label">Mode de paiement:</label>
               <div class="controls">
 
                  <select v-model="formData.mode_paiement_id" class="span">
@@ -488,6 +488,7 @@ export default {
         formData : {
 
              cout_billet_avion:"",
+             mode_paiement_id:"",
              classe_voyage:"",
                objet:"",
                ua_id:"",
