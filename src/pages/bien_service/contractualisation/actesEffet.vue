@@ -39,7 +39,7 @@
                         <th>Libelle acte</th>
                         <th>Reference acte</th>
                         <!-- <th>Objet acte</th> -->
-                        <th>Incendit financier</th>
+                        <th>Incendice financière</th>
                         <th>Montant acte</th>
                      <th title="type effet financier">Type E.</th>
                         <!-- <th>Type modif doc</th> -->
@@ -66,8 +66,11 @@
                         <!-- <td @click="afficherModalModifierActeEffetFinancier(index)">
                             {{effetFinancier.objet_act || 'Non renseigné'}}</td> -->
 
-                        <td @click="afficherModalModifierActeEffetFinancier(index)">
-                            {{effetFinancier.incidence_financiere || 'Non renseigné'}}</td>
+                        <td >
+                          <span v-if="effetFinancier.	incidence_financiere == 0">Oui</span>
+
+                           <span v-else>Non</span>
+                            </td>
 
                             <td @click="afficherModalModifierActeEffetFinancier(index)">
                             {{formatageSomme(parseFloat(effetFinancier.montant_act)) || 0}}</td>

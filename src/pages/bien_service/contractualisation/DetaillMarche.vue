@@ -1918,7 +1918,7 @@ Ajouter bailleur
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.marche.objet || 'Non renseigné'}}</td>
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.text_juridique.libelle_text || 'Non renseigné'}}</td>
+                            {{effetFinancier.text_juridique.objet_text || 'Non renseigné'}}</td>
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.marche.imputation || 'Non renseigné'}}</td>
                               <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
@@ -3719,7 +3719,7 @@ Ajouter bailleur
                      <td>
                        
                     <div class="control-group">
-                        <label class="control-label">Cojo</label>
+                        <label class="control-label">Controleur financier</label>
                         <div class="controls">
                             <select v-model="formAnalyseDossier.cojo_id" class="span">
                                 <option v-for="plans in listeCojo(marcheid)" :key="plans.id"
@@ -3843,7 +3843,7 @@ Ajouter bailleur
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Cojo</label>
+                        <label class="control-label">Controleur financier</label>
                         <div class="controls">
                             <select v-model="edite_analyse_dossier.cojo_id" class="span">
                                 <option v-for="plans in listeCojo(marcheid)" :key="plans.id"
