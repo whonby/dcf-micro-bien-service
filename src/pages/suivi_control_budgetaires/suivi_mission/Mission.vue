@@ -150,11 +150,11 @@
           <div class="widget-title">
             <ul class="nav nav-tabs">
               
-              <li class="active"><a style="cursor:pointer;" @click.prevent="filter = 'all'" >Toutes les missions <span class="badge"></span></a></li>
-               <li><a style="cursor:pointer;" @click.prevent="filter = 'attente'" >Dossiers en attente <span class="badge">{{total_mission_attente}}</span></a></li> 
-               <li><a style="cursor:pointer;" @click.prevent="filter = 'visés'" > Dossiers visés <span class="badge">{{total_mission_vises}}</span></a></li> 
-              <li><a style="cursor:pointer;" @click.prevent="filter = 'differés'">Dossiers differés <span class="badge">{{total_mission_differes}}</span></a></li>
-            <li><a style="cursor:pointer;" @click.prevent="filter = 'rejetés'">Dossiers rejetés <span class="badge">{{total_mission_rejetes}}</span></a></li>  
+              <li class="active"><a   style="cursor:pointer;" @click.prevent="filter = 'all'" >Toutes les missions <span class="badge"></span></a></li>
+               <li><a  style="cursor:pointer;" @click.prevent="filter = 'attente'" >Dossiers en attente <span class="badge">{{total_mission_attente}}</span></a></li> 
+               <li ><a   style="cursor:pointer;" @click.prevent="filter = 'visés'" > Dossiers visés <span class="badge">{{total_mission_vises}}</span></a></li> 
+              <li><a  style="cursor:pointer;" @click.prevent="filter = 'differés'">Dossiers differés <span class="badge">{{total_mission_differes}}</span></a></li>
+            <li><a  style="cursor:pointer;" @click.prevent="filter = 'rejetés'">Dossiers rejetés <span class="badge">{{total_mission_rejetes}}</span></a></li>  
                 
               
             </ul>

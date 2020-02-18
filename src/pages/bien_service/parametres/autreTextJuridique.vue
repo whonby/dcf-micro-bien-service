@@ -10,15 +10,24 @@
       <div class="modal-body">
        <form class="form-horizontal">
            
-              
+              <div class="control-group">
+            <label class="control-label"> text juridique</label>
+            <div class="controls">
+               <select v-model="formData.text_juridique_id" class="span">
+               <option v-for="varText in text_juridiques" :key="varText.id" 
+               :value="varText.id">{{varText.objet_text}}</option>
+           </select>
+            </div>
+          </div>
+
           <div class="control-group">
-            <label class="control-label">libelle</label>
+            <label class="control-label">libellé</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.libelle_autre_texte"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder="Saisir le libellé"
               />
             </div>
           </div>
@@ -30,7 +39,7 @@
                 type="date"
                 v-model="formData.date_autre_texte"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder="Saisir "
               />
             </div>
           </div>
@@ -42,7 +51,7 @@
                 type="text"
                 v-model="formData.desc_autre_texte"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder="Saisir autre text"
               />
             </div>
           </div>
@@ -68,23 +77,11 @@
                 type="text"
                 v-model="formData.id_autre_texte_modifie"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder="Saisir le libellé autre text modifié "
               />
             </div>
           </div>
               
-           <div class="control-group">
-            <label class="control-label"> text juridique</label>
-            <div class="controls">
-               <select v-model="formData.text_juridique_id" class="span">
-               <option v-for="varText in text_juridiques" :key="varText.id" 
-               :value="varText.id">{{varText.libelle_text}}</option>
-           </select>
-            </div>
-          </div>
-           
-          
-         
          </form>
       </div>
       <div class="modal-footer">
@@ -104,19 +101,29 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier autre text jridique</h3>
+        <h3>Modifier autre text juridique</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
+
+           <div class="control-group">
+            <label class="control-label"> text juridique</label>
+            <div class="controls">
+              <select v-model="editTextJuridique.text_juridique_id" class="span">
+               <option v-for="varText in text_juridiques" :key="varText.id" 
+               :value="varText.id">{{varText.objet_text}}</option>
+           </select>
+            </div>
+          </div>
             
           <div class="control-group">
-            <label class="control-label">libelle</label>
+            <label class="control-label">libellé</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="editTextJuridique.libelle_autre_texte"
                 class="span"
-                placeholder="Saisir le libelle_type"
+                placeholder="Saisir le libellé"
               />
             </div>
           </div>
@@ -145,8 +152,6 @@
             </div>
           </div>
             
-
-            
           <div class="control-group">
             <label class="control-label">version</label>
             <div class="controls">
@@ -163,21 +168,11 @@
             <label class="control-label"> text modifier</label>
             <div class="controls">
               <input
-                type="date"
+                type="text"
                 v-model="editTextJuridique.id_autre_texte_modifie"
                 class="span"
                 placeholder="Saisir le libelle_type"
               />
-            </div>
-          </div>
-               
-           <div class="control-group">
-            <label class="control-label"> text juridique</label>
-            <div class="controls">
-              <select v-model="editTextJuridique.text_juridique_id" class="span">
-               <option v-for="varText in text_juridiques" :key="varText.id" 
-               :value="varText.id">{{varText.libelle_text}}</option>
-           </select>
             </div>
           </div>
            
@@ -227,7 +222,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>libelle</th>
+                    <th>libellé</th>
                     <th>Date</th>
                     <th>autres text</th>
                     <th>autre text modifie</th>
@@ -248,7 +243,7 @@
                     <td @dblclick="afficherModalModifiertextJuridique(index)">
                    {{textJuridique.id_autre_texte_modifie || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifiertextJuridique(index)">
-                   {{textJuridique.text_juridique.libelle_text || 'Non renseigné'}}</td>
+                   {{textJuridique.text_juridique.objet_text || 'Non renseigné'}}</td>
                    
                   
 

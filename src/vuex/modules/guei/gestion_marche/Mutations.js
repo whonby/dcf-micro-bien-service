@@ -82,8 +82,9 @@ const AJOUTER_SECTEUR_ACTIVITE = (state, nouvel_objet) => {
 }
 
 
+
 const SUPPRIMER_SECTEUR_ACTIVITE= (state, id) => {
-    state.secteur_activites = state.secteur_activite.filter(titre => titre.id != id)
+    state.secteur_activites = state.secteur_activites.filter(titre => titre.id != id)
 }
 
 

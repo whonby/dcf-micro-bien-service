@@ -367,11 +367,11 @@
                 <div class="control-group">
               <label class="control-label" title="mode de paiement">Mode de paiement:</label>
               <div class="controls">
-                <select v-model="formData.mode_paiement" class="span">
-                <option value="0">Virement</option>
-                  <option value="1">Chèque</option>
-                  <option value="2">Espèce</option>
-                </select>
+
+                 <select v-model="formData.mode_paiement_id" class="span">
+                          <option v-for="modePaie in modepaiements" :key="modePaie.id" 
+                         :value="modePaie.id">{{modePaie.libelle}}</option>
+                     </select>
                  </div>
                  </div>
                     </td>
@@ -538,6 +538,7 @@ export default {
   ...mapGetters('personnelUA', ['all_acteur_depense',  'fonctions']),
    ...mapGetters('uniteadministrative', ['uniteAdministratives', 'getPersonnaliseBudgetGeneralParPersonnel']),
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+   ...mapGetters('bienService', ['modepaiements' ,'gettersPersonneliserModePaiment']),
 
    nombreJourCalucle(){
      const form = this.formData
