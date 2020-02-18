@@ -31,7 +31,7 @@
                 <tbody>
                    <agenceItem
                         class="item"
-                        v-for="groupeElement in groupe.relation_agence_banque"
+                        v-for="groupeElement in groupe.agence_banque"
                         :key="groupeElement.id"
                         :article="groupeElement"
                       @modification="$emit('modification', $event)"
@@ -75,21 +75,21 @@ export default {
   computed: {
   
     isFolder: function () {
-      return this.groupe.relation_agence_banque &&
-        this.groupe.relation_agence_banque.length
+      return this.groupe.agence_banque &&
+        this.groupe.agence_banque.length
     },
 
     getNombreArticle(){
-        var nombre = this.groupe.relation_agence_banque.length
+        var nombre = this.groupe.agence_banque.length
         if(nombre) return nombre
         return '0' 
     },
     iconClasses() {
       return {
-        'icon-plus': !this.isOpen && this.groupe.relation_agence_banque.length,
-        'icon-minus': this.isOpen && this.groupe.relation_agence_banque.length
-        //    'icon-folder-close': !this.isOpen && this.groupe.relation_agence_banque.length,
-        // 'icon-folder-open': this.isOpen && this.groupe.relation_agence_banque.length
+        'icon-plus': !this.isOpen && this.groupe.agence_banque.length,
+        'icon-minus': this.isOpen && this.groupe.agence_banque.length
+        //    'icon-folder-close': !this.isOpen && this.groupe.agence_banque.length,
+        // 'icon-folder-open': this.isOpen && this.groupe.agence_banque.length
       }
     },
 

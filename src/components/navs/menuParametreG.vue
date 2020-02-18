@@ -87,7 +87,7 @@
       <!-- fonctionnelle
       -->
        <li class="dropdown" id="fonctionnelle">
-        <a title = "fonctionnelle" href="#" data-toggle="dropdown" data-target="#fonctionnelle" class="dropdown-toggle">
+        <a title = "STRUCTURES ET PLANS" href="#" data-toggle="dropdown" data-target="#fonctionnelle" class="dropdown-toggle">
           <span class="text">STRUCTURES ET PLANS</span>
           <b class="caret"></b>
         </a>
@@ -172,7 +172,7 @@
       </li>
      
       <li class="dropdown" id="Depense">
-        <a title="classification economique" href="#" data-toggle="dropdown" data-target="#Depense" class="dropdown-toggle">
+        <a title="CODIFICATIONS" href="#" data-toggle="dropdown" data-target="#Depense" class="dropdown-toggle">
           <span class="text">CODIFICATIONS</span>
           <b class="caret"></b>
         </a>
@@ -297,7 +297,7 @@
       <!-- Activite
       -->
       <li class="dropdown" id="Activite">
-        <a title="Activité" href="#" data-toggle="dropdown" data-target="#Activite" class="dropdown-toggle">
+        <a title="FOURNISSEURS" href="#" data-toggle="dropdown" data-target="#Activite" class="dropdown-toggle">
           <span class="text">FOURNISSEURS</span>
           <b class="caret"></b>
         </a>
@@ -330,12 +330,18 @@
             </router-link>
           </li>
           <li class="divider"></li>
+           <li>
+            <router-link :to="{name: 'ModePaiement'}" tag="a">
+              <i class="icon-bar-chart"></i>
+          Mode de paiement
+            </router-link>
+          </li>
         </ul>
       </li>
       <!-- Généraux
       -->
       <li class="dropdown" id="generaux">
-        <a title="Parametres généraux" href="#" data-toggle="dropdown" data-target="#generaux" class="dropdown-toggle">
+        <a title="MARCHES" href="#" data-toggle="dropdown" data-target="#generaux" class="dropdown-toggle">
           <span class="text">MARCHES</span>
           <b class="caret"></b>
         </a>
@@ -364,7 +370,7 @@
         </ul>
       </li>
       <li class="dropdown" id="personnelPara">
-        <a title="Parametres personnel" href="#" data-toggle="dropdown" data-target="#personnelPara" class="dropdown-toggle">
+        <a title="PERSONNELS" href="#" data-toggle="dropdown" data-target="#personnelPara" class="dropdown-toggle">
           <span class="text">PERSONNELS</span>
           <b class="caret"></b>
         </a>
@@ -424,8 +430,8 @@
         </ul>
       </li>
         <li class="dropdown" id="comptaMatiere">
-        <a title="" href="#" data-toggle="dropdown" data-target="#comptaMatiere" class="dropdown-toggle">
-          <span class="text">IMMOBILISATION</span>
+        <a title="IMMOBILISATIONS" href="#" data-toggle="dropdown" data-target="#comptaMatiere" class="dropdown-toggle">
+          <span class="text">IMMOBILISATIONS</span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">

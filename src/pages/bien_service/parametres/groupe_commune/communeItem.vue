@@ -6,7 +6,7 @@
                   
                     <td
                     
-                    > {{article.libelle || 'Non renseignÃ©'}}</td>
+                    > {{article.libelle || 'Non renseigne'}}</td>
 
                     <td>
                       <button class="btn btn-danger" @click.prevent="$emit('suppression', article.id)">

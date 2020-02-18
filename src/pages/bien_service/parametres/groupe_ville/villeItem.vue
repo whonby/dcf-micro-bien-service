@@ -1,5 +1,6 @@
 <template>
   
+  
 
   
                   <tr class="odd gradeX" v-if="article" @dblclick="$emit('modification', article)">

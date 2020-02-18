@@ -126,7 +126,7 @@ export default {
          'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur",
           'getActeEffetFinancier','getEngagement','getMandat',"getVille","getPays","getCommune",
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
-          ,"getMarcheBailleur","getMembreCojo","getProceVerbal"])
+          ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement"])
 
 
   },
@@ -135,6 +135,7 @@ export default {
 
       this.getExercicesBudgetaires()
       this.getTaux()
+      this.getModePaiement()
    this.getTitres()
    this.getNatureSection()
    this.getSection()

@@ -65,7 +65,8 @@ documentProcedures:[],
     choixprocedure: [],
      membre_cojo:[],
     proce_verballe:[],
-    avenants:[]
+    avenants:[],
+    modepaiements:[]
 
 
 

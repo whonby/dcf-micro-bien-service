@@ -7,7 +7,7 @@
               <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
                 <h5>{{groupe.libelle}}</h5>
-                 <span class="badge badge-inverse" >{{getNombreArticle}}</span>
+                 <!-- <span class="badge badge-inverse" >{{getNombreArticle}}</span> -->
 
                 </a> 
             </div>
@@ -18,7 +18,7 @@
                 <thead>
                   <tr>
                   
-                    <th width="90%">Libelle</th>
+                    <th width="90%">Ville</th>
                    
                     <th>Action</th>
                   </tr>
@@ -26,7 +26,7 @@
                 <tbody>
                    <villeItem
                         class="item"
-                        v-for="groupeElement in groupe.relation_pays_ville"
+                        v-for="groupeElement in groupe.pays_ville"
                         :key="groupeElement.id"
                         :article="groupeElement"
                       @modification="$emit('modification', $event)"
@@ -70,21 +70,21 @@ export default {
   computed: {
   
     isFolder: function () {
-      return this.groupe.relation_pays_ville &&
-        this.groupe.relation_pays_ville.length
+      return this.groupe.pays_ville &&
+        this.groupe.pays_ville.length
     },
 
-    getNombreArticle(){
-        var nombre = this.groupe.relation_pays_ville.length
-        if(nombre) return nombre
-        return '0' 
-    },
+    // getNombreArticle(){
+    //     var nombre = this.groupe.pays_ville.length
+    //     if(nombre) return nombre
+    //     return '0' 
+    // },
     iconClasses() {
       return {
-        'icon-plus': !this.isOpen && this.groupe.relation_pays_ville.length,
-        'icon-minus': this.isOpen && this.groupe.relation_pays_ville.length
-        //    'icon-folder-close': !this.isOpen && this.groupe.relation_pays_ville.length,
-        // 'icon-folder-open': this.isOpen && this.groupe.relation_pays_ville.length
+        'icon-plus': !this.isOpen && this.groupe.pays_ville.length,
+        'icon-minus': this.isOpen && this.groupe.pays_ville.length
+        //    'icon-folder-close': !this.isOpen && this.groupe.pays_ville.length,
+        // 'icon-folder-open': this.isOpen && this.groupe.pays_ville.length
       }
     },
 
