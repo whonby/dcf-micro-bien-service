@@ -1931,3 +1931,39 @@ export const MODIFIER_AVENANT = (state, elementModif) => {
 export const DELETE_AVENANT = (state, id) => {
     state.avenants = state.avenants.filter(prest => prest.id != id)
 }
+
+
+
+
+
+
+// get all prestation
+export const GET_ALL_MODE_PAIEMNT = (state, tableau_prestation) => {
+    state.modepaiements = tableau_prestation
+}
+
+// add * presttation 
+
+export const AJOUTER_MODE_PAIEMNT = (state, elementAjouter) => {
+    state.modepaiements.unshift(elementAjouter)
+}
+
+// update all prestation
+export const MODIFIER_MODE_PAIEMNT = (state, elementModif) => {
+    state.modepaiements = state.modepaiements.map(response => {
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
+        }
+        return response
+    })
+}
+
+
+
+
+// delete all prestation
+
+export const DELETE_MODE_PAIEMNT = (state, id) => {
+    state.modepaiements = state.modepaiements.filter(prest => prest.id != id)
+}
+

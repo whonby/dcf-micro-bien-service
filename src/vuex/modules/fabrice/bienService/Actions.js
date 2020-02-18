@@ -2283,11 +2283,12 @@ export  function  getTypeProcedures({commit}) {
 
 // action pour ajouter les infos 
 
-export function ajouterTypeProcedure({commit}, elementAjout){
+export function ajouterTypeProcedure({ commit, dispatch}, elementAjout){
   asyncLoading(axios.post('/type_procedures',elementAjout)).then(response =>{
       if(response.status == 201){
           commit('AJOUTER_TYPE_PROCEDURE', response.data)
-
+        dispatch('getProcedurePassation')
+       
           this.$app.$notify({
             title: 'success ',
             text: 'Enregistrement effectué !',
@@ -2301,10 +2302,10 @@ export function ajouterTypeProcedure({commit}, elementAjout){
 // action pour modifier le type text juridique
 
 
-export function modifierTypeProcedure({commit}, element_modifie) {
+export function modifierTypeProcedure({ commit, dispatch}, element_modifie) {
   asyncLoading( axios.put('/type_procedures',element_modifie)).then(response => {
        commit('MODIFIER_TYPE_PROCEDURE', response.data)
-       
+    dispatch('getProcedurePassation')
 
        this.$app.$notify({
          title: 'success ',
@@ -2315,11 +2316,12 @@ export function modifierTypeProcedure({commit}, element_modifie) {
 }
 // supprimer le type text juridique
 
-export function supprimerTypeProcedure({commit}, id) {
+export function supprimerTypeProcedure({ commit, dispatch}, id) {
  this.$app.$dialog
  .confirm("Voulez vouz vraiment supprimer ?.")
  .then(dialog => {
-    commit('SUPPRIMER_TYPE_PROCEDURE', id)
+   commit('SUPPRIMER_TYPE_PROCEDURE', id)
+   dispatch('getProcedurePassation')
    // // dialog.loading(false) // stops the proceed button's loader
      axios.delete('/type_procedures/' + id).then(() => dialog.close() )   
  })
@@ -3284,12 +3286,13 @@ export function getPays({ commit }) {
 
 
 // action pour ajouter bailleur
-export function ajouterPays({ commit }, formData) {
+export function ajouterPays({ commit, dispatch }, formData) {
   asyncLoading(axios.post('/pays', formData)).then(response => {
     if (response.status == 201) {
       console.log(response.data)
       commit('AJOUTER_PAYS', response.data)
-
+      dispatch('getVille')
+      
       this.$app.$notify({
         title: 'success ',
         text: 'Enregistrement effectué !',
@@ -3303,9 +3306,10 @@ export function ajouterPays({ commit }, formData) {
 // action pour modifier bailleur
 
 
-export function modifierPays({ commit }, element_modifie) {
+export function modifierPays({ commit, dispatch}, element_modifie) {
   asyncLoading(axios.put('/pays', element_modifie)).then(response => {
     commit('MODIFIER_PAYS', response.data)
+    dispatch('getVille')
     this.$app.$notify({
       title: 'success ',
       text: 'Modification effectué !',
@@ -3359,7 +3363,7 @@ export function modifierVille({ commit, dispatch}, element_modifie) {
   asyncLoading(axios.put('/ville', element_modifie)).then(response => {
     commit('MODIFIER_VILLE', response.data)
     dispatch('getVille')
-    dispatch('getPays')
+    dispatch('getCommune')
     
     this.$app.$notify({
       title: 'success ',
@@ -3375,7 +3379,7 @@ export function supprimerVille({ commit, dispatch }, id) {
     .then(dialog => {
       commit('SUPPRIMER_VILLE', id)
       dispatch('getVille')
-      dispatch('getPays')
+      dispatch('getCommune')
      
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete('/ville/' + id).then(() => dialog.close())
@@ -3725,6 +3729,59 @@ export function supprimerAvenant({ commit }, id) {
       commit('DELETE_AVENANT', id)
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete('/avenant/' + id).then(() => dialog.close())
+    })
+
+}
+
+
+
+
+
+export function getModePaiement({ commit }) {
+  queue.push(() => axios.get('/modepaiement').then((response) => {
+    commit('GET_ALL_MODE_PAIEMNT', response.data.data)
+
+  }).catch(error => console.log(error)))
+}
+
+// action pour ajouter bailleur
+export function ajouterModePaiement({ commit }, formData) {
+  asyncLoading(axios.post('/modepaiement', formData)).then(response => {
+    if (response.status == 201) {
+      // console.log(response.data)
+      commit('AJOUTER_MODE_PAIEMNT', response.data)
+
+      this.$app.$notify({
+        title: 'success ',
+        text: 'Enregistrement effectué !',
+        type: "success"
+      })
+    }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier bailleur
+
+
+export function modifierModePaiement({ commit }, element_modifie) {
+  asyncLoading(axios.put('/modepaiement', element_modifie)).then(response => {
+    commit('MODIFIER_MODE_PAIEMNT', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+// supprimer categorie mision
+export function supprimerModePaiement({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('DELETE_MODE_PAIEMNT', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/modepaiement/' + id).then(() => dialog.close())
     })
 
 }

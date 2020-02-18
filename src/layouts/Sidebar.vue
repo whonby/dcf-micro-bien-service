@@ -28,6 +28,7 @@
           
           </ul>
        </li> -->
+       
         <li :class="{active: active_el == 11 }" @click.prevent="navigateToParametreGeneraux">
           <a title="PARAMETRES GENERAUX" href="#">
             <i class="icon icon-signal"></i>
@@ -162,3 +163,4 @@ export default {
   }
 };
 </script>
+

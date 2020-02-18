@@ -105,7 +105,7 @@
                <tr class="odd gradeX">
                   
                   <td>{{Engage.type_procedure_id || 'Non renseigné'}}</td>
-                   <td>{{Engage.mod_paiement_engage || 'Non renseigné'}}</td>
+                   <td>{{afficheModePaiement(Engage.mod_paiement_engage)|| 'Non renseigné'}}</td>
                     <td>{{Engage.montant_don || 0}}</td>
                     <td>{{Engage.montant_tresor || 0}}</td>
                      <td>{{Engage.montant_emprunt || 0}}</td>
@@ -196,7 +196,7 @@ export default {
   
 
   computed: {
-      ...mapGetters("bienService", ['getFacturePersonnaliser','factures','motifDecisions','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+      ...mapGetters("bienService", ['modepaiements','getFacturePersonnaliser','factures','motifDecisions','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -359,6 +359,18 @@ uaMandat() {
 
       if (qtereel) {
         return qtereel.code;
+      }
+      return 0
+        }
+      };
+    },
+    afficheModePaiement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.modepaiements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
       }
       return 0
         }

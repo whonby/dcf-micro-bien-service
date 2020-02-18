@@ -50,7 +50,13 @@ import DetailLivrable from '../../pages/bien_service/DetailLivrable.vue';
 import DetailEngagement from '../../pages/bien_service/contractualisation/detailEngagement.vue';
  import DetailMandat from '../../pages/bien_service/contractualisation/detailMandat.vue';
 import Avenant from '../../pages/bien_service/contractualisation/avenant.vue';
+import ModePaiement from '../../pages/bien_service/parametres/ModePaiement.vue';
 const BienServiceRoutes = [
+    {
+        path: "mode-paiement",
+        name: "ModePaiement",
+        component: ModePaiement
+    },
     {
         path: "Avenant",
         name: "Avenant",

@@ -231,7 +231,7 @@ export  function  getBanque({commit}) {
   }
   
   // action pour ajouter banque
-  export function ajouterBanque({commit}, elementAjout){
+export function ajouterBanque({ commit, dispatch}, elementAjout){
     asyncLoading(axios.post('/banques',{
         code_banque:elementAjout.code_banque,
       numero_banque:elementAjout.numero_banque,
@@ -242,7 +242,9 @@ export  function  getBanque({commit}) {
   })).then(response =>{
         if(response.status == 201){
             commit('AJOUTER_BANQUE', response.data)
-  
+            dispatch('getBanque')
+            dispatch('getAgence')
+            
             this.$app.$notify({
               title: 'success ',
               text: 'Enregistrement effectué !',
@@ -256,10 +258,11 @@ export  function  getBanque({commit}) {
   // action pour modifier banque
   
   
-  export function modifierBanque({commit}, element_modifie) {
+export function modifierBanque({ commit, dispatch}, element_modifie) {
     asyncLoading( axios.put('/banques',element_modifie)).then(response => {
          commit('MODIFIER_BANQUE', response.data)
-         
+        dispatch('getBanque')
+        dispatch('getAgence')
   
          this.$app.$notify({
            title: 'success ',
@@ -270,11 +273,13 @@ export  function  getBanque({commit}) {
   }
   // supprimer banque
   
-  export function supprimerBanque({commit}, id) {
+export function supprimerBanque({ commit, dispatch}, id) {
    this.$app.$dialog
    .confirm("Voulez vouz vraiment supprimer ?.")
    .then(dialog => {
-      commit('SUPPRIMER_BANQUE', id)
+       commit('SUPPRIMER_BANQUE', id)
+       dispatch('getBanque')
+       dispatch('getAgence')
      // // dialog.loading(false) // stops the proceed button's loader
        axios.delete('/banques/' + id).then(() => dialog.close() )   
    })

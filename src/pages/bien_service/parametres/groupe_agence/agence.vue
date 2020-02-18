@@ -136,7 +136,7 @@
 
 <!----- modifier modal debut  ---->
 
- <div id="modifierModal" class="modal hide">
+ <div id="modifierModal" class="modal hide gdeModalAgence">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Modifier Agence</h3>

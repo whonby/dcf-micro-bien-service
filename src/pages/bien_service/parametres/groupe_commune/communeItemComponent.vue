@@ -7,7 +7,7 @@
               <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
                 <h5>{{groupe.libelle}}</h5>
-                 <span class="badge badge-inverse" >{{getNombreArticle}}</span>
+                 <!-- <span class="badge badge-inverse" >{{getNombreArticle}}</span> -->
 
                 </a> 
             </div>
@@ -74,11 +74,11 @@ export default {
         this.groupe.relation_ville_commune.length
     },
 
-    getNombreArticle(){
-        var nombre = this.groupe.relation_ville_commune.length
-        if(nombre) return nombre
-        return '0' 
-    },
+    // getNombreArticle(){
+    //     var nombre = this.groupe.relation_ville_commune.length
+    //     if(nombre) return nombre
+    //     return '0' 
+    // },
     iconClasses() {
       return {
         'icon-plus': !this.isOpen && this.groupe.relation_ville_commune.length,

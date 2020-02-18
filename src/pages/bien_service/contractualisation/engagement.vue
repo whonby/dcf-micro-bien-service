@@ -1,4 +1,7 @@
 Ajouter Mandat
+Ajouter engagement
+Modifier Mandat
+taux facture
 <template>
   	
         <div class="container-fluid">
@@ -1483,13 +1486,14 @@ Ajouter Mandat
                              <div class="control-group">
                             <label class="control-label">Bailleur</label>
                             
-                             <select v-model="editMandat.bailler_id" class="span4">
+                             <!-- <select v-model="editMandat.bailler_id" class="span4">
                                 <option
                                   v-for="fam in sources_financements"
                                   :key="fam.id"
                                   :value="fam.id"
                                 >{{fam.libelle}}</option>
-                              </select>
+                              </select> -->
+                              <input type="text" class="span4" :value="afficheBailleur(editMandat.bailler_id)" readonly />
                           </div>
                         </td> 
                       </tr>
@@ -1507,7 +1511,7 @@ Ajouter Mandat
                          <div class="control-group">
                             <label class="control-label">Trésor</label>
                             <div class="controls">
-                              <input type="number" class="span4" v-model="editMandat.montant_tresor" />
+                              <input type="number" class="span4" v-model="editMandat.montant_tresor" readonly/>
                             </div>
                           </div>
                         </td>
@@ -1515,7 +1519,7 @@ Ajouter Mandat
                           <div class="control-group">
                             <label class="control-label">Don</label>
                             <div class="controls">
-                              <input type="number" class="span4" v-model="editMandat.montant_don" />
+                              <input type="number" class="span4" v-model="editMandat.montant_don" readonly/>
                             </div>
                           </div>
                         </td>
@@ -1523,7 +1527,7 @@ Ajouter Mandat
                              <div class="control-group">
                             <label class="control-label">Emprunt</label>
                             <div class="controls">
-                              <input type="number" class="span4" v-model="editMandat.montant_emprunt" />
+                              <input type="number" class="span4" v-model="editMandat.montant_emprunt" readonly/>
                             </div>
                           </div>
                         </td>
@@ -2198,15 +2202,12 @@ Ajouter Mandat
                             <label class="control-label">Mode de paiement</label>
                             <div class="controls">
                               <select v-model="formData.mod_paiement_engage" class="span4">
-                                
-                                <option value="0">Bon de caisse</option>
-                                    <option value="1">Chèque Spécial Trésor</option>
-                                       <option value="2">Chèque Spécial Enregistrement</option>
-                                    <option value="3">Virement</option>
-                                     <option value="4">Chèque Spécial Douanes</option>
-                                      <option value="5">Paiement direct par bailleur de fonds</option>
-                                       <option value="6">Autres</option>
-                               
+                             
+                                <option
+                        v-for="localgeo in modepaiements"
+                        :key="localgeo.id"
+                        :value="localgeo.id"
+                      >{{localgeo.libelle}}</option>
                               </select>
                               
                             </div>
@@ -7073,7 +7074,7 @@ Ajouter Mandat
                          <div class="control-group">
                             <label class="control-label">Mode de paiement</label>
                             <div class="controls">
-                              <select v-model="formData.mod_paiement_engage" class="span4">
+                              <!-- <select v-model="formData.mod_paiement_engage" class="span4">
                                 
                                 <option value="0">Bon de caisse</option>
                                     <option value="1">Chèque Spécial Trésor</option>
@@ -7083,8 +7084,8 @@ Ajouter Mandat
                                       <option value="5">Paiement direct par bailleur de fonds</option>
                                        <option value="6">Autres</option>
                                
-                              </select>
-                              
+                              </select> -->
+                               <input type="text" class="span4" :value="afficheModePaiement(editEngagement.mod_paiement_engage)" readonly/>
                             </div>
                           </div>
                         </td>
@@ -7198,13 +7199,14 @@ Ajouter Mandat
                              <div class="control-group">
                             <label class="control-label">Bailleur</label>
                             
-                             <select v-model="formData.bailler_id" class="span4">
+                             <!-- <select v-model="formData.bailler_id" class="span4">
                                 <option
                                   v-for="fam in sources_financements"
                                   :key="fam.id"
                                   :value="fam.id"
                                 >{{fam.libelle}}</option>
-                              </select>
+                              </select> -->
+                               <input type="text" class="span4" :value="afficheBailleur(editEngagement.bailler_id)" readonly/>
                           </div>
                         </td> 
                       </tr>
@@ -7213,7 +7215,7 @@ Ajouter Mandat
                          <div class="control-group">
                             <label class="control-label">Total général</label>
                             <div class="controls">
-                              <input type="number" class="span4" :value="sommeMontant" readonly/>
+                              <input type="number" class="span4" :value="editEngagement.total_general" readonly/>
                             </div>
                           </div>
                         </td>
@@ -7222,7 +7224,7 @@ Ajouter Mandat
                          <div class="control-group">
                             <label class="control-label">Trésor</label>
                             <div class="controls">
-                              <input type="number" class="span4" v-model="formData.montant_tresor" />
+                              <input type="number" class="span4" v-model="editEngagement.montant_tresor" readonly/>
                             </div>
                           </div>
                         </td>
@@ -7230,7 +7232,7 @@ Ajouter Mandat
                           <div class="control-group">
                             <label class="control-label">Don</label>
                             <div class="controls">
-                              <input type="number" class="span4" v-model="formData.montant_don" />
+                              <input type="number" class="span4" v-model="editEngagement.montant_don" readonly/>
                             </div>
                           </div>
                         </td>
@@ -7238,7 +7240,7 @@ Ajouter Mandat
                              <div class="control-group">
                             <label class="control-label">Emprunt</label>
                             <div class="controls">
-                              <input type="number" class="span4" v-model="formData.montant_emprunt" />
+                              <input type="number" class="span4" v-model="editEngagement.montant_emprunt" readonly/>
                             </div>
                           </div>
                         </td>
@@ -7312,7 +7314,7 @@ Ajouter Mandat
                           <div class="control-group">
                             <label class="control-label">Crédits Autorisés(Engagement actuel)</label>
                             <div class="controls">
-                              <input type="text" class="span4" :value="sommeMontant" readonly/>
+                              <input type="text" class="span4" :value="editEngagement.total_general" readonly/>
                             </div>
                           </div>
                         </td>
@@ -7321,7 +7323,7 @@ Ajouter Mandat
                                                     <div class="control-group">
                             <label class="control-label">Engagement cumulé </label>
                             <div class="controls">
-                              <input type="text" class="span4" :value="montantCumulerMandat" readonly/>
+                              <input type="text" class="span4" :value="montantCumulerEngagementMandat" readonly/>
                               <input type="hidden" class="span4" :value="sommeEgagementLigneTableau(detail_marche.id)" readonly/>
                               
                             </div>
@@ -7562,7 +7564,7 @@ created() {
     console.log(this.appel_offre_marche)*/
 },
         computed: {
-            ...mapGetters("bienService", ['getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+            ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -7609,8 +7611,18 @@ created() {
     ]),
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
+  afficheModePaiement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.modepaiements.find(qtreel => qtreel.id == id);
 
-
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 montantFactureParMarche: function () {
                 return id => {
                     if (id != "") {
@@ -7631,10 +7643,19 @@ montantFactureParMarche: function () {
                     }
                 }
             },
-
+ montantCredite: function () {
+                return id => {
+                    if (id != "") {
+                      let valInite=0;
+                        return  this.getMandatPersonnaliserVise.filter(normeEquipe => normeEquipe.marche_id == this.detail_marche.id).reduce(function(total,currentVal){
+                           return total + parseFloat(currentVal.total_general)
+                        },valInite);
+                    }
+                }
+            },
 
 tauxFacturation() {
-      const val = (parseFloat(this.montantFactureParMarche(this.detail_marche.id)) / parseFloat(this.montantMarcheAvecAvenant)) * 100;
+      const val = (parseFloat(this.montantCredite(this.detail_marche.id)) / parseFloat(this.montantMarcheAvecAvenant)) * 100;
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -8046,6 +8067,15 @@ montantCumulerMandatEngagement() {
       
       return 0
     },
+      montantCumulerEngagementMandat() {
+      const val = parseFloat(this.sommeEgagementLigne(this.detail_marche.id)) + parseFloat(this.editEngagement.total_general);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
 montantCumulerMandat() {
       const val = parseFloat(this.sommeEgagementLigne(this.detail_marche.id)) + parseFloat(this.sommeMontant);
       
@@ -8235,7 +8265,18 @@ afficheractivite() {
 
 
 
+afficheBailleur() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sources_financements.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 
 
  veifuaExist() {
@@ -9353,14 +9394,14 @@ recupererActivite(){
 
 
 ajouterMandatEngagement(){
-      if (this.afficherMontantEngagement < this.sommeMontant){
+      if (this.afficherMontantEngagement < this.editEngagement.total_general){
 alert("Le montant engagé est superieure au montant de la facture")
       }
-      else if (this.afficherMontantEngagement > this.sommeMontant)
+      else if (this.afficherMontantEngagement > this.editEngagement.total_general)
       {
         alert("Le montant engagé est Inférieure au montant de la facture")
       }
-       else if (this.dotationDisponibleAnterieure < this.afficherMontantFacture)
+       else if (this.dotationDisponibleAnterieure < this.afficherMontantEngagement)
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
@@ -9376,7 +9417,7 @@ alert("Le montant engagé est superieure au montant de la facture")
        	numero_cc_id :this.NumeroFournisseur,
         nom_entreprise :this.nomFournisseur,
          adresse_entreprise :this.AdresseFournisseur,
-         total_general :this.sommeMontant,
+        //  total_general :this.sommeMontant,
          budget_general_id :this.CodeBudgetaire,
          marche_id : this.detail_marche.id,
          montant_a_paye: this.montantResteApaye,
@@ -9388,6 +9429,7 @@ alert("Le montant engagé est superieure au montant de la facture")
         facture_id:this.editEngagement.facture_id,
         type_procedure_id	:this.recupererTypeProcedure,
 engagement_id:this.editEngagement.id,
+
 // numero_engage:this.formDataEngage.numero_engage,
 // numero_demande:this.formDataEngage.numero_demande_engage,
 programme_id:this.afficherProgDotId,
@@ -9396,8 +9438,13 @@ activite_id:this.detail_marche.activite_id,
   ua_id:this.detail_marche.unite_administrative_id,
   grd_nature_id:this.detail_marche.gdenature_id,
 
-section_id:this.afficherSectId
-
+section_id:this.afficherSectId,
+  total_general:this.editEngagement.total_general,
+    montant_tresor:this.editEngagement.montant_tresor,
+      montant_don:this.editEngagement.montant_don,
+ montant_emprunt:this.editEngagement.montant_emprunt,
+ bailler_id:this.editEngagement.bailler_id,
+ 
        };
 this.ajouterMandat(nouvelObjet)
 this.$("#exampleModalMandatEngagement").modal('hide');

@@ -26,7 +26,7 @@
                 <tbody>
                    <procedureItem
                         class="item"
-                        v-for="groupeElement in groupe.procedure_passation"
+                        v-for="groupeElement in groupe.procedure_pass"
                         :key="groupeElement.id"
                         :article="groupeElement"
                       @modification="$emit('modification', $event)"
@@ -50,7 +50,7 @@
 import procedureItem from './procedureItem'
 
 export default {
-    name: 'procedureComponent',
+    name: 'procedureItemComponent',
      props: {
     groupe: Object,
   },
@@ -70,21 +70,21 @@ export default {
   computed: {
   
     isFolder: function () {
-      return this.groupe.procedure_passation &&
-        this.groupe.procedure_passation.length
+      return this.groupe.procedure_pass &&
+        this.groupe.procedure_pass.length
     },
 
-    getNombreArticle(){
-        var nombre = this.groupe.procedure_passation.length
-        if(nombre) return nombre
-        return '0' 
-    },
+    // getNombreArticle(){
+    //     var nombre = this.groupe.procedure_pass.length
+    //     if(nombre) return nombre
+    //     return '0' 
+    // },
     iconClasses() {
       return {
-        'icon-plus': !this.isOpen && this.groupe.procedure_passation.length,
-        'icon-minus': this.isOpen && this.groupe.procedure_passation.length
-        //    'icon-folder-close': !this.isOpen && this.groupe.procedure_passation.length,
-        // 'icon-folder-open': this.isOpen && this.groupe.procedure_passation.length
+        'icon-plus': !this.isOpen && this.groupe.procedure_pass.length,
+        'icon-minus': this.isOpen && this.groupe.procedure_pass.length
+        //    'icon-folder-close': !this.isOpen && this.groupe.procedure_pass.length,
+        // 'icon-folder-open': this.isOpen && this.groupe.procedure_pass.length
       }
     },
 

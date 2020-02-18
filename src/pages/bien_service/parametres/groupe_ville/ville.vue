@@ -2,6 +2,7 @@
 <template>
   <div>
    
+   
 <!----- ajouter modal   ---->
 
 
@@ -35,7 +36,7 @@
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button  v-show="formData.pays_id && formData.libelle.length"
+             <button  
              @click.prevent="ajouterTitreLocal" class="btn btn-primary"
               href="#">Valider</button>
               <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
@@ -78,7 +79,7 @@
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="editSection.pays_id && editSection.libelle.length" 
+             <button 
               @click.prevent="modifierSectionLocal(editSection)" class="btn btn-primary"
               >Modifier</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
