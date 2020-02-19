@@ -43,7 +43,11 @@
         </ul>
       </li>
 
-     
+     <li>
+            <router-link :to="{name: 'indicateurBienService'}" tag="a">
+              INDICATEUR BIEN SERVICE
+            </router-link>
+          </li>
     </ul>
   </div>
 </template>
