@@ -500,7 +500,7 @@ export default {
              numero_ccm:"",
              moyen_transport:"",
              itineraire_retenu:"",
-             mode_paiement:"",
+             
              duree:"",
              date_retour:"",
              date_depart:"",
@@ -539,7 +539,7 @@ export default {
   ...mapGetters('personnelUA', ['all_acteur_depense',  'fonctions']),
    ...mapGetters('uniteadministrative', ['uniteAdministratives', 'getPersonnaliseBudgetGeneralParPersonnel']),
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
-   ...mapGetters('bienService', ['modepaiements' ,'gettersPersonneliserModePaiment']),
+   ...mapGetters('bienService', ['modepaiements']),
 
    nombreJourCalucle(){
      const form = this.formData
@@ -765,7 +765,7 @@ acteurDepenseDynamiques() {
              numero_ccm:"",
              moyen_transport:"",
              itineraire_retenu:"",
-             mode_paiement:"",
+             
              duree:"",
              date_retour:"",
              date_depart:"",

@@ -71,6 +71,7 @@
 
 
 
+
               <div class="btn-group">
               <button @click.prevent="supprimerNormeMission(norme_mission.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
@@ -107,7 +108,7 @@
             
 
               <div class="modal-body">
-                <form class="form-horizontal">
+                <form class="form-horizontal" enctype="multipart/form-data">
                 
            
               <div class="control-group">
@@ -304,7 +305,13 @@ export default {
         fonction_id:"",
      source_financement_id: "",
       perdiem:"",
-      zone:""
+      zone:"",
+      fichier_joint:"",
+      // selectedFile:"",
+      // imagePDF:"",
+      // namePDF:"",
+      // fichierPDF:""
+
             
         },
 
@@ -312,7 +319,12 @@ export default {
     fonction_id:"",
      source_financement_id: "",
       perdiem:"",
-      zone:""
+      zone:"",
+      fichier_joint:"",
+      // selectedFile:"",
+      // imagePDF:"",
+      // namePDF:"",
+      // fichierPDF:""
             
         },
             search:""
@@ -349,7 +361,9 @@ return this.getNormeMissionPersonnaliser.filter((item) => {
 
    }
 )
-   }
+   },
+
+    
   },
 
   methods: {
@@ -367,15 +381,47 @@ return this.getNormeMissionPersonnaliser.filter((item) => {
     onFichierChange(e){
       this.formData.fichier_joint = e.target.files[0]
     },
+
+    //  OnchangeFichier(e) {
+    //             const files = e.target.files;
+    //             this.selectedFile = event.target.files[0];
+    //             console.log(this.selectedFile)
+    //             Array.from(files).forEach(file => this.addFichierPDF(file));
+    //         },
+    //         addFichierPDF(file) {
+    //             let reader = new FileReader();
+    //             let vm = this;
+    //             reader.onload = e => {
+    //                 vm.imagePDF = "pdf.png";
+    //                 vm.namePDF = file.name;
+    //                 vm.fichierPDF = e.target.result;
+    //             };
+    //             reader.readAsDataURL(file);
+    //         },
    // fonction pour vider l'input
      ajouterNormeMissionLocal () {
+
+      //  const formData = new FormData();
+      //  formData.append('fichier_joint', this.selectedFile, this.selectedFile.name);
+      //  formData.append('fonction_id', this.formData.fonction_id);
+      //  formData.append('zone', this.formData.zone);
+      //  formData.append('perdiem', this.formData.perdiem);
+      //  formData.append('source_financement_id', this.formData.source_financement_id);
+      //   let config = {
+      //     header :{
+      //          'Content-Type': 'multipart/form-data'
+      //     }
+
+      //   }
+
      this.ajouterNormeMission(this.formData)
 
         this.formData = {
              fonction_id:"",
         source_financement_id: "",
         perdiem:"",
-        zone:""
+        fichier_joint:"",
+          zone:""
             
          }
      },
@@ -394,6 +440,21 @@ afficherModalModifierNormeMission(index){
  },  
 // 
 modifierModalNormeMissionLocal(){
+  // const formData = new FormData();
+                
+  //      formData.append('fonction_id', this.editNormeMission.fonction_id);
+  //      formData.append('zone', this.editNormeMission.zone);
+  //      formData.append('perdiem', this.editNormeMission.perdiem);
+  //      formData.append('source_financement_id', this.editNormeMission.source_financement_id);
+  //               console.log(formData)
+  //               if ( this.selectedFile!==""){
+  //                   formData.append('fichier_joint', this.selectedFile, this.selectedFile.name);
+  //               }
+  //               let config = {
+  //                   header : {
+  //                       'Content-Type' : 'multipart/form-data'
+  //                   }
+  //               }
   this.modifierNormeMission(this.editNormeMission)
   this.$('#modifierModal').modal('hide');
   // this.editNormeMission = {

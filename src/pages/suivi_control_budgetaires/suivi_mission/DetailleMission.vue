@@ -32,7 +32,7 @@
               <tbody>                          
                 <tr class="odd gradeX" >
                   <td >
-                     {{mission.annee}}</td> 
+                     {{mission.exercice_budgetaire_id}}</td> 
                   <td>
                       {{mission.categorie_mission.libelle || 'Non renseigné'}}</td> 
                  <td >
@@ -72,13 +72,13 @@
                   <th>Signataire</th>
                   <th> Cout de billet avion</th>
                   <th>fichier joint</th>
-                  <th > Temps d'arrivé du dossier</th>
+                  
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd gradeX" >
                
-                <td >
+                <!-- <td >
                   <span
                        v-if="mission.mode_paiement == 0" > virement
                   </span>
@@ -87,7 +87,8 @@
 
                          <span v-else> espèce </span>   
                    
-                  </td> 
+                  </td>  -->
+                      <td > {{mission.varModeDePaiement.libelle || 'Non renseigné'}}</td>
                 
                  <td >  {{formatageSomme(parseFloat(mission.frais_restauration)) || 'Non renseigné'}}</td>
 
@@ -106,7 +107,7 @@
                      <td > {{formatageSomme(parseFloat(mission.cout_billet_avion)) || 'Non renseigné'}}</td> 
                       
                       <td > {{mission.fichier_joint || 'Non renseigné'}}</td>
-                       <td > {{mission.temps_arrive || 'Non renseigné'}}</td>
+                       
 
                            
                 
@@ -326,8 +327,9 @@ this.historique = this.historiques_missions.filter(mission => mission.mission ==
 
  computed: {
 // methode pour maper notre guetter
-   ...mapGetters('suivi_controle_budgetaire', ['getMissionPersonnaliser', 'historiques_missions'])
-   
+   ...mapGetters('suivi_controle_budgetaire', ['getMissionPersonnaliser', 'historiques_missions']),
+   ...mapGetters('bienService', ['modepaiements']),
+   ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
   },
 
 
