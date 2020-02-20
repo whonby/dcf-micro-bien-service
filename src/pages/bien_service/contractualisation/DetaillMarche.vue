@@ -1,4 +1,4 @@
-
+Ajouter offre
 <template>
     
 <div>
@@ -216,7 +216,7 @@
 
                                         <!-- <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.nom_bailleurs || 'Non renseigné'}}</td> -->
-                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                        <!-- <td @dblclick="afficherModalModifierActeDepense(index)"> -->
 
                                         <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)">
 
@@ -2712,7 +2712,7 @@
                                 </td>
 
 
-                                 <td colspan="">
+                                
 
                                  <td >
 

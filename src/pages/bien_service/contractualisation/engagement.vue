@@ -1,7 +1,4 @@
-Ajouter Mandat
-Ajouter engagement
 Modifier Mandat
-taux facture
 <template>
   	
         <div class="container-fluid">
@@ -1511,7 +1508,7 @@ taux facture
                          <div class="control-group">
                             <label class="control-label">Trésor</label>
                             <div class="controls">
-                              <input type="number" class="span4" v-model="editMandat.montant_tresor" readonly/>
+                              <input type="number" class="span4" v-model="editMandat.montant_tresor" />
                             </div>
                           </div>
                         </td>
@@ -1519,7 +1516,7 @@ taux facture
                           <div class="control-group">
                             <label class="control-label">Don</label>
                             <div class="controls">
-                              <input type="number" class="span4" v-model="editMandat.montant_don" readonly/>
+                              <input type="number" class="span4" v-model="editMandat.montant_don" />
                             </div>
                           </div>
                         </td>
@@ -1527,7 +1524,7 @@ taux facture
                              <div class="control-group">
                             <label class="control-label">Emprunt</label>
                             <div class="controls">
-                              <input type="number" class="span4" v-model="editMandat.montant_emprunt" readonly/>
+                              <input type="number" class="span4" v-model="editMandat.montant_emprunt" />
                             </div>
                           </div>
                         </td>
@@ -2620,7 +2617,12 @@ taux facture
             <span class="label label-success">{{tauxFacturation}}%</span>TAUX FACTURE
           </a>
         </li>
-        
+         <li class="bg_lo">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-success">{{ratioAvenantMarche}}%</span> RATIO AVENENT/MARCHE
+          </a>
+        </li>
       
       </ul>
     </div>
@@ -3145,7 +3147,7 @@ taux facture
                     >{{formatageSomme(parseFloat(type.montant_tresor)) || 0}}</td>
                   <td
                        style="text-align: center"
-                    >{{formatageSomme(parseFloat(objetfactureMontant(type.facture_id)))|| 0}}</td>
+                    >{{formatageSomme(parseFloat(montantTotalDonEtEmprunt))|| 0}}</td>
                     <!-- <td  style="text-align: center">{{formatageSomme(parseFloat(restePayeMarche)) || 0}}</td> -->
                    
   <!-- <td style="text-align: center"> {{tauxFacturation || 0}}%</td>
@@ -3162,12 +3164,15 @@ taux facture
                      
                     
                     > {{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td> -->
-                     <td  style="text-align: center;color:red;font-weight:bold;"> {{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td>
+                     <td ></td>
                   <td
                      
                      style="text-align: center;color:red;font-weight:bold;"
                     >{{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td> 
-                    
+                      <td
+                     
+                     style="text-align: center;color:red;font-weight:bold;"
+                    >{{formatageSomme(parseFloat(montantTotalDonEtEmprunt)) || 0}}</td> 
                     
                       <!-- <td  style="text-align: center;color:red;font-weight:bold;"> {{tauxFacturation || 0}}%</td> -->
                     
@@ -7520,7 +7525,7 @@ type_engagement_id:"",
 val:0
       },
 
-formData1= {
+formData1: {
 total:0,
 total2:0,
 total3:0,
@@ -7703,7 +7708,6 @@ created() {
 
 
 
-
   afficheModePaiement() {
       return id => {
         if (id != null && id != "") {
@@ -7751,7 +7755,7 @@ tauxFacturation() {
       const val = (parseFloat(this.montantCredite(this.detail_marche.id)) / parseFloat(this.montantMarcheAvecAvenant)) * 100;
       
        if (val) {
-        return parseInt(val).toFixed(0);
+        return parseInt(val).toFixed(2);
       }
       
       return 0
@@ -7828,6 +7832,12 @@ montantMarcheAvecAvenant() {
       return parseFloat(val).toFixed(2);
     },
 
+
+
+ratioAvenantMarche(){
+   const val = (parseFloat(this.affichierMontantAvenant(this.detail_marche.id)) / parseFloat(this.afficheMontantReelMarche(this.detail_marche.id))) * 100;
+      return parseFloat(val).toFixed(2);
+},
 // montantMarcheAvecAvenant() {
  
 //       return id => {
@@ -9629,6 +9639,9 @@ val:0,
        };
       
 this.ajouterChoixProcedure(nouvelObjet)
+this.formData= {
+tprocedure :""
+}
 this.$("#modalTypeEngagement").modal('hide');
  this.$("#modalFactureAjouterEngagementDirect").modal({
         backdrop: "static",
@@ -9643,6 +9656,9 @@ this.$("#modalTypeEngagement").modal('hide');
     
        };
 this.ajouterChoixProcedure(nouvelObjet1)
+this.formData= {
+tprocedure : ""
+}
        this.$("#modalTypeEngagement").modal('hide');
  this.$("#modatFactureAjouter").modal({
         backdrop: "static",

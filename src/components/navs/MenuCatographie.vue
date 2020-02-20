@@ -84,7 +84,7 @@
           data-target="#tableau"
           class="dropdown-toggle"
         >
-          <i class="icon icon-user"></i>
+         
           <span class="text">TABLEAU DE BORD</span>
           <b class="caret"></b>
         </a>
