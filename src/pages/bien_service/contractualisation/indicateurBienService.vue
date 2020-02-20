@@ -41,7 +41,7 @@
               </td>
               <td>
                   <div class="control-group">
-                                <label class="control-label">Année Budgetaire</label>
+                                <label class="control-label">Type marche</label>
                                 <div class="controls ">
                             
                             <select v-model="editMarche.unite_administrative_id" class="span">
@@ -53,7 +53,7 @@
               </td>
               <td>
                   <div class="control-group">
-                                <label class="control-label">Année Budgetaire</label>
+                                <label class="control-label">Procedure passation</label>
                                 <div class="controls ">
                             
                            <select v-model="editMarche.unite_administrative_id" class="span">
@@ -65,7 +65,7 @@
               </td>
                <td>
                   <div class="control-group">
-                                <label class="control-label">Année Budgetaire</label>
+                                <label class="control-label">Fournisseur</label>
                                 <div class="controls ">
                             
                              <select v-model="editMarche.unite_administrative_id" class="span">
@@ -102,6 +102,42 @@
                   </tr>
                       
                    </table>
+                   <div class="quick-actions_homepage " >
+              <ul class="quick-actions">
+                
+                 <li class="bg_lb" title="Nombre Global d'équipement">
+          <a href="#">
+            <i class="icon-th-large"></i>
+            <span class="label label-important"></span> QUANTITE GLOBAL
+          </a>
+        </li> 
+         <li class="bg_ly" title="QUANTITE NON COUVERTE">
+          <a href="#" >
+            <i class=" icon-list-alt"></i>
+            <span class="label label-success"></span>QTE NON COUVERTE
+          </a>
+        </li>
+         <li class="bg_ly" title="QUANTITE COUVERTE">
+          <a href="#">
+            <i class=" icon-list-alt"></i>
+            <span class="label label-success"></span> QTE COUVERTE
+          </a>
+        </li> 
+        <li class="bg_lg" title="Taux QUANTITE COUVERTE">
+          <a href="#">
+            <i class="icon-th"></i>
+            <span class="label label-warning"></span>TAUX QTE COUVERTE
+          </a>
+        </li>
+         <li class="bg_lg" title="Taux QUANTITE NON COUVERTE">
+          <a href="#">
+            <i class="icon-th"></i>
+            <span class="label label-warning"></span>TAUX QTE NON COUVERTE
+          </a>
+        </li>
+        
+              </ul>
+            </div>
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
