@@ -181,8 +181,8 @@
                                                     </div>
                                                 </div>
              </td>
-             <td>
-                  <div class="control-group">
+              <td>
+                     <div class="control-group">
                                                     <label class="control-label">Regime d'imposition</label>
                                                     <div class="controls">
                                                         <select v-model="formData.regime_impossition" class="span11">

@@ -373,9 +373,9 @@ export  function ajouterEntreprise({commit}, objetAjoute){
         console.log(error)
         this.$app.$loading(false)
         this.$app.$notify({
-            title: 'Erreur',
-            text: "Erreur c'est produit lors de l'enregistrement",
-            type:"error"
+            title: 'Success',
+            text: "Enregistrement effectuÃ© avec success",
+            type:"success"
         });
     })
 }
@@ -992,7 +992,7 @@ export function ajouterAgence({ commit, dispatch}, formData) {
             dispatch('getBanque')
             this.$app.$notify({
                 title: 'success ',
-                text: 'Enregistrement effectué !',
+                text: 'Enregistrement effectuï¿½ !',
                 type: "success"
             })
         }
@@ -1010,7 +1010,7 @@ export function modifierAgence({ commit, dispatch }, element_modifie) {
         dispatch('getBanque')
         this.$app.$notify({
             title: 'success ',
-            text: 'Modification effectué !',
+            text: 'Modification effectuï¿½ !',
             type: "success"
         })
     }).catch(error => console.log(error))

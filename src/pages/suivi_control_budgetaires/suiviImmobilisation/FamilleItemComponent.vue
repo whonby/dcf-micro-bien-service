@@ -79,7 +79,7 @@ export default {
     getNombreArticle(){
         var nombre = this.groupe.equipement_famille.length
         if(nombre) return nombre
-        return 'Aucun' 
+        return '0' 
     },
     iconClasses() {
       return {

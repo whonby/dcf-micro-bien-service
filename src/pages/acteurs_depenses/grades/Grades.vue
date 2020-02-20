@@ -23,7 +23,7 @@
                                 <thead>
                                 <tr>
                                     <th>Code </th>
-                                    <th>Libelle</th>
+                                    <th>Libellé</th>
                                      <!-- <th>Echelons</th> -->
                                     <th>Action</th>
                                 </tr>
@@ -62,23 +62,12 @@
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter echelons</h3>
+                <h3>Ajouter grade</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
-                    <div class="control-group">
-                        <label class="control-label">Code:</label>
-                        <div class="controls">
-                            <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Libelle:</label>
-                        <div class="controls">
-                            <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
-                        </div>
-                    </div>
-                    <div class="control-group">
+
+                     <!-- <div class="control-group">
                         <label class="control-label">Echelons</label>
                         <div class="controls">
                             <select v-model="formData.echellon_id">
@@ -88,7 +77,21 @@
                                 </option>
                             </select>
                         </div>
+                    </div> -->
+
+                    <div class="control-group">
+                        <label class="control-label">Code:</label>
+                        <div class="controls">
+                            <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
+                        </div>
                     </div>
+                    <div class="control-group">
+                        <label class="control-label">Libellé:</label>
+                        <div class="controls">
+                            <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                        </div>
+                    </div>
+                   
 
                 </form>
             </div>
@@ -107,10 +110,23 @@
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier un fonctions</h3>
+                <h3>Modifier grade</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
+
+                     <!-- <div class="control-group">
+                        <label class="control-label">Echelons</label>
+                        <div class="controls">
+                            <select v-model="editGrade.echellon_id">
+                                <option></option>
+                                <option v-for="item in echellons" :key="item.id" :value="item.id">
+                                    {{item.libelle}}
+                                </option>
+                            </select>
+                        </div>
+                    </div> -->
+
                     <div class="control-group">
                         <label class="control-label">Code:</label>
                         <div class="controls">

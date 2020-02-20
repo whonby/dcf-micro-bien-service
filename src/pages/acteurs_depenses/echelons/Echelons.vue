@@ -63,7 +63,7 @@
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter echelons</h3>
+                <h3>Ajouter échelons</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Libelle:</label>
+                        <label class="control-label">Libellé:</label>
                         <div class="controls">
                             <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
                         </div>
@@ -109,7 +109,7 @@
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier un fonctions</h3>
+                <h3>Modifier échelons</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -120,7 +120,7 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Libelle:</label>
+                        <label class="control-label">Libellé:</label>
                         <div class="controls">
                             <input type="text" v-model="editTitre.libelle" class="span" placeholder="" />
                         </div>

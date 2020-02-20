@@ -92,7 +92,7 @@
   export  const getMissionPersonnaliser = (state, getters,rootState, rootGetters) =>
   state.missions.map(element => {
       if(element.exercice_budgetaire_id !== null && element.acte_personnel_id !== null && element.ua_id !== null  
-        && element.source_financement_id !== null  && element.fonction_id !== null){
+        && element.source_financement_id !== null  && element.fonction_id !== null && element.mode_paiement_id !== null){
           element = {
               ...element,
               objetExerciceBudegetaire:rootGetters['parametreGenerauxAdministratif/exercices_budgetaires'].find(
@@ -110,6 +110,10 @@
               objetFonction:rootGetters['personnelUA/fonctions' ].find(
                 fonction => fonction.id == element.fonction_id
              ),
+             varModeDePaiement:rootGetters['bienService/modepaiements'].find(
+                mode => mode.id == element.mode_paiement_id
+            )
+            
           }
           
       }
@@ -119,7 +123,20 @@
  
  
  
- 
+ // getter qui va recuperer le mode de paiment 
+
+//  export const gettersPersonneliserModePaiment = (state, getters,rootState, rootGetters) =>
+//  state.missions.map(element =>{
+//      if(element.mode_paiement_id !== null){
+//          element ={
+//              ...element,
+//              varModeDePaiement:rootGetters['bienService/modepaiements'].find(
+//                  mode => mode.id == element.mode_paiement_id
+//              )
+//          }
+//      }
+//      return element ;
+//  } )
  
 
   

@@ -68,7 +68,7 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Famille Famille d'Article</h3>
+        <h3>Modifier  Famille d'Article</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
@@ -86,7 +86,7 @@
                             </div>
                           </div>
           <div class="control-group">
-            <label class="control-label">Libelle:</label>
+            <label class="control-label">Libellé:</label>
             <div class="controls">
               <input
                 type="text"
