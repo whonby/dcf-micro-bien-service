@@ -135,7 +135,12 @@
             <span class="label label-warning"></span>TAUX QTE NON COUVERTE
           </a>
         </li>
-        
+         <li class="bg_lg" title="Taux QUANTITE NON COUVERTE">
+          <a href="#">
+            <i class="icon-th"></i>
+            <span class="label label-warning"></span>TAUX QTE NON COUVERTE
+          </a>
+        </li>
               </ul>
             </div>
             <div class="widget-title">
