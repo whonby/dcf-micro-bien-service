@@ -33,8 +33,8 @@
                                 <div class="controls ">
                             
                           <select v-model="editMarche.unite_administrative_id" class="span">
-               <option 
-               ></option>
+                              <option></option>
+               <option v-for="exo in exercices_budgetaires" :key="exo.id" value="exo.id">{{exo.annee}}</option>
            </select>
                                 </div>
                                 </div>
@@ -45,8 +45,8 @@
                                 <div class="controls ">
                             
                             <select v-model="editMarche.unite_administrative_id" class="span">
-               <option 
-               ></option>
+               <option ></option>
+               <option v-for="typePas in typeMarches" :key="typePas.id"   :value="typePas.id">{{typePas.libelle}}</option>
            </select>
                                 </div>
                                 </div>
@@ -57,8 +57,8 @@
                                 <div class="controls ">
                             
                            <select v-model="editMarche.unite_administrative_id" class="span">
-               <option 
-               ></option>
+               <option></option>
+               <option  v-for="propass in procedurePassations" :key="propass.id" :value="propass.id">{{propass.libelle}}</option>
            </select>
                                 </div>
                                 </div>
@@ -102,7 +102,10 @@
                   </tr>
                       
                    </table>
+                   
                    <div class="quick-actions_homepage " >
+                       <br/>
+                    
               <ul class="quick-actions">
                 
                  <li class="bg_lb" title="Nombre Global d'équipement">
