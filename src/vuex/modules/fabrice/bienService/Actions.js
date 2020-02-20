@@ -1948,7 +1948,7 @@ export function ajouterOffreFinancier({commit}, elementAjout){
 
 
 export function modifierOffreFinancier({commit}, element_modifie) {
-    asyncLoading( axios.put('/offre_financieres/',element_modifie)).then(response => {
+    asyncLoading( axios.put('/offre_financieres',element_modifie)).then(response => {
         commit('MODIFIER_OFFRE_FINANCIER', response.data)
 
 
