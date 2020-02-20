@@ -32,7 +32,7 @@
                                 <label class="control-label">Année Budgetaire</label>
                                 <div class="controls ">
                             
-                          <select v-model="editMarche.unite_administrative_id" class="span">
+                          <select v-model="budgetaire" class="span">
                               <option></option>
                <option v-for="exo in exercices_budgetaires" :key="exo.id" value="exo.id">{{exo.annee}}</option>
            </select>
@@ -44,7 +44,7 @@
                                 <label class="control-label">Type marche</label>
                                 <div class="controls ">
                             
-                            <select v-model="editMarche.unite_administrative_id" class="span">
+                            <select v-model="type_marche" class="span">
                <option ></option>
                <option v-for="typePas in typeMarches" :key="typePas.id"   :value="typePas.id">{{typePas.libelle}}</option>
            </select>
@@ -56,7 +56,7 @@
                                 <label class="control-label">Procedure passation</label>
                                 <div class="controls ">
                             
-                           <select v-model="editMarche.unite_administrative_id" class="span">
+                           <select v-model="Procedure" class="span">
                <option></option>
                <option  v-for="propass in procedurePassations" :key="propass.id" :value="propass.id">{{propass.libelle}}</option>
            </select>
@@ -68,37 +68,14 @@
                                 <label class="control-label">Fournisseur</label>
                                 <div class="controls ">
                             
-                             <select v-model="editMarche.unite_administrative_id" class="span">
-               <option 
-               ></option>
+                             <select v-model="entreprise" class="span">
+               <option></option>
+               <option  v-for="entrep in entreprises" :value="entrep.raison_sociale" :key="entrep.id">{{entrep.raison_sociale}}</option>
            </select>
                                 </div>
                                 </div>
               </td>
-              <td>
-                  <div class="control-group">
-                                <label class="control-label">Année Budgetaire</label>
-                                <div class="controls ">
-                            
-                            <select v-model="editMarche.unite_administrative_id" class="span">
-               <option 
-               ></option>
-           </select>
-                                </div>
-                                </div>
-              </td>
-              <td>
-                  <div class="control-group">
-                                <label class="control-label">Année Budgetaire</label>
-                                <div class="controls ">
-                            
-                         <select v-model="editMarche.unite_administrative_id" class="span">
-               <option 
-               ></option>
-           </select>
-                                </div>
-                                </div>
-              </td>
+             
                   </tr>
                       
                    </table>
@@ -162,17 +139,18 @@
             
                 <thead>
                   <tr>
-                      <th>Reference marché</th>
-                      <th>Numero marché</th>
+                    <th>Année</th>
+                      <th>N°marché</th>
+                        <th>Objet marché</th>
                       <th>Type marché</th>
-                      <th>Type passation</th>
-                      <th>Objet marché</th>
+                      <th>Procedure passation</th>
+                    
                     <th>Fournisseur</th>
                       <th>Montant Réel</th>
-                    <th>Montant mandat</th>
-                    <th>Montant facturé</th>
-                    <th>Reste a payé</th>
-                    
+                  
+                    <th title="montant facturé">Mont.facturé</th>
+                    <th>Solde</th>
+                      <th>%payé</th>
                     
                   
                     
@@ -180,7 +158,41 @@
                   </tr>
                 </thead>
                 <tbody >
-                  
+                   <tr class="odd gradeX" v-for="type in rechercheMarcheSuivie" :key="type.id">
+                   <td
+                     
+                    >{{type.exercice_budget || 'Non renseigné'}}</td>
+                    <td
+                     
+                    >{{afficheNumeroMarche(type.marche_id) || 'Non renseigné'}}</td>
+                     <td
+                     
+                    >{{afficheObjetMarche(type.marche_id) || 'Non renseigné'}}</td>
+ <td
+                     
+                    >{{type.affichierObjetMarche.type_marche.libelle || 'Non renseigné'}}</td>
+                    <td
+                     
+                    >{{afficheTypeProcedure(type.marche_id) || 'Non renseigné'}}</td>
+                    
+                    <td
+                     
+                    >{{type.nom_entreprise || 'Non renseigné'}}</td>
+                     <td
+                     
+                    >{{formatageSomme(parseFloat(afficheMontantReelMarche(type.marche_id)))|| '0'}}</td>
+                    <td
+                     
+                    >{{formatageSomme(parseFloat(sommeEgagementMandatParMarche(type.marche_id))) || '0'}}</td>
+                   
+                    <td
+                     
+                    >{{formatageSomme(parseFloat(afficheMontantReelMarche(type.marche_id)) - type.total_general) || '0'}}</td>
+                     <td
+                     
+                    >{{(sommeEgagementMandatParMarche(type.marche_id) / (afficheMontantReelMarche(type.marche_id)) * 100).toFixed(2)|| '0'}}%</td>
+                   
+                  </tr>
                 </tbody>
               </table>
               
@@ -198,7 +210,7 @@
 </template>
   
 <script>
- import { mapGetters, mapActions } from "vuex";
+ import { mapGetters} from "vuex";
  import { formatageSomme } from "../../../../src/Repositories/Repository";
 export default {
   name:'type facture',
@@ -216,30 +228,16 @@ export default {
     //     CODE: "code",
     //     libelle: "libelle"
     //   },
-
-      formData: {
-            objet:"",
-            reference_marche:"",
-            montant_marche:"",
-                type_marche_id:"",
-                unite_administrative_id:"",
-                grdnature_id:"",
-                activite_id:""
-        
-      },
-      editMarche: {
-        	 objet:"",
-            reference_marche:"",
-            montant_marche:"",
-                type_marche_id:"",
-                unite_administrative_id:""
-      },
+         type_marche:"",
+         entreprise:"",
+      Procedure:"",
+      budgetaire :"",
       search: ""
     };
   },
 
   computed: {
-      ...mapGetters("bienService", ['acteEffetFinanciers','marches','typeMarches', 'getMarchePersonnaliser',
+      ...mapGetters("bienService", ['getMandatPersonnaliserViseTableauBord','acteEffetFinanciers','marches','typeMarches', 'getMarchePersonnaliser',
      "montantMarche", "printMarcheNonAttribue","procedurePassations","typeTypeProcedures","montantMarcheReel"]),
 
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
@@ -249,7 +247,95 @@ export default {
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
+...mapGetters('gestionMarche', ['entreprises']),
 
+rechercheMarcheSuivie(){
+      if(this.entreprise!="" || this.type_marche != ""){
+          console.log(this.entreprise)
+          console.log(this.type_marche)
+          return this.getMandatPersonnaliserViseTableauBord.filter(item =>{
+              if( item.nom_entreprise == this.entreprise || item.affichierObjetMarche.type_marche.id == this.type_marche){
+                  return item
+              }
+             
+    
+          })
+          
+      }
+    
+      return this.getMandatPersonnaliserViseTableauBord
+},
+ sommeEgagementMandatParMarche: function () {
+                return id => {
+                    if (id != "") {
+                      let valInite=0;
+                        return  this.getMandatPersonnaliserViseTableauBord.filter(normeEquipe => normeEquipe.marche_id == id).reduce(function(total,currentVal){
+                           return total + parseFloat(currentVal.total_general)
+                        },valInite);
+                    }
+                }
+            },
+
+afficheReference() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.reference_marche;
+      }
+      return 0
+        }
+      };
+    },
+afficheNumeroMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_marche;
+      }
+      return 0
+        }
+      };
+    },
+afficheTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_marche.libelle;
+      }
+      return 0
+        }
+      };
+    },
+afficheTypeProcedure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.procedure_passation.libelle;
+      }
+      return 0
+        }
+      };
+    },
+afficheObjetMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.objet;
+      }
+      return 0
+        }
+      };
+    },
 
 afficheMontantReelMarche() {
       return id => {
@@ -265,18 +351,13 @@ afficheMontantReelMarche() {
     },
 
 
-
-
-
-
-
-    marcherAttribuerFiltre()  {
+//     marcherTableau()  {
      
-        const searchTerm = this.search.toLowerCase();
+//         const searchTerm = this.editMarche.typeMarch.toLowerCase();
 
-return this. marcherAttribuer.filter((item) => {
+// return this. getMandatPersonnaliserViseTableauBord.filter((item) => {
   
-     return item.objet.toLowerCase().includes(searchTerm) 
+//      return item.afficheTypeMarche(type.marche_id).toLowerCase().includes(searchTerm) 
      
     
 
@@ -284,9 +365,9 @@ return this. marcherAttribuer.filter((item) => {
   
 
 
-   }
-)
-    },
+//    }
+// )
+//     },
   
     
     deverouGrandNature() {
@@ -412,58 +493,8 @@ anneeAmort() {
     },
   },
   methods: {
-    ...mapActions("bienService", ['ajouterMarche','modifierMarche',
-    'supprimerMarche'
-     
-    ]),
-    //afiicher modal ajouter
-    afficherModalAjoutTypaPrestation() {
-      this.$("#exampleModal").modal({
-        backdrop: "static",
-        keyboard: false
-      });
-    },
-    // fonction pour vider l'input ajouter
-    ajouterModalTypePrestationLocal(){
-      
-       var nouvelObjet = {
-      ...this.formData,
-      imputation :this.ImputationBudget
-       };
-this.ajouterMarche(nouvelObjet)
-this.formData = {
-	          objet:"",
-            reference_marche:"",
-            montant_marche:"",
-                type_marche_id:"",
-                unite_administrative_id:"",
-                imputation:"",
-                	activite_id:""
-}
-
-    },
-    formatageSomme:formatageSomme,
-    // afficher modal de modification
-    afficherModalModifierTypePrestation(index) {
-      this.$("#modificationModal").modal({
-        backdrop: "static",
-        keyboard: false
-      });
-
-      this.editMarche = this.marcherAttribuerFiltre[index];
-    },
-    // fonction pour vider l'input modification
-    modifierModalTypeprestationLocal(){
-      this.modifierMarche(this.editMarche)
-      this.$('#modificationModal').modal('hide');
-    },
-    
-    // alert() {
-    //   console.log("ok");
-    // },
-     ExporterEnExel(){
-      this.$refs.excel.click()
-    }
+   
+   formatageSomme:formatageSomme
   }
 };
 </script>

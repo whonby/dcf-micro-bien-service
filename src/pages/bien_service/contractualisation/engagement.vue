@@ -1,7 +1,4 @@
-Ajouter Mandat
-Ajouter engagement
-Modifier Mandat
-taux facture
+
 <template>
   	
         <div class="container-fluid">

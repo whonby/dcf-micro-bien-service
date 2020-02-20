@@ -41,7 +41,11 @@ bailleurAjouter,
                             </tr>
                             </tbody>
                         </table>
+
                         
+
+                        <bailleur-ajouter :macheid="detail_marche.exo_id"></bailleur-ajouter>
+
                     </div>
                 </div>
             </div>
