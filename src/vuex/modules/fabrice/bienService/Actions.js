@@ -1889,7 +1889,7 @@ export function ajouterOffreTechnique({commit}, elementAjout){
 
 
 export function modifierOffreTechnique({commit}, element_modifie) {
-    asyncLoading( axios.put('/offre_techniques/',element_modifie)).then(response => {
+    asyncLoading( axios.put('/offre_techniques',element_modifie)).then(response => {
         commit('MODIFIER_OFFRE_TECHNIQUE', response.data)
 
 

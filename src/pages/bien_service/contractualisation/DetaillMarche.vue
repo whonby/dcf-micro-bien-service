@@ -770,18 +770,18 @@
                                 </thead>
 
                                 <tr>
-                                    <td>{{detail_offre_technique.prog_mobilisation || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_technique.capacite_financiere || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_technique.caa_moyen_ac_entre || "Non renseigne"}}</td>
-                                    <!-- <td>{{detail_offre_technique.capacite_financement || "Non renseigne"}}</td> -->
-                                    <td>{{detail_offre_technique.capacite_tech_exp || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_technique.meth_real_travau || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_technique.accord_groupe || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_technique.pouv_habil_signataire || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_technique.cautionnement_prov || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_technique.reg_com || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).prog_mobilisation || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).capacite_financiere || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).caa_moyen_ac_entre || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).capacite_tech_exp || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).meth_real_travau || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).accord_groupe || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).pouv_habil_signataire || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).cautionnement_prov || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).reg_com || "Non renseigne"}}</td>
                                     <td><button @click.prevent="supprimerOffreTechnique(detail_offre_technique.id)"  class="btn btn-danger " title="Supprimer">
-                                        <span class=""><i class="icon-trash"></i></span></button></td>
+                                        <span class=""><i class="icon-trash"></i></span></button>
+                                    </td>
                                 </tr>
 
 
@@ -2956,7 +2956,7 @@
                 <div class="widget-box">
                     <table class="table table-bordered table-striped">
                         <tr>
-                            <td>
+                       <!--     <td>
  <div class="control-group">
                             <label>Liste lot</label>
                             <div class="controls">
@@ -2966,6 +2966,17 @@
                                 </select>
                             </div>
                         </div>
+                            </td>-->
+                            <td>
+                                <div class="control-group">
+                                    <label>Offre</label>
+                                    <div class="controls">
+                                        <select v-model="formLot.appel_offre_id" class="span" disabled>
+                                            <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
+                                                    :value="varText.id">{{varText.ref_appel}}</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </td>
                             <td>
                                   <div class="control-group">
@@ -3313,7 +3324,155 @@
             <!--<a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>-->
             <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
     </div>
-        <!--Fin dossier candidature ajouterMantater-->
+
+    <div id="modificationOffreT" class="modal hide tailleModalOffre2">
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button">×</button>
+            <h3>Modification d'offre technique</h3>
+        </div>
+        <div class="modal-body">
+            <div class="widget-box">
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <!--     <td>
+  <div class="control-group">
+                             <label>Liste lot</label>
+                             <div class="controls">
+                                 <select v-model="formOffreTechnique.numero_lot" class="span">
+                                     <option v-for="varText in listeLots(marcheid)" :key="varText.numero_lot"
+                                             :value="varText.id">{{varText.numero_lot}}-{{varText.libelle_lot}}</option>
+                                 </select>
+                             </div>
+                         </div>
+                             </td>-->
+                        <td>
+                            <div class="control-group">
+                                <label>Offre</label>
+                                <div class="controls">
+                                    <select v-model="formLot.appel_offre_id" class="span" disabled>
+                                        <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
+                                                :value="varText.id">{{varText.ref_appel}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Accord groupe :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Accord groupe" v-model="edit_offre_technique_recupere.accord_groupe">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Cautionnement prov :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Cautionnement prov" v-model="edit_offre_technique_recupere.cautionnement_prov">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Attest banc:</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Pouv habil" v-model="edit_offre_technique_recupere.attest_banc">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Formil propo tech :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Piece Admin" v-model="edit_offre_technique_recupere.formil_propo_tech">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Fiche rsgnt nombre groupe :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Attest banc" v-model="edit_offre_technique_recupere.fiche_rsgnt_mbre_groupe">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+
+                            <div class="control-group">
+                                <label class="control-label">Atcdent marche non exe :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Org travau" v-model="edit_offre_technique_recupere.atcdent_marche_non_exe">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Org travau site :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Meth real travau" v-model="edit_offre_technique_recupere.org_travau_site">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Meth real travau:</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Prog mobilisation" v-model="edit_offre_technique_recupere.meth_real_travau">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Prog mobilisation :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Prog mobilisation" v-model="edit_offre_technique_recupere.prog_mobilisation">
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Capacite financiere :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Capacite financiere" v-model="edit_offre_technique_recupere.capacite_financiere">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">CAA moyen ac entre :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Caa moyen ac" v-model="edit_offre_technique_recupere.caa_moyen_ac_entre">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Capacite techn expe :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Capacite techn exp" v-model="edit_offre_technique_recupere.capacite_techn_exp">
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button @click.prevent="editeOffreT" class="btn btn-primary">Modification</button>
+            <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+    </div>
+
+
+    <!--Fin dossier candidature ajouterMantater-->
 
            <!--Lettre d'invitation-->
         <div id="ajouterLettreInvitation" class="modal hide">
@@ -5167,7 +5326,7 @@ formPv:{
                     role:"",
                     cojo_id:"",
                 },
-                // detail_marche:{},
+                edit_offre_technique_recupere:"",
                 formLettre: {
                     appel_offre_id:"",
                     objet_lettre:"",
@@ -5283,33 +5442,6 @@ getDateFinExécutionValue(){
 },
 
 
-// modifier le calcul lors de la modificatin
-// nombreModifDejourCalcule(){
-
-//               let vM=this;
-//     const acteEdit = vM.editActeEffetFinancier
-//     if(acteEdit.date_odre_service == acteEdit.date_fin_exe &&  acteEdit.date_fin_exe !=="" && acteEdit.date_odre_service !=="") return 1
-//      if(acteEdit.date_fin_exe =="" && acteEdit.date_odre_service =="") return null
-
-//        var dateF = new Date(acteEdit.date_fin_exe).getTime()
-//         var dateO = new Date(acteEdit.date_odre_service).getTime()
-//            var resultat = dateF - dateO
-
-//              var diffJour =  resultat / (1000 * 3600 * 24)
-
-//                if(isNaN(diffJour)) return null
-
-//                if(parseFloat(diffJour) < 0 ) return "durée invalide"
-//     vM.editActeEffetFinancier.duree=diffJour
-//                   return  diffJour;
-
-
-// },
-
-// getDateFinExécutionModifValue(){
-//     return !this.editActeEffetFinancier.date_odre_service !=""
-// },
-
 
 
 
@@ -5346,10 +5478,7 @@ return this.formAnalyseDMP.avis_bail == "1";
         return null
     },
 
-// afficher le moti de demande ano
-//  motifDemandeAno(){
-//      return this.formDemande.avis_ano == 1
-//  },
+
 
 
       afficherIdMarche() {
@@ -5538,10 +5667,7 @@ montantHT() {
 
             },
 
-            // afficher le champ motif dynanmique
-// afficherMotifAnalyse(){
-//     return this.formAnalyseDossier.decision  =="1"
-// },
+
 
             listeLots(){
                 return  marche_id=>{
@@ -5784,6 +5910,13 @@ montantHT() {
                         return this.getterOffreFinanciers.find(item=>item.id==idoffrefine)
                     }
                 }
+            },
+            listeOffreTechnique(){
+                return idoffre => {
+                    if (idoffre != "") {
+                        return this.gettersOffreTechniques.find(item=>item.id==idoffre)
+                    }
+                }
             }
 
 
@@ -5854,7 +5987,7 @@ ajouterStockLocal(){
 
     onFichierChange(e){
       this.formLettre.fichier_joint = e.target.files[0]
-     // console.log(onFichierChange);
+     // console.log(onFichierChange); edit_offre_technique_recupere
     },
             afficheModificationOffreFinancier(index){
                 this.$('#modificationOffre').modal({
@@ -5879,6 +6012,14 @@ ajouterStockLocal(){
                 console.log(this.modification_offre_finnancier_recupere)
             },
 
+            afficheModificationOffreTechnique(index){
+                this.$('#modificationOffreT').modal({
+                    backdrop: "static",
+                    keyboard:false
+                })
+                console.log(index)
+            this.edit_offre_technique_recupere=index;
+            },
             afficheModaleMembreCojo(index){
                 this.$('#modification_membre_cojo').modal({
                     backdrop: "static",
@@ -6076,6 +6217,11 @@ modifierFactureLocal(){
                         dossier_candidat_id:"",
                 }
             },
+            editeOffreT(){
+
+                this.modifierOffreTechnique(this.edit_offre_technique_recupere)
+                this.$('#modificationOffreT').modal('hide');
+            },
             ajouterOffreF(){
 
 
@@ -6088,7 +6234,7 @@ modifierFactureLocal(){
           designation:"",
           dossier_candidat_id : this.edite_offre_financiere.id
        };
-                // console.log(this.edite_offre_financiere.id)
+                // console.log(this.edite_offre_financiere.id) editeOffreT
                 // this.formOffreFinanciere.dossier_candidat_id=this.edite_offre_financiere.id
                 this.ajouterOffreFinancier(nouvelObjet)
                 this.formOffreFinanciere={
@@ -6107,17 +6253,6 @@ modifierFactureLocal(){
                 this.modification_offre_finnancier_recupere.taux=this.affcherTauxEnCourse
                 this.modification_offre_finnancier_recupere.tva=this.affcherTauxEnCours
 
-                /*var nouvelObjet = {
-                    ...this.modification_offre_finnancier_recupere,
-                    montant_total_ht :this.montantHTEdite,
-                    montant_total_ttc :this.montantHTtEdite,
-                    taux :this.affcherTauxEnCours,
-                    tva :this.montantTvaEdite,
-                    designation:"",
-                   // dossier_candidat_id : this.edite_offre_financiere.id
-                };*/
-                // console.log(this.edite_offre_financiere.id)
-                // this.formOffreFinanciere.dossier_candidat_id=this.edite_offre_financiere.id
                 this.modifierOffreFinancier(this.modification_offre_finnancier_recupere)
                 this.$('#modificationOffre').modal('hide');
             },
