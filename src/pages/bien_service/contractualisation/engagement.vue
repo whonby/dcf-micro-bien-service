@@ -7519,7 +7519,8 @@ type_procedure_id:"",
 type_engagement_id:"",
 val:0
       },
-formData1:{
+
+formData1= {
 total:0,
 total2:0,
 total3:0,
@@ -7529,10 +7530,86 @@ total6:0,
 total7:0,
 total8:0,
 total9:0,
-total10:0
+total10:0,
+       
+numero_facture:"",
+        objet_facture:"",
+       
+      
+        
+        typfacture_id:"",
+           prix_propose_ht:"",
+        prix_propose_ttc:"",
+         date_facture:"",
+         ua:"",
+           tva:"",
+           taux:"",
 
+            designation:"",
 
+ prix_unitaire:"",
+         quantite:"",
+           montantHT1:"",
+           designation2:"",
+            prix_unitaire2:"",
+             quantite2:"",
+         montantHT2:"",
+           designation3:"",
+           prix_unitaire3:"",
+            quantite3:"",
+             montantHT3:"",
+
+ designation4:"",
+           prix_unitaire4:"",
+            quantite4:"",
+             montantHT4:"",
+              designation5:"",
+           prix_unitaire5:"",
+            quantite5:"",
+             montantHT5:"",
+              designation6:"",
+           prix_unitaire6:"",
+            quantite6:"",
+             montantHT6:"",
+              designation7:"",
+           prix_unitaire7:"",
+            quantite7:"",
+             montantHT7:"",
+              designation8:"",
+           prix_unitaire8:"",
+            quantite8:"",
+             montantHT8:"",
+              designation9:"",
+           prix_unitaire9:"",
+            quantite9:"",
+             montantHT9:"",
+
+ designation10:"",
+           prix_unitaire10:"",
+            quantite10:"",
+             montantHT10:"",
+ fournisseur_id:"",
+ exonere:"",
+       
+
+        
+      
 },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
               popupState2: false,
