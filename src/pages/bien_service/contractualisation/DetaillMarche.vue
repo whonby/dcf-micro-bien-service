@@ -4656,19 +4656,19 @@
 <script>
     import { mapGetters, mapActions } from "vuex";
     import moment from 'moment';
-    import bailleurAjouter from '../dossierComponent/bailleurAjouter'
+    // import bailleurAjouter from '../dossierComponent/bailleurAjouter'
     //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
-    import {  ModelListSelect } from 'vue-search-select'
+    // import {  ModelListSelect } from 'vue-search-select'
     import 'vue-search-select/dist/VueSearchSelect.css'
 import { formatageSomme } from "../../../../src/Repositories/Repository";
     export default {
         name: 'compte',
-        components:{
-            bailleurAjouter,
+        // components:{
+        //     bailleurAjouter,
             
-            ModelListSelect,
+        //     ModelListSelect,
 
-        },
+        // },
         data() {
             return {
                 fabActions: [
