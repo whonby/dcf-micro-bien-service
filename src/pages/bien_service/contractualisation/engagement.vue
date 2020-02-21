@@ -2621,7 +2621,7 @@ Ajouter Engagement
          <li class="bg_lo">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-success">{{ratioAvenantMarche}}%</span> RATIO AVENENT/MARCHE
+            <span class="label label-success">{{ratioAvenantMarche}}%</span> RATIO AVENANT/MARCHE
           </a>
         </li>
       
@@ -2880,7 +2880,7 @@ Ajouter Engagement
                      <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{type.objet_avenant || 'Non renseigné'}}</td>
-                    <td
+                    <td style="text-align: center"
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{formatageSomme(parseFloat(type.montant_avenant)) || 0}}</td>
                     <td
@@ -2895,6 +2895,15 @@ Ajouter Engagement
                         </span>
                       </button>
                     </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    
+                      <td style="font-weight:bold;">Total Avenant</td>
+                    <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(montantAvenantParMarche(this.detail_marche.id)))}}</td>
+                    <td></td>
                   </tr>
                                     </tbody>
                                 </table>
@@ -3003,6 +3012,8 @@ Ajouter Engagement
                       </button>
                     </td>
                   </tr>
+
+                  
                                     </tbody>
                                 </table>
                            
@@ -7721,6 +7732,16 @@ created() {
         }
       };
     },
+    montantAvenantParMarche: function () {
+                return id => {
+                    if (id != "") {
+                      let valInite=0;
+                        return  this.avenants.filter(normeEquipe => normeEquipe.marche_id == this.detail_marche.id).reduce(function(total,currentVal){
+                           return total + parseFloat(currentVal.montant_avenant)
+                        },valInite);
+                    }
+                }
+            },
 montantFactureParMarche: function () {
                 return id => {
                     if (id != "") {

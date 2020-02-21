@@ -950,7 +950,7 @@ json_fields: {
       "besoinEquipement",
       "type_Unite_admins",
       "getPersoListeDesNorme",
-      "besoinEquipement"
+      
     ]),
     ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
