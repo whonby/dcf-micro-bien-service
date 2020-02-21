@@ -44,7 +44,7 @@ Ajouter bailleur
 
                         
 
-                        <bailleur-ajouter :macheid="detail_marche.exo_id"></bailleur-ajouter>
+                       
 
                     </div>
                 </div>
@@ -75,175 +75,21 @@ Ajouter bailleur
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
                                     <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
-                                <h4>Liste des bailleurs du marché</h4>
-
-                                <table class="table table-bordered table-striped" v-if="marcheid">
-                                    <thead>
-                                    <tr>
-                                        <th>Bailleur</th>
-                                        <th>Type finanncement</th>
-                                        <th>Montant</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr class="odd gradeX" v-for="appelOffre in listeBailleurMarche(marcheid)"
-                                        :key="appelOffre.id">
-                                        <td @dblclick="editeMarcheBailleur(appelOffre.id)">
-                                            {{appelOffre.bailleur.libelle || 'Non renseigné'}}</td>
-                                        <td @dblclick="editeMarcheBailleur(appelOffre.id)">
-                                            {{appelOffre.typeFinnancement.libelle || 'Non renseigné'}}</td>
-                                        <td @dblclick="editeMarcheBailleur(appelOffre.id)">
-                                            {{appelOffre.montant || 'Non renseigné'}}</td>
-                                        <div class="btn-group">
-                                            <button @click.prevent="supprimerMarcheBailleur(appelOffre.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash"></i></span></button>
-                                        </div>
-
-                                    </tr>
-                                    </tbody>
-                                </table>
-
-
-                                <div id="addBailleurMarche" class="modal hide" aria-hidden="true" style="display: none;">
-                                    <div class="modal-header">
-                                        <button data-dismiss="modal" class="close" type="button">×</button>
-                                        <h3>Ajouter bailleur </h3>
-                                    </div>
-                                    <div class="modal-body">
-
-                                        <form action="#" method="get" v-if="marcheid">
-                                            <label>Bailleur</label>
-                                            <div class="controls">
-                                                <select v-model="formBailleur.bailleur_id" class="span" >
-                                                    <option v-for="varText in sources_financements" :key="varText.id"
-                                                            :value="varText.id">{{varText.libelle}}</option>
-                                                </select>
-                                            </div>
-                                            <label>Type finnancement <code>*</code> </label>
-                                            <div class="controls">
-
-                                                <select v-model="formBailleur.type_finnancement_id" class="span">
-                                                    <option v-for="varText in types_financements" :key="varText.id"
-                                                            :value="varText.id">{{varText.libelle}}</option>
-                                                </select>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label">Montant <code>*</code> :</label>
-                                                <div class="controls">
-                                                    <input type="text" class="span5" placeholder="Libelle lot" v-model="formBailleur.montant">
-                                                </div>
-                                                <div class="controls" v-if="detail_marche">
-                                                    <code>Reste bailleur : {{parseFloat(detail_marche.montant_marche)-montantBailleurMarcheCompare(marcheid)}}</code>
-                                                    <code v-if="montantBailleurMarcheCompare(marcheid)>=parseFloat(detail_marche.montant_marche)">
-                                                        Le montant total des bailleurs ne toi etre supperier au montant du marche
-                                                    </code>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <div class="modal-footer" v-if="detail_marche">
-                                            <button @click.prevent="ajouterBailleur" class="btn btn-primary" v-if="montantBailleurMarcheCompare(marcheid)<=parseFloat(detail_marche.montant_marche)">Valider</button>
-                                            <button data-dismiss="modal" class="btn" href="#">Fermer</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div id="editBailleuMarche" class="modal hide" aria-hidden="true" style="display: none;">
-                                    <div class="modal-header">
-                                        <button data-dismiss="modal" class="close" type="button">×</button>
-                                        <h3>Modification </h3>
-                                    </div>
-                                    <div class="modal-body">
-
-                                        <form action="#" method="get" v-if="marcheid">
-                                            <label>Bailleur</label>
-                                            <div class="controls">
-                                                <select v-model="edit_bailleur_marche.bailleur_id" class="span" >
-                                                    <option v-for="varText in sources_financements" :key="varText.id"
-                                                            :value="varText.id">{{varText.libelle}}</option>
-                                                </select>
-                                            </div>
-                                            <label>Type finnancement <code>*</code> </label>
-                                            <div class="controls">
-
-                                                <select v-model="edit_bailleur_marche.type_finnancement_id" class="span">
-                                                    <option v-for="varText in types_financements" :key="varText.id"
-                                                            :value="varText.id">{{varText.libelle}}</option>
-                                                </select>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label">Montant <code>*</code> :</label>
-                                                <div class="controls">
-                                                    <input type="text" class="span5" placeholder="Libelle lot" v-model="edit_bailleur_marche.montant">
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <div class="modal-footer">
-                                            <button @click.prevent="modificationBailleurMarche" class="btn btn-primary">Modification</button>
-                                            <button data-dismiss="modal" class="btn" href="#">Fermer</button>
-                                        </div>
-                                    </div>
-                                </div>
-
+                               
+                                <bailleur-ajouter :macheid="detail_marche.id"></bailleur-ajouter>
                             </div>
+
+
                             <div id="tab1" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
                                     <a href="#myAlert" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
-                                   <h4>Liste des offres</h4>
-                                <table class="table table-bordered table-striped" v-if="marcheid">
-                                    <thead>
-                                    <tr>
+                                   
 
-                                        <th>Reference appel</th>
-                                        <th> Type procedure</th>
-
-                                        <!-- <th>Financement</th>
-                                        <th>Nom bailleur</th> -->
-                                        <th>Date emmission</th>
-                                        <th>Date limite</th>
-                                        <th>Objet appel</th>
-                                        <th>Imputation</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr class="odd gradeX" v-for="appelOffre in listeAppelOffre(marcheid)"
-                                        :key="appelOffre.id">
-                                        <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)">
-                                            {{appelOffre.ref_appel || 'Non renseigné'}}</td>
-                                        <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)">
-                                            {{appelOffre.type_appel || 'Non renseigné'}}</td>
-
-                                        <!-- <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{appelOffre.financement || 'Non renseigné'}}</td> -->
-
-                                        <!-- <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{appelOffre.nom_bailleurs || 'Non renseigné'}}</td> -->
-                                        <td @dblclick="afficherModalModifierActeDepense(index)">
-
-                                        <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)">
-
-                                            {{formaterDate(appelOffre.date_emission) || 'Non renseigné'}}</td>
-                                        <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)">
-                                            {{formaterDate(appelOffre.date_limite) || 'Non renseigné'}}</td>
-                                        <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)">
-                                            {{appelOffre.objet_appel || 'Non renseigné'}}</td>
-                                        <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)">
-                                            {{appelOffre.imputation || 'Non renseigné'}}</td>
-                                            <td>
-                                        <div class="btn-group">
-                                            <button @click.prevent="supprimerAppelOffre(appelOffre.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash"></i></span></button>
-
-                                        </div>
-                                        </td>
-
-                                    </tr>
-                                    </tbody>
-                                </table>
+                               <component-offre :macheid="detail_marche.id"></component-offre>
                             </div>
+
 
                             <div id="tab2" class="tab-pane">
                                 <div class="widget-box">
@@ -251,11 +97,11 @@ Ajouter bailleur
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                                        <h5>Liste des Lots</h5>
-                                        <div align="right">
+                                        
+                                        <!-- <div align="right">
                                             Search:
                                             <input type="search" placeholder v-model="search" />
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="widget-content nopadding">
                                         <div class="span4"></div>
@@ -263,40 +109,9 @@ Ajouter bailleur
                                         <div class="span4" align="right">
                                             <a href="#addLot" data-toggle="modal"
                                                                             class="btn btn-info">Ajouter lot</a></div>
-                                        <table class="table table-bordered table-striped" v-if="marcheid">
-                                            <thead>
-                                            <tr>
-                                                <th>Numero lot </th>
-                                                <th>Libellé</th>
-                                                <th>Montant</th>
-                                                <th>Offre</th>
-                                                <th>Action</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr class="odd gradeX" v-for="(lot_marche, index) in listeLots(marcheid)"
-                                                :key="lot_marche.id">
-                                                <td @dblclick="afficherModaleModifier(index)">
-                                                    {{lot_marche.numero_lot || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModaleModifier(index)">
-                                                    {{lot_marche.libelle_lot || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModaleModifier(index)">
-                                                    {{lot_marche.montant_lot || 'Non renseigné'}}</td>
-                                             
-                                                <td @dblclick="afficherModaleModifier(index)">
-                                                    {{lot_marche.appel_offre.ref_appel || 'Non renseigné'}}
-                                                </td>
+                                        <add-lot :macheid="detail_marche.id"></add-lot>    
 
-                                                <div class="btn-group">
-                                                    <button @click.prevent="supprimerLot(lot_marche.id)"  class="btn btn-danger ">
-                                                        <span class=""><i class="icon-trash"></i></span></button>
-
-                                                </div>
-
-                                            </tr>
-                                            </tbody>
-                                        </table>
-
+                               
                                     </div>
                                 </div>
                             </div>
@@ -1163,48 +978,7 @@ Ajouter bailleur
 
 </div>
        <h4> Liste des lettres invitations</h4>
-                <table class="table table-bordered table-striped" v-if="marcheid">
-                    <thead>
-                    <tr>
-
-                        <th>Date lettre</th>
-                        <th>Ref lettre </th>
-                        <th>Destinataire</th>
-                        <th>Objet de la lettre</th>
-                        <th>Fichier</th>
-                        <th>Date cojo</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="odd gradeX" v-for="appelOffre in lettreInvitationAMarche(marcheid)"
-                        :key="appelOffre.id">
-                        <td @click="afficheBouttonTechFinInvitation(appelOffre.id)">
-                           {{formaterDate(appelOffre.date_lettre) || 'Non renseigné'}}</td>
-                        <td @click="afficheBouttonTechFinInvitation(appelOffre.id)">
-                            {{appelOffre.ref_lettre || 'Non renseigné'}}</td>
-                        <td @click="afficheBouttonTechFinInvitation(appelOffre.id)">
-                            {{appelOffre.destination || 'Non renseigné'}}</td>
-
-                         <td @click="afficheBouttonTechFinInvitation(appelOffre.id)">
-                            {{appelOffre.objet_lettre || 'Non renseigné'}}</td>
-                        <td>
-                            <a v-if="appelOffre.fichier" :href="appelOffre.fichier" class="btn btn-default" target="_blank">
-                                <span class=""><i class="icon-book"></i>
-                                </span>
-                            </a>
-                        </td>
-                        <td @click="afficheBouttonTechFinInvitation(appelOffre.id)">
-                            {{formaterDate(appelOffre.date_cojo )|| 'Non renseigné'}}
-                        </td>
-                        <div class="btn-group">
-                            <button @click.prevent="supprimerLettreInvitation(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                                <span class=""><i class="icon-trash"></i></span></button>
-                        </div>
-
-                    </tr>
-                    </tbody>
-                </table>
+              <component-lettreInvitation :macheid="detail_marche.id"></component-lettreInvitation>
             </div>
 
             <div id="tab31" class="tab-pane">
@@ -1216,7 +990,7 @@ Ajouter bailleur
                     </div>
 
                 </div>
-                <h4> liste des mandates</h4>
+                <!-- <h4> liste des mandates</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
@@ -1247,95 +1021,16 @@ Ajouter bailleur
 
                     </tr>
                     </tbody>
-                </table>
+                </table> -->
+                <component-mandate :macheid="detail_marche.id"></component-mandate>
 
               </div>
 
               <div id="tab22" class="tab-pane">
-                  <div align="right">
-                      <div class="widget-content">
-
-                          <a href="#ajouterCojo" data-toggle="modal" class="btn btn-warning" >Ajouter </a>
-
-                      </div>
-
-                  </div>
-                  <h4> Infomation sur la cojo</h4>
-                  <table class="table table-bordered table-striped" v-if="marcheid">
-                      <thead>
-                      <tr>
-                          <th>Date Composition</th>
-                          <th>Date invitation</th>
-                          <th>Numero dossier Appel Offre</th>
-                          <th>Nmbr particiapnt</th>
-                          <th>Action</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr class="odd gradeX" v-for="(appelOffre, index) in listeCojo(marcheid)"
-                          :key="appelOffre.id">
-                          <!--<td listeMembreCojo @click="afficheBouttonTechCojo(index)">
-                              {{appelOffre.controleur_finnancier || 'Non renseigné'}}</td>
-                          <td @click="afficheBouttonTechCojo(index)">
-                              {{appelOffre.dmp || 'Non renseigné'}}</td>
-                          <td @click="afficheBouttonTechCojo(index)">
-                              {{appelOffre.autorite_contractante || 'Non renseigné'}}</td>-->
-                          <td @click="afficheBouttonTechCojo(index)">
-                              {{formaterDate(appelOffre.date_composition) || 'Non renseigné'}}
-                          </td>
-                          <td @click="afficheBouttonTechCojo(index)">
-                              {{formaterDate(appelOffre.date_invitation) || 'Non renseigné'}}</td>
-                          <td @click="afficheBouttonTechCojo(index)">
-                              {{appelOffre.num_dossier_appel_offre || 'Non renseigné'}}</td>
-                          <td @click="afficheBouttonTechCojo(index)">
-                              {{appelOffre.nbr_participant || 'Non renseigné'}}</td>
-
-                          <td @click="afficheBouttonTechCojo(index)">
-                              {{appelOffre.lettre_invitation.ref_lettre || 'Non renseigné'}}</td>
-                          <div class="btn-group">
-                              <button @click.prevent="supprimerCojo(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                                  <span class=""><i class="icon-trash"></i></span></button>
-
-                          </div>
-
-                      </tr>
-                      </tbody>
-                  </table>
-                  <div class="">
-                      <div class="span9" >
-                         <h4>Liste des membres de la cojo</h4>
-                      </div>
-                      <div class="span3" align="right">
-                          <a href="#ajouter_membre_cojo" data-toggle="modal" class="btn btn-warning" >Ajouter un autre membre </a>
-                      </div>
-                      <table class="table table-bordered table-striped" v-if="marcheid">
-                          <thead>
-                          <tr>
-                              <th>Matricule</th>
-                              <th>Nom et prenom</th>
-                              <th>Role</th>
-                              <th>Action</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                          <tr class="odd gradeX" v-for="appelOffre in listeMembreCojo"
-                              :key="appelOffre.id">
-                              <td @click="afficheModaleMembreCojo(appelOffre.id)">
-                                  {{appelOffre.matricule|| 'Non renseigné'}}
-                              </td>
-                              <td @click="afficheModaleMembreCojo(appelOffre.id)">
-                                  {{appelOffre.nom_prenom || 'Non renseigné'}}</td>
-                              <td @click="afficheModaleMembreCojo(appelOffre.id)">
-                                  {{appelOffre.role || 'Non renseigné'}}</td>
-                              <div class="btn-group">
-                                  <button @click.prevent="supprimerMembreCojo(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
-                                      <span class=""><i class="icon-trash"></i></span></button>
-                              </div>
-
-                          </tr>
-                          </tbody>
-                      </table>
-                  </div>
+                  
+                 
+                  <component-ouverture :macheid="detail_marche.id"></component-ouverture>
+                  <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>
             </div>
 
 
@@ -2574,84 +2269,7 @@ Ajouter bailleur
             </div>
         </div>
 
-<!-- Ajouter appel offres --->
-        <div id="myAlert" class="modal hide tlg" aria-hidden="true" style="display: none;">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter  offre</h3>
-            </div>
-            
-            <div class="modal-body">
-                <div class="widget-box">
-                    <form action="#" method="get">
-                        <table class="table table-bordered table-striped" >
-                            <tr>
-                            <td>
-                        <div class="control-group">
-                            <label class="control-label">Type de procedure <code>*</code> :</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Type appel" v-model="formData.type_appel" disabled>
-                            </div>
-                        </div>
-                            </td>
 
-                            <td colspan="2" width="250">
-                        <div class="control-group">
-                            <label class="control-label">Reference  offre <code>*</code> :</label>
-                            <div class="controls">
-                                <input type="text" class="span5" placeholder="Reference d'appel" v-model="formData.ref_appel">
-                            </div>
-                        </div>
-                            </td>
-                            </tr>
-
-                            <tr>
-                            <td colspan="3" width="">
-                        <div class="control-group">
-                            <label class="control-label">Objet  offre :</label>
-                            <div class="controls">
-                                 <textarea  v-model="formData.objet_appel"  class="textarea_editor span8" rows="3" placeholder="Entre le  text ..."></textarea>
-                    
-                            </div>
-                        </div>
-                            </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Date emission <code>*</code></label>
-                                <input type="date" class="span" placeholder="Date emision" v-model="formData.date_emission">
-                            </div>
-                        </div>
-                                </td>
-                                <td>
-
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Date limite <code>*</code></label>
-                                <input type="date" class="span" placeholder="Date limite" v-model="formData.date_limite" :min="formData.date_emission">
-                            </div>
-                        </div>
-                        </td>
-                        <td >
-
-                        <div class="control-group">
-                            <label class="control-label">Imputation :</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Imputation" v-model="formData.imputation" disabled>
-                            </div>
-                        </div>
-                        </td>
-                        </tr>
-                        </table>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">  <a @click.prevent="ajouter" class="btn btn-primary"
-                                           href="#">Valider</a> <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
-        </div>
 
         <!-- Fin ajouter appel offres --->
 
@@ -2660,295 +2278,17 @@ Ajouter bailleur
         <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
         <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterActeDepense()">Open</button>
 
-        <!-- Modification appel offres --->
-
-        <div id="modificationModal" class="modal hide taillemodal">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification  offre</h3>
-            </div>
-            <div class="modal-body">
-                <div class="widget-box">
-                    <form action="#" method="get">
-                 <table class="table table-bordered table-striped" > 
-
-                    <tr>
-
-                       <td>
-                        <div class="control-group">
-                            <label class="control-label">Type de procedure  :</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="" v-model="edite_appel_offre.type_appel">
-                            </div>
-                        </div>
-                            </td>
-
-                                <td colspan="2" width="250">
-                        <div class="control-group">
-                            <label class="control-label">Reference  offre  :</label>
-                            <div class="controls">
-                                <input type="text" class="span5" placeholder="Reference d'appel" v-model="edite_appel_offre.ref_appel">
-                            </div>
-                        </div>
-                            </td>
-                    </tr>
-
-
-                                   <tr>
-                            <td colspan="3" width="">
-                        <div class="control-group">
-                            <label class="control-label">Objet  offre :</label>
-                            <div class="controls">
-                                 <textarea   v-model="edite_appel_offre.objet_appel"  class="textarea_editor span7" rows="3" placeholder="Entre le  text ..."></textarea>
-                    
-                            </div>
-                        </div>
-                            </td>
-                            </tr>
-
-                            <tr>
-                             <td>
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Date emission </label>
-                                <input type="date" class="span" placeholder="Date emision" v-model="edite_appel_offre.date_emission">
-                            </div>
-                        </div>
-                                </td>
-
-
-                                 <td colspan="">
-
-                                 <td >
-
-
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Date limite </label>
-                                <input type="date" class="span" placeholder="Date limite" v-model="edite_appel_offre.date_limite">
-                            </div>
-                        </div>
-                        </td>
-
-                         <td>
-                        
-                        <div class="control-group">
-                            <label>Imputation</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Imputation" v-model="edite_appel_offre.imputation">
-                            </div>
-                        </div>
-         </td>
-
-                               
-
-                            </tr>
-
-                            
-<!-- 
-<tr>
-
-
-          <td>
-
       
-
-              
-                        <div class="control-group">
-                             <label>Financement</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Financement" v-model="edite_appel_offre.financement">
-                            </div>
-                        </div>
-         </td>
-         <td>
-                        <div class="control-group">
-                          <label>Nom bailleur</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Nom bailleurs" v-model="edite_appel_offre.nom_bailleurs">
-                            </div>
-                        </div>
-
-         </td> 
-         
-        
-
-
-         
-         
-
-
-                            </tr> -->
-
-
-                 </table>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <a class="btn btn-primary" @click.prevent="modfications()">Modifier</a>
-                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-            </div>
-        </div>
         
 
         
 
         <!--Gestion de Lot-->
 
-        <div id="addLot" class="modal hide" aria-hidden="true" style="display: none;">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter lot </h3>
-            </div>
-            <div class="modal-body">
-                <div class="widget-box">
-                    <form action="#" method="get" v-if="marcheid">
-
-                 <table class="table table-bordered table-striped"> 
-                     <tr>
-                         <td>
-                        <div class="control-group">
-                        <label>Offre</label>
-                        <div class="controls">
-                            <select v-model="formLot.appel_offre_id" class="span" disabled>
-                                <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
-                                        :value="varText.id">{{varText.ref_appel}}</option>
-                            </select>
-                        </div>
-                        </div>
-                         </td>
-
-                         <td>
-
-                         <div class="control-group">
-            
-                            <label class="control-label">Numero lot <code>*</code> :</label>
-                           <div class="control-group">
-                       <input type="text" class="span" placeholder="Numero lo" v-model="formLot.numero_lot">
-                            </div>
-                        </div>
-
-                         
-                         </td>
-                     </tr>
-                     <tr>
-                         
-                         <td colspan="2">
-
-                        <div class="control-group">
-
-                            <label class="control-label">Libellé lot <code>*</code> :</label>
-
-                            <div class="controls">
-                                <input type="text" class="span5" row="2" placeholder="Libellé lot"  v-model="formLot.libelle_lot">
-                            </div>
-                        </div>
-                         </td>
-                     </tr>
-                     <tr>
-                         <td colspan="3">
-                        <div class="control-group">
-
-                        
-                            <label class="control-label">Montant lot <code>*</code> :</label>
-
-                            <div class="controls">
-                                <input type="text" class="span5" placeholder="Montant lot" v-model="formLot.montant_lot">
-                            </div>
-                        </div>
-                         </td>
-                     </tr>
-                 </table>
-
-                        
-                       
-
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <a class="btn btn-primary" @click.prevent="ajouterL()">Ajouter</a>
-                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
-            </div>
-        </div>
+      
         <!--Fin gestion de lot-->
 
-        <div id="modificationModal1" class="modal hide taillemodal">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification de lot</h3>
-            </div>
-            <div class="modal-body">
-                <div class="widget-box">
-                    <form action="#" method="get">
-
-                     <table class="table table-bordered table-striped"> 
-
-                         <tr>
-                         
-
-                       <td>
-                        <div class="control-group">
-                        <label>Offre</label>
-                        <div class="controls">
-                            <select v-model="edite_lot.appel_offre_id" class="span" disabled>
-                                <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
-                                        :value="varText.id">{{varText.ref_appel}}</option>
-                            </select>
-                        </div>
-                        </div>
-                         </td>
-
-
-
-                            <td>
-                        <div class="control-group">
-                            <label class="control-label">Numero lot :</label>
-                            <div class="controls">
-                                <input type="text" class="span5" placeholder="Numero lo" v-model="edite_lot.numero_lot">
-                            </div>
-                        </div>
-                            </td>
-                         </tr>
-                         <tr>
-                             <td colspan="2">
-                        <div class="control-group">
-                            <label class="control-label">Libellé lot :</label>
-                            <div class="controls">
-                                <input type="text" class="span5" placeholder="Libellé lot" v-model="edite_lot.libelle_lot">
-                            </div>
-                        </div>
-                             </td>
-                         </tr>
-                         <tr>
-                             <td colspan="3">
-                        <div class="control-group">
-                            <label class="control-label">Montant lot :</label>
-                            <div class="controls">
-                                <input type="text" class="span5" placeholder="Montant lot" v-model="edite_lot.montant_lot">
-                            </div>
-                        </div>
-                             </td>
-                         </tr>
-                     </table>
-                        
-                        <!-- <label>Mode de passation</label>
-                        <div class="controls">
-                            <select v-model="edite_lot.mode_passation_id" class="span">
-                                <option v-for="varText in modePassations" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle}}</option>
-                            </select>
-                        </div> -->
-
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <a class="btn btn-primary" @click.prevent="modficationsLot()">Modifier</a>
-                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-            </div>
-        </div>
+      
 
 
         <!--contratualisation-->
@@ -3195,173 +2535,7 @@ Ajouter bailleur
         <!--Fin dossier candidature ajouterMantater-->
 
            <!--Lettre d'invitation-->
-        <div id="ajouterLettreInvitation" class="modal hide">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter lettre d'invitation</h3>
-            </div>
-            <div class="modal-body">
-           
-                <form class="form-horizontal">
-                    <div class="control-group">
-                        <label class="control-label">Offre</label>
-                        <div class="controls">
-                            <select v-model="formLettre.appel_offre_id" class="span" disabled>
-                                <option v-for="plans in listeAppelOffre(marcheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.ref_appel}}</option>
-                            </select>
-                        </div>
-                    </div>
-
-
-                    <div class="control-group">
-                        <label class="control-label">Date lettre</label>
-                        <div class="controls">
-                            <input
-                                    type="date"
-                                    v-model="formLettre.date_lettre"
-                                    class="span"
-                                    placeholder="Saisir le nom_bailleur"
-                            />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Refernece lettre</label>
-                        <div class="controls">
-                            <input
-                                    type="text"
-                                    v-model="formLettre.ref_lettre"
-                                    class="span"
-                                    placeholder="Saisir l"
-                            />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Destinataire</label>
-                        <div class="controls">
-                            <input
-                                    type="text"
-                                    v-model="formLettre.destination"
-                                    class="span"
-                                    placeholder="Saisir "
-                            />
-                        </div>
-                    </div>
-
-
-                      <div class="control-group">
-          <label class="control-label">Objet de lettre:</label>
-            <div class="controls">
-              <textarea  v-model="formLettre.objet_lettre"  class=" span" rows="" placeholder="Enter text ..."></textarea>
-            </div>
-          
-        </div>
-
-
-
-                    <div class="control-group">
-                        <label class="control-label">Date cojo</label>
-                        <div class="controls">
-                            <input
-                                    type="date"
-                                    v-model="formLettre.date_cojo"
-                                    class="span"
-                                    placeholder="Saisir email bailleur"
-                            />
-                        </div>
-                    </div>
-
-                   <div class="control-group">
-                   <label class="control-label">Fichier joint:</label>
-                    <div class="controls">
-                     <input type="file"   @change="OnchangeFichier" />
-              </div>
-            </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterLettreInv()" href="#">Valider</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
-        </div>
-        <div id="modificationLettreInvitation" class="modal hide">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification lettre invitation</h3>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-
-
-                    <div class="control-group">
-                        <label class="control-label">Offre</label>
-                        <div class="controls">
-                            <select v-model="edite_lettre_invitation.appel_offre_id" class="span" disabled>
-                                <option v-for="plans in listeAppelOffre(marcheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.ref_appel}}</option>
-                            </select>
-                        </div>
-                    </div>
-
-
-                    <div class="control-group">
-                        <label class="control-label">Date lettre</label>
-                        <div class="controls">
-                            <input
-                                    type="date"
-                                    v-model="edite_lettre_invitation.date_lettre"
-                                    class="span"
-                                    placeholder="Saisir le nom_bailleur"
-                            />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Refernece lettre</label>
-                        <div class="controls">
-                            <input
-                                    type="text"
-                                    v-model="edite_lettre_invitation.ref_lettre"
-                                    class="span"
-                                    placeholder="Saisir l"
-                            />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Destination</label>
-                        <div class="controls">
-                            <input
-                                    type="text"
-                                    v-model="edite_lettre_invitation.destination"
-                                    class="span"
-                                    placeholder="Saisir "
-                            />
-                        </div>
-                    </div>
-
-
-                    <div class="control-group">
-                        <label class="control-label">Date cojo</label>
-                        <div class="controls">
-                            <input
-                                    type="date"
-                                    v-model="edite_lettre_invitation.date_cojo"
-                                    class="span"
-                                    placeholder=""
-                            />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Fichier</label>
-                        <div class="controls">
-                            <input type="file"   @change="OnchangeFichier" />
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationLettreInvitation()" href="#">Valider</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
-        </div>
+      
         <!--Fin lettre d'invitation-->
 
         <!--Mandater-->
@@ -3520,172 +2694,9 @@ Ajouter bailleur
         <!--Fin mandater-->
 
         <!--Mandater-->
-        <div id="ajouterCojo" class="modal hide">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter Cojo</h3>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-                    <div class="control-group">
-                        <label class="control-label">Numero dossier APPEL OFFRE</label>
-                        <div class="controls">
-                            <input disabled
-                                   type="text"
-                                   v-model="formDataCojo.num_dossier_appel_offre"
-                                   class="span"
-                            />
-                        </div>
-                    </div>
+      
 
-                    <div class="control-group">
-                        <label class="control-label">Lettre Invitation</label>
-                        <div class="controls">
-                            <select v-model="formDataCojo.lettre_invitation_id" class="span" disabled>
-                                <option v-for="plans in lettreInvitationAMarche(marcheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.ref_lettre}}</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Date invitation</label>
-                        <div class="controls">
-                            <input
-                                    type="date"
-                                    v-model="formDataCojo.date_invitation"
-                                    class="span"
-                                       disabled
-                            />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                          <label class="control-label">Controleur finnancier</label>
-                        <div class="controls">
-                            <input disabled
-                                    type="text"
-                                    v-model="formDataCojo.controleur_finnancier"
-                                    class="span"
-                                    placeholder="Controller Finnancier"
-                            />
-                        </div>
-                    </div>
-                   <!-- <div class="control-group">
-                        <label class="control-label">Condition</label>
-                        <div class="controls">
-                            <select v-model="formDataCojo.condition_id" class="span">
-                                <option v-for="plans in conditions" :key="plans.id"
-                                        :value="plans.id">{{plans.libelle}}</option>
-                            </select>
-                        </div>
-                    </div>-->
-
-
-                    <div class="control-group">
-                        <label class="control-label">Date composition</label>
-                        <div class="controls">
-                            <input
-                                    type="date"
-                                    v-model="formDataCojo.date_composition"
-                                    class="span"
-                 :min="formDataCojo.date_invitation"
-                            />
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="control-group">
-                        <label class="control-label">NBR participant</label>
-                        <div class="controls">
-                            <input
-                                    type="text"
-                                    v-model="formDataCojo.nbr_participant"
-                                    class="span"
-                            />
-                        </div>
-                    </div>
-
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterCojoMarche()" href="#">Valider</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
-        </div>
-
-        <div id="modificationCojo" class="modal hide">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification de cojo</h3>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-
-
-                    <div class="control-group">
-                        <label class="control-label">Numero dossier APPEL OFFRE</label>
-                        <div class="controls">
-                            <input disabled
-                                    type="text"
-                                    v-model="edite_cojo.num_dossier_appel_offre"
-                                    class="span"
-                            />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Lettre Invitation</label>
-                        <div class="controls">
-                            <select v-model="edite_cojo.lettre_invitation_id" class="span" disabled>
-                                <option v-for="plans in lettreInvitationAMarche(marcheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.ref_lettre}}</option>
-                            </select>
-                        </div>
-                    </div>
-
-
-                    <div class="control-group">
-                        <label class="control-label">Date invitation</label>
-                        <div class="controls">
-                            <input disabled
-                                   type="date"
-                                   v-model="edite_cojo.date_invitation"
-                                   class="span"
-
-                            />
-                        </div>
-                    </div>
-
-
-                    <div class="control-group">
-                        <label class="control-label">Date composition</label>
-                        <div class="controls">
-                            <input
-                                    type="date"
-                                    v-model="edite_cojo.date_composition"
-                                    class="span"
-
-                            />
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">NBR participant</label>
-                        <div class="controls">
-                            <input
-                                    type="text"
-                                    v-model="edite_cojo.nbr_participant"
-                                    class="span"
-                            />
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationCojo()" href="#">Valider</a>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
-        </div>
+       
         <!--Fin mandater-->
 
         <!--Analyse dossier-->
@@ -4505,153 +3516,11 @@ Ajouter bailleur
 
 
 
-    <div id="ajouter_membre_cojo" class="modal hide" aria-hidden="true" style="display: none;">
-        <div class="modal-header">
-            <button data-dismiss="modal" class="close" type="button">×</button>
-            <h3>Ajouter un autre membre de la cojo </h3>
-        </div>
-        <div class="modal-body">
-            <div class="widget-box">
-                <form action="#" method="get" v-if="marcheid">
-                    <table class="table table-bordered table-striped">
-                        <tr>
-                            <td>
-                                <div class="control-group">
-                                    <label>Matricule</label>
-                                    <div class="controls">
-                                        <input type="text" class="span" placeholder="Matricule " v-model="formDataMembreCojo.matricule" v-on:keyup="rechercheMembreCojo()" >
-                                        <code v-if="message_mandater">{{message_mandater}}</code>
-                                    </div>
-                                </div>
-                            </td>
+   
 
-                            <td>
-
-                                <div class="control-group">
-
-                                    <label class="control-label">Nom et prenom <code>*</code> :</label>
-                                    <div class="control-group">
-                                        <input type="text" class="span" placeholder="Numero lo" v-model="formDataMembreCojo.nom_prenom">
-
-
-                                    </div>
-                                </div>
-
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td colspan="2">
-
-                                <div class="control-group">
-
-                                    <label class="control-label span5">Role <code>*</code> :</label>
-
-                                    <div class="controls">
-                                        <select class="span4" v-model="formDataMembreCojo.role">
-                                            <option></option>
-                                            <option value="Autorité contractante">Autorité contractante</option>
-                                            <option value="DMP">Direction des marchés publique</option>
-                                            <option value="Béneficiare">Béneficiaire</option>
-                                            <option value="Rapporteur">Rapporteur</option>
-                                            <option value="Service technique">Service technique</option>
-                                            <option value="Autre">Autre</option>
-                                        </select>
-
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                    </table>
-
-
-
-
-                </form>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <a class="btn btn-primary" @click.prevent="ajouterMembreCojoM()">Ajouter</a>
-            <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
-        </div>
-    </div>
-
-    <div id="modification_membre_cojo" class="modal hide" aria-hidden="true" style="display: none;">
-        <div class="modal-header">
-            <button data-dismiss="modal" class="close" type="button">×</button>
-            <h3>modification  </h3>
-        </div>
-        <div class="modal-body">
-            <div class="widget-box">
-                <form action="#" method="get" v-if="marcheid">
-                    <table class="table table-bordered table-striped">
-                        <tr>
-                            <td>
-                                <div class="control-group">
-                                    <label>Matricule</label>
-                                    <div class="controls">
-                                        <input type="text" class="span" placeholder="Matricule " v-model="edite_membre_cojo.matricule"  >
-                                        <code v-if="message_mandater">{{message_mandater}}</code>
-                                    </div>
-                                </div>
-                            </td>
-
-                            <td>
-
-                                <div class="control-group">
-
-                                    <label class="control-label">Nom et prenom <code>*</code> :</label>
-                                    <div class="control-group">
-                                        <input type="text" class="span" placeholder="Numero lo" v-model="edite_membre_cojo.nom_prenom">
-
-
-                                    </div>
-                                </div>
-
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td colspan="2">
-
-                                <div class="control-group">
-
-                                    <label class="control-label span5">Role <code>*</code> :</label>
-
-                                    <div class="controls">
-                                        <select class="span4" v-model="edite_membre_cojo.role">
-                                            <option></option>
-                                            <option value="Controller finnancier">Controller finnancier</option>
-                                            <option value="Autorité contractante">Autorité contractante</option>
-                                            <option value="DMP">Direction des marchés publique</option>
-                                            <option value="Béneficiare">Béneficiaire</option>
-                                            <option value="Rapporteur">Rapporteur</option>
-                                            <option value="Service technique">Service technique</option>
-                                            <option value="Autre">Autre</option>
-                                        </select>
-
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                    </table>
-
-
-
-
-                </form>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <a class="btn btn-primary" @click.prevent="editeMembreCojoM()">Ajouter</a>
-            <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
-        </div>
-    </div>
 
         <!---->
-        <!--Fin contratualisation-->
+        <!--Fin contratualisation-->  
  
 </div>
 
@@ -4662,9 +3531,13 @@ Ajouter bailleur
     import moment from 'moment';
 
     //import bailleurAjouter from '../dossierComponent/bailleurAjouter';
-
-    import bailleurAjouter from '../dossierComponent/bailleurAjouter'
-
+    import addLot from '../dossierLot/addLot';
+    import componentLettreInvitation from '../contractualisation/folderComponentLettre/componentLettreInvitation'
+     import componentMandate from '../dossierComponentMandate/componentMandate';
+    import bailleurAjouter from '../dossierComponent/bailleurAjouter';
+    import componentOffre from '../contractualisation/dossierComponentOffre/componentOffre';
+    import componentOuvertureMembre from '../dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
+    import componentOuverture from '../dossierComponentOuverture/componentOuverture';
     //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
     import {  ModelListSelect } from 'vue-search-select'
     import 'vue-search-select/dist/VueSearchSelect.css'
@@ -4673,9 +3546,13 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
         name: 'compte',
         components:{
 
-        // bailleurAjouter,
-
+        componentOffre,
+        componentLettreInvitation,
+         componentMandate,
             bailleurAjouter,
+            addLot,
+            componentOuverture,
+            componentOuvertureMembre,
 
             
             ModelListSelect,
@@ -4729,13 +3606,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
                   // mode_passation_id:""
                }
                 ,
-                formBailleur:{
-                    type_finnancement_id:"",
-                    montant:0,
-                    marche_id:"",
-                    bailleur_id:"",
-
-                },
+               
                 edit_bailleur_marche:""
                ,formMandater:{
                     lettre_invitation_id:"",
@@ -5037,13 +3908,13 @@ formPv:{
                     imputation:"",
                     marche_id:"",
                 },
-                formDataMembreCojo: {
-                    matricule:"",
-                    type_appel:"",
-                    nom_prenom:"",
-                    role:"",
-                    cojo_id:"",
-                },
+                // formDataMembreCojo: {
+                //     matricule:"",
+                //     type_appel:"",
+                //     nom_prenom:"",
+                //     role:"",
+                //     cojo_id:"",
+                // },
                 // detail_marche:{},
                 formLettre: {
                     appel_offre_id:"",
@@ -5089,7 +3960,7 @@ created() {
    )
   /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
     console.log(this.appel_offre_marche)*/
-},
+},  
         computed: {
 
             ...mapGetters("bienService", [ "typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
@@ -5107,7 +3978,7 @@ created() {
                 'types_financements']) ,
                 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
-            
+        
     //            afficheRef() {
     //   return id => {
     //     if (id != null && id != "") {
@@ -5257,7 +4128,7 @@ return this.formAnalyseDMP.avis_bail == "1";
                         return  this.marches.find(idmarche => idmarche.id == marche_id
                         )
                     }
-                }
+               }
 
             },
  libelleLot() {
@@ -5269,6 +4140,8 @@ return this.formAnalyseDMP.avis_bail == "1";
       }
       return ""
     },
+
+  
 
 affcherTauxEnCours() {
       
@@ -5325,34 +4198,9 @@ montantHT() {
                 return this.formAno.avis_bail =="1";
             },
 
-            listeBailleurMarche(){
-                return  marche_id=>{
-                    if (marche_id!="") {
-                       // console.log("MarcheBailleur")
-                        return this.personnaliseGetterMarcheBailleur.filter( idmarche => idmarche.marche_id == marche_id)
-                    }
-                }
-
-
-            },
-            montantBailleurMarcheCompare(){
-                return  marche_id=>{
-                    if (marche_id!="") {
-                        let initialValue = 0;
-                        let vM=this;
-                      //  let montantSaisie=parseFloat(vM.formBailleur.montant)
-                        let ObjetMontant =this.personnaliseGetterMarcheBailleur.filter( idmarche => idmarche.marche_id == marche_id).reduce(function (total, currentValue) {
-                                 return total + parseFloat(currentValue.montant) ;
-                        }, initialValue);
-                        let montantConbiner=parseFloat(vM.formBailleur.montant) + parseFloat(ObjetMontant)
-
-                        return parseFloat(montantConbiner);
-                    }
-                }
-
-
-            }
-            ,
+            
+            
+            
             listeAppelOffre(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -5463,25 +4311,8 @@ montantHT() {
                 }
             }
             ,
-            listeCojo: function () {
-                return marcheid => {
-                    if (marcheid != "") {
-                      let Objet=  this.getterCojos.find(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid);
-                        let vM=this;
-                        if(Objet!=undefined){
-                            vM.idcojo=Objet.id
-                        }
-                        return this.getterCojos.filter(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid)
-                    }
-                }
-            },
-             listeMembreCojo: function (){
-                let vM=this;
-                if( vM.idcojo!=""){
-                    return this.getterMembreCojo.filter(idmem=>idmem.cojo_id==vM.idcojo);
-                }
-                return null;
-             },
+           
+            
         listeAnalyseDossier: function () {
             return marcheid => {
                 if (marcheid != "") {
@@ -5491,6 +4322,18 @@ montantHT() {
             }
         },
 
+  listeCojo: function () {
+                return macheid => {
+                    if (macheid != "") {
+                      let Objet=  this.getterCojos.find(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == macheid);
+                        let vM=this;
+                        if(Objet!=undefined){
+                            vM.idcojo=Objet.id
+                        }
+                        return this.getterCojos.filter(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == macheid)
+                    }
+                }
+            },
             demandeAno: function () {
                 return marcheid => {
                     if (marcheid != "") {
@@ -5624,8 +4467,7 @@ montantHT() {
                 "ajouterLot","modifierLot","supprimerLot","ajouterDossierCandidat","getDossierCandidat",
                 "modifierDossierCandidat","supprimerDossierCandidat","ajouterOffreTechnique","modifierOffreTechnique",
                 "supprimerOffreTechnique","ajouterOffreFinancier","modifierOffreFinancier","supprimerOffreFinancier",
-                "ajouterLettreInvitation",
-                "modifierLettreInvitation","supprimerLettreInvitation","getMandater","ajouterMandater",
+                "getMandater","ajouterMandater",
                 "modifierMandater","supprimerMandater","ajouterCojo","modifierCojo","supprimerCojo","ajouterAnalyseDossier",
                 "modifierAnalyseDossier","supprimerAnalyseDossier","ajouterDemandeAno",
                 "modifierDemandeAno","supprimerDemandeAno","ajouterAnalyseDMP","modifierAnalyseDMP",
@@ -5636,8 +4478,8 @@ montantHT() {
                   "ajouterFacture"
                 , "modifierObservationBaileur","ajouterObseravtionBailleur","supprimerObseravtionBailleur",
                  "ajouterFournisseur", "ajouterActeEffetFinancier",
-                "modifierActeEffetFinancier","supprimerActeEffetFinancier","modifierMarche","modificationMarcheBailleur",
-                "ajouterMarcherBailleur","supprimerMarcheBailleur","ajouterMembreCojo",
+                "modifierActeEffetFinancier","supprimerActeEffetFinancier","modifierMarche"
+                ,"ajouterMembreCojo",
                 "modificationMembreCojo","supprimerMembreCojo","getProceVerbal",
                 "ajouterProceVerbal","supprimerProceVerbal","modificationProceVerbalOffre","getAnalyseDossier","getDemandeAno","getAnalyseDMP","getAnoDMPBailleur","getActeEffetFinancier"
 
@@ -5687,17 +4529,8 @@ ajouterStockLocal(){
      // console.log(onFichierChange);
     },
 
-            afficheModaleMembreCojo(index){
-                this.$('#modification_membre_cojo').modal({
-                    backdrop: "static",
-                    keyboard:false
-                })
-                this.edite_membre_cojo = this.getterMembreCojo.find(item=>item.id==index);
-            },
-            editeMembreCojoM(){
-    this.modificationMembreCojo(this.edite_membre_cojo)
-    this.$('#modification_membre_cojo').modal('hide');
-},
+           
+   
 modifierFactureLocal(){
 
     this.$('#modififacture').modal('hide');
@@ -5774,17 +4607,7 @@ modifierFactureLocal(){
                     keyboard: false
                 });
             },
-            ajouterMembreCojoM(){
-                this.formDataMembreCojo.cojo_id=this.idcojo
-              this.ajouterMembreCojo(this.formDataMembreCojo)
-                this.formDataMembreCojo= {
-                       matricule:"",
-                        type_appel:"",
-                        nom_prenom:"",
-                        role:"",
-                        cojo_id:"",
-                }
-            },
+         
             ajouterBailleur(){
                 this.formBailleur.marche_id=this.marcheid
                this.ajouterMarcherBailleur(this.formBailleur)
@@ -5921,20 +4744,7 @@ dossier_candidat_id : this.edite_offre_financiere.id
                     matricule_m:""
                 }
             },
-            ajouterCojoMarche(){
-              this.ajouterCojo(this.formDataCojo)
-                this.formDataCojo={
-                        lettre_invitation_id:"",
-                        condition_id:'',
-                        controleur_finnancier:"",
-                        dmp:"",
-                        autorite_contractante:"",
-                        date_invitation:"",
-                        date_composition:"",
-                        num_dossier_appel_offre:"",
-                        nbr_participant:""
-                }
-            },
+           
             ajouterDossierCandidature(){
                 this.formFournisseur.raison_sociale=this.formDossierCadidature.nom_cand
                 this.formFournisseur.numero_cc= this.formDossierCadidature.numero_cc
@@ -6302,24 +5112,16 @@ ajouterNouveauFournisseurLocal(registeCommerce){
                 this.edite_analyse_dossier = this.listeAnalyseDossier(this.marcheid)[index];
             },
 
-            afficherModaleModifier(index){
-                this.$('#modificationModal1').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
+            // afficherModaleModifier(index){
+            //     this.$('#modificationModal1').modal({
+            //         backdrop: 'static',
+            //         keyboard: false
+            //     });
 
-             this.edite_lot = this.listeLots(this.marcheid)[index];
-                //this.edite_lot.appel_offre_id=this.edite_lot.
-            },
-            afficheBouttonTechCojo(index){
-        this.$('#modificationCojo').modal({
-            backdrop: 'static',
-            keyboard: false
-        });
-
-        this.edite_cojo = this.getterCojos[index];
-        //this.edite_lot.appel_offre_id=this.edite_lot. modifierDemandeAno
-    },
+            //  this.edite_lot = this.listeLots(this.marcheid)[index];
+            //     //this.edite_lot.appel_offre_id=this.edite_lot.
+            // },
+        
             afficheBouttonTechFinMandater(index){
                 this.$('#modificationMantater').modal({
                     backdrop: 'static',
@@ -6339,19 +5141,12 @@ ajouterNouveauFournisseurLocal(registeCommerce){
                 this.modifierAnalyseDossier(this.edite_analyse_dossier)
                 this.$('#modificationAajouterAnalys01').modal('hide');
             },
-            modfications(){
-                this.modifierAppelOffre(this.edite_appel_offre)
-                this.$('#modificationModal').modal('hide');
-            },
-            modificationCojo(){
-                this.modifierCojo(this.edite_cojo)
-                this.$('#modificationModal').modal('hide');
-            },
-            modficationsLot(){
-            
-                this.modifierLot(this.edite_lot)
-                this.$('#modificationModal1').modal('hide');
-            },
+            // modfications(){
+            //     this.modifierAppelOffre(this.edite_appel_offre)
+            //     this.$('#modificationModal').modal('hide');
+            // },
+           
+           
 
             modficationsAnalyseDMP(){
                 this.modifierAnalyseDMP(this.edite_analyse_dpm)
