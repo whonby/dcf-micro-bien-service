@@ -385,7 +385,8 @@ montantTotalMarcheReel: function () {
                         return  this.getMandatPersonnaliserViseTableauBord.reduce(function(total,currentVal){
                            return total + parseFloat(currentVal.total_general)
                         },valInite);
-                 return 0
+
+                
             },
 
 // rechercheMarcheSuivie(){
