@@ -1256,9 +1256,9 @@ quantiteEnstockidModifier() {
        if (this.formData.quantite > this.normeequipement ) {
         alert("La norme doit etre superieure au egal a la quantité demande")
       }
-      else if (this.normeequipement <= this.qtedemande  ){
-         alert("Demande déja Effectuée")
-      }
+      // else if (this.normeequipement <= this.qtedemande  ){
+      //    alert("Demande déja Effectuée")
+      // }
       else
       {
  //  var objetPourModifierQuantiteEnStock2 = {
