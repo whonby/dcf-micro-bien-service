@@ -620,7 +620,7 @@ export const getMandatPersonnaliser = (state, getters, rootState, rootGetters) =
 
 export const getMandatPersonnaliserViseTableauBord = (state, getters, rootState, rootGetters) =>
     getters.mandatVise.map(element => {
-        if (element.ua_id !== null && element.marche_id !== null ) {
+        if (element.ua_id !== null && element.marche_id !== null && element.section_id !== null) {
             element = {
                 ...element,
 
@@ -630,7 +630,10 @@ export const getMandatPersonnaliserViseTableauBord = (state, getters, rootState,
                 ),
                 affichierObjetMarche: rootGetters[
                     "bienService/marches"
-                ].find(planactivite => planactivite.id == element.marche_id)
+                ].find(planactivite => planactivite.id == element.marche_id),
+                affichierSection: rootGetters[
+                    "parametreGenerauxAdministratif/sections"
+                ].find(planactivite2 => planactivite2.id == element.section_id)
 
             }
 
