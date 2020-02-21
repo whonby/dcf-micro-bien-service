@@ -1,4 +1,5 @@
 Modifier Mandat
+mod_paiement_engage
 <template>
   	
         <div class="container-fluid">
@@ -9547,6 +9548,7 @@ section_id:this.afficherSectId,
       montant_don:this.editEngagement.montant_don,
  montant_emprunt:this.editEngagement.montant_emprunt,
  bailler_id:this.editEngagement.bailler_id,
+ mod_paiement_engage:this.editEngagement.mod_paiement_engage
  
        };
 this.ajouterMandat(nouvelObjet)
