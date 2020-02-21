@@ -1,5 +1,5 @@
 Modifier Mandat
-mod_paiement_engage
+Ajouter Engagement
 <template>
   	
         <div class="container-fluid">
@@ -10384,7 +10384,7 @@ alert("Le montant engagé est superieure au montant de la facture")
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.montantMarcheAvecAvenant == this.afficherMontantFacture)
+       else if (this.montantMarcheAvecAvenant == this.sommeEgagementLigneTableau(this.detail_marche.id))
       {
         alert("Marché apuré")
       }
