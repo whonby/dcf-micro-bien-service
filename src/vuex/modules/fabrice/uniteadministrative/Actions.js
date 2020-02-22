@@ -402,3 +402,86 @@ export function supprimerArchivageDocument({ commit }, id) {
 }
 // afficher liste des archivage note se service
 /*fin action archivage note se service */
+
+
+export function getAllUniteZone({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeUniteZone")
+      .then(response => {
+        commit("GET_ALL_UNITE_ZONE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterUniteZone({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterUniteZone", {
+      id_zone_geographique: nouveau.id_zone_geographique,
+      id_unite_administrative: nouveau.id_unite_administrative,
+      libelle: nouveau.libelle,
+      	longitude: nouveau.longitude,
+      latitude: nouveau.latitude,
+      telephone_cel: nouveau.telephone_cel,
+      adresse_postale: nouveau.adresse_postale,
+      telephone_fixe: nouveau.telephone_fixe,
+      description_localisation: nouveau.description_localisation,
+      quartier: nouveau.quartier,
+      
+    }))
+
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_UNITE_ZONE", response.data);
+        dispatch('getAllUniteZone')
+        dispatch('getAllUniteAdministrative')
+       
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+// modifier
+export function modifierUniteZone({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierUniteZone/" + nouveau.id, {
+      id_zone_geographique: nouveau.id_zone_geographique,
+      id_unite_administrative: nouveau.id_unite_administrative,
+      libelle: nouveau.libelle,
+      longitude: nouveau.longitude,
+      latitude: nouveau.latitude,
+      telephone_cel: nouveau.telephone_cel,
+      adresse_postale: nouveau.adresse_postale,
+      telephone_fixe: nouveau.telephone_fixe,
+      description_localisation: nouveau.description_localisation,
+      quartier: nouveau.quartier,
+    }))
+    .then(response => {
+      commit("MODIFIER_UNITE_ZONE", response.data);
+      dispatch('getAllUniteZone')
+      dispatch('getAllUniteAdministrative')
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerUniteZone({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_UNITE_ZONE", id);
+      dispatch('getAllUniteZone')
+      dispatch('getAllUniteAdministrative')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerUniteZone/" + id).then(() => dialog.close());
+    });
+}

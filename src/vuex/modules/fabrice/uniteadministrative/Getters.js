@@ -19,7 +19,8 @@ const budgetGeneral = state =>
 
 const historiquebudgetGeneral = state =>
   state.historiquebudgetGeneral.sort((a, b) => (a.code > b.code ? 1 : -1));
-
+export const uniteZones = state =>
+  state.uniteZones.sort((a, b) => (a.code > b.code ? 1 : -1));
 
 // const listeDocUniteAdministratives = state =>
 //   state.listeDocUniteAdministratives;
