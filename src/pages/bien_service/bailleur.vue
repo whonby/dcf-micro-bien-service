@@ -327,6 +327,7 @@ return this.bailleurs.filter((item) => {
         	email_bailleur:""
 
      }
+     
     },
     
     // afficher modal de modification
