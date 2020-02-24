@@ -7,7 +7,7 @@ import UtilisateursModule from './modules/auth/index'
 import ModulePersonnelUniteAdmin from "./modules/guei/personnel_ua/index"
 
 import Moduleuniteadministrative from "./modules/fabrice/uniteadministrative/index";
-
+ import Moduleinvestissement from './modules/adoni/investissement/index'
 import ModuleParametreGenerauxAdmnistratif from './modules/parametres_generaux/administratifs/index'
 import SousModuleParametreGenerauxSourceDeFinancement from './modules/parametres_generaux/souce-de-financement/index'
 import SousModuleParametreGenerauxProgrammeUnite from './modules/parametres_generaux/parametre_unite/index'
@@ -47,7 +47,8 @@ export default new Vuex.Store({
       SuiviImmobilisation: ModuleSuiviImmobilisation,
       suivi_controle_budgetaire : ModuleSuiviMission,
     planification_budgetaire: ModulePlanificationBudgetaire,
-    bienService: ModuleBienService
+    bienService: ModuleBienService,
+    investissement:Moduleinvestissement
 
 
       
