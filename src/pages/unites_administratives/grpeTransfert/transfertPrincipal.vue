@@ -10,17 +10,33 @@
     <div id="exampleModal" class="modal hide tailgrand12">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Unites de zones</h3>
+        <h3>Ajouter Tansfert</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
          
             <tr>
+               <td>
+              
+               <div class="control-group">
+                  <label class="control-label">Numero transfert</label>
+                  <div class="controls">
+                       <input
+                      type="text"
+                 v-model="formData.num_transfert"
+                      class="span"
+                     
+                      
+                    />
+                   
+                  </div>
+                </div>
+              </td>
                    <td>
                 <div class="control-group">
                   <label class="control-label">Unite d'administrative</label>
                   <div class="controls">
-                    <select v-model="formData.id_unite_administrative">
+                    <select v-model="formData.ua_id">
                       <option
                         v-for="typeUniteA in uniteAdministratives"
                         :key="typeUniteA.id"
@@ -32,29 +48,29 @@
               </td>
               <td>
                  <div class="control-group">
-                  <label class="control-label">Localisation Geographique</label>
+                  <label class="control-label">Destinataire</label>
                   <div class="controls">
-                    <select v-model="formData.id_zone_geographique">
+                    <select v-model="formData.unitezone_id" :readOnly="verrouDestinataire">
                       <option
-                        v-for="localgeo in afficheLocalisationGeoNiveau5"
+                        v-for="localgeo in destinationDynamiques(formData.ua_id)"
                         :key="localgeo.id"
                         :value="localgeo.id"
-                      >{{localgeo.code}}-{{localgeo.libelle}}</option>
+                      >{{localgeo.libelle}}</option>
                     </select>
                   </div>
                 </div>
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Destination</label>
+                  <label class="control-label">Ligne budgetaire</label>
                   <div class="controls">
-                       <input
-                      type="text"
-                    v-model="formData.libelle"
-                      class="span"
-                     
-                      
-                    />
+                        <select v-model="formData.ligne_budgetaire_id" :readOnly="verrouLigneBudgetaire">
+                      <option
+                        v-for="localgeo in ligneBudgetaireDynamiques(formData.ua_id)"
+                        :key="localgeo.id"
+                        :value="localgeo.afficheEconomique.id"
+                      >{{localgeo.afficheEconomique.code}}-{{localgeo.afficheEconomique.libelle}}</option>
+                    </select>
                    
                   </div>
                 </div>
@@ -62,47 +78,48 @@
                <td>
               
                <div class="control-group">
-                  <label class="control-label">longitude</label>
+                  <label class="control-label">Montant transfert</label>
                   <div class="controls">
                        <input
                       type="number"
-                    v-model="formData.longitude"
+                   :value="afficheMontantTransfere(formData.ligne_budgetaire_id)"
                       class="span"
-                     
+                     readonly
                       
                     />
                    
                   </div>
                 </div>
               </td>
-                <td>
-              
-               <div class="control-group">
-                  <label class="control-label">latitude</label>
-                  <div class="controls">
-                       <input
-                      type="number"
-                    v-model="formData.latitude"
-                      class="span"
-                     
-                      
-                    />
-                   
-                  </div>
-                </div>
-              </td>
+             
             </tr>
             <tr>
+                 <td>
+              
+               <div class="control-group">
+                  <label class="control-label">Montant du contrat</label>
+                  <div class="controls">
+                       <input
+                      type="number"
+                    v-model="formData.montant_total_contrat"
+                      class="span"
+                     
+                      
+                    />
+                   
+                  </div>
+                </div>
+              </td>
                <td>
               
                <div class="control-group">
-                  <label class="control-label">	Telephone cel</label>
+                  <label class="control-label">	Solde</label>
                   <div class="controls">
                        <input
                       type="number"
-                    v-model="formData.telephone_cel"
+                   :value="disponibleBudgetaire"
                       class="span"
-                     
+                     readonly
                       
                     />
                    
@@ -112,15 +129,31 @@
               <td>
               
                <div class="control-group">
-                  <label class="control-label">Adresse postale</label>
+                  <label class="control-label">grande nature</label>
                   <div class="controls">
                        <input
                       type="text"
-                    v-model="formData.adresse_postale"
+                  :value="GnDynamiques(afficheGrandeNature(formData.ligne_budgetaire_id))"
                       class="span"
-                     
+                     readonly
                       
                     />
+                   
+                  </div>
+                </div>
+              </td>
+               <td>
+              
+               <div class="control-group">
+                  <label class="control-label">Fonction</label>
+                  <div class="controls">
+                    <select v-model="formData.fonction_id" :readOnly="verrouDestinataire">
+                      <option
+                        v-for="localgeo in fonctionDynamiques(formData.ua_id)"
+                        :key="localgeo.id"
+                        :value="localgeo.fonction.id"
+                      >{{localgeo.fonction.libelle}}</option>
+                    </select>
                    
                   </div>
                 </div>
@@ -128,51 +161,21 @@
               <td>
               
                <div class="control-group">
-                  <label class="control-label">Telephone fixe</label>
-                  <div class="controls">
-                       <input
-                      type="number"
-                    v-model="formData.telephone_fixe"
-                      class="span"
-                     
-                      
-                    />
-                   
-                  </div>
-                </div>
-              </td>
-             <td>
-              
-               <div class="control-group">
-                  <label class="control-label">Description localisation</label>
+                  <label class="control-label">Acteur depense</label>
                   <div class="controls">
                        <input
                       type="text"
-                    v-model="formData.description_localisation"
+                  :value="afficheActeurDepense(formData.fonction_id)"
                       class="span"
-                     
+                     readonly
                       
                     />
                    
                   </div>
                 </div>
               </td>
-                <td>
+        
               
-               <div class="control-group">
-                  <label class="control-label">Quartier</label>
-                  <div class="controls">
-                       <input
-                      type="text"
-                    v-model="formData.quartier"
-                      class="span"
-                     
-                      
-                    />
-                   
-                  </div>
-                </div>
-              </td>
             </tr>
        
         </table>
@@ -194,17 +197,33 @@
     <div id="modificationModal" class="modal hide tailgrand12">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Budget par unité d'administrative</h3>
+        <h3>Modifier Transfert</h3>
       </div>
       <div class="modal-body">
-        <table class="table table-bordered table-striped">
+         <table class="table table-bordered table-striped">
          
             <tr>
+               <td>
+              
+               <div class="control-group">
+                  <label class="control-label">Numero transfert</label>
+                  <div class="controls">
+                       <input
+                      type="text"
+                 v-model="editTransfert.num_transfert"
+                      class="span"
+                     
+                      
+                    />
+                   
+                  </div>
+                </div>
+              </td>
                    <td>
                 <div class="control-group">
                   <label class="control-label">Unite d'administrative</label>
                   <div class="controls">
-                    <select v-model="editUniteZone.id_unite_administrative">
+                    <select v-model="editTransfert.ua_id">
                       <option
                         v-for="typeUniteA in uniteAdministratives"
                         :key="typeUniteA.id"
@@ -216,29 +235,29 @@
               </td>
               <td>
                  <div class="control-group">
-                  <label class="control-label">Localisation Geographique</label>
+                  <label class="control-label">Destinataire</label>
                   <div class="controls">
-                    <select v-model="editUniteZone.id_zone_geographique">
+                    <select v-model="editTransfert.unitezone_id" :readOnly="verrouDestinataire">
                       <option
-                        v-for="localgeo in afficheLocalisationGeoNiveau5"
+                        v-for="localgeo in destinationDynamiques(editTransfert.ua_id)"
                         :key="localgeo.id"
                         :value="localgeo.id"
-                      >{{localgeo.code}}-{{localgeo.libelle}}</option>
+                      >{{localgeo.libelle}}</option>
                     </select>
                   </div>
                 </div>
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Destination</label>
+                  <label class="control-label">Ligne budgetaire</label>
                   <div class="controls">
-                       <input
-                      type="text"
-                    v-model="editUniteZone.libelle"
-                      class="span"
-                     
-                      
-                    />
+                        <select v-model="editTransfert.ligne_budgetaire_id" :readOnly="verrouLigneBudgetaire">
+                      <option
+                        v-for="localgeo in ligneBudgetaireDynamiques(editTransfert.ua_id)"
+                        :key="localgeo.id"
+                        :value="localgeo.afficheEconomique.id"
+                      >{{localgeo.afficheEconomique.code}}-{{localgeo.afficheEconomique.libelle}}</option>
+                    </select>
                    
                   </div>
                 </div>
@@ -246,47 +265,48 @@
                <td>
               
                <div class="control-group">
-                  <label class="control-label">longitude</label>
+                  <label class="control-label">Montant transfert</label>
                   <div class="controls">
                        <input
                       type="number"
-                    v-model="editUniteZone.longitude"
+                   :value="afficheMontantTransfere(editTransfert.ligne_budgetaire_id)"
                       class="span"
-                     
+                     readonly
                       
                     />
                    
                   </div>
                 </div>
               </td>
-                <td>
-              
-               <div class="control-group">
-                  <label class="control-label">latitude</label>
-                  <div class="controls">
-                       <input
-                      type="number"
-                    v-model="editUniteZone.latitude"
-                      class="span"
-                     
-                      
-                    />
-                   
-                  </div>
-                </div>
-              </td>
+             
             </tr>
             <tr>
+                 <td>
+              
+               <div class="control-group">
+                  <label class="control-label">Montant du contrat</label>
+                  <div class="controls">
+                       <input
+                      type="number"
+                    v-model="editTransfert.montant_total_contrat"
+                      class="span"
+                     
+                      
+                    />
+                   
+                  </div>
+                </div>
+              </td>
                <td>
               
                <div class="control-group">
-                  <label class="control-label">	Telephone cel</label>
+                  <label class="control-label">	Solde</label>
                   <div class="controls">
                        <input
                       type="number"
-                    v-model="editUniteZone.telephone_cel"
+                   :value="disponibleBudgetaire"
                       class="span"
-                     
+                     readonly
                       
                     />
                    
@@ -296,15 +316,31 @@
               <td>
               
                <div class="control-group">
-                  <label class="control-label">Adresse postale</label>
+                  <label class="control-label">grande nature</label>
                   <div class="controls">
                        <input
                       type="text"
-                    v-model="editUniteZone.adresse_postale"
+                  :value="GnDynamiques(afficheGrandeNature(editTransfert.ligne_budgetaire_id))"
                       class="span"
-                     
+                     readonly
                       
                     />
+                   
+                  </div>
+                </div>
+              </td>
+               <td>
+              
+               <div class="control-group">
+                  <label class="control-label">Fonction</label>
+                  <div class="controls">
+                    <select v-model="editTransfert.fonction_id" :readOnly="verrouDestinataire">
+                      <option
+                        v-for="localgeo in fonctionDynamiques(editTransfert.ua_id)"
+                        :key="localgeo.id"
+                        :value="localgeo.fonction.id"
+                      >{{localgeo.fonction.libelle}}</option>
+                    </select>
                    
                   </div>
                 </div>
@@ -312,58 +348,28 @@
               <td>
               
                <div class="control-group">
-                  <label class="control-label">Telephone fixe</label>
-                  <div class="controls">
-                       <input
-                      type="number"
-                    v-model="editUniteZone.telephone_fixe"
-                      class="span"
-                     
-                      
-                    />
-                   
-                  </div>
-                </div>
-              </td>
-             <td>
-              
-               <div class="control-group">
-                  <label class="control-label">Description localisation</label>
+                  <label class="control-label">Acteur depense</label>
                   <div class="controls">
                        <input
                       type="text"
-                    v-model="editUniteZone.description_localisation"
+                  :value="afficheActeurDepense(editTransfert.fonction_id)"
                       class="span"
-                     
+                     readonly
                       
                     />
                    
                   </div>
                 </div>
               </td>
-                <td>
+        
               
-               <div class="control-group">
-                  <label class="control-label">Quartier</label>
-                  <div class="controls">
-                       <input
-                      type="text"
-                    v-model="editUniteZone.quartier"
-                      class="span"
-                     
-                      
-                    />
-                   
-                  </div>
-                </div>
-              </td>
             </tr>
        
         </table>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierUniteAdministrativeLocal(editUniteZone)"
+          @click.prevent="modifierUniteAdministrativeLocal(editTransfert)"
           class="btn btn-primary"
           href="#"
          
@@ -399,27 +405,20 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des unites de zones</h5>
-              <!-- <div align="right">
-                Recherche:
-                <input type="search" placeholder v-model="search" />
-               
-              </div> -->
+              <h5>Listes des transferts</h5>
+             
             </div>
 
             <div class="widget-content nopadding" v-if="uniteAdministratives.length" >
-              <uniteZoneComponent v-for="equipement in uniteAdministratives"
+              <transfertComponent v-for="equipement in uniteAdministratives"
                :key="equipement.id"
                 :groupe="equipement"
                 @modification="afficherModalModifierUniteAdministrative" 
                 @suppression="supprimerBudget"
                 >
-              </uniteZoneComponent>
+              </transfertComponent>
 
-              <!-- <div v-if="filtre_famille.length"></div>
-              <div v-else>
-                <p style="text-align:center;font-size:20px;color:red;">Aucun Article</p>
-              </div> -->
+            
 
             
               
@@ -444,12 +443,12 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
-import uniteZoneComponent from './uniteZoneComponent'
+import transfertComponent from './transfertComponent'
 import { formatageSomme } from "../../../../src/Repositories/Repository";
 export default {
-  name: 'budgetgeneral',
+  name: 'transfert',
  components: {
-      uniteZoneComponent
+      transfertComponent
   },
   data() {
     return {
@@ -473,28 +472,28 @@ export default {
           ],
      
       formData: {
-      id_zone_geographique:"",
-      id_unite_administrative: "",
-      libelle: "",
-      longitude: "",
-      latitude: "",
-      telephone_cel: "",
-      adresse_postale: "",
-      telephone_fixe: "",
-      description_localisation: "",
-      quartier: "",
+      num_transfert:"",
+      acteurdepense_id: "",
+      unitezone_id: "",
+      montant_total_contrat: "",
+      montant_transfert: "",
+      fonction_id: "",
+      montant_restant: "",
+      ligne_budgetaire_id: "",
+      grandnatire_id: "",
+      	ua_id: "",
       },
-      editUniteZone: {
-         exercicebudget_id:"",
-      gdenature_id: "",
-      program_id: "",
-      typeua_id: "",
-      ua_id: "",
-      section_id: "",
-      fonctionnel_id: "",
-      economique_id: "",
-      Dotation_Initiale: "",
-      version: ""
+      editTransfert: {
+       num_transfert:"",
+      acteurdepense_id: "",
+      unitezone_id: "",
+      montant_total_contrat: "",
+      montant_transfert: "",
+      fonction_id: "",
+      montant_restant: "",
+      ligne_budgetaire_id: "",
+      grandnatire_id: "",
+      	ua_id: "",
       },
        search:"",
        
@@ -508,7 +507,9 @@ export default {
       "uniteAdministratives",
       "budgetGeneral",
       "getPersonnaliseBudgetGeneral",
-      "montantBudgetGeneral"
+      "montantBudgetGeneral",
+      "uniteZones",
+      "getPersonnaliseBudgetGeneralParTransfert"
       // "chapitres",
       // "sections"
     ]),
@@ -534,15 +535,95 @@ export default {
 
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  
+ ...mapGetters('personnelUA', ['all_acteur_depense']),
 
-    uniteAdministrativeDynamiques() {
+    destinationDynamiques() {
       return id => {
         if (id != null && id != "") {
-          return this.jointureUaChapitreSection.filter(element => element.id == id);
+          return this.uniteZones.filter(element => element.id_unite_administrative == this.formData.ua_id);
         }
       };
     },
 
+ ligneBudgetaireDynamiques() {
+      return id => {
+        if (id != null && id != "") {
+          return this.getPersonnaliseBudgetGeneralParTransfert.filter(element => element.afficheUA.id == this.formData.ua_id);
+        }
+      };
+    },
+    afficheMontantTransfere() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == this.formData.ligne_budgetaire_id);
+
+      if (qtereel) {
+        return qtereel.Dotation_Initiale;
+      }
+      return 0
+        }
+      };
+    },
+     disponibleBudgetaire() {
+      const val = parseInt(this.afficheMontantTransfere(this.formData.ligne_budgetaire_id)) - parseInt(this.formData.montant_total_contrat);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+     afficheGrandeNature() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == this.formData.ligne_budgetaire_id);
+
+      if (qtereel) {
+        return qtereel.testgdenature;
+      }
+      return 0
+        }
+      };
+    },
+    
+    GnDynamiques() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.grandes_natures.find(element => element.code == this.afficheGrandeNature(this.formData.ligne_budgetaire_id));
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
+     fonctionDynamiques() {
+      return id => {
+        if (id != null && id != "") {
+          return this.all_acteur_depense.filter(element => element.unite_administrative_id == this.formData.ua_id);
+        }
+      };
+    },
+    afficheActeurDepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.fonction.id == this.formData.fonction_id);
+
+      if (qtereel) {
+        return qtereel.matricule.concat('  ', qtereel.nom,'  ',qtereel.prenom)
+      }
+      return 0
+        }
+      };
+    },
+
+     verrouDestinataire() {
+      return this.formData.ua_id == "";
+    },
+    verrouLigneBudgetaire() {
+      return this.formData.unitezone_id == "";
+    },
   },
 
 
@@ -550,14 +631,12 @@ export default {
   methods: {
     ...mapActions("uniteadministrative", [
       "getAllUniteZone",
-      "ajouterUniteZone",
-      "modifierUniteZone",
-      "supprimerUniteZone",
+      "ajouterTransfert",
+      "modifierTransfert",
+      "supprimerTransfert",
       // "ajouterHistoriqueBudgetGeneral"
     ]),
-     isEmailValid: function() {
-      return (this.email == "")? "" : (this.reg.test(this.email)) ? 'has-success' : 'has-error';
-    },
+    
  formatageSomme: formatageSomme,
     afficherModalAjouterUniteAdministrative() {
       this.$("#exampleModal").modal({
@@ -567,20 +646,25 @@ export default {
     },
     // fonction pour vider l'input ajouter
     ajouterUniteAdministrativeLocal() {
-      
-      this.ajouterUniteZone(this.formData);
+        var nouvelObjet = {
+        ...this.formData,
+        montant_transfert: this.afficheMontantTransfere(this.formData.ligne_budgetaire_id),
+         montant_restant: this.disponibleBudgetaire
+       
+      };
+      this.ajouterTransfert(nouvelObjet);
 
       this.formData = {
-        id_zone_geographique:"",
-      id_unite_administrative: "",
-      libelle: "",
-      longitude: "",
-      latitude: "",
-      telephone_cel: "",
-      adresse_postale: "",
-      telephone_fixe: "",
-      description_localisation: "",
-      quartier: "",
+        num_transfert:"",
+      acteurdepense_id: "",
+      unitezone_id: "",
+      montant_total_contrat: "",
+      montant_transfert: "",
+      fonction_id: "",
+      montant_restant: "",
+      ligne_budgetaire_id: "",
+      grandnatire_id: "",
+      	ua_id: "",
       
       };
       // }
@@ -588,12 +672,12 @@ export default {
     },
     
      supprimerBudget(id){
-      this.supprimerUniteZone(id)
+      this.supprimerTransfert(id)
     },
     // fonction pour vider l'input modifier
     modifierUniteAdministrativeLocal() {
      
-      this.modifierUniteZone(this.editUniteZone);
+      this.modifierTransfert(this.editTransfert);
 this.$("#modificationModal").modal('hide');
       // this.editUniteAdministrative = {
       //   code: "",
@@ -609,7 +693,7 @@ this.$("#modificationModal").modal('hide');
         keyboard: false
       });
 
-      this.editUniteZone = articles;
+      this.editTransfert = articles;
     },
     alert() {
       console.log("ok");

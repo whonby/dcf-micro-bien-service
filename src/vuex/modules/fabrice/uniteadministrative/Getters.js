@@ -21,7 +21,8 @@ const historiquebudgetGeneral = state =>
   state.historiquebudgetGeneral.sort((a, b) => (a.code > b.code ? 1 : -1));
 export const uniteZones = state =>
   state.uniteZones.sort((a, b) => (a.code > b.code ? 1 : -1));
-
+export const transferts = state =>
+  state.transferts.sort((a, b) => (a.num_transfert > b.num_transfert ? 1 : -1));
 // const listeDocUniteAdministratives = state =>
 //   state.listeDocUniteAdministratives;
 // const nbreUniteAdministratives = state => state.nbreUniteAdministratives;
@@ -361,7 +362,106 @@ export const montantBudgetGeneral = (state, getters) =>
 
 
 
+export const getPersonnaliseTransfert = (
+  state,
+  getters,
+  rootState,
+  rootGetters
+) =>
+  state.transferts.map(element => {
+    if (
+      element.grandnatire_id !== null &&
+      
+      element.acteurdepense_id !== null &&
+      element.ua_id !== null &&
+     
+      element.ligne_budgetaire_id !== null 
+     
+    ) {
+      element = {
+        ...element,
+        afficheGdeNature: rootGetters[
+          "parametreGenerauxAdministratif/grandes_natures"
+        ].find(Gdenat => Gdenat.id == element.grandnatire_id),
+        afficheAceurDepense: rootGetters["personnelUA/acteur_depenses"].find(
+          Secti => Secti.id == element.acteurdepense_id
+        ),
+        afficheUA: rootGetters[
+          "uniteadministrative/uniteAdministratives"
+        ].find(uniteA => uniteA.id == element.ua_id),
+       
+      
+        
+        afficheEconomique: rootGetters[
+          "parametreGenerauxBudgetaire/plans_budgetaires"
+        ].find(planEconomiq => planEconomiq.id == element.ligne_budgetaire_id),
+       
+      };
+    }
+    return element;
+  });
 
+
+
+
+
+export const afficheTransfert = state =>
+  state.budgetGeneral.filter(
+    affichenaturedep => affichenaturedep.testgdenature == 3
+  );
+
+
+export const getPersonnaliseBudgetGeneralParTransfert = (
+  state,
+  getters,
+  rootState,
+  rootGetters
+) =>
+  getters.afficheTransfert.map(element => {
+    if (
+      element.gdenature_id !== null &&
+      element.program_id !== null &&
+      element.section_id !== null &&
+      element.ua_id !== null &&
+      element.typeua_id !== null &&
+      element.fonctionnel_id !== null &&
+      element.economique_id !== null &&
+      element.action_id !== null &&
+      element.activite_id !== null
+    ) {
+      element = {
+        ...element,
+        afficheGdeNature: rootGetters[
+          "parametreGenerauxAdministratif/grandes_natures"
+        ].find(Gdenat => Gdenat.id == element.gdenature_id),
+        afficheSection: rootGetters["parametreGenerauxAdministratif/sections"].find(
+          Secti => Secti.id == element.section_id
+        ),
+        afficheUA: rootGetters[
+          "uniteadministrative/uniteAdministratives"
+        ].find(uniteA => uniteA.id == element.ua_id),
+        affichetypeua: rootGetters[
+          "parametreGenerauxAdministratif/type_Unite_admins"
+        ].find(typeUadmin => typeUadmin.id == element.typeua_id),
+        afficheProgramme: rootGetters[
+          "parametreGenerauxAdministratif/plans_programmes"
+        ].find(planProg => planProg.id == element.program_id),
+        afficheFonctionnel: rootGetters[
+          "parametreGenerauxFonctionnelle/plans_fonctionnels"
+        ].find(planfonct => planfonct.id == element.fonctionnel_id),
+        afficheEconomique: rootGetters[
+          "parametreGenerauxBudgetaire/plans_budgetaires"
+        ].find(planEconomiq => planEconomiq.id == element.economique_id),
+        afficheAction: rootGetters[
+          "parametreGenerauxActivite/plans_activites"
+        ].find(planaction => planaction.id == element.action_id),
+        afficheActivite: rootGetters[
+          "parametreGenerauxActivite/plans_activites"
+        ].find(planactivite => planactivite.id == element.activite_id)
+      };
+    }
+    return element;
+  });
 
 export {
   typeTextes,

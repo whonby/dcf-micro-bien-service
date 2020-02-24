@@ -88,7 +88,8 @@ export default {
       
       "getAllBudgetGeneral",
       "getAllHistoriqueBudgetGeneral",
-      "getAllUniteZone"
+      "getAllUniteZone",
+      "getAllTransfert"
     ]),
             ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
@@ -159,6 +160,7 @@ export default {
     this.getTypeUniteAdministrative()
     // this. getPlanActivite()
     this.getAllUniteZone()
+    this.getAllTransfert()
     this.getUnite()
     this.getZone()
     this.getBanque()

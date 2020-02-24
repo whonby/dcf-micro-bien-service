@@ -1,4 +1,4 @@
-bailleurAjouter,
+controleur_finnancier
 <template>
     
 <div>

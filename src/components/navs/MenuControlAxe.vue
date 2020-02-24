@@ -3,7 +3,7 @@
   <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
       <!--Paramètres administratifs-->
-      <li class="dropdown" id="profile-messages">
+      <!-- <li class="dropdown" id="profile-messages">
         <a
           title="Définition des indicateurs"
           href="#"
@@ -28,24 +28,23 @@
 
           
         </ul>
-      </li>
+      </li> -->
       
       <!--Paramètres programmes
       -->
-      <li class="" id="out">
-        <a title="Out put" href="#" class="">
-          <i class="icon icon-users"></i>
-          <span class="text">Out put</span>
-        </a>
-      </li>
-
-<li class="" id="indicateur">
+     
+  <li>
+            <router-link :to="{name: 'transfert'}" tag="a">
+             TRANSFERT
+            </router-link>
+          </li>
+<!-- <li class="" id="indicateur">
         <a title="Indicateur" href="#" class="">
           <i class="icon icon-users"></i>
           <span class="text">Indicateur</span>
         </a>
-      </li>
-       <li class="dropdown" id="tableau">
+      </li> -->
+       <!-- <li class="dropdown" id="tableau">
         <a
           title="Tableau de bord"
           href="#"
@@ -66,7 +65,7 @@
             </a>
           </li>
         </ul>
-      </li>
+      </li> -->
     </ul>
   </div>
 </template>

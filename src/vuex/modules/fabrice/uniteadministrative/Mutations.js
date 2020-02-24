@@ -186,6 +186,34 @@ const SUPPRIMER_UNITE_ZONE = (state, id) => {
 
 
 
+const GET_ALL_TRANSFERT = (state, tableauBudgetGeneral) => {
+  state.transferts = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+const AJOUTER_TRANSFERT = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.transferts.unshift(nouveau_budgetGeneral);
+};
+
+// modifier type_textes
+const MODIFIER_TRANSFERT = (state, objetModifie) => {
+  state.transferts = state.transferts.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
+// supprimer type_texte
+const SUPPRIMER_TRANSFERT = (state, id) => {
+  state.transferts = state.transferts.filter(type => type.id != id);
+};
+
+
+
 
 
 
@@ -193,6 +221,13 @@ const SUPPRIMER_UNITE_ZONE = (state, id) => {
 
 
 export {
+
+  GET_ALL_TRANSFERT,
+  AJOUTER_TRANSFERT,
+  MODIFIER_TRANSFERT,
+  SUPPRIMER_TRANSFERT,
+
+
 
   GET_ALL_UNITE_ZONE,
   AJOUTER_UNITE_ZONE,

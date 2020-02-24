@@ -11,7 +11,13 @@ import grpeBudgetSection from "../../pages/unites_administratives/grpeBudgetSect
 import grpeBudgetProgramme from "../../pages/unites_administratives/grpeBudgetProgramme.vue"
 import historiquebudgetGeneralComponent from "../../pages/unites_administratives/historiquebudgetGeneralComponent.vue";
 import uniteZone from "../../pages/unites_administratives/grpeUniteZone/uniteZonePrincipal.vue";
+import transfert from "../../pages/unites_administratives/grpeTransfert/transfertPrincipal.vue";
 const UniteAdministativeRoutes = [
+  {
+    path: "/transfert",
+    name: "transfert",
+    component: transfert
+  },
   {
     path: "/unite-Zone",
     name: "uniteZone",
