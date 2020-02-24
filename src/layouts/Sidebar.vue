@@ -77,13 +77,13 @@
             <span class="label label-important"></span>
           </a>
         </li>
-        <li  @click.prevent="activate(7)" :class="{active: active_el ==7}">
+        <!-- <li  @click.prevent="activate(7)" :class="{active: active_el ==7}">
           <a title="" href="#">
             <i class="icon icon-info-sign"></i>
             <span>EXECUTION</span>
             <span class="label label-important"></span>
           </a>
-        </li>
+        </li> -->
         <!-- <li @click.prevent="activate(8)" :class="{active: active_el ==8}">
           <a title="OPERATIONNALISATION DU DISPOSITIF DE CONTRÔLE INTERNE" href="#">
             <i class="icon icon-heart"></i>

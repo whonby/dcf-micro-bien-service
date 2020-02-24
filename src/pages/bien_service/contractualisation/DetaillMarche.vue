@@ -1,4 +1,4 @@
-Ajouter bailleur
+bailleurAjouter,
 <template>
     
 <div>
@@ -3530,6 +3530,7 @@ Ajouter bailleur
     import { mapGetters, mapActions } from "vuex";
     import moment from 'moment';
 
+
     //import bailleurAjouter from '../dossierComponent/bailleurAjouter';
     import addLot from '../dossierLot/addLot';
     import componentLettreInvitation from '../contractualisation/folderComponentLettre/componentLettreInvitation'
@@ -3538,6 +3539,9 @@ Ajouter bailleur
     import componentOffre from '../contractualisation/dossierComponentOffre/componentOffre';
     import componentOuvertureMembre from '../dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
     import componentOuverture from '../dossierComponentOuverture/componentOuverture';
+
+    // import bailleurAjouter from '../dossierComponent/bailleurAjouter'
+
     //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
     import {  ModelListSelect } from 'vue-search-select'
     import 'vue-search-select/dist/VueSearchSelect.css'
@@ -3546,6 +3550,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
         name: 'compte',
         components:{
 
+
         componentOffre,
         componentLettreInvitation,
          componentMandate,
@@ -3553,6 +3558,9 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
             addLot,
             componentOuverture,
             componentOuvertureMembre,
+
+
+            // bailleurAjouter,
 
             
             ModelListSelect,

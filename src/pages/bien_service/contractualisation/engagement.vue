@@ -1,7 +1,4 @@
-Ajouter Mandat
-Ajouter engagement
-Modifier Mandat
-taux facture
+
 <template>
   	
         <div class="container-fluid">
@@ -3158,15 +3155,15 @@ taux facture
                     <td
                      style="text-align: center;color:red;font-weight:bold;"
                     >{{formatageSomme(parseFloat(montantFactureParMarche(detail_marche.id))) || 0}}</td>
-                     <td  style="text-align: center;color:red;font-weight:bold;"
+                     <!-- <td  style="text-align: center;color:red;font-weight:bold;"
                      
                     
-                    > {{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td>
+                    > {{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td> -->
                      <td  style="text-align: center;color:red;font-weight:bold;"> {{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td>
                   <td
                      
                      style="text-align: center;color:red;font-weight:bold;"
-                    >{{formatageSomme(parseFloat(montantFactureParMarche(detail_marche.id))) || 0}}</td> 
+                    >{{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td> 
                     
                     
                       <!-- <td  style="text-align: center;color:red;font-weight:bold;"> {{tauxFacturation || 0}}%</td> -->
@@ -7611,6 +7608,22 @@ created() {
     ]),
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   afficheModePaiement() {
       return id => {
         if (id != null && id != "") {
@@ -10503,20 +10516,6 @@ this.$("#modificationModalAvenant").modal('hide');
       // };
        
     },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     },
          

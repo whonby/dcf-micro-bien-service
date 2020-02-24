@@ -155,7 +155,52 @@ const SUPPRIMER_ARCHIVAGE_DOCUMENT = (state, id) => {
   );
 };
 
+
+
+const GET_ALL_UNITE_ZONE = (state, tableauBudgetGeneral) => {
+  state.uniteZones = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+const AJOUTER_UNITE_ZONE = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.uniteZones.unshift(nouveau_budgetGeneral);
+};
+
+// modifier type_textes
+const MODIFIER_UNITE_ZONE = (state, objetModifie) => {
+  state.uniteZones = state.uniteZones.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
+// supprimer type_texte
+const SUPPRIMER_UNITE_ZONE = (state, id) => {
+  state.uniteZones = state.uniteZones.filter(type => type.id != id);
+};
+
+
+
+
+
+
+
+
+
+
 export {
+
+  GET_ALL_UNITE_ZONE,
+  AJOUTER_UNITE_ZONE,
+  MODIFIER_UNITE_ZONE,
+  SUPPRIMER_UNITE_ZONE,
+
+
+
 
   GET_ALL_HISTORIQUE_BUDGET_GENERAL,
   AJOUTER_HISTORIQUE_BUDGET_GENERAL,

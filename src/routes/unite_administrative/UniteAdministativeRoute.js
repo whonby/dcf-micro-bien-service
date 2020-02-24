@@ -10,7 +10,13 @@ import budgetGeneralParUa from "../../pages/unites_administratives/budgetGeneral
 import grpeBudgetSection from "../../pages/unites_administratives/grpeBudgetSection.vue"
 import grpeBudgetProgramme from "../../pages/unites_administratives/grpeBudgetProgramme.vue"
 import historiquebudgetGeneralComponent from "../../pages/unites_administratives/historiquebudgetGeneralComponent.vue";
+import uniteZone from "../../pages/unites_administratives/grpeUniteZone/uniteZonePrincipal.vue";
 const UniteAdministativeRoutes = [
+  {
+    path: "/unite-Zone",
+    name: "uniteZone",
+    component: uniteZone
+  },
   {
     path: "/historique-budget-general-component",
     name: "historiquebudgetGeneralComponent",
