@@ -1,18 +1,18 @@
 <template>
   <div>
     <!--Header-part-->
-    <div id="header">
+    <div id="header" style="background:#1f262d">
       <h1>
         <a href="#">S I D C F</a>
       </h1>
     </div>
     <!--close-Header-part-->
     <!--sidebar-menu-->
-    <div id="sidebar" style="position: fixed;">
+    <div id="sidebar" style="position: fixed; background:#1f262d;">
       <!-- <a title=" Dashboard" href="#" class="visible-phone">
         <i class="icon icon-home"></i>Dashboard
       </a> -->
-      <ul>
+      <ul style=" background:#1f262d; height: 1000px">
         <!-- <li :class="{active: active_el == 0 }" @click.prevent="activate(0)">
           <a href="index.html">
             <i class="icon icon-home"></i>

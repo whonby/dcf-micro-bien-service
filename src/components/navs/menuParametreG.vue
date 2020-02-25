@@ -369,6 +369,7 @@
           </li>
         </ul>
       </li>
+
       <li class="dropdown" id="personnelPara">
         <a title="PERSONNELS" href="#" data-toggle="dropdown" data-target="#personnelPara" class="dropdown-toggle">
           <span class="text">PERSONNELS</span>
@@ -429,6 +430,8 @@
           </li>
         </ul>
       </li>
+
+
         <li class="dropdown" id="comptaMatiere">
         <a title="IMMOBILISATIONS" href="#" data-toggle="dropdown" data-target="#comptaMatiere" class="dropdown-toggle">
           <span class="text">IMMOBILISATIONS</span>
@@ -463,6 +466,36 @@
           </li>
         </ul>
       </li>
+
+        <li class="dropdown" id="gestion_user">
+            <a title="Gestion utilisateur" href="#" data-toggle="dropdown" data-target="#gestion_user" class="dropdown-toggle">
+                <span class="text">GESTION DES UTILISATEURS</span>
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="divider"></li>
+                <li>
+                    <router-link :to="{name: 'typeMarche'}" tag="a">
+                        <i class="icon-check"></i>
+                        Utilisateurs
+                    </router-link>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <router-link :to="{name: 'typeProcedure'}" tag="a">
+                        <i class="icon-bar-chart"></i>
+                        Famille de procedure
+                    </router-link>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <router-link :to="{name: 'procedurePassation'}" tag="a">
+                        <i class="icon-bar-chart"></i>
+                        Procedure de passation
+                    </router-link>
+                </li>
+            </ul>
+        </li>
     </ul>
 
 

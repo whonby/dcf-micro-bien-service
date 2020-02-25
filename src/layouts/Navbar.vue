@@ -1,6 +1,6 @@
 
 <template>
-  <div>
+  <div >
     <!--start-top-serch-->
     <MenuParamG v-if="active_el == 11"></MenuParamG>
     <MenuUA v-if="active_el == 1"></MenuUA>

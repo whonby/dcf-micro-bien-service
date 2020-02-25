@@ -219,10 +219,6 @@ background: url("../assets/logoA.jpg");
  html, body {    width: 100%;    height: 100%;}
 /*Bootstrap-overlay*/
 
-body {
- overflow-x: hidden;
- margin-top: -10px;  font-family: 'Open Sans', sans-serif; font-size:12px; color:#666;
-}
 
 .dropdown-menu .divider{ margin:4px 0px;}
 .dropdown-menu{ min-width:180px;}
@@ -254,10 +250,29 @@ hr{ border-top-color:#dadada;}
 .bg_lv{ background:#603bbc;}
 .bg_lh{ background:#b6b3b3;}
 
-body { background-color:#2E363F;    padding: 0;    margin-top:10%;}
+body {
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    /*background:url(../images/bodybg.png); */
+
+}
 #logo, #loginbox {    width: 32%;    margin-left: auto;    margin-right: auto;    position: relative;}
 #logo img {  margin: 0 auto;    display: block;}
-#loginbox { overflow: hidden !important;    text-align: left;    position: relative; }
+#loginbox { overflow: hidden !important;
+    width: 430px;
+    text-align: left;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-box-shadow: -4px 10px 10px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: -4px 10px 10px -6px rgba(0,0,0,0.75);
+    box-shadow: -4px 10px 10px -6px rgba(0,0,0,0.75);
+}
 #loginbox form{ width:100%; background:#2E363F; position:relative; top:0; left:0; }
 #loginbox .form-actions { padding: 14px 20px 15px;}
 #loginbox .form-actions .pull-left { margin-top:0px;}
@@ -271,7 +286,7 @@ body { background-color:#2E363F;    padding: 0;    margin-top:10%;}
 #loginbox .control-group{ padding:20px 0; margin-bottom:0px;}
 .form-vertical, .form-actions {  margin-bottom: 0; background:none; border-top:1px solid #3f4954; }
 #loginbox .normal_text{ padding:15px 10px; text-align:center; font-size:14px; line-height:20px; background:#2E363F; color:#fff; }
-@media (max-width:800px){
+@media (max-width:1024px){
 #logo { width: 60%; }
 #loginbox{ width:80%}
 }
