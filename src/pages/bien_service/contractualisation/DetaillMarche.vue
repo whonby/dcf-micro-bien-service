@@ -1,4 +1,5 @@
 Selectionner l'entreprise
+Modifier acte effet financier
 <template>
     
 <div>
@@ -2397,7 +2398,7 @@ Selectionner l'entreprise
                             <div class="control-group">
                                 <label class="control-label">Date ordre de service demarrage</label>
                                 <div class="controls">
-                                    <input type="date" v-model="formEffetFinancier.date_odre_service"
+                                    <input type="date" v-model="editActeEffetFinancier.date_odre_service"
                                            class="span"
                                            placeholder=""
                                     />
@@ -2410,7 +2411,7 @@ Selectionner l'entreprise
                             <div class="control-group">
                                 <label class="control-label" title=" ">Date fin exécution</label>
                                 <div class="controls">
-                                    <input type="date" :min="formEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValue" v-model="formEffetFinancier.date_fin_exe"
+                                    <input type="date" :min="editActeEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValueMod" v-model="editActeEffetFinancier.date_fin_exe"
                                            class="span"
                                            placeholder=""
                                     />
@@ -2424,7 +2425,7 @@ Selectionner l'entreprise
                             <div class="control-group">
                                 <label class="control-label" title=" ">Durée d'exécution(jrs)</label>
                                 <div class="controls">
-                                    <input type="text" readonly :value="nombreDejourCalcule"
+                                    <input type="text" readonly :value="nombreDejourCalculeModification"
                                            class="span"
                                     />
                                 </div>
@@ -5440,11 +5441,38 @@ nombreDejourCalcule(){
                   return  diffJour;
    
 },
+nombreDejourCalculeModification(){
+                let vM=this;
+    const acteAffet = vM.editActeEffetFinancier
+    if(acteAffet.date_odre_service == acteAffet.date_fin_exe &&  acteAffet.date_fin_exe !=="" && acteAffet.date_odre_service !=="") return 1
+     if(acteAffet.date_fin_exe =="" && acteAffet.date_odre_service =="") return null
+
+       var dateF = new Date(acteAffet.date_fin_exe).getTime()
+        var dateO = new Date(acteAffet.date_odre_service).getTime()
+           var resultat = dateF - dateO
+
+             var diffJour =  resultat / (1000 * 3600 * 24)
+
+               if(isNaN(diffJour)) return null
+
+               if(parseFloat(diffJour) < 0 ) return "durée invalide"
+    vM.formEffetFinancier.duree=diffJour
+                  return  diffJour;
+   
+},
+
+
+
+
+
+
 
 getDateFinExécutionValue(){
     return !this.formEffetFinancier.date_odre_service !=""
 },
-
+getDateFinExécutionValueMod(){
+    return !this.editActeEffetFinancier.date_odre_service !=""
+},
 
 
 

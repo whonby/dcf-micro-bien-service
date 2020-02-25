@@ -57,12 +57,7 @@
               <span class="text">NORME EQUIPEMENT</span>
             </router-link>
           </li>
-           <li>
-            <router-link :to="{name:'StockArticles'}" tag="a">
-              <!-- <i class="icon-home"></i> -->
-              <span class="text">GESTION DES STOCKS</span>
-            </router-link>
-          </li>
+          
            <li title="Bessoin Immobilisation">
             <router-link :to="{name:'demandeEquipement'}" tag="a">
               <!-- <i class="icon-list"></i> -->
