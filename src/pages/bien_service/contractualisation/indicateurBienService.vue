@@ -39,30 +39,30 @@
                                 </div>
                                 </div>
               </td>
-              <!-- <td>
+               <td>
                   <div class="control-group">
                                 <label class="control-label" >Type marche</label>
                                 <div class="controls ">
                             
                             <select v-model="typemarche" class="span3" >
                <option ></option>
-               <option v-for="typePas in typeMarches" :key="typePas.id"   :value="typePas.libelle">{{typePas.libelle}}</option>
+               <option v-for="typePas in typeMarches" :key="typePas.id"   :value="typePas.id">{{typePas.libelle}}</option>
            </select>
                                 </div>
                                 </div>
-              </td> -->
-              <!-- <td>
+              </td>
+               <td>
                   <div class="control-group">
                                 <label class="control-label" >Procedure passation</label>
                                 <div class="controls ">
                             
                            <select v-model="Procedure" class="span3"  >
                <option></option>
-               <option  v-for="propass in procedurePassations" :key="propass.id" :value="propass.libelle">{{propass.libelle}}</option>
+               <option  v-for="propass in procedurePassations" :key="propass.id" :value="propass.id">{{propass.libelle}}</option>
            </select>
                                 </div>
                                 </div>
-              </td> -->
+              </td>
                <td>
                   <div class="control-group">
                                 <label class="control-label" >Fournisseur</label>
@@ -102,13 +102,13 @@
             <span class="label label-important">{{formatageSomme(parseFloat(montantTotalMarcheReel))}}</span> MONTANT GLOBAL MARCHE REEL
           </a>
         </li> 
-         <li class="bg_lg" title="MONTANT REEL PAR SECTION">
+         <li class="bg_lg" title="MONTANT REEL PAR SECTION" v-if="section">
           <a href="#" >
             <i class=" icon-list-alt"></i>
             <span class="label label-success">{{formatageSomme(parseFloat(montantMantant(this.section)))}}</span>{{nomSection(this.section)}}
           </a>
         </li>
-         <li class="bg_ly" title="MONTANT FACTURE PAR SECTION">
+         <li class="bg_ly" title="MONTANT FACTURE PAR SECTION" v-if="section">
           <a href="#">
             <i class=" icon-list-alt"></i>
             <span class="label label-success">{{formatageSomme(parseFloat(sommeFactureParSection(this.section)))}}</span> Mt FACTURE PAR SECTION
@@ -120,7 +120,7 @@
             <span class="label label-warning">{{formatageSomme(parseFloat(montantParAnnee(this.budgetaire)))}}</span>MONTANT PAR ANNEE
           </a>
         </li>
-         <!-- <li class="bg_lg" title="Taux QUANTITE NON COUVERTE">
+          <li class="bg_lg" title="Taux QUANTITE NON COUVERTE">
           <a href="#">
             <i class="icon-th"></i>
             <span class="label label-warning"></span>TAUX QTE NON COUVERTE
@@ -131,7 +131,7 @@
             <i class="icon-th"></i>
             <span class="label label-warning"></span>TAUX QTE NON COUVERTE
           </a>
-        </li> -->
+        </li>
               </ul>
             </div>
             <div class="widget-title">
@@ -298,10 +298,10 @@ export default {
 //       },
          typemarche:"",
          entreprise:"",
-      Procedure:"",
-      budgetaire :"",
-      search: "",
-      section:""
+         Procedure:"",
+         budgetaire :"",
+         search: "",
+         section:""
     };
   },
 
@@ -340,18 +340,311 @@ activeEntreprise() {
   }
     },
 rechercheMarcheSuivie(){
-      if(this.budgetaire != "" &&  this.section != ""){
-         
-          return this.getMandatPersonnaliserViseTableauBord.filter(item =>{
-              if(item.exercice_budget == this.budgetaire   && item.affichierSection.nom_section == this.section){
-                  return item
-              }
-            
-          })
-        
+           //****Recherche exercice budgetaire
+      if(this.budgetaire !="" &&  this.section=="" && this.typemarche=="" && this.entreprise=="" && this.Procedure==""){
+
+          return this.getMandatPersonnaliserViseTableauBord.filter(item=>item.exercice_budget==this.budgetaire)
       }
-      
-    
+
+      //Exercie + section
+    if(this.budgetaire !="" &&  this.section!="" && this.typemarche=="" && this.entreprise=="" && this.Procedure==""){
+
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.exercice_budget==this.budgetaire && item.affichierSection.nom_section==this.section){
+                return item;
+            }
+        })
+    }
+
+    //Exerce + Type marche
+    if(this.budgetaire !="" &&  this.section=="" && this.typemarche!="" && this.entreprise=="" && this.Procedure==""){
+
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.exercice_budget==this.budgetaire && item.affichierObjetMarche.type_marche_id==this.typemarche){
+                return item;
+            }
+        })
+    }
+
+    //Exercie + entreprise
+    if(this.budgetaire !="" &&  this.section=="" && this.typemarche=="" && this.entreprise!="" && this.Procedure==""){
+
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.exercice_budget==this.budgetaire && item.nom_entreprise==this.entreprise ){
+                return item;
+            }
+        })
+    }
+
+    //Exercice + procedure
+    if(this.budgetaire !="" &&  this.section=="" && this.typemarche=="" && this.entreprise=="" && this.Procedure!=""){
+           console.log(this.Procedure)
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.exercice_budget==this.budgetaire && item.affichierObjetMarche.procedure_passation_id==this.Procedure ){
+                return item;
+            }
+        })
+    }
+
+
+
+    //Exercie + section + typemarche
+    if(this.budgetaire !="" &&  this.section!="" && this.typemarche!="" && this.entreprise=="" && this.Procedure==""){
+
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.exercice_budget==this.budgetaire && item.affichierSection.nom_section==this.section && item.affichierObjetMarche.type_marche_id==this.typemarche){
+                return item;
+            }
+        })
+    }
+
+    //Exercie + section + entreprise
+    if(this.budgetaire !="" &&  this.section!="" && this.typemarche=="" && this.entreprise!="" && this.Procedure==""){
+
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.exercice_budget==this.budgetaire && item.affichierSection.nom_section==this.section && item.nom_entreprise==this.entreprise){
+                return item;
+            }
+        })
+    }
+
+    //Exercie + section + procedure
+    if(this.budgetaire !="" &&  this.section!="" && this.typemarche=="" && this.entreprise=="" && this.Procedure!=""){
+
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.exercice_budget==this.budgetaire && item.affichierSection.nom_section==this.section && item.affichierObjetMarche.procedure_passation_id==this.Procedure){
+                return item;
+            }
+        })
+    }
+
+//Exercice + typemarche + entreprise
+    if(this.budgetaire !="" &&  this.section=="" && this.typemarche!="" && this.entreprise!="" && this.Procedure==""){
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.exercice_budget==this.budgetaire && item.nom_entreprise==this.entreprise && item.affichierObjetMarche.type_marche_id==this.typemarche){
+                return item;
+            }
+        })
+    }
+
+    //Exercice + typemarche + procedure
+    if(this.budgetaire !="" &&  this.section=="" && this.typemarche!="" && this.entreprise=="" && this.Procedure!=""){
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.exercice_budget==this.budgetaire && item.affichierObjetMarche.procedure_passation_id==this.Procedure && item.affichierObjetMarche.type_marche_id==this.typemarche){
+                return item;
+            }
+        })
+    }
+
+    //Exercice + entreprise + procedure
+    if(this.budgetaire !="" &&  this.section=="" && this.typemarche=="" && this.entreprise!="" && this.Procedure!=""){
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.exercice_budget==this.budgetaire && item.affichierObjetMarche.procedure_passation_id==this.Procedure && item.nom_entreprise==this.entreprise){
+                return item;
+            }
+        })
+    }
+
+
+    //Exercice + section + type marche + entreprise
+    if(this.budgetaire !="" &&  this.section!="" && this.typemarche!="" && this.entreprise!="" && this.Procedure==""){
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.exercice_budget==this.budgetaire &&
+                item.affichierSection.nom_section==this.section &&
+                item.nom_entreprise==this.entreprise &&
+                item.affichierObjetMarche.type_marche_id==this.typemarche){
+                return item;
+            }
+        })
+    }
+
+    //Exercice + section + type marche + procedure
+    if(this.budgetaire !="" &&  this.section!="" && this.typemarche!="" && this.entreprise=="" && this.Procedure!=""){
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.exercice_budget==this.budgetaire &&
+                item.affichierSection.nom_section==this.section &&
+                item.affichierObjetMarche.procedure_passation_id==this.Procedure &&
+                item.affichierObjetMarche.type_marche_id==this.typemarche){
+                return item;
+            }
+        })
+    }
+
+    //Exercice + entreprise + type marche + procedure
+    if(this.budgetaire !="" &&  this.section=="" && this.typemarche!="" && this.entreprise!="" && this.Procedure!=""){
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.exercice_budget==this.budgetaire &&
+                item.affichierObjetMarche.procedure_passation_id==this.Procedure
+                && item.nom_entreprise==this.entreprise &&
+                item.affichierObjetMarche.type_marche_id==this.typemarche){
+                return item;
+            }
+        })
+    }
+
+    //Exercice + type marche + procedure + section + entreprise
+    if(this.budgetaire !="" &&  this.section!="" && this.typemarche!="" && this.entreprise!="" && this.Procedure!=""){
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.exercice_budget==this.budgetaire &&
+                item.affichierObjetMarche.procedure_passation_id==this.Procedure
+                && item.nom_entreprise==this.entreprise &&
+                item.affichierSection.nom_section==this.section &&
+                item.affichierObjetMarche.type_marche_id==this.typemarche){
+                return item;
+            }
+        })
+    }
+
+
+
+
+    //Recherche section
+    if(this.budgetaire =="" &&  this.section!="" && this.typemarche=="" && this.entreprise=="" && this.Procedure==""){
+              console.log(this.section)
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>item.affichierSection.nom_section==this.section)
+    }
+
+    //senat + entreprise
+    if(this.budgetaire =="" &&  this.section!="" && this.typemarche=="" && this.entreprise!="" && this.Procedure==""){
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.nom_entreprise==this.entreprise &&
+                item.affichierSection.nom_section==this.section ){
+                return item;
+            }
+        })
+    }
+
+    //senat + procedure
+    if(this.budgetaire =="" &&  this.section!="" && this.typemarche=="" && this.entreprise=="" && this.Procedure!=""){
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.affichierObjetMarche.procedure_passation_id==this.Procedure
+                && item.affichierSection.nom_section==this.section ){
+                return item;
+            }
+        })
+    }
+
+    //senat + type de marche
+    if(this.budgetaire =="" &&  this.section!="" && this.typemarche!="" && this.entreprise=="" && this.Procedure==""){
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.affichierSection.nom_section==this.section &&
+                item.affichierObjetMarche.type_marche_id==this.typemarche){
+                return item;
+            }
+        })
+    }
+    //senat + procedure + entreprise
+
+    if(this.budgetaire =="" &&  this.section!="" && this.typemarche=="" && this.entreprise!="" && this.Procedure!=""){
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.affichierObjetMarche.procedure_passation_id==this.Procedure
+                && item.nom_entreprise==this.entreprise && item.affichierSection.nom_section==this.section ){
+                return item;
+            }
+        })
+    }
+    //senat + type de marche+ entreprise
+    if(this.budgetaire =="" &&  this.section!="" && this.typemarche!="" && this.entreprise!="" && this.Procedure==""){
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.nom_entreprise==this.entreprise &&
+                item.affichierSection.nom_section==this.section &&
+                item.affichierObjetMarche.type_marche_id==this.typemarche){
+                return item;
+            }
+        })
+    }
+    //senat + type marche + procedure
+    if(this.budgetaire =="" &&  this.section!="" && this.typemarche!="" && this.entreprise=="" && this.Procedure!=""){
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.affichierObjetMarche.procedure_passation_id==this.Procedure
+                && item.affichierSection.nom_section==this.section &&
+                item.affichierObjetMarche.type_marche_id==this.typemarche){
+                return item;
+            }
+        })
+    }
+
+    //senat + type marche + procedure + entreprise
+    if(this.budgetaire =="" &&  this.section!="" && this.typemarche!="" && this.entreprise!="" && this.Procedure!=""){
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.affichierObjetMarche.procedure_passation_id==this.Procedure
+                && item.nom_entreprise==this.entreprise &&
+                item.affichierSection.nom_section==this.section &&
+                item.affichierObjetMarche.type_marche_id==this.typemarche){
+                return item;
+            }
+        })
+    }
+
+
+
+
+
+    //Recherche type de marche
+    if(this.budgetaire =="" &&  this.section=="" && this.typemarche!="" && this.entreprise=="" && this.Procedure==""){
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>item.affichierObjetMarche.type_marche_id==this.typemarche)
+    }
+
+    //Type marche + procedure + fournisseur
+
+    if(this.budgetaire =="" &&  this.section=="" && this.typemarche!="" && this.entreprise!="" && this.Procedure!=""){
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.affichierObjetMarche.procedure_passation_id==this.Procedure
+                && item.nom_entreprise==this.entreprise &&
+                item.affichierObjetMarche.type_marche_id==this.typemarche){
+                return item;
+            }
+        })
+    }
+
+    //type marche + procedure
+
+    if(this.budgetaire =="" &&  this.section=="" && this.typemarche!="" && this.entreprise=="" && this.Procedure!=""){
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.affichierObjetMarche.procedure_passation_id==this.Procedure
+                && item.affichierObjetMarche.type_marche_id==this.typemarche){
+                return item;
+            }
+        })
+    }
+
+
+    //type marche + entreprise
+
+    if(this.budgetaire =="" &&  this.section=="" && this.typemarche!="" && this.entreprise=="" && this.Procedure==""){
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.nom_entreprise==this.entreprise && item.affichierObjetMarche.type_marche_id==this.typemarche){
+                return item;
+            }
+        })
+    }
+
+
+
+    //Recherche type de entreprise
+    if(this.budgetaire =="" &&  this.section=="" && this.typemarche=="" && this.entreprise!="" && this.Procedure==""){
+
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>item.nom_entreprise==this.entreprise)
+    }
+
+
+    //Fourniseur + procedure
+
+    if(this.budgetaire =="" &&  this.section=="" && this.typemarche=="" && this.entreprise!="" && this.Procedure!=""){
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>{
+            if(item.affichierObjetMarche.procedure_passation_id==this.Procedure
+                && item.nom_entreprise==this.entreprise){
+                return item;
+            }
+        })
+    }
+
+    //Recherche type de procedure
+    if(this.budgetaire =="" &&  this.section=="" && this.typemarche=="" && this.entreprise=="" && this.Procedure!=""){
+
+        return this.getMandatPersonnaliserViseTableauBord.filter(item=>item.affichierObjetMarche.procedure_passation_id==this.Procedure)
+    }
+
       return this.getMandatPersonnaliserViseTableauBord
 },
 
