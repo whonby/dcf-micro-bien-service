@@ -63,7 +63,7 @@
                                 </div>
                                 </div>
               </td> -->
-               <!-- <td>
+               <td>
                   <div class="control-group">
                                 <label class="control-label" >Fournisseur</label>
                                 <div class="controls ">
@@ -74,7 +74,7 @@
            </select>
                                 </div>
                                 </div>
-              </td> -->
+              </td>
               <td>
                   <div class="control-group">
                                 <label class="control-label" >Section</label>
@@ -341,8 +341,7 @@ activeEntreprise() {
     },
 rechercheMarcheSuivie(){
       if(this.budgetaire != "" &&  this.section != ""){
-          // console.log(this.entreprise)
-          // console.log(this.type_marche)
+         
           return this.getMandatPersonnaliserViseTableauBord.filter(item =>{
               if(item.exercice_budget == this.budgetaire   && item.affichierSection.nom_section == this.section){
                   return item
@@ -355,6 +354,15 @@ rechercheMarcheSuivie(){
     
       return this.getMandatPersonnaliserViseTableauBord
 },
+
+
+
+
+
+
+
+
+
 montantParAnnee: function () {
                 return id => {
                     if (id != "") {
