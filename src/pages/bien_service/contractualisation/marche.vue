@@ -23,7 +23,7 @@
                                 </div>
                                 </div>
               </td>
-               <td>
+               <td colspan="">
                  <div class="control-group">
             <label class="control-label">Refencence marché</label>
             <div class="controls">
@@ -122,7 +122,7 @@
               <input
                 type="text"
                 :value="ImputationBudget"
-                class="span5"
+                class="span4"
                 placeholder="Saisir le Imputation"
                 readonly
               />
@@ -201,10 +201,19 @@
            </select>
             </div>
           </div>
+             
+           
+           
+              
+               
+              
+            
               </td>
+          
+             
 
    
-             <td colspan="">
+             <td >
               
                <div class="control-group">
             <label class="control-label">procedure passation</label>
@@ -218,7 +227,7 @@
           </div>
               </td>
 
-                          <td>
+                          <td colspan="">
                <div class="control-group">
             <label class="control-label">Livrable</label>
             <div class="controls">
@@ -228,6 +237,9 @@
                 class="span"
                 placeholder="Saisir le livrable"
               />
+              <input
+                type="hidden"
+               v-model="formData.test_diff" />
             </div>
           </div>
               </td>
@@ -449,6 +461,13 @@
            </select>
             </div>
           </div>
+          
+              <input
+                type="hidden"
+               v-model="editMarche.test_diff" />
+               
+              
+           
               </td>
 
              
@@ -466,7 +485,7 @@
           </div>
               </td>
 
-                <td>
+                <td colspan="">
                <div class="control-group">
             <label class="control-label">Livrable</label>
             <div class="controls">
@@ -680,7 +699,8 @@ export default {
                 unite_administrative_id:"",
                 gdenature_id:"",
                 activite_id:"",
-                typeappel_id:""
+                typeappel_id:"",
+                test_diff:"bs"
         
       },
       editMarche: {
@@ -691,7 +711,8 @@ export default {
                 type_marche_id:"",
                 unite_administrative_id:"",
                 imputation:"",
-                 activite_id:""
+                 activite_id:"",
+                 test_diff:"bs"
       },
       search: ""
     };
@@ -733,6 +754,20 @@ anneeAmort() {
       }
       return 0
     },
+
+
+    
+
+//  afficheBs(){
+// //  const affiche = this.printMarcheNonAttribue.fin( equi => equi.test_diff == this.formData.bs)
+
+//    const norme = this.printMarcheNonAttribue.find(filtreMarche => filtreMarche.test_diff == "bs");
+
+//       if (norme) {
+//         return norme.;
+//       }
+//       return 0
+//   },
 
 
     procedurePassationDynamiques() {
@@ -852,7 +887,8 @@ anneeAmort() {
        var nouvelObjet = {
       ...this.formData,
       imputation :this.ImputationBudget,
-      exo_id : this.anneeAmort
+      exo_id : this.anneeAmort,
+     // test_diff: this.afficheBs
        };
 this.ajouterMarche(nouvelObjet)
 this.formData = {
@@ -863,7 +899,8 @@ this.formData = {
                 type_marche_id:"",
                 unite_administrative_id:"",
                 imputation:"",
-                	activite_id:""
+                  activite_id:"",
+                  	test_diff:"bs"
 }
 
     },
@@ -900,7 +937,7 @@ this.formData = {
 
 <style scoped>
 .taillModal{
-  width: 980px;
-   margin: 0 -25%;
+  width: 1000px;
+   margin: 0 -400px;
 }
 </style>

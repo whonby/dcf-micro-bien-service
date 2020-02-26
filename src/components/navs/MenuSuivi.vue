@@ -22,10 +22,10 @@
         <ul class="dropdown-menu">
           <li class="divider"></li>
           <li>
-            <a href="#">
+            <router-link :to="{name:'executionActeEffetInvestissement'}" tag="a">
               <i class="icon-check"></i>
             acte effet financier 
-            </a>
+            </router-link>
           </li>
           <li class="divider"></li>
           <li>

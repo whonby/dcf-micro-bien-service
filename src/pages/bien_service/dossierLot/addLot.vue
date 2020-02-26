@@ -309,7 +309,7 @@ export default {
                     keyboard: false
                 });
 
-             this.edite_lot = this.listeLots(this.macheid)[index];
+             this.edite_lot = this.lots.find(item =>item.id==index);
                 //this.edite_lot.appel_offre_id=this.edite_lot.
             },
  

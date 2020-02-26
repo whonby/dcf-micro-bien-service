@@ -216,6 +216,19 @@ export const montantMarche = (state, getters) =>
         0
     );
 
+
+    // export const motantInvestissement = (state, getters) =>
+    // getters.marches.reduce(
+    //     (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
+
+    //     0  
+    // );
+
+
+
+
+
+
 export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, rootGetters) =>
     state.acteEffetFinanciers.map(element => {
         if (element.entreprise_id !== null) {
@@ -266,19 +279,30 @@ export const montantMarcheReel = (state, getters) =>
 
    
 
+// cette fonction permet d'afficher le montant de l'investissement si la varriable test_diff est a imvs
+
+export const montantInvestissement = getters =>
+getters.marches.filter(
+    afficheMontant => afficheMontant.test_diff ==="imvs"
+)
+
+// la fonction permettre de calculer le montant de l'investissement
+export const afficherMontantExatInvestissement = (state, getters) =>
+getters.montantInvestissement.reduce((prec, cur) =>parseFloat(prec) + parseFloat(cur.montant_marche), 0);
 
 
 
-    // export const marcheNonattribue = getters =>
-    // getters.marches.filter(
-    //   marcheNonAttribue => marcheNonAttribue.attribue == 0
-    // );
 
-getEngagementPersonnaliser1
+    export const afficherListeMarcheDeBienService = getters =>
+    getters.marches.filter(
+      marcheNonAttribue => marcheNonAttribue.test_diff =="bs"
+    );
+
+
 
 
     export  const printMarcheNonAttribue = (state, getters,rootState, rootGetters) =>
-        getters.marches.map(element => {
+        getters.afficherListeMarcheDeBienService.map(element => {
         if (element.unite_administrative_id !== null
             && element.activite_id !== null
             && element.economique_id !== null && element.type_marche_id !== null) {
@@ -306,6 +330,61 @@ getEngagementPersonnaliser1
     }
     return element;
 })
+
+montantMarche
+
+
+// afficher le tableau d'investissement
+
+getActeEffetFinancierPersonnaliser
+
+
+
+export const afficherLeTableauInvestissement = getters =>
+getters.marches.filter(
+  marcheNonAttribue => marcheNonAttribue.test_diff =="imvs"
+);
+
+
+
+
+export  const afficherTableauInvestissement = (state, getters,rootState, rootGetters) =>
+    getters.afficherLeTableauInvestissement.map(element => {
+    if (element.unite_administrative_id !== null
+        && element.activite_id !== null
+        && element.economique_id !== null && element.type_marche_id !== null) {
+    element = {
+        ...element,
+       
+       
+        objetUniteAdministrative:rootGetters['uniteadministrative/uniteAdministratives'].find(
+           plans => plans.id == element.unite_administrative_id
+        ),
+        afficheActivite: rootGetters[
+      "parametreGenerauxActivite/plans_activites"
+        ].find(planactivite => planactivite.id == element.activite_id),
+        afficheEconomique: rootGetters[
+            "parametreGenerauxBudgetaire/plans_budgetaires"
+        ].find(planactivite => planactivite.id == element.economique_id),
+        type_marche: rootGetters[
+            "bienService/typeMarches"
+        ].find(planactivite => planactivite.id == element.type_marche_id)
+
+
+        
+    }
+    
+}
+return element;
+})
+
+
+
+
+
+
+
+
 
 export const EngagementNonValider = state =>
   state.engagements.filter(
