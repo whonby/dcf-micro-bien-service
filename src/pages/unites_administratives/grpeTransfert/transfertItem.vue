@@ -5,19 +5,44 @@
   
                   <tr class="odd gradeX" v-if="article" @dblclick="$emit('modification', article)">
                    <td>{{article.num_transfert || 'Non renseigné'}}</td>
-                    <td>{{afficherLocalisation(article.id_zone_geographique) || 'Non renseigné'}}</td>
+                     <td>{{afficherActeurDepense(article.acteurdepense_id)|| 'Non renseigné'}}</td>
+                     <td>{{afficherDestinataire(article.unitezone_id) || 'Non renseigné'}}</td>
                       
+                          <td>{{afficherCodeTransfert(article.ligne_budgetaire_id) || 'Non renseigné'}}-{{afficherTransfert(article.ligne_budgetaire_id) || 'Non renseigné'}}</td>
+                  <td>{{afficherGrandNature(article.grandnatire_id)|| 'Non renseigné'}}</td>
+                  <td>{{afficherUa(article.ua_id) || 'Non renseigné'}}</td>
+                   <td style="text-align: center;">{{formatageSomme(parseFloat(article.montant_total_contrat)) || 'Non renseigné'}}</td>
+                       
+                     <td>
+                        <button v-if="article.decision_cf == 1"  class="btn  btn-success"  >                        
                      
-                    <td>{{article.acteurdepense_id|| 'Non renseigné'}}</td>
-                    <td>{{article.unitezone_id || 'Non renseigné'}}</td>
-                    <td>{{article.montant_total_contrat || 'Non renseigné'}}</td>
-                   
-                      <td>{{article.montant_transfert || 'Non renseigné'}}</td>
-                    <td>{{article.montant_total_transfert || 'Non renseigné'}}</td>
-                   <td>{{article.montant_restant || 'Non renseigné'}}</td>
-                     <td>{{article.ligne_budgetaire_id || 'Non renseigné'}}</td>
-                  <td>{{article.grandnatire_id || 'Non renseigné'}}</td>
-                  <td>{{article.ua_id || 'Non renseigné'}}</td>
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="article.decision_cf == 2" class="btn  btn-warning"  >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="article.decision_cf == 3" class="btn  btn-danger"  >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info"   >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                  
+                    <td>{{article.delaitraitement || 'Pas de delai de traitement'}}</td>
                     <td>
                       <button
                         class="btn btn-danger"
@@ -66,6 +91,17 @@ export default {
       "afficheNiveauPlanProg",
       "exercices_budgetaires"
     ]),
+    ...mapGetters("uniteadministrative", [
+      "jointureUaChapitreSection",
+      "uniteAdministratives",
+      "budgetGeneral",
+      "getPersonnaliseBudgetGeneral",
+      "montantBudgetGeneral",
+      "uniteZones",
+      "getPersonnaliseBudgetGeneralParTransfert"
+      // "chapitres",
+      // "sections"
+    ]),
     ...mapGetters("parametreGenerauxFonctionnelle", [
       "plans_fonctionnels",
       "afficheNiveauPlanFonctionnel"
@@ -75,7 +111,7 @@ export default {
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
-  
+  ...mapGetters('personnelUA', ['all_acteur_depense',  'fonctions']),
      afficherLocalisation() {
       return id => {
         if (id != null && id != "") {
@@ -88,8 +124,78 @@ export default {
         }
       };
     },
-    
-  
+         afficherActeurDepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.matricule.concat('  ', qtereel.nom,'  ',qtereel.prenom);
+      }
+      return 0
+        }
+      };
+    },
+   afficherDestinataire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteZones.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.description_localisation;
+      }
+      return 0
+        }
+      };
+    },
+     afficherUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     afficherGrandNature() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.grandes_natures.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    afficherTransfert() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == id);
+
+      if (qtereel) {
+        return qtereel.afficheEconomique.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    afficherCodeTransfert() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == id);
+
+      if (qtereel) {
+        return qtereel.afficheEconomique.code;
+      }
+      return 0
+        }
+      };
+    },
   },
   methods: {
     toggle: function () {

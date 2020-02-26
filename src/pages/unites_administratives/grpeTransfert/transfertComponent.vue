@@ -21,18 +21,18 @@
                 <thead>
                   <tr>
                     
-                     <th >N°transfert</th>
+                     <th >Numero transfert</th>
                    
-                    <th>Acteur depense</th>
+                    <th>Matricule Acteurs</th>
                       <th>Destinataire</th>
-                    <th>Montant Contrat</th> 
-                    <th>Montant transfert</th> 
-                     <th>Montant total transfert</th>
-                     <th>Montant restant</th>
+                   
                     <th>Ligne budgetaire</th>
                     <th>Grande nature</th>
                        <th>UA</th>
-                   
+                        <th>Montant Contrat</th> 
+                    
+                    <th>D&eacute;cision CF</th>
+                     <th>D&eacute;lai traitement</th>
                      <th>Action</th>
                   </tr>
                 </thead>
@@ -43,10 +43,23 @@
                         :key="groupeElement.id"
                         :article="groupeElement"
                      @modification="$emit('modification', $event)"
+                       @modification1="$emit('modification1', $event)"
                         @suppression="$emit('suppression', $event)"
 
                     ></transfertItem>
-                      
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="font-weight:bold;">Total</td>
+                        <td  style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(totalContrat))}}</td>
+                        
+                       <td></td>
+                         <td></td>
+                          <td></td>
+                      </tr>
                 </tbody>
               </table>
               </div>
@@ -88,7 +101,8 @@ export default {
       "uniteAdministratives",
       "budgetGeneral",
       "getPersonnaliseBudgetGeneral",
-      "montantBudgetGeneral"
+      "montantBudgetGeneral",
+      "transferts"
       // "chapitres",
       // "sections"
     ]),
@@ -121,7 +135,52 @@ export default {
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+  ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+                "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
+                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
+                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
+                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
+                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
+                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
+
+
+
+
+
+
+
+
+
+
+
+
+
+totalContrat(){
   
+    
+    var montant = this.groupe.uatransfert.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(2); 
+      if(isNaN(montant)) return null
+      return montant
+
+   
+  
+}, 
+
+totalTransfert(){
+  
+    
+    var montant = this.groupe.uatransfert.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_transfert), 0).toFixed(2); 
+      if(isNaN(montant)) return null
+      return montant
+
+   
+  
+}, 
+
+
+
+
+
     afficherSection() {
       return id => {
         if (id != null && id != "") {

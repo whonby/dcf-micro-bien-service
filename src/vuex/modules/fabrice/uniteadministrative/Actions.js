@@ -511,6 +511,7 @@ export function ajouterTransfert({ commit, dispatch }, nouveau) {
       ligne_budgetaire_id: nouveau.ligne_budgetaire_id,
       grandnatire_id: nouveau.grandnatire_id,
       ua_id: nouveau.ua_id,
+      date_jours: nouveau.date_jours,
 
     }))
 
@@ -543,6 +544,12 @@ export function modifierTransfert({ commit, dispatch }, nouveau) {
       ligne_budgetaire_id: nouveau.ligne_budgetaire_id,
       grandnatire_id: nouveau.grandnatire_id,
       ua_id: nouveau.ua_id,
+        	decision_cf: nouveau.decision_cf,
+      motif: nouveau.motif,
+      observation: nouveau.observation,
+      date_motif: nouveau.date_motif,
+      date_jours: nouveau.date_jours, 
+      delaitraitement: nouveau.delaitraitement,
     }))
     .then(response => {
       commit("MODIFIER_TRANSFERT", response.data);

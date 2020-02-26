@@ -463,6 +463,29 @@ export const getPersonnaliseBudgetGeneralParTransfert = (
     return element;
   });
 
+
+export const afficheTransfertValider = state =>
+  state.transferts.filter(
+    affichenaturedep => affichenaturedep.decision_cf == 1
+  );
+
+
+
+export const nombreUniteZoneValider = state =>
+  state.transferts.filter(
+    marcheNonAttribue => marcheNonAttribue.decision_cf == 1
+  ).length;
+
+export const montantTransfert = (state, getters) =>
+  getters.getPersonnaliseBudgetGeneralParTransfert.reduce(
+    (prec, cur) => parseInt(prec) + parseInt(cur.Dotation_Initiale),
+    0
+  );
+export const montantTransferer = (state, getters) =>
+  getters.afficheTransfertValider.reduce(
+    (prec, cur) => parseInt(prec) + parseInt(cur.montant_total_contrat),
+    0
+  );
 export {
   typeTextes,
   uniteAdministratives,
