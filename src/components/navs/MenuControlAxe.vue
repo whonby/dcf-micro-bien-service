@@ -38,6 +38,11 @@
              TRANSFERT
             </router-link>
           </li>
+           <li>
+            <router-link :to="{name: 'tableaubordTransfert'}" tag="a">
+             SUIVI DES TRANSFERTS
+            </router-link>
+          </li>
 <!-- <li class="" id="indicateur">
         <a title="Indicateur" href="#" class="">
           <i class="icon icon-users"></i>

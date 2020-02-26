@@ -2,7 +2,72 @@
 
 <template>
   <div>
-   
+      <div id="exampleModalMotifMandat" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Validation CF</h3>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" >
+          <div class="control-group">
+                            <label class="control-label">D&eacute;cision CF </label>
+                            <div class="controls">
+                              <select v-model="editTransfert.decision_cf">
+                               <option value="0">Attente</option>
+                              <option value="1">Vis&eacute;</option>
+                             <option value="2">Diff&eacute;r&eacute;</option>
+                             <option value="3">R&eacute;jet&eacute;</option>
+                            
+    
+    </select>
+                           
+                            </div>
+                          </div>
+                            <div class="control-group">
+                            <label class="control-label">Motif CF </label>
+                            <div class="controls">
+                              <select v-model="editTransfert.motif">
+                             
+                                 <option
+                                  v-for="gpeua in motifDecisions"
+                                  :key="gpeua.id"
+                                  :value="gpeua.id"
+                                >{{gpeua.libelle}}</option>
+                               
+                               
+                              </select>
+                           
+                            </div>
+                          </div>
+                          <div class="control-group">
+                            <label class="control-label">Observation CF</label>
+                            <div class="controls">
+                              <textarea  class="span" row = "6" v-model="editTransfert.observation">
+                              </textarea>
+                            </div>
+                          </div>
+                           <div class="control-group">
+                            <label class="control-label">Date Decision CF :</label>
+                            <div class="controls">
+                              <input type="date" class="span"  v-model="editTransfert.date_motif"/>
+                               
+                                
+                            </div>
+                          </div>
+                           
+         
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierUniteAdministrativeLocal(editTransfert)"
+          class="btn btn-primary"
+          href="#"
+         
+        >Modifier</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
 <!----- ajouter modal   ---->
 
 
@@ -455,7 +520,7 @@
                   </div>
                 </div>
               </td>
-              <td>
+              <td colspan="2">
               
                <div class="control-group">
                   <label class="control-label">Acteur depense</label>
@@ -463,7 +528,7 @@
                        <input
                       type="text"
                   :value="afficheActeurDepenseModifier(editTransfert.fonction_id)"
-                      class="span3"
+                      class="span6"
                      readonly
                       
                     />
@@ -479,7 +544,7 @@
                        <input
                       type="date"
                  v-model="editTransfert.date_jours"
-                      class="span3"
+                      class="span4"
                    
                       
                     />
@@ -487,13 +552,13 @@
                   </div>
                 </div>
               </td>
-              <td>
+              <!-- <td>
               
                <div class="control-group">
                   <label class="control-label">Dur&eacute;e traitement</label>
                   <div class="controls">
                        <input
-                      type="text"
+                      type="hidden"
                 :value="nombreJourTraitementCalucle"
                       class="span4"
                      readonly
@@ -502,8 +567,8 @@
                    
                   </div>
                 </div>
-              </td>
-                 <td>
+              </td> -->
+                 <td >
               
                <div class="control-group">
                   <label class="control-label">Fichier join</label>
@@ -515,74 +580,21 @@
                      readonly
                       
                     />
-                   
+                    <input
+                      type="hidden"
+                :value="nombreJourTraitementCalucle"
+                      class="span4"
+                     readonly
+                      
+                    />
                   </div>
                 </div>
               </td>
          </tr>
           
-         <span style="text-align:center;margin:20px 20px;color:red ">DECISION CF</span>
-         
-       <tr>
        
          
-         <td>
-       <div class="control-group">
-                            <label class="control-label">Decision CF </label>
-                            <div class="controls">
-                              <select v-model="editTransfert.decision_cf" class="span3">
-                                <option value="0">Attente</option>
-                              <option value="1">Vis&eacute;</option>
-                             <option value="2">Diff&eacute;r&eacute;</option>
-                             <option value="3">R&eacute;jet&eacute;</option>
-                            
-    
-    </select>
-                           
-                            </div>
-                          </div>
-         </td>
-        
-               <td>
-              
-             <div class="control-group">
-                            <label class="control-label">Motif CF </label>
-                            <div class="controls">
-                              <select v-model="editTransfert.motif" class="span3">
-                             
-                                 <option
-                                  v-for="gpeua in motifDecisions"
-                                  :key="gpeua.id"
-                                  :value="gpeua.id"
-                                >{{gpeua.libelle}}</option>
-                               
-                               
-                              </select>
-                           
-                            </div>
-                          </div>
-              </td>
-               <td>
-               <div class="control-group">
-                            <label class="control-label">Date Decision CF :</label>
-                            <div class="controls">
-                              <input type="date" class="span3"  v-model="editTransfert.date_motif"/>
-                           
-                            </div>
-                          </div>
-           
-              </td>
-               <td colspan="2">
-               <div class="control-group">
-                            <label class="control-label">Observation CF</label>
-                            <div class="controls">
-                              <textarea  class="span6"  v-model="editTransfert.observation">
-                              </textarea>
-                            </div>
-                          </div>
-              
-              </td>
-       </tr>
+      
         </table>
       </div>
       <div class="modal-footer">
@@ -631,8 +643,8 @@
               <transfertComponent v-for="equipement in uniteAdministratives"
                :key="equipement.id"
                 :groupe="equipement"
-                @modification="afficherModalModifierUniteAdministrative" 
-                
+                @modification="afficherModalModifierUniteAdministrative"
+                @modification2="afficherModalModifierMotifMandat"
                 
                 @suppression="supprimerBudget"
                 >
@@ -1087,20 +1099,21 @@ destinationDynamiquesModifier() {
   
   methods: {
     ...mapActions("uniteadministrative", [
-      "getAllUniteZone",
+     
       "ajouterTransfert",
       "modifierTransfert",
       "supprimerTransfert",
       // "ajouterHistoriqueBudgetGeneral"
     ]),
 
-    // afficherModalModifierMotifMandat(articles) {
-    //   this.$("#exampleModalMotifMandat").modal({
-    //     backdrop: "static",
-    //     keyboard: false
-    //   })
-    //   this.editTransfert = articles;
-    //   },
+    afficherModalModifierMotifMandat(articles) {
+      console.log("afficherModalModifierMotifMandat")
+      this.$("#exampleModalMotifMandat").modal({
+        backdrop: "static",
+        keyboard: false
+      })
+      this.editTransfert = articles;
+      },
 
  formatageSomme: formatageSomme,
     afficherModalAjouterUniteAdministrative() {

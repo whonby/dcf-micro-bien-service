@@ -43,7 +43,7 @@
                         :key="groupeElement.id"
                         :article="groupeElement"
                      @modification="$emit('modification', $event)"
-                       @modification1="$emit('modification1', $event)"
+                       @modification2="$emit('modification2', $event)"
                         @suppression="$emit('suppression', $event)"
 
                     ></transfertItem>

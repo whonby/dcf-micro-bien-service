@@ -13,27 +13,28 @@
                   <td>{{afficherUa(article.ua_id) || 'Non renseigné'}}</td>
                    <td style="text-align: center;">{{formatageSomme(parseFloat(article.montant_total_contrat)) || 'Non renseigné'}}</td>
                        
-                     <td>
-                        <button v-if="article.decision_cf == 1"  class="btn  btn-success"  >                        
+
+                     <td  v-if="article">
+                        <button v-if="article.decision_cf == 1"  class="btn  btn-success"    @click.prevent="$emit('modification2', article)">                        
                      
                       <span    >Visé</span>
                       
                       </button>
-                       <button v-else-if="article.decision_cf == 2" class="btn  btn-warning"  >                        
+                       <button v-else-if="article.decision_cf == 2" class="btn  btn-warning" @click.prevent="$emit('modification2', article)">                        
                      
                       
                        <span  >Différé</span>
                       
                     
                       </button>
-                        <button v-else-if="article.decision_cf == 3" class="btn  btn-danger"  >                        
+                        <button v-else-if="article.decision_cf == 3" class="btn  btn-danger"  @click.prevent="$emit('modification2', article)">                        
                      
                       
                        <span  >Réjeté</span>
                       
                     
                       </button>
-                     <button v-else class="btn  btn-info"   >                        
+                     <button v-else class="btn  btn-info" @click.prevent="$emit('modification2', article)"  >                        
                      
                       
                        <span  >Attente</span>
