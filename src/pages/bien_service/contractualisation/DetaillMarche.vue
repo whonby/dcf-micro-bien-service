@@ -1,4 +1,4 @@
-bailleurAjouter,
+difference_act,
 <template>
     
 <div>
@@ -1716,7 +1716,7 @@ bailleurAjouter,
                             />
                         </div>
                     </div>
-
+                          <input type="hidden" v-model="formEffetFinancier.difference_act">
                             </td>
 
 
@@ -1990,7 +1990,7 @@ bailleurAjouter,
                                     />
                                 </div>
                             </div>
-
+                             <input type="hidden" v-model="editActeEffetFinancier.difference_act">
                         </td>
 
 
@@ -3751,6 +3751,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
          formEffetFinancier:{
              code_act:"",
              libelle_act:"",
+             difference_act:"bs",
              reference_act:"",
              objet_act:"",
              incidence_financiere:"",
@@ -3790,6 +3791,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
          editActeEffetFinancier:{
               code_act:"",
              libelle_act:"",
+             difference_act:"bs",
              reference_act:"",
              objet_act:"",
              incidence_financiere:"",
@@ -4847,6 +4849,7 @@ ajouterModalActeEffetFinancierLocal(rcm){
     this.formEffetFinancier = {
              code_act:"",
              libelle_act:"",
+             difference_act:"bs",
              reference_act:"",
              objet_act:"",
              incidence_financiere:"",

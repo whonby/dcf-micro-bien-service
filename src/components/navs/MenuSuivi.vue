@@ -23,16 +23,16 @@
           <li class="divider"></li>
           <li>
             <router-link :to="{name:'executionActeEffetInvestissement'}" tag="a">
-              <i class="icon-check"></i>
+              <i class=" icon-cogs"></i>
             acte effet financier 
             </router-link>
           </li>
           <li class="divider"></li>
           <li>
-            <a href="#">
-              <i class="icon-key"></i>
+            <router-link :to="{name:'marcheEnExecutionPourInvestissement'}" tag="a">
+              <i class=" icon-ok"></i>
               marché && contrat atribué
-            </a>
+            </router-link>
           </li>
           <!-- <li class="divider"></li>
           <li>

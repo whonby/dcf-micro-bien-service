@@ -5,31 +5,48 @@
     <div class="quick-actions_homepage">
     
       <ul class="quick-actions">
+
+        <li class="bg_lg">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-important">{{sommeNombremarcheAttribueInvestisssemnt}}</span> Nombre de marche
+          </a>
+        </li>
+
         <li class="bg_ls">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-important">{{nombremarches}}</span> MARCHES NON ATTRIBUES
+            <span class="label label-important">{{nombreMarcheInvestissemst}}</span> MARCHES NON ATTRIBUES
+          </a>
+        </li>
+
+         <li class="bg_ls">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-important">{{nombreMarcheAttribueInvestissemst}}</span> MARCHES ATTRIBUES
           </a>
         </li>
          <li class="bg_ls">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-important">{{nombremarchesExecute}}</span> MARCHES ATTRIBUES
+            <span class="label label-important">{{formatageSomme(parseFloat(montantGlobalMarcheInvestissement))}}</span> MONTANTS PREVUS DES MARCHES NON ATTRIBUE
           </a>
         </li>
-         <li class="bg_ls">
+
+       <li class="bg_ly">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-important">{{formatageSomme(parseFloat(montantGlobalMarche))}}</span> MONTANTS PREVU DES MARCHES
+            <span class="label label-success">{{formatageSomme(parseFloat(montantGlobalMarcheAttribueInvestissement))}}</span>MONTANTS DES MARCHES ATTRIBUES
           </a>
         </li>
+
         <li class="bg_lo">
           <a href="#">
             <i class="icon-list-ol"></i>
             <span class="label label-success">{{formatageSomme(parseFloat(montantGlobalMarcheEnCoursExecution))}}</span>MONTANTS DES MARCHES ATTRIBUES
           </a>
         </li>
-        <!-- <li class="bg_ly">
+        <!-- <li class="bg_ly">nombremarchesExecute1   montantGlobalMarche
           <a href="#">
             <i class="icon-list-ol"></i>
             <span class="label label-important">{{nombreTypeText}}</span>Nombre de type texte
@@ -47,7 +64,7 @@
 <script>
 import { mapGetters } from "vuex";
 
-import { formatageSomme } from "../../Repositories/Repository";
+import { formatageSomme } from "../../../src/Repositories/Repository";
 
 export default {
   name:'tableauBordInvestissement',
@@ -66,8 +83,9 @@ export default {
   computed: {
 
     //   ...mapGetters('investissement'['']),
-    ...mapGetters("investissement", ['nombremarchesExecute', "montantGlobalMarcheEnCoursExecution",'montantGlobalMarche','nombremarches','acteDepense',"getMarchePersonnaliser","appelOffres",
+    ...mapGetters("bienService", ['nombreMarcheAttribueInvestissemst', "montantGlobalMarcheEnCoursExecution",'montantGlobalMarcheInvestissement','nombreMarcheInvestissemst','acteDepense',"getMarchePersonnaliser","appelOffres",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
+                "montantGlobalMarcheAttribueInvestissement","sommeNombremarcheAttribueInvestisssemnt",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",

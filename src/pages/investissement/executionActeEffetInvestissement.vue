@@ -172,20 +172,21 @@ export default {
 
   computed: {
       ...mapGetters('investissement',['actesEffetInvestissement']),
-     ...mapGetters("bienService", ['acteEffetFinanciers', 'marches',"getActeEffetFinancierPersonnaliser"]),
+     ...mapGetters("bienService", ['acteEffetFinanciers', 'marches',"getActeEffetFinancierInvestissement"]),
      ...mapGetters("gestionMarche",['entreprises']),
 
     acteEffetFiltre()  {
      
         const searchTerm = this.search.toLowerCase();
 
-return this.getActeEffetFinancierPersonnaliser.filter((item) => {
+return this.getActeEffetFinancierInvestissement.filter((item) => {
   
      return item.libelle_act.toLowerCase().includes(searchTerm) ||
        item.varObjetEntreprise.forme_juridique.toLowerCase().includes(searchTerm)
 
      
-    
+
+
 
   
   
@@ -193,6 +194,8 @@ return this.getActeEffetFinancierPersonnaliser.filter((item) => {
    }
 )
     },
+
+    
     // grandNatureDynamiques() {
     //  return id => {
     //     if (id != null && id != "") {
@@ -234,7 +237,7 @@ return this.getActeEffetFinancierPersonnaliser.filter((item) => {
         keyboard: false
       });
 
-      this.editacteEf = this.acteEffetFinanciers[index];
+      this.editacteEf = this.getActeEffetFinancierInvestissement[index];
     },
     // fonction pour vider l'input modification
     modifierModalTypeprestationLocal(){

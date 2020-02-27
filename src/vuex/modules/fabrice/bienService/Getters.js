@@ -1,3 +1,5 @@
+
+
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays
@@ -89,28 +91,95 @@ export const nombremarches = getters =>
         marcheNonAttribue => marcheNonAttribue.attribue !== 1
     ).length;
 
+// afficher le nombre de marcher nom attribué pour le module investissement
+    export const nombreMarcheInvestissemst = getters =>
+    getters.marches.filter(varComparaisonMarche => varComparaisonMarche.test_diff ==="imvs" 
+    && varComparaisonMarche.attribue !==1).length;
+
+
+    // afficher le nombre de marché attribué pour le module investissement
+    export const nombreMarcheAttribueInvestissemst = getters =>
+    getters.marches.filter(afficherMarcheattribInvestissement => afficherMarcheattribInvestissement.test_diff ==="imvs" 
+    && afficherMarcheattribInvestissement.attribue ==1).length;
+
+    
+
+  // fonction pour afficher le nombre marche pour l'investissemnet
+    export const sommeNombremarcheAttribueInvestisssemnt = (state, getters) =>{
+        let somme = (getters.nombreMarcheInvestissemst + getters.nombreMarcheAttribueInvestissemst)
+        if(isNaN(somme)) return null
+        return somme
+    }
+    
+
+
+
 
 export const nombremarchesExecute = getters =>
     getters.marches.filter(
         marcheNonAttribue => marcheNonAttribue.attribue == 1
     ).length;
 
+
+
+
+    
+
+// calcul du montant du marche pour l'investissement
+
+
+export const calculMontantMarcheNonAttribue = getters =>
+ getters.marches.filter(varaffi => varaffi.attribue !==1 &&
+    varaffi.test_diff ==="imvs")
+
+export const montantGlobalMarcheInvestissement = (state, getters) =>
+getters.calculMontantMarcheNonAttribue.reduce(
+    (prec,cur)=> parseInt(prec) + parseInt(cur.montant_marche), 0)
+
+// calcule le montant des marchers attribue pour l'investissement
+
+    export const calculMontantMarcheAttribue = getters =>
+ getters.marches.filter(varaffi => varaffi.attribue ==1 &&
+    varaffi.test_diff ==="imvs")
+
+export const montantGlobalMarcheAttribueInvestissement = (state, getters) =>
+getters.calculMontantMarcheAttribue.reduce(
+    (prec,cur)=> parseInt(prec) + parseInt(cur.montant_marche), 0)
+
+// fin du calcul
+
+// calcul le nombre de marche de l'investissement
+
+
+
+
+
 export const afficheNonMarche = getters =>
     getters.marches.filter(
-        marcheNonAttribue => marcheNonAttribue.attribue !== 1
+        marcheNonAttribue => marcheNonAttribue.attribue !== 1 && 
+         marcheNonAttribue.test_diff ==="bs"
     );
+
 export const montantGlobalMarche = (state, getters) =>
     getters.afficheNonMarche.reduce(
         (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
         0
     );
+    
 export const nombremarchesExecute1 = getters =>
     getters.marches.filter(
         marcheNonAttribue => marcheNonAttribue.attribue == 1
     );
 
+
+
+
+
+    export const montantMarcheAttribueInvestissement = getters =>
+    getters.acteEffetFinanciers.filter(variableInvestissement => variableInvestissement.difference_act ==="imvs")
+
 export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
-    getters.acteEffetFinanciers.reduce(
+    getters.montantMarcheAttribueInvestissement.reduce(
         (prec, cur) => parseInt(prec) + parseInt(cur.montant_act),
         0
     );
@@ -226,6 +295,12 @@ export const montantMarche = (state, getters) =>
 
 
 
+    // export const afficherListeMarcheDeBienService = getters =>
+    // getters.marches.filter(
+    //   marcheNonAttribue => marcheNonAttribue.test_diff =="bs"
+    // );
+
+
 
 
 
@@ -249,14 +324,46 @@ export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, ro
         return element;
     })
 
+
+
+
+
+// fonction pour calculer le montant reel acte
+
+export const montantReelacteEffetfinancier = getters =>
+getters.acteEffetFinanciers.filter(varDifference => varDifference.difference_act ==="imvs")
+
+
+export const resultatMontantReelActeEffet =(state, getters) =>
+    getters.montantReelacteEffetfinancier.reduce(
+        (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0);
+
+
+        
+// fonction pour calcule le montant de reel acte effet financier dans bien service
+
+export const fonctionDeCalcule = getters =>
+getters.acteEffetFinanciers.filter(varComparaisonMontant => varComparaisonMontant.difference_act ==="bs")
+
 export const montantMarcheReel = (state, getters) =>
 
-    getters.acteEffetFinanciers.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act),
+    getters.fonctionDeCalcule.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_act),
         0
 
     );
 
 
+    
+//     export const montantInvestissement = getters =>
+// getters.marches.filter(
+//     afficheMontant => afficheMontant.test_diff ==="imvs"
+// )
+
+// export const afficherMontant = (state, getters) =>
+// getters.acteEffetFinanciers.reduce((prec, cur)=>parseFloat(prec) + parseFloat(cur.montant_act))
+
+
+    // afficher montant des marches attribues pour investissement
 
     export const montantMarcheAttribue = (state, getters) =>
 
@@ -277,7 +384,39 @@ export const montantMarcheReel = (state, getters) =>
 
 // marche non attribué 
 
-   
+// marche attribue pour l'investissement
+
+// export const marcheAttribueinvestissement = getters =>
+// getters.marches.filter(
+//     afficheInvestissement => afficheInvestissement.test_diff ==="imvs"
+// );
+
+// export const afficherMontantMracheInvestissement = getters =>
+// getters.marcheAttribueinvestissement.filter(
+//     comparaisonInvestissement => comparaisonInvestissement.attribue !== 0
+// )
+
+// export  const getMarcheInvestissement = (state, getters,rootState, rootGetters) =>
+// state.afficherMontantMracheInvestissement.map(element => {
+//     if (element.unite_administrative_id !== null && element.activite_id !== null && element.economique_id !== null ){
+//         element = {
+//             ...element,
+//             objetUniteAdministrative:rootGetters['uniteadministrative/uniteAdministratives'].find(
+//                plans => plans.id == element.unite_administrative_id
+//             ),
+//             afficheActivite: rootGetters[
+//           "parametreGenerauxActivite/plans_activites"
+//         ].find(planactivite => planactivite.id == element.activite_id),
+//             afficheEconomique: rootGetters[
+//                 "parametreGenerauxBudgetaire/plans_budgetaires"
+//             ].find(planactivite => planactivite.id == element.economique_id)
+            
+//         }
+        
+//     }
+//     return element;
+// })
+
 
 // cette fonction permet d'afficher le montant de l'investissement si la varriable test_diff est a imvs
 
@@ -285,6 +424,7 @@ export const montantInvestissement = getters =>
 getters.marches.filter(
     afficheMontant => afficheMontant.test_diff ==="imvs"
 )
+
 
 // la fonction permettre de calculer le montant de l'investissement
 export const afficherMontantExatInvestissement = (state, getters) =>
@@ -331,12 +471,75 @@ getters.montantInvestissement.reduce((prec, cur) =>parseFloat(prec) + parseFloat
     return element;
 })
 
-montantMarche
+
+
+
+// afficher le tableau des marche attribuer pour le module investissement
+
+// export const afficherMontantInvestissement = getters =>
+// getters.marches.filter(
+//     varAffiche => varAffiche.test_diff =="imvs"
+// );
+
+// export  const getMarcheInvestissement = (state, getters,rootState, rootGetters) =>
+// state.afficherMontantInvestissement.map(element => {
+//     if (element.unite_administrative_id !== null && element.activite_id !== null && element.economique_id !== null ){
+//         element = {
+//             ...element,
+//             objetUniteAdministrative:rootGetters['uniteadministrative/uniteAdministratives'].find(
+//                plans => plans.id == element.unite_administrative_id
+//             ),
+//             afficheActivite: rootGetters[
+//           "parametreGenerauxActivite/plans_activites"
+//         ].find(planactivite => planactivite.id == element.activite_id),
+//             afficheEconomique: rootGetters[
+//                 "parametreGenerauxBudgetaire/plans_budgetaires"
+//             ].find(planactivite => planactivite.id == element.economique_id)
+            
+//         }
+        
+//     }
+//     return element;
+// })
+
+
+
+
+
+
+
+
+export const afficherTableauInvestissements = getters =>
+getters.acteEffetFinanciers.filter(
+    varResponse => varResponse.difference_act =="imvs"
+    );
+
+
+
+    export  const getActeEffetFinancierInvestissement = (state, getters,rootState, rootGetters) =>
+    getters.afficherTableauInvestissements.map(element => {
+    if (element.entreprise_id !== null
+       ) {
+    element = {
+        ...element,
+       
+       
+        varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
+            plans => plans.id == element.entreprise_id
+        ),
+
+        
+    }
+    
+}
+return element;
+})
+
 
 
 // afficher le tableau d'investissement
 
-getActeEffetFinancierPersonnaliser
+
 
 
 

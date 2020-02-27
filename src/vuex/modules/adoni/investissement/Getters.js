@@ -42,6 +42,32 @@ return element;
 
 
 
+// export const getActeEffetFinancierPersonnaliserInvestissement = (state, getters, rootState, rootGetters) =>
+//     state.actesEffetInvestissement.map(element => {
+//         if (element.entreprise_id !== null) {
+//             element = {
+//                 ...element,
+
+
+//                 varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
+//                     plans => plans.id == element.entreprise_id
+//                 ),
+
+//                 varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
+//                     plans => plans.id == element.entreprise_id
+//                 ),
+
+               
+
+
+//             }
+
+//         }
+//         return element;
+//     })
+
+
+
 
 
 
