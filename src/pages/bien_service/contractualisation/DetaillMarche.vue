@@ -134,6 +134,9 @@
                                         </td>
 
                                <component-offre :macheid="detail_marche.id"></component-offre>
+                        </tr>
+                         </tbody>
+                           </table>
                             </div>
 
 
@@ -6069,6 +6072,7 @@ ajouterNouveauFournisseurLocal(registeCommerce){
                         'Content-Type' : 'multipart/form-data'
                     }
                 }
+
 
                 this.modifierDemandeAno(formData,config)
                 this.getAnalyseDMP()
