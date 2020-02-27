@@ -1,3 +1,4 @@
+
 <template>
     <div>
 
@@ -96,13 +97,13 @@
 
                                         <th>Banque</th>
                                         <!-- <th>Entreprise</th> -->
-                                        <th>Date</th>
+                                        <th>Date d'Ouverture</th>
                                         <th>Signataire</th>
                                         <th>Nature compte</th>
-                                        <th>Nom Agence</th>
-                                        <th>Situation geographique</th>
-                                        <th>Numero agence</th>
-                                        <th>Telephone </th>
+                                         <th>Swift</th>
+                                        <th>Iban</th>
+                                        <th>Rib</th>
+                                       
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -121,13 +122,12 @@
                                          <td v-else >Non renseigné</td>
                                             
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{appelOffre.agence|| 'Non renseigné'}}</td>
+                                            {{appelOffre.swift|| 'Non renseigné'}}</td>
+                                       
                                         <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{appelOffre.situation_geographique_angence || 'Non renseigné'}}</td>
-                                        <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{appelOffre.numero_agence || 'Non renseigné'}}</td>
-                                            <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{appelOffre.telephone_agence || 'Non renseigné'}}</td>
+                                            {{appelOffre.iban || 'Non renseigné'}}</td>
+                                             <td @dblclick="afficherModalModifierActeDepense(index)">
+                                            {{appelOffre.rib || 'Non renseigné'}}</td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerCompte(appelOffre.id)"  class="btn btn-danger ">
                                                 <span class=""><i class="icon-trash"></i></span></button>
@@ -155,7 +155,7 @@
         </div>
 
 <!-- Ajouter appel offres --->
-        <div id="myAlert" class="modal hide tailModal" aria-hidden="true" style="display: none;">
+        <div id="myAlert" class="modal hide tailModal"  >
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter compte bancaire</h3>
@@ -204,12 +204,7 @@
                                                 </div>
                           </td>
                         
-
-                       
-                         
-                      </tr>
-                      <tr>
-                            <td>
+<td>
                               <div class="control-group">
                                                     <label class="control-label">Communes</label>
                                                     <div class="controls">
@@ -225,6 +220,11 @@
                                                     </div>
                                                 </div>
                           </td>
+                       
+                         
+                      </tr>
+                      <tr>
+                            
                             <td>
                         <div class="control-group">
                              <label>Banque</label>
@@ -251,11 +251,7 @@
                             </div>
                         </div>
                           </td>
-                      </tr>
-                     <tr>
-                    
-
-                        
+                          
                                 <td>
 
                         <div class="control-group">
@@ -274,6 +270,11 @@
                             </div>
                         </div>
                           </td>
+                      </tr>
+                     <tr>
+                    
+
+                        
                           <td>
                      
                         <div class="control-group">
@@ -283,8 +284,6 @@
                             </div>
                         </div>
                           </td>
-                      </tr>
-                      <tr>
                            <td>
                         <div class="control-group">
                             <div class="controls">
@@ -302,7 +301,7 @@
                              <td>
                        <div class="control-group">
                            
-                             <label>Numero compte</label>
+                             <label>Numero compte/cléRib</label>
                             <div class="controls">
                               
                             <!-- <select v-model="formData.entrepse_id" class="span">
@@ -310,7 +309,7 @@
                               :value="varText.id">{{varText.raison_sociale}}</option>
                             </select> -->
                                   <div class="controls">
-                                <input type="text" class="span4" placeholder="" v-model="formData.numero_compte">
+                                <input type="text" class="span3" placeholder="" v-model="formData.numero_compte"> <input type="text" class="span1" placeholder="" v-model="formData.clerib">
                             </div>
                             </div>
                         </div>
@@ -323,6 +322,9 @@
                             </div>
                         </div>
                           </td>
+                      </tr>
+                      <tr>
+                          
                         
                          
 
@@ -339,13 +341,45 @@
                             </div>
                         </div>
                           </td>
+<td>
 
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Code SWIFT</label>
+                                <input type="text" class="span4"  v-model="formData.swift">
+                            </div>
+                        </div>
+                          </td>
+                          <td>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>IBAN</label>
+                                <input type="text" class="span4"  v-model="formData.iban">
+                            </div>
+                        </div>
+                          </td>
+                           <td>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>RIB</label>
+                                <input type="text" class="span4"  :value="afficherCodeRib" readonly>
+                            </div>
+                        </div>
+                          </td>
                     </tr>
                     </table>
                 
             </div>
-            <div class="modal-footer">  <a @click.prevent="ajouterCompteLocal" class="btn btn-primary"
- href="#">Valider</a> <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+            
+            <div class="modal-footer"> 
+              
+  <button 
+              @click.prevent="ajouterCompteLocal" class="btn btn-primary"
+              href="#">Valider</button>
+              <button data-dismiss="modal" class="btn" href="#">Fermer</button>
+ </div>
         </div>
 
         <!-- Fin ajouter appel offres --->
@@ -402,12 +436,7 @@
                                                 </div>
                           </td>
                         
-
-                       
-                         
-                      </tr>
-                      <tr>
-                            <td>
+ <td>
                               <div class="control-group">
                                                     <label class="control-label">Communes</label>
                                                     <div class="controls">
@@ -423,6 +452,11 @@
                                                     </div>
                                                 </div>
                           </td>
+                       
+                         
+                      </tr>
+                      <tr>
+                           
                             <td>
                         <div class="control-group">
                              <label>Banque</label>
@@ -449,12 +483,7 @@
                             </div>
                         </div>
                           </td>
-                      </tr>
-                     <tr>
-                    
-
-                        
-                                <td>
+                           <td>
 
                         <div class="control-group">
                             <div class="controls">
@@ -472,6 +501,12 @@
                             </div>
                         </div>
                           </td>
+                      </tr>
+                     <tr>
+                    
+
+                        
+                               
                           <td>
                      
                         <div class="control-group">
@@ -481,9 +516,7 @@
                             </div>
                         </div>
                           </td>
-                      </tr>
-                      <tr>
-                           <td>
+<td>
                         <div class="control-group">
                             <div class="controls">
                                 <label>Nature de compte</label>
@@ -497,18 +530,18 @@
                             </div>
                         </div>
                           </td>
-                             <td>
+                           <td>
                        <div class="control-group">
                            
-                             <label>Numero compte</label>
+                             <label>Numero compte/cléRib</label>
                             <div class="controls">
                               
-                            <!-- <select v-model="editCompte.entrepse_id" class="span">
+                            <!-- <select v-model="formData.entrepse_id" class="span">
                                 <option v-for="varText in entreprises" :key="varText.id"
                               :value="varText.id">{{varText.raison_sociale}}</option>
                             </select> -->
                                   <div class="controls">
-                                <input type="text" class="span4" placeholder="" v-model="editCompte.numero_compte">
+                                <input type="text" class="span3" placeholder="" v-model="editCompte.numero_compte"> <input type="text" class="span1" placeholder="" v-model="editCompte.clerib">
                             </div>
                             </div>
                         </div>
@@ -521,11 +554,8 @@
                             </div>
                         </div>
                           </td>
-                        
-                         
-
-                         
                       </tr>
+                      
  
                     <tr>
                           <td>
@@ -537,7 +567,33 @@
                             </div>
                         </div>
                           </td>
+<td>
 
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Code SWIFT</label>
+                                <input type="text" class="span4"  v-model="editCompte.swift">
+                            </div>
+                        </div>
+                          </td>
+                          <td>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>IBAN</label>
+                                <input type="text" class="span4"  v-model="editCompte.iban">
+                            </div>
+                        </div>
+                          </td>
+                           <td>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>RIB</label>
+                                <input type="text" class="span4"  :value="afficherCodeRibEditCompte" readonly>
+                            </div>
+                        </div>
+                          </td>
                     </tr>
                     </table>
                 
@@ -549,9 +605,9 @@
 
       
  <!--<fab :actions="fabActions" @cache="afficherModalAjouterActeDepense" main-icon="apps" bg-color="green"></fab>-->
-        <notifications  />
+        <!-- <notifications  />
         <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-        <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterActeDepense()">Open</button>
+        <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterActeDepense()">Open</button> -->
 
 
     </div>
@@ -641,6 +697,31 @@ created() {
             ...mapGetters("bienService", [ "getMarchePersonnaliser","appelOffres","villes","communes","pays" ]),
 
                 ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
+
+afficherCodeRib(){
+      //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
+    
+    const codeBanq = this.banques.find(codeBanq => codeBanq.id == this.formData.banq_id)
+ const codeAgence = this.agenceBanques.find(codeAgence => codeAgence.code_agence == this.formData.numero_agence)
+     if(codeBanq && codeAgence && this.formData.numero_compte  && this.formData.clerib ){
+       return codeBanq.code_banque + codeAgence.code_agence + this.formData.numero_compte + this.formData.clerib
+     }
+
+     return ""
+   },
+afficherCodeRibEditCompte(){
+      //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
+    
+    const codeBanq = this.banques.find(codeBanq => codeBanq.id == this.editCompte.banq_id)
+ const codeAgence = this.agenceBanques.find(codeAgence => codeAgence.code_agence == this.editCompte.numero_agence)
+     if(codeBanq && codeAgence && this.editCompte.numero_compte  && this.editCompte.clerib ){
+       return codeBanq.code_banque + codeAgence.code_agence + this.editCompte.numero_compte + this.editCompte.clerib
+     }
+
+     return ""
+   },
+
+
 
               verroPays() {
       return this.formData.banq_id == "";
@@ -955,7 +1036,8 @@ AffichierSituationGeoAgenceModifier() {
       telephone_agence:this.AffichierNumeroAgence,
           situation_geographique_angence:this.AffichierSituationGeoAgence,
           agence:this.AffichierNomAgence,
-         agence_id:this.AffichierIdAgence
+         agence_id:this.AffichierIdAgence,
+         rib:this.afficherCodeRib,
       
        };
                 this.ajouterCompte(nouvelObjet)
@@ -1000,7 +1082,8 @@ AffichierSituationGeoAgenceModifier() {
       telephone_agence:this.AffichierNumeroAgenceModifier,
           situation_geographique_angence:this.AffichierSituationGeoAgenceModifier,
           agence:this.AffichierNomAgenceModifier,
-         agence_id:this.AffichierIdAgenceModifier
+         agence_id:this.AffichierIdAgenceModifier,
+         rib:this.afficherCodeRibEditCompte
       
        };
               this.modifierCompte(nouvelObjet)
@@ -1064,8 +1147,8 @@ AffichierSituationGeoAgenceModifier() {
     .tailModal
     {
 
- width: 1200px;
- margin: 0 -630px;
+ width: 1590px;
+ margin: 0 -790px;
  height: 500px;
 
     }

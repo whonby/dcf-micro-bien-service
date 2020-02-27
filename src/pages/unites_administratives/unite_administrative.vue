@@ -66,7 +66,7 @@
               <td>
               
                <div class="control-group">
-                  <label class="control-label">Service gestionnaire</label>
+                  <label class="control-label">Service gestionnaire de crédit</label>
                   <div class="controls">
                     <select v-model="formData.servicegest_id">
                       <option
@@ -223,7 +223,7 @@
             <tr>
                <td>
                  <div class="control-group">
-                  <label class="control-label">Service gestionnaire</label>
+                  <label class="control-label">Service gestionnaire de crédit</label>
                   <div class="controls">
                     <select v-model="editUniteAdministrative.servicegest_id">
                       <option

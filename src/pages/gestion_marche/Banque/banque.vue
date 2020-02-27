@@ -39,7 +39,7 @@
               <thead>
                 <tr>
                   <th>Code banque</th>
-                     <th>Numero banque</th>
+                     <!-- <th>Numero banque</th> -->
                     <th>Libelle</th>
                   <th>Telephone</th>
                   <th>Situation geographique</th>
@@ -53,8 +53,8 @@
 
                   <td @dblclick="afficherModalModifierBanque(index)">
                       {{banque.code_banque || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifierBanque(index)">
-                      {{banque.numero_banque || 'Non renseigné'}}</td>
+                 <!-- <td @dblclick="afficherModalModifierBanque(index)">
+                      {{banque.numero_banque || 'Non renseigné'}}</td> -->
                   <td @dblclick="afficherModalModifierBanque(index)">
                       {{banque.libelle || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierBanque(index)">
@@ -109,12 +109,12 @@
               </div>
             </div>
 
-            <div class="control-group">
+            <!-- <div class="control-group">
               <label class="control-label">Numero banque:</label>
               <div class="controls">
                 <input type="text" v-model="formData.numero_banque	" class="span" placeholder="Saisir le numero " />
               </div>
-            </div>
+            </div> -->
 
             <div class="control-group">
               <label class="control-label">Libelle:</label>
@@ -129,7 +129,7 @@
             <div class="control-group">
               <label class="control-label">Telephone:</label>
               <div class="controls">
-                <input type="text" v-model="formData.telephone" class="span" placeholder="" />
+                <input type="number" v-model="formData.telephone" class="span" placeholder="" />
               </div>
             </div>
              <div class="control-group">
@@ -169,12 +169,12 @@
               </div>
             </div>
 
-                    <div class="control-group">
+                    <!-- <div class="control-group">
               <label class="control-label">Numero banque:</label>
               <div class="controls">
                 <input type="text" v-model="editBanque.numero_banque" class="span" placeholder="Saisir le numero " />
               </div>
-            </div>
+            </div>  -->
 
 
             
@@ -190,7 +190,7 @@
               <div class="control-group">
               <label class="control-label">Telephone:</label>
               <div class="controls">
-                <input type="text" v-model="editBanque.telephone" class="span" placeholder="" />
+                <input type="number" v-model="editBanque.telephone" class="span" placeholder="" />
               </div>
             </div>
              <div class="control-group">

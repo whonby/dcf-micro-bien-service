@@ -731,15 +731,29 @@
                        
                       </tr>
                       <tr>
-                            <td colspan=2>
+                            <td >
                          <div class="control-group">
                             <label class="control-label">Objet de la dépense</label>
                             <div class="controls">
-                              <input type="text" class="span7" :value="afficherObjetEngagement1" readonly/>
+                              <input type="text" class="span4" :value="afficherObjetEngagement1" readonly/>
                                <input type="hidden" class="span10" v-model="editEngagement.id" readonly/>
                             </div>
                           </div>
                         </td>
+                         <td>
+                            <div class="control-group">
+                              <label class="control-label">Numéro compte</label>
+                              <div class="controls">
+                               <select v-model="editEngagement.compte_id" class="span4">
+                                <option
+                                  v-for="affiche in afficherCompteUtilisateur(this.AfficherIdFournisseur)" :key="affiche.id"
+                                  :value="affiche.id"
+                                >{{affiche.rib}}</option>
+                              </select>
+                              </div>
+                            </div>
+                          </td>
+                          
                          <td>
                             <div class="control-group">
                               <label class="control-label">piece justificative</label>
@@ -1458,15 +1472,28 @@
                        
                       </tr>
                       <tr>
-                            <td colspan=2>
+                            <td>
                          <div class="control-group">
                             <label class="control-label">Objet de la dépense</label>
                             <div class="controls">
-                              <input type="text" class="span7" :value="afficherObjetMandat"  readonly/>
+                              <input type="text" class="span4" :value="afficherObjetMandat"  readonly/>
                                <input type="hidden" class="span10" v-model="editMandat.id" readonly/>
                             </div>
                           </div>
                         </td>
+                         <td>
+                            <div class="control-group">
+                              <label class="control-label">Numéro compte</label>
+                              <div class="controls">
+                               <select v-model="editMandat.compte_id" class="span4">
+                                <option
+                                  v-for="affiche in afficherCompteUtilisateur(this.AfficherIdFournisseur)" :key="affiche.id"
+                                  :value="affiche.id"
+                                >{{affiche.rib}}</option>
+                              </select>
+                              </div>
+                            </div>
+                          </td>
                          <td>
                             <div class="control-group">
                               <label class="control-label">piece justificative</label>
@@ -1508,7 +1535,7 @@
                          <div class="control-group">
                             <label class="control-label">Trésor</label>
                             <div class="controls">
-                              <input type="number" class="span4" v-model="editMandat.montant_tresor" readonly/>
+                              <input type="number" class="span4" v-model="editMandat.montant_tresor" />
                             </div>
                           </div>
                         </td>
@@ -1516,7 +1543,7 @@
                           <div class="control-group">
                             <label class="control-label">Don</label>
                             <div class="controls">
-                              <input type="number" class="span4" v-model="editMandat.montant_don" readonly/>
+                              <input type="number" class="span4" v-model="editMandat.montant_don" />
                             </div>
                           </div>
                         </td>
@@ -1524,7 +1551,7 @@
                              <div class="control-group">
                             <label class="control-label">Emprunt</label>
                             <div class="controls">
-                              <input type="number" class="span4" v-model="editMandat.montant_emprunt" readonly/>
+                              <input type="number" class="span4" v-model="editMandat.montant_emprunt" />
                             </div>
                           </div>
                         </td>
@@ -2295,15 +2322,28 @@
                        
                       </tr>
                       <tr>
-                            <td colspan=2>
+                            <td >
                          <div class="control-group">
                             <label class="control-label">Objet de la dépense</label>
                             <div class="controls">
-                              <input type="text" class="span7" :value="afficherObjetFacture" readonly/>
+                              <input type="text" class="span4" :value="afficherObjetFacture" readonly/>
                                <input type="hidden" class="span10" v-model="formData.id" readonly/>
                             </div>
                           </div>
                         </td>
+                          <td>
+                            <div class="control-group">
+                              <label class="control-label">Numéro compte</label>
+                              <div class="controls">
+                               <select v-model="formData.compte_id" class="span4">
+                                <option
+                                  v-for="affiche in afficherCompteUtilisateur(this.AfficherIdFournisseur)" :key="affiche.id"
+                                  :value="affiche.id"
+                                >{{affiche.rib}}</option>
+                              </select>
+                              </div>
+                            </div>
+                          </td>
                          <td>
                             <div class="control-group">
                               <label class="control-label">piece justificative</label>
@@ -2617,8 +2657,18 @@
             <span class="label label-success">{{tauxFacturation}}%</span>TAUX FACTURE
           </a>
         </li>
-        
-      
+         <li class="bg_lo">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-success">{{ratioAvenantMarche}}%</span> RATIO AVENANT/MARCHE
+          </a>
+        </li>
+       <li class="bg_lo">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-success">{{affichierNombreAvenant(detail_marche.id)}}</span> NOMBRE AVENANT
+          </a>
+        </li>
       </ul>
     </div>
 
@@ -2874,7 +2924,7 @@
                      <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{type.objet_avenant || 'Non renseigné'}}</td>
-                    <td
+                    <td style="text-align: center"
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{formatageSomme(parseFloat(type.montant_avenant)) || 0}}</td>
                     <td
@@ -2889,6 +2939,15 @@
                         </span>
                       </button>
                     </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    
+                      <td style="font-weight:bold;">Total Avenant</td>
+                    <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(montantAvenantParMarche(this.detail_marche.id)))}}</td>
+                    <td></td>
                   </tr>
                                     </tbody>
                                 </table>
@@ -2997,6 +3056,8 @@
                       </button>
                     </td>
                   </tr>
+
+                  
                                     </tbody>
                                 </table>
                            
@@ -3142,7 +3203,7 @@
                     >{{formatageSomme(parseFloat(type.montant_tresor)) || 0}}</td>
                   <td
                        style="text-align: center"
-                    >{{formatageSomme(parseFloat(objetfactureMontant(type.facture_id)))|| 0}}</td>
+                    >{{formatageSomme(parseFloat(montantTotalDonEtEmprunt))|| 0}}</td>
                     <!-- <td  style="text-align: center">{{formatageSomme(parseFloat(restePayeMarche)) || 0}}</td> -->
                    
   <!-- <td style="text-align: center"> {{tauxFacturation || 0}}%</td>
@@ -3159,12 +3220,15 @@
                      
                     
                     > {{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td> -->
-                     <td  style="text-align: center;color:red;font-weight:bold;"> {{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td>
+                     <td ></td>
                   <td
                      
                      style="text-align: center;color:red;font-weight:bold;"
                     >{{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td> 
-                    
+                      <td
+                     
+                     style="text-align: center;color:red;font-weight:bold;"
+                    >{{formatageSomme(parseFloat(montantTotalDonEtEmprunt)) || 0}}</td> 
                     
                       <!-- <td  style="text-align: center;color:red;font-weight:bold;"> {{tauxFacturation || 0}}%</td> -->
                     
@@ -3303,6 +3367,7 @@
                             </div>
                           </div>
                         </td>
+                        
                           <td>
                          <div class="control-group">
                             <label class="control-label">Section</label>
@@ -3741,15 +3806,29 @@
                        
                       </tr>
                       <tr>
-                            <td colspan=2>
+                            <td>
                          <div class="control-group">
                             <label class="control-label">Objet de la dépense</label>
                             <div class="controls">
-                              <input type="text" class="span7" v-model="afficherObjetFacture" readonly/>
+                              <input type="text" class="span4" v-model="afficherObjetFacture" readonly/>
                                <input type="hidden" class="span10" v-model="formData.id" readonly/>
                             </div>
                           </div>
                         </td>
+                       
+                         <td>
+                            <div class="control-group">
+                              <label class="control-label">Numéro compte</label>
+                              <div class="controls">
+                               <select v-model="formData.compte_id" class="span4">
+                                <option
+                                  v-for="affiche in afficherCompteUtilisateur(this.AfficherIdFournisseur)" :key="affiche.id"
+                                  :value="affiche.id"
+                                >{{affiche.rib}}</option>
+                              </select>
+                              </div>
+                            </div>
+                          </td>
                          <td>
                             <div class="control-group">
                               <label class="control-label">piece justificative</label>
@@ -7171,15 +7250,30 @@
                        
                       </tr>
                       <tr>
-                            <td colspan=2>
+                            <td>
                          <div class="control-group">
                             <label class="control-label">Objet de la dépense</label>
                             <div class="controls">
-                              <input type="text" class="span7" v-model="afficherObjetFactureEngagement" readonly/>
+                              <input type="text" class="span4" v-model="afficherObjetFactureEngagement" readonly/>
                                <input type="hidden" class="span10" v-model="formData.id" readonly/>
                             </div>
                           </div>
                         </td>
+                        <td>
+                            <div class="control-group">
+                              <label class="control-label">Numéro compte</label>
+                             
+                              <div class="controls">
+                                <input
+                                  type="text"
+                                  class="span"
+                                  :value="afficheCompte(editEngagement.compte_id)"
+                                
+                                 readonly
+                                />
+                              </div>
+                            </div>
+                          </td>
                          <td>
                             <div class="control-group">
                               <label class="control-label">piece justificative</label>
@@ -7516,7 +7610,8 @@ type_procedure_id:"",
 type_engagement_id:"",
 val:0
       },
-formData1:{
+
+formData1: {
 total:0,
 total2:0,
 total3:0,
@@ -7526,10 +7621,86 @@ total6:0,
 total7:0,
 total8:0,
 total9:0,
-total10:0
+total10:0,
+       
+numero_facture:"",
+        objet_facture:"",
+       
+      
+        
+        typfacture_id:"",
+           prix_propose_ht:"",
+        prix_propose_ttc:"",
+         date_facture:"",
+         ua:"",
+           tva:"",
+           taux:"",
 
+            designation:"",
 
+ prix_unitaire:"",
+         quantite:"",
+           montantHT1:"",
+           designation2:"",
+            prix_unitaire2:"",
+             quantite2:"",
+         montantHT2:"",
+           designation3:"",
+           prix_unitaire3:"",
+            quantite3:"",
+             montantHT3:"",
+
+ designation4:"",
+           prix_unitaire4:"",
+            quantite4:"",
+             montantHT4:"",
+              designation5:"",
+           prix_unitaire5:"",
+            quantite5:"",
+             montantHT5:"",
+              designation6:"",
+           prix_unitaire6:"",
+            quantite6:"",
+             montantHT6:"",
+              designation7:"",
+           prix_unitaire7:"",
+            quantite7:"",
+             montantHT7:"",
+              designation8:"",
+           prix_unitaire8:"",
+            quantite8:"",
+             montantHT8:"",
+              designation9:"",
+           prix_unitaire9:"",
+            quantite9:"",
+             montantHT9:"",
+
+ designation10:"",
+           prix_unitaire10:"",
+            quantite10:"",
+             montantHT10:"",
+ fournisseur_id:"",
+ exonere:"",
+       
+
+        
+      
 },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
               popupState2: false,
@@ -7593,7 +7764,7 @@ created() {
     ...mapGetters("parametreGenerauxProgrammeUnite", ["unites"]),
     ...mapGetters("personnelUA", ["all_acteur_depense","personnaliseActeurDepense","acteur_depenses","personnaFonction"]),
     
-    ...mapGetters("gestionMarche", ["entreprises"]),
+    ...mapGetters("gestionMarche", ["entreprises","comptes"]),
   ...mapGetters("uniteadministrative", [
       "jointureUaChapitreSection",
       "uniteAdministratives",
@@ -7609,6 +7780,15 @@ created() {
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
 
+afficherCompteUtilisateur: function () {
+                return id => {
+                    if (id != "") {
+                      
+                        return  this.comptes.filter(normeEquipe => normeEquipe.entrepse_id == this.AfficherIdFournisseur);
+                       
+                    }
+                }
+            },
 
 
 
@@ -7618,9 +7798,18 @@ created() {
 
 
 
+afficheCompte() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.comptes.find(qtreel => qtreel.id == id);
 
-
-
+      if (qtereel) {
+        return qtereel.rib;
+      }
+      return 0
+        }
+      };
+    },
 
 
 
@@ -7636,6 +7825,16 @@ created() {
         }
       };
     },
+    montantAvenantParMarche: function () {
+                return id => {
+                    if (id != "") {
+                      let valInite=0;
+                        return  this.avenants.filter(normeEquipe => normeEquipe.marche_id == this.detail_marche.id).reduce(function(total,currentVal){
+                           return total + parseFloat(currentVal.montant_avenant)
+                        },valInite);
+                    }
+                }
+            },
 montantFactureParMarche: function () {
                 return id => {
                     if (id != "") {
@@ -7671,7 +7870,7 @@ tauxFacturation() {
       const val = (parseFloat(this.montantCredite(this.detail_marche.id)) / parseFloat(this.montantMarcheAvecAvenant)) * 100;
       
        if (val) {
-        return parseInt(val).toFixed(0);
+        return parseInt(val).toFixed(2);
       }
       
       return 0
@@ -7725,7 +7924,17 @@ montantTotalDonEtEmprunt() {
 
 
 
-
+affichierNombreAvenant(){
+  return id => {
+    if(id !=""){
+  
+        
+    return this.avenants.filter(element => element.marche_id == id).length; 
+      
+    }
+    
+  }
+},
 
 
 
@@ -7748,6 +7957,12 @@ montantMarcheAvecAvenant() {
       return parseFloat(val).toFixed(2);
     },
 
+
+
+ratioAvenantMarche(){
+   const val = (parseFloat(this.affichierMontantAvenant(this.detail_marche.id)) / parseFloat(this.afficheMontantReelMarche(this.detail_marche.id))) * 100;
+      return parseFloat(val).toFixed(2);
+},
 // montantMarcheAvecAvenant() {
  
 //       return id => {
@@ -8817,6 +9032,24 @@ uniteAdministrative() {
       }
       return 0
     },
+     AfficherIdFournisseur() {
+      
+      const norme = this.getActeEffetFinancierPersonnaliser.find(normeEquipe => normeEquipe.marche_id == this.detail_marche.id);
+
+      if (norme) {
+        return norme.varObjetEntreprise.id;
+      }
+      return 0
+    },
+     AfficherIdFournisseur1() {
+      
+      const norme = this.getActeEffetFinancierPersonnaliser.find(normeEquipe => normeEquipe.marche_id == this.detail_marche.id);
+
+      if (norme) {
+        return norme.varObjetEntreprise.id;
+      }
+      return 0
+    },
     nomFournisseur() {
       
       const norme = this.getActeEffetFinancierPersonnaliser.find(normeEquipe => normeEquipe.marche_id == this.detail_marche.id);
@@ -9443,6 +9676,7 @@ alert("Le montant engagé est superieure au montant de la facture")
         type_procedure_id	:this.recupererTypeProcedure,
 engagement_id:this.editEngagement.id,
 
+
 // numero_engage:this.formDataEngage.numero_engage,
 // numero_demande:this.formDataEngage.numero_demande_engage,
 programme_id:this.afficherProgDotId,
@@ -9457,6 +9691,7 @@ section_id:this.afficherSectId,
       montant_don:this.editEngagement.montant_don,
  montant_emprunt:this.editEngagement.montant_emprunt,
  bailler_id:this.editEngagement.bailler_id,
+ mod_paiement_engage:this.editEngagement.mod_paiement_engage
  
        };
 this.ajouterMandat(nouvelObjet)
@@ -9549,6 +9784,9 @@ val:0,
        };
       
 this.ajouterChoixProcedure(nouvelObjet)
+this.formData= {
+tprocedure :""
+}
 this.$("#modalTypeEngagement").modal('hide');
  this.$("#modalFactureAjouterEngagementDirect").modal({
         backdrop: "static",
@@ -9563,6 +9801,9 @@ this.$("#modalTypeEngagement").modal('hide');
     
        };
 this.ajouterChoixProcedure(nouvelObjet1)
+this.formData= {
+tprocedure : ""
+}
        this.$("#modalTypeEngagement").modal('hide');
  this.$("#modatFactureAjouter").modal({
         backdrop: "static",
@@ -10286,7 +10527,7 @@ alert("Le montant engagé est superieure au montant de la facture")
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.montantMarcheAvecAvenant == this.afficherMontantFacture)
+       else if (this.montantMarcheAvecAvenant == this.sommeEgagementLigneTableau(this.detail_marche.id))
       {
         alert("Marché apuré")
       }

@@ -1,4 +1,5 @@
 import { groupBy } from "../../../../Repositories/Repository";
+
 const mode_passations = state => state.mode_passations;
 const source_personnalise=state =>state.source_personnalise
 const type_marches = state => state.type_marches;
@@ -181,7 +182,7 @@ const presenceCFPersonnalise =(state, getters, rootState, rootGetters) =>
 
     export const getCompte =(state, getters, rootState, rootGetters) =>
     state.comptes.map(element => {
-        if (element.banq_id!== null ) {
+        if (element.banq_id !== null ) {
             element = {
                 ...element,
                 // varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
