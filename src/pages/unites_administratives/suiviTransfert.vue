@@ -7,11 +7,11 @@ afficherActeurDepense
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#tab2078">Toutes les transferts <span class="badge badge-inverse" >{{nombreTransfert}}</span></a></li>
-                               <li ><a data-toggle="tab" href="#tab100">Transferts en attente    <span class="badge badge-info" >{{afficheNbreTransfertEnAnttente}}</span></a></li>
-                                <li ><a data-toggle="tab" href="#tab10">Transferts visé  <span class="badge badge-success" >{{afficheNbreTransfertValider}}</span></a></li>
-                                <li><a data-toggle="tab" href="#tab20">Transferts différé  <span class="badge badge-warning" >{{afficheNbreTransfertDiffere}}</span></a></li>
+                               <li ><a data-toggle="tab" href="#tab100">Transferts en attentes    <span class="badge badge-info" >{{afficheNbreTransfertEnAnttente}}</span></a></li>
+                                <li ><a data-toggle="tab" href="#tab10">Transferts visés  <span class="badge badge-success" >{{afficheNbreTransfertValider}}</span></a></li>
+                                <li><a data-toggle="tab" href="#tab20">Transferts différés  <span class="badge badge-warning" >{{afficheNbreTransfertDiffere}}</span></a></li>
                                  <li><a data-toggle="tab" href="#tab20002">Transferts rejétes  <span class="badge badge-important" >{{affichenbreTransfertRejeter}}</span></a></li>
-                                  <li><a data-toggle="tab" href="#tab99999">Recherche Transfert  </a></li>
+                                  <li><a data-toggle="tab" href="#tab99999">Recherches Transferts  </a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li> -->
                             </ul>
