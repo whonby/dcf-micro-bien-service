@@ -50,7 +50,7 @@
                             <label class="control-label">Date Decision CF :</label>
                             <div class="controls">
                               <input type="date" class="span"  v-model="editTransfert.date_motif"/>
-                               
+                              
                                 
                             </div>
                           </div>
@@ -92,7 +92,13 @@
                      
                       
                     />
-                   
+                    <input
+                      type="hidden"
+                 v-model="formData.aj_transfert"
+                      class="span"
+                     
+                      
+                    />
                   </div>
                 </div>
              
@@ -509,7 +515,7 @@
                <div class="control-group">
                   <label class="control-label">Fonction</label>
                   <div class="controls">
-                    <select v-model="editTransfert.fonction_id" :readOnly="verrouDestinataire" class="span3">
+                    <select v-model="editTransfert.fonction_id" :readOnly="verrouDestinataireMod" class="span3">
                       <option
                         v-for="localgeo in fonctionDynamiquesModifier(editTransfert.ua_id)"
                         :key="localgeo.id"
@@ -713,7 +719,8 @@ export default {
       montant_restant: "",
       ligne_budgetaire_id: "",
       grandnatire_id: "",
-      	ua_id: "",
+        ua_id: "",
+        aj_transfert:"AJ"
       },
       editTransfert: {
        num_transfert:"",
@@ -729,7 +736,14 @@ export default {
         decision_cf:"",
         motif:"",
         observation:"",
-        date_motif:""
+        date_motif:"",
+      
+      
+      },
+      editTransfert1: {
+      
+    
+        test:"MAJ"
       },
        search:"",
        
@@ -793,7 +807,7 @@ export default {
     var diffJours = diffTime / (1000 * 3600 * 24)
           if(isNaN(diffJours)) return null
 
-    if(parseFloat(diffJours) < 0 ) return "duree invalide"
+    if(parseFloat(diffJours) < 0 ) return 0
 
       return diffJours;
    },
@@ -1086,7 +1100,9 @@ destinationDynamiquesModifier() {
         }
       };
     },
-
+  verrouDestinataireMod() {
+      return this.editTransfert.ua_id == "";
+    },
      verrouDestinataire() {
       return this.formData.ua_id == "";
     },
@@ -1103,11 +1119,14 @@ destinationDynamiquesModifier() {
       "ajouterTransfert",
       "modifierTransfert",
       "supprimerTransfert",
+      "ajouterHistoriqueTransfert",
+      "modifierHistoTransfert",
+      "supprimerHistoTransfert",
       // "ajouterHistoriqueBudgetGeneral"
     ]),
 
     afficherModalModifierMotifMandat(articles) {
-      console.log("afficherModalModifierMotifMandat")
+     
       this.$("#exampleModalMotifMandat").modal({
         backdrop: "static",
         keyboard: false
@@ -1136,9 +1155,10 @@ destinationDynamiquesModifier() {
          montant_restant: this.disponibleBudgetaire,
        acteurdepense_id:this.afficheActeurDepense1(this.formData.fonction_id),
        grandnatire_id:this.afficheGrandeNatureid(this.formData.ligne_budgetaire_id)
+       
       };
       this.ajouterTransfert(nouvelObjet);
-
+this.ajouterHistoriqueTransfert(nouvelObjet)
       this.formData = {
         num_transfert:"",
       acteurdepense_id: "",
@@ -1150,7 +1170,7 @@ destinationDynamiquesModifier() {
       ligne_budgetaire_id: "",
       grandnatire_id: "",
       	ua_id: "",
-      
+      aj_transfert:"AJ"
       };
       }
       
@@ -1170,15 +1190,21 @@ destinationDynamiquesModifier() {
       }
       else{
   var nouvelObjet = {
-        ...this.editTransfert,
+        ...this.editTransfert,...this.editTransfert1,
         montant_transfert: this.afficheMontantTransfereModifier(this.editTransfert.ligne_budgetaire_id),
          montant_restant: this.disponibleBudgetaireModifier,
        acteurdepense_id:this.afficheActeurDepenseIdModifier(this.editTransfert.fonction_id),
        grandnatire_id:this.afficheGrandeNatureidModifier(this.editTransfert.ligne_budgetaire_id),
-     delaitraitement:this.nombreJourTraitementCalucle
+     delaitraitement:this.nombreJourTraitementCalucle,
+    
+     
+     
      };
       this.modifierTransfert(nouvelObjet);
+      this.ajouterHistoriqueTransfert(nouvelObjet)
 this.$("#modificationModal").modal('hide');
+this.$("#exampleModalMotifMandat").modal('hide');
+
       }
       
     
@@ -1191,6 +1217,7 @@ this.$("#modificationModal").modal('hide');
       });
 
       this.editTransfert = articles;
+      
     },
     alert() {
       console.log("ok");

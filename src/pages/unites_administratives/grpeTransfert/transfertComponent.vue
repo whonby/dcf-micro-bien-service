@@ -32,7 +32,7 @@
                         <th>Montant Contrat</th> 
                     
                     <th>D&eacute;cision CF</th>
-                     <th>D&eacute;lai traitement</th>
+                     <th>Dur&eacute;e traitement</th>
                      <th>Action</th>
                   </tr>
                 </thead>

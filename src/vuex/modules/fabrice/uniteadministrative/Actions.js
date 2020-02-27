@@ -574,3 +574,103 @@ export function supprimerTransfert({ commit, dispatch }, id) {
       axios.delete("/supprimerTransfert/" + id).then(() => dialog.close());
     });
 }
+
+
+
+
+
+export function getAllHistoriqueTransfert({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeHistoTransfert")
+      .then(response => {
+        commit("GET_ALL_HISTOTRANSFERT", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterHistoriqueTransfert({ commit}, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterHistoTransfert", {
+      num_transfert: nouveau.num_transfert,
+      acteurdepense_id: nouveau.acteurdepense_id,
+      unitezone_id: nouveau.unitezone_id,
+      montant_total_contrat: nouveau.montant_total_contrat,
+      montant_transfert: nouveau.montant_transfert,
+      fonction_id: nouveau.fonction_id,
+      montant_restant: nouveau.montant_restant,
+      ligne_budgetaire_id: nouveau.ligne_budgetaire_id,
+      grandnatire_id: nouveau.grandnatire_id,
+      ua_id: nouveau.ua_id,
+      decision_cf: nouveau.decision_cf,
+      motif: nouveau.motif,
+      observation: nouveau.observation,
+      date_motif: nouveau.date_motif,
+      date_jours: nouveau.date_jours,
+      delaitraitement: nouveau.delaitraitement,
+      aj_transfert: nouveau.aj_transfert,
+      //  maj_transfert: nouveau.maj_transfert
+      
+
+    }))
+
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_HISTOTRANSFERT", response.data);
+       
+
+        // this.$app.$notify({
+        //   title: 'Success',
+        //   text: 'Enregistrement Effectué avec Succès!',
+        //   type: "success"
+        // })
+      }
+    });
+}
+
+// modifier
+export function modifierHistoriqueTransfert({ commit}, nouveau) {
+  asyncLoading(axios
+    .put("/modifierHistoTransfert/" + nouveau.id, {
+      num_transfert: nouveau.num_transfert,
+      acteurdepense_id: nouveau.acteurdepense_id,
+      unitezone_id: nouveau.unitezone_id,
+      montant_total_contrat: nouveau.montant_total_contrat,
+      montant_transfert: nouveau.montant_transfert,
+      fonction_id: nouveau.fonction_id,
+      montant_restant: nouveau.montant_restant,
+      ligne_budgetaire_id: nouveau.ligne_budgetaire_id,
+      grandnatire_id: nouveau.grandnatire_id,
+      ua_id: nouveau.ua_id,
+      decision_cf: nouveau.decision_cf,
+      motif: nouveau.motif,
+      observation: nouveau.observation,
+      date_motif: nouveau.date_motif,
+      date_jours: nouveau.date_jours,
+      delaitraitement: nouveau.delaitraitement,
+      aj_transfert: nouveau.aj_transfert,
+      // maj_transfert: nouveau.maj_transfert
+    }))
+    .then(response => {
+      commit("MODIFIER_HISTOTRANSFERT", response.data);
+    
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerHistoriqueTransfert({ commit}, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_HISTOTRANSFERT", id);
+      
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerHistoTransfert/" + id).then(() => dialog.close());
+    });
+}

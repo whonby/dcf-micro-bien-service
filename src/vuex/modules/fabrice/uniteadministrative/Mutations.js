@@ -215,12 +215,43 @@ const SUPPRIMER_TRANSFERT = (state, id) => {
 
 
 
+const GET_ALL_HISTOTRANSFERT = (state, tableauBudgetGeneral) => {
+  state.historiquetransferts = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+const AJOUTER_HISTOTRANSFERT = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.historiquetransferts.unshift(nouveau_budgetGeneral);
+};
+
+// modifier type_textes
+const MODIFIER_HISTOTRANSFERT = (state, objetModifie) => {
+  state.historiquetransferts = state.historiquetransferts.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
+// supprimer type_texte
+const SUPPRIMER_HISTOTRANSFERT = (state, id) => {
+  state.historiquetransferts = state.historiquetransferts.filter(type => type.id != id);
+};
+
+
 
 
 
 
 
 export {
+  GET_ALL_HISTOTRANSFERT,
+  AJOUTER_HISTOTRANSFERT,
+  MODIFIER_HISTOTRANSFERT,
+  SUPPRIMER_HISTOTRANSFERT,
 
   GET_ALL_TRANSFERT,
   AJOUTER_TRANSFERT,

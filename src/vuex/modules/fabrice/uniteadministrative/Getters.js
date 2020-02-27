@@ -16,13 +16,15 @@ export const nombreArchivageDocument = state => state.archivageDocuments.length;
 export const nombreTypeText = state => state.typeTextes.length;
 const budgetGeneral = state =>
   state.budgetGeneral.sort((a, b) => (a.code > b.code ? 1 : -1));
-
+export const nombreTransfert = state => state.transferts.length;
 const historiquebudgetGeneral = state =>
   state.historiquebudgetGeneral.sort((a, b) => (a.code > b.code ? 1 : -1));
 export const uniteZones = state =>
   state.uniteZones.sort((a, b) => (a.code > b.code ? 1 : -1));
 export const transferts = state =>
   state.transferts.sort((a, b) => (a.num_transfert > b.num_transfert ? 1 : -1));
+export const historiquetransferts = state =>
+  state.historiquetransferts.sort((a, b) => (a.date_jours > b.date_jours ? 1 : -1));
 // const listeDocUniteAdministratives = state =>
 //   state.listeDocUniteAdministratives;
 // const nbreUniteAdministratives = state => state.nbreUniteAdministratives;
@@ -469,6 +471,10 @@ export const afficheTransfertValider = state =>
     affichenaturedep => affichenaturedep.decision_cf == 1
   );
 
+export const afficheNbreTransfertValider = state =>
+  state.transferts.filter(
+    affichenaturedep => affichenaturedep.decision_cf == 1
+  ).length;
 
 
 export const nombreUniteZoneValider = state =>
@@ -486,6 +492,128 @@ export const montantTransferer = (state, getters) =>
     (prec, cur) => parseInt(prec) + parseInt(cur.montant_total_contrat),
     0
   );
+export const montantTransfererGlobal = (state, getters) =>
+  getters.transferts.reduce(
+    (prec, cur) => parseInt(prec) + parseInt(cur.montant_total_contrat),
+    0
+  );
+
+
+export const afficheTransfertEnAnttente = state =>
+  state.transferts.filter(
+    affichenaturedep => affichenaturedep.decision_cf == 0
+  );
+export const afficheNbreTransfertEnAnttente = state =>
+  state.transferts.filter(
+    affichenaturedep => affichenaturedep.decision_cf == 0
+  ).length;
+export const montantTransfererGlobalAttente = (state, getters) =>
+  getters.afficheTransfertEnAnttente.reduce(
+    (prec, cur) => parseInt(prec) + parseInt(cur.montant_total_contrat),
+    0
+  );
+
+export const afficheTransfertDiffere = state =>
+  state.transferts.filter(
+    affichenaturedep => affichenaturedep.decision_cf == 2
+  );
+export const afficheNbreTransfertDiffere = state =>
+  state.transferts.filter(
+    affichenaturedep => affichenaturedep.decision_cf == 2
+  ).length;
+export const montantTransfererGlobalDifferer = (state, getters) =>
+  getters.afficheTransfertDiffere.reduce(
+    (prec, cur) => parseInt(prec) + parseInt(cur.montant_total_contrat),
+    0
+  );
+
+export const afficheTransfertRejeter = state =>
+  state.transferts.filter(
+    affichenaturedep => affichenaturedep.decision_cf == 3
+  );
+export const affichenbreTransfertRejeter = state =>
+  state.transferts.filter(
+    affichenaturedep => affichenaturedep.decision_cf == 3
+  ).length;
+export const montantTransfererGlobalRejeter = (state, getters) =>
+  getters.afficheTransfertRejeter.reduce(
+    (prec, cur) => parseInt(prec) + parseInt(cur.montant_total_contrat),
+    0
+  );
+
+
+export const getPersonnaliseHistoriqueTransfert = (
+  state,
+  getters,
+  rootState,
+  rootGetters
+) =>
+  state.historiquetransferts.map(element => {
+    if (
+      element.grandnatire_id !== null &&
+
+      element.acteurdepense_id !== null &&
+
+      element.ua_id !== null &&
+
+      element.ligne_budgetaire_id !== null && 
+      element.unitezone_id !== null &&
+      element.motif !== null
+
+    ) {
+      element = {
+        ...element,
+        afficheMotifDecission: rootGetters[
+          "bienService/motifDecisions"
+        ].find(Gdenat => Gdenat.id == element.motif),
+        afficheGdeNature: rootGetters[
+          "parametreGenerauxAdministratif/grandes_natures"
+        ].find(Gdenat => Gdenat.id == element.grandnatire_id),
+        afficheAceurDepense: rootGetters["personnelUA/acteur_depenses"].find(
+          Secti => Secti.id == element.acteurdepense_id
+        ),
+        afficheUA: rootGetters[
+          "uniteadministrative/uniteAdministratives"
+        ].find(uniteA => uniteA.id == element.ua_id),
+
+
+
+        afficheEconomique: rootGetters[
+          "parametreGenerauxBudgetaire/plans_budgetaires"
+        ].find(planEconomiq => planEconomiq.id == element.ligne_budgetaire_id),
+
+        afficheUniteZone: rootGetters[
+          "uniteadministrative/uniteZones"
+        ].find(planEconomiq => planEconomiq.id == element.unitezone_id),
+
+      };
+    }
+    return element;
+  });
+
+
+
+
+
+
+
+
+// export const listeTransfertEnAttente = state =>
+//   state.uniteAdministratives.filter(
+//     marcheNonAttribue1 => marcheNonAttribue1.decision_cf == 0
+//   );
+// export const listeTransfertVise = state =>
+//   state.uniteAdministratives.filter(
+//     marcheNonAttribue => marcheNonAttribue.uatransfert.decision_cf == 1
+//   );
+// export const listeTransfertDifferer = state =>
+//   state.uniteAdministratives.filter(
+//     marcheNonAttribue => marcheNonAttribue.uatransfert.decision_cf == 2
+//   );
+// export const listeTransfertRejete = state =>
+//   state.uniteAdministratives.filter(
+//     marcheNonAttribue => marcheNonAttribue.uatransfert.decision_cf == 3
+//   );
 export {
   typeTextes,
   uniteAdministratives,

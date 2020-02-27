@@ -13,7 +13,19 @@ import historiquebudgetGeneralComponent from "../../pages/unites_administratives
 import uniteZone from "../../pages/unites_administratives/grpeUniteZone/uniteZonePrincipal.vue";
 import transfert from "../../pages/unites_administratives/grpeTransfert/transfertPrincipal.vue";
 import tableaubordTransfert from "../../pages/unites_administratives/tableauBordTransfert.vue";
+import suiviTransfert from "../../pages/unites_administratives/suiviTransfert.vue";
+import detailHistoTreansfert from "../../pages/unites_administratives/detailHistoTreansfert.vue";
 const UniteAdministativeRoutes = [
+  {
+    path: '/detail-Histo-Transfert/:detail_historiq_id',
+    name: "detailHistoTreansfert",
+    component: detailHistoTreansfert
+  },
+  {
+    path: "/suivi-Transfert",
+    name: "suiviTransfert",
+    component: suiviTransfert
+  },
   {
     path: "/tableau-bord-Transfert",
     name: "tableaubordTransfert",

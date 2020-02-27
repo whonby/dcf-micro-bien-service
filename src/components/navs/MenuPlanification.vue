@@ -45,7 +45,7 @@
 
      <li>
             <router-link :to="{name: 'indicateurBienService'}" tag="a">
-              INDICATEUR BIEN SERVICE
+              SUIVI DES MARCHES
             </router-link>
           </li>
     </ul>

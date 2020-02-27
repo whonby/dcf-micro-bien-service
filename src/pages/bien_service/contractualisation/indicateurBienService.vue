@@ -120,25 +120,25 @@
             <span class="label label-warning">{{formatageSomme(parseFloat(montantParAnnee(this.budgetaire)))}}</span>MONTANT PAR ANNEE
           </a>
         </li>
-          <li class="bg_lg" title="Taux QUANTITE NON COUVERTE">
+          <!-- <li class="bg_lg" title="Taux QUANTITE NON COUVERTE">
           <a href="#">
             <i class="icon-th"></i>
             <span class="label label-warning"></span>TAUX QTE NON COUVERTE
           </a>
-        </li>
-         <li class="bg_lg" title="Taux QUANTITE NON COUVERTE">
+        </li> -->
+         <!-- <li class="bg_lg" title="Taux QUANTITE NON COUVERTE">
           <a href="#">
             <i class="icon-th"></i>
             <span class="label label-warning"></span>TAUX QTE NON COUVERTE
           </a>
-        </li>
+        </li> -->
               </ul>
             </div>
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>INDICATEURS BIENS SERVICES</h5>
+              <h5>SUIVI DES MARCHES</h5>
               <!-- <div align="right">
                <download-excel
             class="btn btn-default pull-right"

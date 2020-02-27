@@ -43,7 +43,7 @@
                       </button>
                     </td>
                   
-                    <td>{{article.delaitraitement || 'Pas de delai de traitement'}}</td>
+                    <td>{{article.delaitraitement || 0}}  jour(s)</td>
                     <td>
                       <button
                         class="btn btn-danger"
@@ -143,7 +143,7 @@ export default {
            const qtereel = this.uniteZones.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.description_localisation;
+        return qtereel.libelle;
       }
       return 0
         }

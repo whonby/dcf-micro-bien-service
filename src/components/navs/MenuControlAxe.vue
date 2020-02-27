@@ -33,13 +33,14 @@
       <!--Paramètres programmes
       -->
      
+
   <li>
             <router-link :to="{name: 'transfert'}" tag="a">
              TRANSFERT
             </router-link>
           </li>
            <li>
-            <router-link :to="{name: 'tableaubordTransfert'}" tag="a">
+            <router-link :to="{name: 'suiviTransfert'}" tag="a">
              SUIVI DES TRANSFERTS
             </router-link>
           </li>

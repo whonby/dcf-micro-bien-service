@@ -5,7 +5,8 @@ const defaultState = {
   budgetGeneral: [],
   historiquebudgetGeneral: [],
   uniteZones: [],
-  transferts: []
+  transferts: [],
+  historiquetransferts: []
   // listeDocUniteAdministratives: [],
 
   // nbreUniteAdministratives: [],
