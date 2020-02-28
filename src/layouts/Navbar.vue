@@ -126,13 +126,18 @@ export default {
          'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur",
           'getActeEffetFinancier','getEngagement','getMandat',"getVille","getPays","getCommune",
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
-          ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement"])
+          ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement"]),
+               ...mapActions("Utilisateurs",["getRole","getModule","getEntite","getAtorisation","getUtilisateur"])
 
 
   },
 
   created(){
-
+  this.getRole()
+    this.getModule()
+    this.getEntite()
+    this.getUtilisateur()
+    this.getAtorisation()
       this.getExercicesBudgetaires()
       this.getTaux()
       this.getModePaiement()

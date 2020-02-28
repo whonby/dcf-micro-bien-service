@@ -48,10 +48,5 @@ export default new Vuex.Store({
       suivi_controle_budgetaire : ModuleSuiviMission,
     planification_budgetaire: ModulePlanificationBudgetaire,
     bienService: ModuleBienService
-
-
-      
-
-
     }
   })

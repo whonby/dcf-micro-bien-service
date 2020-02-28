@@ -75,3 +75,52 @@ export const MODIFIER_type_uas = (state, objetModifie) => {
     })
 }
 
+export const GET_ROLE = (state, objet) => {
+    state.role = objet
+}
+
+export const GET_AUTORISATION = (state, objet) => {
+    state.autorisation = objet
+}
+
+export const GET_MODULE = (state, objet) => {
+    state.module = objet
+}
+
+export const GET_ENTITE = (state, objet) => {
+    state.entite = objet
+}
+
+/**
+ *  Controller finnancier mutation
+ * @param state
+ * @param objet
+ * @constructor
+ */
+export const GET_UTILISATEUR = (state, objet) => {
+    state.utilisateur = objet
+}
+
+
+export const AJOUTER_UTILISATEUR = (state, nouvel_objet) => {
+    state.utilisateur.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+
+}
+
+export const SUPPRIMER_UTILISATEURR= (state, id) => {
+    state.utilisateur = state.utilisateur.filter(titre => titre.id != id)
+}
+
+export const MODIFIER_UTILISATEUR = (state, objetModifie) => {
+    state.utilisateur = state.utilisateur.map(mode_passation => {
+        if(mode_passation.id == objetModifie.id){
+            mode_passation = {...objetModifie}
+        }
+        return mode_passation
+    })
+}
+
+/***
+ * fin
+ */

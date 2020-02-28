@@ -7,8 +7,12 @@ const defaultstate = {
     loader: false,
     error: false,
     errorMessage: undefined,
-    type_uas: []
-
+    type_uas: [],
+    utilisateur:[],
+    role:[],
+    entite:[],
+    module:[],
+    autorisation:[]
 
 };
 

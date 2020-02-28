@@ -162,13 +162,15 @@
                  <div class="control-group">
             <label class="control-label">Montant prévu</label>
             <div class="controls">
-              <input
+            <!--  <input
                 type="text"
                 v-model="formData.montant_marche"
                 class="span"
                 placeholder="Saisir le montant"
-               
+
               />
+-->
+              <money-input  v-model="formData.montant_marche"></money-input>
             </div>
           </div>
               </td>
@@ -650,8 +652,12 @@
 <script>
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../../src/Repositories/Repository";
+ import MoneyInput from "../../MoneyInput"
 export default {
   name:'type facture',
+    components: {
+        MoneyInput
+    },
   data() {
     return {
       fabActions: [
@@ -675,7 +681,7 @@ export default {
             objet:"",
             livrable:"",
             reference_marche:"",
-            montant_marche:"",
+            montant_marche:0,
                 type_marche_id:"",
                 unite_administrative_id:"",
                 gdenature_id:"",

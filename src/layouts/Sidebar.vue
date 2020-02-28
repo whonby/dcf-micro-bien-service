@@ -29,7 +29,7 @@
           </ul>
        </li> -->
        
-        <li :class="{active: active_el == 11 }" @click.prevent="navigateToParametreGeneraux">
+        <li :class="{active: active_el == 11 }" @click.prevent="navigateToParametreGeneraux" v-if="userRole">
           <a title="PARAMETRES GENERAUX" href="#">
             <i class="icon icon-signal"></i>
             <span>PARAMETRES GENERAUX</span>
@@ -115,7 +115,22 @@ export default {
   computed: {
       ...mapState('parametrageMenu', {
      active_el: state => state.active_el
-  })
+  }),
+    userRole(){
+      let user_stokent = JSON.parse(localStorage.getItem("user"))
+       if(user_stokent.affectation!=undefined){
+         let role = user_stokent.affectation.find(item=>{
+           if (item.role.code_role=="SUPER_ADMIN" || item.role.code_role =="ADMIN" ){
+             return true;
+           } else{
+             return false
+           }
+         })
+         return role;
+       }
+         console.log(user_stokent.affectation)
+        return null;
+    }
   },
 
   methods: {

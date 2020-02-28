@@ -15,9 +15,11 @@ export const errorMessage = state => state.errorMessage
 export const type_uas = state => state.type_uas
 
 
-
-  
-
+export const getterEntite = state => state.entite
+export const getterModule = state => state.module
+export const getterAutorisation = state => state.autorisation
+export const getterRole = state => state.role
+export const getterUtilisateur = state => state.utilisateur
 
 
 

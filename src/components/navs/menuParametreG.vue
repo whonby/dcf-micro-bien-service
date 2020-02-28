@@ -469,37 +469,28 @@
 
         <li class="dropdown" id="gestion_user">
             <a title="Gestion utilisateur" href="#" data-toggle="dropdown" data-target="#gestion_user" class="dropdown-toggle">
-                <span class="text">GESTION DES UTILISATEURS</span>
+                <span class="text">UTILISATEUR CF</span>
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
                 <li class="divider"></li>
                 <li>
-                    <router-link :to="{name: 'typeMarche'}" tag="a">
+                    <router-link :to="{name: 'GestionCF'}" tag="a">
                         <i class="icon-check"></i>
-                        Utilisateurs
+                        CF
                     </router-link>
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <router-link :to="{name: 'typeProcedure'}" tag="a">
+                    <router-link :to="{name: 'affectation-cf'}" tag="a">
                         <i class="icon-bar-chart"></i>
-                        Famille de procedure
+                       Gestion Affectation
                     </router-link>
                 </li>
-                <li class="divider"></li>
-                <li>
-                    <router-link :to="{name: 'procedurePassation'}" tag="a">
-                        <i class="icon-bar-chart"></i>
-                        Procedure de passation
-                    </router-link>
-                </li>
+
             </ul>
         </li>
     </ul>
-
-
- 
 
 
 

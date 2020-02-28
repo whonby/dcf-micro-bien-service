@@ -20,9 +20,10 @@ export function login({commit}, user){
                 email: user.email,
                 password: user.password
             })).then(response => {
-              
+                console.log(response)
                     commit('LOGIN_USER', response.data.user)
                     localStorage.setItem('token', response.data.access_token)
+                   localStorage.setItem("user",JSON.stringify(response.data.user) )
                    // localStorage.setItem('user', response.data.user)
                   // commit('SET_LOADER_FALSE')
 
@@ -47,10 +48,10 @@ export function login({commit}, user){
 
     export function logoutUser({commit}){
       localStorage.removeItem('token')
+        localStorage.removeItem('user')
      // localStorage.removeItem('user')
       commit('LOGOUT_USER')
       router.push({ name: 'Login' })                   
-
 
     }
 
@@ -94,3 +95,119 @@ export function login({commit}, user){
   }
 
 
+/***
+ * Action role
+ */
+
+export function getRole({ commit }) {
+    queue.push(() => apiGuest.get('/roles').then((response) => {
+        commit('GET_ROLE', response)
+
+    }).catch(error => console.log(error)))
+}
+/***
+ * Fin action role
+ */
+
+
+/***
+ * Action module
+ */
+
+export function getModule({ commit }) {
+    queue.push(() => apiGuest.get('/modules').then((response) => {
+        commit('GET_MODULE', response)
+
+    }).catch(error => console.log(error)))
+}
+
+
+
+/***
+ * Fin action module
+ */
+
+/***
+ * Action entite
+ */
+
+export function getEntite({ commit }) {
+    queue.push(() => apiGuest.get('/entites').then((response) => {
+        commit('GET_ENTITE', response)
+
+    }).catch(error => console.log(error)))
+}
+/***
+ * Fin action entite
+ */
+
+/***
+ * Action autorisation
+ */
+
+export function getAtorisation({ commit }) {
+    queue.push(() => apiGuest.get('/autorisations').then((response) => {
+        commit('GET_AUTORISATION', response.data)
+
+    }).catch(error => console.log(error)))
+}
+/***
+ * Fin action autorisation
+ */
+
+
+/**
+ * Action controller finnancier
+ * @param commit
+ */
+export function getUtilisateur({ commit }) {
+    queue.push(() => apiGuest.get('/users').then((response) => {
+        commit('GET_UTILISATEUR', response.data)
+
+    }).catch(error => console.log(error)))
+}
+
+
+export function ajouterControllerFinnancier({ commit }, formData) {
+    asyncLoading(apiGuest.post('/avenant', formData)).then(response => {
+        if (response.status == 201) {
+            // console.log(response.data)
+            commit('AJOUTER_UTILISATEUR', response.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type: "success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
+
+
+export function modifierControllerFinnancier({ commit }, element_modifie) {
+    asyncLoading(apiGuest.put('/avenant', element_modifie)).then(response => {
+        commit('MODIFIER_UTILISATEUR', response.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type: "success"
+        })
+    }).catch(error => console.log(error))
+}
+
+export function supprimerControllerFinnancier({ commit }, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_UTILISATEUR', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            apiGuest.delete('/avenant/' + id).then(() => dialog.close())
+        })
+
+}
+
+/***
+ * Fin action
+ */
