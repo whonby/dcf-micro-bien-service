@@ -50,14 +50,263 @@
                 </table>
 
         <!--fin de dossier analyse -->
+
+        <!-- debut formulaire ajout analyse -->
+
+
+         <div id="ajouterMP" class="modal hide grdirModalAnalyse">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter dossier analyse</h3>
+            </div>
+
+                <table class="table table-bordered table-striped">
+                        <tr>
+                            <td>
+                        <div class="control-group">
+                        <label class="control-label">Reference offre</label>
+                        <div class="controls">
+                            <select v-model="formAnalyseDossier.appel_offre_id" class="span" disabled>
+                                <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.ref_appel}}</option>
+                            </select>
+                        </div>
+                        </div>
+                            </td>
+                            <td>
+                     <div class="control-group">
+                        <label class="control-label">Dossier candidat</label>
+                        <div class="controls">
+                            <select v-model="formAnalyseDossier.dossier_candidat_id" class="span">
+                                <option v-for="plans in dossierCandidature(macheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.nom_cand}}</option>
+                            </select>
+                        </div>
+                    </div>
+                            </td>
+
+
+                     <td>
+                       
+                    <div class="control-group">
+                        <label class="control-label">Controleur financier</label>
+                        <div class="controls">
+                            <select v-model="formAnalyseDossier.cojo_id" class="span">
+                                <option v-for="plans in listeCojo(macheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.controleur_finnancier}}</option>
+                            </select>
+                        </div>
+                    </div>
+                            </td>
+
+                              <td>
+                        <div class="control-group">
+                        <label class="control-label">Type analyse</label>
+                        <div class="controls">
+                            <select v-model="formAnalyseDossier.type_analyse_id" class="span">
+                                <option v-for="plans in typeAnalyses" :key="plans.id"
+                                        :value="plans.id">{{plans.libelle}}</option>
+                            </select>
+                        </div>
+                    </div>
+                            </td>
+                           
+                       
+                           </tr>
+                           
+                        <tr>
+                   
+                            <td>
+                     <div class="control-group">
+                        <label class="control-label">Note</label>
+                        <div class="controls">
+                            <input type="text"
+                                   v-model="formAnalyseDossier.note_analyse"
+                                   class="span"
+                                   placeholder="Saisir la note"
+                            />
+                        </div>
+                    </div>
+
+                            </td>
+                        
+                   
+                            <td>
+
+                    <div class="control-group">
+                        <label class="control-label">Rang</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formAnalyseDossier.rang_analyse"
+                                    class="span"
+                                    placeholder="Rang d'analyse"
+                            />
+                        </div>
+                    </div>
+                            </td>
+                            <td colspan="2">
+                    <div class="control-group">
+                        <label class="control-label">Date</label>
+                        <div class="controls">
+                            <input type="date"
+                                   v-model="formAnalyseDossier.date_analyse"
+                                   class="span5"
+                                   placeholder="date"
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+                                  <!-- <td>
+                    <div class="control-group">
+                        <label class="control-label">Decision</label>
+                        <div class="controls">
+                            <select v-model="formAnalyseDossier.decision" >
+                                <option value="1">Non objection</option>
+                                <option value="2">Objection</option>
+                            </select>
+                        </div>
+                    </div>
+                            </td> -->
+                        </tr>
+                        <!-- <tr>
+                      
+                            <td colspan="4">
+                     <div class="control-group">
+          <label class="control-label">Obseravtion:</label>
+            <div class="controls">
+              <textarea  v-model="formAnalyseDossier.motif" :readonly="afficherMotifAnalyse"  class="textarea_editor span10" rows="4" placeholder="Entrer le text ..."></textarea>
+            </div>
+          
+        </div>
+                            </td>
+                           
+                      
+                        </tr> -->
+
+                    </table>
+            
+            <div class="modal-footer">
+                <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterAnalyseD()" href="#">Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        </div>
+        <!-- fin formulaire ajout analyse  -->
+
+
+
+        
+        <div id="modificationAajouterAnalys01" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Modification du dossier Analyse</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+
+
+                    <div class="control-group">
+                        <label class="control-label">Dossier candidat</label>
+                        <div class="controls">
+                            <select v-model="edite_analyse_dossier.dossier_candidat_id" class="span">
+                                <option v-for="plans in dossierCandidature(macheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.nom_cand}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Controleur financier</label>
+                        <div class="controls">
+                            <select v-model="edite_analyse_dossier.cojo_id" class="span">
+                                <option v-for="plans in listeCojo(macheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.controleur_finnancier}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Type analyse</label>
+                        <div class="controls">
+                            <select v-model="edite_analyse_dossier.type_analyse_id" class="span">
+                                <option v-for="plans in typeAnalyses" :key="plans.id"
+                                        :value="plans.id">{{plans.libelle}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Rang analyse :</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="edite_analyse_dossier.rang_analyse"
+                                    class="span"
+                                    placeholder="Rang d'analyse"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Date :</label>
+                        <div class="controls">
+                            <input type="date"
+                                   v-model="edite_analyse_dossier.date_analyse"
+                                   class="span"
+                                   placeholder=""
+                            />
+                        </div>
+                    </div>
+
+                     <div class="control-group">
+                        <label class="control-label">Note</label>
+                        <div class="controls">
+                            <input type="text"
+                                   v-model="edite_analyse_dossier.note_analyse"
+                                   class="span"
+                                   placeholder=""
+                            />
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="control-group">
+                        <label class="control-label">Decision</label>
+                        <div class="controls">
+                            <select   v-model="edite_analyse_dossier.decision" >
+                                <option value="1">Non objection</option>
+                                <option value="2">Objection</option>
+                            </select>
+                        </div>
+                    </div> -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationDossierAnalyse()" href="#">Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        </div>
     </div>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import moment from 'moment';
 export default {
+    
     data(){
         return{
+            formAnalyseDossier:{
+                  date_analyse:"",
+                        appel_offre_id:"",
+                        rang_analyse:"",
+                      //  decision:"",
+                       // motif:"",
+                        note_analyse:"",
+                        dossier_candidat_id:"",
+                        type_analyse_id: "",
+                        cojo_id:""
+
+
+            },
+
+
 
         }
     },
@@ -68,21 +317,94 @@ export default {
     computed:{
         ...mapGetters('bienService'['getterAnalyseDossiers',
         'getterDossierCandidats','typeAnalyses','getterCojos', 'appelOffres']),
+
          // ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
 
+
+
+
+             
+            
+            listeAppelOffre(){
+                return  macheid=>{
+                    if (macheid!="") {
+                        //console.log("Marche appel offre")
+                       const vM=this;
+                        let Objet=this.appelOffres.find( idmarche => idmarche.macheid == macheid)
+                       // console.log("Marche appel offre 10")
+                        if(Objet!=undefined){
+                            vM.formDossierCadidature.appel_offre_id=Objet.id;
+                            vM.formAnalyseDossier.appel_offre_id = Objet.id;
+                           // vM.formLot.appel_offre_id=Objet.id;
+                           // vM.formAno.appel_offre_id = Objet.id
+                           // vM.formLettre.appel_offre_id=Objet.id;
+                            vM.formDataCojo.num_dossier_appel_offre=Objet.ref_appel;
+                        }
+                       // console.log(Objet)
+                    return this.appelOffres.filter( idmarche => idmarche.macheid == macheid)
+                    }
+                }
+
+            },
+
+              
     },
     methods:{
-        ...mapActions('bienService',['supprimerAnalyseDossier']),
+        ...mapActions('bienService',['supprimerAnalyseDossier',
+        'ajouterAnalyseDossier','modifierAnalyseDossier']),
 
 
          listeAnalyseDossier: function () {
             return macheid => {
                 if (macheid != "") {
 
-                    return this.getterAnalyseDossiers.filter(idmarche => idmarche.dossier_candidature.appel_offre.marche_id == macheid)
+                    return this.getterAnalyseDossiers.filter(idmarche => idmarche.dossier_candidature.appel_offre.macheid == macheid)
                 }
             }
         },
+
+        
+dossierCandidature: function () {
+                return macheid => {
+                    if (macheid != "") {
+                      //  console.log("Marche dossier candidat")
+                        return this.getterDossierCandidats.filter(idmarche => idmarche.appel_offre.macheid == macheid)
+                    }
+                }
+            },
+
+            listeCojo: function () {
+                return macheid => {
+                    if (macheid != "") {
+                      let Objet=  this.getterCojos.find(idmarche => idmarche.lettre_invitation.appel_offre.macheid == macheid);
+                        let vM=this;
+                        if(Objet!=undefined){
+                            vM.idcojo=Objet.id
+                        }
+                        return this.getterCojos.filter(idmarche => idmarche.lettre_invitation.appel_offre.macheid == macheid)
+                    }
+                }
+            },
+
+               ajouterAnalyseD(){
+              this.ajouterAnalyseDossier(this.formAnalyseDossier)
+                this.formAnalyseDossier={
+                        date_analyse:"",
+                        appel_offre_id:"",
+                        rang_analyse:"",
+                      //  decision:"",
+                       // motif:"",
+                        note_analyse:"",
+                        dossier_candidat_id:"",
+                        type_analyse_id: "",
+                        cojo_id:""
+                }
+            },
+
+         modificationDossierAnalyse(){
+                this.modifierAnalyseDossier(this.edite_analyse_dossier)
+                this.$('#modificationAajouterAnalys01').modal('hide');
+            },
 
          afficheAnnalyseDossier(index){
                 this.$('#modificationAajouterAnalys01').modal({

@@ -1,4 +1,4 @@
-difference_act,
+
 <template>
     
 <div>
@@ -1726,14 +1726,14 @@ difference_act,
                         <div class="controls">
                             <input
                                     type="date"
-                                    v-model="formEffetFinancier.autorite_approbation"
+                                    v-model="formEffetFinancier.date_approbation"
                                     class="span"
                                     placeholder=""
                             />
                         </div>
                     </div>
 
-                            </td>
+                            </td> 
 
                                   <td>
                     <div class="control-group">
@@ -2000,7 +2000,7 @@ difference_act,
                                 <div class="controls">
                                     <input
                                             type="date"
-                                            v-model="editActeEffetFinancier.autorite_approbation"
+                                            v-model="editActeEffetFinancier.date_approbation"
                                             class="span"
                                             placeholder=""
                                     />
@@ -4420,10 +4420,10 @@ montantHT() {
 
                         let marcherFavaroble=marcherEnAction.find(idmarche=>idmarche.avis_bail==1);
                         let marcherObjetction=marcherEnAction.find(idmarche=>idmarche.avis_bail==0);
-                        console.log(marcherFavaroble)
+                       // console.log(marcherFavaroble)
                         if (marcherFavaroble!=undefined){
                             vM.entreprise_vainqueur=""
-                            console.log("1411111")
+                           // console.log("1411111")
 
 
                             vM.info_avis_bailleur="Non objection";
@@ -4437,9 +4437,9 @@ montantHT() {
                                     return a.note_analyse - b.note_analyse;
                                 }).reverse()
                                  entreprise=resulta.find(item=>item.reference_pv==marcherFavaroble.annalyse_d_m_p.demande_ano.proce_verbal_offre.reference)
-                                console.log("111111")
-                                console.log(entreprise)
-                                console.log("222222")
+                               // console.log("111111")
+                               // console.log(entreprise)
+                               // console.log("222222")
                                 return entreprise;
                             }
 
@@ -4978,7 +4978,7 @@ modifierModalActeEffetFinancierLocal(){
         ref_dmp: this.detail_marche.id,
         ref_courier: this.recupererNumeroCourier,
       };*/
-                console.log(this.formAnalyseDMP)
+                //console.log(this.formAnalyseDMP)
             this.ajouterAnalyseDMP(this.formAnalyseDMP)
             this.formAnalyseDMP={
                      ref_dmp:"",
@@ -5055,7 +5055,7 @@ modifierModalActeEffetFinancierLocal(){
                 this.edite_demande_dao=this.getterDemandeAno.find(
                     demandeAno => demandeAno.id == index
                 )
-                console.log(this.edite_demande_dao)
+              //  console.log(this.edite_demande_dao)
             },
             afficheAnalyseDMP(index){
 
@@ -5067,7 +5067,7 @@ modifierModalActeEffetFinancierLocal(){
                 this.edite_analyse_dpm=this.getterAnalyseDMP.find(
                     annalyseDP => annalyseDP.id == index
                 )
-                console.log(this.edite_analyse_dpm)
+             //   console.log(this.edite_analyse_dpm)
             },
 
 

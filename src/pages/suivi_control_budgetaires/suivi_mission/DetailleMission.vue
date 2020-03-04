@@ -221,7 +221,7 @@
                     <th>Type operation</th>
                      <th>Date operation</th>
                      <th>Motif</th>
-                     <th>Observation</th>
+                     <!-- <th>Observation</th> -->
                      <!-- <th>Temps du traitement du dossier</th> -->
                       <!-- <th>Action</th> -->
                 </tr>
@@ -245,8 +245,8 @@
                         <td @dblclick="afficherModalModifierHistoriqueMission(index)">
                       {{historiqueMission.motif || 'Non renseigné'}}</td>
 
-                        <td @dblclick="afficherModalModifierHistoriqueMission(index)">
-                      {{historiqueMission.observation || 'Non renseigné'}}</td>
+                        <!-- <td @dblclick="afficherModalModifierHistoriqueMission(index)">
+                      {{historiqueMission.observation || 'Non renseigné'}}</td> -->
 
                         <!-- <td @dblclick="afficherModalModifierHistoriqueMission(index)">
                       {{historiqueMission.temps_traitement || 'Non renseigné'}}</td> -->

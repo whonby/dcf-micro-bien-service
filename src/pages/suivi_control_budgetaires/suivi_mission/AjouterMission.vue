@@ -305,8 +305,8 @@
                <div class="control-group">
               <label class="control-label">frais d'hebergement:</label>
               <div class="controls">
-                <input type="number" v-model="formData.frais_hebergement" 
-                class="span"/>
+                <input type="number"  v-model="formData.frais_hebergement" 
+                class="span" />
               </div>
                 </div>
                 </td>
@@ -466,6 +466,7 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+//import { CurrencyDirective, parseCurrency } from 'vue-currency-input'
 export default {
   
   data() {

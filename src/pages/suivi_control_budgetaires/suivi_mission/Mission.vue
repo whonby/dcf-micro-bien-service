@@ -151,10 +151,10 @@
             <ul class="nav nav-tabs">
               
               <li class="active"><a   style="cursor:pointer;" @click.prevent="filter = 'all'" >Toutes les missions <span class="badge"></span></a></li>
-               <li><a  style="cursor:pointer;" @click.prevent="filter = 'attente'" >Dossiers en attente <span class="badge">{{total_mission_attente}}</span></a></li> 
-               <li ><a   style="cursor:pointer;" @click.prevent="filter = 'visés'" > Dossiers visés <span class="badge">{{total_mission_vises}}</span></a></li> 
-              <li><a  style="cursor:pointer;" @click.prevent="filter = 'differés'">Dossiers differés <span class="badge">{{total_mission_differes}}</span></a></li>
-            <li><a  style="cursor:pointer;" @click.prevent="filter = 'rejetés'">Dossiers rejetés <span class="badge">{{total_mission_rejetes}}</span></a></li>  
+               <li><a  style="cursor:pointer;" @click.prevent="filter = 'attente'" >Dossiers en attente <span class="badge badge-info">{{total_mission_attente}}</span></a></li> 
+               <li ><a   style="cursor:pointer;" @click.prevent="filter = 'visés'" > Dossiers visés <span class="badge badge-success">{{total_mission_vises}}</span></a></li> 
+              <li><a  style="cursor:pointer;" @click.prevent="filter = 'differés'">Dossiers differés <span class="badge badge-warning">{{total_mission_differes}}</span></a></li>
+            <li><a  style="cursor:pointer;" @click.prevent="filter = 'rejetés'">Dossiers rejetés <span class="badge badge-important">{{total_mission_rejetes}}</span></a></li>  
                 
               
             </ul>
@@ -181,12 +181,11 @@
 
                                <div class="widget-box">
                                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                        <h5>Liste de toutes les missions  <br /></h5>
+                                        <h5>
+                                          
+                                            <span>Liste de toutes les missions</span>
+                                                                </h5>
                                            
-                                       
-                                             
-
-
                                             
                                         <div align="right">
                                 
@@ -342,7 +341,7 @@
               <!---  deuxieme tableau  --->
 
 
-        
+<!--         
                         <div id="tab2" class="tab-pane">
                            <div class="container-fluid">
                                       <div class="row-fluid">
@@ -429,7 +428,7 @@
       </div>
               </div>
             </div>
-            </div>
+            </div> -->
   <!-- fin deuxieme tableau  -->
 
 
@@ -437,7 +436,7 @@
 
     <!---  debut troisieme tableau  --->
 
-
+<!-- 
          
                            <div id="tab3" class="tab-pane">
                            <div class="container-fluid">
@@ -529,7 +528,7 @@
       </div>
               </div>
             </div>
-            </div>
+            </div> -->
   <!---- fin troisieme  tableau  ---->
 
 
@@ -537,7 +536,7 @@
     <!--- debut  quatrieme tableau  --->
 
 
-         
+<!--          
                         <div id="tab4" class="tab-pane">
                            <div class="container-fluid">
                                       <div class="row-fluid">
@@ -630,7 +629,7 @@
       </div>
               </div>
             </div>
-            </div>
+            </div> -->
   <!---- fin quatrieme tableau ---->
 
 
@@ -639,7 +638,7 @@
 
     <!--- debut  quatrieme tableau  --->
 
-                        <div id="tab5" class="tab-pane">
+                        <!-- <div id="tab5" class="tab-pane">
                            <div class="container-fluid">
                                       <div class="row-fluid">
                                         <div class="span12">
@@ -731,7 +730,7 @@
       </div>
               </div>
             </div>
-            </div>
+            </div> -->
 
   <!---- fin quatrieme tableau ---->
   

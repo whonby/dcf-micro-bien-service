@@ -47,7 +47,7 @@
               </thead>
               <tbody>
                 <tr class="odd gradeX" v-for="(norme_mission, index) in 
-                normeMissionFiltre"
+                getNormeMissionPersonnaliser"
                  :key="norme_mission.id">
                   <td @dblclick="afficherModalModifierNormeMission(index)">
                       {{norme_mission.varObjetSourceFinancement.libelle|| 'Non renseigné'}}</td>
@@ -157,7 +157,7 @@
                 <div class="control-group">
               <label class="control-label">Fichier joint:</label>
               <div class="controls">
-                <input type="file" id="file"  @change="onFichierChange" />
+                <input type="file" id="file"  @change="OnchangeFichier" />
               </div>
             </div>
                    
@@ -243,6 +243,13 @@
                 class="span"  />
                 </div>
                   </div>
+
+                   <div class="control-group">
+              <label class="control-label">Fichier joint:</label>
+              <div class="controls">
+                <input type="file" id="file"  @change="OnchangeFichier" />
+              </div>
+            </div>
                    
                    
               
@@ -283,10 +290,18 @@
 import {mapGetters, mapActions} from 'vuex'
 import {formatageSomme} from '../../../Repositories/Repository'
 export default {
-  
+   name:'compte',
   data() {
     return {
       json_fields:{
+
+        ' Fonction':'varObjetFonction.libelle',
+     'Source de financement': 'varObjetSourceFinancement.libelle',
+      'Perdiem':'perdiem',
+      
+                            
+      'Fichier joint':'fichier_joint'
+
              
       },
         fabActions: [
@@ -306,14 +321,15 @@ export default {
      source_financement_id: "",
       perdiem:"",
       zone:"",
-      fichier_joint:"",
-      // selectedFile:"",
-      // imagePDF:"",
-      // namePDF:"",
-      // fichierPDF:""
+      fichier_joint:""
 
             
         },
+
+          selectedFile:"",
+      imagePDF:"",
+      namePDF:"",
+      fichierPDF:"",
 
         editNormeMission: {
     fonction_id:"",
@@ -321,10 +337,7 @@ export default {
       perdiem:"",
       zone:"",
       fichier_joint:"",
-      // selectedFile:"",
-      // imagePDF:"",
-      // namePDF:"",
-      // fichierPDF:""
+    
             
         },
             search:""
@@ -348,20 +361,19 @@ export default {
   
    
     // methode pour trier un item
-           normeMissionFiltre(){
+//            getNormeMissionPersonnaliser(){
 
-      const searchTerm = this.search.toLowerCase();
+//       const searchTerm = this.search.toLowerCase();
 
-return this.getNormeMissionPersonnaliser.filter((item) => {
+// return this.getNormeMissionPersonnaliser.filter((item) => {
   
-     return item.zone.toLowerCase().includes(searchTerm) 
-    //  ||
-    //         item.libelle.toLowerCase().includes(searchTerm)
+//      return item.zone.toLowerCase().includes(searchTerm) 
+//          item.libelle.toLowerCase().includes(searchTerm)
     
 
-   }
-)
-   },
+//    }
+// )
+//    },
 
     
   },
@@ -377,51 +389,95 @@ return this.getNormeMissionPersonnaliser.filter((item) => {
               keyboard: false
              });
     },
-// uploader ficheir
-    onFichierChange(e){
-      this.formData.fichier_joint = e.target.files[0]
-    },
 
-    //  OnchangeFichier(e) {
-    //             const files = e.target.files;
-    //             this.selectedFile = event.target.files[0];
-    //             console.log(this.selectedFile)
-    //             Array.from(files).forEach(file => this.addFichierPDF(file));
-    //         },
-    //         addFichierPDF(file) {
-    //             let reader = new FileReader();
-    //             let vm = this;
-    //             reader.onload = e => {
-    //                 vm.imagePDF = "pdf.png";
-    //                 vm.namePDF = file.name;
-    //                 vm.fichierPDF = e.target.result;
-    //             };
-    //             reader.readAsDataURL(file);
-    //         },
+
+
+/// essai de uploader un fichier
+
+          // ajouterLettreInv(){
+          //       const formData = new FormData();
+          //       formData.append('fichier', this.selectedFile, this.selectedFile.name);
+          //       formData.append('appel_offre_id', this.formLettre.appel_offre_id);
+          //       formData.append('destination', this.formLettre.destination);
+          //       formData.append('ref_lettre', this.formLettre.ref_lettre);
+          //       formData.append('date_lettre', this.formLettre.date_lettre);
+          //       formData.append('date_cojo', this.formLettre.date_cojo);
+          //       formData.append('objet_lettre', this.formLettre.objet_lettre);
+          //       let config = {
+          //           header : {
+          //               'Content-Type' : 'multipart/form-data'
+          //           }
+          //       }
+          //       this.ajouterLettreInvitation(formData,config)
+          //       this.formLettre= {
+          //           appel_offre_id:"",
+          //           fichier_joint:"",
+          //           date_lettre:"",
+          //           ref_lettre:"",
+          //           destination:"",
+          //           date_cojo:"",
+          //       objet_lettre:""
+          //       }
+
+                
+          //   },
+
+
+
+
+
+
+
+
+
+
+
+// uploader ficheir
+    // onFichierChange(e){
+    //   this.formData.fichier_joint = e.target.files[0]
+    // },
+
+     OnchangeFichier(e) {
+                const files = e.target.files;
+                this.selectedFile = event.target.files[0];
+                console.log(this.selectedFile)
+                Array.from(files).forEach(file => this.addFichierPDF(file));
+            },
+            addFichierPDF(file) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = e => {
+                    vm.imagePDF = "pdf.png";
+                    vm.namePDF = file.name;
+                    vm.fichierPDF = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
+
    // fonction pour vider l'input
      ajouterNormeMissionLocal () {
 
-      //  const formData = new FormData();
-      //  formData.append('fichier_joint', this.selectedFile, this.selectedFile.name);
-      //  formData.append('fonction_id', this.formData.fonction_id);
-      //  formData.append('zone', this.formData.zone);
-      //  formData.append('perdiem', this.formData.perdiem);
-      //  formData.append('source_financement_id', this.formData.source_financement_id);
-      //   let config = {
-      //     header :{
-      //          'Content-Type': 'multipart/form-data'
-      //     }
+       const formNorme = new FormData();
+       formNorme.append('fichier_joint', this.selectedFile, this.selectedFile.name);
+       formNorme.append('fonction_id', this.formData.fonction_id);
+       formNorme.append('zone', this.formData.zone);
+       formNorme.append('perdiem', this.formData.perdiem);
+       formNorme.append('source_financement_id', this.formData.source_financement_id);
+        let config = {
+          header :{
+               'Content-Type': 'multipart/form-data'
+          }
 
-      //   }
+        }
 
-     this.ajouterNormeMission(this.formData)
+     this.ajouterNormeMission(formNorme,config)
 
         this.formData = {
              fonction_id:"",
-        source_financement_id: "",
-        perdiem:"",
-        fichier_joint:"",
-          zone:""
+             source_financement_id: "",
+             perdiem:"",
+            fichier_joint:"",
+             zone:""
             
          }
      },
@@ -440,29 +496,27 @@ afficherModalModifierNormeMission(index){
  },  
 // 
 modifierModalNormeMissionLocal(){
-  // const formData = new FormData();
+  const formNorme = new FormData();
                 
-  //      formData.append('fonction_id', this.editNormeMission.fonction_id);
-  //      formData.append('zone', this.editNormeMission.zone);
-  //      formData.append('perdiem', this.editNormeMission.perdiem);
-  //      formData.append('source_financement_id', this.editNormeMission.source_financement_id);
-  //               console.log(formData)
-  //               if ( this.selectedFile!==""){
-  //                   formData.append('fichier_joint', this.selectedFile, this.selectedFile.name);
-  //               }
-  //               let config = {
-  //                   header : {
-  //                       'Content-Type' : 'multipart/form-data'
-  //                   }
-  //               }
-  this.modifierNormeMission(this.editNormeMission)
+       formNorme.append('fonction_id', this.editNormeMission.fonction_id);
+       formNorme.append('zone', this.editNormeMission.zone);
+       formNorme.append('perdiem', this.editNormeMission.perdiem);
+       formNorme.append('fonction_id', this.editNormeMission.fonction_id);
+       formNorme.append('source_financement_id', this.editNormeMission.source_financement_id);
+                console.log(formNorme)
+                 let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }
+
+                if ( this.selectedFile!==""){
+                    formNorme.append('fichier_joint', this.selectedFile, this.selectedFile.name);
+                }
+               
+  this.modifierNormeMission(formNorme,config)
   this.$('#modifierModal').modal('hide');
-  // this.editNormeMission = {
-  //    fonction_id:"",
-  //       source_financement_id: "",
-  //       perdiem:"",
-  //       zone:""
-  // }
+ 
 },
 formatageSomme:formatageSomme
 
