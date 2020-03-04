@@ -15,12 +15,44 @@ import transfert from "../../pages/unites_administratives/grpeTransfert/transfer
 import tableaubordTransfert from "../../pages/unites_administratives/tableauBordTransfert.vue";
 import suiviTransfert from "../../pages/unites_administratives/suiviTransfert.vue";
 import detailHistoTreansfert from "../../pages/unites_administratives/detailHistoTreansfert.vue";
+
+import DirectionPrincipal from "../../pages/unites_administratives/grpeDirection/DirectionPrincipal.vue";
+import ServicePrincipal from "../../pages/unites_administratives/grpeService/ServicePrincipal.vue";
+import FonctionPrincipal from "../../pages/unites_administratives/grpeFonction/FonctionPrincipal.vue";
 const UniteAdministativeRoutes = [
+
+  {
+    path: '/Direction',
+    name: "DirectionPrincipal",
+    component: DirectionPrincipal
+  },
+
+  {
+    path: '/ServicePerso',
+    name: "ServicePrincipal",
+    component: ServicePrincipal
+  },
+
+  {
+    path: '/FonctionPerso',
+    name: "FonctionPrincipal",
+    component: FonctionPrincipal
+  },
+
+
+
+
+
+
+
+
+
   {
     path: '/detail-Histo-Transfert/:detail_historiq_id',
     name: "detailHistoTreansfert",
     component: detailHistoTreansfert
   },
+ 
   {
     path: "/suivi-Transfert",
     name: "suiviTransfert",

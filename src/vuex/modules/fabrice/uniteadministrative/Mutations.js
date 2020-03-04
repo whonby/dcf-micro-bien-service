@@ -247,7 +247,128 @@ const SUPPRIMER_HISTOTRANSFERT = (state, id) => {
 
 
 
+
+
+
+
+
+const GET_ALL_DIRECTION = (state, tableauBudgetGeneral) => {
+  state.directions = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+const AJOUTER_DIRECTION = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.directions.unshift(nouveau_budgetGeneral);
+};
+
+// modifier type_textes
+const MODIFIER_DIRECTION = (state, objetModifie) => {
+  state.directions = state.directions.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
+// supprimer type_texte
+const SUPPRIMER_DIRECTION = (state, id) => {
+  state.directions = state.directions.filter(type => type.id != id);
+};
+
+
+
+const GET_ALL_SERVICE = (state, tableauBudgetGeneral) => {
+  state.servicesua = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+const AJOUTER_SERVICE = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.servicesua.unshift(nouveau_budgetGeneral);
+};
+
+// modifier type_textes
+const MODIFIER_SERVICE = (state, objetModifie) => {
+  state.servicesua = state.servicesua.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
+// supprimer type_texte
+const SUPPRIMER_SERVICE = (state, id) => {
+  state.servicesua = state.servicesua.filter(type => type.id != id);
+};
+
+
+
+const GET_ALL_FONCTION = (state, tableauBudgetGeneral) => {
+  state.fonctionsua = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+const AJOUTER_FONCTION = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.fonctionsua.unshift(nouveau_budgetGeneral);
+};
+
+// modifier type_textes
+const MODIFIER_FONCTION = (state, objetModifie) => {
+  state.fonctionsua = state.fonctionsua.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
+// supprimer type_texte
+const SUPPRIMER_FONCTION = (state, id) => {
+  state.fonctionsua = state.fonctionsua.filter(type => type.id != id);
+};
+
+
+
+
+
+
+
 export {
+
+  GET_ALL_DIRECTION,
+  AJOUTER_DIRECTION,
+  MODIFIER_DIRECTION,
+  SUPPRIMER_DIRECTION,
+
+  GET_ALL_SERVICE,
+  AJOUTER_SERVICE,
+  MODIFIER_SERVICE,
+  SUPPRIMER_SERVICE,
+
+  GET_ALL_FONCTION,
+  AJOUTER_FONCTION,
+  MODIFIER_FONCTION,
+  SUPPRIMER_FONCTION,
+
+
+
+
+
+
+
+
+
+
+
+
+
   GET_ALL_HISTOTRANSFERT,
   AJOUTER_HISTOTRANSFERT,
   MODIFIER_HISTOTRANSFERT,

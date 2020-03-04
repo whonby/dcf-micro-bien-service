@@ -1,12 +1,20 @@
 import { groupBy } from "../../../../Repositories/Repository";
 
-const typeTextes = state =>
-  state.typeTextes.sort((a, b) => (a.code > b.code ? 1 : -1));
-
+// const typeTextes = state =>
+//   state.typeTextes.sort((a, b) => (a.code > b.code ? 1 : -1));
+ export const servicesua = state => state.servicesua;
+export const directions = state => state.directions;
+export const fonctionsua = state => state.fonctionsua;
 const uniteAdministratives = state =>
   state.uniteAdministratives.sort((a, b) => (a.code > b.code ? 1 : -1));
-const archivageDocuments = state =>
-  state.archivageDocuments.sort((a, b) => (a.reference > b.reference ? 1 : -1));
+// const archivageDocuments = state =>
+//   state.archivageDocuments.sort((a, b) => (a.reference > b.reference ? 1 : -1));
+// export const directions = state =>
+//   state.directions.sort((a, b) => (a.id > b.id ? 1 : -1));
+// export const servicesua = state =>
+//   state.servicesua.sort((a, b) => (a.id > b.id ? 1 : -1));
+// export const fonctionsua = state =>
+//   state.fonctionsua.sort((a, b) => (a.id > b.id ? 1 : -1));
 
 
 
@@ -596,8 +604,6 @@ export const getPersonnaliseHistoriqueTransfert = (
 
 
 
-
-
 // export const listeTransfertEnAttente = state =>
 //   state.uniteAdministratives.filter(
 //     marcheNonAttribue1 => marcheNonAttribue1.decision_cf == 0
@@ -615,9 +621,9 @@ export const getPersonnaliseHistoriqueTransfert = (
 //     marcheNonAttribue => marcheNonAttribue.uatransfert.decision_cf == 3
 //   );
 export {
-  typeTextes,
+  // typeTextes,
   uniteAdministratives,
-  archivageDocuments,
+  // archivageDocuments,
   jointureUaChapitreSection1,
   budgetGeneral,
   historiquebudgetGeneral

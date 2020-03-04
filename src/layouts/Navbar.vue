@@ -82,9 +82,9 @@ export default {
     'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature"]),
 
  ...mapActions("uniteadministrative", [
-      "getAllTypeTextes",
+      // "getAllTypeTextes",
       "getAllUniteAdministrative",
-      "getAllArchivageDocument",
+      // "getAllArchivageDocument",
       
       "getAllBudgetGeneral",
       "getAllHistoriqueBudgetGeneral",
@@ -120,7 +120,7 @@ export default {
     	 ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'getNormeMission','getHistoriqueMission',
     'getMission']),
       //  ...mapActions('planification_budgetaire', ['getAllBudgetGeneral']),
-       ...mapActions('bienService', ['getAvenant','getChoixProcedure','getActeurDepense', 'getBailleur','getTypeFacture',
+       ...mapActions('bienService', ['getAvenant','getChoixProcedure', 'getBailleur','getTypeFacture',
        'getTypeActeDepense', 'getTypeActeEffetFinancier', 'getTypeAnalyse','getTypeTextJuridique','getAutreTextJuridique' ,
          'getTypePrestation', 'getCondition', 'getTextJuridique', 'getMarche', 'getTypeMarches',
        'getModePassations', 'getTypeProcedures', 'getProcedurePassation', "getAppelOffre","getLot",
@@ -192,9 +192,9 @@ this.getTypeAppel()
 
 
     
-      this.getAllTypeTextes();
+      // this.getAllTypeTextes();
     this.getAllUniteAdministrative();
-    this.getAllArchivageDocument();
+    // this.getAllArchivageDocument();
 
 
 
@@ -257,7 +257,7 @@ this.getAllHistoriqueBudgetGeneral()
        this.getHistoriqueMission() 
 this.getAllBudgetGeneral()
  // debut du module de bien && service
-this.getActeurDepense()
+
 this.getBailleur()
 this.getTypeFacture()
 this.getTypeActeDepense()

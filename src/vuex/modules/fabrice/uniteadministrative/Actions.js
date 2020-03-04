@@ -674,3 +674,237 @@ export function supprimerHistoriqueTransfert({ commit}, id) {
       axios.delete("/supprimerHistoTransfert/" + id).then(() => dialog.close());
     });
 }
+
+
+
+
+
+
+
+
+
+
+
+export function getAllDirection({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeDirectionUa")
+      .then(response => {
+        commit("GET_ALL_DIRECTION", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterDirection({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterDirectionUa", {
+      	d_ua_id: nouveau.d_ua_id,
+    
+      libelle: nouveau.libelle,
+     
+      
+
+    }))
+
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_DIRECTION", response.data);
+        dispatch('getAllDirection')
+        dispatch('getAllUniteAdministrative')
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+// modifier
+export function modifierDirection({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierDirectionUa/" + nouveau.id, {
+      d_ua_id: nouveau.d_ua_id,
+
+      libelle: nouveau.libelle,
+    }))
+    .then(response => {
+      commit("MODIFIER_DIRECTION", response.data);
+      dispatch('getAllDirection')
+      dispatch('getAllUniteAdministrative')
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerDirection({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_DIRECTION", id);
+      dispatch('getAllDirection')
+      dispatch('getAllUniteAdministrative')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerDirectionUa/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
+
+
+export function getAllService({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeServiceUa")
+      .then(response => {
+        commit("GET_ALL_SERVICE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterService({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterServiceUa", {
+      s_ua_id: nouveau.s_ua_id,
+      direction_id	: nouveau.direction_id	,
+      libelle: nouveau.libelle,
+
+
+
+    }))
+
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_SERVICE", response.data);
+        dispatch('getAllDirection')
+        dispatch('getAllService')
+        dispatch('getAllUniteAdministrative')
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+// modifier
+export function modifierService({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierServiceUa/" + nouveau.id, {
+      s_ua_id: nouveau.s_ua_id,
+      direction_id: nouveau.direction_id,
+      libelle: nouveau.libelle,
+    }))
+    .then(response => {
+      commit("MODIFIER_SERVICE", response.data);
+      dispatch('getAllDirection')
+      dispatch('getAllService')
+      dispatch('getAllUniteAdministrative')
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerService({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_SERVICE", id);
+      dispatch('getAllDirection')
+      dispatch('getAllService')
+      dispatch('getAllUniteAdministrative')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerServiceUa/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
+
+
+export function getAllFonction({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeFonctionUa")
+      .then(response => {
+        commit("GET_ALL_FONCTION", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterFonction({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterFonctionUa", {
+      f_ua_id: nouveau.f_ua_id,
+      service_id: nouveau.service_id,
+      libelle: nouveau.libelle,
+      direction_id: nouveau.direction_id
+
+
+    }))
+
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_FONCTION", response.data);
+        dispatch('getAllFonction')
+        dispatch('getAllUniteAdministrative')
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+// modifier
+export function modifierFonction({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierFonctionUa/" + nouveau.id, {
+      f_ua_id: nouveau.f_ua_id,
+      service_id: nouveau.service_id,
+      libelle: nouveau.libelle,
+      direction_id: nouveau.direction_id
+    }))
+    .then(response => {
+      commit("MODIFIER_FONCTION", response.data);
+      dispatch('getAllFonction')
+      dispatch('getAllUniteAdministrative')
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerFonction({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_FONCTION", id);
+      dispatch('getAllFonction')
+      dispatch('getAllUniteAdministrative')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerFonctionUa/" + id).then(() => dialog.close());
+    });
+}
