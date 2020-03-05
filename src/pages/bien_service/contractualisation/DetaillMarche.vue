@@ -1665,7 +1665,7 @@
                             </td>
                                     <td>
                      <div class="control-group" v-if="selectionAttributionMarche(marcheid)">
-                        <label class="control-label">Entreprise vainqueur </label>
+                        <label class="control-label">Titulaire </label>
                         <div class="controls" >
                             <input :value="selectionAttributionMarche(marcheid).dossier_candidature.nom_cand" readonly/>
                         </div>
@@ -1775,14 +1775,84 @@
               <textarea   v-model="formEffetFinancier.libelle_act"   class="textarea_editor span12" rows="3" placeholder="Entrer le libellé ..."></textarea>
             </div>
           
-        </div>
-                            </td>
-                   
-                           
-                          
+              </div>
+             </td>
+                     
                         </tr>
                         <tr>
+                    
+                           
+                                <td>
+
+                     <div class="control-group">
+                        <label class="control-label">Montant HT(hors taxe)</label>
+                        <div class="controls">
+                            <input type="text" v-model="formEffetFinancier.montant_act_ht"
+                                    class="span"
+                                    placeholder="Saisir le montant "
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+                                   <td>
+
+                     <div class="control-group">
+                        <label class="control-label">Montant tva</label>
+                        <div class="controls">
+                            <input type="text" v-model="formEffetFinancier.montant_act_tva"
+                                    class="span"
+                                    placeholder="Saisir le montant "
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+   
+                            
                             <td>
+
+                     <div class="control-group">
+                        <label class="control-label">Montant acte/réel du marché(TTC)</label>
+                        <div class="controls">
+                            <input type="text" v-model="formEffetFinancier.montant_act"
+                                    class="span"
+                                    placeholder="Saisir le montant "
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+                             <td>
+
+                     <div class="control-group">
+                        <label class="control-label">Avance demarrage HT</label>
+                        <div class="controls">
+                            <input type="text" v-model="formEffetFinancier.avance_demarrage_ht"
+                                    class="span"
+                                    placeholder="Saisir le montant "
+                            />
+                        </div>
+                    </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+
+                             <td>
+
+                     <div class="control-group">
+                        <label class="control-label">Avance demarrage TTC</label>
+                        <div class="controls">
+                            <input type="text" v-model="formEffetFinancier.avance_demarrage_ttc"
+                                    class="span"
+                                    placeholder="Saisir le montant "
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+                             <td>
                     <div class="control-group">
                         <label class="control-label">Reference acte</label>
                         <div class="controls">
@@ -1793,7 +1863,7 @@
                         </div>
                     </div>
                             </td>
-                            <td>
+                               <td>
                      <div class="control-group">
                         <label class="control-label">Incidence financière</label>
                         <div class="controls">
@@ -1804,18 +1874,6 @@
                                     
                                   
                             
-                        </div>
-                    </div>
-                            </td>
-                            <td>
-
-                     <div class="control-group">
-                        <label class="control-label">Montant acte/réel du marché</label>
-                        <div class="controls">
-                            <input type="text" v-model="formEffetFinancier.montant_act"
-                                    class="span"
-                                    placeholder="Saisir le montant "
-                            />
                         </div>
                     </div>
                             </td>
@@ -1864,7 +1922,7 @@
 
                                            <td>
                      <div class="control-group">
-                        <label class="control-label" title=" ">Durée d'exécution(jrs)</label>
+                        <label class="control-label" title=" ">Durée d'exécution prévisionnelle(jrs)</label>
                         <div class="controls">
                             <input type="text"  readonly :value="nombreDejourCalcule"
                                     class="span"
@@ -1940,7 +1998,7 @@
 
                         <td>
                             <div class="control-group" v-if="selectionAttributionMarche(marcheid)">
-                                <label class="control-label">Entreprise vainqueur </label>
+                                <label class="control-label">Titulaire </label>
                                 <div class="controls" >
                                     <input :value="selectionAttributionMarche(marcheid).dossier_candidature.nom_cand" readonly/>
                                 </div>
@@ -2009,6 +2067,21 @@
 
                         </td>
 
+                                   <td>
+                    <div class="control-group">
+                        <label class="control-label">Numero du marche/contract</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="editActeEffetFinancier.numero_marche"
+                                    class="span"
+                                    placeholder="Saisir le numero "
+                            />
+                        </div>
+                    </div>
+
+                            </td>
+
 
                         <td>
 
@@ -2029,7 +2102,7 @@
                     <tr>
 
 
-                        <td colspan="3" width="250">
+                        <td colspan="4" width="250">
                             <div class="control-group">
                                 <label class="control-label">Libellé acte:</label>
                                 <div class="controls">
@@ -2038,37 +2111,42 @@
 
                             </div>
                         </td>
-
-
-
                     </tr>
                     <tr>
-                        <td>
-                            <div class="control-group">
-                                <label class="control-label">Reference acte</label>
-                                <div class="controls">
-                                    <input type="text" v-model="editActeEffetFinancier.reference_act"
-                                           class="span"
-                                           placeholder="refence acte"
-                                    />
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="control-group">
-                                <label class="control-label">Incidence financière</label>
-                                <div class="controls">
-                                    <select  v-model="editActeEffetFinancier.incidence_financiere" class="span">
-                                        <option value="0">Oui</option>
-                                        <option value="1">Non</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </td>
+
+                                  <td>
+
+                     <div class="control-group">
+                        <label class="control-label">Montant HT (hors taxe)</label>
+                        <div class="controls">
+                            <input type="text" v-model="editActeEffetFinancier.montant_act_ht"
+                                    class="span"
+                                    placeholder="Saisir le montant "
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+   
+                            
+                            <td>
+
+                     <div class="control-group">
+                        <label class="control-label">Montant tva</label>
+                        <div class="controls">
+                            <input type="text" v-model="editActeEffetFinancier.montant_act_tva"
+                                    class="span"
+                                    placeholder="Saisir le montant "
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+                        
                         <td>
 
                             <div class="control-group">
-                                <label class="control-label">Montant acte/réel du marché</label>
+                                <label class="control-label">Montant acte/réel du marché(TTC)</label>
                                 <div class="controls">
                                     <input type="text" v-model="editActeEffetFinancier.montant_act"
                                            class="span"
@@ -2077,6 +2155,61 @@
                                 </div>
                             </div>
                         </td>
+
+                                  <td>
+
+                            <div class="control-group">
+                                <label class="control-label">Avance demarrageHT</label>
+                                <div class="controls">
+                                    <input type="text" v-model="editActeEffetFinancier.avance_demarrage_ht"
+                                           class="span"
+                                           placeholder="refence acte"
+                                    />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                     <td>
+
+                            <div class="control-group">
+                                <label class="control-label">Avance demarrage TTC</label>
+                                <div class="controls">
+                                    <input type="text" v-model="editActeEffetFinancier.avance_demarrage_ttc"
+                                           class="span"
+                                           placeholder="refence acte"
+                                    />
+                                </div>
+                            </div>
+                        </td>
+
+                         <td>
+                    <div class="control-group">
+                        <label class="control-label">Reference acte</label>
+                        <div class="controls">
+                            <input type="text" v-model="editActeEffetFinancier.reference_act"
+                                    class="span"
+                                    placeholder="refence acte"
+                            />
+                        </div>
+                    </div>
+                            </td>
+                               <td>
+                     <div class="control-group">
+                        <label class="control-label">Incidence financière</label>
+                        <div class="controls">
+                            <select  v-model="editActeEffetFinancier.incidence_financiere" class="span">
+                               <option value="0">Oui</option>
+                               <option value="1">Non</option>
+                            </select>
+                                    
+                                  
+                            
+                        </div>
+                    </div>
+                            </td>
                         <td>
 
                             <div class="control-group">
@@ -2122,7 +2255,7 @@
 
                         <td>
                             <div class="control-group">
-                                <label class="control-label" title=" ">Durée d'exécution(jrs)</label>
+                                <label class="control-label" title=" ">Durée d'exécution prévisionnelle(jrs)</label>
                                 <div class="controls">
                                     <input type="text" readonly :value="nombreDejourCalcule"
                                            class="span"
@@ -3750,6 +3883,10 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
 
          formEffetFinancier:{
              code_act:"",
+             montant_act_tva:"",
+             montant_act_ht:"",
+             avance_demarrage_ttc:"",
+             avance_demarrage_ht:"",
              libelle_act:"",
              difference_act:"bs",
              reference_act:"",
@@ -3791,6 +3928,10 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
          editActeEffetFinancier:{
               code_act:"",
              libelle_act:"",
+             montant_act_tva:"",
+             montant_act_ht:"",
+             avance_demarrage_ttc:"",
+             avance_demarrage_ht:"",
              difference_act:"bs",
              reference_act:"",
              objet_act:"",
@@ -4849,6 +4990,10 @@ ajouterModalActeEffetFinancierLocal(rcm){
     this.formEffetFinancier = {
              code_act:"",
              libelle_act:"",
+             montant_act_ht:"",
+             montant_act_tva:"",
+             avance_demarrage_ttc:"",
+             avance_demarrage_ht:"",
              difference_act:"bs",
              reference_act:"",
              objet_act:"",
