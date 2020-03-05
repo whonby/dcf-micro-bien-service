@@ -402,3 +402,15 @@ export function supprimerArchivageDocument({ commit }, id) {
 }
 // afficher liste des archivage note se service
 /*fin action archivage note se service */
+
+
+export function importBudget({ commit }, element_modifie,config) {
+    return asyncLoading(axios
+        .post("/importBudge",element_modifie,config))
+        .then(response => {
+         /*   if (response.status == 201) {
+
+            }*/
+            commit("IMPORT_BUDGET", response.data);
+        });
+}

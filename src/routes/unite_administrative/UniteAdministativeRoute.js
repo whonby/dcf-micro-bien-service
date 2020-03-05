@@ -10,6 +10,7 @@ import budgetGeneralParUa from "../../pages/unites_administratives/budgetGeneral
 import grpeBudgetSection from "../../pages/unites_administratives/grpeBudgetSection.vue"
 import grpeBudgetProgramme from "../../pages/unites_administratives/grpeBudgetProgramme.vue"
 import historiquebudgetGeneralComponent from "../../pages/unites_administratives/historiquebudgetGeneralComponent.vue";
+import Budget from "../../pages/budget/Budget";
 const UniteAdministativeRoutes = [
   {
     path: "/historique-budget-general-component",
@@ -71,6 +72,12 @@ const UniteAdministativeRoutes = [
     path: "/archivage_document",
     name: "archivagedocument",
     component: archivagedocument
+  }
+  ,
+  {
+    path: "/import_budget",
+    name: "ImportBudget",
+    component: Budget
   }
 ];
 
