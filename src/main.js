@@ -10,7 +10,10 @@ axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 import Default from '../src/layouts/Default.vue'
 import NoSidebar from '../src/layouts/NoSidebar.vue'
-
+import VuejsDialog from 'vuejs-dialog';
+// include the default style
+import 'vuejs-dialog/dist/vuejs-dialog.min.css';
+import VueLoading from 'vuejs-loading-plugin'
 import './../node_modules/jquery/dist/jquery.min.js';
 import './../node_modules/bootstrap/dist/js/bootstrap.min.js';
 import App from './App.vue'
@@ -18,7 +21,9 @@ import router from './routes'
 import store from './vuex/store'
 
 import JsonExcel from 'vue-json-excel'
- 
+import Datatable from 'vue2-datatable-component'
+
+
 Vue.component('downloadExcel', JsonExcel)
 //Vue.component(Balloon)
 //import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -31,12 +36,9 @@ Vue.prototype.$ = Jquery
  Vue.component('default-layout', Default)
  Vue.component('no-sidebar-layout', NoSidebar)
 
- import VuejsDialog from 'vuejs-dialog'; 
-// include the default style
-import 'vuejs-dialog/dist/vuejs-dialog.min.css';
-import VueLoading from 'vuejs-loading-plugin'
 
 
+Vue.use(Datatable)
 // using default options
 //Vue.use(VueLoading)
 

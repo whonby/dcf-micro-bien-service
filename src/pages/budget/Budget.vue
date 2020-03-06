@@ -13,46 +13,45 @@
                     </div>-->
                 </div>
                 <div class="span6">
-                    <div class="widget-box">
-                        <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-                            <h5>Importation de budget</h5>
-                        </div>
-                        <div class="widget-content" >
-                            <form action="#" method="get" class="form-horizontal">
-                                <div class="control-group">
-                                    <label class="control-label">Exercice budgetaire</label>
 
-                                    <div class="controls">
-                                        <input
-                                                type="text"
-                                                class="span"
-                                                readonly
-                                                :value="anneeAmort"
-                                        />
-                                        <!-- <input
-                                          type="text"
-                                          class="span"
-                                         readonly
-                                        :value="alertMessage"
-                                        /> -->
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">Fichier joint:</label>
-                                    <div class="controls">
-                                        <input type="file"   @change="OnchangeFichier" />
-                                    </div>
-                                </div>
-
-
-                                <div class="form-actions">
-                                    <button type="submit" class="btn btn-success" @click="ajouterFichier">Importer</button>
-                                </div>
-                            </form>
-
-                        </div>
-
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Importation de budge</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Exercice budgetaire</td>
+                            <td> <input
+                                    type="text"
+                                    class="span"
+                                    readonly
+                                    :value="anneeAmort"
+                            /></td>
+                        </tr>
+                        <tr>
+                            <td>Budget:</td>
+                            <td><div class="controls">
+                                <input type="file"   @change="OnchangeFichier" />
+                            </div>
+                                <img v-if="imagePDFDemandeAno" src="../../assets/excel.png" width="50" height="50">
+                            </td>
+                        </tr>
+                       <!-- <tr>
+                            <td> </td>
+                            <td v-if="imagePDFDemandeAno"> </td>
+                        </tr>-->
+                        </tbody>
+                    </table>
+                    <button  type="submit" class="btn btn-success" @click="ajouterFichier">Importer</button>
+                    <hr>
+                <!--    <progress max="100" :value.prop="uploadPercentage"  v-bind:style="{ width: bgWidth, height: bgHeight }"></progress>-->
+                    <div class="progress progress-striped progress-success">
+                        <div class="bar" v-bind:style="{ width: bgWidth, height: bgHeight }"></div>
                     </div>
+
                 </div>
                 <div class="span2">
 
@@ -77,10 +76,15 @@
                     }
 
                 ],
+
+                bgWidth: '0%',
+                bgHeight: '30px',
                 exercice_budget:"",
                 message_mandater:'',
+                i:0,
                 isOffreTechniqueFinancier:false,
                 namePDF: "",
+                uploadPercentage:0,
                 fichierPDF: "",
                 imagePDF:"",
                 selectedFile:"",
@@ -94,6 +98,7 @@
                 namePDFDemandeAno: "",
                 fichierPDFDemandeAno: "",
                 imagePDFDemandeAno:"",
+
 
             };
         },
@@ -170,15 +175,21 @@
                         'Content-Type' : 'multipart/form-data'
                     }
                 }
-                console.log(formData)
+
+
+                this.i= this.i+10;
+                this.bgWidth=this.i+"%"
+
                this.importBudget(formData,config).then(data=>{
                    console.log(erro)
                    this.getAllBudgetGeneral()
                    this.getAllUniteAdministrative()
+                   router.push({ path: 'budgetGenerals' })
                }).catch(erro=>{
                    console.log(erro)
                    this.getAllBudgetGeneral()
                    this.getAllUniteAdministrative()
+                   router.push({ path: 'budgetGenerals' })
                })
 
             },

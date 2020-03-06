@@ -798,6 +798,7 @@ anneeAmort() {
 
 
      ImputationBudget() {
+
       
       const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.afficheEconomique.id == this.formData.economique_id);
 

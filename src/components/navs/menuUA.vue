@@ -68,17 +68,17 @@
           data-target="#Affichebudget"
           class="dropdown-toggle"
         >
-          <span class="text">AFFICHAGE BUDGET</span>
+          <span class="text"> BUDGET</span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-          <!-- <li>
-            <router-link :to="{name: ''}" tag="a">
+           <li>
+            <router-link :to="{name: 'ImportBudget'}" tag="a">
               <i class="icon-user"></i>
-              Budget par UA
+            Importe le budget
             </router-link>
-          </li> -->
-<li>
+          </li>
+          <li>
             <router-link :to="{name: 'grpeBudgetSection'}" tag="a">
               <i class="icon-user"></i>
               Budget General par section
