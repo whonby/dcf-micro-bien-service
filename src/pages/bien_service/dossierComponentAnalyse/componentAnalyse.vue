@@ -158,32 +158,8 @@
                     </div>
                             </td>
 
-                                  <!-- <td>
-                    <div class="control-group">
-                        <label class="control-label">Decision</label>
-                        <div class="controls">
-                            <select v-model="formAnalyseDossier.decision" >
-                                <option value="1">Non objection</option>
-                                <option value="2">Objection</option>
-                            </select>
-                        </div>
-                    </div>
-                            </td> -->
                         </tr>
-                        <!-- <tr>
-                      
-                            <td colspan="4">
-                     <div class="control-group">
-          <label class="control-label">Obseravtion:</label>
-            <div class="controls">
-              <textarea  v-model="formAnalyseDossier.motif" :readonly="afficherMotifAnalyse"  class="textarea_editor span10" rows="4" placeholder="Entrer le text ..."></textarea>
-            </div>
-          
-        </div>
-                            </td>
-                           
-                      
-                        </tr> -->
+                       
 
                     </table>
             
@@ -306,6 +282,8 @@ export default {
 
             },
 
+            edite_analyse_dossier:""
+
 
 
         }
@@ -315,8 +293,20 @@ export default {
 
     },
     computed:{
-        ...mapGetters('bienService'['getterAnalyseDossiers',
-        'getterDossierCandidats','typeAnalyses','getterCojos', 'appelOffres']),
+       ...mapGetters("bienService", [ "typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+                "modePassations", "procedurePassations","getterDossierCandidats","marches",
+                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
+                "getterMandate","getterCojos","getterAnalyseDossiers","typeAnalyses", "analyseDossiers","text_juridiques"
+                ]),
+            // ...mapGetters('personnelUA', ['acteur_depenses']),
+
+
+    //             ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
+    //         ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
+    //             'types_financements']) ,
+                
+    // ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
+        
 
          // ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
 
