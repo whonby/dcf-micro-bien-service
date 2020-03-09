@@ -362,7 +362,7 @@
 
             <div
               class="widget-content nopadding"
-              v-if="type_Unite_admins.length && sections.length && chapitres.length && filtre_unite_admin.length "
+              v-if="type_Unite_admins.length && sections.length && chapitres.length"
             >
               <table class="table table-bordered table-striped">
                 <thead>
