@@ -1,3 +1,4 @@
+import { groupBy } from "../../../../Repositories/Repository";
 const mode_passations = state => state.mode_passations;
 const source_personnalise=state =>state.source_personnalise
 const type_marches = state => state.type_marches;
@@ -17,6 +18,49 @@ const document_presence_by_marche=state =>state.document_presence_by_marche;
 const deatil_marche_back_end=state =>state.deatil_marche_back_end;
 const financement_by_marche =state =>state.financement_by_marche;
 const detail_marche_finance=state =>state.detail_marche_finance;
+export const banques = state => state.banques;
+export const comptes = state => state.comptes;
+export const agenceBanques = state => state.agenceBanques
+
+
+
+const getPersonnaliseAgence = (state, getters, rootState, rootGetters) =>
+    state.agenceBanques.map(element => {
+        if (element.banque_id !== null && element.pays_id !== null && element.ville_id !== null && element.commune_id !== null) {
+            element = {
+                ...element,
+                afficheBanque: rootGetters['gestionMarche/banques'].find(
+                    banq => banq.id == element.banque_id
+                ),
+                affichePays: rootGetters['bienService/pays'].find(
+                    pay => pay.id == element.pays_id
+                ),
+                afficheVille: rootGetters['bienService/villes'].find(
+                    vil => vil.id == element.ville_id
+                ),
+                afficheCommune: rootGetters['bienService/communes'].find(
+                    comm => comm.id == element.commune_id
+                ),
+            };
+        }
+
+        return element;
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const document_pyba_ppm_personnalise=(state, getters, rootState, rootGetters) =>
     state.document_ptba_ppm.map(element => {
         if (element.unite_administrative_id !== null && element.exercice_budgetaire_id!==null ) {
@@ -115,7 +159,54 @@ const presenceCFPersonnalise =(state, getters, rootState, rootGetters) =>
     });
 
 
+
+
+    export const getEntreptise =(state, getters, rootState, rootGetters) =>
+    state.entreprises.map(element => {
+        if ( element.banque_id !== null && element.secteur_activite_id!== null ) {
+            element = {
+                ...element,
+                varBanque: rootGetters['gestionMarche/banques'].find(
+                    section => section.id == element.banque_id
+                ),
+                varActivite: rootGetters['gestionMarche/secteur_activites'].find(
+                    section => section.id == element.secteur_activite_id
+                )
+            };
+        }
+
+        return element;
+    });
+
+
+    export const getCompte =(state, getters, rootState, rootGetters) =>
+    state.comptes.map(element => {
+        if (element.banq_id!== null ) {
+            element = {
+                ...element,
+                // varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
+                //     section => section.id == element.entreprise_id
+                // ),
+                varObjetBanque: rootGetters['gestionMarche/banques'].find(
+                    section => section.id == element.banq_id
+                )
+            };
+        }
+
+        return element;
+    });
+
+export const groupeVille = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+    return groupBy(getters.getPersonnaliseAgence,"ville_id");
+};
+export const groupeCommune = (state, getters) => {
+    //delete getters.trieUaImmobilisation.
+    return groupBy(getters.getPersonnaliseAgence, "commune_id");
+};
+
 export {
+    getPersonnaliseAgence,
     mode_passations,
     type_marches,
     secteur_activites,

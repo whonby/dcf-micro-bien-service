@@ -1,4 +1,3 @@
-
 <template>
   <div>
   
@@ -55,15 +54,11 @@
                    <td @dblclick="afficherMoadlModifierLocalisation(index)">
                       {{geographique.structure_localisation_geographique.libelle || 'Non renseigné'}}</td>
                   <td>
-
-
-
               <div class="btn-group">
               <button @click.prevent="supprimerLocalisationGeographique(geographique.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
-
                   </td>
                 </tr>
               </tbody>
@@ -71,9 +66,9 @@
                 <ul id="demo">
             <Tree class="item" v-for="plan in lesPlansParents"
             :key="plan.id" :item="plan"   
-              @ajouterElementEnfant="ajouterElementEnfant(plan)" 
+              @ajouterElementEnfant="ajouterElementEnfant" 
               @supprimer="supprimerPlanProgrammeLocal"
-              @modifier="afficherMoadlModifierLocalisation(plan)"></Tree>
+              @modifier="afficherMoadlModifierLocalisation"></Tree>
           </ul>
             <div v-if="lesPlansParents.length">
             </div>
@@ -190,7 +185,7 @@
  <div id="modalAjouterElementEnfant" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter plan programme</h3>
+                <h3>Ajouter localisation geographique</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -237,8 +232,8 @@
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="nouvelElementEnfant.code.length && nouvelElementEnfant.libelle.length && 
-             nouvelElementEnfant.structure_programme_id"
+             <button v-show=" nouvelElementEnfant.libelle.length && 
+             nouvelElementEnfant.structure_localisation_geographique_id"
               @click.prevent="ajouterProgrammeLocalEnfant()" class="btn btn-primary"
               >Valider</button>
               <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
@@ -280,7 +275,6 @@ export default {
              libelle: "",
           structure_localisation_geographique_id:""
       },
-
       json_fields:{
                'Code':'code',
                'Libelle':'lielle',
@@ -302,7 +296,6 @@ export default {
              libelle: "",
              structure_localisation_geographique_id:""
         },
-
         editTitre: {
             code: "",
              libelle: "",
@@ -320,11 +313,8 @@ export default {
 // methode pour maper notre guetter
   ...mapGetters('parametreGenerauxAdministratif', ['structures_geographiques', 
   'localisations_geographiques']),
-
    localisationsFiltre(){
-
      const searchTerm = this.search.toLowerCase();
-
 return this.localisations_geographiques.filter((item) => {
   
     return item.code.toLowerCase().includes(searchTerm) 
@@ -333,44 +323,40 @@ return this.localisations_geographiques.filter((item) => {
    }
 )
    },
-
     lesPlansParents(){
      return this.localisations_geographiques.filter(plan => plan.parent == null)
    },
   },
-  methods: {
+  
 
+
+  methods: {
         ajouterProgrammeLocalEnfant () {
       // console.log(this.nouvelElementEnfant)
       this.ajouterLocalisationGeographique(this.nouvelElementEnfant)
-
         this.nouvelElementEnfant = {
                 code: "",
              libelle: "",
           structure_localisation_geographique_id:""
         }
     },
-
     supprimerPlanProgrammeLocal(item){
       this.supprimerLocalisationGeographique(item.id)
     },
 // afficher modal
-
  //afficher modal pour ajouter element enfant
 	 ajouterElementEnfant(item) {
     this.parentDossier = this.localisations_geographiques.find(plan => plan.id == item.id)
+    // this.nouvelElementEnfant = this.localisations_geographiques.find(plan => plan.id == item.id)
+    
+    this.nouvelElementEnfant.code = this.parentDossier.code
      this.nouvelElementEnfant.parent = this.parentDossier.id
-
       this.$('#modalAjouterElementEnfant').modal({
               backdrop: 'static',
               keyboard: false
              });
-
     },
-
  // fin
-
-
     // methode pour notre action
     ...mapActions('parametreGenerauxAdministratif', ['getLocalisationGeographique', 
     'ajouterLocalisationGeographique', 
@@ -385,7 +371,6 @@ return this.localisations_geographiques.filter((item) => {
    // fonction pour vider l'input
     ajouterTitreLocal () {
       this.ajouterLocalisationGeographique(this.formData)
-
         this.formData = {
                 code: "",
              libelle: "",
@@ -394,15 +379,12 @@ return this.localisations_geographiques.filter((item) => {
     },
 // afficher modal
 afficherMoadlModifierLocalisation(item){
-
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
-
        
 this.editTitre = this.localisations_geographiques.find(plan => plan.id == item.id);
-
         
  },
 modifierLocalisationLocal(){
@@ -414,8 +396,6 @@ modifierLocalisationLocal(){
         structure_localisation_geographique_id:""
   }
 }
-
   }
 };
 </script>
-

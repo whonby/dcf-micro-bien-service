@@ -141,7 +141,7 @@
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="editProgramme.niveau.length && editProgramme.libelle.length"
+             <button
               @click.prevent="modifierModalStructureprogrammeLocal(editProgramme)" class="btn btn-primary"
               >Modifier</button>
               <button data-dismiss="modal" class="btn" >Fermer</button> </div>
@@ -262,10 +262,11 @@ afficherModalModifierStructure(index){
  },
  modifierModalStructureprogrammeLocal(){
    this.modifierStructureProgramme(this.editProgramme)
-   this.editProgramme = {
-                niveau: "",
-               libelle: ""
-   }
+   this.$('#modifierModal').modal('hide');
+  //  this.editProgramme = {
+  //               niveau: "",
+  //              libelle: ""
+  //  }
  }
 
   }

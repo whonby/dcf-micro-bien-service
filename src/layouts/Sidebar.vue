@@ -28,6 +28,7 @@
           
           </ul>
        </li> -->
+       
         <li :class="{active: active_el == 11 }" @click.prevent="navigateToParametreGeneraux">
           <a title="PARAMETRES GENERAUX" href="#">
             <i class="icon icon-signal"></i>
@@ -43,49 +44,53 @@
         <li  @click.prevent="navigateToActeurDepense" :class="{active: active_el == 2 }">
           <a href="#">
             <i class="icon icon-th"></i>
-            <span>ACTEURS DE LA DEPENSE</span>
+            <span>PERSONNEL</span>
           </a>
         </li>
-        <li @click.prevent="activate(3)" :class="{active: active_el ==3}">
+        <li @click.prevent="navigateToBienEtService" :class="{active: active_el ==3}">
           <a href="#">
             <i class="icon icon-fullscreen"></i>
-            <span>PLANIFICATION</span>
+            <span>BIENS ET SERVICES</span>
           </a>
+
+       <li @click.prevent="navigateToComptaMatiere" :class="{active: active_el ==5}">
+          <a title="COMPTABILITE DES MATIERE" href="#">
+            <i class="icon icon-pencil"></i>
+            <span>COMPTA DES MATIERES</span>
+          </a>
+        </li>
+
+
         <li @click.prevent="activate(4)" :class="{active: active_el ==4}">
-          <a title="SUIVIB ET CONTROLE BUDGETAIRE 1" href="#">
+          <a title="INVESTISSEMENT" href="#">
             <i class="icon icon-th-list"></i>
-            <span>SUIVI ET CONTRÔLE B.</span>
+            <span>INVESTISSEMENT</span>
             <span class="label label-important"></span>
           </a>
         </li>
         
-        <li @click.prevent="activate(5)" :class="{active: active_el ==5}">
-          <a title="CARTOGRAPHIE DES OPERATIONS BUDGETAIRES" href="#">
-            <i class="icon icon-pencil"></i>
-            <span>CARTOGRAPHIE DES OP. B.</span>
-          </a>
-        </li>
+        
         <li @click.prevent="activate(6)" :class="{active: active_el ==6}">
-          <a title="CONTRÔLE AXE SUR LA PERFORMANCE" href="#">
+          <a title="TRANSFERT" href="#">
             <i class="icon icon-file"></i>
-            <span>CONTRÔLE AXE SUR LA P.</span>
+            <span>TRANSFERT</span>
             <span class="label label-important"></span>
           </a>
         </li>
         <li  @click.prevent="activate(7)" :class="{active: active_el ==7}">
-          <a title="OPERATIONNALISATION DU RAPPORT D’ACTIVITE ET DE LA CARTOGRAPHIE DES RISQUES" href="#">
+          <a title="" href="#">
             <i class="icon icon-info-sign"></i>
-            <span>OP. DU RAPPORT ACTIVITE...</span>
+            <span>EXECUTION</span>
             <span class="label label-important"></span>
           </a>
         </li>
-        <li @click.prevent="activate(8)" :class="{active: active_el ==8}">
+        <!-- <li @click.prevent="activate(8)" :class="{active: active_el ==8}">
           <a title="OPERATIONNALISATION DU DISPOSITIF DE CONTRÔLE INTERNE" href="#">
             <i class="icon icon-heart"></i>
             <span>OP. DU DISPOSITIF DE C. I.</span>
             <span class="label label-important"></span>
           </a>
-        </li>
+        </li> -->
 
            <li @click.prevent="logoutUser()" >
           <a title="DECONNEXION" href="#">
@@ -137,12 +142,25 @@ export default {
         this.$router.push({
           name: 'ExerciceBudgetaire'
         })
+      },
+      
+       navigateToComptaMatiere(){
+        this.activate(5)
+        this.$router.push({
+          name: 'TableauBordImmo2'
+        })
+      },
+
+ navigateToBienEtService(){
+        this.activate(3)
+        this.$router.push({
+          name: 'tableauBord'
+        })
       }
-
-
     
 
 
   }
 };
 </script>
+

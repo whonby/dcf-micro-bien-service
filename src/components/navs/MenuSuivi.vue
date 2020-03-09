@@ -210,7 +210,7 @@
       </li>
       <!-- document
       -->
-       <li class="dropdown" id="mission">
+       <!-- <li class="dropdown" id="mission">
         <a
           title="Suivi des missions"
           href="#"
@@ -221,43 +221,43 @@
           <span class="text">SUIVI DES MISSIONS </span>
           <b class="caret"></b>
         </a>
-        <ul class="dropdown-menu">
-          <li class="divider"></li>
+        <ul class="dropdown-menu"> -->
+          <!-- <li class="divider"></li>
           <li>
             <router-link :to ="{name: 'CategorieMission'}" tag="a">
               <i class="icon-key"></i> Catégories de missions
             </router-link>
           
-          </li>
+          </li> -->
 
-            <li class="divider"></li>
+            <!-- <li class="divider"></li>
           <li>
             <router-link :to ="{name: 'NormeMission'}" tag="a">
               <i class="icon-key"></i> Norme de missions
             </router-link>
           
-          </li>
-          <li class="divider"></li>
+          </li> -->
+          <!-- <li class="divider"></li>
             <li> 
               <router-link :to ="{name: 'Imputation'}" tag="a">
                 <i class="icon-user"></i> Imputation budget en mission
               </router-link>
-            </li>
-          <li class="divider"></li>
+            </li> -->
+          <!-- <li class="divider"></li>
           <li>
             <router-link :to ="{name: 'Mission'}" tag="a">
               <i class="icon-check"></i>
              Missions
             </router-link>
-          </li>
-        </ul>
+          </li> -->
+        <!-- </ul>
       </li>
-     
+      -->
      
       
       <!-- Activite
       -->
-     <li class="dropdown" id="tableau">
+     <!-- <li class="dropdown" id="tableau">
         <a
           title="Suivi des immobilisations"
           href="#"
@@ -266,7 +266,7 @@
           class="dropdown-toggle"
         >
           <span class="text">SUIVI DES IMMOBILISATIONS </span>
-          <!-- <span  class="badge badge-important">{{nombreDemandeEquipement}}</span>  -->
+          <span  class="badge badge-important">{{nombreDemandeEquipement}}</span> 
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
@@ -353,15 +353,15 @@
               <span class="text">Acteur équipé</span>
             </router-link>
           </li>
-     <!-- <li>
+     <li>
             <router-link :to="{name:'listeImmobilisationParUa'}" tag="a" title>
               <i class="icon-search"></i>
               <span class="text">Recherche Immobilisation</span>
             </router-link>
-          </li> -->
+          </li>
         </ul>
-      </li>
-      <li>
+      </li> -->
+      <!-- <li>
         <router-link
               :to="{name:'TableauBordImmo'}"
               tag="a"
@@ -371,7 +371,7 @@
           
         </router-link>
       
-      </li>
+      </li> -->
     </ul>
   </div>
 </template>

@@ -94,6 +94,7 @@ export function ajouterExerciceBudgetaire({commit}, objetAjout){
     }).catch(error => console.log(error))
 }
 
+
 //modification exercice budgetaire
 export function modifierExerciceBudgetaire({commit}, exercice_budgetaire) {
 
@@ -126,7 +127,21 @@ export function supprimerExerciceBudgetaire({commit}, id){
         axios.delete('/delete_exercice_budgetaire/' + id).then(() => dialog.close() )   
     })
 }
+// export function EncoursExerciceBudgetaire({ commit }, id) {
 
+//     this.$app.$dialog
+//         .confirm("Voulez vouz vraiment supprimer ?.")
+//         .then(dialog => {
+//             commit('ENCOURS_EXERCICE_BUDGETAIRES', id)
+//             // dispatch('getExercicesBudgetaires')
+//             // commit('ENCOURS_EXERCICE_BUDGETAIRES', varExerciceBudgetaire.data)
+//             // // dialog.loading(false) // stops the proceed button's loader
+//             axios.post('/encours_exercice_budgetaire/' + id).then(() => dialog.close())
+//         })
+
+
+    
+// }
 // get all nature de section
 export  function getNatureSection({commit}) {
 
@@ -138,7 +153,7 @@ export  function getNatureSection({commit}) {
 }
 
 // ajouter nature de section
-export function ajouterNatureSection({commit},objetAjout){
+export function ajouterNatureSection({ commit, dispatch},objetAjout){
    asyncLoading( axios.post('/ajouter_nature_section',{
     code:objetAjout.code,
     libelle:objetAjout.libelle
@@ -146,7 +161,7 @@ export function ajouterNatureSection({commit},objetAjout){
 })).then(response => {
         if(response.status == 201){
             commit('AJOUTER_NATURE_SECTION', response.data)
-
+            dispatch('getNatureSection')
             this.$app.$notify({
                 title: 'success ',
                 text: 'Enregistrement effectué avec success !',
@@ -157,14 +172,14 @@ export function ajouterNatureSection({commit},objetAjout){
 
 }
 // modififer nature de section
-export function modifierNatureSection({commit}, objetModifie){
+export function modifierNatureSection({ commit, dispatch}, objetModifie){
   asyncLoading(  axios.put('/modifier_nature_section/'+ objetModifie.id,{
 
     code:objetModifie.code,
     libelle:objetModifie.libelle
 })).then(res => {
         commit('MODIFIER_NATURE_SECTION', res.data)
-
+    dispatch('getNatureSection')
         this.$app.$notify({
             title: 'success ',
             text: 'Modification effectué avec success !',
@@ -180,7 +195,8 @@ export function supprimerNatureSection({commit}, id){
     this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
-       commit('SUPPRIMER_NATURE_SECTION', id)
+        commit('SUPPRIMER_NATURE_SECTION', id)
+        
       // // dialog.loading(false) // stops the proceed button's loader
         axios.delete('/supprimer_nature_section/' + id).then(() => dialog.close() )   
     })
@@ -201,7 +217,7 @@ export  function getSection({commit}) {
 
 
 // ajouter  section
-export function ajouterSection({commit},objetAjout){
+export function ajouterSection({ commit, dispatch},objetAjout){
    asyncLoading( axios.post('/ajouter_section',{
     code:objetAjout.code,
     nom_section:objetAjout.nom_section,
@@ -210,7 +226,8 @@ export function ajouterSection({commit},objetAjout){
 })).then(response => {
         if(response.status == 201){
             commit('AJOUTER_SECTION', response.data)
-
+            dispatch('getSection')
+            dispatch('getNatureSection')
             this.$app.$notify({
                 title: 'success ',
                 text: 'Enregistrement effectué avec success !',
@@ -220,29 +237,37 @@ export function ajouterSection({commit},objetAjout){
     }).catch(error => console.log(error))
 
 }
-// modififer de section
-export function modifierSection({commit}, objetModifie){
-  asyncLoading(  axios.put('/modifier_section/'+ objetModifie.id,{
 
-    code:objetModifie.code,
-    nom_section:objetModifie.nom_section,
-      code_section: objetModifie.code_section,
-    naturesection_id:objetModifie.naturesection_id
-})).then(res => {
+export function modifierSection({ commit, dispatch }, objetModifie) {
+    asyncLoading(axios.put('/modifier_section/' + objetModifie.id, {
+
+        code: objetModifie.code,
+        nom_section: objetModifie.nom_section,
+        code_section: objetModifie.code_section,
+        naturesection_id: objetModifie.naturesection_id
+    })).then(res => {
         commit('MODIFIER_SECTION', res.data)
+        dispatch('getSection')
+        dispatch('getNatureSection')
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué avec success !',
+            type: "success"
+        })
     }).catch(error => console.log(error))
-   
-}
 
+}
 
 // supprimer de setion
 
-export function supprimerSection({commit}, id){
+export function supprimerSection({ commit, dispatch}, id){
   
     this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
-       commit('SUPPRIMER_SECTION', id)
+        commit('SUPPRIMER_SECTION', id)
+        dispatch('getSection')
+        dispatch('getNatureSection')
       // // dialog.loading(false) // stops the proceed button's loader
         axios.delete('/supprimer_section/' + id).then(() => dialog.close() )   
     })
@@ -761,3 +786,119 @@ export function modifierTypeUniteAdministrative({ commit, dispatch }, typeua) {
     });
 }
 
+export function EncoursExerciceBudgetaire({ commit, dispatch }, objetAjout) {
+
+    this.$app.$dialog
+        .confirm("Voulez vous changer année en cours ?.")
+        .then(dialog => {
+    
+            asyncLoading(axios.post('/encours_exercice_budgetaire', {
+
+                id: objetAjout,
+
+            })).then(varExerciceBudgetaire => {
+                // if (varExerciceBudgetaire.status == 201) {
+                commit('ENCOURS_EXERCICE_BUDGETAIRES', varExerciceBudgetaire.data)
+                dispatch('getExercicesBudgetaires')
+                this.$app.$notify({
+                    title: 'success ',
+                    text: 'Option Effectué avec success !',
+                    type: "success"
+                })
+                // }
+            }).catch(error => console.log(error))
+            dialog.close()
+        });
+   
+   
+}
+
+export function EncoursTaux({ commit, dispatch }, objetAjout) {
+
+    this.$app.$dialog
+        .confirm("Voulez vous changer le taux en cours ?.")
+        .then(dialog => {
+
+            asyncLoading(axios.post('/encours_taux', {
+
+                id: objetAjout,
+
+            })).then(varExerciceBudgetaire => {
+                // if (varExerciceBudgetaire.status == 201) {
+                commit('ENCOURS_TAUX', varExerciceBudgetaire.data)
+                dispatch('getTaux')
+                this.$app.$notify({
+                    title: 'success ',
+                    text: 'Option Effectué avec success !',
+                    type: "success"
+                })
+                // }
+            }).catch(error => console.log(error))
+            dialog.close()
+        });
+
+
+}
+
+// get all exercices budgetaires 
+export function getTaux({ commit }) {
+
+    queue.push(() => axios.get('/liste_taux').then((response) => {
+        commit('GET_TAUX', response.data)
+
+    }).catch(error => console.log(error)))
+
+
+}
+// ajouter execice budgetaire
+export function ajouterTaux({ commit }, objetAjout) {
+    asyncLoading(axios.post('/add_taux', {
+        libelle: objetAjout.libelle,
+        arrondit: objetAjout.arrondit,
+        encours: objetAjout.encours,
+      
+    })).then(varExerciceBudgetaire => {
+        if (varExerciceBudgetaire.status == 201) {
+            commit('AJOUTER_TAUX', varExerciceBudgetaire.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué avec success !',
+                type: "success"
+            })
+        }
+    }).catch(error => console.log(error))
+}
+
+
+//modification exercice budgetaire
+export function modifierTaux({ commit }, exercice_budgetaire) {
+
+    asyncLoading(axios.put('/update_taux/' + exercice_budgetaire.id, {
+        libelle: exercice_budgetaire.libelle,
+        arrondit: exercice_budgetaire.arrondit,
+        encours: exercice_budgetaire.encours
+    })).then(response => {
+        commit('MODIFIER_TAUX', response.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué avec success !',
+            type: "success"
+        })
+    }).catch(error => console.log(error))
+
+}
+
+
+// supprimer exercice budgetaire
+
+export function supprimerTaux({ commit }, id) {
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_TAUX', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/delete_taux/' + id).then(() => dialog.close())
+        })
+}
