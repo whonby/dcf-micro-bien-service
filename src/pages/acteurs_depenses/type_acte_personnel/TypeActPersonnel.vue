@@ -12,7 +12,7 @@
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Liste des types acte de personnel</h5>
+                            <h5>Liste  type acte  personnel</h5>
                             <div align="right">
                                 Search: <input type="text" v-model="search">
 
@@ -24,7 +24,7 @@
                                 <thead>
                                 <tr>
                                     <th>Code</th>
-                                    <th>Libelle</th>
+                                    <th>Libellé</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -63,7 +63,7 @@
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter un type d'acte</h3>
+                <h3>Ajouter type acte  personnel</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Libelle:</label>
+                        <label class="control-label">Libellé:</label>
                         <div class="controls">
                             <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
                         </div>
@@ -98,7 +98,7 @@
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier un titre</h3>
+                <h3>Modifier type acte personnel</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Libelle:</label>
+                        <label class="control-label">Libellé:</label>
                         <div class="controls">
                             <input type="text" v-model="editTitre.libelle" class="span" placeholder="" />
                         </div>

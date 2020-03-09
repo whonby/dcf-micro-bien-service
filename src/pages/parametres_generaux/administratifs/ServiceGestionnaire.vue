@@ -139,7 +139,7 @@
            <div class="modal-footer"> 
              <button  v-show="formData.code.length && formData.libelle.length && 
             formData.structure_administrative_id" 
-             @click.prevent="ajouterTitreLocal" class="btn btn-primary"
+             @click.prevent="ajouetProgrammeLocal" class="btn btn-primary"
               href="#">Valider</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
             </div>
@@ -403,6 +403,7 @@ return this.services_gestionnaires.filter((item) => {
  //afficher modal pour ajouter element enfant
 	 ajouterElementEnfant(item) {
     this.parentDossier = this.services_gestionnaires.find(plan => plan.id == item.id)
+    this.nouvelElementEnfant.code = this.parentDossier.code
      this.nouvelElementEnfant.parent = this.parentDossier.id
 
       this.$('#modalAjouterElementEnfant').modal({

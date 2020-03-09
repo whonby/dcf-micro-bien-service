@@ -34,7 +34,7 @@
              
           </div>
          
-           <div class="widget-content nopadding">
+           <div class="widget-content nopadding" v-if="sources_financements.length && fonctions.length">
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -47,19 +47,28 @@
               </thead>
               <tbody>
                 <tr class="odd gradeX" v-for="(norme_mission, index) in 
-                getNormeMissionPersonnaliser"
+                normeMissionFiltre"
                  :key="norme_mission.id">
                   <td @dblclick="afficherModalModifierNormeMission(index)">
-                      {{norme_mission.objetSourceFinancement.libelle || 'Non renseigné'}}</td>
+                      {{norme_mission.varObjetSourceFinancement.libelle|| 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierNormeMission(index)">
-                      {{norme_mission.objetFonction.libelle || 'Non renseigné'}}</td>
+                      {{norme_mission.varObjetFonction.libelle || 'Non renseigné'}}</td>
                    
                     <td @dblclick="afficherModalModifierNormeMission(index)">
-                      {{norme_mission.perdiem || 'Non renseigné'}}</td>
+                      {{formatageSomme(parseFloat(norme_mission.perdiem)) || 'Non renseigné'}}</td>
 
-                  <td  @dblclick="afficherModalModifierNormeMission(index)">
-                      {{norme_mission.zone || 'Non renseigné'}}</td>
+               
+                        <td  @dblclick="afficherModalModifierNormeMission(index)">
+                            <span 
+                             v-if="norme_mission.zone == 0"> Cote d'ivoire</span>
+                              <span v-else-if="norme_mission.zone == 1" > Afrique</span>
+                            
+                          <span v-else >Hors Afrique</span>
+    
+                          </td>
+                   
                   <td>
+
 
 
 
@@ -99,7 +108,7 @@
             
 
               <div class="modal-body">
-                <form class="form-horizontal">
+                <form class="form-horizontal" enctype="multipart/form-data">
                 
            
               <div class="control-group">
@@ -127,9 +136,9 @@
               <div class="controls">
                 <select v-model="formData.zone" class="span">
               
-                  <option value="Cote d'ivoire">Cote d'ivoire</option>
-                  <option value="Afrique">Afrique</option>
-                   <option value="hors Afrique">hors Afrique</option>
+                  <option value="0">Cote d'ivoire</option>
+                  <option value="1">Afrique</option>
+                   <option value="2">hors Afrique</option>
                 </select>
               </div>
             </div>
@@ -204,7 +213,7 @@
             </div>
               
             <div class="control-group">
-              <label class="control-label">Acteur de depense:</label>
+              <label class="control-label">Fonction:</label>
               <div class="controls">
            <select v-model="editNormeMission.fonction_id" class="span">
                <option v-for="norme in fonctions" :key="norme.id" 
@@ -215,14 +224,14 @@
             
 
 
-    <div class="control-group">
+              <div class="control-group">
               <label class="control-label">Zone:</label>
               <div class="controls">
                 <select v-model="editNormeMission.zone" class="span">
               
-                  <option value="Cote d'ivoire">Cote d'ivoire</option>
-                  <option value="Afrique">Afrique</option>
-                   <option value="hors Afrique">hors Afrique</option>
+                  <option value="0">Cote d'ivoire</option>
+                  <option value="1">Afrique</option>
+                   <option value="2">hors Afrique</option>
                 </select>
               </div>
             </div>
@@ -236,14 +245,13 @@
                   </div>
                    
                    
-                 
+              
               
         
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="editNormeMission.source_financement_id  && editNormeMission.fonction_id && 
-             editNormeMission.perdiem.length && editNormeMission.zone "
+             <button 
              @click.prevent="modifierModalNormeMissionLocal(editNormeMission)" class="btn btn-primary"
               href="#">Modifier</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
@@ -260,7 +268,8 @@
         bg-color="green"
 
   ></fab>
-<notifications  />
+
+<notifications />
 
 
 
@@ -272,6 +281,7 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import {formatageSomme} from '../../../Repositories/Repository'
 export default {
   
   data() {
@@ -295,7 +305,13 @@ export default {
         fonction_id:"",
      source_financement_id: "",
       perdiem:"",
-      zone:""
+      zone:"",
+      fichier_joint:"",
+      // selectedFile:"",
+      // imagePDF:"",
+      // namePDF:"",
+      // fichierPDF:""
+
             
         },
 
@@ -303,7 +319,12 @@ export default {
     fonction_id:"",
      source_financement_id: "",
       perdiem:"",
-      zone:""
+      zone:"",
+      fichier_joint:"",
+      // selectedFile:"",
+      // imagePDF:"",
+      // namePDF:"",
+      // fichierPDF:""
             
         },
             search:""
@@ -316,7 +337,7 @@ export default {
   },
   computed: {
 //  parcourir le getters personnaliser
-   ...mapGetters('suivi_controle_budgetaire', ['getNormeMissionPersonnaliser']) ,
+   ...mapGetters('suivi_controle_budgetaire', ['getNormeMissionPersonnaliser', 'normes_missions']) ,
 
 
 
@@ -327,21 +348,22 @@ export default {
   
    
     // methode pour trier un item
-//            normeMissionFiltre(){
+           normeMissionFiltre(){
 
-//       const searchTerm = this.search.toLowerCase();
+      const searchTerm = this.search.toLowerCase();
 
-// return this.getNormeMissionPersonnaliser.filter((item) => {
+return this.getNormeMissionPersonnaliser.filter((item) => {
   
-//      return item.zone.toLowerCase().includes(searchTerm) 
+     return item.zone.toLowerCase().includes(searchTerm) 
+    //  ||
+    //         item.libelle.toLowerCase().includes(searchTerm)
     
 
-   
-  
+   }
+)
+   },
 
-//    }
-// )
-//    }
+    
   },
 
   methods: {
@@ -359,15 +381,47 @@ export default {
     onFichierChange(e){
       this.formData.fichier_joint = e.target.files[0]
     },
+
+    //  OnchangeFichier(e) {
+    //             const files = e.target.files;
+    //             this.selectedFile = event.target.files[0];
+    //             console.log(this.selectedFile)
+    //             Array.from(files).forEach(file => this.addFichierPDF(file));
+    //         },
+    //         addFichierPDF(file) {
+    //             let reader = new FileReader();
+    //             let vm = this;
+    //             reader.onload = e => {
+    //                 vm.imagePDF = "pdf.png";
+    //                 vm.namePDF = file.name;
+    //                 vm.fichierPDF = e.target.result;
+    //             };
+    //             reader.readAsDataURL(file);
+    //         },
    // fonction pour vider l'input
      ajouterNormeMissionLocal () {
+
+      //  const formData = new FormData();
+      //  formData.append('fichier_joint', this.selectedFile, this.selectedFile.name);
+      //  formData.append('fonction_id', this.formData.fonction_id);
+      //  formData.append('zone', this.formData.zone);
+      //  formData.append('perdiem', this.formData.perdiem);
+      //  formData.append('source_financement_id', this.formData.source_financement_id);
+      //   let config = {
+      //     header :{
+      //          'Content-Type': 'multipart/form-data'
+      //     }
+
+      //   }
+
      this.ajouterNormeMission(this.formData)
 
         this.formData = {
              fonction_id:"",
         source_financement_id: "",
         perdiem:"",
-        zone:""
+        fichier_joint:"",
+          zone:""
             
          }
      },
@@ -386,14 +440,31 @@ afficherModalModifierNormeMission(index){
  },  
 // 
 modifierModalNormeMissionLocal(){
+  // const formData = new FormData();
+                
+  //      formData.append('fonction_id', this.editNormeMission.fonction_id);
+  //      formData.append('zone', this.editNormeMission.zone);
+  //      formData.append('perdiem', this.editNormeMission.perdiem);
+  //      formData.append('source_financement_id', this.editNormeMission.source_financement_id);
+  //               console.log(formData)
+  //               if ( this.selectedFile!==""){
+  //                   formData.append('fichier_joint', this.selectedFile, this.selectedFile.name);
+  //               }
+  //               let config = {
+  //                   header : {
+  //                       'Content-Type' : 'multipart/form-data'
+  //                   }
+  //               }
   this.modifierNormeMission(this.editNormeMission)
-  this.editNormeMission = {
-     fonction_id:"",
-        source_financement_id: "",
-        perdiem:"",
-        zone:""
-  }
-}
+  this.$('#modifierModal').modal('hide');
+  // this.editNormeMission = {
+  //    fonction_id:"",
+  //       source_financement_id: "",
+  //       perdiem:"",
+  //       zone:""
+  // }
+},
+formatageSomme:formatageSomme
 
   }
 };

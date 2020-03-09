@@ -146,7 +146,7 @@ const SUPPRIMER_CLASSES= (state, id) => {
  * @param objetModifie
  * @constructor
  */
-const MODIFIER_CLASSES = (state, id, objetModifie) => {
+const MODIFIER_CLASSES = (state, objetModifie) => {
     state.classes = state.classes.map(classe => {
         if(classe.id == objetModifie.id){
             classe = {...objetModifie}
@@ -198,7 +198,7 @@ const SUPPRIMER_NIVEAU_ETUDE= (state, id) => {
  * @param objetModifie
  * @constructor
  */
-const MODIFIER_NIVEAU_ETUDE = (state, id, objetModifie) => {
+const MODIFIER_NIVEAU_ETUDE = (state, objetModifie) => {
     state.niveau_etudes = state.niveau_etudes.map(classe => {
         if(classe.id == objetModifie.id){
             classe = {...objetModifie}
@@ -411,6 +411,7 @@ const MODIFIER_GRADE = (state, objetModifie) => {
         return grade
     })
 }
+
 
 /**
  * Fin echelons

@@ -14,11 +14,24 @@ import MarcheContratEdite from "../../pages/gestion_marche/MarcheContrat/Modific
 import EditeEntreprise from "../../pages/gestion_marche/Entreprise/EntrepriseEdite"
 import MarcheExecution from "../../pages/gestion_marche/MarcheContrat/execution/MarcheContratExecution"
 import DetailMarcheExecution from "../../pages/gestion_marche/MarcheContrat/execution/DetailMarcheContratExecution"
+import banque from '../../pages/gestion_marche/Banque/banque.vue';
+import DetaillEntreprise from '../../pages/gestion_marche/Entreprise/DetaillEntreprise.vue';
 const GestionMarcheRoutes = [
     {
+        
         path:"/mode-passation",
         name:"ModePassation",
         component:ModePassation
+    },
+    {
+        path:"/detaill-entreprise/:id",
+        name:"DetaillEntreprise",
+        component:DetaillEntreprise
+    },
+    {
+        path:"/creation-banque",
+        name:"banque",
+        component:banque
     },
     {
         path:"/type-marche",

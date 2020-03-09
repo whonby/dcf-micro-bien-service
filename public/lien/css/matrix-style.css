@@ -1,3 +1,4 @@
+
 * {
 	outline:none !important;
 	-moz-outline: none !important;
@@ -10,6 +11,7 @@ html, body{height:100%}
 body {
 	overflow-x: hidden;
 	margin-top: -10px; font-family: 'Open Sans', sans-serif; font-size:12px; color:#666;
+
 }
 a{color:#666;}
 a:hover, a:focus {
@@ -54,13 +56,13 @@ hr{ border-top-color:#dadada;}
 }
 #header h1 {
 	background: url("../img/typo.png") no-repeat scroll 0 0 transparent;
-	height: 31px;
+	height: 40px;
 	left: 20px;
 	line-height: 600px;
 	overflow: hidden;
 	position: relative;
 	top: 26px;
-	width: 191px;
+	width: 170px;
 }
 #header h1 a {
 	display: block;
@@ -89,7 +91,10 @@ hr{ border-top-color:#dadada;}
 #search button:hover i, #search button:active i {
 	opacity: 1;
 }
-
+#user {
+	
+	background: green;
+}
 
 /* Top user navigation */
 #user-nav {
@@ -98,6 +103,7 @@ hr{ border-top-color:#dadada;}
 	top:0px;
 	z-index: 20;
 	margin: 0;
+	
 }
 #user-nav > ul {
 	margin: 0;
@@ -114,10 +120,12 @@ hr{ border-top-color:#dadada;}
 #user-nav > ul > li > a {
 	padding:9px 10px;
 	display: block;
-	font-size: 11px;
+	font-size: 14px;
+	
+	color: white;
 }
 #user-nav > ul > li > a:hover, #user-nav > ul > li.open > a {
-	color: #ffffff;  background:#000;
+	color:  #000;  background:#41BEDD; font-weight: normal;
 }
 #user-nav > ul > li > a > i, #sidebar li a i {
 	opacity: .5; 
@@ -144,6 +152,7 @@ hr{ border-top-color:#dadada;}
 	position: relative;
 	width: 220px;
 	z-index: 16;
+	
 }
 #sidebar > ul {
 	list-style: none;
@@ -159,7 +168,9 @@ hr{ border-top-color:#dadada;}
 #sidebar > ul > li > a {
 	padding: 10px 0 10px 15px;
 	display: block;
-	color: #939da8;
+	color: white;
+	font-family: Arial;
+	font-size: 13px;
 }
 #sidebar > ul > li > a > i {
 	margin-right: 10px;
@@ -184,7 +195,8 @@ hr{ border-top-color:#dadada;}
 #sidebar > ul li ul li a {
 	padding: 10px 0 10px 25px;
 	display: block;
-	color: #777777;
+	color: white;
+	font-size: 14px;
 }
 #sidebar > ul li ul li:first-child a {
 	border-top: 0;
@@ -194,7 +206,7 @@ hr{ border-top-color:#dadada;}
 }
 /* Content */
 #content {
-	background: none repeat scroll 0 0 #eeeeee;
+	background: none repeat scroll 0 0 #fff;
 	margin-left: 220px;
 	margin-right: 0;
 	padding-bottom: 25px;
@@ -548,7 +560,7 @@ hr{ border-top-color:#dadada;}
 		border-radius: 0 0 0 0;
 	border-right: 1px solid #DDDDDD;
 	border-top: medium none;
-	color: #999999;
+	color: #000000;
 	margin: 0;
 	outline: medium none;
 	padding: 9px 10px 8px;
@@ -1316,6 +1328,7 @@ form {
 	margin-left: 0 !important;
 	border-top-left-radius: 0;
 	margin-top:0px;
+
 }
 #content-header {
 	margin-top: 0;
@@ -1559,6 +1572,7 @@ body {
 .container-fluid {
 	padding-left: 20px;
 	padding-right: 20px;
+
 }
 #search {
 	display: none;

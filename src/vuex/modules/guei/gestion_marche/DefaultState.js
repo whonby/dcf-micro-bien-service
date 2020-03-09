@@ -18,7 +18,10 @@ const defaultstate = {
     source_personnalise:[],
     financement_by_marche:[],
     detail_marche_finance:[],
-    marche_contrat_en_execution:[]
+    marche_contrat_en_execution:[],
+    banques:[],
+    comptes:[],
+    agenceBanques: [],
 
 };
 

@@ -63,7 +63,7 @@
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter echelons</h3>
+                <h3>Ajouter échelons</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Libelle:</label>
+                        <label class="control-label">Libellé:</label>
                         <div class="controls">
                             <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
                         </div>
@@ -109,7 +109,7 @@
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier un fonctions</h3>
+                <h3>Modifier échelons</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -120,7 +120,7 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Libelle:</label>
+                        <label class="control-label">Libellé:</label>
                         <div class="controls">
                             <input type="text" v-model="editTitre.libelle" class="span" placeholder="" />
                         </div>
@@ -130,7 +130,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <a @click.prevent="modifierTitre(editTitre)" class="btn btn-primary"
+                <a @click.prevent="modifierEchelonsLocal(editTitre)" class="btn btn-primary"
                    href="#">Modifier</a>
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
         </div>
@@ -192,7 +192,7 @@
         },
         methods: {
             // methode pour notre action
-            ...mapActions('personnelUA', ['getEchelons',"ajouterEchelons","supprimerEchelons","getClasses"]),
+            ...mapActions('personnelUA', ['getEchelons',"ajouterEchelons","supprimerEchelons","getClasses", "modifierEchelons"]),
             afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',
@@ -214,8 +214,14 @@
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.editTitre = this.titres[index];
+                this.editTitre = this.echellons[index];
 
+            },
+
+
+            modifierEchelonsLocal(){
+                this.modifierEchelons(this.editTitre)
+                this.$('#modifierModal').modal('hide');
             },
 
 

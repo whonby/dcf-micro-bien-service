@@ -5,10 +5,37 @@ import archivagedocument from "../../pages/unites_administratives/archivage_docu
 import listeuniteadministrative from "../../pages/unites_administratives/liste_unite_administrative.vue";
 import listetypetexte from "../../pages/unites_administratives/liste_type_texte.vue";
 import ordonnedocua from "../../pages/unites_administratives/ordonne_doc_ua.vue";
-
-
-
+import budgetGenerals from "../../pages/unites_administratives/budgetGeneralComponent.vue";
+import budgetGeneralParUa from "../../pages/unites_administratives/budgetGeneral.vue"
+import grpeBudgetSection from "../../pages/unites_administratives/grpeBudgetSection.vue"
+import grpeBudgetProgramme from "../../pages/unites_administratives/grpeBudgetProgramme.vue"
+import historiquebudgetGeneralComponent from "../../pages/unites_administratives/historiquebudgetGeneralComponent.vue";
 const UniteAdministativeRoutes = [
+  {
+    path: "/historique-budget-general-component",
+    name: "historiquebudgetGeneralComponent",
+    component: historiquebudgetGeneralComponent
+  },
+  {
+    path: "/budget-General-Par-Programme",
+    name: "grpeBudgetProgramme",
+    component: grpeBudgetProgramme
+  },
+  {
+    path: "/budget-General-Par-section",
+    name: "grpeBudgetSection",
+    component: grpeBudgetSection
+  },
+  {
+    path: "/budget-General-Par-Ua",
+    name: "budgetGeneralParUa",
+    component: budgetGeneralParUa
+  },
+  {
+    path: "/budget-General",
+    name: "budgetGenerals",
+    component: budgetGenerals
+  },
   {
     path: "/unite-administrative",
     name: "uniteadministrative",

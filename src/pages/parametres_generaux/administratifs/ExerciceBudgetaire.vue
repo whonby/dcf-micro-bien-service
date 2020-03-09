@@ -6,7 +6,7 @@
     
       <!-- End Page Header -->
             <!-- Default Light Table -->
-           <div class="container-fluid">
+           <div class="container-fluid grdfont" style="heigth:1024px">
         <hr>
     <div class="row-fluid">
       <div class="span12">
@@ -19,7 +19,7 @@
                                               title="Liste exercice budgetaire "
                                               name ="Liste exrcice budgetaire"
                                               worksheet = "Exercice budgetaire"
-                                            :data="titreFiltres">
+                                            :data="exercices_budgetaires">
                      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
@@ -28,10 +28,10 @@
           
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste exercice budgetaire</h5>
-             <div align="right">
+             <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
-          </div>
+          </div> -->
              
           </div>
          
@@ -42,15 +42,15 @@
                   <th>Annee</th>
                   <th>Date debut</th>
                   <th>Date fin</th>
-                  <th>Encours</th>
                   <!-- <th>Encours</th> -->
+                  <th>En cours</th>
                   <!-- <th>Date cloture </th> -->
                    <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd gradeX" v-for="(exercice_budgetaire, index) 
-                in titreFiltres" :key="exercice_budgetaire.id">
+                in exercices_budgetaires" :key="exercice_budgetaire.id">
                   <template v-if="!exercice_budgetaire.encours">
                          <td @dblclick="afficherModalModifierExerciceBudgetaire(index)">
                     {{exercice_budgetaire.annee || 'Non renseigné'}}</td>
@@ -58,12 +58,7 @@
                     {{formaterDate(exercice_budgetaire.date_debut) || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierExerciceBudgetaire(index)">
                     {{formaterDate(exercice_budgetaire.date_fin) || 'Non renseigné'}}</td>
-                    <td>{{exercice_budgetaire.encours ? 'Oui' : 'Non'}}</td>
-                    <!-- <td v-if="exercice_budgetaire.encours">Oui</td>
-            <td v-else>non</td> -->
-            <!-- <td>
-              <input type="checkbox" v-model="exercice_budgetaire.encours" />
-            </td> -->
+
                   </template>
 
 
@@ -74,16 +69,24 @@
                     {{formaterDate(exercice_budgetaire.date_debut) || 'Non renseigné'}}</td>
                   <td >
                     {{formaterDate(exercice_budgetaire.date_fin) || 'Non renseigné'}}</td>
-                  <td>{{exercice_budgetaire.encours ? 'Oui' : 'Non'}}</td>
-                   <!-- <td v-if="exercice_budgetaire.encours">Oui</td>
-            <td v-else>non</td> -->
-            <!-- <td>
-              <input type="checkbox" v-model="exercice_budgetaire.encours" />
-            </td> -->
-                  </template>
+                  <!-- <td>{{exercice_budgetaire.encours ? 'Oui' : 'Non'}}</td> -->
                   
+                  </template>
+                   <td>
+                     <button  @click.prevent="EncoursExerciceLocal(exercice_budgetaire.id)"
+                      v-if="exercice_budgetaire.encours == 1"  class="btn  btn-success">
+                <span >Oui</span>
+       
+                </button>
+                   <button v-else @click.prevent="EncoursExerciceLocal(exercice_budgetaire.id)" class="btn  btn-danger">
+              
+                <span >Non</span>
+                </button>
+                   </td>
                   <td>
                     
+                    
+              
               <button v-if="!exercice_budgetaire.encours" @click.prevent="supprimerExerciceBudgetaire(exercice_budgetaire.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
@@ -92,7 +95,7 @@
                 </tr>
               </tbody>
             </table>
-            <div v-if="titreFiltres.length">
+            <div v-if="exercices_budgetaires.length">
             </div>
              
             <div v-else>
@@ -294,7 +297,7 @@ export default {
                 
             
         },
-        search:""
+        // search:""
  
     };
   },
@@ -306,33 +309,50 @@ export default {
 // methode pour maper notre guetter
    ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']) ,
   
-    titreFiltres() {
+//     exercices_budgetaires() {
 
-const searchTerm = this.search.toLowerCase();
+// const searchTerm = this.search.toLowerCase();
 
-return this.exercices_budgetaires.filter((item) => {
+// return this.exercices_budgetaires.filter((item) => {
   
-    return item.annee.toLowerCase().includes(searchTerm) 
-    || item.date_debut.toLowerCase().includes(searchTerm) 
-    || item.date_fin.toLowerCase().includes(searchTerm)
+//     return item.annee.toLowerCase().includes(searchTerm) 
+//     || item.date_debut.toLowerCase().includes(searchTerm) 
+//     || item.date_fin.toLowerCase().includes(searchTerm)
 
-   }
-)
+//    }
+// )
 
-}
+// }
+
+
+  // decocher(a,b) {
+  //       document.getElementById(a).checked=false;
+  //       document.getElementById(b).checked=false;
+  //     },
 
 
   },
   methods: {
     // methode pour notre action
    ...mapActions('parametreGenerauxAdministratif', [ 'ajouterExerciceBudgetaire',
-    'supprimerExerciceBudgetaire', 'modifierExerciceBudgetaire']),   
+    'supprimerExerciceBudgetaire', 'modifierExerciceBudgetaire',"EncoursExerciceBudgetaire"]),   
    
     afficherModalExerciceBudgetaire(){
        this.$('#exampleModal').modal({
               backdrop: 'static',
               keyboard: false
              });
+    },
+     EncoursExerciceLocal (id) {
+      this.EncoursExerciceBudgetaire(id)
+
+        // this.formData = {
+        //       annee: "",
+        //         date_debut:"",
+        //         date_fin:"",
+               
+             
+        // }
     },
    // fonction pour vider l'input
     ajouterExerciceLocal () {
@@ -378,3 +398,8 @@ formaterDate(date) {
 };
 </script>
 
+<style>
+.container-fluid{
+  height: 1000px;
+}
+</style>

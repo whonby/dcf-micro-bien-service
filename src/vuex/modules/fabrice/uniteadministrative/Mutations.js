@@ -1,3 +1,71 @@
+
+
+const GET_ALL_HISTORIQUE_BUDGET_GENERAL = (state, tableauBudgetGeneral) => {
+  state.historiquebudgetGeneral = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+const AJOUTER_HISTORIQUE_BUDGET_GENERAL = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.historiquebudgetGeneral.unshift(nouveau_budgetGeneral);
+};
+
+// modifier type_textes
+const MODIFIER_HISTORIQUE_BUDGET_GENERAL = (state, objetModifie) => {
+  state.historiquebudgetGeneral = state.historiquebudgetGeneral.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
+// supprimer type_texte
+const SUPPRIMER_HISTORIQUE_BUDGET_GENERAL = (state, id) => {
+  state.historiquebudgetGeneral = state.historiquebudgetGeneral.filter(type => type.id != id);
+};
+
+
+
+
+
+
+
+
+const GET_ALL_BUDGET_GENERAL = (state, tableauBudgetGeneral) => {
+  state.budgetGeneral = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+const AJOUTER_BUDGET_GENERAL = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.budgetGeneral.unshift(nouveau_budgetGeneral);
+};
+
+// modifier type_textes
+const MODIFIER_BUDGET_GENERAL = (state, objetModifie) => {
+  state.budgetGeneral = state.budgetGeneral.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
+// supprimer type_texte
+const SUPPRIMER_BUDGET_GENERAL = (state, id) => {
+  state.budgetGeneral = state.budgetGeneral.filter(type => type.id != id);
+};
+
+
+
+
+
+
+
+
 /////////////////////////////////*debut mutation type texte */////////////////////
 // afficher les type de texte*
 const GET_ALL_TYPES_TEXTES = (state, tableauTypeTexte) => {
@@ -88,6 +156,23 @@ const SUPPRIMER_ARCHIVAGE_DOCUMENT = (state, id) => {
 };
 
 export {
+
+  GET_ALL_HISTORIQUE_BUDGET_GENERAL,
+  AJOUTER_HISTORIQUE_BUDGET_GENERAL,
+  MODIFIER_HISTORIQUE_BUDGET_GENERAL,
+  SUPPRIMER_HISTORIQUE_BUDGET_GENERAL,
+
+
+
+  GET_ALL_BUDGET_GENERAL,
+  AJOUTER_BUDGET_GENERAL,
+  MODIFIER_BUDGET_GENERAL,
+  SUPPRIMER_BUDGET_GENERAL,
+
+
+
+
+
   GET_ALL_TYPES_TEXTES,
   AJOUTER_TYPE_TEXTE,
   MODIFIER_TYPE_TEXTES,

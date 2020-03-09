@@ -82,8 +82,9 @@ const AJOUTER_SECTEUR_ACTIVITE = (state, nouvel_objet) => {
 }
 
 
+
 const SUPPRIMER_SECTEUR_ACTIVITE= (state, id) => {
-    state.secteur_activites = state.secteur_activite.filter(titre => titre.id != id)
+    state.secteur_activites = state.secteur_activites.filter(titre => titre.id != id)
 }
 
 
@@ -98,6 +99,75 @@ const MODIFIER_SECTEUR_ACTIVITE= (state, objetModifie) => {
 /**
  * Fin secteur activite
  */
+
+
+// mutation banque
+
+
+// get all banque
+export const GET_ALL_BANQUE = (state, tableau_banques) =>{
+    state.banques = tableau_banques
+}
+
+// add * acte depense 
+
+export const AJOUTER_BANQUE = (state, elementAjouter) => {
+    state.banques.unshift(elementAjouter)
+}
+
+
+// update all acte depense
+export const MODIFIER_BANQUE = (state, elementModif)=>{
+    state.banques = state.banques.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all prestation
+
+export const SUPPRIMER_BANQUE = (state, id)=> {
+    state.banques = state.banques.filter(prest => prest.id !=id)
+}
+
+
+// mutation des comptes bancaires
+
+
+
+// get all banque
+export const GET_ALL_COMPTE = (state, tableau_compte) =>{
+    state.comptes = tableau_compte
+}
+
+// add * acte depense 
+
+export const AJOUTER_COMPTE = (state, elementAjouter) => {
+    state.comptes.unshift(elementAjouter)
+}
+
+
+// update all acte depense
+export const MODIFIER_COMPTE = (state, elementModif)=>{
+    state.comptes = state.comptes.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+// delete all comptes
+
+export const SUPPRIMER_COMPTE = (state, id)=> {
+    state.comptes = state.comptes.filter(cptes => cptes.id !=id)
+}
+
+
 
 /**
  * Entreprise
@@ -127,6 +197,7 @@ const MODIFIER_ENTREPRISE= (state, objetModifie) => {
         return entreprise
     })
 }
+
 /**
  * Fin entreprise
  */
@@ -384,6 +455,46 @@ const DETAIL_MARCHE_FINNANCEMENT=(state,{getters,id})=>{
 const GET_MARCHE_CONTRAT_EN_EXECUTION = (state, data) => {
     state.marche_contrat_en_execution = data
 }
+
+
+
+// get all facture
+export const GET_ALL_AGENCE = (state, tableau_facture) => {
+    state.agenceBanques = tableau_facture
+}
+
+// add * facture
+
+export const AJOUTER_AGENCE = (state, elementAjouter) => {
+    state.agenceBanques.unshift(elementAjouter)
+}
+
+// update all facture
+export const MODIFIER_AGENCE = (state, elementModif) => {
+    state.agenceBanques = state.agenceBanques.map(response => {
+        if (response.id == elementModif.id) {
+            response = { ...elementModif }
+        }
+        return response
+    })
+}
+
+
+// delete all facture
+
+export const SUPPRIMER_AGENCE = (state, id) => {
+    state.agenceBanques = state.agenceBanques.filter(prest => prest.id != id)
+}
+
+
+
+
+
+
+
+
+
+
 export {
     GET_MODE_PASSATION,
     AJOUTER_MODE_PASSATION,

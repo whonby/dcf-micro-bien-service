@@ -62,7 +62,7 @@
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter fonctions</h3>
+                <h3>Ajouter classe</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Libelle:</label>
+                        <label class="control-label">Libellé:</label>
                         <div class="controls">
                             <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
                         </div>
@@ -97,7 +97,7 @@
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier un fonctions</h3>
+                <h3>Modifier  classe</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -108,7 +108,7 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Libelle:</label>
+                        <label class="control-label">Libellé:</label>
                         <div class="controls">
                             <input type="text" v-model="editTitre.libelle" class="span" placeholder="" />
                         </div>
@@ -177,7 +177,7 @@
         },
         methods: {
             // methode pour notre action
-            ...mapActions('personnelUA', ['getClasses',"ajouterClasses","supprimerClasse"]),
+            ...mapActions('personnelUA', ['getClasses',"ajouterClasses","supprimerClasse", "modifierClasse"]),
             afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',

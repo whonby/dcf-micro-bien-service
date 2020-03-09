@@ -1,6 +1,7 @@
 
 <template>
   <div class="container-fluid">
+     <!-- <h3 style="text-align:center">TABLEAU DE BORD : UNITE ADMINISTRATIVE</h3> -->
     <div class="quick-actions_homepage">
       <ul class="quick-actions">
         <li class="bg_ls">
@@ -12,15 +13,15 @@
         <li class="bg_lo">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-success">{{nombreArchivageDocument}}</span>Nombre Archivage document
+            <span class="label label-success">{{formatageSomme(parseFloat(montantBudgetGeneral))}}</span>Total des lignes Budgetaires
           </a>
         </li>
-        <li class="bg_ly">
+        <!-- <li class="bg_ly">
           <a href="#">
             <i class="icon-list-ol"></i>
             <span class="label label-important">{{nombreTypeText}}</span>Nombre de type texte
           </a>
-        </li>
+        </li> -->
       
       </ul>
     </div>
@@ -29,6 +30,8 @@
   
 <script>
 import { mapGetters } from "vuex";
+
+import { formatageSomme } from "../../../src/Repositories/Repository";
 export default {
   name:'tableaudebord',
   data() {
@@ -47,13 +50,16 @@ export default {
       "nombreTypeText",
       "nombreUniteAdministratives",
       "nombreArchivageDocument",
+      "montantBudgetGeneral"
       // "nbreNouveauProjet"
 
       // "nbreArchivageNotes"
     ]),
   
   },
-  methods: {}
+  methods: {
+    formatageSomme:formatageSomme
+  }
 };
 </script>
 

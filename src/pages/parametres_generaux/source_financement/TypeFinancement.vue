@@ -40,7 +40,7 @@
                 <tr>
                  <th>Code</th>
                   <th>Libelle</th>
-                  <th>Source de financement</th>
+                
                    <th>Action</th>
                 </tr>
               </thead>
@@ -52,8 +52,8 @@
                    <td @dblclick="afficherModalModifierTypefinancement(index)">
                     {{types.libelle || 'Non renseigné'}}</td>
                     
-                   <td @dblclick="afficherModalModifierTypefinancement(index)">
-                      {{types.souce_financement.libelle || 'Non renseigné'}}</td>
+                   <!-- <td @dblclick="afficherModalModifierTypefinancement(index)">
+                      {{types.souce_financement.libelle || 'Non renseigné'}}</td> -->
                   <td>
 
 
@@ -86,7 +86,7 @@
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
-                   <div class="control-group">
+                   <!-- <div class="control-group">
               <label class="control-label">Source de financement:</label>
               <div class="controls">
                 <select  v-model="formData.source_financement_id">
@@ -94,7 +94,7 @@
             :value="resultat.id">{{resultat.libelle}}</option>
                 </select>
               </div>
-            </div>
+            </div> -->
             <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
@@ -113,10 +113,15 @@
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="formData.source_financement_id && formData.code.length && 
+
+             <button v-show="formData.code.length && 
              formData.libelle.length"
+
+            
+
               @click.prevent="ajouterTitreLocal" class="btn btn-primary">Valider</button>
-              <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
+              <button data-dismiss="modal" class="btn" href="#">Fermer</button>
+           </div>
             </div>
 
 <!----- fin modal  ajouter  ---->
@@ -132,7 +137,7 @@
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
-                   <div class="control-group">
+                   <!-- <div class="control-group">
               <label class="control-label">Source de financement:</label>
               <div class="controls">
                 <select  v-model="editTitre.source_financement_id">
@@ -140,7 +145,7 @@
             :value="resultat.id">{{resultat.libelle}}</option>
                 </select>
               </div>
-            </div>
+            </div> -->
             <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
@@ -158,8 +163,7 @@
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="editTitre.source_financement_id && editTitre.code.length && 
-             editTitre.libelle.length"
+             <button 
               @click.prevent="modifierLocalisationLocal(editTitre)" class="btn btn-primary"
               >Modifier</button>
               <button data-dismiss="modal" class="btn">Fermer</button> </div>
@@ -197,7 +201,7 @@ export default {
       json_fields:{
         'Code':'code',
         'Libelle':'libelle',
-        'source de financement':'souce_financement.libelle'
+        // 'source de financement':'souce_financement.libelle'
       },
         fabActions: [
               {
@@ -286,11 +290,12 @@ afficherModalModifierTypefinancement(index){
  },
 modifierLocalisationLocal(){
   this.modifierTypeFinancement(this.editTitre)
-  this.editTitre = {
-                code: "",
-             libelle: "",
-             source_financement_id:""
-  }
+  this.$('#modifierModal').modal('hide');
+  // this.editTitre = {
+  //               code: "",
+  //            libelle: "",
+  //            source_financement_id:""
+  // }
 },
 //   sup(id){
 // this.supprimerChapitre(id)
