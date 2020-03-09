@@ -830,3 +830,314 @@ export function modifierQuantiteNormeDmd({ commit, dispatch }, objet) {
 }
 
 
+
+// afficher liste famille
+export function getAllNatureEntre({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeNatureEntre")
+      .then(response => {
+        commit("GET_ALL_NATURE_ENTRE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+//ajouter
+export function ajouterNatureEntre({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterNatureEntre", {
+     
+
+      libelle: nouveau.libelle,
+      
+
+    }))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_NATURE_ENTRE", response.data);
+        dispatch('getAllNatureEntre')
+        
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+
+// modifier
+export function modifierNatureEntre({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierNatureEntre/" + nouveau.id, {
+
+    
+      libelle: nouveau.libelle,
+     
+
+    }))
+    .then(response => {
+      commit("MODIFIER_NATURE_ENTRE", response.data);
+      dispatch('getAllNatureEntre')
+    
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerNatureEntre({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vous vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_NATURE_ENTRE", id);
+      dispatch('getAllNatureEntre')
+      
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerNatureEntre/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
+
+
+// afficher liste famille
+export function getAllCauseInactivite({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeCause")
+      .then(response => {
+        commit("GET_ALL_CAUSE_INACTIVITE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+//ajouter
+export function ajouterCauseInactivite({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterCause", {
+
+
+      libelle: nouveau.libelle,
+
+
+    }))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_CAUSE_INACTIVITE", response.data);
+        dispatch('getAllCauseInactivite')
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+
+// modifier
+export function modifierCauseInactivite({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierCause/" + nouveau.id, {
+
+
+      libelle: nouveau.libelle,
+
+
+    }))
+    .then(response => {
+      commit("MODIFIER_CAUSE_INACTIVITE", response.data);
+      dispatch('getAllCauseInactivite')
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerCauseInactivite({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vous vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_CAUSE_INACTIVITE", id);
+      dispatch('getAllCauseInactivite')
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerCause/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
+
+
+// afficher liste famille
+export function getAllEtatImmo({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeEtatImmo")
+      .then(response => {
+        commit("GET_ALL_ETAT_IMMOBILISATION", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+//ajouter
+export function ajouterEtatImmobilisation({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterEtatImmo", {
+
+
+      libelle: nouveau.libelle,
+
+
+    }))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_ETAT_IMMOBILISATION", response.data);
+        dispatch('getAllEtatImmo')
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+
+// modifier
+export function modifierEtatImmo({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierEtatImmo/" + nouveau.id, {
+
+
+      libelle: nouveau.libelle,
+
+
+    }))
+    .then(response => {
+      commit("MODIFIER_ETAT_IMMOBILISATION", response.data);
+      dispatch('getAllEtatImmo')
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerEtatImmo({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vous vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_ETAT_IMMOBILISATION", id);
+      dispatch('getAllEtatImmo')
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerEtatImmo/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
+
+
+
+// afficher liste famille
+export function getAllNormeImmob({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeNormeImmo")
+      .then(response => {
+        commit("GET_ALL_NORMEIMMOB", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+//ajouter
+export function ajouterNormeImmob({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterNormeImmo", {
+
+      statut: nouveau.statut,
+      famille_id: nouveau.famille_id,
+      norme: nouveau.norme,
+      direction_id: nouveau.direction_id,
+      service_id: nouveau.service_id,
+      fonction_id: nouveau.fonction_id
+
+
+    }))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_NORMEIMMOB", response.data);
+        dispatch('getAllFamille')
+        dispatch('getAllNormeImmob')
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+
+// modifier
+export function modifierNormeImmob({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierNormeImmo/" + nouveau.id, {
+
+      statut: nouveau.statut,
+      famille_id: nouveau.famille_id,
+      norme: nouveau.norme,
+      direction_id: nouveau.direction_id,
+      service_id: nouveau.service_id,
+      fonction_id: nouveau.fonction_id
+
+
+    }))
+    .then(response => {
+      commit("MODIFIER_NORMEIMMOB", response.data);
+      dispatch('getAllFamille')
+      dispatch('getAllNormeImmob')
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerNormeImmob({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vous vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_NORMEIMMOB", id);
+      dispatch('getAllFamille')
+      dispatch('getAllNormeImmob')
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerNormeImmo/" + id).then(() => dialog.close());
+    });
+}

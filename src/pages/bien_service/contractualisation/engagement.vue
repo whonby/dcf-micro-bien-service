@@ -1,10 +1,4 @@
-Ajouter Engagement
-afficherCompteUtilisateur
-AfficherIdFournisseur
-Ajouter Mandat
-ajouterMandatDirectLocal
-Modifier Engagement
-Modifier Mandat
+
 <template>
   	
         <div class="container-fluid">

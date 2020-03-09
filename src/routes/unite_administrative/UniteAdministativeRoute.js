@@ -10,7 +10,69 @@ import budgetGeneralParUa from "../../pages/unites_administratives/budgetGeneral
 import grpeBudgetSection from "../../pages/unites_administratives/grpeBudgetSection.vue"
 import grpeBudgetProgramme from "../../pages/unites_administratives/grpeBudgetProgramme.vue"
 import historiquebudgetGeneralComponent from "../../pages/unites_administratives/historiquebudgetGeneralComponent.vue";
+import uniteZone from "../../pages/unites_administratives/grpeUniteZone/uniteZonePrincipal.vue";
+import transfert from "../../pages/unites_administratives/grpeTransfert/transfertPrincipal.vue";
+import tableaubordTransfert from "../../pages/unites_administratives/tableauBordTransfert.vue";
+import suiviTransfert from "../../pages/unites_administratives/suiviTransfert.vue";
+import detailHistoTreansfert from "../../pages/unites_administratives/detailHistoTreansfert.vue";
+
+import DirectionPrincipal from "../../pages/unites_administratives/grpeDirection/DirectionPrincipal.vue";
+import ServicePrincipal from "../../pages/unites_administratives/grpeService/ServicePrincipal.vue";
+import FonctionPrincipal from "../../pages/unites_administratives/grpeFonction/FonctionPrincipal.vue";
 const UniteAdministativeRoutes = [
+
+  {
+    path: '/Direction',
+    name: "DirectionPrincipal",
+    component: DirectionPrincipal
+  },
+
+  {
+    path: '/ServicePerso',
+    name: "ServicePrincipal",
+    component: ServicePrincipal
+  },
+
+  {
+    path: '/FonctionPerso',
+    name: "FonctionPrincipal",
+    component: FonctionPrincipal
+  },
+
+
+
+
+
+
+
+
+
+  {
+    path: '/detail-Histo-Transfert/:detail_historiq_id',
+    name: "detailHistoTreansfert",
+    component: detailHistoTreansfert
+  },
+ 
+  {
+    path: "/suivi-Transfert",
+    name: "suiviTransfert",
+    component: suiviTransfert
+  },
+  {
+    path: "/tableau-bord-Transfert",
+    name: "tableaubordTransfert",
+    component: tableaubordTransfert
+  },
+  {
+    path: "/transfert",
+    name: "transfert",
+    component: transfert
+  },
+  {
+    path: "/unite-Zone",
+    name: "uniteZone",
+    component: uniteZone
+  },
   {
     path: "/historique-budget-general-component",
     name: "historiquebudgetGeneralComponent",

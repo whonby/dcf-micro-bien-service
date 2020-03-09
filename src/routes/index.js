@@ -41,6 +41,8 @@ import planificationBudgetaireRoutes from './planification_budgetaire/planificat
 // route pour le bien et bservice
 import BienServiceRoutes from './bien_service/BienServiceRoutes';
 
+// la route de l'investissement
+import investissementRoutes from './investissement/investissementRoutes';
 
 // authentitification 
 import AuthRoutes from './auth/AuthRoutes' 
@@ -56,10 +58,6 @@ const regroupementDesRoutes = [
 
   UniteAdministativeRoute,
 
-
-
-
-
   AdministratifRoutesAdoni,
   SourceFinancementRoutesAdoni,
   parametreUniteRoutesAdoni,
@@ -70,7 +68,8 @@ const regroupementDesRoutes = [
   suiviImmobilisationRoute,
   MissionRoutes,
 planificationBudgetaireRoutes,
-BienServiceRoutes
+BienServiceRoutes,
+investissementRoutes
 
 ];
 const routes = [].concat(...regroupementDesRoutes);

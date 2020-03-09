@@ -402,3 +402,511 @@ export function supprimerArchivageDocument({ commit }, id) {
 }
 // afficher liste des archivage note se service
 /*fin action archivage note se service */
+
+
+export function getAllUniteZone({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeUniteZone")
+      .then(response => {
+        commit("GET_ALL_UNITE_ZONE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterUniteZone({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterUniteZone", {
+      id_zone_geographique: nouveau.id_zone_geographique,
+      id_unite_administrative: nouveau.id_unite_administrative,
+      libelle: nouveau.libelle,
+      	longitude: nouveau.longitude,
+      latitude: nouveau.latitude,
+      telephone_cel: nouveau.telephone_cel,
+      adresse_postale: nouveau.adresse_postale,
+      telephone_fixe: nouveau.telephone_fixe,
+      description_localisation: nouveau.description_localisation,
+      quartier: nouveau.quartier,
+      
+    }))
+
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_UNITE_ZONE", response.data);
+        dispatch('getAllUniteZone')
+        dispatch('getAllUniteAdministrative')
+       
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+// modifier
+export function modifierUniteZone({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierUniteZone/" + nouveau.id, {
+      id_zone_geographique: nouveau.id_zone_geographique,
+      id_unite_administrative: nouveau.id_unite_administrative,
+      libelle: nouveau.libelle,
+      longitude: nouveau.longitude,
+      latitude: nouveau.latitude,
+      telephone_cel: nouveau.telephone_cel,
+      adresse_postale: nouveau.adresse_postale,
+      telephone_fixe: nouveau.telephone_fixe,
+      description_localisation: nouveau.description_localisation,
+      quartier: nouveau.quartier,
+    }))
+    .then(response => {
+      commit("MODIFIER_UNITE_ZONE", response.data);
+      dispatch('getAllUniteZone')
+      dispatch('getAllUniteAdministrative')
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerUniteZone({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_UNITE_ZONE", id);
+      dispatch('getAllUniteZone')
+      dispatch('getAllUniteAdministrative')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerUniteZone/" + id).then(() => dialog.close());
+    });
+}
+
+export function getAllTransfert({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeTransfert")
+      .then(response => {
+        commit("GET_ALL_TRANSFERT", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterTransfert({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterTransfert", {
+      num_transfert: nouveau.num_transfert,
+      acteurdepense_id: nouveau.acteurdepense_id,
+      unitezone_id: nouveau.unitezone_id,
+      montant_total_contrat: nouveau.montant_total_contrat,
+      montant_transfert: nouveau.montant_transfert,
+      fonction_id: nouveau.fonction_id,
+      montant_restant: nouveau.montant_restant,
+      ligne_budgetaire_id: nouveau.ligne_budgetaire_id,
+      grandnatire_id: nouveau.grandnatire_id,
+      ua_id: nouveau.ua_id,
+      date_jours: nouveau.date_jours,
+
+    }))
+
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_TRANSFERT", response.data);
+        dispatch('getAllTransfert')
+        dispatch('getAllUniteAdministrative')
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+// modifier
+export function modifierTransfert({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierTransfert/" + nouveau.id, {
+      num_transfert: nouveau.num_transfert,
+      acteurdepense_id: nouveau.acteurdepense_id,
+      unitezone_id: nouveau.unitezone_id,
+      montant_total_contrat: nouveau.montant_total_contrat,
+      montant_transfert: nouveau.montant_transfert,
+      fonction_id: nouveau.fonction_id,
+      montant_restant: nouveau.montant_restant,
+      ligne_budgetaire_id: nouveau.ligne_budgetaire_id,
+      grandnatire_id: nouveau.grandnatire_id,
+      ua_id: nouveau.ua_id,
+        	decision_cf: nouveau.decision_cf,
+      motif: nouveau.motif,
+      observation: nouveau.observation,
+      date_motif: nouveau.date_motif,
+      date_jours: nouveau.date_jours, 
+      delaitraitement: nouveau.delaitraitement,
+    }))
+    .then(response => {
+      commit("MODIFIER_TRANSFERT", response.data);
+      dispatch('getAllTransfert')
+      dispatch('getAllUniteAdministrative')
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerTransfert({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_TRANSFERT", id);
+      dispatch('getAllTransfert')
+      dispatch('getAllUniteAdministrative')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerTransfert/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
+
+export function getAllHistoriqueTransfert({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeHistoTransfert")
+      .then(response => {
+        commit("GET_ALL_HISTOTRANSFERT", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterHistoriqueTransfert({ commit}, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterHistoTransfert", {
+      num_transfert: nouveau.num_transfert,
+      acteurdepense_id: nouveau.acteurdepense_id,
+      unitezone_id: nouveau.unitezone_id,
+      montant_total_contrat: nouveau.montant_total_contrat,
+      montant_transfert: nouveau.montant_transfert,
+      fonction_id: nouveau.fonction_id,
+      montant_restant: nouveau.montant_restant,
+      ligne_budgetaire_id: nouveau.ligne_budgetaire_id,
+      grandnatire_id: nouveau.grandnatire_id,
+      ua_id: nouveau.ua_id,
+      decision_cf: nouveau.decision_cf,
+      motif: nouveau.motif,
+      observation: nouveau.observation,
+      date_motif: nouveau.date_motif,
+      date_jours: nouveau.date_jours,
+      delaitraitement: nouveau.delaitraitement,
+      aj_transfert: nouveau.aj_transfert,
+      //  maj_transfert: nouveau.maj_transfert
+      
+
+    }))
+
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_HISTOTRANSFERT", response.data);
+       
+
+        // this.$app.$notify({
+        //   title: 'Success',
+        //   text: 'Enregistrement Effectué avec Succès!',
+        //   type: "success"
+        // })
+      }
+    });
+}
+
+// modifier
+export function modifierHistoriqueTransfert({ commit}, nouveau) {
+  asyncLoading(axios
+    .put("/modifierHistoTransfert/" + nouveau.id, {
+      num_transfert: nouveau.num_transfert,
+      acteurdepense_id: nouveau.acteurdepense_id,
+      unitezone_id: nouveau.unitezone_id,
+      montant_total_contrat: nouveau.montant_total_contrat,
+      montant_transfert: nouveau.montant_transfert,
+      fonction_id: nouveau.fonction_id,
+      montant_restant: nouveau.montant_restant,
+      ligne_budgetaire_id: nouveau.ligne_budgetaire_id,
+      grandnatire_id: nouveau.grandnatire_id,
+      ua_id: nouveau.ua_id,
+      decision_cf: nouveau.decision_cf,
+      motif: nouveau.motif,
+      observation: nouveau.observation,
+      date_motif: nouveau.date_motif,
+      date_jours: nouveau.date_jours,
+      delaitraitement: nouveau.delaitraitement,
+      aj_transfert: nouveau.aj_transfert,
+      // maj_transfert: nouveau.maj_transfert
+    }))
+    .then(response => {
+      commit("MODIFIER_HISTOTRANSFERT", response.data);
+    
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerHistoriqueTransfert({ commit}, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_HISTOTRANSFERT", id);
+      
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerHistoTransfert/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+export function getAllDirection({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeDirectionUa")
+      .then(response => {
+        commit("GET_ALL_DIRECTION", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterDirection({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterDirectionUa", {
+      	d_ua_id: nouveau.d_ua_id,
+    
+      libelle: nouveau.libelle,
+     
+      
+
+    }))
+
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_DIRECTION", response.data);
+        dispatch('getAllDirection')
+        dispatch('getAllUniteAdministrative')
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+// modifier
+export function modifierDirection({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierDirectionUa/" + nouveau.id, {
+      d_ua_id: nouveau.d_ua_id,
+
+      libelle: nouveau.libelle,
+    }))
+    .then(response => {
+      commit("MODIFIER_DIRECTION", response.data);
+      dispatch('getAllDirection')
+      dispatch('getAllUniteAdministrative')
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerDirection({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_DIRECTION", id);
+      dispatch('getAllDirection')
+      dispatch('getAllUniteAdministrative')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerDirectionUa/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
+
+
+export function getAllServiceua({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeServiceUa")
+      .then(response => {
+        commit("GET_ALL_SERVICE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterService({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterServiceUa", {
+      s_ua_id: nouveau.s_ua_id,
+      direction_id	: nouveau.direction_id	,
+      libelle: nouveau.libelle,
+
+
+
+    }))
+
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_SERVICE", response.data);
+        dispatch('getAllDirection')
+        dispatch('getAllServiceua')
+        dispatch('getAllUniteAdministrative')
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+// modifier
+export function modifierService({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierServiceUa/" + nouveau.id, {
+      s_ua_id: nouveau.s_ua_id,
+      direction_id: nouveau.direction_id,
+      libelle: nouveau.libelle,
+    }))
+    .then(response => {
+      commit("MODIFIER_SERVICE", response.data);
+      dispatch('getAllDirection')
+      dispatch('getAllServiceua')
+      dispatch('getAllUniteAdministrative')
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerService({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_SERVICE", id);
+      dispatch('getAllDirection')
+      dispatch('getAllServiceua')
+      dispatch('getAllUniteAdministrative')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerServiceUa/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
+
+
+export function getAllFonction({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeFonctionUa")
+      .then(response => {
+        commit("GET_ALL_FONCTION", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterFonction({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterFonctionUa", {
+      f_ua_id: nouveau.f_ua_id,
+      service_id: nouveau.service_id,
+      fonction_id: nouveau.fonction_id,
+      direction_id: nouveau.direction_id
+
+
+    }))
+
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_FONCTION", response.data);
+        dispatch('getAllServiceua')
+        dispatch('getAllFonction')
+        
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+// modifier
+export function modifierFonction({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierFonctionUa/" + nouveau.id, {
+      f_ua_id: nouveau.f_ua_id,
+      service_id: nouveau.service_id,
+      fonction_id: nouveau.fonction_id,
+      direction_id: nouveau.direction_id
+    }))
+    .then(response => {
+      commit("MODIFIER_FONCTION", response.data);
+      dispatch('getAllServiceua')
+      dispatch('getAllFonction')
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerFonction({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_FONCTION", id);
+      dispatch('getAllServiceua')
+      dispatch('getAllFonction')
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerFonctionUa/" + id).then(() => dialog.close());
+    });
+}

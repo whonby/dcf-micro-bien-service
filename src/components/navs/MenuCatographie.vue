@@ -51,12 +51,12 @@
             </router-link>
           </li> -->
          
-          <li>
+          <!-- <li>
             <router-link :to="{name:'NormeEquipement'}" tag="a">
-              <!-- <i class="icon-shopping-cart"></i> -->
+              <i class="icon-shopping-cart"></i>
               <span class="text">NORME EQUIPEMENT</span>
             </router-link>
-          </li>
+          </li> -->
           
            <li title="Bessoin Immobilisation">
             <router-link :to="{name:'demandeEquipement'}" tag="a">
@@ -85,7 +85,7 @@
         </a>
         <ul class="dropdown-menu">
           
-          <li class="divider"></li>
+          
          <li>
             <router-link :to="{name:'simulationAmortissement'}" tag="a">
               <i class="icon-table"></i>
@@ -93,12 +93,14 @@
             </router-link>
           </li>
            <li class="divider"></li>
+           
          <li>
             <router-link :to="{name:'ficheAnalyse'}" tag="a">
               <i class="icon-table"></i>
               <span class="text">Fiche d'analyse</span>
             </router-link>
           </li>
+           <li class="divider"></li>
           <!-- <li>
             <router-link :to="{name:'listeStructureMoinEquipe'}" tag="a" title>
               <i class="icon-home"></i>
@@ -117,18 +119,21 @@
               <span class="text">Personnel équipé</span>
             </router-link>
           </li> -->
+          
            <li>
             <router-link :to="{name:'listeBesoinRealise'}" tag="a" title>
               <i class="icon-group"></i>
               <span class="text">Listes Besoins Realisés</span>
             </router-link>
           </li>
+           <li class="divider"></li>
            <li>
             <router-link :to="{name:'historiqueDemande'}" tag="a" title>
               <i class="icon-group"></i>
               <span class="text">Historique Besoins</span>
             </router-link>
           </li>
+           <li class="divider"></li>
         </ul>
       </li>
     </ul>

@@ -5,7 +5,7 @@ var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
 
 // action for print all to prestation
-
+ajouterMembreCojo
 // export  function  getPrestation({commit}) {
 //     queue.push(() => axios.get('/url').then((response) => {
 //       commit('GET_ALL_PRESTATION', response.data)
@@ -3575,11 +3575,12 @@ export  function  getMembreCojo({commit}) {
     }).catch(error => console.log(error)))
 }
 
-export function ajouterMembreCojo({commit}, formData){
+export function ajouterMembreCojo({commit, dispatch}, formData){
     asyncLoading(axios.post('/membre_cojo',formData)).then(response =>{
         if(response.status == 201){
             console.log(response.data)
             commit('AJOUTER_MEMBRE_COJO', response.data)
+            dispatch('getMembreCojo')
             this.$app.$notify({
                 title: 'success ',
                 text: 'Enregistrement effectué !',

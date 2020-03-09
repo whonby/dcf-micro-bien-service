@@ -1,12 +1,15 @@
 const defaultState = {
   typeTextes: [],
-
   uniteAdministratives: [],
-
   archivageDocuments: [],
   budgetGeneral: [],
-  historiquebudgetGeneral: []
-  
+  historiquebudgetGeneral: [],
+  uniteZones: [],
+  transferts: [],
+  historiquetransferts: [],
+  directions: [],
+  servicesua: [],
+  fonctionsua: []
   // listeDocUniteAdministratives: [],
 
   // nbreUniteAdministratives: [],

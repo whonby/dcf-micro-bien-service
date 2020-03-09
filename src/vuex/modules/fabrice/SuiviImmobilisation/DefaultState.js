@@ -13,6 +13,10 @@ const defaultState = {
   
   articles: [],
   stockageArticles: [],
+  natureEntres: [],
+  causeInactivite: [],
+  EtatImmobilisations: [],
+  normeImmo:[]
   
    
 };

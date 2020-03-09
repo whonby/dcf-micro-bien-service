@@ -900,7 +900,8 @@ this.formData = {
 
 <style scoped>
 .taillModal{
-  width: 980px;
+  width: 1080px;
    margin: 0 -25%;
+   
 }
 </style>

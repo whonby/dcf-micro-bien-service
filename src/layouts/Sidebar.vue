@@ -28,8 +28,13 @@
           
           </ul>
        </li> -->
-       
-        <li :class="{active: active_el == 11 }" @click.prevent="navigateToParametreGeneraux">
+        <!-- <li :class="{active: active_el == 11 }" @click.prevent="navigateToTableauBord">
+          <a title="TABLEAU DE BORD" href="#">
+            <i class="icon icon-signal"></i>
+            <span>TABLEAU DE BORD</span>
+          </a>
+        </li> -->
+        <li :class="{active: active_el == 17 }" @click.prevent="navigateToParametreGeneraux">
           <a title="PARAMETRES GENERAUX" href="#">
             <i class="icon icon-signal"></i>
             <span>PARAMETRES GENERAUX</span>
@@ -70,7 +75,7 @@
         </li>
         
         
-        <li @click.prevent="activate(6)" :class="{active: active_el ==6}">
+        <li @click.prevent="navigateToTransfert" :class="{active: active_el ==6}">
           <a title="TRANSFERT" href="#">
             <i class="icon icon-file"></i>
             <span>TRANSFERT</span>
@@ -123,6 +128,17 @@ export default {
       ...mapMutations('parametrageMenu', ['activate']),
       ...mapActions('Utilisateurs', ['logoutUser']),
 
+
+ navigateToTransfert(){
+        this.activate(6)
+        this.$router.push({
+          name: 'tableaubordTransfert'
+        })
+      },
+
+
+
+
       navigateToActeurDepense(){
         this.activate(2)
         this.$router.push({
@@ -136,9 +152,14 @@ export default {
           name: 'tableaudebord'
         })
       },
-
-       navigateToParametreGeneraux(){
+ navigateToTableauBord(){
         this.activate(11)
+        this.$router.push({
+          name: 'ExerciceBudgetaire'
+        })
+      },
+       navigateToParametreGeneraux(){
+        this.activate(17)
         this.$router.push({
           name: 'ExerciceBudgetaire'
         })

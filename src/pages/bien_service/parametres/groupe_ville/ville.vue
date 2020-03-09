@@ -28,7 +28,7 @@
             <div class="control-group">
               <label class="control-label">Ville</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span"  />
+                <input type="text" v-model="formData.libelle" class="span"  style="text-transform: uppercase" />
               </div>
             </div>
             

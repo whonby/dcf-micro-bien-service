@@ -40,7 +40,7 @@ export const afficheNatureTransfert = state =>
     );
     export const afficheServiceGestionnaireNiveau4 = state =>
     state.services_gestionnaires.filter(
-        afficheSeviceG => afficheSeviceG.code.length == 7
+        afficheSeviceG => afficheSeviceG.code.length == 8
     );
     export const afficheLocalisationGeoNiveau5 = state =>
              state.localisations_geographiques.filter(

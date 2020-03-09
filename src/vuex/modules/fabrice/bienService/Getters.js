@@ -566,3 +566,77 @@ export const getMandatPersonnaliser = (state, getters, rootState, rootGetters) =
         }
         return element;
     })
+
+
+// export const getMandatPersonnaliserViseTableauBord = (state, getters, rootState, rootGetters) =>
+//     getters.mandatVise.map(element => {
+//         if (
+//             element.programme_id !== null
+//             && element.action_id !== null
+//             && element.activite_id !== null
+//             && element.ua_id !== null
+//             && element.grd_nature_id !== null
+//             && element.ligne_budgetaire_id !== null
+//             && element.marche_id !== null
+//             && element.section_id !== null
+//         ) {
+//             element = {
+//                 ...element,
+//                 afficheSections: rootGetters['parametreGenerauxAdministratif/sections'].find(
+//                     plans1 => plans1.id == element.section_id
+//                 ),
+//                 afficheMarche: rootGetters['bienService/marches'].find(
+//                     plans2 => plans2.id == element.marche_id
+//                 ),
+//                 afficheProgramme: rootGetters['parametreGenerauxAdministratif/plans_programmes'].find(
+//                     plans3 => plans3.id == element.programme_id
+//                 ),
+//                 afficheAction: rootGetters['parametreGenerauxActivite/afficheNiveauAction'].find(
+//                     plans4 => plans4.id == element.action_id
+//                 ),
+
+//                 afficheActivite: rootGetters['parametreGenerauxActivite/afficheNiveauActivite'].find(
+//                     plans5 => plans5.id == element.activite_id
+//                 ),
+//                 afficheUa: rootGetters['uniteadministrative/uniteAdministratives'].find(
+//                     plans6 => plans6.id == element.ua_id
+//                 ),
+
+//                 afficheGrandNature: rootGetters['parametreGenerauxAdministratif/grandes_natures'].find(
+//                     plans7 => plans7.id == element.grd_nature_id
+//                 ),
+//                 afficheLigneBudget: rootGetters['parametreGenerauxBudgetaire/plans_budgetaires'].find(
+//                     plans8 => plans8.id == element.ligne_budgetaire_id
+//                 ),
+
+
+//             }
+
+//         }
+//         return element;
+//     })
+
+
+
+export const getMandatPersonnaliserViseTableauBord = (state, getters, rootState, rootGetters) =>
+    getters.mandatVise.map(element => {
+        if (element.ua_id !== null && element.marche_id !== null && element.section_id !== null) {
+            element = {
+                ...element,
+
+
+                objetUA: rootGetters['uniteadministrative/uniteAdministratives'].find(
+                    plans => plans.id == element.ua_id
+                ),
+                affichierObjetMarche: rootGetters[
+                    "bienService/marches"
+                ].find(planactivite => planactivite.id == element.marche_id),
+                affichierSection: rootGetters[
+                    "parametreGenerauxAdministratif/sections"
+                ].find(planactivite2 => planactivite2.id == element.section_id)
+
+            }
+
+        }
+        return element;
+    })

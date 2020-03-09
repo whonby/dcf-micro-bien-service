@@ -3,65 +3,20 @@
   <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
       <!-- administratifs-->
-      <li class="dropdown" id="excution">
-        <a
-          title="Execution marchés-contrat"
-          href="#"
-          data-toggle="dropdown"
-          data-target="#excution"
-          class="dropdown-toggle"
-        >
-          <span class="text">EXECUTION DES MARCHES ET CONTRATS
-               </span>
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <router-link :to="{name: 'SecteurActivite'}" tag="a">
-              <i class="icon-user"></i>
-            Secteur d'activité
-            </router-link>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'Entreprise'}" tag="a">
-              <i class="icon-check"></i>
-             Entrprise
-            </router-link>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <a href="#">
-              <i class="icon-key"></i>Suivi des obligations sociales
-            </a>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <a href="#">
-              <i class="icon-key"></i> Marchés & Contrats
-            </a>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <a href="#">
-              <i class="icon-key"></i> Avenants
-            </a>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <a href="#">
-              <i class="icon-key"></i> suivi du respects des delais contratuels
-            </a>
-          </li>
-          
-          
-        </ul>
-      </li>
+       <li>
+         <router-link :to="{name:'investissement'}" tag="a">
+           PLANIFICATION DES MARCHES
+         </router-link>
+
+       </li>
+   <!-- <li> <router-link :to="{name:'tableauBordInvestissement'}" tag="a">
+    </li> -->
+
       <!--Excution budgetaire-->
       <li class="dropdown" id="plant">
         <a title="Excution budgetaire" href="#" data-toggle="dropdown" data-target="#plant" 
         class="dropdown-toggle">
-          <span class="text">EXECUTION BUDGETAIRE </span>
+          <span class="text">EXECUTION DU MARCHE </span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
@@ -69,16 +24,17 @@
           <li>
             <a href="#">
               <i class="icon-check"></i>
-            Suivi des engagements
+            acte effet financier 
             </a>
           </li>
           <li class="divider"></li>
           <li>
             <a href="#">
-              <i class="icon-key"></i>Suivi des mandats
+              <i class="icon-key"></i>
+              marché && contrat atribué
             </a>
           </li>
-          <li class="divider"></li>
+          <!-- <li class="divider"></li>
           <li>
             <a href="#">
               <i class="icon-check"></i>
@@ -204,7 +160,7 @@
             <a href="login.html">
               <i class="icon-key"></i>Gestion des mandats-provision
             </a>
-          </li>
+          </li> -->
 
         </ul>
       </li>

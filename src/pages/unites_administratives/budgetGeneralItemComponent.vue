@@ -12,9 +12,9 @@
                 
                  <span class="badge badge-info">{{formatageSomme(parseFloat(MontantTotal))}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
  
-                 <span class="badge badge-success">{{formatageSomme(parseFloat(MontantDisponibleBudget(groupe.id)))}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                 <span class="badge badge-success">{{formatageSomme(parseFloat(budgetConsommerDesModule))}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
 
-                 <span class="badge badge-important">{{formatageSomme(parseFloat(MontantDisponibleBudget(groupe.id)) - parseFloat(MontantTotal))}}</span>
+                 <span class="badge badge-important">{{formatageSomme(parseFloat(budgetConsommerDesModule) - parseFloat(MontantTotal))}}</span>
                 </a> 
             </div>
             </div>
@@ -126,7 +126,8 @@ export default {
       "uniteAdministratives",
       "budgetGeneral",
       "getPersonnaliseBudgetGeneral",
-      "montantBudgetGeneral"
+      "montantBudgetGeneral",
+      "afficheTransfertValider"
       // "chapitres",
       // "sections"
     ]),
@@ -140,19 +141,45 @@ export default {
     MontantTotal(){
   
     
-    var montant = this.groupe.ua_budget_general.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
+    var montant = this.groupe.ua_budget_general.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0); 
       if(isNaN(montant)) return null
       return montant
 }, 
-MontantDisponibleBudget(){
+budgetConsommerBienService(){
   return id => {
     if(id !=""){
-    return this.getMandatPersonnaliserVise.filter(element => element.ua_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(2); 
+    return this.getMandatPersonnaliserVise.filter(element => element.ua_id == this.groupe.id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
       
     }
     
   }
 },
+budgetConsommerTransfert(){
+  return id => {
+    if(id !=""){
+    return this.afficheTransfertValider.filter(element => element.ua_id == this.groupe.id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
+      
+    }
+    
+  }
+},
+budgetConsommerDesModule() {
+      const val = parseInt(this.budgetConsommerBienService(this.groupe.id)) + parseInt(this.budgetConsommerTransfert(this.groupe.id));
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+
+
+
+
+
+
+
     isFolder: function () {
       return this.groupe.ua_budget_general &&
         this.groupe.ua_budget_general.length
