@@ -2,6 +2,7 @@
 
 <template>
   <div>
+
      
 <!----- ajouter modal   ---->
 
@@ -9,21 +10,54 @@
 <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
     <div id="exampleModal" class="modal hide tailgrand12">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Direction</h3>
+        <button data-dismiss="modal" class="close" type="button">x</button>
+        <h3>Ajouter Equipement type</h3>
       </div>
       <div class="modal-body">
         
         <table class="table table-bordered table-striped">
          
-            <tr>
+          
+               <tr>
+                    
                <td>
                 <div class="control-group">
-                  <label class="control-label">Unite d'administrative</label>
+                  <label class="control-label">Direction</label>
                   <div class="controls">
-                    <select v-model="formData.d_ua_id" class="span6">
+                    
+                    <select v-model="formData.direction_id" class="span5" >
+                   
+                      <option ></option>
+                      <option value="Direction">Direction</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+               <td>
+                <div class="control-group">
+                  <label class="control-label">Service</label>
+                  <div class="controls">
+                    <select v-model="formData.service_id" class="span5">
+                    
+                      <option value=""></option>
                       <option
-                        v-for="typeUniteA in uniteAdministratives"
+                        v-for="typeUniteA in servicesua"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+               <td>
+                <div class="control-group">
+                  <label class="control-label">Fonction</label>
+                  <div class="controls">
+                    <select v-model="formData.fonction_id" class="span5" >
+                     
+                      <option value=""></option>
+                      <option
+                        v-for="typeUniteA in fonctions"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
@@ -33,22 +67,56 @@
               </td>
              </tr>
                <tr>
-              <td>
+                  <td>
                 <div class="control-group">
-                  <label class="control-label">Nom direction</label>
+                  <label class="control-label">Famille</label>
                   <div class="controls">
-                       <input
-                      type="text"
-                    v-model="formData.libelle"
-                      class="span6"
-                     :readonly="verroDirection"
-                      
-                    />
-                   
+                    <select v-model="formData.famille_id" class="span5" >
+                     
+                      <option value=""></option>
+                      <option
+                        v-for="typeUniteA in familleNormeDynamiques(formData.direction_id)"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.famille_id}}</option>
+                    </select>
                   </div>
                 </div>
               </td>
-         
+              <td>
+                <div class="control-group">
+                  <label class="control-label">Norme</label>
+                  <div class="controls">
+                       <input
+                      type="text"
+                    v-model="formData.norme"
+                      class="span5"
+                     
+                      
+                    />
+                   
+                    
+                    
+                  </div>
+                </div>
+              </td>
+          <td>
+                <div class="control-group">
+                  <label class="control-label">Duree de vie</label>
+                  <div class="controls">
+                       <input
+                      type="text"
+                  :value="DureeAffche"
+                      class="span5"
+                     readonly
+                      
+                    />
+                   
+                    
+                    
+                  </div>
+                </div>
+              </td>
              
             </tr>
             
@@ -73,21 +141,50 @@
 
     <div id="modificationModal" class="modal hide tailgrand12">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Direction</h3>
+        <button data-dismiss="modal" class="close" type="button">x</button>
+        <h3>Modifier Equipement type</h3>
       </div>
       <div class="modal-body">
-         <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped">
          
-           
-              <tr>
+         
+               
+                     <tr>
                <td>
                 <div class="control-group">
-                  <label class="control-label">Unite d'administrative</label>
+                  <label class="control-label">Direction</label>
                   <div class="controls">
-                    <select v-model="editTransfert.d_ua_id" class="span6">
+                    <select v-model="editTransfert.direction_id" class="span5" >
                       <option
-                        v-for="typeUniteA in uniteAdministratives"
+                        v-for="typeUniteA in directions"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+               <td>
+                <div class="control-group">
+                  <label class="control-label">Service</label>
+                  <div class="controls">
+                    <select v-model="editTransfert.service_id" class="span5" >
+                      <option
+                        v-for="typeUniteA in servicesua"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+               <td>
+                <div class="control-group">
+                  <label class="control-label">Fonction</label>
+                  <div class="controls">
+                    <select v-model="editTransfert.fonction_id" class="span5" >
+                      <option
+                        v-for="typeUniteA in fonctions"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
@@ -96,29 +193,60 @@
                 </div>
               </td>
              </tr>
-             <tr>
+               <tr>
+                  <td>
+                <div class="control-group">
+                  <label class="control-label">Famille</label>
+                  <div class="controls">
+                    <select v-model="editTransfert.famille_id" class="span5" >
+                      <option
+                        v-for="typeUniteA in familles"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Nom direction</label>
+                  <label class="control-label">Norme</label>
                   <div class="controls">
                        <input
                       type="text"
-                    v-model="editTransfert.libelle"
-                      class="span6"
+                    v-model="editTransfert.norme"
+                      class="span5"
                      
                       
                     />
                    
+                    
+                    
                   </div>
                 </div>
               </td>
-         
+          <td>
+                <div class="control-group">
+                  <label class="control-label">Duree de vie</label>
+                  <div class="controls">
+                       <input
+                      type="text"
+                  :value="DureeAffcheModifier"
+                      class="span5"
+                     readonly
+                      
+                    />
+                   
+                    
+                    
+                  </div>
+                </div>
+              </td>
              
             </tr>
-         
-          
-       
-         
+            
+              
+             
       
         </table>
       </div>
@@ -160,19 +288,20 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des Directions</h5>
+              <h5>Listes des normes</h5>
              
             </div>
 
-            <div class="widget-content nopadding" v-if="uniteAdministratives.length" >
-              <DirectionComponent v-for="equipement in uniteAdministratives"
-               :key="equipement.id"
+            <div class="widget-content nopadding" v-if="familles.length" >
+              
+              <NormeImmoComponent v-for="equipement in familles"
+                :key="equipement.id"
                 :groupe="equipement"
                 @modification="afficherModalModifierUniteAdministrative"
-                               
                 @suppression="supprimerBudget"
                 >
-              </DirectionComponent>
+                
+              </NormeImmoComponent>
 
             
 
@@ -199,12 +328,12 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
-import DirectionComponent from './DirectionComponent'
+import NormeImmoComponent from './NormeImmoComponent'
 // import { formatageSomme } from "../../../../src/Repositories/Repository";
 export default {
-  name: 'transfert',
+  name: 'NormeImmoPrincipal',
  components: {
-      DirectionComponent
+      NormeImmoComponent
   },
   data() {
     return {
@@ -216,6 +345,7 @@ export default {
            
            
       //   },
+      direct:"",
      fabActions: [
               {
                   name: 'cache',
@@ -228,13 +358,19 @@ export default {
           ],
      
       formData: {
-      	d_ua_id:"",
+        service_id:"",
+       s_ua_id:"",
+           direction_id:"",
       libelle: "",
+      	fonction_id:""
      
       },
       editTransfert: {
-     	d_ua_id:"",
+     	 service_id:"",
+       s_ua_id:"",
+           direction_id:"",
       libelle: "",
+      	fonction_id:""
       
       
       },
@@ -245,7 +381,22 @@ export default {
     
   },
 
+
   computed: {
+     ...mapGetters("SuiviImmobilisation", [
+      "familles",
+   
+      "listeBesoinValider",
+      "besoinImmobilisations",
+      "groupTriUaImmo",
+      "SuiviImmo",
+      "listeBesoinValider",
+      "getAfficheStockArticle",
+      "getPersoNormeArticle",
+      "getPersoStock",
+      "stockageArticle"
+      
+    ]),
         ...mapGetters("uniteadministrative", [
       "directions",
       "servicesua",
@@ -258,6 +409,7 @@ export default {
       // "chapitres",
       // "sections"
     ]),
+    
     ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
@@ -287,22 +439,90 @@ export default {
 
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  
- ...mapGetters('personnelUA', ['all_acteur_depense']),
+ ...mapGetters('personnelUA', ['all_acteur_depense','fonctions']),
+
+DureeAffcheModifier() {
+      
+      const norme = this.familles.find(normeEquipe => normeEquipe.id == this.editTransfert.famille_id);
+
+      if (norme) {
+        return norme.dureVie;
+      }
+      return 0
+    },
+
+ DureeAffche() {
+      
+      const norme = this.familles.find(normeEquipe => normeEquipe.id == this.formData.famille_id);
+
+      if (norme) {
+        return norme.dureVie;
+      }
+      return 0
+    },
+
+// verrouDirection() {
+//   if(this.direct != 1){
+// return this.formData.direction_id == "";
+
+//   }
+//     0 
+//     },
+// verrouService() {
+ 
+//     if (this.direct != 2){
+//         return this.formData.service_id == "";
+//       }
+//       0
+//     },
+
+// verrouFonction() {
+ 
+//     if (this.direct != 3){
+//         return this.formData.fonction_id == "";
+//       }
+//      0 
+//     },
 
 
- verroDirection() {
-      return this.formData.d_ua_id == "";
+
+  directionDynamiques() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.directions.filter(element => element.d_ua_id == id);
+        }
+      };
+    },
+    
+    ModifierdirectionDynamiques() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.directions.filter(element => element.d_ua_id == id);
+        }
+      };
+    },
+
+
+      familleNormeDynamiques() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.normeImmo.filter(element => element.direction_id == id);
+        }
+      };
     },
   },
 
 
   
   methods: {
-    ...mapActions("uniteadministrative", [
+    ...mapActions("SuiviImmobilisation", [
      
-      "ajouterDirection",
-      "modifierDirection",
-      "supprimerDirection",
+      "ajouterNormeImmob",
+      "modifierNormeImmob",
+      "supprimerNormeImmob",
      
       // "ajouterHistoriqueBudgetGeneral"
     ]),
@@ -319,23 +539,26 @@ export default {
     // fonction pour vider l'input ajouter
     ajouterUniteAdministrativeLocal() {
      
-      this.ajouterDirection(this.formData);
+      this.ajouterNormeImmob(this.formData);
 
       this.formData = {
-       	d_ua_id:"",
+           service_id:"",
+       s_ua_id:"",
+           direction_id:"",
       libelle: "",
+      	fonction_id:""
       };
       },
       
       // }
      
      supprimerBudget(id){
-      this.supprimerDirection(id)
+      this.supprimerNormeImmob(id)
     },
     // fonction pour vider l'input modifier
     modifierUniteAdministrativeLocal() {
      
-      this.modifierDirection(this.editTransfert);
+      this.modifierNormeImmob(this.editTransfert);
    
 this.$("#modificationModal").modal('hide');
 
@@ -373,8 +596,8 @@ this.$("#modificationModal").modal('hide');
 <style scoped>
 
 .tailgrand12{
-  width: 640px;
-  margin: 0 -25%;
+  width:1500px;
+  margin: 0 -45%;
  
 }
 

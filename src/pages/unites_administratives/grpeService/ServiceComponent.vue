@@ -1,9 +1,14 @@
 
 
+
 <template>
    
       <div class="accordion" >
+
+        
+        <h5> {{afficherUniteAdministrative(groupe.d_ua_id)}}</h5>
           <div class="accordion-group widget-box">
+           
             <div class="accordion-heading">
               <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
@@ -21,7 +26,7 @@
                  <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th >Unite administrative</th>
+                    <!-- <th >Unite administrative</th> -->
                      <th >Nom Service</th>
                    
                   
@@ -72,6 +77,7 @@ export default {
       active: null
     }
   },
+
 
 
 

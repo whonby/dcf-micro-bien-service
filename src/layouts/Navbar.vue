@@ -2,7 +2,8 @@
 <template>
   <div>
     <!--start-top-serch-->
-    <MenuParamG v-if="active_el == 11"></MenuParamG>
+    <MenuTableau v-if="active_el == 11"></MenuTableau>
+    <MenuParamG v-if="active_el == 17"></MenuParamG>
     <MenuUA v-if="active_el == 1"></MenuUA>
     <MenuActeurDepense v-if="active_el == 2"></MenuActeurDepense>
     <MenuPlanification v-if="active_el ==3"></MenuPlanification>
@@ -24,7 +25,7 @@
 // var housecall = require('housecall');
 
 // var queue = housecall({ concurrency: 2, cooldown: 1000 });
-
+import MenuTableau from "../components/navs/menuTableauBord";
 import MenuParamG from "../components/navs/menuParametreG";
 import MenuUA from "../components/navs/menuUA";
 import MenuActeurDepense from "../components/navs/MenuActeurDepense";
@@ -40,6 +41,7 @@ import Search from "../components/Search";
 import { mapState, mapActions} from "vuex";
 export default {
   components: {
+    MenuTableau,
     MenuParamG,
     MenuUA,
     MenuActeurDepense,
@@ -85,7 +87,9 @@ export default {
       // "getAllTypeTextes",
       "getAllUniteAdministrative",
       // "getAllArchivageDocument",
-      
+      "getAllDirection",
+      "getAllServiceua",
+      "getAllFonction",
       "getAllBudgetGeneral",
       "getAllHistoriqueBudgetGeneral",
       "getAllUniteZone",
@@ -104,11 +108,14 @@ export default {
         "getBanque", "getCompte","getAgence"]),
 
         ...mapActions("SuiviImmobilisation", [
-      
+      "getAllNatureEntre",
+      "getAllCauseInactivite",
+      "getAllEtatImmo",
       "getAllService",
       "getAllEquipement",
       "getAllFamille",
       "getAllArticles",
+      "getAllNormeImmob",
       "getAllNormeArticle",
       "getAllStock",
       "getAllBesoinImmo",
@@ -195,8 +202,9 @@ this.getTypeAppel()
       // this.getAllTypeTextes();
     this.getAllUniteAdministrative();
     // this.getAllArchivageDocument();
-
-
+this.getAllDirection()
+this.getAllServiceua()
+this.getAllFonction()
 
       this.getListeSalaireActuelAll()
     this.getTypeSalarie()
@@ -233,11 +241,14 @@ this.getAllHistoriqueBudgetGeneral()
       /**
        * suivi des immo
        */
-       
+       this.getAllNatureEntre();
+      this.getAllCauseInactivite();
+      this.getAllEtatImmo();
     this.getAllService();
     this.getAllEquipement();
     this.getAllFamille();
     this.getAllArticles();
+    this.getAllNormeImmob();
     this.getAllNormeArticle();
     this.getAllStock();
     this.getAllBesoinImmo();

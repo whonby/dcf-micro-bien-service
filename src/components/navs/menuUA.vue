@@ -54,24 +54,24 @@
           </li>
 
           <li class="divider"></li>
-          <!-- <li>
-            <router-link :to="{name: ''}" tag="a">
+          <li>
+            <router-link :to="{name: 'DirectionPrincipal'}" tag="a">
               <i class="icon-key"></i>Direction UA
             </router-link>
           </li>
            <li class="divider"></li>
           <li>
-            <router-link :to="{name: ''}" tag="a">
+            <router-link :to="{name: 'ServicePrincipal'}" tag="a">
               <i class="icon-key"></i>Service UA
             </router-link>
           </li>
            <li class="divider"></li>
           <li>
-            <router-link :to="{name: ''}" tag="a">
+            <router-link :to="{name: 'FonctionPrincipal'}" tag="a">
               <i class="icon-key"></i>Fonction UA
             </router-link>
           </li>
-           <li class="divider"></li> -->
+           <li class="divider"></li>
           <li>
             <router-link :to="{name: 'uniteZone'}" tag="a">
               <i class="icon-key"></i>Unite zone

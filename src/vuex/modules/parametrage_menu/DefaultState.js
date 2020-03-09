@@ -1,5 +1,5 @@
 const defaultstate = {
-    paramGe: 11,
+    paramGe: 17,
     UnitAdminist: 1,
     Acteurdepense: 2,
     Panification: 3,
@@ -9,7 +9,8 @@ const defaultstate = {
     ControlPerfor: 6,
     OpRaportAct: 7,
     OpDispoContrInter: 8,
-    active_el: 11
+    tableaubord: 11,
+    active_el: 17
 };
 
  export default defaultstate

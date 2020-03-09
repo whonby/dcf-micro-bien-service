@@ -1,5 +1,6 @@
+import ExerciceBudgetaire from "../../pages/parametres_generaux/administratifs/tableauBord.vue";
 
-import ExerciceBudgetaire from "../../pages/parametres_generaux/administratifs/ExerciceBudgetaire.vue";
+import ExerciceBudgetaire1 from "../../pages/parametres_generaux/administratifs/ExerciceBudgetaire.vue";
 import Titre from "../../pages/parametres_generaux/administratifs/Titre.vue";
 import NatureSection from "../../pages/parametres_generaux/administratifs/NatureSection.vue";
 import Section from "../../pages/parametres_generaux/administratifs/Section.vue";
@@ -15,6 +16,11 @@ import TypeUniteAdmin from "../../pages/parametres_generaux/administratifs/TypeU
 import taux from "../../pages/parametres_generaux/administratifs/taux.vue";
 const AdministratifRoutesAdoni = [
   // route type unite administrative
+  {
+    path: "/tableau-Bord-General",
+    name: "ExerciceBudgetaire",
+    component: ExerciceBudgetaire
+  },
   {
     path: "/taux",
     name: "taux",
@@ -47,8 +53,8 @@ const AdministratifRoutesAdoni = [
      {
       // route pour l'exercice budgetaire 
       path:"/exercice-budgetaire",
-        name:"ExerciceBudgetaire",
-        component:ExerciceBudgetaire
+        name:"ExerciceBudgetaire1",
+        component:ExerciceBudgetaire1
 
      },
      // route pour la nature de section

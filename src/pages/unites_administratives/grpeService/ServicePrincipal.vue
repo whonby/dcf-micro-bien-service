@@ -39,7 +39,7 @@
                 <div class="control-group">
                   <label class="control-label">Direction</label>
                   <div class="controls">
-                    <select v-model="formData.direction_id" class="span6">
+                    <select v-model="formData.direction_id" class="span6" :readOnly="verroDirection">
                       <option
                         v-for="typeUniteA in directionDynamiques(formData.s_ua_id)"
                         :key="typeUniteA.id"
@@ -59,7 +59,7 @@
                       type="text"
                     v-model="formData.libelle"
                       class="span6"
-                     
+                     :readOnly="verroService"
                       
                     />
                    
@@ -198,13 +198,14 @@
             </div>
 
             <div class="widget-content nopadding" v-if="directions.length" >
+              
               <ServiceComponent v-for="equipement in directions"
-               :key="equipement.id"
+                :key="equipement.id"
                 :groupe="equipement"
                 @modification="afficherModalModifierUniteAdministrative"
-                               
                 @suppression="supprimerBudget"
                 >
+                
               </ServiceComponent>
 
             
@@ -280,6 +281,7 @@ export default {
     
   },
 
+
   computed: {
         ...mapGetters("uniteadministrative", [
       "directions",
@@ -325,8 +327,12 @@ export default {
  
  ...mapGetters('personnelUA', ['all_acteur_depense']),
 
-
-
+verroDirection() {
+      return this.formData.s_ua_id == "";
+    },
+verroService() {
+      return this.formData.direction_id == "";
+    },
   directionDynamiques() {
       
       return id => {

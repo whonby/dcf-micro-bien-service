@@ -1,7 +1,11 @@
 import { groupBy } from "../../../../Repositories/Repository";
 
 export const factures = state => state.factures
+export const normeImmo = state => state.normeImmo
 
+export const natureEntres = state => state.natureEntres
+export const causeInactivite = state => state.causeInactivite
+export const EtatImmobilisations = state => state.EtatImmobilisations
 
 const familles = state =>
   state.familles.sort((a, b) => (a.code > b.code ? 1 : -1));
@@ -1019,6 +1023,18 @@ export const historiqueDemande = (state, getters, rootState, rootGetters) =>
 
 
 
+export const getPersonnaliseNormeEquipement = (state, getters, rootState, rootGetters) =>
+  state.normeImmo.map(element => {
+    if (element.famille_id !== null && element.service_id !== null) {
+      element = {
+        ...element,
+        familleImmo: rootGetters["SuiviImmobilisation/familles"].find(familImmo => familImmo.id == element.famille_id),
+        serviceImmo: rootGetters["uniteadministrative/servicesua"].find(familImmo => familImmo.id == element.service_id)
+      };
+    }
+
+    return element;
+  });
 
 
 

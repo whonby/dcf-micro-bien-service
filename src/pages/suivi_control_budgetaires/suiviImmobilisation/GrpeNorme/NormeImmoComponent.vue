@@ -1,17 +1,23 @@
 
 
+
 <template>
    
       <div class="accordion" >
+
+        
+       
           <div class="accordion-group widget-box">
+           
             <div class="accordion-heading">
               <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
-                <h5>{{groupe.libelle }}</h5>
+                <h5>{{groupe.libelle}}</h5>
                  <!-- <span class="badge badge-info" >{{getNombreArticle}}</span>&nbsp;&nbsp; -->
                  <span class="badge badge-inverse" >{{getNombreArticle}}</span>
 
                 </a> 
+
 
             </div>
             </div>
@@ -20,31 +26,26 @@
                  <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                       <!-- <th>Exercice</th> -->
-                    <!-- <th title="">Code Budget</th> -->
-                     <th >Destinataire</th>
-                    <!-- <th>Section</th> -->
-                    <th title="grande nature depense">Zone geographique</th>
-                      <th>Longitude</th>
-                    <th>Latitude</th> 
-                    <th>Telephone cel</th> 
-                     <th >Adresse Postale</th>
-                     <th>Telephone Fixe</th>
-                    <th>description localisation</th>
-                    <th>Quartier</th>
+                    <!-- <th >Unite administrative</th> -->
+                     <th style="width:30%">Direction</th>
+                     <th style="width:20%">Service</th>
+                       <th style="width:20%">Fonction</th>
+                        
+                    <th style="width:20%">Norme</th>
                      <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                   <uniteZoneItem
-                        class="item"
-                        v-for="groupeElement in groupe.unite_zone_ua"
+                   <NormeImmoItem
+                        class="item" 
+                        v-for="groupeElement in groupe.famille__norme"
                         :key="groupeElement.id"
                         :article="groupeElement"
                      @modification="$emit('modification', $event)"
+                      
                         @suppression="$emit('suppression', $event)"
 
-                    ></uniteZoneItem>
+                    ></NormeImmoItem>
                       
                 </tbody>
               </table>
@@ -61,15 +62,15 @@
 
 <script>
 import { mapGetters} from "vuex";
-import uniteZoneItem from './uniteZoneItem'
-import { formatageSomme } from "../../../Repositories/Repository";
+import NormeImmoItem from './NormeImmoItem'
+// import { formatageSomme } from "../../../Repositories/Repository";
 export default {
-    name: 'uniteZoneComponent',
+    name: 'NormeImmoComponent',
      props: {
     groupe: Object,
   },
   components: {
-      uniteZoneItem
+      NormeImmoItem
   },
   data: function () {
     return {
@@ -81,13 +82,32 @@ export default {
 
 
 
+
+
   computed: {
+    ...mapGetters("SuiviImmobilisation", [
+      "familles",
+      "services",
+      "listeBesoinValider",
+      "besoinImmobilisations",
+      "groupTriUaImmo",
+      "SuiviImmo",
+      "listeBesoinValider",
+      "getAfficheStockArticle",
+      "getPersoNormeArticle",
+      "getPersoStock",
+      "stockageArticle"
+      
+    ]),
   ...mapGetters("uniteadministrative", [
-      "jointureUaChapitreSection",
-      "uniteAdministratives",
-      "budgetGeneral",
+     "directions",
+      "servicesua",
+      "fonctionsua",
       "getPersonnaliseBudgetGeneral",
-      "montantBudgetGeneral"
+      "montantBudgetGeneral",
+      "uniteZones",
+      "getPersonnaliseBudgetGeneralParTransfert",
+      "uniteAdministratives"
       // "chapitres",
       // "sections"
     ]),
@@ -120,52 +140,63 @@ export default {
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
-  
-    afficherSection() {
+  ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+                "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
+                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
+                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
+                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
+                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
+                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
+
+
+ afficherDirection() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.sections.find(qtreel => qtreel.id == id);
+           const qtereel = this.directions.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.nom_section;
+        return qtereel.libelle;
       }
       return 0
         }
       };
     },
-     CodeSection() {
+afficherService() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.sections.find(qtreel => qtreel.id == id);
+           const qtereel = this.servicesua.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.code_section;
+        return qtereel.libelle;
       }
       return 0
         }
       };
     },
+
+
+
 getNombreArticle(){
-        var nombre = this.groupe.unite_zone_ua.length
+        var nombre = this.groupe.famille__norme.length
         if(nombre) return nombre
         return '0' 
     },
     isFolder: function () {
-      return this.groupe.unite_zone_ua &&
-        this.groupe.unite_zone_ua.length
+      return this.groupe.famille__norme &&
+        this.groupe.famille__norme.length
     },
 
     // getNombreArticle(){
-    //     var nombre = this.groupe.unite_zone_ua.length
+    //     var nombre = this.groupe.famille__norme.length
     //     if(nombre) return nombre
     //     return 'Aucun' 
     // },
     iconClasses() {
       return {
-        'icon-plus': !this.isOpen && this.groupe.unite_zone_ua.length,
-        'icon-minus': this.isOpen && this.groupe.unite_zone_ua.length
-        //    'icon-folder-close': !this.isOpen && this.groupe.unite_zone_ua.length,
-        // 'icon-folder-open': this.isOpen && this.groupe.unite_zone_ua.length
+        'icon-plus': !this.isOpen && this.groupe.famille__norme.length,
+        'icon-minus': this.isOpen && this.groupe.famille__norme.length
+        //    'icon-folder-close': !this.isOpen && this.groupe.famille__norme.length,
+        // 'icon-folder-open': this.isOpen && this.groupe.famille__norme.length
       }
     },
 
@@ -191,7 +222,7 @@ getNombreArticle(){
         
       }
     },
-formatageSomme:formatageSomme
+// formatageSomme:formatageSomme
   }
 }
 </script>

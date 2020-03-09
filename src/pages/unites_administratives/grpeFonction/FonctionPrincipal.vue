@@ -10,7 +10,7 @@
     <div id="exampleModal" class="modal hide tailgrand12">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">x</button>
-        <h3>Ajouter Direction</h3>
+        <h3>Ajouter Fonction</h3>
       </div>
       <div class="modal-body">
         
@@ -37,7 +37,7 @@
                 <div class="control-group">
                   <label class="control-label">Direction</label>
                   <div class="controls">
-                    <select v-model="formData.direction_id" class="span6">
+                    <select v-model="formData.direction_id" class="span6" :readOnly="verroDirection">
                       <option
                         v-for="typeUniteA in directionDynamiques(formData.f_ua_id)"
                         :key="typeUniteA.id"
@@ -53,7 +53,7 @@
                 <div class="control-group">
                   <label class="control-label">Service</label>
                   <div class="controls">
-                    <select v-model="formData.service_id" class="span6">
+                    <select v-model="formData.service_id" class="span6" :readOnly="verroService">
                       <option
                         v-for="typeUniteA in serviceDynamiques(formData.direction_id)"
                         :key="typeUniteA.id"
@@ -65,7 +65,21 @@
               </td>
              </tr>
                <tr>
-              <td>
+                   <td>
+                <div class="control-group">
+                  <label class="control-label">Fonction</label>
+                  <div class="controls">
+                    <select v-model="formData.fonction_id" class="span6" :readOnly="verroFonction">
+                      <option
+                        v-for="typeUniteA in fonctions"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+              <!-- <td>
                 <div class="control-group">
                   <label class="control-label">Fonction</label>
                   <div class="controls">
@@ -79,7 +93,7 @@
                    
                   </div>
                 </div>
-              </td>
+              </td> -->
          
              
             </tr>
@@ -226,8 +240,8 @@
              
             </div>
 
-            <div class="widget-content nopadding" v-if="services.length" >
-              <FonctionComponent v-for="equipement in services"
+            <div class="widget-content nopadding" v-if="servicesua.length" >
+              <FonctionComponent v-for="equipement in servicesua"
                :key="equipement.id"
                 :groupe="equipement"
                 @modification="afficherModalModifierUniteAdministrative"
@@ -290,14 +304,18 @@ export default {
           ],
      
       formData: {
-      	d_ua_id:"",
-      libelle: "",
-     
+      		f_ua_id:"",
+        direction_id: "",
+        
+     service_id:"",
+     	fonction_id:""
       },
       editTransfert: {
-     	d_ua_id:"",
-      libelle: "",
-      
+     	      		f_ua_id:"",
+        direction_id: "",
+        
+     service_id:"",
+     	fonction_id:""
       
       },
      
@@ -308,9 +326,10 @@ export default {
   },
 
   computed: {
+    
         ...mapGetters("uniteadministrative", [
       "directions",
-      "services",
+      "servicesua",
       "fonctionsua",
       "getPersonnaliseBudgetGeneral",
       "montantBudgetGeneral",
@@ -349,14 +368,22 @@ export default {
 
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  
- ...mapGetters('personnelUA', ['all_acteur_depense']),
+ ...mapGetters('personnelUA', ['all_acteur_depense','fonctions']),
 
- 
+ verroDirection() {
+      return this.formData.f_ua_id == "";
+    },
+    verroService() {
+      return this.formData.direction_id == "";
+    },
+     verroFonction() {
+      return this.formData.service_id == "";
+    },
   serviceDynamiques() {
       
       return id => {
         if (id != null && id != "") {
-          return this.services.filter(element => element.direction_id == id);
+          return this.servicesua.filter(element => element.direction_id == id);
         }
       };
     },
@@ -418,8 +445,11 @@ directionDynamiques() {
       this.ajouterFonction(this.formData);
 
       this.formData = {
-       	d_ua_id:"",
-      libelle: "",
+            		f_ua_id:"",
+        direction_id: "",
+        
+     service_id:"",
+     	fonction_id:""
       };
       },
       

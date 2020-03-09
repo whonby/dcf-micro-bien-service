@@ -30,7 +30,39 @@ import demandeEquipement from '../../pages/suivi_control_budgetaires/suiviImmobi
 import ficheAnalyse from '../../pages/suivi_control_budgetaires/suiviImmobilisation/resultatFinal.vue'
 import listeBesoinRealise from '../../pages/suivi_control_budgetaires/suiviImmobilisation/listeBesoinRealise.vue'
 import historiqueDemande from '../../pages/suivi_control_budgetaires/suiviImmobilisation/historiqueDemande.vue'
+import EtatImmobilisation from '../../pages/suivi_control_budgetaires/suiviImmobilisation/EtatImmobilisation.vue'
+import CauseInactivite from '../../pages/suivi_control_budgetaires/suiviImmobilisation/CauseInactivite.vue'
+import natureEntre from '../../pages/suivi_control_budgetaires/suiviImmobilisation/natureEntre.vue'
+import NormeImmo from '../../pages/suivi_control_budgetaires/suiviImmobilisation/GrpeNorme/NormeImmoPrincipal.vue'
 const suiviImmobilisationRoutes = [
+  {
+    path: "/equipement-type",
+    name: "NormeImmo",
+    component: NormeImmo
+  },
+  {
+    path: "/Etat-Immobilisation",
+    name: "EtatImmobilisation",
+    component: EtatImmobilisation
+  },
+  {
+    path: "/Cause-Inactivite",
+    name: "CauseInactivite",
+    component: CauseInactivite
+  },
+  {
+    path: "/nature-Entre",
+    name: "natureEntre",
+    component: natureEntre
+  },
+
+
+
+
+
+
+
+
   {
     path: "/historique-Demande",
     name: "historiqueDemande",

@@ -5,7 +5,7 @@
   
                   <tr class="odd gradeX" v-if="article" @dblclick="$emit('modification', article)">
                      <!-- <td style="width:50%">{{article.direction_id|| 'Non renseigné'}}</td> -->
-                     <td style="width:90%">{{article.libelle|| 'Non renseigné'}}</td>
+                     <td style="width:90%">{{afficherFonction(article.fonction_id)|| 'Non renseigné'}}</td>
                     
                  
                     <td>
@@ -38,7 +38,7 @@ export default {
  computed: {
     ...mapGetters("uniteadministrative", [
       "directions",
-      "services",
+      "servicesua",
       "fonctionsua",
       "getPersonnaliseBudgetGeneral",
       "montantBudgetGeneral",
@@ -47,6 +47,19 @@ export default {
       // "chapitres",
       // "sections"
     ]),
+...mapGetters('personnelUA', ['all_acteur_depense','fonctions']),
+    afficherFonction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.fonctions.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
    
   },
   methods: {

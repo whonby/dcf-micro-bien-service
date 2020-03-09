@@ -5,8 +5,11 @@
   
                   <tr class="odd gradeX" v-if="article" @dblclick="$emit('modification', article)">
                      <!-- <td style="width:50%"  >{{afficherUniteAdministrative(article.s_ua_id)|| 'Non renseigné'}}</td> -->
-                     <td style="width:90%" >{{article.libelle|| 'Non renseigné'}}</td>
-                    
+                      <td >{{article.direction_id|| ''}}</td>
+                       <td >{{afficherService(article.service_id)|| ''}}</td>
+                     <td  >{{afficherFonction(article.fonction_id)|| ''}}</td>
+                     <td style="text-align:center;color:red;font-weight:bold" >{{article.norme|| 'Non renseign�'}}</td>
+                     
                  
 
                     <td>
@@ -32,7 +35,7 @@
 import { mapGetters} from "vuex";
 // import { formatageSomme } from "../../../../src/Repositories/Repository";
 export default {
-    name: 'ServiceItem',
+    name: 'NormeImmoItem',
      props: {
     article: Object,
   },
@@ -51,11 +54,36 @@ export default {
       // "chapitres",
       // "sections"
     ]),
-   
- afficherUniteAdministrative() {
+    
+ ...mapGetters('personnelUA', ['all_acteur_depense','fonctions']),
+    afficherFonction() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+           const qtereel = this.fonctions.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+   afficherService() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.servicesua.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+ afficherDirection() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.directions.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.libelle;

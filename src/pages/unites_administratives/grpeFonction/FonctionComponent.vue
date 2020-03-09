@@ -1,8 +1,12 @@
 
 
 <template>
-   
+<div>
+ 
+  
       <div class="accordion" >
+        <h5>{{afficherUniteAdministrative(groupe.s_ua_id)}}</h5>
+      
           <div class="accordion-group widget-box">
             <div class="accordion-heading">
               <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
@@ -49,6 +53,9 @@
         
         </div>
 
+</div>
+
+  
   
 </template>
 
@@ -78,13 +85,14 @@ export default {
   computed: {
   ...mapGetters("uniteadministrative", [
      "directions",
-      "services",
+      "servicesua",
       "fonctionsua",
       "getPersonnaliseBudgetGeneral",
       "montantBudgetGeneral",
       "uniteZones",
       "getPersonnaliseBudgetGeneralParTransfert",
-      "uniteAdministratives"
+      "uniteAdministratives",
+      "groupUa"
       // "chapitres",
       // "sections"
     ]),

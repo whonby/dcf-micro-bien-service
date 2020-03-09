@@ -38,7 +38,7 @@ export default {
  computed: {
     ...mapGetters("uniteadministrative", [
       "directions",
-      "services",
+      "servicesua",
       "fonctionsua",
       "getPersonnaliseBudgetGeneral",
       "montantBudgetGeneral",

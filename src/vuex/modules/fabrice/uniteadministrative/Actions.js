@@ -685,6 +685,7 @@ export function supprimerHistoriqueTransfert({ commit}, id) {
 
 
 
+
 export function getAllDirection({ commit }) {
   queue.push(() => {
     axios
@@ -760,7 +761,7 @@ export function supprimerDirection({ commit, dispatch }, id) {
 
 
 
-export function getAllService({ commit }) {
+export function getAllServiceua({ commit }) {
   queue.push(() => {
     axios
       .get("/listeServiceUa")
@@ -787,7 +788,7 @@ export function ajouterService({ commit, dispatch }, nouveau) {
       if (response.status == 201) {
         commit("AJOUTER_SERVICE", response.data);
         dispatch('getAllDirection')
-        dispatch('getAllService')
+        dispatch('getAllServiceua')
         dispatch('getAllUniteAdministrative')
 
         this.$app.$notify({
@@ -810,7 +811,7 @@ export function modifierService({ commit, dispatch }, nouveau) {
     .then(response => {
       commit("MODIFIER_SERVICE", response.data);
       dispatch('getAllDirection')
-      dispatch('getAllService')
+      dispatch('getAllServiceua')
       dispatch('getAllUniteAdministrative')
       this.$app.$notify({
         title: 'Success',
@@ -826,7 +827,7 @@ export function supprimerService({ commit, dispatch }, id) {
     .then(dialog => {
       commit("SUPPRIMER_SERVICE", id);
       dispatch('getAllDirection')
-      dispatch('getAllService')
+      dispatch('getAllServiceua')
       dispatch('getAllUniteAdministrative')
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete("/supprimerServiceUa/" + id).then(() => dialog.close());
@@ -855,7 +856,7 @@ export function ajouterFonction({ commit, dispatch }, nouveau) {
     .post("/ajouterFonctionUa", {
       f_ua_id: nouveau.f_ua_id,
       service_id: nouveau.service_id,
-      libelle: nouveau.libelle,
+      fonction_id: nouveau.fonction_id,
       direction_id: nouveau.direction_id
 
 
@@ -864,8 +865,9 @@ export function ajouterFonction({ commit, dispatch }, nouveau) {
     .then(response => {
       if (response.status == 201) {
         commit("AJOUTER_FONCTION", response.data);
+        dispatch('getAllServiceua')
         dispatch('getAllFonction')
-        dispatch('getAllUniteAdministrative')
+        
 
         this.$app.$notify({
           title: 'Success',
@@ -882,13 +884,13 @@ export function modifierFonction({ commit, dispatch }, nouveau) {
     .put("/modifierFonctionUa/" + nouveau.id, {
       f_ua_id: nouveau.f_ua_id,
       service_id: nouveau.service_id,
-      libelle: nouveau.libelle,
+      fonction_id: nouveau.fonction_id,
       direction_id: nouveau.direction_id
     }))
     .then(response => {
       commit("MODIFIER_FONCTION", response.data);
+      dispatch('getAllServiceua')
       dispatch('getAllFonction')
-      dispatch('getAllUniteAdministrative')
       this.$app.$notify({
         title: 'Success',
         text: 'Modification Effectué avec Succès!',
@@ -902,8 +904,8 @@ export function supprimerFonction({ commit, dispatch }, id) {
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
       commit("SUPPRIMER_FONCTION", id);
+      dispatch('getAllServiceua')
       dispatch('getAllFonction')
-      dispatch('getAllUniteAdministrative')
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete("/supprimerFonctionUa/" + id).then(() => dialog.close());
     });

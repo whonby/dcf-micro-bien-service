@@ -410,7 +410,163 @@ const MODIFIER_NORME_REALISE = (state, objet) => {
 
 
 
+
+const GET_ALL_NATURE_ENTRE = (state, tableauNormeArticle) => {
+  state.natureEntres = tableauNormeArticle;
+};
+
+// ajouter NORME_EQUIPEMENTS
+const AJOUTER_NATURE_ENTRE = (state, nouveau_normeArt) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.natureEntres.unshift(nouveau_normeArt);
+};
+
+
+// modifier NORME_EQUIPEMENTS
+const MODIFIER_NATURE_ENTRE = (state, objetModifie) => {
+  state.natureEntres = state.natureEntres.map(norme => {
+    if (norme.id == objetModifie.id) {
+      norme = { ...objetModifie };
+    }
+
+    return norme;
+  });
+};
+
+// supprimer NORME_EQUIPEMENTS
+const SUPPRIMER_NATURE_ENTRE = (state, id) => {
+  state.natureEntres = state.natureEntres.filter(norme => norme.id != id);
+};
+
+
+const GET_ALL_CAUSE_INACTIVITE = (state, tableauNormeArticle) => {
+  state.causeInactivite = tableauNormeArticle;
+};
+
+// ajouter NORME_EQUIPEMENTS
+const AJOUTER_CAUSE_INACTIVITE = (state, nouveau_normeArt) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.causeInactivite.unshift(nouveau_normeArt);
+};
+
+
+// modifier NORME_EQUIPEMENTS
+const MODIFIER_CAUSE_INACTIVITE = (state, objetModifie) => {
+  state.causeInactivite = state.causeInactivite.map(norme => {
+    if (norme.id == objetModifie.id) {
+      norme = { ...objetModifie };
+    }
+
+    return norme;
+  });
+};
+
+// supprimer NORME_EQUIPEMENTS
+const SUPPRIMER_CAUSE_INACTIVITE = (state, id) => {
+  state.causeInactivite = state.causeInactivite.filter(norme => norme.id != id);
+};
+
+const GET_ALL_ETAT_IMMOBILISATION = (state, tableauNormeArticle) => {
+  state.EtatImmobilisations = tableauNormeArticle;
+};
+
+// ajouter NORME_EQUIPEMENTS
+const AJOUTER_ETAT_IMMOBILISATION = (state, nouveau_normeArt) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.EtatImmobilisations.unshift(nouveau_normeArt);
+};
+
+
+// modifier NORME_EQUIPEMENTS
+const MODIFIER_ETAT_IMMOBILISATION = (state, objetModifie) => {
+  state.EtatImmobilisations = state.EtatImmobilisations.map(norme => {
+    if (norme.id == objetModifie.id) {
+      norme = { ...objetModifie };
+    }
+
+    return norme;
+  });
+};
+
+// supprimer NORME_EQUIPEMENTS
+const SUPPRIMER_ETAT_IMMOBILISATION = (state, id) => {
+  state.EtatImmobilisations = state.EtatImmobilisations.filter(norme => norme.id != id);
+};
+
+
+
+
+
+
+
+
+const GET_ALL_NORMEIMMOB = (state, tableauNormeArticle) => {
+  state.normeImmo = tableauNormeArticle;
+};
+
+// ajouter NORME_EQUIPEMENTS
+const AJOUTER_NORMEIMMOB = (state, nouveau_normeArt) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.normeImmo.unshift(nouveau_normeArt);
+};
+
+
+// modifier NORME_EQUIPEMENTS
+const MODIFIER_NORMEIMMOB = (state, objetModifie) => {
+  state.normeImmo = state.normeImmo.map(norme => {
+    if (norme.id == objetModifie.id) {
+      norme = { ...objetModifie };
+    }
+
+    return norme;
+  });
+};
+
+// supprimer NORME_EQUIPEMENTS
+const SUPPRIMER_NORMEIMMOB = (state, id) => {
+  state.normeImmo = state.normeImmo.filter(norme => norme.id != id);
+};
+
+
+
+
 export {
+
+  GET_ALL_NORMEIMMOB,
+  AJOUTER_NORMEIMMOB,
+  MODIFIER_NORMEIMMOB,
+  SUPPRIMER_NORMEIMMOB,
+
+
+
+  GET_ALL_ETAT_IMMOBILISATION,
+  AJOUTER_ETAT_IMMOBILISATION,
+  MODIFIER_ETAT_IMMOBILISATION,
+  SUPPRIMER_ETAT_IMMOBILISATION,
+  GET_ALL_CAUSE_INACTIVITE,
+  AJOUTER_CAUSE_INACTIVITE,
+  MODIFIER_CAUSE_INACTIVITE,
+  SUPPRIMER_CAUSE_INACTIVITE,
+  GET_ALL_NATURE_ENTRE,
+  AJOUTER_NATURE_ENTRE,
+  MODIFIER_NATURE_ENTRE,
+  SUPPRIMER_NATURE_ENTRE,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   MODIFIER_NORME_REALISE,
   MODIFIER_QUANTITE_EN_STOCK_NORME,
   MODIFIER_QUANTITE_EN_STOCK2,

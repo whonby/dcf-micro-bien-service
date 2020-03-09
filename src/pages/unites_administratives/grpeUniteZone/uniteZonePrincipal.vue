@@ -46,7 +46,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Destination</label>
+                  <label class="control-label">Destinataire</label>
                   <div class="controls">
                        <input
                       type="text"
@@ -230,7 +230,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Destination</label>
+                  <label class="control-label">Destinataire</label>
                   <div class="controls">
                        <input
                       type="text"

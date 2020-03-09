@@ -620,6 +620,8 @@ export const getPersonnaliseHistoriqueTransfert = (
 //   state.uniteAdministratives.filter(
 //     marcheNonAttribue => marcheNonAttribue.uatransfert.decision_cf == 3
 //   );
+
+
 export {
   // typeTextes,
   uniteAdministratives,

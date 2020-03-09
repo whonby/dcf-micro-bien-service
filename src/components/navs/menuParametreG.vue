@@ -437,9 +437,30 @@
         <ul class="dropdown-menu">
             <li class="divider"></li>
           <li>
+            <router-link :to="{name: 'natureEntre'}" tag="a">
+              <i class="icon-check"></i>
+             Nature Entrée
+            </router-link>
+          </li>
+            <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'CauseInactivite'}" tag="a">
+              <i class="icon-check"></i>
+             Cause Inactivite
+            </router-link>
+          </li>
+            <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'EtatImmobilisation'}" tag="a">
+              <i class="icon-check"></i>
+            Etat Immobilisation
+            </router-link>
+          </li>
+            <li class="divider"></li>
+          <li>
             <router-link :to="{name: 'listeEquipement'}" tag="a">
               <i class="icon-check"></i>
-             Equipement type
+            Groupe équipement
             </router-link>
           </li>
           <li class="divider"></li>
@@ -465,6 +486,13 @@
             <router-link :to="{name:'StockArticles'}" tag="a">
               <!-- <i class="icon-home"></i> -->
                <i class="icon-user"></i> Gestion des stocks
+             
+            </router-link>
+          </li>
+           <li>
+            <router-link :to="{name:'NormeImmo'}" tag="a">
+              <!-- <i class="icon-home"></i> -->
+               <i class="icon-user"></i> Equipement Type
              
             </router-link>
           </li>
