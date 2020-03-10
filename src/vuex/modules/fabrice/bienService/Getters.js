@@ -64,8 +64,8 @@ export const getterObseravtionBailleurs = state => state.obseravtionBailleurs
 // export const nombremarches = state => state.marches.length;
 
 export const getterMarcheBailleur= state => state.bailleurMarche;
-export const getterMembreCojo=state=>state.membre_cojo
-
+export const getterMembreCojo=state=>state.membre_cojo;
+export const nombreTotalMarche = state => state.marches.length;
 export const getterProceVerballe=state=>state.proce_verballe
 export const personnaliseGetterMarcheBailleur=(state, getters, rootState, rootGetters) =>
     state.bailleurMarche.map(element => {
@@ -84,10 +84,6 @@ export const personnaliseGetterMarcheBailleur=(state, getters, rootState, rootGe
         return element;
     });
 
-export const nombremarches = getters =>
-    getters.marches.filter(
-        marcheNonAttribue => marcheNonAttribue.attribue !== 1
-    ).length;
 
 
 export const nombremarchesExecute = getters =>
@@ -640,3 +636,36 @@ export const getMandatPersonnaliserViseTableauBord = (state, getters, rootState,
         }
         return element;
     })
+export const nombremarches = getters =>
+    getters.marches.filter(
+        marcheNonAttribue => marcheNonAttribue.attribue !== 1
+    ).length;
+
+    export const AfficheMarcheNonAttribue = state =>
+             state.marches.filter(
+               affichenaturedep => affichenaturedep.attribue !== 1
+    ).length;
+    
+
+   export const affichePlanifier = state =>
+            state.marches.filter(
+              affichenaturedep => affichenaturedep.attribue !== 1
+    );
+            
+    
+   export const afficheContratualisation = state =>
+     state.marches.filter(affichenaturedep => affichenaturedep.attribue == 1);
+
+     export const montantContratualisation = (state, getters) =>
+              getters.afficheContratualisation.reduce(
+                (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
+                0
+              );
+              
+     export const montantPlanifier = (state, getters) =>
+              getters.affichePlanifier.reduce(
+                (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
+                0
+    );
+              
+

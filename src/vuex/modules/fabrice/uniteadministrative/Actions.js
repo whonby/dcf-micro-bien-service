@@ -404,6 +404,7 @@ export function supprimerArchivageDocument({ commit }, id) {
 /*fin action archivage note se service */
 
 
+
 export function getAllUniteZone({ commit }) {
   queue.push(() => {
     axios
@@ -910,3 +911,15 @@ export function supprimerFonction({ commit, dispatch }, id) {
       axios.delete("/supprimerFonctionUa/" + id).then(() => dialog.close());
     });
 }
+
+export function importBudget({ commit }, element_modifie,config) {
+    return asyncLoading(axios
+        .post("/importBudge",element_modifie,config))
+        .then(response => {
+         /*   if (response.status == 201) {
+
+            }*/
+            commit("IMPORT_BUDGET", response.data);
+        });
+}
+

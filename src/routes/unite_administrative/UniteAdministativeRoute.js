@@ -10,6 +10,7 @@ import budgetGeneralParUa from "../../pages/unites_administratives/budgetGeneral
 import grpeBudgetSection from "../../pages/unites_administratives/grpeBudgetSection.vue"
 import grpeBudgetProgramme from "../../pages/unites_administratives/grpeBudgetProgramme.vue"
 import historiquebudgetGeneralComponent from "../../pages/unites_administratives/historiquebudgetGeneralComponent.vue";
+
 import uniteZone from "../../pages/unites_administratives/grpeUniteZone/uniteZonePrincipal.vue";
 import transfert from "../../pages/unites_administratives/grpeTransfert/transfertPrincipal.vue";
 import tableaubordTransfert from "../../pages/unites_administratives/tableauBordTransfert.vue";
@@ -19,6 +20,9 @@ import detailHistoTreansfert from "../../pages/unites_administratives/detailHist
 import DirectionPrincipal from "../../pages/unites_administratives/grpeDirection/DirectionPrincipal.vue";
 import ServicePrincipal from "../../pages/unites_administratives/grpeService/ServicePrincipal.vue";
 import FonctionPrincipal from "../../pages/unites_administratives/grpeFonction/FonctionPrincipal.vue";
+
+import Budget from "../../pages/budget/Budget";
+
 const UniteAdministativeRoutes = [
 
   {
@@ -133,6 +137,12 @@ const UniteAdministativeRoutes = [
     path: "/archivage_document",
     name: "archivagedocument",
     component: archivagedocument
+  }
+  ,
+  {
+    path: "/import_budget",
+    name: "ImportBudget",
+    component: Budget
   }
 ];
 

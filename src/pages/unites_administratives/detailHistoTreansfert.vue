@@ -10,6 +10,7 @@
             <h5>Detail Transfert</h5>
           </div>
 
+
           <!--- PREMIERE PARTIE --->
           <div class="table-responsive text-nowrap bordure">
             <table class="table table-bordered table-striped">
