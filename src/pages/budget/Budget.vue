@@ -184,12 +184,12 @@
                    console.log(data)
                    this.getAllBudgetGeneral()
                    this.getAllUniteAdministrative()
-                  this.router.push({ path: 'budgetGenerals' })
+                  this.$router.push({ name: 'budgetGenerals' })
                }).catch(erro=>{
                    console.log(erro)
                    this.getAllBudgetGeneral()
                    this.getAllUniteAdministrative()
-                  this.router.push({ path: 'budgetGenerals' })
+                  this.$router.push({ name: 'budgetGenerals' })
                })
 
             },
