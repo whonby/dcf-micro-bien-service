@@ -27,9 +27,9 @@ const SUPPRIMER_HISTORIQUE_BUDGET_GENERAL = (state, id) => {
 };
 
 
-const IMPORT_BUDGET = (state, nouveau_budgetGeneral) => {
+// const IMPORT_BUDGET = (state, nouveau_budgetGeneral) => {
 
-};
+// };
 
 
 

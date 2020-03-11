@@ -76,7 +76,7 @@
                     }
 
                 ],
-
+                       
                 bgWidth: '0%',
                 bgHeight: '30px',
                 exercice_budget:"",
@@ -181,15 +181,15 @@
                 this.bgWidth=this.i+"%"
 
                this.importBudget(formData,config).then(data=>{
-                //    console.log(erro)
+                    console.log(data)
                    this.getAllBudgetGeneral()
                    this.getAllUniteAdministrative()
-                   router.push({ path: 'budgetGenerals' })
+                  this.$router.push({ name: 'budgetGenerals' })
                }).catch(erro=>{
-                //    console.log(erro)
+                   console.log(erro)
                    this.getAllBudgetGeneral()
                    this.getAllUniteAdministrative()
-                   router.push({ path: 'budgetGenerals' })
+                  this.$router.push({ name: 'budgetGenerals' })
                })
 
             },

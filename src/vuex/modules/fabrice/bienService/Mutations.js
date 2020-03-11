@@ -1,4 +1,5 @@
 // get all prestation
+
 export const GET_ALL_PRESTATION = (state, tableau_prestation) =>{
     state.prestations = tableau_prestation
 }
@@ -39,6 +40,13 @@ export const GET_EXECUTION_MARCHE = (state, tableau_execution_marche) =>{
     state.executionMarches = tableau_execution_marche
 }
 
+
+
+
+
+
+
+
 // add * execution nmarche
 
 export const AJOUTER_EXECUTION_MARCHE = (state, elementAjouter) => {
@@ -62,6 +70,81 @@ export const MODIFIER_EXECUTION_MARCHE = (state, elementModif)=>{
 
 export const DELETE_EXECUTION_MARCHE = (state, id)=> {
     state.executionMarches = state.executionMarches.filter(marche => marche.id !=id)
+}
+
+
+
+
+
+
+
+
+
+// get all cotation
+export const GET_ALL_COTATION = (state, tableau_cotation) =>{
+    state.gettersCotations = tableau_cotation
+}
+
+
+// add * cotation
+
+export const AJOUTER_COTATION = (state, elementAjouter) => {
+    state.gettersCotations.unshift(elementAjouter)
+}
+
+// update all cotation
+export const MODIFIER_COTATION = (state, elementModif)=>{
+    state.gettersCotations = state.gettersCotations.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+
+
+// delete all cotation
+
+export const SUPPRIMER_COTATION = (state, id)=> {
+    state.gettersCotations = state.gettersCotations.filter(marche => marche.id !=id)
+}
+
+
+
+
+
+
+// get all ouverture
+export const GET_ALL_OUVERTURE = (state, tableau_ouverture) =>{
+    state.gettersOuvertures = tableau_ouverture
+}
+
+
+// add * ouverture
+
+export const AJOUTER_OUVERTURE = (state, elementAjouter) => {
+    state.gettersOuvertures.unshift(elementAjouter)
+}
+
+// update all ouverture
+export const MODIFIER_OUVERTURE = (state, elementModif)=>{
+    state.gettersOuvertures = state.gettersOuvertures.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+
+
+// delete all ouverture
+
+export const SUPPRIMER_OUVERTURE = (state, id)=> {
+    state.gettersOuvertures = state.gettersOuvertures.filter(marche => marche.id !=id)
 }
 
 

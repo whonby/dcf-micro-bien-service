@@ -18,8 +18,8 @@
                 <thead>
                   <tr>
                   
-                    <th width="90%">Libelle</th>
-                   
+                    <th width="40%">Code</th>
+                   <th width="50%">Libelle</th>
                     <th>Action</th>
                   </tr>
                 </thead>

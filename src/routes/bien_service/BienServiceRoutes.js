@@ -51,7 +51,11 @@ import DetailEngagement from '../../pages/bien_service/contractualisation/detail
  import DetailMandat from '../../pages/bien_service/contractualisation/detailMandat.vue';
 import Avenant from '../../pages/bien_service/contractualisation/avenant.vue';
 import ModePaiement from '../../pages/bien_service/parametres/ModePaiement.vue';
+
+import DetailMarchePs from '../../pages/bien_service/dossierDetailMarchePs/DetailMarchePs.vue';
+
 import indicateurBienService from '../../pages/bien_service/contractualisation/indicateurBienService.vue';
+
 const BienServiceRoutes = [
     {
         path: "indicateur-Bien-Service",
@@ -181,6 +185,13 @@ component:actesEffet
     path: '/detail-marche/:id',
     name:"DetaillMarche",
     component:DetaillMarche
+},
+
+// detail marche du procedure simplifier
+{
+    path:'/detail-marche-ps/:id',
+    name:"DetailMarchePs",
+    component:DetailMarchePs
 },
 
 {

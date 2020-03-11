@@ -22,7 +22,17 @@
                 </select>
               </div>
             </div>
-
+<div class="control-group">
+            <label class="control-label">Code</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formData.code"
+                class="span"
+                
+              />
+            </div>
+          </div>
            
             <div class="control-group">
              <label class="control-label">Procedure passation</label>
@@ -65,7 +75,17 @@
               </div>
             </div>
 
-            
+            <div class="control-group">
+            <label class="control-label">Code</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editprocedure.code"
+                class="span"
+                
+              />
+            </div>
+          </div>
             
             <div class="control-group">
               <label class="control-label">Procedure passation</label>

@@ -4,6 +4,9 @@
   
                   <tr class="odd gradeX" v-if="article" @dblclick="$emit('modification', article)">
                   
+                   <td
+                    
+                    > {{article.code || 'Non renseigné'}}</td>
                     <td
                     
                     > {{article.libelle || 'Non renseigné'}}</td>

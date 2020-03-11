@@ -136,7 +136,8 @@ export default {
          'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur",
           'getActeEffetFinancier','getEngagement','getMandat',"getVille","getPays","getCommune",
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
-          ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement"])
+          ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", 
+          "getCotation","getOuverture"])
 
 
   },
@@ -181,6 +182,9 @@ export default {
 this.getVille()
 this.getCommune()
 this.getChoixProcedure()
+
+this.getCotation()
+this.getOuverture()
 
 // this.getTypeProcedure()
 
