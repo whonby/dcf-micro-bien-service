@@ -1,4 +1,4 @@
-
+comparerMontantReelEtMandat
 <template>
     <div class="container-fluid">
          <div id="exampleModal" class="modal hide taillModal">
@@ -1108,44 +1108,45 @@ return element;
 
 
 
-sommeMarcheParMandat: function () {
-                return id => {
-                    if (id != "") {
-                      let valInite=0;
-                        return  this.getMandatPersonnaliserVise.filter(normeEquipe => normeEquipe.marche_id == id).reduce(function(total,currentVal){
-                           return total + parseFloat(currentVal.total_general)
-                        },valInite);
-                    }
-                }
-            },
+// sommeMarcheParMandat: function () {
+//                 return id => {
+//                     if (id != "") {
+//                       let valInite=0;
+//                         return  this.getMandatPersonnaliserVise.filter(normeEquipe => normeEquipe.marche_id == id).reduce(function(total,currentVal){
+//                            return total + parseFloat(currentVal.total_general)
+//                         },valInite);
+//                     }
+//                 }
+//             },
 
 
-recupererMontantReel() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.getActeEffetFinancierPersonnaliser45.find(qtreel => qtreel.marche_id == id);
+// recupererMontantReel() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.getActeEffetFinancierPersonnaliser45.find(qtreel => qtreel.marche_id == id);
 
-      if (qtereel) {
-        return qtereel.montant_act;
-      }
-      return 0
-        }
-      };
-    },
-comparerMontantReelEtMandat(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => {
-  if(this.recupererMontantReel(element.id) == this.sommeMarcheParMandat(element.id)){
+//       if (qtereel) {
+//         return qtereel.montant_act;
+//       }
+//       return 0
+//         }
+//       };
+//     },
+    
+// comparerMontantReelEtMandat(){
+// return this.getActeEffetFinancierPersonnaliser45.filter(element => {
+//   if(this.recupererMontantReel(element.id) == this.sommeMarcheParMandat(element.id)){
 
-return element;
+// return element;
 
 
-}
-else{
-  return ""
-}
-})
+// }
+// else{
+//   return ""
+// }
+// })
 
-}
+// }
 
 
 
