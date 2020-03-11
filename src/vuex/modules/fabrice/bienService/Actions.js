@@ -2244,20 +2244,6 @@ export function modifierTypeTextJuridique({ commit }, element_modifie) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // supprimer le type text juridique
 
 export function supprimerTypeTextJuridique({commit}, id) {
@@ -2270,6 +2256,135 @@ export function supprimerTypeTextJuridique({commit}, id) {
  })
 
 }
+
+
+
+///
+
+
+
+export function getCotation({commit}) {
+  queue.push(() => axios.get('/liste_cotation').then((response) => {
+    commit('GET_ALL_COTATION', response.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter les infos 
+
+export function ajouterCotation({commit,dispatch}, elementAjout){
+  asyncLoading(axios.post('/add_cotation', elementAjout)).then(response =>{
+      if(response.status == 201){
+        commit('AJOUTER_COTATION', response.data)
+          dispatch('getCotation')
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier le type text juridique
+
+
+
+export function modifierCotation({ commit }, element_modifie) {
+  asyncLoading(axios.put('/update_cotation/' + element_modifie.id, element_modifie)).then(response => {
+    commit('MODIFIER_COTATION', response.data)
+
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+
+
+// supprimer le type text juridique
+
+export function supprimerCotation({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vous vraiment supprimer ?.")
+ .then(dialog => {
+   commit('SUPPRIMER_COTATION', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+   axios.delete('/suppri_cotation/' + id).then(() => dialog.close() )   
+ })
+
+}
+
+
+
+
+
+
+export function getOuverture({commit}) {
+  queue.push(() => axios.get('/liste_ouverture').then((response) => {
+    commit('GET_ALL_OUVERTURE', response.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter les infos 
+
+export function ajouterOuverture({commit,dispatch}, elementAjout){
+  asyncLoading(axios.post('/add_ouverture', elementAjout)).then(response =>{
+      if(response.status == 201){
+        commit('AJOUTER_OUVERTURE', response.data)
+          dispatch('getOuverture')
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier le type text juridique
+
+
+
+export function modifierOuverture({ commit }, element_modifie) {
+  asyncLoading(axios.put('/update_ouverture/' + element_modifie.id, element_modifie)).then(response => {
+    commit('MODIFIER_OUVERTURE', response.data)
+
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+
+
+// supprimer le type text juridique
+
+export function supprimerOuverture({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vous vraiment supprimer ?.")
+ .then(dialog => {
+   commit('SUPPRIMER_OUVERTURE', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+   axios.delete('/suppri_ouverture/' + id).then(() => dialog.close() )   
+ })
+
+}
+
+
+
+
+
+
+
+
 
 
 ////////////////////

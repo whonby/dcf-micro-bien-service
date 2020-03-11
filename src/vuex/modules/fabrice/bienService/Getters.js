@@ -63,6 +63,8 @@ export const getterAnoDMPBailleur = state => state.stateAnoDmpBailleur
 export const getterObseravtionBailleurs = state => state.obseravtionBailleurs
 // export const nombremarches = state => state.marches.length;
 
+//export const gettersCotations = state =>state.gettersCotations 
+
 export const getterMarcheBailleur= state => state.bailleurMarche;
 export const getterMembreCojo=state=>state.membre_cojo
 
@@ -116,6 +118,52 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
     );
 
 
+
+
+
+
+
+    export const gettersCotationPersonnaliser = (state, getters, rootState, rootGetters) =>
+    state.gettersCotations.map(element => {
+        if (element.entreprise_id !== null) {
+            element = {
+                ...element,
+
+
+                objetEntreprise: rootGetters['gestionMarche/entreprises'].find(
+                    plans => plans.id == element.entreprise_id
+                ),
+
+               
+
+
+            }
+
+        }
+        return element;
+    })
+
+
+
+     export const gettersOuverturePersonnaliser = (state, getters, rootState, rootGetters) =>
+    state.gettersOuvertures.map(element => {
+        if (element.entreprise_id !== null) {
+            element = {
+                ...element,
+
+
+                varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
+                    plans => plans.id == element.entreprise_id
+                ),
+
+               
+
+
+            }
+
+        }
+        return element;
+    })
 
 
 

@@ -66,7 +66,9 @@ documentProcedures:[],
      membre_cojo:[],
     proce_verballe:[],
     avenants:[],
-    modepaiements:[]
+    modepaiements:[],
+    gettersCotations:[],
+    gettersOuvertures:[]
 
 
 

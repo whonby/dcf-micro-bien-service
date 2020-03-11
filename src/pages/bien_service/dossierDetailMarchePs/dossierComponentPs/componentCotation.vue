@@ -1,0 +1,344 @@
+<template>
+    <div>
+       
+                                   <!-- <div class="span" align="right">
+                                       Rechercher: <input type="search" v-model="search" />
+
+                                   </div> -->
+
+                                 <table class="table table-bordered table-striped" >
+                                            <thead>
+                                            <tr>
+                                                <th>Nom</th>
+                                                <th>Contact</th>
+                                                <th>Entreprise</th>
+                                                <th>Fichier</th>
+                                               
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                         <tr class="odd gradeX" v-for="(cotation, index) in gettersCotationPersonnaliser"
+                        :key="cotation.id">
+
+                         <td @click="afficherModalcotation(index)">
+                            {{cotation.nom_person || 'Non renseigné'}}</td>
+
+                         <td @click="afficherModalcotation(index)">
+                            {{cotation.contact || 'Non renseigné'}}</td>
+
+                         <td @click="afficherModalcotation(index)">
+                            {{cotation.objetEntreprise.raison_sociale || 'Non renseigné'}}</td>
+                      
+                        <td>
+                            <a v-if="cotation.fichier_joint" :href="cotation.fichier_joint" class="btn btn-default" target="_blank">
+                                <span class=""><i class="icon-book"></i>
+                                </span>
+                            </a>
+                        </td>
+                        <div class="btn-group">
+                            <button @click.prevent="supprimerCotation(cotation.id)"  class="btn btn-danger " title="Supprimer">
+                                <span class=""><i class="icon-trash"></i></span></button>
+
+                        </div>
+
+                    </tr>
+                                            </tbody>
+                                        </table>
+
+
+                 <div id="addCotation" class="modal hide" aria-hidden="true" style="display: none;">
+
+
+                         <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter la cotation </h3>
+            </div>
+            <div class="modal-body">
+                <div class="widget-box">
+                    <form action="#" method="get" >
+                        
+
+                         <div class="control-group">
+            
+                            <label class="control-label">Nom :</label>
+                           <div class="control-group">
+                       <input type="text" class="span" placeholder="saisir le nom" v-model="formCotation.nom_person">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+
+                            <label class="control-label">Contact :</label>
+
+                            <div class="controls">
+                                <input type="text" class="span" row="" placeholder=""  v-model="formCotation.contact">
+                            </div>
+                        </div>
+
+                         <div class="control-group">
+                        <label class="control-label">Entreprise.</label>
+                        <div class="controls">
+                          <select v-model="formCotation.entreprise_id" class="span">
+                                <option v-for="varText in entreprises" :key="varText.id"
+                                        :value="varText.id">{{varText.raison_sociale}}</option>
+                            </select>
+                        
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+
+                     <label class="control-label">Date de depot de cotation :</label>
+
+                            <div class="controls">
+                                <input type="date" class="span" row="" placeholder=""  v-model="formCotation.date_cotation">
+                            </div>
+                        </div>
+
+                    <div class="control-group">
+              <label class="control-label">Fichier joint:</label>
+              <div class="controls">
+                <input type="file"  @change="OnchangeFichier" />
+              </div>
+            </div>
+                
+                     
+                
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" @click.prevent="ajouterCotationLocal()">Ajouter</a>
+                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+            </div>
+        </div>
+
+
+             <div id="modifiCotation" class="modal hide" aria-hidden="true" style="display: none;">
+
+
+                         <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Modifier la cotation </h3>
+            </div>
+            <div class="modal-body">
+                <div class="widget-box">
+                    <form action="#" method="get" >
+
+                         <div class="control-group">
+            
+                            <label class="control-label">Nom  :</label>
+                           <div class="control-group">
+                       <input type="text" class="span" placeholder="saisir le nom" v-model="editCotation.nom_person">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+
+                            <label class="control-label">Contact :</label>
+
+                            <div class="controls">
+                                <input type="text" class="span" row="" placeholder=""  v-model="editCotation.contact">
+                            </div>
+                        </div>
+
+                         <div class="control-group">
+                        <label class="control-label">Entreprise.</label>
+                        <div class="controls">
+                          <select v-model="editCotation.entreprise_id" class="span">
+                                <option v-for="varText in entreprises" :key="varText.id"
+                                        :value="varText.id">{{varText.raison_sociale}}</option>
+                            </select>
+                        
+                        </div>
+                    </div>
+
+                           <div class="control-group">
+
+                     <label class="control-label">Date de depot de cotation :</label>
+
+                            <div class="controls">
+                                <input type="date" class="span" row="" placeholder=""  v-model="editCotation.date_cotation">
+                            </div>
+                        </div>
+
+
+
+                              <div class="control-group">
+              <label class="control-label">Fichier joint:</label>
+              <div class="controls">
+                <input type="file"   @change="OnchangeFichier" />
+              </div>
+            </div>
+                
+                     
+                
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" @click.prevent="modifierCotationLocal()">Modifier</a>
+                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+            </div>
+        </div>
+
+        <notifications />
+ </div>
+    
+</template>
+
+<script>
+import {mapActions, mapGetters} from 'vuex';
+export default {
+ name:'compte',
+    data(){
+        return{
+
+            formCotation:{
+                    nom_person:"",
+                    contact:"",
+                    fichier_joint:"",
+                    entreprise_id:"",
+                    date_cotation:""
+
+                },
+            
+            editCotation:{
+                 nom_person:"",
+                    contact:"",
+                    entreprise_id:"",
+                    fichier_joint:"",
+                    date_cotation:""
+
+            },
+
+            imagePDF:"",
+            namePDF:"",
+            fichierPDF:"",
+            selectedFile:"",
+
+                search: "",
+
+        }
+    },
+
+    props:["macheid"],
+
+    created(){
+
+    },
+    computed: {
+
+            ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,"gettersCotations"]),
+            // ...mapGetters('personnelUA', ['acteur_depenses']),
+
+
+               ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
+            // ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
+            //     'types_financements']) ,
+                
+    ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
+           
+           
+
+    // filtreCotation(){
+    //     const searchTem = this.search.toLowerCase();
+
+    //     return this.gettersCotationPersonnaliser.filter((item) =>{
+    //         item.nom_person.toLowerCase().includes(searchTem)
+    //     })
+    // }
+
+
+
+        },
+     methods: {
+            ...mapActions("bienService", ['ajouterCotation' , 'modifierCotation','supprimerCotation']),
+            // ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
+            // 
+
+
+             OnchangeFichier(e) {
+                const files = e.target.files;
+                this.selectedFile = event.target.files[0];
+               
+                Array.from(files).forEach(file => this.addFichierPDF(file));
+            },
+            addFichierPDF(file) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = e => {
+                    vm.imagePDF = "pdf.png";
+                    vm.namePDF = file.name;
+                    vm.fichierPDF = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
+          
+          afficherModalcotation(index){
+              this.$('#modifiCotation').modal({
+                     backdrop: 'static',
+                    keyboard: false
+              })
+
+              this.editCotation = this.gettersCotationPersonnaliser[index]
+              
+          },
+           
+         
+          
+           ajouterCotationLocal(){
+                const formData = new FormData();
+                formData.append('fichier_joint', this.selectedFile, this.selectedFile.name);
+                formData.append('nom_person', this.formCotation.nom_person);
+                formData.append('contact', this.formCotation.contact);
+                formData.append('entreprise_id', this.formCotation.entreprise_id);
+                formData.append('date_cotation', this.formCotation.date_cotation);
+                let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }
+
+              
+               this.ajouterCotation(formData, config)
+               this.formCotation ={
+                   nom_person:"",
+                       contact:"",
+                       entreprise_id:"",
+                       date_cotation:""
+                       
+               }
+           },
+
+
+           modifierCotationLocal(){
+
+               const formData = new FormData();
+                formData.append('nom_person', this.editCotation.nom_person);
+                formData.append('contact', this.editCotation.contact);
+                formData.append('entreprise_id', this.editCotation.entreprise_id);
+                formData.append('date_cotation', this.editCotation.date_cotation);
+               
+                console.log(formData)
+                if ( this.selectedFile!==""){
+                    formData.append('fichier_joint', this.selectedFile, this.selectedFile.name);
+                }
+                let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }
+              
+               this.modifierCotation(formData,config)
+               this.$('#modifiCotation').modal('hide');
+           }
+
+     }
+
+    
+}
+</script>
