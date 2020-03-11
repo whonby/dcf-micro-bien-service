@@ -67,7 +67,7 @@ export default {
    
 
       ...mapActions('parametreGenerauxFonctionnelle', 
-    [ 'getStructureFonctionnelle', 'getPlanFonctionnelle']),
+    [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision']),
 
     ...mapActions('parametreGenerauxSourceDeFinancement',['getSourceFinancement',
         'getTypeFinancement'
@@ -158,6 +158,8 @@ export default {
    this.getChapitre()
    this.getStructureFonctionnelle()
    this.getPlanFonctionnelle()
+   this.getStructureDecision()
+   this.getPlanDecision()
    this.getSourceFinancement()
    this.getTypeFinancement()
    this.getStructureBudgetaire()

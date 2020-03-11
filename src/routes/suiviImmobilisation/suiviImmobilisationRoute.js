@@ -26,7 +26,7 @@ import NormeEquipement from "../../pages/suivi_control_budgetaires/suiviImmobili
 import stockageArticle from "../../pages/suivi_control_budgetaires/suiviImmobilisation/stockageEquipement.vue"
 import DetailBesoinImmo from '../../pages/suivi_control_budgetaires/suiviImmobilisation/DetailBesoinImmo.vue';
 import StockArticles from '../../pages/suivi_control_budgetaires/suiviImmobilisation/StockArticles.vue'
-import demandeEquipement from '../../pages/suivi_control_budgetaires/suiviImmobilisation/demandeEquipement.vue'
+import demandeEquipement from '../../pages/suivi_control_budgetaires/suiviImmobilisation/demandeImmo.vue'
 import ficheAnalyse from '../../pages/suivi_control_budgetaires/suiviImmobilisation/resultatFinal.vue'
 import listeBesoinRealise from '../../pages/suivi_control_budgetaires/suiviImmobilisation/listeBesoinRealise.vue'
 import historiqueDemande from '../../pages/suivi_control_budgetaires/suiviImmobilisation/historiqueDemande.vue'

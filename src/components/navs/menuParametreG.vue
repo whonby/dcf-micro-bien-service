@@ -119,6 +119,18 @@
           </li>
           <li class="divider"></li>
           <li>
+            <router-link :to="{name: 'StructureAtivite'}" tag="a">
+              <i class="icon-key"></i> Structure programmatique
+            </router-link>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'PlanActivite'}" tag="a">
+              <i class="icon-key"></i> Plan programmatique
+            </router-link>
+          </li>
+          <li class="divider"></li>
+          <li>
             <router-link :to="{name:'StructureAdministrative'}" tag="a">
               <i class="icon-th"></i> Structure administrative
             </router-link>
@@ -157,15 +169,16 @@
             </router-link>
           </li>
            <li class="divider"></li>
+          
           <li>
-            <router-link :to="{name: 'StructureAtivite'}" tag="a">
-              <i class="icon-key"></i> Structure programmatique
+            <router-link :to="{name: 'structureDecision'}" tag="a">
+              <i class="icon-key"></i> Structures Décisionnelles
             </router-link>
           </li>
           <li class="divider"></li>
           <li>
-            <router-link :to="{name: 'PlanActivite'}" tag="a">
-              <i class="icon-key"></i> Plan programmatique
+            <router-link :to="{name: 'planDecision'}" tag="a">
+              <i class="icon-key"></i> Plan Décisionnelles
             </router-link>
           </li>
         </ul>

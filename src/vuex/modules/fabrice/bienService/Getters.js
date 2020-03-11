@@ -1,3 +1,4 @@
+printMarcheNonAttribue
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays
@@ -214,13 +215,16 @@ export const montantMarche = (state, getters) =>
 
 export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, rootGetters) =>
     state.acteEffetFinanciers.map(element => {
-        if (element.entreprise_id !== null) {
+        if (element.entreprise_id !== null && element.marche_id !== null) {
             element = {
                 ...element,
 
 
                 varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
                     plans => plans.id == element.entreprise_id
+                ),
+                AfficheMarche: rootGetters['bienService/marches'].find(
+                    plans => plans.id == element.marche_id
                 ),
 
                
@@ -669,3 +673,49 @@ export const nombremarches = getters =>
     );
               
 
+
+export const getActeEffetFinancierPersonnaliser45 = (state, getters, rootState, rootGetters) =>
+    state.acteEffetFinanciers.map(element => {
+        if (element.entreprise_id !== null && element.marche_id !== null) {
+            element = {
+                ...element,
+
+
+                varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
+                    plans => plans.id == element.entreprise_id
+                ),
+                AfficheMarche: rootGetters['bienService/afficheContratualisation'].find(
+                    plans => plans.id == element.marche_id
+                ),
+
+               
+
+
+            }
+
+        }
+        return element;
+    })
+
+
+
+export const gettersTest = (state, getters, rootState, rootGetters) =>
+    state.marches.map(element => {
+        if (element.id !== null) {
+            element = {
+                ...element,
+
+
+              
+                AfficheMarche: rootGetters['bienService/acteEffetFinanciers'].find(
+                    plans => plans.marche_id == element.id
+                ),
+
+
+
+
+            }
+
+        }
+        return element;
+    })
