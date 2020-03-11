@@ -2292,7 +2292,7 @@ export function ajouterCotation({commit,dispatch}, elementAjout){
 
 
 export function modifierCotation({ commit }, element_modifie) {
-  asyncLoading(axios.put('/update_cotation/' + element_modifie.id, element_modifie)).then(response => {
+  asyncLoading(axios.put('/update_cotation/'+ element_modifie.id, element_modifie)).then(response => {
     commit('MODIFIER_COTATION', response.data)
 
 
