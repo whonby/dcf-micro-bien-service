@@ -5,7 +5,7 @@ var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
 
 // action for print all to prestation
-
+ajouterMembreCojo
 // export  function  getPrestation({commit}) {
 //     queue.push(() => axios.get('/url').then((response) => {
 //       commit('GET_ALL_PRESTATION', response.data)
@@ -1889,7 +1889,7 @@ export function ajouterOffreTechnique({commit}, elementAjout){
 
 
 export function modifierOffreTechnique({commit}, element_modifie) {
-    asyncLoading( axios.put('/offre_techniques/',element_modifie)).then(response => {
+    asyncLoading( axios.put('/offre_techniques',element_modifie)).then(response => {
         commit('MODIFIER_OFFRE_TECHNIQUE', response.data)
 
 
@@ -1948,7 +1948,7 @@ export function ajouterOffreFinancier({commit}, elementAjout){
 
 
 export function modifierOffreFinancier({commit}, element_modifie) {
-    asyncLoading( axios.put('/offre_financieres/',element_modifie)).then(response => {
+    asyncLoading( axios.put('/offre_financieres',element_modifie)).then(response => {
         commit('MODIFIER_OFFRE_FINANCIER', response.data)
 
 
@@ -3690,11 +3690,12 @@ export  function  getMembreCojo({commit}) {
     }).catch(error => console.log(error)))
 }
 
-export function ajouterMembreCojo({commit}, formData){
+export function ajouterMembreCojo({commit, dispatch}, formData){
     asyncLoading(axios.post('/membre_cojo',formData)).then(response =>{
         if(response.status == 201){
             console.log(response.data)
             commit('AJOUTER_MEMBRE_COJO', response.data)
+            dispatch('getMembreCojo')
             this.$app.$notify({
                 title: 'success ',
                 text: 'Enregistrement effectué !',

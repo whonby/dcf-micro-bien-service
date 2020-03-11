@@ -41,11 +41,7 @@
                             </tr>
                             </tbody>
                         </table>
-
                         
-
-                        <bailleur-ajouter :macheid="detail_marche.exo_id"></bailleur-ajouter>
-
                     </div>
                 </div>
             </div>
@@ -68,7 +64,6 @@
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
-
 
                             <div id="tab01" class="tab-pane active">
                                 <div class="span4"></div>
@@ -221,7 +216,7 @@
 
                                         <!-- <td @dblclick="afficherModalModifierActeDepense(index)">
                                             {{appelOffre.nom_bailleurs || 'Non renseigné'}}</td> -->
-                                        <td @dblclick="afficherModalModifierActeDepense(index)">
+                                        <!-- <td @dblclick="afficherModalModifierActeDepense(index)"> -->
 
                                         <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)">
 
@@ -383,7 +378,8 @@
 
                          <div class="btn-group">
                              <button   class="btn  " title="Detail" @click.prevent="isDetailDossierCandi(appelOffre.id)">
-                                 <span class=""><i class="icon-folder-open" ></i></span></button>
+                                 <span class=""><i class="icon-folder-open" ></i></span>
+                             </button>
                              <a href="#offreT" data-toggle="modal" @click.prevent="modaleOffreTechnique(appelOffre.id)"  class="btn" title="Offre technique">
                                  <span class=""><i class="icon-wrench"></i></span></a>
                              <a href="#offreF" data-toggle="modal" @click.prevent="modaleOffreFinnanciere(appelOffre.id)"  class="btn  " title="Offre financière">
@@ -775,18 +771,18 @@
                                 </thead>
 
                                 <tr>
-                                    <td>{{detail_offre_technique.prog_mobilisation || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_technique.capacite_financiere || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_technique.caa_moyen_ac_entre || "Non renseigne"}}</td>
-                                    <!-- <td>{{detail_offre_technique.capacite_financement || "Non renseigne"}}</td> -->
-                                    <td>{{detail_offre_technique.capacite_tech_exp || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_technique.meth_real_travau || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_technique.accord_groupe || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_technique.pouv_habil_signataire || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_technique.cautionnement_prov || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_technique.reg_com || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).prog_mobilisation || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).capacite_financiere || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).caa_moyen_ac_entre || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).capacite_tech_exp || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).meth_real_travau || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).accord_groupe || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).pouv_habil_signataire || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).cautionnement_prov || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).reg_com || "Non renseigne"}}</td>
                                     <td><button @click.prevent="supprimerOffreTechnique(detail_offre_technique.id)"  class="btn btn-danger " title="Supprimer">
-                                        <span class=""><i class="icon-trash"></i></span></button></td>
+                                        <span class=""><i class="icon-trash"></i></span></button>
+                                    </td>
                                 </tr>
 
 
@@ -803,7 +799,6 @@
                                 <thead>
                                 <tr>
                                     <th>Designation</th>
-                                  
                                     <th>Quantite</th>
                                     <th>Prix unitaire</th>
                                     <th>Montant total ht </th>
@@ -812,13 +807,13 @@
                                 </tr>
                                 </thead>
 
-                                <tr>
-                                    <td>{{detail_offre_finnancier.designation || "Non renseigne"}}</td>
+                                <tr v-if="listeOffreFinancier(detail_offre_finnancier.id)">
+                                    <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(detail_offre_finnancier.id).designation || "Non renseigne"}}</td>
                                     <!-- <td>{{detail_offre_finnancier.unite || "Non renseigne"}}</td> -->
-                                    <td>{{detail_offre_finnancier.quantite || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_finnancier.prix_unitaire || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_finnancier.montant_total_ht || "Non renseigne"}}</td>
-                                    <td>{{detail_offre_finnancier.montant_total_ttc || "Non renseigne"}}</td>
+                                    <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(detail_offre_finnancier.id).quantite || "Non renseigne"}}</td>
+                                    <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(detail_offre_finnancier.id).prix_unitaire || "Non renseigne"}}</td>
+                                    <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(detail_offre_finnancier.id).montant_total_ht || "Non renseigne"}}</td>
+                                    <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(detail_offre_finnancier.id).montant_total_ttc || "Non renseigne"}}</td>
                                     <td><button @click.prevent="supprimerOffreFinancier(detail_offre_finnancier.id)"  class="btn btn-danger " title="Supprimer">
                                         <span class=""><i class="icon-trash"></i></span></button></td>
                                 </tr>
@@ -1137,36 +1132,18 @@
                </div>
 
               <!-- fin de formulaire de modification de dossier de candidat --->
-
-
-
-
-
-
      <!--- debut ajout fournisseur que information n'exist pas dans la base  --->
-
-
-
               <!--  fin ajout founisseur --->
-
-
-
-
-
             <div id="tab21" class="tab-pane">
 <div align="right">
                 <div class="widget-content">
-
                     <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-warning">Ajouter</a>
-
                 </div>
-
 </div>
        <h4> Liste des lettres invitations</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
-
                         <th>Date lettre</th>
                         <th>Ref lettre </th>
                         <th>Destinataire</th>
@@ -1185,7 +1162,6 @@
                             {{appelOffre.ref_lettre || 'Non renseigné'}}</td>
                         <td @click="afficheBouttonTechFinInvitation(appelOffre.id)">
                             {{appelOffre.destination || 'Non renseigné'}}</td>
-
                          <td @click="afficheBouttonTechFinInvitation(appelOffre.id)">
                             {{appelOffre.objet_lettre || 'Non renseigné'}}</td>
                         <td>
@@ -1201,26 +1177,20 @@
                             <button @click.prevent="supprimerLettreInvitation(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
                         </div>
-
                     </tr>
                     </tbody>
                 </table>
             </div>
-
             <div id="tab31" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
-
                         <a href="#ajouterMantater" data-toggle="modal" class="btn btn-warning">Ajouter</a>
-
                     </div>
-
                 </div>
                 <h4> liste des mandates</h4>
                 <table class="table table-bordered table-striped" v-if="marcheid">
                     <thead>
                     <tr>
-
                         <th>Date </th>
                         <th>Matricule </th>
                         <th>Nom</th>
@@ -1242,23 +1212,16 @@
                         <div class="btn-group">
                             <button @click.prevent="supprimerMandater(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
-
                         </div>
-
                     </tr>
                     </tbody>
                 </table>
-
               </div>
-
               <div id="tab22" class="tab-pane">
                   <div align="right">
                       <div class="widget-content">
-
                           <a href="#ajouterCojo" data-toggle="modal" class="btn btn-warning" >Ajouter </a>
-
                       </div>
-
                   </div>
                   <h4> Infomation sur la cojo</h4>
                   <table class="table table-bordered table-striped" v-if="marcheid">
@@ -1521,18 +1484,9 @@
 
 
 <!--- debut analyse dmp  --->
-
-
-
-
-
-
-
-
 <!-- fin analyse dmp  -->
 
 <!--- debut analyse dmp   --->
-
 <!--  fin modification analyse dmp ---->
 
 
@@ -1944,16 +1898,12 @@
 
 
 <!-- debut ajout acte effet financier --->
-
-
-
 <div id="ajouterActeEffetFinancier" class="modal hide grdirModalActeEffet">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter acte effet financier</h3>
             </div>
             <div class="modal-body">
-
                     <table class="table table-bordered table-striped">
                         <tr>
                             <td>
@@ -1974,17 +1924,12 @@
                         <div class="controls" >
                             <input :value="selectionAttributionMarche(marcheid).dossier_candidature.nom_cand" readonly/>
                         </div>
-
                     </div>
                                         <div class="control-group" v-else>
                                             <code>{{message_setion_vainqueur}}</code>
-
                                         </div>
                             </td>
-
                             <td>
-
-
                         <div class="control-group">
                         <label class="control-label">Text juridique </label>
                         <div class="controls">
@@ -1995,7 +1940,6 @@
                         </div>
                     </div>
                             </td>
-
                               <td>
                         <div class="control-group">
                         <label class="control-label">Ano bailleur dmp.</label>
@@ -2021,10 +1965,7 @@
                             />
                         </div>
                     </div>
-
                             </td>
-
-
                                            <td>
                     <div class="control-group">
                         <label class="control-label"> date d'approbation</label>
@@ -2037,9 +1978,7 @@
                             />
                         </div>
                     </div>
-
                             </td>
-
                                   <td>
                     <div class="control-group">
                         <label class="control-label">Numero du marche/contract</label>
@@ -2052,10 +1991,8 @@
                             />
                         </div>
                     </div>
-
                             </td>
                              <td>
-
                     <div class="control-group">
                         <label class="control-label">Code acte </label>
                         <div class="controls">
@@ -2068,7 +2005,6 @@
                         </div>
                     </div>
                             </td>
-
                            </tr>
                         <tr>
                    
@@ -2113,7 +2049,6 @@
                     </div>
                             </td>
                             <td>
-
                      <div class="control-group">
                         <label class="control-label">Montant acte/réel du marché</label>
                         <div class="controls">
@@ -2125,7 +2060,6 @@
                     </div>
                             </td>
                             <td>
-
                             <div class="control-group">
                         <label class="control-label" >Date de signature attributaire</label>
                         <div class="controls">
@@ -2138,7 +2072,6 @@
                             </td>
                         </tr>
                         <tr>
-
                     
                      <td>
                      <div class="control-group">
@@ -2151,8 +2084,6 @@
                         </div>
                     </div>
                             </td>
-
-
                                          <td>
                      <div class="control-group">
                         <label class="control-label" title=" ">Date fin exécution</label>
@@ -2166,7 +2097,6 @@
                             </td>
                         
                         
-
                                            <td>
                      <div class="control-group">
                         <label class="control-label" title=" ">Durée d'exécution(jrs)</label>
@@ -2178,8 +2108,6 @@
                         </div>
                     </div>
                             </td>
-
-
                                              <td>
                      <div class="control-group">
                         <label class="control-label" title=" ">Date de reception definitive</label>
@@ -2192,11 +2120,8 @@
                     </div>
                             </td>
                         </tr>
-
                     </table>  
-
                    
-
                 
             </div>
             <div class="modal-footer">
@@ -2217,16 +2142,12 @@
 
 
 <!-- debut modifier acte effet financier --->
-
-
-
 <div id="modifierActeEF" class="modal hide grdirModalActeEffet">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Modifier acte effet financier</h3>
             </div>
             <div class="modal-body">
-
                 <table class="table table-bordered table-striped">
                     <tr>
                         <td>
@@ -2237,27 +2158,20 @@
                                         <option v-for="varText in typeActeEffetFinanciers" :key="varText.id"
                                                 :value="varText.id">{{varText.libelle}}</option>
                                     </select>
-
                                 </div>
                             </div>
                         </td>
-
-
                         <td>
                             <div class="control-group" v-if="selectionAttributionMarche(marcheid)">
                                 <label class="control-label">Entreprise vainqueur </label>
                                 <div class="controls" >
                                     <input :value="selectionAttributionMarche(marcheid).dossier_candidature.nom_cand" readonly/>
                                 </div>
-
                             </div>
                             <div class="control-group" v-else>
                                 <code>{{message_setion_vainqueur}}</code>
-
                             </div>
                         </td>
-
-
                         <td>
                             <div class="control-group">
                                 <label class="control-label">Text juridique </label>
@@ -2269,18 +2183,14 @@
                                 </div>
                             </div>
                         </td>
-
                         <td>
                             <div class="control-group">
                                 <label class="control-label">Ano bailleur dmp.</label>
                                 <div class="controls">
                                     <input :value="info_avis_bailleur" readonly>
-
                                 </div>
                             </div>
                         </td>
-
-
                     </tr>
                     <tr>
                         <td>
@@ -2295,10 +2205,7 @@
                                     />
                                 </div>
                             </div>
-
                         </td>
-
-
                         <td>
                             <div class="control-group">
                                 <label class="control-label"> date d'approbation</label>
@@ -2311,12 +2218,8 @@
                                     />
                                 </div>
                             </div>
-
                         </td>
-
-
                         <td>
-
                             <div class="control-group">
                                 <label class="control-label">Code acte </label>
                                 <div class="controls">
@@ -2329,23 +2232,16 @@
                                 </div>
                             </div>
                         </td>
-
                     </tr>
                     <tr>
-
-
                         <td colspan="3" width="250">
                             <div class="control-group">
                                 <label class="control-label">Libellé acte:</label>
                                 <div class="controls">
                                     <textarea   v-model="editActeEffetFinancier.libelle_act"   class="textarea_editor span12" rows="3" placeholder="Entrer le libellé ..."></textarea>
                                 </div>
-
                             </div>
                         </td>
-
-
-
                     </tr>
                     <tr>
                         <td>
@@ -2371,7 +2267,6 @@
                             </div>
                         </td>
                         <td>
-
                             <div class="control-group">
                                 <label class="control-label">Montant acte/réel du marché</label>
                                 <div class="controls">
@@ -2383,7 +2278,6 @@
                             </div>
                         </td>
                         <td>
-
                             <div class="control-group">
                                 <label class="control-label" >Date de signature attributaire</label>
                                 <div class="controls">
@@ -2396,47 +2290,38 @@
                         </td>
                     </tr>
                     <tr>
-
-
                         <td>
                             <div class="control-group">
                                 <label class="control-label">Date ordre de service demarrage</label>
                                 <div class="controls">
-                                    <input type="date" v-model="formEffetFinancier.date_odre_service"
+                                    <input type="date" v-model="editActeEffetFinancier.date_odre_service"
                                            class="span"
                                            placeholder=""
                                     />
                                 </div>
                             </div>
                         </td>
-
-
                         <td>
                             <div class="control-group">
                                 <label class="control-label" title=" ">Date fin exécution</label>
                                 <div class="controls">
-                                    <input type="date" :min="formEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValue" v-model="formEffetFinancier.date_fin_exe"
+                                    <input type="date" :min="editActeEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValueMod" v-model="editActeEffetFinancier.date_fin_exe"
                                            class="span"
                                            placeholder=""
                                     />
                                 </div>
                             </div>
                         </td>
-
-
-
                         <td>
                             <div class="control-group">
                                 <label class="control-label" title=" ">Durée d'exécution(jrs)</label>
                                 <div class="controls">
-                                    <input type="text" readonly :value="nombreDejourCalcule"
+                                    <input type="text" readonly :value="nombreDejourCalculeModification"
                                            class="span"
                                     />
                                 </div>
                             </div>
                         </td>
-
-
                         <td>
                             <div class="control-group">
                                 <label class="control-label" title=" ">Date de reception definitive</label>
@@ -2449,25 +2334,18 @@
                             </div>
                         </td>
                     </tr>
-
                 </table>
-
-
               
-
-
             </div>
              <div class="modal-footer">
                 <a
                         @click.prevent="modifierModalActeEffetFinancierLocal"
                         class="btn btn-primary"
                         href="#"
-
                 >Modifier</a>
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a>
             </div>
         </div>
-
 <!--- fin modifier acte effet financier  -->
 
 
@@ -2535,32 +2413,15 @@
     </div>
 
 <!--  fin modification ano --->
-
-
           </div>
         </div>
-
-
-
                             </ul>
                       
                              
-
-
-
-
                             </div>
-
-
                       <!-- debut item de facture  --->
-
                                <div id="tab4" class="tab-pane">
-
                             </div>
-
-
-
-
                         </div>
                         <div class="modal-footer">
         
@@ -2569,11 +2430,9 @@
       </div>
   
                     </div>
-
                 </div>
             </div>
         </div>
-
 <!-- Ajouter appel offres --->
         <div id="myAlert" class="modal hide tlg" aria-hidden="true" style="display: none;">
             <div class="modal-header">
@@ -2594,7 +2453,6 @@
                             </div>
                         </div>
                             </td>
-
                             <td colspan="2" width="250">
                         <div class="control-group">
                             <label class="control-label">Reference  offre <code>*</code> :</label>
@@ -2604,7 +2462,6 @@
                         </div>
                             </td>
                             </tr>
-
                             <tr>
                             <td colspan="3" width="">
                         <div class="control-group">
@@ -2616,7 +2473,6 @@
                         </div>
                             </td>
                             </tr>
-
                             <tr>
                                 <td>
                         <div class="control-group">
@@ -2627,7 +2483,6 @@
                         </div>
                                 </td>
                                 <td>
-
                         <div class="control-group">
                             <div class="controls">
                                 <label>Date limite <code>*</code></label>
@@ -2636,7 +2491,6 @@
                         </div>
                         </td>
                         <td >
-
                         <div class="control-group">
                             <label class="control-label">Imputation :</label>
                             <div class="controls">
@@ -2652,16 +2506,13 @@
             <div class="modal-footer">  <a @click.prevent="ajouter" class="btn btn-primary"
                                            href="#">Valider</a> <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
-
         <!-- Fin ajouter appel offres --->
-
         <!--<fab :actions="fabActions" @cache="afficherModalAjouterActeDepense" main-icon="apps" bg-color="green"></fab>-->
         <notifications  />
         <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
         <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterActeDepense()">Open</button>
 
         <!-- Modification appel offres --->
-
         <div id="modificationModal" class="modal hide taillemodal">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
@@ -2671,9 +2522,7 @@
                 <div class="widget-box">
                     <form action="#" method="get">
                  <table class="table table-bordered table-striped" > 
-
                     <tr>
-
                        <td>
                         <div class="control-group">
                             <label class="control-label">Type de procedure  :</label>
@@ -2682,7 +2531,6 @@
                             </div>
                         </div>
                             </td>
-
                                 <td colspan="2" width="250">
                         <div class="control-group">
                             <label class="control-label">Reference  offre  :</label>
@@ -2692,8 +2540,6 @@
                         </div>
                             </td>
                     </tr>
-
-
                                    <tr>
                             <td colspan="3" width="">
                         <div class="control-group">
@@ -2705,7 +2551,6 @@
                         </div>
                             </td>
                             </tr>
-
                             <tr>
                              <td>
                         <div class="control-group">
@@ -2715,13 +2560,8 @@
                             </div>
                         </div>
                                 </td>
-
-
-                                 <td colspan="">
-
+                                
                                  <td >
-
-
                         <div class="control-group">
                             <div class="controls">
                                 <label>Date limite </label>
@@ -2729,7 +2569,6 @@
                             </div>
                         </div>
                         </td>
-
                          <td>
                         
                         <div class="control-group">
@@ -2739,20 +2578,13 @@
                             </div>
                         </div>
          </td>
-
                                
-
                             </tr>
-
                             
 <!-- 
 <tr>
-
-
           <td>
-
       
-
               
                         <div class="control-group">
                              <label>Financement</label>
@@ -2768,16 +2600,11 @@
                                 <input type="text" class="span" placeholder="Nom bailleurs" v-model="edite_appel_offre.nom_bailleurs">
                             </div>
                         </div>
-
          </td> 
          
         
-
-
          
          
-
-
                             </tr> -->
 
 
@@ -2962,7 +2789,7 @@
                 <div class="widget-box">
                     <table class="table table-bordered table-striped">
                         <tr>
-                            <td>
+                       <!--     <td>
  <div class="control-group">
                             <label>Liste lot</label>
                             <div class="controls">
@@ -2972,6 +2799,17 @@
                                 </select>
                             </div>
                         </div>
+                            </td>-->
+                            <td>
+                                <div class="control-group">
+                                    <label>Offre</label>
+                                    <div class="controls">
+                                        <select v-model="formLot.appel_offre_id" class="span" disabled>
+                                            <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
+                                                    :value="varText.id">{{varText.ref_appel}}</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </td>
                             <td>
                                   <div class="control-group">
@@ -3090,13 +2928,23 @@
         <div id="offreF" class="modal hide modaloffreFin">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter l'offre financière</h3>
+                <h3>Ajouter l'offre financière du candidat <b>{{edite_offre_financiere.nom_cand}}</b></h3>
             </div>
             <div class="modal-body">
                    <table class="table table-bordered table-striped">
-         
             <tr>
-              <td>
+                <td>
+                    <div class="control-group">
+                        <label>Offre</label>
+                        <div class="controls">
+                            <select v-model="formLot.appel_offre_id" class="span" disabled>
+                                <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
+                                        :value="varText.id">{{varText.ref_appel}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </td>
+            <!--  <td>
                 <div class="control-group">
               
                   <label>Liste lot</label>
@@ -3107,37 +2955,37 @@
                                     </select>
                                 </div>
                 </div>
-              </td>
-              <td colspan="2">
+              </td>-->
+             <!-- <td colspan="2">
                 <div class="control-group">
                     <label class="control-label">Designation :</label>
                             <div class="controls">
                                 <input type="text"  readonly   class="span6" placeholder="Designation" :value="libelleLot">
                             </div>
                 </div>
-              </td>
-               
+              </td>-->
+                <td>
+
+                    <div class="control-group">
+                        <label class="control-label">Quantite :</label>
+                        <div class="controls">
+                            <input type="number" class="span" placeholder="quantite" v-model="formOffreFinanciere.quantite">
+                        </div>
+                    </div>
+
+                </td>
+                <td>
+
+                    <div class="control-group">
+                        <label class="control-label">Prix unitaire :</label>
+                        <div class="controls">
+                            <input type="number" class="span" placeholder="prix unitaire" v-model="formOffreFinanciere.prix_unitaire">
+                        </div>
+                    </div>
+                </td>
             </tr>
             <tr>
-                <td>
-              
-              <div class="control-group">
-                            <label class="control-label">Quantite :</label>
-                            <div class="controls">
-                                <input type="number" class="span" placeholder="quantite" v-model="formOffreFinanciere.quantite">
-                            </div>
-                        </div>
-              
-              </td>
-              <td>
-              
-                <div class="control-group">
-                            <label class="control-label">Prix unitaire :</label>
-                            <div class="controls">
-                                <input type="number" class="span" placeholder="prix unitaire" v-model="formOffreFinanciere.prix_unitaire">
-                            </div>
-                        </div>
-              </td>
+
               <td>
                   <div class="control-group">
                             <label class="control-label">Taux</label>
@@ -3153,26 +3001,26 @@
                             </div>
                         </div>
               </td>
-              
-              
+
+                <td>
+                    <div class="control-group">
+                        <label class="control-label">Tva</label>
+                        <div class="controls">
+                            <input type="number" readonly :value="montantTva" class="span" />
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label">Montant total ht :</label>
+                        <div class="controls">
+                            <input type="text"   readonly  class="span" placeholder="Montant total HT" :value="montantHT">
+                        </div>
+                    </div>
+                </td>
             </tr>
             <tr>
-              <td>
-                  <div class="control-group">
-                  <label class="control-label">Tva</label>
-                  <div class="controls">
-                    <input type="number" readonly :value="montantTva" class="span" />
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                            <label class="control-label">Montant total ht :</label>
-                            <div class="controls">
-                                <input type="text"   readonly  class="span" placeholder="Montant total HT" :value="montantHT">
-                            </div>
-                        </div>
-              </td>
+
               <td>
                 <div class="control-group">
                             <label class="control-label">Montant totat ttc :</label>
@@ -3192,7 +3040,271 @@
                 <!--<a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>-->
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
-        <!--Fin dossier candidature ajouterMantater-->
+
+
+       <div id="modificationOffre" class="modal hide modaloffreFin">
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button">×</button>
+            <h3>Modification offre financier</h3>
+        </div>
+        <div class="modal-body">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <td>
+                        <div class="control-group">
+                            <label>Offre</label>
+                            <div class="controls">
+                                <select v-model="formLot.appel_offre_id" class="span" disabled>
+                                    <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
+                                            :value="varText.id">{{varText.ref_appel}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </td>
+                    <!--  <td>
+                        <div class="control-group">
+                          <label>Liste lot</label>
+                                        <div class="controls">
+                                            <select v-model="formOffreFinanciere.numero_lot" class="span">
+                                                <option v-for="varText in listeLots(marcheid)" :key="varText.numero_lot"
+                                                        :value="varText.id">{{varText.numero_lot}}</option>
+                                            </select>
+                                        </div>
+                        </div>
+                      </td>-->
+                    <!-- <td colspan="2">
+                       <div class="control-group">
+                           <label class="control-label">Designation :</label>
+                                   <div class="controls">
+                                       <input type="text"  readonly   class="span6" placeholder="Designation" :value="libelleLot">
+                                   </div>
+                       </div>
+                     </td>-->
+                    <td>
+
+                        <div class="control-group">
+                            <label class="control-label">Quantite :</label>
+                            <div class="controls">
+                                <input type="number" class="span" placeholder="quantite" v-model="modification_offre_finnancier_recupere.quantite">
+                            </div>
+                        </div>
+
+                    </td>
+                    <td>
+
+                        <div class="control-group">
+                            <label class="control-label">Prix unitaire :</label>
+                            <div class="controls">
+                                <input type="number" class="span" placeholder="prix unitaire" v-model="modification_offre_finnancier_recupere.prix_unitaire">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        <div class="control-group">
+                            <label class="control-label">Taux</label>
+                            <div class="controls">
+                                <input type="text" readonly  class="span" :value="affcherTauxEnCours">
+                                <input
+                                        type="hidden"
+                                        :value="tauxArrondit"
+
+                                        class="span3"
+
+                                />
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="control-group">
+                            <label class="control-label">Tva</label>
+                            <div class="controls">
+                                <input type="number" readonly :value="montantTvaEdite" class="span" />
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="control-group">
+                            <label class="control-label">Montant total ht :</label>
+                            <div class="controls">
+                                <input type="text"   readonly  class="span" placeholder="Montant total HT" :value="montantHTEdite">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        <div class="control-group">
+                            <label class="control-label">Montant totat ttc :</label>
+                            <div class="controls">
+                                <input type="text"  readonly  class="span" placeholder="Montant total ttc" :value="montantHTtEdite">
+                            </div>
+                        </div>
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+        <div class="modal-footer">
+            <button @click.prevent="modificationOffreFin()" class="btn btn-primary">Modification</button>
+            <!--<a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>-->
+            <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+    </div>
+
+    <div id="modificationOffreT" class="modal hide tailleModalOffre2">
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button">×</button>
+            <h3>Modification d'offre technique</h3>
+        </div>
+        <div class="modal-body">
+            <div class="widget-box">
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <!--     <td>
+  <div class="control-group">
+                             <label>Liste lot</label>
+                             <div class="controls">
+                                 <select v-model="formOffreTechnique.numero_lot" class="span">
+                                     <option v-for="varText in listeLots(marcheid)" :key="varText.numero_lot"
+                                             :value="varText.id">{{varText.numero_lot}}-{{varText.libelle_lot}}</option>
+                                 </select>
+                             </div>
+                         </div>
+                             </td>-->
+                        <td>
+                            <div class="control-group">
+                                <label>Offre</label>
+                                <div class="controls">
+                                    <select v-model="formLot.appel_offre_id" class="span" disabled>
+                                        <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
+                                                :value="varText.id">{{varText.ref_appel}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Accord groupe :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Accord groupe" v-model="edit_offre_technique_recupere.accord_groupe">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Cautionnement prov :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Cautionnement prov" v-model="edit_offre_technique_recupere.cautionnement_prov">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Attest banc:</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Pouv habil" v-model="edit_offre_technique_recupere.attest_banc">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Formil propo tech :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Piece Admin" v-model="edit_offre_technique_recupere.formil_propo_tech">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Fiche rsgnt nombre groupe :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Attest banc" v-model="edit_offre_technique_recupere.fiche_rsgnt_mbre_groupe">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+
+                            <div class="control-group">
+                                <label class="control-label">Atcdent marche non exe :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Org travau" v-model="edit_offre_technique_recupere.atcdent_marche_non_exe">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Org travau site :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Meth real travau" v-model="edit_offre_technique_recupere.org_travau_site">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Meth real travau:</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Prog mobilisation" v-model="edit_offre_technique_recupere.meth_real_travau">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Prog mobilisation :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Prog mobilisation" v-model="edit_offre_technique_recupere.prog_mobilisation">
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Capacite financiere :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Capacite financiere" v-model="edit_offre_technique_recupere.capacite_financiere">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">CAA moyen ac entre :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Caa moyen ac" v-model="edit_offre_technique_recupere.caa_moyen_ac_entre">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Capacite techn expe :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Capacite techn exp" v-model="edit_offre_technique_recupere.capacite_techn_exp">
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button @click.prevent="editeOffreT" class="btn btn-primary">Modification</button>
+            <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+    </div>
+
+
+    <!--Fin dossier candidature ajouterMantater-->
 
            <!--Lettre d'invitation-->
         <div id="ajouterLettreInvitation" class="modal hide">
@@ -3978,11 +4090,9 @@
                     </div>
 
                     <!-- <div class="control-group">
-
                         <label class="control-label">Avis</label>
                         <div class="controls">
                            <select v-model="formDemande.avis_ano" class="span">
-
                                <option value="1"> Objection</option>
                                <option value="2"> Non objection</option>
                            </select>
@@ -3992,7 +4102,6 @@
                   <div class="control-group">
           <label class="control-label">Observation:</label>
             <div class="controls">
-
               <textarea  v-model="formDemande.observations_ano" :readonly="motifDemandeAno"  class="textarea_editor" rows="" placeholder="Entrer  le text ..."></textarea>
             </div>
           
@@ -4660,11 +4769,7 @@
 <script>
     import { mapGetters, mapActions } from "vuex";
     import moment from 'moment';
-
-    //import bailleurAjouter from '../dossierComponent/bailleurAjouter';
-
-    import bailleurAjouter from '../dossierComponent/bailleurAjouter'
-
+    // import bailleurAjouter from '../dossierComponent/bailleurAjouter'
     //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
     import {  ModelListSelect } from 'vue-search-select'
     import 'vue-search-select/dist/VueSearchSelect.css'
@@ -4672,14 +4777,9 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
     export default {
         name: 'compte',
         components:{
-
-        // bailleurAjouter,
-
-            bailleurAjouter,
-
+            // bailleurAjouter,
             
             ModelListSelect,
-
         },
         data() {
             return {
@@ -4688,7 +4788,6 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
                         name: "cache",
                         icon: "add"
                     }
-
                 ],
                 demande:{},
                 acteEffetActive:"",
@@ -4734,7 +4833,6 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
                     montant:0,
                     marche_id:"",
                     bailleur_id:"",
-
                 },
                 edit_bailleur_marche:""
                ,formMandater:{
@@ -4756,7 +4854,6 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
                     type_analyse_id: "",
                     cojo_id:"",
                    // motif:""
-
                 },
                 affiche_bouton_ajouter_cojo:false,
                 idcojo:"",
@@ -4771,6 +4868,19 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
                     num_dossier_appel_offre:"",
                     nbr_participant:"",
                     matricule:""
+                },
+                modification_offre_finnancier_recupere:{
+                    id:"",
+                    numero_lot:"",
+                    designation:"",
+                    unite:"",
+                    prix_unitaire:"",
+                    montant_total_ht:"",
+                    montant_total_ttc:"",
+                    taux:"",
+                    tva:"",
+                    dossier_candidat_id:"",
+                    quantite:""
                 },
             isFormulaireDossierCandidature:false,
                 isDetailDossierCandidature:false,
@@ -4808,12 +4918,8 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
               mt_offre_financiere:"",
               numero_dossier:"",
               capacite_financement:"",
-
           },
-
-
           editDossierCadidature:{
-
                secteur_activite_id:"",
                type_candidat_id:"",
               numero_cc:"",
@@ -4846,8 +4952,6 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
               mt_offre_financiere:"",
               numero_dossier:"",
               capacite_financement:"",
-
-
           },
          formOffreTechnique:{
              numero_lot:"",
@@ -4868,7 +4972,6 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
              capacite_techn_exp:"",
              dossier_candidat_id:"",
          },
-
          formEffetFinancier:{
              code_act:"",
              libelle_act:"",
@@ -4892,7 +4995,6 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
              numero_marche:"",
              ano_bailleur_id:""
          },
-
          formDataFacture:{
              prix_propose_ttc:"",
              prix_propose_ht:"",
@@ -4903,11 +5005,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
              id_type_facture:"",
              code_acte_depense:"",
              numero_facture:"",
-
          },
-
-
-
          editActeEffetFinancier:{
               code_act:"",
              libelle_act:"",
@@ -4930,7 +5028,6 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
              marche_id:"",
              numero_marche:"",
              ano_bailleur_id:""
-
          },
 formOffreFinanciere:{
       numero_lot:"",
@@ -4948,9 +5045,7 @@ ref_marche:"",
 num_courrier:"",
     analyse_dossier_id:"",
     proce_verbal_jugement_offre_id:""
-
 },
-
                 editMarche: {
                     id:"",
                     attribue:"",
@@ -4960,11 +5055,7 @@ editDemandeAno:{
 date_demande:"",
 ref_marche:"",
 num_courrier:""
-
-
 },
-
-
 formObservation:{
     date_avis_baill:"",
     avis_bail:"",
@@ -4972,7 +5063,6 @@ formObservation:{
     ano_dmp_bailleur_id:"",
     document_procedure_id:""
 },
-
 editObservation1:{
     date_avis_baill:"",
     avis_bail:"",
@@ -4980,9 +5070,7 @@ editObservation1:{
     ano_dmp_bailleur_id:"",
     document_procedure_id:""
 },
-
                 edite_membre_cojo:"",
-
 formAno:{
 date_ano_dmp:"",
 observations_bailleur:"",
@@ -4998,12 +5086,10 @@ date_ano_dmp:"",
 ref_ano_dmp:"",
 numero_courie:""
 },
-
 editDemamnde:{
     date_demande:"",
 ref_marche:"",
 num_courrier:""
-
 },
 formPv:{
     ref_pv:"",
@@ -5020,8 +5106,6 @@ formPv:{
                               email_cand:"",
                                   procedure_passation_id:"",
                                   	appel_offre_id:"",
-
-
           },
                 edite_ano_bailleur_dmp:"",
                 edite_offre_technique:"",
@@ -5044,7 +5128,7 @@ formPv:{
                     role:"",
                     cojo_id:"",
                 },
-                // detail_marche:{},
+                edit_offre_technique_recupere:"",
                 formLettre: {
                     appel_offre_id:"",
                     objet_lettre:"",
@@ -5091,7 +5175,6 @@ created() {
     console.log(this.appel_offre_marche)*/
 },
         computed: {
-
             ...mapGetters("bienService", [ "typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
@@ -5100,8 +5183,6 @@ created() {
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
             ...mapGetters('personnelUA', ['acteur_depenses']),
-
-
                 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
                 'types_financements']) ,
@@ -5112,7 +5193,6 @@ created() {
     //   return id => {
     //     if (id != null && id != "") {
     //        const qtereel = this.appelOffres.find(qtreel => qtreel.id == id);
-
     //   if (qtereel) {
     //     return qtereel.ref_appel;
     //   }
@@ -5124,7 +5204,6 @@ afficheCandidat() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.typeCandidat.find(qtreel => qtreel.id == id);
-
       if (qtereel) {
         return qtereel.libelle;
       }
@@ -5132,85 +5211,58 @@ afficheCandidat() {
         }
       };
     },
-
 // calculons le nombre de jours pour acteur depense
-
 nombreDejourCalcule(){
                 let vM=this;
     const acteAffet = vM.formEffetFinancier
     if(acteAffet.date_odre_service == acteAffet.date_fin_exe &&  acteAffet.date_fin_exe !=="" && acteAffet.date_odre_service !=="") return 1
      if(acteAffet.date_fin_exe =="" && acteAffet.date_odre_service =="") return null
-
        var dateF = new Date(acteAffet.date_fin_exe).getTime()
         var dateO = new Date(acteAffet.date_odre_service).getTime()
            var resultat = dateF - dateO
-
              var diffJour =  resultat / (1000 * 3600 * 24)
-
                if(isNaN(diffJour)) return null
-
                if(parseFloat(diffJour) < 0 ) return "durée invalide"
     vM.formEffetFinancier.duree=diffJour
                   return  diffJour;
    
 },
-
+nombreDejourCalculeModification(){
+                let vM=this;
+    const acteAffet = vM.editActeEffetFinancier
+    if(acteAffet.date_odre_service == acteAffet.date_fin_exe &&  acteAffet.date_fin_exe !=="" && acteAffet.date_odre_service !=="") return 1
+     if(acteAffet.date_fin_exe =="" && acteAffet.date_odre_service =="") return null
+       var dateF = new Date(acteAffet.date_fin_exe).getTime()
+        var dateO = new Date(acteAffet.date_odre_service).getTime()
+           var resultat = dateF - dateO
+             var diffJour =  resultat / (1000 * 3600 * 24)
+               if(isNaN(diffJour)) return null
+               if(parseFloat(diffJour) < 0 ) return "durée invalide"
+    vM.formEffetFinancier.duree=diffJour
+                  return  diffJour;
+   
+},
 getDateFinExécutionValue(){
     return !this.formEffetFinancier.date_odre_service !=""
 },
-
-
-// modifier le calcul lors de la modificatin
-// nombreModifDejourCalcule(){
-
-//               let vM=this;
-//     const acteEdit = vM.editActeEffetFinancier
-//     if(acteEdit.date_odre_service == acteEdit.date_fin_exe &&  acteEdit.date_fin_exe !=="" && acteEdit.date_odre_service !=="") return 1
-//      if(acteEdit.date_fin_exe =="" && acteEdit.date_odre_service =="") return null
-
-//        var dateF = new Date(acteEdit.date_fin_exe).getTime()
-//         var dateO = new Date(acteEdit.date_odre_service).getTime()
-//            var resultat = dateF - dateO
-
-//              var diffJour =  resultat / (1000 * 3600 * 24)
-
-//                if(isNaN(diffJour)) return null
-
-//                if(parseFloat(diffJour) < 0 ) return "durée invalide"
-//     vM.editActeEffetFinancier.duree=diffJour
-//                   return  diffJour;
-
-
-// },
-
-// getDateFinExécutionModifValue(){
-//     return !this.editActeEffetFinancier.date_odre_service !=""
-// },
-
-
-
-
-
+getDateFinExécutionValueMod(){
+    return !this.editActeEffetFinancier.date_odre_service !=""
+},
             verrouObjection(){
-
 return this.formAnalyseDMP.avis_bail == "1";
             },
             
              recupererNumeroCourier() {
       
       const norme = this.getterDemandeAno.find(normeEquipe => normeEquipe.ref_marche == this.detail_marche.reference_marche);
-
       if (norme) {
         return norme.num_courrier;
       }
       return ""
     },
-
-
     // affichage de l'avis DMP
     recuperationDeAvisDmp(){
         
-
         let numero = this.getterAnalyseDMP.find(numeroDmp => numeroDmp.avis_bail == 1)
         if(numero) {
             if(numero.avis_bail==1){
@@ -5222,18 +5274,10 @@ return this.formAnalyseDMP.avis_bail == "1";
         }
         return null
     },
-
-// afficher le moti de demande ano
-//  motifDemandeAno(){
-//      return this.formDemande.avis_ano == 1
-//  },
-
-
       afficherIdMarche() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
       if (qtereel) {
         return qtereel.reference_marche;
       }
@@ -5258,22 +5302,18 @@ return this.formAnalyseDMP.avis_bail == "1";
                         )
                     }
                 }
-
             },
  libelleLot() {
       const typeUniteA = this.lots.find(typeUa=> typeUa.id == this.formOffreFinanciere.numero_lot);
-
       if (typeUniteA) {
         return typeUniteA.libelle_lot;
         
       }
       return ""
     },
-
 affcherTauxEnCours() {
       
       const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
-
       if (norme) {
         return norme.libelle;
       }
@@ -5282,16 +5322,17 @@ affcherTauxEnCours() {
 tauxArrondit() {
       
       const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
-
       if (norme) {
         return norme.arrondit;
       }
       return 0
     },
 montantHT() {
-      const val =  parseFloat(this.formOffreFinanciere.prix_unitaire) * parseFloat(this.formOffreFinanciere.quantite);
-      
-       if (val) {
+                let val;
+    if(this.formOffreFinanciere.prix_unitaire!="" &&this.formOffreFinanciere.quantite!=""){
+        val =  parseFloat(this.formOffreFinanciere.prix_unitaire) * parseFloat(this.formOffreFinanciere.quantite);
+    }
+    if (val) {
         return parseInt(val).toFixed(0);
       }
       
@@ -5306,8 +5347,6 @@ montantHT() {
       
       return 0
     },
-
-
  montantHTt() {
       const val = parseFloat(this.montantHT) + parseFloat(this.montantTva);
       
@@ -5317,14 +5356,34 @@ montantHT() {
       
       return 0
     },
-
-
-
+            montantHTEdite() {
+                let val;
+                if(this.modification_offre_finnancier_recupere.prix_unitaire!="" && this.modification_offre_finnancier_recupere.quantite!=""){
+                    val =  parseFloat(this.modification_offre_finnancier_recupere.prix_unitaire) * parseFloat(this.modification_offre_finnancier_recupere.quantite);
+                }
+                if (val) {
+                    return parseInt(val).toFixed(0);
+                }
+                return 0
+            },
+            montantTvaEdite() {
+                const val =   parseFloat(this.montantHTEdite) * parseFloat(this.tauxArrondit);
+                if (val) {
+                    return parseInt(val).toFixed(0);
+                }
+                return 0
+            },
+            montantHTtEdite() {
+                const val = parseFloat(this.montantHTEdite) + parseFloat(this.montantTvaEdite);
+                if (val) {
+                    return parseInt(val).toFixed(0);
+                }
+                return 0
+            },
             //afficher le motif avis bailleur 
             afficherMotifBailleur(){
                 return this.formAno.avis_bail =="1";
             },
-
             listeBailleurMarche(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -5332,8 +5391,6 @@ montantHT() {
                         return this.personnaliseGetterMarcheBailleur.filter( idmarche => idmarche.marche_id == marche_id)
                     }
                 }
-
-
             },
             montantBailleurMarcheCompare(){
                 return  marche_id=>{
@@ -5345,12 +5402,9 @@ montantHT() {
                                  return total + parseFloat(currentValue.montant) ;
                         }, initialValue);
                         let montantConbiner=parseFloat(vM.formBailleur.montant) + parseFloat(ObjetMontant)
-
                         return parseFloat(montantConbiner);
                     }
                 }
-
-
             }
             ,
             listeAppelOffre(){
@@ -5372,14 +5426,7 @@ montantHT() {
                     return this.appelOffres.filter( idmarche => idmarche.marche_id == marche_id)
                     }
                 }
-
             },
-
-            // afficher le champ motif dynanmique
-// afficherMotifAnalyse(){
-//     return this.formAnalyseDossier.decision  =="1"
-// },
-
             listeLots(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -5390,7 +5437,6 @@ montantHT() {
                         return this.lots.filter( idmarche => idmarche.marche_id == marche_id)
                     }
                 }
-
                 
             },
              listePV(){
@@ -5418,7 +5464,6 @@ montantHT() {
             avisPv(){
                 return reference=>{
                     if(reference!=""){
-
                         let info=this.getterProceVerballe.find(item=>item.reference==reference);
                         if(info.avie==null){
                             return null
@@ -5485,17 +5530,15 @@ montantHT() {
         listeAnalyseDossier: function () {
             return marcheid => {
                 if (marcheid != "") {
-
-                    return this.getterAnalyseDossiers.filter(idmarche => idmarche.dossier_candidature.appel_offre.marche_id == marcheid)
+                    let objet= this.getterAnalyseDossiers.filter(idmarche => idmarche.dossier_candidature.appel_offre.marche_id == marcheid)
+                    return objet;
                 }
             }
         },
-
             demandeAno: function () {
                 return marcheid => {
                     if (marcheid != "") {
                         let obje=this.getterDemandeAno.filter(idmarche => idmarche.proce_verbal_offre.appel_offre.marche_id == marcheid)
-
                         return obje
                     }
                 }
@@ -5504,7 +5547,6 @@ montantHT() {
                 return marcheid => {
                     if (marcheid != "") {
                        // console.log("Marche demande ano AnalyseDmp marche_id")
-
                         let obje=this.getterDemandeAno.find(idmarche => {
                             if(idmarche.proce_verbal_offre.appel_offre.marche_id == marcheid && idmarche.proce_verbal_offre.avie==null){
                                 let vM=this;
@@ -5526,7 +5568,6 @@ montantHT() {
                         return objet;
                     }
                 }
-
             },
             analyseDMPValider(){
              return marcheid=>{
@@ -5544,8 +5585,6 @@ montantHT() {
                  }
              }
             },
-
-
             listeAnoDMPBailleur: function () {
                 return marcheid => {
                     if (marcheid != "") {
@@ -5556,23 +5595,17 @@ montantHT() {
                     }
                 }
             },
-
-
             selectionAttributionMarche: function () {
                 return marcheid => {
                     if (marcheid != "") {
                        let vM=this;
-
                         let marcherEnAction=this.getterAnoDMPBailleur.filter(idmarche => idmarche.annalyse_d_m_p.demande_ano.proce_verbal_offre.appel_offre.marche_id == marcheid)
-
                         let marcherFavaroble=marcherEnAction.find(idmarche=>idmarche.avis_bail==1);
                         let marcherObjetction=marcherEnAction.find(idmarche=>idmarche.avis_bail==0);
                         console.log(marcherFavaroble)
                         if (marcherFavaroble!=undefined){
                             vM.entreprise_vainqueur=""
                             console.log("1411111")
-
-
                             vM.info_avis_bailleur="Non objection";
                             vM.formEffetFinancier.ano_bailleur_id=marcherFavaroble.id
                             let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==marcherFavaroble.annalyse_d_m_p.demande_ano.proce_verbal_offre.reference);
@@ -5589,10 +5622,7 @@ montantHT() {
                                 console.log("222222")
                                 return entreprise;
                             }
-
                             return null
-
-
                         }
                         if(marcherObjetction!=undefined){
                             vM.message_setion_vainqueur="Le dossier a été rejete"
@@ -5600,12 +5630,9 @@ montantHT() {
                             vM.message_setion_vainqueur="Assuré vous d'avoir terminé tous les étape précedente"
                         }
                         return null
-
                     }
                 }
             },
-
-
             listeActeEffectFinnancier: function () {
                 return marcheid => {
                     if (marcheid != "") {
@@ -5614,9 +5641,21 @@ montantHT() {
                     }
                 }
             },
-
-
-
+            listeOffreFinancier(){
+                return idoffrefine => {
+                    if (idoffrefine != "") {
+                        // console.log("Marche leste acte effect finnancier")
+                        return this.getterOffreFinanciers.find(item=>item.id==idoffrefine)
+                    }
+                }
+            },
+            listeOffreTechnique(){
+                return idoffre => {
+                    if (idoffre != "") {
+                        return this.gettersOffreTechniques.find(item=>item.id==idoffre)
+                    }
+                }
+            }
         },
         methods: {
             ...mapActions("bienService", [
@@ -5640,7 +5679,6 @@ montantHT() {
                 "ajouterMarcherBailleur","supprimerMarcheBailleur","ajouterMembreCojo",
                 "modificationMembreCojo","supprimerMembreCojo","getProceVerbal",
                 "ajouterProceVerbal","supprimerProceVerbal","modificationProceVerbalOffre","getAnalyseDossier","getDemandeAno","getAnalyseDMP","getAnoDMPBailleur","getActeEffetFinancier"
-
             ]),
             ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
             // 
@@ -5663,30 +5701,53 @@ ajouterStockLocal(){
              id_type_facture:"",
              code_acte_depense:"",
              numero_facture:"",
-
-
     }
-
 },
             infoPVAffiche(ref){
                 this.resultaAnalysePv=[]
                 let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==ref);
                 this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
-
                 if (this.resultaAnalysePv.length>0){
                     this.resultaAnalysePv.sort(function (a, b) {
                         return a.note_analyse - b.note_analyse;
                     }).reverse()
                 }
-
                 //console.log(this.resultaAnalysePv)
             },
-
     onFichierChange(e){
       this.formLettre.fichier_joint = e.target.files[0]
-     // console.log(onFichierChange);
+     // console.log(onFichierChange); edit_offre_technique_recupere
     },
-
+            afficheModificationOffreFinancier(index){
+                this.$('#modificationOffre').modal({
+                    backdrop: "static",
+                    keyboard:false
+                })
+                console.log(index)
+                //let objet = this.getterOffreFinanciers.find(item=>item.id==index);
+                this.modification_offre_finnancier_recupere={
+                        id:index.id,
+                        numero_lot:index.numero_lot,
+                        designation:index.designation,
+                        unite:index.unite,
+                        prix_unitaire:index.prix_unitaire,
+                        montant_total_ht:index.montant_total_ht,
+                        montant_total_ttc:index.montant_total_ttc,
+                        taux:index.taux,
+                        tva:index.tva,
+                    quantite:index.quantite,
+                        dossier_candidat_id:index.dossier_candidat_id
+                }
+                console.log(this.modification_offre_finnancier_recupere)
+            },
+            afficheModificationOffreTechnique(index){
+                this.$('#modificationOffreT').modal({
+                    backdrop: "static",
+                    keyboard:false
+                })
+                console.log(index)
+            this.edit_offre_technique_recupere=index;
+            },
             afficheModaleMembreCojo(index){
                 this.$('#modification_membre_cojo').modal({
                     backdrop: "static",
@@ -5699,7 +5760,6 @@ ajouterStockLocal(){
     this.$('#modification_membre_cojo').modal('hide');
 },
 modifierFactureLocal(){
-
     this.$('#modififacture').modal('hide');
 },
            rechercheMandater(){
@@ -5725,7 +5785,6 @@ modifierFactureLocal(){
            },
             rechercheMembreCojo(){
                 // console.log(this.formMandater.matricule_m)
-
                 let objetMandater=this.acteur_depenses.filter(item=>item.acteur_depense.matricule==this.formDataMembreCojo.matricule)
                 // console.log(objetMandater)
                 if(objetMandater!=undefined){
@@ -5733,7 +5792,6 @@ modifierFactureLocal(){
                         let acteur= this.acteur_depenses.find(item=>item.acteur_depense.matricule==this.formDataMembreCojo.matricule)
                         this.formDataMembreCojo.nom_prenom=acteur.acteur_depense.nom +" "+acteur.acteur_depense.prenom
                         this.message_mandater=" "
-
                     }
                     else{
                         this.message_mandater="Cette n'existe pas dans notre base de donnée "
@@ -5747,7 +5805,6 @@ modifierFactureLocal(){
             }
             ,
             recherche() {
-
               // console.log(this.search)
                 let entre=this.entreprises.find(item=>item.id==this.search);
                 if (entre!=undefined){
@@ -5761,8 +5818,6 @@ modifierFactureLocal(){
                         this.formDossierCadidature.secteur_activite_id=entre.secteur_activite_id
                     }
                 }
-
-
             },
             retourListeEntreprise(){
                  this.$router.push({ name: 'marche' })
@@ -5809,7 +5864,6 @@ modifierFactureLocal(){
                     objet_appel:"",
                     imputation:"",
                     marche_id:"",
-
                 }
             },
             ajouterL(){
@@ -5884,19 +5938,21 @@ modifierFactureLocal(){
                         dossier_candidat_id:"",
                 }
             },
+            editeOffreT(){
+                this.modifierOffreTechnique(this.edit_offre_technique_recupere)
+                this.$('#modificationOffreT').modal('hide');
+            },
             ajouterOffreF(){
-
-
                  var nouvelObjet = {
       ...this.formOffreFinanciere,
       montant_total_ht :this.montantHT,
        montant_total_ttc :this.montantHTt,
         	taux :this.affcherTauxEnCours,
          	tva :this.montantTva,
-designation:this.libelleLot,
-dossier_candidat_id : this.edite_offre_financiere.id
+          designation:"",
+          dossier_candidat_id : this.edite_offre_financiere.id
        };
-                // console.log(this.edite_offre_financiere.id)
+                // console.log(this.edite_offre_financiere.id) editeOffreT
                 // this.formOffreFinanciere.dossier_candidat_id=this.edite_offre_financiere.id
                 this.ajouterOffreFinancier(nouvelObjet)
                 this.formOffreFinanciere={
@@ -5909,8 +5965,15 @@ dossier_candidat_id : this.edite_offre_financiere.id
                         montant_total_ttc:"",
                 }
             },
+            modificationOffreFin(){
+                this.modification_offre_finnancier_recupere.montant_total_ht=this.montantHTEdite
+                this.modification_offre_finnancier_recupere.montant_total_ttc=this.montantHTtEdite
+                this.modification_offre_finnancier_recupere.taux=this.affcherTauxEnCourse
+                this.modification_offre_finnancier_recupere.tva=this.affcherTauxEnCours
+                this.modifierOffreFinancier(this.modification_offre_finnancier_recupere)
+                this.$('#modificationOffre').modal('hide');
+            },
             ajouterMandaterA(){
-
                this.ajouterMandater(this.formMandater)
                 this.formMandater={
                         lettre_invitation_id:"",
@@ -5943,15 +6006,12 @@ dossier_candidat_id : this.edite_offre_financiere.id
                 this.formFournisseur.adresse=this.formDossierCadidature.adresse_post
                 this.formFournisseur.email=this.formDossierCadidature.email_cand
                 this.formFournisseur.complet=0
-
            // console.log(this.formFournisseur)
               let ent=  this.entreprises.find(item=>item.numero_rc==this.formFournisseur.numero_rc)
-
                 if(ent==undefined){
                     this.ajouterEntreprise(this.formFournisseur)
                 }
                 this.ajouterDossierCandidat(this.formDossierCadidature)
-
                 this.formDossierCadidature={
                     type_candidat:"",
                         numero_cc:"",
@@ -5981,17 +6041,11 @@ dossier_candidat_id : this.edite_offre_financiere.id
                         caa_moyen_ac_entre:"",
                         capacite_tech_exp:"",
                         mt_offre_financiere:"",
-
                 }
-
                 this.NotisFormulaireDossierCand()
             },
-
-
 // vider l'input 
-
    // modification de dossier candidat
-
             modificationDossierCandidatLocal(){
                 this.formFournisseur.raison_sociale=this.editDossierCadidature.nom_cand
                 this.formFournisseur.numero_cc= this.editDossierCadidature.numero_cc
@@ -6000,17 +6054,13 @@ dossier_candidat_id : this.edite_offre_financiere.id
                 this.formFournisseur.adresse=this.editDossierCadidature.adresse_post
                 this.formFournisseur.email=this.editDossierCadidature.email_cand
                 this.formFournisseur.complet=0
-
                 let entre = this.entreprises.find(item =>item.numero_rc==this.formFournisseur.numero_rc)
                   if(entre==undefined){
                       this.modifierEntreprise(this.formFournisseur)
                   }
                   this.modifierDossierCandidat(this.editDossierCadidature)
                   this.$('#modificationDossierCandidatModal').modal('hide');
-
             },
-
-
 ajouterModalActeEffetFinancierLocal(rcm){
        /* var nouvelObjet = {
             ...this.formEffetFinancier,
@@ -6047,11 +6097,8 @@ ajouterModalActeEffetFinancierLocal(rcm){
              entreprise_id:"",
              marche_id:"",
              numero_marche:""
-
     }
 },
-
-
 afficherModalModifierActeEffetFinancier(index){
     this.$('#modifierActeEF').modal({
         backdrop: 'static',
@@ -6059,7 +6106,6 @@ afficherModalModifierActeEffetFinancier(index){
     });
     this.editActeEffetFinancier = this.acteEffetFinanciers.find(item=>item.id==index)
 },
-
    afficherModificationPV(index){
        this.$('#modificationPV').modal({
            backdrop: 'static',
@@ -6088,7 +6134,6 @@ afficherModalModifierActeEffetFinancier(index){
                 this.getAnalyseDMP()
                 this.getAnoDMPBailleur()
             },
-
             modificationBailleurMarche(){
                 this.modificationMarcheBailleur(this.edit_bailleur_marche)
                 this.$('#editBailleuMarche').modal('hide');
@@ -6101,22 +6146,15 @@ afficherModalModifierActeEffetFinancier(index){
                 this.edit_bailleur_marche = this.personnaliseGetterMarcheBailleur.find(item=>item.id==index)
               //  console.log(this.edit_bailleur_marche)
             },
-
 // vider l'input 
 modifierModalActeEffetFinancierLocal(){
-
    // this.editActeEffetFinancier.entreprise_id=entreprise_id
-
-
-
     this.modifierActeEffetFinancier(this.editActeEffetFinancier)
     this.$('#modifierActeEF').modal('hide');
 },
-
             // afficherModalAjoutObservationBailleur(){
             //     this.$('#ajouterObservationBailleur')
             // },
-
             ajoutObservationBailleurLocal(){
                 this.ajouterObseravtionBailleur(this.formObservation)
                 this.formObservation = {
@@ -6125,32 +6163,22 @@ modifierModalActeEffetFinancierLocal(){
               observations_bail:"",
            ano_dmp_bailleur_id:"",
              document_procedure_id:""
-
                 }
-
               
-
-
             },
-
-
-
             afficherModalObservationBailleur(index){
                  this.$('#modifierObservationBailleur').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
                   this.editObservation1 = this.getterObseravtionBailleurs[index]
-
             },
             // vider l'input
             modifierObservationBailleurLocal(){
                 this.modifierObservationBaileur(this.editObservation1)
                 this.$('#modifierObservationBailleur').modal('hide');
             },
-
         
-
         ajouterAnalyseDMPB(){
      /*        var nouvelObjet = {
         ...this.formAnalyseDMP,
@@ -6190,9 +6218,12 @@ modifierModalActeEffetFinancierLocal(){
                 }
               this.edite_offre_technique=this.getterDossierCandidats.find(item=>item.id=index);
             },
-
             modaleOffreFinnanciere(index){
-                this.edite_offre_financiere=this.getterDossierCandidats.find(item=>item.id=index);
+                this.edite_offre_financiere="";
+                let objet=this.getterDossierCandidats.filter(item=>item.id==index)
+                console.log(objet)
+                this.edite_offre_financiere=this.getterDossierCandidats.find(item=>item.id==index);
+                console.log(this.edite_offre_financiere)
             },
             isFormulaireDossierCand(){
                 this.isFormulaireDossierCandidature=true
@@ -6208,25 +6239,20 @@ modifierModalActeEffetFinancierLocal(){
                 this.isDetailDossierCandidature=true,
                     this.isButtunAddDossierCandidat=false
                 this.isButtunAddDossierCandidat=false
-
                 this.detail_dossier_candidature=this.getterDossierCandidats.find(dossier=>dossier.id==id)
                 this.detail_offre_finnancier=this.getterOffreFinanciers.find(offre => offre.dossier_candidature.id ==id)
                 this.detail_offre_technique =this.gettersOffreTechniques.find(offre =>offre.dossier_candidature.id ==id)
                // console.log(this.detail_offre_finnancier)
-
             },
             // afficher modal de modification
-
             afficherModalModifierActeDepense(index){
                 this.$('#modificationModal').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
-
                 this.edite_appel_offre = this.appelOffres.find(item=>item.id==index);
             },
             afficheDemandeDAO(index){
-
                 this.$('#modifDemandeAno').modal({
                     backdrop: 'static',
                     keyboard: false
@@ -6237,20 +6263,15 @@ modifierModalActeEffetFinancierLocal(){
                 console.log(this.edite_demande_dao)
             },
             afficheAnalyseDMP(index){
-
                 this.$('#editeDMP').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
-
                 this.edite_analyse_dpm=this.getterAnalyseDMP.find(
                     annalyseDP => annalyseDP.id == index
                 )
                 console.log(this.edite_analyse_dpm)
             },
-
-
-
 // vider l'input de nnouveau fournisseur
 ajouterNouveauFournisseurLocal(registeCommerce){
                 this.formFournisseur.numero_rc=registeCommerce
@@ -6277,13 +6298,8 @@ ajouterNouveauFournisseurLocal(registeCommerce){
                     service_assiette_impot:"",
                     adresse:"",
                     banque:""
-
     }*/
 },
-
-
-
-
             afficheAnoDPMBailleurModale(index){
                 this.$('#editeAnoDmpBailleurModal').modal({
                     backdrop: 'static',
@@ -6298,16 +6314,13 @@ ajouterNouveauFournisseurLocal(registeCommerce){
                     backdrop: 'static',
                     keyboard: false
                 });
-
                 this.edite_analyse_dossier = this.listeAnalyseDossier(this.marcheid)[index];
             },
-
             afficherModaleModifier(index){
                 this.$('#modificationModal1').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
-
              this.edite_lot = this.listeLots(this.marcheid)[index];
                 //this.edite_lot.appel_offre_id=this.edite_lot.
             },
@@ -6316,7 +6329,6 @@ ajouterNouveauFournisseurLocal(registeCommerce){
             backdrop: 'static',
             keyboard: false
         });
-
         this.edite_cojo = this.getterCojos[index];
         //this.edite_lot.appel_offre_id=this.edite_lot. modifierDemandeAno
     },
@@ -6325,16 +6337,12 @@ ajouterNouveauFournisseurLocal(registeCommerce){
                     backdrop: 'static',
                     keyboard: false
                 });
-
                 this.editer_mandater = this.getterMandate[index];
             },
             modificationMandater(){
                 this.modifierMandater(this.editer_mandater)
                 this.$('#modificationMantater').modal('hide');
             },
-
-
-
             modificationDossierAnalyse(){
                 this.modifierAnalyseDossier(this.edite_analyse_dossier)
                 this.$('#modificationAajouterAnalys01').modal('hide');
@@ -6352,16 +6360,13 @@ ajouterNouveauFournisseurLocal(registeCommerce){
                 this.modifierLot(this.edite_lot)
                 this.$('#modificationModal1').modal('hide');
             },
-
             modficationsAnalyseDMP(){
                 this.modifierAnalyseDMP(this.edite_analyse_dpm)
                     this.getProceVerbal();
                 this.getAnoDMPBailleur()
                 this.$('#editeDMP').modal('hide');
             },
-
             editeAnoDMPBailleurLocal(){
-
                 const formData = new FormData();
                 formData.append('date_ano_dmp', this.edite_ano_bailleur_dmp.date_ano_dmp);
                 formData.append('avis_bail', this.edite_ano_bailleur_dmp.avis_bail);
@@ -6385,14 +6390,12 @@ ajouterNouveauFournisseurLocal(registeCommerce){
                 this.getActeEffetFinancier()
             },
 // afficher modification demande ano
-
 /* afficherModalModifierDemandeAno(index){
     this.$('#modificationDemandeAno').modal({
        backdrop:'static',
      keyboard:false
   })
   },*/     
-
             // eslint-disable-next-line no-unused-vars
             afficheBouttonTechFin(index){
              this.isOffreTechniqueFinancier=true
@@ -6401,15 +6404,12 @@ ajouterNouveauFournisseurLocal(registeCommerce){
                     keyboard:false
                 });
                 this.editDossierCadidature = this.dossierCandidature(this.marcheid)[index];
-
-
             },
             afficheBouttonTechFinInvitation(index){
                 this.$('#modificationLettreInvitation').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
-
                 this.edite_lettre_invitation = this.getterLettreInvitation.find(item=>item.id==index);
             },
             modificationLettreInvitation(){
@@ -6435,7 +6435,6 @@ ajouterNouveauFournisseurLocal(registeCommerce){
             formaterDate(date) {
               return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },
-
             ExporterEnExel(){
                 this.$refs.excel.click()
             }
@@ -6467,7 +6466,6 @@ ajouterNouveauFournisseurLocal(registeCommerce){
                 }
                 //console.log(formData)
                 this.ajouterProceVerbal(formData,config);
-
             },
             OnchangeFichierDemandeAno(e) {
                 const files = e.target.files;
@@ -6506,7 +6504,6 @@ ajouterNouveauFournisseurLocal(registeCommerce){
                     num_courrier:"",
                     analyse_dossier_id:"",
                     proce_verbal_jugement_offre_id:""
-
                 }
             },
             editDemandeDAO(){
@@ -6526,7 +6523,6 @@ ajouterNouveauFournisseurLocal(registeCommerce){
                         'Content-Type' : 'multipart/form-data'
                     }
                 }
-
                 this.modifierDemandeAno(formData,config)
                 this.getAnalyseDMP()
                 this.getAnoDMPBailleur()
@@ -6574,11 +6570,9 @@ ajouterNouveauFournisseurLocal(registeCommerce){
     }
     .grdirModalActeEffet
     {
-
  width: 1200px;
  margin: 0 -530px;
  height: 550px;
-
     }
     .grdirModalAnalyse{
          width: 1000px;
@@ -6589,15 +6583,12 @@ ajouterNouveauFournisseurLocal(registeCommerce){
   width: 1000px;
  margin: 0 -530px;
  height: 450px;
-
     }
     .tlDossierCandidat{
         width: 1000px;
  margin: 0 -530px;
  height: 500px;
-
     }
-
     .tlg{
     width: 900px;
  margin: 0 -450px;

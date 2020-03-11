@@ -5,7 +5,7 @@
                    <!-- <td> {{article.famille_id || 'Non renseigné'}}</td> -->
                     <td> {{article.libelle || 'Non renseigné'}}</td>
                      <td> {{formatageSomme(article.prix_ht) || 'Non renseigné'}}</td>
-                      <td> {{ 18  || 'Non renseigné'}} %</td>
+                      <td> {{ article.taux  || 'Non renseigné'}} %</td>
                       <td> {{article.tva || 'Non renseigné'}}</td>
                    <td style="text-align: center;font-weight:bold;"> {{formatageSomme(article.montant_ttc) || 'Non renseigné'}}</td>
                 

@@ -66,7 +66,7 @@
               <td>
               
                <div class="control-group">
-                  <label class="control-label">Service gestionnaire</label>
+                  <label class="control-label">Service gestionnaire de crédit</label>
                   <div class="controls">
                     <select v-model="formData.servicegest_id">
                       <option
@@ -223,7 +223,7 @@
             <tr>
                <td>
                  <div class="control-group">
-                  <label class="control-label">Service gestionnaire</label>
+                  <label class="control-label">Service gestionnaire de crédit</label>
                   <div class="controls">
                     <select v-model="editUniteAdministrative.servicegest_id">
                       <option
@@ -362,7 +362,7 @@
 
             <div
               class="widget-content nopadding"
-              v-if="type_Unite_admins.length && sections.length && chapitres.length && filtre_unite_admin.length "
+              v-if="type_Unite_admins.length && sections.length && chapitres.length"
             >
               <table class="table table-bordered table-striped">
                 <thead>

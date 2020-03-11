@@ -223,7 +223,7 @@ export default {
         keyboard: false
       });
 
-      this.editTypeAppel = this.pays[index];
+      this.editTypeAppel = this.modepaiements[index];
     },
     // fonction pour vider l'input modification
     

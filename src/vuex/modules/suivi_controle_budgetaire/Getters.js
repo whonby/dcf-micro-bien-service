@@ -23,7 +23,7 @@
   export const coutMoyenDeMission = (state , getters) => {
  
      const coutMission = (getters.coutTotalDemission / getters.nombreTotalDeTouteMissions)
-     if(isNaN(coutMission)) return null
+     if(isNaN(coutMission)) return 0
      return coutMission
   }
  
@@ -61,7 +61,7 @@
  
   export const coutMoyenDeBilletAvionDeMissions = (state, getters) => {
    const val = ((getters.coutTotalDeBilletAvion / getters.nombreTotalDeTouteMissions) * getters.dureeMoyenneDeTouteLesMissions).toFixed(2)
-    if(isNaN(val)) return null
+    if(isNaN(val)) return 0
     return val
   } 
  
