@@ -2292,7 +2292,7 @@ export function ajouterCotation({commit,dispatch}, elementAjout){
 
 
 export function modifierCotation({ commit }, element_modifie) {
-  asyncLoading(axios.put('/update_cotation/'+ element_modifie.id, element_modifie)).then(response => {
+  asyncLoading(axios.put('/update_cotation', element_modifie)).then(response => {
     commit('MODIFIER_COTATION', response.data)
 
 
@@ -2317,6 +2317,66 @@ export function supprimerCotation({commit}, id) {
  })
 
 }
+
+
+
+// action pour l'etat de procedure
+
+
+
+
+
+// export function getCotation({commit}) {
+//   queue.push(() => axios.get('/liste_cotation').then((response) => {
+//     commit('GET_ALL_COTATION', response.data)
+    
+// }).catch(error => console.log(error)))
+// }
+
+// action pour ajouter les infos d'etat de procedure
+
+export function ajouterEtatProcedure({commit}, elementAjout){
+  asyncLoading(axios.post('/add_etat', elementAjout)).then(response =>{
+      if(response.status == 201){
+        commit('AJOUTER_ETAT_PROCEDURE', response.data)
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier etat de procedure
+
+
+
+export function modifierEtatProcedure({ commit }, element_modifie) {
+  asyncLoading(axios.put('/update_etat/'+ element_modifie.id, element_modifie)).then(response => {
+    commit('MODIFIER_ETAT_PROCEDURE', response.data)
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+
+
+// supprimer le type text juridique
+
+// export function supprimerEtatProcedure({commit}, id) {
+//  this.$app.$dialog
+//  .confirm("Voulez vous vraiment supprimer ?.")
+//  .then(dialog => {
+//    commit('SUPPRIMER_ETAT_PROCEDURE', id)
+   
+//    axios.delete('/suppri_etat/' + id).then(() => dialog.close() )   
+//  })
+
+// }
 
 
 

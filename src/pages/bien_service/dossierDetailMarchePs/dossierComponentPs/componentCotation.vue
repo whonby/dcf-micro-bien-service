@@ -6,7 +6,7 @@
 
                                    </div> -->
 
-                                 <table class="table table-bordered table-striped" >
+                                 <table class="table table-bordered table-striped"  v-if="macheid">
                                             <thead>
                                             <tr>
                                                 <th>Nom</th>
@@ -17,8 +17,9 @@
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
+                           
                                             <tbody>
-                         <tr class="odd gradeX" v-for="(cotation, index) in gettersCotationPersonnaliser"
+                         <tr class="odd gradeX" v-for="(cotation, index) in listeCotation(macheid.id)"
                         :key="cotation.id">
 
                          <td @click="afficherModalcotation(index)">
@@ -202,7 +203,9 @@ export default {
                     contact:"",
                     fichier_joint:"",
                     entreprise_id:"",
-                    date_cotation:""
+                    date_cotation:"",
+
+                   // marche_id:""
 
                 },
             
@@ -253,6 +256,15 @@ export default {
     // }
 
 
+  listeCotation () {
+                return macheid => {
+                    if (macheid != "") {
+                        // console.log("Marche lettre inviation marche")
+                        return this.gettersCotationPersonnaliser.filter(idmarche => idmarche.marche_id == macheid)
+                     }
+             }
+            },
+
 
         },
      methods: {
@@ -284,25 +296,30 @@ export default {
                     keyboard: false
               })
 
-              this.editCotation = this.gettersCotationPersonnaliser[index]
+              this.editCotation = this.gettersCotationPersonnaliser.find(item=>item.id==index)
               
           },
            
          
           
            ajouterCotationLocal(){
+
+               
                 const formData = new FormData();
                 formData.append('fichier_joint', this.selectedFile, this.selectedFile.name);
                 formData.append('nom_person', this.formCotation.nom_person);
                 formData.append('contact', this.formCotation.contact);
                 formData.append('entreprise_id', this.formCotation.entreprise_id);
                 formData.append('date_cotation', this.formCotation.date_cotation);
+                formData.append('marche_id', this.marcheid);
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'
                     }
                 }
-
+// if (condition) {
+    
+// }
               
                this.ajouterCotation(formData, config)
                this.formCotation ={
@@ -316,12 +333,14 @@ export default {
 
 
            modifierCotationLocal(){
+              
 
                const formData = new FormData();
                 formData.append('nom_person', this.editCotation.nom_person);
                 formData.append('contact', this.editCotation.contact);
                 formData.append('entreprise_id', this.editCotation.entreprise_id);
                 formData.append('date_cotation', this.editCotation.date_cotation);
+                formData.append('marche_id', this.marcheid);
                
                 console.log(formData)
                 if ( this.selectedFile!==""){

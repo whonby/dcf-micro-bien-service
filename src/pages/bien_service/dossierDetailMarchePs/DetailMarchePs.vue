@@ -56,7 +56,7 @@
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab01">Cotation</a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab01">Reception de l'offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab1">Attribution</a></li>
                                
@@ -69,10 +69,15 @@
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
-                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                
+                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div>
+                               
+                                        <component-etat :macheid="detail_marche.id"></component-etat>
+                                        
+                               
                                 <h4>Liste des receptions de cotation</h4>
 
-                      <component-cotation :macheid="detail_marche.id"></component-cotation>
+                      <component-cotation :macheid="detail_marche"></component-cotation>
                          </div>
 
                         <div id="tab1" class="tab-pane">
@@ -123,7 +128,7 @@
     import { mapGetters, mapActions } from "vuex";
     //import moment from 'moment';
     import componentCotation from '../dossierDetailMarchePs/dossierComponentPs/componentCotation';
-   
+     import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
      import componentOuverture from '../dossierDetailMarchePs/dossierComponentOuverture/componentOuverture';  
    import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
     //import bailleurAjouter from '../dossierComponent/bailleurAjouter';
@@ -139,6 +144,7 @@
         components:{
 
             componentCotation,
+            componentEtat,
             componentOuverture,
             componentActe,
 
@@ -215,6 +221,14 @@ created() {
                 }
 
             },
+
+    //            ajouterEtatLocal(){
+    //      this.ajouterEtatProcedure(this.formEtat)
+    //      this.formEtat={
+    //          date_realisation:"",
+    //          libelle_etat:"reception de la cotation"
+    //      }
+    //  },
 
               retourListeEntreprise(){
                  this.$router.push({ name: 'marche' })

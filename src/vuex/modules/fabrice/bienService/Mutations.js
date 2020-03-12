@@ -148,6 +148,42 @@ export const SUPPRIMER_OUVERTURE = (state, id)=> {
 
 
 
+// mutation de l'etat de procedure //
+
+
+// get all 
+// export const GET_ALL_ETA = (state, tableau_ouverture) =>{
+//     state.gettersOuvertures = tableau_ouverture
+// }
+
+
+// add * etat de procedure
+
+export const AJOUTER_ETAT_PROCEDURE = (state, elementAjouter) => {
+    state.gettersEtatProcedure.unshift(elementAjouter)
+}
+
+// update all etat procedure
+export const MODIFIER_ETAT_PROCEDURE = (state, elementModif)=>{
+    state.gettersEtatProcedure = state.gettersEtatProcedure.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+
+
+// delete all ouverture
+
+// export const SUPPRIMER_ETAT_PROCEDURE = (state, id)=> {
+//     state.gettersEtatProcedure = state.gettersEtatProcedure.filter(marche => marche.id !=id)
+// }
+
+
+
 
 
 

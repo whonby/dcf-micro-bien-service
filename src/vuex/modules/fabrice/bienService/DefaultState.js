@@ -68,7 +68,8 @@ documentProcedures:[],
     avenants:[],
     modepaiements:[],
     gettersCotations:[],
-    gettersOuvertures:[]
+    gettersOuvertures:[],
+    gettersEtatProcedure:[]
 
 
 
