@@ -92,7 +92,55 @@
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
-         <tr>
+        
+            <tr>
+              <td>
+                <div class="control-group">
+                  <label class="control-label">Type Unite d'administrative</label>
+                  <div class="controls">
+                    <select v-model="formData.type_ua_id" class="span4">
+                      <option
+                        v-for="typeUniteA in type_Unite_admins"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="control-group">
+                  <label class="control-label">Unite administrative</label>
+                  <div class="controls">
+                    <select v-model="formData.ua_id" class="span4">
+                      <option value=""></option>
+                      <option
+                        v-for="typeUniteA in uniteAdministDynamiques(formData.type_ua_id)"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+               <td>
+                 <div class="control-group">
+                  <label class="control-label">Fonction</label>
+                  <div class="controls">
+                    <select v-model="formData.fonction_id" class="span4" >
+                     <option value="">Désactiver</option>
+                      <option
+                        v-for="typeUniteA in fonctionDynamiquesParUa(formData.ua_id)"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.fonction.id"
+                      >{{typeUniteA.fonction.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+              
+            </tr>
+            <tr>
               <td>
               
                <div class="control-group">
@@ -115,53 +163,6 @@
                       <option value="">Désactiver</option>
                       <option
                         v-for="typeUniteA in servicesua"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-               <td>
-                 <div class="control-group">
-                  <label class="control-label">Fonction</label>
-                  <div class="controls">
-                    <select v-model="formData.fonction_id" class="span4" >
-                     <option value="">Désactiver</option>
-                      <option
-                        v-for="typeUniteA in fonctions"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-              
-            </tr>
-            <tr>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Type Unite d'administrative</label>
-                  <div class="controls">
-                    <select v-model="formData.type_ua_id" class="span4">
-                      <option
-                        v-for="typeUniteA in type_Unite_admins"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Unite administrative</label>
-                  <div class="controls">
-                    <select v-model="formData.nature_section_id" class="span4">
-                      <option value=""></option>
-                      <option
-                        v-for="typeUniteA in uniteAdministDynamiques(formData.type_ua_id)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
@@ -202,8 +203,8 @@
                     /> -->
                 </div>
               </td>
+              
             </tr>
-           
             <tr>
              
               <td>
@@ -212,11 +213,12 @@
                 
                   <div class="controls">
                     <input
-                      type="text"
+                      type="number"
                     :value="afficheNormeFamille"
                       class="span4"
-                      placeholder="Saisir le code"
+                      
                       readonly
+                      
                     />
                   </div>
                   </div>
@@ -227,9 +229,9 @@
                 
                   <div class="controls">
                    <input
-                      type="text"
-                    v-model="formData.demande
-                    "
+                   :max="afficheNormeFamille"
+                      type="number"
+                    v-model="formData.demande"
                       class="span4"
                      
                     />
@@ -241,14 +243,13 @@
                   <label class="control-label">Acteur demandeur</label>
                 
                   <div class="controls">
-                    <select v-model="formData.section_id" class="span4">
-                      <option value=""></option>
-                      <option
-                        v-for="typeUniteA in auteurParUaDynamiques(formData.nature_section_id)"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.acteur_depense.id"
-                      >{{typeUniteA.acteur_depense.libelle}}</option>
-                      </select>
+                    <input
+                      type="text"
+                  :value="afficheActeurDepense(formData.fonction_id)"
+                      class="span4"
+                     readonly
+                      
+                    />
                   </div>
                   </div>
               </td>
@@ -564,7 +565,8 @@ json_fields: {
         motif_demande:"0",
         date_motif:"",
         motif_ua:"0",
-        qterealise:"0"
+        qterealise:"0",
+        nature_section_id:""
       },
       editBesoinImmo: {
         uniteadmin_id: "",
@@ -616,12 +618,33 @@ json_fields: {
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
 ...mapGetters("personnelUA", ["all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
 
+afficheActeurDepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.fonction.id == this.formData.fonction_id);
+
+      if (qtereel) {
+        return qtereel.matricule.concat('  ', qtereel.nom,'  ',qtereel.prenom)
+      }
+      return 0
+        }
+      };
+    },
+ fonctionDynamiquesParUa() {
+      return id => {
+        if (id != null && id != "") {
+          return this.all_acteur_depense.filter(element => element.unite_administrative_id == id);
+        }
+      };
+    },
 auteurParUaDynamiques() {
       
       return id => {
         if (id != null && id != "") {
-          return this.personnaFonction.filter(element => element.uniteAdmin.id == id);
+          return this.personnaFonction.filter(element => element.unite_administrative_id == id);
+        
         }
+        
       };
     },
  familleNormeDynamiques() {

@@ -1,4 +1,5 @@
 // get all prestation
+
 export const GET_ALL_PRESTATION = (state, tableau_prestation) =>{
     state.prestations = tableau_prestation
 }

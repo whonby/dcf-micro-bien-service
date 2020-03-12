@@ -2,7 +2,9 @@
 
 const defaultstate = {
     structures_fonctionnelles:[],
-    plans_fonctionnels:[]
+  plans_fonctionnels: [],
+  structuresDecision: [],
+  plans_Decision: []
 
   };
   

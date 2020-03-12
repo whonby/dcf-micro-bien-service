@@ -18,7 +18,17 @@
            </select>
             </div>     
           </div>
-
+ <div class="control-group">
+            <label class="control-label">Code</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formData.code"
+                class="span"
+                
+              />
+            </div>
+          </div>
           <div class="control-group">
             <label class="control-label">libelle</label>
             <div class="controls">
@@ -68,7 +78,16 @@
            </select>
             </div>
           </div>
-
+<div class="control-group">
+            <label class="control-label">Code</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editProcedure.code"
+                class="span"
+                placeholder="Saisir le libelle_type"
+              />
+            </div>
             <div class="control-group">
             <label class="control-label">libelle</label>
             <div class="controls">
@@ -130,8 +149,10 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>libelle</th>
+                    
                     <th>Type de procedure</th>
+                    <th>Code</th>
+                    <th>libelle</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -139,12 +160,14 @@
                   <tr class="odd gradeX" v-for="(typeProcedure, index) in 
                 procedureFiltre"
                  :key="typeProcedure.id">
-                 <td @dblclick="afficherModalModifiertextJuridique(index)">
-                   {{typeProcedure.libelle || 'Non renseigné'}}</td>
+                 
                    <td @dblclick="afficherModalModifiertextJuridique(index)">
                    {{typeProcedure.type_procedure.libelle || 'Non renseigné'}}</td>
                   
-                  
+                  <td @dblclick="afficherModalModifiertextJuridique(index)">
+                   {{typeProcedure.code || 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifiertextJuridique(index)">
+                   {{typeProcedure.libelle || 'Non renseigné'}}</td>
 
 
 
@@ -198,14 +221,16 @@ export default {
 
       formData: {
             libelle:"",
-            	type_procedure_id:""
+              type_procedure_id:"",
+              code:""
             
 
         
       },
       editProcedure: {
              libelle:"",
-             	type_procedure_id:""
+               type_procedure_id:"",
+               code:""
             
       },
       search: ""
@@ -220,9 +245,10 @@ export default {
         const searchTerm = this.search.toLowerCase();
 
 return this.procedurePassations.filter((item) => {
-  
-     return item.libelle.toLowerCase().includes(searchTerm) 
-     
+  return (
+          type.code.toLowerCase().includes(st) ||
+          type.libelle.toLowerCase().includes(st)
+        );
     
 
   

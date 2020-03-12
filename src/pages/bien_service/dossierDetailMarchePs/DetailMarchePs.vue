@@ -1,6 +1,7 @@
 
 <template>
     
+
 <div>
         <div class="container-fluid">
             <h4 v-if="marcheDetail(marcheid)" >Detail Marche en procedure simplifiée : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en cours de passation</button>
@@ -13,17 +14,22 @@
                         <table class="table table-striped table-bordered" v-if="detail_marche">
                             <thead>
                             <tr>
+                                <th>Exercice Budgetaire</th>
+                                <th>Type de procedure</th>
                                 <th>Objet marché</th>
                                 <th>Reference marché</th>
                                 <th>Montant marché</th>
                                 <th>Type de marché</th>
                                 <th>Unite administrative</th>
-                                <th>Exercice Budgetaire</th>
+                                
                             </tr>
                             </thead>
                             <tbody>
                             <tr v-if="detail_marche">
-                                
+                                 <td class="taskOptions">
+                                    {{detail_marche.exo_id}}
+                                </td>
+                                <td class="taskDesc">{{afficherLibelleTypeProcedure(detail_marche.procedure_passation_id)}}</td>
                                 <td class="taskDesc">{{detail_marche.objet}}</td>
                                 <td class="taskStatus">{{detail_marche.reference_marche}}</td>
                                 <td class="taskOptions">
@@ -35,9 +41,7 @@
                                 <td class="taskOptions">
                                     {{detail_marche.objetUniteAdministrative.libelle}}
                                 </td>
-                                <td class="taskOptions">
-                                    {{detail_marche.exo_id}}
-                                </td>
+                               
                             </tr>
                             </tbody>
                         </table>             
@@ -51,8 +55,10 @@
 
                 </div>
             </div>
+            
             <div class="row-fluid">
                 <div class="span12">
+                     <template v-if="detail_marche.procedure_passation_id == 15">
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -63,6 +69,7 @@
                                 
                             </ul>
                         </div>
+                        
                          <div class="widget-content tab-content">
 
                          <div id="tab01" class="tab-pane active">
@@ -110,6 +117,7 @@
                          
 
                     </div>
+                     </template>
                 </div>
             </div>
               <div class="modal-footer">
@@ -180,7 +188,7 @@ created() {
 },
         computed: {
 
-            ...mapGetters("bienService", [ "typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres",
+            ...mapGetters("bienService", [ "procedurePassations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres",
                "getterDossierCandidats","marches","gettersOuverturePersonnaliser","getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser"
                
                
@@ -194,7 +202,18 @@ created() {
                 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
            
-        
+        afficherLibelleTypeProcedure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.procedurePassations.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 
         },
         
@@ -203,6 +222,12 @@ created() {
             ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
             // 
           
+
+
+
+
+
+
                  marcheDetail(){
                 return  marche_id=>{
                     if (marche_id!="") {

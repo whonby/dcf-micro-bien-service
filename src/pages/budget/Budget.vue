@@ -181,7 +181,7 @@
                 this.bgWidth=this.i+"%"
 
                this.importBudget(formData,config).then(data=>{
-                   console.log(data)
+                    console.log(data)
                    this.getAllBudgetGeneral()
                    this.getAllUniteAdministrative()
                   this.$router.push({ name: 'budgetGenerals' })
