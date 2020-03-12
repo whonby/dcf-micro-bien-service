@@ -51,7 +51,7 @@ export const documentProcedures = state => state.documentProcedures
  export const executionMarches = state => state.executionMarches
 export const mandats = state => state.mandats
  export const getterActeEffetFinanciers = state => state.acteEffetFinanciers
-
+  export const gettersEtatProcedure = state =>state.gettersEtatProcedure
 // exemple de getters
 export const appelOffres = state => state.appelOffres
 export const gettersOffreTechniques = state => state.offreTechniques
@@ -142,15 +142,39 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
 
 
 
+    // getters d'etat de procedure
+
+    export const gettersEtatProcedurePersonnaliser = (state, getters, rootState, rootGetters) =>
+    state.gettersEtatProcedure.map(element => {
+        if (element.marche_id !== null) {
+            element = {
+                ...element,
+
+
+                objetEntreprise: rootGetters['bienService/marches'].find(
+                    plans => plans.id == element.marche_id
+                ),
+
+            }
+
+        }
+        return element;
+    })
+
+
      export const gettersOuverturePersonnaliser = (state, getters, rootState, rootGetters) =>
     state.gettersOuvertures.map(element => {
-        if (element.entreprise_id !== null) {
+        if (element.entreprise_id !== null && element.cotation_id !==null) {
             element = {
                 ...element,
 
 
                 varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
                     plans => plans.id == element.entreprise_id
+                ),
+
+                varObjetCotation: rootGetters['bienService/gettersCotation'].find(
+                    plans => plans.id == element.cotation_id
                 ),
 
                

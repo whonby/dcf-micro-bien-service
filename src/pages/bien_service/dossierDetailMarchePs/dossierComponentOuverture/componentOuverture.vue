@@ -14,11 +14,11 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                         <tr class="odd gradeX" v-for="(ouverture, index) in gettersOuverturePersonnaliser"
+                         <tr class="odd gradeX" v-for="(ouverture, index) in listeOuverture(macheid)"
                         :key="ouverture.id">
 
                          <td @click="afficherModalOuverture(index)">
-                            {{ouverture.varObjetEntreprise.raison_sociale || 'Non renseigné'}}</td>
+                            {{ouverture.entreprise_id || 'Non renseigné'}}</td>
 
                          <td @click="afficherModalOuverture(index)">
                             {{ouverture.libelle_ouverture || 'Non renseigné'}}</td>
@@ -276,8 +276,8 @@ export default {
                 montant_ouverture:"",
                   note_ouverture:"",
                 rang_ouverture:""
-            }
-
+            },
+         cotation_id:""
         }
     },
     props:["macheid"],
@@ -288,7 +288,7 @@ export default {
 
       computed: {
 
-            ...mapGetters("bienService", [ "gettersOuverturePersonnaliser"]),
+            ...mapGetters("bienService", [ "gettersOuverturePersonnaliser","gettersCotationPersonnaliser"]),
             // ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -298,7 +298,31 @@ export default {
                 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
            
-           
+           listeOuverture(){
+               return macheid =>{
+                   if(macheid!=""){
+                       return this.gettersOuverturePersonnaliser.filter(item =>item.marche_id==macheid)
+
+                      
+                      
+
+                   }
+               }
+           },
+
+        //    listeCotation(){
+        //        return macheid =>{
+        //            if(macheid !=""){
+        //               const vM=this;
+        //               let objet= this.gettersCotationPersonnaliser.find(item=>item.marche_id==macheid) 
+        //                if(objet!=undefined){
+        //                    vM.formCotation.entreprise_id ==objet.id;
+
+        //                }
+        //                 return this.gettersCotationPersonnaliser.filter(idmache=>idmache.marche_id==macheid)
+        //            }
+        //        }
+        //    }
 
     // filtreCotation(){
     //     const searchTem = this.search.toLowerCase();
@@ -323,13 +347,13 @@ export default {
                     keyboard: false
              })
 
-             this.editOuverture = this.gettersOuverturePersonnaliser[index]
+             this.editOuverture = this.gettersOuverturePersonnaliser.find(item=>item==index)
            },
 
 
 
             ajouterOuvertureLocal(){
-
+         
                 this.ajouterOuverture(this.formOuverture)
                 this.formOuverture={
 

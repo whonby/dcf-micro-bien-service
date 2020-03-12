@@ -694,6 +694,7 @@ export default {
 },
 
 
+
 acteurDepenseDynamiques() {
       return id => {
         if (id != null && id != "") {
