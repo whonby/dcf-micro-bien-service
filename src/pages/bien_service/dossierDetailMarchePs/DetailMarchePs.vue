@@ -26,6 +26,7 @@
                             </thead>
                             <tbody>
                             <tr v-if="detail_marche">
+                                
                                  <td class="taskOptions">
                                     {{detail_marche.exo_id}}
                                 </td>
@@ -41,7 +42,7 @@
                                 <td class="taskOptions">
                                     {{detail_marche.objetUniteAdministrative.libelle}}
                                 </td>
-                               
+                               <td>{{afficherLaDotationIntial(detail_marche.economique_id)}}</td>
                             </tr>
                             </tbody>
                         </table>             
@@ -58,7 +59,7 @@
             
             <div class="row-fluid">
                 <div class="span12">
-                     <template v-if="detail_marche.procedure_passation_id == 15">
+                     <template v-if="detail_marche.procedure_passation_id == 15 && afficherLaDotationIntial(detail_marche.economique_id) < 10000000 ">
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -113,6 +114,63 @@
 
                     </div>
                      </template>
+                    <template v-else>
+<div class="widget-box">
+                        <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#tab01">Cotation</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab4">Comite</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab4">Jugement</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab1">Attribution</a></li>
+                               
+                                
+                            </ul>
+                        </div>
+                        
+                         <div class="widget-content tab-content">
+
+                         <div id="tab01" class="tab-pane active">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <h4>Liste des receptions de cotation</h4>
+
+                      <component-cotation :macheid="detail_marche.id"></component-cotation>
+                         </div>
+
+                        <div id="tab1" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+                    </div>
+
+
+                </div>
+                <component-acte :macheid="detail_marche.id"></component-acte>
+
+                </div>
+
+
+                   <div id="tab4" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterOuverture" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+
+
+                </div>
+               
+                   <component-ouverture :macheid="detail_marche.id"></component-ouverture>
+                </div>
+
+                         </div>
+
+                         
+
+                    </div>
+                    </template>
                 </div>
             </div>
               <div class="modal-footer">
@@ -187,6 +245,8 @@ created() {
                
                
               ]),
+              ...mapGetters('parametreGenerauxBudgetaire', ['structures_budgetaires', 
+  'plans_budgetaires']),
             ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -196,6 +256,16 @@ created() {
                 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
            
+            ...mapGetters("uniteadministrative", [
+      "jointureUaChapitreSection",
+      "uniteAdministratives",
+      "budgetGeneral",
+      "getPersonnaliseBudgetGeneral",
+      // "montantBudgetGeneral"
+      // "chapitres",
+      // "sections"
+    ]),
+    
         afficherLibelleTypeProcedure() {
       return id => {
         if (id != null && id != "") {
@@ -203,6 +273,19 @@ created() {
 
       if (qtereel) {
         return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+     afficherLaDotationIntial() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.economique_id == id);
+
+      if (qtereel) {
+        return qtereel.Dotation_Initiale;
       }
       return 0
         }
