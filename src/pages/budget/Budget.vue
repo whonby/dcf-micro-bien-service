@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container-fluid">
-
+            <notifications  />
 
             <div class="row-fluid">
                 <div class="span2">
@@ -46,11 +46,12 @@
                         </tbody>
                     </table>
                     <button  type="submit" class="btn btn-success" @click="ajouterFichier">Importer</button>
-                    <hr>
+                  <!--  <hr>
+                    <progress-bar :progress="progress"></progress-bar>-->
                 <!--    <progress max="100" :value.prop="uploadPercentage"  v-bind:style="{ width: bgWidth, height: bgHeight }"></progress>-->
-                    <div class="progress progress-striped progress-success">
+                   <!-- <div class="progress progress-striped progress-success">
                         <div class="bar" v-bind:style="{ width: bgWidth, height: bgHeight }"></div>
-                    </div>
+                    </div>-->
 
                 </div>
                 <div class="span2">
@@ -64,9 +65,12 @@
 
 <script>
     import { mapGetters, mapActions } from "vuex";
-
+   //import ProgressBar from "../component/ProgressBar"
     export default {
         name: 'budget',
+        components:{
+            //ProgressBar
+        },
         data() {
             return {
                 fabActions: [
@@ -76,7 +80,7 @@
                     }
 
                 ],
-
+               progress:0,
                 bgWidth: '0%',
                 bgHeight: '30px',
                 exercice_budget:"",
@@ -181,15 +185,13 @@
                 this.bgWidth=this.i+"%"
 
                this.importBudget(formData,config).then(data=>{
-                   console.log(erro)
-                   this.getAllBudgetGeneral()
-                   this.getAllUniteAdministrative()
-                   router.push({ path: 'budgetGenerals' })
+                   console.log(data)
+                   //this.getAllBudgetGeneral()
                }).catch(erro=>{
                    console.log(erro)
                    this.getAllBudgetGeneral()
                    this.getAllUniteAdministrative()
-                   router.push({ path: 'budgetGenerals' })
+                  // router.push({ path: 'budgetGenerals' })
                })
 
             },

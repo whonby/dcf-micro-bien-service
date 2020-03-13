@@ -52,6 +52,8 @@ import DetailEngagement from '../../pages/bien_service/contractualisation/detail
 import Avenant from '../../pages/bien_service/contractualisation/avenant.vue';
 import ModePaiement from '../../pages/bien_service/parametres/ModePaiement.vue';
 import indicateurBienService from '../../pages/bien_service/contractualisation/indicateurBienService.vue';
+import PlanPassationMarche from "../../pages/bien_service/ppm/PlanPassationMarche";
+import DetailPPM from "../../pages/bien_service/ppm/DetailPPM";
 const BienServiceRoutes = [
     {
         path: "indicateur-Bien-Service",
@@ -371,7 +373,17 @@ component:analyseDossier
        path:"/creation-type-unite-administrative",
        name:"typeUa",
        component:typeUa
-       }
+       },
+    {
+        path:"/ppm",
+        name:"ppm",
+        component:PlanPassationMarche
+    },
+    {
+        path:"/ppm/:id",
+        name:"DetailPPM",
+        component:DetailPPM
+    }
        
 ]
 

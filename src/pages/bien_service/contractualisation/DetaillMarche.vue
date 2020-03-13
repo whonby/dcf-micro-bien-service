@@ -1,4 +1,3 @@
-Selectionner l'entreprise
 <template>
     
 <div>
@@ -41,7 +40,6 @@ Selectionner l'entreprise
                             </tr>
                             </tbody>
                         </table>
-                        
                     </div>
                 </div>
             </div>

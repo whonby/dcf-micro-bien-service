@@ -8,7 +8,7 @@
         props: ['marche'],
         data: function () {
             return {
-                counter: this.initialCounter
+                counter: ""
             }
         }
     }

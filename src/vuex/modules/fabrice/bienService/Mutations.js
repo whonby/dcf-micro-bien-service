@@ -29,6 +29,7 @@ export const DELETE_PRESTATION = (state, id)=> {
 }
 
 
+
 // mutation des executions de marché
 
 
@@ -1967,3 +1968,34 @@ export const DELETE_MODE_PAIEMNT = (state, id) => {
     state.modepaiements = state.modepaiements.filter(prest => prest.id != id)
 }
 
+
+
+
+export const GET_ALL_PLAN_PASSATION_MARCHE = (state, tableau_prestation) =>{
+    state.plan_passation_marche = tableau_prestation
+}
+
+// add * presttation
+
+export const AJOUTER_PLAN_PASSATION_MARCHE= (state, elementAjouter) => {
+    state.plan_passation_marche.unshift(elementAjouter)
+}
+
+// update all prestation
+export const MODIFIER_PLAN_PASSATION_MARCHE= (state, elementModif)=>{
+    state.plan_passation_marche = state.plan_passation_marche.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+
+
+// delete all prestation
+
+export const DELETE_PLAN_PASSATION_MARCHE = (state, id)=> {
+    state.plan_passation_marche = state.plan_passation_marche.filter(prest => prest.id !=id)
+}

@@ -66,8 +66,8 @@ documentProcedures:[],
      membre_cojo:[],
     proce_verballe:[],
     avenants:[],
-    modepaiements:[]
-
+    modepaiements:[],
+    plan_passation_marche:[],
 
 
 }

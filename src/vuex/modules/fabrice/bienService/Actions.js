@@ -3786,3 +3786,54 @@ export function supprimerModePaiement({ commit }, id) {
 
 }
 
+
+
+
+
+export  function  getPlanPassationMarche({commit}) {
+    queue.push(() => axios.get('/plan_passation_marche').then((response) => {
+        commit('GET_ALL_PLAN_PASSATION_MARCHE', response.data)
+
+    }).catch(error => console.log(error)))
+}
+
+export function ajouterPlanPassationMarche({commit}, objetAjoute,config){
+  return  asyncLoading(axios.post('/plan_passation_marche',objetAjoute,config)).then(response =>{
+        if(response.status == 201){
+            console.log(response.data)
+            commit('AJOUTER_PLAN_PASSATION_MARCHE', response.data)
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
+export function supprimerPlanPassationMarche({commit}, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('DELETE_PLAN_PASSATION_MARCHE', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/plan_passation_marche/' + id).then(response =>{
+                commit('GET_ALL_ANALYSE_DOSSIER', response.data.data)
+                dialog.close()
+            }  )
+        })
+
+}
+/*export function modificationPlanPassationMarche({commit}, element_modifie,config) {
+    asyncLoading( axios.put('/plan_passation_marche' ,element_modifie,config)).then(response => {
+        console.log(response)
+        commit('MODIFIER_PLAN_PASSATION_MARCHE', response)
+        //commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}*/

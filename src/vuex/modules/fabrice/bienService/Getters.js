@@ -1,3 +1,4 @@
+export const getterPlanPassationMarche=state=>state.plan_passation_marche
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays

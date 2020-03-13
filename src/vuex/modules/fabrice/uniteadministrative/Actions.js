@@ -408,9 +408,13 @@ export function importBudget({ commit }, element_modifie,config) {
     return asyncLoading(axios
         .post("/importBudge",element_modifie,config))
         .then(response => {
-         /*   if (response.status == 201) {
-
-            }*/
+            dispatch('getAllBudgetGeneral')
+            dispatch('getAllUniteAdministrative')
+            this.$app.$notify({
+                title: 'Success',
+                text: 'Budget importe avec success!',
+                type: "success"
+            })
             commit("IMPORT_BUDGET", response.data);
         });
 }
