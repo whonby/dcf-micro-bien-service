@@ -35,15 +35,33 @@
                 config: {
                     locale:"fr",
                     schedulerLicenseKey: "GPL-My-Project-Is-Open-Source",
-                    defaultView: "timelineYear",
+                    defaultView: "timelineCustom",
                     //plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
                     header: {
                         left: "prev,next today",
                         center: "title",
                        /* right: "timelineDay,timelineWeek,timelineMonth,listMonth"*/
-                        right: "timelineMonth,timelineYear,listMonth"
+                        right: "timelineMonth,timelineCustom"
                     },
-
+                    fixedWeekCount: false,
+                    contentHeight: 650,
+                    viewRender: function(view, element) {
+                        $('.fc-center')[0].children[0].innerText = view.title.replace(new RegExp("undefined", 'g'), "");
+                    },
+                    views: {
+                        timelineCustom: {
+                            type: 'timeline',
+                            buttonText: 'Annee',
+                            dateIncrement: { years: 1 },
+                            slotDuration: { months: 1 },
+                            visibleRange: function (currentDate) {
+                                return {
+                                    start: currentDate.clone().startOf('year'),
+                                    end: currentDate.clone().endOf("year")
+                                };
+                            }
+                        }
+                    },
                     resourceLabelText: "Marchés",
                     resources: []
                 },
@@ -56,6 +74,14 @@
             if(this.ppm!=""){
                 this.ppm.marche.forEach(function (value) {
                     let objetMarche={"id":value.id,"title":value.objet,"children":[]}
+                    let evenMarcher={
+                        resourceId:value.id,
+                        title  : "Realisation prevue du marche",
+                        start  : value.date_execution_marche_debut_prevue,
+                        end:value.date_execution_fin_prevue,
+
+                    }
+                    self.events.push(evenMarcher)
                    if(value.date_transmission_dao_dmp_prevu!=""){
 
                        let childrenDAO={
@@ -68,6 +94,8 @@
                            title  : "Transmission du DAO à la DMP",
                            start  : value.date_transmission_dao_dmp_prevu,
 
+                           color: 'green',
+                           backgroundColor: 'green'
                        }
 
                        self.events.push(transmission_dao_dmp_prevue1)
@@ -87,6 +115,8 @@
                             title  : "ANO DMP sur DAO",
                             start  : value.date_dmp_dao_prevu,
 
+                            color: 'green',
+                            backgroundColor: 'green'
                         }
 
 
@@ -108,6 +138,8 @@
                             title  : "ANO Bailleur sur DAO",
                             start  : value.date_bailleur_dmp_prevu,
 
+                            color: 'green',
+                            backgroundColor: 'green'
                         }
 
 
@@ -129,6 +161,8 @@
                             title  : "Publication  AO",
                             start  : value.date_publication_ao_prevu,
 
+                            color: 'green',
+                            backgroundColor: 'green'
                         }
 
 
@@ -149,6 +183,8 @@
                             title  : "Lettre d'invitation CF",
                             start  : value.date_lettre_invitation_prevu,
 
+                            color: 'green',
+                            backgroundColor: 'green'
                         }
 
 
@@ -168,7 +204,8 @@
                             resourceId:"ROff"+value.id,
                             title  : "Reception des offres",
                             start  : value.date_reception_offre_prevu,
-
+                            color: 'green',
+                            backgroundColor: 'green'
                         }
 
 
@@ -188,7 +225,8 @@
                             resourceId:"OOffreTechnique"+value.id,
                             title  : "Ouverture des offres (Technique)",
                             start  : value.date_ouverture_offre_technique_prevu,
-
+                            color: 'green',
+                            backgroundColor: 'green'
                         }
 
 
@@ -209,6 +247,8 @@
                             title  : "Rapport d'ouverture",
                             start  : value.date_rapport_ouverture_prevu,
 
+                            color: 'green',
+                            backgroundColor: 'green'
                         }
 
 
@@ -230,6 +270,8 @@
                             title  : "Ouverture des offres (Financières)",
                             start  : value.date_ouverture_offre_finnancier_prevu,
 
+                            color: 'green',
+                            backgroundColor: 'green'
                         }
 
 
@@ -250,6 +292,8 @@
                             title  : "Jugement des offres",
                             start  : value.date_jugement_offre_prevu,
 
+                            color: 'green',
+                            backgroundColor: 'green'
                         }
 
 
@@ -270,6 +314,8 @@
                             title  : "Rapport d'évaluation combiné",
                             start  : value.date_rapport_evaluation_combine_prevue,
 
+                            color: 'green',
+                            backgroundColor: 'green'
                         }
 
 
@@ -290,6 +336,8 @@
                             title  : "Demande ANO/DMP",
                             start  : value.date_demande_ano_dmp_prevue,
 
+                            color: 'green',
+                            backgroundColor: 'green'
                         }
 
                         self.events.push(DemandeAnoDMP1)
@@ -309,6 +357,8 @@
                             title  : "ANO / DMP attribution",
                             start  : value.date_ano_dmp_attribution_prevue,
 
+                            color: 'green',
+                            backgroundColor: 'green'
                         }
 
                         self.events.push(AnoDMPAttribution1)
@@ -328,6 +378,8 @@
                             title  : "Négociation",
                             start  : value.date_negociation_prevue,
 
+                            color: 'green',
+                            backgroundColor: 'green'
                         }
 
                         self.events.push(Negociation1)
@@ -348,6 +400,9 @@
                             resourceId:"SignatureAttributaire"+value.id,
                             title  : "Négociation",
                             start  : value.date_signature_attributaire_prevue,
+
+                            color: 'green',
+                            backgroundColor: 'green'
                         }
 
                         self.events.push(SignatureAttributaire1)
@@ -366,6 +421,9 @@
                             resourceId:"SignatureAutoriteContractant"+value.id,
                             title  : "Signature  Autorité Contractante",
                             start  : value.date_signature_autorite_contractante_prevue,
+
+                            color: 'green',
+                            backgroundColor: 'green'
                         }
 
                         self.events.push(SignatureAutoriteContractant1)
@@ -384,6 +442,9 @@
                             resourceId:"ApprobationMarche"+value.id,
                             title  : "Approbation du marché",
                             start  : value.date_approbation_marche_prevue,
+
+                            color: 'green',
+                            backgroundColor: 'green'
                         }
 
                         self.events.push(ApprobationMarche1)

@@ -50,8 +50,5 @@ export default new Vuex.Store({
     bienService: ModuleBienService
 
 
-      
-
-
     }
   })
