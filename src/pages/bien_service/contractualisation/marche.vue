@@ -345,6 +345,14 @@ exo_id
                    class="btn btn-default"  title="detail marche psc">
                    <span class=""><i class="icon-book"></i></span>
                    </router-link>
+
+                  <router-link :to="{name:'detailMarchePsLimite',params:{id:marche.id}}"
+                   class="btn btn-default"  title="detail marche psL">
+                   <span class=""><i class="icon-plus"></i></span>
+                   </router-link>
+
+
+                   
               <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              

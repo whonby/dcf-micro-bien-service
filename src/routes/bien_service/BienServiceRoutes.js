@@ -54,7 +54,8 @@ import ModePaiement from '../../pages/bien_service/parametres/ModePaiement.vue';
 
 import DetailMarchePs from '../../pages/bien_service/dossierDetailMarchePs/DetailMarchePs.vue';
  import detailMarcheProcedureSimplifierComite from '../../pages/bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/detailMarcheProcedureSimplifierComite.vue';
-import indicateurBienService from '../../pages/bien_service/contractualisation/indicateurBienService.vue';
+ import detailMarchePsLimite from '../../pages/bien_service/dossierDetailMarcheProcedureSimplifieLimite/detailMarchePsLimite.vue'; 
+ import indicateurBienService from '../../pages/bien_service/contractualisation/indicateurBienService.vue';
 
 const BienServiceRoutes = [
     {
@@ -66,6 +67,13 @@ const BienServiceRoutes = [
         path: "mode-paiement",
         name: "ModePaiement",
         component: ModePaiement
+    },
+    // la route pour le chemin de procedure simplifier de limite
+
+    {
+        path:"/detail-marche-psl/:id",
+        name:"detailMarchePsLimite",
+        component:detailMarchePsLimite
     },
 
     {

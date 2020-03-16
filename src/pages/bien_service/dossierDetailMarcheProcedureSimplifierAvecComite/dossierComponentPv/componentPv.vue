@@ -10,7 +10,7 @@
                                             <thead>
                                             <tr>
                                                 
-                                                <th>Ref offre</th>
+                                                <!-- <th>Ref offre</th> -->
                                                 <th>Fichier</th>
                                                
                                                 <th>Action</th>
@@ -18,11 +18,11 @@
                                             </thead>
                            
                                             <tbody>
-                         <tr class="odd gradeX" v-for="(cotation, index) in listeAnalyseDossier(macheid.id)"
+                         <tr class="odd gradeX" v-for="cotation in listeAnalyseDossier(macheid.id)"
                         :key="cotation.id">
 
-                           <td @click="afficheAnnalyseDossier(index)">
-                            {{cotation.cotation.ref_offre|| 'Non renseigné'}}</td>
+                           <!-- <td @click="afficheAnnalyseDossier(index)">
+                            {{cotation.cotation.ref_offre|| 'Non renseigné'}}</td> -->
                          <!-- <td @click="afficheAnnalyseDossier(index)">
                             {{cotation.nom_person || 'Non renseigné'}}</td>
 

@@ -24,7 +24,7 @@
                     <tr class="odd gradeX" v-for="(appelOffre, index) in listeAnalyseDossier(macheid)"
                         :key="appelOffre.id">
                         <td @click="afficheAnnalyseDossier(index)">
-                            {{appelOffre.cotation_id|| 'Non renseigné'}}</td>
+                            {{appelOffre.cotation.ref_offre|| 'Non renseigné'}}</td>
                         <!-- <td @click="afficheAnnalyseDossier(index)">
                             {{appelOffre.dossier_candidature.nom_cand || 'Non renseigné'}}</td> -->
                         <td @click="afficheAnnalyseDossier(index)">
