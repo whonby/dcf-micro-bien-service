@@ -9,6 +9,7 @@
                                  <table class="table table-bordered table-striped"  v-if="macheid">
                                             <thead>
                                             <tr>
+                                                <th>Ref</th>
                                                 <th>Nom</th>
                                                 <th>Contact</th>
                                                 <th>Entreprise</th>
@@ -22,6 +23,8 @@
                          <tr class="odd gradeX" v-for="(cotation, index) in listeCotation(macheid.id)"
                         :key="cotation.id">
 
+                           <td @click="afficherModalcotation(index)">
+                            {{cotation.ref_offre || 'Non renseigné'}}</td>
                          <td @click="afficherModalcotation(index)">
                             {{cotation.nom_person || 'Non renseigné'}}</td>
 
@@ -48,9 +51,9 @@
                                         </table>
 
 
-                 <div id="addCotation" class="modal hide" aria-hidden="true" style="display: none;">
+                 <div id="addCotation" class="modal hide tllgrde" aria-hidden="true" style="display: none;">
 
-
+                      
                          <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter la cotation </h3>
@@ -58,8 +61,19 @@
             <div class="modal-body">
                 <div class="widget-box">
                     <form action="#" method="get" >
-                        
-
+                        <table class="table table-bordered table-striped">
+                     
+                          <tr>
+                              <td>
+                          <div class="control-group">
+            
+                            <label class="control-label">Ref de l'offre:</label>
+                           <div class="control-group">
+                       <input type="text" class="span" placeholder="" v-model="formCotation.ref_offre">
+                            </div>
+                        </div>
+                              </td>
+                              <td>
                          <div class="control-group">
             
                             <label class="control-label">Nom :</label>
@@ -67,6 +81,8 @@
                        <input type="text" class="span" placeholder="saisir le nom" v-model="formCotation.nom_person">
                             </div>
                         </div>
+                              </td>
+                              <td>
 
                         <div class="control-group">
 
@@ -76,6 +92,10 @@
                                 <input type="text" class="span" row="" placeholder=""  v-model="formCotation.contact">
                             </div>
                         </div>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
 
                          <div class="control-group">
                         <label class="control-label">Entreprise.</label>
@@ -87,6 +107,8 @@
                         
                         </div>
                     </div>
+                              </td>
+                              <td>
 
                     <div class="control-group">
 
@@ -96,6 +118,8 @@
                                 <input type="date" class="span" row="" placeholder=""  v-model="formCotation.date_cotation">
                             </div>
                         </div>
+                              </td>
+                              <td>
 
                     <div class="control-group">
               <label class="control-label">Fichier joint:</label>
@@ -103,6 +127,9 @@
                 <input type="file"  @change="OnchangeFichier" />
               </div>
             </div>
+                              </td>
+                          </tr>
+                        </table>
                 
                      
                 
@@ -117,7 +144,7 @@
         </div>
 
 
-             <div id="modifiCotation" class="modal hide" aria-hidden="true" style="display: none;">
+             <div id="modifiCotation" class="modal hide tllgrde" aria-hidden="true" style="display: none;">
 
 
                          <div class="modal-header">
@@ -127,6 +154,19 @@
             <div class="modal-body">
                 <div class="widget-box">
                     <form action="#" method="get" >
+                         
+                  <table class="table table-bordered table-striped">
+                      <tr>
+                          <td>
+                                <div class="control-group">
+            
+                            <label class="control-label">Ref de l'offre:</label>
+                           <div class="control-group">
+                       <input type="text" class="span" placeholder="saisir le nom" v-model="editCotation.ref_offre">
+                            </div>
+                        </div>
+                          </td>
+                          <td>
 
                          <div class="control-group">
             
@@ -135,6 +175,8 @@
                        <input type="text" class="span" placeholder="saisir le nom" v-model="editCotation.nom_person">
                             </div>
                         </div>
+                          </td>
+                          <td>
 
                         <div class="control-group">
 
@@ -144,6 +186,10 @@
                                 <input type="text" class="span" row="" placeholder=""  v-model="editCotation.contact">
                             </div>
                         </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>
 
                          <div class="control-group">
                         <label class="control-label">Entreprise.</label>
@@ -155,6 +201,8 @@
                         
                         </div>
                     </div>
+                          </td>
+                          <td>
 
                            <div class="control-group">
 
@@ -164,6 +212,8 @@
                                 <input type="date" class="span" row="" placeholder=""  v-model="editCotation.date_cotation">
                             </div>
                         </div>
+                          </td>
+                          <td>
 
 
 
@@ -173,6 +223,9 @@
                 <input type="file"   @change="OnchangeFichier" />
               </div>
             </div>
+                          </td>
+                      </tr>
+                  </table>
                 
                      
                 
@@ -204,6 +257,7 @@ export default {
                     fichier_joint:"",
                     entreprise_id:"",
                     date_cotation:"",
+                    ref_offre:""
 
                    // marche_id:""
 
@@ -214,7 +268,8 @@ export default {
                     contact:"",
                     entreprise_id:"",
                     fichier_joint:"",
-                    date_cotation:""
+                    date_cotation:"",
+                    ref_offre:""
 
             },
 
@@ -296,7 +351,7 @@ export default {
                     keyboard: false
               })
 
-              this.editCotation = this.gettersCotationPersonnaliser.find(item=>item.id==index)
+              this.editCotation = this.listeCotation(this.macheid.id)[index]
               
           },
            
@@ -311,7 +366,8 @@ export default {
                 formData.append('contact', this.formCotation.contact);
                 formData.append('entreprise_id', this.formCotation.entreprise_id);
                 formData.append('date_cotation', this.formCotation.date_cotation);
-                formData.append('marche_id', this.marcheid);
+                formData.append('marche_id', this.macheid.id);
+                formData.append('ref_offre', this.formCotation.ref_offre);
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'
@@ -326,7 +382,8 @@ export default {
                    nom_person:"",
                        contact:"",
                        entreprise_id:"",
-                       date_cotation:""
+                       date_cotation:"",
+                       ref_offre:""
                        
                }
            },
@@ -341,6 +398,7 @@ export default {
                 formData.append('entreprise_id', this.editCotation.entreprise_id);
                 formData.append('date_cotation', this.editCotation.date_cotation);
                 formData.append('marche_id', this.marcheid);
+                formData.append('ref_offre', this.editCotation.ref_offre);
                
                 console.log(formData)
                 if ( this.selectedFile!==""){
@@ -361,3 +419,11 @@ export default {
     
 }
 </script>
+
+<style scoped>
+.tllgrde{
+ width: 1000px;
+ margin: 0 -530px;
+ height: 350px;
+}
+</style>

@@ -4,7 +4,7 @@
 
 <div>
         <div class="container-fluid">
-            <h4 v-if="marcheDetail(marcheid)" >Detail Marche en procedure simplifiée : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en cours de passation</button>
+            <h4 v-if="marcheDetail(marcheid)" >Detail Marche en procedure simplifiée avec comité (PSC) : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en cours de passation</button>
                 <button class="btn btn-success btn-large" v-else>Marché attribué</button></h4>
             <hr />
 
@@ -18,7 +18,7 @@
                                 <th>Type de procedure</th>
                                 <th>Objet marché</th>
                                 <th>Reference marché</th>
-                                <th>Montant marché</th>
+                                <th>Montant prévu</th>
                                 <th>Type de marché</th>
                                 <th>Unite administrative</th>
                                 
@@ -64,6 +64,9 @@
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tab01">Reception de l'offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
+                                <!-- <li class=""><a data-toggle="tab" href="#tab5">Rapport d'ouverture</a></li> -->
+                                <li class=""><a data-toggle="tab" href="#tab6">Jugement des offres</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab7">Rapport du jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab1">Attribution</a></li>
                                
                                 
@@ -102,14 +105,53 @@
 
                    <div id="tab4" class="tab-pane">
                 <div align="right">
+                   
+
+
+                </div>
+               
+                  <component-ouverture :macheid="detail_marche.id"></component-ouverture>
+                  <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>
+                </div>
+
+
+
+                
+                   <div id="tab5" class="tab-pane">
+                <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterOuverture" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                        <a href="#jugement" data-toggle="modal" class="btn btn-warning">Ajouter</a>
                     </div>
 
 
                 </div>
                
-                   <component-ouverture :macheid="detail_marche.id"></component-ouverture>
+
+                </div>
+
+                  <div id="tab6" class="tab-pane">
+               <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterMP" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                    </div>
+
+
+                </div>
+                <component-analyse :macheid="detail_marche.id"></component-analyse>
+
+                </div>
+
+                  <div id="tab7" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterObservationBailleur" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+
+
+                </div>
+               
+                 <component-analyse :macheid="detail_marche.id"></component-analyse>
+              <!-- <component-pv :macheid="detail_marche.id"></component-pv> -->
                 </div>
 
                          </div>
@@ -135,13 +177,23 @@
 <script>
     import { mapGetters, mapActions } from "vuex";
     //import moment from 'moment';
+ 
     import componentCotation from '../dossierDetailMarchePs/dossierComponentPs/componentCotation';
      import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
-     import componentOuverture from '../dossierDetailMarchePs/dossierComponentOuverture/componentOuverture';  
+      import componentOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
+      import componentAnalyse from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
+    
+     import componentOuvertureMembre from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
+    //import componentPvJugement from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentRapportJugement/componentPvJugement';
+  
+  
+  // import componentRapportJugement from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierRapportjugement/componentRapportJugement';
+    
+    //import componentMembreOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentMembreOuverture';
    import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
     //import bailleurAjouter from '../dossierComponent/bailleurAjouter';
 
-   // import bailleurAjouter from '../dossierComponent/bailleurAjouter'
+    //import bailleurAjouter from '../dossierComponent/bailleurAjouter'
 
     //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
     //import {  ModelListSelect } from 'vue-search-select'
@@ -154,7 +206,12 @@
             componentCotation,
             componentEtat,
             componentOuverture,
+            componentOuvertureMembre,
+            componentAnalyse,
+           //componentRapportJugement,
             componentActe,
+            //componentPvJugement,
+
 
 
         // bailleurAjouter,
@@ -189,7 +246,8 @@ created() {
         computed: {
 
             ...mapGetters("bienService", [ "procedurePassations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres",
-               "getterDossierCandidats","marches","gettersOuverturePersonnaliser","getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser"
+               "getterDossierCandidats","marches","gettersOuverturePersonnaliser",
+               "getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser","getterCojos"
                
                
               ]),

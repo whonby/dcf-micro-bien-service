@@ -1,4 +1,6 @@
 
+exo_id
+
 <template>
     <div class="container-fluid">
          <div id="exampleModal" class="modal hide taillModal">
@@ -339,6 +341,10 @@
                 class="btn btn-default " title="Detail marche proceduce simplifiée">
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link> 
+                   <router-link :to="{name:'detailMarcheProcedureSimplifierComite',params:{id:marche.id}}"
+                   class="btn btn-default"  title="detail marche psc">
+                   <span class=""><i class="icon-book"></i></span>
+                   </router-link>
               <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
@@ -773,7 +779,8 @@ export default {
                 unite_administrative_id:"",
                 gdenature_id:"",
                 activite_id:"",
-                typeappel_id:""
+                typeappel_id:"",
+                exo_id:""
         
       },
       editMarche: {
@@ -784,7 +791,8 @@ export default {
                 type_marche_id:"",
                 unite_administrative_id:"",
                 imputation:"",
-                 activite_id:""
+                 activite_id:"",
+                 exo_id:""
                  
       },
       indicateur_test:1,

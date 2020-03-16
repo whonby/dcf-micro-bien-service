@@ -184,7 +184,8 @@ this.getCommune()
 this.getChoixProcedure()
 
 this.getCotation()
-this.getOuverture()
+this.getOuverture()    
+
 
 // this.getTypeProcedure()
 

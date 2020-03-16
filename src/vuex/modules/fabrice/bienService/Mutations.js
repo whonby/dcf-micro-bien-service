@@ -185,6 +185,36 @@ export const MODIFIER_ETAT_PROCEDURE = (state, elementModif)=>{
 
 
 
+// get all  motif de decision
+// export const GET_ALL_PSC = (state, tableau_psc) =>{
+//     state.gettersPsc = tableau_psc
+// }
+
+// add * motif de decision 
+
+// export const AJOUTER_PSC = (state, elementAjouter) => {
+//     state.gettersPsc.unshift(elementAjouter)
+// }
+
+// update all motif de decision
+// export const MODIFIER_PSC = (state, elementModif)=>{
+//     state.gettersPsc = state.gettersPsc.map(response => {
+//         if(response.id == elementModif.id){
+//             response = {...elementModif}
+//         }
+//         return response
+//     })
+// }
+
+
+
+// delete all motif de decision
+
+// export const SUPPRI_PSC = (state, id)=> {
+//     state.gettersPsc = state.gettersPsc.filter(motif => motif.id !=id)
+// }
+
+
 
 
 

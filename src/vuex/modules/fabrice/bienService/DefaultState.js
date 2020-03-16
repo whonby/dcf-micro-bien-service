@@ -69,7 +69,8 @@ documentProcedures:[],
     modepaiements:[],
     gettersCotations:[],
     gettersOuvertures:[],
-    gettersEtatProcedure:[]
+    gettersEtatProcedure:[],
+    gettersPsc:[]
 
 
 

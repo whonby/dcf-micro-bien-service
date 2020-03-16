@@ -20,6 +20,7 @@ export const typeFactures = state => state.typeFactures.sort((a,b)=>(a.code>b.co
 export const typeActeDepenses = state => state.typeActeDepenses
 export const acteurDepenses = state => state.acteurDepenses.sort((a,b)=>(a.code>b.code)? 1:-1)
 export const getterCojos = state => state.cojos
+
 export const conditions = state => state.conditions
 export const fonctionOccupes = state => state.fonctionOccupes
 export const getterAnalyseDossiers = state => state.analyseDossiers
@@ -63,8 +64,8 @@ export const getterAnalyseDMP = state => state.analyseDMP
 export const getterAnoDMPBailleur = state => state.stateAnoDmpBailleur
 export const getterObseravtionBailleurs = state => state.obseravtionBailleurs
 // export const nombremarches = state => state.marches.length;
-
-//export const gettersCotations = state =>state.gettersCotations 
+//export const gettersPsc = state =>state.gettersPsc
+export const gettersCotations = state =>state.gettersCotations 
 
 export const getterMarcheBailleur= state => state.bailleurMarche;
 export const getterMembreCojo=state=>state.membre_cojo;
@@ -140,6 +141,28 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
         return element;
     })
 
+
+
+
+    // export const gettersCojoPersonnaliser = (state, getters, rootState, rootGetters) =>
+    // state.cojos.map(element => {
+    //     if (element.cotation_id !== null) {
+    //         element = {
+    //             ...element,
+
+
+    //             varObjetCotation: rootGetters['bienService/gettersCotations'].find(
+    //                 plans => plans.id == element.cotation_id
+    //             ),
+
+               
+
+
+    //         }
+
+    //     }
+    //     return element;
+    // })
 
 
     // getters d'etat de procedure

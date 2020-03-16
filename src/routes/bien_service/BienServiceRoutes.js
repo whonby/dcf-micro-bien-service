@@ -53,7 +53,7 @@ import Avenant from '../../pages/bien_service/contractualisation/avenant.vue';
 import ModePaiement from '../../pages/bien_service/parametres/ModePaiement.vue';
 
 import DetailMarchePs from '../../pages/bien_service/dossierDetailMarchePs/DetailMarchePs.vue';
-
+ import detailMarcheProcedureSimplifierComite from '../../pages/bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/detailMarcheProcedureSimplifierComite.vue';
 import indicateurBienService from '../../pages/bien_service/contractualisation/indicateurBienService.vue';
 
 const BienServiceRoutes = [
@@ -66,6 +66,12 @@ const BienServiceRoutes = [
         path: "mode-paiement",
         name: "ModePaiement",
         component: ModePaiement
+    },
+
+    {
+    path:"/detail-marche-psc/:id",
+    name:"detailMarcheProcedureSimplifierComite",
+    component:detailMarcheProcedureSimplifierComite
     },
     {
         path: "Avenant",
