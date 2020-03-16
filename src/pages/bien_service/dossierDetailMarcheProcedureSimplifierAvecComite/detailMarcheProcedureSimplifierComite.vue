@@ -142,16 +142,15 @@
                 </div>
 
                   <div id="tab7" class="tab-pane">
-                <div align="right">
+               <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterObservationBailleur" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                        <a href="#ajouterPv" data-toggle="modal" class="btn btn-primary">Ajouter</a>
                     </div>
 
 
                 </div>
-               
-                 <component-analyse :macheid="detail_marche.id"></component-analyse>
-              <!-- <component-pv :macheid="detail_marche.id"></component-pv> -->
+               <component-pv :macheid="detail_marche.id"></component-pv>
+
                 </div>
 
                          </div>
@@ -184,13 +183,18 @@
       import componentAnalyse from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
     
      import componentOuvertureMembre from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
+      import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
+     
+     import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
+
+    
     //import componentPvJugement from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentRapportJugement/componentPvJugement';
   
   
   // import componentRapportJugement from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierRapportjugement/componentRapportJugement';
     
     //import componentMembreOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentMembreOuverture';
-   import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
+ 
     //import bailleurAjouter from '../dossierComponent/bailleurAjouter';
 
     //import bailleurAjouter from '../dossierComponent/bailleurAjouter'
@@ -208,7 +212,8 @@
             componentOuverture,
             componentOuvertureMembre,
             componentAnalyse,
-           //componentRapportJugement,
+         //  componentRapportJugement,
+         componentPv,
             componentActe,
             //componentPvJugement,
 
