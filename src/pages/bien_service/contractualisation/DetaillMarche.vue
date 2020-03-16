@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 Liste des dossiers candidats
 reg_com
 listeAppelOffre
 isDetailDossierCandi
+=======
+>>>>>>> 357e1bd8d66595a534b26021a3bc5d636aa9c8a9
 <template>
     
 <div>

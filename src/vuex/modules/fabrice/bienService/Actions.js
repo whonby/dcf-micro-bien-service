@@ -2442,6 +2442,65 @@ export function supprimerOuverture({commit}, id) {
 
 
 
+//////////
+
+
+
+
+// export function getOuverturePsc({commit}) {
+//   queue.push(() => axios.get('/list_psc').then((response) => {
+//     commit('GET_ALL_PSC', response.data)
+    
+// }).catch(error => console.log(error)))
+// }
+
+// action pour ajouter les infos 
+
+// export function ajouterPsc({commit}, elementAjout){
+//   asyncLoading(axios.post('/add_psc', elementAjout)).then(response =>{
+//       if(response.status == 201){
+//         commit('AJOUTER_PSC', response.data)
+//           dispatch('getOuverture')
+//           this.$app.$notify({
+//             title: 'success ',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
+
+//   }).catch(error => console.log(error))
+// }
+
+// action pour modifier le type text juridique
+
+
+
+// export function modifierPsc({ commit }, element_modifie) {
+//   asyncLoading(axios.put('/update_psc/' + element_modifie.id, element_modifie)).then(response => {
+//     commit('MODIFIER_PSC', response.data)
+
+
+//     this.$app.$notify({
+//       title: 'success ',
+//       text: 'Modification effectué !',
+//       type: "success"
+//     })
+//   }).catch(error => console.log(error))
+// }
+
+
+// supprimer le type text juridique
+
+// export function supprimerPsc({commit}, id) {
+//  this.$app.$dialog
+//  .confirm("Voulez vous vraiment supprimer ?.")
+//  .then(dialog => {
+//    commit('SUPPRI_PSC', id)
+
+//    axios.delete('/suppri_psc/' + id).then(() => dialog.close() )   
+//  })
+
+// }
 
 
 

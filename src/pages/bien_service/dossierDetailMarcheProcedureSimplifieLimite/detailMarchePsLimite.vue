@@ -4,7 +4,7 @@
 
 <div>
         <div class="container-fluid">
-            <h4 v-if="marcheDetail(marcheid)" >Detail Marche en procedure simplifiée avec comité (PSC) : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en cours de passation</button>
+            <h4 v-if="marcheDetail(marcheid)" >Detail Marche en procedure simplifiée à competition Limité (PSL) : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en cours de passation</button>
                 <button class="btn btn-success btn-large" v-else>Marché attribué</button></h4>
             <hr />
 
@@ -62,11 +62,12 @@
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab01">Reception de l'offre</a></li>
+                                 <li class="active"><a data-toggle="tab" href="#tab01">Lettre d'invitation</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab02">Reception de l'offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab5">Rapport d'ouverture</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tab6">Jugement des offres</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab7">Rapport du jugement</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab7">Rapport d'évaluation combiné</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab1">Attribution</a></li>
                                
                                 
@@ -75,7 +76,20 @@
                         
                          <div class="widget-content tab-content">
 
-                         <div id="tab01" class="tab-pane active">
+
+                              <div id="tab01" class="tab-pane active">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <h4>Publication de l'offre</h4> -->
+
+                      <invitationCf :macheid="detail_marche.id"></invitationCf>
+                         </div>
+
+
+
+                         <div id="tab02" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
@@ -184,7 +198,7 @@
     
      import componentOuvertureMembre from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
       import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
-     
+     import invitationCf from '../DossierPso/lettreInvitation/invitationCf';
      import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
 
     
@@ -214,7 +228,9 @@
             componentAnalyse,
          //  componentRapportJugement,
          componentPv,
+         invitationCf,
             componentActe,
+            
             //componentPvJugement,
 
 
