@@ -385,7 +385,8 @@ export function ajouterBesoinImmo({ commit, dispatch }, nouveau) {
       normearticle: nouveau.normearticle,
       fonction_id: nouveau.fonction_id,
       qterealise: nouveau.qterealise,
-      dure_vie: nouveau.dure_vie
+      dure_vie: nouveau.dure_vie,
+      demandeur_id: nouveau.demandeur_id
     })
   ).then(response => {
     if (response.status == 201) {
@@ -427,7 +428,10 @@ export function modifierBesoinImmo({ commit, dispatch }, nouveau) {
        norme_id: nouveau.norme_id,
       normearticle: nouveau.normearticle,
       fonction_id: nouveau.fonction_id,
-      dure_vie: nouveau.dure_vie
+      dure_vie: nouveau.dure_vie,
+      demandeur_id: nouveau.demandeur_id,
+      direction: nouveau.direction,
+      service_id: nouveau.service_id,
     })
   ).then(response => {
     commit("MODIFIER_BESOIN_IMMO", response.data);

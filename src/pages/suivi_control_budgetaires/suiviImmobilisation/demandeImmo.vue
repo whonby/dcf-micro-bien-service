@@ -98,7 +98,7 @@
                 <div class="control-group">
                   <label class="control-label">Type Unite d'administrative</label>
                   <div class="controls">
-                    <select v-model="formData.type_ua_id" class="span4">
+                    <select v-model="formData.typeuniteadminist_id" class="span4">
                       <option
                         v-for="typeUniteA in type_Unite_admins"
                         :key="typeUniteA.id"
@@ -112,10 +112,10 @@
                 <div class="control-group">
                   <label class="control-label">Unite administrative</label>
                   <div class="controls">
-                    <select v-model="formData.ua_id" class="span4">
+                    <select v-model="formData.uniteadmin_id" class="span4">
                       <option value=""></option>
                       <option
-                        v-for="typeUniteA in uniteAdministDynamiques(formData.type_ua_id)"
+                        v-for="typeUniteA in uniteAdministDynamiques(formData.typeuniteadminist_id)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
@@ -127,10 +127,10 @@
                  <div class="control-group">
                   <label class="control-label">Fonction</label>
                   <div class="controls">
-                    <select v-model="formData.fonction_id" class="span4" >
+                    <select v-model="formData.fonction_id" class="span4" :readOnly="deverouFonctionDirectionService">
                      <option value="">Désactiver</option>
                       <option
-                        v-for="typeUniteA in fonctionDynamiquesParUa(formData.ua_id)"
+                        v-for="typeUniteA in fonctionDynamiquesParUa(formData.uniteadmin_id)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.fonction.id"
                       >{{typeUniteA.fonction.libelle}}</option>
@@ -146,7 +146,7 @@
                <div class="control-group">
                   <label class="control-label">Direction</label>
                   <div class="controls">
-                    <select v-model="formData.servicegest_id" class="span4" >
+                    <select :readOnly="deverouFonctionDirectionService" v-model="formData.direction" class="span4" >
                       <option value="">Désactiver</option>
                       <option
                        value="Direction"
@@ -159,7 +159,7 @@
                  <div class="control-group">
                   <label class="control-label">Service</label>
                   <div class="controls">
-                    <select v-model="formData.localisationgeo_id" class="span4">
+                    <select v-model="formData.service_id" class="span4" :readOnly="deverouFonctionDirectionService">
                       <option value="">Désactiver</option>
                       <option
                         v-for="typeUniteA in servicesua"
@@ -175,15 +175,15 @@
                <div class="control-group">
                   <label class="control-label">famille</label>
                   <div class="controls">
-                    <select v-model="formData.section_id" class="span4">
+                    <select v-model="formData.famille_id" class="span4">
                       <option value=""></option>
                       <option
-                        v-for="typeUniteA in familleNormeDynamiques(formData.servicegest_id)"
+                        v-for="typeUniteA in familleNormeDynamiques(formData.direction)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.norme_famille.id"
                       >{{typeUniteA.norme_famille.libelle}}</option>
                        <option
-                        v-for="typeUniteA in familleNormeServiceDynamiques(formData.localisationgeo_id)"
+                        v-for="typeUniteA in familleNormeServiceDynamiques(formData.service_id)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.norme_famille.id"
                       >{{typeUniteA.norme_famille.libelle}}</option>
@@ -220,6 +220,7 @@
                       readonly
                       
                     />
+                   
                   </div>
                   </div>
               </td>
@@ -231,7 +232,7 @@
                    <input
                    :max="afficheNormeFamille"
                       type="number"
-                    v-model="formData.demande"
+                  v-model="formData.quantite"
                       class="span4"
                      
                     />
@@ -240,16 +241,16 @@
               </td>
                <td>
                 <div class="control-group">
-                  <label class="control-label">Acteur demandeur</label>
+                  <label class="control-label">Demandeur</label>
                 
                   <div class="controls">
-                    <input
-                      type="text"
-                  :value="afficheActeurDepense(formData.fonction_id)"
-                      class="span4"
-                     readonly
-                      
-                    />
+                      <select v-model="formData.demandeur_id" class="span4">
+                     <option
+                        v-for="typeUniteA in afficheActeurDepense(formData.fonction_id)"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.matricule}}--{{typeUniteA.nom}}--{{typeUniteA.prenom}}</option>
+                   </select>
                   </div>
                   </div>
               </td>
@@ -263,9 +264,9 @@
                   <div class="controls">
                     <input
                       type="text"
-                      v-model="formData.libelle"
+                   :value="CoutMoyen(formData.famille_id)"
                       class="span4"
-                      placeholder="Saisir le Nom unite administrative"
+                      
                        readonly
                     />
                </div>
@@ -279,28 +280,29 @@
                   <div class="controls">
                     <input
                       type="text"
-                      v-model="formData.libelle"
+                     :value="montantTotalarticles"
                       class="span4"
-                      placeholder="Saisir le Nom unite administrative"
+                     
                      readonly
                     />
                </div>
                 </div>
               </td>
-               <td>
+             <td>
                 <div class="control-group">
-                  <!-- <label class="control-label">Code</label> -->
-                
+                  <label class="control-label">Date enregistrement</label>
+                    
+               
                   <div class="controls">
                     <input
-                      type="hidden"
-                   
-                      class="span"
-                      placeholder="Saisir le code"
-                      readonly
+                      type="date"
+                     v-model="formData.date_jour"
+                      class="span4"
+                     
+                     
                     />
-                  </div>
-                  </div>
+               </div>
+                </div>
               </td>
             </tr>
           
@@ -308,7 +310,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterUniteAdministrativeLocal(formData)"
+          @click.prevent="ajouterBesoinImmoLocal(formData)"
           class="btn btn-primary"
           href="#"
          
@@ -377,7 +379,7 @@
                     <th>Fonction</th>
                      <!-- <th>Equipement Type</th> -->
                      <th>Famille</th>
-                    <th>Article</th>
+                    
                     <th title="Quantité">Qté</th>
                     <th title="Prix Unitaire">PU</th>
                     <th>Total</th>
@@ -396,18 +398,16 @@
                     v-for="(BesoinImmo,index) in besoinEquipement"
                     :key="BesoinImmo.id"
                   >
-                   <td
+                   <!-- <td
                       @dblclick="afficherModalModifierBesoinImmo(index)"
                     >{{BesoinImmo.Afficheua.libelle || 'Non renseigné'}}</td> 
                      <td
                       @dblclick="afficherModalModifierBesoinImmo(index)"
-                    >{{BesoinImmo.Affichefonction.libelle || 'Non renseigné'}}</td>
+                    >{{BesoinImmo.Affichefonction.libelle || 'Non renseigné'}}</td> -->
                     <td
                       @dblclick="afficherModalModifierBesoinImmo(index)"
                     >{{BesoinImmo.Affichefamille.libelle || 'Non renseigné'}}</td>
-                    <td
-                      @dblclick="afficherModalModifierBesoinImmo(index)"
-                    >{{BesoinImmo.AfficheArticle.libelle || 'Non renseigné'}}</td>  
+                   
                    <!-- <td 
                       @dblclick="afficherModalModifierBesoinImmo(index)"
                     >{{BesoinImmo.typeUniteAdmin.libelle || 'Non renseigné'}}</td> -->
@@ -611,25 +611,69 @@ json_fields: {
       "type_Unite_admins",
       "getPersoListeDesNorme",
       "normeImmo",
-      "getPersonnaliseNormeEquipement"
+      "getPersonnaliseNormeEquipement",
+      
       
     ]),
     ...mapGetters("uniteadministrative", ["uniteAdministratives","directions","servicesua"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
 ...mapGetters("personnelUA", ["all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
 
+
+// verifierLaNorme(){
+//     let normeInitial=parseFloat(this.afficheNormeFamille)
+//       let qteDemande=parseFloat( this.formData.quantite)
+//        if(normeInitial < qteDemande){
+//         alert("La norme doit etre superieure a la qte demande")
+//       }
+// },
+
+CoutMoyen() {
+ return id => {
+    if(id !=""){
+      
+    const val = parseFloat((this.getAfficheArticle.filter(element => element.famille_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(2))/this.getAfficheArticle.filter(element => element.famille_id == id).length).toFixed(2); 
+    if (isNaN(val)) return null;
+    return val;
+  
+ }
+  }
+    },
+
+
+ montantTotalarticles() {
+   if(this.formData.famille_id !=""){
+      const val = parseFloat(this.formData.quantite) * parseFloat(this.CoutMoyen(this.formData.famille_id));
+        if (isNaN(val)) return null;
+     return parseFloat(val).toFixed(2);
+    }
+    return null
+
+},
+
+ deverouFonctionDirectionService() {
+      return this.formData.uniteadmin_id == "";
+    },
 afficheActeurDepense() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.fonction.id == this.formData.fonction_id);
-
-      if (qtereel) {
-        return qtereel.matricule.concat('  ', qtereel.nom,'  ',qtereel.prenom)
-      }
-      return 0
+          return this.all_acteur_depense.filter(element => element.fonction.id == id);
         }
       };
     },
+
+// afficheActeurDepense() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.all_acteur_depense.find(qtreel => qtreel.fonction.id == this.formData.fonction_id);
+
+//       if (qtereel) {
+//         return qtereel.matricule.concat('  ', qtereel.nom,'  ',qtereel.prenom)
+//       }
+//       return 0
+//         }
+//       };
+//     },
  fonctionDynamiquesParUa() {
       return id => {
         if (id != null && id != "") {
@@ -701,7 +745,7 @@ fonctionDynamiques() {
     },
     afficheNormeFamille() {
       
-      const norme1 = this.normeImmo.find(normeEquipe => normeEquipe.famille_id == this.formData.section_id);
+      const norme1 = this.normeImmo.find(normeEquipe => normeEquipe.famille_id == this.formData.famille_id);
       if (norme1) {
         return norme1.norme;
       }
@@ -737,10 +781,13 @@ fonctionDynamiques() {
     // fonction pour vider l'input ajouter
     ajouterBesoinImmoLocal() {
  
-       if (this.formData.quantite > this.normeequipement ) {
-        alert("La norme doit etre superieure au egal a la quantité demande")
+       if (this.formData.quantite > this.afficheNormeFamille ) {
+        alert("Quantite demande doit être egale a la norme definie")
       }
-      // else if (this.normeequipement <= this.qtedemande  ){
+      else if(this.formData.quantite < this.afficheNormeFamille){
+         alert("Quantite demande doit être egale a la norme definie")
+      }
+      // else if (this.afficheNormeFamille <= this.qtedemande  ){
       //    alert("Demande déja Effectuée")
       // }
       else
@@ -752,18 +799,19 @@ fonctionDynamiques() {
       //   qte_recu: this.qteRecu,
         
       // }
-      var objetPourModifiernormerealise = {
-        id: this.normeEqup,
-        qtedmd: this.totalNorme
-      }
-      this.modifierQuantiteNormeDmd(objetPourModifiernormerealise);
+      // var objetPourModifiernormerealise = {
+      //   id: this.normeEqup,
+      //   qtedmd: this.totalNorme
+      // }
+      // this.modifierQuantiteNormeDmd(objetPourModifiernormerealise);
        var nouvelObjet = {
       ...this.formData,
+      
        montant_total: this.montantTotal,
       historiqueqte: this.Historqte,
-         prix_unitaire:this.coutMoyen,
+         prix_unitaire:this.CoutMoyen(this.formData.famille_id),
       norme_id : this.normeEqup,
-       normearticle : this.normeequipement,
+       normearticle : this.afficheNormeFamille,
       dure_vie :this.dureVieEquipement,
       stock_id:this.quantiteEnstockid   ,
       qtestock : this.quantiteEnstock    };
@@ -824,12 +872,12 @@ fonctionDynamiques() {
     },
     // fonction pour vider l'input modification
     modifierBesoinImmoLocal() {
-        if (this.formData.quantite > this.normeequipementModifier ) {
-        alert("La norme doit etre superieure au egal a la quantité demande")
+        if (this.formData.quantite > this.afficheNormeFamille ) {
+        alert("Quantite demande est egale a la norme definie")
       }
-      //  else if (this.normeequipementModifier <= this.qtedemandemodifier  ){
-      //    alert("Demande déja Effectuer")
-      // }
+      else if(this.formData.quantite < this.afficheNormeFamille){
+         alert("Quantite demande est egale a la norme definie")
+      }
       else
       {
          var objetPourModifiernormerealise1 = {
@@ -842,7 +890,7 @@ fonctionDynamiques() {
          montant_total: this.montantTotalModifier,
       historiqueqte: this.HistorqteModifier,
          prix_unitaire:this.coutMoyenModifier,
-         normearticle : this.normeequipementModifier,
+         normearticle : this.afficheNormeFamilleModifier,
          norme_id : this.normeEqupmodifier,
          dure_vie :this.dureVieEquipementModifier,
           stock_id:this.quantiteEnstockidModifier  ,

@@ -75,10 +75,10 @@
                      
                       <option value=""></option>
                       <option
-                        v-for="typeUniteA in familleNormeDynamiques(formData.direction_id)"
+                        v-for="typeUniteA in familles"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
-                      >{{typeUniteA.famille_id}}</option>
+                      >{{typeUniteA.libelle}}</option>
                     </select>
                   </div>
                 </div>

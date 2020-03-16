@@ -1,6 +1,3 @@
-
-resultaAnalysePv
-
 <template>
     
 <div>
@@ -213,13 +210,7 @@ resultaAnalysePv
                                         <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)">
                                             {{appelOffre.type_appel || 'Non renseigné'}}</td>
 
-                                        <!-- <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{appelOffre.financement || 'Non renseigné'}}</td> -->
-
-                                        <!-- <td @dblclick="afficherModalModifierActeDepense(index)">
-                                            {{appelOffre.nom_bailleurs || 'Non renseigné'}}</td> -->
-                                        <!-- <td @dblclick="afficherModalModifierActeDepense(index)"> -->
-
+                                       
                                         <td @dblclick="afficherModalModifierActeDepense(appelOffre.id)">
 
                                             {{formaterDate(appelOffre.date_emission) || 'Non renseigné'}}</td>

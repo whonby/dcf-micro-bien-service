@@ -1,11 +1,11 @@
 import axios from '../../fabrice/bienService/urls/api'
 import { asyncLoading } from 'vuejs-loading-plugin'
-
+modifierAppelOffre
 var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
 
 // action for print all to prestation
-ajouterMembreCojo
+
 // export  function  getPrestation({commit}) {
 //     queue.push(() => axios.get('/url').then((response) => {
 //       commit('GET_ALL_PRESTATION', response.data)
@@ -2963,11 +2963,12 @@ export function modifierLettreInvitation({commit}, element_modifie,config) {
 }
 // supprimer le type text juridique
 
-export function supprimerLettreInvitation({commit}, id) {
+export function supprimerLettreInvitation({ commit, dispatch}, id) {
     this.$app.$dialog
         .confirm("Voulez vouz vraiment supprimer ?.")
         .then(dialog => {
-            commit('SUPPRIMER_LETTRE_INVITATION', id)
+          commit('SUPPRIMER_LETTRE_INVITATION', id)
+          dispatch('getLettreInvitation')
             // // dialog.loading(false) // stops the proceed button's loader
             axios.delete('/lettre_invitations/' + id).then(() => dialog.close() )
         })
@@ -3003,11 +3004,12 @@ export function ajouterMandater({commit}, elementAjout,config){
     }).catch(error => console.log(error))
 }
 
+
 // action pour modifier le type text juridique
 
 
 export function modifierMandater({commit}, element_modifie) {
-    asyncLoading( axios.put('/mondates',element_modifie)).then(response => {
+  asyncLoading(axios.put('/update_mondates',element_modifie)).then(response => {
         commit('MODIFIER_MANDATER', response.data)
         this.$app.$notify({
             title: 'success ',
