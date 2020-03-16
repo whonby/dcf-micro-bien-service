@@ -1,3 +1,4 @@
+
 <template>
     <div>
 
@@ -274,6 +275,14 @@ export default {
 
                 
             },
+            // listeAppelOffre: function () {
+            //     return id => {
+            //         if (id != "") {
+            //             //console.log("Marche lettre inviation marche")
+            //             return this.appelOffres.filter(idmarche => idmarche.marche_id == id)
+            //         }
+            //     }
+            // },
 
             listeAppelOffre(){
                 return  marche_id=>{

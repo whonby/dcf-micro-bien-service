@@ -1,5 +1,7 @@
-Date limite
+Liste des dossiers candidats
+reg_com
 listeAppelOffre
+isDetailDossierCandi
 <template>
     
 <div>

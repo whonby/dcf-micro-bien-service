@@ -1,4 +1,6 @@
-
+model-list-select
+addLot
+ref_appel
 <template>
     
 
@@ -186,8 +188,8 @@
                                 <li class=""><a data-toggle="tab" href="#tab041">Lettre d'invitation CF</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab04">Le mandaté</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab051">Reception des offres</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab44">Ouverture des offres</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab049">D.Candidats</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab784">Ouverture des offres</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab7884">D.Candidats</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab101">Rapport d'ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab54"> Jugement des offres </a></li>
                                 <li class=""><a data-toggle="tab" href="#tab61">Rapport d'évaluation</a></li>
@@ -246,11 +248,43 @@
 
                       <component-cotation :macheid="detail_marche"></component-cotation>
                          </div>
+                             <div id="tab444" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <h4>Publication de l'offre</h4> -->
+
+                      <component-cotation :macheid="detail_marche"></component-cotation>
+                         </div>
+                          <div id="tab784" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterOuverture" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+
+
+                </div>
+               
+                   <component-ouverture :macheid="detail_marche.id"></component-ouverture>
+                </div>
+                 <div id="tab7884" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterDossierCandidat" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+
+
+                </div>
+               
+                   <dossier-Candidat :macheid="detail_marche.id"></dossier-Candidat>
+                </div>
                          </div>
 
                          
 
                     </div>
+                    
                      </template>
 
                       <template v-else>
@@ -305,7 +339,7 @@ ddddddddddddddddd
     import addLot from '../dossierLot/addLot';
         import invitationCf from '../DossierPso/lettreInvitation/invitationCf';
  import mandateBs from '../DossierPso/mandaté/mandateBs';
-
+import dossierCandidat from '../DossierPso/dossierCandidat/dossierCandidat'
     //import bailleurAjouter from '../dossierComponent/bailleurAjouter';
 
    // import bailleurAjouter from '../dossierComponent/bailleurAjouter'
@@ -325,7 +359,8 @@ ddddddddddddddddd
             publicationOffre,
 addLot,
 invitationCf,
-mandateBs
+mandateBs,
+dossierCandidat
 
         // bailleurAjouter,
 
