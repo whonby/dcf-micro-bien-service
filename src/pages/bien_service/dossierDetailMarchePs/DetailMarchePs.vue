@@ -4,6 +4,7 @@
 
 <div>
         <div class="container-fluid">
+            
             <h4 v-if="marcheDetail(marcheid)" >Detail Marche en procedure simplifiée : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en cours de passation</button>
                 <button class="btn btn-success btn-large" v-else>Marché attribué</button></h4>
             <hr />
@@ -15,10 +16,10 @@
                             <thead>
                             <tr>
                                 <th>Exercice Budgetaire</th>
-                                <th>Type de procedure</th>
+                                <th>Procedure de passation</th>
                                 <th>Objet marché</th>
                                 <th>Reference marché</th>
-                                <th>Montant marché</th>
+                                <th>Montant prévu marché</th>
                                 <th>Type de marché</th>
                                 <th>Unite administrative</th>
                                 
@@ -30,7 +31,7 @@
                                  <td class="taskOptions">
                                     {{detail_marche.exo_id}}
                                 </td>
-                                <td class="taskDesc">{{afficherLibelleTypeProcedure(detail_marche.procedure_passation_id)}}</td>
+                                <td class="taskDesc">{{afficherCodeTypeProcedure(detail_marche.procedure_passation_id)}}</td>
                                 <td class="taskDesc">{{detail_marche.objet}}</td>
                                 <td class="taskStatus">{{detail_marche.reference_marche}}</td>
                                 <td class="taskOptions">
@@ -42,7 +43,7 @@
                                 <td class="taskOptions">
                                     {{detail_marche.objetUniteAdministrative.libelle}}
                                 </td>
-                               <td>{{afficherLaDotationIntial(detail_marche.economique_id)}}</td>
+                               <td>{{budgetDisponible}}</td>
                             </tr>
                             </tbody>
                         </table>             
@@ -50,7 +51,7 @@
                     </div>
                 </div>
             </div>
-
+<h4 style="text-align:center;font-size:30px">{{test}}</h4>
             <div class="row-fluid">
                 <div class="span3">
 
@@ -59,7 +60,7 @@
             
             <div class="row-fluid">
                 <div class="span12">
-                     <template v-if="detail_marche.procedure_passation_id == 15 && afficherLaDotationIntial(detail_marche.economique_id) < 10000000 ">
+                     <template v-if="afficherCodeTypeProcedure(detail_marche.procedure_passation_id) == 'PSC' && budgetDisponible < 10000000 ">
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -119,7 +120,7 @@
 
                     </div>
                      </template>
-                    <template v-else>
+                    <template v-else-if="afficherCodeTypeProcedure(detail_marche.procedure_passation_id) == 'PSC' && budgetDisponible <= 30000000">
 <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -176,6 +177,109 @@
 
                     </div>
                     </template>
+                    <template v-else-if="afficherCodeTypeProcedure(detail_marche.procedure_passation_id) == 'PSO' && 60000000 <= budgetDisponible < 100000000 ">
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#tab001">Offre</a></li>
+                                <li ><a data-toggle="tab" href="#tab0015">Lot</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab041">Lettre d'invitation CF</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab04">Le mandaté</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab051">Reception des offres</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab44">Ouverture des offres</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab049">D.Candidats</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab101">Rapport d'ouverture</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab54"> Jugement des offres </a></li>
+                                <li class=""><a data-toggle="tab" href="#tab61">Rapport d'évaluation</a></li>
+                               <li class=""><a data-toggle="tab" href="#tab54">Attribution de l'Offre</a></li>
+                                
+                            </ul>
+                        </div>
+                        
+                         <div class="widget-content tab-content">
+
+                         <div id="tab001" class="tab-pane active">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <h4>Publication de l'offre</h4> -->
+
+                      <publication-Offre :macheid="detail_marche.id"></publication-Offre>
+                         </div>
+
+                    <div id="tab0015" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#addLot" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <h4>Publication de l'offre</h4> -->
+
+                      <add-Lot :macheid="detail_marche.id"></add-Lot>
+                         </div>
+
+
+                <div id="tab041" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <h4>Publication de l'offre</h4> -->
+
+                      <invitationCf :macheid="detail_marche.id"></invitationCf>
+                         </div>
+ <div id="tab04" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <h4>Publication de l'offre</h4> -->
+
+                      <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
+                         </div>
+                          <div id="tab051" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <h4>Publication de l'offre</h4> -->
+
+                      <component-cotation :macheid="detail_marche"></component-cotation>
+                         </div>
+                         </div>
+
+                         
+
+                    </div>
+                     </template>
+
+                      <template v-else>
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#tab01">Offre</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab1">Attribution</a></li>
+                               
+                                
+                            </ul>
+                        </div>
+                        
+                         <div class="widget-content tab-content">
+
+                        
+ddddddddddddddddd
+                    
+
+
+               
+
+                         </div>
+
+                         
+
+                    </div>
+                     </template>
                 </div>
             </div>
               <div class="modal-footer">
@@ -197,6 +301,11 @@
      import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
      import componentOuverture from '../dossierDetailMarchePs/dossierComponentOuverture/componentOuverture';  
    import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
+    import publicationOffre from '../DossierPso/publicationOffre/publicationOffre';
+    import addLot from '../dossierLot/addLot';
+        import invitationCf from '../DossierPso/lettreInvitation/invitationCf';
+ import mandateBs from '../DossierPso/mandaté/mandateBs';
+
     //import bailleurAjouter from '../dossierComponent/bailleurAjouter';
 
    // import bailleurAjouter from '../dossierComponent/bailleurAjouter'
@@ -213,7 +322,10 @@
             componentEtat,
             componentOuverture,
             componentActe,
-
+            publicationOffre,
+addLot,
+invitationCf,
+mandateBs
 
         // bailleurAjouter,
 
@@ -246,7 +358,7 @@ created() {
 },
         computed: {
 
-            ...mapGetters("bienService", [ "procedurePassations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres",
+            ...mapGetters("bienService", ["mandate","getMandatPersonnaliserVise", "procedurePassations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres",
                "getterDossierCandidats","marches","gettersOuverturePersonnaliser","getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser"
                
                
@@ -267,11 +379,50 @@ created() {
       "uniteAdministratives",
       "budgetGeneral",
       "getPersonnaliseBudgetGeneral",
+      "afficheTransfertValider"
       // "montantBudgetGeneral"
       // "chapitres",
       // "sections"
     ]),
     
+test(){
+    if(this.afficherCodeTypeProcedure(this.detail_marche.procedure_passation_id) == 'PSC' && this.budgetDisponible < 10000000){
+        return "Procédure Simplifiée de demande de Cotation(PSC Sans comité)"
+    }
+    else if(this.afficherCodeTypeProcedure(this.detail_marche.procedure_passation_id) == 'PSC' && 10000000 < this.budgetDisponible < 30000000)
+    {
+return "Procédure Simplifiée de demande de Cotation(PSC Avec comité)"
+    }
+    else if(this.afficherCodeTypeProcedure(this.detail_marche.procedure_passation_id) == 'PSO' && 60000000 <= this.budgetDisponible < 100000000 )
+    {
+return "Procédure Simplifiée à compétition Ouverte(PSO)"
+    }
+   
+},
+
+
+
+
+
+  afficherCodeTypeProcedure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.procedurePassations.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+
+
         afficherLibelleTypeProcedure() {
       return id => {
         if (id != null && id != "") {
@@ -297,6 +448,56 @@ created() {
         }
       };
     },
+
+MontantTotal(){
+  
+    
+    var montant = this.groupe.ua_budget_general.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0); 
+      if(isNaN(montant)) return null
+      return montant
+}, 
+budgetConsommerBienService(){
+  return id => {
+    if(id !=""){
+    return this.getMandatPersonnaliserVise.filter(element => element.economique_id == this.detail_marche.economique_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+      
+    }
+    
+  }
+},
+budgetConsommerTransfert(){
+  return id => {
+    if(id !=""){
+    return this.afficheTransfertValider.filter(element => element.ligne_budgetaire_id == this.detail_marche.economique_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
+      
+    }
+    
+  }
+},
+budgetConsommerDesModule() {
+      const val = parseInt(this.budgetConsommerBienService(this.detail_marche.economique_id)) + parseInt(this.budgetConsommerTransfert(this.detail_marche.economique_id));
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+budgetDisponible() {
+      const val = parseInt(this.afficherLaDotationIntial(this.detail_marche.economique_id)) - parseInt(this.budgetConsommerDesModule);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+
+
+
+
 
         },
         

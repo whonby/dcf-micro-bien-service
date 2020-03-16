@@ -27,6 +27,10 @@
                         </div>
                          </td>
 
+                     </tr>
+                     <tr>
+                         
+
                          <td>
 
                          <div class="control-group">
@@ -49,7 +53,7 @@
                             <label class="control-label">Libellé lot <code>*</code> :</label>
 
                             <div class="controls">
-                                <input type="text" class="span5" row="2" placeholder="Libellé lot"  v-model="formLot.libelle_lot">
+                                <input type="text" class="span" row="2" placeholder="Libellé lot"  v-model="formLot.libelle_lot">
                             </div>
                         </div>
                          </td>
@@ -62,7 +66,7 @@
                             <label class="control-label">Montant lot <code>*</code> :</label>
 
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Montant lot" v-model="formLot.montant_lot">
+                                <input type="text" class="span" placeholder="Montant lot" v-model="formLot.montant_lot">
                             </div>
                         </div>
                          </td>
@@ -111,11 +115,20 @@
 
 
 
+                           
+                         </tr>
+                          <tr>
+                         
+
+                      
+
+
+
                             <td>
                         <div class="control-group">
                             <label class="control-label">Numero lot :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Numero lo" v-model="edite_lot.numero_lot">
+                                <input type="text" class="span" placeholder="Numero lo" v-model="edite_lot.numero_lot">
                             </div>
                         </div>
                             </td>
@@ -125,7 +138,7 @@
                         <div class="control-group">
                             <label class="control-label">Libellé lot :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Libellé lot" v-model="edite_lot.libelle_lot">
+                                <input type="text" class="span" placeholder="Libellé lot" v-model="edite_lot.libelle_lot">
                             </div>
                         </div>
                              </td>
@@ -135,7 +148,7 @@
                         <div class="control-group">
                             <label class="control-label">Montant lot :</label>
                             <div class="controls">
-                                <input type="text" class="span5" placeholder="Montant lot" v-model="edite_lot.montant_lot">
+                                <input type="text" class="span" placeholder="Montant lot" v-model="edite_lot.montant_lot">
                             </div>
                         </div>
                              </td>
@@ -171,7 +184,7 @@
 
 
     <!--bigin of list lot  -->
-      <h5>Liste des Lots</h5>
+      <!-- <h5>Liste des Lots</h5> -->
 
                             <table class="table table-bordered table-striped" v-if="macheid">
                                             <thead>
@@ -184,16 +197,16 @@
                                                  </tr>
                                             </thead>
                                             <tbody>
-                                            <tr class="odd gradeX" v-for="lot_marche in listeLots(macheid)"
+                                            <tr class="odd gradeX" v-for="(lot_marche,index) in listeLots(macheid)"
                                                 :key="lot_marche.id">
-                                                <td @dblclick="afficherModaleModifier(lot_marche.id)">
+                                                <td @dblclick="afficherModaleModifier(index)">
                                                     {{lot_marche.numero_lot || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModaleModifier(lot_marche.id)">
+                                                <td @dblclick="afficherModaleModifier(index)">
                                                     {{lot_marche.libelle_lot || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModaleModifier(lot_marche.id)">
-                                                    {{lot_marche.montant_lot || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModaleModifier(index)">
+                                                    {{lot_marche.montant_lot || 0}}</td>
                                              
-                                                <td @dblclick="afficherModaleModifier(lot_marche.id)">
+                                                <td @dblclick="afficherModaleModifier(index)">
                                                     {{lot_marche.appel_offre.ref_appel || 'Non renseigné'}}
                                                 </td>
 
