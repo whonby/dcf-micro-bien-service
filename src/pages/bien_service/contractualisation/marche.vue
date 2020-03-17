@@ -1,5 +1,5 @@
 
-exo_id
+
 
 <template>
     <div class="container-fluid">
@@ -338,10 +338,10 @@ exo_id
                    </router-link>  -->
                    
                  <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail marche proceduce simplifiée">
+                class="btn btn-default " title="Detail marche">
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link> 
-                   <router-link :to="{name:'detailMarcheProcedureSimplifierComite',params:{id:marche.id}}"
+                   <!-- <router-link :to="{name:'detailMarcheProcedureSimplifierComite',params:{id:marche.id}}"
                    class="btn btn-default"  title="detail marche psc">
                    <span class=""><i class="icon-book"></i></span>
                    </router-link>
@@ -349,7 +349,7 @@ exo_id
                   <router-link :to="{name:'detailMarchePsLimite',params:{id:marche.id}}"
                    class="btn btn-default"  title="detail marche psL">
                    <span class=""><i class="icon-plus"></i></span>
-                   </router-link>
+                   </router-link> -->
 
 
                    

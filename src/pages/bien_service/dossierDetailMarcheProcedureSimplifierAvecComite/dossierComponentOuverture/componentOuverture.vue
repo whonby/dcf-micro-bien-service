@@ -75,10 +75,17 @@
                      <div class="control-group">
                         <label class="control-label">Reference offre</label>
                         <div class="controls">
-                            <select v-model="formDataCojo.cotation_id" class="span" disabled>
+                            <!-- <select v-model="formDataCojo.cotation_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
                                         :value="plans.id">{{plans.ref_offre}}</option>
-                            </select>
+                            </select> -->
+                            <input
+                                    type="text"
+                                    :value="listeAppelOffre(macheid)"
+                                    class="span"
+                                       readonly
+                            />
+                            
                         </div>
                         </div>
 
@@ -174,10 +181,16 @@
                      <div class="control-group">
                         <label class="control-label">Reference offre</label>
                         <div class="controls">
-                            <select v-model="edite_cojo.cotation_id" class="span" disabled>
+                            <!-- <select v-model="edite_cojo.cotation_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
                                         :value="plans.id">{{plans.ref_offre}}</option>
-                            </select>
+                            </select> -->
+                             <input
+                                    type="text"
+                                    :value="listeAppelOffre(macheid)"
+                                    class="span"
+                                       readonly
+                            />
                         </div>
                         </div>
                     <!-- <div class="control-group">
@@ -287,27 +300,50 @@ export default {
                     }
                 }
             },
+listeAppelOffre() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersCotations.find(qtreel => qtreel.marche_id == id);
 
-  listeAppelOffre(){
-                return  macheid=>{
-                    if (macheid!="") {
-                        //console.log("Marche appel offre")
-                       const vM=this;
-                        let Objet=this.gettersCotations.find( idmarche => idmarche.macheid == macheid)
-                       // console.log("Marche appel offre 10")
-                        if(Objet!=undefined){
-                           // vM.formDossierCadidature.appel_offre_id=Objet.id;
-                           // vM.formAnalyseDossier.appel_offre_id = Objet.id;
-                            //vM.formLot.appel_offre_id=Objet.id;
-                           // vM.formAno.appel_offre_id = Objet.id
-                            //vM.formLettre.appel_offre_id=Objet.id;
-                            vM.formDataCojo.cotation_id=Objet.ref_offre;
-                        }
-                       // console.log(Objet)
-                    return this.gettersCotations.filter( idmarche => idmarche.macheid == macheid)
-                    }
-                }
-            },
+      if (qtereel) {
+        return qtereel.ref_offre;
+      }
+      return 0
+        }
+      };
+    },
+listeAppelOffreId() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersCotations.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+//   listeAppelOffre(){
+//                 return  macheid=>{
+//                     if (macheid!="") {
+//                         //console.log("Marche appel offre")
+//                        const vM=this;
+//                         let Objet=this.gettersCotations.find( idmarche => idmarche.marche_id == macheid)
+//                        // console.log("Marche appel offre 10")
+//                         if(Objet!=undefined){
+//                            // vM.formDossierCadidature.appel_offre_id=Objet.id;
+//                            // vM.formAnalyseDossier.appel_offre_id = Objet.id;
+//                             //vM.formLot.appel_offre_id=Objet.id;
+//                            // vM.formAno.appel_offre_id = Objet.id
+//                             //vM.formLettre.appel_offre_id=Objet.id;
+//                             vM.formDataCojo.cotation_id=Objet.ref_offre;
+//                         }
+//                        // console.log(Objet)
+//                     return this.gettersCotations.filter( idmarche => idmarche.marche_id == macheid)
+//                     }
+//                 }
+//             },
           
     },
     methods:{
@@ -338,7 +374,9 @@ export default {
      ajouterCojoMarche(){
          var nouvelObjet ={
              ...this.formDataCojo,
-             marche_id:this.macheid.id
+             marche_id:this.macheid.id,
+             cotation_id :this.listeAppelOffreId(this.macheid)
+
          }
               this.ajouterCojo(nouvelObjet)
                 this.formDataCojo={
@@ -356,7 +394,13 @@ export default {
 // la fonction pour afficher le modal du cojo
            
  modificationCojo(){
-                this.modifierCojo(this.edite_cojo)
+      var nouvelObjet1 ={
+             ...this.edite_cojo,
+             marche_id:this.macheid.id,
+             cotation_id :this.listeAppelOffreId(this.macheid)
+
+         }
+                this.modifierCojo(nouvelObjet1)
                 this.$('#modificationCojo').modal('hide');
             },
             // fonction pour formater la date

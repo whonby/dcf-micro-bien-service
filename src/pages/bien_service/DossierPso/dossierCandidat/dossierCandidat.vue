@@ -1,21 +1,12 @@
-reg_com
-entreprises
-marcheid
-search
-listeAppelOffre
-addLot
-marche_id
-macheid
-isDetailDossierCandi
+Ajouter l'offre technique
 <template>
     <div>
-
-                
-                <!-- <h4>Liste des offres</h4> -->
-                <table class="table table-bordered table-striped" v-if="macheid">
-                    <thead>
-                   <tr>
-                       <th>Numero dossier</th>
+ <div v-if="isButtunAddDossierCandidat">
+                 <h4>Liste des dossiers candidats</h4>
+                 <table class="table table-bordered table-striped" v-if="marcheid">
+                     <thead>
+                     <tr>
+                         <th>Numero dossier</th>
                          <th>Type candidat</th>
                          <th>Raison social </th>
                          <th>Date naissance</th>
@@ -24,12 +15,12 @@ isDetailDossierCandi
                          <th>Email</th>
                          <th>Appel Offre</th>
                          <th>Procedure</th>
-                       
+                         <!--<th v-if="selectionAttributionMarche(marcheid)">Decision</th>-->
                          <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                  <tr class="odd gradeX" v-for="(appelOffre, index) in dossierCandidature(macheid)"
+                     </tr>
+                     </thead>
+                     <tbody>
+                     <tr class="odd gradeX" v-for="(appelOffre, index) in dossierCandidature(marcheid)"
                          :key="appelOffre.id">
                          <td @click="afficheBouttonTechFin(index)">
                              {{appelOffre.numero_dossier || 'Non renseigné'}}</td>
@@ -64,30 +55,392 @@ isDetailDossierCandi
                          </div>
 
                      </tr>
-                    </tbody>
-                </table>
+                     </tbody>
+                 </table>
+             </div>
 
-              
-     
-<!-- debut ajout acte effet financier --->
-
-
-
-<div id="ajouterDossierCandidat" class="modal hide grdirModalActeEffet">
-             <div class="modal-header">
+ <div id="offreF" class="modal hide modaloffreFin">
+            <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter Dossier Candidat</h3>
+                <h3>Ajouter l'offre financière du candidat <b>{{edite_offre_financiere.nom_cand}}</b></h3>
             </div>
-            <div class="modal-body ">
+            <div class="modal-body">
+                   <table class="table table-bordered table-striped">
+            <tr>
+                <td>
+                    <div class="control-group">
+                        <label>Offre</label>
+                        <div class="controls">
+                            <select v-model="formLot.appel_offre_id" class="span" disabled>
+                                <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
+                                        :value="varText.id">{{varText.ref_appel}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </td>
+            <!--  <td>
+                <div class="control-group">
+              
+                  <label>Liste lot</label>
+                                <div class="controls">
+                                    <select v-model="formOffreFinanciere.numero_lot" class="span">
+                                        <option v-for="varText in listeLots(marcheid)" :key="varText.numero_lot"
+                                                :value="varText.id">{{varText.numero_lot}}</option>
+                                    </select>
+                                </div>
+                </div>
+              </td>-->
+             <!-- <td colspan="2">
+                <div class="control-group">
+                    <label class="control-label">Designation :</label>
+                            <div class="controls">
+                                <input type="text"  readonly   class="span6" placeholder="Designation" :value="libelleLot">
+                            </div>
+                </div>
+              </td>-->
+                <td>
 
-                    <table class="table table-bordered table-striped ">
-                        <tr>
-                            <td>
-                                 <div class="control-group" >
-                                    <label class="control-label"> Selectionner l'entreprise:</label>
-                                    <div class="controls">
-                                        
-                                        <model-list-select style="background-color: rgb(255,255,255);"
+                    <div class="control-group">
+                        <label class="control-label">Quantite :</label>
+                        <div class="controls">
+                            <input type="number" class="span" placeholder="quantite" v-model="formOffreFinanciere.quantite">
+                        </div>
+                    </div>
+
+                </td>
+                <td>
+
+                    <div class="control-group">
+                        <label class="control-label">Prix unitaire :</label>
+                        <div class="controls">
+                            <input type="number" class="span" placeholder="prix unitaire" v-model="formOffreFinanciere.prix_unitaire">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+
+              <td>
+                  <div class="control-group">
+                            <label class="control-label">Taux</label>
+                            <div class="controls">
+                                <input type="text" readonly  class="span" :value="affcherTauxEnCours">
+                                 <input
+                    type="hidden"
+                    :value="tauxArrondit"
+                   
+                    class="span3"
+                   
+                  />
+                            </div>
+                        </div>
+              </td>
+
+                <td>
+                    <div class="control-group">
+                        <label class="control-label">Tva</label>
+                        <div class="controls">
+                            <input type="number" readonly :value="montantTva" class="span" />
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label">Montant total ht :</label>
+                        <div class="controls">
+                            <input type="text"   readonly  class="span" placeholder="Montant total HT" :value="montantHT">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+
+              <td>
+                <div class="control-group">
+                            <label class="control-label">Montant totat ttc :</label>
+                            <div class="controls">
+                                <input type="text"  readonly  class="span" placeholder="Montant total ttc" :value="montantHTt">
+                            </div>
+                        </div>
+              </td>
+              
+            </tr>
+          
+        </table>
+                
+            </div>
+            <div class="modal-footer">
+                <button @click.prevent="ajouterOffreF()" class="btn btn-primary">Ajouer</button>
+                <!--<a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>-->
+                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        </div>
+        <div id="modificationOffre" class="modal hide modaloffreFin">
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button">×</button>
+            <h3>Modification offre financier</h3>
+        </div>
+        <div class="modal-body">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <td>
+                        <div class="control-group">
+                            <label>Offre</label>
+                            <div class="controls">
+                                <select v-model="formLot.appel_offre_id" class="span" disabled>
+                                    <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
+                                            :value="varText.id">{{varText.ref_appel}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </td>
+                    <!--  <td>
+                        <div class="control-group">
+                          <label>Liste lot</label>
+                                        <div class="controls">
+                                            <select v-model="formOffreFinanciere.numero_lot" class="span">
+                                                <option v-for="varText in listeLots(marcheid)" :key="varText.numero_lot"
+                                                        :value="varText.id">{{varText.numero_lot}}</option>
+                                            </select>
+                                        </div>
+                        </div>
+                      </td>-->
+                    <!-- <td colspan="2">
+                       <div class="control-group">
+                           <label class="control-label">Designation :</label>
+                                   <div class="controls">
+                                       <input type="text"  readonly   class="span6" placeholder="Designation" :value="libelleLot">
+                                   </div>
+                       </div>
+                     </td>-->
+                    <td>
+
+                        <div class="control-group">
+                            <label class="control-label">Quantite :</label>
+                            <div class="controls">
+                                <input type="number" class="span" placeholder="quantite" v-model="modification_offre_finnancier_recupere.quantite">
+                            </div>
+                        </div>
+
+                    </td>
+                    <td>
+
+                        <div class="control-group">
+                            <label class="control-label">Prix unitaire :</label>
+                            <div class="controls">
+                                <input type="number" class="span" placeholder="prix unitaire" v-model="modification_offre_finnancier_recupere.prix_unitaire">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        <div class="control-group">
+                            <label class="control-label">Taux</label>
+                            <div class="controls">
+                                <input type="text" readonly  class="span" :value="affcherTauxEnCours">
+                                <input
+                                        type="hidden"
+                                        :value="tauxArrondit"
+
+                                        class="span3"
+
+                                />
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="control-group">
+                            <label class="control-label">Tva</label>
+                            <div class="controls">
+                                <input type="number" readonly :value="montantTvaEdite" class="span" />
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="control-group">
+                            <label class="control-label">Montant total ht :</label>
+                            <div class="controls">
+                                <input type="text"   readonly  class="span" placeholder="Montant total HT" :value="montantHTEdite">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        <div class="control-group">
+                            <label class="control-label">Montant totat ttc :</label>
+                            <div class="controls">
+                                <input type="text"  readonly  class="span" placeholder="Montant total ttc" :value="montantHTtEdite">
+                            </div>
+                        </div>
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+        <div class="modal-footer">
+            <button @click.prevent="modificationOffreFin()" class="btn btn-primary">Modification</button>
+            <!--<a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>-->
+            <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+    </div>
+
+    <div id="modificationOffreT" class="modal hide tailleModalOffre2">
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button">×</button>
+            <h3>Modification d'offre technique</h3>
+        </div>
+        <div class="modal-body">
+            <div class="widget-box">
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <!--     <td>
+  <div class="control-group">
+                             <label>Liste lot</label>
+                             <div class="controls">
+                                 <select v-model="formOffreTechnique.numero_lot" class="span">
+                                     <option v-for="varText in listeLots(marcheid)" :key="varText.numero_lot"
+                                             :value="varText.id">{{varText.numero_lot}}-{{varText.libelle_lot}}</option>
+                                 </select>
+                             </div>
+                         </div>
+                             </td>-->
+                        <td>
+                            <div class="control-group">
+                                <label>Offre</label>
+                                <div class="controls">
+                                    <select v-model="formLot.appel_offre_id" class="span" disabled>
+                                        <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
+                                                :value="varText.id">{{varText.ref_appel}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Accord groupe :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Accord groupe" v-model="edit_offre_technique_recupere.accord_groupe">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Cautionnement prov :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Cautionnement prov" v-model="edit_offre_technique_recupere.cautionnement_prov">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Attest banc:</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Pouv habil" v-model="edit_offre_technique_recupere.attest_banc">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Formil propo tech :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Piece Admin" v-model="edit_offre_technique_recupere.formil_propo_tech">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Fiche rsgnt nombre groupe :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Attest banc" v-model="edit_offre_technique_recupere.fiche_rsgnt_mbre_groupe">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+
+                            <div class="control-group">
+                                <label class="control-label">Atcdent marche non exe :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Org travau" v-model="edit_offre_technique_recupere.atcdent_marche_non_exe">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Org travau site :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Meth real travau" v-model="edit_offre_technique_recupere.org_travau_site">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Meth real travau:</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Prog mobilisation" v-model="edit_offre_technique_recupere.meth_real_travau">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Prog mobilisation :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Prog mobilisation" v-model="edit_offre_technique_recupere.prog_mobilisation">
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Capacite financiere :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Capacite financiere" v-model="edit_offre_technique_recupere.capacite_financiere">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">CAA moyen ac entre :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Caa moyen ac" v-model="edit_offre_technique_recupere.caa_moyen_ac_entre">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Capacite techn expe :</label>
+                                <div class="controls">
+                                    <input type="text" class="span" placeholder="Capacite techn exp" v-model="edit_offre_technique_recupere.capacite_techn_exp">
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button @click.prevent="editeOffreT" class="btn btn-primary">Modification</button>
+            <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+    </div>
+
+  <!--ajouter de dossier candidature-->
+                <div v-if="isFormulaireDossierCandidature">
+                    <h6><button class="btn btn-success" @click="NotisFormulaireDossierCand" v-if="!isButtunAddDossierCandidat">Afficher la liste des candidat</button></h6>
+                    <div class="span6" align="left">
+                        Selectionner l'entreprise:
+                        <model-list-select style="background-color: rgb(255,255,255);"
                                            class="wide"
                                            :list="entreprises"
                                            v-model="search"
@@ -98,22 +451,28 @@ isDetailDossierCandi
                         >
 
                         </model-list-select>
-                                    </div>
-                                </div>
-                            </td>
-                             <td>
+                        <hr>
+                       <!-- <input type="text" placeholder="Recherche ..." v-on:keyup="recherche" class="span6" v-model="search">-->
+                    </div>
+
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                        <tr class="odd gradeX">
+
+                            <td>
                                 <div class="control-group">
                                     <label class="control-label">registre de commerce</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Registre de commerce" v-model="formDossierCadidature.reg_com">
+                                        <input type="text" class="" placeholder="Registre de commerce" v-model="formDossierCadidature.reg_com">
                                     </div>
                                 </div>
                             </td>
+
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Numero de compte contribuable</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Situation Geographique" v-model="formDossierCadidature.numero_cc">
+                                        <input type="text" class="" placeholder="Situation Geographique" v-model="formDossierCadidature.numero_cc">
                                     </div>
                                 </div>
                             </td>
@@ -121,7 +480,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Raison social</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Raison social" v-model="formDossierCadidature.nom_cand">
+                                        <input type="text" class="" placeholder="Raison social" v-model="formDossierCadidature.nom_cand">
                                     </div>
                                 </div>
                             </td>
@@ -129,27 +488,27 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Email</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Email" v-model="formDossierCadidature.email_cand">
+                                        <input type="text" class="" placeholder="Email" v-model="formDossierCadidature.email_cand">
                                     </div>
                                 </div>
                             </td>
-                            
                         </tr>
-                          <tr>
-                            
-                             <td>
+
+
+                        <tr class="odd gradeX">
+                            <td>
                                 <div class="control-group">
                                     <label class="control-label">Telephone</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Telphone" v-model="formDossierCadidature.telephone_cand">
+                                        <input type="text" class="" placeholder="Telphone" v-model="formDossierCadidature.telephone_cand">
                                     </div>
                                 </div>
                             </td>
-                             <td>
+                            <td>
                                 <div class="control-group">
                                     <label class="control-label">Address </label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Adresse" v-model="formDossierCadidature.adresse_post">
+                                        <input type="text" class="" placeholder="Adresse" v-model="formDossierCadidature.adresse_post">
                                     </div>
                                 </div>
                             </td>
@@ -159,7 +518,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Numero de dossier</label>
                                     <div class="controls">
-                                        <input type="text" readonly class="span12" placeholder="Numero dossier" v-model="formDossierCadidature.numero_dossier">
+                                        <input type="text" readonly class="" placeholder="Numero dossier" v-model="formDossierCadidature.numero_dossier">
                                     </div>
                                 </div>
                             </td>
@@ -176,30 +535,35 @@ isDetailDossierCandi
                                     </div>
                                 </div>
                             </td>
+
+
+
+                        </tr>
+
+
+                        <tr class="odd gradeX">
                             <td>
                                 <label>Appel Offre</label>
                                 <div class="controls">
-                                   <input type="text" readonly   class="span12" :value="affichierReferenceOffre(macheid)">
+                                    <select hidden v-model="formDossierCadidature.appel_offre_id" class="span" disabled>
+                                        <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
+                                                :value="varText.id">{{varText.ref_appel}}</option>
+                                    </select>
                                 </div>
                             </td>
-                            </tr>
-                            <tr>
-                            
-                            
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Accord groupe</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Accord Groupe" v-model="formDossierCadidature.accord_group">
+                                        <input type="text" class="" placeholder="Accord Groupe" v-model="formDossierCadidature.accord_group">
                                     </div>
                                 </div>
                             </td>
-                                
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Cautionnement prov</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Cautionnement" v-model="formDossierCadidature.cautionnement_prov">
+                                        <input type="text" class="" placeholder="Cautionnement" v-model="formDossierCadidature.cautionnement_prov">
                                     </div>
                                 </div>
                             </td>
@@ -208,53 +572,60 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Pouv habil signataire</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Pouv Hile Signature" v-model="formDossierCadidature.pouv_habil_signataire">
-                                    </div>
-                                </div>
-                            </td>
-                             <td>
-                                <div class="control-group">
-                                    <label class="control-label">Attestion banc</label>
-                                    <div class="controls">
-                                        <input type="text" class="span12" placeholder="Attestation banc" v-model="formDossierCadidature.attest_banc">
-                                    </div>
-                                </div>
-                            </td>
-                             <td>
-                                <div class="control-group">
-                                    <label class="control-label">Formulaire proo techn</label>
-                                    <div class="controls">
-                                        <input type="text" class="span12" placeholder="Formul propo tech" v-model="formDossierCadidature.formul_propo_tech">
-                                    </div>
-                                </div>
-                            </td>
-                           
-                            </tr>
-                           
-                            <tr>
-                             <td>
-                                <div class="control-group">
-                                    <label class="control-label">Fiche rsgnt </label>
-                                    <div class="controls">
-                                        <input type="text" class="span12" placeholder="Fiche renseignement" v-model="formDossierCadidature.fiche_rsgnt_cand">
+                                        <input type="text" class="" placeholder="Pouv Hile Signature" v-model="formDossierCadidature.pouv_habil_signataire">
                                     </div>
                                 </div>
                             </td>
 
-                            
+
+                        </tr>
+
+
+                        <tr class="odd gradeX">
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Attestion banc</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Attestation banc" v-model="formDossierCadidature.attest_banc">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Formulaire proo techn</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Formul propo tech" v-model="formDossierCadidature.formul_propo_tech">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Fiche rsgnt </label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Fiche renseignement" v-model="formDossierCadidature.fiche_rsgnt_cand">
+                                    </div>
+                                </div>
+                            </td>
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Piece admin</label>
                                     <div class="controls">
-                                        <input type="text"  class="span12" placeholder="Piece Admin" v-model="formDossierCadidature.piece_admin">
+                                        <input type="text" class="" placeholder="Piece Admin" v-model="formDossierCadidature.piece_admin">
                                     </div>
                                 </div>
                             </td>
-                             <td>
+                        </tr>
+
+
+                        <tr class="odd gradeX">
+                            <td>
                                 <div class="control-group">
                                     <label class="control-label">Fiche rsgnt nombre groupe</label>
                                     <div class="controls">
-                                        <input type="text"  class="span12" placeholder="Fiche renseignement nombre groupe" v-model="formDossierCadidature.fiche_rsgnt_mbre_group">
+                                        <input type="text" class="" placeholder="Fiche renseignement nombre groupe" v-model="formDossierCadidature.fiche_rsgnt_mbre_group">
                                     </div>
                                 </div>
                             </td>
@@ -262,41 +633,47 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Atcdent marche non exe</label>
                                     <div class="controls">
-                                        <input type="text"  class="span12" placeholder="Atcent marche non exe" v-model="formDossierCadidature.atcdent_marche_non_exe">
+                                        <input type="text" class="" placeholder="Atcent marche non exe" v-model="formDossierCadidature.atcdent_marche_non_exe">
                                     </div>
                                 </div>
-                            </td>   
-                           <td>
+                            </td>
+
+                            <td>
                                 <div class="control-group">
                                     <label class="control-label">Org travau site</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Org travau" v-model="formDossierCadidature.org_travau_site">
+                                        <input type="text" class="" placeholder="Org travau" v-model="formDossierCadidature.org_travau_site">
                                      </div>
                                 </div>
                             </td>
 
-                           
-                        </tr>
-                        <tr>
-                               <td>
+                            <td>
                                 <div class="control-group">
                                     <label class="control-label">Metch real travau</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Meth real travau" v-model="formDossierCadidature.meth_real_travau">
+                                        <input type="text" class="" placeholder="Meth real travau" v-model="formDossierCadidature.meth_real_travau">
                                     </div>
                                 </div>
                             </td>
-                             <td>
+
+                        </tr>
+
+                        <tr class="odd gradeX">
+
+                            <td>
                                 <label>Procedure de passation</label>
                                 <div class="controls">
-                                    <input type="text" class="span12" :value="afficherLibelleTypeProcedure(affichierPassationMarche(macheid))" readonly>
+                                    <select v-model="formDossierCadidature.procedure_passation_id" class="span" disabled>
+                                        <option v-for="varText in procedurePassations" :key="varText.id"
+                                                :value="varText.id">{{varText.libelle}}</option>
+                                    </select>
                                 </div>
                             </td>
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Date de naissance</label>
                                     <div class="controls">
-                                          <input type="date"  class="span12" placeholder="" v-model="formDossierCadidature.date_nais_cand">
+                                          <input type="date" class="" placeholder="" v-model="formDossierCadidature.date_nais_cand">
                                     </div>
                                 </div>
                             </td>
@@ -304,27 +681,26 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Capacite financiere</label>
                                     <div class="controls">
-                                        <input type="text"  class="span12" placeholder="Capacite financiere" v-model="formDossierCadidature.capacite_financiere">
+                                        <input type="text" class="" placeholder="Capacite financiere" v-model="formDossierCadidature.capacite_financiere">
                                     </div>
                                 </div>
                             </td>
+
                             <td>
                                 <div class="control-group">
                                     <div class="controls">
                                         <label class="control-label">Prog mobilisation</label>
-                                        <input type="Text" class="span12" placeholder="Programme mobilisation" v-model="formDossierCadidature.prog_mobilisation">
+                                        <input type="Text" class="" placeholder="Programme mobilisation" v-model="formDossierCadidature.prog_mobilisation">
                                     </div>
                                 </div>
                             </td>
-                            
                         </tr>
-                        
                         <tr>
-                             <td>
+                            <td>
                                 <div class="control-group">
                                     <label class="control-label">CAA moyen acc entre</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="CAA moyen ac entre" v-model="formDossierCadidature.caa_moyen_ac_entre">
+                                        <input type="text" class="" placeholder="CAA moyen ac entre" v-model="formDossierCadidature.caa_moyen_ac_entre">
                                     </div>
                                 </div>
                             </td>
@@ -332,7 +708,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Capacite finanancier</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Capacite financement" v-model="formDossierCadidature.capacite_financement">
+                                        <input type="text" class="" placeholder="Capacite financement" v-model="formDossierCadidature.capacite_financement">
                                     </div>
                                 </div>
                             </td>
@@ -340,7 +716,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Capacite techn exp</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Capacite tech exp" v-model="formDossierCadidature.capacite_tech_exp">
+                                        <input type="text" class="" placeholder="Capacite tech exp" v-model="formDossierCadidature.capacite_tech_exp">
                                     </div>
                                 </div>
                             </td>
@@ -348,72 +724,310 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Montant offre financiere</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Mont offre financiere" v-model="formDossierCadidature.mt_offre_financiere">
+                                        <input type="text" class="" placeholder="Mont offre financiere" v-model="formDossierCadidature.mt_offre_financiere">
                                     </div>
                                 </div>
                             </td>
                         </tr>
-                        
-                    </table>  
 
-                   
+
+
+                        <a @click.prevent="ajouterDossierCandidature" class="btn btn-primary"
+                           href="#">Enregistre dossier candidature</a>
+                        </tbody>
+                    </table>
+                </div>
+
 
                 
-            </div>
-            <div class="modal-footer">
-                <a  
-                @click.prevent="ajouterDossierCandidature"
-                        class="btn btn-primary"
-                        href="#"
-                >Valider</a>
-                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-            </div>
-        </div>
+                <!--Detail dossier candidat  -->
+                <div v-if="isDetailDossierCandidature">
+                    <h6 v-if="detail_dossier_candidature">
+                      </h6>
 
 
+                    <div class="widget-box" v-if="detail_dossier_candidature">
+                        <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+                            <h5>Nom du candidat : {{detail_dossier_candidature.nom_cand}} {{detail_dossier_candidature.prenom_cand}}  Numero dossier :{{detail_dossier_candidature.numero_dossier}} </h5>
+                            <button class="btn" title="Affiche la liste des candidats" @click="NotisFormulaireDossierCand" v-if="!isButtunAddDossierCandidat"><span class=""><i class="icon-eye-open"></i></span></button></div>
+                        <div class="widget-content nopadding">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Numero dossier</th>
+                                    <th>Type candidat</th>
+                                    <th>Telephone </th>
+                                    <th>adresse </th>
+                                    <th>Situation geographique</th>
+                                    <th>Email</th>
+                                    <th>Meth reat traveau</th>
+                                    <th>Accord groupe</th>
+                                    <th>Pauv habil signataire</th>
+                                    <th>Caution</th>
+                                    <th>Registe de commerce</th>
+                                </tr>
+                                </thead>
 
-<div id="modificationModal" class="modal hide grdirModalActeEffet">
-           <div class="modal-header">
+                                <tr>
+                                    <td>{{detail_dossier_candidature.numero_dossier || "Non renseigne"}}</td>
+                                    <td>{{afficheCandidat(detail_dossier_candidature.type_candidat_id) || "Non renseigne"}}</td>
+                                    <td>{{detail_dossier_candidature.telephone_cand || "Non renseigne"}}</td>
+                                    <td>{{detail_dossier_candidature.adresse_post || "Non renseigne"}}</td>
+                                    <td>{{detail_dossier_candidature.situation_geo || "Non renseigne"}}</td>
+                                    <td>{{detail_dossier_candidature.email_cand || "Non renseigne"}}</td>
+                                    <td>{{detail_dossier_candidature.meth_real_travau || "Non renseigne"}}</td>
+                                    <td>{{detail_dossier_candidature.accord_group || "Non renseigne"}}</td>
+                                    <td>{{detail_dossier_candidature.pouv_habil_signataire || "Non renseigne"}}</td>
+                                    <td>{{detail_dossier_candidature.cautionnement_prov || "Non renseigne"}}</td>
+                                    <td>{{detail_dossier_candidature.reg_com || "Non renseigne"}}</td>
+
+                                </tr>
+
+
+                            </table>
+                        </div>
+                    </div>
+                       <!--contratualisation-->
+        <!--dossier candidature-->
+        <div id="offreT" class="modal hide tailleModalOffre2">
+            <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification Dossier Candidat</h3>
+                <h3>Ajouter l'offre technique</h3>
             </div>
             <div class="modal-body">
-
-                <table class="table table-bordered table-striped">
-                
-                           <tr>
+                <div class="widget-box">
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                     
                             <td>
-                                 <div class="control-group" >
-                                    <label class="control-label"> Selectionner l'entreprise:</label>
+                                <div class="control-group">
+                                    <label>Offre</label>
                                     <div class="controls">
-                                        
-                                        <model-list-select style="background-color: rgb(255,255,255);"
-                                           class="wide"
-                                           :list="entreprises"
-                                           v-model="search"
-                                           option-value="id"
-                                           option-text="raison_sociale"
-                                            :search-change="recherche()"
-                                           placeholder="Selectionner l'entreprise"
-                        >
-
-                        </model-list-select>
+                                        <select v-model="formLot.appel_offre_id" class="span" disabled>
+                                            <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
+                                                    :value="varText.id">{{varText.ref_appel}}</option>
+                                        </select>
                                     </div>
                                 </div>
                             </td>
+                            <td>
+                                  <div class="control-group">
+                            <label class="control-label">Accord groupe :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Accord groupe" v-model="formOffreTechnique.accord_groupe">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                                 <div class="control-group">
+                            <label class="control-label">Cautionnement prov :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Cautionnement prov" v-model="formOffreTechnique.cautionnement_prov">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                                 <div class="control-group">
+                            <label class="control-label">Attest banc:</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Pouv habil" v-model="formOffreTechnique.attest_banc">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                                  <div class="control-group">
+                            <label class="control-label">Formil propo tech :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Piece Admin" v-model="formOffreTechnique.formil_propo_tech">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                             <tr>
+                            <td>
+<div class="control-group">
+                            <label class="control-label">Fiche rsgnt nombre groupe :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Attest banc" v-model="formOffreTechnique.fiche_rsgnt_mbre_groupe">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                                 
+                        <div class="control-group">
+                            <label class="control-label">Atcdent marche non exe :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Org travau" v-model="formOffreTechnique.atcdent_marche_non_exe">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                            <label class="control-label">Org travau site :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Meth real travau" v-model="formOffreTechnique.org_travau_site">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                                 <div class="control-group">
+                            <label class="control-label">Meth real travau:</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Prog mobilisation" v-model="formOffreTechnique.meth_real_travau">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                               <div class="control-group">
+                            <label class="control-label">Prog mobilisation :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Prog mobilisation" v-model="formOffreTechnique.prog_mobilisation">
+                            </div>
+                        </div> 
+                            </td>
+                           
+                        </tr>
+                        <tr>
                              <td>
+                                <div class="control-group">
+                            <label class="control-label">Capacite financiere :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Capacite financiere" v-model="formOffreTechnique.capacite_financiere">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                                 <div class="control-group">
+                            <label class="control-label">CAA moyen ac entre :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Caa moyen ac" v-model="formOffreTechnique.caa_moyen_ac_entre">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                            <label class="control-label">Capacite techn expe :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Capacite techn exp" v-model="formOffreTechnique.capacite_techn_exp">
+                            </div>
+                        </div>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button @click.prevent="ajouterOffreT" class="btn btn-primary">Ajouer</button>
+                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        </div>
+                    <div class="widget-box" v-if="detail_offre_technique">
+                        <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+                            <h5>Offre technique du candidat</h5>
+                            </div>
+                        <div class="widget-content nopadding">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Programme mobilisation</th>
+                                    <th>Capacite financiere </th>
+                                    <th>CAA Moyenn</th>
+                                    <!-- <th>Capacite financement</th> -->
+                                    <th>Capacite technique exper </th>
+                                    <th>Meth reat traveau</th>
+                                    <th>Accord groupe</th>
+                                    <th>Pauv habil signataire</th>
+                                    <th>Caution</th>
+                                    <th>Registe de commerce</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+
+                                <tr>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).prog_mobilisation || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).capacite_financiere || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).caa_moyen_ac_entre || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).capacite_tech_exp || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).meth_real_travau || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).accord_groupe || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).pouv_habil_signataire || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).cautionnement_prov || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).reg_com || "Non renseigne"}}</td>
+                                    <td><button @click.prevent="supprimerOffreTechnique(detail_offre_technique.id)"  class="btn btn-danger " title="Supprimer">
+                                        <span class=""><i class="icon-trash"></i></span></button>
+                                    </td>
+                                </tr>
+
+
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="widget-box" v-if="detail_offre_finnancier">
+                        <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+                            <h5>Offre financiere</h5>
+                        </div>
+                        <div class="widget-content nopadding">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Designation</th>
+                                    <th>Quantite</th>
+                                    <th>Prix unitaire</th>
+                                    <th>Montant total ht </th>
+                                    <th>Montant total ttc </th>
+                                    <th>Action </th>
+                                </tr>
+                                </thead>
+
+                                <tr v-if="listeOffreFinancier(detail_offre_finnancier.id)">
+                                    <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(detail_offre_finnancier.id).designation || "Non renseigne"}}</td>
+                                    <!-- <td>{{detail_offre_finnancier.unite || "Non renseigne"}}</td> -->
+                                    <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(detail_offre_finnancier.id).quantite || "Non renseigne"}}</td>
+                                    <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(detail_offre_finnancier.id).prix_unitaire || "Non renseigne"}}</td>
+                                    <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(detail_offre_finnancier.id).montant_total_ht || "Non renseigne"}}</td>
+                                    <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(detail_offre_finnancier.id).montant_total_ttc || "Non renseigne"}}</td>
+                                    <td><button @click.prevent="supprimerOffreFinancier(detail_offre_finnancier.id)"  class="btn btn-danger " title="Supprimer">
+                                        <span class=""><i class="icon-trash"></i></span></button></td>
+                                </tr>
+
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--fin dossier candidat-->
+
+
+              <!--- debut de formulaire de modification  de dossier de candidat-->
+
+               <div id="modificationDossierCandidatModal" class="modal hide tlDossierCandidat">
+                   <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Modification dossier candidat</h3>
+                 </div>
+                  <div class="modal-body">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                        <tr class="odd gradeX">
+
+                            <td>
                                 <div class="control-group">
                                     <label class="control-label">registre de commerce</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Registre de commerce" v-model="editDossierCadidature.reg_com">
+                                        <input type="text" class="" placeholder="Registre de commerce" v-model="editDossierCadidature.reg_com">
                                     </div>
                                 </div>
                             </td>
+
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Numero de compte contribuable</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Situation Geographique" v-model="editDossierCadidature.numero_cc">
+                                        <input type="text" class="" placeholder="Situation Geographique" v-model="editDossierCadidature.numero_cc">
                                     </div>
                                 </div>
                             </td>
@@ -421,7 +1035,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Raison social</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Raison social" v-model="editDossierCadidature.nom_cand">
+                                        <input type="text" class="" placeholder="Raison social" v-model="editDossierCadidature.nom_cand">
                                     </div>
                                 </div>
                             </td>
@@ -429,27 +1043,27 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Email</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Email" v-model="editDossierCadidature.email_cand">
+                                        <input type="text" class="" placeholder="Email" v-model="editDossierCadidature.email_cand">
                                     </div>
                                 </div>
                             </td>
-                            
                         </tr>
-                          <tr>
-                            
-                             <td>
+
+
+                        <tr class="odd gradeX">
+                            <td>
                                 <div class="control-group">
                                     <label class="control-label">Telephone</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Telphone" v-model="editDossierCadidature.telephone_cand">
+                                        <input type="text" class="" placeholder="Telphone" v-model="editDossierCadidature.telephone_cand">
                                     </div>
                                 </div>
                             </td>
-                             <td>
+                            <td>
                                 <div class="control-group">
                                     <label class="control-label">Address </label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Adresse" v-model="editDossierCadidature.adresse_post">
+                                        <input type="text" class="" placeholder="Adresse" v-model="editDossierCadidature.adresse_post">
                                     </div>
                                 </div>
                             </td>
@@ -459,47 +1073,53 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Numero de dossier</label>
                                     <div class="controls">
-                                        <input type="text" readonly class="span12" placeholder="Numero dossier" v-model="editDossierCadidature.numero_dossier">
+                                        <input type="text" class="" placeholder="Numero dossier" v-model="editDossierCadidature.numero_dossier">
                                     </div>
                                 </div>
                             </td>
-                            <td>
+                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Type candidat</label>
                                     <div class="controls">
 
-                                         <select v-model="editDossierCadidature.type_candidat_id" class="span" >
+                                         <select  v-model="editDossierCadidature.type_candidat_id" class="span" >
                                         <option v-for="varText in typeCandidat" :key="varText.id"
                                                 :value="varText.id">{{varText.libelle}}</option>
                                     </select>
-                                     
+                                       
                                     </div>
                                 </div>
                             </td>
+
+
+
+
+                        </tr>
+
+
+                        <tr class="odd gradeX">
                             <td>
                                 <label>Appel Offre</label>
                                 <div class="controls">
-                                   <input type="text" readonly   class="span12" :value="affichierReferenceOffre(macheid)">
+                                    <select hidden v-model="editDossierCadidature.appel_offre_id" class="span" disabled>
+                                        <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
+                                                :value="varText.id">{{varText.ref_appel}}</option>
+                                    </select>
                                 </div>
                             </td>
-                            </tr>
-                            <tr>
-                            
-                            
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Accord groupe</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Accord Groupe" v-model="editDossierCadidature.accord_group">
+                                        <input type="text" class="" placeholder="Accord Groupe" v-model="editDossierCadidature.accord_group">
                                     </div>
                                 </div>
                             </td>
-                                
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Cautionnement prov</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Cautionnement" v-model="editDossierCadidature.cautionnement_prov">
+                                        <input type="text" class="" placeholder="Cautionnement" v-model="editDossierCadidature.cautionnement_prov">
                                     </div>
                                 </div>
                             </td>
@@ -508,53 +1128,60 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Pouv habil signataire</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Pouv Hile Signature" v-model="editDossierCadidature.pouv_habil_signataire">
-                                    </div>
-                                </div>
-                            </td>
-                             <td>
-                                <div class="control-group">
-                                    <label class="control-label">Attestion banc</label>
-                                    <div class="controls">
-                                        <input type="text" class="span12" placeholder="Attestation banc" v-model="editDossierCadidature.attest_banc">
-                                    </div>
-                                </div>
-                            </td>
-                             <td>
-                                <div class="control-group">
-                                    <label class="control-label">Formulaire proo techn</label>
-                                    <div class="controls">
-                                        <input type="text" class="span12" placeholder="Formul propo tech" v-model="editDossierCadidature.formul_propo_tech">
-                                    </div>
-                                </div>
-                            </td>
-                           
-                            </tr>
-                           
-                            <tr>
-                             <td>
-                                <div class="control-group">
-                                    <label class="control-label">Fiche rsgnt </label>
-                                    <div class="controls">
-                                        <input type="text" class="span12" placeholder="Fiche renseignement" v-model="editDossierCadidature.fiche_rsgnt_cand">
+                                        <input type="text" class="" placeholder="Pouv Hile Signature" v-model="editDossierCadidature.pouv_habil_signataire">
                                     </div>
                                 </div>
                             </td>
 
-                            
+
+                        </tr>
+
+
+                        <tr class="odd gradeX">
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Attestion banc</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Attestation banc" v-model="editDossierCadidature.attest_banc">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Formulaire proo techn</label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Formul propo tech" v-model="editDossierCadidature.formul_propo_tech">
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label">Fiche rsgnt </label>
+                                    <div class="controls">
+                                        <input type="text" class="" placeholder="Fiche renseignement" v-model="editDossierCadidature.fiche_rsgnt_cand">
+                                    </div>
+                                </div>
+                            </td>
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Piece admin</label>
                                     <div class="controls">
-                                        <input type="text"  class="span12" placeholder="Piece Admin" v-model="editDossierCadidature.piece_admin">
+                                        <input type="text" class="" placeholder="Piece Admin" v-model="editDossierCadidature.piece_admin">
                                     </div>
                                 </div>
                             </td>
-                             <td>
+                        </tr>
+
+
+                        <tr class="odd gradeX">
+                            <td>
                                 <div class="control-group">
                                     <label class="control-label">Fiche rsgnt nombre groupe</label>
                                     <div class="controls">
-                                        <input type="text"  class="span12" placeholder="Fiche renseignement nombre groupe" v-model="editDossierCadidature.fiche_rsgnt_mbre_group">
+                                        <input type="text" class="" placeholder="Fiche renseignement nombre groupe" v-model="editDossierCadidature.fiche_rsgnt_mbre_group">
                                     </div>
                                 </div>
                             </td>
@@ -562,41 +1189,47 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Atcdent marche non exe</label>
                                     <div class="controls">
-                                        <input type="text"  class="span12" placeholder="Atcent marche non exe" v-model="editDossierCadidature.atcdent_marche_non_exe">
+                                        <input type="text" class="" placeholder="Atcent marche non exe" v-model="editDossierCadidature.atcdent_marche_non_exe">
                                     </div>
                                 </div>
-                            </td>   
-                           <td>
+                            </td>
+
+                            <td>
                                 <div class="control-group">
                                     <label class="control-label">Org travau site</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Org travau" v-model="editDossierCadidature.org_travau_site">
+                                        <input type="text" class="" placeholder="Org travau" v-model="editDossierCadidature.org_travau_site">
                                      </div>
                                 </div>
                             </td>
 
-                           
-                        </tr>
-                        <tr>
-                               <td>
+                            <td>
                                 <div class="control-group">
                                     <label class="control-label">Metch real travau</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Meth real travau" v-model="editDossierCadidature.meth_real_travau">
+                                        <input type="text" class="" placeholder="Meth real travau" v-model="editDossierCadidature.meth_real_travau">
                                     </div>
                                 </div>
                             </td>
-                             <td>
+
+                        </tr>
+
+                        <tr class="odd gradeX">
+
+                            <td>
                                 <label>Procedure de passation</label>
                                 <div class="controls">
-                                    <input type="text" class="span12" :value="afficherLibelleTypeProcedure(affichierPassationMarche(macheid))" readonly>
+                                    <select v-model="editDossierCadidature.procedure_passation_id" class="span" disabled>
+                                        <option v-for="varText in procedurePassations" :key="varText.id"
+                                                :value="varText.id">{{varText.libelle}}</option>
+                                    </select>
                                 </div>
                             </td>
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Date de naissance</label>
                                     <div class="controls">
-                                          <input type="date"  class="span12" placeholder="" v-model="editDossierCadidature.date_nais_cand">
+                                          <input type="date" class="" placeholder="" v-model="editDossierCadidature.date_nais_cand">
                                     </div>
                                 </div>
                             </td>
@@ -604,27 +1237,27 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Capacite financiere</label>
                                     <div class="controls">
-                                        <input type="text"  class="span12" placeholder="Capacite financiere" v-model="editDossierCadidature.capacite_financiere">
+                                        <input type="text" class="" placeholder="Capacite financiere" v-model="editDossierCadidature.capacite_financiere">
                                     </div>
                                 </div>
                             </td>
+
                             <td>
                                 <div class="control-group">
                                     <div class="controls">
                                         <label class="control-label">Prog mobilisation</label>
-                                        <input type="Text" class="span12" placeholder="Programme mobilisation" v-model="editDossierCadidature.prog_mobilisation">
+                                        <input type="Text" class="" placeholder="Programme mobilisation" v-model="editDossierCadidature.prog_mobilisation">
                                     </div>
                                 </div>
                             </td>
-                            
                         </tr>
-                        
+
                         <tr>
-                             <td>
+                            <td>
                                 <div class="control-group">
                                     <label class="control-label">CAA moyen acc entre</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="CAA moyen ac entre" v-model="editDossierCadidature.caa_moyen_ac_entre">
+                                        <input type="text" class="" placeholder="CAA moyen ac entre" v-model="editDossierCadidature.caa_moyen_ac_entre">
                                     </div>
                                 </div>
                             </td>
@@ -632,7 +1265,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Capacite finanancier</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Capacite financement" v-model="editDossierCadidature.capacite_financement">
+                                        <input type="text" class="" placeholder="Capacite financement" v-model="editDossierCadidature.capacite_financement">
                                     </div>
                                 </div>
                             </td>
@@ -640,7 +1273,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Capacite techn exp</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Capacite tech exp" v-model="editDossierCadidature.capacite_tech_exp">
+                                        <input type="text" class="" placeholder="Capacite tech exp" v-model="editDossierCadidature.capacite_tech_exp">
                                     </div>
                                 </div>
                             </td>
@@ -648,50 +1281,147 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Montant offre financiere</label>
                                     <div class="controls">
-                                        <input type="text" class="span12" placeholder="Mont offre financiere" v-model="editDossierCadidature.mt_offre_financiere">
+                                        <input type="text" class="" placeholder="Mont offre financiere" v-model="editDossierCadidature.mt_offre_financiere">
                                     </div>
                                 </div>
                             </td>
                         </tr>
-                </table>
 
 
-              
-
-
-            </div>
-             <div class="modal-footer">
-                <a
                         
-                        class="btn btn-primary"
-                        href="#"
+                        </tbody>
+                    </table>
+                  </div>
+                        
+                     <div class="modal-footer">
+                <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationDossierCandidatLocal" href="#">Modifier</a>
+                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>    
+               </div>
 
-                >Modifier</a>
-                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-            </div>
-        </div>
-
-<!--- fin modifier acte effet financier  -->
-  <notifications/>
+              <!-- fin de formulaire de modification de dossier de candidat --->
     </div>
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex';
+  import { mapGetters, mapActions } from "vuex";
+    import moment from 'moment';
+    // import bailleurAjouter from '../dossierComponent/bailleurAjouter'
+    //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
+    import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
 import { formatageSomme } from '../../../../../src/Repositories/Repository';
-import moment from 'moment';
-import {  ModelListSelect } from 'vue-search-select'
-import 'vue-search-select/dist/VueSearchSelect.css'
-export default {
-    components:{
-           
+    export default {
+        name: 'compte',
+        components:{
+            // bailleurAjouter,
             
             ModelListSelect,
         },
-    data(){
-        return{
-        
-         formDossierCadidature:{
+        data() {
+            return {
+                fabActions: [
+                    {
+                        name: "cache",
+                        icon: "add"
+                    }
+                ],
+                demande:{},
+                acteEffetActive:"",
+                formFournisseur : {
+                    numero_cc: "",
+                    numero_rc: "",
+                    raison_sociale: "",
+                    telephone:"",
+                    email:"",
+                    adresse:"",
+                },
+                formAnalyseDMP:{
+                    //document_procedure_id:"",
+                    demande_ano_id:"",
+                    observation:"",
+                    avis_bail:"",
+                    ref_dmp:"",
+                    date_avis_bail:""
+                },
+                edite_analyse_dossier:"",
+                edite_cojo:"",
+                editer_mandater:"",
+                edite_lettre_invitation:"",
+                detail_dossier_candidature:"",
+                detail_offre_technique:"",
+                detail_offre_finnancier:"",
+                detail_marche:"",
+                marcheid:"",
+                appel_offre_marche:"",
+                edite_demande_dao:"",
+                edite_analyse_dpm:"",
+               formLot:{
+                   numero_lot:"",
+                   libelle_lot:"",
+                   montant_lot:"",
+                   marche_id:"",
+                   appel_offre_id:"",
+                  // mode_passation_id:""
+               }
+                ,
+                formBailleur:{
+                    type_finnancement_id:"",
+                    montant:0,
+                    marche_id:"",
+                    bailleur_id:"",
+                },
+                edit_bailleur_marche:""
+               ,formMandater:{
+                    lettre_invitation_id:"",
+                    date_id:"",
+                    fichier_joint:"",
+                    nom_mandat:"",
+                    prenom_nom:"",
+                    matricule_m:""
+                },
+                edite_pv:"",
+                formAnalyseDossier:{
+                    date_analyse:"",
+                    appel_offre_id:"",
+                    note_analyse:"",
+                    rang_analyse:"",
+                   // decision:"",
+                    dossier_candidat_id:"",
+                    type_analyse_id: "",
+                    cojo_id:"",
+                   // motif:""
+                },
+                affiche_bouton_ajouter_cojo:false,
+                idcojo:"",
+                formDataCojo:{
+                    lettre_invitation_id:"",
+                    condition_id:'',
+                    controleur_finnancier:"",
+                    dmp:"",
+                    autorite_contractante:"",
+                    date_invitation:"",
+                    date_composition:"",
+                    num_dossier_appel_offre:"",
+                    nbr_participant:"",
+                    matricule:""
+                },
+                modification_offre_finnancier_recupere:{
+                    id:"",
+                    numero_lot:"",
+                    designation:"",
+                    unite:"",
+                    prix_unitaire:"",
+                    montant_total_ht:"",
+                    montant_total_ttc:"",
+                    taux:"",
+                    tva:"",
+                    dossier_candidat_id:"",
+                    quantite:""
+                },
+            isFormulaireDossierCandidature:false,
+                isDetailDossierCandidature:false,
+                isButtunAddDossierCandidat:true,
+          formDossierCadidature:{
               secteur_activite_id:"",
               type_candidat_id:"",
               numero_cc:"",
@@ -726,8 +1456,8 @@ export default {
               capacite_financement:"",
           },
           editDossierCadidature:{
-              secteur_activite_id:"",
-              type_candidat_id:"",
+               secteur_activite_id:"",
+               type_candidat_id:"",
               numero_cc:"",
               type_candidat:"",
               nom_cand:"",
@@ -759,19 +1489,229 @@ export default {
               numero_dossier:"",
               capacite_financement:"",
           },
-            isFormulaireDossierCandidature:false,
-                isDetailDossierCandidature:false,
-                isButtunAddDossierCandidat:true,
-                
-search:""
-        }
-    },
-    props:["macheid"],
-    created(){},
-
-       computed: {
-
-            ...mapGetters("bienService", [ "typeTypeProcedures","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+         formOffreTechnique:{
+             numero_lot:"",
+             accord_groupe:"",
+             cautionnement_prov:"",
+             pouv_habil_signataire:"",
+             peice_admin:"",
+             reg_com:"",
+             attest_banc:"",
+             formil_propo_tech:"",
+             fiche_rsgnt_mbre_groupe:"",
+             atcdent_marche_non_exe:"",
+             org_travau_site:"",
+             meth_real_travau:"",
+             prog_mobilisation:"",
+             capacite_financiere:"",
+             caa_moyen_ac_entre:"",
+             capacite_techn_exp:"",
+             dossier_candidat_id:"",
+         },
+         formEffetFinancier:{
+             code_act:"",
+             libelle_act:"",
+             reference_act:"",
+             objet_act:"",
+             incidence_financiere:"",
+             montant_act:"",
+             date_attributaire:"",
+             date_reception:"",
+             duree:"",
+             date_fin_exe:"",
+             date_odre_service:"",
+             autorite_approbation:"",
+             date_approbation:"",
+             livrable_id:"",
+             text_juridique_id:"",
+             type_act_effet_id:"",
+             analyse_dossier_id:"",
+             entreprise_id:"",
+             marche_id:"",
+             numero_marche:"",
+             ano_bailleur_id:""
+         },
+         formDataFacture:{
+             prix_propose_ttc:"",
+             prix_propose_ht:"",
+             prix_unitaire:"",
+             montant_facture:"",
+             ligne_budgetaire:"",
+             objet_facture:"",
+             id_type_facture:"",
+             code_acte_depense:"",
+             numero_facture:"",
+         },
+         editActeEffetFinancier:{
+              code_act:"",
+             libelle_act:"",
+             reference_act:"",
+             objet_act:"",
+             incidence_financiere:"",
+             montant_act:"",
+             date_attributaire:"",
+             date_reception:"",
+             duree:"",
+             date_fin_exe:"",
+             date_odre_service:"",
+             autorite_approbation:"",
+             date_approbation:"",
+             livrable_id:"",
+             text_juridique_id:"",
+             type_act_effet_id:"",
+             analyse_dossier_id:"",
+             //entreprise_id:"",
+             marche_id:"",
+             numero_marche:"",
+             ano_bailleur_id:""
+         },
+formOffreFinanciere:{
+      numero_lot:"",
+    designation:"",
+    unite:"",
+    quantite:"",
+    prix_unitaire:"",
+    montant_total_ht:"",
+    montant_total_ttc:"",
+    dossier_candidat_id:"",
+},
+formDemande:{
+date_demande:"",
+ref_marche:"",
+num_courrier:"",
+    analyse_dossier_id:"",
+    proce_verbal_jugement_offre_id:""
+},
+                editMarche: {
+                    id:"",
+                    attribue:"",
+                    numero_marche:""
+                },
+editDemandeAno:{
+date_demande:"",
+ref_marche:"",
+num_courrier:""
+},
+formObservation:{
+    date_avis_baill:"",
+    avis_bail:"",
+    observations_bailleur:"",
+    ano_dmp_bailleur_id:"",
+    document_procedure_id:""
+},
+editObservation1:{
+    date_avis_baill:"",
+    avis_bail:"",
+    observations_bailleur:"",
+    ano_dmp_bailleur_id:"",
+    document_procedure_id:""
+},
+                edite_membre_cojo:"",
+formAno:{
+date_ano_dmp:"",
+observations_bailleur:"",
+avis_bail:"",
+ref_ano_dmp:"",
+numero_courie:"",
+	appel_offre_id:"",
+    analyse_dmp_id:""
+},
+avis_dmp:"",
+editAno:{
+date_ano_dmp:"",
+ref_ano_dmp:"",
+numero_courie:""
+},
+editDemamnde:{
+    date_demande:"",
+ref_marche:"",
+num_courrier:""
+},
+formPv:{
+    ref_pv:"",
+    fichier_joint_pv:"",
+},
+          editDossier:{
+              type_candidat:"",
+                      nom_cand:"",
+                      prenom_cand:"",
+                      date_nais_cand:"",
+                      telephone_cand:"",
+                      adresse_post:"",
+                          situation_geo:"",
+                              email_cand:"",
+                                  procedure_passation_id:"",
+                                  	appel_offre_id:"",
+          },
+                edite_ano_bailleur_dmp:"",
+                edite_offre_technique:"",
+                edite_offre_financiere:"",
+                formData: {
+                    ref_appel:"",
+                    type_appel:"",
+                    financement:"",
+                    nom_bailleurs:"",
+                    date_emission:"",
+                    date_limite:"",
+                    objet_appel:"",
+                    imputation:"",
+                    marche_id:"",
+                },
+                formDataMembreCojo: {
+                    matricule:"",
+                    type_appel:"",
+                    nom_prenom:"",
+                    role:"",
+                    cojo_id:"",
+                },
+                edit_offre_technique_recupere:"",
+                formLettre: {
+                    appel_offre_id:"",
+                    objet_lettre:"",
+                    date_lettre:"",
+                    ref_lettre:"",
+                    destination:"",
+                    date_cojo:""
+                },
+                edite_appel_offre: "",
+                search: "",
+                edite_lot:{
+                    numero_lot:"",
+                    libelle_lot:"",
+                    montant_lot:"",
+                    marche_id:"",
+                    appel_offre_id:"",
+                    //mode_passation_id:""
+                },
+                message_mandater:'',
+                isOffreTechniqueFinancier:false,
+                namePDF: "",
+                fichierPDF: "",
+                imagePDF:"",
+                selectedFile:"",
+                resultaAnalysePv:[],
+                resultaFinalCandidat:[],
+                entreprise_vainqueur:"",
+                registrecc_vainqueur:"",
+                identreprise_vainqueur:"",
+                message_setion_vainqueur:"",
+                info_avis_bailleur:"",
+                namePDFDemandeAno: "",
+                fichierPDFDemandeAno: "",
+                imagePDFDemandeAno:"",
+                selectedFileDemandeAno:"",
+            };
+        },
+created() {
+            this.marcheid=this.$route.params.id
+   this.detail_marche = this.getMarchePersonnaliser.find(
+       idmarche => idmarche.id == this.$route.params.id
+   )
+  /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
+    console.log(this.appel_offre_marche)*/
+},
+        computed: {
+            ...mapGetters("bienService", [ "typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -779,14 +1719,23 @@ search:""
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
             ...mapGetters('personnelUA', ['acteur_depenses']),
-
-
                 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
                 'types_financements']) ,
                 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
-      
+            
+    //            afficheRef() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.appelOffres.find(qtreel => qtreel.id == id);
+    //   if (qtereel) {
+    //     return qtereel.ref_appel;
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
 afficheCandidat() {
       return id => {
         if (id != null && id != "") {
@@ -798,104 +1747,600 @@ afficheCandidat() {
         }
       };
     },
- dossierCandidature(){
-                return  id=>{
-                    if (id!="") {
-                        
-                        return this.getterDossierCandidats.filter( idmarche => idmarche.appel_offre.marche_id == id)
-                    }
-                }
-
-                
+// calculons le nombre de jours pour acteur depense
+nombreDejourCalcule(){
+                let vM=this;
+    const acteAffet = vM.formEffetFinancier
+    if(acteAffet.date_odre_service == acteAffet.date_fin_exe &&  acteAffet.date_fin_exe !=="" && acteAffet.date_odre_service !=="") return 1
+     if(acteAffet.date_fin_exe =="" && acteAffet.date_odre_service =="") return null
+       var dateF = new Date(acteAffet.date_fin_exe).getTime()
+        var dateO = new Date(acteAffet.date_odre_service).getTime()
+           var resultat = dateF - dateO
+             var diffJour =  resultat / (1000 * 3600 * 24)
+               if(isNaN(diffJour)) return null
+               if(parseFloat(diffJour) < 0 ) return "durée invalide"
+    vM.formEffetFinancier.duree=diffJour
+                  return  diffJour;
+   
+},
+nombreDejourCalculeModification(){
+                let vM=this;
+    const acteAffet = vM.editActeEffetFinancier
+    if(acteAffet.date_odre_service == acteAffet.date_fin_exe &&  acteAffet.date_fin_exe !=="" && acteAffet.date_odre_service !=="") return 1
+     if(acteAffet.date_fin_exe =="" && acteAffet.date_odre_service =="") return null
+       var dateF = new Date(acteAffet.date_fin_exe).getTime()
+        var dateO = new Date(acteAffet.date_odre_service).getTime()
+           var resultat = dateF - dateO
+             var diffJour =  resultat / (1000 * 3600 * 24)
+               if(isNaN(diffJour)) return null
+               if(parseFloat(diffJour) < 0 ) return "durée invalide"
+    vM.formEffetFinancier.duree=diffJour
+                  return  diffJour;
+   
+},
+getDateFinExécutionValue(){
+    return !this.formEffetFinancier.date_odre_service !=""
+},
+getDateFinExécutionValueMod(){
+    return !this.editActeEffetFinancier.date_odre_service !=""
+},
+            verrouObjection(){
+return this.formAnalyseDMP.avis_bail == "1";
             },
-
-
-
-        //   dossierCandidature: function () {
-        //         return macheid => {
-        //             if (macheid != "") {
-        //               //  console.log("Marche dossier candidat")
-        //                 return this.getterDossierCandidats.filter(idmarche => idmarche.appel_offre.marche_id == macheid)
-        //             }
-        //         }
-        //     },
-        afficherLibelleTypeProcedure() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.procedurePassations.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.code;
+            
+             recupererNumeroCourier() {
+      
+      const norme = this.getterDemandeAno.find(normeEquipe => normeEquipe.ref_marche == this.detail_marche.reference_marche);
+      if (norme) {
+        return norme.num_courrier;
       }
-      return 0
-        }
-      };
+      return ""
     },
-      affichierPassationMarche() {
+    // affichage de l'avis DMP
+    recuperationDeAvisDmp(){
+        
+        let numero = this.getterAnalyseDMP.find(numeroDmp => numeroDmp.avis_bail == 1)
+        if(numero) {
+            if(numero.avis_bail==1){
+              return "non objection"
+            }else{
+            return "objection"
+            }
+           
+        }
+        return null
+    },
+      afficherIdMarche() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
       if (qtereel) {
-        return qtereel.procedure_passation_id;
+        return qtereel.reference_marche;
       }
       return 0
         }
       };
     },
-     affichierReferenceOffre() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.ref_appel;
-      }
-      return 0
-        }
-      };
-    },
-     affichierReferenceOffreId() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.id;
-      }
-      return 0
-        }
-      };
-    },
-lettreInvitationAMarche: function () {
-                return id => {
-                    if (id != "") {
-                        //console.log("Marche lettre inviation marche")
-                        return this.getterLettreInvitation.filter(idmarche => idmarche.appel_offre.marche_id == id)
+            
+            marcheDetail(){
+                return  marche_id=>{
+                    if (marche_id!="") {
+                        const vM=this;
+                       // console.log("Marche detail")
+                        let Objet=this.marches.find(idmarche => idmarche.id == marche_id)
+                        if(Objet!=undefined){
+                           vM.formData.type_appel=Objet.procedure_passation.type_procedure.libelle;
+                            vM.formData.imputation=Objet.imputation;
+                            vM.formDossierCadidature.procedure_passation_id=Objet.procedure_passation.id;
+                            vM.formDemande.ref_marche=Objet.reference_marche
+                        }
+                        return  this.marches.find(idmarche => idmarche.id == marche_id
+                        )
                     }
                 }
             },
-
+ libelleLot() {
+      const typeUniteA = this.lots.find(typeUa=> typeUa.id == this.formOffreFinanciere.numero_lot);
+      if (typeUniteA) {
+        return typeUniteA.libelle_lot;
+        
+      }
+      return ""
+    },
+affcherTauxEnCours() {
       
-      },
-
-      methods:{ 
-
-          ...mapActions("bienService", [
-               "ajouterDossierCandidat",
-                "supprimerDossierCandidat","modifierDossierCandidat"
-            
-            ]),
- isDetailDossierCandi(id){
-                this.isDetailDossierCandidature=true,
-                    this.isButtunAddDossierCandidat=false
-                this.isButtunAddDossierCandidat=false
-                this.detail_dossier_candidature=this.getterDossierCandidats.find(dossier=>dossier.id==id)
-                this.detail_offre_finnancier=this.getterOffreFinanciers.find(offre => offre.dossier_candidature.id ==id)
-                this.detail_offre_technique =this.gettersOffreTechniques.find(offre =>offre.dossier_candidature.id ==id)
-               // console.log(this.detail_offre_finnancier)
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
+    },
+tauxArrondit() {
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+      if (norme) {
+        return norme.arrondit;
+      }
+      return 0
+    },
+montantHT() {
+                let val;
+    if(this.formOffreFinanciere.prix_unitaire!="" &&this.formOffreFinanciere.quantite!=""){
+        val =  parseFloat(this.formOffreFinanciere.prix_unitaire) * parseFloat(this.formOffreFinanciere.quantite);
+    }
+    if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+    montantTva() {
+      const val =   parseFloat(this.montantHT) * parseFloat(this.tauxArrondit);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+ montantHTt() {
+      const val = parseFloat(this.montantHT) + parseFloat(this.montantTva);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+            montantHTEdite() {
+                let val;
+                if(this.modification_offre_finnancier_recupere.prix_unitaire!="" && this.modification_offre_finnancier_recupere.quantite!=""){
+                    val =  parseFloat(this.modification_offre_finnancier_recupere.prix_unitaire) * parseFloat(this.modification_offre_finnancier_recupere.quantite);
+                }
+                if (val) {
+                    return parseInt(val).toFixed(0);
+                }
+                return 0
             },
-   recherche() {
+            montantTvaEdite() {
+                const val =   parseFloat(this.montantHTEdite) * parseFloat(this.tauxArrondit);
+                if (val) {
+                    return parseInt(val).toFixed(0);
+                }
+                return 0
+            },
+            montantHTtEdite() {
+                const val = parseFloat(this.montantHTEdite) + parseFloat(this.montantTvaEdite);
+                if (val) {
+                    return parseInt(val).toFixed(0);
+                }
+                return 0
+            },
+            //afficher le motif avis bailleur 
+            afficherMotifBailleur(){
+                return this.formAno.avis_bail =="1";
+            },
+            listeBailleurMarche(){
+                return  marche_id=>{
+                    if (marche_id!="") {
+                       // console.log("MarcheBailleur")
+                        return this.personnaliseGetterMarcheBailleur.filter( idmarche => idmarche.marche_id == marche_id)
+                    }
+                }
+            },
+            montantBailleurMarcheCompare(){
+                return  marche_id=>{
+                    if (marche_id!="") {
+                        let initialValue = 0;
+                        let vM=this;
+                      //  let montantSaisie=parseFloat(vM.formBailleur.montant)
+                        let ObjetMontant =this.personnaliseGetterMarcheBailleur.filter( idmarche => idmarche.marche_id == marche_id).reduce(function (total, currentValue) {
+                                 return total + parseFloat(currentValue.montant) ;
+                        }, initialValue);
+                        let montantConbiner=parseFloat(vM.formBailleur.montant) + parseFloat(ObjetMontant)
+                        return parseFloat(montantConbiner);
+                    }
+                }
+            }
+            ,
+            listeAppelOffre(){
+                return  marche_id=>{
+                    if (marche_id!="") {
+                        //console.log("Marche appel offre")
+                       const vM=this;
+                        let Objet=this.appelOffres.find( idmarche => idmarche.marche_id == marche_id)
+                       // console.log("Marche appel offre 10")
+                        if(Objet!=undefined){
+                            vM.formDossierCadidature.appel_offre_id=Objet.id;
+                            vM.formAnalyseDossier.appel_offre_id = Objet.id;
+                            vM.formLot.appel_offre_id=Objet.id;
+                            vM.formAno.appel_offre_id = Objet.id
+                            vM.formLettre.appel_offre_id=Objet.id;
+                            vM.formDataCojo.num_dossier_appel_offre=Objet.ref_appel;
+                        }
+                       // console.log(Objet)
+                    return this.appelOffres.filter( idmarche => idmarche.marche_id == marche_id)
+                    }
+                }
+            },
+            listeLots(){
+                return  marche_id=>{
+                    if (marche_id!="") {
+                        //console.log("Marche lots")
+                       // let listeLotMarche =this.lots.filter( idmarche => idmarche.marche.id == marche_id)
+                       // const searchTerm = this.search.toLowerCase();
+                        //return this.lots.filter( idmarche => idmarche.marche.id == marche_id)
+                        return this.lots.filter( idmarche => idmarche.marche_id == marche_id)
+                    }
+                }
+                
+            },
+             listePV(){
+               return marche_id=>{
+                   if(marche_id!=""){
+                       let objet=this.getterProceVerballe.filter(item=>item.appel_offre.marche_id==marche_id);
+                      // console.log("PV est en cour10")
+                       return objet
+                   }
+               }
+             },
+            listePVDemandePV(){
+                return marche_id=>{
+                    if(marche_id!=""){
+                        return this.getterProceVerballe.find(item=>{
+                            if(item.appel_offre.marche_id==marche_id && item.avie==null ){
+                                let vM=this;
+                                vM.formDemande.proce_verbal_jugement_offre_id=item.id
+                                return item;
+                            }
+                        });
+                    }
+                }
+            },
+            avisPv(){
+                return reference=>{
+                    if(reference!=""){
+                        let info=this.getterProceVerballe.find(item=>item.reference==reference);
+                        if(info.avie==null){
+                            return null
+                        }else{
+                            return info.avie
+                        }
+                    }
+                    return null;
+                }
+            }
+            ,
+            dossierCandidature: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                      //  console.log("Marche dossier candidat")
+                        return this.getterDossierCandidats.filter(idmarche => idmarche.appel_offre.marche_id == marcheid)
+                    }
+                }
+            },
+            lettreInvitationAMarche: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                        //console.log("Marche lettre inviation marche")
+                        return this.getterLettreInvitation.filter(idmarche => idmarche.appel_offre.marche_id == marcheid)
+                    }
+                }
+            },
+            listeMantater: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                       let vM =this;
+                        let Objet =this.getterMandate.find(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid);
+                      console.log("Ok c'est la vie")
+                        if(Objet!=undefined){
+                            vM.formDataCojo.lettre_invitation_id=Objet.lettre_invitation_id
+                            vM.formDataCojo.controleur_finnancier=Objet.nom_mandat+" "+Objet.prenom_nom
+                            vM.formDataCojo.matricule=Objet.matricule_m
+                            vM.formDataCojo.date_invitation=Objet.lettre_invitation.date_lettre
+                        }
+                        return this.getterMandate.filter(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid)
+                    }
+                }
+            }
+            ,
+            listeCojo: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                      let Objet=  this.getterCojos.find(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid);
+                        let vM=this;
+                        if(Objet!=undefined){
+                            vM.idcojo=Objet.id
+                        }
+                        return this.getterCojos.filter(idmarche => idmarche.lettre_invitation.appel_offre.marche_id == marcheid)
+                    }
+                }
+            },
+             listeMembreCojo: function (){
+                let vM=this;
+                if( vM.idcojo!=""){
+                    return this.getterMembreCojo.filter(idmem=>idmem.cojo_id==vM.idcojo);
+                }
+                return null;
+             },
+        listeAnalyseDossier: function () {
+            return marcheid => {
+                if (marcheid != "") {
+                    let objet= this.getterAnalyseDossiers.filter(idmarche => idmarche.dossier_candidature.appel_offre.marche_id == marcheid)
+                    return objet;
+                }
+            }
+        },
+            demandeAno: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                        let obje=this.getterDemandeAno.filter(idmarche => idmarche.proce_verbal_offre.appel_offre.marche_id == marcheid)
+                        return obje
+                    }
+                }
+            },
+            demandeAnoAnalyseDMP: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                       // console.log("Marche demande ano AnalyseDmp marche_id")
+                        let obje=this.getterDemandeAno.find(idmarche => {
+                            if(idmarche.proce_verbal_offre.appel_offre.marche_id == marcheid && idmarche.proce_verbal_offre.avie==null){
+                                let vM=this;
+                                vM.formAnalyseDMP.demande_ano_id=idmarche.id;
+                                return idmarche;
+                            }
+                        })
+                       // console.log("Marche demande 41000000")
+                        return obje
+                    }
+                }
+            },
+            listeAnalyseDPM: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                       // console.log("Marche liste analyse dpm")
+                        let objet=this.getterAnalyseDMP.filter(idmarche => idmarche.demande_ano.proce_verbal_offre.appel_offre.marche_id == marcheid)
+                      // console.log("ok c'est la vie 010101")
+                        return objet;
+                    }
+                }
+            },
+            analyseDMPValider(){
+             return marcheid=>{
+                 if(marcheid != ""){
+                     let objet=this.getterAnalyseDMP.find(item=>{
+                         if(item.demande_ano.proce_verbal_offre.appel_offre.marche_id == marcheid && item.avis_bail==1 ){
+                             let vM=this;
+                         // console.log("OK AnalyseDMP")
+                             vM.formAno.analyse_dmp_id=item.id;
+                             vM.avis_dmp="Non objection"
+                              return item;
+                         }
+                     })
+                     return objet;
+                 }
+             }
+            },
+            listeAnoDMPBailleur: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                      //  console.log("Marche dmp bailleur")
+                        let objet=this.getterAnoDMPBailleur.filter(idmarche => idmarche.annalyse_d_m_p.demande_ano.proce_verbal_offre.appel_offre.marche_id == marcheid)
+                        //console.log("Marche dmp bailleru 7474")
+                        return objet
+                    }
+                }
+            },
+            selectionAttributionMarche: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                       let vM=this;
+                        let marcherEnAction=this.getterAnoDMPBailleur.filter(idmarche => idmarche.annalyse_d_m_p.demande_ano.proce_verbal_offre.appel_offre.marche_id == marcheid)
+                        let marcherFavaroble=marcherEnAction.find(idmarche=>idmarche.avis_bail==1);
+                        let marcherObjetction=marcherEnAction.find(idmarche=>idmarche.avis_bail==0);
+                        console.log(marcherFavaroble)
+                        if (marcherFavaroble!=undefined){
+                            vM.entreprise_vainqueur=""
+                            console.log("1411111")
+                            vM.info_avis_bailleur="Non objection";
+                            vM.formEffetFinancier.ano_bailleur_id=marcherFavaroble.id
+                            let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==marcherFavaroble.annalyse_d_m_p.demande_ano.proce_verbal_offre.reference);
+                            console.log(resulta)
+                            //vM.resultaFinalCandidat=resulta
+                            let entreprise;
+                            if (resulta.length>0){
+                                resulta.sort(function (a, b) {
+                                    return a.note_analyse - b.note_analyse;
+                                }).reverse()
+                                 entreprise=resulta.find(item=>item.reference_pv==marcherFavaroble.annalyse_d_m_p.demande_ano.proce_verbal_offre.reference)
+                                console.log("111111")
+                                console.log(entreprise)
+                                console.log("222222")
+                                return entreprise;
+                            }
+                            return null
+                        }
+                        if(marcherObjetction!=undefined){
+                            vM.message_setion_vainqueur="Le dossier a été rejete"
+                        }else{
+                            vM.message_setion_vainqueur="Assuré vous d'avoir terminé tous les étape précedente"
+                        }
+                        return null
+                    }
+                }
+            },
+            listeActeEffectFinnancier: function () {
+                return marcheid => {
+                    if (marcheid != "") {
+                      // console.log("Marche leste acte effect finnancier")
+                        return this.getActeEffetFinancierPersonnaliser.filter(idmarche => idmarche.marche_id == marcheid)
+                    }
+                }
+            },
+            listeOffreFinancier(){
+                return idoffrefine => {
+                    if (idoffrefine != "") {
+                        // console.log("Marche leste acte effect finnancier")
+                        return this.getterOffreFinanciers.find(item=>item.id==idoffrefine)
+                    }
+                }
+            },
+            listeOffreTechnique(){
+                return idoffre => {
+                    if (idoffre != "") {
+                        return this.gettersOffreTechniques.find(item=>item.id==idoffre)
+                    }
+                }
+            }
+        },
+        methods: {
+            ...mapActions("bienService", [
+                'ajouterAppelOffre','modifierAppelOffre',"supprimerAppelOffre","modifierAppelOffre",
+                "ajouterLot","modifierLot","supprimerLot","ajouterDossierCandidat","getDossierCandidat",
+                "modifierDossierCandidat","supprimerDossierCandidat","ajouterOffreTechnique","modifierOffreTechnique",
+                "supprimerOffreTechnique","ajouterOffreFinancier","modifierOffreFinancier","supprimerOffreFinancier",
+                "ajouterLettreInvitation",
+                "modifierLettreInvitation","supprimerLettreInvitation","getMandater","ajouterMandater",
+                "modifierMandater","supprimerMandater","ajouterCojo","modifierCojo","supprimerCojo","ajouterAnalyseDossier",
+                "modifierAnalyseDossier","supprimerAnalyseDossier","ajouterDemandeAno",
+                "modifierDemandeAno","supprimerDemandeAno","ajouterAnalyseDMP","modifierAnalyseDMP",
+                "supprimerAnalyseDMP","ajouterAnoDMPBailleur","modifierAnoDMPBailleur","supprimerAnoDMPBailleur"
+                , "modifierObservationBaileur","ajouterObseravtionBailleur" , "supprimerObseravtionBailleur",
+                 "ajouterFournisseur", "ajouterActeEffetFinancier", "modifierActeEffetFinancier",
+                 "supprimerActeEffetFinancier","modifierMarche","supprimerFacture","modifierFacture",
+                  "ajouterFacture"
+                , "modifierObservationBaileur","ajouterObseravtionBailleur","supprimerObseravtionBailleur",
+                 "ajouterFournisseur", "ajouterActeEffetFinancier",
+                "modifierActeEffetFinancier","supprimerActeEffetFinancier","modifierMarche","modificationMarcheBailleur",
+                "ajouterMarcherBailleur","supprimerMarcheBailleur","ajouterMembreCojo",
+                "modificationMembreCojo","supprimerMembreCojo","getProceVerbal",
+                "ajouterProceVerbal","supprimerProceVerbal","modificationProceVerbalOffre","getAnalyseDossier","getDemandeAno","getAnalyseDMP","getAnoDMPBailleur","getActeEffetFinancier"
+            ]),
+            ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
+            // 
+            ajouterBudgetaireLocal(){
+                 this.$("#myModal").modal({
+                    backdrop: "static",
+                    keyboard: false
+                });
+            },
+formatageSomme: formatageSomme,
+ajouterStockLocal(){
+    this.ajouterFacture(this.formDataFacture)
+    this.formDataFacture ={
+        prix_propose_ttc:"",
+             prix_propose_ht:"",
+             prix_unitaire:"",
+             montant_facture:"",
+             ligne_budgetaire:"",
+             objet_facture:"",
+             id_type_facture:"",
+             code_acte_depense:"",
+             numero_facture:"",
+    }
+},
+            infoPVAffiche(ref){
+                this.resultaAnalysePv=[]
+                let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==ref);
+                this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
+                if (this.resultaAnalysePv.length>0){
+                    this.resultaAnalysePv.sort(function (a, b) {
+                        return a.note_analyse - b.note_analyse;
+                    }).reverse()
+                }
+                //console.log(this.resultaAnalysePv)
+            },
+    onFichierChange(e){
+      this.formLettre.fichier_joint = e.target.files[0]
+     // console.log(onFichierChange); edit_offre_technique_recupere
+    },
+            afficheModificationOffreFinancier(index){
+                this.$('#modificationOffre').modal({
+                    backdrop: "static",
+                    keyboard:false
+                })
+                console.log(index)
+                //let objet = this.getterOffreFinanciers.find(item=>item.id==index);
+                this.modification_offre_finnancier_recupere={
+                        id:index.id,
+                        numero_lot:index.numero_lot,
+                        designation:index.designation,
+                        unite:index.unite,
+                        prix_unitaire:index.prix_unitaire,
+                        montant_total_ht:index.montant_total_ht,
+                        montant_total_ttc:index.montant_total_ttc,
+                        taux:index.taux,
+                        tva:index.tva,
+                    quantite:index.quantite,
+                        dossier_candidat_id:index.dossier_candidat_id
+                }
+                console.log(this.modification_offre_finnancier_recupere)
+            },
+            afficheModificationOffreTechnique(index){
+                this.$('#modificationOffreT').modal({
+                    backdrop: "static",
+                    keyboard:false
+                })
+                console.log(index)
+            this.edit_offre_technique_recupere=index;
+            },
+            afficheModaleMembreCojo(index){
+                this.$('#modification_membre_cojo').modal({
+                    backdrop: "static",
+                    keyboard:false
+                })
+                this.edite_membre_cojo = this.getterMembreCojo.find(item=>item.id==index);
+            },
+            editeMembreCojoM(){
+    this.modificationMembreCojo(this.edite_membre_cojo)
+    this.$('#modification_membre_cojo').modal('hide');
+},
+modifierFactureLocal(){
+    this.$('#modififacture').modal('hide');
+},
+           rechercheMandater(){
+            // console.log(this.formMandater.matricule_m)
+              let objetMandater=this.acteur_depenses.filter(item=>item.acteur_depense.matricule==this.formMandater.matricule_m)
+              // console.log(objetMandater)
+               if(objetMandater!=undefined){
+                   if (objetMandater.length==1){
+                       let acteur= this.acteur_depenses.find(item=>item.acteur_depense.matricule==this.formMandater.matricule_m)
+                       this.formMandater.prenom_nom=acteur.acteur_depense.prenom
+                       this.formMandater.nom_mandat=acteur.acteur_depense.nom
+                       this.message_mandater=""
+                   }
+                   else{
+                       this.message_mandater="Cette n'existe pas dans notre base de donnée "
+                   }
+               }
+             if(this.formMandater.matricule_m==""){
+                 this.formMandater.prenom_nom=""
+                 this.formMandater.nom_mandat=""
+                 this.message_mandater=""
+             }
+           },
+            rechercheMembreCojo(){
+                // console.log(this.formMandater.matricule_m)
+                let objetMandater=this.acteur_depenses.filter(item=>item.acteur_depense.matricule==this.formDataMembreCojo.matricule)
+                // console.log(objetMandater)
+                if(objetMandater!=undefined){
+                    if (objetMandater.length==1){
+                        let acteur= this.acteur_depenses.find(item=>item.acteur_depense.matricule==this.formDataMembreCojo.matricule)
+                        this.formDataMembreCojo.nom_prenom=acteur.acteur_depense.nom +" "+acteur.acteur_depense.prenom
+                        this.message_mandater=" "
+                    }
+                    else{
+                        this.message_mandater="Cette n'existe pas dans notre base de donnée "
+                        this.formDataMembreCojo.nom_prenom=""
+                    }
+                }
+                if(this.formDataMembreCojo.matricule==""){
+                    this.formDataMembreCojo.nom_prenom=""
+                    this.message_mandater=" "
+                }
+            }
+            ,
+            recherche() {
               // console.log(this.search)
                 let entre=this.entreprises.find(item=>item.id==this.search);
                 if (entre!=undefined){
@@ -910,42 +2355,199 @@ lettreInvitationAMarche: function () {
                     }
                 }
             },
-
- ajouterDossierCandidature(){
-                // this.formFournisseur.raison_sociale=this.formDossierCadidature.nom_cand
-                // this.formFournisseur.numero_cc= this.formDossierCadidature.numero_cc
-                // this.formFournisseur.numero_rc=this.formDossierCadidature.reg_com
-                // this.formFournisseur.telephone=this.formDossierCadidature.telephone_cand
-                // this.formFournisseur.adresse=this.formDossierCadidature.adresse_post
-                // this.formFournisseur.email=this.formDossierCadidature.email_cand
-                // this.formFournisseur.complet=0
+            retourListeEntreprise(){
+                 this.$router.push({ name: 'marche' })
+            },
+            //afiicher modal ajouter
+            afficherModalAjouterActeDepense() {
+                this.$("#exampleModal").modal({
+                    backdrop: "static",
+                    keyboard: false
+                });
+            },
+            ajouterMembreCojoM(){
+                this.formDataMembreCojo.cojo_id=this.idcojo
+              this.ajouterMembreCojo(this.formDataMembreCojo)
+                this.formDataMembreCojo= {
+                       matricule:"",
+                        type_appel:"",
+                        nom_prenom:"",
+                        role:"",
+                        cojo_id:"",
+                }
+            },
+            ajouterBailleur(){
+                this.formBailleur.marche_id=this.marcheid
+               this.ajouterMarcherBailleur(this.formBailleur)
+                this.formBailleur={
+                      type_finnancement_id:"",
+                        montant:0,
+                        marche_id:"",
+                        bailleur_id:"",
+                }
+            },
+            // fonction pour vider l'input ajouter
+            ajouter(){
+                this.formData.marche_id=this.marcheid
+                this.ajouterAppelOffre(this.formData)
+                this.formData = {
+                    ref_appel:"",
+                    type_appel:"",
+                    financement:"",
+                    nom_bailleurs:"",
+                    date_emission:"",
+                    date_limite:"",
+                    objet_appel:"",
+                    imputation:"",
+                    marche_id:"",
+                }
+            },
+            ajouterL(){
+                this.formLot.marche_id=this.marcheid
+                this.ajouterLot(this.formLot)
+                this.formLot={
+                    numero_lot:"",
+                        libelle_lot:"",
+                        montant_lot:"",
+                        marche_id:"",
+                        appel_offre_id:"",
+                        //mode_passation_id:""
+                }
+            },
+            ajouterLettreInv(){
+                const formData = new FormData();
+                formData.append('fichier', this.selectedFile, this.selectedFile.name);
+                formData.append('appel_offre_id', this.formLettre.appel_offre_id);
+                formData.append('destination', this.formLettre.destination);
+                formData.append('ref_lettre', this.formLettre.ref_lettre);
+                formData.append('date_lettre', this.formLettre.date_lettre);
+                formData.append('date_cojo', this.formLettre.date_cojo);
+                let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }
+                this.ajouterLettreInvitation(formData,config)
+                this.formLettre= {
+                    appel_offre_id:"",
+                    fichier_joint:"",
+                    date_lettre:"",
+                    ref_lettre:"",
+                    destination:"",
+                    date_cojo:""
+                }
+            },
+            ajouterAnalyseD(){
+              this.ajouterAnalyseDossier(this.formAnalyseDossier)
+                this.formAnalyseDossier={
+                        date_analyse:"",
+                        appel_offre_id:"",
+                        rang_analyse:"",
+                      //  decision:"",
+                       // motif:"",
+                        note_analyse:"",
+                        dossier_candidat_id:"",
+                        type_analyse_id: "",
+                        cojo_id:""
+                }
+            },
+            ajouterOffreT(){
+                this.formOffreTechnique.dossier_candidat_id=this.edite_offre_technique.id
+              this.ajouterOffreTechnique(this.formOffreTechnique)
+                this.formOffreTechnique={
+                    numero_lot:"",
+                        accord_groupe:"",
+                        cautionnement_prov:"",
+                        pouv_habil_signataire:"",
+                        peice_admin:"",
+                        reg_com:"",
+                        attest_banc:"",
+                        formil_propo_tech:"",
+                        fiche_rsgnt_mbre_groupe:"",
+                        atcdent_marche_non_exe:"",
+                        org_travau_site:"",
+                        meth_real_travau:"",
+                        prog_mobilisation:"",
+                        capacite_financiere:"",
+                        caa_moyen_ac_entre:"",
+                        capacite_techn_exp:"",
+                        dossier_candidat_id:"",
+                }
+            },
+            editeOffreT(){
+                this.modifierOffreTechnique(this.edit_offre_technique_recupere)
+                this.$('#modificationOffreT').modal('hide');
+            },
+            ajouterOffreF(){
+                 var nouvelObjet = {
+      ...this.formOffreFinanciere,
+      montant_total_ht :this.montantHT,
+       montant_total_ttc :this.montantHTt,
+        	taux :this.affcherTauxEnCours,
+         	tva :this.montantTva,
+          designation:"",
+          dossier_candidat_id : this.edite_offre_financiere.id
+       };
+                // console.log(this.edite_offre_financiere.id) editeOffreT
+                // this.formOffreFinanciere.dossier_candidat_id=this.edite_offre_financiere.id
+                this.ajouterOffreFinancier(nouvelObjet)
+                this.formOffreFinanciere={
+                        numero_lot:"",
+                        designation:"",
+                        unite:"",
+                        quantite:"",
+                        prix_unitaire:"",
+                        montant_total_ht:"",
+                        montant_total_ttc:"",
+                }
+            },
+            modificationOffreFin(){
+                this.modification_offre_finnancier_recupere.montant_total_ht=this.montantHTEdite
+                this.modification_offre_finnancier_recupere.montant_total_ttc=this.montantHTtEdite
+                this.modification_offre_finnancier_recupere.taux=this.affcherTauxEnCourse
+                this.modification_offre_finnancier_recupere.tva=this.affcherTauxEnCours
+                this.modifierOffreFinancier(this.modification_offre_finnancier_recupere)
+                this.$('#modificationOffre').modal('hide');
+            },
+            ajouterMandaterA(){
+               this.ajouterMandater(this.formMandater)
+                this.formMandater={
+                        lettre_invitation_id:"",
+                        date_id:"",
+                        fichier_joint:"",
+                        nom_mandat:"",
+                        prenom_nom:"",
+                    matricule_m:""
+                }
+            },
+            ajouterCojoMarche(){
+              this.ajouterCojo(this.formDataCojo)
+                this.formDataCojo={
+                        lettre_invitation_id:"",
+                        condition_id:'',
+                        controleur_finnancier:"",
+                        dmp:"",
+                        autorite_contractante:"",
+                        date_invitation:"",
+                        date_composition:"",
+                        num_dossier_appel_offre:"",
+                        nbr_participant:""
+                }
+            },
+            ajouterDossierCandidature(){
+                this.formFournisseur.raison_sociale=this.formDossierCadidature.nom_cand
+                this.formFournisseur.numero_cc= this.formDossierCadidature.numero_cc
+                this.formFournisseur.numero_rc=this.formDossierCadidature.reg_com
+                this.formFournisseur.telephone=this.formDossierCadidature.telephone_cand
+                this.formFournisseur.adresse=this.formDossierCadidature.adresse_post
+                this.formFournisseur.email=this.formDossierCadidature.email_cand
+                this.formFournisseur.complet=0
            // console.log(this.formFournisseur)
-            // nouveauObjet1={
-            //         ...this.formFournisseur,
-                   
-            //     raison_sociale:this.formFournisseur.nom_cand,
-            //     numero_cc: this.formFournisseur.numero_cc,
-            //     numero_rc:this.formFournisseur.reg_com,
-            //     telephone:this.formFournisseur.telephone_cand,
-            //     adresse:this.formFournisseur.adresse_post,
-            //     email:this.formFournisseur.email_cand,
-            //    }
-            //   let ent=  this.entreprises.find(item=>item.numero_rc==this.formFournisseur.numero_rc)
-            //     if(ent==undefined){
-            //         this.ajouterEntreprise(nouveauObjet1)
-            //     }
-              var  nouveauObjet={
-                    ...this.formDossierCadidature,
-                    appel_offre_id:this.affichierReferenceOffreId(this.macheid),
-                    procedure_passation_id:this.affichierPassationMarche(this.macheid),
-                raison_sociale:this.formDossierCadidature.nom_cand,
-                numero_cc: this.formDossierCadidature.numero_cc,
-                numero_rc:this.formDossierCadidature.reg_com,
-                telephone:this.formDossierCadidature.telephone_cand,
-                adresse:this.formDossierCadidature.adresse_post,
-                email:this.formDossierCadidature.email_cand,
-               }
-                this.ajouterDossierCandidat(nouveauObjet)
+              let ent=  this.entreprises.find(item=>item.numero_rc==this.formFournisseur.numero_rc)
+                if(ent==undefined){
+                    this.ajouterEntreprise(this.formFournisseur)
+                }
+                this.ajouterDossierCandidat(this.formDossierCadidature)
                 this.formDossierCadidature={
                     type_candidat:"",
                         numero_cc:"",
@@ -978,92 +2580,402 @@ lettreInvitationAMarche: function () {
                 }
                 this.NotisFormulaireDossierCand()
             },
-             modificationDossierCandidatLocal(){
-                  var  nouveauObjet={
-                    ...this.editDossierCadidature,
-                    appel_offre_id:this.affichierReferenceOffreId(this.macheid),
-                    procedure_passation_id:this.affichierPassationMarche(this.macheid),
-                raison_sociale:this.formDossierCadidature.nom_cand,
-                numero_cc: this.formDossierCadidature.numero_cc,
-                numero_rc:this.formDossierCadidature.reg_com,
-                telephone:this.formDossierCadidature.telephone_cand,
-                adresse:this.formDossierCadidature.adresse_post,
-                email:this.formDossierCadidature.email_cand,
-               }
-                // this.formFournisseur.raison_sociale=this.editDossierCadidature.nom_cand
-                // this.formFournisseur.numero_cc= this.editDossierCadidature.numero_cc
-                // this.formFournisseur.numero_rc=this.editDossierCadidature.reg_com
-                // this.formFournisseur.telephone=this.editDossierCadidature.telephone_cand
-                // this.formFournisseur.adresse=this.editDossierCadidature.adresse_post
-                // this.formFournisseur.email=this.editDossierCadidature.email_cand
-                // this.formFournisseur.complet=0
-                // let entre = this.entreprises.find(item =>item.numero_rc==this.formFournisseur.numero_rc)
-                //   if(entre==undefined){
-                //       this.modifierEntreprise(this.formFournisseur)
-                //   }
-                  this.modifierDossierCandidat(nouveauObjet)
+// vider l'input 
+   // modification de dossier candidat
+            modificationDossierCandidatLocal(){
+                this.formFournisseur.raison_sociale=this.editDossierCadidature.nom_cand
+                this.formFournisseur.numero_cc= this.editDossierCadidature.numero_cc
+                this.formFournisseur.numero_rc=this.editDossierCadidature.reg_com
+                this.formFournisseur.telephone=this.editDossierCadidature.telephone_cand
+                this.formFournisseur.adresse=this.editDossierCadidature.adresse_post
+                this.formFournisseur.email=this.editDossierCadidature.email_cand
+                this.formFournisseur.complet=0
+                let entre = this.entreprises.find(item =>item.numero_rc==this.formFournisseur.numero_rc)
+                  if(entre==undefined){
+                      this.modifierEntreprise(this.formFournisseur)
+                  }
+                  this.modifierDossierCandidat(this.editDossierCadidature)
                   this.$('#modificationDossierCandidatModal').modal('hide');
             },
-        afficheBouttonTechFin(index){
-                this.$('#modificationModal').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-                this.editDossierCadidature = this.dossierCandidature(this.macheid)[index];
-            },
-
-
-
-
-
-
-
-
-            ajouterLettreInv(){
+ajouterModalActeEffetFinancierLocal(rcm){
+       /* var nouvelObjet = {
+            ...this.formEffetFinancier,
+            duree: this.nombreDejourCalcule
+        }*/
+    let entreprisePremier=this.entreprises.find(item=>item.numero_rc==rcm)
+              //  console.log(this.formEffetFinancier)
+    this.formEffetFinancier.marche_id=this.marcheid
+    this.formEffetFinancier.entreprise_id=entreprisePremier.id
+    this.ajouterActeEffetFinancier(this.formEffetFinancier)
+    let marcheObjet=this.marches.find(marche=>marche.id==this.marcheid)
+    marcheObjet.attribue=1
+    marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
+   // console.log(marcheObjet)
+    this.modifierMarche(marcheObjet)
+    this.formEffetFinancier = {
+             code_act:"",
+             libelle_act:"",
+             reference_act:"",
+             objet_act:"",
+             incidence_financiere:"",
+             montant_act:"",
+              date_attributaire:"",
+             date_reception:"",
+             duree:"",
+             date_fin_exe:"",
+             date_odre_service:"",
+             livrable_id:"",
+        autorite_approbation:"",
+        date_approbation:"",
+             text_juridique_id:"",
+             type_act_effet_id:"",
+             analyse_dossier_id:"",
+             entreprise_id:"",
+             marche_id:"",
+             numero_marche:""
+    }
+},
+afficherModalModifierActeEffetFinancier(index){
+    this.$('#modifierActeEF').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+    this.editActeEffetFinancier = this.acteEffetFinanciers.find(item=>item.id==index)
+},
+   afficherModificationPV(index){
+       this.$('#modificationPV').modal({
+           backdrop: 'static',
+           keyboard: false
+       });
+       this.edite_pv = this.getterProceVerballe.find(item=>item.id==index);
+   }  ,
+            modificationProceVerbal(){
                 const formData = new FormData();
-                formData.append('fichier', this.selectedFile, this.selectedFile.name);
-                formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
-                formData.append('destination', this.formLettre.destination);
-                formData.append('ref_lettre', this.formLettre.ref_lettre);
-                formData.append('date_lettre', this.formLettre.date_lettre);
-                formData.append('date_cojo', this.formLettre.date_cojo);
-                formData.append('objet_lettre', this.formLettre.objet_lettre);
+                formData.append('reference', this.edite_pv.reference);
+                formData.append('id', this.edite_pv.id);
+                formData.append('appel_offre_id', this.edite_pv.appel_offre_id);
+                console.log(formData)
+                if ( this.selectedFile!==""){
+                    formData.append('fichier', this.selectedFile, this.selectedFile.name);
+                }
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'
                     }
                 }
-                this.ajouterLettreInvitation(formData,config)
-                this.formLettre= {
-                    appel_offre_id:"",
-                    fichier_joint:"",
-                    date_lettre:"",
-                    ref_lettre:"",
-                    destination:"",
-                    date_cojo:""
+                this.modificationProceVerbalOffre(formData,config)
+                this.$('#modificationPV').modal('hide');
+                this.getAnalyseDossier()
+                this.getDemandeAno()
+                this.getAnalyseDMP()
+                this.getAnoDMPBailleur()
+            },
+            modificationBailleurMarche(){
+                this.modificationMarcheBailleur(this.edit_bailleur_marche)
+                this.$('#editBailleuMarche').modal('hide');
+            },
+            editeMarcheBailleur(index){
+                this.$('#editBailleuMarche').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                this.edit_bailleur_marche = this.personnaliseGetterMarcheBailleur.find(item=>item.id==index)
+              //  console.log(this.edit_bailleur_marche)
+            },
+// vider l'input 
+modifierModalActeEffetFinancierLocal(){
+   // this.editActeEffetFinancier.entreprise_id=entreprise_id
+    this.modifierActeEffetFinancier(this.editActeEffetFinancier)
+    this.$('#modifierActeEF').modal('hide');
+},
+            // afficherModalAjoutObservationBailleur(){
+            //     this.$('#ajouterObservationBailleur')
+            // },
+            ajoutObservationBailleurLocal(){
+                this.ajouterObseravtionBailleur(this.formObservation)
+                this.formObservation = {
+                    date_avis_bail:"",
+               avis_bail:"",
+              observations_bail:"",
+           ano_dmp_bailleur_id:"",
+             document_procedure_id:""
                 }
+              
             },
-           
-
-
-
-
-
-
-
- modfications(){
+            afficherModalObservationBailleur(index){
+                 this.$('#modifierObservationBailleur').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                  this.editObservation1 = this.getterObseravtionBailleurs[index]
+            },
+            // vider l'input
+            modifierObservationBailleurLocal(){
+                this.modifierObservationBaileur(this.editObservation1)
+                this.$('#modifierObservationBailleur').modal('hide');
+            },
+        
+        ajouterAnalyseDMPB(){
+     /*        var nouvelObjet = {
+        ...this.formAnalyseDMP,
+        ref_dmp: this.detail_marche.id,
+        ref_courier: this.recupererNumeroCourier,
+      };*/
+                console.log(this.formAnalyseDMP)
+            this.ajouterAnalyseDMP(this.formAnalyseDMP)
+            this.formAnalyseDMP={
+                     ref_dmp:"",
+                    demande_ano_id:"",
+                    observation:"",
+                    avis_bail:"",
+                    date_avis_bail:""
+            }
+        },
+            modaleOffreTechnique(index){
+               let objet= this.getterDossierCandidats.find(item=>item.id=index);
+                this.formOffreTechnique={
+                    numero_lot:"",
+                    accord_groupe:objet.accord_group,
+                    cautionnement_prov:objet.cautionnement_prov,
+                    pouv_habil_signataire:objet.pouv_habil_signataire,
+                    peice_admin:objet.piece_admin,
+                    reg_com:objet.reg_com,
+                    attest_banc:objet.attest_banc,
+                    formil_propo_tech:objet.formil_propo_tech,
+                    fiche_rsgnt_mbre_groupe:objet.fiche_rsgnt_mbre_groupe,
+                    atcdent_marche_non_exe:objet.atcdent_marche_non_exe,
+                    org_travau_site:objet.org_travau_site,
+                    meth_real_travau:objet.meth_real_travau,
+                    prog_mobilisation:objet.prog_mobilisation,
+                    capacite_financiere:objet.capacite_financiere,
+                    caa_moyen_ac_entre:objet.caa_moyen_ac_entre,
+                    capacite_techn_exp:objet.capacite_tech_exp,
+                    dossier_candidat_id:objet.id,
+                }
+              this.edite_offre_technique=this.getterDossierCandidats.find(item=>item.id=index);
+            },
+            modaleOffreFinnanciere(index){
+                this.edite_offre_financiere="";
+                let objet=this.getterDossierCandidats.filter(item=>item.id==index)
+                console.log(objet)
+                this.edite_offre_financiere=this.getterDossierCandidats.find(item=>item.id==index);
+                console.log(this.edite_offre_financiere)
+            },
+            isFormulaireDossierCand(){
+                this.isFormulaireDossierCandidature=true
+                this.isButtunAddDossierCandidat=false
+                this.isDetailDossierCandidature=false
+            },
+            NotisFormulaireDossierCand(){
+                this.isFormulaireDossierCandidature=false
+                this.isButtunAddDossierCandidat=true
+                this.isDetailDossierCandidature=false
+            },
+            isDetailDossierCandi(id){
+                this.isDetailDossierCandidature=true,
+                    this.isButtunAddDossierCandidat=false
+                this.isButtunAddDossierCandidat=false
+                this.detail_dossier_candidature=this.getterDossierCandidats.find(dossier=>dossier.id==id)
+                this.detail_offre_finnancier=this.getterOffreFinanciers.find(offre => offre.dossier_candidature.id ==id)
+                this.detail_offre_technique =this.gettersOffreTechniques.find(offre =>offre.dossier_candidature.id ==id)
+               // console.log(this.detail_offre_finnancier)
+            },
+            // afficher modal de modification
+            afficherModalModifierActeDepense(index){
+                this.$('#modificationModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                this.edite_appel_offre = this.appelOffres.find(item=>item.id==index);
+            },
+            afficheDemandeDAO(index){
+                this.$('#modifDemandeAno').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                this.edite_demande_dao=this.getterDemandeAno.find(
+                    demandeAno => demandeAno.id == index
+                )
+                console.log(this.edite_demande_dao)
+            },
+            afficheAnalyseDMP(index){
+                this.$('#editeDMP').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                this.edite_analyse_dpm=this.getterAnalyseDMP.find(
+                    annalyseDP => annalyseDP.id == index
+                )
+                console.log(this.edite_analyse_dpm)
+            },
+// vider l'input de nnouveau fournisseur
+ajouterNouveauFournisseurLocal(registeCommerce){
+                this.formFournisseur.numero_rc=registeCommerce
+    /*this.ajouterEntreprise(this.formFournisseur)
+    this.formFournisseur = {
+         numero_cc: "",
+                    numero_rc: "",
+                    raison_sociale: "",
+                    sigle: "",
+                    secteur_activite_id: "",
+                    activite_principale: "",
+                    pays: "",
+                    ville: "",
+                    forme_juridique:"",
+                    centre_impot:"",
+                    regime_imposition:"",
+                    capitale_sociale:"",
+                    immatriculation_cnps:"",
+                    date_enregistrement_cnps:"",
+                    telephone:"",
+                    email:"",
+                    nbre_travailleur_permanent:"",
+                    nbre_travailleur_journalier:"",
+                    service_assiette_impot:"",
+                    adresse:"",
+                    banque:""
+    }*/
+},
+            afficheAnoDPMBailleurModale(index){
+                this.$('#editeAnoDmpBailleurModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                this.edite_ano_bailleur_dmp=this.getterAnoDMPBailleur.find(
+                    resp => resp.id == index
+                )
+                 },
+            afficheAnnalyseDossier(index){
+                this.$('#modificationAajouterAnalys01').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                this.edite_analyse_dossier = this.listeAnalyseDossier(this.marcheid)[index];
+            },
+            afficherModaleModifier(index){
+                this.$('#modificationModal1').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+             this.edite_lot = this.listeLots(this.marcheid)[index];
+                //this.edite_lot.appel_offre_id=this.edite_lot.
+            },
+            afficheBouttonTechCojo(index){
+        this.$('#modificationCojo').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+        this.edite_cojo = this.getterCojos[index];
+        //this.edite_lot.appel_offre_id=this.edite_lot. modifierDemandeAno
+    },
+            afficheBouttonTechFinMandater(index){
+                this.$('#modificationMantater').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                this.editer_mandater = this.getterMandate[index];
+            },
+            modificationMandater(){
+                this.modifierMandater(this.editer_mandater)
+                this.$('#modificationMantater').modal('hide');
+            },
+            modificationDossierAnalyse(){
+                this.modifierAnalyseDossier(this.edite_analyse_dossier)
+                this.$('#modificationAajouterAnalys01').modal('hide');
+            },
+            modfications(){
                 this.modifierAppelOffre(this.edite_appel_offre)
-                this.$('#modifierActeEF').modal('hide');
+                this.$('#modificationModal').modal('hide');
             },
-    
-
-
-formatageSomme:formatageSomme,
-
- formaterDate(date) {
+            modificationCojo(){
+                this.modifierCojo(this.edite_cojo)
+                this.$('#modificationModal').modal('hide');
+            },
+            modficationsLot(){
+            
+                this.modifierLot(this.edite_lot)
+                this.$('#modificationModal1').modal('hide');
+            },
+            modficationsAnalyseDMP(){
+                this.modifierAnalyseDMP(this.edite_analyse_dpm)
+                    this.getProceVerbal();
+                this.getAnoDMPBailleur()
+                this.$('#editeDMP').modal('hide');
+            },
+            editeAnoDMPBailleurLocal(){
+                const formData = new FormData();
+                formData.append('date_ano_dmp', this.edite_ano_bailleur_dmp.date_ano_dmp);
+                formData.append('avis_bail', this.edite_ano_bailleur_dmp.avis_bail);
+                formData.append('observations_bailleur', this.edite_ano_bailleur_dmp.observations_bailleur);
+                formData.append('ref_ano_dmp', this.edite_ano_bailleur_dmp.ref_ano_dmp);
+                formData.append('analyse_dmp_id', this.edite_ano_bailleur_dmp.analyse_dmp_id);
+                formData.append('appel_offre_id', this.edite_ano_bailleur_dmp.appel_offre_id);
+                formData.append('id', this.edite_ano_bailleur_dmp.id);
+                console.log(formData)
+                if ( this.selectedFile!==""){
+                    formData.append('fichier', this.selectedFile, this.selectedFile.name);
+                }
+                let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }
+                this.modifierAnoDMPBailleur(formData,config)
+                this.$('#editeAnoDmpBailleurModal').modal('hide');
+                this.getProceVerbal()
+                this.getActeEffetFinancier()
+            },
+// afficher modification demande ano
+/* afficherModalModifierDemandeAno(index){
+    this.$('#modificationDemandeAno').modal({
+       backdrop:'static',
+     keyboard:false
+  })
+  },*/     
+            // eslint-disable-next-line no-unused-vars
+            afficheBouttonTechFin(index){
+             this.isOffreTechniqueFinancier=true
+            this.$('#modificationDossierCandidatModal').modal({
+                    backdrop:'static',
+                    keyboard:false
+                });
+                this.editDossierCadidature = this.dossierCandidature(this.marcheid)[index];
+            },
+            afficheBouttonTechFinInvitation(index){
+                this.$('#modificationLettreInvitation').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                this.edite_lettre_invitation = this.getterLettreInvitation.find(item=>item.id==index);
+            },
+            modificationLettreInvitation(){
+                const formData = new FormData();
+                formData.append('appel_offre_id', this.edite_lettre_invitation.appel_offre_id);
+                formData.append('destination', this.edite_lettre_invitation.destination);
+                formData.append('ref_lettre', this.edite_lettre_invitation.ref_lettre);
+                formData.append('date_lettre', this.edite_lettre_invitation.date_lettre);
+                formData.append('date_cojo', this.edite_lettre_invitation.date_cojo);
+                formData.append('id', this.edite_lettre_invitation.id);
+                console.log(this.edite_lettre_invitation.id)
+                let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }
+                if ( this.selectedFile!==""){
+                    formData.append('fichier', this.selectedFile, this.selectedFile.name);
+                }
+               this.modifierLettreInvitation(formData,config)
+            },
+            // formatage de date
+            formaterDate(date) {
               return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },
-             OnchangeFichier(e) {
+            ExporterEnExel(){
+                this.$refs.excel.click()
+            }
+,
+            OnchangeFichier(e) {
                 const files = e.target.files;
                 this.selectedFile = event.target.files[0];
                 console.log(this.selectedFile)
@@ -1079,15 +2991,166 @@ formatageSomme:formatageSomme,
                 };
                 reader.readAsDataURL(file);
             },
-      }
-}
+            ajouterPV(){
+                const formData = new FormData();
+                formData.append('fichier', this.selectedFile, this.selectedFile.name);
+                formData.append('appel_offre_id', this.formLot.appel_offre_id);
+                let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }
+                //console.log(formData)
+                this.ajouterProceVerbal(formData,config);
+            },
+            OnchangeFichierDemandeAno(e) {
+                const files = e.target.files;
+                this.selectedFileDemandeAno = event.target.files[0];
+                console.log(this.selectedFileDemandeAno)
+                Array.from(files).forEach(file => this.addFichierPDFDemandeAno(file));
+            },
+            addFichierPDFDemandeAno(file) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = e => {
+                    vm.imagePDFDemandeAno = "pdf.png";
+                    vm.namePDFDemandeAno = file.name;
+                    vm.fichierPDFDemandeAno = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+            ,
+            ajouterDemandeAnoLocal(){
+                const formData = new FormData();
+                formData.append('fichier', this.selectedFileDemandeAno, this.selectedFileDemandeAno.name);
+                formData.append('proce_verbal_jugement_offre_id', this.formDemande.proce_verbal_jugement_offre_id);
+                formData.append('date_demande', this.formDemande.date_demande);
+                formData.append('ref_marche', this.formDemande.ref_marche);
+                formData.append('num_courrier', this.formDemande.num_courrier);
+                let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }
+                console.log(formData)
+                this.ajouterDemandeAno(formData,config)
+                this.formDemande={
+                    date_demande:"",
+                    ref_marche:"",
+                    num_courrier:"",
+                    analyse_dossier_id:"",
+                    proce_verbal_jugement_offre_id:""
+                }
+            },
+            editDemandeDAO(){
+                //console.log(this.edite_demande_dao)
+                const formData = new FormData();
+                formData.append('proce_verbal_jugement_offre_id', this.edite_demande_dao.proce_verbal_jugement_offre_id);
+                formData.append('date_demande', this.edite_demande_dao.date_demande);
+                formData.append('ref_marche', this.edite_demande_dao.ref_marche);
+                formData.append('num_courrier', this.edite_demande_dao.num_courrier);
+                formData.append('id', this.edite_demande_dao.id);
+                console.log(formData)
+                if ( this.selectedFileDemandeAno!==""){
+                    formData.append('fichier', this.selectedFileDemandeAno, this.selectedFileDemandeAno.name);
+                }
+                let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }
+                this.modifierDemandeAno(formData,config)
+                this.getAnalyseDMP()
+                this.getAnoDMPBailleur()
+                this.$('#modifDemandeAno').modal('hide');
+            },
+         ajouterAnoDMPBailleurLocal(){
+             const formData = new FormData();
+             formData.append('fichier', this.selectedFile, this.selectedFile.name);
+             formData.append('date_ano_dmp', this.formAno.date_ano_dmp);
+             formData.append('avis_bail', this.formAno.avis_bail);
+             formData.append('observations_bailleur', this.formAno.observations_bailleur);
+             formData.append('ref_ano_dmp', this.formAno.ref_ano_dmp);
+             formData.append('numero_courie', this.formAno.numero_courie);
+             formData.append('appel_offre_id', this.formAno.appel_offre_id);
+             formData.append('analyse_dmp_id', this.formAno.analyse_dmp_id);
+             let config = {
+                 header : {
+                     'Content-Type' : 'multipart/form-data'
+                 }
+             }
+            this.ajouterAnoDMPBailleur(formData,config)
+            this.formAno={
+                date_ano_dmp:"",
+                avis_bail:"",
+                observations_bailleur:"",
+                ref_ano_dmp:"",
+                numero_courie:"",
+                appel_offre_id:"",
+                analyse_dmp_id:""
+            }
+        }
+        }
+    };
 </script>
-
 <style scoped>
-.grdirModalActeEffet{
-     width: 1600px;
- margin: 0 -830px;
-
-
-}
+    .taillemodal {
+        width: 800px;
+        margin: 0 -380px;
+    }
+    .gdmodelfour
+    {
+ width: 1000px;
+ margin: 0 -580px;
+ height: 500px;
+    }
+    .grdirModalActeEffet
+    {
+ width: 1200px;
+ margin: 0 -530px;
+ height: 550px;
+    }
+    .grdirModalAnalyse{
+         width: 1000px;
+ margin: 0 -530px;
+ height: 350px;
+    }
+    .tlAviBailleur{
+  width: 1000px;
+ margin: 0 -530px;
+ height: 450px;
+    }
+    .tlDossierCandidat{
+        width: 1000px;
+ margin: 0 -530px;
+ height: 500px;
+    }
+    .tlg{
+    width: 900px;
+ margin: 0 -450px;
+ height: 500px; 
+    }
+    .sommecolor{
+        background-color: red;
+        color:red;
+        font-size: 120%;
+        text-align: center;
+        font-weight:bold;
+    }
+    .modaloffreFin{
+width: 850px;
+ margin: 0 -480px;
+    }
+    .tailDMP{
+        width: 850px;
+ margin: 0 -490px;
+    }
+    .tailleModalOffre{
+           width: 1200px;
+ margin: 0 -490px;
+    }
+     .tailleModalOffre2{
+           width: 1300px;
+ margin: 0 -690px;
+    }
 </style>

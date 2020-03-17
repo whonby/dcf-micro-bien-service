@@ -1,65 +1,25 @@
-
+formLot
+tauxArrondit
+Liste des bailleurs du marché
+offreF
+ajouterOffreT
 <template>
     
 <div>
         <div class="container-fluid">
-            <h4 v-if="marcheDetail(marcheid)" >Detail Marche : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en cours de passation</button>
-                <button class="btn btn-success btn-large" v-else>Marché attribué</button></h4>
-            <hr />
+           
+            
 
-            <div class="widget-box">
-                <div class="widget-content">
-                    <div class="widget-content nopadding">
-                        <table class="table table-striped table-bordered" v-if="detail_marche">
-                            <thead>
-                            <tr>
-                                <th>Objet marché</th>
-                                <th>Reference marché</th>
-                                <th>Montant marché</th>
-                                <th>Type de marché</th>
-                                <th>Unite administrative</th>
-                                <th>Exercice Budgetaire</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr v-if="detail_marche">
-                                
-                                <td class="taskDesc">{{detail_marche.objet}}</td>
-                                <td class="taskStatus">{{detail_marche.reference_marche}}</td>
-                                <td class="taskOptions">
-                                    {{detail_marche.montant_marche}}
-                                </td>
-                                <td class="taskOptions">
-                                    {{detail_marche.type_marche.libelle}}
-                                </td>
-                                <td class="taskOptions">
-                                    {{detail_marche.objetUniteAdministrative.libelle}}
-                                </td>
-                                <td class="taskOptions">
-                                    {{detail_marche.exo_id}}
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        
-                    </div>
-                </div>
-            </div>
-
-            <div class="row-fluid">
-                <div class="span3">
-
-                </div>
-            </div>
+            
             <div class="row-fluid">
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab01">Bailleur</a></li>
+                                <!-- <li class="active"><a data-toggle="tab" href="#tab01">Bailleur</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab1">Offre</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li> -->
+                                <li class=""><a data-toggle="tab" href="#tab3">Information Candidat</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab4">Facture</a></li> -->
                             </ul>
                         </div>
@@ -72,32 +32,7 @@
                                     <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
                                 <h4>Liste des bailleurs du marché</h4>
 
-                                <table class="table table-bordered table-striped" v-if="marcheid">
-                                    <thead>
-                                    <tr>
-                                        <th>Bailleur</th>
-                                        <th>Type finanncement</th>
-                                        <th>Montant</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr class="odd gradeX" v-for="appelOffre in listeBailleurMarche(marcheid)"
-                                        :key="appelOffre.id">
-                                        <td @dblclick="editeMarcheBailleur(appelOffre.id)">
-                                            {{appelOffre.bailleur.libelle || 'Non renseigné'}}</td>
-                                        <td @dblclick="editeMarcheBailleur(appelOffre.id)">
-                                            {{appelOffre.typeFinnancement.libelle || 'Non renseigné'}}</td>
-                                        <td @dblclick="editeMarcheBailleur(appelOffre.id)">
-                                            {{appelOffre.montant || 'Non renseigné'}}</td>
-                                        <div class="btn-group">
-                                            <button @click.prevent="supprimerMarcheBailleur(appelOffre.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash"></i></span></button>
-                                        </div>
-
-                                    </tr>
-                                    </tbody>
-                                </table>
+                               
 
 
                                 <div id="addBailleurMarche" class="modal hide" aria-hidden="true" style="display: none;">
@@ -300,7 +235,7 @@
           <div class="widget-title">
             <ul class="nav nav-tabs">
               <li class="active"><a data-toggle="tab" href="#tab12">Dossier candidat</a></li>
-              <li class=""><a data-toggle="tab" href="#tab21">Lettre invitation</a></li>
+              <!-- <li class=""><a data-toggle="tab" href="#tab21">Lettre invitation</a></li>
               <li class=""><a data-toggle="tab" href="#tab31">Mandate</a></li>
               <li class=""><a data-toggle="tab" href="#tab22">Ouverture</a></li>
               <li class=""><a data-toggle="tab" href="#tab32">Analyse</a></li>
@@ -309,7 +244,7 @@
                 <li class=""><a data-toggle="tab" href="#tab34">Avis DMP</a></li>
                  <li class=""><a data-toggle="tab" href="#tab35">Avis Bailleur</a></li>
                  
-                 <li class=""><a data-toggle="tab" href="#tab37" title="">Actes</a></li>
+                 <li class=""><a data-toggle="tab" href="#tab37" title="">Actes</a></li> -->
 
             
 
@@ -4767,7 +4702,7 @@
     //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
     import {  ModelListSelect } from 'vue-search-select'
     import 'vue-search-select/dist/VueSearchSelect.css'
-import { formatageSomme } from "../../../../src/Repositories/Repository";
+import { formatageSomme } from '../../../../../src/Repositories/Repository';
     export default {
         name: 'compte',
         components:{

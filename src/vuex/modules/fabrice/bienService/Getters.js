@@ -1,4 +1,4 @@
-printMarcheNonAttribue
+gettersOuverturePersonnaliser
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays
@@ -194,7 +194,8 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
 
                 varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
                     plans => plans.id == element.entreprise_id
-                ),
+                )
+                ,
 
                 varObjetCotation: rootGetters['bienService/gettersCotation'].find(
                     plans => plans.id == element.cotation_id

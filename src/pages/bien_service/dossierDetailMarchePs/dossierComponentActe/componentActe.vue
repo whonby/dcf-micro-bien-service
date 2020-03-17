@@ -1,4 +1,4 @@
-
+affichierNomEntreprise
 <template>
     <div>
 
@@ -39,7 +39,7 @@
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.marche.imputation || 'Non renseigné'}}</td>
                               <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.varObjetEntreprise.raison_sociale || 'Non renseigné'}}</td>
+                            {{affichierNomEntreprise(effetFinancier.entreprise_id) || 'Non renseigné'}}</td>
 <td>
       <div class="btn-group">
                             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
@@ -84,8 +84,8 @@
                         <label class="control-label">Entreprise.</label>
                         <div class="controls">
                           <select v-model="formEffetFinancier.entreprise_id" class="span">
-                                <option v-for="varText in entreprises" :key="varText.id"
-                                        :value="varText.id">{{varText.raison_sociale}}</option>
+                                <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
+                                        :value="varText.entreprise_id">{{affichierNomEntreprise(varText.entreprise_id)}}</option>
                             </select>
                         
                         </div>
@@ -353,8 +353,8 @@
                         <label class="control-label">Entreprise.</label>
                         <div class="controls">
                           <select v-model="editActeEffetFinancier.entreprise_id" class="span">
-                                <option v-for="varText in entreprises" :key="varText.id"
-                                        :value="varText.id">{{varText.raison_sociale}}</option>
+                               <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
+                                        :value="varText.entreprise_id">{{affichierNomEntreprise(varText.entreprise_id)}}</option>
                             </select>
                         
                         </div>
@@ -637,7 +637,7 @@ export default {
 
        computed: {
 
-            ...mapGetters("bienService", [ "typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+            ...mapGetters("bienService", [ "gettersOuverturePersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -653,8 +653,38 @@ export default {
                 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
       
+// affichierNomEntreprise() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
 
+//       if (qtereel) {
+//         return qtereel.raison_sociale;
+//       }
+//       return 0
+//         }
+//       };
+//     },
+    affichierNomEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.raison_sociale;
+      }
+      return 0
+        }
+      };
+    },
+afficherEntrepriseRecep () {
+                return id => {
+                    if (id != "") {
+                        // console.log("Marche lettre inviation marche")
+                        return this.gettersOuverturePersonnaliser.filter(idmarche => idmarche.marche_id == id)
+                     }
+             }
+            },
 
 
 nombreDejourCalcule(){
