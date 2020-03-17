@@ -2320,6 +2320,71 @@ export function supprimerCotation({commit}, id) {
 
 
 
+
+
+
+
+export function getTransmission({commit}) {
+  queue.push(() => axios.get('/list_transmission').then((response) => {
+    commit('GET_ALL_TRANSMISSION', response.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter les infos 
+
+export function ajouterTransmission({commit,dispatch}, elementAjout){
+  asyncLoading(axios.post('/add_transmission', elementAjout)).then(response =>{
+      if(response.status == 201){
+        commit('AJOUTER_TRANSMISSION', response.data)
+         dispatch('getTransmission')
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier le type text juridique
+
+
+
+export function modifiertransmission({ commit }, element_modifie) {
+  asyncLoading(axios.put('/update_transmission', element_modifie)).then(response => {
+    commit('MODIFIER_TRANSMISSION', response.data)
+
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+
+
+// supprimer le type text juridique
+
+export function supprimerTransmission({commit}, id) {
+ this.$app.$dialog
+ .confirm("Voulez vous vraiment supprimer ?.")
+ .then(dialog => {
+   commit('SUPPRI_TRANSMISSION', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+   axios.delete('/suppri_transmission/' + id).then(() => dialog.close() )   
+ })
+
+}
+
+
+
+
+
+
+
 // action pour l'etat de procedure
 
 

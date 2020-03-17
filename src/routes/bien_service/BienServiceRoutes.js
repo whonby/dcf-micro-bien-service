@@ -55,6 +55,7 @@ import ModePaiement from '../../pages/bien_service/parametres/ModePaiement.vue';
 import DetailMarchePs from '../../pages/bien_service/dossierDetailMarchePs/DetailMarchePs.vue';
  import detailMarcheProcedureSimplifierComite from '../../pages/bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/detailMarcheProcedureSimplifierComite.vue';
  import detailMarchePsLimite from '../../pages/bien_service/dossierDetailMarcheProcedureSimplifieLimite/detailMarchePsLimite.vue'; 
+ import detailMarcheAoi_Aon from '../../pages/bien_service/dossierDetailMarcheAOI_AON/detailMarcheAoi_Aon.vue';
  import indicateurBienService from '../../pages/bien_service/contractualisation/indicateurBienService.vue';
 
 const BienServiceRoutes = [
@@ -75,7 +76,15 @@ const BienServiceRoutes = [
         name:"detailMarchePsLimite",
         component:detailMarchePsLimite
     },
+    // chemin de procedure d'appel offre iternational et national
 
+    {
+        path:"/detail-marche-AOI-AON/:id",
+        name:"detailMarcheAoi_Aon",
+        component:detailMarcheAoi_Aon
+    },
+
+    
     {
     path:"/detail-marche-psc/:id",
     name:"detailMarcheProcedureSimplifierComite",
