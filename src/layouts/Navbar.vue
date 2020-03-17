@@ -137,7 +137,7 @@ export default {
           'getActeEffetFinancier','getEngagement','getMandat',"getVille","getPays","getCommune",
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", 
-          "getCotation","getOuverture"])
+          "getCotation","getOuverture","getTransmission"])
 
 
   },
@@ -182,7 +182,7 @@ export default {
 this.getVille()
 this.getCommune()
 this.getChoixProcedure()
-
+this.getTransmission()
 this.getCotation()
 this.getOuverture()    
 

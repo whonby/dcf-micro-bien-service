@@ -185,34 +185,34 @@ export const MODIFIER_ETAT_PROCEDURE = (state, elementModif)=>{
 
 
 
-// get all  motif de decision
-// export const GET_ALL_PSC = (state, tableau_psc) =>{
-//     state.gettersPsc = tableau_psc
-// }
+//get all  motif de decision
+export const GET_ALL_TRANSMISSION = (state, tableau_psc) =>{
+    state.gettersTransmissions = tableau_psc
+}
 
-// add * motif de decision 
+//add * motif de decision 
 
-// export const AJOUTER_PSC = (state, elementAjouter) => {
-//     state.gettersPsc.unshift(elementAjouter)
-// }
+export const AJOUTER_TRANSMISSION = (state, elementAjouter) => {
+    state.gettersTransmissions.unshift(elementAjouter)
+}
 
-// update all motif de decision
-// export const MODIFIER_PSC = (state, elementModif)=>{
-//     state.gettersPsc = state.gettersPsc.map(response => {
-//         if(response.id == elementModif.id){
-//             response = {...elementModif}
-//         }
-//         return response
-//     })
-// }
+//update all motif de decision
+export const MODIFIER_TRANSMISSION = (state, elementModif)=>{
+    state.gettersTransmissions = state.gettersTransmissions.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
 
 
 
-// delete all motif de decision
+//delete all motif de decision
 
-// export const SUPPRI_PSC = (state, id)=> {
-//     state.gettersPsc = state.gettersPsc.filter(motif => motif.id !=id)
-// }
+export const SUPPRI_TRANSMISSION = (state, id)=> {
+    state.gettersTransmissions = state.gettersTransmissions.filter(motif => motif.id !=id)
+}
 
 
 

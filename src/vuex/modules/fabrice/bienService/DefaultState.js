@@ -70,7 +70,8 @@ documentProcedures:[],
     gettersCotations:[],
     gettersOuvertures:[],
     gettersEtatProcedure:[],
-    gettersPsc:[]
+    gettersPsc:[],
+    gettersTransmissions:[]
 
 
 
