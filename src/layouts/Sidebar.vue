@@ -12,7 +12,7 @@
       <!-- <a title=" Dashboard" href="#" class="visible-phone">
         <i class="icon icon-home"></i>Dashboard
       </a> -->
-      <ul>
+      <ul style=" background:#1f262d; height: 1000px">
         <!-- <li :class="{active: active_el == 0 }" @click.prevent="activate(0)">
           <a href="index.html">
             <i class="icon icon-home"></i>

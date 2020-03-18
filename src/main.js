@@ -23,7 +23,11 @@ import store from './vuex/store'
 import JsonExcel from 'vue-json-excel'
 import Datatable from 'vue2-datatable-component'
 
-
+import FullCalendar from 'vue-full-calendar'
+import "fullcalendar-scheduler";
+//import 'fullcalendar/dist/fullcalendar';
+import "fullcalendar/dist/fullcalendar.min.css";
+import "fullcalendar-scheduler/dist/scheduler.min.css";
 Vue.component('downloadExcel', JsonExcel)
 //Vue.component(Balloon)
 //import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -37,7 +41,7 @@ Vue.prototype.$ = Jquery
  Vue.component('no-sidebar-layout', NoSidebar)
 
 
-
+Vue.use(FullCalendar)
 Vue.use(Datatable)
 // using default options
 //Vue.use(VueLoading)

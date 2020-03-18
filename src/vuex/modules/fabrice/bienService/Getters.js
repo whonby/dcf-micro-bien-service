@@ -24,6 +24,7 @@ export const getterCojos = state => state.cojos
 export const conditions = state => state.conditions
 export const fonctionOccupes = state => state.fonctionOccupes
 export const getterAnalyseDossiers = state => state.analyseDossiers
+export const getterPlanPassationMarche=state=>state.plan_passation_marche
 export const natureFonctions = state => state.natureFonctions
 export const signatures = state => state.signatures
 export const typeActeEffetFinanciers = state => state.typeActeEffetFinanciers

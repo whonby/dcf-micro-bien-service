@@ -137,13 +137,13 @@ export default {
           'getActeEffetFinancier','getEngagement','getMandat',"getVille","getPays","getCommune",
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", 
-          "getCotation","getOuverture","getTransmission"])
+          "getCotation","getOuverture","getTransmission","getPlanPassationMarche"])
 
 
   },
 
   created(){
-
+    this.getPlanPassationMarche()
       this.getExercicesBudgetaires()
       this.getTaux()
       this.getModePaiement()
