@@ -378,8 +378,7 @@ return this.plans_Decision.filter((item) => {
 
     // methode pour notre action
     ...mapActions('parametreGenerauxFonctionnelle', ['getPlanDecision', 
-    'ajouterPlanDecision', 
-   'supprimerPlanDecision', 'modifierPlanDecision']),     
+    'ajouterPlanDecision','supprimerPlanDecision', 'modifierPlanDecision']),     
    
     afficherModalAjouterplanFonctionnel(){
        this.$('#exampleModal').modal({

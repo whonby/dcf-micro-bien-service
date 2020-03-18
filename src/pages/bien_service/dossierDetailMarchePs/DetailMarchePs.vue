@@ -1,6 +1,4 @@
-model-list-select
-addLot
-ref_appel
+
 <template>
     
 
@@ -45,7 +43,7 @@ ref_appel
                                 <td class="taskOptions">
                                     {{detail_marche.objetUniteAdministrative.libelle}}
                                 </td>
-                               <td>{{budgetDisponible}}</td>
+                               <!-- <td>{{budgetDisponible}}</td> -->
                             </tr>
                             </tbody>
                         </table>             
@@ -145,7 +143,7 @@ ref_appel
                                 <li class=""><a data-toggle="tab" href="#tab478">Reception des offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab498">Ouverture</a></li>
                                  <!-- <li class=""><a data-toggle="tab" href="#tab4110">Rapport d'ouverture</a></li> -->
-                                <li class=""><a data-toggle="tab" href="#tab4100">Jugement</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab78932">Jugement</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab4110">Rapport Jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab178">Attribution</a></li>
                                
@@ -194,7 +192,7 @@ ref_appel
                   <component-ouverture :macheid="detail_marche.id"></component-ouverture>
                   <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>
                 </div>
- <div id="tab4100" class="tab-pane">
+ <!-- <div id="tab4100" class="tab-pane">
                <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterMP" data-toggle="modal" class="btn btn-primary">Ajouter</a>
@@ -204,6 +202,17 @@ ref_appel
                 </div>
                 <component-analyse :macheid="detail_marche.id"></component-analyse>
 
+                </div> -->
+                   <div id="tab78932" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterMP" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                    </div>
+
+
+                </div>
+               
+                   <component-analyse :macheid="detail_marche.id"></component-analyse>
                 </div>
                 <div id="tab4110" class="tab-pane">
                 <div align="right">
@@ -557,7 +566,7 @@ import dossierCandidat from '../DossierPso/dossierCandidat/dossierCandidat'
     //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
     //import {  ModelListSelect } from 'vue-search-select'
     import 'vue-search-select/dist/VueSearchSelect.css'
-//import { formatageSomme } from "../../../../src/Repositories/Repository";
+import { formatageSomme } from "../../../../src/Repositories/Repository";
     export default {
        
         components:{
@@ -760,7 +769,7 @@ budgetDisponible() {
           
 
 
-
+formatageSomme:formatageSomme,
 
 
 
