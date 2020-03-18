@@ -989,3 +989,239 @@ export  function  getActeurFinContratAndActivite({commit}) {
  * Fin grades
  * **/
 
+
+
+
+
+/**
+ * Gestion des classes
+ */
+export function getCategorieGrade({ commit }) {
+
+    queue.push(() => axios.get('/liste_CategorieGrade').then(response => {
+        // console.log(response.data)
+        commit('GET_CATEGORIE_GRADE', response.data)
+    }).catch(error => console.log(error))
+    );
+
+
+}
+
+// ajouter type acte personnel
+export function ajouterCategorieGrade({ commit }, objetAjoute) {
+    this.$app.$loading(true)
+    axios.post('/add_CategorieGrade', objetAjoute).then(res => {
+        if (res.status == 201) {
+            this.$app.$notify({
+                title: 'success',
+                text: 'Enregistrement effectuer',
+                type: "success"
+            });
+            commit('AJOUTER_CATEGORIE_GRADE', res.data)
+            this.$app.$loading(false)
+        }
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type: "error"
+        });
+    })
+}
+
+// supprimer type act
+export function supprimerCategorieGrade({ commit }, id) {
+
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
+            this.$app.$notify({
+                title: 'Suppression',
+                text: 'Suppression effectuer',
+                type: "error"
+            });
+            commit('SUPPRIMER_CATEGORIE_GRADE', id)
+            axios.delete('/delete_CategorieGrade/' + id).then(() => dialog.close())
+        })
+
+}
+
+export function modifierCategorieGrade({ commit }, formData) {
+    this.$app.$loading(true)
+    axios.put('/update_CategorieGrade', formData).then(response => {
+        this.$app.$notify({
+            title: 'success',
+            text: 'Modification effectuer',
+            type: "success"
+        });
+        commit('MODIFIER_CATEGORIE_GRADE', response.data)
+        this.$app.$loading(false)
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type: "error"
+        });
+    })
+
+}
+
+/**
+ * Gestion des classes
+ */
+export function getFamilleFonction({ commit }) {
+
+    queue.push(() => axios.get('/liste_FamilleFonction').then(response => {
+        // console.log(response.data)
+        commit('GET_FAMILLE_FONCTIONS', response.data)
+    }).catch(error => console.log(error))
+    );
+
+
+}
+
+// ajouter type acte personnel
+export function ajouterFamilleFonction({ commit }, objetAjoute) {
+    this.$app.$loading(true)
+    axios.post('/add_FamilleFonction', objetAjoute).then(res => {
+        if (res.status == 201) {
+            this.$app.$notify({
+                title: 'success',
+                text: 'Enregistrement effectuer',
+                type: "success"
+            });
+            commit('AJOUTER_FAMILLE_FONCTIONS', res.data)
+            this.$app.$loading(false)
+        }
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type: "error"
+        });
+    })
+}
+
+// supprimer type act
+export function supprimerFamilleFonction({ commit }, id) {
+
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
+            this.$app.$notify({
+                title: 'Suppression',
+                text: 'Suppression effectuer',
+                type: "error"
+            });
+            commit('SUPPRIMER_FAMILLE_FONCTIONS', id)
+            axios.delete('/delete_FamilleFonction/' + id).then(() => dialog.close())
+        })
+
+}
+
+export function modifierFamilleFonction({ commit }, formData) {
+    this.$app.$loading(true)
+    axios.put('/update_FamilleFonction', formData).then(response => {
+        this.$app.$notify({
+            title: 'success',
+            text: 'Modification effectuer',
+            type: "success"
+        });
+        commit('MODIFIER_FAMILLE_FONCTIONS', response.data)
+        this.$app.$loading(false)
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type: "error"
+        });
+    })
+
+}
+
+
+
+/**
+ * Gestion des classes
+ */
+export function getClassificationGradeFonction({ commit }) {
+
+    queue.push(() => axios.get('/liste_ClassifGradeEmploie').then(response => {
+        // console.log(response.data)
+        commit('GET_CLASSIFICATION_GRADE_FONCTION', response.data)
+    }).catch(error => console.log(error))
+    );
+
+
+}
+
+// ajouter type acte personnel
+export function ajouterClassificationGradeFonction({ commit }, objetAjoute) {
+    this.$app.$loading(true)
+    axios.post('/add_ClassifGradeEmploie', objetAjoute).then(res => {
+        if (res.status == 201) {
+            this.$app.$notify({
+                title: 'success',
+                text: 'Enregistrement effectuer',
+                type: "success"
+            });
+            commit('AJOUTER_CLASSIFICATION_GRADE_FONCTION', res.data)
+            this.$app.$loading(false)
+        }
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type: "error"
+        });
+    })
+}
+
+// supprimer type act
+export function supprimerClassificationGradeFonction({ commit }, id) {
+
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
+            this.$app.$notify({
+                title: 'Suppression',
+                text: 'Suppression effectuer',
+                type: "error"
+            });
+            commit('SUPPRIMER_CLASSIFICATION_GRADE_FONCTION', id)
+            axios.delete('/delete_ClassifGradeEmploie/' + id).then(() => dialog.close())
+        })
+
+}
+
+export function modifierClassificationGradeFonction({ commit }, formData) {
+    this.$app.$loading(true)
+    axios.put('/update_ClassifGradeEmploie', formData).then(response => {
+        this.$app.$notify({
+            title: 'success',
+            text: 'Modification effectuer',
+            type: "success"
+        });
+        commit('MODIFIER_CLASSIFICATION_GRADE_FONCTION', response.data)
+        this.$app.$loading(false)
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type: "error"
+        });
+    })
+
+}

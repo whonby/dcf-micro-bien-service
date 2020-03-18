@@ -616,7 +616,172 @@ const GET_FIN_ACTIVITE_CONTRAT = (state, data) => {
     state.list_acteur_fin_contrat_activite = data
 }
 
+
+
+//  * @param state
+//     * @param data
+//         */ @constructor
+//  * /
+const GET_FAMILLE_FONCTIONS = (state, data) => {
+    state.familleFonction = data
+}
+
+
+const AJOUTER_FAMILLE_FONCTIONS = (state, nouvel_objet) => {
+    state.familleFonction.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+}
+
+/**
+ * Suppresions
+ * @param state
+ * @param id
+ * @constructor
+ */
+const SUPPRIMER_FAMILLE_FONCTIONS = (state, id) => {
+    state.familleFonction = state.familleFonction.filter(fonction => fonction.id != id)
+}
+
+/**
+ * Modification
+ * @param state
+ * @param id
+ * @param objetModifie
+ * @constructor
+ */
+const MODIFIER_FAMILLE_FONCTIONS = (state, objetModifie) => {
+    state.familleFonction = state.familleFonction.map(fonction => {
+        if (fonction.id == objetModifie.id) {
+            fonction = { ...objetModifie }
+        }
+        return fonction
+    })
+}
+
+
+//  * @param state
+//     * @param data
+//         */ @constructor
+//  * /
+const GET_CATEGORIE_GRADE = (state, data) => {
+    state.familleFonction = data
+}
+
+
+const AJOUTER_CATEGORIE_GRADE = (state, nouvel_objet) => {
+    state.familleFonction.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+}
+
+/**
+ * Suppresions
+ * @param state
+ * @param id
+ * @constructor
+ */
+const SUPPRIMER_CATEGORIE_GRADE = (state, id) => {
+    state.familleFonction = state.familleFonction.filter(fonction => fonction.id != id)
+}
+
+/**
+ * Modification
+ * @param state
+ * @param id
+ * @param objetModifie
+ * @constructor
+ */
+const MODIFIER_CATEGORIE_GRADE = (state, objetModifie) => {
+    state.familleFonction = state.familleFonction.map(fonction => {
+        if (fonction.id == objetModifie.id) {
+            fonction = { ...objetModifie }
+        }
+        return fonction
+    })
+}
+
+
+//  * @param state
+//     * @param data
+//         */ @constructor
+//  * /
+const GET_CLASSIFICATION_GRADE_FONCTION = (state, data) => {
+    state.classificationGradeFonction = data
+}
+
+
+const AJOUTER_CLASSIFICATION_GRADE_FONCTION = (state, nouvel_objet) => {
+    state.classificationGradeFonction.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+}
+
+/**
+ * Suppresions
+ * @param state
+ * @param id
+ * @constructor
+ */
+const SUPPRIMER_CLASSIFICATION_GRADE_FONCTION = (state, id) => {
+    state.classificationGradeFonction = state.classificationGradeFonction.filter(fonction => fonction.id != id)
+}
+
+/**
+ * Modification
+ * @param state
+ * @param id
+ * @param objetModifie
+ * @constructor
+ */
+const MODIFIER_CLASSIFICATION_GRADE_FONCTION = (state, objetModifie) => {
+    state.classificationGradeFonction = state.classificationGradeFonction.map(fonction => {
+        if (fonction.id == objetModifie.id) {
+            fonction = { ...objetModifie }
+        }
+        return fonction
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export {
+    
+    GET_CLASSIFICATION_GRADE_FONCTION,
+    AJOUTER_CLASSIFICATION_GRADE_FONCTION,
+    SUPPRIMER_CLASSIFICATION_GRADE_FONCTION,
+    MODIFIER_CLASSIFICATION_GRADE_FONCTION,
+    
+GET_CATEGORIE_GRADE,
+    AJOUTER_CATEGORIE_GRADE,
+    SUPPRIMER_CATEGORIE_GRADE,
+    MODIFIER_CATEGORIE_GRADE,
+
+
+
+
+GET_FAMILLE_FONCTIONS,
+    AJOUTER_FAMILLE_FONCTIONS,
+    SUPPRIMER_FAMILLE_FONCTIONS,
+    MODIFIER_FAMILLE_FONCTIONS,
+
+
+
     GET_TYPE_ACTE_PERSONNELS,
     AJOUTER_TYPE_ACTE_PERSONNELS,
     SUPPRIMER_TYPE_ACTE_PERSONNELS,
