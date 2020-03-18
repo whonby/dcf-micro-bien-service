@@ -51,7 +51,7 @@
                     </div>
                 </div>
             </div>
-<h4 style="text-align:center;font-size:30px">{{test}}</h4>
+<h4 style="text-align:center;font-size:30px">{{afficheLeNomDesProcedure}}</h4>
             <div class="row-fluid">
                 <div class="span3">
 
@@ -642,7 +642,7 @@ created() {
       // "sections"
     ]),
     
-test(){
+afficheLeNomDesProcedure(){
     if(this.afficherCodeTypeProcedure(this.detail_marche.procedure_passation_id) == 'PSC' && this.budgetDisponible < 10000000){
         return "Procédure Simplifiée de demande de Cotation(PSC Sans comité)"
     }
@@ -659,6 +659,7 @@ return "Procédure Simplifiée à compétition Limitée(PSL)"
 return "Procédure Simplifiée à compétition Ouverte(PSO)"
     }
     
+    return 0
 },
 
 
