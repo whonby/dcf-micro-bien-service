@@ -71,8 +71,8 @@ documentProcedures:[],
     gettersOuvertures:[],
     gettersEtatProcedure:[],
     gettersPsc:[],
-    gettersTransmissions:[]
-
+    gettersTransmissions:[],
+    plan_passation_marche:[],
 
 
 }

@@ -57,7 +57,8 @@ import DetailMarchePs from '../../pages/bien_service/dossierDetailMarchePs/Detai
  import detailMarchePsLimite from '../../pages/bien_service/dossierDetailMarcheProcedureSimplifieLimite/detailMarchePsLimite.vue'; 
  import detailMarcheAoi_Aon from '../../pages/bien_service/dossierDetailMarcheAOI_AON/detailMarcheAoi_Aon.vue';
  import indicateurBienService from '../../pages/bien_service/contractualisation/indicateurBienService.vue';
-
+import PlanPassationMarche from "../../pages/bien_service/ppm/PlanPassationMarche";
+import DetailPPM from "../../pages/bien_service/ppm/DetailPPM";
 const BienServiceRoutes = [
     {
         path: "indicateur-Bien-Service",
@@ -405,7 +406,17 @@ component:analyseDossier
        path:"/creation-type-unite-administrative",
        name:"typeUa",
        component:typeUa
-       }
+       },
+    {
+        path:"/ppm",
+        name:"ppm",
+        component:PlanPassationMarche
+    },
+    {
+        path:"/ppm/:id",
+        name:"DetailPPM",
+        component:DetailPPM
+    }
        
 ]
 
