@@ -22,6 +22,7 @@ import ServicePrincipal from "../../pages/unites_administratives/grpeService/Ser
 import FonctionPrincipal from "../../pages/unites_administratives/grpeFonction/FonctionPrincipal.vue";
 
 import Budget from "../../pages/budget/Budget";
+import LigneExempte from "../../pages/unites_administratives/LigneExempte";
 
 const UniteAdministativeRoutes = [
 
@@ -143,6 +144,12 @@ const UniteAdministativeRoutes = [
     path: "/import_budget",
     name: "ImportBudget",
     component: Budget
+  }
+  ,
+  {
+    path: "/ligne_exempter",
+    name: "LigneExempter",
+    component: LigneExempte
   }
 ];
 

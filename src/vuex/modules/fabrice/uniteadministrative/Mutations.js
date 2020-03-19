@@ -341,6 +341,63 @@ const SUPPRIMER_FONCTION = (state, id) => {
 
 
 
+export const GET_BUDGET_CHARGE = (state, tableauBudgetGeneral) => {
+  state.budgeCharge = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+export const AJOUTER_BUDGET_CHARGE = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.budgeCharge.unshift(nouveau_budgetGeneral);
+};
+
+// modifier type_textes
+export const MODIFIER_BUDGET_CHARGE = (state, objetModifie) => {
+  state.budgeCharge = state.budgeCharge.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
+// supprimer type_texte
+export const SUPPRIMER_BUDGET_CHARGE = (state, id) => {
+  state.budgeCharge = state.budgeCharge.filter(type => type.id != id);
+};
+
+
+
+
+
+
+export const GET_LIGNE_EXEMPTER = (state, tableauBudgetGeneral) => {
+    state.ligneExempter = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+export const AJOUTER_LIGNE_EXEMPTER = (state, nouveau_budgetGeneral) => {
+    // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+    state.ligneExempter.unshift(nouveau_budgetGeneral);
+};
+
+// modifier type_textes
+export const MODIFIER_LIGNE_EXEMPTER = (state, objetModifie) => {
+    state.ligneExempter = state.ligneExempter.map(type => {
+        if (type.id == objetModifie.id) {
+            type = { ...objetModifie };
+        }
+
+        return type;
+    });
+};
+
+// supprimer type_texte
+export const SUPPRIMER_LIGNE_EXEMPTER = (state, id) => {
+    state.ligneExempter = state.ligneExempter.filter(type => type.id != id);
+};
+
 
 
 

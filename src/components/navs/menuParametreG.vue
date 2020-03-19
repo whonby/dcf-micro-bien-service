@@ -245,6 +245,12 @@
            Autre texte juridique
             </router-link>
           </li>
+            <li>
+                <router-link :to="{name: 'LigneExempter'}" tag="a">
+                    <i class="icon-bar-chart"></i>
+                    Ligne Exempter
+                </router-link>
+            </li>
           <li>
             <router-link :to="{name: 'motifDecision'}" tag="a">
               <i class="icon-bar-chart"></i>
