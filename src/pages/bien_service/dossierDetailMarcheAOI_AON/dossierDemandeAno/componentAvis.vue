@@ -11,8 +11,9 @@
                                             <tr>
                                                 <th>Ref du courier</th>
                                                 <th>Destinataire</th>
-                                                <th>Date de transmission du DAO</th>
+                                                <th>Date DAO</th>
                                                 <th>Fichier</th>
+                                                <th>Avis</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
@@ -34,12 +35,20 @@
                             {{ formaterDate(transmission.date_dao)|| 'Non renseigné'}}</td>
                         
                       
-                        <td >
+                        <td  >
                             <a v-if="transmission.fichier" :href="transmission.fichier" class="btn btn-default" target="_blank">
                                 <span class=""><i class="icon-book"></i>
                                 </span>
                             </a>
                         </td>
+
+                         <td @click="afficherModalDecisionAnoDMP (index)"> 
+                           <span v-if="transmission.avis== 0" class=" btn label label-success"> Non objection </span>
+                           <span v-if="transmission.avis== 1" class=" btn label label-important"> Non objection </span>
+                           <span v-else class=" btn label label-info"> En attent</span>
+                         </td>
+
+
                         <div class="btn-group">
                             <button @click.prevent="supprimerTransmission(transmission.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
@@ -51,114 +60,80 @@
                                         </table>
 
 
-                 <div id="ajouterT" class="modal hide" aria-hidden="true" style="display: none;">
 
-                      
-                         <div class="modal-header">
+         
+<!--  debut de decision ano dmp -->
+
+<div id="ajouterDemandeAno" class="modal hide">
+            <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter la transmission du DAO  </h3>
+                <h3>Ajouter ANO DMP sur DAO</h3>
             </div>
             <div class="modal-body">
-                <div class="widget-box">
-                    <form action="#" method="get" >
+                <form class="form-horizontal">
 
-                      
-                     <div class="control-group">
-              <label class="control-label">Reférence du dossier:</label>
-              <div class="controls">
-                <input type="text"  class="span11"  v-model="formTransmission.ref_courier" />
-              </div>
-            </div>
-                           <div class="control-group">
-              <label class="control-label">Date de transmission du dossier:</label>
-              <div class="controls">
-                <input type="date"  class="span11"  v-model="formTransmission.date_dao" />
-              </div>
-            </div>
-                 <div class="control-group">
-                        <label class="control-label">Destinataire</label>
+                    <div class="control-group">
+
+                        <label class="control-label">Date d'avis</label>
                         <div class="controls">
-                           <select v-model="formTransmission.destinataire" class="span">
-                               <option value="1"> ANO DMP</option>
-                               <option value="2">ANO Bailleur</option>
-                           </select>
+                            <input
+                                    type="date"
+                                    v-model="formDemande.date_ano_dmp"
+                                    class="span"
+                                    placeholder="Saisir le libelle_type"
+                            />
                         </div>
                     </div>
 
                     <div class="control-group">
-              <label class="control-label">Fichier joint:</label>
-              <div class="controls">
-                <input type="file"  @change="OnchangeFichier" />
-              </div>
-            </div>
-                         
-                
-                     
-                
+                        <label class="control-label">Avis</label>
+                        <div class="controls">
+                           <select v-model="formDemande.avis" class="span">
+                               <option value="1"> Objection</option>
+                               <option value="2"> Non objection</option>
+                           </select>
+                        </div>
+                    </div>
 
-                    </form>
-                </div>
+                  <div class="control-group">
+          <label class="control-label">Observation:</label>
+            <div class="controls">
+              <textarea  v-model="formDemande.observations"  class="textarea_editor span" rows="" placeholder="Entrer  le text ..."></textarea>
             </div>
-            <div class="modal-footer">
-                <a class="btn btn-primary" @click.prevent="ajouterCotationLocal()">Ajouter</a>
-                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
-            </div>
+          
         </div>
 
-
-             <div id="modificationAajouterAnalys01" class="modal hide " aria-hidden="true" style="display: none;">
-
-
-                         <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier la transmission du DAO sur la DMP</h3>
-            </div>
-            <div class="modal-body">
-                <div class="widget-box">
-                    <form action="#" method="get" >
-
-                    <div class="control-group">
-              <label class="control-label">Reférence du dossier:</label>
-              <div class="controls">
-                <input type="text"   v-model="edit_transmission.ref_courier" />
-              </div>
-            </div>
+          <div class="control-group">
+                        <label class="control-label">Motif</label>
+                        <div class="controls">
+                          <select v-model="formDemande.plan_motif_decision_id" class="span">
+                                <option v-for="varText in motifDecisions" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
                         
-                                  <div class="control-group">
-              <label class="control-label">Date de transmission du dossuier:</label>
-              <div class="controls">
-                <input type="date"   v-model="edit_transmission.date_dao" />
-              </div>
-            </div>
-
-             <div class="control-group">
-                        <label class="control-label">Destinataire</label>
-                        <div class="controls">
-                           <select v-model="edit_transmission.destinataire" class="span">
-                               <option value="1"> ANO DMP</option>
-                               <option value="2">ANO Bailleur</option>
-                           </select>
                         </div>
                     </div>
 
-                   <div class="control-group">
-              <label class="control-label">Fichier joint:</label>
-              <div class="controls">
-                <input type="file"   @change="OnchangeFichier" />
-              </div>
-            </div>
-                     
-                     
-                
-
-                    </form>
-                </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-primary" @click.prevent="modifierCotationLocal()">modifier</a>
-                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+                <a
+                        @click.prevent="modifierCotationLocal()"
+                        class="btn btn-primary"
+                        href="#"
+
+                >Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
             </div>
         </div>
+<!-- fin de decision  -->
+
+
+
+
+
+
+        
 
         <notifications />
  </div>
@@ -178,7 +153,8 @@ export default {
                     fichier:"",
                     date_dao:"",
                     ref_courier:"",
-                    destinataire:""
+                    destinataire:"",
+                    avis:""
                   
 
                 },
@@ -188,8 +164,18 @@ export default {
                 date_dao:"",
                     fichier:"",
                     ref_courier:"",
-                    destinataire:""
+                    destinataire:"",
+                    avis:""
                     
+
+            },
+
+            formDemande:{
+                date_ano_dmp:"",
+                avis:"",
+                observations:"",
+                plan_motif_decision_id:""
+
 
             },
 
@@ -210,7 +196,8 @@ export default {
     },
     computed: {
 
-            ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,"gettersCotations","gettersTransmissions"]),
+            ...mapGetters("bienService", [ "gettersCotationPersonnaliser"
+             ,"gettersCotations","gettersTransmissions","motifDecisions"]),
             // ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -218,7 +205,8 @@ export default {
             // ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
             //     'types_financements']) ,
                 
-    ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
+    ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires",
+    "type_Unite_admins","grandes_natures","taux","sections","plan_motif_decision"]),
            
                        
  listetransmissionDao () {
@@ -315,7 +303,26 @@ export default {
            },
            formaterDate(date){
               return moment (date,'YYYY-MM-DD').format('DD/MM/YYYY');
-           }
+           },
+
+           afficherModalDecisionAnoDMP(index){
+           this.$('#ajouterDemandeAno').modal({
+               backdrop:'static',
+               keyboard:false
+           })
+            this.edit_transmission = this.listetransmissionDao(this.macheid.id)[index]
+           },
+
+
+
+
+            //  ajouterDemandeAnoLocal(){
+            
+            //     this.ajouterDemandeAno(formData,config)
+            //     this.formDemande={
+                   
+            //     }
+            // },
 
      }
 
@@ -330,3 +337,5 @@ export default {
  height: 350px;
 }
 </style>
+  
+

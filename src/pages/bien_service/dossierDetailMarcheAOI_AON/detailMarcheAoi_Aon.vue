@@ -95,11 +95,12 @@
                           <div id="tab010" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-warning" align="rigth">Ajouter</a></div>
+                                <!-- <div class="span4" align="right">
+                                    <a href="#ajouterDemandeAno" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
                                 <!-- <h4>Publication de l'offre</h4> -->
 
-                      <!-- <invitationCf :macheid="detail_marche.id"></invitationCf> -->
+                            <componentAvis :macheid="detail_marche.id"></componentAvis>
+
                          </div>
 
 
@@ -250,7 +251,7 @@
      import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
 
      import componentTransmissionDao from '../dossierDetailMarcheAOI_AON/dossierTransmission/componentTransmissionD';
-    
+      import componentAvis from '../dossierDetailMarcheAOI_AON/dossierDemandeAno/componentAvis';
 
     //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
     //import {  ModelListSelect } from 'vue-search-select'
@@ -271,6 +272,7 @@
          componentPv,
          invitationCf,
          componentTransmissionDao,
+          componentAvis,      
             componentActe,
             
          

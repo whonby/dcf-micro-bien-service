@@ -67,11 +67,11 @@ documentProcedures:[],
     proce_verballe:[],
     avenants:[],
     modepaiements:[],
-    gettersCotations:[],
+    stateCotations:[],
     gettersOuvertures:[],
     gettersEtatProcedure:[],
     gettersPsc:[],
-    gettersTransmissions:[]
+    stateTransmissions:[]
 
 
 

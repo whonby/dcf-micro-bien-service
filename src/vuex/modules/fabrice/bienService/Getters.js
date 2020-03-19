@@ -65,8 +65,8 @@ export const getterAnoDMPBailleur = state => state.stateAnoDmpBailleur
 export const getterObseravtionBailleurs = state => state.obseravtionBailleurs
 // export const nombremarches = state => state.marches.length;
 //export const gettersPsc = state =>state.gettersPsc
-export const gettersCotations = state =>state.gettersCotations 
- export const gettersTransmissions = state => state.gettersTransmissions
+export const gettersCotations = state =>state.stateCotations 
+ export const gettersTransmissions = state => state.stateTransmissions
 export const getterMarcheBailleur= state => state.bailleurMarche;
 export const getterMembreCojo=state=>state.membre_cojo;
 export const nombreTotalMarche = state => state.marches.length;
@@ -122,7 +122,7 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
 
 
     export const gettersCotationPersonnaliser = (state, getters, rootState, rootGetters) =>
-    state.gettersCotations.map(element => {
+    state.stateCotations.map(element => {
         if (element.entreprise_id !== null) {
             element = {
                 ...element,

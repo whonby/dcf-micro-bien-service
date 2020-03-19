@@ -4,6 +4,8 @@ modifierAppelOffre
 var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
 
+
+
 // action for print all to prestation
 
 // export  function  getPrestation({commit}) {
@@ -2353,7 +2355,7 @@ export function ajouterTransmission({commit,dispatch}, elementAjout){
 
 
 export function modifiertransmission({ commit }, element_modifie) {
-  asyncLoading(axios.put('/update_transmission', element_modifie)).then(response => {
+  asyncLoading(axios.put('/update_transmission/' + element_modifie.id, element_modifie)).then(response => {
     commit('MODIFIER_TRANSMISSION', response.data)
 
 
