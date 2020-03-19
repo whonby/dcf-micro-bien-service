@@ -1,6 +1,7 @@
 import axios from "./url/api_personnel_ua/api"
 var housecall = require('housecall');
 var queue = housecall({ concurrency: 2, cooldown: 1000 });
+import { asyncLoading } from "vuejs-loading-plugin";
 /**
  * Gestion type acteur
  */
@@ -598,74 +599,117 @@ export function supprimerEchelons({commit}, id){
 /**
  * Gestion des grades
  */
-export  function  getGrades({commit}) {
-
-    queue.push(() =>  axios.get('/liste_grade').then(response => {
-            // console.log(response.data)
-            commit('GET_GRADE', response.data)
-        }).catch(error => console.log(error))
-    );
 
 
-}
-
-// ajouter type acte personnel
-export  function ajouterGrades({commit}, objetAjoute){
-    this.$app.$loading(true)
-    axios.post('/add_grade', objetAjoute ).then(res => {
-        if(res.status == 201){
-            this.$app.$notify({
-                title: 'success',
-                text: 'Enregistrement effectuer',
-                type:"success"
-            });
-            commit('AJOUTER_GRADE', res.data)
-            this.$app.$loading(false)
-        }
-    }).catch(error =>{
-        console.log(error)
-        this.$app.$loading(true)
-        this.$app.$notify({
-            title: 'Erreur',
-            text: "Erreur c'est produit lors de l'enregistrement",
-            type:"error"
-        });
-    })
-}
 
 // modifier le grade
 
 
-export function modifierGrade({commit}, formData){
-    this.$app.$loading(true)
-    axios.put('/update_grade' ,formData).then(response => {
-        commit('MODIFIER_GRADE', response.data)
-        this.$app.$loading(false)
-    }).catch(error =>{
-        console.log(error)
-        this.$app.$loading(true)
-        this.$app.$notify({
-            title: 'success',
-            text: "Modification effectuÃ©e !",
-            type:"success"
-        });
-    })
 
-}
 
 // supprimer type act
-export function supprimerGrades({commit}, id){
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
-        this.$app.$notify({
-            title: 'Suppression',
-            text: 'Suppression effectuer',
-            type:"error"
-        });
-        commit('SUPPRIMER_GRADE', id)
-        axios.delete('/delete_grade/' + id).then(() => dialog.close() )
-    })
-}
+
+
+export function getGrades({ commit }) {
+         queue.push(() =>
+           axios
+             .get("/liste_grade")
+             .then(response => {
+               // console.log(response.data)
+               commit("GET_GRADE", response.data);
+             })
+             .catch(error => console.log(error))
+         );
+       }
+
+export function ajouterGrades({ commit, dispatch }, formData) {
+         asyncLoading(axios.post("/add_grade", formData))
+           .then(response => {
+             if (response.status == 201) {
+               console.log(response.data);
+               commit("AJOUTER_GRADE", response.data);
+               dispatch("getGrades");
+               dispatch("getCategorieGrade");
+               this.$app.$notify({
+                 title: "success ",
+                 text: "Enregistrement effectué !",
+                 type: "success"
+               });
+             }
+           })
+           .catch(error => console.log(error));
+       }
+export function supprimerGrades({ commit, dispatch }, id) {
+         this.$app.$dialog
+           .confirm("Voulez vouz vraiment supprimer ?.")
+           .then(dialog => {
+             commit("SUPPRIMER_GRADE", id);
+             dispatch("getGrades");
+             dispatch("getCategorieGrade");
+             // // dialog.loading(false) // stops the proceed button's loader
+             axios.delete("/delete_grade/" + id).then(() => dialog.close());
+           });
+       }
+
+export function modifierGrade({ commit, dispatch }, nouveau) {
+         asyncLoading(
+           axios.put("/update_grade/" + nouveau.id, {
+               categoriegrade_id: nouveau.categoriegrade_id,
+             libelle: nouveau.libelle
+           })
+         ).then(response => {
+           commit("MODIFIER_GRADE", response.data);
+           dispatch("getGrades");
+           dispatch("getCategorieGrade");
+           this.$app.$notify({
+             title: "Success",
+             text: "Modification Effectué avec Succès!",
+             type: "success"
+           });
+         });
+       }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // modifier type acte personnel
 /*export function modifierFonction({commit}, titre){
@@ -1007,68 +1051,55 @@ export function getCategorieGrade({ commit }) {
 
 }
 
-// ajouter type acte personnel
-export function ajouterCategorieGrade({ commit }, objetAjoute) {
-    this.$app.$loading(true)
-    axios.post('/add_CategorieGrade', objetAjoute).then(res => {
-        if (res.status == 201) {
-            this.$app.$notify({
-                title: 'success',
-                text: 'Enregistrement effectuer',
-                type: "success"
-            });
-            commit('AJOUTER_CATEGORIE_GRADE', res.data)
-            this.$app.$loading(false)
-        }
-    }).catch(error => {
-        console.log(error)
-        this.$app.$loading(true)
-        this.$app.$notify({
-            title: 'Erreur',
-            text: "Erreur c'est produit lors de l'enregistrement",
-            type: "error"
-        });
-    })
-}
+export function ajouterCategorieGrade({ commit }, formData) {
+         asyncLoading(axios.post("/add_CategorieGrade", formData))
+           .then(response => {
+             if (response.status == 201) {
+               console.log(response.data);
+               commit("AJOUTER_CATEGORIE_GRADE", response.data);
 
-// supprimer type act
-export function supprimerCategorieGrade({ commit }, id) {
+               this.$app.$notify({
+                 title: "success ",
+                 text: "Enregistrement effectué !",
+                 type: "success"
+               });
+             }
+           })
+           .catch(error => console.log(error));
+       }
+export function supprimerCategorieGrade({ commit}, id) {
+         this.$app.$dialog
+           .confirm("Voulez vouz vraiment supprimer ?.")
+           .then(dialog => {
+             commit("SUPPRIMER_CATEGORIE_GRADE", id);
+            //  dispatch("getAllDirection");
+            //  dispatch("getAllUniteAdministrative");
+             // // dialog.loading(false) // stops the proceed button's loader
+             axios
+               .delete("/delete_CategorieGrade/" + id)
+               .then(() => dialog.close());
+           });
+       }
 
+export function modifierCategorieGrade({ commit }, nouveau) {
+         asyncLoading(
+           axios.put("/update_CategorieGrade/" + nouveau.id, {
+             
 
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
-            this.$app.$notify({
-                title: 'Suppression',
-                text: 'Suppression effectuer',
-                type: "error"
-            });
-            commit('SUPPRIMER_CATEGORIE_GRADE', id)
-            axios.delete('/delete_CategorieGrade/' + id).then(() => dialog.close())
-        })
+             libelle: nouveau.libelle
+           })
+         ).then(response => {
+           commit("MODIFIER_CATEGORIE_GRADE", response.data);
+        //    dispatch("getAllDirection");
+        //    dispatch("getAllUniteAdministrative");
+           this.$app.$notify({
+             title: "Success",
+             text: "Modification Effectué avec Succès!",
+             type: "success"
+           });
+         });
+       }
 
-}
-
-export function modifierCategorieGrade({ commit }, formData) {
-    this.$app.$loading(true)
-    axios.put('/update_CategorieGrade', formData).then(response => {
-        this.$app.$notify({
-            title: 'success',
-            text: 'Modification effectuer',
-            type: "success"
-        });
-        commit('MODIFIER_CATEGORIE_GRADE', response.data)
-        this.$app.$loading(false)
-    }).catch(error => {
-        console.log(error)
-        this.$app.$loading(true)
-        this.$app.$notify({
-            title: 'Erreur',
-            text: "Erreur c'est produit lors de l'enregistrement",
-            type: "error"
-        });
-    })
-
-}
 
 /**
  * Gestion des classes
@@ -1084,68 +1115,79 @@ export function getFamilleFonction({ commit }) {
 
 }
 
-// ajouter type acte personnel
-export function ajouterFamilleFonction({ commit }, objetAjoute) {
-    this.$app.$loading(true)
-    axios.post('/add_FamilleFonction', objetAjoute).then(res => {
-        if (res.status == 201) {
-            this.$app.$notify({
-                title: 'success',
-                text: 'Enregistrement effectuer',
-                type: "success"
-            });
-            commit('AJOUTER_FAMILLE_FONCTIONS', res.data)
-            this.$app.$loading(false)
-        }
-    }).catch(error => {
-        console.log(error)
-        this.$app.$loading(true)
-        this.$app.$notify({
-            title: 'Erreur',
-            text: "Erreur c'est produit lors de l'enregistrement",
-            type: "error"
-        });
-    })
-}
 
 // supprimer type act
+
+
+
+
+
+
+
+
+
+
+export function ajouterFamilleFonction({ commit }, formData) {
+         asyncLoading(axios.post("/add_FamilleFonction", formData))
+           .then(response => {
+             if (response.status == 201) {
+               console.log(response.data);
+               commit("AJOUTER_FAMILLE_FONCTIONS", response.data);
+
+               this.$app.$notify({
+                 title: "success ",
+                 text: "Enregistrement effectué !",
+                 type: "success"
+               });
+             }
+           })
+           .catch(error => console.log(error));
+       }
 export function supprimerFamilleFonction({ commit }, id) {
+         this.$app.$dialog
+           .confirm("Voulez vouz vraiment supprimer ?.")
+           .then(dialog => {
+             commit("SUPPRIMER_FAMILLE_FONCTIONS", id);
+             //  dispatch("getAllDirection");
+             //  dispatch("getAllUniteAdministrative");
+             // // dialog.loading(false) // stops the proceed button's loader
+             axios
+               .delete("/delete_FamilleFonction/" + id)
+               .then(() => dialog.close());
+           });
+       }
+
+export function modifierFamilleFonction({ commit }, nouveau) {
+         asyncLoading(
+           axios.put("/update_FamilleFonction/" + nouveau.id, {
+             libelle: nouveau.libelle
+           })
+         ).then(response => {
+           commit("MODIFIER_FAMILLE_FONCTIONS", response.data);
+           //    dispatch("getAllDirection");
+           //    dispatch("getAllUniteAdministrative");
+           this.$app.$notify({
+             title: "Success",
+             text: "Modification Effectué avec Succès!",
+             type: "success"
+           });
+         });
+       }
 
 
-    this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
-            this.$app.$notify({
-                title: 'Suppression',
-                text: 'Suppression effectuer',
-                type: "error"
-            });
-            commit('SUPPRIMER_FAMILLE_FONCTIONS', id)
-            axios.delete('/delete_FamilleFonction/' + id).then(() => dialog.close())
-        })
 
-}
 
-export function modifierFamilleFonction({ commit }, formData) {
-    this.$app.$loading(true)
-    axios.put('/update_FamilleFonction', formData).then(response => {
-        this.$app.$notify({
-            title: 'success',
-            text: 'Modification effectuer',
-            type: "success"
-        });
-        commit('MODIFIER_FAMILLE_FONCTIONS', response.data)
-        this.$app.$loading(false)
-    }).catch(error => {
-        console.log(error)
-        this.$app.$loading(true)
-        this.$app.$notify({
-            title: 'Erreur',
-            text: "Erreur c'est produit lors de l'enregistrement",
-            type: "error"
-        });
-    })
 
-}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1164,7 +1206,7 @@ export function getClassificationGradeFonction({ commit }) {
 }
 
 // ajouter type acte personnel
-export function ajouterClassificationGradeFonction({ commit }, objetAjoute) {
+export function ajouterClassificationGradeFonction({ commit,dispatch }, objetAjoute) {
     this.$app.$loading(true)
     axios.post('/add_ClassifGradeEmploie', objetAjoute).then(res => {
         if (res.status == 201) {
@@ -1175,6 +1217,8 @@ export function ajouterClassificationGradeFonction({ commit }, objetAjoute) {
             });
             commit('AJOUTER_CLASSIFICATION_GRADE_FONCTION', res.data)
             this.$app.$loading(false)
+            dispatch("getClassificationGradeFonction");
+            dispatch("getFamilleFonction");
         }
     }).catch(error => {
         console.log(error)
@@ -1188,40 +1232,81 @@ export function ajouterClassificationGradeFonction({ commit }, objetAjoute) {
 }
 
 // supprimer type act
-export function supprimerClassificationGradeFonction({ commit }, id) {
+// export function supprimerClassificationGradeFonction({ commit, dispatch }, id) {
 
 
+//     this.$app.$dialog
+//         .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
+//             this.$app.$notify({
+//                 title: 'Suppression',
+//                 text: 'Suppression effectuer',
+//                 type: "error"
+//             });
+//             commit('SUPPRIMER_CLASSIFICATION_GRADE_FONCTION', id)
+//             dispatch("getClassificationGradeFonction");
+//             dispatch("getFamilleFonction");
+//             axios.delete('/delete_ClassifGradeEmploie/' + id).then(() => dialog.close())
+//         })
+
+// }
+export function supprimerClassificationGradeFonction({ commit, dispatch }, id) {
     this.$app.$dialog
-        .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
-            this.$app.$notify({
-                title: 'Suppression',
-                text: 'Suppression effectuer',
-                type: "error"
-            });
-            commit('SUPPRIMER_CLASSIFICATION_GRADE_FONCTION', id)
-            axios.delete('/delete_ClassifGradeEmploie/' + id).then(() => dialog.close())
-        })
-
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit("SUPPRIMER_CLASSIFICATION_GRADE_FONCTION", id);
+            dispatch("getClassificationGradeFonction");
+            dispatch("getFamilleFonction");
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete("/delete_ClassifGradeEmploie/" + id).then(() => dialog.close());
+        });
 }
 
-export function modifierClassificationGradeFonction({ commit }, formData) {
-    this.$app.$loading(true)
-    axios.put('/update_ClassifGradeEmploie', formData).then(response => {
+
+
+
+
+
+// export function modifierClassificationGradeFonction({ commit }, formData) {
+//     this.$app.$loading(true)
+//     axios.put('/update_ClassifGradeEmploie', formData).then(response => {
+//         this.$app.$notify({
+//             title: 'success',
+//             text: 'Modification effectuer',
+//             type: "success"
+//         });
+//         commit('MODIFIER_CLASSIFICATION_GRADE_FONCTION', response.data)
+//         this.$app.$loading(false)
+//     }).catch(error => {
+//         console.log(error)
+//         this.$app.$loading(true)
+//         this.$app.$notify({
+//             title: 'Erreur',
+//             text: "Erreur c'est produit lors de l'enregistrement",
+//             type: "error"
+//         });
+//     })
+
+// }
+
+
+export function modifierClassificationGradeFonction({ commit, dispatch }, nouveau) {
+    asyncLoading(
+        axios.put("/update_ClassifGradeEmploie/" + nouveau.id, {
+            
+            famille_fonction_id: nouveau.famille_fonction_id,
+            fonction_id: nouveau.fonction_id,
+            grade_id: nouveau.grade_id,
+            recrutement: nouveau.recrutement,
+            promotion: nouveau.promotion
+        })
+    ).then(response => {
+        commit("MODIFIER_CLASSIFICATION_GRADE_FONCTION", response.data);
+        dispatch("getClassificationGradeFonction");
+        dispatch("getFamilleFonction");
         this.$app.$notify({
-            title: 'success',
-            text: 'Modification effectuer',
+            title: "Success",
+            text: "Modification Effectué avec Succès!",
             type: "success"
         });
-        commit('MODIFIER_CLASSIFICATION_GRADE_FONCTION', response.data)
-        this.$app.$loading(false)
-    }).catch(error => {
-        console.log(error)
-        this.$app.$loading(true)
-        this.$app.$notify({
-            title: 'Erreur',
-            text: "Erreur c'est produit lors de l'enregistrement",
-            type: "error"
-        });
-    })
-
+    });
 }

@@ -502,6 +502,7 @@
                
               </div> -->
             </div>
+            
 
             <div class="widget-content nopadding" v-if="uniteAdministratives.length" >
               <budgetGeneralItemComponent v-for="equipement in uniteAdministratives"

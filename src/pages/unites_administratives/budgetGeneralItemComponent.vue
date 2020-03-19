@@ -44,7 +44,7 @@
                 <tbody>
                    <budgetGeneralItem
                         class="item"
-                        v-for="groupeElement in groupe.ua_budget_general"
+                        v-for="groupeElement in affichebudgetActive"
                         :key="groupeElement.id"
                         :article="groupeElement"
                       @modification="$emit('modification', $event)"
@@ -53,6 +53,7 @@
                     ></budgetGeneralItem>
                       <!-- <tr>
                      
+
                        <td>
                            
                       </td>
@@ -138,10 +139,21 @@ export default {
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
-    MontantTotal(){
+   
+   affichebudgetActive(){
+  
+    var activeBudget= this.groupe.ua_budget_general.filter(element => element.actived == 1); 
+     
+      return activeBudget
+  
+},
+   
+   
+   
+   MontantTotal(){
   
     
-    var montant = this.groupe.ua_budget_general.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0); 
+    var montant = this.affichebudgetActive.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0); 
       if(isNaN(montant)) return null
       return montant
 }, 

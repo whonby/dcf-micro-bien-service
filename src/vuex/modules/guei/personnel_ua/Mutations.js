@@ -664,12 +664,12 @@ const MODIFIER_FAMILLE_FONCTIONS = (state, objetModifie) => {
 //         */ @constructor
 //  * /
 const GET_CATEGORIE_GRADE = (state, data) => {
-    state.familleFonction = data
+    state.categorieGrade = data;
 }
 
 
 const AJOUTER_CATEGORIE_GRADE = (state, nouvel_objet) => {
-    state.familleFonction.unshift(nouvel_objet)
+    state.categorieGrade.unshift(nouvel_objet)
     // state.titres = [...nouvel_objet, ...state.titres]
 }
 
@@ -680,7 +680,7 @@ const AJOUTER_CATEGORIE_GRADE = (state, nouvel_objet) => {
  * @constructor
  */
 const SUPPRIMER_CATEGORIE_GRADE = (state, id) => {
-    state.familleFonction = state.familleFonction.filter(fonction => fonction.id != id)
+    state.categorieGrade = state.categorieGrade.filter(fonction => fonction.id != id)
 }
 
 /**
@@ -690,15 +690,16 @@ const SUPPRIMER_CATEGORIE_GRADE = (state, id) => {
  * @param objetModifie
  * @constructor
  */
-const MODIFIER_CATEGORIE_GRADE = (state, objetModifie) => {
-    state.familleFonction = state.familleFonction.map(fonction => {
-        if (fonction.id == objetModifie.id) {
-            fonction = { ...objetModifie }
-        }
-        return fonction
-    })
-}
 
+const MODIFIER_CATEGORIE_GRADE = (state, objetModifie) => {
+  state.categorieGrade = state.categorieGrade.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
 
 //  * @param state
 //     * @param data

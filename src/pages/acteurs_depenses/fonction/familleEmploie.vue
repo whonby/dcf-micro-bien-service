@@ -12,11 +12,11 @@
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Liste des Catégories de Grades</h5>
-                            <div align="right">
+                            <h5>Listes des Familles d' emploies </h5>
+                            <!-- <div align="right">
                                 Search: <input type="text">
 
-                            </div>
+                            </div> -->
 
                         </div>
 
@@ -30,12 +30,12 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="odd gradeX" v-for="(item, index) in categorieGrade" :key="item.id">
+                                <tr class="odd gradeX" v-for="(item, index) in familleFonction" :key="item.id">
                                    
                                     <td @dblclick="afficherModalModifierTitre(index)">{{item.libelle || 'Non renseigné'}}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <button @click.prevent="supprimerCategorieGrade(item.id)"  class="btn btn-danger ">
+                                            <button @click.prevent="supprimerFamilleFonction(item.id)"  class="btn btn-danger ">
                                                 <span class=""><i class="icon-trash"></i></span></button>
 
                                         </div>
@@ -63,7 +63,7 @@
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter Catégories de Grades</h3>
+                <h3>Ajouter Familles d' emplois</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -93,7 +93,7 @@
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier Catégories de Grades</h3>
+                <h3>Modifier Familles d' emplois</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -166,12 +166,12 @@
         },
         computed: {
 // methode pour maper notre guetter
-            ...mapGetters('personnelUA', ['categorieGrade'])
+            ...mapGetters('personnelUA', ['familleFonction'])
 
         },
         methods: {
             // methode pour notre action
-            ...mapActions('personnelUA', ["ajouterCategorieGrade","supprimerCategorieGrade","modifierCategorieGrade"]),
+            ...mapActions('personnelUA', ["ajouterFamilleFonction","supprimerFamilleFonction","modifierFamilleFonction"]),
             afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',
@@ -180,7 +180,7 @@
             },
             // fonction pour vider l'input
             ajouterTitreLocal () {
-                this.ajouterCategorieGrade(this.formData)
+                this.ajouterFamilleFonction(this.formData)
                 this.formData = {
                    
                     libelle: ""
@@ -193,13 +193,13 @@
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.editCategorieGrade = this.categorieGrade[index];
+                this.editCategorieGrade = this.familleFonction[index];
 
             },
 
 
             modifierEchelonsLocal(){
-                this.modifierCategorieGrade(this.editCategorieGrade)
+                this.modifierFamilleFonction(this.editCategorieGrade)
                 this.$('#modifierModal').modal('hide');
             },
 
