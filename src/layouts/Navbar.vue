@@ -94,7 +94,9 @@ export default {
       "getAllHistoriqueBudgetGeneral",
       "getAllUniteZone",
       "getAllTransfert",
-      "getAllHistoriqueTransfert"
+      "getAllHistoriqueTransfert",
+     "getLigneExempter",
+     "getBudgeChager"
     ]),
             ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
@@ -146,6 +148,8 @@ export default {
 
   created(){
     this.getPlanPassationMarche()
+      this.getBudgeChager()
+      this.getLigneExempter()
       this.getExercicesBudgetaires()
       this.getTaux()
       this.getModePaiement()

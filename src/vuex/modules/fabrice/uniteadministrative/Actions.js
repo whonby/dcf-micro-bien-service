@@ -923,3 +923,91 @@ export function importBudget({ commit }, element_modifie,config) {
         });
 }
 
+
+export function getBudgeChager({ commit }) {
+    queue.push(() => {
+        axios
+            .get("/budgetCharger")
+            .then(response => {
+                commit("GET_BUDGET_CHARGE", response.data);
+            })
+            .catch(error => console.log(error));
+    });
+}
+
+// ajouter type texte
+export function ajouterBudgetCharge({ commit, dispatch }, nouveau) {
+    return asyncLoading(axios
+        .post("/budgetCharger",nouveau))
+
+        .then(response => {
+            commit("AJOUTER_BUDGET_CHARGE", response.data);
+            dispatch('getAllBudgetGeneral')
+            dispatch('getAllUniteAdministrative')
+            dispatch('getBudgeChager')
+            this.$app.$notify({
+                title: 'Success',
+                text: 'Enregistrement Effectué avec Succès!',
+                type: "success"
+            })
+        });
+}
+
+
+
+
+
+
+
+
+export function getLigneExempter({ commit }) {
+    queue.push(() => {
+        axios
+            .get("/ligne_exemptes")
+            .then(response => {
+                commit("GET_LIGNE_EXEMPTER", response.data);
+            })
+            .catch(error => console.log(error));
+    });
+}
+
+// ajouter type texte
+export function ajouterLigneExempter({ commit }, nouveau) {
+    asyncLoading(axios
+        .post("/ligne_exemptes", nouveau))
+        .then(response => {
+            if (response.status == 201) {
+                commit("AJOUTER_LIGNE_EXEMPTER", response.data);
+
+                this.$app.$notify({
+                    title: 'Success',
+                    text: 'Enregistrement Effectué avec Succès!',
+                    type: "success"
+                })
+            }
+        });
+}
+
+// modifier
+export function modifierLigneExempter({ commit }, nouveau) {
+    asyncLoading(axios
+        .put("/ligne_exemptes/" + nouveau.id,nouveau))
+        .then(response => {
+            commit("MODIFIER_LIGNE_EXEMPTER", response.data);
+            this.$app.$notify({
+                title: 'Success',
+                text: 'Modification Effectué avec Succès!',
+                type: "success"
+            })
+        });
+}
+//supprimer
+export function supprimerLigneExempter({ commit }, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit("SUPPRIMER_LIGNE_EXEMPTER", id);
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete("/ligne_exemptes/" + id).then(() => dialog.close());
+        });
+}

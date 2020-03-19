@@ -1,70 +1,121 @@
 <template>
     <div>
         <div class="container-fluid">
+
             <notifications  />
-
-            <div class="row-fluid">
-                <div class="span2">
-                    <!--<div class="widget-box">
-                        <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-                            <h5>One third width <code>class=Span4</code></h5>
-                        </div>
-                        <div class="widget-content"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </div>
-                    </div>-->
+            <div class="widget-box">
+                <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+                    <h5>Liste des plan de passation </h5>
+                    <!-- <div align="right">
+                         Recherche:
+                         <input type="search" placeholder v-model="search" />
+                     </div>-->
                 </div>
-                <div class="span6">
 
+                <div class="widget-content nopadding" >
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>Importation de budge</th>
-                            <th></th>
+                            <th>Code budget</th>
+                            <th>Exercice budget</th>
+                            <th>Status</th>
+                           <th>Montant Global</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>Exercice budgetaire</td>
-                            <td> <input
-                                    type="text"
-                                    class="span"
-                                    readonly
-                                    :value="anneeAmort"
-                            /></td>
-                        </tr>
-                        <tr>
-                            <td>Budget:</td>
-                            <td><div class="controls">
-                                <input type="file"   @change="OnchangeFichier" />
-                            </div>
-                                <img v-if="imagePDFDemandeAno" src="../../assets/excel.png" width="50" height="50">
+                        <tr v-for="passation in getterBudgeCharge" :key="passation.id">
+                            <td>{{passation.code}}</td>
+                            <td>{{passation.exercice}}</td>
+                            <td>
+                                <button v-if="passation.status=='init'" class="btn  btn-danger">
+
+                                    <span >Budget initiale</span>
+                                </button>
+
+                                    <button v-else-if="passation.actived == 1 && passation.status=='actu' "  class="btn  btn-success">
+                                        <span >Budget actuelle</span>
+                                    </button>
+                                    <button v-else-if="passation.actived == 0 && passation.status=='actu'" class="btn btn-info ">Version {{passation.version}}</button>
+
+                            </td>
+                            <td>{{formatageSomme(montantGlobale(passation.id))}}</td>
+                            <td>
+                                <router-link :to="{ name: 'DetailPPM', params: { id: passation.code }}"
+                                             class="btn btn-default " title="Detail marches">
+                                    <span class=""><i class="icon-folder-open"></i></span>
+                                </router-link>
                             </td>
                         </tr>
-                        <!-- <tr>
-                             <td> </td>
-                             <td v-if="imagePDFDemandeAno"> </td>
-                         </tr>-->
                         </tbody>
                     </table>
-                    <button  type="submit" class="btn btn-success" @click="ajouterFichier">Importer</button>
-                    <!--  <hr>
-                      <progress-bar :progress="progress"></progress-bar>-->
-                    <!--    <progress max="100" :value.prop="uploadPercentage"  v-bind:style="{ width: bgWidth, height: bgHeight }"></progress>-->
-                    <!-- <div class="progress progress-striped progress-success">
-                         <div class="bar" v-bind:style="{ width: bgWidth, height: bgHeight }"></div>
-                     </div>-->
-
                 </div>
-                <div class="span2">
 
-                </div>
             </div>
         </div>
 
+        <div id="exampleModal" class="modal hide taillemodal">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Importation du budget</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Importation de budge</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+                        <td>Exercice budgetaire</td>
+                        <td> <input
+                                type="text"
+                                class="span"
+                                readonly
+                                :value="anneeAmort"
+                        /></td>
+                    </tr>
+                    <tr>
+                        <td>Budget:</td>
+                        <td><div class="controls">
+                            <input type="file"   @change="OnchangeFichier" />
+                        </div>
+                            <img v-if="imagePDFDemandeAno" src="../../assets/excel.png" width="50" height="50">
+                        </td>
+                    </tr>
+                    <!-- <tr>
+                         <td> </td>
+                         <td v-if="imagePDFDemandeAno"> </td>
+                     </tr>-->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <a
+                        @click.prevent="ajouterFichier"
+                        class="btn btn-primary"
+                        href="#"
+
+                >Importer</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div>
+        </div>
+
+        <fab :actions="fabActions" @cache="afficherModalAjouterStock" main-icon="apps" bg-color="green"></fab>
+
+        <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
     </div>
 </template>
 
 <script>
     import { mapGetters, mapActions } from "vuex";
+    import { formatageSomme } from "../../Repositories/Repository";
     //import ProgressBar from "../component/ProgressBar"
     export default {
         name: 'budget',
@@ -113,7 +164,8 @@
             ...mapGetters("uniteadministrative", [
                 "acteCreations",
                 "typeTextes",
-                "uniteAdministratives"
+                "uniteAdministratives",
+                "getterBudgeCharge"
             ]),
             ...mapGetters("parametreGenerauxAdministratif", [
 
@@ -136,6 +188,23 @@
                 }
                 return 0
             },
+            montantGlobale(){
+                return id =>{
+                    if (id!="") {
+                        let objet =this.getterBudgeCharge.find(item=>item.id==id)
+                        console.log(objet)
+                        let initialValue = 0;
+
+                        if (objet!="undefined") {
+                            return objet.budget_general.reduce(function (total, currentValue) {
+                                return total + parseFloat(currentValue.Dotation_Initiale) ;
+                            }, initialValue);
+                        }
+                    }
+
+
+                }
+            },
 
         },
         methods: {
@@ -148,11 +217,12 @@
                 "getAllTypeTextes",
                 "getAllUniteAdministrative",
                 "getAllArchivageDocument",
-
+                      "ajouterBudgetCharge",
                 "getAllBudgetGeneral",
-                "getAllHistoriqueBudgetGeneral"
+                "getAllHistoriqueBudgetGeneral",
+                "modifierLigneExempter",
             ]),
-
+            formatageSomme:formatageSomme,
             OnchangeFichier(e) {
                 const files = e.target.files;
                 this.selectedFile = event.target.files[0];
@@ -170,6 +240,12 @@
                 reader.readAsDataURL(file);
             }
             ,
+            afficherModalAjouterStock() {
+                this.$("#exampleModal").modal({
+                    backdrop: "static",
+                    keyboard: false
+                });
+            },
             ajouterFichier(){
                 const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
@@ -183,8 +259,8 @@
 
                 this.i= this.i+10;
                 this.bgWidth=this.i+"%"
-
-                this.importBudget(formData,config).then(data=>{
+                this.$("#exampleModal").modal('hide');
+                this.ajouterBudgetCharge(formData,config).then(data=>{
                     console.log(data)
                     //this.getAllBudgetGeneral()
                 }).catch(erro=>{

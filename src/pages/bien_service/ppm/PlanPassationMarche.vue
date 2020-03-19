@@ -56,7 +56,7 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>Importation de budge</th>
+                        <th>Importation de PMP</th>
                         <th></th>
                     </tr>
                     </thead>
