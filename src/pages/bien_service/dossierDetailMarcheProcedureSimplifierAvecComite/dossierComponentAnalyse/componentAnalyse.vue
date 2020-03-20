@@ -25,7 +25,10 @@
                     <tr class="odd gradeX" v-for="(appelOffre, index) in listeAnalyseDossier(macheid)"
                         :key="appelOffre.id">
                         <td @click="afficheAnnalyseDossier(index)">
-                            {{listeAppelOffre(appelOffre.cotation_id)|| 'Non renseigné'}}</td>
+
+                            {{appelOffre.cotation_id|| 'Non renseigné'}}</td>
+
+                          
                         <!-- <td @click="afficheAnnalyseDossier(index)">
                             {{appelOffre.dossier_candidature.nom_cand || 'Non renseigné'}}</td> -->
                         <td @click="afficheAnnalyseDossier(index)">
@@ -182,7 +185,7 @@
 
 
         
-        <div id="modificationAajouterAnalys01" class="modal hide grdirModalAnalyse">
+        <div id="modifierJugement" class="modal hide grdirModalAnalyse">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Modification du dossier Analyse</h3>
@@ -460,6 +463,9 @@ listeAppelOffreId() {
                        // cojo_id:""
                 }
             },
+
+       
+
          modificationDossierAnalyse(){
               var nouvelObjet1 ={
                        ...this.edite_analyse_dossier,
@@ -469,13 +475,19 @@ listeAppelOffreId() {
                 this.modifierAnalyseDossier(nouvelObjet1)
                 this.$('#modificationAajouterAnalys01').modal('hide');
             },
+
          afficheAnnalyseDossier(index){
-                this.$('#modificationAajouterAnalys01').modal({
+                this.$('#modifierJugement').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
                 this.edite_analyse_dossier = this.listeAnalyseDossier(this.macheid)[index];
             },
+
+            //   modificationDossierAnalyse(){
+            //     this.modifierAnalyseDossier(this.edite_analyse_dossier)
+            //     this.$('#modifierJugement').modal('hide');
+            // },
 // formatage de date 
 formaterDate(date){
     return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");

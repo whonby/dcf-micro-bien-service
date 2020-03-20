@@ -171,7 +171,7 @@
 
 
 
-<div id="modificationModal" class="modal hide grdirModalActeEffet">
+<div id="modificationL" class="modal hide grdirModalActeEffet">
            <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Modification  offre</h3>
@@ -268,14 +268,14 @@
                         </div>
                     </div>
                         </td>
-                        <!-- <td >
+                        <td >
                         <div class="control-group">
                    <label class="control-label">Fichier joint:</label>
                     <div class="controls">
                      <input type="file"   @change="OnchangeFichier" />
               </div>
             </div>
-                        </td> -->
+                        </td>
                         </tr>
 
                 </table>
@@ -318,17 +318,7 @@ export default {
                     destination:"",
                     date_cojo:""
                 },
-        edite_Lettre_invitation:{
-             	ref_appel:"",
-                    type_appel:"",
-                    financement:"",
-                    nom_bailleurs:"",
-                    date_emission:"",
-                    date_limite:"",
-                    objet_lettre:"",
-                    imputation:"",
-                    marche_id:"",
-        }
+        edite_Lettre_invitation:""
 
         }
     },
@@ -466,14 +456,20 @@ typeProcedureLibelle() {
             
             ]),
 
-
+            //  afficherModalModifierTransmission(index){
+            //     this.$('#modificationAajouterAnalys01').modal({
+            //         backdrop: 'static',
+            //         keyboard: false
+            //     });
+            //     this.edit_transmission = this.listetransmissionDao(this.macheid.id)[index];
+            // },
 
         afficheBouttonTechFinInvitation(index){
-                this.$('#modificationModal').modal({
+                this.$('#modificationL').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.edite_Lettre_invitation = this.lettreInvitationAMarche(this.macheid)[index];
+ this.edite_Lettre_invitation = this.lettreInvitationAMarche(this.macheid)[index];
             },
 
 
@@ -507,18 +503,63 @@ typeProcedureLibelle() {
                     date_cojo:""
                 }
             },
+
+
+            //  modfications(){
+            //     const formData = new FormData();
+                
+            //     formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
+            //     formData.append('destination', this.edite_Lettre_invitation.destination);
+            //     formData.append('ref_lettre', this.edite_Lettre_invitation.ref_lettre);
+            //     formData.append('date_lettre', this.edite_Lettre_invitation.date_lettre);
+            //     formData.append('date_cojo', this.edite_Lettre_invitation.date_cojo);
+            //     formData.append('objet_lettre', this.edite_Lettre_invitation.objet_lettre);
+            //     formData.append('id',thi.edite_Lettre_invitation.id)
+            //      if ( this.selectedFile!==""){
+            //         formData.append('fichier', this.selectedFile, this.selectedFile.name);
+            //     }
+            //     let config = {
+            //         header : {
+            //             'Content-Type' : 'multipart/form-data'
+            //         }
+            //     }
+            //      this.modifierAppelOffre(formData,config)
+            //     this.$('#modifierActeEF').modal('hide');
+            // },
            
 
-
-
-
-
-
-
+           
  modfications(){
-                this.modifierAppelOffre(this.edite_appel_offre)
-                this.$('#modifierActeEF').modal('hide');
+                //console.log(this.edite_demande_dao)
+                const formData = new FormData();
+               formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
+                formData.append('destination', this.edite_Lettre_invitation.destination);
+                formData.append('ref_lettre', this.edite_Lettre_invitation.ref_lettre);
+                formData.append('date_lettre', this.edite_Lettre_invitation.date_lettre);
+                formData.append('date_cojo', this.edite_Lettre_invitation.date_cojo);
+                formData.append('objet_lettre', this.edite_Lettre_invitation.objet_lettre);
+                formData.append('id',this.edite_Lettre_invitation.id);
+               
+                console.log(formData)
+                if ( this.selectedFile!==""){
+                    formData.append('fichier', this.selectedFile, this.selectedFile.name);
+                }
+                let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }
+                 this.modifierLettreInvitation(formData,config)
+               this.$('#modifierActeEF').modal('hide');
             },
+
+
+
+
+
+
+
+ 
     
 
 

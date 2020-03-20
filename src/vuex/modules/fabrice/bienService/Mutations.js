@@ -1,5 +1,6 @@
 // get all prestation
 
+
 export const GET_ALL_PRESTATION = (state, tableau_prestation) =>{
     state.prestations = tableau_prestation
 }
@@ -82,19 +83,19 @@ export const DELETE_EXECUTION_MARCHE = (state, id)=> {
 
 // get all cotation
 export const GET_ALL_COTATION = (state, tableau_cotation) =>{
-    state.gettersCotations = tableau_cotation
+    state.stateCotations = tableau_cotation
 }
 
 
 // add * cotation
 
 export const AJOUTER_COTATION = (state, elementAjouter) => {
-    state.gettersCotations.unshift(elementAjouter)
+    state.stateCotations.unshift(elementAjouter)
 }
 
 // update all cotation
 export const MODIFIER_COTATION = (state, elementModif)=>{
-    state.gettersCotations = state.gettersCotations.map(response => {
+    state.stateCotations = state.stateCotations.map(response => {
         if(response.id == elementModif.id){
             response = {...elementModif}
         }
@@ -108,7 +109,7 @@ export const MODIFIER_COTATION = (state, elementModif)=>{
 // delete all cotation
 
 export const SUPPRIMER_COTATION = (state, id)=> {
-    state.gettersCotations = state.gettersCotations.filter(marche => marche.id !=id)
+    state.stateCotations = state.stateCotations.filter(marche => marche.id !=id)
 }
 
 
@@ -187,18 +188,18 @@ export const MODIFIER_ETAT_PROCEDURE = (state, elementModif)=>{
 
 //get all  motif de decision
 export const GET_ALL_TRANSMISSION = (state, tableau_psc) =>{
-    state.gettersTransmissions = tableau_psc
+    state.stateTransmissions = tableau_psc
 }
 
 //add * motif de decision 
 
 export const AJOUTER_TRANSMISSION = (state, elementAjouter) => {
-    state.gettersTransmissions.unshift(elementAjouter)
+    state.stateTransmissions.unshift(elementAjouter)
 }
 
 //update all motif de decision
 export const MODIFIER_TRANSMISSION = (state, elementModif)=>{
-    state.gettersTransmissions = state.gettersTransmissions.map(response => {
+    state.stateTransmissions = state.stateTransmissions.map(response => {
         if(response.id == elementModif.id){
             response = {...elementModif}
         }
@@ -211,7 +212,7 @@ export const MODIFIER_TRANSMISSION = (state, elementModif)=>{
 //delete all motif de decision
 
 export const SUPPRI_TRANSMISSION = (state, id)=> {
-    state.gettersTransmissions = state.gettersTransmissions.filter(motif => motif.id !=id)
+    state.stateTransmissions = state.stateTransmissions.filter(motif => motif.id !=id)
 }
 
 
@@ -335,9 +336,6 @@ export const AJOUTER_NOUVEAU_FOURNISSEUR = (state, elementAjouter) => {
 
 
 // mmutation de l'obseravtion du bailleur
-
-
-
 
 
 // get all  obseravtion bailleur

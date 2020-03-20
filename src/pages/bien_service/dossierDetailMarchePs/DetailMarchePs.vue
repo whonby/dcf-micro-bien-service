@@ -658,8 +658,10 @@ return "Procédure Simplifiée à compétition Limitée(PSL)"
     {
 return "Procédure Simplifiée à compétition Ouverte(PSO)"
     }
-    
-    return 0
+
+  return null  
+
+
 },
 
 
