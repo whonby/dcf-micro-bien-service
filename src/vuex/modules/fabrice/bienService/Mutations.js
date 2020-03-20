@@ -21,7 +21,7 @@ export const MODIFIER_PRESTATION = (state, elementModif)=>{
     })
 }
 
-
+SUPPRIMER_MEMBRE_COJO
 
 
 // delete all prestation
@@ -2016,7 +2016,7 @@ export const MODIFIER_MEMBRE_COJO= (state, elementModif)=>{
 }
 
 export const SUPPRIMER_MEMBRE_COJO= (state, id)=> {
-    state.proce_verballe = state.proce_verballe.filter(autreText => autreText.id !=id)
+    state.membre_cojo = state.membre_cojo.filter(autreText => autreText.id !=id)
 }
 /**Fin mutation membre cojo**/
 

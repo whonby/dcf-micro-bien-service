@@ -1,6 +1,6 @@
 import axios from '../../fabrice/bienService/urls/api'
 import { asyncLoading } from 'vuejs-loading-plugin'
-modifierAppelOffre
+
 var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
 
@@ -3689,6 +3689,7 @@ export function getVille({ commit }) {
 
   }).catch(error => console.log(error)))
 }
+
 
 // action pour ajouter bailleur
 export function ajouterVille({ commit, dispatch}, formData) {

@@ -9,7 +9,9 @@ const defaultState = {
   historiquetransferts: [],
   directions: [],
   servicesua: [],
-  fonctionsua: []
+  fonctionsua: [],
+  budgeCharge:[],
+    ligneExempter:[],
   // listeDocUniteAdministratives: [],
 
   // nbreUniteAdministratives: [],

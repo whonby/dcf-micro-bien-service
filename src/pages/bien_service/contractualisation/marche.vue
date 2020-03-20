@@ -351,11 +351,11 @@
                    <span class=""><i class="icon-plus"></i></span>
                    </router-link> -->
 
-
+<!-- 
                    <router-link :to="{name:'detailMarcheAoi_Aon',params:{id:marche.id}}"
                    class="btn btn-default"  title="detail marche AOI-AON">
                    <span class=""><i class="icon-user"></i></span>
-                   </router-link>
+                   </router-link> -->
 
 
                    
