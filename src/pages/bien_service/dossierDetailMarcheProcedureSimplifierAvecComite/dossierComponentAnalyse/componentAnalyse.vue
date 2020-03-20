@@ -175,7 +175,7 @@
 
 
         
-        <div id="modificationAajouterAnalys01" class="modal hide grdirModalAnalyse">
+        <div id="modifierJugement" class="modal hide grdirModalAnalyse">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Modification du dossier Analyse</h3>
@@ -415,16 +415,18 @@ export default {
                        // cojo_id:""
                 }
             },
-         modificationDossierAnalyse(){
-                this.modifierAnalyseDossier(this.edite_analyse_dossier)
-                this.$('#modificationAajouterAnalys01').modal('hide');
-            },
+       
          afficheAnnalyseDossier(index){
-                this.$('#modificationAajouterAnalys01').modal({
+                this.$('#modifierJugement').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
                 this.edite_analyse_dossier = this.listeAnalyseDossier(this.macheid)[index];
+            },
+
+              modificationDossierAnalyse(){
+                this.modifierAnalyseDossier(this.edite_analyse_dossier)
+                this.$('#modifierJugement').modal('hide');
             },
 // formatage de date 
 formaterDate(date){

@@ -1,3 +1,4 @@
+listeReferenceAppel
 <template>
     <div>
        
@@ -69,7 +70,8 @@
             
                             <label class="control-label">Ref de l'offre:</label>
                            <div class="control-group">
-                       <input type="text" class="span" placeholder="" v-model="formCotation.ref_offre">
+                       <input type="text" class="span" readonly :value="affichierReferenceAppelOffre(macheid.id)">
+                       
                             </div>
                         </div>
                               </td>
@@ -162,7 +164,7 @@
             
                             <label class="control-label">Ref de l'offre:</label>
                            <div class="control-group">
-                       <input type="text" class="span" placeholder="saisir le nom" v-model="editCotation.ref_offre">
+                       <input type="text" class="span" :value="affichierReferenceAppelOffre(macheid.id)" readonly>
                             </div>
                         </div>
                           </td>
@@ -290,7 +292,7 @@ export default {
     },
     computed: {
 
-            ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,"gettersCotations"]),
+            ...mapGetters("bienService", ["gettersCotations","appelOffres", "gettersCotationPersonnaliser" ,"gettersCotations"]),
             // ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -312,14 +314,26 @@ export default {
 
 
   listeCotation () {
-                return macheid => {
-                    if (macheid != "") {
+                return id => {
+                    if (id != "") {
                         // console.log("Marche lettre inviation marche")
-                        return this.gettersCotationPersonnaliser.filter(idmarche => idmarche.marche_id == macheid)
+                        return this.gettersCotationPersonnaliser.filter(idmarche => idmarche.marche_id == id)
                      }
              }
             },
 
+affichierReferenceAppelOffre() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.ref_appel;
+      }
+      return 0
+        }
+      };
+    },
 
         },
      methods: {
@@ -367,7 +381,7 @@ export default {
                 formData.append('entreprise_id', this.formCotation.entreprise_id);
                 formData.append('date_cotation', this.formCotation.date_cotation);
                 formData.append('marche_id', this.macheid.id);
-                formData.append('ref_offre', this.formCotation.ref_offre);
+                formData.append('ref_offre', this.affichierReferenceAppelOffre(this.macheid.id));
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'

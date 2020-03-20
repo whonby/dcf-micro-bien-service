@@ -2335,8 +2335,8 @@ export function getTransmission({commit}) {
 
 // action pour ajouter les infos 
 
-export function ajouterTransmission({commit,dispatch}, elementAjout){
-  asyncLoading(axios.post('/add_transmission', elementAjout)).then(response =>{
+export function ajouterTransmission({commit,dispatch}, elementAjout,config){
+  asyncLoading(axios.post('/add_transmission', elementAjout,config)).then(response =>{
       if(response.status == 201){
         commit('AJOUTER_TRANSMISSION', response.data)
          dispatch('getTransmission')
@@ -2354,16 +2354,55 @@ export function ajouterTransmission({commit,dispatch}, elementAjout){
 
 
 
-export function modifiertransmission({ commit }, element_modifie) {
-  asyncLoading(axios.put('/update_transmission/' + element_modifie.id, element_modifie)).then(response => {
-    commit('MODIFIER_TRANSMISSION', response.data)
+// export function modifiertransmission({ commit }, element_modifie) {
+//   console.log("element_modifie")
+//   console.log(element_modifie)
+//   asyncLoading(axios.put('/update_transmission/'+ id, element_modifie)).then(response => {
+//     commit('MODIFIER_TRANSMISSION', response.data)
+//     this.$app.$notify({
+//       title: 'success ',
+//       text: 'Modification effectué !',
+//       type: "success"
+//     })
+//   }).catch(error => console.log(error))
+// }
+
+export function modifiertransmission({commit,dispatch}, element_modifie,config) {
+  asyncLoading( axios.post('/update_transmission',element_modifie,config)).then(response => {
+      commit('MODIFIER_TRANSMISSION', response.data)
+      dispatch('getTransmission')
+      this.$app.$notify({
+          title: 'success ',
+          text: 'Modification effectué !',
+          type:"success"
+      })
+  }).catch(error => console.log(error))
+}
 
 
-    this.$app.$notify({
-      title: 'success ',
-      text: 'Modification effectué !',
-      type: "success"
-    })
+export function modifierDecisionAnoDmp({commit,dispatch}, element_modifie,config) {
+  asyncLoading( axios.post('/update_transmission',element_modifie,config)).then(response => {
+      commit('MODIFIER_TRANSMISSION', response.data)
+      dispatch('getTransmission')
+        return this.$app.$notify({
+          title: 'success ',
+          text: 'Avis ANO sur le DAO effectué !',
+          type:"success"
+      }) 
+  }).catch(error => console.log(error))
+}
+
+
+
+export function modificationAvisBailleurDmp({commit,dispatch}, element_modifie,config) {
+  asyncLoading( axios.post('/update_transmission',element_modifie,config)).then(response => {
+      commit('MODIFIER_TRANSMISSION', response.data)
+      dispatch('getTransmission')
+        return this.$app.$notify({
+          title: 'success ',
+          text: 'Avis bailleur effectué !',
+          type:"success"
+      }) 
   }).catch(error => console.log(error))
 }
 
@@ -3143,6 +3182,17 @@ export function modifierDemandeAno({commit}, element_modifie,config) {
     }).catch(error => console.log(error))
 }
 
+export function modifierAvisAnoCf({commit,dispatch}, element_modifie,config) {
+  asyncLoading( axios.post('/rdemande_ano_update',element_modifie,config)).then(response => {
+      commit('MODIFIER_DEMANDE_ANO', response.data)
+      dispatch('getDemandeAno')
+      this.$app.$notify({
+          title: 'success ',
+          text: 'Decision effectué !',
+          type:"success"
+      })
+  }).catch(error => console.log(error))
+}
 
 export function supprimerDemandeAno({commit}, id) {
     this.$app.$dialog
@@ -4090,3 +4140,52 @@ export function supprimerModePaiement({ commit }, id) {
 
 }
 
+
+
+export  function  getPlanPassationMarche({commit}) {
+    queue.push(() => axios.get('/plan_passation_marche').then((response) => {
+        commit('GET_ALL_PLAN_PASSATION_MARCHE', response.data)
+
+    }).catch(error => console.log(error)))
+}
+
+export function ajouterPlanPassationMarche({commit}, objetAjoute,config){
+    return  asyncLoading(axios.post('/plan_passation_marche',objetAjoute,config)).then(response =>{
+        if(response.status == 201){
+            console.log(response.data)
+            commit('AJOUTER_PLAN_PASSATION_MARCHE', response.data)
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+
+    }).catch(error => console.log(error))
+}
+
+export function supprimerPlanPassationMarche({commit}, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('DELETE_PLAN_PASSATION_MARCHE', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/plan_passation_marche/' + id).then(response =>{
+                commit('GET_ALL_ANALYSE_DOSSIER', response.data.data)
+                dialog.close()
+            }  )
+        })
+
+}
+/*export function modificationPlanPassationMarche({commit}, element_modifie,config) {
+    asyncLoading( axios.put('/plan_passation_marche' ,element_modifie,config)).then(response => {
+        console.log(response)
+        commit('MODIFIER_PLAN_PASSATION_MARCHE', response)
+        //commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+}*/

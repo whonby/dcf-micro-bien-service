@@ -18,7 +18,7 @@
                         :key="ouverture.id">
 
                          <td @click="afficherModalOuverture(index)">
-                            {{ouverture.entreprise_id || 'Non renseigné'}}</td>
+                            {{affichierNomEntreprise(ouverture.entreprise_id) || 'Non renseigné'}}</td>
 
                          <td @click="afficherModalOuverture(index)">
                             {{ouverture.libelle_ouverture || 'Non renseigné'}}</td>
@@ -66,8 +66,8 @@
                         <label class="control-label">Entreprise.</label>
                         <div class="controls">
                           <select v-model="formOuverture.entreprise_id" class="span">
-                                <option v-for="varText in entreprises" :key="varText.id"
-                                        :value="varText.id">{{varText.raison_sociale}}</option>
+                                <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
+                                        :value="varText.objetEntreprise.id">{{varText.objetEntreprise.raison_sociale}}</option>
                             </select>
                         
                         </div>
@@ -128,7 +128,7 @@
                             <label class="control-label">Montant ouverture :</label>
 
                             <div class="controls">
-                                <input type="text" class="span" placeholder="Montant lot" v-model="formOuverture.montant_ouverture">
+                                <input type="number" class="span" placeholder="Montant lot" v-model="formOuverture.montant_ouverture">
                             </div>
                         </div>
                          </td>
@@ -165,9 +165,9 @@
                          <div class="control-group">
                         <label class="control-label">Entreprise.</label>
                         <div class="controls">
-                          <select v-model="editOuverture.entreprise_id" class="span">
-                                <option v-for="varText in entreprises" :key="varText.id"
-                                        :value="varText.id">{{varText.raison_sociale}}</option>
+                         <select v-model="editOuverture.entreprise_id" class="span">
+                                <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
+                                        :value="varText.objetEntreprise.id">{{varText.objetEntreprise.raison_sociale}}</option>
                             </select>
                         
                         </div>
@@ -231,7 +231,7 @@
                             <label class="control-label">Montant ouverture :</label>
 
                             <div class="controls">
-                                <input type="text" class="span" placeholder="Montant lot" v-model="editOuverture.montant_ouverture">
+                                <input type="number" class="span" placeholder="Montant lot" v-model="editOuverture.montant_ouverture">
                             </div>
                         </div>
                   </td>
@@ -309,7 +309,14 @@ export default {
                    }
                }
            },
-
+afficherEntrepriseRecep () {
+                return id => {
+                    if (id != "") {
+                        // console.log("Marche lettre inviation marche")
+                        return this.gettersCotationPersonnaliser.filter(idmarche => idmarche.marche_id == id)
+                     }
+             }
+            },
         //    listeCotation(){
         //        return macheid =>{
         //            if(macheid !=""){
@@ -332,7 +339,18 @@ export default {
     //     })
     // }
 
+affichierNomEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.raison_sociale;
+      }
+      return 0
+        }
+      };
+    },
 
         },
           methods:{

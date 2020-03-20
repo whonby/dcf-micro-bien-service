@@ -1,4 +1,4 @@
-printMarcheNonAttribue
+gettersOuverturePersonnaliser
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays
@@ -24,6 +24,7 @@ export const getterCojos = state => state.cojos
 export const conditions = state => state.conditions
 export const fonctionOccupes = state => state.fonctionOccupes
 export const getterAnalyseDossiers = state => state.analyseDossiers
+export const getterPlanPassationMarche=state=>state.plan_passation_marche
 export const natureFonctions = state => state.natureFonctions
 export const signatures = state => state.signatures
 export const typeActeEffetFinanciers = state => state.typeActeEffetFinanciers
@@ -144,28 +145,30 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
 
 
 
-    // export const gettersCojoPersonnaliser = (state, getters, rootState, rootGetters) =>
-    // state.cojos.map(element => {
-    //     if (element.cotation_id !== null) {
-    //         element = {
-    //             ...element,
+    export const gettersPersonnaliserTransmissions = (state, getters, rootState, rootGetters) =>
+    state.stateTransmissions.map(element => {
+        if (element.plan_motif_decision_id !== null) {
+            element = {
+                ...element,
 
 
-    //             varObjetCotation: rootGetters['bienService/gettersCotations'].find(
-    //                 plans => plans.id == element.cotation_id
-    //             ),
+                varObjetMotifDecision: rootGetters['bienService/motifDecisions'].find(
+                    plans => plans.id == element.plan_motif_decision_id
+                ),
 
                
 
 
-    //         }
+            }
 
-    //     }
-    //     return element;
-    // })
+        }
+        return element;
+    })
 
-
+    //gettersTransmissions
     // getters d'etat de procedure
+
+
 
     export const gettersEtatProcedurePersonnaliser = (state, getters, rootState, rootGetters) =>
     state.gettersEtatProcedure.map(element => {
@@ -194,7 +197,8 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
 
                 varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
                     plans => plans.id == element.entreprise_id
-                ),
+                )
+                ,
 
                 varObjetCotation: rootGetters['bienService/gettersCotation'].find(
                     plans => plans.id == element.cotation_id

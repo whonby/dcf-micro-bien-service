@@ -14,7 +14,8 @@
                                                 <th>Date de transmission</th>
                                                 <th>Fichier</th>
                                                 <th>Avis</th>
-                                                <th>Date d'avis Ano DMP</th>
+                                                <th>Date d'avis ANO Bailleur</th>
+
                                                 <th>Observation</th>
                                                 <th>Action</th>
                                             </tr>
@@ -44,14 +45,14 @@
                             </a>
                         </td>
 
-                         <td @click="afficherModalDecisionAnoDMP (index)"> 
+                         <td @click="afficherModalDecisionAvisBailleur (index)"> 
                            <span v-if="transmission.avis== 0" class=" btn label label-success"> Non objection </span>
                            <span v-else-if="transmission.avis== 1" class=" btn label label-important">objection </span>
                            <span v-else class=" btn label label-info"> En attent</span>
                          </td>
 
                           <td @click="afficherModalModifierTransmission(index)">
-                            {{ formaterDate(transmission.date_ano_dmp)|| 'Non renseigné'}}</td>
+                            {{ formaterDate(transmission.date_ano_bailleur)|| 'Non renseigné'}}</td>
 
                              <td @click="afficherModalModifierTransmission(index)">
                             {{ transmission.observations|| 'Non renseigné'}}</td>
@@ -74,7 +75,7 @@
          
 <!--  debut de decision ano dmp -->
 
-<div id="ajouterDecisionAvisANO" class="modal hide">
+<div id="ajouterAvisBailleur" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter ANO DMP sur DAO</h3>
@@ -82,20 +83,36 @@
             <div class="modal-body">
                 <form class="form-horizontal">
 
-                <div class="control-group">
+                     <div class="control-group">
               <label class="control-label">Reférence du dossier:</label>
               <div class="controls">
                 <input type="text"   v-model="edit_transmission.ref_courier" readonly/>
               </div>
             </div>
 
+                 <div class="control-group">
+              <label class="control-label">Avis ANO sur le DAO:</label>
+              <div class="controls">
+                <input type="text"   :value="recuperationDeAvisBailleurDmp" readonly/>
+              </div>
+            </div>
+
+             <div class="control-group">
+              <label class="control-label">Date d'ANO sur l'avis:</label>
+              <div class="controls">
+                <input type="text"  v-model="edit_transmission.date_ano_dmp" readonly/>
+              </div>
+            </div>
+
+
+
                     <div class="control-group">
 
-                        <label class="control-label">Date d'avis</label>
+                        <label class="control-label">Date d'avis d'ANO bailleur</label>
                         <div class="controls">
                             <input
                                     type="date"
-                                    v-model="edit_transmission.date_ano_dmp"
+                                    v-model="edit_transmission.date_ano_bailleur"
                                     class="span"
                                     placeholder="Saisir le libelle_type"
                             />
@@ -115,7 +132,8 @@
                   <div class="control-group">
           <label class="control-label">Observation:</label>
             <div class="controls">
-              <textarea  v-model="edit_transmission.observations "  class="textarea_editor span"  :readonly="verouillageObservation" rows="" placeholder="Entrer  le text ..."></textarea>
+              <textarea  v-model="edit_transmission.observations"  class="textarea_editor span"
+              :readonly="deverouillageAvisBailleur" rows="" placeholder="Entrer  le text ..."></textarea>
             </div>
           
         </div>
@@ -179,7 +197,7 @@ export default {
         
 
             edit_transmission:{
-                date_ano_dmp:"",
+                	date_ano_bailleur:"",
                 avis:"",
                 observations:"",
                 plan_motif_decision_id:""
@@ -220,21 +238,34 @@ export default {
  listetransmissionDao () {
             return macheid => {
                 if (macheid != "") {
-
-                    return this.gettersPersonnaliserTransmissions.filter(idmarche => idmarche.macheid == macheid 
-                    && idmarche.destinataire==1)
+                   
+                    return this.gettersPersonnaliserTransmissions.filter(idmarche => idmarche.macheid == macheid && idmarche.destinataire==2)
                 }
             }
         },
 
-        verouillageObservation(){
-            return this.edit_transmission.avis == 0
-        },
+         recuperationDeAvisBailleurDmp(){
+        
+        let numero = this.gettersPersonnaliserTransmissions.find(numeroDmp =>numeroDmp.destinataire== 1 && numeroDmp.avis== 0 )
+        if(numero) {
+            if(numero.avis== 0){
+              return "non objection"
+            }else{
+            return "objection"
+            }
+        }
+        return null
+    },
+
+
+    deverouillageAvisBailleur(){
+        return this.edit_transmission.avis == 0
+    }
 
         },
     methods:{
         ...mapActions('bienService',['supprimerTransmission',
-        'ajouterTransmission','modifierDecisionAnoDmp']),
+        'ajouterTransmission','modificationAvisBailleurDmp']),
 
 
              OnchangeFichier(e) {
@@ -269,6 +300,7 @@ export default {
                 const formData = new FormData();
                 formData.append('date_dao', this.formTransmission.date_dao);
                 formData.append('ref_courier',this.formTransmission.ref_courier);
+                
                 formData.append('destinataire',this.formTransmission.destinataire);
                 formData.append('marche_id',this.macheid);
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
@@ -302,7 +334,7 @@ export default {
                 formData.append('observations',this.edit_transmission.observations);
                 formData.append('plan_motif_decision_id', this.edit_transmission.plan_motif_decision_id);
                 formData.append('ref_courier',this.edit_transmission.ref_courier);
-                formData.append('date_ano_dmp',this.edit_transmission.date_ano_dmp);
+                formData.append('date_ano_bailleur',this.edit_transmission.	date_ano_bailleur);
                 formData.append('destinataire',this.edit_transmission.destinataire);
                formData.append('id',this.edit_transmission.id);
                 console.log(formData)
@@ -314,15 +346,15 @@ export default {
                         'Content-Type' : 'multipart/form-data'
                     }
                 }
-                 this.modifierDecisionAnoDmp(formData,config)
+                 this.modificationAvisBailleurDmp(formData,config)
                this.$('#modificationAajouterAnalys01').modal('hide');
             },
            formaterDate(date){
               return moment (date,'YYYY-MM-DD').format('DD/MM/YYYY');
            },
 
-           afficherModalDecisionAnoDMP(index){
-           this.$('#ajouterDecisionAvisANO').modal({
+           afficherModalDecisionAvisBailleur(index){
+           this.$('#ajouterAvisBailleur').modal({
                backdrop:'static',
                keyboard:false
            })

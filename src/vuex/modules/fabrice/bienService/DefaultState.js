@@ -71,7 +71,11 @@ documentProcedures:[],
     gettersOuvertures:[],
     gettersEtatProcedure:[],
     gettersPsc:[],
-    stateTransmissions:[]
+    stateTransmissions:[],
+
+
+    gettersTransmissions:[],
+    plan_passation_marche:[],
 
 
 

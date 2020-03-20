@@ -155,12 +155,12 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-primary" @click.prevent="modifierCotationLocal()">modifier</a>
+                <a class="btn btn-primary" @click.prevent="modificationTransmissionLocal()">modifier</a>
                 <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
             </div>
         </div>
 
-        <notifications />
+        <notifications/>
  </div>
     
 </template>
@@ -188,7 +188,8 @@ export default {
                 date_dao:"",
                     fichier:"",
                     ref_courier:"",
-                    destinataire:""
+                    destinataire:"",
+                   
                     
 
             },
@@ -292,14 +293,37 @@ export default {
            },
 
 
-           modifierCotationLocal(){
+        //    modificationTransmissionLocal(){
               
-               const formData = new FormData();
-                 formData.append('date_dao', this.edit_transmission.date_dao);
+        //        const formData = new FormData();
+        //          formData.append('date_dao', this.edit_transmission.date_dao);
+        //         formData.append('marche_id', this.macheid);
+        //         formData.append('ref_courier',this.edit_transmission.ref_courier);
+        //         formData.append('destinataire',this.edit_transmission.destinataire);
+        //        formData.append('id',this.edit_transmission.id);
+        //         console.log(formData)
+        //         if ( this.selectedFile!==""){
+        //             formData.append('fichier', this.selectedFile, this.selectedFile.name);
+        //         }
+        //         let config = {
+        //             header : {
+        //                 'Content-Type' : 'multipart/form-data'
+        //             }
+        //         }
+              
+        //        this.modifiertransmission(formData,config)
+        //        this.$('#modificationAajouterAnalys01').modal('hide');
+        //    },
+
+
+ modificationTransmissionLocal(){
+                //console.log(this.edite_demande_dao)
+                const formData = new FormData();
+              formData.append('date_dao', this.edit_transmission.date_dao);
                 formData.append('marche_id', this.macheid);
                 formData.append('ref_courier',this.edit_transmission.ref_courier);
                 formData.append('destinataire',this.edit_transmission.destinataire);
-               
+               formData.append('id',this.edit_transmission.id);
                 console.log(formData)
                 if ( this.selectedFile!==""){
                     formData.append('fichier', this.selectedFile, this.selectedFile.name);
@@ -309,10 +333,19 @@ export default {
                         'Content-Type' : 'multipart/form-data'
                     }
                 }
-              
-               this.modifiertransmission(formData,config)
+                 this.modifiertransmission(formData,config)
                this.$('#modificationAajouterAnalys01').modal('hide');
-           },
+            },
+
+
+
+
+
+
+
+
+
+
            formaterDate(date){
               return moment (date,'YYYY-MM-DD').format('DD/MM/YYYY');
            }
