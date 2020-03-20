@@ -409,9 +409,16 @@
           </li>
            <li class="divider"></li>
           <li>
+            <router-link :to="{name: 'fonctionBudgetaire'}" tag="a">
+              <i class="icon-check"></i>
+              Fonction Budgétaire
+            </router-link>
+          </li>
+           <li class="divider"></li>
+          <li>
             <router-link :to="{name: 'Fonction'}" tag="a">
               <i class="icon-check"></i>
-              Fonction
+              Fonction Administrative
             </router-link>
           </li>
            <li class="divider"></li>

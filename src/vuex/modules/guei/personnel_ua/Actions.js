@@ -1310,3 +1310,95 @@ export function modifierClassificationGradeFonction({ commit, dispatch }, nouvea
         });
     });
 }
+
+
+
+
+
+
+export function getFonctionBudgetaire({ commit }) {
+
+    queue.push(() => axios.get('/listeFonctionBudgetaire').then(response => {
+        // console.log(response.data)
+        commit('GET_FONCTION_BUDGETAIRE', response.data)
+    }).catch(error => console.log(error))
+    );
+
+
+}
+
+// ajouter type acte personnel
+export function ajouterFonctionBudgetaire({ commit}, objetAjoute) {
+    this.$app.$loading(true)
+    axios.post('/addFonctionBudgetaire', objetAjoute).then(res => {
+        if (res.status == 201) {
+            this.$app.$notify({
+                title: 'success',
+                text: 'Enregistrement effectuer',
+                type: "success"
+            });
+            commit('AJOUTER_FONCTION_BUDGETAIRE', res.data)
+            this.$app.$loading(false)
+           
+        }
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type: "error"
+        });
+    })
+}
+
+
+export function modifierFonctionBudgetaire({ commit }, formData) {
+    this.$app.$loading(true)
+    axios.put('/updateFonctionBudgetaire', formData).then(response => {
+        commit('MODIFIER_FONCTION_BUDGETAIRE', response.data)
+        this.$app.$loading(false)
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'success',
+            text: "Modification effectuÃ©e !",
+            type: "success"
+        });
+    })
+
+        .then(response => {
+            commit("MODIFIER_FONCTION_BUDGETAIRE", response.data);
+           
+            this.$app.$notify({
+                title: "Success",
+                text: "Modification Effectué avec Succès!",
+                type: "success"
+            });
+        });
+
+}
+
+// supprimer type act
+export function supprimerFonctionBudgetaire({ commit }, id) {
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
+            this.$app.$notify({
+                title: 'Suppression',
+                text: 'Suppression effectuer',
+                type: "error"
+            });
+            commit('SUPPRIMER_FONCTION_BUDGETAIRE', id)
+            axios.delete('/deleteFonctionBudgetaire/' + id).then(() => dialog.close())
+        })
+}
+
+
+
+
+
+
+
+

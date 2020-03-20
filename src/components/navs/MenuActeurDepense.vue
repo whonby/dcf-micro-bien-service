@@ -6,7 +6,7 @@
       
        <li>
             <router-link :to="{name: 'Acteur'}" tag="a">
-              ACTEURS DE LA DEPENSE
+              PERSONNEL
             </router-link>
           </li>
      
