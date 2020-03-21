@@ -1,4 +1,4 @@
-gettersOuverturePersonnaliser
+getMandatPersonnaliserVise
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays
@@ -66,8 +66,8 @@ export const getterAnoDMPBailleur = state => state.stateAnoDmpBailleur
 export const getterObseravtionBailleurs = state => state.obseravtionBailleurs
 // export const nombremarches = state => state.marches.length;
 //export const gettersPsc = state =>state.gettersPsc
-export const gettersCotations = state =>state.gettersCotations 
- export const gettersTransmissions = state => state.gettersTransmissions
+export const gettersCotations = state =>state.stateCotations 
+ export const gettersTransmissions = state => state.stateTransmissions
 export const getterMarcheBailleur= state => state.bailleurMarche;
 export const getterMembreCojo=state=>state.membre_cojo;
 export const nombreTotalMarche = state => state.marches.length;
@@ -123,7 +123,7 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
 
 
     export const gettersCotationPersonnaliser = (state, getters, rootState, rootGetters) =>
-    state.gettersCotations.map(element => {
+    state.stateCotations.map(element => {
         if (element.entreprise_id !== null) {
             element = {
                 ...element,
@@ -145,28 +145,30 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
 
 
 
-    // export const gettersCojoPersonnaliser = (state, getters, rootState, rootGetters) =>
-    // state.cojos.map(element => {
-    //     if (element.cotation_id !== null) {
-    //         element = {
-    //             ...element,
+    export const gettersPersonnaliserTransmissions = (state, getters, rootState, rootGetters) =>
+    state.stateTransmissions.map(element => {
+        if (element.plan_motif_decision_id !== null) {
+            element = {
+                ...element,
 
 
-    //             varObjetCotation: rootGetters['bienService/gettersCotations'].find(
-    //                 plans => plans.id == element.cotation_id
-    //             ),
+                varObjetMotifDecision: rootGetters['bienService/motifDecisions'].find(
+                    plans => plans.id == element.plan_motif_decision_id
+                ),
 
                
 
 
-    //         }
+            }
 
-    //     }
-    //     return element;
-    // })
+        }
+        return element;
+    })
 
-
+    //gettersTransmissions
     // getters d'etat de procedure
+
+
 
     export const gettersEtatProcedurePersonnaliser = (state, getters, rootState, rootGetters) =>
     state.gettersEtatProcedure.map(element => {

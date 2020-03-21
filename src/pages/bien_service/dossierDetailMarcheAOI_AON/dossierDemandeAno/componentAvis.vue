@@ -11,8 +11,11 @@
                                             <tr>
                                                 <th>Ref du courier</th>
                                                 <th>Destinataire</th>
-                                                <th>Date de transmission du DAO</th>
+                                                <th>Date de transmission</th>
                                                 <th>Fichier</th>
+                                                <th>Avis</th>
+                                                <th>Date d'avis Ano DMP</th>
+                                                <th>Observation</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
@@ -34,12 +37,28 @@
                             {{ formaterDate(transmission.date_dao)|| 'Non renseigné'}}</td>
                         
                       
-                        <td >
+                        <td  >
                             <a v-if="transmission.fichier" :href="transmission.fichier" class="btn btn-default" target="_blank">
                                 <span class=""><i class="icon-book"></i>
                                 </span>
                             </a>
                         </td>
+
+                         <td @click="afficherModalDecisionAnoDMP (index)"> 
+                           <span v-if="transmission.avis== 0" class=" btn label label-success"> Non objection </span>
+                           <span v-else-if="transmission.avis== 1" class=" btn label label-important">objection </span>
+                           <span v-else class=" btn label label-info"> En attent</span>
+                         </td>
+
+                          <td @click="afficherModalModifierTransmission(index)">
+                            {{ formaterDate(transmission.date_ano_dmp)|| 'Non renseigné'}}</td>
+
+                             <td @click="afficherModalModifierTransmission(index)">
+                            {{ transmission.observations|| 'Non renseigné'}}</td>
+
+
+
+
                         <div class="btn-group">
                             <button @click.prevent="supprimerTransmission(transmission.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
@@ -51,116 +70,89 @@
                                         </table>
 
 
-                 <div id="ajouterT" class="modal hide" aria-hidden="true" style="display: none;">
 
-                      
-                         <div class="modal-header">
+         
+<!--  debut de decision ano dmp -->
+
+<div id="ajouterDecisionAvisANO" class="modal hide">
+            <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter la transmission du DAO  </h3>
+                <h3>Ajouter ANO DMP sur DAO</h3>
             </div>
             <div class="modal-body">
-                <div class="widget-box">
-                    <form action="#" method="get" >
+                <form class="form-horizontal">
 
-                      
-                     <div class="control-group">
+                <div class="control-group">
               <label class="control-label">Reférence du dossier:</label>
               <div class="controls">
-                <input type="text"  class="span11"  v-model="formTransmission.ref_courier" />
+                <input type="text"   v-model="edit_transmission.ref_courier" readonly/>
               </div>
             </div>
-                           <div class="control-group">
-              <label class="control-label">Date de transmission du dossier:</label>
-              <div class="controls">
-                <input type="date"  class="span11"  v-model="formTransmission.date_dao" />
-              </div>
-            </div>
-                 <div class="control-group">
-                        <label class="control-label">Destinataire</label>
+
+                    <div class="control-group">
+
+                        <label class="control-label">Date d'avis</label>
                         <div class="controls">
-                           <select v-model="formTransmission.destinataire" class="span">
-                               <option value="1"> ANO DMP</option>
-                               <option value="2">ANO Bailleur</option>
-                           </select>
+                            <input
+                                    type="date"
+                                    v-model="edit_transmission.date_ano_dmp"
+                                    class="span"
+                                    placeholder="Saisir le libelle_type"
+                            />
                         </div>
                     </div>
 
                     <div class="control-group">
-              <label class="control-label">Fichier joint:</label>
-              <div class="controls">
-                <input type="file"  @change="OnchangeFichier" />
-              </div>
-            </div>
-                         
-                
-                     
-                
+                        <label class="control-label">Avis</label>
+                        <div class="controls">
+                           <select v-model="edit_transmission.avis" class="span">
+                               <option value="0"> Non objection</option>
+                               <option value="1">Objection </option>
+                           </select>
+                        </div>
+                    </div>
 
-                    </form>
-                </div>
+                  <div class="control-group">
+          <label class="control-label">Observation:</label>
+            <div class="controls">
+              <textarea  v-model="edit_transmission.observations "  class="textarea_editor span"  :readonly="verouillageObservation" rows="" placeholder="Entrer  le text ..."></textarea>
             </div>
-            <div class="modal-footer">
-                <a class="btn btn-primary" @click.prevent="ajouterCotationLocal()">Ajouter</a>
-                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
-            </div>
+          
         </div>
 
-
-             <div id="modificationAajouterAnalys01" class="modal hide " aria-hidden="true" style="display: none;">
-
-
-                         <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier la transmission du DAO sur la DMP</h3>
-            </div>
-            <div class="modal-body">
-                <div class="widget-box">
-                    <form action="#" method="get" >
-
-                    <div class="control-group">
-              <label class="control-label">Reférence du dossier:</label>
-              <div class="controls">
-                <input type="text"   v-model="edit_transmission.ref_courier" />
-              </div>
-            </div>
+          <div class="control-group">
+                        <label class="control-label">Motif</label>
+                        <div class="controls">
+                          <select v-model="edit_transmission.plan_motif_decision_id" class="span">
+                                <option v-for="varText in motifDecisions" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
                         
-                                  <div class="control-group">
-              <label class="control-label">Date de transmission du dossuier:</label>
-              <div class="controls">
-                <input type="date"   v-model="edit_transmission.date_dao" />
-              </div>
-            </div>
-
-             <div class="control-group">
-                        <label class="control-label">Destinataire</label>
-                        <div class="controls">
-                           <select v-model="edit_transmission.destinataire" class="span">
-                               <option value="1"> ANO DMP</option>
-                               <option value="2">ANO Bailleur</option>
-                           </select>
                         </div>
                     </div>
 
-                   <div class="control-group">
-              <label class="control-label">Fichier joint:</label>
-              <div class="controls">
-                <input type="file"   @change="OnchangeFichier" />
-              </div>
-            </div>
-                     
-                     
-                
-
-                    </form>
-                </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-primary" @click.prevent="modificationTransmissionLocal()">modifier</a>
-                <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
+                <a
+                        @click.prevent="modificationTransmissionLocal()"
+                        class="btn btn-primary"
+                        href="#"
+
+                >Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
             </div>
         </div>
+<!-- fin de decision  -->
 
-        <notifications/>
+
+
+
+
+
+        
+
+        <notifications />
  </div>
     
 </template>
@@ -178,19 +170,20 @@ export default {
                     fichier:"",
                     date_dao:"",
                     ref_courier:"",
-                    destinataire:""
+                    destinataire:"",
+                    avis:""
                   
 
                 },
             
+        
+
             edit_transmission:{
-              
-                date_dao:"",
-                    fichier:"",
-                    ref_courier:"",
-                    destinataire:"",
-                   
-                    
+                date_ano_dmp:"",
+                avis:"",
+                observations:"",
+                plan_motif_decision_id:""
+
 
             },
 
@@ -211,7 +204,8 @@ export default {
     },
     computed: {
 
-            ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,"gettersCotations","gettersTransmissions"]),
+            ...mapGetters("bienService", [ "gettersPersonnaliserTransmissions"
+             ,"gettersCotations","gettersTransmissions","motifDecisions"]),
             // ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -219,22 +213,28 @@ export default {
             // ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
             //     'types_financements']) ,
                 
-    ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
+    ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires",
+    "type_Unite_admins","grandes_natures","taux","sections","plan_motif_decision"]),
            
                        
  listetransmissionDao () {
             return macheid => {
                 if (macheid != "") {
 
-                    return this.gettersTransmissions.filter(idmarche => idmarche.macheid == macheid)
+                    return this.gettersPersonnaliserTransmissions.filter(idmarche => idmarche.macheid == macheid 
+                    && idmarche.destinataire==1)
                 }
             }
+        },
+
+        verouillageObservation(){
+            return this.edit_transmission.avis == 0
         },
 
         },
     methods:{
         ...mapActions('bienService',['supprimerTransmission',
-        'ajouterTransmission','modifiertransmission']),
+        'ajouterTransmission','modifierDecisionAnoDmp']),
 
 
              OnchangeFichier(e) {
@@ -293,35 +293,16 @@ export default {
            },
 
 
-        //    modificationTransmissionLocal(){
-              
-        //        const formData = new FormData();
-        //          formData.append('date_dao', this.edit_transmission.date_dao);
-        //         formData.append('marche_id', this.macheid);
-        //         formData.append('ref_courier',this.edit_transmission.ref_courier);
-        //         formData.append('destinataire',this.edit_transmission.destinataire);
-        //        formData.append('id',this.edit_transmission.id);
-        //         console.log(formData)
-        //         if ( this.selectedFile!==""){
-        //             formData.append('fichier', this.selectedFile, this.selectedFile.name);
-        //         }
-        //         let config = {
-        //             header : {
-        //                 'Content-Type' : 'multipart/form-data'
-        //             }
-        //         }
-              
-        //        this.modifiertransmission(formData,config)
-        //        this.$('#modificationAajouterAnalys01').modal('hide');
-        //    },
-
-
  modificationTransmissionLocal(){
                 //console.log(this.edite_demande_dao)
                 const formData = new FormData();
               formData.append('date_dao', this.edit_transmission.date_dao);
                 formData.append('marche_id', this.macheid);
+                formData.append('avis',this.edit_transmission.avis);
+                formData.append('observations',this.edit_transmission.observations);
+                formData.append('plan_motif_decision_id', this.edit_transmission.plan_motif_decision_id);
                 formData.append('ref_courier',this.edit_transmission.ref_courier);
+                formData.append('date_ano_dmp',this.edit_transmission.date_ano_dmp);
                 formData.append('destinataire',this.edit_transmission.destinataire);
                formData.append('id',this.edit_transmission.id);
                 console.log(formData)
@@ -333,22 +314,31 @@ export default {
                         'Content-Type' : 'multipart/form-data'
                     }
                 }
-                 this.modifiertransmission(formData,config)
+                 this.modifierDecisionAnoDmp(formData,config)
                this.$('#modificationAajouterAnalys01').modal('hide');
             },
-
-
-
-
-
-
-
-
-
-
            formaterDate(date){
               return moment (date,'YYYY-MM-DD').format('DD/MM/YYYY');
-           }
+           },
+
+           afficherModalDecisionAnoDMP(index){
+           this.$('#ajouterDecisionAvisANO').modal({
+               backdrop:'static',
+               keyboard:false
+           })
+            this.edit_transmission = this.listetransmissionDao(this.macheid.id)[index]
+           },
+
+
+
+
+            //  ajouterDemandeAnoLocal(){
+            
+            //     this.ajouterDemandeAno(formData,config)
+            //     this.edit_transmission={
+                   
+            //     }
+            // },
 
      }
 
@@ -363,3 +353,5 @@ export default {
  height: 350px;
 }
 </style>
+  
+

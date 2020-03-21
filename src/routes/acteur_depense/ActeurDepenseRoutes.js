@@ -5,84 +5,108 @@ import NiveauEtude from "../../pages/acteurs_depenses/niveau_etude/NiveauEtude.v
 import TypeContrat from "../../pages/acteurs_depenses/type_contrat/TypeContrat.vue"
 import TypeSalarie from "../../pages/acteurs_depenses/type_salarie/TypeSalarie.vue"
 import Echelons from "../../pages/acteurs_depenses/echelons/Echelons.vue"
-import Grades from "../../pages/acteurs_depenses/grades/Grades.vue"
+import Grades from "../../pages/acteurs_depenses/grades/GradePrincipal.vue"
 import Acteur from "../../pages/acteurs_depenses/acteurs/Acteurs.vue"
 import ActeurDetail from "../../pages/acteurs_depenses/acteurs/DetailActeurDepense.vue"
 import TableauBordActeurDepense from "../../pages/acteurs_depenses/TableauBord.vue"
 import Conge from "../../pages/acteurs_depenses/conges/Conge.vue"
 import AjouterActeur from "../../pages/acteurs_depenses/acteurs/AjouteActeurDepense.vue"
 import EditActeurDepense from "../../pages/acteurs_depenses/acteurs/EditeActeurDepense.vue"
+import CategorieGrade from "../../pages/acteurs_depenses/CategorieGrade/CategorieGrade.vue";
+import familleEmploie from "../../pages/acteurs_depenses/fonction/familleEmploie.vue";
+import ClassificationEmploisGradePrincipal from "../../pages/acteurs_depenses/fonction/ClassificationEmploisGradePrincipal.vue";
+import fonctionBudgetaire from "../../pages/acteurs_depenses/fonction/fonctionBudgetaire.vue";
 const ActeurDepenseRoutes = [
-    {
-        path:"/type-acte-personnel",
-        name:"TypeActePersonnels",
-        component:TypeActePersonnel
-    },
-    {
-        path:"/fonction",
-        name:"Fonction",
-        component:Fonction
-    },
-    {
-        path:"/classes",
-        name:"Classe",
-        component:Classe
-    },
-    {
-        path:"/niveau-etude",
-        name:"NiveauEtude",
-        component:NiveauEtude
-    },
-    {
-        path:"/type-contrat",
-        name:"TypeContrat",
-        component:TypeContrat
-    },
-    {
-        path:"/type-salarie",
-        name:"TypeSalarie",
-        component:TypeSalarie
-    },
-    {
-        path:"/grades",
-        name:"Grades",
-        component:Grades
-    },
-    {
-        path:"/echelons",
-        name:"Echelons",
-        component:Echelons
-    },
-    {
-        path:"/acteur-depenses",
-        name:"Acteur",
-        component:Acteur
-    },
-    {
-        path: '/detail-acteur/:id',
-        name: 'ActeurDetail',
-        component: ActeurDetail,
-    },
-    {
-        path: '/tableau-bord-acteur-depense',
-        name: 'TableauBordActeurDepense',
-        component: TableauBordActeurDepense,
-    },
-    {
-        path: '/suivie-conges',
-        name: 'Conge',
-        component: Conge,
-    },
-    {
-        path: '/ajouter-acteur',
-        name: 'AjouterActeur',
-        component: AjouterActeur,
-    },
-    {
-        path: '/edit-acteur-depense/:id',
-        name: 'EditActeurDepense',
-        component: EditActeurDepense,
-    },
-]
+  {
+    path: "/fonction-Budgetaire",
+    name: "fonctionBudgetaire",
+    component: fonctionBudgetaire
+  },
+  {
+    path: "/Classification-Emplois-Grade-Principal",
+    name: "ClassificationEmploisGradePrincipal",
+    component: ClassificationEmploisGradePrincipal
+  },
+  {
+    path: "/famille-Emplois",
+    name: "familleEmploie",
+    component: familleEmploie
+  },
+  {
+    path: "/Categorie-Grade",
+    name: "CategorieGrade",
+    component: CategorieGrade
+  },
+  {
+    path: "/type-acte-personnel",
+    name: "TypeActePersonnels",
+    component: TypeActePersonnel
+  },
+  {
+    path: "/fonction",
+    name: "Fonction",
+    component: Fonction
+  },
+  {
+    path: "/classes",
+    name: "Classe",
+    component: Classe
+  },
+  {
+    path: "/niveau-etude",
+    name: "NiveauEtude",
+    component: NiveauEtude
+  },
+  {
+    path: "/type-contrat",
+    name: "TypeContrat",
+    component: TypeContrat
+  },
+  {
+    path: "/type-salarie",
+    name: "TypeSalarie",
+    component: TypeSalarie
+  },
+  {
+    path: "/grades",
+    name: "Grades",
+    component: Grades
+  },
+  {
+    path: "/echelons",
+    name: "Echelons",
+    component: Echelons
+  },
+  {
+    path: "/acteur-depenses",
+    name: "Acteur",
+    component: Acteur
+  },
+  {
+    path: "/detail-acteur/:id",
+    name: "ActeurDetail",
+    component: ActeurDetail
+  },
+  {
+    path: "/tableau-bord-acteur-depense",
+    name: "TableauBordActeurDepense",
+    component: TableauBordActeurDepense
+  },
+  {
+    path: "/suivie-conges",
+    name: "Conge",
+    component: Conge
+  },
+  {
+    path: "/ajouter-acteur",
+    name: "AjouterActeur",
+    component: AjouterActeur
+  },
+  {
+    path: "/edit-acteur-depense/:id",
+    name: "EditActeurDepense",
+    component: EditActeurDepense
+  }
+];
 
 export default ActeurDepenseRoutes;

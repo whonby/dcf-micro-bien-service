@@ -21,7 +21,11 @@ const defaultstate = {
     delais_mise_disposition_act:[],
     jour_conge_disponible_acteur:[],
     tous_salaire_actuel_acteur:[],
-    list_acteur_fin_contrat_activite:[]
+    list_acteur_fin_contrat_activite: [],
+    categorieGrade: [],
+    familleFonction: [],
+    classificationGradeFonction: [],
+    fonctionBudgetaire:[]
 };
 
  export default defaultstate

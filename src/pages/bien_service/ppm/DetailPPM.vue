@@ -45,8 +45,8 @@
                     },
                     fixedWeekCount: false,
                     contentHeight: 650,
-                    viewRender: function(view, element) {
-                        $('.fc-center')[0].children[0].innerText = view.title.replace(new RegExp("undefined", 'g'), "");
+                    viewRender: function(view) {
+                       this.$('.fc-center')[0].children[0].innerText = view.title.replace(new RegExp("undefined", 'g'), "");
                     },
                     views: {
                         timelineCustom: {

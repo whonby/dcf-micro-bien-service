@@ -394,21 +394,55 @@
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
+          <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'CategorieGrade'}" tag="a">
+              <i class="icon-user"></i>
+              Catégorie grade
+            </router-link>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'Grades'}" tag="a">
+              <i class="icon-key"></i> Grades
+            </router-link>
+          </li>
+           <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'fonctionBudgetaire'}" tag="a">
+              <i class="icon-check"></i>
+              Fonction Budgétaire
+            </router-link>
+          </li>
+           <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'Fonction'}" tag="a">
+              <i class="icon-check"></i>
+              Fonction Administrative
+            </router-link>
+          </li>
+           <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'familleEmploie'}" tag="a">
+              <i class="icon-key"></i> Familles d'emplois            </router-link>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'ClassificationEmploisGradePrincipal'}" tag="a">
+              <i class="icon-user"></i>
+              Classification Grade et Emplois
+            </router-link>
+          </li>
+          <li class="divider"></li>
           <li>
             <router-link :to="{name: 'TypeActePersonnels'}" tag="a">
               <i class="icon-user"></i>
               Type d'acte
             </router-link>
           </li>
+         
           <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'Fonction'}" tag="a">
-              <i class="icon-check"></i>
-              Fonction
-            </router-link>
-          </li>
-          <li class="divider"></li>
-          <li>
+          <!-- <li>
             <router-link :to="{name: 'Classe'}" tag="a">
               <i class="icon-key"></i> Classe
             </router-link>
@@ -420,13 +454,13 @@
               <i class="icon-check"></i>
               Echelons
             </router-link>
-          </li>
-          <li class="divider"></li>
+          </li> -->
+          <!-- <li class="divider"></li>
           <li>
             <router-link :to="{name: 'Grades'}" tag="a">
               <i class="icon-key"></i> Grades
             </router-link>
-          </li>
+          </li> -->
            <li class="divider"></li>
           <li>
             <router-link :to="{name: 'NiveauEtude'}" tag="a">

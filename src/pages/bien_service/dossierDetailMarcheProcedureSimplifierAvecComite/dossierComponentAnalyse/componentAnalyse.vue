@@ -3,6 +3,7 @@
 
 <template>
     <div>
+      
         <!-- debut de liste analyse  -->
           <h4>Liste des dossiers analyses</h4>
                 <table class="table table-bordered table-striped" v-if="macheid">
@@ -24,7 +25,10 @@
                     <tr class="odd gradeX" v-for="(appelOffre, index) in listeAnalyseDossier(macheid)"
                         :key="appelOffre.id">
                         <td @click="afficheAnnalyseDossier(index)">
-                            {{appelOffre.cotation.ref_offre|| 'Non renseigné'}}</td>
+
+                            {{appelOffre.cotation_id|| 'Non renseigné'}}</td>
+
+                          
                         <!-- <td @click="afficheAnnalyseDossier(index)">
                             {{appelOffre.dossier_candidature.nom_cand || 'Non renseigné'}}</td> -->
                         <td @click="afficheAnnalyseDossier(index)">
@@ -69,10 +73,16 @@
                         <div class="control-group">
                         <label class="control-label">Reference offre</label>
                         <div class="controls">
-                            <select v-model="formAnalyseDossier.cotation_id" class="span" disabled>
+                            <!-- <select v-model="formAnalyseDossier.cotation_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
                                         :value="plans.id">{{plans.ref_offre}}</option>
-                            </select>
+                            </select> -->
+                           <input
+                                    type="text"
+                                    :value="listeAppelOffre(macheid)"
+                                    class="span"
+                                       readonly
+                            />
                         </div>
                         </div>
                             </td>
@@ -175,7 +185,7 @@
 
 
         
-        <div id="modificationAajouterAnalys01" class="modal hide grdirModalAnalyse">
+        <div id="modifierJugement" class="modal hide grdirModalAnalyse">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Modification du dossier Analyse</h3>
@@ -189,10 +199,12 @@
                                <div class="control-group">
                         <label class="control-label">Reference offre</label>
                         <div class="controls">
-                            <select v-model="edite_analyse_dossier.cotation_id" class="span" disabled>
-                                <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.ref_offre}}</option>
-                            </select>
+                          <input
+                                    type="text"
+                                    :value="listeAppelOffre(macheid)"
+                                    class="span"
+                                       readonly
+                            />
                         </div>
                         </div>
                           </td>
@@ -325,7 +337,7 @@ export default {
     created(){
     },
     computed:{
-       ...mapGetters("bienService", [ "typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+       ...mapGetters("bienService", ["appelOffres","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches", "gettersCotations",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","getterAnalyseDossiers","typeAnalyses", "analyseDossiers","text_juridiques"
@@ -350,27 +362,62 @@ export default {
             }
         },
             
-            listeAppelOffre(){
-                return  macheid=>{
-                    if (macheid!="") {
-                        //console.log("Marche appel offre")
-                       const vM=this;
-                        let Objet=this.gettersCotations.find( idmarche => idmarche.marche_id == macheid)
-                       // console.log("Marche appel offre 10")
-                        if(Objet!=undefined){
-                            //vM.formDossierCadidature.appel_offre_id=Objet.id;
-                            vM.formAnalyseDossier.cotation_id = Objet.id;
-                           // vM.formLot.appel_offre_id=Objet.id;
-                           // vM.formAno.appel_offre_id = Objet.id
-                           // vM.formLettre.appel_offre_id=Objet.id;
-                           // vM.formDataCojo.num_dossier_appel_offre=Objet.ref_appel;
-                        }
-                       // console.log(Objet)
-                    return this.gettersCotations.filter( idmarche => idmarche.marche_id == macheid)
-                    }
-                }
-            },
-              
+            // listeAppelOffre(){
+            //     return  macheid=>{
+            //         if (macheid!="") {
+            //             //console.log("Marche appel offre")
+            //            const vM=this;
+            //             let Objet=this.gettersCotations.find( idmarche => idmarche.marche_id == macheid)
+            //            // console.log("Marche appel offre 10")
+            //             if(Objet!=undefined){
+            //                 //vM.formDossierCadidature.appel_offre_id=Objet.id;
+            //                 vM.formAnalyseDossier.cotation_id = Objet.id;
+            //                // vM.formLot.appel_offre_id=Objet.id;
+            //                // vM.formAno.appel_offre_id = Objet.id
+            //                // vM.formLettre.appel_offre_id=Objet.id;
+            //                // vM.formDataCojo.num_dossier_appel_offre=Objet.ref_appel;
+            //             }
+            //            // console.log(Objet)
+            //         return this.gettersCotations.filter( idmarche => idmarche.marche_id == macheid)
+            //         }
+            //     }
+            // },
+              listeAppelOffre() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersCotations.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ref_offre;
+      }
+      return 0
+        }
+      };
+    },
+     listeAppel() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.appelOffres.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ref_appel;
+      }
+      return 0
+        }
+      };
+    },
+listeAppelOffreId() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersCotations.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
     },
     methods:{
         ...mapActions('bienService',['supprimerAnalyseDossier',
@@ -400,7 +447,8 @@ export default {
                ajouterAnalyseD(){
                    var nouvelObjet ={
                        ...this.formAnalyseDossier,
-                       marche_id:this.macheid
+                       marche_id:this.macheid,
+                        cotation_id :this.listeAppelOffreId(this.macheid)
                    }
               this.ajouterAnalyseDossier(nouvelObjet)
                 this.formAnalyseDossier={
@@ -415,17 +463,31 @@ export default {
                        // cojo_id:""
                 }
             },
+
+       
+
          modificationDossierAnalyse(){
-                this.modifierAnalyseDossier(this.edite_analyse_dossier)
+              var nouvelObjet1 ={
+                       ...this.edite_analyse_dossier,
+                       marche_id:this.macheid,
+                        cotation_id :this.listeAppelOffreId(this.macheid)
+                   }
+                this.modifierAnalyseDossier(nouvelObjet1)
                 this.$('#modificationAajouterAnalys01').modal('hide');
             },
+
          afficheAnnalyseDossier(index){
-                this.$('#modificationAajouterAnalys01').modal({
+                this.$('#modifierJugement').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
                 this.edite_analyse_dossier = this.listeAnalyseDossier(this.macheid)[index];
             },
+
+            //   modificationDossierAnalyse(){
+            //     this.modifierAnalyseDossier(this.edite_analyse_dossier)
+            //     this.$('#modifierJugement').modal('hide');
+            // },
 // formatage de date 
 formaterDate(date){
     return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");

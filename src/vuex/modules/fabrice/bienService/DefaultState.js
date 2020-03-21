@@ -67,12 +67,16 @@ documentProcedures:[],
     proce_verballe:[],
     avenants:[],
     modepaiements:[],
-    gettersCotations:[],
+    stateCotations:[],
     gettersOuvertures:[],
     gettersEtatProcedure:[],
     gettersPsc:[],
+    stateTransmissions:[],
+
+
     gettersTransmissions:[],
     plan_passation_marche:[],
+
 
 
 }

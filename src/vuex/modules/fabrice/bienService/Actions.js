@@ -1,8 +1,10 @@
 import axios from '../../fabrice/bienService/urls/api'
 import { asyncLoading } from 'vuejs-loading-plugin'
-modifierAppelOffre
+
 var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
+
+
 
 // action for print all to prestation
 
@@ -2333,8 +2335,8 @@ export function getTransmission({commit}) {
 
 // action pour ajouter les infos 
 
-export function ajouterTransmission({commit,dispatch}, elementAjout){
-  asyncLoading(axios.post('/add_transmission', elementAjout)).then(response =>{
+export function ajouterTransmission({commit,dispatch}, elementAjout,config){
+  asyncLoading(axios.post('/add_transmission', elementAjout,config)).then(response =>{
       if(response.status == 201){
         commit('AJOUTER_TRANSMISSION', response.data)
          dispatch('getTransmission')
@@ -2352,16 +2354,55 @@ export function ajouterTransmission({commit,dispatch}, elementAjout){
 
 
 
-export function modifiertransmission({ commit }, element_modifie) {
-  asyncLoading(axios.put('/update_transmission', element_modifie)).then(response => {
-    commit('MODIFIER_TRANSMISSION', response.data)
+// export function modifiertransmission({ commit }, element_modifie) {
+//   console.log("element_modifie")
+//   console.log(element_modifie)
+//   asyncLoading(axios.put('/update_transmission/'+ id, element_modifie)).then(response => {
+//     commit('MODIFIER_TRANSMISSION', response.data)
+//     this.$app.$notify({
+//       title: 'success ',
+//       text: 'Modification effectué !',
+//       type: "success"
+//     })
+//   }).catch(error => console.log(error))
+// }
+
+export function modifiertransmission({commit,dispatch}, element_modifie,config) {
+  asyncLoading( axios.post('/update_transmission',element_modifie,config)).then(response => {
+      commit('MODIFIER_TRANSMISSION', response.data)
+      dispatch('getTransmission')
+      this.$app.$notify({
+          title: 'success ',
+          text: 'Modification effectué !',
+          type:"success"
+      })
+  }).catch(error => console.log(error))
+}
 
 
-    this.$app.$notify({
-      title: 'success ',
-      text: 'Modification effectué !',
-      type: "success"
-    })
+export function modifierDecisionAnoDmp({commit,dispatch}, element_modifie,config) {
+  asyncLoading( axios.post('/update_transmission',element_modifie,config)).then(response => {
+      commit('MODIFIER_TRANSMISSION', response.data)
+      dispatch('getTransmission')
+        return this.$app.$notify({
+          title: 'success ',
+          text: 'Avis ANO sur le DAO effectué !',
+          type:"success"
+      }) 
+  }).catch(error => console.log(error))
+}
+
+
+
+export function modificationAvisBailleurDmp({commit,dispatch}, element_modifie,config) {
+  asyncLoading( axios.post('/update_transmission',element_modifie,config)).then(response => {
+      commit('MODIFIER_TRANSMISSION', response.data)
+      dispatch('getTransmission')
+        return this.$app.$notify({
+          title: 'success ',
+          text: 'Avis bailleur effectué !',
+          type:"success"
+      }) 
   }).catch(error => console.log(error))
 }
 
@@ -3141,6 +3182,17 @@ export function modifierDemandeAno({commit}, element_modifie,config) {
     }).catch(error => console.log(error))
 }
 
+export function modifierAvisAnoCf({commit,dispatch}, element_modifie,config) {
+  asyncLoading( axios.post('/rdemande_ano_update',element_modifie,config)).then(response => {
+      commit('MODIFIER_DEMANDE_ANO', response.data)
+      dispatch('getDemandeAno')
+      this.$app.$notify({
+          title: 'success ',
+          text: 'Decision effectué !',
+          type:"success"
+      })
+  }).catch(error => console.log(error))
+}
 
 export function supprimerDemandeAno({commit}, id) {
     this.$app.$dialog
@@ -3637,6 +3689,7 @@ export function getVille({ commit }) {
 
   }).catch(error => console.log(error)))
 }
+
 
 // action pour ajouter bailleur
 export function ajouterVille({ commit, dispatch}, formData) {

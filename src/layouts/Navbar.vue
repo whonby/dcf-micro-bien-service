@@ -101,7 +101,9 @@ export default {
             ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
             "getClasses","getEchelons","getActeur","getGrades","getNbrActeurAcrediteTaux",
-            "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite"]),
+            "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite","getCategorieGrade",
+"getFamilleFonction","getFonctionBudgetaire",
+"getClassificationGradeFonction"]),
 
       ...mapActions('gestionMarche',['getTypeMarche',"getSecteurActivite",
         "getEntreprise","getEtapeMarche","getDocumentPTBAPPM","getMarcheContrat","getPresenceCF",
@@ -216,11 +218,14 @@ this.getTypeAppel()
 this.getAllDirection()
 this.getAllServiceua()
 this.getAllFonction()
-
+this.getFonctionBudgetaire()
       this.getListeSalaireActuelAll()
     this.getTypeSalarie()
         this.getTypeActPersonnel()
         this.getFonctions()
+       this.getCategorieGrade()
+this.getFamilleFonction()
+this.getClassificationGradeFonction()
         this.getNiveauEtude()
         this.getTypeContrat()
         this.getClasses()
