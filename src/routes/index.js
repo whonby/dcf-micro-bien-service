@@ -5,7 +5,7 @@ import store from '../vuex/store'
 
 import ActeurDepenseRoutes from "./acteur_depense/ActeurDepenseRoutes"
 
-
+import CartographieRoute from "./cartographie/CartographieRoute"
 // les routes module unite administrative = gestion unite administrative
 import UniteAdministativeRoute from "./unite_administrative/UniteAdministativeRoute";
 
@@ -69,7 +69,8 @@ const regroupementDesRoutes = [
   MissionRoutes,
 planificationBudgetaireRoutes,
 BienServiceRoutes,
-investissementRoutes
+investissementRoutes,
+  CartographieRoute
 
 ];
 const routes = [].concat(...regroupementDesRoutes);
