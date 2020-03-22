@@ -96,8 +96,15 @@
             <span class="label label-important"></span>
           </a>
         </li> -->
+          <li >
+              <router-link :to="{name: 'CartographieBudget'}" title="Cartographie du budget" tag="a">
+                  <i class="icon icon-heart"></i>
+                  <span>CARTOGRAPHIE</span>
+                  <span class="label label-important"></span>
+              </router-link>
 
-           <li @click.prevent="logoutUser()" >
+          </li>
+          <li @click.prevent="logoutUser()" >
           <a title="DECONNEXION" href="#">
             <i class="icon icon-off"></i>
             <span>DECONNEXION</span>

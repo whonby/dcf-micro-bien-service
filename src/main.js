@@ -28,6 +28,9 @@ import "fullcalendar-scheduler";
 //import 'fullcalendar/dist/fullcalendar';
 import "fullcalendar/dist/fullcalendar.min.css";
 import "fullcalendar-scheduler/dist/scheduler.min.css";
+import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
+
+Vue.component('v-marker-cluster', Vue2LeafletMarkerCluster)
 Vue.component('downloadExcel', JsonExcel)
 //Vue.component(Balloon)
 //import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
