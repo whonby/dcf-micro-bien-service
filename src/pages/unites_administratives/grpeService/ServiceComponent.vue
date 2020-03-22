@@ -6,7 +6,7 @@
       <div class="accordion" >
 
         
-        <h5> {{afficherUniteAdministrative(groupe.d_ua_id)}}</h5>
+        <!-- <h5> {{afficherUniteAdministrative(groupe.d_ua_id)}}</h5> -->
           <div class="accordion-group widget-box">
            
             <div class="accordion-heading">

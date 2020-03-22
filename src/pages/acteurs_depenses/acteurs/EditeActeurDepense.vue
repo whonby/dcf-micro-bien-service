@@ -1,106 +1,174 @@
 
+
 <template>
-    <div>
-        <notifications />
-        <div class="container-fluid">
-            <hr>
-            <div class="row-fluid">
-                <div class="span12">
-                    <div class="widget-box">
-                        <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Modifiction d'acteur de depenses</h5>
-                        </div>
-                        <div class="widget-content nopadding">
-                            <form action="#" method="get" class="form-horizontal" enctype="multipart/form-data">
-                                <div class="row-fluid">
-                                    <div class="span6">
-                                        <div class="widget-box">
-                                            <div class="widget-content nopadding">
-                                                <div class="control-group">
+   
+<div class="container-fluid">
+      <hr />
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="widget-box">
+            <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              <h5>Ajouter Immobilisation</h5>
+              <!-- <div align="right">
+                Search:
+                <input type="search" placeholder />
+              </div>-->
+            </div>
+
+            <div class="table-responsive text-nowrap">
+              <table class="table table-bordered table-striped">
+                <div class="widget-box">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#tab1">INFORMATION PERSONNEL</a>
+                      </li>
+                      <li>
+                        <a data-toggle="tab" href="#tab2">DESCRIPTIF</a>
+                      </li>
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab3">Descriptif3</a>
+                      </li> -->
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab3">Autres Information</a>
+                      </li> -->
+                     
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content">
+                    <!--ongle identification-->
+                    <div id="tab1" class="tab-pane active">
+                      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Situation matrimoniale</label>
+                                                    <div class="controls">
+                                                        <select v-model="editPersonnel.situation_matrimonial" >
+                                                            <option></option>
+                                                            <option value="Marie">Marie</option>
+                                                            <option value="Celibataire">Celibataire</option>
+                                                             <option value="Divorce">Divorce</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                </td>
+                <td>
+ 
                                                     <label class="control-label">Matricule:</label>
                                                     <div class="controls">
-                                                        <input type="text"  v-model="formData.matricule" class="span7" placeholder="Saisir le matricule" />
+                                                        <input type="text"  v-model="editPersonnel.matricule"  placeholder="Saisir le matricule" />
                                                     </div>
-                                                </div>
-                                                <div class="control-group">
+                                                
+                </td>
+                 <td>
+                    <div class="control-group">
                                                     <label class="control-label">Nom:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="formData.nom" class="span5" placeholder="Saisir le nom" />
+                                                        <input type="text" v-model="editPersonnel.nom"  placeholder="Saisir le nom" />
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
+                </td>
+                 <td>
+                     <div class="control-group">
                                                     <label class="control-label">Prenom:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="formData.prenom" class="span8" placeholder="Saisir le prenom" />
+                                                        <input type="text" v-model="editPersonnel.prenom"  placeholder="Saisir le prenom" />
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
+                </td>
+                 <td>
+                     <div class="control-group">
                                                     <label class="control-label">Sexe:</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.sexe" class="span3">
+                                                        <select v-model="editPersonnel.sexe" >
                                                             <option></option>
                                                             <option value="H">Homme</option>
                                                             <option value="F">Femme</option>
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
+                </td>
+                 
+            </tr>
+            <tr>
+                <td>
+                    <div class="control-group">
                                                     <label class="control-label">Numero CNI:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="formData.numero_cni" class="span8" placeholder="Saisir le numero cni" />
+                                                        <input type="text" v-model="editPersonnel.numero_cni"  placeholder="Saisir le numero cni" />
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
+                </td>
+                <td>
+                     <div class="control-group">
                                                     <label class="control-label">Numero passeport:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="formData.numero_passeport" class="span8" placeholder="Saisir le numero passeport" />
+                                                        <input type="text" v-model="editPersonnel.numero_passeport"  placeholder="Saisir le numero passeport" />
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
+                </td>
+                <td>
+                     <div class="control-group">
                                                     <label class="control-label">Date de naissance:</label>
                                                     <div class="controls">
-                                                        <input type="date" v-model="formData.date_naissance" class="span4" placeholder="Saisir la date de naissance" />
+                                                        <input type="date" v-model="editPersonnel.date_naissance"  placeholder="Saisir la date de naissance" />
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label class="control-label">Nom du père:</label>
+                </td>
+                <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Nom du pere:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="formData.nom_pere" class="span8" placeholder="Saisir le nom du pere" />
+                                                        <input type="text" v-model="editPersonnel.nom_pere"  placeholder="Saisir le nom du pere" />
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label class="control-label">Nom de la mère:</label>
+                </td>
+                <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Nom de la mere:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="formData.nom_mere" class="span8" placeholder="Saisir le nom de la mere" />
+                                                        <input type="text" v-model="editPersonnel.nom_mere"  placeholder="Saisir le nom de la mere" />
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span6">
-                                        <div class="widget-box">
-                                            <div class="widget-content nopadding">
-                                                <div class="control-group">
-                                                    <label class="control-label">Reference acte:</label>
+                </td>
+            </tr>
+            </table>
+          </div>
+          
+                    </div>
+                    <!--ongle descriptif-->
+                    <div id="tab2" class="tab-pane">
+                      
+  <div class="modal-body">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td>
+                    <div class="control-group">
+                                                    <label class="control-label">Exercice budgetaire:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="formData.code" class="span8" placeholder="Saisir la reference" />
-                                                    </div>
-                                                </div>
-                                                <div class="control-group">
-                                                    <label class="control-label">Type acte de personnel</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.type_acte_id">
-                                                            <option></option>
-                                                            <option v-for="item in type_acte_personnels" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
+                                                        <!-- <select v-model="editPersonnel.exercice_budgetaire_id">
+                                                            <option v-for="item in exercices_budgetaires" :key="item.id" :value="item.id">
+                                                                {{item.annee}}
                                                             </option>
-                                                        </select>
+
+                                                        </select> -->
+                                                        
+                                                     
+                                                        <input type="text" :value="exoEnCours" readonly/>
+                                                   
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
+                </td>
+                <td>
+                     <div class="control-group">
                                                     <label class="control-label">L'unite administrative:</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.unite_administrative_id">
+                                                        <select v-model="editPersonnel.unite_administrative_id">
                                                             <option></option>
                                                             <option v-for="item in uniteAdministratives" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -109,34 +177,95 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label class="control-label">Date debut contrat:</label>
+                </td>
+                <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Unite de Zone</label>
                                                     <div class="controls">
-                                                        <input type="date" v-model="formData.date_debut_contrat" class="span4" placeholder="" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="control-group">
-                                                    <label class="control-label">Type salarie</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.type_salarie_id">
+                                                        <select v-model="editPersonnel.uniteZone_id" :disabled="verrouilleUniteZone">
                                                             <option></option>
-                                                            <option v-for="item in type_salaries" :key="item.id" :value="item.id">
+                                                            <option v-for="item in afficheUniteZone(editPersonnel.unite_administrative_id)" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
+
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label class="control-label">Salaire:</label>
+                </td>
+                <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Service</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="formData.salaires" class="span8" placeholder="Saisir le salaire" />
+                                                        <select v-model="editPersonnel.service_id" :disabled="verrouilleService">
+                                                            <option></option>
+                                                            <option v-for="item in afficheService(editPersonnel.unite_administrative_id)" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
                                                     </div>
                                                 </div>
+                </td>
+                <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Fonctions</label>
+                                                    <div class="controls">
+                                                        <select v-model="editPersonnel.fonction_id" :disabled="verrouilleFonction">
+                                                            <option></option>
+                                                            <option v-for="item in afficheFonction(editPersonnel.service_id)" :key="item.id" :value="item.fonction_id">
+                                                                {{afficheLibelleFonction(item.fonction_id)}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                     
                                                 <div class="control-group">
+                                                    <label class="control-label">Grades</label>
+                                                    <div class="controls">
+                                                        <!-- <select v-model="editPersonnel.grade_id">
+                                                            <option></option>
+                                                            <option v-for="item in grades" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select> -->
+                                                        
+                                                         <input type="text" :value="afficheLibelle(afficheGrade(editPersonnel.fonction_id))" readonly/>
+                                                    </div>
+                                                </div>
+                </td>
+                <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Reference acte:</label>
+                                                    <div class="controls">
+                                                        <input type="text" v-model="editPersonnel.code"  placeholder="Saisir la reference" />
+                                                    </div>
+                                                </div>
+                </td>
+                <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Type acte de personnel</label>
+                                                    <div class="controls">
+                                                        <select v-model="editPersonnel.type_acte_id">
+                                                            <option></option>
+                                                            <option v-for="item in type_acte_personnels" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                </td>
+                <td>
+                     <div class="control-group">
                                                     <label class="control-label">Type contrat</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.type_contrat_id">
+                                                        <select v-model="editPersonnel.type_contrat_id">
                                                             <option></option>
                                                             <option v-for="item in type_contrats" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -145,10 +274,59 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
+                </td>
+                <td>
+                      <div class="control-group">
+                                                    <label class="control-label">Date debut contrat:</label>
+                                                    <div class="controls">
+                                                        <input type="date" v-model="editPersonnel.date_debut_contrat"  placeholder="" />
+                                                    </div>
+                                                </div>
+                </td>
+   
+            </tr>
+            <tr>
+              <td colspan="2">
+                <div class="control-group">
+                                                    <label class="control-label">Ligne budgetaires:</label>
+                                                    <div class="controls">
+
+                                                        <select v-model="editPersonnel.plan_budgetaire_id" class="span18">
+                                                            <option v-for="item in afficheBudgetPersonnel(editPersonnel.unite_administrative_id)" :key="item.id" :value="item.economique_id">
+                                                               {{item.afficheEconomique.code}} - {{item.afficheEconomique.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+              </td>
+                
+                                 <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Type salarie</label>
+                                                    <div class="controls">
+                                                        <select v-model="editPersonnel.type_salarie_id">
+                                                            <option></option>
+                                                            <option v-for="item in type_salaries" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                </td>
+                <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Salaire:</label>
+                                                    <div class="controls">
+                                                        <input type="text" v-model="editPersonnel.salaires"  placeholder="Saisir le salaire" />
+                                                    </div>
+                                                </div>
+                </td>
+                <td>
+                     <div class="control-group">
                                                     <label class="control-label">Type niveau etude</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.niveau_etude_id">
+                                                        <select v-model="editPersonnel.niveau_etude_id">
                                                             <option></option>
                                                             <option v-for="item in niveau_etudes" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -157,76 +335,47 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="widget-box">
-                                            <div class="widget-content nopadding">
-                                                <div class="control-group">
-                                                    <label class="control-label">Exercice budgetaire:</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.exercice_budgetaire_id">
-                                                            <option v-for="item in exercices_budgetaires" :key="item.id" :value="item.id">
-                                                                {{item.annee}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="control-group">
-                                                    <label class="control-label">Ligne budgetaires:</label>
-                                                    <div class="controls">
-
-                                                        <select v-model="formData.plan_budgetaire_id">
-                                                            <option v-for="item in plans_budgetaires" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="control-group">
-                                                    <label class="control-label">Fonctions</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.fonction_id">
-                                                            <option></option>
-                                                            <option v-for="item in fonctions" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="control-group">
-                                                    <label class="control-label">Grades</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.grade_id">
-                                                            <option></option>
-                                                            <option v-for="item in grades" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="form-actions">
-                                            <a @click.prevent="ajouterTitreLocal" class="btn btn-primary"
-                                               href="#">Valider</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </form>
-                        </div>
+                </td>
+            </tr>
+        </table>
+  </div>
                     </div>
+                     <!-- <div id="tab3" class="tab-pane">
+                      
+
+                    </div> -->
+                    <!--ongle 3 -->
+                    <!-- <div id="tab3" class="tab-pane">
+                    
+                      
+                    </div> -->
+                  </div>
+                  <br />
+                  <div align="right">
+                    <div class="controls">
+                      <div data-toggle="buttons-checkbox" class="btn-group">
+                        <a
+                          class="btn btn-primary"
+                          @click.prevent="ajouterTitreLocal"
+                        >Valider</a>
+                        <a
+                          @click.prevent="afficherModalListePersonnel()"
+                          class="btn"
+                          href="#"
+                        >Fermer</a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </table>
             </div>
+          </div>
         </div>
-
-
+      </div>
+      <notifications/>
     </div>
+
+
 
 </template>
 <script>
@@ -243,8 +392,15 @@
                     },
 
                 ],
+                created() {
+    this.editImmobilisation = this.immobilisations.find(
+      immo => immo.id == this.$route.params.id
+    );
+
+    //console.log(this.$router);
+  },
                 liste:[],
-                formData : {
+                 editPersonnel : {
                     matricule: "",
                     nom: "",
                     prenom: "",
@@ -266,8 +422,12 @@
                     type_acte_id:"",
                     grade_id:"",
                     fonction_id:"",
-                    plan_budgetaire_id:''
+                    plan_budgetaire_id:'',
+                    uniteZone_id:"",
+                    situation_matrimonial:"",
+                    service_id:""
                 },
+
 
                 editTitre: {
                     code: "",

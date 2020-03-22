@@ -47,11 +47,11 @@
                      <div class="control-group">
                                                     <label class="control-label">Situation matrimoniale</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.sexe" >
+                                                        <select v-model="formData.situation_matrimonial" >
                                                             <option></option>
-                                                            <option value="1">Marie</option>
-                                                            <option value="2">Celibataire</option>
-                                                             <option value="3">Divorce</option>
+                                                            <option value="Marie">Marie</option>
+                                                            <option value="Celibataire">Celibataire</option>
+                                                             <option value="Divorce">Divorce</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -209,10 +209,10 @@
                      <div class="control-group">
                                                     <label class="control-label">Fonctions</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.fonction_id">
+                                                        <select v-model="formData.fonction_id" :disabled="verrouilleFonction">
                                                             <option></option>
-                                                            <option v-for="item in afficheFonction(formData.service_id)" :key="item.id" :value="item.id">
-                                                                {{item.fonction_id}}
+                                                            <option v-for="item in afficheFonction(formData.service_id)" :key="item.id" :value="item.fonction_id">
+                                                                {{afficheLibelleFonction(item.fonction_id)}}
                                                             </option>
 
                                                         </select>
@@ -285,7 +285,21 @@
    
             </tr>
             <tr>
-                <td>
+              <td colspan="2">
+                <div class="control-group">
+                                                    <label class="control-label">Ligne budgetaires:</label>
+                                                    <div class="controls">
+
+                                                        <select v-model="formData.plan_budgetaire_id" class="span18">
+                                                            <option v-for="item in afficheBudgetPersonnel(formData.unite_administrative_id)" :key="item.id" :value="item.economique_id">
+                                                               {{item.afficheEconomique.code}} - {{item.afficheEconomique.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+              </td>
+                
                                  <td>
                      <div class="control-group">
                                                     <label class="control-label">Type salarie</label>
@@ -392,6 +406,7 @@
 
 
 
+
 </template>
 <script>
 
@@ -431,7 +446,9 @@
                     grade_id:"",
                     fonction_id:"",
                     plan_budgetaire_id:'',
-                    uniteZone_id:""
+                    uniteZone_id:"",
+                    situation_matrimonial:"",
+                    service_id:""
                 },
 
                 editTitre: {
@@ -462,6 +479,9 @@
     },
     verrouilleService() {
       return this.formData.uniteZone_id == "";
+    },
+    verrouilleFonction() {
+      return this.formData.service_id == "";
     },
 
  afficheUniteZone() {
@@ -495,6 +515,15 @@ exoEnCours() {
       }
       return 0
     },
+    afficheIdExerciceEnCours() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.annee == this.exoEnCours);
+
+      if (norme) {
+        return norme.id;
+      }
+      return 0
+    },
     afficheBudgetPersonnel() {
       return id => {
         if (id != null && id != "") {
@@ -502,7 +531,8 @@ exoEnCours() {
         }
       };
     },
-     
+    
+        
 
         afficheGrade() {
       return id => {
@@ -511,6 +541,18 @@ exoEnCours() {
 
       if (qtereel) {
         return qtereel.grade_id;
+      }
+      return 0
+        }
+      };
+    },
+          afficheLibelleFonction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.fonctions.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
       }
       return 0
         }
@@ -543,8 +585,13 @@ exoEnCours() {
             },
             // fonction pour vider l'input
             ajouterTitreLocal () {
+              var nouveauObjet={
+                ...this.formData,
+                exercice_budgetaire_id:this.afficheIdExerciceEnCours,
+                grade_id:this.afficheGrade(this.formData.fonction_id)
+              }
                 console.log(this.formData)
-                this.ajouterActeur(this.formData)
+                this.ajouterActeur(nouveauObjet)
                 this.getActeur()
                 this.formData = {
                     code: "",

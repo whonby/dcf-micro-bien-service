@@ -1,5 +1,5 @@
 import { groupBy } from "../../../../Repositories/Repository";
-
+besoinEquipement
 export const factures = state => state.factures
 export const normeImmo = state => state.normeImmo
 
@@ -923,6 +923,39 @@ export const besoinRealiseEquipement = (state, getters, rootState, rootGetters) 
 
     return element;
   });
+
+
+
+
+export const afficherDirection = state =>
+  state.besoinImmobilisations.filter(
+    trieUaBesoin => trieUaBesoin.direction != null
+  );
+
+
+export const afficherService = state =>
+  state.besoinImmobilisations.filter(
+    trieUaBesoin => trieUaBesoin.service_id != null
+  );
+
+
+export const afficherFonction = state =>
+  state.besoinImmobilisations.filter(
+    trieUaBesoin => trieUaBesoin.fonction_id != null
+  );
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

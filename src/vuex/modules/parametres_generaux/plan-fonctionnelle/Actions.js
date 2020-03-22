@@ -189,7 +189,7 @@ export function ajouterPlanDecision({ commit, dispatch }, objetAjout) {
         commit('AJOUTER_PLAN_DECISION', response.data)
         
         dispatch('getPlanDecision')
-        
+        dispatch('getStructureDecision')
         this.$app.$notify({
             title: 'success ',
             text: 'Enregistrement effectué avec success !',
@@ -227,5 +227,133 @@ export function supprimerPlanDecision({ commit, dispatch }, id) {
 
             // // dialog.loading(false) // stops the proceed button's loader
             axios.delete('/supprimer_PlanMotifDecision/' + id).then(() => dialog.close())
+        })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export function getStructureActe({ commit }) {
+    queue.push(() => axios.get('/liste_StructureActe').then(tony => {
+        commit('GET_STRUCTURE_ACTE', tony.data)
+    }).catch(error => console.log(error)))
+}
+
+// ajouter structure fonctionnelle
+export function ajouterStructureActe({ commit }, objetAjout) {
+    asyncLoading(axios.post('/ajouter_StructureActe', {
+        niveau: objetAjout.niveau,
+        libelle: objetAjout.libelle,
+
+    })).then(tony => {
+        if (tony.status == 201) {
+            commit('AJOUTER_STRUCTURE_ACTE', tony.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué avec success !',
+                type: "success"
+            })
+        }
+    }).catch(error => console.log(error))
+}
+// supprimer structure fonctionnelle
+export function supprimerStructureActe({ commit }, id) {
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_STRUCTURE_ACTE', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/supprimer_StructureActe/' + id).then(() => dialog.close())
+        })
+}
+//modifier structure fonctionnelle
+export function modifierStructureActe({ commit }, source_financement) {
+
+    asyncLoading(axios.put('/modifier_StructureActe/' + source_financement.id, {
+        niveau: source_financement.niveau,
+        libelle: source_financement.libelle,
+
+    })).then(response => {
+        commit('MODIFIER_STRUCTURE_ACTE', response.data)
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué avec success !',
+            type: "success"
+        })
+    }).catch(error => console.log(error))
+
+}
+
+// get all of plan fonctionnelle
+export function getPlanActe({ commit }) {
+    queue.push(() => axios.get('/liste_PlanActe').then(tony => {
+        commit('GET_PLAN_ACTE', tony.data)
+    }).catch(error => console.log(error)))
+
+}
+
+// ajouter plan fonctionnelle
+export function ajouterPlanActe({ commit, dispatch }, objetAjout) {
+    asyncLoading(axios.post('/ajouter_PlanActe', objetAjout)).then(response => {
+        commit('AJOUTER_PLAN_ACTE', response.data)
+
+        dispatch('getPlanActe')
+        dispatch('getStructureActe')
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué avec success !',
+            type: "success"
+        })
+    }).catch(error => console.log(error))
+}
+// modifier plan fonctionnelle
+
+export function modifierPlanActe({ commit, dispatch }, plan_fonctionnel) {
+    asyncLoading(axios.put('/modifier_PlanActe/' + plan_fonctionnel.id, {
+        code: plan_fonctionnel.code,
+        libelle: plan_fonctionnel.libelle,
+        structure_Acte_id: plan_fonctionnel.structure_Acte_id
+    })).then(res => {
+        commit('MODIFIER_PLAN_ACTE', res.data)
+        dispatch('getPlanActe')
+        dispatch('getStructureActe')
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué avec success !',
+            type: "success"
+        })
+    }).catch(error => console.log(error))
+}
+// supprimer plan fonctionnelle
+export function supprimerPlanActe({ commit, dispatch }, id) {
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_PLAN_ACTE', id)
+            dispatch('getPlanActe')
+            dispatch('getStructureActe')
+
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/supprimer_PlanActe/' + id).then(() => dialog.close())
         })
 }

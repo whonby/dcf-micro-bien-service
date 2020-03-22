@@ -5,7 +5,7 @@
  
   
       <div class="accordion" >
-        <h5>{{afficherUniteAdministrative(groupe.s_ua_id)}}</h5>
+        <!-- <h5>{{afficherUniteAdministrative(groupe.s_ua_id)}}</h5> -->
       
           <div class="accordion-group widget-box">
             <div class="accordion-heading">

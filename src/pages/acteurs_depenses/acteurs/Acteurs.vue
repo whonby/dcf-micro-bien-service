@@ -57,21 +57,30 @@
                                         <table class="table table-bordered table-striped">
                                             <thead>
                                             <tr>
+                                                <th>Situation matrimoniale </th>
                                                 <th>Matricule </th>
                                                 <th>Nom</th>
                                                 <th>Prenom</th>
                                                 <th>Date de naissance</th>
-                                                <th>Unite administrative</th>
-                                                <th>Action</th>
+                                                <th >Unite administrative</th>
+                                                
+                                                <th style="width:10px">Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr class="odd gradeX" v-for="item in acteurActivite" :key="item.id">
+                                                  <!-- <td @dblclick="afficherModalModifierTitre(item.id)">{{item.situation_matrimonial || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.matricule || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.nom || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_naissance) }}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.uniteAdmin.libelle || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.uniteAdmin.libelle || 'Non renseigné'}}</td> -->
+                                                 <td >{{item.situation_matrimonial || 'Non renseigné'}}</td>
+                                                <td >{{item.matricule || 'Non renseigné'}}</td>
+                                                <td >{{item.nom || 'Non renseigné'}}</td>
+                                                <td >{{item.prenom || 'Non renseigné'}}</td>
+                                                <td >{{formaterDate(item.date_naissance) }}</td>
+                                                <td >{{item.uniteAdmin.libelle || 'Non renseigné'}}</td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <router-link :to="{ name: 'ActeurDetail', params: { id: item.id }}" class="btn btn-default ">
@@ -102,6 +111,7 @@
                                         <table class="table table-bordered table-striped">
                                             <thead>
                                             <tr>
+                                                <th>Situation matrimoniale </th>
                                                 <th>Matricule </th>
                                                 <th>Nom</th>
                                                 <th>Prenoms</th>
@@ -114,6 +124,7 @@
                                             </thead>
                                             <tbody>
                                             <tr class="odd gradeX" v-for="item in affichePersonnelRecuActeNormination" :key="item.id">
+                                                  <td >{{afficheSituationMatrimonial(item.acteur_depense_id) || 'Non renseigné'}}</td>
                                                 <td >{{afficheMatriculePersonnel(item.acteur_depense_id) || 'Non renseigné'}}</td>
                                                 <td >{{afficheNomPersonnel(item.acteur_depense_id) || 'Non renseigné'}}</td>
                                                 <td >{{affichePrenomsPersonnel(item.acteur_depense_id) || 'Non renseigné'}}</td>
@@ -637,6 +648,18 @@
         }
       };
     },
+      afficheSituationMatrimonial() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.situation_matrimonial;
+      }
+      return 0
+        }
+      };
+    },
     afficheUniteAdministrative() {
       return id => {
         if (id != null && id != "") {
@@ -679,11 +702,20 @@
                 this.allActeurDepense()
                 this.getNbrActeurAcrediteTaux();
             },
-            afficherModalModifierTitre(index){
+            // afficherModalModifierTitre(index){
 
-                this.$router.push({ name: 'EditActeurDepense', params: { id: index } })
+            //     this.$router.push({ path: 'EditActeurDepense', params: { id: index } })
 
-            },
+            // },
+
+
+ afficherModalModifierTitre(id) {
+      this.$router.push({
+        path: "/Modifier_immobilisation/" + id
+      });
+    },
+
+
             formaterDate(date) {
                 return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },

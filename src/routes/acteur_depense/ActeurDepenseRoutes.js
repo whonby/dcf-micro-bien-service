@@ -106,7 +106,8 @@ const ActeurDepenseRoutes = [
     path: "/edit-acteur-depense/:id",
     name: "EditActeurDepense",
     component: EditActeurDepense
-  }
+  },
+    
 ];
 
 export default ActeurDepenseRoutes;

@@ -132,10 +132,66 @@ const SUPPRIMER_PLAN_DECISION = (state, id) => {
 
 
 
+// get all plan fonctionnelle
+const GET_PLAN_ACTE = (state, tableau_plan_fonctionnele) => {
+    state.planActe = tableau_plan_fonctionnele
+}
+
+// ajouter type de financement 
+const AJOUTER_PLAN_ACTE = (state, nouvel_objet) => {
+
+    state.planActe.unshift(nouvel_objet)
+}
+// modififier type de financement 
+const MODIFIER_PLAN_ACTE = (state, objetModifie) => {
+
+    state.planActe = state.planActe.map(plan_fonctionnelle => {
+        if (plan_fonctionnelle.id == objetModifie.id) {
+            plan_fonctionnelle = { ...objetModifie }
+        }
+        return plan_fonctionnelle
+    })
+}
+
+// suppression de source de financement
+const SUPPRIMER_PLAN_ACTE = (state, id) => {
+    state.planActe = state.planActe.filter(plan_fonctionnelle =>
+        plan_fonctionnelle.id != id)
+}
 
 
 
 
+
+
+const GET_STRUCTURE_ACTE = (state, tableau_structure_fonctionnelle) => {
+
+    state.structureActe = tableau_structure_fonctionnelle
+}
+
+// ajouter source de financement
+const AJOUTER_STRUCTURE_ACTE = (state, nouvel_objet) => {
+    state.structureActe.unshift(nouvel_objet)
+}
+
+// suppression de source de financement
+const SUPPRIMER_STRUCTURE_ACTE = (state, id) => {
+    state.structureActe = state.structureActe.filter(fonctionnelle =>
+        fonctionnelle.id != id)
+}
+
+//modifier siource de financement
+const MODIFIER_STRUCTURE_ACTE = (state, objetModifie) => {
+
+    state.structureActe = state.structureActe.map(fonctionnelle => {
+
+        if (fonctionnelle.id == objetModifie.id) {
+            fonctionnelle = { ...objetModifie }
+
+        }
+        return fonctionnelle
+    })
+}
 
 
 
@@ -156,7 +212,15 @@ export {
     SUPPRIMER_PLAN_DECISION,
 
 
+    GET_STRUCTURE_ACTE,
+    AJOUTER_STRUCTURE_ACTE,
+    SUPPRIMER_STRUCTURE_ACTE,
+    MODIFIER_STRUCTURE_ACTE,
 
+    GET_PLAN_ACTE,
+    AJOUTER_PLAN_ACTE,
+    MODIFIER_PLAN_ACTE,
+    SUPPRIMER_PLAN_ACTE,
 
 
 
