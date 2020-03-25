@@ -1,4 +1,4 @@
-getMandatPersonnaliserVise
+affichePlanifier
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays
@@ -165,7 +165,7 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
         return element;
     })
 
-    //gettersTransmissions
+    //stateTransmissions
     // getters d'etat de procedure
 
 

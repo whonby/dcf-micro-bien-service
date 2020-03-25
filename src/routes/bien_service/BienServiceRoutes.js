@@ -59,6 +59,8 @@ import DetailMarchePs from '../../pages/bien_service/dossierDetailMarchePs/Detai
  import indicateurBienService from '../../pages/bien_service/contractualisation/indicateurBienService.vue';
 import PlanPassationMarche from "../../pages/bien_service/ppm/PlanPassationMarche";
 import DetailPPM from "../../pages/bien_service/ppm/DetailPPM";
+import detailMarcheFsqc from "../../pages/bien_service/dossierFSQC/detailMarcheFsqc";
+import detailMarcheR3cv from "../../pages/bien_service/dossierR3CV/detailMarcheR3cv";
 const BienServiceRoutes = [
     {
         path: "indicateur-Bien-Service",
@@ -77,8 +79,20 @@ const BienServiceRoutes = [
         name:"detailMarchePsLimite",
         component:detailMarchePsLimite
     },
-    // chemin de procedure d'appel offre iternational et national
 
+    {
+        path:"/detail-marche-fsqc/:id",
+        name:"detailMarcheFsqc",
+        component:detailMarcheFsqc
+    },
+
+    {
+        path:"/detail-marche-R3cv/:id",
+        name:"detailMarcheR3cv",
+        component:detailMarcheR3cv
+    },
+    // chemin de procedure d'appel offre iternational et national
+    
     {
         path:"/detail-marche-AOI-AON/:id",
         name:"detailMarcheAoi_Aon",

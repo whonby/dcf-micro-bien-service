@@ -390,22 +390,12 @@ export default {
       if (qtereel) {
         return qtereel.ref_offre;
       }
-      return 0
-        }
-      };
-    },
-     listeAppel() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.appelOffres.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.ref_appel;
-      }
       return 0
         }
       };
     },
+    
 listeAppelOffreId() {
       return id => {
         if (id != null && id != "") {
@@ -418,6 +408,19 @@ listeAppelOffreId() {
         }
       };
     },
+    
+    //  listeAppel() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.gettersCotations.find(qtreel => qtreel.id == id);
+
+    //   if (qtereel) {
+    //     return qtereel.ref_appel;
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
     },
     methods:{
         ...mapActions('bienService',['supprimerAnalyseDossier',

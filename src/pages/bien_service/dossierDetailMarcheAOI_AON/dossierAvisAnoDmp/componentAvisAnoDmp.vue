@@ -261,6 +261,7 @@ selectedFileDemandeAno:""
             }, 
 
 
+
              listeAppelOffre(){
                 return  macheid=>{
                     if (macheid!="") {

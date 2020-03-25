@@ -119,12 +119,12 @@
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab2078">Toutes les marches    <span class="badge badge-inverse" >{{nombreTotalMarche}}</span></a></li>
-                               <li ><a data-toggle="tab" href="#tab100">Marchés Planifiés        <span class="badge badge-important" >    {{AfficheMarcheNonAttribue}}</span></a></li>
-                                <li ><a data-toggle="tab" href="#tab10">En cours Contratualisation        <span class="badge badge-success" >{{NombreafficheContrat}}</span></a></li>
-                                <li><a data-toggle="tab" href="#tab20">Marchés en Exécution      <span class="badge badge-warning" >     {{afficheNombreMarchExecuter}}</span></a></li>
-                                <!-- <li><a data-toggle="tab" href="#tab208">Marchés Terminés      <span class="badge badge" >     {{0}}</span></a></li> -->
-                                 <li><a data-toggle="tab" href="#tab20002">Marchés Résiliés    <span class="badge badge-info" >     {{afficheNombreMarcheResilier}}</span></a></li>
+                               <li class="active"><a data-toggle="tab" href="#tab2078">Toutes les contrats<span class="badge badge-inverse" >{{nombreTotalMarche}}</span></a></li>
+                               <li ><a data-toggle="tab" href="#tab100">Contrat Planifiés<span class="badge badge-important" >    {{AfficheMarcheNonAttribue}}</span></a></li>
+                                <li ><a data-toggle="tab" href="#tab10">En cours Contratualisation<span class="badge badge-success" >{{NombreafficheContrat}}</span></a></li>
+                                <li><a data-toggle="tab" href="#tab20">Contrat en Exécution<span class="badge badge-warning" >     {{afficheNombreMarchExecuter}}</span></a></li>
+                                <!-- <li><a data-toggle="tab" href="#tab208">Marchés Terminés<span class="badge badge" >     {{0}}</span></a></li> -->
+                                 <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" >     {{afficheNombreMarcheResilier}}</span></a></li>
                                   <!-- <li><a data-toggle="tab" href="#tab99999">Exemple2  </a></li>  -->
                                 <!-- <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li>-->
@@ -142,7 +142,7 @@
                 <input type="search"  v-model="search" />
               </div>
             </div>
-                             <table class="table table-bordered table-striped">
+                 <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
                 <th>Ann&eacute;e</th>
@@ -180,7 +180,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marches En cours de Contratualisation</h5>
+              <h5>Liste des contrats En cours de Contratualisation</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -267,7 +267,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des March&eacute;s</h5>
+              <h5>Liste des Contrats&eacute;s</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -285,15 +285,15 @@
                     <th>Objet marché</th>
                     <th>Reference marché</th>
                      <!-- <th>Numero marché</th> -->
-                    <th>Montant prévu</th>
-                    <th>marché Attribuer</th>
+                    <!-- <th>Montant prévu</th> -->
+                    <th>contrat Attribuer</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                  
                         <tr class="odd gradeX" v-for="(marche, index) in 
-                typePrestationFiltre"
+                afficherLaListeDesContratsDuPersonnel"
                  :key="marche.id">
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
@@ -314,8 +314,8 @@
                    {{marche.reference_marche || 'Non renseigné'}}</td>
                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
-                   {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
+                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
+                   {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td> -->
                   
 <td>
                      <button 
@@ -337,25 +337,25 @@
                   <span class=""><i class="icon-folder-open"></i></span>
                    </router-link>  -->
                    
-                 <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+                 <!-- <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail marche">
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link> 
                    <router-link :to="{name:'detailMarcheFsqc',params:{id:marche.id}}"
                    class="btn btn-default"  title="detail marche SFQC">
                    <span class=""><i class="icon-book"></i></span>
+                   </router-link> -->
+
+                  <router-link :to="{name:'detailPersonnel',params:{id:marche.id}}"
+                   class="btn btn-default"  title="detail personnel R3CV">
+                   <span class=""><i class="icon-folder-open"></i></span>
                    </router-link>
 
-                  <router-link :to="{name:'detailMarcheR3cv',params:{id:marche.id}}"
-                   class="btn btn-default"  title="detail marche R3CV">
-                   <span class=""><i class="icon-plus"></i></span>
-                   </router-link>
 
-
-                   <router-link :to="{name:'detailMarcheAoi_Aon',params:{id:marche.id}}"
+                   <!-- <router-link :to="{name:'detailMarcheAoi_Aon',params:{id:marche.id}}"
                    class="btn btn-default"  title="detail marche AOI-AON">
                    <span class=""><i class="icon-user"></i></span>
-                   </router-link>
+                   </router-link> -->
 
 
                    
@@ -386,12 +386,12 @@
                       <td>
                           
                       </td>
-                       <td style="font-weight:bold;"> Total Marché
+                       <!-- <td style="font-weight:bold;"> Total Marché
                       </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
                            {{formatageSomme(parseFloat(montantMarche))}}
                            
-                      </td>
+                      </td> -->
                        <td>
                           
                       </td>
@@ -409,7 +409,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des marchés en executions</h5>
+              <h5>Liste des contrats en executions</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -458,7 +458,7 @@
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_act)) || 'Non renseigné'}}</td>
-                  
+                    
 <td>
                      <button 
                       v-if="marche.AfficheMarche.attribue == 1"  class="btn  btn-warning">
@@ -487,7 +487,7 @@
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link>  -->
                     <button   class="btn btn-info " title="Ajouter marché resilié" @click="afficherModalMarcheResilier(index)">
-                <span class=""><i class="icon-pencil"></i></span></button>
+                <span class=""><i class="icon-folder-open"></i></span></button>
               <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
@@ -506,7 +506,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marches en Planifications</h5>
+              <h5>Liste des contrats en Planifications</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -630,7 +630,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marchés résiliés</h5>
+              <h5>Liste des contrats résiliés</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -815,7 +815,10 @@ export default {
   },
 
   computed: {
-     ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser','acteEffetFinanciers','montantPlanifier','montantContratualisation','afficheContratualisation','affichePlanifier','nombremarchesExecute','afficheMarchePlanifier','afficheMarcheContratualisation','AfficheMarcheAttribue','AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
+     ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser','acteEffetFinanciers','montantPlanifier','montantContratualisation',
+     'afficheContratualisation','affichePlanifier','nombremarchesExecute','afficheMarchePlanifier','afficheMarcheContratualisation',
+     'AfficheMarcheAttribue','AfficheMarcheNonAttribue','nombreTotalMarche','marches',
+     'typeMarches', 'getMarchePersonnaliser',
      "montantMarche", "printMarcheNonAttribue","procedurePassations","typeTypeProcedures"]),
 
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
@@ -828,17 +831,23 @@ export default {
    ...mapGetters("gestionMarche", ['entreprises']),
 
   
-  typePrestationFiltre()  {
+//   typePrestationFiltre()  {
      
-        const searchTerm = this.search.toLowerCase();
+//         const searchTerm = this.search.toLowerCase();
 
-return this.printMarcheNonAttribue.filter((item) => {
+// return this.printMarcheNonAttribue.filter((item) => {
   
-     return item.objet.toLowerCase().includes(searchTerm) 
+//      return item.objet.toLowerCase().includes(searchTerm) 
 
-   }
-)
-    },
+//    }
+// )
+//     },
+
+afficherLaListeDesContratsDuPersonnel(){
+return this.printMarcheNonAttribue.filter(element => element.type_marche.libelle == "Prestations Intellectuelles")
+},
+
+
 
  afficherObjetMarche() {
       return id => {

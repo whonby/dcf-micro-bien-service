@@ -6,11 +6,12 @@
                     <thead>
                     <tr>
                         <th>Numéro courrier</th>
-                        <!-- <th>Reference marché</th> -->
                         <!-- <th>Reférence d'offre </th> -->
                         <th>Reference PV</th>
                         <th>Date demande</th>
                         <th>Fichier</th>
+                         <th>Avis</th>
+                        <th>Date de l'avis</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -29,13 +30,23 @@
                         <td @click="afficheDemandeDAO(demande.id)">
                             {{formaterDate(demande.date_demande) || 'Non renseigné'}}</td>
 
-
                         <td>
                             <a v-if="demande.fichier" :href="demande.fichier" class="btn btn-default" target="_blank">
                                 <span class=""><i class="icon-book"></i>
                                 </span>
                             </a>
                         </td>
+
+                        
+                        <td @click="afficherModalDecisionAnocf (demande.id)"> 
+                           <span v-if="demande.avis== 0" class=" btn label label-success"> Non objection </span>
+                           <span v-else-if="demande.avis== 1" class=" btn label label-important"> objection </span>
+                           <span v-else class=" btn label label-info"> En attent</span>
+                         </td>
+
+                         <td @click="afficheDemandeDAO(demande.id)">
+                            {{formaterDate(demande.date_avis) || 'Non renseigné'}}</td>
+
                         <div class="btn-group">
                             <button @click.prevent="supprimerDemandeAno(demande.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span>
@@ -202,6 +213,82 @@
             </div>
         </div>
 
+
+        
+
+<div id="ajouterDecisionAvisCf" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter ANO DMP sur DAO</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+
+                 <div class="control-group">
+                        <label class="control-label">Reference offre</label>
+                        <div class="controls">
+                            <select v-model="formDemande.cotation_id" class="span" disabled>
+                                <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.ref_offre}}</option>
+                            </select>
+                        </div>
+                        </div>
+
+                    <div class="control-group">
+
+                        <label class="control-label">Date d'avis d'ANO</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="edite_demande_dao.date_avis"
+                                    class="span"
+                                    placeholder="Saisir le libelle_type"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Avis</label>
+                        <div class="controls">
+                           <select v-model="edite_demande_dao.avis" class="span">
+                               <option value="0"> Non objection</option>
+                               <option value="1">Objection </option>
+                           </select>
+                        </div>
+                    </div>
+
+                  <div class="control-group">
+          <label class="control-label">Observation:</label>
+            <div class="controls">
+              <textarea  v-model="edite_demande_dao.observations "  class="textarea_editor span"  :readonly="verouillageObservation" rows="" placeholder="Entrer  le text ..."></textarea>
+            </div>
+          
+        </div>
+
+          <div class="control-group">
+                        <label class="control-label">Motif</label>
+                        <div class="controls">
+                          <select v-model="edite_demande_dao.plan_motif_decision_id" class="span">
+                                <option v-for="varText in motifDecisions" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                        
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a
+                        @click.prevent="editDemandeDAO()"
+                        class="btn btn-primary"
+                        href="#"
+
+                >Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div>
+        </div>
+
 <notifications/>
 
 </div>
@@ -238,7 +325,7 @@ selectedFileDemandeAno:""
     computed:{
           ...mapGetters("bienService", [ "typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
-                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
+                "motifDecisions","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "gettersCotations", "analyseDossiers","text_juridiques", "livrables",
@@ -293,6 +380,10 @@ selectedFileDemandeAno:""
                 }
             },
 
+            verouillageObservation(){
+    return this.edite_demande_dao.avis == 0
+},
+
 
 
     },
@@ -305,6 +396,17 @@ selectedFileDemandeAno:""
 
  afficheDemandeDAO(index){
                 this.$('#modifDemandeAno').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                this.edite_demande_dao=this.getterDemandeAno.find(
+                    demandeAno => demandeAno.id == index
+                )
+                //console.log(this.edite_demande_dao)
+            },
+
+            afficherModalDecisionAnocf(index){
+                this.$('#ajouterDecisionAvisCf').modal({
                     backdrop: 'static',
                     keyboard: false
                 });

@@ -92,9 +92,7 @@
               </div>
             </div>
                          
-                
-                     
-                
+            
 
                     </form>
                 </div>
@@ -147,10 +145,6 @@
                 <input type="file"   @change="OnchangeFichier" />
               </div>
             </div>
-                     
-                     
-                
-
                     </form>
                 </div>
             </div>
@@ -211,7 +205,8 @@ export default {
     },
     computed: {
 
-            ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,"gettersCotations","gettersTransmissions"]),
+            ...mapGetters("bienService", [ "getTransmission","gettersCotationPersonnaliser" ,
+            "gettersCotations","gettersTransmissions"]),
             // ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -233,6 +228,7 @@ export default {
 
         },
     methods:{
+        
         ...mapActions('bienService',['supprimerTransmission',
         'ajouterTransmission','modifiertransmission']),
 
@@ -283,7 +279,7 @@ export default {
     
 // }
               
-               this.ajouterTransmission(formData, config)
+               this.ajouterTransmission(formData,config)
                this.formTransmission ={
                    date_dao:"",
                    ref_courier:"",
@@ -292,7 +288,7 @@ export default {
                }
            },
 
-
+  
         //    modificationTransmissionLocal(){
               
         //        const formData = new FormData();
@@ -314,6 +310,7 @@ export default {
         //        this.modifiertransmission(formData,config)
         //        this.$('#modificationAajouterAnalys01').modal('hide');
         //    },
+
 
 
  modificationTransmissionLocal(){

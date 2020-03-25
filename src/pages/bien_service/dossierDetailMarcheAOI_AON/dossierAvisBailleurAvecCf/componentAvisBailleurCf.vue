@@ -122,15 +122,16 @@
                             </select>
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label">Observation</label>
-                        <div class="controls">
-                            <textarea  v-model="formBailleur.observations_bailleur" :readonly="deverouillerAvisBailleur"
-                                    class="span"
-                                    placeholder="Saisir l'observation"
-                            ></textarea>
-                        </div>
-                    </div>
+                   
+
+                    
+                  <div class="control-group">
+          <label class="control-label">Observation:</label>
+            <div class="controls">
+              <textarea  v-model="formBailleur.observations_bailleur "  class="textarea_editor span"  :readonly="verouillageObservation" rows="" placeholder="Entrer  le text ..."></textarea>
+            </div>
+          
+        </div>
 
                     <div class="control-group">
                         <label class="control-label">Motif </label>
@@ -316,7 +317,7 @@ selectedFileAnoBailleur:""
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
             
 
-          deverouillerAvisBailleur(){
+          verouillageObservation(){
               return this.formBailleur.avis_bail == 0
           },
 

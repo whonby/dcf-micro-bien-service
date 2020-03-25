@@ -474,6 +474,7 @@
                   <component-ouverture1 :macheid="detail_marche.id"></component-ouverture1>
                   <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>
                 </div>
+                
                  <div id="tab7884" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">

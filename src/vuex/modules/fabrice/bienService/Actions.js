@@ -2335,39 +2335,38 @@ export function getTransmission({commit}) {
 
 // action pour ajouter les infos 
 
+// export function ajouterTransmission({commit,dispatch}, elementAjout,config){
+//   asyncLoading(axios.post('/add_transmission', elementAjout,config)).then(response =>{
+//       if(response.status == 201){
+//         commit('AJOUTER_TRANSMISSION',response.data)
+//          dispatch('getTransmission')
+//           this.$app.$notify({
+//             title: 'success ',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
+      
+
+//   }).catch(error => console.log(error))
+// }
+
 export function ajouterTransmission({commit,dispatch}, elementAjout,config){
-  asyncLoading(axios.post('/add_transmission', elementAjout,config)).then(response =>{
+  asyncLoading(axios.post('/add_transmission',elementAjout,config)).then(response =>{
       if(response.status == 201){
-        commit('AJOUTER_TRANSMISSION', response.data)
-         dispatch('getTransmission')
+          commit('AJOUTER_TRANSMISSION', response.data)
+          dispatch('getTransmission')
           this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
+              title: 'success ',
+              text: 'Enregistrement effectué !',
+              type:"success"
           })
       }
 
   }).catch(error => console.log(error))
 }
 
-// action pour modifier le type text juridique
-
-
-
-// export function modifiertransmission({ commit }, element_modifie) {
-//   console.log("element_modifie")
-//   console.log(element_modifie)
-//   asyncLoading(axios.put('/update_transmission/'+ id, element_modifie)).then(response => {
-//     commit('MODIFIER_TRANSMISSION', response.data)
-//     this.$app.$notify({
-//       title: 'success ',
-//       text: 'Modification effectué !',
-//       type: "success"
-//     })
-//   }).catch(error => console.log(error))
-// }
-
-export function modifiertransmission({commit,dispatch}, element_modifie,config) {
+export function modifiertransmission({commit,dispatch},element_modifie,config) {
   asyncLoading( axios.post('/update_transmission',element_modifie,config)).then(response => {
       commit('MODIFIER_TRANSMISSION', response.data)
       dispatch('getTransmission')
@@ -3479,6 +3478,7 @@ export function modifierAnoDMPBailleur({commit}, element_modifie,config) {
         })
     }).catch(error => console.log(error))
 }
+
 
 
 export function supprimerAnoDMPBailleur({commit}, id) {
