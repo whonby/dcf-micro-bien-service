@@ -15,9 +15,18 @@ import EditActeurDepense from "../../pages/acteurs_depenses/acteurs/EditeActeurD
 import CategorieGrade from "../../pages/acteurs_depenses/CategorieGrade/CategorieGrade.vue";
 import familleEmploie from "../../pages/acteurs_depenses/fonction/familleEmploie.vue";
 import ClassificationEmploisGradePrincipal from "../../pages/acteurs_depenses/fonction/ClassificationEmploisGradePrincipal.vue";
+
 import recrutementPersonnel from "../../pages/acteurs_depenses/dossierPersonnel/recrutementPersonnel.vue";
 import detailPersonnel from "../../pages/acteurs_depenses/dossierPersonnel/detailPersonnel";
+
+import fonctionBudgetaire from "../../pages/acteurs_depenses/fonction/fonctionBudgetaire.vue";
+
 const ActeurDepenseRoutes = [
+  {
+    path: "/fonction-Budgetaire",
+    name: "fonctionBudgetaire",
+    component: fonctionBudgetaire
+  },
   {
     path: "/Classification-Emplois-Grade-Principal",
     name: "ClassificationEmploisGradePrincipal",

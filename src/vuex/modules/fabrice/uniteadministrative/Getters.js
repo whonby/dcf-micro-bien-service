@@ -601,6 +601,10 @@ export const getPersonnaliseHistoriqueTransfert = (
 
 
 
+export const afficheBudgetActive = state =>
+  state.budgetGeneral.filter(
+    affichenaturedep => affichenaturedep.actived == 1
+  );
 
 
 

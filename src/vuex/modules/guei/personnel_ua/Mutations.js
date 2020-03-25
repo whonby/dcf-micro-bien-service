@@ -750,7 +750,42 @@ const MODIFIER_CLASSIFICATION_GRADE_FONCTION = (state, objetModifie) => {
 
 
 
+const GET_FONCTION_BUDGETAIRE = (state, data) => {
+    state.fonctionBudgetaire = data
+}
 
+
+const AJOUTER_FONCTION_BUDGETAIRE = (state, nouvel_objet) => {
+    state.fonctionBudgetaire.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+}
+
+/**
+ * Suppresions
+ * @param state
+ * @param id
+ * @constructor
+ */
+const SUPPRIMER_FONCTION_BUDGETAIRE = (state, id) => {
+    state.fonctionBudgetaire = state.fonctionBudgetaire.filter(fonction => fonction.id != id)
+}
+
+
+/**
+ * Modification
+ * @param state
+ * @param id
+ * @param objetModifie
+ * @constructor
+ */
+const MODIFIER_FONCTION_BUDGETAIRE = (state, objetModifie) => {
+    state.fonctionBudgetaire = state.fonctionBudgetaire.map(fonction => {
+        if (fonction.id == objetModifie.id) {
+            fonction = { ...objetModifie }
+        }
+        return fonction
+    })
+}
 
 
 
@@ -763,6 +798,12 @@ const MODIFIER_CLASSIFICATION_GRADE_FONCTION = (state, objetModifie) => {
 
 export {
     
+    GET_FONCTION_BUDGETAIRE,
+    AJOUTER_FONCTION_BUDGETAIRE,
+    SUPPRIMER_FONCTION_BUDGETAIRE,
+    MODIFIER_FONCTION_BUDGETAIRE,
+
+
     GET_CLASSIFICATION_GRADE_FONCTION,
     AJOUTER_CLASSIFICATION_GRADE_FONCTION,
     SUPPRIMER_CLASSIFICATION_GRADE_FONCTION,

@@ -24,7 +24,8 @@ const defaultstate = {
     list_acteur_fin_contrat_activite: [],
     categorieGrade: [],
     familleFonction: [],
-    classificationGradeFonction:[]
+    classificationGradeFonction: [],
+    fonctionBudgetaire:[]
 };
 
  export default defaultstate

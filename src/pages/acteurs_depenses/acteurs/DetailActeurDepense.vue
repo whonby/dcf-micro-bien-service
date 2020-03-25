@@ -1,3 +1,4 @@
+Ajouter acte de nomination
 <template>
     <div>
         <div class="container-fluid">
@@ -179,39 +180,86 @@
                                             </table>
                                         </div>
                                         <div class="">
-                                            <div id="myModal" class="modal hide" aria-hidden="true" style="display: none;">
+                                            <div id="myModal" class="modal hide tailgrand" aria-hidden="true" style="display: none;">
                                                 <div class="modal-header">
                                                     <button data-dismiss="modal" class="close" type="button">×</button>
-                                                    <h3>Ajouter act de nomination</h3>
+                                                    <h3>Ajouter acte de nomination</h3>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="#" method="post" class="form-horizontal" @submit.prevent="addActNomination" enctype="multipart/form-data">
-                                                        <div class="control-group">
-                                                            <label class="control-label">Date arrive acte :</label>
+                                                    <table class="table table-bordered table-striped">
+                                                        <tr>
+                                                            <td>
+                                                                          <div class="control-group">
+                                                    <label class="control-label">Fonctions Budgetaire</label>
+                                                    <div class="controls">
+                                                        <select v-model="fonction_budgetaire_id">
+                                                            <option></option>
+                                                            <option v-for="item in fonctionBudgetaire" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                 <div class="control-group">
+                                                            <label class="control-label">Date Debut Normination :</label>
+                                                            <div class="controls">
+                                                                <input type="date" class="span11" v-model="date_debut_fonct_budget" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                            </td>
+                                                            <td>
+                                                                 <div class="control-group">
+                                                            <label class="control-label">Date fin Normination :</label>
+                                                            <div class="controls">
+                                                                <input type="date" class="span11" v-model="date_fin_fonct_budget" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                  <div class="control-group">
+                                                            <label class="control-label">Date arrive acte nomination :</label>
                                                             <div class="controls">
                                                                 <input type="date" class="span11" v-model="date_arrivee_act_nomination" placeholder="">
                                                             </div>
                                                         </div>
-                                                        <div class="control-group">
+                                                            </td>
+                                                            <td>
+                                                                <div class="control-group">
                                                             <label class="control-label">Acte nomination :</label>
                                                             <div class="controls">
                                                                 <input  type="file" @change="OnchangeFichier"  class="span11" placeholder="Last name">
                                                                 <code v-if="info_pdf">Le fichier doit etre un pdf</code>
                                                             </div>
                                                         </div>
-                                                        <div class="control-group">
+                                                            </td>
+                                                            <td>
+                                                                 <div class="control-group">
                                                             <label class="control-label">Specimen signature</label>
                                                             <div class="controls">
                                                                 <input type="file" @change="OnchangeImage"  class="span11 form-control" placeholder="Enter specimen">
                                                                 <code v-if="info_img">Le fichier doit etre une image (.png,.jpg,jpeg,gif)</code>
                                                             </div>
                                                         </div>
-                                                        <div class="form-actions">
-                                                            <button type="submit" class="btn btn-success">Enregistre</button>
-                                                        </div>
-                                                    </form>
+                                                            </td>
+                                                        </tr>
+                                                        </table>
+                                                  
 
                                                 </div>
+ <div class="modal-footer">
+        <a
+          @click.prevent="addActNomination"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
                                             </div>
 
                                         </div>
@@ -430,9 +478,12 @@
                                 </div>
                             </div>
                         </div>
-
+ <a @click.prevent="afficherModalListePersonnel" class="btn btn-danger"
+                                               href="#">Fermer</a>
                     </div>
+                    
                 </div>
+               
             </div>
 
         </div>
@@ -659,6 +710,9 @@
                 date_arrivee_act_nomination:"",
                 info_img:false,
                 info_pdf:false,
+                fonction_budgetaire_id:"",
+                date_debut_fonct_budget:"",
+                date_fin_fonct_budget:"",
                 liste:[],
                 formData : {
                     date_debut_contrat:"",
@@ -734,7 +788,7 @@ historiqueMissionParActeur(){
 
 
 // methode pour maper notre guetter
-            ...mapGetters('personnelUA', ['personnaMission','acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades",
+            ...mapGetters('personnelUA', ['personnaMission','acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","fonctionBudgetaire",
                 "niveau_etudes","nbr_acteur_actredite_taux","detail_acteurs","salaire_actuel_acteur","all_salaires_acteurs","acte_personnels",
                 "load_act_personnel_acteur","conge_acteur_depense","temp_moyen_fin_activite_interruption","delais_mise_disposition_act",
                 "jour_conge_disponible_acteur","personnaliseActeurDepense","tous_salaire_actuel_acteur","personnaliseActeurFinContrat"]),
@@ -840,6 +894,9 @@ historiqueMissionParActeur(){
                 formData.append('specimen', this.selectedImage, this.selectedImage.name);
                 formData.append('file', this.selectedFile, this.selectedFile.name);
                 formData.append('date_arrivee_act_nomination', this.date_arrivee_act_nomination);
+                 formData.append('fonction_budgetaire_id', this.fonction_budgetaire_id);
+                  formData.append('date_debut_fonct_budget', this.date_debut_fonct_budget);
+                   formData.append('date_fin_fonct_budget', this.date_fin_fonct_budget);
                 formData.append('id', this.salaire_actuel_acteur.id);
                 let config = {
                     header : {
@@ -932,8 +989,15 @@ historiqueMissionParActeur(){
          formaterDate(date) {
             return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
         },
-
+    afficherModalListePersonnel(){
+                this.$router.push({ name: 'Acteur' })
+            },
         }
     };
 </script>
-
+<style  scoped>
+.tailgrand{
+  width: 50%;
+  margin: 0 -25%;
+}
+</style>

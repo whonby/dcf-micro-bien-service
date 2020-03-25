@@ -1,3 +1,4 @@
+acte_personnels
 const type_acte_personnels = state => state.type_acte_personnels;
 const fonctions  = state => state.fonctions;
 const classes =state => state.classes;
@@ -33,6 +34,9 @@ export const familleFonction = state =>
 // export const categorieGrade = state => state.categorieGrade;
 //export const familleFonction = state => state.familleFonction;
 export const classificationGradeFonction = state => state.classificationGradeFonction;
+
+export const fonctionBudgetaire = state =>
+    state.fonctionBudgetaire.sort((a, b) => (a.id > b.id ? 1 : -1));
 
 
 
@@ -112,8 +116,15 @@ export const personnaFonction = (state, getters, rootState, rootGetters) =>
     });
 
 
+export const affichePersonnelRecuActeNormination = state =>
+    state.acte_personnels.filter(
+        affichenaturedep => affichenaturedep.fonction_budgetaire_id != null
+    );
     
-
+export const afficheNombrePersonnelRecuActeNormination = state =>
+    state.acte_personnels.filter(
+        affichenaturedep => affichenaturedep.fonction_budgetaire_id != null
+    ).length;
 
 
 export {
