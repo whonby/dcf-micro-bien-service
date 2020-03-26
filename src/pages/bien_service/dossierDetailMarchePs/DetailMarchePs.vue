@@ -20,6 +20,7 @@
                                 <th>Objet marché</th>
                                 <th>Reference marché</th>
                                 <th>Montant prévu marché</th>
+                                <th>Montant Budgetaire</th>
                                 <th>Type de marché</th>
                                 <th>Unite administrative</th>
                                 
@@ -31,11 +32,14 @@
                                  <td class="taskOptions">
                                     {{detail_marche.exo_id}}
                                 </td>
-                                <td class="taskDesc">{{afficherCodeTypeProcedure(detail_marche.procedure_passation_id)}}</td>
+                                <td class="taskDesc" style="text-align:center">{{afficherCodeTypeProcedure(detail_marche.procedure_passation_id)}}</td>
                                 <td class="taskDesc">{{detail_marche.objet}}</td>
                                 <td class="taskStatus">{{detail_marche.reference_marche}}</td>
                                 <td class="taskOptions">
-                                    {{detail_marche.montant_marche}}
+                                    {{formatageSomme(parseFloat(detail_marche.montant_marche))}}
+                                </td>
+                                 <td class="taskOptions">
+                                    {{formatageSomme(parseFloat(budgetDisponible))}}
                                 </td>
                                 <td class="taskOptions">
                                     {{detail_marche.type_marche.libelle}}
@@ -60,7 +64,7 @@
             
             <div class="row-fluid">
                 <div class="span12">
-                     <template v-if="afficherCodeTypeProcedure(detail_marche.procedure_passation_id) == 'PSC' && budgetDisponible < 10000000 ">
+                     <template v-if="this.budgetDisponible < 10000000 ">
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -135,7 +139,7 @@
 
 
                      
-                    <template v-else-if="afficherCodeTypeProcedure(detail_marche.procedure_passation_id) == 'PSC' && 10000000 < budgetDisponible <= 30000000">
+                    <template v-else-if="this.budgetDisponible < 30000000">
 <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -242,7 +246,7 @@
 
                     </div>
                     </template>
-                      <template v-else-if="afficherCodeTypeProcedure(detail_marche.procedure_passation_id) == 'PSL' && 30000000 < budgetDisponible <= 60000000">
+                      <template v-else-if="this.budgetDisponible < 60000000">
  
                      <div class="widget-box">
                         <div class="widget-title">
@@ -384,7 +388,7 @@
                     </div>
                     
                     </template>
-                    <template v-else-if="afficherCodeTypeProcedure(detail_marche.procedure_passation_id) == 'PSO' && 60000000 <= budgetDisponible < 100000000 ">
+                    <template v-else-if="this.budgetDisponible < 100000000 ">
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -525,7 +529,7 @@
                     </div>
                     
                      </template>
-  <template v-else-if="afficherCodeTypeProcedure(detail_marche.procedure_passation_id) == 'AOI' &&  100000000 < budgetDisponible">
+  <template v-else-if="100000000 < this.budgetDisponible">
      <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -763,246 +767,7 @@
 
                     </div>
 </template>
-  
-  <template v-else-if="afficherCodeTypeProcedure(detail_marche.procedure_passation_id) == 'AON' &&   100000000 < budgetDisponible">
-     <div class="widget-box">
-                        <div class="widget-title">
-                            <ul class="nav nav-tabs">
-                                   <li class="active"><a data-toggle="tab" href="#tab001" title="tansmission du DAO a la DMP">Transmission</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab010">ANO DMP sur DAO</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab020">ANO Bailleur sur DAO</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab0145" title="publication des offres">Publication</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab0001" title="lettre d'invitation">Lettre I</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab0045" title="reception des offres">Reception</a></li>
-                                <!-- <li class=""><a data-toggle="tab" href="#tab02">Reception de l'offre</a></li> -->
-                                <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
-                                <!-- <li class=""><a data-toggle="tab" href="#tab5">Rapport d'ouverture</a></li> -->
-                                <li class=""><a data-toggle="tab" href="#tab6" title="jugement des offres">Jugement</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab7" title="rapport d'évaluation combiné">Rapport</a></li>
-
-                                 <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP"> D.ANO</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab028" title="ANO/DMP attribution">A.ANO</a></li>
-                                      
-                                      <li class=""><a data-toggle="tab" href="#tab28" title="demande ANO Bailleur"> D.Bailleur </a></li>
-                                <!-- <li class=""><a data-toggle="tab" href="#tab0008" title="ANO bailleur attribution">A.Bailleur </a></li> -->
-
-                                <li class=""><a data-toggle="tab" href="#tab1">Attribution</a></li>
-                               
-                                
-                            </ul>
-                        </div>
-                        
-                         <div class="widget-content tab-content">
-                            
-                             <div id="tab001" class="tab-pane active">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterT" data-toggle="modal" class="btn btn-primary" align="rigth">Ajouter</a></div>
-                                <!-- <h4>Publication de l'offre</h4> -->
-
-                                <componentTransmissionDao :macheid="detail_marche.id"></componentTransmissionDao>
-                         </div>
-
-
-                          <div id="tab010" class="tab-pane">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <!-- <div class="span4" align="right">
-                                    <a href="#ajouterDemandeAno" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div> -->
-                                <!-- <h4>Publication de l'offre</h4> -->
-
-                            <componentAvis :macheid="detail_marche.id"></componentAvis>
-
-                         </div>
-
-
-                          <div id="tab020" class="tab-pane ">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <!-- <div class="span4" align="right">
-                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-primary" align="rigth">Ajouter</a></div> -->
-                                <!-- <h4>Publication de l'offre</h4> -->
-                                 <componentAvisBailleurSurTransmision :macheid="detail_marche.id"></componentAvisBailleurSurTransmision>
-                     
-                         </div>
-
-
-                       <div id="tab0145" class="tab-pane ">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
-                                <!-- <h4>Publication de l'offre</h4> -->
-
-                      <publication-Offre :macheid="detail_marche.id"></publication-Offre>
-                         </div>
-
-
-                              <div id="tab0001" class="tab-pane">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-warning" align="rigth">Ajouter</a></div>
-
-                      <invitationCf :macheid="detail_marche.id"></invitationCf>
-                         </div>
-
-
-
-                         <div id="tab0045" class="tab-pane">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <div class="span4" align="right">
-                                
-                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div>
-                               
-                                        <component-etat :macheid="detail_marche.id"></component-etat>
-                                        
-                               
-                                <h4>Liste des receptions de cotation</h4>
-
-                      <component-cotation :macheid="detail_marche"></component-cotation>
-                         </div>
-
-
-                         
-                   <div id="tab4" class="tab-pane">
-                <div align="right">
-                   
-
-
-                </div>
-               
-                  <component-ouverture :macheid="detail_marche.id"></component-ouverture>
-                  <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>
-                </div>
-
-
-                   <div id="tab6" class="tab-pane">
-               <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterMP" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-                    </div>
-
-
-                </div>
-                <component-analyse :macheid="detail_marche.id"></component-analyse>
-
-                </div>
-
-                  <div id="tab7" class="tab-pane">
-               <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterPv" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-                    </div>
-
-
-                </div>
-               <component-pv :macheid="detail_marche.id"></component-pv>
-
-                </div>
-
-
-
-<!--                 
-                <div id="tab33" class="tab-pane">
-                <div align="right">
-                    <div class="widget-content">
-
-                        <a href="#ajouterDemandeAno" data-toggle="modal" class="btn btn-warning" v-if="listePVDemandePV(macheid)">Ajouter</a>
-                        <button class="btn btn-warning" title="La procedure n'est pas envore termine ou il n'y a pas de pv disponible" disabled v-else>Ajouter</button>
-                    </div>
-
-                </div>
-                 </div> -->
-
-                   <!-- <div id="tab00047" class="tab-pane">
-                <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterDemandeAno" data-toggle="modal" class="btn btn-warning">Ajouter</a>
-                    </div>
-
-
-                </div>
-               <componentDemandeAno :macheid="detail_marche.id"> </componentDemandeAno>
-
-                </div> -->
-
-
-
-                  <div id="tab27" class="tab-pane">
-               <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterD" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-                    </div>
-
-
-                </div>
-                 <componentDemandeAno :macheid="detail_marche.id"> </componentDemandeAno>
-
-                </div>
-
-                  <div id="tab028" class="tab-pane">
-               <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterD" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-                    </div>
-
-
-                </div>
-                 <componentAvisAnoCf :macheid="detail_marche.id"> </componentAvisAnoCf>
-
-                </div>
-
-
-
-
-                  <div id="tab28" class="tab-pane">
-               <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterAnoDMPBAILLEURModal" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-                    </div>
-
-
-                </div>
-                 <componentAvisBailleurCf :macheid="detail_marche.id"> </componentAvisBailleurCf>
-
-                </div>
-
-
-
-
-
-                        <div id="tab1" class="tab-pane">
-                <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning">Ajouter</a>
-                    </div>
-
-
-                </div>
-                <component-acte :macheid="detail_marche.id"></component-acte>
-
-                </div>
-
-
-
-
-
-                
-
-               
-
-                
-
-                         </div>
-
-                         
-
-                    </div>
-</template>
-                      <template v-else>
+          <template v-else>
                    <p style="font-size:14px;text-align:center;color:red">PAS DE PROCEDURE</p>
                      </template>
                 </div>
@@ -1161,21 +926,26 @@ created() {
     ]),
     
 afficheLeNomDesProcedure(){
-    if(this.afficherCodeTypeProcedure(this.detail_marche.procedure_passation_id) == 'PSC' && this.budgetDisponible < 10000000){
+    if( this.budgetDisponible < 10000000){
         return "Procédure Simplifiée de demande de Cotation(PSC Sans comité)"
     }
-    else if(this.afficherCodeTypeProcedure(this.detail_marche.procedure_passation_id) == 'PSC' && 10000000 < this.budgetDisponible < 30000000)
+    else if(this.budgetDisponible < 30000000)
     {
 return "Procédure Simplifiée de demande de Cotation(PSC Avec comité)"
     }
-    else if(this.afficherCodeTypeProcedure(this.detail_marche.procedure_passation_id) == 'PSL' && 30000000 <= this.budgetDisponible < 60000000 )
+    else if(this.budgetDisponible < 60000000 )
     {
 return "Procédure Simplifiée à compétition Limitée(PSL)"
     }
-    else if(this.afficherCodeTypeProcedure(this.detail_marche.procedure_passation_id) == 'PSO' && 60000000 <= this.budgetDisponible < 100000000 )
+    else if(this.budgetDisponible < 100000000 )
     {
 return "Procédure Simplifiée à compétition Ouverte(PSO)"
     }
+     else if(100000000 < this.budgetDisponible)
+    {
+return "Appel d'Offre Ouvert(AON ou AOI)"
+    }
+    
 
   return null  
 

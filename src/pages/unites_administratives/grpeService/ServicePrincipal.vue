@@ -3,6 +3,7 @@
 <template>
   <div>
 
+
      
 <!----- ajouter modal   ---->
 
@@ -33,8 +34,8 @@
                 </div>
               </td>
              </tr>
-               <tr>
-                     <tr>
+              
+                     <!-- <tr>
                <td>
                 <div class="control-group">
                   <label class="control-label">Direction</label>
@@ -49,7 +50,7 @@
                   </div>
                 </div>
               </td>
-             </tr>
+             </tr> -->
                <tr>
               <td>
                 <div class="control-group">
@@ -59,7 +60,7 @@
                       type="text"
                     v-model="formData.libelle"
                       class="span6"
-                     :readOnly="verroService"
+                   
                       
                     />
                    
@@ -114,8 +115,8 @@
                 </div>
               </td>
              </tr>
-               <tr>
-                     <tr>
+             
+                     <!-- <tr>
                <td>
                 <div class="control-group">
                   <label class="control-label">Direction</label>
@@ -130,7 +131,7 @@
                   </div>
                 </div>
               </td>
-             </tr>
+             </tr> -->
                <tr>
               <td>
                 <div class="control-group">
@@ -199,7 +200,7 @@
 
             <div class="widget-content nopadding" v-if="directions.length" >
               
-              <ServiceComponent v-for="equipement in directions"
+              <ServiceComponent v-for="equipement in uniteAdministratives"
                 :key="equipement.id"
                 :groupe="equipement"
                 @modification="afficherModalModifierUniteAdministrative"

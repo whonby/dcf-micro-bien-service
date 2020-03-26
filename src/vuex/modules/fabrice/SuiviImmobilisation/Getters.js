@@ -1,5 +1,6 @@
 import { groupBy } from "../../../../Repositories/Repository";
-besoinEquipement
+afficherDirection
+groupTriUaImmo
 export const factures = state => state.factures
 export const normeImmo = state => state.normeImmo
 
@@ -929,22 +930,23 @@ export const besoinRealiseEquipement = (state, getters, rootState, rootGetters) 
 
 export const afficherDirection = state =>
   state.besoinImmobilisations.filter(
-    trieUaBesoin => trieUaBesoin.direction != null
+    trieUaBesoin => trieUaBesoin.direction == "Direction"
   );
 
 
-export const afficherService = state =>
-  state.besoinImmobilisations.filter(
-    trieUaBesoin => trieUaBesoin.service_id != null
-  );
+
 
 
 export const afficherFonction = state =>
   state.besoinImmobilisations.filter(
-    trieUaBesoin => trieUaBesoin.fonction_id != null
+    trieUaBesoin => trieUaBesoin.identifier_dmd_fonction == 1
   );
 
 
+export const afficherDemandeParService = state =>
+  state.besoinImmobilisations.filter(
+    trieUaBesoin => trieUaBesoin.identifier_dmd_service == 2
+  );
 
 
 

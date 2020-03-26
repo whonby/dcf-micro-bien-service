@@ -1,4 +1,4 @@
-acte_personnels
+personnaliseActeurDepense
 const type_acte_personnels = state => state.type_acte_personnels;
 const fonctions  = state => state.fonctions;
 const classes =state => state.classes;

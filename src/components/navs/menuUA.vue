@@ -54,9 +54,14 @@
           </li>
 
           <li class="divider"></li>
-          <li>
+          <!-- <li>
             <router-link :to="{name: 'DirectionPrincipal'}" tag="a">
               <i class="icon-key"></i>Direction UA
+            </router-link>
+          </li> -->
+            <li>
+            <router-link :to="{name: 'uniteZone'}" tag="a">
+              <i class="icon-key"></i>Unite zone
             </router-link>
           </li>
            <li class="divider"></li>
@@ -72,11 +77,7 @@
             </router-link>
           </li>
            <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'uniteZone'}" tag="a">
-              <i class="icon-key"></i>Unite zone
-            </router-link>
-          </li>
+        
         </ul>
       </li>
         <li>

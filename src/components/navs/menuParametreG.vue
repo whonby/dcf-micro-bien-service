@@ -548,13 +548,13 @@
               <i class="icon-user"></i> Taux
             </router-link>
           </li>
-           <li>
+           <!-- <li>
             <router-link :to="{name:'StockArticles'}" tag="a">
-              <!-- <i class="icon-home"></i> -->
+              <i class="icon-home"></i> 
                <i class="icon-user"></i> Gestion des stocks
              
             </router-link>
-          </li>
+          </li> -->
            <li>
             <router-link :to="{name:'NormeImmo'}" tag="a">
               <!-- <i class="icon-home"></i> -->

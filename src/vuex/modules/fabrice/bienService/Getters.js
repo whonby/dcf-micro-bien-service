@@ -1,4 +1,4 @@
-getMandatPersonnaliserVise
+
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays

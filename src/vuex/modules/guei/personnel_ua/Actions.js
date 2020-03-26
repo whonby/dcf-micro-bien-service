@@ -733,8 +733,9 @@ export  function  getActeur({commit}) {
 
 
 
+
 // ajouter type acte personnel
-export  function ajouterActeur({commit}, objetAjoute){
+export function ajouterActeur({ commit, dispatch}, objetAjoute){
     this.$app.$loading(true)
     axios.post('/nouveau_acteur_depense', objetAjoute ).then(res => {
         this.$app.$notify({
@@ -743,6 +744,7 @@ export  function ajouterActeur({commit}, objetAjoute){
             type:"success"
         });
         commit('AJOUTER_ACTEURS', res.data)
+        dispatch('getActeur')
         this.$app.$loading(false)
     }).catch(error =>{
         console.log(error)
@@ -756,7 +758,7 @@ export  function ajouterActeur({commit}, objetAjoute){
 }
 
 // supprimer type act
-export function supprimerActeurs({commit}, id){
+export function supprimerActeurs({ commit, dispatch}, id){
     this.$app.$dialog
         .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
         this.$app.$notify({
@@ -764,7 +766,8 @@ export function supprimerActeurs({commit}, id){
             text: 'Suppression effectuer',
             type:"error"
         });
-        commit('SUPPRIMER_ACTEURS', id)
+            commit('SUPPRIMER_ACTEURS', id)
+            dispatch('getActeur')
         axios.delete('/delete_acteur_depense/' + id).then(() => dialog.close() )
     })
 }
@@ -812,7 +815,7 @@ export  function  getActPersonnel({commit}) {
 }
 
 // ajouter type acte personnel
-export  function modifierActeurDepense({commit}, objetModifie,config){
+export function modifierActeurDepense({ commit, dispatch}, objetModifie,config){
     this.$app.$loading(true)
     axios.post('/add_act_nomination', objetModifie,config ).then(res => {
         this.$app.$notify({
@@ -821,6 +824,7 @@ export  function modifierActeurDepense({commit}, objetModifie,config){
             type:"success"
         });
         commit('MODIFIER_ACT_PERSONNEL', res.data)
+        dispatch('getActeur')
         this.$app.$loading(false)
     }).catch(error =>{
         console.log(error)
@@ -975,7 +979,7 @@ export  function modifierConges({commit}, objetModifie){
     })
 }
 
-export  function ajouterActeDepense({commit}, objetAjoute){
+export function ajouterActeDepense({ commit, dispatch}, objetAjoute){
     this.$app.$loading(true)
     axios.post('/add_act_personnel', objetAjoute ).then(res => {
         this.$app.$notify({
@@ -984,6 +988,7 @@ export  function ajouterActeDepense({commit}, objetAjoute){
             type:"success"
         });
         commit('AJOUTER_ACT_PERSONNEL', res.data)
+        dispatch('getActeur')
         this.$app.$loading(false)
     }).catch(error =>{
         console.log(error)

@@ -10,7 +10,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Ajouter Immobilisation</h5>
+              <h5>Ajouter personnel</h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -23,10 +23,11 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1">INFORMATION PERSONNEL</a>
+                        <a data-toggle="tab" href="#tab1">Identification</a>
                       </li>
+                       
                       <li>
-                        <a data-toggle="tab" href="#tab2">DESCRIPTIF</a>
+                        <a data-toggle="tab" href="#tab2">Affectation</a>
                       </li>
                       <!-- <li>
                         <a data-toggle="tab" href="#tab3">Descriptif3</a>
@@ -43,19 +44,7 @@
                       <div class="modal-body">
         <table class="table table-bordered table-striped">
             <tr>
-                <td>
-                     <div class="control-group">
-                                                    <label class="control-label">Situation matrimoniale</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.situation_matrimonial" >
-                                                            <option></option>
-                                                            <option value="Marie">Marie</option>
-                                                            <option value="Celibataire">Celibataire</option>
-                                                             <option value="Divorce">Divorce</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                </td>
+
                 <td>
  
                                                     <label class="control-label">Matricule:</label>
@@ -64,6 +53,7 @@
                                                     </div>
                                                 
                 </td>
+                      
                  <td>
                     <div class="control-group">
                                                     <label class="control-label">Nom:</label>
@@ -92,17 +82,18 @@
                                                     </div>
                                                 </div>
                 </td>
-                 
-            </tr>
-            <tr>
-                <td>
-                    <div class="control-group">
-                                                    <label class="control-label">Numero CNI:</label>
+                 <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Date de naissance:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="formData.numero_cni"  placeholder="Saisir le numero cni" />
+                                                        <input type="date" v-model="formData.date_naissance"  placeholder="Saisir la date de naissance" />
                                                     </div>
                                                 </div>
                 </td>
+                
+            </tr>
+            <tr>
+                
                 <td>
                      <div class="control-group">
                                                     <label class="control-label">Numero passeport:</label>
@@ -112,10 +103,10 @@
                                                 </div>
                 </td>
                 <td>
-                     <div class="control-group">
-                                                    <label class="control-label">Date de naissance:</label>
+                    <div class="control-group">
+                                                    <label class="control-label">Numero CNI:</label>
                                                     <div class="controls">
-                                                        <input type="date" v-model="formData.date_naissance"  placeholder="Saisir la date de naissance" />
+                                                        <input type="text" v-model="formData.numero_cni"  placeholder="Saisir le numero cni" />
                                                     </div>
                                                 </div>
                 </td>
@@ -132,6 +123,19 @@
                                                     <label class="control-label">Nom de la mere:</label>
                                                     <div class="controls">
                                                         <input type="text" v-model="formData.nom_mere"  placeholder="Saisir le nom de la mere" />
+                                                    </div>
+                                                </div>
+                </td>
+                          <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Situation matrimoniale</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.situation_matrimonial" >
+                                                            <option></option>
+                                                            <option value="Marie">Marie</option>
+                                                            <option value="Celibataire">Celibataire</option>
+                                                             <option value="Divorce">Divorce</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                 </td>
@@ -285,12 +289,13 @@
    
             </tr>
             <tr>
+               
               <td colspan="2">
                 <div class="control-group">
                                                     <label class="control-label">Ligne budgetaires:</label>
                                                     <div class="controls">
 
-                                                        <select v-model="formData.plan_budgetaire_id" class="span18">
+                                                        <select v-model="formData.plan_budgetaire_id" class="span">
                                                             <option v-for="item in afficheBudgetPersonnel(formData.unite_administrative_id)" :key="item.id" :value="item.economique_id">
                                                                {{item.afficheEconomique.code}} - {{item.afficheEconomique.libelle}}
                                                             </option>
