@@ -1,7 +1,7 @@
 import Famille from "../../pages/suivi_control_budgetaires/suiviImmobilisation/Famille.vue";
 import Service from "../../pages/suivi_control_budgetaires/suiviImmobilisation/Service.vue";
 import Amortissement from "../../pages/suivi_control_budgetaires/suiviImmobilisation/Amortissement.vue";
-import Immobilisation from "../../pages/suivi_control_budgetaires/suiviImmobilisation/Immobilisation.vue";
+import Immobilisation from "../../pages/suivi_control_budgetaires/suiviImmobilisation/docAffectationImmo/listeDesAffectation.vue";
 import AjouterImmobilisation from "../../pages/suivi_control_budgetaires/suiviImmobilisation/AffectationImmobilisation.vue";
 import ModifierImmobilisation from "../../pages/suivi_control_budgetaires/suiviImmobilisation/ModifierImmobilisation.vue";
 // import immobilisationParService from "../../pages/suivi_control_budgetaires/suiviImmobilisation/immobilisationParService.vue";

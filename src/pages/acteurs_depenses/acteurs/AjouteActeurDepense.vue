@@ -220,6 +220,7 @@
                                                             </option>
 
                                                         </select>
+                                                        <input type="hidden" :value="nombreDeFonction(formData.fonction_id)" readonly/>
                                                     </div>
                                                 </div>
                 </td>
@@ -478,7 +479,12 @@
             ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
             ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
-
+ ...mapGetters("SuiviImmobilisation", [
+      
+      "normeImmo"
+      
+      
+    ]),
  verrouilleUniteZone() {
       return this.formData.unite_administrative_id == "";
     },
@@ -489,6 +495,13 @@
       return this.formData.service_id == "";
     },
 
+nombreDeFonction() {
+      return id => {
+        if (id != null && id != "") {
+          return this.normeImmo.filter(element => element.fonction_id == this.formData.fonction_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.norme), 0).toFixed(0);
+        }
+      };
+    },
  afficheUniteZone() {
       return id => {
         if (id != null && id != "") {
@@ -593,7 +606,9 @@ exoEnCours() {
               var nouveauObjet={
                 ...this.formData,
                 exercice_budgetaire_id:this.afficheIdExerciceEnCours,
-                grade_id:this.afficheGrade(this.formData.fonction_id)
+                grade_id:this.afficheGrade(this.formData.fonction_id),
+                normeequipement:this.nombreDeFonction(this.formData.fonction_id),
+                historiquenormequipement:this.nombreDeFonction(this.formData.fonction_id)
               }
                 console.log(this.formData)
                 this.ajouterActeur(nouveauObjet)

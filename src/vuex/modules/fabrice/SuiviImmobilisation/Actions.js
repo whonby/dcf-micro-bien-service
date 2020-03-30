@@ -259,6 +259,8 @@ export function ajouterImmobilisation({ commit, dispatch}, formData) {
       commit("AJOUTER_IMMOBILISATION", response.data);
       dispatch("getAllBesoinImmo");
       dispatch("getAllStock");
+      dispatch('getActPersonnel')
+      dispatch('allActeurDepense')
       this.$app.$notify({
         title: 'Success',
         text: 'Enregistrement Effectué avec Succès!',
@@ -293,6 +295,7 @@ export function modifierImmobilisation({ commit, dispatch}, nouveau) {
       exercice_budgetaire_id: nouveau.exercice_budgetaire_id,
       service_id: nouveau.service_id,
       nature_bien: nouveau.nature_bien,
+      unitezon_id: nouveau.unitezon_id,
       nature_dentree: nouveau.nature_dentree,
       acteur_depense_id: nouveau.acteur_depense_id,
       // TVA_id: nouveau.TVA_id,
@@ -439,7 +442,9 @@ export function modifierBesoinImmo({ commit, dispatch }, nouveau) {
       service_id: nouveau.service_id,
       uniteZone_id: nouveau.uniteZone_id,
       identifier_dmd_service: nouveau.identifier_dmd_service,
-      identifier_dmd_fonction: nouveau.identifier_dmd_fonction
+      identifier_dmd_fonction: nouveau.identifier_dmd_fonction,
+      qte_actuel: nouveau.qte_actuel,
+      total_actuel: nouveau.total_actuel
       
     })
   ).then(response => {

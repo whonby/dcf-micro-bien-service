@@ -120,7 +120,11 @@
                     </td>
 
                     <td>
-                       
+                        <button v-if="BesoinImmo.motif_demande == 1 && BesoinImmo.motif_ua == 1 " class="btn " @click="afficherModalAjouterDirection(index)" title="Affectation Immobilisation">
+                        <span>
+                          <i class="icon icon-book"></i>
+                        </span>
+                      </button>
                      
                       <button class="btn btn-danger" @click="supprimerBesoinImmo(BesoinImmo.id)">
                         <span>
@@ -1091,6 +1095,159 @@
  
  
  
+
+
+
+
+<div id="modificationModalAffectation" class="modal hide tailleImmobilisation">
+     <div class="row-fluid">
+        <div class="span12">
+          <div class="widget-box">
+            <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              <h5>Ajouter Immobilisation</h5>
+              <!-- <div align="right">
+                Search:
+                <input type="search" placeholder />
+              </div>-->
+            </div>
+
+            <div class="table-responsive text-nowrap">
+              <table class="table table-bordered table-striped">
+                <div class="widget-box">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#tab18">Identification</a>
+                      </li>
+                       
+                      <li>
+                        <a data-toggle="tab" href="#tab29">Affectation</a>
+                      </li>
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab3">Descriptif3</a>
+                      </li> -->
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab3">Autres Information</a>
+                      </li> -->
+                     
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content">
+                    <!--ongle identification-->
+                    <div id="tab18" class="tab-pane active">
+                   
+        <table class="table table-bordered table-striped">
+           <tr>
+                <td>
+                   <label class="control-label">Exercice Budgetaire</label>
+                   <input type="text" class="span12" :value="exerciceBudgetaireEnCours" readonly/>
+                </td>
+                <td>
+                  <label class="control-label">Type unite administrative</label>
+                      <input type="text" class="span12"  v-model="editBesoinImmo.typeuniteadminist_id" readonly />
+                </td>
+                <td>
+                     <label class="control-label">Unite administrative</label>
+                     <input type="text" class="span12" readonly v-model="editBesoinImmo.uniteadmin_id"/>
+                </td>
+                <td>
+                     <label class="control-label">Unite de zone</label>
+                        <input type="text" class="span12" readonly v-model="editBesoinImmo.uniteZone_id"/>
+                </td>
+                
+                <td>
+                   <label class="control-label">Direction</label>
+                   <input type="text" class="span12" readonly v-model="editBesoinImmo.direction"/>
+                </td>
+            </tr>
+             <tr>
+                <td>
+                     <label class="control-label">Famille</label>
+                        <input type="text" class="span12" readonly v-model="editBesoinImmo.famille_id"/>
+                </td>
+               
+                <td>
+                  <label class="control-label">Quantité démande</label>
+                      <input type="text" class="span12" readonly v-model="editBesoinImmo.quantite"/>
+                </td>
+                <td>
+                     <label class="control-label">Prix unitaire</label>
+                     <input type="text" class="span12" readonly v-model="editBesoinImmo.prix_unitaire"/>
+                </td>
+                <td>
+                     <label class="control-label">Valeur d'origine</label>
+                        <input type="text" class="span12" readonly v-model="editBesoinImmo.montant_total"/>
+                </td>
+                 <td>
+                     <label class="control-label">Besoin demande</label>
+                        <input type="text" class="span12" readonly/>
+                </td>
+               
+            </tr>
+             <tr>
+                <td>
+                   <label class="control-label">Exercice Budgetaire</label>
+                   <input type="text" class="span12" readonly/>
+                </td>
+                <td>
+                  <label class="control-label">Type unite administrative</label>
+                      <input type="text" class="span12" readonly/>
+                </td>
+                <td>
+                     <label class="control-label">Unite administrative</label>
+                     <input type="text" class="span12" readonly/>
+                </td>
+                <td>
+                     <label class="control-label">Besoin demande</label>
+                        <input type="text" class="span12" readonly/>
+                </td>
+                 <td>
+                     <label class="control-label">Besoin demande</label>
+                        <input type="text" class="span12" readonly/>
+                </td>
+               
+            </tr>
+        </table>
+ 
+                    </div>
+                    <div id="tab29" class="tab-pane">
+                      <div class="modal-body">
+     
+  </div>
+                    </div>
+                  </div>
+                  <br />
+                  <div align="right">
+                    <div class="controls">
+                      <div data-toggle="buttons-checkbox" class="btn-group">
+                        <a
+                          class="btn btn-primary"
+                          @click.prevent="ajouterTitreLocal"
+                        >Valider</a>
+                        <a
+                          @click.prevent="afficherListeDemenade()"
+                          class="btn"
+                          href="#"
+                        >Fermer</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
+
+
+
+
+
     </div>
 
     <!-- <fab :actions="fabActions" @cache="afficherModalAjouterTitre" bg-color="green"></fab> -->
@@ -1201,8 +1358,30 @@ json_fields: {
       
     ]),
     ...mapGetters("uniteadministrative", ["uniteAdministratives","directions","servicesua","uniteZones"]),
-    ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
+    ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins","exercices_budgetaires"]),
 ...mapGetters("personnelUA", ["all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
+
+
+
+exoEnCours(){
+return this.exercices_budgetaires.filter(element => element.encours == 1)
+},
+ 
+
+ exerciceBudgetaireEnCours() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
+    },
+
+
+
+
+
 
 montantTotalDemandeParDirection(){
 return this.besoinEquipement.filter(element => element.direction == "Direction").reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total), 0).toFixed(2)
@@ -1543,6 +1722,27 @@ fonctionDynamiques() {
       "modifierQuantiteEnStock2",
       "modifierQuantiteNormeDmd"
     ]),
+
+  afficherListeDemenade(){
+                this.$router.push({ name: 'demandeEquipement' })
+            },
+ afficherModalAjouterDirection(index) {
+      this.$("#modificationModalAffectation").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+      this.editBesoinImmo = this.afficherDirection[index]
+      // this.editEngagement = this.afficheMarcheEngage(this.detail_marche.id).find(recupererObjet => recupererObjet.id == id)
+        // this.formDataFacture = this.afficheFactureTableau(this.detail_marche.objetUniteAdministrative.id).find(recupererObjet => recupererObjet.id == id)
+    },
+
+
+
+
+
+
+
+
     formatageSomme: formatageSomme,
 
     //afiicher modal ajouter
@@ -1783,5 +1983,8 @@ fonctionDynamiques() {
   width: 72%;
   margin: 0 -35%;
 }
-
+.tailleImmobilisation{
+  width: 90%;
+  margin: 0 -45%;
+}
 </style>

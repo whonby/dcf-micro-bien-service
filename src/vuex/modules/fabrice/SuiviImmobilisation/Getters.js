@@ -1,6 +1,5 @@
 import { groupBy } from "../../../../Repositories/Repository";
-afficherDirection
-groupTriUaImmo
+
 export const factures = state => state.factures
 export const normeImmo = state => state.normeImmo
 
@@ -725,10 +724,6 @@ export const getPersoStock = (state, getters, rootState, rootGetters) =>
   });
 
 
-SuiviImmo
-
-
-
 
 
 export const groupeEquipement = (state, getters) => {
@@ -761,42 +756,42 @@ export const groupeEquipement = (state, getters) => {
 
 
 
-export const getAfficheStockArticle = (
-  state,
-  getters,
-  rootGetters
+// export const getAfficheStockArticle = (
+//   state,
+//   getters,
+//   rootGetters
   
-) =>
-  getters.stockageArticles.map(element => {
-    if (
-      element.typeequipe_id !== null &&
-      element.famill_id !== null &&
-      element.articlestock_id !== null &&
-      element.typeua_id !== null 
-      // element.typeua_id !== null 
+// ) =>
+//   getters.stockageArticles.map(element => {
+//     if (
+//       element.typeequipe_id !== null &&
+//       element.famill_id !== null &&
+//       element.articlestock_id !== null &&
+//       element.typeua_id !== null 
+//       // element.typeua_id !== null 
      
      
-    ) {
-      element = {
-        ...element,
+//     ) {
+//       element = {
+//         ...element,
 
-        AfficheTypeequipement: rootGetters["SuiviImmobilisation/equipements"].find(
-          equipe => equipe.id == element.typeequipe_id
-        ),
-        famille: rootGetters["SuiviImmobilisation/familles"].find(
-          equipefamill => equipefamill.id == element.famill_id
-        ),
-        AfficheArticle: rootGetters["SuiviImmobilisation/articles"].find(
-          articlestock => articlestock.id == element.articlestock_id
+//         AfficheTypeequipement: rootGetters["SuiviImmobilisation/equipements"].find(
+//           equipe => equipe.id == element.typeequipe_id
+//         ),
+//         famille: rootGetters["SuiviImmobilisation/familles"].find(
+//           equipefamill => equipefamill.id == element.famill_id
+//         ),
+//         AfficheArticle: rootGetters["SuiviImmobilisation/articles"].find(
+//           articlestock => articlestock.id == element.articlestock_id
 
-        ),
-        // uniteAdminist: rootGetters["uniteadministrative/uniteAdministratives"].find(uniteAdm => uniteAdm.id == element.uAdministrative_id),
-        typeuniteAdminist: rootGetters["parametreGenerauxAdministratif/type_Unite_admins"].find(typeuniteAdm => typeuniteAdm.id == element.typeua_id)
-      };
-    }
+//         ),
+//         // uniteAdminist: rootGetters["uniteadministrative/uniteAdministratives"].find(uniteAdm => uniteAdm.id == element.uAdministrative_id),
+//         typeuniteAdminist: rootGetters["parametreGenerauxAdministratif/type_Unite_admins"].find(typeuniteAdm => typeuniteAdm.id == element.typeua_id)
+//       };
+//     }
 
-    return element;
-  });
+//     return element;
+//   });
 
 export const groupeTypeUniteAdmin = (state, getters) => {
   //delete getters.trieUaImmobilisation.
@@ -860,6 +855,34 @@ export const groupStockFammile = (state, getters) => {
   return groupBy(getters.getPersoStock, "famill_id");
 };
 
+export const regroupeEquipementCouvert = getters =>
+  getters.immobilisations.filter(
+    structureMoin => structureMoin.qte_actuel == 0
+  );
+
+export const afficheRegroupeEquipementCouvert = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.regroupeEquipementCouvert, "acteurdepense_id");
+};
+
+
+
+
+
+// export const voiruntest = (state, getters, rootState, rootGetters) =>
+//   getters.afficheRegroupeEquipementCouvert.map(element => {
+//     if (element.acteurdepense_id !== null ) {
+//       element = {
+//         ...element,
+        
+//         fonctionActeur: rootGetters["personnelUA/acteur_depense"].find(fonctAct => fonctAct.id == element.acteurdepense_id
+//         ),
+        
+//       };
+//     }
+
+//     return element;
+//   });
 
 
 // export const getterStockNorme = (

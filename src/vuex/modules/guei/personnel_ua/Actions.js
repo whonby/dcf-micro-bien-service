@@ -744,7 +744,10 @@ export function ajouterActeur({ commit, dispatch}, objetAjoute){
             type:"success"
         });
         commit('AJOUTER_ACTEURS', res.data)
+        
         dispatch('getActeur')
+        dispatch('getActPersonnel')
+        dispatch('allActeurDepense')
         this.$app.$loading(false)
     }).catch(error =>{
         console.log(error)
@@ -767,7 +770,10 @@ export function supprimerActeurs({ commit, dispatch}, id){
             type:"error"
         });
             commit('SUPPRIMER_ACTEURS', id)
+            
             dispatch('getActeur')
+            dispatch('getActPersonnel')
+            dispatch('allActeurDepense')
         axios.delete('/delete_acteur_depense/' + id).then(() => dialog.close() )
     })
 }
@@ -825,6 +831,8 @@ export function modifierActeurDepense({ commit, dispatch}, objetModifie,config){
         });
         commit('MODIFIER_ACT_PERSONNEL', res.data)
         dispatch('getActeur')
+        dispatch('getActPersonnel')
+        dispatch('allActeurDepense')
         this.$app.$loading(false)
     }).catch(error =>{
         console.log(error)
@@ -838,7 +846,7 @@ export function modifierActeurDepense({ commit, dispatch}, objetModifie,config){
 }
 
 // Modififie acter depense modification_acteur
-export  function modifierActeurDepenses({commit}, objetModifie){
+export function modifierActeurDepenses({ commit, dispatch}, objetModifie){
     this.$app.$loading(true)
     axios.put('/update_act_personnel', objetModifie ).then(res => {
         if(res.status == 201){
@@ -848,6 +856,9 @@ export  function modifierActeurDepenses({commit}, objetModifie){
                 type:"success"
             });
             commit('MODIFIER_ACT_PERSONNEL', res.data)
+            dispatch('getActeur')
+            dispatch('getActPersonnel')
+            dispatch('allActeurDepense')
         }
         this.$app.$loading(false)
     }).catch(error =>{
@@ -862,7 +873,7 @@ export  function modifierActeurDepenses({commit}, objetModifie){
 }
 
 
-export  function modificationActeur({commit}, objetModifie){
+export function modificationActeur({ commit, dispatch}, objetModifie){
     this.$app.$loading(true)
     axios.put('/modification_acteur', objetModifie ).then(res => {
         if(res.status == 201){
@@ -872,7 +883,9 @@ export  function modificationActeur({commit}, objetModifie){
                 type:"success"
             });
             commit('MODIFIER_ACT_PERSONNEL', res.data)
-        }
+        } dispatch('getActeur')
+        dispatch('getActPersonnel')
+        dispatch('allActeurDepense')
         this.$app.$loading(false)
     }).catch(error =>{
         console.log(error)
@@ -988,7 +1001,10 @@ export function ajouterActeDepense({ commit, dispatch}, objetAjoute){
             type:"success"
         });
         commit('AJOUTER_ACT_PERSONNEL', res.data)
+        
         dispatch('getActeur')
+        dispatch('getActPersonnel')
+        dispatch('allActeurDepense')
         this.$app.$loading(false)
     }).catch(error =>{
         console.log(error)

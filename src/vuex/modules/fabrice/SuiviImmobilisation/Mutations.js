@@ -223,6 +223,9 @@ const MODIFIER_QUANTITE_REEL = (state, objet) => {
 
 
 
+
+
+
 const MODIFIER_QUANTITE_EN_STOCK = (state, objet) => {
   state.besoinImmobilisations = state.besoinImmobilisations.map(STOCK => {
     if (STOCK.id == objet.id) {
@@ -530,8 +533,11 @@ const SUPPRIMER_NORMEIMMOB = (state, id) => {
 
 
 
-export {
 
+
+
+export {
+  
   GET_ALL_NORMEIMMOB,
   AJOUTER_NORMEIMMOB,
   MODIFIER_NORMEIMMOB,
