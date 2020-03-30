@@ -64,12 +64,12 @@
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tab01">Reception de l'offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
-                                <!-- <li class=""><a data-toggle="tab" href="#tab5">Rapport d'ouverture</a></li> -->
+                                <li class=""><a data-toggle="tab" href="#tab5">Rapport d'ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab6">Jugement des offres</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab7">Rapport du jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab1">Attribution</a></li>
                                
-                                
+                               
                             </ul>
                         </div>
                         
@@ -120,9 +120,9 @@
                    <div id="tab5" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
-                        <a href="#jugement" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+                        <a href="#ajouterRapportOuverture" data-toggle="modal" class="btn btn-warning">Ajouter</a>
                     </div>
-
+                    <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
 
                 </div>
                
@@ -180,7 +180,8 @@
     import componentCotation from '../dossierDetailMarchePs/dossierComponentPs/componentCotation';
      import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
       import componentOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
-      import componentAnalyse from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
+      import rapportOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuverture';
+     import componentAnalyse from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
     
      import componentOuvertureMembre from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
       import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
@@ -211,6 +212,7 @@
             componentEtat,
             componentOuverture,
             componentOuvertureMembre,
+            rapportOuverture,
             componentAnalyse,
          //  componentRapportJugement,
          componentPv,

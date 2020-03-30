@@ -20,6 +20,7 @@ const all_acteur_depense=state =>state.all_acteur_depense;
 const temp_moyen_fin_activite_interruption=state =>state.temp_moyen_fin_activite_interruption;
 const delais_mise_disposition_act=state =>state.delais_mise_disposition_act;
 const jour_conge_disponible_acteur=state =>state.jour_conge_disponible_acteur;
+const dossierPersonnels = state => state.dossierPersonnels;
 const totalActeurEnctivite =state =>state.acte_personnels.filter(acteur_depense=>acteur_depense.date_fin_contrat==null ).length;
 const totalActeurDepense =state => state.all_acteur_depense.length;
 const totalActeurNonAccredite =state =>(state.acte_personnels.filter(acteur_depense=>acteur_depense.type_acte_id!='4' && acteur_depense.date_fin_contrat==null ).length);
@@ -156,6 +157,7 @@ export {
     tauxActeurAccredite,
     tous_salaire_actuel_acteur,
     list_acteur_fin_contrat_activite,
+    dossierPersonnels
    // exercices_budgetaires
 }
 

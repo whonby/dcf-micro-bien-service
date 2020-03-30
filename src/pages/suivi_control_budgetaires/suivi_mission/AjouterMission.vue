@@ -779,7 +779,8 @@ acteurDepenseDynamiques() {
              frais_restauration:"",
              autre_frais:"",
              source_financement_id:"",
-             cout_total:"", 
+             cout_total:"",
+             mode_paiement_id:"" 
              
          }
 

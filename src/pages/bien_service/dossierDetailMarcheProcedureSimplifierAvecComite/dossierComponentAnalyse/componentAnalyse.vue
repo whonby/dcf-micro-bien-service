@@ -26,7 +26,7 @@
                         :key="appelOffre.id">
                         <td @click="afficheAnnalyseDossier(index)">
 
-                            {{appelOffre.cotation_id|| 'Non renseigné'}}</td>
+                            {{appelOffre.appel_offre_id|| 'Non renseigné'}}</td>
 
                           
                         <!-- <td @click="afficheAnnalyseDossier(index)">
@@ -73,13 +73,13 @@
                         <div class="control-group">
                         <label class="control-label">Reference offre</label>
                         <div class="controls">
-                            <!-- <select v-model="formAnalyseDossier.cotation_id" class="span" disabled>
+                            <!-- <select v-model="formAnalyseDossier.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
                                         :value="plans.id">{{plans.ref_offre}}</option>
                             </select> -->
                            <input
                                     type="text"
-                                    :value="listeAppelOffre(macheid)"
+                                    :value="affichierReferenceAppelOffre(macheid)"
                                     class="span"
                                        readonly
                             />
@@ -201,7 +201,7 @@
                         <div class="controls">
                           <input
                                     type="text"
-                                    :value="listeAppelOffre(macheid)"
+                                    :value="affichierReferenceAppelOffre(macheid)"
                                     class="span"
                                        readonly
                             />
@@ -323,7 +323,7 @@ export default {
                   date_analyse:"",
                         // appel_offre_id:"",
                         rang_analyse:"",
-                     cotation_id:"",
+                     appel_offre_id:"",
                        // motif:"",
                         note_analyse:"",
                         // dossier_candidat_id:"",
@@ -371,7 +371,7 @@ export default {
             //            // console.log("Marche appel offre 10")
             //             if(Objet!=undefined){
             //                 //vM.formDossierCadidature.appel_offre_id=Objet.id;
-            //                 vM.formAnalyseDossier.cotation_id = Objet.id;
+            //                 vM.formAnalyseDossier.appel_offre_id = Objet.id;
             //                // vM.formLot.appel_offre_id=Objet.id;
             //                // vM.formAno.appel_offre_id = Objet.id
             //                // vM.formLettre.appel_offre_id=Objet.id;
@@ -382,24 +382,54 @@ export default {
             //         }
             //     }
             // },
-              listeAppelOffre() {
+//               listeAppelOffre() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.gettersCotations.find(qtreel => qtreel.id == id);
+
+
+//       if (qtereel) {
+//         return qtereel.ref_offre;
+//       }
+
+//       return 0
+//         }
+//       };
+//     },
+    
+    
+// listeAppelOffreId() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.gettersCotations.find(qtreel => qtreel.marche_id == id);
+
+//       if (qtereel) {
+//         return qtereel.id;
+//       }
+//       return 0
+//         }
+//       };
+//     },
+
+
+
+
+      affichierReferenceAppelOffre() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.gettersCotations.find(qtreel => qtreel.id == id);
+           const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
 
       if (qtereel) {
-        return qtereel.ref_offre;
+        return qtereel.ref_appel;
       }
-
       return 0
         }
       };
     },
-    
-listeAppelOffreId() {
+affichierAppelOffreid() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.gettersCotations.find(qtreel => qtreel.marche_id == id);
+           const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
 
       if (qtereel) {
         return qtereel.id;
@@ -451,14 +481,14 @@ listeAppelOffreId() {
                    var nouvelObjet ={
                        ...this.formAnalyseDossier,
                        marche_id:this.macheid,
-                        cotation_id :this.listeAppelOffreId(this.macheid)
+                        appel_offre_id :this.affichierAppelOffreid(this.macheid)
                    }
               this.ajouterAnalyseDossier(nouvelObjet)
                 this.formAnalyseDossier={
                         date_analyse:"",
                         //appel_offre_id:"",
                         rang_analyse:"",
-                     cotation_id:"",
+                     appel_offre_id:"",
                        // motif:"",
                         note_analyse:"",
                        // dossier_candidat_id:"",
@@ -473,7 +503,7 @@ listeAppelOffreId() {
               var nouvelObjet1 ={
                        ...this.edite_analyse_dossier,
                        marche_id:this.macheid,
-                        cotation_id :this.listeAppelOffreId(this.macheid)
+                        appel_offre_id :this.affichierAppelOffreid(this.macheid)
                    }
                 this.modifierAnalyseDossier(nouvelObjet1)
                 this.$('#modificationAajouterAnalys01').modal('hide');

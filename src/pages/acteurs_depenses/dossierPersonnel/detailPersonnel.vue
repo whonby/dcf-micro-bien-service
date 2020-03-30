@@ -1,6 +1,7 @@
 
 <template>
     
+    
 
 <div>
         <div class="container-fluid">
@@ -65,11 +66,13 @@
 
                                  <li class="active"><a data-toggle="tab" href="#tab0145" title="">Avis de recrutement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab0001" title="lettre d'invitation">Lettre invitation</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab0045" title="reception des offres">Reception</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab0002" title="">Mandate</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab045" title="">Dossier du candidat</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab5">Rapport d'ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab6" title="jugement des offres">Jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab7" title="rapport d'évaluation combiné">Rapport</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP"> Demande ANO</a></li>
+                                 <!-- <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP"> Demande ANO</a></li> -->
                                  <li class=""><a data-toggle="tab" href="#tab28" title="demande ANO Bailleur"> Demande ANO Bailleur </a></li>
                                 <li class=""><a data-toggle="tab" href="#tab1">Attribution</a></li>
                              
@@ -85,11 +88,12 @@
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
-                                    <a href="#ajouterOffre" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                    <a href="#ajouterOffrePublication" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
                                 <!-- <h4>Publication de l'offre</h4> -->
-                            <publicationOffre :macheid="detail_marche.id"></publicationOffre>
-                     
+                            <!-- <publicationOffre :macheid="detail_marche.id"></publicationOffre> -->
+                              <publicationRecrutement :macheid="detail_marche.id"></publicationRecrutement>
                          </div>
+                         
 
 
                               <div id="tab0001" class="tab-pane">
@@ -101,18 +105,42 @@
                                     <invitationCf :macheid="detail_marche.id"></invitationCf>
                                   </div>
 
+                                  <div id="tab0002" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <h4>Publication de l'offre</h4> -->
+
+                      <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
+                         </div>
 
 
-                         <div id="tab0045" class="tab-pane">
+
+                         <div id="tab045" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
                                 
-                                    <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div>
+                                    <a href="#addDossier" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div>
 
-                                <h4>Liste des receptions de cotation</h4>
-                                 <component-cotation :macheid="detail_marche"></component-cotation>
+                                <!-- <h4>Liste des receptions de cotation</h4> -->
+                                 <candidatPersonnel :macheid="detail_marche.id"></candidatPersonnel>
                              </div>
+
+
+                                  
+                   <div id="tab5" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterRapportOuverture" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+                    </div>
+                    <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
+
+                </div>
+               
+
+                </div>
 
 
                          
@@ -157,7 +185,7 @@
                 </div>
 
 
-                     <div id="tab27" class="tab-pane">
+                     <!-- <div id="tab27" class="tab-pane">
                    <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterD" data-toggle="modal" class="btn btn-primary">Ajouter</a>
@@ -167,7 +195,7 @@
                 </div>
                  <componentDemandeAno :macheid="detail_marche.id"> </componentDemandeAno>
 
-                </div>
+                </div> -->
 
                   <div id="tab28" class="tab-pane">
                <div align="right">
@@ -214,18 +242,23 @@
 <script>
     import { mapGetters, mapActions } from "vuex";
     //import moment from 'moment';
-     import publicationOffre from '../../bien_service/DossierPso/publicationOffre/publicationOffre';
-     import invitationCf from '../../bien_service/DossierPso/lettreInvitation/invitationCf';
-     import componentCotation from '../../bien_service/dossierDetailMarchePs/dossierComponentPs/componentCotation';
+   
+   // import publicationOffre from '../../bien_service/DossierPso/publicationOffre/publicationOffre';
+      import publicationRecrutement from '../dossierPersonnel/dossierAvisRecrutement/publicationRecrutement';
+    import invitationCf from '../../bien_service/DossierPso/lettreInvitation/invitationCf';
+     //import componentCotation from '../../bien_service/dossierDetailMarchePs/dossierComponentPs/componentCotation';
      import componentOuverture from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
      import componentOuvertureMembre from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
      import componentAnalyse from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
      import componentPv from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
-     import componentDemandeAno from '../../bien_service/dossierDetailMarcheAOI_AON/dossierDemande_ano_cf/componentDemandeAno'; 
+    // import componentDemandeAno from '../../bien_service/dossierDetailMarcheAOI_AON/dossierDemande_ano_cf/componentDemandeAno'; 
      import componentAvisBailleurCf from '../../bien_service/dossierDetailMarcheAOI_AON/dossierAvisBailleurAvecCf/componentAvisBailleurCf'
      import componentActe from '../../bien_service/dossierDetailMarchePs/dossierComponentActe/componentActe' ;
-   
-   //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
+     import mandateBs from '../../bien_service/DossierPso/mandaté/mandateBs';
+     import candidatPersonnel from '../dossierPersonnel/dossierCandidatPersonnel/candidatPersonnel';
+     import rapportOuverture from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuverture';
+  
+  //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
     //import {  ModelListSelect } from 'vue-search-select'
     import 'vue-search-select/dist/VueSearchSelect.css'
 //import { formatageSomme } from "../../../../src/Repositories/Repository";
@@ -233,16 +266,20 @@
        
         components:{
 
-            publicationOffre,
+           // publicationOffre,
+           publicationRecrutement,
             invitationCf,
-            componentCotation,
+           // componentCotation,
             componentOuverture,
             componentOuvertureMembre,
             componentAnalyse,
             componentPv,
-            componentDemandeAno,
+            //componentDemandeAno,
             componentAvisBailleurCf,
-            componentActe
+            componentActe,
+            mandateBs,
+            candidatPersonnel,
+            rapportOuverture
          
 
             

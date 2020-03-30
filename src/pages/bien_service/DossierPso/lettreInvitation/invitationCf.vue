@@ -46,7 +46,7 @@
 
               
      
-<!-- debut ajout acte effet financier --->
+
 
 
 
@@ -61,7 +61,7 @@
                           <tr>
                             <td>
                         <div class="control-group">
-                        <label class="control-label">Offre</label>
+                        <label class="control-label">Reférence</label>
                         <div class="controls">
                             <!-- <select v-model="formLettre.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -122,7 +122,7 @@
                             <tr>
                                 <td colspan="2" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet  offre :</label>
+                            <label class="control-label">Objet de lettre:</label>
                             <div class="controls">
                                  <textarea   v-model="formLettre.objet_lettre"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
                     
@@ -184,7 +184,7 @@
                                <tr>
                             <td>
                         <div class="control-group">
-                        <label class="control-label">Offre</label>
+                        <label class="control-label"></label>
                         <div class="controls">
                             <!-- <select v-model="formLettre.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -245,7 +245,7 @@
                             <tr>
                                 <td colspan="2" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet  offre :</label>
+                            <label class="control-label">Objet de lettre:</label>
                             <div class="controls">
                                  <textarea   v-model="edite_Lettre_invitation.objet_lettre"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
                     
@@ -568,6 +568,7 @@ formatageSomme:formatageSomme,
  formaterDate(date) {
               return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },
+            
              OnchangeFichier(e) {
                 const files = e.target.files;
                 this.selectedFile = event.target.files[0];

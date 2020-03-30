@@ -7,6 +7,7 @@
 
                           <a href="#ajouterCojo" data-toggle="modal" class="btn btn-warning" >Ajouter </a>
 
+
                       </div>
                            
                   </div>
@@ -16,14 +17,15 @@
                       <thead>
                       <tr>
                            <!-- <th>Ref offre</th> -->
-                          <th>Date Composition</th>
+                          <th>Date Composition </th>
                           <th>Date ouverture</th>
                           <th>Nmbr particiapnt</th>
                           <th>Action</th>
                       </tr>
+                      
                       </thead>
                       <tbody>
-                      <tr class="odd gradeX" v-for="(appelOffre, index) in listeCojo(macheid)"
+                      <tr class="odd gradeX" v-for="(appelOffre, index) in listeCojo(macheid.id)"
                           :key="appelOffre.id">
                            <!-- <td @click="afficheBouttonTechCojo(index)">
                               {{appelOffre.varObjetCotation.ref_offre || 'Non renseigné'}}</td> -->
@@ -79,11 +81,11 @@
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
                                         :value="plans.id">{{plans.ref_offre}}</option>
                             </select> -->
-                            <input
+                             <input
                                     type="text"
-                                    :value="listeAppelOffre(macheid)"
+                                    :value="affichierReferenceAppelOffre(macheid)"
                                     class="span"
-                                       readonly
+                                   readonly
                             />
                             
                         </div>
@@ -187,9 +189,9 @@
                             </select> -->
                              <input
                                     type="text"
-                                    :value="listeAppelOffre(macheid)"
+                                    :value="affichierReferenceAppelOffre(macheid)"
                                     class="span"
-                                       readonly
+                                   readonly
                             />
                         </div>
                         </div>
@@ -274,7 +276,7 @@ export default {
                         date_composition:"",
                         num_dossier_appel_offre:"",
                         nbr_participant:"",
-                        cotation_id:""
+                        appel_offre_id:""
             },
             
             edite_cojo:"",
@@ -284,7 +286,8 @@ export default {
     created(){
     },
     computed:{
-        ...mapGetters('bienService',['getterCojos','gettersCotations','gettersCojoPersonnaliser']),
+        ...mapGetters('bienService',['getterCojos','gettersCotations','appelOffres',
+        'gettersCojoPersonnaliser']),
   ...mapGetters('personnelUA', ['acteur_depenses']),
   
 
@@ -300,22 +303,47 @@ export default {
                     }
                 }
             },
-listeAppelOffre() {
+// listeAppelOffre() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.gettersCotations.find(qtreel => qtreel.marche_id == id);
+
+//       if (qtereel) {
+//         return qtereel.ref_offre;
+//       }
+//       return 0
+//         }
+//       };
+//     },
+// listeAppelOffreId() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.gettersCotations.find(qtreel => qtreel.marche_id == id);
+
+//       if (qtereel) {
+//         return qtereel.id;
+//       }
+//       return 0
+//         }
+//       };
+//     },
+
+    affichierReferenceAppelOffre() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.gettersCotations.find(qtreel => qtreel.marche_id == id);
+           const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
 
       if (qtereel) {
-        return qtereel.ref_offre;
+        return qtereel.ref_appel;
       }
       return 0
         }
       };
     },
-listeAppelOffreId() {
+affichierAppelOffreid() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.gettersCotations.find(qtreel => qtreel.marche_id == id);
+           const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
 
       if (qtereel) {
         return qtereel.id;
@@ -375,12 +403,12 @@ listeAppelOffreId() {
          var nouvelObjet ={
              ...this.formDataCojo,
              marche_id:this.macheid.id,
-             cotation_id :this.listeAppelOffreId(this.macheid)
+             appel_offre_id :this.affichierAppelOffreid(this.macheid)
 
          }
               this.ajouterCojo(nouvelObjet)
                 this.formDataCojo={
-                        cotation_id:"",
+                        appel_offre_id:"",
                         // condition_id:'',
                         // controleur_finnancier:"",
                         // dmp:"",
@@ -397,7 +425,7 @@ listeAppelOffreId() {
       var nouvelObjet1 ={
              ...this.edite_cojo,
              marche_id:this.macheid.id,
-             cotation_id :this.listeAppelOffreId(this.macheid)
+             appel_offre_id :this.affichierAppelOffreid(this.macheid)
 
          }
                 this.modifierCojo(nouvelObjet1)

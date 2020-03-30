@@ -71,12 +71,12 @@
                                  <li class=""><a data-toggle="tab" href="#tab0045" title="reception des offres">Reception</a></li>
                                
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
-                                <!-- <li class=""><a data-toggle="tab" href="#tab5">Rapport d'ouverture</a></li> -->
+                                <li class=""><a data-toggle="tab" href="#tab5">Rapport d'ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab6" title="jugement des offres">Jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab7" title="rapport d'évaluation combiné">Rapport</a></li>
 
                                  <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP"> D.ANO</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab028" title="ANO/DMP attribution">A.ANO</a></li>
+                                <!-- <li class=""><a data-toggle="tab" href="#tab028" title="ANO/DMP attribution">A.ANO</a></li> -->
                                       
                                       <li class=""><a data-toggle="tab" href="#tab28" title="demande ANO Bailleur"> D.Bailleur </a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab0008" title="ANO bailleur attribution">PV </a></li> -->
@@ -187,6 +187,19 @@
                 </div>
 
 
+                 
+                   <div id="tab5" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterRapportOuverture" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+                    </div>
+                    <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
+
+                </div>
+               
+
+                </div>
+
                    <div id="tab6" class="tab-pane">
                   <div align="right">
                     <div class="widget-content">
@@ -251,17 +264,17 @@
 
                 </div>
 
-                  <div id="tab028" class="tab-pane">
+                  <!-- <div id="tab028" class="tab-pane">
                <div align="right">
                     <div class="widget-content">
-                        <!-- <a href="#ajouterD" data-toggle="modal" class="btn btn-primary">Ajouter</a> -->
+                       
                     </div>
 
 
                 </div>
                  <componentAvisAnoCf :macheid="detail_marche.id"> </componentAvisAnoCf>
 
-                </div>
+                </div> -->
 
 
 
@@ -322,7 +335,8 @@
     import componentCotation from '../dossierDetailMarchePs/dossierComponentPs/componentCotation';
      import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
       import componentOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
-      import componentAnalyse from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
+      import rapportOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuverture';
+     import componentAnalyse from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
     
      import componentOuvertureMembre from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
       import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
@@ -337,7 +351,7 @@
         import publicationOffre from '../DossierPso/publicationOffre/publicationOffre';
         import componentDemandeAno from '../dossierDetailMarcheAOI_AON/dossierDemande_ano_cf/componentDemandeAno'; 
          import componentAvisBailleurSurTransmision from '../dossierDetailMarcheAOI_AON/dossierAvisBailleurSurTransmission/componentAvisBailleurSurTransmision';
-        import componentAvisAnoCf from '../dossierDetailMarcheAOI_AON/dossierAvisAnoCf/componentAvisAnoCf';
+        //import componentAvisAnoCf from '../dossierDetailMarcheAOI_AON/dossierAvisAnoCf/componentAvisAnoCf';
          import componentAvisBailleurCf from '../dossierDetailMarcheAOI_AON/dossierAvisBailleurAvecCf/componentAvisBailleurCf'
          
     //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
@@ -354,7 +368,8 @@
             componentEtat,
             componentOuverture,
             componentOuvertureMembre,
-            componentAnalyse,
+           rapportOuverture,
+           componentAnalyse,
        
          componentPv,
         // composantPv1,
@@ -366,7 +381,7 @@
             invitationCf,
             componentDemandeAno,
             componentAvisBailleurSurTransmision,
-            componentAvisAnoCf,
+            //componentAvisAnoCf,
             componentAvisBailleurCf
             
          

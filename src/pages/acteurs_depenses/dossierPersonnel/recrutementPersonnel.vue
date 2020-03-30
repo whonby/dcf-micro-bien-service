@@ -211,6 +211,7 @@
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{afficherUniteAdministrative(marche.AfficheMarche.unite_administrative_id) || 'Non renseigné'}}</td>
 
+
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.AfficheMarche.type_marche.libelle || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -346,10 +347,6 @@
                    <span class=""><i class="icon-book"></i></span>
                    </router-link> -->
 
-                  <router-link :to="{name:'detailPersonnel',params:{id:marche.id}}"
-                   class="btn btn-default"  title="detail personnel R3CV">
-                   <span class=""><i class="icon-folder-open"></i></span>
-                   </router-link>
 
 
                    <!-- <router-link :to="{name:'detailMarcheAoi_Aon',params:{id:marche.id}}"
@@ -523,7 +520,7 @@
                     <th>Imputation</th>
                        <th>Objet march&eacute;</th>
                         <th>Reference march&eacute;</th> 
-                                    <th>Montant prevue</th>
+                                    <!-- <th>Montant prevue</th> -->
                                 <th>Attribution</th>
                                 <th>Action</th>
                 </tr>
@@ -551,9 +548,9 @@
                    {{marche.reference_marche || 'Non renseigné'}}</td>
                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
+                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
-                  
+                   -->
 <td>
                      <button 
                       v-if="marche.attribue == 1"  class="btn  btn-success">
@@ -580,6 +577,12 @@
                 class="btn btn-default " title="Detail Engagement">
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link>  -->
+
+                   
+                  <router-link :to="{name:'detailPersonnel',params:{id:marche.id}}"
+                   class="btn btn-default"  title="detail personnel R3CV">
+                   <span class=""><i class="icon-folder-open"></i></span>
+                   </router-link>
               <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
@@ -607,12 +610,12 @@
                       <td>
                           
                       </td>
-                       <td style="font-weight:bold;"> Total Marché
+                       <!-- <td style="font-weight:bold;"> Total Marché
                       </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
                            {{formatageSomme(parseFloat(montantPlanifier))}}
                            
-                      </td>
+                      </td> -->
                        <td>
                           
                       </td>

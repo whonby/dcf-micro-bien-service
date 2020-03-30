@@ -25,7 +25,10 @@ const defaultstate = {
     categorieGrade: [],
     familleFonction: [],
     classificationGradeFonction: [],
-    fonctionBudgetaire:[]
+    fonctionBudgetaire:[],
+    dossierPersonnels:[]
+    
+
 };
 
  export default defaultstate

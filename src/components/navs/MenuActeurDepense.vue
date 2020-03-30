@@ -66,7 +66,7 @@
           data-target="#mission"
           class="dropdown-toggle"
         >
-          <span class="text">SUIVI DES MISSIONS </span> )
+          <span class="text">SUIVI DES MISSIONS </span> 
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">

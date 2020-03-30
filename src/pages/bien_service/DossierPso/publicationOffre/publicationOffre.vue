@@ -50,7 +50,7 @@
 
               
      
-<!-- debut ajout acte effet financier --->
+ 
 
 
 
@@ -204,10 +204,6 @@
                             
 
                 </table>
-
-
-              
-
 
             </div>
              <div class="modal-footer">
@@ -375,17 +371,8 @@ typeProcedureLibelle() {
             },
 
 
-
-
-
-
-
-
              ajouter(){
-               
-
-
-                var nouvelObjet = {
+     var nouvelObjet = {
       ...this.formData,
       
        type_appel: this.typeProcedure_id(this.procedurePassation_id(this.macheid)),
