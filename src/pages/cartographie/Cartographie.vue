@@ -27,15 +27,25 @@
                                     layer-type="base"/>
                            <!-- <l-control-zoom position="bottomright"  ></l-control-zoom>-->
                             <v-marker-cluster >
-                                <l-marker v-for="l in localisation" :key="l.id" :lat-lng="l.latlng" :icon="icon">
-                                    <l-popup :content="l.ville"></l-popup>
+                                <l-marker v-for="l in localisation" :key="l.id" :lat-lng="l.latlng" @click="uniteAdmin(l.id,l.ville)">
+                              <!--      <LIcon
+                                            :options="{
+            iconUrl:      'http://dcf-parametrage.kognishare.com/point-rouge-png.png',
+            shadowUrl:    'https://vdcrea.gitlab.io/vue-leaflet/static/leaf-shadow.png',
+            iconSize:     [38, 95], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+          }"/>-->
+                                    <!--<l-popup :content="l.ville"></l-popup>-->
                                     <l-tooltip :options="{interactive: true, permanent: true}">
                                        <b>{{l.ville}}</b> <br>
-<div style="font-size: 10px;">
-    Budget: <span style="color: #16c711">20</span> <br>
-    Budget execute:101<br>
-    Budget restant:101<br>
-    Taux d'execution:101
+<div style="font-size: 11px;">
+    Budget: <span style="color: #003900; "><b>20</b></span> <br>
+    Budget execute:<span style="color: #00d700; "><b>101</b></span><br>
+    Budget restant:<span style="color: darkred; "><b>101</b></span><br>
+    Taux d'execution:<span style="color: #e36706; "><b>101</b></span>
 </div>
 
                                     </l-tooltip>
@@ -47,10 +57,25 @@
             <div class="span4">
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-                        <h5>Liste des unite administrative</h5>
+                        <h5>Liste des unite administrative
+                        </h5>
                     </div>
-                    <div class="widget-content">
-
+                    <div class="widget-content" >
+                        <a data-dismiss="modal" class="btn btn-primary" href="#" v-if="zone_geographique">{{zone_geographique}}</a>
+                        
+                        <button v-if="zone_geographique" @click.prevent="afficher()"  class="btn btn-danger ">
+                        <span class="">Afficher tous</span></button>
+                        <table class="table table-bordered table-striped" >
+                            <tr>
+                                <th>Nom UA </th>
+                            </tr>
+                            <tbody style="height: 100px;">
+                            <tr class="odd gradeX" v-for="ua in administratif(idzone)"
+                                :key="ua.id">
+                                <td>{{ua.libelle}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -64,7 +89,7 @@
 <script>
     import {mapGetters} from 'vuex'
     import { latLng, Icon, icon } from 'leaflet'
-    import { LMap, LTileLayer, LMarker, LPopup,LIconDefault,LControlLayers,LTooltip } from "vue2-leaflet";
+    import { LMap, LTileLayer, LMarker,LIconDefault,LControlLayers,LTooltip } from "vue2-leaflet";
     import iconUrl from 'leaflet/dist/images/marker-icon.png'
     import shadowUrl from 'leaflet/dist/images/marker-shadow.png'
     export default {
@@ -73,10 +98,11 @@
             LMap,
             LTileLayer,
             LMarker,
-            LPopup,
+            //LPopup,
             LTooltip,
             LIconDefault,
             LControlLayers,
+           // LIcon
 
         },
         data() {
@@ -89,6 +115,8 @@
                 icon: customicon,
                 clusterOptions: {},
                 zoom: 3,
+                idzone:"",
+                zone_geographique:"",
                 center: latLng(47.41322, -1.219482),
                 url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
                 attribution:
@@ -163,6 +191,12 @@
 // methode pour maper notre guetter
     ...mapGetters('parametreGenerauxAdministratif', ['structures_geographiques',
             'localisations_geographiques']),
+        ...mapGetters("uniteadministrative", [
+            "acteCreations",
+            "typeTextes",
+            "uniteAdministratives",
+            "getterBudgeCharge"
+        ]),
             localisationsFiltre(){
             const searchTerm = this.search.toLowerCase();
             console.log(this.localisations_geographiques.filter(item=>item.parent!==null))
@@ -185,7 +219,11 @@
                         let objetAlocalise={
                             id:value.id,
                             ville:value.libelle,
-                            latlng:coordonne
+                            latlng:coordonne,
+                            budget:"",
+                            budgetReste:'',
+                            budgetExecute:"",
+                            tauxBudget:""
                         }
                         localisation.push(objetAlocalise)
                     }
@@ -193,10 +231,21 @@
                 }
             })
         return localisation;
-        }
+        },
+      administratif(){
+          return  uniteAdmin=>{
+              if (uniteAdmin!="") {
+
+                  return this.uniteAdministratives.filter( item => item.localisationgeo_id == uniteAdmin)
+              }else{
+                  return this.uniteAdministratives;
+              }
+          }
+      }
 
     },
         methods: {
+
             zoomUpdate(zoom) {
                 this.currentZoom = zoom;
             },
@@ -208,6 +257,16 @@
             },
             innerClick() {
                 alert("Click!");
+            },
+            uniteAdmin(id,ville){
+                this.idzone=id
+                this.zone_geographique=ville
+               console.log(id)
+
+            },
+            afficher(){
+                this.idzone=""
+                this.zone_geographique=""
             },
             click: (e) => console.log("clusterclick", e),
             ready: (e) => console.log('ready', e),
