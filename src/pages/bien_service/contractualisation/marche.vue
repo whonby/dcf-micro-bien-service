@@ -621,7 +621,7 @@
                    </router-link> 
 
                      
-                 <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+                 <!-- <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail marche">
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link> 
@@ -639,10 +639,10 @@
                    <router-link :to="{name:'detailMarcheAoi_Aon',params:{id:marche.id}}"
                    class="btn btn-default"  title="detail marche AOI-AON">
                    <span class=""><i class="icon-user"></i></span>
-                   </router-link>
+                   </router-link> -->
 
 
->>>>>>> 6db411edd3eeb7a6abc39a5c8321e254ea2e0882
+
               <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
