@@ -53,7 +53,6 @@ affichierNomEntreprise
 
               
      
-<!-- debut ajout acte effet financier --->
 
 
 
@@ -321,7 +320,7 @@ affichierNomEntreprise
 
 
 
-<!-- debut modifier acte effet financier --->
+
 
 
 

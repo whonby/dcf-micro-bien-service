@@ -14,7 +14,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                         <tr class="odd gradeX" v-for="(ouverture, index) in listeOuverture(macheid)"
+                         <tr class="odd gradeX" v-for="(ouverture, index) in listeOuverture(macheid.id)"
                         :key="ouverture.id">
 
                          <td @click="afficherModalOuverture(index)">

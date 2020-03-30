@@ -26,7 +26,7 @@
                         :key="appelOffre.id">
                         <td @click="afficheAnnalyseDossier(index)">
 
-                            {{appelOffre.appel_offre_id|| 'Non renseigné'}}</td>
+                            {{appelOffre.affichierReferenceAppelOffre|| 'Non renseigné'}}</td>
 
                           
                         <!-- <td @click="afficheAnnalyseDossier(index)">
