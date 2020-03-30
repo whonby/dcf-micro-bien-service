@@ -26,9 +26,19 @@
                                     :url="tileProvider.url"
                                     layer-type="base"/>
                            <!-- <l-control-zoom position="bottomright"  ></l-control-zoom>-->
-                            <v-marker-cluster :options="clusterOptions" @clusterclick="click()" @ready="ready">
+                            <v-marker-cluster >
                                 <l-marker v-for="l in localisation" :key="l.id" :lat-lng="l.latlng" :icon="icon">
                                     <l-popup :content="l.ville"></l-popup>
+                                    <l-tooltip :options="{interactive: true, permanent: true}">
+                                       <b>{{l.ville}}</b> <br>
+<div style="font-size: 10px;">
+    Budget: <span style="color: #16c711">20</span> <br>
+    Budget execute:101<br>
+    Budget restant:101<br>
+    Taux d'execution:101
+</div>
+
+                                    </l-tooltip>
                                 </l-marker>
                             </v-marker-cluster>
                         </l-map> </div>
@@ -39,7 +49,9 @@
                     <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
                         <h5>Liste des unite administrative</h5>
                     </div>
-                    <div class="widget-content"> {{localisation}} </div>
+                    <div class="widget-content">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -52,7 +64,7 @@
 <script>
     import {mapGetters} from 'vuex'
     import { latLng, Icon, icon } from 'leaflet'
-    import { LMap, LTileLayer, LMarker, LPopup,LIconDefault,LControlLayers } from "vue2-leaflet";
+    import { LMap, LTileLayer, LMarker, LPopup,LIconDefault,LControlLayers,LTooltip } from "vue2-leaflet";
     import iconUrl from 'leaflet/dist/images/marker-icon.png'
     import shadowUrl from 'leaflet/dist/images/marker-shadow.png'
     export default {
@@ -62,7 +74,7 @@
             LTileLayer,
             LMarker,
             LPopup,
-
+            LTooltip,
             LIconDefault,
             LControlLayers,
 
