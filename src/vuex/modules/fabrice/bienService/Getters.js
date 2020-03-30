@@ -1,4 +1,4 @@
-
+gettersOuverturePersonnaliser
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays
@@ -192,7 +192,7 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
 
      export const gettersOuverturePersonnaliser = (state, getters, rootState, rootGetters) =>
     state.gettersOuvertures.map(element => {
-        if (element.entreprise_id !== null && element.cotation_id !==null) {
+        if (element.entreprise_id !== null) {
             element = {
                 ...element,
 
@@ -202,9 +202,9 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
                 )
                 ,
 
-                varObjetCotation: rootGetters['bienService/gettersCotation'].find(
-                    plans => plans.id == element.cotation_id
-                ),
+                // varObjetCotation: rootGetters['bienService/gettersCotation'].find(
+                //     plans => plans.id == element.cotation_id
+                // ),
 
                
 
