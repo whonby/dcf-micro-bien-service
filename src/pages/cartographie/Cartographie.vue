@@ -1,6 +1,15 @@
 <template>
     <div>
         <div class="container-fluid">
+            <div class="quick-actions_homepage">
+                <ul class="quick-actions">
+                    <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> Budget </a> </li>
+                    <li class="bg_lg "> <a href="charts.html"> <i class="icon-signal"></i> budget execute </a> </li>
+                    <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> Budget restant </a> </li>
+                    <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i> Taux d'execution</a> </li>
+
+                </ul>
+            </div>
         <div class="row-fluid">
             <div class="span8">
                 <div class="">
@@ -15,11 +24,10 @@
                                     :name="tileProvider.name"
                                     :visible="tileProvider.visible"
                                     :url="tileProvider.url"
-
                                     layer-type="base"/>
                            <!-- <l-control-zoom position="bottomright"  ></l-control-zoom>-->
                             <v-marker-cluster :options="clusterOptions" @clusterclick="click()" @ready="ready">
-                                <l-marker v-for="l in villes" :key="l.id" :lat-lng="l.latlng" :icon="icon">
+                                <l-marker v-for="l in localisation" :key="l.id" :lat-lng="l.latlng" :icon="icon">
                                     <l-popup :content="l.ville"></l-popup>
                                 </l-marker>
                             </v-marker-cluster>
@@ -29,9 +37,9 @@
             <div class="span4">
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-                        <h5>One third width <code>class=Span4</code></h5>
+                        <h5>Liste des unite administrative</h5>
                     </div>
-                    <div class="widget-content"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor </div>
+                    <div class="widget-content"> {{localisation}} </div>
                 </div>
             </div>
         </div>
@@ -44,7 +52,7 @@
 <script>
     import {mapGetters} from 'vuex'
     import { latLng, Icon, icon } from 'leaflet'
-    import { LMap, LTileLayer, LMarker, LPopup, LTooltip,LIconDefault,LControlLayers } from "vue2-leaflet";
+    import { LMap, LTileLayer, LMarker, LPopup,LIconDefault,LControlLayers } from "vue2-leaflet";
     import iconUrl from 'leaflet/dist/images/marker-icon.png'
     import shadowUrl from 'leaflet/dist/images/marker-shadow.png'
     export default {
@@ -54,7 +62,7 @@
             LTileLayer,
             LMarker,
             LPopup,
-            LTooltip,
+
             LIconDefault,
             LControlLayers,
 
@@ -65,6 +73,7 @@
                 {iconUrl, shadowUrl}
             ))
             return {
+                search:"",
                 icon: customicon,
                 clusterOptions: {},
                 zoom: 3,
@@ -144,6 +153,7 @@
             'localisations_geographiques']),
             localisationsFiltre(){
             const searchTerm = this.search.toLowerCase();
+            console.log(this.localisations_geographiques.filter(item=>item.parent!==null))
             return this.localisations_geographiques.filter((item) => {
 
                     return item.code.toLowerCase().includes(searchTerm)
@@ -153,7 +163,24 @@
             )
         },
         localisation(){
-        return null;
+        let localisation=[]
+            this.localisations_geographiques.forEach(function (value){
+                if(value.parent!=null){
+                    if(value.longitude!=null && value.latitude!=null){
+                        let coordonne=[]
+                        coordonne.push(value.latitude)
+                        coordonne.push(value.longitude)
+                        let objetAlocalise={
+                            id:value.id,
+                            ville:value.libelle,
+                            latlng:coordonne
+                        }
+                        localisation.push(objetAlocalise)
+                    }
+
+                }
+            })
+        return localisation;
         }
 
     },
