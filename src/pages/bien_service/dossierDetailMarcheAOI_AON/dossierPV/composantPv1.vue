@@ -1,9 +1,8 @@
 <template>
+
     <div>
-
-  <!--debut du tableau pv  -->
-
-    <table class="table table-bordered table-striped" v-if="macheid">
+          <h4> liste de PV</h4>
+                <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
 
@@ -51,14 +50,11 @@
                     </tr>
                     </tbody>
                 </table>
-  <!-- fin du tableau -->
 
 
 
-
-
-
- <div id="ajouterObservationBailleur" class="modal hide">
+                
+ <div id="ajouterPv1" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter le PV</h3>
@@ -96,9 +92,7 @@
             </div>
         </div>
 
-
-
-        <div id="modificationPV" class="modal hide">
+              <div id="modificationPV" class="modal hide">
                   <div class="modal-header">
                       <button data-dismiss="modal" class="close" type="button">×</button>
                       <h3>Modification de PV</h3>
@@ -133,8 +127,6 @@
                       <a data-dismiss="modal" class="btn" href="#">Fermer</a>
                   </div>
               </div>
-
-
 
               <div id="infoPV" class="modal hide grdirModalActeEffet">
                   <div class="modal-header">
@@ -187,53 +179,70 @@
               </div>
     </div>
 </template>
-
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters,mapActions } from 'vuex';
 export default {
-    name:"compte",
-    data(){
-        return{
-            edite_pv:"",
-            imagePDF:"",
-            namePDF:"",
-            fichierPDF:"",
-            selectedFile:"",
-            
-            resultaAnalysePv:[],
-           
-                appel_offre_id:""
-            
-        }
-    },
-    props:['macheid'],
-    created(){
-    },
- computed:{
-         ...mapGetters("bienService", [ "typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
-                "modePassations", "procedurePassations","getterDossierCandidats","marches",
-                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
-                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
-                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
-                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
-                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
-            ...mapGetters('personnelUA', ['acteur_depenses']),
-                ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
-            ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
-                'types_financements']) ,
+data(){
+
+    return{
+
+
+        resultaAnalysePv:[],
+
+    }
+},
+
+
+props:["macheid"],
+
+
+
+
+
+     computed: {
+
+            ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,"gettersCotations","gettersTransmissions"]),
+            // ...mapGetters('personnelUA', ['acteur_depenses']),
+
+
+               ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
+            // ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
+            //     'types_financements']) ,
                 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
-        
-                listePV(){
+          listePV(){
                return macheid=>{
-                   if(macheid!=""){
-                       let objet=this.getterProceVerballe.filter(item=>item.appel_offre.macheid==macheid);
+                   if(marche_id!=""){
+                       let objet=this.getterProceVerballe.filter(item=>item.macheid==macheid);
                       // console.log("PV est en cour10")
                        return objet
                    }
                }
              },
-               infoPVAffiche(ref){
+            // listePVDemandePV(){
+            //     return macheid=>{
+            //         if(macheid!=""){
+            //             return this.getterProceVerballe.find(item=>{
+            //                 if(item.appel_offre.macheid==macheid && item.avie==null ){
+            //                     let vM=this;
+            //                     vM.formDemande.proce_verbal_jugement_offre_id=item.id
+            //                     return item;
+            //                 }
+            //             });
+            //         }
+            //     }
+            // },
+
+        
+     },
+
+     methods:{
+
+         ...mapActions('bienService',['supprimerProceVerbal',
+         'modificationProceVerbalOffre','ajouterProceVerbal']),
+
+         
+         infoPVAffiche(ref){
                 this.resultaAnalysePv=[]
                 let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==ref);
                 this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
@@ -244,16 +253,19 @@ export default {
                 }
                 //console.log(this.resultaAnalysePv)
             },
-},
-methods:{
-...mapActions('bienService',['ajouterProceVerbal',
-'modificationProceVerbalOffre','supprimerProceVerbal','getAnalyseDossier',
-'getDemandeAno','getAnalyseDMP','getAnoDMPBailleur']),
-          
+
+             afficherModificationPV(index){
+       this.$('#modificationPV').modal({
+           backdrop: 'static',
+           keyboard: false
+       });
+       this.edite_pv = this.getterProceVerballe.find(item=>item.id==index);
+   }  ,
+
     ajouterPV(){
                 const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
-               // formData.append('appel_offre_id', this.formLot.appel_offre_id);
+                formData.append('appel_offre_id', this.formLot.appel_offre_id);
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'
@@ -262,6 +274,7 @@ methods:{
                 //console.log(formData)
                 this.ajouterProceVerbal(formData,config);
             },
+
              modificationProceVerbal(){
                 const formData = new FormData();
                 formData.append('reference', this.edite_pv.reference);
@@ -283,29 +296,9 @@ methods:{
                 this.getAnalyseDMP()
                 this.getAnoDMPBailleur()
             },
-            OnchangeFichier(e) {
-                const files = e.target.files;
-                this.selectedFile = event.target.files[0];
-                console.log(this.selectedFile)
-                Array.from(files).forEach(file => this.addFichierPDF(file));
-            },
-            addFichierPDF(file) {
-                let reader = new FileReader();
-                let vm = this;
-                reader.onload = e => {
-                    vm.imagePDF = "pdf.png";
-                    vm.namePDF = file.name;
-                    vm.fichierPDF = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            },
-              afficherModificationPV(index){
-       this.$('#modificationPV').modal({
-           backdrop: 'static',
-           keyboard: false
-       });
-       this.edite_pv = this.getterProceVerballe.find(item=>item.id==index);
-   }  ,
-},
+
+         
+     }
+    
 }
 </script>

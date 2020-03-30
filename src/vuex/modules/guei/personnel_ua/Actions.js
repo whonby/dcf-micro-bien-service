@@ -225,6 +225,98 @@ export function modifierClasse({commit}, formData){
     })
 
 }
+
+
+
+
+
+
+export  function  getDossierCandidatPersonnel({commit}) {
+
+    queue.push(() =>  axios.get('/liste_candidat').then(response => {
+            // console.log(response.data)
+            commit('GET_ALL_DOSSIER_CANDIDAT', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+// ajouter type acte personnel
+export  function ajouterDossierCandidat({commit}, objetAjoute, config){
+    this.$app.$loading(true)
+    axios.post('/add_candidat', objetAjoute, config ).then(res => {
+        if(res.status == 201){
+            this.$app.$notify({
+                title: 'success',
+                text: 'Enregistrement effectuer',
+                type:"success"
+            });
+            commit('AJOUTER_DOSSIER_CANDIDAT', res.data)
+            this.$app.$loading(false)
+        }
+    }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Success',
+            text: "Enregistrement effectuÃ© avec success",
+            type:"Success"
+        });
+    })
+}
+
+// supprimer type act
+export function supprimerDossierCandidat({commit}, id){
+
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
+        this.$app.$notify({
+            title: 'Suppression',
+            text: 'Suppression effectuer',
+            type:"Supprimer"
+        });
+        commit('SUPPRIMER_DOSSIER_CANDIDAT', id)
+        axios.delete('/delete_candidat/' + id).then(() => dialog.close() )
+    })
+
+}
+
+export function modifierDossierCandidat({commit}, formData,config){
+    this.$app.$loading(true)
+    axios.post('/update_candidat' ,formData,config).then(response => {
+        this.$app.$notify({
+            title: 'success',
+            text: 'Modification effectuer',
+            type:"success"
+        });
+        commit('MODIFIER_DOSSIER_CANDIDAT', response.data)
+        this.$app.$loading(false)
+    }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Modifier',
+            text: "Modification effectuÃ© avec success",
+            type:"Modifier"
+        });
+    })
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 // modifier type acte personnel
 /*export function modifierFonction({commit}, titre){
 
@@ -632,7 +724,7 @@ export function ajouterGrades({ commit, dispatch }, formData) {
                dispatch("getCategorieGrade");
                this.$app.$notify({
                  title: "success ",
-                 text: "Enregistrement effectué !",
+                 text: "Enregistrement effectuï¿½ !",
                  type: "success"
                });
              }
@@ -663,7 +755,7 @@ export function modifierGrade({ commit, dispatch }, nouveau) {
            dispatch("getCategorieGrade");
            this.$app.$notify({
              title: "Success",
-             text: "Modification Effectué avec Succès!",
+             text: "Modification Effectuï¿½ avec Succï¿½s!",
              type: "success"
            });
          });
@@ -1081,7 +1173,7 @@ export function ajouterCategorieGrade({ commit }, formData) {
 
                this.$app.$notify({
                  title: "success ",
-                 text: "Enregistrement effectué !",
+                 text: "Enregistrement effectuï¿½ !",
                  type: "success"
                });
              }
@@ -1115,7 +1207,7 @@ export function modifierCategorieGrade({ commit }, nouveau) {
         //    dispatch("getAllUniteAdministrative");
            this.$app.$notify({
              title: "Success",
-             text: "Modification Effectué avec Succès!",
+             text: "Modification Effectuï¿½ avec Succï¿½s!",
              type: "success"
            });
          });
@@ -1157,7 +1249,7 @@ export function ajouterFamilleFonction({ commit }, formData) {
 
                this.$app.$notify({
                  title: "success ",
-                 text: "Enregistrement effectué !",
+                 text: "Enregistrement effectuï¿½ !",
                  type: "success"
                });
              }
@@ -1189,7 +1281,7 @@ export function modifierFamilleFonction({ commit }, nouveau) {
            //    dispatch("getAllUniteAdministrative");
            this.$app.$notify({
              title: "Success",
-             text: "Modification Effectué avec Succès!",
+             text: "Modification Effectuï¿½ avec Succï¿½s!",
              type: "success"
            });
          });
@@ -1326,7 +1418,7 @@ export function modifierClassificationGradeFonction({ commit, dispatch }, nouvea
         dispatch("getFamilleFonction");
         this.$app.$notify({
             title: "Success",
-            text: "Modification Effectué avec Succès!",
+            text: "Modification Effectuï¿½ avec Succï¿½s!",
             type: "success"
         });
     });
@@ -1394,7 +1486,7 @@ export function modifierFonctionBudgetaire({ commit }, formData) {
            
             this.$app.$notify({
                 title: "Success",
-                text: "Modification Effectué avec Succès!",
+                text: "Modification Effectuï¿½ avec Succï¿½s!",
                 type: "success"
             });
         });

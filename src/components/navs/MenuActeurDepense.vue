@@ -3,12 +3,57 @@
   <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
       <!--Paramètres administratifs-->
+
+              <li class="dropdown" id="personnel">
+        <a
+          title=""
+          href="#"
+          data-toggle="dropdown"
+          data-target="#personnel"
+          class="dropdown-toggle"
+        >
+          <span class="text">  PLANIFICATION DE RECRUTEMENT PERSONNEL </span>
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li class="divider"></li>
+          <li>
+            <router-link :to ="{name: 'recrutementPersonnel'}" tag="a">
+              <i class="icon-key"></i> Recrutement  des trois(3) cv du personnel
+            </router-link>
+          
+          </li>
+
+            <li class="divider"></li>
+          <li>
+            <!-- <router-link :to ="{name: ''}" tag="a">
+              <i class="icon-key"></i> Norme de missions
+            </router-link> -->
+          
+          </li>
+        
+          <li>
+            
+          </li>
+        </ul>
+      </li>   
       
        <li>
             <router-link :to="{name: 'Acteur'}" tag="a">
               PERSONNEL
             </router-link>
           </li>
+
+
+          
+       <!-- <li>
+            <router-link :to="{name: 'planificationPersonnel'}" tag="a">
+             PLANIFICATION DE RECRUTEMENT PERSONNEL
+            </router-link>
+          </li> -->
+
+
+  
      
      
 
@@ -21,7 +66,7 @@
           data-target="#mission"
           class="dropdown-toggle"
         >
-          <span class="text">SUIVI DES MISSIONS </span>
+          <span class="text">SUIVI DES MISSIONS </span> 
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">

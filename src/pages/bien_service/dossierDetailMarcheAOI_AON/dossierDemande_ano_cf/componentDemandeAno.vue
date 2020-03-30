@@ -6,11 +6,12 @@
                     <thead>
                     <tr>
                         <th>Numéro courrier</th>
-                        <!-- <th>Reference marché</th> -->
                         <!-- <th>Reférence d'offre </th> -->
                         <th>Reference PV</th>
                         <th>Date demande</th>
                         <th>Fichier</th>
+                         <th>Avis</th>
+                        <th>Date de l'avis</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -29,13 +30,23 @@
                         <td @click="afficheDemandeDAO(demande.id)">
                             {{formaterDate(demande.date_demande) || 'Non renseigné'}}</td>
 
-
                         <td>
                             <a v-if="demande.fichier" :href="demande.fichier" class="btn btn-default" target="_blank">
                                 <span class=""><i class="icon-book"></i>
                                 </span>
                             </a>
                         </td>
+
+                        
+                        <td @click="afficherModalDecisionAnocf (demande.id)"> 
+                           <span v-if="demande.avis== 0" class=" btn label label-success"> Non objection </span>
+                           <span v-else-if="demande.avis== 1" class=" btn label label-important"> objection </span>
+                           <span v-else class=" btn label label-info"> En attent</span>
+                         </td>
+
+                         <td @click="afficheDemandeDAO(demande.id)">
+                            {{formaterDate(demande.date_avis) || 'Non renseigné'}}</td>
+
                         <div class="btn-group">
                             <button @click.prevent="supprimerDemandeAno(demande.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span>
@@ -65,22 +76,29 @@
                          <div class="control-group">
                         <label class="control-label">Reference offre</label>
                         <div class="controls">
-                            <select v-model="formDemande.cotation_id" class="span" disabled>
+                            <!-- <select v-model="formDemande.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
                                         :value="plans.id">{{plans.ref_offre}}</option>
-                            </select>
+                            </select> -->
+
+                             <input
+                                    type="text"
+                                    :value="affichierReferenceAppelOffre(macheid)"
+                                    class="span"
+                                   readonly
+                            />
                         </div>
                         </div>
 
 
-                     <div class="control-group">
+                     <!-- <div class="control-group">
                         <label class="control-label">PV</label>
                         <div class="controls" v-if="listePVDemandePV(macheid)">
                             <select v-model="formDemande.proce_verbal_jugement_offre_id" class="span">
                                 <option :value="listePVDemandePV(macheid).id">{{listePVDemandePV(macheid).reference}}</option>
                             </select>
                         </div>
-                    </div>
+                    </div> -->
 
 
                      <div class="control-group">
@@ -143,19 +161,26 @@
                        <div class="control-group">
                         <label class="control-label">Reference offre</label>
                         <div class="controls">
-                            <select v-model="edite_demande_dao.cotation_id" class="span" disabled>
+                            <!-- <select v-model="edite_demande_dao.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
                                         :value="plans.id">{{plans.ref_offre}}</option>
-                            </select>
+                            </select> -->
+
+                             <input
+                                    type="text"
+                                    :value="affichierReferenceAppelOffre(macheid)"
+                                    class="span"
+                                   readonly
+                            />
                         </div>
                         </div>
 
-                    <div class="control-group">
+                    <!-- <div class="control-group">
                         <label class="control-label">PV</label>
                         <div class="controls" v-if="edite_demande_dao">
                           <input :value="edite_demande_dao.proce_verbal_offre.reference" readonly/>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="control-group">
                         <label class="control-label">Numero du courrier</label>
@@ -202,6 +227,89 @@
             </div>
         </div>
 
+
+        
+
+<div id="ajouterDecisionAvisCf" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter avis d'ANO DMP sur Le DAO</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+
+                 <div class="control-group">
+                        <label class="control-label">Reference offre</label>
+                        <div class="controls">
+                            <!-- <select v-model="formDemande.appel_offre_id" class="span" disabled>
+                                <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.ref_offre}}</option>
+                            </select> -->
+
+                              <input
+                                    type="text"
+                                    :value="affichierReferenceAppelOffre(macheid)"
+                                    class="span"
+                                   readonly
+                            />
+                        </div>
+                        </div>
+
+                    <div class="control-group">
+
+                        <label class="control-label">Date d'avis d'ANO</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="edite_demande_dao.date_avis"
+                                    class="span"
+                                    placeholder="Saisir le libelle_type"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Avis</label>
+                        <div class="controls">
+                           <select v-model="edite_demande_dao.avis" class="span">
+                               <option value="0"> Non objection</option>
+                               <option value="1">Objection </option>
+                           </select>
+                        </div>
+                    </div>
+
+                  <div class="control-group">
+          <label class="control-label">Observation:</label>
+            <div class="controls">
+              <textarea  v-model="edite_demande_dao.observations "  class="textarea_editor span"  :readonly="verouillageObservation" rows="" placeholder="Entrer  le text ..."></textarea>
+            </div>
+          
+        </div>
+
+          <div class="control-group">
+                        <label class="control-label">Motif</label>
+                        <div class="controls">
+                          <select v-model="edite_demande_dao.plan_motif_decision_id" class="span">
+                                <option v-for="varText in motifDecisions" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                        
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a
+                        @click.prevent="editDemandeDAO()"
+                        class="btn btn-primary"
+                        href="#"
+
+                >Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div>
+        </div>
+
 <notifications/>
 
 </div>
@@ -217,8 +325,8 @@ export default {
 formDemande:{
              date_demande:"",
                     num_courrier:"",
-                    proce_verbal_jugement_offre_id:"",
-                    cotation_id:""
+                   // proce_verbal_jugement_offre_id:"",
+                    appel_offre_id:""
 },
 
 edite_demande_dao:"",
@@ -238,7 +346,7 @@ selectedFileDemandeAno:""
     computed:{
           ...mapGetters("bienService", [ "typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
-                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
+                "motifDecisions","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "gettersCotations", "analyseDossiers","text_juridiques", "livrables",
@@ -260,38 +368,72 @@ selectedFileDemandeAno:""
                 }
             }, 
 
+           
 
-             listeAppelOffre(){
-                return  macheid=>{
-                    if (macheid!="") {
-                        //console.log("Marche appel offre")
-                       const vM=this;
-                        let Objet=this.gettersCotations.find( idmarche => idmarche.marche_id == macheid)
+
+            //  listeAppelOffre(){
+            //     return  macheid=>{
+            //         if (macheid!="") {
+            //             //console.log("Marche appel offre")
+            //            const vM=this;
+            //             let Objet=this.gettersCotations.find( idmarche => idmarche.marche_id == macheid)
                      
-                        if(Objet!=undefined){
+            //             if(Objet!=undefined){
                           
-                            vM.formDemande.cotation_id = Objet.id;
+            //                 vM.formDemande.appel_offre_id = Objet.id;
                          
-                        }
+            //             }
                        
-                    return this.gettersCotations.filter( idmarche => idmarche.marche_id == macheid)
-                    }
-                }
-            },
+            //         return this.gettersCotations.filter( idmarche => idmarche.marche_id == macheid)
+            //         }
+            //     }
+            // },
 
-                     listePVDemandePV(){
-                return macheid=>{
-                    if(macheid!=""){
-                        return this.getterProceVerballe.find(item=>{
-                            if(item.appel_offre.marche_id==macheid && item.avie==null ){
-                                let vM=this;
-                                vM.formDemande.proce_verbal_jugement_offre_id=item.id
-                                return item;
-                            }
-                        });
-                    }
-                }
-            },
+
+             affichierReferenceAppelOffre() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.ref_appel;
+      }
+      return 0
+        }
+      };
+    },
+affichierAppelOffreid() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+
+            //          listePVDemandePV(){
+            //     return macheid=>{
+            //         if(macheid!=""){
+            //             return this.getterProceVerballe.find(item=>{
+            //                 if(item.appel_offre.marche_id==macheid && item.avie==null ){
+            //                     let vM=this;
+            //                     vM.formDemande.proce_verbal_jugement_offre_id=item.id
+            //                     return item;
+            //                 }
+            //             });
+            //         }
+            //     }
+            // },
+
+            verouillageObservation(){
+    return this.edite_demande_dao.avis == 0
+},
+
+
 
 
 
@@ -305,6 +447,19 @@ selectedFileDemandeAno:""
 
  afficheDemandeDAO(index){
                 this.$('#modifDemandeAno').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                this.edite_demande_dao=this.getterDemandeAno.find(
+                    demandeAno => demandeAno.id == index
+                )
+                //console.log(this.edite_demande_dao)
+            },
+
+
+
+            afficherModalDecisionAnocf(index){
+                this.$('#ajouterDecisionAvisCf').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
@@ -334,11 +489,12 @@ selectedFileDemandeAno:""
               ajouterDemandeAnoLocal(){
                 const formData = new FormData();
                 formData.append('fichier', this.selectedFileDemandeAno, this.selectedFileDemandeAno.name);
-                formData.append('proce_verbal_jugement_offre_id', this.formDemande.proce_verbal_jugement_offre_id);
+              //  formData.append('proce_verbal_jugement_offre_id', this.formDemande.proce_verbal_jugement_offre_id);
                 formData.append('date_demande', this.formDemande.date_demande);
                 formData.append('marche_id', this.macheid);
-                formData.append('cotation_id', this.formDemande.cotation_id)
+                formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
                 formData.append('num_courrier', this.formDemande.num_courrier);
+                
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'
@@ -348,7 +504,7 @@ selectedFileDemandeAno:""
                 this.ajouterDemandeAno(formData,config)
                 this.formDemande={
                     date_demande:"",
-                    cotation_id:"",
+                    appel_offre_id:"",
                     num_courrier:"",
                     
                     proce_verbal_jugement_offre_id:""
@@ -358,12 +514,16 @@ selectedFileDemandeAno:""
                editDemandeDAO(){
                 //console.log(this.edite_demande_dao)
                 const formData = new FormData();
-                formData.append('proce_verbal_jugement_offre_id', this.edite_demande_dao.proce_verbal_jugement_offre_id);
+               // formData.append('proce_verbal_jugement_offre_id', this.edite_demande_dao.proce_verbal_jugement_offre_id);
                 formData.append('date_demande', this.edite_demande_dao.date_demande);
-                formData.append('cotation_id', this.edite_demande_dao.cotation_id);
+                formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
                 formData.append('num_courrier', this.edite_demande_dao.num_courrier);
                 formData.append('marche_id',this.macheid);
                 formData.append('id', this.edite_demande_dao.id);
+                 formData.append('plan_motif_decision_id',this.edite_demande_dao.plan_motif_decision_id);
+                formData.append('observations',this.edite_demande_dao.observations)
+                formData.append('date_avis',this.edite_demande_dao.date_avis);
+                formData.append('avis',this.edite_demande_dao.avis);
                 console.log(formData)
                 if ( this.selectedFileDemandeAno!==""){
                     formData.append('fichier', this.selectedFileDemandeAno, this.selectedFileDemandeAno.name);

@@ -102,7 +102,7 @@ export default {
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
             "getClasses","getEchelons","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite","getCategorieGrade",
-"getFamilleFonction","getFonctionBudgetaire",
+"getFamilleFonction","getFonctionBudgetaire", "getDossierCandidatPersonnel",
 "getClassificationGradeFonction"]),
 
       ...mapActions('gestionMarche',['getTypeMarche',"getSecteurActivite",
@@ -141,13 +141,15 @@ export default {
           'getActeEffetFinancier','getEngagement','getMandat',"getVille","getPays","getCommune",
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", 
-          "getCotation","getOuverture","getTransmission","getPlanPassationMarche"])
+          "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
+          "getRapport"])
 
 
   },
 
   created(){
     this.getPlanPassationMarche()
+    this.getRapport()
       this.getBudgeChager()
       this.getLigneExempter()
       this.getExercicesBudgetaires()
@@ -221,6 +223,7 @@ this.getAllDirection()
 this.getAllServiceua()
 this.getAllFonction()
 this.getFonctionBudgetaire()
+this.getDossierCandidatPersonnel()
       this.getListeSalaireActuelAll()
     this.getTypeSalarie()
         this.getTypeActPersonnel()

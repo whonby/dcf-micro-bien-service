@@ -72,6 +72,7 @@ documentProcedures:[],
     gettersEtatProcedure:[],
     gettersPsc:[],
     stateTransmissions:[],
+    rapportOuverture:[],
 
 
     gettersTransmissions:[],

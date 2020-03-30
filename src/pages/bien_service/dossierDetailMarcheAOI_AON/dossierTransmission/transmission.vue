@@ -46,7 +46,7 @@
 
               
      
-
+<!-- debut ajout acte effet financier --->
 
 
 
@@ -61,7 +61,7 @@
                           <tr>
                             <td>
                         <div class="control-group">
-                        <label class="control-label">Reférence</label>
+                        <label class="control-label">Offre</label>
                         <div class="controls">
                             <!-- <select v-model="formLettre.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -122,7 +122,7 @@
                             <tr>
                                 <td colspan="2" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet de lettre:</label>
+                            <label class="control-label">Objet  offre :</label>
                             <div class="controls">
                                  <textarea   v-model="formLettre.objet_lettre"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
                     
@@ -184,7 +184,7 @@
                                <tr>
                             <td>
                         <div class="control-group">
-                        <label class="control-label"></label>
+                        <label class="control-label">Offre</label>
                         <div class="controls">
                             <!-- <select v-model="formLettre.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -245,7 +245,7 @@
                             <tr>
                                 <td colspan="2" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet de lettre:</label>
+                            <label class="control-label">Objet  offre :</label>
                             <div class="controls">
                                  <textarea   v-model="edite_Lettre_invitation.objet_lettre"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
                     
@@ -478,29 +478,24 @@ typeProcedureLibelle() {
 
 
 
-
             ajouterLettreInv(){
                 const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
-                formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
-                formData.append('destination', this.formLettre.destination);
-                formData.append('ref_lettre', this.formLettre.ref_lettre);
-                formData.append('date_lettre', this.formLettre.date_lettre);
-                formData.append('date_cojo', this.formLettre.date_cojo);
-                formData.append('objet_lettre', this.formLettre.objet_lettre);
+                formData.append('date_dao', this.formTransmission.date_dao);
+                formData.append('ref_courier', this.formTransmission.ref_courier);
+                formData.append('destinataire', this.formTransmission.destinataire);
+                formData.append('marche_id', this.marche_id);
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'
                     }
                 }
-                this.ajouterLettreInvitation(formData,config)
-                this.formLettre= {
-                    appel_offre_id:"",
-                    fichier_joint:"",
-                    date_lettre:"",
-                    ref_lettre:"",
-                    destination:"",
-                    date_cojo:""
+                this.ajouterTransmission(formData,config)
+                this.formTransmission= {
+                    date_dao:"",
+                    fichier:"",
+                    ref_courier:"",
+                    destinataire:"",
                 }
             },
 
@@ -529,16 +524,14 @@ typeProcedureLibelle() {
            
 
            
- modfications(){
+ modificationTransmissionLocal(){
                 //console.log(this.edite_demande_dao)
                 const formData = new FormData();
-               formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
-                formData.append('destination', this.edite_Lettre_invitation.destination);
-                formData.append('ref_lettre', this.edite_Lettre_invitation.ref_lettre);
-                formData.append('date_lettre', this.edite_Lettre_invitation.date_lettre);
-                formData.append('date_cojo', this.edite_Lettre_invitation.date_cojo);
-                formData.append('objet_lettre', this.edite_Lettre_invitation.objet_lettre);
-                formData.append('id',this.edite_Lettre_invitation.id);
+                formData.append('date_dao', this.edit_transmission.date_dao);
+                formData.append('ref_courier', this.edit_transmission.ref_courier);
+                formData.append('destinataire', this.edit_transmission.destinataire);
+                formData.append('marche_id', this.marche_id);
+                formData.append('id',this.edit_transmission.id);
                
                 console.log(formData)
                 if ( this.selectedFile!==""){
@@ -549,8 +542,8 @@ typeProcedureLibelle() {
                         'Content-Type' : 'multipart/form-data'
                     }
                 }
-                 this.modifierLettreInvitation(formData,config)
-               this.$('#modifierActeEF').modal('hide');
+                 this.modifiertransmission(formData,config)
+               this.$('#modificationAajouterAnalys01').modal('hide');
             },
 
 
@@ -568,7 +561,6 @@ formatageSomme:formatageSomme,
  formaterDate(date) {
               return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },
-            
              OnchangeFichier(e) {
                 const files = e.target.files;
                 this.selectedFile = event.target.files[0];

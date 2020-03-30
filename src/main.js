@@ -23,6 +23,9 @@ import store from './vuex/store'
 import JsonExcel from 'vue-json-excel'
 import Datatable from 'vue2-datatable-component'
 
+
+
+
 import FullCalendar from 'vue-full-calendar'
 import "fullcalendar-scheduler";
 //import 'fullcalendar/dist/fullcalendar';
@@ -36,6 +39,7 @@ Vue.component('downloadExcel', JsonExcel)
 //import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
 var Jquery = require('jquery')
 
+Vue.config.devtools = true
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios;
 Vue.prototype.$ = Jquery

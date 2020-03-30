@@ -15,7 +15,12 @@ import EditActeurDepense from "../../pages/acteurs_depenses/acteurs/EditeActeurD
 import CategorieGrade from "../../pages/acteurs_depenses/CategorieGrade/CategorieGrade.vue";
 import familleEmploie from "../../pages/acteurs_depenses/fonction/familleEmploie.vue";
 import ClassificationEmploisGradePrincipal from "../../pages/acteurs_depenses/fonction/ClassificationEmploisGradePrincipal.vue";
+
+import recrutementPersonnel from "../../pages/acteurs_depenses/dossierPersonnel/recrutementPersonnel.vue";
+import detailPersonnel from "../../pages/acteurs_depenses/dossierPersonnel/detailPersonnel";
+
 import fonctionBudgetaire from "../../pages/acteurs_depenses/fonction/fonctionBudgetaire.vue";
+
 const ActeurDepenseRoutes = [
   {
     path: "/fonction-Budgetaire",
@@ -41,6 +46,13 @@ const ActeurDepenseRoutes = [
     path: "/type-acte-personnel",
     name: "TypeActePersonnels",
     component: TypeActePersonnel
+  },
+
+  // la route du detail personne
+  {
+    path:"/detail-personnel/:id",
+    name:"detailPersonnel",
+    component:detailPersonnel
   },
   {
     path: "/fonction",
@@ -82,6 +94,14 @@ const ActeurDepenseRoutes = [
     name: "Acteur",
     component: Acteur
   },
+
+  {
+    path: "/recrutement-personnel",
+    name: "recrutementPersonnel",
+    component: recrutementPersonnel
+  },
+
+  
   {
     path: "/detail-acteur/:id",
     name: "ActeurDetail",

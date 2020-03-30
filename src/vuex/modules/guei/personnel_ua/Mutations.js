@@ -160,7 +160,30 @@ const MODIFIER_CLASSES = (state, objetModifie) => {
  */
 
 
+export const GET_ALL_DOSSIER_CANDIDAT =(state, tableau_candidat) => {
+    state.dossierPersonnels = tableau_candidat
+}
 
+export const AJOUTER_DOSSIER_CANDIDAT = (state, elementAjout) => {
+    state.dossierPersonnels.unshift(elementAjout)
+   
+}
+
+
+export const MODIFIER_DOSSIER_CANDIDAT = (state, elementModifie) => {
+    state.dossierPersonnels= state.dossierPersonnels.map( item =>{
+        if(item.id == elementModifie.id){
+            item ={...elementModifie}
+        }
+        return item
+    })
+    
+}
+
+
+export const SUPPRIMER_DOSSIER_CANDIDAT = (state, id) => {
+    state.dossierPersonnels = state.dossierPersonnels.filter( response => response.id !=id)
+}
 
 /**
  * Mutation niveau etude

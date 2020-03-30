@@ -46,6 +46,7 @@
 
                           <td @click="afficheDemandeDAO(demande.id)">
                             {{formaterDate(demande.date_avis) || 'Non renseigné'}}</td>
+                            
                         <div class="btn-group">
                             <button @click.prevent="supprimerDemandeAno(demande.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span>

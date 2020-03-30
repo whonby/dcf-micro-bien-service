@@ -8,13 +8,11 @@
                     <thead>
                    <tr>
 
-                                        <th>Reference appel</th>
-                                        <th> Type procedure</th>
-
-                                      
+                                        <th>Reference avis</th>
+                                        <th> Type marché</th>
                                         <th>Date emmission</th>
                                         <th>Date limite</th>
-                                        <th>Objet appel</th>
+                                        <th>Objet avis de recrutement</th>
                                        
                                         <th>Action</th>
                                     </tr>
@@ -54,10 +52,10 @@
 
 
 
-<div id="ajouterOffre" class="modal hide grdirModalActeEffet">
+<div id="ajouterOffrePublication" class="modal hide grdirModalActeEffet">
              <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter  offre</h3>
+                <h3>Ajouter  avis de recrutement</h3>
             </div>
             <div class="modal-body">
 
@@ -65,15 +63,15 @@
                           <tr>
                             <td>
                         <div class="control-group">
-                            <label class="control-label">Type de procedure <code>*</code> :</label>
+                            <label class="control-label">Type de marché <code>*</code> :</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="Type appel" :value="typeProcedureLibelle(typeProcedure_id(procedurePassation_id(macheid)))" disabled>
+                                <input type="text" class="span" placeholder="Type appel" :value="typeProcedureLibelle(typeMarcheId(macheid))" disabled>
                             </div>
                         </div>
                             </td>
                             <td>
                         <div class="control-group">
-                            <label class="control-label">Reference  offre <code>*</code> :</label>
+                            <label class="control-label">Reference  avis de recrutement <code>*</code> :</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="Reference d'appel" v-model="formData.ref_appel">
                             </div>
@@ -83,9 +81,9 @@
                             <tr>
                             <td colspan="2" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet  offre :</label>
+                            <label class="control-label">Objet d'avis :</label>
                             <div class="controls">
-                                 <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
+                                 <textarea  v-model="formData.objet_appel"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
                     
                             </div>
                         </div>
@@ -153,7 +151,7 @@
                             </td>
                                 <td >
                         <div class="control-group">
-                            <label class="control-label">Reference  offre  :</label>
+                            <label class="control-label">Reference  avis  :</label>
                             <div class="controls">
                                 <input type="text" class="span" placeholder="Reference d'appel" v-model="edite_appel_offre.ref_appel">
                             </div>
@@ -163,7 +161,7 @@
                                    <tr>
                             <td colspan="2" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet  offre :</label>
+                            <label class="control-label">Objet  d'avis :</label>
                             <div class="controls">
                                  <textarea   v-model="edite_appel_offre.objet_appel"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
                     
@@ -262,7 +260,7 @@ export default {
        computed: {
 
             ...mapGetters("bienService", [ "typeTypeProcedures","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
-                "modePassations", "procedurePassations","getterDossierCandidats","marches",
+                "typeMarches", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
@@ -293,44 +291,45 @@ listeAppelOffre() {
 
 
 
-affichierObjetMarche() {
+
+// affichierObjetMarche() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+//       if (qtereel) {
+//         return qtereel.objet;
+//       }
+//       return 0
+//         }
+//       };
+//     },
+
+
+
+
+
+
+//   procedurePassation_id() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+//       if (qtereel) {
+//         return qtereel.procedure_passation_id;
+//       }
+//       return 0
+//         }
+//       };
+//     },
+
+typeMarcheId() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.objet;
-      }
-      return 0
-        }
-      };
-    },
-
-
-
-
-
-
-  procedurePassation_id() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.procedure_passation_id;
-      }
-      return 0
-        }
-      };
-    },
-
-typeProcedure_id() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.procedurePassations.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.type_procedure_id;
+        return qtereel.type_marche_id;
       }
       return 0
         }
@@ -340,12 +339,12 @@ typeProcedure_id() {
 typeProcedureLibelle() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.typeTypeProcedures.find(qtreel => qtreel.id == id);
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.libelle;
       }
-      return 0
+      return "Prestations Intellectuelles"
         }
       };
     },
@@ -375,9 +374,9 @@ typeProcedureLibelle() {
      var nouvelObjet = {
       ...this.formData,
       
-       type_appel: this.typeProcedure_id(this.procedurePassation_id(this.macheid)),
+       type_appel: this.typeMarcheId(this.macheid),
           marche_id: this.macheid,
-          objet_appel:this.affichierObjetMarche(this.macheid)
+          //objet_appel:this.affichierObjetMarche(this.macheid)
          };
       //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
       this.ajouterAppelOffre(nouvelObjet);

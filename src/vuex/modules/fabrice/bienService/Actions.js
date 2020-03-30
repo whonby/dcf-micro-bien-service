@@ -992,6 +992,9 @@ export function ajouterCojo({commit}, elementAjout){
   }).catch(error => console.log(error))
 }
 
+
+
+
 // action pour modifier la cojo
 
 
@@ -1017,7 +1020,52 @@ export function supprimerCojo({commit}, id) {
  })
 
 }
+// rapport d'ouverture
 
+export  function  getRapport({commit}) {
+  queue.push(() => axios.get('/liste_rapport').then((response) => {
+    commit('GET_ALL_RAPPORT', response.data.data)
+    
+}).catch(error => console.log(error)))
+}
+
+export function ajouterRapport({commit}, elementAjout, config){
+  asyncLoading(axios.post('/add_rapport',elementAjout, config)).then(response =>{
+      if(response.status == 201){
+          commit('AJOUTER_RAPPORT', response.data.cojo)
+          commit('AJOUTER_MEMBRE_COJO', response.data.membre)
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+export function modifierRapport({commit}, element_modifie,config) {
+  asyncLoading( axios.post('/update_rapport',element_modifie, config)).then(response => {
+       commit('MODIFIER_RAPPORT', response.data)
+       this.$app.$notify({
+         title: 'success ',
+         text: 'Modification effectué !',
+         type:"success"
+       })
+   }).catch(error => console.log(error))
+}
+
+
+export function supprimerRapport({commit}, id) {
+  this.$app.$dialog
+  .confirm("Voulez vouz vraiment supprimer ?.")
+  .then(dialog => {
+     commit('SUPPRIMER_RAPPORT', id)
+    // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/delete_rapport/' + id).then(() => dialog.close() )
+  })
+ 
+ }
 
 
 // acttion de l'obseravtion de bailleur
@@ -2335,39 +2383,38 @@ export function getTransmission({commit}) {
 
 // action pour ajouter les infos 
 
+// export function ajouterTransmission({commit,dispatch}, elementAjout,config){
+//   asyncLoading(axios.post('/add_transmission', elementAjout,config)).then(response =>{
+//       if(response.status == 201){
+//         commit('AJOUTER_TRANSMISSION',response.data)
+//          dispatch('getTransmission')
+//           this.$app.$notify({
+//             title: 'success ',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
+      
+
+//   }).catch(error => console.log(error))
+// }
+
 export function ajouterTransmission({commit,dispatch}, elementAjout,config){
-  asyncLoading(axios.post('/add_transmission', elementAjout,config)).then(response =>{
+  asyncLoading(axios.post('/add_transmission',elementAjout,config)).then(response =>{
       if(response.status == 201){
-        commit('AJOUTER_TRANSMISSION', response.data)
-         dispatch('getTransmission')
+          commit('AJOUTER_TRANSMISSION', response.data)
+          dispatch('getTransmission')
           this.$app.$notify({
-            title: 'success ',
-            text: 'Enregistrement effectué !',
-            type:"success"
+              title: 'success ',
+              text: 'Enregistrement effectué !',
+              type:"success"
           })
       }
 
   }).catch(error => console.log(error))
 }
 
-// action pour modifier le type text juridique
-
-
-
-// export function modifiertransmission({ commit }, element_modifie) {
-//   console.log("element_modifie")
-//   console.log(element_modifie)
-//   asyncLoading(axios.put('/update_transmission/'+ id, element_modifie)).then(response => {
-//     commit('MODIFIER_TRANSMISSION', response.data)
-//     this.$app.$notify({
-//       title: 'success ',
-//       text: 'Modification effectué !',
-//       type: "success"
-//     })
-//   }).catch(error => console.log(error))
-// }
-
-export function modifiertransmission({commit,dispatch}, element_modifie,config) {
+export function modifiertransmission({commit,dispatch},element_modifie,config) {
   asyncLoading( axios.post('/update_transmission',element_modifie,config)).then(response => {
       commit('MODIFIER_TRANSMISSION', response.data)
       dispatch('getTransmission')
@@ -3171,9 +3218,10 @@ export function ajouterDemandeAno({commit}, elementAjout,config){
 
 
 
-export function modifierDemandeAno({commit}, element_modifie,config) {
+export function modifierDemandeAno({commit,dispatch}, element_modifie,config) {
     asyncLoading( axios.post('/rdemande_ano_update',element_modifie,config)).then(response => {
         commit('MODIFIER_DEMANDE_ANO', response.data)
+        dispatch('getDemandeAno')
         this.$app.$notify({
             title: 'success ',
             text: 'Modification effectué !',
@@ -3182,17 +3230,17 @@ export function modifierDemandeAno({commit}, element_modifie,config) {
     }).catch(error => console.log(error))
 }
 
-export function modifierAvisAnoCf({commit,dispatch}, element_modifie,config) {
-  asyncLoading( axios.post('/rdemande_ano_update',element_modifie,config)).then(response => {
-      commit('MODIFIER_DEMANDE_ANO', response.data)
-      dispatch('getDemandeAno')
-      this.$app.$notify({
-          title: 'success ',
-          text: 'Decision effectué !',
-          type:"success"
-      })
-  }).catch(error => console.log(error))
-}
+// export function modifierAvisAnoCf({commit,dispatch}, element_modifie,config) {
+//   asyncLoading( axios.post('/rdemande_ano_update',element_modifie,config)).then(response => {
+//       commit('MODIFIER_DEMANDE_ANO', response.data)
+//       dispatch('getDemandeAno')
+//       this.$app.$notify({
+//           title: 'success ',
+//           text: 'Decision effectué !',
+//           type:"success"
+//       })
+//   }).catch(error => console.log(error))
+// }
 
 export function supprimerDemandeAno({commit}, id) {
     this.$app.$dialog
@@ -3457,7 +3505,7 @@ export function ajouterAnoDMPBailleur({commit,dispatch}, elementAjout,config){
         if(response.status == 201){
 
             commit('AJOUTER_ANO_DMP_BAILLEUR', response.data.analyse)
-            commit('MODIFIER_PV', response.data.jugement)
+           // commit('MODIFIER_PV', response.data.jugement)
             dispatch('getAnoDMPBailleur')
             this.$app.$notify({
                 title: 'success ',
@@ -3469,9 +3517,10 @@ export function ajouterAnoDMPBailleur({commit,dispatch}, elementAjout,config){
     }).catch(error => console.log(error))
 }
 
-export function modifierAnoDMPBailleur({commit}, element_modifie,config) {
+export function modifierAnoDMPBailleur({commit,dispatch}, element_modifie,config) {
     asyncLoading( axios.post('/update_ano_dmp_bailleurs',element_modifie,config)).then(response => {
         commit('MODIFIER_ANO_DMP_BAILLEUR', response)
+        dispatch('getAnoDMPBailleur')
         this.$app.$notify({
             title: 'success ',
             text: 'Modification effectué !',
@@ -3479,6 +3528,7 @@ export function modifierAnoDMPBailleur({commit}, element_modifie,config) {
         })
     }).catch(error => console.log(error))
 }
+
 
 
 export function supprimerAnoDMPBailleur({commit}, id) {

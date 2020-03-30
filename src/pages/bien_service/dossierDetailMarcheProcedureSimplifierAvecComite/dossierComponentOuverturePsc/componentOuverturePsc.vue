@@ -15,10 +15,12 @@
                   <table class="table table-bordered table-striped" v-if="macheid">
                       <thead>
                       <tr>
+          
                           <th>Date Composition</th>
                           <th>Date invitation</th>
                           <th>Numero dossier Appel Offre</th>
                           <th>Nmbr particiapnt</th>
+           
                           <th>Action</th>
                       </tr>
                       </thead>

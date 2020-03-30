@@ -54,6 +54,8 @@ export const documentProcedures = state => state.documentProcedures
 export const mandats = state => state.mandats
  export const getterActeEffetFinanciers = state => state.acteEffetFinanciers
   export const gettersEtatProcedure = state =>state.gettersEtatProcedure
+
+  export const rapportOuverture = state => state.rapportOuverture
 // exemple de getters
 export const appelOffres = state => state.appelOffres
 export const gettersOffreTechniques = state => state.offreTechniques
@@ -165,7 +167,7 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
         return element;
     })
 
-    //gettersTransmissions
+    //stateTransmissions
     // getters d'etat de procedure
 
 
@@ -364,7 +366,13 @@ export const montantMarcheReel = (state, getters) =>
 // marche non attribué 
 
    
+ // methode pour le mache en cour de contratualisation
 
+//  export const marcheEnConstratualisation = getters =>
+//  getters.marches.filter(
+//      varResultat => varResultat.contratualisation == 1
+//  );
+ 
 
 
 

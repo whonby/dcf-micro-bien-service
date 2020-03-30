@@ -1,6 +1,6 @@
 // get all prestation
 
-
+MODIFIER_COJO
 export const GET_ALL_PRESTATION = (state, tableau_prestation) =>{
     state.prestations = tableau_prestation
 }
@@ -1023,8 +1023,31 @@ export const SUPRIMER_COJO = (state, id)=> {
 }
 
 // mutation pour condition && fonction occupper
+export const GET_ALL_RAPPORT = (state, tableau_cojo) =>{
+    state.rapportOuverture = tableau_cojo
+}
 
 
+
+export const AJOUTER_RAPPORT = (state, nouvelElement) => {
+    state.rapportOuverture.unshift(nouvelElement)
+}
+
+
+export const MODIFIER_RAPPORT = (state, elementModif)=>{
+    state.rapportOuverture = state.rapportOuverture.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+export const SUPPRIMER_RAPPORT = (state, id)=> {
+    state.rapportOuverture = state.rapportOuverture.filter(prest => prest.id !=id);
+    state.membre_cojo=state.membre_cojo.filter(item=>item.cojo_id!=id)
+}
 
 
 // get all condition
