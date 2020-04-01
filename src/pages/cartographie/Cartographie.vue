@@ -32,15 +32,15 @@
                                                  :lat-lng="l.latlng"
                                                  @click="uniteAdmin(l.id,l.ville)"
                                                  :radius="8"
-                                                 :color="'#ff0000'"
-                                                 :fillColor="'#ff0000'"
+                                                 :color="l.color"
+                                                 :fillColor="l.colorFill"
                                                  :fillOpacity="2"
 
                                 >
                                     <l-popup>
                                     <b>{{l.ville}}</b> <br>
-                                    <div style="font-size: 11px;">
-                                        Budget: <span style="color: #003900; "><b>20</b></span> <br>
+                                    <div >
+                                        Budget: <span style="color: #003900; "><b>{{formatageSomme(l.budget)}}</b></span> <br>
                                         Budget execute:<span style="color: #00d700; "><b>101</b></span><br>
                                         Budget restant:<span style="color: darkred; "><b>101</b></span><br>
                                         Taux d'execution:<span style="color: #e36706; "><b>101</b></span>
@@ -48,11 +48,13 @@
                                 </l-popup>
 
                                 </l-circle-marker>
-                                <l-marker >
+                              <!--  <l-marker v-for="l in localisation"
+                                          :key="l.id"
+                                          :lat-lng="l.latlng">
 
 
-                                    <!---->
-                                </l-marker>
+                                    &lt;!&ndash;&ndash;&gt;
+                                </l-marker>-->
                             </v-marker-cluster>
                         </l-map> </div>
                 </div>
@@ -95,6 +97,7 @@
     import { LMap, LTileLayer, LMarker,LIconDefault,LControlLayers,LTooltip,LPopup,LCircleMarker } from "vue2-leaflet";
     import iconUrl from 'leaflet/dist/images/marker-icon.png'
     import shadowUrl from 'leaflet/dist/images/marker-shadow.png'
+    import { formatageSomme } from "../../Repositories/Repository";
     export default {
         name: "Example",
         components: {
@@ -214,20 +217,63 @@
         },
         localisation(){
         let localisation=[]
+            //console.log(this.uniteAdministratives)
+            let vM=this;
             this.localisations_geographiques.forEach(function (value){
                 if(value.parent!=null){
                     if(value.longitude!=null && value.latitude!=null){
+
                         let coordonne=[]
                         coordonne.push(value.latitude)
                         coordonne.push(value.longitude)
+                        /**
+                         * Recuperation des unite administrative de la zone geographique
+                         * @type {*[]}
+                         */
+                        let budgetZone=0;
+                        let color="";
+                        let colorFill=""
+                        let uniteByZoneGeo= vM.uniteAdministratives.filter( item => item.localisationgeo_id ==value.id)
+                        if (uniteByZoneGeo!=undefined) {
+
+                            /**
+                             *
+                             */
+
+                            uniteByZoneGeo.forEach(function (row) {
+                                let budgetActive=row.ua_budget_general.filter(item=>item.actived==1)
+                                if (budgetActive!="") {
+                                    let initialValue = 0;
+                                  let budgetByUnite=  budgetActive.reduce(function (total, currentValue) {
+                                        return total + parseFloat(currentValue.Dotation_Initiale) ;
+                                    }, initialValue);
+
+                                    budgetZone=budgetZone + budgetByUnite
+                                }
+
+                            })
+                            console.log("---------------")
+                            console.log(value.libelle)
+                            console.log(budgetZone)
+                            console.log("---------------")
+                        }
+                         if(budgetZone==0){
+                             color="#ff0000"
+                             colorFill="#ff0000"
+                         }else{
+                             color="#0f13ff"
+                             colorFill="#0f13ff"
+                         }
                         let objetAlocalise={
                             id:value.id,
                             ville:value.libelle,
                             latlng:coordonne,
-                            budget:"",
+                            budget:budgetZone,
                             budgetReste:'',
                             budgetExecute:"",
-                            tauxBudget:""
+                            tauxBudget:"",
+                            color:color,
+                            colorFill:colorFill
                         }
                         localisation.push(objetAlocalise)
                     }
@@ -268,6 +314,7 @@
                console.log(id)
 
             },
+            formatageSomme:formatageSomme,
             afficher(){
                 this.idzone=""
                 this.zone_geographique=""
