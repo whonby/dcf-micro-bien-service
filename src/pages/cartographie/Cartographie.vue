@@ -27,28 +27,31 @@
                                     layer-type="base"/>
                            <!-- <l-control-zoom position="bottomright"  ></l-control-zoom>-->
                             <v-marker-cluster >
-                                <l-marker v-for="l in localisation" :key="l.id" :lat-lng="l.latlng" @click="uniteAdmin(l.id,l.ville)">
-                              <!--      <LIcon
-                                            :options="{
-            iconUrl:      'http://dcf-parametrage.kognishare.com/point-rouge-png.png',
-            shadowUrl:    'https://vdcrea.gitlab.io/vue-leaflet/static/leaf-shadow.png',
-            iconSize:     [38, 95], // size of the icon
-            shadowSize:   [50, 64], // size of the shadow
-            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-            shadowAnchor: [4, 62],  // the same for the shadow
-            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-          }"/>-->
-                                    <!--<l-popup :content="l.ville"></l-popup>-->
-                                    <l-tooltip :options="{interactive: true, permanent: true}">
-                                       <b>{{l.ville}}</b> <br>
-<div style="font-size: 11px;">
-    Budget: <span style="color: #003900; "><b>20</b></span> <br>
-    Budget execute:<span style="color: #00d700; "><b>101</b></span><br>
-    Budget restant:<span style="color: darkred; "><b>101</b></span><br>
-    Taux d'execution:<span style="color: #e36706; "><b>101</b></span>
-</div>
+                                <l-circle-marker v-for="l in localisation"
+                                                 :key="l.id"
+                                                 :lat-lng="l.latlng"
+                                                 @click="uniteAdmin(l.id,l.ville)"
+                                                 :radius="8"
+                                                 :color="'#ff0000'"
+                                                 :fillColor="'#ff0000'"
+                                                 :fillOpacity="2"
 
-                                    </l-tooltip>
+                                >
+                                    <l-popup>
+                                    <b>{{l.ville}}</b> <br>
+                                    <div style="font-size: 11px;">
+                                        Budget: <span style="color: #003900; "><b>20</b></span> <br>
+                                        Budget execute:<span style="color: #00d700; "><b>101</b></span><br>
+                                        Budget restant:<span style="color: darkred; "><b>101</b></span><br>
+                                        Taux d'execution:<span style="color: #e36706; "><b>101</b></span>
+                                    </div>
+                                </l-popup>
+
+                                </l-circle-marker>
+                                <l-marker >
+
+
+                                    <!---->
                                 </l-marker>
                             </v-marker-cluster>
                         </l-map> </div>
@@ -62,7 +65,7 @@
                     </div>
                     <div class="widget-content" >
                         <a data-dismiss="modal" class="btn btn-primary" href="#" v-if="zone_geographique">{{zone_geographique}}</a>
-                        
+
                         <button v-if="zone_geographique" @click.prevent="afficher()"  class="btn btn-danger ">
                         <span class="">Afficher tous</span></button>
                         <table class="table table-bordered table-striped" >
@@ -89,7 +92,7 @@
 <script>
     import {mapGetters} from 'vuex'
     import { latLng, Icon, icon } from 'leaflet'
-    import { LMap, LTileLayer, LMarker,LIconDefault,LControlLayers,LTooltip } from "vue2-leaflet";
+    import { LMap, LTileLayer, LMarker,LIconDefault,LControlLayers,LTooltip,LPopup,LCircleMarker } from "vue2-leaflet";
     import iconUrl from 'leaflet/dist/images/marker-icon.png'
     import shadowUrl from 'leaflet/dist/images/marker-shadow.png'
     export default {
@@ -98,10 +101,11 @@
             LMap,
             LTileLayer,
             LMarker,
-            //LPopup,
+            LPopup,
             LTooltip,
             LIconDefault,
             LControlLayers,
+            LCircleMarker
            // LIcon
 
         },
