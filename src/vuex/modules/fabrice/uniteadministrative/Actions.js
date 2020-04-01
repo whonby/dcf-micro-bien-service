@@ -1011,3 +1011,137 @@ export function supprimerLigneExempter({ commit }, id) {
             axios.delete("/ligne_exemptes/" + id).then(() => dialog.close());
         });
 }
+
+
+
+
+
+
+export function getAllRealiteServiceFait({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeRealiteFait")
+      .then(response => {
+        commit("GET_ALL_REALITE_SERVICE_FAIT", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterRealiteServiceFait({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterRealiteFait", nouveau)).then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_REALITE_SERVICE_FAIT", response.data);
+          this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => console.log(error))
+}
+
+// modifier
+export function modifierRealiteServiceFait({ commit }, nouveau) {
+  asyncLoading(axios.put("/modifierRealiteFait/" + nouveau.id , {
+  
+  
+      	section_id: nouveau.section_id,
+      marche_id: nouveau.marche_id,
+      fournisseur_id: nouveau.fournisseur_id,
+    facture_id: nouveau.facture_id,
+    ua_id: nouveau.ua_id,
+    decision_service_beneficiaire: nouveau.decision_service_beneficiaire,
+    date_service_beneficiaire: nouveau.date_service_beneficiaire,
+    observation_service_beneficiaire: nouveau.observation_service_beneficiaire,
+    nom_service_beneficiaire: nouveau.nom_service_beneficiaire,
+    decision_controleur_financier: nouveau.decision_controleur_financier,
+    date_controleur_financier: nouveau.date_controleur_financier,
+    observation_controleur_financier: nouveau.observation_controleur_financier,
+    nom_controleur_financier: nouveau.nom_controleur_financier,
+    	montant: nouveau.	montant,
+    	exercice_budget: nouveau.	exercice_budget,
+    }
+  
+  )).then(response => {
+      commit("MODIFIER_REALITE_SERVICE_FAIT", response.data);
+    
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+
+//supprimer
+export function supprimerRealiteServiceFait({ commit}, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_REALITE_SERVICE_FAIT", id);
+    
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerRealiteFait/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+export function getAllLiquidation({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeLiquidation")
+      .then(response => {
+        commit("GET_ALL_LIQUIDATION", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterLiquidation({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterLiquidation", nouveau)).then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_LIQUIDATION", response.data);
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => console.log(error))
+}
+
+// modifier
+export function modifierLiquidation({ commit }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierLiquidation/" + nouveau.id)).then(response => {
+      commit("MODIFIER_LIQUIDATION", response.data);
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+
+//supprimer
+export function supprimerLiquidation({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_LIQUIDATION", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerLiquidation/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+

@@ -3,126 +3,84 @@
   	
         <div class="container-fluid">
 
+            <!--///////////////////////////////////////// DEBUT TABLEAU AVENANT//////////////////////////////-->
 <!--///////////////////////////////////////// DEBUT TABLEAU REALITE SERVICE FAIT//////////////////////////////-->
 <!--///////////////////////////////////////// DEBUT TABLEAU REALITE SERVICE FAIT//////////////////////////////-->
   <!--///////////////////////////////////////// debut modal REALITE SERVICE FAIT //////////////////////////////-->
-    <div id="exampleModalRealiteServiceFait" class="modal hide tailleRealiteServiceFait">
+    <div id="exampleModalAvenant" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Réalité Service Fait</h3>
+        <h3>Ajouter Avenant</h3>
       </div>
       <div class="modal-body">
       <table class="table table-bordered table-striped">
           <tr>
               <td>
                     <label class="control-label">Ministere</label>
-                      <input type="text" v-model="editEngagement.section_id" class="span4" readonly/>
+                      <input type="text" v-model="editUniteAdministrative.date_creation" class="span" />
               </td>
                <td>
                     <label class="control-label">Fournisseurs</label>
-                      <input type="text" v-model="editEngagement.facture_id" class="span4" readonly/>
+                      <input type="text" v-model="editUniteAdministrative.date_creation" class="span" />
               </td>
                <td>
                     <label class="control-label">Adresse du fournisseur</label>
-                      <input type="text" v-model="editEngagement.facture_id" class="span4" readonly/>
+                      <input type="text" v-model="editUniteAdministrative.date_creation" class="span" />
               </td>
                <td>
                     <label class="control-label">Numero du facture</label>
-                      <input type="text" v-model="editEngagement.facture_id" class="span4" readonly/>
+                      <input type="text" v-model="editUniteAdministrative.date_creation" class="span" />
               </td>
           </tr>
           <tr>
                <td>
                     <label class="control-label">Date facture</label>
-                      <input type="date" v-model="editEngagement.facture_id" class="span4" readonly/>
+                      <input type="date" v-model="editUniteAdministrative.date_creation" class="span" />
               </td>
               <td colspan="2">
                     <label class="control-label">Objet de la depense</label>
-                      <input type="text" v-model="editEngagement.marche_id" class="span8" readonly/>
+                      <input type="text" v-model="editUniteAdministrative.date_creation" class="span" />
               </td>
               
               
                <td>
                     <label class="control-label">Date de reception</label>
-                      <input type="date" v-model="editEngagement.marche_id" class="span4" readonly/>
+                      <input type="date" v-model="editUniteAdministrative.date_creation" class="span" />
               </td>
           </tr>
           <tr>
               <td>
                     <label class="control-label">Ordre de paiement</label>
-                      <input type="text" v-model="editEngagement.marche_id" class="span4" readonly/>
+                      <input type="text" v-model="editUniteAdministrative.date_creation" class="span" />
               </td>
                <td>
                     <label class="control-label">Date de paiement</label>
-                      <input type="text" v-model="editEngagement.section_id" class="span4" readonly/>
+                      <input type="text" v-model="editUniteAdministrative.date_creation" class="span" />
               </td>
                <td>
                     <label class="control-label">Imputation budgetaire</label>
-                      <input type="text" v-model="editEngagement.marche_id" class="span4" readonly/>
+                      <input type="text" v-model="editUniteAdministrative.date_creation" class="span" />
               </td>
                <td>
                     <label class="control-label">Montant</label>
-                      <input type="text" v-model="editEngagement.marche_id" class="span4" readonly/>
+                      <input type="text" v-model="editUniteAdministrative.date_creation" class="span" />
               </td>
           </tr>
       </table>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierRealiteService(editRealiteServiceFait)"
+          @click.prevent="ajouterTypeTexteLocal"
           class="btn btn-primary"
           href="#"
         
-        >Modifier</a>
+        >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
    <!--///////////////////////////////////////// fin TABLEAU REALITE SERVICE FAIT//////////////////////////////-->
 <!--///////////////////////////////////////// fin TABLEAU REALITE SERVICE FAIT//////////////////////////////-->
   <!--///////////////////////////////////////// fin modal REALITE SERVICE FAIT //////////////////////////////-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <!--///////////////////////////////////////// DEBUT TABLEAU AVENANT//////////////////////////////-->
 
 <!--///////////////////////////////////////// DEBUT TABLEAU AVENANT//////////////////////////////-->
 <!--///////////////////////////////////////// DEBUT TABLEAU AVENANT//////////////////////////////-->
@@ -1966,129 +1924,6 @@
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
-
-
-
-
- <div id="exampleDecisionServiceBeneficiare" class="modal hide">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Observation du Service Bénéficiaire</h3>
-      </div>
-      <div class="modal-body">
-        <form class="form-horizontal" >
-          <div class="control-group">
-                            <label class="control-label">Décision Service Bénéficiaire </label>
-                            <div class="controls">
-                              <select v-model="editRealiteServiceFait.decision_service_beneficiaire">
-                                <option value="0">Attente</option>
-                              <option value="1">Viser</option>
-                             <option value="2">Différer</option>
-                             <option value="3">Réjeter</option>
-                            
-    
-    </select>
-                           
-                            </div>
-                          </div>
-                        
-                          <div class="control-group">
-                            <label class="control-label">Observation Service Bénéficiaire</label>
-                            <div class="controls">
-                              <textarea  class="span" row = "6" v-model="editRealiteServiceFait.observation_service_beneficiaire">
-                              </textarea>
-                            </div>
-                          </div>
-                           <div class="control-group">
-                            <label class="control-label">Date Observation:</label>
-                            <div class="controls">
-                              <input type="date" class="span"  v-model="editRealiteServiceFait.date_service_beneficiaire"/>
-                             
-                            </div>
-                          </div>
-                              <div class="control-group">
-                            <label class="control-label">Nom et prenoms</label>
-                            <div class="controls">
-                              <input type="text" class="span"  v-model="editRealiteServiceFait.nom_service_beneficiaire"/>
-                             
-                            </div>
-                          </div>
-         
-        </form>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="modifierRealiteService(editRealiteServiceFait)"
-          class="btn btn-primary"
-          href="#"
-         
-        >Modifier</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
-
-
-
-
-<div id="exampleDecisionControlleurFinancier" class="modal hide">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Observation du Controleur Financier</h3>
-      </div>
-      <div class="modal-body">
-        <form class="form-horizontal" >
-          <div class="control-group">
-                            <label class="control-label">Décision Controleur Financier </label>
-                            <div class="controls">
-                              <select v-model="editRealiteServiceFait.decision_controleur_financier">
-                                <option value="0">Attente</option>
-                              <option value="1">Viser</option>
-                             <option value="2">Différer</option>
-                             <option value="3">Réjeter</option>
-                            
-    
-    </select>
-                           
-                            </div>
-                          </div>
-                        
-                          <div class="control-group">
-                            <label class="control-label">Observation Controleur Financier</label>
-                            <div class="controls">
-                              <textarea  class="span" row = "6" v-model="editRealiteServiceFait.observation_controleur_financier">
-                              </textarea>
-                            </div>
-                          </div>
-                           <div class="control-group">
-                            <label class="control-label">Date Observation:</label>
-                            <div class="controls">
-                              <input type="date" class="span"  v-model="editRealiteServiceFait.date_controleur_financier"/>
-                             
-                            </div>
-                          </div>
-                              <div class="control-group">
-                            <label class="control-label">Nom et prenoms</label>
-                            <div class="controls">
-                              <input type="text" class="span"  v-model="editRealiteServiceFait.nom_controleur_financier"/>
-                             
-                            </div>
-                          </div>
-         
-        </form>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="modifierRealiteService(editRealiteServiceFait)"
-          class="btn btn-primary"
-          href="#"
-         
-        >Modifier</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
-
-
-
 <!--///////////////////////////////////////// FIN TABLEAU VALIDATION//////////////////////////////-->
 <!--///////////////////////////////////////// FIN TABLEAU VALIDATION//////////////////////////////-->
 <!--///////////////////////////////////////// FIN TABLEAU VALIDATION//////////////////////////////-->
@@ -2960,237 +2795,6 @@
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
-
-
-
-                          <!--DEBUT DE LA TABLEAU LIQUIDATION-->
-
-
-                           <div id="tab120120" class="tab-pane">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <!-- <div class="span4" align="right"    >
-                                   
-                                       <button class="btn btn-success" @click="afficherModalAjouter" >Demande Engagement</button>
-                                         
-  
-                    </div> -->
-                    
-                                <table class="table table-bordered table-striped" v-if="detail_marche">
-                                    <thead>
-                                    <tr>
-
-                                        <th>Année</th>
-                                          <th title="">N°bon manuel</th>
-                                <th title="">N°demande</th>
-                           
-                                <!-- <th title="">Adresse fournisseur</th> -->
-                               
-                                <th title="">Numero facture</th>
-                                 <th>Date facture</th>
-                                  <!-- <th title="">Ordre de paiement</th> -->
-                                  <!-- <th>Date paiement</th> -->
-                                  <th>Imputation budgetaire</th>
-                                
-                                <!-- <th>Service béneficiaire</th> -->
-                                <th>Observation du Emmetteur</th>
-                                
-                                <th>Observation Controleur financier</th>
-                                <th>Observation du ordonnateur</th>
-                                <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    
-               
-                                    </tbody>
-                                </table>
-                           
-
-
-
-                        </div>
-<!--FIN DE LA TABLEAU LIQUIDATION -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                          <!--DEBUT DE LA TABLEAU REALITE SERVICE FAIT -->
-
-
-                           <div id="tab15550" class="tab-pane">
-                                   <div class="span4"></div>
-                                <div class="span4"></div>
-                                <!-- <div class="span4" align="right"    >
-                                   
-                                       <button class="btn btn-success" @click="afficherModalAjouter" >Demande Engagement</button>
-                                         
-  
-                    </div> -->
-                    
-                                <table class="table table-bordered table-striped" v-if="detail_marche">
-                                    <thead>
-                                    <tr>
-
-                                        <th>Année</th>
-                                         <th title="">Section</th>
-                              
-                                 <th title="">Fournisseur</th>
-                                <th title="">Numero facture</th>
-                                 <th>Date facture</th>
-                                  <th>Imputation budgetaire</th>
-                                <th>Montant</th>
-                                <!-- <th>Service béneficiaire</th> -->
-                                <th>Observation service beneficiaire</th>
-                                <th>Observation Controleur financier</th>
-                                <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr 
-                    class="odd gradeX"
-                    v-for="(realiteService, index) in afficheMarcheRealiteServiceFait(detail_marche.id)"
-                    :key="realiteService.id"
-                  >
-                    <!-- <template v-if="Engage.decision_cf == 1"> -->
-                    <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{realiteService.exercice_budget || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{realiteService.section_id || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{realiteService.facture_id || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{realiteService.facture_id || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{realiteService.facture_id || 'Non renseigné'}}</td> 
-                     
-                    <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{detail_marche.imputation  || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{realiteService.montant || 'Non renseigné'}}</td>
-                     <td>
-                        <button v-if="realiteService.decision_service_beneficiaire == 1"  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
-                     
-                      <span    >Viser</span>
-                      
-                      </button>
-                       <button v-else-if="realiteService.decision_service_beneficiaire == 2" class="btn  btn-warning" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
-                     
-                      
-                       <span  >Différer</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="realiteService.decision_service_beneficiaire == 3" class="btn  btn-danger" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
-                     
-                      
-                       <span  >Réjeter</span>
-                      
-                    
-                      </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
-                     
-                      
-                       <span  >Attente</span>
-                      
-                    
-                      </button>
-                    </td>
-                   
-                  <td v-if="realiteService.decision_service_beneficiaire == 1">
-                        <button v-if="realiteService.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancier(index)" >                        
-                     
-                      <span    >Viser</span>
-                      
-                      </button>
-                       <button v-else-if="realiteService.decision_controleur_financier == 2" class="btn  btn-warning" @click="afficherModalObservationControlleurFinancier(index)" >                        
-                     
-                      
-                       <span  >Différer</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="realiteService.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationControlleurFinancier(index)" >                        
-                     
-                      
-                       <span  >Réjeter</span>
-                      
-                    
-                      </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalObservationControlleurFinancier(index)" >                        
-                     
-                      
-                       <span  >Attente</span>
-                      
-                    
-                      </button>
-                      
-                    </td>
-                    <td v-else>
-                        <h1 style="font-size:12px;color:red;text-align:center">Avis préalable du bénéficiaire  </h1>
-                    </td>
-                     <td>
-                        <router-link :to="{ name: 'DetailEngagement', params: {id_detail_engagement:realiteService.id}}"
-                class="btn btn-default " title="Detail Engagement">
-                  <span class=""><i class=" icon-folder-close"></i></span>
-                   </router-link> 
-                    <button v-if="realiteService.decision_controleur_financier == 1" class="btn " @click="afficherModalAjouterLiquidation(index)" title="Ajouter Liquidatation">
-                        <span>
-                          <i class="icon icon-book"></i>
-                        </span>
-                      </button>
-                      <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Mandat">
-                        <span>
-                          <i class="icon icon-book"></i>
-                        </span>
-                      </button> -->
-                      <button class="btn btn-danger" @click="supprimerEngagement(realiteService.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
-                    </td>
-                     <!-- </template>
-                      <template v-else>
-                 <td colspan="10">   <h1 style="color:red;font-size:15px;text-align:center">veuillez valider l' engagement svp?</h1></td>
-                   
-                     </template> -->
-                    
-                  </tr>
-               
-                                    </tbody>
-                                </table>
-                           
-
-                           
-
-
-
-                        </div>
-<!--FIN DE LA TABLEAU REALITE SERVICE FAIT-->
-
-
-
-
-
-
-
-
-
-
-
-
-
                             <div id="tab10" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
@@ -3316,11 +2920,11 @@
                 class="btn btn-default " title="Detail Engagement">
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link> 
-                    <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterRealiteServiceFait(index)" title="Ajouter Réalité Service Fait">
+                    <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Réalité Service Fait">
                         <span>
                           <i class="icon icon-book"></i>
                         </span>
-                      </button> -->
+                      </button>
                       <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Mandat">
                         <span>
                           <i class="icon icon-book"></i>
@@ -7963,7 +7567,7 @@
 <script>
     import { mapGetters, mapActions } from "vuex";
     import moment from "moment";
-     import { formatageSomme } from "../../../../src/Repositories/Repository";
+    // import { formatageSomme } from "../../../../Repositories/Repository";
     //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
 
 
@@ -7978,23 +7582,7 @@
                     }
 
                 ],
-                editRealiteServiceFait:{
-                  	section_id: "",
-      marche_id: "",
-      fournisseur_id: "",
-    facture_id: "",
-    ua_id: "",
-    decision_service_beneficiaire: "",
-    date_service_beneficiaire: "",
-    observation_service_beneficiaire: "",
-    nom_service_beneficiaire: "",
-    decision_controleur_financier: "",
-    date_controleur_financier: "",
-    observation_controleur_financier: "",
-    nom_controleur_financier: "",
-    	montant: "",
-    	exercice_budget: "",
-                },
+                
                 formDataFacture:{},
                  formDataEngage:{},
                   editAvenant: {},
@@ -8246,19 +7834,7 @@ created() {
       // "sections"
        
     ]),
-     ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
-      "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
-      "montantBudgetGeneral","realiteServiceFait","liquidation" ]),
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
-
-
-
-validationParServiceBeneficiaire() {
-      return this.realiteService.decision_service_beneficiaire == 1;
-    },
-
-
-
 
 
 afficherCompteUtilisateur: function () {
@@ -9715,15 +9291,6 @@ afficheMarcheEngage() {
         }
       };
     },
-    afficheMarcheRealiteServiceFait() {
-      return id => {
-        if (id != null && id != "") {
-          return this.realiteServiceFait.filter(
-            element => element.marche_id == this.detail_marche.id
-          );
-        }
-      };
-    },
 afficheMarcheAvenant() {
       return id => {
         if (id != null && id != "") {
@@ -10124,20 +9691,10 @@ recupererActivite(){
                
             ]),
  ...mapActions("uniteadministrative", [              
-                "modifierMontantBudgetaire",
-                "ajouterRealiteServiceFait",
-                "modifierRealiteServiceFait"
+                "modifierMontantBudgetaire"
             ]),
             
-   modifierRealiteService() {
-      this.modifierRealiteServiceFait(this.editRealiteServiceFait);
-this.$("#exampleDecisionServiceBeneficiare").modal('hide');
-      // this.editTypeTexte = {
-      //   code: "",
-      //   libelle: ""
-      // };
-       
-    },
+
 
 ajouterMandatEngagement(){
       if (this.afficherMontantEngagement < this.editEngagement.total_general){
@@ -10752,8 +10309,8 @@ afficherModalAjouterMandatDirect(id) {
     },
 
 
- afficherModalAjouterRealiteServiceFait(index) {
-      this.$("#exampleModalRealiteServiceFait").modal({
+ afficherModalAjouterMandat(index) {
+      this.$("#exampleModalMandatEngagement").modal({
         backdrop: "static",
         keyboard: false
       });
@@ -11060,25 +10617,7 @@ activite_id:this.detail_marche.activite_id,
 section_id:this.afficherSectId
 
        };
-       var realiteServiceFait = {
-     
-      exercice_budget :this.anneeAmort,
-       
-         marche_id : this.detail_marche.id,
-       
-      	
-        facture_id:this.formDataFacture.id,
-       
- montant :this.sommeMontant,
-
-  ua_id:this.detail_marche.unite_administrative_id,
-  
-
-section_id:this.afficherSectId
-
-       };
   this.ajouterEngagement(nouvelObjet)
-  this.ajouterRealiteServiceFait(realiteServiceFait)
 this.$("#AjouterEngage").modal('hide');
 this.formData= {
 
@@ -11149,30 +10688,6 @@ afficherModalModifierMotifDemandeservice(index) {
       
       },
 
-afficherModalObservationServiceBeneficiaire(index) {
-      this.$("#exampleDecisionServiceBeneficiare").modal({
-        backdrop: "static",
-        keyboard: false
-      })
-      this.editRealiteServiceFait = this.afficheMarcheRealiteServiceFait(this.detail_marche.id)[index];
-      
-      },
-afficherModalModifierRealiteServiceFait(index) {
-      this.$("#exampleModalRealiteServiceFait").modal({
-        backdrop: "static",
-        keyboard: false
-      })
-      this.editRealiteServiceFait = this.afficheMarcheRealiteServiceFait(this.detail_marche.id)[index];
-      
-      },
-afficherModalObservationControlleurFinancier(index) {
-      this.$("#exampleDecisionControlleurFinancier").modal({
-        backdrop: "static",
-        keyboard: false
-      })
-      this.editRealiteServiceFait = this.afficheMarcheRealiteServiceFait(this.detail_marche.id)[index];
-      
-      },
  afficherModalModifierEngagement(index) {
       this.$("#ModifierEngage").modal({
         backdrop: "static",
@@ -11357,9 +10872,5 @@ this.$("#modificationModalAvenant").modal('hide');
     .taillemodal61 {
         width: 1500px;
         
-    }
-    .tailleRealiteServiceFait{
-        width: 1600px;
-        margin: 0 -780px;
     }
 </style>

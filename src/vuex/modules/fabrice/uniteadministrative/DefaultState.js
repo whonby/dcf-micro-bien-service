@@ -11,7 +11,9 @@ const defaultState = {
   servicesua: [],
   fonctionsua: [],
   budgeCharge:[],
-    ligneExempter:[],
+  ligneExempter: [],
+  realiteServiceFait: [],
+  liquidation: [],
   // listeDocUniteAdministratives: [],
 
   // nbreUniteAdministratives: [],

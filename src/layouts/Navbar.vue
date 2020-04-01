@@ -96,7 +96,9 @@ export default {
       "getAllTransfert",
       "getAllHistoriqueTransfert",
      "getLigneExempter",
-     "getBudgeChager"
+     "getBudgeChager",
+     "getAllRealiteServiceFait",
+     "getAllLiquidation"
     ]),
             ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
@@ -196,7 +198,8 @@ this.getTransmission()
 this.getCotation()
 this.getOuverture()    
 
-
+this.getAllRealiteServiceFait()
+     this.getAllLiquidation()
 // this.getTypeProcedure()
 
 

@@ -4,7 +4,7 @@ import { asyncLoading } from 'vuejs-loading-plugin'
 var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
 
-
+supprimerEngagement
 
 // action for print all to prestation
 
@@ -2332,6 +2332,7 @@ export function ajouterCotation({commit,dispatch}, elementAjout){
             text: 'Enregistrement effectué !',
             type:"success"
           })
+        
       }
 
   }).catch(error => console.log(error))
@@ -3358,6 +3359,7 @@ export function supprimerEngagement({ commit ,dispatch}, id) {
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
       commit('SUPPRIMER_ENGAGEMENT', id)
+      dispatch('getEngagement')
       dispatch('getEngagement')
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete('/engagement/' + id).then(() => dialog.close())
