@@ -57,21 +57,35 @@
                                         <table class="table table-bordered table-striped">
                                             <thead>
                                             <tr>
+                                                <!-- <th>Situation matrimoniale </th> -->
                                                 <th>Matricule </th>
                                                 <th>Nom</th>
                                                 <th>Prenom</th>
                                                 <th>Date de naissance</th>
-                                                <th>Unite administrative</th>
-                                                <th>Action</th>
+                                                <th >Unite administrative</th>
+                                                <th >Unite Zone</th>
+                                                <th >Service</th>
+                                                <th >Fonction Administrative</th>
+                                                <th style="width:10px">Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr class="odd gradeX" v-for="item in acteurActivite" :key="item.id">
+                                                  <!-- <td @dblclick="afficherModalModifierTitre(item.id)">{{item.situation_matrimonial || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.matricule || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.nom || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_naissance) }}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.uniteAdmin.libelle || 'Non renseigné'}}</td> -->
+                                                 <!-- <td >{{item.situation_matrimonial || 'Non renseigné'}}</td> -->
+                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_naissance) }}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.uniteAdmin.libelle || 'Non renseigné'}}</td>
+                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheUniteZone(item.uniteZone_id) || 'Non renseigné'}}</td>
+                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheService(item.service_id)|| 'Non renseigné'}}</td>
+                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{item.fonction.libelle || 'Non renseigné'}}</td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <router-link :to="{ name: 'ActeurDetail', params: { id: item.id }}" class="btn btn-default ">
@@ -102,6 +116,7 @@
                                         <table class="table table-bordered table-striped">
                                             <thead>
                                             <tr>
+                                              
                                                 <th>Matricule </th>
                                                 <th>Nom</th>
                                                 <th>Prenoms</th>
@@ -114,6 +129,7 @@
                                             </thead>
                                             <tbody>
                                             <tr class="odd gradeX" v-for="item in affichePersonnelRecuActeNormination" :key="item.id">
+                                                 
                                                 <td >{{afficheMatriculePersonnel(item.acteur_depense_id) || 'Non renseigné'}}</td>
                                                 <td >{{afficheNomPersonnel(item.acteur_depense_id) || 'Non renseigné'}}</td>
                                                 <td >{{affichePrenomsPersonnel(item.acteur_depense_id) || 'Non renseigné'}}</td>
@@ -122,18 +138,18 @@
                                                 <td >{{formaterDate(item.date_debut_fonct_budget) }}</td>
                                                 <td >{{formaterDate(item.date_fin_fonct_budget) }}</td>
                                                
-                                                <!-- <td>
+                                                <td>
                                                     <div class="btn-group">
-                                                        <router-link :to="{ name: 'ActeurDetail', params: { id: item.id }}" class="btn btn-default ">
+                                                        <!-- <router-link :to="{ name: 'ActeurDetail', params: { id: item.id }}" class="btn btn-default ">
                                                             <span class=""><i class="icon-folder-open"></i></span>
-                                                        </router-link>
+                                                        </router-link> -->
 
                                                         <button @click.prevent="suprimer(item.id)"  class="btn btn-danger ">
                                                             <span class=""><i class="icon-trash"></i></span></button> 
 
                                                     </div>
 
-                                                </td> -->
+                                                </td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -565,9 +581,53 @@
             ...mapGetters('personnelUA', ["afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
-            ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
+             ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
             ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
+
+ afficheFonctionAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.fonctions.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+ afficheService() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.servicesua.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+ afficheUniteZone() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteZones.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
             acteurActivite() {
                 const searchTerm = this.search.toLowerCase();
                // let ObjetModepassation=this.document_pyba_ppm_personnalise.filter((idm)=>idm.exerciceBudgetaire.encours===1);
@@ -637,6 +697,18 @@
         }
       };
     },
+      afficheSituationMatrimonial() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.situation_matrimonial;
+      }
+      return 0
+        }
+      };
+    },
     afficheUniteAdministrative() {
       return id => {
         if (id != null && id != "") {
@@ -679,11 +751,20 @@
                 this.allActeurDepense()
                 this.getNbrActeurAcrediteTaux();
             },
-            afficherModalModifierTitre(index){
+            // afficherModalModifierTitre(index){
 
-                this.$router.push({ name: 'EditActeurDepense', params: { id: index } })
+            //     this.$router.push({ path: 'EditActeurDepense', params: { id: index } })
 
-            },
+            // },
+
+
+ afficherModalModifierTitre(id) {
+      this.$router.push({
+        path: "/Modifier_immobilisation/" + id
+      });
+    },
+
+
             formaterDate(date) {
                 return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },

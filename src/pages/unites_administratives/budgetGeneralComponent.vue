@@ -225,6 +225,13 @@
                       placeholder="Saisir le code"
                       readonly
                     />
+                    <!-- <input
+                      type="text"
+                     v-model="formData.actived"
+                      class="span"
+                      
+                      readonly
+                    /> -->
           </tr>
         </table>
       </div>
@@ -579,7 +586,8 @@ export default {
       fonctionnel_id: "",
       economique_id: "",
       Dotation_Initiale: "",
-      version: ""
+      version: "",
+      	actived:1
       },
       editBudgetGeneral: {
          exercicebudget_id:"",
@@ -591,7 +599,8 @@ export default {
       fonctionnel_id: "",
       economique_id: "",
       Dotation_Initiale: "",
-      version: ""
+      version: "",
+      actived:1
       },
        search:""
     };

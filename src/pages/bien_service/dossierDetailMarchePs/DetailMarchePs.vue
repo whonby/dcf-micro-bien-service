@@ -20,6 +20,7 @@
                                 <th>Objet marché</th>
                                 <th>Reference marché</th>
                                 <th>Montant prévu marché</th>
+                                <th>Montant Budgetaire</th>
                                 <th>Type de marché</th>
                                 <th>Unite administrative</th>
                                 
@@ -31,11 +32,14 @@
                                  <td class="taskOptions">
                                     {{detail_marche.exo_id}}
                                 </td>
-                                <td class="taskDesc">{{afficherCodeTypeProcedure(detail_marche.procedure_passation_id)}}</td>
+                                <td class="taskDesc" style="text-align:center">{{afficherCodeTypeProcedure(detail_marche.procedure_passation_id)}}</td>
                                 <td class="taskDesc">{{detail_marche.objet}}</td>
                                 <td class="taskStatus">{{detail_marche.reference_marche}}</td>
                                 <td class="taskOptions">
-                                    {{detail_marche.montant_marche}}
+                                    {{formatageSomme(parseFloat(detail_marche.montant_marche))}}
+                                </td>
+                                 <td class="taskOptions">
+                                    {{formatageSomme(parseFloat(budgetDisponible))}}
                                 </td>
                                 <td class="taskOptions">
                                     {{detail_marche.type_marche.libelle}}
@@ -60,7 +64,7 @@
             
             <div class="row-fluid">
                 <div class="span12">
-                     <template v-if="afficherCodeTypeProcedure(detail_marche.procedure_passation_id) == 'PSC' && budgetDisponible < 10000000 ">
+                     <template v-if="this.budgetDisponible < 10000000 ">
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -135,7 +139,7 @@
 
 
                      
-                    <template v-else-if="afficherCodeTypeProcedure(detail_marche.procedure_passation_id) == 'PSC' && 10000000 < budgetDisponible <= 30000000">
+                    <template v-else-if="this.budgetDisponible < 30000000">
 <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -242,7 +246,7 @@
 
                     </div>
                     </template>
-                      <template v-else-if="afficherCodeTypeProcedure(detail_marche.procedure_passation_id) == 'PSL' && 30000000 < budgetDisponible <= 60000000">
+                      <template v-else-if="this.budgetDisponible < 60000000">
  
                      <div class="widget-box">
                         <div class="widget-title">
@@ -384,7 +388,7 @@
                     </div>
                     
                     </template>
-                    <template v-else-if="afficherCodeTypeProcedure(detail_marche.procedure_passation_id) == 'PSO' && 60000000 <= budgetDisponible < 100000000 ">
+                    <template v-else-if="this.budgetDisponible < 100000000 ">
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -526,7 +530,7 @@
                     </div>
                     
                      </template>
-  <template v-else-if="afficherCodeTypeProcedure(detail_marche.procedure_passation_id) == 'AOI' || afficherCodeTypeProcedure(detail_marche.procedure_passation_id) == 'AON' &&   100000000 < budgetDisponible">
+  <template v-else-if="100000000 < this.budgetDisponible">
      <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -777,7 +781,7 @@
 
                     </div>
 </template>
-                      <template v-else>
+          <template v-else>
                    <p style="font-size:14px;text-align:center;color:red">PAS DE PROCEDURE</p>
                      </template>
                 </div>
@@ -938,21 +942,26 @@ created() {
     ]),
     
 afficheLeNomDesProcedure(){
-    if(this.afficherCodeTypeProcedure(this.detail_marche.procedure_passation_id) == 'PSC' && this.budgetDisponible < 10000000){
+    if( this.budgetDisponible < 10000000){
         return "Procédure Simplifiée de demande de Cotation(PSC Sans comité)"
     }
-    else if(this.afficherCodeTypeProcedure(this.detail_marche.procedure_passation_id) == 'PSC' && 10000000 < this.budgetDisponible < 30000000)
+    else if(this.budgetDisponible < 30000000)
     {
 return "Procédure Simplifiée de demande de Cotation(PSC Avec comité)"
     }
-    else if(this.afficherCodeTypeProcedure(this.detail_marche.procedure_passation_id) == 'PSL' && 30000000 <= this.budgetDisponible < 60000000 )
+    else if(this.budgetDisponible < 60000000 )
     {
 return "Procédure Simplifiée à compétition Limitée(PSL)"
     }
-    else if(this.afficherCodeTypeProcedure(this.detail_marche.procedure_passation_id) == 'PSO' && 60000000 <= this.budgetDisponible < 100000000 )
+    else if(this.budgetDisponible < 100000000 )
     {
 return "Procédure Simplifiée à compétition Ouverte(PSO)"
     }
+     else if(100000000 < this.budgetDisponible)
+    {
+return "Appel d'Offre Ouvert(AON ou AOI)"
+    }
+    
 
   return null  
 

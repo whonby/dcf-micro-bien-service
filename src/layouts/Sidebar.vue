@@ -98,7 +98,7 @@
         </li> -->
           <li >
               <router-link :to="{name: 'CartographieBudget'}" title="Cartographie du budget" tag="a">
-                  <i class="icon icon-heart"></i>
+                  <i class="icon icon-map-marker"></i>
                   <span>CARTOGRAPHIE</span>
                   <span class="label label-important"></span>
               </router-link>

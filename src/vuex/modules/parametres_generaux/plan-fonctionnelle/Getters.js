@@ -6,6 +6,9 @@ const plans_fonctionnels = state => state.plans_fonctionnels.sort((a, b) => (a.c
 export const structuresDecision = state => state.structuresDecision
 export const plans_Decision = state => state.plans_Decision.sort((a, b) => (a.code > b.code) ? 1 : -1)
 
+export const structureActe = state => state.structureActe
+export const planActe = state => state.planActe.sort((a, b) => (a.code > b.code) ? 1 : -1)
+
 
 
 

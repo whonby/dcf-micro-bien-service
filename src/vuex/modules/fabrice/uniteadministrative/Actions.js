@@ -778,7 +778,7 @@ export function ajouterService({ commit, dispatch }, nouveau) {
   asyncLoading(axios
     .post("/ajouterServiceUa", {
       s_ua_id: nouveau.s_ua_id,
-      direction_id	: nouveau.direction_id	,
+      // direction_id	: nouveau.direction_id	,
       libelle: nouveau.libelle,
 
 
@@ -788,7 +788,7 @@ export function ajouterService({ commit, dispatch }, nouveau) {
     .then(response => {
       if (response.status == 201) {
         commit("AJOUTER_SERVICE", response.data);
-        dispatch('getAllDirection')
+        dispatch('getAllUniteAdministrative')
         dispatch('getAllServiceua')
         dispatch('getAllUniteAdministrative')
 
@@ -806,12 +806,12 @@ export function modifierService({ commit, dispatch }, nouveau) {
   asyncLoading(axios
     .put("/modifierServiceUa/" + nouveau.id, {
       s_ua_id: nouveau.s_ua_id,
-      direction_id: nouveau.direction_id,
+      // direction_id: nouveau.direction_id,
       libelle: nouveau.libelle,
     }))
     .then(response => {
       commit("MODIFIER_SERVICE", response.data);
-      dispatch('getAllDirection')
+      dispatch('getAllUniteAdministrative')
       dispatch('getAllServiceua')
       dispatch('getAllUniteAdministrative')
       this.$app.$notify({
@@ -827,7 +827,7 @@ export function supprimerService({ commit, dispatch }, id) {
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
       commit("SUPPRIMER_SERVICE", id);
-      dispatch('getAllDirection')
+      dispatch('getAllUniteAdministrative')
       dispatch('getAllServiceua')
       dispatch('getAllUniteAdministrative')
       // // dialog.loading(false) // stops the proceed button's loader

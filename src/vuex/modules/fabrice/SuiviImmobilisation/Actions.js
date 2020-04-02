@@ -259,6 +259,8 @@ export function ajouterImmobilisation({ commit, dispatch}, formData) {
       commit("AJOUTER_IMMOBILISATION", response.data);
       dispatch("getAllBesoinImmo");
       dispatch("getAllStock");
+      dispatch('getActPersonnel')
+      dispatch('allActeurDepense')
       this.$app.$notify({
         title: 'Success',
         text: 'Enregistrement Effectué avec Succès!',
@@ -293,6 +295,7 @@ export function modifierImmobilisation({ commit, dispatch}, nouveau) {
       exercice_budgetaire_id: nouveau.exercice_budgetaire_id,
       service_id: nouveau.service_id,
       nature_bien: nouveau.nature_bien,
+      unitezon_id: nouveau.unitezon_id,
       nature_dentree: nouveau.nature_dentree,
       acteur_depense_id: nouveau.acteur_depense_id,
       // TVA_id: nouveau.TVA_id,
@@ -379,14 +382,19 @@ export function ajouterBesoinImmo({ commit, dispatch }, nouveau) {
       // qte_recu: nouveau.qte_recu,
       // qteactuelstock: nouveau.qteactuelstock,
       motif_demande: nouveau.motif_demande,
-      // service_id: nouveau.service_id,
+      service_id: nouveau.service_id,
       stock_id: nouveau.stock_id,
       norme_id: nouveau.norme_id,
       normearticle: nouveau.normearticle,
       fonction_id: nouveau.fonction_id,
       qterealise: nouveau.qterealise,
       dure_vie: nouveau.dure_vie,
-      demandeur_id: nouveau.demandeur_id
+      demandeur_id: nouveau.demandeur_id,
+      uniteZone_id: nouveau.uniteZone_id,
+      direction: nouveau.direction,
+      identifier_dmd_service: nouveau.identifier_dmd_service,
+      identifier_dmd_fonction: nouveau.identifier_dmd_fonction
+      
     })
   ).then(response => {
     if (response.status == 201) {
@@ -432,6 +440,12 @@ export function modifierBesoinImmo({ commit, dispatch }, nouveau) {
       demandeur_id: nouveau.demandeur_id,
       direction: nouveau.direction,
       service_id: nouveau.service_id,
+      uniteZone_id: nouveau.uniteZone_id,
+      identifier_dmd_service: nouveau.identifier_dmd_service,
+      identifier_dmd_fonction: nouveau.identifier_dmd_fonction,
+      qte_actuel: nouveau.qte_actuel,
+      total_actuel: nouveau.total_actuel
+      
     })
   ).then(response => {
     commit("MODIFIER_BESOIN_IMMO", response.data);

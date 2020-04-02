@@ -27,19 +27,34 @@
                                     layer-type="base"/>
                            <!-- <l-control-zoom position="bottomright"  ></l-control-zoom>-->
                             <v-marker-cluster >
-                                <l-marker v-for="l in localisation" :key="l.id" :lat-lng="l.latlng" :icon="icon">
-                                    <l-popup :content="l.ville"></l-popup>
-                                    <l-tooltip :options="{interactive: true, permanent: true}">
-                                       <b>{{l.ville}}</b> <br>
-<div style="font-size: 10px;">
-    Budget: <span style="color: #16c711">20</span> <br>
-    Budget execute:101<br>
-    Budget restant:101<br>
-    Taux d'execution:101
-</div>
+                                <l-circle-marker v-for="l in localisation"
+                                                 :key="l.id"
+                                                 :lat-lng="l.latlng"
+                                                 @click="uniteAdmin(l.id,l.ville)"
+                                                 :radius="8"
+                                                 :color="l.color"
+                                                 :fillColor="l.colorFill"
+                                                 :fillOpacity="2"
 
-                                    </l-tooltip>
-                                </l-marker>
+                                >
+                                    <l-popup>
+                                    <b>{{l.ville}}</b> <br>
+                                    <div >
+                                        Budget: <span style="color: #003900; "><b>{{formatageSomme(l.budget)}}</b></span> <br>
+                                        Budget execute:<span style="color: #00d700; "><b>101</b></span><br>
+                                        Budget restant:<span style="color: darkred; "><b>101</b></span><br>
+                                        Taux d'execution:<span style="color: #e36706; "><b>101</b></span>
+                                    </div>
+                                </l-popup>
+
+                                </l-circle-marker>
+                              <!--  <l-marker v-for="l in localisation"
+                                          :key="l.id"
+                                          :lat-lng="l.latlng">
+
+
+                                    &lt;!&ndash;&ndash;&gt;
+                                </l-marker>-->
                             </v-marker-cluster>
                         </l-map> </div>
                 </div>
@@ -47,10 +62,25 @@
             <div class="span4">
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-                        <h5>Liste des unite administrative</h5>
+                        <h5>Liste des unite administrative
+                        </h5>
                     </div>
-                    <div class="widget-content">
+                    <div class="widget-content" >
+                        <a data-dismiss="modal" class="btn btn-primary" href="#" v-if="zone_geographique">{{zone_geographique}}</a>
 
+                        <button v-if="zone_geographique" @click.prevent="afficher()"  class="btn btn-danger ">
+                        <span class="">Afficher tous</span></button>
+                        <table class="table table-bordered table-striped" >
+                            <tr>
+                                <th>Nom UA </th>
+                            </tr>
+                            <tbody style="height: 100px;">
+                            <tr class="odd gradeX" v-for="ua in administratif(idzone)"
+                                :key="ua.id">
+                                <td>{{ua.libelle}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -64,9 +94,10 @@
 <script>
     import {mapGetters} from 'vuex'
     import { latLng, Icon, icon } from 'leaflet'
-    import { LMap, LTileLayer, LMarker, LPopup,LIconDefault,LControlLayers,LTooltip } from "vue2-leaflet";
+    import { LMap, LTileLayer, LMarker,LIconDefault,LControlLayers,LTooltip,LPopup,LCircleMarker } from "vue2-leaflet";
     import iconUrl from 'leaflet/dist/images/marker-icon.png'
     import shadowUrl from 'leaflet/dist/images/marker-shadow.png'
+    import { formatageSomme } from "../../Repositories/Repository";
     export default {
         name: "Example",
         components: {
@@ -77,6 +108,8 @@
             LTooltip,
             LIconDefault,
             LControlLayers,
+            LCircleMarker
+           // LIcon
 
         },
         data() {
@@ -89,6 +122,8 @@
                 icon: customicon,
                 clusterOptions: {},
                 zoom: 3,
+                idzone:"",
+                zone_geographique:"",
                 center: latLng(47.41322, -1.219482),
                 url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
                 attribution:
@@ -163,6 +198,12 @@
 // methode pour maper notre guetter
     ...mapGetters('parametreGenerauxAdministratif', ['structures_geographiques',
             'localisations_geographiques']),
+        ...mapGetters("uniteadministrative", [
+            "acteCreations",
+            "typeTextes",
+            "uniteAdministratives",
+            "getterBudgeCharge"
+        ]),
             localisationsFiltre(){
             const searchTerm = this.search.toLowerCase();
             console.log(this.localisations_geographiques.filter(item=>item.parent!==null))
@@ -176,16 +217,63 @@
         },
         localisation(){
         let localisation=[]
+            //console.log(this.uniteAdministratives)
+            let vM=this;
             this.localisations_geographiques.forEach(function (value){
                 if(value.parent!=null){
                     if(value.longitude!=null && value.latitude!=null){
+
                         let coordonne=[]
                         coordonne.push(value.latitude)
                         coordonne.push(value.longitude)
+                        /**
+                         * Recuperation des unite administrative de la zone geographique
+                         * @type {*[]}
+                         */
+                        let budgetZone=0;
+                        let color="";
+                        let colorFill=""
+                        let uniteByZoneGeo= vM.uniteAdministratives.filter( item => item.localisationgeo_id ==value.id)
+                        if (uniteByZoneGeo!=undefined) {
+
+                            /**
+                             *
+                             */
+
+                            uniteByZoneGeo.forEach(function (row) {
+                                let budgetActive=row.ua_budget_general.filter(item=>item.actived==1)
+                                if (budgetActive!="") {
+                                    let initialValue = 0;
+                                  let budgetByUnite=  budgetActive.reduce(function (total, currentValue) {
+                                        return total + parseFloat(currentValue.Dotation_Initiale) ;
+                                    }, initialValue);
+
+                                    budgetZone=budgetZone + budgetByUnite
+                                }
+
+                            })
+                            console.log("---------------")
+                            console.log(value.libelle)
+                            console.log(budgetZone)
+                            console.log("---------------")
+                        }
+                         if(budgetZone==0){
+                             color="#ff0000"
+                             colorFill="#ff0000"
+                         }else{
+                             color="#0f13ff"
+                             colorFill="#0f13ff"
+                         }
                         let objetAlocalise={
                             id:value.id,
                             ville:value.libelle,
-                            latlng:coordonne
+                            latlng:coordonne,
+                            budget:budgetZone,
+                            budgetReste:'',
+                            budgetExecute:"",
+                            tauxBudget:"",
+                            color:color,
+                            colorFill:colorFill
                         }
                         localisation.push(objetAlocalise)
                     }
@@ -193,10 +281,21 @@
                 }
             })
         return localisation;
-        }
+        },
+      administratif(){
+          return  uniteAdmin=>{
+              if (uniteAdmin!="") {
+
+                  return this.uniteAdministratives.filter( item => item.localisationgeo_id == uniteAdmin)
+              }else{
+                  return this.uniteAdministratives;
+              }
+          }
+      }
 
     },
         methods: {
+
             zoomUpdate(zoom) {
                 this.currentZoom = zoom;
             },
@@ -208,6 +307,17 @@
             },
             innerClick() {
                 alert("Click!");
+            },
+            uniteAdmin(id,ville){
+                this.idzone=id
+                this.zone_geographique=ville
+               console.log(id)
+
+            },
+            formatageSomme:formatageSomme,
+            afficher(){
+                this.idzone=""
+                this.zone_geographique=""
             },
             click: (e) => console.log("clusterclick", e),
             ready: (e) => console.log('ready', e),

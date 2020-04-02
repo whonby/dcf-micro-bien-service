@@ -6,7 +6,7 @@
       <div class="accordion" >
 
         
-        <h5> {{afficherUniteAdministrative(groupe.d_ua_id)}}</h5>
+        <!-- <h5> {{afficherUniteAdministrative(groupe.d_ua_id)}}</h5> -->
           <div class="accordion-group widget-box">
            
             <div class="accordion-heading">
@@ -17,6 +17,7 @@
                  <span class="badge badge-inverse" >{{getNombreArticle}}</span>
 
                 </a> 
+
 
 
             </div>
@@ -36,7 +37,7 @@
                 <tbody>
                    <ServiceItem
                         class="item" 
-                        v-for="groupeElement in groupe.direction_service"
+                        v-for="groupeElement in groupe.relation_service"
                         :key="groupeElement.id"
                         :article="groupeElement"
                      @modification="$emit('modification', $event)"
@@ -149,26 +150,26 @@ export default {
 
 
 getNombreArticle(){
-        var nombre = this.groupe.direction_service.length
+        var nombre = this.groupe.relation_service.length
         if(nombre) return nombre
         return '0' 
     },
     isFolder: function () {
-      return this.groupe.direction_service &&
-        this.groupe.direction_service.length
+      return this.groupe.relation_service &&
+        this.groupe.relation_service.length
     },
 
     // getNombreArticle(){
-    //     var nombre = this.groupe.direction_service.length
+    //     var nombre = this.groupe.relation_service.length
     //     if(nombre) return nombre
     //     return 'Aucun' 
     // },
     iconClasses() {
       return {
-        'icon-plus': !this.isOpen && this.groupe.direction_service.length,
-        'icon-minus': this.isOpen && this.groupe.direction_service.length
-        //    'icon-folder-close': !this.isOpen && this.groupe.direction_service.length,
-        // 'icon-folder-open': this.isOpen && this.groupe.direction_service.length
+        'icon-plus': !this.isOpen && this.groupe.relation_service.length,
+        'icon-minus': this.isOpen && this.groupe.relation_service.length
+        //    'icon-folder-close': !this.isOpen && this.groupe.relation_service.length,
+        // 'icon-folder-open': this.isOpen && this.groupe.relation_service.length
       }
     },
 

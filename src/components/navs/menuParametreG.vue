@@ -181,6 +181,19 @@
               <i class="icon-key"></i> Plan Décisionnelles
             </router-link>
           </li>
+           <li class="divider"></li>
+          
+          <li>
+            <router-link :to="{name: 'structureActe'}" tag="a">
+              <i class="icon-key"></i> Structures Acte
+            </router-link>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'planActe'}" tag="a">
+              <i class="icon-key"></i> Plan Acte
+            </router-link>
+          </li>
         </ul>
       </li>
      
@@ -535,13 +548,13 @@
               <i class="icon-user"></i> Taux
             </router-link>
           </li>
-           <li>
+           <!-- <li>
             <router-link :to="{name:'StockArticles'}" tag="a">
-              <!-- <i class="icon-home"></i> -->
+              <i class="icon-home"></i> 
                <i class="icon-user"></i> Gestion des stocks
              
             </router-link>
-          </li>
+          </li> -->
            <li>
             <router-link :to="{name:'NormeImmo'}" tag="a">
               <!-- <i class="icon-home"></i> -->

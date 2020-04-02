@@ -92,12 +92,12 @@
                             <label class="control-label">Type Unite administrative:</label>
                             <div class="controls">
                               <select v-model="formData.typeuniteadminis_id">
-                                <option value>Sélectionner</option>
+                                <!-- <option value>Sélectionner</option>
                                 <option
                                   v-for="typeua in groupTriUaImmo"
                                   :key="typeua[0].id"
                                   :value="typeua[0].typeUniteAdmin.id"
-                                >{{typeua[0].typeUniteAdmin.libelle}}</option>
+                                >{{typeua[0].typeUniteAdmin.libelle}}</option> -->
                               </select>
                             </div>
                           </div>
@@ -108,11 +108,11 @@
                             <div class="controls">
                               <select v-model="formData.uniteadministrative_id" :readOnly="veifuaExist">
                                 <option value>Sélectionner</option>
-                                <option
+                                <!-- <option
                                   v-for="ua in typeUniteAdministrativeDynamiques(formData.typeuniteadminis_id)"
                                   :key="ua.id"
                                   :value="ua.uniteAdminist.id"
-                                >{{ua.uniteAdminist.libelle}}</option>
+                                >{{ua.uniteAdminist.libelle}}</option> -->
                               </select>
                             </div>
                           </div>
@@ -124,11 +124,11 @@
                             <div class="controls">
                               <select v-model="formData.famillearticle_id" :readOnly="veifEquipementExist">
                                 <option value>Sélectionner</option>
-                                <option
+                                <!-- <option
                                   v-for="fam in designationDynamiques(formData.uniteadministrative_id)"
                                   :key="fam.id"
                                   :value="fam.famille.id"
-                                >{{fam.famille.libelle}}</option>
+                                >{{fam.famille.libelle}}</option> -->
                                
                               </select>
                               
@@ -141,11 +141,11 @@
                             <div class="controls">
                               <select v-model="formData.articleImmo_id" :readOnly="veifarticleExist">
                                 <option value>Sélectionner</option>
-                                <option
+                                <!-- <option
                                   v-for="arti in ArticlesDynamiques(formData.famillearticle_id)"
                                   :key="arti.id"
                                   :value="arti.afficheArticle.id"
-                                >{{arti.afficheArticle.libelle}}</option>
+                                >{{arti.afficheArticle.libelle}}</option> -->
                               </select>
                             </div>
                           </div>

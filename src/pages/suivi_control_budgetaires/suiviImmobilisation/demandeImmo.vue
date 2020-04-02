@@ -127,7 +127,7 @@
                  <div class="control-group">
                   <label class="control-label">Fonction</label>
                   <div class="controls">
-                    <select v-model="formData.fonction_id" class="span4" :readOnly="deverouFonctionDirectionService">
+                    <select v-model="formData.fonction_id" class="span4" :readOnly="deverouFonctionDirectionService" v-on="pourDesactiveLesfonctionalite">
                      <option value="">Désactiver</option>
                       <option
                         v-for="typeUniteA in fonctionDynamiquesParUa(formData.uniteadmin_id)"
@@ -398,15 +398,15 @@
                     v-for="(BesoinImmo,index) in besoinEquipement"
                     :key="BesoinImmo.id"
                   >
-                   <!-- <td
-                      @dblclick="afficherModalModifierBesoinImmo(index)"
-                    >{{BesoinImmo.Afficheua.libelle || 'Non renseigné'}}</td> 
-                     <td
-                      @dblclick="afficherModalModifierBesoinImmo(index)"
-                    >{{BesoinImmo.Affichefonction.libelle || 'Non renseigné'}}</td> -->
                     <td
                       @dblclick="afficherModalModifierBesoinImmo(index)"
-                    >{{BesoinImmo.Affichefamille.libelle || 'Non renseigné'}}</td>
+                    >{{BesoinImmo.uniteadmin_id || 'Non renseigné'}}</td> 
+                     <td
+                      @dblclick="afficherModalModifierBesoinImmo(index)" 
+                    >{{BesoinImmo.fonction_id || 'Non renseigné'}}</td> 
+                    <td
+                      @dblclick="afficherModalModifierBesoinImmo(index)"
+                    >{{BesoinImmo.famille_id || 'Non renseigné'}}</td>
                    
                    <!-- <td 
                       @dblclick="afficherModalModifierBesoinImmo(index)"
@@ -627,6 +627,31 @@ json_fields: {
 //         alert("La norme doit etre superieure a la qte demande")
 //       }
 // },
+
+pourDesactiveLesfonctionalite(){
+ if(this.formData.fonction_id != "désactiver"){
+   return (
+     this.formData.direction == "désactiver" && 
+     this.formData.service_id == "désactiver"
+   
+   )
+ }
+ else if(this.formData.direction != "désactiver"){
+ return (
+     this.formData.fonction_id == "désactiver" && 
+     this.formData.service_id == "désactiver"
+   
+   )
+ }
+ else{
+   return (
+     this.formData.fonction_id == "désactiver" && 
+     this.formData.direction == "désactiver"
+   
+   )
+ }
+ 
+},
 
 CoutMoyen() {
  return id => {

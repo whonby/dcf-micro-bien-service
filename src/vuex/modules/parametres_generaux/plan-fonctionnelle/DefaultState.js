@@ -4,7 +4,9 @@ const defaultstate = {
     structures_fonctionnelles:[],
   plans_fonctionnels: [],
   structuresDecision: [],
-  plans_Decision: []
+  plans_Decision: [],
+  structureActe: [],
+  planActe:[]
 
   };
   

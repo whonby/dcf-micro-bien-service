@@ -4,25 +4,7 @@
      <!-- <h3 style="text-align:center">TABLEAU DE BORD : COMPTABILITES DES MATIERES</h3> -->
     <div class="quick-actions_homepage">
       <ul class="quick-actions">
-        <!-- <li class="bg_lb" title="nombre de famille d'immobilisation">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-important">{{nombreFamilleArticle}}</span> Nbre familles immo
-          </a>
-        </li>-->
-
-        <!-- <li class="bg_ly" title="nombre de service">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-success">{{nombreServices}}</span> Nbre de service
-          </a>
-        </li>-->
-        <!-- <li class="bg_lo" title="total amortissement">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-success">{{nombreAmortissement}}</span> Nbre Amortissement
-          </a>
-        </li>-->
+<!--   
           <li class="bg_lb" title="Nombre Global d'équipement">
           <a href="#">
             <i class="icon-list-ol"></i>
@@ -54,25 +36,9 @@
             <i class="icon-fullscreen"></i>
             <span class="label label-warning">{{tauxEquipementPrevue}}%</span>TAUX QUANTITES NON COUVERTES
           </a>
-        </li>
-           <!-- <li class="bg_lb" title="Montant total besoin">
-          <a href="#">
-            <i class="icon-plus-sign"></i>
-            <span class="label label-important">{{formatageSomme(parseFloat(SommeTotalBesoin))}}</span> Montant Global Besoins restant
-          </a>
-        </li>  -->
-        <!-- <li class="bg_lr" >
-          <a href="#">
-            <i class="icon-info-sign"></i>
-            <span class="label label-success">{{tauxGlobalEquipement}}%</span>Taux Global d'equipement
-          </a>
         </li> -->
-        <!-- <li class="bg_lr" title="Taux immobilisation de UA">
-          <a href="#">
-            <i class="icon-info-sign"></i>
-            <span class="label label-success">{{tauxbesoinimmoUa}}%</span>Taux Besoin immobilisation de ua
-          </a>
-        </li>-->
+          
+          <h1 style="text-align:center;margin:0 auto;color:red">EN COURS DE DEVELOPPEMENT TABLEAU DE BORD COMPTABILITE DES MATIERES</h1>
       </ul>
     </div>
 

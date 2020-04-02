@@ -10,7 +10,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Ajouter Immobilisation</h5>
+              <h5>Ajouter personnel</h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -23,10 +23,11 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1">INFORMATION PERSONNEL</a>
+                        <a data-toggle="tab" href="#tab1">Identification</a>
                       </li>
+                       
                       <li>
-                        <a data-toggle="tab" href="#tab2">DESCRIPTIF</a>
+                        <a data-toggle="tab" href="#tab2">Affectation</a>
                       </li>
                       <!-- <li>
                         <a data-toggle="tab" href="#tab3">Descriptif3</a>
@@ -43,19 +44,7 @@
                       <div class="modal-body">
         <table class="table table-bordered table-striped">
             <tr>
-                <td>
-                     <div class="control-group">
-                                                    <label class="control-label">Situation matrimoniale</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.sexe" >
-                                                            <option></option>
-                                                            <option value="1">Marie</option>
-                                                            <option value="2">Celibataire</option>
-                                                             <option value="3">Divorce</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                </td>
+
                 <td>
  
                                                     <label class="control-label">Matricule:</label>
@@ -64,6 +53,7 @@
                                                     </div>
                                                 
                 </td>
+                      
                  <td>
                     <div class="control-group">
                                                     <label class="control-label">Nom:</label>
@@ -92,17 +82,18 @@
                                                     </div>
                                                 </div>
                 </td>
-                 
-            </tr>
-            <tr>
-                <td>
-                    <div class="control-group">
-                                                    <label class="control-label">Numero CNI:</label>
+                 <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Date de naissance:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="formData.numero_cni"  placeholder="Saisir le numero cni" />
+                                                        <input type="date" v-model="formData.date_naissance"  placeholder="Saisir la date de naissance" />
                                                     </div>
                                                 </div>
                 </td>
+                
+            </tr>
+            <tr>
+                
                 <td>
                      <div class="control-group">
                                                     <label class="control-label">Numero passeport:</label>
@@ -112,10 +103,10 @@
                                                 </div>
                 </td>
                 <td>
-                     <div class="control-group">
-                                                    <label class="control-label">Date de naissance:</label>
+                    <div class="control-group">
+                                                    <label class="control-label">Numero CNI:</label>
                                                     <div class="controls">
-                                                        <input type="date" v-model="formData.date_naissance"  placeholder="Saisir la date de naissance" />
+                                                        <input type="text" v-model="formData.numero_cni"  placeholder="Saisir le numero cni" />
                                                     </div>
                                                 </div>
                 </td>
@@ -132,6 +123,19 @@
                                                     <label class="control-label">Nom de la mere:</label>
                                                     <div class="controls">
                                                         <input type="text" v-model="formData.nom_mere"  placeholder="Saisir le nom de la mere" />
+                                                    </div>
+                                                </div>
+                </td>
+                          <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Situation matrimoniale</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.situation_matrimonial" >
+                                                            <option></option>
+                                                            <option value="Marie">Marie</option>
+                                                            <option value="Celibataire">Celibataire</option>
+                                                             <option value="Divorce">Divorce</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                 </td>
@@ -209,13 +213,14 @@
                      <div class="control-group">
                                                     <label class="control-label">Fonctions</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.fonction_id">
+                                                        <select v-model="formData.fonction_id" :disabled="verrouilleFonction">
                                                             <option></option>
-                                                            <option v-for="item in afficheFonction(formData.service_id)" :key="item.id" :value="item.id">
-                                                                {{item.fonction_id}}
+                                                            <option v-for="item in afficheFonction(formData.service_id)" :key="item.id" :value="item.fonction_id">
+                                                                {{afficheLibelleFonction(item.fonction_id)}}
                                                             </option>
 
                                                         </select>
+                                                        <input type="hidden" :value="nombreDeFonction(formData.fonction_id)" readonly/>
                                                     </div>
                                                 </div>
                 </td>
@@ -285,7 +290,22 @@
    
             </tr>
             <tr>
-                <td>
+               
+              <td colspan="2">
+                <div class="control-group">
+                                                    <label class="control-label">Ligne budgetaires:</label>
+                                                    <div class="controls">
+
+                                                        <select v-model="formData.plan_budgetaire_id" class="span">
+                                                            <option v-for="item in afficheBudgetPersonnel(formData.unite_administrative_id)" :key="item.id" :value="item.economique_id">
+                                                               {{item.afficheEconomique.code}} - {{item.afficheEconomique.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+              </td>
+                
                                  <td>
                      <div class="control-group">
                                                     <label class="control-label">Type salarie</label>
@@ -392,6 +412,7 @@
 
 
 
+
 </template>
 <script>
 
@@ -431,7 +452,9 @@
                     grade_id:"",
                     fonction_id:"",
                     plan_budgetaire_id:'',
-                    uniteZone_id:""
+                    uniteZone_id:"",
+                    situation_matrimonial:"",
+                    service_id:""
                 },
 
                 editTitre: {
@@ -456,14 +479,29 @@
             ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
             ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
-
+ ...mapGetters("SuiviImmobilisation", [
+      
+      "normeImmo"
+      
+      
+    ]),
  verrouilleUniteZone() {
       return this.formData.unite_administrative_id == "";
     },
     verrouilleService() {
       return this.formData.uniteZone_id == "";
     },
+    verrouilleFonction() {
+      return this.formData.service_id == "";
+    },
 
+nombreDeFonction() {
+      return id => {
+        if (id != null && id != "") {
+          return this.normeImmo.filter(element => element.fonction_id == this.formData.fonction_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.norme), 0).toFixed(0);
+        }
+      };
+    },
  afficheUniteZone() {
       return id => {
         if (id != null && id != "") {
@@ -495,6 +533,15 @@ exoEnCours() {
       }
       return 0
     },
+    afficheIdExerciceEnCours() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.annee == this.exoEnCours);
+
+      if (norme) {
+        return norme.id;
+      }
+      return 0
+    },
     afficheBudgetPersonnel() {
       return id => {
         if (id != null && id != "") {
@@ -502,7 +549,8 @@ exoEnCours() {
         }
       };
     },
-     
+    
+        
 
         afficheGrade() {
       return id => {
@@ -511,6 +559,18 @@ exoEnCours() {
 
       if (qtereel) {
         return qtereel.grade_id;
+      }
+      return 0
+        }
+      };
+    },
+          afficheLibelleFonction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.fonctions.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
       }
       return 0
         }
@@ -543,8 +603,15 @@ exoEnCours() {
             },
             // fonction pour vider l'input
             ajouterTitreLocal () {
+              var nouveauObjet={
+                ...this.formData,
+                exercice_budgetaire_id:this.afficheIdExerciceEnCours,
+                grade_id:this.afficheGrade(this.formData.fonction_id),
+                normeequipement:this.nombreDeFonction(this.formData.fonction_id),
+                historiquenormequipement:this.nombreDeFonction(this.formData.fonction_id)
+              }
                 console.log(this.formData)
-                this.ajouterActeur(this.formData)
+                this.ajouterActeur(nouveauObjet)
                 this.getActeur()
                 this.formData = {
                     code: "",
