@@ -29,6 +29,7 @@
             <span class="label label-success">{{formatageSomme(parseFloat(montantGlobalMarcheEnCoursExecution))}}</span>MONTANTS DES MARCHES ATTRIBUES
           </a>
         </li>
+        
         <!-- <li class="bg_ly">
           <a href="#">
             <i class="icon-list-ol"></i>

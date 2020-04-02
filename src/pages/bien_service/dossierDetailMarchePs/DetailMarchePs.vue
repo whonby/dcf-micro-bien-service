@@ -182,9 +182,9 @@
                    <div id="tab498" class="tab-pane">
                 <div align="right">
                    
- <div class="widget-content">
+ <!-- <div class="widget-content">
                         <a href="#ajouterOuverture" data-toggle="modal" class="btn btn-success">Ajouter</a>
-                    </div>
+                    </div> -->
 
 
                 </div>
@@ -749,6 +749,19 @@
                 </div>
 
 
+                       <div id="tab1" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#modifierActeEF" data-toggle="modal" class=""></a>
+                    </div>
+
+
+                </div>
+                <acteModification :macheid="detail_marche.id"></acteModification>
+
+                </div>
+
+
 
 
 
@@ -790,6 +803,7 @@
    import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
     import publicationOffre from '../DossierPso/publicationOffre/publicationOffre';
     import addLot from '../dossierLot/addLot';
+    import acteModification from '../dossierDetailMarchePs/dossierModificationActe/acteModification';
         import invitationCf from '../DossierPso/lettreInvitation/invitationCf';
  import mandateBs from '../DossierPso/mandaté/mandateBs';
  import componentOuverture1 from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
@@ -797,7 +811,7 @@ import dossierCandidat from '../DossierPso/dossierCandidat/dossierCandidat'
     import componentOuvertureMembre from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
     import componentAnalyse from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
      import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
-  
+    
 //   import componentCotation from '../dossierDetailMarchePs/dossierComponentPs/componentCotation';
 //      import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
 //       import componentOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
@@ -860,7 +874,8 @@ componentPv,
             componentDemandeAno,
             componentAvisBailleurSurTransmision,
             componentAvisAnoCf,
-            componentAvisBailleurCf
+            componentAvisBailleurCf,
+            acteModification
         // bailleurAjouter,
 
            // bailleurAjouter,

@@ -3014,6 +3014,113 @@ export function supprimerProcedurePassation({ commit, dispatch}, id) {
 // }).catch(error => console.log(error)))
 // }
 
+
+
+export  function  getRapportJugement({commit}) {
+  queue.push(() => axios.get('/liste_rapport_iugement').then((response) => {
+      commit('GET_ALL_JUGEMENT', response.data)
+
+  }).catch(error => console.log(error)))
+}
+
+// action pour ajouter les infos
+
+export function ajouterRapportJugement({commit, dispatch}, elementAjout,config){
+  asyncLoading(axios.post('/add_rapport_jugement',elementAjout,config)).then(response =>{
+      if(response.status == 201){
+          commit('AJOUTER_RAPPORT_JUGEMENT', response.data)
+          dispatch('getRapportJugement')
+          this.$app.$notify({
+              title: 'success ',
+              text: 'Enregistrement effectué !',
+              type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier le type text juridique
+
+
+export function modifierRapportJugement({commit}, element_modifie,config) {
+  asyncLoading( axios.post('/update_rapport_jugement',element_modifie,config)).then(response => {
+      commit('MODIFIER_RAPPORT_JUGEMENT', response.data)
+      this.$app.$notify({
+          title: 'success ',
+          text: 'Modification effectué !',
+          type:"success"
+      })
+  }).catch(error => console.log(error))
+}
+// supprimer le type text juridique
+
+export function supprimerrapportJugement({ commit, dispatch}, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+        commit('SUPPRIMER_RAPPORT_JUGEMENT', id)
+        dispatch('getRapportJugement')
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete('/delete_rapport_jugement/' + id).then(() => dialog.close() )
+      })
+
+}
+
+
+
+
+export  function  getDocument({commit}) {
+  queue.push(() => axios.get('/list_document').then((response) => {
+      commit('GET_ALL_DOCUMENT', response.data)
+
+  }).catch(error => console.log(error)))
+}
+
+// action pour ajouter les infos
+
+export function ajouterDocument({commit, dispatch}, elementAjout,config){
+  asyncLoading(axios.post('/add_document',elementAjout,config)).then(response =>{
+      if(response.status == 201){
+          commit('AJOUTER_DOCUMENT', response.data)
+          dispatch('getDocument')
+          this.$app.$notify({
+              title: 'success ',
+              text: 'Enregistrement effectué !',
+              type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// action pour modifier le type text juridique
+
+
+export function modifierDocument({commit}, element_modifie,config) {
+  asyncLoading( axios.post('/update_document',element_modifie,config)).then(response => {
+      commit('MODIFIER_DOCUMENT', response.data)
+      this.$app.$notify({
+          title: 'success ',
+          text: 'Modification effectué !',
+          type:"success"
+      })
+  }).catch(error => console.log(error))
+}
+// supprimer le type text juridique
+
+export function supprimerDocument({ commit, dispatch}, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+        commit('SUPPRIMER_DOCUMENT', id)
+        dispatch('getDocument')
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete('/delete_document/' + id).then(() => dialog.close() )
+      })
+
+}
+
 // action pour ajouter la realite du service fait
 
 // export function ajouterRealiteServiceFait({commit}, elementAjout){

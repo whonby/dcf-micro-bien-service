@@ -2,7 +2,7 @@
         <div>
 
             <!-- debut de list  -->
-            <div align="right">
+            <!-- <div align="right">
                       <div class="widget-content">
 
                           <a href="#ajouterCojo" data-toggle="modal" class="btn btn-warning" >Ajouter </a>
@@ -10,13 +10,14 @@
 
                       </div>
                            
-                  </div>
+                  </div> -->
+                  <div align="left">
                   <h4> Infomation sur la cojo</h4>
-            
+                  </div>
                   <table class="table table-bordered table-striped" v-if="macheid">
                       <thead>
                       <tr>
-                           <th>Entreprise</th>
+                           <!-- <th>Entreprise</th> -->
                           <th>Date Composition </th>
                           <th>Date ouverture</th>
                           <th>Nmbr particiapnt</th>
@@ -28,8 +29,8 @@
                       <tr class="odd gradeX" v-for="(appelOffre, index) in listeCojo(macheid.id)"
                           :key="appelOffre.id">
                          
-                              <td @click="afficheBouttonTechCojo(index)">
-                            {{affichierNomEntreprise(appelOffre.entreprise_id) || 'Non renseigné'}}</td>
+                              <!-- <td @click="afficheBouttonTechCojo(index)">
+                            {{affichierNomEntreprise(appelOffre.entreprise_id) || 'Non renseigné'}}</td> -->
 
                           <td @click="afficheBouttonTechCojo(index)">
                               {{formaterDate(appelOffre.date_composition) || 'Non renseigné'}}
@@ -59,15 +60,13 @@
 
 
             <!-- add formulaire cojo -->
-              <div id="ajouterCojo" class="modal hide grdtaill">
+              <div id="ajouterOuverturePersonnel" class="modal hide grdtaill">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter Cojo</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
-
-
 
                      <div class="control-group">
                         <label class="control-label">Reference offre</label>
@@ -86,16 +85,16 @@
                         </div>
                         </div>
 
-                    <div class="control-group">
-                        <label class="control-label">Entreprise.</label>
+                    <!-- <div class="control-group">
+                        <label class="control-label">Destinataire.</label>
                         <div class="controls">
-                          <select v-model="formDataCojo.entreprise_id" class="span">
+                          <select v-model="formDataCojo.lettre_invitation_id" class="span">
                                 <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
                                         :value="varText.objetEntreprise.id">{{varText.objetEntreprise.raison_sociale}}</option>
                             </select>
                         
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="control-group">
                         <label class="control-label">Date d'ouverture</label>
@@ -193,7 +192,7 @@
                         </div>
                         </div>
 
-                    <div class="control-group">
+                    <!-- <div class="control-group">
                         <label class="control-label">Entreprise.</label>
                         <div class="controls">
                           <select v-model="edite_cojo.entreprise_id" class="span">
@@ -202,7 +201,7 @@
                             </select>
                         
                         </div>
-                    </div>
+                    </div> -->
 
 
                     <div class="control-group">
@@ -238,7 +237,7 @@
                                     v-model="edite_cojo.nbr_participant"
                                     class="span"
                             />
-                              <input type="hidden" v-model="edite_cojo.difference_personnel_bienService"/>
+                             <input type="hidden" v-model="formDataCojo.difference_personnel_bienService"/>
                         </div>
                     </div>
                 </form>
@@ -272,13 +271,13 @@ export default {
                 //         controleur_finnancier:"",
                 //         dmp:"",
                 //         autorite_contractante:"",
-                       entreprise_id:"",
+                      // entreprise_id:"",
                         date_ouverture:"",
                         date_composition:"",
                         num_dossier_appel_offre:"",
                         nbr_participant:"",
                         appel_offre_id:"",
-                        difference_personnel_bienService:"bienService"
+                        difference_personnel_bienService:"pers"
             },
             
             edite_cojo:"",
@@ -288,7 +287,8 @@ export default {
     created(){
     },
     computed:{
-        ...mapGetters('bienService',['getterCojos','gettersCotations','appelOffres',
+        ...mapGetters('bienService',['getterCojos',"listeOuverturePersonnel",
+        'gettersCotations','appelOffres',
         'gettersCojoPersonnaliser','gettersCotationPersonnaliser']),
 
   ...mapGetters('personnelUA', ['acteur_depenses']),
@@ -302,31 +302,31 @@ export default {
                     //     if(Objet!=undefined){
                     //         vM.idcojo=Objet.id
                     //     }
-                        return this.getterCojos.filter(idmarche => idmarche.marche_id == macheid)
+                        return this.listeOuverturePersonnel.filter(idmarche => idmarche.marche_id == macheid)
                     }
                 }
             },
 
-         afficherEntrepriseRecep () {
-                return id => {
-                    if (id != "") {
-                        // console.log("Marche lettre inviation marche")
-                        return this.gettersCotationPersonnaliser.filter(idmarche => idmarche.marche_id == id)
-                     }
-             }
-            },
-            affichierNomEntreprise() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+        //  afficherEntrepriseRecep () {
+        //         return id => {
+        //             if (id != "") {
+        //                 console.log("Marche lettre inviation marche")
+        //                 return this.gettersCotationPersonnaliser.filter(idmarche => idmarche.marche_id == id)
+        //              }
+        //      }
+        //     },
+    //         affichierNomEntreprise() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.raison_sociale;
-      }
-      return 0
-        }
-      };
-    },
+    //   if (qtereel) {
+    //     return qtereel.raison_sociale;
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
 // listeAppelOffre() {
 //       return id => {
 //         if (id != null && id != "") {
@@ -417,7 +417,7 @@ affichierAppelOffreid() {
             backdrop: 'static',
             keyboard: false
         });
-        this.edite_cojo = this.getterCojos.find(item=>item.id==index);
+        this.edite_cojo = this.listeOuverturePersonnel.find(item=>item.id==index);
         //this.edite_lot.appel_offre_id=this.edite_lot. modifierDemandeAno
     },
     
@@ -433,7 +433,7 @@ affichierAppelOffreid() {
               this.ajouterCojo(nouvelObjet)
                 this.formDataCojo={
                         appel_offre_id:"",
-                         entreprise_id:'',
+                        // entreprise_id:'',
                         // controleur_finnancier:"",
                         // dmp:"",
                         // autorite_contractante:"",
@@ -441,7 +441,7 @@ affichierAppelOffreid() {
                         date_composition:"",
                         num_dossier_appel_offre:"",
                         nbr_participant:"",
-                     difference_personnel_bienService:"bienService"
+                         difference_personnel_bienService:"pers"
                 }
             },
 // la fonction pour afficher le modal du cojo

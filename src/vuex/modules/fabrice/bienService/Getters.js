@@ -1,4 +1,4 @@
-gettersOuverturePersonnaliser
+getActeEffetFinancierPersonnaliser
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays
@@ -54,7 +54,10 @@ export const documentProcedures = state => state.documentProcedures
 export const mandats = state => state.mandats
  export const getterActeEffetFinanciers = state => state.acteEffetFinanciers
   export const gettersEtatProcedure = state =>state.gettersEtatProcedure
-
+ // export const gettersDocuments = state => state.documents
+  export const documents = state => state.documents
+  export const rapportJugement = state => state.rapportJugement
+  
   export const rapportOuverture = state => state.rapportOuverture
 // exemple de getters
 export const appelOffres = state => state.appelOffres
@@ -97,6 +100,46 @@ export const nombremarchesExecute = getters =>
     getters.marches.filter(
         marcheNonAttribue => marcheNonAttribue.attribue == 1
     ).length;
+
+    // affichage la liste de cojo pour le personnel
+
+export const listeOuverturePersonnel = state =>
+state.cojos.filter(
+    varObjet => varObjet.difference_personnel_bienService =="pers"
+)
+
+
+// afficher lettre invitation personnel
+export const listeLettreInvitationPersonnel = state =>
+state.lettreInvitation.filter(
+    varObjetLettre => varObjetLettre.difference_personnel_bienService =="personnel"
+);
+
+
+// afficher mandater du personnel
+
+export const listeMandatePersonnel = state =>
+state.mandate.filter(
+    varObjetMandat => varObjetMandat.difference_personnel_bienService ==="personnel"
+);
+
+// afficher jugement personnel
+export const listeJugementPersonnel = state =>
+state.analyseDossiers.filter(
+    objetJugement => objetJugement.difference_personnel_bienService ==="personnel"
+);
+
+// afficher ano dmp bailleur du personnel
+
+export const listeAnoDmpBailleur = state =>
+state.stateAnoDmpBailleur.filter(
+    objetBailleur => objetBailleur.difference_personnel_bienService ==="personnel"
+)
+
+
+
+    // afficher nombre de contrat dans personnel
+    
 
 export const afficheNonMarche = getters =>
     getters.marches.filter(
@@ -147,6 +190,12 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
 
 
 
+
+
+
+
+
+
     export const gettersPersonnaliserTransmissions = (state, getters, rootState, rootGetters) =>
     state.stateTransmissions.map(element => {
         if (element.plan_motif_decision_id !== null) {
@@ -191,8 +240,8 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
 
 
      export const gettersOuverturePersonnaliser = (state, getters, rootState, rootGetters) =>
-    state.gettersOuvertures.map(element => {
-        if (element.entreprise_id !== null) {
+    state.cojos.map(element => {
+        if (element.entreprise_id !== null && element.cotation_id !==null) {
             element = {
                 ...element,
 
@@ -202,9 +251,9 @@ export const montantGlobalMarcheEnCoursExecution = (state, getters) =>
                 )
                 ,
 
-                // varObjetCotation: rootGetters['bienService/gettersCotation'].find(
-                //     plans => plans.id == element.cotation_id
-                // ),
+                varObjetCotation: rootGetters['bienService/gettersCotations'].find(
+                    plans => plans.id == element.cotation_id
+                ),
 
                
 
@@ -314,8 +363,15 @@ export const montantMarche = (state, getters) =>
         0
     );
 
+    // afficher infos acte effet financier du personnnel
+
+    // export const actePersonnel = state =>
+    // state.acteEffetFinanciers.filter(
+    //     objetActe => objetActe.difference_personnel_bienService ==="personnel"
+    // )
+
 export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, rootGetters) =>
-    state.acteEffetFinanciers.map(element => {
+getters.acteEffetFinanciers.map(element => {
         if (element.entreprise_id !== null && element.marche_id !== null) {
             element = {
                 ...element,
@@ -762,10 +818,15 @@ export const nombremarches = getters =>
             state.marches.filter(
               affichenaturedep => affichenaturedep.attribue !== 1
     );
-            
+
     
    export const afficheContratualisation = state =>
-     state.marches.filter(affichenaturedep => affichenaturedep.attribue == 1);
+   state.marches.filter(
+     affichenaturedep => affichenaturedep.attribue == 1
+);
+
+
+            
 
      export const montantContratualisation = (state, getters) =>
               getters.afficheContratualisation.reduce(
@@ -786,7 +847,6 @@ export const getActeEffetFinancierPersonnaliser45 = (state, getters, rootState, 
         if (element.entreprise_id !== null && element.marche_id !== null) {
             element = {
                 ...element,
-
 
                 varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
                     plans => plans.id == element.entreprise_id

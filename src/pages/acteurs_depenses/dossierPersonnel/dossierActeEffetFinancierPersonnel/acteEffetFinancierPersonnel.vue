@@ -15,7 +15,7 @@
                         <th>Objet marche.</th>
                         <th>text juridique</th>
                         <th>Imputation</th>
-                        <th>Entreprise</th>
+                        <!-- <th>Entreprise</th> -->
                        
                         <th>Action</th>
                     </tr>
@@ -38,8 +38,8 @@
                             {{effetFinancier.text_juridique.objet_text || 'Non renseigné'}}</td>
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.marche.imputation || 'Non renseigné'}}</td>
-                              <td @click="afficherModalModifierActeEffetFinancier(index)">
-                            {{affichierNomEntreprise(ouverture.entreprise_id) || 'Non renseigné'}}</td>
+                              <!-- <td @click="afficherModalModifierActeEffetFinancier(index)">
+                            {{affichierNomEntreprise(ouverture.entreprise_id) || 'Non renseigné'}}</td> -->
 <td>
       <div class="btn-group">
                             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
@@ -56,7 +56,7 @@
 
 
 
-<div id="ajouterActeEffetFinancier" class="modal hide grdirModalActeEffet">
+<div id="ajouterActeEffetFinancierP" class="modal hide grdirModalActeEffet">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter acte effet financier</h3>
@@ -79,7 +79,7 @@
                             </td>
                             <td>
 
-                        <div class="control-group">
+                        <!-- <div class="control-group">
                         <label class="control-label">Entreprise.</label>
                         <div class="controls">
                           <select v-model="formEffetFinancier.entreprise_id" class="span">
@@ -88,7 +88,7 @@
                             </select>
                         
                         </div>
-                    </div>
+                    </div> -->
                             </td>
 
                             <td>
@@ -297,6 +297,7 @@
                                     class="span"
                                     placeholder=""
                             />
+                            <input type="hidden" v-model="formEffetFinancier.difference_personnel_bienService"/>
                         </div>
                     </div>
                             </td>
@@ -347,7 +348,7 @@
                         </td>
 
 
-                        <td>
+                        <!-- <td>
                            <div class="control-group">
                         <label class="control-label">Entreprise.</label>
                         <div class="controls">
@@ -358,7 +359,7 @@
                         
                         </div>
                     </div>
-                        </td>
+                        </td> -->
 
 
                         <td>
@@ -548,6 +549,7 @@
                                            class="span"
                                            placeholder=""
                                     />
+                                    <input type="hidden" v-model="editActeEffetFinancier.difference_personnel_bienService"/>
                                 </div>
                             </div>
                         </td>
@@ -604,7 +606,8 @@ export default {
              analyse_dossier_id:"",
              entreprise_id:"",
              marche_id:"",
-             numero_marche:""
+             numero_marche:"",
+             difference_personnel_bienService:"personnel"
         },
         editActeEffetFinancier:{
              code_act:"",
@@ -626,7 +629,8 @@ export default {
              analyse_dossier_id:"",
              entreprise_id:"",
              marche_id:"",
-             numero_marche:""
+             numero_marche:"",
+             difference_personnel_bienService:"personnel"
         }
 
         }
@@ -653,27 +657,27 @@ export default {
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
       
 
-afficherEntrepriseRecep () {
-                return id => {
-                    if (id != "") {
-                        // console.log("Marche lettre inviation marche")
-                        return this.gettersCotationPersonnaliser.filter(idmarche => idmarche.marche_id == id)
-                     }
-             }
-            },
+// afficherEntrepriseRecep () {
+//                 return id => {
+//                     if (id != "") {
+//                          console.log("Marche lettre inviation marche")
+//                         return this.gettersCotationPersonnaliser.filter(idmarche => idmarche.marche_id == id)
+//                      }
+//              }
+//             },
 
-            affichierNomEntreprise() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+    //         affichierNomEntreprise() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.raison_sociale;
-      }
-      return 0
-        }
-      };
-    },
+    //   if (qtereel) {
+    //     return qtereel.raison_sociale;
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
 
 
 nombreDejourCalcule(){
@@ -807,7 +811,8 @@ getDateFinExécutionValue(){
              analyse_dossier_id:"",
              entreprise_id:"",
              marche_id:"",
-             numero_marche:""
+             numero_marche:"",
+             difference_personnel_bienService:"personnel"
 
     }
 },

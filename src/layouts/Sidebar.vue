@@ -66,7 +66,7 @@
         </li>
 
 
-        <li @click.prevent="activate(4)" :class="{active: active_el ==4}">
+        <li @click.prevent="navigateToInvestissement" :class="{active: active_el ==4}">
           <a title="INVESTISSEMENT" href="#">
             <i class="icon icon-th-list"></i>
             <span>INVESTISSEMENT</span>
@@ -176,6 +176,14 @@ export default {
         this.activate(5)
         this.$router.push({
           name: 'TableauBordImmo2'
+        })
+      },
+
+
+      navigateToInvestissement(){
+        this.activate(4)
+        this.$router.push({
+          name: 'tableauBordInvestissement'
         })
       },
 

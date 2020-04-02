@@ -10,27 +10,27 @@
                                             <thead>
                                             <tr>
                                                 
-                                                <th>Date DAO</th>
+                                         <th>Date du rapport</th> 
                                                 <th>Fichier</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
                            
                                             <tbody>
-                         <tr class="odd gradeX" v-for="transmission in listetransmissionDao(macheid.id)"
-                        :key="transmission.id">
+                         <tr class="odd gradeX" v-for="(rapport,index) in listeRapport(macheid)"
+                        :key="rapport.id">
 
-                           <td @click="afficherModalModifierTransmission(index)">
-                            {{transmission.date_dao|| 'Non renseigné'}}</td>
+                         <td @click="afficherModalRapportOuverture(index)">
+                            {{formaterDate(rapport.date_type_procedure)|| 'Non renseigné'}}</td> 
                       
-                        <td>
-                            <a v-if="transmission.fichier" :href="transmission.fichier" class="btn btn-default" target="_blank">
+                        <td @click="afficherModalRapportOuverture(index)">
+                            <a v-if="rapport.fichier" :href="rapport.fichier" class="btn btn-default" target="_blank">
                                 <span class=""><i class="icon-book"></i>
                                 </span>
                             </a>
                         </td>
                         <div class="btn-group">
-                            <button @click.prevent="supprimerTransmission(transmission.id)"  class="btn btn-danger " title="Supprimer">
+                            <button @click.prevent="supprimerDocument(rapport.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
 
                         </div>
@@ -39,48 +39,44 @@
                                             </tbody>
                                         </table>
 
-
-                 <div id="ajouterT" class="modal hide" aria-hidden="true" style="display: none;">
-
-                      
-                         <div class="modal-header">
+                 <div id="ajouterRapportOuvertureP" class="modal hide grdtaill">
+            <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter la transmission du DAO  </h3>
+                <h3>Ajouter rapport d'ouverture</h3>
             </div>
             <div class="modal-body">
-                <div class="widget-box">
-                    <form action="#" method="get" >
-                      
-                      
-                           <div class="control-group">
-              <label class="control-label">Date de transmission:</label>
-              <div class="controls">
-                <input type="date" class="span" v-model="formTransmission.date_dao" />
-              </div>
-            </div>
-
+                <form class="form-horizontal">
                     <div class="control-group">
+                        <label class="control-label">Date du rapport</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="formRapport.date_type_procedure"
+                                    class="span"
+                                       
+                            />
+                              <input type="hidden" v-model="formRapport.difference_personnel_bienService"/>
+                        </div>
+                    </div>
+
+     <div class="control-group">
               <label class="control-label">Fichier joint:</label>
               <div class="controls">
-                <input type="file"  @change="OnchangeFichier" />
+                <input type="file"  class="span" @change="OnchangeFichier" />
               </div>
             </div>
-                         
-                
-                     
-                
 
-                    </form>
-                </div>
+
+                </form>
             </div>
-            <div class="modal-footer">
-                <a class="btn btn-primary" @click.prevent="ajouterCotationLocal()">Ajouter</a>
+           <div class="modal-footer">
+                <a class="btn btn-primary" @click.prevent="ajouterRapportOuverture()">Ajouter</a>
                 <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
             </div>
         </div>
 
 
-             <div id="modificationAajouterAnalys01" class="modal hide " aria-hidden="true" style="display: none;">
+             <div id="modifierModalRapportOuverture" class="modal hide " aria-hidden="true" style="display: none;">
 
 
                          <div class="modal-header">
@@ -90,14 +86,15 @@
             <div class="modal-body">
                 <div class="widget-box">
                     <form action="#" method="get" >
-                        
-                                  <div class="control-group">
-              <label class="control-label">Date de transmission:</label>
+    
+                        <div class="control-group">
+              <label class="control-label">Date:</label>
               <div class="controls">
-                <input type="date"  class="span"  v-model="edit_transmission.date_dao" />
+                <input type="date"   v-model="editRapport.date_type_procedure"
+                 />
+                <input type="hidden" v-model="editRapport.difference_personnel_bienService"/>
               </div>
             </div>
-
                    <div class="control-group">
               <label class="control-label">Fichier joint:</label>
               <div class="controls">
@@ -112,7 +109,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-primary" @click.prevent="modifierCotationLocal()">Modifier</a>
+                <a class="btn btn-primary" @click.prevent="modifierRapportOuverture()">Modifier</a>
                 <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
             </div>
         </div>
@@ -124,33 +121,25 @@
 
 <script>
 import {mapActions, mapGetters} from 'vuex';
+import moment from 'moment';
 export default {
  name:'compte',
     data(){
         return{
 
-            formTransmission:{
-                  //  nom_person:"",
-                   // contact:"",
-                    fichier:"",
-                    date_dao:"",
-                   // entreprise_id:"",
-                   // date_cotation:"",
-                   // ref_offre:""
-
-                   // marche_id:""
+            formRapport:{
+                 date_type_procedure:"",
+                 fichier:"",
+                difference_personnel_bienService:"personnel",
+                marche_id:""
 
                 },
             
-            edit_transmission:{
-                //  nom_person:"",
-                //     contact:"",
-                //     entreprise_id:"",
-                date_dao:"",
-                    fichier:"",
-                    // date_cotation:"",
-                    // ref_offre:""
-
+            editRapport:{
+              date_type_procedure:"",
+              fichier:"",
+              difference_personnel_bienService:"personnel",
+              marche_id:""
             },
 
             imagePDF:"",
@@ -170,7 +159,8 @@ export default {
     },
     computed: {
 
-            ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,"gettersCotations","gettersTransmissions"]),
+            ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,
+            "gettersCotations","documents"]),
             // ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -180,39 +170,26 @@ export default {
                 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
            
-                       
- listetransmissionDao: function () {
-            return macheid => {
-                if (macheid != "") {
-
-                    return this.gettersTransmissions.filter(idmarche => idmarche.marche_id == macheid)
-                }
-            }
-        },
-
-    // filtreCotation(){
-    //     const searchTem = this.search.toLowerCase();
-
-    //     return this.gettersCotationPersonnaliser.filter((item) =>{
-    //         item.nom_person.toLowerCase().includes(searchTem)
-    //     })
-    // }
-
-
-//   listeCotation () {
-//                 return macheid => {
-//                     if (macheid != "") {
-                        
-//                         return this.gettersCotationPersonnaliser.filter(idmarche => idmarche.marche_id == macheid)
-//                      }
-//              }
+//    listeRapport() {
+//                 return id => {
+//                     if (id != "") {
+//                         return this.documents.filter(idmarche => idmarche.marche_id == id)
+//                     }
+//                 }
 //             },
+ listeRapport() {
+      return id => {
+        if (id != null && id != "") {
+          return this.documents.filter(element => element.marche_id == id);
+        }
+      };
+    },
 
 
         },
     methods:{
-        ...mapActions('bienService',['supprimerTransmission',
-        'ajouterTransmission','modifiertransmission']),
+        ...mapActions('bienService',['supprimerDocument',
+        'ajouterDocument','modifierDocument']),
 
 
              OnchangeFichier(e) {
@@ -232,53 +209,42 @@ export default {
                 reader.readAsDataURL(file);
             },
           
-         afficherModalModifierTransmission(index){
-                this.$('#modificationAajouterAnalys01').modal({
+         afficherModalRapportOuverture(index){
+                this.$('#modifierModalRapportOuverture').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.edit_transmission = this.listetransmissionDao(this.macheid)[index];
+                this.editRapport = this.documents[index];
             },
+
            
          
           
-           ajouterCotationLocal(){
-
-               
+           ajouterRapportOuverture(){
                 const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
-                // formData.append('nom_person', this.formCotation.nom_person);
-                // formData.append('contact', this.formCotation.contact);
-                // formData.append('entreprise_id', this.formCotation.entreprise_id);
-                // formData.append('date_cotation', this.formCotation.date_cotation);
-                formData.append('marche_id', this.macheid.id);
-                // formData.append('ref_offre', this.formCotation.ref_offre);
+                 formData.append('date_type_procedure', this.formRapport.date_type_procedure);
+               formData.append('marche_id', this.macheid);
+               formData.append('difference_personnel_bienService',this.formRapport.difference_personnel_bienService)
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'
                     }
                 }
-// if (condition) {
-    
-// }
-              
-               this.ajouterTransmission(formData, config)
-               this.formTransmission ={
-                  
+               this.ajouterDocument(formData, config)
+               this.formRapport ={
+                 difference_personnel_bienService:"personnel",
+                 date_type_procedure:""
                }
            },
 
 
-           modifierCotationLocal(){
-              
-
+           modifierRapportOuverture(){
                const formData = new FormData();
-                // formData.append('nom_person', this.editCotation.nom_person);
-                // formData.append('contact', this.editCotation.contact);
-                // formData.append('entreprise_id', this.editCotation.entreprise_id);
-                // formData.append('date_cotation', this.editCotation.date_cotation);
+                 formData.append('date_type_procedure', this.editRapport.date_type_procedure);
                  formData.append('marche_id', this.macheid);
-                // formData.append('ref_offre', this.editCotation.ref_offre);
+                 formData.append('difference_personnel_bienService', this.difference_personnel_bienService)
+                formData.append('id', this.editRapport.id);
                
                 console.log(formData)
                 if ( this.selectedFile!==""){
@@ -290,8 +256,12 @@ export default {
                     }
                 }
               
-               this.modifiertransmission(formData,config)
-               this.$('#modificationAajouterAnalys01').modal('hide');
+               this.modifierDocument(formData,config)
+               this.$('#modifierModalRapportOuverture').modal('hide');
+           },
+
+           formaterDate(date){
+               return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
            }
 
      }

@@ -1,6 +1,5 @@
 // get all prestation
 
-MODIFIER_COJO
 export const GET_ALL_PRESTATION = (state, tableau_prestation) =>{
     state.prestations = tableau_prestation
 }
@@ -220,6 +219,72 @@ export const SUPPRI_TRANSMISSION = (state, id)=> {
 
 
 
+
+//get all  motif de decision
+export const GET_ALL_DOCUMENT = (state, tableau_document) =>{
+    state.documents = tableau_document
+}
+
+//add * motif de decision 
+
+export const AJOUTER_DOCUMENT = (state, elementAjouter) => {
+    state.documents.unshift(elementAjouter)
+}
+
+//update all document 
+export const MODIFIER_DOCUMENT = (state, elementModif)=>{
+    state.documents = state.documents.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+
+//delete all motif de decision
+
+export const SUPPRIMER_DOCUMENT = (state, id)=> {
+    state.documents = state.documents.filter(document => document.id !=id)
+}
+
+
+
+
+
+//get all  motif de decision
+export const GET_ALL_JUGEMENT = (state, tableau_rapport_jugement) =>{
+    state.rapportJugement = tableau_rapport_jugement
+}
+
+//add * motif de decision 
+
+export const AJOUTER_RAPPORT_JUGEMENT = (state, elementAjouter) => {
+    state.rapportJugement.unshift(elementAjouter)
+}
+
+//update all document 
+export const MODIFIER_RAPPORT_JUGEMENT = (state, elementModif)=>{
+    state.rapportJugement = state.rapportJugement.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+
+//delete all motif de decision
+
+export const SUPPRIMER_RAPPORT_JUGEMENT = (state, id)=> {
+    state.rapportJugement = state.rapportJugement.filter(document => document.id !=id)
+}
+
+
+
+
 // mutation pour le motif de decision
 
 
@@ -298,13 +363,13 @@ export const DELETE_DOCUMENT_PROCEDURE = (state, id)=> {
 // get all  acte effet financier
 
 export const GET_ALL_ACTE_EFFET_FINANCIER = (state, tableau_acte_financier) =>{
-    state.acteEffetFinanciers = tableau_acte_financier
+    state.getterCojos = tableau_acte_financier
 }
 
 // add * acte effet financier
 
 export const AJOUTER_ACTE_EFFET_FINANCIER = (state, elementAjouter) => {
-    state.acteEffetFinanciers.unshift(elementAjouter)
+    state.getterCojos.unshift(elementAjouter)
 }
 
 // update all acte effet financier

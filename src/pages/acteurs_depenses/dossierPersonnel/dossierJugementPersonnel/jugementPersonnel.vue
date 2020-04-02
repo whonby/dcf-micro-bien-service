@@ -62,7 +62,7 @@
         <!-- debut formulaire ajout analyse -->
 
 
-         <div id="ajouterMP" class="modal hide grdirModalAnalyse">
+         <div id="ajouterJugementPersonnel" class="modal hide grdirModalAnalyse">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter le jugement des offres</h3>
@@ -168,6 +168,7 @@
                                    class="span"
                                    placeholder="date"
                             />
+                            <input type="hidden" v-model="formAnalyseDossier.difference_personnel_bienService"/>
                         </div>
                     </div>
                             </td>
@@ -288,6 +289,7 @@
                                    class="span"
                                    placeholder=""
                             />
+                            <input type="hidden" v-model="edite_analyse_dossier.difference_personnel_bienService"/>
                         </div>
                     </div>
                           </td>
@@ -329,6 +331,7 @@ export default {
                         note_analyse:"",
                         // dossier_candidat_id:"",
                         type_analyse_id: "",
+                        difference_personnel_bienService:"personnel"
                         // cojo_id:""
             },
             edite_analyse_dossier:""
@@ -341,7 +344,7 @@ export default {
        ...mapGetters("bienService", ["appelOffres","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches", "gettersCotations",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
-                "getterMandate","getterCojos","getterAnalyseDossiers","typeAnalyses", "analyseDossiers","text_juridiques"
+                "getterMandate","getterCojos","listeJugementPersonnel","getterAnalyseDossiers","typeAnalyses", "analyseDossiers","text_juridiques"
                 ]),
             // ...mapGetters('personnelUA', ['acteur_depenses']),
     //             ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
@@ -358,7 +361,7 @@ export default {
             return macheid => {
                 if (macheid != "") {
 
-                    return this.getterAnalyseDossiers.filter(idmarche => idmarche.marche_id == macheid)
+                    return this.listeJugementPersonnel.filter(idmarche => idmarche.marche_id == macheid)
                 }
             }
         },
@@ -494,6 +497,7 @@ affichierAppelOffreid() {
                         note_analyse:"",
                        // dossier_candidat_id:"",
                         type_analyse_id: "",
+                        difference_personnel_bienService:"personnel"
                        // cojo_id:""
                 }
             },

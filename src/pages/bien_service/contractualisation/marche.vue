@@ -113,6 +113,255 @@
         >Fermer</a>
       </div>
     </div>
+
+
+
+     <div id="modifierActeEF" class="modal hide grdirModalActeEffet">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Modifier acte effet financier</h3>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Type acte effet financier.</label>
+                                <div class="controls">
+                                    <select v-model="editActeEffetFinancier.type_act_effet_id" class="span">
+                                        <option v-for="varText in typeActeEffetFinanciers" :key="varText.id"
+                                                :value="varText.id">{{varText.libelle}}</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                        </td>
+
+
+                        <td>
+                           <div class="control-group">
+                        <label class="control-label">Entreprise.</label>
+                        <div class="controls">
+                          <select v-model="editActeEffetFinancier.entreprise_id" class="span">
+                               <option v-for="varText in entreprises" :key="varText.id"
+                                        :value="varText.id">{{varText.raison_sociale}}</option>
+                            </select>
+                        
+                        </div>
+                    </div>
+                        </td>
+
+
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Text juridique </label>
+                                <div class="controls">
+                                    <select v-model="editActeEffetFinancier.text_juridique_id" class="span">
+                                        <option v-for="varText in text_juridiques" :key="varText.id"
+                                                :value="varText.id">{{varText.objet_text}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+
+                        <!-- <td>
+                            <div class="control-group">
+                                <label class="control-label">Ano bailleur dmp.</label>
+                                <div class="controls">
+                                    <input :value="info_avis_bailleur" readonly>
+
+                                </div>
+                            </div>
+                        </td> -->
+
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Autorité approbatrice</label>
+                                <div class="controls">
+                                    <input
+                                            type="text"
+                                            v-model="editActeEffetFinancier.autorite_approbation"
+                                            class="span"
+                                            placeholder=" "
+                                    />
+                                </div>
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label"> date d'approbation</label>
+                                <div class="controls">
+                                    <input
+                                            type="date"
+                                            v-model="editActeEffetFinancier.date_approbation"
+                                            class="span"
+                                            placeholder=""
+                                    />
+                                </div>
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="control-group">
+                                <label class="control-label">Code acte </label>
+                                <div class="controls">
+                                    <input
+                                            type="text"
+                                            v-model="editActeEffetFinancier.code_act"
+                                            class="span"
+                                            placeholder="Saisir le code acte"
+                                    />
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr>
+
+
+                        <td colspan="3" width="250">
+                            <div class="control-group">
+                                <label class="control-label">Libellé acte:</label>
+                                <div class="controls">
+                                    <textarea   v-model="editActeEffetFinancier.libelle_act"   class="textarea_editor span12" rows="3" placeholder="Entrer le libellé ..."></textarea>
+                                </div>
+
+                            </div>
+                        </td>
+
+
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Reference acte</label>
+                                <div class="controls">
+                                    <input type="text" v-model="editActeEffetFinancier.reference_act"
+                                           class="span"
+                                           placeholder="refence acte"
+                                    />
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Incidence financière</label>
+                                <div class="controls">
+                                    <select  v-model="editActeEffetFinancier.incidence_financiere" class="span">
+                                        <option value="0">Oui</option>
+                                        <option value="1">Non</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+
+                            <div class="control-group">
+                                <label class="control-label">Montant acte/réel du marché</label>
+                                <div class="controls">
+                                    <input type="text" v-model="editActeEffetFinancier.montant_act"
+                                           class="span"
+                                           placeholder="refence acte"
+                                    />
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+
+                            <div class="control-group">
+                                <label class="control-label" >Date de signature attributaire</label>
+                                <div class="controls">
+                                    <input type="date" v-model="editActeEffetFinancier.date_attributaire"
+                                           class="span"
+                                           placeholder=""
+                                    />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+
+
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label">Date ordre de service demarrage</label>
+                                <div class="controls">
+                                    <input type="date" v-model="editActeEffetFinancier.date_odre_service"
+                                           class="span"
+                                           placeholder=""
+                                    />
+                                </div>
+                            </div>
+                        </td>
+
+
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label" title=" ">Date fin exécution</label>
+                                <div class="controls">
+                                    <input type="date" :min="editActeEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValue" v-model="editActeEffetFinancier.date_fin_exe"
+                                           class="span"
+                                           placeholder=""
+                                    />
+                                </div>
+                            </div>
+                        </td>
+
+
+
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label" title=" ">Durée d'exécution(jrs)</label>
+                                <div class="controls">
+                                    <input type="text" readonly :value="nombreDejourCalcule"
+                                           class="span"
+                                    />
+                                </div>
+                            </div>
+                        </td>
+
+
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label" title=" ">Date de reception definitive</label>
+                                <div class="controls">
+                                    <input type="date" v-model="editActeEffetFinancier.date_reception"
+                                           class="span"
+                                           placeholder=""
+                                    />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+             <div class="modal-footer">
+                <a
+                        @click.prevent="modifierModalActeEffetFinancierLocal"
+                        class="btn btn-primary"
+                        href="#"
+
+                >Modifier</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div>
+        </div>
+
+
+ 
+
+
     <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
          <div class="row-fluid">
                 <div class="span12">
@@ -168,102 +417,8 @@
 
 
 
-
-
-
-
-
-
-
-                            <div id="tab10" class="tab-pane">
-                              <div class="widget-title">
-              <span class="icon">
-                <i class="icon-th"></i>
-              </span>
-              <h5>Liste des Marches En cours de Contratualisation</h5>
-              <!-- <div align="right">
-                Recherche:
-                <input type="search"  v-model="search" />
-              </div> -->
-            </div>
-                             <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                <th>Ann&eacute;e</th>
-                 <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
-                   
-                    <th>Activit&eacute;</th>
-                    <th>Imputation</th>
-                       <th>Objet march&eacute;</th>
-                        <th>Reference march&eacute;</th> 
-                                    <th>Montant prevue</th>
-                                <th>Attribution</th>
-                                <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                      <tr class="odd gradeX" v-for="(marche, index) in 
-                afficheContrat"
-                 :key="marche.id">
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.exo_id || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherUniteAdministrative(marche.AfficheMarche.unite_administrative_id) || 'Non renseigné'}}</td>
-
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.type_marche.libelle || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficheractivite(marche.AfficheMarche.activite_id )|| 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.imputation || 'Non renseigné'}}</td>
-                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
-                  {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.objet || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.reference_marche || 'Non renseigné'}}</td>
-                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.numero_marche || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
-                   {{formatageSomme(parseFloat(marche.AfficheMarche.montant_marche)) || 'Non renseigné'}}</td>
-                  
-<td>
-                     <button 
-                      v-if="marche.AfficheMarche.attribue == 1"  class="btn  btn-success">
-                <span >OUI</span>
-       
-                </button>
-                   <button v-else class="btn  btn-danger">
-              
-                <span >NON</span>
-                </button>
-                   </td>
-
-
-                     <div class="btn-group">
-
-                   <!-- <router-link :to="{ name: 'DetaillMarche', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail marches">
-                  <span class=""><i class="icon-folder-open"></i></span>
-                   </router-link>  -->
-  <!-- <router-link :to="{ name: 'Engagement', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail Engagement">
-                  <span class=""><i class=" icon-folder-close"></i></span>
-                   </router-link>  -->
-              <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
-             
-            </div>
-
-                       </tr>
-                      
-                </tbody>
-              </table>
-                           
-                        </div>
-                         <div id="tab2078" class="tab-pane active">
-                             <div class="widget-title">
+                 <div id="tab2078" class="tab-pane active">
+                <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
@@ -293,7 +448,7 @@
                 <tbody>
                  
                         <tr class="odd gradeX" v-for="(marche, index) in 
-                typePrestationFiltre"
+                afficherLaListeDesContratsDuPersonnel"
                  :key="marche.id">
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
@@ -380,107 +535,9 @@
                 </tbody>
               </table>
           
+             </div>
 
-
-                        </div>
-                         <div id="tab20" class="tab-pane">
-                            <div class="widget-title">
-              <span class="icon">
-                <i class="icon-th"></i>
-              </span>
-              <h5>Liste des marchés en executions</h5>
-              <!-- <div align="right">
-                Recherche:
-                <input type="search"  v-model="search" />
-              </div> -->
-              
-            </div>
-                        <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                <th>Ann&eacute;e</th>
-                 <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
-                   
-                    <th>Activit&eacute;</th>
-                    <th>Imputation</th>
-                       <th>Objet march&eacute;</th>
-                        <th>Reference march&eacute;</th> 
-                                    <th>Montant réel</th>
-                                <th>Attribution</th>
-                                <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                  <!-- <input type="text" :value="nombreJourTraitementCalucle"> -->
-                   <tr class="odd gradeX" v-for="(marche, index) in 
-                afficheMarchExecuter"
-                 :key="marche.id">
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.exo_id || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherUniteAdministrative(marche.AfficheMarche.unite_administrative_id) || 'Non renseigné'}}</td>
-
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.type_marche.libelle || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficheractivite(marche.AfficheMarche.activite_id )|| 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.imputation || 'Non renseigné'}}</td>
-                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
-                  {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.objet || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.reference_marche || 'Non renseigné'}}</td>
-                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.numero_marche || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
-                   {{formatageSomme(parseFloat(marche.montant_act)) || 'Non renseigné'}}</td>
-                  
-<td>
-                     <button 
-                      v-if="marche.AfficheMarche.attribue == 1"  class="btn  btn-warning">
-                <span >OUI</span>
-       
-                </button>
-                   <button v-else class="btn  btn-danger">
-              
-                <span >NON</span>
-                </button>
-                   </td>
-
-
-                     <div class="btn-group">
- 
-                 <!-- <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail marche proceduce simplifiée">
-                  <span class=""><i class=" icon-folder-open"></i></span>
-                   </router-link>  -->
-                   <!-- <router-link :to="{ name: 'DetaillMarche', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail marches">
-                  <span class=""><i class="icon-folder-open"></i></span>
-                   </router-link>  -->
-  <!-- <router-link :to="{ name: 'Engagement', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail Engagement">
-                  <span class=""><i class=" icon-folder-close"></i></span>
-                   </router-link>  -->
-                    <button   class="btn btn-info " title="Ajouter marché resilié" @click="afficherModalMarcheResilier(index)">
-                <span class=""><i class="icon-pencil"></i></span></button>
-              <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
-             
-            </div>
-
-                       </tr>
-                      
-                </tbody>
-              </table>
-                            
-
-
-                        </div>
-<div id="tab100" class="tab-pane ">
+             <div id="tab100" class="tab-pane ">
                                 <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
@@ -581,8 +638,8 @@
                    </router-link>
 
 
-              <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
+              <!-- <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button> -->
              
             </div>
 
@@ -622,9 +679,228 @@
                     </tr>
                 </tbody>
               </table>
+               </div>
+
+
+
+
+
+
+                            <div id="tab10" class="tab-pane">
+                              <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              <h5>Liste des Marches En cours de Contratualisation</h5>
+              
+            </div>
+                <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                <th>Ann&eacute;e</th>
+                 <th title="unite administrative">UA</th>
+                      <th>Type marche</th>
+                   
+                    <th>Activit&eacute;</th>
+                    <th>Imputation</th>
+                       <th>Objet march&eacute;</th>
+                        <th>Reference march&eacute;</th> 
+                                    <th>Montant prevue</th>
+                                <th>Attribution</th>
+                                <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                      <tr class="odd gradeX" v-for="(marche, index) in 
+                afficheContrat"
+                 :key="marche.id">
+                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.AfficheMarche.exo_id || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficherUniteAdministrative(marche.AfficheMarche.unite_administrative_id) || 'Non renseigné'}}</td>
+
+                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.AfficheMarche.type_marche.libelle || 'Non renseigné'}}</td>
+                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficheractivite(marche.AfficheMarche.activite_id )|| 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.AfficheMarche.imputation || 'Non renseigné'}}</td>
+                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
+                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.AfficheMarche.objet || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.AfficheMarche.reference_marche || 'Non renseigné'}}</td>
+                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.numero_marche || 'Non renseigné'}}</td> -->
+                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
+                   {{formatageSomme(parseFloat(marche.AfficheMarche.montant_marche)) || 'Non renseigné'}}</td>
+                  
+<td>
+                     <button 
+                      v-if="marche.AfficheMarche.attribue == 1"  class="btn  btn-success">
+                <span >OUI</span>
+       
+                </button>
+                   <button v-else class="btn  btn-danger">
+              
+                <span >NON</span>
+                </button>
+                   </td>
+
+
+                     <div class="btn-group">
+
+                   <!-- <router-link :to="{ name: 'DetaillMarche', params: { id: marche.id }}"
+                class="btn btn-default " title="Detail marches">
+                  <span class=""><i class="icon-folder-open"></i></span>
+                   </router-link>  -->
+  <!-- <router-link :to="{ name: 'Engagement', params: { id: marche.id }}"
+                class="btn btn-default " title="Detail Engagement">
+                  <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link>  -->
+
+                   <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+                class="btn btn-default " title="Detail marche">
+                  <span class=""><i class=" icon-folder-open"></i></span>
+                   </router-link> 
+                   <router-link :to="{name:'detailMarcheFsqc',params:{id:marche.id}}"
+                   class="btn btn-default"  title="detail marche SFQC">
+                   <span class=""><i class="icon-book"></i></span>
+                   </router-link>
+
+                  <router-link :to="{name:'detailMarcheR3cv',params:{id:marche.id}}"
+                   class="btn btn-default"  title="detail marche R3CV">
+                   <span class=""><i class="icon-plus"></i></span>
+                   </router-link>
+
+
+                   <router-link :to="{name:'detailMarcheAoi_Aon',params:{id:marche.id}}"
+                   class="btn btn-default"  title="detail marche AOI-AON">
+                   <span class=""><i class="icon-user"></i></span>
+                   </router-link>
+                   <button   class="btn btn-danger " title="aller
+                    en contratualisation" @click="afficherModalModifierActeEffetFinancier(index)">
+                <span class=""><i class="icon-plus"></i></span></button>
+                   
+              <!-- <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button> -->
+             
+            </div>
+
+                       </tr>
+                      
+                </tbody>
+              </table>
+                           
+                        </div>
+
+                  
+                         <div id="tab20" class="tab-pane">
+                            <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              <h5>Liste des marchés en executions</h5>
+              <!-- <div align="right">
+                Recherche:
+                <input type="search"  v-model="search" />
+              </div> -->
+              
+            </div>
+                        <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                <th>Ann&eacute;e</th>
+                 <th title="unite administrative">UA</th>
+                      <th>Type marche</th>
+                   
+                    <th>Activit&eacute;</th>
+                    <th>Imputation</th>
+                       <th>Objet march&eacute;</th>
+                        <th>Reference march&eacute;</th> 
+                                    <th>Montant réel</th>
+                                <th>Attribution</th>
+                                <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <!-- <input type="text" :value="nombreJourTraitementCalucle"> -->
+                   <tr class="odd gradeX" v-for="(marche, index) in 
+                afficheMarchExecuter"
+                 :key="marche.id">
+                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.AfficheMarche.exo_id || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficherUniteAdministrative(marche.AfficheMarche.unite_administrative_id) || 'Non renseigné'}}</td>
+
+                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.AfficheMarche.type_marche.libelle || 'Non renseigné'}}</td>
+                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficheractivite(marche.AfficheMarche.activite_id )|| 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.AfficheMarche.imputation || 'Non renseigné'}}</td>
+                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
+                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.AfficheMarche.objet || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.AfficheMarche.reference_marche || 'Non renseigné'}}</td>
+                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.numero_marche || 'Non renseigné'}}</td> -->
+                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
+                   {{formatageSomme(parseFloat(marche.montant_act)) || 'Non renseigné'}}</td>
+                  
+<td>
+                     <button 
+                      v-if="marche.AfficheMarche.attribue == 1"  class="btn  btn-success">
+                <span >OUI</span>
+       
+                </button>
+                   <button v-else class="btn  btn-danger">
+              
+                <span >NON</span>
+                </button>
+                   </td>
+
+
+                     <div class="btn-group">
+ 
+                 <!-- <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+                class="btn btn-default " title="Detail marche proceduce simplifiée">
+                  <span class=""><i class=" icon-folder-open"></i></span>
+                   </router-link>  -->
+                   <!-- <router-link :to="{ name: 'DetaillMarche', params: { id: marche.id }}"
+                class="btn btn-default " title="Detail marches">
+                  <span class=""><i class="icon-folder-open"></i></span>
+                   </router-link>  -->
+  <!-- <router-link :to="{ name: 'Engagement', params: { id: marche.id }}"
+                class="btn btn-default " title="Detail Engagement">
+                  <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link>  -->
+                    <button   class="btn btn-info " title="Ajouter marché resilié" @click="afficherModalMarcheResilier(index)">
+                <span class=""><i class="icon-pencil"></i></span></button>
+
+                 <button   class="btn btn-danger " title="retour en contratualisation" @click="afficherModalModifierActeEffetFinancier(index)">
+                <span class=""><i class="icon-plus"></i></span></button>
+                
+                
+
+                 <!-- <div class="widget-content">
+                        <a href="#modifierActeEF" data-toggle="modal" class="">ajouter</a>
+                    </div> -->         
+             
+            </div>
+
+                       </tr>
+                      
+                </tbody>
+              </table>
+                            
 
 
                         </div>
+
 
                          <div id="tab20002" class="tab-pane">
                               <div class="widget-title">
@@ -694,16 +970,13 @@
                         </div>
 
 
-                        <div id="tab208" class="tab-pane ">
+                        <!-- <div id="tab208" class="tab-pane ">
                                 <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
               <h5>Liste des Marches Terminés</h5>
-              <!-- <div align="right">
-                Recherche:
-                <input type="search"  v-model="search" />
-              </div> -->
+            
             </div>
                           <table class="table table-bordered table-striped">
                 <thead>
@@ -727,7 +1000,7 @@
               </table>
 
 
-                        </div>
+                        </div> -->
                     </div>
 
 <!--   
@@ -764,7 +1037,9 @@
 <script>
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../../src/Repositories/Repository";
+ // import acteModification from '../dossierDetailMarchePs/dossierModificationActe/acteModification';
 export default {
+  props:["macheid"],
   name:'type facture',
   data() {
     return {
@@ -784,6 +1059,30 @@ export default {
     //     CODE: "code",
     //     libelle: "libelle"
     //   },
+    editActeEffetFinancier:"",
+    formEffetFinancier:{
+       code_act:"",
+             libelle_act:"",
+             reference_act:"",
+             objet_act:"",
+             incidence_financiere:"",
+             montant_act:"",
+              date_attributaire:"",
+             date_reception:"",
+             duree:"",
+             date_fin_exe:"",
+             date_odre_service:"",
+             livrable_id:"",
+        autorite_approbation:"",
+        date_approbation:"",
+             text_juridique_id:"",
+             type_act_effet_id:"",
+             analyse_dossier_id:"",
+             entreprise_id:"",
+             marche_id:"",
+             numero_marche:""
+
+    },
 
       formData: {
             objet:"",
@@ -812,12 +1111,16 @@ export default {
       },
       indicateur_test:1,
       search: ""
+
+      
     };
   },
 
   computed: {
-     ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser','acteEffetFinanciers','montantPlanifier','montantContratualisation','afficheContratualisation','affichePlanifier','nombremarchesExecute','afficheMarchePlanifier','afficheMarcheContratualisation','AfficheMarcheAttribue','AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
-     "montantMarche", "printMarcheNonAttribue","procedurePassations","typeTypeProcedures"]),
+     ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser','acteEffetFinanciers','montantPlanifier','montantContratualisation','afficheContratualisation',
+     'afficherContratualisation','affichePlanifier','nombremarchesExecute','afficheMarchePlanifier','afficheMarcheContratualisation','AfficheMarcheAttribue','AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
+     "montantMarche","typeActeEffetFinanciers","gettersCotationPersonnaliser" ,"text_juridiques",
+     "printMarcheNonAttribue","procedurePassations","typeTypeProcedures"]),
 
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
@@ -828,18 +1131,60 @@ export default {
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
    ...mapGetters("gestionMarche", ['entreprises']),
 
+
+
+   
+        
+      afficherEntrepriseRecep () {
+                return id => {
+                    if (id != "") {
+                        // console.log("Marche lettre inviation marche")
+                        return this.gettersCotationPersonnaliser.filter(idmarche => idmarche.marche_id == id)
+                     }
+             }
+            },
+
+                        
+nombreDejourCalcule(){
+                let vM=this;
+    const acteAffet = vM.formEffetFinancier
+    if(acteAffet.date_odre_service == acteAffet.date_fin_exe &&  acteAffet.date_fin_exe !=="" && acteAffet.date_odre_service !=="") return 1
+     if(acteAffet.date_fin_exe =="" && acteAffet.date_odre_service =="") return null
+
+       var dateF = new Date(acteAffet.date_fin_exe).getTime()
+        var dateO = new Date(acteAffet.date_odre_service).getTime()
+           var resultat = dateF - dateO
+
+             var diffJour =  resultat / (1000 * 3600 * 24)
+
+               if(isNaN(diffJour)) return null
+
+               if(parseFloat(diffJour) < 0 ) return "durée invalide"
+    vM.formEffetFinancier.duree=diffJour
+                  return  diffJour;
+   
+},
+
+            getDateFinExécutionValue(){
+    return !this.formEffetFinancier.date_odre_service !=""
+},
+
   
-  typePrestationFiltre()  {
+//   typePrestationFiltre()  {
      
-        const searchTerm = this.search.toLowerCase();
+//         const searchTerm = this.search.toLowerCase();
 
-return this.printMarcheNonAttribue.filter((item) => {
+// return this.printMarcheNonAttribue.filter((item) => {
   
-     return item.objet.toLowerCase().includes(searchTerm) 
+//      return item.objet.toLowerCase().includes(searchTerm) 
 
-   }
-)
-    },
+//    }
+// )
+//     },
+
+    afficherLaListeDesContratsDuPersonnel(){
+return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4)
+},
 
  afficherObjetMarche() {
       return id => {
@@ -877,6 +1222,8 @@ afficherEntreprise() {
         }
       };
     },
+
+
 
 
 
@@ -1037,6 +1384,9 @@ anneeAmort() {
 return this.getActeEffetFinancierPersonnaliser.filter(element => element.date_odre_service == this.nombreJourTraitementCalucle)
 },
 afficheMarchExecuter(){
+
+
+
 return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
 },
 
@@ -1044,7 +1394,9 @@ afficheParMarcheEnExecution(){
 return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
 },
 
-
+afficherMarcheEncontratualisation(){
+  return this.printMarcheNonAttribue.filter(item => item.contratualisation==1)
+},
 
 
 
@@ -1261,6 +1613,28 @@ this.formData = {
       this.modifierActeEffetFinancier(nouvelObjet)
       this.$('#exampleModal').modal('hide');
     },
+
+
+    
+
+
+
+
+    ////////////// information sur acte
+
+     afficherModalModifierActeEffetFinancier(index){
+    this.$('#modifierActeEF').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+    this.editActeEffetFinancier = this.acteEffetFinanciers[index]
+}, 
+
+modifierModalActeEffetFinancierLocal(){
+
+    this.modifierActeEffetFinancier(this.editActeEffetFinancier)
+    this.$('#modifierActeEF').modal('hide');
+},
     // alert() {
     //   console.log("ok");
     // },
@@ -1277,5 +1651,10 @@ this.formData = {
   width: 1080px;
    margin: 0 -25%;
    
+}
+.grdirModalActeEffet{
+   width: 1200px;
+ margin: 0 -530px;
+ height: 550px;
 }
 </style>

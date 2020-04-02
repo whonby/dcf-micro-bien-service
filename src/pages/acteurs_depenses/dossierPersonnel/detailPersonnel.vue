@@ -59,7 +59,7 @@
             
             <div class="row-fluid">
                 <div class="span12">
-                     <template v-if="detail_marche.procedure_passation_id == 15">
+                     <template >
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
@@ -71,7 +71,7 @@
                                  <li class=""><a data-toggle="tab" href="#tab045" title="">Dossier du candidat</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab5">Rapport d'ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab6" title="jugement des offres">Jugement</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab7" title="rapport d'évaluation combiné">Rapport</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab7" title="">Rapport du jugement</a></li>
                                  <!-- <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP"> Demande ANO</a></li> -->
                                  <li class=""><a data-toggle="tab" href="#tab28" title="demande ANO Bailleur"> Demande ANO Bailleur </a></li>
                                 <li class=""><a data-toggle="tab" href="#tab1">Attribution</a></li>
@@ -100,19 +100,19 @@
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
-                                    <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-warning" align="rigth">Ajouter</a></div>
+                                    <a href="#ajouterLettreInvitationP" data-toggle="modal" class="btn btn-warning" align="rigth">Ajouter</a></div>
 
-                                    <invitationCf :macheid="detail_marche.id"></invitationCf>
+                                    <lettreInvitationPersonnel :macheid="detail_marche.id"></lettreInvitationPersonnel>
                                   </div>
 
                                   <div id="tab0002" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
-                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                    <a href="#ajouterMandatePersonnel" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
                                 <!-- <h4>Publication de l'offre</h4> -->
 
-                      <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
+                      <mandatPersonnel :macheid="detail_marche.id"></mandatPersonnel>
                          </div>
 
 
@@ -133,9 +133,10 @@
                    <div id="tab5" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterRapportOuverture" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+                        <a href="#ajouterRapportOuvertureP" data-toggle="modal" class="btn btn-warning">Ajouter</a>
                     </div>
-                    <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
+                    <!-- <rapportOuverture :macheid="detail_marche.id"></rapportOuverture> -->
+                    <rapportOuverturePersonnel :macheid="detail_marche.id"></rapportOuverturePersonnel>
 
                 </div>
                
@@ -147,10 +148,13 @@
                      <div id="tab4" class="tab-pane">
                      <div align="right">
 
-                          <!-- <a href="#ajouterOuverture" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-                     <a href="#ajouter_membre_cojo" data-toggle="modal" class="btn btn-primary">Ajouter</a> -->
+                     <a href="#ajouterOuverturePersonnel" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                     <!-- <a href="#ajouter_membre_cojo" data-toggle="modal" class="btn btn-primary">Ajouter</a> -->
 
-                       <component-ouverture :macheid="detail_marche.id"></component-ouverture>
+                      
+                       <!-- <component-ouverture :macheid="detail_marche.id"></component-ouverture> -->
+                       <ouverturePersonnel :macheid="detail_marche.id"></ouverturePersonnel>
+                  
                   <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>
 
                      </div>
@@ -162,12 +166,12 @@
                 <div id="tab6" class="tab-pane">
                   <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterMP" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterJugementPersonnel" data-toggle="modal" class="btn btn-primary">Ajouter</a>
                     </div>
 
 
                 </div>
-                <component-analyse :macheid="detail_marche.id"></component-analyse>
+                <jugementPersonnel :macheid="detail_marche.id"></jugementPersonnel>
 
                 </div>
 
@@ -175,12 +179,12 @@
                   <div id="tab7" class="tab-pane">
                <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterPv" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterRapportJ" data-toggle="modal" class="btn btn-primary">Ajouter</a>
                     </div>
 
 
                 </div>
-               <component-pv :macheid="detail_marche.id"></component-pv>
+               <rapportJugementPersonnel :macheid="detail_marche.id"></rapportJugementPersonnel>
 
                 </div>
 
@@ -200,24 +204,24 @@
                   <div id="tab28" class="tab-pane">
                <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterAnoDMPBAILLEURModal" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterAnoBailleurPersonnel" data-toggle="modal" class="btn btn-primary">Ajouter</a>
                     </div>
 
 
                 </div>
-                 <componentAvisBailleurCf :macheid="detail_marche.id"> </componentAvisBailleurCf>
+                 <AnoDmpBailleurPersonnel :macheid="detail_marche.id"> </AnoDmpBailleurPersonnel>
 
                 </div>
 
                      <div id="tab1" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+                        <a href="#ajouterActeEffetFinancierP" data-toggle="modal" class="btn btn-warning">Ajouter</a>
                     </div>
 
 
                 </div>
-                <component-acte :macheid="detail_marche.id"></component-acte>
+                <acteEffetFinancierPersonnel :macheid="detail_marche.id"></acteEffetFinancierPersonnel>
 
                 </div>
 
@@ -245,20 +249,29 @@
    
    // import publicationOffre from '../../bien_service/DossierPso/publicationOffre/publicationOffre';
       import publicationRecrutement from '../dossierPersonnel/dossierAvisRecrutement/publicationRecrutement';
-    import invitationCf from '../../bien_service/DossierPso/lettreInvitation/invitationCf';
+       import lettreInvitationPersonnel from '../dossierPersonnel/dossierLettreInvitationPersonnel/lettreInvitationPersonnel';
+     // import invitationCf from '../../bien_service/DossierPso/lettreInvitation/invitationCf';
      //import componentCotation from '../../bien_service/dossierDetailMarchePs/dossierComponentPs/componentCotation';
-     import componentOuverture from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
-     import componentOuvertureMembre from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
-     import componentAnalyse from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
-     import componentPv from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
+   
+   // import componentOuverture from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
+      import ouverturePersonnel from '../dossierPersonnel/dossierOuverturePersonnel/ouverturePersonnel'
+    import componentOuvertureMembre from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
+    import jugementPersonnel from '../dossierPersonnel/dossierJugementPersonnel/jugementPersonnel';
+     
+     //import componentAnalyse from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
+     //import componentPv from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
     // import componentDemandeAno from '../../bien_service/dossierDetailMarcheAOI_AON/dossierDemande_ano_cf/componentDemandeAno'; 
-     import componentAvisBailleurCf from '../../bien_service/dossierDetailMarcheAOI_AON/dossierAvisBailleurAvecCf/componentAvisBailleurCf'
-     import componentActe from '../../bien_service/dossierDetailMarchePs/dossierComponentActe/componentActe' ;
-     import mandateBs from '../../bien_service/DossierPso/mandaté/mandateBs';
+     //import componentAvisBailleurCf from '../../bien_service/dossierDetailMarcheAOI_AON/dossierAvisBailleurAvecCf/componentAvisBailleurCf'
+      import AnoDmpBailleurPersonnel from '../dossierPersonnel/dossierAnoDMPBailleurPersonnel/AnoDmpBailleurPersonnel'
+      import acteEffetFinancierPersonnel from '../dossierPersonnel/dossierActeEffetFinancierPersonnel/acteEffetFinancierPersonnel';
+   // import componentActe from '../../bien_service/dossierDetailMarchePs/dossierComponentActe/componentActe' ;
+     import mandatPersonnel from '../dossierPersonnel/dossierMandat/mandatPersonnel';
+   // import mandateBs from '../../bien_service/DossierPso/mandaté/mandateBs';
      import candidatPersonnel from '../dossierPersonnel/dossierCandidatPersonnel/candidatPersonnel';
-     import rapportOuverture from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuverture';
-  
-  //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
+    // import rapportOuverture from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuverture';
+    import rapportOuverturePersonnel from '../dossierPersonnel/dossierRapportOuverturePersonnel/rapportOuverturePersonnel'
+    import rapportJugementPersonnel from '../dossierPersonnel/dossierRapportJugement/rapportJugementPersonnel';
+ //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
     //import {  ModelListSelect } from 'vue-search-select'
     import 'vue-search-select/dist/VueSearchSelect.css'
 //import { formatageSomme } from "../../../../src/Repositories/Repository";
@@ -268,18 +281,26 @@
 
            // publicationOffre,
            publicationRecrutement,
-            invitationCf,
+           lettreInvitationPersonnel,
+           // invitationCf,
            // componentCotation,
-            componentOuverture,
+           // componentOuverture,
+           ouverturePersonnel,
             componentOuvertureMembre,
-            componentAnalyse,
-            componentPv,
+            jugementPersonnel,
+            AnoDmpBailleurPersonnel,
+            acteEffetFinancierPersonnel,
+            //componentAnalyse,
+           // componentPv,
             //componentDemandeAno,
-            componentAvisBailleurCf,
-            componentActe,
-            mandateBs,
+            // componentAvisBailleurCf,
+            //componentActe,
+            mandatPersonnel,
+           // mandateBs,
             candidatPersonnel,
-            rapportOuverture
+            //rapportOuverture
+            rapportOuverturePersonnel,
+            rapportJugementPersonnel
          
 
             
