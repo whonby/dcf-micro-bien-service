@@ -448,7 +448,7 @@
                 <tbody>
                  
                         <tr class="odd gradeX" v-for="(marche, index) in 
-                afficherLaListeDesContratsDuPersonnel"
+                afficherMarcherPourInvestissement"
                  :key="marche.id">
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
@@ -1120,7 +1120,7 @@ export default {
      ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser','acteEffetFinanciers','montantPlanifier','montantContratualisation','afficheContratualisation',
      'afficherContratualisation','affichePlanifier','nombremarchesExecute','afficheMarchePlanifier','afficheMarcheContratualisation','AfficheMarcheAttribue','AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
      "montantMarche","typeActeEffetFinanciers","gettersCotationPersonnaliser" ,"text_juridiques",
-     "printMarcheNonAttribue","procedurePassations","typeTypeProcedures"]),
+     "gettersMarcherPersonnaliser","procedurePassations","typeTypeProcedures"]),
 
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
@@ -1170,8 +1170,8 @@ nombreDejourCalcule(){
 },
 
   
-afficherLaListeDesContratsDuPersonnel(){
-return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 3)
+afficherMarcherPourInvestissement(){
+return this.gettersMarcherPersonnaliser.filter(element => element.type_marche.code_type_marche == 3)
 },
 
 
@@ -1384,7 +1384,7 @@ return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
 },
 
 afficherMarcheEncontratualisation(){
-  return this.printMarcheNonAttribue.filter(item => item.contratualisation==1)
+  return this.gettersMarcherPersonnaliser.filter(item => item.contratualisation==1)
 },
 
 

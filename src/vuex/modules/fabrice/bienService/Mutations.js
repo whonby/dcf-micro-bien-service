@@ -363,13 +363,13 @@ export const DELETE_DOCUMENT_PROCEDURE = (state, id)=> {
 // get all  acte effet financier
 
 export const GET_ALL_ACTE_EFFET_FINANCIER = (state, tableau_acte_financier) =>{
-    state.getterCojos = tableau_acte_financier
+    state.acteEffetFinanciers = tableau_acte_financier
 }
 
 // add * acte effet financier
 
 export const AJOUTER_ACTE_EFFET_FINANCIER = (state, elementAjouter) => {
-    state.getterCojos.unshift(elementAjouter)
+    state.acteEffetFinanciers.unshift(elementAjouter)
 }
 
 // update all acte effet financier

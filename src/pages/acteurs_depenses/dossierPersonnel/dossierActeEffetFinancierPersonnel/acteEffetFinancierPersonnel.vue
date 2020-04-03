@@ -604,7 +604,7 @@ export default {
              text_juridique_id:"",
              type_act_effet_id:"",
              analyse_dossier_id:"",
-             entreprise_id:"",
+            // entreprise_id:"",
              marche_id:"",
              numero_marche:"",
              difference_personnel_bienService:"personnel"
@@ -627,7 +627,7 @@ export default {
              text_juridique_id:"",
              type_act_effet_id:"",
              analyse_dossier_id:"",
-             entreprise_id:"",
+            // entreprise_id:"",
              marche_id:"",
              numero_marche:"",
              difference_personnel_bienService:"personnel"
@@ -809,7 +809,7 @@ getDateFinExécutionValue(){
              text_juridique_id:"",
              type_act_effet_id:"",
              analyse_dossier_id:"",
-             entreprise_id:"",
+             //entreprise_id:"",
              marche_id:"",
              numero_marche:"",
              difference_personnel_bienService:"personnel"

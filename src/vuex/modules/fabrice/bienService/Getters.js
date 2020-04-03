@@ -1,4 +1,4 @@
-getActeEffetFinancierPersonnaliser
+
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays
@@ -437,10 +437,10 @@ export const montantMarcheReel = (state, getters) =>
     //   marcheNonAttribue => marcheNonAttribue.attribue == 0
     // );
 
-getEngagementPersonnaliser1
 
 
-    export  const printMarcheNonAttribue = (state, getters,rootState, rootGetters) =>
+
+    export  const gettersMarcherPersonnaliser = (state, getters,rootState, rootGetters) =>
         getters.marches.map(element => {
         if (element.unite_administrative_id !== null
             && element.activite_id !== null
