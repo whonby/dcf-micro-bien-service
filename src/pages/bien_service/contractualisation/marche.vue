@@ -1,6 +1,6 @@
-attribue
-exo_id
-unite_administrative_id
+
+
+
 <template>
     <div class="container-fluid">
          <div id="exampleModal" class="modal hide taillModal">
@@ -132,73 +132,7 @@ unite_administrative_id
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <div id="tab99999" class="tab-pane">
-                              <div class="widget-title">
-              <span class="icon">
-                <i class="icon-th"></i>
-              </span>
-              <h5>Recherche</h5>
-              <div align="right">
-                Recherche Par :
-                <input type="search"  v-model="search" />
-              </div>
-            </div>
-                             <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                <th>Ann&eacute;e</th>
-                 <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
-                   
-                    <th>Activit&eacute;</th>
-                    <th>Imputation</th>
-                       <th>Objet march&eacute;</th>
-                        <th>Reference march&eacute;</th> 
-                                    <th>Montant prevue</th>
-                                <th>Attribution</th>
-                                <th>Action</th>
-                </tr>
-              </thead>
-                <tbody>
-                
-                </tbody>
-              </table>
-                           
-                        </div>
-
-
-
-
-
-
-
-
-
-
-
+    
                             <div id="tab10" class="tab-pane">
                               <div class="widget-title">
               <span class="icon">
@@ -227,60 +161,7 @@ unite_administrative_id
                 </tr>
                 </thead>
                 <tbody>
-                      <tr class="odd gradeX" v-for="(marche, index) in 
-                afficheContrat"
-                 :key="marche.id">
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.marche_id || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherUniteAdministrative(marche.marche_id) || 'Non renseigné'}}</td>
-
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherTypeMarcheLibelle(afficherTypeMarche(marche.marche_id)) || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficheractivite(marche.marche_id )|| 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherImputationMarche(marche.marche_id) || 'Non renseigné'}}</td>
-                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
-                  {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherObjetMarche(marche.marche_id) || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherReferenceMarche(marche.marche_id) || 'Non renseigné'}}</td>
-                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.numero_marche || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
-                   {{formatageSomme(parseFloat(afficherMontantMarche(marche.marche_id))) || 0}}</td>
-                  
-<td>
-                     <button 
-                      v-if="afficherAttributMarche(marche.marche_id) == 1"  class="btn  btn-success">
-                <span >OUI</span>
-       
-                </button>
-                   <button v-else class="btn  btn-danger">
-              
-                <span >NON</span>
-                </button>
-                   </td>
-
-
-                     <div class="btn-group">
-
-                   <!-- <router-link :to="{ name: 'DetaillMarche', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail marches">
-                  <span class=""><i class="icon-folder-open"></i></span>
-                   </router-link>  -->
-  <!-- <router-link :to="{ name: 'Engagement', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail Engagement">
-                  <span class=""><i class=" icon-folder-close"></i></span>
-                   </router-link>  -->
-              <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>
-             
-            </div>
-
-                       </tr>
+                     
                       
                 </tbody>
               </table>
@@ -323,9 +204,9 @@ unite_administrative_id
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherUniteAdministrative(marche.marche_id) || 'Non renseigné'}}</td>
+                   {{marche.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
 <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherTypeMarcheLibelle(afficherTypeMarche(marche.marche_id)) || 'Non renseigné'}}</td>
+                   {{marche.type_marche.libelle || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
                    {{marche.procedure_passation.code || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -345,7 +226,7 @@ unite_administrative_id
                   
 <td>
                      <button 
-                      v-if="afficherAttributMarche(marche.marche_id) == 1"  class="btn  btn-success">
+                      v-if="marche.attribue == 1"  class="btn  btn-success">
                 <span >OUI</span>
        
                 </button>
@@ -453,7 +334,7 @@ unite_administrative_id
                         <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                <!-- <th>Ann&eacute;e</th> -->
+                <th>Ann&eacute;e</th>
                  <th title="unite administrative">UA</th>
                       <th>Type marche</th>
                    
@@ -467,27 +348,26 @@ unite_administrative_id
                 </tr>
                 </thead>
                 <tbody>
-                  <!-- <input type="text" :value="nombreJourTraitementCalucle"> -->
-                   <tr class="odd gradeX" v-for="(marche, index) in 
+                 <tr class="odd gradeX" v-for="(marche, index) in 
                 afficheMarchExecuter"
                  :key="marche.id">
-                  <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.exo_id || 'Non renseigné'}}</td> -->
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherUniteAdministrative(marche.marche_id) || 'Non renseigné'}}</td>
-
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherTypeMarcheLibelle(afficherTypeMarche(marche.marche_id)) || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficheractivite(marche.marche_id )|| 'Non renseigné'}}</td>
+                   {{afficherAnneeBudget(marche.marche_id) || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficherUniteAdministrative(afficherIdUniteAdministrative(marche.marche_id)) || 'Non renseigné'}}</td>
+                 
+                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficherTypeMarcheLibelle(afficherTypeMarche(marche.marche_id))|| 'Non renseigné'}}</td>
+                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficheractivite(afficherIdactivite(marche.marche_id))|| 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherImputationMarche(marche.marche_id)  || 'Non renseigné'}}</td>
+                   {{afficherImputationMarche(marche.marche_id)|| 'Non renseigné'}}</td>
                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                   {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{afficherObjetMarche(marche.marche_id) || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherReferenceMarche(marche.marche_id) || 'Non renseigné'}}</td>
+                   {{afficherReferenceMarche(marche.marche_id)|| 'Non renseigné'}}</td>
                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
@@ -495,7 +375,7 @@ unite_administrative_id
                   
 <td>
                      <button 
-                      v-if="afficherAttributMarche(marche.marche_id) == 1"  class="btn  btn-warning">
+                      v-if="marche.marche_id == 1"  class="btn  btn-warning">
                 <span >OUI</span>
        
                 </button>
@@ -526,8 +406,7 @@ unite_administrative_id
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
-
-                       </tr>
+                   </tr>
                       
                 </tbody>
               </table>
@@ -590,7 +469,7 @@ unite_administrative_id
                   
 <td>
                      <button 
-                      v-if="afficherAttributMarche(marche.marche_id) == 1"  class="btn  btn-success">
+                      v-if="marche.attribue == 1"  class="btn  btn-success">
                 <span >OUI</span>
        
                 </button>
@@ -716,20 +595,19 @@ unite_administrative_id
                 </thead>
                 <tbody>
                
-                  <!-- <input type="text" :value="nombreJourTraitementCalucle"> -->
+                       <!-- <input type="text" :value="nombreJourTraitementCalucle"> -->
                   <tr class="odd gradeX" v-for="(marche, index) in 
                 afficheMarcheResilier"
                  :key="marche.id">
                  
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.exo_id || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherUniteAdministrative(marche.AfficheMarche.unite_administrative_id) || 'Non renseigné'}}</td>
-
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.numero_marche || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.objet || 'Non renseigné'}}</td>
+                   {{afficherAnneeBudget(marche.marche_id) || 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficherUniteAdministrative(afficherIdUniteAdministrative(marche.marche_id)) || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.numero_marche || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficherObjetMarche(marche.marche_id) || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.varObjetEntreprise.raison_sociale || 'Non renseigné'}}</td>
                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -746,8 +624,7 @@ unite_administrative_id
 
 
 
-                       </tr>
-                        
+                       </tr>  
                       
                 </tbody>
               </table>
@@ -1412,7 +1289,19 @@ return this.printMarcheNonAttribue.filter((item) => {
    }
 )
     },
-     afficherTypeMarche() {
+    afficherAnneeBudget() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.exo_id;
+      }
+      return 0
+        }
+      };
+    },
+afficherTypeMarche() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.marches.find(qtreel => qtreel.id == id);
@@ -1484,6 +1373,87 @@ return this.printMarcheNonAttribue.filter((item) => {
         }
       };
     },
+//  afficherObjetMarche() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+//       if (qtereel) {
+//         return qtereel.objet;
+//       }
+//       return 0
+//         }
+//       };
+//     },
+    // afficherNumeroMarche() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+    //   if (qtereel) {
+    //     return qtereel.numero_marche;
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
+// afficherEntreprise() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+//       if (qtereel) {
+//         return qtereel.raison_sociale;
+//       }
+//       return 0
+//         }
+//       };
+//     },
+
+
+
+
+
+
+
+ afficherIdUniteAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.unite_administrative_id;
+      }
+      return 0
+        }
+      };
+    },
+   
+    //  afficherUniteAdministrative() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+    //   if (qtereel) {
+    //     return qtereel.libelle;
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
+     afficherIdactivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.activite_id;
+      }
+      return 0
+        }
+      };
+    },
+      
  afficherObjetMarche() {
       return id => {
         if (id != null && id != "") {
@@ -1677,7 +1647,7 @@ anneeAmort() {
         // return cur_day + " " + hours + ":" + minutes + ":" + seconds;
    },
    afficheExercution(){
-return this.getActeEffetFinancierPersonnaliser.filter(element => element.date_odre_service == this.nombreJourTraitementCalucle)
+return this.getActeEffetFinancierPersonnaliser.filter(element => element.date_odre_service <= this.nombreJourTraitementCalucle)
 },
 afficheMarchExecuter(){
 return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
