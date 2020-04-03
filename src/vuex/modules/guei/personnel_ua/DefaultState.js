@@ -28,7 +28,6 @@ const defaultstate = {
     fonctionBudgetaire:[],
     dossierPersonnels:[]
     
-    
 
 };
 

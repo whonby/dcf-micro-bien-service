@@ -1011,3 +1011,168 @@ export function supprimerLigneExempter({ commit }, id) {
             axios.delete("/ligne_exemptes/" + id).then(() => dialog.close());
         });
 }
+
+
+
+
+
+
+export function getAllRealiteServiceFait({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeRealiteFait")
+      .then(response => {
+        commit("GET_ALL_REALITE_SERVICE_FAIT", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterRealiteServiceFait({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterRealiteFait", nouveau)).then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_REALITE_SERVICE_FAIT", response.data);
+          this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => console.log(error))
+}
+
+// modifier
+export function modifierRealiteServiceFait({ commit }, nouveau) {
+  asyncLoading(axios.put("/modifierRealiteFait/" + nouveau.id , {
+  
+  
+      	section_id: nouveau.section_id,
+      marche_id: nouveau.marche_id,
+      fournisseur_id: nouveau.fournisseur_id,
+    facture_id: nouveau.facture_id,
+    ua_id: nouveau.ua_id,
+    decision_service_beneficiaire: nouveau.decision_service_beneficiaire,
+    date_service_beneficiaire: nouveau.date_service_beneficiaire,
+    observation_service_beneficiaire: nouveau.observation_service_beneficiaire,
+    nom_service_beneficiaire: nouveau.nom_service_beneficiaire,
+    decision_controleur_financier: nouveau.decision_controleur_financier,
+    date_controleur_financier: nouveau.date_controleur_financier,
+    observation_controleur_financier: nouveau.observation_controleur_financier,
+    nom_controleur_financier: nouveau.nom_controleur_financier,
+    	montant: nouveau.	montant,
+    	exercice_budget: nouveau.	exercice_budget,
+    }
+  
+  )).then(response => {
+      commit("MODIFIER_REALITE_SERVICE_FAIT", response.data);
+    
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+
+//supprimer
+export function supprimerRealiteServiceFait({ commit}, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_REALITE_SERVICE_FAIT", id);
+    
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerRealiteFait/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+export function getAllLiquidation({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeLiquidation")
+      .then(response => {
+        commit("GET_ALL_LIQUIDATION", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterLiquidation({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterLiquidation", nouveau)).then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_LIQUIDATION", response.data);
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    }).catch(error => console.log(error))
+}
+
+// modifier
+export function modifierLiquidation({ commit, dispatch}, nouveau) {
+  asyncLoading(axios
+    .put("/modifierLiquidation/" + nouveau.id, {
+      
+      numero_bon_manuel: nouveau.numero_bon_manuel,
+      numero_demande: nouveau.numero_demande,
+      exo_id: nouveau.exo_id,
+      imputation_budgetaire: nouveau.imputation_budgetaire,
+      section_id: nouveau.section_id,
+      programme_id: nouveau.programme_id,
+      action_id: nouveau.action_id,
+      activite_id: nouveau.activite_id,
+      ua_id: nouveau.ua_id,
+      nature_depense_id: nouveau.nature_depense_id,
+      plan_budgetaire_id: nouveau.plan_budgetaire_id,
+      marche_id: nouveau.marche_id,
+      mode_paiement_id: nouveau.mode_paiement_id,
+      fournisseur_id: nouveau.fournisseur_id,
+      egagement_id: nouveau.egagement_id,
+      decision_emetteur: nouveau.decision_emetteur,
+      nom_emetteur: nouveau.nom_emetteur,
+      	date_emetteur: nouveau.date_emetteur,
+      
+      observation_emetteur: nouveau.observation_emetteur,
+       decision_ordonnateur: nouveau.decision_ordonnateur,
+      observation_ordonnateur: nouveau.observation_ordonnateur,
+      nom_ordonnateur: nouveau.nom_ordonnateur,
+      date_ordonnateur: nouveau.date_ordonnateur,
+
+       decision_controleur_financier: nouveau.decision_controleur_financier,
+      nom_controleur_financier: nouveau.nom_controleur_financier,
+      date_controleur_financier: nouveau.date_controleur_financier,
+      observation_controleur_financier: nouveau.observation_controleur_financier
+    })).then(response => {
+      commit("MODIFIER_LIQUIDATION", response.data);
+      dispatch('getAllLiquidation')
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+
+//supprimer
+export function supprimerLiquidation({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_LIQUIDATION", id);
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerLiquidation/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+

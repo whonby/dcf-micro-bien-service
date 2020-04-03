@@ -21,17 +21,6 @@
             </div>
           </div>
          
-         <div class="control-group">
-            <label class="control-label">Code</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="formData.code_type_marche"
-                class="span"
-                placeholder="code_type_marche"
-              />
-            </div>
-          </div>
       
 
          
@@ -69,18 +58,7 @@
               />
             </div>
           </div>
-           
-           <div class="control-group">
-            <label class="control-label">Code</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="editTypeProcedure.code_type_marche"
-                class="span"
-                placeholder=""
-             readonly />
-            </div>
-          </div>
+
        
 
          
@@ -194,14 +172,12 @@ export default {
 
       formData: {
             libelle:"",
-            code_type_marche:""
             
 
         
       },
       editTypeProcedure: {
-           libelle:"",
-           code_type_marche:""
+        	 libelle:"",
             
       },
       search: ""
@@ -244,8 +220,7 @@ return this.typeMarches.filter((item) => {
     ajouterModalTypeAnalyseLocal(){
 this.ajouterTypeMarche(this.formData)
 this.formData = {
-  libelle:"",
-  code_type_marche:""
+	libelle:""
 }
 
     },

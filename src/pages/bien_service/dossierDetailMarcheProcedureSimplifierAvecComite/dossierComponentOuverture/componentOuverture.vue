@@ -16,7 +16,7 @@
                   <table class="table table-bordered table-striped" v-if="macheid">
                       <thead>
                       <tr>
-                           <th>Entreprise</th>
+                           <!-- <th>Ref offre</th> -->
                           <th>Date Composition </th>
                           <th>Date ouverture</th>
                           <th>Nmbr particiapnt</th>
@@ -27,10 +27,15 @@
                       <tbody>
                       <tr class="odd gradeX" v-for="(appelOffre, index) in listeCojo(macheid.id)"
                           :key="appelOffre.id">
-                         
-                              <td @click="afficheBouttonTechCojo(index)">
-                            {{affichierNomEntreprise(appelOffre.entreprise_id) || 'Non renseigné'}}</td>
+                           <!-- <td @click="afficheBouttonTechCojo(index)">
+                              {{appelOffre.varObjetCotation.ref_offre || 'Non renseigné'}}</td> -->
 
+                          <!--<td listeMembreCojo @click="afficheBouttonTechCojo(index)">
+                              {{appelOffre.controleur_finnancier || 'Non renseigné'}}</td>
+                          <td @click="afficheBouttonTechCojo(index)">
+                              {{appelOffre.dmp || 'Non renseigné'}}</td>
+                          <td @click="afficheBouttonTechCojo(index)">
+                              {{appelOffre.autorite_contractante || 'Non renseigné'}}</td>-->
                           <td @click="afficheBouttonTechCojo(index)">
                               {{formaterDate(appelOffre.date_composition) || 'Non renseigné'}}
                           </td>
@@ -86,16 +91,15 @@
                         </div>
                         </div>
 
-                    <div class="control-group">
-                        <label class="control-label">Entreprise.</label>
+                    <!-- <div class="control-group">
+                        <label class="control-label">Lettre Invitation</label>
                         <div class="controls">
-                          <select v-model="formDataCojo.entreprise_id" class="span">
-                                <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
-                                        :value="varText.objetEntreprise.id">{{varText.objetEntreprise.raison_sociale}}</option>
+                            <select v-model="formDataCojo.lettre_invitation_id" class="span" disabled>
+                                <option v-for="plans in lettreInvitationAMarche(macheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.ref_lettre}}</option>
                             </select>
-                        
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="control-group">
                         <label class="control-label">Date d'ouverture</label>
@@ -153,7 +157,6 @@
                                     v-model="formDataCojo.nbr_participant"
                                     class="span"
                             />
-                            <input type="hidden" v-model="formDataCojo.difference_personnel_bienService"/>
                         </div>
                     </div>
 
@@ -192,17 +195,15 @@
                             />
                         </div>
                         </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Entreprise.</label>
+                    <!-- <div class="control-group">
+                        <label class="control-label">Lettre Invitation</label>
                         <div class="controls">
-                          <select v-model="edite_cojo.entreprise_id" class="span">
-                                <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
-                                        :value="varText.objetEntreprise.id">{{varText.objetEntreprise.raison_sociale}}</option>
+                            <select v-model="edite_cojo.lettre_invitation_id" class="span" disabled>
+                                <option v-for="plans in lettreInvitationAMarche(macheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.ref_lettre}}</option>
                             </select>
-                        
                         </div>
-                    </div>
+                    </div> -->
 
 
                     <div class="control-group">
@@ -238,7 +239,6 @@
                                     v-model="edite_cojo.nbr_participant"
                                     class="span"
                             />
-                              <input type="hidden" v-model="edite_cojo.difference_personnel_bienService"/>
                         </div>
                     </div>
                 </form>
@@ -272,13 +272,11 @@ export default {
                 //         controleur_finnancier:"",
                 //         dmp:"",
                 //         autorite_contractante:"",
-                       entreprise_id:"",
                         date_ouverture:"",
                         date_composition:"",
                         num_dossier_appel_offre:"",
                         nbr_participant:"",
-                        appel_offre_id:"",
-                        difference_personnel_bienService:"bienService"
+                        appel_offre_id:""
             },
             
             edite_cojo:"",
@@ -289,10 +287,9 @@ export default {
     },
     computed:{
         ...mapGetters('bienService',['getterCojos','gettersCotations','appelOffres',
-        'gettersCojoPersonnaliser','gettersCotationPersonnaliser']),
-
+        'gettersCojoPersonnaliser']),
   ...mapGetters('personnelUA', ['acteur_depenses']),
-   ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
+  
 
          listeCojo() {
                 return macheid => {
@@ -306,27 +303,6 @@ export default {
                     }
                 }
             },
-
-         afficherEntrepriseRecep () {
-                return id => {
-                    if (id != "") {
-                        // console.log("Marche lettre inviation marche")
-                        return this.gettersCotationPersonnaliser.filter(idmarche => idmarche.marche_id == id)
-                     }
-             }
-            },
-            affichierNomEntreprise() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.raison_sociale;
-      }
-      return 0
-        }
-      };
-    },
 // listeAppelOffre() {
 //       return id => {
 //         if (id != null && id != "") {
@@ -433,15 +409,14 @@ affichierAppelOffreid() {
               this.ajouterCojo(nouvelObjet)
                 this.formDataCojo={
                         appel_offre_id:"",
-                         entreprise_id:'',
+                        // condition_id:'',
                         // controleur_finnancier:"",
                         // dmp:"",
                         // autorite_contractante:"",
                         date_ouverture:"",
                         date_composition:"",
                         num_dossier_appel_offre:"",
-                        nbr_participant:"",
-                     difference_personnel_bienService:"bienService"
+                        nbr_participant:""
                 }
             },
 // la fonction pour afficher le modal du cojo

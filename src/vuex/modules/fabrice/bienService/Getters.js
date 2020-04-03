@@ -1,4 +1,5 @@
 
+
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays
@@ -819,7 +820,7 @@ export const nombremarches = getters =>
               affichenaturedep => affichenaturedep.attribue !== 1
     );
 
-    
+affichePlanifier
    export const afficheContratualisation = state =>
    state.marches.filter(
      affichenaturedep => affichenaturedep.attribue == 1

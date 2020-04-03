@@ -68,8 +68,7 @@ const defaultState = {
 //     avenants:[],
 //     modepaiements:[]
 
-// investissements :[ ] ,
-// actesEffetInvestissement :[]
+
 
 }
 

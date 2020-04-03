@@ -401,7 +401,75 @@ export const SUPPRIMER_LIGNE_EXEMPTER = (state, id) => {
 
 
 
+const GET_ALL_REALITE_SERVICE_FAIT = (state, tableauBudgetGeneral) => {
+  state.realiteServiceFait = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+const AJOUTER_REALITE_SERVICE_FAIT = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.realiteServiceFait.unshift(nouveau_budgetGeneral);
+};
+
+// modifier type_textes
+const MODIFIER_REALITE_SERVICE_FAIT = (state, objetModifie) => {
+  state.realiteServiceFait = state.realiteServiceFait.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
+// supprimer type_texte
+const SUPPRIMER_REALITE_SERVICE_FAIT = (state, id) => {
+  state.realiteServiceFait = state.realiteServiceFait.filter(type => type.id != id);
+};
+
+
+const GET_ALL_LIQUIDATION = (state, tableauBudgetGeneral) => {
+  state.liquidation = tableauBudgetGeneral;
+};
+
+// ajouter type_textes
+const AJOUTER_LIQUIDATION = (state, nouveau_budgetGeneral) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.liquidation.unshift(nouveau_budgetGeneral);
+};
+
+// modifier type_textes
+const MODIFIER_LIQUIDATION = (state, objetModifie) => {
+  state.liquidation = state.liquidation.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
+// supprimer type_texte
+const SUPPRIMER_LIQUIDATION = (state, id) => {
+  state.liquidation = state.liquidation.filter(type => type.id != id);
+};
+
+
+
+
 export {
+
+  GET_ALL_LIQUIDATION,
+  AJOUTER_LIQUIDATION,
+  MODIFIER_LIQUIDATION,
+  SUPPRIMER_LIQUIDATION,
+
+  GET_ALL_REALITE_SERVICE_FAIT,
+  AJOUTER_REALITE_SERVICE_FAIT,
+  MODIFIER_REALITE_SERVICE_FAIT,
+  SUPPRIMER_REALITE_SERVICE_FAIT,
+
+
 
   GET_ALL_DIRECTION,
   AJOUTER_DIRECTION,

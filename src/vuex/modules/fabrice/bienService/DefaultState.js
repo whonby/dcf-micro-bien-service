@@ -73,10 +73,11 @@ documentProcedures:[],
     gettersPsc:[],
     stateTransmissions:[],
     rapportOuverture:[],
+
+
     gettersTransmissions:[],
     plan_passation_marche:[],
-    documents:[],
-    rapportJugement:[]
+
 
 
 }

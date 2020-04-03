@@ -9,7 +9,7 @@
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
-                        <!-- <th>Ref offre</th> -->
+                        <th>Ref offre</th>
                         <!-- <th>Dossier candidat </th> -->
                         <th>Date Analyse </th>
                         <th>Rang d'analyse</th>
@@ -24,10 +24,9 @@
                     <tbody>
                     <tr class="odd gradeX" v-for="(appelOffre, index) in listeAnalyseDossier(macheid)"
                         :key="appelOffre.id">
+                        <td @click="afficheAnnalyseDossier(index)">
 
-                        <!-- <td @click="afficheAnnalyseDossier(index)">
-
-                            {{appelOffre.affichierReferenceAppelOffre|| 'Non renseigné'}}</td> -->
+                            {{appelOffre.affichierReferenceAppelOffre|| 'Non renseigné'}}</td>
 
                           
                         <!-- <td @click="afficheAnnalyseDossier(index)">

@@ -17,11 +17,11 @@
                                             </thead>
                            
                                             <tbody>
-                         <tr class="odd gradeX" v-for="rapport in listeCojo(macheid)"
+                         <tr class="odd gradeX" v-for="rapport in listeCojo(macheid.id)"
                         :key="rapport.id">
 
                          <td @click="afficherModalRapportOuverture(index)">
-                            {{rapport.date_type_procedure|| 'Non renseigné'}}</td> 
+                            {{rapport.date_depot|| 'Non renseigné'}}</td> 
                       
                         <td @click="afficherModalRapportOuverture(index)">
                             <a v-if="rapport.fichier" :href="rapport.fichier" class="btn btn-default" target="_blank">
@@ -30,7 +30,7 @@
                             </a>
                         </td>
                         <div class="btn-group">
-                            <button @click.prevent="supprimerDocument(rapport.id)"  class="btn btn-danger " title="Supprimer">
+                            <button @click.prevent="supprimerRapport(rapport.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
 
                         </div>
@@ -48,11 +48,11 @@
             <div class="modal-body">
                 <form class="form-horizontal">
                     <div class="control-group">
-                        <label class="control-label">Date du rapport</label>
+                        <label class="control-label">Date de depot</label>
                         <div class="controls">
                             <input
                                     type="date"
-                                    v-model="formRapport.date_type_procedure"
+                                    v-model="formRapport.date_depot"
                                     class="span"
                                        
                             />
@@ -90,7 +90,7 @@
                         <div class="control-group">
               <label class="control-label">Date:</label>
               <div class="controls">
-                <input type="date"   v-model="editRapport.date_type_procedure" />
+                <input type="date"   v-model="editRapport.date_depot" />
               </div>
             </div>
                    <div class="control-group">
@@ -125,13 +125,13 @@ export default {
         return{
 
             formRapport:{
-                 date_type_procedure:"",
+                 date_depot:"",
                  fichier:""
 
                 },
             
             editRapport:{
-              date_type_procedure:"",
+              date_depot:"",
               fichier:""
             },
 
@@ -153,7 +153,7 @@ export default {
     computed: {
 
             ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,
-            "gettersCotations","gettersDocuments"]),
+            "gettersCotations","rapportOuverture"]),
             // ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -166,7 +166,7 @@ export default {
    listeCojo() {
                 return macheid => {
                     if (macheid != "") {
-                        return this.gettersDocuments.filter(idmarche => idmarche.marche_id == macheid)
+                        return this.rapportOuverture.filter(idmarche => idmarche.marche_id == macheid)
                     }
                 }
             },
@@ -175,8 +175,8 @@ export default {
 
         },
     methods:{
-        ...mapActions('bienService',['supprimerDocument',
-        'ajouterDocument','modifierDocument']),
+        ...mapActions('bienService',['supprimerRapport',
+        'ajouterRapport','modifierRapport']),
 
 
              OnchangeFichier(e) {
@@ -201,7 +201,7 @@ export default {
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.editRapport = this.gettersDocuments.find(item=>item.id==index);
+                this.editRapport = this.rapportOuverture.find(item=>item.id==index);
             },
 
            
@@ -210,14 +210,14 @@ export default {
            ajouterRapportOuverture(){
                 const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
-                 formData.append('date_type_procedure', this.formRapport.date_type_procedure);
+                 formData.append('date_depot', this.formRapport.date_depot);
             //    formData.append('marche_id', this.macheid.id);
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'
                     }
                 }
-               this.ajouterDocument(formData, config)
+               this.ajouterRapport(formData, config)
                this.formRapport ={
                   
                }
@@ -226,7 +226,7 @@ export default {
 
            modifierRapportOuverture(){
                const formData = new FormData();
-                 formData.append('date_type_procedure', this.editRapport.date_type_procedure);
+                 formData.append('date_depot', this.editRapport.date_depot);
                 // formData.append('marche_id', this.marcheid);
                 formData.append('id', this.editRapport.id);
                
@@ -240,7 +240,7 @@ export default {
                     }
                 }
               
-               this.modifierDocument(formData,config)
+               this.modifierRapport(formData,config)
                this.$('#modifierModalRapportOuverture').modal('hide');
            }
 

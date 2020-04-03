@@ -5,6 +5,8 @@ import { groupBy } from "../../../../Repositories/Repository";
  export const servicesua = state => state.servicesua;
 export const directions = state => state.directions;
 export const fonctionsua = state => state.fonctionsua;
+export const realiteServiceFait = state => state.realiteServiceFait;
+export const liquidation = state => state.liquidation;
 const uniteAdministratives = state =>
   state.uniteAdministratives.sort((a, b) => (a.code > b.code ? 1 : -1));
 // const archivageDocuments = state =>

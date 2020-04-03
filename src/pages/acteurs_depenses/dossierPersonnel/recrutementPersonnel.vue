@@ -1,5 +1,6 @@
 
 
+
 <template>
     <div class="container-fluid">
          <div id="exampleModal" class="modal hide taillModal">
@@ -112,6 +113,7 @@
         >Fermer</a>
       </div>
     </div>
+
 
 
      
@@ -361,14 +363,15 @@
 
 
 
+
     <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
          <div class="row-fluid">
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab2078">Toutes les contrats<span class="badge badge-inverse" >{{nombreDeContrat}}</span></a></li>
-                               <li ><a data-toggle="tab" href="#tab100">Contrat Planifiés<span class="badge badge-important" >    {{nombreContratPlanifier}}</span></a></li>
+                               <li class="active"><a data-toggle="tab" href="#tab2078">Toutes les contrats<span class="badge badge-inverse" >{{nombreTotalMarche}}</span></a></li>
+                               <li ><a data-toggle="tab" href="#tab100">Contrat Planifiés<span class="badge badge-important" >    {{AfficheMarcheNonAttribue}}</span></a></li>
                                 <li ><a data-toggle="tab" href="#tab10">En cours Contratualisation<span class="badge badge-success" >{{NombreafficheContrat}}</span></a></li>
                                 <li><a data-toggle="tab" href="#tab20">Contrat en Exécution<span class="badge badge-warning" >     {{afficheNombreMarchExecuter}}</span></a></li>
                                 <!-- <li><a data-toggle="tab" href="#tab208">Marchés Terminés<span class="badge badge" >     {{0}}</span></a></li> -->
@@ -743,7 +746,6 @@
 
 
                      <div class="btn-group">
-
                    <!-- <router-link :to="{ name: 'DetaillMarche', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail marches">
                   <span class=""><i class="icon-folder-open"></i></span>
@@ -752,14 +754,11 @@
                 class="btn btn-default " title="Detail Engagement">
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link>  -->
-
-                     <button   class="btn btn-warning " title="" @click="afficherModalModifierActeEffetFinancier(index)">
-                <span class=""><i class="icon-plus"></i></span></button>
-
-                   
-              <!-- <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
+                    <button   class="btn btn-info " title="Ajouter marché resilié" @click="afficherModalMarcheResilier(index)">
+                <span class=""><i class="icon-folder-open"></i></span></button>
+              <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
-              -->
+             
             </div>
 
                        </tr>
@@ -1033,30 +1032,6 @@ export default {
     //     CODE: "code",
     //     libelle: "libelle"
     //   },
-    editActeEffetFinancier:"",
-
-       formEffetFinancier:{
-       code_act:"",
-             libelle_act:"",
-             reference_act:"",
-             objet_act:"",
-             incidence_financiere:"",
-             montant_act:"",
-              date_attributaire:"",
-             date_reception:"",
-             duree:"",
-             date_fin_exe:"",
-             date_odre_service:"",
-             livrable_id:"",
-        autorite_approbation:"",
-        date_approbation:"",
-             text_juridique_id:"",
-             type_act_effet_id:"",
-             analyse_dossier_id:"",
-             entreprise_id:"",
-             marche_id:"",
-             numero_marche:""
-       },
 
       formData: {
             objet:"",
@@ -1090,8 +1065,7 @@ export default {
 
   computed: {
      ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser','acteEffetFinanciers','montantPlanifier','montantContratualisation',
-     'afficheContratualisation', "gettersCotationPersonnaliser", "text_juridiques",
-     'affichePlanifier','nombremarchesExecute','afficheMarchePlanifier','afficheMarcheContratualisation',
+     'afficheContratualisation','affichePlanifier','nombremarchesExecute','afficheMarchePlanifier','afficheMarcheContratualisation',
      'AfficheMarcheAttribue','AfficheMarcheNonAttribue','nombreTotalMarche','marches',
      'typeMarches', 'getMarchePersonnaliser',"typeActeEffetFinanciers",
      "montantMarche", "gettersMarcherPersonnaliser","procedurePassations","typeTypeProcedures"]),
@@ -1369,7 +1343,7 @@ anneeAmort() {
         // return cur_day + " " + hours + ":" + minutes + ":" + seconds;
    },
    afficheExercution(){
-return this.getActeEffetFinancierPersonnaliser.filter(element => element.date_odre_service <= this.nombreJourTraitementCalucle)
+return this.getActeEffetFinancierPersonnaliser.filter(element => element.date_odre_service == this.nombreJourTraitementCalucle)
 },
 afficheMarchExecuter(){
 return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
@@ -1596,22 +1570,6 @@ this.formData = {
       this.modifierActeEffetFinancier(nouvelObjet)
       this.$('#exampleModal').modal('hide');
     },
-
-
-
-      afficherModalModifierActeEffetFinancier(index){
-    this.$('#modifierActeEF').modal({
-        backdrop: 'static',
-        keyboard: false
-    });
-    this.editActeEffetFinancier = this.acteEffetFinanciers[index]
-}, 
-
-modifierModalActeEffetFinancierLocal(){
-
-    this.modifierActeEffetFinancier(this.editActeEffetFinancier)
-    this.$('#modifierActeEF').modal('hide');
-},
     // alert() {
     //   console.log("ok");
     // },
@@ -1628,11 +1586,5 @@ modifierModalActeEffetFinancierLocal(){
   width: 1080px;
    margin: 0 -25%;
    
-}
-
-.grdirModalActeEffet{
-   width: 1200px;
- margin: 0 -530px;
- height: 550px;
 }
 </style>

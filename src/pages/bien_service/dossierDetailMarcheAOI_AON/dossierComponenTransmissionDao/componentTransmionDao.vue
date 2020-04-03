@@ -277,7 +277,7 @@ export default {
                 // formData.append('contact', this.editCotation.contact);
                 // formData.append('entreprise_id', this.editCotation.entreprise_id);
                 // formData.append('date_cotation', this.editCotation.date_cotation);
-                 formData.append('marche_id', this.macheid);
+                 formData.append('marche_id', this.marcheid);
                 // formData.append('ref_offre', this.editCotation.ref_offre);
                
                 console.log(formData)

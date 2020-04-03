@@ -116,6 +116,7 @@
 
 
 
+
  <div id="modifierActeEF" class="modal hide grdirModalActeEffet">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
@@ -360,6 +361,7 @@
 
 
 
+
     <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
          <div class="row-fluid">
                 <div class="span12">
@@ -379,73 +381,7 @@
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <div id="tab99999" class="tab-pane">
-                              <div class="widget-title">
-              <span class="icon">
-                <i class="icon-th"></i>
-              </span>
-              <h5>Recherche</h5>
-              <div align="right">
-                Recherche Par :
-                <input type="search"  v-model="search" />
-              </div>
-            </div>
-                             <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                <th>Ann&eacute;e</th>
-                 <th title="unite administrative">UA</th>
-                      <th>Type marche</th>
-                   
-                    <th>Activit&eacute;</th>
-                    <th>Imputation</th>
-                       <th>Objet march&eacute;</th>
-                        <th>Reference march&eacute;</th> 
-                                    <th>Montant prevue</th>
-                                <th>Attribution</th>
-                                <th>Action</th>
-                </tr>
-              </thead>
-                <tbody>
-                
-                </tbody>
-              </table>
-                           
-                        </div>
-
-
-
-
-
-
-
-
-
-
-
+    
                             <div id="tab10" class="tab-pane">
                               <div class="widget-title">
               <span class="icon">
@@ -474,16 +410,87 @@
                 </tr>
                 </thead>
                 <tbody>
-                      <tr class="odd gradeX" v-for="(marche, index) in 
-                afficheContrat"
-                 :key="marche.id">    
+                     
+                      
+                </tbody>
+              </table>
+                           
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                            <div id="tab10" class="tab-pane">
+                              <div class="widget-title">
+
+                         <div id="tab2078" class="tab-pane active">
+                             <div class="widget-title">
+
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              <h5>Liste des Marches En cours de Contratualisation</h5>
+              <!-- <div align="right">
+                Recherche:
+                <input type="search"  v-model="search" />
+              </div> -->
+            </div>
+                             <table class="table table-bordered table-striped">
+                <thead>
+
+                  <tr>
+                <th>Ann&eacute;e</th>
+                 <th title="unite administrative">UA</th>
+                      <th>Type marche</th>
+                   
+                    <th>Activit&eacute;</th>
+
+                <tr>
+                    <th>Année</th>
+                      <th>UA</th>
+                    <th>Type marché</th>
+                    <th>Mode de passation</th>
+                    <th>Activité</th>
+
+                    <th>Imputation</th>
+                       <th>Objet march&eacute;</th>
+                        <th>Reference march&eacute;</th> 
+                                    <th>Montant prevue</th>
+                                <th>Attribution</th>
+                                <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                    
+     
+                        <tr class="odd gradeX" v-for="(marche, index) in 
+                typePrestationFiltre"
+                 :key="marche.id">
+
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.AfficheMarche.exo_id || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+
                    {{afficherUniteAdministrative(marche.AfficheMarche.unite_administrative_id) || 'Non renseigné'}}</td>
 
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.AfficheMarche.type_marche.libelle || 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.type_marche.libelle || 'Non renseigné'}}</td>
+                 <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
+                   {{marche.procedure_passation.code || 'Non renseigné'}}</td>
+
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{afficheractivite(marche.AfficheMarche.activite_id )|| 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -510,6 +517,7 @@
                 <span >NON</span>
                 </button>
                    </td>
+
 
 
                      <div class="btn-group">
@@ -612,6 +620,9 @@
                    </td>
 
 <td>
+
+<td>
+
     <div class="btn-group">
 
                    <!-- <router-link :to="{ name: 'DetaillMarche', params: { id: marche.id }}"
@@ -642,8 +653,13 @@
 
 
                    
+
               <!-- <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button> -->
+
+              <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+
              
             </div>
 </td>
@@ -676,7 +692,11 @@
                        <td style="font-weight:bold;"> Total Marché
                       </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
+
                            {{formatageSomme(parseFloat(montantMarche1))}}
+
+                          
+
                            
                       </td>
                        <td>
@@ -723,27 +743,28 @@
                 </tr>
                 </thead>
                 <tbody>
+
                   <!-- <input type="text" :value="nombreJourTraitementCalucle"> -->
                    <tr class="odd gradeX" v-for="(marche, index) in 
                 afficheMarchExecuter"
                  :key="marche.id">
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.exo_id || 'Non renseigné'}}</td>
+                   {{afficherAnneeBudget(marche.marche_id) || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherUniteAdministrative(marche.AfficheMarche.unite_administrative_id) || 'Non renseigné'}}</td>
-
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.type_marche.libelle || 'Non renseigné'}}</td>
+                   {{afficherUniteAdministrative(afficherIdUniteAdministrative(marche.marche_id)) || 'Non renseigné'}}</td>
+                 
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficheractivite(marche.AfficheMarche.activite_id )|| 'Non renseigné'}}</td>
+                   {{afficherTypeMarcheLibelle(afficherTypeMarche(marche.marche_id))|| 'Non renseigné'}}</td>
+                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficheractivite(afficherIdactivite(marche.marche_id))|| 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.imputation || 'Non renseigné'}}</td>
+                   {{afficherImputationMarche(marche.marche_id)|| 'Non renseigné'}}</td>
                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                   {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.objet || 'Non renseigné'}}</td>
+                   {{afficherObjetMarche(marche.marche_id) || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.reference_marche || 'Non renseigné'}}</td>
+                   {{afficherReferenceMarche(marche.marche_id)|| 'Non renseigné'}}</td>
                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
@@ -751,7 +772,11 @@
                   
 <td>
                      <button 
+
                       v-if="marche.AfficheMarche.attribue == 1"  class="btn  btn-warning">
+
+                      v-if="marche.marche_id == 1"  class="btn  btn-warning">
+
                 <span >OUI</span>
        
                 </button>
@@ -764,7 +789,7 @@
 
                      <div class="btn-group">
  
-                 <!-- <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+                 <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail marche proceduce simplifiée">
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link>  -->
@@ -772,19 +797,19 @@
                 class="btn btn-default " title="Detail marches">
                   <span class=""><i class="icon-folder-open"></i></span>
                    </router-link>  -->
-  <!-- <router-link :to="{ name: 'Engagement', params: { id: marche.id }}"
+   <router-link :to="{ name: 'Engagement', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail Engagement">
                   <span class=""><i class=" icon-folder-close"></i></span>
-                   </router-link>  -->
+                   </router-link>  
                     <button   class="btn btn-info " title="Ajouter marché resilié" @click="afficherModalMarcheResilier(index)">
                 <span class=""><i class="icon-pencil"></i></span></button>
+
 
               <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
-
-                       </tr>
+                   </tr>
                       
                 </tbody>
               </table>
@@ -820,8 +845,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                   <tr class="odd gradeX" v-for="(marche, index) in 
-                afficherMarchePlanifier"
+                   <tr class="odd gradeX" v-for="(marche, index) in afficherMarchePlanifier"
+
+           
+
                  :key="marche.id">
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
@@ -912,6 +939,7 @@
                    </router-link>
 
 
+
                    <router-link :to="{name:'detailMarcheAoi_Aon',params:{id:marche.id}}"
                    class="btn btn-default"  title="detail marche AOI-AON">
                    <span class=""><i class="icon-user"></i></span>
@@ -920,6 +948,10 @@
 
               <!-- <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button> -->
+
+              <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
+
              
             </div>
 
@@ -948,7 +980,11 @@
                        <td style="font-weight:bold;"> Total Marché
                       </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
+
                            {{formatageSomme(parseFloat(montantMarchePlanifier))}}
+
+                           {{formatageSomme(parseFloat(montantPlanifier))}}
+
                            
                       </td>
                        <td>
@@ -991,20 +1027,19 @@
                 </thead>
                 <tbody>
                
-                  <!-- <input type="text" :value="nombreJourTraitementCalucle"> -->
+                       <!-- <input type="text" :value="nombreJourTraitementCalucle"> -->
                   <tr class="odd gradeX" v-for="(marche, index) in 
                 afficheMarcheResilier"
                  :key="marche.id">
                  
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.exo_id || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherUniteAdministrative(marche.AfficheMarche.unite_administrative_id) || 'Non renseigné'}}</td>
-
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.numero_marche || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.AfficheMarche.objet || 'Non renseigné'}}</td>
+                   {{afficherAnneeBudget(marche.marche_id) || 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficherUniteAdministrative(afficherIdUniteAdministrative(marche.marche_id)) || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.numero_marche || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{afficherObjetMarche(marche.marche_id) || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.varObjetEntreprise.raison_sociale || 'Non renseigné'}}</td>
                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -1021,8 +1056,7 @@
 
 
 
-                       </tr>
-                        
+                       </tr>  
                       
                 </tbody>
               </table>
@@ -1682,9 +1716,14 @@ export default {
   },
 
   computed: {
-     ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser','acteEffetFinanciers','montantPlanifier','montantContratualisation','afficheContratualisation','affichePlanifier','nombremarchesExecute','afficheMarchePlanifier','afficheMarcheContratualisation','AfficheMarcheAttribue','AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
+     ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser','acteEffetFinanciers','montantPlanifier','montantContratualisation','afficheContratualisation','affichePlanifier','nombremarchesExecute',
+     'afficheMarchePlanifier','afficheMarcheContratualisation','AfficheMarcheAttribue','AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
+
      "montantMarche", "gettersMarcherPersonnaliser","typeActeEffetFinanciers","text_juridiques",
-     "procedurePassations","typeTypeProcedures"]),
+     "procedurePassations","typeTypeProcedures","printMarcheNonAttribue"]),
+
+
+
 
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
@@ -1697,33 +1736,113 @@ export default {
 
 
 //  afficheIdTypeMarche() {
+
 //     return this.gettersMarcherPersonnaliser.filter(element => element.type_marche.libelle == "Prestations Intellectuelles")
 //     },
 
                           
-nombreDejourCalcule(){
-                let vM=this;
-    const acteAffet = vM.formEffetFinancier
-    if(acteAffet.date_odre_service == acteAffet.date_fin_exe &&  acteAffet.date_fin_exe !=="" && acteAffet.date_odre_service !=="") return 1
-     if(acteAffet.date_fin_exe =="" && acteAffet.date_odre_service =="") return null
 
-       var dateF = new Date(acteAffet.date_fin_exe).getTime()
-        var dateO = new Date(acteAffet.date_odre_service).getTime()
-           var resultat = dateF - dateO
+//     return this.printMarcheNonAttribue.filter(element => element.type_marche.libelle == "Prestations Intellectuelles")
+//     },
 
-             var diffJour =  resultat / (1000 * 3600 * 24)
 
-               if(isNaN(diffJour)) return null
+  
+  typePrestationFiltre()  {
+     
+        const searchTerm = this.search.toLowerCase();
 
-               if(parseFloat(diffJour) < 0 ) return "durée invalide"
-    vM.formEffetFinancier.duree=diffJour
-                  return  diffJour;
-   
-},
+return this.printMarcheNonAttribue.filter((item) => {
+  
+     return item.objet.toLowerCase().includes(searchTerm) 
+
+   }
+)
+    },
+    afficherAnneeBudget() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.exo_id;
+      }
+      return 0
+        }
+      };
+    },
+afficherTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_marche_id;
+      }
+      return 0
+        }
+      };
+    },
+      afficherTypeMarcheLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
+
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    afficherImputationMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.imputation;
+      }
+      return 0
+        }
+      };
+    },
+ afficherReferenceMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.reference_marche;
+      }
+      return 0
+        }
+      };
+    },
+     afficherAttributMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.attribue;
+      }
+      return 0
+        }
+      };
+    },
+     afficherMontantMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+        }
+      }
+      },
 
             getDateFinExécutionValue(){
     return !this.formEffetFinancier.date_odre_service !=""
 },
+
   
 //   typePrestationFiltre()  {
      
@@ -1733,9 +1852,48 @@ nombreDejourCalcule(){
   
 //      return item.objet.toLowerCase().includes(searchTerm) 
 
-//    }
-// )
+     
+//  afficherObjetMarche() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+//       if (qtereel) {
+//         return qtereel.objet;
+//       }
+//       return 0
+//         }
+//       };
 //     },
+    // afficherNumeroMarche() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+    //   if (qtereel) {
+    //     return qtereel.numero_marche;
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
+// afficherEntreprise() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+//       if (qtereel) {
+//         return qtereel.raison_sociale;
+//       }
+//       return 0
+//         }
+//       };
+//     },
+
+
+
+
+
 
 
 
@@ -1764,11 +1922,44 @@ nombreMarchePlanifier(){
 },
 
 // afficher le montant du marche planifier
+
 montantMarchePlanifier(){
   return this.afficherMarchePlanifier.reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.montant_marche),0)
 },
 
 
+
+
+
+
+
+ afficherIdUniteAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.unite_administrative_id;
+      }
+      return 0
+        }
+      };
+    },
+   
+ 
+     afficherIdactivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.activite_id;
+      }
+      return 0
+        }
+      };
+    },
+      
 
  afficherObjetMarche() {
       return id => {
@@ -1960,10 +2151,10 @@ anneeAmort() {
         return cur_day
 
 
-        // return cur_day + " " + hours + ":" + minutes + ":" + seconds;
+        
    },
    afficheExercution(){
-return this.getActeEffetFinancierPersonnaliser.filter(element => element.date_odre_service == this.nombreJourTraitementCalucle)
+return this.getActeEffetFinancierPersonnaliser.filter(element => element.date_odre_service <= this.nombreJourTraitementCalucle)
 },
 afficheMarchExecuter(){
 return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
@@ -2006,15 +2197,7 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => element.date_
 NombreExecute(){
 return this.getActeEffetFinancierPersonnaliser45.filter(element => element.date_odre_service == this.nombreJourTraitementCalucle).length
 },
-    // ImputationBudgetModif() {
-      
-    //   const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.economique_id == this.editMarche.Economique);
-
-    //   if (norme) {
-    //     return norme.codebudget;
-    //   }
-    //   return 0
-    // },
+   
     MontatantImputationBudget() {
       
       const norme = this.getPersonnaliseBudgetGeneral.find(normeEquipe => normeEquipe.economique_id == this.formData.Economique);
@@ -2195,6 +2378,7 @@ this.formData = {
     // },
      ExporterEnExel(){
       this.$refs.excel.click()
+
     },
 
      afficherModalModifierActeEffetFinancier(index){
@@ -2211,6 +2395,9 @@ modifierModalActeEffetFinancierLocal(){
     this.$('#modifierActeEF').modal('hide');
 },
 
+
+
+    
 
   }
 

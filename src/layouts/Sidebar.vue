@@ -66,7 +66,7 @@
         </li>
 
 
-        <li @click.prevent="navigateToInvestissement" :class="{active: active_el ==4}">
+        <li @click.prevent="activate(4)" :class="{active: active_el ==4}">
           <a title="INVESTISSEMENT" href="#">
             <i class="icon icon-th-list"></i>
             <span>INVESTISSEMENT</span>
@@ -98,7 +98,7 @@
         </li> -->
           <li >
               <router-link :to="{name: 'CartographieBudget'}" title="Cartographie du budget" tag="a">
-                  <i class="icon icon-map-marker"></i>
+                  <i class="icon icon-heart"></i>
                   <span>CARTOGRAPHIE</span>
                   <span class="label label-important"></span>
               </router-link>
@@ -176,14 +176,6 @@ export default {
         this.activate(5)
         this.$router.push({
           name: 'TableauBordImmo2'
-        })
-      },
-
-
-      navigateToInvestissement(){
-        this.activate(4)
-        this.$router.push({
-          name: 'tableauBordInvestissement'
         })
       },
 

@@ -17,7 +17,7 @@
         </a>
         <ul class="dropdown-menu">
           <li>
-            <router-link :to="{name: 'ExerciceBudgetaire'}" tag="a">
+            <router-link :to="{name: 'ExerciceBudgetaire1'}" tag="a">
               <i class="icon-user"></i>
               Exercises budgétaires
             </router-link>
@@ -87,8 +87,8 @@
       <!-- fonctionnelle
       -->
        <li class="dropdown" id="fonctionnelle">
-        <a title = "STRUCTURES ET PLANS" href="#" data-toggle="dropdown" data-target="#fonctionnelle" class="dropdown-toggle">
-          <span class="text">STRUCTURES ET PLANS</span>
+        <a title = "STRUCTURES " href="#" data-toggle="dropdown" data-target="#fonctionnelle" class="dropdown-toggle">
+          <span class="text">STRUCTURES</span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
@@ -100,47 +100,33 @@
             </router-link>
           </li>
           <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'PlanFonctionnel'}" tag="a">
-              <i class="icon-key"></i> Plan fonctionnel
-            </router-link>
-          </li>
-           <li class="divider"></li>
+          
+          
           <li>
             <router-link :to="{name:'StructureProgramme'}" tag="a">
               <i class=" icon-star"></i> Structures programmes
             </router-link>
           </li>
           <li class="divider"></li>
-          <li>
-            <router-link :to="{name:'PlanProgramme'}" tag="a">
-              <i class="icon-stop"></i> Plan programme
-            </router-link>
-          </li>
-          <li class="divider"></li>
+          
           <li>
             <router-link :to="{name: 'StructureAtivite'}" tag="a">
               <i class="icon-key"></i> Structure programmatique
             </router-link>
           </li>
           <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'PlanActivite'}" tag="a">
-              <i class="icon-key"></i> Plan programmatique
-            </router-link>
-          </li>
-          <li class="divider"></li>
+         
           <li>
             <router-link :to="{name:'StructureAdministrative'}" tag="a">
               <i class="icon-th"></i> Structure administrative
             </router-link>
           </li>
-          <li class="divider"></li>
+          <!-- <li class="divider"></li>
           <li>
             <router-link :to="{name: 'ServiceGestionnaire'}" tag="a">
               <i class="icon-key"></i> Service gestionnaire de crédit
             </router-link>
-          </li>
+          </li> -->
 
            <li class="divider"></li>
           <li>
@@ -150,17 +136,76 @@
           </li>
 
            <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'LocalisationGeographique'}" tag="a">
-              <i class="icon-plus"></i> Localisation géographique
-            </router-link>
-          </li>
-         <li class="divider"></li>
+         
           <li>
             <router-link :to="{name: 'StructureBudgetaire'}" tag="a">
               <i class="icon-key"></i> Structure économique
             </router-link>
           </li>
+         
+           <li class="divider"></li>
+          
+          <li>
+            <router-link :to="{name: 'structureDecision'}" tag="a">
+              <i class="icon-key"></i> Structures décisionnelles
+            </router-link>
+          </li>
+          <li class="divider"></li>
+          
+          
+          <li>
+            <router-link :to="{name: 'structureActe'}" tag="a">
+              <i class="icon-key"></i> Structures des actes
+            </router-link>
+          </li>
+          <li class="divider"></li>
+         
+        </ul>
+      </li>
+     <li class="dropdown" id="lesPlans">
+        <a title = " PLANS" href="#" data-toggle="dropdown" data-target="#lesPlans" class="dropdown-toggle">
+          <span class="text">PLANS</span>
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+         
+          <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'PlanFonctionnel'}" tag="a">
+              <i class="icon-key"></i> Plan fonctionnel
+            </router-link>
+          </li>
+           
+          <li class="divider"></li>
+          <li>
+            <router-link :to="{name:'PlanProgramme'}" tag="a">
+              <i class="icon-stop"></i> Plan programme
+            </router-link>
+          </li>
+         
+          <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'PlanActivite'}" tag="a">
+              <i class="icon-key"></i> Plan programmatique
+            </router-link>
+          </li>
+         
+          <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'ServiceGestionnaire'}" tag="a">
+              <i class="icon-key"></i> Service gestionnaire de crédit
+            </router-link>
+          </li>
+
+          
+
+           <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'LocalisationGeographique'}" tag="a">
+              <i class="icon-plus"></i> Localisation géographique
+            </router-link>
+          </li>
+       
           <li class="divider"></li>
           <li>
             <router-link :to="{name: 'PlanBudgetaire'}" tag="a">
@@ -168,35 +213,22 @@
               Plan économique
             </router-link>
           </li>
-           <li class="divider"></li>
           
-          <li>
-            <router-link :to="{name: 'structureDecision'}" tag="a">
-              <i class="icon-key"></i> Structures Décisionnelles
-            </router-link>
-          </li>
           <li class="divider"></li>
           <li>
             <router-link :to="{name: 'planDecision'}" tag="a">
-              <i class="icon-key"></i> Plan Décisionnelles
+              <i class="icon-key"></i> Plan décisionnelles
             </router-link>
           </li>
-           <li class="divider"></li>
           
-          <li>
-            <router-link :to="{name: 'structureActe'}" tag="a">
-              <i class="icon-key"></i> Structures Acte
-            </router-link>
-          </li>
           <li class="divider"></li>
           <li>
             <router-link :to="{name: 'planActe'}" tag="a">
-              <i class="icon-key"></i> Plan Acte
+              <i class="icon-key"></i> Plan des actes
             </router-link>
           </li>
         </ul>
       </li>
-     
       <li class="dropdown" id="Depense">
         <a title="CODIFICATIONS" href="#" data-toggle="dropdown" data-target="#Depense" class="dropdown-toggle">
           <span class="text">CODIFICATIONS</span>

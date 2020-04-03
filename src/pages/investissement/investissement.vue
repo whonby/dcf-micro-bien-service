@@ -1,7 +1,5 @@
-
-
-
 <template>
+<<<<<<< HEAD
     <div class="container-fluid">
          <div id="exampleModal" class="modal hide taillModal">
       <div class="modal-header">
@@ -1032,13 +1030,13 @@
             </div>
         </div>
     </div>
+=======
+    <div></div>
+>>>>>>> e29f078159d189187917d8992e81cb6815fd7bb6
 </template>
-
 <script>
- import { mapGetters, mapActions } from "vuex";
- import { formatageSomme } from "../../../src/Repositories/Repository";
- // import acteModification from '../dossierDetailMarchePs/dossierModificationActe/acteModification';
 export default {
+<<<<<<< HEAD
   props:["macheid"],
   name:'type facture',
   data() {
@@ -1174,142 +1172,14 @@ afficherMarcherPourInvestissement(){
 return this.gettersMarcherPersonnaliser.filter(element => element.type_marche.code_type_marche == 3)
 },
 
+=======
+    data(){
+        return{
+>>>>>>> e29f078159d189187917d8992e81cb6815fd7bb6
 
- afficherObjetMarche() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.objet;
-      }
-      return 0
         }
-      };
     },
-    afficherNumeroMarche() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.numero_marche;
-      }
-      return 0
-        }
-      };
-    },
-afficherEntreprise() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.raison_sociale;
-      }
-      return 0
-        }
-      };
-    },
-
-
-
-
-
-
-
-
-   
-     afficherUniteAdministrative() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.libelle;
-      }
-      return 0
-        }
-      };
-    },
-      afficheractivite() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.afficheNiveauActivite.find(qtreel => qtreel.id == id);
-
-      if (qtereel) {
-        return qtereel.libelle;
-      }
-      return 0
-        }
-      };
-    },
-exoEnCours(){
-return this.exercices_budgetaires.filter(element => element.encours == 1)
-},
-anneeAmort() {
-      
-      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
-
-      if (norme) {
-        return norme.annee;
-      }
-      return 0
-    },
-
-
-    procedurePassationDynamiques() {
-     return id => {
-        if (id != null && id != "") {
-          return this.procedurePassations.filter(
-            element => element.type_procedure_id == id
-          );
-        }
-      };
-    },
-     activiteDynamiques() {
-     return id => {
-        if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParBienService.filter(
-            element => element.ua_id == id
-          );
-        }
-      };
-    },
-    deverouPassation() {
-      return this.formData.typeappel_id == "";
-    }, 
-     deverouPassationModi() {
-      return this.editMarche.typeappel_id == "";
-    }, 
-    deverouGrandNature() {
-      return this.formData.unite_administrative_id == "";
-    }, 
-    deverouactivite() {
-      return this.formData.gdenature_id == "";
-    },
-     deveroueconomiq() {
-      return this.formData.activite_id == "";
-    },
-     economiqueDynamiques() {
-     return id => {
-        if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParBienService.filter(
-            element => element.ua_id == id
-          );
-        }
-      };
-    },
-
-  grandeNatureDynamiques() {
-     return id => {
-        if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParBienService.filter(
-            element => element.ua_id == id
-          );
-        }
-      };
-    },
+<<<<<<< HEAD
 
 
 
@@ -1645,5 +1515,8 @@ modifierModalActeEffetFinancierLocal(){
    width: 1200px;
  margin: 0 -530px;
  height: 550px;
+=======
+    props:[""]
+>>>>>>> e29f078159d189187917d8992e81cb6815fd7bb6
 }
-</style>
+</script>

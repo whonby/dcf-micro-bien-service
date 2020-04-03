@@ -60,13 +60,8 @@ export default {
     },
     methods:{
         ...mapActions('bienService', ['ajouterEtatProcedure']),
-
      ajouterEtatLocal(){
-         var nouvelObjet = {
-             ...this.formEtat,
-             marche_id:this.macheid
-         }
-         this.ajouterEtatProcedure(nouvelObjet)
+         this.ajouterEtatProcedure(this.formEtat)
          this.formEtat={
              date_realisation:"",
              libelle_etat:"reception de la cotation"

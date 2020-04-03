@@ -96,7 +96,9 @@ export default {
       "getAllTransfert",
       "getAllHistoriqueTransfert",
      "getLigneExempter",
-     "getBudgeChager"
+     "getBudgeChager",
+     "getAllRealiteServiceFait",
+     "getAllLiquidation"
     ]),
             ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
@@ -142,7 +144,7 @@ export default {
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", 
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
-          "getRapport","getDocument", "getRapportJugement"])
+          "getRapport"])
 
 
   },
@@ -194,11 +196,10 @@ this.getCommune()
 this.getChoixProcedure()
 this.getTransmission()
 this.getCotation()
-this.getOuverture()  
-this.getDocument()  
-this.getRapportJugement()
+this.getOuverture()    
 
-
+this.getAllRealiteServiceFait()
+     this.getAllLiquidation()
 // this.getTypeProcedure()
 
 

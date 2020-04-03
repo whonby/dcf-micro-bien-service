@@ -1,4 +1,4 @@
-
+affichierNomEntreprise
 <template>
     <div>
 
@@ -38,8 +38,8 @@
                             {{effetFinancier.text_juridique.objet_text || 'Non renseigné'}}</td>
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.marche.imputation || 'Non renseigné'}}</td>
-                              <td @click="afficherModalModifierActeEffetFinancier(index)">
-                            {{affichierNomEntreprise(ouverture.entreprise_id) || 'Non renseigné'}}</td>
+                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{affichierNomEntreprise(effetFinancier.entreprise_id) || 'Non renseigné'}}</td>
 <td>
       <div class="btn-group">
                             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
@@ -84,7 +84,7 @@
                         <div class="controls">
                           <select v-model="formEffetFinancier.entreprise_id" class="span">
                                 <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
-                                        :value="varText.objetEntreprise.id">{{varText.objetEntreprise.raison_sociale}}</option>
+                                        :value="varText.entreprise_id">{{affichierNomEntreprise(varText.entreprise_id)}}</option>
                             </select>
                         
                         </div>
@@ -353,7 +353,7 @@
                         <div class="controls">
                           <select v-model="editActeEffetFinancier.entreprise_id" class="span">
                                <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
-                                        :value="varText.objetEntreprise.id">{{varText.objetEntreprise.raison_sociale}}</option>
+                                        :value="varText.entreprise_id">{{affichierNomEntreprise(varText.entreprise_id)}}</option>
                             </select>
                         
                         </div>
@@ -636,7 +636,7 @@ export default {
 
        computed: {
 
-            ...mapGetters("bienService", [ "gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+            ...mapGetters("bienService", [ "gettersOuverturePersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -652,17 +652,19 @@ export default {
                 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
       
+// affichierNomEntreprise() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
 
-afficherEntrepriseRecep () {
-                return id => {
-                    if (id != "") {
-                        // console.log("Marche lettre inviation marche")
-                        return this.gettersCotationPersonnaliser.filter(idmarche => idmarche.marche_id == id)
-                     }
-             }
-            },
-
-            affichierNomEntreprise() {
+//       if (qtereel) {
+//         return qtereel.raison_sociale;
+//       }
+//       return 0
+//         }
+//       };
+//     },
+    affichierNomEntreprise() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
@@ -674,6 +676,14 @@ afficherEntrepriseRecep () {
         }
       };
     },
+afficherEntrepriseRecep () {
+                return id => {
+                    if (id != "") {
+                        // console.log("Marche lettre inviation marche")
+                        return this.gettersOuverturePersonnaliser.filter(idmarche => idmarche.marche_id == id)
+                     }
+             }
+            },
 
 
 nombreDejourCalcule(){
@@ -760,8 +770,6 @@ getDateFinExécutionValue(){
             //         }
             //     }
             // },
-
-            
       
       },
 
