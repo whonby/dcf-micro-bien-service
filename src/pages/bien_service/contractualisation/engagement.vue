@@ -3,6 +3,847 @@
   	
         <div class="container-fluid">
 
+
+
+ <!--///////////////////////////////////////// DEBUT TABLEAU MANDAT PAR BON DE COMMANDE//////////////////////////////-->
+<!--///////////////////////////////////////// DEBUT TABLEAU MANDAT PAR BON DE COMMANDE//////////////////////////////-->
+  <!--///////////////////////////////////////// debut modal MANDAT PAR BON DE COMMANDE //////////////////////////////-->
+
+
+
+
+     <div id="exampleModalAjouteMandionatApresLiquidat" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter Mandat </h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+        
+            <div class="widget-box">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#tab189">INDENTIFICATION</a>
+                      </li>
+                      <li>
+                        <a data-toggle="tab" href="#tab289">DESCRIPTION DE LA DEMANDE D'ENGAGEMENT</a>
+                      </li>
+                       <li>
+                        <a data-toggle="tab" href="#tab2892">REFERENCE DU FOURNISSEUR OU BENEFICIAIRE</a>
+                      </li>
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab3">Autres Information</a>
+                      </li> -->
+                     
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content">
+                    <div id="tab189" class="tab-pane active">
+                      <tr>
+                        <td>
+                          <label class="control-label">Exercice Budgetaire</label>
+                          
+                              <input    type="text"   class="span3" readonly  v-model="editLiquidation.exo_id" />                
+                             
+                        </td>
+                         <td>
+                          <label class="control-label">Section</label>
+                          
+                              <input    type="text"   class="span5" readonly  :value="afficherSection(editLiquidation.section_id)" />                
+                             
+                        </td>
+                        <td>
+                          <label class="control-label">Programme</label>
+                          
+                              <input    type="text"   class="span3" readonly :value="afficheProgrammeLibelle(afficheProgrammeId(editLiquidation.marche_id))" />                
+                             
+                        </td>
+                        <td>
+                          <label class="control-label">Action</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheActionLibelle(afficheActionId(editLiquidation.marche_id))"/>                              
+                             
+                        </td>
+                        
+                       
+                        
+                      </tr>
+                       <tr>
+                          <td>
+                          <label class="control-label">Activite</label>
+                          
+                              <input    type="text"   class="span3" readonly  :value="afficheActiviteLibelle(afficheActiviteId(editLiquidation.marche_id))" />                              
+                             
+                        </td>
+                         <td>
+                          <label class="control-label">Unite d'administrative</label>
+                          
+                              <input    type="text"   class="span5" readonly  :value="afficheUALibelle(afficheUAId(editLiquidation.marche_id))" />                              
+                             
+                        </td>
+                          <td>
+                          <label class="control-label">Nature de depense</label>
+                          
+                              <input    type="text"   class="span3" readonly :value="afficheGrandNatureLibelle(afficheGrandNatureId(editLiquidation.marche_id))"  />                
+                            
+                        </td>
+                        <td>
+                          <label class="control-label">Plan économique</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="affichePlanEconomiqueLibelle(affichePlanEconomiqueId(editLiquidation.marche_id))" />                
+                             
+                                              
+                        </td>
+                       
+                        
+                      </tr>
+                      <tr>
+                        <td>
+                        <label class="control-label">N° Bon Manuel</label>
+                          
+                              <input    type="text"   class="span3" v-model="editLiquidation.numero_bon_manuel"   />                
+                             
+                        </td>
+                          <td>
+                          <label class="control-label">N° Demande</label>
+                          
+                              <input    type="text"   class="span4"  v-model="editLiquidation.numero_demande" />                
+                             
+                        </td>
+                        <td colspan="2">
+                          <label class="control-label">Imputation Budgetaire</label>
+                          
+                              <input    type="text"   class="span6" readonly  :value="detail_marche.imputation" />                
+                             
+                                              
+                        </td>
+                       
+                        
+                        
+                      </tr>
+                        
+                     
+                    </div>
+                    <div id="tab289" class="tab-pane ">
+                      <tr>
+                          <td colspan="2">
+                         
+                         <label class="control-label">Objet du marche</label>
+                          
+                              <input    type="text"   class="span7" readonly  :value="detail_marche.objet"  />                
+                             
+                                             
+                        </td>
+                         <td>
+                          <label class="control-label">Banque</label>
+                          
+                              <input    type="text"   class="span4"  readonly  :value="afficheLibelleBanque(afficheIdBanque(afficheIdCompteBancaire(editLiquidation.marche_id)))" />                
+                             
+                        </td>
+                         <td>
+                          <label class="control-label">Numero compte bancaire</label>
+                          
+                              <input    type="text"   class="span4"  readonly :value="afficheLibelleCompteBancaire(afficheIdCompteBancaire(editLiquidation.marche_id))" />                
+                             
+                        </td>
+                      </tr>
+                     <tr>
+                        
+
+                         <input
+                    type="hidden"
+                   :value="montantCumuler"
+                    
+                    class="span"
+                    
+                  />
+                   <input
+                    type="hidden"
+                   :value="montantCumulerModifier"
+                    
+                    class="span"
+                    
+                  />
+                          <td colspan="">
+                          <label class="control-label">Mode de reglement</label>
+                          
+                              <input    type="text"   class="span3" readonly   :value="afficheLibelleModePaiemnt(afficheIdModePaiement(editLiquidation.marche_id))" />                
+                             
+                        </td>
+                         <td colspan="">
+                          <label class="control-label">Numero demande engagement</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheDemandeEngagement(editLiquidation.marche_id)" />                
+                             
+                        </td>
+                        <td colspan="">
+                          <label class="control-label">Numero engagement</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheNumeroEngagement(editLiquidation.marche_id)"  />                
+                             
+                        </td>
+                        <td colspan="">
+                          <label class="control-label">Numero bordereau engagement</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheNumeroBordeauEngagement(editLiquidation.marche_id)"  />                
+                             
+                        </td>
+                        
+                      </tr>
+                          <tr>
+                            <td>
+                               <label class="control-label">Numero OP/AT</label>
+                          
+                              <input    type="text"   class="span3" readonly  :value="afficheNumeroOPATEngagement(editLiquidation.marche_id)"  />  
+                            </td>
+                             <td>
+                               <label class="control-label">Réf. Engagement  juridique</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheReferenceEngagement(editLiquidation.marche_id)"  />  
+                            </td>
+                             <td>
+                               <label class="control-label">Numero mandat</label>
+                          
+                              <input    type="text"   class="span4"   v-model="formDataMadat.numero_mandat" required />  
+                            </td>
+                             <td>
+                               <label class="control-label">Numero Bordereau mandat</label>
+                          
+                              <input    type="text"   class="span4"   v-model="formDataMadat.numero_bordereau"  required/>  
+                            </td>
+                          </tr>
+                     
+
+                    </div>
+                     <div id="tab2892" class="tab-pane ">
+                     <tr>
+                        <td colspan="">
+                         
+                         <label class="control-label">Numéro</label>
+                          
+                              <input    type="text"   class="span3" readonly  :value="afficheNumeroFournisseur(afficheIdFournisseur(editLiquidation.marche_id))" />                
+                             
+                                             
+                        </td>
+                        <td>
+                          <label class="control-label">Nom</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheNomFournisseur(afficheIdFournisseur(editLiquidation.marche_id))" />                
+                             
+                        </td>
+                          <td>
+                          <label class="control-label">Telephone</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheTelephoneFournisseur(afficheIdFournisseur(editLiquidation.marche_id))" />                
+                             
+                        </td>
+                        <td>
+                          <label class="control-label">Adresse</label>
+                          
+                              <input    type="text"   class="span4" readonly :value="afficheAdresseFournisseur(afficheIdFournisseur(editLiquidation.marche_id))"  />                
+                             
+                        </td>
+                       
+                        
+                      </tr>
+                      <tr>
+                        <td>
+                           <label class="control-label">Trésor</label>
+                          
+                              <input    type="text"   class="span3" readonly  :value="afficheMontantTresor(editLiquidation.marche_id)" />                
+                             
+                        </td>
+                         <td>
+                           <label class="control-label">Don</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheMontantDon(editLiquidation.marche_id)" />                
+                             
+                        </td>
+                         <td>
+                           <label class="control-label">Emprunt</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheMontantEmprunt(editLiquidation.marche_id)" />                
+                             
+                        </td>
+                         <td>
+                           <label class="control-label">Total</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheMontantAutorise(editLiquidation.marche_id)" />                
+                             
+                        </td>
+                      </tr>
+                           <tr>
+                              <td>
+                          <label class="control-label">Bailleur</label>
+                          
+                              <input    type="text"   class="span4" readonly :value="afficheLibelleBailleur(afficheIdBailleur(editLiquidation.marche_id))"  />                
+                             
+                        </td>
+                        <td colspan="">
+                         
+                         <label class="control-label">Crédit autorisé</label>
+                          
+                              <input    type="text"   class="span3" :value="afficheMontantAutorise(editLiquidation.marche_id)" readonly   />                
+                             
+                                              
+                        </td>
+                        <td>
+                          <label class="control-label">Cumul des demandes</label>
+                          
+                              <input    type="text"   class="span4" readonly :value="sommeEgagementLigne(detail_marche.id)"  />                
+                             
+                        </td>
+                          <td>
+                          <label class="control-label">Disponible</label>
+                          
+                              <input    type="text"   class="span4" readonly :value="restePayeMarche"  />                
+                             
+                        </td>
+                      
+                       
+                        
+                      </tr>
+                     
+
+                    </div>
+                  </div>
+            </div>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="fonctionAjouterLiquidation(formData9)"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+
+
+ <!--///////////////////////////////////////// FIN TABLEAU MANDAT PAR BON DE COMMANDE//////////////////////////////-->
+<!--///////////////////////////////////////// FIN TABLEAU MANDAT PAR BON DE COMMANDE//////////////////////////////-->
+  <!--///////////////////////////////////////// FIN modal MANDAT PAR BON DE COMMANDE //////////////////////////////-->
+
+
+
+
+
+
+
+
+
+
+  <!--///////////////////////////////////////// DEBUT TABLEAU LIQUIDATION//////////////////////////////-->
+<!--///////////////////////////////////////// DEBUT TABLEAU LIQUIDATION//////////////////////////////-->
+  <!--///////////////////////////////////////// debut modal LIQUIDATION //////////////////////////////-->
+
+
+
+<div id="exampleModalLiquidationModification" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Modifier Liquidation </h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+        
+            <div class="widget-box">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#tab189">INDENTIFICATION</a>
+                      </li>
+                      <li>
+                        <a data-toggle="tab" href="#tab289">DESCRIPTION DE LA DEMANDE D'ENGAGEMENT</a>
+                      </li>
+                       <li>
+                        <a data-toggle="tab" href="#tab2892">REFERENCE DU FOURNISSEUR OU BENEFICIAIRE</a>
+                      </li>
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab3">Autres Information</a>
+                      </li> -->
+                     
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content">
+                    <div id="tab189" class="tab-pane active">
+                      <tr>
+                        <td>
+                          <label class="control-label">Exercice Budgetaire</label>
+                          
+                              <input    type="text"   class="span3" readonly  v-model="editLiquidation.exo_id" />                
+                             
+                        </td>
+                         <td>
+                          <label class="control-label">Section</label>
+                          
+                              <input    type="text"   class="span5" readonly  :value="afficherSection(editLiquidation.section_id)" />                
+                             
+                        </td>
+                        <td>
+                          <label class="control-label">Programme</label>
+                          
+                              <input    type="text"   class="span3" readonly :value="afficheProgrammeLibelle(afficheProgrammeId(editLiquidation.marche_id))" />                
+                             
+                        </td>
+                        <td>
+                          <label class="control-label">Action</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheActionLibelle(afficheActionId(editLiquidation.marche_id))"/>                              
+                             
+                        </td>
+                        
+                       
+                        
+                      </tr>
+                       <tr>
+                          <td>
+                          <label class="control-label">Activite</label>
+                          
+                              <input    type="text"   class="span3" readonly  :value="afficheActiviteLibelle(afficheActiviteId(editLiquidation.marche_id))" />                              
+                             
+                        </td>
+                         <td>
+                          <label class="control-label">Unite d'administrative</label>
+                          
+                              <input    type="text"   class="span5" readonly  :value="afficheUALibelle(afficheUAId(editLiquidation.marche_id))" />                              
+                             
+                        </td>
+                          <td>
+                          <label class="control-label">Nature de depense</label>
+                          
+                              <input    type="text"   class="span3" readonly :value="afficheGrandNatureLibelle(afficheGrandNatureId(editLiquidation.marche_id))"  />                
+                            
+                        </td>
+                        <td>
+                          <label class="control-label">Plan économique</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="affichePlanEconomiqueLibelle(affichePlanEconomiqueId(editLiquidation.marche_id))" />                
+                             
+                                              
+                        </td>
+                       
+                        
+                      </tr>
+                      <tr>
+                        <td>
+                        <label class="control-label">N° Bon Manuel</label>
+                          
+                              <input    type="text"   class="span3" v-model="editLiquidation.numero_bon_manuel"   />                
+                             
+                        </td>
+                          <td>
+                          <label class="control-label">N° Demande</label>
+                          
+                              <input    type="text"   class="span4"  v-model="editLiquidation.numero_demande" />                
+                             
+                        </td>
+                        <td colspan="2">
+                          <label class="control-label">Imputation Budgetaire</label>
+                          
+                              <input    type="text"   class="span6" readonly  :value="detail_marche.imputation" />                
+                             
+                                              
+                        </td>
+                       
+                        
+                        
+                      </tr>
+                        
+                     
+                    </div>
+                    <div id="tab289" class="tab-pane ">
+                      <tr>
+                          <td colspan="3">
+                         
+                         <label class="control-label">Objet du marche</label>
+                          
+                              <input    type="text"   class="span7" readonly  :value="detail_marche.objet"  />                
+                             
+                                             
+                        </td>
+                         <td>
+                          <label class="control-label">Banque</label>
+                          
+                              <input    type="text"   class="span7"  readonly  :value="afficheLibelleBanque(afficheIdBanque(afficheIdCompteBancaire(editLiquidation.marche_id)))" />                
+                             
+                        </td>
+                      </tr>
+                     <tr>
+                        
+
+                       
+                          <td colspan="2">
+                          <label class="control-label">Numero compte bancaire</label>
+                          
+                              <input    type="text"   class="span7" readonly  :value="afficheLibelleCompteBancaire(afficheIdCompteBancaire(editLiquidation.marche_id))" />                
+                             
+                        </td>
+                        <td colspan="2">
+                          <label class="control-label">Mode de reglement</label>
+                          
+                              <input    type="text"   class="span7" readonly  :value="afficheLibelleModePaiemnt(afficheIdModePaiement(editLiquidation.marche_id))"  />                
+                             
+                        </td>
+                       
+                        
+                      </tr>
+                          
+                     
+
+                    </div>
+                     <div id="tab2892" class="tab-pane ">
+                     <tr>
+                        <td colspan="">
+                         
+                         <label class="control-label">Numéro</label>
+                          
+                              <input    type="text"   class="span3" readonly  :value="afficheNumeroFournisseur(afficheIdFournisseur(editLiquidation.marche_id))" />                
+                             
+                                             
+                        </td>
+                        <td>
+                          <label class="control-label">Nom</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheNomFournisseur(afficheIdFournisseur(editLiquidation.marche_id))" />                
+                             
+                        </td>
+                          <td>
+                          <label class="control-label">Telephone</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheTelephoneFournisseur(afficheIdFournisseur(editLiquidation.marche_id))" />                
+                             
+                        </td>
+                        <td>
+                          <label class="control-label">Adresse</label>
+                          
+                              <input    type="text"   class="span4" readonly :value="afficheAdresseFournisseur(afficheIdFournisseur(editLiquidation.marche_id))"  />                
+                             
+                        </td>
+                       
+                        
+                      </tr>
+                           <tr>
+                        <td colspan="">
+                         
+                         <label class="control-label">Crédit autorisé</label>
+                          
+                              <input    type="text"   class="span3" :value="afficheMontantAutorise(editLiquidation.marche_id)" readonly   />                
+                             
+                                              
+                        </td>
+                        <td>
+                          <label class="control-label">Cumul des demandes</label>
+                          
+                              <input    type="text"   class="span4" readonly :value="sommeEgagementLigne(detail_marche.id)"  />                
+                             
+                        </td>
+                          <td>
+                          <label class="control-label">Disponible</label>
+                          
+                              <input    type="text"   class="span4" readonly :value="restePayeMarche"  />                
+                             
+                        </td>
+                       
+                       
+                        
+                      </tr>
+                     
+
+                    </div>
+                  </div>
+            </div>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="fonctionModifierLiquidation(editLiquidation)"
+          class="btn btn-primary"
+          href="#"
+         
+        >Modifier</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- DEBUT AJOUT LIQUIDATION -->
+
+
+     <div id="exampleModalLiquidation" class="modal hide tailgrand">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter Liquidation </h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+        
+            <div class="widget-box">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#tab189">INDENTIFICATION</a>
+                      </li>
+                      <li>
+                        <a data-toggle="tab" href="#tab289">DESCRIPTION DE LA DEMANDE D'ENGAGEMENT</a>
+                      </li>
+                       <li>
+                        <a data-toggle="tab" href="#tab2892">REFERENCE DU FOURNISSEUR OU BENEFICIAIRE</a>
+                      </li>
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab3">Autres Information</a>
+                      </li> -->
+                     
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content">
+                    <div id="tab189" class="tab-pane active">
+                      <tr>
+                        <td>
+                          <label class="control-label">Exercice Budgetaire</label>
+                          
+                              <input    type="text"   class="span3" readonly  v-model="editRealiteServiceFait.exercice_budget" />                
+                             
+                        </td>
+                         <td>
+                          <label class="control-label">Section</label>
+                          
+                              <input    type="text"   class="span5" readonly  :value="afficherSection(editRealiteServiceFait.section_id)" />                
+                             
+                        </td>
+                        <td>
+                          <label class="control-label">Programme</label>
+                          
+                              <input    type="text"   class="span3" readonly :value="afficheProgrammeLibelle(afficheProgrammeId(editRealiteServiceFait.marche_id))" />                
+                             
+                        </td>
+                        <td>
+                          <label class="control-label">Action</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheActionLibelle(afficheActionId(editRealiteServiceFait.marche_id))"/>                              
+                             
+                        </td>
+                        
+                       
+                        
+                      </tr>
+                       <tr>
+                          <td>
+                          <label class="control-label">Activite</label>
+                          
+                              <input    type="text"   class="span3" readonly  :value="afficheActiviteLibelle(afficheActiviteId(editRealiteServiceFait.marche_id))" />                              
+                             
+                        </td>
+                         <td>
+                          <label class="control-label">Unite d'administrative</label>
+                          
+                              <input    type="text"   class="span5" readonly  :value="afficheUALibelle(afficheUAId(editRealiteServiceFait.marche_id))" />                              
+                             
+                        </td>
+                          <td>
+                          <label class="control-label">Nature de depense</label>
+                          
+                              <input    type="text"   class="span3" readonly :value="afficheGrandNatureLibelle(afficheGrandNatureId(editRealiteServiceFait.marche_id))"  />                
+                            
+                        </td>
+                        <td>
+                          <label class="control-label">Plan économique</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="affichePlanEconomiqueLibelle(affichePlanEconomiqueId(editRealiteServiceFait.marche_id))" />                
+                             
+                                              
+                        </td>
+                       
+                        
+                      </tr>
+                      <tr>
+                        <td>
+                        <label class="control-label">N° Bon Manuel</label>
+                          
+                              <input    type="text"   class="span3" v-model="formData9.numero_bon_manuel"   />                
+                             
+                        </td>
+                          <td>
+                          <label class="control-label">N° Demande</label>
+                          
+                              <input    type="text"   class="span4"  v-model="formData9.numero_demande" />                
+                             
+                        </td>
+                        <td colspan="2">
+                          <label class="control-label">Imputation Budgetaire</label>
+                          
+                              <input    type="text"   class="span6" readonly  :value="detail_marche.imputation" />                
+                             
+                                              
+                        </td>
+                       
+                        
+                        
+                      </tr>
+                        
+                     
+                    </div>
+                    <div id="tab289" class="tab-pane ">
+                      <tr>
+                          <td colspan="3">
+                         
+                         <label class="control-label">Objet du marche</label>
+                          
+                              <input    type="text"   class="span7" readonly  :value="detail_marche.objet"  />                
+                             
+                                             
+                        </td>
+                         <td>
+                          <label class="control-label">Banque</label>
+                          
+                              <input    type="text"   class="span7"  readonly  :value="afficheLibelleBanque(afficheIdBanque(afficheIdCompteBancaire(editRealiteServiceFait.marche_id)))" />                
+                             
+                        </td>
+                      </tr>
+                     <tr>
+                        
+
+                       
+                          <td colspan="2">
+                          <label class="control-label">Numero compte bancaire</label>
+                          
+                              <input    type="text"   class="span7" readonly  :value="afficheLibelleCompteBancaire(afficheIdCompteBancaire(editRealiteServiceFait.marche_id))" />                
+                             
+                        </td>
+                        <td colspan="2">
+                          <label class="control-label">Mode de reglement</label>
+                          
+                              <input    type="text"   class="span7" readonly  :value="afficheLibelleModePaiemnt(afficheIdModePaiement(editRealiteServiceFait.marche_id))"  />                
+                             
+                        </td>
+                       
+                        
+                      </tr>
+                          
+                     
+
+                    </div>
+                     <div id="tab2892" class="tab-pane ">
+                     <tr>
+                        <td colspan="">
+                         
+                         <label class="control-label">Numéro</label>
+                          
+                              <input    type="text"   class="span3" readonly  :value="afficheNumeroFournisseur(afficheIdFournisseur(editRealiteServiceFait.marche_id))" />                
+                             
+                                             
+                        </td>
+                        <td>
+                          <label class="control-label">Nom</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheNomFournisseur(afficheIdFournisseur(editRealiteServiceFait.marche_id))" />                
+                             
+                        </td>
+                          <td>
+                          <label class="control-label">Telephone</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheTelephoneFournisseur(afficheIdFournisseur(editRealiteServiceFait.marche_id))" />                
+                             
+                        </td>
+                        <td>
+                          <label class="control-label">Adresse</label>
+                          
+                              <input    type="text"   class="span4" readonly :value="afficheAdresseFournisseur(afficheIdFournisseur(editRealiteServiceFait.marche_id))"  />                
+                             
+                        </td>
+                       
+                        
+                      </tr>
+                           <tr>
+                        <td colspan="">
+                         
+                         <label class="control-label">Crédit autorisé</label>
+                          
+                              <input    type="text"   class="span3" :value="afficheMontantAutorise(editRealiteServiceFait.marche_id)" readonly   />                
+                             
+                                              
+                        </td>
+                        <td>
+                          <label class="control-label">Cumul des demandes</label>
+                          
+                              <input    type="text"   class="span4" readonly :value="sommeEgagementLigne(detail_marche.id)"  />                
+                             
+                        </td>
+                          <td>
+                          <label class="control-label">Disponible</label>
+                          
+                              <input    type="text"   class="span4" readonly :value="restePayeMarche"  />                
+                             
+                        </td>
+                       
+                       
+                        
+                      </tr>
+                     
+
+                    </div>
+                  </div>
+            </div>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="fonctionAjouterLiquidation(formData9)"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+  <!--///////////////////////////////////////// FIN  TABLEAU LIQUIDATION//////////////////////////////-->
+<!--///////////////////////////////////////// FIN  TABLEAU LIQUIDATION//////////////////////////////-->
+  <!--///////////////////////////////////////// FIN  modal LIQUIDATION //////////////////////////////-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--///////////////////////////////////////// DEBUT TABLEAU REALITE SERVICE FAIT//////////////////////////////-->
 <!--///////////////////////////////////////// DEBUT TABLEAU REALITE SERVICE FAIT//////////////////////////////-->
   <!--///////////////////////////////////////// debut modal REALITE SERVICE FAIT //////////////////////////////-->
@@ -16,53 +857,53 @@
           <tr>
               <td>
                     <label class="control-label">Ministere</label>
-                      <input type="text" v-model="editEngagement.section_id" class="span4" readonly/>
+                      <input type="text" v-model="editRealiteServiceFait.section_id" class="span4" readonly/>
               </td>
                <td>
                     <label class="control-label">Fournisseurs</label>
-                      <input type="text" v-model="editEngagement.facture_id" class="span4" readonly/>
+                      <input type="text" v-model="editRealiteServiceFait.facture_id" class="span4" readonly/>
               </td>
                <td>
                     <label class="control-label">Adresse du fournisseur</label>
-                      <input type="text" v-model="editEngagement.facture_id" class="span4" readonly/>
+                      <input type="text" v-model="editRealiteServiceFait.facture_id" class="span4" readonly/>
               </td>
                <td>
                     <label class="control-label">Numero du facture</label>
-                      <input type="text" v-model="editEngagement.facture_id" class="span4" readonly/>
+                      <input type="text" v-model="editRealiteServiceFait.facture_id" class="span4" readonly/>
               </td>
           </tr>
           <tr>
                <td>
                     <label class="control-label">Date facture</label>
-                      <input type="date" v-model="editEngagement.facture_id" class="span4" readonly/>
+                      <input type="date" v-model="editRealiteServiceFait.facture_id" class="span4" readonly/>
               </td>
               <td colspan="2">
                     <label class="control-label">Objet de la depense</label>
-                      <input type="text" v-model="editEngagement.marche_id" class="span8" readonly/>
+                      <input type="text" v-model="editRealiteServiceFait.marche_id" class="span8" readonly/>
               </td>
               
               
                <td>
                     <label class="control-label">Date de reception</label>
-                      <input type="date" v-model="editEngagement.marche_id" class="span4" readonly/>
+                      <input type="date" v-model="editRealiteServiceFait.marche_id" class="span4" readonly/>
               </td>
           </tr>
           <tr>
               <td>
                     <label class="control-label">Ordre de paiement</label>
-                      <input type="text" v-model="editEngagement.marche_id" class="span4" readonly/>
+                      <input type="text" v-model="editRealiteServiceFait.marche_id" class="span4" readonly/>
               </td>
                <td>
                     <label class="control-label">Date de paiement</label>
-                      <input type="text" v-model="editEngagement.section_id" class="span4" readonly/>
+                      <input type="text" v-model="editRealiteServiceFait.section_id" class="span4" readonly/>
               </td>
                <td>
                     <label class="control-label">Imputation budgetaire</label>
-                      <input type="text" v-model="editEngagement.marche_id" class="span4" readonly/>
+                      <input type="text" v-model="editRealiteServiceFait.marche_id" class="span4" readonly/>
               </td>
                <td>
                     <label class="control-label">Montant</label>
-                      <input type="text" v-model="editEngagement.marche_id" class="span4" readonly/>
+                      <input type="text" v-model="editRealiteServiceFait.marche_id" class="span4" readonly/>
               </td>
           </tr>
       </table>
@@ -80,25 +921,6 @@
    <!--///////////////////////////////////////// fin TABLEAU REALITE SERVICE FAIT//////////////////////////////-->
 <!--///////////////////////////////////////// fin TABLEAU REALITE SERVICE FAIT//////////////////////////////-->
   <!--///////////////////////////////////////// fin modal REALITE SERVICE FAIT //////////////////////////////-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1913,9 +2735,9 @@
                             <div class="controls">
                               <select v-model="editEngagement.decision_cf">
                                 <option value="0">Attente</option>
-                              <option value="1">Viser</option>
-                             <option value="2">Différer</option>
-                             <option value="3">Réjeter</option>
+                              <option value="1">Visé</option>
+                             <option value="2">Différé</option>
+                             <option value="3">Réjeté</option>
                             
     
     </select>
@@ -1982,9 +2804,9 @@
                             <div class="controls">
                               <select v-model="editRealiteServiceFait.decision_service_beneficiaire">
                                 <option value="0">Attente</option>
-                              <option value="1">Viser</option>
-                             <option value="2">Différer</option>
-                             <option value="3">Réjeter</option>
+                              <option value="1">Visé</option>
+                             <option value="2">Différé</option>
+                             <option value="3">Réjeté</option>
                             
     
     </select>
@@ -2042,9 +2864,9 @@
                             <div class="controls">
                               <select v-model="editRealiteServiceFait.decision_controleur_financier">
                                 <option value="0">Attente</option>
-                              <option value="1">Viser</option>
-                             <option value="2">Différer</option>
-                             <option value="3">Réjeter</option>
+                              <option value="1">Visé</option>
+                             <option value="2">Différé</option>
+                             <option value="3">Réjeté</option>
                             
     
     </select>
@@ -2089,6 +2911,179 @@
 
 
 
+<div id="exampleDecisionControlleurFinancierLiquidation" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter Observation du Controleur Financier</h3>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" >
+          <div class="control-group">
+                            <label class="control-label">Décision Controleur Financier </label>
+                            <div class="controls">
+                              <select v-model="editLiquidation.decision_controleur_financier">
+                                <option value="0">Attente</option>
+                              <option value="1">Visé</option>
+                             <option value="2">Différé</option>
+                             <option value="3">Réjeté</option>
+                            
+    
+    </select>
+                           
+                            </div>
+                          </div>
+                        
+                          <div class="control-group">
+                            <label class="control-label">Observation Controleur Financier</label>
+                            <div class="controls">
+                              <textarea  class="span" row = "6" v-model="editLiquidation.observation_controleur_financier">
+                              </textarea>
+                            </div>
+                          </div>
+                           <div class="control-group">
+                            <label class="control-label">Date Observation:</label>
+                            <div class="controls">
+                              <input type="date" class="span"  v-model="editLiquidation.date_controleur_financier"/>
+                             
+                            </div>
+                          </div>
+                              <div class="control-group">
+                            <label class="control-label">Nom et prenoms</label>
+                            <div class="controls">
+                              <input type="text" class="span"  v-model="editLiquidation.nom_controleur_financier"/>
+                             
+                            </div>
+                          </div>
+         
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="fonctionModifierLiquidation(editLiquidation)"
+          class="btn btn-primary"
+          href="#"
+         
+        >Modifier</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+
+
+<div id="exampleDecisionEmetteurLiquidation" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter Observation de l' emetteur</h3>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" >
+          <div class="control-group">
+                            <label class="control-label">Décision Emetteur </label>
+                            <div class="controls">
+                              <select v-model="editLiquidation.decision_emetteur">
+                                <option value="0">Attente</option>
+                              <option value="1">Visé</option>
+                             <option value="2">Différé</option>
+                             <option value="3">Réjeté</option>
+                            
+    
+    </select>
+                           
+                            </div>
+                          </div>
+                        
+                          <div class="control-group">
+                            <label class="control-label">Observation Emetteur</label>
+                            <div class="controls">
+                              <textarea  class="span" row = "6" v-model="editLiquidation.observation_emetteur">
+                              </textarea>
+                            </div>
+                          </div>
+                           <div class="control-group">
+                            <label class="control-label">Date Observation:</label>
+                            <div class="controls">
+                              <input type="date" class="span"  v-model="editLiquidation.date_emetteur"/>
+                             
+                            </div>
+                          </div>
+                              <div class="control-group">
+                            <label class="control-label">Nom et prenoms</label>
+                            <div class="controls">
+                              <input type="text" class="span"  v-model="editLiquidation.nom_emetteur"/>
+                             
+                            </div>
+                          </div>
+         
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="fonctionModifierLiquidation(editLiquidation)"
+          class="btn btn-primary"
+          href="#"
+         
+        >Modifier</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+
+
+
+<div id="exampleDecisionOrdonnateurLiquidation" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter Observation de l' Ordonnateur</h3>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" >
+          <div class="control-group">
+                            <label class="control-label">Décision Ordonnateur </label>
+                            <div class="controls">
+                              <select v-model="editLiquidation.decision_ordonnateur">
+                                <option value="0">Attente</option>
+                              <option value="1">Visé</option>
+                             <option value="2">Différé</option>
+                             <option value="3">Réjeté</option>
+                            
+    
+    </select>
+                           
+                            </div>
+                          </div>
+                        
+                          <div class="control-group">
+                            <label class="control-label">Observation Ordonnateur</label>
+                            <div class="controls">
+                              <textarea  class="span" row = "6" v-model="editLiquidation.observation_ordonnateur">
+                              </textarea>
+                            </div>
+                          </div>
+                           <div class="control-group">
+                            <label class="control-label">Date Observation:</label>
+                            <div class="controls">
+                              <input type="date" class="span"  v-model="editLiquidation.date_ordonnateur"/>
+                             
+                            </div>
+                          </div>
+                              <div class="control-group">
+                            <label class="control-label">Nom et prenoms</label>
+                            <div class="controls">
+                              <input type="text" class="span"  v-model="editLiquidation.nom_ordonnateur"/>
+                             
+                            </div>
+                          </div>
+         
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="fonctionModifierLiquidation(editLiquidation)"
+          class="btn btn-primary"
+          href="#"
+         
+        >Modifier</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
 <!--///////////////////////////////////////// FIN TABLEAU VALIDATION//////////////////////////////-->
 <!--///////////////////////////////////////// FIN TABLEAU VALIDATION//////////////////////////////-->
 <!--///////////////////////////////////////// FIN TABLEAU VALIDATION//////////////////////////////-->
@@ -2898,11 +3893,13 @@
                         <table class="table table-striped table-bordered" v-if="detail_marche">
                             <thead>
                             <tr>
-                               
-                                <th>Objet marche</th>
-                                <th>Reference marche</th>
-                                <th>Montant marche</th>
-                                <th>Type de marche</th>
+                               <th>Reference marché</th>
+                               <th>Numéro marché</th>
+                                <th>Objet marché</th>
+                                
+                                <th>Montant de base</th>
+                                <th>Type de marché</th>
+                                <th>Procédure de passation </th>
                                 <th>Unite administrative</th>
                                 <th>Activité</th>
                     <th>Imputation</th>
@@ -2912,14 +3909,18 @@
                             </thead>
                             <tbody>
                             <tr>
-                                
-                                <td class="taskDesc">{{detail_marche.objet}}</td>
                                 <td class="taskStatus">{{detail_marche.reference_marche}}</td>
+                                
+                                <td class="taskStatus">{{afficheNumeroMarche(detail_marche.id)}}</td>
+                                 <td class="taskDesc">{{detail_marche.objet}}</td>
                                 <td class="taskOptions">
                                     {{formatageSomme(parseFloat(afficheMontantReelMarche(detail_marche.id)))}}
                                 </td>
                                 <td class="taskOptions">
                                     {{detail_marche.type_marche.libelle}}
+                                </td>
+                                <td class="taskOptions">
+                                    {{afficheModePassation(detail_marche.procedure_passation_id)}}
                                 </td>
                                 <td class="taskOptions">
                                     {{detail_marche.objetUniteAdministrative.libelle}}
@@ -2986,9 +3987,9 @@
                            
                                 <!-- <th title="">Adresse fournisseur</th> -->
                                
-                                <th title="">Numero facture</th>
-                                 <th>Date facture</th>
-                                  <!-- <th title="">Ordre de paiement</th> -->
+                                <th title="">Montant Autorisé</th>
+                                
+                                  <th title="">Disponible</th>
                                   <!-- <th>Date paiement</th> -->
                                   <th>Imputation budgetaire</th>
                                 
@@ -3002,6 +4003,141 @@
                                     </thead>
                                     <tbody>
                                     
+                <tr 
+                    class="odd gradeX"
+                    v-for="(liquida, index) in afficheMarcheLiquidation(detail_marche.id)"
+                    :key="liquida.id"
+                  >
+                    <!-- <template v-if="Engage.decision_cf == 1"> -->
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.exo_id || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.numero_bon_manuel || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.numero_demande || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{afficheMontantAutorise(liquida.marche_id) || 0}}</td>
+                     <td @dblclick="afficherModalModificationLiquidation(index)">{{sommeEgagementLigne(liquida.marche_id) || 0 }}</td> 
+                     
+                     
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.imputation_budgetaire || 'Non renseigné'}}</td>
+                   
+                     <td>
+                        <button v-if="liquida.decision_emetteur == 1"  class="btn  btn-success" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      <span    >Visé avec Observation</span>
+                      
+                      </button>
+                       <button v-else-if="liquida.decision_emetteur == 2" class="btn  btn-warning" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="liquida.decision_emetteur == 3" class="btn  btn-danger" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                   
+                  <td v-if="liquida.decision_emetteur == 1">
+                        <button v-if="liquida.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                    <span    >Visé avec Observation</span>
+                      
+                      </button>
+                       <button v-else-if="liquida.decision_controleur_financier == 2" class="btn  btn-warning" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="liquida.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                      <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                      
+                    </td>
+                     <td v-else>
+                        <h1 style="font-size:12px;color:red;">Observation non activé  </h1>
+                    </td>
+                     <td v-if="liquida.decision_controleur_financier == 1">
+                        <button v-if="liquida.decision_ordonnateur == 1"  class="btn  btn-success" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      <span    >Visé avec Observation</span>
+                      
+                      </button>
+                       <button v-else-if="liquida.decision_ordonnateur == 2" class="btn  btn-warning" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="liquida.decision_ordonnateur == 3" class="btn  btn-danger" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                      
+                    </td>
+                    <td v-else>
+                        <h1 style="font-size:12px;color:red;">Observation non activé  </h1>
+                    </td>
+                     <td>
+                        <!-- <router-link :to="{ name: 'DetailEngagement', params: {id_detail_engagement:realiteService.id}}"
+                class="btn btn-default " title="Detail Engagement">
+                  <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link>  -->
+                    <button v-if="liquida.decision_ordonnateur == 1" class="btn " @click="afficherModalAjouterMandatApresLiquidation(index)" title="Ajouter Mandat">
+                        <span>
+                          <i class="icon icon-book"></i>
+                        </span>
+                      </button>
+                      <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Mandat">
+                        <span>
+                          <i class="icon icon-book"></i>
+                        </span>
+                      </button> -->
+                      <button class="btn btn-danger" @click="supprimerEngagement(liquida.id)">
+                        <span>
+                          <i class="icon icon-trash"></i>
+                        </span>
+                      </button>
+                    </td>
+                     <!-- </template>
+                      <template v-else>
+                 <td colspan="10">   <h1 style="color:red;font-size:15px;text-align:center">veuillez valider l' engagement svp?</h1></td>
+                   
+                     </template> -->
+                    
+                  </tr>
                
                                     </tbody>
                                 </table>
@@ -3053,13 +4189,13 @@
                                          <th title="">Section</th>
                               
                                  <th title="">Fournisseur</th>
-                                <th title="">Numero facture</th>
+                                <th title="">N°facture</th>
                                  <th>Date facture</th>
-                                  <th>Imputation budgetaire</th>
+                                  <th>Imputation</th>
                                 <th>Montant</th>
                                 <!-- <th>Service béneficiaire</th> -->
-                                <th>Observation service beneficiaire</th>
-                                <th>Observation Controleur financier</th>
+                                <th title="Observation service beneficiaire">Observation S-B</th>
+                                <th title="Observation Controleur financier">Observation CF</th>
                                 <th>Action</th>
                                     </tr>
                                     </thead>
@@ -3071,13 +4207,13 @@
                   >
                     <!-- <template v-if="Engage.decision_cf == 1"> -->
                     <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{realiteService.exercice_budget || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{realiteService.section_id || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{realiteService.facture_id || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{realiteService.facture_id || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{realiteService.facture_id || 'Non renseigné'}}</td> 
+                    <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{afficherSection(realiteService.section_id) || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{afficheNomFournisseur(afficheidFournisseurFacture(realiteService.facture_id)) || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{afficheNumeroFacture(realiteService.facture_id) || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{afficheDateFacture(realiteService.facture_id) || 'Non renseigné'}}</td> 
                      
                     <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{detail_marche.imputation  || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{realiteService.montant || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{formatageSomme(parseFloat(realiteService.montant)) || 'Non renseigné'}}</td>
                      <td>
                         <button v-if="realiteService.decision_service_beneficiaire == 1"  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
                      
@@ -3137,7 +4273,7 @@
                       
                     </td>
                     <td v-else>
-                        <h1 style="font-size:12px;color:red;text-align:center">Avis préalable du bénéficiaire  </h1>
+                        <h1 style="font-size:12px;color:red;text-align:center">Observation non activé  </h1>
                     </td>
                      <td>
                         <router-link :to="{ name: 'DetailEngagement', params: {id_detail_engagement:realiteService.id}}"
@@ -7227,722 +8363,6 @@
 
 
 
-<!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
-    <div id="exampleModalMandatEngagement" class="modal hide taillemodal6">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Mandat</h3>
-      </div>
-     <div class="table-responsive text-nowrap taillemodal61">
-              <table class="table table-bordered table-striped ">
-                <div class="widget-box">
-                  <div class="widget-title">
-                    <ul class="nav nav-tabs">
-                      <li class="active">
-                        <a data-toggle="tab" href="#tab89">INFORMATION</a>
-                      </li>
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab2">TYPE ENGAGEMENT </a>
-                      </li> -->
-                      
-                      <li>
-                        <a data-toggle="tab" href="#tab56">INFO FOURNISSEUR / IMPUTATION BUDGETAIRE</a>
-                      </li>
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab32">IMPUTATION BUDGETAIRE</a>
-                      </li> -->
-                       <!-- <li>
-                        <a data-toggle="tab" href="#2">Valeur Calculer</a>
-                      </li> -->
-                    </ul>
-                  </div>
-                  <div class="widget-content tab-content tailfenet">
-                    <!--ongle identification-->
-                    <div id="tab89" class="tab-pane active">
-                      <tr>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Exercice Budgetaire</label>
-                            
-                               
-                             <div class="controls">
-                              <input
-                                type="text"
-                                class="span4"
-                               readonly
-                              :value="anneeAmort"
-                              />
-                            </div>
-                          </div>
-                        </td>
-                          <td>
-                         <div class="control-group">
-                            <label class="control-label">Section</label>
-                            <div class="controls">
-                             <input
-                                type="text"
-                                class="span4"
-                               readonly
-                            :value="afficherSecti"
-                              
-                              />
-                            </div>
-                          </div>
-                          
-                        </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Programme/dotation</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                class="span4"
-                                readonly
-                            :value="afficherProgDot"
-                              
-                              />
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                         <div class="control-group">
-                            <label class="control-label">Nature depense</label>
-                             <div class="controls">
-                                 <input
-                                type="text"
-                                class="span4"
-                                readonly
-                            :value="CodeGdeNatureDep(detail_marche.gdenature_id)"
-                              
-                              />
-                          
-                           <input
-                                type="hidden"
-                                class="span"
-                               
-                             :value="detail_marche.id"
-                              />
-                               <input
-                                type="hidden"
-                                class="span"
-                               
-                             :value="montantMarcheAvecAvenant"
-                              />
-                               <input
-                                type="hidden"
-                                class="span"
-                               
-                             v-model="formData.val"
-                              />
-                              </div>
-                              </div>
-                        </td>
-                        </tr>
-                         <tr>
- 
-                          <td>
-                           <div class="control-group">
-                            <label class="control-label">Action</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                class="span4"
-                                readonly
-                            :value="afficherActi"
-                              
-                              />
-                              
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                         <div class="control-group">
-                            <label class="control-label">Activite</label>
-                            <div class="controls">
-                             
-                               <input
-                                type="text"
-                                class="span4"
-                                readonly
-                            :value="afficheractivite(detail_marche.activite_id)"
-                              
-                              />
-                            </div>
-                          </div>
-                          </td>
-                          <td>
-                             <div class="control-group">
-                            <label class="control-label">Unite administrative</label>
-                            <div class="controls">
-                               <input
-                                type="text"
-                                class="span4"
-                                readonly
-                            :value="afficherUniteAdmin(detail_marche.unite_administrative_id)"
-                              
-                              />
-                              
-                            </div>
-                          </div>
-                          
-                        </td>
-                          <td>
-                           <div class="control-group">
-                            <label class="control-label">Type Procedure</label>
-                            
-                               <div class="controls">
-                              <input
-                                type="text"
-                                class="span4"
-                               readonly
-                             :value="recupererTypeProcedure"
-                              
-                              />
-                               
-                               
-                             
-
-                              
-                            </div>
-                          </div>
-                        </td>
-                        </tr>
-                         
-                        <tr>
-                        
-                        
-                               <input
-                                type="hidden"
-                                class="span4"
-                               
-                            :value="idBudgetaire"
-                              
-                              />
-                            <!-- </div>
-                          </div>
-                        </td> -->
-                        
-                       
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Type de facture</label>
-                            <div class="controls">
-                              <!-- <input
-                                  type="text"
-                                  class="span4"
-                                  v-model="formData.typefact"
-                                  readonly
-                                /> -->
-                               <select v-model="formData.typefact" class="span4">
-                                
-                                <option value></option>
-                                    <option value="Facture definitive">Facture definitive</option>
-                                     
-                               
-                              </select>
-                            </div>
-                          </div>
-                        </td>
-                          <td >
-                         <div class="control-group">
-                            <label class="control-label">Numero demande engagement</label>
-                            <div class="controls">
-                              <input type="text" class="span4" v-model="editEngagement.numero_demande_engage" readonly/>
-                              <!-- <input type="hidden" class="span4" v-model="formDataEngage.facture_id" readonly/> -->
-                           
-                            </div>
-                          </div>
-                        </td>
-                       
-                         <td >
-                         <div class="control-group">
-                            <label class="control-label">Numero engagement</label>
-                            <div class="controls">
-                              <input type="text" class="span4" v-model="editEngagement.numero_engage" readonly/>
-                               <!-- <input type="hidden" class="span4" v-model="formDataEngage.id" readonly/> -->
-                              
-                            </div>
-                          </div>
-                        </td>
-                        <td >
-                         <div class="control-group">
-                            <label class="control-label">Numero bordereau engagement</label>
-                            <div class="controls">
-                              <input type="text" class="span4" v-model="editEngagement.numero_bordereau" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                     
-                         
-                
-                      </tr>
-
-                    
-                 
-                  <tr>
-                          <td>
-                         <div class="control-group">
-                            <label class="control-label">Numero mandat</label>
-                            <div class="controls">
-                              <input type="text" class="span4" v-model="formData.numero_mandat"/>
-                            </div>
-                          </div>
-                        </td>
-                        
-                        <td>
-                         <div class="control-group">
-                            <label class="control-label">Numero Bordereau mandat</label>
-                            <div class="controls">
-                              <input type="text" class="span4" v-model="formData.numero_bordereau"/>
-                            </div>
-                          </div>
-                        </td>
-                          <td>
-                            <div class="control-group">
-                              <label class="control-label">Numero OP/AT</label>
-                              <div class="controls">
-                                <input
-                                  type="text"
-                                  class="span4"
-                                  v-model="formData.numero_op"
-                                />
-                              </div>
-                            </div>
-                          </td>
-                        
-                         <td>
-                            <div class="control-group">
-                              <label class="control-label">Réf. Engagement  juridique</label>
-                              <div class="controls">
-                                <input
-                                  type="text"
-                                  class="span4"
-                                  v-model="formData.ref_juridique"
-                                />
-                              </div>
-                            </div>
-                          </td>
-                         
-                        
-                        
-                           
-                         
-                      </tr>
-                       <tr>
-                        <td>
-                         <div class="control-group">
-                            <label class="control-label">Date de reception dossier</label>
-                            <div class="controls">
-                              <input type="date" class="span4" v-model="formData.date_reception_cf"/>
-                            </div>
-                          </div>
-                        </td>
-                       <input
-                    type="hidden"
-                   :value="montantCumuler"
-                    
-                    class="span"
-                    
-                  />
-                      <input
-                    type="hidden"
-                   :value="montantCumulerModifier"
-                    
-                    class="span"
-                    
-                  />
-                        
-                          
-                        
-                       
-                        
-                       
-                        <!-- <td>
-                             <div class="control-group">
-                            <label class="control-label">Bailleur</label>
-                            <div class="controls">
-                              <input type="text" class="span" v-model="formData.Bailleur" />
-                            </div>
-                          </div>
-                        </td> -->
-                       
-                      </tr>
-                      <tr>
-                          
-                             
-                      </tr>
-                    </div>
-                    <!--ongle descriptif-->
-                    <!-- <div id="tab2" class="tab-pane">
-                      
-
-                      
-                       
-                     
-                     
-                      <tr>
-                         
-                         
-                      
-                        
-                       
-                       
-                      </tr>
-                      
-                    </div> -->
-                    <!--ongle 3 -->
-
-
-<!--ongle descriptif-->
-                    <div id="tab56" class="tab-pane">
-                      
-
-                      
-                        <tr>
-                         <td>
-                         <div class="control-group">
-                            <label class="control-label">Mode de paiement</label>
-                            <div class="controls">
-                              <!-- <select v-model="formData.mod_paiement_engage" class="span4">
-                                
-                                <option value="0">Bon de caisse</option>
-                                    <option value="1">Chèque Spécial Trésor</option>
-                                       <option value="2">Chèque Spécial Enregistrement</option>
-                                    <option value="3">Virement</option>
-                                     <option value="4">Chèque Spécial Douanes</option>
-                                      <option value="5">Paiement direct par bailleur de fonds</option>
-                                       <option value="6">Autres</option>
-                               
-                              </select> -->
-                               <input type="text" class="span4" :value="afficheModePaiement(editEngagement.mod_paiement_engage)" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                         
-                       <td>
-                         <div class="control-group">
-                            <label class="control-label">N° compte contribuable</label>
-                            <div class="controls">
-                             <div class="controls">
-                              <input type="text" class="span4" :value="NumeroFournisseur" readonly/>
-                               
-                            </div>
-                              
-                            </div>
-                          </div>
-                        </td>
-                        
-                          
-                       
-                       
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Nom entreprise</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="nomFournisseur" readonly/>
-                               
-                            </div>
-                          </div>
-                        </td>
-                          <td>
-                          <div class="control-group">
-                            <label class="control-label">Adresse</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                class="span4"
-                                placeholder="Saisir adresse_entreprise"
-                                :value="AdresseFournisseur"
-                                readonly
-                              />
-                            </div>
-                          </div>
-                        </td>
-                       
-                       
-                      </tr>
-                     
-                      <tr>
-                        
-                       <input
-                    type="hidden"
-                   :value="montantCumuler"
-                    
-                    class="span"
-                    
-                  />
-                      <input
-                    type="hidden"
-                   :value="montantCumulerModifier"
-                    
-                    class="span"
-                    
-                  />
-                        
-                          
-                        
-                       
-                        
-                       
-                        <!-- <td>
-                             <div class="control-group">
-                            <label class="control-label">Bailleur</label>
-                            <div class="controls">
-                              <input type="text" class="span" v-model="formData.Bailleur" />
-                            </div>
-                          </div>
-                        </td> -->
-                       
-                      </tr>
-                      <tr>
-                         
-                         
-                      
-                        
-                       
-                       
-                      </tr>
-                      <tr>
-                            <td>
-                         <div class="control-group">
-                            <label class="control-label">Objet de la dépense</label>
-                            <div class="controls">
-                              <input type="text" class="span4" v-model="afficherObjetFactureEngagement" readonly/>
-                               <input type="hidden" class="span10" v-model="formData.id" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                            <div class="control-group">
-                              <label class="control-label">Numéro compte</label>
-                             
-                              <div class="controls">
-                                <input
-                                  type="text"
-                                  class="span"
-                                  :value="afficheCompte(editEngagement.compte_id)"
-                                
-                                 readonly
-                                />
-                              </div>
-                            </div>
-                          </td>
-                         <td>
-                            <div class="control-group">
-                              <label class="control-label">piece justificative</label>
-                              <div class="controls">
-                                <input
-                                  type="file"
-                                  class="span"
-                                 
-                                />
-                              </div>
-                            </div>
-                          </td>
-                             <td>
-                             <div class="control-group">
-                            <label class="control-label">Bailleur</label>
-                            
-                             <!-- <select v-model="formData.bailler_id" class="span4">
-                                <option
-                                  v-for="fam in sources_financements"
-                                  :key="fam.id"
-                                  :value="fam.id"
-                                >{{fam.libelle}}</option>
-                              </select> -->
-                               <input type="text" class="span4" :value="afficheBailleur(editEngagement.bailler_id)" readonly/>
-                          </div>
-                        </td> 
-                      </tr>
-                      <tr>
-                       <td>
-                         <div class="control-group">
-                            <label class="control-label">Total général</label>
-                            <div class="controls">
-                              <input type="number" class="span4" :value="editEngagement.total_general" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                       
-                        <td>
-                         <div class="control-group">
-                            <label class="control-label">Trésor</label>
-                            <div class="controls">
-                              <input type="number" class="span4" v-model="editEngagement.montant_tresor" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                          <td>
-                          <div class="control-group">
-                            <label class="control-label">Don</label>
-                            <div class="controls">
-                              <input type="number" class="span4" v-model="editEngagement.montant_don" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                             <div class="control-group">
-                            <label class="control-label">Emprunt</label>
-                            <div class="controls">
-                              <input type="number" class="span4" v-model="editEngagement.montant_emprunt" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                        <tr>
-                        
-                        
-                       
-                        
-                        <td>
-                           <div class="control-group">
-                            <label class="control-label">Ligne Budgetaire</label>
-                            <div class="controls">
-                              <!-- <select v-model="formData.ligne_budgetaire_id" class="span4"> -->
-                                <!-- <option
-                                  v-for="fam in ligneBudgetaire(detail_marche.id)"
-                                  :key="fam.id"
-                                  :value="fam.economique_id"
-                                >{{fam.afficheEconomique.code}}-{{fam.afficheEconomique.libelle}}</option>
-                              </select> -->
-                               <div class="controls">
-                              <input type="text" class="span4" :value="afficheligneEconomiqueBudgetaire(ligneEconomiqueBudgetaire)" readonly/>
-                            </div>
-                            </div>
-                          </div>
-                        </td>
-                        <td >
-                          <div class="control-group">
-                            <label class="control-label">Code Budgetaire</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="CodeBudgetaire" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                       <td>
-                          <div class="control-group">
-                            <label class="control-label">Numéro Facture</label>
-                            <div class="controls">
-                              <input type="text" class="span4" v-model="affichiernumEngagement" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Montant Facture</label>
-                            <div class="controls">
-                              <input type="text" class="span4" v-model="afficherMontantEngagement" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                       
-                      </tr>
-                      <tr>
-                         <td>
-                          <div class="control-group">
-                            <label class="control-label">Dotation Iniatiale</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="dotationInite(detail_marche.imputation).Dotation_Initiale" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                         <td>
-                          <div class="control-group">
-                            <label class="control-label">Cumul engagements antérieurs </label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="sommeEgagementLigne(detail_marche.id)" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                           <td>
-                          <div class="control-group">
-                            <label class="control-label">Crédits Autorisés(Engagement actuel)</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="editEngagement.total_general" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                       
-                        <td>
-                                                    <div class="control-group">
-                            <label class="control-label">Engagement cumulé </label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="montantCumulerEngagementMandat" readonly/>
-                              <input type="hidden" class="span4" :value="sommeEgagementLigneTableau(detail_marche.id)" readonly/>
-                              
-                            </div>
-                          </div>
-                        </td>
-                        
-                        
-                      
-                      </tr>
-                        <tr>
-                           <td >
-                          <div class="control-group">
-                            <label class="control-label">Dotation disponible</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="montantDisponibleBudgetMandat" readonly/>
-                            </div> 
-                          </div>
-                          
-                        </td>
-                                                 <td>
-                          <div class="control-group">
-                            <label class="control-label">Dotation disponible anterieure</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="dotationDisponibleAnterieure" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                           <td>
-                          <div class="control-group">
-                            <label class="control-label">Montant marché</label>
-                            <div class="controls">
-                              <input type="text" class="span4" v-model="montantMarcheAvecAvenant" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Disponible marché</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="restePayeMarcheMandat" readonly/>
-                            </div>
-                          </div>
-                        </td>
-
-                         <!-- <td>
-                          <div class="control-group">
-                            <label class="control-label">Disponible</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="montantDisponibleBudget" readonly/>
-                            </div> 
-                          </div>
-                        </td> -->
-                       
-                      </tr>
-                    </div>
-                    <!--ongle 3 -->
-                
-                       
-                  </div>
-                  <br />
-                  <div align="right">
-                    <div class="controls">
-                      <div data-toggle="buttons-checkbox" class="btn-group">
-                        <a
-                          class="btn btn-primary"
-                          @click.prevent="ajouterMandatEngagement"
-                        >Valider</a>
-                        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </table>
-            </div>
-    </div>
     <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
 
 
@@ -7978,6 +8398,34 @@
                     }
 
                 ],
+                formDataMadat:{
+                  numero_mandat:"",
+                  numero_bordereau:""
+                },
+                formData9:{
+numero_bon_manuel:"",
+numero_demande:""
+                },
+                editLiquidation:{
+numero_bon_manuel:"",
+numero_demande:"",
+	exo_id:"",
+  	imputation_budgetaire:"",
+    section_id:"",
+    	programme_id:"",
+      action_id:"",
+      activite_id:"",
+      	ua_id:"",
+        nature_depense_id:"",
+        plan_budgetaire_id:"",
+        marche_id:"",
+        mode_paiement_id:"",
+        fournisseur_id:"",
+        	egagement_id:"",
+          decision_emetteur:"",
+          nom_emetteur:""
+                },
+
                 editRealiteServiceFait:{
                   	section_id: "",
       marche_id: "",
@@ -8209,7 +8657,7 @@ created() {
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
 
-                ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
+                ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises',"comptes","banques"]),
 
            ...mapGetters("SuiviImmobilisation", [
       "familles",
@@ -8233,29 +8681,603 @@ created() {
     ...mapGetters("parametreGenerauxProgrammeUnite", ["unites"]),
     ...mapGetters("personnelUA", ["all_acteur_depense","personnaliseActeurDepense","acteur_depenses","personnaFonction"]),
     
-    ...mapGetters("gestionMarche", ["entreprises","comptes"]),
+   
   ...mapGetters("uniteadministrative", [
       "jointureUaChapitreSection",
       "uniteAdministratives",
       "budgetGeneral",
       "getPersonnaliseBudgetGeneral",
       "groupUa",
-      "getPersonnaliseBudgetGeneralParBienService"
+      "getPersonnaliseBudgetGeneralParBienService",
+      "groupgranNature", "montantBudgetGeneral","realiteServiceFait","liquidation"
       // "montantBudgetGeneral"
       // "chapitres",
       // "sections"
        
     ]),
-     ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
-      "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
-      "montantBudgetGeneral","realiteServiceFait","liquidation" ]),
+   
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
 
+afficheMontantTresor() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
 
-validationParServiceBeneficiaire() {
-      return this.realiteService.decision_service_beneficiaire == 1;
+      if (qtereel) {
+        return qtereel.montant_tresor;
+      }
+      return 0
+        }
+      };
     },
+afficheMontantDon() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.montant_don;
+      }
+      return 0
+        }
+      };
+    },
+    afficheMontantEmprunt() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.montant_emprunt;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+
+
+afficheIdBailleur() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.bailler_id;
+      }
+      return 0
+        }
+      };
+    },
+
+afficheLibelleBailleur() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sources_financements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+afficheDemandeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.numero_demande_engage;
+      }
+      return 0
+        }
+      };
+    },
+afficheNumeroEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.numero_engage;
+      }
+      return 0
+        }
+      };
+    },
+
+afficheNumeroBordeauEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.numero_bordereau;
+      }
+      return 0
+        }
+      };
+    },
+
+afficheNumeroOPATEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.numero_op;
+      }
+      return 0
+        }
+      };
+    },
+
+afficheReferenceEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.ref_juridique;
+      }
+      return 0
+        }
+      };
+    },
+
+afficheidFournisseurFacture() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.fournisseur_id;
+      }
+      return 0
+        }
+      };
+    },
+afficheNumeroFacture() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_facture;
+      }
+      return 0
+        }
+      };
+    },
+
+afficheDateFacture() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.date_facture;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+afficheMontantAutorise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.total_general;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+afficheNumeroMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterActeEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.numero_marche;
+      }
+      return 0
+        }
+      };
+    },
+afficheModePassation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.procedurePassations.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+afficheIdFournisseur() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.fournisseur_id;
+      }
+      return 0
+        }
+      };
+    },
+
+afficheNumeroFournisseur() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_cc;
+      }
+      return 0
+        }
+      };
+    },
+afficheNomFournisseur() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.raison_sociale;
+      }
+      return 0
+        }
+      };
+    },
+
+afficheAdresseFournisseur() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.adresse;
+      }
+      return 0
+        }
+      };
+    },
+
+afficheTelephoneFournisseur() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.telephone;
+      }
+      return 0
+        }
+      };
+    },
+
+afficheIdCompteBancaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.compte_id;
+      }
+      return 0
+        }
+      };
+    },
+
+
+afficheLibelleCompteBancaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.comptes.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_compte;
+      }
+      return 0
+        }
+      };
+    },
+
+
+afficheIdBanque() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.comptes.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.banq_id;
+      }
+      return 0
+        }
+      };
+    },
+    
+afficheLibelleBanque() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.banques.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+afficheIdModePaiement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.mod_paiement_engage;
+      }
+      return 0
+        }
+      };
+    },
+
+ afficheLibelleModePaiemnt() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.modepaiements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+
+    afficherSection() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sections.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+         return qtereel.code_section.concat('  ', qtereel.nom_section);
+       
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+ affichePlanEconomiqueId() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.imputation ==this.detail_marche.imputation );
+
+      if (qtereel) {
+        return qtereel.economique_id;
+      }
+      return 0
+        }
+      };
+    },
+
+ affichePlanEconomiqueLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+
+
+ afficheGrandNatureId() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel =>  qtreel.imputation ==this.detail_marche.imputation);
+
+      if (qtereel) {
+        return qtereel.gdenature_id;
+      }
+      return 0
+        }
+      };
+    },
+
+ afficheGrandNatureLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.grandes_natures.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+      return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+
+ afficheUAId() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.ua_id;
+      }
+      return 0
+        }
+      };
+    },
+
+ afficheUALibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+
+ afficheActiviteId() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.activite_id;
+      }
+      return 0
+        }
+      };
+    },
+
+ afficheActiviteLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.afficheNiveauActivite.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+       return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+
+afficheIdEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+ afficheProgrammeId() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.programme_id;
+      }
+      return 0
+        }
+      };
+    },
+
+ afficheProgrammeLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_programmes.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+
+ 
+
+ afficheActionId() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.action_id;
+      }
+      return 0
+        }
+      };
+    },
+
+ afficheActionLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.afficheNiveauAction.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9649,6 +10671,7 @@ sommeEngagementTableau(){
 restePayeMarche() {
       const val = parseFloat(this.montantMarcheAvecAvenant) - parseFloat(this.sommeEngagementTableau(this.detail_marche.id));
       return parseFloat(val).toFixed(0);
+      
     },
     restePayeMarcheMandat() {
       const val = parseFloat(this.montantMarcheAvecAvenant) - parseFloat(this.montantCumulerMandat);
@@ -9719,6 +10742,15 @@ afficheMarcheEngage() {
       return id => {
         if (id != null && id != "") {
           return this.realiteServiceFait.filter(
+            element => element.marche_id == this.detail_marche.id
+          );
+        }
+      };
+    },
+     afficheMarcheLiquidation() {
+      return id => {
+        if (id != null && id != "") {
+          return this.liquidation.filter(
             element => element.marche_id == this.detail_marche.id
           );
         }
@@ -10126,16 +11158,135 @@ recupererActivite(){
  ...mapActions("uniteadministrative", [              
                 "modifierMontantBudgetaire",
                 "ajouterRealiteServiceFait",
-                "modifierRealiteServiceFait"
+                "modifierRealiteServiceFait",
+                "ajouterLiquidation",
+                "modifierLiquidation",
+                "supprimerLiquidation"
             ]),
-            
+    
+             fonctionModifierLiquidation() {
+     
+
+                  if (this.editLiquidation.numero_bon_manuel ==""){
+alert("Veuillez saisir le numrero du Bon")
+      }
+      else if (this.editLiquidation.numero_demande =="")
+      {
+        alert("Veuillez saisir le numrero de la demande")
+      }
+    
+      else
+      {
+ var nouvelObjet = {
+      ...this.editLiquidation,
+      exo_id :this.editLiquidation.exo_id,
+       	imputation_budgetaire :this.detail_marche.imputation,
+        	section_id :this.editLiquidation.section_id,
+         programme_id :this.afficheProgrammeId(this.editLiquidation.marche_id),
+        
+         action_id :this.afficheActionId(this.editLiquidation.marche_id),
+         activite_id : this.afficheActiviteId(this.editLiquidation.marche_id),
+         ua_id: this.afficheUAId(this.editLiquidation.marche_id),
+         nature_depense_id:this.afficheGrandNatureId(this.editLiquidation.marche_id),
+       plan_budgetaire_id:this.affichePlanEconomiqueId(this.editLiquidation.marche_id),
+     
+        marche_id:this.editLiquidation.marche_id,
+        mode_paiement_id:this.afficheIdModePaiement(this.editLiquidation.marche_id),
+fournisseur_id:this.afficheIdFournisseur(this.editLiquidation.marche_id),
+egagement_id:this.afficheIdEngagement(this.editLiquidation.marche_id),
+
+ 
+       };
+ this.modifierLiquidation(nouvelObjet);
+this.$("#exampleDecisionOrdonnateurLiquidation").modal('hide');
+this.$("#exampleDecisionControlleurFinancierLiquidation").modal('hide');
+this.$("#exampleDecisionEmetteurLiquidation").modal('hide');
+          this.editLiquidation={
+                  numero_bon_manuel:"",
+numero_demande:"",
+	exo_id:"",
+  	imputation_budgetaire:"",
+    section_id:"",
+    	programme_id:"",
+      action_id:"",
+      activite_id:"",
+      	ua_id:"",
+        nature_depense_id:"",
+        plan_budgetaire_id:"",
+        marche_id:"",
+        mode_paiement_id:"",
+        fournisseur_id:"",
+        	egagement_id:"",
+          decision_emetteur:"",
+          nom_emetteur:""
+                };
+
+      }
+       
+    },
+            fonctionAjouterLiquidation(){
+      if (this.formData9.numero_bon_manuel ==""){
+alert("Veuillez saisir le numrero du Bon")
+      }
+      else if (this.formData9.numero_demande =="")
+      {
+        alert("Veuillez saisir le numrero de la demande")
+      }
+    
+      else
+      {
+ var nouvelObjet = {
+      ...this.formData9,
+      exo_id :this.editRealiteServiceFait.exercice_budget,
+       	imputation_budgetaire :this.detail_marche.imputation,
+        	section_id :this.editRealiteServiceFait.section_id,
+         programme_id :this.afficheProgrammeId(this.editRealiteServiceFait.marche_id),
+        
+         action_id :this.afficheActionId(this.editRealiteServiceFait.marche_id),
+         activite_id : this.afficheActiviteId(this.editRealiteServiceFait.marche_id),
+         ua_id: this.afficheUAId(this.editRealiteServiceFait.marche_id),
+         nature_depense_id:this.afficheGrandNatureId(this.editRealiteServiceFait.marche_id),
+       plan_budgetaire_id:this.affichePlanEconomiqueId(this.editRealiteServiceFait.marche_id),
+     
+        marche_id:this.editRealiteServiceFait.marche_id,
+        mode_paiement_id:this.afficheIdModePaiement(this.editRealiteServiceFait.marche_id),
+fournisseur_id:this.afficheIdFournisseur(this.editRealiteServiceFait.marche_id),
+egagement_id:this.afficheIdEngagement(this.editRealiteServiceFait.marche_id),
+
+ 
+       };
+this.ajouterLiquidation(nouvelObjet)
+this.$("#exampleModalLiquidation").modal('hide');
+this.formData9= {
+
+};
+
+      }
+      
+
+    },
    modifierRealiteService() {
       this.modifierRealiteServiceFait(this.editRealiteServiceFait);
 this.$("#exampleDecisionServiceBeneficiare").modal('hide');
-      // this.editTypeTexte = {
-      //   code: "",
-      //   libelle: ""
-      // };
+this.$("#exampleModalRealiteServiceFait").modal('hide');
+this.$("#exampleDecisionControlleurFinancier").modal('hide');
+          this.editRealiteServiceFait={
+                  	section_id: "",
+      marche_id: "",
+      fournisseur_id: "",
+    facture_id: "",
+    ua_id: "",
+    decision_service_beneficiaire: "",
+    date_service_beneficiaire: "",
+    observation_service_beneficiaire: "",
+    nom_service_beneficiaire: "",
+    decision_controleur_financier: "",
+    date_controleur_financier: "",
+    observation_controleur_financier: "",
+    nom_controleur_financier: "",
+    	montant: "",
+    	exercice_budget: "",
+                };
        
     },
 
@@ -10715,7 +11866,6 @@ val:0,
 
 
 
-
 afficherModalModifierMotifMandat(index) {
       this.$("#exampleModalMotifMandat").modal({
         backdrop: "static",
@@ -10752,15 +11902,15 @@ afficherModalAjouterMandatDirect(id) {
     },
 
 
- afficherModalAjouterRealiteServiceFait(index) {
-      this.$("#exampleModalRealiteServiceFait").modal({
-        backdrop: "static",
-        keyboard: false
-      });
-      this.editEngagement = this.afficheMarcheEngage(this.detail_marche.id)[index]
-      // this.editEngagement = this.afficheMarcheEngage(this.detail_marche.id).find(recupererObjet => recupererObjet.id == id)
-        // this.formDataFacture = this.afficheFactureTableau(this.detail_marche.objetUniteAdministrative.id).find(recupererObjet => recupererObjet.id == id)
-    },
+//  afficherModalAjouterRealiteServiceFait(index) {
+//       this.$("#exampleModalRealiteServiceFait").modal({
+//         backdrop: "static",
+//         keyboard: false
+//       });
+//       this.editEngagement = this.afficheMarcheEngage(this.detail_marche.id)[index]
+//       // this.editEngagement = this.afficheMarcheEngage(this.detail_marche.id).find(recupererObjet => recupererObjet.id == id)
+//         // this.formDataFacture = this.afficheFactureTableau(this.detail_marche.objetUniteAdministrative.id).find(recupererObjet => recupererObjet.id == id)
+//     },
   retourListeEntreprise(){
                  this.$router.push({ name: 'executionMarche' })
             },
@@ -10954,10 +12104,28 @@ activite_id:this.detail_marche.activite_id,
   ua_id:this.detail_marche.unite_administrative_id,
   grd_nature_id:this.detail_marche.gdenature_id,
 
+section_id:this.afficherSectId,
+ fournisseur_id:this.AfficherFournisseur_id
+       };
+          var realiteServiceFait = {
+     
+      exercice_budget :this.anneeAmort,
+       
+         marche_id : this.detail_marche.id,
+       
+      	
+        facture_id:this.formDataFacture.id,
+       
+ montant :this.sommeMontant,
+
+  ua_id:this.detail_marche.unite_administrative_id,
+  
+
 section_id:this.afficherSectId
 
        };
   this.modifierEngagement(nouvelObjet)
+  this.modifierRealiteServiceFait(realiteServiceFait)
       this.$('#ModifierEngage').modal('hide');
       this.$('#exampleModalMotif').modal('hide');
 this.formData= {
@@ -11057,8 +12225,8 @@ activite_id:this.detail_marche.activite_id,
   ua_id:this.detail_marche.unite_administrative_id,
   grd_nature_id:this.detail_marche.gdenature_id,
 
-section_id:this.afficherSectId
-
+section_id:this.afficherSectId,
+fournisseur_id:this.AfficherFournisseur_id
        };
        var realiteServiceFait = {
      
@@ -11079,6 +12247,7 @@ section_id:this.afficherSectId
        };
   this.ajouterEngagement(nouvelObjet)
   this.ajouterRealiteServiceFait(realiteServiceFait)
+  
 this.$("#AjouterEngage").modal('hide');
 this.formData= {
 
@@ -11165,6 +12334,64 @@ afficherModalModifierRealiteServiceFait(index) {
       this.editRealiteServiceFait = this.afficheMarcheRealiteServiceFait(this.detail_marche.id)[index];
       
       },
+
+
+
+afficherModalAjouterLiquidation(index) {
+      this.$("#exampleModalLiquidation").modal({
+        backdrop: "static",
+        keyboard: false
+      })
+      this.editRealiteServiceFait = this.afficheMarcheRealiteServiceFait(this.detail_marche.id)[index];
+      
+      },
+afficherModalObservationEmetteurLiquidation(index) {
+      this.$("#exampleDecisionEmetteurLiquidation").modal({
+        backdrop: "static",
+        keyboard: false
+      })
+      this.editLiquidation = this.afficheMarcheLiquidation(this.detail_marche.id)[index];
+  
+      },
+afficherModalObservationControlleurFinancierLiquidation(index) {
+      this.$("#exampleDecisionControlleurFinancierLiquidation").modal({
+        backdrop: "static",
+        keyboard: false
+      })
+      this.editLiquidation = this.afficheMarcheLiquidation(this.detail_marche.id)[index];
+      
+      },
+afficherModalObservationOrdonnanteurLiquidation(index) {
+      this.$("#exampleDecisionOrdonnateurLiquidation").modal({
+        backdrop: "static",
+        keyboard: false
+      })
+      this.editLiquidation = this.afficheMarcheLiquidation(this.detail_marche.id)[index];
+      
+      },
+
+      afficherModalModificationLiquidation(index) {
+      this.$("#exampleModalLiquidationModification").modal({
+        backdrop: "static",
+        keyboard: false
+      })
+      this.editLiquidation = this.afficheMarcheLiquidation(this.detail_marche.id)[index];
+      
+      },
+
+afficherModalAjouterMandatParLiquidation(index) {
+      this.$("#exampleModalLiquidation").modal({
+        backdrop: "static",
+        keyboard: false
+      })
+      this.editLiquidation = this.afficheMarcheLiquidation(this.detail_marche.id)[index];
+      
+      },
+
+
+
+
+
 afficherModalObservationControlleurFinancier(index) {
       this.$("#exampleDecisionControlleurFinancier").modal({
         backdrop: "static",
@@ -11182,6 +12409,17 @@ afficherModalObservationControlleurFinancier(index) {
        this.editEngagement = this.afficheMarcheEngage(this.detail_marche.id)[index];
        
     },
+
+afficherModalAjouterMandatApresLiquidation(index) {
+      this.$("#exampleModalAjouteMandionatApresLiquidat").modal({
+        backdrop: "static",
+        keyboard: false
+      })
+      this.editLiquidation = this.afficheMarcheLiquidation(this.detail_marche.id)[index];
+      
+      },
+
+
 
 afficherModalModifierMandat(index) {
       this.$("#ModifierModalMandat").modal({
@@ -11362,4 +12600,8 @@ this.$("#modificationModalAvenant").modal('hide');
         width: 1600px;
         margin: 0 -780px;
     }
+    .tailgrand{
+  width: 89%;
+  margin: 0 -45%;
+}
 </style>

@@ -1117,11 +1117,42 @@ export function ajouterLiquidation({ commit }, nouveau) {
 }
 
 // modifier
-export function modifierLiquidation({ commit }, nouveau) {
+export function modifierLiquidation({ commit, dispatch}, nouveau) {
   asyncLoading(axios
-    .put("/modifierLiquidation/" + nouveau.id)).then(response => {
-      commit("MODIFIER_LIQUIDATION", response.data);
+    .put("/modifierLiquidation/" + nouveau.id, {
+      
+      numero_bon_manuel: nouveau.numero_bon_manuel,
+      numero_demande: nouveau.numero_demande,
+      exo_id: nouveau.exo_id,
+      imputation_budgetaire: nouveau.imputation_budgetaire,
+      section_id: nouveau.section_id,
+      programme_id: nouveau.programme_id,
+      action_id: nouveau.action_id,
+      activite_id: nouveau.activite_id,
+      ua_id: nouveau.ua_id,
+      nature_depense_id: nouveau.nature_depense_id,
+      plan_budgetaire_id: nouveau.plan_budgetaire_id,
+      marche_id: nouveau.marche_id,
+      mode_paiement_id: nouveau.mode_paiement_id,
+      fournisseur_id: nouveau.fournisseur_id,
+      egagement_id: nouveau.egagement_id,
+      decision_emetteur: nouveau.decision_emetteur,
+      nom_emetteur: nouveau.nom_emetteur,
+      	date_emetteur: nouveau.date_emetteur,
+      
+      observation_emetteur: nouveau.observation_emetteur,
+       decision_ordonnateur: nouveau.decision_ordonnateur,
+      observation_ordonnateur: nouveau.observation_ordonnateur,
+      nom_ordonnateur: nouveau.nom_ordonnateur,
+      date_ordonnateur: nouveau.date_ordonnateur,
 
+       decision_controleur_financier: nouveau.decision_controleur_financier,
+      nom_controleur_financier: nouveau.nom_controleur_financier,
+      date_controleur_financier: nouveau.date_controleur_financier,
+      observation_controleur_financier: nouveau.observation_controleur_financier
+    })).then(response => {
+      commit("MODIFIER_LIQUIDATION", response.data);
+      dispatch('getAllLiquidation')
       this.$app.$notify({
         title: 'Success',
         text: 'Modification Effectué avec Succès!',
