@@ -1,6 +1,4 @@
 
-
-
 <template>
     <div class="container-fluid">
          <div id="exampleModal" class="modal hide taillModal">
