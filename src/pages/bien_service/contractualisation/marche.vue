@@ -1957,10 +1957,10 @@ return element;
     ]),
       modifierModalResiliation(){
       var nouvelObjet1 = {
-      
-      indicateur_resilie :this.indicateur_test,
-        date_resiliation:this.editActeEffetFinancier.date_resiliation,
-        	cause_resiliation:this.editActeEffetFinancier.cause_resiliation
+      ...this.editActeEffetFinancier
+      // indicateur_resilie :this.indicateur_test,
+      //   date_resiliation:this.editActeEffetFinancier.date_resiliation,
+      //   	cause_resiliation:this.editActeEffetFinancier.cause_resiliation
        };
      this.modifierActeEffetFinancier(nouvelObjet1)
     //   let marcheObjet=this.marches.find(marche=>marche.id==this.editActeEffetFinancier.marche_id)
