@@ -272,13 +272,15 @@ afficheContrat
                        <td style="font-weight:bold;"> Total Marché
                       </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
-                           {{formatageSomme(parseFloat(montantPlanifier))}}
+                           {{formatageSomme(parseFloat(montantComtratualisation))}}
                            
                       </td>
                        <td>
                           
                       </td>
-                       
+                        <td>
+                          
+                      </td>
                      
                     </tr>
                 </tbody>
@@ -345,22 +347,22 @@ afficheContrat
 <td>
                      <button 
                       v-if="marche.attribue == 2"  class="btn  btn-warning">
-                <span >Oui</span>
+                <span title="MZRCHE EN EXERCUTER" style="">EX</span>
        
                 </button>
                 <button 
                       v-else-if="marche.attribue == 1"  class="btn  btn-success">
-                <span >cours</span>
+                <span title=" MARCHE EN COURS DE CONTRATUALISATION">C</span>
        
                 </button>
                  <button 
                       v-else-if="marche.attribue == 3"  class="btn  btn-info">
-                <span >resilié</span>
+                <span title="MARCHE RESILIE" >R</span>
        
                 </button>
                    <button v-else class="btn  btn-danger">
               
-                <span >Non</span>
+                <span title="MARCHE EN PLANIFICATION">P</span>
                 </button>
                    </td>
 
@@ -680,13 +682,15 @@ afficheContrat
                        <td style="font-weight:bold;"> Total Marché
                       </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
-                           {{formatageSomme(parseFloat(montantPlanifier))}}
+                           {{formatageSomme(parseFloat(montantPlanification))}}
                            
                       </td>
                        <td>
                           
                       </td>
-                       
+                        <td>
+                          
+                      </td>
                      
                     </tr>
                 </tbody>
@@ -1401,8 +1405,8 @@ date_resiliation:""
   },
 
   computed: {
-     ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser','acteEffetFinanciers','montantPlanifier','montantContratualisation','afficheContratualisation','affichePlanifier','nombremarchesExecute','afficheMarchePlanifier','afficheMarcheContratualisation','AfficheMarcheAttribue','AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
-     "montantMarche", "printMarcheNonAttribue","procedurePassations","typeTypeProcedures"]),
+     ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser','acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier','nombremarchesExecute','afficheMarchePlanifier','afficheMarcheContratualisation','AfficheMarcheAttribue','AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
+     "montantMarche", "printMarcheNonAttribue","procedurePassations","typeTypeProcedures","montantComtratualisation"]),
 
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
@@ -1826,6 +1830,19 @@ return this.marches.filter(element => element.attribue == 1)
 afficheMarcheEnPlanification(){
 return this.marches.filter(element => element.attribue == 0)
 },
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //  afficheContrat(){
 // return this.getActeEffetFinancierPersonnaliser45.filter(element => element.date_odre_service > this.nombreJourTraitementCalucle)

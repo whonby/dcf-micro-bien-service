@@ -1,4 +1,5 @@
 affichePlanifier
+montantPlanifier
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays
@@ -819,13 +820,15 @@ export const nombremarches = getters =>
               affichenaturedep => affichenaturedep.attribue !== 1
     );
 
-affichePlanifier
+
    export const afficheContratualisation = state =>
    state.marches.filter(
      affichenaturedep => affichenaturedep.attribue == 1
 );
 
-
+//  export const affichePlanifier = (state) =>
+//     state.marches.filter((affichenaturedep) => affichenaturedep.attribue !== 1);
+   
             
 
      export const montantContratualisation = (state, getters) =>
@@ -840,6 +843,21 @@ affichePlanifier
                 0
     );
               
+
+ export const montantPlanification = (state, getters) =>
+   getters.marches.filter(elment => elment.attribue == 0).reduce(
+     (prec, cur) => parseInt(prec) + parseInt(cur.montant_marche),
+     0
+   );
+
+
+export const montantComtratualisation = (state, getters) =>
+  getters.marches
+    .filter((elment) => elment.attribue == 1)
+    .reduce((prec, cur) => parseInt(prec) + parseInt(cur.montant_marche), 0);
+
+
+
 
 
 export const getActeEffetFinancierPersonnaliser45 = (state, getters, rootState, rootGetters) =>
