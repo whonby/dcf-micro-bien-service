@@ -379,6 +379,11 @@ typeProcedureLibelle() {
           //objet_appel:this.affichierObjetMarche(this.macheid)
          };
       //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
+
+       let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
+    marcheObjet.attribue=1
+      //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
+     this.modifierMarche(marcheObjet)
       this.ajouterAppelOffre(nouvelObjet);
       this.formData = {
                     ref_appel:"",
@@ -390,6 +395,7 @@ typeProcedureLibelle() {
                     objet_appel:"",
                     imputation:"",
                     marche_id:"",
+
                 }
             },     
 

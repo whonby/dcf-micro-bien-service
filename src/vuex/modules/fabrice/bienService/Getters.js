@@ -1,5 +1,4 @@
-affichePlanifier
-montantPlanifier
+
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays
@@ -364,6 +363,37 @@ export const montantMarche = (state, getters) =>
         0
     );
 
+
+
+    
+    export const executionContrat = state => 
+    state.acteEffetFinanciers.filter(
+        varObjetContrat => varObjetContrat.difference_personnel_bienService =="personnel"
+    )
+
+export const getActeEffetFinancierPersonnaliserContrat = (state, getters, rootState, rootGetters) =>
+getters.executionContrat.map(element => {
+        if (element.entreprise_id !== null && element.marche_id !== null) {
+            element = {
+                ...element,
+
+
+                varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
+                    plans => plans.id == element.entreprise_id
+                ),
+                AfficheMarche: rootGetters['bienService/marches'].find(
+                    plans => plans.id == element.marche_id
+                ),
+
+               
+
+
+            }
+
+        }
+        return element;
+    })
+
     // afficher infos acte effet financier du personnnel
 
     // export const actePersonnel = state =>
@@ -371,8 +401,14 @@ export const montantMarche = (state, getters) =>
     //     objetActe => objetActe.difference_personnel_bienService ==="personnel"
     // )
 
+
+    export const executionDuMarche = state => 
+    state.acteEffetFinanciers.filter(
+        varObjet => varObjet.difference_personnel_bienService =="bienService"
+    )
+
 export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, rootGetters) =>
-getters.acteEffetFinanciers.map(element => {
+getters.executionDuMarche.map(element => {
         if (element.entreprise_id !== null && element.marche_id !== null) {
             element = {
                 ...element,
