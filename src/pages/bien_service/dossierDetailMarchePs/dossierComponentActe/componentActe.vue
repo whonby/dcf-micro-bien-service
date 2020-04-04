@@ -324,6 +324,7 @@ affichierNomEntreprise
 
 
 
+
 <div id="modifierActeEF" class="modal hide grdirModalActeEffet">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
@@ -791,7 +792,7 @@ getDateFinExécutionValue(){
     //this.formEffetFinancier.entreprise_id=entreprisePremier.id
     this.ajouterActeEffetFinancier(this.formEffetFinancier)
     let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
-    marcheObjet.attribue=1
+    marcheObjet.attribue=2
     marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
    // console.log(marcheObjet)
     this.modifierMarche(marcheObjet)
@@ -829,10 +830,6 @@ getDateFinExécutionValue(){
 }, 
 
 modifierModalActeEffetFinancierLocal(){
-
-   // this.editActeEffetFinancier.entreprise_id=entreprise_id
-
-
 
     this.modifierActeEffetFinancier(this.editActeEffetFinancier)
     this.$('#modifierActeEF').modal('hide');
