@@ -1,8 +1,9 @@
 
 
-afficheContrat
+
 <template>
     <div class="container-fluid">
+     
          <div id="exampleModal" class="modal hide taillModal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
@@ -157,7 +158,7 @@ afficheContrat
                        <th>Objet march&eacute;</th>
                         <th>Reference march&eacute;</th> 
                                     <th>Montant prevue</th>
-                                <th>Attribution</th>
+                                <th>Etape marché</th>
                                 <th>Action</th>
                 </tr>
                 </thead>
@@ -190,13 +191,10 @@ afficheContrat
 <td>
                      <button 
                       v-if="marche.attribue == 1"  class="btn  btn-success">
-                <span >OUI</span>
+                <span >CT</span>
        
                 </button>
-                   <button v-else class="btn  btn-danger">
-              
-                <span >NON</span>
-                </button>
+                  
                    </td>
 
 
@@ -312,7 +310,7 @@ afficheContrat
                     <th>Reference marché</th>
                      <!-- <th>Numero marché</th> -->
                     <th>Montant prévu</th>
-                    <th>marché Attribuer</th>
+                    <th>Etape marché</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -347,22 +345,22 @@ afficheContrat
 <td>
                      <button 
                       v-if="marche.attribue == 2"  class="btn  btn-warning">
-                <span title="MZRCHE EN EXERCUTER" style="">EX</span>
+                <span title="MARCHE EN EXERCUTER" style="">EX</span>
        
                 </button>
                 <button 
                       v-else-if="marche.attribue == 1"  class="btn  btn-success">
-                <span title=" MARCHE EN COURS DE CONTRATUALISATION">C</span>
+                <span title=" MARCHE EN COURS DE CONTRATUALISATION">CT</span>
        
                 </button>
                  <button 
                       v-else-if="marche.attribue == 3"  class="btn  btn-info">
-                <span title="MARCHE RESILIE" >R</span>
+                <span title="MARCHE RESILIE" >RE</span>
        
                 </button>
                    <button v-else class="btn  btn-danger">
               
-                <span title="MARCHE EN PLANIFICATION">P</span>
+                <span title="MARCHE EN PLANIFICATION">PL</span>
                 </button>
                    </td>
 
@@ -473,7 +471,7 @@ afficheContrat
                        <th>Objet march&eacute;</th>
                         <th>Reference march&eacute;</th> 
                                     <th>Montant réel</th>
-                                <th>Attribution</th>
+                                <th>Etape marché</th>
                                 <th>Action</th>
                 </tr>
                 </thead>
@@ -506,7 +504,7 @@ afficheContrat
 <td>
                      <button 
                       v-if="afficherAttributMarche(marche.marche_id) == 2"  class="btn  btn-warning">
-                <span >OUI</span>
+                <span >EX</span>
        
                 </button>
                    <!-- <button v-else class="btn  btn-danger">
@@ -567,7 +565,7 @@ afficheContrat
                        <th>Objet march&eacute;</th>
                         <th>Reference march&eacute;</th> 
                                     <th>Montant prevue</th>
-                                <th>Attribution</th>
+                                <th>Etape marché</th>
                                 <th>Action</th>
                 </tr>
                 </thead>
@@ -599,14 +597,11 @@ afficheContrat
                   
 <td>
                      <button 
-                      v-if="marche.attribue == 1"  class="btn  btn-success">
-                <span >OUI</span>
+                      v-if="marche.attribue == 0"  class="btn  btn-danger">
+                <span >PL</span>
        
                 </button>
-                   <button v-else class="btn  btn-danger">
-              
-                <span >NON</span>
-                </button>
+                 
                    </td>
 
 
@@ -756,7 +751,7 @@ afficheContrat
 <td>
                      <button 
                       v-if="afficherAttributMarche(marche.marche_id) == 3"  class="btn  btn-info">
-                <span >OUI</span>
+                <span >RE</span>
        
                 </button>
                    <!-- <button v-else class="btn  btn-danger">

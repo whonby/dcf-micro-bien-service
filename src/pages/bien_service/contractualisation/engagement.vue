@@ -625,13 +625,13 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab189">INDENTIFICATION</a>
+                        <a data-toggle="tab" href="#tab107">INDENTIFICATION</a>
                       </li>
                       <li>
-                        <a data-toggle="tab" href="#tab289">DESCRIPTION DE LA DEMANDE D'ENGAGEMENT</a>
+                        <a data-toggle="tab" href="#tab789">DESCRIPTION DE LA DEMANDE D'ENGAGEMENT</a>
                       </li>
                        <li>
-                        <a data-toggle="tab" href="#tab2892">REFERENCE DU FOURNISSEUR OU BENEFICIAIRE</a>
+                        <a data-toggle="tab" href="#tab7892">REFERENCE DU FOURNISSEUR OU BENEFICIAIRE</a>
                       </li>
                       <!-- <li>
                         <a data-toggle="tab" href="#tab3">Autres Information</a>
@@ -640,7 +640,7 @@
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
-                    <div id="tab189" class="tab-pane active">
+                    <div id="tab107" class="tab-pane active">
                       <tr>
                         <td>
                           <label class="control-label">Exercice Budgetaire</label>
@@ -703,7 +703,7 @@
                         <td>
                         <label class="control-label">N° Bon Manuel</label>
                           
-                              <input    type="text"   class="span3" v-model="formData9.numero_bon_manuel"   />                
+                              <input    type="text"   class="span3" readonly :value="afficheNumerodemande_engage(afficheIdEngagementDansRealiteFait(editRealiteServiceFait.marche_id))"  />                
                              
                         </td>
                           <td>
@@ -726,7 +726,7 @@
                         
                      
                     </div>
-                    <div id="tab289" class="tab-pane ">
+                    <div id="tab789" class="tab-pane ">
                       <tr>
                           <td colspan="3">
                          
@@ -766,7 +766,7 @@
                      
 
                     </div>
-                     <div id="tab2892" class="tab-pane ">
+                     <div id="tab7892" class="tab-pane ">
                      <tr>
                         <td colspan="">
                          
@@ -2796,6 +2796,7 @@
                             <div class="controls">
                               <input type="date" class="span"  v-model="editEngagement.date_motif"/>
                                <input type="hidden" class="span"  :value="recuperer"/>
+                               {{editEngagement.id}}
                             </div>
                           </div>
                            
@@ -4300,8 +4301,8 @@
                         <h1 style="font-size:12px;color:red;text-align:center">Observation non activé  </h1>
                     </td>
                      <td>
-                        <router-link :to="{ name: 'DetailEngagement', params: {id_detail_engagement:realiteService.id}}"
-                class="btn btn-default " title="Detail Engagement">
+                        <router-link :to="{ name: 'detailRealiteServiceFait', params: {id_detailRealiteServiceFait:realiteService.id}}"
+                class="btn btn-default " title="Detail Realite service fait">
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link> 
                     <button v-if="realiteService.decision_controleur_financier == 1" class="btn " @click="afficherModalAjouterLiquidation(index)" title="Ajouter Liquidatation">
@@ -4591,6 +4592,10 @@
                                         <th title="unite administrative">Ua</th>
                              
                                 <th>Montant Mandat</th>
+                                 <!-- <th >Decision de emetteur</th>
+                                <th>Date validation</th>
+                                  <th>Nom d'emetteur</th> -->
+                              
                                 <th >Date reception CF</th>
                                 <th>Décision CF</th>
                                 <th title="Date validation mandat">Date validation</th>
@@ -8718,6 +8723,51 @@ created() {
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
 
+afficheIdEngagementDansRealiteFait() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.realiteServiceFait.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.engagement_id;
+      }
+      return 0
+        }
+      };
+    },
+
+afficheNumerodemande_engage() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_demande_engage;
+      }
+      return 0
+        }
+      };
+    },
+  afficherIdRealiteServiceFait() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.realiteServiceFait.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+
+
+
 afficheMontantTresor() {
       return id => {
         if (id != null && id != "") {
@@ -11087,7 +11137,6 @@ montantTva() {
 
 
 
-
 recupererObjetFacture() {
       
       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.marche_id == this.detail_marche.id);
@@ -11294,6 +11343,7 @@ this.formData9= {
 
     },
    modifierRealiteService() {
+
       this.modifierRealiteServiceFait(this.editRealiteServiceFait);
 this.$("#exampleDecisionServiceBeneficiare").modal('hide');
 this.$("#exampleModalRealiteServiceFait").modal('hide');
@@ -11455,7 +11505,7 @@ val:0,
 
  ajouterChoixProcLocal(){
 
-   if(this.formData.tprocedure =="Engagement Direct"){
+   if(this.formData.tprocedure =="Engagement Bon de Commande"){
  var nouvelObjet = {
       ...this.formData,
       marche_id :this.detail_marche.id,
@@ -11473,7 +11523,7 @@ this.$("#modalTypeEngagement").modal('hide');
       });
    }
        
-      else if(this.formData.tprocedure =="Engagement Bon de Commande"){
+      else if(this.formData.tprocedure =="Engagement Direct"){
      var nouvelObjet1 = {
       ...this.formData,
       marche_id :this.detail_marche.id,
@@ -12136,7 +12186,8 @@ section_id:this.afficherSectId,
  fournisseur_id:this.AfficherFournisseur_id
        };
           var realiteServiceFait = {
-     
+     ...this.editEngagement,
+
       exercice_budget :this.anneeAmort,
        
          marche_id : this.detail_marche.id,
@@ -12144,14 +12195,18 @@ section_id:this.afficherSectId,
       	
         facture_id:this.formDataFacture.id,
        
- montant :this.sommeMontant,
+ montant :this.sommeMontantEngagement,
 
   ua_id:this.detail_marche.unite_administrative_id,
   
 
-section_id:this.afficherSectId
+section_id:this.afficherSectId,
+id:this.afficherIdRealiteServiceFait(this.detail_marche.id),
+	engagement_id:this.editEngagement.id
 
        };
+     
+      
   this.modifierEngagement(nouvelObjet)
   this.modifierRealiteServiceFait(realiteServiceFait)
       this.$('#ModifierEngage').modal('hide');
@@ -12529,10 +12584,10 @@ showPopup20: function() {
       });
     },
     ajouterMandatLiquidation(){
-      if (this.afficherMontantEngagement < this.afficheMontantAutorise(editLiquidation.marche_id)){
+      if (this.afficherMontantEngagement < this.afficheMontantAutorise(this.editLiquidation.marche_id)){
 alert("Le montant engagé est superieure au montant de la facture")
       }
-      else if (this.afficherMontantEngagement > this.afficheMontantAutorise(editLiquidation.marche_id))
+      else if (this.afficherMontantEngagement > this.afficheMontantAutorise(this.editLiquidation.marche_id))
       {
         alert("Le montant engagé est Inférieure au montant de la facture")
       }
@@ -12575,8 +12630,8 @@ section_id:this.editLiquidation.section_id,
    
  bailler_id:this.afficheIdBailleur(this.editLiquidation.marche_id),
  mod_paiement_engage:this.afficheIdModePaiement(this.editLiquidation.marche_id),
- numero_bon_manuel:this.editLiquidation.numero_bon_manuel,
- numero_demande_liquidation:this.editLiquidation.numero_demande,
+//  numero_bon_manuel:this.editLiquidation.numero_bon_manuel,
+//  numero_demande_liquidation:this.editLiquidation.numero_demande,
  numero_op:this.afficheNumeroOPATEngagement(this.editLiquidation.marche_id),
 	entreprise_id:this.afficheIdFournisseur(this.editLiquidation.marche_id),
     	montant_tresor:this.afficheMontantTresor(this.editLiquidation.marche_id),

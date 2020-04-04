@@ -147,11 +147,11 @@
               <tbody>
                <tr class="odd gradeX">
                   
-                  <td>{{Engage.date_motif || 'Non renseigné'}}</td>
+                  <td>{{formaterDate(Engage.date_motif) || 'Non renseigné'}}</td>
                    <td>{{Engage.observation || 'Non renseigné'}}</td>
                     <!-- <td>{{Engage.ligne_id ||'Non renseigné'}}</td> -->
                    
-                     <td>{{Engage.date_demande ||'Non renseigné'}}</td>
+                     <td>{{formaterDate(Engage.date_demande) ||'Non renseigné'}}</td>
                      <td>{{Engage.numero_op || 'Non renseigné'}}</td> 
                      <td>{{afficheFacture(Engage.facture_id)|| 'Non renseigné'}}</td> 
                       <td>{{Engage.numero_bordereau || 'Non renseigné'}}</td>

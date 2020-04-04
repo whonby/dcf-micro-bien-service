@@ -9,7 +9,7 @@ import compte from '../../pages/bien_service/compte.vue';
 import condition from '../../pages/bien_service/condition.vue';
 import facture from '../../pages/bien_service/facture.vue';
 import fonctionOccupee from '../../pages/bien_service/fonctionOccupee.vue';
-// import lot from '../../pages/bien_service/lot.vue';
+// import lot from '../../pages/bien_service/lot.vue';creation-execution-marche
 import natureFonction from '../../pages/bien_service/natureFonction.vue';
 import prestation from '../../pages/bien_service/prestation.vue';
 import signature from '../../pages/bien_service/signature.vue';
@@ -48,6 +48,7 @@ import commune from '../../pages/bien_service/parametres/groupe_commune/commune.
 import agence from '../../pages/bien_service/parametres/groupe_agence/agence.vue';
 import DetailLivrable from '../../pages/bien_service/DetailLivrable.vue';
 import DetailEngagement from '../../pages/bien_service/contractualisation/detailEngagement.vue';
+import detailRealiteServiceFait from '../../pages/bien_service/contractualisation/detailRealiteServiceFait.vue';
  import DetailMandat from '../../pages/bien_service/contractualisation/detailMandat.vue';
 import Avenant from '../../pages/bien_service/contractualisation/avenant.vue';
 import ModePaiement from '../../pages/bien_service/parametres/ModePaiement.vue';
@@ -62,6 +63,11 @@ import DetailPPM from "../../pages/bien_service/ppm/DetailPPM";
 import detailMarcheFsqc from "../../pages/bien_service/dossierFSQC/detailMarcheFsqc";
 import detailMarcheR3cv from "../../pages/bien_service/dossierR3CV/detailMarcheR3cv";
 const BienServiceRoutes = [
+    {
+        path: '/detail-Realite-ServiceFait/:id_detailRealiteServiceFait',
+        name: "detailRealiteServiceFait",
+        component: detailRealiteServiceFait
+    },
     {
         path: "indicateur-Bien-Service",
         name: "indicateurBienService",

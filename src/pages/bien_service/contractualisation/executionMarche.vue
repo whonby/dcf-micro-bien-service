@@ -651,7 +651,7 @@ return this. marcherAttribuer.filter((item) => {
     
 
     marcherAttribuer(){
-      return this.getMarchePersonnaliser.filter(recuper => recuper.attribue == 1)
+      return this.getMarchePersonnaliser.filter(recuper => recuper.attribue == 2)
       
     },
     // MontatantImputationBudget() {

@@ -85,7 +85,7 @@
                             {{effetFinancier.varObjetEntreprise.forme_juridique || 'Non renseigné'}}</td> -->
 
                              <td @click="afficherModalModifierActeEffetFinancier(index)">
-                            {{effetFinancier.varObjetEntreprise.raison_sociale || 'Non renseigné'}}</td>
+                            {{afficherNomEntreprise(effetFinancier.entreprise_id) || 'Non renseigné'}}</td>
 
                               <td @click="afficherModalModifierActeEffetFinancier(index)">
                             {{effetFinancier.marche.objet || 'Non renseigné'}}</td>
@@ -191,6 +191,19 @@ return this.getActeEffetFinancierPersonnaliser.filter((item) => {
 
    }
 )
+    },
+
+    afficherNomEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.raison_sociale;
+      }
+      return 0
+        }
+      };
     },
     // grandNatureDynamiques() {
     //  return id => {

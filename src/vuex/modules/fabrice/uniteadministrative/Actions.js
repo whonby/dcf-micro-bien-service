@@ -1062,7 +1062,8 @@ export function modifierRealiteServiceFait({ commit }, nouveau) {
     observation_controleur_financier: nouveau.observation_controleur_financier,
     nom_controleur_financier: nouveau.nom_controleur_financier,
     	montant: nouveau.	montant,
-    	exercice_budget: nouveau.	exercice_budget,
+      exercice_budget: nouveau.	exercice_budget,
+    engagement_id: nouveau.engagement_id
     }
   
   )).then(response => {
