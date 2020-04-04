@@ -102,13 +102,13 @@
                         <td>
                         <label class="control-label">N° Bon Manuel</label>
                           
-                              <input    type="text"   class="span3" v-model="editLiquidation.numero_bon_manuel"   />                
+                              <input    type="text" readonly  class="span3" v-model="editLiquidation.numero_bon_manuel"   />                
                              
                         </td>
                           <td>
                           <label class="control-label">N° Demande</label>
                           
-                              <input    type="text"   class="span4"  v-model="editLiquidation.numero_demande" />                
+                              <input    type="text"   class="span4" readonly v-model="editLiquidation.numero_demande" />                
                              
                         </td>
                         <td colspan="2">
@@ -222,7 +222,7 @@
                          
                          <label class="control-label">Numéro</label>
                           
-                              <input    type="text"   class="span3" readonly  :value="afficheNumeroFournisseur(afficheIdFournisseur(editLiquidation.marche_id))" />                
+                              <input    type="text"   class="span4" readonly  :value="afficheNumeroFournisseur(afficheIdFournisseur(editLiquidation.marche_id))" />                
                              
                                              
                         </td>
@@ -251,7 +251,7 @@
                         <td>
                            <label class="control-label">Trésor</label>
                           
-                              <input    type="text"   class="span3" readonly  :value="afficheMontantTresor(editLiquidation.marche_id)" />                
+                              <input    type="text"   class="span4" readonly  :value="afficheMontantTresor(editLiquidation.marche_id)" />                
                              
                         </td>
                          <td>
@@ -284,14 +284,14 @@
                          
                          <label class="control-label">Crédit autorisé</label>
                           
-                              <input    type="text"   class="span3" :value="afficheMontantAutorise(editLiquidation.marche_id)" readonly   />                
+                              <input    type="text"   class="span4" :value="afficheMontantAutorise(editLiquidation.marche_id)" readonly   />                
                              
                                               
                         </td>
                         <td>
                           <label class="control-label">Cumul des demandes</label>
-                          
-                              <input    type="text"   class="span4" readonly :value="sommeEgagementLigne(detail_marche.id)"  />                
+                          <input    type="text"   class="span4" readonly :value="montantCumulerLiquidationMandat"  />
+                              <input    type="hidden"   class="span4" readonly :value="sommeEgagementLigne(detail_marche.id)"  />                
                              
                         </td>
                           <td>
@@ -304,7 +304,31 @@
                        
                         
                       </tr>
-                     
+                     <tr>
+                              <td>
+                          <label class="control-label">Dotation disponible anterieure</label>
+                          
+                              <input    type="text"   class="span4" readonly :value="dotationDisponibleAnterieure"  />                
+                             
+                        </td>
+                        <td colspan="">
+                         
+                         <label class="control-label">Montant marché</label>
+                          
+                              <input    type="text"   class="span4" :value="montantMarcheAvecAvenant" readonly   />                
+                             
+                                              
+                        </td>
+                        <td>
+                          <label class="control-label">Disponible marché</label>
+                          <input    type="text"   class="span4" readonly :value="restePayeMarcheMandat"  />
+                              
+                        </td>
+                         
+                      
+                       
+                        
+                      </tr>
 
                     </div>
                   </div>
@@ -313,7 +337,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="fonctionAjouterLiquidation(formData9)"
+          @click.prevent="ajouterMandatLiquidation(formDataMadat)"
           class="btn btn-primary"
           href="#"
          
@@ -4565,10 +4589,6 @@
                                         
                                         <!-- <th >Section</th> -->
                                         <th title="unite administrative">Ua</th>
-                                
-                              
-                              
-                                
                              
                                 <th>Montant Mandat</th>
                                 <th >Date reception CF</th>
@@ -4589,17 +4609,16 @@
                     :key="Manda.id"
                   >
                     <td @dblclick="afficherModalModifierMandat(index)">{{marcheMandat(Manda.marche_id) || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierMandat(index)">{{Manda.numero_mandat || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierMandat(index)">{{Manda.numero_bordereau || 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifierMandat(index)">{{Manda.numero_mandat || 'Non renseigné'}}</td>
+                  <td @dblclick="afficherModalModifierMandat(index)">{{Manda.numero_bordereau || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierMandat(index)">{{afficherNumeroDemandeEngagemnt(Manda.engagement_id) || 'pas numero demande'}}</td>
                      <td @dblclick="afficherModalModifierMandat(index)">{{afficherNumeroEngagemnt(Manda.engagement_id) || 'pas numero engage'}}</td>
                      <td @dblclick="afficherModalModifierMandat(index)">{{Manda.type_procedure_id || 'Non renseigné'}}</td>
-                    <!-- <td @dblclick="afficherModalModifierMandat(index)">{{CodeSection(Manda.section_id) || 'Non renseigné'}}</td> -->
-                    <td @dblclick="afficherModalModifierMandat(index)">{{uaMandat(Manda.ua_id) || 'Non renseigné'}}</td>
+            <td @dblclick="afficherModalModifierMandat(index)">{{uaMandat(Manda.ua_id) || 'Non renseigné'}}</td>
                                    
                     <td @dblclick="afficherModalModifierMandat(index)">{{formatageSomme(parseFloat(Manda.total_general))|| 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierMandat(index)">{{formaterDate(Manda.date_reception_cf) || 'Non renseigné'}}</td>
-                         <td>
+              <td>
                         <button v-if="Manda.decision_cf == 1"  class="btn  btn-success" @click="afficherModalModifierMotifMandat(index)" >                        
                      
                       <span    >Visé</span>
@@ -4644,7 +4663,7 @@
                         </span>
                       </button>
                     </td>
-                  </tr>
+              </tr>
 
                   
                                     </tbody>
@@ -9807,6 +9826,15 @@ montantCumulerMandatEngagement() {
       
       return 0
     },
+      montantCumulerLiquidationMandat() {
+      const val = parseFloat(this.sommeEgagementLigne(this.detail_marche.id)) + parseFloat(this.editLiquidation.total_general);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
 montantCumulerMandat() {
       const val = parseFloat(this.sommeEgagementLigne(this.detail_marche.id)) + parseFloat(this.sommeMontant);
       
@@ -12500,6 +12528,74 @@ showPopup20: function() {
         keyboard: false
       });
     },
+    ajouterMandatLiquidation(){
+      if (this.afficherMontantEngagement < this.afficheMontantAutorise(editLiquidation.marche_id)){
+alert("Le montant engagé est superieure au montant de la facture")
+      }
+      else if (this.afficherMontantEngagement > this.afficheMontantAutorise(editLiquidation.marche_id))
+      {
+        alert("Le montant engagé est Inférieure au montant de la facture")
+      }
+       else if (this.dotationDisponibleAnterieure < this.afficherMontantEngagement)
+      {
+        alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
+      }
+       else if (this.montantMarcheAvecAvenant == this.sommeEgagementLigneTableau(this.detail_marche.id))
+      {
+        alert("Marché apuré")
+      }
+      else
+      {
+ var nouvelObjet91 = {
+      
+      
+       exercice_budget :this.editLiquidation.exo_id,
+      numero_bon_manuel:this.editLiquidation.numero_bon_manuel,
+      numero_demande_liquidation:this.editLiquidation.numero_demande,
+       numero_engage:this.afficheNumeroEngagement(this.editLiquidation.marche_id),
+       numero_demande:this.afficheDemandeEngagement(this.editLiquidation.marche_id),
+       Numero_bordereau_engagement:this.afficheNumeroBordeauEngagement(this.editLiquidation.marche_id),
+         budget_general_id :this.detail_marche.imputation,
+         marche_id : this.detail_marche.id,
+         montant_a_paye: this.montantResteApaye,
+         montant_cumul:this.montantCumuler,
+       ligne_id:this.affichePlanEconomiqueId(this.editLiquidation.marche_id),
+     banque_id:this.afficheIdBanque(this.afficheIdCompteBancaire(this.editLiquidation.marche_id)),
+        // facture_id:this.editEngagement.facture_id,
+        type_procedure_id	:this.recupererTypeProcedure,
+engagement_id:this.editLiquidation.egagement_id,
+programme_id:this.afficheProgrammeId(this.editLiquidation.marche_id),
+action_id:this.afficheActionId(this.editLiquidation.marche_id),
+activite_id:this.afficheActiviteId(this.editLiquidation.marche_id),
+  ua_id:this.afficheUAId(this.editLiquidation.marche_id),
+  grd_nature_id:this.afficheGrandNatureId(this.editLiquidation.marche_id),
+	compte_id:this.afficheIdCompteBancaire(this.editLiquidation.marche_id),
+section_id:this.editLiquidation.section_id,
+  total_general:this.afficheMontantAutorise(this.editLiquidation.marche_id),
+   
+ bailler_id:this.afficheIdBailleur(this.editLiquidation.marche_id),
+ mod_paiement_engage:this.afficheIdModePaiement(this.editLiquidation.marche_id),
+ numero_bon_manuel:this.editLiquidation.numero_bon_manuel,
+ numero_demande_liquidation:this.editLiquidation.numero_demande,
+ numero_op:this.afficheNumeroOPATEngagement(this.editLiquidation.marche_id),
+	entreprise_id:this.afficheIdFournisseur(this.editLiquidation.marche_id),
+    	montant_tresor:this.afficheMontantTresor(this.editLiquidation.marche_id),
+        montant_don:this.afficheMontantDon(this.editLiquidation.marche_id),
+        montant_emprunt:this.afficheMontantEmprunt(this.editLiquidation.marche_id)
+ 
+       };
+this.ajouterMandat(nouvelObjet91)
+this.$("#exampleModalAjouteMandionatApresLiquidat").modal('hide');
+this.formDataMadat= {
+ numero_mandat:"",
+                  numero_bordereau:""
+ 
+};
+
+      }
+      
+
+    },
     // fonction pour vider l'input ajouter
     ajouterTypeTexteLocal() {
       var nouvelObjet = {
@@ -12539,9 +12635,34 @@ this.$("#modificationModalAvenant").modal('hide');
     },
 
     },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
          
         }
     
+
+
+
+
+
+
+
+
 </script>
 <style scoped>
  /* .testtaille {

@@ -356,7 +356,7 @@ typeProcedureLibelle() {
       methods:{ 
 
           ...mapActions("bienService", [
-                'ajouterAppelOffre','modifierAppelOffre',"supprimerAppelOffre","modifierAppelOffre",
+                'ajouterAppelOffre','modifierAppelOffre',"supprimerAppelOffre","modifierAppelOffre","modifierMarche"
             
             ]),
 
@@ -379,8 +379,14 @@ typeProcedureLibelle() {
           marche_id: this.macheid,
           objet_appel:this.affichierObjetMarche(this.macheid)
          };
+        //  this.formData.marche_id=this.macheid
+    //this.formEffetFinancier.entreprise_id=entreprisePremier.id
+    // this.ajouterActeEffetFinancier(this.formEffetFinancier)
+     this.ajouterAppelOffre(nouvelObjet);
+    let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
+    marcheObjet.attribue=1
       //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
-      this.ajouterAppelOffre(nouvelObjet);
+     this.modifierMarche(marcheObjet)
       this.formData = {
                     ref_appel:"",
                     type_appel:"",

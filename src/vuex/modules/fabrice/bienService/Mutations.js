@@ -1,6 +1,5 @@
 // get all prestation
 
-MODIFIER_COJO
 export const GET_ALL_PRESTATION = (state, tableau_prestation) =>{
     state.prestations = tableau_prestation
 }

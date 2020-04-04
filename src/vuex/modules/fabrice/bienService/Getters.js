@@ -810,7 +810,7 @@ export const nombremarches = getters =>
 
     export const AfficheMarcheNonAttribue = state =>
              state.marches.filter(
-               affichenaturedep => affichenaturedep.attribue !== 1
+               affichenaturedep => affichenaturedep.attribue == 0
     ).length;
     
 

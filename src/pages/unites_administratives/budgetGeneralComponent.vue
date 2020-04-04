@@ -23,7 +23,7 @@
                   <div class="controls">
                      <input
                                 type="text"
-                                class="span"
+                                class="span4"
                                readonly
                               :value="anneeAmort"
                               />
@@ -40,7 +40,7 @@
                 <div class="control-group">
                   <label class="control-label">Grande nature depense</label>
                   <div class="controls">
-                    <select v-model="formData.gdenature_id">
+                    <select v-model="formData.gdenature_id" class="span4">
                       <option
                         v-for="gdenature in grandes_natures"
                         :key="gdenature.id"
@@ -54,7 +54,7 @@
                 <div class="control-group">
                   <label class="control-label">Programme</label>
                   <div class="controls">
-                    <select v-model="formData.program_id">
+                    <select v-model="formData.program_id" class="span4">
                       <option
                         v-for="natsection in afficheNiveauPlanProg"
                         :key="natsection.id"
@@ -69,7 +69,7 @@
                <div class="control-group">
                   <label class="control-label">Unite administrative</label>
                   <div class="controls">
-                    <select v-model="formData.ua_id">
+                    <select v-model="formData.ua_id" class="span4">
                         <option value>Sélectionner</option>
                     <option
                       v-for="ua in uniteAdministratives"
@@ -88,7 +88,7 @@
                <div class="control-group">
                    <label class="control-label">Type Unite administrative</label>
                   <div class="controls">
-                    <select v-model="formData.typeua_id">
+                    <select v-model="formData.typeua_id" class="span4">
                       <option
                         v-for="type in uniteAdministrativeDynamiques(formData.ua_id)"
                         :key="type.id"
@@ -103,7 +103,7 @@
                <div class="control-group">
                   <label class="control-label">Section</label>
                   <div class="controls">
-                    <select v-model="formData.section_id">
+                    <select v-model="formData.section_id" class="span4">
                       <option
                         v-for="sect in sectionDynamiques(formData.ua_id)"
                         :key="sect.id"
@@ -117,7 +117,7 @@
                  <div class="control-group">
                   <label class="control-label">Classification Fonctionnel</label>
                   <div class="controls">
-                    <select v-model="formData.fonctionnel_id">
+                    <select v-model="formData.fonctionnel_id" class="span4">
                       <option
                         v-for="planfonct in afficheNiveauPlanFonctionnel"
                         :key="planfonct.id"
@@ -131,7 +131,7 @@
                  <div class="control-group">
                   <label class="control-label">Classification Economique</label>
                   <div class="controls">
-                    <select v-model="formData.economique_id">
+                    <select v-model="formData.economique_id" class="span4">
                       <option
                         v-for="Bgeneral in derniereNivoPlanBudgetaire"
                         :key="Bgeneral.id"
@@ -148,7 +148,7 @@
                  <div class="control-group">
                   <label class="control-label">Action</label>
                   <div class="controls">
-                    <select v-model="formData.action_id">
+                    <select v-model="formData.action_id" class="span4">
                       <option
                         v-for="planfonct in afficheNiveauAction"
                         :key="planfonct.id"
@@ -162,7 +162,7 @@
                  <div class="control-group">
                   <label class="control-label">Activite</label>
                   <div class="controls">
-                    <select v-model="formData.activite_id">
+                    <select v-model="formData.activite_id" class="span4">
                       <option
                         v-for="Bgeneral in afficheNiveauActivite"
                         :key="Bgeneral.id"
@@ -181,7 +181,7 @@
                     <input
                       type="number"
                     v-model="formData.Dotation_Initiale"
-                      class="span"
+                      class="span4"
                       placeholder="Dotation Initiale"
                       
                     />
@@ -193,7 +193,7 @@
                             <div class="control-group">
                             <label class="control-label">Version</label>
                             <div class="controls">
-                              <select v-model="formData.version">
+                              <select v-model="formData.version" class="span4">
                               <option value="0">Original</option>
                           <option value="1">Premiere modification</option>
    
@@ -211,7 +211,7 @@
                     <input
                       type="text"
                      :value="codeBudgetGeneral"
-                      class="span6"
+                      class="span8"
                       placeholder="Saisir le code"
                       readonly
                     />
@@ -265,7 +265,7 @@
                   <div class="controls">
                      <input
                                 type="text"
-                                class="span"
+                                class="span4"
                                readonly
                               :value="anneeAmort"
                               />
@@ -276,7 +276,7 @@
                 <div class="control-group">
                   <label class="control-label">Grande nature depense</label>
                   <div class="controls">
-                    <select v-model="editBudgetGeneral.gdenature_id">
+                    <select v-model="editBudgetGeneral.gdenature_id" class="span4">
                       <option
                         v-for="gdenature in grandes_natures"
                         :key="gdenature.id"
@@ -290,7 +290,7 @@
                 <div class="control-group">
                   <label class="control-label">Programme</label>
                   <div class="controls">
-                    <select v-model="editBudgetGeneral.program_id">
+                    <select v-model="editBudgetGeneral.program_id" class="span4">
                       <option
                         v-for="natsection in afficheNiveauPlanProg"
                         :key="natsection.id"
@@ -305,7 +305,7 @@
                <div class="control-group">
                   <label class="control-label">Unite administrative</label>
                   <div class="controls">
-                    <select v-model="editBudgetGeneral.ua_id">
+                    <select v-model="editBudgetGeneral.ua_id" class="span4">
                         <option value>Sélectionner</option>
                     <option
                       v-for="ua in uniteAdministratives"
@@ -323,7 +323,7 @@
                <div class="control-group">
                    <label class="control-label">Type Unite administrative</label>
                   <div class="controls">
-                    <select v-model="editBudgetGeneral.typeua_id">
+                    <select v-model="editBudgetGeneral.typeua_id" class="span4">
                       <option
                         v-for="type in uniteAdministrativeDynamiques(editBudgetGeneral.ua_id)"
                         :key="type.id"
@@ -339,7 +339,7 @@
                <div class="control-group">
                   <label class="control-label">Section</label>
                   <div class="controls">
-                    <select v-model="editBudgetGeneral.section_id">
+                    <select v-model="editBudgetGeneral.section_id" class="span4">
                       <option
                         v-for="sect in sectionDynamiques(editBudgetGeneral.ua_id)"
                         :key="sect.secti.id"
@@ -353,7 +353,7 @@
                  <div class="control-group">
                   <label class="control-label">Classification Fonctionnel</label>
                   <div class="controls">
-                    <select v-model="editBudgetGeneral.fonctionnel_id">
+                    <select v-model="editBudgetGeneral.fonctionnel_id" class="span4">
                      <option
                         v-for="planfonct in afficheNiveauPlanFonctionnel"
                         :key="planfonct.id"
@@ -368,7 +368,7 @@
                  <div class="control-group">
                   <label class="control-label">Classification Economique</label>
                   <div class="controls">
-                    <select v-model="editBudgetGeneral.economique_id">
+                    <select v-model="editBudgetGeneral.economique_id" class="span4">
                       <option
                         v-for="Bgeneral in derniereNivoPlanBudgetaire"
                         :key="Bgeneral.id"
@@ -385,7 +385,7 @@
                  <div class="control-group">
                   <label class="control-label">Action</label>
                   <div class="controls">
-                    <select v-model="editBudgetGeneral.action_id">
+                    <select v-model="editBudgetGeneral.action_id" class="span4">
                       <option
                         v-for="planfonct in afficheNiveauAction"
                         :key="planfonct.id"
@@ -399,7 +399,7 @@
                  <div class="control-group">
                   <label class="control-label">Activite</label>
                   <div class="controls">
-                    <select v-model="editBudgetGeneral.activite_id">
+                    <select v-model="editBudgetGeneral.activite_id" class="span4">
                       <option
                         v-for="Bgeneral in afficheNiveauActivite"
                         :key="Bgeneral.id"
@@ -418,7 +418,7 @@
                     <input
                       type="number"
                     v-model="editBudgetGeneral.Dotation_Initiale"
-                      class="span"
+                      class="span4"
                       placeholder="Dotation Initiale"
                       
                     />
@@ -430,7 +430,7 @@
                             <div class="control-group">
                             <label class="control-label">Version</label>
                             <div class="controls">
-                              <select v-model="editBudgetGeneral.version">
+                              <select v-model="editBudgetGeneral.version" class="span4">
                               <option value="0">Original</option>
                           <option value="1">Premiere modification</option>
    
@@ -447,7 +447,7 @@
                     <input
                       type="text"
                      :value="codeBudgetGeneralModifier"
-                      class="span6"
+                      class="span8"
                       placeholder="Saisir le code"
                       readonly
                     />
@@ -637,32 +637,65 @@ export default {
 
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  
+//  codeBudgetGeneralModifier(){
+//       // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
+//     const sectionBudget = this.sections.find(serviceg => serviceg.id == this.editBudgetGeneral.section_id)
+//    const programmeBudget = this.plans_programmes.find(serviceg => serviceg.id == this.editBudgetGeneral.program_id)
+//      const uaBudget = this.uniteAdministratives.find(serviceg => serviceg.id == this.editBudgetGeneral.ua_id)
+//     const fonctionnelBudget = this.plans_fonctionnels.find(serviceg => serviceg.id == this.editBudgetGeneral.fonctionnel_id)
+//  const economiqueBudget = this.plans_budgetaires.find(chap => chap.id == this.editBudgetGeneral.economique_id)
+//      if(sectionBudget && programmeBudget && uaBudget && fonctionnelBudget && economiqueBudget){
+//        return sectionBudget.code_section +"-"+ programmeBudget.code +"-"+ uaBudget.code_ua +"-"+ fonctionnelBudget.code  +"-"+ economiqueBudget.code
+//      }
+
+//      return null
+//    },
+
  codeBudgetGeneralModifier(){
-      // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
-    const sectionBudget = this.sections.find(serviceg => serviceg.id == this.editBudgetGeneral.section_id)
-   const programmeBudget = this.plans_programmes.find(serviceg => serviceg.id == this.editBudgetGeneral.program_id)
-     const uaBudget = this.uniteAdministratives.find(serviceg => serviceg.id == this.editBudgetGeneral.ua_id)
-    const fonctionnelBudget = this.plans_fonctionnels.find(serviceg => serviceg.id == this.editBudgetGeneral.fonctionnel_id)
+        // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
+       const ActiviteBudget = this.afficheNiveauActivite.find(serviceg => serviceg.id == this.editBudgetGeneral.activite_id)
+  //   const sectionBudget = this.sections.find(serviceg => serviceg.id == this.formData.section_id)
+  //  const programmeBudget = this.plans_programmes.find(serviceg => serviceg.id == this.formData.program_id)
+  //    const uaBudget = this.uniteAdministratives.find(serviceg => serviceg.id == this.formData.ua_id)
+  //   const fonctionnelBudget = this.plans_fonctionnels.find(serviceg => serviceg.id == this.formData.fonctionnel_id)
  const economiqueBudget = this.plans_budgetaires.find(chap => chap.id == this.editBudgetGeneral.economique_id)
-     if(sectionBudget && programmeBudget && uaBudget && fonctionnelBudget && economiqueBudget){
-       return sectionBudget.code_section +"-"+ programmeBudget.code +"-"+ uaBudget.code_ua +"-"+ fonctionnelBudget.code  +"-"+ economiqueBudget.code
+     if(ActiviteBudget && economiqueBudget){
+       return ActiviteBudget.code +" "+ economiqueBudget.code
      }
 
      return null
    },
-    codeBudgetGeneral(){
+ codeBudgetGeneral(){
       // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
-    const sectionBudget = this.sections.find(serviceg => serviceg.id == this.formData.section_id)
-   const programmeBudget = this.plans_programmes.find(serviceg => serviceg.id == this.formData.program_id)
-     const uaBudget = this.uniteAdministratives.find(serviceg => serviceg.id == this.formData.ua_id)
-    const fonctionnelBudget = this.plans_fonctionnels.find(serviceg => serviceg.id == this.formData.fonctionnel_id)
+       const ActiviteBudget = this.afficheNiveauActivite.find(serviceg => serviceg.id == this.formData.activite_id)
+  //   const sectionBudget = this.sections.find(serviceg => serviceg.id == this.formData.section_id)
+  //  const programmeBudget = this.plans_programmes.find(serviceg => serviceg.id == this.formData.program_id)
+  //    const uaBudget = this.uniteAdministratives.find(serviceg => serviceg.id == this.formData.ua_id)
+  //   const fonctionnelBudget = this.plans_fonctionnels.find(serviceg => serviceg.id == this.formData.fonctionnel_id)
  const economiqueBudget = this.plans_budgetaires.find(chap => chap.id == this.formData.economique_id)
-     if(sectionBudget && programmeBudget && uaBudget && fonctionnelBudget && economiqueBudget){
-       return sectionBudget.code_section +"-"+ programmeBudget.code +"-"+ uaBudget.code_ua +"-"+ fonctionnelBudget.code  +"-"+ economiqueBudget.code
+     if(ActiviteBudget && economiqueBudget){
+       return ActiviteBudget.code +" "+ economiqueBudget.code
      }
 
      return null
    },
+
+
+
+
+//     codeBudgetGeneral(){
+//       // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
+//     const sectionBudget = this.sections.find(serviceg => serviceg.id == this.formData.section_id)
+//    const programmeBudget = this.plans_programmes.find(serviceg => serviceg.id == this.formData.program_id)
+//      const uaBudget = this.uniteAdministratives.find(serviceg => serviceg.id == this.formData.ua_id)
+//     const fonctionnelBudget = this.plans_fonctionnels.find(serviceg => serviceg.id == this.formData.fonctionnel_id)
+//  const economiqueBudget = this.plans_budgetaires.find(chap => chap.id == this.formData.economique_id)
+//      if(sectionBudget && programmeBudget && uaBudget && fonctionnelBudget && economiqueBudget){
+//        return sectionBudget.code_section +"-"+ programmeBudget.code +"-"+ uaBudget.code_ua +"-"+ fonctionnelBudget.code  +"-"+ economiqueBudget.code
+//      }
+
+//      return null
+//    },
 
     sectionDynamiques() {
       return id => {
@@ -822,8 +855,8 @@ this.$("#modificationModal").modal('hide');
 <style scoped>
 
 .tailgrand12{
-  width: 75%;
-  margin: 0 -35%;
+  width: 95%;
+  margin: 0 -47%;
 }
 
 </style>

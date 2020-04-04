@@ -4,7 +4,7 @@ import { asyncLoading } from 'vuejs-loading-plugin'
 var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
 
-supprimerEngagement
+
 
 // action for print all to prestation
 
@@ -286,7 +286,7 @@ export function supprimerExecutionMarche({commit}, id) {
 
 
 
-
+modifierActeEffetFinancier
 
 
 // action pour le motif de decision
