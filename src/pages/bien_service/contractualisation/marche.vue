@@ -1382,7 +1382,11 @@ export default {
   },
 
   computed: {
-     ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser','acteEffetFinanciers','montantPlanifier','montantContratualisation','afficheContratualisation','affichePlanifier','nombremarchesExecute','afficheMarchePlanifier','afficheMarcheContratualisation','AfficheMarcheAttribue','AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
+     ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45',
+         'getActeEffetFinancierPersonnaliser','acteEffetFinanciers','montantPlanifier','montantContratualisation',
+         'afficheContratualisation','affichePlanifier','nombremarchesExecute',
+         'afficheMarchePlanifier','afficheMarcheContratualisation','AfficheMarcheAttribue',
+         'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
      "montantMarche", "printMarcheNonAttribue","procedurePassations","typeTypeProcedures"]),
 
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",

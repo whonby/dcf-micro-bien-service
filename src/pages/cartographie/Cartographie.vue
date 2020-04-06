@@ -41,9 +41,9 @@
                                     <b>{{l.ville}}</b> <br>
                                     <div >
                                         Budget: <span style="color: #003900; "><b>{{formatageSomme(l.budget)}}</b></span> <br>
-                                        Budget execute:<span style="color: #00d700; "><b>101</b></span><br>
-                                        Budget restant:<span style="color: darkred; "><b>101</b></span><br>
-                                        Taux d'execution:<span style="color: #e36706; "><b>101</b></span>
+                                        Budget execute:<span style="color: #00d700; "><b>{{formatageSomme(l.budgetExecute)}}</b></span><br>
+                                        Budget restant:<span style="color: darkred; "><b>{{formatageSomme(l.budgetReste)}}</b></span><br>
+                                        Taux d'execution:<span style="color: #e36706; "><b>{{l.tauxBudget}} %</b></span>
                                     </div>
                                 </l-popup>
 
@@ -204,6 +204,7 @@
             "uniteAdministratives",
             "getterBudgeCharge"
         ]),
+        ...mapGetters("bienService", ['marches',"engagements"]),
             localisationsFiltre(){
             const searchTerm = this.search.toLowerCase();
             console.log(this.localisations_geographiques.filter(item=>item.parent!==null))
@@ -217,7 +218,7 @@
         },
         localisation(){
         let localisation=[]
-            //console.log(this.uniteAdministratives)
+
             let vM=this;
             this.localisations_geographiques.forEach(function (value){
                 if(value.parent!=null){
@@ -233,6 +234,7 @@
                         let budgetZone=0;
                         let color="";
                         let colorFill=""
+                        let montant_engagement_zone=0;
                         let uniteByZoneGeo= vM.uniteAdministratives.filter( item => item.localisationgeo_id ==value.id)
                         if (uniteByZoneGeo!=undefined) {
 
@@ -241,6 +243,7 @@
                              */
 
                             uniteByZoneGeo.forEach(function (row) {
+                                let montant_engagement_unite_admin=0;
                                 let budgetActive=row.ua_budget_general.filter(item=>item.actived==1)
                                 if (budgetActive!="") {
                                     let initialValue = 0;
@@ -249,13 +252,45 @@
                                     }, initialValue);
 
                                     budgetZone=budgetZone + budgetByUnite
+
+                                    //Recuperation des marche
+                                    let  objetMarche=vM.marches.filter(item=>{
+                                        if(item.unite_administrative_id==row.id ){
+
+                                                 return item
+                                        }
+                                    })
+
+                                     if(objetMarche!=""){
+                                         objetMarche.forEach(function (val) {
+                                             let initeVal = 0;
+                                             let montantEngament=  vM.engagements.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                                                 return total + parseFloat(currentValue.total_general) ;
+                                             }, initeVal);
+                                             montant_engagement_unite_admin=montant_engagement_unite_admin + montantEngament
+
+                                         })
+                                     }
+                                    montant_engagement_zone= montant_engagement_zone + montant_engagement_unite_admin
+
+
                                 }
 
+
+
+
                             })
-                            console.log("---------------")
-                            console.log(value.libelle)
-                            console.log(budgetZone)
-                            console.log("---------------")
+
+
+
+                        }
+
+       let taux=0;
+                        let budgetRest=budgetZone-montant_engagement_zone
+                        if (montant_engagement_zone!=0){
+
+                            taux=(montant_engagement_zone/budgetZone)*100
+
                         }
                          if(budgetZone==0){
                              color="#ff0000"
@@ -269,9 +304,9 @@
                             ville:value.libelle,
                             latlng:coordonne,
                             budget:budgetZone,
-                            budgetReste:'',
-                            budgetExecute:"",
-                            tauxBudget:"",
+                            budgetReste:budgetRest,
+                            budgetExecute:montant_engagement_zone,
+                            tauxBudget:taux.toFixed(2),
                             color:color,
                             colorFill:colorFill
                         }
@@ -281,6 +316,9 @@
                 }
             })
         return localisation;
+        },
+        exoEnCours(){
+            return this.exercices_budgetaires.filter(element => element.encours == 1)
         },
       administratif(){
           return  uniteAdmin=>{
