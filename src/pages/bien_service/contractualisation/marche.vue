@@ -1,9 +1,4 @@
-afficheNombreMarchExecuter
-afficherAnneeBudget
-afficherUniteAdministrative
-afficherTypeMarcheLibelle
-afficherIdUniteAdministrative
-afficheMarcheResilier
+
 <template>
     <div class="container-fluid">
      
@@ -1711,11 +1706,12 @@ export default {
 
   computed: {
      ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
-     'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
-     'nombremarchesExecute','afficheMarchePlanifier','afficheMarcheContratualisation','AfficheMarcheAttribue',
+     'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier','montantPlanifier',
+     'nombremarchesExecute','afficheMarchePlanifier','afficheMarcheContratualisation','AfficheMarcheAttribue','montantMarche',
      'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
       "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
+
 
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
