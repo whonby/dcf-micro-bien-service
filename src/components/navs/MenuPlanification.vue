@@ -8,7 +8,7 @@
 
 
 
-        <li class="dropdown" id="planification">
+        <!-- <li class="dropdown" id="planification">
             <a  href="#" data-toggle="dropdown" data-target="#planification" class="dropdown-toggle">
                 <span class="text">PLANIFICATION DES MARCHES </span>
                 <b class="caret"></b>
@@ -33,9 +33,9 @@
 
 
             </ul>
-        </li>
+        </li> -->
       
-       <li class="dropdown" id="execut">
+       <!-- <li class="dropdown" id="execut">
         <a  href="#" data-toggle="dropdown" data-target="#execut" class="dropdown-toggle">
           <span class="text">EXECUTION DU MARCHES </span>
           <b class="caret"></b>
@@ -62,8 +62,18 @@
          
           
         </ul>
-      </li>
-
+      </li> -->
+       <li>
+            <router-link :to="{name: 'marche'}" tag="a">
+              PLANIFICATION DES MARCHES
+            </router-link>
+          </li>
+     <li>
+   <li>
+            <router-link :to="{name: 'executionMarche'}" tag="a">
+              EXECUTION DU MARCHES
+            </router-link>
+          </li>
      <li>
             <router-link :to="{name: 'indicateurBienService'}" tag="a">
               SUIVI DES MARCHES

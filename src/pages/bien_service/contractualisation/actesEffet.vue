@@ -67,7 +67,7 @@
                             {{effetFinancier.objet_act || 'Non renseigné'}}</td> -->
 
                         <td >
-                          <span v-if="effetFinancier.	incidence_financiere == 0">Oui</span>
+                          <span v-if="effetFinancier.incidence_financiere == 0">Oui</span>
 
                            <span v-else>Non</span>
                             </td>
