@@ -43,14 +43,14 @@
                       <tr>
                         <td>
                           <label class="control-label">Exercice Budgetaire</label>
-                          
+                         
+
                               <input    type="text"   class="span3" readonly  v-model="editLiquidation.exo_id" />                
-                             
-                        </td>
+                                                    </td>
                          <td>
                           <label class="control-label">Section</label>
                           
-                              <input    type="text"   class="span5" readonly  :value="afficherSection(editLiquidation.section_id)" />                
+                              <input    type="text"   class="span4" readonly  :value="afficherSection(editLiquidation.section_id)" />                
                              
                         </td>
                         <td>
@@ -62,7 +62,7 @@
                         <td>
                           <label class="control-label">Action</label>
                           
-                              <input    type="text"   class="span4" readonly  :value="afficheActionLibelle(afficheActionId(editLiquidation.marche_id))"/>                              
+                              <input    type="text"   class="span5" readonly  :value="afficheActionLibelle(afficheActionId(editLiquidation.marche_id))"/>                              
                              
                         </td>
                         
@@ -79,7 +79,7 @@
                          <td>
                           <label class="control-label">Unite d'administrative</label>
                           
-                              <input    type="text"   class="span5" readonly  :value="afficheUALibelle(afficheUAId(editLiquidation.marche_id))" />                              
+                              <input    type="text"   class="span4" readonly  :value="afficheUALibelle(afficheUAId(editLiquidation.marche_id))" />                              
                              
                         </td>
                           <td>
@@ -91,7 +91,7 @@
                         <td>
                           <label class="control-label">Plan économique</label>
                           
-                              <input    type="text"   class="span4" readonly  :value="affichePlanEconomiqueLibelle(affichePlanEconomiqueId(editLiquidation.marche_id))" />                
+                              <input    type="text"   class="span5" readonly  :value="affichePlanEconomiqueLibelle(affichePlanEconomiqueId(editLiquidation.marche_id))" />                
                              
                                               
                         </td>
@@ -131,14 +131,14 @@
                          
                          <label class="control-label">Objet du marche</label>
                           
-                              <input    type="text"   class="span7" readonly  :value="detail_marche.objet"  />                
+                              <input    type="text"   class="span8" readonly  :value="detail_marche.objet"  />                
                              
                                              
                         </td>
                          <td>
                           <label class="control-label">Banque</label>
                           
-                              <input    type="text"   class="span4"  readonly  :value="afficheLibelleBanque(afficheIdBanque(afficheIdCompteBancaire(editLiquidation.marche_id)))" />                
+                              <input    type="text"   class="span3"  readonly  :value="afficheLibelleBanque(afficheIdBanque(afficheIdCompteBancaire(editLiquidation.marche_id)))" />                
                              
                         </td>
                          <td>
@@ -168,7 +168,7 @@
                           <td colspan="">
                           <label class="control-label">Mode de reglement</label>
                           
-                              <input    type="text"   class="span3" readonly   :value="afficheLibelleModePaiemnt(afficheIdModePaiement(editLiquidation.marche_id))" />                
+                              <input    type="text"   class="span4" readonly   :value="afficheLibelleModePaiemnt(afficheIdModePaiement(editLiquidation.marche_id))" />                
                              
                         </td>
                          <td colspan="">
@@ -180,7 +180,7 @@
                         <td colspan="">
                           <label class="control-label">Numero engagement</label>
                           
-                              <input    type="text"   class="span4" readonly  :value="afficheNumeroEngagement(editLiquidation.marche_id)"  />                
+                              <input    type="text"   class="span3" readonly  :value="afficheNumeroEngagement(editLiquidation.marche_id)"  />                
                              
                         </td>
                         <td colspan="">
@@ -195,7 +195,7 @@
                             <td>
                                <label class="control-label">Numero OP/AT</label>
                           
-                              <input    type="text"   class="span3" readonly  :value="afficheNumeroOPATEngagement(editLiquidation.marche_id)"  />  
+                              <input    type="text"   class="span4" readonly  :value="afficheNumeroOPATEngagement(editLiquidation.marche_id)"  />  
                             </td>
                              <td>
                                <label class="control-label">Réf. Engagement  juridique</label>
@@ -205,7 +205,7 @@
                              <td>
                                <label class="control-label">Numero mandat</label>
                           
-                              <input    type="text"   class="span4"   v-model="formDataMadat.numero_mandat" required />  
+                              <input    type="text"   class="span3"   v-model="formDataMadat.numero_mandat" required />  
                             </td>
                              <td>
                                <label class="control-label">Numero Bordereau mandat</label>
@@ -241,7 +241,7 @@
                         <td>
                           <label class="control-label">Adresse</label>
                           
-                              <input    type="text"   class="span4" readonly :value="afficheAdresseFournisseur(afficheIdFournisseur(editLiquidation.marche_id))"  />                
+                              <input    type="text"   class="span3" readonly :value="afficheAdresseFournisseur(afficheIdFournisseur(editLiquidation.marche_id))"  />                
                              
                         </td>
                        
@@ -269,7 +269,7 @@
                          <td>
                            <label class="control-label">Total</label>
                           
-                              <input    type="text"   class="span4" readonly  :value="afficheMontantAutorise(editLiquidation.marche_id)" />                
+                              <input    type="text"   class="span3" readonly  :value="afficheMontantAutorise(editLiquidation.marche_id)" />                
                              
                         </td>
                       </tr>
@@ -280,50 +280,82 @@
                               <input    type="text"   class="span4" readonly :value="afficheLibelleBailleur(afficheIdBailleur(editLiquidation.marche_id))"  />                
                              
                         </td>
-                        <td colspan="">
-                         
-                         <label class="control-label">Crédit autorisé</label>
+                         <td>
+                          <div class="control-group">
+                            <label class="control-label">Crédit Autorisés</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="dotationInite(detail_marche.imputation).Dotation_Initiale" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                         <td>
+                          <div class="control-group">
+                            <label class="control-label">Cumul des demandes(y compris celle-ci) </label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="montantCumulerLiquidationMandat" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                                               <td>
+                          <div class="control-group">
+                            <label class="control-label">Dotation disponible</label>
+                            <div class="controls">
+                              <input type="text" class="span3" :value="dotationDisponibleAnterieure" readonly/>
+                            </div>
+                          </div>
+                        </td>
                           
-                              <input    type="text"   class="span4" :value="afficheMontantAutorise(editLiquidation.marche_id)" readonly   />                
+                          <div class="control-group">
+                            <!-- <label class="control-label">Montant marché</label> -->
+                            <div class="controls">
+                              <input type="hidden" class="span4" v-model="montantMarcheAvecAvenant" readonly/>
+                            </div>
+                          </div>
+                        
+                       
+                         
+                         <!-- <label class="control-label">Crédit autorisé</label> -->
+                          
+                              <input    type="hidden"   class="span4" :value="afficheMontantAutorise(editLiquidation.marche_id)" readonly   />                
                              
                                               
-                        </td>
-                        <td>
-                          <label class="control-label">Cumul des demandes</label>
-                          <input    type="text"   class="span4" readonly :value="montantCumulerLiquidationMandat"  />
+                      
+                        
+                          <!-- <label class="control-label">Cumul des demandes</label> -->
+                          <input    type="hidden"   class="span4" readonly :value="montantCumulerLiquidationMandat"  />
                               <input    type="hidden"   class="span4" readonly :value="sommeEgagementLigne(detail_marche.id)"  />                
                              
-                        </td>
-                          <td>
-                          <label class="control-label">Disponible</label>
+                        
+                       
+                          <!-- <label class="control-label">Disponible budgetaire</label> -->
                           
-                              <input    type="text"   class="span4" readonly :value="restePayeMarche"  />                
+                              <input    type="hidden"   class="span4" readonly :value="restePayeMarche"  />                
                              
-                        </td>
+                      
                       
                        
                         
                       </tr>
                      <tr>
-                              <td>
-                          <label class="control-label">Dotation disponible anterieure</label>
+                            
+                          <!-- <label class="control-label">Dotation disponible anterieure</label> -->
                           
-                              <input    type="text"   class="span4" readonly :value="dotationDisponibleAnterieure"  />                
+                              <input    type="hidden"   class="span4" readonly :value="dotationDisponibleAnterieure"  />                
                              
-                        </td>
-                        <td colspan="">
+                       
+                        
                          
-                         <label class="control-label">Montant marché</label>
+                         <!-- <label class="control-label">Montant marché</label> -->
                           
-                              <input    type="text"   class="span4" :value="montantMarcheAvecAvenant" readonly   />                
+                              <input    type="hidden"   class="span4" :value="montantMarcheAvecAvenant" readonly   />                
                              
                                               
-                        </td>
-                        <td>
-                          <label class="control-label">Disponible marché</label>
-                          <input    type="text"   class="span4" readonly :value="restePayeMarcheMandat"  />
+                        
+                       
+                          <!-- <label class="control-label">Disponible marché</label> -->
+                          <input    type="hidden"   class="span4" readonly :value="restePayeMarcheMandat"  />
                               
-                        </td>
+                       
                          
                       
                        
@@ -366,479 +398,13 @@
 
 
 
-<div id="exampleModalLiquidationModification" class="modal hide tailgrand">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Liquidation </h3>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-        
-            <div class="widget-box">
-                  <div class="widget-title">
-                    <ul class="nav nav-tabs">
-                      <li class="active">
-                        <a data-toggle="tab" href="#tab189">INDENTIFICATION</a>
-                      </li>
-                      <li>
-                        <a data-toggle="tab" href="#tab289">DESCRIPTION DE LA DEMANDE D'ENGAGEMENT</a>
-                      </li>
-                       <li>
-                        <a data-toggle="tab" href="#tab2892">REFERENCE DU FOURNISSEUR OU BENEFICIAIRE</a>
-                      </li>
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab3">Autres Information</a>
-                      </li> -->
-                     
-                    </ul>
-                  </div>
-                  <div class="widget-content tab-content">
-                    <div id="tab189" class="tab-pane active">
-                      <tr>
-                        <td>
-                          <label class="control-label">Exercice Budgetaire</label>
-                          
-                              <input    type="text"   class="span3" readonly  v-model="editLiquidation.exo_id" />                
-                             
-                        </td>
-                         <td>
-                          <label class="control-label">Section</label>
-                          
-                              <input    type="text"   class="span5" readonly  :value="afficherSection(editLiquidation.section_id)" />                
-                             
-                        </td>
-                        <td>
-                          <label class="control-label">Programme</label>
-                          
-                              <input    type="text"   class="span3" readonly :value="afficheProgrammeLibelle(afficheProgrammeId(editLiquidation.marche_id))" />                
-                             
-                        </td>
-                        <td>
-                          <label class="control-label">Action</label>
-                          
-                              <input    type="text"   class="span4" readonly  :value="afficheActionLibelle(afficheActionId(editLiquidation.marche_id))"/>                              
-                             
-                        </td>
-                        
-                       
-                        
-                      </tr>
-                       <tr>
-                          <td>
-                          <label class="control-label">Activite</label>
-                          
-                              <input    type="text"   class="span3" readonly  :value="afficheActiviteLibelle(afficheActiviteId(editLiquidation.marche_id))" />                              
-                             
-                        </td>
-                         <td>
-                          <label class="control-label">Unite d'administrative</label>
-                          
-                              <input    type="text"   class="span5" readonly  :value="afficheUALibelle(afficheUAId(editLiquidation.marche_id))" />                              
-                             
-                        </td>
-                          <td>
-                          <label class="control-label">Nature de depense</label>
-                          
-                              <input    type="text"   class="span3" readonly :value="afficheGrandNatureLibelle(afficheGrandNatureId(editLiquidation.marche_id))"  />                
-                            
-                        </td>
-                        <td>
-                          <label class="control-label">Plan économique</label>
-                          
-                              <input    type="text"   class="span4" readonly  :value="affichePlanEconomiqueLibelle(affichePlanEconomiqueId(editLiquidation.marche_id))" />                
-                             
-                                              
-                        </td>
-                       
-                        
-                      </tr>
-                      <tr>
-                        <td>
-                        <label class="control-label">N° Bon Manuel</label>
-                          
-                              <input    type="text"   class="span3" v-model="editLiquidation.numero_bon_manuel"   />                
-                             
-                        </td>
-                          <td>
-                          <label class="control-label">N° Demande</label>
-                          
-                              <input    type="text"   class="span4"  v-model="editLiquidation.numero_demande" />                
-                             
-                        </td>
-                        <td colspan="2">
-                          <label class="control-label">Imputation Budgetaire</label>
-                          
-                              <input    type="text"   class="span6" readonly  :value="detail_marche.imputation" />                
-                             
-                                              
-                        </td>
-                       
-                        
-                        
-                      </tr>
-                        
-                     
-                    </div>
-                    <div id="tab289" class="tab-pane ">
-                      <tr>
-                          <td colspan="3">
-                         
-                         <label class="control-label">Objet du marche</label>
-                          
-                              <input    type="text"   class="span7" readonly  :value="detail_marche.objet"  />                
-                             
-                                             
-                        </td>
-                         <td>
-                          <label class="control-label">Banque</label>
-                          
-                              <input    type="text"   class="span7"  readonly  :value="afficheLibelleBanque(afficheIdBanque(afficheIdCompteBancaire(editLiquidation.marche_id)))" />                
-                             
-                        </td>
-                      </tr>
-                     <tr>
-                        
-
-                       
-                          <td colspan="2">
-                          <label class="control-label">Numero compte bancaire</label>
-                          
-                              <input    type="text"   class="span7" readonly  :value="afficheLibelleCompteBancaire(afficheIdCompteBancaire(editLiquidation.marche_id))" />                
-                             
-                        </td>
-                        <td colspan="2">
-                          <label class="control-label">Mode de reglement</label>
-                          
-                              <input    type="text"   class="span7" readonly  :value="afficheLibelleModePaiemnt(afficheIdModePaiement(editLiquidation.marche_id))"  />                
-                             
-                        </td>
-                       
-                        
-                      </tr>
-                          
-                     
-
-                    </div>
-                     <div id="tab2892" class="tab-pane ">
-                     <tr>
-                        <td colspan="">
-                         
-                         <label class="control-label">Numéro</label>
-                          
-                              <input    type="text"   class="span3" readonly  :value="afficheNumeroFournisseur(afficheIdFournisseur(editLiquidation.marche_id))" />                
-                             
-                                             
-                        </td>
-                        <td>
-                          <label class="control-label">Nom</label>
-                          
-                              <input    type="text"   class="span4" readonly  :value="afficheNomFournisseur(afficheIdFournisseur(editLiquidation.marche_id))" />                
-                             
-                        </td>
-                          <td>
-                          <label class="control-label">Telephone</label>
-                          
-                              <input    type="text"   class="span4" readonly  :value="afficheTelephoneFournisseur(afficheIdFournisseur(editLiquidation.marche_id))" />                
-                             
-                        </td>
-                        <td>
-                          <label class="control-label">Adresse</label>
-                          
-                              <input    type="text"   class="span4" readonly :value="afficheAdresseFournisseur(afficheIdFournisseur(editLiquidation.marche_id))"  />                
-                             
-                        </td>
-                       
-                        
-                      </tr>
-                           <tr>
-                        <td colspan="">
-                         
-                         <label class="control-label">Crédit autorisé</label>
-                          
-                              <input    type="text"   class="span3" :value="afficheMontantAutorise(editLiquidation.marche_id)" readonly   />                
-                             
-                                              
-                        </td>
-                        <td>
-                          <label class="control-label">Cumul des demandes</label>
-                          
-                              <input    type="text"   class="span4" readonly :value="sommeEgagementLigne(detail_marche.id)"  />                
-                             
-                        </td>
-                          <td>
-                          <label class="control-label">Disponible</label>
-                          
-                              <input    type="text"   class="span4" readonly :value="restePayeMarche"  />                
-                             
-                        </td>
-                       
-                       
-                        
-                      </tr>
-                     
-
-                    </div>
-                  </div>
-            </div>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="fonctionModifierLiquidation(editLiquidation)"
-          class="btn btn-primary"
-          href="#"
-         
-        >Modifier</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 <!-- DEBUT AJOUT LIQUIDATION -->
 
 
-     <div id="exampleModalLiquidation" class="modal hide tailgrand">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Liquidation </h3>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-        
-            <div class="widget-box">
-                  <div class="widget-title">
-                    <ul class="nav nav-tabs">
-                      <li class="active">
-                        <a data-toggle="tab" href="#tab107">INDENTIFICATION</a>
-                      </li>
-                      <li>
-                        <a data-toggle="tab" href="#tab789">DESCRIPTION DE LA DEMANDE D'ENGAGEMENT</a>
-                      </li>
-                       <li>
-                        <a data-toggle="tab" href="#tab7892">REFERENCE DU FOURNISSEUR OU BENEFICIAIRE</a>
-                      </li>
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab3">Autres Information</a>
-                      </li> -->
-                     
-                    </ul>
-                  </div>
-                  <div class="widget-content tab-content">
-                    <div id="tab107" class="tab-pane active">
-                      <tr>
-                        <td>
-                          <label class="control-label">Exercice Budgetaire</label>
-                          
-                              <input    type="text"   class="span3" readonly  v-model="editRealiteServiceFait.exercice_budget" />                
-                             
-                        </td>
-                         <td>
-                          <label class="control-label">Section</label>
-                          
-                              <input    type="text"   class="span5" readonly  :value="afficherSection(editRealiteServiceFait.section_id)" />                
-                             
-                        </td>
-                        <td>
-                          <label class="control-label">Programme</label>
-                          
-                              <input    type="text"   class="span3" readonly :value="afficheProgrammeLibelle(afficheProgrammeId(editRealiteServiceFait.marche_id))" />                
-                             
-                        </td>
-                        <td>
-                          <label class="control-label">Action</label>
-                          
-                              <input    type="text"   class="span4" readonly  :value="afficheActionLibelle(afficheActionId(editRealiteServiceFait.marche_id))"/>                              
-                             
-                        </td>
-                        
-                       
-                        
-                      </tr>
-                       <tr>
-                          <td>
-                          <label class="control-label">Activite</label>
-                          
-                              <input    type="text"   class="span3" readonly  :value="afficheActiviteLibelle(afficheActiviteId(editRealiteServiceFait.marche_id))" />                              
-                             
-                        </td>
-                         <td>
-                          <label class="control-label">Unite d'administrative</label>
-                          
-                              <input    type="text"   class="span5" readonly  :value="afficheUALibelle(afficheUAId(editRealiteServiceFait.marche_id))" />                              
-                             
-                        </td>
-                          <td>
-                          <label class="control-label">Nature de depense</label>
-                          
-                              <input    type="text"   class="span3" readonly :value="afficheGrandNatureLibelle(afficheGrandNatureId(editRealiteServiceFait.marche_id))"  />                
-                            
-                        </td>
-                        <td>
-                          <label class="control-label">Plan économique</label>
-                          
-                              <input    type="text"   class="span4" readonly  :value="affichePlanEconomiqueLibelle(affichePlanEconomiqueId(editRealiteServiceFait.marche_id))" />                
-                             
-                                              
-                        </td>
-                       
-                        
-                      </tr>
-                      <tr>
-                        <td>
-                        <label class="control-label">N° Bon Manuel</label>
-                          
-                              <input    type="text"   class="span3" readonly :value="afficheNumerodemande_engage(afficheIdEngagementDansRealiteFait(editRealiteServiceFait.marche_id))"  />                
-                             
-                        </td>
-                          <td>
-                          <label class="control-label">N° Demande</label>
-                          
-                              <input    type="text"   class="span4"  v-model="formData9.numero_demande" />                
-                             
-                        </td>
-                        <td colspan="2">
-                          <label class="control-label">Imputation Budgetaire</label>
-                          
-                              <input    type="text"   class="span6" readonly  :value="detail_marche.imputation" />                
-                             
-                                              
-                        </td>
-                       
-                        
-                        
-                      </tr>
-                        
-                     
-                    </div>
-                    <div id="tab789" class="tab-pane ">
-                      <tr>
-                          <td colspan="3">
-                         
-                         <label class="control-label">Objet du marche</label>
-                          
-                              <input    type="text"   class="span7" readonly  :value="detail_marche.objet"  />                
-                             
-                                             
-                        </td>
-                         <td>
-                          <label class="control-label">Banque</label>
-                          
-                              <input    type="text"   class="span7"  readonly  :value="afficheLibelleBanque(afficheIdBanque(afficheIdCompteBancaire(editRealiteServiceFait.marche_id)))" />                
-                             
-                        </td>
-                      </tr>
-                     <tr>
-                        
-
-                       
-                          <td colspan="2">
-                          <label class="control-label">Numero compte bancaire</label>
-                          
-                              <input    type="text"   class="span7" readonly  :value="afficheLibelleCompteBancaire(afficheIdCompteBancaire(editRealiteServiceFait.marche_id))" />                
-                             
-                        </td>
-                        <td colspan="2">
-                          <label class="control-label">Mode de reglement</label>
-                          
-                              <input    type="text"   class="span7" readonly  :value="afficheLibelleModePaiemnt(afficheIdModePaiement(editRealiteServiceFait.marche_id))"  />                
-                             
-                        </td>
-                       
-                        
-                      </tr>
-                          
-                     
-
-                    </div>
-                     <div id="tab7892" class="tab-pane ">
-                     <tr>
-                        <td colspan="">
-                         
-                         <label class="control-label">Numéro</label>
-                          
-                              <input    type="text"   class="span3" readonly  :value="afficheNumeroFournisseur(afficheIdFournisseur(editRealiteServiceFait.marche_id))" />                
-                             
-                                             
-                        </td>
-                        <td>
-                          <label class="control-label">Nom</label>
-                          
-                              <input    type="text"   class="span4" readonly  :value="afficheNomFournisseur(afficheIdFournisseur(editRealiteServiceFait.marche_id))" />                
-                             
-                        </td>
-                          <td>
-                          <label class="control-label">Telephone</label>
-                          
-                              <input    type="text"   class="span4" readonly  :value="afficheTelephoneFournisseur(afficheIdFournisseur(editRealiteServiceFait.marche_id))" />                
-                             
-                        </td>
-                        <td>
-                          <label class="control-label">Adresse</label>
-                          
-                              <input    type="text"   class="span4" readonly :value="afficheAdresseFournisseur(afficheIdFournisseur(editRealiteServiceFait.marche_id))"  />                
-                             
-                        </td>
-                       
-                        
-                      </tr>
-                           <tr>
-                        <td colspan="">
-                         
-                         <label class="control-label">Crédit autorisé</label>
-                          
-                              <input    type="text"   class="span3" :value="afficheMontantAutorise(editRealiteServiceFait.marche_id)" readonly   />                
-                             
-                                              
-                        </td>
-                        <td>
-                          <label class="control-label">Cumul des demandes</label>
-                          
-                              <input    type="text"   class="span4" readonly :value="sommeEgagementLigne(detail_marche.id)"  />                
-                             
-                        </td>
-                          <td>
-                          <label class="control-label">Disponible</label>
-                          
-                              <input    type="text"   class="span4" readonly :value="restePayeMarche"  />                
-                             
-                        </td>
-                       
-                       
-                        
-                      </tr>
-                     
-
-                    </div>
-                  </div>
-            </div>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="fonctionAjouterLiquidation(formData9)"
-          class="btn btn-primary"
-          href="#"
-         
-        >Valider</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
+ 
   <!--///////////////////////////////////////// FIN  TABLEAU LIQUIDATION//////////////////////////////-->
 <!--///////////////////////////////////////// FIN  TABLEAU LIQUIDATION//////////////////////////////-->
   <!--///////////////////////////////////////// FIN  modal LIQUIDATION //////////////////////////////-->
@@ -871,77 +437,7 @@
 <!--///////////////////////////////////////// DEBUT TABLEAU REALITE SERVICE FAIT//////////////////////////////-->
 <!--///////////////////////////////////////// DEBUT TABLEAU REALITE SERVICE FAIT//////////////////////////////-->
   <!--///////////////////////////////////////// debut modal REALITE SERVICE FAIT //////////////////////////////-->
-    <div id="exampleModalRealiteServiceFait" class="modal hide tailleRealiteServiceFait">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Réalité Service Fait</h3>
-      </div>
-      <div class="modal-body">
-      <table class="table table-bordered table-striped">
-          <tr>
-              <td>
-                    <label class="control-label">Ministere</label>
-                      <input type="text" v-model="editRealiteServiceFait.section_id" class="span4" readonly/>
-              </td>
-               <td>
-                    <label class="control-label">Fournisseurs</label>
-                      <input type="text" v-model="editRealiteServiceFait.facture_id" class="span4" readonly/>
-              </td>
-               <td>
-                    <label class="control-label">Adresse du fournisseur</label>
-                      <input type="text" v-model="editRealiteServiceFait.facture_id" class="span4" readonly/>
-              </td>
-               <td>
-                    <label class="control-label">Numero du facture</label>
-                      <input type="text" v-model="editRealiteServiceFait.facture_id" class="span4" readonly/>
-              </td>
-          </tr>
-          <tr>
-               <td>
-                    <label class="control-label">Date facture</label>
-                      <input type="date" v-model="editRealiteServiceFait.facture_id" class="span4" readonly/>
-              </td>
-              <td colspan="2">
-                    <label class="control-label">Objet de la depense</label>
-                      <input type="text" v-model="editRealiteServiceFait.marche_id" class="span8" readonly/>
-              </td>
-              
-              
-               <td>
-                    <label class="control-label">Date de reception</label>
-                      <input type="date" v-model="editRealiteServiceFait.marche_id" class="span4" readonly/>
-              </td>
-          </tr>
-          <tr>
-              <td>
-                    <label class="control-label">Ordre de paiement</label>
-                      <input type="text" v-model="editRealiteServiceFait.marche_id" class="span4" readonly/>
-              </td>
-               <td>
-                    <label class="control-label">Date de paiement</label>
-                      <input type="text" v-model="editRealiteServiceFait.section_id" class="span4" readonly/>
-              </td>
-               <td>
-                    <label class="control-label">Imputation budgetaire</label>
-                      <input type="text" v-model="editRealiteServiceFait.marche_id" class="span4" readonly/>
-              </td>
-               <td>
-                    <label class="control-label">Montant</label>
-                      <input type="text" v-model="editRealiteServiceFait.marche_id" class="span4" readonly/>
-              </td>
-          </tr>
-      </table>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="modifierRealiteService(editRealiteServiceFait)"
-          class="btn btn-primary"
-          href="#"
-        
-        >Modifier</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
+   
    <!--///////////////////////////////////////// fin TABLEAU REALITE SERVICE FAIT//////////////////////////////-->
 <!--///////////////////////////////////////// fin TABLEAU REALITE SERVICE FAIT//////////////////////////////-->
   <!--///////////////////////////////////////// fin modal REALITE SERVICE FAIT //////////////////////////////-->
@@ -1948,102 +1444,58 @@
 <!--///////////////////////////////////////// DEBUT TABLEAU MANDAT//////////////////////////////-->
 
 <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
-   <div id="ModifierModalMandat" class="modal hide taillemodal6">
+    <div id="ModifierModalMandat" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Mandat</h3>
+        <h3>Modifier Mandat </h3>
       </div>
-    
-            <div class="table-responsive text-nowrap taillemodal61">
-              <table class="table table-bordered table-striped ">
-                <div class="widget-box">
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+        
+            <div class="widget-box">
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab10000">INFORMATION</a>
+                        <a data-toggle="tab" href="#tab1894">INDENTIFICATION</a>
                       </li>
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab2">TYPE ENGAGEMENT </a>
-                      </li> -->
-                      
                       <li>
-                        <a data-toggle="tab" href="#tab12000">INFO FOURNISSEUR / IMPUTATION BUDGETAIRE</a>
+                        <a data-toggle="tab" href="#tab2894">DESCRIPTION DE LA DEMANDE D'ENGAGEMENT</a>
+                      </li>
+                       <li>
+                        <a data-toggle="tab" href="#tab28924">REFERENCE DU FOURNISSEUR OU BENEFICIAIRE</a>
                       </li>
                       <!-- <li>
-                        <a data-toggle="tab" href="#tab32">IMPUTATION BUDGETAIRE</a>
+                        <a data-toggle="tab" href="#tab3">Autres Information</a>
                       </li> -->
-                       <!-- <li>
-                        <a data-toggle="tab" href="#2">Valeur Calculer</a>
-                      </li> -->
+                     
                     </ul>
                   </div>
-                  <div class="widget-content tab-content tailfenet">
-                    <!--ongle identification-->
-                    <div id="tab10000" class="tab-pane active">
+                  <div class="widget-content tab-content">
+                    <div id="tab1894" class="tab-pane active">
                       <tr>
                         <td>
-                          <div class="control-group">
-                            <label class="control-label">Exercice Budgetaire</label>
-                            
-                               
-                             <div class="controls">
-                              <input
-                                type="text"
-                                class="span4"
-                               readonly
-                              :value="anneeAmort"
-                              />
-                              <input
-                                type="hidden"
-                                class="span4"
-                               readonly
-                              v-model="editMandat.facture_id"
-                              />
-                            </div>
-                          </div>
+                          <label class="control-label">Exercice Budgetaire</label>
+                         
+                              <input    type="text"   class="span3" readonly   :value="anneeAmort" />                
+                             
                         </td>
-                          <td>
-                         <div class="control-group">
-                            <label class="control-label">Section</label>
-                            <div class="controls">
+                         <td>
+                          <label class="control-label">Section</label>
+                          
+                              <input    type="text"   class="span5" readonly  :value="afficherSection(editMandat.section_id)" />                
+                              <input   type="hidden"  class="span4"    readonly  v-model="editMandat.facture_id"                      />
+                        </td>
+                        <td>
+                          <label class="control-label">Programme</label>
+                          
+                              <input    type="text"   class="span3" readonly  :value="afficheProgrammeLibelle(editMandat.programme_id)" />                
+                             
+                        </td>
+                        <td>
+                          <label class="control-label">Action</label>
+                          
+                              <input    type="text"   class="span4" readonly   :value="afficheActionLibelle(editMandat.action_id)"/>                              
                              <input
-                                type="text"
-                                class="span4"
-                               readonly
-                            :value="afficherSecti"
-                              
-                              />
-                            </div>
-                          </div>
-                          
-                        </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Programme/dotation</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                class="span4"
-                                readonly
-                            :value="afficherProgDot"
-                              
-                              />
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                         <div class="control-group">
-                            <label class="control-label">Nature depense</label>
-                             <div class="controls">
-                                 <input
-                                type="text"
-                                class="span4"
-                                readonly
-                            :value="CodeGdeNatureDep(detail_marche.gdenature_id)"
-                              
-                              />
-                          
-                           <input
                                 type="hidden"
                                 class="span"
                                
@@ -2061,500 +1513,249 @@
                                
                              v-model="editMandat.val"
                               />
-                              </div>
-                              </div>
                         </td>
-                        </tr>
-                         <tr>
- 
-                          <td>
-                           <div class="control-group">
-                            <label class="control-label">Action</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                class="span4"
-                                readonly
-                            :value="afficherActi"
-                              
-                              />
-                              
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                         <div class="control-group">
-                            <label class="control-label">Activite</label>
-                            <div class="controls">
-                             
-                               <input
-                                type="text"
-                                class="span4"
-                                readonly
-                            :value="afficheractivite(detail_marche.activite_id)"
-                              
-                              />
-                            </div>
-                          </div>
-                          </td>
-                          <td>
-                             <div class="control-group">
-                            <label class="control-label">Unite administrative</label>
-                            <div class="controls">
-                               <input
-                                type="text"
-                                class="span4"
-                                readonly
-                            :value="afficherUniteAdmin(detail_marche.unite_administrative_id)"
-                              
-                              />
-                              
-                            </div>
-                          </div>
-                          
-                        </td>
-                          <td>
-                           <div class="control-group">
-                            <label class="control-label">Type Procedure</label>
-                            
-                               <div class="controls">
-                              <input
-                                type="text"
-                                class="span4"
-                               readonly
-                             :value="recupererTypeProcedure"
-                              
-                              />
-                               
-                               
-                             
-
-                              
-                            </div>
-                          </div>
-                        </td>
-                        </tr>
-                         
-                        <tr>
-                        
-                         <!-- <td>
-                          <div class="control-group">
-                            <label class="control-label">Numero demande</label>
-
-                               
-                             <div class="controls">
-                              <input
-                                type="text"
-                                class="span4"
-                               
-                              v-model="editMandat.numero_demande"
-                              
-                              />
-                                <input
-                                type="hidden"
-                                class="span4"
-                               
-                            :value="idBudgetaire"
-                              
-                              /> 
-                            </div>
-                          </div>
-                        </td> -->
-                      
-                          <!-- <td>
-                          <div class="control-group">
-                            <label class="control-label">Numero engagement</label>
-
-                               
-                             <div class="controls">
-                              <input
-                                type="text"
-                                class="span4"
-                               
-                              v-model="editMandat.numero_engage"
-                              
-                              /> -->
-                               <input
-                                type="hidden"
-                                class="span4"
-                               
-                            :value="idBudgetaire"
-                              
-                              />
-                            <!-- </div>
-                          </div>
-                        </td> -->
                         
                        
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Type d'engagement direct</label>
-                            <div class="controls">
-                              <select v-model="editMandat.type_engagement_id"  class="span4" :readOnly="griseTypeEngagement">
-                                  <option value="0">Marche</option>
-                                    <option value="1">Régie d'avances - reservation des crédits</option>
-                                       <option value="2">Régularisation d'ordre de paiement (OP)</option>
-                                    <option value="3">Régularisation avances de trésorerie (AT)</option>
-                                     <option value="4">Autres</option>
-                               
-                              </select>
-                              
-                            </div>
-                          </div>
-                        </td>
-                       <td>
-                            <div class="control-group">
-                              <label class="control-label">Réf. Engagement  juridique</label>
-                              <div class="controls">
-                                <input
-                                  type="text"
-                                  class="span4"
-                                  v-model="editMandat.ref_juridique"
-                                />
-                              </div>
-                            </div>
-                          </td>
-                           <td>
-                            <div class="control-group">
-                              <label class="control-label">Numero OP/AT</label>
-                              <div class="controls">
-                                <input
-                                  type="text"
-                                  class="span4"
-                                  v-model="editMandat.numero_op"
-                                />
-                              </div>
-                            </div>
-                          </td>
-                  <td >
-                         <div class="control-group">
-                            <label class="control-label">Autre type engagement</label>
-                            <div class="controls">
-                              <input type="text" class="span4" v-model="editMandat.autre_engagement" :readOnly="griseTypeEngagement"/>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-
-                    
-                 
-                  <tr>
-                          <td>
-                         <div class="control-group">
-                            <label class="control-label">Numero mandat</label>
-                            <div class="controls">
-                              <input type="text" class="span4" v-model="editMandat.numero_mandat"/>
-                            </div>
-                          </div>
-                        </td>
                         
-                        <td>
-                         <div class="control-group">
-                            <label class="control-label">Numero Bordereau</label>
-                            <div class="controls">
-                              <input type="text" class="span4" v-model="editMandat.numero_bordereau"/>
-                            </div>
-                          </div>
-                        </td>
-                        
-                        
-                       
-                         
-                        
-                        
-                           <td>
-                         <div class="control-group">
-                            <label class="control-label">Date de reception dossier</label>
-                            <div class="controls">
-                              <input type="date" class="span4" v-model="editMandat.date_reception_cf"/>
-                            </div>
-                          </div>
-                        </td>
-                         
                       </tr>
                        <tr>
-                        
-                       <input
-                    type="hidden"
-                   :value="montantCumuler"
-                    
-                    class="span"
-                    
-                  />
-                      <input
-                    type="hidden"
-                   :value="montantCumulerModifier"
-                    
-                    class="span"
-                    
-                  />
-                        
+                          <td>
+                          <label class="control-label">Activite</label>
                           
-                        
-                       
-                        
-                       
-                        <!-- <td>
-                             <div class="control-group">
-                            <label class="control-label">Bailleur</label>
-                            <div class="controls">
-                              <input type="text" class="span" v-model="editMandat.Bailleur" />
-                            </div>
-                          </div>
-                        </td> -->
-                       
-                      </tr>
-                      <tr>
-                          
+                              <input    type="text"   class="span3" readonly  :value="afficheActiviteLibelle(detail_marche.activite_id)" />                              
                              
-                      </tr>
-                    </div>
-                    <!--ongle descriptif-->
-                    <!-- <div id="tab2" class="tab-pane">
-                      
-
-                      
-                       
-                     
-                     
-                      <tr>
-                         
-                         
-                      
-                        
-                       
-                       
-                      </tr>
-                      
-                    </div> -->
-                    <!--ongle 3 -->
-
-
-<!--ongle descriptif-->
-                    <div id="tab12000" class="tab-pane">
-                      
-
-                      
-                        <tr>
+                        </td>
                          <td>
-                         <div class="control-group">
-                            <label class="control-label">Mode de paiement</label>
-                            <div class="controls">
-                              <select v-model="editMandat.mod_paiement_engage" class="span4">
-                                
-                                <option value="0">Bon de caisse</option>
-                                    <option value="1">Chèque Spécial Trésor</option>
-                                       <option value="2">Chèque Spécial Enregistrement</option>
-                                    <option value="3">Virement</option>
-                                     <option value="4">Chèque Spécial Douanes</option>
-                                      <option value="5">Paiement direct par bailleur de fonds</option>
-                                       <option value="6">Autres</option>
-                               
-                              </select>
-                              
-                            </div>
-                          </div>
-                        </td>
-                         
-                       <td>
-                         <div class="control-group">
-                            <label class="control-label">N° compte contribuable</label>
-                            <div class="controls">
-                             <div class="controls">
-                              <input type="text" class="span4" :value="NumeroFournisseur" readonly/>
-                               
-                            </div>
-                              
-                            </div>
-                          </div>
-                        </td>
-                        
+                          <label class="control-label">Unite d'administrative</label>
                           
-                       
-                       
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Nom entreprise</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="nomFournisseur" readonly/>
-                               
-                            </div>
-                          </div>
+                              <input    type="text"   class="span5" readonly   :value="afficherUniteAdmin(detail_marche.unite_administrative_id)" />                              
+                             
                         </td>
                           <td>
-                          <div class="control-group">
-                            <label class="control-label">Adresse</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                class="span4"
-                                placeholder="Saisir adresse_entreprise"
-                                :value="AdresseFournisseur"
-                                readonly
-                              />
-                            </div>
-                          </div>
-                        </td>
-                       
-                       
-                      </tr>
-                     
-                      <tr>
-                        
-                       <input
-                    type="hidden"
-                   :value="montantCumuler"
-                    
-                    class="span"
-                    
-                  />
-                      <input
-                    type="hidden"
-                   :value="montantCumulerModifier"
-                    
-                    class="span"
-                    
-                  />
-                        
+                          <label class="control-label">Nature de depense</label>
                           
-                        
-                       
-                        
-                       
-                        <!-- <td>
-                             <div class="control-group">
-                            <label class="control-label">Bailleur</label>
-                            <div class="controls">
-                              <input type="text" class="span" v-model="editMandat.Bailleur" />
-                            </div>
-                          </div>
-                        </td> -->
-                       
-                      </tr>
-                      <tr>
-                         
-                         
-                      
-                        
-                       
-                       
-                      </tr>
-                      <tr>
-                            <td>
-                         <div class="control-group">
-                            <label class="control-label">Objet de la dépense</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="afficherObjetMandat"  readonly/>
-                               <input type="hidden" class="span10" v-model="editMandat.id" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                         <td>
-                            <div class="control-group">
-                              <label class="control-label">Numéro compte</label>
-                              <div class="controls">
-                               <select v-model="editMandat.compte_id" class="span4">
-                                <option
-                                  v-for="affiche in afficherCompteUtilisateur(this.AfficherIdFournisseur)" :key="affiche.id"
-                                  :value="affiche.id"
-                                >{{affiche.rib}}</option>
-                              </select>
-                              </div>
-                            </div>
-                          </td>
-                         <td>
-                            <div class="control-group">
-                              <label class="control-label">piece justificative</label>
-                              <div class="controls">
-                                <input
-                                  type="file"
-                                  class="span"
-                                 
-                                />
-                              </div>
-                            </div>
-                          </td>
-                             <td>
-                             <div class="control-group">
-                            <label class="control-label">Bailleur</label>
+                              <input    type="text"   class="span3" readonly  :value="CodeGdeNatureDep(detail_marche.gdenature_id)"  />                
                             
-                             <!-- <select v-model="editMandat.bailler_id" class="span4">
-                                <option
-                                  v-for="fam in sources_financements"
-                                  :key="fam.id"
-                                  :value="fam.id"
-                                >{{fam.libelle}}</option>
-                              </select> -->
-                              <input type="text" class="span4" :value="afficheBailleur(editMandat.bailler_id)" readonly />
-                          </div>
-                        </td> 
+                        </td>
+                        <td>
+                          <label class="control-label">Plan économique</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="affichePlanEconomiqueLibelle(editMandat.ligne_id)" />                
+                              <input
+                                type="hidden"
+                                class="span4"
+                               
+                            :value="idBudgetaire"
+                                              />
+                        </td>
+                       
+                        
                       </tr>
                       <tr>
-                       <td>
-                         <div class="control-group">
-                            <label class="control-label">Total général</label>
-                            <div class="controls">
-                              <input type="number" class="span4" :value="sommeMontantMandat" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                       
                         <td>
-                         <div class="control-group">
-                            <label class="control-label">Trésor</label>
-                            <div class="controls">
-                              <input type="number" class="span4" v-model="editMandat.montant_tresor" />
-                            </div>
-                          </div>
+                        <label class="control-label">N° Bon Manuel</label>
+                          
+                              <input    type="text" readonly  class="span3" v-model="editMandat.numero_demande"   />                
+                             
                         </td>
                           <td>
-                          <div class="control-group">
-                            <label class="control-label">Don</label>
-                            <div class="controls">
-                              <input type="number" class="span4" v-model="editMandat.montant_don" />
-                            </div>
-                          </div>
+                          <label class="control-label">N° Demande</label>
+                          
+                              <input    type="text"   class="span4" readonly v-model="editMandat.numero_demande_liquidation" />                
+                             
                         </td>
-                        <td>
-                             <div class="control-group">
-                            <label class="control-label">Emprunt</label>
-                            <div class="controls">
-                              <input type="number" class="span4" v-model="editMandat.montant_emprunt" />
-                            </div>
-                          </div>
+                        <td colspan="2">
+                          <label class="control-label">Imputation Budgetaire</label>
+                          
+                              <input    type="text"   class="span6" readonly  :value="detail_marche.imputation" />                
+                             
+                                              
                         </td>
-                      </tr>
-                        <tr>
-                        
-                        
                        
                         
-                        <td>
-                           <div class="control-group">
-                            <label class="control-label">Ligne Budgetaire</label>
-                            <div class="controls">
+                        
+                      </tr>
+                        
+                     
+                    </div>
+                    <div id="tab2894" class="tab-pane ">
+                      <tr>
+                          <td colspan="2">
+                         
+                         <label class="control-label">Objet du marche</label>
+                          
+                              <input    type="text"   class="span7" readonly  :value="detail_marche.objet"  />                
                              
-                               <div class="controls">
-                              <input type="text" class="span4" :value="afficheligneEconomiqueBudgetaire(ligneEconomiqueBudgetaire)" readonly/>
-                            </div>
-                            </div>
-                          </div>
+                                             
                         </td>
-                        <td >
-                          <div class="control-group">
-                            <label class="control-label">Code Budgetaire</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="CodeBudgetaire" readonly/>
-                            </div>
-                          </div>
+                         <td>
+                          <label class="control-label">Banque</label>
+                          
+                              <input    type="text"   class="span4"  readonly  :value="afficheLibelleBanque(afficheIdBanque(afficheIdCompteBancaire(editMandat.marche_id)))" />                
+                              <input
+                    type="hidden"
+                   :value="montantCumuler"
+                    
+                    class="span"
+                    
+                  />
+                      <input
+                    type="hidden"
+                   :value="montantCumulerModifier"
+                    
+                    class="span"
+                    
+                  />
                         </td>
-                       <td>
-                          <div class="control-group">
-                            <label class="control-label">Numéro Facture</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="affichiernumMandat"  readonly/>
-                            </div>
-                          </div>
+                         <td>
+                          <label class="control-label">Numero compte bancaire</label>
+                          
+                              <input    type="text"   class="span4"  readonly :value="afficheLibelleCompteBancaire(afficheIdCompteBancaire(editMandat.marche_id))" />                
+                             
+                        </td>
+                      </tr>
+                     <tr>
+                        
+
+                         <input
+                    type="hidden"
+                   :value="montantCumuler"
+                    
+                    class="span"
+                    
+                  />
+                   <input
+                    type="hidden"
+                   :value="montantCumulerModifier"
+                    
+                    class="span"
+                    
+                  />
+                          <td colspan="">
+                          <label class="control-label">Mode de reglement</label>
+                          
+                              <input    type="text"   class="span3" readonly   :value="afficheLibelleModePaiemnt(editMandat.mod_paiement_engage)" />                
+                             
+                        </td>
+                         <td colspan="">
+                          <label class="control-label">Numero demande engagement</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheDemandeEngagement(editMandat.engagement_id)" />                
+                             
+                        </td>
+                        <td colspan="">
+                          <label class="control-label">Numero engagement</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheNumeroEngagement(editMandat.engagement_id)"  />                
+                             
+                        </td>
+                        <td colspan="">
+                          <label class="control-label">Numero bordereau engagement</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheNumeroBordeauEngagement(editMandat.engagement_id)"  />                
+                             
+                        </td>
+                        
+                      </tr>
+                          <tr>
+                            <td>
+                               <label class="control-label">Numero OP/AT</label>
+                          
+                              <input    type="text"   class="span3" readonly  :value="afficheNumeroOPATEngagement(editMandat.engagement_id)"  />  
+                            </td>
+                             <td>
+                               <label class="control-label">Réf. Engagement  juridique</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheReferenceEngagement(editMandat.engagement_id)"  />  
+                            </td>
+                             <td>
+                               <label class="control-label">Numero mandat</label>
+                          
+                              <input    type="text"   class="span4"   v-model="editMandat.numero_mandat" required />  
+                            </td>
+                             <td>
+                               <label class="control-label">Numero Bordereau mandat</label>
+                          
+                              <input    type="text"   class="span4"   v-model="editMandat.numero_bordereau"  required/>  
+                             <input
+                    type="hidden"
+                   :value="montantCumuler"
+                    
+                    class="span"
+                    
+                  />
+                      <input
+                    type="hidden"
+                   :value="montantCumulerModifier"
+                    
+                    class="span"
+                    
+                  />
+                            </td>
+                          </tr>
+                     
+
+                    </div>
+                     <div id="tab28924" class="tab-pane ">
+                     <tr>
+                        <td colspan="">
+                         
+                         <label class="control-label">Numéro</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheNumeroFournisseur(editMandat.entreprise_id)" />                
+                             
+                                             
+                        </td>
+                        <td>
+                          <label class="control-label">Nom</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="afficheNomFournisseur(editMandat.entreprise_id)" />                
+                             
+                        </td>
+                          <td>
+                          <label class="control-label">Telephone</label>
+                          
+                              <input    type="text"   class="span3" readonly  :value="afficheTelephoneFournisseur(editMandat.entreprise_id)" />                
+                             
+                        </td>
+                        <td>
+                          <label class="control-label">Adresse</label>
+                          
+                              <input    type="text"   class="span4" readonly :value="afficheAdresseFournisseur(editMandat.entreprise_id)"  />                
+                             
+                        </td>
+                       
+                          <td>
+                          <label class="control-label">Bailleur</label>
+                          
+                              <input    type="text"   class="span4" readonly :value="editMandat.bailler_id" />                
+                             
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                           <label class="control-label">Trésor</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="editMandat.montant_tresor" />                
+                             
+                        </td>
+                         <td>
+                           <label class="control-label">Don</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="editMandat.montant_don" />                
+                             
+                        </td>
+                         <td>
+                           <label class="control-label">Emprunt</label>
+                          
+                              <input    type="text"   class="span3" readonly  :value="editMandat.montant_emprunt" />                
+                             
+                        </td>
+                         <td>
+                           <label class="control-label">Total</label>
+                          
+                              <input    type="text"   class="span4" readonly  :value="editMandat.total_general" />                
+                             
                         </td>
                         <td>
                           <div class="control-group">
@@ -2564,26 +1765,17 @@
                             </div>
                           </div>
                         </td>
-                       
                       </tr>
-                      <tr>
-                         <td>
+                           <tr>
+                             <td>
                           <div class="control-group">
-                            <label class="control-label">Dotation Iniatiale</label>
+                            <label class="control-label">Numéro Facture</label>
                             <div class="controls">
-                              <input type="text" class="span4" :value="dotationInite(detail_marche.imputation).Dotation_Initiale" readonly/>
+                              <input type="text" class="span4" :value="affichiernumMandat"  readonly/>
                             </div>
                           </div>
                         </td>
-                         <td>
-                          <div class="control-group">
-                            <label class="control-label">Cumul engagements antérieurs </label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="sommeEgagementLigne(detail_marche.id)" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                           <td>
+                       <td>
                           <div class="control-group">
                             <label class="control-label">Crédits Autorisés(Engagement actuel)</label>
                             <div class="controls">
@@ -2591,8 +1783,54 @@
                             </div>
                           </div>
                         </td>
-                       
                         <td>
+                          <label class="control-label">Cumul des demandes</label>
+                           <div class="controls">
+                              <input type="text" class="span4" :value="sommeEgagementLigne(detail_marche.id)" readonly/>
+                            </div>
+                        //   <input    type="text"   class="span3" readonly :value="montantCumulerLiquidationMandat"  />
+                            //   <input    type="hidden"   class="span4" readonly :value="sommeEgagementLigne(detail_marche.id)"  />                
+                             
+                        </td>
+                          <td>
+                          <label class="control-label">Disponible</label>
+                          
+                              <input    type="text"   class="span4" readonly :value="restePayeMarche"  />                
+                             
+                        </td>
+                      
+                          <td>
+                          <div class="control-group">
+                            <label class="control-label">Dotation Iniatiale</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="dotationInite(detail_marche.imputation).Dotation_Initiale" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                        
+                      </tr>
+                     <tr>
+                              <td>
+                          <label class="control-label">Dotation disponible anterieure</label>
+                          
+                              <input    type="text"   class="span4" readonly :value="dotationDisponibleAnterieure"  />                
+                             
+                        </td>
+                        <td colspan="">
+                         
+                         <label class="control-label">Montant marché</label>
+                          
+                              <input    type="text"   class="span4" :value="montantMarcheAvecAvenant" readonly   />                
+                             
+                                              
+                        </td>
+                        <td>
+                          <label class="control-label">Disponible marché</label>
+                          <input    type="text"   class="span4" readonly :value="restePayeMarcheMandat"  />
+                              
+                        </td>
+                         
+                      <td>
                                                     <div class="control-group">
                             <label class="control-label">Engagement cumulé </label>
                             <div class="controls">
@@ -2600,21 +1838,7 @@
                             </div>
                           </div>
                         </td>
-                        
-                        
-                      
-                      </tr>
-                        <tr>
-                           <!-- <td >
-                          <div class="control-group">
-                            <label class="control-label">Dotation disponible</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="montantDisponibleBudgetMandatDirect" readonly/>
-                            </div> 
-                          </div>
-                          
-                        </td> -->
-                                                 <td>
+                       <td>
                           <div class="control-group">
                             <label class="control-label">Dotation disponible</label>
                             <div class="controls">
@@ -2622,54 +1846,25 @@
                             </div>
                           </div>
                         </td>
-                           <td>
-                          <div class="control-group">
-                            <label class="control-label">Montant marché</label>
-                            <div class="controls">
-                              <input type="text" class="span4" v-model="montantMarcheAvecAvenant" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Disponible marché</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="restePayeMarcheMandat" readonly/>
-                            </div>
-                          </div>
-                        </td>
-
-                         <!-- <td>
-                          <div class="control-group">
-                            <label class="control-label">Disponible</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="montantDisponibleBudget" readonly/>
-                            </div> 
-                          </div>
-                        </td> -->
-                       
+                        
                       </tr>
-                    </div>
-                    <!--ongle 3 -->
-                
-                       
-                  </div>
-                  <br />
-                  <div align="right">
-                    <div class="controls">
-                      <div data-toggle="buttons-checkbox" class="btn-group">
-                        <a
-                          class="btn btn-primary"
-                           @click.prevent="modifierModalMandatLocal(editMandat)"
-                        >Modifier</a>
-                        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-                      </div>
+
                     </div>
                   </div>
-                </div>
-              </table>
             </div>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierModalMandatLocal(editMandat)"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
     </div>
+
     <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
 <!--///////////////////////////////////////// FIN TABLEAU ENGAGEMENT//////////////////////////////-->
 <!--///////////////////////////////////////// FIN TABLEAU ENGAGEMENT//////////////////////////////-->
@@ -2679,7 +1874,62 @@
 <!--///////////////////////////////////////// DEBUT TABLEAU VALIDATION//////////////////////////////-->
 <!--///////////////////////////////////////// DEBUT TABLEAU VALIDATION//////////////////////////////-->
 <!--///////////////////////////////////////// DEBUT TABLEAU VALIDATION//////////////////////////////-->
-
+<div id="exampleModalMotifMandatEmetteur" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Decision Emetteur</h3>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" >
+          <div class="control-group">
+                            <label class="control-label">Décision Emetteur </label>
+                            <div class="controls">
+                              <select v-model="editMandat.decision_emetteur">
+                                <option value=""></option>
+                              <option value="1">Visé</option>
+                             <option value="2">Différé</option>
+                             <option value="3">Réjeté</option>
+                            
+    
+    </select>
+                           
+                            </div>
+                          </div>
+                         
+                          <div class="control-group">
+                            <label class="control-label">Observation Emetteur</label>
+                            <div class="controls">
+                              <textarea  class="span" row = "6" v-model="editMandat.observation_emetteur">
+                              </textarea>
+                            </div>
+                          </div>
+                           <div class="control-group">
+                            <label class="control-label">Date Decision Emetteur :</label>
+                            <div class="controls">
+                              <input type="date" class="span"  v-model="editMandat.date_decision_emetteur"/>
+                               <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                            </div>
+                          </div>
+                               <div class="control-group">
+                            <label class="control-label">Nom Emetteur :</label>
+                            <div class="controls">
+                              <input type="text" class="span"  v-model="editMandat.nom_emetteur"/>
+                               <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                            </div>
+                          </div>
+         
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierModalMandatLocal(editMandat)"
+          class="btn btn-primary"
+          href="#"
+         
+        >Modifier</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
   <div id="exampleModalMotifMandat" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
@@ -2729,6 +1979,7 @@
                             <div class="controls">
                               <input type="date" class="span"  v-model="editMandat.date_motif"/>
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                              
                             </div>
                           </div>
                            
@@ -2737,7 +1988,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierModalMandatLocal(editMandat)"
+          @click.prevent="modifierModalMandatDecisionCF(editMandat)"
           class="btn btn-primary"
           href="#"
          
@@ -3319,7 +2570,7 @@
                        
                         <td>
                          <div class="control-group">
-                            <label class="control-label">Numero Demande engagement</label>
+                            <label class="control-label">Numéro Bon Manuel</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="formData.numero_demande_engage"/>
                             </div>
@@ -3327,7 +2578,7 @@
                         </td>
                          <td>
                          <div class="control-group">
-                            <label class="control-label">Numero engagement</label>
+                            <label class="control-label">Numéro demande engagement</label>
                             <div class="controls">
                               <input type="text" class="span4" v-model="formData.numero_engage"/>
                             </div>
@@ -3476,7 +2727,7 @@
                             <label class="control-label">N° compte contribuable</label>
                             <div class="controls">
                              <div class="controls">
-                              <input type="text" class="span4" :value="NumeroFournisseur" readonly/>
+                              <input type="text" class="span4" :value="afficheNumeroFournisseur(NumeroFournisseur_id)" readonly/>
                                
                             </div>
                               
@@ -3491,7 +2742,7 @@
                           <div class="control-group">
                             <label class="control-label">Nom entreprise</label>
                             <div class="controls">
-                              <input type="text" class="span4" :value="nomFournisseur" readonly/>
+                              <input type="text" class="span4" :value="afficheNomFournisseur(NumeroFournisseur_id)" readonly/>
                                
                             </div>
                           </div>
@@ -3504,7 +2755,7 @@
                                 type="text"
                                 class="span4"
                                 placeholder="Saisir adresse_entreprise"
-                                :value="AdresseFournisseur"
+                                :value="afficheAdresseFournisseur(NumeroFournisseur_id)"
                                 readonly
                               />
                             </div>
@@ -3570,7 +2821,7 @@
                               <div class="controls">
                                <select v-model="formData.compte_id" class="span4">
                                 <option
-                                  v-for="affiche in afficherCompteUtilisateur(this.AfficherIdFournisseur)" :key="affiche.id"
+                                  v-for="affiche in afficherCompteUtilisateur1(this.NumeroFournisseur_id)" :key="affiche.id"
                                   :value="affiche.id"
                                 >{{affiche.rib}}</option>
                               </select>
@@ -3655,16 +2906,16 @@
                                 >{{fam.afficheEconomique.code}}-{{fam.afficheEconomique.libelle}}</option>
                               </select> -->
                                <div class="controls">
-                              <input type="text" class="span4" :value="afficheligneEconomiqueBudgetaire(ligneEconomiqueBudgetaire)" readonly/>
+                              <input type="text" class="span4" :value="afficheligneEconomiqueBudgetaire(afficheligneEconom(afficherligneEconomiqueBudgetaire))" readonly/>
                             </div>
                             </div>
                           </div>
                         </td>
                         <td >
                           <div class="control-group">
-                            <label class="control-label">Code Budgetaire</label>
+                            <label class="control-label">Imputation Budgetaire</label>
                             <div class="controls">
-                              <input type="text" class="span4" :value="CodeBudgetaire" readonly/>
+                              <input type="text" class="span4" :value="afficherligneEconomiqueBudgetaire" readonly/>
                             </div>
                           </div>
                         </td>
@@ -3691,7 +2942,7 @@
                       <tr>
                          <td>
                           <div class="control-group">
-                            <label class="control-label">Dotation Iniatiale</label>
+                            <label class="control-label">Crédit Autorisés</label>
                             <div class="controls">
                               <input type="text" class="span4" :value="dotationInite(detail_marche.imputation).Dotation_Initiale" readonly/>
                             </div>
@@ -3699,67 +2950,78 @@
                         </td>
                          <td>
                           <div class="control-group">
-                            <label class="control-label">Cumul engagements antérieurs </label>
+                            <label class="control-label">Cumul des demandes(y compris celle-ci) </label>
                             <div class="controls">
                               <input type="text" class="span4" :value="sommeEgagementLigne(detail_marche.id)" readonly/>
                             </div>
                           </div>
                         </td>
+                                               <td>
+                          <div class="control-group">
+                            <label class="control-label">Dotation disponible</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="dotationDisponibleAnterieure" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                          <td>
+                          <div class="control-group">
+                            <!-- <label class="control-label">Montant marché</label> -->
+                            <div class="controls">
+                              <input type="hidden" class="span4" v-model="montantMarcheAvecAvenant" readonly/>
+                            </div>
+                          </div>
+                        </td>
                            <td>
                           <div class="control-group">
-                            <label class="control-label">Crédits Autorisés(Engagement actuel)</label>
+                            <!-- <label class="control-label">Crédits Autorisés(Engagement actuel)</label> -->
                             <div class="controls">
-                              <input type="text" class="span4" :value="sommeMontant" readonly/>
+                              <input type="hidden" class="span4" :value="sommeMontant" readonly/>
                             </div>
                           </div>
                         </td>
                        
-                        <td>
-                                                    <div class="control-group">
-                            <label class="control-label">Engagement cumulé </label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="montantCumulerMandat" readonly/>
-                            </div>
-                          </div>
-                        </td>
+                      
                         
                         
                       
                       </tr>
                         <tr>
+                            <td>
+                                                    <div class="control-group">
+                            <!-- <label class="control-label">Engagement cumulé </label> -->
+                            <div class="controls">
+                              <input type="hidden" class="span4" :value="montantCumulerMandat" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                          <td>
+                          <div class="control-group">
+                            <!-- <label class="control-label">Disponible marché</label> -->
+                            <div class="controls">
+                              <input type="hidden" class="span4" :value="restePayeMarche" readonly/>
+                            </div>
+                          </div>
+                        </td>
                            <td >
                           <div class="control-group">
-                            <label class="control-label">Dotation disponible</label>
+                            <!-- <label class="control-label">Dotation disponible</label> -->
                             <div class="controls">
-                              <input type="text" class="span4" :value="montantDisponibleBudgetMandat" readonly/>
+                              <input type="hidden" class="span4" :value="montantDisponibleBudgetMandat" readonly/>
                             </div> 
                           </div>
                           
                         </td>
                                                  <td>
                           <div class="control-group">
-                            <label class="control-label">Dotation disponible anterieure</label>
+                            <!-- <label class="control-label">Dotation disponible anterieure</label> -->
                             <div class="controls">
-                              <input type="text" class="span4" :value="dotationDisponibleAnterieure" readonly/>
+                              <input type="hidden" class="span4" :value="dotationDisponibleAnterieure" readonly/>
                             </div>
                           </div>
                         </td>
-                           <td>
-                          <div class="control-group">
-                            <label class="control-label">Montant marché</label>
-                            <div class="controls">
-                              <input type="text" class="span4" v-model="montantMarcheAvecAvenant" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Disponible marché</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="restePayeMarche" readonly/>
-                            </div>
-                          </div>
-                        </td>
+                         
+                        
 
                          <!-- <td>
                           <div class="control-group">
@@ -3776,7 +3038,7 @@
                 
                        
                   </div>
-                  <br />
+                  
                   <div align="right">
                     <div class="controls">
                       <div data-toggle="buttons-checkbox" class="btn-group">
@@ -4033,7 +3295,7 @@
                     v-for="(liquida, index) in afficheMarcheLiquidation(detail_marche.id)"
                     :key="liquida.id"
                   >
-                    <!-- <template v-if="Engage.decision_cf == 1"> -->
+                    <template v-if="validationRealiteServiceFait(liquida.marche_id) != 1">
                     <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.exo_id || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.numero_bon_manuel || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.numero_demande || 'Non renseigné'}}</td>
@@ -4101,7 +3363,7 @@
                       
                     </td>
                      <td v-else>
-                        <h1 style="font-size:12px;color:red;">Observation non activé  </h1>
+                        <h1 style="font-size:12px;color:red;">non activé  </h1>
                     </td>
                      <td v-if="liquida.decision_controleur_financier == 1">
                         <button v-if="liquida.decision_ordonnateur == 1"  class="btn  btn-success" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
@@ -4133,14 +3395,120 @@
                       
                     </td>
                     <td v-else>
-                        <h1 style="font-size:12px;color:red;">Observation non activé  </h1>
+                        <h1 style="font-size:12px;color:red;">non activé  </h1>
                     </td>
+                    
+                     </template>
+                      <template v-else>
+                <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.exo_id || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.numero_bon_manuel || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.numero_demande || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{afficheMontantAutorise(liquida.marche_id) || 0}}</td>
+                     <td @dblclick="afficherModalModificationLiquidation(index)">{{sommeEgagementLigne(liquida.marche_id) || 0 }}</td> 
+                     
+                     
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.imputation_budgetaire || 'Non renseigné'}}</td>
+                   
+                     <td>
+                        <button v-if="liquida.decision_emetteur == 1"  class="btn  btn-success" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      <span    >Visé avec Observation</span>
+                      
+                      </button>
+                       <button v-else-if="liquida.decision_emetteur == 2" class="btn  btn-warning" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="liquida.decision_emetteur == 3" class="btn  btn-danger" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                   
+                  <td v-if="liquida.decision_emetteur == 1">
+                        <button v-if="liquida.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                    <span    >Visé avec Observation</span>
+                      
+                      </button>
+                       <button v-else-if="liquida.decision_controleur_financier == 2" class="btn  btn-warning" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="liquida.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                      <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                      
+                    </td>
+                     <td v-else>
+                        <h1 style="font-size:12px;color:red;">non activé  </h1>
+                    </td>
+                     <td v-if="liquida.decision_controleur_financier == 1">
+                        <button v-if="liquida.decision_ordonnateur == 1"  class="btn  btn-success" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      <span    >Visé avec Observation</span>
+                      
+                      </button>
+                       <button v-else-if="liquida.decision_ordonnateur == 2" class="btn  btn-warning" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="liquida.decision_ordonnateur == 3" class="btn  btn-danger" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                      
+                    </td>
+                    <td v-else>
+                        <h1 style="font-size:12px;color:red;">non activé  </h1>
+                    </td>
+                
+                     </template>
                      <td>
                         <!-- <router-link :to="{ name: 'DetailEngagement', params: {id_detail_engagement:realiteService.id}}"
                 class="btn btn-default " title="Detail Engagement">
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link>  -->
-                    <button v-if="liquida.decision_ordonnateur == 1" class="btn " @click="afficherModalAjouterMandatApresLiquidation(index)" title="Ajouter Mandat">
+                    <button v-if="liquida.decision_ordonnateur == 1 && validationRealiteServiceFait(liquida.marche_id) == 1" class="btn " @click="afficherModalAjouterMandatApresLiquidation(index)" title="Ajouter Mandat">
                         <span>
                           <i class="icon icon-book"></i>
                         </span>
@@ -4150,18 +3518,12 @@
                           <i class="icon icon-book"></i>
                         </span>
                       </button> -->
-                      <button class="btn btn-danger" @click="supprimerEngagement(liquida.id)">
+                      <button class="btn btn-danger"  @click="supprimerLiquidation(liquida.id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
                       </button>
                     </td>
-                     <!-- </template>
-                      <template v-else>
-                 <td colspan="10">   <h1 style="color:red;font-size:15px;text-align:center">veuillez valider l' engagement svp?</h1></td>
-                   
-                     </template> -->
-                    
                   </tr>
                
                                     </tbody>
@@ -4230,16 +3592,16 @@
                     v-for="(realiteService, index) in afficheMarcheRealiteServiceFait(detail_marche.id)"
                     :key="realiteService.id"
                   >
-                    <!-- <template v-if="Engage.decision_cf == 1"> -->
-                    <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{realiteService.exercice_budget || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{afficherSection(realiteService.section_id) || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{afficheNomFournisseur(afficheidFournisseurFacture(realiteService.facture_id)) || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{afficheNumeroFacture(realiteService.facture_id) || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{afficheDateFacture(realiteService.facture_id) || 'Non renseigné'}}</td> 
+                    <template v-if="validationDeEngagement(realiteService.marche_id) != 1">
+                    <td >{{realiteService.exercice_budget || 'Non renseigné'}}</td>
+                    <td >{{afficherSection(realiteService.section_id) || 'Non renseigné'}}</td>
+                    <td >{{afficheNomFournisseur(afficheidFournisseurFacture(realiteService.facture_id)) || 'Non renseigné'}}</td>
+                    <td >{{afficheNumeroFacture(realiteService.facture_id) || 'Non renseigné'}}</td>
+                     <td >{{afficheDateFacture(realiteService.facture_id) || 'Non renseigné'}}</td> 
                      
-                    <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{detail_marche.imputation  || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierRealiteServiceFait(index)">{{formatageSomme(parseFloat(realiteService.montant)) || 'Non renseigné'}}</td>
-                     <td>
+                    <td >{{detail_marche.imputation  || 'Non renseigné'}}</td>
+                     <td >{{formatageSomme(parseFloat(realiteService.montant)) || 'Non renseigné'}}</td>
+                     <td >
                         <button v-if="realiteService.decision_service_beneficiaire == 1"  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
                      
                       <span    >Viser</span>
@@ -4298,35 +3660,103 @@
                       
                     </td>
                     <td v-else>
-                        <h1 style="font-size:12px;color:red;text-align:center">Observation non activé  </h1>
+                        <h1 style="font-size:12px;color:red;text-align:center">non activé  </h1>
                     </td>
+                      </template>
+                      <template v-else>
+                  <td >{{realiteService.exercice_budget || 'Non renseigné'}}</td>
+                    <td >{{afficherSection(realiteService.section_id) || 'Non renseigné'}}</td>
+                    <td >{{afficheNomFournisseur(afficheidFournisseurFacture(realiteService.facture_id)) || 'Non renseigné'}}</td>
+                    <td >{{afficheNumeroFacture(realiteService.facture_id) || 'Non renseigné'}}</td>
+                     <td >{{afficheDateFacture(realiteService.facture_id) || 'Non renseigné'}}</td> 
+                     
+                    <td >{{detail_marche.imputation  || 'Non renseigné'}}</td>
+                     <td >{{formatageSomme(parseFloat(realiteService.montant)) || 'Non renseigné'}}</td>
+                     <td>
+                        <button v-if="realiteService.decision_service_beneficiaire == 1"  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      <span    >Viser</span>
+                      
+                      </button>
+                       <button v-else-if="realiteService.decision_service_beneficiaire == 2" class="btn  btn-warning" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      
+                       <span  >Différer</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="realiteService.decision_service_beneficiaire == 3" class="btn  btn-danger" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      
+                       <span  >Réjeter</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                   
+                  <td v-if="realiteService.decision_service_beneficiaire == 1">
+                        <button v-if="realiteService.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      <span    >Viser</span>
+                      
+                      </button>
+                       <button v-else-if="realiteService.decision_controleur_financier == 2" class="btn  btn-warning" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      
+                       <span  >Différer</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="realiteService.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      
+                       <span  >Réjeter</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                      
+                    </td>
+                     <td v-else>
+                        <h1 style="font-size:12px;color:red;text-align:center">non activé  </h1>
+                    </td>
+                    
+               
+                     </template> 
                      <td>
                         <router-link :to="{ name: 'detailRealiteServiceFait', params: {id_detailRealiteServiceFait:realiteService.id}}"
                 class="btn btn-default " title="Detail Realite service fait">
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link> 
-                    <button v-if="realiteService.decision_controleur_financier == 1" class="btn " @click="afficherModalAjouterLiquidation(index)" title="Ajouter Liquidatation">
+                    <!-- <button v-if="realiteService.decision_controleur_financier == 1 && validationDeEngagement(realiteService.marche_id) == 1" class="btn " @click="afficherModalAjouterLiquidation(index)" title="Ajouter Liquidatation">
                         <span>
                           <i class="icon icon-book"></i>
                         </span>
-                      </button>
+                      </button> -->
                       <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Mandat">
                         <span>
                           <i class="icon icon-book"></i>
                         </span>
                       </button> -->
-                      <button class="btn btn-danger" @click="supprimerEngagement(realiteService.id)">
+                      <button  class="btn btn-danger" @click="supprimerRealiteServiceFait(realiteService.id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
                       </button>
                     </td>
-                     <!-- </template>
-                      <template v-else>
-                 <td colspan="10">   <h1 style="color:red;font-size:15px;text-align:center">veuillez valider l' engagement svp?</h1></td>
-                   
-                     </template> -->
-                    
                   </tr>
                
                                     </tbody>
@@ -4589,16 +4019,16 @@
                                         <th>Type procedure</th>
                                         
                                         <!-- <th >Section</th> -->
-                                        <th title="unite administrative">Ua</th>
+                                        <!-- <th title="unite administrative">Ua</th> -->
                              
                                 <th>Montant Mandat</th>
-                                 <!-- <th >Decision de emetteur</th>
-                                <th>Date validation</th>
-                                  <th>Nom d'emetteur</th> -->
+                                 <th >Decision de emetteur</th>
+                                <th title="Date validation Emetteur">Date Emetteur</th>
+                                
                               
-                                <th >Date reception CF</th>
+                               
                                 <th>Décision CF</th>
-                                <th title="Date validation mandat">Date validation</th>
+                                <th title="Date validation Cf">Date validation CF</th>
 
                                 
                                 
@@ -4613,17 +4043,49 @@
                     v-for="(Manda, index) in afficheMandatMarcheTableau(detail_marche.id)"
                     :key="Manda.id"
                   >
+                   <template v-if="validationLiquidation(Manda.marche_id) == 1">
                     <td @dblclick="afficherModalModifierMandat(index)">{{marcheMandat(Manda.marche_id) || 'Non renseigné'}}</td>
                    <td @dblclick="afficherModalModifierMandat(index)">{{Manda.numero_mandat || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierMandat(index)">{{Manda.numero_bordereau || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierMandat(index)">{{afficherNumeroDemandeEngagemnt(Manda.engagement_id) || 'pas numero demande'}}</td>
                      <td @dblclick="afficherModalModifierMandat(index)">{{afficherNumeroEngagemnt(Manda.engagement_id) || 'pas numero engage'}}</td>
                      <td @dblclick="afficherModalModifierMandat(index)">{{Manda.type_procedure_id || 'Non renseigné'}}</td>
-            <td @dblclick="afficherModalModifierMandat(index)">{{uaMandat(Manda.ua_id) || 'Non renseigné'}}</td>
-                                   
+            <!-- <td @dblclick="afficherModalModifierMandat(index)">{{uaMandat(Manda.ua_id) || 'Non renseigné'}}</td>
+                                    -->
                     <td @dblclick="afficherModalModifierMandat(index)">{{formatageSomme(parseFloat(Manda.total_general))|| 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierMandat(index)">{{formaterDate(Manda.date_reception_cf) || 'Non renseigné'}}</td>
-              <td>
+                    
+                    <td>
+                        <button v-if="Manda.decision_emetteur == 1"  class="btn  btn-success" @click="afficherModalModifierMotifMandatEmetteur(index)" >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="Manda.decision_emetteur == 2" class="btn  btn-warning" @click="afficherModalModifierMotifMandatEmetteur(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="Manda.decision_emetteur == 3" class="btn  btn-danger" @click="afficherModalModifierMotifMandatEmetteur(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalModifierMotifMandatEmetteur(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                    
+                    <td @dblclick="afficherModalModifierMandat(index)">{{formaterDate(Manda.date_decision_emetteur) || 'Non renseigné'}}</td>
+                      
+              <td v-if="Manda.decision_emetteur == 1">
                         <button v-if="Manda.decision_cf == 1"  class="btn  btn-success" @click="afficherModalModifierMotifMandat(index)" >                        
                      
                       <span    >Visé</span>
@@ -4651,7 +4113,9 @@
                     
                       </button>
                     </td>
-                    
+                      <td v-else>
+                        <h1 style="font-size:10px;color:red;">Non activé  </h1>
+                    </td>
                     <td @dblclick="afficherModalModifierMandat(index)">{{formaterDate(Manda.date_motif) || 'Non renseigné'}}</td>
                        <td>
                         <!-- <router-link :to="{ name: 'DetailEngagement', params: {id_detail_engagement:Engage.id}}"
@@ -4668,6 +4132,11 @@
                         </span>
                       </button>
                     </td>
+                     </template>
+                      <template v-else>
+                 <td colspan="10">   <h1 style="color:red;font-size:15px;text-align:center">veuillez valider la liquidation svp?</h1></td>
+                   
+                     </template>
               </tr>
 
                   
@@ -8431,6 +7900,7 @@ numero_bon_manuel:"",
 numero_demande:""
                 },
                 editLiquidation:{
+                  total_general:"",
 numero_bon_manuel:"",
 numero_demande:"",
 	exo_id:"",
@@ -8477,7 +7947,12 @@ montant_emprunt:0,
 
       },
       editFacture:{},
-             editMandat:{}  ,
+             editMandat:{
+                observation_emetteur:"",
+              	decision_emetteur:"",
+                date_decision_emetteur:"",
+                nom_emetteur:""
+             }  ,
              test:{
                val:0
                },
@@ -8722,7 +8197,85 @@ created() {
    
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
+afficheidFour() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
 
+      if (qtereel) {
+        return qtereel.fournisseur_id;
+      }
+      return 0
+        }
+      };
+    },
+
+afficheIdFacture() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.facture_id;
+      }
+      return 0
+        }
+      };
+    },
+    afficheMontantFaacture() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.prix_propose_ttc;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+
+
+
+
+DisponibleBudgetaireApresLiquidation() {
+  
+      const val = parseFloat(this.dotationInite(this.detail_marche.imputation).Dotation_Initiale) - parseFloat(this.sommeEgagementLigne(this.detail_marche.id));
+      return parseFloat(val).toFixed(0);
+      
+    },
+
+
+
+ validationDeEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.decision_cf;
+      }
+      return 0
+        }
+      };
+    },
+ validationRealiteServiceFait() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.realiteServiceFait.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.decision_controleur_financier;
+      }
+      return 0
+        }
+      };
+    },
 afficheIdEngagementDansRealiteFait() {
       return id => {
         if (id != null && id != "") {
@@ -8735,7 +8288,18 @@ afficheIdEngagementDansRealiteFait() {
         }
       };
     },
+validationLiquidation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.liquidation.find(qtreel => qtreel.marche_id == id);
 
+      if (qtereel) {
+        return qtereel.decision_ordonnateur;
+      }
+      return 0
+        }
+      };
+    },
 afficheNumerodemande_engage() {
       return id => {
         if (id != null && id != "") {
@@ -8743,6 +8307,18 @@ afficheNumerodemande_engage() {
 
       if (qtereel) {
         return qtereel.numero_demande_engage;
+      }
+      return 0
+        }
+      };
+    },
+    afficheNumerodemand() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_engage;
       }
       return 0
         }
@@ -8760,7 +8336,18 @@ afficheNumerodemande_engage() {
         }
       };
     },
+afficherIdLiquidation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.realiteServiceFait.find(qtreel => qtreel.marche_id == id);
 
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
 
 
 
@@ -8996,7 +8583,18 @@ afficheIdFournisseur() {
         }
       };
     },
+afficheIdFournisseurEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.fournisseur_id;
+      }
+      return 0
+        }
+      };
+    },
 afficheNumeroFournisseur() {
       return id => {
         if (id != null && id != "") {
@@ -9233,7 +8831,7 @@ afficheIdModePaiement() {
            const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.code.concat('  ', qtereel.libelle);
+        return qtereel.libelle;
       }
       return 0
         }
@@ -9356,13 +8954,21 @@ afficherCompteUtilisateur: function () {
                 return id => {
                     if (id != "") {
                       
-                        return  this.comptes.filter(normeEquipe => normeEquipe.entrepse_id == this.AfficherIdFournisseur);
+                        return  this.comptes.filter(normeEquipe => normeEquipe.entrepse_id == id);
                        
                     }
                 }
             },
 
-
+afficherCompteUtilisateur1: function () {
+                return id => {
+                    if (id != "") {
+                      
+                        return  this.comptes.filter(normeEquipe => normeEquipe.entrepse_id == id);
+                       
+                    }
+                }
+            },
 
 
 
@@ -9526,7 +9132,7 @@ affichierMontantAvenant(){
 
 montantMarcheAvecAvenant() {
       const val = parseFloat(this.afficheMontantReelMarche(this.detail_marche.id)) + parseFloat(this.affichierMontantAvenant(this.detail_marche.id));
-      return parseFloat(val).toFixed(2);
+      return parseFloat(val).toFixed(0);
     },
 
 
@@ -9700,7 +9306,7 @@ afficherObjetEngagement1() {
 
 afficherMontantEngagement1() {
     
-       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.editEngagement.facture_id);
+       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.editLiquidation.facture_id);
 
       if (norme) {
        return norme.prix_propose_ttc;
@@ -9849,7 +9455,7 @@ afficherMontantFacture() {
 
 
  dotationDisponibleAnterieure() {
-      const val =  parseFloat(this.dotationInite(this.detail_marche.imputation).Dotation_Initiale) - parseFloat(this.sommeEgagementLigne(this.detail_marche.imputation));
+      const val =  parseFloat(this.dotationInite(this.detail_marche.imputation).Dotation_Initiale) - parseFloat(this.montantCumulerLiquidationMandat);
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -9877,7 +9483,16 @@ montantCumulerMandatEngagement() {
       return 0
     },
       montantCumulerLiquidationMandat() {
-      const val = parseFloat(this.sommeEgagementLigne(this.detail_marche.id)) + parseFloat(this.editLiquidation.total_general);
+      const val = parseFloat(this.sommeEgagementLigne(this.detail_marche.id)) + parseFloat(this.afficheMontantFaacture(this.afficheIdFacture(this.editLiquidation.marche_id)));
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+     montantCumulerLiquidationMandatModifer() {
+      const val = parseFloat(this.sommeEgagementLigne(this.detail_marche.id)) + parseFloat(this.afficheMontantFaacture(this.afficheIdFacture(this.editMandat.marche_id)));
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -9938,7 +9553,7 @@ afficherUniteAdmin() {
        const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.ua_id == this.detail_marche.unite_administrative_id);
 
       if (norme) {
-       return norme.afficheSection.nom_section;
+       return norme.afficheSection.code_section.concat('  ', norme.afficheSection.nom_section)
       }
       return ""
     },
@@ -10604,6 +10219,28 @@ uniteAdministrative() {
         }
       };
     },
+    
+     recupererNumeroFournisseur() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    NumeroFournisseur_id() {
+      
+      const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.marche_id == this.detail_marche.id);
+
+      if (norme) {
+        return norme.fournisseur_id;
+      }
+      return 0
+    },
  NumeroFournisseur() {
       
       const norme = this.getActeEffetFinancierPersonnaliser.find(normeEquipe => normeEquipe.marche_id == this.detail_marche.id);
@@ -10685,14 +10322,35 @@ uniteAdministrative() {
       }
       return 0
     },
-   
+   afficherligneEconomiqueBudgetaire() {
+      
+      const norme = this.marches.find(normeEquipe => normeEquipe.id == this.detail_marche.id);
+
+      if (norme) {
+        return norme.imputation;
+      }
+      return 0
+    },
+      afficheligneEconom() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.codebudget == id);
+
+      if (qtereel) {
+        return qtereel.economique_id ;
+      }
+      return 0
+        }
+      };
+    },
     afficheligneEconomiqueBudgetaire() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.derniereNivoPlanBudgetaire.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.libelle ;
+        
+         return qtereel.code.concat('  ', qtereel.libelle);
       }
       return 0
         }
@@ -11229,7 +10887,9 @@ recupererActivite(){
                  "ajouterAvenant",
       "modifierAvenant",
       "supprimerAvenant",
-               
+      "modifierMarche",
+      "getActeEffetFinancier",
+      "getMarche"
                
             ]),
  ...mapActions("uniteadministrative", [              
@@ -11238,7 +10898,8 @@ recupererActivite(){
                 "modifierRealiteServiceFait",
                 "ajouterLiquidation",
                 "modifierLiquidation",
-                "supprimerLiquidation"
+                "supprimerLiquidation",
+                "supprimerRealiteServiceFait"
             ]),
     
              fonctionModifierLiquidation() {
@@ -11944,6 +11605,13 @@ val:0,
 
 
 
+afficherModalModifierMotifMandatEmetteur(index) {
+      this.$("#exampleModalMotifMandatEmetteur").modal({
+        backdrop: "static",
+        keyboard: false
+      })
+      this.editMandat = this.afficheMandatMarcheTableau(this.detail_marche.id)[index];
+      },
 afficherModalModifierMotifMandat(index) {
       this.$("#exampleModalMotifMandat").modal({
         backdrop: "static",
@@ -12001,18 +11669,20 @@ afficherModalAjouterMandatDirect(id) {
 
 
  modifierModalMandatLocal(){
-  if (this.afficherMontantMandat < this.sommeMontantMandat){
+    
+     
+   if (this.afficheMontantFaacture(this.afficheIdFacture(this.editMandat.marche_id)) < this.afficheMontantAutorise(this.editMandat.marche_id)){
 alert("Le montant engagé est superieure au montant de la facture")
       }
-      else if (this.afficherMontantMandat > this.sommeMontantMandat)
+      else if (this.afficheMontantFaacture(this.afficheIdFacture(this.editMandat.marche_id)) > this.afficheMontantAutorise(this.editMandat.marche_id))
       {
         alert("Le montant engagé est Inférieure au montant de la facture")
       }
-       else if (this.dotationDisponibleAnterieureDirect < this.afficherMontantMandat)
+       else if (this.dotationDisponibleAnterieure < this.afficheMontantFaacture(this.afficheIdFacture(this.editMandat.marche_id)))
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-    
+        
       else
       {
  var nouvelObjet = {
@@ -12045,6 +11715,7 @@ section_id:this.afficherSectId
   this.modifierMandat(nouvelObjet)
       this.$('#ModifierModalMandat').modal('hide');
       this.$('#exampleModalMotifMandat').modal('hide');
+      this.$('#exampleModalMotifMandatEmetteur').modal('hide');
 this.formData= {
 
  numero_engage:"",
@@ -12091,13 +11762,141 @@ val:0,
            numero_demande:"",
               numero_op:"",
               autre_engagement:"",
+              observation_emetteur:"",
+              	decision_emetteur:"",
+                date_decision_emetteur:"",
+                nom_emetteur:""
 };
 
       }
     
+    
   //  }
       
     },
+
+
+modifierModalMandatDecisionCF(){
+    
+     
+   if (this.afficheMontantFaacture(this.afficheIdFacture(this.editMandat.marche_id)) < this.afficheMontantAutorise(this.editMandat.marche_id)){
+alert("Le montant engagé est superieure au montant de la facture")
+      }
+      else if (this.afficheMontantFaacture(this.afficheIdFacture(this.editMandat.marche_id)) > this.afficheMontantAutorise(this.editMandat.marche_id))
+      {
+        alert("Le montant engagé est Inférieure au montant de la facture")
+      }
+       else if (this.dotationDisponibleAnterieure < this.afficheMontantFaacture(this.afficheIdFacture(this.editMandat.marche_id)))
+      {
+        alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
+      }
+      
+       else if (this.montantMarcheAvecAvenant == this.afficheMontantReelMarche(this.detail_marche.id))
+      {
+        let marcheObjet=this.marches.find(marche=>marche.id == this.detail_marche.id)
+    marcheObjet.attribue = 5
+      //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
+     this.modifierMarche(marcheObjet)
+      this.getMarche()
+      this.getActeEffetFinancier()
+      
+      }
+    
+      else
+      {
+ var nouvelObjet = {
+      ...this.editMandat,
+      exercice_budget :this.anneeAmort,
+       	numero_cc_id :this.NumeroFournisseur,
+        nom_entreprise :this.nomFournisseur,
+         adresse_entreprise :this.AdresseFournisseur,
+         total_general :this.sommeMontantMandat,
+         budget_general_id :this.CodeBudgetaire,
+         marche_id : this.detail_marche.id,
+         montant_a_paye: this.montantResteApaye,
+         montant_cumul:this.montantCumuler,
+       ligne_id:this.idBudgetaire,
+         numero_facture:this.afficherNumeroFcture,
+      montant_facture:this.afficherMontantFacture,
+      	objet_depense : this.formData.objet_facture,
+        facture_id:this.editMandat.facture_id,
+        type_procedure_id	:this.recupererTypeProcedure,
+
+programme_id:this.afficherProgDotId,
+action_id:this.afficherActid,
+activite_id:this.detail_marche.activite_id,
+  ua_id:this.detail_marche.unite_administrative_id,
+  grd_nature_id:this.detail_marche.gdenature_id,
+
+section_id:this.afficherSectId
+
+       };
+  this.modifierMandat(nouvelObjet)
+      this.$('#ModifierModalMandat').modal('hide');
+      this.$('#exampleModalMotifMandat').modal('hide');
+      this.$('#exampleModalMotifMandatEmetteur').modal('hide');
+      
+this.formData= {
+
+ numero_engage:"",
+  total_general:0,
+       montant_tresor:0,
+montant_don:0,
+montant_emprunt:0,
+
+val:0,
+        exercice_budget:"",
+        budget_general_id:"",
+        programme_id:"",
+        action_id:"",
+        activite_id:"",
+      
+        ua_id:"",
+        grd_nature_id:"",
+        type_procedure_id:"",
+        ref_juridique:"",
+
+        type_engagement_id:"",
+        mod_paiement_engage:"",
+        numero_cc_id:"",
+        adresse_entreprise:"",
+
+         nom_entreprise:"",
+       
+        bailler_id:"",
+        objet_depense:"",
+        piece_justificative:"",
+
+         motif:"",
+        date_motif:"",
+        observation:"",
+        ligne_budgetaire_id:"",
+        section_id:"",
+        marche_id:"",
+        // montant_a_paye:"",
+        //  montant_cumul:"",
+         ligne_id:"",
+         
+         date_reception_cf:"",
+          decision_cf:"",
+           numero_demande:"",
+              numero_op:"",
+              autre_engagement:"",
+              observation_emetteur:"",
+              	decision_emetteur:"",
+                date_decision_emetteur:"",
+                nom_emetteur:""
+};
+
+      }
+    
+    
+  //  }
+      
+    },
+
+
+
 
          afficherModalAjouter(id) {
           
@@ -12205,10 +12004,50 @@ id:this.afficherIdRealiteServiceFait(this.detail_marche.id),
 	engagement_id:this.editEngagement.id
 
        };
-     
+
+      var odjetLiquisation = {
+    
+
+id:this.afficherIdLiquidation(this.detail_marche.id),
+	engagement_id:this.editEngagement.id,
+
+
+
+   numero_bon_manuel :this.editEngagement.numero_demande_engage,
+       
+         numero_demande : this.numero_engage,
+        	exo_id:this.anneeAmort,
+       
+ imputation_budgetaire :this.CodeBudgetaire,
+
+  section_id:this.afficherSectId,
+  
+
+programme_id:this.afficherProgDotId,
+action_id:this.afficherActid,
+  
+
+activite_id:this.detail_marche.activite_id,
+
+
+  ua_id:this.detail_marche.unite_administrative_id,
+  
+
+nature_depense_id:this.detail_marche.gdenature_id,
+plan_budgetaire_id:this.idBudgetaire,
+  
+
+	marche_id:this.detail_marche.id,
+
+  mode_paiement_id:this.editEngagement.mod_paiement_engage,
+  
+
+fournisseur_id:this.AfficherFournisseur_id,
+       };
       
   this.modifierEngagement(nouvelObjet)
   this.modifierRealiteServiceFait(realiteServiceFait)
+  this.modifierLiquidation(odjetLiquisation)
       this.$('#ModifierEngage').modal('hide');
       this.$('#exampleModalMotif').modal('hide');
 this.formData= {
@@ -12328,9 +12167,45 @@ fournisseur_id:this.AfficherFournisseur_id
 section_id:this.afficherSectId
 
        };
+        var objetLiquidation = {
+     
+      numero_bon_manuel :this.formData.numero_demande_engage,
+       
+         numero_demande : this.formData.numero_engage,
+        	exo_id:this.anneeAmort,
+       
+ imputation_budgetaire :this.CodeBudgetaire,
+
+  section_id:this.afficherSectId,
+  
+
+programme_id:this.afficherProgDotId,
+action_id:this.afficherActid,
+  
+
+activite_id:this.detail_marche.activite_id,
+
+
+  ua_id:this.detail_marche.unite_administrative_id,
+  
+
+nature_depense_id:this.detail_marche.gdenature_id,
+plan_budgetaire_id:this.idBudgetaire,
+  
+
+	marche_id:this.detail_marche.id,
+
+  mode_paiement_id:this.formData.mod_paiement_engage,
+  
+
+fournisseur_id:this.AfficherFournisseur_id,
+
+  
+
+       };
   this.ajouterEngagement(nouvelObjet)
   this.ajouterRealiteServiceFait(realiteServiceFait)
-  
+  this.ajouterLiquidation(objetLiquidation)
 this.$("#AjouterEngage").modal('hide');
 this.formData= {
 
@@ -12584,25 +12459,28 @@ showPopup20: function() {
       });
     },
     ajouterMandatLiquidation(){
-      if (this.afficherMontantEngagement < this.afficheMontantAutorise(this.editLiquidation.marche_id)){
+      //  let datationdispo = parseFloat(this.montantMarcheAvecAvenant)
+      // let montant_contrat = parseFloat( this.afficheMontantReelMarche(this.detail_marche.id))
+      if (this.afficheMontantFaacture(this.afficheIdFacture(this.editLiquidation.marche_id)) < this.afficheMontantAutorise(this.editLiquidation.marche_id)){
 alert("Le montant engagé est superieure au montant de la facture")
       }
-      else if (this.afficherMontantEngagement > this.afficheMontantAutorise(this.editLiquidation.marche_id))
+      else if (this.afficheMontantFaacture(this.afficheIdFacture(this.editLiquidation.marche_id)) > this.afficheMontantAutorise(this.editLiquidation.marche_id))
       {
         alert("Le montant engagé est Inférieure au montant de la facture")
       }
-       else if (this.dotationDisponibleAnterieure < this.afficherMontantEngagement)
+       else if (this.dotationDisponibleAnterieure < this.afficheMontantFaacture(this.afficheIdFacture(this.editLiquidation.marche_id)))
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-       else if (this.montantMarcheAvecAvenant == this.sommeEgagementLigneTableau(this.detail_marche.id))
+      
+       else if (this.montantMarcheAvecAvenant == this.afficheMontantReelMarche(this.detail_marche.id))
       {
         alert("Marché apuré")
       }
       else
       {
  var nouvelObjet91 = {
-      
+      ...this.formDataMadat,
       
        exercice_budget :this.editLiquidation.exo_id,
       numero_bon_manuel:this.editLiquidation.numero_bon_manuel,
@@ -12633,7 +12511,7 @@ section_id:this.editLiquidation.section_id,
 //  numero_bon_manuel:this.editLiquidation.numero_bon_manuel,
 //  numero_demande_liquidation:this.editLiquidation.numero_demande,
  numero_op:this.afficheNumeroOPATEngagement(this.editLiquidation.marche_id),
-	entreprise_id:this.afficheIdFournisseur(this.editLiquidation.marche_id),
+	entreprise_id:this.afficheidFour(this.editLiquidation.marche_id),
     	montant_tresor:this.afficheMontantTresor(this.editLiquidation.marche_id),
         montant_don:this.afficheMontantDon(this.editLiquidation.marche_id),
         montant_emprunt:this.afficheMontantEmprunt(this.editLiquidation.marche_id)

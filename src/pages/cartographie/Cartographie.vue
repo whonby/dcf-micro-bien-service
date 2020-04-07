@@ -1,13 +1,25 @@
 <template>
+
     <div>
         <div class="container-fluid">
             <div class="quick-actions_homepage">
-                <ul class="quick-actions">
-                    <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> Budget </a> </li>
-                    <li class="bg_lg "> <a href="charts.html"> <i class="icon-signal"></i> budget execute </a> </li>
-                    <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> Budget restant </a> </li>
-                    <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i> Taux d'execution</a> </li>
+                <ul class="quick-actions" v-if="!idzone">
+                    <li class="bg_lb"> <a href="#">
+                        {{formatageSomme(budgetGeneral)}}<br> Budget general</a> </li>
+                    <li class="bg_lg "> <a href="#">
+                        {{formatageSomme(budgetGeneralExcecute)}}<br> budget execute </a> </li>
+                    <li class="bg_ly"> <a href="#">  {{formatageSomme(bugdetGeneralRestant)}}<br> Budget restant </a> </li>
+                    <li class="bg_lo"> <a href="#">{{tauxExecutionBudgetGeneral}} %<br> Taux d'execution</a> </li>
+                </ul>
 
+                <ul class="quick-actions" v-if="idzone">
+                    <li class="bg_ls"> <a href="#"><h6>{{zone_geographique}}</h6> </a> </li>
+                    <li class="bg_lb"> <a href="#">
+                        {{formatageSomme(budgetByZone(idzone))}}<br> Budget total zone</a> </li>
+                    <li class="bg_lg "> <a href="#">
+                        {{formatageSomme(budgetZoneExcecute)}}<br> budget execute zone </a> </li>
+                    <li class="bg_ly"> <a href="#">  {{formatageSomme(budgetZoneExcecute)}}<br> Budget restant zone</a> </li>
+                    <li class="bg_lo"> <a href="#">{{tauxExecutionBudgetZone}} %<br> Taux d'execution zone </a> </li>
                 </ul>
             </div>
         <div class="row-fluid">
@@ -27,44 +39,56 @@
                                     layer-type="base"/>
                            <!-- <l-control-zoom position="bottomright"  ></l-control-zoom>-->
                             <v-marker-cluster >
-                                <l-marker v-for="l in localisation" :key="l.id" :lat-lng="l.latlng" @click="uniteAdmin(l.id,l.ville)">
-                              <!--      <LIcon
-                                            :options="{
-            iconUrl:      'http://dcf-parametrage.kognishare.com/point-rouge-png.png',
-            shadowUrl:    'https://vdcrea.gitlab.io/vue-leaflet/static/leaf-shadow.png',
-            iconSize:     [38, 95], // size of the icon
-            shadowSize:   [50, 64], // size of the shadow
-            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-            shadowAnchor: [4, 62],  // the same for the shadow
-            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-          }"/>-->
-                                    <!--<l-popup :content="l.ville"></l-popup>-->
-                                    <l-tooltip :options="{interactive: true, permanent: true}">
-                                       <b>{{l.ville}}</b> <br>
-<div style="font-size: 11px;">
-    Budget: <span style="color: #003900; "><b>20</b></span> <br>
-    Budget execute:<span style="color: #00d700; "><b>101</b></span><br>
-    Budget restant:<span style="color: darkred; "><b>101</b></span><br>
-    Taux d'execution:<span style="color: #e36706; "><b>101</b></span>
-</div>
+                                <l-circle-marker v-for="l in localisation"
+                                                 :key="l.id"
+                                                 :lat-lng="l.latlng"
+                                                 @click="uniteAdmin(l.id,l.ville)"
+                                                 :radius="8"
+                                                 :color="l.color"
+                                                 :fillColor="l.colorFill"
+                                                 :fillOpacity="2"
 
-                                    </l-tooltip>
-                                </l-marker>
+                                >
+                                    <l-popup>
+                                    <b>{{l.ville}}</b> <br>
+                                    <div >
+                                        Budget: <span style="color: #003900; "><b>{{formatageSomme(l.budget)}}</b></span> <br>
+                                        Budget execute:<span style="color: #00d700; "><b>{{formatageSomme(l.budgetExecute)}}</b></span><br>
+                                        Budget restant:<span style="color: darkred; "><b>{{formatageSomme(l.budgetReste)}}</b></span><br>
+                                        Taux d'execution:<span style="color: #e36706; "><b>{{l.tauxBudget}} %</b></span>
+                                    </div>
+                                </l-popup>
+
+                                </l-circle-marker>
+                              <!--  <l-marker v-for="l in localisation"
+                                          :key="l.id"
+                                          :lat-lng="l.latlng">
+
+
+                                    &lt;!&ndash;&ndash;&gt;
+                                </l-marker>-->
                             </v-marker-cluster>
                         </l-map> </div>
                 </div>
             </div>
             <div class="span4">
                 <div class="widget-box">
+                    <div class="widget-title" align="center" v-if="zone_geographique"> <span class="icon"> <i class="icon-book"></i> </span>
+                        <h5>{{zone_geographique}}</h5>
+                        <button v-if="zone_geographique" @click.prevent="afficher()"  class="btn btn-mini">
+                            <i class="icon-folder-open"></i>Afficher tout</button>
+
+                    </div>
+
                     <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-                        <h5>Liste des unite administrative
+                        <h5 align="center">Liste des unite administrative
                         </h5>
                     </div>
+
                     <div class="widget-content" >
-                        <a data-dismiss="modal" class="btn btn-primary" href="#" v-if="zone_geographique">{{zone_geographique}}</a>
-                        
-                        <button v-if="zone_geographique" @click.prevent="afficher()"  class="btn btn-danger ">
-                        <span class="">Afficher tous</span></button>
+
+
+
                         <table class="table table-bordered table-striped" >
                             <tr>
                                 <th>Nom UA </th>
@@ -89,19 +113,21 @@
 <script>
     import {mapGetters} from 'vuex'
     import { latLng, Icon, icon } from 'leaflet'
-    import { LMap, LTileLayer, LMarker,LIconDefault,LControlLayers,LTooltip } from "vue2-leaflet";
+    import { LMap, LTileLayer, LIconDefault,LControlLayers,LPopup,LCircleMarker } from "vue2-leaflet";
     import iconUrl from 'leaflet/dist/images/marker-icon.png'
     import shadowUrl from 'leaflet/dist/images/marker-shadow.png'
+    import { formatageSomme } from "../../../src/Repositories/Repository";
     export default {
         name: "Example",
         components: {
             LMap,
             LTileLayer,
-            LMarker,
-            //LPopup,
-            LTooltip,
+
+            LPopup,
+           // LTooltip,
             LIconDefault,
             LControlLayers,
+            LCircleMarker
            // LIcon
 
         },
@@ -112,6 +138,13 @@
             ))
             return {
                 search:"",
+                budgetGeneralExcecute:0,
+                tauxExecutionBudgetGeneral:0,
+                bugdetGeneralRestant:0,
+
+                budgetZoneExcecute:0,
+                tauxExecutionBudgetZone:0,
+                bugdetZoneRestant:0,
                 icon: customicon,
                 clusterOptions: {},
                 zoom: 3,
@@ -197,6 +230,7 @@
             "uniteAdministratives",
             "getterBudgeCharge"
         ]),
+        ...mapGetters("bienService", ['marches',"engagements"]),
             localisationsFiltre(){
             const searchTerm = this.search.toLowerCase();
             console.log(this.localisations_geographiques.filter(item=>item.parent!==null))
@@ -210,20 +244,96 @@
         },
         localisation(){
         let localisation=[]
+
+            let vM=this;
             this.localisations_geographiques.forEach(function (value){
                 if(value.parent!=null){
                     if(value.longitude!=null && value.latitude!=null){
                         let coordonne=[]
                         coordonne.push(value.latitude)
                         coordonne.push(value.longitude)
+                        /**
+                         * Recuperation des unite administrative de la zone geographique
+                         * @type {*[]}
+                         */
+                        let budgetZone=0;
+                        let color="";
+                        let colorFill=""
+                        let montant_engagement_zone=0;
+                        let uniteByZoneGeo= vM.uniteAdministratives.filter( item => item.localisationgeo_id ==value.id)
+                        if (uniteByZoneGeo!=undefined) {
+
+                            /**
+                             *
+                             */
+
+                            uniteByZoneGeo.forEach(function (row) {
+                                let montant_engagement_unite_admin=0;
+                                let budgetActive=row.ua_budget_general.filter(item=>item.actived==1)
+                                if (budgetActive!="") {
+                                    let initialValue = 0;
+                                  let budgetByUnite=  budgetActive.reduce(function (total, currentValue) {
+                                        return total + parseFloat(currentValue.Dotation_Initiale) ;
+                                    }, initialValue);
+
+                                    budgetZone=budgetZone + budgetByUnite
+
+                                    //Recuperation des marche
+                                    let  objetMarche=vM.marches.filter(item=>{
+                                        if(item.unite_administrative_id==row.id ){
+
+                                                 return item
+                                        }
+                                    })
+
+                                     if(objetMarche!=""){
+                                         objetMarche.forEach(function (val) {
+                                             let initeVal = 0;
+                                             let montantEngament=  vM.engagements.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                                                 return total + parseFloat(currentValue.total_general) ;
+                                             }, initeVal);
+                                             montant_engagement_unite_admin=montant_engagement_unite_admin + montantEngament
+
+                                         })
+                                     }
+                                    montant_engagement_zone= montant_engagement_zone + montant_engagement_unite_admin
+
+
+                                }
+
+
+
+
+                            })
+
+
+
+                        }
+
+               let taux=0;
+                        let budgetRest=budgetZone-montant_engagement_zone
+                        if (montant_engagement_zone!=0){
+
+                            taux=(montant_engagement_zone/budgetZone)*100
+
+                        }
+                         if(budgetZone==0){
+                             color="#ff0000"
+                             colorFill="#ff0000"
+                         }else{
+                             color="#0f13ff"
+                             colorFill="#0f13ff"
+                         }
                         let objetAlocalise={
                             id:value.id,
                             ville:value.libelle,
                             latlng:coordonne,
-                            budget:"",
-                            budgetReste:'',
-                            budgetExecute:"",
-                            tauxBudget:""
+                            budget:budgetZone,
+                            budgetReste:budgetRest,
+                            budgetExecute:montant_engagement_zone,
+                            tauxBudget:taux.toFixed(2),
+                            color:color,
+                            colorFill:colorFill
                         }
                         localisation.push(objetAlocalise)
                     }
@@ -231,6 +341,110 @@
                 }
             })
         return localisation;
+        },
+        budgetGeneral(){
+            let budget_general=0;
+            let montant_engagement=0;
+            let vM=this;
+            this.uniteAdministratives.forEach(function(row){
+                let montant_engagement_unite_admin=0;
+                let budgetActive=row.ua_budget_general.filter(item=>item.actived==1)
+
+                if (budgetActive!="") {
+                    let initialValue = 0;
+                    let budgetByUnite = budgetActive.reduce(function (total, currentValue) {
+                        return total + parseFloat(currentValue.Dotation_Initiale);
+                    }, initialValue);
+                    budget_general=budget_general+budgetByUnite
+                }
+
+                let  objetMarche=vM.marches.filter(item=>{
+                    if(item.unite_administrative_id==row.id ){
+
+                        return item
+                    }
+                })
+                if(objetMarche!=""){
+                    objetMarche.forEach(function (val) {
+                        let initeVal = 0;
+                        let montantEngament=  vM.engagements.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.total_general) ;
+                        }, initeVal);
+                        montant_engagement_unite_admin=montant_engagement_unite_admin + montantEngament
+
+                    })
+                }
+                montant_engagement=montant_engagement + montant_engagement_unite_admin
+            })
+            vM.budgetGeneralExcecute=montant_engagement
+            let tauxEx=(montant_engagement/budget_general)*100
+                vM.tauxExecutionBudgetGeneral=tauxEx.toFixed(2)
+                vM.bugdetGeneralRestant=budget_general - montant_engagement
+            return budget_general;
+        },
+        budgetByZone(){
+            return zone_id=>{
+                if(zone_id!=""){
+                    let vM=this;
+                    let budgetZone=0;
+                    let montant_engagement_zone=0;
+                    let uniteByZoneGeo= vM.uniteAdministratives.filter( item => item.localisationgeo_id ==zone_id)
+                    if (uniteByZoneGeo!=undefined) {
+                        uniteByZoneGeo.forEach(function (row) {
+                            let montant_engagement_unite_admin=0;
+                            let budgetActive=row.ua_budget_general.filter(item=>item.actived==1)
+                            if (budgetActive!="") {
+                                let initialValue = 0;
+                                let budgetByUnite=  budgetActive.reduce(function (total, currentValue) {
+                                    return total + parseFloat(currentValue.Dotation_Initiale) ;
+                                }, initialValue);
+
+                                budgetZone=budgetZone + budgetByUnite
+
+                                //Recuperation des marche
+                                let  objetMarche=vM.marches.filter(item=>{
+                                    if(item.unite_administrative_id==row.id ){
+
+                                        return item
+                                    }
+                                })
+
+                                if(objetMarche!=""){
+                                    objetMarche.forEach(function (val) {
+                                        let initeVal = 0;
+                                        let montantEngament=  vM.engagements.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                                            return total + parseFloat(currentValue.total_general) ;
+                                        }, initeVal);
+                                        montant_engagement_unite_admin=montant_engagement_unite_admin + montantEngament
+
+                                    })
+                                }
+                                montant_engagement_zone= montant_engagement_zone + montant_engagement_unite_admin
+
+
+                            }
+
+                        })
+                        if(montant_engagement_zone!=0){
+                            vM.budgetZoneExcecute=montant_engagement_zone
+                            let taux=(montant_engagement_zone/budgetZone)*100
+                                vM.tauxExecutionBudgetZone=taux.toFixed(2)
+                            vM.bugdetZoneRestant=budgetZone - montant_engagement_zone
+                        }else {
+                            vM.budgetZoneExcecute=0
+                            vM.tauxExecutionBudgetZone=0
+                            vM.bugdetZoneRestant=0
+                        }
+
+                    }
+
+                 return budgetZone;
+
+               }
+            }
+        },
+        exoEnCours(){
+            return this.exercices_budgetaires.filter(element => element.encours == 1)
         },
       administratif(){
           return  uniteAdmin=>{
@@ -245,7 +459,7 @@
 
     },
         methods: {
-
+formatageSomme:formatageSomme,
             zoomUpdate(zoom) {
                 this.currentZoom = zoom;
             },

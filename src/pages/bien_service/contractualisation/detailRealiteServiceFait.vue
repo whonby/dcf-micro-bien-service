@@ -23,7 +23,7 @@
                                 <th title="">Numero facture</th>
                                 <th>Date facture</th>
                                 <th>Ordre de paiement</th>
-                                <th title="">Imputation Budgetaire</th>
+                               
                                 
                 </tr>
               </thead>
@@ -34,12 +34,12 @@
                   <td>{{afficherSection(Engage.section_id) || 'Non renseigné'}}</td>
                    <td>{{afficheMarche(Engage.marche_id) || 'Non renseigné'}}</td>
                     
-                    <td>{{afficheNomFournisseur(Engage.fournisseur_id) || 'Non renseigné'}}</td>
-                     <td>{{afficheAdresseFournisseur(Engage.fournisseur_id) || 'Non renseigné'}}</td> 
+                    <td>{{afficheNomFournisseur(afficheidFournisseurFacture(Engage.facture_id)) || 'Non renseigné'}}</td>
+                     <td>{{afficheAdresseFournisseur(afficheidFournisseurFacture(Engage.facture_id)) || 'Non renseigné'}}</td> 
                      <td>{{afficheNumeroFacture(Engage.facture_id)|| 'Non renseigné'}}</td> 
                       <td>{{formaterDate(afficheDateFacture(Engage.facture_id)) || 'Non renseigné'}}</td>
                     <td>{{afficheModePaiement(recupererModePaiement(Engage.engagement_id)) || 'Non renseigné'}}</td>
-                     <td>{{recupererImputation(Engage.engagement_id) || 'Non renseigné'}}</td>
+                    
                     
                 
                   
@@ -149,11 +149,11 @@
         
   
         </div>
-          <div class="modal-footer">
+          <!-- <div class="modal-footer">
         
         <a data-dismiss="modal" class="btn btn-danger" @click.prevent="retourListeEntreprise" href="#">Voir Tableau</a>
        
-      </div>
+      </div> -->
       </div>
     </div>
   </div>

@@ -2732,10 +2732,12 @@ export function ajouterMarche({commit}, elementAjout){
 // action pour modifier le type text juridique
 
 
-export function modifierMarche({commit}, element_modifie) {
+export function modifierMarche({ commit, dispatch}, element_modifie) {
   asyncLoading( axios.put('/marches',element_modifie)).then(response => {
        commit('MODIFIER_MARCHE', response.data)
-
+    dispatch('getMarche')
+    dispatch('getActeEffetFinancier')
+    
        this.$app.$notify({
          title: 'success ',
          text: 'Modification effectué !',

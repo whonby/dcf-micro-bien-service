@@ -1,4 +1,5 @@
-
+getMandatPersonnaliserVise
+getActeEffetFinancierPersonnaliser45
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays
@@ -909,7 +910,7 @@ export const getActeEffetFinancierPersonnaliser45 = (state, getters, rootState, 
                 varObjetEntreprise: rootGetters['gestionMarche/entreprises'].find(
                     plans => plans.id == element.entreprise_id
                 ),
-                AfficheMarche: rootGetters['bienService/afficheContratualisation'].find(
+                AfficheMarche: rootGetters['bienService/marches'].find(
                     plans => plans.id == element.marche_id
                 ),
 
@@ -921,6 +922,9 @@ export const getActeEffetFinancierPersonnaliser45 = (state, getters, rootState, 
         }
         return element;
     })
+
+
+
 
 
 

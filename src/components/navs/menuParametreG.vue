@@ -431,6 +431,14 @@
            Procedure de passation
             </router-link>
           </li>
+           <li>
+
+                    <router-link :to="{name: 'ppm'}" tag="a">
+                        <i class="icon-list-alt"></i>
+                        Importation du PPM
+                    </router-link>
+                </li>
+
         </ul>
       </li>
       <li class="dropdown" id="personnelPara">

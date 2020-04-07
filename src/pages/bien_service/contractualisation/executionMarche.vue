@@ -511,10 +511,10 @@
                       <td>
                           
                       </td>
-                       <td style="font-weight:bold;"> Total Marche attribué
+                       <td style="font-weight:bold;"> Total Marche en execution
                       </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
-                           {{formatageSomme(parseFloat(montantMarcheReel))}}
+                           {{formatageSomme(parseFloat(montantMarcheExecuter))}}
                            
                       </td>
                        <td>
@@ -582,7 +582,7 @@ export default {
   },
 
   computed: {
-      ...mapGetters("bienService", ['acteEffetFinanciers','marches','typeMarches', 'getMarchePersonnaliser',
+      ...mapGetters("bienService", ["getActeEffetFinancierPersonnaliser45",'acteEffetFinanciers','marches','typeMarches', 'getMarchePersonnaliser',
      "montantMarche", "printMarcheNonAttribue","procedurePassations","typeTypeProcedures","montantMarcheReel"]),
 
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
@@ -607,7 +607,12 @@ afficheMontantReelMarche() {
       };
     },
 
-
+  afficheExercution(){
+return this.getActeEffetFinancierPersonnaliser.filter(element => element.date_odre_service <= this.nombreJourTraitementCalucle)
+},
+afficheMarchExecuter(){
+return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
+},
 
 
 
@@ -654,6 +659,11 @@ return this. marcherAttribuer.filter((item) => {
       return this.getMarchePersonnaliser.filter(recuper => recuper.attribue == 2)
       
     },
+
+    
+    montantMarcheExecuter(){
+  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
+},
     // MontatantImputationBudget() {
       
     //   const norme = this.getPersonnaliseBudgetGeneral.find(normeEquipe => normeEquipe.economique_id == this.formData.Economique);

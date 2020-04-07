@@ -170,7 +170,7 @@ export default {
     },
     computed: {
 
-            ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,"gettersCotations","gettersTransmissions"]),
+            ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,"gettersCotations","gettersTransmissions","marches"]),
             // ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -212,7 +212,11 @@ export default {
         },
     methods:{
         ...mapActions('bienService',['supprimerTransmission',
+<<<<<<< HEAD
         'ajouterTransmission','modifiertransmission', "modifierMarche", "getTransmission"]),
+=======
+        'ajouterTransmission','modifiertransmission',"modifierMarche"]),
+>>>>>>> 5f3ab689fdc3b0e518a64130569043a4d6b447ad
 
 
              OnchangeFichier(e) {
@@ -264,8 +268,17 @@ export default {
 // if (condition) {
     
 // }
+<<<<<<< HEAD
          
          
+=======
+ this.ajouterAppelOffre(nouvelObjet);
+    let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
+    marcheObjet.attribue=1
+      //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
+     this.modifierMarche(marcheObjet)
+              
+>>>>>>> 5f3ab689fdc3b0e518a64130569043a4d6b447ad
                this.ajouterTransmission(formData, config)
                this.getTransmission()
                this.formTransmission ={

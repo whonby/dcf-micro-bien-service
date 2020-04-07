@@ -792,7 +792,7 @@ getDateFinExécutionValue(){
     //this.formEffetFinancier.entreprise_id=entreprisePremier.id
     this.ajouterActeEffetFinancier(this.formEffetFinancier)
     let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
-    marcheObjet.attribue=2
+    marcheObjet.attribue = 2
     marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
    // console.log(marcheObjet)
     this.modifierMarche(marcheObjet)
