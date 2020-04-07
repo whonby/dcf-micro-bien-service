@@ -212,7 +212,7 @@ export default {
         },
     methods:{
         ...mapActions('bienService',['supprimerTransmission',
-        'ajouterTransmission','modifiertransmission']),
+        'ajouterTransmission','modifiertransmission', "modifierMarche", "getTransmission"]),
 
 
              OnchangeFichier(e) {
@@ -243,7 +243,10 @@ export default {
          
           
            ajouterCotationLocal(){
-
+     let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
+    marcheObjet.attribue=1
+      //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
+     this.modifierMarche(marcheObjet)
                
                 const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
@@ -261,8 +264,10 @@ export default {
 // if (condition) {
     
 // }
-              
+         
+         
                this.ajouterTransmission(formData, config)
+               this.getTransmission()
                this.formTransmission ={
                   
                }

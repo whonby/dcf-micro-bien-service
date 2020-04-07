@@ -144,7 +144,7 @@ export default {
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", 
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
-          "getRapport"])
+          "getRapport", "getDocument","getRapportJugement"])
 
 
   },
@@ -318,7 +318,8 @@ this.getProcedurePassation()
 this.getEngagement()
 this.getExecutionMarche()
 this.getMandat()
-
+this.getRapportJugement()
+this.getDocument()
  
 
     this.getAppelOffre()

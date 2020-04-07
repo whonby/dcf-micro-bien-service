@@ -205,7 +205,7 @@ export default {
     },
     computed: {
 
-            ...mapGetters("bienService", [ "getTransmission","gettersCotationPersonnaliser" ,
+            ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,
             "gettersCotations","gettersTransmissions"]),
             // ...mapGetters('personnelUA', ['acteur_depenses']),
 
@@ -230,7 +230,7 @@ export default {
     methods:{
         
         ...mapActions('bienService',['supprimerTransmission',
-        'ajouterTransmission','modifiertransmission']),
+        'ajouterTransmission','modifiertransmission',"getTransmission"]),
 
 
              OnchangeFichier(e) {
@@ -280,6 +280,7 @@ export default {
 // }
               
                this.ajouterTransmission(formData,config)
+               this.getTransmission()
                this.formTransmission ={
                    date_dao:"",
                    ref_courier:"",

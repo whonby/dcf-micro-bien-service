@@ -775,7 +775,7 @@
             </div>
               <div class="modal-footer">
         
-        <a data-dismiss="modal" class="btn btn-danger" @click.prevent="retourListeEntreprise" href="#">Voir Tableau Marché</a>
+        <a data-dismiss="modal" class="btn btn-danger" @click.prevent="callBack" href="#">Voir Tableau investissement</a>
        
       </div>
         </div>
@@ -788,19 +788,19 @@
 <script>
     import { mapGetters, mapActions } from "vuex";
     //import moment from 'moment';
-    import componentCotation from '../dossierDetailMarchePs/dossierComponentPs/componentCotation';
-     import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
-     import componentOuverture from '../dossierDetailMarchePs/dossierComponentOuverture/componentOuverture';  
-   import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
-    import publicationOffre from '../DossierPso/publicationOffre/publicationOffre';
-    import addLot from '../dossierLot/addLot';
-        import invitationCf from '../DossierPso/lettreInvitation/invitationCf';
- import mandateBs from '../DossierPso/mandaté/mandateBs';
- import componentOuverture1 from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
-import dossierCandidat from '../DossierPso/dossierCandidat/dossierCandidat'
-    import componentOuvertureMembre from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
-    import componentAnalyse from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
-     import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
+    import componentCotation from '../../bien_service/dossierDetailMarchePs/dossierComponentPs/componentCotation';
+     import componentEtat from '../../bien_service/dossierDetailMarchePs/dossierComponentEtat/componentEtat';
+     import componentOuverture from '../../bien_service/dossierDetailMarchePs/dossierComponentOuverture/componentOuverture';  
+   import componentActe from '../../bien_service/dossierDetailMarchePs/dossierComponentActe/componentActe' ;
+    import publicationOffre from '../../bien_service/DossierPso/publicationOffre/publicationOffre';
+    import addLot from '../../bien_service/dossierLot/addLot';
+        import invitationCf from '../../bien_service/DossierPso/lettreInvitation/invitationCf';
+ import mandateBs from '../../bien_service/DossierPso/mandaté/mandateBs';
+ import componentOuverture1 from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
+import dossierCandidat from '../../bien_service/DossierPso/dossierCandidat/dossierCandidat'
+    import componentOuvertureMembre from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
+    import componentAnalyse from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
+     import componentPv from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
   
 //   import componentCotation from '../dossierDetailMarchePs/dossierComponentPs/componentCotation';
 //      import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
@@ -812,16 +812,16 @@ import dossierCandidat from '../DossierPso/dossierCandidat/dossierCandidat'
     //  import invitationCf from '../DossierPso/lettreInvitation/invitationCf';
     //  import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
 
-     import componentTransmissionDao from '../dossierDetailMarcheAOI_AON/dossierTransmission/componentTransmissionD';
-      import componentAvis from '../dossierDetailMarcheAOI_AON/dossierDemandeAno/componentAvis';
+     import componentTransmissionDao from '../../bien_service/dossierDetailMarcheAOI_AON/dossierTransmission/componentTransmissionD';
+      import componentAvis from '../../bien_service/dossierDetailMarcheAOI_AON/dossierDemandeAno/componentAvis';
 ///////////////////////////////////////////////
 
      
         // import publicationOffre from '../DossierPso/publicationOffre/publicationOffre';
-        import componentDemandeAno from '../dossierDetailMarcheAOI_AON/dossierDemande_ano_cf/componentDemandeAno'; 
-         import componentAvisBailleurSurTransmision from '../dossierDetailMarcheAOI_AON/dossierAvisBailleurSurTransmission/componentAvisBailleurSurTransmision';
-        import componentAvisAnoCf from '../dossierDetailMarcheAOI_AON/dossierAvisAnoCf/componentAvisAnoCf';
-         import componentAvisBailleurCf from '../dossierDetailMarcheAOI_AON/dossierAvisBailleurAvecCf/componentAvisBailleurCf'
+        import componentDemandeAno from '../../bien_service/dossierDetailMarcheAOI_AON/dossierDemande_ano_cf/componentDemandeAno'; 
+         import componentAvisBailleurSurTransmision from '../../bien_service/dossierDetailMarcheAOI_AON/dossierAvisBailleurSurTransmission/componentAvisBailleurSurTransmision';
+        import componentAvisAnoCf from '../../bien_service/dossierDetailMarcheAOI_AON/dossierAvisAnoCf/componentAvisAnoCf';
+         import componentAvisBailleurCf from '../../bien_service/dossierDetailMarcheAOI_AON/dossierAvisBailleurAvecCf/componentAvisBailleurCf'
 
   //import bailleurAjouter from '../dossierComponent/bailleurAjouter';
 
@@ -883,7 +883,7 @@ componentPv,
 
                 ],
                     
-              
+              isButtunAddDossierCandidat:""
             };
         },
 created() {
@@ -1092,8 +1092,8 @@ formatageSomme:formatageSomme,
     //      }
     //  },
 
-              retourListeEntreprise(){
-                 this.$router.push({ name: 'marche' })
+              callBack(){
+                 this.$router.push({ name: 'investissement' })
             },
            
            

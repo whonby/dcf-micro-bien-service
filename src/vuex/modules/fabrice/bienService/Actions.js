@@ -286,7 +286,7 @@ export function supprimerExecutionMarche({commit}, id) {
 
 
 
-modifierActeEffetFinancier
+
 
 
 // action pour le motif de decision
@@ -2384,21 +2384,7 @@ export function getTransmission({commit}) {
 
 // action pour ajouter les infos 
 
-// export function ajouterTransmission({commit,dispatch}, elementAjout,config){
-//   asyncLoading(axios.post('/add_transmission', elementAjout,config)).then(response =>{
-//       if(response.status == 201){
-//         commit('AJOUTER_TRANSMISSION',response.data)
-//          dispatch('getTransmission')
-//           this.$app.$notify({
-//             title: 'success ',
-//             text: 'Enregistrement effectué !',
-//             type:"success"
-//           })
-//       }
-      
 
-//   }).catch(error => console.log(error))
-// }
 
 export function ajouterTransmission({commit,dispatch}, elementAjout,config){
   asyncLoading(axios.post('/add_transmission',elementAjout,config)).then(response =>{
@@ -3185,6 +3171,141 @@ export function supprimerMandater({commit}, id) {
 
 }
 /**Fin madate*/
+
+
+
+
+
+
+
+
+
+
+
+
+/*Action mandater*/
+
+export  function  getDocument({commit}) {
+  queue.push(() => axios.get('/list_document').then((response) => {
+      commit('GET_ALL_DOCUMENT', response.data)
+
+  }).catch(error => console.log(error)))
+}
+
+// action pour ajouter les infos
+
+export function ajouterDocument({commit}, elementAjout,config){
+  asyncLoading(axios.post('/add_document',elementAjout,config)).then(response =>{
+      if(response.status == 201){
+          commit('AJOUTER_DOCUMENT', response.data)
+
+          this.$app.$notify({
+              title: 'success ',
+              text: 'Enregistrement effectué !',
+              type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+
+// action pour modifier le type text juridique
+
+
+export function modifierDocument({commit}, element_modifie) {
+asyncLoading(axios.post('/update_document',element_modifie)).then(response => {
+      commit('MODIFIER_DOCUMENT', response.data)
+      this.$app.$notify({
+          title: 'success ',
+          text: 'Modification effectué !',
+          type:"success"
+      })
+  }).catch(error => console.log(error))
+}
+// supprimer le type text juridique
+
+export function supprimerDocument({commit}, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit('SUPPRIMER_DOCUMENT', id)
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete('/delete_document/' + id).then(() => dialog.close() )
+      })
+
+}
+/**Fin madate*/
+
+
+
+
+
+/*Action mandater*/
+
+export  function  getRapportJugement({commit}) {
+  queue.push(() => axios.get('/liste_rapport_iugement').then((response) => {
+      commit('GET_ALL_RAPPORTJUGEMENT', response.data)
+
+  }).catch(error => console.log(error)))
+}
+
+// action pour ajouter les infos
+
+export function ajouterRapportJugement({commit}, elementAjout,config){
+  asyncLoading(axios.post('/add_rapport_jugement',elementAjout,config)).then(response =>{
+      if(response.status == 201){
+          commit('AJOUTER_RAPPORT_OUVERTURE', response.data)
+
+          this.$app.$notify({
+              title: 'success ',
+              text: 'Enregistrement effectué !',
+              type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+
+// action pour modifier le type text juridique
+
+
+export function modifierRapportJugement({commit}, element_modifie) {
+asyncLoading(axios.post('/update_rapport_jugement',element_modifie)).then(response => {
+      commit('MODIFIER_RAPPORT_OUVERTURE', response.data)
+      this.$app.$notify({
+          title: 'success ',
+          text: 'Modification effectué !',
+          type:"success"
+      })
+  }).catch(error => console.log(error))
+}
+// supprimer le type text juridique
+
+export function supprimerRapportJugement({commit}, id) {
+  this.$app.$dialog
+      .confirm("Voulez vouz vraiment supprimer ?.")
+      .then(dialog => {
+          commit('SUPPRIMER_RAPPORT_OUVERTURE', id)
+          // // dialog.loading(false) // stops the proceed button's loader
+          axios.delete('/delete_rapport_jugement/' + id).then(() => dialog.close() )
+      })
+
+}
+/**Fin madate*/
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

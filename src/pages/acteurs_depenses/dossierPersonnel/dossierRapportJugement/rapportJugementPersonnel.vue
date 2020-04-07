@@ -30,7 +30,7 @@
                             </a>
                         </td>
                         <div class="btn-group">
-                            <button @click.prevent="supprimerrapportJugement(rapport.id)"  class="btn btn-danger " title="Supprimer">
+                            <button @click.prevent="supprimerRapportJugement(rapport.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
 
                         </div>
@@ -39,7 +39,7 @@
                                             </tbody>
                                         </table>
 
-                 <div id="ajouterRapportJ" class="modal hide grdtaill">
+                 <div id="ajouterRapportPersonnel" class="modal hide grdtaill">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter rapport d'ouverture</h3>
@@ -76,7 +76,7 @@
         </div>
 
 
-             <div id="modifierRapportJugement" class="modal hide " aria-hidden="true" style="display: none;">
+             <div id="modifierRapportJugements" class="modal hide " aria-hidden="true" style="display: none;">
 
 
                          <div class="modal-header">
@@ -160,7 +160,7 @@ export default {
     computed: {
 
             ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,
-            "gettersCotations","rapportJugement"]),
+            "gettersCotations","rapportDocuments"]),
             // ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -178,9 +178,9 @@ export default {
 //                 }
 //             },
  listeRapport() {
-      return id => {
-        if (id != null && id != "") {
-          return this.rapportJugement.filter(element => element.marche_id == id);
+      return macheid => {
+        if (macheid != null && macheid != "") {
+          return this.rapportDocuments.filter(element => element.marche_id == macheid);
         }
       };
     },
@@ -188,7 +188,7 @@ export default {
 
         },
     methods:{
-        ...mapActions('bienService',['supprimerrapportJugement',
+        ...mapActions('bienService',['supprimerRapportJugement',
         'ajouterRapportJugement','modifierRapportJugement']),
 
 
@@ -210,11 +210,11 @@ export default {
             },
           
          afficherModalRapportJugement(index){
-                this.$('#modifierRapportJugement').modal({
+                this.$('#modifierRapportJugements').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.editRapport = this.rapportJugement[index];
+                this.editRapport = this.rapportDocuments[index];
             },
 
            
@@ -257,7 +257,7 @@ export default {
                 }
               
                this.modifierRapportJugement(formData,config)
-               this.$('#modifierRapportJugement').modal('hide');
+               this.$('#modifierRapportJugements').modal('hide');
            },
            formaterDate(date){
                return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");

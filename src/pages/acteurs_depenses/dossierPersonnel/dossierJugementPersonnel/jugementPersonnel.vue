@@ -62,7 +62,7 @@
         <!-- debut formulaire ajout analyse -->
 
 
-         <div id="ajouterJugementPersonnel" class="modal hide grdirModalAnalyse">
+         <div id="ajouterPesonnel" class="modal hide grdirModalAnalyse">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter le jugement des offres</h3>

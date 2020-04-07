@@ -28,7 +28,18 @@ const defaultState = {
     ligneBudgetaires:[],
     DossierCandidats:[],
     livrables:[],
-      
+
+    // documents:[],
+    // rapportJugements:[],
+    // rapportOuverture1:[],
+    // rapportOuverture2:[],
+
+    documentMedias:[],
+    rapportDocuments:[],
+
+    // mediaStock:[],
+    // stockDocuments:[],
+
     zoneGeographiques:[],
     typeTextJuridiques:[],
     realiteServiceFaits:[],
@@ -44,7 +55,7 @@ const defaultState = {
     offreFinanciers:[],
     lettreInvitation:[],
     mandate:[],
-documentProcedures:[],
+    documentProcedures:[],
     stateDemandeAno:[],
     analyseDMP:[],
     stateAnoDmpBailleur:[],
@@ -60,7 +71,6 @@ documentProcedures:[],
     pays: [],
     villes: [],
     communes:[],
-
     bailleurMarche: [],
     choixprocedure: [],
      membre_cojo:[],
@@ -73,13 +83,9 @@ documentProcedures:[],
     gettersPsc:[],
     stateTransmissions:[],
     rapportOuverture:[],
-
-
     gettersTransmissions:[],
     plan_passation_marche:[],
-
-
-
+  
 }
 
 export default defaultState;

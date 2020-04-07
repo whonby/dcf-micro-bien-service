@@ -317,7 +317,7 @@ message_mandater:'',
                 return marcheid => {
                     if (marcheid != "") {
                         //console.log("Marche lettre inviation marche")
-                        return this.getterLettreInvitation.filter(idmarche => idmarche.appel_offre.marche_id == marcheid)
+                        return this.getterLettreInvitation.filter(idmarche => idmarche.marche_id == marcheid)
                     }
                 }
             },

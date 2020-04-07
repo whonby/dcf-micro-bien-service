@@ -1,4 +1,73 @@
-// get all prestation
+// get all document
+
+
+
+
+export const GET_ALL_DOCUMENT = (state, tableau_document) =>{
+    state.documentMedias = tableau_document
+}
+
+// add * document
+
+export const AJOUTER_DOCUMENT = (state, elementAjouter) => {
+    state.documentMedias.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_DOCUMENT = (state, elementModif)=>{
+    state.documentMedias = state.documentMedias.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+
+export const SUPPRIMER_DOCUMENT = (state, id)=> {
+    state.documentMedias = state.documentMedias.filter(prest => prest.id !=id)
+}
+
+
+
+
+
+export const GET_ALL_RAPPORTJUGEMENT = (state, tableau_rapport_ouverture) =>{
+    state.rapportDocuments = tableau_rapport_ouverture
+}
+
+// add * document
+
+export const AJOUTER_RAPPORT_OUVERTURE = (state, elementAjouter) => {
+    state.rapportDocuments.unshift(elementAjouter)
+}
+
+// update all document
+export const MODIFIER_RAPPORT_OUVERTURE = (state, elementModif)=>{
+    state.rapportDocuments = state.rapportDocuments.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+
+export const SUPPRIMER_RAPPORT_OUVERTURE = (state, id)=> {
+    state.rapportDocuments = state.rapportDocuments.filter(prest => prest.id !=id)
+}
+
+
+
+
+
+
+
+
+
+
 
 export const GET_ALL_PRESTATION = (state, tableau_prestation) =>{
     state.prestations = tableau_prestation
@@ -213,6 +282,7 @@ export const MODIFIER_TRANSMISSION = (state, elementModif)=>{
 export const SUPPRI_TRANSMISSION = (state, id)=> {
     state.stateTransmissions = state.stateTransmissions.filter(motif => motif.id !=id)
 }
+
 
 
 

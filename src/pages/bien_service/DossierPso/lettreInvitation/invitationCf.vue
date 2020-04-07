@@ -344,10 +344,10 @@ export default {
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
       
 lettreInvitationAMarche: function () {
-                return id => {
-                    if (id != "") {
+                return macheid => {
+                    if (macheid != "") {
                         //console.log("Marche lettre inviation marche")
-                        return this.getterLettreInvitation.filter(idmarche => idmarche.appel_offre.marche_id == id)
+                        return this.getterLettreInvitation.filter(idmarche => idmarche.marche_id == macheid)
                     }
                 }
             },
@@ -479,6 +479,7 @@ typeProcedureLibelle() {
 
 
 
+
             ajouterLettreInv(){
                 const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
@@ -487,6 +488,7 @@ typeProcedureLibelle() {
                 formData.append('ref_lettre', this.formLettre.ref_lettre);
                 formData.append('date_lettre', this.formLettre.date_lettre);
                 formData.append('date_cojo', this.formLettre.date_cojo);
+                formData.append('marche_id', this.macheid);
                 formData.append('objet_lettre', this.formLettre.objet_lettre);
                 let config = {
                     header : {
@@ -538,6 +540,7 @@ typeProcedureLibelle() {
                 formData.append('date_lettre', this.edite_Lettre_invitation.date_lettre);
                 formData.append('date_cojo', this.edite_Lettre_invitation.date_cojo);
                 formData.append('objet_lettre', this.edite_Lettre_invitation.objet_lettre);
+                formData.append('marche_id', this.macheid);
                 formData.append('id',this.edite_Lettre_invitation.id);
                
                 console.log(formData)

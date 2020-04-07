@@ -52,7 +52,7 @@
 
 
 
-<div id="ajouterOffrePublication" class="modal hide grdirModalActeEffet">
+<div id="ajouterOffrePublicationP" class="modal hide grdirModalActeEffet">
              <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter  avis de recrutement</h3>
@@ -355,7 +355,8 @@ typeProcedureLibelle() {
       methods:{ 
 
           ...mapActions("bienService", [
-                'ajouterAppelOffre','modifierAppelOffre',"supprimerAppelOffre","modifierAppelOffre",
+                'ajouterAppelOffre','modifierAppelOffre',
+                "supprimerAppelOffre","modifierAppelOffre","modifierMarche"
             
             ]),
 

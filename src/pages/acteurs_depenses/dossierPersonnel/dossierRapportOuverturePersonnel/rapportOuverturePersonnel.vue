@@ -160,7 +160,7 @@ export default {
     computed: {
 
             ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,
-            "gettersCotations","documents"]),
+            "gettersCotations","documentMedias"]),
             // ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -177,10 +177,11 @@ export default {
 //                     }
 //                 }
 //             },
+
  listeRapport() {
-      return id => {
-        if (id != null && id != "") {
-          return this.documents.filter(element => element.marche_id == id);
+      return macheid => {
+        if (macheid != null && macheid != "") {
+          return this.documentMedias.filter(element => element.marche_id == macheid);
         }
       };
     },
@@ -214,7 +215,7 @@ export default {
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.editRapport = this.documents[index];
+                this.editRapport = this.documentMedias[index];
             },
 
            

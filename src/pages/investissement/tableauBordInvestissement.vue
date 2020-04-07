@@ -6,35 +6,52 @@
     
       <ul class="quick-actions">
         <li class="bg_ls">
-          <a href="#">
+          <a href="#" title="nombre de marché d'investissement">
             <i class="icon-list-ol"></i>
-            <span class="label label-important">{{nombremarches}}</span> MARCHES NON ATTRIBUES
+            <span class="label label-inverse">{{nombreMarcheinvestissement}}</span> Nombre de marché I.
           </a>
         </li>
-         <li class="bg_ls">
-          <a href="#">
+
+        <li class="bg_lo">
+          <a href="#" title="nombre de marché planifié d'investissement">
             <i class="icon-list-ol"></i>
-            <span class="label label-important">{{nombremarchesExecute}}</span> MARCHES ATTRIBUES
+            <span  title="marche Planifié en investissment" class="label label-important" >{{nombreMarchePlanifier}}</span> Nombre de marché planfié I.
           </a>
         </li>
-         <li class="bg_ls">
-          <a href="#">
+
+        <li class="bg_ly">
+          <a href="#" title=" nombre de marché en contratualisation d'investissement">
             <i class="icon-list-ol"></i>
-            <span class="label label-important">{{formatageSomme(parseFloat(montantGlobalMarche))}}</span> MONTANTS PREVU DES MARCHES
+            <span class="label label-success">{{nombreMarcheContratualisation}}</span>Nombre de marché en contratualisation
+          </a>
+        </li>
+
+         <li class="bg_ls">
+          <a href="#" title="nombre de marche en execution d'investissement">
+            <i class="icon-list-ol"></i>
+            <span class="label label-warning">{{afficheNombreMarchExecuter}}</span> Marché en exécution I
+          </a> 
+        </li>
+         <li class="bg_ls">
+          <a href="#" title=" montant des marchés planifiés d'investissement">
+            <i class="icon-list-ol"></i>
+            <span class="label label-important">{{formatageSomme(parseFloat(MontantMarcheInvestissement))}}</span> MONTANTS PREVU DES MARCHES / PLANIFIE I.
           </a>
         </li>
         <li class="bg_lo">
-          <a href="#">
+          <a href="#" title=" montant du marché en contratualisation d'investissement">
             <i class="icon-list-ol"></i>
-            <span class="label label-success">{{formatageSomme(parseFloat(montantGlobalMarcheEnCoursExecution))}}</span>MONTANTS DES MARCHES ATTRIBUES
+            <span class="label label-success">{{formatageSomme(parseFloat(montantMarcheContratualisationInvestissement))}}</span>Montant des marchés en contratualisation
           </a>
         </li>
-        <!-- <li class="bg_ly">
-          <a href="#">
+        
+
+        <li class="bg_lo">
+          <a href="#" title=" montant du marché en execution d'investissement">
             <i class="icon-list-ol"></i>
-            <span class="label label-important">{{nombreTypeText}}</span>Nombre de type texte
+            <span class="label label-warning">{{formatageSomme(parseFloat(montantMarcheExecution))}}</span>Montant des marchés en execution I.
           </a>
-        </li> -->
+        </li>
       
 
       </ul>
@@ -43,6 +60,7 @@
     
   </div>
 </template>
+  
   
 <script>
 import { mapGetters } from "vuex";
@@ -66,7 +84,9 @@ export default {
   computed: {
 
     //   ...mapGetters('investissement'['']),
-    ...mapGetters("investissement", ['nombremarchesExecute', "montantGlobalMarcheEnCoursExecution",'montantGlobalMarche','nombremarches','acteDepense',"getMarchePersonnaliser","appelOffres",
+    ...mapGetters("bienService", ['nombreMarcheExecuteInvestissement',"nombreMarcheContratualisation",
+    'MontantMarcheInvestissement','montantMarcheContratualisationInvestissement',"montantMarcheExecutionInvestissement",
+    'nombreMarcheinvestissement','acteDepense',"getMarchePersonnaliser","appelOffres","nombreMarchePlanifier",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -75,6 +95,29 @@ export default {
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats"]),
    ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
 
+
+
+// affiche le montant de marche en contratualisation
+
+   
+
+// montantMarcheContratualisationInvestissement(){
+//   return this.nombreMarcheContratualisation.reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_marche), 0)
+
+// }
+
+ // afficher le nombre de marche executé d'investissement
+
+ afficheNombreMarchExecuter(){
+return this.getActeEffetFinancierPersonnaliser.filter(element => element.indicateur_resilie != 1).length
+},
+
+
+// afficher le montant d'execution 
+
+montantMarcheExecution(){
+  return this.getActeEffetFinancierPersonnaliser.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
+},
 
 
 //    nbreMarcheParUa(){
@@ -90,6 +133,10 @@ export default {
 // },
   },
   methods: {
+
+
+
+
     formatageSomme:formatageSomme
   }
 };

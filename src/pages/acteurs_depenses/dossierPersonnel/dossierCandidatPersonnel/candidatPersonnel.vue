@@ -60,7 +60,7 @@
 
 
 
-<div id="addDossier" class="modal hide grdirModalActeEffet">
+<div id="addcandidatP" class="modal hide grdirModalActeEffet">
              <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter les troid(3) cv</h3>

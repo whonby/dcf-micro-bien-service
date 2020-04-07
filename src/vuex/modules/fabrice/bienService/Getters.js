@@ -55,9 +55,13 @@ export const mandats = state => state.mandats
  export const getterActeEffetFinanciers = state => state.acteEffetFinanciers
   export const gettersEtatProcedure = state =>state.gettersEtatProcedure
  // export const gettersDocuments = state => state.documents
-  export const documents = state => state.documents
-  export const rapportJugement = state => state.rapportJugement
-  
+   export const documentMedias = state => state.documentMedias
+ export const rapportDocuments = state => state.rapportDocuments
+
+//  export const documentMedias = state =>state.mediaStock
+//  export const gettersStockDocuments = state =>state.stockDocuments
+// export const rapportOuverture1 = state => state.rapportOuverture1
+// export const rapportOuverture2 = state => state.rapportOuverture2
   export const rapportOuverture = state => state.rapportOuverture
 // exemple de getters
 export const appelOffres = state => state.appelOffres
@@ -940,3 +944,63 @@ export const gettersTest = (state, getters, rootState, rootGetters) =>
         }
         return element;
     })
+
+
+    /// afficher les informations  du tableau de bord  d'investissement///
+
+    // afficher le nombre de marche
+
+    export const nombreMarcheinvestissement = state =>
+    state.marches.filter(
+        varObjet => varObjet.type_marche.code_type_marche == 3
+    ).length;
+         
+   export const MontantMarcheInvestissement = state =>
+   state.marches.filter(
+       objetMontant => objetMontant.type_marche.code_type_marche == 3
+   ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche),0)
+
+   // afficher les marche en planiofications pour investissement
+    export const nombreMarchePlanifier = state =>
+    state.marches.filter(
+        response => response.type_marche.code_type_marche == 3 && response.attribue == 0
+    ).length;
+
+    // afficher le nombre de marche en contratualisation d'investissement
+
+    export const nombreMarcheContratualisation = state =>
+    state.marches.filter(
+        objetNombreContratualisation => objetNombreContratualisation.type_marche.code_type_marche == 3
+         && objetNombreContratualisation.attribue == 1
+    ).length;
+
+
+    // export const montantMarcheContratualisationInvestissement = (state, getters) =>
+    // state.nombreMarcheContratualisation.reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_marche),0)
+   
+    export const montantMarcheContratualisationInvestissement = state =>
+    state.marches.filter(
+        varObjet => varObjet.type_marche.code_type_marche == 3
+         && varObjet.attribue == 1
+    ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+    
+
+    /// afficher le nombre de marche en execution d'investissement
+
+
+    // export const nombreMarcheExecuteInvestissement = (state, getters) =>
+    // state.acteEffetFinanciers.filter(
+    //     objetExecution => objetExecution.indicateur_resilie != 1 && objetExecution.marche_id == marche_id
+        
+    // ).length;
+
+// echo le montant des marches executé d'investissement
+
+    // export const montantMarcheExecutionInvestissement = (state, getters) =>
+    // state.marches.filter(
+    //     varObjet => varObjet.type_marche.code_type_marche == 3
+    //      && varObjet.attribue == 2
+    // ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+
+
+
