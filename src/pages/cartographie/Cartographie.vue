@@ -99,9 +99,7 @@
                         </h5>
                     </div>
 
-                    <div class="widget-content" >
-
-
+                    <div class="widget-content widget-content1" >
 
                         <table class="table table-bordered table-striped" >
                             <tr>
@@ -656,5 +654,11 @@
     }
     .blah{
         cursor: grab !important;
+    }
+    .widget-content1{
+
+        height: 500px !important;
+
+        overflow-y: scroll !important;
     }
 </style>
