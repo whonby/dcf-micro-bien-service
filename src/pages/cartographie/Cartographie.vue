@@ -325,8 +325,35 @@
                              color="#ff0000"
                              colorFill="#ff0000"
                          }else{
-                             color="#0f13ff"
-                             colorFill="#0f13ff"
+                             if(taux==0){
+                                 color="#0c2061"
+                                 colorFill="#0c2061"
+                             }
+
+                             if(1<=taux && taux<31){
+
+                                 color="#fffb13"
+                                 colorFill="#fffb13"
+                             }
+
+                             if(31<=taux && taux<51){
+                                 color="#2affe1"
+                                 colorFill="#2affe1"
+                             }
+
+                             if(51<=taux && taux<81){
+                                 color="#1285ff"
+                                 colorFill="#1285ff"
+                             }
+                             if(81<=taux && taux<100){
+                                 color="#9dfd80"
+                                 colorFill="#9dfd80"
+                             }
+                             if(taux==100){
+                                 color="#209503"
+                                 colorFill="#209503"
+                             }
+
                          }
                         let objetAlocalise={
                             id:value.id,
