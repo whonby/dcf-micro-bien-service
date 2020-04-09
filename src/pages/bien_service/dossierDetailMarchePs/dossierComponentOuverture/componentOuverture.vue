@@ -76,7 +76,7 @@
                          
 
                          
-                         <td>
+                         <!-- <td>
                          <div class="control-group">
             
                             <label class="control-label">Rang:</label>
@@ -84,10 +84,10 @@
                        <input type="number" class="span" placeholder="" v-model="formOuverture.rang_ouverture">
                             </div>
                         </div>
-                         </td>
+                         </td> -->
 
 
-                         <td>
+                         <!-- <td>
                          <div class="control-group">
             
                             <label class="control-label">Note :</label>
@@ -95,11 +95,10 @@
                        <input type="number" class="span" placeholder="" v-model="formOuverture.note_ouverture">
                             </div>
                         </div>
-                         </td>
-                     </tr>
-                     <tr>
+                         </td> -->
+                     
 
-                     <td colspan="" width="">
+                     <td colspan="2" width="">
                             <div class="control-group">
                                 <label class="control-label">Objet:</label>
                                 <div class="controls">
@@ -108,6 +107,9 @@
 
                             </div>
                         </td>
+                     </tr>
+
+                     <tr>
 
                         <td>
                             
@@ -121,7 +123,7 @@
                         </div>
                         </td>
                          
-                         <td>
+                         <td colspan="2">
                         <div class="control-group">
 
                         
@@ -174,7 +176,7 @@
                     </div>
                                </td>
 
-                                <td>
+                                <!-- <td>
                         
 
                          <div class="control-group">
@@ -184,9 +186,9 @@
                        <input type="number" class="span" placeholder="Numero lo" v-model="editOuverture.note_ouverture">
                             </div>
                         </div>
-                               </td>
+                               </td> -->
 
-                                <td>
+                                <!-- <td>
                         
 
                          <div class="control-group">
@@ -196,11 +198,10 @@
                        <input type="number" class="span" placeholder="Numero lo" v-model="editOuverture.rang_ouverture">
                             </div>
                         </div>
-                               </td>
-                           </tr>
-                           <tr>
+                               </td> -->
+                          
 
-                             <td colspan="" width="">
+                             <td colspan="2" width="">
                             <div class="control-group">
                                 <label class="control-label">Objet:</label>
                                 <div class="controls">
@@ -209,6 +210,9 @@
 
                             </div>
                         </td>
+                           </tr>
+
+                           <tr>
                          
                      
                          
@@ -223,7 +227,7 @@
                             </div>
                         </div>
                   </td>
-                  <td>
+                  <td colspan="2">
                      
                         <div class="control-group">
 
@@ -266,16 +270,16 @@ export default {
                 libelle_ouverture:"",
                 date_ouverture:"",
                 montant_ouverture:"",
-                note_ouverture:"",
-                rang_ouverture:""
+                // note_ouverture:"",
+                // rang_ouverture:""
             },
             editOuverture:{
                 entreprise_id:"",
                 libelle_ouverture:"",
                 date_ouverture:"",
                 montant_ouverture:"",
-                  note_ouverture:"",
-                rang_ouverture:""
+                //   note_ouverture:"",
+                // rang_ouverture:""
             },
          cotation_id:""
         }
@@ -379,8 +383,8 @@ affichierNomEntreprise() {
                 libelle_ouverture:"",
                 date_ouverture:"",
                 montant_ouverture:"",
-                  note_ouverture:"",
-                rang_ouverture:""
+                //   note_ouverture:"",
+                // rang_ouverture:""
                 }
             },
             

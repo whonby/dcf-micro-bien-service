@@ -1,6 +1,11 @@
 <template>
         <div>
 
+
+        <div align="right">
+
+            <a href="#ajouterOuverturePersonnel" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+        </div>
             <!-- debut de list  -->
             <!-- <div align="right">
                       <div class="widget-content">

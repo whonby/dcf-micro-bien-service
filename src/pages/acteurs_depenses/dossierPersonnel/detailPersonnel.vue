@@ -5,8 +5,8 @@
 
 <div>
         <div class="container-fluid">
-            <h4 v-if="marcheDetail(marcheid)" >Detail Personnel de recrutement sur trois(3) cv  : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Contrat en cours de recrutement</button>
-                <button class="btn btn-success btn-large" v-else>Contrat attribué</button></h4>
+            <h4 v-if="marcheDetail(marcheid)" > {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0" ||v-if="marcheDetail(marcheid).attribue==1" >Contrat en cours de recrutement</button>
+                <button class="btn btn-success btn-large" v-if="marcheDetail(marcheid).attribue==3">Contrat attribué</button></h4>
             <hr />
 
             <div class="widget-box">
@@ -109,8 +109,7 @@
                                   <div id="tab0002" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
-                                    <a href="#ajouterMandatePersonnel" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                               
                                 <!-- <h4>Publication de l'offre</h4> -->
 
                       <mandatPersonnel :macheid="detail_marche.id"></mandatPersonnel>
@@ -146,15 +145,13 @@
 
                          
                      <div id="tab4" class="tab-pane">
-                     <div align="right">
-
-                        <a href="#ajouterOuverturePersonnel" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                     
                      <!-- <a href="#ajouter_membre_cojo" data-toggle="modal" class="btn btn-primary">Ajouter</a>  -->
 
                        <ouverturePersonnel :macheid="detail_marche.id"></ouverturePersonnel>
                   <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>
 
-                     </div>
+    
                
                  
                    </div>

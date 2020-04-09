@@ -57,6 +57,25 @@ const getPersonnaliseAgence = (state, getters, rootState, rootGetters) =>
 
 
 
+//  export const gettersPersonnaliserCompte = (state, getters, rootState, rootGetters) =>
+//     state.comptes.map(element => {
+//         if (element.banq_id !== null) {
+//             element = {
+//                 ...element,
+//                 afficheBanque: rootGetters['gestionMarche/banques'].find(
+//                     banq => banq.id == element.banq_id
+//                 ),
+               
+               
+               
+//             };
+//         }
+
+//         return element;
+//     });
+
+
+
 
 
 

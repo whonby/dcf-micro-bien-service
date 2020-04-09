@@ -8,7 +8,7 @@
                     <thead>
                     <tr>
 
-                        <th>Reference acte</th>
+                        <th>Reference acte </th>
                         <th>Libelle acte</th>
                         <th>Montant acte</th>
                         <th>Type acte</th>
@@ -77,21 +77,33 @@
                         </div>
                     </div>
                             </td>
-                            <td>
+                            <td colspan="2">
 
-                        <!-- <div class="control-group">
-                        <label class="control-label">Entreprise.</label>
+                       <div class="control-group">
+                        <label class="control-label">Dossier candidat.</label>
                         <div class="controls">
-                          <select v-model="formEffetFinancier.entreprise_id" class="span">
-                                <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
-                                        :value="varText.objetEntreprise.id">{{varText.objetEntreprise.raison_sociale}}</option>
+                          <select v-model="formEffetFinancier.candidat_personnel_id" class="span">
+                                <option v-for="varText in afficherCandidat(macheid)" :key="varText.id"
+                                        :value="varText.candidat_personnel_id">{{varText.nom_candidat}} {{varText.prenom_candidat}}</option>
                             </select>
                         
                         </div>
-                    </div> -->
+                    </div>
                             </td>
 
-                            <td>
+                                          <!-- <td>
+                     <div class="control-group" v-if="selectionAttributionMarche(marcheid)">
+                        <label class="control-label">Candidat récruté </label>
+                        <div class="controls" >
+                            <input :value="selectionAttributionMarche(marcheid).nom_candidat" readonly/>
+                        </div>
+                    </div>
+                                        <div class="control-group" v-else>
+                                            <code>{{message_setion_vainqueur}}</code>
+                                        </div>
+                            </td> -->
+
+                            <!-- <td>
 
 
                         <div class="control-group">
@@ -103,7 +115,7 @@
                             </select>
                         </div>
                     </div>
-                            </td>
+                            </td> -->
 
                               <!-- <td>
                         <div class="control-group">
@@ -116,9 +128,8 @@
                             </td> -->
                            
                        
-                           </tr>
-                           <tr>
-                                   <td>
+                          
+                                   <td colspan="">
                     <div class="control-group">
                         <label class="control-label">Autorité approbatrice</label>
                         <div class="controls">
@@ -132,9 +143,13 @@
                     </div>
 
                             </td>
+                        </tr>
+
+                        <tr>
+                           
 
 
-                                           <td>
+                                           <td colspan="2">
                     <div class="control-group">
                         <label class="control-label"> date d'approbation</label>
                         <div class="controls">
@@ -316,6 +331,14 @@
                 >Valider</a>
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a>
             </div>
+
+            <!-- <div class="modal-footer">
+                <a v-if="selectionAttributionMarche(marcheid)" @click.prevent="ajouterModalActeEffetFinancierLocal(selectionAttributionMarche(marcheid).nom_candidat)"
+                        class="btn btn-primary"
+                        href="#"
+                >Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div> -->
         </div>
 <!--- fin ajout acte effet financier  -->
 
@@ -353,7 +376,7 @@
                         <label class="control-label">Entreprise.</label>
                         <div class="controls">
                           <select v-model="editActeEffetFinancier.entreprise_id" class="span">
-                               <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
+                               <option v-for="varText in afficherCandidatId(macheid)" :key="varText.id"
                                         :value="varText.objetEntreprise.id">{{varText.objetEntreprise.raison_sociale}}</option>
                             </select>
                         
@@ -362,7 +385,7 @@
                         </td> -->
 
 
-                        <td>
+                        <!-- <td>
                             <div class="control-group">
                                 <label class="control-label">Text juridique </label>
                                 <div class="controls">
@@ -372,7 +395,7 @@
                                     </select>
                                 </div>
                             </div>
-                        </td>
+                        </td> -->
 
                         <!-- <td>
                             <div class="control-group">
@@ -601,10 +624,11 @@ export default {
              livrable_id:"",
         autorite_approbation:"",
         date_approbation:"",
-             text_juridique_id:"",
+            // text_juridique_id:"",
              type_act_effet_id:"",
              analyse_dossier_id:"",
              entreprise_id:"",
+             candidat_personnel_id:"",
              marche_id:"",
              numero_marche:"",
              difference_personnel_bienService:"personnel"
@@ -624,10 +648,11 @@ export default {
              livrable_id:"",
         autorite_approbation:"",
         date_approbation:"",
-             text_juridique_id:"",
+            // text_juridique_id:"",
              type_act_effet_id:"",
              analyse_dossier_id:"",
              entreprise_id:"",
+             candidat_personnel_id:"",
              marche_id:"",
              numero_marche:"",
              difference_personnel_bienService:"personnel"
@@ -646,8 +671,8 @@ export default {
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
-                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
-            ...mapGetters('personnelUA', ['acteur_depenses']),
+                "getActeEffetFinancierPersonnaliserContrat", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
+            ...mapGetters('personnelUA', ['acteur_depenses','dossierPersonnels']),
 
 
                 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
@@ -657,27 +682,28 @@ export default {
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
       
 
-// afficherEntrepriseRecep () {
-//                 return id => {
-//                     if (id != "") {
-//                          console.log("Marche lettre inviation marche")
-//                         return this.gettersCotationPersonnaliser.filter(idmarche => idmarche.marche_id == id)
-//                      }
-//              }
-//             },
+   
+afficherCandidat () {
+                return id => {
+                    if (id != "") {
+                        // console.log("Marche lettre inviation marche")
+                        return this.dossierPersonnels.filter(idmarche => idmarche.marche_id == id)
+                     }
+             }
+            },
 
-    //         affichierNomEntreprise() {
-    //   return id => {
-    //     if (id != null && id != "") {
-    //        const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+        afficherNomCandidatId() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.dossierPersonnels.find(qtreel => qtreel.marche_id == id);
 
-    //   if (qtereel) {
-    //     return qtereel.raison_sociale;
-    //   }
-    //   return 0
-    //     }
-    //   };
-    // },
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
 
 
 nombreDejourCalcule(){
@@ -710,7 +736,7 @@ getDateFinExécutionValue(){
                 return macheid => {
                     if (macheid != "") {
                       // console.log("Marche leste acte effect finnancier")
-                        return this.getActeEffetFinancierPersonnaliser.filter(idmarche => idmarche.marche_id == macheid)
+                        return this.getActeEffetFinancierPersonnaliserContrat.filter(idmarche => idmarche.marche_id == macheid)
                     }
                 }
             },
@@ -806,7 +832,7 @@ getDateFinExécutionValue(){
              livrable_id:"",
         autorite_approbation:"",
         date_approbation:"",
-             text_juridique_id:"",
+             candidat_personnel_id:"",
              type_act_effet_id:"",
              analyse_dossier_id:"",
              entreprise_id:"",

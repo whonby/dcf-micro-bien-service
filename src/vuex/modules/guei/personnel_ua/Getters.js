@@ -100,6 +100,29 @@ export const personnaFonction = (state, getters, rootState, rootGetters) =>
     });
 
 
+
+
+
+    // export const getPersonnaliserDossierCandidatPersonnel = (state, getters, rootState, rootGetters) =>
+    // state.dossierPersonnels.map(element => {
+    //     if (element.jugement_personnel_id !== null ) {
+    //         element = {
+    //             ...element,
+               
+    //             fonctionActeur: rootGetters['bienService/listeJugementPersonnel'].find(
+    //                 act => act.id === element.jugement_personnel_id
+    //             ),
+               
+    //         };
+    //     }
+
+    //     return element;
+    // });
+
+
+
+
+
     export const personnaMission = (state, getters, rootState, rootGetters) =>
     state.acteur_depenses.map(element => {
         if (element.mission_id !== null ) {

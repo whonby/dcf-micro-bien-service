@@ -576,6 +576,7 @@ export default {
    },
 
 
+
    afficherLaFonctionDActeurDepenseDynamique(){
      return acte_personnel_id => {
        if( acte_personnel_id != undefined) {

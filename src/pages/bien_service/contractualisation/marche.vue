@@ -399,7 +399,8 @@
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
-          <div id="tab2000256" class="tab-pane">
+
+                       <div id="tab2000256" class="tab-pane">
                               <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
@@ -481,6 +482,7 @@
               </table>
                            
                         </div>
+
                             <div id="tab10" class="tab-pane">
                               <div class="widget-title">
               <span class="icon">
@@ -911,7 +913,7 @@
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link>
 </td>
-                     <div class="btn-group">
+                     <!-- <div class="btn-group">
 
 
                      <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
@@ -921,10 +923,10 @@
 
                 
 
-              <!-- <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button> -->
+              <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
              
-            </div>
+            </div> -->
 
                        </tr>
                         <tr>

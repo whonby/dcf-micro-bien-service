@@ -8,7 +8,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                    <h5>Liste des plan de passation </h5>
+                    <h5>Liste des budget importer </h5>
                     <!-- <div align="right">
                          Recherche:
                          <input type="search" placeholder v-model="search" />
@@ -28,27 +28,46 @@
                         </thead>
                         <tbody>
                         <tr v-for="passation in getterBudgeCharge" :key="passation.id">
-                            <td>{{passation.code}}</td>
-                            <td>{{passation.exercice}}</td>
-                            <td>
-                                <button v-if="passation.status=='init'" class="btn  btn-danger">
 
-                                    <span >Budget initiale</span>
-                                </button>
 
-                                    <button v-else-if="passation.actived == 1 && passation.status=='actu' "  class="btn  btn-success">
-                                        <span >Budget actuelle</span>
-                                    </button>
-                                    <button v-else-if="passation.actived == 0 && passation.status=='actu'" class="btn btn-info ">Version {{passation.version}}</button>
+                            <td v-if="passation.status=='init'" style="background-color: red; color:#fff">{{passation.code}}</td>
+                            <td v-else-if="passation.actived == 1 && passation.status=='actu' " style="background-color: green; color:#fff">{{passation.code}}</td>
+                            <td v-else-if="passation.actived == 0 && passation.status=='actu'"  >{{passation.code}}</td>
 
-                            </td>
-                            <td>{{formatageSomme(montantGlobale(passation.id))}}</td>
-                            <td>
-                                <router-link :to="{ name: 'DetailPPM', params: { id: passation.code }}"
+                            <td v-if="passation.status=='init'" style="background-color: red; color:#fff">{{passation.exercice}}</td>
+                            <td v-else-if="passation.actived == 1 && passation.status=='actu' " style="background-color: green; color:#fff">{{passation.exercice}}</td>
+                            <td v-else-if="passation.actived == 0 && passation.status=='actu'"  >{{passation.exercice}}</td>
+
+
+                            <td v-if="passation.status=='init'" style="background-color: red; color:#fff"> Budget initiale  </td>
+                            <td v-else-if="passation.actived == 1 && passation.status=='actu' " style="background-color: green; color:#fff"> Budget actuelle  </td>
+                            <td v-else-if="passation.actived == 0 && passation.status=='actu'"   > Version {{passation.version}} </td>
+                               <!-- <span v-if="passation.status=='init'" class="label label-important">Budget initiale</span>
+                                <span  v-else-if="passation.actived == 1 && passation.status=='actu' " class="label label-success">Budget actuelle</span>
+
+                                <span v-else-if="passation.actived == 0 && passation.status=='actu'" class="label label-warning">Version {{passation.version}}</span>-->
+
+
+
+                            <td v-if="passation.status=='init'" style="background-color: red; color:#fff">{{formatageSomme(montantGlobale(passation.id))}}</td>
+                            <td v-else-if="passation.actived == 1 && passation.status=='actu' " style="background-color: green; color:#fff">{{formatageSomme(montantGlobale(passation.id))}}</td>
+                            <td v-else-if="passation.actived == 0 && passation.status=='actu'"  >{{formatageSomme(montantGlobale(passation.id))}}</td>
+
+
+                            <td v-if="passation.status=='init'" style="background-color: red; color:#fff"> <router-link :to="{ name: 'DetailBudgetImporte', params: { id: passation.id }}"
+                                                                                                                        class="btn btn-default " title="Detail marches">
+                                <span class=""><i class="icon-folder-open"></i></span>
+                            </router-link></td>
+                            <td v-else-if="passation.actived == 1 && passation.status=='actu' " style="background-color: green; color:#fff">
+                                <router-link :to="{ name: 'DetailBudgetImporte', params: { id: passation.id }}"
                                              class="btn btn-default " title="Detail marches">
                                     <span class=""><i class="icon-folder-open"></i></span>
-                                </router-link>
-                            </td>
+                                </router-link></td>
+                            <td v-else-if="passation.actived == 0 && passation.status=='actu'" > <router-link :to="{ name: 'DetailBudgetImporte', params: { id: passation.id }}"
+                                                                                                                                                           class="btn btn-default " title="Detail marches">
+                                <span class=""><i class="icon-folder-open"></i></span>
+                            </router-link></td>
+
                         </tr>
                         </tbody>
                     </table>
@@ -192,7 +211,7 @@
                 return id =>{
                     if (id!="") {
                         let objet =this.getterBudgeCharge.find(item=>item.id==id)
-                        console.log(objet)
+
                         let initialValue = 0;
 
                         if (objet!="undefined") {

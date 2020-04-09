@@ -22,6 +22,7 @@ import ServicePrincipal from "../../pages/unites_administratives/grpeService/Ser
 import FonctionPrincipal from "../../pages/unites_administratives/grpeFonction/FonctionPrincipal.vue";
 
 import Budget from "../../pages/budget/Budget";
+import DetailBudgetImporte from "../../pages/budget/DetailBudgetImporte.vue";
 import LigneExempte from "../../pages/unites_administratives/LigneExempte";
 
 const UniteAdministativeRoutes = [
@@ -146,6 +147,13 @@ const UniteAdministativeRoutes = [
     component: Budget
   }
   ,
+    {
+        path: "/detail-budget-importer/:id",
+        name: "DetailBudgetImporte",
+        component: DetailBudgetImporte
+    }
+    ,
+
   {
     path: "/ligne_exempter",
     name: "LigneExempter",

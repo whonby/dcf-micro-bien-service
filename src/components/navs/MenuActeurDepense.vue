@@ -19,7 +19,7 @@
           <li class="divider"></li>
           <li>
             <router-link :to ="{name: 'recrutementPersonnel'}" tag="a">
-              <i class="icon-key"></i> Recrutement  des trois(3) cv du personnel
+              <i class="icon-key"></i> Recrutement  du personnel
             </router-link>
           
           </li>

@@ -3,7 +3,7 @@
     <div>
         <div class="container-fluid">
             <div class="quick-actions_homepage">
-                <ul class="quick-actions" v-if="!idzone">
+                <ul class="quick-actions" v-if="idzone=='' && iduniteadmin==''">
                     <li class="bg_lb"> <a href="#">
                         {{formatageSomme(budgetGeneral)}}<br> Budget general</a> </li>
                     <li class="bg_lg "> <a href="#">
@@ -12,14 +12,24 @@
                     <li class="bg_lo"> <a href="#">{{tauxExecutionBudgetGeneral}} %<br> Taux d'execution</a> </li>
                 </ul>
 
-                <ul class="quick-actions" v-if="idzone">
+                <ul class="quick-actions" v-if="zone_geographique!='' && iduniteadmin==''">
                     <li class="bg_ls"> <a href="#"><h6>{{zone_geographique}}</h6> </a> </li>
                     <li class="bg_lb"> <a href="#">
                         {{formatageSomme(budgetByZone(idzone))}}<br> Budget total zone</a> </li>
                     <li class="bg_lg "> <a href="#">
                         {{formatageSomme(budgetZoneExcecute)}}<br> budget execute zone </a> </li>
-                    <li class="bg_ly"> <a href="#">  {{formatageSomme(budgetZoneExcecute)}}<br> Budget restant zone</a> </li>
+                    <li class="bg_ly"> <a href="#">  {{formatageSomme(bugdetZoneRestant)}}<br> Budget restant zone</a> </li>
                     <li class="bg_lo"> <a href="#">{{tauxExecutionBudgetZone}} %<br> Taux d'execution zone </a> </li>
+                </ul>
+
+                <ul class="quick-actions" v-if="iduniteadmin">
+                    <li class="bg_ls"> <a href="#"><h6>{{libelle_unite_admin}}</h6> </a> </li>
+                    <li class="bg_lb"> <a href="#">
+                        {{formatageSomme(budgetByUniteAdmin(iduniteadmin))}}<br> Budget total UA</a> </li>
+                    <li class="bg_lg "> <a href="#">
+                        {{formatageSomme(budgetExecuteUniteAdmin)}}<br> budget execute zone </a> </li>
+                    <li class="bg_ly"> <a href="#">  {{formatageSomme(budgetRestUniteAdmin)}}<br> Budget restant UA</a> </li>
+                    <li class="bg_lo"> <a href="#">{{tauxExecutionUniteAdmin}} %<br> Taux d'execution UA </a> </li>
                 </ul>
             </div>
         <div class="row-fluid">
@@ -79,24 +89,27 @@
                             <i class="icon-folder-open"></i>Afficher tout</button>
 
                     </div>
+                    <div class="widget-title" align="center" v-if="libelle_unite_admin"> <span class="icon"> <i class="icon-book"></i> </span>
+                        <h5>{{libelle_unite_admin}}</h5>
+                        <button v-if="libelle_unite_admin" @click.prevent="afficher()"  class="btn btn-mini">
+                            <i class="icon-folder-open"></i>Afficher tout</button>
 
+                    </div>
                     <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
                         <h5 align="center">Liste des unite administrative
                         </h5>
                     </div>
 
-                    <div class="widget-content" >
-
-
+                    <div class="widget-content widget-content1" >
 
                         <table class="table table-bordered table-striped" >
                             <tr>
                                 <th>Nom UA </th>
                             </tr>
                             <tbody style="height: 100px;">
-                            <tr class="odd gradeX" v-for="ua in administratif(idzone)"
+                            <tr class="odd gradeX " v-for="ua in administratif(idzone)"
                                 :key="ua.id">
-                                <td>{{ua.libelle}}</td>
+                                <td  @click="uniteAdministrativeSelect(ua.id,ua.libelle, $event)">{{ua.libelle}}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -141,14 +154,20 @@
                 budgetGeneralExcecute:0,
                 tauxExecutionBudgetGeneral:0,
                 bugdetGeneralRestant:0,
-
                 budgetZoneExcecute:0,
                 tauxExecutionBudgetZone:0,
                 bugdetZoneRestant:0,
+                budgetUniteAdmin:0,
+                budgetRestUniteAdmin:0,
+                budgetExecuteUniteAdmin:0,
+                tauxExecutionUniteAdmin:0,
+                iduniteadmin:"",
+                libelle_unite_admin:"",
                 icon: customicon,
                 clusterOptions: {},
                 zoom: 3,
                 idzone:"",
+                activeUa:false,
                 zone_geographique:"",
                 center: latLng(47.41322, -1.219482),
                 url: 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
@@ -164,24 +183,7 @@
                 },
                 initialLocation: [5.315322875304895, -3.981547742187508],
                 showMap: true,
-                villes :[
-                    { "id":1,"ville":"Abidjan", latlng: [5.315322875304895, -3.981547742187508]},
-                    { "id":2,"ville":"Abengourou", latlng: [6.664694482178404, -3.470683484375008]},
-                    { "id":3,"ville":"Daloa", latlng: [6.8610723184485805, -6.436992078125008]},
-                    { "id":4,"ville":"Man", latlng: [7.36800149553843, -7.530131726562508]},
-                    { "id":4,"ville":"Katiola", latlng: [8.146329453370681, -5.085673718750008]},
-                    { "id":5,"ville":"Séguéla", latlng: [7.950523505237736, -6.678691296875008]},
-                    { "id":6,"ville":"Agnibilékrou", latlng: [7.136409840235729, -3.209758191406258]},
-                    { "id":7,"ville":"Bouaké", latlng: [7.675694207615582, -5.038981824218758]},
-                    { "id":8,"ville":"Korhogo", latlng: [9.487076476705427,-5.607524304687508]},
-                    { "id":9,"ville":"Odienné", latlng: [9.503330190159723, -7.568583875000008]},
-                    { "id":10,"ville":"Grand-Bassam", latlng: [5.181688812992997, -3.7619662700796486]},
-                    { "id":11,"ville":"Sassandra", latlng: [4.9419160311934345, -6.081309705078133]},
-                    { "id":12,"ville":"Gagnoa", latlng: [6.146103409730145, -5.948100476562508]},
-                    { "id":13,"ville":"Bouaflé", latlng: [6.972862557513062, -5.731120496093758]},
-                    { "id":14,"ville":"Duékoué", latlng: [6.735617895972735, -7.359843640625008]},
-                    { "id":15,"ville":"Bouna", latlng: [9.264982283292248, -2.984804458143524]},
-                ],
+                isActive: false,
                 tileProviders: [
                     {
                         name: 'Plan',
@@ -321,8 +323,35 @@
                              color="#ff0000"
                              colorFill="#ff0000"
                          }else{
-                             color="#0f13ff"
-                             colorFill="#0f13ff"
+                             if(taux==0){
+                                 color="#0c2061"
+                                 colorFill="#0c2061"
+                             }
+
+                             if(1<=taux && taux<31){
+
+                                 color="#fffb13"
+                                 colorFill="#fffb13"
+                             }
+
+                             if(31<=taux && taux<51){
+                                 color="#2affe1"
+                                 colorFill="#2affe1"
+                             }
+
+                             if(51<=taux && taux<81){
+                                 color="#1285ff"
+                                 colorFill="#1285ff"
+                             }
+                             if(81<=taux && taux<100){
+                                 color="#9dfd80"
+                                 colorFill="#9dfd80"
+                             }
+                             if(taux==100){
+                                 color="#209503"
+                                 colorFill="#209503"
+                             }
+
                          }
                         let objetAlocalise={
                             id:value.id,
@@ -426,21 +455,64 @@
 
                         })
                         if(montant_engagement_zone!=0){
-                            vM.budgetZoneExcecute=montant_engagement_zone
-                            let taux=(montant_engagement_zone/budgetZone)*100
-                                vM.tauxExecutionBudgetZone=taux.toFixed(2)
-                            vM.bugdetZoneRestant=budgetZone - montant_engagement_zone
-                        }else {
-                            vM.budgetZoneExcecute=0
-                            vM.tauxExecutionBudgetZone=0
-                            vM.bugdetZoneRestant=0
-                        }
 
+                            let taux=(montant_engagement_zone/budgetZone)*100
+                            vM.tauxExecutionBudgetZone=taux.toFixed(2)
+                        }
+                        vM.budgetZoneExcecute=montant_engagement_zone
+
+                        vM.bugdetZoneRestant=budgetZone - montant_engagement_zone
                     }
 
                  return budgetZone;
 
                }
+            }
+        },
+        budgetByUniteAdmin(){
+            return uniteId=>{
+                let vM=this;
+                let budgetUniteAdmin=0;
+                let uniteByZoneGeo= vM.uniteAdministratives.find( item => item.id ==uniteId)
+                let montant_engagement_unite_admin=0;
+                let budgetActive=uniteByZoneGeo.ua_budget_general.filter(item=>item.actived==1)
+                if (budgetActive!="") {
+                    let initialValue = 0;
+                    let budgetByUnite=  budgetActive.reduce(function (total, currentValue) {
+                        return total + parseFloat(currentValue.Dotation_Initiale) ;
+                    }, initialValue);
+
+                    budgetUniteAdmin=budgetByUnite
+
+                    //Recuperation des marche
+                    let  objetMarche=vM.marches.filter(item=>{
+                        if(item.unite_administrative_id==uniteId ){
+
+                            return item
+                        }
+                    })
+
+                    if(objetMarche!=""){
+                        objetMarche.forEach(function (val) {
+                            let initeVal = 0;
+                            let montantEngament=  vM.engagements.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                                return total + parseFloat(currentValue.total_general) ;
+                            }, initeVal);
+                            montant_engagement_unite_admin=montant_engagement_unite_admin + montantEngament
+
+                        })
+                    }
+
+                }
+              if(montant_engagement_unite_admin!=0){
+
+                  let taux=(montant_engagement_unite_admin/budgetUniteAdmin)*100
+                  vM.tauxExecutionUniteAdmin=taux.toFixed(2)
+              }
+                vM.budgetUniteAdmin=budgetUniteAdmin
+                    vM.budgetRestUniteAdmin=budgetUniteAdmin - montant_engagement_unite_admin
+                    vM.budgetExecuteUniteAdmin=montant_engagement_unite_admin
+                  return budgetUniteAdmin
             }
         },
         exoEnCours(){
@@ -473,6 +545,9 @@ formatageSomme:formatageSomme,
                 alert("Click!");
             },
             uniteAdmin(id,ville){
+                /*this.activeUa=false*/
+                this.iduniteadmin=""
+                this.libelle_unite_admin=""
                 this.idzone=id
                 this.zone_geographique=ville
                console.log(id)
@@ -481,6 +556,8 @@ formatageSomme:formatageSomme,
             afficher(){
                 this.idzone=""
                 this.zone_geographique=""
+                this.iduniteadmin=""
+                this.libelle_unite_admin=""
             },
             click: (e) => console.log("clusterclick", e),
             ready: (e) => console.log('ready', e),
@@ -558,5 +635,18 @@ formatageSomme:formatageSomme,
     /*Marker states*/
     .map-marker.inactive {
         opacity: 0.6;
+    }
+    .red {
+      color:#fff;
+        background-color: #3eb5ff !important;
+    }
+    .blah{
+        cursor: grab !important;
+    }
+    .widget-content1{
+
+        height: 500px !important;
+
+        overflow-y: scroll !important;
     }
 </style>

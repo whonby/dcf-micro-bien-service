@@ -3093,9 +3093,10 @@ export function ajouterLettreInvitation({commit}, elementAjout,config){
 // action pour modifier le type text juridique
 
 
-export function modifierLettreInvitation({commit}, element_modifie,config) {
+export function modifierLettreInvitation({commit,dispatch}, element_modifie,config) {
     asyncLoading( axios.post('/update_lettre_invitations',element_modifie,config)).then(response => {
         commit('MODIFIER_LETTRE_INVITATION', response.data)
+        dispatch('getLettreInvitation')
         this.$app.$notify({
             title: 'success ',
             text: 'Modification effectué !',
