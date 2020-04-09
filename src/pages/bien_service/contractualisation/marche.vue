@@ -410,7 +410,8 @@
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
-          <div id="tab2000256" class="tab-pane">
+
+                       <div id="tab2000256" class="tab-pane">
                               <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
@@ -492,6 +493,7 @@
               </table>
                            
                         </div>
+
                             <div id="tab10" class="tab-pane">
                               <div class="widget-title">
               <span class="icon">
@@ -560,28 +562,12 @@
 </td>
 
                      <div class="btn-group">
- <!-- <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail marche proceduce simplifiée">
+                      <td>
+    <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+                class="btn btn-default " title="Continué le processusse">
                   <span class=""><i class=" icon-folder-open"></i></span>
-                   </router-link>  -->
-                   <!-- <router-link :to="{ name: 'DetaillMarche', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail marches">
-                  <span class=""><i class="icon-folder-open"></i></span>
-                   </router-link>  -->
-  <!-- <router-link :to="{ name: 'Engagement', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail Engagement">
-                  <span class=""><i class=" icon-folder-close"></i></span>
-                   </router-link>  -->
-
-                     <!-- <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail marche">
-                  <span class=""><i class=" icon-folder-open"></i></span>
-                   </router-link>  -->
-
-                    
-                    
-               <!-- <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>  -->
+                   </router-link>
+</td>
              
             </div>
 
@@ -940,7 +926,7 @@
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link>
 </td>
-                     <div class="btn-group">
+                     <!-- <div class="btn-group">
 
 
                      <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
@@ -950,10 +936,10 @@
 
                 
 
-              <!-- <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button> -->
+              <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
+                <span class=""><i class="icon-trash"></i></span></button>
              
-            </div>
+            </div> -->
 
                        </tr>
                         <tr>

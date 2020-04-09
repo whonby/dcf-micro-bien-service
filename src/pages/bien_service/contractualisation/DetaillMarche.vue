@@ -1,5 +1,5 @@
 
-ajouterPV
+resultaAnalysePv
 
 
 <template>
@@ -1365,6 +1365,7 @@ ajouterPV
 
 
 
+
        <div id="tab33" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
@@ -1750,6 +1751,7 @@ ajouterPV
                       <a data-dismiss="modal" class="btn" href="#">Fermer</a>
                   </div>
               </div>
+
 <!-- fin obseravtion bailleur -->
 
 

@@ -9,7 +9,8 @@
 
                    <tr>
 
-                                        <th>Reference avis</th>
+                                        <th>Reference avis </th>
+                                           
                                         <th>Numero du dossier</th>
                                         <th>Nom</th>
                                         <th>Prenom</th>
@@ -19,10 +20,13 @@
                                     </tr>
                     </thead>
                     <tbody>
-                   <tr class="odd gradeX" v-for="(personnel, index) in dossierPersonnels"
+                   <tr class="odd gradeX" v-for="(personnel, index) in listeDossierCandidatPersonnel(macheid)"
                                         :key="personnel.id">
+                                          <!-- <td @dblclick="afficherModalDossierCandidatPersonnel(index)">
+
+                                            {{personnel.appel_offre_id || 'Non renseigné'}}</td> -->
                                         <td @dblclick="afficherModalDossierCandidatPersonnel(index)">
-                                            {{personnel.appel_offre_id || 'Non renseigné'}}</td>
+                                         {{affichierReferenceAppelOffre(personnel.appel_offre_id) || 'Non renseigné'}}</td>
                                         <td @dblclick="afficherModalDossierCandidatPersonnel(index)">
                                             {{personnel.numero_dossier || 'Non renseigné'}}</td>
 
@@ -63,7 +67,7 @@
 <div id="addcandidatP" class="modal hide grdirModalActeEffet">
              <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter les troid(3) cv</h3>
+                <h3>Ajouter  dossier candidat</h3>
             </div>
             <div class="modal-body">
 
@@ -80,7 +84,7 @@
                             </select> -->
                              <input
                                     type="text"
-                                    :value="affichierReferenceAppelOffre(macheid)"
+                                    :value="afficherRefAppelOffre(macheid)"
                                     class="span"
                                    readonly
                             />
@@ -176,12 +180,21 @@
                             </select> -->
                              <input
                                     type="text"
-                                    :value="affichierReferenceAppelOffre(macheid)"
+                                    :value="afficherRefAppelOffre(macheid)"
                                     class="span"
                                    readonly
                             />
                             
                         </div>
+                        </div>
+                            </td>
+
+                              <td>
+                        <div class="control-group">
+                            <label class="control-label">Numero du dossier <code>*</code> :</label>
+                            <div class="controls">
+                                <input type="text" class="span" v-model="editDossier.numero_dossier" placeholder="Type appel" >
+                            </div>
                         </div>
                             </td>
                             <td>
@@ -312,8 +325,22 @@ export default {
 //                         return this.dossierCandidatPersonnel.filter(idmarche => idmarche.marche_id == macheid)
 //                     }
 //                 }
-//             },
- affichierReferenceAppelOffre() {
+//             },()
+
+listeDossierCandidatPersonnel(){
+
+    return macheid =>{
+        if(macheid !=null && macheid!=""){
+            return this.dossierPersonnels.filter(idCandidat => idCandidat.marche_id ==macheid)
+        }
+    }
+    
+},
+
+
+
+
+ afficherRefAppelOffre() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
@@ -325,6 +352,22 @@ export default {
         }
       };
     },
+
+
+
+ affichierReferenceAppelOffre() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.appelOffres.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ref_appel;
+      }
+      return 0
+        }
+      };
+    },
+
 affichierAppelOffreid() {
       return id => {
         if (id != null && id != "") {
@@ -462,6 +505,7 @@ affichierAppelOffreid() {
                 formData.append('prenom_candidat', this.editDossier.prenom_candidat);
                 formData.append('numero_dossier', this.editDossier.numero_dossier);
                 formData.append('date_depot', this.editDossier.date_depot);
+                formData.append('marche_id',this.macheid);
                 formData.append('id',this.editDossier.id);
                
                 console.log(formData)

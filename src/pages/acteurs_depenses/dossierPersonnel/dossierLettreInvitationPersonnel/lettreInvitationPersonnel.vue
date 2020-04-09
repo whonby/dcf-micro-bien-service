@@ -61,7 +61,7 @@
                           <tr>
                             <td>
                         <div class="control-group">
-                        <label class="control-label">Reférence</label>
+                        <label class="control-label">Reférence avis de recrutement</label>
                         <div class="controls">
                             <!-- <select v-model="formLettre.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -175,7 +175,7 @@
 <div id="modificationL" class="modal hide grdirModalActeEffet">
            <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification  offre</h3>
+                <h3>Modification  lettre d'invitation</h3>
             </div>
             <div class="modal-body">
 
@@ -185,7 +185,7 @@
                                <tr>
                             <td>
                         <div class="control-group">
-                        <label class="control-label"></label>
+                        <label class="control-label"> Reférence avis de recrutement</label>
                         <div class="controls">
                             <!-- <select v-model="formLettre.appel_offre_id" class="span" disabled>
                                 <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
@@ -454,7 +454,7 @@ typeProcedureLibelle() {
       methods:{ 
 
           ...mapActions("bienService", [
-               "ajouterLettreInvitation",
+               "ajouterLettreInvitation","getLettreInvitation",
                 "modifierLettreInvitation","supprimerLettreInvitation"
             
             ]),
@@ -491,6 +491,7 @@ typeProcedureLibelle() {
                 formData.append('date_lettre', this.formLettre.date_lettre);
                 formData.append('date_cojo', this.formLettre.date_cojo);
                 formData.append('objet_lettre', this.formLettre.objet_lettre);
+                formData.append('marche_id', this.macheid);
                 formData.append('difference_personnel_bienService', this.formLettre.difference_personnel_bienService);
                 let config = {
                     header : {
@@ -542,6 +543,7 @@ typeProcedureLibelle() {
                 formData.append('date_lettre', this.edite_Lettre_invitation.date_lettre);
                 formData.append('date_cojo', this.edite_Lettre_invitation.date_cojo);
                 formData.append('objet_lettre', this.edite_Lettre_invitation.objet_lettre);
+                formData.append('marche_id',this.macheid);
                 formData.append('difference_personnel_bienService', this.edite_Lettre_invitation.difference_personnel_bienService);
                 formData.append('id',this.edite_Lettre_invitation.id);
                
@@ -555,6 +557,7 @@ typeProcedureLibelle() {
                     }
                 }
                  this.modifierLettreInvitation(formData,config)
+                  this.getLettreInvitation()
                this.$('#modifierActeEF').modal('hide');
             },
 

@@ -2,6 +2,11 @@
 <template>
     <div>
 
+         <div class="span4" align="right">
+     <a href="#ajouterMandatePersonnel" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a>
+      <!-- <button class="btn btn-warning" title="veiller terminer l'etape de la lettre d'invitation avant de passer au mandate merci!" disabled v-else>Ajouter</button> -->
+     </div>
+
                 
                 <!-- <h4>Liste des offres</h4> -->
                 <table class="table table-bordered table-striped" v-if="macheid">
@@ -11,7 +16,7 @@
                         <th>Matricule </th>
                         <th>Nom</th>
                         <th>Prenom</th>
-                        <th>Reference Lettre invitation</th>
+                        <!-- <th>Reference Lettre invitation</th> -->
                          <th>Date</th>
                         <th>Action</th>
                     </tr>
@@ -26,8 +31,8 @@
                             {{appelOffre.nom_mandat || 'Non renseigné'}}</td>
                              <td @click="afficheBouttonTechFinMandater(index)">
                             {{appelOffre.prenom_nom || 'Non renseigné'}}</td>
-                             <td @click="afficheBouttonTechFinMandater(index)">
-                            {{affichierReferenceLettreInvitation(appelOffre.lettre_invitation_id) || 'Non renseigné'}}</td>
+                             <!-- <td @click="afficheBouttonTechFinMandater(index)">
+                            {{affichierReferenceLettreInvitation(appelOffre.lettre_invitation_id) || 'Non renseigné'}}</td> -->
                              <td @click="afficheBouttonTechFinMandater(index)">
                             {{formaterDate(appelOffre.date_id) || 'Non renseigné'}}</td>
                         <div class="btn-group">
@@ -57,12 +62,19 @@
                             <td>
                       <div class="control-group">
                         <label class="control-label">Lettre Invitation</label>
-                        <div class="controls">
+                        <!-- <div class="controls">
                             <select v-model="formMandater.lettre_invitation_id" class="span">
                                 <option v-for="plans in lettreInvitationAMarche(macheid)" :key="plans.id"
                                         :value="plans.id">{{plans.ref_lettre}}</option>
                             </select>
-                        </div>
+                        </div> -->
+
+                         <input
+                                    type="text"
+                                    :value="affichierReferenceLettreInvitation(macheid)"
+                                    class="span"
+                                   
+                            />
                     </div>
                             </td>
                             <td>
@@ -172,10 +184,17 @@
                       <div class="control-group">
                         <label class="control-label">Lettre Invitation</label>
                         <div class="controls">
-                            <select v-model="editer_mandater.lettre_invitation_id" class="span">
+                            <!-- <select v-model="editer_mandater.lettre_invitation_id" class="span">
                                 <option v-for="plans in lettreInvitationAMarche(macheid)" :key="plans.id"
                                         :value="plans.id">{{plans.ref_lettre}}</option>
-                            </select>
+                            </select> -->
+
+                             <input
+                                    type="text"
+                                    :value="affichierReferenceLettreInvitation(macheid)"
+                                    class="span"
+                                   
+                            />
                         </div>
                     </div>
                             </td>
@@ -313,14 +332,15 @@ message_mandater:'',
                 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
       
-   lettreInvitationAMarche: function () {
-                return marcheid => {
-                    if (marcheid != "") {
-                        //console.log("Marche lettre inviation marche")
-                        return this.getterLettreInvitation.filter(idmarche => idmarche.marche_id == marcheid)
-                    }
-                }
-            },
+//    lettreInvitationAMarche: function () {
+//                 return marcheid => {
+//                     if (marcheid != "") {
+//                         console.log("Marche lettre inviation marche")
+//                         return this.getterLettreInvitation.filter(idmarche => idmarche.marche_id == marcheid)
+//                     }
+//                 }
+//             },
+
 listeAppelOffre() {
       return id => {
         if (id != null && id != "") {
@@ -336,7 +356,7 @@ listeAppelOffre() {
 affichierReferenceLettreInvitation() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getterLettreInvitation.find(qtreel => qtreel.id == id);
+           const qtereel = this.getterLettreInvitation.find(qtreel => qtreel.marche_id == id);
 
       if (qtereel) {
         return qtereel.ref_lettre;
@@ -345,6 +365,35 @@ affichierReferenceLettreInvitation() {
         }
       };
     },
+
+
+
+    affichierLettreInvitationid() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterLettreInvitation.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+
+
+// affichierReferenceLettreInvitation() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.getterLettreInvitation.find(qtreel => qtreel.id == id);
+
+//       if (qtereel) {
+//         return qtereel.ref_lettre;
+//       }
+//       return 0
+//         }
+//       };
+//     },
 
 
 
@@ -434,12 +483,18 @@ typeProcedureLibelle() {
       methods:{ 
 
           ...mapActions("bienService", [
-                'ajouterMandater','modifierMandater',"supprimerMandater",
+                'ajouterMandater','modifierMandater',"supprimerMandater","getMandater"
             
             ]),
 
 modificationMandater(){
-                this.modifierMandater(this.editer_mandater)
+    var ObjetModifi={
+         ...this.editer_mandater,
+     lettre_invitation_id: this.affichierLettreInvitationid(this.macheid)
+
+     }
+                this.modifierMandater(ObjetModifi)
+                this.getMandater();
                 this.$('#modificationMantater').modal('hide');
             },
              afficheBouttonTechFinMandater(index){
@@ -456,7 +511,8 @@ modificationMandater(){
  ajouterMandaterA(){
      var nouveauObjet={
          ...this.formMandater,
-         marche_id:this.macheid
+         marche_id:this.macheid,
+         lettre_invitation_id: this.affichierLettreInvitationid(this.macheid)
      };
                this.ajouterMandater(nouveauObjet)
                 this.formMandater={
@@ -472,6 +528,7 @@ modificationMandater(){
 
 
    rechercheMandater(){
+
             // console.log(this.formMandater.matricule_m)
               let objetMandater=this.acteur_depenses.filter(item=>item.acteur_depense.matricule==this.formMandater.matricule_m)
               // console.log(objetMandater)
@@ -496,10 +553,12 @@ modificationMandater(){
 
 
 
- modfications(){
-                this.modifierAppelOffre(this.edite_appel_offre)
-                this.$('#modifierActeEF').modal('hide');
-            },
+//  modfications(){
+     
+
+//                 this.modifierAppelOffre(this.ObjetModifi)
+//                 this.$('#modifierActeEF').modal('hide');
+//             },
     
 
 

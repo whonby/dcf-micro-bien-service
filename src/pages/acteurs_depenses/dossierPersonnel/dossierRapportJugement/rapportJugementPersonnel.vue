@@ -30,14 +30,22 @@
                             </a>
                         </td>
                         <div class="btn-group">
+                              <td>
                             <button @click.prevent="supprimerRapportJugement(rapport.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
-
+                             </td>
+                             <td>
+                               <a href="#infoPV" @click.prevent="infoPVAffiche(rapport.reference)" data-toggle="modal" class="btn btn-info">
+                            <span title="voir la liste des classements des candidats"><i class="icon-pencil" ></i></span></a>
+                             </td>
                         </div>
-
+                       
+                       
+                        
                     </tr>
                                             </tbody>
                                         </table>
+
 
                  <div id="ajouterRapportPersonnel" class="modal hide grdtaill">
             <div class="modal-header">
@@ -74,6 +82,58 @@
                 <a data-dismiss="modal" class="btn btn-inverse" href="#">Cancel</a>
             </div>
         </div>
+
+
+
+         <div id="infoPV" class="modal hide grdirModalActeEffet">
+                  <div class="modal-header">
+                      <button data-dismiss="modal" class="close" type="button">×</button>
+                      <h3>PROCES-VERBAL DE JUGEMENT DES OFFRES</h3>
+                  </div>
+                  <div class="modal-body" v-if="resultaAnalysePv">
+                      <h4 class="text-center">ATTRIBUTION DU CONTRAT</h4>
+                      <div>
+                          Suivant les résultats de l’évaluation des offres présentés par le rapporteur dans le
+                          tableau ci-dessus, il apparaît que le soumissionnaire <b v-if="resultaAnalysePv.length>0">{{}}</b> propose
+                          l’offre conforme la moins-disante.
+                      </div>
+                      <h4 class="text-center">TABLEAU RECAPITULATIF DE LA COMPARAISON DES OFFRES</h4>
+                      <table class="table table-bordered table-striped">
+                          <thead>
+                          <tr>
+                              <th>Nom des candidats </th>
+                              <th>Note</th>
+                              <th>Classement</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr class="odd gradeX" v-for="(item, index) in resultaAnalysePv"
+                              :key="item.id">
+                              <!-- <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
+                                  {{anoBailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td> -->
+                              <td >
+                                  {{afficherNomCandidat(item.candidat_personnel_id) || 'Non renseigné'}}</td>
+                              <td >
+                                  {{item.note_analyse || 'Non renseigné'}}</td>
+                              <td >
+                                  <p v-if="index==0">
+                                      {{index + 1}} er
+                                  </p>
+                                  <p v-else>
+                                      {{index + 1}} eme
+                                  </p>
+
+                              </td>
+
+                          </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                  <div class="modal-footer">
+
+                      <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+                  </div>
+              </div>
 
 
              <div id="modifierRapportJugements" class="modal hide " aria-hidden="true" style="display: none;">
@@ -114,6 +174,8 @@
             </div>
         </div>
 
+      
+
         <notifications />
  </div>
     
@@ -127,6 +189,8 @@ export default {
     data(){
         return{
 
+          note_analyse:"",
+            reference_pv:"",
             formJugement:{
                  date_rapport_jugement:"",
                  fichier:"",
@@ -134,21 +198,21 @@ export default {
                 marche_id:""
 
                 },
-            
+            reference:"",
             editRapport:{
               date_rapport_jugement:"",
               fichier:"",
               difference_personnel_bienService:"personnel",
               marche_id:""
             },
-
+            resultaAnalysePv:[],
             imagePDF:"",
             namePDF:"",
             fichierPDF:"",
             selectedFile:"",
 
                 search: "",
-
+           nom_candidat:""
         }
     },
 
@@ -159,9 +223,9 @@ export default {
     },
     computed: {
 
-            ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,
-            "gettersCotations","rapportDocuments"]),
-            // ...mapGetters('personnelUA', ['acteur_depenses']),
+            ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,"gettersPersonnaliserRapportJugement",
+            "gettersCotations","rapportDocuments", 'listeJugementPersonnel']),
+             ...mapGetters('personnelUA', ['acteur_depenses','dossierPersonnels']),
 
 
                ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
@@ -184,6 +248,23 @@ export default {
         }
       };
     },
+
+
+
+    // afficher le nom des candidats
+
+    afficherNomCandidat(){
+        return id =>{
+            if(id!=null && id!=""){
+                let obejtNom = this.dossierPersonnels.find(obejtNom => obejtNom.id == id)
+                if(obejtNom){
+                    return obejtNom.nom_candidat.concat(' ', obejtNom.prenom_candidat)
+                }
+                return 0
+            }
+        }
+    }
+            
 
 
         },
@@ -261,7 +342,19 @@ export default {
            },
            formaterDate(date){
                return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
-           }
+           },
+
+           infoPVAffiche(ref){
+                this.resultaAnalysePv=[]
+                let resulta=this.listeJugementPersonnel.filter(item=>item.reference_pv==ref);
+                this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
+                if (this.resultaAnalysePv.length>0){
+                    this.resultaAnalysePv.sort(function (a, b) {
+                        return a.note_analyse - b.note_analyse;
+                    }).reverse()
+                }
+                //console.log(this.resultaAnalysePv)
+            },
 
      }
 

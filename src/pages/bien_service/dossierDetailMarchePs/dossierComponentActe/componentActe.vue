@@ -1,4 +1,4 @@
-affichierNomEntreprise
+afficherBanqueDynamique
 <template>
     <div>
 
@@ -92,6 +92,31 @@ affichierNomEntreprise
                             </td>
 
                             <td>
+                           <div class="control-group">
+                        <label class="control-label">Banque.</label>
+                        <div class="controls">
+                          <select v-model="formEffetFinancier.banq_id" class="span" :readOnly="verifiBanqueExist">
+                               <option v-for="varText in afficherBanqueDynamiqueId(formEffetFinancier.entreprise_id)" :key="varText.id"
+                                        :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
+                            </select>
+                        
+                        </div>
+                    </div>
+                        </td>
+
+                    <td>
+                      <div class="control-group">
+              <label class="control-label">Compte:</label>
+              <div class="controls " >
+            <input type="text"  class="span" :value="afficherLeCompteEnFonctionDeLaBanque(formEffetFinancier.banq_id)" readonly >
+      
+              </div>
+            </div>
+                    </td>
+
+
+
+                            <!-- <td>
 
 
                         <div class="control-group">
@@ -103,7 +128,7 @@ affichierNomEntreprise
                             </select>
                         </div>
                     </div>
-                            </td>
+                            </td> -->
 
                               <!-- <td>
                         <div class="control-group">
@@ -361,7 +386,21 @@ affichierNomEntreprise
                     </div>
                         </td>
 
+                         <!-- <td>
+                           <div class="control-group">
+                        <label class="control-label">Banque.</label>
+                        <div class="controls">
+                          <select v-model="editActeEffetFinancier.entreprise_id" class="span" :readOnly="verifiBanqueExist">
+                               <option v-for="varText in banques" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                        
+                        </div>
+                    </div>
+                        </td> -->
 
+
+<!-- 
                         <td>
                             <div class="control-group">
                                 <label class="control-label">Text juridique </label>
@@ -372,7 +411,7 @@ affichierNomEntreprise
                                     </select>
                                 </div>
                             </div>
-                        </td>
+                        </td> -->
 
                         <!-- <td>
                             <div class="control-group">
@@ -600,11 +639,12 @@ export default {
              livrable_id:"",
         autorite_approbation:"",
         date_approbation:"",
-             text_juridique_id:"",
+            // text_juridique_id:"",
              type_act_effet_id:"",
              analyse_dossier_id:"",
              entreprise_id:"",
              marche_id:"",
+             banq_id:"",
              numero_marche:""
         },
         editActeEffetFinancier:{
@@ -622,11 +662,12 @@ export default {
              livrable_id:"",
         autorite_approbation:"",
         date_approbation:"",
-             text_juridique_id:"",
+             //text_juridique_id:"",
              type_act_effet_id:"",
              analyse_dossier_id:"",
              entreprise_id:"",
              marche_id:"",
+             banq_id:"",
              numero_marche:""
         }
 
@@ -637,7 +678,7 @@ export default {
 
        computed: {
 
-            ...mapGetters("bienService", [ "gettersOuverturePersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+            ...mapGetters("bienService", [ "gettersCotations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -647,7 +688,7 @@ export default {
             ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
-                ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
+                ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
                 'types_financements']) ,
                 
@@ -681,10 +722,64 @@ afficherEntrepriseRecep () {
                 return id => {
                     if (id != "") {
                         // console.log("Marche lettre inviation marche")
-                        return this.gettersOuverturePersonnaliser.filter(idmarche => idmarche.marche_id == id)
+                        return this.gettersCotations.filter(idmarche => idmarche.marche_id == id)
                      }
              }
             },
+
+
+            // afficher la banque dynamique
+
+            verifiBanqueExist(){
+                return this.formEffetFinancier.entreprise_id ==undefined;
+            },
+
+
+            afficherBanqueDynamique(){
+                return id =>{
+                    if(id != null && id !=""){
+                      var  resultat = this.banques.find(element => element.id== id);
+                       if(resultat){
+                           return resultat.libelle
+                       } 
+                     return 0
+                    }
+                }
+            },
+
+
+
+             afficherBanqueDynamiqueId(){
+                return id =>{
+                    if(id != null && id !=""){
+                      return this.comptes.filter(element => element.entrepse_id== id)
+                        
+
+                    }
+                }
+            },
+
+            // afficherLeCompteEnFonctionDeLaBanque(){       return resultat.varObjetBanque.libelle
+            //     return banq_id =>{
+            //         if(banq_id !=null && banq_id!=""){
+            //   varObjetBanque.libelle.     return this.comptes.find(element => element.id == banq_id)
+
+                    
+            //         }
+            //     }
+            // },
+
+             afficherLeCompteEnFonctionDeLaBanque(){
+     return banq_id => {
+       if( banq_id !== undefined) {
+    var acteur = this.comptes.find(acteur => acteur.id == banq_id  )
+    
+     return  (acteur) ? acteur.rib :null 
+       }
+    return null
+     }
+  
+   },
 
 
 nombreDejourCalcule(){
@@ -811,7 +906,7 @@ getDateFinExécutionValue(){
              livrable_id:"",
         autorite_approbation:"",
         date_approbation:"",
-             text_juridique_id:"",
+            // text_juridique_id:"",
              type_act_effet_id:"",
              analyse_dossier_id:"",
              entreprise_id:"",
