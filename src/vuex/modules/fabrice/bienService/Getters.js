@@ -1024,3 +1024,4 @@ export const gettersTest = (state, getters, rootState, rootGetters) =>
         }
         return element;
     })
+    getActeEffetFinancierPersonnaliserContrat

@@ -2017,8 +2017,8 @@ anneeAmort() {
    afficheMarcheTerminer(){
 return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 5)
 },
-   afficheExercution(marche_id){
-return this.getActeEffetFinancierPersonnaliserContrat.filter(element => element.marche_id == marche_id)
+   afficheExercution(){
+return this.getActeEffetFinancierPersonnaliserContrat.filter(element => element.marche.attribue == 2 && element.AfficheMarche.type_marche.code_type_marche ==2)
 },
 afficheMarchExecuter(){
 return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
@@ -2265,7 +2265,7 @@ RetourExecution(index){
 this.idMarche = this.listeContratEnContratualisation[index]
    let marcheObjet=this.marches.find(marche=>marche.id==this.idMarche.id)
     marcheObjet.attribue = 2
-  
+   
     this.modifierMarche(marcheObjet)
     
     // this.modifierActeEffetFinancier(this.editActeEffetFinancier)

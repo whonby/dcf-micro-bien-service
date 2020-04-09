@@ -164,7 +164,7 @@
 
                             </td>
 
-                                  <td>
+                                  <td colspan="2">
                     <div class="control-group">
                         <label class="control-label">Numero du marche/contract</label>
                         <div class="controls">
@@ -178,7 +178,7 @@
                     </div>
 
                             </td>
-                             <td>
+                             <!-- <td>
 
                     <div class="control-group">
                         <label class="control-label">Code acte </label>
@@ -191,22 +191,20 @@
                             />
                         </div>
                     </div>
-                            </td>
+                            </td> -->
 
                            </tr>
                         <tr>
-                   
+                              <td colspan="4" width="550">
                       
-                          <td colspan="4" width="550">
-                     <div class="control-group">
-          <label class="control-label">Libellé acte:</label>
-            <div class="controls">
-              <textarea   v-model="formEffetFinancier.libelle_act"   class="textarea_editor span12" rows="3" placeholder="Entrer le libellé ..."></textarea>
-            </div>
-          
-        </div>
-                            </td>
-                   
+                         <div class="control-group">
+                            <label class="control-label">Objet offre :</label>
+                            <div class="controls">
+                            <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span11" rows="3" placeholder="Entre le  text ..."></textarea>
+                    
+                            </div>
+                        </div>
+                          </td>     
                            
                           
                         </tr>
@@ -703,6 +701,20 @@ afficherCandidat () {
       return 0
         }
       };
+    },
+
+    // afficher l'objet du marcher
+
+    affichierObjetMarche(){
+        return id =>{
+            if(id!=null && id!=""){
+                let objetMarche = this.marches.find(idMarche => idMarche.id ==id);
+                if(objetMarche){
+                    return objetMarche.objet
+                }
+                 return 0
+            }
+        }
     },
 
 
