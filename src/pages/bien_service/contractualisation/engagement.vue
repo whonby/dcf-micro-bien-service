@@ -3363,7 +3363,7 @@
                       
                     </td>
                      <td v-else>
-                        <h1 style="font-size:12px;color:red;">non activé  </h1>
+                        <h1 style="font-size:12px;color:red;">Désactivé  </h1>
                     </td>
                      <td v-if="liquida.decision_controleur_financier == 1">
                         <button v-if="liquida.decision_ordonnateur == 1"  class="btn  btn-success" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
@@ -3395,7 +3395,7 @@
                       
                     </td>
                     <td v-else>
-                        <h1 style="font-size:12px;color:red;">non activé  </h1>
+                        <h1 style="font-size:12px;color:red;">Désactivé  </h1>
                     </td>
                     
                      </template>
@@ -3467,7 +3467,7 @@
                       
                     </td>
                      <td v-else>
-                        <h1 style="font-size:12px;color:red;">non activé  </h1>
+                        <h1 style="font-size:12px;color:red;">Désactivé  </h1>
                     </td>
                      <td v-if="liquida.decision_controleur_financier == 1">
                         <button v-if="liquida.decision_ordonnateur == 1"  class="btn  btn-success" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
@@ -3499,7 +3499,7 @@
                       
                     </td>
                     <td v-else>
-                        <h1 style="font-size:12px;color:red;">non activé  </h1>
+                        <h1 style="font-size:12px;color:red;">Désactivé  </h1>
                     </td>
                 
                      </template>
@@ -3660,7 +3660,7 @@
                       
                     </td>
                     <td v-else>
-                        <h1 style="font-size:12px;color:red;text-align:center">non activé  </h1>
+                        <h1 style="font-size:12px;color:red;text-align:center">Désactivé  </h1>
                     </td>
                       </template>
                       <template v-else>
@@ -3731,7 +3731,7 @@
                       
                     </td>
                      <td v-else>
-                        <h1 style="font-size:12px;color:red;text-align:center">non activé  </h1>
+                        <h1 style="font-size:12px;color:red;text-align:center">Désactivé  </h1>
                     </td>
                     
                
@@ -4114,7 +4114,7 @@
                       </button>
                     </td>
                       <td v-else>
-                        <h1 style="font-size:10px;color:red;">Non activé  </h1>
+                        <h1 style="font-size:10px;color:red;">Désactivé  </h1>
                     </td>
                     <td @dblclick="afficherModalModifierMandat(index)">{{formaterDate(Manda.date_motif) || 'Non renseigné'}}</td>
                        <td>
@@ -5229,10 +5229,11 @@
                   <input
                     type="text"
                     
-                 :value="nomFournisseur"
+                 :value="afficheNomFournisseur(AfficherFournisseur_id)"
                     class="span3"
                     readonly
                   />
+                  
                 </div>
               </div>
             </td>
@@ -6134,7 +6135,7 @@
                   <input
                     type="text"
                     
-                 :value="nomFournisseur"
+                 :value="afficheNomFournisseur(AfficherFournisseur_id)"
                     class="span3"
                     readonly
                   />
@@ -10279,10 +10280,10 @@ uniteAdministrative() {
     },
   AfficherFournisseur_id() {
       
-      const norme = this.getActeEffetFinancierPersonnaliser.find(normeEquipe => normeEquipe.marche_id == this.detail_marche.id);
+      const norme = this.acteEffetFinanciers.find(normeEquipe => normeEquipe.marche_id == this.detail_marche.id);
 
       if (norme) {
-        return norme.varObjetEntreprise.id;
+        return norme.entreprise_id;
       }
       return 0
     },

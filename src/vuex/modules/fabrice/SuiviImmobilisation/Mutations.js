@@ -536,8 +536,81 @@ const SUPPRIMER_NORMEIMMOB = (state, id) => {
 
 
 
+const GET_ALL_HISTORIQUE_AFFECTATION = (state, tableauNormeArticle) => {
+  state.historiqueAffectation = tableauNormeArticle;
+};
+
+// ajouter NORME_EQUIPEMENTS
+const AJOUTER_HISTORIQUE_AFFECTATION = (state, nouveau_normeArt) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.historiqueAffectation.unshift(nouveau_normeArt);
+};
+
+
+// modifier NORME_EQUIPEMENTS
+const MODIFIER_HISTORIQUE_AFFECTATION = (state, objetModifie) => {
+  state.historiqueAffectation = state.historiqueAffectation.map(norme => {
+    if (norme.id == objetModifie.id) {
+      norme = { ...objetModifie };
+    }
+
+    return norme;
+  });
+};
+
+// supprimer NORME_EQUIPEMENTS
+const SUPPRIMER_HISTORIQUE_AFFECTATION = (state, id) => {
+  state.historiqueAffectation = state.historiqueAffectation.filter(norme => norme.id != id);
+};
+
+
+
+
+
+const GET_ALL_DEMANDE_MATERIEL = (state, tableauNormeArticle) => {
+  state.demandeMateriel = tableauNormeArticle;
+};
+
+// ajouter NORME_EQUIPEMENTS
+const AJOUTER_DEMANDE_MATERIEL = (state, nouveau_normeArt) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.demandeMateriel.unshift(nouveau_normeArt);
+};
+
+
+// modifier NORME_EQUIPEMENTS
+const MODIFIER_DEMANDE_MATERIEL = (state, objetModifie) => {
+  state.demandeMateriel = state.demandeMateriel.map(norme => {
+    if (norme.id == objetModifie.id) {
+      norme = { ...objetModifie };
+    }
+
+    return norme;
+  });
+};
+
+// supprimer NORME_EQUIPEMENTS
+const SUPPRIMER_DEMANDE_MATERIEL = (state, id) => {
+  state.demandeMateriel = state.demandeMateriel.filter(norme => norme.id != id);
+};
+
+
+
 export {
   
+  GET_ALL_DEMANDE_MATERIEL,
+  AJOUTER_DEMANDE_MATERIEL,
+  MODIFIER_DEMANDE_MATERIEL,
+  SUPPRIMER_DEMANDE_MATERIEL,
+
+  GET_ALL_HISTORIQUE_AFFECTATION,
+  AJOUTER_HISTORIQUE_AFFECTATION,
+  MODIFIER_HISTORIQUE_AFFECTATION,
+  SUPPRIMER_HISTORIQUE_AFFECTATION,
+
+
+
+
   GET_ALL_NORMEIMMOB,
   AJOUTER_NORMEIMMOB,
   MODIFIER_NORMEIMMOB,

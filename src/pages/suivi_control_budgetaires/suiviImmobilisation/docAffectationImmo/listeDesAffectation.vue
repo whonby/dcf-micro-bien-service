@@ -1,5 +1,6 @@
 
 <template>
+  
    
     <!-- End Page Header -->
     <!-- Default Light Table -->
@@ -12,7 +13,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des demandes d'equipement</h5>
+              <h5>AFFECTATION D'EQUIPEMENT</h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -25,8 +26,43 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1">AFFECTATION DU PERSONNEL   <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab1">NOUVELLE PERSONNES   <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
                       </li>
+                       <li>
+                        <a data-toggle="tab" href="#tab2">AFFECTATION DES DEMANDES</a>
+                      </li>
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
+                      </li> --> 
+                     
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content">
+
+   <div id="tab2" class="tab-pane">
+
+
+<div class="table-responsive text-nowrap">
+              <table class="table table-bordered table-striped">
+                <div class="widget-box">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#tab112">Listes des demandes   <span class="badge badge-inverse">{{afficheNombreToutPersonne}}</span></a>
+                      </li>
+                       <li class="">
+                        <a data-toggle="tab" href="#tab132">Demande non attribué  <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
+                      </li>
+                      <li class="">
+                        <a data-toggle="tab" href="#tab452">Demande  attribué    <span class="badge badge-warning">{{NombreafficheEquipementNonCouvert}}</span></a>
+                      </li>
+                       <li class="">
+                        <a data-toggle="tab" href="#tab129">Taux demande attribué     <span class="badge badge-info">{{NombreaffichePersonneEquipe}}</span></a>
+                      </li>
+                      <li class="">
+                        <a data-toggle="tab" href="#tab12969">Taux demande non attribué"    <span class="badge badge-success">{{NombreTauxequipementParAgent}}</span></a>
+                      </li>
+                      
                       <!-- <li>
                         <a data-toggle="tab" href="#tab2">AFFECTATION DU SERVICE</a>
                       </li>
@@ -37,6 +73,162 @@
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
+
+     <div id="tab12969" class="tab-pane">
+                       <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     
+                    <!-- <th>Type Unite d'administrative</th> -->
+                    
+                     
+                    <th>Matricule && Nom && prenoms</th>
+                    <th>Unite administrative</th>
+                    <th>Unite de zone</th>
+                    <th>Service</th>
+                    <th>Fonction</th>
+                  
+                    <th>Besoin Reel</th>
+                    <th>Besoin Non couvert</th>
+                    <th >Besoin Recu</th>
+                    <th>Taux</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                 
+                 
+                 
+                </tbody>
+              </table>
+
+                    </div>
+
+
+
+                      <div id="tab452" class="tab-pane">
+                       <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     
+                    <!-- <th>Type Unite d'administrative</th> -->
+                    <th>Unite d'administrative</th>
+                     <th>Unite de zone</th>
+                    <th>Service</th>
+                    <th>Fonction</th>
+                    <th>Nom et prénoms</th>
+                    <th >Article</th>
+                     <th >Qte requise</th>
+                     <th >Qte couverte</th>
+                     <th >Qte non couverte</th>
+                     <th >Prix unitaire(coût moyen)</th>
+                       <th >Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                
+                 
+                 
+                 
+                </tbody>
+              </table>
+
+                    </div>
+                      <div id="tab112" class="tab-pane active">
+                       <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     
+                    <!-- <th>Type Unite d'administrative</th> -->
+                    <th>Unite d'administrative</th>
+                    
+                     <th>Unite de zone</th>
+                    
+                    <th>Service</th>
+                    <th>Fonction</th>
+                    <th>Nom et prénoms</th>
+                    <th >Equipé</th>
+                     
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                 
+                 
+                 
+                </tbody>
+              </table>
+
+                    </div>
+                    <div id="tab132" class="tab-pane">
+<table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     
+                    <!-- <th>Type Unite d'administrative</th> -->
+                    <th>Unite d'administrative</th>
+                    
+                     <th>Unite de zone</th>
+                    
+                    <th>Service</th>
+                    <th>Fonction</th>
+                    <th>Nom et prénoms</th>
+                    <th >Equipé</th>
+                     <th >Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                 
+                 
+                 
+                 
+                </tbody>
+              </table>
+                  </div>
+                   <div id="tab129" class="tab-pane">
+                     <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     
+                    <!-- <th>Type Unite d'administrative</th> -->
+                    <th>Unite d'administrative</th>
+                    
+                     <th>Unite de zone</th>
+                    
+                    <th>Service</th>
+                    <th>Fonction</th>
+                    <th>Nom et prénoms</th>
+                    <th >Equipé</th>
+                  
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                 
+                 
+                 
+                 
+                </tbody>
+              </table>
+                   </div>
+                  </div>
+                  <br />
+              
+                </div>
+              </table>
+            </div>
+
+
+
+
+
+
+
+   </div>
+
+
+
                     <!--ongle identification-->
                     <div id="tab1" class="tab-pane active">
                   
@@ -774,7 +966,16 @@ json_fields: {
         cause_inactivite:"",
 
       },
-      
+      formData3:{
+        acteur_id:"",
+        ua_id:"",
+          unitezone_id:"",
+          fonction_id:"",
+          article_id:"",
+          qte:"",
+          dure_vie:"",
+          etatimmo_id:""
+      },
       direct:"",
       search: ""
     };
@@ -1140,6 +1341,18 @@ afficherActeurDepense() {
         }
       };
     },
+afficherActeurDepenseMatricule() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.matricule;
+      }
+      return 0
+        }
+      };
+    },
 
 afficherLibelleService() {
       return id => {
@@ -1479,7 +1692,9 @@ fonctionDynamiques() {
     ...mapActions("SuiviImmobilisation", [
        "ajouterImmobilisation",
        "modifierImmobilisation",
-       "modifierStock"
+       "modifierStock",
+       "ajouterHistotorisqueAffection",
+      
      
     ]),
      ...mapActions("personnelUA", [
@@ -1552,11 +1767,31 @@ var nouvelobjet2 ={
      
      qte_affecte:this.nombreAffecter,
      total_actuel:this.afficherPrixActuelResteACouvertModifier,
-     qte_actuel:this.afficherQteResteACouvertModifier
+     qte_actuel:this.afficherQteResteACouvertModifier,
 
       };
+   var nouveauObjetDemande = {
+        
+ acteur_id:this.formData.acteur_depense_id,
+ ua_id:this.formData.unite_administrative_id,
+ unitezone_id:this.formData.uniteZone_id,
+ fonction_id:this.formData.fonction_id,
+ article_id:this.formData2.famillearticle_id,
+ qte:this.formData2.qte_affecte,
+ dure_vie:this.afficherDureeVieFamille(this.formData2.famillearticle_id),
+ etatimmo_id:this.formData2.etat_immobilisation,
+ matricule_auteur:this.afficherActeurDepenseMatricule(this.formData.acteur_depense_id),
+ annee:this.exerciceBudgetaireEnCours,
+ annee_amortissement:this.this.anneeAmortissement,
+ valeurorigine:this.afficherValeurOrigine,
+ date_mise_service:this.formData2.date_mise_service
+};
+
+
+this.ajouterHistotorisqueAffection(nouveauObjetDemande)
       this.modifierStock(nouvelobjet8)
 this.modifierActeurDepenses(nouvelobjet2)
+
   this.getActeur()
     this.allActeurDepense()
     this.getActPersonnel()
@@ -1616,6 +1851,26 @@ var nouvelobjet4 ={
      qte_actuel:this.afficherQteResteACouvert
 
       };
+       var ObjetDemande = {
+       ...this.formData,
+       ...this.formData2,
+ acteur_id:this.formData.acteur_depense_id,
+ ua_id:this.formData.unite_administrative_id,
+ unitezone_id:this.formData.uniteZone_id,
+ fonction_id:this.formData.fonction_id,
+ article_id:this.formData2.famillearticle_id,
+ qte:this.formData2.qte_affecte,
+ dure_vie:this.afficherDureeVieFamille(this.formData2.famillearticle_id),
+ etatimmo_id:this.formData2.etat_immobilisation,
+ matricule_auteur:this.afficherActeurDepenseMatricule(this.formData.acteur_depense_id),
+ annee:this.exerciceBudgetaireEnCours,
+annee_amortissement:this.this.anneeAmortissement,
+valeurorigine:this.afficherValeurOrigine,
+ date_mise_service:this.formData2.date_mise_service
+};
+
+
+this.ajouterHistotorisqueAffection(ObjetDemande)
        this.modifierStock(nouvelobjet9)
 this.modifierActeurDepenses(nouvelobjet4)
   this.getActeur()
