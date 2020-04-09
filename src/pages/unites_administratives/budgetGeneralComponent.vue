@@ -164,7 +164,7 @@
                   <div class="controls">
                     <select v-model="formData.activite_id" class="span4">
                       <option
-                        v-for="Bgeneral in afficheNiveauActivite"
+                        v-for="Bgeneral in afficheActiviteParAction(formData.action_id)"
                         :key="Bgeneral.id"
                         :value="Bgeneral.id"
                       >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
@@ -650,6 +650,13 @@ export default {
 
 //      return null
 //    },
+afficheActiviteParAction() {
+      return id => {
+        if (id != null && id != "") {
+          return this.afficheNiveauActivite.filter(element => element.parent == id);
+        }
+      };
+    },
 
  codeBudgetGeneralModifier(){
         // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)

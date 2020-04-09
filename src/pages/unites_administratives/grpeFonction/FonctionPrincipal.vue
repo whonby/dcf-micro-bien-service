@@ -33,7 +33,7 @@
               </td>
              </tr>
                  <tr>
-               <td>
+               <!-- <td>
                 <div class="control-group">
                   <label class="control-label">Direction</label>
                   <div class="controls">
@@ -46,7 +46,7 @@
                     </select>
                   </div>
                 </div>
-              </td>
+              </td> -->
              </tr>
                <tr>
                <td>
@@ -55,7 +55,7 @@
                   <div class="controls">
                     <select v-model="formData.service_id" class="span6" :readOnly="verroService">
                       <option
-                        v-for="typeUniteA in serviceDynamiques(formData.direction_id)"
+                        v-for="typeUniteA in serviceDynamiques(formData.f_ua_id)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
@@ -141,7 +141,7 @@
                 </div>
               </td>
              </tr>
-                 <tr>
+                 <!-- <tr>
                <td>
                 <div class="control-group">
                   <label class="control-label">Direction</label>
@@ -156,7 +156,7 @@
                   </div>
                 </div>
               </td>
-             </tr>
+             </tr> -->
                <tr>
                <td>
                 <div class="control-group">
@@ -164,7 +164,7 @@
                   <div class="controls">
                     <select v-model="editTransfert.service_id" class="span6">
                       <option
-                        v-for="typeUniteA in serviceDynamiques(editTransfert.direction_id)"
+                        v-for="typeUniteA in serviceDynamiques(editTransfert.f_ua_id)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
@@ -374,7 +374,7 @@ export default {
       return this.formData.f_ua_id == "";
     },
     verroService() {
-      return this.formData.direction_id == "";
+      return this.formData.s_ua_id == "";
     },
      verroFonction() {
       return this.formData.service_id == "";
@@ -383,7 +383,7 @@ export default {
       
       return id => {
         if (id != null && id != "") {
-          return this.servicesua.filter(element => element.direction_id == id);
+          return this.servicesua.filter(element => element.s_ua_id == id);
         }
       };
     },

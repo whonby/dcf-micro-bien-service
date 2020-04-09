@@ -16,7 +16,9 @@ const defaultState = {
   natureEntres: [],
   causeInactivite: [],
   EtatImmobilisations: [],
-  normeImmo:[]
+  normeImmo:[],
+  historiqueAffectation:[],
+  demandeMateriel:[]
   
    
 };

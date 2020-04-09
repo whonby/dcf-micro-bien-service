@@ -1,4 +1,5 @@
 <template>
+
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span12">
@@ -13,23 +14,22 @@
                   <!-- <th>Code</th> -->
                   <th>Annee budgetaire</th>
                   <!-- <th>Taux</th> -->
-                  <th>Duree</th>
+                  <th>dure_vie</th>
                   <th>Designation</th>
                   <th>Valeur Origine</th>
                   <th>Date de mise en service</th>
                   
-                 
                   <!-- <th>Acteur Depense</th> -->
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd gradeX">
-                  <td>{{immobilisat.exercice_budgetaire || 'Non renseigné'}}</td> 
-                  <!-- <td>{{immobilisat.TVA_id || 'Non renseigné'}} %</td> -->
-                  <td>{{immobilisat.duree || 'Non renseigné'}} ans</td>
-                    <td>{{immobilisat.familleImmo.libelle || 'Non renseigné'}}</td>
-                  <td>{{formatageSomme(immobilisat.valeurorigine) || 'Non renseigné'}}</td>
-                  <td>{{formaterDate(immobilisat.date_mise_service) || 'Non renseigné'}}</td>
+                  <td>{{BesoinImmo.annee || 'Non renseigné'}}</td> 
+                  <!-- <td>{{BesoinImmo.TVA_id || 'Non renseigné'}} %</td> -->
+                  <td>{{BesoinImmo.dure_vie || 'Non renseigné'}} Ans</td>
+                    <td>{{afficheFamille(BesoinImmo.article_id) || 'Non renseigné'}}</td>
+                  <td>{{formatageSomme(BesoinImmo.valeurorigine) || 0 }}</td>
+                  <td>{{formaterDate(BesoinImmo.date_mise_service) || 'Non renseigné'}}</td>
                  
                   
                 </tr>
@@ -146,7 +146,7 @@ import { formatageSomme } from "../../../Repositories/Repository";
 export default {
   data() {
     return {
-      immobilisat: undefined,
+      BesoinImmo: undefined,
       json_fields_lineaire: {
         ANNEE: "annee",
         ANNUITE: "anuite",
@@ -171,29 +171,42 @@ export default {
   
 
   computed: {
-    ...mapGetters("SuiviImmobilisation", ["SuiviImmo"]),
+    ...mapGetters("SuiviImmobilisation", ["historiqueAffectation","familles"]),
+
+    afficheFamille() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.familles.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
 
     calculAnnuite(){
-      const immobilisat = this.immobilisat
-      if(immobilisat != undefined){
-        return  parseFloat(immobilisat.valeurorigine) / parseFloat(immobilisat.duree)
+      const BesoinImmo = this.BesoinImmo
+      if(BesoinImmo != undefined){
+        return  parseFloat(BesoinImmo.valeurorigine) / parseFloat(BesoinImmo.dure_vie)
       }
       return null
     },
 
     getAnnee(){
-        const immobilisat = this.immobilisat
-      if(immobilisat != undefined){
-        var annee = new Date(immobilisat.date_mise_service).getFullYear()
+        const BesoinImmo = this.BesoinImmo
+      if(BesoinImmo != undefined){
+        var annee = new Date(BesoinImmo.date_mise_service).getFullYear()
         return parseFloat(annee) 
       }
       return null
     },
 
       getNombreDeMois(){
-        const immobilisat = this.immobilisat
-      if(immobilisat != undefined){
-        var annee = new Date(immobilisat.date_mise_service).getMonth() + 1
+        const BesoinImmo = this.BesoinImmo
+      if(BesoinImmo != undefined){
+        var annee = new Date(BesoinImmo.date_mise_service).getMonth() + 1
         return 13 - parseFloat(annee) 
        
       }
@@ -201,13 +214,13 @@ export default {
     },
 
   Amortissement(){
-        const immobilisat = this.immobilisat
-      if(immobilisat.duree != "" && immobilisat.date_mise_service != "" && immobilisat.valeurorigine != ""){
+        const BesoinImmo = this.BesoinImmo
+      if(BesoinImmo.dure_vie != "" && BesoinImmo.date_mise_service != "" && BesoinImmo.valeurorigine != ""){
         var tableauAmortissement = []
          var tableauAmortissementAExporter = []
 
-        var tailleDuTableau = this.immobilisat.duree
-         var valeurNettActuelle = immobilisat.valeurorigine
+        var tailleDuTableau = this.BesoinImmo.dure_vie
+         var valeurNettActuelle = BesoinImmo.valeurorigine
           var cumulActuel = this.calculAnnuite
               for(var i = 0; i < tailleDuTableau; i++){
             let objet = {
@@ -237,13 +250,13 @@ export default {
     },
 
        AmortissementProrataTemporis(){
-        const immobilisat = this.immobilisat
-      if(immobilisat.duree != "" && immobilisat.date_mise_service != "" && immobilisat.valeurorigine != ""){
+        const BesoinImmo = this.BesoinImmo
+      if(BesoinImmo.dure_vie != "" && BesoinImmo.date_mise_service != "" && BesoinImmo.valeurorigine != ""){
         var tableauAmortissement = []
         var tableauAmortissementAExporter = []
 
-        var tailleDuTableau = this.immobilisat.duree
-         var valeurNettActuelle = immobilisat.valeurorigine
+        var tailleDuTableau = this.BesoinImmo.dure_vie
+         var valeurNettActuelle = BesoinImmo.valeurorigine
           var cumulActuel = this.calculAnnuite
 
         if(this.getNombreDeMois === 12){
@@ -267,7 +280,7 @@ export default {
             annee : this.getAnnee + i,
           anuite : i == 0 ? ( (valeurNettActuelle * this.getNombreDeMois) / 12 ) / tailleDuTableau : i == tailleDuTableau ? this.calculAnnuite - tableauAmortissement[0].anuite : this.calculAnnuite,
           valeurNette : i == 0 ?  parseFloat(valeurNettActuelle) - ( ((valeurNettActuelle * this.getNombreDeMois) / 12 ) / tailleDuTableau) : i == tailleDuTableau ? 0 : parseFloat(valeurNettActuelle) - this.calculAnnuite,
-            cumul: i == 0 ? ( (valeurNettActuelle * this.getNombreDeMois) / 12 ) / tailleDuTableau : i == tailleDuTableau ? immobilisat.valeurorigine : cumulActuel
+            cumul: i == 0 ? ( (valeurNettActuelle * this.getNombreDeMois) / 12 ) / tailleDuTableau : i == tailleDuTableau ? BesoinImmo.valeurorigine : cumulActuel
             }
             valeurNettActuelle = objet.valeurNette
             cumulActuel = this.calculAnnuite + objet.cumul
@@ -299,8 +312,8 @@ export default {
   },
   methods: {
     getDetail(){
-        this.immobilisat = this.SuiviImmo.find(
-      immobilisat => immobilisat.id == this.$route.params.id
+        this.BesoinImmo = this.historiqueAffectation.find(
+      BesoinImmo => BesoinImmo.id == this.$route.params.id
     );
     },
     

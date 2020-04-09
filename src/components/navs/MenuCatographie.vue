@@ -71,6 +71,13 @@
              
             </router-link>
           </li>
+            <li title="Immobilisation">
+            <router-link :to="{name:'historisqueAffection'}" tag="a">
+              <!-- <i class="icon-list"></i> -->
+              <span class="text">DEMANDE</span>   
+             
+            </router-link>
+          </li>
           <li>
             <router-link :to="{name:'immobilisation'}" tag="a">
               <!-- <i class="icon-money"></!--> 

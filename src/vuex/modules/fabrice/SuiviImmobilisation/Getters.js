@@ -2,11 +2,11 @@ import { groupBy } from "../../../../Repositories/Repository";
 
 export const factures = state => state.factures
 export const normeImmo = state => state.normeImmo
-
+export const demandeMateriel = state => state.demandeMateriel
 export const natureEntres = state => state.natureEntres
 export const causeInactivite = state => state.causeInactivite
 export const EtatImmobilisations = state => state.EtatImmobilisations
-
+export const historiqueAffectation = state => state.historiqueAffectation
 const familles = state =>
   state.familles.sort((a, b) => (a.code > b.code ? 1 : -1));
 
@@ -1099,7 +1099,18 @@ export const getPersonnaliseNormeEquipement = (state, getters, rootState, rootGe
 
 
 
+export const equipementNonCouvert = (state, getters, rootState, rootGetters) =>
+  state.normeImmo.map(element => {
+    if (element.fonction_id !== null ) {
+      element = {
+        ...element,
+        Affichefonction: rootGetters["personnelUA/acte_personnels"].find(Equipe => Equipe.fonction_id == element.fonction_id
+        )
+      };
+    }
 
+    return element;
+  });
 
 
 

@@ -1,20 +1,7 @@
 
 <template>
     <div class="container-fluid">
-     
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
          <div id="exampleModal" class="modal hide taillModal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
@@ -331,7 +318,7 @@
                             <div class="control-group">
                                 <label class="control-label" title=" ">Date fin exécution</label>
                                 <div class="controls">
-                                      <input type="date" :min="formEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValue" v-model="formEffetFinancier.date_fin_exe"
+                                      <input type="date" :min="editActeEffetFinancier.date_odre_service"  v-model="editActeEffetFinancier.date_fin_exe"
                                            class="span3"
                                            placeholder=""
                                     />
@@ -361,7 +348,7 @@
                                            class="span3"
                                            placeholder=""
                                     />
-                                  
+                                  {{editActeEffetFinancier.marche_id}}
                                 </div>
                             </div>
                         </td>
@@ -386,6 +373,8 @@
 
 
 
+
+<!---debut de modification de acte effet financier   --->
 
 
 
@@ -434,7 +423,7 @@
                        <th>Objet march&eacute;</th>
                         <!-- <th>Reference march&eacute;</th>  -->
                                     <th>Montant réel</th>
-                                <th>Etape marché</th>
+                                <th>Etat du marché</th>
                                 
                 </tr>
                
@@ -513,9 +502,9 @@
                     <th>Activit&eacute;</th>
                     <th>Imputation</th>
                        <th>Objet march&eacute;</th>
-                        <th>Reference march&eacute;</th> 
+                        <!-- <th>Reference march&eacute;</th>  -->
                                     <th>Montant prevue</th>
-                                <th>Etape marché</th>
+                                <th>Etat du marché</th>
                                 <th>Action</th>
                 </tr>
                 </thead>
@@ -538,13 +527,13 @@
                   {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.objet || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.reference_marche || 'Non renseigné'}}</td>
+                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.reference_marche || 'Non renseigné'}}</td> -->
                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
-                  <br>
+                  
 <td>
                      <button 
                       v-if="marche.attribue == 1"  class="btn  btn-success">
@@ -552,39 +541,20 @@
        
                 </button>
                   
-                   </td>
-<td>
-   <button @click.prevent="afficherModalModifierActeEffetFinancier(index)"  class="btn btn-info">
-                <span class=""><i class="icon-folder-open" title="continue la contratualisation"></i></span></button> 
+                 
 
 </td>
-
-                     <div class="btn-group">
- <!-- <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail marche proceduce simplifiée">
+<td>
+    <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+                class="btn btn-default " title="continue la contratualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
-                   </router-link>  -->
-                   <!-- <router-link :to="{ name: 'DetaillMarche', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail marches">
-                  <span class=""><i class="icon-folder-open"></i></span>
-                   </router-link>  -->
-  <!-- <router-link :to="{ name: 'Engagement', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail Engagement">
-                  <span class=""><i class=" icon-folder-close"></i></span>
-                   </router-link>  -->
-
-                     <!-- <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail marche">
-                  <span class=""><i class=" icon-folder-open"></i></span>
-                   </router-link>  -->
-
-                    
-                    
-               <!-- <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
-                <span class=""><i class="icon-trash"></i></span></button>  -->
-             
-            </div>
-
+                    </router-link> 
+</td>
+<td>
+ 
+   <button @click.prevent="modifierModalActeEffetFinancierLocal2(index)"  class="btn btn-info"  title="Retourner en execution">
+                <span class=""><i class="icon-folder-open" ></i></span></button> 
+</td>
                        </tr>
                         <tr>
                      
@@ -616,9 +586,7 @@
                        <td>
                           
                       </td>
-                        <td>
-                          
-                      </td>
+                       
                      
                     </tr>
                 </tbody>
@@ -650,7 +618,7 @@
                     <th>Reference marché</th>
                      <!-- <th>Numero marché</th> -->
                     <th>Montant prévu</th>
-                    <th>Etape marché</th>
+                    <th>Etat du marché</th>
                    <th>Action</th>
                   </tr>
                 </thead>
@@ -794,7 +762,7 @@
                        <th>Objet march&eacute;</th>
                         <!-- <th>Reference march&eacute;</th>  -->
                                     <th>Montant réel</th>
-                                <th>Etape marché</th>
+                                <th>Etat du marché</th>
                                 <th>Action</th>
                 </tr>
                 </thead>
@@ -802,6 +770,8 @@
                  <tr class="odd gradeX" v-for="(marche, index) in 
                 afficheMarchExecuter"
                  :key="marche.id">
+                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.marche_id || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{afficherAnneeBudget(marche.marche_id) || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -839,6 +809,7 @@
       <button   class="btn btn-info " title="Ajouter marché resilié" @click="afficherModalMarcheResilier(index)">
                 <span class=""><i class="icon-pencil"></i></span></button>
 
+   
                     
                      <button @click.prevent="afficherModalModifierActeEffetFinancier(index)"  class="btn btn-success">
                 <span class=""><i class="icon-folder-open" title="retour sur  la contratualisation"></i></span></button> 
@@ -895,7 +866,7 @@
                        <th>Objet march&eacute;</th>
                         <th>Reference march&eacute;</th> 
                                     <th>Montant prevue</th>
-                                <th>Etape marché</th>
+                                <th>Etat du marché</th>
                                 <th>Action</th>
                 </tr>
                 </thead>
@@ -1628,7 +1599,10 @@ export default {
                 exo_id:"",
         
       },
-        editActeEffetFinancier:"",
+        editActeEffetFinancier:{
+          date_odre_service:"",
+          date_fin_exe:""
+        },
         formEffetFinancier:{
              code_act:"",
              libelle_act:"",
@@ -1700,7 +1674,7 @@ export default {
 
 nombreDejourCalcule(){
                 let vM=this;
-    const acteAffet = vM.formEffetFinancier
+    const acteAffet = vM.editActeEffetFinancier
     if(acteAffet.date_odre_service == acteAffet.date_fin_exe &&  acteAffet.date_fin_exe !=="" && acteAffet.date_odre_service !=="") return 1
      if(acteAffet.date_fin_exe =="" && acteAffet.date_odre_service =="") return null
 
@@ -1713,13 +1687,13 @@ nombreDejourCalcule(){
                if(isNaN(diffJour)) return null
 
                if(parseFloat(diffJour) < 0 ) return "durée invalide"
-    vM.formEffetFinancier.duree=diffJour
+    vM.editActeEffetFinancier.duree=diffJour
                   return  diffJour;
    
 },
 
 getDateFinExécutionValue(){
-    return !this.formEffetFinancier.date_odre_service !=""
+    return this.editActeEffetFinancier.date_odre_service !=""
 },
 
 
@@ -2480,7 +2454,7 @@ this.formData = {
         backdrop: 'static',
         keyboard: false
     });
-    this.editActeEffetFinancier = this.acteEffetFinanciers[index]
+    this.editActeEffetFinancier = this.afficheMarchExecuter[index]
 }, 
 
 modifierModalActeEffetFinancierLocal(){
@@ -2493,7 +2467,16 @@ modifierModalActeEffetFinancierLocal(){
     this.modifierActeEffetFinancier(this.editActeEffetFinancier)
     this.$('#modifierActeEF').modal('hide');
 },
-  
+
+  modifierModalActeEffetFinancierLocal2(index){
+    this.editActeEffetFinancier = this.afficheMarcheEnCoursContratualisation[index]
+    
+      let marcheObjet = this.marches.find(marche=>marche.id==this.editActeEffetFinancier.id)
+         marcheObjet.attribue = 2
+
+    this.modifierMarche(marcheObjet)
+   
+},
     // alert() {
     //   console.log("ok");
     // },

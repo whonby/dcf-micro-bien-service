@@ -34,7 +34,13 @@ import EtatImmobilisation from '../../pages/suivi_control_budgetaires/suiviImmob
 import CauseInactivite from '../../pages/suivi_control_budgetaires/suiviImmobilisation/CauseInactivite.vue'
 import natureEntre from '../../pages/suivi_control_budgetaires/suiviImmobilisation/natureEntre.vue'
 import NormeImmo from '../../pages/suivi_control_budgetaires/suiviImmobilisation/GrpeNorme/NormeImmoPrincipal.vue'
+import historisqueAffection from '../../pages/suivi_control_budgetaires/suiviImmobilisation/docAffectationImmo/historisqueAffection.vue'
 const suiviImmobilisationRoutes = [
+  {
+    path: "/historisque-Affection",
+    name: "historisqueAffection",
+    component: historisqueAffection
+  },
   {
     path: "/equipement-type",
     name: "NormeImmo",
