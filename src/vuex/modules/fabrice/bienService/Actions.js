@@ -4366,3 +4366,17 @@ export function supprimerPlanPassationMarche({commit}, id) {
         })
     }).catch(error => console.log(error))
 }*/
+
+export function modifierMarcheBascule({ commit, dispatch }, element_modifie) {
+  asyncLoading(axios.put('/marches', element_modifie)).then(response => {
+    commit('MODIFIER_MARCHE', response.data)
+    dispatch('getMarche')
+    dispatch('getActeEffetFinancier')
+
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Traitement effectué !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}

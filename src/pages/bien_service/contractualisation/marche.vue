@@ -507,7 +507,7 @@
                         <!-- <th>Reference march&eacute;</th>  -->
                                     <th>Montant prevue</th>
                                 <th>Etat du marché</th>
-                                <th>Action</th>
+                                <th colspan="2">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -554,7 +554,7 @@
 </td>
 <td>
  
-   <button @click.prevent="modifierModalActeEffetFinancierLocal2(index)"  class="btn btn-info"  title="Retourner en execution">
+   <button @click.prevent="modifierModalActeEffetFinancierLocal2(index)"  class="btn btn-info"  title="Basculer en Execution">
                 <span class=""><i class="icon-folder-open" ></i></span></button> 
 </td>
                        </tr>
@@ -576,11 +576,9 @@
                           
                       </td>
                      
-                      <td>
-                          
+                       <td style="font-weight:bold;text-align: center;"> Total Marché
                       </td>
-                       <td style="font-weight:bold;"> Total Marché
-                      </td>
+                      
                        <td  style="text-align: center;color:red;font-weight:bold;">
                            {{formatageSomme(parseFloat(montantEnContratualisation))}}
                            
@@ -588,8 +586,12 @@
                        <td>
                           
                       </td>
-                       
-                     
+                        <td>
+                          
+                      </td>
+                      <td>
+                          
+                      </td>
                     </tr>
                 </tbody>
               </table>
@@ -765,15 +767,14 @@
                         <!-- <th>Reference march&eacute;</th>  -->
                                     <th>Montant réel</th>
                                 <th>Etat du marché</th>
-                                <th>Action</th>
+                                <th colspan="2">Action</th>
                 </tr>
                 </thead>
                 <tbody>
                  <tr class="odd gradeX" v-for="(marche, index) in 
                 afficheMarchExecuter"
                  :key="marche.id">
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.marche_id || 'Non renseigné'}}</td>
+                 
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{afficherAnneeBudget(marche.marche_id) || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -813,8 +814,8 @@
 
    
                     
-                     <button @click.prevent="afficherModalModifierActeEffetFinancier(index)"  class="btn btn-success">
-                <span class=""><i class="icon-folder-open" title="retour sur  la contratualisation"></i></span></button> 
+                     <button @click.prevent="modifierModalActeEffetFinancierLocal(index)"  class="btn btn-success">
+                <span class=""><i class="icon-folder-open" title="Basculer en contratualisation"></i></span></button> 
 
 </td>
 
@@ -2134,8 +2135,9 @@ anneeAmort() {
     // return cur_day + " " + hours + ":" + minutes + ":" + seconds;
    },
    afficheMarchExecuter(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 2)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 2 && element.AfficheMarche.type_marche.code_type_marche == 4)
 },
+
 // afficheMarchExecuter(){
 // return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
 // },
@@ -2363,7 +2365,7 @@ return element;
 
   },
   methods: {
-    ...mapActions("bienService", ['ajouterMarche','modifierMarche',
+    ...mapActions("bienService", ['ajouterMarche','modifierMarche','modifierMarcheBascule',
     'supprimerMarche','modifierActeEffetFinancier',"getMarche","getActeEffetFinancier"
      
     ]),
@@ -2459,24 +2461,37 @@ this.formData = {
     this.editActeEffetFinancier = this.afficheMarchExecuter[index]
 }, 
 
-modifierModalActeEffetFinancierLocal(){
+modifierModalActeEffetFinancierLocal(index){
     
+    if ( confirm( "Voulez-vous basculer en Contractualisation ?") ) {
+   
+     this.editActeEffetFinancier = this.afficheMarchExecuter[index]
     
       let marcheObjet = this.marches.find(marche=>marche.id==this.editActeEffetFinancier.marche_id)
          marcheObjet.attribue = 1
 
-    this.modifierMarche(marcheObjet)
-    this.modifierActeEffetFinancier(this.editActeEffetFinancier)
-    this.$('#modifierActeEF').modal('hide');
+    this.modifierMarcheBascule(marcheObjet)
+} else {
+    // Code à éxécuter si l'utilisateur clique sur "Annuler" 
+}
+    
+     
+   
 },
 
   modifierModalActeEffetFinancierLocal2(index){
-    this.editActeEffetFinancier = this.afficheMarcheEnCoursContratualisation[index]
+    if ( confirm( "Voulez-vous basculer en Execution ?") ) {
+   
+     this.editActeEffetFinancier = this.afficheMarcheEnCoursContratualisation[index]
     
       let marcheObjet = this.marches.find(marche=>marche.id==this.editActeEffetFinancier.id)
          marcheObjet.attribue = 2
 
-    this.modifierMarche(marcheObjet)
+    this.modifierMarcheBascule(marcheObjet)
+} else {
+    // Code à éxécuter si l'utilisateur clique sur "Annuler" 
+}
+   
    
 },
     // alert() {

@@ -127,7 +127,8 @@ export default {
       "getAllBesoinImmo",
       "getAllImmobilisation",
       "getAllAmortissement",
-      "getAllHistoAffectation"
+      "getAllHistoAffectation",
+      "getAllDemandeMateriel"
       
     ]),
 
@@ -279,8 +280,10 @@ this.getAllHistoriqueBudgetGeneral()
     this.getAllBesoinImmo();
     this.getAllImmobilisation();
     this.getAllHistoAffectation();
+    this.getAllDemandeMateriel();
     //this.getAllAmortissement();
       /**
+       * this.
        * fin suivi des immo
        */
 
