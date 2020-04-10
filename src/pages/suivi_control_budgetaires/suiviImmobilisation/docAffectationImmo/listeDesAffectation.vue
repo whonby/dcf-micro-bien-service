@@ -5,6 +5,143 @@
     <!-- End Page Header -->
     <!-- Default Light Table -->
     <div class="container-fluid">
+
+
+ <div id="exampleModalValidationdirecteur" class="modal hide valDirecteur">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Decision Du directeur</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+                 <div class="control-group">
+                            <label class="control-label">Décision Directeur</label>
+                            <div class="controls">
+                              <select v-model="valideDirecteur.motif" class="span5">
+                                        <option value=""></option>
+                                      <option value="3">Visé</option>
+                                    <option value="4">Différé</option>
+                                    <option value="5">Réjeté</option>
+                                    <option value="1">Attente</option>
+                            
+    
+                             </select>
+                           
+                            </div>
+                          </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+               <div class="control-group">
+                            <label class="control-label">Cause</label>
+                            <div class="controls">
+                              <textarea name="" id="" cols="30" rows="2" class="span5" :readonly="verrouilleCause"></textarea>
+                              
+                               <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                            </div>
+                          </div>
+            </td>
+          </tr>
+         <tr>
+           <td>
+             
+                           <div class="control-group">
+                            <label class="control-label">Date Decision :</label>
+                            <div class="controls">
+                              <input type="date" class="span5"  v-model="valideDirecteur.date_motif_directeur"/>
+                               <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                            </div>
+                          </div>
+           </td>
+         </tr>
+                               <!-- <div class="control-group">
+                            <label class="control-label">Nom Emetteur :</label>
+                            <div class="controls">
+                              <input type="text" class="span"  v-model="editMandat.nom_emetteur"/>
+                              <input type="hidden" class="span"  :value="recuperer"/> 
+                            </div>
+                          </div> -->
+         
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierModalMandatLocal(editMandat)"
+          class="btn btn-primary"
+          href="#"
+         
+        >Modifier</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div id="exampleModalValidationChefService" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Decision Chef de service</h3>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" >
+          <div class="control-group">
+                            <label class="control-label">Décision Chef de service </label>
+                            <div class="controls">
+                              <select v-model="valideService.motif">
+                                <option value=""></option>
+                              <option value="1">Visé</option>
+                             <!-- <option value="2">Différé</option>
+                             <option value="3">Réjeté</option> -->
+                             <option value="0">Attente</option>
+                            
+    
+    </select>
+                           
+                            </div>
+                          </div>
+                           <div class="control-group">
+                            <label class="control-label">Date Decision :</label>
+                            <div class="controls">
+                              <input type="date" class="span"  v-model="valideService.date_motif"/>
+                               <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                            </div>
+                          </div>
+                               <!-- <div class="control-group">
+                            <label class="control-label">Nom Emetteur :</label>
+                            <div class="controls">
+                              <input type="text" class="span"  v-model="editMandat.nom_emetteur"/>
+                              <input type="hidden" class="span"  :value="recuperer"/> 
+                            </div>
+                          </div> -->
+         
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierModalMandatLocal(editMandat)"
+          class="btn btn-primary"
+          href="#"
+         
+        >Modifier</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
       <hr />
       <div class="row-fluid">
         <div class="span12">
@@ -47,18 +184,18 @@
                 <div class="widget-box">
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
-                      <li class="active">
-                        <a data-toggle="tab" href="#tab112">Listes des demandes   <span class="badge badge-inverse">{{afficheNombreToutPersonne}}</span></a>
-                      </li>
-                       <li class="">
-                        <a data-toggle="tab" href="#tab132">Demande non attribué  <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
+                        <li class="active">
+                        <a data-toggle="tab" href="#tab129">Listes des Demande    <span class="badge badge-info">{{NombreaffichePersonneEquipe}}</span></a>
                       </li>
                       <li class="">
-                        <a data-toggle="tab" href="#tab452">Demande  attribué    <span class="badge badge-warning">{{NombreafficheEquipementNonCouvert}}</span></a>
+                        
+                        <a data-toggle="tab" href="#tab112">Validation Chef service  <span class="badge badge-inverse">{{nombreValidationEnAttenteChefService}}</span></a>
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#tab129">Taux demande attribué     <span class="badge badge-info">{{NombreaffichePersonneEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab132">Validation Directeur  <span class="badge badge-important">{{nombreValidationEnAttenteDirecteur}}</span></a>
                       </li>
+                    
+                     
                       <li class="">
                         <a data-toggle="tab" href="#tab12969">Taux demande non attribué"    <span class="badge badge-success">{{NombreTauxequipementParAgent}}</span></a>
                       </li>
@@ -134,25 +271,103 @@
               </table>
 
                     </div>
-                      <div id="tab112" class="tab-pane active">
+                      <div id="tab112" class="tab-pane">
                        <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
                      
-                    <!-- <th>Type Unite d'administrative</th> -->
-                    <th>Unite d'administrative</th>
+                  
                     
-                     <th>Unite de zone</th>
-                    
-                    <th>Service</th>
-                    <th>Fonction</th>
                     <th>Nom et prénoms</th>
-                    <th >Equipé</th>
-                     
+                    <th>Unite d'administrative</th>
+                     <th>Unite de zone</th>
+                    <th>Fonction</th>
+                    <th>Article</th>
+                    <th>Quantite</th>
+                    <th>Cause inactivite</th>
+                    <th>Cause de la demande</th>
+                    <th >Date demande</th>
+                     <th>duré vie</th>
+                     <th>Motif chef sce</th>
+                     <th>Date motif</th>
                   </tr>
                 </thead>
                 <tbody>
-                  
+                   <tr
+                    class="odd gradeX"
+                    v-for="(BesoinImmo,index) in afficheValidationChefService"
+                    :key="BesoinImmo.id"
+                  >
+   
+                    
+                    <td
+                       style=" color:black;font-size:14px;font-weight:bold;"
+                    >{{afficherActeurDepense(BesoinImmo.acteur_id) || 'Non renseigné'}}</td> 
+                    <td
+                       style=" color:black;font-size:14px;font-weight:bold;"
+                    >{{afficherUniteAdministrative(BesoinImmo.uniteadmin_id) || 'Non renseigné'}}</td> 
+                     <td
+                        style=" color:black;font-size:14px;font-weight:bold;"
+                    >{{afficheUniteZone(BesoinImmo.uniteZone_id)  || 'Non renseigné'}}</td> 
+                                    
+                      <td 
+                       style=" color:black;font-size:14px;font-weight:bold;"
+                    >{{afficheFonction(BesoinImmo.fonction_id) || 'Non renseigné'}}</td>
+                      <td  style=" color:black;font-size:14px;font-weight:bold;"
+                      
+                    >{{BesoinImmo.article_id || 0}}</td>
+                    <td 
+                       style="text-align: center; color:black;font-size:14px;font-weight:bold;"
+                    >{{BesoinImmo.quantite || 0}}</td>
+                   
+                     <td 
+                       style=" color:black;font-size:14px;font-weight:bold;"
+                    >{{(BesoinImmo.cause_inactivite) || 'Non renseigné'}}</td>
+                   
+                      <td
+                      style=" color:black;font-size:14px;font-weight:bold;"
+                    >{{BesoinImmo.cause_demande || 'Non renseigné'}}</td> 
+                     <td
+                       style="text-align: center; color:black;font-size:14px;font-weight:bold;"
+                    >{{formaterDate(BesoinImmo.date_demande) || 'Non renseigné'}}</td> 
+                     <td
+                      style="text-align: center; color:black;font-size:14px;font-weight:bold;"
+                    >{{BesoinImmo.dure_vie || 'Non renseigné'}}</td>
+                    <td>
+                        <button v-if="BesoinImmo.motif == 1"  class="btn  btn-success" @click="afficherModalPourValidationChefService(index)" >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="BesoinImmo.motif == 4" class="btn  btn-warning" @click="afficherModalPourValidationChefService(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="BesoinImmo.motif == 5" class="btn  btn-danger" @click="afficherModalPourValidationChefService(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info"  @click="afficherModalPourValidationChefService(index)">                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                    
+                      </button>
+                    </td>
+                    
+                     <td
+                      style="text-align: center; color:black;font-size:14px;font-weight:bold;"
+                    >{{BesoinImmo.date_motif || 'Non renseigné'}}</td>
+
+                  </tr>
                  
                  
                  
@@ -165,48 +380,239 @@
                 <thead>
                   <tr>
                      
-                    <!-- <th>Type Unite d'administrative</th> -->
-                    <th>Unite d'administrative</th>
+                  
                     
-                     <th>Unite de zone</th>
-                    
-                    <th>Service</th>
-                    <th>Fonction</th>
                     <th>Nom et prénoms</th>
-                    <th >Equipé</th>
-                     <th >Action</th>
+                    <th>Unite d'administrative</th>
+                     <th>Unite de zone</th>
+                    <th>Fonction</th>
+                    <th>Article</th>
+                    <th>Quantite</th>
+                    <th>Cause inactivite</th>
+                    <th>Cause de la demande</th>
+                    <th >Date demande</th>
+                     <th>duré vie</th>
+                     <th>Décision Directeur</th>
+                     <th>Date motif</th>
                   </tr>
                 </thead>
                 <tbody>
                   
-                 
+                  <tr
+                    class="odd gradeX"
+                    v-for="(BesoinImmo,index) in afficheValidationDirecteur"
+                    :key="BesoinImmo.id"
+                  >
+   
+                    
+                    <td
+                      style=" color:black;font-size:14px;font-weight:bold;"
+                    >{{afficherActeurDepense(BesoinImmo.acteur_id) || 'Non renseigné'}}</td> 
+                    <td
+                      style=" color:black;font-size:14px;font-weight:bold;"
+                    >{{afficherUniteAdministrative(BesoinImmo.uniteadmin_id) || 'Non renseigné'}}</td> 
+                     <td
+                       style=" color:black;font-size:14px;font-weight:bold;"
+                    >{{afficheUniteZone(BesoinImmo.uniteZone_id)  || 'Non renseigné'}}</td> 
+                                    
+                      <td 
+                      style=" color:black;font-size:14px;font-weight:bold;"
+                    >{{afficheFonction(BesoinImmo.fonction_id) || 'Non renseigné'}}</td>
+                      <td style=" color:black;font-size:14px;font-weight:bold;"
+                      
+                    >{{BesoinImmo.article_id || 0}}</td>
+                    <td 
+                      style=" color:black;font-size:14px;font-weight:bold;"
+                    >{{BesoinImmo.quantite || 0}}</td>
+                   
+                     <td 
+                      style=" color:black;font-size:14px;font-weight:bold;"
+                    >{{(BesoinImmo.cause_inactivite) || 'Non renseigné'}}</td>
+                   
+                      <td
+                      style=" color:black;font-size:14px;font-weight:bold;"
+                    >{{BesoinImmo.cause_demande || 'Non renseigné'}}</td> 
+                     <td
+                      style="text-align: center; color:red;font-size:14px;font-weight:bold;"
+                    >{{formaterDate(BesoinImmo.date_demande) || 'Non renseigné'}}</td> 
+                     <td
+                      style="text-align: center; color:red;font-size:14px;font-weight:bold;"
+                    >{{BesoinImmo.dure_vie || 'Non renseigné'}}</td>
+                    <td>
+                        <button v-if="BesoinImmo.motif == 3"  class="btn  btn-success"  @click="afficherModalPourValidationDuDirecteur(index)">                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <!-- <button v-else-if="BesoinImmo.motif == 0" class="btn  btn-warning"  >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="BesoinImmo.motif == 0" class="btn  btn-danger"  >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button> -->
+                     <button v-else class="btn  btn-info" @click="afficherModalPourValidationDuDirecteur(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                    
+                      </button>
+                    </td>
+                    
+                     <td
+                      style="text-align: center; color:red;font-size:14px;font-weight:bold;"
+                    >{{BesoinImmo.date_motif_directeur || 'Non renseigné'}}</td>
+
+                  </tr>
                  
                  
                  
                 </tbody>
               </table>
                   </div>
-                   <div id="tab129" class="tab-pane">
+                   <div id="tab129" class="tab-pane active">
                      <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                     
-                    <!-- <th>Type Unite d'administrative</th> -->
-                    <th>Unite d'administrative</th>
-                    
-                     <th>Unite de zone</th>
-                    
-                    <th>Service</th>
-                    <th>Fonction</th>
+                
                     <th>Nom et prénoms</th>
-                    <th >Equipé</th>
-                  
+                    <th>Unite d'administrative</th>
+                     <th>Unite de zone</th>
+                    <th>Fonction</th>
+                    <th>Article</th>
+                    <th>Quantite</th>
+                    <th>Cause inactivite</th>
+                    <th>Cause de la demande</th>
+                    <th >Date demande</th>
+                     <th>duré vie</th>
+                     <th>Décision chef sce</th>
+                     <th>Date motif sce</th>
+                      <th>Décision Directeur</th>
+                     <th>Date motif Directeur</th>
                   </tr>
                 </thead>
                 <tbody>
                   
                  
-                 
+                 <tr
+                    class="odd gradeX"
+                    v-for="BesoinImmo in demandeMateriel"
+                    :key="BesoinImmo.id"
+                  >
+   
+                    
+                    <td
+                      style=" color:black;font-size:14px;font-weight:bold;"
+                    >{{afficherActeurDepense(BesoinImmo.acteur_id) || 'Non renseigné'}}</td> 
+                    <td
+                      style=" color:black;font-size:14px;font-weight:bold;"
+                    >{{afficherUniteAdministrative(BesoinImmo.uniteadmin_id) || 'Non renseigné'}}</td> 
+                     <td
+                       style=" color:black;font-size:14px;font-weight:bold;"
+                    >{{afficheUniteZone(BesoinImmo.uniteZone_id)  || 'Non renseigné'}}</td> 
+                                    
+                      <td 
+                      style=" color:black;font-size:14px;font-weight:bold;"
+                    >{{afficheFonction(BesoinImmo.fonction_id) || 'Non renseigné'}}</td>
+                      <td style=" color:black;font-size:14px;font-weight:bold;"
+                      
+                    >{{BesoinImmo.article_id || 0}}</td>
+                    <td style=" text-align: center; color:black;font-size:14px;font-weight:bold;"
+                     
+                    >{{BesoinImmo.quantite || 0}}</td>
+                   
+                     <td 
+                      style=" color:black;font-size:14px;font-weight:bold;"
+                    >{{(BesoinImmo.cause_inactivite) || 'Non renseigné'}}</td>
+                   
+                      <td
+                      style=" color:black;font-size:14px;font-weight:bold;"
+                    >{{BesoinImmo.cause_demande || 'Non renseigné'}}</td> 
+                     <td
+                      style="text-align: center; color:red;font-size:14px;font-weight:bold;"
+                    >{{formaterDate(BesoinImmo.date_demande) || 'Non renseigné'}}</td> 
+                     <td
+                      style="text-align: center; color:black;font-size:14px;font-weight:bold;"
+                    >{{BesoinImmo.dure_vie || 'Non renseigné'}}</td>
+                    <td>
+                        <button v-if="BesoinImmo.motif_chef_sce == 1"  class="btn  btn-success"  >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="BesoinImmo.motif_chef_sce == 2" class="btn  btn-warning"  >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="BesoinImmo.motif_chef_sce == 4" class="btn  btn-danger"  >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info"  >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                    
+                      </button>
+                    </td>
+                    
+                     <td
+                      style="text-align: center; color:red;font-size:14px;font-weight:bold;"
+                    >{{BesoinImmo.date_motif || 'Non renseigné'}}</td>
+
+
+
+<td>
+                        <button v-if="BesoinImmo.motif_directeur == 1"  class="btn  btn-success"  >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="BesoinImmo.motif_directeur == 2" class="btn  btn-warning"  >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="BesoinImmo.motif_directeur == 4" class="btn  btn-danger"  >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info"  >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                    
+                      </button>
+                    </td>
+                    
+                     <td
+                      style="text-align: center; color:red;font-size:14px;font-weight:bold;"
+                    >{{BesoinImmo.date_motif_directeur || 'Non renseigné'}}</td>
+                  </tr>
                  
                  
                 </tbody>
@@ -954,6 +1360,14 @@ json_fields: {
 
         
       },
+      valideService:{
+motif:"",
+date_motif:""
+      },
+      valideDirecteur:{
+motif:"",
+date_motif_directeur:""
+      },
       formData2:{
         famillearticle_id :"",
         qte_affecte:"",
@@ -1016,7 +1430,8 @@ json_fields: {
       "EtatImmobilisations",
       "causeInactivite",
       "immobilisations",
-      "afficheRegroupeEquipementCouvert"
+      "afficheRegroupeEquipementCouvert",
+      "demandeMateriel"
       
       
       
@@ -1025,6 +1440,43 @@ json_fields: {
     ...mapGetters("uniteadministrative", ["uniteAdministratives","directions","servicesua","uniteZones"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins","exercices_budgetaires"]),
 ...mapGetters("personnelUA", ["acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
+
+
+verrouilleCause(){
+
+    return this.valideDirecteur.motif == 3;
+},
+
+
+
+afficheValidationChefService() {
+      
+          return this.demandeMateriel.filter(element => element.motif != 3 && element.motif != 1 );
+       
+    },
+
+
+afficheValidationDirecteur() {
+      
+          return this.demandeMateriel.filter(element => element.motif != 0 && element.motif != 5 && element.motif != 4);
+       
+    },
+
+nombreValidationEnAttenteChefService() {
+      
+          return this.afficheValidationChefService.length;
+       
+    },
+    
+nombreValidationEnAttenteDirecteur() {
+      
+          return this.afficheValidationDirecteur.length;
+       
+    },
+
+
+
+
 
 afficherRecupererQteActuelle() {
       const qtereel = this.immobilisations.find(
@@ -1703,6 +2155,30 @@ fonctionDynamiques() {
      
     ]),
   
+
+afficherModalPourValidationChefService(index) {
+      this.$("#exampleModalValidationChefService").modal({
+        backdrop: "static",
+        keyboard: false
+      })
+      this.valideService = this.afficheValidationChefService[index];
+      
+      },
+
+
+afficherModalPourValidationDuDirecteur(index) {
+      this.$("#exampleModalValidationdirecteur").modal({
+        backdrop: "static",
+        keyboard: false
+      })
+      this.valideDirecteur = this.afficheValidationDirecteur[index];
+      
+      },
+
+
+
+
+
   fenetreAjouterAffectation(index) {
       this.$("#exampleModal").modal({
         backdrop: "static",
@@ -1898,10 +2374,13 @@ unite_administrative_id: "",
         etat_immobilisation:"",
         cause_inactivite:"",
      }
+
 }
 
     },
+   
   }
+  
 };
 </script>
 <style scoped>
@@ -1927,5 +2406,9 @@ unite_administrative_id: "",
 .tailleImmobilisation{
   width: 90%;
   margin: 0 -45%;
+}
+.valDirecteur{
+  width:30%;
+  margin:0 -15%;
 }
 </style>

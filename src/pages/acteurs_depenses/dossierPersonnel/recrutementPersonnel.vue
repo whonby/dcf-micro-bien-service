@@ -2264,7 +2264,6 @@ this.formData = {
 //     this.editActeEffetFinancier = this.acteEffetFinanciers[index]
 // }, 
 
-
 RetourExecution(index){
   if(confirm("voulez-vous basculer en execution!")){
 this.idMarche = this.listeContratEnContratualisation[index]
@@ -2275,8 +2274,6 @@ this.idMarche = this.listeContratEnContratualisation[index]
   } else{
     return ("rester sur la page de contratualisation")
   }
-
-    
     // this.modifierActeEffetFinancier(this.editActeEffetFinancier)
     // this.$('#modifierActeEF').modal('hide');
 },

@@ -3604,20 +3604,20 @@
                      <td >
                         <button v-if="realiteService.decision_service_beneficiaire == 1"  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
                      
-                      <span    >Viser</span>
+                      <span    >Visé</span>
                       
                       </button>
                        <button v-else-if="realiteService.decision_service_beneficiaire == 2" class="btn  btn-warning" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
                      
                       
-                       <span  >Différer</span>
+                       <span  >Différé</span>
                       
                     
                       </button>
                         <button v-else-if="realiteService.decision_service_beneficiaire == 3" class="btn  btn-danger" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
                      
                       
-                       <span  >Réjeter</span>
+                       <span  >Réjeté</span>
                       
                     
                       </button>
@@ -3633,20 +3633,20 @@
                   <td v-if="realiteService.decision_service_beneficiaire == 1">
                         <button v-if="realiteService.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancier(index)" >                        
                      
-                      <span    >Viser</span>
+                      <span    >Visé</span>
                       
                       </button>
                        <button v-else-if="realiteService.decision_controleur_financier == 2" class="btn  btn-warning" @click="afficherModalObservationControlleurFinancier(index)" >                        
                      
                       
-                       <span  >Différer</span>
+                       <span  >Différé</span>
                       
                     
                       </button>
                         <button v-else-if="realiteService.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationControlleurFinancier(index)" >                        
                      
                       
-                       <span  >Réjeter</span>
+                       <span  >Réjeté</span>
                       
                     
                       </button>
@@ -3675,20 +3675,20 @@
                      <td>
                         <button v-if="realiteService.decision_service_beneficiaire == 1"  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
                      
-                      <span    >Viser</span>
+                      <span    >Visé</span>
                       
                       </button>
                        <button v-else-if="realiteService.decision_service_beneficiaire == 2" class="btn  btn-warning" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
                      
                       
-                       <span  >Différer</span>
+                       <span  >Différé</span>
                       
                     
                       </button>
                         <button v-else-if="realiteService.decision_service_beneficiaire == 3" class="btn  btn-danger" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
                      
                       
-                       <span  >Réjeter</span>
+                       <span  >Réjeté</span>
                       
                     
                       </button>
@@ -3704,20 +3704,20 @@
                   <td v-if="realiteService.decision_service_beneficiaire == 1">
                         <button v-if="realiteService.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancier(index)" >                        
                      
-                      <span    >Viser</span>
+                      <span    >Visé</span>
                       
                       </button>
                        <button v-else-if="realiteService.decision_controleur_financier == 2" class="btn  btn-warning" @click="afficherModalObservationControlleurFinancier(index)" >                        
                      
                       
-                       <span  >Différer</span>
+                       <span  >Différé</span>
                       
                     
                       </button>
                         <button v-else-if="realiteService.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationControlleurFinancier(index)" >                        
                      
                       
-                       <span  >Réjeter</span>
+                       <span  >Réjeté</span>
                       
                     
                       </button>
@@ -3833,20 +3833,20 @@
                   <td>
                         <button v-if="Engage.decision_cf == 1"  class="btn  btn-success" @click="afficherModalModifierMotifDemandeservice(index)" >                        
                      
-                      <span    >Viser</span>
+                      <span    >Visé</span>
                       
                       </button>
                        <button v-else-if="Engage.decision_cf == 2" class="btn  btn-warning" @click="afficherModalModifierMotifDemandeservice(index)" >                        
                      
                       
-                       <span  >Différer</span>
+                       <span  >Différé</span>
                       
                     
                       </button>
                         <button v-else-if="Engage.decision_cf == 3" class="btn  btn-danger" @click="afficherModalModifierMotifDemandeservice(index)" >                        
                      
                       
-                       <span  >Réjeter</span>
+                       <span  >Réjeté</span>
                       
                     
                       </button>
@@ -3875,20 +3875,20 @@
                   <td>
                         <button v-if="Engage.decision_cf == 1"  class="btn  btn-success" @click="afficherModalModifierMotifDemandeservice(index)" >                        
                      
-                      <span    >Viser</span>
+                      <span    >Visé</span>
                       
                       </button>
                        <button v-else-if="Engage.decision_cf == 2" class="btn  btn-warning" @click="afficherModalModifierMotifDemandeservice(index)" >                        
                      
                       
-                       <span  >Différer</span>
+                       <span  >Différé</span>
                       
                     
                       </button>
                         <button v-else-if="Engage.decision_cf == 3" class="btn  btn-danger" @click="afficherModalModifierMotifDemandeservice(index)" >                        
                      
                       
-                       <span  >Réjeter</span>
+                       <span  >Réjeté</span>
                       
                     
                       </button>
