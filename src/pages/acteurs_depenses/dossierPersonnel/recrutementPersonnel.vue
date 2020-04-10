@@ -177,7 +177,7 @@ afficheMarcheTerminer
                         </td>
                    
 
-                        <td>
+                        <!-- <td>
 
                             <div class="control-group">
                                 <label class="control-label">Code acte </label>
@@ -190,7 +190,7 @@ afficheMarcheTerminer
                                     />
                                 </div>
                             </div>
-                        </td>
+                        </td> -->
 
                         </tr>
 
@@ -307,7 +307,9 @@ afficheMarcheTerminer
                                     <input type="date" v-model="editActeEffetFinancier.date_reception"
                                            class="span"
                                            placeholder=""
+                                           
                                     />
+                              
                                 </div>
                             </div>
                         </td>
@@ -317,7 +319,7 @@ afficheMarcheTerminer
             </div>
              <div class="modal-footer">
                 <a
-                        @click.prevent="modifierModalActeEffetFinancierLocal"
+                        @click.prevent="modifierModalActeEffetFinancierLocal2"
                         class="btn btn-primary"
                         href="#"
 
@@ -405,7 +407,7 @@ afficheMarcheTerminer
                     <td>
                      <button 
                       v-if="marche.attribue== 1"  class="btn  btn-success">
-                <span >C</span>
+                <span title="CONTRAT EN COURS DE CONTRATUALISATION">CT</span>
        
                 </button>
             
@@ -634,7 +636,7 @@ afficheMarcheTerminer
                      <td>
                      <button 
                       v-if="afficherAttributMarche(marche.marche_id) == 2"  class="btn  btn-warning">
-                <span >EX</span>
+                <span title="CONTRAT EN EXECUTION">EX</span>
        
                 </button>
                    <!-- <button v-else class="btn  btn-danger">
@@ -724,7 +726,7 @@ afficheMarcheTerminer
 <td>
                      <button 
                       v-if=" afficherAttributMarche(marche.attribue) == 0"  class="btn  btn-danger">
-                <span >PL</span>
+                <span title="CONTRAT EN PLANIFICATION">PL</span>
        
                 </button>
                   
@@ -846,7 +848,7 @@ afficheMarcheTerminer
                       <td>
                          <button 
                            v-if="afficherAttributMarche(marche.attribue) == 3" class="btn  btn-info">
-                           <span >RE</span>
+                           <span title="CONTRAT RESILIER">RE</span>
        
                           </button>
                       </td>
@@ -918,13 +920,13 @@ afficheMarcheTerminer
 <td>
                      <button 
                       v-if="afficherAttributMarche(marche.attribue) == 5"  class="btn  btn-inverse">
-                <span >TE</span>
+                <span title="CONTRAT TERMINER">TE</span>
        
                 </button>
-                 <router-link :to="{ name: 'Engagement', params: { id: marche.marche_id }}"
+                 <!-- <router-link :to="{ name: 'Engagement', params: { id: marche.marche_id }}"
                 class="btn btn-default " title="Detail Payement marche">
                   <span class=""><i class=" icon-folder-close"></i></span>
-                   </router-link> 
+                   </router-link>  -->
                  
                    </td>
 
@@ -2033,11 +2035,13 @@ return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
 
 
 
-
-
-afficheMarcheResilier(){
-return this.afficheExercution.filter(element => element.indicateur_resilie == 1)
+  afficheMarcheResilier(){
+return this.getActeEffetFinancierPersonnaliserContrat.filter(element => element.marche.attribue == 3 && element.AfficheMarche.type_marche.code_type_marche ==2)
 },
+
+// afficheMarcheResilier(){
+// return this.afficheExercution.filter(element => element.indicateur_resilie == 1)
+// },
 
 
 afficheNombreMarchExecuter(){
@@ -2262,11 +2266,16 @@ this.formData = {
 
 
 RetourExecution(index){
+  if(confirm("voulez-vous basculer en execution!")){
 this.idMarche = this.listeContratEnContratualisation[index]
    let marcheObjet=this.marches.find(marche=>marche.id==this.idMarche.id)
     marcheObjet.attribue = 2
    
     this.modifierMarche(marcheObjet)
+  } else{
+    return ("rester sur la page de contratualisation merci!");
+  }
+
     
     // this.modifierActeEffetFinancier(this.editActeEffetFinancier)
     // this.$('#modifierActeEF').modal('hide');
@@ -2280,16 +2289,18 @@ this.idMarche = this.listeContratEnContratualisation[index]
 
 
 
-  afficherModalModifierActeEffetFinancier1(index){
-    this.$('#modifierActeEF').modal({
-        backdrop: 'static',
-        keyboard: false
-    });
-    this.editActeEffetFinancier = this.afficheMarchExecuter[index]
-}, 
+//   afficherModalModifierActeEffetFinancier1(index){
+//     this.$('#modifierActeEF').modal({
+//         backdrop: 'static',
+//         keyboard: false
+//     });
+//     this.editActeEffetFinancier = this.afficheMarchExecuter[index]
+// }, 
 
-modifierModalActeEffetFinancierLocal2(){
-  let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
+afficherModalModifierActeEffetFinancier1(index){
+  if(confirm("voulez-vous retourner sur la page de contratualisation ?")){
+     this.editActeEffetFinancier = this.afficheMarchExecuter[index]
+     let marcheObjet=this.marches.find(marche=>marche.id==this.editActeEffetFinancier.marche_id)
     marcheObjet.attribue = 1
     // marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
    // console.log(marcheObjet)
@@ -2297,6 +2308,11 @@ modifierModalActeEffetFinancierLocal2(){
     
     this.modifierActeEffetFinancier(this.editActeEffetFinancier)
     this.$('#modifierActeEF').modal('hide');
+
+  }else{
+    return ("rester sur la page d'execution merci!");
+  }
+ 
 },
 
     
