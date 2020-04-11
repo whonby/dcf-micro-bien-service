@@ -1,6 +1,7 @@
-Ajouter l'offre technique
+
 <template>
     <div>
+        
  <div v-if="isButtunAddDossierCandidat">
                  <h4>Liste des dossiers candidats</h4>
                  <table class="table table-bordered table-striped" v-if="marcheid">

@@ -37,13 +37,7 @@ const SUPPRIMER_TYPE_ACTE_PERSONNELS= (state, id) => {
     state.type_acte_personnels = state.type_acte_personnels.filter(titre => titre.id != id)
 }
 
-/**
- * Modification
- * @param state
- * @param id
- * @param objetModifie
- * @constructor
- */
+
 const MODIFIER_TYPE_ACTE_PERSONNELS = (state, objetModifie) => {
     state.type_acte_personnels = state.type_acte_personnels.map(type_acte_personnel => {
         if(type_acte_personnel.id == objetModifie.id){
@@ -87,13 +81,7 @@ const SUPPRIMER_FONCTIONS= (state, id) => {
     state.fonctions = state.fonctions.filter(fonction => fonction.id != id)
 }
 
-/**
- * Modification
- * @param state
- * @param id
- * @param objetModifie
- * @constructor
- */
+
 const MODIFIER_FONCTIONS = (state, objetModifie) => {
     state.fonctions = state.fonctions.map(fonction => {
         if(fonction.id == objetModifie.id){
@@ -139,13 +127,7 @@ const SUPPRIMER_CLASSES= (state, id) => {
     state.classes = state.classes.filter(classe => classe.id != id)
 }
 
-/**
- * Modification
- * @param state
- * @param id
- * @param objetModifie
- * @constructor
- */
+
 const MODIFIER_CLASSES = (state, objetModifie) => {
     state.classes = state.classes.map(classe => {
         if(classe.id == objetModifie.id){
@@ -214,13 +196,7 @@ const SUPPRIMER_NIVEAU_ETUDE= (state, id) => {
     state.niveau_etudes = state.niveau_etudes.filter(classe => classe.id != id)
 }
 
-/**
- * Modification
- * @param state
- * @param id
- * @param objetModifie
- * @constructor
- */
+
 const MODIFIER_NIVEAU_ETUDE = (state, objetModifie) => {
     state.niveau_etudes = state.niveau_etudes.map(classe => {
         if(classe.id == objetModifie.id){
@@ -268,13 +244,7 @@ const SUPPRIMER_TYPE_CONTRAT= (state, id) => {
     state.type_contrats = state.type_contrats.filter(type_contrat => type_contrat.id != id)
 }
 
-/**
- * Modification
- * @param state
- * @param id
- * @param objetModifie
- * @constructor
- */
+
 const MODIFIER_TYPE_CONTRAT = (state, objetModifie) => {
     state.type_contrats = state.type_contrats.map(type_contrat => {
         if(type_contrat.id == objetModifie.id){
@@ -317,13 +287,7 @@ const SUPPRIMER_TYPE_SALARIE= (state, id) => {
     state.type_salaries = state.type_salaries.filter(type_salarie => type_salarie.id != id)
 }
 
-/**
- * Modification
- * @param state
- * @param id
- * @param objetModifie
- * @constructor
- */
+
 const MODIFIER_TYPE_SALARIE = (state,  objetModifie) => {
     state.type_salaries = state.type_salaries.map(type_salarie => {
         if(type_salarie.id == objetModifie.id){
@@ -367,13 +331,7 @@ const SUPPRIMER_ECHELONS= (state, id) => {
     state.echellons = state.echellons.filter(echellon => echellon.id != id)
 }
 
-/**
- * Modification
- * @param state
- * @param id
- * @param objetModifie
- * @constructor
- */
+
 const MODIFIER_ECHELONS = (state,  objetModifie) => {
     state.echellons = state.echellons.map(echellon => {
         if(echellon.id == objetModifie.id){
@@ -419,13 +377,7 @@ const SUPPRIMER_GRADE= (state, id) => {
     state.grades = state.grades.filter(grade => grade.id != id)
 }
 
-/**
- * Modification
- * @param state
- * @param id
- * @param objetModifie
- * @constructor
- */
+
 const MODIFIER_GRADE = (state, objetModifie) => {
     state.grades = state.grades.map(grade => {
         if(grade.id == objetModifie.id){
@@ -488,13 +440,7 @@ const SUPPRIMER_ACTEURS= (state, id) => {
     state.acteur_depenses = state.acteur_depenses.filter(acteur_depense => acteur_depense.id != id)
 }
 
-/**
- * Modification
- * @param state
- * @param id
- * @param objetModifie
- * @constructor
- */
+
 const MODIFIER_ACTEURS = (state,  objetModifie) => {
     state.acteur_depenses = state.acteur_depenses.map(acteur_depense => {
         if(acteur_depense.id == objetModifie.id){
@@ -619,13 +565,7 @@ const JOUR_CONGE_DISPONIBLE_ACTEUR= (state, data) => {
 }
 
 
-/**
- * Modification
- * @param state
- * @param id
- * @param objetModifie
- * @constructor
- */
+
 const MODIFIER_ACT_PERSONNEL = (state,  objetModifie) => {
     state.acte_personnels = state.acte_personnels.map(acte_personnel => {
         if(acte_personnel.id == objetModifie.id){
@@ -665,13 +605,7 @@ const SUPPRIMER_FAMILLE_FONCTIONS = (state, id) => {
     state.familleFonction = state.familleFonction.filter(fonction => fonction.id != id)
 }
 
-/**
- * Modification
- * @param state
- * @param id
- * @param objetModifie
- * @constructor
- */
+
 const MODIFIER_FAMILLE_FONCTIONS = (state, objetModifie) => {
     state.familleFonction = state.familleFonction.map(fonction => {
         if (fonction.id == objetModifie.id) {
@@ -706,13 +640,7 @@ const SUPPRIMER_CATEGORIE_GRADE = (state, id) => {
     state.categorieGrade = state.categorieGrade.filter(fonction => fonction.id != id)
 }
 
-/**
- * Modification
- * @param state
- * @param id
- * @param objetModifie
- * @constructor
- */
+
 
 const MODIFIER_CATEGORIE_GRADE = (state, objetModifie) => {
   state.categorieGrade = state.categorieGrade.map(type => {
@@ -748,13 +676,7 @@ const SUPPRIMER_CLASSIFICATION_GRADE_FONCTION = (state, id) => {
     state.classificationGradeFonction = state.classificationGradeFonction.filter(fonction => fonction.id != id)
 }
 
-/**
- * Modification
- * @param state
- * @param id
- * @param objetModifie
- * @constructor
- */
+
 const MODIFIER_CLASSIFICATION_GRADE_FONCTION = (state, objetModifie) => {
     state.classificationGradeFonction = state.classificationGradeFonction.map(fonction => {
         if (fonction.id == objetModifie.id) {
@@ -794,13 +716,7 @@ const SUPPRIMER_FONCTION_BUDGETAIRE = (state, id) => {
 }
 
 
-/**
- * Modification
- * @param state
- * @param id
- * @param objetModifie
- * @constructor
- */
+
 const MODIFIER_FONCTION_BUDGETAIRE = (state, objetModifie) => {
     state.fonctionBudgetaire = state.fonctionBudgetaire.map(fonction => {
         if (fonction.id == objetModifie.id) {
@@ -812,6 +728,40 @@ const MODIFIER_FONCTION_BUDGETAIRE = (state, objetModifie) => {
 
 
 
+/**
+ * Mutation fonctions
+ */
+
+
+
+const GET_SITUATION_MATRIMONIAL = (state, data) => {
+    state.situation_matrimonial = data
+}
+
+
+const AJOUTER_SITUATION_MATRIMONIAL = (state, nouvel_objet) => {
+    state.situation_matrimonial.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+}
+
+
+const SUPPRIMER_SITUATION_MATRIMONIAL = (state, id) => {
+    state.situation_matrimonial = state.situation_matrimonial.filter(fonction => fonction.id != id)
+}
+
+
+const MODIFIER_SITUATION_MATRIMONIAL = (state, objetModifie) => {
+    state.situation_matrimonial = state.situation_matrimonial.map(fonction => {
+        if (fonction.id == objetModifie.id) {
+            fonction = { ...objetModifie }
+        }
+        return fonction
+    })
+}
+
+/**
+ * Fin de type acte
+ */
 
 
 
@@ -821,6 +771,12 @@ const MODIFIER_FONCTION_BUDGETAIRE = (state, objetModifie) => {
 
 export {
     
+    GET_SITUATION_MATRIMONIAL,
+    AJOUTER_SITUATION_MATRIMONIAL,
+    SUPPRIMER_SITUATION_MATRIMONIAL,
+    MODIFIER_SITUATION_MATRIMONIAL,
+
+
     GET_FONCTION_BUDGETAIRE,
     AJOUTER_FONCTION_BUDGETAIRE,
     SUPPRIMER_FONCTION_BUDGETAIRE,

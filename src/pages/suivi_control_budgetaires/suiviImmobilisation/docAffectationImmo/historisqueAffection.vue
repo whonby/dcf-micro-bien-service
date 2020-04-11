@@ -276,6 +276,21 @@ afficheNombrePersonneNonEquipe
       <div class="modal-body">
         <table class="table table-bordered table-striped">
           <tr>
+            <td>
+     <div class="control-group">
+                <label class="control-label">Année budgétaire</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    readonly
+                     :value="afficheFonction(editDemande.fonction_id)"
+                    class="span4"
+                   
+                   
+                  />
+                </div>
+              </div>
+</td>
            <td>
                 <div class="control-group">
                 <label class="control-label">Unite administrative</label>
@@ -283,7 +298,7 @@ afficheNombrePersonneNonEquipe
                   <input
                     type="text"
                     readonly
-                   :value="editDemande.ua_id"
+                   :value="afficherUniteAdministrative(editDemande.ua_id)"
                     class="span4"
                    
                    
@@ -306,21 +321,7 @@ afficheNombrePersonneNonEquipe
                 </div>
               </div>
 </td>
-<td>
-     <div class="control-group">
-                <label class="control-label">Fonction</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    readonly
-                     :value="afficheFonction(editDemande.fonction_id)"
-                    class="span4"
-                   
-                   
-                  />
-                </div>
-              </div>
-</td>
+
            
           </tr>
           <tr>
@@ -337,7 +338,7 @@ afficheNombrePersonneNonEquipe
                 </div>
               </div>
             </td>
-            <td colspan="2">
+            <td colspan="">
               <div class="control-group">
                 <label class="control-label">Nom &&  Prénoms</label>
                 <div class="controls">
@@ -352,7 +353,21 @@ afficheNombrePersonneNonEquipe
                 </div>
               </div>
             </td>
-          
+          <td>
+     <div class="control-group">
+                <label class="control-label">Fonction</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    readonly
+                     :value="afficheFonction(editDemande.fonction_id)"
+                    class="span4"
+                   
+                   
+                  />
+                </div>
+              </div>
+</td>
           </tr>
           <tr>
            
@@ -1065,7 +1080,7 @@ afficheDemandeDeMateriel(index) {
 
 fonctionAjouterDemande(index){
 
-if ( confirm( "EN UTILISATION , Voulez-vous continuer la demande svp?") ) {
+if ( confirm( "Voulez-vous continuer la demande svp?") ) {
    
      this.$("#exampleModal").modal({
         backdrop: "static",

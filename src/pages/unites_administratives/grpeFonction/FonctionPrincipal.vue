@@ -174,18 +174,17 @@
               </td>
              </tr>
                <tr>
-              <td>
+               <td>
                 <div class="control-group">
                   <label class="control-label">Fonction</label>
                   <div class="controls">
-                       <input
-                      type="text"
-                    v-model="editTransfert.libelle"
-                      class="span6"
-                     
-                      
-                    />
-                   
+                    <select v-model="editTransfert.fonction_id" class="span6">
+                      <option
+                        v-for="typeUniteA in fonctions"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
                   </div>
                 </div>
               </td>

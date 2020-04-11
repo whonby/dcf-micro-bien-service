@@ -20,8 +20,13 @@ import recrutementPersonnel from "../../pages/acteurs_depenses/dossierPersonnel/
 import detailPersonnel from "../../pages/acteurs_depenses/dossierPersonnel/detailPersonnel";
 
 import fonctionBudgetaire from "../../pages/acteurs_depenses/fonction/fonctionBudgetaire.vue";
-
+import SituationMatrimonial from "../../pages/acteurs_depenses/fonction/SituationMatrimonial.vue";
 const ActeurDepenseRoutes = [
+  {
+    path: "/Situation-Matrimonial",
+    name: "SituationMatrimonial",
+    component: SituationMatrimonial
+  },
   {
     path: "/fonction-Budgetaire",
     name: "fonctionBudgetaire",

@@ -131,10 +131,10 @@
                                                     <label class="control-label">Situation matrimoniale</label>
                                                     <div class="controls">
                                                         <select v-model="formData.situation_matrimonial" >
-                                                            <option></option>
-                                                            <option value="Marie">Marie</option>
-                                                            <option value="Celibataire">Celibataire</option>
-                                                             <option value="Divorce">Divorce</option>
+                                                           
+                                                           
+                                                            <option v-for="situation in situation_matrimonial" :key="situation.id" :value="situation.id">{{situation.libelle}}</option>
+                                                           
                                                         </select>
                                                     </div>
                                                 </div>
@@ -243,28 +243,7 @@
                                                     </div>
                                                 </div>
                 </td>
-                <td>
-                     <div class="control-group">
-                                                    <label class="control-label">Reference acte:</label>
-                                                    <div class="controls">
-                                                        <input type="text" v-model="formData.code"  placeholder="Saisir la reference" />
-                                                    </div>
-                                                </div>
-                </td>
-                <td>
-                     <div class="control-group">
-                                                    <label class="control-label">Type acte de personnel</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.type_acte_id">
-                                                            <option></option>
-                                                            <option v-for="item in type_acte_personnels" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                </td>
+              
                 <td>
                      <div class="control-group">
                                                     <label class="control-label">Type contrat</label>
@@ -287,7 +266,33 @@
                                                     </div>
                                                 </div>
                 </td>
-   
+    <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Type niveau etude</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.niveau_etude_id">
+                                                            <option></option>
+                                                            <option v-for="item in niveau_etudes" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                </td>
+                             <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Type salarie</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.type_salarie_id">
+                                                            <option></option>
+                                                            <option v-for="item in type_salaries" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                </td>
             </tr>
             <tr>
                
@@ -306,19 +311,7 @@
                                                 </div>
               </td>
                 
-                                 <td>
-                     <div class="control-group">
-                                                    <label class="control-label">Type salarie</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.type_salarie_id">
-                                                            <option></option>
-                                                            <option v-for="item in type_salaries" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                </td>
+                    
                 <td>
                      <div class="control-group">
                                                     <label class="control-label">Salaire:</label>
@@ -327,20 +320,7 @@
                                                     </div>
                                                 </div>
                 </td>
-                <td>
-                     <div class="control-group">
-                                                    <label class="control-label">Type niveau etude</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.niveau_etude_id">
-                                                            <option></option>
-                                                            <option v-for="item in niveau_etudes" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                </td>
+               
             </tr>
         </table>
   </div>
@@ -473,7 +453,7 @@
         },
         computed: {
 // methode pour maper notre guetter
-            ...mapGetters('personnelUA', ['acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
+            ...mapGetters('personnelUA', ["situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
             ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),

@@ -218,6 +218,34 @@
                   </div>
                 </div>
               </td>
+               <td colspan="">
+                <div class="control-group">
+                  <label class="control-label">Type procedure</label>
+                  <div class="controls">
+                    <input
+                      type="text"
+                     :value="afficheLeNomDesProcedure"
+                      class="span4"
+                      placeholder="Saisir le code"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </td>
+               <!-- <td colspan="">
+                <div class="control-group">
+                  <label class="control-label">Statut de la ligne</label>
+                  <div class="controls">
+                    <input
+                      type="text"
+                     :value="codeBudgetGeneral"
+                      class="span4"
+                      placeholder="Saisir le code"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </td> -->
                <input
                       type="hidden"
                      :value="codeGrdeNature"
@@ -454,6 +482,34 @@
                   </div>
                 </div>
               </td>
+               <td colspan="2">
+                <div class="control-group">
+                  <label class="control-label">Type procedure</label>
+                  <div class="controls">
+                    <input
+                      type="text"
+                     :value="afficheLeNomDesProcedureModifier"
+                      class="span4"
+                      placeholder="Saisir le code"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </td>
+               <!-- <td colspan="2">
+                <div class="control-group">
+                  <label class="control-label">Statut de la ligne</label>
+                  <div class="controls">
+                    <input
+                      type="text"
+                     :value="codeBudgetGeneral"
+                      class="span4"
+                      placeholder="Saisir le code"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </td> -->
                <input
                       type="hidden"
                      :value="codeGrdeNaturemodif"
@@ -650,6 +706,66 @@ export default {
 
 //      return null
 //    },
+
+afficheLeNomDesProcedureModifier(){
+  if(this.editBudgetGeneral.Dotation_Initiale == ""){
+return "Aucune procedure"
+  }
+     else if( this.editBudgetGeneral.Dotation_Initiale < 10000000){
+        return "Procédure Simplifiée de demande de Cotation(PSC Sans comité)"
+    }
+    else if(this.editBudgetGeneral.Dotation_Initiale < 30000000)
+    {
+return "Procédure Simplifiée de demande de Cotation(PSC Avec comité)"
+    }
+    else if(this.editBudgetGeneral.Dotation_Initiale < 60000000 )
+    {
+return "Procédure Simplifiée à compétition Limitée(PSL)"
+    }
+    else if(this.editBudgetGeneral.Dotation_Initiale < 100000000 )
+    {
+return "Procédure Simplifiée à compétition Ouverte(PSO)"
+    }
+     else if(100000000 < this.editBudgetGeneral.Dotation_Initiale)
+    {
+return "Appel d'Offre Ouvert(AON ou AOI)"
+    }
+    
+  return null  
+
+
+},
+afficheLeNomDesProcedure(){
+  if(this.formData.Dotation_Initiale == ""){
+return "Aucune procedure"
+  }
+     else if( this.formData.Dotation_Initiale < 10000000){
+        return "Procédure Simplifiée de demande de Cotation(PSC Sans comité)"
+    }
+    else if(this.formData.Dotation_Initiale < 30000000)
+    {
+return "Procédure Simplifiée de demande de Cotation(PSC Avec comité)"
+    }
+    else if(this.formData.Dotation_Initiale < 60000000 )
+    {
+return "Procédure Simplifiée à compétition Limitée(PSL)"
+    }
+    else if(this.formData.Dotation_Initiale < 100000000 )
+    {
+return "Procédure Simplifiée à compétition Ouverte(PSO)"
+    }
+     else if(100000000 < this.formData.Dotation_Initiale)
+    {
+return "Appel d'Offre Ouvert(AON ou AOI)"
+    }
+   
+  return null  
+
+
+},
+
+
+
 afficheActiviteParAction() {
       return id => {
         if (id != null && id != "") {
@@ -794,7 +910,8 @@ var nouvelObjet = {
       ...this.formData,
        exercicebudget_id: this.anneeAmort,
        codebudget : this.codeBudgetGeneral,
-       testgdenature:this.codeGrdeNature
+       testgdenature:this.codeGrdeNature,
+       type_procedure:this.afficheLeNomDesProcedure
       
        };
       this.ajouterBudgetGeneral(nouvelObjet);
@@ -825,8 +942,8 @@ var nouvelObjet = {
       ...this.editBudgetGeneral,
        exercicebudget_id: this.anneeAmort,
        codebudget : this.codeBudgetGeneralModifier,
-        testgdenature:this.codeGrdeNaturemodif
-      
+        testgdenature:this.codeGrdeNaturemodif,
+       type_procedure:this.afficheLeNomDesProcedureModifier
        };
       this.modifierBudgetGeneral(nouvelObjet);
 this.$("#modificationModal").modal('hide');

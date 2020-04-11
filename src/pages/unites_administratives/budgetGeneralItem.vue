@@ -15,6 +15,14 @@
                     <!-- <td>{{article.afficheAction.code || 'Non renseigné'}}-{{article.afficheAction.libelle || 'Non renseigné'}}</td>
                      <td>{{article.afficheActivite.code || 'Non renseigné'}}-{{article.afficheActivite.libelle || 'Non renseigné'}}</td> -->
                       <td>{{Codefonctionnel(article.fonctionnel_id) || 'Non renseigné'}}-{{afficherfonctionnel(article.fonctionnel_id) || 'Non renseigné'}}</td>
+                       <td>
+                         <span v-if="article.Dotation_Initiale < 10000000 ">Procédure Simplifiée de demande de Cotation(PSC Sans comité)</span>
+                         <span v-else-if="article.Dotation_Initiale < 30000000 ">Procédure Simplifiée de demande de Cotation(PSC Avec comité)</span>
+                         <span v-else-if="article.Dotation_Initiale < 60000000 ">Procédure Simplifiée à compétition Limitée(PSL)</span>
+                         <span v-else-if="article.Dotation_Initiale < 100000000 ">Procédure Simplifiée à compétition Ouverte(PSO)</span>
+                         <span v-else-if="article.Dotation_Initiale > 100000000 ">Appel d'Offre Ouvert(AON ou AOI)</span>
+                         <span v-else></span>
+                       </td>
                     <td>{{Codeeconomique( article.economique_id) || 'Non renseigné'}}-{{ affichereconomique(article.economique_id) || 'Non renseigné'}}</td>
                   <td>{{formatageSomme(parseFloat(article.Dotation_Initiale)) || 0}}</td>
                    <td>

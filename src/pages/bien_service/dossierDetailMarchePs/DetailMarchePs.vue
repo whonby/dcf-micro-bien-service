@@ -1059,7 +1059,11 @@ budgetDisponible() {
             ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
             // 
           
-
+isFormulaireDossierCand(){
+                this.isFormulaireDossierCandidature=true
+                this.isButtunAddDossierCandidat=false
+                this.isDetailDossierCandidature=false
+            },
 
 formatageSomme:formatageSomme,
 

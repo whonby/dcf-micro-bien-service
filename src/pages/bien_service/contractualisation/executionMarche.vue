@@ -472,7 +472,7 @@
                   <span class=""><i class="icon-folder-open"></i></span>
                    </router-link>  -->
  <router-link :to="{ name: 'Engagement', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail Engagement">
+                class="btn btn-default " title="Detail execution">
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link> 
 

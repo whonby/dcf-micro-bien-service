@@ -272,24 +272,24 @@
             </router-link>
           </li>
            
-           <li>
+           <!-- <li>
             <router-link :to="{name: 'typeTextJuridique'}" tag="a">
               <i class="icon-bar-chart"></i>
            Type Texte juridique
             </router-link>
-          </li>
-           <li>
+          </li> -->
+           <!-- <li>
             <router-link :to="{name: 'textJuridique'}" tag="a">
               <i class="icon-bar-chart"></i>
            Texte juridique
             </router-link>
-          </li>
-          <li>
+          </li> -->
+          <!-- <li>
             <router-link :to="{name: 'autreTextJuridique'}" tag="a">
               <i class="icon-bar-chart"></i>
            Autre texte juridique
             </router-link>
-          </li>
+          </li> -->
             <li>
                 <router-link :to="{name: 'LigneExempter'}" tag="a">
                     <i class="icon-bar-chart"></i>
@@ -329,12 +329,12 @@
            Type d'acte de depense
             </router-link>
           </li>
-           <li>
+           <!-- <li>
             <router-link :to="{name: 'condition'}" tag="a">
               <i class="icon-bar-chart"></i>
            Condition
             </router-link>
-          </li>
+          </li> -->
            <!-- <li>
             <router-link :to="{name: 'bailleur'}" tag="a">
               <i class="icon-bar-chart"></i>
@@ -342,19 +342,19 @@
             </router-link>
           </li> -->
 
-           <li>
+           <!-- <li>
             <router-link :to="{name: 'documentProcedure'}" tag="a">
               <i class="icon-bar-chart"></i>
                Document procedure
             </router-link>
-          </li>
+          </li> -->
           
-           <li>
+           <!-- <li>
             <router-link :to="{name: 'type_prestation'}" tag="a">
               <i class="icon-bar-chart"></i>
            Type prestation
             </router-link>
-          </li>
+          </li> -->
           
         </ul>
       </li>
@@ -447,6 +447,12 @@
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
+           <li>
+            <router-link :to="{name: 'SituationMatrimonial'}" tag="a">
+              <i class="icon-user"></i>
+              Situation matrimoniale
+            </router-link>
+          </li>
           <li class="divider"></li>
           <li>
             <router-link :to="{name: 'CategorieGrade'}" tag="a">

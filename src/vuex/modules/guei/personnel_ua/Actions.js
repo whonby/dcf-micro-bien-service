@@ -1515,3 +1515,72 @@ export function supprimerFonctionBudgetaire({ commit }, id) {
 
 
 
+export function getSituationMatrimonial({ commit }) {
+
+    queue.push(() => axios.get('/listeSituationMatrimonial').then(response => {
+        // console.log(response.data)
+        commit('GET_SITUATION_MATRIMONIAL', response.data)
+    }).catch(error => console.log(error))
+    );
+
+
+}
+
+// ajouter type acte personnel
+export function ajouterSituationMatrimonial({ commit }, objetAjoute) {
+    this.$app.$loading(true)
+    axios.post('/ajouterSituationMatrimonial', objetAjoute).then(res => {
+        this.$app.$notify({
+            title: 'success',
+            text: 'Enregistrement effectuer',
+            type: "success"
+        });
+        commit('AJOUTER_SITUATION_MATRIMONIAL', res.data)
+        this.$app.$loading(false)
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type: "error"
+        });
+    })
+}
+
+// supprimer type act
+export function supprimerSituationMatrimonial({ commit }, id) {
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
+            this.$app.$notify({
+                title: 'Suppression',
+                text: 'Suppression effectuer',
+                type: "error"
+            });
+            commit('SUPPRIMER_SITUATION_MATRIMONIAL', id)
+            axios.delete('/supprimerSituationMatrimonial/' + id).then(() => dialog.close())
+        })
+}
+
+export function modifierSituationMatrimonial({ commit }, formData) {
+    this.$app.$loading(true)
+    axios.put('/modifierSituationMatrimonial', formData).then(response => {
+        this.$app.$notify({
+            title: 'success',
+            text: 'Modification effectuer',
+            type: "success"
+        });
+        commit('MODIFIER_SITUATION_MATRIMONIAL', response.data)
+        this.$app.$loading(false)
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type: "error"
+        });
+    })
+
+}

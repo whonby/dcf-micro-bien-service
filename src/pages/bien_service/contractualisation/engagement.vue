@@ -3207,7 +3207,14 @@
                                     {{detail_marche.type_marche.libelle}}
                                 </td>
                                 <td class="taskOptions">
-                                    {{afficheModePassation(detail_marche.procedure_passation_id)}}
+                                    <!-- {{afficheModePassation(detail_marche.procedure_passation_id)}} -->
+                                   
+                               <span v-if="DisponibleBudgetaireApresLiquidation < 10000000 ">Procédure Simplifiée de demande de Cotation(PSC Sans comité)</span>
+                         <span v-else-if="DisponibleBudgetaireApresLiquidation < 30000000 ">Procédure Simplifiée de demande de Cotation(PSC Avec comité)</span>
+                         <span v-else-if="DisponibleBudgetaireApresLiquidation < 60000000 ">Procédure Simplifiée à compétition Limitée(PSL)</span>
+                         <span v-else-if="DisponibleBudgetaireApresLiquidation < 100000000 ">Procédure Simplifiée à compétition Ouverte(PSO)</span>
+                         <span v-else-if="DisponibleBudgetaireApresLiquidation > 100000000 ">Appel d'Offre Ouvert(AON ou AOI)</span>
+                         <span v-else></span>
                                 </td>
                                 <td class="taskOptions">
                                     {{detail_marche.objetUniteAdministrative.libelle}}
@@ -10903,6 +10910,16 @@ recupererActivite(){
                 "supprimerRealiteServiceFait"
             ]),
     
+   
+
+
+
+
+
+
+
+
+
              fonctionModifierLiquidation() {
      
 
@@ -11623,10 +11640,18 @@ afficherModalModifierMotifMandat(index) {
 
 
 afficherModalProcedureFacture() {
-      this.$("#modalTypeEngagement").modal({
+
+   if(this.DisponibleBudgetaireApresLiquidation < this.montantMarcheAvecAvenant)
+ {
+alert("Montant du marche est supperieure au Budget")
+}
+else{
+  this.$("#modalTypeEngagement").modal({
         backdrop: "static",
         keyboard: false
       });
+}
+    
     },
 
 afficherModalModifierFacture(index) {

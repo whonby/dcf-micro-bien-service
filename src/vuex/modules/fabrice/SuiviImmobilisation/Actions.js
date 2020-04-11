@@ -1285,7 +1285,7 @@ export function getAllDemandeMateriel({ commit }) {
 export function ajouterDemandeMateriel({ commit }, nouveau) {
   asyncLoading(axios
     .post("/ajouterDmdMateriel", {
-
+      annee_budgetaire: nouveau.annee_budgetaire,
       	uniteadmin_id: nouveau.uniteadmin_id,
       famille_id: nouveau.famille_id,
       fonction_id: nouveau.fonction_id,
@@ -1323,7 +1323,7 @@ export function modifierDemandeMateriel({ commit }, nouveau) {
   asyncLoading(axios
     .put("/modifierDmdMateriel/" + nouveau.id, {
 
-
+      annee_budgetaire: nouveau.annee_budgetaire,
       uniteadmin_id: nouveau.uniteadmin_id,
       famille_id: nouveau.famille_id,
       fonction_id: nouveau.fonction_id,
@@ -1338,8 +1338,11 @@ export function modifierDemandeMateriel({ commit }, nouveau) {
       dure_vie: nouveau.dure_vie,
       uniteZone_id: nouveau.uniteZone_id,
       cause_demande: nouveau.cause_demande,
-      cause_inactivite: nouveau.cause_inactivite
-
+      cause_inactivite: nouveau.cause_inactivite,
+      motif: nouveau.motif,
+      cause_directeur: nouveau.cause_directeur,
+      dure_traitement_sce: nouveau.dure_traitement_sce,
+      dure_traitement_directeur: nouveau.dure_traitement_directeur
     }))
     .then(response => {
       commit("MODIFIER_DEMANDE_MATERIEL", response.data);

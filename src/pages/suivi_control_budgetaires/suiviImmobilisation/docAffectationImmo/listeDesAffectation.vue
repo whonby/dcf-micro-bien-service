@@ -38,7 +38,7 @@
                <div class="control-group">
                             <label class="control-label">Cause</label>
                             <div class="controls">
-                              <textarea name="" id="" cols="30" rows="2" class="span5" :readonly="verrouilleCause"></textarea>
+                              <textarea name="" id="" cols="30" rows="2" class="span5" :readonly="verrouilleCause" v-model="valideDirecteur.cause_directeur"></textarea>
                               
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
                             </div>
@@ -69,7 +69,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierModalMandatLocal(editMandat)"
+          @click.prevent="modifierDecisionDirecteur(valideDirecteur)"
           class="btn btn-primary"
           href="#"
          
@@ -101,7 +101,7 @@
       <div class="modal-body">
         <form class="form-horizontal" >
           <div class="control-group">
-                            <label class="control-label">Décision Chef de service </label>
+                            <label class="control-label">Décision Chef de service</label>
                             <div class="controls">
                               <select v-model="valideService.motif">
                                 <option value=""></option>
@@ -119,13 +119,14 @@
                             <label class="control-label">Date Decision :</label>
                             <div class="controls">
                               <input type="date" class="span"  v-model="valideService.date_motif"/>
+                              <!-- <input type="text" class="span"  :value="nombreDejourCalculeTraitementService"/> -->
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
                             </div>
                           </div>
                                <!-- <div class="control-group">
                             <label class="control-label">Nom Emetteur :</label>
                             <div class="controls">
-                              <input type="text" class="span"  v-model="editMandat.nom_emetteur"/>
+                              <input type="text" class="span"  :value:"nombreDejourCalculeTraitementService"/>
                               <input type="hidden" class="span"  :value="recuperer"/> 
                             </div>
                           </div> -->
@@ -134,7 +135,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierModalMandatLocal(editMandat)"
+          @click.prevent="modifierDecisionChefService(valideService)"
           class="btn btn-primary"
           href="#"
          
@@ -185,7 +186,7 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                         <li class="active">
-                        <a data-toggle="tab" href="#tab129">Listes des Demande    <span class="badge badge-info">{{NombreaffichePersonneEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab129">Listes des Demande    <span class="badge badge-info">{{nombreDemande}}</span></a>
                       </li>
                       <li class="">
                         
@@ -206,7 +207,7 @@
                       <li>
                         <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
                       </li> -->
-                     
+                     {{afficheAnneeAmortis}}
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
@@ -315,14 +316,14 @@
                     >{{afficheFonction(BesoinImmo.fonction_id) || 'Non renseigné'}}</td>
                       <td  style=" color:black;font-size:14px;font-weight:bold;"
                       
-                    >{{BesoinImmo.article_id || 0}}</td>
+                    >{{afficheFamille(BesoinImmo.article_id) || 0}}</td>
                     <td 
                        style="text-align: center; color:black;font-size:14px;font-weight:bold;"
                     >{{BesoinImmo.quantite || 0}}</td>
                    
                      <td 
                        style=" color:black;font-size:14px;font-weight:bold;"
-                    >{{(BesoinImmo.cause_inactivite) || 'Non renseigné'}}</td>
+                    >{{(afficheCauseInactivite(BesoinImmo.cause_inactivite)) || 'Non renseigné'}}</td>
                    
                       <td
                       style=" color:black;font-size:14px;font-weight:bold;"
@@ -365,7 +366,7 @@
                     
                      <td
                       style="text-align: center; color:black;font-size:14px;font-weight:bold;"
-                    >{{BesoinImmo.date_motif || 'Non renseigné'}}</td>
+                    >{{formaterDate(BesoinImmo.date_motif) || 'Non renseigné'}}</td>
 
                   </tr>
                  
@@ -394,6 +395,7 @@
                      <th>duré vie</th>
                      <th>Décision Directeur</th>
                      <th>Date motif</th>
+                     <th>Affectation</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -420,21 +422,21 @@
                     >{{afficheFonction(BesoinImmo.fonction_id) || 'Non renseigné'}}</td>
                       <td style=" color:black;font-size:14px;font-weight:bold;"
                       
-                    >{{BesoinImmo.article_id || 0}}</td>
+                    >{{afficheFamille(BesoinImmo.article_id) || 0}}</td>
                     <td 
                       style=" color:black;font-size:14px;font-weight:bold;"
                     >{{BesoinImmo.quantite || 0}}</td>
                    
                      <td 
                       style=" color:black;font-size:14px;font-weight:bold;"
-                    >{{(BesoinImmo.cause_inactivite) || 'Non renseigné'}}</td>
+                    >{{(afficheCauseInactivite(BesoinImmo.cause_inactivite)) || 'Non renseigné'}}</td>
                    
                       <td
                       style=" color:black;font-size:14px;font-weight:bold;"
                     >{{BesoinImmo.cause_demande || 'Non renseigné'}}</td> 
                      <td
                       style="text-align: center; color:red;font-size:14px;font-weight:bold;"
-                    >{{formaterDate(BesoinImmo.date_demande) || 'Non renseigné'}}</td> 
+                    >{{formaterDate(BesoinImmo.date_motif_directeur) || 'Non renseigné'}}</td> 
                      <td
                       style="text-align: center; color:red;font-size:14px;font-weight:bold;"
                     >{{BesoinImmo.dure_vie || 'Non renseigné'}}</td>
@@ -470,7 +472,16 @@
                     
                      <td
                       style="text-align: center; color:red;font-size:14px;font-weight:bold;"
-                    >{{BesoinImmo.date_motif_directeur || 'Non renseigné'}}</td>
+                    >{{formaterDate(BesoinImmo.date_motif_directeur) || 'Non renseigné'}}</td>
+<td >
+  <span v-if="BesoinImmo.motif == 3">
+  
+<button @click.prevent="AjouterAffectationDemande(index)"  class="btn btn-success">
+                <span class=""><i class=" icon-hand-right" title="Affectation Equipement"></i></span></button> 
+
+  </span>
+  <span v-else style="color:red;text-align:center">Affectation Desactivé</span>
+</td>
 
                   </tr>
                  
@@ -493,11 +504,14 @@
                     <th>Cause inactivite</th>
                     <th>Cause de la demande</th>
                     <th >Date demande</th>
-                     <th>duré vie</th>
-                     <th>Décision chef sce</th>
+                     <!-- <th>duré vie</th> -->
                      <th>Date motif sce</th>
-                      <th>Décision Directeur</th>
+                     <th >Duré traitement sce</th>
+                     <th>Décision chef sce</th>
                      <th>Date motif Directeur</th>
+                     <th >Duré traitement Directeur</th>
+                      <th>Décision Directeur</th>
+                     
                   </tr>
                 </thead>
                 <tbody>
@@ -525,14 +539,14 @@
                     >{{afficheFonction(BesoinImmo.fonction_id) || 'Non renseigné'}}</td>
                       <td style=" color:black;font-size:14px;font-weight:bold;"
                       
-                    >{{BesoinImmo.article_id || 0}}</td>
+                    >{{afficheFamille(BesoinImmo.article_id) || 0}}</td>
                     <td style=" text-align: center; color:black;font-size:14px;font-weight:bold;"
                      
                     >{{BesoinImmo.quantite || 0}}</td>
                    
                      <td 
                       style=" color:black;font-size:14px;font-weight:bold;"
-                    >{{(BesoinImmo.cause_inactivite) || 'Non renseigné'}}</td>
+                    >{{(afficheCauseInactivite(BesoinImmo.cause_inactivite)) || 'Non renseigné'}}</td>
                    
                       <td
                       style=" color:black;font-size:14px;font-weight:bold;"
@@ -540,9 +554,13 @@
                      <td
                       style="text-align: center; color:red;font-size:14px;font-weight:bold;"
                     >{{formaterDate(BesoinImmo.date_demande) || 'Non renseigné'}}</td> 
-                     <td
+                     <!-- <td
                       style="text-align: center; color:black;font-size:14px;font-weight:bold;"
-                    >{{BesoinImmo.dure_vie || 'Non renseigné'}}</td>
+                    >{{BesoinImmo.dure_vie || 'Non renseigné'}}</td> -->
+                     <td
+                      style="text-align: center; color:red;font-size:14px;font-weight:bold;"
+                    >{{formaterDate(BesoinImmo.date_motif) || 'Non renseigné'}}</td>
+                    <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{BesoinImmo.dure_traitement_sce || 0 }}  jours</td>
                     <td>
                         <button v-if="BesoinImmo.motif_chef_sce == 1"  class="btn  btn-success"  >                        
                      
@@ -573,26 +591,29 @@
                       </button>
                     </td>
                     
-                     <td
+                    
+
+ <td
                       style="text-align: center; color:red;font-size:14px;font-weight:bold;"
-                    >{{BesoinImmo.date_motif || 'Non renseigné'}}</td>
-
-
+                    >{{formaterDate(BesoinImmo.date_motif_directeur) || 'Non renseigné'}}</td>
+                    <td
+                      style="text-align: center; color:red;font-size:14px;font-weight:bold;"
+                    >{{BesoinImmo.dure_traitement_directeur || 0 }}  Jours</td>
 
 <td>
-                        <button v-if="BesoinImmo.motif_directeur == 1"  class="btn  btn-success"  >                        
+                        <button v-if="BesoinImmo.motif_directeur == 3"  class="btn  btn-success"  >                        
                      
                       <span    >Visé</span>
                       
                       </button>
-                       <button v-else-if="BesoinImmo.motif_directeur == 2" class="btn  btn-warning"  >                        
+                       <button v-else-if="BesoinImmo.motif_directeur == 4" class="btn  btn-warning"  >                        
                      
                       
                        <span  >Différé</span>
                       
                     
                       </button>
-                        <button v-else-if="BesoinImmo.motif_directeur == 4" class="btn  btn-danger"  >                        
+                        <button v-else-if="BesoinImmo.motif_directeur ==54" class="btn  btn-danger"  >                        
                      
                       
                        <span  >Réjeté</span>
@@ -609,9 +630,7 @@
                       </button>
                     </td>
                     
-                     <td
-                      style="text-align: center; color:red;font-size:14px;font-weight:bold;"
-                    >{{BesoinImmo.date_motif_directeur || 'Non renseigné'}}</td>
+                    
                   </tr>
                  
                  
@@ -1366,7 +1385,8 @@ date_motif:""
       },
       valideDirecteur:{
 motif:"",
-date_motif_directeur:""
+date_motif_directeur:"",
+cause_directeur:""
       },
       formData2:{
         famillearticle_id :"",
@@ -1442,6 +1462,88 @@ date_motif_directeur:""
 ...mapGetters("personnelUA", ["acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
 
 
+
+afficheAnneeAmortis() {
+      const val = parseInt(this.valideDirecteur.annee_budgetaire) + parseInt(this.valideDirecteur.dure_vie);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+
+
+
+afficheValeurOrigine() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.immobilisations.find(qtreel => qtreel.famillearticle_id == id);
+
+      if (qtereel) {
+        return qtereel.valeurorigine;
+      }
+      return 0
+        }
+      };
+    },
+
+
+nombreDejourCalculeTraitementService(){
+                let vM=this;
+    const acteAffet = vM.valideService
+    if(acteAffet.date_demande == acteAffet.date_motif &&  acteAffet.date_motif !=="" && acteAffet.date_demande !=="") return 1
+     if(acteAffet.date_motif =="" && acteAffet.date_demande =="") return null
+
+       var dateF = new Date(acteAffet.date_motif).getTime()
+        var dateO = new Date(acteAffet.date_demande).getTime()
+           var resultat = dateF - dateO
+
+             var diffJour =  resultat / (1000 * 3600 * 24)
+
+               if(isNaN(diffJour)) return null
+
+               if(parseFloat(diffJour) < 0 ) return "durée invalide"
+    vM.valideService.duree=diffJour
+                  return  diffJour;
+   
+},
+
+
+
+nombreDejourCalculeTraitementDirecteur(){
+                let vM=this;
+    const acteAffet = vM.valideDirecteur
+    if(acteAffet.date_motif == acteAffet.date_motif_directeur &&  acteAffet.date_motif_directeur !=="" && acteAffet.date_motif !=="") return 1
+     if(acteAffet.date_motif_directeur =="" && acteAffet.date_motif =="") return null
+
+       var dateF = new Date(acteAffet.date_motif_directeur).getTime()
+        var dateO = new Date(acteAffet.date_motif).getTime()
+           var resultat = dateF - dateO
+
+             var diffJour =  resultat / (1000 * 3600 * 24)
+
+               if(isNaN(diffJour)) return null
+
+               if(parseFloat(diffJour) < 0 ) return "durée invalide"
+    vM.valideDirecteur.duree=diffJour
+                  return  diffJour;
+   
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
 verrouilleCause(){
 
     return this.valideDirecteur.motif == 3;
@@ -1467,7 +1569,11 @@ nombreValidationEnAttenteChefService() {
           return this.afficheValidationChefService.length;
        
     },
-    
+    nombreDemande() {
+      
+          return this.demandeMateriel.length;
+       
+    },
 nombreValidationEnAttenteDirecteur() {
       
           return this.afficheValidationDirecteur.length;
@@ -1867,7 +1973,18 @@ afficheFonction() {
         }
       };
     },
+afficheCauseInactivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.causeInactivite.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
 // identifierDmdService(){
 // if(this.formData.service_id != 0){
 //   return 2
@@ -2146,6 +2263,7 @@ fonctionDynamiques() {
        "modifierImmobilisation",
        "modifierStock",
        "ajouterHistotorisqueAffection",
+       "modifierDemandeMateriel"
       
      
     ]),
@@ -2155,6 +2273,79 @@ fonctionDynamiques() {
      
     ]),
   
+
+
+  AjouterAffectationDemande(index){
+
+if ( confirm( "Voulez-vous attribuer l'equipement?") ) {
+    this.valideDirecteur = this.afficheValidationDirecteur[index];
+  
+   var nouveauObjetDemande = {
+        ...this.valideDirecteur,
+ acteur_id:this.valideDirecteur.acteur_id,
+ ua_id:this.valideDirecteur.uniteadmin_id,
+ unitezone_id:this.valideDirecteur.uniteZone_id,
+ fonction_id:this.valideDirecteur.fonction_id,
+ article_id:this.valideDirecteur.article_id,
+ qte:this.valideDirecteur.quantite,
+ dure_vie:this.valideDirecteur.dure_vie,
+ 
+ matricule_auteur:this.afficherActeurDepenseMatricule(this.valideDirecteur.acteur_id),
+ annee:this.valideDirecteur.annee_budgetaire,
+annee_amortissement:this.this.afficheAnneeAmortis,
+ valeurorigine:this.afficheValeurOrigine(this.valideDirecteur.article_id),
+ date_mise_service:this.valideDirecteur.date_motif_directeur,
+ 
+};
+   
+      let dmdObjet = this.demandeMateriel.find(marche=>marche.id==this.valideDirecteur.id)
+         dmdObjet.motif = 10
+
+this.ajouterHistotorisqueAffection(nouveauObjetDemande);
+this.modifierDemandeMateriel(dmdObjet)
+
+} else {
+    // Code à éxécuter si l'utilisateur clique sur "Annuler" 
+}
+
+
+
+
+
+
+},
+
+
+
+
+
+
+modifierDecisionChefService(){
+
+  var objetService = {
+  ...this.valideService,
+  motif_chef_sce:this.valideService.motif,
+  dure_traitement_sce:this.nombreDejourCalculeTraitementService
+ 
+}
+this.modifierDemandeMateriel(objetService)
+this.$("#exampleModalValidationChefService").modal('hide');
+
+},
+
+modifierDecisionDirecteur(){
+
+var objetDirecteur = {
+  ...this.valideDirecteur,
+  motif_directeur:this.valideDirecteur.motif,
+  dure_traitement_directeur:this.nombreDejourCalculeTraitementDirecteur
+ 
+}
+this.modifierDemandeMateriel(objetDirecteur)
+this.$("#exampleModalValidationdirecteur").modal('hide');
+},
+
+
 
 afficherModalPourValidationChefService(index) {
       this.$("#exampleModalValidationChefService").modal({

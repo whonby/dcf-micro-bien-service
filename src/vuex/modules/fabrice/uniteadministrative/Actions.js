@@ -858,7 +858,7 @@ export function ajouterFonction({ commit, dispatch }, nouveau) {
       f_ua_id: nouveau.f_ua_id,
       service_id: nouveau.service_id,
       fonction_id: nouveau.fonction_id,
-      direction_id: nouveau.direction_id
+      // direction_id: nouveau.direction_id
 
 
     }))
@@ -886,7 +886,7 @@ export function modifierFonction({ commit, dispatch }, nouveau) {
       f_ua_id: nouveau.f_ua_id,
       service_id: nouveau.service_id,
       fonction_id: nouveau.fonction_id,
-      direction_id: nouveau.direction_id
+      // direction_id: nouveau.direction_id
     }))
     .then(response => {
       commit("MODIFIER_FONCTION", response.data);
