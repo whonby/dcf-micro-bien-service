@@ -3,8 +3,7 @@ import { asyncLoading } from 'vuejs-loading-plugin'
 
 var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
-
-
+modifierCojo
 
 // action for print all to prestation
 

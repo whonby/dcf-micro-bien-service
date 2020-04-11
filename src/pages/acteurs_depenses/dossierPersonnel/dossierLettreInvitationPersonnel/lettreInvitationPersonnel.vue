@@ -483,7 +483,10 @@ typeProcedureLibelle() {
 
 
             ajouterLettreInv(){
-                const formData = new FormData();
+                if(confirm("veillez selectionner un fichier svp sinon la validation ne sera executé merci !")){
+
+
+                 const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
                 formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
                 formData.append('destination', this.formLettre.destination);
@@ -507,35 +510,20 @@ typeProcedureLibelle() {
                     destination:"",
                     date_cojo:""
                 }
+                }else{
+                    return "possibilité de selectionner un veiller"
+                }
+                
             },
 
 
-            //  modfications(){
-            //     const formData = new FormData();
-                
-            //     formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
-            //     formData.append('destination', this.edite_Lettre_invitation.destination);
-            //     formData.append('ref_lettre', this.edite_Lettre_invitation.ref_lettre);
-            //     formData.append('date_lettre', this.edite_Lettre_invitation.date_lettre);
-            //     formData.append('date_cojo', this.edite_Lettre_invitation.date_cojo);
-            //     formData.append('objet_lettre', this.edite_Lettre_invitation.objet_lettre);
-            //     formData.append('id',thi.edite_Lettre_invitation.id)
-            //      if ( this.selectedFile!==""){
-            //         formData.append('fichier', this.selectedFile, this.selectedFile.name);
-            //     }
-            //     let config = {
-            //         header : {
-            //             'Content-Type' : 'multipart/form-data'
-            //         }
-            //     }
-            //      this.modifierAppelOffre(formData,config)
-            //     this.$('#modifierActeEF').modal('hide');
-            // },
+            
            
 
            
  modfications(){
-                //console.log(this.edite_demande_dao)
+     if(confirm("veiller selectionner un fichier svp sinon la modifier ne sera paqs effectué merci!")){
+       //console.log(this.edite_demande_dao)
                 const formData = new FormData();
                formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
                 formData.append('destination', this.edite_Lettre_invitation.destination);
@@ -559,6 +547,10 @@ typeProcedureLibelle() {
                  this.modifierLettreInvitation(formData,config)
                   this.getLettreInvitation()
                this.$('#modifierActeEF').modal('hide');
+     }else{
+         return " merci d'avoir selectionner un ficier mercie!"
+     }
+              
             },
 
 

@@ -383,8 +383,8 @@ afficheMarcheTerminer
                         <tr class="odd gradeX" v-for="(marche, index) in 
                 listeContratEnContratualisation"
                  :key="marche.id">
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.id || 'Non renseigné'}}</td>
+                  <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.id || 'Non renseigné'}}</td> -->
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -1561,7 +1561,7 @@ export default {
      ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45',
      'getActeEffetFinancierPersonnaliserContrat','acteEffetFinanciers','montantPlanifier',
      'montantContratualisation','afficheContratualisation','affichePlanifier','nombremarchesExecute',
-     'afficheMarchePlanifier','afficheMarcheContratualisation','AfficheMarcheAttribue',
+     
      'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
      "montantMarche", "printMarcheNonAttribue","procedurePassations",
      "typeTypeProcedures", "typeActeEffetFinanciers", "text_juridiques"]),
