@@ -98,8 +98,8 @@
                         <div class="controls">
                             <input
                                     type="text"
-                                    v-model="formBailleur.num_courrier"
-                                    class="span"
+                                    v-model="formBailleur.numero_courie"
+                                  class="span"
                                     placeholder="Saisir le numero du courrier"
                             />
                         </div>
@@ -180,7 +180,7 @@
                         <div class="controls">
                             <input
                                     type="text"
-                                    v-model="edit_bailleur.num_courrier"
+                                    v-model="edit_bailleur.numero_courie"
                                     class="span"
                                     placeholder="Saisir le numero du courrier"
                             />
@@ -485,7 +485,9 @@ affichierAppelOffreid() {
             },
 
               ajouterDemandeAnoLocal(){
-                const formData = new FormData();
+
+                  if(confirm("chargement du fichier neccessaire ok mercie")){
+                      const formData = new FormData();
                 formData.append('fichier', this.selectedFileDemandeAno, this.selectedFileDemandeAno.name);
               //  formData.append('proce_verbal_jugement_offre_id', this.formBailleur.proce_verbal_jugement_offre_id);
                 formData.append('date_ano_dmp', this.formBailleur.date_ano_dmp);
@@ -508,10 +510,14 @@ affichierAppelOffreid() {
                     
                    // proce_verbal_jugement_offre_id:""
                 }
+                  }else return "chargement du fichier neccessaire"
+              
             },
 
                editAnoBailleur(){
-                //console.log(this.edit_bailleur)
+                   if(confirm("veiller charger le fichier svp")){
+                   
+                   //console.log(this.edit_bailleur)
                 const formData = new FormData();
                // formData.append('proce_verbal_jugement_offre_id', this.edit_bailleur.proce_verbal_jugement_offre_id);
                 formData.append('date_ano_dmp', this.edit_bailleur.date_ano_dmp);
@@ -537,6 +543,9 @@ affichierAppelOffreid() {
                 this.getAnalyseDMP()
                 this.getAnoDMPBailleur()
                 this.$('#modifDemandeAno').modal('hide');
+                
+                   }else return "charger le fichier "
+                
             },
 
             formaterDate(date){

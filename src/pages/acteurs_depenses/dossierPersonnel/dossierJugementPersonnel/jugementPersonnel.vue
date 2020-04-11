@@ -239,7 +239,7 @@
                         <div class="controls">
                           <select v-model="edite_analyse_dossier.candidat_personnel_id" class="span">
                                 <option v-for="varText in dossierPersonnels" :key="varText.id"
-                                        :value="varText.candidat_personnel_id">{{varText.nom_candidat}} {{varText.prenom_candidat}}</option>
+                                        :value="varText.id">{{varText.nom_candidat}} {{varText.prenom_candidat}}</option>
                             </select>
                         
                         </div>

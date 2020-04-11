@@ -539,6 +539,7 @@
                                  <li class=""><a data-toggle="tab" href="#tab020">ANO Bailleur sur DAO</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab0145" title="publication des offres">Publication</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab0001" title="lettre d'invitation">Lettre I</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab04" title="">mandaté</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab0045" title="reception des offres">Reception</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab02">Reception de l'offre</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
@@ -614,6 +615,16 @@
                       <invitationCf :macheid="detail_marche.id"></invitationCf>
                          </div>
 
+                         <div id="tab04" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <h4>Publication de l'offre</h4> -->
+
+                      <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
+                         </div>
+
 
 
                          <div id="tab0045" class="tab-pane">
@@ -623,7 +634,7 @@
                                 
                                     <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div>
                                
-                                        <component-etat :macheid="detail_marche.id"></component-etat>
+                                        <!-- <component-etat :macheid="detail_marche.id"></component-etat> -->
                                         
                                
                                 <h4>Liste des receptions de cotation</h4>
@@ -789,7 +800,7 @@
     import { mapGetters, mapActions } from "vuex";
     //import moment from 'moment';
     import componentCotation from '../dossierDetailMarchePs/dossierComponentPs/componentCotation';
-     import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
+     //import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
      import componentOuverture from '../dossierDetailMarchePs/dossierComponentOuverture/componentOuverture';  
    import componentActe from '../dossierDetailMarchePs/dossierComponentActe/componentActe' ;
     import publicationOffre from '../DossierPso/publicationOffre/publicationOffre';
@@ -836,7 +847,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
         components:{
 
             componentCotation,
-            componentEtat,
+            //componentEtat,
             componentOuverture,
             componentActe,
             publicationOffre,

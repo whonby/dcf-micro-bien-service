@@ -68,6 +68,7 @@
                                  <li class=""><a data-toggle="tab" href="#tab020">ANO Bailleur sur DAO</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab0145" title="publication des offres">Publication</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab0001" title="lettre d'invitation">Lettre I</a></li>
+                                  <li class=""><a data-toggle="tab" href="#tab0046" title="">Mandaté</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab0045" title="reception des offres">Reception</a></li>
                                
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
@@ -154,6 +155,16 @@
                                     <a href="#ajouterLettreInvitation" data-toggle="modal" class="btn btn-warning" align="rigth">Ajouter</a></div>
 
                       <invitationCf :macheid="detail_marche.id"></invitationCf>
+                         </div>
+
+                         <div id="tab0046" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                    <a href="#ajouterMandate" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter</a></div>
+                                <!-- <h4>Publication de l'offre</h4> -->
+
+                      <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
                          </div>
 
 
@@ -345,6 +356,8 @@
       import transmission from '../dossierDetailMarcheAOI_AON/dossierTransmission/transmission';
      import componentTransmissionDao from '../dossierDetailMarcheAOI_AON/dossierTransmission/componentTransmissionD';
       import componentAvis from '../dossierDetailMarcheAOI_AON/dossierDemandeAno/componentAvis';
+       import mandateBs from '../DossierPso/mandaté/mandateBs';
+
 ///////////////////////////////////////////////
       // import composantPv1 from '../dossierDetailMarcheAOI_AON/dossierPV/composantPv1';
      
@@ -372,6 +385,7 @@
            componentAnalyse,
        
          componentPv,
+         mandateBs,
         // composantPv1,
           ///////
          componentTransmissionDao,

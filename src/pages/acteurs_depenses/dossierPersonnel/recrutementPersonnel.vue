@@ -1561,7 +1561,7 @@ export default {
      ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45',
      'getActeEffetFinancierPersonnaliserContrat','acteEffetFinanciers','montantPlanifier',
      'montantContratualisation','afficheContratualisation','affichePlanifier','nombremarchesExecute',
-     'afficheMarchePlanifier','afficheMarcheContratualisation','AfficheMarcheAttribue',
+     
      'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
      "montantMarche", "printMarcheNonAttribue","procedurePassations",
      "typeTypeProcedures", "typeActeEffetFinanciers", "text_juridiques"]),

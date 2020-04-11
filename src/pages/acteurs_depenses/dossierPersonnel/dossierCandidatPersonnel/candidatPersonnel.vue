@@ -463,7 +463,8 @@ affichierAppelOffreid() {
 
 
           ajouterDossierC(){
-                const formData = new FormData();
+              if(confirm("veiller charger le fichier svp")){
+                 const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
                 formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
                 formData.append('nom_candidat', this.formDossier.nom_candidat);
@@ -486,6 +487,10 @@ affichierAppelOffreid() {
                     prenom_candidat:"",
                     numero_dossier:""
                 }
+              }else{
+                  return "fichier uploader neccessaire !"
+              }
+               
             },    
 
            
@@ -497,7 +502,9 @@ affichierAppelOffreid() {
 
            
  modificationsDossierCandidatPersonnel(){
-                //console.log(this.edite_demande_dao)
+     if( confirm("veillez uploader le fichier sinon la modification ne sera valider mercie")){
+
+   //console.log(this.edite_demande_dao)
                 const formData = new FormData();
                //formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
                  formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
@@ -519,6 +526,10 @@ affichierAppelOffreid() {
                 }
                  this.modifierDossierCandidat(formData,config)
                this.$('#modificationModalC').modal('hide');
+     }else{
+         return "erreur de validation de la modification "
+     }
+             
             },
 
 

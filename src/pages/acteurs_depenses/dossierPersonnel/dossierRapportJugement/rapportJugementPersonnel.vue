@@ -127,7 +127,10 @@
 
                           </tr>
                           </tbody>
+                          
                       </table>
+                      <h4> super, le classement effectué avec success
+                               donc nous  passerons au recrutement ,en prenant le premier mercie !</h4>
                   </div>
                   <div class="modal-footer">
 
@@ -145,27 +148,31 @@
             </div>
             <div class="modal-body">
                 <div class="widget-box">
-                    <form action="#" method="get" >
-    
-                        <div class="control-group">
-              <label class="control-label">Date:</label>
-              <div class="controls">
-                <input type="date"   v-model="editRapport.date_rapport_jugement"
-                 />
-                <input type="hidden" v-model="editRapport.difference_personnel_bienService"/>
-              </div>
-            </div>
-                   <div class="control-group">
+
+
+          <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">Date du rapport de jugement</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="editRapport.date_rapport_jugement"
+                                    class="span"
+                                       
+                            />
+                              <input type="hidden" v-model="editRapport.difference_personnel_bienService"/>
+                        </div>
+                    </div>
+
+     <div class="control-group">
               <label class="control-label">Fichier joint:</label>
               <div class="controls">
-                <input type="file"   @change="OnchangeFichier" />
+                <input type="file"  class="span" @change="OnchangeFichier" />
               </div>
             </div>
-                     
-                     
-                
+                </form>
 
-                    </form>
+
                 </div>
             </div>
             <div class="modal-footer">
@@ -302,6 +309,8 @@ export default {
          
           
            ajouterRapportJugementLocal(){
+
+               if(confirm("veiller charger le fichier svp mercie")){
                 const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
                  formData.append('date_rapport_jugement', this.formJugement.date_rapport_jugement);
@@ -317,11 +326,14 @@ export default {
                  difference_personnel_bienService:"personnel",
                  date_rapport_jugement:""
                }
+               }else return "chargement du fichier neccessaire ";
+                
            },
 
 
            modifierRapportOuverture(){
-               const formData = new FormData();
+               if(confirm("chargement du fichier neccessaire ")){
+                 const formData = new FormData();
                  formData.append('date_rapport_jugement', this.editRapport.date_rapport_jugement);
                  formData.append('marche_id', this.macheid);
                  formData.append('difference_personnel_bienService', this.difference_personnel_bienService)
@@ -339,6 +351,8 @@ export default {
               
                this.modifierRapportJugement(formData,config)
                this.$('#modifierRapportJugements').modal('hide');
+               } else return "chargement du fichier neccessaire";
+              
            },
            formaterDate(date){
                return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");

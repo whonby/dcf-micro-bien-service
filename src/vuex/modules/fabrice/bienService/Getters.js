@@ -1,4 +1,5 @@
-listeJugementPersonnel
+ 
+ export const cojo_personnels = state => state.cojo_personnels 
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays
@@ -410,13 +411,13 @@ getters.acteEffetFinanciers.map(element => {
     // )
 
 
-    export const executionDuMarche = state => 
-    state.acteEffetFinanciers.filter(
-        varObjet => varObjet.difference_personnel_bienService =="bienService"
-    )
+    // export const executionDuMarche = state => 
+    // state.acteEffetFinanciers.filter(
+    //     varObjet => varObjet.difference_personnel_bienService =="bienService"
+    // )
 
 export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, rootGetters) =>
-getters.executionDuMarche.map(element => {
+getters.acteEffetFinanciers.map(element => {
         if (element.entreprise_id !== null && element.marche_id !== null) {
             element = {
                 ...element,
@@ -1024,4 +1025,4 @@ export const gettersTest = (state, getters, rootState, rootGetters) =>
         }
         return element;
     })
-    getActeEffetFinancierPersonnaliserContrat
+    

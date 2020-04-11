@@ -1,7 +1,5 @@
 // get all document
-
-
-
+MODIFIER_OUVERTURE
 
 export const GET_ALL_DOCUMENT = (state, tableau_document) =>{
     state.documentMedias = tableau_document
@@ -187,19 +185,19 @@ export const SUPPRIMER_COTATION = (state, id)=> {
 
 // get all ouverture
 export const GET_ALL_OUVERTURE = (state, tableau_ouverture) =>{
-    state.gettersOuvertures = tableau_ouverture
+    state.cojo_personnel = tableau_ouverture
 }
 
 
 // add * ouverture
 
 export const AJOUTER_OUVERTURE = (state, elementAjouter) => {
-    state.gettersOuvertures.unshift(elementAjouter)
+    state.cojo_personnels.unshift(elementAjouter)
 }
 
 // update all ouverture
 export const MODIFIER_OUVERTURE = (state, elementModif)=>{
-    state.gettersOuvertures = state.gettersOuvertures.map(response => {
+    state.cojo_personnels = state.cojo_personnels.map(response => {
         if(response.id == elementModif.id){
             response = {...elementModif}
         }
@@ -213,7 +211,7 @@ export const MODIFIER_OUVERTURE = (state, elementModif)=>{
 // delete all ouverture
 
 export const SUPPRIMER_OUVERTURE = (state, id)=> {
-    state.gettersOuvertures = state.gettersOuvertures.filter(marche => marche.id !=id)
+    state.cojo_personnels = state.cojo_personnels.filter(marche => marche.id !=id)
 }
 
 
@@ -223,7 +221,7 @@ export const SUPPRIMER_OUVERTURE = (state, id)=> {
 
 // get all 
 // export const GET_ALL_ETA = (state, tableau_ouverture) =>{
-//     state.gettersOuvertures = tableau_ouverture
+//     state.cojos = tableau_ouverture
 // }
 
 
