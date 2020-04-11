@@ -221,7 +221,7 @@
                 <div id="tab4110" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterPv" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>
                     </div>
 
 
@@ -362,7 +362,7 @@
                  <div id="tab06125" class="tab-pane">
                  <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterPv" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>
                     </div>
 
 
@@ -504,7 +504,7 @@
                  <div id="tab0612" class="tab-pane">
                  <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterPv" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>
                     </div>
 
 
@@ -535,20 +535,22 @@
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
                                    <li class="active"><a data-toggle="tab" href="#tab001" title="tansmission du DAO a la DMP">Transmission</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab010">ANO DMP sur DAO</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab020">ANO Bailleur sur DAO</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab010">ANO DMP DAO</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab020">ANO Bailleur DAO</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab0145" title="publication des offres">Publication</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab0001" title="lettre d'invitation">Lettre I</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab04" title="">mandaté</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab0045" title="reception des offres">Reception</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab02">Reception de l'offre</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
-                                <!-- <li class=""><a data-toggle="tab" href="#tab5">Rapport d'ouverture</a></li> -->
+                                
+                                <li class=""><a data-toggle="tab" href="#tab5">Dossier Candidat</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab45" title="rapport ouverture">Rapport O</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab6" title="jugement des offres">Jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab7" title="rapport d'évaluation combiné">Rapport</a></li>
 
-                                 <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP"> D.ANO</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab028" title="ANO/DMP attribution">A.ANO</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP">demande</a></li>
+                                <!-- <li class=""><a data-toggle="tab" href="#tab028" title="ANO/DMP attribution">A.ANO</a></li> -->
                                       
                                       <li class=""><a data-toggle="tab" href="#tab28" title="demande ANO Bailleur"> D.Bailleur </a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab0008" title="ANO bailleur attribution">A.Bailleur </a></li> -->
@@ -654,6 +656,31 @@
                   <component-ouverture :macheid="detail_marche.id"></component-ouverture>
                   <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>
                 </div>
+                      
+
+                 <div id="tab5" class="tab-pane">  
+                 <div align="right">
+                    <div class="widget-content">
+                        <a href="" @click="isFormulaireDossierCand" v-if="isButtunAddDossierCandidat" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+
+
+                </div>
+               
+                   <dossierCandidat :macheid="detail_marche.id"></dossierCandidat>
+                </div>
+
+                  <div id="tab45" class="tab-pane">
+               <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                    </div>
+
+
+                </div>
+                <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
+
+                </div>
 
 
                    <div id="tab6" class="tab-pane">
@@ -671,7 +698,7 @@
                   <div id="tab7" class="tab-pane">
                <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterPv" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>
                     </div>
 
 
@@ -812,7 +839,8 @@ import dossierCandidat from '../DossierPso/dossierCandidat/dossierCandidat'
     import componentOuvertureMembre from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
     import componentAnalyse from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
      import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
-  
+import rapportOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuverture';
+     
 //   import componentCotation from '../dossierDetailMarchePs/dossierComponentPs/componentCotation';
 //      import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
 //       import componentOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
@@ -851,6 +879,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
             componentOuverture,
             componentActe,
             publicationOffre,
+            rapportOuverture,
 addLot,
 invitationCf,
 mandateBs,

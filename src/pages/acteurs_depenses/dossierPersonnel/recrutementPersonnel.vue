@@ -383,8 +383,8 @@ afficheMarcheTerminer
                         <tr class="odd gradeX" v-for="(marche, index) in 
                 listeContratEnContratualisation"
                  :key="marche.id">
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.id || 'Non renseigné'}}</td>
+                  <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{marche.id || 'Non renseigné'}}</td> -->
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)">

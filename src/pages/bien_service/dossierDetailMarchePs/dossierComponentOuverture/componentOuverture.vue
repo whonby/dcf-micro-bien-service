@@ -422,7 +422,7 @@ affichierAppelOffreid() {
             backdrop: 'static',
             keyboard: false
         });
-        this.edite_cojo = this.listeCojo(this.macheid)[index];
+        this.edite_cojo = this.listeCojo(this.macheid.id)[index];
 
         //this.edite_lot.appel_offre_id=this.edite_lot. modifierDemandeAno
     },

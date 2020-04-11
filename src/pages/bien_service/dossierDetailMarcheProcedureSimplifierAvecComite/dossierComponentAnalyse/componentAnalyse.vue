@@ -9,7 +9,7 @@
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
-                        <th>Ref offre</th>
+                        <!-- <th>Ref offre</th> -->
                         <!-- <th>Dossier candidat </th> -->
                         <th>Date Analyse </th>
                         <th>Rang d'analyse</th>
@@ -24,11 +24,11 @@
                     <tbody>
                     <tr class="odd gradeX" v-for="(appelOffre, index) in listeAnalyseDossier(macheid)"
                         :key="appelOffre.id">
-                        <td @click="afficheAnnalyseDossier(index)">
+                        <!-- <td @click="afficheAnnalyseDossier(index)">
 
-                            {{appelOffre.affichierReferenceAppelOffre|| 'Non renseigné'}}</td>
+                            {{affichierReferenceOffre(appelOffre.appel_offre_id)|| 'Non renseigné'}}</td> -->
 
-                          
+
                         <!-- <td @click="afficheAnnalyseDossier(index)">
                             {{appelOffre.dossier_candidature.nom_cand || 'Non renseigné'}}</td> -->
                         <td @click="afficheAnnalyseDossier(index)">
@@ -357,7 +357,7 @@ export default {
             return macheid => {
                 if (macheid != "") {
 
-                    return this.getterAnalyseDossiers.filter(idmarche => idmarche.marche_id == macheid)
+                    return this.getterAnalyseDossiers.filter(idmarche => idmarche.marche_id == macheid).sort((a,b)=>(a.note_analyse>b.note_analyse)? 1:-1)
                 }
             }
         },
@@ -410,6 +410,18 @@ export default {
 //         }
 //       };
 //     },
+ affichierReferenceOffre() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.appelOffres.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ref_appel;
+      }
+      return 0
+        }
+      };
+    },
 
 
 

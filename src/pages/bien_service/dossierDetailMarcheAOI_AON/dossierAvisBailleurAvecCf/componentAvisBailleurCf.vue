@@ -15,9 +15,10 @@
                         <th>Action</th>
                     </tr>
                     </thead>
+                    
                     <tbody>
 
-                    <tr class="odd gradeX" v-for="anoBailleur in listeAnoDMPBailleur(macheid.id)"
+                    <tr class="odd gradeX" v-for="anoBailleur in listeAnoDMPBailleur(macheid)"
                         :key="anoBailleur.id" >
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             {{anoBailleur.numero_courie || 'Non renseigné'}}</td>
@@ -116,6 +117,7 @@
                                     class="span"
                                     placeholder="Saisir le libelle_type"
                             />
+                           <input type="hidden" v-model="formBailleur.difference_personnel_bienService"/> 
                         </div>
                     </div>
 
@@ -197,6 +199,7 @@
                                     class="span"
                                     placeholder="Saisir le libelle_type"
                             />
+                            <input type="hidden" v-model="edit_bailleur.difference_personnel_bienService"/> 
                         </div>
                     </div>
                     <div class="control-group">
@@ -320,7 +323,8 @@ formBailleur:{
                     numero_courie:"",
                    // proce_verbal_jugement_offre_id:"",
                     appel_offre_id:"",
-                    plan_motif_decision_id:""
+                    plan_motif_decision_id:"",
+                    difference_personnel_bienService:"bienservice"
 },
 
 edit_bailleur:"",
@@ -446,9 +450,7 @@ affichierAppelOffreid() {
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.edit_bailleur=this.getterAnoDMPBailleur.find(
-                    demandeAno => demandeAno.id == index
-                )
+                this.edit_bailleur=this.listeAnoDMPBailleur(this.macheid)[index]
                 //console.log(this.edit_bailleur)
             },
 
@@ -483,11 +485,13 @@ affichierAppelOffreid() {
             },
 
               ajouterDemandeAnoLocal(){
-                const formData = new FormData();
+                  if(confirm("veiller charger le fichier")){
+                    const formData = new FormData();
                 formData.append('fichier', this.selectedFileDemandeAno, this.selectedFileDemandeAno.name);
               //  formData.append('proce_verbal_jugement_offre_id', this.formBailleur.proce_verbal_jugement_offre_id);
                 formData.append('date_ano_dmp', this.formBailleur.date_ano_dmp);
                 formData.append('marche_id', this.macheid);
+                formData.append('difference_personnel_bienService', this.formBailleur.difference_personnel_bienService);
                 formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
                 formData.append('numero_courie', this.formBailleur.numero_courie);
                 
@@ -505,10 +509,13 @@ affichierAppelOffreid() {
                     
                    // proce_verbal_jugement_offre_id:""
                 }
+                  }else return "fichier neccessaire"
+                
             },
 
                editAnoBailleur(){
-                //console.log(this.edit_bailleur)
+                   if(confirm("veiller charger le fichier")){
+                      //console.log(this.edit_bailleur)
                 const formData = new FormData();
                // formData.append('proce_verbal_jugement_offre_id', this.edit_bailleur.proce_verbal_jugement_offre_id);
                 formData.append('date_ano_dmp', this.edit_bailleur.date_ano_dmp);
@@ -516,6 +523,7 @@ affichierAppelOffreid() {
                 formData.append('numero_courie', this.edit_bailleur.numero_courie);
                 formData.append('marche_id',this.macheid);
                 formData.append('id', this.edit_bailleur.id);
+                 formData.append('difference_personnel_bienService', this.edit_bailleur.difference_personnel_bienService);
                  formData.append('plan_motif_decision_id',this.edit_bailleur.plan_motif_decision_id);
                 formData.append('observations_bailleur',this.edit_bailleur.	observations_bailleur)
                 formData.append('date_avis',this.edit_bailleur.date_avis);
@@ -533,6 +541,9 @@ affichierAppelOffreid() {
                 this.getAnalyseDMP()
                 this.getAnoDMPBailleur()
                 this.$('#modifDemandeAno').modal('hide');
+                
+                   }else return "uploader le fichier"
+               
             },
 
             formaterDate(date){
