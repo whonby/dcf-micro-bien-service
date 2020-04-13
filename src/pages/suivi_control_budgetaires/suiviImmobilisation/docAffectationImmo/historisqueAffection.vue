@@ -55,7 +55,7 @@ afficheNombrePersonneNonEquipe
                       <th>Article</th>
                     <th>Quantité</th>
                     <th>Duree de vie</th>
-                    <th>Etat Immobilisation</th>
+                    <!-- <th>Etat Immobilisation</th> -->
                     <th>Date mise en service</th>
                       <th>Montant</th>
                      <!-- <th>Année de l'amortissement</th> -->
@@ -97,15 +97,15 @@ afficheNombrePersonneNonEquipe
                       <td 
                       
                     >{{BesoinImmo.dure_vie || 'Non renseigné'}}</td>
-                      <td 
+                      <!-- <td 
                       
-                    >{{afficheEtatImmobilisation(BesoinImmo.etatimmo_id) || 'Non renseigné'}}</td>
+                    >{{afficheEtatImmobilisation(BesoinImmo.etatimmo_id) || 'Non renseigné'}}</td> -->
                  
                  <!-- <td>{{BesoinImmo.annee_amortissement || 'Non renseigné'}}</td> -->
                  
                    <td>{{formaterDate(BesoinImmo.date_mise_service) || 'Non renseigné'}}</td>
                     <td>{{formatageSomme(BesoinImmo.valeurorigine) || 'Non renseigné'}}</td>
-                     <td>
+                     <td colspan="2">
                           <button   class="btn btn-info " title="" @click="fonctionAjouterDemande(index)">
                 <span class=""><i class="icon-pencil"></i></span></button>
                     
@@ -140,7 +140,7 @@ afficheNombrePersonneNonEquipe
                  <tr>
                      <!-- <th>Type UA</th> -->
                    <th>Année de l'affectation</th>
-                    <th>Matricule {{nombreJourTraitementCalucle}}</th>
+                    <th>Matricule</th>
                     <th>Nom & Prénoms</th>
                     
                      <th>Unite administrative</th>

@@ -31,7 +31,7 @@ afficherBanqueDynamique
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{formatageSomme(parseFloat(effetFinancier.montant_act ))|| 'Non renseigné'}}</td>
                               <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.type_acte_effet.libelle || 'Non renseigné'}}</td>
+                            {{affichierLibelleTypeActeFinancier(effetFinancier.type_act_effet_id) || 'Non renseigné'}}</td>
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.marche.objet || 'Non renseigné'}}</td>
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
@@ -70,7 +70,7 @@ afficherBanqueDynamique
                         <label class="control-label">Type acte effet financier.</label>
                         <div class="controls">
                           <select v-model="formEffetFinancier.type_act_effet_id" class="span">
-                                <option v-for="varText in typeActeEffetFinanciers" :key="varText.id"
+                                <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
                             </select>
                         
@@ -363,10 +363,10 @@ afficherBanqueDynamique
                             <div class="control-group">
                                 <label class="control-label">Type acte effet financier.</label>
                                 <div class="controls">
-                                    <select v-model="editActeEffetFinancier.type_act_effet_id" class="span">
-                                        <option v-for="varText in typeActeEffetFinanciers" :key="varText.id"
-                                                :value="varText.id">{{varText.libelle}}</option>
-                                    </select>
+                                      <select v-model="formEffetFinancier.type_act_effet_id" class="span">
+                                <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
 
                                 </div>
                             </div>
@@ -693,7 +693,45 @@ export default {
                 'types_financements']) ,
                 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
+       ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe', 
+  'planActe']),
+
+ affichierLibelleTypeActeFinancier() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.planActe.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+affichierIdActeFinancierDansActePlan() {
+      const qtereel = this.planActe.find(
+        qtreel => qtreel.code == "02",
+       
+      );
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
+
+AffichierElementParent() {
       
+      return id => {
+        if (id != null && id != "") {
+          return this.planActe.filter(element => element.parent == id);
+        }
+      };
+    },
+
+
+
 // affichierNomEntreprise() {
 //       return id => {
 //         if (id != null && id != "") {

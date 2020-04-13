@@ -28,7 +28,9 @@
                             
     
                              </select>
-                           
+                           <!-- {{afficherResteStock}}
+                           {{affichierQuantiteEnStock(valideDirecteur.article_id)}}
+                           {{affichierIdQuantiteEnStock(valideDirecteur.article_id)}} -->
                             </div>
                           </div>
             </td>
@@ -151,7 +153,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>AFFECTATION D'EQUIPEMENT</h5>
+              <h5>AFFECTATION D'EQUIPEMENT </h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -167,7 +169,7 @@
                         <a data-toggle="tab" href="#tab1">NOUVELLE PERSONNES   <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
                       </li>
                        <li>
-                        <a data-toggle="tab" href="#tab2">AFFECTATION DES DEMANDES</a>
+                        <a data-toggle="tab" href="#tab2">AFFECTATION DES DEMANDES     <span class="badge badge-success">{{nombreDemandeImmobilisation}}</span></a>
                       </li>
                       <!-- <li>
                         <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
@@ -197,9 +199,9 @@
                       </li>
                     
                      
-                      <li class="">
+                      <!-- <li class="">
                         <a data-toggle="tab" href="#tab12969">Taux demande non attribué"    <span class="badge badge-success">{{NombreTauxequipementParAgent}}</span></a>
-                      </li>
+                      </li> -->
                       
                       <!-- <li>
                         <a data-toggle="tab" href="#tab2">AFFECTATION DU SERVICE</a>
@@ -207,71 +209,16 @@
                       <li>
                         <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
                       </li> -->
-                     {{afficheAnneeAmortis}}
+                     
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
 
-     <div id="tab12969" class="tab-pane">
-                       <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     
-                    <!-- <th>Type Unite d'administrative</th> -->
-                    
-                     
-                    <th>Matricule && Nom && prenoms</th>
-                    <th>Unite administrative</th>
-                    <th>Unite de zone</th>
-                    <th>Service</th>
-                    <th>Fonction</th>
-                  
-                    <th>Besoin Reel</th>
-                    <th>Besoin Non couvert</th>
-                    <th >Besoin Recu</th>
-                    <th>Taux</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  
-                 
-                 
-                 
-                </tbody>
-              </table>
-
-                    </div>
+    
 
 
 
-                      <div id="tab452" class="tab-pane">
-                       <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     
-                    <!-- <th>Type Unite d'administrative</th> -->
-                    <th>Unite d'administrative</th>
-                     <th>Unite de zone</th>
-                    <th>Service</th>
-                    <th>Fonction</th>
-                    <th>Nom et prénoms</th>
-                    <th >Article</th>
-                     <th >Qte requise</th>
-                     <th >Qte couverte</th>
-                     <th >Qte non couverte</th>
-                     <th >Prix unitaire(coût moyen)</th>
-                       <th >Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                
                  
-                 
-                 
-                </tbody>
-              </table>
-
-                    </div>
                       <div id="tab112" class="tab-pane">
                        <table class="table table-bordered table-striped">
                 <thead>
@@ -511,7 +458,7 @@
                      <th>Date motif Directeur</th>
                      <th >Duré traitement Directeur</th>
                       <th>Décision Directeur</th>
-                     
+                     <th>Attribuer</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -589,6 +536,7 @@
                     
                     
                       </button>
+                      
                     </td>
                     
                     
@@ -613,7 +561,7 @@
                       
                     
                       </button>
-                        <button v-else-if="BesoinImmo.motif_directeur ==54" class="btn  btn-danger"  >                        
+                        <button v-else-if="BesoinImmo.motif_directeur ==5" class="btn  btn-danger"  >                        
                      
                       
                        <span  >Réjeté</span>
@@ -630,7 +578,26 @@
                       </button>
                     </td>
                     
+                    <td>
+                       <button v-if="BesoinImmo.motif == 10" class="btn  btn-success" >                        
+                     
+                      
+                       <span  >Oui</span>
+                      
                     
+                    
+                      </button>  
+                      <button v-else class="btn  btn-danger" >                        
+                     
+                      
+                       <span  >Non</span>
+                      
+                    
+                    
+                      </button>  
+               
+               
+                    </td>
                   </tr>
                  
                  
@@ -1384,6 +1351,7 @@ motif:"",
 date_motif:""
       },
       valideDirecteur:{
+        article_id:"",
 motif:"",
 date_motif_directeur:"",
 cause_directeur:""
@@ -1463,6 +1431,46 @@ cause_directeur:""
 
 
 
+nombreDemandeImmobilisation() {
+      
+          return this.demandeMateriel.filter(element => element.motif == 10).length;
+       
+    },
+
+
+
+
+
+
+afficherResteStock() {
+      const val = this.affichierQuantiteEnStock(this.valideDirecteur.article_id) - this.valideDirecteur.quantite;
+      return parseFloat(val).toFixed(0);
+    },
+
+affichierQuantiteEnStock() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.stockageArticles.find(qtreel => qtreel.famill_id == id);
+
+      if (qtereel) {
+        return qtereel.quantitestock;
+      }
+      return 0
+        }
+      };
+    },
+affichierIdQuantiteEnStock() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.stockageArticles.find(qtreel => qtreel.famill_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
 afficheAnneeAmortis() {
       const val = parseInt(this.valideDirecteur.annee_budgetaire) + parseInt(this.valideDirecteur.dure_vie);
       
@@ -1553,14 +1561,14 @@ verrouilleCause(){
 
 afficheValidationChefService() {
       
-          return this.demandeMateriel.filter(element => element.motif != 3 && element.motif != 1 );
+          return this.demandeMateriel.filter(element => element.motif != 3 && element.motif != 1 && element.motif != 10 );
        
     },
 
 
 afficheValidationDirecteur() {
       
-          return this.demandeMateriel.filter(element => element.motif != 0 && element.motif != 5 && element.motif != 4);
+          return this.demandeMateriel.filter(element => element.motif != 0 && element.motif != 5 && element.motif != 4 && element.motif != 10);
        
     },
 
@@ -2276,8 +2284,11 @@ fonctionDynamiques() {
 
 
   AjouterAffectationDemande(index){
-
-if ( confirm( "Voulez-vous attribuer l'equipement?") ) {
+if(this.affichierQuantiteEnStock(this.valideDirecteur.article_id) < this.valideDirecteur.quantite)
+{
+  alert("Stock en Rupture")
+}
+else if ( confirm( "Voulez-vous attribuer l'equipement?") ) {
     this.valideDirecteur = this.afficheValidationDirecteur[index];
   
    var nouveauObjetDemande = {
@@ -2292,7 +2303,7 @@ if ( confirm( "Voulez-vous attribuer l'equipement?") ) {
  
  matricule_auteur:this.afficherActeurDepenseMatricule(this.valideDirecteur.acteur_id),
  annee:this.valideDirecteur.annee_budgetaire,
-annee_amortissement:this.this.afficheAnneeAmortis,
+annee_amortissement:this.afficheAnneeAmortis,
  valeurorigine:this.afficheValeurOrigine(this.valideDirecteur.article_id),
  date_mise_service:this.valideDirecteur.date_motif_directeur,
  
@@ -2300,14 +2311,15 @@ annee_amortissement:this.this.afficheAnneeAmortis,
    
       let dmdObjet = this.demandeMateriel.find(marche=>marche.id==this.valideDirecteur.id)
          dmdObjet.motif = 10
+           let stockObjet = this.stockageArticles.find(marche=>marche.id==this.affichierIdQuantiteEnStock(this.valideDirecteur.article_id))
+         stockObjet.quantitestock = this.afficherResteStock
 
 this.ajouterHistotorisqueAffection(nouveauObjetDemande);
 this.modifierDemandeMateriel(dmdObjet)
-
+this.modifierStock(stockObjet)
 } else {
     // Code à éxécuter si l'utilisateur clique sur "Annuler" 
 }
-
 
 
 

@@ -74,11 +74,11 @@
               EXECUTION DU MARCHES
             </router-link>
           </li>
-     <li>
+     <!-- <li>
             <router-link :to="{name: 'indicateurBienService'}" tag="a">
               SUIVI DES MARCHES
             </router-link>
-          </li>
+          </li> -->
     </ul>
   </div>
 </template>
