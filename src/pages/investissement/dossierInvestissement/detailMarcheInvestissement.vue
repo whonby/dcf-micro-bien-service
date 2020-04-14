@@ -5,8 +5,8 @@
 <div>
         <div class="container-fluid">
             
-            <h4 v-if="marcheDetail(marcheid)" >Detail Marche en procedure simplifiée : {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en cours de passation</button>
-                <button class="btn btn-success btn-large" v-else>Marché attribué</button></h4>
+            <h4 v-if="marcheDetail(marcheid)" >  {{marcheDetail(marcheid).objet}}  <button class="btn btn-danger btn-large" v-if="marcheDetail(marcheid).attribue==0">Marché en cours de passation</button>
+                <button class="btn btn-success btn-large" v-else-if="marcheDetail(marcheid).attribue==2">Marché attribué</button></h4>
             <hr />
 
             <div class="widget-box">

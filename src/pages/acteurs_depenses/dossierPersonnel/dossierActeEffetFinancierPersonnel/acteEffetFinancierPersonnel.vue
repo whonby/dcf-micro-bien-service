@@ -9,11 +9,10 @@
                     <tr>
 
                         <th>Reference acte </th>
-                        <th>Libelle acte</th>
+                        <!-- <th>Libelle acte</th> -->
                         <th>Montant acte</th>
-                        <th>Type acte</th>
+                        <!-- <th>Type acte</th> -->
                         <th>Objet marche.</th>
-                        <th>text juridique</th>
                         <th>Imputation</th>
                         <!-- <th>Entreprise</th> -->
                        
@@ -26,16 +25,16 @@
                         
                               <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.reference_act || 'Non renseigné'}}</td>
-                            <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.libelle_act || 'Non renseigné'}}</td>
+                            <!-- <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.libelle_act || 'Non renseigné'}}</td> -->
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{formatageSomme(parseFloat(effetFinancier.montant_act ))|| 'Non renseigné'}}</td>
-                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.type_acte_effet.libelle || 'Non renseigné'}}</td>
+                              <!-- <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.type_acte_effet.libelle || 'Non renseigné'}}</td> -->
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.marche.objet || 'Non renseigné'}}</td>
-                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.text_juridique.objet_text || 'Non renseigné'}}</td>
+                             <!-- <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.text_juridique.objet_text || 'Non renseigné'}}</td> -->
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.marche.imputation || 'Non renseigné'}}</td>
                               <!-- <td @click="afficherModalModifierActeEffetFinancier(index)">
@@ -65,12 +64,12 @@
 
                     <table class="table table-bordered table-striped">
                         <tr>
-                            <td>
+                          <td>
                         <div class="control-group">
                         <label class="control-label">Type acte effet financier.</label>
                         <div class="controls">
                           <select v-model="formEffetFinancier.type_act_effet_id" class="span">
-                                <option v-for="varText in typeActeEffetFinanciers" :key="varText.id"
+                                <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
                             </select>
                         
@@ -369,12 +368,12 @@
 
                              <table class="table table-bordered table-striped">
                         <tr>
-                            <td>
+                           <td>
                         <div class="control-group">
                         <label class="control-label">Type acte effet financier.</label>
                         <div class="controls">
                           <select v-model="editActeEffetFinancier.type_act_effet_id" class="span">
-                                <option v-for="varText in typeActeEffetFinanciers" :key="varText.id"
+                                <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
                             </select>
                         
@@ -388,7 +387,7 @@
                         <div class="controls">
                           <select v-model="editActeEffetFinancier.candidat_personnel_id" class="span">
                                 <option v-for="varText in dossierPersonnels" :key="varText.id"
-                                        :value="varText.candidat_personnel_id">{{varText.nom_candidat}} {{varText.prenom_candidat}}</option>
+                                        :value="varText.id">{{varText.nom_candidat}} {{varText.prenom_candidat}} </option>
                             </select>
                         
                         </div>
@@ -510,6 +509,7 @@
                         </div>
                           </td>     
                            
+
                           
                         </tr>
                         <tr>
@@ -570,7 +570,7 @@
                      <div class="control-group">
                         <label class="control-label">Date ordre de service demarrage</label>
                         <div class="controls">
-                            <input type="date" v-model="formEffetFinancier.date_odre_service"
+                            <input type="date" v-model="editActeEffetFinancier.date_odre_service"
                                     class="span"
                                     placeholder=""
                             />
@@ -583,7 +583,7 @@
                      <div class="control-group">
                         <label class="control-label" title=" ">Date fin exécution</label>
                         <div class="controls">
-                            <input type="date" :min="formEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValue" v-model="formEffetFinancier.date_fin_exe"
+                            <input type="date" :min="editActeEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValueEdit" v-model="editActeEffetFinancier.date_fin_exe"
                                     class="span"
                                     placeholder=""
                             />
@@ -597,7 +597,7 @@
                      <div class="control-group">
                         <label class="control-label" title=" ">Durée d'exécution(jrs)</label>
                         <div class="controls">
-                            <input type="text"  readonly :value="nombreDejourCalcule"
+                            <input type="text"  readonly :value="nombreDejourCalculeEdit"
                                     class="span"
                                    
                             />
@@ -667,7 +667,7 @@ export default {
             // text_juridique_id:"",
              type_act_effet_id:"",
              analyse_dossier_id:"",
-             entreprise_id:"",
+            // entreprise_id:"",
              candidat_personnel_id:"",
              marche_id:"",
              numero_marche:"",
@@ -691,7 +691,7 @@ export default {
             // text_juridique_id:"",
              type_act_effet_id:"",
              analyse_dossier_id:"",
-             entreprise_id:"",
+             //entreprise_id:"",
              candidat_personnel_id:"",
              marche_id:"",
              numero_marche:"",
@@ -713,7 +713,8 @@ export default {
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliserContrat", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
             ...mapGetters('personnelUA', ['acteur_depenses','dossierPersonnels']),
-
+              ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe', 
+  'planActe']),
 
                 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
@@ -787,6 +788,32 @@ getDateFinExécutionValue(){
 },
 
 
+
+
+nombreDejourCalculeEdit(){
+                let vM=this;
+    const acteAffetEdit = vM.editActeEffetFinancier
+    if(acteAffetEdit.date_odre_service == acteAffetEdit.date_fin_exe &&  acteAffetEdit.date_fin_exe !=="" && acteAffetEdit.date_odre_service !=="") return 1
+     if(acteAffetEdit.date_fin_exe =="" && acteAffetEdit.date_odre_service =="") return null
+
+       var dateF = new Date(acteAffetEdit.date_fin_exe).getTime()
+        var dateO = new Date(acteAffetEdit.date_odre_service).getTime()
+           var resultat = dateF - dateO
+
+             var diffJour =  resultat / (1000 * 3600 * 24)
+
+               if(isNaN(diffJour)) return null
+
+               if(parseFloat(diffJour) < 0 ) return "durée invalide"
+    vM.editActeEffetFinancier.duree=diffJour
+                  return  diffJour;
+   
+},
+
+getDateFinExécutionValueEdit(){
+    return !this.editActeEffetFinancier.date_odre_service !=""
+},
+
       
                 listeActeEffectFinnancier: function () {
                 return macheid => {
@@ -796,6 +823,30 @@ getDateFinExécutionValue(){
                     }
                 }
             },
+
+
+// afficher les infos de type acte
+
+affichierIdActeFinancierDansActePlan() {
+      const qtereel = this.planActe.find(
+        qtreel => qtreel.code == "02",
+       
+      );
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
+
+AffichierElementParent() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.planActe.filter(element => element.parent == id);
+        }
+      };
+    },
 
 
             //   candidatSelectionContrat:function(){
@@ -919,7 +970,7 @@ getDateFinExécutionValue(){
              candidat_personnel_id:"",
              type_act_effet_id:"",
              analyse_dossier_id:"",
-             entreprise_id:"",
+            // entreprise_id:"",
              marche_id:"",
              numero_marche:"",
              difference_personnel_bienService:"personnel"

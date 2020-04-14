@@ -4,7 +4,14 @@
     <ul class="nav">
       <!--Paramètres administratifs-->
 
-              <li class="dropdown" id="personnel">
+       <li>
+         <router-link :to="{name:'recrutementPersonnel'}" tag="a">
+           PLANIFICATION DE RECRUTEMENT PERSONNEL
+         </router-link>
+
+       </li>
+
+              <!-- <li class="dropdown" id="personnel">
         <a
           title=""
           href="#"
@@ -26,9 +33,9 @@
 
             <li class="divider"></li>
           <li>
-            <!-- <router-link :to ="{name: ''}" tag="a">
+            <router-link :to ="{name: ''}" tag="a">
               <i class="icon-key"></i> Norme de missions
-            </router-link> -->
+            </router-link>
           
           </li>
         
@@ -36,7 +43,7 @@
             
           </li>
         </ul>
-      </li>   
+      </li>    -->
       
        <li>
             <router-link :to="{name: 'Acteur'}" tag="a">
@@ -103,6 +110,7 @@
 
         <!-- <li>
         <router-link
+
               :to="{name:'TableauBordImmo'}"
               tag="a"
               title="Tableau de Bord Acteur depense"

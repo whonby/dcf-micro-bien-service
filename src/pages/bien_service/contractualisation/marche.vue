@@ -799,24 +799,21 @@ type_marche
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_act)) || 'Non renseigné'}}</td>
                   
-<td>
+                    <td>
                      <button 
                       v-if="afficherAttributMarche(marche.marche_id) == 2"  class="btn  btn-warning">
                 <span >EX</span>
        
                 </button>
-                   <!-- <button v-else class="btn  btn-danger">
-              
-                <span >NON</span>
-                </button> -->
-                   </td>
-<td>
-      <button   class="btn btn-info " title="Ajouter marché resilié" @click="afficherModalMarcheResilier(index)">
+                 
+                 </td>
+                   <td>
+           <button   class="btn btn-info " title="Ajouter marché resilié" @click="afficherModalMarcheResilier(index)">
                 <span class=""><i class="icon-pencil"></i></span></button>
 
    
                     
-                     <button @click.prevent="modifierModalActeEffetFinancierLocal(index)"  class="btn btn-success">
+                <button @click.prevent="modifierModalActeEffetFinancierLocal(index)"  class="btn btn-success">
                 <span class=""><i class="icon-folder-open" title="Basculer en contratualisation"></i></span></button> 
 
 </td>
