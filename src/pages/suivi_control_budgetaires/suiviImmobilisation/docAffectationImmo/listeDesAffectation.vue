@@ -940,7 +940,7 @@
                      
                          
                     
-                     <td title="Affectation d'equipement">
+                     <td title="Affectation d'equipement" style="font-weight: 500;">
                         <button class="btn btn-info" @click="fenetreAjouterAffectation(index)">
                         <span>
                           <i class="icon-hand-right"></i>
@@ -1433,7 +1433,7 @@ cause_directeur:""
 
 nombreDemandeImmobilisation() {
       
-          return this.demandeMateriel.filter(element => element.motif == 10).length;
+          return this.demandeMateriel.filter(element => element.motif != 10).length;
        
     },
 

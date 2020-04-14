@@ -1,4 +1,4 @@
-
+Validation CF
 <template>
   	
         <div class="container-fluid">
@@ -2001,7 +2001,7 @@
             <div id="exampleModalMotif" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Validation CF</h3>
+        <h3>Validation CF{{afficherMontantEngagement1}}-{{sommeMontantEngagement}}</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" >
@@ -2047,7 +2047,7 @@
                             <div class="controls">
                               <input type="date" class="span"  v-model="editEngagement.date_motif"/>
                                <input type="hidden" class="span"  :value="recuperer"/>
-                               {{editEngagement.id}}
+                               
                             </div>
                           </div>
                            
@@ -9314,7 +9314,7 @@ afficherObjetEngagement1() {
 
 afficherMontantEngagement1() {
     
-       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.editLiquidation.facture_id);
+       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.editEngagement.facture_id);
 
       if (norme) {
        return norme.prix_propose_ttc;

@@ -258,6 +258,8 @@ Ajouter acte de nomination
                                                             <div class="controls">
                                                                 <input type="date" class="span11" v-model="date_arrivee_act_nomination" placeholder="">
                                                             </div>
+                                                             <input type="hidden" class="span11" v-model="formData.normeequipement" placeholder="">
+                                                             <input type="hidden" class="span11" v-model="formData.historiquenormequipement" placeholder="">
                                                         </div>
                                                             </td>
                                                         </tr>
@@ -754,7 +756,9 @@ Ajouter acte de nomination
                     type_acte_id:"",
                     grade_id:"",
                     fonction_id:"",
-                    plan_budgetaire_id:''
+                    plan_budgetaire_id:'',
+                    normeequipement:"",
+                    historiquenormequipement:""
                 },
                 conges:{
                     code: "",
@@ -925,6 +929,8 @@ historiqueMissionParActeur(){
                   formData.append('date_debut_fonct_budget', this.date_debut_fonct_budget);
                    formData.append('date_fin_fonct_budget', this.date_fin_fonct_budget);
                 formData.append('id', this.salaire_actuel_acteur.id);
+                formData.append('normeequipement', this.normeequipement);
+                formData.append('historiquenormequipement', this.historiquenormequipement);
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'

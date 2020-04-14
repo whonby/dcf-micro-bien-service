@@ -346,7 +346,7 @@ afficheNombrePersonneNonEquipe
                     type="text"
                     readonly
                      :value="afficherActeurDepense(editDemande.acteur_id)"
-                    class="span8"
+                    class="span4"
                    
                    
                   />
