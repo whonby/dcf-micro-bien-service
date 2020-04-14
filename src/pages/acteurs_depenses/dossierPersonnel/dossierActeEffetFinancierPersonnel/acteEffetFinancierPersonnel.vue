@@ -9,11 +9,10 @@
                     <tr>
 
                         <th>Reference acte </th>
-                        <th>Libelle acte</th>
+                        <!-- <th>Libelle acte</th> -->
                         <th>Montant acte</th>
-                        <th>Type acte</th>
+                        <!-- <th>Type acte</th> -->
                         <th>Objet marche.</th>
-                        <th>text juridique</th>
                         <th>Imputation</th>
                         <!-- <th>Entreprise</th> -->
                        
@@ -26,16 +25,16 @@
                         
                               <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.reference_act || 'Non renseigné'}}</td>
-                            <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.libelle_act || 'Non renseigné'}}</td>
+                            <!-- <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.libelle_act || 'Non renseigné'}}</td> -->
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{formatageSomme(parseFloat(effetFinancier.montant_act ))|| 'Non renseigné'}}</td>
-                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.type_acte_effet.libelle || 'Non renseigné'}}</td>
+                              <!-- <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.type_acte_effet.libelle || 'Non renseigné'}}</td> -->
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.marche.objet || 'Non renseigné'}}</td>
-                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.text_juridique.objet_text || 'Non renseigné'}}</td>
+                             <!-- <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.text_juridique.objet_text || 'Non renseigné'}}</td> -->
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.marche.imputation || 'Non renseigné'}}</td>
                               <!-- <td @click="afficherModalModifierActeEffetFinancier(index)">
@@ -388,7 +387,7 @@
                         <div class="controls">
                           <select v-model="editActeEffetFinancier.candidat_personnel_id" class="span">
                                 <option v-for="varText in dossierPersonnels" :key="varText.id"
-                                        :value="varText.candidat_personnel_id">{{varText.nom_candidat}} {{varText.prenom_candidat}}</option>
+                                        :value="varText.id">{{varText.nom_candidat}} {{varText.prenom_candidat}} </option>
                             </select>
                         
                         </div>
@@ -668,7 +667,7 @@ export default {
             // text_juridique_id:"",
              type_act_effet_id:"",
              analyse_dossier_id:"",
-             entreprise_id:"",
+            // entreprise_id:"",
              candidat_personnel_id:"",
              marche_id:"",
              numero_marche:"",
@@ -692,7 +691,7 @@ export default {
             // text_juridique_id:"",
              type_act_effet_id:"",
              analyse_dossier_id:"",
-             entreprise_id:"",
+             //entreprise_id:"",
              candidat_personnel_id:"",
              marche_id:"",
              numero_marche:"",
@@ -971,7 +970,7 @@ AffichierElementParent() {
              candidat_personnel_id:"",
              type_act_effet_id:"",
              analyse_dossier_id:"",
-             entreprise_id:"",
+            // entreprise_id:"",
              marche_id:"",
              numero_marche:"",
              difference_personnel_bienService:"personnel"

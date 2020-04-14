@@ -374,7 +374,7 @@ export default {
             return macheid => {
                 if (macheid != "") {
 
-                    return this.gettersPersonnaliserRapportJugement.filter(idmarche => idmarche.marche_id == macheid)
+                    return this.gettersPersonnaliserRapportJugement.filter(idmarche => idmarche.marche_id == macheid && idmarche.attribue==0)
                 }
             }
         },

@@ -1,15 +1,15 @@
-type_marche
+
 <template>
     <div class="container-fluid">
     
-         <div id="exampleModal" class="modal hide taillModal">
+      <div id="exampleModal" class="modal hide taillModal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter Marché Résilié</h3>
       </div>
-    <div class="modal-body">
-        <table class="table table-bordered table-striped">
-    <tr>
+      <div class="modal-body">
+      <table class="table table-bordered table-striped">
+      <tr>
        <td>
                  <div class="control-group">
             <label class="control-label">N°Marche</label>
@@ -385,13 +385,13 @@ type_marche
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab2078">Toutes les marches d'investissement<span class="badge badge" >{{nombreDeMarcheI}}</span></a></li>
+                               <li class="active"><a data-toggle="tab" href="#tab2078">Toutes les marches d'investissement  <span class="badge badge" > {{nombreDeMarcheI}}</span></a></li>
                                
-                               <li ><a data-toggle="tab" href="#tab100" title="marché planifié en investissement">Marchés Planifiés I.<span class="badge badge-important" >    {{nombreMarcheEnplanification}}</span></a></li>
-                                <li ><a data-toggle="tab" href="#tab10" title="marché en contratualisation d'investissement">Marché en cours Contratualisation I. <span class="badge badge-success" >{{nombreDeMarcheEnContratualisation}}</span></a></li>
-                                <li><a data-toggle="tab" href="#tab20" title="marché en execution d'investiisement">Marchés en Exécution I. <span class="badge badge-warning" >{{afficheNombreMarchExecuter}}</span></a></li>
-                                 <li><a data-toggle="tab" href="#tab20002" title="marché resilié d'investissement">Marchés Résiliés I.<span class="badge badge-info" >     {{afficheNombreMarcheResilier}}</span></a></li>
-                                  <li><a data-toggle="tab" href="#tab2000256"  title="marché terminé d'investissement">Marchés Terminé I.<span class="badge badge-inverse" >     {{nombreAfficheMarcheSolde}}</span></a></li>
+                               <li ><a data-toggle="tab" href="#tab100" title="marché planifié en investissement">Marchés Planifiés I.   <span class="badge badge-important" >    {{nombreMarcheEnplanification}}</span></a></li>
+                                <li ><a data-toggle="tab" href="#tab10" title="marché en contratualisation d'investissement">Marché en cours Contratualisation I.   <span class="badge badge-success" >{{nombreDeMarcheEnContratualisation}}</span></a></li>
+                                <li><a data-toggle="tab" href="#tab20" title="marché en execution d'investiisement">Marchés en Exécution I.    <span class="badge badge-warning" >{{afficheNombreMarchExecuter}}</span></a></li>
+                                 <li><a data-toggle="tab" href="#tab20002" title="marché resilié d'investissement">Marchés Résiliés I.   <span class="badge badge-info" >     {{afficheNombreMarcheResilier}}</span></a></li>
+                                  <li><a data-toggle="tab" href="#tab2000256"  title="marché terminé d'investissement">Marchés Terminé I.   <span class="badge badge-inverse" >     {{nombreAfficheMarcheSolde}}</span></a></li>
 
                             </ul>
                         </div>
@@ -1836,11 +1836,11 @@ getDateFinExécutionValue(){
   
 //   typePrestationFiltre()  {
      
-//         const searchTerm = this.search.toLowerCase();
+//    const searchTerm = this.search.toLowerCase();
 
 // return this.printMarcheNonAttribue.filter((item) => {
   
-//      return item.objet.toLowerCase().includes(searchTerm) 
+//   return item.objet.toLowerCase().includes(searchTerm) 
 
 //    }
 // )
@@ -1873,7 +1873,7 @@ montantMarcheInvestissement(){
 
 
    afficheMarchExecuter(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 2 )
+return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 2 && element.AfficheMarche.type_marche.code_type_marche == 3)
 },
 
 // afficheMarchExecuter(){
@@ -1881,6 +1881,8 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => element.march
 // },
 
 afficheNombreMarchExecuter(){
+
+  
 return this.afficheMarchExecuter.length
 },
 
@@ -2613,7 +2615,7 @@ modifierModalActeEffetFinancierLocal(index){
 }
     
      
-   
+    
 },
 
   modifierModalActeEffetFinancierLocal2(index){
