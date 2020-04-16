@@ -158,14 +158,42 @@
 
 
                 <div id="tab6" class="tab-pane">
+                 
+                     <div class="widget-title">
+                           <ul class="nav nav-tabs">
+                             <li class="active"><a data-toggle="tab" href="#tab00056" title="">Voir la list des jugements</a></li>
+                             <li class=""><a data-toggle="tab" href="#tab00020" title="">Voir la liste des candidats selectionner</a></li>     
+
+                          </ul>
+                     </div>
+                          
+                       <div class="widget-content tab-content">
+                        
+                         <div id="tab00056" class="tab-pane active">
+                             
                   <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterPesonnel" data-toggle="modal" class="btn btn-primary">Ajouter</a>
                     </div>
 
 
-                </div>
-                <jugementPersonnel :macheid="detail_marche.id"></jugementPersonnel>
+                   </div>
+                         <jugementPersonnel :macheid="detail_marche.id"></jugementPersonnel>
+                           </div>
+
+                            <div id="tab00020" class="tab-pane">
+                              
+                               <candidatSelectionner :macheid="detail_marche.id"></candidatSelectionner>
+
+                      
+                         </div>
+                        
+                        </div>
+                   
+
+               
+
+              
 
                 </div>
 
@@ -250,6 +278,7 @@
        import candidatPersonnel from '../dossierPersonnel/dossierCandidatPersonnel/candidatPersonnel';
        import rapportOuverturePersonnel from '../dossierPersonnel/dossierRapportOuverturePersonnel/rapportOuverturePersonnel'
        import jugementPersonnel from '../dossierPersonnel/dossierJugementPersonnel/jugementPersonnel'
+       import candidatSelectionner from '../dossierPersonnel/dossierCandidatSelectionner/candidatSelectionner';
        import rapportJugementPersonnel from '../dossierPersonnel/dossierRapportJugement/rapportJugementPersonnel'
        import AnoDmpBailleurPersonnel from '../dossierPersonnel/dossierAnoDMPBailleurPersonnel/AnoDmpBailleurPersonnel'
        import acteEffetFinancierPersonnel from '../dossierPersonnel/dossierActeEffetFinancierPersonnel/acteEffetFinancierPersonnel'
@@ -271,6 +300,7 @@
             candidatPersonnel,
             rapportOuverturePersonnel,
             jugementPersonnel,
+            candidatSelectionner,
             rapportJugementPersonnel,
             AnoDmpBailleurPersonnel,
             acteEffetFinancierPersonnel,

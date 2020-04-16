@@ -1,4 +1,4 @@
- getActeEffetFinancierPersonnaliser45
+
  export const cojo_personnels = state => state.cojo_personnels 
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
@@ -58,7 +58,7 @@ export const mandats = state => state.mandats
  // export const gettersDocuments = state => state.documents
    export const documentMedias = state => state.documentMedias
  export const rapportDocuments = state => state.rapportDocuments
-
+ export const selectionner_candidats = state => state.selectionner_candidats
 //  export const documentMedias = state =>state.mediaStock
 //  export const gettersStockDocuments = state =>state.stockDocuments
 // export const rapportOuverture1 = state => state.rapportOuverture1

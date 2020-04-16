@@ -3,7 +3,111 @@ import { asyncLoading } from 'vuejs-loading-plugin'
 
 var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
-modifierCojo
+
+
+
+export  function  getCandidatSelectionner({commit}) {
+  queue.push(() => axios.get('/liste_candidat_select').then((response) => {
+    commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data.data)
+    
+}).catch(error => console.log(error)))
+}
+
+// action pour modifier candidat selectionner
+export function modifierCandidatSelectionner({commit}, formData){
+  asyncLoading(axios.post('/update_candidat_select',formData)).then(response =>{
+      if(response.status == 201){
+        console.log(response.data)
+          commit('MODIFIER_CANDIDAT_SELECTIONNER', response.data)
+          
+          this.$app.$notify({
+            title: '',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// supprimer candidat selectionner
+export function supprimerCandidatSelectionner({commit}, id) {
+  return this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('SUPPRIMER_CANDIDAT_SELECTION', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+   return  axios.delete('/suppri_candidat_select/' + id).then(() => dialog.close() )   
+ })
+
+}
+
+
+
+// retourn de selection du candiadt 
+export function supprimerCandidatSelectionnerDeselection({commit}, id) {
+   return this.$app.$dialog
+  .confirm("Voulez vouz déselectionner le candidat ?.")
+  .then(dialog => {
+     commit('SUPPRIMER_CANDIDAT_SELECTION', id)
+    // // dialog.loading(false) // stops the proceed button's loader
+    return  axios.delete('/suppri_candidat_select/' + id).then(() => dialog.close() )   
+  })
+ 
+ }
+
+//  export function ajouterCandidatSelectionner({ commit}, formData) {
+
+//   this.$app.$dialog
+//       .confirm("Voulez-vous selectionner le candidat  ?.")
+//       .then(dialog => {
+//    asyncLoading(axios.post('/add_candidat_select', {
+//                       formData
+//           })).then(response => {
+//               // if (response.status == 201) {
+//               commit('AJOUTER_CANDIDAT_SELECTIONNER', response.data)
+//               //dispatch('getExercicesBudgetaires')
+//               this.$app.$notify({
+//                   title: 'Felicitation ',
+//                   text: 'Candidat selectionner avec success  !',
+//                   type: "success"
+//               })
+//               // }
+//           }).catch(error => console.log(error))
+//           dialog.close()
+//       });
+ 
+ 
+// }
+
+
+export function ajouterCandidatSelectionner({commit}, formData){
+
+   return this.$app.$dialog
+  .confirm("Voulez-vous selectionner ce candidat ?.")
+  .then(dialog => {
+    
+    return asyncLoading(axios.post('/add_candidat_select',formData)).then(response =>{
+      if(response.status == 201){
+        console.log(response.data)
+          commit('AJOUTER_CANDIDAT_SELECTIONNER', response.data)
+          dialog.close()
+          this.$app.$notify({
+            title: '',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+    // // dialog.loading(false) // stops the proceed button's loader
+     
+  })
+
+  
+}
+
+
 
 // action for print all to prestation
 

@@ -1,6 +1,4 @@
 
-afficheMarcheTerminer
-
 <template>
     <div class="container-fluid">
          <div id="exampleModal" class="modal hide taillModal">
@@ -614,6 +612,8 @@ afficheMarcheTerminer
                  <tr class="odd gradeX" v-for="(marche, index) in 
                 afficheMarchExecuter"
                  :key="marche.id">
+
+                 <template v-if="afficherCodeTypeMarche(afficherTypeMarcheId(marche.marche_id)) == 2">
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{afficherAnneeBudget(marche.marche_id) || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -660,6 +660,7 @@ afficheMarcheTerminer
                 <span class=""><i class="icon-trash"></i></span></button> -->
              
             </div>
+            </template>
                    </tr>  
                       
                 </tbody>
@@ -1738,6 +1739,30 @@ afficherTypeMarche() {
         }
       };
     },
+
+
+    // afficher le type MarcheID
+    afficherTypeMarcheId(){
+      return id =>{
+        if(id!=null && id!=""){
+          const objet = this.marches.find(idMarche => idMarche.id==id)
+          if(objet) return objet.type_marche_id
+          
+        }
+        return null
+      }
+    },
+
+
+    afficherCodeTypeMarche(){
+      return id =>{
+        if(id!=null && id!=""){
+          let objetTypeMarche = this.typeMarches.find(item =>item.id ==id)
+          if(objetTypeMarche) return objetTypeMarche.code_type_marche
+        }
+        return null
+      }
+    },
 //  afficherObjetMarche() {
 //       return id => {
 //         if (id != null && id != "") {
@@ -2020,7 +2045,7 @@ anneeAmort() {
 return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 5)
 },
    afficheExercution(){
-return this.getActeEffetFinancierPersonnaliserContrat.filter(element => element.marche.attribue == 2 && element.AfficheMarche.type_marche.code_type_marche ==2)
+return this.getActeEffetFinancierPersonnaliserContrat.filter(element => element.marche.attribue == 2)
 },
 afficheMarchExecuter(){
 return this.afficheExercution.filter(element => element.indicateur_resilie != 1)

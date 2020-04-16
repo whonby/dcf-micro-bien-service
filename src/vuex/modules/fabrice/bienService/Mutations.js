@@ -1,5 +1,30 @@
+export const GET_ALL_SELECTIONNER_CANDIDAT = (state, tableau_candidat_selectionner) =>{
+    state.selectionner_candidats = tableau_candidat_selectionner
+}
+
+// add candidat selectionner
+
+export const AJOUTER_CANDIDAT_SELECTIONNER = (state, elementAjouter) => {
+    state.selectionner_candidats.unshift(elementAjouter)
+}
+
+
+export const MODIFIER_CANDIDAT_SELECTIONNER = (state,elementModif) => {
+    state.selectionner_candidats = state.selectionner_candidats.map(response =>{
+        if(response.id == elementModif.id){
+           response = {...elementModif} 
+        }
+        return response
+    })
+}
+
+
+export const SUPPRIMER_CANDIDAT_SELECTION = (state, id) =>{
+    state.selectionner_candidats = state.selectionner_candidats.filter(candidat => candidat.id!=id)
+}
+
 // get all document
-MODIFIER_OUVERTURE
+
 
 export const GET_ALL_DOCUMENT = (state, tableau_document) =>{
     state.documentMedias = tableau_document

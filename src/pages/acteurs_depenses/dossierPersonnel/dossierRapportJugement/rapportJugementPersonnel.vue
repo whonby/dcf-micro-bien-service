@@ -31,13 +31,14 @@
                         </td>
                         <div class="btn-group">
                               <td>
+                               <button href="#infoPV" @click.prevent="infoPVAffiche(rapport.reference)" data-toggle="modal" class="btn btn-info">
+                            <span title="voir la liste des classements des candidats"><i class="icon-pencil" ></i></span></button>
+                             </td>
+                              <td>
                             <button @click.prevent="supprimerRapportJugement(rapport.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
                              </td>
-                             <td>
-                               <a href="#infoPV" @click.prevent="infoPVAffiche(rapport.reference)" data-toggle="modal" class="btn btn-info">
-                            <span title="voir la liste des classements des candidats"><i class="icon-pencil" ></i></span></a>
-                             </td>
+                           
                         </div>
                        
                        
@@ -231,7 +232,7 @@ export default {
     computed: {
 
             ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,"gettersPersonnaliserRapportJugement",
-            "gettersCotations","rapportDocuments", 'listeJugementPersonnel']),
+            "gettersCotations","rapportDocuments", 'listeJugementPersonnel','selectionner_candidats']),
              ...mapGetters('personnelUA', ['acteur_depenses','dossierPersonnels']),
 
 
@@ -256,7 +257,18 @@ export default {
       };
     },
 
+ afficherCandidatSelectionnerAtrribue() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersPersonnaliserRapportJugement.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.attribue;
+      }
+      return 0
+        }
+      };
+    },
 
     // afficher le nom des candidats
 
@@ -358,9 +370,11 @@ export default {
                return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
            },
 
+
+
            infoPVAffiche(ref){
                 this.resultaAnalysePv=[]
-                let resulta=this.listeJugementPersonnel.filter(item=>item.reference_pv==ref);
+                let resulta=this.selectionner_candidats.filter(item=>item.reference_pv==ref && this.afficherCandidatSelectionnerAtrribue(item.jugement_id)==1);
                 this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
                 if (this.resultaAnalysePv.length>0){
                     this.resultaAnalysePv.sort(function (a, b) {

@@ -3,35 +3,31 @@
 
 <template>
     <div>
+                  
       
         <!-- debut de liste analyse  -->
           <h4>Liste des dossiers analyses</h4>
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
-                        <!-- <th>Ref offre</th> -->
-                        <!-- <th>Dossier candidat </th> -->
-                        
-                        <th>Nom candidat</th>
+                       
+                      
+                        <th>Nom candidat </th>
                          <th>Note candidat</th>
                         <th>Rang du candidat</th>
                         <th>Date Analyse </th>
                         <th>Type d'analyse</th>
                         
-                        <!--<th>Avis</th>-->
-
+                        <!--<th>Avis</th>-->         
+                         <th>Selectionner les candidats </th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr class="odd gradeX" v-for="(appelOffre, index) in listeAnalyseDossier(macheid)"
                         :key="appelOffre.id">
+                         
 
-                        <!-- <td @click="afficheAnnalyseDossier(index)">
-
-                            {{appelOffre.affichierReferenceAppelOffre|| 'Non renseigné'}}</td> -->
-     
-                          
                         <td @click="afficheAnnalyseDossier(index)">
                             {{afficherNomDossierCandidat(appelOffre.candidat_personnel_id) || 'Non renseigné'}}</td>
                        
@@ -54,18 +50,47 @@
                             <button class="btn btn-success btn-mini" v-else-if="avisPv(appelOffre.reference_pv)== 1">Non Objection</button>
                             <button class="btn btn-danger btn-mini" v-else>Objection</button>
                         </td>-->
-                        <div class="btn-group">
+
+                     
+                             
+                         
+
+                          <td> 
+                              <button  @click.prevent="modification(index)" v-if="appelOffre.attribue == 0" class="btn btn-danger " title="selectionner candidat">
+                                <span class=""><i class="icon-remove"></i></span></button> 
+                                
+
+                                <button  @click.prevent="modification1(index)" v-if="appelOffre.attribue == 1" class="btn btn-success " title="candidat selectionné">
+                                <span class=""><i class="icon-ok"></i></span></button> 
+                          </td>
+
+                           
+                              
+
+                          
+
+                            <div class="btn-group">
                              
                             <button @click.prevent="supprimerAnalyseDossier(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
 
                         </div>
 
+
+                        <!-- <td @click="afficheAnnalyseDossier(index)">
+
+                            {{appelOffre.affichierReferenceAppelOffre|| 'Non renseigné'}}</td> -->
+                        
+
                         
 
                     </tr>
                     </tbody>
                 </table>
+<!--                 
+                  <div class="modal-footer-right">
+                <button data-dismiss="modal" class="btn btn-warning" @click.prevent="ajouterCandidatSelectionner()"  v-show="attribue">Valider la selection du candidat</button>
+                </div> -->
 
         <!--fin de dossier analyse -->
 
@@ -215,7 +240,7 @@
                   <table class="table table-bordered table-striped">
                       <tr>
 
-
+                         
                           <td>
                                <div class="control-group">
                         <label class="control-label">Reference Avis de recrutement</label>
@@ -226,6 +251,7 @@
                                     class="span"
                                        readonly
                             />
+                           
                         </div>
                         </div>
                           </td>
@@ -324,10 +350,13 @@
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
         <notifications/>
+        
     </div>
+    
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
+//import PrettyCheck from 'pretty-checkbox-vue/check';
 import moment from 'moment';
 export default {
     
@@ -346,6 +375,8 @@ export default {
                          candidat_personnel_id:""
             },
             edite_analyse_dossier:"",
+
+            
          
         }
     },
@@ -374,7 +405,7 @@ export default {
             return macheid => {
                 if (macheid != "") {
 
-                    return this.gettersPersonnaliserRapportJugement.filter(idmarche => idmarche.marche_id == macheid && idmarche.attribue==0)
+                    return this.gettersPersonnaliserRapportJugement.filter(idmarche => idmarche.marche_id == macheid)
                 }
             }
         },
@@ -392,6 +423,8 @@ export default {
     //     }
     //   };
     // },
+
+ // fonction pour cocher les checkbox
 
 
 
@@ -480,8 +513,8 @@ affichierAppelOffreid() {
     // },
     },
     methods:{
-        ...mapActions('bienService',['supprimerAnalyseDossier',
-        'ajouterAnalyseDossier','modifierAnalyseDossier']),
+        ...mapActions('bienService',['supprimerAnalyseDossier',"supprimerCandidatSelectionner",
+        'ajouterAnalyseDossier','modifierAnalyseDossier','ajouterCandidatSelectionner']),
         
         
           
@@ -527,17 +560,108 @@ affichierAppelOffreid() {
                         candidat_personnel_id:""
                 }
             },
+ modification(index){
 
+    
+                this.edite_analyse_dossier = this.listeAnalyseDossier(this.macheid)[index];
+
+            var nouvelObjet10 = {
+                       ...this.edite_analyse_dossier,
+                       marche_id:this.macheid,
+                       candidat_personnel_id: this.edite_analyse_dossier.candidat_personnel_id,
+                       rang_analyse:this.edite_analyse_dossier.rang_analyse,
+                     note_analyse:this.edite_analyse_dossier.note_analyse,
+                     date_analyse:this.edite_analyse_dossier.date_analyse,
+                     type_analyse_id:this.edite_analyse_dossier.type_analyse_id,
+                      jugement_id:this.edite_analyse_dossier.id
+                           
+                   }
+                  
+
+                this.ajouterCandidatSelectionner(nouvelObjet10).then(data=>{
+                     let marcheObjet=this.getterAnalyseDossiers.find(candidatSelect=>candidatSelect.id==this.edite_analyse_dossier.id)
+                    marcheObjet.attribue = 1
+                     this.modifierAnalyseDossier(marcheObjet)
+                     console.log(data)
+                })
+                  
+
+
+     
+            //   var nouvelObjet1 ={
+            //            ...this.edite_analyse_dossier,
+            //            marche_id:this.macheid,
+            //            candidat_personnel_id: this.edite_analyse_dossier.candidat_personnel_id,
+            //            rang_analyse:this.edite_analyse_dossier.rang_analyse,
+            //          note_analyse:this.edite_analyse_dossier.note_analyse,
+            //          date_analyse:this.edite_analyse_dossier.date_analyse,
+            //          type_analyse_id:this.edite_analyse_dossier.type_analyse_id
+                           
+            //        }
+                //    let marcheObjet=this.gettersPersonnaliserRapportJugement.find(marche=>marche.id==this.edite_analyse_dossier.id)
+                //     marcheObjet.attribue = 1
+               // this.ajouterCandidatSelectionner(nouvelObjet1)
+                // this.modifierAnalyseDossier(marcheObjet)
+                // this.$('#modificationAajouterAnalys01').modal('hide');
+            },
+
+
+
+
+            modification1(index){
+
+     
+                this.edite_analyse_dossier = this.listeAnalyseDossier(this.macheid)[index];
+
+            // var nouvelObjet10 = {
+            //            ...this.edite_analyse_dossier,
+            //            marche_id:this.macheid,
+            //            candidat_personnel_id: this.edite_analyse_dossier.candidat_personnel_id,
+            //            rang_analyse:this.edite_analyse_dossier.rang_analyse,
+            //          note_analyse:this.edite_analyse_dossier.note_analyse,
+            //          date_analyse:this.edite_analyse_dossier.date_analyse,
+            //          type_analyse_id:this.edite_analyse_dossier.type_analyse_id
+     
+     
+            //        }
+                   let marcheObjet=this.getterAnalyseDossiers.find(candidatSelect=>candidatSelect.id==this.edite_analyse_dossier.id)
+                    marcheObjet.attribue = 0
+
+                // this.ajouterCandidatSelectionner(nouvelObjet10)
+                  this.modifierAnalyseDossier(marcheObjet)
+                 // this.supprimerCandidatSelectionner()
+            //   var nouvelObjet1 ={
+            //            ...this.edite_analyse_dossier,
+            //            marche_id:this.macheid,
+            //            candidat_personnel_id: this.edite_analyse_dossier.candidat_personnel_id,
+            //            rang_analyse:this.edite_analyse_dossier.rang_analyse,
+            //          note_analyse:this.edite_analyse_dossier.note_analyse,
+            //          date_analyse:this.edite_analyse_dossier.date_analyse,
+            //          type_analyse_id:this.edite_analyse_dossier.type_analyse_id
+                           
+            //        }
+                //    let marcheObjet=this.gettersPersonnaliserRapportJugement.find(marche=>marche.id==this.edite_analyse_dossier.id)
+                //     marcheObjet.attribue = 1
+               // this.ajouterCandidatSelectionner(nouvelObjet1)
+                // this.modifierAnalyseDossier(marcheObjet)
+                // this.$('#modificationAajouterAnalys01').modal('hide');
+            },
        
 
          modificationDossierAnalyse(){
+
               var nouvelObjet1 ={
                        ...this.edite_analyse_dossier,
+                      
                        marche_id:this.macheid,
                         appel_offre_id :this.affichierAppelOffreid(this.macheid),
+                       
                        //candidat_personnel_id:this.afficherCandidat(this.macheid)
                    }
+            
                 this.modifierAnalyseDossier(nouvelObjet1)
+
+                
                 this.$('#modificationAajouterAnalys01').modal('hide');
             },
 
