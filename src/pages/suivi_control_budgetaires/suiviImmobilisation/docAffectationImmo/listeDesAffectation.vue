@@ -1,4 +1,4 @@
-
+anneeAmortissement
 <template>
   
    
@@ -169,7 +169,13 @@
                         <a data-toggle="tab" href="#tab1">NOUVELLE PERSONNES   <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
                       </li>
                        <li>
-                        <a data-toggle="tab" href="#tab2">AFFECTATION DES DEMANDES     <span class="badge badge-success">{{nombreDemandeImmobilisation}}</span></a>
+                        <a data-toggle="tab" href="#tab2">AFFECTATION DES DEMANDES DU PERSONNEL    <span class="badge badge-success">{{nombreDemandeImmobilisation}}</span></a>
+                      </li>
+                       <li class="">
+                        <a data-toggle="tab" href="#tab1005">NOUVEAU SERVICE   <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
+                      </li>
+                       <li>
+                        <a data-toggle="tab" href="#tab2005">AFFECTATION DES DEMANDES DU SERVICE   <span class="badge badge-success">{{nombreDemandeImmobilisation}}</span></a>
                       </li>
                       <!-- <li>
                         <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
@@ -178,6 +184,456 @@
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
+
+
+          <div id="tab1005" class="tab-pane">
+                  
+<div class="table-responsive text-nowrap">
+              <table class="table table-bordered table-striped">
+                <div class="widget-box">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="">
+                        <a data-toggle="tab" href="#tab456">Listes des services   <span class="badge badge-inverse">{{afficheNombreToutPersonne}}</span></a>
+                      </li>
+                       <li class="">
+                        <a data-toggle="tab" href="#tab46">Listes des services non Equipé  <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
+                      </li>
+                      <li class="">
+                        <a data-toggle="tab" href="#tab89">Equipements Non Couverts   <span class="badge badge-warning">{{NombreafficheEquipementNonCouvert}}</span></a>
+                      </li>
+                       <li class="">
+                        <a data-toggle="tab" href="#tab63">Listes des services Equipé     <span class="badge badge-info">{{NombreaffichePersonneEquipe}}</span></a>
+                      </li>
+                      <li class="">
+                        <a data-toggle="tab" href="#tab6396">Taux equipement des services    <span class="badge badge-success">{{NombreTauxequipementParAgent}}</span></a>
+                      </li>
+                      
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab2">AFFECTATION DU SERVICE</a>
+                      </li>
+                      <li>
+                        <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
+                      </li> -->
+                     
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content">
+
+     <div id="tab6396" class="tab-pane">
+                       <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     
+                    <!-- <th>Type Unite d'administrative</th> -->
+                    
+                     
+                    <th>Matricule && Nom && prenoms</th>
+                    <th>Unite administrative</th>
+                    <th>Unite de zone</th>
+                    <th>Service</th>
+                    <th>Fonction</th>
+                  
+                    <th>Besoin Reel</th>
+                    <th>Besoin Non couvert</th>
+                    <th >Besoin Recu</th>
+                    <th>Taux</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                  <tr
+                    class="odd gradeX"
+                    v-for="BesoinImmo in tauxequipementParAgent"
+                    :key="BesoinImmo.id"
+                  >
+   
+                    
+                    <td
+                      
+                    >{{afficherActeurDepense(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td> 
+                    <td
+                      
+                    >{{afficherUniteAdministrative(BesoinImmo.unite_administrative_id) || 'Non renseigné'}}</td> 
+                     <td
+                       
+                    >{{afficheUniteZone(BesoinImmo.uniteZone_id)  || 'Non renseigné'}}</td> 
+                    <td
+                      
+                    >{{afficherLibelleService(BesoinImmo.service_id) || 'Non renseigné'}}</td>
+                  
+                      <td 
+                      
+                    >{{afficheFonction(BesoinImmo.fonction_id) || 'Non renseigné'}}</td>
+                      <td style="text-align: center;"
+                      
+                    >{{BesoinImmo.historiquenormequipement || 0}}</td>
+                    <td 
+                      style="text-align: center;"
+                    >{{BesoinImmo.normeequipement || 0}}</td>
+                   
+                     <td 
+                      style="text-align: center;"
+                    >{{(BesoinImmo.historiquenormequipement) - (BesoinImmo.normeequipement) || 0}}</td>
+                   
+                      <td
+                      style="text-align: center; color:red;font-size:14px;font-weight:bold;"
+                    >{{((((BesoinImmo.historiquenormequipement) - (BesoinImmo.normeequipement))/(BesoinImmo.historiquenormequipement))*100).toFixed(2) || 0 }}%</td> 
+                    
+                     
+                    
+                    
+
+                  </tr>
+                 
+                 
+                </tbody>
+              </table>
+
+                    </div>
+
+
+
+                      <div id="tab89" class="tab-pane">
+                       <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     
+                    <!-- <th>Type Unite d'administrative</th> -->
+                    <th>Unite d'administrative</th>
+                     <th>Unite de zone</th>
+                    <th>Service</th>
+                    <th>Fonction</th>
+                    <th>Nom et prénoms</th>
+                    <!-- <th >Article</th> -->
+                     <th >Qte requise</th>
+                     <th >Qte couverte</th>
+                     <th >Qte non couverte</th>
+                     <!-- <th >Prix unitaire(coût moyen)</th> -->
+                       <th >Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                    <tr
+                    class="odd gradeX"
+                    v-for="BesoinImmo in equipementNonCouvert"
+                    :key="BesoinImmo.id"
+                  >
+   
+                    
+                    
+                    <td
+                      
+                    >{{afficherUniteAdministrative(BesoinImmo.unite_administrative_id) || 'Non renseigné'}}</td> 
+                     <td
+                       
+                    >{{afficheUniteZone(BesoinImmo.uniteZone_id)  || 'Non renseigné'}}</td> 
+                    <td
+                      
+                    >{{afficherLibelleService(BesoinImmo.service_id) || 'Non renseigné'}}</td>
+                  
+                      <td 
+                      
+                    >{{afficheFonction(BesoinImmo.fonction_id) || 'Non renseigné'}}</td>
+                     <td
+                      
+                    >{{afficherActeurDepense(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td>
+                      <td style="text-align: center;"
+                      
+                    >{{BesoinImmo.historiquenormequipement || 0}}</td>
+                    
+                   
+                     <td 
+                      style="text-align: center;"
+                    >{{(BesoinImmo.historiquenormequipement) - (BesoinImmo.normeequipement) || 0}}</td>
+                    <td 
+                      style="text-align: center;"
+                    >{{BesoinImmo.normeequipement || 0}}</td>
+                   <!-- <td style="text-align: center;">{{BesoinImmo.montantequipement  / BesoinImmo.normeequipement || 0}}</td> -->
+                      <td style="text-align: center; color:red;font-size:14px;font-weight:bold;"
+                    >{{formatageSomme(parseFloat(BesoinImmo.montantequipement)) || 0 }}</td> 
+                    
+                     
+                  </tr>
+                 <tr>
+                   <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <!-- <td></td> -->
+                  <td style="text-align: center;font-size:14px;font-weight:bold;">Total</td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{formatageSomme(parseFloat(afficheMontantTotalEquipementNonCouvert))}}</td>
+                 </tr>
+                 
+                </tbody>
+              </table>
+
+                    </div>
+                      <div id="tab456" class="tab-pane active">
+                       <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     
+                    <!-- <th>Type Unite d'administrative</th> -->
+                    <th>Unite d'administrative</th>
+                    
+                     <th>Unite de zone</th>
+                    
+                    <th>Service</th>
+                    <th>Fonction</th>
+                    <th>Nom et prénoms</th>
+                    <th >Equipé</th>
+                     
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                 
+                 
+                </tbody>
+              </table>
+
+                    </div>
+                    <div id="tab46" class="tab-pane">
+<table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     
+                    <!-- <th>Type Unite d'administrative</th> -->
+                    <th>Unite d'administrative</th>
+                    
+                     <th>Unite de zone</th>
+                    
+                    <th>Service</th>
+                    <th>Fonction</th>
+                    <th>Nom et prénoms</th>
+                    <th >Equipé</th>
+                     <th >Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                 
+                 
+                 
+                 
+                </tbody>
+              </table>
+                  </div>
+                   <div id="tab63" class="tab-pane">
+                     <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     
+                    <!-- <th>Type Unite d'administrative</th> -->
+                    <th>Unite d'administrative</th>
+                    
+                     <th>Unite de zone</th>
+                    
+                    <th>Service</th>
+                    <th>Fonction</th>
+                    <th>Nom et prénoms</th>
+                    <th >Equipé</th>
+                  
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                 
+                 
+                 
+                </tbody>
+              </table>
+                   </div>
+                  </div>
+                  <br />
+              
+                </div>
+              </table>
+            </div>
+          </div>
+
+
+
+
+
+
+ <div id="tab2005" class="tab-pane">
+
+
+<div class="table-responsive text-nowrap">
+              <table class="table table-bordered table-striped">
+                <div class="widget-box">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                        <a data-toggle="tab" href="#tab1294">Listes des Demande des services    <span class="badge badge-info">{{nombreDemande}}</span></a>
+                      </li>
+                      <li class="">
+                        
+                        <a data-toggle="tab" href="#tab1124">Validation Chef service  <span class="badge badge-inverse">{{nombreValidationEnAttenteChefService}}</span></a>
+                      </li>
+                       <li class="">
+                        <a data-toggle="tab" href="#tab1324">Validation Directeur  <span class="badge badge-important">{{nombreValidationEnAttenteDirecteur}}</span></a>
+                      </li>
+                    
+                     
+                      <!-- <li class="">
+                        <a data-toggle="tab" href="#tab12969">Taux demande non attribué"    <span class="badge badge-success">{{NombreTauxequipementParAgent}}</span></a>
+                      </li> -->
+                      
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab2">AFFECTATION DU SERVICE</a>
+                      </li>
+                      <li>
+                        <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
+                      </li> -->
+                     
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content">
+
+    
+
+
+
+                 
+                      <div id="tab1124" class="tab-pane">
+                       <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     
+                  
+                    
+                    <th>Nom et prénoms</th>
+                    <th>Unite d'administrative</th>
+                     <th>Unite de zone</th>
+                    <th>Fonction</th>
+                    <th>Article</th>
+                    <th>Quantite</th>
+                    <th>Cause inactivite</th>
+                    <th>Cause de la demande</th>
+                    <th >Date demande</th>
+                     <th>duré vie</th>
+                     <th>Motif chef sce</th>
+                     <th>Date motif</th>
+                  </tr>
+                </thead>
+                <tbody>
+               
+                 
+                 
+                </tbody>
+              </table>
+
+                    </div>
+                    <div id="tab1324" class="tab-pane">
+<table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                     
+                  
+                    
+                    <th>Nom et prénoms</th>
+                    <th>Unite d'administrative</th>
+                     <th>Unite de zone</th>
+                    <th>Fonction</th>
+                    <th>Article</th>
+                    <th>Quantite</th>
+                    <th>Cause inactivite</th>
+                    <th>Cause de la demande</th>
+                    <th >Date demande</th>
+                     <th>duré vie</th>
+                     <th>Décision Directeur</th>
+                     <th>Date motif</th>
+                     <th>Affectation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                
+                 
+                 
+                </tbody>
+              </table>
+                  </div>
+                   <div id="tab1294" class="tab-pane active">
+                     <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                
+                    <th>Nom et prénoms</th>
+                    <th>Unite d'administrative</th>
+                     <th>Unite de zone</th>
+                    <th>Fonction</th>
+                    <th>Article</th>
+                    <th>Quantite</th>
+                    <th>Cause inactivite</th>
+                    <th>Cause de la demande</th>
+                    <th >Date demande</th>
+                     <!-- <th>duré vie</th> -->
+                     <th>Date motif sce</th>
+                     <th >Duré traitement sce</th>
+                     <th>Décision chef sce</th>
+                     <th>Date motif Directeur</th>
+                     <th >Duré traitement Directeur</th>
+                      <th>Décision Directeur</th>
+                     <th>Attribuer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                 
+                 
+                 
+                 
+                </tbody>
+              </table>
+                   </div>
+                  </div>
+                  <br />
+              
+                </div>
+              </table>
+            </div>
+
+
+
+
+
+
+
+   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
    <div id="tab2" class="tab-pane">
 
@@ -741,77 +1197,69 @@
                     <th>Service</th>
                     <th>Fonction</th>
                     <th>Nom et prénoms</th>
-                    <th >Article</th>
+                    <!-- <th >Article</th> -->
                      <th >Qte requise</th>
                      <th >Qte couverte</th>
                      <th >Qte non couverte</th>
-                     <th >Prix unitaire(coût moyen)</th>
+                     <!-- <th >Prix unitaire(coût moyen)</th> -->
                        <th >Total</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr
+                 
+                    <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in afficheEquipementNonCouvert"
+                    v-for="BesoinImmo in equipementNonCouvert"
                     :key="BesoinImmo.id"
                   >
-  
+   
+                    
+                    
                     <td
                       
-                    >{{afficherUniteAdministrative(BesoinImmo.uniteadministrative_id) || 'Non renseigné'}}</td> 
+                    >{{afficherUniteAdministrative(BesoinImmo.unite_administrative_id) || 'Non renseigné'}}</td> 
                      <td
                        
-                    >{{afficheUniteZone(BesoinImmo.unitezon_id) || 'Non renseigné'}}</td> 
+                    >{{afficheUniteZone(BesoinImmo.uniteZone_id)  || 'Non renseigné'}}</td> 
                     <td
                       
                     >{{afficherLibelleService(BesoinImmo.service_id) || 'Non renseigné'}}</td>
-                    <td 
+                  
+                      <td 
                       
-                    >{{afficheFonction(BesoinImmo.fonction_id)}}</td>
-                    <td 
+                    >{{afficheFonction(BesoinImmo.fonction_id) || 'Non renseigné'}}</td>
+                     <td
                       
-                    >{{afficherActeurDepense(BesoinImmo.acteurdepense_id) || 'Non renseigné'}}</td>
-                     <td 
-                      
-                    >{{afficheFamille(BesoinImmo.famillearticle_id) || 'Non renseigné'}}</td>
+                    >{{afficherActeurDepense(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td>
                       <td style="text-align: center;"
                       
-                    >{{BesoinImmo.qte_reel || 0}}</td>
-                     <td 
-                      style="text-align: center;"
-                    >{{BesoinImmo.qte_affecte || 0}}</td>
-                    <td 
-                      style="text-align: center;"
-                    >{{BesoinImmo.qte_actuel || 0}}</td>
-                     <td 
-                      style="text-align: center;"
-                    >{{formatageSomme(parseFloat(BesoinImmo.prixUnitaire)) || 0}}</td>
-                     <td 
-                      style="text-align: center;"
-                    >{{formatageSomme(parseFloat(BesoinImmo.total_actuel)) || 0}}</td>
-                     
-                    
-                     
-                    
-                    
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                     <td></td>
-                    <td></td>
-                     <td></td>
-                    <td></td>
-                     <td></td>
-                    <td></td>
-                     <td></td>
-                    <td style="font-weight:bold;">Total</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(totalNonCouvert))}}</td>
+                    >{{BesoinImmo.historiquenormequipement || 0}}</td>
                     
                    
+                     <td 
+                      style="text-align: center;"
+                    >{{(BesoinImmo.historiquenormequipement) - (BesoinImmo.normeequipement) || 0}}</td>
+                    <td 
+                      style="text-align: center;"
+                    >{{BesoinImmo.normeequipement || 0}}</td>
+                   <!-- <td style="text-align: center;">{{BesoinImmo.montantequipement  / BesoinImmo.normeequipement || 0}}</td> -->
+                      <td style="text-align: center; color:red;font-size:14px;font-weight:bold;"
+                    >{{formatageSomme(parseFloat(BesoinImmo.montantequipement)) || 0 }}</td> 
+                    
+                     
                   </tr>
-                 
-                 
+                 <tr>
+                   <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <!-- <td></td> -->
+                  <td style="text-align: center;font-size:14px;font-weight:bold;">Total</td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{formatageSomme(parseFloat(afficheMontantTotalEquipementNonCouvert))}}</td>
+                 </tr>
                  
                 </tbody>
               </table>
@@ -1127,7 +1575,8 @@
                       <option v-for="item in afficheLeBesoinDemande(formData.fonction_id)" 
                       :key="item.id" :value="item.norme_famille.id">{{item.norme_famille.libelle}}</option>
                     </select>
-                             
+                            
+                       
                         </td>
                         <td>
                           <label class="control-label">Quantite en stock</label>
@@ -1243,7 +1692,7 @@
     <option v-for="item in EtatImmobilisations" :key="item.id" :value="item.id">{{item.libelle}}</option>
                               </select>
                         </td>
-                        <td>
+                        <!-- <td>
                           <label class="control-label">Cause inactivite</label>
                           
                              <select v-model="formData2.cause_inactivite" class="span4">
@@ -1251,7 +1700,7 @@
     <option v-for="item in causeInactivite" :key="item.id" :value="item.id">{{item.libelle}}</option>
                               </select>
                                               
-                        </td>
+                        </td> -->
                         
                          <td>
                           <label class="control-label">Duree de vie</label>
@@ -1430,6 +1879,74 @@ cause_directeur:""
 ...mapGetters("personnelUA", ["acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
 
 
+afficheMontantTotalEquipementNonCouvert() {
+     
+         return this.acte_personnels.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+
+     
+      
+     
+    },
+
+afficherMontantRestant() {
+      const val = this.affichierTotal(this.formData.fonction_id) - this.afficherValeurOrigine;
+      return parseFloat(val).toFixed(0);
+    },
+ 
+
+
+affichierTotal() {
+      return id => {
+        if (id != null && id != "") {
+         return this.normeImmo.filter(element => element.fonction_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total), 0).toFixed(0);
+
+     
+        }
+      };
+    },
+    coutMoyenActicle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.normeImmo.find(qtreel => qtreel.famille_id == id);
+
+      if (qtereel) {
+        return qtereel.cout_moyen;
+      }
+      return 0
+        }
+      };
+    },
+ 
+
+MontantParEquipementModifier(){
+  
+    
+    var montant = this.articles.filter(element => element.famille_id == this.editTransfert.famille_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(0); 
+      if(isNaN(montant)) return null
+      return montant
+
+   
+  
+}, 
+
+
+
+
+
+
+
+afficheEquipementNonCouvt() {
+      return id => {
+        if (id != null && id != "") {
+           return this.normeImmo.find(qtreel => qtreel.fonction_id == id);
+
+    
+     
+        }
+      };
+    },
+
+
 
 nombreDemandeImmobilisation() {
       
@@ -1604,7 +2121,7 @@ afficherRecupererQteActuelle() {
       return 0
     },
 totalNonCouvert(){
-return this.immobilisations.filter(element=>element.qte_actuel != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_actuel), 0).toFixed(2);
+return this.immobilisations.filter(element=>element.qte_actuel != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_actuel), 0).toFixed(0);
 },
 
 afficherQteTotal() {
@@ -1783,11 +2300,11 @@ afficherDureeVieFamille() {
 
 afficherValeurOrigineModifier() {
       const val = parseFloat(this.nombreAffecter) * parseFloat(this.coutMonenArticle);
-      return parseFloat(val).toFixed(2);
+      return parseFloat(val).toFixed(0);
     },
   afficherValeurOrigine() {
       const val = parseFloat(this.formData2.qte_affecte) * parseFloat(this.coutMonenArticle);
-      return parseFloat(val).toFixed(2);
+      return parseFloat(val).toFixed(0);
     },
 
     afficherNombreEquipementRestant() {
@@ -1798,7 +2315,7 @@ afficherValeurOrigineModifier() {
 montantParBesoin() {
       return id => {
         if (id != null && id != "") {
-          return this.articles.filter(element => element.famille_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(2);
+          return this.articles.filter(element => element.famille_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(0);
         }
       };
     },
@@ -1846,6 +2363,9 @@ afficheIdFonction() {
       }
       return 0
     },
+    equipementNonCouvert(){
+return this.acte_personnels.filter(element => element.normeequipement != 0)
+},
     NombreTauxequipementParAgent(){
 return this.acte_personnels.filter(element => element.normeequipement != null).length
 },
@@ -1855,12 +2375,16 @@ return this.acte_personnels.filter(element => element.normeequipement != null)
 afficheEquipementCouvert(){
 return this.immobilisations.filter(element => element.qte_actuel == 0)
 },
-afficheEquipementNonCouvert(){
-return this.immobilisations.filter(element => element.qte_actuel != 0)
-},
+// afficheEquipementNonCouvert(){
+// return this.immobilisations.filter(element => element.qte_actuel != 0)
+// },
+// NombreafficheEquipementNonCouvert(){
+// return this.immobilisations.filter(element => element.qte_actuel != 0).length
+// },
 NombreafficheEquipementNonCouvert(){
-return this.immobilisations.filter(element => element.qte_actuel != 0).length
+return this.acte_personnels.filter(element => element.normeequipement != 0).length
 },
+
 affichePersonneNonEquipe(){
 return this.acte_personnels.filter(element => element.normeequipement != 0)
 },
@@ -1923,7 +2447,7 @@ afficherActeurDepenseMatricule() {
 afficherLibelleService() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.servicesua.find(qtreel => qtreel.id == id);
+           const qtereel = this.services.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.libelle;
@@ -2128,7 +2652,7 @@ CoutMoyen() {
  return id => {
     if(id !=""){
       
-    const val = parseFloat((this.getAfficheArticle.filter(element => element.famillearticle_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(2))/this.getAfficheArticle.filter(element => element.famillearticle_id == id).length).toFixed(2); 
+    const val = parseFloat((this.getAfficheArticle.filter(element => element.famillearticle_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(2))/this.getAfficheArticle.filter(element => element.famillearticle_id == id).length).toFixed(0); 
     if (isNaN(val)) return null;
     return val;
   
@@ -2140,7 +2664,7 @@ CoutMoyen() {
    if(this.editBesoinImmo.famillearticle_id !=""){
       const val = parseFloat(this.editBesoinImmo.quantite) * parseFloat(this.CoutMoyen(this.editBesoinImmo.famillearticle_id));
         if (isNaN(val)) return null;
-     return parseFloat(val).toFixed(2);
+     return parseFloat(val).toFixed(0);
     }
     return null
 
@@ -2149,7 +2673,7 @@ CoutMoyen() {
    if(this.formData2.famillearticle_id !=""){
       const val = parseFloat(this.formData.quantite) * parseFloat(this.CoutMoyen(this.formData2.famillearticle_id));
         if (isNaN(val)) return null;
-     return parseFloat(val).toFixed(2);
+     return parseFloat(val).toFixed(0);
     }
     return null
 
@@ -2406,13 +2930,13 @@ afficherModalPourValidationDuDirecteur(index) {
       
 if (this.formData.fonction_id == this.afficherAffectationParFonction &&  this.formData.acteur_depense_id == this.afficherAffectationParActeurDepense && this.afficherQuantiteEnRequise(this.formData2.famillearticle_id) == this.afficherAffectationParQuantiteAffecter){
 
-alert("Acteur deja equipé")
+alert("équipement déja attribué")
 }
 else if(this.afficherQuantiteEnStock(this.formData2.famillearticle_id) == 0){
 alert("Veuillez approvisionner votre stock")
 }
 else if(this.afficherQuantiteEnRequise(this.formData2.famillearticle_id) < this.afficherQteTotal){
-  alert("Vérifier le nombre article restant a équipe l'acteur")
+  alert("Vérifiez la quantité affecté")
 }
 
 else if (this.formData.fonction_id == this.afficherAffectationParFonction &&  this.formData.acteur_depense_id == this.afficherAffectationParActeurDepense && this.formData.uniteZone_id == this.afficherAffectationParUniteZone && this.formData.service_id == this.afficherAffectationParService && this.formData2.famillearticle_id == this.afficherAffectationParBesoin){
@@ -2425,7 +2949,8 @@ var nouvelobjet8 ={
 }
 var nouvelobjet2 ={
   ...this.formData,
- normeequipement:this.afficherNombreEquipementRestant
+ normeequipement:this.afficherNombreEquipementRestant,
+ montantequipement:this.afficherMontantRestant
 }
       var nouvelObjet3 = {
         ...this.formData2,
@@ -2461,7 +2986,7 @@ var nouvelobjet2 ={
  etatimmo_id:this.formData2.etat_immobilisation,
  matricule_auteur:this.afficherActeurDepenseMatricule(this.formData.acteur_depense_id),
  annee:this.exerciceBudgetaireEnCours,
- annee_amortissement:this.this.anneeAmortissement,
+ annee_amortissement:this.anneeAmortissement,
  valeurorigine:this.afficherValeurOrigine,
  date_mise_service:this.formData2.date_mise_service
 };
@@ -2507,7 +3032,8 @@ var nouvelobjet9 ={
 }
 var nouvelobjet4 ={
   ...this.formData,
- normeequipement:this.afficherNombreEquipementRestant
+ normeequipement:this.afficherNombreEquipementRestant,
+ montantequipement:this.afficherMontantRestant
 }
       var nouvelObjet = {
         ...this.formData2,
@@ -2543,7 +3069,7 @@ var nouvelobjet4 ={
  etatimmo_id:this.formData2.etat_immobilisation,
  matricule_auteur:this.afficherActeurDepenseMatricule(this.formData.acteur_depense_id),
  annee:this.exerciceBudgetaireEnCours,
-annee_amortissement:this.this.anneeAmortissement,
+annee_amortissement:this.anneeAmortissement,
 valeurorigine:this.afficherValeurOrigine,
  date_mise_service:this.formData2.date_mise_service
 };

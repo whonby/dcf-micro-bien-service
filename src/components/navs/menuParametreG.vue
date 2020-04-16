@@ -468,6 +468,13 @@
           </li>
            <li class="divider"></li>
           <li>
+            <router-link :to="{name: 'service'}" tag="a">
+              <i class="icon-check"></i>
+              Service
+            </router-link>
+          </li>
+           <li class="divider"></li>
+          <li>
             <router-link :to="{name: 'fonctionBudgetaire'}" tag="a">
               <i class="icon-check"></i>
               Fonction Budgétaire

@@ -4,7 +4,7 @@ var queue = housecall({ concurrency: 2, cooldown: 1000 });
 import { asyncLoading } from "vuejs-loading-plugin";
 /**
  * Gestion type acteur
- */
+ */ajouterActeur
 export async function  getTypeActPersonnel({commit}) {
 
     queue.push(() =>  axios.get('/liste_type_acte_personnel').then(response => {

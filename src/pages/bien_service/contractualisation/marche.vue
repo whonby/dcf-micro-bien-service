@@ -389,7 +389,7 @@ type_marche
                                
                                <li ><a data-toggle="tab" href="#tab100">Marchés Planifiés        <span class="badge badge-important" >    {{nombreMarcheEnplanification}}</span></a></li>
                                 <li ><a data-toggle="tab" href="#tab10">En cours Contratualisation        <span class="badge badge-success" >{{nombreDeMarcheEnContratualisation}}</span></a></li>
-                                <li><a data-toggle="tab" href="#tab20">Marchés en Exécution      <span class="badge badge-warning" >     {{0}}</span></a></li>
+                                <li><a data-toggle="tab" href="#tab20">Marchés en Exécution      <span class="badge badge-warning" >     {{nbreMarcheExecuter}}</span></a></li>
                                 <!-- <li><a data-toggle="tab" href="#tab208">Marchés Terminés      <span class="badge badge" >     {{0}}</span></a></li> -->
                                  <li><a data-toggle="tab" href="#tab20002">Marchés Résiliés    <span class="badge badge-info" >     {{afficheNombreMarcheResilier}}</span></a></li>
                                   <li><a data-toggle="tab" href="#tab2000256">Marchés Terminé    <span class="badge badge-inverse" >     {{nombreAfficheMarcheSolde}}</span></a></li>
@@ -439,7 +439,7 @@ type_marche
                    {{afficherUniteAdministrative(afficherIdUniteAdministrative(marche.marche_id)) || 'Non renseigné'}}</td>
                  
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherTypeMarcheLibelle(afficherTypeMarche(marche.marche_id))|| 'Non renseigné'}}</td>
+                   {{ELibelle(E(marche.marche_id))|| 'Non renseigné'}}</td>
                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{afficheractivite(afficherIdactivite(marche.marche_id))|| 'Non renseigné'}}</td> -->
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -520,7 +520,7 @@ type_marche
                    {{afficherUniteAdministrative(marche.unite_administrative_id) || 'Non renseigné'}}</td>
 
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherTypeMarcheLibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
+                   {{ELibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{afficheractivite(marche.activite_id) || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -636,7 +636,7 @@ type_marche
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherTypeMarcheLibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
+                   {{ELibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
                    {{marche.procedure_passation.code || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -783,7 +783,7 @@ type_marche
                    {{afficherUniteAdministrative(afficherIdUniteAdministrative(marche.marche_id)) || 'Non renseigné'}}</td>
                  
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherTypeMarcheLibelle(afficherTypeMarche(marche.marche_id))|| 'Non renseigné'}}</td>
+                   {{ELibelle(E(marche.marche_id))|| 'Non renseigné'}}</td>
                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{afficheractivite(afficherIdactivite(marche.marche_id))|| 'Non renseigné'}}</td> -->
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -884,7 +884,7 @@ type_marche
                    {{afficherUniteAdministrative(marche.unite_administrative_id) || 'Non renseigné'}}</td>
 
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{afficherTypeMarcheLibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
+                   {{ELibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{afficheractivite(marche.activite_id) || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -1926,7 +1926,7 @@ afficherCodeTypeMarche() {
         }
       };
     },
-afficherTypeMarche() {
+E() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.marches.find(qtreel => qtreel.id == id);
@@ -1938,7 +1938,7 @@ afficherTypeMarche() {
         }
       };
     },
-      afficherTypeMarcheLibelle() {
+      ELibelle() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
@@ -2305,7 +2305,21 @@ anneeAmort() {
    afficheMarchExecuter(){
 return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 2)
 },
+ affichertypeMarcheEx() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.code_type_marche;
+      }
+      return 0
+        }
+      };
+    },
+    nbreMarcheExecuter(){
+  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.affichertypeMarcheEx(recuper.marche.type_marche_id) == 4).length
+},
 // afficheMarchExecuter(){
 // return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
 // },

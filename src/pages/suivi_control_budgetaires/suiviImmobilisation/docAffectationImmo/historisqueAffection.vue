@@ -1,4 +1,4 @@
-afficheNombrePersonneNonEquipe
+montant.toFixed
 <template>
   <div>
 
@@ -104,7 +104,7 @@ afficheNombrePersonneNonEquipe
                  <!-- <td>{{BesoinImmo.annee_amortissement || 'Non renseigné'}}</td> -->
                  
                    <td>{{formaterDate(BesoinImmo.date_mise_service) || 'Non renseigné'}}</td>
-                    <td>{{formatageSomme(BesoinImmo.valeurorigine) || 'Non renseigné'}}</td>
+                    <td>{{formatageSomme(parseFloat(BesoinImmo.valeurorigine)) || 'Non renseigné'}}</td>
                      <td colspan="2">
                           <button   class="btn btn-info " title="" @click="fonctionAjouterDemande(index)">
                 <span class=""><i class="icon-pencil"></i></span></button>
@@ -198,8 +198,8 @@ afficheNombrePersonneNonEquipe
                  
                  <!-- <td>{{BesoinImmo.annee_amortissement || 'Non renseigné'}}</td> -->
                  
-                   <td>{{formaterDate(BesoinImmo.date_mise_service) || 'Non renseigné'}}</td>
-                    <td>{{formatageSomme(BesoinImmo.valeurorigine) || 'Non renseigné'}}</td>
+                   <td style="text-align: center;font-size:14px;font-weight:bold;">{{formaterDate(BesoinImmo.date_mise_service) || 'Non renseigné'}}</td>
+                    <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{formatageSomme(BesoinImmo.valeurorigine) || 'Non renseigné'}}</td>
                      <td>
                           <button   class="btn btn-info " title="" @click="afficheDemandeDeMateriel(index)">
                 <span class=""><i class="icon-pencil"></i></span></button>
@@ -244,24 +244,6 @@ afficheNombrePersonneNonEquipe
 
 
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

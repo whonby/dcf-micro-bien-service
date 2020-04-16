@@ -584,7 +584,7 @@
              ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
             ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
-
+ ...mapGetters("SuiviImmobilisation", ["services"]),
  afficheFonctionAdministrative() {
       return id => {
         if (id != null && id != "") {
@@ -601,7 +601,7 @@
  afficheService() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.servicesua.find(qtreel => qtreel.id == id);
+           const qtereel = this.services.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.libelle;
