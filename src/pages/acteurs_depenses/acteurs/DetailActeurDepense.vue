@@ -229,7 +229,7 @@ Ajouter acte de nomination
                                                     </div>
                                                 </div>
                 </td> -->
-                <td>
+                <!-- <td>
                      <div class="control-group">
                                                     <label class="control-label">Type acte de personnel</label>
                                                     <div class="controls">
@@ -242,7 +242,7 @@ Ajouter acte de nomination
                                                         </select>
                                                     </div>
                                                 </div>
-                </td>
+                </td> -->
                  <td>
                                                                 <div class="control-group">
                                                             <label class="control-label">Acte nomination :</label>
@@ -262,11 +262,7 @@ Ajouter acte de nomination
                                                              <input type="hidden" class="span11" v-model="formData.historiquenormequipement" placeholder="">
                                                         </div>
                                                             </td>
-                                                        </tr>
-                                                        <tr>
-                                                           
-                                                           
-                                                            <td>
+                                                              <td>
                                                                  <div class="control-group">
                                                             <label class="control-label">Spécimen de signature</label>
                                                             <div class="controls">
@@ -276,6 +272,7 @@ Ajouter acte de nomination
                                                         </div>
                                                             </td>
                                                         </tr>
+                                                       
                                                         </table>
                                                   
 
@@ -929,8 +926,9 @@ historiqueMissionParActeur(){
                   formData.append('date_debut_fonct_budget', this.date_debut_fonct_budget);
                    formData.append('date_fin_fonct_budget', this.date_fin_fonct_budget);
                 formData.append('id', this.salaire_actuel_acteur.id);
-                formData.append('normeequipement', this.normeequipement);
-                formData.append('historiquenormequipement', this.historiquenormequipement);
+                // formData.append('normeequipement', this.normeequipement);
+                // formData.append('historiquenormequipement', this.historiquenormequipement);
+                //  formData.append('historiquenormequipement', this.historiquenormequipement);
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'

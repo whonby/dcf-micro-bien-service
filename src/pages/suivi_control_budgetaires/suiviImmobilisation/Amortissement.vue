@@ -12,24 +12,24 @@
               <thead>
                 <tr>
                   <!-- <th>Code</th> -->
-                  <th>Annee budgetaire</th>
+                  <th style="text-align: center;font-size:14px;font-weight:bold;">Année budgétaire</th>
                   <!-- <th>Taux</th> -->
-                  <th>dure_vie</th>
-                  <th>Designation</th>
-                  <th>Valeur Origine</th>
-                  <th>Date de mise en service</th>
+                  <th style="text-align: center;font-size:14px;font-weight:bold;">durée</th>
+                  <th style="text-align: center;font-size:14px;font-weight:bold;">Désignation</th>
+                  <th style="text-align: center;font-size:14px;font-weight:bold;">Valeur Origine</th>
+                  <th style="text-align: center;font-size:14px;font-weight:bold;">Date de mise en service</th>
                   
                   <!-- <th>Acteur Depense</th> -->
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd gradeX">
-                  <td>{{BesoinImmo.annee || 'Non renseigné'}}</td> 
+                  <td style="text-align: center;font-size:14px;font-weight:bold;">{{BesoinImmo.annee || 'Non renseigné'}}</td> 
                   <!-- <td>{{BesoinImmo.TVA_id || 'Non renseigné'}} %</td> -->
-                  <td>{{BesoinImmo.dure_vie || 'Non renseigné'}} Ans</td>
-                    <td>{{afficheFamille(BesoinImmo.article_id) || 'Non renseigné'}}</td>
-                  <td>{{formatageSomme(BesoinImmo.valeurorigine) || 0 }}</td>
-                  <td>{{formaterDate(BesoinImmo.date_mise_service) || 'Non renseigné'}}</td>
+                  <td style="text-align: center;font-size:14px;font-weight:bold;">{{BesoinImmo.dure_vie || 'Non renseigné'}} Ans</td>
+                    <td style="text-align: center;font-size:14px;font-weight:bold;">{{afficheFamille(BesoinImmo.article_id) || 'Non renseigné'}}</td>
+                  <td style="text-align: center;font-size:14px;font-weight:bold;">{{formatageSomme(BesoinImmo.valeurorigine) || 0 }}</td>
+                  <td style="text-align: center;font-size:14px;font-weight:bold;">{{formaterDate(BesoinImmo.date_mise_service) || 'Non renseigné'}}</td>
                  
                   
                 </tr>
@@ -39,12 +39,12 @@
             <span class="icon">
               <i class="icon-th"></i>
             </span>
-            <h5>Amortissement</h5>
+            <h5 style="text-align: center;font-size:14px;font-weight:bold;">Amortissement</h5>
         
           </div>
             <ul class="nav nav-tabs">
-              <li class="active"><a data-toggle="tab" href="#tab1">Amortissement linéaire simple</a></li>
-              <li v-if="getNombreDeMois != 12"><a data-toggle="tab" href="#tab2">Amortissement linéaire au prorata temporis</a></li>
+              <li class="active"><a data-toggle="tab" href="#tab1" style="text-align: center;font-size:14px;font-weight:bold;">Amortissement linéaire simple</a></li>
+              <li v-if="getNombreDeMois != 12"><a data-toggle="tab" href="#tab2" style="text-align: center;font-size:14px;font-weight:bold;">Amortissement linéaire au prorata temporis</a></li>
               
             </ul>
              <div class="widget-content tab-content">
@@ -65,10 +65,10 @@
               <thead>
                 <tr>
                   <!-- <th>Code</th> -->
-                  <th>Année</th>
-                  <th>Annuité</th>
-                   <th>Cumul</th> 
-                  <th>Valeur Net Comptable</th>
+                  <th style="text-align: center;font-size:14px;font-weight:bold;">Année</th>
+                  <th style="text-align: center;font-size:14px;font-weight:bold;">Annuité</th>
+                   <th style="text-align: center;font-size:14px;font-weight:bold;">Cumul</th> 
+                  <th style="text-align: center;font-size:14px;font-weight:bold;">Valeur Net Comptable</th>
                   
                   
                  
@@ -77,14 +77,14 @@
               </thead>
               <tbody>
                 <tr class="odd gradeX" v-for="amort in Amortissement" :key="amort.annee">
-                  <td>{{amort.annee }}</td> 
-                  <td>{{amort.anuite }}</td>
-                    <td>{{amort.cumul }}</td>
+                  <td style="text-align: center;font-size:14px;font-weight:bold;">{{amort.annee }}</td> 
+                  <td style="text-align: center;font-size:14px;font-weight:bold;">{{amort.anuite }}</td>
+                    <td style="text-align: center;font-size:14px;font-weight:bold;">{{amort.cumul }}</td>
 
-                  <td>{{amort.valeurNette }}</td>
+                  <td style="text-align: center;font-size:14px;font-weight:bold;">{{amort.valeurNette }}</td>
                   <!-- <td>{{test || 'Non renseigné'}} </td> -->
                    
-                  
+                   
                 </tr>
               </tbody>
             </table>
@@ -114,11 +114,11 @@
               </thead>
               <tbody>
                 <tr class="odd gradeX" v-for="amort in AmortissementProrataTemporis" :key="amort.annee">
-                  <td>{{amort.annee }}</td> 
-                  <td>{{amort.anuite }}</td>
-                    <td>{{amort.cumul }}</td>
+                  <td style="text-align: center;font-size:14px;font-weight:bold;">{{amort.annee }}</td> 
+                  <td style="text-align: center;font-size:14px;font-weight:bold;">{{amort.anuite }}</td>
+                    <td style="text-align: center;font-size:14px;font-weight:bold;">{{amort.cumul }}</td>
 
-                  <td>{{amort.valeurNette }}</td>
+                  <td style="text-align: center;font-size:14px;font-weight:bold;">{{amort.valeurNette }}</td>
                   <!-- <td>{{test || 'Non renseigné'}} </td> -->
                    
                   

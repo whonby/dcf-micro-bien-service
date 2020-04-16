@@ -202,7 +202,7 @@
                                                         <select v-model="formData.service_id" :disabled="verrouilleService">
                                                             <option></option>
                                                             <option v-for="item in afficheService(formData.unite_administrative_id)" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
+                                                                {{afficheServicelibelle(item.libelle)}}
                                                             </option>
 
                                                         </select>
@@ -320,7 +320,20 @@
                                                     </div>
                                                 </div>
                 </td>
-               
+                  <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Type acte de personnel</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.type_acte_id">
+                                                            <option></option>
+                                                            <option v-for="item in type_acte_personnels" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                </td>
             </tr>
         </table>
   </div>
@@ -420,7 +433,7 @@
                     nom_pere: "",
                     nom_mere: "",
                     date_debut_contrat:"",
-                    code:"",
+                    
                     type_salarie_id:"",
                     type_contrat_id:"",
                     niveau_etude_id:"",
@@ -460,7 +473,7 @@
             ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", [
-      
+      "services",
       "normeImmo"
       
       
@@ -482,6 +495,14 @@ nombreDeFonction() {
         }
       };
     },
+    montantPourEtreEquipe() {
+      return id => {
+        if (id != null && id != "") {
+          return this.normeImmo.filter(element => element.fonction_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total), 0).toFixed(0);
+        }
+      };
+    },
+    
  afficheUniteZone() {
       return id => {
         if (id != null && id != "") {
@@ -493,6 +514,18 @@ nombreDeFonction() {
       return id => {
         if (id != null && id != "") {
           return this.servicesua.filter(element => element.s_ua_id == id);
+        }
+      };
+    },
+    afficheServicelibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.services.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
         }
       };
     },
@@ -588,7 +621,9 @@ exoEnCours() {
                 exercice_budgetaire_id:this.afficheIdExerciceEnCours,
                 grade_id:this.afficheGrade(this.formData.fonction_id),
                 normeequipement:this.nombreDeFonction(this.formData.fonction_id),
-                historiquenormequipement:this.nombreDeFonction(this.formData.fonction_id)
+                historiquenormequipement:this.nombreDeFonction(this.formData.fonction_id),
+                montantequipement:this.montantPourEtreEquipe(this.formData.fonction_id)
+               
               }
                 console.log(this.formData)
                 this.ajouterActeur(nouveauObjet)

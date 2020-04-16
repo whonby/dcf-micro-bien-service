@@ -41,7 +41,7 @@
                     
                       <option value=""></option>
                       <option
-                        v-for="typeUniteA in servicesua"
+                        v-for="typeUniteA in services"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
@@ -80,6 +80,7 @@
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
                     </select>
+                   
                   </div>
                 </div>
               </td>
@@ -102,6 +103,43 @@
               </td>
           <td>
                 <div class="control-group">
+                  <label class="control-label">Coût moyen</label>
+                  <div class="controls">
+                       <input
+                      type="text"
+                  :value="MontantMoyen"
+                      class="span5"
+                     readonly
+                      
+                    />
+                   
+                    
+                    
+                  </div>
+                </div>
+              </td>
+             
+            </tr>
+            <tr>
+              <td>
+                <div class="control-group">
+                  <label class="control-label">Montant Total</label>
+                  <div class="controls">
+                       <input
+                      type="text"
+                  :value="MontantTotal"
+                      class="span5"
+                     readonly
+                      
+                    />
+                   
+                    
+                    
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="control-group">
                   <label class="control-label">Duree de vie</label>
                   <div class="controls">
                        <input
@@ -117,9 +155,7 @@
                   </div>
                 </div>
               </td>
-             
             </tr>
-            
               
              
       
@@ -155,11 +191,9 @@
                   <label class="control-label">Direction</label>
                   <div class="controls">
                     <select v-model="editTransfert.direction_id" class="span5" >
-                      <option
-                        v-for="typeUniteA in directions"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
+                   
+                      <option ></option>
+                      <option value="Direction">Direction</option>
                     </select>
                   </div>
                 </div>
@@ -170,7 +204,7 @@
                   <div class="controls">
                     <select v-model="editTransfert.service_id" class="span5" >
                       <option
-                        v-for="typeUniteA in servicesua"
+                        v-for="typeUniteA in services"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
@@ -225,7 +259,44 @@
                   </div>
                 </div>
               </td>
-          <td>
+         <td>
+                <div class="control-group">
+                  <label class="control-label">Coût moyen</label>
+                  <div class="controls">
+                       <input
+                      type="text"
+                  :value="MontantMoyenModifier"
+                      class="span5"
+                     readonly
+                      
+                    />
+                   
+                    
+                    
+                  </div>
+                </div>
+              </td>
+             
+            </tr>
+             <tr>
+              <td>
+                <div class="control-group">
+                  <label class="control-label">Montant Total</label>
+                  <div class="controls">
+                       <input
+                      type="text"
+                  :value="MontantTotalModifier"
+                      class="span5"
+                     readonly
+                      
+                    />
+                   
+                    
+                    
+                  </div>
+                </div>
+              </td>
+              <td>
                 <div class="control-group">
                   <label class="control-label">Duree de vie</label>
                   <div class="controls">
@@ -242,10 +313,7 @@
                   </div>
                 </div>
               </td>
-             
-            </tr>
-            
-              
+            </tr>  
              
       
         </table>
@@ -394,7 +462,9 @@ export default {
       "getAfficheStockArticle",
       "getPersoNormeArticle",
       "getPersoStock",
-      "stockageArticle"
+      "stockageArticle",
+      "articles",
+      "services"
       
     ]),
         ...mapGetters("uniteadministrative", [
@@ -440,6 +510,91 @@ export default {
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  
  ...mapGetters('personnelUA', ['all_acteur_depense','fonctions']),
+
+
+MontantParEquipementModifier(){
+  
+    
+    var montant = this.articles.filter(element => element.famille_id == this.editTransfert.famille_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(2); 
+      if(isNaN(montant)) return null
+      return montant
+
+   
+  
+}, 
+getNombreArticleModifier(){
+  
+    
+    return  this.articles.filter(element => element.famille_id == this.editTransfert.famille_id).length; 
+      
+
+   
+  
+}, 
+MontantMoyenModifier() {
+ 
+      
+    const val = parseFloat((this.MontantParEquipementModifier)/this.getNombreArticleModifier).toFixed(2); 
+    if (isNaN(val)) return null;
+    return val;
+  
+
+    },
+
+MontantTotalModifier() {
+ 
+      
+    const val = parseFloat((this.editTransfert.norme)*this.MontantMoyenModifier).toFixed(2); 
+    if (isNaN(val)) return null;
+    return val;
+  
+
+    },
+
+
+MontantParEquipement(){
+  
+    
+    var montant = this.articles.filter(element => element.famille_id == this.formData.famille_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(2); 
+      if(isNaN(montant)) return null
+      return montant
+
+   
+  
+}, 
+getNombreArticle(){
+  
+    
+    return  this.articles.filter(element => element.famille_id == this.formData.famille_id).length; 
+      
+
+   
+  
+}, 
+MontantMoyen() {
+ 
+      
+    const val = parseFloat((this.MontantParEquipement)/this.getNombreArticle).toFixed(2); 
+    if (isNaN(val)) return null;
+    return val;
+  
+
+    },
+
+MontantTotal() {
+ 
+      
+    const val = parseFloat((this.formData.norme)*this.MontantMoyen).toFixed(2); 
+    if (isNaN(val)) return null;
+    return val;
+  
+
+    },
+
+
+
+
+
 
 DureeAffcheModifier() {
       
@@ -539,7 +694,12 @@ DureeAffcheModifier() {
     // fonction pour vider l'input ajouter
     ajouterUniteAdministrativeLocal() {
      
-      this.ajouterNormeImmob(this.formData);
+     var objetNorme ={
+       ...this.formData,
+        cout_moyen: this.MontantMoyen,
+      total: this.MontantTotal,
+     }
+      this.ajouterNormeImmob(objetNorme);
 
       this.formData = {
            service_id:"",
@@ -557,8 +717,12 @@ DureeAffcheModifier() {
     },
     // fonction pour vider l'input modifier
     modifierUniteAdministrativeLocal() {
-     
-      this.modifierNormeImmob(this.editTransfert);
+     var objetNorme ={
+       ...this.editTransfert,
+        cout_moyen: this.MontantMoyenModifier,
+      total: this.MontantTotalModifier,
+     }
+      this.modifierNormeImmob(objetNorme);
    
 this.$("#modificationModal").modal('hide');
 

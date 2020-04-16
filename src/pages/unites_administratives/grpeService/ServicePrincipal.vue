@@ -12,7 +12,7 @@
     <div id="exampleModal" class="modal hide tailgrand12">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">x</button>
-        <h3>Ajouter Direction</h3>
+        <h3>Ajouter Service</h3>
       </div>
       <div class="modal-body">
         
@@ -35,35 +35,19 @@
               </td>
              </tr>
               
-                     <!-- <tr>
-               <td>
+                  
+               <tr>
+              <td>
                 <div class="control-group">
-                  <label class="control-label">Direction</label>
+                  <label class="control-label">Service</label>
                   <div class="controls">
-                    <select v-model="formData.direction_id" class="span6" :readOnly="verroDirection">
+                    <select v-model="formData.libelle" class="span6" >
                       <option
-                        v-for="typeUniteA in directionDynamiques(formData.s_ua_id)"
+                        v-for="typeUniteA in services"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
                     </select>
-                  </div>
-                </div>
-              </td>
-             </tr> -->
-               <tr>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Nom Service</label>
-                  <div class="controls">
-                       <input
-                      type="text"
-                    v-model="formData.libelle"
-                      class="span6"
-                   
-                      
-                    />
-                   
                   </div>
                 </div>
               </td>
@@ -93,7 +77,7 @@
     <div id="modificationModal" class="modal hide tailgrand12">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">Ã—</button>
-        <h3>Modifier Direction</h3>
+        <h3>Modifier Service</h3>
       </div>
       <div class="modal-body">
          <table class="table table-bordered table-striped">
@@ -133,18 +117,17 @@
               </td>
              </tr> -->
                <tr>
-              <td>
+             <td>
                 <div class="control-group">
-                  <label class="control-label">Nom Service</label>
+                  <label class="control-label">Service</label>
                   <div class="controls">
-                       <input
-                      type="text"
-                    v-model="editTransfert.libelle"
-                      class="span6"
-                     
-                      
-                    />
-                   
+                    <select v-model="editTransfert.libelle" class="span6" >
+                      <option
+                        v-for="typeUniteA in services"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
                   </div>
                 </div>
               </td>
@@ -328,6 +311,20 @@ export default {
  
  ...mapGetters('personnelUA', ['all_acteur_depense']),
 
+ ...mapGetters("SuiviImmobilisation", [
+      "familles",
+   
+      "listeBesoinValider",
+      "besoinImmobilisations",
+      "groupTriUaImmo",
+      "SuiviImmo",
+      "listeBesoinValider",
+      "getAfficheStockArticle",
+      "getPersoNormeArticle",
+      "getPersoStock",
+      "stockageArticle",
+      "articles",
+      "services"]),
 verroDirection() {
       return this.formData.s_ua_id == "";
     },

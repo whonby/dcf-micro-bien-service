@@ -1101,7 +1101,9 @@ export function ajouterNormeImmob({ commit, dispatch }, nouveau) {
       norme: nouveau.norme,
       direction_id: nouveau.direction_id,
       service_id: nouveau.service_id,
-      fonction_id: nouveau.fonction_id
+      fonction_id: nouveau.fonction_id,
+      cout_moyen: nouveau.cout_moyen,
+      total: nouveau.total,
 
 
     }))
@@ -1131,7 +1133,9 @@ export function modifierNormeImmob({ commit, dispatch }, nouveau) {
       norme: nouveau.norme,
       direction_id: nouveau.direction_id,
       service_id: nouveau.service_id,
-      fonction_id: nouveau.fonction_id
+      fonction_id: nouveau.fonction_id,
+      cout_moyen: nouveau.cout_moyen,
+      total: nouveau.total,
 
 
     }))
