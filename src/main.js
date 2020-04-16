@@ -33,13 +33,13 @@ import "fullcalendar/dist/fullcalendar.min.css";
 import "fullcalendar-scheduler/dist/scheduler.min.css";
 import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
 
-import PrettyInput from 'pretty-checkbox-vue/input';
-import PrettyCheck from 'pretty-checkbox-vue/check';
-import PrettyRadio from 'pretty-checkbox-vue/radio';
+// import PrettyInput from 'pretty-checkbox-vue/input';
+// import PrettyCheck from 'pretty-checkbox-vue/check';
+// import PrettyRadio from 'pretty-checkbox-vue/radio';
  
-Vue.component('p-input', PrettyInput);
-Vue.component('p-check', PrettyCheck);
-Vue.component('p-radio', PrettyRadio);
+// Vue.component('p-input', PrettyInput);
+// Vue.component('p-check', PrettyCheck);
+// Vue.component('p-radio', PrettyRadio);
 
 Vue.component('v-marker-cluster', Vue2LeafletMarkerCluster)
 Vue.component('downloadExcel', JsonExcel)

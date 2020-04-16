@@ -46,7 +46,6 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "file-saver": "^2.0.1",
-    "pretty-checkbox-vue": "^1.1.9",
     "sass": "^1.15.2",
     "sass-loader": "^7.1.0",
     "vue-devtools": "^5.1.3",

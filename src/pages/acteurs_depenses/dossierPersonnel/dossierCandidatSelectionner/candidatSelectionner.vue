@@ -50,7 +50,7 @@
                         </td>-->   
                 
                             <div class="btn-group">
-                                <button  @click.prevent="modification1(index)" v-if="afficherCandidatSelectionnerAtrribue(appelOffre.jugement_id) == 1" class="btn btn-success " title="candidat selectionné">
+                                <button  @click.prevent="modification1(index)" v-if="afficherCandidatSelectionnerAtrribue(appelOffre.jugement_id) == 1" class="btn btn-success " title=" déselectionné le candidat">
                                 <span class=""><i class="icon-ok"></i></span></button> 
                              
                             <button @click.prevent="supprimerCandidatSelectionner(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
