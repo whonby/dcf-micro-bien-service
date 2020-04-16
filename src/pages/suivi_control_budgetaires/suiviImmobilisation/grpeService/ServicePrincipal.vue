@@ -4,148 +4,10 @@
   <div>
 
 
-<!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
-    <div id="exampleModal" class="modal hide tailgrand12">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">x</button>
-        <h3>Ajouter Service</h3>
-      </div>
-      <div class="modal-body">
-        
-        <table class="table table-bordered table-striped">
-         
-            <tr>
-               <td>
-                <div class="control-group">
-                  <label class="control-label">Unite d'administrative</label>
-                  <div class="controls">
-                    <select v-model="formData.s_ua_id" class="span6">
-                      <option
-                        v-for="typeUniteA in uniteAdministratives"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-             </tr>
-              
-                  
-               <tr>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Service</label>
-                  <div class="controls">
-                    <select v-model="formData.libelle" class="span6" >
-                      <option
-                        v-for="typeUniteA in services"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-         
-             
-            </tr>
-            
-              
-             
-      
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="ajouterUniteAdministrativeLocal(formData)"
-          class="btn btn-primary"
-          href="#"
-         
-        >Valider</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
-    <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
+     
+<!----- ajouter modal   ---->
 
-<!--///////////////////////////////////////// debut modal de modification //////////////////////////////-->
 
-    <div id="modificationModal" class="modal hide tailgrand12">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">x</button>
-        <h3>Modifier Service</h3>
-      </div>
-      <div class="modal-body">
-         <table class="table table-bordered table-striped">
-         
-           
-            <tr>
-               <td>
-                <div class="control-group">
-                  <label class="control-label">Unite d'administrative</label>
-                  <div class="controls">
-                    <select v-model="editTransfert.s_ua_id" class="span6">
-                      <option
-                        v-for="typeUniteA in uniteAdministratives"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-             </tr>
-             
-                     <!-- <tr>
-               <td>
-                <div class="control-group">
-                  <label class="control-label">Direction</label>
-                  <div class="controls">
-                    <select v-model="editTransfert.direction_id" class="span6">
-                      <option
-                        v-for="typeUniteA in ModifierdirectionDynamiques(editTransfert.s_ua_id)"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-             </tr> -->
-               <tr>
-             <td>
-                <div class="control-group">
-                  <label class="control-label">Service</label>
-                  <div class="controls">
-                    <select v-model="editTransfert.libelle" class="span6" >
-                      <option
-                        v-for="typeUniteA in services"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-         
-             
-            </tr>
-            
-         
-      
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="modifierUniteAdministrativeLocal(editTransfert)"
-          class="btn btn-primary"
-          href="#"
-         
-        >Modifier</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
-    
     <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
     <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
     <!-- End Page Header -->
@@ -153,8 +15,21 @@
     <div class="container-fluid">
       <hr />
       <div class="row-fluid">
-        
-       
+        <div class="span12">
+          <div>
+
+                                        <!-- <download-excel
+                                            class="btn btn-default pull-right"
+                                            style="cursor:pointer;"
+                                              :fields = "json_fields"
+                                              title="Liste Section "
+                                              name ="Liste section"
+                                              worksheet = "section"
+                                            :data="uniteAdministratives">
+                    <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+
+                                                 </download-excel>  -->
+                                     </div>
                                      
           <div class="widget-box">
             <div class="widget-title">
@@ -165,7 +40,7 @@
              
             </div>
 
-            <div class="widget-content nopadding">
+            <div class="widget-content nopadding"  >
               
               <ServiceComponent v-for="equipement in uniteAdministratives"
                 :key="equipement.id"
@@ -182,7 +57,7 @@
               
             </div>
           </div>
-        
+        </div>
       </div>
     </div>
 
@@ -309,25 +184,7 @@ export default {
       "stockageArticle",
       "articles",
       "services",
-      "normeImmo"]),
-
-
-
-nombreDeFonction() {
-      return id => {
-        if (id != null && id != "") {
-          return this.normeImmo.filter(element => element.service_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.norme), 0).toFixed(0);
-        }
-      };
-    },
-
- montantPourEtreEquipe() {
-      return id => {
-        if (id != null && id != "") {
-          return this.normeImmo.filter(element => element.service_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total), 0).toFixed(0);
-        }
-      };
-    },
+      "servicesua"]),
 verroDirection() {
       return this.formData.s_ua_id == "";
     },
@@ -376,13 +233,8 @@ verroService() {
     },
     // fonction pour vider l'input ajouter
     ajouterUniteAdministrativeLocal() {
-     var objetService = {
-       ...this.formData,
-       normeequipement:this.nombreDeFonction(this.formData.libelle),
-       historiqueequipement:this.nombreDeFonction(this.formData.libelle),
-       montantequipement:this.montantPourEtreEquipe(this.formData.libelle),
-     }
-      this.ajouterService(objetService);
+     
+      this.ajouterService(this.formData);
 
       this.formData = {
            s_ua_id:"",

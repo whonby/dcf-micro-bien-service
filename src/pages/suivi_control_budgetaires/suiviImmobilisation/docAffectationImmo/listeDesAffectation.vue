@@ -193,7 +193,7 @@ anneeAmortissement
                 <div class="widget-box">
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
-                      <li class="">
+                      <li class="active">
                         <a data-toggle="tab" href="#tab456">Listes des services   <span class="badge badge-inverse">{{afficheNombreToutPersonne}}</span></a>
                       </li>
                        <li class="">
@@ -374,28 +374,19 @@ anneeAmortissement
 
                     </div>
                       <div id="tab456" class="tab-pane active">
-                       <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
                      
-                    <!-- <th>Type Unite d'administrative</th> -->
-                    <th>Unite d'administrative</th>
-                    
-                     <th>Unite de zone</th>
-                    
-                    <th>Service</th>
-                    <th>Fonction</th>
-                    <th>Nom et prénoms</th>
-                    <th >Equipé</th>
-                     
-                  </tr>
-                </thead>
-                <tbody>
-                  
+             
+                
+             
+              
+<ServicePrincipal></ServicePrincipal>
+            
+
+            
+          
                  
                  
-                </tbody>
-              </table>
+               
 
                     </div>
                     <div id="tab46" class="tab-pane">
@@ -1759,10 +1750,15 @@ anneeAmortissement
 <script>
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
+import ServicePrincipal from '../grpeService/ServicePrincipal'
 import { formatageSomme } from "../../../../Repositories/Repository";
 
 export default {
+  
   name: 'besionImmolisation',
+  components: {
+      ServicePrincipal
+  },
   data() {
     return {
       fabActions: [
