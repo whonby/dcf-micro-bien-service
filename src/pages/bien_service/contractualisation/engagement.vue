@@ -1,4 +1,4 @@
-Validation CF
+
 <template>
   	<div>
 
@@ -15,7 +15,69 @@ Validation CF
                 <input type="search" placeholder />
               </div>-->
             </div>
+   <div class="widget-box">
+                <div class="widget-content">
+                    <div class="widget-content nopadding">
+                       <h4 v-if="detail_marche">Detail Marche : {{detail_marche.objet}} </h4>
+                        <table class="table table-striped table-bordered" v-if="detail_marche">
+                            <thead>
+                            <tr>
+                               <th>Reference marché</th>
+                               <th>Numéro marché</th>
+                                <th>Objet marché</th>
+                                
+                                <th>Montant de base</th>
+                                <th>Type de marché</th>
+                                <th>Procédure de passation </th>
+                                <th>Unite administrative</th>
+                                <th>Activité</th>
+                    <th>Imputation</th>
+                    <!-- <th>Ligne Budgetaire</th>
+                                <th>Exercice Budgetaire</th> -->
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="taskStatus">{{detail_marche.reference_marche}}</td>
+                                
+                                <td class="taskStatus">{{afficheNumeroMarche(detail_marche.id)}}</td>
+                                 <td class="taskDesc">{{detail_marche.objet}}</td>
+                                <td class="taskOptions">
+                                    {{formatageSomme(parseFloat(afficheMontantReelMarche(detail_marche.id)))}}
+                                </td>
+                                <td class="taskOptions">
+                                    {{detail_marche.type_marche.libelle}}
+                                </td>
+                                <td class="taskOptions">
+                                    <!-- {{afficheModePassation(detail_marche.procedure_passation_id)}} -->
+                                   
+                               <span v-if="DisponibleBudgetaireApresLiquidation < 10000000 ">Procédure Simplifiée de demande de Cotation(PSC Sans comité)</span>
+                         <span v-else-if="DisponibleBudgetaireApresLiquidation < 30000000 ">Procédure Simplifiée de demande de Cotation(PSC Avec comité)</span>
+                         <span v-else-if="DisponibleBudgetaireApresLiquidation < 60000000 ">Procédure Simplifiée à compétition Limitée(PSL)</span>
+                         <span v-else-if="DisponibleBudgetaireApresLiquidation < 100000000 ">Procédure Simplifiée à compétition Ouverte(PSO)</span>
+                         <span v-else-if="DisponibleBudgetaireApresLiquidation > 100000000 ">Appel d'Offre Ouvert(AON ou AOI)</span>
+                         <span v-else></span>
+                                </td>
+                                <td class="taskOptions">
+                                    {{detail_marche.objetUniteAdministrative.libelle}}
+                                </td>
+                                <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{detail_marche.afficheActivite.libelle || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{detail_marche.imputation || 'Non renseigné'}}</td>
+                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  {{detail_marche.afficheEconomique.code || 'Non renseigné'}}- {{detail_marche.afficheEconomique.libelle || 'Non renseigné'}}</td>
+                     
+                                <td class="taskOptions">
+                                    Ok
+                                </td> -->
+                            </tr>
 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
             <div class="table-responsive text-nowrap">
               <table class="table table-bordered table-striped">
                 <div class="widget-box">
@@ -123,69 +185,7 @@ Validation CF
           </div>
                             <div id="tab2" class="tab-pane ">
   <div class="widget-content nopadding" >
-   <div class="widget-box">
-                <div class="widget-content">
-                    <div class="widget-content nopadding">
-                       <h4 v-if="detail_marche">Detail Marche : {{detail_marche.objet}} </h4>
-                        <table class="table table-striped table-bordered" v-if="detail_marche">
-                            <thead>
-                            <tr>
-                               <th>Reference marché</th>
-                               <th>Numéro marché</th>
-                                <th>Objet marché</th>
-                                
-                                <th>Montant de base</th>
-                                <th>Type de marché</th>
-                                <th>Procédure de passation </th>
-                                <th>Unite administrative</th>
-                                <th>Activité</th>
-                    <th>Imputation</th>
-                    <!-- <th>Ligne Budgetaire</th>
-                                <th>Exercice Budgetaire</th> -->
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="taskStatus">{{detail_marche.reference_marche}}</td>
-                                
-                                <td class="taskStatus">{{afficheNumeroMarche(detail_marche.id)}}</td>
-                                 <td class="taskDesc">{{detail_marche.objet}}</td>
-                                <td class="taskOptions">
-                                    {{formatageSomme(parseFloat(afficheMontantReelMarche(detail_marche.id)))}}
-                                </td>
-                                <td class="taskOptions">
-                                    {{detail_marche.type_marche.libelle}}
-                                </td>
-                                <td class="taskOptions">
-                                    <!-- {{afficheModePassation(detail_marche.procedure_passation_id)}} -->
-                                   
-                               <span v-if="DisponibleBudgetaireApresLiquidation < 10000000 ">Procédure Simplifiée de demande de Cotation(PSC Sans comité)</span>
-                         <span v-else-if="DisponibleBudgetaireApresLiquidation < 30000000 ">Procédure Simplifiée de demande de Cotation(PSC Avec comité)</span>
-                         <span v-else-if="DisponibleBudgetaireApresLiquidation < 60000000 ">Procédure Simplifiée à compétition Limitée(PSL)</span>
-                         <span v-else-if="DisponibleBudgetaireApresLiquidation < 100000000 ">Procédure Simplifiée à compétition Ouverte(PSO)</span>
-                         <span v-else-if="DisponibleBudgetaireApresLiquidation > 100000000 ">Appel d'Offre Ouvert(AON ou AOI)</span>
-                         <span v-else></span>
-                                </td>
-                                <td class="taskOptions">
-                                    {{detail_marche.objetUniteAdministrative.libelle}}
-                                </td>
-                                <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{detail_marche.afficheActivite.libelle || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{detail_marche.imputation || 'Non renseigné'}}</td>
-                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
-                  {{detail_marche.afficheEconomique.code || 'Non renseigné'}}- {{detail_marche.afficheEconomique.libelle || 'Non renseigné'}}</td>
-                     
-                                <td class="taskOptions">
-                                    Ok
-                                </td> -->
-                            </tr>
 
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
                   <div class="row-fluid">
                 <div class="span12">
                     <div class="widget-box">
