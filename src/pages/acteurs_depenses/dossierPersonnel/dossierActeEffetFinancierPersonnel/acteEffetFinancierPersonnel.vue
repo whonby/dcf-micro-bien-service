@@ -9,12 +9,12 @@
                     <tr>
 
                         <th>Reference acte </th>
-                        <!-- <th>Libelle acte</th> -->
+                       
                         <th>Montant acte</th>
                         <!-- <th>Type acte</th> -->
                         <th>Objet marche.</th>
                         <th>Imputation</th>
-                        <!-- <th>Entreprise</th> -->
+                        <th>Candidat retenu</th>
                        
                         <th>Action</th>
                     </tr>
@@ -37,8 +37,8 @@
                             {{effetFinancier.text_juridique.objet_text || 'Non renseigné'}}</td> -->
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.marche.imputation || 'Non renseigné'}}</td>
-                              <!-- <td @click="afficherModalModifierActeEffetFinancier(index)">
-                            {{affichierNomEntreprise(ouverture.entreprise_id) || 'Non renseigné'}}</td> -->
+                              <td @click="afficherModalModifierActeEffetFinancier(index)">
+                            {{afficherNomDossierCandidat(effetFinancier.candidat_personnel_id) || 'Non renseigné'}}</td>
 <td>
       <div class="btn-group">
                             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
@@ -93,11 +93,12 @@
                             <td colspan="2">
 
                        <div class="control-group">
-                        <label class="control-label">Dossier candidat.</label>
+                        <label class="control-label">Candidat retenu après analyse.</label>
                         <div class="controls">
                           <select v-model="formEffetFinancier.candidat_personnel_id" class="span">
+                              <option value=""></option>
                                 <option v-for="varText in afficherCandidat(macheid)" :key="varText.id"
-                                        :value="varText.candidat_personnel_id">{{varText.nom_candidat}} {{varText.prenom_candidat}}</option>
+                                        :value="varText.candidat_personnel_id">{{afficherNomDossierCandidat(varText.candidat_personnel_id)}}</option>
                             </select>
                         
                         </div>
@@ -152,6 +153,7 @@
                                     class="span"
                                     placeholder=" "
                             />
+                            
                         </div>
                     </div>
 
@@ -710,7 +712,7 @@ export default {
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
-                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
+                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
                 "getActeEffetFinancierPersonnaliserContrat", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
             ...mapGetters('personnelUA', ['acteur_depenses','dossierPersonnels']),
               ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe', 
@@ -728,25 +730,53 @@ afficherCandidat () {
                 return id => {
                     if (id != "") {
                         // console.log("Marche lettre inviation marche")
-                        return this.dossierPersonnels.filter(idmarche => idmarche.marche_id == id)
+                        return this.selectionner_candidats.filter(idmarche => idmarche.marche_id == id)
 
                        // let contratValider =this.gettersPersonnaliserRapportJugement
                      }
              }
             },
 
-        afficherNomCandidatId() {
+
+
+
+          
+
+
+
+
+      
+       afficherNomDansPersonnel() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.dossierPersonnels.find(qtreel => qtreel.marche_id == id);
+           const qtereel = this.dossierPersonnels.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.id;
+        return qtereel.nom_candidat;
       }
       return 0
         }
       };
     },
+
+
+
+      //   }
+            afficherNomDossierCandidat() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.dossierPersonnels.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.nom_candidat.concat(' ', qtereel.prenom_candidat);
+      }
+      return 0
+        }
+      };
+    },
+
+
+
 
     // afficher l'objet du marcher
 
@@ -848,84 +878,6 @@ AffichierElementParent() {
       };
     },
 
-
-            //   candidatSelectionContrat:function(){
-            //       return macheid =>{
-            //           if(macheid){
-            //               letvM=this;
-            //               let contratValider= this.getterAnoDMPBailleur.filter(idMarche => idMarche.marche_id == macheid)
-            //               let contratFavorable=contratValider.find(idmarche =>idmarche.avis_bail==1);
-            //               let contratDefavorable=contratValider.find(idmarche => idmarche.avis_bail==0);
-
-            //                if(contratFavorable!=undefined){
-            //                   vM.candidat_recrutement=""  
-
-            //                    vM.info_avis_bailleur="Non objection"
-            //                }
-            //           }
-            //       }
-            //   }
-             afficherNomCandidat(){
-        return id =>{
-            if(id!=null && id!=""){
-                let obejtNom = this.dossierPersonnels.find(obejtNom => obejtNom.id == id)
-                if(obejtNom){
-                    return obejtNom.nom_candidat.concat(' ', obejtNom.prenom_candidat)
-                }
-                return 0
-            }
-        }
-    },
-
-            
-            
-            // selectionAttributionMarche: function () {
-            //     return macheid => {
-            //         if (macheid != "") {
-            //            let vM=this;
-
-            //             let marcherEnAction=this.getterAnoDMPBailleur.filter(idmarche => idmarche.marche_id == macheid)
-
-            //             let marcherFavaroble=marcherEnAction.find(idmarche=>idmarche.avis_bail==1);
-            //             let marcherObjetction=marcherEnAction.find(idmarche=>idmarche.avis_bail==0);
-            //             console.log(marcherFavaroble)
-            //             if (marcherFavaroble!=undefined){
-            //                 vM.candidat_recruter=""
-            //                 console.log("1411111")
-
-
-            //                 vM.info_avis_bailleur="Non objection";
-            //                 vM.formEffetFinancier.ano_bailleur_id=marcherFavaroble.id
-            //                 let resulta=this.gettersPersonnaliserRapportJugement.filter(item=>item.reference_pv==marcherFavaroble.annalyse_d_m_p.reference);
-            //                 console.log(resulta)
-                          
-            //                 let candidat;
-            //                 if (resulta.length>0){
-            //                     resulta.sort(function (a, b) {
-            //                         return a.note_analyse - b.note_analyse;
-            //                     }).reverse()
-            //                      candidat=resulta.find(item=>item.reference_pv==marcherFavaroble.annalyse_d_m_p.reference)
-            //                     console.log("111111")
-            //                     console.log(candidat)
-            //                     console.log("222222")
-            //                     return candidat;
-            //                 }
-
-            //                 return null
-
-
-            //             }
-            //             if(marcherObjetction!=undefined){
-            //                 vM.message_setion_vainqueur="Le dossier a été rejete"
-            //             }else{
-            //                 vM.message_setion_vainqueur="Assuré vous d'avoir terminé tous les étape précedente"
-            //             }
-            //             return null
-
-            //         }
-            //     }
-            // },
-
             
       
       },
@@ -938,10 +890,10 @@ AffichierElementParent() {
               
 
               ajouterModalActeEffetFinancierLocal(){
-       /* var nouvelObjet = {
-            ...this.formEffetFinancier,
-            duree: this.nombreDejourCalcule
-        }*/
+        // var nouvelObjet = {
+        //     ...this.formEffetFinancier,
+        //     nom: this.afficherNomDansPersonnel(formEffetFinancier.candidat_personnel_id)
+        // }
     //let entreprisePremier=this.entreprises.find(item=>item.numero_rc==rcm)
              
     this.formEffetFinancier.marche_id=this.macheid
