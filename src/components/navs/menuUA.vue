@@ -85,6 +85,13 @@
               BUDGET PAR UNITES ADMINISTRATIVES
             </router-link>
           </li>
+
+
+           <li>
+            <router-link :to="{name: 'BudgetParUa'}" tag="a">
+              LISTE BUDGET PAR UNITE ADMINISTRATIVE
+            </router-link>
+          </li>
            <li>
             <router-link :to="{name: 'ImportBudget'}" tag="a">
               IMPORTATION DU BUDGET

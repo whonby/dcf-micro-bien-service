@@ -6,7 +6,7 @@
                   
       
         <!-- debut de liste analyse  -->
-          <h4>Liste des candidats Selectionner</h4>
+          <h4>Liste des candidats Selectionnés</h4>
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>

@@ -19,7 +19,7 @@
                         <th>Type d'analyse</th>
                         
                         <!--<th>Avis</th>-->         
-                         <th>Selectionner les candidats </th>
+                         <th>Selection des candidats </th>
                         <th>Action</th>
                     </tr>
                     </thead>

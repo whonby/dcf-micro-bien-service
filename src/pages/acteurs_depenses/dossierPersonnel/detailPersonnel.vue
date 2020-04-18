@@ -162,7 +162,7 @@
                      <div class="widget-title">
                            <ul class="nav nav-tabs">
                              <li class="active"><a data-toggle="tab" href="#tab00056" title="">Voir la list des jugements</a></li>
-                             <li class=""><a data-toggle="tab" href="#tab00020" title="">Voir la liste des candidats selectionner</a></li>     
+                             <li class=""><a data-toggle="tab" href="#tab00020" title="">Voir la liste des candidats selectionnés</a></li>     
 
                           </ul>
                      </div>
