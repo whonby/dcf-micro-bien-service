@@ -780,8 +780,10 @@ export function ajouterService({ commit, dispatch }, nouveau) {
       s_ua_id: nouveau.s_ua_id,
       // direction_id	: nouveau.direction_id	,
       libelle: nouveau.libelle,
-
-
+      exercicebudget: nouveau.exercicebudget,
+      normeequipement : nouveau.normeequipement,
+      historiqueequipement:nouveau.historiqueequipement,
+      montantequipement:nouveau.montantequipement
 
     }))
 
@@ -806,8 +808,11 @@ export function modifierService({ commit, dispatch }, nouveau) {
   asyncLoading(axios
     .put("/modifierServiceUa/" + nouveau.id, {
       s_ua_id: nouveau.s_ua_id,
-      // direction_id: nouveau.direction_id,
+      exercicebudget: nouveau.exercicebudget,
       libelle: nouveau.libelle,
+      normeequipement : nouveau.normeequipement,
+      historiqueequipement:nouveau.historiqueequipement,
+      montantequipement:nouveau.montantequipement
     }))
     .then(response => {
       commit("MODIFIER_SERVICE", response.data);

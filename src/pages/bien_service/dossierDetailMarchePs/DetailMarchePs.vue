@@ -537,7 +537,7 @@
                                    <li class="active"><a data-toggle="tab" href="#tab001" title="tansmission du DAO a la DMP">Transmission</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab010">ANO DMP DAO</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab020">ANO Bailleur DAO</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab0145" title="publication des offres">Publication</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab4569" title="publication des offres">Publication</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab0001" title="lettre d'invitation">Lettre I</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab04" title="">mandaté</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab0045" title="reception des offres">Reception</a></li>
@@ -597,7 +597,7 @@
                          </div>
 
 
-                       <div id="tab0145" class="tab-pane ">
+                       <div id="tab4569" class="tab-pane ">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">

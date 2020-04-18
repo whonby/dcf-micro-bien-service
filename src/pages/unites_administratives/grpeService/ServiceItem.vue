@@ -6,7 +6,7 @@
 
                   <tr class="odd gradeX" v-if="article" @dblclick="$emit('modification', article)">
                      <!-- <td style="width:50%"  >{{afficherUniteAdministrative(article.s_ua_id)|| 'Non renseigné'}}</td> -->
-                     <td style="width:90%;font-size:14px;font-weight:bold;" >{{afficherLibelleService(article.libelle)|| 'Non renseigné'}}</td>
+                     <td style="width:90%;font-size:14px;font-weight:bold;" >{{afficherLibelleService(article.serviceua_id)|| 'Non renseigné'}}</td>
                     
                  
 

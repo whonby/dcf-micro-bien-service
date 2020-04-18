@@ -18,8 +18,8 @@ const defaultState = {
   EtatImmobilisations: [],
   normeImmo:[],
   historiqueAffectation:[],
-  demandeMateriel:[]
-  
+  demandeMateriel:[],
+  historiqueAffectationService:[],
    
 };
 

@@ -596,8 +596,46 @@ const SUPPRIMER_DEMANDE_MATERIEL = (state, id) => {
 
 
 
+
+
+const GET_ALL_HISTORIQUE_AFFECTATION_SERVICE = (state, tableauNormeArticle) => {
+  state.historiqueAffectationService = tableauNormeArticle;
+};
+
+// ajouter NORME_EQUIPEMENTS
+const AJOUTER_HISTORIQUE_AFFECTATION_SERVICE = (state, nouveau_normeArt) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.historiqueAffectationService.unshift(nouveau_normeArt);
+};
+
+
+// modifier NORME_EQUIPEMENTS
+const MODIFIER_HISTORIQUE_AFFECTATION_SERVICE = (state, objetModifie) => {
+  state.historiqueAffectationService = state.historiqueAffectationService.map(norme => {
+    if (norme.id == objetModifie.id) {
+      norme = { ...objetModifie };
+    }
+
+    return norme;
+  });
+};
+
+// supprimer NORME_EQUIPEMENTS
+const SUPPRIMER_HISTORIQUE_AFFECTATION_SERVICE = (state, id) => {
+  state.historiqueAffectationService = state.historiqueAffectationService.filter(norme => norme.id != id);
+};
+
 export {
   
+
+
+  GET_ALL_HISTORIQUE_AFFECTATION_SERVICE,
+  AJOUTER_HISTORIQUE_AFFECTATION_SERVICE,
+  MODIFIER_HISTORIQUE_AFFECTATION_SERVICE,
+  SUPPRIMER_HISTORIQUE_AFFECTATION_SERVICE,
+
+
+
   GET_ALL_DEMANDE_MATERIEL,
   AJOUTER_DEMANDE_MATERIEL,
   MODIFIER_DEMANDE_MATERIEL,

@@ -311,7 +311,15 @@ export default {
       "services",
       "normeImmo"]),
 
+anneeAmort() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
 
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
+    },
 
 nombreDeFonction() {
       return id => {
@@ -381,6 +389,7 @@ verroService() {
        normeequipement:this.nombreDeFonction(this.formData.libelle),
        historiqueequipement:this.nombreDeFonction(this.formData.libelle),
        montantequipement:this.montantPourEtreEquipe(this.formData.libelle),
+       exercicebudget:this.anneeAmort
      }
       this.ajouterService(objetService);
 
@@ -398,8 +407,14 @@ verroService() {
     },
     // fonction pour vider l'input modifier
     modifierUniteAdministrativeLocal() {
-     
-      this.modifierService(this.editTransfert);
+      var objetService = {
+       ...this.editTransfert,
+       normeequipement:this.nombreDeFonction(this.editTransfert.libelle),
+       historiqueequipement:this.nombreDeFonction(this.editTransfert.libelle),
+       montantequipement:this.montantPourEtreEquipe(this.editTransfert.libelle),
+       exercicebudget:this.anneeAmort
+     }
+      this.modifierService(objetService);
    
 this.$("#modificationModal").modal('hide');
 

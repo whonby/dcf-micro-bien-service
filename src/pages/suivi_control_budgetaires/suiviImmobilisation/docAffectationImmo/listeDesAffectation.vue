@@ -1,4 +1,4 @@
-anneeAmortissement
+
 <template>
   
    
@@ -166,10 +166,10 @@ anneeAmortissement
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1">NOUVELLE PERSONNES   <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab8969">NOUVELLE PERSONNES   <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
                       </li>
                        <li>
-                        <a data-toggle="tab" href="#tab2">AFFECTATION DES DEMANDES DU PERSONNEL    <span class="badge badge-success">{{nombreDemandeImmobilisation}}</span></a>
+                        <a data-toggle="tab" href="#tab7458">AFFECTATION DES DEMANDES DU PERSONNEL    <span class="badge badge-success">{{nombreDemandeImmobilisation}}</span></a>
                       </li>
                        <li class="">
                         <a data-toggle="tab" href="#tab1005">NOUVEAU SERVICE   <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
@@ -208,240 +208,26 @@ anneeAmortissement
                       <li class="">
                         <a data-toggle="tab" href="#tab6396">Taux equipement des services    <span class="badge badge-success">{{NombreTauxequipementParAgent}}</span></a>
                       </li>
-                      
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab2">AFFECTATION DU SERVICE</a>
-                      </li>
-                      <li>
-                        <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
-                      </li> -->
-                     
+                 
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
 
-     <div id="tab6396" class="tab-pane">
-                       <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     
-                    <!-- <th>Type Unite d'administrative</th> -->
+                             <div id="tab6396" class="tab-pane"><tauxServiceEquipe></tauxServiceEquipe></div>
+                              <div id="tab89" class="tab-pane"><listeServiceNonCouvert></listeServiceNonCouvert> </div>
+                      <div id="tab456" class="tab-pane active"><listeToutService></listeToutService></div>          
+                       <div id="tab46" class="tab-pane"><listeServiceNonEquipe></listeServiceNonEquipe></div>
+                   <div id="tab63" class="tab-pane"><listeServiceEquipe></listeServiceEquipe></div>
+                 </div>
                     
-                     
-                    <th>Matricule && Nom && prenoms</th>
-                    <th>Unite administrative</th>
-                    <th>Unite de zone</th>
-                    <th>Service</th>
-                    <th>Fonction</th>
-                  
-                    <th>Besoin Reel</th>
-                    <th>Besoin Non couvert</th>
-                    <th >Besoin Recu</th>
-                    <th>Taux</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  
-                  <tr
-                    class="odd gradeX"
-                    v-for="BesoinImmo in tauxequipementParAgent"
-                    :key="BesoinImmo.id"
-                  >
-   
-                    
-                    <td
-                      
-                    >{{afficherActeurDepense(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td> 
-                    <td
-                      
-                    >{{afficherUniteAdministrative(BesoinImmo.unite_administrative_id) || 'Non renseigné'}}</td> 
-                     <td
-                       
-                    >{{afficheUniteZone(BesoinImmo.uniteZone_id)  || 'Non renseigné'}}</td> 
-                    <td
-                      
-                    >{{afficherLibelleService(BesoinImmo.service_id) || 'Non renseigné'}}</td>
-                  
-                      <td 
-                      
-                    >{{afficheFonction(BesoinImmo.fonction_id) || 'Non renseigné'}}</td>
-                      <td style="text-align: center;"
-                      
-                    >{{BesoinImmo.historiquenormequipement || 0}}</td>
-                    <td 
-                      style="text-align: center;"
-                    >{{BesoinImmo.normeequipement || 0}}</td>
-                   
-                     <td 
-                      style="text-align: center;"
-                    >{{(BesoinImmo.historiquenormequipement) - (BesoinImmo.normeequipement) || 0}}</td>
-                   
-                      <td
-                      style="text-align: center; color:red;font-size:14px;font-weight:bold;"
-                    >{{((((BesoinImmo.historiquenormequipement) - (BesoinImmo.normeequipement))/(BesoinImmo.historiquenormequipement))*100).toFixed(2) || 0 }}%</td> 
-                    
-                     
-                    
-                    
-
-                  </tr>
-                 
-                 
-                </tbody>
-              </table>
-
-                    </div>
 
 
 
-                      <div id="tab89" class="tab-pane">
-                       <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     
-                    <!-- <th>Type Unite d'administrative</th> -->
-                    <th>Unite d'administrative</th>
-                     <th>Unite de zone</th>
-                    <th>Service</th>
-                    <th>Fonction</th>
-                    <th>Nom et prénoms</th>
-                    <!-- <th >Article</th> -->
-                     <th >Qte requise</th>
-                     <th >Qte couverte</th>
-                     <th >Qte non couverte</th>
-                     <!-- <th >Prix unitaire(coût moyen)</th> -->
-                       <th >Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                 
-                    <tr
-                    class="odd gradeX"
-                    v-for="BesoinImmo in equipementNonCouvert"
-                    :key="BesoinImmo.id"
-                  >
-   
-                    
-                    
-                    <td
                       
-                    >{{afficherUniteAdministrative(BesoinImmo.unite_administrative_id) || 'Non renseigné'}}</td> 
-                     <td
-                       
-                    >{{afficheUniteZone(BesoinImmo.uniteZone_id)  || 'Non renseigné'}}</td> 
-                    <td
-                      
-                    >{{afficherLibelleService(BesoinImmo.service_id) || 'Non renseigné'}}</td>
-                  
-                      <td 
-                      
-                    >{{afficheFonction(BesoinImmo.fonction_id) || 'Non renseigné'}}</td>
-                     <td
-                      
-                    >{{afficherActeurDepense(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td>
-                      <td style="text-align: center;"
-                      
-                    >{{BesoinImmo.historiquenormequipement || 0}}</td>
                     
                    
-                     <td 
-                      style="text-align: center;"
-                    >{{(BesoinImmo.historiquenormequipement) - (BesoinImmo.normeequipement) || 0}}</td>
-                    <td 
-                      style="text-align: center;"
-                    >{{BesoinImmo.normeequipement || 0}}</td>
-                   <!-- <td style="text-align: center;">{{BesoinImmo.montantequipement  / BesoinImmo.normeequipement || 0}}</td> -->
-                      <td style="text-align: center; color:red;font-size:14px;font-weight:bold;"
-                    >{{formatageSomme(parseFloat(BesoinImmo.montantequipement)) || 0 }}</td> 
-                    
-                     
-                  </tr>
-                 <tr>
-                   <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <!-- <td></td> -->
-                  <td style="text-align: center;font-size:14px;font-weight:bold;">Total</td>
-                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{formatageSomme(parseFloat(afficheMontantTotalEquipementNonCouvert))}}</td>
-                 </tr>
-                 
-                </tbody>
-              </table>
-
-                    </div>
-                      <div id="tab456" class="tab-pane active">
-                     
-             
-                
-             
-              
-<ServicePrincipal></ServicePrincipal>
-            
-
-            
-          
-                 
-                 
-               
-
-                    </div>
-                    <div id="tab46" class="tab-pane">
-<table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     
-                    <!-- <th>Type Unite d'administrative</th> -->
-                    <th>Unite d'administrative</th>
-                    
-                     <th>Unite de zone</th>
-                    
-                    <th>Service</th>
-                    <th>Fonction</th>
-                    <th>Nom et prénoms</th>
-                    <th >Equipé</th>
-                     <th >Action</th>
-                  </tr>
-                </thead>
-                <tbody>
                   
-                 
-                 
-                 
-                 
-                </tbody>
-              </table>
-                  </div>
-                   <div id="tab63" class="tab-pane">
-                     <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     
-                    <!-- <th>Type Unite d'administrative</th> -->
-                    <th>Unite d'administrative</th>
-                    
-                     <th>Unite de zone</th>
-                    
-                    <th>Service</th>
-                    <th>Fonction</th>
-                    <th>Nom et prénoms</th>
-                    <th >Equipé</th>
                   
-                  </tr>
-                </thead>
-                <tbody>
-                  
-                 
-                 
-                 
-                </tbody>
-              </table>
-                   </div>
-                  </div>
-                  <br />
               
                 </div>
               </table>
@@ -626,7 +412,7 @@ anneeAmortissement
 
 
 
-   <div id="tab2" class="tab-pane">
+   <div id="tab7458" class="tab-pane">
 
 
 <div class="table-responsive text-nowrap">
@@ -1069,7 +855,7 @@ anneeAmortissement
 
 
                     <!--ongle identification-->
-                    <div id="tab1" class="tab-pane active">
+                    <div id="tab8969" class="tab-pane active">
                   
 <div class="table-responsive text-nowrap">
               <table class="table table-bordered table-striped">
@@ -1696,16 +1482,11 @@ anneeAmortissement
                          <td>
                           <label class="control-label">Duree de vie</label>
                           
-                             <input    type="text"   class="span3" readonly  :value="afficherDureeVieFamille(formData2.famillearticle_id)" />                
+                             <input    type="text"   class="span4" readonly  :value="afficherDureeVieFamille(formData2.famillearticle_id)" />                
                              
                              
                         </td>  
-                        
-                      </tr>
-                      <tr>
-                         
-                           
-                        <td>
+                         <td>
                           <label class="control-label">Année Amortissement</label>
                           
                              <input
@@ -1715,12 +1496,8 @@ anneeAmortissement
                               :value="anneeAmortissement"
                               />
                         </td>
-                        
-                    
-                        
-                        
-                        
                       </tr>
+                      
 
                     </div>
                   </div>
@@ -1750,14 +1527,22 @@ anneeAmortissement
 <script>
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
-import ServicePrincipal from '../grpeService/ServicePrincipal'
+import listeToutService from '../affectationParService/listeToutService'
+import listeServiceNonEquipe from '../affectationParService/listeServiceNonEquipe'
+import listeServiceNonCouvert from '../affectationParService/listeServiceNonCouvert'
+import listeServiceEquipe from '../affectationParService/listeServiceEquipe'
+import tauxServiceEquipe from '../affectationParService/tauxServiceEquipe'
 import { formatageSomme } from "../../../../Repositories/Repository";
 
 export default {
   
   name: 'besionImmolisation',
   components: {
-      ServicePrincipal
+      listeToutService,
+      listeServiceNonEquipe,
+      listeServiceNonCouvert,
+      listeServiceEquipe,
+      tauxServiceEquipe
   },
   data() {
     return {
