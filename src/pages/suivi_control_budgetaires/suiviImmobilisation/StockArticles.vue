@@ -445,7 +445,7 @@
                     <th title="unite administrative">Ua</th>
                      <th>Equipement Type</th> 
                      <th>Famille</th>
-                    <th>Article</th>
+                    <!-- <th>Article</th> -->
                     <!-- <th>Durée de vie</th> -->
                     <th title="quantite en stock">Qté en stock</th>
                      <th>Date d'entrée</th>
@@ -479,9 +479,9 @@
                     <td
                       @dblclick="afficherModalModifierStock(index)"
                     >{{stock.famille.libelle || 'Non renseigné'}}</td>
-                     <td
+                     <!-- <td
                       @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.AfficheArticle.libelle || 'Non renseigné'}}</td>
+                    >{{stock.AfficheArticle.libelle || 'Non renseigné'}}</td> -->
                      <!-- <td style="text-align: center;"
                       @dblclick="afficherModalModifierStock(index)"
                     >{{stock.durevie || 'Non renseigné'}}</td> -->
@@ -521,7 +521,7 @@
                    <tr
                    
                   >
-                 <td></td>
+                
                     <td></td>
                       <td></td>
                    <td style="font-weight:bold;" title="total quantite entrant">Total en stock</td>
@@ -535,7 +535,7 @@
                     <td style="text-align: center;color:red;font-weight:bold;">{{ totalQteSortant || 0 }}</td>
                     
                    
-                     <td ></td>
+                     
                     
                   </tr>
                 </tbody>
@@ -785,6 +785,7 @@ veifArticlesExist() {
       
       };
       this.ajouterStock(nouvelObjet);
+       this.$("#exampleModal").modal('hide');
       this.formData = {
       uAdministrative_id: "",
         typeequipe_id: "",
@@ -823,11 +824,12 @@ veifArticlesExist() {
       
       };
       this.modifierStock(nouvelObjet);
+       this.$("#exampleModalStock").modal('hide');
        this.editStock = {
      
         quantitestock: "",
       };
-      this.$("#exampleModalStock").modal('hide');
+      
     },
     // fonction pour vider l'input modification
     modifierStockLocal() {

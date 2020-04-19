@@ -171,7 +171,7 @@ export default {
   
 
   computed: {
-    ...mapGetters("SuiviImmobilisation", ["historiqueAffectation","familles"]),
+    ...mapGetters("SuiviImmobilisation", ["historiqueAffectation","familles","historiqueAffectationService"]),
 
     afficheFamille() {
       return id => {
