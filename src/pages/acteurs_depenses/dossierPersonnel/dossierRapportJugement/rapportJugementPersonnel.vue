@@ -95,7 +95,7 @@
                       <h4 class="text-center">ATTRIBUTION DU CONTRAT</h4>
                       <div>
                           Suivant les résultats de l’évaluation des offres présentés par le rapporteur dans le
-                          tableau ci-dessus, il apparaît que le soumissionnaire <b v-if="resultaAnalysePv.length>0">{{}}</b> propose
+                          tableau ci-dessus, il apparaît que le soumissionnaire <b v-if="resultaAnalysePv.length>0"></b> propose
                           l’offre conforme la moins-disante.
                       </div>
                       <h4 class="text-center">TABLEAU RECAPITULATIF DE LA COMPARAISON DES OFFRES</h4>
@@ -130,8 +130,9 @@
                           </tbody>
                           
                       </table>
-                      <h4> super, le classement effectué avec success
-                               donc nous  passerons au recrutement ,en prenant le premier mercie !</h4>
+                      <div> super, le classement effectué avec success!
+                               donc nous  passerons à l'avis d'ANO Bailleur, si l'avis est "Non Objection" alors,
+                               les candidats passerons a l'attribution pour etre recruter !</div>
                   </div>
                   <div class="modal-footer">
 
@@ -203,7 +204,8 @@ export default {
                  date_rapport_jugement:"",
                  fichier:"",
                 difference_personnel_bienService:"personnel",
-                marche_id:""
+                marche_id:"",
+                candidat_personnel_id:""
 
                 },
             reference:"",
@@ -211,7 +213,8 @@ export default {
               date_rapport_jugement:"",
               fichier:"",
               difference_personnel_bienService:"personnel",
-              marche_id:""
+              marche_id:"",
+              candidat_personnel_id:""
             },
             resultaAnalysePv:[],
             imagePDF:"",
@@ -249,6 +252,7 @@ export default {
 //                     }
 //                 }
 //             },
+
  listeRapport() {
       return macheid => {
         if (macheid != null && macheid != "") {
@@ -327,6 +331,7 @@ export default {
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
                  formData.append('date_rapport_jugement', this.formJugement.date_rapport_jugement);
                formData.append('marche_id', this.macheid);
+               formData.append('candidat_personnel_id', this.formJugement.candidat_personnel_id);
                formData.append('difference_personnel_bienService',this.formJugement.difference_personnel_bienService)
                 let config = {
                     header : {
@@ -348,6 +353,7 @@ export default {
                  const formData = new FormData();
                  formData.append('date_rapport_jugement', this.editRapport.date_rapport_jugement);
                  formData.append('marche_id', this.macheid);
+                 formData.append('candidat_personnel_id', this.editRapport.candidat_personnel_id);
                  formData.append('difference_personnel_bienService', this.difference_personnel_bienService)
                 formData.append('id', this.editRapport.id);
                

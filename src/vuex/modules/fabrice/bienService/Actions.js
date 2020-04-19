@@ -6,6 +6,9 @@ var queue = housecall({concurrency: 2, cooldown: 1000})
 
 
 
+
+
+
 export  function  getCandidatSelectionner({commit}) {
   queue.push(() => axios.get('/liste_candidat_select').then((response) => {
     commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data.data)
@@ -4262,6 +4265,7 @@ export function ajouterProceVerbal({commit}, objetAjoute,config){
         if(response.status == 201){
             console.log(response.data)
             commit('AJOUTER_PV', response.data.jugement)
+            
             commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
             this.$app.$notify({
                 title: 'success ',
@@ -4279,7 +4283,7 @@ export function supprimerProceVerbal({commit}, id) {
         .then(dialog => {
             commit('SUPPRIMER_PV', id)
             // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete('/proceVerbalJugementOffres/' + id).then(response =>{
+            axios.delete('/suppri_proceVerbalJugementOffres/' + id).then(response =>{
                 commit('GET_ALL_ANALYSE_DOSSIER', response.data.data)
                 dialog.close()
             }  )

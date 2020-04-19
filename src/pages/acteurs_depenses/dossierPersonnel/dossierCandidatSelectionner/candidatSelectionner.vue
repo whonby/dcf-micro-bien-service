@@ -380,7 +380,7 @@ affichierAppelOffreid() {
 
      
              this.edite_analyse_dossier = this.listeCandidatSelectionner(this.macheid)[index];
-                  let marcheObjet1=this.selectionner_candidats.find(candidatSelect=>candidatSelect.id==this.edite_analyse_dossier.id)
+            let marcheObjet1=this.selectionner_candidats.find(candidatSelect=>candidatSelect.id==this.edite_analyse_dossier.id)
           
                    
 
