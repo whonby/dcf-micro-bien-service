@@ -236,13 +236,7 @@
                 </div>
 
                      <div id="tab1" class="tab-pane">
-                <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterActeEffetFinancierP" data-toggle="modal" class="btn btn-warning">Ajouter</a>
-                    </div>
-
-
-                </div>
+                
                 <acteEffetFinancierPersonnel :macheid="detail_marche.id"></acteEffetFinancierPersonnel>
 
                 </div>

@@ -2,6 +2,7 @@ export const GET_ALL_SELECTIONNER_CANDIDAT = (state, tableau_candidat_selectionn
     state.selectionner_candidats = tableau_candidat_selectionner
 }
 
+
 // add candidat selectionner
 
 export const AJOUTER_CANDIDAT_SELECTIONNER = (state, elementAjouter) => {

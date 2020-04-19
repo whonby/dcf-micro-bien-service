@@ -32,8 +32,8 @@
 
                         
                         <td @click="afficherModalDecisionAnocf (anoBailleur.id)"> 
-                           <span v-if="anoBailleur.avis_bail== 0" class=" btn label label-success"> Non objection </span>
-                           <span v-else-if="anoBailleur.avis_bail== 1" class=" btn label label-important"> objection </span>
+                           <span v-if="anoBailleur.avis_bail== 1" class=" btn label label-success"> Non objection </span>
+                           <span v-else-if="anoBailleur.avis_bail== 2" class=" btn label label-important"> objection </span>
                            <span v-else class=" btn label label-info"> En attent</span>
                          </td>
 
@@ -266,8 +266,8 @@
                         <label class="control-label">Avis</label>
                         <div class="controls">
                            <select v-model="edit_bailleur.avis_bail" class="span">
-                               <option value="0"> Non objection</option>
-                               <option value="1">Objection </option>
+                               <option value="1"> Non objection</option>
+                               <option value="2">Objection </option>
                            </select>
                         </div>
                     </div>
@@ -428,7 +428,7 @@ affichierAppelOffreid() {
             // },
 
             verouillageObservation(){
-    return this.edit_bailleur.avis_bail == 0
+    return this.edit_bailleur.avis_bail == 1
 },
 
 
@@ -514,8 +514,9 @@ affichierAppelOffreid() {
               
             },
 
+
                editAnoBailleur(){
-                   if(confirm("veiller charger le fichier svp")){
+                  
                    
                    //console.log(this.edit_bailleur)
                 const formData = new FormData();
@@ -543,8 +544,12 @@ affichierAppelOffreid() {
                 this.getAnalyseDMP()
                 this.getAnoDMPBailleur()
                 this.$('#modifDemandeAno').modal('hide');
+
+
                 
-                   }else return "charger le fichier "
+        //    let marcheObjet=this.getterAnalyseDossiers.find(marche=>marche.id==this.macheid)
+        //        marcheObjet.attribue=2
+                 
                 
             },
 
