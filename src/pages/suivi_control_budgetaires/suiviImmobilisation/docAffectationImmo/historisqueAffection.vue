@@ -256,8 +256,8 @@
                   <input
                     type="text"
                     readonly
-                     :value="afficheFonction(editDemande.fonction_id)"
-                    class="span4"
+                     :value="editDemande.annee"
+                    class="span12"
                    
                    
                   />
@@ -272,7 +272,7 @@
                     type="text"
                     readonly
                    :value="afficherUniteAdministrative(editDemande.ua_id)"
-                    class="span4"
+                    class="span12"
                    
                    
                   />
@@ -287,7 +287,7 @@
                     type="text"
                     readonly
                     :value="afficheUniteZone(editDemande.unitezone_id)"
-                    class="span4"
+                    class="span12"
                    
                    
                   />
@@ -306,7 +306,7 @@
                     type="text"
                     readonly
                      :value="afficherMatriculeActeurDepense(editDemande.acteur_id)"
-                    class="span4"
+                    class="span12"
                   />
                 </div>
               </div>
@@ -319,7 +319,7 @@
                     type="text"
                     readonly
                      :value="afficherActeurDepense(editDemande.acteur_id)"
-                    class="span4"
+                    class="span12"
                    
                    
                   />
@@ -334,7 +334,7 @@
                     type="text"
                     readonly
                      :value="afficheFonction(editDemande.fonction_id)"
-                    class="span4"
+                    class="span12"
                    
                    
                   />
@@ -352,7 +352,7 @@
                     type="text"
                     readonly
                     :value="afficheFamille(editDemande.article_id)"
-                    class="span4"
+                    class="span12"
                    
                    
                   />
@@ -364,7 +364,7 @@
               <div class="control-group">
                 <label class="control-label">Cause inactivité  <span style="color:red">*</span>  </label>
                 <div class="controls">
-                  <select v-model="Demande.cause_inactivite" class="span4">
+                  <select v-model="Demande.cause_inactivite" class="span12">
                     
                     <option
                       v-for="equipe in causeInactivite"
@@ -384,7 +384,7 @@
                     type="text"
                     readonly
                      v-model="editDemande.qte"
-                    class="span4"
+                    class="span12"
                    
                    
                   />
@@ -399,7 +399,7 @@
                <div class="control-group">
                 <label class="control-label">Cause de la demande <span style="color:red">*</span> </label>
                 <div class="controls">
-                  <textarea name="" id="" cols="30" rows="2" class="span8" v-model="Demande.cause_demande"></textarea>
+                  <textarea name="" id="" cols="30" rows="1" class="span12" v-model="Demande.cause_demande"></textarea>
                   
                 </div>
               </div>
@@ -414,7 +414,7 @@
                     type="text"
                     readonly
                     
-                    class="span4"
+                    class="span12"
                    
                     v-model="editDemande.dure_vie"
                   />
@@ -1090,8 +1090,8 @@ uniteadmin_id :this.editDemande.ua_id,
   
     dure_vie :this.editDemande.dure_vie,
     acteur_id :this.editDemande.acteur_id,
-    uniteZone_id :this.editDemande.unitezone_id
-    
+    uniteZone_id :this.editDemande.unitezone_id,
+    annee_budgetaire:this.editDemande.annee
     	
     }
     this.ajouterDemandeMateriel(nouveauDemade)

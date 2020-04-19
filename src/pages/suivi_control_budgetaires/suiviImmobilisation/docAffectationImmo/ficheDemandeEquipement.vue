@@ -43,10 +43,10 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab8969">DEMANDE PERSONNEL  <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab8969">DEMANDE PERSONNEL  </a>
                       </li>
                        <li>
-                        <a data-toggle="tab" href="#tab7458">DEMANDE SERVICE    <span class="badge badge-success">{{nombreDemandeImmobilisation}}</span></a>
+                        <a data-toggle="tab" href="#tab7458">DEMANDE SERVICE    </a>
                       </li>
                        <!-- <li class="">
                         <a data-toggle="tab" href="#tab1005">NOUVEAU SERVICE   <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>

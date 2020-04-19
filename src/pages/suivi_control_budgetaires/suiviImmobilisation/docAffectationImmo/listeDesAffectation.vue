@@ -1,4 +1,4 @@
-
+modifierDecisionDirecteur
 <template>
   
    
@@ -166,16 +166,16 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab8969">NOUVELLE PERSONNES   <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab8969">NOUVELLE PERSONNES   </a>
                       </li>
                        <li>
-                        <a data-toggle="tab" href="#tab7458">AFFECTATION DES DEMANDES DU PERSONNEL    <span class="badge badge-success">{{nombreDemandeImmobilisation}}</span></a>
+                        <a data-toggle="tab" href="#tab7458">AFFECTATION DES DEMANDES DU PERSONNEL   </a>
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#tab1005">NOUVEAU SERVICE   <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab1005">NOUVEAU SERVICE  </a>
                       </li>
                        <li>
-                        <a data-toggle="tab" href="#tab2005">AFFECTATION DES DEMANDES DU SERVICE   <span class="badge badge-success">{{nombreDemandeImmobilisation}}</span></a>
+                        <a data-toggle="tab" href="#tab2005">AFFECTATION DES DEMANDES DU SERVICE  </a>
                       </li>
                       <!-- <li>
                         <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
@@ -239,155 +239,7 @@
 
 
 
- <div id="tab2005" class="tab-pane">
-
-
-<div class="table-responsive text-nowrap">
-              <table class="table table-bordered table-striped">
-                <div class="widget-box">
-                  <div class="widget-title">
-                    <ul class="nav nav-tabs">
-                        <li class="active">
-                        <a data-toggle="tab" href="#tab1294">Listes des Demande des services    <span class="badge badge-info">{{nombreDemande}}</span></a>
-                      </li>
-                      <li class="">
-                        
-                        <a data-toggle="tab" href="#tab1124">Validation Chef service  <span class="badge badge-inverse">{{nombreValidationEnAttenteChefService}}</span></a>
-                      </li>
-                       <li class="">
-                        <a data-toggle="tab" href="#tab1324">Validation Directeur  <span class="badge badge-important">{{nombreValidationEnAttenteDirecteur}}</span></a>
-                      </li>
-                    
-                     
-                      <!-- <li class="">
-                        <a data-toggle="tab" href="#tab12969">Taux demande non attribué"    <span class="badge badge-success">{{NombreTauxequipementParAgent}}</span></a>
-                      </li> -->
-                      
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab2">AFFECTATION DU SERVICE</a>
-                      </li>
-                      <li>
-                        <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
-                      </li> -->
-                     
-                    </ul>
-                  </div>
-                  <div class="widget-content tab-content">
-
-    
-
-
-
-                 
-                      <div id="tab1124" class="tab-pane">
-                       <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     
-                  
-                    
-                    <th>Nom et prénoms</th>
-                    <th>Unite d'administrative</th>
-                     <th>Unite de zone</th>
-                    <th>Fonction</th>
-                    <th>Article</th>
-                    <th>Quantite</th>
-                    <th>Cause inactivite</th>
-                    <th>Cause de la demande</th>
-                    <th >Date demande</th>
-                     <th>duré vie</th>
-                     <th>Motif chef sce</th>
-                     <th>Date motif</th>
-                  </tr>
-                </thead>
-                <tbody>
-               
-                 
-                 
-                </tbody>
-              </table>
-
-                    </div>
-                    <div id="tab1324" class="tab-pane">
-<table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     
-                  
-                    
-                    <th>Nom et prénoms</th>
-                    <th>Unite d'administrative</th>
-                     <th>Unite de zone</th>
-                    <th>Fonction</th>
-                    <th>Article</th>
-                    <th>Quantite</th>
-                    <th>Cause inactivite</th>
-                    <th>Cause de la demande</th>
-                    <th >Date demande</th>
-                     <th>duré vie</th>
-                     <th>Décision Directeur</th>
-                     <th>Date motif</th>
-                     <th>Affectation</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  
-                
-                 
-                 
-                </tbody>
-              </table>
-                  </div>
-                   <div id="tab1294" class="tab-pane active">
-                     <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                
-                    <th>Nom et prénoms</th>
-                    <th>Unite d'administrative</th>
-                     <th>Unite de zone</th>
-                    <th>Fonction</th>
-                    <th>Article</th>
-                    <th>Quantite</th>
-                    <th>Cause inactivite</th>
-                    <th>Cause de la demande</th>
-                    <th >Date demande</th>
-                     <!-- <th>duré vie</th> -->
-                     <th>Date motif sce</th>
-                     <th >Duré traitement sce</th>
-                     <th>Décision chef sce</th>
-                     <th>Date motif Directeur</th>
-                     <th >Duré traitement Directeur</th>
-                      <th>Décision Directeur</th>
-                     <th>Attribuer</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  
-                 
-                 
-                 
-                 
-                </tbody>
-              </table>
-                   </div>
-                  </div>
-                  <br />
-              
-                </div>
-              </table>
-            </div>
-
-
-
-
-
-
-
-   </div>
-
-
-
+ <div id="tab2005" class="tab-pane"><affectationDemandeDuService></affectationDemandeDuService></div>
 
 
 
@@ -699,7 +551,7 @@
                  
                  <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in demandeMateriel"
+                    v-for="BesoinImmo in afficheToutDemande"
                     :key="BesoinImmo.id"
                   >
    
@@ -1532,6 +1384,7 @@ import listeServiceNonEquipe from '../affectationParService/listeServiceNonEquip
 import listeServiceNonCouvert from '../affectationParService/listeServiceNonCouvert'
 import listeServiceEquipe from '../affectationParService/listeServiceEquipe'
 import tauxServiceEquipe from '../affectationParService/tauxServiceEquipe'
+import affectationDemandeDuService from '../docAffectationImmo/affectationDemandeDuService'
 import { formatageSomme } from "../../../../Repositories/Repository";
 
 export default {
@@ -1542,7 +1395,8 @@ export default {
       listeServiceNonEquipe,
       listeServiceNonCouvert,
       listeServiceEquipe,
-      tauxServiceEquipe
+      tauxServiceEquipe,
+      affectationDemandeDuService
   },
   data() {
     return {
@@ -1859,17 +1713,21 @@ verrouilleCause(){
 
 afficheValidationChefService() {
       
-          return this.demandeMateriel.filter(element => element.motif != 3 && element.motif != 1 && element.motif != 10 );
+          return this.demandeMateriel.filter(element => element.service_id == 0 && element.motif != 3 && element.motif != 1 && element.motif != 10 );
        
     },
 
 
 afficheValidationDirecteur() {
       
-          return this.demandeMateriel.filter(element => element.motif != 0 && element.motif != 5 && element.motif != 4 && element.motif != 10);
+          return this.demandeMateriel.filter(element => element.service_id == 0 && element.motif != 0 && element.motif != 5 && element.motif != 4 && element.motif != 10);
        
     },
-
+afficheToutDemande() {
+      
+          return this.demandeMateriel.filter(element => element.service_id == 0 );
+       
+    },
 nombreValidationEnAttenteChefService() {
       
           return this.afficheValidationChefService.length;
@@ -1877,7 +1735,7 @@ nombreValidationEnAttenteChefService() {
     },
     nombreDemande() {
       
-          return this.demandeMateriel.length;
+          return this.afficheToutDemande.length;
        
     },
 nombreValidationEnAttenteDirecteur() {

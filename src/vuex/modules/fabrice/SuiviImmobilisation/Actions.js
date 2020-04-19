@@ -1406,8 +1406,8 @@ export function ajouterDemandeMateriel({ commit }, nouveau) {
       acteur_id: nouveau.acteur_id,
       uniteZone_id: nouveau.uniteZone_id,
       cause_demande: nouveau.cause_demande,
-      cause_inactivite: nouveau.cause_inactivite
-
+      cause_inactivite: nouveau.cause_inactivite,
+service_id: nouveau.service_id
 
     }))
     .then(response => {

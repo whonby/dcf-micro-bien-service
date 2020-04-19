@@ -1,6 +1,7 @@
 import Famille from "../../pages/suivi_control_budgetaires/suiviImmobilisation/Famille.vue";
 import Service from "../../pages/suivi_control_budgetaires/suiviImmobilisation/Service.vue";
 import Amortissement from "../../pages/suivi_control_budgetaires/suiviImmobilisation/Amortissement.vue";
+import AmortissementService from "../../pages/suivi_control_budgetaires/suiviImmobilisation/AmortissementService.vue";
 import Immobilisation from "../../pages/suivi_control_budgetaires/suiviImmobilisation/docAffectationImmo/listeDesAffectation.vue";
 import AjouterImmobilisation from "../../pages/suivi_control_budgetaires/suiviImmobilisation/AffectationImmobilisation.vue";
 import ModifierImmobilisation from "../../pages/suivi_control_budgetaires/suiviImmobilisation/ModifierImmobilisation.vue";
@@ -36,6 +37,12 @@ import natureEntre from '../../pages/suivi_control_budgetaires/suiviImmobilisati
 import NormeImmo from '../../pages/suivi_control_budgetaires/suiviImmobilisation/GrpeNorme/NormeImmoPrincipal.vue'
 import historisqueAffection from '../../pages/suivi_control_budgetaires/suiviImmobilisation/docAffectationImmo/ficheDemandeEquipement.vue'
 const suiviImmobilisationRoutes = [
+
+  {
+    path: "/AmortissementService/:id",
+    name: "AmortissementService",
+    component: AmortissementService
+  },
   {
     path: "/historisque-Affection",
     name: "historisqueAffection",
