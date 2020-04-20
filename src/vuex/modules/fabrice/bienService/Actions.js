@@ -6,6 +6,7 @@ var queue = housecall({concurrency: 2, cooldown: 1000})
 
 
 
+
 // action for print all to prestation
 
 // export  function  getPrestation({commit}) {
@@ -173,6 +174,81 @@ var queue = housecall({concurrency: 2, cooldown: 1000})
 //    })
  
 // }
+
+ // liste role membrecojo
+ export  function getRolemembreCojo({commit}){
+  queue.push(() => axios.get('/Liste_RoleMembreCojo').then(tony => {
+      commit('GET_ROLE_MEMBRECOJO', tony.data)
+  }).catch(error => console.log(error)))
+}
+
+
+
+
+export function ajouterRolemembreCojo({commit}, formData){
+  asyncLoading(axios.post('/ajouter_ListeRoleMembreCojo',formData)).then(response =>{
+      if(response.status == 201){
+        console.log(response.data)
+          commit('AJOUTER_ROLE_MEMBRECOJO', response.data)
+          
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+}
+
+// ajouter role membrecojo
+// export function ajouterRolemembreCojo({commit}, objetAjout){
+// asyncLoading(axios.post('/ajouter_ListeRoleMembreCojo' ,{
+  // code:objetAjout.code,
+  // libelle:objetAjout.libelle,
+//  
+// })).then(tony => {
+  //  if(tony.status == 201){
+      //  commit('AJOUTER_ROLE_MEMBRECOJO', tony.data)
+// 
+      //  this.$app.$notify({
+          // title: 'success ',
+          // text: 'Enregistrement effectué avec success !',
+          // type:"success"
+        // })
+  //  }
+// }).catch(error => console.log(error))
+// }
+// supprimer role membrecojo
+export function supprimerRolemembreCojo({commit}, id){
+
+  this.$app.$dialog
+  .confirm("Voulez vouz vraiment supprimer ?.")
+  .then(dialog => {
+     commit('SUPPRIMER_ROLE_MEMBRECOJO', id)
+    // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/supprimer_ListeRoleMembreCojo/' + id).then(() => dialog.close() )   
+  })
+}
+//modifier role membrecojo
+export function modifierRolemembreCojo({commit}, elementModifie){
+
+ asyncLoading( axios.put('/modifier_ListeRoleMembreCojo/' + elementModifie.id ,{
+  code:elementModifie.code,
+  libelle:elementModifie.libelle,
+
+})).then(response => {
+      commit('MODIFIER_ROLE_MEMBRECOJO', response.data)
+
+      this.$app.$notify({
+          title: 'success ',
+          text: 'Modification effectué avec success !',
+          type:"success"
+        })
+  }).catch(error => console.log(error))
+ 
+}
+
 
 
 export  function  getBailleur({commit}) {

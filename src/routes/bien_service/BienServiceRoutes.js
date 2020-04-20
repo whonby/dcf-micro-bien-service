@@ -1,4 +1,6 @@
 import acteDepense from '../../pages/bien_service/acteDepense.vue';
+
+import rolemembrecojo from "../../pages/bien_service/parametres/rolemembrecojo.vue";
 import acteurDepense from '../../pages/bien_service/acteurDepense.vue';
 import analyseDossier from '../../pages/bien_service/analyseDossier';
 import bailleur from '../../pages/bien_service/bailleur.vue';
@@ -63,6 +65,11 @@ import DetailPPM from "../../pages/bien_service/ppm/DetailPPM";
 import detailMarcheFsqc from "../../pages/bien_service/dossierFSQC/detailMarcheFsqc";
 import detailMarcheR3cv from "../../pages/bien_service/dossierR3CV/detailMarcheR3cv";
 const BienServiceRoutes = [
+    {
+        path: "/role-membrecojo",
+        name: "rolemembrecojo",
+        component: rolemembrecojo
+    },
     {
         path: '/detail-Realite-ServiceFait/:id_detailRealiteServiceFait',
         name: "detailRealiteServiceFait",

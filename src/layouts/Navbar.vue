@@ -67,7 +67,7 @@ export default {
    
 
       ...mapActions('parametreGenerauxFonctionnelle', 
-    [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe']),
+    [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges']),
 
     ...mapActions('parametreGenerauxSourceDeFinancement',['getSourceFinancement',
         'getTypeFinancement'
@@ -146,7 +146,7 @@ export default {
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", 
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
-          "getRapport", "getDocument","getRapportJugement"])
+          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo"])
 
 
   },
@@ -175,6 +175,7 @@ export default {
    this.getPlanDecision()
    this.getStructureActe()
    this.getPlanActe()
+   this.getTypeconges()
    this.getSourceFinancement()
    this.getTypeFinancement()
    this.getStructureBudgetaire()
@@ -325,7 +326,7 @@ this.getExecutionMarche()
 this.getMandat()
 this.getRapportJugement()
 this.getDocument()
- 
+ this.getRolemembreCojo()
 
     this.getAppelOffre()
 this.getMarche()

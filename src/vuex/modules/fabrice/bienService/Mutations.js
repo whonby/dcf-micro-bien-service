@@ -1,5 +1,34 @@
 // get all document
 
+export const GET_ROLE_MEMBRECOJO = (state, tableau_role_membrecojo) => {
+
+    state.role_membrecojo = tableau_role_membrecojo
+}
+
+// ajouter source de financement
+export const AJOUTER_ROLE_MEMBRECOJO = (state , nouvel_objet) => {
+    state.role_membrecojo.unshift(nouvel_objet)
+}
+
+// suppression de source de financement
+export const SUPPRIMER_ROLE_MEMBRECOJO = (state ,id) => {
+    state.role_membrecojo = state.role_membrecojo.filter(role => 
+        role.id !=id)
+}
+
+//modifier siource de financement
+export const MODIFIER_ROLE_MEMBRECOJO = (state, objetModifie) => {
+   
+    state.role_membrecojo = state.role_membrecojo.map(role => {
+
+        if(role.id == objetModifie.id){
+            role = {...objetModifie}
+
+        }
+        return role
+    })
+}
+
 
 
 

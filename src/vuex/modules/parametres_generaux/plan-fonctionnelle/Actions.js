@@ -4,6 +4,63 @@ import { asyncLoading } from 'vuejs-loading-plugin'
  var housecall= require('housecall')
  var queue = housecall({concurrency: 2, cooldown: 1000})
 
+
+// liste structure fonctionnelle
+
+export  function getTypeconges({commit}){
+    queue.push(() => axios.get('/Typeconges').then(tony => {
+        commit('GET_TYPECONGES', tony.data)
+    }).catch(error => console.log(error)))
+}
+
+// ajouter structure fonctionnelle
+export function ajouterTypeconges({commit}, objetAjout){
+ asyncLoading(axios.post('/ajouterTypeconges' ,{
+    libelle:objetAjout.libelle,
+   
+})).then(tony => {
+     if(tony.status == 201){
+         commit('AJOUTER_TYPECONGES', tony.data)
+
+         this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué avec success !',
+            type:"success"
+          })
+     }
+ }).catch(error => console.log(error))
+}
+// supprimer structure fonctionnelle
+export function supprimerTypeconges({commit}, id){
+  
+    this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+       commit('SUPPRIMER_TYPECONGES', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+        axios.delete('/supprimerTypeconges/' + id).then(() => dialog.close() )   
+    })
+}
+//modifier structure fonctionnelle
+export function modifierTypeconges({commit},elementModifie){
+
+   asyncLoading( axios.put('/modifierTypeconges/' +elementModifie.id ,{
+    libelle:elementModifie.libelle,
+
+})).then(response => {
+        commit('MODIFIER_TYPECONGES', response.data)
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué avec success !',
+            type:"success"
+          })
+    }).catch(error => console.log(error))
+   
+}
+
+
+
 // liste structure fonctionnelle
 
 export  function getStructureFonctionnelle({commit}){
