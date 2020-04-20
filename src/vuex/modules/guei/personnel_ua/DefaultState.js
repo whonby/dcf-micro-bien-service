@@ -26,7 +26,8 @@ const defaultstate = {
     familleFonction: [],
     classificationGradeFonction: [],
     fonctionBudgetaire:[],
-    dossierPersonnels:[]
+    dossierPersonnels: [],
+    situation_matrimonial:[]
     
 
 };

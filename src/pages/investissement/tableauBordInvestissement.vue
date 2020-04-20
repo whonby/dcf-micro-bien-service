@@ -87,7 +87,7 @@ export default {
     ...mapGetters("bienService", ['nombreMarcheExecuteInvestissement',"nombreMarcheContratualisation",
     'MontantMarcheInvestissement','montantMarcheContratualisationInvestissement',"montantMarcheExecutionInvestissement",
     'nombreMarcheinvestissement','acteDepense',"getMarchePersonnaliser","appelOffres","nombreMarchePlanifier",
-                "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
+                "lots","modePassations", "procedurePassations","getterDossierCandidats","marches","getActeEffetFinancierPersonnaliser45",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
@@ -109,9 +109,12 @@ export default {
  // afficher le nombre de marche executé d'investissement
 
  afficheNombreMarchExecuter(){
-return this.getActeEffetFinancierPersonnaliser.filter(element => element.indicateur_resilie != 1).length
+return this.getActeEffetFinancierPersonnaliser.filter(element => element.mache != 1).length
 },
 
+//   afficheNombreMarchExecuter(){
+// return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 2 && element.AfficheMarche.type_marche.code_type_marche == 3)
+// },
 
 // afficher le montant d'execution 
 

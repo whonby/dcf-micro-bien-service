@@ -8,32 +8,27 @@
         <h3>Ajouter Service</h3>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" >
-          <div class="control-group">
-            <label class="control-label">Code:</label>
-            <div class="controls">
-              <input type="text" v-model="formData.code" class="span" placeholder="Saisir le code" />
-            </div>
-          </div>
+      <table class="table table-bordered table-striped">
+          
           <div class="control-group">
             <label class="control-label">Libelle:</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.libelle"
-                class="span"
+                class="span12"
                 placeholder="Saisir le libelle"
               />
             </div>
           </div>
-        </form>
+      </table>
       </div>
       <div class="modal-footer">
         <a
           @click.prevent="ajouterServiceLocal(formData)"
           class="btn btn-primary"
           href="#"
-          v-show="formData.code.length && formData.libelle.length"
+          v-show="formData.libelle.length"
         >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
@@ -48,30 +43,20 @@
         <h3>Modifier Service</h3>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal">
-          <div class="control-group">
-            <label class="control-label">Code:</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="editService.code"
-                class="span"
-                placeholder="Saisir le code"
-              />
-            </div>
-          </div>
+     <table class="table table-bordered table-striped">
+         
           <div class="control-group">
             <label class="control-label">Libelle:</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="editService.libelle"
-                class="span"
+                class="span12"
                 placeholder="Saisir le libelle"
               />
             </div>
           </div>
-        </form>
+     </table>
       </div>
       <div class="modal-footer">
         <a
@@ -116,7 +101,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Code</th>
+                   
                     <th>Libelle</th>
                     <th>Action</th>
                   </tr>
@@ -127,10 +112,8 @@
                     v-for="(service, index) in filtre_service"
                     :key="service.id"
                   >
-                    <td
-                      @dblclick="afficherModalModifierService(index)"
-                    >{{service.code || 'Non renseigné'}}</td>
-                    <td
+                   
+                    <td style="width:90%"
                       @dblclick="afficherModalModifierService(index)"
                     >{{service.libelle || 'Non renseigné'}}</td>
 
@@ -201,7 +184,7 @@ json_fields: {
       const st = this.search.toLowerCase();
       return this.services.filter(type => {
         return (
-          type.code.toLowerCase().includes(st) ||
+         
           type.libelle.toLowerCase().includes(st)
         );
       });
@@ -226,7 +209,7 @@ json_fields: {
       this.ajouterService(this.formData);
 
       this.formData = {
-        code: "",
+        
         libelle: ""
       };
     },

@@ -64,17 +64,17 @@
              
             </router-link>
           </li>
-           <li title="Bessoin Immobilisation">
+           <!-- <li title="Bessoin Immobilisation">
             <router-link :to="{name:'demandeEquipement'}" tag="a">
-              <!-- <i class="icon-list"></i> -->
+              <i class="icon-list"></i> 
               <span class="text">DEMANDE EQUIPEMENT</span>   
              
             </router-link>
-          </li>
+          </li> -->
             <li title="Immobilisation">
             <router-link :to="{name:'historisqueAffection'}" tag="a">
               <!-- <i class="icon-list"></i> -->
-              <span class="text">DEMANDE</span>   
+              <span class="text">DEMANDE EQUIPEMENT</span>   
              
             </router-link>
           </li>

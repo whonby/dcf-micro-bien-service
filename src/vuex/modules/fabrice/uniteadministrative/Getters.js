@@ -643,3 +643,4 @@ export {
 
 export const getterBudgeCharge = state => state.budgeCharge;
 export const getterligneExempter = state => state.ligneExempter;
+

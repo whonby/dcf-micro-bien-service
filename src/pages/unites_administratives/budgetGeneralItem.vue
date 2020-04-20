@@ -15,6 +15,14 @@
                     <!-- <td>{{article.afficheAction.code || 'Non renseigné'}}-{{article.afficheAction.libelle || 'Non renseigné'}}</td>
                      <td>{{article.afficheActivite.code || 'Non renseigné'}}-{{article.afficheActivite.libelle || 'Non renseigné'}}</td> -->
                       <td>{{Codefonctionnel(article.fonctionnel_id) || 'Non renseigné'}}-{{afficherfonctionnel(article.fonctionnel_id) || 'Non renseigné'}}</td>
+                       <td>
+                         <span v-if="article.Dotation_Initiale < 10000000 ">PSC Sans comité</span>
+                         <span v-else-if="article.Dotation_Initiale < 30000000 ">PSC Avec comité</span>
+                         <span v-else-if="article.Dotation_Initiale < 60000000 ">PSL</span>
+                         <span v-else-if="article.Dotation_Initiale < 100000000 ">PSO</span>
+                         <span v-else-if="article.Dotation_Initiale > 100000000 ">AON ou AOI</span>
+                         <span v-else></span>
+                       </td>
                     <td>{{Codeeconomique( article.economique_id) || 'Non renseigné'}}-{{ affichereconomique(article.economique_id) || 'Non renseigné'}}</td>
                   <td>{{formatageSomme(parseFloat(article.Dotation_Initiale)) || 0}}</td>
                    <td>

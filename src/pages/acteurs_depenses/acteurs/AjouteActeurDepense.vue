@@ -131,10 +131,10 @@
                                                     <label class="control-label">Situation matrimoniale</label>
                                                     <div class="controls">
                                                         <select v-model="formData.situation_matrimonial" >
-                                                            <option></option>
-                                                            <option value="Marie">Marie</option>
-                                                            <option value="Celibataire">Celibataire</option>
-                                                             <option value="Divorce">Divorce</option>
+                                                           
+                                                           
+                                                            <option v-for="situation in situation_matrimonial" :key="situation.id" :value="situation.id">{{situation.libelle}}</option>
+                                                           
                                                         </select>
                                                     </div>
                                                 </div>
@@ -202,7 +202,7 @@
                                                         <select v-model="formData.service_id" :disabled="verrouilleService">
                                                             <option></option>
                                                             <option v-for="item in afficheService(formData.unite_administrative_id)" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
+                                                                {{afficheServicelibelle(item.serviceua_id)}}
                                                             </option>
 
                                                         </select>
@@ -243,28 +243,7 @@
                                                     </div>
                                                 </div>
                 </td>
-                <td>
-                     <div class="control-group">
-                                                    <label class="control-label">Reference acte:</label>
-                                                    <div class="controls">
-                                                        <input type="text" v-model="formData.code"  placeholder="Saisir la reference" />
-                                                    </div>
-                                                </div>
-                </td>
-                <td>
-                     <div class="control-group">
-                                                    <label class="control-label">Type acte de personnel</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.type_acte_id">
-                                                            <option></option>
-                                                            <option v-for="item in type_acte_personnels" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                </td>
+              
                 <td>
                      <div class="control-group">
                                                     <label class="control-label">Type contrat</label>
@@ -287,7 +266,33 @@
                                                     </div>
                                                 </div>
                 </td>
-   
+    <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Type niveau etude</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.niveau_etude_id">
+                                                            <option></option>
+                                                            <option v-for="item in niveau_etudes" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                </td>
+                             <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Type salarie</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.type_salarie_id">
+                                                            <option></option>
+                                                            <option v-for="item in type_salaries" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                </td>
             </tr>
             <tr>
                
@@ -306,19 +311,7 @@
                                                 </div>
               </td>
                 
-                                 <td>
-                     <div class="control-group">
-                                                    <label class="control-label">Type salarie</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.type_salarie_id">
-                                                            <option></option>
-                                                            <option v-for="item in type_salaries" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                </td>
+                    
                 <td>
                      <div class="control-group">
                                                     <label class="control-label">Salaire:</label>
@@ -327,13 +320,13 @@
                                                     </div>
                                                 </div>
                 </td>
-                <td>
+                  <td>
                      <div class="control-group">
-                                                    <label class="control-label">Type niveau etude</label>
+                                                    <label class="control-label">Type acte de personnel</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.niveau_etude_id">
+                                                        <select v-model="formData.type_acte_id">
                                                             <option></option>
-                                                            <option v-for="item in niveau_etudes" :key="item.id" :value="item.id">
+                                                            <option v-for="item in type_acte_personnels" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -440,7 +433,7 @@
                     nom_pere: "",
                     nom_mere: "",
                     date_debut_contrat:"",
-                    code:"",
+                    
                     type_salarie_id:"",
                     type_contrat_id:"",
                     niveau_etude_id:"",
@@ -473,14 +466,14 @@
         },
         computed: {
 // methode pour maper notre guetter
-            ...mapGetters('personnelUA', ['acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
+            ...mapGetters('personnelUA', ["situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
             ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
             ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", [
-      
+      "services",
       "normeImmo"
       
       
@@ -502,6 +495,14 @@ nombreDeFonction() {
         }
       };
     },
+    montantPourEtreEquipe() {
+      return id => {
+        if (id != null && id != "") {
+          return this.normeImmo.filter(element => element.fonction_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total), 0).toFixed(0);
+        }
+      };
+    },
+    
  afficheUniteZone() {
       return id => {
         if (id != null && id != "") {
@@ -513,6 +514,18 @@ nombreDeFonction() {
       return id => {
         if (id != null && id != "") {
           return this.servicesua.filter(element => element.s_ua_id == id);
+        }
+      };
+    },
+    afficheServicelibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.services.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
         }
       };
     },
@@ -608,7 +621,9 @@ exoEnCours() {
                 exercice_budgetaire_id:this.afficheIdExerciceEnCours,
                 grade_id:this.afficheGrade(this.formData.fonction_id),
                 normeequipement:this.nombreDeFonction(this.formData.fonction_id),
-                historiquenormequipement:this.nombreDeFonction(this.formData.fonction_id)
+                historiquenormequipement:this.nombreDeFonction(this.formData.fonction_id),
+                montantequipement:this.montantPourEtreEquipe(this.formData.fonction_id)
+               
               }
                 console.log(this.formData)
                 this.ajouterActeur(nouveauObjet)

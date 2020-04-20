@@ -2,6 +2,8 @@ personnaliseActeurDepense
 const type_acte_personnels = state => state.type_acte_personnels;
 const fonctions  = state => state.fonctions;
 const classes =state => state.classes;
+
+export const situation_matrimonial = state => state.situation_matrimonial;
 const niveau_etudes =state => state.niveau_etudes;
 const type_contrats =state => state.type_contrats;
 const type_salaries =state => state.type_salaries;

@@ -1,7 +1,1386 @@
 
 <template>
-  	
-        <div class="container-fluid">
+  	<div>
+
+<div class="row-fluid">
+        <div class="span12">
+          <div class="widget-box">
+            <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              <h5>DETAIL  MARCHE</h5>
+              <!-- <div align="right">
+                Search:
+                <input type="search" placeholder />
+              </div>-->
+            </div>
+   <div class="widget-box">
+                <div class="widget-content">
+                    <div class="widget-content nopadding">
+                       <h4 v-if="detail_marche" style="text-align: center;font-size:20px;font-weight:bold;">Detail Marche : {{detail_marche.objet}} </h4>
+                        <table class="table table-striped table-bordered" v-if="detail_marche">
+                            <thead>
+                            <tr>
+                               <th style="font-size:12px;font-weight:bold;">Reference marché</th>
+                               <th style="font-size:12px;font-weight:bold;">Numéro marché</th>
+                                <th style="font-size:12px;font-weight:bold;">Objet marché</th>
+                                
+                             
+                                <th style="font-size:12px;font-weight:bold;">Type de marché</th>
+                                <th style="font-size:12px;font-weight:bold;">Procédure de passation </th>
+                                <th style="font-size:12px;font-weight:bold;">Unite administrative</th>
+                                <th style="font-size:12px;font-weight:bold;">Activité</th>
+                    <th style="font-size:12px;font-weight:bold;">Imputation</th>
+                       <th style="font-size:12px;font-weight:bold;">Montant de base</th>
+                    <!-- <th>Ligne Budgetaire</th>
+                                <th>Exercice Budgetaire</th> -->
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="taskStatus" style="font-size:14px;font-weight:bold;">{{detail_marche.reference_marche}}</td>
+                                
+                                <td class="taskStatus" style="font-size:14px;font-weight:bold;">{{afficheNumeroMarche(detail_marche.id)}}</td>
+                                 <td class="taskDesc" style="font-size:14px;font-weight:bold;">{{detail_marche.objet}}</td>
+                               
+                                <td class="taskOptions" style="font-size:14px;font-weight:bold;">
+                                    {{detail_marche.type_marche.libelle}}
+                                </td>
+                                <td class="taskOptions" style="font-size:14px;font-weight:bold;">
+                                    <!-- {{afficheModePassation(detail_marche.procedure_passation_id)}} -->
+                                   
+                               <span v-if="DisponibleBudgetaireApresLiquidation < 10000000 ">Procédure Simplifiée de demande de Cotation(PSC Sans comité)</span>
+                         <span v-else-if="DisponibleBudgetaireApresLiquidation < 30000000 ">Procédure Simplifiée de demande de Cotation(PSC Avec comité)</span>
+                         <span v-else-if="DisponibleBudgetaireApresLiquidation < 60000000 ">Procédure Simplifiée à compétition Limitée(PSL)</span>
+                         <span v-else-if="DisponibleBudgetaireApresLiquidation < 100000000 ">Procédure Simplifiée à compétition Ouverte(PSO)</span>
+                         <span v-else-if="DisponibleBudgetaireApresLiquidation > 100000000 ">Appel d'Offre Ouvert(AON ou AOI)</span>
+                         <span v-else></span>
+                                </td>
+                                <td class="taskOptions" style="font-size:14px;font-weight:bold;">
+                                    {{detail_marche.objetUniteAdministrative.libelle}}
+                                </td>
+                                <td @dblclick="afficherModalModifierTypePrestation(index)" style="font-size:14px;font-weight:bold;">
+                   {{detail_marche.afficheActivite.libelle || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierTypePrestation(index)" style="font-size:14px;font-weight:bold;">
+                   {{detail_marche.imputation || 'Non renseigné'}}</td>
+                    <td class="taskOptions" style="font-size:14px;font-weight:bold;color:red;">
+                                    {{formatageSomme(parseFloat(afficheMontantReelMarche(detail_marche.id)))}}
+                                </td>
+                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  {{detail_marche.afficheEconomique.code || 'Non renseigné'}}- {{detail_marche.afficheEconomique.libelle || 'Non renseigné'}}</td>
+                     
+                                <td class="taskOptions">
+                                    Ok
+                                </td> -->
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive text-nowrap">
+              <table class="table table-bordered table-striped">
+                <div class="widget-box">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#tab1">TABLEAU DE BORD</a>
+                      </li>
+                       <li>
+                        <a data-toggle="tab" href="#tab2">DETAIL EXECUTION</a>
+                      </li>
+                        <!-- <li>
+                        <a data-toggle="tab" href="#tab22">DETAIL ECHEANCIER</a>
+                      </li> -->
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
+                      </li> --> 
+                     
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content">
+                    <!--ongle identification-->
+                    <div id="tab1" class="tab-pane active">
+  <div class="widget-content nopadding" >
+     
+             <div class="quick-actions_homepage">
+      <ul class="quick-actions">
+        <li class="bg_ls">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-important">{{formatageSomme(parseFloat(afficheMontantReelMarche(detail_marche.id)))}}</span> MONTANT MARCHE
+          </a>
+        </li>
+        <li class="bg_lo">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-success">{{formatageSomme(parseFloat(restePayeMarche))}}</span>DISPONIBLE MARCHE
+          </a>
+        </li>
+        <li class="bg_lo">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-success">{{formatageSomme(parseFloat(sommeEngagementTableau(detail_marche.id)))}}</span>MONTANTS PAYES
+          </a>
+        </li>
+        <li class="bg_ly">
+          <a href="#" v-if="marcheid">
+            <i class="icon-list-ol"></i>
+            <span class="label label-important">{{formatageSomme(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale))}}</span>DOTATION BUDGETAIRE
+
+
+          </a>
+        </li>
+       <li class="bg_ly">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-important">{{formatageSomme(parseFloat(sommeEgagementLigneTableau(detail_marche.id)))}}</span>CUMUL ENGAGEMENT
+          </a>
+        </li>
+      
+       <li class="bg_ly">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-important">{{formatageSomme(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale - sommeEgagementLigneTableau(detail_marche.imputation)))}}</span>DISPONIBLE BUDGETAIRE
+          </a>
+        </li>
+      
+      </ul>
+    </div>
+    <div class="quick-actions_homepage">
+      <ul class="quick-actions">
+        <li class="bg_ls">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-important">{{formatageSomme(parseFloat(affichierMontantAvenant(detail_marche.id)))}}</span> MONTANT AVENANT
+          </a>
+        </li>
+        <li class="bg_lo">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-success">{{formatageSomme(parseFloat(montantMarcheAvecAvenant))}}</span>MONTANT MARCHE AVEC AVENANT
+          </a>
+        </li>
+          <li class="bg_lo">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-success">{{tauxFacturation}}%</span>TAUX FACTURE
+          </a>
+        </li>
+         <li class="bg_lo">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-success">{{ratioAvenantMarche}}%</span> RATIO AVENANT/MARCHE
+          </a>
+        </li>
+       <li class="bg_lo">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-success">{{affichierNombreAvenant(detail_marche.id)}}</span> NOMBRE AVENANT
+          </a>
+        </li>
+      </ul>
+    </div>
+            </div>
+          </div>
+                            <div id="tab2" class="tab-pane ">
+  <div class="widget-content nopadding" >
+
+                  <div class="row-fluid">
+                <div class="span12">
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                               <li class="active"><a data-toggle="tab" href="#tab2078">Avenant</a></li>
+                               <li ><a data-toggle="tab" href="#tab100">Facture</a></li>
+                                <li ><a data-toggle="tab" href="#tab10">Engagement</a></li>
+                                <li ><a data-toggle="tab" href="#tab15550">Réalité service fait</a></li>
+                                <li ><a data-toggle="tab" href="#tab120120">Liquidation</a></li>
+                                <li><a data-toggle="tab" href="#tab20">Mandat</a></li>
+                                 <li><a data-toggle="tab" href="#tab20002">Décompte</a></li>
+                                <!-- <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li> -->
+                            </ul>
+                        </div>
+                        <div class="widget-content tab-content">
+
+
+
+                          <!--DEBUT DE LA TABLEAU LIQUIDATION-->
+
+
+                           <div id="tab120120" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <!-- <div class="span4" align="right"    >
+                                   
+                                       <button class="btn btn-success" @click="afficherModalAjouter" >Demande Engagement</button>
+                                         
+  
+                    </div> -->
+                    
+                                <table class="table table-bordered table-striped" v-if="detail_marche">
+                                    <thead>
+                                    <tr>
+
+                                        <th>Année</th>
+                                          <th title="">N°bon manuel</th>
+                                <th title="">N°demande</th>
+                           
+                                <!-- <th title="">Adresse fournisseur</th> -->
+                               
+                                <th title="">Montant Autorisé</th>
+                                
+                                  <th title="">Disponible</th>
+                                  <!-- <th>Date paiement</th> -->
+                                  <th>Imputation budgetaire</th>
+                                
+                                <!-- <th>Service béneficiaire</th> -->
+                                <th>Observation du Emmetteur</th>
+                                
+                                <th>Observation Controleur financier</th>
+                                <th>Observation du ordonnateur</th>
+                                <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    
+                <tr 
+                    class="odd gradeX"
+                    v-for="(liquida, index) in afficheMarcheLiquidation(detail_marche.id)"
+                    :key="liquida.id"
+                  >
+                    <template v-if="validationRealiteServiceFait(liquida.marche_id) != 1">
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.exo_id || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.numero_bon_manuel || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.numero_demande || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{afficheMontantAutorise(liquida.marche_id) || 0}}</td>
+                     <td @dblclick="afficherModalModificationLiquidation(index)">{{sommeEgagementLigne(liquida.marche_id) || 0 }}</td> 
+                     
+                     
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.imputation_budgetaire || 'Non renseigné'}}</td>
+                   
+                     <td>
+                        <button v-if="liquida.decision_emetteur == 1"  class="btn  btn-success" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      <span    >Visé avec Observation</span>
+                      
+                      </button>
+                       <button v-else-if="liquida.decision_emetteur == 2" class="btn  btn-warning" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="liquida.decision_emetteur == 3" class="btn  btn-danger" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                   
+                  <td v-if="liquida.decision_emetteur == 1">
+                        <button v-if="liquida.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                    <span    >Visé avec Observation</span>
+                      
+                      </button>
+                       <button v-else-if="liquida.decision_controleur_financier == 2" class="btn  btn-warning" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="liquida.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                      <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                      
+                    </td>
+                     <td v-else>
+                        <h1 style="font-size:12px;color:red;">Désactivé  </h1>
+                    </td>
+                     <td v-if="liquida.decision_controleur_financier == 1">
+                        <button v-if="liquida.decision_ordonnateur == 1"  class="btn  btn-success" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      <span    >Visé avec Observation</span>
+                      
+                      </button>
+                       <button v-else-if="liquida.decision_ordonnateur == 2" class="btn  btn-warning" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="liquida.decision_ordonnateur == 3" class="btn  btn-danger" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                      
+                    </td>
+                    <td v-else>
+                        <h1 style="font-size:12px;color:red;">Désactivé  </h1>
+                    </td>
+                    
+                     </template>
+                      <template v-else>
+                <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.exo_id || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.numero_bon_manuel || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.numero_demande || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{afficheMontantAutorise(liquida.marche_id) || 0}}</td>
+                     <td @dblclick="afficherModalModificationLiquidation(index)">{{sommeEgagementLigne(liquida.marche_id) || 0 }}</td> 
+                     
+                     
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.imputation_budgetaire || 'Non renseigné'}}</td>
+                   
+                     <td>
+                        <button v-if="liquida.decision_emetteur == 1"  class="btn  btn-success" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      <span    >Visé avec Observation</span>
+                      
+                      </button>
+                       <button v-else-if="liquida.decision_emetteur == 2" class="btn  btn-warning" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="liquida.decision_emetteur == 3" class="btn  btn-danger" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                   
+                  <td v-if="liquida.decision_emetteur == 1">
+                        <button v-if="liquida.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                    <span    >Visé avec Observation</span>
+                      
+                      </button>
+                       <button v-else-if="liquida.decision_controleur_financier == 2" class="btn  btn-warning" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="liquida.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                      <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                      
+                    </td>
+                     <td v-else>
+                        <h1 style="font-size:12px;color:red;">Désactivé  </h1>
+                    </td>
+                     <td v-if="liquida.decision_controleur_financier == 1">
+                        <button v-if="liquida.decision_ordonnateur == 1"  class="btn  btn-success" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      <span    >Visé avec Observation</span>
+                      
+                      </button>
+                       <button v-else-if="liquida.decision_ordonnateur == 2" class="btn  btn-warning" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="liquida.decision_ordonnateur == 3" class="btn  btn-danger" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                      
+                    </td>
+                    <td v-else>
+                        <h1 style="font-size:12px;color:red;">Désactivé  </h1>
+                    </td>
+                
+                     </template>
+                     <td>
+                        <!-- <router-link :to="{ name: 'DetailEngagement', params: {id_detail_engagement:realiteService.id}}"
+                class="btn btn-default " title="Detail Engagement">
+                  <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link>  -->
+                    <button v-if="liquida.decision_ordonnateur == 1 && validationRealiteServiceFait(liquida.marche_id) == 1" class="btn " @click="afficherModalAjouterMandatApresLiquidation(index)" title="Ajouter Mandat">
+                        <span>
+                          <i class="icon icon-book"></i>
+                        </span>
+                      </button>
+                      <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Mandat">
+                        <span>
+                          <i class="icon icon-book"></i>
+                        </span>
+                      </button> -->
+                      <button class="btn btn-danger"  @click="supprimerLiquidation(liquida.id)">
+                        <span>
+                          <i class="icon icon-trash"></i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+               
+                                    </tbody>
+                                </table>
+                           
+
+
+
+                        </div>
+<!--FIN DE LA TABLEAU LIQUIDATION -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                          <!--DEBUT DE LA TABLEAU REALITE SERVICE FAIT -->
+
+
+                           <div id="tab15550" class="tab-pane">
+                                   <div class="span4"></div>
+                                <div class="span4"></div>
+                                <!-- <div class="span4" align="right"    >
+                                   
+                                       <button class="btn btn-success" @click="afficherModalAjouter" >Demande Engagement</button>
+                                         
+  
+                    </div> -->
+                    
+                                <table class="table table-bordered table-striped" v-if="detail_marche">
+                                    <thead>
+                                    <tr>
+
+                                        <th>Année</th>
+                                         <th title="">Section</th>
+                              
+                                 <th title="">Fournisseur</th>
+                                <th title="">N°facture</th>
+                                 <th>Date facture</th>
+                                  <th>Imputation</th>
+                                <th>Montant</th>
+                                <!-- <th>Service béneficiaire</th> -->
+                                <th title="Observation service beneficiaire">Observation S-B</th>
+                                <th title="Observation Controleur financier">Observation CF</th>
+                                <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr 
+                    class="odd gradeX"
+                    v-for="(realiteService, index) in afficheMarcheRealiteServiceFait(detail_marche.id)"
+                    :key="realiteService.id"
+                  >
+                    <template v-if="validationDeEngagement(realiteService.marche_id) != 1">
+                    <td >{{realiteService.exercice_budget || 'Non renseigné'}}</td>
+                    <td >{{afficherSection(realiteService.section_id) || 'Non renseigné'}}</td>
+                    <td >{{afficheNomFournisseur(afficheidFournisseurFacture(realiteService.facture_id)) || 'Non renseigné'}}</td>
+                    <td >{{afficheNumeroFacture(realiteService.facture_id) || 'Non renseigné'}}</td>
+                     <td >{{afficheDateFacture(realiteService.facture_id) || 'Non renseigné'}}</td> 
+                     
+                    <td >{{detail_marche.imputation  || 'Non renseigné'}}</td>
+                     <td >{{formatageSomme(parseFloat(realiteService.montant)) || 'Non renseigné'}}</td>
+                     <td >
+                        <button v-if="realiteService.decision_service_beneficiaire == 1"  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="realiteService.decision_service_beneficiaire == 2" class="btn  btn-warning" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="realiteService.decision_service_beneficiaire == 3" class="btn  btn-danger" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                   
+                  <td v-if="realiteService.decision_service_beneficiaire == 1">
+                        <button v-if="realiteService.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="realiteService.decision_controleur_financier == 2" class="btn  btn-warning" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="realiteService.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                      
+                    </td>
+                    <td v-else>
+                        <h1 style="font-size:12px;color:red;text-align:center">Désactivé  </h1>
+                    </td>
+                      </template>
+                      <template v-else>
+                  <td >{{realiteService.exercice_budget || 'Non renseigné'}}</td>
+                    <td >{{afficherSection(realiteService.section_id) || 'Non renseigné'}}</td>
+                    <td >{{afficheNomFournisseur(afficheidFournisseurFacture(realiteService.facture_id)) || 'Non renseigné'}}</td>
+                    <td >{{afficheNumeroFacture(realiteService.facture_id) || 'Non renseigné'}}</td>
+                     <td >{{afficheDateFacture(realiteService.facture_id) || 'Non renseigné'}}</td> 
+                     
+                    <td >{{detail_marche.imputation  || 'Non renseigné'}}</td>
+                     <td >{{formatageSomme(parseFloat(realiteService.montant)) || 'Non renseigné'}}</td>
+                     <td>
+                        <button v-if="realiteService.decision_service_beneficiaire == 1"  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="realiteService.decision_service_beneficiaire == 2" class="btn  btn-warning" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="realiteService.decision_service_beneficiaire == 3" class="btn  btn-danger" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                   
+                  <td v-if="realiteService.decision_service_beneficiaire == 1">
+                        <button v-if="realiteService.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="realiteService.decision_controleur_financier == 2" class="btn  btn-warning" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="realiteService.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                      
+                    </td>
+                     <td v-else>
+                        <h1 style="font-size:12px;color:red;text-align:center">Désactivé  </h1>
+                    </td>
+                    
+               
+                     </template> 
+                     <td>
+                        <router-link :to="{ name: 'detailRealiteServiceFait', params: {id_detailRealiteServiceFait:realiteService.id}}"
+                class="btn btn-default " title="Detail Realite service fait">
+                  <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link> 
+                    <!-- <button v-if="realiteService.decision_controleur_financier == 1 && validationDeEngagement(realiteService.marche_id) == 1" class="btn " @click="afficherModalAjouterLiquidation(index)" title="Ajouter Liquidatation">
+                        <span>
+                          <i class="icon icon-book"></i>
+                        </span>
+                      </button> -->
+                      <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Mandat">
+                        <span>
+                          <i class="icon icon-book"></i>
+                        </span>
+                      </button> -->
+                      <button  class="btn btn-danger" @click="supprimerRealiteServiceFait(realiteService.id)">
+                        <span>
+                          <i class="icon icon-trash"></i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+               
+                                    </tbody>
+                                </table>
+                           
+
+                           
+
+
+
+                        </div>
+<!--FIN DE LA TABLEAU REALITE SERVICE FAIT-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <div id="tab10" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <!-- <div class="span4" align="right"    >
+                                   
+                                       <button class="btn btn-success" @click="afficherModalAjouter" >Demande Engagement</button>
+                                         
+  
+                    </div> -->
+                    
+                                <table class="table table-bordered table-striped" v-if="detail_marche">
+                                    <thead>
+                                    <tr>
+
+                                        <th>Année</th>
+                                          <th title="numero de  demande engagement">N°demande engagement</th>
+                                <th title="numero de bordereau">N°bordereau engagement</th>
+                                 <th title="numero de l'engagement">N°engagement</th>
+                                <th title="programme/dotation">Prog/Dotat</th>
+                                <!-- <th>Action Programmatique</th>
+                                <th>Activite</th> -->
+                                <th title="unite administrative">Ua</th>
+                                 <th>Imputation</th>
+                                  <th title="ligne budgetaire">Section</th>
+                                  <th>Montant</th>
+                                  <th>Décision CF</th>
+                                <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr 
+                    class="odd gradeX"
+                    v-for="(Engage, index) in afficheMarcheEngage(detail_marche.id)"
+                    :key="Engage.id"
+                  >
+                    <template v-if="Engage.decision_cf == 1">
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.exercice_budget || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_demande_engage || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_bordereau || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_engage || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierEngagement(index)">{{afficheProgrammeDot(Engage.programme_id) || 'Non renseigné'}}</td> 
+                     <!-- <td @dblclick="afficherModalModifierEngagement(index)">{{afficheActionProg(Engage.action_id) || 'Non renseigné'}}</td> 
+                      <td @dblclick="afficherModalModifierEngagement(index)">{{afficheAtiviteProg(Engage.activite_id) || 'Non renseigné'}}</td> -->
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{uaMandat(Engage.ua_id) || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.budget_general_id || 'Non renseigné'}}</td>
+                     
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{ CodeSection(Engage.section_id) || 'Non renseigné'}}</td> 
+                  <td @dblclick="afficherModalModifierEngagement(index)">{{formatageSomme(parseFloat(Engage.total_general)) || 0}}</td>
+                  <td>
+                        <button v-if="Engage.decision_cf == 1"  class="btn  btn-success" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="Engage.decision_cf == 2" class="btn  btn-warning" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="Engage.decision_cf == 3" class="btn  btn-danger" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                     </template>
+                      <template v-else>
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.exercice_budget || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_demande_engage || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_bordereau || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_engage || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierEngagement(index)">{{afficheProgrammeDot(Engage.programme_id) || 'Non renseigné'}}</td> 
+                     <!-- <td @dblclick="afficherModalModifierEngagement(index)">{{afficheActionProg(Engage.action_id)|| 'Non renseigné'}}</td> 
+                      <td @dblclick="afficherModalModifierEngagement(index)">{{afficheAtiviteProg(Engage.activite_id) || 'Non renseigné'}}</td> -->
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{uaMandat(Engage.ua_id) || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.budget_general_id || 'Non renseigné'}}</td>
+                     
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{CodeSection(Engage.section_id) || 'Non renseigné'}}</td> 
+                  <td @dblclick="afficherModalModifierEngagement(index)">{{formatageSomme(parseFloat(Engage.total_general)) || 0}}</td>
+                  <td>
+                        <button v-if="Engage.decision_cf == 1"  class="btn  btn-success" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="Engage.decision_cf == 2" class="btn  btn-warning" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="Engage.decision_cf == 3" class="btn  btn-danger" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                    
+                      </button>
+                    </td>
+                     </template>
+                       <td>
+                        <router-link :to="{ name: 'DetailEngagement', params: {id_detail_engagement:Engage.id}}"
+                class="btn btn-default " title="Detail Engagement">
+                  <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link> 
+                    <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterRealiteServiceFait(index)" title="Ajouter Réalité Service Fait">
+                        <span>
+                          <i class="icon icon-book"></i>
+                        </span>
+                      </button> -->
+                      <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Mandat">
+                        <span>
+                          <i class="icon icon-book"></i>
+                        </span>
+                      </button> -->
+                      <button class="btn btn-danger" @click="supprimerEngagement(Engage.id)">
+                        <span>
+                          <i class="icon icon-trash"></i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+               
+                                    </tbody>
+                                </table>
+                           
+
+
+
+                        </div>
+                         <div id="tab2078" class="tab-pane active">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                   
+                                      <button class="btn btn-success" @click="afficherModalAjouterTitre" >Ajouter Avenant</button>
+
+                    </div>
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                   <tr>
+                    <th>Marché</th>
+                      <th>Type acte financier</th>
+                        <th>Numéro avenant</th>
+                    <th>Objet Avenant</th>
+                    <th>Montant Avenant</th>
+                     <th>Date Avenant</th>
+                    
+                    <th>Action</th>
+                  </tr>
+                                    </thead>
+                                    <tbody>
+                                   
+                 <tr class="odd gradeX" v-for="(type, index) in afficheMarcheAvenant(detail_marche.id)" :key="type.id">
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{afficheNumeroMarcheAttribuer(type.marche_id) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{afficheTypeActeFinancier(type.type_acte_financier) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.numero_avenant || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.objet_avenant || 'Non renseigné'}}</td>
+                    <td style="text-align: center"
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.montant_avenant)) || 0}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formaterDate(type.date_avenant) || 'Non renseigné'}}</td>
+                   
+
+                    <td>
+                      <button class="btn btn-danger" @click="supprimerAvenant(type.id)">
+                        <span>
+                          <i class="icon icon-trash"></i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    
+                      <td style="font-weight:bold;">Total Avenant</td>
+                    <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(montantAvenantParMarche(this.detail_marche.id)))}}</td>
+                    <td></td>
+                  </tr>
+                                    </tbody>
+                                </table>
+                           
+                            
+
+
+                        </div>
+                         <div id="tab20" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <!-- <div class="span4" align="right">
+                                   
+                                      <button class="btn btn-success" @click="afficherModalAjouterMandat" >Ajouter Mandat</button>
+
+                    </div> -->
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>N° du marche</th>
+                                         <th>N° du mandat</th>
+                                        <th>N° bordereau mandat</th>
+                                        <th>N° demande engagement</th>
+                                          <th>N° engagement</th>
+                                        <th>Type procedure</th>
+                                        
+                                        <!-- <th >Section</th> -->
+                                        <!-- <th title="unite administrative">Ua</th> -->
+                             
+                                <th>Montant Mandat</th>
+                                 <th >Decision de emetteur</th>
+                                <th title="Date validation Emetteur">Date Emetteur</th>
+                                
+                              
+                               
+                                <th>Décision CF</th>
+                                <th title="Date validation Cf">Date validation CF</th>
+
+                                
+                                
+                                
+                                <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                   
+                 <tr
+                    class="odd gradeX"
+                    v-for="(Manda, index) in afficheMandatMarcheTableau(detail_marche.id)"
+                    :key="Manda.id"
+                  >
+                   <template v-if="validationLiquidation(Manda.marche_id) == 1">
+                    <td @dblclick="afficherModalModifierMandat(index)">{{marcheMandat(Manda.marche_id) || 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifierMandat(index)">{{Manda.numero_mandat || 'Non renseigné'}}</td>
+                  <td @dblclick="afficherModalModifierMandat(index)">{{Manda.numero_bordereau || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierMandat(index)">{{afficherNumeroDemandeEngagemnt(Manda.engagement_id) || 'pas numero demande'}}</td>
+                     <td @dblclick="afficherModalModifierMandat(index)">{{afficherNumeroEngagemnt(Manda.engagement_id) || 'pas numero engage'}}</td>
+                     <td @dblclick="afficherModalModifierMandat(index)">{{Manda.type_procedure_id || 'Non renseigné'}}</td>
+            <!-- <td @dblclick="afficherModalModifierMandat(index)">{{uaMandat(Manda.ua_id) || 'Non renseigné'}}</td>
+                                    -->
+                    <td @dblclick="afficherModalModifierMandat(index)">{{formatageSomme(parseFloat(Manda.total_general))|| 'Non renseigné'}}</td>
+                    
+                    <td>
+                        <button v-if="Manda.decision_emetteur == 1"  class="btn  btn-success" @click="afficherModalModifierMotifMandatEmetteur(index)" >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="Manda.decision_emetteur == 2" class="btn  btn-warning" @click="afficherModalModifierMotifMandatEmetteur(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="Manda.decision_emetteur == 3" class="btn  btn-danger" @click="afficherModalModifierMotifMandatEmetteur(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalModifierMotifMandatEmetteur(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                    
+                    <td @dblclick="afficherModalModifierMandat(index)">{{formaterDate(Manda.date_decision_emetteur) || 'Non renseigné'}}</td>
+                      
+              <td v-if="Manda.decision_emetteur == 1">
+                        <button v-if="Manda.decision_cf == 1"  class="btn  btn-success" @click="afficherModalModifierMotifMandat(index)" >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="Manda.decision_cf == 2" class="btn  btn-warning" @click="afficherModalModifierMotifMandat(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="Manda.decision_cf == 3" class="btn  btn-danger" @click="afficherModalModifierMotifMandat(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalModifierMotifMandat(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                      <td v-else>
+                        <h1 style="font-size:10px;color:red;">Désactivé  </h1>
+                    </td>
+                    <td @dblclick="afficherModalModifierMandat(index)">{{formaterDate(Manda.date_motif) || 'Non renseigné'}}</td>
+                       <td>
+                        <!-- <router-link :to="{ name: 'DetailEngagement', params: {id_detail_engagement:Engage.id}}"
+                class="btn btn-default " title="Detail Engagement">
+                  <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link>  -->
+                       <router-link :to="{ name: 'DetailMandat', params: {id_detail_mandat:Manda.id}}"
+                class="btn btn-default " title="Detail Mandat">
+                  <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link> 
+                      <button class="btn btn-danger" @click="supprimerMandat(Manda.id)">
+                        <span>
+                          <i class="icon icon-trash"></i>
+                        </span>
+                      </button>
+                    </td>
+                     </template>
+                      <template v-else>
+                 <td colspan="10">   <h1 style="color:red;font-size:15px;text-align:center">veuillez valider la liquidation svp?</h1></td>
+                   
+                     </template>
+              </tr>
+
+                  
+                                    </tbody>
+                                </table>
+                           
+                            
+
+
+                        </div>
+<div id="tab100" class="tab-pane ">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                   
+                                      <button class="btn btn-success" @click="afficherModalProcedureFacture" >Ajouter Facture</button>
+
+                    </div>
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+
+                                         
+                     <th>type_facture</th>
+                    <th>numero_facture</th>
+                    <th>objet_facture</th>
+                    
+                     <th>Ua</th>
+                    <!-- <th>prix_unitaire</th>
+                    <th>Quantité</th> -->
+                    <th>prix_propose_ht</th>
+                    <th>Tva</th>
+                    
+                    <th>prix_propose_ttc</th>
+        
+                              
+                                
+                                
+                                <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                            
+                 <tr
+                    class="odd gradeX"
+                    v-for="(factu, index) in afficheFactureTableau(detail_marche.id)"
+                    :key="factu.id"
+                  >
+                   <template v-if="factu.typfacture_id == 1">
+                   <!-- <td @dblclick="afficherModalModifierFacture(index)">{{factu.id || 'Non renseigné'}}</td> -->
+                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objectTypefacture.libelle || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.numero_facture || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objet_facture || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objetUA.libelle || 'Non renseigné'}}</td>
+                       <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ht))|| 0}}</td>
+                   <!-- <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_unitaire ))|| 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifierFacture(index)">{{factu.quantite || 'Non renseigné'}}</td> -->
+                        <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.tva)) || 'Non renseigné'}}</td>
+                 
+                     
+                     <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ttc))|| 'Non renseigné'}}</td>
+                      </template>
+                        <template v-else>
+                   <!-- <td @dblclick="afficherModalModifierFacture(index)">{{factu.id || 'Non renseigné'}}</td> -->
+                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objectTypefacture.libelle || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.numero_facture || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objet_facture || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objetUA.libelle || 'Non renseigné'}}</td>
+                       <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ht))|| 0}}</td>
+                   <!-- <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_unitaire ))|| 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifierFacture(index)">{{factu.quantite || 'Non renseigné'}}</td> -->
+                        <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.tva)) || 0}}</td>
+                 
+                     
+                     <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ttc))|| 0}}</td>
+                      </template>
+                     <td>
+                        <button class="btn " v-if="factu.typfacture_id !== 1" @click="afficherModalAjouter(factu.id)" title="Ajouter engagement">
+                        <span>
+                          <i class="icon   icon-folder-close"></i>
+                        </span>
+                      </button>
+                       <button class="btn " v-if="factu.typfacture_id == 1" @click="afficherModalAjouterMandatDirect(factu.id)" title="Ajouter Mandat">
+                        <span>
+                          <i class="icon   icon-folder-close"></i>
+                        </span>
+                      </button>
+                      <button class="btn btn-danger" @click="supprimerFacture(factu.id)">
+                        <span>
+                          <i class="icon icon-trash"></i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                                    </tbody>
+                                </table>
+                           
+                            
+
+
+                        </div>
+
+                         <div id="tab20002" class="tab-pane">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <!-- <div class="span4" align="right">
+                                   
+                                      <button class="btn btn-success" @click="afficherModalAjouterTitre" >Ajouter Avenant</button>
+
+                    </div> -->
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                   <tr>
+                                     <th>Année budgetaire</th>
+                    <th>Objet marche</th>
+                      <th>Fournisseur</th>
+                        <!-- <th>Marché</th>
+                    <th>Avenant</th>
+                    <th>Marché + Avenant</th> -->
+                     <th>Facture (TTC)</th>
+                      <th>Date</th>
+                    <th>Paiement part Etat</th>
+                    <th>Paiement part Bailleurs</th>
+                    <!-- <th>Reste a payer marché</th> -->
+                    <!-- <th>Taux facturétauxFacturation</th> -->
+                  </tr>
+                                    </thead>
+                                    <tbody>
+                                   
+                 <tr class="odd gradeX" v-for="type in afficheMandatMarcheTableau(detail_marche.id)" :key="type.id">
+                   <td>{{type.exercice_budget || 'Non renseigné'}}</td>
+                    <td
+                     
+                    >{{detail_marche.objet || 'Non renseigné'}}</td>
+                   
+                    <td>{{type.nom_entreprise || 'Non renseigné'}}</td>
+                   
+                   
+                     
+                     <td>{{formatageSomme(parseFloat(objetfactureMontant(type.facture_id))) || 0}}</td>
+                     <td
+                     style="text-align: center"
+                    >{{formaterDate(type.date_motif) || 0}}</td>
+                     <td
+                       style="text-align: center"
+                    >{{formatageSomme(parseFloat(type.montant_tresor)) || 0}}</td>
+                  <td
+                       style="text-align: center"
+                    >{{formatageSomme(parseFloat(montantTotalDonEtEmprunt))|| 0}}</td>
+                    <!-- <td  style="text-align: center">{{formatageSomme(parseFloat(restePayeMarche)) || 0}}</td> -->
+                   
+  <!-- <td style="text-align: center"> {{tauxFacturation || 0}}%</td>
+                     -->
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td
+                     style="text-align: center;color:red;font-weight:bold;"
+                    >{{formatageSomme(parseFloat(montantFactureParMarche(detail_marche.id))) || 0}}</td>
+                     <!-- <td  style="text-align: center;color:red;font-weight:bold;"
+                     
+                    
+                    > {{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td> -->
+                     <td ></td>
+                  <td
+                     
+                     style="text-align: center;color:red;font-weight:bold;"
+                    >{{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td> 
+                      <td
+                     
+                     style="text-align: center;color:red;font-weight:bold;"
+                    >{{formatageSomme(parseFloat(montantTotalDonEtEmprunt)) || 0}}</td> 
+                    
+                      <!-- <td  style="text-align: center;color:red;font-weight:bold;"> {{tauxFacturation || 0}}%</td> -->
+                    
+                   
+ 
+                    
+                  </tr>
+                  
+                                    </tbody>
+                                </table>
+                           
+                            
+
+
+                        </div>
+                    </div>
+
+  
+<div class="modal-footer">
+        
+        <a data-dismiss="modal" class="btn btn-danger" @click.prevent="retourListeEntreprise" href="#">Voir Tableau</a>
+       
+      </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+          </div>
+        </div>
+      </div>
+       </div>
+        <!-- <fab :actions="fabActions" @cache="afficherModalAjouterBesoinImmobilisation" main-icon="apps" bg-color="green"></fab>
+    <notifications  />
+      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterBesoinImmobilisation()">Open</button>
+ 
+  -->
+ 
+              </table>
+ 
+  </div>
+
+
+    </div>
+</div>
+
+
+    </div>
+    
+        <!-- <div class="container-fluid"> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2001,7 +3380,7 @@
             <div id="exampleModalMotif" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Validation CF</h3>
+        <h3>Validation CF{{afficherMontantEngagement1}}-{{sommeMontantEngagement}}</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" >
@@ -2047,7 +3426,7 @@
                             <div class="controls">
                               <input type="date" class="span"  v-model="editEngagement.date_motif"/>
                                <input type="hidden" class="span"  :value="recuperer"/>
-                               {{editEngagement.id}}
+                               
                             </div>
                           </div>
                            
@@ -3089,1273 +4468,18 @@
 
 
 
- <div class="quick-actions_homepage">
-      <ul class="quick-actions">
-        <li class="bg_ls">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-important">{{formatageSomme(parseFloat(afficheMontantReelMarche(detail_marche.id)))}}</span> MONTANT MARCHE
-          </a>
-        </li>
-        <li class="bg_lo">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-success">{{formatageSomme(parseFloat(restePayeMarche))}}</span>DISPONIBLE MARCHE
-          </a>
-        </li>
-        <li class="bg_lo">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-success">{{formatageSomme(parseFloat(sommeEngagementTableau(detail_marche.id)))}}</span>MONTANTS PAYES
-          </a>
-        </li>
-        <li class="bg_ly">
-          <a href="#" v-if="marcheid">
-            <i class="icon-list-ol"></i>
-            <span class="label label-important">{{formatageSomme(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale))}}</span>DOTATION BUDGETAIRE
 
 
-          </a>
-        </li>
-       <li class="bg_ly">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-important">{{formatageSomme(parseFloat(sommeEgagementLigneTableau(detail_marche.id)))}}</span>CUMUL ENGAGEMENT
-          </a>
-        </li>
-      
-       <li class="bg_ly">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-important">{{formatageSomme(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale - sommeEgagementLigneTableau(detail_marche.imputation)))}}</span>DISPONIBLE BUDGETAIRE
-          </a>
-        </li>
-      
-      </ul>
-    </div>
-<div class="quick-actions_homepage">
-      <ul class="quick-actions">
-        <li class="bg_ls">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-important">{{formatageSomme(parseFloat(affichierMontantAvenant(detail_marche.id)))}}</span> MONTANT AVENANT
-          </a>
-        </li>
-        <li class="bg_lo">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-success">{{formatageSomme(parseFloat(montantMarcheAvecAvenant))}}</span>MONTANT MARCHE AVEC AVENANT
-          </a>
-        </li>
-          <li class="bg_lo">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-success">{{tauxFacturation}}%</span>TAUX FACTURE
-          </a>
-        </li>
-         <li class="bg_lo">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-success">{{ratioAvenantMarche}}%</span> RATIO AVENANT/MARCHE
-          </a>
-        </li>
-       <li class="bg_lo">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-success">{{affichierNombreAvenant(detail_marche.id)}}</span> NOMBRE AVENANT
-          </a>
-        </li>
-      </ul>
-    </div>
 
 
 
            
             <hr />
 
-            <div class="widget-box">
-                <div class="widget-content">
-                    <div class="widget-content nopadding">
-                       <h4 v-if="detail_marche">Detail Marche : {{detail_marche.objet}} </h4>
-                        <table class="table table-striped table-bordered" v-if="detail_marche">
-                            <thead>
-                            <tr>
-                               <th>Reference marché</th>
-                               <th>Numéro marché</th>
-                                <th>Objet marché</th>
-                                
-                                <th>Montant de base</th>
-                                <th>Type de marché</th>
-                                <th>Procédure de passation </th>
-                                <th>Unite administrative</th>
-                                <th>Activité</th>
-                    <th>Imputation</th>
-                    <!-- <th>Ligne Budgetaire</th>
-                                <th>Exercice Budgetaire</th> -->
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="taskStatus">{{detail_marche.reference_marche}}</td>
-                                
-                                <td class="taskStatus">{{afficheNumeroMarche(detail_marche.id)}}</td>
-                                 <td class="taskDesc">{{detail_marche.objet}}</td>
-                                <td class="taskOptions">
-                                    {{formatageSomme(parseFloat(afficheMontantReelMarche(detail_marche.id)))}}
-                                </td>
-                                <td class="taskOptions">
-                                    {{detail_marche.type_marche.libelle}}
-                                </td>
-                                <td class="taskOptions">
-                                    {{afficheModePassation(detail_marche.procedure_passation_id)}}
-                                </td>
-                                <td class="taskOptions">
-                                    {{detail_marche.objetUniteAdministrative.libelle}}
-                                </td>
-                                <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{detail_marche.afficheActivite.libelle || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{detail_marche.imputation || 'Non renseigné'}}</td>
-                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
-                  {{detail_marche.afficheEconomique.code || 'Non renseigné'}}- {{detail_marche.afficheEconomique.libelle || 'Non renseigné'}}</td>
-                     
-                                <td class="taskOptions">
-                                    Ok
-                                </td> -->
-                            </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            
 
             
-            <div class="row-fluid">
-                <div class="span12">
-                    <div class="widget-box">
-                        <div class="widget-title">
-                            <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab2078">Avenant</a></li>
-                               <li ><a data-toggle="tab" href="#tab100">Facture</a></li>
-                                <li ><a data-toggle="tab" href="#tab10">Engagement</a></li>
-                                <li ><a data-toggle="tab" href="#tab15550">Réalité service fait</a></li>
-                                <li ><a data-toggle="tab" href="#tab120120">Liquidation</a></li>
-                                <li><a data-toggle="tab" href="#tab20">Mandat</a></li>
-                                 <li><a data-toggle="tab" href="#tab20002">Décompte</a></li>
-                                <!-- <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li> -->
-                            </ul>
-                        </div>
-                        <div class="widget-content tab-content">
-
-
-
-                          <!--DEBUT DE LA TABLEAU LIQUIDATION-->
-
-
-                           <div id="tab120120" class="tab-pane">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <!-- <div class="span4" align="right"    >
-                                   
-                                       <button class="btn btn-success" @click="afficherModalAjouter" >Demande Engagement</button>
-                                         
-  
-                    </div> -->
-                    
-                                <table class="table table-bordered table-striped" v-if="detail_marche">
-                                    <thead>
-                                    <tr>
-
-                                        <th>Année</th>
-                                          <th title="">N°bon manuel</th>
-                                <th title="">N°demande</th>
-                           
-                                <!-- <th title="">Adresse fournisseur</th> -->
-                               
-                                <th title="">Montant Autorisé</th>
-                                
-                                  <th title="">Disponible</th>
-                                  <!-- <th>Date paiement</th> -->
-                                  <th>Imputation budgetaire</th>
-                                
-                                <!-- <th>Service béneficiaire</th> -->
-                                <th>Observation du Emmetteur</th>
-                                
-                                <th>Observation Controleur financier</th>
-                                <th>Observation du ordonnateur</th>
-                                <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    
-                <tr 
-                    class="odd gradeX"
-                    v-for="(liquida, index) in afficheMarcheLiquidation(detail_marche.id)"
-                    :key="liquida.id"
-                  >
-                    <template v-if="validationRealiteServiceFait(liquida.marche_id) != 1">
-                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.exo_id || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.numero_bon_manuel || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.numero_demande || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModificationLiquidation(index)">{{afficheMontantAutorise(liquida.marche_id) || 0}}</td>
-                     <td @dblclick="afficherModalModificationLiquidation(index)">{{sommeEgagementLigne(liquida.marche_id) || 0 }}</td> 
-                     
-                     
-                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.imputation_budgetaire || 'Non renseigné'}}</td>
-                   
-                     <td>
-                        <button v-if="liquida.decision_emetteur == 1"  class="btn  btn-success" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
-                     
-                      <span    >Visé avec Observation</span>
-                      
-                      </button>
-                       <button v-else-if="liquida.decision_emetteur == 2" class="btn  btn-warning" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="liquida.decision_emetteur == 3" class="btn  btn-danger" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
-                     
-                      
-                       <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
-                     
-                      
-                       <span  >Attente</span>
-                      
-                    
-                      </button>
-                    </td>
-                   
-                  <td v-if="liquida.decision_emetteur == 1">
-                        <button v-if="liquida.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
-                     
-                    <span    >Visé avec Observation</span>
-                      
-                      </button>
-                       <button v-else-if="liquida.decision_controleur_financier == 2" class="btn  btn-warning" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="liquida.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
-                     
-                      <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
-                     
-                      
-                       <span  >Attente</span>
-                      
-                    
-                      </button>
-                      
-                    </td>
-                     <td v-else>
-                        <h1 style="font-size:12px;color:red;">Désactivé  </h1>
-                    </td>
-                     <td v-if="liquida.decision_controleur_financier == 1">
-                        <button v-if="liquida.decision_ordonnateur == 1"  class="btn  btn-success" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
-                     
-                      <span    >Visé avec Observation</span>
-                      
-                      </button>
-                       <button v-else-if="liquida.decision_ordonnateur == 2" class="btn  btn-warning" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="liquida.decision_ordonnateur == 3" class="btn  btn-danger" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
-                     
-                      
-                       <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
-                     
-                      
-                       <span  >Attente</span>
-                      
-                    
-                      </button>
-                      
-                    </td>
-                    <td v-else>
-                        <h1 style="font-size:12px;color:red;">Désactivé  </h1>
-                    </td>
-                    
-                     </template>
-                      <template v-else>
-                <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.exo_id || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.numero_bon_manuel || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.numero_demande || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModificationLiquidation(index)">{{afficheMontantAutorise(liquida.marche_id) || 0}}</td>
-                     <td @dblclick="afficherModalModificationLiquidation(index)">{{sommeEgagementLigne(liquida.marche_id) || 0 }}</td> 
-                     
-                     
-                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.imputation_budgetaire || 'Non renseigné'}}</td>
-                   
-                     <td>
-                        <button v-if="liquida.decision_emetteur == 1"  class="btn  btn-success" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
-                     
-                      <span    >Visé avec Observation</span>
-                      
-                      </button>
-                       <button v-else-if="liquida.decision_emetteur == 2" class="btn  btn-warning" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="liquida.decision_emetteur == 3" class="btn  btn-danger" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
-                     
-                      
-                       <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
-                     
-                      
-                       <span  >Attente</span>
-                      
-                    
-                      </button>
-                    </td>
-                   
-                  <td v-if="liquida.decision_emetteur == 1">
-                        <button v-if="liquida.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
-                     
-                    <span    >Visé avec Observation</span>
-                      
-                      </button>
-                       <button v-else-if="liquida.decision_controleur_financier == 2" class="btn  btn-warning" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="liquida.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
-                     
-                      <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
-                     
-                      
-                       <span  >Attente</span>
-                      
-                    
-                      </button>
-                      
-                    </td>
-                     <td v-else>
-                        <h1 style="font-size:12px;color:red;">Désactivé  </h1>
-                    </td>
-                     <td v-if="liquida.decision_controleur_financier == 1">
-                        <button v-if="liquida.decision_ordonnateur == 1"  class="btn  btn-success" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
-                     
-                      <span    >Visé avec Observation</span>
-                      
-                      </button>
-                       <button v-else-if="liquida.decision_ordonnateur == 2" class="btn  btn-warning" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="liquida.decision_ordonnateur == 3" class="btn  btn-danger" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
-                     
-                      
-                       <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
-                     
-                      
-                       <span  >Attente</span>
-                      
-                    
-                      </button>
-                      
-                    </td>
-                    <td v-else>
-                        <h1 style="font-size:12px;color:red;">Désactivé  </h1>
-                    </td>
-                
-                     </template>
-                     <td>
-                        <!-- <router-link :to="{ name: 'DetailEngagement', params: {id_detail_engagement:realiteService.id}}"
-                class="btn btn-default " title="Detail Engagement">
-                  <span class=""><i class=" icon-folder-close"></i></span>
-                   </router-link>  -->
-                    <button v-if="liquida.decision_ordonnateur == 1 && validationRealiteServiceFait(liquida.marche_id) == 1" class="btn " @click="afficherModalAjouterMandatApresLiquidation(index)" title="Ajouter Mandat">
-                        <span>
-                          <i class="icon icon-book"></i>
-                        </span>
-                      </button>
-                      <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Mandat">
-                        <span>
-                          <i class="icon icon-book"></i>
-                        </span>
-                      </button> -->
-                      <button class="btn btn-danger"  @click="supprimerLiquidation(liquida.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
-                    </td>
-                  </tr>
-               
-                                    </tbody>
-                                </table>
-                           
-
-
-
-                        </div>
-<!--FIN DE LA TABLEAU LIQUIDATION -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                          <!--DEBUT DE LA TABLEAU REALITE SERVICE FAIT -->
-
-
-                           <div id="tab15550" class="tab-pane">
-                                   <div class="span4"></div>
-                                <div class="span4"></div>
-                                <!-- <div class="span4" align="right"    >
-                                   
-                                       <button class="btn btn-success" @click="afficherModalAjouter" >Demande Engagement</button>
-                                         
-  
-                    </div> -->
-                    
-                                <table class="table table-bordered table-striped" v-if="detail_marche">
-                                    <thead>
-                                    <tr>
-
-                                        <th>Année</th>
-                                         <th title="">Section</th>
-                              
-                                 <th title="">Fournisseur</th>
-                                <th title="">N°facture</th>
-                                 <th>Date facture</th>
-                                  <th>Imputation</th>
-                                <th>Montant</th>
-                                <!-- <th>Service béneficiaire</th> -->
-                                <th title="Observation service beneficiaire">Observation S-B</th>
-                                <th title="Observation Controleur financier">Observation CF</th>
-                                <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr 
-                    class="odd gradeX"
-                    v-for="(realiteService, index) in afficheMarcheRealiteServiceFait(detail_marche.id)"
-                    :key="realiteService.id"
-                  >
-                    <template v-if="validationDeEngagement(realiteService.marche_id) != 1">
-                    <td >{{realiteService.exercice_budget || 'Non renseigné'}}</td>
-                    <td >{{afficherSection(realiteService.section_id) || 'Non renseigné'}}</td>
-                    <td >{{afficheNomFournisseur(afficheidFournisseurFacture(realiteService.facture_id)) || 'Non renseigné'}}</td>
-                    <td >{{afficheNumeroFacture(realiteService.facture_id) || 'Non renseigné'}}</td>
-                     <td >{{afficheDateFacture(realiteService.facture_id) || 'Non renseigné'}}</td> 
-                     
-                    <td >{{detail_marche.imputation  || 'Non renseigné'}}</td>
-                     <td >{{formatageSomme(parseFloat(realiteService.montant)) || 'Non renseigné'}}</td>
-                     <td >
-                        <button v-if="realiteService.decision_service_beneficiaire == 1"  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
-                     
-                      <span    >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="realiteService.decision_service_beneficiaire == 2" class="btn  btn-warning" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="realiteService.decision_service_beneficiaire == 3" class="btn  btn-danger" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
-                     
-                      
-                       <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
-                     
-                      
-                       <span  >Attente</span>
-                      
-                    
-                      </button>
-                    </td>
-                   
-                  <td v-if="realiteService.decision_service_beneficiaire == 1">
-                        <button v-if="realiteService.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancier(index)" >                        
-                     
-                      <span    >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="realiteService.decision_controleur_financier == 2" class="btn  btn-warning" @click="afficherModalObservationControlleurFinancier(index)" >                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="realiteService.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationControlleurFinancier(index)" >                        
-                     
-                      
-                       <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalObservationControlleurFinancier(index)" >                        
-                     
-                      
-                       <span  >Attente</span>
-                      
-                    
-                      </button>
-                      
-                    </td>
-                    <td v-else>
-                        <h1 style="font-size:12px;color:red;text-align:center">Désactivé  </h1>
-                    </td>
-                      </template>
-                      <template v-else>
-                  <td >{{realiteService.exercice_budget || 'Non renseigné'}}</td>
-                    <td >{{afficherSection(realiteService.section_id) || 'Non renseigné'}}</td>
-                    <td >{{afficheNomFournisseur(afficheidFournisseurFacture(realiteService.facture_id)) || 'Non renseigné'}}</td>
-                    <td >{{afficheNumeroFacture(realiteService.facture_id) || 'Non renseigné'}}</td>
-                     <td >{{afficheDateFacture(realiteService.facture_id) || 'Non renseigné'}}</td> 
-                     
-                    <td >{{detail_marche.imputation  || 'Non renseigné'}}</td>
-                     <td >{{formatageSomme(parseFloat(realiteService.montant)) || 'Non renseigné'}}</td>
-                     <td>
-                        <button v-if="realiteService.decision_service_beneficiaire == 1"  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
-                     
-                      <span    >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="realiteService.decision_service_beneficiaire == 2" class="btn  btn-warning" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="realiteService.decision_service_beneficiaire == 3" class="btn  btn-danger" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
-                     
-                      
-                       <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
-                     
-                      
-                       <span  >Attente</span>
-                      
-                    
-                      </button>
-                    </td>
-                   
-                  <td v-if="realiteService.decision_service_beneficiaire == 1">
-                        <button v-if="realiteService.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancier(index)" >                        
-                     
-                      <span    >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="realiteService.decision_controleur_financier == 2" class="btn  btn-warning" @click="afficherModalObservationControlleurFinancier(index)" >                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="realiteService.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationControlleurFinancier(index)" >                        
-                     
-                      
-                       <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalObservationControlleurFinancier(index)" >                        
-                     
-                      
-                       <span  >Attente</span>
-                      
-                    
-                      </button>
-                      
-                    </td>
-                     <td v-else>
-                        <h1 style="font-size:12px;color:red;text-align:center">Désactivé  </h1>
-                    </td>
-                    
-               
-                     </template> 
-                     <td>
-                        <router-link :to="{ name: 'detailRealiteServiceFait', params: {id_detailRealiteServiceFait:realiteService.id}}"
-                class="btn btn-default " title="Detail Realite service fait">
-                  <span class=""><i class=" icon-folder-close"></i></span>
-                   </router-link> 
-                    <!-- <button v-if="realiteService.decision_controleur_financier == 1 && validationDeEngagement(realiteService.marche_id) == 1" class="btn " @click="afficherModalAjouterLiquidation(index)" title="Ajouter Liquidatation">
-                        <span>
-                          <i class="icon icon-book"></i>
-                        </span>
-                      </button> -->
-                      <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Mandat">
-                        <span>
-                          <i class="icon icon-book"></i>
-                        </span>
-                      </button> -->
-                      <button  class="btn btn-danger" @click="supprimerRealiteServiceFait(realiteService.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
-                    </td>
-                  </tr>
-               
-                                    </tbody>
-                                </table>
-                           
-
-                           
-
-
-
-                        </div>
-<!--FIN DE LA TABLEAU REALITE SERVICE FAIT-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            <div id="tab10" class="tab-pane">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <!-- <div class="span4" align="right"    >
-                                   
-                                       <button class="btn btn-success" @click="afficherModalAjouter" >Demande Engagement</button>
-                                         
-  
-                    </div> -->
-                    
-                                <table class="table table-bordered table-striped" v-if="detail_marche">
-                                    <thead>
-                                    <tr>
-
-                                        <th>Année</th>
-                                          <th title="numero de  demande engagement">N°demande engagement</th>
-                                <th title="numero de bordereau">N°bordereau engagement</th>
-                                 <th title="numero de l'engagement">N°engagement</th>
-                                <th title="programme/dotation">Prog/Dotat</th>
-                                <!-- <th>Action Programmatique</th>
-                                <th>Activite</th> -->
-                                <th title="unite administrative">Ua</th>
-                                 <th>Imputation</th>
-                                  <th title="ligne budgetaire">Section</th>
-                                  <th>Montant</th>
-                                  <th>Décision CF</th>
-                                <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr 
-                    class="odd gradeX"
-                    v-for="(Engage, index) in afficheMarcheEngage(detail_marche.id)"
-                    :key="Engage.id"
-                  >
-                    <template v-if="Engage.decision_cf == 1">
-                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.exercice_budget || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_demande_engage || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_bordereau || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_engage || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierEngagement(index)">{{afficheProgrammeDot(Engage.programme_id) || 'Non renseigné'}}</td> 
-                     <!-- <td @dblclick="afficherModalModifierEngagement(index)">{{afficheActionProg(Engage.action_id) || 'Non renseigné'}}</td> 
-                      <td @dblclick="afficherModalModifierEngagement(index)">{{afficheAtiviteProg(Engage.activite_id) || 'Non renseigné'}}</td> -->
-                    <td @dblclick="afficherModalModifierEngagement(index)">{{uaMandat(Engage.ua_id) || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.budget_general_id || 'Non renseigné'}}</td>
-                     
-                    <td @dblclick="afficherModalModifierEngagement(index)">{{ CodeSection(Engage.section_id) || 'Non renseigné'}}</td> 
-                  <td @dblclick="afficherModalModifierEngagement(index)">{{formatageSomme(parseFloat(Engage.total_general)) || 0}}</td>
-                  <td>
-                        <button v-if="Engage.decision_cf == 1"  class="btn  btn-success" @click="afficherModalModifierMotifDemandeservice(index)" >                        
-                     
-                      <span    >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="Engage.decision_cf == 2" class="btn  btn-warning" @click="afficherModalModifierMotifDemandeservice(index)" >                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="Engage.decision_cf == 3" class="btn  btn-danger" @click="afficherModalModifierMotifDemandeservice(index)" >                        
-                     
-                      
-                       <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalModifierMotifDemandeservice(index)" >                        
-                     
-                      
-                       <span  >Attente</span>
-                      
-                    
-                      </button>
-                    </td>
-                     </template>
-                      <template v-else>
-                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.exercice_budget || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_demande_engage || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_bordereau || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_engage || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierEngagement(index)">{{afficheProgrammeDot(Engage.programme_id) || 'Non renseigné'}}</td> 
-                     <!-- <td @dblclick="afficherModalModifierEngagement(index)">{{afficheActionProg(Engage.action_id)|| 'Non renseigné'}}</td> 
-                      <td @dblclick="afficherModalModifierEngagement(index)">{{afficheAtiviteProg(Engage.activite_id) || 'Non renseigné'}}</td> -->
-                    <td @dblclick="afficherModalModifierEngagement(index)">{{uaMandat(Engage.ua_id) || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.budget_general_id || 'Non renseigné'}}</td>
-                     
-                    <td @dblclick="afficherModalModifierEngagement(index)">{{CodeSection(Engage.section_id) || 'Non renseigné'}}</td> 
-                  <td @dblclick="afficherModalModifierEngagement(index)">{{formatageSomme(parseFloat(Engage.total_general)) || 0}}</td>
-                  <td>
-                        <button v-if="Engage.decision_cf == 1"  class="btn  btn-success" @click="afficherModalModifierMotifDemandeservice(index)" >                        
-                     
-                      <span    >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="Engage.decision_cf == 2" class="btn  btn-warning" @click="afficherModalModifierMotifDemandeservice(index)" >                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="Engage.decision_cf == 3" class="btn  btn-danger" @click="afficherModalModifierMotifDemandeservice(index)" >                        
-                     
-                      
-                       <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalModifierMotifDemandeservice(index)" >                        
-                     
-                      
-                       <span  >Attente</span>
-                      
-                    
-                    
-                      </button>
-                    </td>
-                     </template>
-                       <td>
-                        <router-link :to="{ name: 'DetailEngagement', params: {id_detail_engagement:Engage.id}}"
-                class="btn btn-default " title="Detail Engagement">
-                  <span class=""><i class=" icon-folder-close"></i></span>
-                   </router-link> 
-                    <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterRealiteServiceFait(index)" title="Ajouter Réalité Service Fait">
-                        <span>
-                          <i class="icon icon-book"></i>
-                        </span>
-                      </button> -->
-                      <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Mandat">
-                        <span>
-                          <i class="icon icon-book"></i>
-                        </span>
-                      </button> -->
-                      <button class="btn btn-danger" @click="supprimerEngagement(Engage.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
-                    </td>
-                  </tr>
-               
-                                    </tbody>
-                                </table>
-                           
-
-
-
-                        </div>
-                         <div id="tab2078" class="tab-pane active">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <div class="span4" align="right">
-                                   
-                                      <button class="btn btn-success" @click="afficherModalAjouterTitre" >Ajouter Avenant</button>
-
-                    </div>
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                   <tr>
-                    <th>Marché</th>
-                      <th>Type acte financier</th>
-                        <th>Numéro avenant</th>
-                    <th>Objet Avenant</th>
-                    <th>Montant Avenant</th>
-                     <th>Date Avenant</th>
-                    
-                    <th>Action</th>
-                  </tr>
-                                    </thead>
-                                    <tbody>
-                                   
-                 <tr class="odd gradeX" v-for="(type, index) in afficheMarcheAvenant(detail_marche.id)" :key="type.id">
-                    <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{afficheNumeroMarcheAttribuer(type.marche_id) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{afficheTypeActeFinancier(type.type_acte_financier) || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.numero_avenant || 'Non renseigné'}}</td>
-                     <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{type.objet_avenant || 'Non renseigné'}}</td>
-                    <td style="text-align: center"
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{formatageSomme(parseFloat(type.montant_avenant)) || 0}}</td>
-                    <td
-                      @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{formaterDate(type.date_avenant) || 'Non renseigné'}}</td>
-                   
-
-                    <td>
-                      <button class="btn btn-danger" @click="supprimerAvenant(type.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    
-                      <td style="font-weight:bold;">Total Avenant</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(montantAvenantParMarche(this.detail_marche.id)))}}</td>
-                    <td></td>
-                  </tr>
-                                    </tbody>
-                                </table>
-                           
-                            
-
-
-                        </div>
-                         <div id="tab20" class="tab-pane">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <!-- <div class="span4" align="right">
-                                   
-                                      <button class="btn btn-success" @click="afficherModalAjouterMandat" >Ajouter Mandat</button>
-
-                    </div> -->
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>N° du marche</th>
-                                         <th>N° du mandat</th>
-                                        <th>N° bordereau mandat</th>
-                                        <th>N° demande engagement</th>
-                                          <th>N° engagement</th>
-                                        <th>Type procedure</th>
-                                        
-                                        <!-- <th >Section</th> -->
-                                        <!-- <th title="unite administrative">Ua</th> -->
-                             
-                                <th>Montant Mandat</th>
-                                 <th >Decision de emetteur</th>
-                                <th title="Date validation Emetteur">Date Emetteur</th>
-                                
-                              
-                               
-                                <th>Décision CF</th>
-                                <th title="Date validation Cf">Date validation CF</th>
-
-                                
-                                
-                                
-                                <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                   
-                 <tr
-                    class="odd gradeX"
-                    v-for="(Manda, index) in afficheMandatMarcheTableau(detail_marche.id)"
-                    :key="Manda.id"
-                  >
-                   <template v-if="validationLiquidation(Manda.marche_id) == 1">
-                    <td @dblclick="afficherModalModifierMandat(index)">{{marcheMandat(Manda.marche_id) || 'Non renseigné'}}</td>
-                   <td @dblclick="afficherModalModifierMandat(index)">{{Manda.numero_mandat || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierMandat(index)">{{Manda.numero_bordereau || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierMandat(index)">{{afficherNumeroDemandeEngagemnt(Manda.engagement_id) || 'pas numero demande'}}</td>
-                     <td @dblclick="afficherModalModifierMandat(index)">{{afficherNumeroEngagemnt(Manda.engagement_id) || 'pas numero engage'}}</td>
-                     <td @dblclick="afficherModalModifierMandat(index)">{{Manda.type_procedure_id || 'Non renseigné'}}</td>
-            <!-- <td @dblclick="afficherModalModifierMandat(index)">{{uaMandat(Manda.ua_id) || 'Non renseigné'}}</td>
-                                    -->
-                    <td @dblclick="afficherModalModifierMandat(index)">{{formatageSomme(parseFloat(Manda.total_general))|| 'Non renseigné'}}</td>
-                    
-                    <td>
-                        <button v-if="Manda.decision_emetteur == 1"  class="btn  btn-success" @click="afficherModalModifierMotifMandatEmetteur(index)" >                        
-                     
-                      <span    >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="Manda.decision_emetteur == 2" class="btn  btn-warning" @click="afficherModalModifierMotifMandatEmetteur(index)" >                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="Manda.decision_emetteur == 3" class="btn  btn-danger" @click="afficherModalModifierMotifMandatEmetteur(index)" >                        
-                     
-                      
-                       <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalModifierMotifMandatEmetteur(index)" >                        
-                     
-                      
-                       <span  >Attente</span>
-                      
-                    
-                      </button>
-                    </td>
-                    
-                    <td @dblclick="afficherModalModifierMandat(index)">{{formaterDate(Manda.date_decision_emetteur) || 'Non renseigné'}}</td>
-                      
-              <td v-if="Manda.decision_emetteur == 1">
-                        <button v-if="Manda.decision_cf == 1"  class="btn  btn-success" @click="afficherModalModifierMotifMandat(index)" >                        
-                     
-                      <span    >Visé</span>
-                      
-                      </button>
-                       <button v-else-if="Manda.decision_cf == 2" class="btn  btn-warning" @click="afficherModalModifierMotifMandat(index)" >                        
-                     
-                      
-                       <span  >Différé</span>
-                      
-                    
-                      </button>
-                        <button v-else-if="Manda.decision_cf == 3" class="btn  btn-danger" @click="afficherModalModifierMotifMandat(index)" >                        
-                     
-                      
-                       <span  >Réjeté</span>
-                      
-                    
-                      </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalModifierMotifMandat(index)" >                        
-                     
-                      
-                       <span  >Attente</span>
-                      
-                    
-                      </button>
-                    </td>
-                      <td v-else>
-                        <h1 style="font-size:10px;color:red;">Désactivé  </h1>
-                    </td>
-                    <td @dblclick="afficherModalModifierMandat(index)">{{formaterDate(Manda.date_motif) || 'Non renseigné'}}</td>
-                       <td>
-                        <!-- <router-link :to="{ name: 'DetailEngagement', params: {id_detail_engagement:Engage.id}}"
-                class="btn btn-default " title="Detail Engagement">
-                  <span class=""><i class=" icon-folder-close"></i></span>
-                   </router-link>  -->
-                       <router-link :to="{ name: 'DetailMandat', params: {id_detail_mandat:Manda.id}}"
-                class="btn btn-default " title="Detail Mandat">
-                  <span class=""><i class=" icon-folder-close"></i></span>
-                   </router-link> 
-                      <button class="btn btn-danger" @click="supprimerMandat(Manda.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
-                    </td>
-                     </template>
-                      <template v-else>
-                 <td colspan="10">   <h1 style="color:red;font-size:15px;text-align:center">veuillez valider la liquidation svp?</h1></td>
-                   
-                     </template>
-              </tr>
-
-                  
-                                    </tbody>
-                                </table>
-                           
-                            
-
-
-                        </div>
-<div id="tab100" class="tab-pane ">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <div class="span4" align="right">
-                                   
-                                      <button class="btn btn-success" @click="afficherModalProcedureFacture" >Ajouter Facture</button>
-
-                    </div>
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr>
-
-                                         
-                     <th>type_facture</th>
-                    <th>numero_facture</th>
-                    <th>objet_facture</th>
-                    
-                     <th>Ua</th>
-                    <!-- <th>prix_unitaire</th>
-                    <th>Quantité</th> -->
-                    <th>prix_propose_ht</th>
-                    <th>Tva</th>
-                    
-                    <th>prix_propose_ttc</th>
-        
-                              
-                                
-                                
-                                <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                            
-                 <tr
-                    class="odd gradeX"
-                    v-for="(factu, index) in afficheFactureTableau(detail_marche.id)"
-                    :key="factu.id"
-                  >
-                   <template v-if="factu.typfacture_id == 1">
-                   <!-- <td @dblclick="afficherModalModifierFacture(index)">{{factu.id || 'Non renseigné'}}</td> -->
-                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objectTypefacture.libelle || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.numero_facture || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objet_facture || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objetUA.libelle || 'Non renseigné'}}</td>
-                       <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ht))|| 0}}</td>
-                   <!-- <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_unitaire ))|| 'Non renseigné'}}</td>
-                   <td @dblclick="afficherModalModifierFacture(index)">{{factu.quantite || 'Non renseigné'}}</td> -->
-                        <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.tva)) || 'Non renseigné'}}</td>
-                 
-                     
-                     <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ttc))|| 'Non renseigné'}}</td>
-                      </template>
-                        <template v-else>
-                   <!-- <td @dblclick="afficherModalModifierFacture(index)">{{factu.id || 'Non renseigné'}}</td> -->
-                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objectTypefacture.libelle || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.numero_facture || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objet_facture || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objetUA.libelle || 'Non renseigné'}}</td>
-                       <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ht))|| 0}}</td>
-                   <!-- <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_unitaire ))|| 'Non renseigné'}}</td>
-                   <td @dblclick="afficherModalModifierFacture(index)">{{factu.quantite || 'Non renseigné'}}</td> -->
-                        <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.tva)) || 0}}</td>
-                 
-                     
-                     <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ttc))|| 0}}</td>
-                      </template>
-                     <td>
-                        <button class="btn " v-if="factu.typfacture_id !== 1" @click="afficherModalAjouter(factu.id)" title="Ajouter engagement">
-                        <span>
-                          <i class="icon   icon-folder-close"></i>
-                        </span>
-                      </button>
-                       <button class="btn " v-if="factu.typfacture_id == 1" @click="afficherModalAjouterMandatDirect(factu.id)" title="Ajouter Mandat">
-                        <span>
-                          <i class="icon   icon-folder-close"></i>
-                        </span>
-                      </button>
-                      <button class="btn btn-danger" @click="supprimerFacture(factu.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
-                    </td>
-                  </tr>
-                                    </tbody>
-                                </table>
-                           
-                            
-
-
-                        </div>
-
-                         <div id="tab20002" class="tab-pane">
-                                <div class="span4"></div>
-                                <div class="span4"></div>
-                                <!-- <div class="span4" align="right">
-                                   
-                                      <button class="btn btn-success" @click="afficherModalAjouterTitre" >Ajouter Avenant</button>
-
-                    </div> -->
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                   <tr>
-                                     <th>Année budgetaire</th>
-                    <th>Objet marche</th>
-                      <th>Fournisseur</th>
-                        <!-- <th>Marché</th>
-                    <th>Avenant</th>
-                    <th>Marché + Avenant</th> -->
-                     <th>Facture (TTC)</th>
-                      <th>Date</th>
-                    <th>Paiement part Etat</th>
-                    <th>Paiement part Bailleurs</th>
-                    <!-- <th>Reste a payer marché</th> -->
-                    <!-- <th>Taux facturétauxFacturation</th> -->
-                  </tr>
-                                    </thead>
-                                    <tbody>
-                                   
-                 <tr class="odd gradeX" v-for="type in afficheMandatMarcheTableau(detail_marche.id)" :key="type.id">
-                   <td>{{type.exercice_budget || 'Non renseigné'}}</td>
-                    <td
-                     
-                    >{{detail_marche.objet || 'Non renseigné'}}</td>
-                   
-                    <td>{{type.nom_entreprise || 'Non renseigné'}}</td>
-                   
-                   
-                     
-                     <td>{{formatageSomme(parseFloat(objetfactureMontant(type.facture_id))) || 0}}</td>
-                     <td
-                     style="text-align: center"
-                    >{{formaterDate(type.date_motif) || 0}}</td>
-                     <td
-                       style="text-align: center"
-                    >{{formatageSomme(parseFloat(type.montant_tresor)) || 0}}</td>
-                  <td
-                       style="text-align: center"
-                    >{{formatageSomme(parseFloat(montantTotalDonEtEmprunt))|| 0}}</td>
-                    <!-- <td  style="text-align: center">{{formatageSomme(parseFloat(restePayeMarche)) || 0}}</td> -->
-                   
-  <!-- <td style="text-align: center"> {{tauxFacturation || 0}}%</td>
-                     -->
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td
-                     style="text-align: center;color:red;font-weight:bold;"
-                    >{{formatageSomme(parseFloat(montantFactureParMarche(detail_marche.id))) || 0}}</td>
-                     <!-- <td  style="text-align: center;color:red;font-weight:bold;"
-                     
-                    
-                    > {{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td> -->
-                     <td ></td>
-                  <td
-                     
-                     style="text-align: center;color:red;font-weight:bold;"
-                    >{{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td> 
-                      <td
-                     
-                     style="text-align: center;color:red;font-weight:bold;"
-                    >{{formatageSomme(parseFloat(montantTotalDonEtEmprunt)) || 0}}</td> 
-                    
-                      <!-- <td  style="text-align: center;color:red;font-weight:bold;"> {{tauxFacturation || 0}}%</td> -->
-                    
-                   
- 
-                    
-                  </tr>
-                  
-                                    </tbody>
-                                </table>
-                           
-                            
-
-
-                        </div>
-                    </div>
-
-  
-<div class="modal-footer">
-        
-        <a data-dismiss="modal" class="btn btn-danger" @click.prevent="retourListeEntreprise" href="#">Voir Tableau</a>
-       
-      </div>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                </div>
-            </div>
-        </div>
+      
 
 
 
@@ -9307,7 +9431,7 @@ afficherObjetEngagement1() {
 
 afficherMontantEngagement1() {
     
-       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.editLiquidation.facture_id);
+       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.editEngagement.facture_id);
 
       if (norme) {
        return norme.prix_propose_ttc;
@@ -10903,6 +11027,16 @@ recupererActivite(){
                 "supprimerRealiteServiceFait"
             ]),
     
+   
+
+
+
+
+
+
+
+
+
              fonctionModifierLiquidation() {
      
 
@@ -11623,10 +11757,18 @@ afficherModalModifierMotifMandat(index) {
 
 
 afficherModalProcedureFacture() {
-      this.$("#modalTypeEngagement").modal({
+
+   if(this.DisponibleBudgetaireApresLiquidation < this.montantMarcheAvecAvenant)
+ {
+alert("Montant du marche est supperieure au Budget")
+}
+else{
+  this.$("#modalTypeEngagement").modal({
         backdrop: "static",
         keyboard: false
       });
+}
+    
     },
 
 afficherModalModifierFacture(index) {

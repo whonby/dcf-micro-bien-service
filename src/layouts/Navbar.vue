@@ -1,4 +1,4 @@
-
+ 
 <template>
   <div>
     <!--start-top-serch-->
@@ -87,7 +87,7 @@ export default {
       // "getAllTypeTextes",
       "getAllUniteAdministrative",
       // "getAllArchivageDocument",
-      "getAllDirection",
+      // "getAllDirection",
       "getAllServiceua",
       "getAllFonction",
       "getAllBudgetGeneral",
@@ -105,7 +105,7 @@ export default {
             "getClasses","getEchelons","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite","getCategorieGrade",
 "getFamilleFonction","getFonctionBudgetaire", "getDossierCandidatPersonnel",
-"getClassificationGradeFonction"]),
+"getClassificationGradeFonction","getSituationMatrimonial"]),
 
       ...mapActions('gestionMarche',['getTypeMarche',"getSecteurActivite",
         "getEntreprise","getEtapeMarche","getDocumentPTBAPPM","getMarcheContrat","getPresenceCF",
@@ -128,7 +128,8 @@ export default {
       "getAllImmobilisation",
       "getAllAmortissement",
       "getAllHistoAffectation",
-      "getAllDemandeMateriel"
+      "getAllDemandeMateriel",
+      "getAllHistoAffectationService"
       
     ]),
 
@@ -147,7 +148,6 @@ export default {
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", 
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
           "getRapport", "getDocument","getRapportJugement","getRolemembreCojo"])
-
 
   },
 
@@ -225,7 +225,7 @@ this.getTypeAppel()
       // this.getAllTypeTextes();
     this.getAllUniteAdministrative();
     // this.getAllArchivageDocument();
-this.getAllDirection()
+// this.getAllDirection()
 this.getAllServiceua()
 this.getAllFonction()
 this.getFonctionBudgetaire()
@@ -236,6 +236,7 @@ this.getDossierCandidatPersonnel()
         this.getFonctions()
        this.getCategorieGrade()
 this.getFamilleFonction()
+this.getSituationMatrimonial()
 this.getClassificationGradeFonction()
         this.getNiveauEtude()
         this.getTypeContrat()
@@ -282,6 +283,7 @@ this.getAllHistoriqueBudgetGeneral()
     this.getAllImmobilisation();
     this.getAllHistoAffectation();
     this.getAllDemandeMateriel();
+    this.getAllHistoAffectationService()
     //this.getAllAmortissement();
       /**
        * this.
@@ -325,6 +327,7 @@ this.getEngagement()
 this.getExecutionMarche()
 this.getMandat()
 this.getRapportJugement()
+this.getCandidatSelectionner()
 this.getDocument()
  this.getRolemembreCojo()
 

@@ -1,20 +1,11 @@
-afficheNombrePersonneNonEquipe
+
 <template>
   <div>
 
-<div class="row-fluid">
-        <div class="span12">
-          <div class="widget-box">
-            <div class="widget-title">
-              <span class="icon">
-                <i class="icon-th"></i>
-              </span>
-              <h5>DEMANDE DE MATERIEL</h5>
-              <!-- <div align="right">
-                Search:
-                <input type="search" placeholder />
-              </div>-->
-            </div>
+
+        
+     
+           
 
             <div class="table-responsive text-nowrap">
               <table class="table table-bordered table-striped">
@@ -55,7 +46,7 @@ afficheNombrePersonneNonEquipe
                       <th>Article</th>
                     <th>Quantité</th>
                     <th>Duree de vie</th>
-                    <th>Etat Immobilisation</th>
+                    <!-- <th>Etat Immobilisation</th> -->
                     <th>Date mise en service</th>
                       <th>Montant</th>
                      <!-- <th>Année de l'amortissement</th> -->
@@ -97,15 +88,15 @@ afficheNombrePersonneNonEquipe
                       <td 
                       
                     >{{BesoinImmo.dure_vie || 'Non renseigné'}}</td>
-                      <td 
+                      <!-- <td 
                       
-                    >{{afficheEtatImmobilisation(BesoinImmo.etatimmo_id) || 'Non renseigné'}}</td>
+                    >{{afficheEtatImmobilisation(BesoinImmo.etatimmo_id) || 'Non renseigné'}}</td> -->
                  
                  <!-- <td>{{BesoinImmo.annee_amortissement || 'Non renseigné'}}</td> -->
                  
                    <td>{{formaterDate(BesoinImmo.date_mise_service) || 'Non renseigné'}}</td>
-                    <td>{{formatageSomme(BesoinImmo.valeurorigine) || 'Non renseigné'}}</td>
-                     <td>
+                    <td>{{formatageSomme(parseFloat(BesoinImmo.valeurorigine)) || 'Non renseigné'}}</td>
+                     <td colspan="2">
                           <button   class="btn btn-info " title="" @click="fonctionAjouterDemande(index)">
                 <span class=""><i class="icon-pencil"></i></span></button>
                     
@@ -140,7 +131,7 @@ afficheNombrePersonneNonEquipe
                  <tr>
                      <!-- <th>Type UA</th> -->
                    <th>Année de l'affectation</th>
-                    <th>Matricule {{nombreJourTraitementCalucle}}</th>
+                    <th>Matricule</th>
                     <th>Nom & Prénoms</th>
                     
                      <th>Unite administrative</th>
@@ -198,8 +189,8 @@ afficheNombrePersonneNonEquipe
                  
                  <!-- <td>{{BesoinImmo.annee_amortissement || 'Non renseigné'}}</td> -->
                  
-                   <td>{{formaterDate(BesoinImmo.date_mise_service) || 'Non renseigné'}}</td>
-                    <td>{{formatageSomme(BesoinImmo.valeurorigine) || 'Non renseigné'}}</td>
+                   <td style="text-align: center;font-size:14px;font-weight:bold;">{{formaterDate(BesoinImmo.date_mise_service) || 'Non renseigné'}}</td>
+                    <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{formatageSomme(BesoinImmo.valeurorigine) || 'Non renseigné'}}</td>
                      <td>
                           <button   class="btn btn-info " title="" @click="afficheDemandeDeMateriel(index)">
                 <span class=""><i class="icon-pencil"></i></span></button>
@@ -239,29 +230,11 @@ afficheNombrePersonneNonEquipe
   </div>
 
 
-    </div>
-</div>
-
-
-    </div>
+    
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   
 
 
 
@@ -276,6 +249,21 @@ afficheNombrePersonneNonEquipe
       <div class="modal-body">
         <table class="table table-bordered table-striped">
           <tr>
+            <td>
+     <div class="control-group">
+                <label class="control-label">Année budgétaire</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    readonly
+                     :value="editDemande.annee"
+                    class="span12"
+                   
+                   
+                  />
+                </div>
+              </div>
+</td>
            <td>
                 <div class="control-group">
                 <label class="control-label">Unite administrative</label>
@@ -283,8 +271,8 @@ afficheNombrePersonneNonEquipe
                   <input
                     type="text"
                     readonly
-                   :value="editDemande.ua_id"
-                    class="span4"
+                   :value="afficherUniteAdministrative(editDemande.ua_id)"
+                    class="span12"
                    
                    
                   />
@@ -299,28 +287,14 @@ afficheNombrePersonneNonEquipe
                     type="text"
                     readonly
                     :value="afficheUniteZone(editDemande.unitezone_id)"
-                    class="span4"
+                    class="span12"
                    
                    
                   />
                 </div>
               </div>
 </td>
-<td>
-     <div class="control-group">
-                <label class="control-label">Fonction</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    readonly
-                     :value="afficheFonction(editDemande.fonction_id)"
-                    class="span4"
-                   
-                   
-                  />
-                </div>
-              </div>
-</td>
+
            
           </tr>
           <tr>
@@ -332,12 +306,12 @@ afficheNombrePersonneNonEquipe
                     type="text"
                     readonly
                      :value="afficherMatriculeActeurDepense(editDemande.acteur_id)"
-                    class="span4"
+                    class="span12"
                   />
                 </div>
               </div>
             </td>
-            <td colspan="2">
+            <td colspan="">
               <div class="control-group">
                 <label class="control-label">Nom &&  Prénoms</label>
                 <div class="controls">
@@ -345,14 +319,28 @@ afficheNombrePersonneNonEquipe
                     type="text"
                     readonly
                      :value="afficherActeurDepense(editDemande.acteur_id)"
-                    class="span8"
+                    class="span12"
                    
                    
                   />
                 </div>
               </div>
             </td>
-          
+          <td>
+     <div class="control-group">
+                <label class="control-label">Fonction</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    readonly
+                     :value="afficheFonction(editDemande.fonction_id)"
+                    class="span12"
+                   
+                   
+                  />
+                </div>
+              </div>
+</td>
           </tr>
           <tr>
            
@@ -364,7 +352,7 @@ afficheNombrePersonneNonEquipe
                     type="text"
                     readonly
                     :value="afficheFamille(editDemande.article_id)"
-                    class="span4"
+                    class="span12"
                    
                    
                   />
@@ -376,7 +364,7 @@ afficheNombrePersonneNonEquipe
               <div class="control-group">
                 <label class="control-label">Cause inactivité  <span style="color:red">*</span>  </label>
                 <div class="controls">
-                  <select v-model="Demande.cause_inactivite" class="span4">
+                  <select v-model="Demande.cause_inactivite" class="span12">
                     
                     <option
                       v-for="equipe in causeInactivite"
@@ -396,7 +384,7 @@ afficheNombrePersonneNonEquipe
                     type="text"
                     readonly
                      v-model="editDemande.qte"
-                    class="span4"
+                    class="span12"
                    
                    
                   />
@@ -411,7 +399,7 @@ afficheNombrePersonneNonEquipe
                <div class="control-group">
                 <label class="control-label">Cause de la demande <span style="color:red">*</span> </label>
                 <div class="controls">
-                  <textarea name="" id="" cols="30" rows="2" class="span8" v-model="Demande.cause_demande"></textarea>
+                  <textarea name="" id="" cols="30" rows="1" class="span12" v-model="Demande.cause_demande"></textarea>
                   
                 </div>
               </div>
@@ -426,7 +414,7 @@ afficheNombrePersonneNonEquipe
                     type="text"
                     readonly
                     
-                    class="span4"
+                    class="span12"
                    
                     v-model="editDemande.dure_vie"
                   />
@@ -1065,7 +1053,7 @@ afficheDemandeDeMateriel(index) {
 
 fonctionAjouterDemande(index){
 
-if ( confirm( "EN UTILISATION , Voulez-vous continuer la demande svp?") ) {
+if ( confirm( "Voulez-vous continuer la demande svp?") ) {
    
      this.$("#exampleModal").modal({
         backdrop: "static",
@@ -1102,8 +1090,8 @@ uniteadmin_id :this.editDemande.ua_id,
   
     dure_vie :this.editDemande.dure_vie,
     acteur_id :this.editDemande.acteur_id,
-    uniteZone_id :this.editDemande.unitezone_id
-    
+    uniteZone_id :this.editDemande.unitezone_id,
+    annee_budgetaire:this.editDemande.annee
     	
     }
     this.ajouterDemandeMateriel(nouveauDemade)

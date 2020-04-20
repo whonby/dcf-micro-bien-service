@@ -6,16 +6,7 @@
 
             <a href="#ajouterOuverturePersonnel" data-toggle="modal" class="btn btn-primary">Ajouter</a>
         </div>
-            <!-- debut de list  -->
-            <!-- <div align="right">
-                      <div class="widget-content">
-
-                          <a href="#ajouterCojo" data-toggle="modal" class="btn btn-warning" >Ajouter </a>
-
-
-                      </div>
-                           
-                  </div> -->
+          
                   <div align="left">
                   <h4> Infomation sur la cojo</h4>
                   </div>
@@ -31,7 +22,7 @@
                       
                       </thead>
                       <tbody>
-                      <tr class="odd gradeX" v-for="(appelOffre, index) in listeCojo(macheid.id)"
+                      <tr class="odd gradeX" v-for="(appelOffre, index) in listeCojo(macheid)"
                           :key="appelOffre.id">
                          
                               <!-- <td @click="afficheBouttonTechCojo(index)">
@@ -68,7 +59,7 @@
               <div id="ajouterOuverturePersonnel" class="modal hide grdtaill">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter Cojo</h3>
+                <h3>Ajouter Cojo </h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -172,7 +163,7 @@
             <!-- end formulaire cojo  -->
 
             <!-- bigin modifie cojo  -->
-             <div id="modificationCojo" class="modal hide grdtaill">
+             <div id="modificationCojo1" class="modal hide grdtaill">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Modification de cojo</h3>
@@ -271,12 +262,7 @@ export default {
         return{
            
             formDataCojo:{
-                //   lettre_invitation_id:"",
-                //         condition_id:'',
-                //         controleur_finnancier:"",
-                //         dmp:"",
-                //         autorite_contractante:"",
-                      // entreprise_id:"",
+               
                         date_ouverture:"",
                         date_composition:"",
                         num_dossier_appel_offre:"",
@@ -285,14 +271,22 @@ export default {
                         difference_personnel_bienService:"pers"
             },
             
-            edite_cojo:"",
+            edite_cojo:{
+               date_ouverture:"",
+               date_composition:"",
+               num_dossier_appel_offre:"",
+              nbr_participant:"",
+              appel_offre_id:"",
+             difference_personnel_bienService:"pers"   
+
+            }
         }
     },
     props:["macheid"],
     created(){
     },
     computed:{
-        ...mapGetters('bienService',['getterCojos',"listeOuverturePersonnel",
+        ...mapGetters('bienService',["getterCojos",
         'gettersCotations','appelOffres',
         'gettersCojoPersonnaliser','gettersCotationPersonnaliser']),
 
@@ -302,60 +296,13 @@ export default {
          listeCojo() {
                 return macheid => {
                     if (macheid != "") {
-                    //   let Objet=  this.getterCojos.find(idmarche => idmarche.lettre_invitation.appel_offre.macheid == macheid);
-                    //     let vM=this;
-                    //     if(Objet!=undefined){
-                    //         vM.idcojo=Objet.id
-                    //     }
-                        return this.listeOuverturePersonnel.filter(idmarche => idmarche.marche_id == macheid)
+                   
+                        return this.getterCojos.filter(idmarche => idmarche.marche_id == macheid)
                     }
                 }
             },
 
-        //  afficherEntrepriseRecep () {
-        //         return id => {
-        //             if (id != "") {
-        //                 console.log("Marche lettre inviation marche")
-        //                 return this.gettersCotationPersonnaliser.filter(idmarche => idmarche.marche_id == id)
-        //              }
-        //      }
-        //     },
-    //         affichierNomEntreprise() {
-    //   return id => {
-    //     if (id != null && id != "") {
-    //        const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
-
-    //   if (qtereel) {
-    //     return qtereel.raison_sociale;
-    //   }
-    //   return 0
-    //     }
-    //   };
-    // },
-// listeAppelOffre() {
-//       return id => {
-//         if (id != null && id != "") {
-//            const qtereel = this.gettersCotations.find(qtreel => qtreel.marche_id == id);
-
-//       if (qtereel) {
-//         return qtereel.ref_offre;
-//       }
-//       return 0
-//         }
-//       };
-//     },
-// listeAppelOffreId() {
-//       return id => {
-//         if (id != null && id != "") {
-//            const qtereel = this.gettersCotations.find(qtreel => qtreel.marche_id == id);
-
-//       if (qtereel) {
-//         return qtereel.id;
-//       }
-//       return 0
-//         }
-//       };
-//     },
+     
 
     affichierReferenceAppelOffre() {
       return id => {
@@ -381,48 +328,22 @@ affichierAppelOffreid() {
         }
       };
     },
-//   listeAppelOffre(){
-//                 return  macheid=>{
-//                     if (macheid!="") {
-//                         //console.log("Marche appel offre")
-//                        const vM=this;
-//                         let Objet=this.gettersCotations.find( idmarche => idmarche.marche_id == macheid)
-//                        // console.log("Marche appel offre 10")
-//                         if(Objet!=undefined){
-//                            // vM.formDossierCadidature.appel_offre_id=Objet.id;
-//                            // vM.formAnalyseDossier.appel_offre_id = Objet.id;
-//                             //vM.formLot.appel_offre_id=Objet.id;
-//                            // vM.formAno.appel_offre_id = Objet.id
-//                             //vM.formLettre.appel_offre_id=Objet.id;
-//                             vM.formDataCojo.cotation_id=Objet.ref_offre;
-//                         }
-//                        // console.log(Objet)
-//                     return this.gettersCotations.filter( idmarche => idmarche.marche_id == macheid)
-//                     }
-//                 }
-//             },
+
           
     },
     methods:{
         ...mapActions('bienService',['supprimerCojo',
         'ajouterCojo', 'modifierCojo']),
 
-            //  lettreInvitationAMarche: function () {
-            //     return macheid => {
-            //         if (macheid != "") {
-                        
-            //             return this.getterLettreInvitation.filter(idmarche => idmarche.appel_offre.macheid == macheid)
-            //         }
-            //     }
-            // },
+           
             // c'est une fonction pour afficher les membres
               
                 afficheBouttonTechCojo(index){
-        this.$('#modificationCojo').modal({
+        this.$('#modificationCojo1').modal({
             backdrop: 'static',
             keyboard: false
         });
-        this.edite_cojo = this.listeOuverturePersonnel.find(item=>item.id==index);
+        this.edite_cojo = this.listeCojo(this.macheid)[index];
         //this.edite_lot.appel_offre_id=this.edite_lot. modifierDemandeAno
     },
     
@@ -431,7 +352,7 @@ affichierAppelOffreid() {
      ajouterCojoMarche(){
          var nouvelObjet ={
              ...this.formDataCojo,
-             marche_id:this.macheid.id,
+             marche_id:this.macheid,
              appel_offre_id :this.affichierAppelOffreid(this.macheid)
 
          }
@@ -454,12 +375,12 @@ affichierAppelOffreid() {
  modificationCojo(){
       var nouvelObjet1 ={
              ...this.edite_cojo,
-             marche_id:this.macheid.id,
+             marche_id:this.macheid,
              appel_offre_id :this.affichierAppelOffreid(this.macheid)
 
          }
                 this.modifierCojo(nouvelObjet1)
-                this.$('#modificationCojo').modal('hide');
+                this.$('#modificationCojo1').modal('hide');
             },
             // fonction pour formater la date
             formaterDate(date){

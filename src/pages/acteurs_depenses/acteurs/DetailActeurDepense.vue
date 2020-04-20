@@ -1,6 +1,7 @@
 Ajouter acte de nomination
 <template>
     <div>
+
         <div class="container-fluid">
             <div class="quick-actions_homepage span12" >
                 <ul class="quick-actions" style="margin: 0px !important;" v-if="acteurDetail">
@@ -141,7 +142,7 @@ Ajouter acte de nomination
 
                                         <div class="span12 widget-box">
                                             <div class="span8"></div>
-                                            <div class="span4" align="right" v-if="!salaire_actuel_acteur.date_arrivee_act_nomination"><a href="#myModal" data-toggle="modal" class="btn btn-success" >Ajouter act de nomination</a></div>
+                                            <div class="span4" align="right" v-if="!salaire_actuel_acteur.date_arrivee_act_nomination"><a href="#myModal" data-toggle="modal" class="btn btn-success" >Ajouter acte de nomination</a></div>
 
                                             <table class="table table-bordered">
                                                 <thead>
@@ -204,7 +205,7 @@ Ajouter acte de nomination
                                                             </td>
                                                             <td>
                                                                  <div class="control-group">
-                                                            <label class="control-label">Date Debut Normination :</label>
+                                                            <label class="control-label">Date Début Nomination :</label>
                                                             <div class="controls">
                                                                 <input type="date" class="span11" v-model="date_debut_fonct_budget" placeholder="">
                                                             </div>
@@ -212,7 +213,7 @@ Ajouter acte de nomination
                                                             </td>
                                                             <td>
                                                                  <div class="control-group">
-                                                            <label class="control-label">Date fin Normination :</label>
+                                                            <label class="control-label">Date fin Nomination :</label>
                                                             <div class="controls">
                                                                 <input type="date" class="span11" v-model="date_fin_fonct_budget" placeholder="">
                                                             </div>
@@ -220,15 +221,29 @@ Ajouter acte de nomination
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td>
-                                                                  <div class="control-group">
-                                                            <label class="control-label">Date arrive acte nomination :</label>
-                                                            <div class="controls">
-                                                                <input type="date" class="span11" v-model="date_arrivee_act_nomination" placeholder="">
-                                                            </div>
-                                                        </div>
-                                                            </td>
-                                                            <td>
+                                                              <!-- <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Reference acte:</label>
+                                                    <div class="controls">
+                                                        <input type="text" v-model="formData.code"  placeholder="Saisir la reference" />
+                                                    </div>
+                                                </div>
+                </td> -->
+                <!-- <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Type acte de personnel</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.type_acte_id">
+                                                            <option></option>
+                                                            <option v-for="item in type_acte_personnels" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                </td> -->
+                 <td>
                                                                 <div class="control-group">
                                                             <label class="control-label">Acte nomination :</label>
                                                             <div class="controls">
@@ -237,9 +252,19 @@ Ajouter acte de nomination
                                                             </div>
                                                         </div>
                                                             </td>
-                                                            <td>
+                                                             <td>
+                                                                  <div class="control-group">
+                                                            <label class="control-label">Date arrivée acte nomination :</label>
+                                                            <div class="controls">
+                                                                <input type="date" class="span11" v-model="date_arrivee_act_nomination" placeholder="">
+                                                            </div>
+                                                             <input type="hidden" class="span11" v-model="formData.normeequipement" placeholder="">
+                                                             <input type="hidden" class="span11" v-model="formData.historiquenormequipement" placeholder="">
+                                                        </div>
+                                                            </td>
+                                                              <td>
                                                                  <div class="control-group">
-                                                            <label class="control-label">Specimen signature</label>
+                                                            <label class="control-label">Spécimen de signature</label>
                                                             <div class="controls">
                                                                 <input type="file" @change="OnchangeImage"  class="span11 form-control" placeholder="Enter specimen">
                                                                 <code v-if="info_img">Le fichier doit etre une image (.png,.jpg,jpeg,gif)</code>
@@ -247,6 +272,7 @@ Ajouter acte de nomination
                                                         </div>
                                                             </td>
                                                         </tr>
+                                                       
                                                         </table>
                                                   
 
@@ -727,7 +753,9 @@ Ajouter acte de nomination
                     type_acte_id:"",
                     grade_id:"",
                     fonction_id:"",
-                    plan_budgetaire_id:''
+                    plan_budgetaire_id:'',
+                    normeequipement:"",
+                    historiquenormequipement:""
                 },
                 conges:{
                     code: "",
@@ -898,6 +926,9 @@ historiqueMissionParActeur(){
                   formData.append('date_debut_fonct_budget', this.date_debut_fonct_budget);
                    formData.append('date_fin_fonct_budget', this.date_fin_fonct_budget);
                 formData.append('id', this.salaire_actuel_acteur.id);
+                // formData.append('normeequipement', this.normeequipement);
+                // formData.append('historiquenormequipement', this.historiquenormequipement);
+                //  formData.append('historiquenormequipement', this.historiquenormequipement);
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'

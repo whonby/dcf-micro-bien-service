@@ -32,8 +32,8 @@
 
                         
                         <td @click="afficherModalDecisionAnocf (anoBailleur.id)"> 
-                           <span v-if="anoBailleur.avis_bail== 0" class=" btn label label-success"> Non objection </span>
-                           <span v-else-if="anoBailleur.avis_bail== 1" class=" btn label label-important"> objection </span>
+                           <span v-if="anoBailleur.avis_bail== 1" class=" btn label label-success"> Non objection </span>
+                           <span v-else-if="anoBailleur.avis_bail== 2" class=" btn label label-important"> objection </span>
                            <span v-else class=" btn label label-info"> En attent</span>
                          </td>
 
@@ -98,8 +98,8 @@
                         <div class="controls">
                             <input
                                     type="text"
-                                    v-model="formBailleur.num_courrier"
-                                    class="span"
+                                    v-model="formBailleur.numero_courie"
+                                  class="span"
                                     placeholder="Saisir le numero du courrier"
                             />
                         </div>
@@ -180,7 +180,7 @@
                         <div class="controls">
                             <input
                                     type="text"
-                                    v-model="edit_bailleur.num_courrier"
+                                    v-model="edit_bailleur.numero_courie"
                                     class="span"
                                     placeholder="Saisir le numero du courrier"
                             />
@@ -266,8 +266,8 @@
                         <label class="control-label">Avis</label>
                         <div class="controls">
                            <select v-model="edit_bailleur.avis_bail" class="span">
-                               <option value="0"> Non objection</option>
-                               <option value="1">Objection </option>
+                               <option value="1"> Non objection</option>
+                               <option value="2">Objection </option>
                            </select>
                         </div>
                     </div>
@@ -428,7 +428,7 @@ affichierAppelOffreid() {
             // },
 
             verouillageObservation(){
-    return this.edit_bailleur.avis_bail == 0
+    return this.edit_bailleur.avis_bail == 1
 },
 
 
@@ -485,7 +485,9 @@ affichierAppelOffreid() {
             },
 
               ajouterDemandeAnoLocal(){
-                const formData = new FormData();
+
+                  if(confirm("chargement du fichier neccessaire ok mercie")){
+                      const formData = new FormData();
                 formData.append('fichier', this.selectedFileDemandeAno, this.selectedFileDemandeAno.name);
               //  formData.append('proce_verbal_jugement_offre_id', this.formBailleur.proce_verbal_jugement_offre_id);
                 formData.append('date_ano_dmp', this.formBailleur.date_ano_dmp);
@@ -508,10 +510,15 @@ affichierAppelOffreid() {
                     
                    // proce_verbal_jugement_offre_id:""
                 }
+                  }else return "chargement du fichier neccessaire"
+              
             },
 
+
                editAnoBailleur(){
-                //console.log(this.edit_bailleur)
+                  
+                   
+                   //console.log(this.edit_bailleur)
                 const formData = new FormData();
                // formData.append('proce_verbal_jugement_offre_id', this.edit_bailleur.proce_verbal_jugement_offre_id);
                 formData.append('date_ano_dmp', this.edit_bailleur.date_ano_dmp);
@@ -537,6 +544,13 @@ affichierAppelOffreid() {
                 this.getAnalyseDMP()
                 this.getAnoDMPBailleur()
                 this.$('#modifDemandeAno').modal('hide');
+
+
+                
+        //    let marcheObjet=this.getterAnalyseDossiers.find(marche=>marche.id==this.macheid)
+        //        marcheObjet.attribue=2
+                 
+                
             },
 
             formaterDate(date){

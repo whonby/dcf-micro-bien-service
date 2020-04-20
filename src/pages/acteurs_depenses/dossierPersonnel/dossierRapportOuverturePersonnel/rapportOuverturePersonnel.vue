@@ -85,27 +85,31 @@
             </div>
             <div class="modal-body">
                 <div class="widget-box">
-                    <form action="#" method="get" >
-    
-                        <div class="control-group">
-              <label class="control-label">Date:</label>
-              <div class="controls">
-                <input type="date"   v-model="editRapport.date_type_procedure"
-                 />
-                <input type="hidden" v-model="editRapport.difference_personnel_bienService"/>
-              </div>
-            </div>
-                   <div class="control-group">
+
+               <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">Date du rapport</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="editRapport.date_type_procedure"
+                                    class="span"
+                                       
+                            />
+                              <input type="hidden" v-model="editRapport.difference_personnel_bienService"/>
+                        </div>
+                    </div>
+
+     <div class="control-group">
               <label class="control-label">Fichier joint:</label>
               <div class="controls">
-                <input type="file"   @change="OnchangeFichier" />
+                <input type="file"  class="span" @change="OnchangeFichier" />
               </div>
             </div>
-                     
-                     
-                
 
-                    </form>
+
+                </form>
+
                 </div>
             </div>
             <div class="modal-footer">
@@ -222,7 +226,8 @@ export default {
          
           
            ajouterRapportOuverture(){
-                const formData = new FormData();
+               if(confirm("veiller charger le fichier svp !")){
+                 const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
                  formData.append('date_type_procedure', this.formRapport.date_type_procedure);
                formData.append('marche_id', this.macheid);
@@ -237,11 +242,16 @@ export default {
                  difference_personnel_bienService:"personnel",
                  date_type_procedure:""
                }
+               }else{
+                   return "ok fichier neccessaire mercie"
+               }
+              
            },
 
 
            modifierRapportOuverture(){
-               const formData = new FormData();
+               if(confirm("veiller charger le fichier svp !")){
+                    const formData = new FormData();
                  formData.append('date_type_procedure', this.editRapport.date_type_procedure);
                  formData.append('marche_id', this.macheid);
                  formData.append('difference_personnel_bienService', this.difference_personnel_bienService)
@@ -259,6 +269,10 @@ export default {
               
                this.modifierDocument(formData,config)
                this.$('#modifierModalRapportOuverture').modal('hide');
+               }else{
+                   return " chargemennt de fichier neccessaire "
+               }
+         
            },
 
            formaterDate(date){

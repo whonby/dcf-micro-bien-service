@@ -85,7 +85,19 @@
               BUDGET PAR UNITES ADMINISTRATIVES
             </router-link>
           </li>
-<li class="dropdown" id="Affichebudget">
+
+
+           <li>
+            <router-link :to="{name: 'BudgetParUa'}" tag="a">
+              LISTE BUDGET PAR UNITE ADMINISTRATIVE
+            </router-link>
+          </li>
+           <li>
+            <router-link :to="{name: 'ImportBudget'}" tag="a">
+              IMPORTATION DU BUDGET
+            </router-link>
+          </li>
+<!-- <li class="dropdown" id="Affichebudget">
         <a
           title="OUT PUT"
           href="#"
@@ -109,14 +121,14 @@
               Budget General par section
             </router-link>
           </li>
-          <!-- <li class="divider"></li>
+          <li class="divider"></li>
           <li>
             <router-link :to="{name: 'historiquebudgetGeneralComponent'}" tag="a">
               <i class="icon-key"></i>Historique Budget General 
             </router-link>
-          </li> -->
+          </li>
         </ul>
-      </li>
+      </li> -->
 
 
 <li class="dropdown" id="rechbudget">

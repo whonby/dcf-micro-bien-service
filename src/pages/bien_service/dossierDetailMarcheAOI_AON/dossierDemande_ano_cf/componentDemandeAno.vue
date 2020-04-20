@@ -7,7 +7,7 @@
                     <tr>
                         <th>Numéro courrier</th>
                         <!-- <th>Reférence d'offre </th> -->
-                        <th>Reference PV</th>
+                        <!-- <th>Reference PV</th> -->
                         <th>Date demande</th>
                         <th>Fichier</th>
                          <th>Avis</th>
@@ -25,8 +25,8 @@
                             {{demande.ref_marche || 'Non renseigné'}}</td> -->
                         <!-- <td @click="afficheDemandeDAO(demande.id)">
                             {{demande.proce_verbal_offre.appel_offre.ref_appel || 'Non renseigné'}}</td> -->
-                        <td @click="afficheDemandeDAO(demande.id)">
-                            {{demande.proce_verbal_jugement_offre_id || 'Non renseigné'}}</td>
+                        <!-- <td @click="afficheDemandeDAO(demande.id)">
+                            {{demande.proce_verbal_jugement_offre_id || 'Non renseigné'}}</td> -->
                         <td @click="afficheDemandeDAO(demande.id)">
                             {{formaterDate(demande.date_demande) || 'Non renseigné'}}</td>
 

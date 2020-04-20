@@ -36,6 +36,7 @@ const defaultState = {
 
     documentMedias:[],
     rapportDocuments:[],
+    cojo_personnels:[],
 
     // mediaStock:[],
     // stockDocuments:[],

@@ -589,7 +589,9 @@ export function modifierLocalisationGeographique({commit, dispatch}, objetModifi
    asyncLoading( axios.put('/modifier_localisation_geo/'+ objetModifie.id, {
     code:objetModifie.code,
     libelle:objetModifie.libelle,
-   structure_localisation_geographique_id:objetModifie.structure_localisation_geographique_id
+       structure_localisation_geographique_id: objetModifie.structure_localisation_geographique_id,
+       longitude: objetModifie.longitude,
+       latitude: objetModifie.latitude,
 })).then( response => {
         commit('MODIFIER_LOCALISATION_GEOGRAPHIQUE', response.data) 
         dispatch('getLocalisationGeographique')

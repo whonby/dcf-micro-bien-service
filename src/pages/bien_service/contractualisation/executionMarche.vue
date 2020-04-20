@@ -437,6 +437,7 @@
                     <th>Ligne Budgetaire</th>
                     <th>Objet marché</th>
                     <th>Reference marché</th>
+                   
                     <th>Montant Réel</th>
                     <th>Action</th>
                   </tr>
@@ -462,7 +463,7 @@
                    {{marche.reference_marche || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(afficheMontantReelMarche(marche.id))) || 'Non renseigné'}}</td>
-                  
+                 
 
 
                      <div class="btn-group">
@@ -472,7 +473,7 @@
                   <span class=""><i class="icon-folder-open"></i></span>
                    </router-link>  -->
  <router-link :to="{ name: 'Engagement', params: { id: marche.id }}"
-                class="btn btn-default " title="Detail Engagement">
+                class="btn btn-default " title="Detail execution">
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link> 
 
@@ -592,7 +593,18 @@ export default {
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
+ afficherAttributMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.attribue;
+      }
+      return 0
+        }
+      };
+    },
 
 afficheMontantReelMarche() {
       return id => {
@@ -653,16 +665,27 @@ return this. marcherAttribuer.filter((item) => {
         }
       };
     },
-    
+     affichertypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code_type_marche;
+      }
+      return 0
+        }
+      };
+    },
 
     marcherAttribuer(){
-      return this.getMarchePersonnaliser.filter(recuper => recuper.attribue == 2)
+      return this.getMarchePersonnaliser.filter(recuper => recuper.attribue == 2 && recuper.type_marche.code_type_marche == 4 )
       
     },
 
     
     montantMarcheExecuter(){
-  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
+  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.affichertypeMarche(recuper.marche.type_marche_id) == 4).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
 },
     // MontatantImputationBudget() {
       

@@ -31,13 +31,14 @@
                         </td>
                         <div class="btn-group">
                               <td>
+                               <button href="#infoPV" @click.prevent="infoPVAffiche(rapport.reference)" data-toggle="modal" class="btn btn-info">
+                            <span title="voir la liste des classements des candidats"><i class="icon-pencil" ></i></span></button>
+                             </td>
+                              <td>
                             <button @click.prevent="supprimerRapportJugement(rapport.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
                              </td>
-                             <td>
-                               <a href="#infoPV" @click.prevent="infoPVAffiche(rapport.reference)" data-toggle="modal" class="btn btn-info">
-                            <span title="voir la liste des classements des candidats"><i class="icon-pencil" ></i></span></a>
-                             </td>
+                           
                         </div>
                        
                        
@@ -94,7 +95,7 @@
                       <h4 class="text-center">ATTRIBUTION DU CONTRAT</h4>
                       <div>
                           Suivant les résultats de l’évaluation des offres présentés par le rapporteur dans le
-                          tableau ci-dessus, il apparaît que le soumissionnaire <b v-if="resultaAnalysePv.length>0">{{}}</b> propose
+                          tableau ci-dessus, il apparaît que le soumissionnaire <b v-if="resultaAnalysePv.length>0"></b> propose
                           l’offre conforme la moins-disante.
                       </div>
                       <h4 class="text-center">TABLEAU RECAPITULATIF DE LA COMPARAISON DES OFFRES</h4>
@@ -127,7 +128,11 @@
 
                           </tr>
                           </tbody>
+                          
                       </table>
+                      <div> super, le classement effectué avec success!
+                               donc nous  passerons à l'avis d'ANO Bailleur, si l'avis est "Non Objection" alors,
+                               les candidats passerons a l'attribution pour etre recruter !</div>
                   </div>
                   <div class="modal-footer">
 
@@ -145,27 +150,31 @@
             </div>
             <div class="modal-body">
                 <div class="widget-box">
-                    <form action="#" method="get" >
-    
-                        <div class="control-group">
-              <label class="control-label">Date:</label>
-              <div class="controls">
-                <input type="date"   v-model="editRapport.date_rapport_jugement"
-                 />
-                <input type="hidden" v-model="editRapport.difference_personnel_bienService"/>
-              </div>
-            </div>
-                   <div class="control-group">
+
+
+          <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">Date du rapport de jugement</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="editRapport.date_rapport_jugement"
+                                    class="span"
+                                       
+                            />
+                              <input type="hidden" v-model="editRapport.difference_personnel_bienService"/>
+                        </div>
+                    </div>
+
+     <div class="control-group">
               <label class="control-label">Fichier joint:</label>
               <div class="controls">
-                <input type="file"   @change="OnchangeFichier" />
+                <input type="file"  class="span" @change="OnchangeFichier" />
               </div>
             </div>
-                     
-                     
-                
+                </form>
 
-                    </form>
+
                 </div>
             </div>
             <div class="modal-footer">
@@ -195,7 +204,8 @@ export default {
                  date_rapport_jugement:"",
                  fichier:"",
                 difference_personnel_bienService:"personnel",
-                marche_id:""
+                marche_id:"",
+                candidat_personnel_id:""
 
                 },
             reference:"",
@@ -203,7 +213,8 @@ export default {
               date_rapport_jugement:"",
               fichier:"",
               difference_personnel_bienService:"personnel",
-              marche_id:""
+              marche_id:"",
+              candidat_personnel_id:""
             },
             resultaAnalysePv:[],
             imagePDF:"",
@@ -224,7 +235,7 @@ export default {
     computed: {
 
             ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,"gettersPersonnaliserRapportJugement",
-            "gettersCotations","rapportDocuments", 'listeJugementPersonnel']),
+            "gettersCotations","rapportDocuments", 'listeJugementPersonnel','selectionner_candidats']),
              ...mapGetters('personnelUA', ['acteur_depenses','dossierPersonnels']),
 
 
@@ -241,6 +252,7 @@ export default {
 //                     }
 //                 }
 //             },
+
  listeRapport() {
       return macheid => {
         if (macheid != null && macheid != "") {
@@ -249,7 +261,18 @@ export default {
       };
     },
 
+ afficherCandidatSelectionnerAtrribue() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.gettersPersonnaliserRapportJugement.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.attribue;
+      }
+      return 0
+        }
+      };
+    },
 
     // afficher le nom des candidats
 
@@ -302,10 +325,13 @@ export default {
          
           
            ajouterRapportJugementLocal(){
+
+               if(confirm("veiller charger le fichier svp mercie")){
                 const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
                  formData.append('date_rapport_jugement', this.formJugement.date_rapport_jugement);
                formData.append('marche_id', this.macheid);
+               formData.append('candidat_personnel_id', this.formJugement.candidat_personnel_id);
                formData.append('difference_personnel_bienService',this.formJugement.difference_personnel_bienService)
                 let config = {
                     header : {
@@ -317,13 +343,17 @@ export default {
                  difference_personnel_bienService:"personnel",
                  date_rapport_jugement:""
                }
+               }else return "chargement du fichier neccessaire ";
+                
            },
 
 
            modifierRapportOuverture(){
-               const formData = new FormData();
+               if(confirm("chargement du fichier neccessaire ")){
+                 const formData = new FormData();
                  formData.append('date_rapport_jugement', this.editRapport.date_rapport_jugement);
                  formData.append('marche_id', this.macheid);
+                 formData.append('candidat_personnel_id', this.editRapport.candidat_personnel_id);
                  formData.append('difference_personnel_bienService', this.difference_personnel_bienService)
                 formData.append('id', this.editRapport.id);
                
@@ -339,14 +369,18 @@ export default {
               
                this.modifierRapportJugement(formData,config)
                this.$('#modifierRapportJugements').modal('hide');
+               } else return "chargement du fichier neccessaire";
+              
            },
            formaterDate(date){
                return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
            },
 
+
+
            infoPVAffiche(ref){
                 this.resultaAnalysePv=[]
-                let resulta=this.listeJugementPersonnel.filter(item=>item.reference_pv==ref);
+                let resulta=this.selectionner_candidats.filter(item=>item.reference_pv==ref && this.afficherCandidatSelectionnerAtrribue(item.jugement_id)==1);
                 this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
                 if (this.resultaAnalysePv.length>0){
                     this.resultaAnalysePv.sort(function (a, b) {

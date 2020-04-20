@@ -7,6 +7,7 @@ export const natureEntres = state => state.natureEntres
 export const causeInactivite = state => state.causeInactivite
 export const EtatImmobilisations = state => state.EtatImmobilisations
 export const historiqueAffectation = state => state.historiqueAffectation
+export const historiqueAffectationService = state => state.historiqueAffectationService
 const familles = state =>
   state.familles.sort((a, b) => (a.code > b.code ? 1 : -1));
 
@@ -64,7 +65,6 @@ export const SuiviImmo = (state, getters, rootState, rootGetters) =>
   state.immobilisations.map(element => {
     if (
       element.famillearticle_id !== null &&
-     
       element.acteurdepense_id !== null &&
       element.uniteadministrative_id !== null &&
       element.typeuniteadminis_id !== null &&
@@ -1101,16 +1101,18 @@ export const getPersonnaliseNormeEquipement = (state, getters, rootState, rootGe
 
 export const equipementNonCouvert = (state, getters, rootState, rootGetters) =>
   state.normeImmo.map(element => {
-    if (element.fonction_id !== null ) {
+    if (element.fonction_id != null ) {
       element = {
-        ...element,
+        ...element, 
         Affichefonction: rootGetters["personnelUA/acte_personnels"].find(Equipe => Equipe.fonction_id == element.fonction_id
-        )
+        ),
+        
       };
     }
 
     return element;
   });
+
 
 
 

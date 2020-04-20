@@ -58,7 +58,7 @@ export const mandats = state => state.mandats
  // export const gettersDocuments = state => state.documents
    export const documentMedias = state => state.documentMedias
  export const rapportDocuments = state => state.rapportDocuments
-
+ export const selectionner_candidats = state => state.selectionner_candidats
 //  export const documentMedias = state =>state.mediaStock
 //  export const gettersStockDocuments = state =>state.stockDocuments
 // export const rapportOuverture1 = state => state.rapportOuverture1
@@ -411,13 +411,13 @@ getters.acteEffetFinanciers.map(element => {
     // )
 
 
-    export const executionDuMarche = state => 
-    state.acteEffetFinanciers.filter(
-        varObjet => varObjet.difference_personnel_bienService =="bienService"
-    )
+    // export const executionDuMarche = state => 
+    // state.acteEffetFinanciers.filter(
+    //     varObjet => varObjet.difference_personnel_bienService =="bienService"
+    // )
 
 export const getActeEffetFinancierPersonnaliser = (state, getters, rootState, rootGetters) =>
-getters.executionDuMarche.map(element => {
+getters.acteEffetFinanciers.map(element => {
         if (element.entreprise_id !== null && element.marche_id !== null) {
             element = {
                 ...element,
@@ -1025,4 +1025,4 @@ export const gettersTest = (state, getters, rootState, rootGetters) =>
         }
         return element;
     })
-    getActeEffetFinancierPersonnaliserContrat
+    

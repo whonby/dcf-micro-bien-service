@@ -64,11 +64,11 @@
               </tbody>
             </table> -->
                 <ul id="demo">
-            <Tree class="item" v-for="plan in lesPlansParents"
+            <TreeLocalisation class="item" v-for="plan in lesPlansParents"
             :key="plan.id" :item="plan"   
               @ajouterElementEnfant="ajouterElementEnfant" 
               @supprimer="supprimerPlanProgrammeLocal"
-              @modifier="afficherMoadlModifierLocalisation"></Tree>
+              @modifier="afficherMoadlModifierLocalisation"></TreeLocalisation>
           </ul>
             <div v-if="lesPlansParents.length">
             </div>
@@ -117,8 +117,20 @@
                 <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
               </div>
             </div>
-    
-            
+     
+             
+<div class="control-group">
+              <label class="control-label">Longitude</label>
+              <div class="controls">
+                <input type="number" v-model="formData.longitude" class="span" placeholder="Saisir le longitude" />
+              </div>
+            </div>
+              <div class="control-group">
+              <label class="control-label">Latitude</label>
+              <div class="controls">
+                <input type="number" v-model="formData.latitude" class="span" placeholder="Saisir le Latitude" />
+              </div>
+            </div>
 
           </form>              
           </div>
@@ -165,7 +177,18 @@
               </div>
             </div>
      
-
+<div class="control-group">
+              <label class="control-label">Longitude</label>
+              <div class="controls">
+                <input type="number" v-model="editTitre.longitude" class="span" placeholder="Saisir le longitude" />
+              </div>
+            </div>
+              <div class="control-group">
+              <label class="control-label">Latitude</label>
+              <div class="controls">
+                <input type="number" v-model="editTitre.latitude" class="span" placeholder="Saisir le Latitude" />
+              </div>
+            </div>
           </form>              
           </div>
            <div class="modal-footer"> 
@@ -205,7 +228,7 @@
             </div>
 
                <div class="control-group">
-              <label class="control-label">Structure programme:</label>
+              <label class="control-label">Structure localisation geographique:</label>
               
               <div class="controls">
               <select v-model="nouvelElementEnfant.structure_localisation_geographique_id" >
@@ -228,7 +251,18 @@
                 <input type="text" v-model="nouvelElementEnfant.libelle" class="span" placeholder="Saisir le libelle" />
               </div>
             </div>
-           
+            <div class="control-group">
+              <label class="control-label">Longitude</label>
+              <div class="controls">
+                <input type="number" v-model="nouvelElementEnfant.longitude" class="span" placeholder="Saisir le longitude" />
+              </div>
+            </div>
+              <div class="control-group">
+              <label class="control-label">Latitude</label>
+              <div class="controls">
+                <input type="number" v-model="nouvelElementEnfant.latitude" class="span" placeholder="Saisir le Latitude" />
+              </div>
+            </div>
           </form>              
           </div>
            <div class="modal-footer"> 
@@ -262,10 +296,10 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
-import Tree from '../administratifs/Tree'
+import TreeLocalisation from '../administratifs/TreeLocalisation'
 export default {
   components: {
-    Tree
+    TreeLocalisation
   },
   data() {
     return {
@@ -273,12 +307,16 @@ export default {
       nouvelElementEnfant: {
          code: "",
              libelle: "",
-          structure_localisation_geographique_id:""
+          structure_localisation_geographique_id:"",
+          latitude:"",
+          longitude:""
       },
       json_fields:{
                'Code':'code',
                'Libelle':'lielle',
-               'structure localistion':'structure_localisation_geographique.libelle'
+               'structure localistion':'structure_localisation_geographique.libelle',
+               'Longitude':'longitude',
+               'Latitude':'latitude'
       },
         fabActions: [
               {
@@ -294,12 +332,16 @@ export default {
         formData : {
                 code: "",
              libelle: "",
-             structure_localisation_geographique_id:""
+             structure_localisation_geographique_id:"",
+              latitude:"",
+          longitude:""
         },
         editTitre: {
             code: "",
              libelle: "",
-   structure_localisation_geographique_id:""
+   structure_localisation_geographique_id:"",
+    latitude:"",
+          longitude:""
         },
         search:""
  
@@ -337,7 +379,9 @@ return this.localisations_geographiques.filter((item) => {
         this.nouvelElementEnfant = {
                 code: "",
              libelle: "",
-          structure_localisation_geographique_id:""
+          structure_localisation_geographique_id:"",
+          latitude:"",
+          longitude:""
         }
     },
     supprimerPlanProgrammeLocal(item){
@@ -374,7 +418,9 @@ return this.localisations_geographiques.filter((item) => {
         this.formData = {
                 code: "",
              libelle: "",
-              structure_localisation_geographique_id:""
+              structure_localisation_geographique_id:"",
+              latitude:"",
+          longitude:""
         }
     },
 // afficher modal
@@ -393,7 +439,9 @@ modifierLocalisationLocal(){
   this.editTitre = {
                 code: "",
              libelle: "",
-        structure_localisation_geographique_id:""
+        structure_localisation_geographique_id:"",
+        latitude:"",
+          longitude:""
   }
 }
   }

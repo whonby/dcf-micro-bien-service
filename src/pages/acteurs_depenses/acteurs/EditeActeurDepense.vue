@@ -44,15 +44,15 @@
                       <div class="modal-body">
         <table class="table table-bordered table-striped">
             <tr>
-                <td>
+              <td>
                      <div class="control-group">
                                                     <label class="control-label">Situation matrimoniale</label>
                                                     <div class="controls">
                                                         <select v-model="editPersonnel.situation_matrimonial" >
-                                                            <option></option>
-                                                            <option value="Marie">Marie</option>
-                                                            <option value="Celibataire">Celibataire</option>
-                                                             <option value="Divorce">Divorce</option>
+                                                           
+                                                           
+                                                            <option v-for="situation in situation_matrimonial" :key="situation.id" :value="situation.id">{{situation.libelle}}</option>
+                                                           
                                                         </select>
                                                     </div>
                                                 </div>
@@ -474,7 +474,7 @@
         },
         computed: {
 // methode pour maper notre guetter
-            ...mapGetters('personnelUA', ['acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades",
+            ...mapGetters('personnelUA', ['situation_matrimonial','acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades",
                 "niveau_etudes","nbr_acteur_actredite_taux","detail_acteurs","salaire_actuel_acteur","all_salaires_acteurs","acte_personnels",
                 "load_act_personnel_acteur","conge_acteur_depense","temp_moyen_fin_activite_interruption","delais_mise_disposition_act",
                 "jour_conge_disponible_acteur","personnaliseActeurDepense","tous_salaire_actuel_acteur","personnaliseActeurFinContrat"]),

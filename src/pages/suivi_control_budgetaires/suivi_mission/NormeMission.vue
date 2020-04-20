@@ -47,7 +47,7 @@
               </thead>
               <tbody>
                 <tr class="odd gradeX" v-for="(norme_mission, index) in 
-                normeMissionFiltre"
+                getNormeMissionPersonnaliser"
                  :key="norme_mission.id">
                   <td @dblclick="afficherModalModifierNormeMission(index)">
                       {{norme_mission.varObjetSourceFinancement.libelle|| 'Non renseigné'}}</td>
@@ -348,20 +348,19 @@ export default {
   
    
     // methode pour trier un item
-           normeMissionFiltre(){
+//            getNormeMissionPersonnaliser(){
 
-      const searchTerm = this.search.toLowerCase();
+//       const searchTerm = this.search.toLowerCase();
 
-return this.getNormeMissionPersonnaliser.filter((item) => {
+// return this.getNormeMissionPersonnaliser.filter((item) => {
   
-     return item.zone.toLowerCase().includes(searchTerm) 
-    //  ||
-    //         item.libelle.toLowerCase().includes(searchTerm)
+//     //  return item.zone.toLowerCase().includes(searchTerm) 
+//    return item.varObjetFonction.libelle.toLowerCase().includes(searchTerm)
     
 
-   }
-)
-   },
+//    }
+// )
+//    },
 
     
   },
@@ -415,7 +414,7 @@ return this.getNormeMissionPersonnaliser.filter((item) => {
       //   }
 
      this.ajouterNormeMission(this.formData)
-
+     this.getNormeMission()
         this.formData = {
              fonction_id:"",
         source_financement_id: "",

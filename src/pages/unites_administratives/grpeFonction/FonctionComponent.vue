@@ -11,7 +11,7 @@
             <div class="accordion-heading">
               <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
-                <h5>{{groupe.libelle }}</h5>
+                <h5>{{afficheService(groupe.libelle) }}</h5>
                
                  <!-- <span class="badge badge-info" >{{getNombreArticle}}</span>&nbsp;&nbsp; -->
                  <span class="badge badge-inverse" >{{getNombreArticle}}</span>
@@ -132,8 +132,19 @@ export default {
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
+...mapGetters("SuiviImmobilisation", ["services"]),
+ afficheService() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.services.find(qtreel => qtreel.id == id);
 
-
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 
  afficherUniteAdministrative() {
       return id => {

@@ -1,4 +1,4 @@
-
+modifierDecisionDirecteur
 <template>
   
    
@@ -28,7 +28,9 @@
                             
     
                              </select>
-                           
+                           <!-- {{afficherResteStock}}
+                           {{affichierQuantiteEnStock(valideDirecteur.article_id)}}
+                           {{affichierIdQuantiteEnStock(valideDirecteur.article_id)}} -->
                             </div>
                           </div>
             </td>
@@ -38,7 +40,7 @@
                <div class="control-group">
                             <label class="control-label">Cause</label>
                             <div class="controls">
-                              <textarea name="" id="" cols="30" rows="2" class="span5" :readonly="verrouilleCause"></textarea>
+                              <textarea name="" id="" cols="30" rows="2" class="span5" :readonly="verrouilleCause" v-model="valideDirecteur.cause_directeur"></textarea>
                               
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
                             </div>
@@ -69,7 +71,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierModalMandatLocal(editMandat)"
+          @click.prevent="modifierDecisionDirecteur(valideDirecteur)"
           class="btn btn-primary"
           href="#"
          
@@ -101,7 +103,7 @@
       <div class="modal-body">
         <form class="form-horizontal" >
           <div class="control-group">
-                            <label class="control-label">Décision Chef de service </label>
+                            <label class="control-label">Décision Chef de service</label>
                             <div class="controls">
                               <select v-model="valideService.motif">
                                 <option value=""></option>
@@ -119,13 +121,14 @@
                             <label class="control-label">Date Decision :</label>
                             <div class="controls">
                               <input type="date" class="span"  v-model="valideService.date_motif"/>
+                              <!-- <input type="text" class="span"  :value="nombreDejourCalculeTraitementService"/> -->
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
                             </div>
                           </div>
                                <!-- <div class="control-group">
                             <label class="control-label">Nom Emetteur :</label>
                             <div class="controls">
-                              <input type="text" class="span"  v-model="editMandat.nom_emetteur"/>
+                              <input type="text" class="span"  :value:"nombreDejourCalculeTraitementService"/>
                               <input type="hidden" class="span"  :value="recuperer"/> 
                             </div>
                           </div> -->
@@ -134,7 +137,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierModalMandatLocal(editMandat)"
+          @click.prevent="modifierDecisionChefService(valideService)"
           class="btn btn-primary"
           href="#"
          
@@ -150,7 +153,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>AFFECTATION D'EQUIPEMENT</h5>
+              <h5>AFFECTATION D'EQUIPEMENT </h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -163,10 +166,16 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1">NOUVELLE PERSONNES   <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab8969">NOUVELLE PERSONNES   </a>
                       </li>
                        <li>
-                        <a data-toggle="tab" href="#tab2">AFFECTATION DES DEMANDES</a>
+                        <a data-toggle="tab" href="#tab7458">AFFECTATION DES DEMANDES DU PERSONNEL   </a>
+                      </li>
+                       <li class="">
+                        <a data-toggle="tab" href="#tab1005">NOUVEAU SERVICE  </a>
+                      </li>
+                       <li>
+                        <a data-toggle="tab" href="#tab2005">AFFECTATION DES DEMANDES DU SERVICE  </a>
                       </li>
                       <!-- <li>
                         <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
@@ -176,7 +185,86 @@
                   </div>
                   <div class="widget-content tab-content">
 
-   <div id="tab2" class="tab-pane">
+
+          <div id="tab1005" class="tab-pane">
+                  
+<div class="table-responsive text-nowrap">
+              <table class="table table-bordered table-striped">
+                <div class="widget-box">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#tab456">Listes des services   <span class="badge badge-inverse">{{afficheNombreToutPersonne}}</span></a>
+                      </li>
+                       <li class="">
+                        <a data-toggle="tab" href="#tab46">Listes des services non Equipé  <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
+                      </li>
+                      <li class="">
+                        <a data-toggle="tab" href="#tab89">Equipements Non Couverts   <span class="badge badge-warning">{{NombreafficheEquipementNonCouvert}}</span></a>
+                      </li>
+                       <li class="">
+                        <a data-toggle="tab" href="#tab63">Listes des services Equipé     <span class="badge badge-info">{{NombreaffichePersonneEquipe}}</span></a>
+                      </li>
+                      <li class="">
+                        <a data-toggle="tab" href="#tab6396">Taux equipement des services    <span class="badge badge-success">{{NombreTauxequipementParAgent}}</span></a>
+                      </li>
+                 
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content">
+
+                             <div id="tab6396" class="tab-pane"><tauxServiceEquipe></tauxServiceEquipe></div>
+                              <div id="tab89" class="tab-pane"><listeServiceNonCouvert></listeServiceNonCouvert> </div>
+                      <div id="tab456" class="tab-pane active"><listeToutService></listeToutService></div>          
+                       <div id="tab46" class="tab-pane"><listeServiceNonEquipe></listeServiceNonEquipe></div>
+                   <div id="tab63" class="tab-pane"><listeServiceEquipe></listeServiceEquipe></div>
+                 </div>
+                    
+
+
+
+                      
+                    
+                   
+                  
+                  
+              
+                </div>
+              </table>
+            </div>
+          </div>
+
+
+
+
+
+
+ <div id="tab2005" class="tab-pane"><affectationDemandeDuService></affectationDemandeDuService></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   <div id="tab7458" class="tab-pane">
 
 
 <div class="table-responsive text-nowrap">
@@ -185,7 +273,7 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                         <li class="active">
-                        <a data-toggle="tab" href="#tab129">Listes des Demande    <span class="badge badge-info">{{NombreaffichePersonneEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab129">Listes des Demande    <span class="badge badge-info">{{nombreDemande}}</span></a>
                       </li>
                       <li class="">
                         
@@ -196,9 +284,9 @@
                       </li>
                     
                      
-                      <li class="">
+                      <!-- <li class="">
                         <a data-toggle="tab" href="#tab12969">Taux demande non attribué"    <span class="badge badge-success">{{NombreTauxequipementParAgent}}</span></a>
-                      </li>
+                      </li> -->
                       
                       <!-- <li>
                         <a data-toggle="tab" href="#tab2">AFFECTATION DU SERVICE</a>
@@ -211,66 +299,11 @@
                   </div>
                   <div class="widget-content tab-content">
 
-     <div id="tab12969" class="tab-pane">
-                       <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     
-                    <!-- <th>Type Unite d'administrative</th> -->
-                    
-                     
-                    <th>Matricule && Nom && prenoms</th>
-                    <th>Unite administrative</th>
-                    <th>Unite de zone</th>
-                    <th>Service</th>
-                    <th>Fonction</th>
-                  
-                    <th>Besoin Reel</th>
-                    <th>Besoin Non couvert</th>
-                    <th >Besoin Recu</th>
-                    <th>Taux</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  
-                 
-                 
-                 
-                </tbody>
-              </table>
-
-                    </div>
+    
 
 
 
-                      <div id="tab452" class="tab-pane">
-                       <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                     
-                    <!-- <th>Type Unite d'administrative</th> -->
-                    <th>Unite d'administrative</th>
-                     <th>Unite de zone</th>
-                    <th>Service</th>
-                    <th>Fonction</th>
-                    <th>Nom et prénoms</th>
-                    <th >Article</th>
-                     <th >Qte requise</th>
-                     <th >Qte couverte</th>
-                     <th >Qte non couverte</th>
-                     <th >Prix unitaire(coût moyen)</th>
-                       <th >Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                
                  
-                 
-                 
-                </tbody>
-              </table>
-
-                    </div>
                       <div id="tab112" class="tab-pane">
                        <table class="table table-bordered table-striped">
                 <thead>
@@ -315,14 +348,14 @@
                     >{{afficheFonction(BesoinImmo.fonction_id) || 'Non renseigné'}}</td>
                       <td  style=" color:black;font-size:14px;font-weight:bold;"
                       
-                    >{{BesoinImmo.article_id || 0}}</td>
+                    >{{afficheFamille(BesoinImmo.article_id) || 0}}</td>
                     <td 
                        style="text-align: center; color:black;font-size:14px;font-weight:bold;"
                     >{{BesoinImmo.quantite || 0}}</td>
                    
                      <td 
                        style=" color:black;font-size:14px;font-weight:bold;"
-                    >{{(BesoinImmo.cause_inactivite) || 'Non renseigné'}}</td>
+                    >{{(afficheCauseInactivite(BesoinImmo.cause_inactivite)) || 'Non renseigné'}}</td>
                    
                       <td
                       style=" color:black;font-size:14px;font-weight:bold;"
@@ -365,7 +398,7 @@
                     
                      <td
                       style="text-align: center; color:black;font-size:14px;font-weight:bold;"
-                    >{{BesoinImmo.date_motif || 'Non renseigné'}}</td>
+                    >{{formaterDate(BesoinImmo.date_motif) || 'Non renseigné'}}</td>
 
                   </tr>
                  
@@ -394,6 +427,7 @@
                      <th>duré vie</th>
                      <th>Décision Directeur</th>
                      <th>Date motif</th>
+                     <th>Affectation</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -420,21 +454,21 @@
                     >{{afficheFonction(BesoinImmo.fonction_id) || 'Non renseigné'}}</td>
                       <td style=" color:black;font-size:14px;font-weight:bold;"
                       
-                    >{{BesoinImmo.article_id || 0}}</td>
+                    >{{afficheFamille(BesoinImmo.article_id) || 0}}</td>
                     <td 
                       style=" color:black;font-size:14px;font-weight:bold;"
                     >{{BesoinImmo.quantite || 0}}</td>
                    
                      <td 
                       style=" color:black;font-size:14px;font-weight:bold;"
-                    >{{(BesoinImmo.cause_inactivite) || 'Non renseigné'}}</td>
+                    >{{(afficheCauseInactivite(BesoinImmo.cause_inactivite)) || 'Non renseigné'}}</td>
                    
                       <td
                       style=" color:black;font-size:14px;font-weight:bold;"
                     >{{BesoinImmo.cause_demande || 'Non renseigné'}}</td> 
                      <td
                       style="text-align: center; color:red;font-size:14px;font-weight:bold;"
-                    >{{formaterDate(BesoinImmo.date_demande) || 'Non renseigné'}}</td> 
+                    >{{formaterDate(BesoinImmo.date_motif_directeur) || 'Non renseigné'}}</td> 
                      <td
                       style="text-align: center; color:red;font-size:14px;font-weight:bold;"
                     >{{BesoinImmo.dure_vie || 'Non renseigné'}}</td>
@@ -470,7 +504,16 @@
                     
                      <td
                       style="text-align: center; color:red;font-size:14px;font-weight:bold;"
-                    >{{BesoinImmo.date_motif_directeur || 'Non renseigné'}}</td>
+                    >{{formaterDate(BesoinImmo.date_motif_directeur) || 'Non renseigné'}}</td>
+<td >
+  <span v-if="BesoinImmo.motif == 3">
+  
+<button @click.prevent="AjouterAffectationDemande(index)"  class="btn btn-success">
+                <span class=""><i class=" icon-hand-right" title="Affectation Equipement"></i></span></button> 
+
+  </span>
+  <span v-else style="color:red;text-align:center">Affectation Desactivé</span>
+</td>
 
                   </tr>
                  
@@ -493,11 +536,14 @@
                     <th>Cause inactivite</th>
                     <th>Cause de la demande</th>
                     <th >Date demande</th>
-                     <th>duré vie</th>
-                     <th>Décision chef sce</th>
+                     <!-- <th>duré vie</th> -->
                      <th>Date motif sce</th>
-                      <th>Décision Directeur</th>
+                     <th >Duré traitement sce</th>
+                     <th>Décision chef sce</th>
                      <th>Date motif Directeur</th>
+                     <th >Duré traitement Directeur</th>
+                      <th>Décision Directeur</th>
+                     <th>Attribuer</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -505,7 +551,7 @@
                  
                  <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in demandeMateriel"
+                    v-for="BesoinImmo in afficheToutDemande"
                     :key="BesoinImmo.id"
                   >
    
@@ -525,14 +571,14 @@
                     >{{afficheFonction(BesoinImmo.fonction_id) || 'Non renseigné'}}</td>
                       <td style=" color:black;font-size:14px;font-weight:bold;"
                       
-                    >{{BesoinImmo.article_id || 0}}</td>
+                    >{{afficheFamille(BesoinImmo.article_id) || 0}}</td>
                     <td style=" text-align: center; color:black;font-size:14px;font-weight:bold;"
                      
                     >{{BesoinImmo.quantite || 0}}</td>
                    
                      <td 
                       style=" color:black;font-size:14px;font-weight:bold;"
-                    >{{(BesoinImmo.cause_inactivite) || 'Non renseigné'}}</td>
+                    >{{(afficheCauseInactivite(BesoinImmo.cause_inactivite)) || 'Non renseigné'}}</td>
                    
                       <td
                       style=" color:black;font-size:14px;font-weight:bold;"
@@ -540,9 +586,13 @@
                      <td
                       style="text-align: center; color:red;font-size:14px;font-weight:bold;"
                     >{{formaterDate(BesoinImmo.date_demande) || 'Non renseigné'}}</td> 
-                     <td
+                     <!-- <td
                       style="text-align: center; color:black;font-size:14px;font-weight:bold;"
-                    >{{BesoinImmo.dure_vie || 'Non renseigné'}}</td>
+                    >{{BesoinImmo.dure_vie || 'Non renseigné'}}</td> -->
+                     <td
+                      style="text-align: center; color:red;font-size:14px;font-weight:bold;"
+                    >{{formaterDate(BesoinImmo.date_motif) || 'Non renseigné'}}</td>
+                    <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{BesoinImmo.dure_traitement_sce || 0 }}  jours</td>
                     <td>
                         <button v-if="BesoinImmo.motif_chef_sce == 1"  class="btn  btn-success"  >                        
                      
@@ -571,28 +621,32 @@
                     
                     
                       </button>
+                      
                     </td>
                     
-                     <td
+                    
+
+ <td
                       style="text-align: center; color:red;font-size:14px;font-weight:bold;"
-                    >{{BesoinImmo.date_motif || 'Non renseigné'}}</td>
-
-
+                    >{{formaterDate(BesoinImmo.date_motif_directeur) || 'Non renseigné'}}</td>
+                    <td
+                      style="text-align: center; color:red;font-size:14px;font-weight:bold;"
+                    >{{BesoinImmo.dure_traitement_directeur || 0 }}  Jours</td>
 
 <td>
-                        <button v-if="BesoinImmo.motif_directeur == 1"  class="btn  btn-success"  >                        
+                        <button v-if="BesoinImmo.motif_directeur == 3"  class="btn  btn-success"  >                        
                      
                       <span    >Visé</span>
                       
                       </button>
-                       <button v-else-if="BesoinImmo.motif_directeur == 2" class="btn  btn-warning"  >                        
+                       <button v-else-if="BesoinImmo.motif_directeur == 4" class="btn  btn-warning"  >                        
                      
                       
                        <span  >Différé</span>
                       
                     
                       </button>
-                        <button v-else-if="BesoinImmo.motif_directeur == 4" class="btn  btn-danger"  >                        
+                        <button v-else-if="BesoinImmo.motif_directeur ==5" class="btn  btn-danger"  >                        
                      
                       
                        <span  >Réjeté</span>
@@ -609,9 +663,26 @@
                       </button>
                     </td>
                     
-                     <td
-                      style="text-align: center; color:red;font-size:14px;font-weight:bold;"
-                    >{{BesoinImmo.date_motif_directeur || 'Non renseigné'}}</td>
+                    <td>
+                       <button v-if="BesoinImmo.motif == 10" class="btn  btn-success" >                        
+                     
+                      
+                       <span  >Oui</span>
+                      
+                    
+                    
+                      </button>  
+                      <button v-else class="btn  btn-danger" >                        
+                     
+                      
+                       <span  >Non</span>
+                      
+                    
+                    
+                      </button>  
+               
+               
+                    </td>
                   </tr>
                  
                  
@@ -636,7 +707,7 @@
 
 
                     <!--ongle identification-->
-                    <div id="tab1" class="tab-pane active">
+                    <div id="tab8969" class="tab-pane active">
                   
 <div class="table-responsive text-nowrap">
               <table class="table table-bordered table-striped">
@@ -755,77 +826,69 @@
                     <th>Service</th>
                     <th>Fonction</th>
                     <th>Nom et prénoms</th>
-                    <th >Article</th>
+                    <!-- <th >Article</th> -->
                      <th >Qte requise</th>
                      <th >Qte couverte</th>
                      <th >Qte non couverte</th>
-                     <th >Prix unitaire(coût moyen)</th>
+                     <!-- <th >Prix unitaire(coût moyen)</th> -->
                        <th >Total</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr
+                 
+                    <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in afficheEquipementNonCouvert"
+                    v-for="BesoinImmo in equipementNonCouvert"
                     :key="BesoinImmo.id"
                   >
-  
+   
+                    
+                    
                     <td
                       
-                    >{{afficherUniteAdministrative(BesoinImmo.uniteadministrative_id) || 'Non renseigné'}}</td> 
+                    >{{afficherUniteAdministrative(BesoinImmo.unite_administrative_id) || 'Non renseigné'}}</td> 
                      <td
                        
-                    >{{afficheUniteZone(BesoinImmo.unitezon_id) || 'Non renseigné'}}</td> 
+                    >{{afficheUniteZone(BesoinImmo.uniteZone_id)  || 'Non renseigné'}}</td> 
                     <td
                       
                     >{{afficherLibelleService(BesoinImmo.service_id) || 'Non renseigné'}}</td>
-                    <td 
+                  
+                      <td 
                       
-                    >{{afficheFonction(BesoinImmo.fonction_id)}}</td>
-                    <td 
+                    >{{afficheFonction(BesoinImmo.fonction_id) || 'Non renseigné'}}</td>
+                     <td
                       
-                    >{{afficherActeurDepense(BesoinImmo.acteurdepense_id) || 'Non renseigné'}}</td>
-                     <td 
-                      
-                    >{{afficheFamille(BesoinImmo.famillearticle_id) || 'Non renseigné'}}</td>
+                    >{{afficherActeurDepense(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td>
                       <td style="text-align: center;"
                       
-                    >{{BesoinImmo.qte_reel || 0}}</td>
-                     <td 
-                      style="text-align: center;"
-                    >{{BesoinImmo.qte_affecte || 0}}</td>
-                    <td 
-                      style="text-align: center;"
-                    >{{BesoinImmo.qte_actuel || 0}}</td>
-                     <td 
-                      style="text-align: center;"
-                    >{{formatageSomme(parseFloat(BesoinImmo.prixUnitaire)) || 0}}</td>
-                     <td 
-                      style="text-align: center;"
-                    >{{formatageSomme(parseFloat(BesoinImmo.total_actuel)) || 0}}</td>
-                     
-                    
-                     
-                    
-                    
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                     <td></td>
-                    <td></td>
-                     <td></td>
-                    <td></td>
-                     <td></td>
-                    <td></td>
-                     <td></td>
-                    <td style="font-weight:bold;">Total</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(totalNonCouvert))}}</td>
+                    >{{BesoinImmo.historiquenormequipement || 0}}</td>
                     
                    
+                     <td 
+                      style="text-align: center;"
+                    >{{(BesoinImmo.historiquenormequipement) - (BesoinImmo.normeequipement) || 0}}</td>
+                    <td 
+                      style="text-align: center;"
+                    >{{BesoinImmo.normeequipement || 0}}</td>
+                   <!-- <td style="text-align: center;">{{BesoinImmo.montantequipement  / BesoinImmo.normeequipement || 0}}</td> -->
+                      <td style="text-align: center; color:red;font-size:14px;font-weight:bold;"
+                    >{{formatageSomme(parseFloat(BesoinImmo.montantequipement)) || 0 }}</td> 
+                    
+                     
                   </tr>
-                 
-                 
+                 <tr>
+                   <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <!-- <td></td> -->
+                  <td style="text-align: center;font-size:14px;font-weight:bold;">Total</td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{formatageSomme(parseFloat(afficheMontantTotalEquipementNonCouvert))}}</td>
+                 </tr>
                  
                 </tbody>
               </table>
@@ -954,7 +1017,7 @@
                      
                          
                     
-                     <td title="Affectation d'equipement">
+                     <td title="Affectation d'equipement" style="font-weight: 500;">
                         <button class="btn btn-info" @click="fenetreAjouterAffectation(index)">
                         <span>
                           <i class="icon-hand-right"></i>
@@ -1141,7 +1204,8 @@
                       <option v-for="item in afficheLeBesoinDemande(formData.fonction_id)" 
                       :key="item.id" :value="item.norme_famille.id">{{item.norme_famille.libelle}}</option>
                     </select>
-                             
+                            
+                       
                         </td>
                         <td>
                           <label class="control-label">Quantite en stock</label>
@@ -1257,7 +1321,7 @@
     <option v-for="item in EtatImmobilisations" :key="item.id" :value="item.id">{{item.libelle}}</option>
                               </select>
                         </td>
-                        <td>
+                        <!-- <td>
                           <label class="control-label">Cause inactivite</label>
                           
                              <select v-model="formData2.cause_inactivite" class="span4">
@@ -1265,21 +1329,16 @@
     <option v-for="item in causeInactivite" :key="item.id" :value="item.id">{{item.libelle}}</option>
                               </select>
                                               
-                        </td>
+                        </td> -->
                         
                          <td>
                           <label class="control-label">Duree de vie</label>
                           
-                             <input    type="text"   class="span3" readonly  :value="afficherDureeVieFamille(formData2.famillearticle_id)" />                
+                             <input    type="text"   class="span4" readonly  :value="afficherDureeVieFamille(formData2.famillearticle_id)" />                
                              
                              
                         </td>  
-                        
-                      </tr>
-                      <tr>
-                         
-                           
-                        <td>
+                         <td>
                           <label class="control-label">Année Amortissement</label>
                           
                              <input
@@ -1289,12 +1348,8 @@
                               :value="anneeAmortissement"
                               />
                         </td>
-                        
-                    
-                        
-                        
-                        
                       </tr>
+                      
 
                     </div>
                   </div>
@@ -1324,10 +1379,25 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
+import listeToutService from '../affectationParService/listeToutService'
+import listeServiceNonEquipe from '../affectationParService/listeServiceNonEquipe'
+import listeServiceNonCouvert from '../affectationParService/listeServiceNonCouvert'
+import listeServiceEquipe from '../affectationParService/listeServiceEquipe'
+import tauxServiceEquipe from '../affectationParService/tauxServiceEquipe'
+import affectationDemandeDuService from '../docAffectationImmo/affectationDemandeDuService'
 import { formatageSomme } from "../../../../Repositories/Repository";
 
 export default {
+  
   name: 'besionImmolisation',
+  components: {
+      listeToutService,
+      listeServiceNonEquipe,
+      listeServiceNonCouvert,
+      listeServiceEquipe,
+      tauxServiceEquipe,
+      affectationDemandeDuService
+  },
   data() {
     return {
       fabActions: [
@@ -1365,8 +1435,10 @@ motif:"",
 date_motif:""
       },
       valideDirecteur:{
+        article_id:"",
 motif:"",
-date_motif_directeur:""
+date_motif_directeur:"",
+cause_directeur:""
       },
       formData2:{
         famillearticle_id :"",
@@ -1442,6 +1514,196 @@ date_motif_directeur:""
 ...mapGetters("personnelUA", ["acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
 
 
+afficheMontantTotalEquipementNonCouvert() {
+     
+         return this.acte_personnels.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+
+     
+      
+     
+    },
+
+afficherMontantRestant() {
+      const val = this.affichierTotal(this.formData.fonction_id) - this.afficherValeurOrigine;
+      return parseFloat(val).toFixed(0);
+    },
+ 
+
+
+affichierTotal() {
+      return id => {
+        if (id != null && id != "") {
+         return this.normeImmo.filter(element => element.fonction_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total), 0).toFixed(0);
+
+     
+        }
+      };
+    },
+    coutMoyenActicle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.normeImmo.find(qtreel => qtreel.famille_id == id);
+
+      if (qtereel) {
+        return qtereel.cout_moyen;
+      }
+      return 0
+        }
+      };
+    },
+ 
+
+MontantParEquipementModifier(){
+  
+    
+    var montant = this.articles.filter(element => element.famille_id == this.editTransfert.famille_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(0); 
+      if(isNaN(montant)) return null
+      return montant
+
+   
+  
+}, 
+
+
+
+
+
+
+
+afficheEquipementNonCouvt() {
+      return id => {
+        if (id != null && id != "") {
+           return this.normeImmo.find(qtreel => qtreel.fonction_id == id);
+
+    
+     
+        }
+      };
+    },
+
+
+
+nombreDemandeImmobilisation() {
+      
+          return this.demandeMateriel.filter(element => element.motif != 10).length;
+       
+    },
+
+
+
+
+
+
+afficherResteStock() {
+      const val = this.affichierQuantiteEnStock(this.valideDirecteur.article_id) - this.valideDirecteur.quantite;
+      return parseFloat(val).toFixed(0);
+    },
+
+affichierQuantiteEnStock() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.stockageArticles.find(qtreel => qtreel.famill_id == id);
+
+      if (qtereel) {
+        return qtereel.quantitestock;
+      }
+      return 0
+        }
+      };
+    },
+affichierIdQuantiteEnStock() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.stockageArticles.find(qtreel => qtreel.famill_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+afficheAnneeAmortis() {
+      const val = parseInt(this.valideDirecteur.annee_budgetaire) + parseInt(this.valideDirecteur.dure_vie);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+
+
+
+afficheValeurOrigine() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.immobilisations.find(qtreel => qtreel.famillearticle_id == id);
+
+      if (qtereel) {
+        return qtereel.valeurorigine;
+      }
+      return 0
+        }
+      };
+    },
+
+
+nombreDejourCalculeTraitementService(){
+                let vM=this;
+    const acteAffet = vM.valideService
+    if(acteAffet.date_demande == acteAffet.date_motif &&  acteAffet.date_motif !=="" && acteAffet.date_demande !=="") return 1
+     if(acteAffet.date_motif =="" && acteAffet.date_demande =="") return null
+
+       var dateF = new Date(acteAffet.date_motif).getTime()
+        var dateO = new Date(acteAffet.date_demande).getTime()
+           var resultat = dateF - dateO
+
+             var diffJour =  resultat / (1000 * 3600 * 24)
+
+               if(isNaN(diffJour)) return null
+
+               if(parseFloat(diffJour) < 0 ) return "durée invalide"
+    vM.valideService.duree=diffJour
+                  return  diffJour;
+   
+},
+
+
+
+nombreDejourCalculeTraitementDirecteur(){
+                let vM=this;
+    const acteAffet = vM.valideDirecteur
+    if(acteAffet.date_motif == acteAffet.date_motif_directeur &&  acteAffet.date_motif_directeur !=="" && acteAffet.date_motif !=="") return 1
+     if(acteAffet.date_motif_directeur =="" && acteAffet.date_motif =="") return null
+
+       var dateF = new Date(acteAffet.date_motif_directeur).getTime()
+        var dateO = new Date(acteAffet.date_motif).getTime()
+           var resultat = dateF - dateO
+
+             var diffJour =  resultat / (1000 * 3600 * 24)
+
+               if(isNaN(diffJour)) return null
+
+               if(parseFloat(diffJour) < 0 ) return "durée invalide"
+    vM.valideDirecteur.duree=diffJour
+                  return  diffJour;
+   
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
 verrouilleCause(){
 
     return this.valideDirecteur.motif == 3;
@@ -1451,23 +1713,31 @@ verrouilleCause(){
 
 afficheValidationChefService() {
       
-          return this.demandeMateriel.filter(element => element.motif != 3 && element.motif != 1 );
+          return this.demandeMateriel.filter(element => element.service_id == 0 && element.motif != 3 && element.motif != 1 && element.motif != 10 );
        
     },
 
 
 afficheValidationDirecteur() {
       
-          return this.demandeMateriel.filter(element => element.motif != 0 && element.motif != 5 && element.motif != 4);
+          return this.demandeMateriel.filter(element => element.service_id == 0 && element.motif != 0 && element.motif != 5 && element.motif != 4 && element.motif != 10);
        
     },
-
+afficheToutDemande() {
+      
+          return this.demandeMateriel.filter(element => element.service_id == 0 );
+       
+    },
 nombreValidationEnAttenteChefService() {
       
           return this.afficheValidationChefService.length;
        
     },
-    
+    nombreDemande() {
+      
+          return this.afficheToutDemande.length;
+       
+    },
 nombreValidationEnAttenteDirecteur() {
       
           return this.afficheValidationDirecteur.length;
@@ -1490,7 +1760,7 @@ afficherRecupererQteActuelle() {
       return 0
     },
 totalNonCouvert(){
-return this.immobilisations.filter(element=>element.qte_actuel != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_actuel), 0).toFixed(2);
+return this.immobilisations.filter(element=>element.qte_actuel != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_actuel), 0).toFixed(0);
 },
 
 afficherQteTotal() {
@@ -1669,11 +1939,11 @@ afficherDureeVieFamille() {
 
 afficherValeurOrigineModifier() {
       const val = parseFloat(this.nombreAffecter) * parseFloat(this.coutMonenArticle);
-      return parseFloat(val).toFixed(2);
+      return parseFloat(val).toFixed(0);
     },
   afficherValeurOrigine() {
       const val = parseFloat(this.formData2.qte_affecte) * parseFloat(this.coutMonenArticle);
-      return parseFloat(val).toFixed(2);
+      return parseFloat(val).toFixed(0);
     },
 
     afficherNombreEquipementRestant() {
@@ -1684,7 +1954,7 @@ afficherValeurOrigineModifier() {
 montantParBesoin() {
       return id => {
         if (id != null && id != "") {
-          return this.articles.filter(element => element.famille_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(2);
+          return this.articles.filter(element => element.famille_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(0);
         }
       };
     },
@@ -1732,6 +2002,9 @@ afficheIdFonction() {
       }
       return 0
     },
+    equipementNonCouvert(){
+return this.acte_personnels.filter(element => element.normeequipement != 0)
+},
     NombreTauxequipementParAgent(){
 return this.acte_personnels.filter(element => element.normeequipement != null).length
 },
@@ -1741,12 +2014,16 @@ return this.acte_personnels.filter(element => element.normeequipement != null)
 afficheEquipementCouvert(){
 return this.immobilisations.filter(element => element.qte_actuel == 0)
 },
-afficheEquipementNonCouvert(){
-return this.immobilisations.filter(element => element.qte_actuel != 0)
-},
+// afficheEquipementNonCouvert(){
+// return this.immobilisations.filter(element => element.qte_actuel != 0)
+// },
+// NombreafficheEquipementNonCouvert(){
+// return this.immobilisations.filter(element => element.qte_actuel != 0).length
+// },
 NombreafficheEquipementNonCouvert(){
-return this.immobilisations.filter(element => element.qte_actuel != 0).length
+return this.acte_personnels.filter(element => element.normeequipement != 0).length
 },
+
 affichePersonneNonEquipe(){
 return this.acte_personnels.filter(element => element.normeequipement != 0)
 },
@@ -1809,7 +2086,7 @@ afficherActeurDepenseMatricule() {
 afficherLibelleService() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.servicesua.find(qtreel => qtreel.id == id);
+           const qtereel = this.services.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.libelle;
@@ -1867,7 +2144,18 @@ afficheFonction() {
         }
       };
     },
+afficheCauseInactivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.causeInactivite.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle
+      }
+      return 0
+        }
+      };
+    },
 // identifierDmdService(){
 // if(this.formData.service_id != 0){
 //   return 2
@@ -2003,7 +2291,7 @@ CoutMoyen() {
  return id => {
     if(id !=""){
       
-    const val = parseFloat((this.getAfficheArticle.filter(element => element.famillearticle_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(2))/this.getAfficheArticle.filter(element => element.famillearticle_id == id).length).toFixed(2); 
+    const val = parseFloat((this.getAfficheArticle.filter(element => element.famillearticle_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(2))/this.getAfficheArticle.filter(element => element.famillearticle_id == id).length).toFixed(0); 
     if (isNaN(val)) return null;
     return val;
   
@@ -2015,7 +2303,7 @@ CoutMoyen() {
    if(this.editBesoinImmo.famillearticle_id !=""){
       const val = parseFloat(this.editBesoinImmo.quantite) * parseFloat(this.CoutMoyen(this.editBesoinImmo.famillearticle_id));
         if (isNaN(val)) return null;
-     return parseFloat(val).toFixed(2);
+     return parseFloat(val).toFixed(0);
     }
     return null
 
@@ -2024,7 +2312,7 @@ CoutMoyen() {
    if(this.formData2.famillearticle_id !=""){
       const val = parseFloat(this.formData.quantite) * parseFloat(this.CoutMoyen(this.formData2.famillearticle_id));
         if (isNaN(val)) return null;
-     return parseFloat(val).toFixed(2);
+     return parseFloat(val).toFixed(0);
     }
     return null
 
@@ -2146,6 +2434,7 @@ fonctionDynamiques() {
        "modifierImmobilisation",
        "modifierStock",
        "ajouterHistotorisqueAffection",
+       "modifierDemandeMateriel"
       
      
     ]),
@@ -2155,6 +2444,83 @@ fonctionDynamiques() {
      
     ]),
   
+
+
+  AjouterAffectationDemande(index){
+if(this.affichierQuantiteEnStock(this.valideDirecteur.article_id) < this.valideDirecteur.quantite)
+{
+  alert("Stock en Rupture")
+}
+else if ( confirm( "Voulez-vous attribuer l'equipement?") ) {
+    this.valideDirecteur = this.afficheValidationDirecteur[index];
+  
+   var nouveauObjetDemande = {
+        ...this.valideDirecteur,
+ acteur_id:this.valideDirecteur.acteur_id,
+ ua_id:this.valideDirecteur.uniteadmin_id,
+ unitezone_id:this.valideDirecteur.uniteZone_id,
+ fonction_id:this.valideDirecteur.fonction_id,
+ article_id:this.valideDirecteur.article_id,
+ qte:this.valideDirecteur.quantite,
+ dure_vie:this.valideDirecteur.dure_vie,
+ 
+ matricule_auteur:this.afficherActeurDepenseMatricule(this.valideDirecteur.acteur_id),
+ annee:this.valideDirecteur.annee_budgetaire,
+annee_amortissement:this.afficheAnneeAmortis,
+ valeurorigine:this.afficheValeurOrigine(this.valideDirecteur.article_id),
+ date_mise_service:this.valideDirecteur.date_motif_directeur,
+ 
+};
+   
+      let dmdObjet = this.demandeMateriel.find(marche=>marche.id==this.valideDirecteur.id)
+         dmdObjet.motif = 10
+           let stockObjet = this.stockageArticles.find(marche=>marche.id==this.affichierIdQuantiteEnStock(this.valideDirecteur.article_id))
+         stockObjet.quantitestock = this.afficherResteStock
+
+this.ajouterHistotorisqueAffection(nouveauObjetDemande);
+this.modifierDemandeMateriel(dmdObjet)
+this.modifierStock(stockObjet)
+} else {
+    // Code à éxécuter si l'utilisateur clique sur "Annuler" 
+}
+
+
+
+
+
+},
+
+
+
+
+
+
+modifierDecisionChefService(){
+
+  var objetService = {
+  ...this.valideService,
+  motif_chef_sce:this.valideService.motif,
+  dure_traitement_sce:this.nombreDejourCalculeTraitementService
+ 
+}
+this.modifierDemandeMateriel(objetService)
+this.$("#exampleModalValidationChefService").modal('hide');
+
+},
+
+modifierDecisionDirecteur(){
+
+var objetDirecteur = {
+  ...this.valideDirecteur,
+  motif_directeur:this.valideDirecteur.motif,
+  dure_traitement_directeur:this.nombreDejourCalculeTraitementDirecteur
+ 
+}
+this.modifierDemandeMateriel(objetDirecteur)
+this.$("#exampleModalValidationdirecteur").modal('hide');
+},
+
+
 
 afficherModalPourValidationChefService(index) {
       this.$("#exampleModalValidationChefService").modal({
@@ -2203,13 +2569,13 @@ afficherModalPourValidationDuDirecteur(index) {
       
 if (this.formData.fonction_id == this.afficherAffectationParFonction &&  this.formData.acteur_depense_id == this.afficherAffectationParActeurDepense && this.afficherQuantiteEnRequise(this.formData2.famillearticle_id) == this.afficherAffectationParQuantiteAffecter){
 
-alert("Acteur deja equipé")
+alert("équipement déja attribué")
 }
 else if(this.afficherQuantiteEnStock(this.formData2.famillearticle_id) == 0){
 alert("Veuillez approvisionner votre stock")
 }
 else if(this.afficherQuantiteEnRequise(this.formData2.famillearticle_id) < this.afficherQteTotal){
-  alert("Vérifier le nombre article restant a équipe l'acteur")
+  alert("Vérifiez la quantité affecté")
 }
 
 else if (this.formData.fonction_id == this.afficherAffectationParFonction &&  this.formData.acteur_depense_id == this.afficherAffectationParActeurDepense && this.formData.uniteZone_id == this.afficherAffectationParUniteZone && this.formData.service_id == this.afficherAffectationParService && this.formData2.famillearticle_id == this.afficherAffectationParBesoin){
@@ -2222,7 +2588,8 @@ var nouvelobjet8 ={
 }
 var nouvelobjet2 ={
   ...this.formData,
- normeequipement:this.afficherNombreEquipementRestant
+ normeequipement:this.afficherNombreEquipementRestant,
+ montantequipement:this.afficherMontantRestant
 }
       var nouvelObjet3 = {
         ...this.formData2,
@@ -2258,7 +2625,7 @@ var nouvelobjet2 ={
  etatimmo_id:this.formData2.etat_immobilisation,
  matricule_auteur:this.afficherActeurDepenseMatricule(this.formData.acteur_depense_id),
  annee:this.exerciceBudgetaireEnCours,
- annee_amortissement:this.this.anneeAmortissement,
+ annee_amortissement:this.anneeAmortissement,
  valeurorigine:this.afficherValeurOrigine,
  date_mise_service:this.formData2.date_mise_service
 };
@@ -2304,7 +2671,8 @@ var nouvelobjet9 ={
 }
 var nouvelobjet4 ={
   ...this.formData,
- normeequipement:this.afficherNombreEquipementRestant
+ normeequipement:this.afficherNombreEquipementRestant,
+ montantequipement:this.afficherMontantRestant
 }
       var nouvelObjet = {
         ...this.formData2,
@@ -2340,7 +2708,7 @@ var nouvelobjet4 ={
  etatimmo_id:this.formData2.etat_immobilisation,
  matricule_auteur:this.afficherActeurDepenseMatricule(this.formData.acteur_depense_id),
  annee:this.exerciceBudgetaireEnCours,
-annee_amortissement:this.this.anneeAmortissement,
+annee_amortissement:this.anneeAmortissement,
 valeurorigine:this.afficherValeurOrigine,
  date_mise_service:this.formData2.date_mise_service
 };

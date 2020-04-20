@@ -274,6 +274,7 @@ export function ajouterImmobilisation({ commit, dispatch}, formData) {
 export function modifierImmobilisation({ commit, dispatch}, nouveau) {
   asyncLoading(axios
     .put("/modifier_immobilisation/" + nouveau.id, {
+      
       date_enregis : nouveau.date_enregis,
       type_immo: nouveau.type_immo,
       besoinimmo_id: nouveau.besoinimmo_id,
@@ -1101,7 +1102,9 @@ export function ajouterNormeImmob({ commit, dispatch }, nouveau) {
       norme: nouveau.norme,
       direction_id: nouveau.direction_id,
       service_id: nouveau.service_id,
-      fonction_id: nouveau.fonction_id
+      fonction_id: nouveau.fonction_id,
+      cout_moyen: nouveau.cout_moyen,
+      total: nouveau.total,
 
 
     }))
@@ -1131,7 +1134,9 @@ export function modifierNormeImmob({ commit, dispatch }, nouveau) {
       norme: nouveau.norme,
       direction_id: nouveau.direction_id,
       service_id: nouveau.service_id,
-      fonction_id: nouveau.fonction_id
+      fonction_id: nouveau.fonction_id,
+      cout_moyen: nouveau.cout_moyen,
+      total: nouveau.total,
 
 
     }))
@@ -1205,7 +1210,8 @@ export function ajouterHistotorisqueAffection({ commit}, nouveau) {
       annee: nouveau.annee,
       annee_amortissement: nouveau.annee_amortissement,
       valeurorigine: nouveau.valeurorigine,
-      date_mise_service: nouveau.date_mise_service
+      date_mise_service: nouveau.date_mise_service,
+      service_id: nouveau.service_id
 
     }))
     .then(response => {
@@ -1237,7 +1243,8 @@ export function modifierHistoAffectation({ commit}, nouveau) {
       qte: nouveau.qte,
       dure_vie: nouveau.dure_vie,
       etatimmo_id: nouveau.etatimmo_id,
-matricule_auteur: nouveau.matricule_auteur
+      matricule_auteur: nouveau.matricule_auteur,
+      service_id: nouveau.service_id
 
     }))
     .then(response => {
@@ -1269,6 +1276,107 @@ export function supprimerHistoAffectation({ commit }, id) {
 
 
 
+
+
+
+
+
+// afficher liste famille
+export function getAllHistoAffectationService({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeAffectionHistoService")
+      .then(response => {
+        commit("GET_ALL_HISTORIQUE_AFFECTATION_SERVICE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+//ajouter
+export function ajouterHistotorisqueAffectionService({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterAffectionHistoService", {
+
+      
+      ua_id: nouveau.ua_id,
+      unitezone_id: nouveau.unitezone_id,
+     
+      qte: nouveau.qte,
+      dure_vie: nouveau.dure_vie,
+      etatimmo_id: nouveau.etatimmo_id,
+      
+      annee: nouveau.annee,
+      annee_amortissement: nouveau.annee_amortissement,
+      valeurorigine: nouveau.valeurorigine,
+      date_mise_service: nouveau.date_mise_service,
+      service_id: nouveau.service_id
+
+    }))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_HISTORIQUE_AFFECTATION_SERVICE", response.data);
+        // dispatch('getAllFamille')
+        // dispatch('getAllNormeImmob')
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+
+// modifier
+export function modifierHistoAffectationService({ commit }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierAffectionHistoService/" + nouveau.id, {
+
+      ua_id: nouveau.ua_id,
+      unitezone_id: nouveau.unitezone_id,
+
+      qte: nouveau.qte,
+      dure_vie: nouveau.dure_vie,
+      etatimmo_id: nouveau.etatimmo_id,
+      
+      annee: nouveau.annee,
+      annee_amortissement: nouveau.annee_amortissement,
+      valeurorigine: nouveau.valeurorigine,
+      date_mise_service: nouveau.date_mise_service,
+      service_id: nouveau.service_id
+
+    }))
+    .then(response => {
+      commit("MODIFIER_HISTORIQUE_AFFECTATION_SERVICE", response.data);
+      // dispatch('getAllFamille')
+      // dispatch('getAllNormeImmob')
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerHistoAffectationService({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vous vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_HISTORIQUE_AFFECTATION_SERVICE", id);
+      // dispatch('getAllFamille')
+      // dispatch('getAllNormeImmob')
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerAffectionHistoService/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
 // afficher liste famille
 export function getAllDemandeMateriel({ commit }) {
   queue.push(() => {
@@ -1285,21 +1393,21 @@ export function getAllDemandeMateriel({ commit }) {
 export function ajouterDemandeMateriel({ commit }, nouveau) {
   asyncLoading(axios
     .post("/ajouterDmdMateriel", {
-
-      	uniteadmin_id: nouveau.uniteadmin_id,
+      annee_budgetaire: nouveau.annee_budgetaire,
+      uniteadmin_id: nouveau.uniteadmin_id,
       famille_id: nouveau.famille_id,
       fonction_id: nouveau.fonction_id,
-      
+
       article_id: nouveau.article_id,
       quantite: nouveau.quantite,
       date_demande: nouveau.date_demande,
-      
-      	dure_vie: nouveau.dure_vie,
+
+      dure_vie: nouveau.dure_vie,
       acteur_id: nouveau.acteur_id,
       uniteZone_id: nouveau.uniteZone_id,
       cause_demande: nouveau.cause_demande,
-      cause_inactivite: nouveau.cause_inactivite
-     
+      cause_inactivite: nouveau.cause_inactivite,
+service_id: nouveau.service_id
 
     }))
     .then(response => {
@@ -1314,55 +1422,5 @@ export function ajouterDemandeMateriel({ commit }, nouveau) {
           type: "success"
         })
       }
-    });
-}
-
-
-// modifier
-export function modifierDemandeMateriel({ commit }, nouveau) {
-  asyncLoading(axios
-    .put("/modifierDmdMateriel/" + nouveau.id, {
-
-
-      uniteadmin_id: nouveau.uniteadmin_id,
-      famille_id: nouveau.famille_id,
-      fonction_id: nouveau.fonction_id,
-      article_id: nouveau.article_id,
-      
-      quantite: nouveau.quantite,
-      date_demande: nouveau.date_demande,
-      motif_chef_sce: nouveau.motif_chef_sce,
-      motif_directeur: nouveau.motif_directeur,
-      date_motif: nouveau.date_motif,
-      date_motif_directeur: nouveau.date_motif_directeur,
-      dure_vie: nouveau.dure_vie,
-      uniteZone_id: nouveau.uniteZone_id,
-      cause_demande: nouveau.cause_demande,
-      cause_inactivite: nouveau.cause_inactivite
-
-    }))
-    .then(response => {
-      commit("MODIFIER_DEMANDE_MATERIEL", response.data);
-      // dispatch('getAllFamille')
-      // dispatch('getAllNormeImmob')
-
-      this.$app.$notify({
-        title: 'Success',
-        text: 'Modification Effectué avec Succès!',
-        type: "success"
-      })
-    });
-}
-//supprimer
-export function supprimerDemandeMateriel({ commit }, id) {
-  this.$app.$dialog
-    .confirm("Voulez vous vraiment supprimer ?.")
-    .then(dialog => {
-      commit("SUPPRIMER_DEMANDE_MATERIEL", id);
-      // dispatch('getAllFamille')
-      // dispatch('getAllNormeImmob')
-
-      // // dialog.loading(false) // stops the proceed button's loader
-      axios.delete("/supprimerDmdMateriel/" + id).then(() => dialog.close());
     });
 }

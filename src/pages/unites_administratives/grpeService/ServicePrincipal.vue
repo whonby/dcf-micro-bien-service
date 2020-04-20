@@ -4,15 +4,11 @@
   <div>
 
 
-     
-<!----- ajouter modal   ---->
-
-
 <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
     <div id="exampleModal" class="modal hide tailgrand12">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">x</button>
-        <h3>Ajouter Direction</h3>
+        <h3>Ajouter Service</h3>
       </div>
       <div class="modal-body">
         
@@ -35,35 +31,19 @@
               </td>
              </tr>
               
-                     <!-- <tr>
-               <td>
+                  
+               <tr>
+              <td>
                 <div class="control-group">
-                  <label class="control-label">Direction</label>
+                  <label class="control-label">Service</label>
                   <div class="controls">
-                    <select v-model="formData.direction_id" class="span6" :readOnly="verroDirection">
+                    <select v-model="formData.libelle" class="span6" >
                       <option
-                        v-for="typeUniteA in directionDynamiques(formData.s_ua_id)"
+                        v-for="typeUniteA in services"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
                     </select>
-                  </div>
-                </div>
-              </td>
-             </tr> -->
-               <tr>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Nom Service</label>
-                  <div class="controls">
-                       <input
-                      type="text"
-                    v-model="formData.libelle"
-                      class="span6"
-                   
-                      
-                    />
-                   
                   </div>
                 </div>
               </td>
@@ -92,8 +72,8 @@
 
     <div id="modificationModal" class="modal hide tailgrand12">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">Ã—</button>
-        <h3>Modifier Direction</h3>
+        <button data-dismiss="modal" class="close" type="button">x</button>
+        <h3>Modifier Service</h3>
       </div>
       <div class="modal-body">
          <table class="table table-bordered table-striped">
@@ -133,18 +113,17 @@
               </td>
              </tr> -->
                <tr>
-              <td>
+             <td>
                 <div class="control-group">
-                  <label class="control-label">Nom Service</label>
+                  <label class="control-label">Service</label>
                   <div class="controls">
-                       <input
-                      type="text"
-                    v-model="editTransfert.libelle"
-                      class="span6"
-                     
-                      
-                    />
-                   
+                    <select v-model="editTransfert.libelle" class="span6" >
+                      <option
+                        v-for="typeUniteA in services"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
                   </div>
                 </div>
               </td>
@@ -166,6 +145,7 @@
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
+    
     <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
     <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
     <!-- End Page Header -->
@@ -173,21 +153,8 @@
     <div class="container-fluid">
       <hr />
       <div class="row-fluid">
-        <div class="span12">
-          <div>
-
-                                        <!-- <download-excel
-                                            class="btn btn-default pull-right"
-                                            style="cursor:pointer;"
-                                              :fields = "json_fields"
-                                              title="Liste Section "
-                                              name ="Liste section"
-                                              worksheet = "section"
-                                            :data="uniteAdministratives">
-                    <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
-
-                                                 </download-excel>  -->
-                                     </div>
+        
+       
                                      
           <div class="widget-box">
             <div class="widget-title">
@@ -198,7 +165,7 @@
              
             </div>
 
-            <div class="widget-content nopadding" v-if="directions.length" >
+            <div class="widget-content nopadding">
               
               <ServiceComponent v-for="equipement in uniteAdministratives"
                 :key="equipement.id"
@@ -215,7 +182,7 @@
               
             </div>
           </div>
-        </div>
+        
       </div>
     </div>
 
@@ -328,6 +295,47 @@ export default {
  
  ...mapGetters('personnelUA', ['all_acteur_depense']),
 
+ ...mapGetters("SuiviImmobilisation", [
+      "familles",
+   
+      "listeBesoinValider",
+      "besoinImmobilisations",
+      "groupTriUaImmo",
+      "SuiviImmo",
+      "listeBesoinValider",
+      "getAfficheStockArticle",
+      "getPersoNormeArticle",
+      "getPersoStock",
+      "stockageArticle",
+      "articles",
+      "services",
+      "normeImmo"]),
+
+anneeAmort() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
+    },
+
+nombreDeFonction() {
+      return id => {
+        if (id != null && id != "") {
+          return this.normeImmo.filter(element => element.service_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.norme), 0).toFixed(0);
+        }
+      };
+    },
+
+ montantPourEtreEquipe() {
+      return id => {
+        if (id != null && id != "") {
+          return this.normeImmo.filter(element => element.service_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total), 0).toFixed(0);
+        }
+      };
+    },
 verroDirection() {
       return this.formData.s_ua_id == "";
     },
@@ -376,8 +384,14 @@ verroService() {
     },
     // fonction pour vider l'input ajouter
     ajouterUniteAdministrativeLocal() {
-     
-      this.ajouterService(this.formData);
+     var objetService = {
+       ...this.formData,
+       normeequipement:this.nombreDeFonction(this.formData.libelle),
+       historiqueequipement:this.nombreDeFonction(this.formData.libelle),
+       montantequipement:this.montantPourEtreEquipe(this.formData.libelle),
+       exercicebudget:this.anneeAmort
+     }
+      this.ajouterService(objetService);
 
       this.formData = {
            s_ua_id:"",
@@ -393,8 +407,14 @@ verroService() {
     },
     // fonction pour vider l'input modifier
     modifierUniteAdministrativeLocal() {
-     
-      this.modifierService(this.editTransfert);
+      var objetService = {
+       ...this.editTransfert,
+       normeequipement:this.nombreDeFonction(this.editTransfert.libelle),
+       historiqueequipement:this.nombreDeFonction(this.editTransfert.libelle),
+       montantequipement:this.montantPourEtreEquipe(this.editTransfert.libelle),
+       exercicebudget:this.anneeAmort
+     }
+      this.modifierService(objetService);
    
 this.$("#modificationModal").modal('hide');
 
