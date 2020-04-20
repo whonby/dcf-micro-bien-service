@@ -6,6 +6,7 @@ const defaultstate = {
   structuresDecision: [],
   plans_Decision: [],
   structureActe: [],
+  typeconges:[],
   planActe:[]
 
   };

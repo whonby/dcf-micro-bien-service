@@ -177,7 +177,7 @@ var queue = housecall({concurrency: 2, cooldown: 1000})
 
  // liste role membrecojo
  export  function getRolemembreCojo({commit}){
-  queue.push(() => axios.get('/Liste_RoleMembreCojo').then(tony => {
+  queue.push(() => axios.get('/ListeRoleMembreCojo').then(tony => {
       commit('GET_ROLE_MEMBRECOJO', tony.data)
   }).catch(error => console.log(error)))
 }

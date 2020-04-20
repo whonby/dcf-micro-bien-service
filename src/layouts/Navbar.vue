@@ -147,7 +147,7 @@ export default {
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", 
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
-          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo"])
+          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner"])
 
   },
 
