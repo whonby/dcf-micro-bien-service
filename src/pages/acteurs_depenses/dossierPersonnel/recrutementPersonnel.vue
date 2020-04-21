@@ -2376,7 +2376,6 @@ this.formData = {
 //     this.editActeEffetFinancier = this.acteEffetFinanciers[index]
 // }, 
 
-
 RetourExecution(index){
   if(confirm("voulez-vous basculer en execution!")){
 this.idMarche = this.listeContratEnContratualisation[index]
@@ -2385,10 +2384,8 @@ this.idMarche = this.listeContratEnContratualisation[index]
    
     this.modifierMarche(marcheObjet)
   } else{
-    return ("rester sur la page de contratualisation merci!");
+    return ("rester sur la page de contratualisation")
   }
-
-    
     // this.modifierActeEffetFinancier(this.editActeEffetFinancier)
     // this.$('#modifierActeEF').modal('hide');
 },
@@ -2422,7 +2419,7 @@ afficherModalModifierActeEffetFinancier1(index){
     this.$('#modifierActeEF').modal('hide');
 
   }else{
-    return ("rester sur la page d'execution merci!");
+ return ("rester sur la page d'execution")
   }
  
 },

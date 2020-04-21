@@ -86,8 +86,8 @@ const defaultState = {
     rapportOuverture:[],
     gettersTransmissions:[],
     plan_passation_marche:[],
-    selectionner_candidats:[]
-  
+    role_membrecojo: [],
+
 }
 
 export default defaultState;
