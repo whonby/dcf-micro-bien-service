@@ -431,6 +431,13 @@
            Procedure de passation
             </router-link>
           </li>
+          <li class="divider"></li>
+           <li>
+            <router-link :to="{name: 'rolemembrecojo'}" tag="a">
+              <i class="icon-bar-chart"></i>
+             Role membre Cojo
+            </router-link>
+          </li>
            <li>
 
                     <router-link :to="{name: 'ppm'}" tag="a">
@@ -504,6 +511,13 @@
             <router-link :to="{name: 'TypeActePersonnels'}" tag="a">
               <i class="icon-user"></i>
               Type d'acte
+            </router-link>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'Typeconges'}" tag="a">
+              <i class="icon-user"></i>
+              Type congés
             </router-link>
           </li>
          
