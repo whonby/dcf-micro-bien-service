@@ -134,13 +134,13 @@ export default {
     };
   },
   created() {
-    this.detailBudget = this.getterBudgeCharge.find(
+    /*this.detailBudget = this.getterBudgeCharge.find(
       item => item.id == this.$route.params.id
-    );
+    );*/
     this.budgetGeneralCharge = this.budgetGeneral.filter(
-      item => item.budget_charge_id == this.$route.params.id
+      item => item.actived == 1
     );
-    console.log(this.budgetGeneralCharge);
+   /// console.log(this.budgetGeneralCharge);
   },
   computed: {
     ...mapGetters("uniteadministrative", [
@@ -244,14 +244,14 @@ export default {
       return unite_id => {
         let vM = this;
         if (unite_id != "" && vM.budgetGeneralCharge != "") {
-          console.log("------65");
-          console.log(vM.budgetGeneralCharge);
+         // console.log("------65");
+         // console.log(vM.budgetGeneralCharge);
           let budget = vM.budgetGeneralCharge.find(item => {
             if (item.gdenature_id == 7 && item.ua_id == unite_id) {
               return item;
             }
           });
-          console.log(budget);
+          //console.log(budget);
           if (budget != undefined) {
             return parseFloat(budget.Dotation_Initiale);
           }
@@ -264,7 +264,7 @@ export default {
       return unite_id => {
         let vM = this;
         if (unite_id != "" && vM.budgetGeneralCharge != "") {
-          let budget = vM.budgetGeneral.find(item => {
+          let budget = vM.budgetGeneralCharge.find(item => {
             if (item.gdenature_id == 6 && item.ua_id == unite_id) {
               return item;
             }

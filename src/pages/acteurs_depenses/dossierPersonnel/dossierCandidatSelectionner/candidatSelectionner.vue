@@ -269,7 +269,7 @@ export default {
 
 
             
- listeCandidatSelectionner: function () {
+ listeCandidatSelectionner () {
             return macheid => {
                 if (macheid != "") {
 

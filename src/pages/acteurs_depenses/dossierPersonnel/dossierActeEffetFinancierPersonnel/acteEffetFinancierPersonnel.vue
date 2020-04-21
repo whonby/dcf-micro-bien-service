@@ -769,8 +769,8 @@ listeRapport(){
 
 
 
-      
-       afficherNomDansPersonnel() {
+      afficherNomDansPersonnel
+       () {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.dossierPersonnels.find(qtreel => qtreel.id == id);

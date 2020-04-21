@@ -111,10 +111,7 @@
             <div class="control-group">
               <label class="control-label">Reference offre</label>
               <div class="controls">
-                <!-- <select v-model="formAnalyseDossier.appel_offre_id" class="span" disabled>
-                                <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.ref_offre}}</option>
-                </select>-->
+               
                 <input
                   type="text"
                   :value="affichierReferenceAppelOffre(macheid)"
@@ -125,21 +122,38 @@
             </div>
           </td>
           <td>
-            <div class="control-group">
+
+                <div class="control-group">
               <label class="control-label">Dossier candidat.</label>
               <div class="controls">
+                
                 <select v-model="formAnalyseDossier.candidat_personnel_id" class="span">
                   <option
                     v-for="varText in afficherCandidat(macheid)"
+                    
                     :key="varText.id"
                     :value="varText.candidat_personnel_id"
                   >{{varText.nom_candidat}} {{varText.prenom_candidat}}</option>
                 </select>
               </div>
-            </div>
+            </div> 
+            <!-- <div class="control-group">
+              <label class="control-label">Dossier candidat.</label>
+              <div class="controls">
+                
+                 <select v-model="formAnalyseDossier.candidat_personnel_id" class="span">
+                  <option
+                    v-for="varText in dossierPersonnels"
+                    :key="varText.id"
+                    :value="varText.id"
+                  >{{varText.nom_candidat}} {{varText.prenom_candidat}}</option>
+                </select>
+              </div>
+            </div> -->
           </td>
 
           <!-- 
+                  
                      <td>
                        
                     <div class="control-group">
@@ -153,7 +167,7 @@
                     </div>
           </td>-->
 
-          <td colspan>
+          <td>
             <div class="control-group">
               <label class="control-label">Type analyse</label>
               <div class="controls">
@@ -230,7 +244,7 @@
     <div id="modifierJugement" class="modal hide grdirModalAnalyse">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modification du dossier Analyse</h3>
+        <h3>Modification le jugement des offres</h3>
       </div>
 
       <table class="table table-bordered table-striped">
@@ -359,15 +373,14 @@ export default {
     return {
       formAnalyseDossier: {
         date_analyse: "",
-        // appel_offre_id:"",
         rang_analyse: "",
         appel_offre_id: "",
-        // motif:"",
         note_analyse: "",
-        // dossier_candidat_id:"",
         type_analyse_id: "",
+
+         candidat_personnel_id: "",
         difference_personnel_bienService: "personnel",
-        candidat_personnel_id: ""
+       
       },
       edite_analyse_dossier: ""
     };
@@ -419,20 +432,9 @@ export default {
       };
     },
 
-    //   afficherCandidat() {
-    //   return id => {
-    //     if (id != null && id != "") {
-    //      let objetId = this.dossierPersonnels.find(objetId => objetId.id == id);
+  
 
-    //   if (objetId) {
-    //     return (objetId).nom_candidat;
-    //   }
-    //   return 0
-    //     }
-    //   };
-    // },
-
-    // fonction pour cocher les checkbox
+    // fonction pour afficher le nom du candidat
 
     afficherNomDossierCandidat() {
       return id => {
@@ -523,7 +525,8 @@ export default {
       "supprimerCandidatSelectionner",
       "ajouterAnalyseDossier",
       "modifierAnalyseDossier",
-      "ajouterCandidatSelectionner"
+      "ajouterCandidatSelectionner",
+      "getAnalyseDossier"
     ]),
 
     // dossierCandidature: function () {
@@ -554,14 +557,12 @@ export default {
         candidat_personnel_id: this.afficherNomCandidatId(this.macheid)
       };
       this.ajouterAnalyseDossier(nouvelObjet);
+      this.getAnalyseDossier()
       this.formAnalyseDossier = {
         date_analyse: "",
-        //appel_offre_id:"",
         rang_analyse: "",
         appel_offre_id: "",
-        // motif:"",
         note_analyse: "",
-        // dossier_candidat_id:"",
         type_analyse_id: "",
         difference_personnel_bienService: "personnel",
         candidat_personnel_id: ""
