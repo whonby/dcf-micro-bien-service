@@ -378,8 +378,7 @@ selectedFileDemandeAno:""
                     }
                 }
             },
-
-           
+            
 
 
             //  listeAppelOffre(){
