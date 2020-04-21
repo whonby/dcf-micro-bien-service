@@ -216,7 +216,7 @@ return this.Typeconges.filter((item) => {
   },
   methods: {
     // methode pour notre action
-   ...mapActions('parametreGenerauxFonctionnelle', ['ajouterTypeconges', 
+   ...mapActions('parametreGenerauxFonctionnelle',  ['ajouterTypeconges', 
    'supprimerTypeconges','modifierTypeconges']),   
    
     afficherModalAjouterTypeconges(){
