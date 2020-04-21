@@ -554,6 +554,7 @@ type_marche
 </td>
 <td>
  
+ 
    <button @click.prevent="modifierModalActeEffetFinancierLocal2(index)"  class="btn btn-info"  title="Basculer en Execution">
                 <span class=""><i class="icon-folder-open" ></i></span></button> 
 </td>

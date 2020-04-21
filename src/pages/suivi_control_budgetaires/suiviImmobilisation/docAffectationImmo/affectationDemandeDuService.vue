@@ -1,5 +1,6 @@
 afficheCauseInactivite
 verrouilleCause
+modifierDemandeMateriel
 <template>
 
 <div>
@@ -16,7 +17,7 @@ verrouilleCause
                  <div class="control-group">
                             <label class="control-label">Décision Directeur</label>
                             <div class="controls">
-                              <select v-model="valideDirecteur.motif_directeur" class="span5">
+                              <select v-model="serviceValiderDirecteur.motif_directeur_sce" class="span5">
                                         <option value=""></option>
                                       <option value="1">Visé</option>
                                     <option value="2">Différé</option>
@@ -26,8 +27,8 @@ verrouilleCause
     
                              </select>
                            <!-- {{afficherResteStock}}
-                           {{affichierQuantiteEnStock(valideDirecteur.article_id)}}
-                           {{affichierIdQuantiteEnStock(valideDirecteur.article_id)}} -->
+                           {{affichierQuantiteEnStock(serviceValiderDirecteur.article_id)}}
+                           {{affichierIdQuantiteEnStock(serviceValiderDirecteur.article_id)}} -->
                             </div>
                           </div>
             </td>
@@ -37,12 +38,12 @@ verrouilleCause
                <div class="control-group">
                             <label class="control-label">Cause</label>
                             <div class="controls">
-                              <textarea name="" id="" cols="30" rows="2" class="span5" :readonly="verrouilleCause" v-model="valideDirecteur.cause_directeur"></textarea>
+                              <textarea name="" id="" cols="30" rows="2" class="span5" :readonly="verrouilleCause" v-model="serviceValiderDirecteur.cause_directeur_sce"></textarea>
                               
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
                             </div>
                           </div>
-                          {{valideDirecteur.uniteadmin_id}}
+                          
             </td>
           </tr>
          <tr>
@@ -51,7 +52,7 @@ verrouilleCause
                            <div class="control-group">
                             <label class="control-label">Date Decision :</label>
                             <div class="controls">
-                              <input type="date" class="span5"  v-model="valideDirecteur.date_motif_directeur"/>
+                              <input type="date" class="span5"  v-model="serviceValiderDirecteur.date_directeur_sce"/>
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
                             </div>
                           </div>
@@ -69,7 +70,7 @@ verrouilleCause
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="modifierDecisionDirecteur(valideDirecteur)"
+          @click.prevent="modifierDecisionDirecteur(serviceValiderDirecteur)"
           class="btn btn-primary"
           href="#"
          
@@ -122,13 +123,13 @@ verrouilleCause
                   
                   <tr
                     class="odd gradeX"
-                    v-for="(BesoinImmo,index) in afficheValidationDirecteur"
+                    v-for="(BesoinImmo,index) in validationDemandeDuServiceParDirecteur"
                     :key="BesoinImmo.id"
                   >
    
                     
                   
-                    <td
+                    <td @click.prevent="modatValidationDemandeService(index)"
                       style=" color:black;font-size:14px;font-weight:bold;"
                     >{{afficherUniteAdministrative(BesoinImmo.uniteadmin_id) || 'Non renseigné'}}</td> 
                     
@@ -149,7 +150,7 @@ verrouilleCause
                    
                       <td
                       style=" color:black;font-size:14px;font-weight:bold;"
-                    >{{BesoinImmo.cause_demande || 'Non renseigné'}}</td> 
+                    >{{BesoinImmo.cause_directeur_sce || 'Non renseigné'}}</td> 
                      <td
                       style="text-align: center; color:red;font-size:14px;font-weight:bold;"
                     >{{formaterDate(BesoinImmo.date_demande) || 'Non renseigné'}}</td> 
@@ -159,32 +160,32 @@ verrouilleCause
 
  <td
                       style="text-align: center; color:red;font-size:14px;font-weight:bold;"
-                    >{{formaterDate(BesoinImmo.date_motif_directeur) || 'Non renseigné'}}</td>
+                    >{{formaterDate(BesoinImmo.date_directeur_sce) || 'Non renseigné'}}</td>
                     <!-- <td
                       style="text-align: center; color:red;font-size:14px;font-weight:bold;"
                     >{{BesoinImmo.dure_traitement_directeur || 0 }}  Jours</td> -->
 
 <td>
-                        <button v-if="BesoinImmo.motif_directeur == 1"  class="btn  btn-success" @click="afficherModalPourValidationDuDirecteur(index)" >                        
+                        <button v-if="BesoinImmo.motif_directeur_sce == 1"  class="btn  btn-success" @click="modatValidationDemandeService(index)" >                        
                      
                       <span    >Visé</span>
                       
                       </button>
-                       <button v-else-if="BesoinImmo.motif_directeur == 2" class="btn  btn-warning" @click="afficherModalPourValidationDuDirecteur(index)" >                        
+                       <button v-else-if="BesoinImmo.motif_directeur_sce == 2" class="btn  btn-warning" @click="modatValidationDemandeService(index)" >                        
                      
                       
                        <span  >Différé</span>
                       
                     
                       </button>
-                        <button v-else-if="BesoinImmo.motif_directeur ==3" class="btn  btn-danger"  @click="afficherModalPourValidationDuDirecteur(index)">                        
+                        <button v-else-if="BesoinImmo.motif_directeur_sce ==3" class="btn  btn-danger"  @click="modatValidationDemandeService(index)">                        
                      
                       
                        <span  >Réjeté</span>
                       
                     
                       </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalPourValidationDuDirecteur(index)" >                        
+                     <button v-else class="btn  btn-info" @click="modatValidationDemandeService(index)" >                        
                      
                       
                        <span  >Attente</span>
@@ -193,7 +194,15 @@ verrouilleCause
                     
                       </button>
                     </td>
-                    
+                    <td >
+  <span v-if="BesoinImmo.motif_directeur_sce == 1">
+  
+<button @click.prevent="AjouterAffectationDemande(index)"  class="btn btn-success">
+                <span class=""><i class=" icon-hand-right" title="Affectation Equipement"></i></span></button> 
+
+  </span>
+  <span v-else style="color:red;text-align:center">Affectation Desactivé</span>
+</td>
                    
                   </tr>
                  
@@ -256,7 +265,7 @@ verrouilleCause
                    
                       <td
                       style=" color:black;font-size:14px;font-weight:bold;"
-                    >{{BesoinImmo.cause_demande || 'Non renseigné'}}</td> 
+                    >{{BesoinImmo.cause_directeur_sce || 'Non renseigné'}}</td> 
                      <td
                       style="text-align: center; color:red;font-size:14px;font-weight:bold;"
                     >{{formaterDate(BesoinImmo.date_demande) || 'Non renseigné'}}</td> 
@@ -266,7 +275,7 @@ verrouilleCause
 
  <td
                       style="text-align: center; color:red;font-size:14px;font-weight:bold;"
-                    >{{formaterDate(BesoinImmo.date_motif_directeur) || 'Non renseigné'}}</td>
+                    >{{formaterDate(BesoinImmo.date_directeur_sce) || 'Non renseigné'}}</td>
                     <!-- <td
                       style="text-align: center; color:red;font-size:14px;font-weight:bold;"
                     >{{BesoinImmo.dure_traitement_directeur || 0 }}  Jours</td> -->
@@ -361,11 +370,12 @@ serviceua_id:"",
         cause_inactivite:"",
 
       },
-         valideDirecteur:{
+  
+         serviceValiderDirecteur:{
         article_id:"",
-motif_directeur:"",
-date_motif_directeur:"",
-cause_directeur:""
+motif_directeur_sce:"",
+date_directeur_sce:"",
+cause_directeur_sce:""
       },
 search:""
         }
@@ -450,7 +460,7 @@ search:""
     // },
     verrouilleCause(){
 
-    return this.valideDirecteur.motif == 1;
+    return this.serviceValiderDirecteur.motif == 1;
 },
     afficheCauseInactivite() {
       return id => {
@@ -493,7 +503,7 @@ affichierService() {
 
 
 
-afficheValidationDirecteur() {
+validationDemandeDuServiceParDirecteur() {
       
           return this.demandeMateriel.filter(element => element.fonction_id == 0 && element.motif_directeur == 0 );
        
@@ -511,7 +521,7 @@ afficheToutDemande() {
     },
 nombreValidationEnAttenteDirecteur() {
       
-          return this.afficheValidationDirecteur.length;
+          return this.validationDemandeDuServiceParDirecteur.length;
        
     },
 
@@ -575,20 +585,20 @@ afficherLibelleService() {
 modifierDecisionDirecteur(){
 
 var objetDirecteur = {
-  ...this.valideDirecteur,
-  motif_directeur:this.valideDirecteur.motif_directeur,
+  ...this.serviceValiderDirecteur,
+  motif_directeur:this.serviceValiderDirecteur.motif_directeur,
   
  
 }
 this.modifierDemandeMateriel(objetDirecteur)
 this.$("#exampleModalValidationdirecteur").modal('hide');
 },
-    afficherModalPourValidationDuDirecteur(index) {
+    modatValidationDemandeService(index) {
       this.$("#exampleModalValidationdirecteur").modal({
         backdrop: "static",
         keyboard: false
       })
-      this.valideDirecteur = this.afficheValidationDirecteur[index];
+      this.serviceValiderDirecteur = this.validationDemandeDuServiceParDirecteur[index];
       
       },
 
