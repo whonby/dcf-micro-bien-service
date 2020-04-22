@@ -7,7 +7,6 @@ var queue = housecall({concurrency: 2, cooldown: 1000})
 
 
 
-
 export  function  getCandidatSelectionner({commit}) {
   queue.push(() => axios.get('/liste_candidat_select').then((response) => {
     commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data.data)
@@ -88,174 +87,6 @@ export function ajouterCandidatSelectionner({commit}, formData){
 }
 
 
-
-// action for print all to prestation
-
-// export  function  getPrestation({commit}) {
-//     queue.push(() => axios.get('/url').then((response) => {
-//       commit('GET_ALL_PRESTATION', response.data)
-      
-//   }).catch(error => console.log(error)))
-//   }
-
-  // action pour ajouter prestation
-//   export function ajouterPrestation({commit}, elementAjout){
-//     asyncLoading(axios.post('/urls',{
-//         id_type_prestation:elementAjout.id_type_prestation,
-//       libelle:elementAjout.libelle,
-//       date_debut:elementAjout.date_debut,
-//       date_fin:elementAjout.date_fin,
-//       objet_prestation:elementAjout.objet_prestation
-//   })).then(response =>{
-//         if(response.status == 201){
-//             commit('AJOUTER_PRESTATION', response.data)
-
-//             this.$app.$notify({
-//               title: 'success ',
-//               text: 'Enregistrement effectué !',
-//               type:"success"
-//             })
-//         }
-
-
-//     }).catch(error => console.log(error))
-
-// }
-
-
-// action pour ajiouter nouveau fournisseur
-
-// export function ajouterFournisseur({commit}, elementAjout){
-//   asyncLoading(axios.post('/urls', elementAjout)).then(response =>{
-//       if(response.status == 201){
-//           commit('AJOUTER_NOUVEAU_FOURNISSEUR', response.data)
-
-//           this.$app.$notify({
-//             title: 'success ',
-//             text: 'Enregistrement effectué !',
-//             type:"success"
-//           })
-//       }
-
-
-//   }).catch(error => console.log(error))
-
-// }
-
-
-// action pour modifier prestation
-
-
-//  export function modifierPrestation({commit}, element_modifie) {
-//     asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-//         id_type_prestation:element_modifie.id_type_prestation,
-//         libelle:element_modifie.libelle,
-//         date_debut:element_modifie.date_debut,
-//         date_fin:element_modifie.date_fin,
-//         objet_prestation:element_modifie.objet_prestation
-
-//    })).then(response => {
-//          commit('MODIFIER_PRESTATION', response.data)
-
-//          this.$app.$notify({
-//            title: 'success ',
-//            text: 'Modification effectué !',
-//            type:"success"
-//          })
-//      }).catch(error => console.log(error))
-//  }
-  // supprimer categorie mision
-// export function supprimerPrestation({commit}, id) {
-//    this.$app.$dialog
-//    .confirm("Voulez vouz vraiment supprimer ?.")
-//    .then(dialog => {
-//       commit('DELETE_PRESTATION', id)
-//      // // dialog.loading(false) // stops the proceed button's loader
-//        axios.delete('/urls/' + id).then(() => dialog.close() )   
-//    })
- 
-// }
-
-
-
-// export  function  getActeDepense({commit}) {
-//     queue.push(() => axios.get('/url').then((response) => {
-//       commit('GET_ALL_ACTE_DEPENSE', response.data)
-      
-//   }).catch(error => console.log(error)))
-//   }
-
-  // action pour ajouter acte depense
-//   export function ajouterActeDepense({commit}, elementAjout){
-//     asyncLoading(axios.post('/urls',{
-    
-//     matricule:elementAjout.matricule,
-//     id_type_acte_depense:elementAjout.id_type_acte_depense,
-//     montant:elementAjout.montant,
-//     dotation_budgetaire:elementAjout.dotation_budgetaire,
-//     engagement_anterieur:elementAjout.engagement_anterieur,
-//     engagement_actuel:elementAjout.engagement_actuel,
-//     engagement_cumule:elementAjout.engagement_cumule,
-//     disponible_budgetaire:elementAjout.disponible_budgetaire,
-//     objet_depense:elementAjout.objet_depense,
-//     ligne_budgetaire:elementAjout.ligne_budgetaire,
-//     Type_de_procedure:elementAjout.Type_de_procedure
-
-       
-//   })).then(response =>{
-//         if(response.status == 201){
-//             commit('AJOUTER_ACTE_DEPENSE', response.data)
-
-//             this.$app.$notify({
-//               title: 'success ',
-//               text: 'Enregistrement effectué !',
-//               type:"success"
-//             })
-//         }
-
-//     }).catch(error => console.log(error))
-// }
-
-// action pour modifier acte depense
-
-
-//  export function modifierActeDepense({commit}, element_modifie) {
-//     asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-   
-//       matricule:element_modifie.matricule,
-//       id_type_acte_depense:element_modifie.id_type_acte_depense,
-//       montant:element_modifie.montant,
-//       dotation_budgetaire:element_modifie.dotation_budgetaire,
-//       engagement_anterieur:element_modifie.engagement_anterieur,
-//       engagement_actuel:element_modifie.engagement_actuel,
-//       engagement_cumule:element_modifie.engagement_cumule,
-//       disponible_budgetaire:element_modifie.disponible_budgetaire,
-//       objet_depense:element_modifie.objet_depense,
-//       ligne_budgetaire:element_modifie.ligne_budgetaire,
-//       Type_de_procedure:element_modifie.Type_de_procedure
-
-//    })).then(response => {
-//          commit('MODIFIER_ACTE_DEPENSE', response.data)
-         
-
-//          this.$app.$notify({
-//            title: 'success ',
-//            text: 'Modification effectué !',
-//            type:"success"
-//          })
-//      }).catch(error => console.log(error))
-//  }
-  // action pour la suppression d'acte de depense
-// export function supprimerActeDepense({commit}, id) {
-//    this.$app.$dialog
-//    .confirm("Voulez vouz vraiment supprimer ?.")
-//    .then(dialog => {
-//       commit('SUPPRIMER_ACTE_DEPENSE', id)
-
-//        axios.delete('/urls/' + id).then(() => dialog.close() )   
-//    })
- 
-// }
 
  // liste role membrecojo
  export  function getRolemembreCojo({commit}){
@@ -3433,8 +3264,8 @@ export function ajouterRapportJugement({commit,dispatch}, elementAjout,config){
 // action pour modifier le type text juridique
 
 
-export function modifierRapportJugement({commit}, element_modifie) {
-asyncLoading(axios.post('/update_rapport_jugement',element_modifie)).then(response => {
+export function modifierRapportJugement({commit}, element_modifie,config) {
+asyncLoading(axios.post('/update_rapport_jugement',element_modifie,config)).then(response => {
       commit('MODIFIER_RAPPORT_OUVERTURE', response.data)
       this.$app.$notify({
           title: 'success ',
@@ -4545,3 +4376,4 @@ export function modifierMarcheBascule({ commit, dispatch }, element_modifie) {
     })
   }).catch(error => console.log(error))
 }
+

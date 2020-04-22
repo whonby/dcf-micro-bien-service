@@ -87,6 +87,7 @@ const defaultState = {
     gettersTransmissions:[],
     plan_passation_marche:[],
     role_membrecojo: [],
+    selectionner_candidats:[]
 
 }
 

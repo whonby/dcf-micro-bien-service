@@ -1,6 +1,15 @@
 
 <template>
     <div>
+
+
+        <div align="right">
+                    <div class="widget-content">
+                        <a href="" @click="isFormulaireDossierCand" v-if="isButtunAddDossierCandidat" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+
+
+                </div>
         
  <div v-if="isButtunAddDossierCandidat">
                  <h4>Liste des dossiers candidats</h4>

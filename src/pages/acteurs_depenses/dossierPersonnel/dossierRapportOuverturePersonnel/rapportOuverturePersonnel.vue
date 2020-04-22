@@ -81,7 +81,7 @@
 
                          <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier le rapport de jugement </h3>
+                <h3>Modifier le rapport d'ouverture </h3>
             </div>
             <div class="modal-body">
                 <div class="widget-box">
@@ -223,7 +223,7 @@ export default {
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.editRapport = this.documentMedias[index];
+                this.editRapport = this.listeRapport(this.macheid)[index];
             },
 
            
@@ -248,7 +248,7 @@ export default {
                  date_rapport_ouverture:""
                }
                }else{
-                   return "ok fichier neccessaire mercie"
+                  // return "ok fichier neccessaire mercie"
                }
               
            },
@@ -274,7 +274,7 @@ export default {
                 }
               
                this.modifierRapportJugement(formData,config)
-               this.getRapportJugement()
+              // this.getRapportJugement()
                this.$('#modifierModalRapportOuverture').modal('hide');
                }else{
                    return " chargemennt de fichier neccessaire "

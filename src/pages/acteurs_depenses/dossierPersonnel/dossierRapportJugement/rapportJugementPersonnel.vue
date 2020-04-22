@@ -102,6 +102,7 @@
                           l’offre conforme la moins-disante.
                       </div>
                       <h4 class="text-center">TABLEAU RECAPITULATIF DE LA COMPARAISON DES OFFRES</h4>
+                     
                       <table class="table table-bordered table-striped">
                           <thead>
                           <tr>
@@ -210,7 +211,7 @@ export default {
                  fichier:"",
                 difference_personnel_bienService:"personnel",
                 marche_id:"",
-                //candidat_selection_id:""
+                candidat_selection_id:""
 
                 },
             reference:"",
@@ -221,7 +222,7 @@ export default {
               fichier:"",
               difference_personnel_bienService:"personnel",
               marche_id:"",
-             // candidat_selection_id:""
+              candidat_selection_id:""
             },
             resultaAnalysePv:[],
             imagePDF:"",
@@ -284,18 +285,18 @@ export default {
 
 // afficher ID du candidat selectionner 
 
-// affichierCandidatSelectionId() {
-//       return id => {
-//         if (id != null && id != "") {
-//            const objetPourRecureperId = this.selectionner_candidats.find(objetPourRecureperId => objetPourRecureperId.marche_id == id);
+affichierCandidatSelectionId() {
+      return id => {
+        if (id != null && id != "") {
+           const objetPourRecureperId = this.selectionner_candidats.find(objetPourRecureperId => objetPourRecureperId.marche_id == id);
 
-//       if (objetPourRecureperId) {
-//         return objetPourRecureperId.id;
-//       }
-//       return 0
-//         }
-//       };
-//     },
+      if (objetPourRecureperId) {
+        return objetPourRecureperId.id;
+      }
+      return 0
+        }
+      };
+    },
 
 
 // afficher ID de avis de re rutement 
@@ -371,7 +372,7 @@ affichierAppelOffreid() {
                formData.append('marche_id', this.macheid);
                formData.append('attribue', this.formJugement.attribue);
                 formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
-              //formData.append('candidat_selection_id', this.affichierCandidatSelectionId(this.macheid));
+              formData.append('candidat_selection_id', this.affichierCandidatSelectionId(this.macheid));
                formData.append('difference_personnel_bienService',this.formJugement.difference_personnel_bienService)
                 let config = {
                     header : {
@@ -396,7 +397,7 @@ affichierAppelOffreid() {
                  formData.append('marche_id', this.macheid);
                   formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
                  formData.append('attribue',this.editRapport.attribue);
-                // formData.append('candidat_selection_id', this.affichierCandidatSelectionId(this.macheid));
+                 formData.append('candidat_selection_id', this.affichierCandidatSelectionId(this.macheid));
                  formData.append('difference_personnel_bienService', this.difference_personnel_bienService)
                 formData.append('id', this.editRapport.id);
                
@@ -411,6 +412,7 @@ affichierAppelOffreid() {
                 }
               
                this.modifierRapportJugement(formData,config)
+              // this.getRapportJugement()
                this.$('#modifierRapportJugements').modal('hide');
                } else return "chargement du fichier neccessaire";
               
@@ -424,7 +426,7 @@ affichierAppelOffreid() {
 
            infoPVAffiche(ref){
                 this.resultaAnalysePv=[]
-                let resulta=this.selectionner_candidats.filter(item=>item.reference_pv==ref && this.afficherCandidatSelectionnerAtrribue(item.jugement_id)==1);
+                let resulta=this.selectionner_candidats.filter(item=>item.reference_pv==null || ref && this.afficherCandidatSelectionnerAtrribue(item.jugement_id)==1);
                 this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
                 if (this.resultaAnalysePv.length>0){
                     this.resultaAnalysePv.sort(function (a, b) {

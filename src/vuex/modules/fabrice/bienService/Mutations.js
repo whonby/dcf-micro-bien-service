@@ -1,7 +1,7 @@
 export const GET_ALL_SELECTIONNER_CANDIDAT = (state, tableau_candidat_selectionner) =>{
     state.selectionner_candidats = tableau_candidat_selectionner
 }
-AJOUTER_PV
+
 
 // add candidat selectionner
 
@@ -17,6 +17,12 @@ export const MODIFIER_CANDIDAT_SELECTIONNER = (state,elementModif) => {
         }
         return response
     })
+}
+
+
+export const SUPPRIMER_CANDIDAT_SELECTION = (state ,id) => {
+    state.selectionner_candidats = state.selectionner_candidats.filter(select => 
+        select.id !=id)
 }
 
 
@@ -91,6 +97,7 @@ export const GET_ALL_RAPPORTJUGEMENT = (state, tableau_rapport_ouverture) =>{
 
 export const AJOUTER_RAPPORT_OUVERTURE = (state, elementAjouter) => {
     state.rapportDocuments.unshift(elementAjouter)
+    //state.selectionner_candidats=[]
     state.selectionner_candidats=[]
     
 }
