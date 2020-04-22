@@ -138,8 +138,8 @@
             };
         },
         created() {
-            this.detailBudget=this.getterBudgeCharge.find(item=>item.id== this.$route.params.id)
-          this.budgetGeneralCharge=this.budgetGeneral.filter(item=>item.budget_charge_id==this.$route.params.id)
+          //  this.detailBudget=this.getterBudgeCharge.find(item=>item.id== this.$route.params.id)
+          this.budgetGeneralCharge=this.budgetGeneral.filter(item=>item.actived==1)
             console.log(this.budgetGeneralCharge)
         },
         computed: {
@@ -170,8 +170,6 @@
                               return item
                           }
                       })
-
-
 
                       if(budget!=undefined){
 

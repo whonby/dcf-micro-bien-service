@@ -89,9 +89,9 @@
                        <li>
                         <a data-toggle="tab" href="#tab2">DETAIL EXECUTION</a>
                       </li>
-                        <!-- <li>
-                        <a data-toggle="tab" href="#tab22">DETAIL ECHEANCIER</a>
-                      </li> -->
+                        <li>
+                        <a data-toggle="tab" href="#tab22">PARAMETRAGE ECHEANCIER</a>
+                      </li>
                       <!-- <li>
                         <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
                       </li> --> 
@@ -1313,6 +1313,9 @@
         </div>
           </div>
         </div>
+                      <div id="tab22" class="tab-pane ">
+                          kkkkk
+                      </div>
       </div>
        </div>
         <!-- <fab :actions="fabActions" @cache="afficherModalAjouterBesoinImmobilisation" main-icon="apps" bg-color="green"></fab>
