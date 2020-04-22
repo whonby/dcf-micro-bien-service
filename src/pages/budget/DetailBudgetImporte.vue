@@ -26,10 +26,10 @@
                         <tbody>
                         <tr v-for="unite in uniteAdministratives" :key="unite.id">
                             <td>{{unite.libelle}}</td>
-                            <td style="background: deepskyblue; color:#fff">{{formatageSomme(budgetPersonnel(unite.id))}}</td>
-                            <td style="background: darkred;color:#fff">{{formatageSomme(budgetBienService(unite.id))}}</td>
-                            <td style="background: orangered;color:#fff">{{formatageSomme(budgetTranfert(unite.id))}}</td>
-                            <td style="background: forestgreen;color:#fff">{{formatageSomme(budgetInverstisement(unite.id))}}</td>
+                            <td>{{formatageSomme(budgetPersonnel(unite.id))}}</td>
+                            <td >{{formatageSomme(budgetBienService(unite.id))}}</td>
+                            <td >{{formatageSomme(budgetTranfert(unite.id))}}</td>
+                            <td >{{formatageSomme(budgetInverstisement(unite.id))}}</td>
                         </tr>
                         </tbody>
                     </table>
