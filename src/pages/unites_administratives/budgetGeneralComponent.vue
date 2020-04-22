@@ -218,14 +218,14 @@
                   </div>
                 </div>
               </td>
-               <td colspan="">
+               <td colspan="2">
                 <div class="control-group">
                   <label class="control-label">Type procedure</label>
                   <div class="controls">
                     <input
                       type="text"
                      :value="afficheLeNomDesProcedure"
-                      class="span4"
+                      class="span6"
                       placeholder="Saisir le code"
                       readonly
                     />
@@ -712,23 +712,23 @@ afficheLeNomDesProcedureModifier(){
 return "Aucune procedure"
   }
      else if( this.editBudgetGeneral.Dotation_Initiale < 10000000){
-        return "Procédure Simplifiée de demande de Cotation(PSC Sans comité)"
+        return "PSC Sans comité"
     }
     else if(this.editBudgetGeneral.Dotation_Initiale < 30000000)
     {
-return "Procédure Simplifiée de demande de Cotation(PSC Avec comité)"
+return "PSC Avec comité"
     }
     else if(this.editBudgetGeneral.Dotation_Initiale < 60000000 )
     {
-return "Procédure Simplifiée à compétition Limitée(PSL)"
+return "PSL"
     }
     else if(this.editBudgetGeneral.Dotation_Initiale < 100000000 )
     {
-return "Procédure Simplifiée à compétition Ouverte(PSO)"
+return "PSO"
     }
      else if(100000000 < this.editBudgetGeneral.Dotation_Initiale)
     {
-return "Appel d'Offre Ouvert(AON ou AOI)"
+return "AON ou AOI"
     }
     
   return null  
@@ -740,23 +740,23 @@ afficheLeNomDesProcedure(){
 return "Aucune procedure"
   }
      else if( this.formData.Dotation_Initiale < 10000000){
-        return "Procédure Simplifiée de demande de Cotation(PSC Sans comité)"
+        return "PSC Sans comité"
     }
     else if(this.formData.Dotation_Initiale < 30000000)
     {
-return "Procédure Simplifiée de demande de Cotation(PSC Avec comité)"
+return "PSC Avec comité"
     }
     else if(this.formData.Dotation_Initiale < 60000000 )
     {
-return "Procédure Simplifiée à compétition Limitée(PSL)"
+return "PSL"
     }
     else if(this.formData.Dotation_Initiale < 100000000 )
     {
-return "Procédure Simplifiée à compétition Ouverte(PSO)"
+return "PSO"
     }
-     else if(100000000 < this.formData.Dotation_Initiale)
+     else if(100000000 <= this.formData.Dotation_Initiale)
     {
-return "Appel d'Offre Ouvert(AON ou AOI)"
+return "AON ou AOI"
     }
    
   return null  

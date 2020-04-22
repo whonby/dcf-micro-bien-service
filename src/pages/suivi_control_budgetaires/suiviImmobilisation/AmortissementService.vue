@@ -24,12 +24,12 @@
               </thead>
               <tbody>
                 <tr class="odd gradeX">
-                  <td style="text-align: center;font-size:14px;font-weight:bold;">{{BesoinImmo.annee || 'Non renseigné'}}</td> 
-                  <!-- <td>{{BesoinImmo.TVA_id || 'Non renseigné'}} %</td> -->
-                  <td style="text-align: center;font-size:14px;font-weight:bold;">{{BesoinImmo.dure_vie || 'Non renseigné'}} Ans</td>
-                    <td style="text-align: center;font-size:14px;font-weight:bold;">{{afficheFamille(BesoinImmo.article_id) || 'Non renseigné'}}</td>
-                  <td style="text-align: center;font-size:14px;font-weight:bold;">{{formatageSomme(BesoinImmo.valeurorigine) || 0 }}</td>
-                  <td style="text-align: center;font-size:14px;font-weight:bold;">{{formaterDate(BesoinImmo.date_mise_service) || 'Non renseigné'}}</td>
+                  <td style="text-align: center;font-size:14px;font-weight:bold;">{{DmdImmo.annee || 'Non renseigné'}}</td> 
+                  <!-- <td>{{DmdImmo.TVA_id || 'Non renseigné'}} %</td> -->
+                  <td style="text-align: center;font-size:14px;font-weight:bold;">{{DmdImmo.dure_vie || 'Non renseigné'}} Ans</td>
+                    <td style="text-align: center;font-size:14px;font-weight:bold;">{{afficheFamille(DmdImmo.article_id) || 'Non renseigné'}}</td>
+                  <td style="text-align: center;font-size:14px;font-weight:bold;">{{formatageSomme(DmdImmo.valeurorigine) || 0 }}</td>
+                  <td style="text-align: center;font-size:14px;font-weight:bold;">{{formaterDate(DmdImmo.date_mise_service) || 'Non renseigné'}}</td>
                  
                   
                 </tr>
@@ -146,7 +146,7 @@ import { formatageSomme } from "../../../Repositories/Repository";
 export default {
   data() {
     return {
-      BesoinImmo: undefined,
+      DmdImmo: undefined,
       json_fields_lineaire: {
         ANNEE: "annee",
         ANNUITE: "anuite",
@@ -171,7 +171,7 @@ export default {
   
 
   computed: {
-    ...mapGetters("SuiviImmobilisation", ["historiqueAffectation","familles","historiqueAffectationService"]),
+    ...mapGetters("SuiviImmobilisation", ["historiqueAffectationService","familles"]),
 
     afficheFamille() {
       return id => {
@@ -187,26 +187,26 @@ export default {
     },
 
     calculAnnuite(){
-      const BesoinImmo = this.BesoinImmo
-      if(BesoinImmo != undefined){
-        return  parseFloat(BesoinImmo.valeurorigine) / parseFloat(BesoinImmo.dure_vie)
+      const DmdImmo = this.DmdImmo
+      if(DmdImmo != undefined){
+        return  parseFloat(DmdImmo.valeurorigine) / parseFloat(DmdImmo.dure_vie)
       }
       return null
     },
 
     getAnnee(){
-        const BesoinImmo = this.BesoinImmo
-      if(BesoinImmo != undefined){
-        var annee = new Date(BesoinImmo.date_mise_service).getFullYear()
+        const DmdImmo = this.DmdImmo
+      if(DmdImmo != undefined){
+        var annee = new Date(DmdImmo.date_mise_service).getFullYear()
         return parseFloat(annee) 
       }
       return null
     },
 
       getNombreDeMois(){
-        const BesoinImmo = this.BesoinImmo
-      if(BesoinImmo != undefined){
-        var annee = new Date(BesoinImmo.date_mise_service).getMonth() + 1
+        const DmdImmo = this.DmdImmo
+      if(DmdImmo != undefined){
+        var annee = new Date(DmdImmo.date_mise_service).getMonth() + 1
         return 13 - parseFloat(annee) 
        
       }
@@ -214,13 +214,13 @@ export default {
     },
 
   Amortissement(){
-        const BesoinImmo = this.BesoinImmo
-      if(BesoinImmo.dure_vie != "" && BesoinImmo.date_mise_service != "" && BesoinImmo.valeurorigine != ""){
+        const DmdImmo = this.DmdImmo
+      if(DmdImmo.dure_vie != "" && DmdImmo.date_mise_service != "" && DmdImmo.valeurorigine != ""){
         var tableauAmortissement = []
          var tableauAmortissementAExporter = []
 
-        var tailleDuTableau = this.BesoinImmo.dure_vie
-         var valeurNettActuelle = BesoinImmo.valeurorigine
+        var tailleDuTableau = this.DmdImmo.dure_vie
+         var valeurNettActuelle = DmdImmo.valeurorigine
           var cumulActuel = this.calculAnnuite
               for(var i = 0; i < tailleDuTableau; i++){
             let objet = {
@@ -250,13 +250,13 @@ export default {
     },
 
        AmortissementProrataTemporis(){
-        const BesoinImmo = this.BesoinImmo
-      if(BesoinImmo.dure_vie != "" && BesoinImmo.date_mise_service != "" && BesoinImmo.valeurorigine != ""){
+        const DmdImmo = this.DmdImmo
+      if(DmdImmo.dure_vie != "" && DmdImmo.date_mise_service != "" && DmdImmo.valeurorigine != ""){
         var tableauAmortissement = []
         var tableauAmortissementAExporter = []
 
-        var tailleDuTableau = this.BesoinImmo.dure_vie
-         var valeurNettActuelle = BesoinImmo.valeurorigine
+        var tailleDuTableau = this.DmdImmo.dure_vie
+         var valeurNettActuelle = DmdImmo.valeurorigine
           var cumulActuel = this.calculAnnuite
 
         if(this.getNombreDeMois === 12){
@@ -280,7 +280,7 @@ export default {
             annee : this.getAnnee + i,
           anuite : i == 0 ? ( (valeurNettActuelle * this.getNombreDeMois) / 12 ) / tailleDuTableau : i == tailleDuTableau ? this.calculAnnuite - tableauAmortissement[0].anuite : this.calculAnnuite,
           valeurNette : i == 0 ?  parseFloat(valeurNettActuelle) - ( ((valeurNettActuelle * this.getNombreDeMois) / 12 ) / tailleDuTableau) : i == tailleDuTableau ? 0 : parseFloat(valeurNettActuelle) - this.calculAnnuite,
-            cumul: i == 0 ? ( (valeurNettActuelle * this.getNombreDeMois) / 12 ) / tailleDuTableau : i == tailleDuTableau ? BesoinImmo.valeurorigine : cumulActuel
+            cumul: i == 0 ? ( (valeurNettActuelle * this.getNombreDeMois) / 12 ) / tailleDuTableau : i == tailleDuTableau ? DmdImmo.valeurorigine : cumulActuel
             }
             valeurNettActuelle = objet.valeurNette
             cumulActuel = this.calculAnnuite + objet.cumul
@@ -312,8 +312,8 @@ export default {
   },
   methods: {
     getDetail(){
-        this.BesoinImmo = this.historiqueAffectation.find(
-      BesoinImmo => BesoinImmo.id == this.$route.params.id
+        this.DmdImmo = this.historiqueAffectationService.find(
+      DmdImmo => DmdImmo.id == this.$route.params.id
     );
     },
     

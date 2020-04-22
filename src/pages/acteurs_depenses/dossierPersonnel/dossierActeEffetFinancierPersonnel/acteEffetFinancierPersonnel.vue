@@ -1,7 +1,15 @@
 
 <template>
     <div>
+                 <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterActeEffetFinancierP" data-toggle="modal" class="btn btn-warning" v-if="listeRapport(macheid)" >Ajouter</a>
+                   
+                        <button class="btn btn-warning" title="La procedure n'est pas terminer car l'avis du Bailleur est Objection, alors veiller recommencer l'analyse" disabled v-else>Ajouter</button>
+                    </div>
 
+
+                </div>
                 
                 <h4> Liste acte effet financier </h4>
                 <table class="table table-bordered table-striped" v-if="macheid">
@@ -732,21 +740,37 @@ afficherCandidat () {
                         // console.log("Marche lettre inviation marche")
                         return this.selectionner_candidats.filter(idmarche => idmarche.marche_id == id)
 
+
                        // let contratValider =this.gettersPersonnaliserRapportJugement
                      }
              }
             },
 
 
+            // afficher id du rapport du jugement
+            
 
+
+listeRapport(){
+    return id =>{
+        if(id!=null && id!=""){
+            let objet = this.getterAnoDMPBailleur.find(idmarche => idmarche.marche_id==id 
+            && idmarche.avis_bail==1)
+           return objet
+        }
+        return null
+    }
+},
 
           
+  // activation de button acte effet financier si avis ano bailleur est non objection
+
+ 
 
 
 
-
-      
-       afficherNomDansPersonnel() {
+      afficherNomDansPersonnel
+       () {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.dossierPersonnels.find(qtreel => qtreel.id == id);
@@ -877,7 +901,9 @@ AffichierElementParent() {
         }
       };
     },
-
+        //   aviNonObjection(){
+        //          return this.getterAnoDMPBailleur.filter(item => item.avis_bail ==1)
+        //        },
             
       
       },
@@ -888,6 +914,7 @@ AffichierElementParent() {
           'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
 
               
+        
 
               ajouterModalActeEffetFinancierLocal(){
         // var nouvelObjet = {

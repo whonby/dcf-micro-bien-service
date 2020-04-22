@@ -1,4 +1,4 @@
-
+ 
 <template>
   <div>
     <!--start-top-serch-->
@@ -87,7 +87,7 @@ export default {
       // "getAllTypeTextes",
       "getAllUniteAdministrative",
       // "getAllArchivageDocument",
-      "getAllDirection",
+      // "getAllDirection",
       "getAllServiceua",
       "getAllFonction",
       "getAllBudgetGeneral",
@@ -128,7 +128,8 @@ export default {
       "getAllImmobilisation",
       "getAllAmortissement",
       "getAllHistoAffectation",
-      "getAllDemandeMateriel"
+      "getAllDemandeMateriel",
+      "getAllHistoAffectationService"
       
     ]),
 
@@ -224,7 +225,7 @@ this.getTypeAppel()
       // this.getAllTypeTextes();
     this.getAllUniteAdministrative();
     // this.getAllArchivageDocument();
-this.getAllDirection()
+// this.getAllDirection()
 this.getAllServiceua()
 this.getAllFonction()
 this.getFonctionBudgetaire()
@@ -282,6 +283,7 @@ this.getAllHistoriqueBudgetGeneral()
     this.getAllImmobilisation();
     this.getAllHistoAffectation();
     this.getAllDemandeMateriel();
+    this.getAllHistoAffectationService()
     //this.getAllAmortissement();
       /**
        * this.

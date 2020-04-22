@@ -179,7 +179,7 @@
                     let vM=this;
                     if(unite_id!='' && vM.budgetGeneralCharge!=""){
 
-                        let budget=vM.budgetGeneral.find(item=>{
+                        let budget=vM.budgetGeneralCharge.find(item=>{
                             if(item.gdenature_id==6  && item.ua_id==unite_id){
                                 return item
                             }

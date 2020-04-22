@@ -18,37 +18,36 @@
    <div class="widget-box">
                 <div class="widget-content">
                     <div class="widget-content nopadding">
-                       <h4 v-if="detail_marche">Detail Marche : {{detail_marche.objet}} </h4>
+                       <h4 v-if="detail_marche" style="text-align: center;font-size:20px;font-weight:bold;">Detail Marche : {{detail_marche.objet}} </h4>
                         <table class="table table-striped table-bordered" v-if="detail_marche">
                             <thead>
                             <tr>
-                               <th>Reference marché</th>
-                               <th>Numéro marché</th>
-                                <th>Objet marché</th>
+                               <th style="font-size:12px;font-weight:bold;">Reference marché</th>
+                               <th style="font-size:12px;font-weight:bold;">Numéro marché</th>
+                                <th style="font-size:12px;font-weight:bold;">Objet marché</th>
                                 
-                                <th>Montant de base</th>
-                                <th>Type de marché</th>
-                                <th>Procédure de passation </th>
-                                <th>Unite administrative</th>
-                                <th>Activité</th>
-                    <th>Imputation</th>
+                             
+                                <th style="font-size:12px;font-weight:bold;">Type de marché</th>
+                                <th style="font-size:12px;font-weight:bold;">Procédure de passation </th>
+                                <th style="font-size:12px;font-weight:bold;">Unite administrative</th>
+                                <th style="font-size:12px;font-weight:bold;">Activité</th>
+                    <th style="font-size:12px;font-weight:bold;">Imputation</th>
+                       <th style="font-size:12px;font-weight:bold;">Montant de base</th>
                     <!-- <th>Ligne Budgetaire</th>
                                 <th>Exercice Budgetaire</th> -->
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td class="taskStatus">{{detail_marche.reference_marche}}</td>
+                                <td class="taskStatus" style="font-size:14px;font-weight:bold;">{{detail_marche.reference_marche}}</td>
                                 
-                                <td class="taskStatus">{{afficheNumeroMarche(detail_marche.id)}}</td>
-                                 <td class="taskDesc">{{detail_marche.objet}}</td>
-                                <td class="taskOptions">
-                                    {{formatageSomme(parseFloat(afficheMontantReelMarche(detail_marche.id)))}}
-                                </td>
-                                <td class="taskOptions">
+                                <td class="taskStatus" style="font-size:14px;font-weight:bold;">{{afficheNumeroMarche(detail_marche.id)}}</td>
+                                 <td class="taskDesc" style="font-size:14px;font-weight:bold;">{{detail_marche.objet}}</td>
+                               
+                                <td class="taskOptions" style="font-size:14px;font-weight:bold;">
                                     {{detail_marche.type_marche.libelle}}
                                 </td>
-                                <td class="taskOptions">
+                                <td class="taskOptions" style="font-size:14px;font-weight:bold;">
                                     <!-- {{afficheModePassation(detail_marche.procedure_passation_id)}} -->
                                    
                                <span v-if="DisponibleBudgetaireApresLiquidation < 10000000 ">Procédure Simplifiée de demande de Cotation(PSC Sans comité)</span>
@@ -58,13 +57,16 @@
                          <span v-else-if="DisponibleBudgetaireApresLiquidation > 100000000 ">Appel d'Offre Ouvert(AON ou AOI)</span>
                          <span v-else></span>
                                 </td>
-                                <td class="taskOptions">
+                                <td class="taskOptions" style="font-size:14px;font-weight:bold;">
                                     {{detail_marche.objetUniteAdministrative.libelle}}
                                 </td>
-                                <td @dblclick="afficherModalModifierTypePrestation(index)">
+                                <td @dblclick="afficherModalModifierTypePrestation(index)" style="font-size:14px;font-weight:bold;">
                    {{detail_marche.afficheActivite.libelle || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <td @dblclick="afficherModalModifierTypePrestation(index)" style="font-size:14px;font-weight:bold;">
                    {{detail_marche.imputation || 'Non renseigné'}}</td>
+                    <td class="taskOptions" style="font-size:14px;font-weight:bold;color:red;">
+                                    {{formatageSomme(parseFloat(afficheMontantReelMarche(detail_marche.id)))}}
+                                </td>
                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                   {{detail_marche.afficheEconomique.code || 'Non renseigné'}}- {{detail_marche.afficheEconomique.libelle || 'Non renseigné'}}</td>
                      

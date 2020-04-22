@@ -6,6 +6,8 @@ var queue = housecall({concurrency: 2, cooldown: 1000})
 
 
 
+
+
 export  function  getCandidatSelectionner({commit}) {
   queue.push(() => axios.get('/liste_candidat_select').then((response) => {
     commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data.data)
@@ -56,29 +58,7 @@ export function supprimerCandidatSelectionnerDeselection({commit}, id) {
  
  }
 
-//  export function ajouterCandidatSelectionner({ commit}, formData) {
 
-//   this.$app.$dialog
-//       .confirm("Voulez-vous selectionner le candidat  ?.")
-//       .then(dialog => {
-//    asyncLoading(axios.post('/add_candidat_select', {
-//                       formData
-//           })).then(response => {
-//               // if (response.status == 201) {
-//               commit('AJOUTER_CANDIDAT_SELECTIONNER', response.data)
-//               //dispatch('getExercicesBudgetaires')
-//               this.$app.$notify({
-//                   title: 'Felicitation ',
-//                   text: 'Candidat selectionner avec success  !',
-//                   type: "success"
-//               })
-//               // }
-//           }).catch(error => console.log(error))
-//           dialog.close()
-//       });
- 
- 
-// }
 
 
 export function ajouterCandidatSelectionner({commit}, formData){
@@ -3293,7 +3273,7 @@ export function supprimerMandater({commit}, id) {
 
 export  function  getDocument({commit}) {
   queue.push(() => axios.get('/list_document').then((response) => {
-      commit('GET_ALL_DOCUMENT', response.data)
+      commit('GET_ALL_DOCUMENT', response.data.data)
 
   }).catch(error => console.log(error)))
 }
@@ -3351,18 +3331,19 @@ export function supprimerDocument({commit}, id) {
 
 export  function  getRapportJugement({commit}) {
   queue.push(() => axios.get('/liste_rapport_iugement').then((response) => {
-      commit('GET_ALL_RAPPORTJUGEMENT', response.data)
+      commit('GET_ALL_RAPPORTJUGEMENT', response.data.data)
 
   }).catch(error => console.log(error)))
 }
 
 // action pour ajouter les infos
 
-export function ajouterRapportJugement({commit}, elementAjout,config){
+export function ajouterRapportJugement({commit,dispatch}, elementAjout,config){
   asyncLoading(axios.post('/add_rapport_jugement',elementAjout,config)).then(response =>{
       if(response.status == 201){
-          commit('AJOUTER_RAPPORT_OUVERTURE', response.data)
-
+          commit('AJOUTER_RAPPORT_OUVERTURE', response.data.jugement)
+          commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data.annalyse.data)
+          dispatch('getRapportJugement')
           this.$app.$notify({
               title: 'success ',
               text: 'Enregistrement effectué !',
@@ -3394,13 +3375,18 @@ export function supprimerRapportJugement({commit}, id) {
       .confirm("Voulez vouz vraiment supprimer ?.")
       .then(dialog => {
           commit('SUPPRIMER_RAPPORT_OUVERTURE', id)
+         
           // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete('/delete_rapport_jugement/' + id).then(() => dialog.close() )
+          axios.delete('/delete_rapport_jugement/' + id).then(response =>{
+            commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data.data)
+            dialog.close()
+        }  )
+
+          //axios.delete('/delete_rapport_jugement/' + id).then(() => dialog.close() )
       })
 
 }
 /**Fin madate*/
-
 
 
 
@@ -4262,6 +4248,7 @@ export function ajouterProceVerbal({commit}, objetAjoute,config){
         if(response.status == 201){
             console.log(response.data)
             commit('AJOUTER_PV', response.data.jugement)
+            
             commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
             this.$app.$notify({
                 title: 'success ',
@@ -4279,7 +4266,7 @@ export function supprimerProceVerbal({commit}, id) {
         .then(dialog => {
             commit('SUPPRIMER_PV', id)
             // // dialog.loading(false) // stops the proceed button's loader
-            axios.delete('/proceVerbalJugementOffres/' + id).then(response =>{
+            axios.delete('/suppri_proceVerbalJugementOffres/' + id).then(response =>{
                 commit('GET_ALL_ANALYSE_DOSSIER', response.data.data)
                 dialog.close()
             }  )

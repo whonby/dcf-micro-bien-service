@@ -300,7 +300,7 @@
                       {{mission.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
                             
                     <td @dblclick="afficherModalModifierMission(mission.id)">
-                     {{mission.objetActeurDepense.matricule}}</td> 
+                     {{affichierActeurDepenseMatricule(affichierActeurDepenseId(mission.acte_personnel_id)) || 'Non renseigné'}}</td> 
 
                      
                     
@@ -966,6 +966,8 @@ export default {
 
     // },
 
+
+
    
     getMissionStyles(){
       return item => {
@@ -1252,6 +1254,32 @@ nomParActeurDepense(){
  }
 },
 
+
+affichierActeurDepenseId() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.missions.find(qtreel => qtreel.acte_personnel_id == id);
+
+      if (qtereel) {
+        return qtereel.acte_personnel_id;
+      }
+      return 0
+        }
+      };
+    },
+
+    affichierActeurDepenseMatricule() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.matricule;
+      }
+      return 0
+        }
+      };
+    },
 // duree moyenne de mission par acteur de depense
 dureetotalParAccteurDepense()
 {

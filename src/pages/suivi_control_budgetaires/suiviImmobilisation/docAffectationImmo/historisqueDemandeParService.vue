@@ -13,10 +13,10 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1">MATERIEL EN UTLISATION       <span class="badge badge-important">{{afficheNombreEquipementEnCoursUtilidation}}</span></a>
+                        <a data-toggle="tab" href="#tab78965">MATERIEL EN UTLISATION       <span class="badge badge-important">{{afficheNombreEquipementEnCoursUtilidation}}</span></a>
                       </li>
                        <li>
-                        <a data-toggle="tab" href="#tab2">MATERIEL AMORTI          <span class="badge badge-important">{{afficheNombreEquipementAmortie}}</span></a>
+                        <a data-toggle="tab" href="#tab4758">MATERIEL AMORTI          <span class="badge badge-important">{{afficheNombreEquipementAmortie}}</span></a>
                       </li>
                       <!-- <li>
                         <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
@@ -26,23 +26,21 @@
                   </div>
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
-                    <div id="tab1" class="tab-pane active">
+                    <div id="tab78965" class="tab-pane active">
   <div class="widget-content nopadding" >
-     <div align="right">
+     <!-- <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search"/>
-              </div>
+              </div> -->
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
                      <!-- <th>Type UA</th> -->
                    <th>Année de l'affectation</th>
-                    <th>Matricule</th>
-                    <th>Nom & Prénoms</th>
-                    
+                  
                      <th>Unite administrative</th>
-                    <th>Unite de zone</th>
-                    <th>Fonction</th>
+                   
+                    <th>Service</th>
                       <th>Article</th>
                     <th>Quantité</th>
                     <th>Duree de vie</th>
@@ -58,50 +56,44 @@
                 <tbody>
                    <tr
                     class="odd gradeX"
-                    v-for="(BesoinImmo,index) in filtreMatricule"
-                    :key="BesoinImmo.id"
+                    v-for="(DmdImmo,index) in afficheEquipementEnCoursUtilidation"
+                    :key="DmdImmo.id"
                   >
-                  <td>{{BesoinImmo.annee || 'Non renseigné'}}</td>
-    <td
-                      
-                    >{{BesoinImmo.matricule_auteur|| 'Non renseigné'}}</td> 
-                    
+                  <td>{{DmdImmo.annee || 'Non renseigné'}}</td>
+   
                     <td
                       
-                    >{{afficherActeurDepense(BesoinImmo.acteur_id) || 'Non renseigné'}}</td> 
-                    <td
-                      
-                    >{{afficherUniteAdministrative(BesoinImmo.ua_id) || 'Non renseigné'}}</td> 
+                    >{{afficherUniteAdministrative(DmdImmo.ua_id) || 'Non renseigné'}}</td> 
                      <td
                        
-                    >{{afficheUniteZone(BesoinImmo.unitezone_id)  || 'Non renseigné'}}</td> 
+                    >{{afficheService(DmdImmo.service_id)  || 'Non renseigné'}}</td> 
                     
                   
-                      <td>{{afficheFonction(BesoinImmo.fonction_id) || 'Non renseigné'}}</td>
+                     
                      
                        <td 
                       
-                    >{{afficheFamille(BesoinImmo.article_id) || 'Non renseigné'}}</td>
+                    >{{afficheFamille(DmdImmo.article_id) || 'Non renseigné'}}</td>
                       <td 
                       
-                    >{{BesoinImmo.qte || 'Non renseigné'}}</td>
+                    >{{DmdImmo.qte || 'Non renseigné'}}</td>
                       <td 
                       
-                    >{{BesoinImmo.dure_vie || 'Non renseigné'}}</td>
+                    >{{DmdImmo.dure_vie || 'Non renseigné'}}</td>
                       <!-- <td 
                       
-                    >{{afficheEtatImmobilisation(BesoinImmo.etatimmo_id) || 'Non renseigné'}}</td> -->
+                    >{{afficheEtatImmobilisation(DmdImmo.etatimmo_id) || 'Non renseigné'}}</td> -->
                  
-                 <!-- <td>{{BesoinImmo.annee_amortissement || 'Non renseigné'}}</td> -->
+                 <!-- <td>{{DmdImmo.annee_amortissement || 'Non renseigné'}}</td> -->
                  
-                   <td>{{formaterDate(BesoinImmo.date_mise_service) || 'Non renseigné'}}</td>
-                    <td>{{formatageSomme(parseFloat(BesoinImmo.valeurorigine)) || 'Non renseigné'}}</td>
+                   <td>{{formaterDate(DmdImmo.date_mise_service) || 'Non renseigné'}}</td>
+                    <td>{{formatageSomme(parseFloat(DmdImmo.valeurorigine)) || 'Non renseigné'}}</td>
                      <td colspan="2">
                           <button   class="btn btn-info " title="" @click="fonctionAjouterDemande(index)">
                 <span class=""><i class="icon-pencil"></i></span></button>
                     
                      <router-link
-                        :to="{name : 'amortissement', params: {id:BesoinImmo.id}}"
+                        :to="{name : 'AmortissementService', params: {id:DmdImmo.id}}"
                         class="btn btn-default"
                         title="Amortissement"
                       >
@@ -120,27 +112,25 @@
               </table>
             </div>
           </div>
-                            <div id="tab2" class="tab-pane ">
+                            <div id="tab4758" class="tab-pane ">
   <div class="widget-content nopadding" >
-     <div align="right">
+     <!-- <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search1"/>
-              </div>
+              </div> -->
               <table class="table table-bordered table-striped">
                 <thead>
-                 <tr>
+                  <tr>
                      <!-- <th>Type UA</th> -->
                    <th>Année de l'affectation</th>
-                    <th>Matricule</th>
-                    <th>Nom & Prénoms</th>
-                    
+                  
                      <th>Unite administrative</th>
-                    <th>Unite de zone</th>
-                    <th>Fonction</th>
+                   
+                    <th>Service</th>
                       <th>Article</th>
                     <th>Quantité</th>
                     <th>Duree de vie</th>
-                    <th>Etat Immobilisation</th>
+                    <!-- <th>Etat Immobilisation</th> -->
                     <th>Date mise en service</th>
                       <th>Montant</th>
                      <!-- <th>Année de l'amortissement</th> -->
@@ -152,52 +142,44 @@
                 <tbody>
                    <tr
                     class="odd gradeX"
-                    v-for="(BesoinImmo,index) in filtreMaterielAmortis"
-                    :key="BesoinImmo.id"
+                    v-for="(DmdImmo,index) in afficheEquipementAmortie"
+                    :key="DmdImmo.id"
                   >
-                  
-   <td>{{BesoinImmo.annee || 'Non renseigné'}}</td>
-    <td
-                      
-                    >{{BesoinImmo.matricule_auteur|| 'Non renseigné'}}</td> 
-                    
+                  <td>{{DmdImmo.annee || 'Non renseigné'}}</td>
+   
                     <td
                       
-                    >{{afficherActeurDepense(BesoinImmo.acteur_id) || 'Non renseigné'}}</td> 
-                    <td
-                      
-                    >{{afficherUniteAdministrative(BesoinImmo.ua_id) || 'Non renseigné'}}</td> 
+                    >{{afficherUniteAdministrative(DmdImmo.ua_id) || 'Non renseigné'}}</td> 
                      <td
                        
-                    >{{afficheUniteZone(BesoinImmo.unitezone_id)  || 'Non renseigné'}}</td> 
+                    >{{afficheService(DmdImmo.service_id)  || 'Non renseigné'}}</td> 
                     
                   
-                      <td>{{afficheFonction(BesoinImmo.fonction_id) || 'Non renseigné'}}</td>
+                     
                      
                        <td 
                       
-                    >{{afficheFamille(BesoinImmo.article_id) || 'Non renseigné'}}</td>
+                    >{{afficheFamille(DmdImmo.article_id) || 'Non renseigné'}}</td>
                       <td 
                       
-                    >{{BesoinImmo.qte || 'Non renseigné'}}</td>
+                    >{{DmdImmo.qte || 'Non renseigné'}}</td>
                       <td 
                       
-                    >{{BesoinImmo.dure_vie || 'Non renseigné'}}</td>
-                      <td 
+                    >{{DmdImmo.dure_vie || 'Non renseigné'}}</td>
+                      <!-- <td 
                       
-                    >{{afficheEtatImmobilisation(BesoinImmo.etatimmo_id) || 'Non renseigné'}}</td>
+                    >{{afficheEtatImmobilisation(DmdImmo.etatimmo_id) || 'Non renseigné'}}</td> -->
                  
-                 <!-- <td>{{BesoinImmo.annee_amortissement || 'Non renseigné'}}</td> -->
+                 <!-- <td>{{DmdImmo.annee_amortissement || 'Non renseigné'}}</td> -->
                  
-                   <td style="text-align: center;font-size:14px;font-weight:bold;">{{formaterDate(BesoinImmo.date_mise_service) || 'Non renseigné'}}</td>
-                    <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{formatageSomme(BesoinImmo.valeurorigine) || 'Non renseigné'}}</td>
-                     <td>
-                          <button   class="btn btn-info " title="" @click="afficheDemandeDeMateriel(index)">
+                   <td>{{formaterDate(DmdImmo.date_mise_service) || 'Non renseigné'}}</td>
+                    <td>{{formatageSomme(parseFloat(DmdImmo.valeurorigine)) || 'Non renseigné'}}</td>
+                     <td colspan="2">
+                          <button   class="btn btn-info " title="" @click="fonctionAjouterDemande(index)">
                 <span class=""><i class="icon-pencil"></i></span></button>
                     
-                    
                      <router-link
-                        :to="{name : 'amortissement', params: {id:BesoinImmo.id}}"
+                        :to="{name : 'AmortissementService', params: {id:DmdImmo.id}}"
                         class="btn btn-default"
                         title="Amortissement"
                       >
@@ -205,6 +187,7 @@
                           <i class="icon  icon-plus"></i>
                         </span>
                       </router-link>
+                    
                      </td>
                     
                     
@@ -218,10 +201,10 @@
         </div>
       </div>
       
-        <!-- <fab :actions="fabActions" @cache="afficherModalAjouterBesoinImmobilisation" main-icon="apps" bg-color="green"></fab>
+        <!-- <fab :actions="fabActions" @cache="afficherModalAjouterDmdImmobilisation" main-icon="apps" bg-color="green"></fab>
     <notifications  />
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterBesoinImmobilisation()">Open</button>
+     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterDmdImmobilisation()">Open</button>
  
   -->
  
@@ -241,7 +224,7 @@
 
 
 
-<div id="exampleModal" class="modal hide taillemodalFormulaire">
+<div id="demandeService" class="modal hide taillemodalFormulaire">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Formulaire de damande de matériel</h3>
@@ -256,7 +239,7 @@
                   <input
                     type="text"
                     readonly
-                     :value="editDemande.annee"
+                     v-model="editDemande.annee"
                     class="span12"
                    
                    
@@ -279,14 +262,14 @@
                 </div>
               </div>
            </td>
-<td>
+        <td>
      <div class="control-group">
-                <label class="control-label">Unite de zone</label>
+                <label class="control-label">Service</label>
                 <div class="controls">
                   <input
                     type="text"
                     readonly
-                    :value="afficheUniteZone(editDemande.unitezone_id)"
+                     :value="afficheService(editDemande.service_id)"
                     class="span12"
                    
                    
@@ -298,49 +281,9 @@
            
           </tr>
           <tr>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Matricule</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    readonly
-                     :value="afficherMatriculeActeurDepense(editDemande.acteur_id)"
-                    class="span12"
-                  />
-                </div>
-              </div>
-            </td>
-            <td colspan="">
-              <div class="control-group">
-                <label class="control-label">Nom &&  Prénoms</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    readonly
-                     :value="afficherActeurDepense(editDemande.acteur_id)"
-                    class="span12"
-                   
-                   
-                  />
-                </div>
-              </div>
-            </td>
-          <td>
-     <div class="control-group">
-                <label class="control-label">Fonction</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    readonly
-                     :value="afficheFonction(editDemande.fonction_id)"
-                    class="span12"
-                   
-                   
-                  />
-                </div>
-              </div>
-</td>
+          
+       
+  
           </tr>
           <tr>
            
@@ -441,7 +384,7 @@
 
 
 
-<div id="exampleModalConfirmation" class="modal hide">
+<div id="demandeServiceConfirmation" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Confirmation de la Demande</h3>
@@ -472,10 +415,10 @@
     <!-- Default Light Table -->
  
 
-    <!-- <fab :actions="fabActions" @cache="afficherModalAjouterBesoinImmobilisation" main-icon="apps" bg-color="green"></fab> -->
+    <!-- <fab :actions="fabActions" @cache="afficherModalAjouterDmdImmobilisation" main-icon="apps" bg-color="green"></fab> -->
     <notifications  />
       <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterBesoinImmobilisation()">Open</button>
+     <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterDmdImmobilisation()">Open</button>
   </div>
 </template>
   
@@ -536,7 +479,7 @@ ua_id: "",
         motif_ua:"0",
         qterealise:"0"
       },
-      // editBesoinImmo: {
+      // editDmdImmo: {
       //   uniteadmin_id: "",
       //   famille_id: "",
       //   epuipement_id: "",
@@ -557,13 +500,13 @@ cause_demande:""
     };
   },
 // created() {
-//     this.formData = this.filtre_besoinImmo.find(
-//       BesoinImmo => BesoinImmo.id == this.$route.params.id
+//     this.formData = this.filtre_DmdImmo.find(
+//       DmdImmo => DmdImmo.id == this.$route.params.id
 //     )
 // },
 created() {
-    this.formData = this.historiqueAffectation.find(
-      BesoinImmo => BesoinImmo.id == this.$route.params.id
+    this.formData = this.historiqueAffectationService.find(
+      DmdImmo => DmdImmo.id == this.$route.params.id
     );
 
     //console.log(this.$router);
@@ -594,7 +537,7 @@ created() {
       "nbreQuantiteDemande",
       "nbreQuantiteNonCouvert",
       "nbreQuantiteCouvert",
-      "historiqueAffectation",
+      "historiqueAffectationService",
       "EtatImmobilisations"
     ]),
      ...mapGetters("uniteadministrative", ["uniteAdministratives","directions","servicesua","uniteZones"]),
@@ -620,41 +563,41 @@ created() {
     
     // return cur_day + " " + hours + ":" + minutes + ":" + seconds;
    },
-    filtreMatricule() {
-      const st = this.search.toLowerCase();
-      return this.afficheEquipementEnCoursUtilidation.filter(type => {
-        return (
-          type.matricule_auteur.toLowerCase().includes(st) 
-        );
-      });
-    },
+    // afficheEquipementEnCoursUtilidation() {
+    //   const st = this.search.toLowerCase();
+    //   return this.afficheEquipementEnCoursUtilidation.filter(type => {
+    //     return (
+    //       type.matricule_auteur.toLowerCase().includes(st) 
+    //     );
+    //   });
+    // },
 
-filtreMaterielAmortis() {
-      const st = this.search1.toLowerCase();
-      return this.afficheEquipementAmortie.filter(type => {
-        return (
-          type.matricule_auteur.toLowerCase().includes(st) 
-        );
-      });
-    },
+// filtreMaterielAmortis() {
+//       const st = this.search1.toLowerCase();
+//       return this.afficheEquipementAmortie.filter(type => {
+//         return (
+//           type.matricule_auteur.toLowerCase().includes(st) 
+//         );
+//       });
+//     },
     afficheNombreEquipementEnCoursUtilidation() {
    
-    return this.historiqueAffectation.filter(qtreel => qtreel.annee_amortissement >= this.nombreJourTraitementCalucle).length;     
+    return this.historiqueAffectationService.filter(qtreel => qtreel.annee_amortissement >= this.nombreJourTraitementCalucle).length;     
       
     },
     afficheNombreEquipementAmortie() {
    
-    return this.historiqueAffectation.filter(qtreel => qtreel.annee_amortissement < this.nombreJourTraitementCalucle).length;     
+    return this.historiqueAffectationService.filter(qtreel => qtreel.annee_amortissement < this.nombreJourTraitementCalucle).length;     
       
     },
 afficheEquipementEnCoursUtilidation() {
    
-    return this.historiqueAffectation.filter(qtreel => qtreel.annee_amortissement >= this.nombreJourTraitementCalucle);     
+    return this.historiqueAffectationService.filter(qtreel => qtreel.annee_amortissement >= this.nombreJourTraitementCalucle);     
       
     },
     afficheEquipementAmortie() {
    
-    return this.historiqueAffectation.filter(qtreel => qtreel.annee_amortissement < this.nombreJourTraitementCalucle);     
+    return this.historiqueAffectationService.filter(qtreel => qtreel.annee_amortissement < this.nombreJourTraitementCalucle);     
       
     },
 afficheEtatImmobilisation() {
@@ -686,10 +629,10 @@ afficheFamille() {
         }
       };
     },
-afficheFonction() {
+afficheService() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.fonctions.find(qtreel => qtreel.id == id);
+           const qtereel = this.services.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.libelle
@@ -800,7 +743,7 @@ qtedemande() {
     },
     qtedemandemodifier() {
       
-      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.familleArt.id == this.editBesoinImmo.famille_id);
+      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.familleArt.id == this.editDmdImmo.famille_id);
 
       if (norme) {
         return norme.normedmd;
@@ -809,7 +752,7 @@ qtedemande() {
     },
 
     totalNormemodifier() {
-      const val = parseFloat(this.qtedemandemodifier) + parseFloat(this.editBesoinImmo.quantite);
+      const val = parseFloat(this.qtedemandemodifier) + parseFloat(this.editDmdImmo.quantite);
       return parseFloat(val).toFixed(0);
     },
 totalNorme() {
@@ -821,7 +764,7 @@ totalNorme() {
 
     normeequipementModifier() {
       
-      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.familleArt.id == this.editBesoinImmo.famille_id);
+      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.familleArt.id == this.editDmdImmo.famille_id);
 
       if (norme) {
         return norme.quantite;
@@ -839,7 +782,7 @@ totalNorme() {
     },
      dureVieEquipementModifier() {
       
-      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.familleArt.id == this.editBesoinImmo.famille_id);
+      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.familleArt.id == this.editDmdImmo.famille_id);
 
       if (norme) {
         return norme.dureviearticle;
@@ -859,7 +802,7 @@ totalNorme() {
  articleDynamiquesModifier() {
       return id => {
         if (id != null && id != "") {
-          return this.getPersoStock.filter(element => element.famill_id == this.editBesoinImmo.famille_id);
+          return this.getPersoStock.filter(element => element.famill_id == this.editDmdImmo.famille_id);
         }
       };
     },
@@ -868,7 +811,7 @@ Historqte() {
       return parseInt(val).toFixed(0);
     },
 HistorqteModifier() {
-      const val = parseInt(this.editBesoinImmo.quantite);
+      const val = parseInt(this.editDmdImmo.quantite);
       return parseInt(val).toFixed(0);
     },
 
@@ -885,7 +828,7 @@ return 0
   },
   totalfamilleModifier(){
   
-    const montant = this.getAfficheArticle.filter(element => element.famille_id == this.editBesoinImmo.famille_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(2); 
+    const montant = this.getAfficheArticle.filter(element => element.famille_id == this.editDmdImmo.famille_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(2); 
     
     if(montant) {
 return montant
@@ -909,7 +852,7 @@ return 0
 
 nombreArticleModifier(){
   
-    const montant = this.getAfficheArticle.filter(element => element.famille_id == this.editBesoinImmo.famille_id).length; 
+    const montant = this.getAfficheArticle.filter(element => element.famille_id == this.editDmdImmo.famille_id).length; 
     
     if(montant) {
 return montant
@@ -932,7 +875,7 @@ montantTotal() {
       return parseFloat(val).toFixed(0);
     },
 montantTotalModifier() {
-      const val = parseFloat(this.editBesoinImmo.quantite) * parseFloat(this.coutMoyenModifier);
+      const val = parseFloat(this.editDmdImmo.quantite) * parseFloat(this.coutMoyenModifier);
       return parseFloat(val).toFixed(0);
     },
 
@@ -958,7 +901,7 @@ quantiteEnstockid() {
     },
 quantiteEnstockidModifier() {
       
-      const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == this.editBesoinImmo.article_id);
+      const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == this.editDmdImmo.article_id);
 
       if (norme) {
         return norme.id;
@@ -968,7 +911,7 @@ quantiteEnstockidModifier() {
 
  quantiteEnstockModifier() {
       
-      const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == this.editBesoinImmo.article_id);
+      const norme = this.getPersoStock.find(normeEquipe => normeEquipe.AfficheArticle.id == this.editDmdImmo.article_id);
 
       if (norme) {
         return norme.quantitestock;
@@ -999,7 +942,7 @@ quantiteEnstockidModifier() {
     },
      normeEqupmodifier() {
       
-      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.familleArt.id == this.editBesoinImmo.famille_id);
+      const norme = this.getPersoListeDesNorme.find(normeEquipe => normeEquipe.familleArt.id == this.editDmdImmo.famille_id);
 
       if (norme) {
         return norme.id;
@@ -1031,23 +974,23 @@ quantiteEnstockidModifier() {
 
 
      afficheCauseDemande(index){
-       this.editDemande = this.historiqueAffectation[index];
+       this.editDemande = this.historiqueAffectationService[index];
     
 
-       this.$("#exampleModalConfirmation").modal({
+       this.$("#demandeServiceConfirmation").modal({
         backdrop: "static",
         keyboard: false
       });
      },
 afficheDemandeDeMateriel(index) {
-       this.$("#exampleModal").modal({
+       this.$("#demandeService").modal({
         backdrop: "static",
         keyboard: false
 
         
       });
   
-       this.editDemande = this.historiqueAffectation[index];
+       this.editDemande = this.historiqueAffectationService[index];
     },
 
 
@@ -1055,14 +998,14 @@ fonctionAjouterDemande(index){
 
 if ( confirm( "Voulez-vous continuer la demande svp?") ) {
    
-     this.$("#exampleModal").modal({
+     this.$("#demandeService").modal({
         backdrop: "static",
         keyboard: false
 
         
       });
   
-       this.editDemande = this.historiqueAffectation[index];
+       this.editDemande = this.historiqueAffectationService[index];
 } else {
     // Code à éxécuter si l'utilisateur clique sur "Annuler" 
 }
@@ -1084,18 +1027,17 @@ AjouterDemandeMateriel(){
       ...this.Demande,
 uniteadmin_id :this.editDemande.ua_id,
  
-  fonction_id :this.editDemande.fonction_id,
+  service_id :this.editDemande.service_id,
   article_id :this.editDemande.article_id,
   quantite :this.editDemande.qte,
   
     dure_vie :this.editDemande.dure_vie,
-    acteur_id :this.editDemande.acteur_id,
-    uniteZone_id :this.editDemande.unitezone_id,
+    
     annee_budgetaire:this.editDemande.annee
     	
     }
     this.ajouterDemandeMateriel(nouveauDemade)
-    this.$("#exampleModal").modal('hide');
+    this.$("#demandeService").modal('hide');
   }
 },
 

@@ -202,7 +202,7 @@
                                                         <select v-model="formData.service_id" :disabled="verrouilleService">
                                                             <option></option>
                                                             <option v-for="item in afficheService(formData.unite_administrative_id)" :key="item.id" :value="item.id">
-                                                                {{afficheServicelibelle(item.libelle)}}
+                                                                {{afficheServicelibelle(item.serviceua_id)}}
                                                             </option>
 
                                                         </select>

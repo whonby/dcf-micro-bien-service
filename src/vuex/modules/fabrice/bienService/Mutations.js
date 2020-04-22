@@ -1,6 +1,7 @@
 export const GET_ALL_SELECTIONNER_CANDIDAT = (state, tableau_candidat_selectionner) =>{
     state.selectionner_candidats = tableau_candidat_selectionner
 }
+AJOUTER_PV
 
 // add candidat selectionner
 
@@ -64,6 +65,8 @@ export const GET_ALL_RAPPORTJUGEMENT = (state, tableau_rapport_ouverture) =>{
 
 export const AJOUTER_RAPPORT_OUVERTURE = (state, elementAjouter) => {
     state.rapportDocuments.unshift(elementAjouter)
+    state.selectionner_candidats=[]
+    
 }
 
 // update all document
@@ -80,6 +83,7 @@ export const MODIFIER_RAPPORT_OUVERTURE = (state, elementModif)=>{
 
 export const SUPPRIMER_RAPPORT_OUVERTURE = (state, id)=> {
     state.rapportDocuments = state.rapportDocuments.filter(prest => prest.id !=id)
+    state.selectionner_candidats=[]
 }
 
 

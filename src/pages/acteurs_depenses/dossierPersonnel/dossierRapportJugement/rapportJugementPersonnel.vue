@@ -9,7 +9,7 @@
                                  <table class="table table-bordered table-striped"  v-if="macheid">
                                             <thead>
                                             <tr>
-                                                
+                                              <th>Reference Pv</th>  
                                          <th>Date rapport jugement</th> 
                                                 <th>Fichier</th>
                                                 <th>Action</th>
@@ -20,8 +20,11 @@
                          <tr class="odd gradeX" v-for="(rapport,index) in listeRapport(macheid)"
                         :key="rapport.id">
 
+                            <td @click="afficherModalRapportJugement(index)">
+                            {{rapport.reference|| 'Non renseigné'}}</td> 
+
                          <td @click="afficherModalRapportJugement(index)">
-                            {{formaterDate(rapport.date_rapport_jugement)|| 'Non renseigné'}}</td> 
+                            {{formaterDate(rapport.date_rapport_jugement)|| 'Non renseigné'}}</td>
                       
                         <td @click="afficherModalRapportJugement(index)">
                             <a v-if="rapport.fichier" :href="rapport.fichier" class="btn btn-default" target="_blank">
@@ -95,7 +98,7 @@
                       <h4 class="text-center">ATTRIBUTION DU CONTRAT</h4>
                       <div>
                           Suivant les résultats de l’évaluation des offres présentés par le rapporteur dans le
-                          tableau ci-dessus, il apparaît que le soumissionnaire <b v-if="resultaAnalysePv.length>0">{{}}</b> propose
+                          tableau ci-dessus, il apparaît que le soumissionnaire <b v-if="resultaAnalysePv.length>0"></b> propose
                           l’offre conforme la moins-disante.
                       </div>
                       <h4 class="text-center">TABLEAU RECAPITULATIF DE LA COMPARAISON DES OFFRES</h4>
@@ -113,7 +116,7 @@
                               <!-- <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                                   {{anoBailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td> -->
                               <td >
-                                  {{afficherNomCandidat(item.candidat_personnel_id) || 'Non renseigné'}}</td>
+                                  {{afficherNomCandidat(item.candidat_selection_id) || 'Non renseigné'}}</td>
                               <td >
                                   {{item.note_analyse || 'Non renseigné'}}</td>
                               <td >
@@ -130,8 +133,9 @@
                           </tbody>
                           
                       </table>
-                      <h4> super, le classement effectué avec success
-                               donc nous  passerons au recrutement ,en prenant le premier mercie !</h4>
+                      <div> super, le classement effectué avec success!
+                               donc nous  passerons à l'avis d'ANO Bailleur, si l'avis est "Non Objection" alors,
+                               les candidats passerons a l'attribution pour etre recruter !</div>
                   </div>
                   <div class="modal-footer">
 
@@ -201,17 +205,23 @@ export default {
             reference_pv:"",
             formJugement:{
                  date_rapport_jugement:"",
+                 attribue:"1",
+                 appel_offre_id:"",
                  fichier:"",
                 difference_personnel_bienService:"personnel",
-                marche_id:""
+                marche_id:"",
+                //candidat_selection_id:""
 
                 },
             reference:"",
             editRapport:{
               date_rapport_jugement:"",
+               attribue:"1",
+               appel_offre_id:"",
               fichier:"",
               difference_personnel_bienService:"personnel",
-              marche_id:""
+              marche_id:"",
+             // candidat_selection_id:""
             },
             resultaAnalysePv:[],
             imagePDF:"",
@@ -231,7 +241,8 @@ export default {
     },
     computed: {
 
-            ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,"gettersPersonnaliserRapportJugement",
+            ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,"appelOffres",
+            "gettersPersonnaliserRapportJugement","getterAnalyseDossiers",
             "gettersCotations","rapportDocuments", 'listeJugementPersonnel','selectionner_candidats']),
              ...mapGetters('personnelUA', ['acteur_depenses','dossierPersonnels']),
 
@@ -249,10 +260,11 @@ export default {
 //                     }
 //                 }
 //             },
+
  listeRapport() {
       return macheid => {
         if (macheid != null && macheid != "") {
-          return this.rapportDocuments.filter(element => element.marche_id == macheid);
+          return this.rapportDocuments.filter(element => element.marche_id == macheid && element.date_rapport_ouverture==null);
         }
       };
     },
@@ -260,7 +272,7 @@ export default {
  afficherCandidatSelectionnerAtrribue() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.gettersPersonnaliserRapportJugement.find(qtreel => qtreel.id == id);
+           const qtereel = this.getterAnalyseDossiers.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.attribue;
@@ -270,6 +282,36 @@ export default {
       };
     },
 
+// afficher ID du candidat selectionner 
+
+// affichierCandidatSelectionId() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const objetPourRecureperId = this.selectionner_candidats.find(objetPourRecureperId => objetPourRecureperId.marche_id == id);
+
+//       if (objetPourRecureperId) {
+//         return objetPourRecureperId.id;
+//       }
+//       return 0
+//         }
+//       };
+//     },
+
+
+// afficher ID de avis de re rutement 
+
+affichierAppelOffreid() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
     // afficher le nom des candidats
 
     afficherNomCandidat(){
@@ -289,7 +331,7 @@ export default {
         },
     methods:{
         ...mapActions('bienService',['supprimerRapportJugement',
-        'ajouterRapportJugement','modifierRapportJugement']),
+        'ajouterRapportJugement','modifierRapportJugement',"getRapportJugement"]),
 
 
              OnchangeFichier(e) {
@@ -327,6 +369,9 @@ export default {
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
                  formData.append('date_rapport_jugement', this.formJugement.date_rapport_jugement);
                formData.append('marche_id', this.macheid);
+               formData.append('attribue', this.formJugement.attribue);
+                formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
+              //formData.append('candidat_selection_id', this.affichierCandidatSelectionId(this.macheid));
                formData.append('difference_personnel_bienService',this.formJugement.difference_personnel_bienService)
                 let config = {
                     header : {
@@ -334,6 +379,7 @@ export default {
                     }
                 }
                this.ajouterRapportJugement(formData, config)
+               this.getRapportJugement()
                this.formJugement ={
                  difference_personnel_bienService:"personnel",
                  date_rapport_jugement:""
@@ -348,6 +394,9 @@ export default {
                  const formData = new FormData();
                  formData.append('date_rapport_jugement', this.editRapport.date_rapport_jugement);
                  formData.append('marche_id', this.macheid);
+                  formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
+                 formData.append('attribue',this.editRapport.attribue);
+                // formData.append('candidat_selection_id', this.affichierCandidatSelectionId(this.macheid));
                  formData.append('difference_personnel_bienService', this.difference_personnel_bienService)
                 formData.append('id', this.editRapport.id);
                
@@ -369,6 +418,7 @@ export default {
            formaterDate(date){
                return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
            },
+
 
 
 
