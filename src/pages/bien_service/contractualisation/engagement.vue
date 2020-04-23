@@ -1,17 +1,4 @@
-idBudgetaire
-montantCumuler
-NumeroFournisseur
-afficherObjetEngagement1
-afficherCompteUtilisateur
-CodeGdeNatureDep
-sources_financements
-afficheligneEconomiqueBudgetaire
-montantMarcheAvecAvenant
-dotationInite
-sommeEgagementLigne
-afficherUniteAdmin
-montantCumulerMandatEngagement
-montantDisponibleBudgetMandatEngagement
+ 
 <template>
   	<div>
 
@@ -22,7 +9,7 @@ montantDisponibleBudgetMandatEngagement
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>DETAIL  MARCHE</h5>
+              <h5>DETAIL  MARCHE </h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -235,7 +222,268 @@ montantDisponibleBudgetMandatEngagement
                     </div> -->
                     
                                 <table class="table table-bordered table-striped" v-if="detail_marche">
+                                    <thead>
+                                    <tr>
+
+                                        <th>Année</th>
+                                          <th title="">N°bon manuel</th>
+                                <th title="">N°demande</th>
+                           
+                                <!-- <th title="">Adresse fournisseur</th> -->
+                               
+                                <th title="">Montant Autorisé</th>
+                                
+                                  <th title="">Disponible</th>
+                                  <!-- <th>Date paiement</th> -->
+                                  <th>Imputation budgetaire</th>
+                                
+                                <!-- <th>Service béneficiaire</th> -->
+                                <th>Observation du Emmetteur</th>
+                                
+                                <th>Observation Controleur financier</th>
+                                <th>Observation du ordonnateur</th>
+                                <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
                                     
+                <tr 
+                    class="odd gradeX"
+                    v-for="(liquida, index) in afficheMarcheLiquidation(detail_marche.id)"
+                    :key="liquida.id"
+                  >
+                    <template v-if="validationRealiteServiceFait(liquida.marche_id) != 1">
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.exo_id || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.numero_bon_manuel || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.numero_demande || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{afficheMontantAutorise(liquida.marche_id) || 0}}</td>
+                     <td @dblclick="afficherModalModificationLiquidation(index)">{{sommeEgagementLigne(liquida.marche_id) || 0 }}</td> 
+                     
+                     
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.imputation_budgetaire || 'Non renseigné'}}</td>
+                   
+                     <td>
+                        <button v-if="liquida.decision_emetteur == 1"  class="btn  btn-success" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      <span    >Visé avec Observation</span>
+                      
+                      </button>
+                       <button v-else-if="liquida.decision_emetteur == 2" class="btn  btn-warning" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="liquida.decision_emetteur == 3" class="btn  btn-danger" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                   
+                  <td v-if="liquida.decision_emetteur == 1">
+                        <button v-if="liquida.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                    <span    >Visé avec Observation</span>
+                      
+                      </button>
+                       <button v-else-if="liquida.decision_controleur_financier == 2" class="btn  btn-warning" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="liquida.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                      <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                      
+                    </td>
+                     <td v-else>
+                        <h1 style="font-size:12px;color:red;">Désactivé  </h1>
+                    </td>
+                     <td v-if="liquida.decision_controleur_financier == 1">
+                        <button v-if="liquida.decision_ordonnateur == 1"  class="btn  btn-success" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      <span    >Visé avec Observation</span>
+                      
+                      </button>
+                       <button v-else-if="liquida.decision_ordonnateur == 2" class="btn  btn-warning" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="liquida.decision_ordonnateur == 3" class="btn  btn-danger" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                      
+                    </td>
+                    <td v-else>
+                        <h1 style="font-size:12px;color:red;">Désactivé  </h1>
+                    </td>
+                    
+                     </template>
+                      <template v-else>
+                <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.exo_id || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.numero_bon_manuel || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.numero_demande || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{afficheMontantAutorise(liquida.marche_id) || 0}}</td>
+                     <td @dblclick="afficherModalModificationLiquidation(index)">{{sommeEgagementLigne(liquida.marche_id) || 0 }}</td> 
+                     
+                     
+                    <td @dblclick="afficherModalModificationLiquidation(index)">{{liquida.imputation_budgetaire || 'Non renseigné'}}</td>
+                   
+                     <td>
+                        <button v-if="liquida.decision_emetteur == 1"  class="btn  btn-success" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      <span    >Visé avec Observation</span>
+                      
+                      </button>
+                       <button v-else-if="liquida.decision_emetteur == 2" class="btn  btn-warning" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="liquida.decision_emetteur == 3" class="btn  btn-danger" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationEmetteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                   
+                  <td v-if="liquida.decision_emetteur == 1">
+                        <button v-if="liquida.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                    <span    >Visé avec Observation</span>
+                      
+                      </button>
+                       <button v-else-if="liquida.decision_controleur_financier == 2" class="btn  btn-warning" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="liquida.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                      <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationControlleurFinancierLiquidation(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                      
+                    </td>
+                     <td v-else>
+                        <h1 style="font-size:12px;color:red;">Désactivé  </h1>
+                    </td>
+                     <td v-if="liquida.decision_controleur_financier == 1">
+                        <button v-if="liquida.decision_ordonnateur == 1"  class="btn  btn-success" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      <span    >Visé avec Observation</span>
+                      
+                      </button>
+                       <button v-else-if="liquida.decision_ordonnateur == 2" class="btn  btn-warning" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="liquida.decision_ordonnateur == 3" class="btn  btn-danger" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationOrdonnanteurLiquidation(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                      
+                    </td>
+                    <td v-else>
+                        <h1 style="font-size:12px;color:red;">Désactivé  </h1>
+                    </td>
+                
+                     </template>
+                     <td>
+                        <!-- <router-link :to="{ name: 'DetailEngagement', params: {id_detail_engagement:realiteService.id}}"
+                class="btn btn-default " title="Detail Engagement">
+                  <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link>  -->
+                    <button v-if="liquida.decision_ordonnateur == 1 && validationRealiteServiceFait(liquida.marche_id) == 1" class="btn " @click="afficherModalAjouterMandatApresLiquidation(index)" title="Ajouter Mandat">
+                        <span>
+                          <i class="icon icon-book"></i>
+                        </span>
+                      </button>
+                      <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Mandat">
+                        <span>
+                          <i class="icon icon-book"></i>
+                        </span>
+                      </button> -->
+                      <button class="btn btn-danger"  @click="supprimerLiquidation(liquida.id)">
+                        <span>
+                          <i class="icon icon-trash"></i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+               
+                                    </tbody>
                                 </table>
                            
 
@@ -268,7 +516,209 @@ montantDisponibleBudgetMandatEngagement
 
 
                            <div id="tab15550" class="tab-pane">
-                                 
+                                   <div class="span4"></div>
+                                <div class="span4"></div>
+                                <!-- <div class="span4" align="right"    >
+                                   
+                                       <button class="btn btn-success" @click="afficherModalAjouter" >Demande Engagement</button>
+                                         
+  
+                    </div> -->
+                    
+                                <table class="table table-bordered table-striped" v-if="detail_marche">
+                                    <thead>
+                                    <tr>
+
+                                        <th>Année</th>
+                                         <th title="">Section</th>
+                              
+                                 <th title="">Fournisseur</th>
+                                <th title="">N°facture</th>
+                                 <th>Date facture</th>
+                                  <th>Imputation</th>
+                                <th>Montant</th>
+                                <!-- <th>Service béneficiaire</th> -->
+                                <th title="Observation service beneficiaire">Observation S-B</th>
+                                <th title="Observation Controleur financier">Observation CF</th>
+                                <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr 
+                    class="odd gradeX"
+                    v-for="(realiteService, index) in afficheMarcheRealiteServiceFait(detail_marche.id)"
+                    :key="realiteService.id"
+                  >
+                    <template v-if="validationDeEngagement(realiteService.marche_id) != 1">
+                    <td >{{realiteService.exercice_budget || 'Non renseigné'}}</td>
+                    <td >{{afficherSection(realiteService.section_id) || 'Non renseigné'}}</td>
+                    <td >{{afficheNomFournisseur(afficheidFournisseurFacture(realiteService.facture_id)) || 'Non renseigné'}}</td>
+                    <td >{{afficheNumeroFacture(realiteService.facture_id) || 'Non renseigné'}}</td>
+                     <td >{{afficheDateFacture(realiteService.facture_id) || 'Non renseigné'}}</td> 
+                     
+                    <td >{{detail_marche.imputation  || 'Non renseigné'}}</td>
+                     <td >{{formatageSomme(parseFloat(realiteService.montant)) || 'Non renseigné'}}</td>
+                     <td >
+                        <button v-if="realiteService.decision_service_beneficiaire == 1"  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="realiteService.decision_service_beneficiaire == 2" class="btn  btn-warning" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="realiteService.decision_service_beneficiaire == 3" class="btn  btn-danger" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                   
+                  <td v-if="realiteService.decision_service_beneficiaire == 1">
+                        <button v-if="realiteService.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="realiteService.decision_controleur_financier == 2" class="btn  btn-warning" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="realiteService.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                      
+                    </td>
+                    <td v-else>
+                        <h1 style="font-size:12px;color:red;text-align:center">Désactivé  </h1>
+                    </td>
+                      </template>
+                      <template v-else>
+                  <td >{{realiteService.exercice_budget || 'Non renseigné'}}</td>
+                    <td >{{afficherSection(realiteService.section_id) || 'Non renseigné'}}</td>
+                    <td >{{afficheNomFournisseur(afficheidFournisseurFacture(realiteService.facture_id)) || 'Non renseigné'}}</td>
+                    <td >{{afficheNumeroFacture(realiteService.facture_id) || 'Non renseigné'}}</td>
+                     <td >{{afficheDateFacture(realiteService.facture_id) || 'Non renseigné'}}</td> 
+                     
+                    <td >{{detail_marche.imputation  || 'Non renseigné'}}</td>
+                     <td >{{formatageSomme(parseFloat(realiteService.montant)) || 'Non renseigné'}}</td>
+                     <td>
+                        <button v-if="realiteService.decision_service_beneficiaire == 1"  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="realiteService.decision_service_beneficiaire == 2" class="btn  btn-warning" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="realiteService.decision_service_beneficiaire == 3" class="btn  btn-danger" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                   
+                  <td v-if="realiteService.decision_service_beneficiaire == 1">
+                        <button v-if="realiteService.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="realiteService.decision_controleur_financier == 2" class="btn  btn-warning" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="realiteService.decision_controleur_financier == 3" class="btn  btn-danger" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationControlleurFinancier(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                      
+                    </td>
+                     <td v-else>
+                        <h1 style="font-size:12px;color:red;text-align:center">Désactivé  </h1>
+                    </td>
+                    
+               
+                     </template> 
+                     <td>
+                        <router-link :to="{ name: 'detailRealiteServiceFait', params: {id_detailRealiteServiceFait:realiteService.id}}"
+                class="btn btn-default " title="Detail Realite service fait">
+                  <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link> 
+                    <!-- <button v-if="realiteService.decision_controleur_financier == 1 && validationDeEngagement(realiteService.marche_id) == 1" class="btn " @click="afficherModalAjouterLiquidation(index)" title="Ajouter Liquidatation">
+                        <span>
+                          <i class="icon icon-book"></i>
+                        </span>
+                      </button> -->
+                      <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Mandat">
+                        <span>
+                          <i class="icon icon-book"></i>
+                        </span>
+                      </button> -->
+                      <button  class="btn btn-danger" @click="supprimerRealiteServiceFait(realiteService.id)">
+                        <span>
+                          <i class="icon icon-trash"></i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+               
+                                    </tbody>
+                                </table>
+                           
 
                            
 
@@ -290,20 +740,222 @@ montantDisponibleBudgetMandatEngagement
 
 
                             <div id="tab10" class="tab-pane">
-                
-<engagementEx :macheid="detail_marche.id"></engagementEx>
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <!-- <div class="span4" align="right"    >
+                                   
+                                       <button class="btn btn-success" @click="afficherModalAjouter" >Demande Engagement</button>
+                                         
+  
+                    </div> -->
+                    
+                                <table class="table table-bordered table-striped" v-if="detail_marche">
+                                    <thead>
+                                    <tr>
+
+                                        <th>Année</th>
+                                          <th title="numero de  demande engagement">N°demande engagement</th>
+                                <th title="numero de bordereau">N°bordereau engagement</th>
+                                 <th title="numero de l'engagement">N°engagement</th>
+                                <th title="programme/dotation">Prog/Dotat</th>
+                                <!-- <th>Action Programmatique</th>
+                                <th>Activite</th> -->
+                                <th title="unite administrative">Ua</th>
+                                 <th>Imputation</th>
+                                  <th title="ligne budgetaire">Section</th>
+                                  <th>Montant</th>
+                                  <th>Décision CF</th>
+                                <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr 
+                    class="odd gradeX"
+                    v-for="(Engage, index) in afficheMarcheEngage(detail_marche.id)"
+                    :key="Engage.id"
+                  >
+                    <template v-if="Engage.decision_cf == 1">
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.exercice_budget || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_demande_engage || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_bordereau || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_engage || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierEngagement(index)">{{afficheProgrammeDot(Engage.programme_id) || 'Non renseigné'}}</td> 
+                     <!-- <td @dblclick="afficherModalModifierEngagement(index)">{{afficheActionProg(Engage.action_id) || 'Non renseigné'}}</td> 
+                      <td @dblclick="afficherModalModifierEngagement(index)">{{afficheAtiviteProg(Engage.activite_id) || 'Non renseigné'}}</td> -->
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{uaMandat(Engage.ua_id) || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.budget_general_id || 'Non renseigné'}}</td>
+                     
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{ CodeSection(Engage.section_id) || 'Non renseigné'}}</td> 
+                  <td @dblclick="afficherModalModifierEngagement(index)">{{formatageSomme(parseFloat(Engage.total_general)) || 0}}</td>
+                  <td>
+                        <button v-if="Engage.decision_cf == 1"  class="btn  btn-success" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="Engage.decision_cf == 2" class="btn  btn-warning" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="Engage.decision_cf == 3" class="btn  btn-danger" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                     </template>
+                      <template v-else>
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.exercice_budget || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_demande_engage || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_bordereau || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.numero_engage || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierEngagement(index)">{{afficheProgrammeDot(Engage.programme_id) || 'Non renseigné'}}</td> 
+                     <!-- <td @dblclick="afficherModalModifierEngagement(index)">{{afficheActionProg(Engage.action_id)|| 'Non renseigné'}}</td> 
+                      <td @dblclick="afficherModalModifierEngagement(index)">{{afficheAtiviteProg(Engage.activite_id) || 'Non renseigné'}}</td> -->
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{uaMandat(Engage.ua_id) || 'Non renseigné'}}</td>
+                     <td @dblclick="afficherModalModifierEngagement(index)">{{Engage.budget_general_id || 'Non renseigné'}}</td>
+                     
+                    <td @dblclick="afficherModalModifierEngagement(index)">{{CodeSection(Engage.section_id) || 'Non renseigné'}}</td> 
+                  <td @dblclick="afficherModalModifierEngagement(index)">{{formatageSomme(parseFloat(Engage.total_general)) || 0}}</td>
+                  <td>
+                        <button v-if="Engage.decision_cf == 1"  class="btn  btn-success" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                     
+                      <span    >Visé</span>
+                      
+                      </button>
+                       <button v-else-if="Engage.decision_cf == 2" class="btn  btn-warning" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                     
+                      
+                       <span  >Différé</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="Engage.decision_cf == 3" class="btn  btn-danger" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                     
+                      
+                       <span  >Réjeté</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalModifierMotifDemandeservice(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                    
+                      </button>
+                    </td>
+                     </template>
+                       <td>
+                        <router-link :to="{ name: 'DetailEngagement', params: {id_detail_engagement:Engage.id}}"
+                class="btn btn-default " title="Detail Engagement">
+                  <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link> 
+                    <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterRealiteServiceFait(index)" title="Ajouter Réalité Service Fait">
+                        <span>
+                          <i class="icon icon-book"></i>
+                        </span>
+                      </button> -->
+                      <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Mandat">
+                        <span>
+                          <i class="icon icon-book"></i>
+                        </span>
+                      </button> -->
+                      <button class="btn btn-danger" @click="supprimerEngagement(Engage.id)">
+                        <span>
+                          <i class="icon icon-trash"></i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+               
+                                    </tbody>
+                                </table>
+                           
+
 
 
                         </div>
                          <div id="tab2078" class="tab-pane active">
-                            <div class="span4"></div>
                                 <div class="span4"></div>
-                             <div class="span4" align="right">
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
                                    
-                <button class="btn btn-success" @click="afficherModalAjouterTitre" >Ajouter Avenant</button>
+                                      <button class="btn btn-success" @click="afficherModalAjouterTitre" >Ajouter Avenant</button>
 
                     </div>
-                       <avenant :macheid="detail_marche.id"></avenant>
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                   <tr>
+                    <th>Marché</th>
+                      <th>Type acte financier</th>
+                        <th>Numéro avenant</th>
+                    <th>Objet Avenant</th>
+                    <th>Montant Avenant</th>
+                     <th>Date Avenant</th>
+                    
+                    <th>Action</th>
+                  </tr>
+                                    </thead>
+                                    <tbody>
+                                   
+                 <tr class="odd gradeX" v-for="(type, index) in afficheMarcheAvenant(detail_marche.id)" :key="type.id">
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{afficheNumeroMarcheAttribuer(type.marche_id) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{afficheTypeActeFinancier(type.type_acte_financier) || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.numero_avenant || 'Non renseigné'}}</td>
+                     <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{type.objet_avenant || 'Non renseigné'}}</td>
+                    <td style="text-align: center"
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formatageSomme(parseFloat(type.montant_avenant)) || 0}}</td>
+                    <td
+                      @dblclick="afficherModalModifierTypeTexte(index)"
+                    >{{formaterDate(type.date_avenant) || 'Non renseigné'}}</td>
+                   
+
+                    <td>
+                      <button class="btn btn-danger" @click="supprimerAvenant(type.id)">
+                        <span>
+                          <i class="icon icon-trash"></i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    
+                      <td style="font-weight:bold;">Total Avenant</td>
+                    <td style="text-align: center;color:red;font-weight:bold;">{{formatageSomme(parseFloat(montantAvenantParMarche(this.detail_marche.id)))}}</td>
+                    <td></td>
+                  </tr>
+                                    </tbody>
+                                </table>
+                           
+                            
+
+
                         </div>
                          <div id="tab20" class="tab-pane">
                                 <div class="span4"></div>
@@ -459,8 +1111,85 @@ montantDisponibleBudgetMandatEngagement
                                    
                                       <button class="btn btn-success" @click="afficherModalProcedureFacture" >Ajouter Facture</button>
 
-                              </div>
-                     <facture :macheid="detail_marche.id"></facture>
+                    </div>
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+
+                                         
+                     <th>type_facture</th>
+                    <th>numero_facture</th>
+                    <th>objet_facture</th>
+                    
+                     <th>Ua</th>
+                    <!-- <th>prix_unitaire</th>
+                    <th>Quantité</th> -->
+                    <th>prix_propose_ht</th>
+                    <th>Tva</th>
+                    
+                    <th>prix_propose_ttc</th>
+        
+                              
+                                
+                                
+                                <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                            
+                 <tr
+                    class="odd gradeX"
+                    v-for="(factu, index) in afficheFactureTableau(detail_marche.id)"
+                    :key="factu.id"
+                  >
+                   <template v-if="factu.typfacture_id == 1">
+                   <!-- <td @dblclick="afficherModalModifierFacture(index)">{{factu.id || 'Non renseigné'}}</td> -->
+                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objectTypefacture.libelle || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.numero_facture || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objet_facture || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objetUA.libelle || 'Non renseigné'}}</td>
+                       <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ht))|| 0}}</td>
+                   <!-- <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_unitaire ))|| 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifierFacture(index)">{{factu.quantite || 'Non renseigné'}}</td> -->
+                        <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.tva)) || 'Non renseigné'}}</td>
+                 
+                     
+                     <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ttc))|| 'Non renseigné'}}</td>
+                      </template>
+                        <template v-else>
+                   <!-- <td @dblclick="afficherModalModifierFacture(index)">{{factu.id || 'Non renseigné'}}</td> -->
+                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objectTypefacture.libelle || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.numero_facture || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objet_facture || 'Non renseigné'}}</td>
+                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objetUA.libelle || 'Non renseigné'}}</td>
+                       <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ht))|| 0}}</td>
+                   <!-- <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_unitaire ))|| 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifierFacture(index)">{{factu.quantite || 'Non renseigné'}}</td> -->
+                        <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.tva)) || 0}}</td>
+                 
+                     
+                     <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ttc))|| 0}}</td>
+                      </template>
+                     <td>
+                        <button class="btn " v-if="factu.typfacture_id !== 1" @click="afficherModalAjouter(factu.id)" title="Ajouter engagement">
+                        <span>
+                          <i class="icon   icon-folder-close"></i>
+                        </span>
+                      </button>
+                       <button class="btn " v-if="factu.typfacture_id == 1" @click="afficherModalAjouterMandatDirect(factu.id)" title="Ajouter Mandat">
+                        <span>
+                          <i class="icon   icon-folder-close"></i>
+                        </span>
+                      </button>
+                      <button class="btn btn-danger" @click="supprimerFacture(factu.id)">
+                        <span>
+                          <i class="icon icon-trash"></i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                                    </tbody>
+                                </table>
                            
                             
 
@@ -735,7 +1464,7 @@ montantDisponibleBudgetMandatEngagement
                           <td>
                           <label class="control-label">Nature de depense</label>
                           
-                              <input    type="text"   class="span3" readonly :value="afficheGrandNatureLibelle(afficheGrandNatureId(editLiquidation.marche_id))"  />                
+                              <input    type="text"   class="span3" readonly :value="afficheGrandNatureLibelle(afficheGrandNatureId(detail_marche.imputation))"  />                
                             
                         </td>
                         <td>
@@ -1120,7 +1849,185 @@ montantDisponibleBudgetMandatEngagement
 <!--///////////////////////////////////////// DEBUT TABLEAU AVENANT//////////////////////////////-->
 <!--///////////////////////////////////////// DEBUT TABLEAU AVENANT//////////////////////////////-->
   <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
-  
+    <div id="exampleModalAvenant" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter Avenant</h3>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label">Marché</label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="afficheNumeroMarcheAttribuer(detail_marche.id)"
+                
+                class="span"
+               readonly
+              />
+            </div>
+            </div>
+            <div class="control-group">
+            <label class="control-label">Type Acte finnancier</label>
+            <div class="controls">
+              <select v-model="formData.type_acte_financier">
+                      <option
+                        v-for="typeUniteA in typeActeEffetFinanciers"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+            </div>
+            </div>
+              <div class="control-group">
+            <label class="control-label">Numero avenant</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="formData.numero_avenant"
+                class="span"
+               
+              />
+            </div>
+          </div>
+            <div class="control-group">
+            <label class="control-label">Objet</label>
+            <div class="controls">
+              <textarea rows="2"  v-model="formData.objet_avenant"  class="span" type="text">
+
+              </textarea>
+             
+             
+              
+            </div>
+          </div>
+         
+          <div class="control-group">
+            <label class="control-label">Montant</label>
+            <div class="controls">
+              <input
+                type="number"
+                v-model="formData.montant_avenant"
+                class="span"
+               
+              />
+            </div>
+          </div>
+            <div class="control-group">
+            <label class="control-label">Date avenant</label>
+            <div class="controls">
+              <input
+                type="date"
+                v-model="formData.date_avenant"
+                class="span"
+               
+              />
+            </div>
+          </div>
+            
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterTypeTexteLocal"
+          class="btn btn-primary"
+          href="#"
+        
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+    <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
+
+ <!--///////////////////////////////////////// debut modal de modification //////////////////////////////-->
+
+    <div id="modificationModalAvenant" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Modifier Avenant</h3>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label">Marché</label>
+            <div class="controls">
+            <input
+                type="text"
+                :value="afficheNumeroMarcheAttribuer(detail_marche.id)"
+                
+                class="span"
+               readonly
+              />
+            </div>
+          </div>
+           <div class="control-group">
+            <label class="control-label">Type Acte finnancier</label>
+            <div class="controls">
+              <select v-model="editAvenant.type_acte_financier">
+                      <option
+                        v-for="typeUniteA in typeActeEffetFinanciers"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+            </div>
+            </div>
+              <div class="control-group">
+            <label class="control-label">Numero avenant</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editAvenant.numero_avenant"
+                class="span"
+               
+              />
+            </div>
+          </div>
+             <div class="control-group">
+            <label class="control-label">Objet</label>
+            <div class="controls">
+               <textarea rows="2"  v-model="editAvenant.objet_avenant"  class="span" type="text">
+
+              </textarea>
+            </div>
+          </div>
+          
+          <div class="control-group">
+            <label class="control-label">Montant</label>
+            <div class="controls">
+              <input
+                type="number"
+                v-model="editAvenant.montant_avenant"
+                class="span"
+               
+              />
+            </div>
+          </div>
+            <div class="control-group">
+            <label class="control-label">Date avenant</label>
+            <div class="controls">
+              <input
+                type="date"
+                v-model="editAvenant.date_avenant"
+                class="span"
+               
+              />
+            </div>
+          </div>
+           
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierTypeTexteLocal(editAvenant)"
+          class="btn btn-primary"
+          href="#"
+        
+        >Modifier</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
     
 <!--///////////////////////////////////////// FIN TABLEAU AVENANT//////////////////////////////-->
 <!--///////////////////////////////////////// FIN TABLEAU AVENANT//////////////////////////////-->
@@ -1132,7 +2039,42 @@ montantDisponibleBudgetMandatEngagement
 <!--///////////////////////////////////////// DEBUT TABLEAU TYPE PROCEDURE//////////////////////////////-->
 <!--///////////////////////////////////////// DEBUT TABLEAU TYPE PROCEDURE//////////////////////////////-->
 
-
+ <div id="modalTypeEngagement" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Choisir le type de procedure</h3>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" >
+         
+                         
+                            <div class="control-group">
+                            <label class="control-label">Type de procedure</label>
+                            <div class="controls">
+                             
+                              <select v-model="formData.tprocedure">
+                             
+                                 <option value="Engagement Direct">Engagement Direct</option>
+                               <option value="Engagement Bon de Commande">Engagement Bon de Commande</option>
+                               
+                              </select>
+                           
+                            </div>
+                          </div>
+                         
+         
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterChoixProcLocal"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
 
 <!--///////////////////////////////////////// FIN TABLEAU TYPE PROCEDURE//////////////////////////////-->
 <!--///////////////////////////////////////// FIN TABLEAU TYPE PROCEDURE//////////////////////////////-->
@@ -1147,7 +2089,727 @@ montantDisponibleBudgetMandatEngagement
 <!--///////////////////////////////////////// DEBUT TABLEAU ENGAGEMENT//////////////////////////////-->
 <!--//////////////////////////// FORMULAIRE Modifier ENGAGEMENT-->
 
+<div id="ModifierEngage" class="modal hide  taillemodal6">
+<div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h5>Modifier Engagement</h5>
+      </div>
+        
+      
+           
+<div class="table-responsive text-nowrap taillemodal61">
+              <table class="table table-bordered table-striped ">
+                <div class="widget-box">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#tab39">INFORMATION</a>
+                      </li>
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab2">TYPE ENGAGEMENT </a>
+                      </li> -->
+                      
+                      <li>
+                        <a data-toggle="tab" href="#tab45">INFO FOURNISSEUR / IMPUTATION BUDGETAIRE</a>
+                      </li>
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab32">IMPUTATION BUDGETAIRE</a>
+                      </li> -->
+                       <!-- <li>
+                        <a data-toggle="tab" href="#2">Valeur Calculer</a>
+                      </li> -->
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content tailfenet">
+                    <!--ongle identification-->
+                    <div id="tab39" class="tab-pane active">
+                      <tr>
+                        <td>
+                          <div class="control-group">
+                            <label class="control-label">Exercice Budgetaire</label>
+                            
+                               
+                             <div class="controls">
+                              <input
+                                type="text"
+                                class="span4"
+                               readonly
+                              :value="anneeAmort"
+                              />
+                              <input
+                                type="hidden"
+                                class="span4"
+                               readonly
+                            v-model="editEngagement.facture_id"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                          <td>
+                         <div class="control-group">
+                            <label class="control-label">Section</label>
+                            <div class="controls">
+                             <input
+                                type="text"
+                                class="span4"
+                               readonly
+                            :value="afficherSecti"
+                              
+                              />
+                            </div>
+                          </div>
+                          
+                        </td>
+                        <td>
+                          <div class="control-group">
+                            <label class="control-label">Programme/dotation</label>
+                            <div class="controls">
+                              <input
+                                type="text"
+                                class="span4"
+                                readonly
+                            :value="afficherProgDot"
+                              
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                         <div class="control-group">
+                            <label class="control-label">Nature depense</label>
+                             <div class="controls">
+                                 <input
+                                type="text"
+                                class="span4"
+                                readonly
+                            :value="CodeGdeNatureDep(detail_marche.gdenature_id)"
+                              
+                              />
+                          
+                           <input
+                                type="hidden"
+                                class="span"
+                               
+                             :value="detail_marche.id"
+                              />
+                               <input
+                                type="hidden"
+                                class="span"
+                               
+                             :value="montantMarcheAvecAvenant"
+                              />
+                               <input
+                                type="hidden"
+                                class="span"
+                               
+                             v-model="editEngagement.val"
+                              />
+                              </div>
+                              </div>
+                        </td>
+                        </tr>
+                         <tr>
+ 
+                          <td>
+                           <div class="control-group">
+                            <label class="control-label">Action</label>
+                            <div class="controls">
+                              <input
+                                type="text"
+                                class="span4"
+                                readonly
+                            :value="afficherActi"
+                              
+                              />
+                              
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                         <div class="control-group">
+                            <label class="control-label">Activite</label>
+                            <div class="controls">
+                             
+                               <input
+                                type="text"
+                                class="span4"
+                                readonly
+                            :value="afficheractivite(detail_marche.activite_id)"
+                              
+                              />
+                            </div>
+                          </div>
+                          </td>
+                          <td>
+                             <div class="control-group">
+                            <label class="control-label">Unite administrative</label>
+                            <div class="controls">
+                               <input
+                                type="text"
+                                class="span4"
+                                readonly
+                            :value="afficherUniteAdmin(detail_marche.unite_administrative_id)"
+                              
+                              />
+                              
+                            </div>
+                          </div>
+                          
+                        </td>
+                          <td>
+                           <div class="control-group">
+                            <label class="control-label">Type Procedure</label>
+                            
+                               <div class="controls">
+                              <input
+                                type="text"
+                                class="span4"
+                               readonly
+                             :value="recupererTypeProcedure"
+                              
+                              />
+                               
+                               
+                             
 
+                              
+                            </div>
+                          </div>
+                        </td>
+                        </tr>
+                         
+                        <tr>
+                        
+                         <!-- <td>
+                          <div class="control-group">
+                            <label class="control-label">Numero demande</label>
+
+                               
+                             <div class="controls">
+                              <input
+                                type="text"
+                                class="span4"
+                               
+                              v-model="editEngagement.numero_demande"
+                              
+                              />
+                                <input
+                                type="hidden"
+                                class="span4"
+                               
+                            :value="idBudgetaire"
+                              
+                              /> 
+                            </div>
+                          </div>
+                        </td> -->
+                      
+                          <!-- <td>
+                          <div class="control-group">
+                            <label class="control-label">Numero engagement</label>
+
+                               
+                             <div class="controls">
+                              <input
+                                type="text"
+                                class="span4"
+                               
+                              v-model="editEngagement.numero_engage"
+                              
+                              /> -->
+                               <input
+                                type="hidden"
+                                class="span4"
+                               
+                            :value="idBudgetaire"
+                              
+                              />
+                            <!-- </div>
+                          </div>
+                        </td> -->
+                        
+                       
+                        <td>
+                         <div class="control-group">
+                            <label class="control-label">Numero Demande engagement</label>
+                            <div class="controls">
+                              <input type="text" class="span4" v-model="editEngagement.numero_demande_engage"/>
+                            </div>
+                          </div>
+                        </td>
+                         <td>
+                         <div class="control-group">
+                            <label class="control-label">Numero engagement</label>
+                            <div class="controls">
+                              <input type="text" class="span4" v-model="editEngagement.numero_engage"/>
+                            </div>
+                          </div>
+                        </td>
+                         <td>
+                         <div class="control-group">
+                            <label class="control-label">Numero Bordereau</label>
+                            <div class="controls">
+                              <input type="text" class="span4" v-model="editEngagement.numero_bordereau"/>
+                            </div>
+                          </div>
+                        </td>
+                         <td>
+                         <div class="control-group">
+                            <label class="control-label">Date demande engagement</label>
+                            <div class="controls">
+                              <input type="date" class="span4" v-model="editEngagement.date_demande"/>
+                            </div>
+                          </div>
+                        </td>
+                       
+               
+                      </tr>
+
+                    
+                 
+                  <tr>
+                          
+                        
+                        <td>
+                            <div class="control-group">
+                              <label class="control-label">Réf. Engagement  juridique</label>
+                              <div class="controls">
+                                <input
+                                  type="text"
+                                  class="span4"
+                                  v-model="editEngagement.ref_juridique"
+                                />
+                              </div>
+                            </div>
+                          </td>
+                          
+                           <td>
+                            <div class="control-group">
+                              <label class="control-label">Numero OP/AT</label>
+                              <div class="controls">
+                                <input
+                                  type="text"
+                                  class="span4"
+                                  v-model="editEngagement.numero_op"
+                                />
+                              </div>
+                            </div>
+                          </td>
+                       
+                         
+                        
+                        
+                          
+                         
+                      </tr>
+                       <tr>
+                        
+                       <input
+                    type="hidden"
+                   :value="montantCumuler"
+                    
+                    class="span"
+                    
+                  />
+                      <input
+                    type="hidden"
+                   :value="montantCumulerModifier"
+                    
+                    class="span"
+                    
+                  />
+                        
+                          
+                        
+                       
+                        
+                       
+                        <!-- <td>
+                             <div class="control-group">
+                            <label class="control-label">Bailleur</label>
+                            <div class="controls">
+                              <input type="text" class="span" v-model="editEngagement.Bailleur" />
+                            </div>
+                          </div>
+                        </td> -->
+                       
+                      </tr>
+                      <tr>
+                          
+                             
+                      </tr>
+                    </div>
+                    <!--ongle descriptif-->
+                    <!-- <div id="tab2" class="tab-pane">
+                      
+
+                      
+                       
+                     
+                     
+                      <tr>
+                         
+                         
+                      
+                        
+                       
+                       
+                      </tr>
+                      
+                    </div> -->
+                    <!--ongle 3 -->
+
+
+<!--ongle descriptif-->
+                    <div id="tab45" class="tab-pane">
+                      
+
+                      
+                        <tr>
+                         <td>
+                         <div class="control-group">
+                            <label class="control-label">Mode de paiement</label>
+                            <div class="controls">
+                              <select v-model="editEngagement.mod_paiement_engage" class="span4">
+                                
+                                <option value="0">Bon de caisse</option>
+                                    <option value="1">Chèque Spécial Trésor</option>
+                                       <option value="2">Chèque Spécial Enregistrement</option>
+                                    <option value="3">Virement</option>
+                                     <option value="4">Chèque Spécial Douanes</option>
+                                      <option value="5">Paiement direct par bailleur de fonds</option>
+                                       <option value="6">Autres</option>
+                               
+                              </select>
+                              
+                            </div>
+                          </div>
+                        </td>
+                         
+                       <td>
+                         <div class="control-group">
+                            <label class="control-label">N° compte contribuable</label>
+                            <div class="controls">
+                             <div class="controls">
+                              <input type="text" class="span4" :value="NumeroFournisseur" readonly/>
+                               
+                            </div>
+                              
+                            </div>
+                          </div>
+                        </td>
+                        
+                          
+                       
+                       
+                        <td>
+                          <div class="control-group">
+                            <label class="control-label">Nom entreprise</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="nomFournisseur" readonly/>
+                               
+                            </div>
+                          </div>
+                        </td>
+                          <td>
+                          <div class="control-group">
+                            <label class="control-label">Adresse</label>
+                            <div class="controls">
+                              <input
+                                type="text"
+                                class="span4"
+                                placeholder="Saisir adresse_entreprise"
+                                :value="AdresseFournisseur"
+                                readonly
+                              />
+                            </div>
+                          </div>
+                        </td>
+                       
+                       
+                      </tr>
+                     
+                      <tr>
+                        
+                       <input
+                    type="hidden"
+                   :value="montantCumuler"
+                    
+                    class="span"
+                    
+                  />
+                      <input
+                    type="hidden"
+                   :value="montantCumulerModifier"
+                    
+                    class="span"
+                    
+                  />
+                        
+                          
+                        
+                       
+                        
+                       
+                        <!-- <td>
+                             <div class="control-group">
+                            <label class="control-label">Bailleur</label>
+                            <div class="controls">
+                              <input type="text" class="span" v-model="editEngagement.Bailleur" />
+                            </div>
+                          </div>
+                        </td> -->
+                       
+                      </tr>
+                      <tr>
+                         
+                         
+                      
+                        
+                       
+                       
+                      </tr>
+                      <tr>
+                            <td >
+                         <div class="control-group">
+                            <label class="control-label">Objet de la dépense</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="afficherObjetEngagement1" readonly/>
+                               <input type="hidden" class="span10" v-model="editEngagement.id" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                         <td>
+                            <div class="control-group">
+                              <label class="control-label">Numéro compte</label>
+                              <div class="controls">
+                               <select v-model="editEngagement.compte_id" class="span4">
+                                <option
+                                  v-for="affiche in afficherCompteUtilisateur(this.AfficherIdFournisseur)" :key="affiche.id"
+                                  :value="affiche.id"
+                                >{{affiche.rib}}</option>
+                              </select>
+                              </div>
+                            </div>
+                          </td>
+                          
+                         <td>
+                            <div class="control-group">
+                              <label class="control-label">piece justificative</label>
+                              <div class="controls">
+                                <input
+                                  type="file"
+                                  class="span"
+                                 
+                                />
+                              </div>
+                            </div>
+                          </td>
+                             <td>
+                             <div class="control-group">
+                            <label class="control-label">Bailleur</label>
+                            
+                             <select v-model="editEngagement.bailler_id" class="span4">
+                                <option
+                                  v-for="fam in sources_financements"
+                                  :key="fam.id"
+                                  :value="fam.id"
+                                >{{fam.libelle}}</option>
+                              </select>
+                          </div>
+                        </td> 
+                      </tr>
+                      <tr>
+                       <td>
+                         <div class="control-group">
+                            <label class="control-label">Total général</label>
+                            <div class="controls">
+                              <input type="number" class="span4" :value="sommeMontantEngagement" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                       
+                        <td>
+                         <div class="control-group">
+                            <label class="control-label">Trésor</label>
+                            <div class="controls">
+                              <input type="number" class="span4" v-model="editEngagement.montant_tresor" />
+                            </div>
+                          </div>
+                        </td>
+                          <td>
+                          <div class="control-group">
+                            <label class="control-label">Don</label>
+                            <div class="controls">
+                              <input type="number" class="span4" v-model="editEngagement.montant_don" />
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                             <div class="control-group">
+                            <label class="control-label">Emprunt</label>
+                            <div class="controls">
+                              <input type="number" class="span4" v-model="editEngagement.montant_emprunt" />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                        <tr>
+                        
+                        
+                       
+                        
+                        <td>
+                           <div class="control-group">
+                            <label class="control-label">Ligne Budgetaire</label>
+                            <div class="controls">
+                              <!-- <select v-model="editEngagement.ligne_budgetaire_id" class="span4"> -->
+                                <!-- <option
+                                  v-for="fam in ligneBudgetaire(detail_marche.id)"
+                                  :key="fam.id"
+                                  :value="fam.economique_id"
+                                >{{fam.afficheEconomique.code}}-{{fam.afficheEconomique.libelle}}</option>
+                              </select> -->
+                               <div class="controls">
+                              <input type="text" class="span4" :value="afficheligneEconomiqueBudgetaire(ligneEconomiqueBudgetaire)" readonly/>
+                            </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td >
+                          <div class="control-group">
+                            <label class="control-label">Code Budgetaire</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="CodeBudgetaire" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                       <td>
+                          <div class="control-group">
+                            <label class="control-label">Numéro Facture</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="affichiernumEngagement1" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="control-group">
+                            <label class="control-label">Montant Facture</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="afficherMontantEngagement1" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                       
+                      </tr>
+                      <tr>
+                         <td>
+                          <div class="control-group">
+                            <label class="control-label">Dotation Iniatiale</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="dotationInite(detail_marche.imputation).Dotation_Initiale" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                         <td>
+                          <div class="control-group">
+                            <label class="control-label">Cumul engagements antérieurs </label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="sommeEgagementLigne(detail_marche.id)" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                           <td>
+                          <div class="control-group">
+                            <label class="control-label">Crédits Autorisés(Engagement actuel)</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="sommeMontantEngagement" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                       
+                        <td>
+                                                    <div class="control-group">
+                            <label class="control-label">Engagement cumulé </label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="montantCumulerMandatEngagement" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                        
+                        
+                      
+                      </tr>
+                        <tr>
+                           <td >
+                          <div class="control-group">
+                            <label class="control-label">Dotation disponible</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="montantDisponibleBudgetMandatEngagement" readonly/>
+                            </div> 
+                          </div>
+                          
+                        </td>
+                                                 <td>
+                          <div class="control-group">
+                            <label class="control-label">Dotation disponible anterieure</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="dotationDisponibleAnterieure" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                           <td>
+                          <div class="control-group">
+                            <label class="control-label">Montant marché</label>
+                            <div class="controls">
+                              <input type="text" class="span4" v-model="montantMarcheAvecAvenant" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="control-group">
+                            <label class="control-label">Disponible marché</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="restePayeMarche" readonly/>
+                            </div>
+                          </div>
+                        </td>
+
+                         <!-- <td>
+                          <div class="control-group">
+                            <label class="control-label">Disponible</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="montantDisponibleBudget" readonly/>
+                            </div> 
+                          </div>
+                        </td> -->
+                       
+                      </tr>
+                    </div>
+                    <!--ongle 3 -->
+                
+                       
+                  </div>
+                  <br />
+                  <div align="right">
+                    <div class="controls">
+                      <div data-toggle="buttons-checkbox" class="btn-group">
+                        <a
+                          class="btn btn-primary"
+                         @click.prevent="modifierModalEngagementLocal(editEngagement)"
+                        >Modifier</a>
+                        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </table>
+            </div>
+           
+          
+        
+     
+    </div>
 <!--///////////////////////////////////////// FIN TABLEAU ENGAGEMENT//////////////////////////////-->
 <!--///////////////////////////////////////// FIN TABLEAU ENGAGEMENT//////////////////////////////-->
 <!--///////////////////////////////////////// FIN TABLEAU ENGAGEMENT//////////////////////////////-->
@@ -2087,7 +3749,694 @@ montantDisponibleBudgetMandatEngagement
 <!--///////////////////////////////////////// DEBUT TABLEAU ENGAGEMENT 2//////////////////////////////-->
 <!--///////////////////////////////////////// DEBUT TABLEAU ENGAGEMENT 2//////////////////////////////-->
  <!--//////////////////////////// FORMULAIRE AJOUTER ENGAGEMENT-->
+    <div id="AjouterEngage" class="modal hide taillemodal6">
+  <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h5>Ajouter Engagement</h5>
+      </div>
+        
+      
+           
+<div class="table-responsive text-nowrap taillemodal61">
+              <table class="table table-bordered table-striped ">
+                <div class="widget-box">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#tab1000">INFORMATION</a>
+                      </li>
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab2">TYPE ENGAGEMENT </a>
+                      </li> -->
+                      
+                      <li>
+                        <a data-toggle="tab" href="#tab120">INFO FOURNISSEUR / IMPUTATION BUDGETAIRE</a>
+                      </li>
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab32">IMPUTATION BUDGETAIRE</a>
+                      </li> -->
+                       <!-- <li>
+                        <a data-toggle="tab" href="#2">Valeur Calculer</a>
+                      </li> -->
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content tailfenet">
+                    <!--ongle identification-->
+                    <div id="tab1000" class="tab-pane active">
+                      <tr>
+                        <td>
+                          <div class="control-group">
+                            <label class="control-label">Exercice Budgetaire</label>
+                            
+                               
+                             <div class="controls">
+                              <input
+                                type="text"
+                                class="span4"
+                               readonly
+                              :value="anneeAmort"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                          <td>
+                         <div class="control-group">
+                            <label class="control-label">Section</label>
+                            <div class="controls">
+                             <input
+                                type="text"
+                                class="span4"
+                               readonly
+                            :value="afficherSecti"
+                              
+                              />
+                            </div>
+                          </div>
+                          
+                        </td>
+                        <td>
+                          <div class="control-group">
+                            <label class="control-label">Programme/dotation</label>
+                            <div class="controls">
+                              <input
+                                type="text"
+                                class="span4"
+                                readonly
+                            :value="afficherProgDot"
+                              
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                         <div class="control-group">
+                            <label class="control-label">Nature depense</label>
+                             <div class="controls">
+                                 <input
+                                type="text"
+                                class="span4"
+                                readonly
+                            :value="CodeGdeNatureDep(detail_marche.gdenature_id)"
+                              
+                              />
+                          
+                           <input
+                                type="hidden"
+                                class="span"
+                               
+                             :value="detail_marche.id"
+                              />
+                               <input
+                                type="hidden"
+                                class="span"
+                               
+                             :value="montantMarcheAvecAvenant"
+                              />
+                               <input
+                                type="hidden"
+                                class="span"
+                               
+                             v-model="formData.val"
+                              />
+                              </div>
+                              </div>
+                        </td>
+                        </tr>
+                         <tr>
  
+                          <td>
+                           <div class="control-group">
+                            <label class="control-label">Action</label>
+                            <div class="controls">
+                              <input
+                                type="text"
+                                class="span4"
+                                readonly
+                            :value="afficherActi"
+                              
+                              />
+                              
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                         <div class="control-group">
+                            <label class="control-label">Activite</label>
+                            <div class="controls">
+                             
+                               <input
+                                type="text"
+                                class="span4"
+                                readonly
+                            :value="afficheractivite(detail_marche.activite_id)"
+                              
+                              />
+                            </div>
+                          </div>
+                          </td>
+                          <td>
+                             <div class="control-group">
+                            <label class="control-label">Unite administrative</label>
+                            <div class="controls">
+                               <input
+                                type="text"
+                                class="span4"
+                                readonly
+                            :value="afficherUniteAdmin(detail_marche.unite_administrative_id)"
+                              
+                              />
+                              
+                            </div>
+                          </div>
+                          
+                        </td>
+                          <td>
+                           <div class="control-group">
+                            <label class="control-label">Type Procedure</label>
+                            
+                               <div class="controls">
+                              <input
+                                type="text"
+                                class="span4"
+                               readonly
+                             :value="recupererTypeProcedure"
+                              
+                              />
+                               
+                               
+                             
+
+                              
+                            </div>
+                          </div>
+                        </td>
+                        </tr>
+                         
+                        <tr>
+                        
+                         
+                               <input
+                                type="hidden"
+                                class="span4"
+                               
+                            :value="idBudgetaire"
+                              
+                              />
+                            <!-- </div>
+                          </div>
+                        </td> -->
+                        
+                       
+                        <td>
+                         <div class="control-group">
+                            <label class="control-label">Numéro Bon Manuel</label>
+                            <div class="controls">
+                              <input type="text" class="span4" v-model="formData.numero_demande_engage"/>
+                            </div>
+                          </div>
+                        </td>
+                         <td>
+                         <div class="control-group">
+                            <label class="control-label">Numéro demande engagement</label>
+                            <div class="controls">
+                              <input type="text" class="span4" v-model="formData.numero_engage"/>
+                            </div>
+                          </div>
+                        </td>
+                         <td>
+                         <div class="control-group">
+                            <label class="control-label">Numero Bordereau</label>
+                            <div class="controls">
+                              <input type="text" class="span4" v-model="formData.numero_bordereau"/>
+                            </div>
+                          </div>
+                        </td>
+                         <td>
+                         <div class="control-group">
+                            <label class="control-label">Date demande engagement</label>
+                            <div class="controls">
+                              <input type="date" class="span4" v-model="formData.date_demande"/>
+                            </div>
+                          </div>
+                        </td>
+                       
+               
+                      </tr>
+
+                    
+                 
+                  <tr>
+                          
+                        
+                        <td>
+                            <div class="control-group">
+                              <label class="control-label">Réf. Engagement  juridique</label>
+                              <div class="controls">
+                                <input
+                                  type="text"
+                                  class="span4"
+                                  v-model="formData.ref_juridique"
+                                />
+                              </div>
+                            </div>
+                          </td>
+                          
+                           <td>
+                            <div class="control-group">
+                              <label class="control-label">Numero OP/AT</label>
+                              <div class="controls">
+                                <input
+                                  type="text"
+                                  class="span4"
+                                  v-model="formData.numero_op"
+                                />
+                              </div>
+                            </div>
+                          </td>
+                       
+                         
+                        
+                        
+                          
+                         
+                      </tr>
+                       <tr>
+                        
+                       <input
+                    type="hidden"
+                   :value="montantCumuler"
+                    
+                    class="span"
+                    
+                  />
+                      <input
+                    type="hidden"
+                   :value="montantCumulerModifier"
+                    
+                    class="span"
+                    
+                  />
+                        
+                          
+                        
+                       
+                        
+                       
+                        <!-- <td>
+                             <div class="control-group">
+                            <label class="control-label">Bailleur</label>
+                            <div class="controls">
+                              <input type="text" class="span" v-model="formData.Bailleur" />
+                            </div>
+                          </div>
+                        </td> -->
+                       
+                      </tr>
+                      <tr>
+                          
+                             <!-- formData2 -->
+                      </tr>
+                    </div>
+                    <!--ongle descriptif-->
+                    <!-- <div id="tab2" class="tab-pane">
+                      
+
+                      
+                       
+                     
+                     
+                      <tr>
+                         
+                         
+                      
+                        
+                       
+                       
+                      </tr>
+                      
+                    </div> -->
+                    <!--ongle 3 -->
+
+
+<!--ongle descriptif-->
+                    <div id="tab120" class="tab-pane">
+                      
+
+                      
+                        <tr>
+                         <td>
+                         <div class="control-group">
+                            <label class="control-label">Mode de paiement</label>
+                            <div class="controls">
+                              <select v-model="formData.mod_paiement_engage" class="span4">
+                             
+                                <option
+                        v-for="localgeo in modepaiements"
+                        :key="localgeo.id"
+                        :value="localgeo.id"
+                      >{{localgeo.libelle}}</option>
+                              </select>
+                              
+                            </div>
+                          </div>
+                        </td>
+                         
+                       <td>
+                         <div class="control-group">
+                            <label class="control-label">N° compte contribuable</label>
+                            <div class="controls">
+                             <div class="controls">
+                              <input type="text" class="span4" :value="afficheNumeroFournisseur(NumeroFournisseur_id)" readonly/>
+                               
+                            </div>
+                              
+                            </div>
+                          </div>
+                        </td>
+                        
+                          
+                       
+                       
+                        <td>
+                          <div class="control-group">
+                            <label class="control-label">Nom entreprise</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="afficheNomFournisseur(NumeroFournisseur_id)" readonly/>
+                               
+                            </div>
+                          </div>
+                        </td>
+                          <td>
+                          <div class="control-group">
+                            <label class="control-label">Adresse</label>
+                            <div class="controls">
+                              <input
+                                type="text"
+                                class="span4"
+                                placeholder="Saisir adresse_entreprise"
+                                :value="afficheAdresseFournisseur(NumeroFournisseur_id)"
+                                readonly
+                              />
+                            </div>
+                          </div>
+                        </td>
+                       
+                       
+                      </tr>
+                     
+                      <tr>
+                        
+                       <input
+                    type="hidden"
+                   :value="montantCumuler"
+                    
+                    class="span"
+                    
+                  />
+                      <input
+                    type="hidden"
+                   :value="montantCumulerModifier"
+                    
+                    class="span"
+                    
+                  />
+                        
+                          
+                        
+                       
+                        
+                       
+                        <!-- <td>
+                             <div class="control-group">
+                            <label class="control-label">Bailleur</label>
+                            <div class="controls">
+                              <input type="text" class="span" v-model="formData.Bailleur" />
+                            </div>
+                          </div>
+                        </td> -->
+                       
+                      </tr>
+                      <tr>
+                         
+                         
+                      
+                        
+                       
+                       
+                      </tr>
+                      <tr>
+                            <td >
+                         <div class="control-group">
+                            <label class="control-label">Objet de la dépense</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="afficherObjetFacture" readonly/>
+                               <input type="hidden" class="span10" v-model="formData.id" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                          <td>
+                            <div class="control-group">
+                              <label class="control-label">Numéro compte</label>
+                              <div class="controls">
+                               <select v-model="formData.compte_id" class="span4">
+                                <option
+                                  v-for="affiche in afficherCompteUtilisateur1(this.NumeroFournisseur_id)" :key="affiche.id"
+                                  :value="affiche.id"
+                                >{{affiche.rib}}</option>
+                              </select>
+                              </div>
+                            </div>
+                          </td>
+                         <td>
+                            <div class="control-group">
+                              <label class="control-label">piece justificative</label>
+                              <div class="controls">
+                                <input
+                                  type="file"
+                                  class="span"
+                                 
+                                />
+                              </div>
+                            </div>
+                          </td>
+                             <td>
+                             <div class="control-group">
+                            <label class="control-label">Bailleur</label>
+                            
+                             <select v-model="formData.bailler_id" class="span4">
+                                <option
+                                  v-for="fam in sources_financements"
+                                  :key="fam.id"
+                                  :value="fam.id"
+                                >{{fam.libelle}}</option>
+                              </select>
+                          </div>
+                        </td> 
+                      </tr>
+                      <tr>
+                       <td>
+                         <div class="control-group">
+                            <label class="control-label">Total général</label>
+                            <div class="controls">
+                              <input type="number" class="span4" :value="sommeMontant" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                       
+                        <td>
+                         <div class="control-group">
+                            <label class="control-label">Trésor</label>
+                            <div class="controls">
+                              <input type="number" class="span4" v-model="formData.montant_tresor" />
+                            </div>
+                          </div>
+                        </td>
+                          <td>
+                          <div class="control-group">
+                            <label class="control-label">Don</label>
+                            <div class="controls">
+                              <input type="number" class="span4" v-model="formData.montant_don" />
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                             <div class="control-group">
+                            <label class="control-label">Emprunt</label>
+                            <div class="controls">
+                              <input type="number" class="span4" v-model="formData.montant_emprunt" />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                        <tr>
+                        
+                        
+                       
+                        
+                        <td>
+                           <div class="control-group">
+                            <label class="control-label">Ligne Budgetaire</label>
+                            <div class="controls">
+                              <!-- <select v-model="formData.ligne_budgetaire_id" class="span4"> -->
+                                <!-- <option
+                                  v-for="fam in ligneBudgetaire(detail_marche.id)"
+                                  :key="fam.id"
+                                  :value="fam.economique_id"
+                                >{{fam.afficheEconomique.code}}-{{fam.afficheEconomique.libelle}}</option>
+                              </select> -->
+                               <div class="controls">
+                              <input type="text" class="span4" :value="afficheligneEconomiqueBudgetaire(afficheligneEconom(afficherligneEconomiqueBudgetaire))" readonly/>
+                            </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td >
+                          <div class="control-group">
+                            <label class="control-label">Imputation Budgetaire</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="afficherligneEconomiqueBudgetaire" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                       <td>
+                          <div class="control-group">
+                            <label class="control-label">Numéro Facture</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="afficherNumeroFcture" readonly/>
+                              
+                              <input type="hidden" class="span4" v-model="formDataFacture.id" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="control-group">
+                            <label class="control-label">Montant Facture</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="afficherMontantFacture" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                       
+                      </tr>
+                      <tr>
+                         <td>
+                          <div class="control-group">
+                            <label class="control-label">Crédit Autorisés</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="dotationInite(detail_marche.imputation).Dotation_Initiale" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                         <td>
+                          <div class="control-group">
+                            <label class="control-label">Cumul des demandes(y compris celle-ci) </label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="sommeEgagementLigne(detail_marche.id)" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                                               <td>
+                          <div class="control-group">
+                            <label class="control-label">Dotation disponible</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="dotationDisponibleAnterieure" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                          <td>
+                          <div class="control-group">
+                            <!-- <label class="control-label">Montant marché</label> -->
+                            <div class="controls">
+                              <input type="hidden" class="span4" v-model="montantMarcheAvecAvenant" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                           <td>
+                          <div class="control-group">
+                            <!-- <label class="control-label">Crédits Autorisés(Engagement actuel)</label> -->
+                            <div class="controls">
+                              <input type="hidden" class="span4" :value="sommeMontant" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                       
+                      
+                        
+                        
+                      
+                      </tr>
+                        <tr>
+                            <td>
+                                                    <div class="control-group">
+                            <!-- <label class="control-label">Engagement cumulé </label> -->
+                            <div class="controls">
+                              <input type="hidden" class="span4" :value="montantCumulerMandat" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                          <td>
+                          <div class="control-group">
+                            <!-- <label class="control-label">Disponible marché</label> -->
+                            <div class="controls">
+                              <input type="hidden" class="span4" :value="restePayeMarche" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                           <td >
+                          <div class="control-group">
+                            <!-- <label class="control-label">Dotation disponible</label> -->
+                            <div class="controls">
+                              <input type="hidden" class="span4" :value="montantDisponibleBudgetMandat" readonly/>
+                            </div> 
+                          </div>
+                          
+                        </td>
+                                                 <td>
+                          <div class="control-group">
+                            <!-- <label class="control-label">Dotation disponible anterieure</label> -->
+                            <div class="controls">
+                              <input type="hidden" class="span4" :value="dotationDisponibleAnterieure" readonly/>
+                            </div>
+                          </div>
+                        </td>
+                         
+                        
+
+                         <!-- <td>
+                          <div class="control-group">
+                            <label class="control-label">Disponible</label>
+                            <div class="controls">
+                              <input type="text" class="span4" :value="montantDisponibleBudget" readonly/>
+                            </div> 
+                          </div>
+                        </td> -->
+                       
+                      </tr>
+                    </div>
+                    <!--ongle 3 -->
+                
+                       
+                  </div>
+                  
+                  <div align="right">
+                    <div class="controls">
+                      <div data-toggle="buttons-checkbox" class="btn-group">
+                        <a
+                          class="btn btn-primary"
+                         @click.prevent="ajouterEngagementLocal(formData)"
+                        >Valider</a>
+                        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </table>
+            </div>
+           
+          
+        
+     
+    </div>
 
 
 <!--////////////////////////////FIN FORMULAIRE AJOUTER ENGAGEMENT-->
@@ -2909,12 +5258,1813 @@ montantDisponibleBudgetMandatEngagement
 
 
 
+<!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
+    <div id="modatFactureModifier" class="modal hide taillemodal45">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Modifier  Facture</h3>
+      </div>
+      <div class="modal-body">
+       <table class="table table-bordered table-striped tailfacture">
+         
+          <tr>
+              <td>
+              
+              <div class="control-group">
+                <label class="control-label">Type facture</label>
+                <div class="controls">
+                  <select v-model="formData1.typfacture_id" class="span3" >
+                    
+                     <option
+                        v-for="typeFact in typeFactures"
+                        :key="typeFact.id"
+                        :value="typeFact.id"
+                      >{{typeFact.libelle}}</option>
+                  </select>
+                </div>
+              </div>
+            </td>
+              <td>
+              <div class="control-group">
+                <label class="control-label">Numero facture</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                   v-model="formData1.numero_facture"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+               </td>
+               <td>
+              <div class="control-group">
+                <label class="control-label">Date de la facture</label>
+                <div class="controls">
+                  <input
+                    type="date"
+                    v-model="formData1.date_facture"
+                   
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+             
+            </td>
+             <td>
+              
+              <div class="control-group">
+                <label class="control-label">Unite administrative</label>
+                <div class="controls">
+                 <input
+                    type="text"
+                    :value="detail_marche.objetUniteAdministrative.libelle"
+                   readonly
+                    class="span"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             
+             
+            
+            
+
+          </tr>
+           <tr>
+               <td colspan="2"> 
+              <div class="control-group">
+                <label class="control-label">Objet facture</label>
+                <div class="controls">
+                 
+                  <textarea rows="1" v-model="formData1.objet_facture" class="span5">
+
+                  </textarea>
+                </div>
+              </div>
+               </td>
+               <td>
+              <div class="control-group">
+                <label class="control-label">Fournisseur</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                 :value="afficheNomFournisseur(AfficherFournisseur_id)"
+                    class="span3"
+                    readonly
+                  />
+                  
+                </div>
+              </div>
+            </td>
+               <td>
+              
+              <div class="control-group">
+                <label class="control-label">exonéré</label>
+                <div class="controls">
+                  <select v-model="formData1.exonere" class="span">
+                  
+                    <option value="0">Oui</option>
+                     <option value="1">Non</option>
+                  </select>
+                 <!-- <input
+                    type="hidden"
+                    
+                v-model="formData1.exonere"
+                    class="span"
+                    readonly
+                  /> -->
+                </div>
+              </div>
+            </td>           
+          </tr>
+          <tr  class="odd gradeX">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                  
+                 :value="montantHT1"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup2()" >
+                        <span>
+                          <i class=" icon-plus"></i>
+                        </span>
+                      </button>
+                       <!-- <button class="btn btn-danger"  v-on:click="showPopup20()" >
+                        <span>
+                          <i class=" icon-remove"></i>
+                        </span>
+                      </button> -->
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+        <!-- 2 ligne -->
+         <tr  class="odd gradeX" v-show="popupState2">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation2"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire2"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                   
+                       v-model="formData1.quantite2"
+                 
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT2"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup3()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState3">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation3"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire3"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite3"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT3"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup4()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState4">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation4"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire4"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite4"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT4"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup5()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState5">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation5"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire5"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite5"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT5"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup6()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState6">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation6"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire6"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite6"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT6"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup7()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState7">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation7"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire7"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite7"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT7"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup8()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState8">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation8"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire8"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite8"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT8"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup9()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState9">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation9"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire9"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite9"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT9"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup10()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState10">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation10"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire10"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite10"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                   :value="montantHT10"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup10()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Montant HT</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                :value="totalMontantHT"
+                    class="span"
+                   readonly
+                  />
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Taux</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="afficherEnorere"
+                    class="span"
+                   readonly
+                  />
+                  
+                   <input
+                    type="hidden"
+                    :value="afficherEnorere2"
+                   
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">TVA</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="montantTva"
+                    class="span"
+                   readonly
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+         
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="montantHTt"
+                    class="span"
+                   readonly
+                  />
+                
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ModifierFactureLocal(formData1)"
+          class="btn btn-primary"
+          href="#"
+           
+        >Modifier</a> 
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
 
 
 
 
 
+     <div id="modatFactureAjouter" class="modal hide taillemodal45">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter Facture</h3>
+      </div>
+      <div class="modal-body" >
+        <table class="table table-bordered table-striped ">
+         
+          <tr>
+              <td>
+              
+              <div class="control-group">
+                <label class="control-label">Type facture</label>
+                <div class="controls">
+                  <select v-model="formData1.typfacture_id" class="span3" >
+                    
+                     <option
+                        v-for="typeFact in typeFactures"
+                        :key="typeFact.id"
+                        :value="typeFact.id"
+                      >{{typeFact.libelle}}</option>
+                  </select>
+                </div>
+              </div>
+            </td>
+              <td>
+              <div class="control-group">
+                <label class="control-label">Numero facture</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                   v-model="formData1.numero_facture"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+               </td>
+               <td>
+              <div class="control-group">
+                <label class="control-label">Date de la facture</label>
+                <div class="controls">
+                  <input
+                    type="date"
+                    v-model="formData1.date_facture"
+                   
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+             
+            </td>
+             <td>
+              
+              <div class="control-group">
+                <label class="control-label">Unite administrative</label>
+                <div class="controls">
+                 <input
+                    type="text"
+                    :value="detail_marche.objetUniteAdministrative.libelle"
+                   readonly
+                    class="span"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             
+             
+            
+            
 
+          </tr>
+           <tr>
+               <td colspan="2"> 
+              <div class="control-group">
+                <label class="control-label">Objet facture</label>
+                <div class="controls">
+                 
+                  <textarea rows="3" :value="detail_marche.objet" class="span5">
+
+                  </textarea>
+                </div>
+              </div>
+               </td>
+               <td>
+              <div class="control-group">
+                <label class="control-label">Fournisseur</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                 :value="afficheNomFournisseur(AfficherFournisseur_id)"
+                    class="span3"
+                    readonly
+                  />
+                </div>
+              </div>
+            </td>
+               <td>
+              
+              <div class="control-group">
+                <label class="control-label">exonéré</label>
+                <div class="controls">
+                  <select v-model="formData1.exonere" class="span">
+                  
+                    <option value="0">Oui</option>
+                     <option value="1">Non</option>
+                  </select>
+                 <input
+                    type="hidden"
+                    
+                v-model="formData1.exonere"
+                    class="span"
+                    readonly
+                  />
+                </div>
+              </div>
+            </td>           
+          </tr>
+          <tr  class="odd gradeX">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                  
+                 :value="montantHT1"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup2()" >
+                        <span>
+                          <i class=" icon-plus"></i>
+                        </span>
+                      </button>
+                       <!-- <button class="btn btn-danger"  v-on:click="showPopup20()" >
+                        <span>
+                          <i class=" icon-remove"></i>
+                        </span>
+                      </button> -->
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+        <!-- 2 ligne -->
+         <tr  class="odd gradeX" v-show="popupState2">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation2"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire2"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                   
+                       v-model="formData1.quantite2"
+                 
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT2"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup3()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState3">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation3"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire3"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite3"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT3"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup4()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState4">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation4"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire4"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite4"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT4"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup5()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState5">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation5"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire5"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite5"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT5"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup6()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState6">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation6"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire6"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite6"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT6"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup7()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState7">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation7"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire7"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite7"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT7"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup8()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState8">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation8"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire8"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite8"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT8"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup9()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState9">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation9"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire9"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite9"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT9"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup10()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState10">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation10"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire10"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite10"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                   :value="montantHT10"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup10()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Montant HT</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                :value="totalMontantHT"
+                    class="span"
+                   readonly
+                  />
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Taux</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="afficherEnorere"
+                    class="span"
+                   readonly
+                  />
+                  
+                   <input
+                    type="hidden"
+                    :value="afficherEnorere2"
+                   
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">TVA</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="montantTva"
+                    class="span"
+                   readonly
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+         
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="montantHTt"
+                    class="span"
+                   readonly
+                  />
+                
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterFactureLocal(formData1)"
+          class="btn btn-primary"
+          href="#"
+           
+        >Valider</a> 
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
     <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
 
 
@@ -2923,7 +7073,905 @@ montantDisponibleBudgetMandatEngagement
 
 
 
-     
+     <div id="modalFactureAjouterEngagementDirect" class="modal hide taillemodal45">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter Facture Definitive</h3>
+      </div>
+      <div class="modal-body " >
+        <table class="table table-bordered table-striped tailfacture">
+         
+          <tr>
+              
+             <td>
+              
+              <div class="control-group">
+                <label class="control-label">Type facture</label>
+                <div class="controls">
+                  <select v-model="formData1.typfacture_id" class="span">
+                  
+                    <option value="1">Facture definitive</option>
+                    
+                  </select>
+                 
+                </div>
+              </div>
+            </td> 
+              <td>
+              <div class="control-group">
+                <label class="control-label">Numero facture</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                   v-model="formData1.numero_facture"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+               </td>
+               <td>
+              <div class="control-group">
+                <label class="control-label">Date de la facture</label>
+                <div class="controls">
+                  <input
+                    type="date"
+                    v-model="formData1.date_facture"
+                   
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+             
+            </td>
+             <td>
+              
+              <div class="control-group">
+                <label class="control-label">Unite administrative</label>
+                <div class="controls">
+                 <input
+                    type="text"
+                    :value="detail_marche.objetUniteAdministrative.libelle"
+                   readonly
+                    class="span"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             
+             
+            
+            
+
+          </tr>
+           <tr>
+               <td colspan="2"> 
+              <div class="control-group">
+                <label class="control-label">Objet facture</label>
+                <div class="controls">
+                 
+                  <textarea rows="3" :value="detail_marche.objet" class="span6">
+
+                  </textarea>
+                </div>
+              </div>
+               </td>
+               <td>
+              <div class="control-group">
+                <label class="control-label">Fournisseur</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                 :value="nomFournisseur"
+                    class="span3"
+                    readonly
+                  />
+                </div>
+              </div>
+            </td>
+               <td>
+              
+              <div class="control-group">
+                <label class="control-label">exonéré</label>
+                <div class="controls">
+                  <select v-model="formData1.exonere" class="span">
+                  
+                    <option value="0">Oui</option>
+                     <option value="1">Non</option>
+                  </select>
+                 <input
+                    type="hidden"
+                    
+                v-model="formData1.exonere"
+                    class="span"
+                    readonly
+                  />
+                </div>
+              </div>
+            </td>           
+          </tr>
+          <tr  class="odd gradeX">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                  
+                 :value="montantHT1"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup2()" >
+                        <span>
+                          <i class=" icon-plus"></i>
+                        </span>
+                      </button>
+                       <!-- <button class="btn btn-danger"  v-on:click="showPopup20()" >
+                        <span>
+                          <i class=" icon-remove"></i>
+                        </span>
+                      </button> -->
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+        <!-- 2 ligne -->
+         <tr  class="odd gradeX" v-show="popupState2">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation2"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire2"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                   
+                       v-model="formData1.quantite2"
+                 
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT2"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup3()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState3">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation3"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire3"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite3"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT3"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup4()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState4">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation4"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire4"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite4"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT4"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup5()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState5">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation5"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire5"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite5"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT5"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup6()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState6">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation6"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire6"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite6"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT6"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup7()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState7">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation7"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire7"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite7"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT7"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup8()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState8">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation8"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire8"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite8"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT8"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup9()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState9">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation9"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire9"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite9"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT9"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup10()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState10">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation10"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire10"
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite10"
+                    class="span3"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                   :value="montantHT10"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup10()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Montant HT</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                :value="totalMontantHT"
+                    class="span"
+                   readonly
+                  />
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Taux</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="afficherEnorere"
+                    class="span"
+                   readonly
+                  />
+                  
+                   <input
+                    type="hidden"
+                    :value="afficherEnorere2"
+                   
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">TVA</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="montantTva"
+                    class="span"
+                   readonly
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+         
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="montantHTt"
+                    class="span"
+                   readonly
+                  />
+                
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterFactureLocal(formData1)"
+          class="btn btn-primary"
+          href="#"
+           
+        >Valider</a> 
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
     <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
 
 
@@ -2953,21 +8001,12 @@ montantDisponibleBudgetMandatEngagement
 <script>
     import { mapGetters, mapActions } from "vuex";
     import moment from "moment";
-    import avenant from "../contractualisation/DossierExecution/dossierAvenant/avenant";
-    import facture from "../contractualisation/DossierExecution/dossierFacture/facture";
-    import engagementEx from "../contractualisation/DossierExecution/dossierEngagement/engagementEx";
      import { formatageSomme } from "../../../../src/Repositories/Repository";
     //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
 
 
     export default {
         name: 'compte',
-         components: {
-      avenant,
-    facture,
-    engagementEx
-     
-  },
         data() {
             return {
                 fabActions: [
@@ -2977,81 +8016,16 @@ montantDisponibleBudgetMandatEngagement
                     }
 
                 ],
-                      formData1: {
-total:0,
-total2:0,
-total3:0,
-total4:0,
-total5:0,
-total6:0,
-total7:0,
-total8:0,
-total9:0,
-total10:0,
-       
-numero_facture:"",
-        objet_facture:"",
-       
-      
-        
-        typfacture_id:"",
-           prix_propose_ht:"",
-        prix_propose_ttc:"",
-         date_facture:"",
-         ua:"",
-           tva:"",
-           taux:"",
-
-            designation:"",
-
- prix_unitaire:"",
-         quantite:"",
-           montantHT1:"",
-           designation2:"",
-            prix_unitaire2:"",
-             quantite2:"",
-         montantHT2:"",
-           designation3:"",
-           prix_unitaire3:"",
-            quantite3:"",
-             montantHT3:"",
-
- designation4:"",
-           prix_unitaire4:"",
-            quantite4:"",
-             montantHT4:"",
-              designation5:"",
-           prix_unitaire5:"",
-            quantite5:"",
-             montantHT5:"",
-              designation6:"",
-           prix_unitaire6:"",
-            quantite6:"",
-             montantHT6:"",
-              designation7:"",
-           prix_unitaire7:"",
-            quantite7:"",
-             montantHT7:"",
-              designation8:"",
-           prix_unitaire8:"",
-            quantite8:"",
-             montantHT8:"",
-              designation9:"",
-           prix_unitaire9:"",
-            quantite9:"",
-             montantHT9:"",
-
- designation10:"",
-           prix_unitaire10:"",
-            quantite10:"",
-             montantHT10:"",
- fournisseur_id:"",
- exonere:"",
-       
-
-        
-      
-},
+                 editMandat:{
+                observation_emetteur:"",
+              	decision_emetteur:"",
+                date_decision_emetteur:"",
+                nom_emetteur:"",
+                date_motif:"",
+                observation:"",
+                decision_cf:"",
+                motif:""
+             }  ,
                 formDataMadat:{
                   numero_mandat:"",
                   numero_bordereau:""
@@ -3108,12 +8082,7 @@ montant_emprunt:0,
 
       },
       editFacture:{},
-             editMandat:{
-                observation_emetteur:"",
-              	decision_emetteur:"",
-                date_decision_emetteur:"",
-                nom_emetteur:""
-             }  ,
+          
              test:{
                val:0
                },
@@ -3188,10 +8157,107 @@ type_engagement_id:"",
 val:0
       },
 
+formData1: {
+total:0,
+total2:0,
+total3:0,
+total4:0,
+total5:0,
+total6:0,
+total7:0,
+total8:0,
+total9:0,
+total10:0,
+       
+numero_facture:"",
+        objet_facture:"",
+       
+      
+        
+        typfacture_id:"",
+           prix_propose_ht:"",
+        prix_propose_ttc:"",
+         date_facture:"",
+         ua:"",
+           tva:"",
+           taux:"",
+
+            designation:"",
+
+ prix_unitaire:"",
+         quantite:"",
+           montantHT1:"",
+           designation2:"",
+            prix_unitaire2:"",
+             quantite2:"",
+         montantHT2:"",
+           designation3:"",
+           prix_unitaire3:"",
+            quantite3:"",
+             montantHT3:"",
+
+ designation4:"",
+           prix_unitaire4:"",
+            quantite4:"",
+             montantHT4:"",
+              designation5:"",
+           prix_unitaire5:"",
+            quantite5:"",
+             montantHT5:"",
+              designation6:"",
+           prix_unitaire6:"",
+            quantite6:"",
+             montantHT6:"",
+              designation7:"",
+           prix_unitaire7:"",
+            quantite7:"",
+             montantHT7:"",
+              designation8:"",
+           prix_unitaire8:"",
+            quantite8:"",
+             montantHT8:"",
+              designation9:"",
+           prix_unitaire9:"",
+            quantite9:"",
+             montantHT9:"",
+
+ designation10:"",
+           prix_unitaire10:"",
+            quantite10:"",
+             montantHT10:"",
+ fournisseur_id:"",
+ exonere:"",
+       
+
+        
+      
+},
 
 
 
-             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              popupState2: false,
+              popupState3: false,
+              popupState4: false,
+              popupState5: false,
+              popupState6: false,
+              popupState7: false,
+              popupState8: false,
+              popupState9: false,
+              popupState10: false,
              
 
             };
@@ -3211,7 +8277,7 @@ created() {
   /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
     console.log(this.appel_offre_marche)*/
 },
-         computed: {
+        computed: {
             ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
@@ -3261,6 +8327,14 @@ created() {
    
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
+afficheMarcheType(){
+if(this.detail_marche.type_marche.libelle == "Travaux"){
+return 1
+}
+else{
+  return 2
+}
+},
 afficheidFour() {
       return id => {
         if (id != null && id != "") {
@@ -3848,7 +8922,7 @@ afficheIdModePaiement() {
  afficheGrandNatureId() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel =>  qtreel.imputation ==this.detail_marche.imputation);
+           const qtereel = this.marches.find(qtreel =>  qtreel.imputation ==id);
 
       if (qtereel) {
         return qtereel.gdenature_id;
@@ -6791,7 +11865,8 @@ activite_id:this.detail_marche.activite_id,
   ua_id:this.detail_marche.unite_administrative_id,
   grd_nature_id:this.detail_marche.gdenature_id,
 
-section_id:this.afficherSectId
+section_id:this.afficherSectId,
+marchetype:this.afficheMarcheType
 
        };
   this.modifierMandat(nouvelObjet)
@@ -6873,7 +11948,7 @@ alert("Le montant engagé est superieure au montant de la facture")
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
       
-       else if (this.montantMarcheAvecAvenant == this.afficheMontantReelMarche(this.detail_marche.id))
+       else if (parseFloat(this.montantMarcheAvecAvenant) == parseFloat(this.sommeEgagementLigneTableau(this.detail_marche.id)))
       {
         let marcheObjet=this.marches.find(marche=>marche.id == this.detail_marche.id)
     marcheObjet.attribue = 5
@@ -7555,7 +12630,7 @@ alert("Le montant engagé est superieure au montant de la facture")
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
       
-       else if (this.montantMarcheAvecAvenant == this.afficheMontantReelMarche(this.detail_marche.id))
+       else if (parseFloat(this.montantMarcheAvecAvenant) == parseFloat(this.sommeEgagementLigneTableau(this.detail_marche.id)))
       {
         alert("Marché apuré")
       }
@@ -7596,14 +12671,14 @@ section_id:this.editLiquidation.section_id,
 	entreprise_id:this.afficheidFour(this.editLiquidation.marche_id),
     	montant_tresor:this.afficheMontantTresor(this.editLiquidation.marche_id),
         montant_don:this.afficheMontantDon(this.editLiquidation.marche_id),
-        montant_emprunt:this.afficheMontantEmprunt(this.editLiquidation.marche_id)
- 
+        montant_emprunt:this.afficheMontantEmprunt(this.editLiquidation.marche_id),
+ marchetype:this.afficheMarcheType
        };
 this.ajouterMandat(nouvelObjet91)
 this.$("#exampleModalAjouteMandionatApresLiquidat").modal('hide');
 this.formDataMadat= {
  numero_mandat:"",
-                  numero_bordereau:""
+ numero_bordereau:""
  
 };
 

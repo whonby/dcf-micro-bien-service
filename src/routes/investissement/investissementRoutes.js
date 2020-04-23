@@ -3,13 +3,14 @@ import tableauBordInvestissement from '../../pages/investissement/tableauBordInv
  import detailMarcheInvestissement from '../../pages/investissement/dossierInvestissement/detailMarcheInvestissement'
 
 const investissementRoutes =[
-
+  
     {
         path:"/creation-investissement",
         name:"investissement",
         component:investissement
     },
     
+
 
     {
         path:"/tabeau-bord-investissement",

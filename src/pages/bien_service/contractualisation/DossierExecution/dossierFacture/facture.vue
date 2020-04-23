@@ -1,1619 +1,23 @@
-
-detail_marche
+montant_cumul
+afficherCompteUtilisateur1
+afficherObjetFacture
+montantCumulerModifier
+afficherObjetFacture
+afficheligneEconom
+sommeMontant
+afficheligneEconomiqueBudgetaire
+sources_financements
+afficherligneEconomiqueBudgetaire
 afficheNomFournisseur
-afficherModalAjouter
-unite_administrative_id
-CodeGdeNatureDep
-gdenature_id
-montantMarcheAvecAvenant
-afficheractivite
-afficherUniteAdmin
+afficherNumeroFcture
+detail_marche
+afficherMontantFacture
+dotationInite
+Dotation_Initiale
+sommeEgagementLigne
 <template>
 
 <div>
-
-   <div id="AjouterEngage" class="modal hide taillemodal6">
-  <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h5>Ajouter Engagement</h5>
-      </div>
-        
-      
-           
-<div class="table-responsive text-nowrap taillemodal61">
-              <table class="table table-bordered table-striped ">
-                <div class="widget-box">
-                  <div class="widget-title">
-                    <ul class="nav nav-tabs">
-                      <li class="active">
-                        <a data-toggle="tab" href="#tab1000">INFORMATION</a>
-                      </li>
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab2">TYPE ENGAGEMENT </a>
-                      </li> -->
-                      
-                      <li>
-                        <a data-toggle="tab" href="#tab120">INFO FOURNISSEUR / IMPUTATION BUDGETAIRE</a>
-                      </li>
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab32">IMPUTATION BUDGETAIRE</a>
-                      </li> -->
-                       <!-- <li>
-                        <a data-toggle="tab" href="#2">Valeur Calculer</a>
-                      </li> -->
-                    </ul>
-                  </div>
-                  <div class="widget-content tab-content tailfenet">
-                    <!--ongle identification-->
-                    <div id="tab1000" class="tab-pane active">
-                      <tr>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Exercice Budgetaire</label>
-                            
-                               
-                             <div class="controls">
-                              <input
-                                type="text"
-                                class="span4"
-                               readonly
-                              :value="anneeAmort"
-                              />
-                            </div>
-                          </div>
-                        </td>
-                          <td>
-                         <div class="control-group">
-                            <label class="control-label">Section</label>
-                            <div class="controls">
-                             <input
-                                type="text"
-                                class="span4"
-                               readonly
-                            :value="afficherSecti"
-                              
-                              />
-                            </div>
-                          </div>
-                          
-                        </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Programme/dotation</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                class="span4"
-                                readonly
-                            :value="afficherProgDot"
-                              
-                              />
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                         <div class="control-group">
-                            <label class="control-label">Nature depense</label>
-                             <div class="controls">
-                                 <input
-                                type="text"
-                                class="span4"
-                                readonly
-                            :value="CodeGdeNatureDep(afficheridgrandeNat(macheid))"
-                              
-                              />
-                          
-                           <input
-                                type="hidden"
-                                class="span"
-                               
-                             :value="macheid"
-                              />
-                               <input
-                                type="hidden"
-                                class="span"
-                               
-                             :value="montantMarcheAvecAvenant"
-                              />
-                               <input
-                                type="hidden"
-                                class="span"
-                               
-                             v-model="formData.val"
-                              />
-                              </div>
-                              </div>
-                        </td>
-                        </tr>
-                         <tr>
- 
-                          <td>
-                           <div class="control-group">
-                            <label class="control-label">Action</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                class="span4"
-                                readonly
-                            :value="afficherActi"
-                              
-                              />
-                              
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                         <div class="control-group">
-                            <label class="control-label">Activite</label>
-                            <div class="controls">
-                             
-                               <input
-                                type="text"
-                                class="span4"
-                                readonly
-                            :value="afficheractivite(afficheridActivite(this.macheid))"
-                              
-                              />
-                            </div>
-                          </div>
-                          </td>
-                          <td>
-                             <div class="control-group">
-                            <label class="control-label">Unite administrative</label>
-                            <div class="controls">
-                               <input
-                                type="text"
-                                class="span4"
-                                readonly
-                            :value="afficherUniteAdmin(afficheridUa(this.macheid))"
-                              
-                              />
-                              
-                            </div>
-                          </div>
-                          
-                        </td>
-                          <td>
-                           <div class="control-group">
-                            <label class="control-label">Type Procedure</label>
-                            
-                               <div class="controls">
-                              <input
-                                type="text"
-                                class="span4"
-                               readonly
-                             :value="recupererTypeProcedure"
-                              
-                              />
-                               
-                               
-                             
-
-                              
-                            </div>
-                          </div>
-                        </td>
-                        </tr>
-                         
-                        <tr>
-                        
-                         
-                               <input
-                                type="hidden"
-                                class="span4"
-                               
-                            :value="idBudgetaire"
-                              
-                              />
-                            <!-- </div>
-                          </div>
-                        </td> -->
-                        
-                       
-                        <td>
-                         <div class="control-group">
-                            <label class="control-label">Numéro Bon Manuel</label>
-                            <div class="controls">
-                              <input type="text" class="span4" v-model="formData.numero_demande_engage"/>
-                            </div>
-                          </div>
-                        </td>
-                         <td>
-                         <div class="control-group">
-                            <label class="control-label">Numéro demande engagement</label>
-                            <div class="controls">
-                              <input type="text" class="span4" v-model="formData.numero_engage"/>
-                            </div>
-                          </div>
-                        </td>
-                         <td>
-                         <div class="control-group">
-                            <label class="control-label">Numero Bordereau</label>
-                            <div class="controls">
-                              <input type="text" class="span4" v-model="formData.numero_bordereau"/>
-                            </div>
-                          </div>
-                        </td>
-                         <td>
-                         <div class="control-group">
-                            <label class="control-label">Date demande engagement</label>
-                            <div class="controls">
-                              <input type="date" class="span4" v-model="formData.date_demande"/>
-                            </div>
-                          </div>
-                        </td>
-                       
-               
-                      </tr>
-
-                    
-                 
-                  <tr>
-                          
-                        
-                        <td>
-                            <div class="control-group">
-                              <label class="control-label">Réf. Engagement  juridique</label>
-                              <div class="controls">
-                                <input
-                                  type="text"
-                                  class="span4"
-                                  v-model="formData.ref_juridique"
-                                />
-                              </div>
-                            </div>
-                          </td>
-                          
-                           <td>
-                            <div class="control-group">
-                              <label class="control-label">Numero OP/AT</label>
-                              <div class="controls">
-                                <input
-                                  type="text"
-                                  class="span4"
-                                  v-model="formData.numero_op"
-                                />
-                              </div>
-                            </div>
-                          </td>
-                       
-                         
-                        
-                        
-                          
-                         
-                      </tr>
-                       <tr>
-                        
-                       <input
-                    type="hidden"
-                   :value="montantCumuler"
-                    
-                    class="span"
-                    
-                  />
-                      <input
-                    type="hidden"
-                   :value="montantCumulerModifier"
-                    
-                    class="span"
-                    
-                  />
-                        
-                          
-                        
-                       
-                        
-                       
-                        <!-- <td>
-                             <div class="control-group">
-                            <label class="control-label">Bailleur</label>
-                            <div class="controls">
-                              <input type="text" class="span" v-model="formData.Bailleur" />
-                            </div>
-                          </div>
-                        </td> -->
-                       
-                      </tr>
-                      <tr>
-                          
-                             <!-- formData2 -->
-                      </tr>
-                    </div>
-                    <!--ongle descriptif-->
-                    <!-- <div id="tab2" class="tab-pane">
-                      
-
-                      
-                       
-                     
-                     
-                      <tr>
-                         
-                         
-                      
-                        
-                       
-                       
-                      </tr>
-                      
-                    </div> -->
-                    <!--ongle 3 -->
-
-
-<!--ongle descriptif-->
-                    <div id="tab120" class="tab-pane">
-                      
-
-                      
-                        <tr>
-                         <td>
-                         <div class="control-group">
-                            <label class="control-label">Mode de paiement</label>
-                            <div class="controls">
-                              <select v-model="formData.mod_paiement_engage" class="span4">
-                             
-                                <option
-                        v-for="localgeo in modepaiements"
-                        :key="localgeo.id"
-                        :value="localgeo.id"
-                      >{{localgeo.libelle}}</option>
-                              </select>
-                              
-                            </div>
-                          </div>
-                        </td>
-                         
-                       <td>
-                         <div class="control-group">
-                            <label class="control-label">N° compte contribuable</label>
-                            <div class="controls">
-                             <div class="controls">
-                              <input type="text" class="span4" :value="afficheNumeroFournisseur(NumeroFournisseur_id)" readonly/>
-                               
-                            </div>
-                              
-                            </div>
-                          </div>
-                        </td>
-                        
-                          
-                       
-                       
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Nom entreprise</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="afficheNomFournisseur(NumeroFournisseur_id)" readonly/>
-                               
-                            </div>
-                          </div>
-                        </td>
-                          <td>
-                          <div class="control-group">
-                            <label class="control-label">Adresse</label>
-                            <div class="controls">
-                              <input
-                                type="text"
-                                class="span4"
-                                placeholder="Saisir adresse_entreprise"
-                                :value="afficheAdresseFournisseur(NumeroFournisseur_id)"
-                                readonly
-                              />
-                            </div>
-                          </div>
-                        </td>
-                       
-                       
-                      </tr>
-                     
-                      <tr>
-                        
-                       <input
-                    type="hidden"
-                   :value="montantCumuler"
-                    
-                    class="span"
-                    
-                  />
-                      <input
-                    type="hidden"
-                   :value="montantCumulerModifier"
-                    
-                    class="span"
-                    
-                  />
-                        
-                          
-                        
-                       
-                        
-                       
-                        <!-- <td>
-                             <div class="control-group">
-                            <label class="control-label">Bailleur</label>
-                            <div class="controls">
-                              <input type="text" class="span" v-model="formData.Bailleur" />
-                            </div>
-                          </div>
-                        </td> -->
-                       
-                      </tr>
-                      <tr>
-                         
-                         
-                      
-                        
-                       
-                       
-                      </tr>
-                      <tr>
-                            <td >
-                         <div class="control-group">
-                            <label class="control-label">Objet de la dépense</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="afficherObjetFacture" readonly/>
-                               <input type="hidden" class="span10" v-model="formData.id" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                          <td>
-                            <div class="control-group">
-                              <label class="control-label">Numéro compte</label>
-                              <div class="controls">
-                               <select v-model="formData.compte_id" class="span4">
-                                <option
-                                  v-for="affiche in afficherCompteUtilisateur1(this.NumeroFournisseur_id)" :key="affiche.id"
-                                  :value="affiche.id"
-                                >{{affiche.rib}}</option>
-                              </select>
-                              </div>
-                            </div>
-                          </td>
-                         <td>
-                            <div class="control-group">
-                              <label class="control-label">piece justificative</label>
-                              <div class="controls">
-                                <input
-                                  type="file"
-                                  class="span"
-                                 
-                                />
-                              </div>
-                            </div>
-                          </td>
-                             <td>
-                             <div class="control-group">
-                            <label class="control-label">Bailleur</label>
-                            
-                             <select v-model="formData.bailler_id" class="span4">
-                                <option
-                                  v-for="fam in sources_financements"
-                                  :key="fam.id"
-                                  :value="fam.id"
-                                >{{fam.libelle}}</option>
-                              </select>
-                          </div>
-                        </td> 
-                      </tr>
-                      <tr>
-                       <td>
-                         <div class="control-group">
-                            <label class="control-label">Total général</label>
-                            <div class="controls">
-                              <input type="number" class="span4" :value="sommeMontant" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                       
-                        <td>
-                         <div class="control-group">
-                            <label class="control-label">Trésor</label>
-                            <div class="controls">
-                              <input type="number" class="span4" v-model="formData.montant_tresor" />
-                            </div>
-                          </div>
-                        </td>
-                          <td>
-                          <div class="control-group">
-                            <label class="control-label">Don</label>
-                            <div class="controls">
-                              <input type="number" class="span4" v-model="formData.montant_don" />
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                             <div class="control-group">
-                            <label class="control-label">Emprunt</label>
-                            <div class="controls">
-                              <input type="number" class="span4" v-model="formData.montant_emprunt" />
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                        <tr>
-                        
-                        
-                       
-                        
-                        <td>
-                           <div class="control-group">
-                            <label class="control-label">Ligne Budgetaire</label>
-                            <div class="controls">
-                              <!-- <select v-model="formData.ligne_budgetaire_id" class="span4"> -->
-                                <!-- <option
-                                  v-for="fam in ligneBudgetaire(macheid)"
-                                  :key="fam.id"
-                                  :value="fam.economique_id"
-                                >{{fam.afficheEconomique.code}}-{{fam.afficheEconomique.libelle}}</option>
-                              </select> -->
-                               <div class="controls">
-                              <input type="text" class="span4" :value="afficheligneEconomiqueBudgetaire(afficheligneEconom(afficherligneEconomiqueBudgetaire))" readonly/>
-                            </div>
-                            </div>
-                          </div>
-                        </td>
-                        <td >
-                          <div class="control-group">
-                            <label class="control-label">Imputation Budgetaire</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="afficherligneEconomiqueBudgetaire" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                       <td>
-                          <div class="control-group">
-                            <label class="control-label">Numéro Facture</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="afficherNumeroFcture" readonly/>
-                              
-                              <input type="hidden" class="span4" v-model="formDataFacture.id" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="control-group">
-                            <label class="control-label">Montant Facture</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="afficherMontantFacture" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                       
-                      </tr>
-                      <tr>
-                         <td>
-                          <div class="control-group">
-                            <label class="control-label">Crédit Autorisés</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="dotationInite(detail_marche.imputation).Dotation_Initiale" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                         <td>
-                          <div class="control-group">
-                            <label class="control-label">Cumul des demandes(y compris celle-ci) </label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="sommeEgagementLigne(macheid)" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                                               <td>
-                          <div class="control-group">
-                            <label class="control-label">Dotation disponible</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="dotationDisponibleAnterieure" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                          <td>
-                          <div class="control-group">
-                            <!-- <label class="control-label">Montant marché</label> -->
-                            <div class="controls">
-                              <input type="hidden" class="span4" v-model="montantMarcheAvecAvenant" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                           <td>
-                          <div class="control-group">
-                            <!-- <label class="control-label">Crédits Autorisés(Engagement actuel)</label> -->
-                            <div class="controls">
-                              <input type="hidden" class="span4" :value="sommeMontant" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                       
-                      
-                        
-                        
-                      
-                      </tr>
-                        <tr>
-                            <td>
-                                                    <div class="control-group">
-                            <!-- <label class="control-label">Engagement cumulé </label> -->
-                            <div class="controls">
-                              <input type="hidden" class="span4" :value="montantCumulerMandat" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                          <td>
-                          <div class="control-group">
-                            <!-- <label class="control-label">Disponible marché</label> -->
-                            <div class="controls">
-                              <input type="hidden" class="span4" :value="restePayeMarche" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                           <td >
-                          <div class="control-group">
-                            <!-- <label class="control-label">Dotation disponible</label> -->
-                            <div class="controls">
-                              <input type="hidden" class="span4" :value="montantDisponibleBudgetMandat" readonly/>
-                            </div> 
-                          </div>
-                          
-                        </td>
-                                                 <td>
-                          <div class="control-group">
-                            <!-- <label class="control-label">Dotation disponible anterieure</label> -->
-                            <div class="controls">
-                              <input type="hidden" class="span4" :value="dotationDisponibleAnterieure" readonly/>
-                            </div>
-                          </div>
-                        </td>
-                         
-                        
-
-                         <!-- <td>
-                          <div class="control-group">
-                            <label class="control-label">Disponible</label>
-                            <div class="controls">
-                              <input type="text" class="span4" :value="montantDisponibleBudget" readonly/>
-                            </div> 
-                          </div>
-                        </td> -->
-                       
-                      </tr>
-                    </div>
-                    <!--ongle 3 -->
-                
-                       
-                  </div>
-                  
-                  <div align="right">
-                    <div class="controls">
-                      <div data-toggle="buttons-checkbox" class="btn-group">
-                        <a
-                          class="btn btn-primary"
-                         @click.prevent="ajouterEngagementLocal(formData)"
-                        >Valider</a>
-                        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </table>
-            </div>
-           
-          
-        
-     
-    </div>
-
-
-
-
-
-<div id="modalFactureAjouterEngagementDirect" class="modal hide taillemodal45">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Facture Definitive</h3>
-      </div>
-      <div class="modal-body " >
-        <table class="table table-bordered table-striped tailfacture">
-         
-          <tr>
-              
-             <td>
-              
-              <div class="control-group">
-                <label class="control-label">Type facture</label>
-                <div class="controls">
-                  <select v-model="formData1.typfacture_id" class="span">
-                  
-                    <option value="1">Facture definitive</option>
-                    
-                  </select>
-                 
-                </div>
-              </div>
-            </td> 
-              <td>
-              <div class="control-group">
-                <label class="control-label">Numero facture</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                   v-model="formData1.numero_facture"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-               </td>
-               <td>
-              <div class="control-group">
-                <label class="control-label">Date de la facture</label>
-                <div class="controls">
-                  <input
-                    type="date"
-                    v-model="formData1.date_facture"
-                   
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-             
-            </td>
-             <td>
-              
-              <div class="control-group">
-                <label class="control-label">Unite administrative</label>
-                <div class="controls">
-                 <input
-                    type="text"
-                    
-                   readonly
-                    class="span"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             
-             
-            
-            
-
-          </tr>
-           <tr>
-               <td colspan="2"> 
-              <div class="control-group">
-                <label class="control-label">Objet facture</label>
-                <div class="controls">
-                 
-                  <textarea rows="3"  class="span6">
-
-                  </textarea>
-                </div>
-              </div>
-               </td>
-               <td>
-              <div class="control-group">
-                <label class="control-label">Fournisseur</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                 :value="nomFournisseur"
-                    class="span3"
-                    readonly
-                  />
-                </div>
-              </div>
-            </td>
-               <td>
-              
-              <div class="control-group">
-                <label class="control-label">exonéré</label>
-                <div class="controls">
-                  <select v-model="formData1.exonere" class="span">
-                  
-                    <option value="0">Oui</option>
-                     <option value="1">Non</option>
-                  </select>
-                 <input
-                    type="hidden"
-                    
-                v-model="formData1.exonere"
-                    class="span"
-                    readonly
-                  />
-                </div>
-              </div>
-            </td>           
-          </tr>
-          <tr  class="odd gradeX">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.quantite"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                  
-                 :value="montantHT1"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup2()" >
-                        <span>
-                          <i class=" icon-plus"></i>
-                        </span>
-                      </button>
-                       <!-- <button class="btn btn-danger"  v-on:click="showPopup20()" >
-                        <span>
-                          <i class=" icon-remove"></i>
-                        </span>
-                      </button> -->
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-        <!-- 2 ligne -->
-         <tr  class="odd gradeX" v-show="popupState2">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation2"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire2"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                   
-                       v-model="formData1.quantite2"
-                 
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  :value="montantHT2"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup3()" >
-                        <span>
-                          <i class=" icon-plus-sign"></i>
-                        </span>
-                      </button>
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-           <!-- 3 ligne -->
-         <tr  class="odd gradeX" v-show="popupState3">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation3"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire3"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.quantite3"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  :value="montantHT3"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup4()" >
-                        <span>
-                          <i class=" icon-plus-sign"></i>
-                        </span>
-                      </button>
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-           <!-- 3 ligne -->
-         <tr  class="odd gradeX" v-show="popupState4">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation4"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire4"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.quantite4"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                 :value="montantHT4"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup5()" >
-                        <span>
-                          <i class=" icon-plus-sign"></i>
-                        </span>
-                      </button>
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-           <!-- 3 ligne -->
-         <tr  class="odd gradeX" v-show="popupState5">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation5"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire5"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.quantite5"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                 :value="montantHT5"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup6()" >
-                        <span>
-                          <i class=" icon-plus-sign"></i>
-                        </span>
-                      </button>
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-           <!-- 3 ligne -->
-         <tr  class="odd gradeX" v-show="popupState6">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation6"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire6"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.quantite6"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  :value="montantHT6"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup7()" >
-                        <span>
-                          <i class=" icon-plus-sign"></i>
-                        </span>
-                      </button>
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-           <!-- 3 ligne -->
-         <tr  class="odd gradeX" v-show="popupState7">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation7"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire7"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.quantite7"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                 :value="montantHT7"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup8()" >
-                        <span>
-                          <i class=" icon-plus-sign"></i>
-                        </span>
-                      </button>
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-           <!-- 3 ligne -->
-         <tr  class="odd gradeX" v-show="popupState8">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation8"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire8"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.quantite8"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                 :value="montantHT8"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup9()" >
-                        <span>
-                          <i class=" icon-plus-sign"></i>
-                        </span>
-                      </button>
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-           <!-- 3 ligne -->
-         <tr  class="odd gradeX" v-show="popupState9">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation9"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire9"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.quantite9"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  :value="montantHT9"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup10()" >
-                        <span>
-                          <i class=" icon-plus-sign"></i>
-                        </span>
-                      </button>
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-           <!-- 3 ligne -->
-         <tr  class="odd gradeX" v-show="popupState10">
-            <td>
-              <div class="control-group">
-                <label class="control-label">Désignation</label>
-                <div class="controls">
-                  <input
-                    type="text"
-                    
-                  v-model="formData1.designation10"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-                <label class="control-label">Prix unitaire</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.prix_unitaire10"
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Quantité</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                  v-model="formData1.quantite10"
-                    class="span3"
-                    
-                  />
-                </div>
-              </div>
-            </td>
-             <td>
-              <div class="control-group">
-                <label class="control-label">Total</label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                   :value="montantHT10"
-                    class="span"
-                    readonly
-                  />
-                  <button class="btn btn-success"  v-on:click="showPopup10()" >
-                        <span>
-                          <i class=" icon-plus-sign"></i>
-                        </span>
-                      </button>
-                </div>
-              </div>
-            </td>
-                  
-          </tr>
-          <tr  class="odd gradeX" >
-            <td colspan="3">
-              <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">Montant HT</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-               
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-                :value="totalMontantHT"
-                    class="span"
-                   readonly
-                  />
-                </div>
-              </div>
-            </td>
-            
-            
-                  
-          </tr>
-          <tr  class="odd gradeX" >
-            <td colspan="3">
-              <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">Taux</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-               
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-              :value="afficherEnorere"
-                    class="span"
-                   readonly
-                  />
-                  
-                   <input
-                    type="hidden"
-                    :value="afficherEnorere2"
-                   
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-            
-            
-                  
-          </tr>
-          <tr  class="odd gradeX" >
-            <td colspan="3">
-              <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">TVA</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-               
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-              :value="montantTva"
-                    class="span"
-                   readonly
-                  />
-                  
-                </div>
-              </div>
-            </td>
-            
-            
-                  
-          </tr>
-         
-          <tr  class="odd gradeX" >
-            <td colspan="3">
-              <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-               
-                <div class="controls">
-                  <input
-                    type="number"
-                    
-              :value="montantHTt"
-                    class="span"
-                   readonly
-                  />
-                
-                </div>
-              </div>
-            </td>
-            
-            
-                  
-          </tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="ajouterFactureLocal(formData1)"
-          class="btn btn-primary"
-          href="#"
-           
-        >Valider</a> 
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
     <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
     <div id="modatFactureModifier" class="modal hide taillemodal45">
       <div class="modal-header">
@@ -3456,10 +1860,16 @@ afficherUniteAdmin
     </div>
     
                 
-               
+                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4" align="right">
+                                   
+                                      <button class="btn btn-success" @click="afficherModalProcedureFacture" >Ajouter Facture</button>
+
+                              </div>
                  
                       <table class="table table-bordered table-striped" v-if="macheid">
-              <table class="table table-bordered table-striped">
+              
                                     <thead>
                                     <tr>
 
@@ -3489,7 +1899,7 @@ afficherUniteAdmin
                     v-for="(factu, index) in afficheFactureTableau(macheid)"
                     :key="factu.id"
                   >
-                   <template v-if="factu.typfacture_id == 1">
+                   
                    <!-- <td @dblclick="afficherModalModifierFacture(index)">{{factu.id || 'Non renseigné'}}</td> -->
                     <td @dblclick="afficherModalModifierFacture(index)">{{factu.objectTypefacture.libelle || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierFacture(index)">{{factu.numero_facture || 'Non renseigné'}}</td>
@@ -3502,32 +1912,19 @@ afficherUniteAdmin
                  
                      
                      <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ttc))|| 'Non renseigné'}}</td>
-                      </template>
-                        <template v-else>
-                   <!-- <td @dblclick="afficherModalModifierFacture(index)">{{factu.id || 'Non renseigné'}}</td> -->
-                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objectTypefacture.libelle || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.numero_facture || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objet_facture || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierFacture(index)">{{factu.objetUA.libelle || 'Non renseigné'}}</td>
-                       <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ht))|| 0}}</td>
-                   <!-- <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_unitaire ))|| 'Non renseigné'}}</td>
-                   <td @dblclick="afficherModalModifierFacture(index)">{{factu.quantite || 'Non renseigné'}}</td> -->
-                        <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.tva)) || 0}}</td>
-                 
+                      
                      
-                     <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ttc))|| 0}}</td>
-                      </template>
                      <td>
-                        <button class="btn " v-if="factu.typfacture_id !== 1" @click="afficherModalAjouter(factu.id)" title="Ajouter engagement">
+                        <button class="btn "  @click="afficherModalAjouter(factu.id)" title="Ajouter engagement">
                         <span>
                           <i class="icon   icon-folder-close"></i>
                         </span>
                       </button>
-                       <button class="btn " v-if="factu.typfacture_id == 1" @click="afficherModalAjouterMandatDirect(factu.id)" title="Ajouter Mandat">
+                       <!-- <button class="btn "  @click="afficherModalAjouterMandatDirect(factu.id)" title="Ajouter Mandat">
                         <span>
                           <i class="icon   icon-folder-close"></i>
                         </span>
-                      </button>
+                      </button> -->
                       <button class="btn btn-danger" @click="supprimerFacture(factu.id)">
                         <span>
                           <i class="icon icon-trash"></i>
@@ -3536,7 +1933,7 @@ afficherUniteAdmin
                     </td>
                   </tr>
                                     </tbody>
-                                </table>
+                                
                                 </table>
 
               
@@ -3654,6 +2051,7 @@ numero_facture:"",
         cause_inactivite:"",
 
       },
+      formDataFacture:{},
        popupState2: false,
               popupState3: false,
               popupState4: false,
@@ -3717,6 +2115,190 @@ search:""
       // "sections"
        
     ]),
+    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+
+    sommeEgagementLigne: function () {
+                return id => {
+                    if (id != "") {
+                      let valInite=0;
+                        return  this.mandats.filter(normeEquipe => normeEquipe.marche_id == this.macheid).reduce(function(total,currentVal){
+                           return total + parseFloat(currentVal.total_general)
+                        },valInite);
+                    }
+                }
+            },
+     dotationInite: function () {
+                return id => {
+                    if (id != "") {
+                        return  this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.codebudget == id);
+                    }
+                }
+            },
+afficherMontantFacture() {
+    
+       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.formDataFacture.id);
+
+      if (norme) {
+       return norme.prix_propose_ttc;
+      }
+      return ""
+    },
+afficherImputationBudget() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.imputation;
+      }
+      return ""
+        }
+      };
+    },
+    afficherNumeroFcture() {
+    
+       const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.formDataFacture.id);
+
+      if (norme) {
+       return norme.numero_facture;
+      }
+      return ""
+    },
+    afficheligneEconomiqueBudgetaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.derniereNivoPlanBudgetaire.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        
+         return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+    // afficherObjetFacture() {
+    
+    //    const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.id == this.formDataFacture.id);
+
+    //   if (norme) {
+    //    return norme.objet_facture;
+    //   }
+    //   return ""
+    // },
+    afficheligneEconom() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.budgetGeneral.find(qtreel => qtreel.codebudget == id);
+
+      if (qtereel) {
+        return qtereel.economique_id ;
+      }
+      return 0
+        }
+      };
+    },
+    afficherCompteUtilisateur1: function () {
+                return id => {
+                    if (id != "") {
+                      
+                        return  this.comptes.filter(normeEquipe => normeEquipe.entrepse_id == id);
+                       
+                    }
+                }
+            },
+     NumeroFournisseur_id() {
+      
+      const norme = this.getFacturePersonnaliser.find(normeEquipe => normeEquipe.marche_id == this.macheid);
+
+      if (norme) {
+        return norme.fournisseur_id;
+      }
+      return 0
+    },
+    afficheNumeroFournisseur() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_cc;
+      }
+      return 0
+        }
+      };
+    },
+
+
+afficheAdresseFournisseur() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.adresse;
+      }
+      return 0
+        }
+      };
+    },
+
+afficheTelephoneFournisseur() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.telephone;
+      }
+      return 0
+        }
+      };
+    },
+sommeMontant() { 
+      const val = parseFloat(this.formData.montant_tresor) + parseFloat(this.formData.montant_don) + parseFloat(this.formData.montant_emprunt);
+      return parseFloat(val).toFixed(2);
+      
+    },
+      montantCumuler() {
+      const val = parseInt(this.sommeMontant);
+      return parseInt(val).toFixed(0);
+    },
+    //  montantCumulerModifier() {
+    //   const val = parseInt(this.editEngagement.montant_cumul);
+    //   return parseInt(val).toFixed(0);
+    // },
+
+    idBudgetaire() {
+      
+      const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.economique_id == this.afficheridBudget(this.macheid));
+
+      if (norme) {
+        return norme.id;
+      }
+      return 0
+    },
+    afficheridBudget() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.economique_id;
+      }
+      return ""
+        }
+      };
+    },
+    recupererTypeProcedure() {
+      
+      const norme = this.choixprocedure.find(normeEquipe => normeEquipe.marche_id == this.macheid);
+
+      if (norme) {
+        return norme.tprocedure;
+      }
+      return ""
+    },
     afficherUniteAdmin() {
       return id => {
         if (id != null && id != "") {
@@ -4107,6 +2689,21 @@ montantTva() {
       
      
     ]),
+    
+afficherModalProcedureFacture() {
+
+   if(this.DisponibleBudgetaireApresLiquidation < this.montantMarcheAvecAvenant)
+ {
+alert("Montant du marche est supperieure au Budget")
+}
+else{
+  this.$("#modalTypeEngagement").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+}
+    
+    },
          afficherModalAjouter(id) {
           
       this.$("#AjouterEngage").modal({

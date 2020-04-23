@@ -45,12 +45,12 @@
                 <td
                   style="background: forestgreen; color:#fff"
                 >{{formatageSomme(parseFloat(MontantTotal(unite.id)))}}</td>
+                <td formatageSomme((parseFloat(budgetConsommerInvestissement(unite.id))
+                  style="background: deepskyblue; color:#fff"
+                >{{formatageSomme(parseFloat(budgetConsommerTransfert(unite.id))+parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerInvestissement(unite.id)))}}</td>
                 <td
                   style="background: deepskyblue; color:#fff"
-                >{{formatageSomme((parseFloat(budgetConsommerTransfert(unite.id))+parseFloat(budgetConsommerBienService(unite.id))))}}</td>
-                <td
-                  style="background: deepskyblue; color:#fff"
-                >{{formatageSomme(parseFloat(MontantTotal(unite.id)-(budgetConsommerBienService(unite.id) + budgetConsommerTransfert(unite.id))))}}</td>
+                >{{formatageSomme(parseFloat(MontantTotal(unite.id))-(parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))))}}</td>
                 <td style="background: orangered;color:#fff">{{}}</td>
               </tr>
 
@@ -283,7 +283,21 @@ export default {
       return id => {
         if (id != "") {
           return this.getMandatPersonnaliserVise
-            .filter(element => element.ua_id == id)
+            .filter(element => element.ua_id == id && element.typemarche == 2)
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+    },
+
+    budgetConsommerInvestissement() {
+      return id => {
+        if (id != "") {
+          return this.getMandatPersonnaliserVise
+            .filter(element => element.ua_id == id && element.typemarche == 1)
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
               0

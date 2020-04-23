@@ -5,7 +5,13 @@
       <!-- administratifs-->
        <li>
          <router-link :to="{name:'investissement'}" tag="a">
-           PLANIFICATION DES MARCHES
+           PLANIFICATION DES MARCHES 
+         </router-link>
+
+       </li>
+        <li>
+         <router-link :to="{name:'executionMarcheInvestissement'}" tag="a">
+           EXECUTION DU MARCHE
          </router-link>
 
        </li>
@@ -13,7 +19,7 @@
     </li> -->
 
       <!--Excution budgetaire-->
-      <li class="dropdown" id="plant">
+      <!-- <li class="dropdown" id="plant">
         <a title="Excution budgetaire" href="#" data-toggle="dropdown" data-target="#plant" 
         class="dropdown-toggle">
           <span class="text">EXECUTION DU MARCHE </span>
@@ -33,7 +39,7 @@
               <i class="icon-key"></i>
               marché && contrat atribué
             </a>
-          </li>
+          </li> -->
           <!-- <li class="divider"></li>
           <li>
             <a href="#">
@@ -162,8 +168,8 @@
             </a>
           </li> -->
 
-        </ul>
-      </li>
+        <!-- </ul>
+      </li> -->
       <!-- document
       -->
        <!-- <li class="dropdown" id="mission">

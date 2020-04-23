@@ -38,6 +38,7 @@ import livrable from '../../pages/bien_service/parametres/livrable.vue';
 import Engagement from '../../pages/bien_service/contractualisation/engagement.vue';
 import AjouterEngagement from '../../pages/bien_service/contractualisation/AjouterEngagement.vue';
 import executionMarche from '../../pages/bien_service/contractualisation/executionMarche.vue';
+import executionMarcheInvestissement from '../../pages/bien_service/contractualisation/executionMarcheInvestissement.vue';
 import actesEffet from '../../pages/bien_service/contractualisation/actesEffet.vue';
 import tableauBord from '../../pages/bien_service/contractualisation/tableauBord.vue';
 import typeAppel from '../../pages/bien_service/parametres/type_appel.vue';
@@ -63,6 +64,11 @@ import DetailPPM from "../../pages/bien_service/ppm/DetailPPM";
 import detailMarcheFsqc from "../../pages/bien_service/dossierFSQC/detailMarcheFsqc";
 import detailMarcheR3cv from "../../pages/bien_service/dossierR3CV/detailMarcheR3cv";
 const BienServiceRoutes = [
+    {
+        path: "/creation-execution-marche-investissement",
+        name: "executionMarcheInvestissement",
+        component: executionMarcheInvestissement
+    },
     {
         path: '/detail-Realite-ServiceFait/:id_detailRealiteServiceFait',
         name: "detailRealiteServiceFait",
@@ -179,7 +185,7 @@ const BienServiceRoutes = [
         path:"/creation-execution-marche",
         name:"executionMarche",
         component:executionMarche
-    },
+    }, 
 
     // acte effe route
 

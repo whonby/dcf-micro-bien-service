@@ -1,22 +1,9 @@
-facture_id
-anneeAmort
-editEngagement
-afficherSecti
-unite_administrative_id
-gdenature_id
-montantMarcheAvecAvenant
-detail_marche
-activite_id
-recupererTypeProcedure
-idBudgetaire
-montantCumuler
-NumeroFournisseur
-afficherObjetEngagement1
-sources_financements
-detail_marche
-sommeEgagementLigne
-montantCumulerMandatEngagement
-montantDisponibleBudgetMandatEngagement
+restePayeMarche
+afficheMarcheEngage
+restePayeMarche
+sommeEngagementTableau
+afficheProgrammeDot
+CodeSection
 <template>
 
 <div>
@@ -701,7 +688,7 @@ montantDisponibleBudgetMandatEngagement
                           <div class="control-group">
                             <label class="control-label">Disponible marché</label>
                             <div class="controls">
-                              <input type="text" class="span4" :value="restePayeMarche" readonly/>
+                              <!-- <input type="text" class="span4" :value="restePayeMarche" readonly/> -->
                             </div>
                           </div>
                         </td>
@@ -971,7 +958,71 @@ search:""
        
     ]),
     ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+     CodeSection() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sections.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.code_section;
+      }
+      return 0
+        }
+      };
+    },
+    uaMandat() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     afficheProgrammeDot() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_programmes.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 0
+        }
+      };
+    },
+sommeEngagementTableau(){
+  return id => {
+    if(id !=""){
+  
+        
+    return this.getMandatPersonnaliserVise.filter(element => element.marche_id == this.macheid).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(2); 
+      
+    }
+    
+  }
+},
+afficheMarcheEngage() {
+      return id => {
+        if (id != null && id != "") {
+          return this.engagements.filter(
+            element => element.marche_id == id
+          );
+        }
+      };
+    },
+restePayeMarche() {
+      const val = parseFloat(this.montantMarcheAvecAvenant) - parseFloat(this.sommeEngagementTableau(this.macheid));
+      return parseFloat(val).toFixed(0);
+      
+    },
+    restePayeMarcheMandat() {
+      const val = parseFloat(this.montantMarcheAvecAvenant) - parseFloat(this.montantCumulerMandat);
+      return parseFloat(val).toFixed(0);
+    },
      dotationDisponibleAnterieure() {
       const val =  parseFloat(this.dotationInite(this.afficherImputationBudget(this.macheid)).Dotation_Initiale) - parseFloat(this.montantCumulerLiquidationMandat);
       
