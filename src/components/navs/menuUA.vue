@@ -82,16 +82,16 @@
       </li>
         <li>
             <router-link :to="{name: 'budgetGenerals'}" tag="a">
-              BUDGET PAR UNITES ADMINISTRATIVES
+              BUDGET PAR UA
             </router-link>
           </li>
 
 
-           <!-- <li>
+           <li>
             <router-link :to="{name: 'BudgetParUa'}" tag="a">
-              LISTE BUDGET PAR UNITE ADMINISTRATIVE
+              DETAIL DE BUDGET PAR UA
             </router-link>
-          </li> -->
+          </li>
            <li>
             <router-link :to="{name: 'ImportBudget'}" tag="a">
               IMPORTATION DU BUDGET

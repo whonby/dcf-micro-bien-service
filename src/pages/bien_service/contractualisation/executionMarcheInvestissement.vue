@@ -461,7 +461,6 @@
                    {{marche.objet || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.reference_marche || 'Non renseigné'}}</td>
-                  
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(afficheMontantReelMarche(marche.id))) || 'Non renseigné'}}</td>
                  
@@ -545,9 +544,9 @@
   
 <script>
  import { mapGetters, mapActions } from "vuex";
- import { formatageSomme } from "../../../../src/Repositories/Repository";
+ import { formatageSomme } from "../../../Repositories/Repository";
 export default {
-  name:'type facture',
+  
   data() {
     return {
       fabActions: [
@@ -681,13 +680,13 @@ return this. marcherAttribuer.filter((item) => {
     },
 
     marcherAttribuer(){
-      return this.getMarchePersonnaliser.filter(recuper => recuper.attribue == 2 && recuper.type_marche.code_type_marche == 4 )
+      return this.getMarchePersonnaliser.filter(recuper => recuper.attribue == 2 && recuper.type_marche.code_type_marche == 3 )
       
     },
 
     
     montantMarcheExecuter(){
-  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.affichertypeMarche(recuper.marche.type_marche_id) == 4).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
+  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.affichertypeMarche(recuper.marche.type_marche_id) == 3).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
 },
     // MontatantImputationBudget() {
       

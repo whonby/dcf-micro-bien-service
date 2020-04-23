@@ -5,19 +5,27 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Equipement Type</h3>
+        <h3>Ajouter Groupe Equipement Type</h3>
       </div>
       <div class="modal-body">
        <form class="form-horizontal">
           <div class="control-group">
             <label class="control-label">Classe:</label>
-            <div class="controls">
-              <input type="number" v-model="formData.code" class="span" placeholder="Saisir le code" />
-            </div>
+            <!-- <select v-model="formData.code" class="span">
+                                <option v-for="varText in affichierIdPlanBudgetaire" :key="varText.id"
+                                        :value="varText.id">{{varText.code}}-{{varText.libelle}}</option>
+                            </select> -->
+                        <input
+                type="text"
+                v-model="formData.code"
+                class="span"
+                placeholder="Saisir le code"
+              />     
           </div>
           <div class="control-group">
             <label class="control-label">Libelle:</label>
             <div class="controls">
+              
               <input
                 type="text"
                 v-model="formData.libelle"
@@ -45,7 +53,7 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Equipement Type</h3>
+        <h3>Modifier Groupe Equipement Type</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
@@ -105,7 +113,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste équipements Type</h5>
+              <h5>Liste Groupe Equipement Type</h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -201,6 +209,7 @@ export default {
 
   computed: {
     ...mapGetters("SuiviImmobilisation", ["equipements"]),
+    ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
     // filtre_equipement() {
     //   const st = this.search.toLowerCase();
     //   return this.equipements.filter(type => {
@@ -210,6 +219,39 @@ export default {
     //     );
     //   });
     // }
+    
+// affichierIdPlanBudgetaire() {
+//       const qtereel = this.plans_budgetaires.find(
+//         qtreel => qtreel.code == 2,
+       
+//       );
+
+//       if (qtereel) {
+//         return qtereel.id;
+//       }
+//       return 0
+//     },
+   
+// AffichieIdDernierNivo() {
+      
+//       return id => {
+//         if (id != null && id != "") {
+//           const qtereel = this.derniereNivoPlanBudgetaire.find(element => element.parent == id);
+//         }
+//  if (qtereel) {
+//         return qtereel.id;
+//       }
+//       return 0
+//       };
+//     },
+// AffichierElementParent() {
+      
+//       return id => {
+//         if (id != null && id != "") {
+//           return this.derniereNivoPlanBudgetaire.filter(element => element.parent == id);
+//         }
+//       };
+//     },
   },
   methods: {
     ...mapActions("SuiviImmobilisation", [

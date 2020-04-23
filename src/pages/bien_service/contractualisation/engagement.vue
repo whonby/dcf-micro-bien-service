@@ -1,4 +1,4 @@
-
+ 
 <template>
   	<div>
 
@@ -9,7 +9,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>DETAIL  MARCHE</h5>
+              <h5>DETAIL  MARCHE </h5>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -1467,7 +1467,7 @@
                           <td>
                           <label class="control-label">Nature de depense</label>
                           
-                              <input    type="text"   class="span3" readonly :value="afficheGrandNatureLibelle(afficheGrandNatureId(editLiquidation.marche_id))"  />                
+                              <input    type="text"   class="span3" readonly :value="afficheGrandNatureLibelle(afficheGrandNatureId(detail_marche.imputation))"  />                
                             
                         </td>
                         <td>
@@ -8019,6 +8019,16 @@
                     }
 
                 ],
+                 editMandat:{
+                observation_emetteur:"",
+              	decision_emetteur:"",
+                date_decision_emetteur:"",
+                nom_emetteur:"",
+                date_motif:"",
+                observation:"",
+                decision_cf:"",
+                motif:""
+             }  ,
                 formDataMadat:{
                   numero_mandat:"",
                   numero_bordereau:""
@@ -8075,12 +8085,7 @@ montant_emprunt:0,
 
       },
       editFacture:{},
-             editMandat:{
-                observation_emetteur:"",
-              	decision_emetteur:"",
-                date_decision_emetteur:"",
-                nom_emetteur:""
-             }  ,
+          
              test:{
                val:0
                },
@@ -8325,6 +8330,14 @@ created() {
    
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
+afficheMarcheType(){
+if(this.detail_marche.type_marche.libelle == "Travaux"){
+return 1
+}
+else{
+  return 2
+}
+},
 afficheidFour() {
       return id => {
         if (id != null && id != "") {
@@ -8912,7 +8925,7 @@ afficheIdModePaiement() {
  afficheGrandNatureId() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.marches.find(qtreel =>  qtreel.imputation ==this.detail_marche.imputation);
+           const qtereel = this.marches.find(qtreel =>  qtreel.imputation ==id);
 
       if (qtereel) {
         return qtereel.gdenature_id;
@@ -11855,7 +11868,8 @@ activite_id:this.detail_marche.activite_id,
   ua_id:this.detail_marche.unite_administrative_id,
   grd_nature_id:this.detail_marche.gdenature_id,
 
-section_id:this.afficherSectId
+section_id:this.afficherSectId,
+marchetype:this.afficheMarcheType
 
        };
   this.modifierMandat(nouvelObjet)
@@ -11937,7 +11951,7 @@ alert("Le montant engagé est superieure au montant de la facture")
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
       
-       else if (this.montantMarcheAvecAvenant == this.afficheMontantReelMarche(this.detail_marche.id))
+       else if (parseFloat(this.montantMarcheAvecAvenant) == parseFloat(this.sommeEgagementLigneTableau(this.detail_marche.id)))
       {
         let marcheObjet=this.marches.find(marche=>marche.id == this.detail_marche.id)
     marcheObjet.attribue = 5
@@ -12619,7 +12633,7 @@ alert("Le montant engagé est superieure au montant de la facture")
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
       
-       else if (this.montantMarcheAvecAvenant == this.afficheMontantReelMarche(this.detail_marche.id))
+       else if (parseFloat(this.montantMarcheAvecAvenant) == parseFloat(this.sommeEgagementLigneTableau(this.detail_marche.id)))
       {
         alert("Marché apuré")
       }
@@ -12660,14 +12674,14 @@ section_id:this.editLiquidation.section_id,
 	entreprise_id:this.afficheidFour(this.editLiquidation.marche_id),
     	montant_tresor:this.afficheMontantTresor(this.editLiquidation.marche_id),
         montant_don:this.afficheMontantDon(this.editLiquidation.marche_id),
-        montant_emprunt:this.afficheMontantEmprunt(this.editLiquidation.marche_id)
- 
+        montant_emprunt:this.afficheMontantEmprunt(this.editLiquidation.marche_id),
+ marchetype:this.afficheMarcheType
        };
 this.ajouterMandat(nouvelObjet91)
 this.$("#exampleModalAjouteMandionatApresLiquidat").modal('hide');
 this.formDataMadat= {
  numero_mandat:"",
-                  numero_bordereau:""
+ numero_bordereau:""
  
 };
 

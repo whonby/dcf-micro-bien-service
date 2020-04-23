@@ -84,7 +84,13 @@
               <span class="text">AFFECTATION</span>
             </router-link>
           </li>
-       <li class="dropdown" id="tableau">
+           <li>
+            <router-link :to="{name:'simulationAmortissement'}" tag="a">
+              <!-- <i class="icon-table"></i> -->
+              <span class="text">SIMULATION AMORTISSEMENT</span>
+            </router-link>
+          </li>
+       <!-- <li class="dropdown" id="tableau">
         <a
           title="Tableau de bord"
           href="#"
@@ -113,7 +119,7 @@
               <span class="text">Fiche d'analyse</span>
             </router-link>
           </li>
-           <li class="divider"></li>
+           <li class="divider"></li> -->
           <!-- <li>
             <router-link :to="{name:'listeStructureMoinEquipe'}" tag="a" title>
               <i class="icon-home"></i>
@@ -133,7 +139,7 @@
             </router-link>
           </li> -->
           
-           <li>
+           <!-- <li>
             <router-link :to="{name:'listeBesoinRealise'}" tag="a" title>
               <i class="icon-group"></i>
               <span class="text">Listes Besoins Realisés</span>
@@ -148,7 +154,7 @@
           </li>
            <li class="divider"></li>
         </ul>
-      </li>
+      </li> -->
     </ul>
   </div>
 </template>
