@@ -220,38 +220,38 @@ export default {
     //   });
     // }
     
-affichierIdPlanBudgetaire() {
-      const qtereel = this.plans_budgetaires.find(
-        qtreel => qtreel.code == 2,
+// affichierIdPlanBudgetaire() {
+//       const qtereel = this.plans_budgetaires.find(
+//         qtreel => qtreel.code == 2,
        
-      );
+//       );
 
-      if (qtereel) {
-        return qtereel.id;
-      }
-      return 0
-    },
+//       if (qtereel) {
+//         return qtereel.id;
+//       }
+//       return 0
+//     },
    
-AffichieIdDernierNivo() {
+// AffichieIdDernierNivo() {
       
-      return id => {
-        if (id != null && id != "") {
-          const qtereel = this.derniereNivoPlanBudgetaire.find(element => element.parent == id);
-        }
- if (qtereel) {
-        return qtereel.id;
-      }
-      return 0
-      };
-    },
-AffichierElementParent() {
+//       return id => {
+//         if (id != null && id != "") {
+//           const qtereel = this.derniereNivoPlanBudgetaire.find(element => element.parent == id);
+//         }
+//  if (qtereel) {
+//         return qtereel.id;
+//       }
+//       return 0
+//       };
+//     },
+// AffichierElementParent() {
       
-      return id => {
-        if (id != null && id != "") {
-          return this.derniereNivoPlanBudgetaire.filter(element => element.parent == id);
-        }
-      };
-    },
+//       return id => {
+//         if (id != null && id != "") {
+//           return this.derniereNivoPlanBudgetaire.filter(element => element.parent == id);
+//         }
+//       };
+//     },
   },
   methods: {
     ...mapActions("SuiviImmobilisation", [
