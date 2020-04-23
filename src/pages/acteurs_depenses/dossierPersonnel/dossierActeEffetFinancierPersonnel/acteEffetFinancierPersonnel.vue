@@ -1,6 +1,13 @@
 
 <template>
     <div>
+
+
+
+
+     
+
+               
                  <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterActeEffetFinancierP" data-toggle="modal" class="btn btn-warning" v-if="listeRapport(macheid)" >Ajouter</a>
@@ -637,7 +644,7 @@ export default {
              type_act_effet_id:"",
              analyse_dossier_id:"",
             // entreprise_id:"",
-             //candidat_personnel_id:"",
+             candidat_personnel_id:"",
              marche_id:"",
              numero_marche:"",
              difference_personnel_bienService:"personnel"
@@ -662,7 +669,7 @@ export default {
              type_act_effet_id:"",
              analyse_dossier_id:"",
              //entreprise_id:"",
-             //candidat_personnel_id:"",
+             candidat_personnel_id:"",
              marche_id:"",
              numero_marche:"",
              difference_personnel_bienService:"personnel"
