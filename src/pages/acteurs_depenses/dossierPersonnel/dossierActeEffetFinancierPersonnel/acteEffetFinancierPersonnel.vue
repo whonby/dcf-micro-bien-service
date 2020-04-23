@@ -74,7 +74,7 @@
 
                     <table class="table table-bordered table-striped">
                         <tr>
-                          <td colspan="2">
+                          <td colspan="">
                         <div class="control-group">
                         <label class="control-label">Type acte effet financier.</label>
                         <div class="controls">
@@ -89,7 +89,7 @@
 
 
 
-                            <!-- <td colspan="2">
+                            <td colspan="2">
 
                     <div class="control-group">
               <label class="control-label">Candidat retenu après analyse.</label>
@@ -107,13 +107,13 @@
             </div> 
 
                    
-                            </td> -->
+                            </td>
 
                                  
                            
                        
                           
-                                   <td colspan="2">
+                                   <td colspan="">
                     <div class="control-group">
                         <label class="control-label">Autorité approbatrice</label>
                         <div class="controls">
@@ -290,28 +290,7 @@
                             
 
                         </tr>
-                        <tr>
-                          <td colspan="4">
-
-                    <div class="control-group">
-              <label class="control-label"> Voir la liste des Candidats selectionnés après analyse.</label>
-              <div class="controls">
-                
-                <select  v-model="formEffetFinancier.candidat_personnel_id" class="span" >
-                  <option
-                    v-for="varText in afficherCandidat(macheid)"
-                    
-                    :key="varText.id"
-                    :value="varText.id"
-                  >{{afficherNomDossierCandidat(varText.candidat_selection_id)}}</option>
-                </select> 
-              </div>
-            </div> 
-
-                   
-                            </td>
-                        
-                        </tr>
+                       
                     </table>  
 
                    
@@ -363,7 +342,7 @@
                         </div>
                     </div>
                             </td>
-                            <!-- <td colspan="2">
+                            <td colspan="2">
 
                         <div class="control-group">
               <label class="control-label">Candidat retenu après analyse.</label>
@@ -379,7 +358,7 @@
                  </select>  
                     </div>
                    </div>
-                            </td> -->
+                            </td>
 
                        
                            
@@ -573,28 +552,7 @@
                             </td>
                         </tr>
 
-                          <tr>
-                          <td colspan="4">
-
-                    <div class="control-group">
-              <label class="control-label"> Voir les Candidats retenus après  analyse.</label>
-              <div class="controls">
-                
-                <select  v-model="editActeEffetFinancier.candidat_personnel_id" class="span" >
-                  <option
-                    v-for="varText in afficherCandidat(macheid)"
-                    
-                    :key="varText.id"
-                    :value="varText.id"
-                  >{{afficherNomDossierCandidat(varText.candidat_selection_id)}}</option>
-                </select> 
-              </div>
-            </div> 
-
-                   
-                            </td>
-                        
-                        </tr>
+                         
 
                     </table>
               
