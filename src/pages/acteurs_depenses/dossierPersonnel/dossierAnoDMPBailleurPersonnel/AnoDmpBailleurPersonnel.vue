@@ -7,7 +7,7 @@
                     <tr>
                         <th>Numéro courrier</th>
                         <!-- <th>Reférence d'offre </th> -->
-                        <!-- <th>Reference PV</th> -->
+                        <th>Reference PV</th>
                         <th>Date ANO bailleur</th>
                         <th>Fichier</th>
                          <th>Avis</th>
@@ -21,6 +21,10 @@
                         :key="anoBailleur.id" >
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             {{anoBailleur.numero_courie || 'Non renseigné'}}</td>
+
+                            <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
+                            {{afficherReferencePv(affichierAppelOffreid(macheid)) || 'Non renseigné'}}</td>
+                        
                         <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
                             {{anoBailleur.date_ano_dmp || 'Non renseigné'}}</td>
                         <td>
@@ -235,11 +239,6 @@
                  <div class="control-group">
                         <label class="control-label">Reference offre</label>
                         <div class="controls">
-                            <!-- <select v-model="formBailleur.appel_offre_id" class="span" disabled>
-                                <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.ref_offre}}</option>
-                            </select> -->
-
                               <input
                                     type="text"
                                     :value="affichierReferenceAppelOffre(macheid)"
@@ -248,6 +247,19 @@
                             />
                         </div>
                         </div>
+
+                          <div class="control-group">
+                        <label class="control-label">Reference pv</label>
+                        <div class="controls">
+                              <input
+                                    type="text"
+                                    :value="afficherReferencePv(affichierAppelOffreid(macheid))"
+                                    class="span"
+                                   readonly
+                            />
+                        </div>
+                        </div>
+
 
                     <div class="control-group">
 
@@ -322,6 +334,7 @@ formBailleur:{
                    // proce_verbal_jugement_offre_id:"",
                     appel_offre_id:"",
                     plan_motif_decision_id:"",
+                    rapport_jugement_id:"",
                     difference_personnel_bienService:"personnel"
 },
 
@@ -341,7 +354,7 @@ selectedFileDemandeAno:""
     },
     computed:{
           ...mapGetters("bienService", [ "typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
-                "modePassations", "procedurePassations","getterDossierCandidats","marches",
+                "modePassations", "procedurePassations","getterDossierCandidats","marches","rapportDocuments",
                 "motifDecisions","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","listeAnoDmpBailleur","getterAnoDMPBailleur","getterObseravtionBailleurs","obseravtionBailleurs",
@@ -365,8 +378,7 @@ selectedFileDemandeAno:""
                     }
                 }
             },
-
-           
+            
 
 
             //  listeAppelOffre(){
@@ -387,6 +399,33 @@ selectedFileDemandeAno:""
             //     }
             // },
 
+            // affichage du pv sur ANO Bailleur
+
+               afficherReferencePv() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.rapportDocuments.find(qtreel => qtreel.appel_offre_id == id );
+
+      if (qtereel) {
+        return qtereel.reference;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+    //    afficherReferencePvAttribue() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.rapportDocuments.filter(qtreel => qtreel.attribue == id && qtereel.attribue==1);
+    //        return qtereel;
+    //     }
+    //     return 0
+    //   };
+    // },
+
 
              affichierReferenceAppelOffre() {
       return id => {
@@ -404,6 +443,22 @@ affichierAppelOffreid() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+
+    // afficher Id du rapport de jugement
+
+
+    afficherRapportJugementId(){
+         return id => {
+        if (id != null && id != "") {
+           const qtereel = this.rapportDocuments.find(qtreel => qtreel.marche_id == id);
 
       if (qtereel) {
         return qtereel.id;
@@ -493,6 +548,7 @@ affichierAppelOffreid() {
                 formData.append('date_ano_dmp', this.formBailleur.date_ano_dmp);
                 formData.append('marche_id', this.macheid);
                 formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
+                 formData.append('rapport_jugement_id', this.afficherRapportJugementId(this.macheid));
                 formData.append('numero_courie', this.formBailleur.numero_courie);
                 formData.append('difference_personnel_bienService', this.formBailleur.difference_personnel_bienService);
                 
@@ -525,10 +581,12 @@ affichierAppelOffreid() {
                 formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
                 formData.append('numero_courie', this.edit_bailleur.numero_courie);
                 formData.append('marche_id',this.macheid);
+                formData.append('rapport_jugement_id', this.afficherRapportJugementId(this.macheid));
                 formData.append('id', this.edit_bailleur.id);
                  formData.append('plan_motif_decision_id',this.edit_bailleur.plan_motif_decision_id);
                 formData.append('observations_bailleur',this.edit_bailleur.	observations_bailleur)
                 formData.append('date_avis',this.edit_bailleur.date_avis);
+                formData.append('rapport_jugement_id', this.edit_bailleur.rapport_jugement_id)
                 formData.append('avis_bail',this.edit_bailleur.avis_bail);
                 formData.append('difference_personnel_bienService', this.edit_bailleur.difference_personnel_bienService);
                 console.log(formData)

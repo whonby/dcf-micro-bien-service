@@ -97,7 +97,7 @@
                         <div class="control-group">
                             <label class="control-label">Numero du dossier <code>*</code> :</label>
                             <div class="controls">
-                                <input type="text" class="span" v-model="formDossier.numero_dossier" placeholder="Type appel" >
+                                <input type="text" class="span" v-model="formDossier.numero_dossier" placeholder="Numero dossier" >
                             </div>
                         </div>
                             </td>
@@ -106,7 +106,7 @@
                         <div class="control-group">
                             <label class="control-label">Nom <code>*</code> :</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="Reference d'appel" v-model="formDossier.nom_candidat">
+                                <input type="text" class="span" placeholder="Nom du candidat" v-model="formDossier.nom_candidat">
                             </div>
                         </div>
                             </td>
@@ -117,16 +117,16 @@
                         <div class="control-group">
                             <label class="control-label">Prenom<code>*</code> :</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="Reference d'appel" v-model="formDossier.prenom_candidat">
+                                <input type="text" class="span" placeholder="Prenom du candidat" v-model="formDossier.prenom_candidat">
                             </div>
                         </div>
                             </td>
                             
                                  <td>
                         <div class="control-group">
-                            <label class="control-label">Date depot trois(3)cv :</label>
+                            <label class="control-label">Date depot du dossier :</label>
                             <div class="controls">
-                                <input type="date" class="span" placeholder="Reference d'appel" v-model="formDossier.date_depot">
+                                <input type="date" class="span" placeholder="" v-model="formDossier.date_depot">
                             </div>
                         </div>
                             </td>
@@ -212,16 +212,16 @@
                         <div class="control-group">
                             <label class="control-label">Prenom<code>*</code> :</label>
                             <div class="controls">
-                                <input type="text" class="span" placeholder="Reference d'appel" v-model="editDossier.prenom_candidat">
+                                <input type="text" class="span" placeholder="prenom du candidat" v-model="editDossier.prenom_candidat">
                             </div>
                         </div>
                             </td>
                             
                                  <td>
                         <div class="control-group">
-                            <label class="control-label">Date depot trois(3)cv :</label>
+                            <label class="control-label">Date depot du dossier :</label>
                             <div class="controls">
-                                <input type="date" class="span" placeholder="Reference d'appel" v-model="editDossier.date_depot">
+                                <input type="date" class="span" placeholder="" v-model="editDossier.date_depot">
                             </div>
                         </div>
                             </td>

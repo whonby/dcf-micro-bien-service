@@ -109,7 +109,7 @@
                             <tbody style="height: 100px;">
                             <tr class="odd gradeX " v-for="ua in administratif(idzone)"
                                 :key="ua.id">
-                                <td  @click="uniteAdministrativeSelect(ua.id,ua.libelle, $event)">{{ua.libelle}}</td>
+                                <td  class="blah" @click="uniteAdministrativeSelect(ua.id,ua.libelle, $event)">{{ua.libelle}}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -553,6 +553,12 @@ formatageSomme:formatageSomme,
                console.log(id)
 
             },
+            uniteAdministrativeSelect(id,libelle, $event){
+                this.iduniteadmin=id
+                this.libelle_unite_admin=libelle
+                console.log($event)
+                this.zone_geographique=""
+      },
             afficher(){
                 this.idzone=""
                 this.zone_geographique=""

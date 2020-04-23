@@ -659,13 +659,7 @@
                       
 
                  <div id="tab5" class="tab-pane">  
-                 <div align="right">
-                    <div class="widget-content">
-                        <a href="" @click="isFormulaireDossierCand" v-if="isButtunAddDossierCandidat" data-toggle="modal" class="btn btn-success">Ajouter</a>
-                    </div>
-
-
-                </div>
+                 
                
                    <dossierCandidat :macheid="detail_marche.id"></dossierCandidat>
                 </div>

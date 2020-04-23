@@ -1,4 +1,39 @@
 
+// get all plan fonctionnelle
+
+
+const GET_TYPECONGES = (state, tableau_typeconges) => {
+
+    state.typeconges = tableau_typeconges
+}
+
+// ajouter source de financement
+const AJOUTER_TYPECONGES = (state , nouvel_objet) => {
+    state.typeconges.unshift(nouvel_objet)
+}
+
+// suppression de source de financement
+const SUPPRIMER_TYPECONGES = (state ,id) => {
+    state.typeconges = state.typeconges.filter(conges => 
+        conges.id !=id)
+}
+
+//modifier siource de financement
+const MODIFIER_TYPECONGES = (state, objetModifie) => {
+   
+    state.typeconges = state.typeconges.map(conges => {
+
+        if(conges.id == objetModifie.id){
+            conges = {...objetModifie}
+
+        }
+        return conges
+    })
+}
+
+// get all plan fonctionnelle
+
+
 const GET_STRUCTURE_FONCTIONNELLE = (state, tableau_structure_fonctionnelle) => {
 
     state.structures_fonctionnelles = tableau_structure_fonctionnelle
@@ -200,6 +235,11 @@ const MODIFIER_STRUCTURE_ACTE = (state, objetModifie) => {
 
 
 export {
+
+    GET_TYPECONGES,
+    AJOUTER_TYPECONGES,
+    SUPPRIMER_TYPECONGES,
+    MODIFIER_TYPECONGES,
 
     GET_STRUCTURE_DECISION,
     AJOUTER_STRUCTURE_DECISION,

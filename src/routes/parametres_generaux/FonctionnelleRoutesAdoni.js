@@ -1,4 +1,5 @@
 
+import Typeconges from "../../pages/parametres_generaux/fonctionnelle/Typeconges.vue";
 import StructureFonctionnelle from "../../pages/parametres_generaux/fonctionnelle/StructureFonctionnelle.vue";
 import PlanFonctionnel  from "../../pages/parametres_generaux/fonctionnelle/PlanFonctionnel.vue";
 
@@ -6,15 +7,21 @@ import structureDecision from "../../pages/parametres_generaux/fonctionnelle/str
 import planDecision from "../../pages/parametres_generaux/fonctionnelle/planDecision.vue";
 
 
-
 import structureActe from "../../pages/parametres_generaux/fonctionnelle/structureActe.vue";
 import planActe from "../../pages/parametres_generaux/fonctionnelle/planActe.vue";
 
 const FonctionnelleRoutesAdoni = [
+   
+
+   
 
 
+   {
+      path: "/Typeconges",
+      name: "Typeconges",
+      component: Typeconges
 
-
+   },
 
    {
       path: "/structures-Acte",

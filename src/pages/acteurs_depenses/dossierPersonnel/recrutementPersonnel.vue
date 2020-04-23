@@ -47,7 +47,7 @@
     </tr>
           <tr>
        <td>
-                         <div class="control-group">
+                         <!-- <div class="control-group">
                         <label class="control-label">Candidat retenu après analyse.</label>
                         <div class="controls">
                           <select v-model="editActeEffetFinancier.candidat_personnel_id" class="span">
@@ -57,7 +57,7 @@
                             </select>
                         
                         </div>
-                    </div>
+                    </div> -->
               <td>
                  <div class="control-group">
             <label class="control-label">Fichier join</label>
@@ -838,9 +838,9 @@
 
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{afficherObjetMarche(marche.marche_id) || 'Non renseigné'}}</td>
-
+<!-- 
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{ afficherNomDossierCandidat(marche.candidat_personnel_id) || 'Non renseigné'}}</td>
+                   {{ afficherNomDossierCandidat(marche.candidat_personnel_id) || 'Non renseigné'}}</td> -->
 
                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                   {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
@@ -1883,29 +1883,29 @@ afficherTypeMarche() {
 
 // afficher candidat retenu
 
-afficherCandidat () {
-                return id => {
-                    if (id != "") {
-                        // console.log("Marche lettre inviation marche")
-                        return this.selectionner_candidats.filter(idmarche => idmarche.marche_id == id)
+// afficherCandidat () {
+//                 return id => {
+//                     if (id != "") {
+//                         // console.log("Marche lettre inviation marche")
+//                         return this.selectionner_candidats.filter(idmarche => idmarche.marche_id == id)
 
-                       // let contratValider =this.gettersPersonnaliserRapportJugement
-                     }
-             }
-            },
+//                        // let contratValider =this.gettersPersonnaliserRapportJugement
+//                      }
+//              }
+//             },
 
-     afficherNomDossierCandidat() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.dossierPersonnels.find(qtreel => qtreel.id == id);
+    //  afficherNomDossierCandidat() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.dossierPersonnels.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.nom_candidat.concat(' ', qtereel.prenom_candidat);
-      }
-      return 0
-        }
-      };
-    },
+    //   if (qtereel) {
+    //     return qtereel.nom_candidat.concat(' ', qtereel.prenom_candidat);
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
 
 
 
@@ -2376,7 +2376,6 @@ this.formData = {
 //     this.editActeEffetFinancier = this.acteEffetFinanciers[index]
 // }, 
 
-
 RetourExecution(index){
   if(confirm("voulez-vous basculer en execution!")){
 this.idMarche = this.listeContratEnContratualisation[index]
@@ -2385,10 +2384,8 @@ this.idMarche = this.listeContratEnContratualisation[index]
    
     this.modifierMarche(marcheObjet)
   } else{
-    return ("rester sur la page de contratualisation merci!");
+    return ("rester sur la page de contratualisation")
   }
-
-    
     // this.modifierActeEffetFinancier(this.editActeEffetFinancier)
     // this.$('#modifierActeEF').modal('hide');
 },
@@ -2422,7 +2419,7 @@ afficherModalModifierActeEffetFinancier1(index){
     this.$('#modifierActeEF').modal('hide');
 
   }else{
-    return ("rester sur la page d'execution merci!");
+ return ("rester sur la page d'execution")
   }
  
 },

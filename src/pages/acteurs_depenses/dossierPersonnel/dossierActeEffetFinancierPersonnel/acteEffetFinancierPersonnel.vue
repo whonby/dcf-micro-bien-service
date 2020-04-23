@@ -17,13 +17,9 @@
                     <tr>
 
                         <th>Reference acte </th>
-                       
                         <th>Montant acte</th>
-                        <!-- <th>Type acte</th> -->
                         <th>Objet marche.</th>
                         <th>Imputation</th>
-                        <th>Candidat retenu</th>
-                       
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -45,8 +41,7 @@
                             {{effetFinancier.text_juridique.objet_text || 'Non renseigné'}}</td> -->
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.marche.imputation || 'Non renseigné'}}</td>
-                              <td @click="afficherModalModifierActeEffetFinancier(index)">
-                            {{afficherNomDossierCandidat(effetFinancier.candidat_personnel_id) || 'Non renseigné'}}</td>
+                             
 <td>
       <div class="btn-group">
                             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
@@ -72,7 +67,7 @@
 
                     <table class="table table-bordered table-striped">
                         <tr>
-                          <td>
+                          <td colspan="2">
                         <div class="control-group">
                         <label class="control-label">Type acte effet financier.</label>
                         <div class="controls">
@@ -86,72 +81,32 @@
                             </td>
 
 
-                                          <!-- <td colspan="2">
-                     <div class="control-group" v-if="selectionAttributionMarche(macheid)">
-                        <label class="control-label">Candidat recruté </label>
-                        <div class="controls" >
-                            <input :value="selectionAttributionMarche(macheid).candidat_personnel_id" readonly/>
-                        </div>
-                    </div>
-                                        <div class="control-group" v-else>
-                                            <code>{{message_setion_vainqueur}}</code>
-                                        </div>
+
+                            <!-- <td colspan="2">
+
+                    <div class="control-group">
+              <label class="control-label">Candidat retenu après analyse.</label>
+              <div class="controls">
+                
+                <select  v-model="formEffetFinancier.candidat_personnel_id" class="span">
+                  <option
+                    v-for="varText in afficherCandidat(macheid)"
+                    
+                    :key="varText.id"
+                    :value="varText.id"
+                  >{{afficherNomDossierCandidat(varText.candidat_selection_id)}}</option>
+                </select> 
+              </div>
+            </div> 
+
+                   
                             </td> -->
 
-                            <td colspan="2">
-
-                       <div class="control-group">
-                        <label class="control-label">Candidat retenu après analyse.</label>
-                        <div class="controls">
-                          <select v-model="formEffetFinancier.candidat_personnel_id" class="span">
-                              <option value=""></option>
-                                <option v-for="varText in afficherCandidat(macheid)" :key="varText.id"
-                                        :value="varText.candidat_personnel_id">{{afficherNomDossierCandidat(varText.candidat_personnel_id)}}</option>
-                            </select>
-                        
-                        </div>
-                    </div>
-                            </td>
-
-                                          <!-- <td>
-                     <div class="control-group" v-if="selectionAttributionMarche(marcheid)">
-                        <label class="control-label">Candidat récruté </label>
-                        <div class="controls" >
-                            <input :value="selectionAttributionMarche(marcheid).nom_candidat" readonly/>
-                        </div>
-                    </div>
-                                        <div class="control-group" v-else>
-                                            <code>{{message_setion_vainqueur}}</code>
-                                        </div>
-                            </td> -->
-
-                            <!-- <td>
-
-
-                        <div class="control-group">
-                        <label class="control-label">Text juridique </label>
-                        <div class="controls">
-                           <select v-model="formEffetFinancier.text_juridique_id" class="span">
-                                <option v-for="varText in text_juridiques" :key="varText.id"
-                                        :value="varText.id">{{varText.objet_text}}</option>
-                            </select>
-                        </div>
-                    </div>
-                            </td> -->
-
-                              <!-- <td>
-                        <div class="control-group">
-                        <label class="control-label">Ano bailleur dmp.</label>
-                        <div class="controls">
-                       <input :value="info_avis_bailleur" readonly>
-                        
-                        </div>
-                    </div>
-                            </td> -->
+                                 
                            
                        
                           
-                                   <td colspan="">
+                                   <td colspan="2">
                     <div class="control-group">
                         <label class="control-label">Autorité approbatrice</label>
                         <div class="controls">
@@ -201,20 +156,7 @@
                     </div>
 
                             </td>
-                             <!-- <td>
-
-                    <div class="control-group">
-                        <label class="control-label">Code acte </label>
-                        <div class="controls">
-                            <input
-                                    type="text"
-                                    v-model="formEffetFinancier.code_act"
-                                    class="span"
-                                    placeholder="Saisir le code acte"
-                            />
-                        </div>
-                    </div>
-                            </td> -->
+                          
 
                            </tr>
                         <tr>
@@ -337,8 +279,32 @@
                         </div>
                     </div>
                             </td>
-                        </tr>
 
+                            
+
+                        </tr>
+                        <tr>
+                          <td colspan="4">
+
+                    <div class="control-group">
+              <label class="control-label"> Voir la liste des Candidats selectionnés après analyse.</label>
+              <div class="controls">
+                
+                <select  v-model="formEffetFinancier.candidat_personnel_id" class="span" >
+                  <option
+                    v-for="varText in afficherCandidat(macheid)"
+                    
+                    :key="varText.id"
+                    :value="varText.id"
+                  >{{afficherNomDossierCandidat(varText.candidat_selection_id)}}</option>
+                </select> 
+              </div>
+            </div> 
+
+                   
+                            </td>
+                        
+                        </tr>
                     </table>  
 
                    
@@ -378,7 +344,7 @@
 
                              <table class="table table-bordered table-striped">
                         <tr>
-                           <td>
+                           <td colspan="2">
                         <div class="control-group">
                         <label class="control-label">Type acte effet financier.</label>
                         <div class="controls">
@@ -390,59 +356,29 @@
                         </div>
                     </div>
                             </td>
-                            <td colspan="2">
-
-                       <div class="control-group">
-                        <label class="control-label">Dossier candidat.</label>
-                        <div class="controls">
-                          <select v-model="editActeEffetFinancier.candidat_personnel_id" class="span">
-                                <option v-for="varText in dossierPersonnels" :key="varText.id"
-                                        :value="varText.id">{{varText.nom_candidat}} {{varText.prenom_candidat}} </option>
-                            </select>
-                        
-                        </div>
-                    </div>
-                            </td>
-
-                                          <!-- <td>
-                     <div class="control-group" v-if="selectionAttributionMarche(marcheid)">
-                        <label class="control-label">Candidat récruté </label>
-                        <div class="controls" >
-                            <input :value="selectionAttributionMarche(marcheid).nom_candidat" readonly/>
-                        </div>
-                    </div>
-                                        <div class="control-group" v-else>
-                                            <code>{{message_setion_vainqueur}}</code>
-                                        </div>
-                            </td> -->
-
-                            <!-- <td>
-
+                            <!-- <td colspan="2">
 
                         <div class="control-group">
-                        <label class="control-label">Text juridique </label>
-                        <div class="controls">
-                           <select v-model="formEffetFinancier.text_juridique_id" class="span">
-                                <option v-for="varText in text_juridiques" :key="varText.id"
-                                        :value="varText.id">{{varText.objet_text}}</option>
-                            </select>
-                        </div>
+              <label class="control-label">Candidat retenu après analyse.</label>
+              <div class="controls">
+                
+                <select v-model="editActeEffetFinancier.candidat_personnel_id" class="span">
+                  <option
+                    v-for="varText in afficherCandidat(macheid)"
+                    
+                    :key="varText.id"
+                    :value="varText.id"
+                  >{{afficherNomDossierCandidat(varText.candidat_selection_id)}}</option>
+                 </select>  
                     </div>
+                   </div>
                             </td> -->
 
-                              <!-- <td>
-                        <div class="control-group">
-                        <label class="control-label">Ano bailleur dmp.</label>
-                        <div class="controls">
-                       <input :value="info_avis_bailleur" readonly>
-                        
-                        </div>
-                    </div>
-                            </td> -->
+                       
                            
                        
                           
-                                   <td colspan="">
+                                   <td colspan="2">
                     <div class="control-group">
                         <label class="control-label">Autorité approbatrice</label>
                         <div class="controls">
@@ -630,6 +566,29 @@
                             </td>
                         </tr>
 
+                          <tr>
+                          <td colspan="4">
+
+                    <div class="control-group">
+              <label class="control-label"> Voir les Candidats retenus après  analyse.</label>
+              <div class="controls">
+                
+                <select  v-model="editActeEffetFinancier.candidat_personnel_id" class="span" >
+                  <option
+                    v-for="varText in afficherCandidat(macheid)"
+                    
+                    :key="varText.id"
+                    :value="varText.id"
+                  >{{afficherNomDossierCandidat(varText.candidat_selection_id)}}</option>
+                </select> 
+              </div>
+            </div> 
+
+                   
+                            </td>
+                        
+                        </tr>
+
                     </table>
               
 
@@ -678,11 +637,12 @@ export default {
              type_act_effet_id:"",
              analyse_dossier_id:"",
             // entreprise_id:"",
-             candidat_personnel_id:"",
+             //candidat_personnel_id:"",
              marche_id:"",
              numero_marche:"",
              difference_personnel_bienService:"personnel"
         },
+        
         editActeEffetFinancier:{
              code_act:"",
              libelle_act:"",
@@ -702,7 +662,7 @@ export default {
              type_act_effet_id:"",
              analyse_dossier_id:"",
              //entreprise_id:"",
-             candidat_personnel_id:"",
+             //candidat_personnel_id:"",
              marche_id:"",
              numero_marche:"",
              difference_personnel_bienService:"personnel"
@@ -734,17 +694,29 @@ export default {
       
 
    
-afficherCandidat () {
-                return id => {
-                    if (id != "") {
-                        // console.log("Marche lettre inviation marche")
-                        return this.selectionner_candidats.filter(idmarche => idmarche.marche_id == id)
+// afficherCandidat () {
+//                 return id => {
+//                     if (id != "") {
+//                         // console.log("Marche lettre inviation marche")
+//                         return this.selectionner_candidats.filter(idmarche => idmarche.marche_id == id)
 
 
-                       // let contratValider =this.gettersPersonnaliserRapportJugement
-                     }
-             }
-            },
+//                        // let contratValider =this.gettersPersonnaliserRapportJugement
+//                      }
+//              }
+//             },
+
+
+            afficherCandidat() {
+      return id => {
+        if (id != "") {
+         return this.selectionner_candidats.filter(
+            idmarche => idmarche.marche_id == id
+          );
+          
+        }
+      };
+    },
 
 
             // afficher id du rapport du jugement
@@ -769,8 +741,8 @@ listeRapport(){
 
 
 
-      
-       afficherNomDansPersonnel() {
+      afficherNomDansPersonnel
+       () {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.dossierPersonnels.find(qtreel => qtreel.id == id);
