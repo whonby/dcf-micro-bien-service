@@ -765,7 +765,7 @@ return "AON ou AOI"
 
 },
  lesClassDe3() { 
-const isClassDe3 = (code) => code.charAt(0) != "2" || code.charAt(0) != "6"; 
+const isClassDe3 = (code) => code.charAt(0) != "2" && code.charAt(0) != "6"; 
 return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
  },
 

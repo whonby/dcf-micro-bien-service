@@ -6,7 +6,7 @@
             <div class="accordion-heading">
               <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
-                <h5>{{groupe.code}}---{{groupe.libelle}}</h5>
+                <h5>{{afficheLibellePlanEconomique(groupe.code)}}---{{groupe.libelle}}</h5>
                  <span class="badge badge-inverse" >{{getNombreArticle}}</span>
 
                 </a> 
@@ -50,7 +50,7 @@
 
 <script>
 import FamilleItem from './FamilleItem'
-
+import { mapGetters} from "vuex";
 export default {
     name: 'FamilleItemComponent',
      props: {
@@ -70,7 +70,8 @@ export default {
 
 
   computed: {
-  
+   ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+
     isFolder: function () {
       return this.groupe.equipement_famille &&
         this.groupe.equipement_famille.length
@@ -90,7 +91,18 @@ export default {
       }
     },
 
-   
+   afficheLibellePlanEconomique() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code
+      }
+      return 0
+        }
+      };
+    },
   },
 
   filters: {

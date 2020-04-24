@@ -293,7 +293,7 @@
             <li>
                 <router-link :to="{name: 'LigneExempter'}" tag="a">
                     <i class="icon-bar-chart"></i>
-                    Ligne Exempter
+                    Ligne Exempté
                 </router-link>
             </li>
           <li>
