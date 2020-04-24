@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <notifications />
+        <!-- <notifications /> -->
         <div class="container-fluid">
             <hr>
             <div class="row-fluid">
@@ -20,20 +20,20 @@
                                 <tr>
                                     <th>Code </th>
                                     <th>Libellé</th>
-                                    <th>Action</th>
+                                    <!-- <th>Action</th> -->
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="odd gradeX" v-for="(item, index) in titreFiltres" :key="item.id">
-                                    <td @dblclick="afficherModalModifierTitre(index)">{{item.code || 'Non renseigné'}}</td>
-                                    <td @dblclick="afficherModalModifierTitre(index)">{{item.libelle || 'Non renseigné'}}</td>
-                                    <td>
+                                <tr class="odd gradeX" v-for="(item) in titreFiltres" :key="item.id">
+                                    <td >{{item.code || 'Non renseigné'}}</td>
+                                    <td >{{item.libelle || 'Non renseigné'}}</td>
+                                    <!-- <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerLigneExempter(item.id)"  class="btn btn-danger ">
                                                 <span class=""><i class="icon-trash"></i></span></button>
                                         </div>
 
-                                    </td>
+                                    </td> -->
                                 </tr>
                                 <tr v-if="titreFiltres.length==0" align="right">
                                     <h6>Pas de donnée disponible</h6>
@@ -45,12 +45,12 @@
                 </div>
             </div>
         </div>
-        <fab :actions="fabActions"
+        <!-- <fab :actions="fabActions"
              main-icon="apps"
              @cache="afficherModalAjouterTitre"
              bg-color="green"
 
-        ></fab>
+        ></fab> -->
 
         <!----- ajouter modal   ---->
         <div id="exampleModal" class="modal hide">
@@ -163,11 +163,16 @@
                 "getterligneExempter",
 
             ]),
+             ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+               lesClassDe3() { 
+const isClassDe3 = (code) => code.charAt(0) == "2" || code.charAt(0) == "6"; 
+return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
+ },
             titreFiltres() {
 
                 const searchTerm = this.search.toLowerCase();
 
-                return this.getterligneExempter.filter((item) => {
+                return this.lesClassDe3.filter((item) => {
 
                         return item.code.toLowerCase().includes(searchTerm)
                             || item.libelle.toLowerCase().includes(searchTerm)

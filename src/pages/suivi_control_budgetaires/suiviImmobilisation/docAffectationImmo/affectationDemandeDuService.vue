@@ -26,6 +26,7 @@ modifierDemandeMateriel
                             
     
                              </select>
+                                <input type="text" class="span"  v-model="serviceValiderDirecteur.service_id"/>
                            <!-- {{afficherResteStock}}
                            {{affichierQuantiteEnStock(serviceValiderDirecteur.article_id)}}
                            {{affichierIdQuantiteEnStock(serviceValiderDirecteur.article_id)}} -->
@@ -53,7 +54,7 @@ modifierDemandeMateriel
                             <label class="control-label">Date Decision :</label>
                             <div class="controls">
                               <input type="date" class="span5"  v-model="serviceValiderDirecteur.date_directeur_sce"/>
-                               <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                            
                             </div>
                           </div>
            </td>
@@ -185,7 +186,7 @@ modifierDemandeMateriel
                       
                     
                       </button>
-                     <button v-else class="btn  btn-info" @click="modatValidationDemandeService(index)" >                        
+                     <button  class="btn  btn-info" @click="modatValidationDemandeService(index)" v-else-if="BesoinImmo.motif_directeur_sce == 0" >                        
                      
                       
                        <span  >Attente</span>
@@ -281,19 +282,19 @@ modifierDemandeMateriel
                     >{{BesoinImmo.dure_traitement_directeur || 0 }}  Jours</td> -->
 
 <td>
-                        <button v-if="BesoinImmo.motif_directeur == 1"  class="btn  btn-success"  >                        
+                        <button v-if="BesoinImmo.motif_directeur_sce == 1"  class="btn  btn-success"  >                        
                      
                       <span    >Visé</span>
                       
                       </button>
-                       <button v-else-if="BesoinImmo.motif_directeur == 4" class="btn  btn-warning"  >                        
+                       <button v-else-if="BesoinImmo.motif_directeur_sce == 4" class="btn  btn-warning"  >                        
                      
                       
                        <span  >Différé</span>
                       
                     
                       </button>
-                        <button v-else-if="BesoinImmo.motif_directeur == 5" class="btn  btn-danger"  >                        
+                        <button v-else-if="BesoinImmo.motif_directeur_sce == 5" class="btn  btn-danger"  >                        
                      
                       
                        <span  >Réjeté</span>
@@ -311,7 +312,7 @@ modifierDemandeMateriel
                     </td>
                     
                     <td>
-                       <button v-if="BesoinImmo.motif_directeur == 1" class="btn  btn-success" >                        
+                       <button v-if="BesoinImmo.motif_directeur_sce == 1" class="btn  btn-success" >                        
                      
                       
                        <span  >Oui</span>
@@ -375,7 +376,8 @@ serviceua_id:"",
         article_id:"",
 motif_directeur_sce:"",
 date_directeur_sce:"",
-cause_directeur_sce:""
+cause_directeur_sce:"",
+service_id:""
       },
 search:""
         }
@@ -505,7 +507,7 @@ affichierService() {
 
 validationDemandeDuServiceParDirecteur() {
       
-          return this.demandeMateriel.filter(element => element.fonction_id == 0 && element.motif_directeur == 0 );
+          return this.demandeMateriel.filter(element => element.fonction_id == 0);
        
     },
 afficheToutDemande() {

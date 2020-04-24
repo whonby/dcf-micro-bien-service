@@ -131,9 +131,10 @@
                  <div class="control-group">
                   <label class="control-label">Classification Economique</label>
                   <div class="controls">
+                    
                     <select v-model="formData.economique_id" class="span4">
                       <option
-                        v-for="Bgeneral in derniereNivoPlanBudgetaire"
+                        v-for="Bgeneral in lesClassDe3"
                         :key="Bgeneral.id"
                         :value="Bgeneral.id"
                       >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
@@ -763,8 +764,10 @@ return "AON ou AOI"
 
 
 },
-
-
+ lesClassDe3() { 
+const isClassDe3 = (code) => code.charAt(0) != "2" || code.charAt(0) != "6"; 
+return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
+ },
 
 afficheActiviteParAction() {
       return id => {

@@ -8,33 +8,42 @@
         <h3>Ajouter Groupe Equipement Type</h3>
       </div>
       <div class="modal-body">
-       <form class="form-horizontal">
-          <div class="control-group">
+       <table class="table table-bordered table-striped">
+         <tr>
+           <td>
+              <div class="control-group">
             <label class="control-label">Classe:</label>
-            <!-- <select v-model="formData.code" class="span">
-                                <option v-for="varText in affichierIdPlanBudgetaire" :key="varText.id"
+            <select v-model="formData.code" class="span5">
+                                <option v-for="varText in lesClassDe3" :key="varText.id"
                                         :value="varText.id">{{varText.code}}-{{varText.libelle}}</option>
-                            </select> -->
-                        <input
+                            </select>
+                        <!-- <input
                 type="text"
                 v-model="formData.code"
                 class="span"
                 placeholder="Saisir le code"
-              />     
+              />      -->
           </div>
-          <div class="control-group">
+           </td>
+         </tr>
+         <tr>
+           <td>
+                  <div class="control-group">
             <label class="control-label">Libelle:</label>
             <div class="controls">
               
               <input
                 type="text"
                 v-model="formData.libelle"
-                class="span"
+                class="span5"
                 placeholder="Saisir le libelle"
               />
             </div>
           </div>
-         </form>
+           </td>
+         </tr>
+      
+       </table>
       </div>
       <div class="modal-footer">
         <a
@@ -56,30 +65,39 @@
         <h3>Modifier Groupe Equipement Type</h3>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal">
+        <table class="table table-bordered table-striped">
           <div class="control-group">
             <label class="control-label">Classe</label>
             <div class="controls">
-              <input
+               <select v-model="editEquipement.code" class="span5">
+                                <option v-for="varText in lesClassDe3" :key="varText.id"
+                                        :value="varText.id">{{varText.code}}-{{varText.libelle}}</option>
+                            </select>
+              <!-- <input
                 type="number"
                 v-model="editEquipement.code"
                 class="span"
                 placeholder="Saisir la Classe"
-              />
+              /> -->
             </div>
           </div>
-          <div class="control-group">
+          <tr>
+           <td>
+                  <div class="control-group">
             <label class="control-label">Libelle:</label>
             <div class="controls">
+              
               <input
                 type="text"
                 v-model="editEquipement.libelle"
-                class="span"
+                class="span5"
                 placeholder="Saisir le libelle"
               />
             </div>
           </div>
-        </form>
+           </td>
+         </tr>
+        </table>
       </div>
       <div class="modal-footer">
         <a
@@ -130,6 +148,14 @@
                   </tr>
                 </thead>
                 <tbody>
+
+
+
+
+
+
+
+
                   <tr
                     class="odd gradeX"
                     v-for="(equipement, index) in equipements"
@@ -137,7 +163,7 @@
                   >
                     <td
                       @dblclick="afficherModalModifierFamille(index)"
-                    >{{equipement.code || 'Non renseigné'}}</td>
+                    >{{afficheLibellePlanEconomique(equipement.code) || 'Non renseigné'}}</td>
                     <td
                       @dblclick="afficherModalModifierFamille(index)"
                     >{{equipement.libelle || 'Non renseigné'}}</td>
@@ -210,6 +236,40 @@ export default {
   computed: {
     ...mapGetters("SuiviImmobilisation", ["equipements"]),
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+
+
+
+   lesClassDe3() { 
+const isClassDe3 = (code) => code.charAt(0) == "2"; 
+return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
+ },
+   
+afficheLibellePlanEconomique() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code
+      }
+      return 0
+        }
+      };
+    },
+
+//  fonctiontrie(){
+
+      
+// const isClassDe3 = (code) => code.charAt(0) == "3";
+
+// var afficherLesClassDe3 = function(equipements) 
+// { return equipements.filter(x => isClassDe3(x.code)); }
+// //tu appelle la variable comme sa // 
+// afficherLesClassDe3(tableau);
+//     },
+
+
+
     // filtre_equipement() {
     //   const st = this.search.toLowerCase();
     //   return this.equipements.filter(type => {
@@ -252,7 +312,7 @@ export default {
 //         }
 //       };
 //     },
-  },
+},
   methods: {
     ...mapActions("SuiviImmobilisation", [
       "getAllEquipement",
@@ -260,6 +320,8 @@ export default {
       "modifierEquipement",
       "supprimerEquipement"
     ]),
+
+
     //afiicher modal ajouter
     afficherModalAjouterTitre() {
       this.$("#exampleModal").modal({
