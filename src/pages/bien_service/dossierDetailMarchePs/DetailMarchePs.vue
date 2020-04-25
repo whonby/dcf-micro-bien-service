@@ -94,7 +94,7 @@
                                 
                                     <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div>
                                
-                                        <component-etat :macheid="detail_marche.id"></component-etat>
+                                        <!-- <component-etat :macheid="detail_marche.id"></component-etat> -->
                                         
                                
                                 <!-- <h4>Liste des receptions de cotation</h4> -->
@@ -174,7 +174,7 @@
                                 
                                     <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div>
                                
-                                        <component-etat :macheid="detail_marche.id"></component-etat>
+                                        <!-- <component-etat :macheid="detail_marche.id"></component-etat> -->
                                         
                                
                                 <!-- <h4>Liste des receptions de cotation</h4> -->

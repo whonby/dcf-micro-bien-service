@@ -99,6 +99,7 @@ export const AJOUTER_RAPPORT_OUVERTURE = (state, elementAjouter) => {
     state.rapportDocuments.unshift(elementAjouter)
     //state.selectionner_candidats=[]
     state.selectionner_candidats=[]
+    state.analyseDossiers=[]
     
 }
 
@@ -117,6 +118,7 @@ export const MODIFIER_RAPPORT_OUVERTURE = (state, elementModif)=>{
 export const SUPPRIMER_RAPPORT_OUVERTURE = (state, id)=> {
     state.rapportDocuments = state.rapportDocuments.filter(prest => prest.id !=id)
     state.selectionner_candidats=[]
+    state.analyseDossiers=[]
 }
 
 

@@ -1,4 +1,6 @@
 
+ajouterchnique
+
 <template>
     <div>
 
@@ -55,10 +57,13 @@
                              <button   class="btn  " title="Detail" @click.prevent="isDetailDossierCandi(appelOffre.id)">
                                  <span class=""><i class="icon-folder-open" ></i></span>
                              </button>
-                             <a href="#offreT" data-toggle="modal" @click.prevent="modaleOffreTechnique(appelOffre.id)"  class="btn" title="Offre technique">
+
+                              <a href="#offreTechnique" data-toggle="modal" @click.prevent="modalOffreTechnique(appelOffre.id)"  class="btn" title="Offre technique">
                                  <span class=""><i class="icon-wrench"></i></span></a>
+                                 
                              <a href="#offreF" data-toggle="modal" @click.prevent="modaleOffreFinnanciere(appelOffre.id)"  class="btn  " title="Offre financière">
                                  <span class=""><i class=" icon-money"></i></span></a>
+
                              <button @click.prevent="supprimerDossierCandidat(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
                                  <span class=""><i class="icon-trash"></i></span></button>
 
@@ -69,7 +74,7 @@
                  </table>
              </div>
 
- <div id="offreF" class="modal hide modaloffreFin">
+              <div id="offreF" class="modal hide modaloffreFin">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter l'offre financière du candidat <b>{{edite_offre_financiere.nom_cand}}</b></h3>
@@ -184,6 +189,12 @@
                 <!--<a data-dismiss="modal" class="btn btn-primary" href="#" @click.prevent="ajouterOffreF()"> Ajouter</a>-->
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
+
+
+
+
+
+
         <div id="modificationOffre" class="modal hide modaloffreFin">
         <div class="modal-header">
             <button data-dismiss="modal" class="close" type="button">×</button>
@@ -299,6 +310,147 @@
             <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
     </div>
 
+
+
+
+     <div id="offreTechnique" class="modal hide tailleModalOffre2">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter l'offre technique</h3>
+            </div>
+            <div class="modal-body">
+                <div class="widget-box">
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                     
+                            <td>
+                                <div class="control-group">
+                                    <label>Offre</label>
+                                    <div class="controls">
+                                        <select v-model="formLot.appel_offre_id" class="span" disabled>
+                                            <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
+                                                    :value="varText.id">{{varText.ref_appel}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                  <div class="control-group">
+                            <label class="control-label">Accord groupe :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Accord groupe" v-model="formchnique.accord_groupe">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                                 <div class="control-group">
+                            <label class="control-label">Cautionnement prov :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Cautionnement prov" v-model="formchnique.cautionnement_prov">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                                 <div class="control-group">
+                            <label class="control-label">Attest banc:</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Pouv habil" v-model="formchnique.attest_banc">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                                  <div class="control-group">
+                            <label class="control-label">Formil propo tech :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Piece Admin" v-model="formchnique.formil_propo_tech">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                             <tr>
+                            <td>
+                         <div class="control-group">
+                            <label class="control-label">Fiche rsgnt nombre groupe :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Attest banc" v-model="formchnique.fiche_rsgnt_mbre_groupe">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                                 
+                        <div class="control-group">
+                            <label class="control-label">Atcdent marche non exe :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Org travau" v-model="formchnique.atcdent_marche_non_exe">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                            <label class="control-label">Org travau site :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Meth real travau" v-model="formchnique.org_travau_site">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                                 <div class="control-group">
+                            <label class="control-label">Meth real travau:</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Prog mobilisation" v-model="formchnique.meth_real_travau">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                               <div class="control-group">
+                            <label class="control-label">Prog mobilisation :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Prog mobilisation" v-model="formchnique.prog_mobilisation">
+                            </div>
+                        </div> 
+                            </td>
+                           
+                        </tr>
+                        <tr>
+                             <td>
+                                <div class="control-group">
+                            <label class="control-label">Capacite financiere :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Capacite financiere" v-model="formchnique.capacite_financiere">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                                 <div class="control-group">
+                            <label class="control-label">CAA moyen ac entre :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Caa moyen ac" v-model="formchnique.caa_moyen_ac_entre">
+                            </div>
+                        </div>
+                            </td>
+                            <td>
+                                <div class="control-group">
+                            <label class="control-label">Capacite techn expe :</label>
+                            <div class="controls">
+                                <input type="text" class="span" placeholder="Capacite techn exp" v-model="formchnique.capacite_techn_exp">
+                            </div>
+                        </div>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button @click.prevent="ajouterOffreT" class="btn btn-primary">Ajouer</button>
+                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        </div>
+
+
     <div id="modificationOffreT" class="modal hide tailleModalOffre2">
         <div class="modal-header">
             <button data-dismiss="modal" class="close" type="button">×</button>
@@ -312,7 +464,7 @@
   <div class="control-group">
                              <label>Liste lot</label>
                              <div class="controls">
-                                 <select v-model="formOffreTechnique.numero_lot" class="span">
+                                 <select v-model="formchnique.numero_lot" class="span">
                                      <option v-for="varText in listeLots(marcheid)" :key="varText.numero_lot"
                                              :value="varText.id">{{varText.numero_lot}}-{{varText.libelle_lot}}</option>
                                  </select>
@@ -673,10 +825,17 @@
                             <td>
                                 <label>Procedure de passation</label>
                                 <div class="controls">
-                                    <select v-model="formDossierCadidature.procedure_passation_id" class="span" disabled>
-                                        <option v-for="varText in procedurePassations" :key="varText.id"
-                                                :value="varText.id">{{varText.libelle}}</option>
-                                    </select>
+                                    <!-- <select v-model="formDossierCadidature.procedure_passation_id" class="span" disabled>
+                                        <option v-for="varText in afficherTypeProcedureId(marcheid)" :key="varText.id"
+                                                :value="varText.id">{{varText.procedure_passation_id}}</option>
+                                    </select> -->
+
+                                     <input
+                                    type="text"
+                                    :value="afficherLibelleTypeProcedure(afficherTypeProcedureId(marcheid))"
+                                    class="span"
+                                   readonly
+                            />
                                 </div>
                             </td>
                             <td>
@@ -799,141 +958,12 @@
                     </div>
                        <!--contratualisation-->
         <!--dossier candidature-->
-        <div id="offreT" class="modal hide tailleModalOffre2">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter l'offre technique</h3>
-            </div>
-            <div class="modal-body">
-                <div class="widget-box">
-                    <table class="table table-bordered table-striped">
-                        <tr>
-                     
-                            <td>
-                                <div class="control-group">
-                                    <label>Offre</label>
-                                    <div class="controls">
-                                        <select v-model="formLot.appel_offre_id" class="span" disabled>
-                                            <option v-for="varText in listeAppelOffre(marcheid)" :key="varText.id"
-                                                    :value="varText.id">{{varText.ref_appel}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                  <div class="control-group">
-                            <label class="control-label">Accord groupe :</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Accord groupe" v-model="formOffreTechnique.accord_groupe">
-                            </div>
-                        </div>
-                            </td>
-                            <td>
-                                 <div class="control-group">
-                            <label class="control-label">Cautionnement prov :</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Cautionnement prov" v-model="formOffreTechnique.cautionnement_prov">
-                            </div>
-                        </div>
-                            </td>
-                            <td>
-                                 <div class="control-group">
-                            <label class="control-label">Attest banc:</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Pouv habil" v-model="formOffreTechnique.attest_banc">
-                            </div>
-                        </div>
-                            </td>
-                            <td>
-                                  <div class="control-group">
-                            <label class="control-label">Formil propo tech :</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Piece Admin" v-model="formOffreTechnique.formil_propo_tech">
-                            </div>
-                        </div>
-                            </td>
-                            <td>
-                                
-                            </td>
-                        </tr>
-                             <tr>
-                            <td>
-<div class="control-group">
-                            <label class="control-label">Fiche rsgnt nombre groupe :</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Attest banc" v-model="formOffreTechnique.fiche_rsgnt_mbre_groupe">
-                            </div>
-                        </div>
-                            </td>
-                            <td>
-                                 
-                        <div class="control-group">
-                            <label class="control-label">Atcdent marche non exe :</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Org travau" v-model="formOffreTechnique.atcdent_marche_non_exe">
-                            </div>
-                        </div>
-                            </td>
-                            <td>
-                                <div class="control-group">
-                            <label class="control-label">Org travau site :</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Meth real travau" v-model="formOffreTechnique.org_travau_site">
-                            </div>
-                        </div>
-                            </td>
-                            <td>
-                                 <div class="control-group">
-                            <label class="control-label">Meth real travau:</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Prog mobilisation" v-model="formOffreTechnique.meth_real_travau">
-                            </div>
-                        </div>
-                            </td>
-                            <td>
-                               <div class="control-group">
-                            <label class="control-label">Prog mobilisation :</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Prog mobilisation" v-model="formOffreTechnique.prog_mobilisation">
-                            </div>
-                        </div> 
-                            </td>
-                           
-                        </tr>
-                        <tr>
-                             <td>
-                                <div class="control-group">
-                            <label class="control-label">Capacite financiere :</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Capacite financiere" v-model="formOffreTechnique.capacite_financiere">
-                            </div>
-                        </div>
-                            </td>
-                            <td>
-                                 <div class="control-group">
-                            <label class="control-label">CAA moyen ac entre :</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Caa moyen ac" v-model="formOffreTechnique.caa_moyen_ac_entre">
-                            </div>
-                        </div>
-                            </td>
-                            <td>
-                                <div class="control-group">
-                            <label class="control-label">Capacite techn expe :</label>
-                            <div class="controls">
-                                <input type="text" class="span" placeholder="Capacite techn exp" v-model="formOffreTechnique.capacite_techn_exp">
-                            </div>
-                        </div>
 
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button @click.prevent="ajouterOffreT" class="btn btn-primary">Ajouer</button>
-                <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
-        </div>
+         
+
+
+
+        
                     <div class="widget-box" v-if="detail_offre_technique">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                             <h5>Offre technique du candidat</h5>
@@ -957,16 +987,16 @@
                                 </thead>
 
                                 <tr>
-                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).prog_mobilisation || "Non renseigne"}}</td>
-                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).capacite_financiere || "Non renseigne"}}</td>
-                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).caa_moyen_ac_entre || "Non renseigne"}}</td>
-                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).capacite_tech_exp || "Non renseigne"}}</td>
-                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).meth_real_travau || "Non renseigne"}}</td>
-                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).accord_groupe || "Non renseigne"}}</td>
-                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).pouv_habil_signataire || "Non renseigne"}}</td>
-                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).cautionnement_prov || "Non renseigne"}}</td>
-                                    <td @dblclick="afficheModificationOffreTechnique(detail_offre_technique)">{{listeOffreTechnique(detail_offre_technique.id).reg_com || "Non renseigne"}}</td>
-                                    <td><button @click.prevent="supprimerOffreTechnique(detail_offre_technique.id)"  class="btn btn-danger " title="Supprimer">
+                                    <td @dblclick="afficheModificationchnique(detail_offre_technique)">{{listechnique(detail_offre_technique.id).prog_mobilisation || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationchnique(detail_offre_technique)">{{listechnique(detail_offre_technique.id).capacite_financiere || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationchnique(detail_offre_technique)">{{listechnique(detail_offre_technique.id).caa_moyen_ac_entre || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationchnique(detail_offre_technique)">{{listechnique(detail_offre_technique.id).capacite_tech_exp || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationchnique(detail_offre_technique)">{{listechnique(detail_offre_technique.id).meth_real_travau || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationchnique(detail_offre_technique)">{{listechnique(detail_offre_technique.id).accord_groupe || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationchnique(detail_offre_technique)">{{listechnique(detail_offre_technique.id).pouv_habil_signataire || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationchnique(detail_offre_technique)">{{listechnique(detail_offre_technique.id).cautionnement_prov || "Non renseigne"}}</td>
+                                    <td @dblclick="afficheModificationchnique(detail_offre_technique)">{{listechnique(detail_offre_technique.id).reg_com || "Non renseigne"}}</td>
+                                    <td><button @click.prevent="supprimerchnique(detail_offre_technique.id)"  class="btn btn-danger " title="Supprimer">
                                         <span class=""><i class="icon-trash"></i></span></button>
                                     </td>
                                 </tr>
@@ -1499,7 +1529,7 @@ import { formatageSomme } from '../../../../../src/Repositories/Repository';
               numero_dossier:"",
               capacite_financement:"",
           },
-         formOffreTechnique:{
+         formchnique:{
              numero_lot:"",
              accord_groupe:"",
              cautionnement_prov:"",
@@ -1694,7 +1724,7 @@ formPv:{
                     //mode_passation_id:""
                 },
                 message_mandater:'',
-                isOffreTechniqueFinancier:false,
+                ischniqueFinancier:false,
                 namePDF: "",
                 fichierPDF: "",
                 imagePDF:"",
@@ -1723,7 +1753,7 @@ created() {
         computed: {
             ...mapGetters("bienService", [ "typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
-                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
+                "getterOffreFinanciers","getterschniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
@@ -2187,6 +2217,39 @@ montantHT() {
                     }
                 }
             },
+
+
+
+
+          
+ afficherTypeProcedureId() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.procedure_passation_id;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+    afficherLibelleTypeProcedure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.procedurePassations.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 0
+        }
+      };
+    },
+
             listeOffreFinancier(){
                 return idoffrefine => {
                     if (idoffrefine != "") {
@@ -2195,10 +2258,10 @@ montantHT() {
                     }
                 }
             },
-            listeOffreTechnique(){
+            listechnique(){
                 return idoffre => {
                     if (idoffre != "") {
-                        return this.gettersOffreTechniques.find(item=>item.id==idoffre)
+                        return this.getterschniques.find(item=>item.id==idoffre)
                     }
                 }
             }
@@ -2208,7 +2271,7 @@ montantHT() {
                 'ajouterAppelOffre','modifierAppelOffre',"supprimerAppelOffre","modifierAppelOffre",
                 "ajouterLot","modifierLot","supprimerLot","ajouterDossierCandidat","getDossierCandidat",
                 "modifierDossierCandidat","supprimerDossierCandidat","ajouterOffreTechnique","modifierOffreTechnique",
-                "supprimerOffreTechnique","ajouterOffreFinancier","modifierOffreFinancier","supprimerOffreFinancier",
+                "supprimerchnique","ajouterOffreFinancier","modifierOffreFinancier","supprimerOffreFinancier",
                 "ajouterLettreInvitation",
                 "modifierLettreInvitation","supprimerLettreInvitation","getMandater","ajouterMandater",
                 "modifierMandater","supprimerMandater","ajouterCojo","modifierCojo","supprimerCojo","ajouterAnalyseDossier",
@@ -2286,7 +2349,7 @@ ajouterStockLocal(){
                 }
                 console.log(this.modification_offre_finnancier_recupere)
             },
-            afficheModificationOffreTechnique(index){
+            afficheModificationchnique(index){
                 this.$('#modificationOffreT').modal({
                     backdrop: "static",
                     keyboard:false
@@ -2462,9 +2525,9 @@ modifierFactureLocal(){
                 }
             },
             ajouterOffreT(){
-                this.formOffreTechnique.dossier_candidat_id=this.edite_offre_technique.id
-              this.ajouterOffreTechnique(this.formOffreTechnique)
-                this.formOffreTechnique={
+            this.formchnique.dossier_candidat_id=this.edite_offre_technique.id
+              this.ajouterOffreTechnique(this.formchnique)
+                this.formchnique={
                     numero_lot:"",
                         accord_groupe:"",
                         cautionnement_prov:"",
@@ -2483,6 +2546,7 @@ modifierFactureLocal(){
                         capacite_techn_exp:"",
                         dossier_candidat_id:"",
                 }
+                
             },
             editeOffreT(){
                 this.modifierOffreTechnique(this.edit_offre_technique_recupere)
@@ -2545,19 +2609,26 @@ modifierFactureLocal(){
                 }
             },
             ajouterDossierCandidature(){
+
+                var nouvelObjet ={
+                  ...this.formDossierCadidature,
+                  procedure_passation_id: this.afficherTypeProcedureId(this.marcheid)  
+                }
                 this.formFournisseur.raison_sociale=this.formDossierCadidature.nom_cand
                 this.formFournisseur.numero_cc= this.formDossierCadidature.numero_cc
                 this.formFournisseur.numero_rc=this.formDossierCadidature.reg_com
                 this.formFournisseur.telephone=this.formDossierCadidature.telephone_cand
                 this.formFournisseur.adresse=this.formDossierCadidature.adresse_post
                 this.formFournisseur.email=this.formDossierCadidature.email_cand
+
                 this.formFournisseur.complet=0
+
            // console.log(this.formFournisseur)
               let ent=  this.entreprises.find(item=>item.numero_rc==this.formFournisseur.numero_rc)
                 if(ent==undefined){
                     this.ajouterEntreprise(this.formFournisseur)
                 }
-                this.ajouterDossierCandidat(this.formDossierCadidature)
+                this.ajouterDossierCandidat(nouvelObjet)
                 this.formDossierCadidature={
                     type_candidat:"",
                         numero_cc:"",
@@ -2593,6 +2664,10 @@ modifierFactureLocal(){
 // vider l'input 
    // modification de dossier candidat
             modificationDossierCandidatLocal(){
+                var nouvelObjet ={
+                    ...this.editDossierCadidature,
+                    procedure_passation_id:this.afficherTypeProcedureId(this.marcheid)
+                }
                 this.formFournisseur.raison_sociale=this.editDossierCadidature.nom_cand
                 this.formFournisseur.numero_cc= this.editDossierCadidature.numero_cc
                 this.formFournisseur.numero_rc=this.editDossierCadidature.reg_com
@@ -2604,7 +2679,7 @@ modifierFactureLocal(){
                   if(entre==undefined){
                       this.modifierEntreprise(this.formFournisseur)
                   }
-                  this.modifierDossierCandidat(this.editDossierCadidature)
+                  this.modifierDossierCandidat(nouvelObjet)
                   this.$('#modificationDossierCandidatModal').modal('hide');
             },
 ajouterModalActeEffetFinancierLocal(rcm){
@@ -2724,6 +2799,9 @@ modifierModalActeEffetFinancierLocal(){
                 this.modifierObservationBaileur(this.editObservation1)
                 this.$('#modifierObservationBailleur').modal('hide');
             },
+
+
+
         
         ajouterAnalyseDMPB(){
      /*        var nouvelObjet = {
@@ -2741,9 +2819,11 @@ modifierModalActeEffetFinancierLocal(){
                     date_avis_bail:""
             }
         },
-            modaleOffreTechnique(index){
+        
+            modalOffreTechnique(index){
+                //console.log("ooool")
                let objet= this.getterDossierCandidats.find(item=>item.id=index);
-                this.formOffreTechnique={
+                this.formchnique={
                     numero_lot:"",
                     accord_groupe:objet.accord_group,
                     cautionnement_prov:objet.cautionnement_prov,
@@ -2783,12 +2863,12 @@ modifierModalActeEffetFinancierLocal(){
             },
             isDetailDossierCandi(id){
                 this.isDetailDossierCandidature=true,
-                    this.isButtunAddDossierCandidat=false
+                this.isButtunAddDossierCandidat=false
                 this.isButtunAddDossierCandidat=false
                 this.detail_dossier_candidature=this.getterDossierCandidats.find(dossier=>dossier.id==id)
-                this.detail_offre_finnancier=this.getterOffreFinanciers.find(offre => offre.dossier_candidature.id ==id)
-                this.detail_offre_technique =this.gettersOffreTechniques.find(offre =>offre.dossier_candidature.id ==id)
-               // console.log(this.detail_offre_finnancier)
+                this.detail_offre_finnancier=this.getterOffreFinanciers.find(offre => offre.dossier_candidature.id==id)
+                this.detail_offre_technique =this.getterschniques.find(offre =>offre.dossier_candidature.id==id)
+              console.log(this.detail_offre_finnancier)
             },
             // afficher modal de modification
             afficherModalModifierActeDepense(index){
@@ -2944,7 +3024,7 @@ ajouterNouveauFournisseurLocal(registeCommerce){
   },*/     
             // eslint-disable-next-line no-unused-vars
             afficheBouttonTechFin(index){
-             this.isOffreTechniqueFinancier=true
+             this.ischniqueFinancier=true
             this.$('#modificationDossierCandidatModal').modal({
                     backdrop:'static',
                     keyboard:false
