@@ -1,7 +1,8 @@
 afficherBanqueDynamique
 <template>
     <div>
-
+                  
+                  
                 
                 <h4> Liste acte effet financier </h4>
                 <table class="table table-bordered table-striped" v-if="macheid">

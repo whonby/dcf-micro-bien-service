@@ -1,5 +1,5 @@
 
-ajouterchnique
+isDetailDossierCandi
 
 <template>
     <div>
@@ -2866,9 +2866,9 @@ modifierModalActeEffetFinancierLocal(){
                 this.isButtunAddDossierCandidat=false
                 this.isButtunAddDossierCandidat=false
                 this.detail_dossier_candidature=this.getterDossierCandidats.find(dossier=>dossier.id==id)
-                this.detail_offre_finnancier=this.getterOffreFinanciers.find(offre => offre.dossier_candidature.id==id)
+                this.detail_offre_finnancier=this.getterOffreFinanciers.find(offre =>offre.dossier_candidature.id==id)
                 this.detail_offre_technique =this.getterschniques.find(offre =>offre.dossier_candidature.id==id)
-              console.log(this.detail_offre_finnancier)
+             // console.log(this.detail_offre_finnancier)
             },
             // afficher modal de modification
             afficherModalModifierActeDepense(index){
@@ -2948,7 +2948,7 @@ ajouterNouveauFournisseurLocal(registeCommerce){
                     keyboard: false
                 });
              this.edite_lot = this.listeLots(this.marcheid)[index];
-                //this.edite_lot.appel_offre_id=this.edite_lot.
+                 //this.edite_lot.appel_offre_id=this.edite_lot.
             },
             afficheBouttonTechCojo(index){
         this.$('#modificationCojo').modal({
