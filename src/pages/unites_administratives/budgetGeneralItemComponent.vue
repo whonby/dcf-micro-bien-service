@@ -33,7 +33,8 @@
                     <!-- <th>Activite</th> -->
                      
                      <th title="classification fonctionnel">C.Fontionnel</th>
-                     <th title="type procedure">Type procedure</th>
+                     <th title="type procedure">Procedure du marché</th>
+                     <th title="Statut">Statut</th>
                      <th title="classification Economique">C.Economique</th>
                     <th>D.Initial</th>
                     <th>Version</th>

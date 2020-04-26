@@ -20,7 +20,7 @@ const defaultState = {
   historiqueAffectation:[],
   demandeMateriel:[],
   historiqueAffectationService:[],
-   
+  demandeService:[]
 };
 
 export default defaultState;

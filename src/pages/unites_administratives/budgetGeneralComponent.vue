@@ -134,11 +134,12 @@
                     
                     <select v-model="formData.economique_id" class="span4">
                       <option
-                        v-for="Bgeneral in lesClassDe3"
+                        v-for="Bgeneral in derniereNivoPlanBudgetaire"
                         :key="Bgeneral.id"
                         :value="Bgeneral.id"
                       >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
                     </select>
+                    
                   </div>
                 </div>
               </td>
@@ -219,34 +220,34 @@
                   </div>
                 </div>
               </td>
-               <td colspan="2">
+               <td colspan="">
                 <div class="control-group">
                   <label class="control-label">Type procedure</label>
                   <div class="controls">
                     <input
                       type="text"
                      :value="afficheLeNomDesProcedure"
-                      class="span6"
-                      placeholder="Saisir le code"
-                      readonly
-                    />
-                  </div>
-                </div>
-              </td>
-               <!-- <td colspan="">
-                <div class="control-group">
-                  <label class="control-label">Statut de la ligne</label>
-                  <div class="controls">
-                    <input
-                      type="text"
-                     :value="codeBudgetGeneral"
                       class="span4"
                       placeholder="Saisir le code"
                       readonly
                     />
                   </div>
                 </div>
-              </td> -->
+              </td>
+               <td colspan="">
+                <div class="control-group">
+                  <label class="control-label">Statut de la ligne</label>
+                  <div class="controls">
+                    <input
+                      type="text"
+                     :value="statutDeLigne"
+                      class="span4"
+                     
+                      readonly
+                    />
+                  </div>
+                </div>
+              </td>
                <input
                       type="hidden"
                      :value="codeGrdeNature"
@@ -693,7 +694,15 @@ export default {
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
- 
+ ...mapGetters("uniteadministrative", [
+                "acteCreations",
+                "typeTextes",
+                "uniteAdministratives",
+                "getterBudgeCharge",
+                "getterligneExempter",
+
+            ]),
+
 //  codeBudgetGeneralModifier(){
 //       // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
 //     const sectionBudget = this.sections.find(serviceg => serviceg.id == this.editBudgetGeneral.section_id)
@@ -764,10 +773,22 @@ return "AON ou AOI"
 
 
 },
- lesClassDe3() { 
-const isClassDe3 = (code) => code.charAt(0) != "2" && code.charAt(0) != "6"; 
-return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
- },
+statutDeLigne(){
+
+     if(this.formData.economique_id == ""){
+       return "Aucune Ligne"
+     }
+     else if(this.formData.economique_id == this.CodeExempte(this.formData.economique_id))
+      {
+        return "Ligne exemptée"
+      }
+      
+      return "Ligne à marché"
+    },
+//  lesClassDe3() { 
+// const isClassDe3 = (code) => code.charAt(0) != "2" && code.charAt(0) != "6"; 
+// return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
+//  },
 
 afficheActiviteParAction() {
       return id => {
@@ -882,6 +903,31 @@ anneeAmort() {
 //       }
 //       return 0
 //     },
+ Codeeconomique() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 0
+        }
+      };
+    },
+    CodeExempte() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterligneExempter.find(qtreel => qtreel.economique_id == id);
+
+      if (qtereel) {
+        return qtereel.economique_id;
+      }
+      return 0
+        }
+      };
+    },
+    
   },
 
 

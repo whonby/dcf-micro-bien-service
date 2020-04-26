@@ -387,11 +387,11 @@
                   >
                    
                    <!-- <template v-if="uniteadministrative.type_ua_id = type_Unite_admins.id"> -->
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.typeua.libelle }}</td>
-                      <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.naturesecti.libelle }}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.secti.nom_section }}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.servivegest.libelle }}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.localgeo.libelle }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{libelleUa(uniteadministrative.type_ua_id)}}</td>
+                      <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{libelleNatureSection(uniteadministrative.nature_section_id) }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{libelleSection(uniteadministrative.section_id)}}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{libelleServiceGestionnaire(uniteadministrative.servicegest_id) }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{libelleLocalGeographie(uniteadministrative.localisationgeo_id) }}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.code }}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.libelle }}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{ formaterDate(uniteadministrative.date_creation) }}</td>
@@ -508,6 +508,66 @@ export default {
       "plans_fonctionnels"
      
     ]),
+    libelleLocalGeographie() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.localisations_geographiques.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    libelleServiceGestionnaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.services_gestionnaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    libelleUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.type_Unite_admins.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     libelleSection() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sections.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.nom_section;
+      }
+      return 0
+        }
+      };
+    },
+     libelleNatureSection() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.natures_sections.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
     filtre_unite_admin() {
       const st = this.search.toLowerCase();
       return this.jointureUaChapitreSection.filter(items => {

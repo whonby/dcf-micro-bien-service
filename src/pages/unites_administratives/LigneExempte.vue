@@ -1,14 +1,14 @@
 
 <template>
     <div>
-        <!-- <notifications /> -->
+        <notifications />
         <div class="container-fluid">
             <hr>
             <div class="row-fluid">
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Liste des ligne exempte</h5>
+                            <h5>Listes des lignes exemptées</h5>
                             <div align="right">
                                 Search: <input type="text" v-model="search">
                             </div>
@@ -20,22 +20,22 @@
                                 <tr>
                                     <th>Code </th>
                                     <th>Libellé</th>
-                                    <!-- <th>Action</th> -->
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="odd gradeX" v-for="(item) in titreFiltres" :key="item.id">
-                                    <td >{{item.code || 'Non renseigné'}}</td>
-                                    <td >{{item.libelle || 'Non renseigné'}}</td>
-                                    <!-- <td>
+                                <tr class="odd gradeX" v-for="(item) in getterligneExempter" :key="item.id">
+                                    <td >{{codeLigneExemptee(item.economique_id) || 'Non renseigné'}}</td>
+                                    <td >{{LibelleLigneExemptee(item.economique_id) || 'Non renseigné'}}</td>
+                                    <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerLigneExempter(item.id)"  class="btn btn-danger ">
                                                 <span class=""><i class="icon-trash"></i></span></button>
                                         </div>
 
-                                    </td> -->
+                                    </td>
                                 </tr>
-                                <tr v-if="titreFiltres.length==0" align="right">
+                                <tr v-if="getterligneExempter.length==0" align="right">
                                     <h6>Pas de donnée disponible</h6>
                                 </tr>
                                 </tbody>
@@ -45,21 +45,40 @@
                 </div>
             </div>
         </div>
-        <!-- <fab :actions="fabActions"
+        <fab :actions="fabActions"
              main-icon="apps"
              @cache="afficherModalAjouterTitre"
              bg-color="green"
 
-        ></fab> -->
+        ></fab>
 
         <!----- ajouter modal   ---->
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter type de contrat</h3>
+                <h3>Ajouter lignes exemptée</h3>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal">
+                 <table class="table table-bordered table-striped">
+                     <tr>
+                         <td>
+                              <div class="control-group">
+                  <label class="control-label">Ligne exemptée</label>
+                  <div class="controls">
+                    
+                    <select v-model="formData.economique_id" class="span4">
+                      <option
+                        v-for="Bgeneral in derniereNivoPlanBudgetaire"
+                        :key="Bgeneral.id"
+                        :value="Bgeneral.id"
+                      >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+                         </td>
+                     </tr>
+                 </table>
+                <!-- <form class="form-horizontal">
                     <div class="control-group">
                         <label class="control-label">Code:</label>
                         <div class="controls">
@@ -72,7 +91,7 @@
                             <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
                         </div>
                     </div>
-                </form>
+                </form> -->
             </div>
             <div class="modal-footer">
                 <a @click.prevent="ajouterTitreLocal" class="btn btn-primary"
@@ -88,10 +107,28 @@
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier type de contrat</h3>
+                <h3>Modifier lignes exemptées</h3>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal">
+                  <table class="table table-bordered table-striped">
+                     <tr>
+                         <td>
+                              <div class="control-group">
+                  <label class="control-label">Ligne exemptée</label>
+                  <div class="controls">
+                    <select v-model="editTitre.economique_id" class="span4">
+                      <option
+                        v-for="Bgeneral in derniereNivoPlanBudgetaire"
+                        :key="Bgeneral.id"
+                        :value="Bgeneral.id"
+                      >{{Bgeneral.code}}-{{Bgeneral.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+                         </td>
+                     </tr>
+                 </table>
+                <!-- <form class="form-horizontal">
                     <div class="control-group">
                         <label class="control-label">Code:</label>
                         <div class="controls">
@@ -104,7 +141,7 @@
                             <input type="text" v-model="editTitre.libelle" class="span" placeholder="" />
                         </div>
                     </div>
-                </form>
+                </form> -->
             </div>
             <div class="modal-footer">
                 <a @click.prevent="modifier()" class="btn btn-primary"
@@ -135,13 +172,12 @@
                 search:"",
                 liste:[],
                 formData : {
-                    code: "",
-                    libelle: ""
+                    economique_id: "",
+                    
                 },
 
                 editTitre: {
-                    code: "",
-                    libelle: ""
+                   economique_id: "",
                 }
 
             };
@@ -168,20 +204,44 @@
 const isClassDe3 = (code) => code.charAt(0) == "2" || code.charAt(0) == "6"; 
 return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
  },
-            titreFiltres() {
+            // titreFiltres() {
 
-                const searchTerm = this.search.toLowerCase();
+            //     const searchTerm = this.search.toLowerCase();
 
-                return this.lesClassDe3.filter((item) => {
+            //     return this.getterligneExempter.filter((item) => {
 
-                        return item.code.toLowerCase().includes(searchTerm)
-                            || item.libelle.toLowerCase().includes(searchTerm)
+            //             return item.code.toLowerCase().includes(searchTerm)
+            //                 || item.libelle.toLowerCase().includes(searchTerm)
 
 
-                    }
-                )
+            //         }
+            //     )
 
-            }
+            // },
+               codeLigneExemptee() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 0
+        }
+      };
+    },
+     LibelleLigneExemptee() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
         },
         methods: {
             // methode pour notre action
@@ -199,8 +259,9 @@ return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
             },
             // fonction pour vider l'input
             ajouterTitreLocal () {
-                this.$("#exampleModal").modal('hide');
+               
                 this.ajouterLigneExempter(this.formData)
+                 this.$("#exampleModal").modal('hide');
                 this.formData = {
                     code: "",
                     libelle: ""

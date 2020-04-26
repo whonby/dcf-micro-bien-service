@@ -625,6 +625,11 @@ const SUPPRIMER_HISTORIQUE_AFFECTATION_SERVICE = (state, id) => {
   state.historiqueAffectationService = state.historiqueAffectationService.filter(norme => norme.id != id);
 };
 
+
+
+
+
+
 export {
   
 

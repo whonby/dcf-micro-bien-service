@@ -37,7 +37,30 @@
             <span class="label label-warning">{{tauxEquipementPrevue}}%</span>TAUX QUANTITES NON COUVERTES
           </a>
         </li> -->
-          
+          <!-- <div class="quick-actions_homepage">
+      <ul class="quick-actions">
+        <li class="bg_lb"> <a href="#"> <i class="icon-dashboard"></i> <span class="label label-important">{{TotalDemande}}</span>DEMANDE TOTAL</a> </li>
+        <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Quantités Couvertes</a> </li>
+        <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> Quantités Non Couvertes </a> </li>
+        <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i>Quantité Non Couvertes</a> </li>
+        <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>
+        <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Forms</a> </li>
+        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Buttons</a> </li>
+        <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i>Elements</a> </li>
+        <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i> Calendar</a> </li>
+        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Error</a> </li>
+ <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> My Dashboard </a> </li>
+        <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Charts</a> </li>
+        <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> Widgets </a> </li>
+        <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i> Tables</a> </li>
+        <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>
+        <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Forms</a> </li>
+        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Buttons</a> </li>
+        <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i>Elements</a> </li>
+        <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i> Calendar</a> </li>
+        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Error</a> </li>
+      </ul>
+    </div> -->
           <h1 style="text-align:center;margin:0 auto;color:red">EN COURS DE DEVELOPPEMENT TABLEAU DE BORD COMPTABILITE DES MATIERES</h1>
       </ul>
     </div>
@@ -79,7 +102,38 @@ export default {
       "tauxEquipementPrevue",
       "tauxEquipementRealise",
       "tauxEquipementPrevue",
-      "SommeTotalBesoin"
+      "SommeTotalBesoin",
+      "trieUaImmobilisation",
+      "equipements",
+      "familles",
+      "articles",
+      "SommeQuantiteNonCouvert",
+      "getAfficheArticle",
+      "getPersoStock",
+      "stockageArticles",
+      "groupUatypeNorme",
+      "groupUaNorme",
+      "groupUaNormeFamille",
+      "normeEquipements",
+      "groupUaNormeEquipe",
+      "groupUaNormeFonction",
+      "getPersoNormeArticle",
+      "services",
+      "besoinEquipement",
+      "afficherDirection",
+      "afficherService",
+      "afficherFonction",
+      "type_Unite_admins",
+      "getPersoListeDesNorme",
+      "normeImmo",
+      "getPersonnaliseNormeEquipement",
+      "afficherDemandeParService",
+      "natureEntres",
+      "EtatImmobilisations",
+      "causeInactivite",
+      "immobilisations",
+      "afficheRegroupeEquipementCouvert",
+      "demandeMateriel"
       // "tauxGlobalEquipement"
 
       // "nbreArchivageNotes"
@@ -95,7 +149,18 @@ export default {
           archivagedocument.type_texte.libelle.toLowerCase().includes(st)
         );
       });
-    }
+    },
+    TotalDemande(){
+ 
+  
+        
+    return this.demandeMateriel.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0); 
+      
+  
+},
+ quantiteCouvert(){
+    return this.immobilisations.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0); 
+},
   },
   methods: {
     formatageSomme: formatageSomme,

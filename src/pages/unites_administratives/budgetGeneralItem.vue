@@ -23,6 +23,11 @@
                          <span v-else-if="article.Dotation_Initiale > 100000000 ">AON ou AOI</span>
                          <span v-else></span>
                        </td>
+                       <td>
+
+                         <span v-if="article.economique_id == CodeExempte(article.economique_id) ">Exemptée procedure</span>
+                         <span v-else>Ligne à marché</span>
+                       </td>
                     <td>{{Codeeconomique( article.economique_id) || 'Non renseigné'}}-{{ affichereconomique(article.economique_id) || 'Non renseigné'}}</td>
                   <td>{{formatageSomme(parseFloat(article.Dotation_Initiale)) || 0}}</td>
                    <td>
@@ -89,7 +94,26 @@ export default {
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
-  
+   ...mapGetters("uniteadministrative", [
+                "acteCreations",
+                "typeTextes",
+                "uniteAdministratives",
+                "getterBudgeCharge",
+                "getterligneExempter",
+
+            ]),
+           CodeExempte() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterligneExempter.find(qtreel => qtreel.economique_id == id);
+
+      if (qtereel) {
+        return qtereel.economique_id;
+      }
+      return 0
+        }
+      };
+    },
      afficherSection() {
       return id => {
         if (id != null && id != "") {
