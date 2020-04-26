@@ -1,6 +1,7 @@
 <template>
 <div>
         
+        
                 <h4> Liste des demandes d'ANO</h4>
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
@@ -241,14 +242,24 @@
                  <div class="control-group">
                         <label class="control-label">Reference offre</label>
                         <div class="controls">
-                            <!-- <select v-model="formDemande.appel_offre_id" class="span" disabled>
-                                <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.ref_offre}}</option>
-                            </select> -->
+                            
 
                               <input
                                     type="text"
                                     :value="affichierReferenceAppelOffre(macheid)"
+                                    class="span"
+                                   readonly
+                            />
+                        </div>
+                        </div>
+
+                        
+                          <div class="control-group">
+                        <label class="control-label">Reference pv</label>
+                        <div class="controls">
+                              <input
+                                    type="text"
+                                    :value="afficherReferencePv(affichierAppelOffreid(macheid))"
                                     class="span"
                                    readonly
                             />
@@ -348,7 +359,7 @@ selectedFileDemandeAno:""
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "motifDecisions","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
-                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
+                "rapportDocuments","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "gettersCotations", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
             ...mapGetters('personnelUA', ['acteur_depenses']),
@@ -369,7 +380,37 @@ selectedFileDemandeAno:""
             }, 
 
            
+              // afficher le pv sur la demende d'ANO
 
+
+      afficherReferencePv() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.rapportDocuments.find(qtreel => qtreel.appel_offre_id == id );
+
+      if (qtereel) {
+        return qtereel.reference;
+      }
+      return 0
+        }
+      };
+    },
+
+
+    // afficher la reference de l'offre
+
+    affichierAppelOffreid() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
 
             //  listeAppelOffre(){
             //     return  macheid=>{
@@ -402,18 +443,18 @@ selectedFileDemandeAno:""
         }
       };
     },
-affichierAppelOffreid() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
+// affichierAppelOffreid() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
 
-      if (qtereel) {
-        return qtereel.id;
-      }
-      return 0
-        }
-      };
-    },
+//       if (qtereel) {
+//         return qtereel.id;
+//       }
+//       return 0
+//         }
+//       };
+//     },
 
             //          listePVDemandePV(){
             //     return macheid=>{

@@ -15,6 +15,7 @@
                         <th>Action</th>
                     </tr>
                     </thead>
+  
                     <tbody>
 
                     <tr class="odd gradeX" v-for="demande in demandeAno(macheid)"
@@ -81,6 +82,8 @@
                             </select>
                         </div>
                         </div>
+
+
 
                     <div class="control-group">
 
@@ -174,7 +177,7 @@ selectedFileDemandeAno:""
           ...mapGetters("bienService", [ "typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "motifDecisions","gettersOffreTechniques","getterLettreInvitation",
-                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
+                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno","rapportDocuments",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "gettersCotations", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),

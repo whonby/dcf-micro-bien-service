@@ -4,8 +4,11 @@ import { asyncLoading } from 'vuejs-loading-plugin'
 var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
 
+// ajouterchnique
+// modifierchnique
+// supprimerDossierCandidat
 
-
+// ajouterOffreFinancier
 
 export  function  getCandidatSelectionner({commit}) {
   queue.push(() => axios.get('/liste_candidat_select').then((response) => {
@@ -3249,6 +3252,7 @@ export function ajouterRapportJugement({commit,dispatch}, elementAjout,config){
       if(response.status == 201){
           commit('AJOUTER_RAPPORT_OUVERTURE', response.data.jugement)
           commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data.annalyse.data)
+          commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
           dispatch('getRapportJugement')
           this.$app.$notify({
               title: 'success ',
@@ -3285,6 +3289,7 @@ export function supprimerRapportJugement({commit}, id) {
           // // dialog.loading(false) // stops the proceed button's loader
           axios.delete('/delete_rapport_jugement/' + id).then(response =>{
             commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data.data)
+            commit('GET_ALL_ANALYSE_DOSSIER', response.data.data)
             dialog.close()
         }  )
 
