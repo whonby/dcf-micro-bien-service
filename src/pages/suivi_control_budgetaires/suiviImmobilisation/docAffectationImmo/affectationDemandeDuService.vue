@@ -91,16 +91,13 @@ modifierDemandeMateriel
                        <li class="">
                         <a data-toggle="tab" href="#tab00007">Validation Directeur  <span class="badge badge-important">{{nombreValidationEnAttenteDirecteur}}</span></a>
                       </li>
-                    
-                     
-                     
                      
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
 
                     <div id="tab00007" class="tab-pane">
-<table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped">
                  <thead>
                   <tr>
                 
@@ -213,6 +210,8 @@ modifierDemandeMateriel
                 </tbody>
               </table>
                   </div>
+
+
                    <div id="tab00001" class="tab-pane active">
                      <table class="table table-bordered table-striped">
                 <thead>
@@ -337,6 +336,7 @@ modifierDemandeMateriel
                 </tbody>
               </table>
                    </div>
+
                   </div>
                   <br />
               
