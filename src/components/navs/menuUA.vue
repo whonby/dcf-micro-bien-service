@@ -87,11 +87,11 @@
           </li>
 
 
-           <li>
+           <!-- <li>
             <router-link :to="{name: 'BudgetParUa'}" tag="a">
               DETAIL DE BUDGET PAR UA
             </router-link>
-          </li>
+          </li> -->
            <li>
             <router-link :to="{name: 'ImportBudget'}" tag="a">
               IMPORTATION DU BUDGET

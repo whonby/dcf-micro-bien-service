@@ -2507,7 +2507,18 @@ return element;
 
 },
 
+recupererDateMiseService() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
 
+      if (qtereel) {
+        return qtereel.date_odre_service;
+      }
+      return 0
+        }
+      };
+    },
 
 
 
@@ -2679,7 +2690,14 @@ modifierModalActeEffetFinancierLocal(index){
 },
 
   modifierModalActeEffetFinancierLocal2(index){
-    if ( confirm( "Voulez-vous basculer en Execution ?") ) {
+   
+    if ( confirm( "Avez-vous terminé les etapes avant de migrer en execution svp ?") ) {
+this.editActeEffetFinancier = this.afficheMarcheEnCoursContratualisation[index]
+ if(this.recupererDateMiseService(this.editActeEffetFinancier.id) == null || this.recupererDateMiseService(this.editActeEffetFinancier.id) == "" ){
+ 
+      alert("Etapes Non Terminé,Vérifier la date de mise en service svp")
+    }
+     else if ( confirm( "Voulez-vous basculer en Execution ?") ) {
    
      this.editActeEffetFinancier = this.afficheMarcheEnCoursContratualisation[index]
     
@@ -2687,9 +2705,13 @@ modifierModalActeEffetFinancierLocal(index){
          marcheObjet.attribue = 2
 
     this.modifierMarcheBascule(marcheObjet)
-} else {
-    // Code à éxécuter si l'utilisateur clique sur "Annuler" 
+} 
+else{
+ // Code à éxécuter si l'utilisateur clique sur "Annuler" 
 }
+    }
+   
+   
    
    
    

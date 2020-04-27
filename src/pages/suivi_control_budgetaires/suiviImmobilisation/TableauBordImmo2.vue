@@ -1,4 +1,4 @@
-
+sommeQuantiteGlobal
 <template>
   <div class="container-fluid">
      <!-- <h3 style="text-align:center">TABLEAU DE BORD : COMPTABILITES DES MATIERES</h3> -->
