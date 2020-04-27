@@ -2296,3 +2296,34 @@ export const MODIFIER_PLAN_PASSATION_MARCHE= (state, elementModif)=>{
 export const DELETE_PLAN_PASSATION_MARCHE = (state, id)=> {
     state.plan_passation_marche = state.plan_passation_marche.filter(prest => prest.id !=id)
 }
+
+
+
+
+export const GET_ECHEANCES = (state, tableau_prestation) =>{
+    state.echeances = tableau_prestation
+}
+
+// add * presttation
+
+export const AJOUTER_ECHEANCES = (state, elementAjouter) => {
+    state.echeances.unshift(elementAjouter)
+}
+
+// update all prestation
+export const MODIFIER_ECHEANCES = (state, elementModif)=>{
+    state.echeances = state.echeances.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+
+// delete all prestation
+
+export const DELETE_ECHEANCES = (state, id)=> {
+    state.echeances = state.echeances.filter(prest => prest.id !=id)
+}

@@ -1316,7 +1316,7 @@
           </div>
         </div>
                       <div id="tab22" class="tab-pane ">
-                          kkkkk
+                          <echeance-marche :marche="detail_marche"></echeance-marche>
                       </div>
       </div>
        </div>
@@ -8006,10 +8006,13 @@
     import moment from "moment";
      import { formatageSomme } from "../../../../src/Repositories/Repository";
     //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
-
+import EcheanceMarche from "../../echeanciers/EcheanceMarche";
 
     export default {
         name: 'compte',
+        components:{
+            EcheanceMarche
+        },
         data() {
             return {
                 fabActions: [
@@ -12728,6 +12731,7 @@ this.$("#modificationModalAvenant").modal('hide');
     },
 
     },
+
 
 
 

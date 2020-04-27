@@ -285,7 +285,7 @@
                 "getAllHistoriqueBudgetGeneral",
                 "modifierLigneExempter",
             ]),
-            formatageSomme:formatageSomme,
+            formatageSomme: formatageSomme,
             OnchangeFichier(e) {
                 const files = e.target.files;
                 this.selectedFile = event.target.files[0];
@@ -309,24 +309,24 @@
                     keyboard: false
                 });
             },
-            ajouterFichier(){
+            ajouterFichier() {
                 const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
                 formData.append('exercicebudget_id', this.exercice_budget);
                 let config = {
-                    header : {
-                        'Content-Type' : 'multipart/form-data'
+                    header: {
+                        'Content-Type': 'multipart/form-data'
                     }
                 }
 
 
-                this.i= this.i+10;
-                this.bgWidth=this.i+"%"
+                this.i = this.i + 10;
+                this.bgWidth = this.i + "%"
                 this.$("#exampleModal").modal('hide');
-                this.ajouterBudgetCharge(formData,config).then(data=>{
+                this.ajouterBudgetCharge(formData, config).then(data => {
                     console.log(data)
                     //this.getAllBudgetGeneral()
-                }).catch(erro=>{
+                }).catch(erro => {
                     console.log(erro)
                     this.getAllBudgetGeneral()
                     this.getAllUniteAdministrative()
@@ -336,7 +336,7 @@
             },
             //  afficherMontantBudgetModulPersonnel(){
             //       return this.getterBudgeCharge.reduce((prec, cur) =>parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
-             
+
             //   console.log(afficherMontantBudgetModulPersonnel)
             //  },
 

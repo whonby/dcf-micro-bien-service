@@ -354,6 +354,7 @@ this.getLettreInvitation()
     this.getMarcheBailleur()
 this.getMembreCojo()
     this.getProceVerbal()
+      this.getEcheances()
       /**
        * fin missions
        */

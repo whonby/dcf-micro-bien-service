@@ -52,20 +52,32 @@ import agence from '../../pages/bien_service/parametres/groupe_agence/agence.vue
 import DetailLivrable from '../../pages/bien_service/DetailLivrable.vue';
 import DetailEngagement from '../../pages/bien_service/contractualisation/detailEngagement.vue';
 import detailRealiteServiceFait from '../../pages/bien_service/contractualisation/detailRealiteServiceFait.vue';
- import DetailMandat from '../../pages/bien_service/contractualisation/detailMandat.vue';
+import DetailMandat from '../../pages/bien_service/contractualisation/detailMandat.vue';
 import Avenant from '../../pages/bien_service/contractualisation/avenant.vue';
 import ModePaiement from '../../pages/bien_service/parametres/ModePaiement.vue';
 
 import DetailMarchePs from '../../pages/bien_service/dossierDetailMarchePs/DetailMarchePs.vue';
- import detailMarcheProcedureSimplifierComite from '../../pages/bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/detailMarcheProcedureSimplifierComite.vue';
- import detailMarchePsLimite from '../../pages/bien_service/dossierDetailMarcheProcedureSimplifieLimite/detailMarchePsLimite.vue'; 
- import detailMarcheAoi_Aon from '../../pages/bien_service/dossierDetailMarcheAOI_AON/detailMarcheAoi_Aon.vue';
- import indicateurBienService from '../../pages/bien_service/contractualisation/indicateurBienService.vue';
+import detailMarcheProcedureSimplifierComite from '../../pages/bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/detailMarcheProcedureSimplifierComite.vue';
+import detailMarchePsLimite from '../../pages/bien_service/dossierDetailMarcheProcedureSimplifieLimite/detailMarchePsLimite.vue';
+import detailMarcheAoi_Aon from '../../pages/bien_service/dossierDetailMarcheAOI_AON/detailMarcheAoi_Aon.vue';
+import indicateurBienService from '../../pages/bien_service/contractualisation/indicateurBienService.vue';
 import PlanPassationMarche from "../../pages/bien_service/ppm/PlanPassationMarche";
 import DetailPPM from "../../pages/bien_service/ppm/DetailPPM";
 import detailMarcheFsqc from "../../pages/bien_service/dossierFSQC/detailMarcheFsqc";
 import detailMarcheR3cv from "../../pages/bien_service/dossierR3CV/detailMarcheR3cv";
 const BienServiceRoutes = [
+   /* {
+
+        path: "/creation-execution-marche-investissement",
+        name: "executionMarcheInvestissement",
+        component: executionMarcheInvestissement
+
+    },
+    {
+        path: "/role-membrecojo",
+        name: "rolemembrecojo",
+        component: rolemembrecojo
+    },*/
     {
 
         path: "/creation-execution-marche-investissement",
@@ -113,18 +125,18 @@ const BienServiceRoutes = [
         component:detailMarcheR3cv
     },
     // chemin de procedure d'appel offre iternational et national
-    
+
     {
         path:"/detail-marche-AOI-AON/:id",
         name:"detailMarcheAoi_Aon",
         component:detailMarcheAoi_Aon
     },
 
-    
+
     {
-    path:"/detail-marche-psc/:id",
-    name:"detailMarcheProcedureSimplifierComite",
-    component:detailMarcheProcedureSimplifierComite
+        path:"/detail-marche-psc/:id",
+        name:"detailMarcheProcedureSimplifierComite",
+        component:detailMarcheProcedureSimplifierComite
     },
     {
         path: "Avenant",
@@ -151,7 +163,7 @@ const BienServiceRoutes = [
         name: "commune",
         component: commune
     },
-     {
+    {
         path: "ville",
         name: "ville",
         component: ville
@@ -182,7 +194,7 @@ const BienServiceRoutes = [
         component: AjouterEngagement
     },
 
-    
+
 
     {
         path: "/type-Text-Juridique",
@@ -199,38 +211,38 @@ const BienServiceRoutes = [
     // acte effe route
 
     {
-path:"/liste-acte-effet-financier",
-name:"actesEffet",
-component:actesEffet
+        path:"/liste-acte-effet-financier",
+        name:"actesEffet",
+        component:actesEffet
     },
     // la route pour acte de depense
-{
- path:"/creation-acte-depense",
- name: "acteDepense",
- component:acteDepense  
-},
+    {
+        path:"/creation-acte-depense",
+        name: "acteDepense",
+        component:acteDepense
+    },
 // la route pour le livrable
-{
-    path:"/creation-livrable",
-    name:"livrable",
-    component:livrable
-},
+    {
+        path:"/creation-livrable",
+        name:"livrable",
+        component:livrable
+    },
 
 // la route du document de procedure
-{
-    path:"/creation-document-procedure",
-    name:'documentProcedure',
-    component:documentProcedure
-},
+    {
+        path:"/creation-document-procedure",
+        name:'documentProcedure',
+        component:documentProcedure
+    },
 
 
 
 // la route du motif de decision
-{
-    path:"/creation-motif-decision",
-    name:"motifDecision",
-    component:motifDecision
-},
+    {
+        path:"/creation-motif-decision",
+        name:"motifDecision",
+        component:motifDecision
+    },
 
     // detail marche
     {
@@ -240,208 +252,208 @@ component:actesEffet
     },
 
 // detail marche
-{
-    path: '/detail-marche/:id',
-    name:"DetaillMarche",
-    component:DetaillMarche
-},
+    {
+        path: '/detail-marche/:id',
+        name:"DetaillMarche",
+        component:DetaillMarche
+    },
 
 // detail marche du procedure simplifier
-{
-    path:'/detail-marche-ps/:id',
-    name:"DetailMarchePs",
-    component:DetailMarchePs
-},
+    {
+        path:'/detail-marche-ps/:id',
+        name:"DetailMarchePs",
+        component:DetailMarchePs
+    },
 
-{
-    path: '/detail-livrable/:id',
-    name:"DetailLivrable",
-    component:DetailLivrable
-},
+    {
+        path: '/detail-livrable/:id',
+        name:"DetailLivrable",
+        component:DetailLivrable
+    },
 
-{
-    path:"/creation-marche",
-    name:"marche",
-    component:marche
-},
+    {
+        path:"/creation-marche",
+        name:"marche",
+        component:marche
+    },
 // la route de mode de passation
-{
- path:"/creation-mode-passation",
- name:"modePassation",
- component:modePassation
-},
+    {
+        path:"/creation-mode-passation",
+        name:"modePassation",
+        component:modePassation
+    },
 // la route pour acteur de depense
-{
-path:"/creation-acteur-depense",
-name:"acteurDepense",
-component:acteurDepense
-},
+    {
+        path:"/creation-acteur-depense",
+        name:"acteurDepense",
+        component:acteurDepense
+    },
 
 // la route pour l'appel offre
-{
-path:"/appel-offre",
-name:"appelOffre",
-component:appelOffre
-},
+    {
+        path:"/appel-offre",
+        name:"appelOffre",
+        component:appelOffre
+    },
 // la route ajouter appel d'offre
-{
-    path:"/creation-appel-offre",
-    name:"ajouterAppelOffre",
-    component:ajouterAppelOffre
-},
+    {
+        path:"/creation-appel-offre",
+        name:"ajouterAppelOffre",
+        component:ajouterAppelOffre
+    },
 // la route du type marche
-{
-    path:"/creation-type-marche",
-    name:"typeMarche",
-    component:typeMarche
-},
+    {
+        path:"/creation-type-marche",
+        name:"typeMarche",
+        component:typeMarche
+    },
 // la route modification appel d'offre
-{
- path:"/modification-appel-offre",
- name:"modificationAppelOffre",
- component:modificationAppelOffre
-},
+    {
+        path:"/modification-appel-offre",
+        name:"modificationAppelOffre",
+        component:modificationAppelOffre
+    },
 
 // la route pour analyse de dossier
-{
-path:"/creation-analyse-de-dossier",
-name:"analyseDossier",
-component:analyseDossier
-},
+    {
+        path:"/creation-analyse-de-dossier",
+        name:"analyseDossier",
+        component:analyseDossier
+    },
 // la route pour le baileur
-{
-    path:"/creation-bailleur",
-    name:"bailleur",
-    component:bailleur
-},
+    {
+        path:"/creation-bailleur",
+        name:"bailleur",
+        component:bailleur
+    },
 
 // la route de type procedure
-{
-    path:"/creation-type-procedure",
-    name:"typeProcedure",
-    component:typeProcedure
-},
+    {
+        path:"/creation-type-procedure",
+        name:"typeProcedure",
+        component:typeProcedure
+    },
 // la route autre text juridique
-{
-    path:"/cretaion-autre-text-juridique",
-    name:"autreTextJuridique",
-    component:autreTextJuridique
-},
+    {
+        path:"/cretaion-autre-text-juridique",
+        name:"autreTextJuridique",
+        component:autreTextJuridique
+    },
 // la route de procedure de passation
-{
-    path:"/creation-procedure-passation",
-    name:"procedurePassation",
-    component:procedurePassation
-},
-{
+    {
+        path:"/creation-procedure-passation",
+        name:"procedurePassation",
+        component:procedurePassation
+    },
+    {
 
-    path:"/creation-text-juridique",
-    name:"textJuridique",
-    component:textJuridique
-},
+        path:"/creation-text-juridique",
+        name:"textJuridique",
+        component:textJuridique
+    },
 // la route pour la banque
-{
-    path:"/creation-banque",
-    name:"banque",
-    component:banque
-},
+    {
+        path:"/creation-banque",
+        name:"banque",
+        component:banque
+    },
 // la route pour le code fonction
-{
-    path:"/creation-code-fonction",
-    name:"codeFonction",
-    component:codeFonction
-},
+    {
+        path:"/creation-code-fonction",
+        name:"codeFonction",
+        component:codeFonction
+    },
 // la route pour la cojo
-{
-    path:"/creation-cojo",
-    name:"cojo",
-    component:cojo
-},
+    {
+        path:"/creation-cojo",
+        name:"cojo",
+        component:cojo
+    },
     // la route pour le compte
     {
         path:"/creation-compte",
         name: "compte",
-        component:compte  
-       },
-       // la route pour la condition
-       {
-       path:"/creation-condition",
-       name:"condition",
-       component:condition
-       },
-       // la route pour la facture
-       {
-       path:"/creation-facture",
-       name:"facture",
-       component:facture
-       },
-       // la route pour la fonction occupee
-       {
-           path:"/creation-fonction-occuppee",
-           name:"fonctionOccupee",
-           component:fonctionOccupee
-       },
-       // la route pour le lot
+        component:compte
+    },
+    // la route pour la condition
+    {
+        path:"/creation-condition",
+        name:"condition",
+        component:condition
+    },
+    // la route pour la facture
+    {
+        path:"/creation-facture",
+        name:"facture",
+        component:facture
+    },
+    // la route pour la fonction occupee
+    {
+        path:"/creation-fonction-occuppee",
+        name:"fonctionOccupee",
+        component:fonctionOccupee
+    },
+    // la route pour le lot
     //    {
     //        path:"/creation-lot",
     //        name:"lot",
     //        component:lot
     //    },
-       // la route pour la nature fonction
-       {
-           path:"/creation-nature-fonction",
-           name:"natureFonction",
-           component:natureFonction
-       },
-       // la route pour la prestation
-       {
-           path:"/creation-prestation",
-           name:"prestation",
-           component:prestation
-       },
+    // la route pour la nature fonction
+    {
+        path:"/creation-nature-fonction",
+        name:"natureFonction",
+        component:natureFonction
+    },
+    // la route pour la prestation
+    {
+        path:"/creation-prestation",
+        name:"prestation",
+        component:prestation
+    },
 
-       // la route pour la signature
-{
-    path:"/creation-signature",
-    name:"signature",
-    component:signature
-},
+    // la route pour la signature
+    {
+        path:"/creation-signature",
+        name:"signature",
+        component:signature
+    },
 // la route pour le type de prestation
-{
-    path:"/creation-type-prestation",
-    name:"type_prestation",
-    component:type_prestation
-},
+    {
+        path:"/creation-type-prestation",
+        name:"type_prestation",
+        component:type_prestation
+    },
 // la route pour le type acte depense
-{
-    path:"/creation-type-acte-depense",
-    name:"typeActeDepense",
-    component:typeActeDepense
-},
+    {
+        path:"/creation-type-acte-depense",
+        name:"typeActeDepense",
+        component:typeActeDepense
+    },
 // la route pour le type acte effet financier
-{
-    path:"/creation-type-effet-financier",
-    name:"typeActeEffetFinancier",
-    component:typeActeEffetFinancier
-},
+    {
+        path:"/creation-type-effet-financier",
+        name:"typeActeEffetFinancier",
+        component:typeActeEffetFinancier
+    },
     // la route pour le type analyse
     {
         path:"/creation-type-analyse",
         name: "typeAnalyse",
-        component:typeAnalyse  
-       },
-       // la route pour le type de facture
-       {
-       path:"/creation-type-facture",
-       name:"typeFacture",
-       component:typeFacture
-       },
-       // la route pour le type de facture
-       {
-       path:"/creation-type-unite-administrative",
-       name:"typeUa",
-       component:typeUa
-       },
+        component:typeAnalyse
+    },
+    // la route pour le type de facture
+    {
+        path:"/creation-type-facture",
+        name:"typeFacture",
+        component:typeFacture
+    },
+    // la route pour le type de facture
+    {
+        path:"/creation-type-unite-administrative",
+        name:"typeUa",
+        component:typeUa
+    },
     {
         path:"/ppm",
         name:"ppm",
@@ -452,7 +464,7 @@ component:analyseDossier
         name:"DetailPPM",
         component:DetailPPM
     }
-       
+
 ]
 
 export default BienServiceRoutes;
