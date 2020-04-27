@@ -86,7 +86,8 @@ const defaultState = {
     rapportOuverture:[],
     gettersTransmissions:[],
     plan_passation_marche:[],
-    selectionner_candidats:[]
+    selectionner_candidats:[],
+    echeances:[]
   
 }
 

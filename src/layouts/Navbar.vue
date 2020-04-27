@@ -147,7 +147,7 @@ export default {
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", 
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
-          "getRapport", "getDocument","getRapportJugement","getCandidatSelectionner"])
+          "getRapport", "getDocument","getRapportJugement","getCandidatSelectionner","getEcheances"])
 
 
   },
@@ -352,6 +352,7 @@ this.getLettreInvitation()
     this.getMarcheBailleur()
 this.getMembreCojo()
     this.getProceVerbal()
+      this.getEcheances()
       /**
        * fin missions
        */

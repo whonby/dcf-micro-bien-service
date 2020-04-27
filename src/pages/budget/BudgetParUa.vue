@@ -91,7 +91,7 @@
 
 
 <script>
-<<<<<<< HEAD
+
     import { mapGetters, mapActions } from "vuex";
     import { formatageSomme } from "../../Repositories/Repository";
     //import ProgressBar from "../component/ProgressBar"
@@ -286,7 +286,7 @@
                 "getAllHistoriqueBudgetGeneral",
                 "modifierLigneExempter",
             ]),
-            formatageSomme:formatageSomme,
+            formatageSomme: formatageSomme,
             OnchangeFichier(e) {
                 const files = e.target.files;
                 this.selectedFile = event.target.files[0];
@@ -310,24 +310,24 @@
                     keyboard: false
                 });
             },
-            ajouterFichier(){
+            ajouterFichier() {
                 const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
                 formData.append('exercicebudget_id', this.exercice_budget);
                 let config = {
-                    header : {
-                        'Content-Type' : 'multipart/form-data'
+                    header: {
+                        'Content-Type': 'multipart/form-data'
                     }
                 }
 
 
-                this.i= this.i+10;
-                this.bgWidth=this.i+"%"
+                this.i = this.i + 10;
+                this.bgWidth = this.i + "%"
                 this.$("#exampleModal").modal('hide');
-                this.ajouterBudgetCharge(formData,config).then(data=>{
+                this.ajouterBudgetCharge(formData, config).then(data => {
                     console.log(data)
                     //this.getAllBudgetGeneral()
-                }).catch(erro=>{
+                }).catch(erro => {
                     console.log(erro)
                     this.getAllBudgetGeneral()
                     this.getAllUniteAdministrative()
@@ -337,334 +337,12 @@
             },
             //  afficherMontantBudgetModulPersonnel(){
             //       return this.getterBudgeCharge.reduce((prec, cur) =>parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
-             
+
             //   console.log(afficherMontantBudgetModulPersonnel)
             //  },
-
-=======
-import { mapGetters, mapActions } from "vuex";
-import { formatageSomme } from "../../Repositories/Repository";
-//import ProgressBar from "../component/ProgressBar"
-export default {
-  name: "budget",
-  components: {
-    //ProgressBar
-  },
-  data() {
-    return {
-      fabActions: [
-        {
-          name: "cache",
-          icon: "add"
->>>>>>> 3e5c90e9b1fa6900ef8c2f886b0e13f71bc53f2b
         }
-      ],
-      detailBudget: "",
-      budgetGeneralCharge: "",
-      progress: 0,
-      bgWidth: "0%",
-      bgHeight: "30px",
-      exercice_budget: "",
-      message_mandater: "",
-      i: 0,
-      isOffreTechniqueFinancier: false,
-      namePDF: "",
-      uploadPercentage: 0,
-      fichierPDF: "",
-      imagePDF: "",
-      selectedFile: "",
-      resultaAnalysePv: [],
-      resultaFinalCandidat: [],
-      entreprise_vainqueur: "",
-      registrecc_vainqueur: "",
-      identreprise_vainqueur: "",
-      message_setion_vainqueur: "",
-      info_avis_bailleur: "",
-      namePDFDemandeAno: "",
-      fichierPDFDemandeAno: "",
-      imagePDFDemandeAno: ""
     };
-  },
-  created() {
-    /*this.detailBudget = this.getterBudgeCharge.find(
-      item => item.id == this.$route.params.id
-    );*/
-    this.budgetGeneralCharge = this.budgetGeneral.filter(
-      item => item.actived == 1
-    );
-   /// console.log(this.budgetGeneralCharge);
-  },
-  computed: {
-    ...mapGetters("uniteadministrative", [
-      "acteCreations",
-      "typeTextes",
-      "uniteAdministratives",
-      "getterBudgeCharge",
-      "budgetGeneral",
-      "afficheTransfertValider"
-    ]),
-    ...mapGetters("parametreGenerauxAdministratif", [
-      "sections",
-      "type_Unite_admins",
-      "plans_programmes",
-      "natures_sections",
-      "grandes_natures",
-      "afficheNiveauPlanProg",
-      "exercices_budgetaires"
-    ]),
 
-    ...mapGetters("bienService", ["getMandatPersonnaliserVise"]),
-
-    budgetBienService() {
-      return unite_id => {
-        let vM = this;
-        if (unite_id != "" && vM.budgetGeneralCharge != "") {
-          let budget = vM.budgetGeneralCharge.find(item => {
-            if (item.gdenature_id == 5 && item.ua_id == unite_id) {
-              return item;
-            }
-          });
-
-          if (budget != undefined) {
-            return parseFloat(budget.Dotation_Initiale);
-          }
-          return 0;
-        }
-        return 0;
-      };
-    },
-
-    // afficher les totaux du budget pour le module personnel
-    afficherTotalBudgetModulePersonnel() {
-      return this.budgetGeneral
-        .filter(idGrand => idGrand.gdenature_id == 2 && idGrand.actived == 1)
-        .reduce(
-          (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-          0
-        );
-    },
-
-    // afficher les totaux du budget pour le module bien && service
-    afficherTotalBudgetModuleBienService() {
-      return this.budgetGeneral
-        .filter(idGrand => idGrand.gdenature_id == 5 && idGrand.actived == 1)
-        .reduce(
-          (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-          0
-        );
-    },
-
-    // afficher les totaux du budget pour le module investissement
-    afficherTotalBudgetModuleInvestissement() {
-      return this.budgetGeneral
-        .filter(idGrand => idGrand.gdenature_id == 7 && idGrand.actived == 1)
-        .reduce(
-          (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-          0
-        );
-    },
-
-    // afficher les totaux du budget pour le module de transfert
-    afficherTotalBudgetModuleTransfert() {
-      return this.budgetGeneral
-        .filter(idGrand => idGrand.gdenature_id == 6 && idGrand.actived == 1)
-        .reduce(
-          (prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-          0
-        );
-    },
-
-    budgetPersonnel() {
-      return unite_id => {
-        let vM = this;
-        if (unite_id != "" && vM.budgetGeneralCharge != "") {
-          let budget = vM.budgetGeneralCharge.find(item => {
-            if (item.gdenature_id == 2 && item.ua_id == unite_id) {
-              return item;
-            }
-          });
-
-          if (budget != undefined) {
-            return parseFloat(budget.Dotation_Initiale);
-          }
-          return 0;
-        }
-        return 0;
-      };
-    },
-    budgetInverstisement() {
-      return unite_id => {
-        let vM = this;
-        if (unite_id != "" && vM.budgetGeneralCharge != "") {
-         // console.log("------65");
-         // console.log(vM.budgetGeneralCharge);
-          let budget = vM.budgetGeneralCharge.find(item => {
-            if (item.gdenature_id == 7 && item.ua_id == unite_id) {
-              return item;
-            }
-          });
-          //console.log(budget);
-          if (budget != undefined) {
-            return parseFloat(budget.Dotation_Initiale);
-          }
-          return 0;
-        }
-        return 0;
-      };
-    },
-    budgetTranfert() {
-      return unite_id => {
-        let vM = this;
-        if (unite_id != "" && vM.budgetGeneralCharge != "") {
-          let budget = vM.budgetGeneralCharge.find(item => {
-            if (item.gdenature_id == 6 && item.ua_id == unite_id) {
-              return item;
-            }
-          });
-
-          if (budget != undefined) {
-            return parseFloat(budget.Dotation_Initiale);
-          }
-          return 0;
-        }
-        return 0;
-      };
-    },
-
-    budgetConsommerBienService() {
-      return id => {
-        if (id != "") {
-          return this.getMandatPersonnaliserVise
-            .filter(element => element.ua_id == id)
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
-              0
-            )
-            .toFixed(0);
-        }
-      };
-    },
-
-    budgetConsommerTransfert() {
-      return id => {
-        if (id != "") {
-          return this.afficheTransfertValider
-            .filter(element => element.ua_id == id)
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.montant_total_contrat),
-              0
-            )
-            .toFixed(0);
-        }
-      };
-    },
-    // budgetConsommerDesModule() {
-    //       const val = parseInt(this.budgetConsommerBienService(id)) + parseInt(this.budgetConsommerTransfert(id));
-
-    //        if (val) {
-    //         return parseInt(val).toFixed(0);
-    //       }
-
-    //       return 0
-    //     },
-
-    MontantTotal() {
-      return id => {
-        if (id != null && id != "") {
-          var montant = this.affichebudgetActive
-            .filter(idUa => idUa.ua_id == id)
-            .reduce(
-              (prec, cur) =>
-                parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
-              0
-            )
-            .toFixed(0);
-          if (isNaN(montant)) return null;
-          return montant;
-        }
-        return 0;
-      };
-    },
-
-    affichebudgetActive() {
-      var activeBudget = this.budgetGeneral.filter(
-        element => element.actived == 1
-      );
-
-      return activeBudget;
-    }
-  },
-  methods: {
-    ...mapActions("uniteadministrative", [
-      "getAllActeCreation",
-      "ajouterActeCreation",
-      "modifierActeCreation",
-      "supprimerActeCreation",
-      "importBudget",
-      "getAllTypeTextes",
-      "getAllUniteAdministrative",
-      "getAllArchivageDocument",
-      "ajouterBudgetCharge",
-      "getAllBudgetGeneral",
-      "getAllHistoriqueBudgetGeneral",
-      "modifierLigneExempter"
-    ]),
-    formatageSomme: formatageSomme,
-    OnchangeFichier(e) {
-      const files = e.target.files;
-      this.selectedFile = event.target.files[0];
-      console.log(this.selectedFile);
-      Array.from(files).forEach(file => this.addFichier(file));
-    },
-    addFichier(file) {
-      let reader = new FileReader();
-      let vm = this;
-      reader.onload = e => {
-        vm.imagePDFDemandeAno = "pdf.png";
-        vm.namePDFDemandeAno = file.name;
-        vm.fichierPDFDemandeAno = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    },
-    afficherModalAjouterStock() {
-      this.$("#exampleModal").modal({
-        backdrop: "static",
-        keyboard: false
-      });
-    },
-    ajouterFichier() {
-      const formData = new FormData();
-      formData.append("fichier", this.selectedFile, this.selectedFile.name);
-      formData.append("exercicebudget_id", this.exercice_budget);
-      let config = {
-        header: {
-          "Content-Type": "multipart/form-data"
-        }
-      };
-
-      this.i = this.i + 10;
-      this.bgWidth = this.i + "%";
-      this.$("#exampleModal").modal("hide");
-      this.ajouterBudgetCharge(formData, config)
-        .then(data => {
-          console.log(data);
-          //this.getAllBudgetGeneral()
-        })
-        .catch(erro => {
-          console.log(erro);
-          this.getAllBudgetGeneral();
-          this.getAllUniteAdministrative();
-          // router.push({ path: 'budgetGenerals' })
-        });
-    }
-    //  afficherMontantBudgetModulPersonnel(){
-    //       return this.getterBudgeCharge.reduce((prec, cur) =>parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
-
-    //   console.log(afficherMontantBudgetModulPersonnel)
-    //  },
-  }
-};
 </script>
 <style scoped>
 .taillemodal {
