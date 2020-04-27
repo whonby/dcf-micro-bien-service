@@ -26,7 +26,7 @@ modifierDemandeMateriel
                             
     
                              </select>
-                              
+                              {{affichierQuantiteEnStock(this.serviceValiderDirecteur.article_id)}}
                            <!-- {{afficherResteStock}}
                            {{affichierQuantiteEnStock(serviceValiderDirecteur.article_id)}}
                            {{affichierIdQuantiteEnStock(serviceValiderDirecteur.article_id)}} -->
@@ -614,6 +614,15 @@ affichierIdQuantiteEnStock() {
         }
       };
     },
+    afficheAnneeAmortis() {
+      const val = parseInt(this.serviceValiderDirecteur.annee_budgetaire) + parseInt(this.serviceValiderDirecteur.dure_vie);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
       },
 
       methods:{ 
@@ -672,7 +681,7 @@ unitezone_id:this.serviceValiderDirecteur.uniteZone_id,
  annee:this.serviceValiderDirecteur.annee_budgetaire,
 annee_amortissement:this.afficheAnneeAmortis,
 valeurorigine:this.afficheValeurOrigine(this.serviceValiderDirecteur.article_id),
- date_mise_service:this.serviceValiderDirecteur.date_motif_directeur,
+ date_mise_service:this.serviceValiderDirecteur.date_directeur_sce,
  
 };
    

@@ -37,19 +37,19 @@
             <span class="label label-warning">{{tauxEquipementPrevue}}%</span>TAUX QUANTITES NON COUVERTES
           </a>
         </li> -->
-          <!-- <div class="quick-actions_homepage">
+        <div class="quick-actions_homepage">
       <ul class="quick-actions">
-        <li class="bg_lb"> <a href="#"> <i class="icon-dashboard"></i> <span class="label label-important">{{TotalDemande}}</span>DEMANDE TOTAL</a> </li>
-        <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Quantités Couvertes</a> </li>
-        <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> Quantités Non Couvertes </a> </li>
-        <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i>Quantité Non Couvertes</a> </li>
-        <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>
-        <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Forms</a> </li>
-        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Buttons</a> </li>
-        <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i>Elements</a> </li>
-        <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i> Calendar</a> </li>
-        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Error</a> </li>
- <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> My Dashboard </a> </li>
+        <li class="bg_lb"> <a href="#"> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{sommeQuantiteGlobal}}</span>QUANTITES GBOBALES</a> </li>
+        <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i><span class="label label-important" style="font-size:15px">{{parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteGlobalNonCouvert)}}</span> QUANTITES COUVERTES</a> </li>
+        <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{sommeQuantiteGlobalNonCouvert}}</span> QUANTITES NON COUVERTES </a> </li>
+        <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i><span class="label label-important" style="font-size:15px">{{(((parseFloat(sommeQuantiteGlobalNonCouvert))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span>TAUX QUANTITES NON COUVERTES</a> </li>
+        <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{(((parseFloat(parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteGlobalNonCouvert)))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span> TAUX QUANTITES COUVERTES</a> </li>
+        <!-- <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"><span class="label label-important" style="font-size:25px">{{nombreDupersonne}}</span></i> NOMBRES DU PERSONNEL</a> </li>
+        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"><span class="label label-important" style="font-size:25px">{{(parseFloat((quantiteTotalCouvertPersonnel)/(parseFloat(quantiteTotalPersonnel)))*100).toFixed(2)}}%</span></i> TAUX DU PERSONNEL COUVERT</a> </li> -->
+        <!-- <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"><span class="label label-success" style="font-size:25px">{{(parseFloat(quantiteTotalNonCouvertPersonnel)/(parseFloat(quantiteTotalPersonnel))*100).toFixed(2)}}%</span></i>TAUX DU PERSONNEL NON COUVERT </a></li>
+        <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i>NOMBRES DE SERVICE </a>  </li>
+        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> TAUX DU SERVICE COUVERT</a></li>
+ <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> TAUX DU SERVICE NON COUVERT </a> </li>
         <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Charts</a> </li>
         <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> Widgets </a> </li>
         <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i> Tables</a> </li>
@@ -58,10 +58,10 @@
         <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Buttons</a> </li>
         <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i>Elements</a> </li>
         <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i> Calendar</a> </li>
-        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Error</a> </li>
+        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Error</a> </li> -->
       </ul>
-    </div> -->
-          <h1 style="text-align:center;margin:0 auto;color:red">EN COURS DE DEVELOPPEMENT TABLEAU DE BORD COMPTABILITE DES MATIERES</h1>
+    </div> 
+          <!-- <h1 style="text-align:center;margin:0 auto;color:red">EN COURS DE DEVELOPPEMENT TABLEAU DE BORD COMPTABILITE DES MATIERES</h1> -->
       </ul>
     </div>
 
@@ -138,6 +138,9 @@ export default {
 
       // "nbreArchivageNotes"
     ]),
+    ...mapGetters("personnelUA", ["acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
+
+ ...mapGetters("uniteadministrative", ["uniteAdministratives","directions","servicesua","uniteZones"]),
     filtre_archivage_document() {
       const st = this.search.toLowerCase();
       return this.archivageDocuments.filter(archivagedocument => {
@@ -150,17 +153,58 @@ export default {
         );
       });
     },
-    TotalDemande(){
- 
-  
-        
-    return this.demandeMateriel.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0); 
+      nombreDupersonne(){
+    return this.acte_personnels.length;
+},
+      quantiteEnStock(){
+    return this.stockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+},
+    quantiteTotalDemande(){
+    return this.demandeMateriel.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+},
+ quantiteTotalPersonnel(){
+    return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
+},
+ quantiteTotalService(){
+    return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0); 
+},
+sommeQuantiteGlobal(){
+  const val = parseInt(this.quantiteTotalDemande) + parseInt(this.quantiteTotalPersonnel) + parseInt(this.quantiteTotalService);
       
-  
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
 },
- quantiteCouvert(){
-    return this.immobilisations.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0); 
+
+quantiteTotalDemandeNonCouvertPersonnel(){
+    return this.demandeMateriel.filter(element => element.motif != 10).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
 },
+quantiteTotalDemandeNonCouvertService(){
+    return this.demandeMateriel.filter(element => element.motif_directeur_sce != 10).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+},
+// quantiteTotalCouvertPersonnel(){
+//     return this.acte_personnels.filter(element => element.normeequipement == 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
+// },
+quantiteTotalCouvertPersonnel(){
+    return this.acte_personnels.filter(element => element.normeequipement == 0).length;
+},
+ quantiteTotalNonCouvertPersonnel(){
+    return this.acte_personnels.filter(element => element.normeequipement != 0).length;
+},
+ quantiteTotalNonCouvertService(){
+    return this.servicesua.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0); 
+},
+sommeQuantiteGlobalNonCouvert(){
+  const val = parseInt(this.quantiteTotalDemandeNonCouvertPersonnel) + parseInt(this.quantiteTotalDemandeNonCouvertService) + parseInt(this.quantiteTotalNonCouvertPersonnel)+ parseInt(this.quantiteTotalNonCouvertService);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+}
   },
   methods: {
     formatageSomme: formatageSomme,

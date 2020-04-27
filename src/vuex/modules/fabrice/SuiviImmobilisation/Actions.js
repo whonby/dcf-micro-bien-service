@@ -1407,7 +1407,8 @@ export function ajouterDemandeMateriel({ commit }, nouveau) {
       uniteZone_id: nouveau.uniteZone_id,
       cause_demande: nouveau.cause_demande,
       cause_inactivite: nouveau.cause_inactivite,
-service_id: nouveau.service_id
+service_id: nouveau.service_id,
+      valeurorigine: nouveau.valeurorigine
 
     }))
     .then(response => {
@@ -1448,7 +1449,8 @@ export function modifierDemandeMateriel({ commit }, nouveau) {
       	dure_traitement_directeur: nouveau.dure_traitement_directeur,
       motif_directeur_sce: nouveau.motif_directeur_sce,
       date_directeur_sce: nouveau.date_directeur_sce,
-      cause_directeur_sce: nouveau.cause_directeur_sce
+      cause_directeur_sce: nouveau.cause_directeur_sce,
+      valeurorigine : nouveau.valeurorigine
     }))
     .then(response => {
       commit("MODIFIER_DEMANDE_MATERIEL", response.data);

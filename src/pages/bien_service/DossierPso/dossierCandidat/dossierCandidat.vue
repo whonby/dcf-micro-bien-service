@@ -1753,7 +1753,7 @@ created() {
         computed: {
             ...mapGetters("bienService", [ "typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
-                "getterOffreFinanciers","getterschniques","getterLettreInvitation",
+                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
@@ -2261,7 +2261,7 @@ montantHT() {
             listechnique(){
                 return idoffre => {
                     if (idoffre != "") {
-                        return this.getterschniques.find(item=>item.id==idoffre)
+                        return this.gettersOffreTechniques.find(item=>item.id==idoffre)
                     }
                 }
             }
@@ -2866,8 +2866,8 @@ modifierModalActeEffetFinancierLocal(){
                 this.isButtunAddDossierCandidat=false
                 this.isButtunAddDossierCandidat=false
                 this.detail_dossier_candidature=this.getterDossierCandidats.find(dossier=>dossier.id==id)
-                this.detail_offre_finnancier=this.getterOffreFinanciers.find(offre =>offre.dossier_candidature.id==id)
-                this.detail_offre_technique =this.getterschniques.find(offre =>offre.dossier_candidature.id==id)
+                this.detail_offre_finnancier=this.getterOffreFinanciers.find(offre =>offre.dossier_candidat_id==id)
+                this.detail_offre_technique =this.gettersOffreTechniques.find(offre =>offre.dossier_candidat_id==id)
              // console.log(this.detail_offre_finnancier)
             },
             // afficher modal de modification

@@ -1601,11 +1601,24 @@ type_marche
             
                 <td>
                <div class="control-group">
-            <label class="control-label">Bénéficiaire</label>
+            <label class="control-label">livrable</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="editMarche.livrable"
+                class="span4"
+                placeholder="Saisir le livrable"
+              />
+            </div>
+          </div>
+              </td>
+              <td>
+               <div class="control-group">
+            <label class="control-label">Bénéficiaire</label>
+            <div class="controls">
+              <input
+                type="text"
+                v-model="editMarche.beneficiaire"
                 class="span4"
                 placeholder="Saisir le livrable"
               />
