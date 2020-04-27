@@ -129,7 +129,8 @@ export default {
       "getAllAmortissement",
       "getAllHistoAffectation",
       "getAllDemandeMateriel",
-      "getAllHistoAffectationService"
+      "getAllHistoAffectationService",
+      
       
     ]),
 
@@ -283,7 +284,8 @@ this.getAllHistoriqueBudgetGeneral()
     this.getAllImmobilisation();
     this.getAllHistoAffectation();
     this.getAllDemandeMateriel();
-    this.getAllHistoAffectationService()
+    this.getAllHistoAffectationService();
+    
     //this.getAllAmortissement();
       /**
        * this.

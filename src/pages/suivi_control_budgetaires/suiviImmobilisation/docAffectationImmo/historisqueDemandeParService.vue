@@ -370,7 +370,7 @@
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="AjouterDemandeMateriel(editDemande)"
+          @click.prevent="AjouterDemande(editDemande)"
           class="btn btn-primary"
           href="#"
         >Valider</a>
@@ -964,7 +964,7 @@ quantiteEnstockidModifier() {
 
   methods: {
     ...mapActions("SuiviImmobilisation", [
-      "ajouterDemandeMateriel",
+      "ajouterDemandeService",
      
     ]),
 
@@ -1017,7 +1017,7 @@ if ( confirm( "Voulez-vous continuer la demande svp?") ) {
 
 },
 
-AjouterDemandeMateriel(){
+AjouterDemande(){
 
   if(this.Demande.cause_inactivite =="" && this.Demande.cause_demande==""){
     alert("Veuillez remplir les champs Svp")
@@ -1036,7 +1036,7 @@ uniteadmin_id :this.editDemande.ua_id,
     annee_budgetaire:this.editDemande.annee
     	
     }
-    this.ajouterDemandeMateriel(nouveauDemade)
+    this.ajouterDemandeService(nouveauDemade)
     this.$("#demandeService").modal('hide');
   }
 },

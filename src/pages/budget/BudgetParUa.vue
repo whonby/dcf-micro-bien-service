@@ -45,8 +45,7 @@
                 <td
                   style="background: forestgreen; color:#fff"
                 >{{formatageSomme(parseFloat(MontantTotal(unite.id)))}}</td>
-                <td formatageSomme((parseFloat(budgetConsommerInvestissement(unite.id))
-                  style="background: deepskyblue; color:#fff"
+                <td style="background: deepskyblue; color:#fff"
                 >{{formatageSomme(parseFloat(budgetConsommerTransfert(unite.id))+parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerInvestissement(unite.id)))}}</td>
                 <td
                   style="background: deepskyblue; color:#fff"

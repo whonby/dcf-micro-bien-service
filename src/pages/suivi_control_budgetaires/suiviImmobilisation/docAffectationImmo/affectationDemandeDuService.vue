@@ -5,7 +5,7 @@ modifierDemandeMateriel
 
 <div>
     
- <div id="exampleModalValidationdirecteur" class="modal hide valDirecteur">
+ <div id="AfficheModalValidation" class="modal hide valDirecteur">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Decision Du directeur</h3>
@@ -17,7 +17,7 @@ modifierDemandeMateriel
                  <div class="control-group">
                             <label class="control-label">Décision Directeur</label>
                             <div class="controls">
-                              <select v-model="serviceValiderDirecteur.motif_directeur_sce" class="span5">
+                              <select v-model="serviceValiderDirecteur.motif_directeur_sce" class="span12">
                                         <option value=""></option>
                                       <option value="1">Visé</option>
                                     <option value="2">Différé</option>
@@ -26,6 +26,7 @@ modifierDemandeMateriel
                             
     
                              </select>
+                              {{affichierQuantiteEnStock(this.serviceValiderDirecteur.article_id)}}
                            <!-- {{afficherResteStock}}
                            {{affichierQuantiteEnStock(serviceValiderDirecteur.article_id)}}
                            {{affichierIdQuantiteEnStock(serviceValiderDirecteur.article_id)}} -->
@@ -38,7 +39,7 @@ modifierDemandeMateriel
                <div class="control-group">
                             <label class="control-label">Cause</label>
                             <div class="controls">
-                              <textarea name="" id="" cols="30" rows="2" class="span5" :readonly="verrouilleCause" v-model="serviceValiderDirecteur.cause_directeur_sce"></textarea>
+                              <textarea name="" id="" cols="30" rows="2" class="span12" :readonly="verrouilleCause" v-model="serviceValiderDirecteur.cause_directeur_sce"></textarea>
                               
                                <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
                             </div>
@@ -52,8 +53,8 @@ modifierDemandeMateriel
                            <div class="control-group">
                             <label class="control-label">Date Decision :</label>
                             <div class="controls">
-                              <input type="date" class="span5"  v-model="serviceValiderDirecteur.date_directeur_sce"/>
-                               <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                              <input type="date" class="span12"  v-model="serviceValiderDirecteur.date_directeur_sce"/>
+                            
                             </div>
                           </div>
            </td>
@@ -185,7 +186,7 @@ modifierDemandeMateriel
                       
                     
                       </button>
-                     <button v-else class="btn  btn-info" @click="modatValidationDemandeService(index)" >                        
+                     <button  class="btn  btn-info" @click="modatValidationDemandeService(index)" v-else-if="BesoinImmo.motif_directeur_sce == 0" >                        
                      
                       
                        <span  >Attente</span>
@@ -281,19 +282,19 @@ modifierDemandeMateriel
                     >{{BesoinImmo.dure_traitement_directeur || 0 }}  Jours</td> -->
 
 <td>
-                        <button v-if="BesoinImmo.motif_directeur == 1"  class="btn  btn-success"  >                        
+                        <button v-if="BesoinImmo.motif_directeur_sce == 10"  class="btn  btn-success"  >                        
                      
                       <span    >Visé</span>
                       
                       </button>
-                       <button v-else-if="BesoinImmo.motif_directeur == 4" class="btn  btn-warning"  >                        
+                       <button v-else-if="BesoinImmo.motif_directeur_sce == 4" class="btn  btn-warning"  >                        
                      
                       
                        <span  >Différé</span>
                       
                     
                       </button>
-                        <button v-else-if="BesoinImmo.motif_directeur == 5" class="btn  btn-danger"  >                        
+                        <button v-else-if="BesoinImmo.motif_directeur_sce == 5" class="btn  btn-danger"  >                        
                      
                       
                        <span  >Réjeté</span>
@@ -311,7 +312,7 @@ modifierDemandeMateriel
                     </td>
                     
                     <td>
-                       <button v-if="BesoinImmo.motif_directeur == 1" class="btn  btn-success" >                        
+                       <button v-if="BesoinImmo.motif_directeur_sce == 10" class="btn  btn-success" >                        
                      
                       
                        <span  >Oui</span>
@@ -375,7 +376,8 @@ serviceua_id:"",
         article_id:"",
 motif_directeur_sce:"",
 date_directeur_sce:"",
-cause_directeur_sce:""
+cause_directeur_sce:"",
+service_id:""
       },
 search:""
         }
@@ -460,7 +462,7 @@ search:""
     // },
     verrouilleCause(){
 
-    return this.serviceValiderDirecteur.motif == 1;
+    return this.serviceValiderDirecteur.motif_directeur_sce == 1;
 },
     afficheCauseInactivite() {
       return id => {
@@ -505,7 +507,7 @@ affichierService() {
 
 validationDemandeDuServiceParDirecteur() {
       
-          return this.demandeMateriel.filter(element => element.fonction_id == 0 && element.motif_directeur == 0 );
+          return this.demandeMateriel.filter(element => element.fonction_id == 0 && element.motif_directeur_sce != 10);
        
     },
 afficheToutDemande() {
@@ -558,6 +560,69 @@ afficherLibelleService() {
         }
       };
     },
+    
+afficherResteStock() {
+      const val = this.affichierQuantiteEnStock(this.serviceValiderDirecteur.article_id) - this.serviceValiderDirecteur.quantite;
+      return parseFloat(val).toFixed(0);
+    },
+
+affichierQuantiteEnStock() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.stockageArticles.find(qtreel => qtreel.famill_id == id);
+
+      if (qtereel) {
+        return qtereel.quantitestock;
+      }
+      return 0
+        }
+      };
+    },
+affichierIdQuantiteEnStock() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.stockageArticles.find(qtreel => qtreel.famill_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+    afficherActeurDepenseMatricule() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.matricule;
+      }
+      return 0
+        }
+      };
+    },
+    afficheValeurOrigine() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.immobilisations.find(qtreel => qtreel.famillearticle_id == id);
+
+      if (qtereel) {
+        return qtereel.valeurorigine;
+      }
+      return 0
+        }
+      };
+    },
+    afficheAnneeAmortis() {
+      const val = parseInt(this.serviceValiderDirecteur.annee_budgetaire) + parseInt(this.serviceValiderDirecteur.dure_vie);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
       },
 
       methods:{ 
@@ -581,7 +646,7 @@ afficherLibelleService() {
       
      
     ]),
-   
+
 modifierDecisionDirecteur(){
 
 var objetDirecteur = {
@@ -591,10 +656,61 @@ var objetDirecteur = {
  
 }
 this.modifierDemandeMateriel(objetDirecteur)
-this.$("#exampleModalValidationdirecteur").modal('hide');
+this.$("#AfficheModalValidation").modal('hide');
 },
+
+AjouterAffectationDemande(index){
+if(this.affichierQuantiteEnStock(this.serviceValiderDirecteur.article_id) < this.serviceValiderDirecteur.quantite)
+{
+  alert("Stock en Rupture")
+}
+else if ( confirm( "Voulez-vous attribuer l'equipement?") ) {
+    this.serviceValiderDirecteur = this.validationDemandeDuServiceParDirecteur[index];
+  
+   var nouveauObjetDemande = {
+        ...this.serviceValiderDirecteur,
+ service_id:this.serviceValiderDirecteur.service_id,
+ ua_id:this.serviceValiderDirecteur.uniteadmin_id,
+unitezone_id:this.serviceValiderDirecteur.uniteZone_id,
+ fonction_id:this.serviceValiderDirecteur.fonction_id,
+ article_id:this.serviceValiderDirecteur.article_id,
+ qte:this.serviceValiderDirecteur.quantite,
+ dure_vie:this.serviceValiderDirecteur.dure_vie,
+ 
+ matricule_auteur:this.afficherActeurDepenseMatricule(this.serviceValiderDirecteur.acteur_id),
+ annee:this.serviceValiderDirecteur.annee_budgetaire,
+annee_amortissement:this.afficheAnneeAmortis,
+valeurorigine:this.afficheValeurOrigine(this.serviceValiderDirecteur.article_id),
+ date_mise_service:this.serviceValiderDirecteur.date_directeur_sce,
+ 
+};
+   
+      let dmdObjet = this.demandeMateriel.find(marche=>marche.id==this.serviceValiderDirecteur.id)
+         dmdObjet.motif_directeur_sce = 10
+           let stockObjet = this.stockageArticles.find(marche=>marche.id==this.affichierIdQuantiteEnStock(this.serviceValiderDirecteur.article_id))
+         stockObjet.quantitestock = this.afficherResteStock
+
+this.ajouterHistotorisqueAffectionService(nouveauObjetDemande);
+this.modifierDemandeMateriel(dmdObjet)
+this.modifierStock(stockObjet)
+} else {
+    // Code à éxécuter si l'utilisateur clique sur "Annuler" 
+}
+
+
+
+
+
+},
+
+
+
+
+
+
+
     modatValidationDemandeService(index) {
-      this.$("#exampleModalValidationdirecteur").modal({
+      this.$("#AfficheModalValidation").modal({
         backdrop: "static",
         keyboard: false
       })
