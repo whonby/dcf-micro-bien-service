@@ -2,7 +2,7 @@
 <div>
         
         
-                <h4> Liste des demandes d'ANO</h4>
+                <h4> Liste ANO DMP</h4>
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
@@ -16,6 +16,7 @@
                         <th>Action</th>
                     </tr>
                     </thead>
+               
                     <tbody>
 
                     <tr class="odd gradeX" v-for="demande in demandeAno(macheid)"

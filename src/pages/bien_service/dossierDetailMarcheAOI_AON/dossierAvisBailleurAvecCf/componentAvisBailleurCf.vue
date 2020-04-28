@@ -6,7 +6,7 @@
                  <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterAnoDMPBAILLEURModal" data-toggle="modal" class="btn btn-warning" v-if="listeAvisDemandeAno(macheid)" >Ajouter</a>
-                        <button class="btn btn-warning"  title="veillez recommencer l'analyse , car l'Avis ANO est Objection" disabled v-else  >Ajouter</button>
+                        <button class="btn btn-warning"  title="veillez recommencer le jugement , car l'Avis ANO DMP est Objection" disabled v-else  >Ajouter</button>
                     </div>
                 </div>
 

@@ -549,7 +549,7 @@
                                 <li class=""><a data-toggle="tab" href="#tab6" title="jugement des offres">Jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab7" title="rapport d'évaluation combiné">Rapport</a></li>
 
-                                 <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP">demande</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP">D.DMP</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab028" title="ANO/DMP attribution">A.ANO</a></li> -->
                                       
                                       <li class=""><a data-toggle="tab" href="#tab28" title="demande ANO Bailleur"> D.Bailleur </a></li>
@@ -773,7 +773,7 @@
                 <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" v-if="listeAvisAnoBailleur(macheid)">Ajouter</a>
-                          <button class="btn btn-warning"  title="veillez recommencer l'analyse , car l'Avis ANO Bailleur est Objection" disabled v-else  >Ajouter</button>
+                          <button class="btn btn-warning"  title="veillez recommencer le jugement , car l'Avis Bailleur est Objection" disabled v-else  >Ajouter</button>
                    
                     </div>
 
