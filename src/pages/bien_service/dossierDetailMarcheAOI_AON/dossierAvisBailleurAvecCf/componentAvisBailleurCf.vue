@@ -555,7 +555,7 @@ affichierAppelOffreid() {
             },
 
                editAnoBailleur(){
-                   if(confirm("veiller charger le fichier")){
+                  
                       //console.log(this.edit_bailleur)
                 const formData = new FormData();
                // formData.append('proce_verbal_jugement_offre_id', this.edit_bailleur.proce_verbal_jugement_offre_id);
@@ -583,7 +583,7 @@ affichierAppelOffreid() {
                 this.getAnoDMPBailleur()
                 this.$('#modifDemandeAno').modal('hide');
                 
-                   }else return "uploader le fichier"
+                  
                
             },
 

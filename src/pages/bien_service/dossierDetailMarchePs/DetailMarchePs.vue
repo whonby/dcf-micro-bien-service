@@ -762,23 +762,7 @@
 
                 </div>
 
-
-
-
-
                         <div id="tab1" class="tab-pane">
-
-
-                     
-                <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" v-if="listeAvisAnoBailleur(macheid)">Ajouter</a>
-                          <button class="btn btn-warning"  title="veillez recommencer le jugement , car l'Avis Bailleur est Objection" disabled v-else  >Ajouter</button>
-                   
-                    </div>
-
-
-                </div>
 
 
                 <component-acte :macheid="detail_marche.id"></component-acte>
@@ -1007,17 +991,7 @@ return "Appel d'Offre Ouvert(AON ou AOI)"
 
 
 
- listeAvisAnoBailleur(){
-       return id =>{
-           if(id!=null && id!=""){
-               const resultatAvis = this.getterAnoDMPBailleur.find(idDemande =>idDemande.marche_id==id
-               && idDemande.avis_bail== 0)
-               return resultatAvis
-           }
-           return null
-       }
-   },
-
+ 
 
 
         afficherLibelleTypeProcedure() {

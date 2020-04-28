@@ -133,6 +133,7 @@
 
                                 <div class="control-group">
 
+                                   
                                     <label class="control-label">Nom et prenom 4 <code>*</code> :</label>
                                     <div class="control-group">
                                         <input type="text" class="span" placeholder="Numero lo" v-model="edite_membre_cojo.nom_prenom">
