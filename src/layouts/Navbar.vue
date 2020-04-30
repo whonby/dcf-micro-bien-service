@@ -67,7 +67,7 @@ export default {
    
 
       ...mapActions('parametreGenerauxFonctionnelle', 
-    [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges']),
+    [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
 
     ...mapActions('parametreGenerauxSourceDeFinancement',['getSourceFinancement',
         'getTypeFinancement'
@@ -176,6 +176,7 @@ export default {
    this.getStructureActe()
    this.getPlanActe()
    this.getTypeconges()
+   this.getlisteNaturePrix()
    this.getSourceFinancement()
    this.getTypeFinancement()
    this.getStructureBudgetaire()

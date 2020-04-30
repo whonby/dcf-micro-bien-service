@@ -4,6 +4,62 @@ import { asyncLoading } from 'vuejs-loading-plugin'
  var housecall= require('housecall')
  var queue = housecall({concurrency: 2, cooldown: 1000})
 
+// liste structure fonctionnelle
+
+export  function getlisteNaturePrix({commit}){
+    queue.push(() => axios.get('/listeNaturePrix').then(tony => {
+        commit('GET_NATUREPRIX', tony.data)
+    }).catch(error => console.log(error)))
+}
+
+// ajouter structure fonctionnelle
+export function ajouterNaturePrix({commit}, objetAjout){
+ asyncLoading(axios.post('/ajouterNaturePrix' ,{
+     code:objetAjout.code,
+     libelle:objetAjout.libelle,
+   
+})).then(tony => {
+     if(tony.status == 201){
+         commit('AJOUTER_NATUREPRIX', tony.data)
+
+         this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué avec success !',
+            type:"success"
+          })
+     }
+ }).catch(error => console.log(error))
+}
+// supprimer structure fonctionnelle
+export function supprimerNaturePrix({commit}, id){
+  
+    this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+       commit('SUPPRIMER_NATUREPRIX', id)
+      // // dialog.loading(false) // stops the proceed button's loader
+        axios.delete('/supprimerNaturePrix/' + id).then(() => dialog.close() )   
+    })
+}
+//modifier structure fonctionnelle
+export function modifierNaturePrix({commit},elementModifie){
+
+   asyncLoading( axios.put('/modifierNaturePrix/' +elementModifie.id ,{
+       code:elementModifie.code,
+      libelle:elementModifie.libelle,
+
+})).then(response => {
+        commit('MODIFIER_NATUREPRIX', response.data)
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué avec success !',
+            type:"success"
+          })
+    }).catch(error => console.log(error))
+   
+}
+
 
 // liste structure fonctionnelle
 
