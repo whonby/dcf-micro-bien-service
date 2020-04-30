@@ -1,4 +1,5 @@
 type_marche
+afficheMarcheEnPlanification
 <template>
     <div class="container-fluid">
     
@@ -621,7 +622,7 @@ type_marche
                     <!-- <th>Ligne Budgetaire</th> -->
                     <th>Objet marché</th>
                     <th>Reference marché</th>
-                     <!-- <th>Numero marché</th> -->
+                     <th>Statut</th>
                     <th>Montant prévu</th>
                     <th>Etat du marché</th>
                    <th>Action</th>
@@ -650,6 +651,11 @@ type_marche
                    {{marche.objet || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.reference_marche || 'Non renseigné'}}</td>
+                    <td>
+
+                         <span v-if="marche.economique_id == CodeExempte(marche.economique_id) ">Exemptée procedure</span>
+                         <span v-else>Ligne à marché</span>
+                       </td>
                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
@@ -702,6 +708,9 @@ type_marche
                         <tr>
                      
                        <td>
+                          
+                      </td>
+                      <td>
                           
                       </td>
                       <td>
@@ -870,6 +879,7 @@ type_marche
                     <th>Imputation</th>
                        <th>Objet march&eacute;</th>
                         <th>Reference march&eacute;</th> 
+                        <th>Statut</th>
                                     <th>Montant prevue</th>
                                 <th>Etat du marché</th>
                                 <th>Action</th>
@@ -896,6 +906,11 @@ type_marche
                    {{marche.objet || 'Non renseigné'}}</td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.reference_marche || 'Non renseigné'}}</td>
+                    <td>
+
+                         <span v-if="marche.economique_id == CodeExempte(marche.economique_id) ">Exemptée procedure</span>
+                         <span v-else>Ligne à marché</span>
+                       </td>
                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
@@ -935,6 +950,9 @@ type_marche
                         <tr>
                      
                        <td>
+                          
+                      </td>
+                      <td>
                           
                       </td>
                       <td>
@@ -1746,7 +1764,7 @@ export default {
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
 
 
-     ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
+     ...mapGetters("uniteadministrative",['getterligneExempter','uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
       "montantBudgetGeneral", ]),
        ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
@@ -1757,7 +1775,18 @@ export default {
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
 
+      CodeExempte() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterligneExempter.find(qtreel => qtreel.economique_id == id);
 
+      if (qtereel) {
+        return qtereel.economique_id;
+      }
+      return 0
+        }
+      };
+    },
 afficheLeNomDesProcedureModifier(){
   if(this.afficherMontantImputation(this.ImputationBudgetModifier) == ""){
 return "Aucune procedure"

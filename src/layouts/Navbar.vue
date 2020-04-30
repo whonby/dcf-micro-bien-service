@@ -98,7 +98,8 @@ export default {
      "getLigneExempter",
      "getBudgeChager",
      "getAllRealiteServiceFait",
-     "getAllLiquidation"
+     "getAllLiquidation",
+     "getOrganigrammeUa"
     ]),
             ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
@@ -225,6 +226,7 @@ this.getTypeAppel()
     
       // this.getAllTypeTextes();
     this.getAllUniteAdministrative();
+     this.getOrganigrammeUa()
     // this.getAllArchivageDocument();
 // this.getAllDirection()
 this.getAllServiceua()
@@ -250,6 +252,7 @@ this.getClassificationGradeFonction()
         this.getConges();
         this.allActeurDepense()
          this.getActeurFinContratAndActivite()
+        
             /**Gestion des marche*/
             
       this.getTypeMarche()

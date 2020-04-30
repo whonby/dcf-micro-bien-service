@@ -3,6 +3,7 @@ var housecall = require('housecall');
 var queue = housecall({ concurrency: 2, cooldown: 1000 });
 import { asyncLoading } from "vuejs-loading-plugin";
 /**
+ * acteur_depenses
  * Gestion type acteur
  */ajouterActeur
 export async function  getTypeActPersonnel({commit}) {

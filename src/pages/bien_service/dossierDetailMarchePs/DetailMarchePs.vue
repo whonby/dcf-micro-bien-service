@@ -23,7 +23,7 @@
                                 <th>Montant Budgetaire</th>
                                 <th>Type de marché</th>
                                 <th>Unite administrative</th>
-                                
+                                <th>Statut</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -47,6 +47,11 @@
                                 <td class="taskOptions">
                                     {{detail_marche.objetUniteAdministrative.libelle}}
                                 </td>
+                                  <td>
+
+                         <span v-if="detail_marche.economique_id == CodeExempte(detail_marche.economique_id) ">Exemptée procedure</span>
+                         <span v-else>Ligne à marché</span>
+                       </td>
                                <!-- <td>{{budgetDisponible}}</td> -->
                             </tr>
                             </tbody>
@@ -55,8 +60,12 @@
                     </div>
                 </div>
             </div>
+        <template v-if="detail_marche.economique_id == CodeExempte(detail_marche.economique_id) ">
+<executionLigneExempte :macheid="detail_marche.id"></executionLigneExempte>
+        </template>
+        <template v-else>
 <h4 style="text-align:center;font-size:30px">{{afficheLeNomDesProcedure}}</h4>
-            <div class="row-fluid">
+ <div class="row-fluid">
                 <div class="span3">
 
                 </div>
@@ -806,6 +815,9 @@
                      </template>
                 </div>
             </div>
+        </template>
+
+           
               <div class="modal-footer">
         
         <a data-dismiss="modal" class="btn btn-danger" @click.prevent="retourListeEntreprise" href="#">Voir Tableau Marché</a>
@@ -848,6 +860,7 @@ import rapportOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComit
 
      import componentTransmissionDao from '../dossierDetailMarcheAOI_AON/dossierTransmission/componentTransmissionD';
       import componentAvis from '../dossierDetailMarcheAOI_AON/dossierDemandeAno/componentAvis';
+      import executionLigneExempte from '../executionLigneExempte/executionLigneExempte';
 ///////////////////////////////////////////////
 
      
@@ -899,7 +912,8 @@ componentPv,
             componentDemandeAno,
             componentAvisBailleurSurTransmision,
             componentAvisAnoCf,
-            componentAvisBailleurCf
+            componentAvisBailleurCf,
+            executionLigneExempte
         // bailleurAjouter,
 
            // bailleurAjouter,
@@ -955,12 +969,24 @@ created() {
       "budgetGeneral",
       "getPersonnaliseBudgetGeneral",
       "afficheTransfertValider",
-      "afficheBudgetActive"
+      "afficheBudgetActive",
+      "getterligneExempter"
       // "montantBudgetGeneral"
       // "chapitres",
       // "sections"
     ]),
-    
+     CodeExempte() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterligneExempter.find(qtreel => qtreel.economique_id == id);
+
+      if (qtereel) {
+        return qtereel.economique_id;
+      }
+      return 0
+        }
+      };
+    },
 afficheLeNomDesProcedure(){
     if( this.budgetDisponible < 10000000){
         return "Procédure Simplifiée de demande de Cotation(PSC Sans comité)"

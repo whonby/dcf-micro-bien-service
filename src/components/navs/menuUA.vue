@@ -76,8 +76,13 @@
               <i class="icon-key"></i>Fonction UA
             </router-link>
           </li>
+           <!-- <li class="divider"></li>
+        <li>
+            <router-link :to="{name: 'Organigramme'}" tag="a">
+              <i class="icon-key"></i>Organigramme UA
+            </router-link>
+          </li> -->
            <li class="divider"></li>
-        
         </ul>
       </li>
         <li>
@@ -87,11 +92,11 @@
           </li>
 
 
-           <!-- <li>
+           <li>
             <router-link :to="{name: 'BudgetParUa'}" tag="a">
               DETAIL DE BUDGET PAR UA
             </router-link>
-          </li> -->
+          </li>
            <li>
             <router-link :to="{name: 'ImportBudget'}" tag="a">
               IMPORTATION DU BUDGET

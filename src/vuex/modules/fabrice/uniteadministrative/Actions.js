@@ -1182,3 +1182,52 @@ export function supprimerLiquidation({ commit }, id) {
 
 
 
+export function getOrganigrammeUa({ commit }) {
+  queue.push(() => axios.get('/listeOrganigrammeUa').then(tony => {
+    commit('GET_ALL_ORGANIGRAMME_UA', tony.data)
+  }).catch(error => console.log(error)))
+
+}
+
+// ajouter plan fonctionnelle
+export function ajouterOrganigrammeUa({ commit, dispatch }, objetAjout) {
+  asyncLoading(axios.post('/ajouterOrganigrammeUa', objetAjout)).then(res => {
+    commit('AJOUTER_ORGANIGRAMME_UA', res.data)
+    dispatch('getOrganigrammeUa')
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Enregistrement effectué avec success !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+// modifier plan fonctionnelle
+
+export function modifierOrganigrammeUa({ commit, dispatch }, plan_fonctionnel) {
+  asyncLoading(axios.put('/modifierOrganigrammeUa/' + plan_fonctionnel.id, {
+    uniteua_id: plan_fonctionnel.uniteua_id,
+    libelle: plan_fonctionnel.libelle,
+   
+  })).then(res => {
+    commit('MODIFIER_ORGANIGRAMME_UA', res.data)
+    dispatch('getOrganigrammeUa')
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué avec success !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+// supprimer plan fonctionnelle
+export function supprimerOrganigrammeUa({ commit, dispatch }, id) {
+
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_ORGANIGRAMME_UA', id)
+      dispatch('getOrganigrammeUa')
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/supprimerOrganigrammeUa/' + id).then(() => dialog.close())
+    })
+}

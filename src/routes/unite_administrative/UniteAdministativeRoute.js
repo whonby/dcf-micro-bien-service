@@ -25,8 +25,14 @@ import Budget from "../../pages/budget/Budget";
 import BudgetParUa from "../../pages/budget/BudgetParUa";
 import DetailBudgetImporte from "../../pages/budget/DetailBudgetImporte.vue";
 import LigneExempte from "../../pages/unites_administratives/LigneExempte";
-
+import Organigramme from "../../pages/unites_administratives/organigrammeUa.vue";
 const UniteAdministativeRoutes = [
+  {
+
+    path: '/Organigramme-ua',
+    name: "Organigramme",
+    component: Organigramme
+  },
 
   {
 

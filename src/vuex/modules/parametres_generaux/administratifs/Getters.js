@@ -13,6 +13,7 @@ const grandes_natures = state => state.grandes_natures.sort((a,b)=>(a.code>b.cod
 const structures_geographiques = state => state.structures_geographiques.sort((a,b)=>(a.niveau>b.niveau)? 1:-1)
 const localisations_geographiques = state => state.localisations_geographiques.sort((a,b)=>(a.code>b.code)? 1:-1)
 const type_Unite_admins = state => state.type_Unite_admins
+const organigrammeUa = state => state.organigrammeUa
 // export const titreFiltres = (state, search) => {
 
 // const searchTerm = search.toLowerCase();
@@ -49,6 +50,7 @@ export const afficheNatureTransfert = state =>
              );
 
 export {
+    organigrammeUa,
     taux,
     titres,
     exercices_budgetaires,

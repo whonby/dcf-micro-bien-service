@@ -1043,7 +1043,7 @@
                     <td @dblclick="afficherModalModifierMandat(index)">{{formaterDate(Manda.date_decision_emetteur) || 'Non renseigné'}}</td>
                       
               <td v-if="Manda.decision_emetteur == 1">
-                        <button v-if="Manda.decision_cf == 1"  class="btn  btn-success" @click="afficherModalModifierMotifMandat(index)" >                        
+                        <button v-if="Manda.decision_cf == 8"  class="btn  btn-success" @click="afficherModalModifierMotifMandat(index)" >                        
                      
                       <span    >Visé</span>
                       
@@ -1208,15 +1208,27 @@
                                     <thead>
                                    <tr>
                                      <th>Année budgetaire</th>
-                    <th>Objet marche</th>
-                      <th>Fournisseur</th>
+                    <th>Objet marché</th>
+                    <th>Numero marché</th>
+                    <th>Montant marché</th>
+                    <th>Date decompte</th>
+                    <th>Montant decompte</th>
+                    <th>Montant cumuler</th>
+                    <th>Dotation prévu</th>
+                    <th>Montant executé dotation</th>
+                    <th>Reste executé dotation</th>
+                    <th>Montant executé marché</th>
+                    <th>Reste executé marché</th>
+                     
+                      <!-- <th>Fournisseur</th> -->
                         <!-- <th>Marché</th>
                     <th>Avenant</th>
                     <th>Marché + Avenant</th> -->
-                     <th>Facture (TTC)</th>
-                      <th>Date</th>
+                     <!-- <th>Facture (TTC)</th>
+                      <th>Date</th> -->
                     <th>Paiement part Etat</th>
                     <th>Paiement part Bailleurs</th>
+                    <th>Taux execution</th>
                     <!-- <th>Reste a payer marché</th> -->
                     <!-- <th>Taux facturétauxFacturation</th> -->
                   </tr>
@@ -1225,24 +1237,25 @@
                                    
                  <tr class="odd gradeX" v-for="type in afficheMandatMarcheTableau(detail_marche.id)" :key="type.id">
                    <td>{{type.exercice_budget || 'Non renseigné'}}</td>
-                    <td
+                    <td >{{detail_marche.objet || 'Non renseigné'}}</td>
+                      <td>{{afficheNumeroMarche(detail_marche.id) || 'Non renseigné'}}</td>
+                       <td>{{formatageSomme(parseFloat(montantMarcheAvecAvenant)) || 0}}</td>
+                   <td style="text-align: center" >{{formaterDate(type.date_motif) || 0}}</td>
+                   <td>{{formatageSomme(parseFloat(montantFactureMandat(numeroFacture(type.engagement_id)))) || 0}}</td>
+                    <td>{{formatageSomme(parseFloat(sommeEgagementLigneTableau(detail_marche.id))) || 0}}</td>
+                   <td>{{formatageSomme(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale)) || 0}}</td>
+                  <td>{{formatageSomme(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale)-(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale - sommeEgagementLigneTableau(detail_marche.imputation))))}}</td>
+                   <td>{{formatageSomme(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale - sommeEgagementLigneTableau(detail_marche.imputation))) || 0}}</td>
+                   <td>{{formatageSomme(parseFloat(montantMarcheAvecAvenant)-(parseFloat(restePayeMarche))) || 0}}</td>
+                   <td>{{formatageSomme(parseFloat(restePayeMarche)) || 0}}</td>
+                     <td style="text-align: center;color:red" >{{formatageSomme(parseFloat(sommeTresor(type.marche_id))) || 0}}</td>
+                   <td  style="text-align: center">{{formatageSomme(parseFloat(montantTotalDonEtEmprunt))|| 0}}</td>
+                      <td style="text-align: center;color:red">{{(((parseFloat(montantMarcheAvecAvenant)-(parseFloat(restePayeMarche)))/parseFloat(montantMarcheAvecAvenant))*100).toFixed(2) || 0}}%</td>
+                    
+                     <!-- <td>{{formatageSomme(parseFloat(objetfactureMontant(type.facture_id))) || 0}}</td>
+                      -->
                      
-                    >{{detail_marche.objet || 'Non renseigné'}}</td>
-                   
-                    <td>{{type.nom_entreprise || 'Non renseigné'}}</td>
-                   
-                   
-                     
-                     <td>{{formatageSomme(parseFloat(objetfactureMontant(type.facture_id))) || 0}}</td>
-                     <td
-                     style="text-align: center"
-                    >{{formaterDate(type.date_motif) || 0}}</td>
-                     <td
-                       style="text-align: center"
-                    >{{formatageSomme(parseFloat(type.montant_tresor)) || 0}}</td>
-                  <td
-                       style="text-align: center"
-                    >{{formatageSomme(parseFloat(montantTotalDonEtEmprunt))|| 0}}</td>
+                  
                     <!-- <td  style="text-align: center">{{formatageSomme(parseFloat(restePayeMarche)) || 0}}</td> -->
                    
   <!-- <td style="text-align: center"> {{tauxFacturation || 0}}%</td>
@@ -1252,23 +1265,30 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td
-                     style="text-align: center;color:red;font-weight:bold;"
-                    >{{formatageSomme(parseFloat(montantFactureParMarche(detail_marche.id))) || 0}}</td>
+                    <!-- <td
+                   style="text-align: center;color:red;font-weight:bold;"
+                    >{{formatageSomme(parseFloat(montantFactureParMarche(detail_marche.id))) || 0}}</td> -->
                      <!-- <td  style="text-align: center;color:red;font-weight:bold;"
                      
                     
                     > {{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td> -->
                      <td ></td>
-                  <td
-                     
+                     <td ></td>
+                     <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  <td                     
                      style="text-align: center;color:red;font-weight:bold;"
                     >{{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td> 
                       <td
-                     
+                      
                      style="text-align: center;color:red;font-weight:bold;"
                     >{{formatageSomme(parseFloat(montantTotalDonEtEmprunt)) || 0}}</td> 
-                    
+                    <td></td>
                       <!-- <td  style="text-align: center;color:red;font-weight:bold;"> {{tauxFacturation || 0}}%</td> -->
                     
                    
@@ -3252,7 +3272,72 @@
 <!--///////////////////////////////////////// FIN TABLEAU ENGAGEMENT//////////////////////////////-->
 <!--///////////////////////////////////////// FIN TABLEAU ENGAGEMENT//////////////////////////////-->
 
-
+<div id="validaDecisionCF" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Decision CF</h3>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" >
+          <div class="control-group">
+                            <label class="control-label">Décision CF </label>
+                            <div class="controls">
+                              <select v-model="editMandat.decision_cf">
+                                <option value=""></option>
+                              <option value="8">Visé</option>
+                             <option value="2">Différé</option>
+                             <option value="3">Réjeté</option>
+                            
+    
+    </select>
+                           
+                            </div>
+                          </div>
+                            <div class="control-group">
+                            <label class="control-label">Motif CF </label>
+                            <div class="controls">
+                              <select v-model="editMandat.motif">
+                             
+                                 <option
+                                  v-for="gpeua in motifDecisions"
+                                  :key="gpeua.id"
+                                  :value="gpeua.id"
+                                >{{gpeua.libelle}}</option>
+                               
+                               
+                              </select>
+                           
+                            </div>
+                          </div>
+                          <div class="control-group">
+                            <label class="control-label">Observation CF</label>
+                            <div class="controls">
+                              <textarea  class="span" row = "6" v-model="editMandat.observation">
+                              </textarea>
+                            </div>
+                          </div>
+                           <div class="control-group">
+                            <label class="control-label">Date Decision CF :</label>
+                            <div class="controls">
+                              <input type="date" class="span"  v-model="editMandat.date_motif"/>
+                               <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
+                              
+                            </div>
+                          </div>
+                           
+         
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierModalMandatDecisionCF(editMandat)"
+          class="btn btn-primary"
+          href="#"
+         
+        >Modifier</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
 <!--///////////////////////////////////////// DEBUT TABLEAU VALIDATION//////////////////////////////-->
 <!--///////////////////////////////////////// DEBUT TABLEAU VALIDATION//////////////////////////////-->
 <!--///////////////////////////////////////// DEBUT TABLEAU VALIDATION//////////////////////////////-->
@@ -3312,78 +3397,13 @@
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
-  <div id="exampleModalMotifMandat" class="modal hide">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Decision CF</h3>
-      </div>
-      <div class="modal-body">
-        <form class="form-horizontal" >
-          <div class="control-group">
-                            <label class="control-label">Décision CF </label>
-                            <div class="controls">
-                              <select v-model="editMandat.decision_cf">
-                                <option value=""></option>
-                              <option value="1">Visé</option>
-                             <option value="2">Différé</option>
-                             <option value="3">Réjeté</option>
-                            
-    
-    </select>
-                           
-                            </div>
-                          </div>
-                            <div class="control-group">
-                            <label class="control-label">Motif CF </label>
-                            <div class="controls">
-                              <select v-model="editMandat.motif">
-                             
-                                 <option
-                                  v-for="gpeua in motifDecisions"
-                                  :key="gpeua.id"
-                                  :value="gpeua.id"
-                                >{{gpeua.libelle}}</option>
-                               
-                               
-                              </select>
-                           
-                            </div>
-                          </div>
-                          <div class="control-group">
-                            <label class="control-label">Observation CF</label>
-                            <div class="controls">
-                              <textarea  class="span" row = "6" v-model="editMandat.observation">
-                              </textarea>
-                            </div>
-                          </div>
-                           <div class="control-group">
-                            <label class="control-label">Date Decision CF :</label>
-                            <div class="controls">
-                              <input type="date" class="span"  v-model="editMandat.date_motif"/>
-                               <!-- <input type="hidden" class="span"  :value="recuperer"/> -->
-                              
-                            </div>
-                          </div>
-                           
-         
-        </form>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="modifierModalMandatDecisionCF(editMandat)"
-          class="btn btn-primary"
-          href="#"
-         
-        >Modifier</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
+  
 
 
             <div id="exampleModalMotif" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Validation CF{{afficherMontantEngagement1}}-{{sommeMontantEngagement}}</h3>
+        <h3>Validation CF</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" >
@@ -8237,23 +8257,9 @@ numero_facture:"",
 },
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-              popupState2: false,
-              popupState3: false,
+State3: false,
+ popupState3: false,
+  popupState2: false,
               popupState4: false,
               popupState5: false,
               popupState6: false,
@@ -8329,6 +8335,60 @@ created() {
     ]),
    
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+
+
+
+sommeTresor(){
+  return id => {
+    if(id !=""){
+  
+        
+    return this.getMandatPersonnaliserVise.filter(element => element.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_tresor), 0).toFixed(0); 
+      
+    }
+    
+  }
+},
+partDonBailleur(){
+  return id => {
+    if(id !=""){
+  
+        
+    return this.getMandatPersonnaliserVise.filter(element => element.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_don), 0).toFixed(0); 
+      
+    }
+    
+  }
+},
+partEmpruntBailleur(){
+  return id => {
+    if(id !=""){
+  
+        
+    return this.getMandatPersonnaliserVise.filter(element => element.marche_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_emprunt), 0).toFixed(0); 
+      
+    }
+    
+  }
+},
+
+montantTotalDonEtEmprunt() {
+      const val = parseFloat(this.partEmpruntBailleur(this.detail_marche.id)) + parseFloat(this.partDonBailleur(this.detail_marche.id));
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+
+
+
+
+
+
+
 
 afficheMarcheType(){
 if(this.detail_marche.type_marche.libelle == "Travaux"){
@@ -9207,37 +9267,6 @@ tauxFacturation() {
 //       };
 // },
 
-partDonBailleur: function () {
-                return id => {
-                    if (id != "") {
-                      let valInite=0;
-                        return  this.getMandatPersonnaliserVise.filter(normeEquipe => normeEquipe.marche_id == this.detail_marche.id).reduce(function(total,currentVal){
-                           return total + parseFloat(currentVal.montant_don)
-                        },valInite);
-                    }
-                }
-            },
-partEmpruntBailleur: function () {
-                return id => {
-                    if (id != "") {
-                      let valInite=0;
-                        return  this.getMandatPersonnaliserVise.filter(normeEquipe => normeEquipe.marche_id == this.detail_marche.id).reduce(function(total,currentVal){
-                           return total + parseFloat(currentVal.montant_emprunt)
-                        },valInite);
-                    }
-                }
-            },
-
-
-montantTotalDonEtEmprunt() {
-      const val = parseFloat(this.partDonBailleur(this.detail_marche.id)) + parseFloat(this.partEmpruntBailleur(this.detail_marche.id));
-      
-       if (val) {
-        return parseInt(val).toFixed(0);
-      }
-      
-      return 0
-    },
 
 
 
@@ -9391,8 +9420,30 @@ objetfactureMontant() {
       };
     },
 
+numeroFacture() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.numero_facture;
+      }
+      return 0
+        }
+      };
+    },
+montantFactureMandat() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.numero_facture == id);
 
+      if (qtereel) {
+        return qtereel.prix_propose_ttc;
+      }
+      return 0
+        }
+      };
+    },
 
 
 
@@ -11764,7 +11815,7 @@ afficherModalModifierMotifMandatEmetteur(index) {
       this.editMandat = this.afficheMandatMarcheTableau(this.detail_marche.id)[index];
       },
 afficherModalModifierMotifMandat(index) {
-      this.$("#exampleModalMotifMandat").modal({
+      this.$("#validaDecisionCF").modal({
         backdrop: "static",
         keyboard: false
       })
@@ -11841,7 +11892,7 @@ alert("Le montant engagé est superieure au montant de la facture")
       {
         alert("Impossible d'emettre l'engagement veuillez revoir la dotation svp")
       }
-        
+     
       else
       {
  var nouvelObjet = {
@@ -11874,7 +11925,7 @@ marchetype:this.afficheMarcheType
        };
   this.modifierMandat(nouvelObjet)
       this.$('#ModifierModalMandat').modal('hide');
-      this.$('#exampleModalMotifMandat').modal('hide');
+      this.$('#validaDecisionCF').modal('hide');
       this.$('#exampleModalMotifMandatEmetteur').modal('hide');
 this.formData= {
 
@@ -11993,7 +12044,7 @@ section_id:this.afficherSectId
        };
   this.modifierMandat(nouvelObjet)
       this.$('#ModifierModalMandat').modal('hide');
-      this.$('#exampleModalMotifMandat').modal('hide');
+      this.$('#validaDecisionCF').modal('hide');
       this.$('#exampleModalMotifMandatEmetteur').modal('hide');
       
 this.formData= {

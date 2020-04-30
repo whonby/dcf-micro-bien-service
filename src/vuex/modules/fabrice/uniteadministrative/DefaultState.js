@@ -14,6 +14,7 @@ const defaultState = {
   ligneExempter: [],
   realiteServiceFait: [],
   liquidation: [],
+  organigrammeUa:[]
   // listeDocUniteAdministratives: [],
 
   // nbreUniteAdministratives: [],
