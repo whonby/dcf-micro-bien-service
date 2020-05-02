@@ -597,6 +597,7 @@
         }
       };
     },
+    
 
  afficheService() {
       return id => {
@@ -737,7 +738,8 @@
         methods: {
             // methode pour notre action
             ...mapActions('personnelUA', ['getActeur',"ajouterActeur","supprimerActeurs","getNbrActeurAcrediteTaux","allActeurDepense","getActeurFinContratAndActivite","getListeSalaireActuelAll"]),
-            afficherModalAjouterTitre(){
+          
+          afficherModalAjouterTitre(){
                 this.$router.push({ name: 'AjouterActeur' })
             },
 //  afficherModalAjouterPersonnel() {
@@ -749,18 +751,18 @@
             suprimer(id){
                 this.supprimerActeurs(id)
                 this.allActeurDepense()
-                this.getNbrActeurAcrediteTaux();
+        
+        this.getNbrActeurAcrediteTaux();
             },
             // afficherModalModifierTitre(index){
 
             //     this.$router.push({ path: 'EditActeurDepense', params: { id: index } })
 
             // },
-
-
  afficherModalModifierTitre(id) {
+
       this.$router.push({
-        path: "/Modifier_immobilisation/" + id
+        path: "/edit-acteur-depense/" + id
       });
     },
 

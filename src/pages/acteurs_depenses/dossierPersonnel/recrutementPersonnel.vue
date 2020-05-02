@@ -1,11 +1,12 @@
 
 <template>
     <div class="container-fluid">
-         <div id="exampleModal" class="modal hide taillModal">
+      <div id="exampleModal" class="modal hide taillModal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Marché Résilié</h3>
+        <h3>Ajouter Contrat Résilié</h3>
       </div>
+      
     <div class="modal-body">
         <table class="table table-bordered table-striped">
     <tr>
@@ -20,6 +21,7 @@
                 readonly
                
               />
+              
             </div>
           </div>
               </td>
@@ -46,18 +48,23 @@
      
     </tr>
           <tr>
-       <td>
-                         <!-- <div class="control-group">
+        <td>
+                         <div class="control-group">
                         <label class="control-label">Candidat retenu après analyse.</label>
                         <div class="controls">
                           <select v-model="editActeEffetFinancier.candidat_personnel_id" class="span">
-                              <option value=""></option>
-                                <option v-for="varText in afficherCandidat(editMarche.marche_id)" :key="varText.id"
-                                        :value="varText.candidat_personnel_id">{{afficherNomDossierCandidat(varText.candidat_personnel_id)}}</option>
-                            </select>
+                  <option
+                    v-for="varText in afficherCandidat(editActeEffetFinancier.marche_id)"
+                    
+                    :key="varText.id"
+                    :value="varText.id"
+                  >{{afficherNomDossierCandidat(varText.candidat_selection_id)}}</option>
+                 </select> 
                         
                         </div>
-                    </div> -->
+                    </div>
+       </td>
+            
               <td>
                  <div class="control-group">
             <label class="control-label">Fichier join</label>
@@ -109,8 +116,6 @@
         >Fermer</a>
       </div>
     </div>
-
-
 
 
     
@@ -1528,7 +1533,7 @@ export default {
         
       },
 
-      
+        marche_id:"",
         editActeEffetFinancier:"",
         formEffetFinancier:{
              code_act:"",
@@ -1562,11 +1567,14 @@ export default {
                 imputation:"",
                  activite_id:"",
                  exo_id:"",
-                 candidat_personnel_id:""
+                 candidat_personnel_id:"",
+                 candidat_selection_id:""
                  
       },
       indicateur_test:1,
-      search: ""
+      search: "",
+
+      macheid:""
     };
   },
 
@@ -1874,7 +1882,7 @@ afficherTypeMarche() {
            const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.numero_marche;
+        return qtereel.reference_marche;
       }
       return 0
         }
@@ -1894,19 +1902,30 @@ afficherTypeMarche() {
 //              }
 //             },
 
-    //  afficherNomDossierCandidat() {
-    //   return id => {
-    //     if (id != null && id != "") {
-    //        const qtereel = this.dossierPersonnels.find(qtreel => qtreel.id == id);
 
-    //   if (qtereel) {
-    //     return qtereel.nom_candidat.concat(' ', qtereel.prenom_candidat);
-    //   }
-    //   return 0
-    //     }
-    //   };
-    // },
+            afficherCandidat() {
+      return id => {
+        if (id != "") {
+         return this.selectionner_candidats.filter(
+            idmarche => idmarche.marche_id == id
+          );
+          
+        }
+      };
+    },
 
+        afficherNomDossierCandidat() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.dossierPersonnels.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.nom_candidat.concat(' ', qtereel.prenom_candidat);
+      }
+      return 0
+        }
+      };
+    },
 
 
 afficherEntreprise() {
@@ -2274,7 +2293,7 @@ return element;
         keyboard: false
       });
 
-      this.editMarche = this.afficheMarchExecuter[index];
+      this.editActeEffetFinancier = this.afficheMarchExecuter[index];
     },
     //afiicher modal ajouter
     afficherModalAjoutTypaPrestation() {
@@ -2335,7 +2354,7 @@ this.formData = {
       
        };
 
-         let marcheObjet = this.marches.find(marche=>marche.id==this.editMarche.marche_id)
+         let marcheObjet = this.marches.find(marche=>marche.id==this.editActeEffetFinancier.marche_id)
          marcheObjet.attribue = 3
 
           this.modifierMarche(marcheObjet)

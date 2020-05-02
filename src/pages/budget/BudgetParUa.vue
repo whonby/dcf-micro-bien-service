@@ -53,43 +53,43 @@
             
                 >{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id))-(parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))))}}</td>
                 
-                <td style="font-weight:bold;font-size:15px">{{((parseFloat(MontantTotalPargdeNature(unite.id))-(parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id)))) / (parseFloat(MontantTotalPargdeNature(unite.id))) * 100)}}</td>
+                <td style="font-weight:bold;font-size:15px">{{((parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))) / (parseFloat(MontantTotalPargdeNature(unite.id))) * 100)}}</td>
               </tr>
 
               <tr>
-                <td style="background: orangered;color:#fff">Total Budget par UA</td>
+                <td style="background: orangered;color:#fff">Total Budget des  UA</td>
 
                 <td
-                  style="text-align: center;color:red;font-weight:bold;"
+                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
                 >{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel))}}</td>
 
                 <td
-                  style="text-align: center;color:red;font-weight:bold;"
+                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
                 >{{formatageSomme(parseFloat(afficherTotalBudgetModuleBienService))}}</td>
 
                 <td
-                  style="text-align: center;color:red;font-weight:bold;"
+                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
                 >{{formatageSomme(parseFloat(afficherTotalBudgetModuleInvestissement))}}</td>
 
                 <td
-                  style="text-align: center;color:red;font-weight:bold;"
+                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
                 >{{formatageSomme(parseFloat(afficherTotalBudgetModuleTransfert))}}</td>
 
                 <td
-                  style="text-align: center;color:red;font-weight:bold;"
-                ></td>
+                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
+                > {{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) }}</td>
 
                 <td
-                  style="text-align: center;color:red;font-weight:bold;"
-                ></td>
+                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
+                >{{formatageSomme(parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal))}}</td>
 
                 <td
-                  style="text-align: center;color:red;font-weight:bold;"
-                ></td>
+                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
+                > {{formatageSomme((parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) - (parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)) )}}</td>
 
                 <td
-                  style="text-align: center;color:red;font-weight:bold;"
-                ></td>
+                  style="text-align: center;color:red;font-weight:bold;font-size:15px" 
+                > {{((parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)) / (parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) * 100 )}}</td>
               </tr>
             </tbody>
           </table>
@@ -196,6 +196,14 @@
                   return 0
               }
             },
+
+
+
+             
+            // // afficher la somme des totaux
+            // afficherLaSommeDesTotaux(){
+            //   return this.MontantTotalPargdeNature.reduce((prec,cur)=>parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0) 
+            // },
 
             // afficher les totaux du budget pour le module personnel
               afficherTotalBudgetModulePersonnel(){
@@ -331,7 +339,43 @@
       };
     },
 
+
+//
+
+   budgetConsommerInvestissementGlobal() {
+      
+          return this.getMandatPersonnaliserVise
+            .filter(element => element.typemarche == 1)
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+              0
+            )
+            .toFixed(0);
+        
+      
+    },
     
+
+     budgetConsommerBienServiceGlobal() {
+          return this.getMandatPersonnaliserVise
+            .filter(element => element.typemarche == 2)
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+              0
+            )
+            .toFixed(0);
+      
+    },
+
+             
+    budgetConsommerTransfertGlobal() {
+    
+          return this.afficheTransfertValider.reduce( (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat),
+              0
+            )
+            .toFixed(0);
+      
+    },
 
     MontantTotalPargdeNature() {
       return id => {
