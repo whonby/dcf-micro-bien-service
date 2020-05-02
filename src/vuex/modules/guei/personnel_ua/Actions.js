@@ -814,7 +814,7 @@ export function modifierGrade({ commit, dispatch }, nouveau) {
 /**
  * Fin grades
  * **/
-
+ 
 export  function  getActeur({commit}) {
 
     queue.push(() =>  axios.get('/liste_acteur_depense').then(response => {
@@ -846,9 +846,9 @@ export function ajouterActeur({ commit, dispatch}, objetAjoute){
         console.log(error)
         this.$app.$loading(false)
         this.$app.$notify({
-            title: 'Erreur',
-            text: "Erreur c'est produit lors de l'enregistrement",
-            type:"error"
+            title: 'Success',
+            text: "Enregistrement effectué avec success",
+            type:"Success"
         });
     })
 }

@@ -1,5 +1,5 @@
 
-isDetailDossierCandi
+
 
 <template>
     <div>
@@ -597,10 +597,44 @@ isDetailDossierCandi
             <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
     </div>
 
+
+
+
+
+
   <!--ajouter de dossier candidature-->
                 <div v-if="isFormulaireDossierCandidature">
-                    <h6><button class="btn btn-success" @click="NotisFormulaireDossierCand" v-if="!isButtunAddDossierCandidat">Afficher la liste des candidat</button></h6>
-                    <div class="span6" align="left">
+                <h6><button class="btn btn-success" @click="NotisFormulaireDossierCand" v-if="!isButtunAddDossierCandidat">Afficher la liste des candidat</button></h6>
+                   
+                   
+                    
+
+                    <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                        <a data-toggle="tab" href="#tab00001">Identifications<span class="badge badge-info"></span></a>
+                      </li>
+                    
+                       <li class="">
+                        <a data-toggle="tab" href="#tab00007">Informations sur le dossier du candidat<span class="badge badge-important"></span></a>
+                      </li>
+                    
+                     
+                     
+                     
+                    </ul>
+                  </div>
+
+
+                  
+                  <div class="widget-content tab-content">
+
+                      
+                      <div id="tab00001" class="tab-pane active">
+                     <table class="table table-bordered table-striped">
+                         <tr class="odd gradeX" >
+                             <td colspan="4" width="">
+                           <div class="span8" align="left" >
                         Selectionner l'entreprise:
                         <model-list-select style="background-color: rgb(255,255,255);"
                                            class="wide"
@@ -616,16 +650,15 @@ isDetailDossierCandi
                         <hr>
                        <!-- <input type="text" placeholder="Recherche ..." v-on:keyup="recherche" class="span6" v-model="search">-->
                     </div>
-
-                    <table class="table table-bordered table-striped">
-                        <tbody>
-                        <tr class="odd gradeX">
+                             </td>
+                         </tr>
+                         <tr class="odd gradeX">
 
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">registre de commerce</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Registre de commerce" v-model="formDossierCadidature.reg_com">
+                                        <input type="text" class="span" placeholder="Registre de commerce" v-model="formDossierCadidature.reg_com">
                                     </div>
                                 </div>
                             </td>
@@ -634,7 +667,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Numero de compte contribuable</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Situation Geographique" v-model="formDossierCadidature.numero_cc">
+                                        <input type="text" class="span" placeholder="Situation Geographique" v-model="formDossierCadidature.numero_cc">
                                     </div>
                                 </div>
                             </td>
@@ -642,7 +675,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Raison social</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Raison social" v-model="formDossierCadidature.nom_cand">
+                                        <input type="text" class="span" placeholder="Raison social" v-model="formDossierCadidature.nom_cand">
                                     </div>
                                 </div>
                             </td>
@@ -650,19 +683,18 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Email</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Email" v-model="formDossierCadidature.email_cand">
+                                        <input type="text" class="span" placeholder="Email" v-model="formDossierCadidature.email_cand">
                                     </div>
                                 </div>
                             </td>
                         </tr>
 
-
-                        <tr class="odd gradeX">
+                         <tr class="odd gradeX">
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Telephone</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Telphone" v-model="formDossierCadidature.telephone_cand">
+                                        <input type="text" class="span" placeholder="Telphone" v-model="formDossierCadidature.telephone_cand">
                                     </div>
                                 </div>
                             </td>
@@ -670,7 +702,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Address </label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Adresse" v-model="formDossierCadidature.adresse_post">
+                                        <input type="text" class="span" placeholder="Adresse" v-model="formDossierCadidature.adresse_post">
                                     </div>
                                 </div>
                             </td>
@@ -680,7 +712,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Numero de dossier</label>
                                     <div class="controls">
-                                        <input type="text" readonly class="" placeholder="Numero dossier" v-model="formDossierCadidature.numero_dossier">
+                                        <input type="text" readonly class="span" placeholder="Numero dossier" v-model="formDossierCadidature.numero_dossier">
                                     </div>
                                 </div>
                             </td>
@@ -697,13 +729,9 @@ isDetailDossierCandi
                                     </div>
                                 </div>
                             </td>
-
-
-
                         </tr>
 
-
-                        <tr class="odd gradeX">
+                         <tr class="odd gradeX">
                             <td>
                                 <label>Appel Offre</label>
                                 <div class="controls">
@@ -717,7 +745,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Accord groupe</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Accord Groupe" v-model="formDossierCadidature.accord_group">
+                                        <input type="text" class="span" placeholder="Accord Groupe" v-model="formDossierCadidature.accord_group">
                                     </div>
                                 </div>
                             </td>
@@ -725,7 +753,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Cautionnement prov</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Cautionnement" v-model="formDossierCadidature.cautionnement_prov">
+                                        <input type="text" class="span" placeholder="Cautionnement" v-model="formDossierCadidature.cautionnement_prov">
                                     </div>
                                 </div>
                             </td>
@@ -734,22 +762,28 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Pouv habil signataire</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Pouv Hile Signature" v-model="formDossierCadidature.pouv_habil_signataire">
+                                        <input type="text" class="span" placeholder="Pouv Hile Signature" v-model="formDossierCadidature.pouv_habil_signataire">
                                     </div>
                                 </div>
                             </td>
-
-
                         </tr>
 
+                       
 
-                        <tr class="odd gradeX">
+
+                      </table>
+                   </div>
+
+                    <div id="tab00007" class="tab-pane">
+                <table class="table table-bordered table-striped">
+
+                     <tr class="odd gradeX">
 
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Attestion banc</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Attestation banc" v-model="formDossierCadidature.attest_banc">
+                                        <input type="text" class="span" placeholder="Attestation banc" v-model="formDossierCadidature.attest_banc">
                                     </div>
                                 </div>
                             </td>
@@ -758,7 +792,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Formulaire proo techn</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Formul propo tech" v-model="formDossierCadidature.formul_propo_tech">
+                                        <input type="text" class="span" placeholder="Formul propo tech" v-model="formDossierCadidature.formul_propo_tech">
                                     </div>
                                 </div>
                             </td>
@@ -767,7 +801,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Fiche rsgnt </label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Fiche renseignement" v-model="formDossierCadidature.fiche_rsgnt_cand">
+                                        <input type="text" class="span" placeholder="Fiche renseignement" v-model="formDossierCadidature.fiche_rsgnt_cand">
                                     </div>
                                 </div>
                             </td>
@@ -775,19 +809,18 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Piece admin</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Piece Admin" v-model="formDossierCadidature.piece_admin">
+                                        <input type="text" class="span" placeholder="Piece Admin" v-model="formDossierCadidature.piece_admin">
                                     </div>
                                 </div>
                             </td>
                         </tr>
-
-
+                 
                         <tr class="odd gradeX">
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">Fiche rsgnt nombre groupe</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Fiche renseignement nombre groupe" v-model="formDossierCadidature.fiche_rsgnt_mbre_group">
+                                        <input type="text" class="span" placeholder="Fiche renseignement nombre groupe" v-model="formDossierCadidature.fiche_rsgnt_mbre_group">
                                     </div>
                                 </div>
                             </td>
@@ -795,7 +828,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Atcdent marche non exe</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Atcent marche non exe" v-model="formDossierCadidature.atcdent_marche_non_exe">
+                                        <input type="text" class="span" placeholder="Atcent marche non exe" v-model="formDossierCadidature.atcdent_marche_non_exe">
                                     </div>
                                 </div>
                             </td>
@@ -804,7 +837,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Org travau site</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Org travau" v-model="formDossierCadidature.org_travau_site">
+                                        <input type="text" class="span" placeholder="Org travau" v-model="formDossierCadidature.org_travau_site">
                                      </div>
                                 </div>
                             </td>
@@ -813,13 +846,16 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Metch real travau</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Meth real travau" v-model="formDossierCadidature.meth_real_travau">
+                                        <input type="text" class="span" placeholder="Meth real travau" v-model="formDossierCadidature.meth_real_travau">
                                     </div>
                                 </div>
                             </td>
 
                         </tr>
 
+
+
+                        
                         <tr class="odd gradeX">
 
                             <td>
@@ -842,7 +878,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Date de naissance</label>
                                     <div class="controls">
-                                          <input type="date" class="" placeholder="" v-model="formDossierCadidature.date_nais_cand">
+                                          <input type="date" class="span" placeholder="" v-model="formDossierCadidature.date_nais_cand">
                                     </div>
                                 </div>
                             </td>
@@ -850,7 +886,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Capacite financiere</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Capacite financiere" v-model="formDossierCadidature.capacite_financiere">
+                                        <input type="text" class="span" placeholder="Capacite financiere" v-model="formDossierCadidature.capacite_financiere">
                                     </div>
                                 </div>
                             </td>
@@ -859,17 +895,18 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <div class="controls">
                                         <label class="control-label">Prog mobilisation</label>
-                                        <input type="Text" class="" placeholder="Programme mobilisation" v-model="formDossierCadidature.prog_mobilisation">
+                                        <input type="Text" class="span" placeholder="Programme mobilisation" v-model="formDossierCadidature.prog_mobilisation">
                                     </div>
                                 </div>
                             </td>
                         </tr>
-                        <tr>
+
+                         <tr class="odd gradeX">
                             <td>
                                 <div class="control-group">
                                     <label class="control-label">CAA moyen acc entre</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="CAA moyen ac entre" v-model="formDossierCadidature.caa_moyen_ac_entre">
+                                        <input type="text" class="span" placeholder="CAA moyen ac entre" v-model="formDossierCadidature.caa_moyen_ac_entre">
                                     </div>
                                 </div>
                             </td>
@@ -877,7 +914,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Capacite finanancier</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Capacite financement" v-model="formDossierCadidature.capacite_financement">
+                                        <input type="text" class="span" placeholder="Capacite financement" v-model="formDossierCadidature.capacite_financement">
                                     </div>
                                 </div>
                             </td>
@@ -885,7 +922,7 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Capacite techn exp</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Capacite tech exp" v-model="formDossierCadidature.capacite_tech_exp">
+                                        <input type="text" class="span" placeholder="Capacite tech exp" v-model="formDossierCadidature.capacite_tech_exp">
                                     </div>
                                 </div>
                             </td>
@@ -893,19 +930,23 @@ isDetailDossierCandi
                                 <div class="control-group">
                                     <label class="control-label">Montant offre financiere</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Mont offre financiere" v-model="formDossierCadidature.mt_offre_financiere">
+                                        <input type="text" class="span" placeholder="Mont offre financiere" v-model="formDossierCadidature.mt_offre_financiere">
                                     </div>
                                 </div>
                             </td>
                         </tr>
 
 
+              </table>
+                  </div>
 
-                        <a @click.prevent="ajouterDossierCandidature" class="btn btn-primary"
+                       <a @click.prevent="ajouterDossierCandidature" class="btn btn-primary"
                            href="#">Enregistre dossier candidature</a>
-                        </tbody>
-                    </table>
+                   
+                   </div>
                 </div>
+
+
 
 
                 

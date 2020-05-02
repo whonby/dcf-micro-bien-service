@@ -558,7 +558,7 @@
                                 <li class=""><a data-toggle="tab" href="#tab6" title="jugement des offres">Jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab7" title="rapport d'évaluation combiné">Rapport</a></li>
 
-                                 <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP">demande</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP">D.DMP</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab028" title="ANO/DMP attribution">A.ANO</a></li> -->
                                       
                                       <li class=""><a data-toggle="tab" href="#tab28" title="demande ANO Bailleur"> D.Bailleur </a></li>
@@ -771,23 +771,7 @@
 
                 </div>
 
-
-
-
-
                         <div id="tab1" class="tab-pane">
-
-
-                     
-                <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" v-if="listeAvisAnoBailleur(macheid)">Ajouter</a>
-                          <button class="btn btn-warning"  title="veillez recommencer l'analyse , car l'Avis ANO Bailleur est Objection" disabled v-else  >Ajouter</button>
-                   
-                    </div>
-
-
-                </div>
 
 
                 <component-acte :macheid="detail_marche.id"></component-acte>
@@ -932,7 +916,7 @@ componentPv,
 
                 ],
                     
-              
+              macheid:""
             };
         },
 created() {
@@ -1033,17 +1017,7 @@ return "Appel d'Offre Ouvert(AON ou AOI)"
 
 
 
- listeAvisAnoBailleur(){
-       return id =>{
-           if(id!=null && id!=""){
-               const resultatAvis = this.getterAnoDMPBailleur.find(idDemande =>idDemande.marche_id==id
-               && idDemande.avis_bail== 0)
-               return resultatAvis
-           }
-           return null
-       }
-   },
-
+ 
 
 
         afficherLibelleTypeProcedure() {

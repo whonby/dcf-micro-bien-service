@@ -147,7 +147,7 @@ export default {
          'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur",
           'getActeEffetFinancier','getEngagement','getMandat',"getVille","getPays","getCommune",
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
-          ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", 
+          ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", "getEcheances",
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
 
           "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getEcheances"])

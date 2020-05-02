@@ -28,7 +28,7 @@
                               <td @click="afficheModaleMembreCojo(appelOffre.id)">
                                   {{appelOffre.nom_prenom || 'Non renseigné'}}</td>
                               <td @click="afficheModaleMembreCojo(appelOffre.id)">
-                                  {{appelOffre.role || 'Non renseigné'}}</td>
+                                  {{afficherLaListemembreCojo(appelOffre.role_membre_cojo_id )|| 'Non renseigné'}}</td>
                               <div class="btn-group">
                                   <button @click.prevent="supprimerMembreCojo(appelOffre.id)"  class="btn btn-danger " title="Supprimer">
                                       <span class=""><i class="icon-trash"></i></span></button>
@@ -83,15 +83,10 @@
                                     <label class="control-label span5">Role <code>*</code> :</label>
 
                                     <div class="controls">
-                                        <select class="span4" v-model="formDataMembreCojo.role">
-                                            <option></option>
-                                            <option value="Autorité contractante">Autorité contractante</option>
-                                            <option value="DMP">Direction des marchés publique</option>
-                                            <option value="Béneficiare">Béneficiaire</option>
-                                            <option value="Rapporteur">Rapporteur</option>
-                                            <option value="Service technique">Service technique</option>
-                                            <option value="Autre">Autre</option>
-                                        </select>
+                                         <select v-model="formDataMembreCojo.role_membre_cojo_id" class="span">
+                                <option v-for="varText in role_membrecojo" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                                  </select>
 
                                     </div>
                                 </div>
@@ -156,16 +151,10 @@
                                     <label class="control-label span5">Role <code>*</code> :</label>
 
                                     <div class="controls">
-                                        <select class="span4" v-model="edite_membre_cojo.role">
-                                            <option></option>
-                                            <option value="Controller finnancier">Controller finnancier</option>
-                                            <option value="Autorité contractante">Autorité contractante</option>
-                                            <option value="DMP">Direction des marchés publique</option>
-                                            <option value="Béneficiare">Béneficiaire</option>
-                                            <option value="Rapporteur">Rapporteur</option>
-                                            <option value="Service technique">Service technique</option>
-                                            <option value="Autre">Autre</option>
-                                        </select>
+                                             <select v-model="edite_membre_cojo.role_membre_cojo_id" class="span">
+                                          <option v-for="varText in role_membrecojo" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                                          </select>
 
                                     </div>
                                 </div>
@@ -197,7 +186,7 @@ export default {
                    matricule:"",
                         type_appel:"",
                         nom_prenom:"",
-                        role:"",
+                        role_membre_cojo_id:"",
                         cojo_id:"",
 
             },
@@ -212,9 +201,21 @@ export default {
     },
     computed:{
 
-  ...mapGetters('bienService',['getterMembreCojo','getterCojos']),  
+  ...mapGetters('bienService',['getterMembreCojo','getterCojos',"role_membrecojo"]),  
 
 ...mapGetters('personnelUA', ['acteur_depenses']),
+
+
+ // afficher la liste des roles membres
+ afficherLaListemembreCojo(){
+     return id =>{
+         if(id!=null && id!=""){
+             let varObjetListeMembrecojo = this.role_membrecojo.find(idmache =>idmache.id==id)
+             return varObjetListeMembrecojo.libelle
+         }
+         return null
+     }
+ }
 
     },
     methods:{
@@ -228,13 +229,18 @@ export default {
 },
 
                 ajouterMembreCojoM(){
-                this.formDataMembreCojo.cojo_id=this.idcojo
-              this.ajouterMembreCojo(this.formDataMembreCojo)
+                   var nouvelObjet ={
+                 ...this.formDataMembreCojo,
+                  marche_id :this.macheid,
+                  cojo_id:this.cojo_id
+                   }  
+                //this.formDataMembreCojo.cojo_id=this.idcojo
+              this.ajouterMembreCojo(nouvelObjet)
                 this.formDataMembreCojo= {
                        matricule:"",
                         type_appel:"",
                         nom_prenom:"",
-                        role:"",
+                        role_membre_cojo_id:"",
                         cojo_id:"",
                 }
             },

@@ -6,7 +6,7 @@
                  <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterAnoDMPBAILLEURModal" data-toggle="modal" class="btn btn-warning" v-if="listeAvisDemandeAno(macheid)" >Ajouter</a>
-                        <button class="btn btn-warning"  title="veillez recommencer l'analyse , car l'Avis ANO est Objection" disabled v-else  >Ajouter</button>
+                        <button class="btn btn-warning"  title="veillez recommencer le jugement , car l'Avis ANO DMP est Objection" disabled v-else  >Ajouter</button>
                     </div>
                 </div>
 
@@ -555,7 +555,7 @@ affichierAppelOffreid() {
             },
 
                editAnoBailleur(){
-                   if(confirm("veiller charger le fichier")){
+                  
                       //console.log(this.edit_bailleur)
                 const formData = new FormData();
                // formData.append('proce_verbal_jugement_offre_id', this.edit_bailleur.proce_verbal_jugement_offre_id);
@@ -583,7 +583,7 @@ affichierAppelOffreid() {
                 this.getAnoDMPBailleur()
                 this.$('#modifDemandeAno').modal('hide');
                 
-                   }else return "uploader le fichier"
+                  
                
             },
 

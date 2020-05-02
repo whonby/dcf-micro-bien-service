@@ -117,6 +117,7 @@ const ActeurDepenseRoutes = [
     name: "TableauBordActeurDepense",
     component: TableauBordActeurDepense
   },
+  
   {
     path: "/suivie-conges",
     name: "Conge",

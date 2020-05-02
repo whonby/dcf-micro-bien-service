@@ -16,14 +16,15 @@
               <tr>
                 <th>Unite administrative</th>
                 <th style>Budget du personnel</th>
+
                 <th style>Budget de bien et service</th>
                 <th style>Budget en inverstisement</th>
                 <th style>Budget en transfert</th>
 
-                <th style="background: forestgreen; color:#fff">Total</th>
+                <th style="background: forestgreen; color:#fff">Totaux</th>
                 <th style="background: deepskyblue; color:#fff">Consommé</th>
-                <th style="background: deepskyblue; color:#fff">Reste</th>
-                <th style="background: orangered;color:#fff">Taux</th>
+                <th style="background: #8b0000;color:#fff">Reste à Consommé</th>
+                <th style="background: orangered;color:#fff">Taux Exécution (%)</th>
               </tr>
             </thead>
             <tbody>
@@ -43,42 +44,52 @@
                 >{{formatageSomme(budgetTranfert(unite.id))}}</td>
 
                 <td
-                  style="background: forestgreen; color:#fff"
-                >{{formatageSomme(parseFloat(MontantTotal(unite.id)))}}</td>
-                <td style="background: deepskyblue; color:#fff"
-                >{{formatageSomme(parseFloat(budgetConsommerTransfert(unite.id))+parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerInvestissement(unite.id)))}}</td>
+                  style="font-weight:bold;font-size:15px"
+                >{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id)))}}</td>
+                <td style="font-weight:bold;font-size:15px"
+                >{{formatageSomme(parseFloat(budgetConsommerTransfert(unite.id)) + parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerInvestissement(unite.id)))}}</td>
                 <td
-                  style="background: deepskyblue; color:#fff"
-                >{{formatageSomme(parseFloat(MontantTotal(unite.id))-(parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))))}}</td>
-                <td style="background: orangered;color:#fff">{{}}</td>
+                  style="font-weight:bold;font-size:15px"
+            
+                >{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id))-(parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))))}}</td>
+                
+                <td style="font-weight:bold;font-size:15px">{{((parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))) / (parseFloat(MontantTotalPargdeNature(unite.id))) * 100)}}</td>
               </tr>
 
               <tr>
-                <td style="background: orangered;color:#fff">Total Budget par UA</td>
+                <td style="background: orangered;color:#fff">Total Budget des  UA</td>
 
                 <td
-                  style="text-align: center;color:red;font-weight:bold;"
+                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
                 >{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel))}}</td>
 
                 <td
-                  style="text-align: center;color:red;font-weight:bold;"
+                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
                 >{{formatageSomme(parseFloat(afficherTotalBudgetModuleBienService))}}</td>
 
                 <td
-                  style="text-align: center;color:red;font-weight:bold;"
+                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
                 >{{formatageSomme(parseFloat(afficherTotalBudgetModuleInvestissement))}}</td>
 
                 <td
-                  style="text-align: center;color:red;font-weight:bold;"
+                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
                 >{{formatageSomme(parseFloat(afficherTotalBudgetModuleTransfert))}}</td>
 
                 <td
-                  style="text-align: center;color:red;font-weight:bold;"
-                >{{formatageSomme(parseFloat(0))}}</td>
+                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
+                > {{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) }}</td>
 
                 <td
-                  style="text-align: center;color:red;font-weight:bold;"
-                >{{formatageSomme(parseFloat(0))}}</td>
+                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
+                >{{formatageSomme(parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal))}}</td>
+
+                <td
+                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
+                > {{formatageSomme((parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) - (parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)) )}}</td>
+
+                <td
+                  style="text-align: center;color:red;font-weight:bold;font-size:15px" 
+                > {{((parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)) / (parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) * 100 )}}</td>
               </tr>
             </tbody>
           </table>
@@ -147,9 +158,13 @@
                 "typeTextes",
                 "uniteAdministratives",
                 "getterBudgeCharge",
-                "budgetGeneral"
+                "budgetGeneral",
+                "afficheTransfertValider"
             ]),
-            ...mapGetters("parametreGenerauxAdministratif", [
+            
+    ...mapGetters("bienService", ["getMandatPersonnaliserVise"]),
+
+       ...mapGetters("parametreGenerauxAdministratif", [
                 "sections",
                 "type_Unite_admins",
                 "plans_programmes",
@@ -158,6 +173,8 @@
                 "afficheNiveauPlanProg",
                 "exercices_budgetaires"
             ]),
+
+            
             budgetBienService(){
               return unite_id=>{
                   let vM=this;
@@ -179,6 +196,14 @@
                   return 0
               }
             },
+
+
+
+             
+            // // afficher la somme des totaux
+            // afficherLaSommeDesTotaux(){
+            //   return this.MontantTotalPargdeNature.reduce((prec,cur)=>parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0) 
+            // },
 
             // afficher les totaux du budget pour le module personnel
               afficherTotalBudgetModulePersonnel(){
@@ -269,6 +294,114 @@
             },
 
 
+            
+    budgetConsommerTransfert() {
+      return id => {
+        if (id != "") {
+          return this.afficheTransfertValider
+            .filter(element => element.ua_id == id)
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_total_contrat),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+    },
+
+
+ budgetConsommerBienService() {
+      return id => {
+        if (id != "") {
+          return this.getMandatPersonnaliserVise
+            .filter(element => element.ua_id == id && element.typemarche == 2)
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+    },
+
+    budgetConsommerInvestissement() {
+      return id => {
+        if (id != "") {
+          return this.getMandatPersonnaliserVise
+            .filter(element => element.ua_id == id && element.typemarche == 1)
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+    },
+
+
+//
+
+   budgetConsommerInvestissementGlobal() {
+      
+          return this.getMandatPersonnaliserVise
+            .filter(element => element.typemarche == 1)
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+              0
+            )
+            .toFixed(0);
+        
+      
+    },
+    
+
+     budgetConsommerBienServiceGlobal() {
+          return this.getMandatPersonnaliserVise
+            .filter(element => element.typemarche == 2)
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+              0
+            )
+            .toFixed(0);
+      
+    },
+
+             
+    budgetConsommerTransfertGlobal() {
+    
+          return this.afficheTransfertValider.reduce( (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat),
+              0
+            )
+            .toFixed(0);
+      
+    },
+
+    MontantTotalPargdeNature() {
+      return id => {
+        if (id != null && id != "") {
+ var montant = this.affichebudgetActive.filter(idUa => idUa.ua_id == id).reduce((prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+              0
+            )
+            .toFixed(0);
+          if (isNaN(montant)) return null;
+          return montant;
+        }
+        return 0;
+      };
+    },
+
+
+
+    affichebudgetActive() {
+      var activeBudget = this.budgetGeneral.filter(
+        element => element.actived == 1
+      );
+
+      return activeBudget;
+    }
+
         },
         methods: {
             ...mapActions("uniteadministrative", [
@@ -334,14 +467,16 @@
                 })
 
             },
-            //  afficherMontantBudgetModulPersonnel(){
-            //       return this.getterBudgeCharge.reduce((prec, cur) =>parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
+            
 
-            //   console.log(afficherMontantBudgetModulPersonnel)
-            //  },
-        }
-    };
 
+
+
+   
+  },
+
+ 
+};
 </script>
 <style scoped>
 .taillemodal {
