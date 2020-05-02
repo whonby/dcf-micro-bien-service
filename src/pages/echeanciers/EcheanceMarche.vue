@@ -42,7 +42,7 @@
                                 <td v-else>0</td>
                             </tr>
                             <tr>
-                                <td>Nombre de moi</td>
+                                <td>Nombre de mois</td>
                                 <td v-if="echeance(marche.id)">{{echeance(marche.id).nbr_moi}}</td>
                                 <td v-else>0</td>
                             </tr>
@@ -58,9 +58,9 @@
                             </tr>
 
                             <tr style="background: green !important; color: white !important;">
-                                <td>Montant echeance</td>
+                                <td>Montant  par echeances </td>
                                 <td v-if="echeance(marche.id)">
-                                    <b>{{formatageSomme(parseFloat(echeance(marche.id).montant_echeance))}}</b> par echeances
+                                    <b>{{formatageSomme(parseFloat(echeance(marche.id).montant_echeance))}}</b>
                              </td>
                                 <td v-else>0</td>
                             </tr>
@@ -115,9 +115,15 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
+                                        <label class="control-label">Montant par echeances</label>
+                                        <div class="controls">
+                                            <input type="text" class="span11" v-model="edite.montant_echeance" placeholder="Montant du marche" >
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
                                         <label class="control-label">Mode echeances</label>
                                         <div class="controls">
-                                            <select class="span11" v-model="formDataEcheance.mode">
+                                            <select class="span11" v-model="edite.mode">
                                                 <option  ></option>
                                                 <option value="mensuel" >Tous les mois (mensuel)</option>
                                                 <option value="bi-mensuel" >Tous les 2 mois (bi-mensuel)</option>
@@ -130,7 +136,7 @@
                                     </div>
 
                                     <div class="form-actions">
-                                        <button type="submit"  @click.prevent="ajouterEcheance" class="btn btn-success">Modification</button>
+                                        <button type="submit"  @click.prevent="modification" class="btn btn-success">Modification</button>
                                     </div>
                                 </form>
                             </div>
@@ -173,6 +179,17 @@
                     date_odre_service:"",
                     date_fin_exe:""
                 },
+                edite:{
+                    marche_id:"",
+                    exercice:"",
+                    mode:"",
+                    montant_marche:"",
+                    date_odre_service:"",
+                    date_fin_exe:"",
+                    id:"",
+                    montant_echeance:""
+
+                },
                 detailBudget:"",
                 budgetGeneralCharge:"",
                 progress:0,
@@ -202,12 +219,11 @@
             };
         },
         created() {
-
+this.getEdite()
         },
         computed: {
             ...mapGetters("bienService", ["getterEcheances","acteEffetFinanciers","getterActeEffetFinanciers"]),
             ...mapGetters("parametreGenerauxAdministratif", [
-
                 "sections",
                 "type_Unite_admins",
                 "plans_programmes",
@@ -218,6 +234,8 @@
             ]),
             echeance(){
                 return marche_id=>{
+
+
                     return this.getterEcheances.find(marche=>marche.marche_id==marche_id)
                 }
             },
@@ -254,8 +272,38 @@
                }
                console.log(this.formDataEcheance)
                this.ajouterEcheances(this.formDataEcheance)
+               this.getEdite()
+           },
+            modification(){
+              /*  this.formDataEcheance={
+                    marche_id:this.marche.id,
+                    exercice:this.anneeAmort,
+                    montant_marche:this.marche.acte_effet_financiare[0].montant_act,
+                    date_odre_service:this.marche.acte_effet_financiare[0].date_odre_service,
+                    date_fin_exe:this.marche.acte_effet_financiare[0].date_fin_exe,
+                    mode: this.formDataEcheance.mode
+                }
+                console.log(this.formDataEcheance)*/
+                this.modifierEcheances(this.edite)
 
-           }
+            },
+            getEdite(){
+                let objet= this.getterEcheances.find(marche=>marche.marche_id==this.marche.id)
+                if(objet!=undefined){
+
+                    this.edite={
+                        marche_id:objet.marche_id,
+                        exercice:objet.exercice,
+                        mode:objet.mode,
+                        montant_marche:this.marche.acte_effet_financiare[0].montant_act,
+                        date_odre_service:this.marche.acte_effet_financiare[0].date_odre_service,
+                        date_fin_exe:this.marche.acte_effet_financiare[0].date_fin_exe,
+                        id:objet.id,
+                        montant_echeance:objet.montant_echeance
+
+                    }
+                }
+            }
 
         }
     };
