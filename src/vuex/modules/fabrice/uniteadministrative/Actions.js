@@ -1068,7 +1068,8 @@ export function modifierRealiteServiceFait({ commit }, nouveau) {
     nom_controleur_financier: nouveau.nom_controleur_financier,
     	montant: nouveau.	montant,
       exercice_budget: nouveau.	exercice_budget,
-    engagement_id: nouveau.engagement_id
+    engagement_id: nouveau.engagement_id,
+    marchetype: nouveau.marchetype
     }
   
   )).then(response => {
@@ -1155,7 +1156,8 @@ export function modifierLiquidation({ commit, dispatch}, nouveau) {
        decision_controleur_financier: nouveau.decision_controleur_financier,
       nom_controleur_financier: nouveau.nom_controleur_financier,
       date_controleur_financier: nouveau.date_controleur_financier,
-      observation_controleur_financier: nouveau.observation_controleur_financier
+      observation_controleur_financier: nouveau.observation_controleur_financier,
+      marchetype: nouveau.marchetype
     })).then(response => {
       commit("MODIFIER_LIQUIDATION", response.data);
       dispatch('getAllLiquidation')

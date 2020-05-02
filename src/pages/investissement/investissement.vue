@@ -1888,8 +1888,9 @@ return this.afficheMarchExecuter.length
 
 
 
+
 afficheMarcheTerminer(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 5)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 3)
 },
 // afficheMarcheTerminer(){
 // return this.afficheMarcheSolde.filter(element => element.indicateur_resilie != 1)
@@ -1933,7 +1934,7 @@ return this.afficheMarcheResilier.length
 // afficher la liste de marche en contratualisation
 
 afficheMarcheEnCoursContratualisation(){
-return this.afficherLaListeDesMarcheDinvestissement.filter(element => element.attribue == 1)
+return this.afficherLaListeDesMarcheDinvestissement.filter(element => element.attribue == 1 && element.type_marche.code_type_marche == 3)
 },
 
 
@@ -1954,7 +1955,7 @@ montantEnContratualisation(){
 
 // afficher la liste des marche en planification
 afficheMarcheEnPlanification(){
-return this.afficherLaListeDesMarcheDinvestissement.filter(element => element.attribue == 0)
+return this.afficherLaListeDesMarcheDinvestissement.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 3)
 },
 
 

@@ -8290,7 +8290,7 @@ created() {
     console.log(this.appel_offre_marche)*/
 },
         computed: {
-            ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+            ...mapGetters("bienService", ["typeMarches",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -11137,7 +11137,7 @@ alert("Veuillez saisir le numrero du Bon")
         mode_paiement_id:this.afficheIdModePaiement(this.editLiquidation.marche_id),
 fournisseur_id:this.afficheIdFournisseur(this.editLiquidation.marche_id),
 egagement_id:this.afficheIdEngagement(this.editLiquidation.marche_id),
-
+marchetype:this.afficheMarcheType
  
        };
  this.modifierLiquidation(nouvelObjet);
@@ -11286,7 +11286,8 @@ section_id:this.afficherSectId,
       montant_don:this.editEngagement.montant_don,
  montant_emprunt:this.editEngagement.montant_emprunt,
  bailler_id:this.editEngagement.bailler_id,
- mod_paiement_engage:this.editEngagement.mod_paiement_engage
+ mod_paiement_engage:this.editEngagement.mod_paiement_engage,
+ marchetype:this.afficheMarcheType
  
        };
 this.ajouterMandat(nouvelObjet)
@@ -11441,7 +11442,8 @@ tprocedure : ""
          tva :this.montantTva,
           	ua :this.detail_marche.objetUniteAdministrative.id,
     marche_id : this.detail_marche.id,
-    objet_facture:this.detail_marche.objet
+    objet_facture:this.detail_marche.objet,
+    marchetype:this.afficheMarcheType
        };
       
 this.ajouterFacture(nouvelObjet)
@@ -11539,7 +11541,8 @@ numero_facture:"",
          tva :this.montantTva,
           	ua :this.detail_marche.objetUniteAdministrative.id,
       marche_id : this.detail_marche.id,
-      objet_facture:this.detail_marche.objet
+      objet_facture:this.detail_marche.objet,
+      marchetype:this.afficheMarcheType
        };
       
 this.modifierFacture(nouvelObjet)
@@ -11628,7 +11631,8 @@ activite_id:this.detail_marche.activite_id,
   ua_id:this.detail_marche.unite_administrative_id,
   grd_nature_id:this.detail_marche.gdenature_id,
 
-section_id:this.afficherSectId
+section_id:this.afficherSectId,
+marchetype:this.afficheMarcheType
 
        };
 this.ajouterMandat(nouvelObjet)
@@ -11731,7 +11735,8 @@ activite_id:this.detail_marche.activite_id,
   ua_id:this.detail_marche.unite_administrative_id,
   grd_nature_id:this.detail_marche.gdenature_id,
 
-section_id:this.afficherSectId
+section_id:this.afficherSectId,
+marchetype:this.afficheMarcheType
 
        };
 this.ajouterMandat(nouvelObjet)
@@ -12042,7 +12047,8 @@ activite_id:this.detail_marche.activite_id,
   ua_id:this.detail_marche.unite_administrative_id,
   grd_nature_id:this.detail_marche.gdenature_id,
 
-section_id:this.afficherSectId
+section_id:this.afficherSectId,
+marchetype:this.afficheMarcheType
 
        };
   this.modifierMandat(nouvelObjet)
@@ -12196,7 +12202,8 @@ activite_id:this.detail_marche.activite_id,
   grd_nature_id:this.detail_marche.gdenature_id,
 
 section_id:this.afficherSectId,
- fournisseur_id:this.AfficherFournisseur_id
+ fournisseur_id:this.AfficherFournisseur_id,
+ marchetype:this.afficheMarcheType
        };
           var realiteServiceFait = {
      ...this.editEngagement,
@@ -12215,7 +12222,8 @@ section_id:this.afficherSectId,
 
 section_id:this.afficherSectId,
 id:this.afficherIdRealiteServiceFait(this.detail_marche.id),
-	engagement_id:this.editEngagement.id
+  engagement_id:this.editEngagement.id,
+  marchetype:this.afficheMarcheType
 
        };
 
@@ -12257,6 +12265,7 @@ plan_budgetaire_id:this.idBudgetaire,
   
 
 fournisseur_id:this.AfficherFournisseur_id,
+marchetype:this.afficheMarcheType
        };
       
   this.modifierEngagement(nouvelObjet)
@@ -12362,7 +12371,8 @@ activite_id:this.detail_marche.activite_id,
   grd_nature_id:this.detail_marche.gdenature_id,
 
 section_id:this.afficherSectId,
-fournisseur_id:this.AfficherFournisseur_id
+fournisseur_id:this.AfficherFournisseur_id,
+marchetype:this.afficheMarcheType
        };
        var realiteServiceFait = {
      
@@ -12378,8 +12388,8 @@ fournisseur_id:this.AfficherFournisseur_id
   ua_id:this.detail_marche.unite_administrative_id,
   
 
-section_id:this.afficherSectId
-
+section_id:this.afficherSectId,
+marchetype:this.afficheMarcheType
        };
         var objetLiquidation = {
      
@@ -12413,7 +12423,7 @@ plan_budgetaire_id:this.idBudgetaire,
   
 
 fournisseur_id:this.AfficherFournisseur_id,
-
+marchetype:this.afficheMarcheType
   
 
        };
@@ -12614,8 +12624,8 @@ afficherModalModifierMandat(index) {
          adresse_entreprise :this.AdresseFournisseur,
          total_general :this.montantCumulerModifier,
          budget_general_id :this.CodeBudgetaire,
-         marche_id : this.detail_marche.id
-       
+         marche_id : this.detail_marche.id,
+       marchetype:this.afficheMarcheType
        };
       this.modifierEngagement(nouvelObjet1);
       this.$("#exampleModalMotif").modal('hide');
@@ -12748,7 +12758,7 @@ this.formDataMadat= {
       var nouvelObjet = {
       ...this.formData,
       marche_id :this.detail_marche.id,
-   
+   marchetype:this.afficheMarcheType
        };
       this.ajouterAvenant(nouvelObjet);
 this.$("#exampleModalAvenant").modal('hide');
@@ -12770,7 +12780,7 @@ this.$("#exampleModalAvenant").modal('hide');
       var nouvelObjet = {
       ...this.editAvenant,
       marche_id :this.detail_marche.id,
-   
+   marchetype:this.afficheMarcheType
        };
       this.modifierAvenant(nouvelObjet);
 this.$("#modificationModalAvenant").modal('hide');

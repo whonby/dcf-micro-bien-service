@@ -3471,7 +3471,7 @@ export function modifierEngagement({ commit,dispatch }, element_modifie) {
     dispatch('getEngagement')
     this.$app.$notify({
       title: 'success ',
-      text: 'Modification effectué !',
+       text: 'Modification effectué !',
       type: "success"
     })
   }).catch(error => console.log(error))

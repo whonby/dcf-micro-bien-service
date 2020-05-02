@@ -13,7 +13,7 @@
         <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i><span class="label label-important">{{formatageSomme(parseFloat(montantMarchePrevu))}}</span>  MONTANT MARCHE PREVU</a> </li>
         <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i><span class="label label-important">{{formatageSomme(parseFloat(montantMarcheAvecAvenant))}}</span> MONTANT MARCHE EN EXECUTION</a> </li>
         <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i><span class="label label-important">{{formatageSomme(parseFloat(budgetConsommerBienService))}}</span>  MONTANT MARCHE CONSOMME</a> </li>
-        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i><span class="label label-important">{{formatageSomme(parseFloat(montantMarcheAvecAvenant)-parseFloat(budgetConsommerBienService))}}</span> MONTANT MARCHE RESTANT </a> </li>
+        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i><span class="label label-important">{{formatageSomme(-(montantMarcheAvecAvenant - budgetConsommerBienService))}}</span> MONTANT MARCHE RESTANT </a> </li>
  <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">{{((parseFloat(budgetConsommerBienService)/parseFloat(montantMarcheAvecAvenant))*100).toFixed(2)}}%</span> TAUX MARCHE EN EXECUTION </a> </li>
         <!-- <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Charts</a> </li>
         <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> Widgets </a> </li>
@@ -50,7 +50,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters("bienService", ["avenants",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
+    ...mapGetters("bienService", ["typeMarches","avenants",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
      'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
      'nombremarchesExecute',
      'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
@@ -70,7 +70,7 @@ export default {
   'types_financements']) ,
 
 montantMarcheAvecAvenant() {
-      const val = parseFloat(this.montantMarcheExecuter) + parseFloat(this.affichierMontantAvenant);
+      const val = parseFloat(this.affichierMontantAvenant) + parseFloat(this.montantMarcheExecuter);
       return parseFloat(val).toFixed(0);
     },
 
@@ -78,12 +78,12 @@ montantMarcheAvecAvenant() {
  
   
         
-    return this.avenants.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_avenant), 0).toFixed(0); 
+    return this.avenants.filter(element => element.marchetype == 2 ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_avenant), 0).toFixed(0); 
       
-   
+    
 },
  montantMarcheExecuter(){
-  return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficheTypeMarche(element.marche_id) == 6 ).reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_act), 0)
+  return this.getActeEffetFinancierPersonnaliser45.filter(element => element.difference_personnel_bienService == 2 ).reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_act), 0)
 },
 budgetConsommerBienService(){
   
@@ -95,7 +95,7 @@ budgetConsommerBienService(){
 
 
   afficheMarcheEnCoursContratualisation(){
-return this.afficherLaListeDesMarche.filter(element => element.attribue == 1)
+return this.afficherLaListeDesMarche.filter(element => element.attribue == 1 )
 },
 afficheMarcheEnPlanification(){
 return this.afficherLaListeDesMarche.filter(element => element.attribue == 0)
@@ -115,10 +115,10 @@ nombreDeMarcheEnContratualisation(){
  },
  
   afficheMarcheResilier(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 3)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 4)
 },
     nbreMarcheExecuter(){
-  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.affichertypeMarcheEx(recuper.marche.type_marche_id) == 4).length
+  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.afficheCodeTypeMarche(recuper.marche.type_marche_id) == 4).length
 },
 afficheNombreMarcheResilier(){
 return this.afficheMarcheResilier.length
@@ -127,7 +127,7 @@ nombreAfficheMarcheSolde(){
 return this.afficheMarcheTerminer.length
 },
 //     nbreMarcheExecuter(){
-//   return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.affichertypeMarcheEx(recuper.marche.type_marche_id) == 4).length
+//   return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.afficheCodeTypeMarche(recuper.marche.type_marche_id) == 4).length
 // },
 
 montantEnPlanification(){
@@ -139,7 +139,7 @@ montantMarchePrevu(){
   return this.marches.filter(element => element.type_marche_id == 6).reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_marche), 0)
 },
 
- afficheTypeMarche() {
+ afficheIdCodeMarche() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.marches.find(qtreel => qtreel.id == id);
@@ -152,7 +152,18 @@ montantMarchePrevu(){
       };
     },
 
+ afficheCodeTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.code_type_marche;
+      }
+      return 0
+        }
+      };
+    },
 
 
 
