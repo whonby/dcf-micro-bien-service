@@ -1124,7 +1124,7 @@
                   <div class="controls">
                     <select v-model="formData.gdenature_id" :readOnly="deverouGrandNature">
                       <option
-                        v-for="gdeNature in groupgranNature"
+                        v-for="gdeNature in groupgranNatureInvestissement"
                         :key="gdeNature[0].id"
                         :value="gdeNature[0].afficheGdeNature.id"
                       >{{gdeNature[0].afficheGdeNature.libelle}}</option>
@@ -1726,7 +1726,7 @@ export default {
 
 
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
-      "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
+      "getPersonnaliseBudgetGeneral","groupUa","groupgranNatureInvestissement","getPersonnaliseBudgetGeneralParInvestissement",
       "montantBudgetGeneral", ]),
        ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
@@ -1885,6 +1885,7 @@ afficheNombreMarchExecuter(){
   
 return this.afficheMarchExecuter.length
 },
+
 
 
 
@@ -2241,7 +2242,7 @@ anneeAmort() {
      activiteDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParBienService.filter(
+          return this.getPersonnaliseBudgetGeneralParInvestissement.filter(
             element => element.afficheUA.id == id
           );
         }
@@ -2250,7 +2251,7 @@ anneeAmort() {
           afficheractiviteBienService() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getPersonnaliseBudgetGeneralParBienService.find(qtreel => qtreel.afficheUA.id == id);
+           const qtereel = this.getPersonnaliseBudgetGeneralParInvestissement.find(qtreel => qtreel.afficheUA.id == id);
 
       if (qtereel) {
         return qtereel.afficheActivite.code.concat('  ', qtereel.afficheActivite.libelle);
@@ -2263,7 +2264,7 @@ anneeAmort() {
  afficherPlanEconomiqueBienService() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getPersonnaliseBudgetGeneralParBienService.find(qtreel => qtreel.afficheUA.id == id);
+           const qtereel = this.getPersonnaliseBudgetGeneralParInvestissement.find(qtreel => qtreel.afficheUA.id == id);
 
       if (qtereel) {
         return qtereel.afficheEconomique.code.concat('  ', qtereel.afficheEconomique.libelle);
@@ -2295,7 +2296,7 @@ anneeAmort() {
      economiqueDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParBienService.filter(
+          return this.getPersonnaliseBudgetGeneralParInvestissement.filter(
             element => element.ua_id == id
           );
         }
@@ -2305,7 +2306,7 @@ anneeAmort() {
   grandeNatureDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParBienService.filter(
+          return this.getPersonnaliseBudgetGeneralParInvestissement.filter(
             element => element.ua_id == id
           );
         }
@@ -2324,7 +2325,7 @@ anneeAmort() {
      ImputationBudget() {
 
       
-      const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.afficheEconomique.id == this.formData.economique_id);
+      const norme = this.getPersonnaliseBudgetGeneralParInvestissement.find(normeEquipe => normeEquipe.afficheEconomique.id == this.formData.economique_id);
 
       if (norme) {
         return norme.codebudget;
@@ -2333,7 +2334,7 @@ anneeAmort() {
     },
      ImputationBudgetModifier() {
       
-      const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.afficheEconomique.id == this.editMarche.economique_id);
+      const norme = this.getPersonnaliseBudgetGeneralParInvestissement.find(normeEquipe => normeEquipe.afficheEconomique.id == this.editMarche.economique_id);
 
       if (norme) {
         return norme.codebudget;
@@ -2391,7 +2392,7 @@ anneeAmort() {
 // },
     // ImputationBudgetModif() {
       
-    //   const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.economique_id == this.editMarche.Economique);
+    //   const norme = this.getPersonnaliseBudgetGeneralParInvestissement.find(normeEquipe => normeEquipe.economique_id == this.editMarche.Economique);
 
     //   if (norme) {
     //     return norme.codebudget;
