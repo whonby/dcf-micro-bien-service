@@ -1059,7 +1059,7 @@
                   <div class="controls">
                     <select v-model="formData.gdenature_id" :readOnly="deverouGrandNature">
                       <option
-                        v-for="gdeNature in groupgranNature"
+                        v-for="gdeNature in groupgranNaturePersonnel"
                         :key="gdeNature[0].id"
                         :value="gdeNature[0].afficheGdeNature.id"
                       >{{gdeNature[0].afficheGdeNature.libelle}}</option>
@@ -1588,7 +1588,7 @@ export default {
      "typeTypeProcedures", "typeActeEffetFinanciers", "text_juridiques"]),
 
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
-      "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
+      "getPersonnaliseBudgetGeneral","groupUa","groupgranNaturePersonnel","getPersonnaliseBudgetGeneralParPersonnel",
       "montantBudgetGeneral", ]),
        ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
@@ -1997,7 +1997,7 @@ anneeAmort() {
      activiteDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParBienService.filter(
+          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(
             element => element.ua_id == id
           );
         }
@@ -2021,7 +2021,7 @@ anneeAmort() {
      economiqueDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParBienService.filter(
+          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(
             element => element.ua_id == id
           );
         }
@@ -2031,7 +2031,7 @@ anneeAmort() {
   grandeNatureDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParBienService.filter(
+          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(
             element => element.ua_id == id
           );
         }
@@ -2050,7 +2050,7 @@ anneeAmort() {
      ImputationBudget() {
 
       
-      const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.afficheEconomique.id == this.formData.economique_id);
+      const norme = this.getPersonnaliseBudgetGeneralParPersonnel.find(normeEquipe => normeEquipe.afficheEconomique.id == this.formData.economique_id);
 
       if (norme) {
         return norme.codebudget;
@@ -2059,7 +2059,7 @@ anneeAmort() {
     },
      ImputationBudgetModifier() {
       
-      const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.afficheEconomique.id == this.editMarche.economique_id);
+      const norme = this.getPersonnaliseBudgetGeneralParPersonnel.find(normeEquipe => normeEquipe.afficheEconomique.id == this.editMarche.economique_id);
 
       if (norme) {
         return norme.codebudget;
@@ -2171,7 +2171,7 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => element.date_
 },
     // ImputationBudgetModif() {
       
-    //   const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.economique_id == this.editMarche.Economique);
+    //   const norme = this.getPersonnaliseBudgetGeneralParPersonnel.find(normeEquipe => normeEquipe.economique_id == this.editMarche.Economique);
 
     //   if (norme) {
     //     return norme.codebudget;
