@@ -1184,6 +1184,7 @@ export function supprimerLiquidation({ commit }, id) {
 
 
 
+
 export function getOrganigrammeUa({ commit }) {
   queue.push(() => axios.get('/listeOrganigrammeUa').then(tony => {
     commit('GET_ALL_ORGANIGRAMME_UA', tony.data)

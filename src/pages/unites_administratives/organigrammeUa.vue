@@ -69,11 +69,11 @@
               </tbody>
             </table> -->
                  <ul id="demo">
-            <Tree class="item" v-for="plan in lesPlansParents"
+            <TreeOrganigramme class="item" v-for="plan in lesPlansParents"
             :key="plan.id" :item="plan"   
               @ajouterElementEnfant="ajouterElementEnfant" 
               @supprimer="supprimerOrganigrammeUaLocal"
-              @modifier="afficherModalmodifierOrganigrammeUa"></Tree>
+              @modifier="afficherModalmodifierOrganigrammeUa"></TreeOrganigramme>
           </ul>
             <div v-if="lesPlansParents.length">
             </div>
@@ -146,7 +146,7 @@
              <div class="control-group">
               <label class="control-label">Libéllé parent:</label>
               <div class="controls">
-                <input type="text" readonly :value="parentDossier.libelle" class="span"  />
+                <input type="text" readonly :value="libelleUniteAdministrative(parentDossier.uniteua_id)" class="span"  />
               </div>
             </div>
 <!-- 
@@ -163,7 +163,7 @@
 
 
             <div class="control-group">
-              <label class="control-label">Code:</label>
+              <label class="control-label">Service</label>
               <div class="controls">
                    <select v-model="nouvelElementEnfant.libelle" >
                 <option v-for="structure in services " :key="structure.id" 
@@ -255,10 +255,10 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
-import Tree from '../../pages/parametres_generaux/administratifs/Tree'
+import TreeOrganigramme from '../../pages/parametres_generaux/administratifs/TreeOrganigramme'
 export default {
   components: {
-    Tree
+    TreeOrganigramme
   },
   data() {
     return { 
@@ -287,12 +287,12 @@ export default {
           ],
      
         formData : {
-                libelle: "",
+               
           uniteua_id:""
         },
 
         editPlanProgramme: {
-             libelle: "",
+            
           uniteua_id:""
 
         },
@@ -318,6 +318,18 @@ export default {
 
             ]),
              ...mapGetters("SuiviImmobilisation", ["services"]),
+                 libelleUniteAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
        localisationsFiltre(){
 
      const searchTerm = this.search.toLowerCase();
@@ -356,9 +368,7 @@ return this.organigrammeUa.filter((item) => {
       this.ajouterOrganigrammeUa(this.formData)
 
         this.formData = {
-                code: "",
-             libelle: "",
-          structure_programme_id:""
+       
         }
     },
 
@@ -368,9 +378,8 @@ return this.organigrammeUa.filter((item) => {
       this.ajouterOrganigrammeUa(this.nouvelElementEnfant)
 
         this.nouvelElementEnfant = {
-                code: "",
-             libelle: "",
-          structure_programme_id:""
+              libelle: "",
+          uniteua_id:""
         }
     },
 
@@ -382,7 +391,7 @@ return this.organigrammeUa.filter((item) => {
  //afficher modal pour ajouter element enfant
 	 ajouterElementEnfant(item) {
     this.parentDossier = this.organigrammeUa.find(plan => plan.id == item.id)
-    this.nouvelElementEnfant.code = this.parentDossier.code
+    this.nouvelElementEnfant.libelle = this.parentDossier.libelle
      this.nouvelElementEnfant.parent = this.parentDossier.id
 
       this.$('#modalAjouterElementEnfant').modal({

@@ -76,12 +76,12 @@
               <i class="icon-key"></i>Fonction UA
             </router-link>
           </li>
-           <!-- <li class="divider"></li>
+           <li class="divider"></li>
         <li>
             <router-link :to="{name: 'Organigramme'}" tag="a">
               <i class="icon-key"></i>Organigramme UA
             </router-link>
-          </li> -->
+          </li>
            <li class="divider"></li>
         </ul>
       </li>

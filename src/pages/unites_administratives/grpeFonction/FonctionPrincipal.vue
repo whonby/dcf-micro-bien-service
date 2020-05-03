@@ -58,7 +58,7 @@
                         v-for="typeUniteA in serviceDynamiques(formData.f_ua_id)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
+                      >{{afficheService(typeUniteA.serviceua_id)}}</option>
                     </select>
                   </div>
                 </div>
@@ -167,7 +167,7 @@
                         v-for="typeUniteA in serviceDynamiques(editTransfert.f_ua_id)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
+                      >{{afficheService(typeUniteA.serviceua_id)}}</option>
                     </select>
                   </div>
                 </div>
@@ -368,7 +368,7 @@ export default {
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  
  ...mapGetters('personnelUA', ['all_acteur_depense','fonctions']),
-
+...mapGetters("SuiviImmobilisation", ["services"]),
  verroDirection() {
       return this.formData.f_ua_id == "";
     },
@@ -401,6 +401,19 @@ directionDynamiques() {
       return id => {
         if (id != null && id != "") {
           return this.directions.filter(element => element.d_ua_id == id);
+        }
+      };
+    },
+
+     afficheService() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.services.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
         }
       };
     },
