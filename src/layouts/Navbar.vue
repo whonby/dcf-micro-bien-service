@@ -102,7 +102,7 @@ export default {
     ]),
             ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
-            "getClasses","getEchelons","getActeur","getGrades","getNbrActeurAcrediteTaux",
+            "getClasses","getEchelons","getpaiementPersonnel","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite","getCategorieGrade",
 "getFamilleFonction","getFonctionBudgetaire", "getDossierCandidatPersonnel",
 "getClassificationGradeFonction","getSituationMatrimonial"]),
@@ -249,6 +249,7 @@ this.getClassificationGradeFonction()
         this.getActPersonnel()
         this.getConges();
         this.allActeurDepense()
+        this.getpaiementPersonnel()
          this.getActeurFinContratAndActivite()
             /**Gestion des marche*/
             

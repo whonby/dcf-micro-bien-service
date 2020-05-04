@@ -311,13 +311,13 @@ const MODIFIER_TYPE_SALARIE = (state,  objetModifie) => {
  * @param data
  * @constructor
  */
-const GET_ECHELONS = (state, data) => {
-    state.echellons = data
+const GET_PAIEMENTPERSONNEL = (state, data) => {
+    state.paiementPersonnel = data
 }
 
 
-const AJOUTER_ECHELONS = (state, nouvel_objet) => {
-    state.echellons.unshift(nouvel_objet)
+const AJOUTER_PAIEMENTPERSONNEL = (state, nouvel_objet) => {
+    state.paiementPersonnel.unshift(nouvel_objet)
     // state.titres = [...nouvel_objet, ...state.titres]
 }
 
@@ -327,17 +327,17 @@ const AJOUTER_ECHELONS = (state, nouvel_objet) => {
  * @param id
  * @constructor
  */
-const SUPPRIMER_ECHELONS= (state, id) => {
-    state.echellons = state.echellons.filter(echellon => echellon.id != id)
+const SUPPRIMER_PAIEMENTPERSONNEL= (state, id) => {
+    state.paiementPersonnel = state.paiementPersonnel.filter(paiementPerso => paiementPerso.id != id)
 }
 
 
-const MODIFIER_ECHELONS = (state,  objetModifie) => {
-    state.echellons = state.echellons.map(echellon => {
-        if(echellon.id == objetModifie.id){
-            echellon = {...objetModifie}
+const MODIFIER_PAIEMENTPERSONNEL = (state,  objetModifie) => {
+    state.paiementPersonnel = state.paiementPersonnel.map(paiementPerso => {
+        if(paiementPerso.id == objetModifie.id){
+            paiementPerso = {...objetModifie}
         }
-        return echellon
+        return paiementPerso
     })
 }
 
@@ -770,6 +770,10 @@ const MODIFIER_SITUATION_MATRIMONIAL = (state, objetModifie) => {
 
 
 export {
+    GET_PAIEMENTPERSONNEL,
+    AJOUTER_PAIEMENTPERSONNEL,
+    SUPPRIMER_PAIEMENTPERSONNEL,
+    MODIFIER_PAIEMENTPERSONNEL,
     
     GET_SITUATION_MATRIMONIAL,
     AJOUTER_SITUATION_MATRIMONIAL,
@@ -827,10 +831,7 @@ GET_FAMILLE_FONCTIONS,
     SUPPRIMER_TYPE_SALARIE,
     AJOUTER_SALARIE,
     MODIFIER_TYPE_SALARIE,
-    AJOUTER_ECHELONS,
-    GET_ECHELONS,
-    SUPPRIMER_ECHELONS,
-    MODIFIER_ECHELONS,
+    
     GET_GRADE,
     AJOUTER_GRADE,
     SUPPRIMER_GRADE,
