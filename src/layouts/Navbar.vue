@@ -106,7 +106,7 @@ export default {
             "getClasses","getEchelons","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite","getCategorieGrade",
 "getFamilleFonction","getFonctionBudgetaire", "getDossierCandidatPersonnel",
-"getClassificationGradeFonction","getSituationMatrimonial"]),
+"getClassificationGradeFonction","getSituationMatrimonial", "getContratResilie"]),
 
       ...mapActions('gestionMarche',['getTypeMarche',"getSecteurActivite",
         "getEntreprise","getEtapeMarche","getDocumentPTBAPPM","getMarcheContrat","getPresenceCF",
@@ -244,6 +244,7 @@ this.getDossierCandidatPersonnel()
        this.getCategorieGrade()
 this.getFamilleFonction()
 this.getSituationMatrimonial()
+this.getContratResilie()
 this.getClassificationGradeFonction()
         this.getNiveauEtude()
         this.getTypeContrat()

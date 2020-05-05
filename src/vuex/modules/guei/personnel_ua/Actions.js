@@ -143,6 +143,82 @@ export function modifierFonction({commit}, formData){
 }
 
 
+
+
+
+
+
+
+export  function  getContratResilie({commit}) {
+
+    queue.push(() =>  axios.get('/list_contrat_resilie').then(response => {
+            // console.log(response.data)
+            commit('GET_ALL_CONTRAT_RESILIE', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+// ajouter type acte personnel
+export  function ajouterContratResilie({commit}, objetAjoute){
+    this.$app.$loading(true)
+    axios.post('/add_contrat_resilie', objetAjoute ).then(res => {
+        this.$app.$notify({
+            title: 'success',
+            text: 'Enregistrement effectuer',
+            type:"success"
+        });
+        commit('AJOUTER_CONTRAT_RESILIE', res.data)
+        this.$app.$loading(false)
+    }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'super',
+            text: "Enregistrement effectué avec success",
+            type:"super"
+        });
+    })
+}
+
+// supprimer type act
+export function supprimerContratResilie({commit}, id){
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
+        this.$app.$notify({
+            title: 'Suppression',
+            text: 'Suppression effectuer',
+            type:"suppression"
+        });
+        commit('SUPPRIMER_CONTRAT_RESILIE', id)
+        axios.delete('/delete_contrat_resilie/' + id).then(() => dialog.close() )
+    })
+}
+
+export function modifierContratResilie({commit}, elementModifie){
+    this.$app.$loading(true)
+    axios.put('/update_contrat_resilie/' + elementModifie.id, elementModifie).then(response => {
+        this.$app.$notify({
+            title: 'success',
+            text: 'Modification effectuer',
+            type:"success"
+        });
+        commit('MODIFIER_FONCTIONS', response.data)
+        this.$app.$loading(false)
+    }).catch(error =>{
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type:"error"
+        });
+    })
+
+}
+
 /**
  * Fin fonction MODIFIER_CLASSES
  * **/
