@@ -45,10 +45,10 @@ paiementPersonnel
                   <div class="controls">
                     <select v-model="formData.programme_id" class="span4">
                       <option
-                        v-for="program in afficheProgrammeParLigne(formData.ligne_id)"
+                        v-for="program in afficheProgrammeParLigne(formData.lignebudg_id)"
                         :key="program.id"
-                        :value="program.id"
-                      >{{program.code}}-{{program.libelle}}</option>
+                        :value="program.afficheProgramme.id"
+                      >{{program.afficheProgramme.code}}-{{program.afficheProgramme.libelle}}</option>
                     </select>
                   </div>
                 </div>
@@ -167,21 +167,35 @@ paiementPersonnel
                 </div>
               </td>
               <td>
-                <div class="control-group">
+                <div class="control-group" >
                   <label class="control-label">Mois de Paiement:</label>
       
  
-                  <div class="controls">
-                    <input
-                      type="text"
-                      v-model="formData.moisdepaiement"
-                      class="span4"
-                      placeholder="Saisir le mois de paiement"
+                  <div class="form-group" >
+                  <select v-model="formData.moisdepaiement" class="span4">
+                     <option value="" >Selectionner</option>
+                     <option value="Janvier" >Janvier</option>
+                     <option value="Février">Février</option>
+                     <option value="Mars">Mars</option>
+                     <option value="Avril">Avril</option>
+                     <option value="Mai">Mai</option>
+                     <option value="Juin">Juin</option>
+                     <option value="Juillet">Juillet</option>
+                     <option value="Août">Août</option>
+                     <option value="Septembre">Septembre</option>
+                     <option value="Octobre">Octobre</option>
+                     <option value="Novembre">Novembre</option>
+                     <option value="Decembre">Decembre</option>
+                     
+                     
+                     
        
-                    />
+                    </select>
                </div>
                  </div>
               </td>
+
+              
               <td>
                 <div class="control-group">
                   <label class="control-label">Montant des Salaires:</label>
@@ -378,19 +392,35 @@ paiementPersonnel
              </div>
              </div>
             </td>
-              <td>
-             <div class="control-group">
+            <td>
+             <div class="control-group" >
               <label class="control-label">Mois de Paiement:</label>
-              <div class="controls">
-                <input
-                 type="text"
-                 v-model="editpaiementPersonnel.moisdepaiement"
-                 class="span4"
-                 placeholder="Saisir le mois de paiement"
-               />
+                <div class="form-group" >
+                <select v-model="editpaiementPersonnel.moisdepaiement" class="span4">
+                  <option value="" >Selectionner</option>
+                  <option value="Janvier" >Janvier</option>
+                  <option value="Février">Février</option>
+                  <option value="Mars">Mars</option>
+                  <option value="Avril">Avril</option>
+                  <option value="Mai">Mai</option>
+                  <option value="Juin">Juin</option>
+                  <option value="Juillet">Juillet</option>
+                  <option value="Août">Août</option>
+                  <option value="Septembre">Septembre</option>
+                  <option value="Octobre">Octobre</option>
+                  <option value="Novembre">Novembre</option>
+                  <option value="Decembre">Decembre</option>
+       
+       
+       
+                </select>
+              </div>
              </div>
-             </div>
-             </td>
+           </td>
+            
+            
+            
+            
               
               <td>
              <div class="control-group">
@@ -524,7 +554,7 @@ paiementPersonnel
                     <td>
                       <button
                         class="btn btn-danger"
-                        @click="supprimerpaiementPersonnel(paiementPersonnel.id)"
+                        @click="supprimerpaiementPersonnel(payepersonnel.id)"
                       >
                         <span>
                           <i class="icon icon-trash"></i>
@@ -668,7 +698,7 @@ export default {
    afficheProgrammeParLigne() {
     return id => {
       if (id != null && id != "") {
-        return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.afficheUA.id == id);
+        return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.afficheEconomique.id == id);
       }
     };
   },

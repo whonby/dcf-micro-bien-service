@@ -1,5 +1,38 @@
 
 
+const GET_ALL_BANQUE_UA = (state, tableauBanqueUa) => {
+  state.banqueUa = tableauBanqueUa;
+};
+
+// ajouter type_textes
+const AJOUTER_BANQUE_UA = (state, nouveau_banqueUa) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.banqueUa.unshift(nouveau_banqueUa);
+};
+
+// modifier type_textes
+const MODIFIER_BANQUE_UA = (state, objetModifie) => {
+  state.banqueUa = state.banqueUa.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
+// supprimer type_texte
+const SUPPRIMER_BANQUE_UA = (state, id) => {
+  state.banqueUa = state.banqueUa.filter(type => type.id != id);
+};
+
+
+// const IMPORT_BUDGET = (state, nouveau_budgetGeneral) => {
+
+// };
+
+
+
 const GET_ALL_HISTORIQUE_BUDGET_GENERAL = (state, tableauBudgetGeneral) => {
   state.historiquebudgetGeneral = tableauBudgetGeneral;
 };
@@ -458,6 +491,12 @@ const SUPPRIMER_LIQUIDATION = (state, id) => {
 
 
 export {
+  GET_ALL_BANQUE_UA,
+  AJOUTER_BANQUE_UA,
+  MODIFIER_BANQUE_UA,
+  SUPPRIMER_BANQUE_UA,
+
+  
 
   GET_ALL_LIQUIDATION,
   AJOUTER_LIQUIDATION,

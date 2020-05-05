@@ -89,6 +89,7 @@ export default {
       // "getAllArchivageDocument",
       // "getAllDirection",
       "getAllServiceua",
+      "getAllBanqueUa",
       "getAllFonction",
       "getAllBudgetGeneral",
       "getAllHistoriqueBudgetGeneral",
@@ -229,6 +230,7 @@ this.getTypeAppel()
 // this.getAllDirection()
 this.getAllServiceua()
 this.getAllFonction()
+this.getAllBanqueUa()
 this.getFonctionBudgetaire()
 this.getDossierCandidatPersonnel()
       this.getListeSalaireActuelAll()
