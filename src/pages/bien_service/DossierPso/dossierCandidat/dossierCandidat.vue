@@ -1509,6 +1509,7 @@ import { formatageSomme } from '../../../../../src/Repositories/Repository';
               type_candidat:"",
               nom_cand:"",
               prenom_cand:"",
+              marche_id:"",
               date_nais_cand:"",
               telephone_cand:"",
               adresse_post:"",
@@ -1568,6 +1569,7 @@ import { formatageSomme } from '../../../../../src/Repositories/Repository';
               capacite_tech_exp:"",
               mt_offre_financiere:"",
               numero_dossier:"",
+              marche_id:"",
               capacite_financement:"",
           },
          formchnique:{
@@ -2653,6 +2655,7 @@ modifierFactureLocal(){
 
                 var nouvelObjet ={
                   ...this.formDossierCadidature,
+                  marche_id:this.marcheid,
                   procedure_passation_id: this.afficherTypeProcedureId(this.marcheid)  
                 }
                 this.formFournisseur.raison_sociale=this.formDossierCadidature.nom_cand
@@ -2707,6 +2710,7 @@ modifierFactureLocal(){
             modificationDossierCandidatLocal(){
                 var nouvelObjet ={
                     ...this.editDossierCadidature,
+                    marche_id:this.marcheid,
                     procedure_passation_id:this.afficherTypeProcedureId(this.marcheid)
                 }
                 this.formFournisseur.raison_sociale=this.editDossierCadidature.nom_cand

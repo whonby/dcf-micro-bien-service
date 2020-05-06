@@ -666,7 +666,7 @@ export const getEngagementPersonnaliser1 = (state, getters, rootState, rootGette
     // exemple de teset
 export const mandatVise = state =>
     state.mandats.filter(
-        Immrealise => Immrealise.decision_cf == 1
+        Immrealise => Immrealise.decision_cf == 8
     );
 export const getMandatPersonnaliserVise = (state, getters, rootState, rootGetters) =>
     getters.mandatVise.map(element => {

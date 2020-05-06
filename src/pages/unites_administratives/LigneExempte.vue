@@ -66,7 +66,7 @@
                   <label class="control-label">Ligne exemptée</label>
                   <div class="controls">
                     
-                    <select v-model="formData.economique_id" class="span4">
+                    <select v-model="formData.economique_id" class="span5">
                       <option
                         v-for="Bgeneral in derniereNivoPlanBudgetaire"
                         :key="Bgeneral.id"
@@ -259,8 +259,13 @@ return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
             },
             // fonction pour vider l'input
             ajouterTitreLocal () {
-               
-                this.ajouterLigneExempter(this.formData)
+                var nouvelObjet = {
+        ...this.formData,
+         code: this.codeLigneExemptee(this.formData.economique_id),
+         libelle: this.LibelleLigneExemptee(this.formData.economique_id)
+       
+      };
+                this.ajouterLigneExempter(nouvelObjet)
                  this.$("#exampleModal").modal('hide');
                 this.formData = {
                     code: "",
@@ -278,7 +283,13 @@ return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
 
             },
             modifier(){
-                this.modifierLigneExempter(this.editTitre)
+                 var nouvelObjet1 = {
+        ...this.editTitre,
+         code: this.codeLigneExemptee(this.editTitre.economique_id),
+         libelle: this.LibelleLigneExemptee(this.editTitre.economique_id)
+       
+      };
+                this.modifierLigneExempter(nouvelObjet1)
                 // this.getTypeContrat()
             }
 

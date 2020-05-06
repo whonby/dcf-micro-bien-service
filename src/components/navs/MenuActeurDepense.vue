@@ -57,7 +57,16 @@
           </li>
          
 
-
+ <!-- <li>
+            <router-link :to="{name: 'paiementPersonnel'}" tag="a">
+              PAIEMENT DU PERSONNEL
+            </router-link>
+          </li>
+           <li>
+            <router-link :to="{name: 'executionPersonnel'}" tag="a">
+              EXECUTION PERSONNEL
+            </router-link>
+          </li> -->
           
        <!-- <li>
             <router-link :to="{name: 'planificationPersonnel'}" tag="a">

@@ -99,14 +99,16 @@ export default {
      "getLigneExempter",
      "getBudgeChager",
      "getAllRealiteServiceFait",
-     "getAllLiquidation"
+     "getAllLiquidation",
+     "getOrganigrammeUa",
+     "getAllBanqueUa"
     ]),
-            ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons",
+            ...mapActions('personnelUA', ["getpaiementPersonnel",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
             "getClasses","getEchelons","getpaiementPersonnel","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite","getCategorieGrade",
 "getFamilleFonction","getFonctionBudgetaire", "getDossierCandidatPersonnel",
-"getClassificationGradeFonction","getSituationMatrimonial"]),
+"getClassificationGradeFonction","getSituationMatrimonial", "getContratResilie"]),
 
       ...mapActions('gestionMarche',['getTypeMarche',"getSecteurActivite",
         "getEntreprise","getEtapeMarche","getDocumentPTBAPPM","getMarcheContrat","getPresenceCF",
@@ -149,7 +151,11 @@ export default {
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", "getEcheances",
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
-          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner"])
+
+          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getEcheances"])
+
+
+
 
   },
 
@@ -227,6 +233,8 @@ this.getTypeAppel()
     
       // this.getAllTypeTextes();
     this.getAllUniteAdministrative();
+     this.getOrganigrammeUa()
+     this.getAllBanqueUa()
     // this.getAllArchivageDocument();
 // this.getAllDirection()
 this.getAllServiceua()
@@ -241,6 +249,7 @@ this.getDossierCandidatPersonnel()
        this.getCategorieGrade()
 this.getFamilleFonction()
 this.getSituationMatrimonial()
+this.getContratResilie()
 this.getClassificationGradeFonction()
         this.getNiveauEtude()
         this.getTypeContrat()
@@ -254,6 +263,7 @@ this.getClassificationGradeFonction()
         this.allActeurDepense()
         this.getpaiementPersonnel()
          this.getActeurFinContratAndActivite()
+        this.getpaiementPersonnel()
             /**Gestion des marche*/
             
       this.getTypeMarche()

@@ -3471,7 +3471,7 @@ export function modifierEngagement({ commit,dispatch }, element_modifie) {
     dispatch('getEngagement')
     this.$app.$notify({
       title: 'success ',
-      text: 'Modification effectué !',
+       text: 'Modification effectué !',
       type: "success"
     })
   }).catch(error => console.log(error))
@@ -4380,5 +4380,64 @@ export function modifierMarcheBascule({ commit, dispatch }, element_modifie) {
       type: "success"
     })
   }).catch(error => console.log(error))
+}
+
+
+
+
+
+
+
+
+
+
+
+export function getEcheances({ commit }) {
+    queue.push(() => axios.get('/echeances').then((response) => {
+        commit('GET_ECHEANCES', response.data.data)
+
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter bailleur
+export function ajouterEcheances({ commit }, formData) {
+    asyncLoading(axios.post('/echeances', formData)).then(response => {
+        if (response.status == 201) {
+        // console.log(response.data)
+        commit('AJOUTER_ECHEANCES', response.data)
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type: "success"
+        })
+    }
+
+}).catch(error => console.log(error))
+}
+
+// action pour modifier bailleur
+
+
+export function modifierEcheances({ commit }, element_modifie) {
+    asyncLoading(axios.put('/echeances', element_modifie)).then(response => {
+        commit('MODIFIER_ECHEANCES', response.data)
+    this.$app.$notify({
+        title: 'success ',
+        text: 'Modification effectué !',
+        type: "success"
+    })
+}).catch(error => console.log(error))
+}
+// supprimer categorie mision
+export function supprimerEcheances({ commit }, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+        commit('DELETE_ECHEANCES', id)
+    // // dialog.loading(false) // stops the proceed button's loader
+    axios.delete('/echeances/' + id).then(() => dialog.close())
+})
+
 }
 

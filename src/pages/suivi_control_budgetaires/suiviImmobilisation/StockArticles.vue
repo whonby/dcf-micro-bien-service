@@ -3,7 +3,7 @@
 
    
 
-     <div id="exampleModalStock" class="modal hide">
+     <div id="exampleModalStock" class="modal hide ">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter quantite Entrant</h3>
@@ -55,7 +55,7 @@
       </div>
     </div>
     <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
-    <div id="exampleModal" class="modal hide taillemodal">
+    <div id="exampleModal" class="modal hide tailgrandStock">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter Stock </h3>
@@ -67,7 +67,7 @@
               <div class="control-group">
                 <label class="control-label">Type Unite administrative:</label>
                 <div class="controls">
-                  <select v-model="formData.typeua_id" >
+                  <select v-model="formData.typeua_id" class="span5">
                     <option value>Sélectionner</option>
                     <option
                       v-for="ua in type_Unite_admins"
@@ -83,7 +83,7 @@
               <div class="control-group">
                 <label class="control-label">Unite administrative:</label>
                 <div class="controls">
-                  <select v-model="formData.uAdministrative_id" :readOnly="veiftypeuaExist">
+                  <select v-model="formData.uAdministrative_id" :readOnly="veiftypeuaExist" class="span5">
                     <option value>Sélectionner</option>
                     <option
                       v-for="ua in uniteAdministrativeDynamiques(formData.typeua_id)"
@@ -98,7 +98,7 @@
               <div class="control-group">
                 <label class="control-label">Type équipement:</label>
                 <div class="controls">
-                  <select v-model="formData.typeequipe_id">
+                  <select v-model="formData.typeequipe_id" class="span5">
                     <option value>Sélectionner</option>
                     <option
                       v-for="equipe in equipements"
@@ -118,7 +118,7 @@
               <div class="control-group">
                 <label class="control-label">Famille:</label>
                 <div class="controls">
-                  <select  v-model="formData.famill_id">
+                  <select  v-model="formData.famill_id" class="span5">
                     <option value>Sélectionner</option>
                     <option
                       v-for="famil in fammillesDynamiques(formData.typeequipe_id)"
@@ -129,11 +129,11 @@
                 </div>
               </div>
             </td>
-            <td>
+            <!-- <td>
               <div class="control-group">
                 <label class="control-label">Article:</label>
                 <div class="controls">
-                  <select :readOnly="veifArticlesExist" v-model="formData.articlestock_id">
+                  <select :readOnly="veifArticlesExist" v-model="formData.articlestock_id" class="span5">
                   
                     <option
                       v-for="famil in articlesDynamiques(formData.famill_id)"
@@ -143,7 +143,7 @@
                   </select>
                 </div>
               </div>
-            </td>
+            </td> -->
             <td>
               <div class="control-group">
                 <label class="control-label">Quantite en entrant</label>
@@ -152,13 +152,25 @@
                     type="number"
                     
                    v-model="formData.quantitestock"
-                    class="span"
+                    class="span5"
                     placeholder="Saisir Quantite en stock"
                   />
                 </div>
               </div>
             </td>
-            
+             <td>
+              <div class="control-group">
+                <label class="control-label">Date d'entrée :</label>
+                <div class="controls">
+                  <input
+                    type="date"
+                    v-model="formData.date_entre"
+                    class="span5"
+                    
+                  />
+                </div>
+              </div>
+            </td>
 
           </tr>
           <tr>
@@ -199,19 +211,7 @@
                   />
             </td>
             
-            <td>
-              <div class="control-group">
-                <label class="control-label">Date d'entrée :</label>
-                <div class="controls">
-                  <input
-                    type="date"
-                    v-model="formData.date_entre"
-                    class="span"
-                    
-                  />
-                </div>
-              </div>
-            </td>
+           
            
                  
           </tr>
@@ -232,7 +232,7 @@
 
     <!--///////////////////////////////////////// debut modal de modification //////////////////////////////-->
 
-    <div id="modificationModal" class="modal hide taillemodalMod">
+    <div id="modificationModal" class="modal hide tailgrandStock">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Modifier stock</h3>
@@ -294,7 +294,7 @@
               <div class="control-group">
                 <label class="control-label">Type équipement:</label>
                 <div class="controls">
-                  <select v-model="editStock.typeequipe_id">
+                  <select v-model="editStock.typeequipe_id" class="span5">
                     <option value>Sélectionner</option>
                     <option
                       v-for="equipe in equipements"
@@ -309,7 +309,7 @@
               <div class="control-group">
                 <label class="control-label">Famille:</label>
                 <div class="controls">
-                  <select  v-model="editStock.famill_id">
+                  <select  v-model="editStock.famill_id" class="span5">
                     <option value>Sélectionner</option>
                     <option
                       v-for="famil in fammillesDynamiques(editStock.typeequipe_id)"
@@ -321,7 +321,21 @@
               </div>
             </td>
            
-            
+             <td>
+              
+              <div class="control-group">
+                <label class="control-label">Quantité en Stock </label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    v-model="editStock.quantitestock"
+                    
+                    class="span5"
+                    placeholder="Nvelle Quantité en Stock"
+                  />
+                </div>
+              </div>
+            </td>
             <!-- <td>
               <div class="control-group">
                 <label class="control-label">Quantite en stock</label>
@@ -340,7 +354,7 @@
 
           </tr>
           <tr>
-             <td>
+             <!-- <td>
               <div class="control-group">
                 <label class="control-label">Article:</label>
                 <div class="controls">
@@ -354,7 +368,7 @@
                   </select>
                 </div>
               </div>
-            </td>
+            </td> -->
              <!-- <td>
               <div class="control-group">
                 <label class="control-label">Date d'entree :</label>
@@ -382,21 +396,7 @@
               </div>
             </td> -->
              
-            <td>
-              
-              <div class="control-group">
-                <label class="control-label">Quantité en Stock </label>
-                <div class="controls">
-                  <input
-                    type="number"
-                    v-model="editStock.quantitestock"
-                    
-                    class="span"
-                    placeholder="Nvelle Quantité en Stock"
-                  />
-                </div>
-              </div>
-            </td>
+           
             
            
                  
@@ -443,7 +443,7 @@
                   <tr>
                      <!-- <th>Type Unite administrative</th>  -->
                     <th title="unite administrative">Ua</th>
-                     <th>Equipement Type</th> 
+                     <!-- <th>Equipement Type</th>  -->
                      <th>Famille</th>
                     <!-- <th>Article</th> -->
                     <!-- <th>Durée de vie</th> -->
@@ -472,13 +472,13 @@
                     >{{stock.typeuniteAdminist.libelle || 'Non renseigné'}}</td>  -->
                     <td
                       @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.uniteAdminist.libelle || 'Non renseigné'}}</td>
-                     <td
+                    >{{libelleUniteAdministrative(stock.uAdministrative_id)	 || 'Non renseigné'}}</td>
+                     <!-- <td
                       @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.AfficheTypeequipement.libelle || 'Non renseigné'}}</td> 
+                    >{{libelleTypeEquipement(stock.typeequipe_id) || 'Non renseigné'}}</td>  -->
                     <td
                       @dblclick="afficherModalModifierStock(index)"
-                    >{{stock.famille.libelle || 'Non renseigné'}}</td>
+                    >{{libelleFamilleEquipement(stock.famill_id) || 'Non renseigné'}}</td>
                      <!-- <td
                       @dblclick="afficherModalModifierStock(index)"
                     >{{stock.AfficheArticle.libelle || 'Non renseigné'}}</td> -->
@@ -522,7 +522,7 @@
                    
                   >
                 
-                    <td></td>
+                
                       <td></td>
                    <td style="font-weight:bold;" title="total quantite entrant">Total en stock</td>
                     <td style="text-align: center;color:red;font-weight:bold;">{{totalQteEntrant || 0 }}</td>
@@ -534,7 +534,7 @@
                     <td style="font-weight:bold;" title="total quantite sortant">Total qte sortie</td>
                     <td style="text-align: center;color:red;font-weight:bold;">{{ totalQteSortant || 0 }}</td>
                     
-                   
+                   <td></td>
                      
                     
                   </tr>
@@ -646,7 +646,42 @@ quantite: {
         );
       });
     },
+     libelleFamilleEquipement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.familles.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     libelleTypeEquipement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.equipements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     libelleUniteAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 quantiteActuel() {
       const val = parseInt(this.quantiteEnt) + parseInt(this.quantiteenstock);
       
@@ -871,5 +906,9 @@ veifArticlesExist() {
   font-size: 120%;
   text-align: center;
   font-weight:bold;
+}
+.tailgrandStock{
+  width: 88%;
+  margin: 0 -42%;
 }
 </style>

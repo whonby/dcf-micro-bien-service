@@ -1,5 +1,5 @@
 import TypeActePersonnel from "../../pages/acteurs_depenses/type_acte_personnel/TypeActPersonnel.vue"
-import paiementPersonnel from "../../pages/acteurs_depenses/executionPersonnel/paiementPersonnel.vue"
+//import paiementPersonnel from "../../pages/acteurs_depenses/executionPersonnel/paiementPersonnel.vue"
 import Fonction from "../../pages/acteurs_depenses/fonction/Fonction.vue"
 import Classe from "../../pages/acteurs_depenses/classes/Classes.vue"
 import NiveauEtude from "../../pages/acteurs_depenses/niveau_etude/NiveauEtude.vue"
@@ -16,13 +16,25 @@ import EditActeurDepense from "../../pages/acteurs_depenses/acteurs/EditeActeurD
 import CategorieGrade from "../../pages/acteurs_depenses/CategorieGrade/CategorieGrade.vue";
 import familleEmploie from "../../pages/acteurs_depenses/fonction/familleEmploie.vue";
 import ClassificationEmploisGradePrincipal from "../../pages/acteurs_depenses/fonction/ClassificationEmploisGradePrincipal.vue";
-
+import paiementPersonnel from "../../pages/acteurs_depenses/executionPersonnel/paiementPersonnel.vue"
+import executionPersonnel from "../../pages/acteurs_depenses/executionPersonnel/executionPersonnel.vue"
+import detailExecutionPersonnel from "../../pages/acteurs_depenses/executionPersonnel/detailExecutionPersonnel.vue"
 import recrutementPersonnel from "../../pages/acteurs_depenses/dossierPersonnel/recrutementPersonnel.vue";
 import detailPersonnel from "../../pages/acteurs_depenses/dossierPersonnel/detailPersonnel";
 
 import fonctionBudgetaire from "../../pages/acteurs_depenses/fonction/fonctionBudgetaire.vue";
 import SituationMatrimonial from "../../pages/acteurs_depenses/fonction/SituationMatrimonial.vue";
 const ActeurDepenseRoutes = [
+  {
+    path: '/detailExecutionPersonnel/:id',
+    name: "detailExecutionPersonnel",
+    component: detailExecutionPersonnel
+  },
+  {
+    path: "/executionPersonnel",
+    name: "executionPersonnel",
+    component: executionPersonnel
+  },
   {
     path: "/paiementpersonnel",
     name: "paiementPersonnel",

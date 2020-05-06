@@ -675,7 +675,7 @@ export function ajouterStock({ commit, dispatch }, nouveau) {
     axios.post("/ajouter_Stockage", {
       famill_id: nouveau.famill_id,
       quantitestock: nouveau.quantitestock,
-      articlestock_id: nouveau.articlestock_id,
+      // articlestock_id: nouveau.articlestock_id,
       typeua_id: nouveau.typeua_id,
       uAdministrative_id: nouveau.uAdministrative_id,
       typeequipe_id: nouveau.typeequipe_id,
@@ -704,7 +704,7 @@ export function modifierStock({ commit, dispatch }, nouveau) {
     axios.put("/modifier_Stockage/" + nouveau.id, {
       famill_id: nouveau.famill_id,
       quantitestock: nouveau.quantitestock,
-      articlestock_id: nouveau.articlestock_id,
+      // articlestock_id: nouveau.articlestock_id,
       typeua_id: nouveau.typeua_id,
       uAdministrative_id: nouveau.uAdministrative_id,
       typeequipe_id: nouveau.typeequipe_id,

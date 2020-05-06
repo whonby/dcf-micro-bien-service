@@ -20,24 +20,22 @@
           
                <tr>
                     
+               <!-- <td>
+                <div class="control-group">
+             
+              <div class="controls">
+                <label> <input type="radio" name="radios" v-model="selectionService" />Service</label><label> <input type="radio" name="radios" v-model="selectionFonction" />Fonction</label>
+                  
+               
+                 
+              </div>
+            </div>
+              </td> -->
                <td>
                 <div class="control-group">
-                  <label class="control-label">Direction</label>
+                  <label class="control-label" >Service</label>
                   <div class="controls">
-                    
-                    <select v-model="formData.direction_id" class="span5" >
-                   
-                      <option ></option>
-                      <option value="Direction">Direction</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-               <td>
-                <div class="control-group">
-                  <label class="control-label">Service</label>
-                  <div class="controls">
-                    <select v-model="formData.service_id" class="span5">
+                    <select v-model="formData.service_id" class="span5" >
                     
                       <option value=""></option>
                       <option
@@ -186,7 +184,7 @@
          
                
                      <tr>
-               <td>
+               <!-- <td>
                 <div class="control-group">
                   <label class="control-label">Direction</label>
                   <div class="controls">
@@ -197,7 +195,7 @@
                     </select>
                   </div>
                 </div>
-              </td>
+              </td> -->
                <td>
                 <div class="control-group">
                   <label class="control-label">Service</label>
@@ -424,7 +422,8 @@ export default {
               //     icon: 'add_alert'
               // }
           ],
-     
+     selectionService: [],
+selectionFonction:[],
       formData: {
         service_id:"",
        s_ua_id:"",
@@ -510,6 +509,7 @@ export default {
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  
  ...mapGetters('personnelUA', ['all_acteur_depense','fonctions']),
+
 
 
 MontantParEquipementModifier(){

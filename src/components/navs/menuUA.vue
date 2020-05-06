@@ -76,7 +76,20 @@
               <i class="icon-key"></i>Fonction UA
             </router-link>
           </li>
+            <li class="divider"></li>
+        <!-- <li>
+            <router-link :to="{name: 'banqueUa'}" tag="a">
+              <i class="icon-key"></i>Banque UA
+            </router-link>
+          </li> -->
+           <!-- <li class="divider"></li>
+        <li>
+            <router-link :to="{name: 'Organigramme'}" tag="a">
+              <i class="icon-key"></i>Organigramme UA
+            </router-link>
+          </li> -->
            <li class="divider"></li>
+<<<<<<< HEAD
          <li>
            <router-link :to="{name: 'banqueUa'}" tag="a">
              <i class="icon-key"></i>Banque UA
@@ -84,6 +97,8 @@
          </li>
            <li class="divider"></li>
         
+=======
+>>>>>>> developpeur
         </ul>
       </li>
         <li>

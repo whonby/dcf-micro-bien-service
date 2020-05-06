@@ -1,9 +1,9 @@
-personnaliseActeurDepense
+
 const type_acte_personnels = state => state.type_acte_personnels;
 const fonctions  = state => state.fonctions;
 const paiementPersonnel  = state => state.paiementPersonnel;
 const classes =state => state.classes;
-
+personnaliseActeurDepense
 export const situation_matrimonial = state => state.situation_matrimonial;
 const niveau_etudes =state => state.niveau_etudes;
 const type_contrats =state => state.type_contrats;
@@ -29,6 +29,7 @@ const totalActeurDepense =state => state.all_acteur_depense.length;
 const totalActeurNonAccredite =state =>(state.acte_personnels.filter(acteur_depense=>acteur_depense.type_acte_id!='4' && acteur_depense.date_fin_contrat==null ).length);
 const totalActeurAccredite =state =>(state.acte_personnels.filter(acteur_depense=>acteur_depense.type_acte_id=='4' && acteur_depense.date_fin_contrat==null).length);
 const tauxActeurAccredite= (state,getters )=> parseFloat((getters.totalActeurAccredite*100)/getters.totalActeurEnctivite).toFixed(2);
+//export const paiementPersonnel = state => state.paiementPersonnel;
 
 export const categorieGrade = state =>
   state.categorieGrade.sort((a, b) => (a.id > b.id ? 1 : -1));
@@ -38,6 +39,8 @@ export const familleFonction = state =>
 // export const categorieGrade = state => state.categorieGrade;
 //export const familleFonction = state => state.familleFonction;
 export const classificationGradeFonction = state => state.classificationGradeFonction;
+
+export const contrat_resilie = state => state.contrat_resilie
 
 export const fonctionBudgetaire = state =>
     state.fonctionBudgetaire.sort((a, b) => (a.id > b.id ? 1 : -1));

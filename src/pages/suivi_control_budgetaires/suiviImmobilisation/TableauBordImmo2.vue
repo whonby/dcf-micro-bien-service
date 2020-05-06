@@ -1,4 +1,4 @@
-
+sommeQuantiteGlobal
 <template>
   <div class="container-fluid">
      <!-- <h3 style="text-align:center">TABLEAU DE BORD : COMPTABILITES DES MATIERES</h3> -->
@@ -40,7 +40,7 @@
         <div class="quick-actions_homepage">
       <ul class="quick-actions">
         <li class="bg_lb"> <a href="#"> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{sommeQuantiteGlobal}}</span>QUANTITES GBOBALES</a> </li>
-        <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i><span class="label label-important" style="font-size:15px">{{parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteGlobalNonCouvert)}}</span> QUANTITES COUVERTES</a> </li>
+        <li class="bg_lg"> <a href="charts.html"> <i class="icon-signal"></i><span class="label label-important" style="font-size:15px">{{parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteGlobalNonCouvert)}}</span> QUANTITES COUVERTES</a> </li>
         <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{sommeQuantiteGlobalNonCouvert}}</span> QUANTITES NON COUVERTES </a> </li>
         <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i><span class="label label-important" style="font-size:15px">{{(((parseFloat(sommeQuantiteGlobalNonCouvert))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span>TAUX QUANTITES NON COUVERTES</a> </li>
         <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{(((parseFloat(parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteGlobalNonCouvert)))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span> TAUX QUANTITES COUVERTES</a> </li>

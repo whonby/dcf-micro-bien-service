@@ -347,9 +347,9 @@
                                
                                <li ><a data-toggle="tab" href="#tab100">Contrat Planifiés <span class="badge badge-important" > {{nombreContratEnPlanification}}</span></a></li>
                                 <li ><a data-toggle="tab" href="#tab10"> Contrat en cours Contratualisation<span class="badge badge-success" >{{nombreContratEnContratualisation}}</span></a></li>
-                                <li><a data-toggle="tab" href="#tab20">Contrat en Exécution<span class="badge badge-warning" > {{nbreMarcheContrat}}</span></a></li>
+                                <!-- <li><a data-toggle="tab" href="#tab20">Contrat en Exécution<span class="badge badge-warning" > {{nbreMarcheContrat}}</span></a></li>
                                  <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{afficheNombreMarcheResilier}}</span></a></li>
-                                  <li><a data-toggle="tab" href="#tab208">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li>
+                                  <li><a data-toggle="tab" href="#tab208">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li> -->
                                 
                             </ul>
                         </div>
@@ -495,6 +495,7 @@
                      <!-- <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td> -->
                   
+
                    <td>
                      <button 
                       v-if="marche.attribue == 2"  class="btn  btn-warning">
@@ -1760,7 +1761,7 @@ export default {
      "typeTypeProcedures", "typeActeEffetFinanciers", "text_juridiques"]),
 
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
-      "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
+      "getPersonnaliseBudgetGeneral","groupUa","groupgranNaturePersonnel","getPersonnaliseBudgetGeneralParPersonnel",
       "montantBudgetGeneral", ]),
        ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
@@ -2169,7 +2170,7 @@ anneeAmort() {
      activiteDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParBienService.filter(
+          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(
             element => element.ua_id == id
           );
         }
@@ -2193,7 +2194,7 @@ anneeAmort() {
      economiqueDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParBienService.filter(
+          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(
             element => element.ua_id == id
           );
         }
@@ -2203,7 +2204,7 @@ anneeAmort() {
   grandeNatureDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParBienService.filter(
+          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(
             element => element.ua_id == id
           );
         }
@@ -2222,7 +2223,7 @@ anneeAmort() {
      ImputationBudget() {
 
       
-      const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.afficheEconomique.id == this.formData.economique_id);
+      const norme = this.getPersonnaliseBudgetGeneralParPersonnel.find(normeEquipe => normeEquipe.afficheEconomique.id == this.formData.economique_id);
 
       if (norme) {
         return norme.codebudget;
@@ -2231,7 +2232,7 @@ anneeAmort() {
     },
      ImputationBudgetModifier() {
       
-      const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.afficheEconomique.id == this.editMarche.economique_id);
+      const norme = this.getPersonnaliseBudgetGeneralParPersonnel.find(normeEquipe => normeEquipe.afficheEconomique.id == this.editMarche.economique_id);
 
       if (norme) {
         return norme.codebudget;
@@ -2297,9 +2298,9 @@ return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
         }
       };
     },
-    nbreMarcheContrat(){
-  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.affichertypeMarcheEx(recuper.marche.type_marche_id) == 2).length
-},
+//     nbreMarcheContrat(){
+//   return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.affichertypeMarcheEx(recuper.marche.type_marche_id) == 2).length
+// },
 
 afficheParMarcheEnExecution(){
 return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
@@ -2325,9 +2326,9 @@ return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
 },
 
 
-afficheNombreMarcheResilier(){
-return this.afficheMarcheResilier.filter(element => element.indicateur_resilie !="").length
-},
+// afficheNombreMarcheResilier(){
+// return this.afficheMarcheResilier.filter(element => element.indicateur_resilie !="").length
+// },
 
 
 
@@ -2343,7 +2344,7 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => element.date_
 },
     // ImputationBudgetModif() {
       
-    //   const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.economique_id == this.editMarche.Economique);
+    //   const norme = this.getPersonnaliseBudgetGeneralParPersonnel.find(normeEquipe => normeEquipe.economique_id == this.editMarche.Economique);
 
     //   if (norme) {
     //     return norme.codebudget;
