@@ -50,6 +50,12 @@
               PERSONNEL
             </router-link>
           </li>
+        <li>
+            <router-link :to="{name: 'paiementPersonnel'}" tag="a">
+              PAIEMENT DU PERSONNEL
+            </router-link>
+          </li>
+         
 
 
           

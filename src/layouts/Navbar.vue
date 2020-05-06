@@ -67,7 +67,7 @@ export default {
    
 
       ...mapActions('parametreGenerauxFonctionnelle', 
-    [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges']),
+    [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
 
     ...mapActions('parametreGenerauxSourceDeFinancement',['getSourceFinancement',
         'getTypeFinancement'
@@ -89,6 +89,7 @@ export default {
       // "getAllArchivageDocument",
       // "getAllDirection",
       "getAllServiceua",
+      "getAllBanqueUa",
       "getAllFonction",
       "getAllBudgetGeneral",
       "getAllHistoriqueBudgetGeneral",
@@ -102,7 +103,7 @@ export default {
     ]),
             ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
-            "getClasses","getEchelons","getActeur","getGrades","getNbrActeurAcrediteTaux",
+            "getClasses","getEchelons","getpaiementPersonnel","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite","getCategorieGrade",
 "getFamilleFonction","getFonctionBudgetaire", "getDossierCandidatPersonnel",
 "getClassificationGradeFonction","getSituationMatrimonial"]),
@@ -177,6 +178,7 @@ export default {
    this.getStructureActe()
    this.getPlanActe()
    this.getTypeconges()
+   this.getlisteNaturePrix()
    this.getSourceFinancement()
    this.getTypeFinancement()
    this.getStructureBudgetaire()
@@ -229,6 +231,7 @@ this.getTypeAppel()
 // this.getAllDirection()
 this.getAllServiceua()
 this.getAllFonction()
+this.getAllBanqueUa()
 this.getFonctionBudgetaire()
 this.getDossierCandidatPersonnel()
       this.getListeSalaireActuelAll()
@@ -249,6 +252,7 @@ this.getClassificationGradeFonction()
         this.getActPersonnel()
         this.getConges();
         this.allActeurDepense()
+        this.getpaiementPersonnel()
          this.getActeurFinContratAndActivite()
             /**Gestion des marche*/
             

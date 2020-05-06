@@ -1,4 +1,5 @@
 import uniteadministrative from "../../pages/unites_administratives/unite_administrative.vue";
+import banqueUa from "../../pages/unites_administratives/banqueUa.vue";
 import tableaudebord from "../../pages/unites_administratives/tableau_de_bord.vue";
 import typetext from "../../pages/unites_administratives/type_texte.vue";
 import archivagedocument from "../../pages/unites_administratives/archivage_document.vue";
@@ -27,6 +28,12 @@ import DetailBudgetImporte from "../../pages/budget/DetailBudgetImporte.vue";
 import LigneExempte from "../../pages/unites_administratives/LigneExempte";
 
 const UniteAdministativeRoutes = [
+
+  {
+    path: '/Banque',
+    name: "banqueUa",
+    component: banqueUa
+  },
 
   {
 

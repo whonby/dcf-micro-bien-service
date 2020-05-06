@@ -5,6 +5,7 @@ import { groupBy } from "../../../../Repositories/Repository";
  export const servicesua = state => state.servicesua;
 export const directions = state => state.directions;
 export const fonctionsua = state => state.fonctionsua;
+export const banqueUa = state => state.banqueUa;
 export const realiteServiceFait = state => state.realiteServiceFait;
 export const liquidation = state => state.liquidation;
 const uniteAdministratives = state =>

@@ -2,6 +2,41 @@
 // get all plan fonctionnelle
 
 
+const GET_NATUREPRIX = (state, tableau_nature_prix) => {
+
+    state.Nature_des_prix = tableau_nature_prix
+}
+
+// ajouter source de financement
+const AJOUTER_NATUREPRIX = (state , nouvel_objet) => {
+    state.Nature_des_prix.unshift(nouvel_objet)
+}
+
+// suppression de source de financement
+const SUPPRIMER_NATUREPRIX = (state ,id) => {
+    state.Nature_des_prix = state.Nature_des_prix.filter(nature => 
+        nature.id !=id)
+}
+
+//modifier siource de financement
+const MODIFIER_NATUREPRIX = (state, objetModifie) => {
+   
+    state.Nature_des_prix = state.Nature_des_prix.map(nature => {
+
+        if(nature.id == objetModifie.id){
+            nature = {...objetModifie}
+
+        }
+        return nature
+    })
+}
+
+
+
+
+// get all plan fonctionnelle
+
+
 const GET_TYPECONGES = (state, tableau_typeconges) => {
 
     state.typeconges = tableau_typeconges
@@ -235,6 +270,11 @@ const MODIFIER_STRUCTURE_ACTE = (state, objetModifie) => {
 
 
 export {
+
+    GET_NATUREPRIX,
+    AJOUTER_NATUREPRIX,
+    SUPPRIMER_NATUREPRIX,
+    MODIFIER_NATUREPRIX,
 
     GET_TYPECONGES,
     AJOUTER_TYPECONGES,

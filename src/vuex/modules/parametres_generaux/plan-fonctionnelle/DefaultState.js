@@ -7,7 +7,8 @@ const defaultstate = {
   plans_Decision: [],
   structureActe: [],
   typeconges:[],
-  planActe:[]
+  planActe:[],
+  Nature_des_prix:[]
 
   };
   

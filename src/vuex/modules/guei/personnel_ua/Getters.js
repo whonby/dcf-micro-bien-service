@@ -1,6 +1,7 @@
 personnaliseActeurDepense
 const type_acte_personnels = state => state.type_acte_personnels;
 const fonctions  = state => state.fonctions;
+const paiementPersonnel  = state => state.paiementPersonnel;
 const classes =state => state.classes;
 
 export const situation_matrimonial = state => state.situation_matrimonial;
@@ -154,6 +155,7 @@ export const afficheNombrePersonnelRecuActeNormination = state =>
 
 
 export {
+    paiementPersonnel,
     type_acte_personnels,
     fonctions,
     classes,
