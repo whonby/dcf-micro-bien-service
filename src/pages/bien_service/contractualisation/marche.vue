@@ -1,5 +1,4 @@
-type_marche
-afficheMarcheEnPlanification
+
 <template>
     <div class="container-fluid">
     

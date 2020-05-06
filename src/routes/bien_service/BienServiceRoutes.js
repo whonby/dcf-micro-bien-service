@@ -33,6 +33,7 @@ import modePassation from '../../pages/bien_service/Prametre_marchers/modePassat
 import typeTextJuridique from '../../pages/bien_service/parametres/typeTextJuridique.vue';
 // import typeTextJuridique from '../../pages/bien_service/typeTextJuridique.vue';
 import marche from '../../pages/bien_service/contractualisation/marche.vue';
+import historiqueMarche from '../../pages/bien_service/contractualisation/historiqueMarche.vue';
 import DetaillMarche from '../../pages/bien_service/contractualisation/DetaillMarche.vue';
 import motifDecision from '../../pages/bien_service/parametres/motifDecision.vue';
 import documentProcedure from '../../pages/bien_service/parametres/documentProcedure.vue';
@@ -72,12 +73,12 @@ const BienServiceRoutes = [
         name: "executionMarcheInvestissement",
         component: executionMarcheInvestissement
 
-    },
-    {
-        path: "/role-membrecojo",
-        name: "rolemembrecojo",
-        component: rolemembrecojo
     },*/
+    {
+        path: "/historique-Marche",
+        name: "historiqueMarche",
+        component: historiqueMarche
+    },
     {
 
         path: "/creation-execution-marche-investissement",

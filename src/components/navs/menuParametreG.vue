@@ -438,11 +438,20 @@
              Role membre Cojo
             </router-link>
           </li>
+           <li class="divider"></li>
            <li>
 
                     <router-link :to="{name: 'ppm'}" tag="a">
                         <i class="icon-list-alt"></i>
                         Importation du PPM
+                    </router-link>
+                </li>
+                 <li class="divider"></li>
+                <li>
+
+                    <router-link :to="{name: 'historiqueMarche'}" tag="a">
+                        <i class="icon-list-alt"></i>
+                        Marchés Global
                     </router-link>
                 </li>
 

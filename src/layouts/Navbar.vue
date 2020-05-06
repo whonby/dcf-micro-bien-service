@@ -99,9 +99,10 @@ export default {
      "getBudgeChager",
      "getAllRealiteServiceFait",
      "getAllLiquidation",
-     "getOrganigrammeUa"
+     "getOrganigrammeUa",
+     "getAllBanqueUa"
     ]),
-            ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons",
+            ...mapActions('personnelUA', ["getpaiementPersonnel",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
             "getClasses","getEchelons","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite","getCategorieGrade",
@@ -231,6 +232,7 @@ this.getTypeAppel()
       // this.getAllTypeTextes();
     this.getAllUniteAdministrative();
      this.getOrganigrammeUa()
+     this.getAllBanqueUa()
     // this.getAllArchivageDocument();
 // this.getAllDirection()
 this.getAllServiceua()
@@ -256,7 +258,7 @@ this.getClassificationGradeFonction()
         this.getConges();
         this.allActeurDepense()
          this.getActeurFinContratAndActivite()
-        
+        this.getpaiementPersonnel()
             /**Gestion des marche*/
             
       this.getTypeMarche()

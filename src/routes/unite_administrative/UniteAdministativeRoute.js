@@ -10,7 +10,7 @@ import budgetGeneralParUa from "../../pages/unites_administratives/budgetGeneral
 import grpeBudgetSection from "../../pages/unites_administratives/grpeBudgetSection.vue"
 import grpeBudgetProgramme from "../../pages/unites_administratives/grpeBudgetProgramme.vue"
 import historiquebudgetGeneralComponent from "../../pages/unites_administratives/historiquebudgetGeneralComponent.vue";
-
+import banqueUa from "../../pages/unites_administratives/banqueUa.vue";
 import uniteZone from "../../pages/unites_administratives/grpeUniteZone/uniteZonePrincipal.vue";
 import transfert from "../../pages/unites_administratives/grpeTransfert/transfertPrincipal.vue";
 import tableaubordTransfert from "../../pages/unites_administratives/tableauBordTransfert.vue";
@@ -27,6 +27,11 @@ import DetailBudgetImporte from "../../pages/budget/DetailBudgetImporte.vue";
 import LigneExempte from "../../pages/unites_administratives/LigneExempte";
 import Organigramme from "../../pages/unites_administratives/organigrammeUa.vue";
 const UniteAdministativeRoutes = [
+  {
+    path: '/Banque',
+    name: "banqueUa",
+    component: banqueUa
+  },
   {
 
     path: '/Organigramme-ua',
