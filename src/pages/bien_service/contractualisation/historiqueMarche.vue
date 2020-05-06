@@ -22,10 +22,10 @@
                 <i class="icon-th"></i>
               </span>
               <h5>Listes des marches</h5>
-              <div align="right">
+              <!-- <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
-              </div>
+              </div> -->
             </div>
             <div class="widget-content nopadding">
               <table class="table table-bordered table-striped">
