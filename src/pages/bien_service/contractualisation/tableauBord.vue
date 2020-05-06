@@ -136,7 +136,7 @@ montantEnPlanification(){
 
 
 montantMarchePrevu(){
-  return this.marches.filter(element => element.type_marche_id == 6).reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_marche), 0)
+  return this.marches.filter(element => element.type_marche_id == 6 || element.type_marche_id == 1).reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_marche), 0)
 },
 
  afficheIdCodeMarche() {
