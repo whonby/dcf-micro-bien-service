@@ -36,7 +36,7 @@
                                 <li class=""><a data-toggle="tab" href="#tab19">Listes des acteurs de depenses   <span class="badge badge-success">{{afficheNombrePersonnelRecuActeNormination}}</span></a> </li>
                                 <li class=""><a data-toggle="tab" href="#tab30">Acteurs non actif</a></li>
                                   <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{0}}</span></a></li>
-                                   <li><a data-toggle="tab" href="#tab208">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li> 
+                                   <!-- <li><a data-toggle="tab" href="#tab208">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li>  -->
                                    <li class=""><a data-toggle="tab" href="#tab301">Gestion des Compte bancaire <span class="badge badge-warning" > {{nombreCompteBancaire}}</span></a></li>
                                   
                             </ul>

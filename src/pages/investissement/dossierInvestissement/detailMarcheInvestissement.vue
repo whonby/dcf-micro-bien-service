@@ -146,7 +146,7 @@
                                 <li class="active"><a data-toggle="tab" href="#tab01">Publication de l'offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab478">Reception des offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab498">Ouverture</a></li>
-                                 <!-- <li class=""><a data-toggle="tab" href="#tab4110">Rapport d'ouverture</a></li> -->
+                                 <li class=""><a data-toggle="tab" href="#tab411">Rapport d'ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab78932">Jugement</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab4110">Rapport Jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab178">Attribution</a></li>
@@ -196,17 +196,20 @@
                   <component-ouverture :macheid="detail_marche.id"></component-ouverture>
                   <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>
                 </div>
- <!-- <div id="tab4100" class="tab-pane">
+
+
+                 <div id="tab411" class="tab-pane">
                <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterMP" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
                     </div>
 
 
                 </div>
-                <component-analyse :macheid="detail_marche.id"></component-analyse>
+                <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
 
-                </div> -->
+                </div>
+
                    <div id="tab78932" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
@@ -257,8 +260,8 @@
                                 <li class=""><a data-toggle="tab" href="#tab21230">Le mandaté</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab1235">Reception des offres</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab78477">Ouverture des offres</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab41011">Rapport d'ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab7845">D.Candidats</a></li>
-                                <!-- <li class=""><a data-toggle="tab" href="#tab101">Rapport d'ouverture</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tab9563"> Jugement des offres </a></li>
                                 <li class=""><a data-toggle="tab" href="#tab06125">Rapport d'évaluation</a></li>
                                <li class=""><a data-toggle="tab" href="#tab067458">Attribution de l'Offre</a></li>
@@ -337,6 +340,21 @@
                   <component-ouverture1 :macheid="detail_marche.id"></component-ouverture1>
                   <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>
                 </div>
+
+
+                    <div id="tab41011" class="tab-pane">
+               <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                    </div>
+
+
+                </div>
+                <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
+
+                </div>
+
+
                  <div id="tab7845" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
@@ -377,6 +395,7 @@
                     </div>
 
 
+
                 </div>
                 <component-acte :macheid="detail_marche.id"></component-acte>
 
@@ -398,8 +417,8 @@
                                 <li class=""><a data-toggle="tab" href="#tab04">Le mandaté</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab051">Reception des offres</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab784">Ouverture des offres</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab410131">Rapport d'ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab7884">D.Candidats</a></li>
-                                <!-- <li class=""><a data-toggle="tab" href="#tab101">Rapport d'ouverture</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tab5498"> Jugement des offres </a></li>
                                 <li class=""><a data-toggle="tab" href="#tab0612">Rapport d'évaluation</a></li>
                                <li class=""><a data-toggle="tab" href="#tab06745">Attribution de l'Offre</a></li>
@@ -478,6 +497,24 @@
                   <component-ouverture1 :macheid="detail_marche.id"></component-ouverture1>
                   <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>
                 </div>
+
+
+
+
+                   <div id="tab410131" class="tab-pane">
+               <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                    </div>
+
+
+                </div>
+                <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
+
+                </div>
+
+
+
                 
                  <div id="tab7884" class="tab-pane">
                 <div align="right">
@@ -745,20 +782,20 @@
 
                 </div>
 
-
+ 
 
 
 
                         <div id="tab1" class="tab-pane">
-                       <!-- <div align="right">
+                       <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" v-if="listeAvisAnoBailleur(macheid)">Ajouter</a>
-                          <button class="btn btn-warning"  title="veillez recommencer l'analyse , car l'Avis ANO Bailleur est Objection" disabled v-else  >Ajouter</button>
+                          <button class="btn btn-warning"  title="veillez recommencer le jugement , car l'Avis  Bailleur est Objection" disabled v-else  >Ajouter</button>
                    
                     </div>
 
 
-                </div> -->
+                </div>
                 <component-acte :macheid="detail_marche.id"></component-acte>
 
                 </div>
@@ -967,16 +1004,16 @@ return "Appel d'Offre Ouvert(AON ou AOI)"
 
 
 
-//  listeAvisAnoBailleur(){
-//        return id =>{
-//            if(id!=null && id!=""){
-//                const resultatAvis = this.getterAnoDMPBailleur.find(idDemande =>idDemande.marche_id==id
-//                && idDemande.avis_bail== 0)
-//                return resultatAvis
-//            }
-//            return null
-//        }
-//    },
+ listeAvisAnoBailleur(){
+       return id =>{
+           if(id!=null && id!=""){
+               const resultatAvis = this.getterAnoDMPBailleur.find(idDemande =>idDemande.marche_id==id
+               && idDemande.avis_bail== 0)
+               return resultatAvis
+           }
+           return null
+       }
+   },
 
   afficherCodeTypeProcedure() {
       return id => {
