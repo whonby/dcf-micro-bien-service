@@ -1,4 +1,4 @@
-
+afficherModalAjouterTitre
 <template>
   <div>
    
@@ -22,10 +22,10 @@
                 <i class="icon-th"></i>
               </span>
               <h5>Listes des marches</h5>
-              <div align="right">
+              <!-- <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
-              </div>
+              </div> -->
             </div>
             <div class="widget-content nopadding">
               <table class="table table-bordered table-striped">
@@ -128,11 +128,8 @@
       </div>
     </div>
 
-    <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab>
- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTitre()">Open</button>
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-<!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
-<notifications  />
+   
+    
   </div>
 </template>
   

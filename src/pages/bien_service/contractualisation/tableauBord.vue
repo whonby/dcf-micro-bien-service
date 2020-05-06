@@ -101,7 +101,7 @@ afficheMarcheEnPlanification(){
 return this.afficherLaListeDesMarche.filter(element => element.attribue == 0)
 },
 afficherLaListeDesMarche(){
-return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4)
+return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
 },
 nombreDeMarche(){
   return this.afficherLaListeDesMarche.length;
@@ -115,7 +115,7 @@ nombreDeMarcheEnContratualisation(){
  },
  
   afficheMarcheResilier(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 4)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 4 )
 },
     nbreMarcheExecuter(){
   return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.afficheCodeTypeMarche(recuper.marche.type_marche_id) == 4).length
@@ -136,7 +136,7 @@ montantEnPlanification(){
 
 
 montantMarchePrevu(){
-  return this.marches.filter(element => element.type_marche_id == 6).reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_marche), 0)
+  return this.marches.filter(element => element.type_marche_id == 6 || element.type_marche_id == 1 ).reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_marche), 0)
 },
 
  afficheIdCodeMarche() {

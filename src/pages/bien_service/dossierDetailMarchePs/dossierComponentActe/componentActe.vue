@@ -97,6 +97,7 @@ afficherBanqueDynamique
                         
                         </div>
                     </div>
+
                             </td>
 
                             <td>
@@ -397,7 +398,7 @@ afficherBanqueDynamique
                            <div class="control-group">
                         <label class="control-label">Banque.</label>
                         <div class="controls">
-                          <select v-model="editActeEffetFinancier.banq_id" class="span" :readOnly="verifiBanqueExist">
+                          <select v-model="editActeEffetFinancier.banq_id" class="span" :readOnly="verifiBanqueExistModifier">
                                <option v-for="varText in afficherBanqueDynamiqueId(formEffetFinancier.entreprise_id)" :key="varText.id"
                                         :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                             </select>
@@ -855,9 +856,11 @@ afficherEntrepriseRecep () {
             // afficher la banque dynamique
 
             verifiBanqueExist(){
-                return this.formEffetFinancier.entreprise_id ==undefined;
+                return this.formEffetFinancier.entreprise_id =="";
             },
-
+         verifiBanqueExistModifier(){
+                return this.editActeEffetFinancier.entreprise_id =="";
+            },
 
             afficherBanqueDynamique(){
                 return id =>{

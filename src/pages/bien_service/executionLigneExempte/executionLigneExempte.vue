@@ -28,8 +28,8 @@
                         <label class="control-label">Entreprise.</label>
                         <div class="controls">
                           <select v-model="editActeEffetFinancier.entreprise_id" class="span4">
-                                <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
-                                        :value="varText.entreprise_id">{{affichierNomEntreprise(varText.entreprise_id)}}</option>
+                               <option v-for="varText in entreprises" :key="varText.id"
+                                        :value="varText.id">{{varText.raison_sociale}}</option>
                             </select>
                         
                         </div>
@@ -317,8 +317,8 @@
                         <label class="control-label">Entreprise.</label>
                         <div class="controls">
                           <select v-model="formEffetFinancier.entreprise_id" class="span4">
-                                <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
-                                        :value="varText.entreprise_id">{{affichierNomEntreprise(varText.entreprise_id)}}</option>
+                                <option v-for="varText in entreprises" :key="varText.id"
+                                        :value="varText.id">{{varText.raison_sociale}}</option>
                             </select>
                         
                         </div>
@@ -330,7 +330,7 @@
                         <label class="control-label">Banque.</label>
                         <div class="controls">
                           <select v-model="formEffetFinancier.banq_id" class="span4" :readOnly="verifiBanqueExist">
-                               <option v-for="varText in afficherBanqueDynamiqueId(formEffetFinancier.entreprise_id)" :key="varText.id"
+                                 <option v-for="varText in afficherBanqueDynamiqueId(formEffetFinancier.entreprise_id)" :key="varText.id"
                                         :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                             </select>
                         
@@ -1010,15 +1010,15 @@ getDateFinExécutionValueEdit(){
               
 
               ajouterModalActeEffetFinancierLocal(){
-       /* var nouvelObjet = {
+       var nouvelObjet = {
             ...this.formEffetFinancier,
             duree: this.nombreDejourCalcule
-        }*/
+        }
     //let entreprisePremier=this.entreprises.find(item=>item.numero_rc==rcm)
              
     this.formEffetFinancier.marche_id=this.macheid
     //this.formEffetFinancier.entreprise_id=entreprisePremier.id
-    this.ajouterActeEffetFinancier(this.formEffetFinancier)
+    this.ajouterActeEffetFinancier(nouvelObjet)
     let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
     marcheObjet.attribue = 2
     marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
