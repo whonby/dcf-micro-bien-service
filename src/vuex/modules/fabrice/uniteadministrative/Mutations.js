@@ -481,7 +481,31 @@ const SUPPRIMER_ORGANIGRAMME_UA = (state, id) => {
   state.organigrammeUa = state.organigrammeUa.filter(type => type.id != id);
 };
 
+export const GET_ALL_BANQUE_UA = (state, tableauBanqueUa) => {
+  state.banqueUa = tableauBanqueUa;
+};
 
+// ajouter type_textes
+export const AJOUTER_BANQUE_UA = (state, nouveau_banqueUa) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.banqueUa.unshift(nouveau_banqueUa);
+};
+
+// modifier type_textes
+export const MODIFIER_BANQUE_UA = (state, objetModifie) => {
+  state.banqueUa = state.banqueUa.map(type => {
+    if (type.id == objetModifie.id) {
+      type = { ...objetModifie };
+    }
+
+    return type;
+  });
+};
+
+// supprimer type_texte
+export const SUPPRIMER_BANQUE_UA = (state, id) => {
+  state.banqueUa = state.banqueUa.filter(type => type.id != id);
+};
 export {
 
   GET_ALL_ORGANIGRAMME_UA,

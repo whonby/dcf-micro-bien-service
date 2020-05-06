@@ -20,7 +20,7 @@ const uniteAdministratives = state =>
 //   state.fonctionsua.sort((a, b) => (a.id > b.id ? 1 : -1));
 
 
-
+export const banqueUa = state => state.banqueUa;
 export const nombreUniteAdministratives = state =>
   state.uniteAdministratives.length;
 export const nombreArchivageDocument = state => state.archivageDocuments.length;

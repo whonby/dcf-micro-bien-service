@@ -28,6 +28,8 @@ const defaultstate = {
     fonctionBudgetaire:[],
     dossierPersonnels: [],
     situation_matrimonial:[],
+    paiementPersonnel: [],
+
     contrat_resilie:[]
     
 

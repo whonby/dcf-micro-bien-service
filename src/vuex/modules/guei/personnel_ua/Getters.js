@@ -28,6 +28,7 @@ const totalActeurDepense =state => state.all_acteur_depense.length;
 const totalActeurNonAccredite =state =>(state.acte_personnels.filter(acteur_depense=>acteur_depense.type_acte_id!='4' && acteur_depense.date_fin_contrat==null ).length);
 const totalActeurAccredite =state =>(state.acte_personnels.filter(acteur_depense=>acteur_depense.type_acte_id=='4' && acteur_depense.date_fin_contrat==null).length);
 const tauxActeurAccredite= (state,getters )=> parseFloat((getters.totalActeurAccredite*100)/getters.totalActeurEnctivite).toFixed(2);
+export const paiementPersonnel = state => state.paiementPersonnel;
 
 export const categorieGrade = state =>
   state.categorieGrade.sort((a, b) => (a.id > b.id ? 1 : -1));

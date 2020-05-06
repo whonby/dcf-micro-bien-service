@@ -1,3 +1,46 @@
+
+/**
+ * Mutation echelons
+ */
+/**
+ *
+ * @param state
+ * @param data
+ * @constructor
+ */
+const GET_PAIEMENTPERSONNEL = (state, data) => {
+    state.paiementPersonnel = data
+}
+
+
+const AJOUTER_PAIEMENTPERSONNEL = (state, nouvel_objet) => {
+    state.paiementPersonnel.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+}
+
+/**
+ * Suppresions
+ * @param state
+ * @param id
+ * @constructor
+ */
+const SUPPRIMER_PAIEMENTPERSONNEL = (state, id) => {
+    state.paiementPersonnel = state.paiementPersonnel.filter(paiementPerso => paiementPerso.id != id)
+}
+
+
+const MODIFIER_PAIEMENTPERSONNEL = (state, objetModifie) => {
+    state.paiementPersonnel = state.paiementPersonnel.map(paiementPerso => {
+        if (paiementPerso.id == objetModifie.id) {
+            paiementPerso = { ...objetModifie }
+        }
+        return paiementPerso
+    })
+}
+
+/**
+
+
 /**
  * Mutation type act personnel
  */
@@ -724,6 +767,7 @@ const MODIFIER_CLASSIFICATION_GRADE_FONCTION = (state, objetModifie) => {
 
 
 
+
 const GET_FONCTION_BUDGETAIRE = (state, data) => {
     state.fonctionBudgetaire = data
 }
@@ -800,6 +844,10 @@ const MODIFIER_SITUATION_MATRIMONIAL = (state, objetModifie) => {
 
 export {
     
+    GET_PAIEMENTPERSONNEL,
+    AJOUTER_PAIEMENTPERSONNEL,
+    SUPPRIMER_PAIEMENTPERSONNEL,
+    MODIFIER_PAIEMENTPERSONNEL,
     GET_SITUATION_MATRIMONIAL,
     AJOUTER_SITUATION_MATRIMONIAL,
     SUPPRIMER_SITUATION_MATRIMONIAL,
