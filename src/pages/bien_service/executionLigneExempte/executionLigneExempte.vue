@@ -41,8 +41,8 @@
                         <label class="control-label">Banque.</label>
                         <div class="controls">
                           <select v-model="editActeEffetFinancier.banq_id" class="span4" :readOnly="verifiBanqueExist">
-                               <option v-for="varText in banques" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle}}</option>
+                               <option v-for="varText in afficherBanqueDynamiqueId(editActeEffetFinancier.entreprise_id)" :key="varText.id"
+                                        :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                             </select>
                         
                         </div>
@@ -330,8 +330,8 @@
                         <label class="control-label">Banque.</label>
                         <div class="controls">
                           <select v-model="formEffetFinancier.banq_id" class="span4" :readOnly="verifiBanqueExist">
-                               <option v-for="varText in banques" :key="varText.id"
-                                        :value="varText.id">{{varText.libelle}}</option>
+                                 <option v-for="varText in afficherBanqueDynamiqueId(formEffetFinancier.entreprise_id)" :key="varText.id"
+                                        :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                             </select>
                         
                         </div>
