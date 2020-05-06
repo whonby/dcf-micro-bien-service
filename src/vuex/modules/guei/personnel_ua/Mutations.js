@@ -210,6 +210,35 @@ export const SUPPRIMER_DOSSIER_CANDIDAT = (state, id) => {
     state.dossierPersonnels = state.dossierPersonnels.filter( response => response.id !=id)
 }
 
+
+
+
+
+export const GET_ALL_CONTRAT_RESILIE =(state, tableau_contrat_resilie) => {
+    state.contrat_resilie = tableau_contrat_resilie
+}
+
+export const AJOUTER_CONTRAT_RESILIE = (state, elementAjout) => {
+    state.contrat_resilie.unshift(elementAjout)
+   
+}
+
+
+export const MODIFIER_CONTRAT_RESILIE = (state, elementModifie) => {
+    state.contrat_resilie= state.contrat_resilie.map( item =>{
+        if(item.id == elementModifie.id){
+            item ={...elementModifie}
+        }
+        return item
+    })
+    
+}
+
+
+export const SUPPRIMER_CONTRAT_RESILIE = (state, id) => {
+    state.contrat_resilie = state.contrat_resilie.filter( response => response.id !=id)
+}
+
 /**
  * Mutation niveau etude
  */

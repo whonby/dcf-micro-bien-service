@@ -345,9 +345,9 @@
                                
                                <li ><a data-toggle="tab" href="#tab100">Contrat Planifiés <span class="badge badge-important" > {{nombreContratEnPlanification}}</span></a></li>
                                 <li ><a data-toggle="tab" href="#tab10"> Contrat en cours Contratualisation<span class="badge badge-success" >{{nombreContratEnContratualisation}}</span></a></li>
-                                <li><a data-toggle="tab" href="#tab20">Contrat en Exécution<span class="badge badge-warning" > {{nbreMarcheContrat}}</span></a></li>
+                                <!-- <li><a data-toggle="tab" href="#tab20">Contrat en Exécution<span class="badge badge-warning" > {{nbreMarcheContrat}}</span></a></li>
                                  <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{afficheNombreMarcheResilier}}</span></a></li>
-                                  <li><a data-toggle="tab" href="#tab208">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li>
+                                  <li><a data-toggle="tab" href="#tab208">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li> -->
                                 
                             </ul>
                         </div>
@@ -493,6 +493,7 @@
                      <!-- <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td> -->
                   
+
                    <td>
                      <button 
                       v-if="marche.attribue == 2"  class="btn  btn-warning">
@@ -2125,9 +2126,9 @@ return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
         }
       };
     },
-    nbreMarcheContrat(){
-  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.affichertypeMarcheEx(recuper.marche.type_marche_id) == 2).length
-},
+//     nbreMarcheContrat(){
+//   return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.affichertypeMarcheEx(recuper.marche.type_marche_id) == 2).length
+// },
 
 afficheParMarcheEnExecution(){
 return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
@@ -2153,9 +2154,9 @@ return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
 },
 
 
-afficheNombreMarcheResilier(){
-return this.afficheMarcheResilier.filter(element => element.indicateur_resilie !="").length
-},
+// afficheNombreMarcheResilier(){
+// return this.afficheMarcheResilier.filter(element => element.indicateur_resilie !="").length
+// },
 
 
 

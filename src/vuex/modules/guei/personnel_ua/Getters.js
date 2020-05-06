@@ -39,6 +39,8 @@ export const familleFonction = state =>
 //export const familleFonction = state => state.familleFonction;
 export const classificationGradeFonction = state => state.classificationGradeFonction;
 
+export const contrat_resilie = state => state.contrat_resilie
+
 export const fonctionBudgetaire = state =>
     state.fonctionBudgetaire.sort((a, b) => (a.id > b.id ? 1 : -1));
 

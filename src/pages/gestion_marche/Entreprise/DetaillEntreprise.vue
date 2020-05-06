@@ -709,6 +709,7 @@ afficherCodeRib(){
 
      return ""
    },
+   
 afficherCodeRibEditCompte(){
       //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
     
