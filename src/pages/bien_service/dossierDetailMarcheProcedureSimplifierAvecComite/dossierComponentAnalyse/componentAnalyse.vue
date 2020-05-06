@@ -86,17 +86,25 @@
                         </div>
                         </div>
                             </td>
-                            <!-- <td>
+                            <td>
                      <div class="control-group">
-                        <label class="control-label">Dossier candidat</label>
+                        <label class="control-label">Numero du dossier</label>
                         <div class="controls">
-                            <select v-model="formAnalyseDossier.dossier_candidat_id" class="span">
+                            <!-- <select v-model="formAnalyseDossier.dossier_candidat_id" class="span">
                                 <option v-for="plans in dossierCandidature(macheid)" :key="plans.id"
                                         :value="plans.id">{{plans.nom_cand}}</option>
-                            </select>
+                            </select> -->
+
+                             <input
+                                    type="text"
+                                    :value="afficherNumeroDossierCandidat(macheid)"
+                                    class="span"
+                                       readonly
+                            />
+
                         </div>
                     </div>
-                            </td> -->
+                            </td>
 
 <!-- 
                      <td>
@@ -112,7 +120,7 @@
                     </div>
                             </td> -->
 
-                              <td colspan="2">
+                              <td colspan="">
                         <div class="control-group">
                         <label class="control-label">Type analyse</label>
                         <div class="controls">
@@ -450,6 +458,20 @@ affichierAppelOffreid() {
         }
       };
     },
+
+    
+      afficherNumeroDossierCandidat() { 
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterDossierCandidats.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.numero_dossier;
+      }
+      return 0
+        }
+      };
+    },
     
     //  listeAppel() {
     //   return id => {
@@ -473,10 +495,31 @@ affichierAppelOffreid() {
 //                 return macheid => {
 //                     if (macheid != "") {
 //                       //  console.log("Marche dossier candidat")
-//                         return this.getterDossierCandidats.filter(idmarche => idmarche.appel_offre.macheid == macheid)
+//                        let  objetNumero= this.getterDossierCandidats.filter(idmarche => idmarche.marche_id == macheid)
+
+//                        if(objetNumero){
+//                            return objetNumero.numero_dossier
+//                        }
+//                        return null
 //                     }
 //                 }
 //             },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             // listeCojo: function () {
             //     return macheid => {
             //         if (macheid != "") {
