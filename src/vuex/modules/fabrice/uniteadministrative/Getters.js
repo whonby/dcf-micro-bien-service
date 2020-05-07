@@ -154,7 +154,7 @@ export const getPersonnaliseBudgetGeneral = (
 
 export const afficheBienEtService = state =>
   state.budgetGeneral.filter(
-    affichenaturedep => affichenaturedep.testgdenature == 2
+    affichenaturedep => affichenaturedep.gdenature_id == 5 || affichenaturedep.gdenature_id == 6
   );
 
 
@@ -234,7 +234,7 @@ export const groupgranNaturePersonnel = (state, getters) => {
 
 export const affichePersonnel = state =>
   state.budgetGeneral.filter(
-    affichenaturedep => affichenaturedep.testgdenature == 1
+    affichenaturedep => affichenaturedep.gdenature_id == 2
   );
 
 
@@ -306,7 +306,7 @@ export const groupgranNatureInvestissement = (state, getters) => {
 
 export const afficherInvestissement = state =>
   state.budgetGeneral.filter(
-    affichenaturedep => affichenaturedep.testgdenature == 4
+    affichenaturedep => affichenaturedep.gdenature_id == 7
   );
 
 

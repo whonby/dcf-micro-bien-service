@@ -1012,7 +1012,9 @@ getDateFinExécutionValueEdit(){
               ajouterModalActeEffetFinancierLocal(){
        var nouvelObjet = {
             ...this.formEffetFinancier,
-            duree: this.nombreDejourCalcule
+            duree: this.nombreDejourCalcule,
+            	marche_id:this.macheid
+
         }
     //let entreprisePremier=this.entreprises.find(item=>item.numero_rc==rcm)
              
