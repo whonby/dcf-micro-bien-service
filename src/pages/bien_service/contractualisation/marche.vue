@@ -2686,7 +2686,7 @@ this.formData = {
         keyboard: false
       });
 
-      this.editMarche = this.marches[index];
+      this.editMarche = this.afficherLaListeDesMarche[index];
     },
     // fonction pour vider l'input modification
     modifierModalTypeprestationLocal(){
