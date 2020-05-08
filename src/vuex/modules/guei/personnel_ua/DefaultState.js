@@ -3,7 +3,7 @@ const defaultstate = {
     fonctions: [],
     classes: [],
     echellons: [],
-    paiementPersonnel:[],
+    // paiementPersonnel:[],
     grades: [],
     niveau_etudes: [],
     type_salaries: [],
