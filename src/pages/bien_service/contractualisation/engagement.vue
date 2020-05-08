@@ -1,4 +1,5 @@
- 
+ Choisir le type de procedure
+ Ajouter Engagement
 <template>
   	<div>
 
@@ -4221,12 +4222,13 @@
                             <div class="control-group">
                               <label class="control-label">Numéro compte</label>
                               <div class="controls">
-                               <select v-model="formData.compte_id" class="span4">
+                               <!-- <select v-model="formData.compte_id" class="span4">
                                 <option
                                   v-for="affiche in afficherCompteUtilisateur1(this.NumeroFournisseur_id)" :key="affiche.id"
                                   :value="affiche.id"
                                 >{{affiche.rib}}</option>
-                              </select>
+                              </select> -->
+                               <input type="text" class="span4" :value="afficheCompteFour(afficheCompteFournisseur(this.NumeroFournisseur_id))" readonly/>
                               </div>
                             </div>
                           </td>
@@ -9174,8 +9176,30 @@ afficherCompteUtilisateur1: function () {
                 }
             },
 
+afficheCompteFournisseur() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getActeEffetFinancierPersonnaliser.find(qtreel => qtreel.entreprise_id == id);
 
+      if (qtereel) {
+        return qtereel.compte_id;
+      }
+      return 0
+        }
+      };
+    },
+afficheCompteFour() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.comptes.find(qtreel => qtreel.entrepse_id == id);
 
+      if (qtereel) {
+        return qtereel.rib;
+      }
+      return 0
+        }
+      };
+    },
 
 
 

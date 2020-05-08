@@ -135,7 +135,7 @@ afficherModalAjouterTitre
   
 <script>
  import { mapGetters, mapActions } from "vuex";
- import { formatageSomme } from "../../../../src/Repositories/Repository";
+ import { formatageSomme } from "../../../src/Repositories/Repository";
 export default {
   name:'type facture',
   data() {
