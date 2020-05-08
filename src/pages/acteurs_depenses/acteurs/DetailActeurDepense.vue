@@ -1,4 +1,4 @@
-
+afficheCompteEntreprise(acteurDetail.id)
 <template>
     <div>
 
@@ -83,7 +83,7 @@
                                         <li class=""><a data-toggle="tab" href="#tab3">Toutes les rémunérations</a></li>
                                         <li class=""><a data-toggle="tab" href="#tab4">Tous les conges</a></li>
                                          <li class=""><a data-toggle="tab" href="#tab5">Historique de mission par acteur</a></li>
-                                         <li class=""><a data-toggle="tab" href="#tab301">Gestion des Compte bancaire <span class="badge badge-warning" > {{nombreCompteBancaire}}</span></a></li>
+                                         <li class=""><a data-toggle="tab" href="#tab301">Gestion des Compte bancaire </a></li>
                                     </ul>
                                 </div>
                                 <div class="widget-content tab-content">
@@ -906,7 +906,7 @@
                    </tr>
                    </thead>
                    <tbody>
-                   <tr class="odd gradeX" v-for="(appelOffre, index) in afficheCompteEntreprise"
+                   <tr class="odd gradeX" v-for="(appelOffre, index) in afficheCompteEntreprise(acteurDetail.id)"
                                         :key="appelOffre.id">
 
                                         <td @dblclick="afficherModalCompteBancaire(index)">
@@ -1781,14 +1781,19 @@ afficherCodeRib(){
 
 
 afficheCompteEntreprise() {
+    return id =>{
+        if(id!=null && id!=""){
+          return this.getCompte.filter( element => element.acteur_depense_id==id );
+        }
+    }
          
-    return this.getCompte.filter( element => element.attribue==1 );
+   
     },
 
 
- nombreCompteBancaire(){
-        return this.getCompte.filter( element => element.attribue==1 ).length
-    },
+//  nombreCompteBancaire(){
+//         return this.getCompte.filter( element => element.attribue==1 ).length
+//     },
 
 
 

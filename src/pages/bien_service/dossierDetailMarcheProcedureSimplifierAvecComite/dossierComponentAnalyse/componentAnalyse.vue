@@ -10,13 +10,14 @@
                     <thead>
                     <tr>
                         <!-- <th>Ref offre</th> -->
-                        <!-- <th>Dossier candidat </th> -->
+                       
                         <th>Date Analyse </th>
                         <th>Rang d'analyse</th>
                         <th>Note</th>
+                         <th>Numero dossier Candidat</th>
+                         <th> Montant Offre financiere</th>
                         <th>Type d'analyse</th>
-                        <!-- <th>Controller finnancier</th> -->
-                        <!--<th>Avis</th>-->
+                       
 
                         <th>Action</th>
                     </tr>
@@ -37,6 +38,14 @@
                             {{appelOffre.rang_analyse || 'Non renseigné'}}</td>
                             <td @click="afficheAnnalyseDossier(index)">
                             {{appelOffre.note_analyse || 'Non renseigné'}}</td>
+                       
+                              <td @click="afficheAnnalyseDossier(index)">
+                            {{afficherNumeroDossierCandidat1(appelOffre.dossier_candidat_id) || 'Non renseigné'}}</td>
+
+                             <td @click="afficheAnnalyseDossier(index)">
+                            {{formatageSomme(parseFloat(afficherListeMontant(afficherOffrefID(appelOffre.dossier_candidat_id)))) || 'Non renseigné'}}</td>
+
+
                         <td @click="afficheAnnalyseDossier(index)">
                             {{appelOffre.type_analyse.libelle || 'Non renseigné'}}</td>
                         <!-- <td @click="afficheAnnalyseDossier(index)">
@@ -90,35 +99,37 @@
                      <div class="control-group">
                         <label class="control-label">Numero du dossier</label>
                         <div class="controls">
-                            <!-- <select v-model="formAnalyseDossier.dossier_candidat_id" class="span">
-                                <option v-for="plans in dossierCandidature(macheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.nom_cand}}</option>
-                            </select> -->
+                             <select v-model="formAnalyseDossier.dossier_candidat_id" class="span">
+                                <option v-for="plans in afficherNumeroDossierCandidatMenuDeroulant(macheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.numero_dossier}}</option>
+                            </select>
 
-                             <input
+                             <!-- <input
                                     type="text"
                                     :value="afficherNumeroDossierCandidat(macheid)"
                                     class="span"
                                        readonly
-                            />
+                            /> -->
 
                         </div>
                     </div>
                             </td>
 
-<!-- 
+
                      <td>
                        
                     <div class="control-group">
-                        <label class="control-label">Controleur financier</label>
+                        <label class="control-label">Offre Financiere</label>
                         <div class="controls">
-                            <select v-model="formAnalyseDossier.cojo_id" class="span">
-                                <option v-for="plans in listeCojo(macheid)" :key="plans.id"
+                            <!-- <select v-model="formAnalyseDossier.cojo_id" class="span" :readOnly="verifiBanqueExist">
+                                <option v-for="plans in afficherMontant(formAnalyseDossier.dossier_candidat_id)" :key="plans.id"
                                         :value="plans.id">{{plans.controleur_finnancier}}</option>
-                            </select>
+                            </select> -->
+                            <input type="text" :value="afficherMontant(formAnalyseDossier.dossier_candidat_id)" readonly>
                         </div>
                     </div>
-                            </td> -->
+                            </td>
+
 
                               <td colspan="">
                         <div class="control-group">
@@ -175,6 +186,7 @@
                                    class="span"
                                    placeholder="date"
                             />
+                            <input type="hidden" v-model="formAnalyseDossier.difference_personnel_bienService">
                         </div>
                     </div>
                             </td>
@@ -216,31 +228,41 @@
                         </div>
                         </div>
                           </td>
-                          <!-- <td>
+                          <td>
                     <div class="control-group">
                         <label class="control-label">Dossier candidat</label>
                         <div class="controls">
-                            <select v-model="edite_analyse_dossier.dossier_candidat_id" class="span">
-                                <option v-for="plans in dossierCandidature(macheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.nom_cand}}</option>
+
+                             <select v-model="edite_analyse_dossier.dossier_candidat_id" class="span">
+                                <option v-for="plans in afficherNumeroDossierCandidatMenuDeroulant(macheid)" :key="plans.id"
+                                        :value="plans.id">{{plans.numero_dossier}}</option>
                             </select>
+
+                            <!-- <input
+                                    type="text"
+                                    :value="afficherNumeroDossierCandidat(macheid)"
+                                    class="span"
+                                       readonly
+                            /> -->
                         </div>
                     </div>
-                          </td> -->
+                          </td>
 
                           
-                          <!-- <td>
-
+                        <td>
+                       
                     <div class="control-group">
-                        <label class="control-label">Controleur financier</label>
+                        <label class="control-label">Offre Financiere</label>
                         <div class="controls">
-                            <select v-model="edite_analyse_dossier.cojo_id" class="span">
-                                <option v-for="plans in listeCojo(macheid)" :key="plans.id"
+                            <!-- <select v-model="formAnalyseDossier.cojo_id" class="span" :readOnly="verifiBanqueExist">
+                                <option v-for="plans in afficherMontant(formAnalyseDossier.dossier_candidat_id)" :key="plans.id"
                                         :value="plans.id">{{plans.controleur_finnancier}}</option>
-                            </select>
+                            </select> -->
+                            <input type="text" :value="afficherMontant(edite_analyse_dossier.dossier_candidat_id)" readonly>
                         </div>
                     </div>
-                          </td> -->
+                            </td>
+
                           <td colspan="2">
                     <div class="control-group">
                         <label class="control-label">Type analyse</label>
@@ -295,6 +317,7 @@
                                    class="span"
                                    placeholder=""
                             />
+                            <input type="hidden" v-model="edite_analyse_dossier.difference_personnel_bienService">
                         </div>
                     </div>
                           </td>
@@ -322,6 +345,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import {formatageSomme} from '../../../../../src/Repositories/Repository';
 import moment from 'moment';
 export default {
     
@@ -332,9 +356,9 @@ export default {
                         // appel_offre_id:"",
                         rang_analyse:"",
                      appel_offre_id:"",
-                       // motif:"",
+                       difference_personnel_bienService:"bienservice",
                         note_analyse:"",
-                        // dossier_candidat_id:"",
+                       dossier_candidat_id:"",
                         type_analyse_id: "",
                         // cojo_id:""
             },
@@ -370,54 +394,8 @@ export default {
             }
         },
             
-            // listeAppelOffre(){
-            //     return  macheid=>{
-            //         if (macheid!="") {
-            //             //console.log("Marche appel offre")
-            //            const vM=this;
-            //             let Objet=this.gettersCotations.find( idmarche => idmarche.marche_id == macheid)
-            //            // console.log("Marche appel offre 10")
-            //             if(Objet!=undefined){
-            //                 //vM.formDossierCadidature.appel_offre_id=Objet.id;
-            //                 vM.formAnalyseDossier.appel_offre_id = Objet.id;
-            //                // vM.formLot.appel_offre_id=Objet.id;
-            //                // vM.formAno.appel_offre_id = Objet.id
-            //                // vM.formLettre.appel_offre_id=Objet.id;
-            //                // vM.formDataCojo.num_dossier_appel_offre=Objet.ref_appel;
-            //             }
-            //            // console.log(Objet)
-            //         return this.gettersCotations.filter( idmarche => idmarche.marche_id == macheid)
-            //         }
-            //     }
-            // },
-//               listeAppelOffre() {
-//       return id => {
-//         if (id != null && id != "") {
-//            const qtereel = this.gettersCotations.find(qtreel => qtreel.id == id);
-
-
-//       if (qtereel) {
-//         return qtereel.ref_offre;
-//       }
-
-//       return 0
-//         }
-//       };
-//     },
+            
     
-    
-// listeAppelOffreId() {
-//       return id => {
-//         if (id != null && id != "") {
-//            const qtereel = this.gettersCotations.find(qtreel => qtreel.marche_id == id);
-
-//       if (qtereel) {
-//         return qtereel.id;
-//       }
-//       return 0
-//         }
-//       };
-//     },
  affichierReferenceOffre() {
       return id => {
         if (id != null && id != "") {
@@ -432,6 +410,59 @@ export default {
     },
 
 
+
+       afficherMontant(){
+     return id => {
+       if( id !== undefined) {
+    var acteur = this.getterOffreFinanciers.find(acteur => acteur.dossier_candidat_id == id)
+    
+     return  (acteur) ? acteur.montant_total_ttc :null 
+       }
+    return null
+     }
+  
+   },
+
+
+    afficherListeMontant(){
+     return id => {
+       if( id !== undefined) {
+    var acteur = this.getterOffreFinanciers.find(acteur => acteur.id == id)
+    
+     return  (acteur) ? acteur.montant_total_ttc :null 
+       }
+    return null
+     }
+  
+   },
+
+
+   // afficher le montant
+     afficherOffrefID() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterOffreFinanciers.find(qtreel => qtreel.dossier_candidat_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+ 
+          
+
+
+            //  afficherMontant(){
+            //     return id =>{
+            //         if(id != null && id !=""){
+            //           return this.getterOffreFinanciers.filter(element => element.dossier_candidat_id== id)
+                        
+
+            //         }
+            //     }
+            // },
 
 
       affichierReferenceAppelOffre() {
@@ -459,19 +490,60 @@ affichierAppelOffreid() {
       };
     },
 
-    
-      afficherNumeroDossierCandidat() { 
+
+ afficherNumeroDossierCandidatMenuDeroulant() { 
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getterDossierCandidats.find(qtreel => qtreel.marche_id == id);
+           return this.getterDossierCandidats.filter(qtreel => qtreel.marche_id == id);
+        }
+      };
+    },
+
+
+
+
+    
+    //   afficherNumeroDossierCandidat() { 
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.getterDossierCandidats.find(qtreel => qtreel.marche_id == id);
+
+    //   if (qtereel) {
+    //     return qtereel.numero_dossier;
+    //   }
+    //   return null
+    //     }
+    //   };
+    // },
+
+
+     afficherNumeroDossierCandidat1() { 
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterDossierCandidats.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.numero_dossier;
       }
-      return 0
+      return null
         }
       };
     },
+
+// afficher Id Dossier candidat
+
+    //  afficherIdDossierCandidat() { 
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.getterDossierCandidats.find(qtreel => qtreel.marche_id == id);
+
+    //   if (qtereel) {
+    //     return qtereel.id;
+    //   }
+    //   return null
+    //     }
+    //   };
+    // },
     
     //  listeAppel() {
     //   return id => {
@@ -536,7 +608,8 @@ affichierAppelOffreid() {
                    var nouvelObjet ={
                        ...this.formAnalyseDossier,
                        marche_id:this.macheid,
-                        appel_offre_id :this.affichierAppelOffreid(this.macheid)
+                        appel_offre_id :this.affichierAppelOffreid(this.macheid),
+                     dossier_candidat_id: this.afficherOffrefID(this.macheid)
                    }
               this.ajouterAnalyseDossier(nouvelObjet)
                 this.formAnalyseDossier={
@@ -544,7 +617,7 @@ affichierAppelOffreid() {
                         //appel_offre_id:"",
                         rang_analyse:"",
                      appel_offre_id:"",
-                       // motif:"",
+                     difference_personnel_bienService:"bienservice",
                         note_analyse:"",
                        // dossier_candidat_id:"",
                         type_analyse_id: "",
@@ -558,7 +631,8 @@ affichierAppelOffreid() {
               var nouvelObjet1 ={
                        ...this.edite_analyse_dossier,
                        marche_id:this.macheid,
-                        appel_offre_id :this.affichierAppelOffreid(this.macheid)
+                        appel_offre_id :this.affichierAppelOffreid(this.macheid),
+                       dossier_candidat_id: this.afficherOffrefID(this.macheid)
                    }
                 this.modifierAnalyseDossier(nouvelObjet1)
                 this.$('#modificationAajouterAnalys01').modal('hide');
@@ -580,6 +654,10 @@ affichierAppelOffreid() {
 formaterDate(date){
     return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
 },
+
+// formatage du montant
+
+formatageSomme:formatageSomme
     }
 }
 </script>

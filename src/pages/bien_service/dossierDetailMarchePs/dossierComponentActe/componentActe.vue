@@ -24,7 +24,7 @@ afficherBanqueDynamique
                         <th>Objet marche.</th>
                         
                         <th>Imputation</th>
-                        <th>Entreprise</th>
+                        <!-- <th>Entreprise</th> -->
                        
                         <th>Action</th>
                     </tr>
@@ -46,8 +46,8 @@ afficherBanqueDynamique
                             
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.marche.imputation || 'Non renseigné'}}</td>
-                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{affichierNomEntreprise(effetFinancier.entreprise_id) || 'Non renseigné'}}</td>
+                              <!-- <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{affichierNomEntreprise(effetFinancier.entreprise_id) || 'Non renseigné'}}</td> -->
 <td>
       <div class="btn-group">
                             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
@@ -91,13 +91,15 @@ afficherBanqueDynamique
                         <label class="control-label">Entreprise.</label>
                         <div class="controls">
                           <select v-model="formEffetFinancier.entreprise_id" class="span">
-                                <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
-                                        :value="varText.entreprise_id">{{affichierNomEntreprise(varText.entreprise_id)}}</option>
+                                <option v-for="varText in affichierNomEntreprise(macheid)" :key="varText.id"
+                                        :value="varText.entreprise_id">{{varText.nom_cand}}</option>
                             </select>
+                            <!-- <input type="text" :value="affichierNomEntreprise(macheid)"> -->
                         
                         </div>
                     </div>
 
+                    
                             </td>
 
                             <td>
@@ -385,9 +387,14 @@ afficherBanqueDynamique
                         <div class="control-group">
                         <label class="control-label">Entreprise.</label>
                         <div class="controls">
-                          <select v-model="editActeEffetFinancier.entreprise_id" class="span">
+                          <!-- <select v-model="editActeEffetFinancier.entreprise_id" class="span">
                                 <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
                                         :value="varText.entreprise_id">{{affichierNomEntreprise(varText.entreprise_id)}}</option>
+                            </select> -->
+
+                            <select v-model="editActeEffetFinancier.entreprise_id" class="span">
+                                <option v-for="varText in affichierNomEntreprise(macheid)" :key="varText.id"
+                                        :value="varText.id">{{varText.nom_cand}}</option>
                             </select>
                         
                         </div>
@@ -649,6 +656,66 @@ afficherBanqueDynamique
         </div>
 
 <!--- fin modifier acte effet financier  -->
+
+
+
+ <div id="infoPV" class="modal hide grdirModalActeEffet">
+                  <div class="modal-header">
+                      <button data-dismiss="modal" class="close" type="button">×</button>
+                      <h3>PROCES-VERBAL DE JUGEMENT DES OFFRES</h3>
+                  </div>
+                  <div class="modal-body" v-if="resultaAnalysePv">
+                      <h4 class="text-center">ATTRIBUTION DU MARCHE</h4>
+                      <div>
+                          Suivant les résultats de l’évaluation des offres présentés par le rapporteur dans le
+                          tableau ci-dessus, il apparaît que le soumissionnaire <b v-if="resultaAnalysePv.length>0"></b> propose
+                          l’offre conforme la moins-disante.
+                      </div>
+                      <h4 class="text-center">TABLEAU RECAPITULATIF DE LA COMPARAISON DES OFFRES</h4>
+                      <table class="table table-bordered table-striped">
+                          <thead>
+                          <tr>
+                         <th>Nom des Soumissionnaires </th>
+                            <th>Numero du dossier</th>
+                            <th>Montant Offre financiere</th>
+                              <th>Note</th>
+                              <th>Classement</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr class="odd gradeX" v-for="(item, index) in resultaAnalysePv"
+                              :key="item.id">
+                             
+                              <td >
+                                  {{afficherNomCandidat(item.dossier_candidat_id)|| 'Non renseigné'}}</td>
+
+                                    <td >
+                                  {{afficherNumeroDossierCandidat1(item.dossier_candidat_id)|| 'Non renseigné'}}</td>
+
+                                   <td >
+                                 {{formatageSomme(parseFloat(afficherListeMontant(afficherOffrefID(item.dossier_candidat_id)))) || 'Non renseigné'}}</td>
+                                   
+                              <td >
+                                  {{item.note_analyse || 'Non renseigné'}}</td>
+                              <td >
+                                  <p v-if="index==0"> 
+                                      {{index + 1}} er
+                                  </p>
+                                  <p v-else>
+                                      {{index + 1}} eme
+                                  </p>
+
+                              </td>
+
+                          </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                  <div class="modal-footer">
+
+                      <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+                  </div>
+              </div>
   <notifications/>
     </div>
 </template>
@@ -684,6 +751,8 @@ export default {
              banq_id:"",
              numero_marche:""
         },
+
+        resultaAnalysePv:[],
         editActeEffetFinancier:{
              code_act:"",
              libelle_act:"",
@@ -770,7 +839,60 @@ affichierIdTypeMarche() {
 
 
 
+///
 
+
+afficherNomCandidat(){
+  return id =>{
+      if(id!=null && id!=""){
+          const nomCandidat= this.getterDossierCandidats.find(item =>item.id==id)
+          if(nomCandidat){
+              return nomCandidat.nom_cand
+          }
+      }
+  }  
+},
+
+
+ afficherNumeroDossierCandidat1() { 
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterDossierCandidats.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_dossier;
+      }
+      return null
+        }
+      };
+    },
+
+
+     afficherOffrefID() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterOffreFinanciers.find(qtreel => qtreel.dossier_candidat_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+
+
+    afficherListeMontant(){
+     return id => {
+       if( id !== undefined) {
+    var acteur = this.getterOffreFinanciers.find(acteur => acteur.id == id)
+    
+     return  (acteur) ? acteur.montant_total_ttc :null 
+       }
+    return null
+     }
+  
+   },
 
 
  affichierLibelleTypeActeFinancier() {
@@ -819,35 +941,35 @@ AffichierElementParent() {
         }
     },
 
-// affichierNomEntreprise() {
-//       return id => {
-//         if (id != null && id != "") {
-//            const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
 
-//       if (qtereel) {
-//         return qtereel.raison_sociale;
-//       }
-//       return 0
-//         }
-//       };
-//     },
+
     affichierNomEntreprise() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+         return this.getterDossierCandidats.filter(qtreel => qtreel.marche_id == id);
 
-      if (qtereel) {
-        return qtereel.raison_sociale;
-      }
-      return 0
+         
         }
+       
       };
     },
+
+
+
+
+
+
+
 afficherEntrepriseRecep () {
                 return id => {
-                    if (id != "") {
+                    if ( id!=null && id != "" ) {
                         // console.log("Marche lettre inviation marche")
-                        return this.gettersCotations.filter(idmarche => idmarche.marche_id == id)
+                        const objet= this.getterDossierCandidats.find(idmarche => idmarche.marche_id == id)
+
+                        if(objet){
+                            return objet.nom_cand
+                        }
+                        return 0
                      }
              }
             },
@@ -983,6 +1105,18 @@ getDateFinExécutionValueEdit(){
 
 
 
+// infoPVAffiche:function(){
+//                 this.resultaAnalysePv=[]
+//                 let resulta=this.getterAnalyseDossiers.filter(item=>item.difference_personnel_bienService==null );
+//                 this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
+//                 if (this.resultaAnalysePv.length>0){
+//                     this.resultaAnalysePv.sort(function (a, b) {
+//                         return a.note_analyse - b.note_analyse;
+//                     }).reverse()
+//                 }
+//                 //console.log(this.resultaAnalysePv)
+//             },
+
             
             // selectionAttributionMarche: function () {
             //     return macheid => {
@@ -1102,6 +1236,20 @@ modifierModalActeEffetFinancierLocal(){
 },
 
 formatageSomme:formatageSomme,
+
+
+
+           infoPVAffiche(){
+                this.resultaAnalysePv=[]
+                let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==null );
+                this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
+                if (this.resultaAnalysePv.length>0){
+                    this.resultaAnalysePv.sort(function (a, b) {
+                        return a.note_analyse - b.note_analyse;
+                    }).reverse()
+                }
+                //console.log(this.resultaAnalysePv)
+            },
 
 //  formaterDate(date) {
 //               return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
