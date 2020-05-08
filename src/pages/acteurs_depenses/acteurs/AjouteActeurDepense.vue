@@ -516,7 +516,7 @@
       
       
     ]),
- ...mapGetters("bienService", [ "selectionner_candidats","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+ ...mapGetters("bienService", ["getActeEffetFinancierPersonnaliserContrat","selectionner_candidats","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -635,10 +635,11 @@ afficheIdCandidat() {
 
       
     },
+
 recupererReferenceActe() {
       return id => {
         if (id != null && id != "") {
-           return this.getActeEffetFinancierPersonnaliser.filter(qtreel => qtreel.marche_id == id);
+           return this.getActeEffetFinancierPersonnaliser.filter(qtreel => qtreel.marche_id == id && qtreel.activationD != 1);
         }
       };
 
@@ -773,7 +774,10 @@ exoEnCours() {
         methods: {
             // methode pour notre action
             ...mapActions('personnelUA', ['getActeur',"ajouterActeur","supprimerActeurs","getNbrActeurAcrediteTaux","allActeurDepense"]),
-            afficherModalAjouterTitre(){
+            ...mapActions('bienService',['supprimerActeEffetFinancier',
+          'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
+           
+           afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',
                     keyboard: false
@@ -797,6 +801,11 @@ exoEnCours() {
                   salaires:this.afficheSalairePersonnel
                
               }
+               let modifierActive=this.acteEffetFinanciers.find(marche=>marche.candidat_personnel_id == this.afficheIdActeurDepense(this.formData.reference_acte))
+    modifierActive.activationD = 1
+    
+   
+    this.modifierActeEffetFinancier(modifierActive)
                 console.log(this.formData)
                 this.ajouterActeur(nouveauObjet)
                 this.getActeur()
