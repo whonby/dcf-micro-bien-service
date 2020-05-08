@@ -28,7 +28,10 @@ const defaultstate = {
     classificationGradeFonction: [],
     fonctionBudgetaire:[],
     dossierPersonnels: [],
-    situation_matrimonial:[]
+    situation_matrimonial:[],
+    paiementPersonnel: [],
+
+    contrat_resilie:[]
     
 
 };

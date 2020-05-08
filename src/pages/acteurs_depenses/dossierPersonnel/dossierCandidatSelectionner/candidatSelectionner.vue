@@ -27,10 +27,10 @@
                              
                           
                         <td @click="afficherCandidatSelectionner(index)">
-                            {{afficherNomDossierCandidat(appelOffre.candidat_personnel_id) || 'Non renseigné'}}</td>
+                            {{afficherNomDossierCandidat(appelOffre.candidat_selection_id) || 'Non renseigné'}}</td>
                        
                           <!-- <td @click="afficherCandidatSelectionner(index)">
-                            {{afficherNomCandidat(afficherCandidatId(appelOffre.candidat_personnel_id)) || 'Non renseigné'}}</td> -->
+                            {{afficherNomCandidat(afficherCandidatId(appelOffre.candidat_selection_id)) || 'Non renseigné'}}</td> -->
                          <td @click="afficherCandidatSelectionner(index)">
                             {{appelOffre.note_analyse || 'Non renseigné'}}</td>
                          <td @click="afficherCandidatSelectionner(index)">
@@ -120,7 +120,7 @@
                             <div class="control-group">
                         <label class="control-label">Dossier candidat.</label>
                         <div class="controls">
-                          <select v-model="edite_analyse_dossier.candidat_personnel_id" class="span">
+                          <select v-model="edite_analyse_dossier.candidat_selection_id" class="span">
                                 <option v-for="varText in dossierPersonnels" :key="varText.id"
                                         :value="varText.id">{{varText.nom_candidat}} {{varText.prenom_candidat}}</option>
                             </select>
@@ -229,7 +229,7 @@ export default {
             //             // dossier_candidat_id:"",
             //             type_analyse_id: "",
             //             difference_personnel_bienService:"personnel",
-            //              candidat_personnel_id:""
+            //              candidat_selection_id:""
             // },
             edite_analyse_dossier:"",
          actif:""
@@ -269,7 +269,7 @@ export default {
 
 
             
- listeCandidatSelectionner: function () {
+ listeCandidatSelectionner () {
             return macheid => {
                 if (macheid != "") {
 
@@ -397,65 +397,7 @@ affichierAppelOffreid() {
                      
             },
           
-// dossierCandidature: function () {
-//                 return macheid => {
-//                     if (macheid != "") {
-//                       //  console.log("Marche dossier candidat")
-//                         return this.getterDossierCandidats.filter(idmarche => idmarche.appel_offre.macheid == macheid)
-//                     }
-//                 }
-//             },
-            // listeCojo: function () {
-            //     return macheid => {
-            //         if (macheid != "") {
-            //           let Objet=  this.getterCojos.find(idmarche => idmarche.lettre_invitation.appel_offre.macheid == macheid);
-            //             let vM=this;
-            //             if(Objet!=undefined){
-            //                 vM.idcojo=Objet.id
-            //             }
-            //             return this.getterCojos.filter(idmarche => idmarche.lettre_invitation.appel_offre.macheid == macheid)
-            //         }
-            //     }
-            // },
-            //    ajouterAnalyseD(){
-            //        var nouvelObjet ={
-            //            ...this.formAnalyseDossier,
-            //            marche_id:this.macheid,
-            //             appel_offre_id :this.affichierAppelOffreid(this.macheid),
-            //          candidat_personnel_id:this.afficherNomCandidatId(this.macheid)
 
-            //        }
-            //   this.ajouterAnalyseDossier(nouvelObjet)
-            //     this.formAnalyseDossier={
-            //             date_analyse:"",
-            //             //appel_offre_id:"",
-            //             rang_analyse:"",
-            //          appel_offre_id:"",
-            //            // motif:"",
-            //             note_analyse:"",
-            //            // dossier_candidat_id:"",
-            //             type_analyse_id: "",
-            //             difference_personnel_bienService:"personnel",
-            //             candidat_personnel_id:""
-            //     }
-            // },
-//  modification(index){
-//              this.edite_analyse_dossier = this.listeAnalyseDossier(this.macheid)[index];
-//               var nouvelObjet1 ={
-//                        ...this.edite_analyse_dossier,
-//                        marche_id:this.macheid,
-//                        // appel_offre_id :this.affichierAppelOffreid(this.macheid),
-//                        //candidat_personnel_id:this.afficherCandidat(this.macheid)
-//                        candidat_personnel_id: this.edite_analyse_dossier.candidat_personnel_id,
-//                        rang_analyse:this.edite_analyse_dossier.rang_analyse,
-//                        	note_analyse:this.edite_analyse_dossier.note_analyse
-//                    }
-//                    let marcheObjet=this.gettersPersonnaliserRapportJugement.find(marche=>marche.id==this.edite_analyse_dossier.id)
-//                     marcheObjet.actif = 1
-//                 this.ajouterCandidatSelectionner(nouvelObjet1)
-//                 this.modifierAnalyseDossier(marcheObjet)
-//                 this.$('#modificationAajouterAnalys01').modal('hide');
-//             },
        
 
          modifierCandidatSelectionner(){
@@ -464,7 +406,7 @@ affichierAppelOffreid() {
                        ...this.edite_analyse_dossier,
                        marche_id:this.macheid,
                         appel_offre_id :this.affichierAppelOffreid(this.macheid),
-                       //candidat_personnel_id:this.afficherCandidat(this.macheid)
+                      // candidat_selection_id:this.afficherCandidat(this.macheid)
                    }
                 this.modifierCandidatSelectionner(nouvelObjet1)
                 this.$('#modificationAajouterAnalys01').modal('hide');

@@ -83,17 +83,13 @@
                                     <label class="control-label span5">Role <code>*</code> :</label>
 
                                     <div class="controls">
-                                        <select class="span4" v-model="formDataMembreCojo.role">
-                                            <option></option>
-                                            <option value="Autorité contractante">Autorité contractante</option>
-                                            <option value="DMP">Direction des marchés publique</option>
-                                            <option value="Béneficiare">Béneficiaire</option>
-                                            <option value="Rapporteur">Rapporteur</option>
-                                            <option value="Service technique">Service technique</option>
-                                            <option value="Autre">Autre</option>
-                                        </select>
+                                 <select v-model="formDataMembreCojo.role_membre_cojo_id" class="span">
+                                <option v-for="varText in role_membrecojo" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                                  </select>
 
                                     </div>
+
                                 </div>
                             </td>
                         </tr>
@@ -137,7 +133,8 @@
 
                                 <div class="control-group">
 
-                                    <label class="control-label">Nom et prenom <code>*</code> :</label>
+                                   
+                                    <label class="control-label">Nom et prenom 4 <code>*</code> :</label>
                                     <div class="control-group">
                                         <input type="text" class="span" placeholder="Numero lo" v-model="edite_membre_cojo.nom_prenom">
 
@@ -156,18 +153,13 @@
                                     <label class="control-label span5">Role <code>*</code> :</label>
 
                                     <div class="controls">
-                                        <select class="span4" v-model="edite_membre_cojo.role">
-                                            <option></option>
-                                            <option value="Controller finnancier">Controller finnancier</option>
-                                            <option value="Autorité contractante">Autorité contractante</option>
-                                            <option value="DMP">Direction des marchés publique</option>
-                                            <option value="Béneficiare">Béneficiaire</option>
-                                            <option value="Rapporteur">Rapporteur</option>
-                                            <option value="Service technique">Service technique</option>
-                                            <option value="Autre">Autre</option>
-                                        </select>
+                                 <select v-model="edite_membre_cojo.role_membre_cojo_id" class="span">
+                                <option v-for="varText in role_membrecojo" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                                  </select>
 
                                     </div>
+
                                 </div>
                             </td>
                         </tr>
@@ -196,8 +188,9 @@ export default {
                    matricule:"",
                         type_appel:"",
                         nom_prenom:"",
-                        role:"",
+                        //role:"",
                         cojo_id:"",
+                        role_membre_cojo_id:""
             },
             edite_membre_cojo:"",
             message_mandater:""
@@ -207,7 +200,7 @@ export default {
     created(){
     },
     computed:{
-  ...mapGetters('bienService',['getterMembreCojo','getterCojos']),  
+  ...mapGetters('bienService',['getterMembreCojo','getterCojos',"role_membrecojo"]),  
 ...mapGetters('personnelUA', ['acteur_depenses']),
     },
     methods:{
@@ -229,8 +222,9 @@ export default {
                        matricule:"",
                         type_appel:"",
                         nom_prenom:"",
-                        role:"",
+                        //role:"",
                         cojo_id:"",
+                        role_membre_cojo_id:""
                 }
             },
              listeMembreCojo: function (){

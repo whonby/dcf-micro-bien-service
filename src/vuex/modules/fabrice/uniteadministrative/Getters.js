@@ -2,7 +2,8 @@ import { groupBy } from "../../../../Repositories/Repository";
 
 // const typeTextes = state =>
 //   state.typeTextes.sort((a, b) => (a.code > b.code ? 1 : -1));
- export const servicesua = state => state.servicesua;
+export const organigrammeUa = state => state.organigrammeUa;
+export const servicesua = state => state.servicesua;
 export const directions = state => state.directions;
 export const fonctionsua = state => state.fonctionsua;
 export const banqueUa = state => state.banqueUa;
@@ -20,7 +21,7 @@ const uniteAdministratives = state =>
 //   state.fonctionsua.sort((a, b) => (a.id > b.id ? 1 : -1));
 
 
-
+//export const banqueUa = state => state.banqueUa;
 export const nombreUniteAdministratives = state =>
   state.uniteAdministratives.length;
 export const nombreArchivageDocument = state => state.archivageDocuments.length;
@@ -222,6 +223,15 @@ export const getPersonnaliseBudgetGeneralParBienService = (
   });
 
 
+// afficher le 
+
+
+export const groupgranNaturePersonnel = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.getPersonnaliseBudgetGeneralParPersonnel, "gdenature_id");
+};
+
+
 
 export const affichePersonnel = state =>
   state.budgetGeneral.filter(
@@ -236,6 +246,78 @@ export const getPersonnaliseBudgetGeneralParPersonnel = (
   rootGetters
 ) =>
   getters.affichePersonnel.map(element => {
+    if (
+      element.gdenature_id !== null &&
+      element.program_id !== null &&
+      element.section_id !== null &&
+      element.ua_id !== null &&
+      element.typeua_id !== null &&
+      element.fonctionnel_id !== null &&
+      element.economique_id !== null &&
+      element.action_id !== null &&
+      element.activite_id !== null
+    ) {
+      element = {
+        ...element,
+        afficheGdeNature: rootGetters[
+          "parametreGenerauxAdministratif/grandes_natures"
+        ].find(Gdenat => Gdenat.id == element.gdenature_id),
+        afficheSection: rootGetters["parametreGenerauxAdministratif/sections"].find(
+          Secti => Secti.id == element.section_id
+        ),
+        afficheUA: rootGetters[
+          "uniteadministrative/uniteAdministratives"
+        ].find(uniteA => uniteA.id == element.ua_id),
+        affichetypeua: rootGetters[
+          "parametreGenerauxAdministratif/type_Unite_admins"
+        ].find(typeUadmin => typeUadmin.id == element.typeua_id),
+        afficheProgramme: rootGetters[
+          "parametreGenerauxAdministratif/plans_programmes"
+        ].find(planProg => planProg.id == element.program_id),
+        afficheFonctionnel: rootGetters[
+          "parametreGenerauxFonctionnelle/plans_fonctionnels"
+        ].find(planfonct => planfonct.id == element.fonctionnel_id),
+        afficheEconomique: rootGetters[
+          "parametreGenerauxBudgetaire/plans_budgetaires"
+        ].find(planEconomiq => planEconomiq.id == element.economique_id),
+        afficheAction: rootGetters[
+          "parametreGenerauxActivite/plans_activites"
+        ].find(planaction => planaction.id == element.action_id),
+        afficheActivite: rootGetters[
+          "parametreGenerauxActivite/plans_activites"
+        ].find(planactivite => planactivite.id == element.activite_id)
+      };
+    }
+    return element;
+  });
+
+
+
+
+  // afficher le getter persponnaliser d'investissement
+
+
+  
+export const groupgranNatureInvestissement = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.getPersonnaliseBudgetGeneralParInvestissement, "gdenature_id");
+};
+
+
+
+export const afficherInvestissement = state =>
+  state.budgetGeneral.filter(
+    affichenaturedep => affichenaturedep.testgdenature == 4
+  );
+
+
+export const getPersonnaliseBudgetGeneralParInvestissement = (
+  state,
+  getters,
+  rootState,
+  rootGetters
+) =>
+  getters.afficherInvestissement.map(element => {
     if (
       element.gdenature_id !== null &&
       element.program_id !== null &&

@@ -14,8 +14,6 @@
                                                 <th>Fichier</th>
                                                 <th>Action</th>
                                             </tr>
-                     
-                      
                                             </thead>
                            
                                             <tbody>
@@ -23,7 +21,7 @@
                         :key="rapport.id">
 
                          <td @click="afficherModalRapportOuverture(index)">
-                            {{formaterDate(rapport.date_type_procedure)|| 'Non renseigné'}}</td> 
+                            {{formaterDate(rapport.date_rapport_ouverture)|| 'Non renseigné'}}</td> 
                       
                         <td @click="afficherModalRapportOuverture(index)">
                             <a v-if="rapport.fichier" :href="rapport.fichier" class="btn btn-default" target="_blank">
@@ -32,7 +30,7 @@
                             </a>
                         </td>
                         <div class="btn-group">
-                            <button @click.prevent="supprimerDocument(rapport.id)"  class="btn btn-danger " title="Supprimer">
+                            <button @click.prevent="supprimerRapportJugement(rapport.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
 
                         </div>
@@ -53,7 +51,7 @@
                         <div class="controls">
                             <input
                                     type="date"
-                                    v-model="formRapport.date_type_procedure"
+                                    v-model="formRapport.date_rapport_ouverture"
                                     class="span"
                                        
                             />
@@ -83,7 +81,7 @@
 
                          <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier le rapport de jugement </h3>
+                <h3>Modifier le rapport d'ouverture </h3>
             </div>
             <div class="modal-body">
                 <div class="widget-box">
@@ -94,7 +92,7 @@
                         <div class="controls">
                             <input
                                     type="date"
-                                    v-model="editRapport.date_type_procedure"
+                                    v-model="editRapport.date_rapport_ouverture"
                                     class="span"
                                        
                             />
@@ -133,8 +131,10 @@ export default {
     data(){
         return{
 
+
             formRapport:{
-                 date_type_procedure:"",
+                 date_rapport_ouverture:"",
+                 attribue:"0",
                  fichier:"",
                 difference_personnel_bienService:"bienservice",
                 marche_id:""
@@ -142,7 +142,8 @@ export default {
                 },
             
             editRapport:{
-              date_type_procedure:"",
+              date_rapport_ouverture:"",
+              attribue:"0",
               fichier:"",
               difference_personnel_bienService:"bienservice",
               marche_id:""
@@ -163,10 +164,11 @@ export default {
     created(){
 
     },
+
     computed: {
 
             ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,
-            "gettersCotations","documentMedias"]),
+            "gettersCotations","documentMedias",'rapportDocuments']),
             // ...mapGetters('personnelUA', ['acteur_depenses']),
 
 
@@ -184,10 +186,11 @@ export default {
 //                 }
 //             },
 
- listeRapport() {
+
+ listeRapport:function() {
       return macheid => {
         if (macheid != null && macheid != "") {
-          return this.documentMedias.filter(element => element.marche_id == macheid);
+          return this.rapportDocuments.filter(element => element.marche_id == macheid  && element.date_rapport_jugement==null );
         }
       };
     },
@@ -195,8 +198,8 @@ export default {
 
         },
     methods:{
-        ...mapActions('bienService',['supprimerDocument',
-        'ajouterDocument','modifierDocument']),
+       ...mapActions('bienService',['supprimerRapportJugement',
+        'ajouterRapportJugement','modifierRapportJugement','getRapportJugement']),
 
 
              OnchangeFichier(e) {
@@ -221,7 +224,7 @@ export default {
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.editRapport = this.documentMedias[index];
+                this.editRapport = this.listeRapport(this.macheid)[index];
             },
 
            
@@ -231,21 +234,22 @@ export default {
                if(confirm("veiller charger le fichier svp !")){
                  const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
-                 formData.append('date_type_procedure', this.formRapport.date_type_procedure);
+                 formData.append('date_rapport_ouverture', this.formRapport.date_rapport_ouverture);
                formData.append('marche_id', this.macheid);
+               formData.append('attribue', this.formRapport.attribue);
                formData.append('difference_personnel_bienService',this.formRapport.difference_personnel_bienService)
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'
                     }
                 }
-               this.ajouterDocument(formData, config)
+               this.ajouterRapportJugement(formData, config)
                this.formRapport ={
                  difference_personnel_bienService:"personnel",
-                 date_type_procedure:""
+                 date_rapport_ouverture:""
                }
                }else{
-                   return "ok fichier neccessaire mercie"
+                  // return "ok fichier neccessaire mercie"
                }
               
            },
@@ -254,8 +258,9 @@ export default {
            modifierRapportOuverture(){
                if(confirm("veiller charger le fichier svp !")){
                     const formData = new FormData();
-                 formData.append('date_type_procedure', this.editRapport.date_type_procedure);
+                 formData.append('date_rapport_ouverture', this.editRapport.date_rapport_ouverture);
                  formData.append('marche_id', this.macheid);
+                 formData.append('attribue', this.editRapport.attribue);
                  formData.append('difference_personnel_bienService', this.difference_personnel_bienService)
                 formData.append('id', this.editRapport.id);
                
@@ -269,7 +274,8 @@ export default {
                     }
                 }
               
-               this.modifierDocument(formData,config)
+               this.modifierRapportJugement(formData,config)
+              // this.getRapportJugement()
                this.$('#modifierModalRapportOuverture').modal('hide');
                }else{
                    return " chargemennt de fichier neccessaire "

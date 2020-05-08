@@ -856,9 +856,6 @@ afficheActionParProgramme() {
     };
   },
 
-   
-  
-
   
             typeFiltre(){
 
@@ -869,7 +866,6 @@ return this.paiementPersonnel.filter((item) => {
     
     return item.libelle.toLowerCase().includes(searchTerm) 
    
-  
 
    }
 )

@@ -8,6 +8,7 @@ export const causeInactivite = state => state.causeInactivite
 export const EtatImmobilisations = state => state.EtatImmobilisations
 export const historiqueAffectation = state => state.historiqueAffectation
 export const historiqueAffectationService = state => state.historiqueAffectationService
+export const demandeService = state => state.demandeService
 const familles = state =>
   state.familles.sort((a, b) => (a.code > b.code ? 1 : -1));
 

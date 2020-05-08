@@ -33,7 +33,8 @@
                     <!-- <th>Activite</th> -->
                      
                      <th title="classification fonctionnel">C.Fontionnel</th>
-                     <th title="type procedure">Type procedure</th>
+                     <th title="type procedure">Procedure de marché</th>
+                     <th title="Statut">Statut</th>
                      <th title="classification Economique">C.Economique</th>
                     <th>D.Initial</th>
                     <th>Version</th>
@@ -162,7 +163,16 @@ export default {
 budgetConsommerBienService(){
   return id => {
     if(id !=""){
-    return this.getMandatPersonnaliserVise.filter(element => element.ua_id == this.groupe.id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+    return this.getMandatPersonnaliserVise.filter(element => element.ua_id == this.groupe.id && element.marchetype == 2 ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+      
+    }
+    
+  }
+},
+budgetConsommerInvertissement(){
+  return id => {
+    if(id !=""){
+    return this.getMandatPersonnaliserVise.filter(element => element.ua_id == this.groupe.id && element.marchetype == 1 ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
       
     }
     
@@ -178,7 +188,7 @@ budgetConsommerTransfert(){
   }
 },
 budgetConsommerDesModule() {
-      const val = parseInt(this.budgetConsommerBienService(this.groupe.id)) + parseInt(this.budgetConsommerTransfert(this.groupe.id));
+      const val = parseInt(this.budgetConsommerBienService(this.groupe.id)) + parseInt(this.budgetConsommerTransfert(this.groupe.id)) + parseInt(this.budgetConsommerInvertissement(this.groupe.id));
       
        if (val) {
         return parseInt(val).toFixed(0);

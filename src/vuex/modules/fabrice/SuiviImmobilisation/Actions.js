@@ -675,7 +675,7 @@ export function ajouterStock({ commit, dispatch }, nouveau) {
     axios.post("/ajouter_Stockage", {
       famill_id: nouveau.famill_id,
       quantitestock: nouveau.quantitestock,
-      articlestock_id: nouveau.articlestock_id,
+      // articlestock_id: nouveau.articlestock_id,
       typeua_id: nouveau.typeua_id,
       uAdministrative_id: nouveau.uAdministrative_id,
       typeequipe_id: nouveau.typeequipe_id,
@@ -704,7 +704,7 @@ export function modifierStock({ commit, dispatch }, nouveau) {
     axios.put("/modifier_Stockage/" + nouveau.id, {
       famill_id: nouveau.famill_id,
       quantitestock: nouveau.quantitestock,
-      articlestock_id: nouveau.articlestock_id,
+      // articlestock_id: nouveau.articlestock_id,
       typeua_id: nouveau.typeua_id,
       uAdministrative_id: nouveau.uAdministrative_id,
       typeequipe_id: nouveau.typeequipe_id,
@@ -1407,7 +1407,8 @@ export function ajouterDemandeMateriel({ commit }, nouveau) {
       uniteZone_id: nouveau.uniteZone_id,
       cause_demande: nouveau.cause_demande,
       cause_inactivite: nouveau.cause_inactivite,
-service_id: nouveau.service_id
+service_id: nouveau.service_id,
+      valeurorigine: nouveau.valeurorigine
 
     }))
     .then(response => {
@@ -1422,5 +1423,57 @@ service_id: nouveau.service_id
           type: "success"
         })
       }
+    });
+}
+
+
+export function modifierDemandeMateriel({ commit }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierDmdMateriel/" + nouveau.id, {
+
+      annee_budgetaire: nouveau.annee_budgetaire,
+      uniteadmin_id: nouveau.uniteadmin_id,
+      famille_id: nouveau.famille_id,
+      fonction_id: nouveau.fonction_id,
+
+      article_id: nouveau.article_id,
+      quantite: nouveau.quantite,
+      date_demande: nouveau.date_demande,
+
+      dure_vie: nouveau.dure_vie,
+      acteur_id: nouveau.acteur_id,
+      uniteZone_id: nouveau.uniteZone_id,
+      cause_demande: nouveau.cause_demande,
+      cause_inactivite: nouveau.cause_inactivite,
+      service_id: nouveau.service_id,
+      	dure_traitement_directeur: nouveau.dure_traitement_directeur,
+      motif_directeur_sce: nouveau.motif_directeur_sce,
+      date_directeur_sce: nouveau.date_directeur_sce,
+      cause_directeur_sce: nouveau.cause_directeur_sce,
+      valeurorigine : nouveau.valeurorigine
+    }))
+    .then(response => {
+      commit("MODIFIER_DEMANDE_MATERIEL", response.data);
+      // dispatch('getAllFamille')
+      // dispatch('getAllNormeImmob')
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerDemandeMateriel({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vous vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_DEMANDE_MATERIEL", id);
+      // dispatch('getAllFamille')
+      // dispatch('getAllNormeImmob')
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerDmdMateriel/" + id).then(() => dialog.close());
     });
 }

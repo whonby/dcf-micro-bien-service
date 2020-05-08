@@ -20,6 +20,12 @@ export const MODIFIER_CANDIDAT_SELECTIONNER = (state,elementModif) => {
 }
 
 
+export const SUPPRIMER_CANDIDAT_SELECTION = (state ,id) => {
+    state.selectionner_candidats = state.selectionner_candidats.filter(select => 
+        select.id !=id)
+}
+
+
 export const GET_ROLE_MEMBRECOJO = (state, tableau_role_membrecojo) => {
 
     state.role_membrecojo = tableau_role_membrecojo
@@ -91,6 +97,10 @@ export const GET_ALL_RAPPORTJUGEMENT = (state, tableau_rapport_ouverture) =>{
 
 export const AJOUTER_RAPPORT_OUVERTURE = (state, elementAjouter) => {
     state.rapportDocuments.unshift(elementAjouter)
+    //state.selectionner_candidats=[]
+    state.selectionner_candidats=[]
+    state.analyseDossiers=[]
+    
 }
 
 // update all document
@@ -107,6 +117,8 @@ export const MODIFIER_RAPPORT_OUVERTURE = (state, elementModif)=>{
 
 export const SUPPRIMER_RAPPORT_OUVERTURE = (state, id)=> {
     state.rapportDocuments = state.rapportDocuments.filter(prest => prest.id !=id)
+    state.selectionner_candidats=[]
+    state.analyseDossiers=[]
 }
 
 
@@ -2283,4 +2295,35 @@ export const MODIFIER_PLAN_PASSATION_MARCHE= (state, elementModif)=>{
 
 export const DELETE_PLAN_PASSATION_MARCHE = (state, id)=> {
     state.plan_passation_marche = state.plan_passation_marche.filter(prest => prest.id !=id)
+}
+
+
+
+
+export const GET_ECHEANCES = (state, tableau_prestation) =>{
+    state.echeances = tableau_prestation
+}
+
+// add * presttation
+
+export const AJOUTER_ECHEANCES = (state, elementAjouter) => {
+    state.echeances.unshift(elementAjouter)
+}
+
+// update all prestation
+export const MODIFIER_ECHEANCES = (state, elementModif)=>{
+    state.echeances = state.echeances.map(response => {
+        if(response.id == elementModif.id){
+            response = {...elementModif}
+        }
+        return response
+    })
+}
+
+
+
+// delete all prestation
+
+export const DELETE_ECHEANCES = (state, id)=> {
+    state.echeances = state.echeances.filter(prest => prest.id !=id)
 }

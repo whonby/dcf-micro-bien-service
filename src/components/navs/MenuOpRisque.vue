@@ -6,14 +6,18 @@
       
       <!--Paramètres programmes
       -->
-<li class="" id="indicateur">
+<!-- <li class="" id="indicateur">
         <a title="Out put" href="#" class="">
           <i class="icon icon-users"></i>
-          <span class="text">Out put </span>
+          <span class="text">CATOGRAPHIE BUDGETAIRE </span>
         </a>
-      </li>
-
-       <li class="" id="out">
+      </li> -->
+<li>
+            <router-link :to="{name: 'CartographieBudget'}" tag="a">
+              CATOGRAPHIE BUDGETAIRE
+            </router-link>
+          </li>
+       <!-- <li class="" id="out">
         <a title="Indicateur" href="#" class="">
           <i class="icon icon-users"></i>
           <span class="text">Indicateurs </span>
@@ -41,7 +45,7 @@
             </a>
           </li>
         </ul>
-      </li>
+      </li> -->
     </ul>
   </div>
 </template>

@@ -217,7 +217,7 @@
           <li class="divider"></li>
           <li>
             <router-link :to="{name: 'planDecision'}" tag="a">
-              <i class="icon-key"></i> Plan décisionnelles
+              <i class="icon-key"></i> Plan décisionnel
             </router-link>
           </li>
           
@@ -293,7 +293,7 @@
             <li>
                 <router-link :to="{name: 'LigneExempter'}" tag="a">
                     <i class="icon-bar-chart"></i>
-                    Ligne Exempter
+                    Ligne Exemptée
                 </router-link>
             </li>
           <li>
@@ -438,6 +438,7 @@
              Role membre Cojo
             </router-link>
           </li>
+           <li class="divider"></li>
            <li>
             <router-link :to="{name: 'NaturePrix'}" tag="a">
               <i class="icon-bar-chart"></i>
@@ -449,6 +450,14 @@
                     <router-link :to="{name: 'ppm'}" tag="a">
                         <i class="icon-list-alt"></i>
                         Importation du PPM
+                    </router-link>
+                </li>
+                 <li class="divider"></li>
+                <li>
+
+                    <router-link :to="{name: 'historiqueMarche'}" tag="a">
+                        <i class="icon-list-alt"></i>
+                        Marchés Global
                     </router-link>
                 </li>
 

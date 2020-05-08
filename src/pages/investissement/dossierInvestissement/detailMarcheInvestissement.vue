@@ -94,7 +94,7 @@
                                 
                                     <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div>
                                
-                                        <component-etat :macheid="detail_marche.id"></component-etat>
+                                        <!-- <component-etat :macheid="detail_marche.id"></component-etat> -->
                                         
                                
                                 <!-- <h4>Liste des receptions de cotation</h4> -->
@@ -146,7 +146,7 @@
                                 <li class="active"><a data-toggle="tab" href="#tab01">Publication de l'offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab478">Reception des offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab498">Ouverture</a></li>
-                                 <!-- <li class=""><a data-toggle="tab" href="#tab4110">Rapport d'ouverture</a></li> -->
+                                 <li class=""><a data-toggle="tab" href="#tab411">Rapport d'ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab78932">Jugement</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab4110">Rapport Jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab178">Attribution</a></li>
@@ -174,7 +174,7 @@
                                 
                                     <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div>
                                
-                                        <component-etat :macheid="detail_marche.id"></component-etat>
+                                        <!-- <component-etat :macheid="detail_marche.id"></component-etat> -->
                                         
                                
                                 <!-- <h4>Liste des receptions de cotation</h4> -->
@@ -196,17 +196,20 @@
                   <component-ouverture :macheid="detail_marche.id"></component-ouverture>
                   <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>
                 </div>
- <!-- <div id="tab4100" class="tab-pane">
+
+
+                 <div id="tab411" class="tab-pane">
                <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterMP" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
                     </div>
 
 
                 </div>
-                <component-analyse :macheid="detail_marche.id"></component-analyse>
+                <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
 
-                </div> -->
+                </div>
+
                    <div id="tab78932" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
@@ -257,8 +260,8 @@
                                 <li class=""><a data-toggle="tab" href="#tab21230">Le mandaté</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab1235">Reception des offres</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab78477">Ouverture des offres</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab41011">Rapport d'ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab7845">D.Candidats</a></li>
-                                <!-- <li class=""><a data-toggle="tab" href="#tab101">Rapport d'ouverture</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tab9563"> Jugement des offres </a></li>
                                 <li class=""><a data-toggle="tab" href="#tab06125">Rapport d'évaluation</a></li>
                                <li class=""><a data-toggle="tab" href="#tab067458">Attribution de l'Offre</a></li>
@@ -337,6 +340,21 @@
                   <component-ouverture1 :macheid="detail_marche.id"></component-ouverture1>
                   <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>
                 </div>
+
+
+                    <div id="tab41011" class="tab-pane">
+               <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                    </div>
+
+
+                </div>
+                <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
+
+                </div>
+
+
                  <div id="tab7845" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
@@ -377,6 +395,7 @@
                     </div>
 
 
+
                 </div>
                 <component-acte :macheid="detail_marche.id"></component-acte>
 
@@ -398,8 +417,8 @@
                                 <li class=""><a data-toggle="tab" href="#tab04">Le mandaté</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab051">Reception des offres</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab784">Ouverture des offres</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab410131">Rapport d'ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab7884">D.Candidats</a></li>
-                                <!-- <li class=""><a data-toggle="tab" href="#tab101">Rapport d'ouverture</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tab5498"> Jugement des offres </a></li>
                                 <li class=""><a data-toggle="tab" href="#tab0612">Rapport d'évaluation</a></li>
                                <li class=""><a data-toggle="tab" href="#tab06745">Attribution de l'Offre</a></li>
@@ -478,6 +497,24 @@
                   <component-ouverture1 :macheid="detail_marche.id"></component-ouverture1>
                   <component-ouvertureMembre :macheid="detail_marche.id"></component-ouvertureMembre>
                 </div>
+
+
+
+
+                   <div id="tab410131" class="tab-pane">
+               <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                    </div>
+
+
+                </div>
+                <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
+
+                </div>
+
+
+
                 
                  <div id="tab7884" class="tab-pane">
                 <div align="right">
@@ -542,12 +579,12 @@
                                  <li class=""><a data-toggle="tab" href="#tab0045" title="reception des offres">Reception</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab02">Reception de l'offre</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
-                                <!-- <li class=""><a data-toggle="tab" href="#tab5">Rapport d'ouverture</a></li> -->
+                                <li class=""><a data-toggle="tab" href="#tab45">Rapport d'ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab6" title="jugement des offres">Jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab7" title="rapport d'évaluation combiné">Rapport</a></li>
 
-                                 <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP"> D.ANO</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab028" title="ANO/DMP attribution">A.ANO</a></li>
+                                 <!-- <li class=""><a data-toggle="tab" href="#tab27" title="demande ANO/DMP"> D.ANO</a></li> -->
+                                <li class=""><a data-toggle="tab" href="#tab27" title="ANO/DMP attribution">Demande ANO</a></li>
                                       
                                       <li class=""><a data-toggle="tab" href="#tab28" title="demande ANO Bailleur"> D.Bailleur </a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab0008" title="ANO bailleur attribution">A.Bailleur </a></li> -->
@@ -623,7 +660,7 @@
                                 
                                     <a href="#addCotation" data-toggle="modal" class="btn btn-success" align="rigth" >Ajouter</a></div>
                                
-                                        <component-etat :macheid="detail_marche.id"></component-etat>
+                                        <!-- <component-etat :macheid="detail_marche.id"></component-etat> -->
                                         
                                
                                 <h4>Liste des receptions de cotation</h4>
@@ -645,6 +682,20 @@
                 </div>
 
 
+                
+                  <div id="tab45" class="tab-pane">
+               <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterRapportOuvertureB" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                    </div>
+
+
+                </div>
+                <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
+
+                </div>
+
+
                    <div id="tab6" class="tab-pane">
                <div align="right">
                     <div class="widget-content">
@@ -660,7 +711,7 @@
                   <div id="tab7" class="tab-pane">
                <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterPv" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>
                     </div>
 
 
@@ -697,7 +748,7 @@
 
 
 
-                  <div id="tab27" class="tab-pane">
+                 <div id="tab27" class="tab-pane">
                <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterD" data-toggle="modal" class="btn btn-primary">Ajouter</a>
@@ -724,26 +775,23 @@
 
 
 
+
                   <div id="tab28" class="tab-pane">
-               <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterAnoDMPBAILLEURModal" data-toggle="modal" class="btn btn-primary">Ajouter</a>
-                    </div>
-
-
-                </div>
+            
                  <componentAvisBailleurCf :macheid="detail_marche.id"> </componentAvisBailleurCf>
 
                 </div>
 
-
+ 
 
 
 
                         <div id="tab1" class="tab-pane">
-                <div align="right">
+                       <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" v-if="listeAvisAnoBailleur(macheid)">Ajouter</a>
+                          <button class="btn btn-warning"  title="veillez recommencer le jugement , car l'Avis  Bailleur est Objection" disabled v-else  >Ajouter</button>
+                   
                     </div>
 
 
@@ -789,7 +837,7 @@
     import { mapGetters, mapActions } from "vuex";
     //import moment from 'moment';
     import componentCotation from '../../bien_service/dossierDetailMarchePs/dossierComponentPs/componentCotation';
-     import componentEtat from '../../bien_service/dossierDetailMarchePs/dossierComponentEtat/componentEtat';
+     //import componentEtat from '../../bien_service/dossierDetailMarchePs/dossierComponentEtat/componentEtat';
      import componentOuverture from '../../bien_service/dossierDetailMarchePs/dossierComponentOuverture/componentOuverture';  
    import componentActe from '../../bien_service/dossierDetailMarchePs/dossierComponentActe/componentActe' ;
     import publicationOffre from '../../bien_service/DossierPso/publicationOffre/publicationOffre';
@@ -801,7 +849,7 @@ import dossierCandidat from '../../bien_service/DossierPso/dossierCandidat/dossi
     import componentOuvertureMembre from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuvertureCojoMembre/componentOuvertureMembre';
     import componentAnalyse from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
      import componentPv from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
-  
+  import rapportOuverture from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuverture';
 //   import componentCotation from '../dossierDetailMarchePs/dossierComponentPs/componentCotation';
 //      import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
 //       import componentOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
@@ -836,7 +884,7 @@ import { formatageSomme } from "../../../../src/Repositories/Repository";
         components:{
 
             componentCotation,
-            componentEtat,
+            // componentEtat,
             componentOuverture,
             componentActe,
             publicationOffre,
@@ -846,6 +894,7 @@ mandateBs,
 dossierCandidat,
  componentOuverture1,
             componentOuvertureMembre,
+            rapportOuverture,
             componentAnalyse,
 componentPv,
  
@@ -882,7 +931,7 @@ componentPv,
                     }
 
                 ],
-                    
+                   macheid:"", 
               isButtunAddDossierCandidat:""
             };
         },
@@ -898,7 +947,7 @@ created() {
 
             ...mapGetters("bienService", ["getterCojos","mandate","getMandatPersonnaliserVise", "procedurePassations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres",
                "getterDossierCandidats","marches","gettersOuverturePersonnaliser","getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser"
-               
+               ,"getterAnoDMPBailleur"
                
               ]),
  
@@ -955,7 +1004,16 @@ return "Appel d'Offre Ouvert(AON ou AOI)"
 
 
 
-
+ listeAvisAnoBailleur(){
+       return id =>{
+           if(id!=null && id!=""){
+               const resultatAvis = this.getterAnoDMPBailleur.find(idDemande =>idDemande.marche_id==id
+               && idDemande.avis_bail== 0)
+               return resultatAvis
+           }
+           return null
+       }
+   },
 
   afficherCodeTypeProcedure() {
       return id => {

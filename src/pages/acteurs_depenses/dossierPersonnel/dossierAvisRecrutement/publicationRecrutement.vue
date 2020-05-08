@@ -80,13 +80,21 @@
                             </tr>
                             <tr>
                             <td colspan="2" width="">
-                        <div class="control-group">
+
+                                 <div class="control-group">
+                            <label class="control-label">Objet offre :</label>
+                            <div class="controls">
+                            <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span11" rows="3" placeholder="Entre le  text ..."></textarea>
+                    
+                            </div>
+                             </div>
+                        <!-- <div class="control-group">
                             <label class="control-label">Objet d'avis :</label>
                             <div class="controls">
                                  <textarea  v-model="formData.objet_appel"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
                     
                             </div>
-                        </div>
+                        </div> -->
                             </td>
                             </tr>
                             <tr>
@@ -306,7 +314,17 @@ listeAppelOffre() {
 //     },
 
 
-
+ affichierObjetMarche(){
+        return id =>{
+            if(id!=null && id!=""){
+                let objetMarche = this.marches.find(idMarche => idMarche.id ==id);
+                if(objetMarche){
+                    return objetMarche.objet
+                }
+                 return 0
+            }
+        }
+    },
 
 
 
@@ -377,7 +395,7 @@ typeProcedureLibelle() {
       
        type_appel: this.typeMarcheId(this.macheid),
           marche_id: this.macheid,
-          //objet_appel:this.affichierObjetMarche(this.macheid)
+          objet_appel:this.affichierObjetMarche(this.macheid)
          };
       //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
 

@@ -1,14 +1,23 @@
 afficherBanqueDynamique
 <template>
     <div>
+                  
+                    <!-- <div align="right">
+                    <div class="widget-content">
+                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" v-if="listeAvisAnoBailleur(macheid)">Ajouter</a>
+                          <button class="btn btn-warning"  title="veillez recommencer le jugement , car l'Avis Bailleur est Objection" disabled v-else  >Ajouter</button>
+                   
+                    </div>
 
+
+                </div> -->
                 
                 <h4> Liste acte effet financier </h4>
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
 
-                        <th>Reference acte</th>
+                        <th>Reference acte{{afficheMarcheType}}</th>
                         <th>Libelle acte</th>
                         <th>Montant acte</th>
                         <th>Type acte</th>
@@ -706,7 +715,7 @@ export default {
        computed: {
 
             ...mapGetters("bienService", [ "gettersCotations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
-                "modePassations", "procedurePassations","getterDossierCandidats","marches",
+                "modePassations", "procedurePassations","getterDossierCandidats","marches","typeMarches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
@@ -722,6 +731,46 @@ export default {
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
        ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe', 
   'planActe']),
+afficheMarcheType(){
+if(this.affichierLibelleTypeMarche(this.affichierIdTypeMarche(this.macheid)) == "Travaux"){
+return 1
+}
+else{
+  return 2
+}
+},
+
+
+affichierLibelleTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+affichierIdTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_marche_id;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
 
  affichierLibelleTypeActeFinancier() {
       return id => {
@@ -822,6 +871,18 @@ afficherEntrepriseRecep () {
                 }
             },
 
+
+
+// listeAvisAnoBailleur(){
+//        return id =>{
+//            if(id!=null && id!=""){
+//                const resultatAvis = this.getterAnoDMPBailleur.find(idDemande =>idDemande.marche_id==id
+//                && idDemande.avis_bail== 0)
+//                return resultatAvis
+//            }
+//            return null
+//        }
+//    },
 
 
              afficherBanqueDynamiqueId(){
@@ -977,15 +1038,17 @@ getDateFinExécutionValueEdit(){
               
 
               ajouterModalActeEffetFinancierLocal(){
-       /* var nouvelObjet = {
+       var nouvelObjet = {
             ...this.formEffetFinancier,
-            duree: this.nombreDejourCalcule
-        }*/
+            // duree: this.nombreDejourCalcule,
+            difference_personnel_bienService:this.afficheMarcheType,
+            marche_id:this.macheid
+        }
     //let entreprisePremier=this.entreprises.find(item=>item.numero_rc==rcm)
              
-    this.formEffetFinancier.marche_id=this.macheid
+    
     //this.formEffetFinancier.entreprise_id=entreprisePremier.id
-    this.ajouterActeEffetFinancier(this.formEffetFinancier)
+    this.ajouterActeEffetFinancier(nouvelObjet)
     let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
     marcheObjet.attribue = 2
     marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
@@ -1025,8 +1088,13 @@ getDateFinExécutionValueEdit(){
 }, 
 
 modifierModalActeEffetFinancierLocal(){
-
-    this.modifierActeEffetFinancier(this.editActeEffetFinancier)
+  var nouvelObjet2 = {
+            ...this.editActeEffetFinancier,
+            // duree: this.nombreDejourCalcule,
+            difference_personnel_bienService:this.afficheMarcheType,
+            marche_id:this.macheid
+        }
+    this.modifierActeEffetFinancier(nouvelObjet2)
     this.$('#modifierActeEF').modal('hide');
 },
 

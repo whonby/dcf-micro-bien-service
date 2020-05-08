@@ -185,100 +185,101 @@ export function supprimerBudgetGeneral({ commit, dispatch}, id) {
 //////////////////////////*debut action type texte */////////////////////////////
 
 // afficher liste des type de textes
-export function getAllBanqueUa({ commit }) {
-  queue.push(() => {
-    axios
-      .get("/listeBanqueUa")
-      .then(response => {
-        commit("GET_ALL_BANQUE_UA", response.data);
-      })
-      .catch(error => console.log(error));
-  });
-}
+// export function getAllBanqueUa({ commit }) {
+//   queue.push(() => {
+//     axios
+//       .get("/listeBanqueUa")
+//       .then(response => {
+//         commit("GET_ALL_BANQUE_UA", response.data);
+//       })
+//       .catch(error => console.log(error));
+//   });
+// }
 
 // ajouter type texte
-export function ajouterBanqueUa({ commit }, nouveau) {
-  asyncLoading(axios
-    .post("/ajouterBanqueUa", {
+// export function ajouterBanqueUa({ commit }, nouveau) {
+//   asyncLoading(axios
+//     .post("/ajouterBanqueUa", {
       
-      date_ouverture_compte: nouveau.date_ouverture_compte,
-      signataire_compte: nouveau.	signataire_compte,
-      nature_compte: nouveau.nature_compte,
-      agence: nouveau.agence,
-      situation_geographique_angence: nouveau.situation_geographique_angence,
-      numero_agence: nouveau.numero_agence,
-      telephone_agence: nouveau.telephone_agence,
-      ua_id: nouveau.ua_id,
-      banque_id: nouveau.banque_id,
-      commune_id: nouveau.commune_id,
-      ville_id: nouveau.ville_id,
-      numero_compte: nouveau.numero_compte,
-      pays_id: nouveau.pays_id,
-      agence_id: nouveau.agence_id,
-      banq_id: nouveau.banq_id,
-      swift: nouveau.swift,
-      rib: nouveau.rib,
-      iban: nouveau.iban,
-      clerib: nouveau.clerib,
+//       date_ouverture_compte: nouveau.date_ouverture_compte,
+//       signataire_compte: nouveau.	signataire_compte,
+//       nature_compte: nouveau.nature_compte,
+//       agence: nouveau.agence,
+//       situation_geographique_angence: nouveau.situation_geographique_angence,
+//       numero_agence: nouveau.numero_agence,
+//       telephone_agence: nouveau.telephone_agence,
+//       ua_id: nouveau.ua_id,
+//       banque_id: nouveau.banque_id,
+//       commune_id: nouveau.commune_id,
+//       ville_id: nouveau.ville_id,
+//       numero_compte: nouveau.numero_compte,
+//       pays_id: nouveau.pays_id,
+//       agence_id: nouveau.agence_id,
+//       banq_id: nouveau.banq_id,
+//       swift: nouveau.swift,
+//       rib: nouveau.rib,
+//       iban: nouveau.iban,
+//       clerib: nouveau.clerib,
 
-    }))
+//     }))
   
-    .then(response => {
-      if (response.status == 201) {
-        commit("AJOUTER_BANQUE_UA", response.data);
-        this.$app.$notify({
-          title: 'Success',
-          text: 'Enregistrement Effectué avec Succès!',
-          type: "success"
-        })
-      }
-    });
-}
+//     .then(response => {
+//       if (response.status == 201) {
+//         commit("AJOUTER_BANQUE_UA", response.data);
+//         this.$app.$notify({
+//           title: 'Success',
+//           text: 'Enregistrement Effectué avec Succès!',
+//           type: "success"
+//         })
+//       }
+//     });
+// }
 
 // modifier
-export function modifierBanqueUa({ commit }, nouveau) {
-  asyncLoading(axios
-    .put("/modifierBanqueUa/" + nouveau.id, {
+
+// export function modifierBanqueUa({ commit }, nouveau) {
+//   asyncLoading(axios
+//     .put("/modifierBanqueUa/" + nouveau.id, {
       
-      date_ouverture_compte: nouveau.date_ouverture_compte,
-     signataire_compte: nouveau.	signataire_compte,
-     nature_compte: nouveau.nature_compte,
-     agence: nouveau.agence,
-     situation_geographique_angence: nouveau.situation_geographique_angence,
-     numero_agence: nouveau.numero_agence,
-     telephone_agence: nouveau.telephone_agence,
-     ua_id: nouveau.ua_id,
-     banque_id: nouveau.banque_id,
-     commune_id: nouveau.commune_id,
-     ville_id: nouveau.ville_id,
-     numero_compte: nouveau.numero_compte,
-     pays_id: nouveau.pays_id,
-     agence_id: nouveau.agence_id,
-     banq_id: nouveau.banq_id,
-     swift: nouveau.swift,
-     rib: nouveau.rib,
-     iban: nouveau.iban,
-     clerib: nouveau.clerib,
-    }))
-    .then(response => {
-      commit("MODIFIER_BANQUE_UA", response.data);
-      this.$app.$notify({
-        title: 'Success',
-        text: 'Modification Effectué avec Succès!',
-        type: "success"
-      })
-    });
-}
+//       date_ouverture_compte: nouveau.date_ouverture_compte,
+//      signataire_compte: nouveau.	signataire_compte,
+//      nature_compte: nouveau.nature_compte,
+//      agence: nouveau.agence,
+//      situation_geographique_angence: nouveau.situation_geographique_angence,
+//      numero_agence: nouveau.numero_agence,
+//      telephone_agence: nouveau.telephone_agence,
+//      ua_id: nouveau.ua_id,
+//      banque_id: nouveau.banque_id,
+//      commune_id: nouveau.commune_id,
+//      ville_id: nouveau.ville_id,
+//      numero_compte: nouveau.numero_compte,
+//      pays_id: nouveau.pays_id,
+//      agence_id: nouveau.agence_id,
+//      banq_id: nouveau.banq_id,
+//      swift: nouveau.swift,
+//      rib: nouveau.rib,
+//      iban: nouveau.iban,
+//      clerib: nouveau.clerib,
+//     }))
+//     .then(response => {
+//       commit("MODIFIER_BANQUE_UA", response.data);
+//       this.$app.$notify({
+//         title: 'Success',
+//         text: 'Modification Effectué avec Succès!',
+//         type: "success"
+//       })
+//     });
+// }
 //supprimer
-export function supprimerBanqueUa({ commit }, id) {
-  this.$app.$dialog
-    .confirm("Voulez vouz vraiment supprimer ?.")
-    .then(dialog => {
-      commit("SUPPRIMER_BANQUE_UA", id);
-      // // dialog.loading(false) // stops the proceed button's loader
-      axios.delete("/supprimerBanqueUa/" + id).then(() => dialog.close());
-    });
-}
+// export function supprimerBanqueUa({ commit }, id) {
+//   this.$app.$dialog
+//     .confirm("Voulez vouz vraiment supprimer ?.")
+//     .then(dialog => {
+//       commit("SUPPRIMER_BANQUE_UA", id);
+//       // // dialog.loading(false) // stops the proceed button's loader
+//       axios.delete("/supprimerBanqueUa/" + id).then(() => dialog.close());
+//     });
+// }
 
 /*fin action type texte */
 
@@ -1167,7 +1168,8 @@ export function modifierRealiteServiceFait({ commit }, nouveau) {
     nom_controleur_financier: nouveau.nom_controleur_financier,
     	montant: nouveau.	montant,
       exercice_budget: nouveau.	exercice_budget,
-    engagement_id: nouveau.engagement_id
+    engagement_id: nouveau.engagement_id,
+    marchetype: nouveau.marchetype
     }
   
   )).then(response => {
@@ -1254,7 +1256,8 @@ export function modifierLiquidation({ commit, dispatch}, nouveau) {
        decision_controleur_financier: nouveau.decision_controleur_financier,
       nom_controleur_financier: nouveau.nom_controleur_financier,
       date_controleur_financier: nouveau.date_controleur_financier,
-      observation_controleur_financier: nouveau.observation_controleur_financier
+      observation_controleur_financier: nouveau.observation_controleur_financier,
+      marchetype: nouveau.marchetype
     })).then(response => {
       commit("MODIFIER_LIQUIDATION", response.data);
       dispatch('getAllLiquidation')
@@ -1281,3 +1284,148 @@ export function supprimerLiquidation({ commit }, id) {
 
 
 
+
+export function getOrganigrammeUa({ commit }) {
+  queue.push(() => axios.get('/listeOrganigrammeUa').then(tony => {
+    commit('GET_ALL_ORGANIGRAMME_UA', tony.data)
+  }).catch(error => console.log(error)))
+
+}
+
+// ajouter plan fonctionnelle
+export function ajouterOrganigrammeUa({ commit, dispatch }, objetAjout) {
+  asyncLoading(axios.post('/ajouterOrganigrammeUa', objetAjout)).then(res => {
+    commit('AJOUTER_ORGANIGRAMME_UA', res.data)
+    dispatch('getOrganigrammeUa')
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Enregistrement effectué avec success !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+// modifier plan fonctionnelle
+
+export function modifierOrganigrammeUa({ commit, dispatch }, plan_fonctionnel) {
+  asyncLoading(axios.put('/modifierOrganigrammeUa/' + plan_fonctionnel.id, {
+    uniteua_id: plan_fonctionnel.uniteua_id,
+    libelle: plan_fonctionnel.libelle,
+   
+  })).then(res => {
+    commit('MODIFIER_ORGANIGRAMME_UA', res.data)
+    dispatch('getOrganigrammeUa')
+    this.$app.$notify({
+      title: 'success ',
+      text: 'Modification effectué avec success !',
+      type: "success"
+    })
+  }).catch(error => console.log(error))
+}
+// supprimer plan fonctionnelle
+export function supprimerOrganigrammeUa({ commit, dispatch }, id) {
+
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit('SUPPRIMER_ORGANIGRAMME_UA', id)
+      dispatch('getOrganigrammeUa')
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete('/supprimerOrganigrammeUa/' + id).then(() => dialog.close())
+    })
+}
+
+export function getAllBanqueUa({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeBanqueUa")
+      .then(response => {
+        commit("GET_ALL_BANQUE_UA", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+// ajouter type texte
+export function ajouterBanqueUa({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterBanqueUa", {
+
+      date_ouverture_compte: nouveau.date_ouverture_compte,
+      signataire_compte: nouveau.signataire_compte,
+      nature_compte: nouveau.nature_compte,
+      agence: nouveau.agence,
+      situation_geographique_angence: nouveau.situation_geographique_angence,
+      numero_agence: nouveau.numero_agence,
+      telephone_agence: nouveau.telephone_agence,
+      ua_id: nouveau.ua_id,
+      banque_id: nouveau.banque_id,
+      commune_id: nouveau.commune_id,
+      ville_id: nouveau.ville_id,
+      numero_compte: nouveau.numero_compte,
+      pays_id: nouveau.pays_id,
+      agence_id: nouveau.agence_id,
+      banq_id: nouveau.banq_id,
+      swift: nouveau.swift,
+      rib: nouveau.rib,
+      iban: nouveau.iban,
+      clerib: nouveau.clerib,
+
+    }))
+
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_BANQUE_UA", response.data);
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+// modifier
+export function modifierBanqueUa({ commit }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierBanqueUa/" + nouveau.id, {
+
+      date_ouverture_compte: nouveau.date_ouverture_compte,
+      signataire_compte: nouveau.signataire_compte,
+      nature_compte: nouveau.nature_compte,
+      agence: nouveau.agence,
+      situation_geographique_angence: nouveau.situation_geographique_angence,
+      numero_agence: nouveau.numero_agence,
+      telephone_agence: nouveau.telephone_agence,
+      ua_id: nouveau.ua_id,
+      banque_id: nouveau.banque_id,
+      commune_id: nouveau.commune_id,
+      ville_id: nouveau.ville_id,
+      numero_compte: nouveau.numero_compte,
+      pays_id: nouveau.pays_id,
+      agence_id: nouveau.agence_id,
+      banq_id: nouveau.banq_id,
+      swift: nouveau.swift,
+      rib: nouveau.rib,
+      iban: nouveau.iban,
+      clerib: nouveau.clerib,
+    }))
+    .then(response => {
+      commit("MODIFIER_BANQUE_UA", response.data);
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerBanqueUa({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vouz vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_BANQUE_UA", id);
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerBanqueUa/" + id).then(() => dialog.close());
+    });
+}

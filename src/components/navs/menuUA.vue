@@ -76,7 +76,20 @@
               <i class="icon-key"></i>Fonction UA
             </router-link>
           </li>
+            <li class="divider"></li>
+        <!-- <li>
+            <router-link :to="{name: 'banqueUa'}" tag="a">
+              <i class="icon-key"></i>Banque UA
+            </router-link>
+          </li> -->
+           <!-- <li class="divider"></li>
+        <li>
+            <router-link :to="{name: 'Organigramme'}" tag="a">
+              <i class="icon-key"></i>Organigramme UA
+            </router-link>
+          </li> -->
            <li class="divider"></li>
+<<<<<<< HEAD
          <li>
            <router-link :to="{name: 'banqueUa'}" tag="a">
              <i class="icon-key"></i>Banque UA
@@ -84,18 +97,20 @@
          </li>
            <li class="divider"></li>
         
+=======
+>>>>>>> developpeur
         </ul>
       </li>
         <li>
             <router-link :to="{name: 'budgetGenerals'}" tag="a">
-              BUDGET PAR UNITES ADMINISTRATIVES
+              BUDGET PAR UA
             </router-link>
           </li>
 
 
            <li>
             <router-link :to="{name: 'BudgetParUa'}" tag="a">
-              LISTE BUDGET PAR UNITE ADMINISTRATIVE
+              DETAIL DE BUDGET PAR UA
             </router-link>
           </li>
            <li>

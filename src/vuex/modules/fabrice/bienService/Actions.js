@@ -4,176 +4,92 @@ import { asyncLoading } from 'vuejs-loading-plugin'
 var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
 
+// ajouterchnique
+// modifierchnique
+// supprimerDossierCandidat
 
+// ajouterOffreFinancier
 
-
-// action for print all to prestation
-
-// export  function  getPrestation({commit}) {
-//     queue.push(() => axios.get('/url').then((response) => {
-//       commit('GET_ALL_PRESTATION', response.data)
-      
-//   }).catch(error => console.log(error)))
-//   }
-
-  // action pour ajouter prestation
-//   export function ajouterPrestation({commit}, elementAjout){
-//     asyncLoading(axios.post('/urls',{
-//         id_type_prestation:elementAjout.id_type_prestation,
-//       libelle:elementAjout.libelle,
-//       date_debut:elementAjout.date_debut,
-//       date_fin:elementAjout.date_fin,
-//       objet_prestation:elementAjout.objet_prestation
-//   })).then(response =>{
-//         if(response.status == 201){
-//             commit('AJOUTER_PRESTATION', response.data)
-
-//             this.$app.$notify({
-//               title: 'success ',
-//               text: 'Enregistrement effectué !',
-//               type:"success"
-//             })
-//         }
-
-
-//     }).catch(error => console.log(error))
-
-// }
-
-
-// action pour ajiouter nouveau fournisseur
-
-// export function ajouterFournisseur({commit}, elementAjout){
-//   asyncLoading(axios.post('/urls', elementAjout)).then(response =>{
-//       if(response.status == 201){
-//           commit('AJOUTER_NOUVEAU_FOURNISSEUR', response.data)
-
-//           this.$app.$notify({
-//             title: 'success ',
-//             text: 'Enregistrement effectué !',
-//             type:"success"
-//           })
-//       }
-
-
-//   }).catch(error => console.log(error))
-
-// }
-
-
-// action pour modifier prestation
-
-
-//  export function modifierPrestation({commit}, element_modifie) {
-//     asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-//         id_type_prestation:element_modifie.id_type_prestation,
-//         libelle:element_modifie.libelle,
-//         date_debut:element_modifie.date_debut,
-//         date_fin:element_modifie.date_fin,
-//         objet_prestation:element_modifie.objet_prestation
-
-//    })).then(response => {
-//          commit('MODIFIER_PRESTATION', response.data)
-
-//          this.$app.$notify({
-//            title: 'success ',
-//            text: 'Modification effectué !',
-//            type:"success"
-//          })
-//      }).catch(error => console.log(error))
-//  }
-  // supprimer categorie mision
-// export function supprimerPrestation({commit}, id) {
-//    this.$app.$dialog
-//    .confirm("Voulez vouz vraiment supprimer ?.")
-//    .then(dialog => {
-//       commit('DELETE_PRESTATION', id)
-//      // // dialog.loading(false) // stops the proceed button's loader
-//        axios.delete('/urls/' + id).then(() => dialog.close() )   
-//    })
- 
-// }
-
-
-
-// export  function  getActeDepense({commit}) {
-//     queue.push(() => axios.get('/url').then((response) => {
-//       commit('GET_ALL_ACTE_DEPENSE', response.data)
-      
-//   }).catch(error => console.log(error)))
-//   }
-
-  // action pour ajouter acte depense
-//   export function ajouterActeDepense({commit}, elementAjout){
-//     asyncLoading(axios.post('/urls',{
+export  function  getCandidatSelectionner({commit}) {
+  queue.push(() => axios.get('/liste_candidat_select').then((response) => {
+    commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data.data)
     
-//     matricule:elementAjout.matricule,
-//     id_type_acte_depense:elementAjout.id_type_acte_depense,
-//     montant:elementAjout.montant,
-//     dotation_budgetaire:elementAjout.dotation_budgetaire,
-//     engagement_anterieur:elementAjout.engagement_anterieur,
-//     engagement_actuel:elementAjout.engagement_actuel,
-//     engagement_cumule:elementAjout.engagement_cumule,
-//     disponible_budgetaire:elementAjout.disponible_budgetaire,
-//     objet_depense:elementAjout.objet_depense,
-//     ligne_budgetaire:elementAjout.ligne_budgetaire,
-//     Type_de_procedure:elementAjout.Type_de_procedure
+}).catch(error => console.log(error)))
+}
 
-       
-//   })).then(response =>{
-//         if(response.status == 201){
-//             commit('AJOUTER_ACTE_DEPENSE', response.data)
+// action pour modifier candidat selectionner
+export function modifierCandidatSelectionner({commit}, formData){
+  asyncLoading(axios.post('/update_candidat_select',formData)).then(response =>{
+      if(response.status == 201){
+        console.log(response.data)
+          commit('MODIFIER_CANDIDAT_SELECTIONNER', response.data)
+          
+          this.$app.$notify({
+            title: '',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
 
-//             this.$app.$notify({
-//               title: 'success ',
-//               text: 'Enregistrement effectué !',
-//               type:"success"
-//             })
-//         }
+  }).catch(error => console.log(error))
+}
 
-//     }).catch(error => console.log(error))
-// }
+// supprimer candidat selectionner
+export function supprimerCandidatSelectionner({commit}, id) {
+  return this.$app.$dialog
+ .confirm("Voulez vouz vraiment supprimer ?.")
+ .then(dialog => {
+    commit('SUPPRIMER_CANDIDAT_SELECTION', id)
+   // // dialog.loading(false) // stops the proceed button's loader
+   return  axios.delete('/suppri_candidat_select/' + id).then(() => dialog.close() )   
+ })
 
-// action pour modifier acte depense
+}
 
 
-//  export function modifierActeDepense({commit}, element_modifie) {
-//     asyncLoading( axios.put('/urls/'+ element_modifie.id ,{
-   
-//       matricule:element_modifie.matricule,
-//       id_type_acte_depense:element_modifie.id_type_acte_depense,
-//       montant:element_modifie.montant,
-//       dotation_budgetaire:element_modifie.dotation_budgetaire,
-//       engagement_anterieur:element_modifie.engagement_anterieur,
-//       engagement_actuel:element_modifie.engagement_actuel,
-//       engagement_cumule:element_modifie.engagement_cumule,
-//       disponible_budgetaire:element_modifie.disponible_budgetaire,
-//       objet_depense:element_modifie.objet_depense,
-//       ligne_budgetaire:element_modifie.ligne_budgetaire,
-//       Type_de_procedure:element_modifie.Type_de_procedure
 
-//    })).then(response => {
-//          commit('MODIFIER_ACTE_DEPENSE', response.data)
-         
-
-//          this.$app.$notify({
-//            title: 'success ',
-//            text: 'Modification effectué !',
-//            type:"success"
-//          })
-//      }).catch(error => console.log(error))
-//  }
-  // action pour la suppression d'acte de depense
-// export function supprimerActeDepense({commit}, id) {
-//    this.$app.$dialog
-//    .confirm("Voulez vouz vraiment supprimer ?.")
-//    .then(dialog => {
-//       commit('SUPPRIMER_ACTE_DEPENSE', id)
-
-//        axios.delete('/urls/' + id).then(() => dialog.close() )   
-//    })
+// retourn de selection du candiadt 
+export function supprimerCandidatSelectionnerDeselection({commit}, id) {
+   return this.$app.$dialog
+  .confirm("Voulez vouz déselectionner le candidat ?.")
+  .then(dialog => {
+     commit('SUPPRIMER_CANDIDAT_SELECTION', id)
+    // // dialog.loading(false) // stops the proceed button's loader
+    return  axios.delete('/suppri_candidat_select/' + id).then(() => dialog.close() )   
+  })
  
-// }
+ }
+
+
+
+
+export function ajouterCandidatSelectionner({commit}, formData){
+
+   return this.$app.$dialog
+  .confirm("Voulez-vous selectionner ce candidat ?.")
+  .then(dialog => {
+    
+    return asyncLoading(axios.post('/add_candidat_select',formData)).then(response =>{
+      if(response.status == 201){
+        console.log(response.data)
+          commit('AJOUTER_CANDIDAT_SELECTIONNER', response.data)
+          dialog.close()
+          this.$app.$notify({
+            title: '',
+            text: 'Enregistrement effectué !',
+            type:"success"
+          })
+      }
+
+  }).catch(error => console.log(error))
+    // // dialog.loading(false) // stops the proceed button's loader
+     
+  })
+
+  
+}
+
+
 
  // liste role membrecojo
  export  function getRolemembreCojo({commit}){
@@ -3266,7 +3182,7 @@ export function supprimerMandater({commit}, id) {
 
 export  function  getDocument({commit}) {
   queue.push(() => axios.get('/list_document').then((response) => {
-      commit('GET_ALL_DOCUMENT', response.data)
+      commit('GET_ALL_DOCUMENT', response.data.data)
 
   }).catch(error => console.log(error)))
 }
@@ -3324,18 +3240,20 @@ export function supprimerDocument({commit}, id) {
 
 export  function  getRapportJugement({commit}) {
   queue.push(() => axios.get('/liste_rapport_iugement').then((response) => {
-      commit('GET_ALL_RAPPORTJUGEMENT', response.data)
+      commit('GET_ALL_RAPPORTJUGEMENT', response.data.data)
 
   }).catch(error => console.log(error)))
 }
 
 // action pour ajouter les infos
 
-export function ajouterRapportJugement({commit}, elementAjout,config){
+export function ajouterRapportJugement({commit,dispatch}, elementAjout,config){
   asyncLoading(axios.post('/add_rapport_jugement',elementAjout,config)).then(response =>{
       if(response.status == 201){
-          commit('AJOUTER_RAPPORT_OUVERTURE', response.data)
-
+          commit('AJOUTER_RAPPORT_OUVERTURE', response.data.jugement)
+          commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data.annalyse.data)
+          commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
+          dispatch('getRapportJugement')
           this.$app.$notify({
               title: 'success ',
               text: 'Enregistrement effectué !',
@@ -3350,8 +3268,8 @@ export function ajouterRapportJugement({commit}, elementAjout,config){
 // action pour modifier le type text juridique
 
 
-export function modifierRapportJugement({commit}, element_modifie) {
-asyncLoading(axios.post('/update_rapport_jugement',element_modifie)).then(response => {
+export function modifierRapportJugement({commit}, element_modifie,config) {
+asyncLoading(axios.post('/update_rapport_jugement',element_modifie,config)).then(response => {
       commit('MODIFIER_RAPPORT_OUVERTURE', response.data)
       this.$app.$notify({
           title: 'success ',
@@ -3367,13 +3285,19 @@ export function supprimerRapportJugement({commit}, id) {
       .confirm("Voulez vouz vraiment supprimer ?.")
       .then(dialog => {
           commit('SUPPRIMER_RAPPORT_OUVERTURE', id)
+         
           // // dialog.loading(false) // stops the proceed button's loader
-          axios.delete('/delete_rapport_jugement/' + id).then(() => dialog.close() )
+          axios.delete('/delete_rapport_jugement/' + id).then(response =>{
+            commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data.data)
+            commit('GET_ALL_ANALYSE_DOSSIER', response.data.data)
+            dialog.close()
+        }  )
+
+          //axios.delete('/delete_rapport_jugement/' + id).then(() => dialog.close() )
       })
 
 }
 /**Fin madate*/
-
 
 
 
@@ -3547,7 +3471,7 @@ export function modifierEngagement({ commit,dispatch }, element_modifie) {
     dispatch('getEngagement')
     this.$app.$notify({
       title: 'success ',
-      text: 'Modification effectué !',
+       text: 'Modification effectué !',
       type: "success"
     })
   }).catch(error => console.log(error))
@@ -4457,3 +4381,63 @@ export function modifierMarcheBascule({ commit, dispatch }, element_modifie) {
     })
   }).catch(error => console.log(error))
 }
+
+
+
+
+
+
+
+
+
+
+
+export function getEcheances({ commit }) {
+    queue.push(() => axios.get('/echeances').then((response) => {
+        commit('GET_ECHEANCES', response.data.data)
+
+}).catch(error => console.log(error)))
+}
+
+// action pour ajouter bailleur
+export function ajouterEcheances({ commit }, formData) {
+    asyncLoading(axios.post('/echeances', formData)).then(response => {
+        if (response.status == 201) {
+        // console.log(response.data)
+        commit('AJOUTER_ECHEANCES', response.data)
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué !',
+            type: "success"
+        })
+    }
+
+}).catch(error => console.log(error))
+}
+
+// action pour modifier bailleur
+
+
+export function modifierEcheances({ commit }, element_modifie) {
+    asyncLoading(axios.put('/echeances', element_modifie)).then(response => {
+        commit('MODIFIER_ECHEANCES', response.data)
+    this.$app.$notify({
+        title: 'success ',
+        text: 'Modification effectué !',
+        type: "success"
+    })
+}).catch(error => console.log(error))
+}
+// supprimer categorie mision
+export function supprimerEcheances({ commit }, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+        commit('DELETE_ECHEANCES', id)
+    // // dialog.loading(false) // stops the proceed button's loader
+    axios.delete('/echeances/' + id).then(() => dialog.close())
+})
+
+}
+

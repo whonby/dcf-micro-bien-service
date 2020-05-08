@@ -1,5 +1,5 @@
 export const role_membrecojo = state => state.role_membrecojo
-listeJugementPersonnel
+
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays
@@ -666,7 +666,7 @@ export const getEngagementPersonnaliser1 = (state, getters, rootState, rootGette
     // exemple de teset
 export const mandatVise = state =>
     state.mandats.filter(
-        Immrealise => Immrealise.decision_cf == 1
+        Immrealise => Immrealise.decision_cf == 8
     );
 export const getMandatPersonnaliserVise = (state, getters, rootState, rootGetters) =>
     getters.mandatVise.map(element => {
@@ -1025,4 +1025,5 @@ export const gettersTest = (state, getters, rootState, rootGetters) =>
         }
         return element;
     })
-    
+
+ export const getterEcheances = state => state.echeances;

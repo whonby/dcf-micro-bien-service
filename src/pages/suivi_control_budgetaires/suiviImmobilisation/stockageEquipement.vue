@@ -6,7 +6,7 @@
 
 
 <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
-    <div id="exampleModal" class="modal hide">
+    <div id="exampleModal" class="modal hide tailgrandStock">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter Article en stock</h3>
@@ -343,3 +343,9 @@ veifEquipementExist() {
   }
 };
 </script>
+<style>
+.tailgrandStock{
+  width: 88%;
+  margin: 0 -42%;
+}
+</style>

@@ -45,9 +45,35 @@ Ajouter acte de nomination
                            <div align="right">
                                <a href="#affeter" data-toggle="modal" class="btn btn-success" v-if="salaire_actuel_acteur.date_interuption"><i class="icon-plus-sign"></i></a>
                                <a href="#interompe" data-toggle="modal" class="btn btn-warning" v-if="salaire_actuel_acteur.date_fin_contrat"><i class="icon-minus-sign"></i></a>
-                               <a href="#fin_contrat" data-toggle="modal" class="btn btn-danger" v-if="!salaire_actuel_acteur.date_fin_contrat">
-                                   <i class=" icon-remove"></i></a>
-                           </div>
+                               <!-- <a href="#fin_contrat" data-toggle="modal" class="btn btn-danger" v-if="!salaire_actuel_acteur.date_fin_contrat">
+                                   <i class=" icon-remove"></i></a> -->
+
+                                     <!-- <div align="left">
+
+                                  <a href="#addcandidatP" data-toggle="modal" class="btn btn-warning" >Ajouter contrat resilié</a>
+                                     
+                                      </div> -->
+
+                                         <table class="">
+                                             <tr>
+                                                
+                                     
+                                     <div align="right">
+                                    <td> 
+                                   <a href="#addcandidatP" data-toggle="modal" class="btn btn-warning" >Ajouter contrat resilié</a>
+                                    </td>
+                                    <td>
+                                  <a href="#fin_contrat" data-toggle="modal" class="btn btn-primary" >Ajouter contrat terminé</a>
+                                    </td>
+
+                                    <td>
+                                    <a href="#addComptePersonnel" data-toggle="modal" class="btn btn-success" align="rigth">Ajouter  compte</a>
+                                      </td>
+                                  </div>
+                                             </tr>
+                                         </table>
+                
+                                  </div>
 
                             <div class="widget-box">
                                 <div class="widget-title">
@@ -158,13 +184,13 @@ Ajouter acte de nomination
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr v-for="item in load_act_personnel_acteur" :key="item.id">
-                                                    <td>{{item.code}}</td>
-                                                    <td>{{nomUniteAdmine(item.unite_administrative_id)}}</td>
-                                                    <td>{{formaterDate(item.date_debut_contrat) }}</td>
-                                                    <td>{{formaterDate(item.date_fin_contrat) }}</td>
-                                                    <td>{{formaterDate(item.date_arrivee_act_nomination) }}</td>
-                                                    <td>{{item.delai_diposition}} </td>
+                                                <tr v-for="(item, index) in load_act_personnel_acteur" :key="item.id">
+                                                    <td @dblclick="afficherModalActeNomination(index)">{{item.code || 'Non renseigné'}}</td>
+                                                    <td @dblclick="afficherModalActeNomination(index)">{{nomUniteAdmine(item.unite_administrative_id) || 'Non renseigné'}}</td>
+                                                    <td @dblclick="afficherModalActeNomination(index)">{{formaterDate(item.date_debut_contrat) || 'Non renseigné'}}</td>
+                                                    <td @dblclick="afficherModalActeNomination(index)">{{formaterDate(item.date_fin_contrat) || 'Non renseigné'}}</td>
+                                                    <td @dblclick="afficherModalActeNomination(index)">{{formaterDate(item.date_arrivee_act_nomination) || 'Non renseigné' }}</td>
+                                                    <td @dblclick="afficherModalActeNomination(index)">{{item.delai_diposition}} </td>
                                                     <td>
                                                         <a v-if="item.fichier_act_nomination" :href="item.fichier_act_nomination" class="btn btn-default" target="_blank">
                                                             <span class=""><i class="icon-book"></i></span>
@@ -180,7 +206,10 @@ Ajouter acte de nomination
                                                 </tbody>
                                             </table>
                                         </div>
+
+
                                         <div class="">
+
                                             <div id="myModal" class="modal hide tailgrand" aria-hidden="true" style="display: none;">
                                                 <div class="modal-header">
                                                     <button data-dismiss="modal" class="close" type="button">×</button>
@@ -193,7 +222,7 @@ Ajouter acte de nomination
                                                                           <div class="control-group">
                                                     <label class="control-label">Fonctions Budgetaire</label>
                                                     <div class="controls">
-                                                        <select v-model="fonction_budgetaire_id">
+                                                        <select v-model="formActe.fonction_budgetaire_id">
                                                             <option></option>
                                                             <option v-for="item in fonctionBudgetaire" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -207,7 +236,7 @@ Ajouter acte de nomination
                                                                  <div class="control-group">
                                                             <label class="control-label">Date Début Nomination :</label>
                                                             <div class="controls">
-                                                                <input type="date" class="span11" v-model="date_debut_fonct_budget" placeholder="">
+                                                                <input type="date" class="span11" v-model="formActe.date_debut_fonct_budget" placeholder="">
                                                             </div>
                                                         </div>
                                                             </td>
@@ -215,7 +244,7 @@ Ajouter acte de nomination
                                                                  <div class="control-group">
                                                             <label class="control-label">Date fin Nomination :</label>
                                                             <div class="controls">
-                                                                <input type="date" class="span11" v-model="date_fin_fonct_budget" placeholder="">
+                                                                <input type="date" class="span11" v-model="formActe.date_fin_fonct_budget" placeholder="">
                                                             </div>
                                                         </div>
                                                             </td>
@@ -256,7 +285,7 @@ Ajouter acte de nomination
                                                                   <div class="control-group">
                                                             <label class="control-label">Date arrivée acte nomination :</label>
                                                             <div class="controls">
-                                                                <input type="date" class="span11" v-model="date_arrivee_act_nomination" placeholder="">
+                                                                <input type="date" class="span11" v-model="formActe.date_arrivee_act_nomination" placeholder="">
                                                             </div>
                                                              <input type="hidden" class="span11" v-model="formData.normeequipement" placeholder="">
                                                              <input type="hidden" class="span11" v-model="formData.historiquenormequipement" placeholder="">
@@ -288,8 +317,120 @@ Ajouter acte de nomination
       </div>
                                             </div>
 
+
+
+
+                                             <div id="modification" class="modal hide tailgrand" aria-hidden="true" style="display: none;">
+                                                <div class="modal-header">
+                                                    <button data-dismiss="modal" class="close" type="button">×</button>
+                                                    <h3>Modifier acte de nomination</h3>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table class="table table-bordered table-striped">
+                                                        <tr>
+                                                            <td>
+                                                                          <div class="control-group">
+                                                    <label class="control-label">Fonctions Budgetaire</label>
+                                                    <div class="controls">
+                                                        <select v-model="editAct.fonction_budgetaire_id">
+                                                            <option></option>
+                                                            <option v-for="item in fonctionBudgetaire" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                 <div class="control-group">
+                                                            <label class="control-label">Date Début Nomination :</label>
+                                                            <div class="controls">
+                                                                <input type="date" class="span11" v-model="editAct.date_debut_fonct_budget" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                            </td>
+                                                            <td>
+                                                                 <div class="control-group">
+                                                            <label class="control-label">Date fin Nomination :</label>
+                                                            <div class="controls">
+                                                                <input type="date" class="span11" v-model="editAct.date_fin_fonct_budget" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                              <!-- <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Reference acte:</label>
+                                                    <div class="controls">
+                                                        <input type="text" v-model="formData.code"  placeholder="Saisir la reference" />
+                                                    </div>
+                                                </div>
+                </td> -->
+                <!-- <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Type acte de personnel</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.type_acte_id">
+                                                            <option></option>
+                                                            <option v-for="item in type_acte_personnels" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                </td> -->
+                 <td>
+                                                                <div class="control-group">
+                                                            <label class="control-label">Acte nomination :</label>
+                                                            <div class="controls">
+                                                                <input  type="file" @change="OnchangeFichier"  class="span11" placeholder="Last name">
+                                                                <code v-if="info_pdf">Le fichier doit etre un pdf</code>
+                                                            </div>
+                                                        </div>
+                                                            </td>
+                                                             <td>
+                                                                  <div class="control-group">
+                                                            <label class="control-label">Date arrivée acte nomination :</label>
+                                                            <div class="controls">
+                                                                <input type="date" class="span11" v-model="editAct.date_arrivee_act_nomination" placeholder="">
+                                                            </div>
+                                                             <input type="hidden" class="span11" v-model="formData.normeequipement" placeholder="">
+                                                             <input type="hidden" class="span11" v-model="formData.historiquenormequipement" placeholder="">
+                                                        </div>
+                                                            </td>
+                                                              <td>
+                                                                 <div class="control-group">
+                                                            <label class="control-label">Spécimen de signature</label>
+                                                            <div class="controls">
+                                                                <input type="file" @change="OnchangeImage"  class="span11 form-control" placeholder="Enter specimen">
+                                                                <code v-if="info_img">Le fichier doit etre une image (.png,.jpg,jpeg,gif)</code>
+                                                            </div>
+                                                        </div>
+                                                            </td>
+                                                        </tr>
+                                                       
+                                                        </table>
+                                                  
+
+                                                </div>
+ <div class="modal-footer">
+        <a
+          @click.prevent="modifierLocal"
+          class="btn btn-primary"
+          href="#"
+         
+        >Modifier</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+                                            </div>
+
                                         </div>
                                     </div>
+
+
                                     <div id="tab3" class="tab-pane">
                                         <div class="widget-content nopadding span8">
                                             <table class="table ">
@@ -667,6 +808,7 @@ Ajouter acte de nomination
             </div>
 
         </div>
+        
         <div id="fin_contrat" class="modal hide">
             <form @submit.prevent="finContrat" enctype="multipart/form-data">
                 <div class="modal-header">
@@ -682,6 +824,300 @@ Ajouter acte de nomination
             </form>
 
         </div>
+
+
+
+
+
+
+           <div id="addcandidatP" class="modal hide grdirModalActeEffet">
+             <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter contrat Resilié</h3>
+            </div>
+            <div class="modal-body">
+             
+         <div class="control-group">
+            <label class="control-label">Date fin contrat resilié</label>
+        <div class="controls">
+         <input type="date" v-model="detail.date_resilie" class="span3"  placeholder="Numero dossier" >
+            </div>
+          </div>
+                 
+
+                 <div class="control-group">
+                            <label class="control-label">cause du contrat :</label>
+                            <div class="controls">
+                            <textarea v-model="detail.cause_contrat"   class="textarea_editor span10" rows="3" placeholder="Saisir la cause du contrat ..."></textarea>
+                    
+                            </div>
+                        </div>
+              
+            </div>
+            <div class="modal-footer">
+                <a  @click.prevent="ajouterDossierC"
+                        class="btn btn-primary"
+                        href="#"
+                >Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div>
+        </div>
+
+
+
+    <div id="addComptePersonnel" class="modal hide tailModal"  >
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter compte bancaire</h3>
+                
+            </div>
+            <div class="modal-body">
+               
+                    <table class="table table-bordered table-striped">
+                      <tr>
+                           <td>
+                        <div class="control-group">
+                          <label>Matricule</label> 
+
+                            <div class="controls">
+                                <!-- <select v-model="formData1.acteur_depense_id" class="span4">
+                                  <option v-for="plans in personnaliseActeurDepense" 
+                                  :key="plans.id"  
+                                        :value="plans.id">{{plans.matricule}}</option>
+                                  </select> -->
+                                          
+                                  <input
+                                    type="text"
+                                    :value="afficherMatriculeDynamique(acteurDetail.id)"
+                                    class="span4"
+                                   readonly
+                            />
+                                
+                            </div>
+                        </div>
+                          </td>
+                           <td>
+                              <div class="control-group">
+                                                    <label class="control-label">Pays</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData1.pays_id" class="span4" >
+                                                            <option></option>
+                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                          </td>
+                           <td>
+                              <div class="control-group">
+                                                    <label class="control-label">Ville:</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData1.ville_id" class="span4" :readOnly="verroVille">
+                                                            <option></option>
+                                                            <option v-for="item in VilleDynamiques(formData1.pays_id)" 
+                                                            :key="item.id" 
+                                                            :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                          </td>
+                        
+<td>
+                              <div class="control-group">
+                                                    <label class="control-label">Communes</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData1.commune_id" class="span4" :readOnly="verroCommune">
+                                                            <option></option>
+                                                            <option v-for="item in commuDynamiques(formData1.ville_id)" 
+                                                            :key="item.id" 
+                                                            :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                          </td>
+                       
+                         
+                      </tr>
+                      <tr>
+                            
+                            <td>
+                        <div class="control-group">
+                             <label>Banque</label>
+                            <div class="controls">
+                              
+                            <select v-model="formData1.banq_id" class="span4" :readOnly="verroBanque">
+                                <option v-for="varText in banqueDynamiques(formData1.commune_id)" :key="varText.afficheBanque.id"
+                              :value="varText.afficheBanque.id">{{varText.afficheBanque.libelle}}</option>
+                            </select>
+                                
+                            </div>
+                        </div>
+                          </td>
+                            <td>
+                        <div class="control-group">
+                            <label>Code  agence</label>
+                            <div class="controls">
+                                <select v-model="formData1.numero_agence" class="span4" :readOnly="verroCodeAgence">
+                                                            <option></option>
+                                                            <option v-for="item in codeAgenceDynamiques" :key="item.id" :value="item.code_agence">
+                                                                {{item.code_agence}}
+                                                            </option>
+                                </select>
+                            </div>
+                        </div>
+                          </td>
+                          
+                                <td>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Nom  Agence</label>
+                                <input type="text" class="span4" placeholder="Saisir l'agence" :value="AffichierNomAgence" readonly>
+                            </div>
+                        </div>
+                          </td>
+                          <td>
+
+                        <div class="control-group">
+                            <label>Telephone agence</label>
+                            <div class="controls">
+                                <input type="text"  readonly   class="span4" placeholder="saisir le teleophone agence" :value="AffichierNumeroAgence">
+                            </div>
+                        </div>
+                          </td>
+                      </tr>
+                     <tr>
+                    
+
+                        
+                          <td>
+                     
+                        <div class="control-group">
+                            <label>Situation geographique</label>
+                            <div class="controls">
+                                <input type="text" class="span4"  readonly  placeholder="sitaution geographique" :value="AffichierSituationGeoAgence">
+                            </div>
+                        </div>
+                          </td>
+                           <td>
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Nature de compte</label>
+                                <!-- <input type="text" class="span" placeholder="saisir la nature de compte" v-model="formData.nature_compte"> -->
+                           <select v-model="formData1.nature_compte" class="span4">
+                                                            <option></option>
+                                                            <option value="0">Compte courant</option>
+                                                           
+                                                            
+                                                        </select>
+                            </div>
+                        </div>
+                          </td>
+                             <td>
+                       <div class="control-group">
+                           
+                             <label>Numero compte/cléRib</label>
+                            <div class="controls">
+                              
+                            <!-- <select v-model="formData.entrepse_id" class="span">
+                                <option v-for="varText in entreprises" :key="varText.id"
+                              :value="varText.id">{{varText.raison_sociale}}</option>
+                            </select> -->
+                                  <div class="controls">
+                                <input type="text" class="span3" placeholder="" v-model="formData1.numero_compte"> <input type="text" class="span1" placeholder="" v-model="formData1.clerib">
+                            </div>
+                            <input type="hidden" v-model="formData1.attribue">
+                            </div>
+                        </div>
+                          </td>
+                           <td>
+                        <div class="control-group">
+                          <label>Date d'ouverture</label>
+                            <div class="controls">
+                                <input type="date" class="span4" placeholder="" v-model="formData1.date_ouverture_compte">
+                            </div>
+                        </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          
+                        
+                         
+
+                         
+                      </tr>
+ 
+                    <tr>
+                          <td>
+                     
+                        <div class="control-group">
+                          <label>Signature</label>
+                            <div class="controls">
+                                <input type="text" class="span4" placeholder="saisir le signataire compte" v-model="formData1.signataire_compte">
+                            </div>
+                        </div>
+                          </td>
+<td>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Code SWIFT</label>
+                                <input type="text" class="span4"  v-model="formData1.swift">
+                            </div>
+                        </div>
+                          </td>
+                          <td>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>IBAN</label>
+                                <input type="text" class="span4"  v-model="formData1.iban">
+                            </div>
+                        </div>
+                          </td>
+                           <td>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>RIB</label>
+                                <input type="text" class="span4"  :value="afficherCodeRib" readonly>
+                            </div>
+                        </div>
+                          </td>
+                    </tr>
+                    </table>
+                
+            </div>
+            
+            <div class="modal-footer"> 
+              
+  <button 
+              @click.prevent="ajouterCompteLocal" class="btn btn-primary"
+              href="#">Valider</button>
+              <button data-dismiss="modal" class="btn" href="#">Fermer</button>
+ </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div id="interompe" class="modal hide">
             <div class="modal-header">
 
@@ -702,6 +1138,8 @@ Ajouter acte de nomination
                 </form>
             </div>
         </div>
+
+        <notifications/>
     </div>
 </template>
 
@@ -733,13 +1171,48 @@ Ajouter acte de nomination
                 imagePDF: "",
                 namePDF: "",
                 fichierPDF: "",
-                date_arrivee_act_nomination:"",
+
+                formActe:{
+            fonction_budgetaire_id :"",
+             date_arrivee_act_nomination:"",
+             date_debut_fonct_budget:"",
+             date_fin_fonct_budget:"",
+            
+
+                },
+
+                 formData1: {
+                   date_ouverture_compte:"",
+                    signataire_compte:"",
+                    nature_compte:"",
+                    	agence:"",
+                    	situation_geographique_angence:"",
+                    	numero_agence:"",
+                    telephone_agence:"",
+                    //entrepse_id:"",
+                        banq_id:"",
+                        pays_id:"",
+                        ville_id:"",
+                        commune_id:"",
+                        acteur_depense_id:"",
+                        attribue:1
+                },
+
+                editAct:{
+             fonction_budgetaire_id :"",
+             date_arrivee_act_nomination:"",
+             date_debut_fonct_budget:"",
+             date_fin_fonct_budget:"",
+            
+                },
+                
                 info_img:false,
                 info_pdf:false,
-                fonction_budgetaire_id:"",
-                date_debut_fonct_budget:"",
-                date_fin_fonct_budget:"",
+                // fonction_budgetaire_id:"",
+                // date_debut_fonct_budget:"",
+                // date_fin_fonct_budget:"",
                 liste:[],
+
                 formData : {
                     date_debut_contrat:"",
                     code:"",
@@ -756,6 +1229,11 @@ Ajouter acte de nomination
                     plan_budgetaire_id:'',
                     normeequipement:"",
                     historiquenormequipement:""
+                },
+
+                detail:{
+             date_resilie:"",
+             cause_contrat:""
                 },
                 conges:{
                     code: "",
@@ -813,14 +1291,203 @@ historiqueMissionParActeur(){
  //console.log(historiqueMissionParActeur);
 },
 
+ afficherNumeroMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.reference_marche;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+// afficher les codes du compte
+
+
+afficherCodeRib(){
+      //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
+    
+    const codeBanq = this.banques.find(codeBanq => codeBanq.id == this.formData1.banq_id)
+ const codeAgence = this.agenceBanques.find(codeAgence => codeAgence.code_agence == this.formData1.numero_agence)
+     if(codeBanq && codeAgence && this.formData1.numero_compte  && this.formData1.clerib ){
+       return codeBanq.code_banque + codeAgence.code_agence + this.formData1.numero_compte + this.formData1.clerib
+     }
+
+     return ""
+   },
+
+
+
+   AffichierSituationGeoAgence() {
+      
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.formData1.numero_agence);
+
+      if (dureVie1) {
+        return dureVie1.situation_geo;
+      }
+      // console.log(dureVie1)
+      return ""
+    },
+
+
+
+    
+  AffichierNumeroAgence() {
+      
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.formData1.numero_agence);
+
+      if (dureVie1) {
+        return dureVie1.tel_agence;
+      }
+      // console.log(dureVie1)
+      return ""
+    },
+
+
+
+
+     AffichierNomAgence() {
+      
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.formData1.numero_agence);
+
+      if (dureVie1) {
+        return dureVie1.nom_agence;
+      }
+      // console.log(dureVie1)
+      return ""
+    },
+
+
+
+
+
+
+
+
+
+
+    
+
+codeAgenceDynamiques() {
+      let vM=this;
+        if (vM.formData1.commune_id != null && vM.formData1.banq_id != "") {
+            // console.log(vM.formData.commune_id)     
+            // console.log(vM.formData.banq_id)     
+                return this.getPersonnaliseAgence.filter(element => {
+                if(element.commune_id == vM.formData1.commune_id &&  element.banque_id == vM.formData1.banq_id ){
+return element;
+                }
+                     
+          }
+            
+          );
+        }
+        return null;
+    },
+
+
+     verroVille() {
+      return this.formData1.pays_id == "";
+    },
+     verroCommune() {
+      return this.formData1.ville_id == "";
+    },
+    verroCodeAgence() {
+      return this.formData1.banq_id == "";
+    },
+     verroBanque() {
+      return this.formData1.commune_id == "";
+    },
+
+// afficher le matricule dynamique du personnel selectionner
+
+   afficherMatriculeDynamique(){
+       return id =>{
+           if(id!=null && id!=""){
+             const objet = this.personnaliseActeurDepense.find(item =>item.id==id)
+             if(objet){
+                 return objet.matricule
+             }
+             return 0  
+           }
+       }
+   },
+
+
+// enregistrement ID de personnel
+
+enregistreIdPersonnel(){
+
+    return id =>{
+        if(id!=null && id!=""){
+          const objetId = this.personnaliseActeurDepense.find(itemId => itemId.id==id)
+          if(objetId){
+              return objetId.id
+          } 
+          return null  
+        }
+    }
+},
+
+
+
+
+         VilleDynamiques() {
+     return id => {
+        if (id != null && id != "") {
+          return this.villes.filter(
+            element => element.pays_id == id
+          );
+        }
+      };
+    },
+
+
+         commuDynamiques() {
+     return id => {
+        if (id != null && id != "") {
+          return this.communes.filter(
+            element => element.ville_id == id
+          );
+        }
+      };
+    },
+
+
+        banqueDynamiques() {
+     return id => {
+        if (id != null && id != "") {
+          return this.getPersonnaliseAgence.filter(
+            element => element.afficheCommune.id == id
+          );
+        }
+      };
+    },
+
+
+
+
+
+ ...mapGetters("bienService", [ "getMarchePersonnaliser","appelOffres","villes","communes","pays" ]),
+
+ ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
 
 // methode pour maper notre guetter
             ...mapGetters('personnelUA', ['personnaMission','acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","fonctionBudgetaire",
                 "niveau_etudes","nbr_acteur_actredite_taux","detail_acteurs","salaire_actuel_acteur","all_salaires_acteurs","acte_personnels",
                 "load_act_personnel_acteur","conge_acteur_depense","temp_moyen_fin_activite_interruption","delais_mise_disposition_act",
-                "jour_conge_disponible_acteur","personnaliseActeurDepense","tous_salaire_actuel_acteur","personnaliseActeurFinContrat"]),
-            ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
+                "jour_conge_disponible_acteur","personnaliseActeurDepense","tous_salaire_actuel_acteur",
+                "personnaliseActeurFinContrat", "contrat_resilie"]),
+         
+         
+         
+         
+         ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
             ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
             ...mapGetters('suivi_controle_budgetaire', ['getMissionPersonnaliser']),
@@ -843,8 +1510,65 @@ historiqueMissionParActeur(){
             // methode pour notre action
             ...mapActions('personnelUA', ["DetailActeur","getSalaireActuelActeur","getAllSallairesActeurs","modifierActeurDepense",
                 "getLoadActeurDepense","loadCongeActeur","ajouterConges","modifierActeurDepenses","ajouterActeDepense",
-                "tempMoyenFinActiviteInterruption","delaiMiseDispositionAct","jourCongeDisponible","allActeurDepense","getActeurFinContratAndActivite","getListeSalaireActuelAll"]),
-            afficherModalAjouterTitre(){
+                "tempMoyenFinActiviteInterruption","delaiMiseDispositionAct","jourCongeDisponible",
+                "allActeurDepense","getActeurFinContratAndActivite",
+                "getListeSalaireActuelAll", "modificationActeur",]),
+           
+           ...mapActions('gestionMarche', ["ajouterSanction", "ajouterCompte", "modifierCompte", "supprimerCompte"]),
+           
+
+
+
+
+
+
+
+   // fonction pour vider l'input ajouter
+            ajouterCompteLocal(){
+               // this.formData.marche_id=this.marcheid
+               
+               var nouvelObjet = {
+      ...this.formData1,
+     // entrepse_id :this.detail_marche.id,
+      telephone_agence:this.AffichierNumeroAgence,
+          situation_geographique_angence:this.AffichierSituationGeoAgence,
+          agence:this.AffichierNomAgence,
+         agence_id:this.AffichierIdAgence,
+         rib:this.afficherCodeRib,
+         acteur_depense_id:this.enregistreIdPersonnel(this.acteurDetail.id)
+       };
+                this.ajouterCompte(nouvelObjet)
+                this.formData1 = {
+                    date_ouverture_compte:"",
+                    signataire_compte:"",
+                    nature_compte:"",
+                    	agence:"",
+                    	situation_geographique_angence:"",
+                    	numero_agence:"",
+                    telephone_agence:"",
+                   // entrepse_id:"",
+                        banq_id:"",
+                        pays_id:"",
+                        ville_id:"",
+                        commune_id:"",
+                        attribue:""
+
+                }
+            },
+
+
+
+
+
+
+
+
+
+
+
+
+
+           afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',
                     keyboard: false
@@ -921,10 +1645,10 @@ historiqueMissionParActeur(){
                 const formData = new FormData();
                 formData.append('specimen', this.selectedImage, this.selectedImage.name);
                 formData.append('file', this.selectedFile, this.selectedFile.name);
-                formData.append('date_arrivee_act_nomination', this.date_arrivee_act_nomination);
-                 formData.append('fonction_budgetaire_id', this.fonction_budgetaire_id);
-                  formData.append('date_debut_fonct_budget', this.date_debut_fonct_budget);
-                   formData.append('date_fin_fonct_budget', this.date_fin_fonct_budget);
+                formData.append('date_arrivee_act_nomination', this.formActe.date_arrivee_act_nomination);
+                 formData.append('fonction_budgetaire_id', this.formActe.fonction_budgetaire_id);
+                  formData.append('date_debut_fonct_budget', this.formActe.date_debut_fonct_budget);
+                   formData.append('date_fin_fonct_budget', this.formActe.date_fin_fonct_budget);
                 formData.append('id', this.salaire_actuel_acteur.id);
                 // formData.append('normeequipement', this.normeequipement);
                 // formData.append('historiquenormequipement', this.historiquenormequipement);
@@ -971,6 +1695,44 @@ historiqueMissionParActeur(){
                 this.editTitre = this.titres[index];
 
             },
+
+
+
+                // fonction pour enregistrer le contrat resilie
+
+                ajouterDossierC(){
+                   this.modificationActeur(this.detail)
+                   this.detail ={
+                       cause_contrat:"",
+                       date_resilie:""
+                   } 
+                },
+
+
+   
+
+             modifierLocal () {
+                const formData = new FormData();
+                formData.append('specimen', this.selectedImage, this.selectedImage.name);
+                formData.append('file', this.selectedFile, this.selectedFile.name);
+                formData.append('date_arrivee_act_nomination', this.editAct.date_arrivee_act_nomination);
+                 formData.append('fonction_budgetaire_id', this.editAct.fonction_budgetaire_id);
+                  formData.append('date_debut_fonct_budget', this.editAct.date_debut_fonct_budget);
+                   formData.append('date_fin_fonct_budget', this.editAct.date_fin_fonct_budget);
+                formData.append('id', this.salaire_actuel_acteur.id);
+                // formData.append('normeequipement', this.normeequipement);
+                // formData.append('historiquenormequipement', this.historiquenormequipement);
+                //  formData.append('historiquenormequipement', this.historiquenormequipement);
+                let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }
+                this.modifierActeurDepense(formData,config)
+                setTimeout(function () {  this.delaiMiseDispositionAct(this.acteur_id) }.bind(this), 3000)
+                setTimeout(function () {  this.getLoadActeurDepense(this.acteur_id) }.bind(this), 3000)
+
+            },
             OnchangeImage(e) {
                 const files = e.target.files;
                 this.selectedImage = event.target.files[0];
@@ -1011,6 +1773,18 @@ historiqueMissionParActeur(){
                 };
                 reader.readAsDataURL(file);
             },
+
+
+            // afficher le modal modifier acte de nominantion
+
+            afficherModalActeNomination(index){
+                this.$("#modification").modal({
+                    backdrop:'static',
+                    keyboard:false
+                });
+
+               this.editAct = this.load_act_personnel_acteur[index]
+            },
             /**
              * Juste pour le test
              * @param id
@@ -1031,4 +1805,18 @@ historiqueMissionParActeur(){
   width: 50%;
   margin: 0 -25%;
 }
+
+.grdirModalActeEffet{
+    width: 60%;
+  margin: 0 -25%;
+}
+
+.tailModal
+    {
+
+ width: 1600px;
+ margin: 0 -780px;
+ height: 500px;
+
+    }
 </style>

@@ -562,11 +562,11 @@
   
   <!-- <template v-if="uniteadministrative.type_ua_id = type_Unite_admins.id"> -->
    
-   <td  @dblclick="afficherModalModifierbanqueUa(index)">{{bankUa.ua_id }}</td>
-     <td  @dblclick="afficherModalModifierbanqueUa(index)">{{bankUa.banq_id }}</td>
+   <td  @dblclick="afficherModalModifierbanqueUa(index)">{{afficherUa(bankUa.ua_id) }}</td>
+     <td  @dblclick="afficherModalModifierbanqueUa(index)">{{afficheBanque(bankUa.banq_id) }}</td>
     
      <!-- <td  @dblclick="afficherModalModifierbanqueUa(index)">{{bankUa.signataire_compte }}</td> -->
-   <td  @dblclick="afficherModalModifierbanqueUa(index)">{{bankUa.nature_compte }}</td>
+   <td  @dblclick="afficherModalModifierbanqueUa(index)"><span v-if="bankUa.nature_compte == 0">Compte courant</span><span v-else>Non renseigné</span></td>
     <td  @dblclick="afficherModalModifierbanqueUa(index)">{{bankUa.swift }}</td>
    <!-- <td  @dblclick="afficherModalModifierbanqueUa(index)">{{bankUa.agence }}</td> -->
    <!-- <td  @dblclick="afficherModalModifierbanqueUa(index)">{{bankUa.situation_geographique_angence }}</td> -->
@@ -581,7 +581,7 @@
   <td  @dblclick="afficherModalModifierbanqueUa(index)">{{bankUa.iban }}</td>
    
    <td  @dblclick="afficherModalModifierbanqueUa(index)">{{bankUa.rib }}</td>
-    <td  @dblclick="afficherModalModifierbanqueUa(index)">{{bankUa.date_ouverture_compte }}</td>
+    <td  @dblclick="afficherModalModifierbanqueUa(index)">{{formaterDate(bankUa.date_ouverture_compte) }}</td>
    <!-- <td  @dblclick="afficherModalModifierbanqueUa(index)">{{bankUa.clerib }}</td> -->              
                 <td>
                   <button
@@ -710,6 +710,30 @@ created() {
    
    
    ]),
+    afficherUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     afficheBanque() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.banques.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 afficherCodeRib(){
       //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
     
@@ -884,7 +908,7 @@ AffichierIdAgence() {
     },
 AffichierIdAgenceModifier() {
       
-      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.formData.numero_agence);
+      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.editBanqueUa.numero_agence);
 
       if (dureVie1) {
         return dureVie1.id;

@@ -378,7 +378,7 @@
            
                 <td>
                <div class="control-group">
-                <label class="control-label">Quantite</label>
+                <label class="control-label">Quantite Réquise</label>
                 <div class="controls">
                   <input
                     type="text"
@@ -392,6 +392,7 @@
               </div>
            
             </td>
+            
           </tr>
           <tr>
            
@@ -422,6 +423,30 @@
               </div>
            
             </td>
+          </tr>
+          <tr>
+            <td colspan="">
+                          <label class="control-label">Quantite</label>
+                          
+                              <input    type="text"   class="span12" readonly  v-model="formData5.quantite2" />                
+                             
+                                              
+                        </td>
+              <td colspan="">
+                          <label class="control-label">Prix unitaire</label>
+                          
+                              <input    type="text"   class="span12" readonly  :value="coutMonenArticle" />                
+                             
+                                              
+                        </td>
+                        <td colspan="2">
+                          <label class="control-label">Valeur d'origine</label>
+                          
+                             <input    type="text"   class="span12" readonly  :value="afficherValeurOrigine" />                
+                             
+                             
+                        </td>
+           
           </tr>
                     </table>
       </div>
@@ -536,6 +561,9 @@ ua_id: "",
         motif_ua:"0",
         qterealise:"0"
       },
+      formData5:{
+          quantite2:""
+      },
       // editBesoinImmo: {
       //   uniteadmin_id: "",
       //   famille_id: "",
@@ -600,9 +628,34 @@ created() {
      ...mapGetters("uniteadministrative", ["uniteAdministratives","directions","servicesua","uniteZones"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
 ...mapGetters("personnelUA", ["all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
+afficherValeurOrigine() {
+      const val = parseFloat(this.editDemande.qte) * parseFloat(this.coutMonenArticle);
+      return parseFloat(val).toFixed(0);
+    },
 
+montantParBesoin() {
+      return id => {
+        if (id != null && id != "") {
+          return this.articles.filter(element => element.famille_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_ttc), 0).toFixed(0);
+        }
+      };
+    },
+nombreParBesoin() {
+      return id => {
+        if (id != null && id != "") {
+          return this.articles.filter(element => element.famille_id == id).length;
+        }
+      };
+    },
+coutMonenArticle() {
+ 
+      
+    const val = parseFloat((this.montantParBesoin(this.editDemande.article_id))/this.nombreParBesoin(this.editDemande.article_id)).toFixed(2); 
+    if (isNaN(val)) return null;
+    return val;
+  
 
-
+    },
 
 
 
@@ -1079,9 +1132,13 @@ AjouterDemandeMateriel(){
   if(this.Demande.cause_inactivite =="" && this.Demande.cause_demande==""){
     alert("Veuillez remplir les champs Svp")
   }
+  // else if(this.formData5.quantite2>){
+
+  // }
   else{
     var nouveauDemade = {
       ...this.Demande,
+      ...this.formData5,
 uniteadmin_id :this.editDemande.ua_id,
  
   fonction_id :this.editDemande.fonction_id,

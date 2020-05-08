@@ -1,11 +1,14 @@
 
+
+
 <template>
     <div class="container-fluid">
-         <div id="exampleModal" class="modal hide taillModal">
+      <div id="exampleModal" class="modal hide taillModal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Marché Résilié</h3>
+        <h3>Ajouter Contrat Résilié</h3>
       </div>
+      
     <div class="modal-body">
         <table class="table table-bordered table-striped">
     <tr>
@@ -20,6 +23,7 @@
                 readonly
                
               />
+              
             </div>
           </div>
               </td>
@@ -46,18 +50,23 @@
      
     </tr>
           <tr>
-       <td>
-                         <!-- <div class="control-group"> -->
-                        <!-- <label class="control-label">Candidat retenu après analyse.</label> -->
-                        <!-- <div class="controls"> -->
-                          <!-- <select v-model="editActeEffetFinancier.candidat_personnel_id" class="span"> -->
-                              <!-- <option value=""></option> -->
-                                <!-- <option v-for="varText in afficherCandidat(editMarche.marche_id)" :key="varText.id" -->
-                                        <!-- :value="varText.candidat_personnel_id">{{afficherNomDossierCandidat(varText.candidat_personnel_id)}}</option> -->
-                            <!-- </select> -->
-<!--                          -->
-                        <!-- </div> -->
-                    <!-- </div> -->
+        <td>
+                         <div class="control-group">
+                        <label class="control-label">Candidat retenu après analyse.</label>
+                        <div class="controls">
+                          <select v-model="editActeEffetFinancier.candidat_personnel_id" class="span">
+                  <option
+                    v-for="varText in afficherCandidat(editActeEffetFinancier.marche_id)"
+                    
+                    :key="varText.id"
+                    :value="varText.id"
+                  >{{afficherNomDossierCandidat(varText.candidat_selection_id)}}</option>
+                 </select> 
+                        
+                        </div>
+                    </div>
+       </td>
+            
               <td>
                  <div class="control-group">
             <label class="control-label">Fichier join</label>
@@ -109,8 +118,6 @@
         >Fermer</a>
       </div>
     </div>
-
-
 
 
     
@@ -340,9 +347,9 @@
                                
                                <li ><a data-toggle="tab" href="#tab100">Contrat Planifiés <span class="badge badge-important" > {{nombreContratEnPlanification}}</span></a></li>
                                 <li ><a data-toggle="tab" href="#tab10"> Contrat en cours Contratualisation<span class="badge badge-success" >{{nombreContratEnContratualisation}}</span></a></li>
-                                <li><a data-toggle="tab" href="#tab20">Contrat en Exécution<span class="badge badge-warning" > {{nbreMarcheContrat}}</span></a></li>
+                                <!-- <li><a data-toggle="tab" href="#tab20">Contrat en Exécution<span class="badge badge-warning" > {{nbreMarcheContrat}}</span></a></li>
                                  <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{afficheNombreMarcheResilier}}</span></a></li>
-                                  <li><a data-toggle="tab" href="#tab208">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li>
+                                  <li><a data-toggle="tab" href="#tab208">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li> -->
                                 
                             </ul>
                         </div>
@@ -488,6 +495,7 @@
                      <!-- <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td> -->
                   
+
                    <td>
                      <button 
                       v-if="marche.attribue == 2"  class="btn  btn-warning">
@@ -838,9 +846,9 @@
 
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{afficherObjetMarche(marche.marche_id) || 'Non renseigné'}}</td>
-
-                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)"> -->
-                   <!-- {{ afficherNomDossierCandidat(marche.candidat_personnel_id) || 'Non renseigné'}}</td> -->
+<!-- 
+                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   {{ afficherNomDossierCandidat(marche.candidat_personnel_id) || 'Non renseigné'}}</td> -->
 
                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                   {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
@@ -1139,7 +1147,7 @@
       <div class="controls">
         <input
           type="text"
-          :value="type_financement"
+          v-model="formData.type_financement"
           class="span4"
          
           readonly
@@ -1158,7 +1166,7 @@
       <div class="controls">
         <input
           type="text"
-          :value="source_financement"
+          v-model="formData.source_financement"
           class="span4"
           
           readonly
@@ -1463,7 +1471,7 @@
        <div class="controls">
          <input
            type="text"
-           :value="editMarche.type_financement"
+           v-model="editMarche.type_financement"
            class="span4"
           
            readonly
@@ -1482,7 +1490,7 @@
        <div class="controls">
          <input
            type="text"
-           :value="editMarche.source_financement"
+           v-model="editMarche.source_financement"
            class="span4"
            
            readonly
@@ -1499,17 +1507,16 @@
           <div class="control-group">
        <label class="control-label">procedure passation</label>
        <div class="controls">
-       <input
+       <!-- <input
            type="text"
            :value="afficheLeNomDesProcedureModifier"
            class="span4"
-           
            readonly
-         />
-          <!-- <select v-model="editMarche.procedure_passation_id" class="span" :readOnly="deverouPassationModi">
+         /> -->
+          <select v-model="editMarche.procedure_passation_id" class="span" :readOnly="deverouPassationModi">
           <option v-for="plans in procedurePassationDynamiques(editMarche.typeappel_id)" :key="plans.id" 
           :value="plans.id">{{plans.libelle}}</option>
-      </select> -->
+      </select>
        </div>
      </div>
          </td>
@@ -1695,7 +1702,7 @@ export default {
         
       },
 
-      
+        marche_id:"",
         editActeEffetFinancier:"",
         formEffetFinancier:{
              code_act:"",
@@ -1733,11 +1740,14 @@ export default {
                 imputation:"",
                  activite_id:"",
                  exo_id:"",
-                 candidat_personnel_id:""
+                 candidat_personnel_id:"",
+                 candidat_selection_id:""
                  
       },
       indicateur_test:1,
-      search: ""
+      search: "",
+
+      macheid:""
     };
   },
 
@@ -1751,7 +1761,7 @@ export default {
      "typeTypeProcedures", "typeActeEffetFinanciers", "text_juridiques"]),
 
      ...mapGetters("uniteadministrative",['uniteAdministratives',"budgetGeneral",
-      "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
+      "getPersonnaliseBudgetGeneral","groupUa","groupgranNaturePersonnel","getPersonnaliseBudgetGeneralParPersonnel",
       "montantBudgetGeneral", ]),
        ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
@@ -2045,7 +2055,7 @@ afficherTypeMarche() {
            const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.numero_marche;
+        return qtereel.reference_marche;
       }
       return 0
         }
@@ -2054,20 +2064,42 @@ afficherTypeMarche() {
 
 // afficher candidat retenu
 
-    //  afficherNomDossierCandidat() {
-      // return id => {
-        // if (id != null && id != "") {
-          //  const qtereel = this.dossierPersonnels.find(qtreel => qtreel.id == id);
+// afficherCandidat () {
+//                 return id => {
+//                     if (id != "") {
+//                         // console.log("Marche lettre inviation marche")
+//                         return this.selectionner_candidats.filter(idmarche => idmarche.marche_id == id)
 
-      // if (qtereel) {
-        // return qtereel.nom_candidat.concat(' ', qtereel.prenom_candidat);
-      // }
-      // return 0
-        // }
-      // };
-    // },
+//                        // let contratValider =this.gettersPersonnaliserRapportJugement
+//                      }
+//              }
+//             },
 
 
+            afficherCandidat() {
+      return id => {
+        if (id != "") {
+         return this.selectionner_candidats.filter(
+            idmarche => idmarche.marche_id == id
+          );
+          
+        }
+      };
+    },
+
+        afficherNomDossierCandidat() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.dossierPersonnels.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.nom_candidat.concat(' ', qtereel.prenom_candidat);
+      }
+      return 0
+        }
+      };
+    },
+        
 
 afficherEntreprise() {
       return id => {
@@ -2138,7 +2170,7 @@ anneeAmort() {
      activiteDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParBienService.filter(
+          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(
             element => element.ua_id == id
           );
         }
@@ -2162,7 +2194,7 @@ anneeAmort() {
      economiqueDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParBienService.filter(
+          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(
             element => element.ua_id == id
           );
         }
@@ -2172,7 +2204,7 @@ anneeAmort() {
   grandeNatureDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParBienService.filter(
+          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(
             element => element.ua_id == id
           );
         }
@@ -2191,7 +2223,7 @@ anneeAmort() {
      ImputationBudget() {
 
       
-      const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.afficheEconomique.id == this.formData.economique_id);
+      const norme = this.getPersonnaliseBudgetGeneralParPersonnel.find(normeEquipe => normeEquipe.afficheEconomique.id == this.formData.economique_id);
 
       if (norme) {
         return norme.codebudget;
@@ -2200,7 +2232,7 @@ anneeAmort() {
     },
      ImputationBudgetModifier() {
       
-      const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.afficheEconomique.id == this.editMarche.economique_id);
+      const norme = this.getPersonnaliseBudgetGeneralParPersonnel.find(normeEquipe => normeEquipe.afficheEconomique.id == this.editMarche.economique_id);
 
       if (norme) {
         return norme.codebudget;
@@ -2266,9 +2298,9 @@ return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
         }
       };
     },
-    nbreMarcheContrat(){
-  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.affichertypeMarcheEx(recuper.marche.type_marche_id) == 2).length
-},
+//     nbreMarcheContrat(){
+//   return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.affichertypeMarcheEx(recuper.marche.type_marche_id) == 2).length
+// },
 
 afficheParMarcheEnExecution(){
 return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
@@ -2294,9 +2326,9 @@ return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
 },
 
 
-afficheNombreMarcheResilier(){
-return this.afficheMarcheResilier.filter(element => element.indicateur_resilie !="").length
-},
+// afficheNombreMarcheResilier(){
+// return this.afficheMarcheResilier.filter(element => element.indicateur_resilie !="").length
+// },
 
 
 
@@ -2312,7 +2344,7 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => element.date_
 },
     // ImputationBudgetModif() {
       
-    //   const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.economique_id == this.editMarche.Economique);
+    //   const norme = this.getPersonnaliseBudgetGeneralParPersonnel.find(normeEquipe => normeEquipe.economique_id == this.editMarche.Economique);
 
     //   if (norme) {
     //     return norme.codebudget;
@@ -2434,7 +2466,7 @@ return element;
         keyboard: false
       });
 
-      this.editMarche = this.afficheMarchExecuter[index];
+      this.editActeEffetFinancier = this.afficheMarchExecuter[index];
     },
     //afiicher modal ajouter
     afficherModalAjoutTypaPrestation() {
@@ -2498,7 +2530,7 @@ this.formData = {
       
        };
 
-         let marcheObjet = this.marches.find(marche=>marche.id==this.editMarche.marche_id)
+         let marcheObjet = this.marches.find(marche=>marche.id==this.editActeEffetFinancier.marche_id)
          marcheObjet.attribue = 3
 
           this.modifierMarche(marcheObjet)

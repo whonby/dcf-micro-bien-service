@@ -16,7 +16,7 @@
                         <th>Matricule </th>
                         <th>Nom</th>
                         <th>Prenom</th>
-                        <!-- <th>Reference Lettre invitation</th> -->
+                        <th>Objet contrat</th>
                          <th>Date</th>
                         <th>Action</th>
                     </tr>
@@ -31,8 +31,8 @@
                             {{appelOffre.nom_mandat || 'Non renseigné'}}</td>
                              <td @click="afficheBouttonTechFinMandater(index)">
                             {{appelOffre.prenom_nom || 'Non renseigné'}}</td>
-                             <!-- <td @click="afficheBouttonTechFinMandater(index)">
-                            {{affichierReferenceLettreInvitation(appelOffre.lettre_invitation_id) || 'Non renseigné'}}</td> -->
+                             <td @click="afficheBouttonTechFinMandater(index)">
+                            {{appelOffre.objet_appel || 'Non renseigné'}}</td>
                              <td @click="afficheBouttonTechFinMandater(index)">
                             {{formaterDate(appelOffre.date_id) || 'Non renseigné'}}</td>
                         <div class="btn-group">
@@ -59,22 +59,17 @@
 
                     <table class="table table-bordered table-striped">
                           <tr>
-                            <td>
+                            <td >
                       <div class="control-group">
-                        <label class="control-label">Lettre Invitation</label>
-                        <!-- <div class="controls">
-                            <select v-model="formMandater.lettre_invitation_id" class="span">
-                                <option v-for="plans in lettreInvitationAMarche(macheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.ref_lettre}}</option>
-                            </select>
-                        </div> -->
+                        <label class="control-label">Reference lettre</label>
+                      
 
                          <input
                                     type="text"
                                     :value="affichierReferenceLettreInvitation(macheid)"
                                     class="span"
                                    
-                            />
+                           readonly />
                     </div>
                             </td>
                             <td>
@@ -91,9 +86,11 @@
                         </div>
                     </div>
                             </td>
-                            </tr>
-                            <!-- <tr>
-                            <td colspan="2" width="">
+
+                          </tr>  
+                           
+                            <tr>
+                            <td colspan="" width="">
                         <div class="control-group">
                             <label class="control-label">Objet  offre :</label>
                             <div class="controls">
@@ -102,8 +99,7 @@
                             </div>
                         </div>
                             </td>
-                            </tr> -->
-                            <tr>
+                           
                                 <td>
                         <div class="control-group">
                         <label class="control-label">Nom</label>
@@ -116,6 +112,9 @@
                         </div>
                     </div>
                                 </td>
+                                 </tr>
+                            
+                            <tr>
                                 <td>
                          <div class="control-group">
                         <label class="control-label">Prenom</label>
@@ -137,8 +136,8 @@
                             </div>
                         </div>
                         </td> -->
-                        </tr>
-                        <tr>
+                        
+                        <td>
                             <div class="control-group">
                         <label class="control-label">Date</label>
                         <div class="controls">
@@ -151,6 +150,7 @@
                             <input type="hidden" v-model="formMandater.difference_personnel_bienService"/>
                         </div>
                     </div>
+                        </td>
                         </tr>
                     </table>  
 
@@ -184,11 +184,6 @@
                       <div class="control-group">
                         <label class="control-label">Lettre Invitation</label>
                         <div class="controls">
-                            <!-- <select v-model="editer_mandater.lettre_invitation_id" class="span">
-                                <option v-for="plans in lettreInvitationAMarche(macheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.ref_lettre}}</option>
-                            </select> -->
-
                              <input
                                     type="text"
                                     :value="affichierReferenceLettreInvitation(macheid)"
@@ -212,9 +207,17 @@
                         </div>
                     </div>
                             </td>
-                            </tr>
                            
-                            <tr>
+                                 <tr>
+                              <td colspan="" width="">
+                        <div class="control-group">
+                            <label class="control-label">Objet  offre :</label>
+                            <div class="controls">
+                                 <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
+                    
+                            </div>
+                        </div>
+                            </td>
                                 <td>
                         <div class="control-group">
                         <label class="control-label">Nom</label>
@@ -227,6 +230,8 @@
                         </div>
                     </div>
                                 </td>
+                          </tr>
+                          <tr>
                                 <td>
                          <div class="control-group">
                         <label class="control-label">Prenom</label>
@@ -241,8 +246,8 @@
                     </div>
                         </td>
                        
-                        </tr>
-                        <tr>
+                      
+                      
                             <div class="control-group">
                         <label class="control-label">Date</label>
                         <div class="controls">
@@ -512,7 +517,8 @@ modificationMandater(){
      var nouveauObjet={
          ...this.formMandater,
          marche_id:this.macheid,
-         lettre_invitation_id: this.affichierLettreInvitationid(this.macheid)
+         lettre_invitation_id: this.affichierLettreInvitationid(this.macheid),
+          objet_appel:this.affichierObjetMarche(this.macheid)
      };
                this.ajouterMandater(nouveauObjet)
                 this.formMandater={
@@ -540,7 +546,7 @@ modificationMandater(){
                        this.message_mandater=""
                    }
                    else{
-                       this.message_mandater="Cette n'existe pas dans notre base de donnée "
+                       this.message_mandater="Ce matricule n'existe pas dans la base de donnée! "
                    }
                }
              if(this.formMandater.matricule_m==""){

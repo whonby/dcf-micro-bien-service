@@ -15,7 +15,7 @@
                 <div class="control-group">
                   <label class="control-label">Type Unite d'administrative</label>
                   <div class="controls">
-                    <select v-model="formData.type_ua_id">
+                    <select v-model="formData.type_ua_id" class="span5">
                       <option
                         v-for="typeUniteA in type_Unite_admins"
                         :key="typeUniteA.id"
@@ -29,7 +29,7 @@
                 <div class="control-group">
                   <label class="control-label">Nature section</label>
                   <div class="controls">
-                    <select v-model="formData.nature_section_id">
+                    <select v-model="formData.nature_section_id" class="span5">
                       <option
                         v-for="natsection in natures_sections"
                         :key="natsection.id"
@@ -44,7 +44,7 @@
                <div class="control-group">
                   <label class="control-label">Section</label>
                   <div class="controls">
-                    <select v-model="formData.section_id">
+                    <select v-model="formData.section_id" class="span5">
                       <option
                         v-for="sect in sectionDynamiques(formData.nature_section_id)"
                         :key="sect.id"
@@ -68,7 +68,7 @@
                <div class="control-group">
                   <label class="control-label">Service gestionnaire de crédit</label>
                   <div class="controls">
-                    <select v-model="formData.servicegest_id">
+                    <select v-model="formData.servicegest_id" class="span5">
                       <option
                         v-for="servicegest in afficheServiceGestionnaireNiveau4"
                         :key="servicegest.id"
@@ -82,7 +82,7 @@
                  <div class="control-group">
                   <label class="control-label">Localisation Geographique</label>
                   <div class="controls">
-                    <select v-model="formData.localisationgeo_id">
+                    <select v-model="formData.localisationgeo_id" class="span5">
                       <option
                         v-for="localgeo in afficheLocalisationGeoNiveau5"
                         :key="localgeo.id"
@@ -96,7 +96,7 @@
                   <div class="control-group">
                   <label class="control-label">Date création:</label>
                   <div class="controls">
-                    <input type="date" v-model="formData.date_creation" class="span" />
+                    <input type="date" v-model="formData.date_creation" class="span5" />
                   </div>
                 </div>
               </td>
@@ -112,7 +112,7 @@
                     <input
                       type="text"
                      :value="codeuniteadministrative"
-                      class="span"
+                      class="span5"
                       placeholder="Saisir le code"
                       readonly
                     />
@@ -128,7 +128,7 @@
                     <input
                       type="text"
                       v-model="formData.libelle"
-                      class="span"
+                      class="span5"
                       placeholder="Saisir le Nom unite administrative"
                      
                     />
@@ -179,7 +179,7 @@
                 <div class="control-group">
                   <label class="control-label">Type Unite d'administrative</label>
                   <div class="controls">
-                    <select v-model="editUniteAdministrative.type_ua_id">
+                    <select v-model="editUniteAdministrative.type_ua_id" class="span5">
                       <option
                         v-for="typeUniteA in type_Unite_admins"
                         :key="typeUniteA.id"
@@ -193,7 +193,7 @@
                 <div class="control-group">
                   <label class="control-label">Nature section</label>
                   <div class="controls">
-                    <select v-model="editUniteAdministrative.nature_section_id">
+                    <select v-model="editUniteAdministrative.nature_section_id" class="span5">
                       <option
                         v-for="natsection in natures_sections"
                         :key="natsection.id"
@@ -208,7 +208,7 @@
                <div class="control-group">
                   <label class="control-label">Section</label>
                   <div class="controls">
-                    <select v-model="editUniteAdministrative.section_id">
+                    <select v-model="editUniteAdministrative.section_id" class="span5">
                       <option
                         v-for="sect in sectionDynamiques(editUniteAdministrative.nature_section_id)"
                         :key="sect.id"
@@ -225,7 +225,7 @@
                  <div class="control-group">
                   <label class="control-label">Service gestionnaire de crédit</label>
                   <div class="controls">
-                    <select v-model="editUniteAdministrative.servicegest_id">
+                    <select v-model="editUniteAdministrative.servicegest_id" class="span5">
                       <option
                         v-for="servicegest in services_gestionnaires"
                         :key="servicegest.id"
@@ -240,7 +240,7 @@
                   <div class="control-group">
                   <label class="control-label">Localisation geographique</label>
                   <div class="controls">
-                    <select v-model="editUniteAdministrative.localisationgeo_id">
+                    <select v-model="editUniteAdministrative.localisationgeo_id" class="span5">
                       <option
                         v-for="localgeo in afficheLocalisationGeoNiveau5"
                         :key="localgeo.id"
@@ -254,7 +254,7 @@
                 <div class="control-group">
                   <label class="control-label">Date création:</label>
                   <div class="controls">
-                    <input type="date" v-model="editUniteAdministrative.date_creation" class="span" />
+                    <input type="date" v-model="editUniteAdministrative.date_creation" class="span5" />
                   </div>
                 </div>
               </td>
@@ -268,7 +268,7 @@
                     <input
                       type="text"
                      :value="codeuniteadministrativeModifier"
-                      class="span"
+                      class="span5"
                       placeholder="Saisir le code"
                       readonly
                     />
@@ -282,7 +282,7 @@
                     <input
                       type="text"
                       v-model="editUniteAdministrative.libelle"
-                      class="span"
+                      class="span5"
                       placeholder="Saisir le Nom unite administrative"
                      
                     />
@@ -387,11 +387,11 @@
                   >
                    
                    <!-- <template v-if="uniteadministrative.type_ua_id = type_Unite_admins.id"> -->
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.typeua.libelle }}</td>
-                      <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.naturesecti.libelle }}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.secti.nom_section }}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.servivegest.libelle }}</td>
-                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.localgeo.libelle }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{libelleUa(uniteadministrative.type_ua_id)}}</td>
+                      <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{libelleNatureSection(uniteadministrative.nature_section_id) }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{libelleSection(uniteadministrative.section_id)}}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{libelleServiceGestionnaire(uniteadministrative.servicegest_id) }}</td>
+                    <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{libelleLocalGeographie(uniteadministrative.localisationgeo_id) }}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.code }}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{uniteadministrative.libelle }}</td>
                     <td  @dblclick="afficherModalModifierUniteAdministrative(index)">{{ formaterDate(uniteadministrative.date_creation) }}</td>
@@ -508,6 +508,66 @@ export default {
       "plans_fonctionnels"
      
     ]),
+    libelleLocalGeographie() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.localisations_geographiques.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    libelleServiceGestionnaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.services_gestionnaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    libelleUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.type_Unite_admins.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     libelleSection() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sections.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.nom_section;
+      }
+      return 0
+        }
+      };
+    },
+     libelleNatureSection() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.natures_sections.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
     filtre_unite_admin() {
       const st = this.search.toLowerCase();
       return this.jointureUaChapitreSection.filter(items => {
@@ -664,8 +724,8 @@ this.$("#modificationModal").modal('hide');
 <style>
 
 .tailgrand{
-  width: 50%;
-  margin: 0 -25%;
+  width: 88%;
+  margin: 0 -42%;
 }
 
 </style>
