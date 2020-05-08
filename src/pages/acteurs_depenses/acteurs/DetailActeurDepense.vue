@@ -78,7 +78,7 @@ Ajouter acte de nomination
                             <div class="widget-box">
                                 <div class="widget-title">
                                     <ul class="nav nav-tabs">
-                                        <li class=""><a data-toggle="tab" href="#tab1">Information</a></li>
+                                        <li class="active"><a data-toggle="tab" href="#tab1">Information</a></li>
                                         <li class=""><a data-toggle="tab" href="#tab2">L’acte de nomination et du spécimen</a></li>
                                         <li class=""><a data-toggle="tab" href="#tab3">Toutes les rémunérations</a></li>
                                         <li class=""><a data-toggle="tab" href="#tab4">Tous les conges</a></li>
@@ -135,7 +135,7 @@ Ajouter acte de nomination
                                                     <tbody>
                                                     <tr>
                                                         <td><b>Numero act</b></td>
-                                                        <td>{{acteurDetail.code_acte_personnel}}</td>
+                                                        <td>{{afficheNumeroActe(acteurDetail.acte_personnel_id)}}</td>
                                                     </tr>
 
                                                     <tr>
@@ -232,6 +232,7 @@ Ajouter acte de nomination
                                                     </div>
                                                 </div>
                                                             </td>
+
                                                             <td>
                                                                  <div class="control-group">
                                                             <label class="control-label">Date Début Nomination :</label>
@@ -258,7 +259,7 @@ Ajouter acte de nomination
                                                     </div>
                                                 </div>
                 </td> -->
-                <!-- <td>
+                <td>
                      <div class="control-group">
                                                     <label class="control-label">Type acte de personnel</label>
                                                     <div class="controls">
@@ -271,7 +272,7 @@ Ajouter acte de nomination
                                                         </select>
                                                     </div>
                                                 </div>
-                </td> -->
+                </td>
                  <td>
                                                                 <div class="control-group">
                                                             <label class="control-label">Acte nomination :</label>
@@ -291,7 +292,10 @@ Ajouter acte de nomination
                                                              <input type="hidden" class="span11" v-model="formData.historiquenormequipement" placeholder="">
                                                         </div>
                                                             </td>
-                                                              <td>
+                                                             
+                                                        </tr>
+                                                       <tr>
+                                                            <td colspan="3">
                                                                  <div class="control-group">
                                                             <label class="control-label">Spécimen de signature</label>
                                                             <div class="controls">
@@ -300,8 +304,7 @@ Ajouter acte de nomination
                                                             </div>
                                                         </div>
                                                             </td>
-                                                        </tr>
-                                                       
+                                                       </tr>
                                                         </table>
                                                   
 
@@ -1277,7 +1280,9 @@ Ajouter acte de nomination
         },
         computed: {
 
-
+ ...mapGetters('personnelUA', ["acte_personnels","dossierPersonnels","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
+                "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction",
+                "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
 
 historiqueMissionParActeur(){
    return acte_personnel_id =>{
@@ -1304,7 +1309,18 @@ historiqueMissionParActeur(){
       };
     },
 
+ afficheNumeroActe() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acte_personnels.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.reference_acte;
+      }
+      return "Non renseigné"
+        }
+      };
+    },
 
 // afficher les codes du compte
 
@@ -1650,7 +1666,7 @@ enregistreIdPersonnel(){
                   formData.append('date_debut_fonct_budget', this.formActe.date_debut_fonct_budget);
                    formData.append('date_fin_fonct_budget', this.formActe.date_fin_fonct_budget);
                 formData.append('id', this.salaire_actuel_acteur.id);
-                // formData.append('normeequipement', this.normeequipement);
+                formData.append('type_acte_id', this.type_acte_id);
                 // formData.append('historiquenormequipement', this.historiquenormequipement);
                 //  formData.append('historiquenormequipement', this.historiquenormequipement);
                 let config = {

@@ -1066,7 +1066,7 @@ getDateFinExécutionValueEdit(){
             duree: this.nombreDejourCalcule,
             difference_personnel_bienService:this.afficheMarcheType,
             marche_id:this.macheid,
-            compte_id:this.afficherIdCompte(this.formEffetFinancier.banq_id)
+            compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id))
         }
     //let entreprisePremier=this.entreprises.find(item=>item.numero_rc==rcm)
              
@@ -1114,9 +1114,10 @@ getDateFinExécutionValueEdit(){
 modifierModalActeEffetFinancierLocal(){
   var nouvelObjet2 = {
             ...this.editActeEffetFinancier,
-            // duree: this.nombreDejourCalcule,
+            duree: this.nombreDejourCalculeEdit,
             difference_personnel_bienService:this.afficheMarcheType,
-            marche_id:this.macheid
+            marche_id:this.macheid,
+             compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.editActeEffetFinancier.banq_id))
         }
     this.modifierActeEffetFinancier(nouvelObjet2)
     this.$('#modifierActeEF').modal('hide');

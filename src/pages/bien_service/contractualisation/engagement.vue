@@ -9191,7 +9191,7 @@ afficheCompteFournisseur() {
 afficheCompteFour() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.comptes.find(qtreel => qtreel.entrepse_id == id);
+           const qtereel = this.comptes.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.rib;
