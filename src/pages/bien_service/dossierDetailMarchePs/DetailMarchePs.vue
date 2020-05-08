@@ -1,4 +1,4 @@
-
+isButtunAddDossierCandidat
 <template>
     
 
@@ -363,13 +363,7 @@
                 </div>
 
                  <div id="tab7845" class="tab-pane">
-                <div align="right">
-                    <div class="widget-content">
-                        <a href="" @click="isFormulaireDossierCand" v-if="isButtunAddDossierCandidat" data-toggle="modal" class="btn btn-success">Ajouter</a>
-                    </div>
-
-
-                </div>
+               
                
                    <dossier-Candidat :macheid="detail_marche.id"></dossier-Candidat>
                 </div>
@@ -519,13 +513,7 @@
                 </div>
 
                  <div id="tab7884" class="tab-pane">
-                <div align="right">
-                    <div class="widget-content">
-                        <a href="" @click="isFormulaireDossierCand" v-if="isButtunAddDossierCandidat" data-toggle="modal" class="btn btn-success">Ajouter</a>
-                    </div>
-
-
-                </div>
+               
                
                    <dossier-Candidat :macheid="detail_marche.id"></dossier-Candidat>
                 </div>

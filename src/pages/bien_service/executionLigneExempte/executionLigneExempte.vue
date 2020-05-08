@@ -28,8 +28,8 @@
                         <label class="control-label">Entreprise.</label>
                         <div class="controls">
                           <select v-model="editActeEffetFinancier.entreprise_id" class="span4">
-                                <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
-                                        :value="varText.entreprise_id">{{affichierNomEntreprise(varText.entreprise_id)}}</option>
+                               <option v-for="varText in entreprises" :key="varText.id"
+                                        :value="varText.id">{{varText.raison_sociale}}</option>
                             </select>
                         
                         </div>
@@ -42,7 +42,7 @@
                         <div class="controls">
                           <select v-model="editActeEffetFinancier.banq_id" class="span4" :readOnly="verifiBanqueExist">
                                <option v-for="varText in afficherBanqueDynamiqueId(editActeEffetFinancier.entreprise_id)" :key="varText.id"
-                                        :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
+                                        :value="varText.banq_id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                             </select>
                         
                         </div>
@@ -317,8 +317,8 @@
                         <label class="control-label">Entreprise.</label>
                         <div class="controls">
                           <select v-model="formEffetFinancier.entreprise_id" class="span4">
-                                <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
-                                        :value="varText.entreprise_id">{{affichierNomEntreprise(varText.entreprise_id)}}</option>
+                                <option v-for="varText in entreprises" :key="varText.id"
+                                        :value="varText.id">{{varText.raison_sociale}}</option>
                             </select>
                         
                         </div>
@@ -330,8 +330,8 @@
                         <label class="control-label">Banque.</label>
                         <div class="controls">
                           <select v-model="formEffetFinancier.banq_id" class="span4" :readOnly="verifiBanqueExist">
-                               <option v-for="varText in afficherBanqueDynamiqueId(formEffetFinancier.entreprise_id)" :key="varText.id"
-                                        :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
+                                 <option v-for="varText in afficherBanqueDynamiqueId(formEffetFinancier.entreprise_id)" :key="varText.id"
+                                        :value="varText.banq_id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                             </select>
                         
                         </div>
@@ -868,6 +868,17 @@ afficherEntrepriseRecep () {
      }
   
    },
+    afficherIdCompte(){
+     return banq_id => {
+       if( banq_id !== undefined) {
+    var acteur = this.comptes.find(acteur => acteur.rib == banq_id  )
+    
+     return  (acteur) ? acteur.id :null 
+       }
+    return null
+     }
+  
+   },
 nombreDejourCalculeModifier(){
                 let vM=this;
     const acteAffet = vM.editActeEffetFinancier
@@ -1010,15 +1021,17 @@ getDateFinExécutionValueEdit(){
               
 
               ajouterModalActeEffetFinancierLocal(){
-       /* var nouvelObjet = {
+       var nouvelObjet = {
             ...this.formEffetFinancier,
-            duree: this.nombreDejourCalcule
-        }*/
+            duree: this.nombreDejourCalcule,
+            	marche_id:this.macheid,
+                compte_id:this.afficherIdCompte(this.formEffetFinancier.banq_id)
+        }
     //let entreprisePremier=this.entreprises.find(item=>item.numero_rc==rcm)
              
     this.formEffetFinancier.marche_id=this.macheid
     //this.formEffetFinancier.entreprise_id=entreprisePremier.id
-    this.ajouterActeEffetFinancier(this.formEffetFinancier)
+    this.ajouterActeEffetFinancier(nouvelObjet)
     let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
     marcheObjet.attribue = 2
     marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
@@ -1058,8 +1071,13 @@ getDateFinExécutionValueEdit(){
 }, 
 
 modifierModalActeEffetFinancierLocal(){
-
-    this.modifierActeEffetFinancier(this.editActeEffetFinancier)
+ var nouvelObjet = {
+            ...this.editActeEffetFinancier,
+            duree: this.nombreDejourCalcule,
+            	marche_id:this.macheid,
+                compte_id:this.afficherIdCompte(editActeEffetFinancier.banq_id)
+        }
+    this.modifierActeEffetFinancier(nouvelObjet)
     this.$('#modifierActeEF').modal('hide');
 },
 

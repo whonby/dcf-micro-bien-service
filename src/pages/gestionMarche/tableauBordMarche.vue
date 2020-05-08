@@ -4,17 +4,17 @@
       <!-- <h3 style="text-align:center">TABLEAU DE BORD : BIEN ET SERVICE</h3> -->
     <div class="quick-actions_homepage">
       <ul class="quick-actions">
-        <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">{{nombreDeMarche}}</span> TOTAL MARCHE</a> </li>
-        <li class="bg_lg "> <a href="charts.html"> <i class="icon-signal"></i><span class="label label-important">{{nombreMarcheEnplanification}}</span>  MARCHE EN PLANIFICATION</a> </li>
-        <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">{{nombreDeMarcheEnContratualisation}}</span> MARCHE EN CONTRALISATION </a> </li>
-        <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i> <span class="label label-important">{{nbreMarcheExecuter}}</span> MARCHE EN EXECUTION</a> </li>
-        <li class="bg_ls "> <a href="grid.html"> <i class="icon-fullscreen"></i><span class="label label-important">{{afficheNombreMarcheResilier}}</span>  MARCHE RESILIE</a> </li>
-        <li class="bg_lo "> <a href="form-common.html"> <i class="icon-th-list"></i><span class="label label-important">{{nombreAfficheMarcheSolde}}</span>  MARCHE TERMINE</a> </li>
-        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i><span class="label label-important">{{formatageSomme(parseFloat(montantMarchePrevu))}}</span>  MONTANT MARCHE PREVU</a> </li>
+        <li class="bg_lb"> <a href="#"> <i class="icon-dashboard"></i> <span class="label label-important">{{nombreDeMarche}}</span> TOTAL MARCHE</a> </li>
+        <li class="bg_lo"> <a href="#"> <i class="icon-signal"></i><span class="label label-important">{{nombreMarcheEnplanification}}</span>  MARCHE EN PLANIFICATION</a> </li>
+        <li class="bg_lg"> <a href="#"> <i class="icon-inbox"></i><span class="label label-success">{{nombreDeMarcheEnContratualisation}}</span> MARCHE EN CONTRALISATION </a> </li>
+        <li class="bg_ly"> <a href="#"> <i class="icon-th"></i> <span class="label label-important">{{nbreMarcheExecuter}}</span> MARCHE EN EXECUTION</a> </li>
+        <li class="bg_ls "> <a href="#"> <i class="icon-fullscreen"></i><span class="label label-important">{{afficheNombreMarcheResilier}}</span>  MARCHE RESILIE</a> </li>
+        <li class="bg_lo "> <a href="#"> <i class="icon-th-list"></i><span class="label label-important">{{nombreAfficheMarcheSolde}}</span>  MARCHE TERMINE</a> </li>
+        <!-- <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i><span class="label label-important">{{formatageSomme(parseFloat(montantMarchePrevu))}}</span>  MONTANT MARCHE PREVU</a> </li>
         <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i><span class="label label-important">{{formatageSomme(parseFloat(montantMarcheAvecAvenant))}}</span> MONTANT MARCHE EN EXECUTION</a> </li>
         <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i><span class="label label-important">{{formatageSomme(parseFloat(budgetConsommerBienService))}}</span>  MONTANT MARCHE CONSOMME</a> </li>
         <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i><span class="label label-important">{{formatageSomme(-(montantMarcheAvecAvenant - budgetConsommerBienService))}}</span> MONTANT MARCHE RESTANT </a> </li>
- <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">{{((parseFloat(budgetConsommerBienService)/parseFloat(montantMarcheAvecAvenant))*100).toFixed(2)}}%</span> TAUX MARCHE EN EXECUTION </a> </li>
+ <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">{{((parseFloat(budgetConsommerBienService)/parseFloat(montantMarcheAvecAvenant))*100).toFixed(2)}}%</span> TAUX MARCHE EN EXECUTION </a> </li> -->
         <!-- <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Charts</a> </li>
         <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> Widgets </a> </li>
         <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i> Tables</a> </li>
@@ -33,7 +33,7 @@
 <script>
 import { mapGetters } from "vuex";
 
-import { formatageSomme } from "../../../Repositories/Repository";
+import { formatageSomme } from "../../../src/Repositories/Repository";
 
 export default {
   name:'tableaudebord',
@@ -94,38 +94,48 @@ budgetConsommerBienService(){
 
 
 
-  afficheMarcheEnCoursContratualisation(){
-return this.afficherLaListeDesMarche.filter(element => element.attribue == 1 )
-},
-afficheMarcheEnPlanification(){
-return this.afficherLaListeDesMarche.filter(element => element.attribue == 0)
-},
-afficherLaListeDesMarche(){
-return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
-},
-nombreDeMarche(){
-  return this.afficherLaListeDesMarche.length;
+  nombreDeMarcheEnContratualisation(){
+return this.marches.filter(element => element.attribue == 1 ).length
 },
 nombreMarcheEnplanification(){
-  return this.afficheMarcheEnPlanification.length;
-},
-nombreDeMarcheEnContratualisation(){
-   return this.afficheMarcheEnCoursContratualisation.length;
-
- },
- 
-  afficheMarcheResilier(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 4 )
-},
-    nbreMarcheExecuter(){
-  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.afficheCodeTypeMarche(recuper.marche.type_marche_id) == 4).length
+return this.marches.filter(element => element.attribue == 0).length
 },
 afficheNombreMarcheResilier(){
-return this.afficheMarcheResilier.length
+return this.marches.filter(element => element.attribue == 3).length
+},
+nbreMarcheExecuter(){
+return this.marches.filter(element => element.attribue == 2).length
 },
 nombreAfficheMarcheSolde(){
-return this.afficheMarcheTerminer.length
+return this.marches.filter(element => element.attribue == 5).length
 },
+// marches(){
+// return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
+// },
+nombreDeMarche(){
+  return this.marches.length;
+},
+// nombreMarcheEnplanification(){
+//   return this.afficheMarcheEnPlanification.length;
+// },
+// nombreDeMarcheEnContratualisation(){
+//    return this.afficheMarcheEnCoursContratualisation.length;
+
+//  },
+ 
+ 
+//   afficheMarcheResilier(){
+// return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 4 )
+// },
+//     nbreMarcheExecuter(){
+//   return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.afficheCodeTypeMarche(recuper.marche.type_marche_id) == 4).length
+// },
+// afficheNombreMarcheResilier(){
+// return this.afficheMarcheResilier.length
+// },
+// nombreAfficheMarcheSolde(){
+// return this.afficheMarcheTerminer.length
+// },
 //     nbreMarcheExecuter(){
 //   return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.afficheCodeTypeMarche(recuper.marche.type_marche_id) == 4).length
 // },

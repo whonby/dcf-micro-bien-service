@@ -2477,7 +2477,7 @@ anneeAmort() {
     // return cur_day + " " + hours + ":" + minutes + ":" + seconds;
    },
    afficheMarchExecuter(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4 ||element.marche.attribue == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 1)
 },
  affichertypeMarcheEx() {
       return id => {
@@ -2506,7 +2506,7 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => element.march
 
 
 afficheMarcheTerminer(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4 || element.marche.attribue == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4)
 },
 // afficheMarcheTerminer(){
 // return this.afficheMarcheSolde.filter(element => element.indicateur_resilie != 1)
@@ -2530,7 +2530,7 @@ montantEnSolde(){
 
 
   afficheMarcheResilier(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 3 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 3 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4 || element.marche.attribue == 3 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 1 )
 },
 
 
@@ -2550,7 +2550,7 @@ return this.afficheMarcheResilier.length
 // afficher la liste de marche en contratualisation
 
 afficheMarcheEnCoursContratualisation(){
-return this.afficherLaListeDesMarche.filter(element => element.attribue == 1 && element.type_marche.code_type_marche == 4)
+return this.afficherLaListeDesMarche.filter(element => element.attribue == 1 &&  this.recupererCodeTypeMarche(element.type_marche_id) == 1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 4  )
 },
 
 
@@ -2571,7 +2571,7 @@ montantEnContratualisation(){
 
 // afficher la liste des marche en planification
 afficheMarcheEnPlanification(){
-return this.afficherLaListeDesMarche.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche ==1)
+return this.afficherLaListeDesMarche.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 4 || element.attribue == 0 && element.type_marche.code_type_marche == 1)
 },
 
 
@@ -2643,6 +2643,18 @@ sommeMarcheParMandat: function () {
             },
 
 
+recupererCodeTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code_type_marche;
+      }
+      return 0
+        }
+      };
+    },
 recupererMontantReel() {
       return id => {
         if (id != null && id != "") {
@@ -2808,7 +2820,7 @@ this.formData = {
         keyboard: false
       });
 
-      this.editMarche = this.marches[index];
+      this.editMarche = this.afficherLaListeDesMarche[index];
     },
     // fonction pour vider l'input modification
     modifierModalTypeprestationLocal(){

@@ -1997,8 +1997,9 @@ montantMarcheInvestissement(){
 
 
 
+
    afficheMarchExecuter(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 2 && element.AfficheMarche.type_marche.code_type_marche == 3)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 3)
 },
 
 // afficheMarchExecuter(){
@@ -2013,7 +2014,18 @@ return this.afficheMarchExecuter.length
 
 
 
+ affichertypeMarcheEx() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.code_type_marche;
+      }
+      return 0
+        }
+      };
+    },
 
 afficheMarcheTerminer(){
 return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 3)

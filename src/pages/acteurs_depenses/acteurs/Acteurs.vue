@@ -86,7 +86,7 @@
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_naissance) }}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.uniteAdmin.libelle || 'Non renseigné'}}</td>
                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheUniteZone(item.uniteZone_id) || 'Non renseigné'}}</td>
-                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheService(item.service_id)|| 'Non renseigné'}}</td>
+                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheServiceLibelle(afficheService(item.service_id))|| 'Non renseigné'}}</td>
                                                    <td @dblclick="afficherModalModifierTitre(item.id)">{{item.fonction.libelle || 'Non renseigné'}}</td>
                                                 <td>
                                                     <div class="btn-group">
@@ -249,7 +249,7 @@
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_resilie) }}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.uniteAdmin.libelle || 'Non renseigné'}}</td>
                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheUniteZone(item.uniteZone_id) || 'Non renseigné'}}</td>
-                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheService(item.service_id)|| 'Non renseigné'}}</td>
+                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheServiceLibelle(afficheService(item.service_id))|| 'Non renseigné'}}</td>
                                                    <td @dblclick="afficherModalModifierTitre(item.id)">{{item.fonction.libelle || 'Non renseigné'}}</td>
                                                 <td>
                                                     <div class="btn-group">
@@ -1209,6 +1209,18 @@ enregistreIdPersonnel(){
  afficheService() {
       return id => {
         if (id != null && id != "") {
+           const qtereel = this.servicesua.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.serviceua_id;
+      }
+      return 0
+        }
+      };
+    },
+ afficheServiceLibelle() {
+      return id => {
+        if (id != null && id != "") {
            const qtereel = this.services.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
@@ -1218,7 +1230,6 @@ enregistreIdPersonnel(){
         }
       };
     },
-
  afficheUniteZone() {
       return id => {
         if (id != null && id != "") {

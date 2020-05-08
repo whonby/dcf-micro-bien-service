@@ -97,6 +97,7 @@ afficherBanqueDynamique
                         
                         </div>
                     </div>
+
                             </td>
 
                             <td>
@@ -105,7 +106,7 @@ afficherBanqueDynamique
                         <div class="controls">
                           <select v-model="formEffetFinancier.banq_id" class="span" :readOnly="verifiBanqueExist">
                                <option v-for="varText in afficherBanqueDynamiqueId(formEffetFinancier.entreprise_id)" :key="varText.id"
-                                        :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
+                                        :value="varText.banq_id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                             </select>
                         
                         </div>
@@ -397,9 +398,9 @@ afficherBanqueDynamique
                            <div class="control-group">
                         <label class="control-label">Banque.</label>
                         <div class="controls">
-                          <select v-model="editActeEffetFinancier.banq_id" class="span" :readOnly="verifiBanqueExist">
+                          <select v-model="editActeEffetFinancier.banq_id" class="span" :readOnly="verifiBanqueExistModifier">
                                <option v-for="varText in afficherBanqueDynamiqueId(formEffetFinancier.entreprise_id)" :key="varText.id"
-                                        :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
+                                        :value="varText.banq_id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                             </select>
                         
                         </div>
@@ -855,9 +856,11 @@ afficherEntrepriseRecep () {
             // afficher la banque dynamique
 
             verifiBanqueExist(){
-                return this.formEffetFinancier.entreprise_id ==undefined;
+                return this.formEffetFinancier.entreprise_id =="";
             },
-
+         verifiBanqueExistModifier(){
+                return this.editActeEffetFinancier.entreprise_id =="";
+            },
 
             afficherBanqueDynamique(){
                 return id =>{
@@ -871,7 +874,17 @@ afficherEntrepriseRecep () {
                 }
             },
 
-
+       afficherBanqueId(){
+                return id =>{
+                    if(id != null && id !=""){
+                      var  resultat = this.comptes.find(element => element.id== id);
+                       if(resultat){
+                           return resultat.banque_id
+                       } 
+                     return 0
+                    }
+                }
+            },
 
 // listeAvisAnoBailleur(){
 //        return id =>{
@@ -916,7 +929,17 @@ afficherEntrepriseRecep () {
      }
   
    },
-
+ afficherIdCompte(){
+     return banq_id => {
+       if( banq_id !== undefined) {
+    var acteur = this.comptes.find(acteur => acteur.rib == banq_id  )
+    
+     return  (acteur) ? acteur.id :null 
+       }
+    return null
+     }
+  
+   },
 
 nombreDejourCalcule(){
                 let vM=this;
@@ -1040,9 +1063,10 @@ getDateFinExécutionValueEdit(){
               ajouterModalActeEffetFinancierLocal(){
        var nouvelObjet = {
             ...this.formEffetFinancier,
-            // duree: this.nombreDejourCalcule,
+            duree: this.nombreDejourCalcule,
             difference_personnel_bienService:this.afficheMarcheType,
-            marche_id:this.macheid
+            marche_id:this.macheid,
+            compte_id:this.afficherIdCompte(this.formEffetFinancier.banq_id)
         }
     //let entreprisePremier=this.entreprises.find(item=>item.numero_rc==rcm)
              

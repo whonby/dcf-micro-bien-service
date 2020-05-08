@@ -10,6 +10,7 @@ import AjouterMarcheContrat from "../../pages/gestion_marche/MarcheContrat/Ajout
 import DetailMarcheContrat from "../../pages/gestion_marche/MarcheContrat/DetailMarcheContrat"
 import IndicateurMarche from "../../pages/gestion_marche/IndicateurMarche"
 import TableauBordMarche from "../../pages/gestion_marche/TableauBordMarche"
+import GestionMarche from "../../pages/gestionMarche/GestionMarche.vue"
 import MarcheContratEdite from "../../pages/gestion_marche/MarcheContrat/ModificationMarche"
 import EditeEntreprise from "../../pages/gestion_marche/Entreprise/EntrepriseEdite"
 import MarcheExecution from "../../pages/gestion_marche/MarcheContrat/execution/MarcheContratExecution"
@@ -17,6 +18,12 @@ import DetailMarcheExecution from "../../pages/gestion_marche/MarcheContrat/exec
 import banque from '../../pages/gestion_marche/Banque/banque.vue';
 import DetaillEntreprise from '../../pages/gestion_marche/Entreprise/DetaillEntreprise.vue';
 const GestionMarcheRoutes = [
+    {
+
+        path: "/Gestion-Marche",
+        name: "GestionMarche",
+        component: GestionMarche
+    },
     {
         
         path:"/mode-passation",

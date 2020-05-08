@@ -781,7 +781,7 @@
                     >{{afficheUniteZone(BesoinImmo.uniteZone_id)  || 'Non renseigné'}}</td> 
                     <td
                       
-                    >{{afficherLibelleService(BesoinImmo.service_id) || 'Non renseigné'}}</td>
+                    >{{afficheServiceLibelle(afficheService(BesoinImmo.service_id)) || 'Non renseigné'}}</td>
                   
                       <td 
                       
@@ -852,7 +852,7 @@
                     >{{afficheUniteZone(BesoinImmo.uniteZone_id)  || 'Non renseigné'}}</td> 
                     <td
                       
-                    >{{afficherLibelleService(BesoinImmo.service_id) || 'Non renseigné'}}</td>
+                    >{{afficheServiceLibelle(afficheService(BesoinImmo.service_id)) || 'Non renseigné'}}</td>
                   
                       <td 
                       
@@ -927,9 +927,9 @@
                      <td
                       @dblclick="afficherModalModifierDirection(index)" 
                     >{{afficheUniteZone(BesoinImmo.uniteZone_id) || 'Non renseigné'}}</td> 
-                    <td
+                    <td 
                       @dblclick="afficherModalModifierDirection(index)"
-                    >{{afficherLibelleService(BesoinImmo.service_id) || 'Non renseigné'}}</td>
+                    >{{afficheServiceLibelle(afficheService(BesoinImmo.service_id)) || 'Non renseigné'}}</td>
                     <td style="text-align: center;"
                       @dblclick="afficherModalModifierDirection(index)"
                     >{{afficheFonction(BesoinImmo.fonction_id)}}</td>
@@ -995,7 +995,7 @@
                     >{{afficheUniteZone(BesoinImmo.uniteZone_id) || 'Non renseigné'}}</td> 
                     <td
                       @dblclick="afficherModalModifierDirection(index)"
-                    >{{afficherLibelleService(BesoinImmo.service_id) || 'Non renseigné'}}</td>
+                    >{{afficheServiceLibelle(afficheService(BesoinImmo.service_id)) || 'Non renseigné'}}</td>
                     <td style="text-align: center;"
                       @dblclick="afficherModalModifierDirection(index)"
                     >{{afficheFonction(BesoinImmo.fonction_id)}}</td>
@@ -1067,9 +1067,9 @@
                      <td
                       @dblclick="afficherModalModifierDirection(index)" 
                     >{{afficheUniteZone(BesoinImmo.uniteZone_id) || 'Non renseigné'}}</td> 
-                    <td
+                    <td 
                       @dblclick="afficherModalModifierDirection(index)"
-                    >{{afficherLibelleService(BesoinImmo.service_id) || 'Non renseigné'}}</td>
+                    >{{afficheServiceLibelle(afficheService(BesoinImmo.service_id)) || 'Non renseigné'}}</td>
                     <td style="text-align: center;"
                       @dblclick="afficherModalModifierDirection(index)"
                     >{{afficheFonction(BesoinImmo.fonction_id)}}</td>
@@ -1512,6 +1512,36 @@ cause_directeur:""
     ...mapGetters("uniteadministrative", ["uniteAdministratives","directions","servicesua","uniteZones"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins","exercices_budgetaires"]),
 ...mapGetters("personnelUA", ["acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
+
+
+
+
+ afficheService() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.servicesua.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.serviceua_id;
+      }
+      return 0
+        }
+      };
+    },
+ afficheServiceLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.services.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+
 
 
 afficheMontantTotalEquipementNonCouvert() {

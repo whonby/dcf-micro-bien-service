@@ -20,10 +20,11 @@
                         <div class="control-group">
                         <label>Offre</label>
                         <div class="controls">
-                            <select v-model="formLot.appel_offre_id" class="span" disabled>
+                            <!-- <select v-model="formLot.appel_offre_id" class="span" disabled>
                                 <option v-for="varText in listeAppelOffre(macheid)" :key="varText.id"
                                         :value="varText.id">{{varText.ref_appel}}</option>
-                            </select>
+                            </select> -->
+                             <input type="text" class="span" :value="listeAppelOffre(macheid)" readonly>
                         </div>
                         </div>
                          </td>
@@ -106,10 +107,11 @@
                         <div class="control-group">
                         <label>Offre</label>
                         <div class="controls">
-                            <select v-model="edite_lot.appel_offre_id" class="span" disabled>
+                            <!-- <select v-model="edite_lot.appel_offre_id" class="span" disabled>
                                 <option v-for="varText in listeAppelOffre(macheid)" :key="varText.id"
                                         :value="varText.id">{{varText.ref_appel}}</option>
-                            </select>
+                            </select> -->
+                             <input type="text" class="span" :value="listeAppelOffre(macheid)" readonly>
                         </div>
                         </div>
                          </td>
@@ -208,7 +210,7 @@
                                                     {{lot_marche.montant_lot || 0}}</td>
                                              
                                                 <td @dblclick="afficherModaleModifier(index)">
-                                                    {{lot_marche.appel_offre.ref_appel || 'Non renseigné'}}
+                                                    {{listeAppelOffreLibelle(lot_marche.appel_offre_id) || 'Non renseigné'}}
                                                 </td>
 
                                                 <div class="btn-group">
@@ -284,33 +286,70 @@ export default {
             //     }
             // },
 
-            listeAppelOffre(){
-                return  marche_id=>{
-                    if (marche_id!="") {
+            // listeAppelOffre(){
+            //     return  id=>{
+            //         if (id!="") {
                         
-                       const vM=this;
-                        let Objet=this.appelOffres.find( idmarche => idmarche.marche_id == marche_id)
-                       console.log(Objet)
-                        if(Objet!=undefined){
-                            // vM.formDossierCadidature.appel_offre_id=Objet.id;
-                            // vM.formAnalyseDossier.appel_offre_id = Objet.id;
-                            vM.formLot.appel_offre_id=Objet.id;
-                            // vM.formAno.appel_offre_id = Objet.id
-                            // vM.formLettre.appel_offre_id=Objet.id;
-                            // vM.formDataCojo.num_dossier_appel_offre=Objet.ref_appel;
-                        }
+            //            const vM=this;
+            //             let Objet=this.appelOffres.find( idmarche => idmarche.marche_id == id)
+            //            console.log(Objet)
+            //             if(Objet!=undefined){
+            //                 // vM.formDossierCadidature.appel_offre_id=Objet.id;
+            //                 // vM.formAnalyseDossier.appel_offre_id = Objet.id;
+            //                 vM.formLot.appel_offre_id=Objet.id;
+            //                 // vM.formAno.appel_offre_id = Objet.id
+            //                 // vM.formLettre.appel_offre_id=Objet.id;
+            //                 // vM.formDataCojo.num_dossier_appel_offre=Objet.ref_appel;
+            //             }
                        
-                    return this.appelOffres.filter( idmarche => idmarche.marche_id == marche_id)
-                    }
-                }
+            //         return this.appelOffres.filter( idmarche => idmarche.marche_id == id)
+            //         }
+            //     }
 
-            },
+            // },
+            listeAppelOffre() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.ref_appel;
+      }
+      return 0
+        }
+      };
+    },
+       listeAppelOffreId() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+     listeAppelOffreLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.appelOffres.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ref_appel;
+      }
+      return 0
+        }
+      };
+    },
     },
     methods:{
         ...mapActions("bienService", [ "ajouterLot","modifierLot","supprimerLot"]),
 
          ajouterL(){
                 this.formLot.marche_id=this.macheid
+                this.formLot.appel_offre_id=this.listeAppelOffreId(this.macheid)
                 this.ajouterLot(this.formLot)
                 this.formLot={
                     numero_lot:"",
@@ -336,7 +375,8 @@ export default {
             },
  
              modficationsLot(){
-                 
+                  this.edite_lot.marche_id=this.macheid
+                this.edite_lot.appel_offre_id=this.listeAppelOffreId(this.macheid)
                 this.modifierLot(this.edite_lot)
                 this.$('#modificationModal1').modal('hide');
             },

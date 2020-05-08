@@ -44,29 +44,75 @@
                       <div class="modal-body">
         <table class="table table-bordered table-striped">
             <tr>
-
-                <td>
- 
-                                                    <label class="control-label">Matricule:</label>
-                                                    <div class="controls">
-                                                        <input type="text"  v-model="formData.matricule"  placeholder="Saisir le matricule" />
-                                                    </div>
-                                                
-                </td>
-                      
-                 <td>
+ <td>
                     <div class="control-group">
-                                                    <label class="control-label">Nom:</label>
+                                                    <label class="control-label">Exercice budgetaire:{{recupererIdMarche(formData.unite_administrative_id)}}</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="formData.nom"  placeholder="Saisir le nom" />
+                                                       
+                                                        
+                                                     
+                                                        <input type="text" :value="exoEnCours" readonly class="span12"/>
+                                                   
+                                                    </div>
+                                                </div>
+                </td>
+                <td colspan="2">
+                     <div class="control-group">
+                                                    <label class="control-label">L'unite administrative:</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.unite_administrative_id" class="span12">
+                                                            <option></option>
+                                                            <option v-for="item in uniteAdministratives" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
                                                     </div>
                                                 </div>
                 </td>
                  <td>
                      <div class="control-group">
+                                                    <label class="control-label">Reference Acte</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.uniteZone_id"  class="span12">
+                                                            <option></option>
+                                                            <option v-for="item in recupererCandidatSel(recupererIdMarche(formData.unite_administrative_id))" :key="item.id" :value="item.id">
+                                                                {{item.reference_act}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                
+                </td>
+                <td>
+ 
+                                                    <label class="control-label">Matricule:</label>
+                                                    <div class="controls">
+                                                        <input type="text"  v-model="formData.matricule"  placeholder="Saisir le matricule" class="span12"/>
+                                                    </div>
+                                                
+                </td>
+                      
+                
+               
+              
+                
+            </tr>
+            <tr>
+               <td>
+                    <div class="control-group">
+                                                    <label class="control-label">Nom:</label>
+                                                    <div class="controls">
+                                                        <input type="text" v-model="formData.nom"  placeholder="Saisir le nom" class="span12" />
+                                                    </div>
+                                                </div>
+                </td>
+                <td colspan="2">
+                     <div class="control-group">
                                                     <label class="control-label">Prenom:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="formData.prenom"  placeholder="Saisir le prenom" />
+                                                        <input type="text" v-model="formData.prenom"  placeholder="Saisir le prenom" class="span12"/>
                                                     </div>
                                                 </div>
                 </td>
@@ -74,7 +120,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Sexe:</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.sexe" >
+                                                        <select v-model="formData.sexe" class="span12">
                                                             <option></option>
                                                             <option value="H">Homme</option>
                                                             <option value="F">Femme</option>
@@ -82,23 +128,22 @@
                                                     </div>
                                                 </div>
                 </td>
-                 <td>
+                   <td>
                      <div class="control-group">
                                                     <label class="control-label">Date de naissance:</label>
                                                     <div class="controls">
-                                                        <input type="date" v-model="formData.date_naissance"  placeholder="Saisir la date de naissance" />
+                                                        <input type="date" v-model="formData.date_naissance"  placeholder="Saisir la date de naissance" class="span12"/>
                                                     </div>
                                                 </div>
                 </td>
-                
+               
             </tr>
             <tr>
-                
-                <td>
+              <td>
                      <div class="control-group">
                                                     <label class="control-label">Numero passeport:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="formData.numero_passeport"  placeholder="Saisir le numero passeport" />
+                                                        <input type="text" v-model="formData.numero_passeport"  placeholder="Saisir le numero passeport" class="span12"/>
                                                     </div>
                                                 </div>
                 </td>
@@ -106,7 +151,7 @@
                     <div class="control-group">
                                                     <label class="control-label">Numero CNI:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="formData.numero_cni"  placeholder="Saisir le numero cni" />
+                                                        <input type="text" v-model="formData.numero_cni"  placeholder="Saisir le numero cni" class="span12"/>
                                                     </div>
                                                 </div>
                 </td>
@@ -114,19 +159,22 @@
                      <div class="control-group">
                                                     <label class="control-label">Nom du pere:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="formData.nom_pere"  placeholder="Saisir le nom du pere" />
+                                                        <input type="text" v-model="formData.nom_pere"  placeholder="Saisir le nom du pere" class="span12"/>
                                                     </div>
                                                 </div>
                 </td>
-                <td>
+                 <td>
                      <div class="control-group">
                                                     <label class="control-label">Nom de la mere:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="formData.nom_mere"  placeholder="Saisir le nom de la mere" />
+                                                        <input type="text" v-model="formData.nom_mere"  placeholder="Saisir le nom de la mere" class="span12"/>
                                                     </div>
                                                 </div>
                 </td>
-                          <td>
+                        
+            </tr>
+            <tr>
+                <td>
                      <div class="control-group">
                                                     <label class="control-label">Situation matrimoniale</label>
                                                     <div class="controls">
@@ -150,42 +198,11 @@
   <div class="modal-body">
         <table class="table table-bordered table-striped">
             <tr>
-                <td>
-                    <div class="control-group">
-                                                    <label class="control-label">Exercice budgetaire:</label>
-                                                    <div class="controls">
-                                                        <!-- <select v-model="formData.exercice_budgetaire_id">
-                                                            <option v-for="item in exercices_budgetaires" :key="item.id" :value="item.id">
-                                                                {{item.annee}}
-                                                            </option>
-
-                                                        </select> -->
-                                                        
-                                                     
-                                                        <input type="text" :value="exoEnCours" readonly/>
-                                                   
-                                                    </div>
-                                                </div>
-                </td>
-                <td>
-                     <div class="control-group">
-                                                    <label class="control-label">L'unite administrative:</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.unite_administrative_id">
-                                                            <option></option>
-                                                            <option v-for="item in uniteAdministratives" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                </td>
-                <td>
+                           <td>
                      <div class="control-group">
                                                     <label class="control-label">Unite de Zone</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.uniteZone_id" :disabled="verrouilleUniteZone">
+                                                        <select v-model="formData.uniteZone_id" :disabled="verrouilleUniteZone" class="span12">
                                                             <option></option>
                                                             <option v-for="item in afficheUniteZone(formData.unite_administrative_id)" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -195,6 +212,7 @@
                                                     </div>
                                                 </div>
                 </td>
+               
                 <td>
                      <div class="control-group">
                                                     <label class="control-label">Service</label>
@@ -478,6 +496,40 @@
       
       
     ]),
+ ...mapGetters("bienService", [ "gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+                "modePassations", "procedurePassations","getterDossierCandidats","marches",
+                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
+                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
+                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
+                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
+                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
+ recupererCandidatSel() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getActeEffetFinancierPersonnaliser.find(qtreel => qtreel.marche_id == id);
+
+    
+        }
+      };
+    },
+
+        recupererIdMarche() {
+      return id1 => {
+        if (id1 != null && id1 != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.unite_administrative_id == id1);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
  verrouilleUniteZone() {
       return this.formData.unite_administrative_id == "";
     },
