@@ -42,7 +42,7 @@
                         <div class="controls">
                           <select v-model="editActeEffetFinancier.banq_id" class="span4" :readOnly="verifiBanqueExist">
                                <option v-for="varText in afficherBanqueDynamiqueId(editActeEffetFinancier.entreprise_id)" :key="varText.id"
-                                        :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
+                                        :value="varText.banq_id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                             </select>
                         
                         </div>
@@ -331,7 +331,7 @@
                         <div class="controls">
                           <select v-model="formEffetFinancier.banq_id" class="span4" :readOnly="verifiBanqueExist">
                                  <option v-for="varText in afficherBanqueDynamiqueId(formEffetFinancier.entreprise_id)" :key="varText.id"
-                                        :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
+                                        :value="varText.banq_id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                             </select>
                         
                         </div>
@@ -868,6 +868,17 @@ afficherEntrepriseRecep () {
      }
   
    },
+    afficherIdCompte(){
+     return banq_id => {
+       if( banq_id !== undefined) {
+    var acteur = this.comptes.find(acteur => acteur.rib == banq_id  )
+    
+     return  (acteur) ? acteur.id :null 
+       }
+    return null
+     }
+  
+   },
 nombreDejourCalculeModifier(){
                 let vM=this;
     const acteAffet = vM.editActeEffetFinancier
@@ -1013,8 +1024,8 @@ getDateFinExécutionValueEdit(){
        var nouvelObjet = {
             ...this.formEffetFinancier,
             duree: this.nombreDejourCalcule,
-            	marche_id:this.macheid
-
+            	marche_id:this.macheid,
+                compte_id:this.afficherIdCompte(this.formEffetFinancier.banq_id)
         }
     //let entreprisePremier=this.entreprises.find(item=>item.numero_rc==rcm)
              
@@ -1060,8 +1071,13 @@ getDateFinExécutionValueEdit(){
 }, 
 
 modifierModalActeEffetFinancierLocal(){
-
-    this.modifierActeEffetFinancier(this.editActeEffetFinancier)
+ var nouvelObjet = {
+            ...this.editActeEffetFinancier,
+            duree: this.nombreDejourCalcule,
+            	marche_id:this.macheid,
+                compte_id:this.afficherIdCompte(editActeEffetFinancier.banq_id)
+        }
+    this.modifierActeEffetFinancier(nouvelObjet)
     this.$('#modifierActeEF').modal('hide');
 },
 
