@@ -108,7 +108,7 @@ afficherBanqueDynamique
                         <div class="controls">
                           <select v-model="formEffetFinancier.banq_id" class="span" :readOnly="verifiBanqueExist">
                                <option v-for="varText in afficherBanqueDynamiqueId(formEffetFinancier.entreprise_id)" :key="varText.id"
-                                        :value="varText.banq_id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
+                                        :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                             </select>
                         
                         </div>
@@ -123,6 +123,7 @@ afficherBanqueDynamique
       
               </div>
             </div>
+            
                     </td>
 
 
@@ -810,6 +811,25 @@ else{
 }
 },
 
+affichierIdBanque() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.comptes.find(qtreel => qtreel.rib == id);
+
+      if (qtereel) {
+        return qtereel.banq_id;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+
+
 
 affichierLibelleTypeMarche() {
       return id => {
@@ -1200,6 +1220,7 @@ getDateFinExécutionValueEdit(){
             duree: this.nombreDejourCalcule,
             difference_personnel_bienService:this.afficheMarcheType,
             marche_id:this.macheid,
+            banq_id:this.affichierIdBanque(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id)),
             compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id))
         }
     //let entreprisePremier=this.entreprises.find(item=>item.numero_rc==rcm)
