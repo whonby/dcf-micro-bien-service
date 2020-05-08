@@ -1248,7 +1248,7 @@
          <div class="control-group">
       <label class="control-label">Type de procedure</label>
       <div class="controls">
-      <select v-model="editMarche.typeappel_id" class="span4">
+      
          <option v-for="plans in typeTypeProcedures" :key="plans.id" 
          :value="plans.id">{{plans.libelle}}</option>
      </select>
