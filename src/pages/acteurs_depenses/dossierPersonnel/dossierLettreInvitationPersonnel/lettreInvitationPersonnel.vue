@@ -350,7 +350,7 @@ lettreInvitationAMarche: function () {
                 return id => {
                     if (id != "") {
                         //console.log("Marche lettre inviation marche")
-                        return this.listeLettreInvitationPersonnel.filter(idmarche => idmarche.appel_offre.marche_id == id)
+                        return this.listeLettreInvitationPersonnel.filter(idmarche => idmarche.marche_id == id)
                     }
                 }
             },

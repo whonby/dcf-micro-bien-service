@@ -1535,6 +1535,7 @@ import { formatageSomme } from '../../../../../src/Repositories/Repository';
               capacite_tech_exp:"",
               mt_offre_financiere:"",
               numero_dossier:"",
+              entreprise_id:"",
               capacite_financement:"",
           },
           editDossierCadidature:{
@@ -2355,17 +2356,17 @@ ajouterStockLocal(){
              numero_facture:"",
     }
 },
-            infoPVAffiche(ref){
-                this.resultaAnalysePv=[]
-                let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==ref);
-                this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
-                if (this.resultaAnalysePv.length>0){
-                    this.resultaAnalysePv.sort(function (a, b) {
-                        return a.note_analyse - b.note_analyse;
-                    }).reverse()
-                }
-                //console.log(this.resultaAnalysePv)
-            },
+            // infoPVAffiche(ref){
+            //     this.resultaAnalysePv=[]
+            //     let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==ref);
+            //     this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
+            //     if (this.resultaAnalysePv.length>0){
+            //         this.resultaAnalysePv.sort(function (a, b) {
+            //             return a.note_analyse - b.note_analyse;
+            //         }).reverse()
+            //     }
+            //     //console.log(this.resultaAnalysePv)
+            // },
     onFichierChange(e){
       this.formLettre.fichier_joint = e.target.files[0]
      // console.log(onFichierChange); edit_offre_technique_recupere
@@ -2601,7 +2602,8 @@ modifierFactureLocal(){
       montant_total_ht :this.montantHT,
        montant_total_ttc :this.montantHTt,
         	taux :this.affcherTauxEnCours,
-         	tva :this.montantTva,
+             tva :this.montantTva,
+             marche_id:this.marcheid,
           designation:"",
           dossier_candidat_id : this.edite_offre_financiere.id
        };
@@ -2620,6 +2622,7 @@ modifierFactureLocal(){
             },
             modificationOffreFin(){
                 this.modification_offre_finnancier_recupere.montant_total_ht=this.montantHTEdite
+                this.modification_offre_finnancier_recupere.marche_id=this.marcheid
                 this.modification_offre_finnancier_recupere.montant_total_ttc=this.montantHTtEdite
                 this.modification_offre_finnancier_recupere.taux=this.affcherTauxEnCourse
                 this.modification_offre_finnancier_recupere.tva=this.affcherTauxEnCours
@@ -2690,6 +2693,7 @@ modifierFactureLocal(){
                         pouv_habil_signataire:"",
                         piece_admin:"",
                         reg_com:"",
+                        entreprise_id:"",
                         attest_banc:"",
                         formul_propo_tech:"",
                         fiche_rsgnt_cand:"",
