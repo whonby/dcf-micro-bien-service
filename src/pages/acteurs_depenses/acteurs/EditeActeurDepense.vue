@@ -209,6 +209,8 @@
                                                     </div>
                                                 </div>
                 </td>
+                
+
                 <td>
                      <div class="control-group">
                                                     <label class="control-label">Fonctions</label>
@@ -609,10 +611,11 @@ exoEnCours() {
 
     
 
-          watch: {
+     
+        },
+             watch: {
     '$route': 'getDetail'
   },
-        },
         methods: {
             // methode pour notre action
             ...mapActions('personnelUA', ['getActeur',"ajouterActeur","supprimerActeurs","getNbrActeurAcrediteTaux",
