@@ -141,7 +141,7 @@ afficheCompteEntreprise(acteurDetail.id)
 
                                                     <tr>
                                                         <td><b>Fonction</b></td>
-                                                        <td>{{acteurDetail.fonction.libelle}}</td>
+                                                        <td>{{afficheLibelleFonction(acteurDetail.fonction_id)}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Niveau d'etude</b></td>
@@ -149,7 +149,7 @@ afficheCompteEntreprise(acteurDetail.id)
                                                     </tr>
                                                     <tr>
                                                         <td><b>Grade</b></td>
-                                                        <td>{{acteurDetail.grade.libelle}}</td>
+                                                        <td>{{afficheLibelle(acteurDetail.grade_id)}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Type de salarie</b></td>
@@ -2007,7 +2007,31 @@ enregistreIdPersonnel(){
                     }
 
                 }
-            }
+            },
+                  afficheLibelleFonction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.fonctions.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+      afficheLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.grades.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
         },
         watch : {
 
