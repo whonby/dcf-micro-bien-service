@@ -1,4 +1,4 @@
-afficheCompteEntreprise(acteurDetail.id)
+
 <template>
     <div>
 
@@ -50,7 +50,7 @@ afficheCompteEntreprise(acteurDetail.id)
 
                                      <!-- <div align="left">
 
-                                  <a href="#addcandidatP" data-toggle="modal" class="btn btn-warning" >Ajouter contrat resilié</a>
+                                  <a href="#modifierActeEF" data-toggle="modal" class="btn btn-warning" >Ajouter contrat resilié</a>
                                      
                                       </div> -->
 
@@ -60,7 +60,7 @@ afficheCompteEntreprise(acteurDetail.id)
                                      
                                      <div align="right">
                                     <td> 
-                                   <a href="" data-toggle="modal" class="btn btn-warning" @click="afficherModalMarcheResilier(index)" >Ajouter contrat resilié </a>
+                                   <a href="" data-toggle="modal" class="btn btn-warning" @click="afficherModalModifierActeEffetFinancier(index)" >Ajouter contrat resilié </a>
                                     
                                       
                                     </td>
@@ -86,6 +86,7 @@ afficheCompteEntreprise(acteurDetail.id)
                                         <li class=""><a data-toggle="tab" href="#tab4">Tous les conges</a></li>
                                          <li class=""><a data-toggle="tab" href="#tab5">Historique de mission par acteur</a></li>
                                          <li class=""><a data-toggle="tab" href="#tab301">Gestion des Compte bancaire </a></li>
+                                         <!-- <li class=""><a data-toggle="tab" href="#tab301">Gestion des Compte bancaire </a></li> -->
                                     </ul>
                                 </div>
                                 <div class="widget-content tab-content">
@@ -96,7 +97,7 @@ afficheCompteEntreprise(acteurDetail.id)
                                                     <tbody>
                                                     <tr>
                                                         <td><b>Structure actuel</b></td>
-                                                        <td>{{acteurDetail.uniteAdmin.libelle}}</td>
+                                                        <td>{{afficheAdministrative(acteurDetail.unite_administrative_id)}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Salaires actuel</b></td>
@@ -143,7 +144,7 @@ afficheCompteEntreprise(acteurDetail.id)
 
                                                     <tr>
                                                         <td><b>Fonction</b></td>
-                                                        <td>{{acteurDetail.fonction.libelle}}</td>
+                                                        <td>{{afficheFonctionAdministrative(acteurDetail.fonction_id)}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Niveau d'etude</b></td>
@@ -1151,7 +1152,7 @@ afficheCompteEntreprise(acteurDetail.id)
 
 
 
-           <div id="addcandidatP" class="modal hide grdirModalActeEffet">
+           <div id="modifierActeEF" class="modal hide grdirModalActeEffet">
              <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter contrat Resilié</h3>
@@ -1161,9 +1162,9 @@ afficheCompteEntreprise(acteurDetail.id)
                  <tr>
                 <td>
          <div class="control-group">
-            <label class="control-label">Date fin contrat resilié</label>
+            <label class="control-label">Date  contrat resilié{{editActeEffetFinancier.reference_act}}</label>
         <div class="controls">
-         <input type="date" v-model="detail.date_resiliation" class="span2"  placeholder="" >
+         <input type="date" v-model="editActeEffetFinancier.date_resiliation" class="span2"  placeholder="" >
             </div>
           </div>
                 </td>
@@ -1174,7 +1175,7 @@ afficheCompteEntreprise(acteurDetail.id)
                  <div class="control-group">
                             <label class="control-label">cause du contrat :</label>
                             <div class="controls">
-                            <textarea v-model="detail.cause_resiliation"   class="textarea_editor span5" rows="3" placeholder="Saisir la cause du contrat ..."></textarea>
+                            <textarea v-model="editActeEffetFinancier.cause_resiliation"   class="textarea_editor span5" rows="3" placeholder="Saisir la cause du contrat ..."></textarea>
                     
                             </div>
                         </div>
@@ -1183,7 +1184,7 @@ afficheCompteEntreprise(acteurDetail.id)
              </table>
             </div>
             <div class="modal-footer">
-                <a  @click.prevent="modifierModalResiliation"
+                <a  @click.prevent="modifierModalResiliation(editActeEffetFinancier)"
                         class="btn btn-warning"
                         href="#"
                 >Resilié le contrat</a>
@@ -1498,11 +1499,12 @@ afficheCompteEntreprise(acteurDetail.id)
                     id:""
                 },
 
-                
-                 detail:{
-             date_resiliation:"",
-             cause_resiliation:""
-                },
+                 index:[],
+                 editActeEffetFinancier:{
+                     cause_resiliation:"",
+                     date_resiliation:""
+                 },
+             
 
 
 
@@ -1522,7 +1524,7 @@ afficheCompteEntreprise(acteurDetail.id)
 
                 },
 
-                index:[],
+               
 
                  formData1: {
                    date_ouverture_compte:"",
@@ -1683,6 +1685,40 @@ historiqueMissionParActeur(){
 
 
 
+
+
+
+
+
+
+ afficheAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+ 
+ afficheFonctionAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.fonctions.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
     
     //  VilleDynamiques() {
     //  return id => {
@@ -2257,62 +2293,29 @@ enregistreIdPersonnel(){
 
 
 
-                // fonction pour enregistrer le contrat resilie
 
-                // ajouterDossierC(){
-                //    this.modifierActeEffetFinancier(this.detail)
-                //    this.detail ={
-                //        cause_resiliation:"",
-                //        date_resiliation:""
-                //    } 
-                // },
-
-
-afficherModalMarcheResilier(index) {
-      this.$("#addcandidatP").modal({
-        backdrop: "static",
+    afficherModalModifierActeEffetFinancier(){
+    this.$('#modifierActeEF').modal({
+        backdrop: 'static',
         keyboard: false
-      });
-
-      this.detail = this.acteEffetFinanciers[index];
-    },
-
-
-
-
-// modifierModalActeEffetFinancierLocal(){
-
-//    // this.detail.entreprise_id=entreprise_id
-
-
-
-//     this.modifierActeEffetFinancier(this.detail)
-//     this.$('#modifierActeEF').modal('hide');
-// },
+    });
+     
+}, 
 
 
 
   modifierModalResiliation(){
-      var nouvelObjet1 = {
-      ...this.detail,
-        date_resiliation:this.detail.date_resiliation,
-        	cause_resiliation:this.detail.cause_resiliation
-       };
-       
-       let marcheObjet = this.marches.find(marche=>marche.id==this.detail.marche_id)
-          marcheObjet.attribue = 3
+   
+     let modifierActive=this.acteEffetFinanciers.find(marche=>marche.reference_act == this.afficheNumeroActe(this.acteurDetail.acte_personnel_id))
+    modifierActive.date_resiliation = this.editActeEffetFinancier.date_resiliation,
+    modifierActive.cause_resiliation = this.editActeEffetFinancier.cause_resiliation
+    
+   
+    this.modifierActeEffetFinancier(modifierActive)
+      //this.getMarche()
 
-    this.modifierMarche(marcheObjet)
-     this.modifierActeEffetFinancier(nouvelObjet1)
-      this.getMarche()
       this.getActeEffetFinancier()
-    //   let marcheObjet=this.marches.find(marche=>marche.id==this.detail.marche_id)
-    // marcheObjet.attribue = 3
-    //   //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
-    //  this.modifierMarche(marcheObjet)
-
-      
-      this.$('#addcandidatP').modal('hide');
+      this.$('#modifierActeEF').modal('hide');
     },
 
 
@@ -2427,3 +2430,6 @@ afficherModalMarcheResilier(index) {
 
     }
 </style>
+
+
+ 

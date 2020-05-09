@@ -87,10 +87,10 @@ editCompte
                                                 <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_naissance) }}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.uniteAdmin.libelle || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheAdministrative(item.unite_administrative_id) || 'Non renseigné'}}</td>
                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheUniteZone(item.uniteZone_id) || 'Non renseigné'}}</td>
                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheServiceLibelle(afficheService(item.service_id))|| 'Non renseigné'}}</td>
-                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{item.fonction.libelle || 'Non renseigné'}}</td>
+                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheFonctionAdministrative(item.fonction_id) || 'Non renseigné'}}</td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <router-link :to="{ name: 'ActeurDetail', params: { id: item.id }}" class="btn btn-default ">
@@ -229,6 +229,7 @@ editCompte
                    <th>Matricule </th>
                     <th>Nom</th>
                      <th>Prenom</th>
+                     <th>Numero Act</th>
                      <th>Date resilie</th>
                      <th> Cause du contrat </th>
                     <th >Unite administrative</th>
@@ -239,7 +240,7 @@ editCompte
                          <!-- <th>Montant march&eacute;</th> -->
                                 
                 </tr>
-                </thead>
+                </thead>            
                 <tbody>
                      
                      <tr class="odd gradeX" v-for="item in acteurActivite" :key="item.id">
@@ -248,12 +249,13 @@ editCompte
                                                 <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
+                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheNumeroActe(item.acte_personnel_id )|| 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.cause_contrat || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_resilie) }}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.uniteAdmin.libelle || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheAdministrative(item.unite_administrative_id)|| 'Non renseigné'}}</td>
                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheUniteZone(item.uniteZone_id) || 'Non renseigné'}}</td>
                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheServiceLibelle(afficheService(item.service_id))|| 'Non renseigné'}}</td>
-                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{item.fonction.libelle || 'Non renseigné'}}</td>
+                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{ afficheFonctionAdministrative(item.fonction_id) || 'Non renseigné'}}</td>
                                                 <td>
                                                     <div class="btn-group">
                                                        <button 
@@ -691,7 +693,7 @@ editCompte
             // console.log(this.getFonction)
         },
         computed: {
-            ...mapGetters('personnelUA', ["afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
+            ...mapGetters('personnelUA', ["afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
              ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
@@ -706,6 +708,19 @@ editCompte
  
 
   
+
+ afficheAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 
 
 
@@ -739,7 +754,19 @@ editCompte
 
 
 
+ afficheNumeroActe() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acte_personnels.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.reference_acte;
+      }
+      return "Non renseigné"
+        }
+      };
+    },
+    
 
 
 
