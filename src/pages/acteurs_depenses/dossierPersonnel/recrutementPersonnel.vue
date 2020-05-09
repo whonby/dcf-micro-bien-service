@@ -1,6 +1,8 @@
 
 <template>
     <div class="container-fluid">
+
+      
       <div id="exampleModal" class="modal hide taillModal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>

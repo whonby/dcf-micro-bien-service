@@ -729,7 +729,7 @@ export default {
         return{
         
         formEffetFinancier:{
-              code_act:"",
+             // code_act:"",
              libelle_act:"",
              reference_act:"",
              objet_act:"",
@@ -753,8 +753,9 @@ export default {
         },
 
         resultaAnalysePv:[],
+
         editActeEffetFinancier:{
-             code_act:"",
+            // code_act:"",
              libelle_act:"",
              reference_act:"",
              objet_act:"",

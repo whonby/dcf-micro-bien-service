@@ -60,7 +60,9 @@ afficheCompteEntreprise(acteurDetail.id)
                                      
                                      <div align="right">
                                     <td> 
-                                   <a href="#addcandidatP" data-toggle="modal" class="btn btn-warning" >Ajouter contrat resilié</a>
+                                   <a href="" data-toggle="modal" class="btn btn-warning" @click="afficherModalMarcheResilier(index)" >Ajouter contrat resilié </a>
+                                    
+                                      
                                     </td>
                                     <td>
                                   <a href="#fin_contrat" data-toggle="modal" class="btn btn-primary" >Ajouter contrat terminé</a>
@@ -165,6 +167,11 @@ afficheCompteEntreprise(acteurDetail.id)
 
                                         </div>
                                     </div>
+
+
+                      
+
+
                                     <div id="tab2" class="tab-pane">
 
                                         <div class="span12 widget-box">
@@ -1153,7 +1160,7 @@ afficheCompteEntreprise(acteurDetail.id)
          <div class="control-group">
             <label class="control-label">Date fin contrat resilié</label>
         <div class="controls">
-         <input type="date" v-model="detail.date_resilie" class="span2"  placeholder="Numero dossier" >
+         <input type="date" v-model="detail.date_resiliation" class="span2"  placeholder="" >
             </div>
           </div>
                 </td>
@@ -1164,7 +1171,7 @@ afficheCompteEntreprise(acteurDetail.id)
                  <div class="control-group">
                             <label class="control-label">cause du contrat :</label>
                             <div class="controls">
-                            <textarea v-model="detail.cause_contrat"   class="textarea_editor span5" rows="3" placeholder="Saisir la cause du contrat ..."></textarea>
+                            <textarea v-model="detail.cause_resiliation"   class="textarea_editor span5" rows="3" placeholder="Saisir la cause du contrat ..."></textarea>
                     
                             </div>
                         </div>
@@ -1173,13 +1180,17 @@ afficheCompteEntreprise(acteurDetail.id)
              </table>
             </div>
             <div class="modal-footer">
-                <a  @click.prevent="ajouterDossierC"
-                        class="btn btn-primary"
+                <a  @click.prevent="modifierModalResiliation"
+                        class="btn btn-warning"
                         href="#"
-                >Valider</a>
+                >Resilié le contrat</a>
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a>
             </div>
         </div>
+
+
+
+        
 
 
 
@@ -1483,6 +1494,15 @@ afficheCompteEntreprise(acteurDetail.id)
                     date_interuption:"",
                     id:""
                 },
+
+                
+                 detail:{
+             date_resiliation:"",
+             cause_resiliation:""
+                },
+
+
+
                 selectedFile:"",
                 selectedImage:"",
                 image: "",
@@ -1498,6 +1518,8 @@ afficheCompteEntreprise(acteurDetail.id)
             
 
                 },
+
+                index:[],
 
                  formData1: {
                    date_ouverture_compte:"",
@@ -1570,10 +1592,8 @@ afficheCompteEntreprise(acteurDetail.id)
                     historiquenormequipement:""
                 },
 
-                detail:{
-             date_resilie:"",
-             cause_contrat:""
-                },
+               
+
                 conges:{
                     code: "",
                     type_conge: "",
@@ -1978,7 +1998,7 @@ enregistreIdPersonnel(){
 
 
 
- ...mapGetters("bienService", [ "getMarchePersonnaliser","appelOffres","villes","communes","pays" ]),
+ ...mapGetters("bienService", [ "getMarchePersonnaliser","appelOffres","villes","communes","pays","marches" ,"acteEffetFinanciers"]),
 
  ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
 
@@ -2022,7 +2042,8 @@ enregistreIdPersonnel(){
            ...mapActions('gestionMarche', ["ajouterSanction", "ajouterCompte", "modifierCompte", "supprimerCompte"]),
            
 
-
+                ...mapActions('bienService',['supprimerActeEffetFinancier',
+          'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche',"getMarche","getActeEffetFinancier"]),
 
 
            afficherModalCompteBancaire(index){
@@ -2034,6 +2055,11 @@ enregistreIdPersonnel(){
                 this.editCompte = this.afficheCompteEntreprise[index];
             },
          
+
+
+    
+
+
 
 
          modifierCompteLocal(){
@@ -2227,15 +2253,66 @@ enregistreIdPersonnel(){
 
 
 
+
+
+
                 // fonction pour enregistrer le contrat resilie
 
-                ajouterDossierC(){
-                   this.modificationActeur(this.detail)
-                   this.detail ={
-                       cause_contrat:"",
-                       date_resilie:""
-                   } 
-                },
+                // ajouterDossierC(){
+                //    this.modifierActeEffetFinancier(this.detail)
+                //    this.detail ={
+                //        cause_resiliation:"",
+                //        date_resiliation:""
+                //    } 
+                // },
+
+
+afficherModalMarcheResilier(index) {
+      this.$("#addcandidatP").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+      this.detail = this.acteEffetFinanciers[index];
+    },
+
+
+
+
+// modifierModalActeEffetFinancierLocal(){
+
+//    // this.detail.entreprise_id=entreprise_id
+
+
+
+//     this.modifierActeEffetFinancier(this.detail)
+//     this.$('#modifierActeEF').modal('hide');
+// },
+
+
+
+  modifierModalResiliation(){
+      var nouvelObjet1 = {
+      ...this.detail,
+        date_resiliation:this.detail.date_resiliation,
+        	cause_resiliation:this.detail.cause_resiliation
+       };
+       
+       let marcheObjet = this.marches.find(marche=>marche.id==this.detail.marche_id)
+          marcheObjet.attribue = 3
+
+    this.modifierMarche(marcheObjet)
+     this.modifierActeEffetFinancier(nouvelObjet1)
+      this.getMarche()
+      this.getActeEffetFinancier()
+    //   let marcheObjet=this.marches.find(marche=>marche.id==this.detail.marche_id)
+    // marcheObjet.attribue = 3
+    //   //  this.modifierQuantiteEnStock2(objetPourModifierQuantiteEnStock2)
+    //  this.modifierMarche(marcheObjet)
+
+      
+      this.$('#addcandidatP').modal('hide');
+    },
 
 
    
