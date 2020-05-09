@@ -149,7 +149,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td><b>Niveau d'etude</b></td>
-                                                        <td>{{acteurDetail.niveau_etude_id}}</td>
+                                                        <td>{{afficheNiveauEtude(acteurDetail.niveau_etude_id)}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Grade</b></td>
@@ -157,11 +157,11 @@
                                                     </tr>
                                                     <tr>
                                                         <td><b>Type de salarie</b></td>
-                                                        <td >{{acteurDetail.type_salarie_id}}</td>
+                                                        <td >{{afficheTypeSalaire(acteurDetail.type_salarie_id)}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Type de contrat</b></td>
-                                                        <td >{{acteurDetail.type_contrat_id}}</td>
+                                                        <td >{{afficheTypeContrat(acteurDetail.type_contrat_id)}}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -195,7 +195,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr v-for="(item, index) in load_act_personnel_acteur" :key="item.id">
-                                                    <td @dblclick="afficherModalActeNomination(index)">{{item.code || 'Non renseigné'}}</td>
+                                                    <td @dblclick="afficherModalActeNomination(index)">{{afficheNumeroActe(acteurDetail.acte_personnel_id) || 'Non renseigné'}}</td>
                                                     <td @dblclick="afficherModalActeNomination(index)">{{nomUniteAdmine(item.unite_administrative_id) || 'Non renseigné'}}</td>
                                                     <td @dblclick="afficherModalActeNomination(index)">{{formaterDate(item.date_debut_contrat) || 'Non renseigné'}}</td>
                                                     <td @dblclick="afficherModalActeNomination(index)">{{formaterDate(item.date_fin_contrat) || 'Non renseigné'}}</td>
@@ -2280,6 +2280,50 @@ enregistreIdPersonnel(){
             ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
             ...mapGetters('suivi_controle_budgetaire', ['getMissionPersonnaliser']),
+
+
+   afficheTypeContrat() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.type_contrats.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+   afficheTypeSalaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.type_salaries.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    
+   afficheNiveauEtude() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.niveau_etudes.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
             nomUniteAdmine(){
                 return uniteAdmin_id=>{
 
@@ -2291,6 +2335,14 @@ enregistreIdPersonnel(){
 
                 }
             },
+
+
+    
+
+
+
+
+
                   afficheLibelleFonction() {
       return id => {
         if (id != null && id != "") {
