@@ -46,7 +46,7 @@
             <tr>
  <td>
                     <div class="control-group">
-                                                    <label class="control-label">Exercice budgetaire:{{recupererIdMarche(formData.unite_administrative_id)}}</label>
+                                                    <label class="control-label">Exercice budgetaire:</label>
                                                     <div class="controls">
                                                        
                                                         
@@ -70,13 +70,35 @@
                                                     </div>
                                                 </div>
                 </td>
-                 <td>
+                <td colspan="2">
+                     <div class="control-group">
+                                                    <label class="control-label">Marché</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.marche_id" class="span12">
+                                                            <option></option>
+                                                            <option v-for="item in recupererMarcheUA(formData.unite_administrative_id)" :key="item.id" :value="item.id">
+                                                                {{item.objet}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                </td>
+                
+                      
+                
+               
+              
+                
+            </tr>
+            <tr>
+               <td>
                      <div class="control-group">
                                                     <label class="control-label">Reference Acte</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.uniteZone_id"  class="span12">
+                                                        <select v-model="formData.reference_acte"  class="span12">
                                                             <option></option>
-                                                            <option v-for="item in recupererCandidatSel(recupererIdMarche(formData.unite_administrative_id))" :key="item.id" :value="item.id">
+                                                            <option v-for="item in recupererReferenceActe(formData.marche_id)" :key="item.id" :value="item.reference_act">
                                                                 {{item.reference_act}}
                                                             </option>
 
@@ -93,18 +115,11 @@
                                                     </div>
                                                 
                 </td>
-                      
-                
-               
-              
-                
-            </tr>
-            <tr>
                <td>
                     <div class="control-group">
                                                     <label class="control-label">Nom:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="formData.nom"  placeholder="Saisir le nom" class="span12" />
+                                                        <input type="text" readonly  :value="afficheNomCandidat(afficheIdCandidat(afficheIdActeurDepense(formData.reference_acte)))"  placeholder="Saisir le nom" class="span12" />
                                                     </div>
                                                 </div>
                 </td>
@@ -112,11 +127,15 @@
                      <div class="control-group">
                                                     <label class="control-label">Prenom:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="formData.prenom"  placeholder="Saisir le prenom" class="span12"/>
+                                                        <input type="text" readonly :value="affichePreNomCandidat(afficheIdCandidat(afficheIdActeurDepense(formData.reference_acte)))"  placeholder="Saisir le prenom" class="span12"/>
                                                     </div>
                                                 </div>
                 </td>
-                 <td>
+                
+               
+            </tr>
+            <tr>
+               <td>
                      <div class="control-group">
                                                     <label class="control-label">Sexe:</label>
                                                     <div class="controls">
@@ -136,9 +155,6 @@
                                                     </div>
                                                 </div>
                 </td>
-               
-            </tr>
-            <tr>
               <td>
                      <div class="control-group">
                                                     <label class="control-label">Numero passeport:</label>
@@ -155,7 +171,12 @@
                                                     </div>
                                                 </div>
                 </td>
-                <td>
+               
+                
+                        
+            </tr>
+            <tr>
+               <td colspan="2">
                      <div class="control-group">
                                                     <label class="control-label">Nom du pere:</label>
                                                     <div class="controls">
@@ -163,7 +184,7 @@
                                                     </div>
                                                 </div>
                 </td>
-                 <td>
+               <td>
                      <div class="control-group">
                                                     <label class="control-label">Nom de la mere:</label>
                                                     <div class="controls">
@@ -171,14 +192,11 @@
                                                     </div>
                                                 </div>
                 </td>
-                        
-            </tr>
-            <tr>
                 <td>
                      <div class="control-group">
                                                     <label class="control-label">Situation matrimoniale</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.situation_matrimonial" >
+                                                        <select v-model="formData.situation_matrimonial" class="span12" >
                                                            
                                                            
                                                             <option v-for="situation in situation_matrimonial" :key="situation.id" :value="situation.id">{{situation.libelle}}</option>
@@ -217,7 +235,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Service</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.service_id" :disabled="verrouilleService">
+                                                        <select v-model="formData.service_id" :disabled="verrouilleService" class="span12">
                                                             <option></option>
                                                             <option v-for="item in afficheService(formData.unite_administrative_id)" :key="item.id" :value="item.id">
                                                                 {{afficheServicelibelle(item.serviceua_id)}}
@@ -231,19 +249,17 @@
                      <div class="control-group">
                                                     <label class="control-label">Fonctions</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.fonction_id" :disabled="verrouilleFonction">
+                                                        <select v-model="formData.fonction_id" :disabled="verrouilleFonction" class="span12">
                                                             <option></option>
                                                             <option v-for="item in afficheFonction(formData.service_id)" :key="item.id" :value="item.fonction_id">
                                                                 {{afficheLibelleFonction(item.fonction_id)}}
                                                             </option>
 
                                                         </select>
-                                                        <input type="hidden" :value="nombreDeFonction(formData.fonction_id)" readonly/>
+                                                        <input type="hidden" :value="nombreDeFonction(formData.fonction_id)" readonly class="span12"/>
                                                     </div>
                                                 </div>
                 </td>
-            </tr>
-            <tr>
                 <td>
                      
                                                 <div class="control-group">
@@ -257,16 +273,19 @@
 
                                                         </select> -->
                                                         
-                                                         <input type="text" :value="afficheLibelle(afficheGrade(formData.fonction_id))" readonly/>
+                                                         <input type="text" :value="afficheLibelle(afficheGrade(formData.fonction_id))" readonly class="span12"/>
                                                     </div>
                                                 </div>
                 </td>
+            </tr>
+            <tr>
+                
               
                 <td>
                      <div class="control-group">
                                                     <label class="control-label">Type contrat</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.type_contrat_id">
+                                                        <select v-model="formData.type_contrat_id" class="span12">
                                                             <option></option>
                                                             <option v-for="item in type_contrats" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -280,7 +299,7 @@
                       <div class="control-group">
                                                     <label class="control-label">Date debut contrat:</label>
                                                     <div class="controls">
-                                                        <input type="date" v-model="formData.date_debut_contrat"  placeholder="" />
+                                                        <input type="date" v-model="formData.date_debut_contrat"  placeholder="" class="span12"/>
                                                     </div>
                                                 </div>
                 </td>
@@ -288,7 +307,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Type niveau etude</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.niveau_etude_id">
+                                                        <select v-model="formData.niveau_etude_id" class="span12">
                                                             <option></option>
                                                             <option v-for="item in niveau_etudes" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -302,7 +321,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Type salarie</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.type_salarie_id">
+                                                        <select v-model="formData.type_salarie_id" class="span12">
                                                             <option></option>
                                                             <option v-for="item in type_salaries" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -330,28 +349,28 @@
               </td>
                 
                     
-                <td>
+                <td colspan="2">
                      <div class="control-group">
                                                     <label class="control-label">Salaire:</label>
                                                     <div class="controls">
-                                                        <input type="text" v-model="formData.salaires"  placeholder="Saisir le salaire" />
+                                                        <input type="text" readonly :value="afficheSalairePersonnel"  placeholder="Saisir le salaire" class="span12"/>
                                                     </div>
                                                 </div>
                 </td>
-                  <td>
+                  <!-- <td>
                      <div class="control-group">
                                                     <label class="control-label">Type acte de personnel</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.type_acte_id">
+                                                        <select v-model="formData.type_acte_id" class="span12">
                                                             <option></option>
-                                                            <option v-for="item in type_acte_personnels" :key="item.id" :value="item.id">
+                                                            <option v-for="item in type_acte_personnels" :key="item.id" :value="item.id" >
                                                                 {{item.libelle}}
                                                             </option>
 
                                                         </select>
                                                     </div>
                                                 </div>
-                </td>
+                </td> -->
             </tr>
         </table>
   </div>
@@ -451,7 +470,7 @@
                     nom_pere: "",
                     nom_mere: "",
                     date_debut_contrat:"",
-                    
+                    marche_id:"",
                     type_salarie_id:"",
                     type_contrat_id:"",
                     niveau_etude_id:"",
@@ -465,7 +484,8 @@
                     plan_budgetaire_id:'',
                     uniteZone_id:"",
                     situation_matrimonial:"",
-                    service_id:""
+                    service_id:"",
+                    reference_acte:""
                 },
 
                 editTitre: {
@@ -484,7 +504,7 @@
         },
         computed: {
 // methode pour maper notre guetter
-            ...mapGetters('personnelUA', ["situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
+            ...mapGetters('personnelUA', ["dossierPersonnels","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
             ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
@@ -496,7 +516,7 @@
       
       
     ]),
- ...mapGetters("bienService", [ "gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+ ...mapGetters("bienService", ["getActeEffetFinancierPersonnaliserContrat","selectionner_candidats","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -513,21 +533,118 @@
       };
     },
 
-        recupererIdMarche() {
-      return id1 => {
-        if (id1 != null && id1 != "") {
-           const qtereel = this.marches.find(qtreel => qtreel.unite_administrative_id == id1);
+    
+  afficheIdActeurDepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.reference_act == id);
 
       if (qtereel) {
-        return qtereel.id;
+        return qtereel.candidat_personnel_id;
       }
-      return 0
+      return "Non renseigné"
         }
       };
     },
+     afficheMontantActe() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.reference_act == id);
 
+      if (qtereel) {
+        return qtereel.montant_act;
+      }
+      return "Non renseigné"
+        }
+      };
+    },
+       afficheSalairePersonnel() {
+      const val = parseFloat(this.afficheMontantActe(this.formData.reference_acte)) / this.NombreMois;
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+    },
+     NombreMois() {
+      const val = parseFloat(this.afficheDure(this.formData.reference_acte)) * parseFloat(0.032854884084021);
+      
+       if (val) {
+        return Math.round(val);
+      }
+      
+      return 0
+    },
+     afficheDure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.reference_act == id);
 
+      if (qtereel) {
+        return qtereel.duree;
+      }
+      return "Non renseigné"
+        }
+      };
+    },
+afficheIdCandidat() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.selectionner_candidats.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.candidat_selection_id;
+      }
+      return "Non renseigné"
+        }
+      };
+    },
+    afficheNomCandidat() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.dossierPersonnels.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.nom_candidat;
+      }
+      return "Non renseigné"
+        }
+      };
+    },
+    affichePreNomCandidat() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.dossierPersonnels.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.prenom_candidat;
+      }
+      return "Non renseigné"
+        }
+      };
+    },
+ recupererMarcheUA() {
+      return id => {
+        if (id != null && id != "") {
+           return this.marches.filter(qtreel => qtreel.unite_administrative_id == id && qtreel.type_marche_id == 4);
+
+     
+        }
+      };
+
+      
+    },
+
+recupererReferenceActe() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getActeEffetFinancierPersonnaliser.filter(qtreel => qtreel.marche_id == id && qtreel.activationD != 1);
+        }
+      };
+
+      
+    },
 
 
  verrouilleUniteZone() {
@@ -657,7 +774,10 @@ exoEnCours() {
         methods: {
             // methode pour notre action
             ...mapActions('personnelUA', ['getActeur',"ajouterActeur","supprimerActeurs","getNbrActeurAcrediteTaux","allActeurDepense"]),
-            afficherModalAjouterTitre(){
+            ...mapActions('bienService',['supprimerActeEffetFinancier',
+          'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
+           
+           afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',
                     keyboard: false
@@ -674,9 +794,18 @@ exoEnCours() {
                 grade_id:this.afficheGrade(this.formData.fonction_id),
                 normeequipement:this.nombreDeFonction(this.formData.fonction_id),
                 historiquenormequipement:this.nombreDeFonction(this.formData.fonction_id),
-                montantequipement:this.montantPourEtreEquipe(this.formData.fonction_id)
+                montantequipement:this.montantPourEtreEquipe(this.formData.fonction_id),
+                  nom : this.afficheNomCandidat(this.afficheIdCandidat(this.afficheIdActeurDepense(this.formData.reference_acte))),
+                  prenom :this.affichePreNomCandidat(this.afficheIdCandidat(this.afficheIdActeurDepense(this.formData.reference_acte))),
+                  
+                  salaires:this.afficheSalairePersonnel
                
               }
+               let modifierActive=this.acteEffetFinanciers.find(marche=>marche.candidat_personnel_id == this.afficheIdActeurDepense(this.formData.reference_acte))
+    modifierActive.activationD = 1
+    
+   
+    this.modifierActeEffetFinancier(modifierActive)
                 console.log(this.formData)
                 this.ajouterActeur(nouveauObjet)
                 this.getActeur()

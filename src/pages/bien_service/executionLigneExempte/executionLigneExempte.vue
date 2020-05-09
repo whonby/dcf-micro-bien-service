@@ -858,9 +858,9 @@ afficherEntrepriseRecep () {
             // },
 
              afficherLeCompteEnFonctionDeLaBanque(){
-     return banq_id => {
-       if( banq_id !== undefined) {
-    var acteur = this.comptes.find(acteur => acteur.id == banq_id  )
+     return id => {
+       if( id !== undefined) {
+    var acteur = this.comptes.find(acteur => acteur.banq_id == id  )
     
      return  (acteur) ? acteur.rib :null 
        }
@@ -1025,7 +1025,7 @@ getDateFinExécutionValueEdit(){
             ...this.formEffetFinancier,
             duree: this.nombreDejourCalcule,
             	marche_id:this.macheid,
-                compte_id:this.afficherIdCompte(this.formEffetFinancier.banq_id)
+                compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id))
         }
     //let entreprisePremier=this.entreprises.find(item=>item.numero_rc==rcm)
              
@@ -1075,7 +1075,7 @@ modifierModalActeEffetFinancierLocal(){
             ...this.editActeEffetFinancier,
             duree: this.nombreDejourCalcule,
             	marche_id:this.macheid,
-                compte_id:this.afficherIdCompte(editActeEffetFinancier.banq_id)
+                compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.editActeEffetFinancier.banq_id))
         }
     this.modifierActeEffetFinancier(nouvelObjet)
     this.$('#modifierActeEF').modal('hide');
