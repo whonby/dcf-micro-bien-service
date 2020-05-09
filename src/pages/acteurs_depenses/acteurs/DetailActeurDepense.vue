@@ -86,7 +86,8 @@
                                         <li class=""><a data-toggle="tab" href="#tab4">Tous les conges</a></li>
                                          <li class=""><a data-toggle="tab" href="#tab5">Historique de mission par acteur</a></li>
                                          <li class=""><a data-toggle="tab" href="#tab301">Gestion des Compte bancaire </a></li>
-                                         <!-- <li class=""><a data-toggle="tab" href="#tab301">Gestion des Compte bancaire </a></li> -->
+                                         <li class=""><a data-toggle="tab" href="#tab20002"> Contrat resilié </a></li>
+                                         <li class=""><a data-toggle="tab" href="#tab200"> Contrat Terminé </a></li>
                                     </ul>
                                 </div>
                                 <div class="widget-content tab-content">
@@ -148,7 +149,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td><b>Niveau d'etude</b></td>
-                                                        <td>{{acteurDetail.niveau_etude.libelle}}</td>
+                                                        <td>{{acteurDetail.niveau_etude_id}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Grade</b></td>
@@ -156,11 +157,11 @@
                                                     </tr>
                                                     <tr>
                                                         <td><b>Type de salarie</b></td>
-                                                        <td v-if="acteurDetail.type_salarie">{{acteurDetail.type_salarie.libelle}}</td>
+                                                        <td >{{acteurDetail.type_salarie_id}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Type de contrat</b></td>
-                                                        <td v-if="acteurDetail.type_contrat">{{acteurDetail.type_contrat.libelle}}</td>
+                                                        <td >{{acteurDetail.type_contrat_id}}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -958,6 +959,162 @@
 
 
 
+                              <div id="tab20002" class="tab-pane">
+                              <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              <h5>Liste des Contrats résiliés</h5>
+              <!-- <div align="right">
+                Recherche:
+                <input type="search"  v-model="search" />
+              </div> -->
+            </div>
+                            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                      
+                   <th>Matricule </th>
+                    <th>Nom</th>
+                     <th>Prenom</th>
+                     <th>Numero Act</th>
+                     <th> Cause du contrat </th>
+                     <th>Date resilie</th>
+                     
+                    <th >Unite administrative</th>
+                     <th >Unite Zone</th>
+                     <th >Service</th>
+                     <th >Fonction Administrative</th>
+                       <th>Status</th>
+                       <th>Action</th>
+
+                         <!-- <th>Montant march&eacute;</th> -->
+                                
+                </tr>
+                </thead>            
+                <tbody>
+                     
+                     <tr class="odd gradeX" v-for="item in personnaliseActeurDepense" :key="item.id">
+                                                 
+                                                 
+                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
+                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheNumeroActe(item.acte_personnel_id )|| 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{afficherCauseResilierId(item.id)|| 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_resilie) }}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheAdministrative(item.unite_administrative_id)|| 'Non renseigné'}}</td>
+                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheUniteZone(item.uniteZone_id) || 'Non renseigné'}}</td>
+                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheServiceLibelle(afficheService(item.service_id))|| 'Non renseigné'}}</td>
+                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheLibelleFonction(item.fonction_id) || 'Non renseigné'}}</td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                       <button 
+                                                          class="btn btn-info">
+                                                            <span title="CONTRAT RESILIE">RE</span>
+       
+                                                           </button>
+                                                           </div>
+                                                               </td>
+
+                                                               <td>
+                                                             <button @click.prevent="suprimer(item.id)"  class="btn btn-danger ">
+                                                            <span class=""><i class="icon-trash"></i></span></button>
+
+                                                    
+
+                                                </td>
+                                            </tr>   
+                 
+                      
+                </tbody>
+              </table>
+                     
+
+                        </div>
+
+
+
+
+
+
+
+                        
+                              <div id="tab200" class="tab-pane">
+                              <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              <h5>Liste des Contrats terminés</h5>
+              <!-- <div align="right">
+                Recherche:
+                <input type="search"  v-model="search" />
+              </div> -->
+            </div>
+                            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                      
+                   <th>Matricule </th>
+                    <th>Nom</th>
+                     <th>Prenom</th>
+                     <th>Numero Act</th>
+                     <th>Date fin contrat</th>
+                    <th >Unite administrative</th>
+                     <th >Unite Zone</th>
+                     <th >Service</th>
+                     <th >Fonction Administrative</th>
+                       <th>Status</th>
+                       <th>Action</th>
+
+                         <!-- <th>Montant march&eacute;</th> -->
+                                
+                </tr>
+                </thead>            
+                <tbody>
+                     
+                     <tr class="odd gradeX" v-for="item in personnaliseActeurDepense" :key="item.id">
+                                                 
+                                                 
+                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
+                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheNumeroActe(item.acte_personnel_id )|| 'Non renseigné'}}</td>
+                                                
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_fin_contrat) }}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheAdministrative(item.unite_administrative_id)|| 'Non renseigné'}}</td>
+                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheUniteZone(item.uniteZone_id) || 'Non renseigné'}}</td>
+                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheServiceLibelle(afficheService(item.service_id))|| 'Non renseigné'}}</td>
+                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheLibelleFonction(item.fonction_id) || 'Non renseigné'}}</td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                       <button 
+                                                          class="btn btn-inverse">
+                                                            <span title="CONTRAT TERMINER">TE</span>
+       
+                                                           </button>
+                                                           </div>
+                                                               </td>
+
+                                                               <td>
+                                                             <button @click.prevent="suprimer(item.id)"  class="btn btn-danger ">
+                                                            <span class=""><i class="icon-trash"></i></span></button>
+
+                                                    
+
+                                                </td>
+                                            </tr>   
+                 
+                      
+                </tbody>
+              </table>
+                     
+
+                        </div>
+
+
+
+
                                 </div>
                             </div>
                         </div>
@@ -1645,6 +1802,9 @@
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
 
+ ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
+
+   ...mapGetters("SuiviImmobilisation", ["services"]),
 historiqueMissionParActeur(){
    return acte_personnel_id =>{
        if(acte_personnel_id !=""){
@@ -1685,10 +1845,77 @@ historiqueMissionParActeur(){
 
 
 
+afficheService() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.servicesua.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.serviceua_id;
+      }
+      return 0
+        }
+      };
+    },
+ afficheServiceLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.services.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+
+ afficheUniteZone() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteZones.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
 
 
 
 
+
+   
+ afficherCauseResilierId() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.reference_acte == id  && qtreel.this.afficheNumeroActe(this.acteurDetail.acte_personnel_id));
+
+      if (qtereel) {
+        return qtereel.cause_resiliation;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+//  afficherCauseResilier() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.id == id && qtereel.this.afficherCauseResilier == this.afficheNumeroActe(this.acteurDetail.acte_personnel_id));
+
+//       if (qtereel) {
+//         return qtereel.cause_resiliation;
+//       }
+//       return 0
+//         }
+//       };
+//     },
 
 
  afficheAdministrative() {
@@ -2094,7 +2321,7 @@ enregistreIdPersonnel(){
         },
         methods: {
             // methode pour notre action
-            ...mapActions('personnelUA', ["DetailActeur","getSalaireActuelActeur","getAllSallairesActeurs","modifierActeurDepense",
+            ...mapActions('personnelUA', ["DetailActeur","getSalaireActuelActeur","getAllSallairesActeurs","modifierActeurDepense","supprimerActeurs","allActeurDepense","getNbrActeurAcrediteTaux",
                 "getLoadActeurDepense","loadCongeActeur","ajouterConges","modifierActeurDepenses","ajouterActeDepense",
                 "tempMoyenFinActiviteInterruption","delaiMiseDispositionAct","jourCongeDisponible",
                 "allActeurDepense","getActeurFinContratAndActivite",
@@ -2117,7 +2344,7 @@ enregistreIdPersonnel(){
             },
          
 
-
+ 
     
 
 
@@ -2326,6 +2553,14 @@ enregistreIdPersonnel(){
      
 }, 
 
+
+
+  suprimer(id){
+                this.supprimerActeurs(id)
+                this.allActeurDepense()
+        
+        this.getNbrActeurAcrediteTaux();
+            },
 
 
   modifierModalResiliation(){

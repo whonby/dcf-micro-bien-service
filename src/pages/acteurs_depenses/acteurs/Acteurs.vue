@@ -38,8 +38,8 @@ editCompte
                                 <li class="active"><a data-toggle="tab" href="#tab10">Listes du personnel    <span class="badge badge-inverse">{{totalActeurDepense}}</span></a></li>
                                 <li class=""><a data-toggle="tab" href="#tab19">Listes des acteurs de depenses   <span class="badge badge-success">{{afficheNombrePersonnelRecuActeNormination}}</span></a> </li>
                                 <li class=""><a data-toggle="tab" href="#tab30">Acteurs non actif</a></li>
-                                  <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{0}}</span></a></li>
-                                   <li><a data-toggle="tab" href="#tab301">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li> 
+                                  <!-- <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{0}}</span></a></li>
+                                   <li><a data-toggle="tab" href="#tab301">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li>  -->
                                    
                                   
                             </ul>
@@ -211,72 +211,7 @@ editCompte
 
 
 
-                              <div id="tab20002" class="tab-pane">
-                              <div class="widget-title">
-              <span class="icon">
-                <i class="icon-th"></i>
-              </span>
-              <h5>Liste des Contrats résiliés</h5>
-              <!-- <div align="right">
-                Recherche:
-                <input type="search"  v-model="search" />
-              </div> -->
-            </div>
-                            <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                      
-                   <th>Matricule </th>
-                    <th>Nom</th>
-                     <th>Prenom</th>
-                     <th>Numero Act</th>
-                     <th>Date resilie</th>
-                     <th> Cause du contrat </th>
-                    <th >Unite administrative</th>
-                     <th >Unite Zone</th>
-                     <th >Service</th>
-                     <th >Fonction Administrative</th>
-                       <th>Status</th>
-                         <!-- <th>Montant march&eacute;</th> -->
-                                
-                </tr>
-                </thead>            
-                <tbody>
-                     
-                     <tr class="odd gradeX" v-for="item in acteurActivite" :key="item.id">
-                                                 
-                                                 
-                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
-                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheNumeroActe(item.acte_personnel_id )|| 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.cause_contrat || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_resilie) }}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheAdministrative(item.unite_administrative_id)|| 'Non renseigné'}}</td>
-                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheUniteZone(item.uniteZone_id) || 'Non renseigné'}}</td>
-                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheServiceLibelle(afficheService(item.service_id))|| 'Non renseigné'}}</td>
-                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheLibelleFonction(item.fonction_id) || 'Non renseigné'}}</td>
-                                                <td>
-                                                    <div class="btn-group">
-                                                       <button 
-                                                          class="btn btn-info">
-                                                            <span title="CONTRAT RESILIE">EX</span>
-       
-                                                           </button>
-
-                                                       
-
-                                                    </div>
-
-                                                </td>
-                                            </tr>   
-                 
-                      
-                </tbody>
-              </table>
-                     
-
-                        </div>
+                         
 
                         
 
