@@ -1,4 +1,4 @@
-afficheCompteEntreprise(acteurDetail.id)
+
 <template>
     <div>
 
@@ -50,7 +50,7 @@ afficheCompteEntreprise(acteurDetail.id)
 
                                      <!-- <div align="left">
 
-                                  <a href="#addcandidatP" data-toggle="modal" class="btn btn-warning" >Ajouter contrat resilié</a>
+                                  <a href="#modifierActeEF" data-toggle="modal" class="btn btn-warning" >Ajouter contrat resilié</a>
                                      
                                       </div> -->
 
@@ -60,7 +60,9 @@ afficheCompteEntreprise(acteurDetail.id)
                                      
                                      <div align="right">
                                     <td> 
-                                   <a href="#addcandidatP" data-toggle="modal" class="btn btn-warning" >Ajouter contrat resilié</a>
+                                   <a href="" data-toggle="modal" class="btn btn-warning" @click="afficherModalModifierActeEffetFinancier(index)" >Ajouter contrat resilié </a>
+                                    
+                                      
                                     </td>
                                     <td>
                                   <a href="#fin_contrat" data-toggle="modal" class="btn btn-primary" >Ajouter contrat terminé</a>
@@ -84,6 +86,8 @@ afficheCompteEntreprise(acteurDetail.id)
                                         <li class=""><a data-toggle="tab" href="#tab4">Tous les conges</a></li>
                                          <li class=""><a data-toggle="tab" href="#tab5">Historique de mission par acteur</a></li>
                                          <li class=""><a data-toggle="tab" href="#tab301">Gestion des Compte bancaire </a></li>
+                                         <li class=""><a data-toggle="tab" href="#tab20002"> Contrat resilié </a></li>
+                                         <!-- <li class=""><a data-toggle="tab" href="#tab200"> Contrat Terminé </a></li> -->
                                     </ul>
                                 </div>
                                 <div class="widget-content tab-content">
@@ -94,7 +98,7 @@ afficheCompteEntreprise(acteurDetail.id)
                                                     <tbody>
                                                     <tr>
                                                         <td><b>Structure actuel</b></td>
-                                                        <td>{{acteurDetail.uniteAdmin.libelle}}</td>
+                                                        <td>{{afficheAdministrative(acteurDetail.unite_administrative_id)}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Salaires actuel</b></td>
@@ -165,6 +169,11 @@ afficheCompteEntreprise(acteurDetail.id)
 
                                         </div>
                                     </div>
+
+
+                      
+
+
                                     <div id="tab2" class="tab-pane">
 
                                         <div class="span12 widget-box">
@@ -950,6 +959,163 @@ afficheCompteEntreprise(acteurDetail.id)
 
 
 
+                              <div id="tab20002" class="tab-pane">
+                              <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              <h5>Liste des Contrats résiliés</h5>
+              <!-- <div align="right">
+                Recherche:
+                <input type="search"  v-model="search" />
+              </div> -->
+            </div>
+                            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                      
+                   <th>Matricule </th>
+                    <th>Nom</th>
+                     <th>Prenom</th>
+                     <th>Numero Act</th>
+                     <th> Cause du contrat </th>
+                     <th>Date resilie</th>
+                     
+                    <th >Unite administrative</th>
+                     <th >Unite Zone</th>
+                     <th >Service</th>
+                     <th >Fonction Administrative</th>
+                       <th>Status</th>
+                       <!-- <th>Action</th> -->
+
+                         <!-- <th>Montant march&eacute;</th> -->
+                                
+                </tr>
+                </thead>            
+                <tbody>
+                     
+                     <tr class="odd gradeX" v-for="item in personnaliseActeurDepense" :key="item.id">
+                                                 
+                                                 
+                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
+                                 
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
+                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheNumeroActe(item.acte_personnel_id )|| 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{afficherCauseResilier(afficheNumeroActe(item.acte_personnel_id ))|| 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate (afficherDateResilie(afficheNumeroActe(item.acte_personnel_id )))}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheAdministrative(item.unite_administrative_id)|| 'Non renseigné'}}</td>
+                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheUniteZone(item.uniteZone_id) || 'Non renseigné'}}</td>
+                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheServiceLibelle(afficheService(item.service_id))|| 'Non renseigné'}}</td>
+                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheLibelleFonction(item.fonction_id) || 'Non renseigné'}}</td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                       <button 
+                                                          class="btn btn-info">
+                                                            <span title="CONTRAT RESILIE">RE</span>
+       
+                                                           </button>
+                                                           </div>
+                                                               </td>
+
+                                                               <!-- <td>
+                                                             <button @click.prevent="suprimer(item.id)"  class="btn btn-danger ">
+                                                            <span class=""><i class="icon-trash"></i></span></button>
+
+                                                    
+
+                                                </td> -->
+                                            </tr>   
+                 
+                      
+                </tbody>
+              </table>
+                     
+
+                        </div>
+
+
+
+
+
+
+
+                        
+                              <div id="tab200" class="tab-pane">
+                              <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              <h5>Liste des Contrats terminés</h5>
+              <!-- <div align="right">
+                Recherche:
+                <input type="search"  v-model="search" />
+              </div> -->
+            </div>
+                            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                      
+                   <th>Matricule </th>
+                    <th>Nom</th>
+                     <th>Prenom</th>
+                     <th>Numero Act</th>
+                     <th>Date fin contrat</th>
+                    <th >Unite administrative</th>
+                     <th >Unite Zone</th>
+                     <th >Service</th>
+                     <th >Fonction Administrative</th>
+                       <th>Status</th>
+                       <!-- <th>Action</th> -->
+
+                         <!-- <th>Montant march&eacute;</th> -->
+                                
+                </tr>
+                </thead>            
+                <tbody>
+                     
+                     <tr class="odd gradeX" v-for="item in personnaliseActeurDepense" :key="item.id">
+                                                 
+                                                 
+                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
+                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheNumeroActe(item.acte_personnel_id )|| 'Non renseigné'}}</td>
+                                                
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_fin_contrat) }}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheAdministrative(item.unite_administrative_id)|| 'Non renseigné'}}</td>
+                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheUniteZone(item.uniteZone_id) || 'Non renseigné'}}</td>
+                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheServiceLibelle(afficheService(item.service_id))|| 'Non renseigné'}}</td>
+                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheLibelleFonction(item.fonction_id) || 'Non renseigné'}}</td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                       <button 
+                                                          class="btn btn-inverse">
+                                                            <span title="CONTRAT TERMINER">TE</span>
+       
+                                                           </button>
+                                                           </div>
+                                                               </td>
+
+                                                               <!-- <td>
+                                                             <button @click.prevent="suprimer(item.id)"  class="btn btn-danger ">
+                                                            <span class=""><i class="icon-trash"></i></span></button>
+
+                                                    
+
+                                                </td> -->
+                                            </tr>   
+                 
+                      
+                </tbody>
+              </table>
+                     
+
+                        </div>
+
+
+
+
                                 </div>
                             </div>
                         </div>
@@ -1144,7 +1310,7 @@ afficheCompteEntreprise(acteurDetail.id)
 
 
 
-           <div id="addcandidatP" class="modal hide grdirModalActeEffet">
+           <div id="modifierActeEF" class="modal hide grdirModalActeEffet">
              <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter contrat Resilié</h3>
@@ -1154,9 +1320,9 @@ afficheCompteEntreprise(acteurDetail.id)
                  <tr>
                 <td>
          <div class="control-group">
-            <label class="control-label">Date fin contrat resilié</label>
+            <label class="control-label">Date  contrat resilié{{editActeEffetFinancier.reference_act}}</label>
         <div class="controls">
-         <input type="date" v-model="detail.date_resilie" class="span2"  placeholder="Numero dossier" >
+         <input type="date" v-model="editActeEffetFinancier.date_resiliation" class="span2"  placeholder="" >
             </div>
           </div>
                 </td>
@@ -1167,7 +1333,7 @@ afficheCompteEntreprise(acteurDetail.id)
                  <div class="control-group">
                             <label class="control-label">cause du contrat :</label>
                             <div class="controls">
-                            <textarea v-model="detail.cause_contrat"   class="textarea_editor span5" rows="3" placeholder="Saisir la cause du contrat ..."></textarea>
+                            <textarea v-model="editActeEffetFinancier.cause_resiliation"   class="textarea_editor span5" rows="3" placeholder="Saisir la cause du contrat ..."></textarea>
                     
                             </div>
                         </div>
@@ -1176,13 +1342,17 @@ afficheCompteEntreprise(acteurDetail.id)
              </table>
             </div>
             <div class="modal-footer">
-                <a  @click.prevent="ajouterDossierC"
-                        class="btn btn-primary"
+                <a  @click.prevent="modifierModalResiliation(editActeEffetFinancier)"
+                        class="btn btn-warning"
                         href="#"
-                >Valider</a>
+                >Resilié le contrat</a>
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a>
             </div>
         </div>
+
+
+
+        
 
 
 
@@ -1486,6 +1656,16 @@ afficheCompteEntreprise(acteurDetail.id)
                     date_interuption:"",
                     id:""
                 },
+
+                 index:[],
+                 editActeEffetFinancier:{
+                     cause_resiliation:"",
+                     date_resiliation:""
+                 },
+             
+
+
+
                 selectedFile:"",
                 selectedImage:"",
                 image: "",
@@ -1501,6 +1681,8 @@ afficheCompteEntreprise(acteurDetail.id)
             
 
                 },
+
+               
 
                  formData1: {
                    date_ouverture_compte:"",
@@ -1573,10 +1755,8 @@ afficheCompteEntreprise(acteurDetail.id)
                     historiquenormequipement:""
                 },
 
-                detail:{
-             date_resilie:"",
-             cause_contrat:""
-                },
+               
+
                 conges:{
                     code: "",
                     type_conge: "",
@@ -1623,6 +1803,9 @@ afficheCompteEntreprise(acteurDetail.id)
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
 
+ ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
+
+   ...mapGetters("SuiviImmobilisation", ["services"]),
 historiqueMissionParActeur(){
    return acte_personnel_id =>{
        if(acte_personnel_id !=""){
@@ -1663,6 +1846,119 @@ historiqueMissionParActeur(){
 
 
 
+afficheService() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.servicesua.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.serviceua_id;
+      }
+      return 0
+        }
+      };
+    },
+ afficheServiceLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.services.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+
+ afficheUniteZone() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteZones.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+   
+//  afficherCauseResilierId() {
+//       return id => {
+//         if (id != null && id != "") {
+//            return this.acteEffetFinanciers.filter(qtreel => qtreel.reference_acte == id);
+
+     
+      
+//         }
+//       };
+//     },
+
+
+
+ afficherDateResilie() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.reference_act == id );
+
+      if (qtereel) {
+        return qtereel.date_resiliation;
+      }
+      return 0
+        }
+      };
+    },
+
+
+ afficherCauseResilier() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.reference_act == id );
+
+      if (qtereel) {
+        return qtereel.cause_resiliation;
+      }
+      return 0
+        }
+      };
+    },
+
+
+ afficheAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+ 
+ afficheFonctionAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.fonctions.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
     
     //  VilleDynamiques() {
     //  return id => {
@@ -1979,7 +2275,7 @@ enregistreIdPersonnel(){
 
 
 
- ...mapGetters("bienService", [ "getMarchePersonnaliser","appelOffres","villes","communes","pays" ]),
+ ...mapGetters("bienService", [ "getMarchePersonnaliser","appelOffres","villes","communes","pays","marches" ,"acteEffetFinanciers"]),
 
  ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
 
@@ -2090,7 +2386,7 @@ enregistreIdPersonnel(){
         },
         methods: {
             // methode pour notre action
-            ...mapActions('personnelUA', ["DetailActeur","getSalaireActuelActeur","getAllSallairesActeurs","modifierActeurDepense",
+            ...mapActions('personnelUA', ["DetailActeur","getSalaireActuelActeur","getAllSallairesActeurs","modifierActeurDepense","supprimerActeurs","allActeurDepense","getNbrActeurAcrediteTaux",
                 "getLoadActeurDepense","loadCongeActeur","ajouterConges","modifierActeurDepenses","ajouterActeDepense",
                 "tempMoyenFinActiviteInterruption","delaiMiseDispositionAct","jourCongeDisponible",
                 "allActeurDepense","getActeurFinContratAndActivite",
@@ -2099,7 +2395,8 @@ enregistreIdPersonnel(){
            ...mapActions('gestionMarche', ["ajouterSanction", "ajouterCompte", "modifierCompte", "supprimerCompte"]),
            
 
-
+                ...mapActions('bienService',['supprimerActeEffetFinancier',
+          'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche',"getMarche","getActeEffetFinancier"]),
 
 
            afficherModalCompteBancaire(index){
@@ -2111,6 +2408,11 @@ enregistreIdPersonnel(){
                 this.editCompte = this.afficheCompteEntreprise[index];
             },
          
+
+ 
+    
+
+
 
 
          modifierCompteLocal(){
@@ -2304,15 +2606,41 @@ enregistreIdPersonnel(){
 
 
 
-                // fonction pour enregistrer le contrat resilie
 
-                ajouterDossierC(){
-                   this.modificationActeur(this.detail)
-                   this.detail ={
-                       cause_contrat:"",
-                       date_resilie:""
-                   } 
-                },
+
+
+
+    afficherModalModifierActeEffetFinancier(){
+    this.$('#modifierActeEF').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+     
+}, 
+
+
+
+  suprimer(id){
+                this.supprimerActeurs(id)
+                this.allActeurDepense()
+        
+        this.getNbrActeurAcrediteTaux();
+            },
+
+
+  modifierModalResiliation(){
+   
+     let modifierActive=this.acteEffetFinanciers.find(marche=>marche.reference_act == this.afficheNumeroActe(this.acteurDetail.acte_personnel_id))
+    modifierActive.date_resiliation = this.editActeEffetFinancier.date_resiliation,
+    modifierActive.cause_resiliation = this.editActeEffetFinancier.cause_resiliation
+    
+   
+    this.modifierActeEffetFinancier(modifierActive)
+      //this.getMarche()
+
+      this.getActeEffetFinancier()
+      this.$('#modifierActeEF').modal('hide');
+    },
 
 
    
@@ -2426,3 +2754,6 @@ enregistreIdPersonnel(){
 
     }
 </style>
+
+
+ 

@@ -754,6 +754,9 @@ listeRapport(){
     },
 
 
+
+
+
 nombreDejourCalcule(){
                 let vM=this;
     const acteAffet = vM.formEffetFinancier
@@ -859,7 +862,7 @@ AffichierElementParent() {
         //     nom: this.afficherNomDansPersonnel(formEffetFinancier.candidat_personnel_id)
         // }
     //let entreprisePremier=this.entreprises.find(item=>item.numero_rc==rcm)
-             
+      this.formEffetFinancier.objet_act=this.affichierObjetMarche(this.macheid)       
     this.formEffetFinancier.marche_id=this.macheid
     //this.formEffetFinancier.entreprise_id=entreprisePremier.id
     this.ajouterActeEffetFinancier(this.formEffetFinancier)
