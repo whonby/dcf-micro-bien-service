@@ -87,7 +87,7 @@
                                          <li class=""><a data-toggle="tab" href="#tab5">Historique de mission par acteur</a></li>
                                          <li class=""><a data-toggle="tab" href="#tab301">Gestion des Compte bancaire </a></li>
                                          <li class=""><a data-toggle="tab" href="#tab20002"> Contrat resilié </a></li>
-                                         <li class=""><a data-toggle="tab" href="#tab200"> Contrat Terminé </a></li>
+                                         <!-- <li class=""><a data-toggle="tab" href="#tab200"> Contrat Terminé </a></li> -->
                                     </ul>
                                 </div>
                                 <div class="widget-content tab-content">
@@ -986,7 +986,7 @@
                      <th >Service</th>
                      <th >Fonction Administrative</th>
                        <th>Status</th>
-                       <th>Action</th>
+                       <!-- <th>Action</th> -->
 
                          <!-- <th>Montant march&eacute;</th> -->
                                 
@@ -999,10 +999,11 @@
                                                  
                                                 <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
+                                 
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheNumeroActe(item.acte_personnel_id )|| 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{afficherCauseResilierId(item.id)|| 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_resilie) }}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{afficherCauseResilier(afficheNumeroActe(item.acte_personnel_id ))|| 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate (afficherDateResilie(afficheNumeroActe(item.acte_personnel_id )))}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheAdministrative(item.unite_administrative_id)|| 'Non renseigné'}}</td>
                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheUniteZone(item.uniteZone_id) || 'Non renseigné'}}</td>
                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheServiceLibelle(afficheService(item.service_id))|| 'Non renseigné'}}</td>
@@ -1017,13 +1018,13 @@
                                                            </div>
                                                                </td>
 
-                                                               <td>
+                                                               <!-- <td>
                                                              <button @click.prevent="suprimer(item.id)"  class="btn btn-danger ">
                                                             <span class=""><i class="icon-trash"></i></span></button>
 
                                                     
 
-                                                </td>
+                                                </td> -->
                                             </tr>   
                  
                       
@@ -1065,7 +1066,7 @@
                      <th >Service</th>
                      <th >Fonction Administrative</th>
                        <th>Status</th>
-                       <th>Action</th>
+                       <!-- <th>Action</th> -->
 
                          <!-- <th>Montant march&eacute;</th> -->
                                 
@@ -1096,13 +1097,13 @@
                                                            </div>
                                                                </td>
 
-                                                               <td>
+                                                               <!-- <td>
                                                              <button @click.prevent="suprimer(item.id)"  class="btn btn-danger ">
                                                             <span class=""><i class="icon-trash"></i></span></button>
 
                                                     
 
-                                                </td>
+                                                </td> -->
                                             </tr>   
                  
                       
@@ -1889,10 +1890,37 @@ afficheService() {
 
 
    
- afficherCauseResilierId() {
+//  afficherCauseResilierId() {
+//       return id => {
+//         if (id != null && id != "") {
+//            return this.acteEffetFinanciers.filter(qtreel => qtreel.reference_acte == id);
+
+     
+      
+//         }
+//       };
+//     },
+
+
+
+ afficherDateResilie() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.reference_acte == id  && qtreel.this.afficheNumeroActe(this.acteurDetail.acte_personnel_id));
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.reference_act == id );
+
+      if (qtereel) {
+        return qtereel.date_resiliation;
+      }
+      return 0
+        }
+      };
+    },
+
+
+ afficherCauseResilier() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.reference_act == id );
 
       if (qtereel) {
         return qtereel.cause_resiliation;
@@ -1901,21 +1929,6 @@ afficheService() {
         }
       };
     },
-
-
-
-//  afficherCauseResilier() {
-//       return id => {
-//         if (id != null && id != "") {
-//            const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.id == id && qtereel.this.afficherCauseResilier == this.afficheNumeroActe(this.acteurDetail.acte_personnel_id));
-
-//       if (qtereel) {
-//         return qtereel.cause_resiliation;
-//       }
-//       return 0
-//         }
-//       };
-//     },
 
 
  afficheAdministrative() {
