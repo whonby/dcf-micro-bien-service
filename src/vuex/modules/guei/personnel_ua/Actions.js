@@ -77,8 +77,38 @@ export function modifierpaiementPersonnel({ commit }, formData) {
     })
 
 }
+export function modifierSalaire({ commit }, formData) {
+    this.$app.$loading(true)
+    axios.put('/update_salarie', formData).then(response => {
+        this.$app.$notify({
+            title: 'success',
+            text: 'Modification effectuer',
+            type: "success"
+        });
+        commit('MODIFIER_SALAIRE', response.data)
+        this.$app.$loading(false)
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type: "error"
+        });
+    })
+
+}
+
+export function getSalaire({ commit }) {
+
+    queue.push(() => axios.get('/liste_salarie').then(response => {
+        // console.log(response.data)
+        commit('GET_SALAIRE', response.data)
+    }).catch(error => console.log(error))
+    );
 
 
+}
 
 
 
