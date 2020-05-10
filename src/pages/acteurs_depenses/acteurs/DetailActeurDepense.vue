@@ -847,7 +847,7 @@
               </thead>
               <tbody v-if="acteur_id">
                 <tr class="odd gradeX" v-for="(historiqueMission, index) in 
-                historiqueMissionParActeur(acteur_id)"
+                getMissionPersonnaliser"
                  :key="historiqueMission.id">
 
                  
@@ -1806,17 +1806,18 @@
  ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
 
    ...mapGetters("SuiviImmobilisation", ["services"]),
-historiqueMissionParActeur(){
-   return acte_personnel_id =>{
-       if(acte_personnel_id !=""){
-           let objet=this.getMissionPersonnaliser.filter(element => element.acte_personnel_id==acte_personnel_id)
-          // console.log(objet)
-           return objet;
-       }
-   }
 
- //console.log(historiqueMissionParActeur);
-},
+// historiqueMissionParActeur(){
+//    return acte_personnel_id =>{
+//        if(acte_personnel_id !=""){
+//            let objet=this.getMissionPersonnaliser.filter(element => element.acte_personnel_id==acte_personnel_id)
+//           // console.log(objet)
+//            return objet;
+//        }
+//    }
+
+//  //console.log(historiqueMissionParActeur);
+// },
 
  afficherNumeroMarche() {
       return id => {

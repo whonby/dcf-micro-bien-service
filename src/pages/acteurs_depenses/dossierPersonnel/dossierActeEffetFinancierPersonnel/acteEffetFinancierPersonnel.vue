@@ -605,7 +605,7 @@ export default {
              candidat_personnel_id:"",
              marche_id:"",
              numero_marche:"",
-             difference_personnel_bienService:"personnel"
+             difference_personnel_bienService:3
         },
         
         editActeEffetFinancier:{
@@ -630,7 +630,7 @@ export default {
              candidat_personnel_id:"",
              marche_id:"",
              numero_marche:"",
-             difference_personnel_bienService:"personnel"
+             difference_personnel_bienService:3
         }
 
         }
@@ -706,8 +706,7 @@ listeRapport(){
 
 
 
-      afficherNomDansPersonnel
-       () {
+      afficherNomDansPersonnel () {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.dossierPersonnels.find(qtreel => qtreel.id == id);
@@ -841,12 +840,14 @@ AffichierElementParent() {
         }
       };
     },
+       
         //   aviNonObjection(){
         //          return this.getterAnoDMPBailleur.filter(item => item.avis_bail ==1)
         //        },
             
       
       },
+
 
       methods:{ 
 
@@ -857,15 +858,16 @@ AffichierElementParent() {
         
 
               ajouterModalActeEffetFinancierLocal(){
-        // var nouvelObjet = {
-        //     ...this.formEffetFinancier,
-        //     nom: this.afficherNomDansPersonnel(formEffetFinancier.candidat_personnel_id)
-        // }
+        var nouvelObjet = {
+            ...this.formEffetFinancier,
+           // nom: this.afficherNomDansPersonnel(formEffetFinancier.candidat_personnel_id)
+           duree: this.nombreDejourCalcule,
+        }
     //let entreprisePremier=this.entreprises.find(item=>item.numero_rc==rcm)
       this.formEffetFinancier.objet_act=this.affichierObjetMarche(this.macheid)       
     this.formEffetFinancier.marche_id=this.macheid
     //this.formEffetFinancier.entreprise_id=entreprisePremier.id
-    this.ajouterActeEffetFinancier(this.formEffetFinancier)
+    this.ajouterActeEffetFinancier(nouvelObjet)
     let marcheObjet=this.marches.find(marche=>marche.id==this.macheid)
     marcheObjet.attribue=2
     marcheObjet.numero_marche=this.formEffetFinancier.numero_marche
@@ -892,7 +894,7 @@ AffichierElementParent() {
             // entreprise_id:"",
              marche_id:"",
              numero_marche:"",
-             difference_personnel_bienService:"personnel"
+             difference_personnel_bienService:3
 
     }
 },
@@ -907,11 +909,13 @@ AffichierElementParent() {
 
 modifierModalActeEffetFinancierLocal(){
 
-   // this.editActeEffetFinancier.entreprise_id=entreprise_id
+  var nouvelObjet2 = {
+            ...this.editActeEffetFinancier,
+            duree: this.nombreDejourCalculeEdit,
+           
+        }
 
-
-
-    this.modifierActeEffetFinancier(this.editActeEffetFinancier)
+    this.modifierActeEffetFinancier(nouvelObjet2)
     this.$('#modifierActeEF').modal('hide');
 },
 
