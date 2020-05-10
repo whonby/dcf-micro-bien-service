@@ -346,7 +346,7 @@
                     
                 <td colspan="2">
                      <div class="control-group">
-                                                    <label class="control-label">Salaire:</label>
+                                                    <label class="control-label">Salaire</label>
                                                    <div class="controls">
                                                         <input type="text" class="span12" :value="afficheSalaire(detail.acte_personnel_id)"  placeholder="Saisir le salaire" />
                                                     </div>
@@ -491,7 +491,7 @@
         },
         computed: {
 // methode pour maper notre guetter
-            ...mapGetters('personnelUA', ["tous_salaire_actuel_acteur","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
+            ...mapGetters('personnelUA', ["salairesActeur","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction","personnaliseActeurDepense","affichePersonnelRecuActeNormination",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
             ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
@@ -533,7 +533,7 @@ recupererMarcheUA() {
   afficheSalaire() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.tous_salaire_actuel_acteur.find(qtreel => qtreel.acte_personnel_id == id);
+           const qtereel = this.salairesActeur.find(qtreel => qtreel.acte_personnel_id == id);
 
       if (qtereel) {
         return qtereel.montant;
@@ -682,7 +682,7 @@ exoEnCours() {
         methods: {
             // methode pour notre action
             ...mapActions('personnelUA', ['getActeur',"ajouterActeur","supprimerActeurs","getNbrActeurAcrediteTaux",
-            "allActeurDepense", "modificationActeur"]),
+            "allActeurDepense", "modificationActeur","modifierSalaire"]),
 
             afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
@@ -729,9 +729,13 @@ exoEnCours() {
               var nouveauObjet = {
                  ...this.detail,
                  grade_id:this.afficheGrade(this.detail.fonction_id),
-                 montant:this.afficheSalaire(this.detail.acte_personnel_id)
+                
               }
-      
+            let modSalaire=this.salairesActeur.find(marche=>marche.acte_personnel_id == this.detail.acte_personnel_id)
+    modSalaire.montant=this.afficheSalaire(this.detail.acte_personnel_id)
+    modSalaire.date=this.detail.date_debut_contrat
+   
+    this.modifierSalaire(modSalaire)
                  this.modificationActeur(nouveauObjet)
                 this.getActeur()
                 this.$router.push({ name: 'Acteur' })

@@ -30,8 +30,8 @@ const defaultstate = {
     situation_matrimonial:[],
     paiementPersonnel: [],
 
-    contrat_resilie:[]
-    
+    contrat_resilie:[],
+    salairesActeur:[]
 
 };
 
