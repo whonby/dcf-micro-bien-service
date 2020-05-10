@@ -1,4 +1,4 @@
-editCompte
+
 
 
 <template>
@@ -228,7 +228,7 @@ editCompte
 
         <fab :actions="fabActions"
              main-icon="apps"
-             @cache="afficherModalAjouterTitre"
+             @cache="afficherModalTypeRecretement"
              bg-color="green"
 
         ></fab>
@@ -262,6 +262,240 @@ editCompte
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
         </div>
 
+
+   <div id="exampleModal" class="modal hide tailleModalRecrutement">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Type de Recrutement</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+    <tr>
+      <td>
+       <div class="control-group">
+            <label class="control-label">Type de Recrutement</label>
+            <div class="controls">
+               <select v-model="formRecrutement.recrutement" class="span5">
+                      <option></option>               
+                      <option value="1">Recrtement Direct</option> 
+                       <option value="2">Recrutement Indirect</option> 
+                    </select>
+            </div>
+          </div>
+      </td>
+    </tr>
+         
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterTypeTexteLocal"
+          class="btn btn-primary"
+          href="#"
+          v-show="formRecrutement.recrutement"
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+
+
+<div id="ajouterActeEffetFinancierP" class="modal hide grdirModalActeEffet">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter acte effet financier</h3>
+            </div>
+            <div class="modal-body">
+
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                          <td colspan="">
+                        <div class="control-group">
+                        <label class="control-label">Type acte effet financier.</label>
+                        <div class="controls">
+                          <select v-model="formEffetFinancier.type_act_effet_id" class="span4">
+                                <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                        
+                        </div>
+                    </div>
+                            </td>
+
+
+
+                           <td>
+                    <div class="control-group">
+                        <label class="control-label">Reference acte</label>
+                        <div class="controls">
+                            <input type="text" v-model="formEffetFinancier.reference_act"
+                                    class="span4"
+                                    placeholder="refence acte"
+                            />
+                        </div>
+                    </div>
+                            </td>
+                                 
+                           
+                       
+                          
+                                   <td colspan="">
+                    <div class="control-group">
+                        <label class="control-label">Autorité approbatrice</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formEffetFinancier.autorite_approbation"
+                                    class="span4"
+                                    placeholder=" "
+                            />
+                            
+                        </div>
+                    </div>
+
+                            </td>
+                                                   <td>
+                    <div class="control-group">
+                        <label class="control-label"> date d'approbation</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="formEffetFinancier.date_approbation"
+                                    class="span4"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+
+                            </td>
+                        </tr>
+
+                       
+                
+                        <tr>
+                           
+                            <td>
+                     <div class="control-group">
+                        <label class="control-label">Incidence financière</label>
+                        <div class="controls">
+                            <select  v-model="formEffetFinancier.incidence_financiere" class="span4">
+                               <option value="0">Oui</option>
+                               <option value="1">Non</option>
+                            </select>
+                                    
+                                  
+                            
+                        </div>
+                    </div>
+                            </td>
+                            <td colspan="2">
+
+                     <div class="control-group">
+                        <label class="control-label">Montant Contrat</label>
+                        <div class="controls">
+                            <input type="text" v-model="formEffetFinancier.montant_act"
+                                    class="span7"
+                                    placeholder="Saisir le montant "
+                            />
+                        </div>
+                    </div>
+                            </td>
+                            <td>
+
+                            <div class="control-group">
+                        <label class="control-label" >Date de signature attributaire</label>
+                        <div class="controls">
+                            <input type="date" v-model="formEffetFinancier.date_attributaire"
+                                    class="span4"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+                            </td>
+                        </tr>
+                        <tr>
+
+                    
+                     <td>
+                     <div class="control-group">
+                        <label class="control-label">Date ordre de service demarrage</label>
+                        <div class="controls">
+                            <input type="date" v-model="formEffetFinancier.date_odre_service"
+                                    class="span4"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+
+                                         <td>
+                     <div class="control-group">
+                        <label class="control-label" title=" ">Date fin exécution</label>
+                        <div class="controls">
+                            <input type="date" :min="formEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValue" v-model="formEffetFinancier.date_fin_exe"
+                                    class="span4"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+                            </td>
+                        
+                        
+
+                                           <td>
+                     <div class="control-group">
+                        <label class="control-label" title=" ">Durée d'exécution(jrs)</label>
+                        <div class="controls">
+                            <input type="text"  readonly  :value="nombreDejourCalcule"
+                                    class="span4"
+                                   
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+
+                                             <td>
+                     <div class="control-group">
+                        <label class="control-label" title=" ">Date de reception definitive</label>
+                        <div class="controls">
+                            <input type="date" v-model="formEffetFinancier.date_reception"
+                                    class="span4"
+                                    placeholder=""
+                            />
+                            <input type="hidden" v-model="formEffetFinancier.difference_personnel_bienService"/>
+                        </div>
+                    </div>
+                            </td>
+
+                            
+
+                        </tr>
+                       
+                    </table>  
+
+                   
+
+                
+            </div>
+            <div class="modal-footer">
+                <a  @click.prevent="ajouterModalActeEffetFinancierLocal"
+                        class="btn btn-primary"
+                        href="#"
+                >Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div>
+
+            <!-- <div class="modal-footer">
+                <a v-if="selectionAttributionMarche(marcheid)" @click.prevent="ajouterModalActeEffetFinancierLocal(selectionAttributionMarche(marcheid).nom_candidat)"
+                        class="btn btn-primary"
+                        href="#"
+                >Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div> -->
+        </div>
+
+
     </div>
 
 </template>
@@ -287,6 +521,33 @@ editCompte
                 liste:[],
                 search:"",
                 search1:"",
+                formRecrutement:{
+recrutement:""
+                },
+                  formEffetFinancier:{
+              
+             date_reception:"",
+             reference_act:"",
+            
+             incidence_financiere:"",
+             montant_act:"",
+              date_attributaire:"",
+             
+             duree:"",
+             date_fin_exe:"",
+             date_odre_service:"",
+             
+        autorite_approbation:"",
+        date_approbation:"",
+            // text_juridique_id:"",
+             type_act_effet_id:"",
+             
+            // entreprise_id:"",
+             
+             
+             
+             difference_personnel_bienService:"3"
+        },
                 formData : {
                     matricule: "",
                     nom: "",
@@ -358,11 +619,55 @@ editCompte
             ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
-  ...mapGetters("bienService", [ "getMarchePersonnaliser","appelOffres","villes","communes","pays" ]),
 
+...mapGetters("bienService", ["gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
+                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
+                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
+                "getActeEffetFinancierPersonnaliserContrat", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
  ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
+   ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe','planActe']),
+ affichierIdActeFinancierDansActePlan() {
+      const qtereel = this.planActe.find(
+        qtreel => qtreel.code == "02",
+       
+      );
 
- 
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
+    getDateFinExécutionValue(){
+    return !this.formEffetFinancier.date_odre_service !=""
+},
+nombreDejourCalcule(){
+                let vM=this;
+    const acteAffet = vM.formEffetFinancier
+    if(acteAffet.date_odre_service == acteAffet.date_fin_exe &&  acteAffet.date_fin_exe !=="" && acteAffet.date_odre_service !=="") return 1
+     if(acteAffet.date_fin_exe =="" && acteAffet.date_odre_service =="") return null
+
+       var dateF = new Date(acteAffet.date_fin_exe).getTime()
+        var dateO = new Date(acteAffet.date_odre_service).getTime()
+           var resultat = dateF - dateO
+
+             var diffJour =  resultat / (1000 * 3600 * 24)
+
+               if(isNaN(diffJour)) return null
+
+               if(parseFloat(diffJour) < 0 ) return "durée invalide"
+    vM.formEffetFinancier.duree=diffJour
+                  return  diffJour;
+   
+},
+AffichierElementParent() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.planActe.filter(element => element.parent == id);
+        }
+      };
+    },
  
  afficheLibelleFonction() {
       return id => {
@@ -601,8 +906,51 @@ editCompte
             ...mapActions('personnelUA', ['getActeur',"ajouterActeur","supprimerActeurs","getNbrActeurAcrediteTaux","allActeurDepense","getActeurFinContratAndActivite","getListeSalaireActuelAll"]),
           
               ...mapActions('gestionMarche', ["ajouterSanction", "ajouterCompte", "modifierCompte", "supprimerCompte"]),
+          ...mapActions('bienService',['supprimerActeEffetFinancier',
+          'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
+
          
-         
+
+
+              ajouterModalActeEffetFinancierLocal(){
+        var nouveauObjet = {
+          ...this.formEffetFinancier,
+          duree:this.nombreDejourCalcule
+        }
+     
+    this.ajouterActeEffetFinancier(nouveauObjet)
+   
+    this.formEffetFinancier = {
+             
+             
+             reference_act:"",
+            
+             incidence_financiere:"",
+             montant_act:"",
+              date_attributaire:"",
+             date_reception:"",
+             duree:"",
+             date_fin_exe:"",
+             date_odre_service:"",
+             
+        autorite_approbation:"",
+        date_approbation:"",
+             
+             type_act_effet_id:"",
+             
+            // entreprise_id:"",
+             
+             
+             difference_personnel_bienService:"3"
+
+    }
+},
+
+
+
+
+
+
          afficherModalAjouterTitre(){
                 this.$router.push({ name: 'AjouterActeur' })
             },
@@ -637,8 +985,28 @@ editCompte
         path: "/edit-acteur-depense/" + id
       });
     },
-
-
+afficherModalTypeRecretement() {
+      this.$("#exampleModal").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+    },
+ajouterTypeTexteLocal() {
+      if(this.formRecrutement.recrutement==1){
+        this.$("#exampleModal").modal('hide');
+       
+       this.$('#ajouterActeEffetFinancierP').modal({
+        backdrop: 'static',
+        keyboard: false
+        
+    });
+      }
+      else if(this.formRecrutement.recrutement==2){
+         this.$("#exampleModal").modal('hide');
+        this.$router.push({ name: 'AjouterActeur' })
+       
+      }
+    },
             formaterDate(date) {
                 return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },
@@ -662,5 +1030,13 @@ editCompte
  height: 500px;
 
     }
+ .tailleModalRecrutement{
+   width: 30%;
+ }
+ .grdirModalActeEffet{
+     width: 93%;
+ margin: 0 -800px;
  
+
+}
 </style>

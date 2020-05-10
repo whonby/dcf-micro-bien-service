@@ -2347,7 +2347,7 @@ anneeAmort() {
     // return cur_day + " " + hours + ":" + minutes + ":" + seconds;
    },
    afficheMarchExecuter(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4 ||element.marche.attribue == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 1)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4 &&  element.difference_personnel_bienService == null||this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 1 && element.difference_personnel_bienService == null)
 },
  affichertypeMarcheEx() {
       return id => {
@@ -2362,7 +2362,7 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => element.march
       };
     },
     nbreMarcheExecuter(){
-  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.affichertypeMarcheEx(recuper.marche.type_marche_id) == 4).length
+  return this.afficheMarchExecuter.length
 },
 // afficheMarchExecuter(){
 // return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
@@ -2376,7 +2376,7 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => element.march
 
 
 afficheMarcheTerminer(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4 || element.marche.attribue == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4 && element.difference_personnel_bienService == null|| this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 1 && element.difference_personnel_bienService == null)
 },
 // afficheMarcheTerminer(){
 // return this.afficheMarcheSolde.filter(element => element.indicateur_resilie != 1)
@@ -2400,7 +2400,7 @@ montantEnSolde(){
 
 
   afficheMarcheResilier(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 3 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4 || element.marche.attribue == 3 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 1 )
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4 && element.difference_personnel_bienService == null|| this.afficherAttributMarche(element.marche_id) == 3 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 1 && element.difference_personnel_bienService == null)
 },
 
 
