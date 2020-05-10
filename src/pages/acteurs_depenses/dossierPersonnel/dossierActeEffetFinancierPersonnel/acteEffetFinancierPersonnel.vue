@@ -605,7 +605,7 @@ export default {
              candidat_personnel_id:"",
              marche_id:"",
              numero_marche:"",
-             difference_personnel_bienService:1
+             difference_personnel_bienService:3
         },
         
         editActeEffetFinancier:{
@@ -630,7 +630,7 @@ export default {
              candidat_personnel_id:"",
              marche_id:"",
              numero_marche:"",
-             difference_personnel_bienService:1
+             difference_personnel_bienService:3
         }
 
         }
@@ -894,7 +894,7 @@ AffichierElementParent() {
             // entreprise_id:"",
              marche_id:"",
              numero_marche:"",
-             difference_personnel_bienService:1
+             difference_personnel_bienService:3
 
     }
 },
