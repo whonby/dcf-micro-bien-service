@@ -1,3 +1,5 @@
+
+afficherLaFonctionDActeurDepenseDynamique
 <template>
    <div class="container-fluid">
         <hr>
@@ -137,7 +139,7 @@
               <div class="controls">
            <select v-model="formData.acte_personnel_id" class="span" :readOnly="veifEquipementExist">
                <option v-for="depense in acteurDepenseDynamiques(formData.ua_id )" :key="depense.id" 
-               :value="depense.id">{{depense.matricule}}</option>
+               :value="depense.acte_personnel_id">{{depense.matricule}}</option>
            </select>
               </div>
             </div>
@@ -174,7 +176,7 @@
                       <div class="control-group">
               <label class="control-label">Fonction:</label>
               <div class="controls " >
-            <input type="text"  class="span" :value="afficherLaFonctionDActeurDepenseDynamique(formData.acte_personnel_id)" readonly >
+            <input type="text"  class="span" :value="afficherLibelleFonction(afficherLaFonctionDActeurDepenseDynamique(formData.acte_personnel_id))" readonly >
       
               </div>
             </div>
@@ -536,7 +538,7 @@ export default {
 // methode pour maper notre guetter
    ...mapGetters('suivi_controle_budgetaire', ['categories_missions','missions','getNormeMissionPersonnaliser']) ,
   ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
-  ...mapGetters('personnelUA', ['all_acteur_depense',  'fonctions']),
+  ...mapGetters('personnelUA', ['personnaliseActeurDepense',  'fonctions' ,"personnaliseActeurDepense"]),
    ...mapGetters('uniteadministrative', ['uniteAdministratives', 'getPersonnaliseBudgetGeneralParPersonnel']),
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
    ...mapGetters('bienService', ['modepaiements']),
@@ -580,11 +582,27 @@ export default {
    afficherLaFonctionDActeurDepenseDynamique(){
      return acte_personnel_id => {
        if( acte_personnel_id != undefined) {
-    var acteur = this.all_acteur_depense.find(acteur => acteur.id == acte_personnel_id  )
+    var acteur = this.personnaliseActeurDepense.find(acteur => acteur.acte_personnel_id == acte_personnel_id  )
     
      // this.fonctionActeur = acteur.fonction.id
       // console.log(acteur)
-     return (acteur) ? acteur.fonction.libelle :null
+     return (acteur) ? acteur.fonction_id :null
+       }
+    return null
+     }
+  
+   },
+
+
+
+   afficherLibelleFonction(){
+     return id => {
+       if( id !=null && id!="") {
+    var acteur = this.fonctions.find(acteur => acteur.id == id  )
+    
+     if(acteur){
+       return acteur.libelle
+     }
        }
     return null
      }
@@ -629,7 +647,7 @@ export default {
    afficherNomPrenomActeurDepense(){
      return acte_personnel_id => {
        if( acte_personnel_id !== undefined) {
-    var acteur = this.all_acteur_depense.find(acteur => acteur.id === acte_personnel_id  )
+    var acteur = this.personnaliseActeurDepense.find(acteur => acteur.acte_personnel_id === acte_personnel_id  )
     
      // this.fonctionActeur = acteur.fonction.id
       // console.log(acteur)
@@ -699,7 +717,7 @@ export default {
 acteurDepenseDynamiques() {
       return id => {
         if (id != null && id != "") {
-          return this.all_acteur_depense.filter(element => element.unite_administrative_id == id);
+          return this.personnaliseActeurDepense.filter(element => element.unite_administrative_id == id);
         }
       };
     },
@@ -722,7 +740,7 @@ acteurDepenseDynamiques() {
    
   //      afficherFonction(){
   //        if(this.formData.acte_personnel_id !==""){
-  //  var acteur =  this.all_acteur_depense.find(acteur => acteur.id == this.formData.acte_personnel_id  )
+  //  var acteur =  this.personnaliseActeurDepense.find(acteur => acteur.id == this.formData.acte_personnel_id  )
 
   //        }
         

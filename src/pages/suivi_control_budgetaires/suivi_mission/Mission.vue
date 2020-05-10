@@ -196,7 +196,7 @@
                                         
                                     </div>
                                     
-                          <div class="widget-content nopadding" v-if="all_acteur_depense.length">
+                          <div class="widget-content nopadding" v-if="personnaliseActeurDepense.length">
                                     <div class="" align="left">
                                    
 
@@ -220,7 +220,7 @@
 
                                   <model-list-select style="background-color: rgb(222, 222, 222);"
                                            class="wide"
-                                            :list="all_acteur_depense"
+                                            :list="personnaliseActeurDepense"
                                             v-model="acte_personnel_id"
                                                 option-value="id"
                                                 option-text="matricule"
@@ -300,7 +300,7 @@
                       {{mission.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
                             
                     <td @dblclick="afficherModalModifierMission(mission.id)">
-                     {{affichierActeurDepenseMatricule(affichierActeurDepenseId(mission.acte_personnel_id)) || 'Non renseigné'}}</td> 
+                     {{afficherNomPrenomActeurDepense(affichierActeurDepenseId(mission.acte_personnel_id)) || 'Non renseigné'}}</td> 
 
                      
                     
@@ -1019,7 +1019,7 @@ export default {
 
   
 
-       ...mapGetters('personnelUA', ['all_acteur_depense']),
+       ...mapGetters('personnelUA', ['personnaliseActeurDepense',"all_acteur_depense"]),
    ...mapGetters('uniteadministrative', ['uniteAdministratives',"getPersonnaliseBudgetGeneralParPersonnel"]),
   ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
 
@@ -1083,6 +1083,7 @@ export default {
    }
 )
    },
+
 
 
 
@@ -1235,6 +1236,8 @@ tauxDeDossierRejeterParUA(){
 
 
 
+
+
 NombreDemissionsParActeurDepense(){
   return acte_personnel_id => {
     if(acte_personnel_id !=""){
@@ -1249,7 +1252,7 @@ NombreDemissionsParActeurDepense(){
 nomParActeurDepense(){
  return acte_personnel_id => {
    if(acte_personnel_id !=""){
-     var ObjetACTE = this.all_acteur_depense.find(element => element.id == acte_personnel_id)
+     var ObjetACTE = this.personnaliseActeurDepense.find(element => element.id == acte_personnel_id)
      return ObjetACTE.matricule
    }
  }
@@ -1269,18 +1272,32 @@ affichierActeurDepenseId() {
       };
     },
 
-    affichierActeurDepenseMatricule() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.id == id);
+   
 
-      if (qtereel) {
-        return qtereel.matricule;
-      }
-      return 0
-        }
-      };
-    },
+
+
+afficherNomPrenomActeurDepense(){
+     return acte_personnel_id => {
+       if( acte_personnel_id !== undefined) {
+    var acteur = this.personnaliseActeurDepense.find(acteur => acteur.acte_personnel_id === acte_personnel_id  )
+    
+     // this.fonctionActeur = acteur.fonction.id
+      // console.log(acteur)
+     return  acteur.matricule
+       }
+    return null
+     }
+  
+   },
+
+
+
+
+
+
+
+
+
 // duree moyenne de mission par acteur de depense
 dureetotalParAccteurDepense()
 {

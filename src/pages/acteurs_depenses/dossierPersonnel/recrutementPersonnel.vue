@@ -2109,7 +2109,7 @@ anneeAmort() {
 return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 5)
 },
    afficheExercution(){
-return this.getActeEffetFinancierPersonnaliserContrat.filter(element => element.marche.attribue == 2)
+return this.getActeEffetFinancierPersonnaliserContrat.filter(element =>element.marche.attribue == 2)
 },
 afficheMarchExecuter(){
 return this.afficheExercution.filter(element => element.indicateur_resilie != 1)

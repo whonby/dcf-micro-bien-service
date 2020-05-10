@@ -51,7 +51,7 @@
                       {{mission.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
                             
                     <td >
-                     {{mission.objetActeurDepense.matricule}}</td> 
+                     {{afficherNomPrenomActeurDepense(affichierActeurDepenseId(mission.acte_personnel_id))}}</td> 
                     
                 </tr>
               </tbody>
@@ -327,9 +327,41 @@ this.historique = this.historiques_missions.filter(mission => mission.mission ==
 
  computed: {
 // methode pour maper notre guetter
-   ...mapGetters('suivi_controle_budgetaire', ['getMissionPersonnaliser', 'historiques_missions']),
+   ...mapGetters('suivi_controle_budgetaire', ['getMissionPersonnaliser', 'historiques_missions','missions']),
    ...mapGetters('bienService', ['modepaiements']),
    ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
+    ...mapGetters('personnelUA', ['personnaliseActeurDepense',"all_acteur_depense"]),
+
+
+
+    afficherNomPrenomActeurDepense(){
+     return acte_personnel_id => {
+       if( acte_personnel_id !== undefined) {
+    var acteur = this.personnaliseActeurDepense.find(acteur => acteur.acte_personnel_id === acte_personnel_id  )
+    
+     // this.fonctionActeur = acteur.fonction.id
+      // console.log(acteur)
+     return  acteur.matricule
+       }
+    return null
+     }
+  
+   },
+
+
+
+affichierActeurDepenseId() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.missions.find(qtreel => qtreel.acte_personnel_id == id);
+
+      if (qtereel) {
+        return qtereel.acte_personnel_id;
+      }
+      return 0
+        }
+      };
+    },
   },
 
 
@@ -339,6 +371,8 @@ this.historique = this.historiques_missions.filter(mission => mission.mission ==
 //   return item.type_operation.toLowerCase().includes(searchHistorique)
 // })
 // },
+
+
 
 
   methods:{
