@@ -55,6 +55,10 @@
                     </div>
                 </div>
             </div>
+             <template v-if="detail_marche.economique_id == CodeExempte(detail_marche.economique_id) ">
+<executionLigneExempte :macheid="detail_marche.id"></executionLigneExempte>
+        </template>
+        <template v-else>
 <h4 style="text-align:center;font-size:30px">{{afficheLeNomDesProcedure}}</h4>
             <div class="row-fluid">
                 <div class="span3">
@@ -821,6 +825,7 @@
                      </template>
                 </div>
             </div>
+            </template>
               <div class="modal-footer">
         
         <a data-dismiss="modal" class="btn btn-danger" @click.prevent="callBack" href="#">Voir Tableau investissement</a>
