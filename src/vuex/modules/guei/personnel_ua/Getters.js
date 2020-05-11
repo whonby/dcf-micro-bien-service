@@ -3,7 +3,7 @@ const type_acte_personnels = state => state.type_acte_personnels;
 const fonctions  = state => state.fonctions;
 const paiementPersonnel  = state => state.paiementPersonnel;
 const classes =state => state.classes;
-personnaliseActeurDepense
+export const salairesActeur = state =>state.salairesActeur;
 export const situation_matrimonial = state => state.situation_matrimonial;
 const niveau_etudes =state => state.niveau_etudes;
 const type_contrats =state => state.type_contrats;
@@ -53,9 +53,12 @@ const tous_salaire_actuel_acteur=state=>state.tous_salaire_actuel_acteur
 const list_acteur_fin_contrat_activite=state=>state.list_acteur_fin_contrat_activite
 export const personnaliseActeurDepense = (state, getters, rootState, rootGetters) =>
     state.all_acteur_depense.map(element => {
-        if (element.unite_administrative_id !== null ) {
+        if (element.unite_administrative_id !== null && element.fonction_id !== null) {
             element = {
                 ...element,
+                fonctionDossier: rootGetters['personnelUA/fonctions'].find(
+                    section => section.id === element.fonction_id
+                ),
                 uniteAdmin: rootGetters['uniteadministrative/uniteAdministratives'].find(
                     section => section.id === element.unite_administrative_id
                 ),

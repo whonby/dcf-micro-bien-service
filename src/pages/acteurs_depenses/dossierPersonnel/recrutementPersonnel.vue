@@ -3,6 +3,8 @@
 
 <template>
     <div class="container-fluid">
+
+      
       <div id="exampleModal" class="modal hide taillModal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
@@ -939,7 +941,7 @@
                   
 <td>
                      <button 
-                      v-if="afficherAttributMarche(marche.attribue) == 5"  class="btn  btn-inverse">
+                      v-if="afficherAttributMarche(marche.marche_id) == 5"  class="btn  btn-inverse">
                 <span title="CONTRAT TERMINER">TE</span>
        
                 </button>
@@ -1704,6 +1706,7 @@ export default {
 
         marche_id:"",
         editActeEffetFinancier:"",
+        
         formEffetFinancier:{
              code_act:"",
              libelle_act:"",
@@ -2275,10 +2278,10 @@ anneeAmort() {
 
 
    afficheMarcheTerminer(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 5)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && element.difference_personnel_bienService == 1)
 },
    afficheExercution(){
-return this.getActeEffetFinancierPersonnaliserContrat.filter(element => element.marche.attribue == 2)
+return this.getActeEffetFinancierPersonnaliserContrat.filter(element => this.afficherAttributMarche(element.marche_id) == 2 && element.difference_personnel_bienService == 1)
 },
 afficheMarchExecuter(){
 return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
@@ -2313,7 +2316,7 @@ return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
 
  
   afficheMarcheResilier(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 3)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && element.difference_personnel_bienService == 1)
 },
 
 // afficheMarcheResilier(){
@@ -2333,7 +2336,7 @@ return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
 
 
  afficheContrat(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => element.date_odre_service > this.nombreJourTraitementCalucle)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => element.date_odre_service > this.nombreJourTraitementCalucle )
 },
 
 NombreafficheContrat(){

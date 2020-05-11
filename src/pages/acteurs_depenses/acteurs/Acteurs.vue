@@ -1,3 +1,6 @@
+
+
+
 <template>
     <div id="">
         <notifications />
@@ -35,9 +38,9 @@
                                 <li class="active"><a data-toggle="tab" href="#tab10">Listes du personnel    <span class="badge badge-inverse">{{totalActeurDepense}}</span></a></li>
                                 <li class=""><a data-toggle="tab" href="#tab19">Listes des acteurs de depenses   <span class="badge badge-success">{{afficheNombrePersonnelRecuActeNormination}}</span></a> </li>
                                 <li class=""><a data-toggle="tab" href="#tab30">Acteurs non actif</a></li>
-                                  <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{0}}</span></a></li>
-                                   <!-- <li><a data-toggle="tab" href="#tab208">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li>  -->
-                                   <li class=""><a data-toggle="tab" href="#tab301">Gestion des Compte bancaire <span class="badge badge-warning" > {{nombreCompteBancaire}}</span></a></li>
+                                  <!-- <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{0}}</span></a></li>
+                                   <li><a data-toggle="tab" href="#tab301">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li>  -->
+                                   
                                   
                             </ul>
                         </div>
@@ -84,10 +87,10 @@
                                                 <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_naissance) }}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.uniteAdmin.libelle || 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheAdministrative(item.unite_administrative_id) || 'Non renseigné'}}</td>
                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheUniteZone(item.uniteZone_id) || 'Non renseigné'}}</td>
                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheServiceLibelle(afficheService(item.service_id))|| 'Non renseigné'}}</td>
-                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{item.fonction.libelle || 'Non renseigné'}}</td>
+                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheLibelleFonction(item.fonction_id) || 'Non renseigné'}}</td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <router-link :to="{ name: 'ActeurDetail', params: { id: item.id }}" class="btn btn-default ">
@@ -208,138 +211,9 @@
 
 
 
-                              <div id="tab20002" class="tab-pane">
-                              <div class="widget-title">
-              <span class="icon">
-                <i class="icon-th"></i>
-              </span>
-              <h5>Liste des Contrats résiliés</h5>
-              <!-- <div align="right">
-                Recherche:
-                <input type="search"  v-model="search" />
-              </div> -->
-            </div>
-                            <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                      
-                   <th>Matricule </th>
-                    <th>Nom</th>
-                     <th>Prenom</th>
-                     <th>Date resilie</th>
-                     <th> Cause du contrat </th>
-                    <th >Unite administrative</th>
-                     <th >Unite Zone</th>
-                     <th >Service</th>
-                     <th >Fonction Administrative</th>
-                       <th>Status</th>
-                         <!-- <th>Montant march&eacute;</th> -->
-                                
-                </tr>
-                </thead>
-                <tbody>
-                     
-                     <tr class="odd gradeX" v-for="item in acteurActivite" :key="item.id">
-                                                 
-                                                 
-                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.cause_contrat || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_resilie) }}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.uniteAdmin.libelle || 'Non renseigné'}}</td>
-                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheUniteZone(item.uniteZone_id) || 'Non renseigné'}}</td>
-                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{afficheServiceLibelle(afficheService(item.service_id))|| 'Non renseigné'}}</td>
-                                                   <td @dblclick="afficherModalModifierTitre(item.id)">{{item.fonction.libelle || 'Non renseigné'}}</td>
-                                                <td>
-                                                    <div class="btn-group">
-                                                       <button 
-                                                          class="btn btn-info">
-                                                            <span title="CONTRAT RESILIE">EX</span>
-       
-                                                           </button>
+                         
 
-                                                       
-
-                                                    </div>
-
-                                                </td>
-                                            </tr>   
-                 
-                      
-                </tbody>
-              </table>
-                     
-
-                        </div>
-
-                         <div id="tab301" class="tab-pane">
-
-                    <div class="widget-title">
-              <span class="icon">
-                <i class="icon-th"></i>
-              </span>
-              <h5>Liste des comptes bancaires des personnels</h5>
-              <!-- <div align="right">
-                Recherche:
-                <input type="search"  v-model="search" />
-              </div> -->
-            </div>
-             <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                      
-                    <th>Banque</th>
-                        <th>Matricule</th>
-                        <th>Date d'Ouverture</th>
-                        <th>Signataire</th>
-                         <th>Nature compte</th>
-                         <th>Swift</th>
-                        <th>Iban</th>
-                        <th>Rib</th>
-                        <th>Action</th>
-                         <!-- <th>Montant march&eacute;</th> -->
-                                
-                   </tr>
-                   </thead>
-                   <tbody>
-                   <tr class="odd gradeX" v-for="(appelOffre, index) in afficheCompteEntreprise"
-                                        :key="appelOffre.id">
-
-                                        <td @dblclick="afficherModalCompteBancaire(index)">
-                                            {{appelOffre.varObjetBanque.libelle || 'Non renseigné'}}</td>
-
-                                        <td @dblclick="afficherModalCompteBancaire(index)">
-                                            {{ afficherMatriculeDynamique(appelOffre.acteur_depense_id )|| 'Non renseigné'}}</td>
-
-                                        <td @dblclick="afficherModalCompteBancaire(index)">
-                                            {{formaterDate(appelOffre.date_ouverture_compte) || 'Non renseigné'}}</td>
-
-                                        <td @dblclick="afficherModalCompteBancaire(index)">
-                                            {{appelOffre.signataire_compte || 'Non renseigné'}}</td>
-
-                                         <td v-if="appelOffre.nature_compte == 0" >Compte courant</td>
-                                         <td v-else >Non renseigné</td>
-                                            
-                                        <td @dblclick="afficherModalCompteBancaire(index)">
-                                            {{appelOffre.swift|| 'Non renseigné'}}</td>
-                                       
-                                        <td @dblclick="afficherModalCompteBancaire(index)">
-                                            {{appelOffre.iban || 'Non renseigné'}}</td>
-
-                                             <td @dblclick="afficherModalCompteBancaire(index)">
-                                            {{appelOffre.rib || 'Non renseigné'}}</td>
-                                        <div class="btn-group">
-                                            <button @click.prevent="supprimerCompte(appelOffre.id)"  class="btn btn-danger ">
-                                                <span class=""><i class="icon-trash"></i></span></button>
-
-                                        </div>
-
-                                    </tr>
-                                    </tbody>
-                                </table>
-
-                         </div>
+                        
 
                           
 
@@ -354,514 +228,12 @@
 
         <fab :actions="fabActions"
              main-icon="apps"
-             @cache="afficherModalAjouterTitre"
+             @cache="afficherModalTypeRecretement"
              bg-color="green"
 
         ></fab>
 
-    <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
     
-       <div id="modifierCompte" class="modal hide tailModal" aria-hidden="true" style="display: none;">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier compte</h3>
-            </div>
-            <div class="modal-body">
-                  <table class="table table-bordered table-striped">
-                      <tr>
-                            <td>
-                        <div class="control-group">
-                          <label>Matricule</label> 
-
-                            <div class="controls">
-
-                                  <input
-                                    type="text"
-                                    :value="afficherMatriculeDynamique(editCompte.acteur_depense_id)"
-                                    class="span4"
-                                   
-                            />
-                                  
-                                
-                            </div>
-                        </div>
-                          </td>
-                           <td>
-                              <div class="control-group">
-                                                    <label class="control-label">Pays</label>
-                                                    <div class="controls">
-                                                        <select v-model="editCompte.pays_id" class="span4" >
-                                                            <option></option>
-                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                          </td>
-                           <td>
-                              <div class="control-group">
-                                                    <label class="control-label">Ville:</label>
-                                                    <div class="controls">
-                                                        <select v-model="editCompte.ville_id" class="span4" :readOnly="verroVille">
-                                                            <option></option>
-                                                            <option v-for="item in VilleDynamiques(editCompte.pays_id)" 
-                                                            :key="item.id" 
-                                                            :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                </td>
-                        
-                                              <td>
-                                                 <div class="control-group">
-                                                    <label class="control-label">Communes</label>
-                                                    <div class="controls">
-                                                        <select v-model="editCompte.commune_id" class="span4" :readOnly="verroCommune">
-                                                            <option></option>
-                                                            <option v-for="item in commuDynamiques(editCompte.ville_id)" 
-                                                            :key="item.id" 
-                                                            :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                          </td>
-                       
-                         
-                      </tr>
-                      <tr>
-                           
-                            <td>
-                        <div class="control-group">
-                             <label>Banque</label>
-                            <div class="controls">
-
-                                <select v-model="editCompte.banq_id" class="span4" :readOnly="verroBanque">
-                                <option v-for="varText in banqueDynamiques(editCompte.commune_id)" :key="varText.afficheBanque.id"
-                              :value="varText.afficheBanque.id">{{varText.afficheBanque.libelle}}</option>
-                            </select>
-                              
-                            <!-- <select v-model="editCompte.banq_id" class="span4" :readOnly="verroBanque">
-                                <option v-for="varText in banqueDynamiques(editCompte.commune_id)" :key="varText.afficheBanque.id"
-                              :value="varText.afficheBanque.id">{{varText.afficheBanque.libelle}}</option>
-                            </select> -->
-                                
-                            </div>
-                        </div>
-                          </td>
-                            <td>
-                        <div class="control-group">
-                            <label>Code de la  agence</label>
-                            <div class="controls">
-                                <select v-model="editCompte.numero_agence" class="span4" :readOnly="verroCodeAgence">
-                                                            <option></option>
-                                                            <option v-for="item in codeAgenceDynamiquesModifier" :key="item.id" :value="item.code_agence">
-                                                                {{item.code_agence}}
-                                                            </option>
-                                </select>
-                            </div>
-                        </div>
-                          </td>
-                           <td>
-
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Nom  Agence</label>
-                                <input type="text" class="span4" placeholder="Saisir l'agence" :value="AffichierNomAgenceModifier" readonly>
-                            </div>
-                        </div>
-                          </td>
-                          <td>
-
-                        <div class="control-group">
-                            <label>Telephone agence</label>
-                            <div class="controls">
-                                <input type="text"  readonly   class="span4" placeholder="saisir le teleophone agence" :value="AffichierNumeroAgenceModifier">
-                            </div>
-                        </div>
-                          </td>
-                      </tr>
-                     <tr>
-                    
-
-                        
-                               
-                          <td>
-                     
-                        <div class="control-group">
-                            <label>Situation geographique</label>
-                            <div class="controls">
-                                <input type="text" class="span4"  readonly  placeholder="sitaution geographique" :value="AffichierSituationGeoAgenceModifier">
-                            </div>
-                        </div>
-                          </td>
-<td>
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Nature de compte</label>
-                                <!-- <input type="text" class="span" placeholder="saisir la nature de compte" v-model="editCompte.nature_compte"> -->
-                           <select v-model="editCompte.nature_compte" class="span4">
-                                                            <option></option>
-                                                            <option value="0">Compte courant</option>
-                                                           
-                                                            
-                                                        </select>
-                            </div>
-                        </div>
-                          </td>
-                           <td>
-                       <div class="control-group">
-                           
-                             <label>Numero compte/cléRib</label>
-                            <div class="controls">
-                              
-                            <!-- <select v-model="formData.entrepse_id" class="span">
-                                <option v-for="varText in entreprises" :key="varText.id"
-                              :value="varText.id">{{varText.raison_sociale}}</option>
-                            </select> -->
-                                  <div class="controls">
-                                <input type="text" class="span3" placeholder="" v-model="editCompte.numero_compte"> <input type="text" class="span1" placeholder="" v-model="editCompte.clerib">
-                            </div>
-                            </div>
-                        </div>
-                          </td>
-                           <td>
-                        <div class="control-group">
-                          <label>Date d'ouverture</label>
-                            <div class="controls">
-                                <input type="date" class="span4" placeholder="" v-model="editCompte.date_ouverture_compte">
-                            </div>
-                        </div>
-                          </td>
-                      </tr>
-                      
- 
-                    <tr>
-                          <td>
-                     
-                        <div class="control-group">
-                          <label>Signature</label>
-                            <div class="controls">
-                                <input type="text" class="span4" placeholder="saisir le signataire compte" v-model="editCompte.signataire_compte">
-                            </div>
-                        </div>
-                          </td>
-<td>
-
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Code SWIFT</label>
-                                <input type="text" class="span4"  v-model="editCompte.swift">
-                            </div>
-                        </div>
-                          </td>
-                          <td>
-
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>IBAN</label>
-                                <input type="text" class="span4"  v-model="editCompte.iban">
-                            </div>
-                        </div>
-                          </td>
-                           <td>
-
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>RIB</label>
-                                <input type="text" class="span4"  :value="afficherCodeRibEditCompte" readonly>
-                            </div>
-                        </div>
-                          </td>
-                    </tr>
-                    </table>
-                
-            </div>
-            <div class="modal-footer">  <a @click.prevent="modifierCompteLocal(editCompte)"   class="btn btn-primary"
-              href="#">Modifier</a> <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
-        </div>
-    
-    
-    
-    
-    
-    
-    
-    <!-- <div id="exampleModal" class="modal hide taillePersonnel">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Personnel</h3>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-         
-            <tr>
-              <td>
-                <div class="control-group">
-                 <label class="control-label">Matricule:</label>
-                                                    <div class="controls">
-                                                        <input type="text"  v-model="formData.matricule" class="span4" placeholder="Saisir le matricule" />
-                                                    </div>
-                </div>
-              </td>
-              <td>
-                <div class="control-group">
-                 <label class="control-label">Nom:</label>
-                                                    <div class="controls">
-                                                        <input type="text" v-model="formData.nom" class="span4" placeholder="Saisir le nom" />
-                                                    </div>
-                </div>
-              </td>
-               <td>
-              
-               <div class="control-group">
-                  <label class="control-label">Prenom:</label>
-                                                    <div class="controls">
-                                                        <input type="text" v-model="formData.prenom" class="span4" placeholder="Saisir le prenom" />
-                                                    </div>
-                   
-                </div>
-              </td>
-              <td>
-                  <div class="control-group">
-                                                    <label class="control-label">Sexe:</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.sexe" class="span4">
-                                                            <option></option>
-                                                            <option value="H">Homme</option>
-                                                            <option value="F">Femme</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-              </td>
-              
-            </tr>
-            <tr>
-                <td>
-                  <div class="control-group">
-                                                    <label class="control-label">Numero CNI:</label>
-                                                    <div class="controls">
-                                                        <input type="text" v-model="formData.numero_cni" class="span4" placeholder="Saisir le numero cni" />
-                                                    </div>
-                                                </div>
-              </td>
-
-              <td>
-              
-               <div class="control-group">
-                                                    <label class="control-label">Numero passeport:</label>
-                                                    <div class="controls">
-                                                        <input type="text" v-model="formData.numero_passeport" class="span4" placeholder="Saisir le numero passeport" />
-                                                    </div>
-                                                </div>
-              </td>
-              <td>
-                 <div class="control-group">
-                  <label class="control-label">Date de naissance:</label>
-                                                    <div class="controls">
-                                                        <input type="date" v-model="formData.date_naissance" class="span4" placeholder="Saisir la date de naissance" />
-                                                    </div>
-                </div>
-              </td>
-               <td>
-                  <div class="control-group">
-                  <label class="control-label">Nom du pÃ¨re:</label>
-                                                    <div class="controls">
-                                                        <input type="text" v-model="formData.nom_pere" class="span4" placeholder="Saisir le nom du pere" />
-                                                    </div>
-                </div>
-              </td>
-             
-            </tr>
-            <tr>
-              <td>
-                   <label class="control-label">Nom de la mÃ¨re:</label>
-                                                    <div class="controls">
-                                                        <input type="text" v-model="formData.nom_mere" class="span4" placeholder="Saisir le nom de la mere" />
-                                                    </div>
-              </td>
-              <td>
-                <div class="control-group">
-                   <label class="control-label">Reference acte:</label>
-                                                    <div class="controls">
-                                                        <input type="text" v-model="formData.code" class="span4" placeholder="Saisir la reference" />
-                                                    </div>
-                  </div>
-              </td>
-              <td>
-                <div class="control-group">
-               <label class="control-label">Type acte de personnel</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.type_acte_id" class="span4">
-                                                            <option></option>
-                                                            <option v-for="item in type_acte_personnels" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                </div>
-              </td>
-               <td>
-                <div class="control-group">
-                  <label class="control-label">L'unite administrative:</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.unite_administrative_id" class="span4">
-                                                            <option></option>
-                                                            <option v-for="item in uniteAdministratives" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                  </div>
-              </td>
-             
-              
-            </tr>
-          <tr>
-               <td>
-                    <label class="control-label">Date debut contrat:</label>
-                                                    <div class="controls">
-                                                        <input type="date" v-model="formData.date_debut_contrat" class="span4" placeholder="" />
-                                                    </div>
-              </td>
-               <td>
-                    <label class="control-label">Date debut contrat:</label>
-                                                    <div class="controls">
-                                                        <input type="date" v-model="formData.date_debut_contrat" class="span4" placeholder="" />
-                                                    </div>
-              </td>
-              <td>
-                  <label class="control-label">Type salarie</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.type_salarie_id" class="span4">
-                                                            <option></option>
-                                                            <option v-for="item in type_salaries" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-                                                        </select>
-                                                    </div>
-              </td>
-             
-               <td>
-                   <div class="control-group">
-                                                    <label class="control-label">Salaire:</label>
-                                                    <div class="controls">
-                                                        <input type="text" v-model="formData.salaires" class="span4" placeholder="Saisir le salaire" />
-                                                    </div>
-                                                </div>
-              </td>
-             
-
-          </tr>
-          <tr>
-               <td>
-                  <div class="control-group">
-                                                    <label class="control-label">Type contrat</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.type_contrat_id" class="span4" >
-                                                            <option></option>
-                                                            <option v-for="item in type_contrats" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-              </td>
-              <td>
-                  <div class="control-group">
-                                                    <label class="control-label">Type niveau etude</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.niveau_etude_id" class="span4">
-                                                            <option></option>
-                                                            <option v-for="item in niveau_etudes" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-              </td>
-              <td>
-                  <div class="control-group">
-                                                    <label class="control-label">Exercice budgetaire:</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.exercice_budgetaire_id" class="span4">
-                                                            <option v-for="item in exercices_budgetaires" :key="item.id" :value="item.id">
-                                                                {{item.annee}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-              </td>
-              <td>
-                   <div class="control-group">
-                                                    <label class="control-label">Ligne budgetaires:</label>
-                                                    <div class="controls">
-
-                                                        <select v-model="formData.plan_budgetaire_id" class="span4">
-                                                            <option v-for="item in plans_budgetaires" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-              </td>
-            
-          </tr>
-          <tr>
-                <td>
-                     <div class="control-group">
-                                                    <label class="control-label">Fonctions</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.fonction_id" class="span4">
-                                                            <option></option>
-                                                            <option v-for="item in fonctions" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-              </td>
-              <td>
-                                 <div class="control-group">
-                                                    <label class="control-label">Grades</label>
-                                                    <div class="controls">
-                                                        <select v-model="formData.grade_id" class="span4">
-                                                            <option></option>
-                                                            <option v-for="item in grades" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-              </td>
-          </tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="ajouterUniteAdministrativeLocal(formData)"
-          class="btn btn-primary"
-          href="#"
-         
-        >Valider</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div> -->
 
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
@@ -890,6 +262,240 @@
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
         </div>
 
+
+   <div id="exampleModal" class="modal hide tailleModalRecrutement">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Type de Recrutement</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+    <tr>
+      <td>
+       <div class="control-group">
+            <label class="control-label">Type de Recrutement</label>
+            <div class="controls">
+               <select v-model="formRecrutement.recrutement" class="span5">
+                      <option></option>               
+                      <option value="1">Recrtement Direct</option> 
+                       <option value="2">Recrutement Indirect</option> 
+                    </select>
+            </div>
+          </div>
+      </td>
+    </tr>
+         
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterTypeTexteLocal"
+          class="btn btn-primary"
+          href="#"
+          v-show="formRecrutement.recrutement"
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+
+
+<div id="ajouterActeEffetFinancierP" class="modal hide grdirModalActeEffet">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Ajouter acte effet financier</h3>
+            </div>
+            <div class="modal-body">
+
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                          <td colspan="">
+                        <div class="control-group">
+                        <label class="control-label">Type acte effet financier.</label>
+                        <div class="controls">
+                          <select v-model="formEffetFinancier.type_act_effet_id" class="span4">
+                                <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                        
+                        </div>
+                    </div>
+                            </td>
+
+
+
+                           <td>
+                    <div class="control-group">
+                        <label class="control-label">Reference acte</label>
+                        <div class="controls">
+                            <input type="text" v-model="formEffetFinancier.reference_act"
+                                    class="span4"
+                                    placeholder="refence acte"
+                            />
+                        </div>
+                    </div>
+                            </td>
+                                 
+                           
+                       
+                          
+                                   <td colspan="">
+                    <div class="control-group">
+                        <label class="control-label">Autorité approbatrice</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formEffetFinancier.autorite_approbation"
+                                    class="span4"
+                                    placeholder=" "
+                            />
+                            
+                        </div>
+                    </div>
+
+                            </td>
+                                                   <td>
+                    <div class="control-group">
+                        <label class="control-label"> date d'approbation</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="formEffetFinancier.date_approbation"
+                                    class="span4"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+
+                            </td>
+                        </tr>
+
+                       
+                
+                        <tr>
+                           
+                            <td>
+                     <div class="control-group">
+                        <label class="control-label">Incidence financière</label>
+                        <div class="controls">
+                            <select  v-model="formEffetFinancier.incidence_financiere" class="span4">
+                               <option value="0">Oui</option>
+                               <option value="1">Non</option>
+                            </select>
+                                    
+                                  
+                            
+                        </div>
+                    </div>
+                            </td>
+                            <td colspan="2">
+
+                     <div class="control-group">
+                        <label class="control-label">Montant Contrat</label>
+                        <div class="controls">
+                            <input type="text" v-model="formEffetFinancier.montant_act"
+                                    class="span7"
+                                    placeholder="Saisir le montant "
+                            />
+                        </div>
+                    </div>
+                            </td>
+                            <td>
+
+                            <div class="control-group">
+                        <label class="control-label" >Date de signature attributaire</label>
+                        <div class="controls">
+                            <input type="date" v-model="formEffetFinancier.date_attributaire"
+                                    class="span4"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+                            </td>
+                        </tr>
+                        <tr>
+
+                    
+                     <td>
+                     <div class="control-group">
+                        <label class="control-label">Date ordre de service demarrage</label>
+                        <div class="controls">
+                            <input type="date" v-model="formEffetFinancier.date_odre_service"
+                                    class="span4"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+
+                                         <td>
+                     <div class="control-group">
+                        <label class="control-label" title=" ">Date fin exécution</label>
+                        <div class="controls">
+                            <input type="date" :min="formEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValue" v-model="formEffetFinancier.date_fin_exe"
+                                    class="span4"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+                            </td>
+                        
+                        
+
+                                           <td>
+                     <div class="control-group">
+                        <label class="control-label" title=" ">Durée d'exécution(jrs)</label>
+                        <div class="controls">
+                            <input type="text"  readonly  :value="nombreDejourCalcule"
+                                    class="span4"
+                                   
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+
+                                             <td>
+                     <div class="control-group">
+                        <label class="control-label" title=" ">Date de reception definitive</label>
+                        <div class="controls">
+                            <input type="date" v-model="formEffetFinancier.date_reception"
+                                    class="span4"
+                                    placeholder=""
+                            />
+                            <input type="hidden" v-model="formEffetFinancier.difference_personnel_bienService"/>
+                        </div>
+                    </div>
+                            </td>
+
+                            
+
+                        </tr>
+                       
+                    </table>  
+
+                   
+
+                
+            </div>
+            <div class="modal-footer">
+                <a  @click.prevent="ajouterModalActeEffetFinancierLocal"
+                        class="btn btn-primary"
+                        href="#"
+                >Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div>
+
+            <!-- <div class="modal-footer">
+                <a v-if="selectionAttributionMarche(marcheid)" @click.prevent="ajouterModalActeEffetFinancierLocal(selectionAttributionMarche(marcheid).nom_candidat)"
+                        class="btn btn-primary"
+                        href="#"
+                >Valider</a>
+                <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+            </div> -->
+        </div>
+
+
     </div>
 
 </template>
@@ -915,6 +521,33 @@
                 liste:[],
                 search:"",
                 search1:"",
+                formRecrutement:{
+recrutement:""
+                },
+                  formEffetFinancier:{
+              
+             date_reception:"",
+             reference_act:"",
+            
+             incidence_financiere:"",
+             montant_act:"",
+              date_attributaire:"",
+             
+             duree:"",
+             date_fin_exe:"",
+             date_odre_service:"",
+             
+        autorite_approbation:"",
+        date_approbation:"",
+            // text_juridique_id:"",
+             type_act_effet_id:"",
+             
+            // entreprise_id:"",
+             
+             
+             
+             difference_personnel_bienService:"3"
+        },
                 formData : {
                     matricule: "",
                     nom: "",
@@ -960,26 +593,7 @@
                 },
                   acteurDetail:"",
 
-                editCompte:{
-                     date_ouverture_compte:"",
-                    signataire_compte:"",
-                    nature_compte:"",
-                    	agence:"",
-                    	situation_geographique_angence:"",
-                    	numero_agence:"",
-                    telephone_agence:"",
-                    //entrepse_id:"",
-                        banq_id:"",
-                        pays_id:"",
-                        ville_id:"",
-                        swift:"",
-                        iban:"",
-                        rib:"",
-                        commune_id:"",
-                        acteur_depense_id:"",
-                        attribue:1
-
-                },
+               
 
                 editTitre: {
                     code: "",
@@ -998,31 +612,88 @@
             // console.log(this.getFonction)
         },
         computed: {
-            ...mapGetters('personnelUA', ["afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
+            ...mapGetters('personnelUA', ["afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
              ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
             ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", ["services"]),
-  ...mapGetters("bienService", [ "getMarchePersonnaliser","appelOffres","villes","communes","pays" ]),
 
+...mapGetters("bienService", ["gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots","villes","communes","pays","modePassations", "procedurePassations","getterDossierCandidats","marches","gettersPersonnaliserRapportJugement",
+                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
+                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
+                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","selectionner_candidats",
+                "getActeEffetFinancierPersonnaliserContrat", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
  ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
+   ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe','planActe']),
+ affichierIdActeFinancierDansActePlan() {
+      const qtereel = this.planActe.find(
+        qtreel => qtreel.code == "02",
+       
+      );
 
- 
- 
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
+    getDateFinExécutionValue(){
+    return !this.formEffetFinancier.date_odre_service !=""
+},
+nombreDejourCalcule(){
+                let vM=this;
+    const acteAffet = vM.formEffetFinancier
+    if(acteAffet.date_odre_service == acteAffet.date_fin_exe &&  acteAffet.date_fin_exe !=="" && acteAffet.date_odre_service !=="") return 1
+     if(acteAffet.date_fin_exe =="" && acteAffet.date_odre_service =="") return null
 
-   verroVille() {
-      return this.editCompte.pays_id == "";
+       var dateF = new Date(acteAffet.date_fin_exe).getTime()
+        var dateO = new Date(acteAffet.date_odre_service).getTime()
+           var resultat = dateF - dateO
+
+             var diffJour =  resultat / (1000 * 3600 * 24)
+
+               if(isNaN(diffJour)) return null
+
+               if(parseFloat(diffJour) < 0 ) return "durée invalide"
+    vM.formEffetFinancier.duree=diffJour
+                  return  diffJour;
+   
+},
+AffichierElementParent() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.planActe.filter(element => element.parent == id);
+        }
+      };
     },
-     verroCommune() {
-      return this.editCompte.ville_id == "";
+ 
+ afficheLibelleFonction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.fonctions.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
     },
-    verroCodeAgence() {
-      return this.editCompte.banq_id == "";
-    },
-     verroBanque() {
-      return this.editCompte.commune_id == "";
+  
+
+ afficheAdministrative() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
     },
 
 
@@ -1042,64 +713,6 @@
     },
     
 
-     VilleDynamiques() {
-     return id => {
-        if (id != null && id != "") {
-          return this.villes.filter(
-            element => element.pays_id == id
-          );
-        }
-      };
-    },
-            commuDynamiques() {
-     return id => {
-        if (id != null && id != "") {
-          return this.communes.filter(
-            element => element.ville_id == id
-          );
-        }
-      };
-    },
-                 banqueDynamiques() {
-     return id => {
-        if (id != null && id != "") {
-          return this.getPersonnaliseAgence.filter(
-            element => element.afficheCommune.id == id
-          );
-        }
-      };
-    },
-
-
-afficherCodeRibEditCompte(){
-      //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
-    
-    const codeBanq = this.banques.find(codeBanq => codeBanq.id == this.editCompte.banq_id)
- const codeAgence = this.agenceBanques.find(codeAgence => codeAgence.code_agence == this.editCompte.numero_agence)
-     if(codeBanq && codeAgence && this.editCompte.numero_compte  && this.editCompte.clerib ){
-       return codeBanq.code_banque + codeAgence.code_agence + this.editCompte.numero_compte + this.editCompte.clerib
-     }
-
-     return ""
-   },
-
-
-   codeAgenceDynamiquesModifier() {
-      let vM=this;
-        if (vM.editCompte.commune_id != null && vM.editCompte.banq_id != "") {
-            // console.log(vM.editCompte.commune_id)     
-            // console.log(vM.editCompte.banq_id)     
-                return this.getPersonnaliseAgence.filter(element => {
-                if(element.commune_id == vM.editCompte.commune_id &&  element.banque_id == vM.editCompte.banq_id ){
-return element;
-                }
-                     
-          }
-            
-          );
-        }
-        return null;
-    },
 
 // afficherMatriculeDynamique(){
 //        return id =>{
@@ -1114,91 +727,20 @@ return element;
 //    },
 
 
-AffichierIdAgenceModifier() {
-      
-      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.formData.numero_agence);
 
-      if (dureVie1) {
-        return dureVie1.id;
+ afficheNumeroActe() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acte_personnels.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.reference_acte;
       }
-      // console.log(dureVie1)
-      return ""
-    },
-
-
-AffichierNomAgenceModifier() {
-      
-      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.editCompte.numero_agence);
-
-      if (dureVie1) {
-        return dureVie1.nom_agence;
-      }
-      // console.log(dureVie1)
-      return ""
-    },
-    AffichierNumeroAgenceModifier() {
-      
-      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.editCompte.numero_agence);
-
-      if (dureVie1) {
-        return dureVie1.tel_agence;
-      }
-      // console.log(dureVie1)
-      return ""
-    },
-AffichierSituationGeoAgenceModifier() {
-      
-      const dureVie1 = this.agenceBanques.find(dureEquipe => dureEquipe.code_agence == this.editCompte.numero_agence);
-
-      if (dureVie1) {
-        return dureVie1.situation_geo;
-      }
-      // console.log(dureVie1)
-      return ""
-    },
-
- afficheCompteEntreprise() {
-         
-    return this.getCompte.filter( element => element.attribue==1 );
-    },
-
-
-    // afficher le nombre de compte bancaire par pesonnel
-
-    nombreCompteBancaire(){
-        return this.getCompte.filter( element => element.attribue==1 ).length
+      return "Non renseigné"
+        }
+      };
     },
     
-afficherMatriculeDynamique(){
-       return id =>{
-           if(id!=null && id!=""){
-             const objet = this.personnaliseActeurDepense.find(item =>item.id==id)
-             if(objet){
-                 return objet.matricule
-             }
-             return 0  
-           }
-       }
-   },
-
-
-// enregistrement ID de personnel
-
-enregistreIdPersonnel(){
-
-    return id =>{
-        if(id!=null && id!=""){
-          const objetId = this.personnaliseActeurDepense.find(itemId => itemId.id==id)
-          if(objetId){
-              return objetId.id
-          } 
-          return null  
-        }
-    }
-},
-
-
-
 
 
 
@@ -1364,8 +906,51 @@ enregistreIdPersonnel(){
             ...mapActions('personnelUA', ['getActeur',"ajouterActeur","supprimerActeurs","getNbrActeurAcrediteTaux","allActeurDepense","getActeurFinContratAndActivite","getListeSalaireActuelAll"]),
           
               ...mapActions('gestionMarche', ["ajouterSanction", "ajouterCompte", "modifierCompte", "supprimerCompte"]),
+          ...mapActions('bienService',['supprimerActeEffetFinancier',
+          'ajouterActeEffetFinancier','modifierActeEffetFinancier', 'modifierMarche']),
+
          
-         
+
+
+              ajouterModalActeEffetFinancierLocal(){
+        var nouveauObjet = {
+          ...this.formEffetFinancier,
+          duree:this.nombreDejourCalcule
+        }
+     
+    this.ajouterActeEffetFinancier(nouveauObjet)
+   
+    this.formEffetFinancier = {
+             
+             
+             reference_act:"",
+            
+             incidence_financiere:"",
+             montant_act:"",
+              date_attributaire:"",
+             date_reception:"",
+             duree:"",
+             date_fin_exe:"",
+             date_odre_service:"",
+             
+        autorite_approbation:"",
+        date_approbation:"",
+             
+             type_act_effet_id:"",
+             
+            // entreprise_id:"",
+             
+             
+             difference_personnel_bienService:"3"
+
+    }
+},
+
+
+
+
+
+
          afficherModalAjouterTitre(){
                 this.$router.push({ name: 'AjouterActeur' })
             },
@@ -1377,31 +962,10 @@ enregistreIdPersonnel(){
 //     },
 
 
- modifierCompteLocal(){
-                var nouvelObjet = {
-      ...this.editCompte,
-      acteur_depense_id :this.enregistreIdPersonnel,
-      telephone_agence:this.AffichierNumeroAgenceModifier,
-          situation_geographique_angence:this.AffichierSituationGeoAgenceModifier,
-          agence:this.AffichierNomAgenceModifier,
-         agence_id:this.AffichierIdAgenceModifier,
-         rib:this.afficherCodeRibEditCompte
-      
-       };
-              this.modifierCompte(nouvelObjet)
-              this.$('#modifierCompte').modal('hide');
-            },
+ 
 
    //afiicher modal ajouter
-           afficherModalCompteBancaire(index){
-                this.$('#modifierCompte').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-
-                this.editCompte = this.afficheCompteEntreprise[index];
-            },
-         
+          
 
 
             suprimer(id){
@@ -1421,8 +985,28 @@ enregistreIdPersonnel(){
         path: "/edit-acteur-depense/" + id
       });
     },
-
-
+afficherModalTypeRecretement() {
+      this.$("#exampleModal").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+    },
+ajouterTypeTexteLocal() {
+      if(this.formRecrutement.recrutement==1){
+        this.$("#exampleModal").modal('hide');
+       
+       this.$('#ajouterActeEffetFinancierP').modal({
+        backdrop: 'static',
+        keyboard: false
+        
+    });
+      }
+      else if(this.formRecrutement.recrutement==2){
+         this.$("#exampleModal").modal('hide');
+        this.$router.push({ name: 'AjouterActeur' })
+       
+      }
+    },
             formaterDate(date) {
                 return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },
@@ -1446,5 +1030,13 @@ enregistreIdPersonnel(){
  height: 500px;
 
     }
+ .tailleModalRecrutement{
+   width: 30%;
+ }
+ .grdirModalActeEffet{
+     width: 93%;
+ margin: 0 -800px;
  
+
+}
 </style>

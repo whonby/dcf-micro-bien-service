@@ -682,13 +682,13 @@ return this. marcherAttribuer.filter((item) => {
     },
 
     marcherAttribuer(){
-      return this.getMarchePersonnaliser.filter(recuper => recuper.attribue == 2 && recuper.type_marche.code_type_marche == 4 )
+      return this.getMarchePersonnaliser.filter(recuper => recuper.attribue == 2 && recuper.type_marche.code_type_marche == 4 || recuper.attribue == 2 && recuper.type_marche.code_type_marche == 1)
       
     },
 
     
     montantMarcheExecuter(){
-  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.affichertypeMarche(recuper.marche.type_marche_id) == 4).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
+  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarche(recuper.marche.type_marche_id) == 4 && recuper.difference_personnel_bienService == 2 || this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarche(recuper.marche.type_marche_id) == 1 && recuper.difference_personnel_bienService == 2).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
 },
     // MontatantImputationBudget() {
       

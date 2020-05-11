@@ -187,12 +187,15 @@
 
       // "nbreArchivageNotes"
     ]),
+  ...mapGetters('personnelUA', ['acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions",
+                "grades","niveau_etudes","nbr_acteur_actredite_taux","all_acteur_depense",
+                "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
+                
 
-
-    ...mapGetters("bienService",["getActeEffetFinancierPersonnaliser45","typeMarches","printMarcheNonAttribue"]),
+    ...mapGetters("bienService",["getActeEffetFinancierPersonnaliser45","typeMarches","printMarcheNonAttribue","marches"]),
 
   nbreMarcheContrat(){
-  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.affichertypeMarcheEx(recuper.marche.type_marche_id) == 2).length
+  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarcheEx(recuper.marche.type_marche_id) == 2 && recuper.difference_personnel_bienService == 3).length
 },
 
 
@@ -215,15 +218,24 @@ return this.printMarcheNonAttribue.filter(element => element.type_marche.code_ty
 
 
 afficheNombreMarcheResilier(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element =>element.marche.attribue == 3).length
+return this.getActeEffetFinancierPersonnaliser45.filter(element =>this.afficherAttributMarche(element.marche_id) == 3 && element.difference_personnel_bienService == 3).length
 },
 
 
 
-            ...mapGetters('personnelUA', ['acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions",
-                "grades","niveau_etudes","nbr_acteur_actredite_taux","all_acteur_depense",
-                "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
+          
+afficherAttributMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.attribue;
+      }
+      return 0
+        }
+      };
+    },
 
                  affichertypeMarcheEx() {
       return id => {

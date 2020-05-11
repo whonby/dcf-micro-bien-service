@@ -5,6 +5,7 @@
                                        Rechercher: <input type="search" v-model="search" />
 
                                    </div> -->
+                                   <h4> Liste rapport de jugement</h4> 
 
                                  <table class="table table-bordered table-striped"  v-if="macheid">
                                             <thead>
@@ -105,7 +106,9 @@
                       <table class="table table-bordered table-striped">
                           <thead>
                           <tr>
-                              <!-- <th>Nom des Soumissionnaires </th> -->
+                         <th>Nom des Soumissionnaires </th>
+                            <th>Numero du dossier</th>
+                            <th>Montant Offre financiere</th>
                               <th>Note</th>
                               <th>Classement</th>
                           </tr>
@@ -113,14 +116,20 @@
                           <tbody>
                           <tr class="odd gradeX" v-for="(item, index) in resultaAnalysePv"
                               :key="item.id">
-                              <!-- <td @click="afficheAnoDPMBailleurModale(anoBailleur.id)">
-                                  {{anoBailleur.annalyse_d_m_p.demande_ano.annalyse_dossier.dossier_candidature.numero_dossier || 'Non renseigné'}}</td> -->
-                              <!-- <td >
-                                  {{item.dossiercandidature.nom_cand || 'Non renseigné'}}</td> -->
+                             
+                              <td >
+                                  {{afficherNomCandidat(item.dossier_candidat_id)|| 'Non renseigné'}}</td>
+
+                                    <td >
+                                  {{afficherNumeroDossierCandidat1(item.dossier_candidat_id)|| 'Non renseigné'}}</td>
+
+                                   <td >
+                                 {{formatageSomme(parseFloat(afficherListeMontant(afficherOffrefID(item.dossier_candidat_id)))) || 'Non renseigné'}}</td>
+                                   
                               <td >
                                   {{item.note_analyse || 'Non renseigné'}}</td>
                               <td >
-                                  <p v-if="index==0">
+                                  <p v-if="index==0"> 
                                       {{index + 1}} er
                                   </p>
                                   <p v-else>
@@ -191,6 +200,7 @@
 
 <script>
 import {mapActions, mapGetters} from 'vuex';
+import {formatageSomme} from '../../../../../src/Repositories/Repository'
 import moment from 'moment';
 export default {
  name:'compte',
@@ -199,6 +209,8 @@ export default {
 
           note_analyse:"",
             reference_pv:"",
+            difference_personnel_bienService:"",
+            dossier_candidat_id:"",
             formJugement:{
                  date_rapport_jugement:"",
                  attribue:"1",
@@ -238,7 +250,7 @@ export default {
     computed: {
 
             ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,"appelOffres",
-            "gettersPersonnaliserRapportJugement","getterAnalyseDossiers",
+            "gettersPersonnaliserRapportJugement","getterAnalyseDossiers","getterDossierCandidats","getterOffreFinanciers",
             "gettersCotations","rapportDocuments", 'listeJugementPersonnel','selectionner_candidats']),
              ...mapGetters('personnelUA', ['acteur_depenses','dossierPersonnels']),
 
@@ -278,6 +290,76 @@ export default {
 //       };
 //     },
 
+
+
+ afficherListeMontant(){
+     return id => {
+       if( id !== undefined) {
+    var acteur = this.getterOffreFinanciers.find(acteur => acteur.id == id)
+    
+     return  (acteur) ? acteur.montant_total_ttc :null 
+       }
+    return null
+     }
+  
+   },
+
+
+   // afficher le montant
+     afficherOffrefID() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterOffreFinanciers.find(qtreel => qtreel.dossier_candidat_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+
+     afficherNumeroDossierCandidat1() { 
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterDossierCandidats.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_dossier;
+      }
+      return null
+        }
+      };
+    },
+
+// afficher nom du candida
+
+afficherNomCandidat(){
+  return id =>{
+      if(id!=null && id!=""){
+          const nomCandidat= this.getterDossierCandidats.find(item =>item.id==id)
+          if(nomCandidat){
+              return nomCandidat.nom_cand
+          }
+      }
+  }  
+},
+
+
+
+afficherNomCandidatId(){
+  return id =>{
+      if(id!=null && id!=""){
+          const nomCandidat= this.getterDossierCandidats.filter(item =>item.marche_id==id)
+          if(nomCandidat){
+              return nomCandidat.id
+          }
+      }
+  }  
+},
+
+
+
 // afficher ID du candidat selectionner 
 
 // affichierCandidatSelectionId() {
@@ -310,17 +392,17 @@ affichierAppelOffreid() {
     },
     // afficher le nom des candidats
 
-    afficherNomCandidat(){
-        return id =>{
-            if(id!=null && id!=""){
-                let obejtNom = this.dossierPersonnels.find(obejtNom => obejtNom.id == id)
-                if(obejtNom){
-                    return obejtNom.nom_candidat.concat(' ', obejtNom.prenom_candidat)
-                }
-                return 0
-            }
-        }
-    }
+    // afficherNomCandidat(){
+    //     return id =>{
+    //         if(id!=null && id!=""){
+    //             let obejtNom = this.dossierPersonnels.find(obejtNom => obejtNom.id == id)
+    //             if(obejtNom){
+    //                 return obejtNom.nom_candidat.concat(' ', obejtNom.prenom_candidat)
+    //             }
+    //             return 0
+    //         }
+    //     }
+    // }
             
 
 
@@ -360,7 +442,7 @@ affichierAppelOffreid() {
           
            ajouterRapportJugementLocal(){
 
-               if(confirm("veiller charger le fichier svp mercie")){
+               
                 const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
                  formData.append('date_rapport_jugement', this.formJugement.date_rapport_jugement);
@@ -380,13 +462,13 @@ affichierAppelOffreid() {
                  difference_personnel_bienService:"personnel",
                  date_rapport_jugement:""
                }
-               }else return "chargement du fichier neccessaire ";
+              
                 
            },
 
 
            modifierRapportOuverture(){
-               if(confirm("chargement du fichier neccessaire ")){
+              
                  const formData = new FormData();
                  formData.append('date_rapport_jugement', this.editRapport.date_rapport_jugement);
                  formData.append('marche_id', this.macheid);
@@ -409,19 +491,23 @@ affichierAppelOffreid() {
                this.modifierRapportJugement(formData,config)
               // this.getRapportJugement()
                this.$('#modifierRapportJugements').modal('hide');
-               } else return "chargement du fichier neccessaire";
+               
               
            },
            formaterDate(date){
                return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
            },
 
+           // formatage sommme
+
+           formatageSomme:formatageSomme,
 
 
 
-           infoPVAffiche(ref){
+
+           infoPVAffiche(){
                 this.resultaAnalysePv=[]
-                let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==null || ref);
+                let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==null );
                 this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
                 if (this.resultaAnalysePv.length>0){
                     this.resultaAnalysePv.sort(function (a, b) {

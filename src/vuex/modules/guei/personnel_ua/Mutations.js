@@ -798,7 +798,17 @@ const MODIFIER_FONCTION_BUDGETAIRE = (state, objetModifie) => {
         return fonction
     })
 }
-
+export const MODIFIER_SALAIRE = (state, objetModifie) => {
+    state.salairesActeur = state.salairesActeur.map(fonction => {
+        if (fonction.id == objetModifie.id) {
+            fonction = { ...objetModifie }
+        }
+        return fonction
+    })
+}
+export const GET_SALAIRE = (state, data) => {
+    state.salairesActeur = data
+}
 
 
 /**

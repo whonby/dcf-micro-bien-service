@@ -431,29 +431,29 @@
                
                 </thead>
                 <tbody>
-                    <tr class="odd gradeX" v-for="(marche, index) in 
+                    <tr class="odd gradeX" v-for="(marche) in 
                 afficheMarcheTerminer"
                  :key="marche.id">
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  <td>
                    {{afficherAnneeBudget(marche.marche_id) || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                 <td>
                    {{afficherUniteAdministrative(afficherIdUniteAdministrative(marche.marche_id)) || 'Non renseigné'}}</td>
                  
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  <td>
                    {{ELibelle(E(marche.marche_id))|| 'Non renseigné'}}</td>
-                  <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  <!-- <td>
                    {{afficheractivite(afficherIdactivite(marche.marche_id))|| 'Non renseigné'}}</td> -->
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <td>
                    {{afficherImputationMarche(marche.marche_id)|| 'Non renseigné'}}</td>
-                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <!-- <td>
                   {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                     <td>
                    {{afficherObjetMarche(marche.marche_id) || 'Non renseigné'}}</td>
-                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                     <!-- <td>
                    {{afficherReferenceMarche(marche.marche_id)|| 'Non renseigné'}}</td> -->
-                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   <!-- <td>
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
+                     <td style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_act)) || 'Non renseigné'}}</td>
                   
 <td>
@@ -515,26 +515,26 @@
                         <tr class="odd gradeX" v-for="(marche, index) in 
                 afficheMarcheEnCoursContratualisation"
                  :key="marche.id">
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  <td @dblclick="afficherModalModifierMarcgeContratualisation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                 <td @dblclick="afficherModalModifierMarcgeContratualisation(index)">
                    {{afficherUniteAdministrative(marche.unite_administrative_id) || 'Non renseigné'}}</td>
 
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                 <td @dblclick="afficherModalModifierMarcgeContratualisation(index)">
                    {{ELibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  <td @dblclick="afficherModalModifierMarcgeContratualisation(index)">
                    {{afficheractivite(marche.activite_id) || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <td @dblclick="afficherModalModifierMarcgeContratualisation(index)">
                    {{marche.imputation || 'Non renseigné'}}</td>
-                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <!-- <td @dblclick="afficherModalModifierMarcgeContratualisation(index)">
                   {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                     <td @dblclick="afficherModalModifierMarcgeContratualisation(index)">
                    {{marche.objet || 'Non renseigné'}}</td>
-                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                     <!-- <td @dblclick="afficherModalModifierMarcgeContratualisation(index)">
                    {{marche.reference_marche || 'Non renseigné'}}</td> -->
-                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   <!-- <td @dblclick="afficherModalModifierMarcgeContratualisation(index)">
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
+                     <td @dblclick="afficherModalModifierMarcgeContratualisation(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
                   
 <td>
@@ -787,26 +787,26 @@
 
                  <template v-if="afficherCodeTypeMarche(afficherDifferentTypeMarche(marche.marche_id)) == 4">
 
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <td>
                    {{afficherAnneeBudget(marche.marche_id) || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                 <td>
                    {{afficherUniteAdministrative(afficherIdUniteAdministrative(marche.marche_id)) || 'Non renseigné'}}</td>
                  
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  <td>
                    {{ELibelle(E(marche.marche_id))|| 'Non renseigné'}}</td>
-                  <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  <!-- <td>
                    {{afficheractivite(afficherIdactivite(marche.marche_id))|| 'Non renseigné'}}</td> -->
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <td>
                    {{afficherImputationMarche(marche.marche_id)|| 'Non renseigné'}}</td>
-                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <!-- <td>
                   {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                     <td>
                    {{afficherObjetMarche(marche.marche_id) || 'Non renseigné'}}</td>
-                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                     <!-- <td>
                    {{afficherReferenceMarche(marche.marche_id)|| 'Non renseigné'}}</td> -->
-                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   <!-- <td>
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
+                     <td style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_act)) || 'Non renseigné'}}</td>
                   
                     <td>
@@ -889,31 +889,31 @@
                    <tr class="odd gradeX" v-for="(marche, index) in 
                 afficheMarcheEnPlanification"
                  :key="marche.id">
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  <td @dblclick="afficherModalModifierMarcgePlanifier(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                 <td @dblclick="afficherModalModifierMarcgePlanifier(index)">
                    {{afficherUniteAdministrative(marche.unite_administrative_id) || 'Non renseigné'}}</td>
 
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                 <td @dblclick="afficherModalModifierMarcgePlanifier(index)">
                    {{ELibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  <td @dblclick="afficherModalModifierMarcgePlanifier(index)">
                    {{afficheractivite(marche.activite_id) || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <td @dblclick="afficherModalModifierMarcgePlanifier(index)">
                    {{marche.imputation || 'Non renseigné'}}</td>
-                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <!-- <td @dblclick="afficherModalModifierMarcgePlanifier(index)">
                   {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                     <td @dblclick="afficherModalModifierMarcgePlanifier(index)">
                    {{marche.objet || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                     <td @dblclick="afficherModalModifierMarcgePlanifier(index)">
                    {{marche.reference_marche || 'Non renseigné'}}</td>
                     <td>
 
                          <span v-if="marche.economique_id == CodeExempte(marche.economique_id) ">Exemptée procedure</span>
                          <span v-else>Ligne à marché</span>
                        </td>
-                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   <!-- <td @dblclick="afficherModalModifierMarcgePlanifier(index)">
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
+                     <td @dblclick="afficherModalModifierMarcgePlanifier(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
                   
 <td>
@@ -1020,29 +1020,29 @@
                 <tbody>
                
                        <!-- <input type="text" :value="nombreJourTraitementCalucle"> -->
-                  <tr class="odd gradeX" v-for="(marche, index) in 
+                  <tr class="odd gradeX" v-for="marche in 
                 afficheMarcheResilier"
                  :key="marche.id">
                  
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                 <td>
                    {{afficherAnneeBudget(marche.marche_id) || 'Non renseigné'}}</td>
-                   <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   <td>
                    {{afficherUniteAdministrative(afficherIdUniteAdministrative(marche.marche_id)) || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <td>
                    {{marche.numero_marche || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <td>
                    {{afficherObjetMarche(marche.marche_id) || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <td>
                    {{marche.varObjetEntreprise.raison_sociale || 'Non renseigné'}}</td>
-                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <!-- <td>
                   {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                     <td>
                    {{marche.date_resiliation || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                     <td>
                    {{marche.cause_resiliation || 'Non renseigné'}}</td>
-                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   <!-- <td>
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
+                     <td style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_act)) || 'Non renseigné'}}</td>
   
 <td>
@@ -2477,7 +2477,7 @@ anneeAmort() {
     // return cur_day + " " + hours + ":" + minutes + ":" + seconds;
    },
    afficheMarchExecuter(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4 ||element.marche.attribue == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 1)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4 &&  element.difference_personnel_bienService == null||this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 1 && element.difference_personnel_bienService == null)
 },
  affichertypeMarcheEx() {
       return id => {
@@ -2492,7 +2492,7 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => element.march
       };
     },
     nbreMarcheExecuter(){
-  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => recuper.marche.attribue == 2 && this.affichertypeMarcheEx(recuper.marche.type_marche_id) == 4).length
+  return this.afficheMarchExecuter.length
 },
 // afficheMarchExecuter(){
 // return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
@@ -2506,7 +2506,7 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => element.march
 
 
 afficheMarcheTerminer(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4 || element.marche.attribue == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4 && element.difference_personnel_bienService == null|| this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 1 && element.difference_personnel_bienService == null)
 },
 // afficheMarcheTerminer(){
 // return this.afficheMarcheSolde.filter(element => element.indicateur_resilie != 1)
@@ -2530,7 +2530,7 @@ montantEnSolde(){
 
 
   afficheMarcheResilier(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => element.marche.attribue == 3 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4 || element.marche.attribue == 3 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 1 )
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4 && element.difference_personnel_bienService == null|| this.afficherAttributMarche(element.marche_id) == 3 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 1 && element.difference_personnel_bienService == null)
 },
 
 
@@ -2821,6 +2821,23 @@ this.formData = {
       });
 
       this.editMarche = this.afficherLaListeDesMarche[index];
+    },
+
+    afficherModalModifierMarcgePlanifier(index) {
+      this.$("#modificationModal").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+      this.editMarche = this.afficheMarcheEnPlanification[index];
+    },
+      afficherModalModifierMarcgeContratualisation(index) {
+      this.$("#modificationModal").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+      this.editMarche = this.afficheMarcheEnCoursContratualisation[index];
     },
     // fonction pour vider l'input modification
     modifierModalTypeprestationLocal(){
