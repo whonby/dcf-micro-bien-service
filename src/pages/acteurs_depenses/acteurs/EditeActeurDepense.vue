@@ -348,7 +348,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Salaire</label>
                                                    <div class="controls">
-                                                        <input type="text" class="span12" :value="detail.salaireActeur.montant"  placeholder="Saisir le salaire" />
+                                                        <input type="number" class="span12" :value="detail.salaireActeur.montant"  placeholder="Saisir le salaire" />
                                                     </div>
                                                 </div>
                 </td>

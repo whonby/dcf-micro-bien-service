@@ -5,7 +5,40 @@
 
      
 <!----- ajouter modal   ---->
-
+  <div id="exampleModalTypeNorme" class="modal hide tailleModalRecrutement">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">?</button>
+        <h3>Type de Recrutement</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+    <tr>
+      <td>
+       <div class="control-group">
+            <label class="control-label">Type de Recrutement</label>
+            <div class="controls">
+               <select v-model="formEtape.recrutement" class="span5">
+                      <option></option>               
+                      <option value="1">Fonction</option> 
+                       <option value="2">Service</option> 
+                    </select>
+            </div>
+          </div>
+      </td>
+    </tr>
+         
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterTypeTexteLocal"
+          class="btn btn-primary"
+          href="#"
+          v-show="formEtape.recrutement"
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
 
 <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
     <div id="exampleModal" class="modal hide tailgrand12">
@@ -33,7 +66,7 @@
               </td> -->
                <td>
                 <div class="control-group">
-                  <label class="control-label" >Service</label>
+                  <label class="control-label">Service</label>
                   <div class="controls">
                     <select v-model="formData.service_id" class="span5" >
                     
@@ -99,7 +132,11 @@
                   </div>
                 </div>
               </td>
-          <td>
+        
+             
+            </tr>
+            <tr>
+                <td>
                 <div class="control-group">
                   <label class="control-label">Coût moyen</label>
                   <div class="controls">
@@ -116,9 +153,6 @@
                   </div>
                 </div>
               </td>
-             
-            </tr>
-            <tr>
               <td>
                 <div class="control-group">
                   <label class="control-label">Montant Total</label>
@@ -136,7 +170,10 @@
                   </div>
                 </div>
               </td>
-              <td>
+              
+            </tr>
+              <tr>
+                <td colspan="">
                 <div class="control-group">
                   <label class="control-label">Duree de vie</label>
                   <div class="controls">
@@ -145,16 +182,11 @@
                   :value="DureeAffche"
                       class="span5"
                      readonly
-                      
                     />
-                   
-                    
-                    
                   </div>
                 </div>
               </td>
-            </tr>
-              
+              </tr>
              
       
         </table>
@@ -257,7 +289,10 @@
                   </div>
                 </div>
               </td>
-         <td>
+        
+            </tr>
+             <tr>
+                <td>
                 <div class="control-group">
                   <label class="control-label">Coût moyen</label>
                   <div class="controls">
@@ -268,15 +303,10 @@
                      readonly
                       
                     />
-                   
-                    
-                    
                   </div>
                 </div>
               </td>
              
-            </tr>
-             <tr>
               <td>
                 <div class="control-group">
                   <label class="control-label">Montant Total</label>
@@ -294,7 +324,10 @@
                   </div>
                 </div>
               </td>
-              <td>
+             
+            </tr>  
+             <tr>
+                <td colspan="2">
                 <div class="control-group">
                   <label class="control-label">Duree de vie</label>
                   <div class="controls">
@@ -311,8 +344,7 @@
                   </div>
                 </div>
               </td>
-            </tr>  
-             
+             </tr>
       
         </table>
       </div>
@@ -432,6 +464,9 @@ selectionFonction:[],
       	fonction_id:""
      
       },
+           formEtape:{
+recrutement:""
+                },
       editTransfert: {
      	 service_id:"",
        s_ua_id:"",
@@ -682,7 +717,23 @@ DureeAffcheModifier() {
       // "ajouterHistoriqueBudgetGeneral"
     ]),
 
-
+ajouterTypeTexteLocal() {
+      if(this.formEtape.recrutement==1){
+        this.$("#exampleModal").modal('hide');
+       
+       this.$('#ajouterActeEffetFinancierP').modal({
+        backdrop: 'static',
+        keyboard: false
+        
+    });
+    return 1
+      }
+      else if(this.formEtape.recrutement==2){
+         this.$("#exampleModal").modal('hide');
+        this.$router.push({ name: 'AjouterActeur' })
+       
+      }
+    },
 
 
     afficherModalAjouterUniteAdministrative() {
@@ -760,9 +811,11 @@ this.$("#modificationModal").modal('hide');
 <style scoped>
 
 .tailgrand12{
-  width:1500px;
-  margin: 0 -45%;
+  width:60%;
+  margin: 0 -25%;
  
 }
-
+.tailleModalRecrutement{
+   width: 30%;
+ }
 </style>
