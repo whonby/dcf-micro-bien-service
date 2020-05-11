@@ -59,7 +59,7 @@ isButtunAddDossierCandidat
 
                     </div>
                 </div>
-            </div>
+            </div> 
         <template v-if="detail_marche.economique_id == CodeExempte(detail_marche.economique_id) ">
 <executionLigneExempte :macheid="detail_marche.id"></executionLigneExempte>
         </template>

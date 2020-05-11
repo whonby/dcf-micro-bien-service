@@ -348,7 +348,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Salaire</label>
                                                    <div class="controls">
-                                                        <input type="text" class="span12" :value="afficheSalaire(detail.acte_personnel_id)"  placeholder="Saisir le salaire" />
+                                                        <input type="text" class="span12" :value="detail.salaireActeur.montant"  placeholder="Saisir le salaire" />
                                                     </div>
                                                 </div>
                 </td>
@@ -705,18 +705,18 @@ exoEnCours() {
                    this.detail.nom_pere=objetPersonnel.nom_pere,
                    this.detail.nom_mere=objetPersonnel.nom_mere,
                    this.detail.date_debut_contrat=objetPersonnel.date_debut_contrat,
-                    this.detail.code_acte_personnel= objetPersonnel.code_acte_personnel,
-                   this.detail.type_salarie_id= objetPersonnel.type_salarie.id,
-                   this.detail.type_contrat_id=objetPersonnel.type_contrat.id,
+                    // this.detail.code_acte_personnel= objetPersonnel.code_acte_personnel,
+                   this.detail.type_salarie_id= objetPersonnel.type_salarie_id,
+                   this.detail.type_contrat_id=objetPersonnel.type_contrat_id,
                    this.detail.niveau_etude_id=objetPersonnel.niveau_etude.id,
                     this.detail.acteur_depense_id=objetPersonnel.acteur_depense_id.id,
                    this.detail.exercice_budgetaire_id=objetPersonnel.exercice_budgetaire_id,
                    this.detail.unite_administrative_id=objetPersonnel.unite_administrative_id,
-                   this.detail.salaires_id=objetPersonnel.salaireActeur.id,
-                    this.detail.salaires=objetPersonnel.salaireActeur.montant,
-                   this.detail.type_acte_id=objetPersonnel.fonction.id,
-                   this.detail.grade_id=this.grade.id,
-                   this.detail.fonction_id=objetPersonnel.fonction.id,
+                  //  this.detail.salaires_id=objetPersonnel.salaireActeur.id,
+                   this.detail.salaires=objetPersonnel.salaireActeur.montant,
+                   this.detail.type_acte_personnel=objetPersonnel.type_acte_personnel,
+                   this.detail.grade_id=this.grade_id,
+                   this.detail.fonction_id=objetPersonnel.fonction_id,
                    this.detail.plan_budgetaire_id=objetPersonnel.plan_budgetaire_id,
                    this.detail.acte_personnel_id=objetPersonnel.acte_personnel_id
     
@@ -732,7 +732,7 @@ exoEnCours() {
                 
               }
             let modSalaire=this.salairesActeur.find(marche=>marche.acte_personnel_id == this.detail.acte_personnel_id)
-    modSalaire.montant=this.afficheSalaire(this.detail.acte_personnel_id)
+    modSalaire.montant=this.detail.salaireActeur.montant
     modSalaire.date=this.detail.date_debut_contrat
    
     this.modifierSalaire(modSalaire)
