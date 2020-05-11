@@ -198,35 +198,100 @@
           <tr>
             <td>
               
-               <label class="control-label">Année:</label>
+               <label class="control-label">Exercice Budgétaire:</label>
                <div class="controls">
                  <input
                    type="text"
-                  v-model="Année"
+                  v-model="Exercice_Budgétaire"
                    
-                    placeholder="Saisir l'année"
+                    placeholder="Saisir exercice budgétaire"
                     readonly
                  />
                </div>
               
             </td>
-            <!-- <td> -->
-<!--               -->
-                <!-- <label class="control-label">Unite Administrative</label> -->
-                <!-- <div class="controls"> -->
-                  <!-- <select v-model="formData.ua_id" class="span"> -->
-                    <!-- <option -->
-                      <!-- v-for="UniteA in uniteAdministratives" -->
-                      <!-- :key="UniteA.id" -->
-                      <!-- :value="UniteA.id" -->
-                    <!-- >{{UniteA.libelle}}</option> -->
-                  <!-- </select> -->
-                <!-- </div> -->
-<!--                -->
-            <!-- </td> -->
              <td>
   
-    <label class="control-label">Unité Administrative</label>
+    <label class="control-label">Section</label>
+    <div class="controls">
+      <input
+       type="text"
+       v-model="formData.section"
+       class="span"
+      readonly
+      />
+    </div>
+  
+</td>
+                         <td>
+  
+    <label class="control-label">Programme/dotation</label>
+    <div class="controls">
+      <input
+       type="text"
+       v-model="formData.programme"
+       class="span"
+      readonly
+      />
+    </div>
+  
+</td>
+
+                         <td>
+  
+    <label class="control-label">Nature Depense</label>
+    <div class="controls">
+      <input
+       type="text"
+       v-model="formData.gdenature_id"
+       class="span"
+      readonly
+      />
+    </div>
+  
+</td>
+
+
+
+
+            
+          </tr>
+          <tr>
+                         <td>
+  
+    <label class="control-label">Action</label>
+    <div class="controls">
+      <input
+       type="text"
+       v-model="formData.action_id"
+       class="span"
+      readonly
+      />
+    </div>
+  
+</td>
+                          <td>
+  
+    <label class="control-label">Activité</label>
+    <div class="controls">
+      <input
+       type="text"
+       v-model="formData.activite_id"
+       class="span"
+      readonly
+      />
+    </div>
+  
+</td>
+
+
+
+
+
+
+                         <td>
+  
+    <label class="control-label">Unité administrative</label>
     <div class="controls">
       <input
        type="text"
@@ -237,132 +302,87 @@
     </div>
   
 </td>
-             <!-- <td> -->
-<!--                 -->
-                <!-- <label class="control-label">Ligne</label> -->
-                <!-- <div class="controls"> -->
-                  <!-- <select v-model="formData.ligne_id" class="span" :readOnly="activerLigneBudgetaire"> -->
-                    <!-- <option -->
-                      <!-- v-for="lignebudg in afficheUaParLignePersonnel(formData.ua_id)" -->
-                      <!-- :key="lignebudg.id" -->
-                      <!-- :value="lignebudg.afficheEconomique.id" -->
-                    <!-- >{{lignebudg.afficheEconomique.code}}-{{lignebudg.afficheEconomique.libelle}}</option> -->
-                  <!-- </select> -->
-                <!-- </div> -->
-<!--                -->
-            <!-- </td> -->
-                         <td>
-  
-    <label class="control-label">Ligne</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.ligne_id"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-            <!-- <td> -->
-<!--                -->
-                <!-- <label class="control-label">Programme</label> -->
-                <!-- <div class="controls"> -->
-                  <!-- <select v-model="formData.programme_id" class="span" :readOnly="activerProgramme"> -->
-                    <!-- <option value=""></option> -->
-                    <!-- <option -->
-                      <!-- v-for="program in afficheProgrammeParLigne(formData.ligne_id)" -->
-                      <!-- :key="program.id" -->
-                      <!-- :value="program.afficheProgramme.id" -->
-                    <!-- >{{program.afficheProgramme.code}}-{{program.afficheProgramme.libelle}}</option> -->
-                  <!-- </select> -->
-                <!-- </div> -->
-<!--                -->
-            <!-- </td> -->
-            
-          </tr>
-          <tr>
-            <!-- <td> -->
-                <!-- <label class="control-label">Action</label> -->
-                <!-- <div class="controls"> -->
-                  <!-- <select v-model="formData.action_id" :readOnly="activerAction" class="span"> -->
-                    <!-- <option -->
-                      <!-- v-for="act in afficheActionParProgramme(formData.programme_id)" -->
-                      <!-- :key="act.id" -->
-                      <!-- :value="act.afficheAction.id" -->
-                    <!-- >{{act.afficheAction.code}}-{{act.afficheAction.libelle}}</option> -->
-                  <!-- </select> -->
-              <!-- </div> -->
-            <!-- </td> -->
-                         <td>
-  
-    <label class="control-label">Objet de Paiement</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.objetdepaiement"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-            <!-- <td> -->
-<!--              -->
-<!--               -->
-                <!-- <label class="control-label">Activite</label> -->
-                <!-- <div class="controls"> -->
-                  <!-- <select v-model="formData.activite_id" class="span" :readOnly="activerActivite"> -->
-                    <!-- <option -->
-                      <!-- v-for="activ in afficheActiviteParAction(formData.action_id)" -->
-                      <!-- :key="activ.id" -->
-                      <!-- :value="activ.afficheActivite.id" -->
-                    <!-- >{{activ.afficheActivite.code}}-{{activ.afficheActivite.libelle}}</option> -->
-                  <!-- </select> -->
-                <!-- </div> -->
-<!--               -->
-            <!-- </td> -->
-                         <td>
-  
-    <label class="control-label">Mois de Paiement</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.moisdepaiement"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
              <td>
   
-    <label class="control-label">Montant de Paiement</label>
+    <label class="control-label">Type Procédure</label>
     <div class="controls">
       <input
        type="text"
-       v-model="formData.montantdepaiement"
+       v-model="formData.type_procedure"
        class="span"
-       placeholder="Saisir montant de paiement"
+       placeholder="Saisir type procédure"
        readonly
       />
     </div>
   
 </td>
- <!-- <td> -->
-<!--    -->
-    <!-- <label class="control-label">References Bancaires</label> -->
-    <!-- <div class="controls"> -->
-      <!-- <input -->
-       <!-- type="text" -->
-       <!-- v-model="formData.referencebancaire" -->
-       <!-- class="span" -->
-      <!-- readonly -->
-      <!-- /> -->
-    <!-- </div> -->
-<!--    -->
-<!-- </td> -->
-                       <td>
+          </tr>
+
+         <tr>
+             <td>
+   <div class="control-group">
+      <label class="control-label">Numéro Bon Manuel</label>
+      <div class="controls">
+        <input type="text" class="span12" v-model="formData.numero_demande_engage"/>
+      </div>
+    </div>
+  </td>
+   <td>
+   <div class="control-group">
+      <label class="control-label">Numéro demande engagement</label>
+      <div class="controls">
+        <input type="text" class="span12" v-model="formData.numero_engage"/>
+      </div>
+    </div>
+  </td>
+   <td>
+   <div class="control-group">
+      <label class="control-label">Numero Bordereau</label>
+      <div class="controls">
+        <input type="text" class="span12" v-model="formData.numero_bordereau"/>
+      </div>
+    </div>
+  </td>
+   <td>
+   <div class="control-group">
+      <label class="control-label">Date demande engagement</label>
+      <div class="controls">
+        <input type="date" class="span12" v-model="formData.date_demande"/>
+      </div>
+    </div>
+  </td>
+ 
+</tr>
+         
+
+         <tr>
+             
+  <td>
+      <div class="control-group">
+        <label class="control-label">Réf. Engagement  juridique</label>
+        <div class="controls">
+          <input
+            type="text"
+            class="span12"
+            v-model="formData.ref_juridique"
+          />
+        </div>
+      </div>
+    </td>
+    
+     <td>
+      <div class="control-group">
+        <label class="control-label">Numero OP/AT</label>
+        <div class="controls">
+          <input
+            type="text"
+            class="span12"
+            v-model="formData.numero_op"
+          />
+        </div>
+      </div>
+    </td>
+                                 <td>
   <div class="control-group">
     <label class="control-label">Fichier Joint</label>
   
@@ -376,208 +396,6 @@
     </div>
     </div>
 </td>
-          </tr>
-
-          <!-- </table>
-        </div>
-        
-                  </div>
-                  ongle descriptif
-                  <div id="tab2" class="tab-pane">
-                    
-<div class="modal-body">
-      <table class="table table-bordered table-striped"> -->
-         <tr>
-           <!-- <td> -->
-<!--              -->
-             <!-- <div class="control-group"> -->
-                <!-- <label class="control-label">Mode de paiemnt</label> -->
-                <!-- <div class="controls"> -->
-                  <!-- <select v-model="formData.modepaiement_id" class="span"> -->
-                    <!-- <option -->
-                      <!-- v-for="activ in modepaiements" -->
-                      <!-- :key="activ.id" -->
-                      <!-- :value="activ.id" -->
-                    <!-- >{{activ.libelle}}</option> -->
-                  <!-- </select> -->
-                <!-- </div> -->
-              <!-- </div> -->
-            <!-- </td> -->
-           <!--  -->
-                        <td>
-  
-    <label class="control-label">Décision</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.decision"
-       class="span"
-       placeholder="Saisir Décision"
-       readonly
-      />
-    </div>
-  
-</td>
-              <!-- <td> -->
-<!--              -->
-             <!-- <div class="control-group"> -->
-                <!-- <label class="control-label">Banque</label> -->
-                <!-- <div class="controls"> -->
-                  <!-- <select v-model="formData.banque_id" class="span"> -->
-                    <!-- <option -->
-                      <!-- v-for="activ in afficheBanque(formData.ua_id)" -->
-                      <!-- :key="activ.id" -->
-                      <!-- :value="activ.id" -->
-                    <!-- >{{afficheBanqueLibelle(activ.banq_id)}}</option> -->
-                  <!-- </select> -->
-                <!-- </div> -->
-              <!-- </div> -->
-            <!-- </td> -->
-              <!-- <td> -->
-              <!-- <div class="control-group"> -->
-              <!-- <label class="control-label">Compte de disponibilite affecte</label> -->
-               <!-- <div class="controls"> -->
-              <!-- <input -->
-               <!-- type="text" -->
-               <!-- :value="afficherCompteBanque(formData.banque_id)" -->
-               <!-- class="span" -->
-               <!-- readonly -->
-<!--                 -->
-             <!-- /> -->
-            <!-- </div> -->
-          <!-- </div> -->
-          <!-- </td> -->
-             <!-- <td> -->
-              <!-- <div class="control-group" > -->
-                <!-- <label class="control-label">Mois de Paiement:</label> -->
-    
-                <!-- <div class="form-group" > -->
-                <!-- <select v-model="formData.moisdepaiement" class="span"> -->
-                   <!-- <option value="" >Selectionner</option> -->
-                   <!-- <option value="Janvier" >Janvier</option> -->
-                   <!-- <option value="Février">Février</option> -->
-                   <!-- <option value="Mars">Mars</option> -->
-                   <!-- <option value="Avril">Avril</option> -->
-                   <!-- <option value="Mai">Mai</option> -->
-                   <!-- <option value="Juin">Juin</option> -->
-                   <!-- <option value="Juillet">Juillet</option> -->
-                   <!-- <option value="Août">Août</option> -->
-                   <!-- <option value="Septembre">Septembre</option> -->
-                   <!-- <option value="Octobre">Octobre</option> -->
-                   <!-- <option value="Novembre">Novembre</option> -->
-                   <!-- <option value="Decembre">Decembre</option> -->
-<!--                     -->
-<!--                     -->
-<!--                     -->
-     
-                  <!-- </select> -->
-             <!-- </div> -->
-               <!-- </div> -->
-            <!-- </td> -->
-                          <td>
-  
-    <label class="control-label">Validation</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.validation"
-       class="span"
-       placeholder="Saisir validé"
-       readonly
-      />
-    </div>
-  
-</td>
-             <td>
-  
-    <label class="control-label">Date de Validation</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.datevalidation"
-       class="span"
-       placeholder="Saisir date de validation"
-       readonly
-      />
-    </div>
-  
-</td>
-         </tr>
-
-         <tr>
-           <td>
-  
-    <label class="control-label">Tresor</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.Tresor"
-       class="span"
-       placeholder="Saisir le Tresor"
-       
-      />
-    </div>
-  
-</td>
-             <td>
-  
-    <label class="control-label">Don</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.Don"
-       class="span"
-       placeholder="Saisir le Don"
-       
-      />
-    </div>
-  
-</td>
-             <td>
-  
-    <label class="control-label">Emprunt</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.Emprunt"
-       class="span"
-       placeholder="Saisir l'Emprunt"
-       
-      />
-    </div>
-  
-</td>
-          
-             <!-- <td> -->
-              <!-- <div class="control-group"> -->
-                <!-- <label class="control-label">Objet de la depense</label> -->
-<!--      -->
-                <!-- <div class="controls"> -->
-                  <!-- <input -->
-                   <!-- type="text" -->
-                   <!-- v-model="formData.montantdessalaires" -->
-                   <!-- class="span4" -->
-                   <!-- placeholder="Saisir le montant de paiement" -->
-<!--       -->
-                  <!-- /> -->
-                 <!-- </div> -->
-              <!-- </div> -->
-            <!-- </td> -->
-<!--            -->
-                       <!-- <td> -->
-  <!-- <div class="control-group"> -->
-    <!-- <label class="control-label">Pieces Justificative</label> -->
-<!--    -->
-    <!-- <div class="controls"> -->
-      <!-- <input -->
-        <!-- type="file" -->
-        <!-- class="span" -->
-        <!-- placeholder="Saisir fichier joint" -->
-        <!-- readonly -->
-      <!-- /> -->
-    <!-- </div> -->
-    <!-- </div> -->
-<!-- </td> -->
 
          </tr>
       </table>
@@ -585,15 +403,289 @@
                   </div>
 
                   <div id="tab120" class="tab-pane">
-                   <!-- <div id="tab3" class="tab-pane">
-                    
-                  </div> -->
-                  <!--ongle 3 -->
-                  <!-- <div id="tab3" class="tab-pane">
                   
+                                    <div class="modal-body">
+      <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              
+               <label class="control-label">Mode de paiement:</label>
+               <div class="controls">
+                 <input
+                   type="text"
+                  v-model="Mode_paiement"
+                    placeholder="Saisir mode de paiement"
+                   class="span"
+                 />
+               </div>
+              
+            </td>
+             <td>
+  
+    <label class="control-label">N°compte contribuable</label>
+    <div class="controls">
+      <input
+       type="text"
+       v-model="formData.NumeroFournisseur"
+       class="span"
+      readonly
+      />
+    </div>
+  
+</td>
+                         <td>
+  
+    <label class="control-label">Nom entreprise</label>
+    <div class="controls">
+      <input
+       type="text"
+       v-model="formData.programme"
+       class="span"
+      readonly
+      />
+    </div>
+  
+</td>
 
-                   
-                  </div> -->
+                         <td>
+  
+    <label class="control-label">Adresse</label>
+    <div class="controls">
+      <input
+       type="text"
+       v-model="formData.adresse"
+       class="span"
+      readonly
+      />
+    </div>
+  
+</td>
+
+
+
+
+            
+          </tr>  
+                  
+                  <tr>
+            <td>
+              
+               <label class="control-label">Objet de la Depense:</label>
+               <div class="controls">
+                 <input
+                   type="text"
+                  v-model="Mode_paiement"
+                    placeholder="Saisir l'objet de la depense"
+                   class="span"
+                 />
+               </div>
+              
+            </td>
+             <td>
+  
+    <label class="control-label">Numéro compte</label>
+    <div class="controls">
+      <input
+       type="text"
+       v-model="formData.NumeroFournisseur"
+       class="span"
+      readonly
+      />
+    </div>
+  
+</td>
+<td>
+   <div class="control-group">
+     <label class="control-label">piece justificative</label>
+     <div class="controls">
+       <input
+         type="file"
+         class="span"
+        
+       />
+     </div>
+   </div>
+ </td>
+
+
+
+
+                         <td>
+  
+    <label class="control-label">Bailleur</label>
+    <div class="controls">
+      <input
+       type="text"
+       v-model="formData.bailleur"
+       class="span"
+      readonly
+      />
+    </div>
+  
+</td>
+            
+          </tr>            
+               <tr>
+ <td>
+   <div class="control-group">
+      <label class="control-label">Total général</label>
+      <div class="controls">
+        <input type="number" class="span12" :value="sommeMontant" readonly/>
+      </div>
+    </div>
+  </td>
+ 
+  <td>
+   <div class="control-group">
+      <label class="control-label">Trésor</label>
+      <div class="controls">
+        <input type="number" class="span12" v-model="formData.montant_tresor" />
+      </div>
+    </div>
+  </td>
+    <td>
+    <div class="control-group">
+      <label class="control-label">Don</label>
+      <div class="controls">
+        <input type="number" class="span12" v-model="formData.montant_don" />
+      </div>
+    </div>
+  </td>
+  <td>
+       <div class="control-group">
+      <label class="control-label">Emprunt</label>
+      <div class="controls">
+        <input type="number" class="span12" v-model="formData.montant_emprunt" />
+      </div>
+    </div>
+  </td>
+</tr>
+   
+            <tr>
+            <td>
+              
+               <label class="control-label">Ligne Budgétaire:</label>
+               <div class="controls">
+                 <input
+                   type="text"
+                  v-model="ligne_id"
+                    placeholder="Saisir ligne budgétaire"
+                   class="span"
+                 />
+               </div>
+              
+            </td>
+             <td>
+  
+    <label class="control-label">Imputation Budgétaire</label>
+    <div class="controls">
+      <input
+       type="text"
+       v-model="formData.Imp_budgetaire"
+       class="span"
+      readonly
+      />
+    </div>
+  
+</td>
+                         <td>
+  
+    <label class="control-label">Numéro Facture</label>
+    <div class="controls">
+      <input
+       type="text"
+       v-model="formData.num_facture"
+       class="span"
+      readonly
+      />
+    </div>
+  
+</td>
+
+  <td>
+  
+    <label class="control-label">Montant Facture</label>
+    <div class="controls">
+      <input 
+      type="number"  
+       v-model="formData.montant_fact"
+       class="span"
+        />
+    
+  </div>
+</td>
+
+            
+          </tr>                
+
+                 <tr>
+            <td>
+              
+               <label class="control-label">Crédit Autorisé:</label>
+               <div class="controls">
+                 <input
+                   type="text"
+                  v-model="credit_auto"
+                    placeholder="Saisir crédit autorisé"
+                   class="span"
+                 />
+               </div>
+              
+            </td>
+             <td>
+  
+    <label class="control-label">Cumul des demandes(y compris celle-ci)</label>
+    <div class="controls">
+      <input
+       type="text"
+       v-model="formData.cumul_demande"
+       class="span"
+      readonly
+      />
+    </div>
+  
+</td>
+             <td>
+  
+    <label class="control-label">Dotation Disponible</label>
+    <div class="controls">
+      <input
+       type="text"
+       v-model="formData.dotation_dispo"
+       class="span"
+      readonly
+      />
+    </div>
+  
+</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 </tr>
+
+      </table>   
+                 </div>
                   </div>
                 </div>
                 <br />
@@ -646,41 +738,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                   <br />
 
 
@@ -714,21 +771,34 @@ export default {
       ],
          formData: {
   // 
-  Année:"",
-   datevalidation:"",
+  Exercice_Budgétaire:"",
+   section:"",
+   programme:"",
+   gdenature_id:"",
    action_id:"",
+   activite_id:"",
    ua_id: "",
-   moisdepaiement: "",
-   montantdessalaires: "",
-   objetdepense:"",
-   ligne_id:"",
+   type_procedure: "",
+   numero_demande_engage: "",
+  numero_engage:"",
+  numero_bordereau:"",
    fichierjoint:"",
-   validation:"",
-   decision:"",
-   Tresor:"",
-   Don:"",
-   Emprunt:"",
-  
+  ref_juridique:"",
+  numero_op:"",
+  NumeroFournisseur:"",
+  adresse:"",
+  sommeMontant:"",
+  montant_tresor:"",
+  montant_don:"",
+  montant_emprunt:"",
+  ligne_id:"",
+  Imp_budgetaire:"",
+  num_facture:"",
+  montant_fact:"",
+  credit_auto:"",
+  cumul_demande:"",
+  dotation_dispo:"",
+
  },
      
       json_fields: {
