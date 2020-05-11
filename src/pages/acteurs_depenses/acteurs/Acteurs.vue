@@ -1,5 +1,5 @@
 
-
+macheid
 
 <template>
     <div id="">
@@ -35,7 +35,8 @@
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab10">Listes du personnel    <span class="badge badge-inverse">{{totalActeurDepense}}</span></a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab10">Listes personnel     <span class="badge badge-inverse">{{totalActeurDepense}}</span></a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab78">Contrat Récrutement Direct      <span class="badge badge-info">{{nbreContratRecrutementDirect}}</span></a></li>
                                 <li class=""><a data-toggle="tab" href="#tab19">Listes des acteurs de depenses   <span class="badge badge-success">{{afficheNombrePersonnelRecuActeNormination}}</span></a> </li>
                                 <li class=""><a data-toggle="tab" href="#tab30">Acteurs non actif</a></li>
                                   <!-- <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{0}}</span></a></li>
@@ -47,8 +48,70 @@
                         <div class="widget-content tab-content">
                 
                          
-                         
-                         
+                         <div id="tab78" class="tab-pane">
+                           <div class="widget-box">
+                             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+                                        <!-- <h5>Listes des contrats</h5>
+                                        <div align="right">
+                                            Search: <input type="text" v-model="search">
+                                        </div> -->
+                                    </div>
+                             <div class="widget-content nopadding">
+                                             <table class="table table-bordered table-striped">
+                                               <thead>
+                    <tr>
+
+                        <th>Reference acte </th>
+                        <th>Date Debut </th>
+                        <th>Date Fin </th>
+                        <th>Duree </th>
+                        <th>Autorite Approbation </th>
+                        <th>Date Attributaire </th>
+                        <th>Montant acte</th>
+                       
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="odd gradeX" v-for=" effetFinancier in listeActeEffectFinnancier"
+                        :key="effetFinancier.id">
+                        
+                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.reference_act || 'Non renseigné'}}</td>
+                            <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{formaterDate(effetFinancier.date_odre_service) || 'Non renseigné'}}</td>
+                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{formaterDate(effetFinancier.date_fin_exe) || 'Non renseigné'}}</td>
+                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.duree || 'Non renseigné'}}</td>
+                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.autorite_approbation || 'Non renseigné'}}</td>
+                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{formaterDate(effetFinancier.date_approbation) || 'Non renseigné'}}</td>
+                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{formatageSomme(parseFloat(effetFinancier.montant_act ))|| 'Non renseigné'}}</td>
+                                               <td >
+  <span v-if="effetFinancier.activationD != 1">
+   <router-link :to="{ name: 'AjouterPersoRecrutementDirect', params: { id: effetFinancier.id }}" class="btn btn-default " title="Ajouter personnel recrutement direct">
+                                                            <span class=""><i class="icon-folder-open"></i></span>
+                                                        </router-link>
+  </span>
+  <span v-else></span>
+</td>
+                             
+<td>
+      <div class="btn-group">
+                            <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
+                                <span class=""><i class="icon-trash"></i></span>
+                            </button>
+                        </div>
+</td>
+                    </tr>
+                    </tbody>
+                                             </table>
+                             </div>
+                         </div>
+                         </div>
                          
                             <div id="tab10" class="tab-pane active">
                                 <div class="widget-box">
@@ -76,13 +139,7 @@
                                             </thead>
                                             <tbody>
                                             <tr class="odd gradeX" v-for="item in acteurActivite" :key="item.id">
-                                                  <!-- <td @dblclick="afficherModalModifierTitre(item.id)">{{item.situation_matrimonial || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.matricule || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.nom || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_naissance) }}</td>
-                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{item.uniteAdmin.libelle || 'Non renseigné'}}</td> -->
-                                                 <!-- <td >{{item.situation_matrimonial || 'Non renseigné'}}</td> -->
+  
                                                 <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.nom || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.prenom || 'Non renseigné'}}</td>
@@ -546,7 +603,7 @@ recrutement:""
              
              
              
-             difference_personnel_bienService:"3"
+             difference_personnel_bienService:"4"
         },
                 formData : {
                     matricule: "",
@@ -627,6 +684,17 @@ recrutement:""
                 "getActeEffetFinancierPersonnaliserContrat", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
  ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
    ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe','planActe']),
+
+         listeActeEffectFinnancier: function () {
+               
+                        return this.getActeEffetFinancierPersonnaliserContrat.filter(idmarche => idmarche.difference_personnel_bienService == 4)
+                 
+            },
+            nbreContratRecrutementDirect() {
+               
+                        return this.listeActeEffectFinnancier.length
+                 
+            },
  affichierIdActeFinancierDansActePlan() {
       const qtereel = this.planActe.find(
         qtreel => qtreel.code == "02",
@@ -941,9 +1009,11 @@ AffichierElementParent() {
             // entreprise_id:"",
              
              
-             difference_personnel_bienService:"3"
+             difference_personnel_bienService:"4"
 
     }
+    
+    
 },
 
 
@@ -953,6 +1023,10 @@ AffichierElementParent() {
 
          afficherModalAjouterTitre(){
                 this.$router.push({ name: 'AjouterActeur' })
+            },
+            afficheFormulaireAjoutRecrutement(){
+
+this.$router.push({ name: 'AjouterPersoRecrutementDirect' })
             },
 //  afficherModalAjouterPersonnel() {
 //       this.$("#exampleModal").modal({

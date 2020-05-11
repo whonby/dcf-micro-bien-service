@@ -56,11 +56,11 @@
                                                     </div>
                                                 </div>
                 </td>
-                <td colspan="2">
+                <td colspan="4">
                      <div class="control-group">
                                                     <label class="control-label">L'unite administrative:</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.unite_administrative_id" class="span12">
+                                                        <select v-model="formData.unite_administrative_id" class="span24">
                                                             <option></option>
                                                             <option v-for="item in uniteAdministratives" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -70,20 +70,18 @@
                                                     </div>
                                                 </div>
                 </td>
-                <td colspan="2">
+                <!-- <td colspan="2">
                      <div class="control-group">
                                                     <label class="control-label">Marché</label>
                                                     <div class="controls">
                                                         <select v-model="formData.marche_id" class="span12">
                                                             <option></option>
-                                                            <option v-for="item in recupererMarcheUA(formData.unite_administrative_id)" :key="item.id" :value="item.id">
-                                                                {{item.objet}}
-                                                            </option>
+                                                            
 
                                                         </select>
                                                     </div>
                                                 </div>
-                </td>
+                </td> -->
                 
                       
                 
@@ -96,20 +94,16 @@
                      <div class="control-group">
                                                     <label class="control-label">Reference Acte</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.reference_acte"  class="span12">
-                                                            <option></option>
-                                                            <option v-for="item in recupererReferenceActe(formData.marche_id)" :key="item.id" :value="item.reference_act">
-                                                                {{item.reference_act}}
-                                                            </option>
+                                                         <input type="text" readonly :value="DetailRecrutement.reference_act"  placeholder="Saisir le matricule" class="span12"/>
 
-                                                        </select>
+                                                        
                                                     </div>
                                                 </div>
                                                 
                 </td>
                 <td>
  
-                                                    <label class="control-label">Matricule:</label>
+                                                    <label class="control-label">Matricule</label>
                                                     <div class="controls">
                                                         <input type="text"  v-model="formData.matricule"  placeholder="Saisir le matricule" class="span12"/>
                                                     </div>
@@ -117,17 +111,17 @@
                 </td>
                <td>
                     <div class="control-group">
-                                                    <label class="control-label">Nom:</label>
+                                                    <label class="control-label">Nom</label>
                                                     <div class="controls">
-                                                        <input type="text" readonly  :value="afficheNomCandidat(afficheIdCandidat(afficheIdActeurDepense(formData.reference_acte)))"  placeholder="Saisir le nom" class="span12" />
+                                                        <input type="text" v-model="formData.nom"  placeholder="Saisir le nom" class="span12" />
                                                     </div>
                                                 </div>
                 </td>
                 <td colspan="2">
                      <div class="control-group">
-                                                    <label class="control-label">Prenom:</label>
+                                                    <label class="control-label">Prenoms</label>
                                                     <div class="controls">
-                                                        <input type="text" readonly :value="affichePreNomCandidat(afficheIdCandidat(afficheIdActeurDepense(formData.reference_acte)))"  placeholder="Saisir le prenom" class="span12"/>
+                                                        <input type="text" v-model="formData.prenom"  placeholder="Saisir le prenom" class="span12"/>
                                                     </div>
                                                 </div>
                 </td>
@@ -335,9 +329,8 @@
                
               <td colspan="2">
                 <div class="control-group">
-                                                    <label class="control-label">Ligne budgetaires:</label>
+                                                    <label class="control-label">Ligne budgetaires</label>
                                                     <div class="controls">
-
                                                         <select v-model="formData.plan_budgetaire_id" class="span">
                                                             <option v-for="item in afficheBudgetPersonnel(formData.unite_administrative_id)" :key="item.id" :value="item.economique_id">
                                                                {{item.afficheEconomique.code}} - {{item.afficheEconomique.libelle}}
@@ -351,7 +344,7 @@
                     
                 <td colspan="2">
                      <div class="control-group">
-                                                    <label class="control-label">Salaire:</label>
+                                                    <label class="control-label">Salaire</label>
                                                     <div class="controls">
                                                         <input type="number" readonly :value="afficheSalairePersonnel"  placeholder="Saisir le salaire" class="span12"/>
                                                     </div>
@@ -451,6 +444,7 @@
 
         data() {
             return {
+              DetailRecrutement: undefined,
                 fabActions: [
                     {
                         name: 'cache',
@@ -495,13 +489,14 @@
 
             };
         },
+ created() {
+    this.getDetail()
+  },
 
-        created() {
-            this.allActeurDepense();
-            //    this.getActeur()
-            //  console.log(this.fonctions)
-            // console.log(this.getFonction)
-        },
+  watch: {
+    '$route' : 'getDetail'
+  },
+        
         computed: {
 // methode pour maper notre guetter
             ...mapGetters('personnelUA', ["dossierPersonnels","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
@@ -559,7 +554,7 @@
       };
     },
        afficheSalairePersonnel() {
-      const val = parseFloat(this.afficheMontantActe(this.formData.reference_acte)) / this.NombreMois;
+      const val = parseFloat(this.afficheMontantActe(this.DetailRecrutement.reference_act)) / this.NombreMois;
       
        if (val) {
         return parseFloat(val).toFixed(0);
@@ -568,7 +563,7 @@
       return 0
     },
      NombreMois() {
-      const val = parseFloat(this.afficheDure(this.formData.reference_acte)) * parseFloat(0.032854884084021);
+      const val = parseFloat(this.afficheDure(this.DetailRecrutement.reference_act)) * parseFloat(0.032854884084021);
       
        if (val) {
         return Math.round(val);
@@ -769,9 +764,28 @@ exoEnCours() {
       return 0
         }
       };
+      
+    },
+     afficheIdActeFin() {
+      return idActe => {
+        if (idActe != null && idActe != "") {
+           const qtereel = this.getActeEffetFinancierPersonnaliserContrat.find(qtreel => qtreel.reference_act == idActe);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+      
     },
         },
         methods: {
+          getDetail(){
+        this.DetailRecrutement = this.getActeEffetFinancierPersonnaliserContrat.find(
+      immobilisat => immobilisat.id == this.$route.params.id
+    );
+          },
             // methode pour notre action
             ...mapActions('personnelUA', ['getActeur',"ajouterActeur","supprimerActeurs","getNbrActeurAcrediteTaux","allActeurDepense"]),
             ...mapActions('bienService',['supprimerActeEffetFinancier',
@@ -795,17 +809,15 @@ exoEnCours() {
                 normeequipement:this.nombreDeFonction(this.formData.fonction_id),
                 historiquenormequipement:this.nombreDeFonction(this.formData.fonction_id),
                 montantequipement:this.montantPourEtreEquipe(this.formData.fonction_id),
-                  nom : this.afficheNomCandidat(this.afficheIdCandidat(this.afficheIdActeurDepense(this.formData.reference_acte))),
-                  prenom :this.affichePreNomCandidat(this.afficheIdCandidat(this.afficheIdActeurDepense(this.formData.reference_acte))),
-                  
+                 reference_acte:this.DetailRecrutement.reference_act,
                   salaires:this.afficheSalairePersonnel
                
               }
-               let modifierActive=this.acteEffetFinanciers.find(marche=>marche.candidat_personnel_id == this.afficheIdActeurDepense(this.formData.reference_acte))
-    modifierActive.activationD = 1
+               let modact=this.getActeEffetFinancierPersonnaliserContrat.find(marche=>marche.id == this.afficheIdActeFin(this.DetailRecrutement.reference_act))
+    modact.activationD = 1
     
    
-    this.modifierActeEffetFinancier(modifierActive)
+    this.modifierActeEffetFinancier(modact)
                 console.log(this.formData)
                 this.ajouterActeur(nouveauObjet)
                 this.getActeur()
