@@ -180,7 +180,7 @@
                        <input
                       type="text"
                   :value="DureeAffche"
-                      class="span10"
+                      class="span5"
                      readonly
                     />
                   </div>
@@ -334,7 +334,7 @@
                        <input
                       type="text"
                   :value="DureeAffcheModifier"
-                      class="span10"
+                      class="span5"
                      readonly
                       
                     />
@@ -811,8 +811,8 @@ this.$("#modificationModal").modal('hide');
 <style scoped>
 
 .tailgrand12{
-  width:1500px;
-  margin: 0 -45%;
+  width:60%;
+  margin: 0 -25%;
  
 }
 .tailleModalRecrutement{

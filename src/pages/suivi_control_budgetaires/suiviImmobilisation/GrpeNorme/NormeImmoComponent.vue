@@ -28,11 +28,11 @@
                   <tr>
                     <!-- <th >Unite administrative</th> -->
                      <!-- <th style="width:30%">Direction</th> -->
-                     <th style="width:20%">Service</th>
-                       <th style="width:20%">Fonction</th>
+                     <th >Service</th>
+                       <th >Fonction</th>
                         
-                    <th style="width:20%">Norme</th>
-                     <th>Action</th>
+                    <th>Norme</th>
+                     <th style="width:40%">Action</th>
                   </tr>
                 </thead>
                 <tbody>
