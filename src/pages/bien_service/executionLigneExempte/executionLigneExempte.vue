@@ -1075,7 +1075,7 @@ modifierModalActeEffetFinancierLocal(){
             ...this.editActeEffetFinancier,
             duree: this.nombreDejourCalcule,
             	marche_id:this.macheid,
-                compte_id:this.afficherIdCompte(editActeEffetFinancier.banq_id)
+                compte_id:this.afficherIdCompte(this.editActeEffetFinancier.banq_id)
         }
     this.modifierActeEffetFinancier(nouvelObjet)
     this.$('#modifierActeEF').modal('hide');
