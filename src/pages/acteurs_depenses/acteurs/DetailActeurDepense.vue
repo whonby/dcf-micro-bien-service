@@ -847,7 +847,7 @@
               </thead>
               <tbody v-if="acteur_id">
                 <tr class="odd gradeX" v-for="(historiqueMission, index) in 
-                getMissionPersonnaliser"
+                historiqueMissionParActeur(acteurDetail.acte_personnel_id)"
                  :key="historiqueMission.id">
 
                  
@@ -994,7 +994,7 @@
                 </thead>            
                 <tbody>
                      
-                     <tr class="odd gradeX" v-for="item in personnaliseActeurDepense" :key="item.id">
+                     <tr class="odd gradeX" v-for="item in afficherListeContratResilie(acteurDetail.id)" :key="item.id">
                                                  
                                                  
                                                 <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}</td>
@@ -1807,6 +1807,8 @@
 
    ...mapGetters("SuiviImmobilisation", ["services"]),
 
+    ...mapGetters('suivi_controle_budgetaire', ["categories_missions" ,"getMissionPersonnaliser", "missions", "historiques_missions","getHistoriqueMissionpersonnaliser"]),
+
 // historiqueMissionParActeur(){
 //    return acte_personnel_id =>{
 //        if(acte_personnel_id !=""){
@@ -1818,6 +1820,20 @@
 
 //  //console.log(historiqueMissionParActeur);
 // },
+
+historiqueMissionParActeur(){
+    return id =>{
+        if(id!=null && id!=""){
+            return this.getMissionPersonnaliser.filter(element =>element.acte_personnel_id==id)
+        }
+    }
+},
+
+
+
+
+
+
 
  afficherNumeroMarche() {
       return id => {
@@ -2141,6 +2157,17 @@ return element;
            }
        }
    },
+
+
+afficherListeContratResilie(){
+       return id =>{
+           if(id!=null && id!=""){
+             return this.personnaliseActeurDepense.filter(item =>item.id==id && this.afficherCauseResilier(this.afficheNumeroActe(item.acte_personnel_id ))!=null) 
+           }
+       }
+   },
+
+
 
 
 // enregistrement ID de personnel
