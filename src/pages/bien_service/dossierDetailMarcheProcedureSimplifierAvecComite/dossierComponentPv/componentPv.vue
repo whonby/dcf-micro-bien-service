@@ -149,7 +149,7 @@
               </div>
 
 
-             <div id="ajouterPvBienservice" class="modal hide " aria-hidden="true" style="display: none;">
+             <div id="modifierRapportJugements" class="modal hide " aria-hidden="true" style="display: none;">
 
 
                          <div class="modal-header">
@@ -434,11 +434,8 @@ affichierAppelOffreid() {
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.editRapport = this.rapportDocuments[index];
+                this.editRapport = this.listeRapport(this.macheid)[index];
             },
-
-           
-         
           
            ajouterRapportJugementLocal(){
 
