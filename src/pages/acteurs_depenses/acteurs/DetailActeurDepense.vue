@@ -809,23 +809,7 @@
 
                                    
                            <div id="tab5" class="tab-pane">
-                           <div class="container-fluid">
-                                      <div class="row-fluid">
-                                        <div class="span12">
-                                            <!-- <div>
-
-                                        <download-excel
-                                            class="btn btn-default pull-right"
-                                            style="cursor:pointer;"
-                                              :fields = "json_fields"
-                                              title="Liste des historiques de missions"
-                                              name ="Liste des missions"
-                                              worksheet = "Missions"
-                                            :data="historiques_missions">
-                      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
-
-                                                 </download-excel> 
-                                     </div> <br> -->
+                          
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des missions par acteur</h5>
@@ -847,7 +831,7 @@
               </thead>
               <tbody v-if="acteur_id">
                 <tr class="odd gradeX" v-for="(historiqueMission, index) in 
-                getMissionPersonnaliser"
+                historiqueMissionParActeur(acteurDetail.acte_personnel_id)"
                  :key="historiqueMission.id">
 
                  
@@ -883,9 +867,9 @@
           </div>
         </div>
       </div>
-              </div>
-            </div>
-            </div>
+              
+            
+            
 
 
                   <div id="tab301" class="tab-pane">
@@ -994,7 +978,7 @@
                 </thead>            
                 <tbody>
                      
-                     <tr class="odd gradeX" v-for="item in personnaliseActeurDepense" :key="item.id">
+                     <tr class="odd gradeX" v-for="item in afficherListeContratResilie(acteurDetail.id)" :key="item.id">
                                                  
                                                  
                                                 <td @dblclick="afficherModalModifierTitre(item.id)" >{{item.matricule || 'Non renseigné'}}</td>
@@ -1807,6 +1791,8 @@
 
    ...mapGetters("SuiviImmobilisation", ["services"]),
 
+    ...mapGetters('suivi_controle_budgetaire', ["categories_missions" ,"getMissionPersonnaliser", "missions", "historiques_missions","getHistoriqueMissionpersonnaliser"]),
+
 // historiqueMissionParActeur(){
 //    return acte_personnel_id =>{
 //        if(acte_personnel_id !=""){
@@ -1818,6 +1804,20 @@
 
 //  //console.log(historiqueMissionParActeur);
 // },
+
+historiqueMissionParActeur(){
+    return id =>{
+        if(id!=null && id!=""){
+            return this.getMissionPersonnaliser.filter(element =>element.acte_personnel_id==id)
+        }
+    }
+},
+
+
+
+
+
+
 
  afficherNumeroMarche() {
       return id => {
@@ -2141,6 +2141,17 @@ return element;
            }
        }
    },
+
+
+afficherListeContratResilie(){
+       return id =>{
+           if(id!=null && id!=""){
+             return this.personnaliseActeurDepense.filter(item =>item.id==id && this.afficherCauseResilier(this.afficheNumeroActe(item.acte_personnel_id ))!=null) 
+           }
+       }
+   },
+
+
 
 
 // enregistrement ID de personnel

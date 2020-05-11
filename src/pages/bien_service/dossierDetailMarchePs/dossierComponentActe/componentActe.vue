@@ -100,6 +100,7 @@ afficherBanqueDynamique
                     </div>
 
                     
+
                             </td>
 
                             <td>
@@ -967,6 +968,7 @@ AffichierElementParent() {
     affichierNomEntreprise() {
       return id => {
         if (id != null && id != "") {
+
          return this.getterDossierCandidats.filter(qtreel => qtreel.marche_id == id);
 
          
@@ -974,6 +976,9 @@ AffichierElementParent() {
        
       };
     },
+
+
+
 
 
 

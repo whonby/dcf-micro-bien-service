@@ -12,6 +12,7 @@ import ActeurDetail from "../../pages/acteurs_depenses/acteurs/DetailActeurDepen
 import TableauBordActeurDepense from "../../pages/acteurs_depenses/TableauBord.vue"
 import Conge from "../../pages/acteurs_depenses/conges/Conge.vue"
 import AjouterActeur from "../../pages/acteurs_depenses/acteurs/AjouteActeurDepense.vue"
+import AjouterPersoRecrutementDirect from "../../pages/acteurs_depenses/acteurs/AjouterPersoRecrutementDirect.vue"
 import EditActeurDepense from "../../pages/acteurs_depenses/acteurs/EditeActeurDepense.vue"
 import CategorieGrade from "../../pages/acteurs_depenses/CategorieGrade/CategorieGrade.vue";
 import familleEmploie from "../../pages/acteurs_depenses/fonction/familleEmploie.vue";
@@ -31,6 +32,11 @@ const ActeurDepenseRoutes = [
  
  
  
+  {
+    path: "/RecrutementDirect/:id",
+  name: "AjouterPersoRecrutementDirect",
+  component: AjouterPersoRecrutementDirect
+  },
   {
     path: '/detailExecutionPersonnel/:id',
     name: "detailExecutionPersonnel",
