@@ -813,8 +813,8 @@ exoEnCours() {
                   salaires:this.afficheSalairePersonnel
                
               }
-               let modact=this.getActeEffetFinancierPersonnaliserContrat.find(marche=>marche.id == this.afficheIdActeFin(this.DetailRecrutement.reference_act))
-    modact.activationD = 1
+               let modact=this.acteEffetFinanciers.find(marche=>marche.id == this.afficheIdActeFin(this.DetailRecrutement.reference_act))
+                modact.activationD = 2
     
    
     this.modifierActeEffetFinancier(modact)
