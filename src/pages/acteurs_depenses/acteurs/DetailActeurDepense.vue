@@ -334,7 +334,7 @@ type_acte_id
 
 
 
-                                             <div id="modifierCompte" class="modal hide tailModal" aria-hidden="true" style="display: none;">
+         <div id="modifierCompte" class="modal hide tailModal" aria-hidden="true" style="display: none;">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Modifier compte</h3>
@@ -1581,9 +1581,11 @@ type_acte_id
  </div>
         </div>
 
+        
 
 
 
+        
 
 
 
@@ -2419,6 +2421,7 @@ enregistreIdPersonnel(){
 
                 this.editCompte = this.afficheCompteEntreprise[index];
             },
+            
          
 
  
@@ -2438,7 +2441,7 @@ enregistreIdPersonnel(){
          rib:this.afficherCodeRibEditCompte
       
        };
-              this.modifierCompte(nouvelObjet)
+              this.modifierCompte(nouvelObjet2)
               this.$('#modifierCompte').modal('hide');
             },
 
