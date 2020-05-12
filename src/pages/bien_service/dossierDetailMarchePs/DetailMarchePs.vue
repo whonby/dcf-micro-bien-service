@@ -518,9 +518,11 @@ isButtunAddDossierCandidat
                    <dossier-Candidat :macheid="detail_marche.id"></dossier-Candidat>
                 </div>
                   <div id="tab5498" class="tab-pane">
+                      
                 <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterMP" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterMP" data-toggle="modal" class="btn btn-primary" >Ajouter</a>
+                       
                     </div>
 
 
@@ -787,7 +789,7 @@ isButtunAddDossierCandidat
                        <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" v-if="listeAvisAnoBailleur(macheid)">Ajouter</a>
-                          <button class="btn btn-warning"  title="veillez recommencer le jugement , car l'Avis Bailleur est Objection" disabled v-else  >Ajouter</button>
+                          <button class="btn btn-primary"  title="veillez recommencer le jugement , car l'Avis Bailleur est Objection" disabled v-else  >Ajouter</button>
                    
                     </div>
 
@@ -1037,6 +1039,23 @@ listeAvisAnoBailleur(){
            return null
        }
    },
+
+
+// activationButtonJugement(){
+//     return id =>{
+//         if(id!=null && id!=""){
+//             let objet = this.getterDossierCandidats.find(item =>item.marche_id==id && item.numero_dossier==null)
+//             return objet  
+//         }
+//         return null
+//     }
+    
+// },
+
+
+
+
+
 
 
   afficherCodeTypeProcedure() {

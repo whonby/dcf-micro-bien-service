@@ -51,6 +51,22 @@
             </router-link>
           </li>
 
+          
+     <li>
+            <router-link :to="{name: 'Mission'}" tag="a">
+              SUIVI DES MISSIONS
+            </router-link>
+          </li>
+
+
+
+                
+     <!-- <li>
+            <router-link :to="{name: '#'}" tag="a">
+              EXECUTION DE MISSIONS
+            </router-link>
+          </li> -->
+
  <!-- <li>
             <router-link :to="{name: 'paiementPersonnel'}" tag="a">
               PAIEMENT DU PERSONNEL
@@ -68,12 +84,11 @@
             </router-link>
           </li> -->
 
-
   
      
      
 
-
+<!-- 
 <li class="dropdown" id="mission">
         <a
           title="Suivi des missions"
@@ -101,12 +116,7 @@
             </router-link>
           
           </li>
-          <!-- <li class="divider"></li>
-            <li> 
-              <router-link :to ="{name: 'Imputation'}" tag="a">
-                <i class="icon-user"></i> Imputation budget en mission
-              </router-link>
-            </li> -->
+          
           <li class="divider"></li>
           <li>
             <router-link :to ="{name: 'Mission'}" tag="a">
@@ -115,7 +125,8 @@
             </router-link>
           </li>
         </ul>
-      </li>
+      </li> -->
+
 
         <!-- <li>
         <router-link
