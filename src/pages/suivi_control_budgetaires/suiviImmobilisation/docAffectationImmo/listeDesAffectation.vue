@@ -935,7 +935,7 @@
                     >{{afficheFonction(BesoinImmo.fonction_id)}}</td>
                     <td style="text-align: center;"
                       @dblclick="afficherModalModifierDirection(index)"
-                    >{{afficherActeurDepense(BesoinImmo.acteur_depense_id) || 0}}</td>
+                    >{{afficherActeurDepense(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td>
                    
                       <td style="text-align: center;">
                       
@@ -2091,22 +2091,22 @@ return this.exercices_budgetaires.filter(element => element.encours == 1)
 afficherActeurDepense() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.id == id);
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
 
       if (qtereel) {
-        return qtereel.matricule.concat('    ', qtereel.nom,'     ',qtereel.prenom);
+        return qtereel.acteur_depense.matricule.concat('    ', qtereel.acteur_depense.nom,'     ',qtereel.acteur_depense.prenom);
       }
-      return 0
+      return 'Non renseigné'
         }
       };
     },
 afficherActeurDepenseMatricule() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.id == id);
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
 
       if (qtereel) {
-        return qtereel.matricule;
+        return qtereel.acteur_depense.matricule;
       }
       return 0
         }
@@ -2354,7 +2354,7 @@ CoutMoyen() {
 afficheActeurDepense() {
       return id => {
         if (id != null && id != "") {
-          return this.all_acteur_depense.filter(element => element.fonction.id == id);
+          return this.personnaFonction.filter(element => element.fonctionActeur.id == id);
         }
       };
     },

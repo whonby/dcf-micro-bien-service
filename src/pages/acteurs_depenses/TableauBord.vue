@@ -81,6 +81,15 @@
                 <li class="bg_ls"> <a href="#"> <i class="icon-fullscreen"></i> <span class="label label-important" v-if="tauxActeurAccredite!='NaN'">{{tauxActeurAccredite || '0' }} %</span>
                     Taux acteurs acredité
                 </a> </li>
+                <li class="bg_ly">
+                    <a href="#">
+                        <i class="icon-inbox"></i><span class="label label-important">{{totalActeurAccredite}}</span> Total acteur accredité
+                    </a>
+                </li>
+                <li class="bg_lb"> <a href="#"> <i class="icon-th"></i> <span class="label label-important">{{totalActeurNonAccredite}}</span> Total acteur non accredité</a> </li>
+                <li class="bg_ls"> <a href="#"> <i class="icon-fullscreen"></i> <span class="label label-important" v-if="tauxActeurAccredite!='NaN'">{{tauxActeurAccredite || '0' }} %</span>
+                    Taux acteurs acredité
+                </a> </li>
             </ul>            
             </div>
             </div>
@@ -187,8 +196,8 @@
 
       // "nbreArchivageNotes"
     ]),
-  ...mapGetters('personnelUA', ['acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions",
-                "grades","niveau_etudes","nbr_acteur_actredite_taux","all_acteur_depense",
+  ...mapGetters('personnelUA', ['totalActeurNonAccredite','acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions",
+                "grades","niveau_etudes","nbr_acteur_actredite_taux","all_acteur_depense","totalActeurAccredite",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
                 
 

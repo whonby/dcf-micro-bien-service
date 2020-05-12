@@ -1,6 +1,3 @@
-
-macheid
-afficherModalRecrutementDirect
 <template>
     <div id="">
         <notifications />
@@ -871,7 +868,7 @@ recrutement:""
             // console.log(this.getFonction)
         },
         computed: {
-            ...mapGetters('personnelUA', ["afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
+            ...mapGetters('personnelUA', ["personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
              ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
@@ -981,17 +978,15 @@ AffichierElementParent() {
         }
       };
     },
-    afficherModalRecrutementDirect(){
 
-  var nouvelObjet2 = {
-            ...this.editEffetFinancier,
-            duree: this.nombreDejourCalculeEdit,
-           
-        }
 
-    this.modifierActeEffetFinancierP(nouvelObjet2)
-    this.$('#modifierActeEF').modal('hide');
-},
+
+
+
+
+
+
+
 
     
 
@@ -1107,10 +1102,10 @@ AffichierElementParent() {
             afficheNomPersonnel() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.id == id);
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
 
       if (qtereel) {
-        return qtereel.nom;
+        return qtereel.acteur_depense.nom;
       }
       return 0
         }
@@ -1119,10 +1114,10 @@ AffichierElementParent() {
  affichePrenomsPersonnel() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.id == id);
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
 
       if (qtereel) {
-        return qtereel.prenom;
+        return qtereel.acteur_depense.prenom;
       }
       return 0
         }
@@ -1131,10 +1126,10 @@ AffichierElementParent() {
     afficheMatriculePersonnel() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.id == id);
+           const qtereel = this.personnaFonction.find(qtreel => qtreel.acteur_depense.id == id);
 
       if (qtereel) {
-        return qtereel.matricule;
+        return qtereel.acteur_depense.matricule;
       }
       return 0
         }
@@ -1312,7 +1307,18 @@ ajouterTypeTexteLocal() {
            },
 
  
- 
+          afficherModalRecrutementDirect(){
+
+           var nouvelObjet2 = {
+            ...this.editEffetFinancier,
+            duree: this.nombreDejourCalculeEdit,
+           
+            }
+
+         this.modifierActeEffetFinancierP(nouvelObjet2)
+          this.$('#modifierActeEF').modal('hide');
+          },
+
  
  
  
