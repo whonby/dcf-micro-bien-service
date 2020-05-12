@@ -99,16 +99,14 @@ export default {
      "getLigneExempter",
      "getBudgeChager",
      "getAllRealiteServiceFait",
-     "getAllLiquidation",
-     "getOrganigrammeUa",
-     "getAllBanqueUa"
+     "getAllLiquidation"
     ]),
-            ...mapActions('personnelUA', ["getSalaire","getpaiementPersonnel",'getTypeSalarie',"getEchelons",
+            ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
             "getClasses","getEchelons","getpaiementPersonnel","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite","getCategorieGrade",
 "getFamilleFonction","getFonctionBudgetaire", "getDossierCandidatPersonnel",
-"getClassificationGradeFonction","getSituationMatrimonial", "getContratResilie"]),
+"getClassificationGradeFonction","getSituationMatrimonial"]),
 
       ...mapActions('gestionMarche',['getTypeMarche',"getSecteurActivite",
         "getEntreprise","getEtapeMarche","getDocumentPTBAPPM","getMarcheContrat","getPresenceCF",
@@ -132,8 +130,7 @@ export default {
       "getAllAmortissement",
       "getAllHistoAffectation",
       "getAllDemandeMateriel",
-      "getAllHistoAffectationService",
-      
+      "getAllHistoAffectationService"
       
     ]),
 
@@ -149,13 +146,9 @@ export default {
          'getDemandeAno',"getAnalyseDMP","getAnoDMPBailleur","getObservationBailleur",
           'getActeEffetFinancier','getEngagement','getMandat',"getVille","getPays","getCommune",
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
-          ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", "getEcheances",
+          ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", 
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
-
-          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getEcheances"])
-
-
-
+          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner"])
 
   },
 
@@ -233,8 +226,6 @@ this.getTypeAppel()
     
       // this.getAllTypeTextes();
     this.getAllUniteAdministrative();
-     this.getOrganigrammeUa()
-     this.getAllBanqueUa()
     // this.getAllArchivageDocument();
 // this.getAllDirection()
 this.getAllServiceua()
@@ -249,7 +240,6 @@ this.getDossierCandidatPersonnel()
        this.getCategorieGrade()
 this.getFamilleFonction()
 this.getSituationMatrimonial()
-this.getContratResilie()
 this.getClassificationGradeFonction()
         this.getNiveauEtude()
         this.getTypeContrat()
@@ -263,8 +253,6 @@ this.getClassificationGradeFonction()
         this.allActeurDepense()
         this.getpaiementPersonnel()
          this.getActeurFinContratAndActivite()
-        this.getpaiementPersonnel()
-        this.getSalaire()
             /**Gestion des marche*/
             
       this.getTypeMarche()
@@ -299,8 +287,7 @@ this.getAllHistoriqueBudgetGeneral()
     this.getAllImmobilisation();
     this.getAllHistoAffectation();
     this.getAllDemandeMateriel();
-    this.getAllHistoAffectationService();
-    
+    this.getAllHistoAffectationService()
     //this.getAllAmortissement();
       /**
        * this.
@@ -369,7 +356,6 @@ this.getLettreInvitation()
     this.getMarcheBailleur()
 this.getMembreCojo()
     this.getProceVerbal()
-      this.getEcheances()
       /**
        * fin missions
        */

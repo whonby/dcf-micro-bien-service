@@ -89,6 +89,13 @@
             </router-link>
           </li> -->
            <li class="divider"></li>
+         <li>
+           <router-link :to="{name: 'banqueUa'}" tag="a">
+             <i class="icon-key"></i>Banque UA
+            </router-link>
+         </li>
+           <li class="divider"></li>
+        
         </ul>
       </li>
         <li>

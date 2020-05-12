@@ -11,10 +11,11 @@ const defaultState = {
   servicesua: [],
   fonctionsua: [],
   budgeCharge:[],
+  banqueUa:[],
   ligneExempter: [],
   realiteServiceFait: [],
   liquidation: [],
-  banqueUa: [],
+  // banqueUa: [],
   organigrammeUa:[]
   // listeDocUniteAdministratives: [],
 

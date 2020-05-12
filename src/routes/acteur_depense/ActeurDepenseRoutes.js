@@ -1,4 +1,5 @@
 import TypeActePersonnel from "../../pages/acteurs_depenses/type_acte_personnel/TypeActPersonnel.vue"
+//import paiementPersonnel from "../../pages/acteurs_depenses/executionPersonnel/paiementPersonnel.vue"
 import Fonction from "../../pages/acteurs_depenses/fonction/Fonction.vue"
 import Classe from "../../pages/acteurs_depenses/classes/Classes.vue"
 import NiveauEtude from "../../pages/acteurs_depenses/niveau_etude/NiveauEtude.vue"
@@ -25,6 +26,12 @@ import detailPersonnel from "../../pages/acteurs_depenses/dossierPersonnel/detai
 import fonctionBudgetaire from "../../pages/acteurs_depenses/fonction/fonctionBudgetaire.vue";
 import SituationMatrimonial from "../../pages/acteurs_depenses/fonction/SituationMatrimonial.vue";
 const ActeurDepenseRoutes = [
+
+ 
+ 
+ 
+ 
+ 
   {
     path: "/RecrutementDirect/:id",
   name: "AjouterPersoRecrutementDirect",
@@ -45,6 +52,8 @@ const ActeurDepenseRoutes = [
     name: "paiementPersonnel",
     component: paiementPersonnel
   },
+  
+  
   {
     path: "/Situation-Matrimonial",
     name: "SituationMatrimonial",

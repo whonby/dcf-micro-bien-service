@@ -1,4 +1,5 @@
 import uniteadministrative from "../../pages/unites_administratives/unite_administrative.vue";
+//import banqueUa from "../../pages/unites_administratives/banqueUa.vue";
 import tableaudebord from "../../pages/unites_administratives/tableau_de_bord.vue";
 import typetext from "../../pages/unites_administratives/type_texte.vue";
 import archivagedocument from "../../pages/unites_administratives/archivage_document.vue";
@@ -37,6 +38,12 @@ const UniteAdministativeRoutes = [
     path: '/Organigramme-ua',
     name: "Organigramme",
     component: Organigramme
+  },
+
+  {
+    path: '/Banque',
+    name: "banqueUa",
+    component: banqueUa
   },
 
   {

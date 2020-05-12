@@ -61,85 +61,21 @@
 
 
                 
-     <!-- <li>
-            <router-link :to="{name: '#'}" tag="a">
-              EXECUTION DE MISSIONS
-            </router-link>
-          </li> -->
+    
+   
+   
+   
+   
+   
+  
 
- <!-- <li>
-            <router-link :to="{name: 'paiementPersonnel'}" tag="a">
-              PAIEMENT DU PERSONNEL
-            </router-link>
-          </li>
-           <li>
-            <router-link :to="{name: 'executionPersonnel'}" tag="a">
-              EXECUTION PERSONNEL
-            </router-link>
-          </li> -->
           
-       <!-- <li>
-            <router-link :to="{name: 'planificationPersonnel'}" tag="a">
-             PLANIFICATION DE RECRUTEMENT PERSONNEL
-            </router-link>
-          </li> -->
+     
 
   
      
      
 
-<!-- 
-<li class="dropdown" id="mission">
-        <a
-          title="Suivi des missions"
-          href="#"
-          data-toggle="dropdown"
-          data-target="#mission"
-          class="dropdown-toggle"
-        >
-          <span class="text">SUIVI DES MISSIONS </span> 
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li class="divider"></li>
-          <li>
-            <router-link :to ="{name: 'CategorieMission'}" tag="a">
-              <i class="icon-key"></i> Catégories de missions
-            </router-link>
-          
-          </li>
-
-            <li class="divider"></li>
-          <li>
-            <router-link :to ="{name: 'NormeMission'}" tag="a">
-              <i class="icon-key"></i> Norme de missions
-            </router-link>
-          
-          </li>
-          
-          <li class="divider"></li>
-          <li>
-            <router-link :to ="{name: 'Mission'}" tag="a">
-              <i class="icon-check"></i>
-             Missions
-            </router-link>
-          </li>
-        </ul>
-      </li> -->
-
-
-        <!-- <li>
-        <router-link
-
-              :to="{name:'TableauBordImmo'}"
-              tag="a"
-              title="Tableau de Bord Acteur depense"
-            >
-          <span class="text">TABLEAU DE BOARD</span>
-          
-        </router-link>
-      
-      </li> -->
      
      
 

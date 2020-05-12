@@ -1,4 +1,5 @@
 
+import NaturePrix from "../../pages/parametres_generaux/fonctionnelle/NaturePrix.vue";
 import Typeconges from "../../pages/parametres_generaux/fonctionnelle/Typeconges.vue";
 import StructureFonctionnelle from "../../pages/parametres_generaux/fonctionnelle/StructureFonctionnelle.vue";
 import PlanFonctionnel  from "../../pages/parametres_generaux/fonctionnelle/PlanFonctionnel.vue";
@@ -15,7 +16,11 @@ const FonctionnelleRoutesAdoni = [
 
    
 
-
+   {
+      path: "/NaturePrix",
+      name: "NaturePrix",
+      component: NaturePrix
+   }, 
    {
       path: "/Typeconges",
       name: "Typeconges",

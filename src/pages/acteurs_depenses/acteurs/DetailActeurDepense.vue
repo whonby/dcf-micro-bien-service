@@ -1,4 +1,4 @@
-
+type_acte_id
 <template>
     <div>
 
@@ -273,7 +273,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Type acte de personnel</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.type_acte_id">
+                                                        <select v-model="formActe.type_acte_id">
                                                             <option></option>
                                                             <option v-for="item in type_acte_personnels" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -1662,7 +1662,7 @@
              date_arrivee_act_nomination:"",
              date_debut_fonct_budget:"",
              date_fin_fonct_budget:"",
-            
+            type_acte_id:""
 
                 },
 
@@ -2570,9 +2570,8 @@ enregistreIdPersonnel(){
                   formData.append('date_debut_fonct_budget', this.formActe.date_debut_fonct_budget);
                    formData.append('date_fin_fonct_budget', this.formActe.date_fin_fonct_budget);
                 formData.append('id', this.salaire_actuel_acteur.id);
-                formData.append('type_acte_id', this.type_acte_id);
-                // formData.append('historiquenormequipement', this.historiquenormequipement);
-                //  formData.append('historiquenormequipement', this.historiquenormequipement);
+                formData.append('type_acte_id', this.formActe.type_acte_id);
+                
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'

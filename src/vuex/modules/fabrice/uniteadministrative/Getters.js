@@ -6,6 +6,7 @@ export const organigrammeUa = state => state.organigrammeUa;
 export const servicesua = state => state.servicesua;
 export const directions = state => state.directions;
 export const fonctionsua = state => state.fonctionsua;
+export const banqueUa = state => state.banqueUa;
 export const realiteServiceFait = state => state.realiteServiceFait;
 export const liquidation = state => state.liquidation;
 const uniteAdministratives = state =>
@@ -20,7 +21,7 @@ const uniteAdministratives = state =>
 //   state.fonctionsua.sort((a, b) => (a.id > b.id ? 1 : -1));
 
 
-export const banqueUa = state => state.banqueUa;
+//export const banqueUa = state => state.banqueUa;
 export const nombreUniteAdministratives = state =>
   state.uniteAdministratives.length;
 export const nombreArchivageDocument = state => state.archivageDocuments.length;
