@@ -548,7 +548,7 @@
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a>
             </div> -->
         </div>
-  <div id="modifierActeEffetFinancierP" class="modal hide grdirModalActeEffet">                                                                 
+  <div id="editEffetFinancier" class="modal hide grdirModalActeEffet">                                                                 
          <div class="modal-header">
      <button data-dismiss="modal" class="close" type="button">×</button>            
      <h3>Modifier acte effet financier</h3>                                 
@@ -1298,7 +1298,7 @@ ajouterTypeTexteLocal() {
 
 
            afficherModalModifierRecrutementDrect(index){
-             this.$("#modifierActeEffetFinancierP").modal({
+             this.$("#editEffetFinancier").modal({
                backdrop:'static',
                keyboard:false
              });
@@ -1315,7 +1315,7 @@ ajouterTypeTexteLocal() {
            
             }
 
-         this.modifierActeEffetFinancierP(nouvelObjet2)
+         this.modifierActeEffetFinancier(nouvelObjet2)
           this.$('#modifierActeEF').modal('hide');
           },
 
