@@ -2441,7 +2441,7 @@ enregistreIdPersonnel(){
          rib:this.afficherCodeRibEditCompte
       
        };
-              this.modifierCompte(nouvelObjet2)
+              this.modifierCompte(nouvelObjet)
               this.$('#modifierCompte').modal('hide');
             },
 
