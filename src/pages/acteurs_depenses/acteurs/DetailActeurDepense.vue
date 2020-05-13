@@ -334,232 +334,7 @@ type_acte_id
 
 
 
-         <div id="modifierCompte" class="modal hide tailModal" aria-hidden="true" style="display: none;">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier compte</h3>
-            </div>
-            <div class="modal-body">
-                  <table class="table table-bordered table-striped">
-                      <tr>
-                            <td>
-                        <div class="control-group">
-                          <label>Matricule</label> 
-
-                            <div class="controls">
-
-                                  <input
-                                    type="text"
-                                    :value="afficherMatriculeDynamique(editCompte.acteur_depense_id)"
-                                    class="span4"
-                                   
-                            />
-                                  
-                                
-                            </div>
-                        </div>
-                          </td>
-                           <td>
-                              <div class="control-group">
-                                                    <label class="control-label">Pays</label>
-                                                    <div class="controls">
-                                                        <select v-model="editCompte.pays_id" class="span4" >
-                                                            <option></option>
-                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                          </td>
-                           <td>
-                              <div class="control-group">
-                                                    <label class="control-label">Ville:</label>
-                                                    <div class="controls">
-                                                        <select v-model="editCompte.ville_id" class="span4" :readOnly="verroVille">
-                                                            <option></option>
-                                                            <option v-for="item in VilleDynamiques(editCompte.pays_id)" 
-                                                            :key="item.id" 
-                                                            :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                </td>
-                        
-                                              <td>
-                                                 <div class="control-group">
-                                                    <label class="control-label">Communes</label>
-                                                    <div class="controls">
-                                                        <select v-model="editCompte.commune_id" class="span4" :readOnly="verroCommune">
-                                                            <option></option>
-                                                            <option v-for="item in commuDynamiques(editCompte.ville_id)" 
-                                                            :key="item.id" 
-                                                            :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                          </td>
-                       
-                         
-                      </tr>
-                      <tr>
-                           
-                            <td>
-                        <div class="control-group">
-                             <label>Banque</label>
-                            <div class="controls">
-
-                                <select v-model="editCompte.banq_id" class="span4" :readOnly="verroBanque">
-                                <option v-for="varText in banqueDynamiques(editCompte.commune_id)" :key="varText.afficheBanque.id"
-                              :value="varText.afficheBanque.id">{{varText.afficheBanque.libelle}}</option>
-                            </select>
-                              
-                            <!-- <select v-model="editCompte.banq_id" class="span4" :readOnly="verroBanque">
-                                <option v-for="varText in banqueDynamiques(editCompte.commune_id)" :key="varText.afficheBanque.id"
-                              :value="varText.afficheBanque.id">{{varText.afficheBanque.libelle}}</option>
-                            </select> -->
-                                
-                            </div>
-                        </div>
-                          </td>
-                            <td>
-                        <div class="control-group">
-                            <label>Code de la  agence</label>
-                            <div class="controls">
-                                <select v-model="editCompte.numero_agence" class="span4" :readOnly="verroCodeAgence">
-                                                            <option></option>
-                                                            <option v-for="item in codeAgenceDynamiquesModifier" :key="item.id" :value="item.code_agence">
-                                                                {{item.code_agence}}
-                                                            </option>
-                                </select>
-                            </div>
-                        </div>
-                          </td>
-                           <td>
-
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Nom  Agence</label>
-                                <input type="text" class="span4" placeholder="Saisir l'agence" :value="AffichierNomAgenceModifier" readonly>
-                            </div>
-                        </div>
-                          </td>
-                          <td>
-
-                        <div class="control-group">
-                            <label>Telephone agence</label>
-                            <div class="controls">
-                                <input type="text"  readonly   class="span4" placeholder="saisir le teleophone agence" :value="AffichierNumeroAgenceModifier">
-                            </div>
-                        </div>
-                          </td>
-                      </tr>
-                     <tr>
-                    
-
-                        
-                               
-                          <td>
-                     
-                        <div class="control-group">
-                            <label>Situation geographique</label>
-                            <div class="controls">
-                                <input type="text" class="span4"  readonly  placeholder="sitaution geographique" :value="AffichierSituationGeoAgenceModifier">
-                            </div>
-                        </div>
-                          </td>
-<td>
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Nature de compte</label>
-                                <!-- <input type="text" class="span" placeholder="saisir la nature de compte" v-model="editCompte.nature_compte"> -->
-                           <select v-model="editCompte.nature_compte" class="span4">
-                                                            <option></option>
-                                                            <option value="0">Compte courant</option>
-                                                           
-                                                            
-                                                        </select>
-                            </div>
-                        </div>
-                          </td>
-                           <td>
-                       <div class="control-group">
-                           
-                             <label>Numero compte/cléRib</label>
-                            <div class="controls">
-                              
-                            <!-- <select v-model="formData.entrepse_id" class="span">
-                                <option v-for="varText in entreprises" :key="varText.id"
-                              :value="varText.id">{{varText.raison_sociale}}</option>
-                            </select> -->
-                                  <div class="controls">
-                                <input type="text" class="span3" placeholder="" v-model="editCompte.numero_compte"> <input type="text" class="span1" placeholder="" v-model="editCompte.clerib">
-                            </div>
-                            </div>
-                        </div>
-                          </td>
-                           <td>
-                        <div class="control-group">
-                          <label>Date d'ouverture</label>
-                            <div class="controls">
-                                <input type="date" class="span4" placeholder="" v-model="editCompte.date_ouverture_compte">
-                            </div>
-                        </div>
-                          </td>
-                      </tr>
-                      
- 
-                    <tr>
-                          <td>
-                     
-                        <div class="control-group">
-                          <label>Signature</label>
-                            <div class="controls">
-                                <input type="text" class="span4" placeholder="saisir le signataire compte" v-model="editCompte.signataire_compte">
-                            </div>
-                        </div>
-                          </td>
-<td>
-
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>Code SWIFT</label>
-                                <input type="text" class="span4"  v-model="editCompte.swift">
-                            </div>
-                        </div>
-                          </td>
-                          <td>
-
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>IBAN</label>
-                                <input type="text" class="span4"  v-model="editCompte.iban">
-                            </div>
-                        </div>
-                          </td>
-                           <td>
-
-                        <div class="control-group">
-                            <div class="controls">
-                                <label>RIB</label>
-                                <input type="text" class="span4"  :value="afficherCodeRibEditCompte" readonly>
-                            </div>
-                        </div>
-                          </td>
-                    </tr>
-                    </table>
-                
-            </div>
-            <div class="modal-footer">  <a @click.prevent="modifierCompteLocal(editCompte)"   class="btn btn-primary"
-              href="#">Modifier</a> <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
-        </div>
+         
 
 
 
@@ -1585,8 +1360,232 @@ type_acte_id
 
 
 
-        
+    <div id="updateCompte" class="modal hide tailModal" aria-hidden="true" style="display: none;">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Modifier compte</h3>
+            </div>
+            <div class="modal-body">
+                  <table class="table table-bordered table-striped">
+                      <tr>
+                            <td>
+                        <div class="control-group">
+                          <label>Matricule</label> 
 
+                            <div class="controls">
+
+                                  <input
+                                    type="text"
+                                    :value="afficherMatriculeDynamique(editCompte.acteur_depense_id)"
+                                    class="span4"
+                                   
+                            />
+                                  
+                                
+                            </div>
+                        </div>
+                          </td>
+                           <td>
+                              <div class="control-group">
+                                                    <label class="control-label">Pays</label>
+                                                    <div class="controls">
+                                                        <select v-model="editCompte.pays_id" class="span4" >
+                                                            <option></option>
+                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                          </td>
+                           <td>
+                              <div class="control-group">
+                                                    <label class="control-label">Ville:</label>
+                                                    <div class="controls">
+                                                        <select v-model="editCompte.ville_id" class="span4" :readOnly="verroVille">
+                                                            <option></option>
+                                                            <option v-for="item in VilleDynamiques(editCompte.pays_id)" 
+                                                            :key="item.id" 
+                                                            :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                </td>
+                        
+                                              <td>
+                                                 <div class="control-group">
+                                                    <label class="control-label">Communes</label>
+                                                    <div class="controls">
+                                                        <select v-model="editCompte.commune_id" class="span4" :readOnly="verroCommune">
+                                                            <option></option>
+                                                            <option v-for="item in commuDynamiques(editCompte.ville_id)" 
+                                                            :key="item.id" 
+                                                            :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                          </td>
+                       
+                         
+                      </tr>
+                      <tr>
+                           
+                            <td>
+                        <div class="control-group">
+                             <label>Banque</label>
+                            <div class="controls">
+
+                                <select v-model="editCompte.banq_id" class="span4" :readOnly="verroBanque">
+                                <option v-for="varText in banqueDynamiques(editCompte.commune_id)" :key="varText.afficheBanque.id"
+                              :value="varText.afficheBanque.id">{{varText.afficheBanque.libelle}}</option>
+                            </select>
+                              
+                            <!-- <select v-model="editCompte.banq_id" class="span4" :readOnly="verroBanque">
+                                <option v-for="varText in banqueDynamiques(editCompte.commune_id)" :key="varText.afficheBanque.id"
+                              :value="varText.afficheBanque.id">{{varText.afficheBanque.libelle}}</option>
+                            </select> -->
+                                
+                            </div>
+                        </div>
+                          </td>
+                            <td>
+                        <div class="control-group">
+                            <label>Code de la  agence</label>
+                            <div class="controls">
+                                <select v-model="editCompte.numero_agence" class="span4" :readOnly="verroCodeAgence">
+                                                            <option></option>
+                                                            <option v-for="item in codeAgenceDynamiquesModifier" :key="item.id" :value="item.code_agence">
+                                                                {{item.code_agence}}
+                                                            </option>
+                                </select>
+                            </div>
+                        </div>
+                          </td>
+                           <td>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Nom  Agence</label>
+                                <input type="text" class="span4" placeholder="Saisir l'agence" :value="AffichierNomAgenceModifier" readonly>
+                            </div>
+                        </div>
+                          </td>
+                          <td>
+
+                        <div class="control-group">
+                            <label>Telephone agence</label>
+                            <div class="controls">
+                                <input type="text"  readonly   class="span4" placeholder="saisir le teleophone agence" :value="AffichierNumeroAgenceModifier">
+                            </div>
+                        </div>
+                          </td>
+                      </tr>
+                     <tr>
+                    
+
+                        
+                               
+                          <td>
+                     
+                        <div class="control-group">
+                            <label>Situation geographique</label>
+                            <div class="controls">
+                                <input type="text" class="span4"  readonly  placeholder="sitaution geographique" :value="AffichierSituationGeoAgenceModifier">
+                            </div>
+                        </div>
+                          </td>
+<td>
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Nature de compte</label>
+                                <!-- <input type="text" class="span" placeholder="saisir la nature de compte" v-model="editCompte.nature_compte"> -->
+                           <select v-model="editCompte.nature_compte" class="span4">
+                                                            <option></option>
+                                                            <option value="0">Compte courant</option>
+                                                           
+                                                            
+                                                        </select>
+                            </div>
+                        </div>
+                          </td>
+                           <td>
+                       <div class="control-group">
+                           
+                             <label>Numero compte/cléRib</label>
+                            <div class="controls">
+                              
+                            <!-- <select v-model="formData.entrepse_id" class="span">
+                                <option v-for="varText in entreprises" :key="varText.id"
+                              :value="varText.id">{{varText.raison_sociale}}</option>
+                            </select> -->
+                                  <div class="controls">
+                                <input type="text" class="span3" placeholder="" v-model="editCompte.numero_compte"> <input type="text" class="span1" placeholder="" v-model="editCompte.clerib">
+                            </div>
+                            </div>
+                        </div>
+                          </td>
+                           <td>
+                        <div class="control-group">
+                          <label>Date d'ouverture</label>
+                            <div class="controls">
+                                <input type="date" class="span4" placeholder="" v-model="editCompte.date_ouverture_compte">
+                            </div>
+                        </div>
+                          </td>
+                      </tr>
+                      
+ 
+                    <tr>
+                          <td>
+                     
+                        <div class="control-group">
+                          <label>Signature</label>
+                            <div class="controls">
+                                <input type="text" class="span4" placeholder="saisir le signataire compte" v-model="editCompte.signataire_compte">
+                            </div>
+                        </div>
+                          </td>
+<td>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Code SWIFT</label>
+                                <input type="text" class="span4"  v-model="editCompte.swift">
+                            </div>
+                        </div>
+                          </td>
+                          <td>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>IBAN</label>
+                                <input type="text" class="span4"  v-model="editCompte.iban">
+                            </div>
+                        </div>
+                          </td>
+                           <td>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>RIB</label>
+                                <input type="text" class="span4"  :value="afficherCodeRibEditCompte" readonly>
+                            </div>
+                        </div>
+                          </td>
+                    </tr>
+                    </table>
+                
+            </div>
+            <div class="modal-footer">  <a @click.prevent="modifierCompteLocal(editCompte)"   class="btn btn-primary"
+              href="#">Modifier</a> <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
+        </div>
 
 
 
@@ -2414,12 +2413,12 @@ enregistreIdPersonnel(){
 
 
            afficherModalCompteBancaire(index){
-                this.$('#modifierCompte').modal({
+                this.$('#updateCompte').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
 
-                this.editCompte = this.afficheCompteEntreprise[index];
+                this.editCompte = this.afficheCompteEntreprise(this.acteurDetail.id)[index];
             },
             
          
@@ -2442,7 +2441,7 @@ enregistreIdPersonnel(){
       
        };
               this.modifierCompte(nouvelObjet)
-              this.$('#modifierCompte').modal('hide');
+              this.$('#updateCompte').modal('hide');
             },
 
 

@@ -627,6 +627,42 @@
           </li>
         </ul>
       </li>
+
+     
+  <li class="dropdown" id="mission">
+        <a
+          title="Suivi des missions"
+          href="#"
+          data-toggle="dropdown"
+          data-target="#mission"
+          class="dropdown-toggle"
+        >
+          <span class="text"> MISSIONS </span> 
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li class="divider"></li>
+          <li>
+            <router-link :to ="{name: 'CategorieMission'}" tag="a">
+              <i class="icon-key"></i> Catégories de missions
+            </router-link>
+          
+          </li>
+
+            <li class="divider"></li>
+          <li>
+            <router-link :to ="{name: 'NormeMission'}" tag="a">
+              <i class="icon-key"></i> Norme de missions
+            </router-link>
+          
+          </li>
+        </ul>
+      </li>
+
+
+
+
+
     </ul>
 
 
