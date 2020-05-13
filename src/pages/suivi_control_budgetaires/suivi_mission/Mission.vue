@@ -300,7 +300,7 @@
                       {{mission.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
                             
                     <td @dblclick="afficherModalModifierMission(mission.id)">
-                     {{afficherNomPrenomActeurDepense(affichierActeurDepenseId(mission.acte_personnel_id)) || 'Non renseigné'}}</td> 
+                     {{afficherMatriculeActePersonnel(affichierActeurDepenseId(mission.acte_personnel_id)) || 'Non renseigné'}}</td> 
 
                      
                     
@@ -1236,8 +1236,6 @@ tauxDeDossierRejeterParUA(){
 
 
 
-
-
 NombreDemissionsParActeurDepense(){
   return acte_personnel_id => {
     if(acte_personnel_id !=""){
@@ -1273,7 +1271,18 @@ affichierActeurDepenseId() {
     },
 
    
+afficherMatriculeActePersonnel() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaliseActeurDepense.find(qtreel => qtreel.acte_personnel_id == id);
 
+      if (qtereel) {
+        return qtereel.matricule;
+      }
+      return 0
+        }
+      };
+    },
 
 
 afficherNomPrenomActeurDepense(){

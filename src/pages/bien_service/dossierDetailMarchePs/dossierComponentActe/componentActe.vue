@@ -17,7 +17,7 @@ afficherBanqueDynamique
                     <thead>
                     <tr>
 
-                        <th>Reference acte{{afficheMarcheType}}</th>
+                        <th>Reference acte</th>
                         <th>Libelle acte</th>
                         <th>Montant acte</th>
                         <th>Type acte</th>
@@ -89,26 +89,29 @@ afficherBanqueDynamique
 
                         <div class="control-group">
                         <label class="control-label">Entreprise.</label>
-                        <div class="controls">
-                          <select v-model="formEffetFinancier.entreprise_id" class="span">
+                        <div class="controls" v-if="affichierNomEntreprise">
+                          <!-- <select v-model="formEffetFinancier.entreprise_id" class="span">
                                 <option v-for="varText in affichierNomEntreprise(macheid)" :key="varText.id"
                                         :value="varText.entreprise_id">{{varText.nom_cand}}</option>
-                            </select>
+                            </select> -->
                             <!-- <input type="text" :value="affichierNomEntreprise(macheid)"> -->
-                        
+                                    {{affichierNomEntreprise.nom_cand}}
                         </div>
+
+                          <!-- <div class="control-group" v-else>
+                                            <code>{{message_setion_vainqueur}}</code>
+                                        </div> -->
                     </div>
-
+                            
                     
-
                             </td>
 
                             <td>
                            <div class="control-group">
                         <label class="control-label">Banque.</label>
-                        <div class="controls">
-                          <select v-model="formEffetFinancier.banq_id" class="span" :readOnly="verifiBanqueExist">
-                               <option v-for="varText in afficherBanqueDynamiqueId(formEffetFinancier.entreprise_id)" :key="varText.id"
+                        <div class="controls" v-if="affichierNomEntreprise">
+                          <select v-model="formEffetFinancier.banq_id" class="span" >
+                               <option v-for="varText in afficherBanqueDynamiqueId(affichierNomEntreprise.entreprise_id)" :key="varText.id"
                                         :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                             </select>
                         
@@ -393,11 +396,11 @@ afficherBanqueDynamique
                                 <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
                                         :value="varText.entreprise_id">{{affichierNomEntreprise(varText.entreprise_id)}}</option>
                             </select> -->
-
+<!-- 
                             <select v-model="editActeEffetFinancier.entreprise_id" class="span">
                                 <option v-for="varText in affichierNomEntreprise(macheid)" :key="varText.id"
-                                        :value="varText.id">{{varText.nom_cand}}</option>
-                            </select>
+                                        :value="varText.entreprise_id">{{varText.nom_cand}}</option>
+                            </select> -->
                         
                         </div>
                     </div>
@@ -966,21 +969,57 @@ AffichierElementParent() {
 
 
     affichierNomEntreprise() {
-      return id => {
-        if (id != null && id != "") {
+     
+                let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==null );
+                
+                
+                if (resulta.length>0){
+                    resulta.sort(function (a, b) {
+                        return a.note_analyse - b.note_analyse;
+                    }).reverse()
+                    let first=[...resulta].shift()
+                   // const [ob1]=resulta
 
-         return this.getterDossierCandidats.filter(qtreel => qtreel.marche_id == id);
-
-         
-        }
-       
-      };
+                    //console.log(ob1)
+                    // let objet=resulta[0]
+                     let dossier=first.dossier_candidature
+                    // console.log(dossier)
+                    return dossier
+                } else{
+                let message="veillez terminer l'analyse"
+                return message;
+                }
+              
+            
     },
 
 
+//    afficherEntrepriseRetenu(){
+//        return id =>{
+//            if(id!=null && id!=""){
+              
+//                return this.getterAnalyseDossiers.filter(item =>item.marche_id == id && item.reference_pv==null)
+            
+             
+//            }
+//        }
+//    },
 
 
 
+
+
+// infoPVAffiche:function(){
+//                 let resultaAnalysePv=[]
+//                 let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==null );
+//                 this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
+//                 // if (this.resultaAnalysePv.length>0){
+//                 //     this.resultaAnalysePv.sort(function (a, b) {
+//                 //         return a.note_analyse - b.note_analyse;
+//                 //     }).reverse()
+//                 // }
+//                 //console.log(this.resultaAnalysePv)
+//             },
 
 
 
@@ -1151,65 +1190,9 @@ getDateFinExécutionValueEdit(){
 
 
 
-// infoPVAffiche:function(){
-//                 this.resultaAnalysePv=[]
-//                 let resulta=this.getterAnalyseDossiers.filter(item=>item.difference_personnel_bienService==null );
-//                 this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
-//                 if (this.resultaAnalysePv.length>0){
-//                     this.resultaAnalysePv.sort(function (a, b) {
-//                         return a.note_analyse - b.note_analyse;
-//                     }).reverse()
-//                 }
-//                 //console.log(this.resultaAnalysePv)
-//             },
-
-            
-            // selectionAttributionMarche: function () {
-            //     return macheid => {
-            //         if (macheid != "") {
-            //            let vM=this;
-
-            //             let marcherEnAction=this.getterAnoDMPBailleur.filter(idmarche => idmarche.annalyse_d_m_p.demande_ano.proce_verbal_offre.appel_offre.marche_id == macheid)
-
-            //             let marcherFavaroble=marcherEnAction.find(idmarche=>idmarche.avis_bail==1);
-            //             let marcherObjetction=marcherEnAction.find(idmarche=>idmarche.avis_bail==0);
-            //             console.log(marcherFavaroble)
-            //             if (marcherFavaroble!=undefined){
-            //                 vM.entreprise_vainqueur=""
-            //                 console.log("1411111")
 
 
-            //                 vM.info_avis_bailleur="Non objection";
-            //                 vM.formEffetFinancier.ano_bailleur_id=marcherFavaroble.id
-            //                 let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==marcherFavaroble.annalyse_d_m_p.demande_ano.proce_verbal_offre.reference);
-            //                 console.log(resulta)
-                          
-            //                 let entreprise;
-            //                 if (resulta.length>0){
-            //                     resulta.sort(function (a, b) {
-            //                         return a.note_analyse - b.note_analyse;
-            //                     }).reverse()
-            //                      entreprise=resulta.find(item=>item.reference_pv==marcherFavaroble.annalyse_d_m_p.demande_ano.proce_verbal_offre.reference)
-            //                     console.log("111111")
-            //                     console.log(entreprise)
-            //                     console.log("222222")
-            //                     return entreprise;
-            //                 }
-
-            //                 return null
-
-
-            //             }
-            //             if(marcherObjetction!=undefined){
-            //                 vM.message_setion_vainqueur="Le dossier a été rejete"
-            //             }else{
-            //                 vM.message_setion_vainqueur="Assuré vous d'avoir terminé tous les étape précedente"
-            //             }
-            //             return null
-
-            //         }
-            //     }
-            // },
+ 
       
       },
 

@@ -1,3 +1,6 @@
+
+
+
 <template>
    <div class="container-fluid">
         
@@ -51,7 +54,7 @@
                       {{mission.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
                             
                     <td >
-                     {{afficherNomPrenomActeurDepense(affichierActeurDepenseId(mission.acte_personnel_id))}}</td> 
+                     {{afficherMatriculeActePersonnel(affichierActeurDepenseId(mission.acte_personnel_id)) || 'Non renseigné'}}</td> 
                     
                 </tr>
               </tbody>
@@ -362,7 +365,25 @@ affichierActeurDepenseId() {
         }
       };
     },
+
+
+
+
+    afficherMatriculeActePersonnel() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaliseActeurDepense.find(qtreel => qtreel.acte_personnel_id == id);
+
+      if (qtereel) {
+        return qtereel.matricule;
+      }
+      return 0
+        }
+      };
+    },
   },
+
+
 
 
 // historiqueMissionfiltre(){
