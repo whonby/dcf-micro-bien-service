@@ -34,7 +34,7 @@ marcheid
                     <th>Mois de Paiement</th>
                     <!-- <th>Montant des Salaires</th> -->
                     <th>Fichier Joint</th>
-                      <th>Validation</th>
+                      <th>Validation{{detail_Execution.exerciceencours}}</th>
                     
 
                   </tr>
@@ -152,7 +152,8 @@ marcheid
             </div>
                        </div>
                     <div id="tab00007" class="tab-pane">
-                   <ordrePaiement :PaiementPersoid="detail_Execution.id"></ordrePaiement>
+                      
+                   <ordrePaiement :PaiementPersoid="detail_Execution.id" ></ordrePaiement>
                    
                        </div>
                   </div>
@@ -185,8 +186,8 @@ export default {
           icon: "add"
         }
       ],
-      executionPersoid:"",
-         
+      PaiementPersoid:"",
+        exerciceBudgetaire:"",
      
       json_fields: {
         UNIT_ADMINISTRATIVE: "ua.libelle",
@@ -202,7 +203,7 @@ export default {
   },
 created() {
             this.executionPersoid=this.$route.params.id
-             this.exo=this.$route.params.exerciceencours
+            
    this.detail_Execution = this.paiementPersonnel.find(
        idExecution => idExecution.id == this.$route.params.id
          )

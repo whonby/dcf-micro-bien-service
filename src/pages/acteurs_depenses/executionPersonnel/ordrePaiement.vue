@@ -3,468 +3,434 @@
     <div>
 
 <div id="ajouterMP1" class="modal hide tailgrand">
-  
-<div class="row-fluid">
-      <div class="span12">
-        <div class="widget-box">
-          
-           <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Ordre de paiement</h3>
-      </div>
-          <div class="table-responsive text-nowrap">
-            <table class="table table-bordered table-striped">
-              <div class="widget-box">
-                <div class="widget-title">
-                  <ul class="nav nav-tabs">
-                 
-                   
-                  </ul>
-                </div>
-                <div class="widget-title">
-  <ul class="nav nav-tabs">
-    <li class="active">
-      <a data-toggle="tab" href="#tab1000">INFORMATION</a>
-    </li>
-    <!-- <li>
-      <a data-toggle="tab" href="#tab2">TYPE ENGAGEMENT </a>
-    </li> -->
-    
-    <li>
-      <a data-toggle="tab" href="#tab120">INFO FOURNISSEUR / IMPUTATION BUDGETAIRE</a>
-    </li>
-    <!-- <li>
-      <a data-toggle="tab" href="#tab32">IMPUTATION BUDGETAIRE</a>
-    </li> -->
-     <!-- <li>
-      <a data-toggle="tab" href="#2">Valeur Calculer</a>
-    </li> -->
-  </ul>
-</div>
-                <div class="widget-content tab-content tailfenet">
-                  <!--ongle identification-->
-                 <div id="tab1000" class="tab-pane active">
-                    <div class="modal-body">
-      <table class="table table-bordered table-striped" >
-          <tr>
-            <td>
-              
-               <label class="control-label">Exercice Budgétaire:</label>
-               <div class="controls">
-                 <input
-                   type="text"
-                 
-                   :value="executionPersoid"
-                    placeholder="Saisir exercice budgétaire"
-                    readonly
-                 />
-               </div>
-              
-            </td>
-             <td>
-  
-    <label class="control-label">Section</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.section"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-                         <td>
-  
-    <label class="control-label">Programme/dotation</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.programme"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
+  <div class="row-fluid">
+        <div class="span12">
+          <div class="widget-box">
+            <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              <h4>Ajouter Ordre de Paiement</h4>
+              <!-- <div align="right">
+                Search:
+                <input type="search" placeholder />
+              </div>-->
+            </div>
 
-                         <td>
-  
-    <label class="control-label">Nature Depense</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.gdenature_id"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-
-
-
-
-            
-          </tr>
-          <tr>
-                         <td>
-  
-    <label class="control-label">Action</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.action_id"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-                          <td>
-  
-    <label class="control-label">Activité</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.activite_id"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-
-
-
-
-
-
-                         <td>
-  
-    <label class="control-label">Unité administrative</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.ua_id"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-       
-          </tr>
-
-         <tr>
-  
-   <td>
-   <div class="control-group">
-      <label class="control-label">Numéro ordre de paiement</label>
-      <div class="controls">
-        <input type="text" class="span12" v-model="formData.numero_engage"/>
-      </div>
-    </div>
-  </td>
-   
- 
-</tr>
-         
-
-         <tr>
-             
-  
-<td>
-  <div class="control-group">
-    <label class="control-label">Fichier Joint</label>
-  
-    <div class="controls">
-      <input
-        type="file"
-        class="span"
-        placeholder="Saisir fichier joint"
-        readonly
-      />
-    </div>
-    </div>
-</td>
-
-         </tr>
-      </table>
-</div>
+            <div class="table-responsive text-nowrap">
+              <table class="table table-bordered table-striped">
+                <div class="widget-box">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#tab1">REFERENCE DU BENEFICIAIRE</a>
+                      </li>
+                       
+                      <li>
+                        <a data-toggle="tab" href="#tab2">SPECIFICATION DE LA DEPENSE</a>
+                      </li>
+                      <li>
+                        <a data-toggle="tab" href="#tab3">SITUATION DU CREDIT</a>
+                      </li>
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab3">Autres Information</a>
+                      </li> -->
+                     
+                    </ul>
                   </div>
-
-                  <div id="tab120" class="tab-pane">
-                  
-                                    <div class="modal-body">
-      <table class="table table-bordered table-striped">
-          <tr>
-            <td>
-              
-               <label class="control-label">Mode de paiement:</label>
-               <div class="controls">
-                 <input
-                   type="text"
-                  v-model="formData.Mode_paiement"
-                    placeholder="Saisir mode de paiement"
-                   class="span"
-                 />
-               </div>
-              
-            </td>
-             
-                         <td>
-  
-    <label class="control-label">Nom entreprise</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.programme"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-
-                         <td>
-  
-    <label class="control-label">Adresse</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.adresse"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-
-
-
-
-            
-          </tr>  
-                  
-                  <tr>
-            <td>
-              
-               <label class="control-label">Objet de la Depense:</label>
-               <div class="controls">
-                 <input
-                   type="text"
-                  v-model="formData.Mode_paiement"
-                    placeholder="Saisir l'objet de la depense"
-                   class="span"
-                 />
-               </div>
-              
-            </td>
-             <td>
-  
-    <label class="control-label">Numéro compte</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.NumeroFournisseur"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-<td>
-   <div class="control-group">
-     <label class="control-label">piece justificative</label>
-     <div class="controls">
-       <input
-         type="file"
-         class="span"
-        
-       />
-     </div>
-   </div>
- </td>
-
-
-
-
-                         <td>
-  
-    <label class="control-label">Bailleur</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.bailleur"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-            
-          </tr>            
-               <tr>
- <td>
-   <div class="control-group">
-      <label class="control-label">Total général</label>
-      <div class="controls">
-        <input type="number" class="span12" :value="formData.sommeMontant" readonly/>
-      </div>
-    </div>
-  </td>
- 
-  <td>
-   <div class="control-group">
-      <label class="control-label">Trésor</label>
-      <div class="controls">
-        <input type="number" class="span12" v-model="formData.montant_tresor" />
-      </div>
-    </div>
-  </td>
-    <td>
-    <div class="control-group">
-      <label class="control-label">Don</label>
-      <div class="controls">
-        <input type="number" class="span12" v-model="formData.montant_don" />
-      </div>
-    </div>
-  </td>
-  <td>
-       <div class="control-group">
-      <label class="control-label">Emprunt</label>
-      <div class="controls">
-        <input type="number" class="span12" v-model="formData.montant_emprunt" />
-      </div>
-    </div>
-  </td>
-</tr>
-   
-            <tr>
-            <td>
-              
-               <label class="control-label">Ligne Budgétaire:</label>
-               <div class="controls">
-                 <input
-                   type="text"
-                  v-model="formData.ligne_id"
-                    placeholder="Saisir ligne budgétaire"
-                   class="span"
-                 />
-               </div>
-              
-            </td>
-             <td>
-  
-    <label class="control-label">Imputation Budgétaire</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.Imp_budgetaire"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-                         <td>
-  
-    <label class="control-label">Numéro Facture</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.num_facture"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-
-  <td>
-  
-    <label class="control-label">Montant Facture</label>
-    <div class="controls">
-      <input 
-      type="number"  
-       v-model="formData.montant_fact"
-       class="span"
-        />
-    
-  </div>
-</td>
-
-            
-          </tr>                
-
-                 <tr>
-            <td>
-              
-               <label class="control-label">Crédit Autorisé:</label>
-               <div class="controls">
-                 <input
-                   type="text"
-                  v-model="formData.credit_auto"
-                    placeholder="Saisir crédit autorisé"
-                   class="span"
-                 />
-               </div>
-              
-            </td>
-             <td>
-  
-    <label class="control-label">Cumul des demandes(y compris celle-ci)</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.cumul_demande"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-             <td>
-  
-    <label class="control-label">Dotation Disponible</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.dotation_dispo"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-
-                 </tr>
-
-      </table>   
+                  <div class="widget-content tab-content">
+                     <div id="tab3" class="tab-pane">
+                      <div class="modal-body">
+                        <table class="table table-bordered table-striped">
+                          <tr>
+                            <td>
+                
+                 <label class="control-label">Trésor</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                  v-model="formData.montant_tresor"
+                      
+                      class="span"
+                   />
                  </div>
+                
+              </td>
+              <td>
+                
+                 <label class="control-label">Don</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                    v-model="formData.montant_don"
+                      
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
+              <td>
+                
+                 <label class="control-label">Emprunt</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                    v-model="formData.montant_emprunt"
+                      
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
+              <td>
+                
+                 <label class="control-label">Montant/Depense</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                  
+                      readonly
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
+                          </tr>
+                                  <tr>
+                            <td>
+                
+                 <label class="control-label">Crédits Autorises</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                  
+                      
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
+              <td>
+                
+                 <label class="control-label">Cumuls des OP Anterieurs</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                  
+                      
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
+              <td>
+                
+                 <label class="control-label">Engagement Actuel</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                  
+                      
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
+              <td>
+                
+                 <label class="control-label">Cumuls des Engagements</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                  
+                      readonly
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
+                          </tr>
+                          <tr>
+                             <td>
+                
+                 <label class="control-label">Disponible</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                  
+                      readonly
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
+                          </tr>
+                        </table>
+                      </div>
+                     </div>
+                    <!--ongle identification-->
+                    <div id="tab1" class="tab-pane active">
+                      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+            <tr>
+              <td>
+                
+                 <label class="control-label">Exercice en Cours</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                   :value="afficherAnneeBudgetaire(PaiementPersoid)"
+                    
+                      placeholder="Saisir l'exercice en cours"
+                      readonly
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
+              <td>
+               
+                  <label class="control-label">Unite Administrative</label>
+                  <div class="controls">
+                   
+                    <input
+         type="text"
+         :value="afficherLibelleUa(afficherIdUa(PaiementPersoid))"
+         class="span"
+         
+         readonly
+        />
+                  </div>
+                
+              </td>
+               <td>
+                 
+                  <label class="control-label">Ligne</label>
+                  <div class="controls">
+                   
+                    <input
+         type="text"
+         :value="afficherLibelleLigne(afficherIdLigne(PaiementPersoid))"
+         class="span"
+         
+         readonly
+        />
+                  </div>
+                
+              </td>
+              <td>
+                
+                  <label class="control-label">Programme</label>
+                  <div class="controls">
+                    
+                    <input
+         type="text"
+         :value="afficherLibelleProgramme(afficherIdProgramme(PaiementPersoid))"
+         class="span"
+         
+         readonly
+        />
+                  </div>
+                
+              </td>
+              
+            </tr>
+            <tr>
+              <td>
+                  <label class="control-label">Action</label>
+                  <div class="controls">
+                   <input
+         type="text"
+         :value="afficherLibelleAction(afficherIdAction(PaiementPersoid))"
+         class="span"
+         
+         readonly
+        />
+                </div>
+              </td>
+              <td>
+              
+               
+                  <label class="control-label">Activite</label>
+                  <div class="controls">
+                   <input
+         type="text"
+         :value="afficherLibelleActivite(afficherIdActivite(PaiementPersoid))"
+         class="span"
+         
+         readonly
+        />
+                  </div>
+               
+              </td>
+               <td>
+    
+      <label class="control-label">Numero Matricule</label>
+      <div class="controls">
+        <input
+         type="text"
+         :value="afficherNumeroMatricule(PaiementPersoid)"
+         class="span"
+         
+         readonly
+        />
+      </div>
+    
+  </td>
+   <td>
+    
+      <label class="control-label">References Bancaires</label>
+      <div class="controls">
+        <input
+         type="text"
+         :value="afficherReferenceBancaire(PaiementPersoid)"
+         class="span"
+        readonly
+        />
+      </div>
+    
+  </td>
+            </tr>
+            </table>
+          </div>
+          
+                    </div>
+                    <!--ongle descriptif-->
+                    <div id="tab2" class="tab-pane">
+                      
+  <div class="modal-body">
+        <table class="table table-bordered table-striped">
+           <tr>
+             <td>
+              
+               <div class="control-group">
+                  <label class="control-label">Mode de paiemnt</label>
+                  <div class="controls">
+                   <input
+         type="text"
+         :value="afficherModePaiementLibelle(afficherModePaiement(PaiementPersoid))"
+         class="span"
+         
+         readonly
+        />
                   </div>
                 </div>
-                <br />
-                <div align="right">
+              </td>
+             
+                <td>
+              
+               <div class="control-group">
+                  <label class="control-label">Banque</label>
                   <div class="controls">
-                    <div data-toggle="buttons-checkbox" class="btn-group">
-                      <a
-        @click.prevent=""
-        class="btn btn-primary"
-        href="#"
+                   <input
+         type="text"
+         :value="afficherBanqueLibelle(afficherIdBanque(PaiementPersoid))"
+         class="span"
+         
+         readonly
+        />
+                  </div>
+                </div>
+              </td>
+                <td>
+                <div class="control-group">
+                <label class="control-label">Compte de disponibilite affecte</label>
+                 <div class="controls">
+                <input
+                 type="text"
+                 :value="afficherCompteUa(PaiementPersoid)"
+                 class="span"
+                 readonly
+                 
+               />
+              </div>
+            </div>
+            </td>
+               <td>
+                <div class="control-group" >
+                  <label class="control-label">Mois de Paiement:</label>
+      
+ 
+                  <div class="form-group" >
+                 <input
+         type="text"
+         :value="affichermoisdepaiement(PaiementPersoid)"
+         class="span"
+         
+         readonly
+        />
+               </div>
+                 </div>
+              </td>
+               
+           </tr>
+           <tr>
+            
+               <td>
+                <div class="control-group">
+                  <label class="control-label">Objet de la depense</label>
+      
+ 
+                  <div class="controls">
+                    <input
+                     type="text"
+                      :value="afficherObjetdepense(PaiementPersoid)"
+                     class="span"
+                     readonly
        
-      >Valider</a>
-      <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+                    />
+                   </div>
+                </div>
+              </td>
+            
+                         <td>
+    <div class="control-group">
+      <label class="control-label">Pieces Justificative</label>
+    
+      <div class="controls">
+        <input
+          type="file"
+          class="span"
+          placeholder="Saisir fichier joint"
+          readonly
+        />
+      </div>
+      </div>
+  </td>
+           </tr>
+        </table>
+  </div>
+                    </div>
+                     <!-- <div id="tab3" class="tab-pane">
+                      
+
+                    </div> -->
+                    <!--ongle 3 -->
+                    <!-- <div id="tab3" class="tab-pane">
+                    
+                      
+                    </div> -->
+                  </div>
+                  <br />
+                  <div align="right">
+                    <div class="controls">
+                      <div data-toggle="buttons-checkbox" class="btn-group">
+                        <a
+          @click.prevent="ajouterUniteAdministrativeLocal(formData)"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </table>
+              </table>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 </div>
 
                             <table class="table table-bordered table-striped">
@@ -501,10 +467,7 @@
 <script>
   import { mapGetters, mapActions } from "vuex";
 export default {
-    props:["executionPersoid",
-           "id",
-           "exerciceencours"
-           ],
+    props:["PaiementPersoid","exerciceBudgetaire"],
     data(){
         return{
 fabActions: [
@@ -513,9 +476,10 @@ fabActions: [
           icon: "add"
         }
          ],  
+         
             formData: {
   // 
-  Exercice_Budgétaire:"",
+  
    section:"",
    programme:"",
    gdenature_id:"",
@@ -532,9 +496,9 @@ fabActions: [
   NumeroFournisseur:"",
   adresse:"",
   sommeMontant:"",
-  montant_tresor:"",
-  montant_don:"",
-  montant_emprunt:"",
+  montant_tresor:0,
+  montant_don:0,
+  montant_emprunt:0,
   ligne_id:"",
   Imp_budgetaire:"",
   num_facture:"",
@@ -576,18 +540,265 @@ fabActions: [
  "afficheNiveauPlanProg",
  "exercices_budgetaires"
    ]),
+ ...mapGetters("bienService", ["typeMarches",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+                "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
+                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
+                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
+                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
+                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
+                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
 
    ...mapGetters('parametreGenerauxFonctionnelle',[
 
       "plans_fonctionnels",
  "afficheNiveauPlanFonctionnel"
    ]),
-
+...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
 ...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
   ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
      
+     afficherAnneeBudgetaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.exerciceencours;
+      }
+      return 0
+        }
+      };
+    },
+     afficherIdUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ua_id;
+      }
+      return 0
+        }
+      };
+    },
+     afficherLibelleUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     afficherIdLigne() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ligne_id;
+      }
+      return 0
+        }
+      };
+    },
+    afficherLibelleLigne() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+    afficherIdProgramme() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.programme_id;
+      }
+      return 0
+        }
+      };
+    },
+      afficherLibelleProgramme() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_programmes.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+    afficherIdAction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.action_id;
+      }
+      return 0
+        }
+      };
+    },
+     afficherLibelleAction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.afficheNiveauAction.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+    afficherIdActivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.activite_id;
+      }
+      return 0
+        }
+      };
+    },
+     afficherLibelleActivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.afficheNiveauActivite.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+     afficherNumeroMatricule() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numeromatricule;
+      }
+      return 0
+        }
+      };
+    },
+     afficherReferenceBancaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.referencebancaire;
+      }
+      return 0
+        }
+      };
+    },
+    afficherModePaiement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.modepaiement_id;
+      }
+      return 0
+        }
+      };
+    },
+    afficherModePaiementLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.modepaiements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    afficherIdBanque() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.banque_id;
+      }
+      return 0
+        }
+      };
+    },
+     afficherBanqueLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.banques.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    afficherCompteUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.rib;
+      }
+      return 0
+        }
+      };
+    },
+    affichermoisdepaiement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.moisdepaiement;
+      }
+      return 0
+        }
+      };
+    },
+    afficherObjetdepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.objetdepense;
+      }
+      return 0
+        }
+      };
+    },
     },
     methods:{
         ...mapActions("bienService", [ "ajouterLot","modifierLot","supprimerLot"]),

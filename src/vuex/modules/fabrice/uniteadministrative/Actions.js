@@ -879,7 +879,7 @@ export function ajouterService({ commit, dispatch }, nouveau) {
     .post("/ajouterServiceUa", {
       s_ua_id: nouveau.s_ua_id,
       // direction_id	: nouveau.direction_id	,
-      libelle: nouveau.libelle,
+      serviceua_id: nouveau.serviceua_id,
       exercicebudget: nouveau.exercicebudget,
       normeequipement : nouveau.normeequipement,
       historiqueequipement:nouveau.historiqueequipement,
@@ -909,7 +909,7 @@ export function modifierService({ commit, dispatch }, nouveau) {
     .put("/modifierServiceUa/" + nouveau.id, {
       s_ua_id: nouveau.s_ua_id,
       exercicebudget: nouveau.exercicebudget,
-      libelle: nouveau.libelle,
+      serviceua_id: nouveau.serviceua_id,
       normeequipement : nouveau.normeequipement,
       historiqueequipement:nouveau.historiqueequipement,
       montantequipement:nouveau.montantequipement

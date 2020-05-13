@@ -1,8 +1,3 @@
-afficherQuantiteEnStock
-afficherQuantiteEnRequise
-afficherAffectationParFonction
-afficherQuantiteSortir
-afficherActeurDepenseMatricule
 
 <template>
 

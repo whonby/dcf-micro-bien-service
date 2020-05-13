@@ -71,10 +71,10 @@
                   <div class="controls">
                     <select v-model="formData.fonction_id" class="span6" :readOnly="verroFonction">
                       <option
-                        v-for="typeUniteA in fonctions"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
+                        v-for="typeUniteA in groupeFonctionNormeEquipe"
+                        :key="typeUniteA[0].id"
+                        :value="typeUniteA[0].fonction_id"
+                      >{{afficheFonctionLibelle(typeUniteA[0].fonction_id)}}</option>
                     </select>
                   </div>
                 </div>
@@ -180,10 +180,10 @@
                   <div class="controls">
                     <select v-model="editTransfert.fonction_id" class="span6">
                       <option
-                        v-for="typeUniteA in fonctions"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
+                        v-for="typeUniteA in groupeFonctionNormeEquipe"
+                        :key="typeUniteA[0].id"
+                        :value="typeUniteA[0].fonction_id"
+                      >{{afficheFonctionLibelle(typeUniteA[0].fonction_id)}}</option>
                     </select>
                   </div>
                 </div>
@@ -368,7 +368,25 @@ export default {
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  
  ...mapGetters('personnelUA', ['all_acteur_depense','fonctions']),
-...mapGetters("SuiviImmobilisation", ["services"]),
+...mapGetters("SuiviImmobilisation", [
+      "familles",
+   
+      "listeBesoinValider",
+      "besoinImmobilisations",
+      "groupTriUaImmo",
+      "SuiviImmo",
+      "listeBesoinValider",
+      "getAfficheStockArticle",
+      "getPersoNormeArticle",
+      "getPersoStock",
+      "stockageArticle",
+      "articles",
+      "services",
+      "normeImmo",
+      "groupeServiceNorme",
+      "groupeFonctionNormeEquipe"
+      
+      ]),
  verroDirection() {
       return this.formData.f_ua_id == "";
     },
@@ -409,6 +427,19 @@ directionDynamiques() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.services.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+     afficheFonctionLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.fonctions.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.libelle;

@@ -37,12 +37,12 @@
                 <div class="control-group">
                   <label class="control-label">Service</label>
                   <div class="controls">
-                    <select v-model="formData.libelle" class="span6" >
+                    <select v-model="formData.serviceua_id" class="span6" >
                       <option
-                        v-for="typeUniteA in services"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
+                        v-for="typeUniteA in groupeServiceNorme"
+                        :key="typeUniteA[0].id"
+                        :value="typeUniteA[0].service_id"
+                      >{{afficheServiceLibelle(typeUniteA[0].service_id)}}</option>
                     </select>
                   </div>
                 </div>
@@ -106,7 +106,7 @@
                         v-for="typeUniteA in ModifierdirectionDynamiques(editTransfert.s_ua_id)"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
+                      >{{typeUniteA.serviceua_id}}</option>
                     </select>
                   </div>
                 </div>
@@ -117,12 +117,12 @@
                 <div class="control-group">
                   <label class="control-label">Service</label>
                   <div class="controls">
-                    <select v-model="editTransfert.libelle" class="span6" >
+                    <select v-model="editTransfert.serviceua_id" class="span6" >
                       <option
-                        v-for="typeUniteA in services"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
+                        v-for="typeUniteA in groupeServiceNorme"
+                        :key="typeUniteA[0].id"
+                        :value="typeUniteA[0].service_id"
+                      >{{afficheServiceLibelle(typeUniteA[0].service_id)}}</option>
                     </select>
                   </div>
                 </div>
@@ -211,10 +211,10 @@ export default {
   data() {
     return {
       // json_fields: {
-      //       'NATURE_SECTION': 'groupe.libelle',
+      //       'NATURE_SECTION': 'groupe.serviceua_id',
       //       'NUMERO_ORDRE_SECTION': 'article.code',
       //     'CODE_SECTION':'article.code_section',
-      //   'LIBELLE_SECTION':'article.nom_section'
+      //   'serviceua_id_SECTION':'article.nom_section'
            
            
       //   },
@@ -232,13 +232,13 @@ export default {
       formData: {
        s_ua_id:"",
            direction_id:"",
-      libelle: "",
+      serviceua_id: "",
      
       },
       editTransfert: {
      	 s_ua_id:"",
            direction_id:"",
-      libelle: "",
+      serviceua_id: "",
       
       
       },
@@ -309,7 +309,25 @@ export default {
       "stockageArticle",
       "articles",
       "services",
-      "normeImmo"]),
+      "normeImmo",
+      "groupeServiceNorme",
+      "groupeFonctionNormeEquipe"
+      
+      ]),
+
+afficheServiceLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.services.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
 
 anneeAmort() {
       
@@ -324,7 +342,7 @@ anneeAmort() {
 nombreDeFonction() {
       return id => {
         if (id != null && id != "") {
-          return this.normeImmo.filter(element => element.service_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.norme), 0).toFixed(0);
+          return this.normeImmo.filter(element => element.service_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.norme),0).toFixed(0);
         }
       };
     },
@@ -386,9 +404,9 @@ verroService() {
     ajouterUniteAdministrativeLocal() {
      var objetService = {
        ...this.formData,
-       normeequipement:this.nombreDeFonction(this.formData.libelle),
-       historiqueequipement:this.nombreDeFonction(this.formData.libelle),
-       montantequipement:this.montantPourEtreEquipe(this.formData.libelle),
+       normeequipement:this.nombreDeFonction(this.formData.serviceua_id),
+       historiqueequipement:this.nombreDeFonction(this.formData.serviceua_id),
+       montantequipement:this.montantPourEtreEquipe(this.formData.serviceua_id),
        exercicebudget:this.anneeAmort
      }
       this.ajouterService(objetService);
@@ -396,7 +414,7 @@ verroService() {
       this.formData = {
            s_ua_id:"",
            direction_id:"",
-      libelle: "",
+      serviceua_id: "",
       };
       },
       
@@ -409,9 +427,9 @@ verroService() {
     modifierUniteAdministrativeLocal() {
       var objetService = {
        ...this.editTransfert,
-       normeequipement:this.nombreDeFonction(this.editTransfert.libelle),
-       historiqueequipement:this.nombreDeFonction(this.editTransfert.libelle),
-       montantequipement:this.montantPourEtreEquipe(this.editTransfert.libelle),
+       normeequipement:this.nombreDeFonction(this.editTransfert.serviceua_id),
+       historiqueequipement:this.nombreDeFonction(this.editTransfert.serviceua_id),
+       montantequipement:this.montantPourEtreEquipe(this.editTransfert.serviceua_id),
        exercicebudget:this.anneeAmort
      }
       this.modifierService(objetService);
