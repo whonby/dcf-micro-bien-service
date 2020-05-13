@@ -23,6 +23,7 @@
                      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel>  -->
+                                                 <input type="button" @click.prevent="imprimerBPdf"/>
                                      </div> <br>
         <div class="widget-box">
           
@@ -257,6 +258,16 @@ afficheTaux() {
     },
   },
   methods: {
+
+
+imprimerBPdf(){
+  // const doc = new jspdf()
+
+   return this.taux.imprimerPdf
+  //  this.doc.save("taux.pdf")
+},
+
+
     // methode pour notre action
    ...mapActions('parametreGenerauxAdministratif', [ 'ajouterTaux',
     'supprimerTaux', 'modifierTaux',"EncoursTaux"]),   
