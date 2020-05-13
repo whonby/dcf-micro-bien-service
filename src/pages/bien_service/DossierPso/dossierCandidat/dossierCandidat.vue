@@ -1537,7 +1537,7 @@ import { formatageSomme } from '../../../../../src/Repositories/Repository';
               numero_dossier:"",
               entreprise_id:"",
               capacite_financement:"",
-          },
+          },  
           editDossierCadidature:{
                secteur_activite_id:"",
                type_candidat_id:"",
@@ -2659,6 +2659,7 @@ modifierFactureLocal(){
                 var nouvelObjet ={
                   ...this.formDossierCadidature,
                   marche_id:this.marcheid,
+                  entreprise_id:this.formDossierCadidature.entreprise_id,
                   procedure_passation_id: this.afficherTypeProcedureId(this.marcheid)  
                 }
                 this.formFournisseur.raison_sociale=this.formDossierCadidature.nom_cand
@@ -2667,6 +2668,7 @@ modifierFactureLocal(){
                 this.formFournisseur.telephone=this.formDossierCadidature.telephone_cand
                 this.formFournisseur.adresse=this.formDossierCadidature.adresse_post
                 this.formFournisseur.email=this.formDossierCadidature.email_cand
+                  this.formFournisseur.id=this.formDossierCadidature.entreprise_id
 
                 this.formFournisseur.complet=0
 
@@ -2715,6 +2717,7 @@ modifierFactureLocal(){
                 var nouvelObjet ={
                     ...this.editDossierCadidature,
                     marche_id:this.marcheid,
+                    
                     procedure_passation_id:this.afficherTypeProcedureId(this.marcheid)
                 }
                 this.formFournisseur.raison_sociale=this.editDossierCadidature.nom_cand

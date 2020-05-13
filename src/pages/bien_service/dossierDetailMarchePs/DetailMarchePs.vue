@@ -522,7 +522,7 @@ isButtunAddDossierCandidat
                 <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterMP" data-toggle="modal" class="btn btn-primary" >Ajouter</a>
-                       
+                        <!-- <button class="btn btn-warning" title="veillez terminer le proccessuss de dossier de candidat " disabled v-else > Ajouter</button> -->
                     </div>
 
 
@@ -1044,7 +1044,7 @@ listeAvisAnoBailleur(){
 // activationButtonJugement(){
 //     return id =>{
 //         if(id!=null && id!=""){
-//             let objet = this.getterDossierCandidats.find(item =>item.marche_id==id && item.numero_dossier==null)
+//             let objet = this.getterDossierCandidats.find(item =>item.marche_id==id && item.nom_cand==null)
 //             return objet  
 //         }
 //         return null

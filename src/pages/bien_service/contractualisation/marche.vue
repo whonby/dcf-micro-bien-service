@@ -1,4 +1,4 @@
-
+source_financement
 <template>
     <div class="container-fluid">
     
@@ -1251,7 +1251,7 @@
        <div class="controls">
          <input
            type="text"
-           :value="type_financement"
+           v-model="formData.type_financement"
            class="span4"
           
            readonly
@@ -1270,7 +1270,7 @@
        <div class="controls">
          <input
            type="text"
-           :value="source_financement"
+           v-model="formData.source_financement"
            class="span4"
            
            readonly
@@ -1592,7 +1592,7 @@
             <div class="controls">
               <input
                 type="text"
-                :value="editMarche.type_financement"
+                v-model="editMarche.type_financement"
                 class="span4"
                
                 readonly
@@ -1611,7 +1611,7 @@
             <div class="controls">
               <input
                 type="text"
-                :value="editMarche.source_financement"
+                v-model="editMarche.source_financement"
                 class="span4"
                 
                 readonly
@@ -1823,8 +1823,9 @@ export default {
             montant_marche:"",
                 type_marche_id:"",
                 type_financement:"",
+                source_financement:"",
                 Bénéficiaire:"",
-                Source_de_financement:"",
+              //  Source_de_financement:"",
                 Nature_des_prix:"",
                 unite_administrative_id:"",
                 gdenature_id:"",
