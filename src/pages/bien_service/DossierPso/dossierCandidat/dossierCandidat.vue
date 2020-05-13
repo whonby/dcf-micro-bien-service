@@ -1,13 +1,16 @@
 
 
-
+entreprise_id
 <template>
     <div>
 
 
         <div align="right">
                     <div class="widget-content">
-                        <a href="" @click="isFormulaireDossierCand" v-if="isButtunAddDossierCandidat" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                        <a href="" @click="isFormulaireDossierCand" v-if="isButtunAddDossierCandidat" data-toggle="modal" class="btn btn-success" >Ajouter</a>
+                        <!-- <button class="btn btn-warning" title="veillez terminer le proccessuss de receptions des offres" disabled v-else /> -->
+                   
+                   
                     </div>
 
 
@@ -635,7 +638,7 @@
                          <tr class="odd gradeX" >
                              <td colspan="4" width="">
                            <div class="span8" align="left" >
-                        Selectionner l'entreprise:
+                        <!-- Selectionner l'entreprise:
                         <model-list-select style="background-color: rgb(255,255,255);"
                                            class="wide"
                                            :list="entreprises"
@@ -646,7 +649,18 @@
                                            placeholder="Selectionner l'entreprise"
                         >
 
-                        </model-list-select>
+                        </model-list-select> -->
+                        <div class="control-group">
+                        <label class="control-label">Entreprise.</label>
+                        <div class="controls">
+                          <select  class="span10" v-model="formDossierCadidature.entreprise_id">
+                              <option value=""></option>
+                                <option v-for="varText in afficherCandidatSelectionner(marcheid)" :key="varText.id"
+                                        :value="varText.entreprise_id">{{afficheNomEntreprise(varText.entreprise_id)}}</option>
+                            </select>
+                        
+                        </div>
+                    </div>
                         <hr>
                        <!-- <input type="text" placeholder="Recherche ..." v-on:keyup="recherche" class="span6" v-model="search">-->
                     </div>
@@ -658,7 +672,7 @@
                                 <div class="control-group">
                                     <label class="control-label">registre de commerce</label>
                                     <div class="controls">
-                                        <input type="text" class="span" placeholder="Registre de commerce" v-model="formDossierCadidature.reg_com">
+                                        <input type="text" class="span" placeholder="Registre de commerce" :value="afficherRegistreCommerceEntreprise(formDossierCadidature.entreprise_id)">
                                     </div>
                                 </div>
                             </td>
@@ -667,7 +681,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Numero de compte contribuable</label>
                                     <div class="controls">
-                                        <input type="text" class="span" placeholder="Situation Geographique" v-model="formDossierCadidature.numero_cc">
+                                        <input type="text" class="span" placeholder="Situation Geographique" :value="afficherNumeroContribuableEntreprise(formDossierCadidature.entreprise_id)">
                                     </div>
                                 </div>
                             </td>
@@ -675,7 +689,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Raison social</label>
                                     <div class="controls">
-                                        <input type="text" class="span" placeholder="Raison social" v-model="formDossierCadidature.nom_cand">
+                                        <input type="text" class="span" placeholder="Raison social" :value="afficheNomEntreprise(formDossierCadidature.entreprise_id)">
                                     </div>
                                 </div>
                             </td>
@@ -683,7 +697,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Email</label>
                                     <div class="controls">
-                                        <input type="text" class="span" placeholder="Email" v-model="formDossierCadidature.email_cand">
+                                        <input type="text" class="span" placeholder="Email" :value="afficherEmailEntreprise(formDossierCadidature.entreprise_id)">
                                     </div>
                                 </div>
                             </td>
@@ -694,7 +708,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Telephone</label>
                                     <div class="controls">
-                                        <input type="text" class="span" placeholder="Telphone" v-model="formDossierCadidature.telephone_cand">
+                                        <input type="text" class="span" placeholder="Telphone" :value="afficherTelephoneEntreprise(formDossierCadidature.entreprise_id)">
                                     </div>
                                 </div>
                             </td>
@@ -702,7 +716,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Address </label>
                                     <div class="controls">
-                                        <input type="text" class="span" placeholder="Adresse" v-model="formDossierCadidature.adresse_post">
+                                        <input type="text" class="span" placeholder="Adresse" :value="afficherAdressEntreprise(formDossierCadidature.entreprise_id)">
                                     </div>
                                 </div>
                             </td>
@@ -1099,7 +1113,7 @@
                                 <div class="control-group">
                                     <label class="control-label">registre de commerce</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Registre de commerce" v-model="editDossierCadidature.reg_com">
+                                        <input type="text" class="" placeholder="Registre de commerce" :value="afficherRegistreCommerceEntreprise(editDossierCadidature.entreprise_id)">
                                     </div>
                                 </div>
                             </td>
@@ -1108,7 +1122,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Numero de compte contribuable</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Situation Geographique" v-model="editDossierCadidature.numero_cc">
+                                        <input type="text" class="" placeholder="Situation Geographique" :value="afficherNumeroContribuableEntreprise(editDossierCadidature.entreprise_id)">
                                     </div>
                                 </div>
                             </td>
@@ -1116,7 +1130,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Raison social</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Raison social" v-model="editDossierCadidature.nom_cand">
+                                        <input type="text" class="" placeholder="Raison social" :value="afficheNomEntreprise(editDossierCadidature.entreprise_id)">
                                     </div>
                                 </div>
                             </td>
@@ -1124,7 +1138,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Email</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Email" v-model="editDossierCadidature.email_cand">
+                                        <input type="text" class="" placeholder="Email" :value="afficherEmailEntreprise(editDossierCadidature.entreprise_id)">
                                     </div>
                                 </div>
                             </td>
@@ -1136,7 +1150,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Telephone</label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Telphone" v-model="editDossierCadidature.telephone_cand">
+                                        <input type="text" class="" placeholder="Telphone" :value="afficherTelephoneEntreprise(editDossierCadidature.entreprise_id)">
                                     </div>
                                 </div>
                             </td>
@@ -1144,7 +1158,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Address </label>
                                     <div class="controls">
-                                        <input type="text" class="" placeholder="Adresse" v-model="editDossierCadidature.adresse_post">
+                                        <input type="text" class="" placeholder="Adresse" :value="afficherAdressEntreprise(editDossierCadidature.entreprise_id)">
                                     </div>
                                 </div>
                             </td>
@@ -1388,15 +1402,15 @@
     import moment from 'moment';
     // import bailleurAjouter from '../dossierComponent/bailleurAjouter'
     //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
-    import {  ModelListSelect } from 'vue-search-select'
-    import 'vue-search-select/dist/VueSearchSelect.css'
+    // import {  ModelListSelect } from 'vue-search-select'
+    // import 'vue-search-select/dist/VueSearchSelect.css'
 import { formatageSomme } from '../../../../../src/Repositories/Repository';
     export default {
         name: 'compte',
         components:{
             // bailleurAjouter,
             
-            ModelListSelect,
+            // ModelListSelect,
         },
         data() {
             return {
@@ -1537,7 +1551,7 @@ import { formatageSomme } from '../../../../../src/Repositories/Repository';
               numero_dossier:"",
               entreprise_id:"",
               capacite_financement:"",
-          },
+          },  
           editDossierCadidature:{
                secteur_activite_id:"",
                type_candidat_id:"",
@@ -1644,7 +1658,7 @@ import { formatageSomme } from '../../../../../src/Repositories/Repository';
              text_juridique_id:"",
              type_act_effet_id:"",
              analyse_dossier_id:"",
-             //entreprise_id:"",
+              entreprise_id:"",
              marche_id:"",
              numero_marche:"",
              ano_bailleur_id:""
@@ -1795,7 +1809,7 @@ created() {
     console.log(this.appel_offre_marche)*/
 },
         computed: {
-            ...mapGetters("bienService", [ "typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
+            ...mapGetters("bienService", ["gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -1809,6 +1823,110 @@ created() {
                 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
             
+             afficherCandidatSelectionner() {
+      return id => {
+        if (id != null && id != "") {
+           return this.gettersCotationPersonnaliser.filter(qtreel => qtreel.marche_id == id);
+      
+        }
+      };
+    },
+    afficheNomEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+      if (qtereel) {
+        return qtereel.raison_sociale;
+      }
+      return 0
+        }
+      };
+    },
+
+    // afficher registre de commerce de l'entreprise
+
+     afficherRegistreCommerceEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+      if (qtereel) {
+        return qtereel.numero_cc;
+      }
+      return 0
+        }
+      };
+    },
+
+    // afficher numero de contribuable entreprise
+
+
+     afficherNumeroContribuableEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+      if (qtereel) {
+        return qtereel.numero_rc;
+      }
+      return 0
+        }
+      };
+    },
+
+/// afficher l'email de l'entreprise
+afficherEmailEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+      if (qtereel) {
+        return qtereel.email;
+      }
+      return 0
+        }
+      };
+    },
+afficherIdEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+
+
+afficherTelephoneEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+      if (qtereel) {
+        return qtereel.telephone;
+      }
+      return 0
+        }
+      };
+    },
+
+// afficher l'adresse de l'entreprise 
+afficherAdressEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+      if (qtereel) {
+        return qtereel.adresse;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+
     //            afficheRef() {
     //   return id => {
     //     if (id != null && id != "") {
@@ -2047,6 +2165,15 @@ montantHT() {
                     }
                 }
             },
+
+            // isButtunAddDossierCandidat(){
+            //     return id =>{
+            //         if(id!=null && id!=""){
+            //             let elementActive = this.gettersCotationPersonnaliser.find(item => item.marche_id==id && item.entreprise_id==null)
+            //             return elementActive
+            //         }
+            //     }
+            // },
             listeLots(){
                 return  marche_id=>{
                     if (marche_id!="") {
@@ -2459,7 +2586,7 @@ modifierFactureLocal(){
             ,
             recherche() {
               // console.log(this.search)
-                let entre=this.entreprises.find(item=>item.id==this.search);
+                let entre=this.gettersCotationPersonnaliser.find(item=>item.id==this.search);
                 if (entre!=undefined){
                     if(this.search!=""){
                         this.formDossierCadidature.telephone_cand=entre.telephone
@@ -2659,25 +2786,34 @@ modifierFactureLocal(){
                 var nouvelObjet ={
                   ...this.formDossierCadidature,
                   marche_id:this.marcheid,
-                  procedure_passation_id: this.afficherTypeProcedureId(this.marcheid)  
-                }
-                this.formFournisseur.raison_sociale=this.formDossierCadidature.nom_cand
-                this.formFournisseur.numero_cc= this.formDossierCadidature.numero_cc
-                this.formFournisseur.numero_rc=this.formDossierCadidature.reg_com
-                this.formFournisseur.telephone=this.formDossierCadidature.telephone_cand
-                this.formFournisseur.adresse=this.formDossierCadidature.adresse_post
-                this.formFournisseur.email=this.formDossierCadidature.email_cand
+                  entreprise_id:this.afficherIdEntreprise(this.formDossierCadidature.entreprise_id),
+                  procedure_passation_id: this.afficherTypeProcedureId(this.marcheid),
 
-                this.formFournisseur.complet=0
+                  nom_cand:this.afficheNomEntreprise(this.formDossierCadidature.entreprise_id),
+                  email_cand:this.afficherEmailEntreprise(this.formDossierCadidature.entreprise_id),
+                  telephone_cand:this.afficherTelephoneEntreprise(this.formDossierCadidature.entreprise_id),
+                  adresse_post:this.afficherAdressEntreprise(this.formDossierCadidature.entreprise_id),
+                  numero_cc:this.afficherRegistreCommerceEntreprise(this.formDossierCadidature.entreprise_id),
+                  reg_com:this.afficherNumeroContribuableEntreprise(this.formDossierCadidature.entreprise_id)
+                }
+                // this.formFournisseur.raison_sociale=this.formDossierCadidature.nom_cand
+                // this.formFournisseur.numero_cc= this.formDossierCadidature.numero_cc
+                // this.formFournisseur.numero_rc=this.formDossierCadidature.reg_com
+                // this.formFournisseur.telephone=this.formDossierCadidature.telephone_cand
+                // this.formFournisseur.adresse=this.formDossierCadidature.adresse_post
+                // this.formFournisseur.email=this.formDossierCadidature.email_cand
+               // this.formFournisseur.id=this.formDossierCadidature.entreprise_id
+
+                //this.formFournisseur.complet=0
 
            // console.log(this.formFournisseur)
-              let ent=  this.entreprises.find(item=>item.numero_rc==this.formFournisseur.numero_rc)
-                if(ent==undefined){
-                    this.ajouterEntreprise(this.formFournisseur)
-                }
+            //   let ent=  this.entreprises.find(item=>item.numero_rc==this.formFournisseur.numero_rc)
+            //     if(ent==undefined){
+            //         this.ajouterEntreprise(this.formFournisseur)
+            //     }
                 this.ajouterDossierCandidat(nouvelObjet)
                 this.formDossierCadidature={
-                    type_candidat:"",
+                    type_candidat_id:"",
                         numero_cc:"",
                         nom_cand:"",
                         prenom_cand:"",
@@ -2715,19 +2851,27 @@ modifierFactureLocal(){
                 var nouvelObjet ={
                     ...this.editDossierCadidature,
                     marche_id:this.marcheid,
-                    procedure_passation_id:this.afficherTypeProcedureId(this.marcheid)
+                    
+                    procedure_passation_id:this.afficherTypeProcedureId(this.marcheid),
+                     entreprise_id:this.afficherIdEntreprise(this.editDossierCadidature.entreprise_id),
+                     nom_cand:this.afficheNomEntreprise(this.editDossierCadidature.entreprise_id),
+                  email_cand:this.afficherEmailEntreprise(this.editDossierCadidature.entreprise_id),
+                  telephone_cand:this.afficherTelephoneEntreprise(this.editDossierCadidature.entreprise_id),
+                  adresse_post:this.afficherAdressEntreprise(this.editDossierCadidature.entreprise_id),
+                  numero_cc:this.afficherRegistreCommerceEntreprise(this.editDossierCadidature.entreprise_id),
+                  reg_com:this.afficherNumeroContribuableEntreprise(this.editDossierCadidature.entreprise_id)
                 }
-                this.formFournisseur.raison_sociale=this.editDossierCadidature.nom_cand
-                this.formFournisseur.numero_cc= this.editDossierCadidature.numero_cc
-                this.formFournisseur.numero_rc=this.editDossierCadidature.reg_com
-                this.formFournisseur.telephone=this.editDossierCadidature.telephone_cand
-                this.formFournisseur.adresse=this.editDossierCadidature.adresse_post
-                this.formFournisseur.email=this.editDossierCadidature.email_cand
-                this.formFournisseur.complet=0
-                let entre = this.entreprises.find(item =>item.numero_rc==this.formFournisseur.numero_rc)
-                  if(entre==undefined){
-                      this.modifierEntreprise(this.formFournisseur)
-                  }
+                // this.formFournisseur.raison_sociale=this.editDossierCadidature.nom_cand
+                // this.formFournisseur.numero_cc= this.editDossierCadidature.numero_cc
+                // this.formFournisseur.numero_rc=this.editDossierCadidature.reg_com
+                // this.formFournisseur.telephone=this.editDossierCadidature.telephone_cand
+                // this.formFournisseur.adresse=this.editDossierCadidature.adresse_post
+                // this.formFournisseur.email=this.editDossierCadidature.email_cand
+                // this.formFournisseur.complet=0
+                // let entre = this.entreprises.find(item =>item.numero_rc==this.formFournisseur.numero_rc)
+                //   if(entre==undefined){
+                //       this.modifierEntreprise(this.formFournisseur)
+                //   }
                   this.modifierDossierCandidat(nouvelObjet)
                   this.$('#modificationDossierCandidatModal').modal('hide');
             },

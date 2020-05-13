@@ -241,7 +241,7 @@
             </div>
         </div>
 
-        <notifications />
+<notifications/>
  </div>
     
 </template>
@@ -337,7 +337,7 @@ affichierReferenceAppelOffre() {
 
         },
      methods: {
-            ...mapActions("bienService", ['ajouterCotation' , 'modifierCotation','supprimerCotation']),
+            ...mapActions("bienService", ['ajouterCotation' ,"getCotation", 'modifierCotation','supprimerCotation']),
             // ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
             // 
 
@@ -392,6 +392,7 @@ affichierReferenceAppelOffre() {
 // }
               
                this.ajouterCotation(formData, config)
+               this.getCotation()
                this.formCotation ={
                    nom_person:"",
                        contact:"",
