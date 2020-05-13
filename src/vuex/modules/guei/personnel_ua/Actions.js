@@ -8,16 +8,85 @@ import { asyncLoading } from "vuejs-loading-plugin";
  */
 //ajouterActeur
 
-export function getpaiementPersonnel({ commit }) {
+export function getordrepaiement({ commit }) {
 
-    queue.push(() => axios.get('/listePaiementPersonnel').then(response => {
+    queue.push(() => axios.get('/listeOrdrePaiement').then(response => {
         // console.log(response.data)
-        commit('GET_PAIEMENTPERSONNEL', response.data)
+        commit('GET_ORDRE_DE_PAIEMENT', response.data)
     }).catch(error => console.log(error))
     );
 
 
 }
+
+// ajouter type acte personnel
+export function ajouterordrepaiement({ commit }, objetAjoute) {
+    this.$app.$loading(true)
+    axios.post('/ajouterOrdrePaiement', objetAjoute).then(res => {
+        this.$app.$notify({
+            title: 'success',
+            text: 'Enregistrement effectuer',
+            type: "success"
+        });
+        commit('AJOUTER_ORDRE_DE_PAIEMENT', res.data)
+        this.$app.$loading(false)
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type: "error"
+        });
+    })
+}
+
+// supprimer type act
+export function supprimerordrepaiement({ commit }, id) {
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
+            this.$app.$notify({
+                title: 'Suppression',
+                text: 'Suppression effectuer',
+                type: "error"
+            });
+            commit('SUPPRIMER_ORDRE_DE_PAIEMENT', id)
+            axios.delete('/deleteOrdrePaiement/' + id).then(() => dialog.close())
+        })
+}
+
+export function modifierordrepaiement({ commit }, formData) {
+    this.$app.$loading(true)
+    axios.put('/updateOrdrePaiement', formData).then(response => {
+        this.$app.$notify({
+            title: 'success',
+            text: 'Modification effectuer',
+            type: "success"
+        });
+        commit('MODIFIER_ORDRE_DE_PAIEMENT', response.data)
+        this.$app.$loading(false)
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type: "error"
+        });
+    })
+
+}
+
+
+
+
+
+
+
+
+
+
 
 // ajouter type acte personnel
 export function ajouterpaiementPersonnel({ commit }, objetAjoute) {

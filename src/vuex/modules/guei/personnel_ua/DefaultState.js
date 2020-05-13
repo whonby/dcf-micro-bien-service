@@ -30,6 +30,7 @@ const defaultstate = {
     dossierPersonnels: [],
     situation_matrimonial:[],
     paiementPersonnel: [],
+    ordre_paiement:[],
 
     contrat_resilie:[],
     salairesActeur:[]

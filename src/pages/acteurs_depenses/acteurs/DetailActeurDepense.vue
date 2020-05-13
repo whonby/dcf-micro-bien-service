@@ -1356,6 +1356,7 @@ type_acte_id
  </div>
         </div>
 
+        
 
 
 
@@ -2419,6 +2420,7 @@ enregistreIdPersonnel(){
 
                 this.editCompte = this.afficheCompteEntreprise(this.acteurDetail.id)[index];
             },
+            
          
 
  

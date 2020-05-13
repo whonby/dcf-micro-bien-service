@@ -23,11 +23,11 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1">REFERENCE DU BENEFICIAIRE</a>
+                        <a data-toggle="tab" href="#tab3">REFERENCE DU BENEFICIAIRE</a>
                       </li>
                        
                       <li>
-                        <a data-toggle="tab" href="#tab2">SPECIFICATION DE LA DEPENSE</a>
+                        <a data-toggle="tab" href="#tab4">SPECIFICATION DE LA DEPENSE</a>
                       </li>
                       <!-- <li>
                         <a data-toggle="tab" href="#tab3">Descriptif3</a>
@@ -40,7 +40,7 @@
                   </div>
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
-                    <div id="tab1" class="tab-pane active">
+                    <div id="tab3" class="tab-pane active">
                       <div class="modal-body">
         <table class="table table-bordered table-striped">
             <tr>
@@ -164,7 +164,7 @@
           
                     </div>
                     <!--ongle descriptif-->
-                    <div id="tab2" class="tab-pane">
+                    <div id="tab4" class="tab-pane">
                       
   <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -315,13 +315,39 @@
     <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
     <!--///////////////////////////////////////// debut modal modification //////////////////////////////-->
     <div id="modificationModal" class="modal hide tailgrand">
+      <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Modifier Paiement du Personnel</h3>
       </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-          
+      <div class="table-responsive text-nowrap">
+  <table class="table table-bordered table-striped">
+    <div class="widget-box">
+      <div class="widget-title">
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a data-toggle="tab" href="#tab1">REFERENCE DU BENEFICIAIRE</a>
+          </li>
+           
+          <li>
+            <a data-toggle="tab" href="#tab2">SPECIFICATION DE LA DEPENSE</a>
+          </li>
+          <!-- <li>
+            <a data-toggle="tab" href="#tab3">Descriptif3</a>
+          </li> -->
+          <!-- <li>
+            <a data-toggle="tab" href="#tab3">Autres Information</a>
+          </li> -->
+         
+        </ul>
+      </div>
+      <div class="widget-content tab-content">
+            <div id="tab1" class="tab-pane active">
+              <div class="modal-body">
+         <table class="table table-bordered table-striped">
+      
             <tr>
               <td>
                 <div class="control-group">
@@ -351,150 +377,222 @@
                    </div>
                  </div>
                </td>
-               <td>
-                 <div class="control-group">
-                   <label class="control-label">Programme</label>
-                   <div class="controls">
-                     <select v-model="editpaiementPersonnel.programme_id" class="span4">
-                       <option
-                         v-for="program in afficheNiveauPlanProg"
-                         :key="program.id"
-                         :value="program.id"
-                       >{{program.code}}-{{program.libelle}}</option>
-                     </select>
-                   </div>
-                 </div>
-               </td>
-               <td>
- 
-              <div class="control-group">
-              <label class="control-label">Action</label>
-              <div class="controls">
-                 <select v-model="editpaiementPersonnel.action_id" class="span4">
-                   <option
-                    v-for="act in afficheNiveauAction"
-                    :key="act.id"
-                    :value="act.id"
-                   >{{act.code}}-{{act.nom_section}}</option>
-                  </select>
-               </div>
-             </div>
-           </td>
+            <td>
+     
+      <label class="control-label">Ligne</label>
+      <div class="controls">
+        <select v-model="editpaiementPersonnel.ligne_id" class="span" :readOnly="activerLigneBudgetaire">
+          <option
+            v-for="lignebudg in afficheUaParLignePersonnel(editpaiementPersonnel.ua_id)"
+            :key="lignebudg.id"
+            :value="lignebudg.afficheEconomique.id"
+          >{{lignebudg.afficheEconomique.code}}-{{lignebudg.afficheEconomique.libelle}}</option>
+        </select>
+      </div>
+    
+  </td>
+  <td>
+    
+      <label class="control-label">Programme</label>
+      <div class="controls">
+        <select v-model="editpaiementPersonnel.programme_id" class="span" :readOnly="activerProgramme">
+          <option value=""></option>
+          <option
+            v-for="program in afficheProgrammeParLigne(editpaiementPersonnel.ligne_id)"
+            :key="program.id"
+            :value="program.afficheProgramme.id"
+          >{{program.afficheProgramme.code}}-{{program.afficheProgramme.libelle}}</option>
+        </select>
+      </div>
+    
+  </td>  
              
             </tr>
-            <tr>
+          <tr>
+                        <td>
+                <label class="control-label">Action</label>
+                <div class="controls">
+                  <select v-model="editpaiementPersonnel.action_id" :readOnly="activerAction" class="span">
+                    <option
+                      v-for="act in afficheActionParProgramme(editpaiementPersonnel.programme_id)"
+                      :key="act.id"
+                      :value="act.afficheAction.id"
+                    >{{act.afficheAction.code}}-{{act.afficheAction.libelle}}</option>
+                  </select>
+              </div>
+            </td>
+            <td>
+            
+             
+                <label class="control-label">Activite</label>
+                <div class="controls">
+                  <select v-model="editpaiementPersonnel.activite_id" class="span" :readOnly="activerActivite">
+                    <option
+                      v-for="activ in afficheActiviteParAction(editpaiementPersonnel.action_id)"
+                      :key="activ.id"
+                      :value="activ.afficheActivite.id"
+                    >{{activ.afficheActivite.code}}-{{activ.afficheActivite.libelle}}</option>
+                  </select>
+                </div>
+             
+            </td>
              <td>
-                           
+  
+    <label class="control-label">Numero Matricule</label>
+    <div class="controls">
+      <input
+       type="text"
+       v-model="editpaiementPersonnel.numeromatricule"
+       class="span"
+       placeholder="Saisir code fichier"
+       readonly
+      />
+    </div>
+  
+</td>
+ <td>
+  
+    <label class="control-label">References Bancaires</label>
+    <div class="controls">
+      <input
+       type="text"
+       v-model="editpaiementPersonnel.referencebancaire"
+       class="span"
+      readonly
+      />
+    </div>
+  
+</td>
+          </tr>
+
+         </table>
+           </div>
+            </div>
+
+
+                         <div id="tab2" class="tab-pane">
+                    
+ <div class="modal-body">
+       <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+             
               <div class="control-group">
-                 <label class="control-label">Activite</label>
+                 <label class="control-label">Mode de paiemnt</label>
                  <div class="controls">
-                   <select v-model="editpaiementPersonnel.activite_id" class="span4">
+                   <select v-model="editpaiementPersonnel.modepaiement_id" class="span">
                      <option
-                       v-for="activ in afficheNiveauActivite"
+                       v-for="activ in modepaiements"
                        :key="activ.id"
                        :value="activ.id"
-                     >{{activ.code}}-{{activ.libelle}}</option>
+                     >{{activ.libelle}}</option>
                    </select>
                  </div>
                </div>
              </td>
-              <td>
-                 <div class="control-group">
-                  <label class="control-label">Ligne</label>
-                  <div class="controls">
-                    <select v-model="editpaiementPersonnel.ligne_id" class="span4">
-                      <option
-                        v-for="lignebudg in derniereNivoPlanBudgetaire"
-                        :key="lignebudg.id"
-                        :value="lignebudg.id"
-                      >{{lignebudg.code}}-{{lignebudg.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-
-              <td>
-                <div class="control-group">
-                <label class="control-label">Code Fichier:</label>
-                 <div class="controls">
-                <input
-                 type="text"
-                 v-model="editpaiementPersonnel.codefichier"
-                 class="span4"
-                 placeholder="Saisir code fichier"
-               />
-              </div>
-            </div>
-            </td>
-
+            
+               <td>
              
-             <td>
-            <div class="control-group">
-              <label class="control-label">Fichier Joint:</label>
-  
-              <div class="controls">
-                <input
-                  type="file"
-                  class="span4"
-                  placeholder="Saisir fichier joint"
-                  readonly
-               />
-             </div>
-            </div>
-            </td>
-             
-            </tr>
-            <tr>
-            <td colspan="2">
               <div class="control-group">
-               <label class="control-label">Objet Depense:</label>
+                 <label class="control-label">Banque</label>
+                 <div class="controls">
+                   <select v-model="editpaiementPersonnel.banque_id" class="span">
+                     <option
+                       v-for="activ in afficheBanque(editpaiementPersonnel.ua_id)"
+                       :key="activ.id"
+                       :value="activ.id"
+                     >{{afficheBanqueLibelle(activ.banq_id)}}</option>
+                   </select>
+                 </div>
+               </div>
+             </td>
+               <td>
+               <div class="control-group">
+               <label class="control-label">Compte de disponibilite affecte</label>
                 <div class="controls">
                <input
-                 type="text"
-                 v-model="editpaiementPersonnel.objetdepense"
-                  class="span8"
-                  placeholder="Saisir l'objet de depense"
-               />
+                type="text"
+                :value="afficherCompteBanque(editpaiementPersonnel.banque_id)"
+                class="span"
+                readonly
+                
+              />
              </div>
-             </div>
-            </td>
+           </div>
+           </td>
               <td>
-             <div class="control-group">
-              <label class="control-label">Mois de Paiement:</label>
-              <div class="controls">
-                <input
-                 type="text"
-                 v-model="editpaiementPersonnel.moisdepaiement"
-                 class="span4"
-                 placeholder="Saisir le mois de paiement"
-               />
-             </div>
-             </div>
+               <div class="control-group" >
+                 <label class="control-label">Mois de Paiement:</label>
+     
+ 
+                 <div class="form-group" >
+                 <select v-model="editpaiementPersonnel.moisdepaiement" class="span">
+                    <option value="" >Selectionner</option>
+                    <option value="Janvier" >Janvier</option>
+                    <option value="Février">Février</option>
+                    <option value="Mars">Mars</option>
+                    <option value="Avril">Avril</option>
+                    <option value="Mai">Mai</option>
+                    <option value="Juin">Juin</option>
+                    <option value="Juillet">Juillet</option>
+                    <option value="Août">Août</option>
+                    <option value="Septembre">Septembre</option>
+                    <option value="Octobre">Octobre</option>
+                    <option value="Novembre">Novembre</option>
+                    <option value="Decembre">Decembre</option>
+                    
+                    
+                    
+      
+                   </select>
+              </div>
+                </div>
              </td>
               
+          </tr>
+          <tr>
+           
               <td>
-             <div class="control-group">
-              <label class="control-label">Montant des Salaires:</label>
-              <div class="controls">
-                <input
-                 type="text"
-                 v-model="editpaiementPersonnel.montantdessalaires"
-                 class="span4"
-                 placeholder="Saisir le montant de paiement"
-               />
-             </div>
-             </div>
+               <div class="control-group">
+                 <label class="control-label">Objet de la depense</label>
+     
+ 
+                 <div class="controls">
+                   <input
+                    type="text"
+                    v-model="editpaiementPersonnel.montantdessalaires"
+                    class="span4"
+                    placeholder="Saisir le montant de paiement"
+      
+                   />
+                  </div>
+               </div>
              </td>
-
-            
-             
-             
-            
-             
-            </tr>
-         
-        </table>
+           
+                        <td>
+   <div class="control-group">
+     <label class="control-label">Pieces Justificative</label>
+   
+     <div class="controls">
+       <input
+         type="file"
+         class="span"
+         placeholder="Saisir fichier joint"
+         readonly
+       />
+     </div>
+     </div>
+ </td>
+          </tr>
+       </table>
+ </div>
+                                                                                                                                                                                                                                                                                                                                    
+    
+    
+          </div>
       </div>
+       
+      
       <div class="modal-footer">
         <a
           @click.prevent="modifierpaiementPersonnelLocal(editpaiementPersonnel)"
@@ -504,6 +602,12 @@
         >Modifier</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
+      </div>
+       </table>
+    </div>
+     </div>
+       </div>
+        </div>
     </div>
     <!--///////////////////////////////////////// fin modal modification //////////////////////////////-->
     <!-- End Page Header -->

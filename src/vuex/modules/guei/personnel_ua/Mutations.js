@@ -8,6 +8,51 @@
  * @param data
  * @constructor
  */
+const GET_ORDRE_DE_PAIEMENT = (state, data) => {
+    state.ordre_paiement = data
+}
+
+
+const AJOUTER_ORDRE_DE_PAIEMENT = (state, nouvel_objet) => {
+    state.ordre_paiement.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+}
+
+/**
+ * Suppresions
+ * @param state
+ * @param id
+ * @constructor
+ */
+const SUPPRIMER_ORDRE_DE_PAIEMENT = (state, id) => {
+    state.ordre_paiement = state.ordre_paiement.filter(op => op.id != id)
+}
+
+
+const MODIFIER_ORDRE_DE_PAIEMENT = (state, objetModifie) => {
+    state.ordre_paiement = state.ordre_paiement.map(op => {
+        if (op.id == objetModifie.id) {
+            op = { ...objetModifie }
+        }
+        return op
+    })
+}
+
+/**
+
+
+
+
+
+/**
+ * Mutation echelons
+ */
+/**
+ *
+ * @param state
+ * @param data
+ * @constructor
+ */
 const GET_PAIEMENTPERSONNEL = (state, data) => {
     state.paiementPersonnel = data
 }
@@ -853,6 +898,12 @@ const MODIFIER_SITUATION_MATRIMONIAL = (state, objetModifie) => {
 
 
 export {
+
+    GET_ORDRE_DE_PAIEMENT,
+    AJOUTER_ORDRE_DE_PAIEMENT,
+    SUPPRIMER_ORDRE_DE_PAIEMENT,
+    MODIFIER_ORDRE_DE_PAIEMENT,
+    
     
     
     GET_PAIEMENTPERSONNEL,
