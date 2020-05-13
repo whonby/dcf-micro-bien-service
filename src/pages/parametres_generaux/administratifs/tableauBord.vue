@@ -1,4 +1,8 @@
 <template>
+
+
+
+
    
 <!--breadcrumbs-->
   
@@ -7,6 +11,49 @@
 <!--Action boxes-->
   <div class="container-fluid">
     <div class="quick-actions_homepage">
+
+      <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                                 <li class="active"><a data-toggle="tab" href="#tab0145"> Personnel</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab01">Bien && Service</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab4">Investissemnt</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab1">Transfert</a></li>
+                               
+                                
+                            </ul>
+                        </div>
+
+
+                         <div class="widget-content tab-content">
+                         <div id="tab0145" class="tab-pane active">
+                            <ul class="quick-actions">
+
+                            <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> My Dashboard </a> </li>
+                        <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Charts</a> </li>
+                        <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> Widgets </a> </li>
+                          <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i> Tables</a> </li>
+
+                              </ul>
+
+                          </div>
+
+                          <div id="tab01" class="tab-pane">
+                            ppppppppp
+
+                          </div>
+
+                          
+                          <div id="tab4" class="tab-pane">
+                           jjjjjjjj
+
+                          </div>
+
+                          
+                          <div id="tab1" class="tab-pane">
+                           ttttttttt
+
+                          </div>
+                           </div>
       <ul class="quick-actions">
         <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> My Dashboard </a> </li>
         <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Charts</a> </li>
