@@ -262,6 +262,7 @@ this.getClassificationGradeFonction()
         this.getConges();
         this.allActeurDepense()
         this.getpaiementPersonnel()
+        
          this.getActeurFinContratAndActivite()
         this.getordrepaiement()
         this.getSalaire()

@@ -16,7 +16,7 @@
               <input
                 type="text"
                 v-model="formData.libelle"
-                class="span12"
+                class="span5"
                 placeholder="Saisir le libelle"
               />
             </div>
@@ -51,7 +51,7 @@
               <input
                 type="text"
                 v-model="editService.libelle"
-                class="span12"
+                class="span5"
                 placeholder="Saisir le libelle"
               />
             </div>
@@ -63,7 +63,7 @@
           @click.prevent="modifierServiceLocal(editService)"
           class="btn btn-primary"
           href="#"
-          v-show="editService.code.length && editService.libelle.length"
+          v-show="editService.libelle.length"
         >Modifier</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
@@ -163,15 +163,15 @@ export default {
       ],
 json_fields: {
        
-        CODE: "code",
+       
         LIBELLE: "libelle"
       },
       formData: {
-        code: "",
+      
         libelle: ""
       },
       editService: {
-        code: "",
+      
         libelle: ""
       },
       search: ""
@@ -227,7 +227,7 @@ json_fields: {
       this.modifierService(this.editService);
 this.$("#modificationModal").modal('hide');
       // this.editService = {
-      //   code: "",
+      // 
       //   libelle: ""
       // };
     },

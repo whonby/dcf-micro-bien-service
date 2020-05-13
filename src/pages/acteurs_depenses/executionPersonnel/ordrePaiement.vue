@@ -10,7 +10,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h4>Ajouter Paiement du Personnel</h4>
+              <h4>Ajouter Ordre de Paiement</h4>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -29,9 +29,9 @@
                       <li>
                         <a data-toggle="tab" href="#tab2">SPECIFICATION DE LA DEPENSE</a>
                       </li>
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab3">Descriptif3</a>
-                      </li> -->
+                      <li>
+                        <a data-toggle="tab" href="#tab3">SITUATION DU CREDIT</a>
+                      </li>
                       <!-- <li>
                         <a data-toggle="tab" href="#tab3">Autres Information</a>
                       </li> -->
@@ -39,6 +39,135 @@
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
+                     <div id="tab3" class="tab-pane">
+                      <div class="modal-body">
+                        <table class="table table-bordered table-striped">
+                          <tr>
+                            <td>
+                
+                 <label class="control-label">Trésor</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                  v-model="formData.montant_tresor"
+                      
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
+              <td>
+                
+                 <label class="control-label">Don</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                    v-model="formData.montant_don"
+                      
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
+              <td>
+                
+                 <label class="control-label">Emprunt</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                    v-model="formData.montant_emprunt"
+                      
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
+              <td>
+                
+                 <label class="control-label">Montant/Depense</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                  
+                      readonly
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
+                          </tr>
+                                  <tr>
+                            <td>
+                
+                 <label class="control-label">Crédits Autorises</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                  
+                      
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
+              <td>
+                
+                 <label class="control-label">Cumuls des OP Anterieurs</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                  
+                      
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
+              <td>
+                
+                 <label class="control-label">Engagement Actuel</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                  
+                      
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
+              <td>
+                
+                 <label class="control-label">Cumuls des Engagements</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                  
+                      readonly
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
+                          </tr>
+                          <tr>
+                             <td>
+                
+                 <label class="control-label">Disponible</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                  
+                      readonly
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
+                          </tr>
+                        </table>
+                      </div>
+                     </div>
                     <!--ongle identification-->
                     <div id="tab1" class="tab-pane active">
                       <div class="modal-body">
@@ -46,14 +175,15 @@
             <tr>
               <td>
                 
-                 <label class="control-label">Exercice en Cours:</label>
+                 <label class="control-label">Exercice en Cours</label>
                  <div class="controls">
                    <input
                      type="text"
-                   
+                   :value="afficherAnneeBudgetaire(PaiementPersoid)"
                     
                       placeholder="Saisir l'exercice en cours"
                       readonly
+                      class="span"
                    />
                  </div>
                 
@@ -62,18 +192,12 @@
                
                   <label class="control-label">Unite Administrative</label>
                   <div class="controls">
-                    <!-- <select v-model="formData.ua_id" class="span">
-                      <option
-                        v-for="UniteA in uniteAdministratives"
-                        :key="UniteA.id"
-                        :value="UniteA.id"
-                      >{{UniteA.libelle}}</option>
-                    </select> -->
+                   
                     <input
          type="text"
-        
+         :value="afficherLibelleUa(afficherIdUa(PaiementPersoid))"
          class="span"
-         placeholder="Saisir code fichier"
+         
          readonly
         />
                   </div>
@@ -83,18 +207,12 @@
                  
                   <label class="control-label">Ligne</label>
                   <div class="controls">
-                    <!-- <select v-model="formData.ligne_id" class="span" :readOnly="activerLigneBudgetaire">
-                      <option
-                        v-for="lignebudg in afficheUaParLignePersonnel(formData.ua_id)"
-                        :key="lignebudg.id"
-                        :value="lignebudg.afficheEconomique.id"
-                      >{{lignebudg.afficheEconomique.code}}-{{lignebudg.afficheEconomique.libelle}}</option>
-                    </select> -->
+                   
                     <input
          type="text"
-        
+         :value="afficherLibelleLigne(afficherIdLigne(PaiementPersoid))"
          class="span"
-         placeholder="Saisir code fichier"
+         
          readonly
         />
                   </div>
@@ -104,15 +222,12 @@
                 
                   <label class="control-label">Programme</label>
                   <div class="controls">
-                    <!-- <select v-model="formData.programme_id" class="span" :readOnly="activerProgramme">
-                      <option value=""></option>
-                     
-                    </select> -->
+                    
                     <input
          type="text"
-        
+         :value="afficherLibelleProgramme(afficherIdProgramme(PaiementPersoid))"
          class="span"
-         placeholder="Saisir code fichier"
+         
          readonly
         />
                   </div>
@@ -126,9 +241,9 @@
                   <div class="controls">
                    <input
          type="text"
-        
+         :value="afficherLibelleAction(afficherIdAction(PaiementPersoid))"
          class="span"
-         placeholder="Saisir code fichier"
+         
          readonly
         />
                 </div>
@@ -140,9 +255,9 @@
                   <div class="controls">
                    <input
          type="text"
-        
+         :value="afficherLibelleActivite(afficherIdActivite(PaiementPersoid))"
          class="span"
-         placeholder="Saisir code fichier"
+         
          readonly
         />
                   </div>
@@ -154,9 +269,9 @@
       <div class="controls">
         <input
          type="text"
-        
+         :value="afficherNumeroMatricule(PaiementPersoid)"
          class="span"
-         placeholder="Saisir code fichier"
+         
          readonly
         />
       </div>
@@ -168,7 +283,7 @@
       <div class="controls">
         <input
          type="text"
-        
+         :value="afficherReferenceBancaire(PaiementPersoid)"
          class="span"
         readonly
         />
@@ -193,9 +308,9 @@
                   <div class="controls">
                    <input
          type="text"
-        
+         :value="afficherModePaiementLibelle(afficherModePaiement(PaiementPersoid))"
          class="span"
-         placeholder="Saisir code fichier"
+         
          readonly
         />
                   </div>
@@ -209,9 +324,9 @@
                   <div class="controls">
                    <input
          type="text"
-        
+         :value="afficherBanqueLibelle(afficherIdBanque(PaiementPersoid))"
          class="span"
-         placeholder="Saisir code fichier"
+         
          readonly
         />
                   </div>
@@ -223,7 +338,7 @@
                  <div class="controls">
                 <input
                  type="text"
-                
+                 :value="afficherCompteUa(PaiementPersoid)"
                  class="span"
                  readonly
                  
@@ -239,9 +354,9 @@
                   <div class="form-group" >
                  <input
          type="text"
-        
+         :value="affichermoisdepaiement(PaiementPersoid)"
          class="span"
-         placeholder="Saisir code fichier"
+         
          readonly
         />
                </div>
@@ -259,7 +374,7 @@
                   <div class="controls">
                     <input
                      type="text"
-                     v-model="formData.objetdepense"
+                      :value="afficherObjetdepense(PaiementPersoid)"
                      class="span"
                      readonly
        
@@ -352,9 +467,7 @@
 <script>
   import { mapGetters, mapActions } from "vuex";
 export default {
-    props:["executionPersoid",
-          
-           ],
+    props:["PaiementPersoid","exerciceBudgetaire"],
     data(){
         return{
 fabActions: [
@@ -366,7 +479,7 @@ fabActions: [
          
             formData: {
   // 
-  Exercice_Budgétaire:"",
+  
    section:"",
    programme:"",
    gdenature_id:"",
@@ -383,9 +496,9 @@ fabActions: [
   NumeroFournisseur:"",
   adresse:"",
   sommeMontant:"",
-  montant_tresor:"",
-  montant_don:"",
-  montant_emprunt:"",
+  montant_tresor:0,
+  montant_don:0,
+  montant_emprunt:0,
   ligne_id:"",
   Imp_budgetaire:"",
   num_facture:"",
@@ -427,18 +540,265 @@ fabActions: [
  "afficheNiveauPlanProg",
  "exercices_budgetaires"
    ]),
+ ...mapGetters("bienService", ["typeMarches",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+                "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
+                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
+                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
+                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
+                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
+                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
 
    ...mapGetters('parametreGenerauxFonctionnelle',[
 
       "plans_fonctionnels",
  "afficheNiveauPlanFonctionnel"
    ]),
-
+...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
 ...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
   ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
      
+     afficherAnneeBudgetaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.exerciceencours;
+      }
+      return 0
+        }
+      };
+    },
+     afficherIdUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ua_id;
+      }
+      return 0
+        }
+      };
+    },
+     afficherLibelleUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+     afficherIdLigne() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ligne_id;
+      }
+      return 0
+        }
+      };
+    },
+    afficherLibelleLigne() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_budgetaires.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+    afficherIdProgramme() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.programme_id;
+      }
+      return 0
+        }
+      };
+    },
+      afficherLibelleProgramme() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_programmes.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+    afficherIdAction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.action_id;
+      }
+      return 0
+        }
+      };
+    },
+     afficherLibelleAction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.afficheNiveauAction.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+    afficherIdActivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.activite_id;
+      }
+      return 0
+        }
+      };
+    },
+     afficherLibelleActivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.afficheNiveauActivite.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle);
+      }
+      return 0
+        }
+      };
+    },
+     afficherNumeroMatricule() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numeromatricule;
+      }
+      return 0
+        }
+      };
+    },
+     afficherReferenceBancaire() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.referencebancaire;
+      }
+      return 0
+        }
+      };
+    },
+    afficherModePaiement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.modepaiement_id;
+      }
+      return 0
+        }
+      };
+    },
+    afficherModePaiementLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.modepaiements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    afficherIdBanque() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.banque_id;
+      }
+      return 0
+        }
+      };
+    },
+     afficherBanqueLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.banques.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+    afficherCompteUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.rib;
+      }
+      return 0
+        }
+      };
+    },
+    affichermoisdepaiement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.moisdepaiement;
+      }
+      return 0
+        }
+      };
+    },
+    afficherObjetdepense() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.objetdepense;
+      }
+      return 0
+        }
+      };
+    },
     },
     methods:{
         ...mapActions("bienService", [ "ajouterLot","modifierLot","supprimerLot"]),

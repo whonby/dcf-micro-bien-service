@@ -21,23 +21,11 @@ export function getordrepaiement({ commit }) {
 
 // ajouter type acte personnel
 export function ajouterordrepaiement({ commit }, objetAjoute) {
-    this.$app.$loading(true)
+    
     axios.post('/ajouterOrdrePaiement', objetAjoute).then(res => {
-        this.$app.$notify({
-            title: 'success',
-            text: 'Enregistrement effectuer',
-            type: "success"
-        });
+      
         commit('AJOUTER_ORDRE_DE_PAIEMENT', res.data)
-        this.$app.$loading(false)
-    }).catch(error => {
-        console.log(error)
-        this.$app.$loading(true)
-        this.$app.$notify({
-            title: 'Erreur',
-            text: "Erreur c'est produit lors de l'enregistrement",
-            type: "error"
-        });
+        
     })
 }
 
@@ -77,7 +65,6 @@ export function modifierordrepaiement({ commit }, formData) {
     })
 
 }
-
 
 
 
@@ -246,16 +233,16 @@ export function modifierTypeAct({commit}, formData){
     })
 
 }
-// export  function  getpaiementPersonnel({commit}) {
+export  function  getpaiementPersonnel({commit}) {
 
-//     queue.push(() =>  axios.get('/listePaiementPersonnel').then(response => {
-//             // console.log(response.data)
-//             commit('GET_PAIEMENTPERSONNEL', response.data)
-//         }).catch(error => console.log(error))
-//     );
+    queue.push(() =>  axios.get('/listePaiementPersonnel').then(response => {
+            // console.log(response.data)
+            commit('GET_PAIEMENTPERSONNEL', response.data)
+        }).catch(error => console.log(error))
+    );
 
 
-// }
+}
 
 // ajouter type acte personnel
 // export  function ajouterpaiementPersonnel({commit}, objetAjoute){
@@ -925,16 +912,16 @@ export  function  allActeurDepense({commit}) {
 /**
  * Gestion des echelons
  */
-export  function  getEchelons({commit}) {
+// export  function  getEchelons({commit}) {
 
-    queue.push(() =>axios.get('/liste_echellon').then(response => {
-            // console.log(response.data)
-            commit('GET_ECHELONS', response.data)
-        }).catch(error => console.log(error))
-    );
+//     queue.push(() =>axios.get('/liste_echellon').then(response => {
+//             // console.log(response.data)
+//             commit('GET_ECHELONS', response.data)
+//         }).catch(error => console.log(error))
+//     );
 
 
-}
+// }
 
 // ajouter type acte personnel
 export  function ajouterEchelons({commit}, objetAjoute){

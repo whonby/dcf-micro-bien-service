@@ -194,7 +194,7 @@
                       <option
                         v-for="activ in afficheBanque(formData.ua_id)"
                         :key="activ.id"
-                        :value="activ.id"
+                        :value="activ.banq_id"
                       >{{afficheBanqueLibelle(activ.banq_id)}}</option>
                     </select>
                   </div>
@@ -771,13 +771,13 @@ export default {
       formData: {
         numeromatricule:"PERSONNEL",
         referencebancaire:"Liste du personnel",
-        codefichier: "",
+        id:"",
         activite_id: "",
         programme_id: "",
         action_id:"",
         ua_id: "",
         moisdepaiement: "",
-        montantdessalaires: "",
+        
         objetdepense:"Salaire",
         ligne_id:"",
         fichierjoint:"",
@@ -785,13 +785,13 @@ export default {
       },
       editpaiementPersonnel: {
         
-         codefichier: "",
+         id:"",
          activite_id: "",
          programme_id: "",
          action_id:"",
          ua_id: "",
          moisdepaiement: "",
-         montantdessalaires: "",
+         
          objetdepense:"",
          ligne_id:"",
          fichierjoint:""
@@ -998,7 +998,8 @@ return this.paiementPersonnel.filter((item) => {
       "getpaiementPersonnel",
       "ajouterpaiementPersonnel",
       "modifierpaiementPersonnel",
-      "supprimerpaiementPersonnel"
+      "supprimerpaiementPersonnel",
+      "ajouterordrepaiement"
     ]),
 
     afficherModalAjouterpaiementPersonnel() {
@@ -1017,18 +1018,18 @@ return this.paiementPersonnel.filter((item) => {
          rib:this.afficherCompteBanque(this.formData.banque_id)
        
       };
-      
+     
       this.ajouterpaiementPersonnel(nouvelObjet);
-
+     this.ajouterordrepaiement(nouvelObjet)
       this.formData = {
         
-       codefichier: "",
+       
         activite_id: "",
        programme_id: "",
        action_id:"",
        ua_id: "",
         moisdepaiement: "",
-       montantdessalaires: "",
+       
        objetdepense:"Salaire",
        ligne_id:"",
        fichierjoint:""
@@ -1047,7 +1048,7 @@ return this.paiementPersonnel.filter((item) => {
 this.$("#modificationModal").modal('hide');
       // this.editpaiementPersonnel = {
         //  exercice_en_cours: "",
-        //  codefichier: "",
+        //  
         //  activite_id: "",
         //  programme_id: "",
         //  action_id:"",

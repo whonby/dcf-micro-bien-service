@@ -1114,7 +1114,24 @@ export const equipementNonCouvert = (state, getters, rootState, rootGetters) =>
     return element;
   });
 
+export const afficherNorme = state =>
+  state.normeImmo.filter(
+    trieUaBesoin => trieUaBesoin.service_id != null
+  );
+export const groupeServiceNorme = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.afficherNorme, "service_id");
+};
 
+
+export const afficherNormeFonction = state =>
+  state.normeImmo.filter(
+    trieUaBesoin => trieUaBesoin.fonction_id != null
+  );
+export const groupeFonctionNormeEquipe = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.afficherNormeFonction, "fonction_id");
+};
 
 
 
