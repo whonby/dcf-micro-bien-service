@@ -2,6 +2,7 @@
 const type_acte_personnels = state => state.type_acte_personnels;
 const fonctions  = state => state.fonctions;
 const paiementPersonnel  = state => state.paiementPersonnel;
+const ordre_paiement = state => state.ordre_paiement;
 const classes =state => state.classes;
 export const salairesActeur = state =>state.salairesActeur;
 export const situation_matrimonial = state => state.situation_matrimonial;
@@ -161,6 +162,7 @@ export const afficheNombrePersonnelRecuActeNormination = state =>
 
 
 export {
+    ordre_paiement,
     paiementPersonnel,
     type_acte_personnels,
     fonctions,

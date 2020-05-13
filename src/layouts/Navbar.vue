@@ -103,7 +103,7 @@ export default {
      "getOrganigrammeUa",
      "getAllBanqueUa"
     ]),
-            ...mapActions('personnelUA', ["getSalaire","getpaiementPersonnel",'getTypeSalarie',"getEchelons",
+            ...mapActions('personnelUA', ["getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
             "getClasses","getEchelons","getpaiementPersonnel","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite","getCategorieGrade",
@@ -263,7 +263,7 @@ this.getClassificationGradeFonction()
         this.allActeurDepense()
         this.getpaiementPersonnel()
          this.getActeurFinContratAndActivite()
-        this.getpaiementPersonnel()
+        this.getordrepaiement()
         this.getSalaire()
             /**Gestion des marche*/
             
