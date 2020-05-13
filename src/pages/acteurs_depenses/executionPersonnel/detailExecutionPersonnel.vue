@@ -185,7 +185,7 @@ export default {
           icon: "add"
         }
       ],
-      PaiementPersoid:"",
+      executionPersoid:"",
          
      
       json_fields: {
@@ -202,6 +202,7 @@ export default {
   },
 created() {
             this.executionPersoid=this.$route.params.id
+             this.exo=this.$route.params.exerciceencours
    this.detail_Execution = this.paiementPersonnel.find(
        idExecution => idExecution.id == this.$route.params.id
          )
