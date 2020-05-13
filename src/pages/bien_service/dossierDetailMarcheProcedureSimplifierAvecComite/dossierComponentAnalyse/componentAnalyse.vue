@@ -530,86 +530,24 @@ affichierAppelOffreid() {
       };
     },
 
-// afficher Id Dossier candidat
 
-    //  afficherIdDossierCandidat() { 
-    //   return id => {
-    //     if (id != null && id != "") {
-    //        const qtereel = this.getterDossierCandidats.find(qtreel => qtreel.marche_id == id);
-
-    //   if (qtereel) {
-    //     return qtereel.id;
-    //   }
-    //   return null
-    //     }
-    //   };
-    // },
-    
-    //  listeAppel() {
-    //   return id => {
-    //     if (id != null && id != "") {
-    //        const qtereel = this.gettersCotations.find(qtreel => qtreel.id == id);
-
-    //   if (qtereel) {
-    //     return qtereel.ref_appel;
-    //   }
-    //   return 0
-    //     }
-    //   };
-    // },
     },
     methods:{
         ...mapActions('bienService',['supprimerAnalyseDossier',
         'ajouterAnalyseDossier','modifierAnalyseDossier']),
         
-        
-// dossierCandidature: function () {
-//                 return macheid => {
-//                     if (macheid != "") {
-//                       //  console.log("Marche dossier candidat")
-//                        let  objetNumero= this.getterDossierCandidats.filter(idmarche => idmarche.marche_id == macheid)
-
-//                        if(objetNumero){
-//                            return objetNumero.numero_dossier
-//                        }
-//                        return null
-//                     }
-//                 }
-//             },
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-            // listeCojo: function () {
-            //     return macheid => {
-            //         if (macheid != "") {
-            //           let Objet=  this.getterCojos.find(idmarche => idmarche.lettre_invitation.appel_offre.macheid == macheid);
-            //             let vM=this;
-            //             if(Objet!=undefined){
-            //                 vM.idcojo=Objet.id
-            //             }
-            //             return this.getterCojos.filter(idmarche => idmarche.lettre_invitation.appel_offre.macheid == macheid)
-            //         }
-            //     }
-            // },
                ajouterAnalyseD(){
                    var nouvelObjet ={
                        ...this.formAnalyseDossier,
                        marche_id:this.macheid,
-                        appel_offre_id :this.affichierAppelOffreid(this.macheid),
-                     dossier_candidat_id: this.afficherOffrefID(this.macheid)
+                     appel_offre_id :this.affichierAppelOffreid(this.macheid),
+                    //  dossier_candidat_id: this.afficherOffrefID(this.macheid)
                    }
               this.ajouterAnalyseDossier(nouvelObjet)
                 this.formAnalyseDossier={
@@ -632,7 +570,7 @@ affichierAppelOffreid() {
                        ...this.edite_analyse_dossier,
                        marche_id:this.macheid,
                         appel_offre_id :this.affichierAppelOffreid(this.macheid),
-                       dossier_candidat_id: this.afficherOffrefID(this.macheid)
+                    //    dossier_candidat_id: this.afficherOffrefID(this.macheid)
                    }
                 this.modifierAnalyseDossier(nouvelObjet1)
                 this.$('#modificationAajouterAnalys01').modal('hide');

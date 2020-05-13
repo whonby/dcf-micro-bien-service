@@ -521,8 +521,8 @@ isButtunAddDossierCandidat
                       
                 <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterMP" data-toggle="modal" class="btn btn-primary" >Ajouter</a>
-                        <!-- <button class="btn btn-warning" title="veillez terminer le proccessuss de dossier de candidat " disabled v-else > Ajouter</button> -->
+                        <a href="#ajouterMP" data-toggle="modal" class="btn btn-primary" v-if="activationButtonJugement(macheid)">Ajouter</a>
+                        <button class="btn btn-warning" title="veillez terminer le proccessuss de dossier de candidat avant de passer à autre etape !" disabled v-else > Ajouter</button>
                     </div>
 
 
@@ -544,7 +544,10 @@ isButtunAddDossierCandidat
                  <div id="tab06745" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning">Ajouter</a>
+                        <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" v-if="activedButtonActeEffet(macheid)">Ajouter</a>
+                        <button class="btn btn-primary" title="veillez terminer le proccessuss de jugement des offres avant  de passer à autre etape !" disabled v-else > Ajouter</button>
+                   
+                   
                     </div>
 
 
@@ -959,7 +962,7 @@ created() {
         computed: {
 
             ...mapGetters("bienService", ["getterCojos","mandate","getMandatPersonnaliserVise", "procedurePassations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres",
-               "getterDossierCandidats","marches","gettersOuverturePersonnaliser",
+               "getterDossierCandidats","marches","gettersOuverturePersonnaliser","getterAnalyseDossiers",
                "getActeEffetFinancierPersonnaliser","gettersCotationPersonnaliser","getterAnoDMPBailleur"
                
                
@@ -1041,18 +1044,26 @@ listeAvisAnoBailleur(){
    },
 
 
-// activationButtonJugement(){
-//     return id =>{
-//         if(id!=null && id!=""){
-//             let objet = this.getterDossierCandidats.find(item =>item.marche_id==id && item.nom_cand==null)
-//             return objet  
-//         }
-//         return null
-//     }
+activationButtonJugement(){
+    return id =>{
+        if(id!=null && id!=""){
+            let objet = this.getterDossierCandidats.find(item =>item.marche_id==id && item.numero_dossier==null)
+            return objet  
+        }
+        return null
+    }
     
-// },
+},
 
-
+activedButtonActeEffet(){
+     return id =>{
+        if(id!=null && id!=""){
+            let objet = this.getterAnalyseDossiers.find(item =>item.marche_id==id && item.dossier_candidat_id==null)
+            return objet  
+        }
+        return null
+    }
+},
 
 
 

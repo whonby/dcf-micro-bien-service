@@ -664,63 +664,6 @@ afficherBanqueDynamique
 
 
 
- <div id="infoPV" class="modal hide grdirModalActeEffet">
-                  <div class="modal-header">
-                      <button data-dismiss="modal" class="close" type="button">×</button>
-                      <h3>PROCES-VERBAL DE JUGEMENT DES OFFRES</h3>
-                  </div>
-                  <div class="modal-body" v-if="resultaAnalysePv">
-                      <h4 class="text-center">ATTRIBUTION DU MARCHE</h4>
-                      <div>
-                          Suivant les résultats de l’évaluation des offres présentés par le rapporteur dans le
-                          tableau ci-dessus, il apparaît que le soumissionnaire <b v-if="resultaAnalysePv.length>0"></b> propose
-                          l’offre conforme la moins-disante.
-                      </div>
-                      <h4 class="text-center">TABLEAU RECAPITULATIF DE LA COMPARAISON DES OFFRES</h4>
-                      <table class="table table-bordered table-striped">
-                          <thead>
-                          <tr>
-                         <th>Nom des Soumissionnaires </th>
-                            <th>Numero du dossier</th>
-                            <th>Montant Offre financiere</th>
-                              <th>Note</th>
-                              <th>Classement</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                          <tr class="odd gradeX" v-for="(item, index) in resultaAnalysePv"
-                              :key="item.id">
-                             
-                              <td >
-                                  {{afficherNomCandidat(item.dossier_candidat_id)|| 'Non renseigné'}}</td>
-
-                                    <td >
-                                  {{afficherNumeroDossierCandidat1(item.dossier_candidat_id)|| 'Non renseigné'}}</td>
-
-                                   <td >
-                                 {{formatageSomme(parseFloat(afficherListeMontant(afficherOffrefID(item.dossier_candidat_id)))) || 'Non renseigné'}}</td>
-                                   
-                              <td >
-                                  {{item.note_analyse || 'Non renseigné'}}</td>
-                              <td >
-                                  <p v-if="index==0"> 
-                                      {{index + 1}} er
-                                  </p>
-                                  <p v-else>
-                                      {{index + 1}} eme
-                                  </p>
-
-                              </td>
-
-                          </tr>
-                          </tbody>
-                      </table>
-                  </div>
-                  <div class="modal-footer">
-
-                      <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-                  </div>
-              </div>
   <notifications/>
     </div>
 </template>
@@ -971,8 +914,6 @@ AffichierElementParent() {
     affichierNomEntreprise() {
      
                 let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==null );
-                
-                
                 if (resulta.length>0){
                     resulta.sort(function (a, b) {
                         return a.note_analyse - b.note_analyse;
