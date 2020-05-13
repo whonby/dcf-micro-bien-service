@@ -202,7 +202,7 @@
               </td>
                 <td>
                 <div class="control-group">
-                <label class="control-label">Compte de disponibilite affecte</label>
+                <label class="control-label">Compte de disponibilite affecte{{formData.banque_id}}</label>
                  <div class="controls">
                 <input
                  type="text"
@@ -254,9 +254,9 @@
                   <div class="controls">
                     <input
                      type="text"
-                     v-model="formData.montantdessalaires"
-                     class="span4"
-                     placeholder="Saisir le montant de paiement"
+                     v-model="formData.objetdepense"
+                     class="span"
+                     readonly
        
                     />
                    </div>
@@ -674,7 +674,7 @@ export default {
         ua_id: "",
         moisdepaiement: "",
         montantdessalaires: "",
-        objetdepense:"",
+        objetdepense:"Salaire",
         ligne_id:"",
         fichierjoint:"",
         banque_id:""
@@ -749,6 +749,23 @@ export default {
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
   ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
+ 
+  afficheImputation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getPersonnaliseBudgetGeneralParPersonnel.find(qtreel => qtreel.afficheEconomique.id == id);
+
+      if (qtereel) {
+        return qtereel.codebudget;
+      }
+      return 0
+        }
+      };
+    },
+ 
+ 
+ 
+ 
  afficheBanqueLibelle() {
       return id => {
         if (id != null && id != "") {
@@ -823,7 +840,7 @@ return this.formData.action_id ==""
      afficherCompteBanque() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.banqueUa.find(qtreel => qtreel.banq_id == id);
+           const qtereel = this.banqueUa.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.rib;
@@ -891,7 +908,9 @@ return this.paiementPersonnel.filter((item) => {
       var nouvelObjet = {
         ...this.formData,
         
-         exerciceencours: this.anneeAmort
+         exerciceencours: this.anneeAmort,
+         imputationBudget:this.afficheImputation(this.formData.ligne_id),
+         rib:this.afficherCompteBanque(this.formData.banque_id)
        
       };
       this.ajouterpaiementPersonnel(nouvelObjet);
@@ -905,7 +924,7 @@ return this.paiementPersonnel.filter((item) => {
        ua_id: "",
         moisdepaiement: "",
        montantdessalaires: "",
-       objetdepense:"",
+       objetdepense:"Salaire",
        ligne_id:"",
        fichierjoint:""
        

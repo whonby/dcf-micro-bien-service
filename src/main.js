@@ -23,8 +23,8 @@ import store from './vuex/store'
 import JsonExcel from 'vue-json-excel'
 import Datatable from 'vue2-datatable-component'
 
-
-
+// import jsPDF from 'jspdf'
+//  vue.component('')
 
 import FullCalendar from 'vue-full-calendar'
 import "fullcalendar-scheduler";
