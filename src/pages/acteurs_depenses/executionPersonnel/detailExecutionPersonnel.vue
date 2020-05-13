@@ -186,7 +186,7 @@ export default {
         }
       ],
       executionPersoid:"",
-         
+        
      
       json_fields: {
         UNIT_ADMINISTRATIVE: "ua.libelle",
@@ -202,7 +202,7 @@ export default {
   },
 created() {
             this.executionPersoid=this.$route.params.id
-             this.exo=this.$route.params.exerciceencours
+            
    this.detail_Execution = this.paiementPersonnel.find(
        idExecution => idExecution.id == this.$route.params.id
          )

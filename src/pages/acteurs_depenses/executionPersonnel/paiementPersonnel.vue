@@ -202,7 +202,7 @@
               </td>
                 <td>
                 <div class="control-group">
-                <label class="control-label">Compte de disponibilite affecte{{formData.banque_id}}</label>
+                <label class="control-label">Compte de disponibilite affecte</label>
                  <div class="controls">
                 <input
                  type="text"
@@ -913,6 +913,7 @@ return this.paiementPersonnel.filter((item) => {
          rib:this.afficherCompteBanque(this.formData.banque_id)
        
       };
+      
       this.ajouterpaiementPersonnel(nouvelObjet);
 
       this.formData = {

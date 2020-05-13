@@ -3,468 +3,319 @@
     <div>
 
 <div id="ajouterMP1" class="modal hide tailgrand">
-  
-<div class="row-fluid">
-      <div class="span12">
-        <div class="widget-box">
-          
-           <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Ordre de paiement</h3>
-      </div>
-          <div class="table-responsive text-nowrap">
-            <table class="table table-bordered table-striped">
-              <div class="widget-box">
-                <div class="widget-title">
-                  <ul class="nav nav-tabs">
-                 
-                   
-                  </ul>
-                </div>
-                <div class="widget-title">
-  <ul class="nav nav-tabs">
-    <li class="active">
-      <a data-toggle="tab" href="#tab1000">INFORMATION</a>
-    </li>
-    <!-- <li>
-      <a data-toggle="tab" href="#tab2">TYPE ENGAGEMENT </a>
-    </li> -->
-    
-    <li>
-      <a data-toggle="tab" href="#tab120">INFO FOURNISSEUR / IMPUTATION BUDGETAIRE</a>
-    </li>
-    <!-- <li>
-      <a data-toggle="tab" href="#tab32">IMPUTATION BUDGETAIRE</a>
-    </li> -->
-     <!-- <li>
-      <a data-toggle="tab" href="#2">Valeur Calculer</a>
-    </li> -->
-  </ul>
-</div>
-                <div class="widget-content tab-content tailfenet">
-                  <!--ongle identification-->
-                 <div id="tab1000" class="tab-pane active">
-                    <div class="modal-body">
-      <table class="table table-bordered table-striped" >
-          <tr>
-            <td>
-              
-               <label class="control-label">Exercice Budgétaire:</label>
-               <div class="controls">
-                 <input
-                   type="text"
-                 
-                   :value="executionPersoid"
-                    placeholder="Saisir exercice budgétaire"
-                    readonly
-                 />
-               </div>
-              
-            </td>
-             <td>
-  
-    <label class="control-label">Section</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.section"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-                         <td>
-  
-    <label class="control-label">Programme/dotation</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.programme"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
+  <div class="row-fluid">
+        <div class="span12">
+          <div class="widget-box">
+            <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              <h4>Ajouter Paiement du Personnel</h4>
+              <!-- <div align="right">
+                Search:
+                <input type="search" placeholder />
+              </div>-->
+            </div>
 
-                         <td>
-  
-    <label class="control-label">Nature Depense</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.gdenature_id"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-
-
-
-
-            
-          </tr>
-          <tr>
-                         <td>
-  
-    <label class="control-label">Action</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.action_id"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-                          <td>
-  
-    <label class="control-label">Activité</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.activite_id"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-
-
-
-
-
-
-                         <td>
-  
-    <label class="control-label">Unité administrative</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.ua_id"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-       
-          </tr>
-
-         <tr>
-  
-   <td>
-   <div class="control-group">
-      <label class="control-label">Numéro ordre de paiement</label>
-      <div class="controls">
-        <input type="text" class="span12" v-model="formData.numero_engage"/>
-      </div>
-    </div>
-  </td>
-   
- 
-</tr>
-         
-
-         <tr>
-             
-  
-<td>
-  <div class="control-group">
-    <label class="control-label">Fichier Joint</label>
-  
-    <div class="controls">
-      <input
-        type="file"
-        class="span"
-        placeholder="Saisir fichier joint"
-        readonly
-      />
-    </div>
-    </div>
-</td>
-
-         </tr>
-      </table>
-</div>
+            <div class="table-responsive text-nowrap">
+              <table class="table table-bordered table-striped">
+                <div class="widget-box">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#tab1">REFERENCE DU BENEFICIAIRE</a>
+                      </li>
+                       
+                      <li>
+                        <a data-toggle="tab" href="#tab2">SPECIFICATION DE LA DEPENSE</a>
+                      </li>
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab3">Descriptif3</a>
+                      </li> -->
+                      <!-- <li>
+                        <a data-toggle="tab" href="#tab3">Autres Information</a>
+                      </li> -->
+                     
+                    </ul>
                   </div>
-
-                  <div id="tab120" class="tab-pane">
-                  
-                                    <div class="modal-body">
-      <table class="table table-bordered table-striped">
-          <tr>
-            <td>
-              
-               <label class="control-label">Mode de paiement:</label>
-               <div class="controls">
-                 <input
-                   type="text"
-                  v-model="formData.Mode_paiement"
-                    placeholder="Saisir mode de paiement"
-                   class="span"
-                 />
-               </div>
-              
-            </td>
-             
-                         <td>
-  
-    <label class="control-label">Nom entreprise</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.programme"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-
-                         <td>
-  
-    <label class="control-label">Adresse</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.adresse"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-
-
-
-
-            
-          </tr>  
-                  
-                  <tr>
-            <td>
-              
-               <label class="control-label">Objet de la Depense:</label>
-               <div class="controls">
-                 <input
-                   type="text"
-                  v-model="formData.Mode_paiement"
-                    placeholder="Saisir l'objet de la depense"
-                   class="span"
-                 />
-               </div>
-              
-            </td>
-             <td>
-  
-    <label class="control-label">Numéro compte</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.NumeroFournisseur"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-<td>
-   <div class="control-group">
-     <label class="control-label">piece justificative</label>
-     <div class="controls">
-       <input
-         type="file"
-         class="span"
-        
-       />
-     </div>
-   </div>
- </td>
-
-
-
-
-                         <td>
-  
-    <label class="control-label">Bailleur</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.bailleur"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-            
-          </tr>            
-               <tr>
- <td>
-   <div class="control-group">
-      <label class="control-label">Total général</label>
-      <div class="controls">
-        <input type="number" class="span12" :value="formData.sommeMontant" readonly/>
-      </div>
-    </div>
-  </td>
- 
-  <td>
-   <div class="control-group">
-      <label class="control-label">Trésor</label>
-      <div class="controls">
-        <input type="number" class="span12" v-model="formData.montant_tresor" />
-      </div>
-    </div>
-  </td>
-    <td>
-    <div class="control-group">
-      <label class="control-label">Don</label>
-      <div class="controls">
-        <input type="number" class="span12" v-model="formData.montant_don" />
-      </div>
-    </div>
-  </td>
-  <td>
-       <div class="control-group">
-      <label class="control-label">Emprunt</label>
-      <div class="controls">
-        <input type="number" class="span12" v-model="formData.montant_emprunt" />
-      </div>
-    </div>
-  </td>
-</tr>
-   
+                  <div class="widget-content tab-content">
+                    <!--ongle identification-->
+                    <div id="tab1" class="tab-pane active">
+                      <div class="modal-body">
+        <table class="table table-bordered table-striped">
             <tr>
-            <td>
-              
-               <label class="control-label">Ligne Budgétaire:</label>
-               <div class="controls">
-                 <input
-                   type="text"
-                  v-model="formData.ligne_id"
-                    placeholder="Saisir ligne budgétaire"
-                   class="span"
-                 />
-               </div>
-              
-            </td>
-             <td>
-  
-    <label class="control-label">Imputation Budgétaire</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.Imp_budgetaire"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-                         <td>
-  
-    <label class="control-label">Numéro Facture</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.num_facture"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-
-  <td>
-  
-    <label class="control-label">Montant Facture</label>
-    <div class="controls">
-      <input 
-      type="number"  
-       v-model="formData.montant_fact"
-       class="span"
-        />
-    
-  </div>
-</td>
-
-            
-          </tr>                
-
-                 <tr>
-            <td>
-              
-               <label class="control-label">Crédit Autorisé:</label>
-               <div class="controls">
-                 <input
-                   type="text"
-                  v-model="formData.credit_auto"
-                    placeholder="Saisir crédit autorisé"
-                   class="span"
-                 />
-               </div>
-              
-            </td>
-             <td>
-  
-    <label class="control-label">Cumul des demandes(y compris celle-ci)</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.cumul_demande"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-             <td>
-  
-    <label class="control-label">Dotation Disponible</label>
-    <div class="controls">
-      <input
-       type="text"
-       v-model="formData.dotation_dispo"
-       class="span"
-      readonly
-      />
-    </div>
-  
-</td>
-
-                 </tr>
-
-      </table>   
+              <td>
+                
+                 <label class="control-label">Exercice en Cours:</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+                   
+                    
+                      placeholder="Saisir l'exercice en cours"
+                      readonly
+                   />
                  </div>
+                
+              </td>
+              <td>
+               
+                  <label class="control-label">Unite Administrative</label>
+                  <div class="controls">
+                    <!-- <select v-model="formData.ua_id" class="span">
+                      <option
+                        v-for="UniteA in uniteAdministratives"
+                        :key="UniteA.id"
+                        :value="UniteA.id"
+                      >{{UniteA.libelle}}</option>
+                    </select> -->
+                    <input
+         type="text"
+        
+         class="span"
+         placeholder="Saisir code fichier"
+         readonly
+        />
+                  </div>
+                
+              </td>
+               <td>
+                 
+                  <label class="control-label">Ligne</label>
+                  <div class="controls">
+                    <!-- <select v-model="formData.ligne_id" class="span" :readOnly="activerLigneBudgetaire">
+                      <option
+                        v-for="lignebudg in afficheUaParLignePersonnel(formData.ua_id)"
+                        :key="lignebudg.id"
+                        :value="lignebudg.afficheEconomique.id"
+                      >{{lignebudg.afficheEconomique.code}}-{{lignebudg.afficheEconomique.libelle}}</option>
+                    </select> -->
+                    <input
+         type="text"
+        
+         class="span"
+         placeholder="Saisir code fichier"
+         readonly
+        />
+                  </div>
+                
+              </td>
+              <td>
+                
+                  <label class="control-label">Programme</label>
+                  <div class="controls">
+                    <!-- <select v-model="formData.programme_id" class="span" :readOnly="activerProgramme">
+                      <option value=""></option>
+                     
+                    </select> -->
+                    <input
+         type="text"
+        
+         class="span"
+         placeholder="Saisir code fichier"
+         readonly
+        />
+                  </div>
+                
+              </td>
+              
+            </tr>
+            <tr>
+              <td>
+                  <label class="control-label">Action</label>
+                  <div class="controls">
+                   <input
+         type="text"
+        
+         class="span"
+         placeholder="Saisir code fichier"
+         readonly
+        />
+                </div>
+              </td>
+              <td>
+              
+               
+                  <label class="control-label">Activite</label>
+                  <div class="controls">
+                   <input
+         type="text"
+        
+         class="span"
+         placeholder="Saisir code fichier"
+         readonly
+        />
+                  </div>
+               
+              </td>
+               <td>
+    
+      <label class="control-label">Numero Matricule</label>
+      <div class="controls">
+        <input
+         type="text"
+        
+         class="span"
+         placeholder="Saisir code fichier"
+         readonly
+        />
+      </div>
+    
+  </td>
+   <td>
+    
+      <label class="control-label">References Bancaires</label>
+      <div class="controls">
+        <input
+         type="text"
+        
+         class="span"
+        readonly
+        />
+      </div>
+    
+  </td>
+            </tr>
+            </table>
+          </div>
+          
+                    </div>
+                    <!--ongle descriptif-->
+                    <div id="tab2" class="tab-pane">
+                      
+  <div class="modal-body">
+        <table class="table table-bordered table-striped">
+           <tr>
+             <td>
+              
+               <div class="control-group">
+                  <label class="control-label">Mode de paiemnt</label>
+                  <div class="controls">
+                   <input
+         type="text"
+        
+         class="span"
+         placeholder="Saisir code fichier"
+         readonly
+        />
                   </div>
                 </div>
-                <br />
-                <div align="right">
+              </td>
+             
+                <td>
+              
+               <div class="control-group">
+                  <label class="control-label">Banque</label>
                   <div class="controls">
-                    <div data-toggle="buttons-checkbox" class="btn-group">
-                      <a
-        @click.prevent=""
-        class="btn btn-primary"
-        href="#"
+                   <input
+         type="text"
+        
+         class="span"
+         placeholder="Saisir code fichier"
+         readonly
+        />
+                  </div>
+                </div>
+              </td>
+                <td>
+                <div class="control-group">
+                <label class="control-label">Compte de disponibilite affecte</label>
+                 <div class="controls">
+                <input
+                 type="text"
+                
+                 class="span"
+                 readonly
+                 
+               />
+              </div>
+            </div>
+            </td>
+               <td>
+                <div class="control-group" >
+                  <label class="control-label">Mois de Paiement:</label>
+      
+ 
+                  <div class="form-group" >
+                 <input
+         type="text"
+        
+         class="span"
+         placeholder="Saisir code fichier"
+         readonly
+        />
+               </div>
+                 </div>
+              </td>
+               
+           </tr>
+           <tr>
+            
+               <td>
+                <div class="control-group">
+                  <label class="control-label">Objet de la depense</label>
+      
+ 
+                  <div class="controls">
+                    <input
+                     type="text"
+                     v-model="formData.objetdepense"
+                     class="span"
+                     readonly
        
-      >Valider</a>
-      <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+                    />
+                   </div>
+                </div>
+              </td>
+            
+                         <td>
+    <div class="control-group">
+      <label class="control-label">Pieces Justificative</label>
+    
+      <div class="controls">
+        <input
+          type="file"
+          class="span"
+          placeholder="Saisir fichier joint"
+          readonly
+        />
+      </div>
+      </div>
+  </td>
+           </tr>
+        </table>
+  </div>
+                    </div>
+                     <!-- <div id="tab3" class="tab-pane">
+                      
+
+                    </div> -->
+                    <!--ongle 3 -->
+                    <!-- <div id="tab3" class="tab-pane">
+                    
+                      
+                    </div> -->
+                  </div>
+                  <br />
+                  <div align="right">
+                    <div class="controls">
+                      <div data-toggle="buttons-checkbox" class="btn-group">
+                        <a
+          @click.prevent="ajouterUniteAdministrativeLocal(formData)"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </table>
+              </table>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 </div>
 
                             <table class="table table-bordered table-striped">
@@ -502,8 +353,7 @@
   import { mapGetters, mapActions } from "vuex";
 export default {
     props:["executionPersoid",
-           "id",
-           "exerciceencours"
+          
            ],
     data(){
         return{
@@ -513,6 +363,7 @@ fabActions: [
           icon: "add"
         }
          ],  
+         
             formData: {
   // 
   Exercice_Budgétaire:"",
