@@ -246,17 +246,17 @@ export function modifierTypeAct({commit}, formData){
     })
 
 }
-// export  function  getpaiementPersonnel({commit}) {
-
-//     queue.push(() =>  axios.get('/listePaiementPersonnel').then(response => {
-//             // console.log(response.data)
-//             commit('GET_PAIEMENTPERSONNEL', response.data)
-//         }).catch(error => console.log(error))
-//     );
-
-
-// }
-
+export  function  getpaiementPersonnel({commit}) {
+// 
+    queue.push(() =>  axios.get('/listePaiementPersonnel').then(response => {
+            // console.log(response.data)
+            commit('GET_PAIEMENTPERSONNEL', response.data)
+        }).catch(error => console.log(error))
+    );
+// 
+// 
+}
+// 
 // ajouter type acte personnel
 // export  function ajouterpaiementPersonnel({commit}, objetAjoute){
 //     this.$app.$loading(true)

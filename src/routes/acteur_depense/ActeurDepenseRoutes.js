@@ -22,12 +22,17 @@ import executionPersonnel from "../../pages/acteurs_depenses/executionPersonnel/
 import detailExecutionPersonnel from "../../pages/acteurs_depenses/executionPersonnel/detailExecutionPersonnel.vue"
 import recrutementPersonnel from "../../pages/acteurs_depenses/dossierPersonnel/recrutementPersonnel.vue";
 import detailPersonnel from "../../pages/acteurs_depenses/dossierPersonnel/detailPersonnel";
+import cycledeVie from "../../pages/acteurs_depenses/CycledeVie/cycledeVie.vue";
 
 import fonctionBudgetaire from "../../pages/acteurs_depenses/fonction/fonctionBudgetaire.vue";
 import SituationMatrimonial from "../../pages/acteurs_depenses/fonction/SituationMatrimonial.vue";
 const ActeurDepenseRoutes = [
 
- 
+  {
+    path: "/Cycle-de-vie",
+    name: "cycledeVie",
+    component: cycledeVie
+},
  
  
  
