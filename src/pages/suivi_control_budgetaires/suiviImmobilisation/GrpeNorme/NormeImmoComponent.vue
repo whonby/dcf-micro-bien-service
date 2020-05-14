@@ -31,8 +31,8 @@
                      <th style="width:30%">Service</th>
                        <th style="width:30%">Fonction</th>
                         
-                    <th style="width:30%">Norme</th>
-                     <th style="width:10%">Action</th>
+                    <th style="width:35%">Norme</th>
+                     <th style="width:5%">Action</th>
                   </tr>
                 </thead>
                 <tbody>
