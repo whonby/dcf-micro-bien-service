@@ -336,6 +336,7 @@
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel>
+           <button class="btn btn-warning" @click.prevent="genererEnPdf()">Imprimer PDF</button>
           <div class="widget-box">
             <div class="widget-title">
               <div align="right">
@@ -364,7 +365,7 @@
               class="widget-content nopadding"
               v-if="type_Unite_admins.length && sections.length && chapitres.length"
             >
-              <table class="table table-bordered table-striped">
+              <table class="table table-bordered table-striped" id="Nature_section">
                 <thead>
                   <tr>
                     <th title="type unite administrative">Type ua</th>
@@ -439,6 +440,8 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
 export default {
@@ -508,6 +511,7 @@ export default {
       "plans_fonctionnels"
      
     ]),
+      
     libelleLocalGeographie() {
       return id => {
         if (id != null && id != "") {
@@ -656,7 +660,14 @@ codeuniteadministrative2(){
       "modifierUniteAdministrative",
       "supprimerUniteAdministrative"
     ]),
-
+genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+  
+  doc.autoTable({ html: '#Nature_section' })
+doc.save('UniteAdministrative.pdf')
+return 0
+},
     afficherModalAjouterUniteAdministrative() {
       this.$("#exampleModal").modal({
         backdrop: "static",
