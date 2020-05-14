@@ -23,10 +23,13 @@
                          <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
-                                     </div> <br>
+                                                   <button class="btn btn-warning" @click.prevent="genererEnPdf()">Imprimer PDF</button>
+                                     </div>
+                  
+                                      <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des natures de sections</h5>
+            
              <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -35,14 +38,17 @@
           </div>
          
            <div class="widget-content nopadding">
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" id="Nature_section">
+             
               <thead>
+                
                 <tr>
                   <th>Code</th>
                   <th>Libelle</th>
                    <th>Action</th>
                 </tr>
               </thead>
+              
               <tbody>
                 <tr class="odd gradeX" v-for="(nature_section, index) in localisationsFiltre" :key="nature_section.id">
                   <td @dblclick="afficherModalModifierTitre(index)">{{nature_section.code || 'Non renseigné'}}</td>
@@ -169,6 +175,8 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   
   data() {
@@ -221,8 +229,15 @@ return this.natures_sections.filter((item) => {
 
    }
 )
-   }
-
+   },
+genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+  
+  doc.autoTable({ html: '#Nature_section' })
+doc.save('NatureSection.pdf')
+return 0
+}
   },
   methods: {
     // methode pour notre action
