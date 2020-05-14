@@ -1,4 +1,4 @@
-
+detail_Execution
 <template>
     <div>
 
@@ -88,7 +88,7 @@
                  <div class="controls">
                    <input
                      type="text"
-                  
+                  :value="sommeMontant"
                       readonly
                       class="span"
                    />
@@ -103,8 +103,8 @@
                  <div class="controls">
                    <input
                      type="text"
-                  
-                      
+                  :value="dotationInite(afficherIdLigne(PaiementPersoid))"
+                      readonly
                       class="span"
                    />
                  </div>
@@ -116,8 +116,8 @@
                  <div class="controls">
                    <input
                      type="text"
-                  
-                      
+               readonly
+                       :value="sommeEgagementLigneTableau(afficherIdLigne(PaiementPersoid))"
                       class="span"
                    />
                  </div>
@@ -129,8 +129,8 @@
                  <div class="controls">
                    <input
                      type="text"
-                  
-                      
+                     :value="sommeMontant"
+                      readonly
                       class="span"
                    />
                  </div>
@@ -142,7 +142,8 @@
                  <div class="controls">
                    <input
                      type="text"
-                  
+                    
+                  :value="CumulEngagement"
                       readonly
                       class="span"
                    />
@@ -157,7 +158,7 @@
                  <div class="controls">
                    <input
                      type="text"
-                  
+                  :value="DisponibleBudget"
                       readonly
                       class="span"
                    />
@@ -397,6 +398,22 @@
       </div>
       </div>
   </td>
+   <td>
+                <div class="control-group">
+                  <label class="control-label">Numéro Ordre paiement</label>
+      
+ 
+                  <div class="controls">
+                    <input
+                     type="text"
+                     v-model="formData.numero_ordre_paiement"
+                     class="span"
+                     readonly
+       
+                    />
+                   </div>
+                </div>
+              </td>
            </tr>
         </table>
   </div>
@@ -433,7 +450,7 @@
       </div>
 </div>
 
-                            <table class="table table-bordered table-striped">
+                            <table class="table table-bordered table-striped" v-if="PaiementPersoid">
                                             <thead>
                   <tr>
                     <th>Exercice en cours</th>
@@ -452,7 +469,23 @@
                   </tr>
                 </thead>
                 <tbody>
-                  
+                   <tr class="odd gradeX" v-for="item in listeOrdrePaiement(PaiementPersoid)" :key="item.id">
+                                    <td>{{item.exerciceencours || 'Non renseigné'}}</td>
+                                    <td>{{item.ua_id || 'Non renseigné'}}</td>
+                                     <td>{{item.programme_id || 'Non renseigné'}}</td>
+                                    <td>{{item.action_id || 'Non renseigné'}}</td>
+                                    
+                                     <td>{{item.activite_id || 'Non renseigné'}}</td>
+                                    <td>{{item.ligne_id || 'Non renseigné'}}</td>
+                                    
+                                     <td>{{item.objetdepense || 'Non renseigné'}}</td>
+                                    <td>{{item.moisdepaiement || 'Non renseigné'}}</td>
+                                    
+                                     <td>{{item.total_general || 'Non renseigné'}}</td>
+                                    <td>{{item.fichierjoint || 'Non renseigné'}}</td>
+                                    <td>{{item.fichierjoint || 'Non renseigné'}}</td>
+                                    
+                                </tr>
                 </tbody>
                                         </table>
     <!--  end -->
@@ -509,6 +542,7 @@ fabActions: [
 
  },
 
+
             
 
         }
@@ -553,12 +587,71 @@ fabActions: [
       "plans_fonctionnels",
  "afficheNiveauPlanFonctionnel"
    ]),
-...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
+...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel","ordre_paiement"]),
 ...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
   ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
-     
+   
+ listeOrdrePaiement: function () {
+                return id => {
+                    if (id != "") {
+                      // console.log("Marche leste acte effect finnancier")
+                        return this.ordre_paiement.filter(idmarche => idmarche.paiementperso_id == id)
+                    }
+                }
+            },
+ CumulEngagement() {
+      const val = parseFloat(this.sommeEgagementLigneTableau(this.afficherIdLigne(this.PaiementPersoid))) + parseFloat(this.sommeMontant);
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+
+
+ DisponibleBudget() {
+      const val = parseFloat(this.dotationInite(this.afficherIdLigne(this.PaiementPersoid))) + parseFloat(this.sommeEgagementLigneTableau(this.afficherIdLigne(this.PaiementPersoid)));
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+    },
+   sommeEgagementLigneTableau: function () {
+                return id => {
+                    if (id != "") {
+                      let valInite=0;
+                        return  this.getMandatPersonnaliserVise.filter(normeEquipe => normeEquipe.ligne_budgetaire_id == id).reduce(function(total,currentVal){
+                           return total + parseFloat(currentVal.total_general)
+                        },valInite);
+                    }
+                }
+            },
+   
+   
+   
+   
+   dotationInite: function () {
+                return id => {
+                    if (id != "" && id != null) {
+                        const qtereel = this.getPersonnaliseBudgetGeneralParPersonnel.find(normeEquipe => normeEquipe.economique_id == id);
+                    if (qtereel) {
+        return qtereel.Dotation_Initiale;
+      }
+      return 2
+                   }
+                }
+            },     
+   sommeMontant() { 
+      const val = parseFloat(this.formData.montant_tresor) + parseFloat(this.formData.montant_don) + parseFloat(this.formData.montant_emprunt);
+      return parseFloat(val).toFixed(2);
+      
+    },
      afficherAnneeBudgetaire() {
       return id => {
         if (id != null && id != "") {
@@ -799,15 +892,83 @@ fabActions: [
         }
       };
     },
+    afficheImputation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getPersonnaliseBudgetGeneralParPersonnel.find(qtreel => qtreel.afficheEconomique.id == id);
+
+      if (qtereel) {
+        return qtereel.codebudget;
+      }
+      return 0
+        }
+      };
+    },
     },
     methods:{
-        ...mapActions("bienService", [ "ajouterLot","modifierLot","supprimerLot"]),
-
+       ...mapActions("personnelUA", [
+      
+      "ajouterordrepaiement"
+    ]),
         afficherModalAjouterTitre() {
       this.$("#ajouterMP1").modal({
         backdrop: "static",
         keyboard: false
       });
+    },
+
+
+    ajouterOrdrePaiement() {
+      var nouvelObjet = {
+        ...this.formData,
+         activite_id: this.afficherIdActivite(this.PaiementPersoid),
+       programme_id:this.afficherIdProgramme(this.PaiementPersoid),
+       action_id:this.afficherIdAction(this.PaiementPersoid),
+       ua_id: this.afficherIdUa(this.PaiementPersoid),
+        moisdepaiement: this.afficherModePaiement(this.PaiementPersoid),
+       ligne_id:this.afficherIdLigne(this.PaiementPersoid),
+       objetdepense:this.afficherObjetdepense(this.PaiementPersoid),
+         exerciceencours: this.afficherAnneeBudgetaire(this.PaiementPersoid),
+         imputationBudget:this.afficheImputation(this.PaiementPersoid),
+        
+         numeromatricule :this.afficherNumeroMatricule(this.PaiementPersoid),
+         referencebancaire :this.afficherReferenceBancaire(this.PaiementPersoid),
+         banque_id :this.afficherIdBanque(this.PaiementPersoid),
+         rib:this.afficherCompteUa(this.PaiementPersoid),
+         total_general:this.sommeMontant,
+           paiementperso_id:this.PaiementPersoid
+       
+      };
+     
+    
+     this.ajouterordrepaiement(nouvelObjet)
+      this.formData = {
+        banque_id:"",
+       section:"",
+   programme:"",
+   gdenature_id:"",
+   action_id:"",
+   activite_id:"",
+   ua_id: "",
+   type_procedure: "",
+  referencebancaire:"",
+   fichierjoint:"",
+  ref_juridique:"",
+  rib:"",
+ 
+  sommeMontant:"",
+  montant_tresor:0,
+  montant_don:0,
+  montant_emprunt:0,
+  ligne_id:"",
+  Imp_budgetaire:"",
+  num_facture:"",
+  montant_fact:"",
+  credit_auto:"",
+  cumul_demande:"",
+ 
+       
+      };
     },
     }
 

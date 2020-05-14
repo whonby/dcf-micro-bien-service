@@ -2478,7 +2478,7 @@ anneeAmort() {
     // return cur_day + " " + hours + ":" + minutes + ":" + seconds;
    },
    afficheMarchExecuter(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4 &&  element.difference_personnel_bienService == null||this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 1 && element.difference_personnel_bienService == null)
+return this.getActeEffetFinancierPersonnaliser45.filter(element =>  this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 1 && element.difference_personnel_bienService == 2)
 },
  affichertypeMarcheEx() {
       return id => {

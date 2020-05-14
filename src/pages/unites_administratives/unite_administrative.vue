@@ -326,7 +326,7 @@
       <div class="row-fluid">
         <div class="span12">
           <download-excel
-            class="btn btn-default pull-right"
+            class="btn btn-success pull-right"
             style="cursor:pointer;"
             :fields="json_fields"
             title="Liste Unites administratives"
@@ -335,8 +335,11 @@
             worksheet="Liste Unites administratives"
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
+         
           </download-excel>
-           <button class="btn btn-warning" @click.prevent="genererEnPdf()">Imprimer PDF</button>
+          <div align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+          </div>
           <div class="widget-box">
             <div class="widget-title">
               <div align="right">
@@ -664,7 +667,8 @@ genererEnPdf(){
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
   
-  doc.autoTable({ html: '#Nature_section' })
+  doc.autoTable({ html: '#Nature_section'}),
+  
 doc.save('UniteAdministrative.pdf')
 return 0
 },

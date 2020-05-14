@@ -135,14 +135,14 @@ marcheid
        <li class="bg_ls">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-important"></span>CUMUL ENGAGEMENT
+            <span class="label label-important">{{formatageSomme(parseFloat(sommeEgagementLigneTableau(detail_Execution.ligne_id)))}}</span>CUMUL ENGAGEMENT
           </a>
         </li>
       
        <li class="bg_lo">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-important"></span>DISPONIBLE BUDGETAIRE
+            <span class="label label-important">{{formatageSomme(parseFloat(dotationInite(detail_Execution.ligne_id) - sommeEgagementLigneTableau(detail_Execution.ligne_id)))}}</span>DISPONIBLE BUDGETAIRE
           </a>
         </li>
       
@@ -254,7 +254,16 @@ created() {
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
 
-
+sommeEgagementLigneTableau: function () {
+                return id => {
+                    if (id != "") {
+                      let valInite=0;
+                        return  this.getMandatPersonnaliserVise.filter(normeEquipe => normeEquipe.marche_id == id).reduce(function(total,currentVal){
+                           return total + parseFloat(currentVal.total_general)
+                        },valInite);
+                    }
+                }
+            },
 afficherListeSalaireEnExecution(){
 return this.paiementPersonnel.filter(element => element.valisationvirement == 0)
 },
@@ -272,6 +281,7 @@ return this.paiementPersonnel.filter(element => element.valisationvirement == 0)
         }
       };
     },
+
 Codeeconomique() {
       return id => {
         if (id != null && id != "") {

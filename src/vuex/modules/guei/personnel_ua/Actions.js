@@ -20,15 +20,27 @@ export function getordrepaiement({ commit }) {
 }
 
 // ajouter type acte personnel
+
 export function ajouterordrepaiement({ commit }, objetAjoute) {
-    
+    this.$app.$loading(true)
     axios.post('/ajouterOrdrePaiement', objetAjoute).then(res => {
-      
+        this.$app.$notify({
+            title: 'success',
+            text: 'Enregistrement effectuer',
+            type: "success"
+        });
         commit('AJOUTER_ORDRE_DE_PAIEMENT', res.data)
-        
+        this.$app.$loading(false)
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type: "error"
+        });
     })
 }
-
 // supprimer type act
 export function supprimerordrepaiement({ commit }, id) {
 
