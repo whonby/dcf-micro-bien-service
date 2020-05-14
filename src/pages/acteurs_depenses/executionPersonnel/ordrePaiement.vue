@@ -408,7 +408,7 @@ detail_Execution
                      type="text"
                      v-model="formData.numero_ordre_paiement"
                      class="span"
-                     readonly
+                     
        
                     />
                    </div>
@@ -433,7 +433,7 @@ detail_Execution
                     <div class="controls">
                       <div data-toggle="buttons-checkbox" class="btn-group">
                         <a
-          @click.prevent="ajouterUniteAdministrativeLocal(formData)"
+          @click.prevent="ajouterOrdrePaiement(formData)"
           class="btn btn-primary"
           href="#"
          
@@ -481,10 +481,16 @@ detail_Execution
                                      <td>{{item.objetdepense || 'Non renseigné'}}</td>
                                     <td>{{item.moisdepaiement || 'Non renseigné'}}</td>
                                     
-                                     <td>{{item.total_general || 'Non renseigné'}}</td>
+                                     <td>{{formatageSomme(parseFloat(item.total_general)) || 'Non renseigné'}}</td>
                                     <td>{{item.fichierjoint || 'Non renseigné'}}</td>
                                     <td>{{item.fichierjoint || 'Non renseigné'}}</td>
-                                    
+                                    <td>
+      <div class="btn-group">
+                            <button @click.prevent="supprimerordrepaiement(item.id)"  class="btn btn-danger " title="Supprimer">
+                                <span class=""><i class="icon-trash"></i></span>
+                            </button>
+                        </div>
+</td>
                                 </tr>
                 </tbody>
                                         </table>
@@ -499,6 +505,7 @@ detail_Execution
 
 <script>
   import { mapGetters, mapActions } from "vuex";
+  import { formatageSomme } from "../../../../src/Repositories/Repository";
 export default {
     props:["PaiementPersoid","exerciceBudgetaire"],
     data(){
@@ -513,32 +520,26 @@ fabActions: [
             formData: {
   // 
   
-   section:"",
-   programme:"",
-   gdenature_id:"",
+      banque_id:"",
+      
+   programme_id:"",
+   numero_ordre_paiement:"",
    action_id:"",
    activite_id:"",
    ua_id: "",
-   type_procedure: "",
-   numero_demande_engage: "",
-  numero_engage:"",
-  numero_bordereau:"",
+   
+  referencebancaire:"",
    fichierjoint:"",
-  ref_juridique:"",
-  numero_op:"",
-  NumeroFournisseur:"",
-  adresse:"",
-  sommeMontant:"",
+  
+  rib:"",
+ 
+  
   montant_tresor:0,
   montant_don:0,
   montant_emprunt:0,
   ligne_id:"",
-  Imp_budgetaire:"",
-  num_facture:"",
-  montant_fact:"",
-  credit_auto:"",
-  cumul_demande:"",
-  dotation_dispo:"",
+
+
 
  },
 
@@ -907,7 +908,7 @@ fabActions: [
     },
     methods:{
        ...mapActions("personnelUA", [
-      
+      "supprimerordrepaiement",
       "ajouterordrepaiement"
     ]),
         afficherModalAjouterTitre() {
@@ -944,32 +945,30 @@ fabActions: [
      this.ajouterordrepaiement(nouvelObjet)
       this.formData = {
         banque_id:"",
-       section:"",
-   programme:"",
-   gdenature_id:"",
+      
+   programme_id:"",
+   numero_ordre_paiement:"",
    action_id:"",
    activite_id:"",
    ua_id: "",
-   type_procedure: "",
+   
   referencebancaire:"",
    fichierjoint:"",
-  ref_juridique:"",
+  
   rib:"",
  
-  sommeMontant:"",
+  
   montant_tresor:0,
   montant_don:0,
   montant_emprunt:0,
   ligne_id:"",
-  Imp_budgetaire:"",
-  num_facture:"",
-  montant_fact:"",
-  credit_auto:"",
-  cumul_demande:"",
+
+
  
        
       };
     },
+     formatageSomme:formatageSomme,
     }
 
     

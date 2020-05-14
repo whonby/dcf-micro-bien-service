@@ -7,15 +7,15 @@
 <!----- ajouter modal   ---->
   <div id="exampleModalTypeNorme" class="modal hide tailleModalRecrutement">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">?</button>
-        <h3>Type de Recrutement</h3>
+        <button data-dismiss="modal" class="close" type="button">x</button>
+        <h3>Objet de la norme</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
     <tr>
       <td>
        <div class="control-group">
-            <label class="control-label">Type de Recrutement</label>
+            <label class="control-label">Objet de la norme</label>
             <div class="controls">
                <select v-model="formEtape.recrutement" class="span5">
                       <option></option>               
@@ -39,9 +39,8 @@
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
-
 <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
-    <div id="exampleModal" class="modal hide tailgrand12">
+    <div id="ModalNomeService" class="modal hide tailgrand12">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">x</button>
         <h3>Ajouter Equipement type</h3>
@@ -80,25 +79,7 @@
                   </div>
                 </div>
               </td>
-               <td>
-                <div class="control-group">
-                  <label class="control-label">Fonction</label>
-                  <div class="controls">
-                    <select v-model="formData.fonction_id" class="span5" >
-                     
-                      <option value=""></option>
-                      <option
-                        v-for="typeUniteA in fonctions"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-             </tr>
-               <tr>
-                  <td>
+              <td>
                 <div class="control-group">
                   <label class="control-label">Famille</label>
                   <div class="controls">
@@ -115,6 +96,9 @@
                   </div>
                 </div>
               </td>
+             </tr>
+               <tr>
+                  
               <td>
                 <div class="control-group">
                   <label class="control-label">Norme</label>
@@ -132,11 +116,7 @@
                   </div>
                 </div>
               </td>
-        
-             
-            </tr>
-            <tr>
-                <td>
+          <td>
                 <div class="control-group">
                   <label class="control-label">Coût moyen</label>
                   <div class="controls">
@@ -153,6 +133,10 @@
                   </div>
                 </div>
               </td>
+             
+            </tr>
+            <tr>
+              
               <td>
                 <div class="control-group">
                   <label class="control-label">Montant Total</label>
@@ -170,10 +154,7 @@
                   </div>
                 </div>
               </td>
-              
-            </tr>
-              <tr>
-                <td colspan="">
+              <td colspan="">
                 <div class="control-group">
                   <label class="control-label">Duree de vie</label>
                   <div class="controls">
@@ -186,9 +167,142 @@
                   </div>
                 </div>
               </td>
-              </tr>
+            </tr>
+             
              
       
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterUniteAdministrativeLocal(formData)"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+<!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
+    <div id="ModalNormeFonction" class="modal hide tailgrand12">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">x</button>
+        <h3>Ajouter Equipement type</h3>
+      </div>
+      <div class="modal-body">
+        
+        <table class="table table-bordered table-striped">
+         
+          
+               <tr>
+                    
+              
+              
+               <td>
+                <div class="control-group">
+                  <label class="control-label">Fonction</label>
+                  <div class="controls">
+                    <select v-model="formData.fonction_id" class="span5" >
+                     
+                      <option value=""></option>
+                      <option
+                        v-for="typeUniteA in fonctions"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+                <td>
+                <div class="control-group">
+                  <label class="control-label">Famille</label>
+                  <div class="controls">
+                    <select v-model="formData.famille_id" class="span5" >
+                     
+                      <option value=""></option>
+                      <option
+                        v-for="typeUniteA in familles"
+                        :key="typeUniteA.id"
+                        :value="typeUniteA.id"
+                      >{{typeUniteA.libelle}}</option>
+                    </select>
+                   
+                  </div>
+                </div>
+              </td>
+             </tr>
+               <tr>
+                
+              <td>
+                <div class="control-group">
+                  <label class="control-label">Norme</label>
+                  <div class="controls">
+                       <input
+                      type="text"
+                    v-model="formData.norme"
+                      class="span5"
+                     
+                      
+                    />
+                   
+                    
+                    
+                  </div>
+                </div>
+              </td>
+         <td>
+                <div class="control-group">
+                  <label class="control-label">Coût moyen</label>
+                  <div class="controls">
+                       <input
+                      type="text"
+                  :value="MontantMoyen"
+                      class="span5"
+                     readonly
+                      
+                    />
+                   
+                    
+                    
+                  </div>
+                </div>
+              </td>
+             
+            </tr>
+            <tr>
+               
+              <td>
+                <div class="control-group">
+                  <label class="control-label">Montant Total</label>
+                  <div class="controls">
+                       <input
+                      type="text"
+                  :value="MontantTotal"
+                      class="span5"
+                     readonly
+                      
+                    />
+                   
+                    
+                    
+                  </div>
+                </div>
+              </td>
+               <td colspan="">
+                <div class="control-group">
+                  <label class="control-label">Duree de vie</label>
+                  <div class="controls">
+                       <input
+                      type="text"
+                  :value="DureeAffche"
+                      class="span5"
+                     readonly
+                    />
+                  </div>
+                </div>
+              </td>
+            </tr>
         </table>
       </div>
       <div class="modal-footer">
@@ -719,25 +833,28 @@ DureeAffcheModifier() {
 
 ajouterTypeTexteLocal() {
       if(this.formEtape.recrutement==1){
-        this.$("#exampleModal").modal('hide');
+        this.$("#exampleModalTypeNorme").modal('hide');
        
-       this.$('#ajouterActeEffetFinancierP').modal({
+       this.$('#ModalNormeFonction').modal({
         backdrop: 'static',
         keyboard: false
         
     });
-    return 1
+    
       }
       else if(this.formEtape.recrutement==2){
-         this.$("#exampleModal").modal('hide');
-        this.$router.push({ name: 'AjouterActeur' })
+         this.$("#exampleModalTypeNorme").modal('hide');
        
+       this.$('#ModalNomeService').modal({
+        backdrop: 'static',
+        keyboard: false
+       });
       }
     },
 
 
     afficherModalAjouterUniteAdministrative() {
-      this.$("#exampleModal").modal({
+      this.$("#exampleModalTypeNorme").modal({
         backdrop: "static",
         keyboard: false
       });
