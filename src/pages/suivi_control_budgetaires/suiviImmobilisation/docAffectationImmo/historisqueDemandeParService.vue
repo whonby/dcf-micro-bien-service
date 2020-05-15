@@ -73,7 +73,7 @@
                      
                        <td 
                       
-                    >{{afficheFamille(DmdImmo.article_id) || 'Non renseigné'}}</td>
+                    >{{DmdImmo.article_id || 'Non renseigné'}}</td>
                       <td 
                       
                     >{{DmdImmo.qte || 'Non renseigné'}}</td>
