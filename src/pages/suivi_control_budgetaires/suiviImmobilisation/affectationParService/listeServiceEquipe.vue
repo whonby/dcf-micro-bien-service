@@ -21,7 +21,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for=" (affectService) in ServiceEquipe"
+                    <tr class="odd gradeX" v-for=" affectService in ServiceEquipe"
                         :key="affectService.id">
                         
                               <td >

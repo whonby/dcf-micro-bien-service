@@ -18,19 +18,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for=" affectService in servicesua"
-                        :key="affectService.id">
+                    <tr class="odd gradeX" v-for=" serv in servicesua"
+                        :key="serv.id">
                         
                               <td >
-                            {{afficheNomUA(affectService.s_ua_id) || 'Non renseigné'}}</td>
+                            {{afficheToutUA(serv.s_ua_id) || 'Non renseigné'}}</td>
                             <td >
-                            {{afficheService(affectService.serviceua_id) || 'Non renseigné'}}</td>
+                            {{afficheToutService(serv.serviceua_id) || 'Non renseigné'}}</td>
                              <td style="text-align: center;">
                       
                        
                           
                          
-                     <span style="font-weight: 500;" v-if="affectService.normeequipement == 0"  class="btn btn-success" >Oui</span>
+                     <span style="font-weight: 500;" v-if="serv.normeequipement == 0"  class="btn btn-success" >Oui</span>
                      <span  v-else  class="btn btn-danger" style="font-weight: 500;"> Non</span>
                      
                         
@@ -118,7 +118,7 @@ search:""
     //     );
     //   });
     // },
- afficheNomUA() {
+ afficheToutUA() {
       return id => {
         if (id != null && id != "") {
            const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
@@ -130,13 +130,13 @@ search:""
         }
       };
     },
-afficheService() {
+afficheToutService() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.services.find(qtreel => qtreel.id == id);
+           const qtereel2 = this.services.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.libelle;
+      if (qtereel2) {
+        return qtereel2.libelle;
       }
       return 0
         }

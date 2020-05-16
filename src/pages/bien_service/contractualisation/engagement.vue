@@ -1,8 +1,4 @@
- Choisir le type de procedure
- Ajouter Engagement
- getMandatPersonnaliserVise
- marchetype
- ajouter mandat
+
 <template>
   	<div>
 
