@@ -6,12 +6,13 @@ var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
 
 // get all  categorie mission
-export  function  getCategorieMission({commit}) {
-    queue.push(() => axios.get('/liste_categorie_mission').then((response) => {
-      commit('GET_CATEGORIE_MISSION', response.data)
+export  function  getCategorieMission({commit},page = 1) {
+    queue.push(() => axios.get('/liste_categorie_mission/results?page='+page).then((response) => {
+      commit('GET_CATEGORIE_MISSION', response.data.data)
       
   }).catch(error => console.log(error)))
   }
+  
 
   // ajouter categorie mission 
   export function ajouterCategorieMission({commit}, elementAjout){
@@ -124,6 +125,7 @@ export function ajouterMission({commit},formData){
        
 //    }).catch(error => console.log(error))
 // }
+
 
 
 

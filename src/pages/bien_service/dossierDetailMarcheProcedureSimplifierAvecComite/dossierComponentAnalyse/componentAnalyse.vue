@@ -101,7 +101,7 @@
                         <div class="controls">
                              <select v-model="formAnalyseDossier.dossier_candidat_id" class="span">
                                 <option v-for="plans in afficherNumeroDossierCandidatMenuDeroulant(macheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.numero_dossier}}</option>
+                                        :value="plans.id">{{plans.numero_dossier}} => {{plans.nom_cand}}</option>
                             </select>
 
                              <!-- <input
@@ -523,7 +523,7 @@ affichierAppelOffreid() {
            const qtereel = this.getterDossierCandidats.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
-        return qtereel.numero_dossier;
+        return qtereel.numero_dossier.concat( ' =>  ',    qtereel.nom_cand);
       }
       return null
         }
@@ -532,6 +532,7 @@ affichierAppelOffreid() {
 
 
     },
+
     methods:{
         ...mapActions('bienService',['supprimerAnalyseDossier',
         'ajouterAnalyseDossier','modifierAnalyseDossier']),

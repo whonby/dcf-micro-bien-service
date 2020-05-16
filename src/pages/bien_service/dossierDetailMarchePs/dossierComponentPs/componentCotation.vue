@@ -33,7 +33,7 @@
                             {{cotation.contact || 'Non renseigné'}}</td>
 
                          <td @click="afficherModalcotation(index)">
-                            {{cotation.objetEntreprise.raison_sociale || 'Non renseigné'}}</td>
+                            {{afficherLibelleEntreprise(cotation.entreprise_id) || 'Non renseigné'}}</td>
                       
                         <td>
                             <a v-if="cotation.fichier_joint" :href="cotation.fichier_joint" class="btn btn-default" target="_blank">
@@ -59,10 +59,41 @@
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Ajouter la cotation </h3>
             </div>
+            <table class="table table-bordered table-striped">
+ <tr>
+                                 <td colspan="2" width="">
+
+                          <!-- <select v-model="formCotation.entreprise_id" class="span">
+                                <option v-for="varText in entreprises" :key="varText.id"
+                                        :value="varText.id">{{varText.raison_sociale}}</option>
+                            </select> -->
+                            <div class="span" align="left" >
+
+                               Selectionner l'entreprise:
+                        <model-list-select style="background-color: rgb(255,255,255);"
+                                           class="wide"
+                                           :list="entreprises"
+                                           v-model="search"
+                                           option-value="id"
+                                           option-text="raison_sociale"
+                                            :search-change="recherche()"
+                                           placeholder="Selectionner l'entreprise"
+                                          
+                        >
+
+                        </model-list-select>
+                        
+                            </div>
+                   
+                              </td>
+                            </tr>
+            </table>
             <div class="modal-body">
                 <div class="widget-box">
                     <form action="#" method="get" >
                         <table class="table table-bordered table-striped">
+
+                           
                      
                           <tr>
                               <td>
@@ -71,6 +102,7 @@
                             <label class="control-label">Ref de l'offre:</label>
                            <div class="control-group">
                        <input type="text" class="span" readonly :value="affichierReferenceAppelOffre(macheid.id)">
+                       
                        
                             </div>
                         </div>
@@ -97,19 +129,7 @@
                               </td>
                           </tr>
                           <tr>
-                              <td>
-
-                         <div class="control-group">
-                        <label class="control-label">Entreprise.</label>
-                        <div class="controls">
-                          <select v-model="formCotation.entreprise_id" class="span">
-                                <option v-for="varText in entreprises" :key="varText.id"
-                                        :value="varText.id">{{varText.raison_sociale}}</option>
-                            </select>
-                        
-                        </div>
-                    </div>
-                              </td>
+                             
                               <td>
 
                     <div class="control-group">
@@ -153,6 +173,36 @@
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Modifier la cotation </h3>
             </div>
+
+                     <table class="table table-bordered table-striped">
+ <tr>
+                                 <td colspan="2" width="">
+
+                          <!-- <select v-model="formCotation.entreprise_id" class="span">
+                                <option v-for="varText in entreprises" :key="varText.id"
+                                        :value="varText.id">{{varText.raison_sociale}}</option>
+                            </select> -->
+                            <div class="span" align="left" >
+
+                               Selectionner l'entreprise:
+                        <model-list-select style="background-color: rgb(255,255,255);"
+                                           class="wide"
+                                           :list="entreprises"
+                                           v-model="search"
+                                           option-value="id"
+                                           option-text="raison_sociale"
+                                            :search-change="recherche()"
+                                           placeholder="Selectionner l'entreprise"
+                                          
+                        >
+
+                        </model-list-select>
+                        
+                            </div>
+                   
+                              </td>
+                            </tr>
+            </table>
             <div class="modal-body">
                 <div class="widget-box">
                     <form action="#" method="get" >
@@ -191,7 +241,7 @@
                           </td>
                       </tr>
                       <tr>
-                          <td>
+                          <!-- <td>
 
                          <div class="control-group">
                         <label class="control-label">Entreprise.</label>
@@ -203,7 +253,7 @@
                         
                         </div>
                     </div>
-                          </td>
+                          </td> -->
                           <td>
 
                            <div class="control-group">
@@ -248,8 +298,16 @@
 
 <script>
 import {mapActions, mapGetters} from 'vuex';
+ import {  ModelListSelect } from 'vue-search-select'
+import 'vue-search-select/dist/VueSearchSelect.css'
 export default {
  name:'compte',
+
+ components:{
+            // bailleurAjouter,
+            
+             ModelListSelect,
+        },
     data(){
         return{
 
@@ -259,8 +317,8 @@ export default {
                     fichier_joint:"",
                     entreprise_id:"",
                     date_cotation:"",
-                    ref_offre:""
-
+                    ref_offre:"",
+                    id:""
                    // marche_id:""
 
                 },
@@ -303,7 +361,17 @@ export default {
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
            
            
-
+afficherIdEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
     // filtreCotation(){
     //     const searchTem = this.search.toLowerCase();
 
@@ -321,6 +389,21 @@ export default {
                      }
              }
             },
+
+
+
+            afficherLibelleEntreprise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.raison_sociale;
+      }
+      return 0
+        }
+      };
+    },
 
 affichierReferenceAppelOffre() {
       return id => {
@@ -340,6 +423,27 @@ affichierReferenceAppelOffre() {
             ...mapActions("bienService", ['ajouterCotation' ,"getCotation", 'modifierCotation','supprimerCotation']),
             // ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
             // 
+
+
+
+
+ recherche() {
+              // console.log(this.search)
+                let entre=this.entreprises.find(item=>item.id==this.search);
+                if (entre!=undefined){
+                    if(this.search!=""){
+                        this.formCotation.id=entre.id
+                        // this.formDossierCadidature.adresse_post=entre.adresse
+                        // this.formDossierCadidature.nom_cand=entre.raison_sociale
+                        // this.formDossierCadidature.reg_com=entre.numero_rc
+                        // this.formDossierCadidature.email_cand=entre.email
+                        // this.formDossierCadidature.numero_cc=entre.numero_cc
+                        // this.formDossierCadidature.secteur_activite_id=entre.secteur_activite_id
+                    }
+                }
+            },
+
+
 
 
              OnchangeFichier(e) {
@@ -372,13 +476,12 @@ affichierReferenceAppelOffre() {
          
           
            ajouterCotationLocal(){
-
-               
+            
                 const formData = new FormData();
                 formData.append('fichier_joint', this.selectedFile, this.selectedFile.name);
                 formData.append('nom_person', this.formCotation.nom_person);
                 formData.append('contact', this.formCotation.contact);
-                formData.append('entreprise_id', this.formCotation.entreprise_id);
+               formData.append('entreprise_id', this.formCotation.id);
                 formData.append('date_cotation', this.formCotation.date_cotation);
                 formData.append('marche_id', this.macheid.id);
                 formData.append('ref_offre', this.affichierReferenceAppelOffre(this.macheid.id));
@@ -410,7 +513,7 @@ affichierReferenceAppelOffre() {
                const formData = new FormData();
                 formData.append('nom_person', this.editCotation.nom_person);
                 formData.append('contact', this.editCotation.contact);
-                formData.append('entreprise_id', this.editCotation.entreprise_id);
+               formData.append('entreprise_id', this.formCotation.id);
                 formData.append('date_cotation', this.editCotation.date_cotation);
                 formData.append('marche_id', this.marcheid);
                 formData.append('ref_offre', this.editCotation.ref_offre);
@@ -439,6 +542,6 @@ affichierReferenceAppelOffre() {
 .tllgrde{
  width: 1000px;
  margin: 0 -530px;
- height: 350px;
+ height: 400px;
 }
 </style>

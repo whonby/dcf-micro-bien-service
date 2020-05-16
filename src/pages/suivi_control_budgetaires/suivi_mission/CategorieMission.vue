@@ -35,6 +35,7 @@
           </div>
          
            <div class="widget-content nopadding">
+             <template>
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -66,6 +67,9 @@
                 </tr>
               </tbody>
             </table>
+
+          <pagination :data="laravelData" @pagination-change-page="getCategorieMission()"></pagination>
+             </template>
             <div v-if="categorieMissionFiltre.length">    
             </div>
             <div v-else>

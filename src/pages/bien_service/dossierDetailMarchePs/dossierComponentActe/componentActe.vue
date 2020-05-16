@@ -18,7 +18,7 @@ afficherBanqueDynamique
                     <tr>
 
                         <th>Reference acte</th>
-                        <th>Libelle acte</th>
+                        <th>Entreprise</th>
                         <th>Montant acte</th>
                         <th>Type acte</th>
                         <th>Objet marche.</th>
@@ -36,7 +36,7 @@ afficherBanqueDynamique
                               <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.reference_act || 'Non renseigné'}}</td>
                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{effetFinancier.libelle_act || 'Non renseigné'}}</td>
+                            {{afficherEntrepriseId(effetFinancier.entreprise_id) || 'Non renseigné'}}</td>
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{formatageSomme(parseFloat(effetFinancier.montant_act ))|| 'Non renseigné'}}</td>
                               <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
@@ -88,7 +88,7 @@ afficherBanqueDynamique
                             <td>
 
                         <div class="control-group">
-                        <label class="control-label">Entreprise.</label>
+                        <label class="control-label">Entreprise </label>
                         <div class="controls" v-if="affichierNomEntreprise">
                           <!-- <select v-model="formEffetFinancier.entreprise_id" class="span">
                                 <option v-for="varText in affichierNomEntreprise(macheid)" :key="varText.id"
@@ -390,19 +390,19 @@ afficherBanqueDynamique
                             <td>
 
                         <div class="control-group">
-                        <label class="control-label">Entreprise.</label>
-                        <div class="controls">
-                          <!-- <select v-model="editActeEffetFinancier.entreprise_id" class="span">
-                                <option v-for="varText in afficherEntrepriseRecep(macheid)" :key="varText.id"
-                                        :value="varText.entreprise_id">{{affichierNomEntreprise(varText.entreprise_id)}}</option>
-                            </select> -->
-<!-- 
-                            <select v-model="editActeEffetFinancier.entreprise_id" class="span">
+                        <label class="control-label">Entreprise </label>
+                        <div class="controls" v-if="affichierNomEntreprise">
+                          <!-- <select v-model="formEffetFinancier.entreprise_id" class="span">
                                 <option v-for="varText in affichierNomEntreprise(macheid)" :key="varText.id"
                                         :value="varText.entreprise_id">{{varText.nom_cand}}</option>
                             </select> -->
-                        
+                            <!-- <input type="text" :value="affichierNomEntreprise(macheid)"> -->
+                                    {{affichierNomEntreprise.nom_cand}}
                         </div>
+
+                          <!-- <div class="control-group" v-else>
+                                            <code>{{message_setion_vainqueur}}</code>
+                                        </div> -->
                     </div>
                             </td>
 
@@ -411,8 +411,8 @@ afficherBanqueDynamique
                         <label class="control-label">Banque.</label>
                         <div class="controls">
                           <select v-model="editActeEffetFinancier.banq_id" class="span" :readOnly="verifiBanqueExistModifier">
-                               <option v-for="varText in afficherBanqueDynamiqueId(formEffetFinancier.entreprise_id)" :key="varText.id"
-                                        :value="varText.banq_id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
+                               <option v-for="varText in afficherBanqueDynamiqueId(affichierNomEntreprise.entreprise_id)" :key="varText.id"
+                                        :value="varText.id">{{afficherBanqueDynamique(varText.banq_id)}}</option>
                             </select>
                         
                         </div>
@@ -910,6 +910,18 @@ AffichierElementParent() {
     },
 
 
+  enregistrerIdEntreprise(){
+        return id =>{
+            if(id!=null && id!=""){
+                let objetMarche = this.marches.find(idMarche => idMarche.id ==id);
+                if(objetMarche){
+                    return objetMarche.objet
+                }
+                 return 0
+            }
+        }
+    },
+
 
     affichierNomEntreprise() {
      
@@ -1036,6 +1048,22 @@ afficherEntrepriseRecep () {
                 }
             },
 
+
+
+
+         afficherEntrepriseId(){
+                return id =>{
+                    if(id != null && id !=""){
+                      let ObjetId =this.getterDossierCandidats.find(element => element.entreprise_id== id)
+                        if(ObjetId){
+                            return ObjetId.nom_cand
+                        }
+
+                    }
+                }
+            },
+
+
             // afficherLeCompteEnFonctionDeLaBanque(){       return resultat.varObjetBanque.libelle
             //     return banq_id =>{
             //         if(banq_id !=null && banq_id!=""){
@@ -1148,6 +1176,7 @@ getDateFinExécutionValueEdit(){
        var nouvelObjet = {
             ...this.formEffetFinancier,
             duree: this.nombreDejourCalcule,
+            entreprise_id:this.affichierNomEntreprise.entreprise_id,
             difference_personnel_bienService:this.afficheMarcheType,
             marche_id:this.macheid,
             banq_id:this.affichierIdBanque(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id)),
@@ -1200,10 +1229,15 @@ modifierModalActeEffetFinancierLocal(){
   var nouvelObjet2 = {
             ...this.editActeEffetFinancier,
             duree: this.nombreDejourCalculeEdit,
+            entreprise_id:this.affichierNomEntreprise.entreprise_id,
             difference_personnel_bienService:this.afficheMarcheType,
             marche_id:this.macheid,
-             compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.editActeEffetFinancier.banq_id))
-        }
+             compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.editActeEffetFinancier.banq_id)),
+        banq_id:this.affichierIdBanque(this.afficherLeCompteEnFonctionDeLaBanque(this.editActeEffetFinancier.banq_id)),
+  
+       
+       
+       }
     this.modifierActeEffetFinancier(nouvelObjet2)
     this.$('#modifierActeEF').modal('hide');
 },
@@ -1212,17 +1246,17 @@ formatageSomme:formatageSomme,
 
 
 
-           infoPVAffiche(){
-                this.resultaAnalysePv=[]
-                let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==null );
-                this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
-                if (this.resultaAnalysePv.length>0){
-                    this.resultaAnalysePv.sort(function (a, b) {
-                        return a.note_analyse - b.note_analyse;
-                    }).reverse()
-                }
-                //console.log(this.resultaAnalysePv)
-            },
+        //    infoPVAffiche(){
+        //         this.resultaAnalysePv=[]
+        //         let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==null );
+        //         this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
+        //         if (this.resultaAnalysePv.length>0){
+        //             this.resultaAnalysePv.sort(function (a, b) {
+        //                 return a.note_analyse - b.note_analyse;
+        //             }).reverse()
+        //         }
+        //         //console.log(this.resultaAnalysePv)
+        //     },
 
 //  formaterDate(date) {
 //               return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
