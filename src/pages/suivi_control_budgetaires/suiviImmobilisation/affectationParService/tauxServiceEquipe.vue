@@ -18,8 +18,8 @@ afficherActeurDepenseMatricule
                     <thead>
                     <tr>
 
-                        <th style="width:40%">Uninte administrative</th>
-                        <th style="width:40%">Service</th>
+                        <th style="width:20%">Uninte administrative</th>
+                        <th style="width:20%">Service</th>
                         <th >Qte requise</th>
                      <th >Qte couverte</th>
                      <th >Qte non couverte</th>
