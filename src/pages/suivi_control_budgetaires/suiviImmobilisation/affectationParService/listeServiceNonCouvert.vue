@@ -51,14 +51,16 @@ afficherActeurDepenseMatricule
                     </tr>
                      <tr>
                    <td></td>
-                  <td></td>
-                  <td></td>
+                 
                   
                   
                   
                   <!-- <td></td> -->
-                  <td style="text-align: center;font-size:14px;font-weight:bold;" colspan="2">Total Non Couvert Par Service </td>
-                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;" colspan="2">{{formatageSomme(parseFloat(afficheMontantTotalEquipementNonCouvert))}}</td>
+                  <td style="text-align: center;font-size:14px;font-weight:bold;">Total </td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{afficheQteACouvert}}</td>
+                   <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{(afficheQteACouvert)-(afficheQteNonCouvert)}}</td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{afficheQteNonCouvert}}</td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{formatageSomme(parseFloat(afficheMontantTotalEquipementNonCouvert))}}</td>
                  </tr>
                  
                     </tbody>
@@ -175,6 +177,22 @@ search:""
       "demandeMateriel"
    
    ]),
+     afficheQteACouvert() {
+     
+         return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
+
+     
+      
+     
+    },
+     afficheQteNonCouvert() {
+     
+         return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+
+     
+      
+     
+    },
    afficheMontantTotalEquipementNonCouvert() {
      
          return this.servicesua.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);

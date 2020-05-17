@@ -153,8 +153,32 @@ marcheid
                        </div>
                     <div id="tab00007" class="tab-pane">
                       
-                   <ordrePaiement :PaiementPersoid="detail_Execution.id" ></ordrePaiement>
-                   
+                  
+                    <table class="table table-bordered table-striped">
+                <div class="widget-box">
+                  <div class="widget-title">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                        <a data-toggle="tab" href="#tab0098">CHEF DE PROJET<span class="badge badge-info"></span></a>
+                      </li>
+                    
+                       <li class="" v-if="prendreDecision(detail_Execution.id) == 1">
+                        <a data-toggle="tab" href="#tab0078">DCF <span class="badge badge-important"></span></a>
+                      </li>
+                    
+                    
+                    </ul>
+                  </div>
+                  <div class="widget-content tab-content">
+                    <div id="tab0098" class="tab-pane active">
+                       <ordrePaiement :PaiementPersoid="detail_Execution.id" ></ordrePaiement>
+                    </div>
+                     <div id="tab0078" class="tab-pane">
+                         <ordrePaiementCf :PaiementPersoid="detail_Execution.id" ></ordrePaiementCf>
+                    </div>
+                  </div>
+                </div>
+                    </table>
                        </div>
                   </div>
                   <br />
@@ -171,12 +195,14 @@ import { mapGetters, mapActions } from "vuex";
   import moment from "moment";
      import { formatageSomme } from "../../../../src/Repositories/Repository";
      import ordrePaiement from '../executionPersonnel/ordrePaiement';
+     import ordrePaiementCf from '../executionPersonnel/ordrePaiementCf';
 // import moment from "moment";
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
 export default {
   components: {
-    ordrePaiement
+    ordrePaiement,
+    ordrePaiementCf
   },
   data() {
     return {
@@ -220,7 +246,7 @@ created() {
       "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
      "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
 
-   ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
+   ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel","ordre_paiement"]),
    
    ...mapGetters('uniteadministrative',[
     "plans_programmes",
@@ -253,6 +279,23 @@ created() {
 ...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+
+
+prendreDecision() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.ordre_paiement.find(qtreel => qtreel.paiementperso_id == id);
+
+      if (qtereel) {
+        return qtereel.motif_chef_projet;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
 
 sommeEgagementLigneTableau: function () {
                 return id => {
