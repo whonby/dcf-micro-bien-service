@@ -224,8 +224,8 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
-import jsPDF from 'jspdf'
-import 'jspdf-autotable'
+// import jsPDF from 'jspdf'
+// import 'jspdf-autotable'
 // import {groupBy} from '../../../Repositories/Repository'
 export default {
   
@@ -301,14 +301,14 @@ return this.chapitres.filter((item) => {
    }
 )
    },
-   genererEnPdf(){
-  var doc = new jsPDF()
-  // doc.autoTable({ html: this.natures_sections })
+//    genererEnPdf(){
+//   var doc = new jsPDF()
+//   // doc.autoTable({ html: this.natures_sections })
   
-  doc.autoTable({ html: '#Nature_section' })
-doc.save('Chapitre.pdf')
-return 0
-}
+//   doc.autoTable({ html: '#Nature_section' })
+// doc.save('Chapitre.pdf')
+// return 0
+// }
   },
   methods: {
     // methode pour notre action

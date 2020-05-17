@@ -84,6 +84,8 @@ import Notifications from 'vue-notification'
 Vue.use(Notifications)
 
 
+Vue.component('pagination', require('laravel-vue-pagination'));
+
 import fab from 'vue-fab'
 Vue.component('fab', fab)
 

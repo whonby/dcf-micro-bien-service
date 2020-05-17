@@ -24,7 +24,7 @@ export const getterCojos = state => state.cojos
 
 export const conditions = state => state.conditions
 export const fonctionOccupes = state => state.fonctionOccupes
-export const getterAnalyseDossiers = state => state.analyseDossiers.sort((a,b)=>(a.note_analyse>b.note_analyse)? 1:-1)
+export const getterAnalyseDossiers = state => state.analyseDossiers
 export const getterPlanPassationMarche=state=>state.plan_passation_marche
 export const natureFonctions = state => state.natureFonctions
 export const signatures = state => state.signatures
