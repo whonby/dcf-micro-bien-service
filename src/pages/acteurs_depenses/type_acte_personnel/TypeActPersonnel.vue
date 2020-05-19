@@ -3,15 +3,27 @@
     <div>
         <notifications />
 
-
+ 
         <!-- End Page Header -->
         <!-- Default Light Table -->
         <div class="container-fluid">
             <hr>
+            <!--<button @click="download()">Exporte</button>-->
+           <!-- <gr-data-table :columns="gridColumns">
+            <tr>
+            <td>Guei</td>
+            <td>Roland</td>
+            </tr>
+            <tr>
+            <td>NALL</td>
+            <td>AMMMMM</td>
+            </tr>
+            </gr-data-table>-->
             <div class="row-fluid">
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+
                             <h5>Liste  type acte  personnel</h5>
                             <div align="right">
                                 Search: <input type="text" v-model="search">
@@ -19,7 +31,7 @@
                             </div>
 
                         </div>
-                        <div class="widget-content nopadding">
+                        <div class="widget-content nopadding" ref="content">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
@@ -29,8 +41,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="odd gradeX" v-for="(titre, index) in titreFiltres" :key="titre.id">
-                                    <td @dblclick="afficherModalModifierTitre(index)">{{titre.code || 'Non renseigné'}}</td>
+                                <tr class="odd gradeX" v-for="(titre, index) in partition(titreFiltres,size)[page] " :key="titre.id">
+                                    <td  @dblclick="afficherModalModifierTitre(index)">{{titre.code || 'Non renseigné'}}</td>
                                     <td @dblclick="afficherModalModifierTitre(index)">{{titre.libelle || 'Non renseigné'}}</td>
                                     <td>
 
@@ -45,6 +57,15 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            <div class="pagination alternate">
+                                <ul>
+                                    <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                                    <li  v-for="(titre, index) in partition(titreFiltres,size).length" :key="index" :class="{ active : active_el == index }">
+                                        <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                                    <li :class="{ disabled : page == partition(titreFiltres,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -123,19 +144,27 @@
                    href="#">Modifier</a>
                 <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
         </div>
-
+         
         <!----- fin modifier modal  ---->
     </div>
 
 </template>
 
 <script>
-
+    import jsPDF from 'jspdf'
+    import html2canvas from "html2canvas"
+   // import GrDataTable from '@/components/table_data/GrDataTable'
     import {mapGetters, mapActions} from 'vuex'
+    import {partition} from "../../../Repositories/Repository"
     export default {
-
+        components:{
+            
+           // GrDataTable
+        },
         data() {
             return {
+                gridColumns: ["name", "power"],
+                active_el:0,
                 fabActions: [
                     {
                         name: 'cache',
@@ -146,6 +175,8 @@
                     //     icon: 'add_alert'
                     // }
                 ],
+                page:0,
+                size:1,
                 search:"",
                 liste:[],
                 formData : {
@@ -172,7 +203,8 @@
             titreFiltres() {
 
                 const searchTerm = this.search.toLowerCase();
-
+               //console.log(this.partition(this.type_acte_personnels,2)[1])
+//console.log(this.type_acte_personnels)
                 return this.type_acte_personnels.filter((item) => {
 
                         return item.code.toLowerCase().includes(searchTerm)
@@ -195,7 +227,23 @@
                     keyboard: false
                 });
             },
-            // fonction pour vider l'input
+            createPDF () {
+                let pdfName = 'test';
+                var doc = new jsPDF();
+                doc.text("Hello World", 10, 10);
+                doc.save(pdfName + '.pdf');
+            },
+            download() {
+
+                /** WITH CSS */
+                var canvasElement = document.createElement('canvas');
+                html2canvas(this.$refs.content, { canvas: canvasElement }).then(function (canvas) {
+                    const img = canvas.toDataURL("image/jpeg", 0.8);
+                    const doc = new jsPDF()
+                    doc.addImage(img, 'JPEG', 5, 5, 200, 287)
+                    doc.save('relatorio-remoto.pdf')
+                });
+            },// fonction pour vider l'input
             ajouterTitreLocal () {
                 this.ajouterTypeActPersonnel(this.formData)
 
@@ -203,6 +251,19 @@
                     code: "",
                     libelle: ""
                 }
+            },
+   partition:partition,
+            getDataPaginate(index){
+                this.active_el = index;
+                this.page=index
+            },
+            precedent(){
+                this.active_el--
+                this.page --
+            },
+            suivant(){
+                this.active_el++
+                this.page ++
             },
 // afficher modal
             afficherModalModifierTitre(index){

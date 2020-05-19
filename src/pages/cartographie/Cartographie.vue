@@ -109,7 +109,7 @@
                             <tbody style="height: 100px;">
                             <tr class="odd gradeX " v-for="ua in administratif(idzone)"
                                 :key="ua.id">
-                                <td  class="blah" @click="uniteAdministrativeSelect(ua.id,ua.libelle, $event)">{{ua.libelle}}</td>
+                                <td  class="blah " @click="uniteAdministrativeSelect(ua.id,ua.libelle, $event)" :class="{ red : active_el == ua.id }">{{ua.libelle}}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -150,6 +150,7 @@
                 {iconUrl, shadowUrl}
             ))
             return {
+                active_el:0,
                 search:"",
                 budgetGeneralExcecute:0,
                 tauxExecutionBudgetGeneral:0,
@@ -554,6 +555,7 @@ formatageSomme:formatageSomme,
 
             },
             uniteAdministrativeSelect(id,libelle, $event){
+                this.active_el = id;
                 this.iduniteadmin=id
                 this.libelle_unite_admin=libelle
                 console.log($event)
@@ -561,6 +563,7 @@ formatageSomme:formatageSomme,
       },
             afficher(){
                 this.idzone=""
+                this.active_el=0
                 this.zone_geographique=""
                 this.iduniteadmin=""
                 this.libelle_unite_admin=""
@@ -644,7 +647,7 @@ formatageSomme:formatageSomme,
     }
     .red {
       color:#fff;
-        background-color: #3eb5ff !important;
+        background-color: red !important;
     }
     .blah{
         cursor: grab !important;
