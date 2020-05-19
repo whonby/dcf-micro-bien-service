@@ -4,11 +4,7 @@ import { asyncLoading } from 'vuejs-loading-plugin'
 var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
 
-// ajouterchnique
-// modifierchnique
-// supprimerDossierCandidat
 
-// ajouterOffreFinancier
 
 export  function  getCandidatSelectionner({commit}) {
   queue.push(() => axios.get('/liste_candidat_select').then((response) => {
@@ -283,7 +279,6 @@ export function supprimerExecutionMarche({commit}, id) {
 
 // action pour le motif de decision
 
-
 export  function  getMotifDecision({commit}) {
   queue.push(() => axios.get('/motif_dessions').then((response) => {
     commit('GET_MOTIF_DECISION', response.data.data)
@@ -336,8 +331,6 @@ export function supprimerMotifDecision({commit}, id) {
 
 
 // action pour le document procedure
-
-
 
 
 export  function  getDocumentProcedure({commit}) {
@@ -3248,11 +3241,13 @@ export  function  getRapportJugement({commit}) {
 // action pour ajouter les infos
 
 export function ajouterRapportJugement({commit,dispatch}, elementAjout,config){
+
   asyncLoading(axios.post('/add_rapport_jugement',elementAjout,config)).then(response =>{
+
       if(response.status == 201){
           commit('AJOUTER_RAPPORT_OUVERTURE', response.data.jugement)
           commit('GET_ALL_SELECTIONNER_CANDIDAT', response.data.annalyse.data)
-          commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
+          //commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
           dispatch('getRapportJugement')
           this.$app.$notify({
               title: 'success ',
@@ -4154,18 +4149,21 @@ export  function  getProceVerbal({commit}) {
     }).catch(error => console.log(error)))
 }
 
+
+
 export function ajouterProceVerbal({commit}, objetAjoute,config){
     asyncLoading(axios.post('/proceVerbalJugementOffres',objetAjoute,config)).then(response =>{
         if(response.status == 201){
             console.log(response.data)
             commit('AJOUTER_PV', response.data.jugement)
-            
             commit('GET_ALL_ANALYSE_DOSSIER', response.data.annalyse.data)
             this.$app.$notify({
                 title: 'success ',
                 text: 'Enregistrement effectué !',
                 type:"success"
+                
             })
+            console.log(objetAjoute)
         }
 
     }).catch(error => console.log(error))
@@ -4183,7 +4181,7 @@ export function supprimerProceVerbal({commit}, id) {
             }  )
         })
 
-}
+}  
 export function modificationProceVerbalOffre({commit}, element_modifie,config) {
     asyncLoading( axios.post('/update_proceVerbalJugementOffres' ,element_modifie,config)).then(response => {
         console.log(response)

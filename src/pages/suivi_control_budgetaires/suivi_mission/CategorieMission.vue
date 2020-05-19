@@ -35,7 +35,7 @@
           </div>
          
            <div class="widget-content nopadding">
-             <!-- <template> -->
+         
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -66,10 +66,19 @@
                   </td>
                 </tr>
               </tbody>
+              
             </table>
-
-          <!-- <pagination :data="laravelData" @pagination-change-page="getCategorieMission()"></pagination> -->
-             <!-- </template> -->
+             <!-- <pagination :data="laravelData" @pagination-change-page="getCategorieMission()"></pagination> -->
+          
+          <!-- <div class="pagination alternate">
+              <ul>
+               
+                <li v-for="(item, index) in 4" :key="item" @click.prevent="paginate(index + 1)"><a href="#" >{{index + 1}}</a></li>
+               
+                
+              </ul>
+            </div> -->
+           
             <div v-if="categorieMissionFiltre.length">    
             </div>
             <div v-else>
@@ -185,6 +194,9 @@ export default {
   
   data() {
     return {
+
+      laravelData:{},
+      
       json_fields:{
              'Libelle':'libelle',
              'Code':'code'
@@ -244,7 +256,7 @@ return this.categories_missions.filter((item) => {
 
   methods: {
     // methode pour notre action
-   ...mapActions('suivi_controle_budgetaire', ['getCategorieMission', 'ajouterCategorieMission', 
+   ...mapActions('suivi_controle_budgetaire', [ 'ajouterCategorieMission', 
    'modifierCategorieMission','supprimerCategorieMission']),   
    
     afficherModalAjouterCategorieMission(){
@@ -253,7 +265,12 @@ return this.categories_missions.filter((item) => {
               keyboard: false
              });
     },
+//     paginate(parm){
+//       console.log("ooooooooo")
+// this.getCategorieMission(parm)
+//     },
    // fonction pour vider l'input
+
      ajouterBudgetaireLocal () {
      this.ajouterCategorieMission(this.formData)
 
