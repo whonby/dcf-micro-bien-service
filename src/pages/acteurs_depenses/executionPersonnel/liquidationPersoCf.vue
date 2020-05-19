@@ -1,90 +1,13 @@
-
+detail_Execution
+formDataMandat
+CumulEngagement2
+afficherIdOrdrePaiement
+afficherIdOrdrePaiement
 <template>
     <div>
 
-  <div id="exampleModalTypeNorme" class="modal hide tailleModalRecrutement">
-      
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-    
-         <h4 style="text-align:center">CE MOIS EST DEJA PAYE</h4>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
- <div id="exampleModalRejeter" class="modal hide tailleModalRecrutement">
-      
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
-    
-         <h4 style="text-align:center">CE MOIS A ETE REJETE</h4>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
 
-
-
-
-
-
-
-
-<div id="modalDecisionChefProjet" class="modal hide">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">�</button>
-        <h3>Ajouter Observation du Chef de projet</h3>
-      </div>
-      <div class="modal-body">
-        <form class="form-horizontal" >
-          <div class="control-group">
-                            <label class="control-label">D&eacute;cision Chef de projet </label>
-                            <div class="controls">
-                              <select v-model="editOrdrePaiement.motif_chef_projet">
-                                <option value="0">Attente</option>
-                              <option value="1">Vis&eacute;</option>
-                             <option value="2">Diff&eacute;r&eacute;</option>
-                             <option value="3">R&eacute;jet&eacute;</option>
-                            
-    
-    </select>
-                           
-                            </div>
-                          </div>
-                        
-                          <div class="control-group">
-                            <label class="control-label">Observation Chef de projet</label>
-                            <div class="controls">
-                              <textarea  class="span" row = "6" v-model="editOrdrePaiement.observation_chef_projet">
-                              </textarea>
-                            </div>
-                          </div>
-                           <div class="control-group">
-                            <label class="control-label">Date Observation:</label>
-                            <div class="controls">
-                              <input type="date" class="span"  v-model="editOrdrePaiement.date_motif_chef_projet"/>
-                             
-                            </div>
-                          </div>
-                              
-         
-        </form>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="modifierOrdrePaiement(editOrdrePaiement)"
-          class="btn btn-primary"
-          href="#"
-         
-        >Valider</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
-<div id="ajouterMP1" class="modal hide tailgrand">
+<div id="ModalMandatLiqu" class="modal hide tailgrand">
   <div class="row-fluid">
         <div class="span12">
           <div class="widget-box">
@@ -92,7 +15,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h4>Ajouter Ordre de Paiement</h4>
+              <h4>Ajouter Mandat</h4>
               <!-- <div align="right">
                 Search:
                 <input type="search" placeholder />
@@ -105,34 +28,34 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1">REFERENCE DU BENEFICIAIRE</a>
+                        <a data-toggle="tab" href="#tab0555">REFERENCE DU BENEFICIAIRE</a>
                       </li>
                        
                       <li>
-                        <a data-toggle="tab" href="#tab2">SPECIFICATION DE LA DEPENSE</a>
+                        <a data-toggle="tab" href="#tab0006">SPECIFICATION DE LA DEPENSE</a>
                       </li>
                       <li>
-                        <a data-toggle="tab" href="#tab3">SITUATION DU CREDIT</a>
+                        <a data-toggle="tab" href="#tab956">SITUATION DU CREDIT</a>
                       </li>
                       <!-- <li>
-                        <a data-toggle="tab" href="#tab3">Autres Information</a>
+                        <a data-toggle="tab" href="#tab956">Autres Information</a>
                       </li> -->
                      
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
-                     <div id="tab3" class="tab-pane">
+                     <div id="tab956" class="tab-pane">
                       <div class="modal-body">
                         <table class="table table-bordered table-striped">
                           <tr>
                             <td>
                 
-                 <label class="control-label">Trésor</label>
+                 <label class="control-label">Tr&eacute;sor</label>
                  <div class="controls">
                    <input
-                     type="text"
-                  v-model="formData.montant_tresor"
-                      
+                     type="number"
+                  :value="afficherMontantTresor(PaiementPersoid)"
+                      readonly
                       class="span"
                    />
                  </div>
@@ -143,9 +66,9 @@
                  <label class="control-label">Don</label>
                  <div class="controls">
                    <input
-                     type="text"
-                    v-model="formData.montant_don"
-                      
+                     type="number"
+                    :value="afficherMontantDon(PaiementPersoid)"
+                      readonly
                       class="span"
                    />
                  </div>
@@ -156,9 +79,9 @@
                  <label class="control-label">Emprunt</label>
                  <div class="controls">
                    <input
-                     type="text"
-                    v-model="formData.montant_emprunt"
-                      
+                     type="number"
+                 :value="afficherMontantEmprunt(PaiementPersoid)"
+                      readonly
                       class="span"
                    />
                  </div>
@@ -169,8 +92,8 @@
                  <label class="control-label">Montant/Depense</label>
                  <div class="controls">
                    <input
-                     type="text"
-                  :value="sommeMontant"
+                     type="number"
+                  :value="sommeMontantMandat"
                       readonly
                       class="span"
                    />
@@ -181,7 +104,7 @@
                                   <tr>
                             <td>
                 
-                 <label class="control-label">Crédits Autorises</label>
+                 <label class="control-label">Cr&eacute;dits Autorises</label>
                  <div class="controls">
                    <input
                      type="text"
@@ -211,7 +134,7 @@
                  <div class="controls">
                    <input
                      type="text"
-                     :value="sommeMontant"
+                     :value="sommeMontantMandat"
                       readonly
                       class="span"
                    />
@@ -225,7 +148,7 @@
                    <input
                      type="text"
                     
-                  :value="CumulEngagement"
+                  :value="CumulEngagement2"
                       readonly
                       class="span"
                    />
@@ -247,12 +170,38 @@
                  </div>
                 
               </td>
+               <td>
+                
+                 <label class="control-label">Numero engagement</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+         readonly
+                      :value="afficherNumeroEngagement(afficherIdOrdrePaiement(PaiementPersoid))"
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
+               <td>
+                
+                 <label class="control-label">Numero Mandat</label>
+                 <div class="controls">
+                   <input
+                     type="text"
+         
+                     v-model="formMandn.numeroMandat"
+                      class="span"
+                   />
+                 </div>
+                
+              </td>
                           </tr>
                         </table>
                       </div>
                      </div>
                     <!--ongle identification-->
-                    <div id="tab1" class="tab-pane active">
+                    <div id="tab0555" class="tab-pane active">
                       <div class="modal-body">
         <table class="table table-bordered table-striped">
             <tr>
@@ -379,7 +328,7 @@
           
                     </div>
                     <!--ongle descriptif-->
-                    <div id="tab2" class="tab-pane">
+                    <div id="tab0006" class="tab-pane">
                       
   <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -488,9 +437,9 @@
                   <div class="controls">
                     <input
                      type="text"
-                     v-model="formData.numero_ordre_paiement"
+                    :value="afficherNumeroOrdrePaiement(PaiementPersoid)"
                      class="span"
-                     
+                     readonly
        
                     />
                    </div>
@@ -515,7 +464,7 @@
                     <div class="controls">
                       <div data-toggle="buttons-checkbox" class="btn-group">
                         <a
-          @click.prevent="ajouterOrdrePaiement(formData)"
+          @click.prevent="ajouterMandatEngagement"
           class="btn btn-primary"
           href="#"
          
@@ -532,61 +481,123 @@
       </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+<div id="modalLiquidationCf" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Ajouter Observation Cf</h3>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" >
+          <div class="control-group">
+                            <label class="control-label">D&eacute;cision ordonnateur </label>
+                            <div class="controls">
+                              <select v-model="editLiquidationCf.decision_controleur_financier">
+                                <option value="0">Attente</option>
+                              <option value="20112">Vis&eacute;</option>
+                             <option value="21112">Diff&eacute;r&eacute;</option>
+                             <option value="22112">R&eacute;jet&eacute;</option>
+                            
+    
+    </select>
+                           
+                            </div>
+                          </div>
+                        
+                          <div class="control-group">
+                            <label class="control-label">Observation CF</label>
+                            <div class="controls">
+                              <textarea  class="span" row = "6" v-model="editLiquidationCf.observation_controleur_financier">
+                              </textarea>
+                            </div>
+                          </div>
+                           <div class="control-group">
+                            <label class="control-label">Date Observation:</label>
+                            <div class="controls">
+                              <input type="date" class="span"  v-model="editLiquidationCf.date_controleur_financier"/>
+                             
+                            </div>
+                          </div>
+                              
+         
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="modifierLiquidationPerso(editLiquidationCf)"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
+
+
                             <table class="table table-bordered table-striped" v-if="PaiementPersoid">
                                             <thead>
-                  <tr>
-                    <th>Exercice en cours </th>
+                   <tr>
+                    <th>Exercice en cours</th>
                     <th title="unite administrative"> ua</th>
                     <th>programme</th>
                     <th>action</th>
-                    <th>activité</th>
-                    <th>ligne</th>
-                    <!-- <th>Code Fichier</th> -->
-                    <th>Objet Depense</th>
-                    <th>Mois de Paiement</th>
-                    <th>Montant des Salaires</th>
-                    <th>Fichier Joint</th>
-                      <th>Chez de projet</th>
+                    <th>activit&eacute;</th>
+                    <th>Ligne budgetaire</th>
+                    <th>Montant autorisé</th>
+                       <th>Decision Emetteur</th>
+                      <th>Date Decision</th>
+                      <th>Decision ordonnateur</th>
+                      <th>Date ordonnateur</th>
+                      <th>Decision CF</th>
+                      <th>Date CF</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                   <tr class="odd gradeX" v-for="(item,index) in listeOrdrePaiement(PaiementPersoid)" :key="item.id">
-                                    <td>{{item.exerciceencours || 'Non renseign&eacute;'}}</td>
-                                    <td>{{afficherLibelleUa(item.ua_id) || 'Non renseign&eacute;'}}</td>
+                   <tr class="odd gradeX" v-for="(item,index) in listeLiquidationPerso(PaiementPersoid)" :key="item.id">
+                                    <td>{{item.exo_id || 'Non renseign&eacute;'}}</td>
+                                   <td>{{afficherLibelleUa(item.ua_id) || 'Non renseign&eacute;'}}</td>
                                      <td>{{afficherLibelleProgramme(item.programme_id) || 'Non renseign&eacute;'}}</td>
                                     <td>{{afficherLibelleAction(item.action_id) || 'Non renseign&eacute;'}}</td>
                                     
                                      <td>{{afficherLibelleActivite(item.activite_id) || 'Non renseign&eacute;'}}</td>
-                                    <td>{{afficherLibelleLigne(item.ligne_id) || 'Non renseign&eacute;'}}</td>
+                                    <td>{{afficherLibelleLigne(item.plan_budgetaire_id) || 'Non renseign&eacute;'}}</td>
+                                     <td>{{formatageSomme(parseFloat(afficherMontantAutorise(item.ordrepaiemnet_id))) || 'Non renseign&eacute;'}}</td>
                                     
-                                     <td>{{item.objetdepense || 'Non renseign&eacute;'}}</td>
-                                    <td>{{item.moisdepaiement || 'Non renseign&eacute;'}}</td>
                                     
-                                     <td>{{formatageSomme(parseFloat(item.total_general)) || 'Non renseign&eacute;'}}</td>
-                                    <td>{{item.fichierjoint || 'Non renseign&eacute;'}}</td>
                                    
-                                     <td>
-                       <button v-if="item.motif_chef_projet == 1"  class="btn  btn-success"  @click="afficherModalObservationChefProjet(index)" >                        
+                  
+                    
+                                       <td>
+                       <button v-if="item.decision_emetteur == 201"  class="btn  btn-success"  @click="afficherModalObservationEmetteur(index)" >                        
                      
-                      <span    >Valid&eacute;</span>
+                      <span    >Vis&eacute;</span>
                       
                       </button>
-                       <button v-else-if="item.motif_chef_projet == 2" class="btn  btn-warning" @click="afficherModalObservationChefProjet(index)">                        
+                       <button v-else-if="item.decision_emetteur == 211" class="btn  btn-warning" @click="afficherModalObservationEmetteur(index)">                        
                      
                       
                        <span  >Diff&eacute;r&eacute;</span>
                       
                     
                       </button>
-                        <button v-else-if="item.motif_chef_projet == 3" class="btn  btn-danger" @click="afficherModalObservationChefProjet(index)" >                        
+                        <button v-else-if="item.decision_emetteur == 221" class="btn  btn-danger" @click="afficherModalObservationEmetteur(index)">                        
                      
                       
                        <span  >R&eacute;jet&eacute;</span>
                       
                     
                       </button>
-                     <button v-else class="btn  btn-info" @click="afficherModalObservationChefProjet(index)" >                        
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationEmetteur(index)" >                        
                      
                       
                        <span  >Attente</span>
@@ -594,9 +605,77 @@
                     
                       </button>
                     </td>
+                    <td>{{formaterDate(item.date_emetteur) || 'Non renseign&eacute;'}}</td>
+                                    
+                                         
+                                                      <td>
+                       <button v-if="item.decision_ordonnateur == 2011"  class="btn  btn-success"  @click="afficherModalObservationCF(index)" >                        
+                     
+                      <span    >Vis&eacute;</span>
+                      
+                      </button>
+                       <button v-else-if="item.decision_ordonnateur == 2111" class="btn  btn-warning" @click="afficherModalObservationCF(index)">                        
+                     
+                      
+                       <span  >Diff&eacute;r&eacute;</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="item.decision_ordonnateur == 2211" class="btn  btn-danger" @click="afficherModalObservationCF(index)">                        
+                     
+                      
+                       <span  >R&eacute;jet&eacute;</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationCF(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                    <td>{{formaterDate(item.date_ordonnateur) || 'Non renseign&eacute;'}}</td>
+                                   
+                                         
+                                                      <td>
+                       <button v-if="item.decision_controleur_financier == 20112"  class="btn  btn-success"  @click="afficherModalObservationCF(index)" >                        
+                     
+                      <span    >Vis&eacute;</span>
+                      
+                      </button>
+                       <button v-else-if="item.decision_controleur_financier == 21112" class="btn  btn-warning" @click="afficherModalObservationCF(index)">                        
+                     
+                      
+                       <span  >Diff&eacute;r&eacute;</span>
+                      
+                    
+                      </button>
+                        <button v-else-if="item.decision_controleur_financier == 22112" class="btn  btn-danger" @click="afficherModalObservationCF(index)">                        
+                     
+                      
+                       <span  >R&eacute;jet&eacute;</span>
+                      
+                    
+                      </button>
+                     <button v-else class="btn  btn-info" @click="afficherModalObservationCF(index)" >                        
+                     
+                      
+                       <span  >Attente</span>
+                      
+                    
+                      </button>
+                    </td>
+                    <td>{{formaterDate(item.date_controleur_financier) || 'Non renseign&eacute;'}}</td>
                                     <td>
       <div class="btn-group">
-                            <button @click.prevent="supprimerordrepaiement(item.id)"  class="btn btn-danger " title="Supprimer">
+         <button class="btn "   title="Ajouter Mandat" v-if="item.decision_controleur_financier == 20112 && afficheButtonMandat(item.paiementperso_id) == 0" @click="afficherModalMandat(item.id)">
+                        <span>
+                          <i class="icon   icon-folder-close"></i>
+                        </span>
+                      </button>
+                            <button @click.prevent="supprimerLiquidation(item.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span>
                             </button>
                         </div>
@@ -606,8 +685,8 @@
                                         </table>
     <!--  end -->
 
-    <fab :actions="fabActions" @cache="afficheToiSiPaiementNonVise" main-icon="apps" bg-color="green"></fab>
-    <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficheToiSiPaiementNonVise()">Open</button>
+    <fab :actions="fabActions" @cache="afficherModalAjouterTitre" main-icon="apps" bg-color="green"></fab>
+    <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterTitre()">Open</button>
 <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <notifications  />
     </div>
@@ -627,9 +706,12 @@ fabActions: [
           icon: "add"
         }
          ],  
-         
+          formNumeroEngagemt:{
+             engagemtPero:"perso"
+         },
+         formDataMandat:{},
             formData: {
-  // 
+  
   
       banque_id:"",
       
@@ -653,8 +735,8 @@ fabActions: [
 
 
  },
-editOrdrePaiement:{}
-
+formMandn:{},
+editLiquidationCf:{}
             
 
         }
@@ -671,7 +753,8 @@ editOrdrePaiement:{}
  "afficheNiveauActivite",
  "derniereNivoPlanBudgetaire",
  "getPersonnaliseBudgetGeneralParPersonnel",
- "banqueUa"
+ "banqueUa",
+ "liquidation"
    
    
    ]),
@@ -705,11 +788,124 @@ editOrdrePaiement:{}
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
   ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
    
- listeOrdrePaiement: function () {
+   
+     afficherMontantTresor() {
+      return id2=> {
+        if (id2!= null && id2!= "") {
+           const qtereel = this.ordre_paiement.find(qtreel => qtreel.paiementperso_id == id2);
+
+      if (qtereel) {
+        return qtereel.montant_tresor;
+      }
+      return 0
+        }
+      };
+    },
+        afficherMontantDon() {
+      return id2=> {
+        if (id2!= null && id2!= "") {
+           const qtereel = this.ordre_paiement.find(qtreel => qtreel.paiementperso_id == id2);
+
+      if (qtereel) {
+        return qtereel.montant_don;
+      }
+      return 0
+        }
+      };
+    },
+         afficherMontantEmprunt() {
+      return id2=> {
+        if (id2!= null && id2!= "") {
+           const qtereel = this.ordre_paiement.find(qtreel => qtreel.paiementperso_id == id2);
+
+      if (qtereel) {
+        return qtereel.montant_emprunt;
+      }
+      return 0
+        }
+      };
+    },
+   afficheButtonMandat() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.valisationvirement;
+      }
+      return 0
+        }
+      };
+    },
+   
+   
+   
+   
+   
+   CumulEngagement2() {
+      const val = parseFloat(this.sommeEgagementLigneTableau(this.afficherIdLigne(this.PaiementPersoid))) + parseFloat(this.sommeMontantEgagement);
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+    },
+        afficherMontantAutorise() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.ordre_paiement.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.total_general;
+      }
+      return 0
+        }
+      };
+    },
+     afficherIdOrdrePaiement() {
+      return id2=> {
+        if (id2!= null && id2!= "") {
+           const qtereel = this.ordre_paiement.find(qtreel => qtreel.paiementperso_id == id2);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+   afficherNumeroOrdrePaiement() {
+      return id2=> {
+        if (id2!= null && id2!= "") {
+           const qtereel = this.ordre_paiement.find(qtreel => qtreel.paiementperso_id == id2);
+
+      if (qtereel) {
+        return qtereel.numero_ordre_paiement;
+      }
+      return 0
+        }
+      };
+    },
+    afficherNumeroEngagement() {
+      return id2=> {
+        if (id2!= null && id2!= "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.ordrepaiemnet_id == id2);
+
+      if (qtereel) {
+        return qtereel.numero_engage;
+      }
+      return 0
+        }
+      };
+    },
+
+
+ listeLiquidationPerso: function () {
                 return id => {
                     if (id != "") {
                       // console.log("Marche leste acte effect finnancier")
-                        return this.ordre_paiement.filter(idmarche => idmarche.paiementperso_id == id)
+                        return this.liquidation.filter(idmarche => idmarche.paiementperso_id == id)
                     }
                 }
             },
@@ -732,11 +928,15 @@ editOrdrePaiement:{}
       return 0
     },
   sommeMontantEgagement() { 
-      const val = parseFloat(this.editOrdrePaiement.montant_tresor) + parseFloat(this.editOrdrePaiement.montant_don) + parseFloat(this.editOrdrePaiement.montant_emprunt);
+      const val = parseFloat(this.formDataMandat.montant_tresor) + parseFloat(this.formDataMandat.montant_don) + parseFloat(this.formDataMandat.montant_emprunt);
       return parseFloat(val).toFixed(2);
       
     },
-
+sommeMontantMandat() { 
+      const val = parseFloat(this.afficherMontantEmprunt(this.PaiementPersoid)) + parseFloat(this.afficherMontantDon(this.PaiementPersoid)) + parseFloat(this.afficherMontantTresor(this.PaiementPersoid));
+      return parseFloat(val).toFixed(0);
+      
+    },
 
  DisponibleBudget() {
       const val = parseFloat(this.dotationInite(this.afficherIdLigne(this.PaiementPersoid))) + parseFloat(this.sommeEgagementLigneTableau(this.afficherIdLigne(this.PaiementPersoid)));
@@ -1005,6 +1205,7 @@ editOrdrePaiement:{}
         }
       };
     },
+
     afficherObjetdepense() {
       return id => {
         if (id != null && id != "") {
@@ -1036,44 +1237,46 @@ editOrdrePaiement:{}
       "ajouterordrepaiement",
       "modifierordrepaiement"
     ]),
-     
- afficheToiSiPaiementNonVise(){
-              if(this.afficheButton(this.PaiementPersoid) == 0){
-                 this.$("#ajouterMP1").modal({
-        backdrop: "static",
-        keyboard: false
-      });
-              }
-              else {
-               this.$("#exampleModalTypeNorme").modal({
-        backdrop: "static",
-        keyboard: false
-      });
-              }
-              
+    ...mapActions("uniteadministrative", [              
+                "modifierMontantBudgetaire",
+                "ajouterRealiteServiceFait",
+                "modifierRealiteServiceFait",
+                "ajouterLiquidation",
+                "modifierLiquidation",
+                "supprimerLiquidation",
+                "supprimerRealiteServiceFait"
+            ]),
+            ...mapActions("bienService", [
+                
+                "ajouterMandat",
+                "modifierMandat",
+                "supprimerMandat",
              
-            },
-    
-     afficheButton() {
-      return id2 => {
-        if (id2 != null && id2 != "") {
-           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id2);
-
-      if (qtereel) {
-        return qtereel.valisationvirement;
-      }
-      return 0
-        }
-      };
+               
+            ]),
+        afficherModalAjouterTitre() {
+      this.$("#ajouterMP1").modal({
+        backdrop: "static",
+        keyboard: false
+      });
     },
-afficherModalObservationChefProjet(index) {
-      this.$("#modalDecisionChefProjet").modal({
+
+afficherModalObservationCF(index) {
+      this.$("#modalLiquidationCf").modal({
         backdrop: "static",
         keyboard: false
       })
-      this.editOrdrePaiement = this.listeOrdrePaiement(this.PaiementPersoid)[index];
+      this.editLiquidationCf = this.listeLiquidationPerso(this.PaiementPersoid)[index];
       
       },
+      afficherModalMandat(id) {
+      this.$("#ModalMandatLiqu").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+      // this.formDataEngage = this.afficheMarcheEngage(this.detail_marche.id).find(recupererObjet => recupererObjet.id == id)
+        this.formDataMandat = this.listeLiquidationPerso(this.PaiementPersoid).find(recupererObjet => recupererObjet.id == id)
+    },
     ajouterOrdrePaiement() {
       var nouvelObjet = {
         ...this.formData,
@@ -1125,61 +1328,80 @@ afficherModalObservationChefProjet(index) {
        
       };
     },
-     modifierOrdrePaiement() {
-      var nouvelObjet = {
-        ...this.editOrdrePaiement,
-         activite_id: this.afficherIdActivite(this.PaiementPersoid),
-       programme_id:this.afficherIdProgramme(this.PaiementPersoid),
-       action_id:this.afficherIdAction(this.PaiementPersoid),
-       ua_id: this.afficherIdUa(this.PaiementPersoid),
-       moisdepaiement:this.affichermoisdepaiement(this.PaiementPersoid),
-        modepaiement_id:this.afficherModePaiement(this.PaiementPersoid),
-       ligne_id:this.afficherIdLigne(this.PaiementPersoid),
-       objetdepense:this.afficherObjetdepense(this.PaiementPersoid),
-         exerciceencours: this.afficherAnneeBudgetaire(this.PaiementPersoid),
-         imputationBudget:this.afficheImputation(this.PaiementPersoid),
-         numeromatricule :this.afficherNumeroMatricule(this.PaiementPersoid),
-         referencebancaire :this.afficherReferenceBancaire(this.PaiementPersoid),
-         banque_id :this.afficherIdBanque(this.PaiementPersoid),
-         rib:this.afficherCompteUa(this.PaiementPersoid),
-         total_general:this.sommeMontantEgagement,
-           paiementperso_id:this.PaiementPersoid,
-           
-       
-      };
+     modifierLiquidationPerso() {
      
+      var objetLiquidation = {
+          ...this.editLiquidationCf,
+         numero_demande : this.formNumeroEngagemt.numero_engage,
+        	exo_id:this.afficherAnneeBudgetaire(this.PaiementPersoid),
+ imputation_budgetaire :this.CodeBudgetaire,
+programme_id:this.afficherIdProgramme(this.PaiementPersoid),
+action_id:this.afficherIdAction(this.PaiementPersoid),
+activite_id:this.afficherIdActivite(this.PaiementPersoid),
+  ua_id:this.afficherIdUa(this.PaiementPersoid),
+
+plan_budgetaire_id:this.afficherIdLigne(this.PaiementPersoid),
+   ordrepaiemnet_id:this.afficherIdOrdrePaiement(this.PaiementPersoid),
+  marchetype:this.formNumeroEngagemt.engagemtPero,
+
+	paiementperso_id:this.PaiementPersoid,
+       };
     
-     this.modifierordrepaiement(nouvelObjet)
-      this.formData = {
-        banque_id:"",
-      
-   programme_id:"",
-   numero_ordre_paiement:"",
-   action_id:"",
-   activite_id:"",
-   ua_id: "",
-   
-  referencebancaire:"",
-   fichierjoint:"",
-  
-  rib:"",
- 
-  
-  montant_tresor:0,
-  montant_don:0,
-  montant_emprunt:0,
-  ligne_id:"",
-
-
- 
-       
-      };
+     this.modifierLiquidation(objetLiquidation)
+     
     },
      formatageSomme:formatageSomme,
 
-      formaterDate(date) {
+
+
+
+
+
+
+     ajouterMandatEngagement(){
+
+
+ var nouvelObjet = {
+      
+      exercice_budget :this.afficherAnneeBudgetaire(this.PaiementPersoid),
+       
+         
+        
+       	ligne_budgetaire_id:this.afficherIdLigne(this.PaiementPersoid),
+     
+       
+        	numero_mandat:this.formMandn.numeroMandat,
+programme_id:this.afficherIdProgramme(this.PaiementPersoid),
+action_id:this.afficherIdAction(this.PaiementPersoid),
+activite_id:this.afficherIdActivite(this.PaiementPersoid),
+  ua_id:this.afficherIdUa(this.PaiementPersoid),
+
+  total_general:this.sommeMontantMandat,
+    montant_tresor:this.afficherMontantTresor(this.PaiementPersoid),
+      montant_don:this.afficherMontantDon(this.PaiementPersoid),
+ montant_emprunt:this.afficherMontantEmprunt(this.PaiementPersoid),
+ 
+  ordrepaiemnet_id:this.afficherIdOrdrePaiement(this.PaiementPersoid),
+  marchetype:this.formNumeroEngagemt.engagemtPero,
+  paiementperso_id:this.PaiementPersoid,
+ numero_engage:this.afficherNumeroEngagement(this.afficherIdOrdrePaiement(this.PaiementPersoid))
+       };
+this.ajouterMandat(nouvelObjet)
+this.$("#ModalMandatLiqu").modal('hide');
+this.formData= {
+
+};
+
+      
+      
+
+    },
+     formaterDate(date) {
       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
     },
+
+
+
     }
 
     

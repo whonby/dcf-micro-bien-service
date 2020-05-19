@@ -1027,3 +1027,47 @@ export const gettersTest = (state, getters, rootState, rootGetters) =>
     })
 
  export const getterEcheances = state => state.echeances;
+
+export const mandatVisePersonnel = state =>
+    state.mandats.filter(
+        Immrealise => Immrealise.decision_cf == 8
+    );
+export const getMandatPersonnaliserPersonnel = (state, getters, rootState, rootGetters) =>
+    getters.mandatVisePersonnel.map(element => {
+        if (
+            element.programme_id !== null
+            && element.action_id !== null
+            && element.activite_id !== null
+            && element.ua_id !== null
+           
+            && element.ligne_budgetaire_id !== null
+           
+        ) {
+            element = {
+                ...element,
+               
+               
+                afficheProgramme: rootGetters['parametreGenerauxAdministratif/plans_programmes'].find(
+                    plans => plans.id == element.programme_id
+                ),
+                afficheAction: rootGetters['parametreGenerauxActivite/afficheNiveauAction'].find(
+                    plans => plans.id == element.action_id
+                ),
+
+                afficheActivite: rootGetters['parametreGenerauxActivite/afficheNiveauActivite'].find(
+                    plans => plans.id == element.activite_id
+                ),
+                afficheUa: rootGetters['uniteadministrative/uniteAdministratives'].find(
+                    plans => plans.id == element.ua_id
+                ),
+
+                afficheLigneBudget: rootGetters['parametreGenerauxBudgetaire/plans_budgetaires'].find(
+                    plans => plans.id == element.ligne_budgetaire_id
+                ),
+
+
+            }
+
+        }
+        return element;
+    })
