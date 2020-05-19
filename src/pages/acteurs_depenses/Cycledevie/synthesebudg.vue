@@ -83,9 +83,9 @@
                            <table class="table table-bordered table-striped">
                <thead>
                   <tr>
-   <th style="width:10%"></th>
-   <td style="width:12%">  </td>
-    <td style="width:12%"></td>
+   <th style="width:10%">ACHATS DE BIENS ET SERVICES</th>
+   <td style="width:12%"> CONTREPARTIE </td>
+    <td style="width:12%">ETAT</td>
     <td style="width:12%"></td>
    <td style="width:12%"></td>
     <td style="width:12%"></td>
@@ -94,16 +94,6 @@
 </tr>
                    <tr>
    <th height="20px"></th>
-   <td height="20px">CONTREPARTIE  </td>
-    <td height="20px">ETAT</td>
-    <td height="20px"></td>
-   <td height="20px"></td>
-    <td height="20px"></td>
-     <td height="20px"></td>
-     <th height="20px"></th>
-</tr>
-                   <tr>
-   <th height="20px">PERSONNEL</th>
    <td height="20px">DON  </td>
     <td height="20px"></td>
     <td height="20px"></td>
@@ -123,7 +113,95 @@
      <th height="20px"></th>
 </tr>
                    <tr>
-   <th height="20px" colspan="2">SOUS-TOTAL PERSONNEL</th>
+   <th height="20px" colspan="2">SOUS-TOTAL  ACHATS DE BIENS ET SERVICES</th>
+   
+    <td height="20px"></td>
+    <td height="20px"></td>
+   <td height="20px"></td>
+    <td height="20px"></td>
+     <td height="20px"></td>
+     <th height="20px"></th>
+</tr>                                                       
+               </thead>    
+             </table>
+                               <table class="table table-bordered table-striped">
+               <thead>
+                  <tr>
+   <th style="width:10%">TRANSFERT POUR DEPENSES EN CAPITAL</th>
+   <td style="width:12%"> CONTREPARTIE </td>
+    <td style="width:12%">ETAT</td>
+    <td style="width:12%"></td>
+   <td style="width:12%"></td>
+    <td style="width:12%"></td>
+     <td style="width:12%"></td>
+     <th style="width:12%"></th>
+</tr>
+                   <tr>
+   <th height="20px"></th>
+   <td height="20px">DON  </td>
+    <td height="20px"></td>
+    <td height="20px"></td>
+   <td height="20px"></td>
+    <td height="20px"></td>
+     <td height="20px"></td>
+     <th height="20px"></th>
+</tr>
+                   <tr>
+   <th height="20px"></th>
+   <td height="20px">EMPRUNT  </td>
+    <td height="20px"></td>
+    <td height="20px"></td>
+   <td height="20px"></td>
+    <td height="20px"></td>
+    <td height="20px"></td>
+     <th height="20px"></th>
+</tr>
+                   <tr>
+   <th height="20px" colspan="2">SOUS-TOTAL TRANSFERT POUR DEPENSES EN CAPITAL </th>
+   
+    <td height="20px"></td>
+    <td height="20px"></td>
+   <td height="20px"></td>
+    <td height="20px"></td>
+     <td height="20px"></td>
+     <th height="20px"></th>
+</tr>                                                       
+               </thead>    
+             </table>
+                                            <table class="table table-bordered table-striped">
+               <thead>
+                  <tr>
+   <th style="width:10%">TOTAL</th>
+   <td style="width:12%"> CONTREPARTIE </td>
+    <td style="width:12%">ETAT</td>
+    <td style="width:12%"></td>
+   <td style="width:12%"></td>
+    <td style="width:12%"></td>
+     <td style="width:12%"></td>
+     <th style="width:12%"></th>
+</tr>
+                   <tr>
+   <th height="20px"></th>
+   <td height="20px">DON  </td>
+    <td height="20px"></td>
+    <td height="20px"></td>
+   <td height="20px"></td>
+    <td height="20px"></td>
+     <td height="20px"></td>
+     <th height="20px"></th>
+</tr>
+                   <tr>
+   <th height="20px"></th>
+   <td height="20px">EMPRUNT  </td>
+    <td height="20px"></td>
+    <td height="20px"></td>
+   <td height="20px"></td>
+    <td height="20px"></td>
+    <td height="20px"></td>
+     <th height="20px"></th>
+</tr>
+                   <tr>
+   <th height="20px" colspan="2">TOTAL GENERAL </th>
    
     <td height="20px"></td>
     <td height="20px"></td>
