@@ -3,12 +3,13 @@
 
 
         <!--liste de lettre d'invitation  -->
+        <h4>Liste Des Lettres</h4>
          
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
 
-                        <th>Date lettre</th>
+                        <th>Date lettre 4</th>
                         <th>Ref lettre </th>
                         <th>Destinataire</th>
                         <th>Objet de la lettre</th>
@@ -102,6 +103,7 @@
                             />
                         </div>
                     </div>
+
 
 
                       <div class="control-group">

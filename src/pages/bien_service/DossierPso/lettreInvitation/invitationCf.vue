@@ -2,7 +2,7 @@
 <template>
     <div>
 
-                
+                <h4>Liste Lettres Invitations</h4>
                 <!-- <h4>Liste des offres</h4> -->
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
@@ -26,7 +26,7 @@
                         <td @click="afficheBouttonTechFinInvitation(index)">
                             {{appelOffre.destination || 'Non renseigné'}}</td>
                          <td @click="afficheBouttonTechFinInvitation(index)">
-                            {{appelOffre.objet_lettre || 'Non renseigné'}}</td>
+                            {{appelOffre.objet_contrat || 'Non renseigné'}}</td>
                         <td>
                             <a v-if="appelOffre.fichier" :href="appelOffre.fichier" class="btn btn-default" target="_blank">
                                 <span class=""><i class="icon-book"></i>
@@ -120,11 +120,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2" width="">
+                            <td colspan="2" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet de lettre:</label>
+                            <label class="control-label">Objet  offre :</label>
                             <div class="controls">
-                                 <textarea   v-model="formLettre.objet_lettre"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
+                                 <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
                     
                             </div>
                         </div>
@@ -243,11 +243,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2" width="">
+                             <td colspan="2" width="">
                         <div class="control-group">
-                            <label class="control-label">Objet de lettre:</label>
+                            <label class="control-label">Objet  offre :</label>
                             <div class="controls">
-                                 <textarea   v-model="edite_Lettre_invitation.objet_lettre"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
+                                 <textarea  :value="affichierObjetMarche(macheid)"  class="textarea_editor span12" rows="3" placeholder="Entre le  text ..."></textarea>
                     
                             </div>
                         </div>
@@ -489,7 +489,7 @@ typeProcedureLibelle() {
                 formData.append('date_lettre', this.formLettre.date_lettre);
                 formData.append('date_cojo', this.formLettre.date_cojo);
                 formData.append('marche_id', this.macheid);
-                formData.append('objet_lettre', this.formLettre.objet_lettre);
+                formData.append('objet_contrat',this.affichierObjetMarche(this.macheid));
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'
@@ -539,7 +539,7 @@ typeProcedureLibelle() {
                 formData.append('ref_lettre', this.edite_Lettre_invitation.ref_lettre);
                 formData.append('date_lettre', this.edite_Lettre_invitation.date_lettre);
                 formData.append('date_cojo', this.edite_Lettre_invitation.date_cojo);
-                formData.append('objet_lettre', this.edite_Lettre_invitation.objet_lettre);
+                formData.append('objet_contrat', this.affichierObjetMarche(this.macheid));
                 formData.append('marche_id', this.macheid);
                 formData.append('id',this.edite_Lettre_invitation.id);
                

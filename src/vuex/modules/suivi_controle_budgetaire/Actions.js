@@ -12,6 +12,15 @@ export  function  getCategorieMission({commit}) {
       
   }).catch(error => console.log(error)))
   }
+  
+// afficher avec la pagination
+
+  // export  function  getCategorieMission({commit},page = 1) {
+  //   queue.push(() => axios.get('/liste_categorie_mission/results?page='+page).then((response) => {
+  //     commit('GET_CATEGORIE_MISSION', response.data.data)
+      
+  // }).catch(error => console.log(error)))
+  // }
 
   // ajouter categorie mission 
   export function ajouterCategorieMission({commit}, elementAjout){
@@ -124,6 +133,7 @@ export function ajouterMission({commit},formData){
        
 //    }).catch(error => console.log(error))
 // }
+
 
 
 

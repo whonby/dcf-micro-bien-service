@@ -785,7 +785,7 @@ source_financement
                 afficheMarchExecuter"
                  :key="marche.id">
 
-                 <template v-if="afficherCodeTypeMarche(afficherDifferentTypeMarche(marche.marche_id)) == 4">
+                 <template v-if="afficherCodeTypeMarche(afficherDifferentTypeMarche(marche.marche_id)) == 4 || afficherCodeTypeMarche(afficherDifferentTypeMarche(marche.marche_id)) == 1">
 
                     <td>
                    {{afficherAnneeBudget(marche.marche_id) || 'Non renseigné'}}</td>
@@ -2478,7 +2478,7 @@ anneeAmort() {
     // return cur_day + " " + hours + ":" + minutes + ":" + seconds;
    },
    afficheMarchExecuter(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element =>  this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 1 && element.difference_personnel_bienService == 2)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4 &&  element.difference_personnel_bienService == 2||this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 1 && element.difference_personnel_bienService == 2)
 },
  affichertypeMarcheEx() {
       return id => {
@@ -2637,6 +2637,7 @@ sommeMarcheParMandat: function () {
                     if (id != "") {
                       let valInite=0;
                         return  this.getMandatPersonnaliserVise.filter(normeEquipe => normeEquipe.marche_id == id).reduce(function(total,currentVal){
+        
                            return total + parseFloat(currentVal.total_general)
                         },valInite);
                     }
