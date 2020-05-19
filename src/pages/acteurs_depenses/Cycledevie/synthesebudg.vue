@@ -19,7 +19,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Cycle de Vie</h5>
+              <h5>Synthèse Budgétaire</h5>
             </div>
 
            
@@ -28,426 +28,120 @@
            
               <table class="table table-bordered table-striped">
                 <thead>
-                  <tr>
-                    <th style="width:10%">EXERCICE</th> 
-                    <td> </td>
-                  </tr>
-                  <tr>
-                    <th style="width:10%">AUTORITE CONTRACTANTE</th>
-                    <td> </td>
-                  </tr>
-                  <tr>
-                    <th style="width:10%">CODE ACTIVITE</th>
-                      <td> </td>
-                   </tr>
-                  <tr>
-                    <th style="width:10%">LIGNE BUDGETAIRE</th>
-                      <td>  </td>
-                   </tr>
-                  <tr>
-                    <th style="width:10%">OBJET</th>
-                      <td> </td>
-                  </tr>
-                  <tr>
-                    <th style="width:10%">TYPE DE MARCHE</th>
-                    <td> </td>
-                  </tr>
-                </thead>
-                
+                   <tr>
+    <th style="width:10%">LIGNE BUDGETAIRE</th>
+    <td style="width:12%"> TYPE DE FINANCEMENT </td>
+     <td style="width:12%">SOURCE DE FINANCEMENT</td>
+     <td style="width:12%">TOTAL(FINANCEMENT)</td>
+    <td style="width:12%">RESTE A CONSOMMER</td>
+     <td style="width:12%">DISPONIBLE</td>
+      <td style="width:12%">MODIFICATION BUDGETAIRE</td>
+      <th style="width:12%">TOTAL</th>
+ </tr>
+                    <tr>
+    <th height="20px"></th>
+    <td height="20px">CONTREPARTIE  </td>
+     <td height="20px">ETAT</td>
+     <td height="20px"></td>
+    <td height="20px"></td>
+     <td height="20px"></td>
+      <td height="20px"></td>
+      <th height="20px"></th>
+ </tr>
+                    <tr>
+    <th height="20px">PERSONNEL</th>
+    <td height="20px">DON  </td>
+     <td height="20px"></td>
+     <td height="20px"></td>
+    <td height="20px"></td>
+     <td height="20px"></td>
+      <td height="20px"></td>
+      <th height="20px"></th>
+ </tr>
+                    <tr>
+    <th height="20px"></th>
+    <td height="20px">EMPRUNT  </td>
+     <td height="20px"></td>
+     <td height="20px"></td>
+    <td height="20px"></td>
+     <td height="20px"></td>
+     <td height="20px"></td>
+      <th height="20px"></th>
+ </tr>
+                    <tr>
+    <th height="20px" colspan="2">SOUS-TOTAL PERSONNEL</th>
+    
+     <td height="20px"></td>
+     <td height="20px"></td>
+    <td height="20px"></td>
+     <td height="20px"></td>
+      <td height="20px"></td>
+      <th height="20px"></th>
+ </tr>                                                       
+                </thead>    
               </table>
+                           <table class="table table-bordered table-striped">
+               <thead>
+                  <tr>
+   <th style="width:10%"></th>
+   <td style="width:12%">  </td>
+    <td style="width:12%"></td>
+    <td style="width:12%"></td>
+   <td style="width:12%"></td>
+    <td style="width:12%"></td>
+     <td style="width:12%"></td>
+     <th style="width:12%"></th>
+</tr>
+                   <tr>
+   <th height="20px"></th>
+   <td height="20px">CONTREPARTIE  </td>
+    <td height="20px">ETAT</td>
+    <td height="20px"></td>
+   <td height="20px"></td>
+    <td height="20px"></td>
+     <td height="20px"></td>
+     <th height="20px"></th>
+</tr>
+                   <tr>
+   <th height="20px">PERSONNEL</th>
+   <td height="20px">DON  </td>
+    <td height="20px"></td>
+    <td height="20px"></td>
+   <td height="20px"></td>
+    <td height="20px"></td>
+     <td height="20px"></td>
+     <th height="20px"></th>
+</tr>
+                   <tr>
+   <th height="20px"></th>
+   <td height="20px">EMPRUNT  </td>
+    <td height="20px"></td>
+    <td height="20px"></td>
+   <td height="20px"></td>
+    <td height="20px"></td>
+    <td height="20px"></td>
+     <th height="20px"></th>
+</tr>
+                   <tr>
+   <th height="20px" colspan="2">SOUS-TOTAL PERSONNEL</th>
+   
+    <td height="20px"></td>
+    <td height="20px"></td>
+   <td height="20px"></td>
+    <td height="20px"></td>
+     <td height="20px"></td>
+     <th height="20px"></th>
+</tr>                                                       
+               </thead>    
+             </table>
             
                
-   <table class="table table-bordered table-striped">
-     <thead>
-       <tr>
-         <th style="width:10%">SOURCE (S) DE FINANCEMENTS</th>
-         <td style="width:15%" colspan="3"> </td> 
-         <td style="width:15%" colspan="3"> </td>
 
-       </tr>
-       <tr>
-          <th style="width:10%">NOM DU BAILLEUR</th>
-          <td style="width:15%"> ETAT </td>
-           <td style="width:15%">B1: </td>
-           <td style="width:15%">B2: </td>
-          <td style="width:15%">B3: </td>
-           <td style="width:15%">B4: </td>
-            <td style="width:15%">B5: </td>
-       </tr>
-       <tr>
-          <th  style="width:10%">VOLET / COMPOSANTE</th>
-           <td style="width:15%"> </td>
-           <td style="width:15%"> </td>
-           <td style="width:15%"> </td>
-           <td style="width:15%"> </td>
-           <td style="width:15%"> </td>
-           <td style="width:15%"> </td>
-       </tr>
-      <tr>
-       <th  style="width:10%">DON / EMPRUNT / N-A</th>
-        <td style="width:15%"> </td>
-       <td style="width:15%"> </td>
-       <td style="width:15%"> </td>
-       <td style="width:15%"> </td>
-       <td style="width:15%"> </td>
-       <td style="width:15%"> </td>
-       </tr>
-      <tr>
-        <th  style="width:10%">POURCENTAGE (%)</th>
-        <td style="width:15%"> </td>
-       <td style="width:15%"> </td>
-        <td style="width:15%"> </td>
-        <td style="width:15%"> </td>
-        <td style="width:15%"> </td>
-        <td style="width:15%"> </td>
-       </tr>
-      <tr>
-       <th  style="width:10%">MONTANT  HT FCFA</th>
-       <td style="width:15%"> </td>
-       <td style="width:15%"> </td>
-       <td style="width:15%"> </td>
-       <td style="width:15%"> </td>
-       <td style="width:15%"> </td>
-       <td style="width:15%"> </td>
-      </tr>
-    <tr>
-      <th  style="width:10%">MONTANT TTC FCFA</th>
-     <td style="width:15%"> </td>
-     <td style="width:15%"> </td>
-     <td style="width:15%"> </td>
-     <td style="width:15%"> </td>
-     <td style="width:15%"> </td>
-     <td style="width:15%"> </td>
-   </tr>
-    <tr>
-   <th  style="width:5%">MONTANT TOTAL DE  BASE DU MARCHE / CONTRAT FCFA(HT,TTC)</th>
-   <td style="width:15%" colspan="3" >HT </td> 
-   <td style="width:15%" colspan="3" >TTC </td>                                    
- </tr>
-     <tr>
-   <th  style="width:5%">AGENT CF DE SUIVI </th>
-   <td style="width:15%" colspan="6" > </td> 
-                                       
- </tr>
 
-     </thead>
-     
-   </table>
-   <hr>
-   <table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-        <th>ETAT DE LA CONTRACTUALISATION:EN COURS - SUSPENDU -ACHEVE -INFRUCTUEUX </th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
- 
-    <table class="table table-bordered table-striped">
-      <thead>
-        <tr>
-          <th style="width:5%">TYPE ET REFERENCES DE LA  PROCEDURE</th>
-           <td style="width:15%" colspan="6" > </td> 
-        </tr>
-         <tr>
-          <th style="width:5%">NATURE DES PRIX</th>
-          <td style="width:15%" colspan="6" > </td> 
-        </tr>
-         <tr>
-           <th style="width:5%">DATE D'OUVERTURE</th>
-           <td style="width:28%" colspan="1" >PLIS TECHNIQUE </td> 
-           <td style="width:2%" colspan="1" > </td>
-           <td style="width:15%" colspan="1" >30/12/2019 </td>
-           <td style="width:28%" colspan="1" >PLIS FINANCIER</td>
-           <td style="width:2%" colspan="1" > </td>
-           <td style="width:15%" colspan="1" >30/12/2019 </td> 
-        </tr>
-        
-        <tr>
-           <th>MONTANT CONFIDENTIEL FCFA</th>
-          <td style="width:15%" colspan="3" >HT</td>
-          <td style="width:15%" colspan="3" >TTC</td>
-           
-        </tr>
-        <tr>
-         <th style="width:5%">DATE D'OUVERTURE</th>
-         <td style="width:28%" colspan="1" >TECHNIQUE </td> 
-         <td style="width:2%" colspan="1" > </td>
-         <td style="width:15%" colspan="1" > </td>
-         <td style="width:28%" colspan="1" >COMBINE</td>
-         <td style="width:2%" colspan="1" > </td>
-         <td style="width:15%" colspan="1" > </td> 
-       </tr>
-        <tr>
-          <th style="width:5%">DATE D'ENVOI DEMANDE D'ANO</th>
-          <td style="width:28%"  colspan="1" >NON APPLICABLE/ APPLICABLE </td> 
-          <td style="width:2%" colspan="1" > </td>
-          <td style="width:15%" colspan="1" >DMP </td>
-          <td style="width:28%"  colspan="1" >BAILLEUR</td>
-          <td style="width:2%" colspan="1" > </td>
-          <td style="width:15%" colspan="1" > </td> 
-       </tr>
-         <tr>
-    <th style="width:5%">DATE RETOUR DEMANDE D'ANO</th>
-    <td style="width:28%" colspan="1" >NON APPLICABLE/ APPLICABLE </td> 
-    <td style="width:2%" colspan="1" > </td>
-    <td style="width:15%" colspan="1" >DMP </td>
-    <td style="width:28%" colspan="1" >BAILLEUR</td>
-    <td style="width:2%" colspan="1" > </td>
-    <td style="width:15%" colspan="1" > </td> 
- </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
 
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-     <th style="width:5%">RESULTAT ET OBSERVATION DE L'ANO</th>
-      <td style="width:15%" colspan="6" > </td>
-    </tr>
-    <tr>
-       <th style="width:5%">DATE D'ATTRIBUTION DEFINITIVE</th>
-       <td style="width:15%" colspan="6" > </td>
-    </tr>
-    <tr>
-       <th style="width:5%">ENTREPRISE ATTRIBUTAIRE</th>
-       <td style="width:15%" colspan="3" > </td>
-       <td style="width:15%" colspan="3" >N° COMPTE CONTRIBUABLE: </td>
-    </tr>
-    <tr>
-        <th>AUTORITE APPROBATRICE DU MARCHE / CONTRAT</th>
-         <td style="width:15%" colspan="6" > </td>
-    </tr>
-    <tr>
-      <th>DATE D'APPROBATION</th>
-       <td style="width:15%" colspan="6" > </td>
-    </tr>
-     <tr>
-   <th>NUMERO DE MARCHE</th>
-    <td style="width:15%" colspan="6" > </td>
- </tr>
-  <tr>
-   <th>CAUTIONNEMENT(%,HT,TTC)</th>
-    <td style="width:15%" colspan="6" > </td>
- </tr>
-  <tr>
-   <th>RETENUE DE GARANTIE(%,HT,TTC)</th>
-    <td style="width:15%" colspan="6" > </td>
- </tr>
-  <tr>
-  <th>AVANCE DE DEMARRAGE(%,HT,TTC)</th>
-   <td style="width:15%" colspan="6" > </td>
-</tr>
-  <tr>
-   <th>DATE DE NOTIFICATION DE L'ORDRE DE SERVICE</th>
-    <td style="width:15%" colspan="6" > </td>
- </tr>
-  <tr>
-  <th>DATE PREVISIONELLE DE DEMARRAGE DES TRAVAUX</th>
-   <td style="width:15%" colspan="6" > </td>
-</tr>
- <tr>
-  <th>DELAI D'EXECUTION</th>
-   <td style="width:15%" colspan="6" > </td>
-</tr>
- <tr>
-  <th>DATE PREVISIONNELLE DE FIN DES TRAVAUX</th>
-   <td style="width:15%" colspan="6" > </td>
-</tr>
- <tr>
-  <th>DUREE TOTALE  DE LA CONTRACTUALISATION</th>
-   <td style="width:15%" colspan="6" > </td>
-</tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-          <hr> 
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-        <th>SITUATION D'EXECUTION:EN COURS - ACHEVE - SUSPENDU-RESILIE </th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table> 
-<table class="table table-bordered table-striped">
-  <thead>
-     <tr>
-  <th style="width:5%" >DATE EFFECTIVE DE DEMARRAGE DES TRAVAUX</th>
-   <td style="width:15%" colspan="6" > </td>
-</tr>
- <tr>
-  <th>REMBOURSEMENT AVANCE DE DEMARRAGE(%,HT,TTC)</th>
-   <td style="width:15%" colspan="6" > </td>
-</tr>
- <tr>
-  <th>NIVEAU D'ENGAGEMENT DU  CAUTIONNEMENT(%,HT,TTC)</th>
-   <td style="width:15%" colspan="6" > </td>
-</tr>
- <tr>
-  <th>NIVEAU D'ENGAGEMENT DE LA RETENUE DE GARANTIE(%,HT,TTC)</th>
-   <td style="width:15%" colspan="6" > </td>
-</tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-        <th>AVENANT (S) APPROUVE (S) </th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table> 
-<table class="table table-bordered table-striped">
-  <thead>
-     <tr>
-  <th style="width:5%">NOMBRE:</th>
-   <td style="width:15%" colspan="2" >1ou2ou3 </td>
-   <td style="width:15%" colspan="2" >%</td>
-   <td style="width:15%" colspan="2" >HT</td>
-   <td style="width:15%" colspan="2" >TTC</td>
-</tr>
- <tr>
-  <th>MONTANT TOTAL DU MARCHE APRES AVENANT (S) FCFA</th>
-   <td style="width:15%" colspan="4" >HT </td>
-   <td style="width:15%" colspan="4" >TTC </td>
-</tr>
-  </thead>
-</table>
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-        <th>DECOMPTE (S)  VISE (S) </th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-<table class="table table-bordered table-striped">
-  <thead> 
 
-    <tr>
-        <th style="width:5%">DATE</th>
-        <td style="width:15%" colspan="8" > </td>
-    </tr>
-     <tr>
-      <th>DERNIER / NUMERO</th>
-      <td style="width:15%" colspan="2" ></td>
-      <td style="width:15%" colspan="2" >%</td>
-      <td style="width:15%" colspan="2" >HT</td>
-      <td style="width:15%" colspan="2" >TTC</td>
-    </tr>
-    <tr>
-       <th>CUMUL / NOMBRE</th>
-       <td style="width:15%" colspan="2" ></td>
-       <td style="width:15%" colspan="2" >%</td>
-       <td style="width:15%" colspan="2" >HT</td>
-       <td style="width:15%" colspan="2" >TTC</td>
-    </tr>
-  
-  </thead>
- </table>
- <table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-        <th>SITUATION FINANCIERE DU MARCHE/CONTRAT</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-          <hr> 
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>DATE</th>
-       <td style="width:15%" colspan="8" ></td>
-    </tr>
-   <tr>
-    <th style="width:10%" >TOTAL PAIEMENT  EXECUTE</th>
-    <td style="width:15%" colspan="2" >%</td>
-    <td style="width:15%" colspan="2" >HT</td>
-    <td style="width:15%" colspan="2" >TTC</td>
-   </tr>
-    <tr>
-  <th style="width:10%" >PART ETAT</th>
-  <td style="width:15%" colspan="2" >%</td>
-  <td style="width:15%" colspan="2" >HT</td>
-  <td style="width:15%" colspan="2" >TTC</td>
- </tr>
-  <tr>
-  <th style="width:10%" >PART BAILLEUR</th>
-  <td style="width:15%" colspan="2" >%</td>
-  <td style="width:15%" colspan="2" >HT</td>
-  <td style="width:15%" colspan="2" >TTC</td>
- </tr>
-  <tr>
-  <th style="width:10%" >TOTAL RESTE A PAYER</th>
-  <td style="width:15%" colspan="2" >%</td>
-  <td style="width:15%" colspan="2" >HT</td>
-  <td style="width:15%" colspan="2" >TTC</td>
- </tr>
-  <tr>
-  <th style="width:10%" >PART ETAT</th>
-  <td style="width:15%" colspan="2" >%</td>
-  <td style="width:15%" colspan="2" >HT</td>
-  <td style="width:15%" colspan="2" >TTC</td>
- </tr>
-  <tr>
- <th style="width:10%" >PART BAILLEUR</th>
- <td style="width:15%" colspan="2" >%</td>
- <td style="width:15%" colspan="2" >HT</td>
- <td style="width:15%" colspan="2" >TTC</td>
-</tr>
-   
-    <tr>
-       <th>DATE DE FIN D'EXECUTION DES TRAVAUX</th>
-        <td style="width:15%" colspan="8" ></td>
-    </tr>
-    <tr>
-        <th>DATE RECEPTION PROVISOIRE</th>
-         <td style="width:15%" colspan="8" ></td>
-    </tr>
-     <tr>
-     <th>DATE RECEPTION DEFINITIVE</th>
-      <td style="width:15%" colspan="8" ></td>
- </tr>
-      <tr>
-     <th>AUTRES</th>
-      <td style="width:15%" colspan="8" ></td>
- </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-          <hr> 
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>OBJECTIFS DU MARCHE/CONTRAT / LIVRABLES ATTENDUS </th>
-      <th>OBSERVATIONS</th>
-      <th>CONTROLEUR FINANCIER</th>
-    </tr>
-    <tr height="120px">
-      <td > </td>
-      <td > </td>
-      <td > DCF N'DA KACOU ANGE JOSEPH
-         </td>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-     <hr>
- 
+
+
             <!-- <div v-else> -->
               <!-- <p style="text-align:center;font-size:20px;color:red;">Aucune Unite Administrative</p> -->
             <!-- </div> -->
