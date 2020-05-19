@@ -468,6 +468,8 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 import {partition} from "../../Repositories/Repository"
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
@@ -690,6 +692,15 @@ codeuniteadministrative2(){
       "modifierUniteAdministrative",
       "supprimerUniteAdministrative"
     ]),
+genererEnPdf(){
+  var doc = new jsPDF('landscape')
+  // doc.autoTable({ html: this.natures_sections })
+  doc.text(98,10,"Listes Unites Administratives")
+  doc.autoTable({ html: '#Nature_section'}),
+  doc.find("Action").remove()
+doc.save('UniteAdministrative.pdf')
+return 0
+},
 
       partition:partition,
       getDataPaginate(index){

@@ -671,7 +671,8 @@
                     <!-- <th>Montant des Salaires</th> -->
                     <th>Fichier Joint</th>
                       <th>Validation</th>
-                    <th>Action</th>
+                      
+                    <th colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -694,19 +695,19 @@
                     <!-- <td  @dblclick="afficherModalModifierpaiementPersonnel(index)">{{payepersonnel.montantdessalaires }}</td> -->
                     <td  @dblclick="afficherModalModifierpaiementPersonnel(index)">{{payepersonnel.fichierjoint || 'Non renseigné' }} </td>
                     <td>
-                       <button v-if="payepersonnel.valisationvirement == 1"  class="btn  btn-success"   >                        
+                       <button v-if="payepersonnel.valisationvirement == 8"  class="btn  btn-success"   >                        
                      
                       <span    >Validé</span>
                       
                       </button>
-                       <button v-else-if="payepersonnel.valisationvirement == 2" class="btn  btn-warning">                        
+                       <button v-else-if="payepersonnel.valisationvirement == 21171" class="btn  btn-warning">                        
                      
                       
                        <span  >Différé</span>
                       
                     
                       </button>
-                        <button v-else-if="payepersonnel.valisationvirement == 3" class="btn  btn-danger" >                        
+                        <button v-else-if="payepersonnel.valisationvirement == 22171" class="btn  btn-danger" >                        
                      
                       
                        <span  >Réjeté</span>
@@ -722,8 +723,14 @@
                       </button>
                     </td>
                   
-                 
+                 <td v-if="payepersonnel.valisationvirement == 8">
+                    <router-link :to="{ name: 'detailExecutionPersonnel', params: { id: payepersonnel.id }}"
+                class="btn btn-default " title="Detail execution">
+                  <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link> 
+                 </td>
                     <td>
+                      
                       <button
                         class="btn btn-danger"
                         @click="supprimerpaiementPersonnel(payepersonnel.id)"

@@ -718,16 +718,16 @@
                         <a data-toggle="tab" href="#tab11">Listes du personnel   <span class="badge badge-inverse">{{afficheNombreToutPersonne}}</span></a>
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#tab13">Listes du personnel non Equipé  <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab13">Listes des personnes non Equipé  <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
                       </li>
                       <li class="">
-                        <a data-toggle="tab" href="#tab45">Equipements Non Couverts   <span class="badge badge-warning">{{NombreafficheEquipementNonCouvert}}</span></a>
+                        <a data-toggle="tab" href="#tab45">Equipements Non Couverts   <span class="badge badge-warning">{{AfficheTotalQteNonCouvert}}</span></a>
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#tab12">Listes du personnel Equipé     <span class="badge badge-info">{{NombreaffichePersonneEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab12">Listes des personnes Equipé     <span class="badge badge-info">{{NombreaffichePersonneEquipe}}</span></a>
                       </li>
                       <li class="">
-                        <a data-toggle="tab" href="#tab1296">Taux equipement par agent    <span class="badge badge-success">{{NombreTauxequipementParAgent}}</span></a>
+                        <a data-toggle="tab" href="#tab1296">Taux equipement par agent</a>
                       </li>
                       
                       <!-- <li>
@@ -742,7 +742,10 @@
                   <div class="widget-content tab-content">
 
      <div id="tab1296" class="tab-pane">
-                       <table class="table table-bordered table-striped">
+       <div align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdfTauxEquipement()">Exporter en PDF</button>
+          </div>
+                       <table class="table table-bordered table-striped" id="equipementTaux">
                 <thead>
                   <tr>
                      
@@ -816,7 +819,10 @@
 
 
                       <div id="tab45" class="tab-pane">
-                       <table class="table table-bordered table-striped">
+                                                               <div align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+          </div>
+                       <table class="table table-bordered table-striped" id="equipementNonCouverts">
                 <thead>
                   <tr>
                      
@@ -839,11 +845,7 @@
                     <tr
                     class="odd gradeX"
                     v-for="BesoinImmo in equipementNonCouvert"
-                    :key="BesoinImmo.id"
-                  >
-   
-                    
-                    
+                    :key="BesoinImmo.id">
                     <td
                       
                     >{{afficherUniteAdministrative(BesoinImmo.unite_administrative_id) || 'Non renseigné'}}</td> 
@@ -860,19 +862,19 @@
                      <td
                       
                     >{{afficherActeurDepense(BesoinImmo.acteur_depense_id) || 'Non renseigné'}}</td>
-                      <td style="text-align: center;"
+                      <td style="text-align: center;font-size:14px;font-weight:bold;"
                       
                     >{{BesoinImmo.historiquenormequipement || 0}}</td>
                     
                    
                      <td 
-                      style="text-align: center;"
+                      style="text-align: center;font-size:14px;font-weight:bold;"
                     >{{(BesoinImmo.historiquenormequipement) - (BesoinImmo.normeequipement) || 0}}</td>
                     <td 
-                      style="text-align: center;"
+                      style="text-align: center;font-size:14px;font-weight:bold;"
                     >{{BesoinImmo.normeequipement || 0}}</td>
                    <!-- <td style="text-align: center;">{{BesoinImmo.montantequipement  / BesoinImmo.normeequipement || 0}}</td> -->
-                      <td style="text-align: center; color:red;font-size:14px;font-weight:bold;"
+                      <td style="text-align: center;font-size:14px;font-weight:bold;"
                     >{{formatageSomme(parseFloat(BesoinImmo.montantequipement)) || 0 }}</td> 
                     
                      
@@ -882,11 +884,13 @@
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  
+                  
                   <!-- <td></td> -->
                   <td style="text-align: center;font-size:14px;font-weight:bold;">Total</td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{AfficheTotalQteACouvrir}}</td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{(AfficheTotalQteACouvrir)-(AfficheTotalQteNonCouvert)}}</td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{AfficheTotalQteNonCouvert}}</td>
                   <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{formatageSomme(parseFloat(afficheMontantTotalEquipementNonCouvert))}}</td>
                  </tr>
                  
@@ -895,6 +899,7 @@
 
                     </div>
                       <div id="tab11" class="tab-pane active">
+                         
                        <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
@@ -1386,7 +1391,8 @@ import listeServiceEquipe from '../affectationParService/listeServiceEquipe'
 import tauxServiceEquipe from '../affectationParService/tauxServiceEquipe'
 import affectationDemandeDuService from '../docAffectationImmo/affectationDemandeDuService'
 import { formatageSomme } from "../../../../Repositories/Repository";
-
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   
   name: 'besionImmolisation',
@@ -1542,15 +1548,18 @@ cause_directeur:""
     },
 
 
-
-
-afficheMontantTotalEquipementNonCouvert() {
+ afficheMontantTotalEquipementNonCouvert() {
      
          return this.acte_personnels.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+    },
 
+AfficheTotalQteACouvrir() {
      
-      
+         return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
+    },
+AfficheTotalQteNonCouvert() {
      
+         return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
     },
 
 afficherMontantRestant() {
@@ -2474,7 +2483,24 @@ fonctionDynamiques() {
      
     ]),
   
-
+    genererEnPdfTauxEquipement(){
+  var doc = new jsPDF('landscape')
+  // 
+  
+    doc.text(98,10,"Taux d'equipement par agent")
+  doc.autoTable({ html: '#equipementTaux'})
+doc.save('TauxEquipements.pdf')
+return 0
+},
+  genererEnPdf(){
+  var doc = new jsPDF('landscape')
+  // 
+  
+    doc.text(98,10,"Listes des equipements non couverts")
+  doc.autoTable({ html: '#equipementNonCouverts'})
+doc.save('EquipementsNonCouverts.pdf')
+return 0
+},
 
   AjouterAffectationDemande(index){
 if(this.affichierQuantiteEnStock(this.valideDirecteur.article_id) < this.valideDirecteur.quantite)
