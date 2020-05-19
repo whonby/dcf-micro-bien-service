@@ -468,12 +468,9 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
-<<<<<<< HEAD
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-=======
 import {partition} from "../../Repositories/Repository"
->>>>>>> dcff5882aa7f638e5b96405f60431377b763285f
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
 export default {
@@ -695,7 +692,6 @@ codeuniteadministrative2(){
       "modifierUniteAdministrative",
       "supprimerUniteAdministrative"
     ]),
-<<<<<<< HEAD
 genererEnPdf(){
   var doc = new jsPDF('landscape')
   // doc.autoTable({ html: this.natures_sections })
@@ -705,7 +701,6 @@ genererEnPdf(){
 doc.save('UniteAdministrative.pdf')
 return 0
 },
-=======
 
       partition:partition,
       getDataPaginate(index){
@@ -720,7 +715,6 @@ return 0
           this.active_el++
           this.page ++
       },
->>>>>>> dcff5882aa7f638e5b96405f60431377b763285f
     afficherModalAjouterUniteAdministrative() {
       this.$("#exampleModal").modal({
         backdrop: "static",
