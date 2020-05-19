@@ -44,6 +44,16 @@
           </li>
         </ul>
       </li>    -->
+          <!-- <li>
+        <router-link :to="{name: 'Synthesebudg'}" tag="a">
+          SYNTHESE BUDGET
+        </router-link>
+     </li>
+       <li>
+      <router-link :to="{name: 'cycledeVie'}" tag="a">
+        CYCLE DE VIE
+      </router-link>
+    </li> -->
       
        <li>
             <router-link :to="{name: 'Acteur'}" tag="a">

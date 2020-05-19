@@ -342,26 +342,42 @@
           </div>
           <div class="widget-box">
             <div class="widget-title">
-              <div align="right">
-                Recherche:
-                <input type="search" placeholder="Saisie section ou libelle" v-model="search" />
-
-                <!-- <div class="span3">
-                  <model-list-select
-                    v-model="formData.test"
-                    style="background-color: rgb(222, 222, 222);"
-                    :list="type_Unite_admins"
-                    option-value="id"
-                    option-text="libelle"
-                    placeholder="unite administrative"
-                  ></model-list-select>
-                </div>
-                <button>ok</button>-->
-              </div>
-              <span class="icon">
+                <div class="span6">
+ <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des unité d'administrative</h5>
+                    <h5>Liste des unité d'administrative</h5>
+                </div>
+                <div class="span6">
+                    <div align="right">
+                        Recherche:
+                        <input type="search" placeholder="Saisie section ou libelle" v-model="search" />
+
+                        <!-- <div class="span3">
+                          <model-list-select
+                            v-model="formData.test"
+                            style="background-color: rgb(222, 222, 222);"
+                            :list="type_Unite_admins"
+                            option-value="id"
+                            option-text="libelle"
+                            placeholder="unite administrative"
+                          ></model-list-select>
+                        </div>
+                        <button>ok</button>-->
+                    </div>
+                </div>
+                <div class="span4">
+                    <br>
+                    Afficher
+                    <select name="pets" id="pet-select" v-model="size" class="span3">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    Entrer
+                </div>
+
             </div>
 
             <div
@@ -386,7 +402,7 @@
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="(uniteadministrative, index) in filtre_unite_admin"
+                    v-for="(uniteadministrative, index) in partition(filtre_unite_admin,size)[page]"
                     :key="uniteadministrative.id"
                   >
                    
@@ -424,6 +440,15 @@
                   </tr>
                 </tbody>
               </table>
+                <div class="pagination alternate">
+                    <ul>
+                        <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                        <li  v-for="(titre, index) in partition(filtre_unite_admin,size).length" :key="index" :class="{ active : active_el == index }">
+                            <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                        <li :class="{ disabled : page == partition(filtre_unite_admin,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+                    </ul>
+                </div>
             </div>
             <div v-else>
               <p style="text-align:center;font-size:20px;color:red;">Aucune Unite Administrative</p>
@@ -445,6 +470,7 @@ import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
+import {partition} from "../../Repositories/Repository"
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
 export default {
@@ -459,6 +485,9 @@ export default {
           icon: "add"
         }
       ],
+        page:0,
+        size:10,
+        active_el:0,
       formData: {
         code: "",
         libelle: "",
@@ -664,14 +693,28 @@ codeuniteadministrative2(){
       "supprimerUniteAdministrative"
     ]),
 genererEnPdf(){
-  var doc = new jsPDF()
+  var doc = new jsPDF('landscape')
   // doc.autoTable({ html: this.natures_sections })
-  
+  doc.text(98,10,"Listes Unites Administratives")
   doc.autoTable({ html: '#Nature_section'}),
-  
+  doc.find("Action").remove()
 doc.save('UniteAdministrative.pdf')
 return 0
 },
+
+      partition:partition,
+      getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
     afficherModalAjouterUniteAdministrative() {
       this.$("#exampleModal").modal({
         backdrop: "static",

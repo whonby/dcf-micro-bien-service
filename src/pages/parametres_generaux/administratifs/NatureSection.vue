@@ -13,7 +13,7 @@
         <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste nature de section "
@@ -23,7 +23,9 @@
                          <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
-                                                   <button class="btn btn-warning" @click.prevent="genererEnPdf()">Imprimer PDF</button>
+                                                   <div align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+          </div>
                                      </div>
                   
                                       <br>
@@ -230,14 +232,7 @@ return this.natures_sections.filter((item) => {
    }
 )
    },
-genererEnPdf(){
-  var doc = new jsPDF()
-  // doc.autoTable({ html: this.natures_sections })
-  
-  doc.autoTable({ html: '#Nature_section' })
-doc.save('NatureSection.pdf')
-return 0
-}
+
   },
   methods: {
     // methode pour notre action
@@ -245,6 +240,22 @@ return 0
    'ajouterNatureSection', 
    'supprimerNatureSection', 'modifierNatureSection']),   
    
+   genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.natures_sections;
+    doc.text(98,10,"Listes Natures Sections")
+  doc.autoTable(this.getColumns(),data)
+doc.save('NatureSection.pdf')
+return 0
+},
+getColumns() {
+    return [
+        {title: "CODE", dataKey: "code"},
+        {title: "LIBELLE", dataKey: "libelle"},
+       
+    ];
+},
     afficherModalAjouterNatureSection(){
        this.$('#exampleModal').modal({
               backdrop: 'static',
