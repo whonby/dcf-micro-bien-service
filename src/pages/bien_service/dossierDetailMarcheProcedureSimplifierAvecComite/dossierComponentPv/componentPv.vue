@@ -18,7 +18,7 @@
                                             </thead>
                            
                                             <tbody>
-                         <tr class="odd gradeX" v-for="(rapport,index) in listeRapport(macheid)"
+                         <tr class="odd gradeX" v-for="(rapport,index) in listePV(macheid)"
                         :key="rapport.id">
 
                             <td @click="afficherModalRapportJugement(index)">
@@ -39,7 +39,7 @@
                             <span title="voir la liste des classements des candidats"><i class="icon-pencil" ></i></span></button>
                              </td>
                               <td>
-                            <button @click.prevent="supprimerRapportJugement(rapport.id)"  class="btn btn-danger " title="Supprimer">
+                            <button @click.prevent="supprimerProceVerbal(rapport.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span></button>
                              </td>
                            
@@ -251,7 +251,8 @@ export default {
 
             ...mapGetters("bienService", [ "gettersCotationPersonnaliser" ,"appelOffres",
             "gettersPersonnaliserRapportJugement","getterAnalyseDossiers","getterDossierCandidats","getterOffreFinanciers",
-            "gettersCotations","rapportDocuments", 'listeJugementPersonnel','selectionner_candidats']),
+            "gettersCotations","rapportDocuments", 'listeJugementPersonnel','selectionner_candidats', "getterProceVerballe"]),
+
              ...mapGetters('personnelUA', ['acteur_depenses','dossierPersonnels']),
 
 
@@ -261,21 +262,28 @@ export default {
                 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
            
-//    listeRapport() {
-//                 return id => {
-//                     if (id != "") {
-//                         return this.rapportJugement.filter(idmarche => idmarche.marche_id == id)
-//                     }
-//                 }
-//             },
 
- listeRapport() {
-      return macheid => {
-        if (macheid != null && macheid != "") {
-          return this.rapportDocuments.filter(element => element.marche_id == macheid && element.date_rapport_ouverture==null);
-        }
-      };
-    },
+
+//  listeRapport() {
+//       return macheid => {
+//         if (macheid != null && macheid != "") {
+//           return this.rapportDocuments.filter(element => element.marche_id == macheid && element.date_rapport_ouverture==null);
+//         }
+//       };
+//     },
+
+
+
+
+     listePV(){
+               return macheid=>{
+                   if(macheid!=""){
+                       let objet=this.getterProceVerballe.filter(item=>item.marche_id==macheid);
+                      // console.log("PV est en cour10")
+                       return objet
+                   }
+               }
+             },
 
 //  afficherCandidatSelectionnerAtrribue() {
 //       return id => {
@@ -406,10 +414,11 @@ affichierAppelOffreid() {
             
 
 
+
         },
     methods:{
-        ...mapActions('bienService',['supprimerRapportJugement',
-        'ajouterRapportJugement','modifierRapportJugement',"getRapportJugement"]),
+        ...mapActions('bienService',['supprimerProceVerbal',
+        'ajouterProceVerbal','modificationProceVerbalOffre',"getProceVerbal"]),
 
 
              OnchangeFichier(e) {
@@ -434,7 +443,7 @@ affichierAppelOffreid() {
                     backdrop: 'static',
                     keyboard: false
                 });
-                this.editRapport = this.listeRapport(this.macheid)[index];
+                this.editRapport = this.listePV(this.macheid)[index];
             },
           
            ajouterRapportJugementLocal(){
@@ -444,19 +453,19 @@ affichierAppelOffreid() {
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
                  formData.append('date_rapport_jugement', this.formJugement.date_rapport_jugement);
                formData.append('marche_id', this.macheid);
-               formData.append('attribue', this.formJugement.attribue);
+               //formData.append('attribue', this.formJugement.attribue);
                 formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
               //formData.append('candidat_selection_id', this.affichierCandidatSelectionId(this.macheid));
-               formData.append('difference_personnel_bienService',this.formJugement.difference_personnel_bienService)
+               //formData.append('difference_personnel_bienService',this.formJugement.difference_personnel_bienService)
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'
                     }
                 }
-               this.ajouterRapportJugement(formData, config)
-               this.getRapportJugement()
+               this.ajouterProceVerbal(formData, config)
+               this.getProceVerbal()
                this.formJugement ={
-                 difference_personnel_bienService:"personnel",
+                // difference_personnel_bienService:"",
                  date_rapport_jugement:""
                }
               
@@ -470,9 +479,9 @@ affichierAppelOffreid() {
                  formData.append('date_rapport_jugement', this.editRapport.date_rapport_jugement);
                  formData.append('marche_id', this.macheid);
                   formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
-                 formData.append('attribue',this.editRapport.attribue);
+                // formData.append('attribue',this.editRapport.attribue);
                  //formData.append('candidat_selection_id', this.affichierCandidatSelectionId(this.macheid));
-                 formData.append('difference_personnel_bienService', this.difference_personnel_bienService)
+                 //formData.append('difference_personnel_bienService', this.difference_personnel_bienService)
                 formData.append('id', this.editRapport.id);
                
                 console.log(formData)
@@ -485,7 +494,7 @@ affichierAppelOffreid() {
                     }
                 }
               
-               this.modifierRapportJugement(formData,config)
+               this.modificationProceVerbalOffre(formData,config)
               // this.getRapportJugement()
                this.$('#modifierRapportJugements').modal('hide');
                
@@ -502,9 +511,9 @@ affichierAppelOffreid() {
 
 
 
-           infoPVAffiche(){
+           infoPVAffiche(ref){
                 this.resultaAnalysePv=[]
-                let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==null );
+                let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==ref);
                 this.resultaAnalysePv=this.resultaAnalysePv.concat(resulta)
                 if (this.resultaAnalysePv.length>0){
                     this.resultaAnalysePv.sort(function (a, b) {

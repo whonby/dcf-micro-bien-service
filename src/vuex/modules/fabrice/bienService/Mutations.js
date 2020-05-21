@@ -99,7 +99,7 @@ export const AJOUTER_RAPPORT_OUVERTURE = (state, elementAjouter) => {
     state.rapportDocuments.unshift(elementAjouter)
     //state.selectionner_candidats=[]
     state.selectionner_candidats=[]
-    state.analyseDossiers=[]
+    //state.analyseDossiers=[]
     
 }
 
@@ -118,7 +118,7 @@ export const MODIFIER_RAPPORT_OUVERTURE = (state, elementModif)=>{
 export const SUPPRIMER_RAPPORT_OUVERTURE = (state, id)=> {
     state.rapportDocuments = state.rapportDocuments.filter(prest => prest.id !=id)
     state.selectionner_candidats=[]
-    state.analyseDossiers=[]
+    //state.analyseDossiers=[]
 }
 
 
@@ -2175,14 +2175,17 @@ export const SUPPRIMER_MEMBRE_COJO= (state, id)=> {
 /**Fin mutation membre cojo**/
 
 
-export const GET_PV= (state, tableau_autre_text_juridique) =>{
-    state.proce_verballe = tableau_autre_text_juridique
+export const GET_PV= (state, tableau_pv) =>{
+    state.proce_verballe = tableau_pv
 }
 
 export const AJOUTER_PV = (state, elementAjouter) => {
     state.proce_verballe.unshift(elementAjouter)
+    //state.analyseDossiers=[]
     state.analyseDossiers=[]
+
 }
+
 
 
 
@@ -2198,6 +2201,7 @@ export const MODIFIER_PV= (state, elementModif)=>{
 
 export const SUPPRIMER_PV= (state, id)=> {
     state.proce_verballe = state.proce_verballe.filter(autreText => autreText.id !=id)
+    //state.analyseDossiers=[]
     state.analyseDossiers=[]
 }
 

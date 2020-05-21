@@ -1069,7 +1069,7 @@ entreprise_id
                             <table class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Ref</th>
+                                    <!-- <th>Ref</th> -->
                                     <th>Quantite</th>
                                     <th>Prix unitaire</th>
                                     <th>Montant total ht </th>
@@ -1079,7 +1079,7 @@ entreprise_id
                                 </thead>
 
                                 <tr v-if="listeOffreFinancier(detail_offre_finnancier.id)">
-                                    <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(listeAppelOffre(detail_offre_finnancier.appel_offre_id)) || "Non renseigne"}}</td>
+                                    <!-- <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(listeAppelOffreLibelle(detail_offre_finnancier.id).appel_offre_id )|| "Non renseigne"}}</td> -->
                                     <!-- <td>{{detail_offre_finnancier.unite || "Non renseigne"}}</td> -->
                                     <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(detail_offre_finnancier.id).quantite || "Non renseigne"}}</td>
                                     <td @click="afficheModificationOffreFinancier(detail_offre_finnancier)">{{listeOffreFinancier(detail_offre_finnancier.id).prix_unitaire || "Non renseigne"}}</td>
@@ -2186,6 +2186,32 @@ montantHT() {
                 }
                 
             },
+
+    //         listeAppelOffreLibelle() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.appelOffres.find(qtreel => qtreel.id == id);
+
+    //   if (qtereel) {
+    //     return qtereel.ref_appel;
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
+
+    //         affichierAppelOffreid() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.appelOffres.find(qtreel => qtreel.marche_id == id);
+
+    //   if (qtereel) {
+    //     return qtereel.id;
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
              listePV(){
                return marche_id=>{
                    if(marche_id!=""){
@@ -2732,6 +2758,7 @@ modifierFactureLocal(){
              tva :this.montantTva,
              marche_id:this.marcheid,
           designation:"",
+         //  appel_offre_id :this.affichierAppelOffreid(this.marcheid),
           dossier_candidat_id : this.edite_offre_financiere.id
        };
                 // console.log(this.edite_offre_financiere.id) editeOffreT
