@@ -27,7 +27,13 @@ import BudgetParUa from "../../pages/budget/BudgetParUa";
 import DetailBudgetImporte from "../../pages/budget/DetailBudgetImporte.vue";
 import LigneExempte from "../../pages/unites_administratives/LigneExempte";
 import Organigramme from "../../pages/unites_administratives/organigrammeUa.vue";
+import Synthesebudg from "../../pages/gestionMarche/synthesebudg.vue";
 const UniteAdministativeRoutes = [
+  {
+    path: "/synthÃ¨se_budgÃ©taire",
+    name: "Synthesebudg",
+    component: Synthesebudg
+  },
   {
     path: '/Banque',
     name: "banqueUa",

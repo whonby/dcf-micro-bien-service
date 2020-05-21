@@ -74,14 +74,14 @@
 <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
     <div id="exampleModal" class="modal hide tailgrand12">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
+        <button data-dismiss="modal" class="close" type="button">x</button>
         <h3>Ajouter Tansfert</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
          
-            <tr>
-               <td>
+           <tr>
+             <td>
                <div class="control-group">
                   <label class="control-label">Numero transfert</label>
                   <div class="controls">
@@ -101,23 +101,24 @@
                     />
                   </div>
                 </div>
-             
-              </td>
-                   <td>
+             </td>
+             <td>
                 <div class="control-group">
                   <label class="control-label">Unite d'administrative</label>
                   <div class="controls">
-                    <select v-model="formData.ua_id" class="span3">
-                      <option
-                        v-for="typeUniteA in uniteAdministratives"
-                        :key="typeUniteA.id"
-                        :value="typeUniteA.id"
-                      >{{typeUniteA.libelle}}</option>
-                    </select>
+                     <select v-model="formData.ua_id" class="span3">
+                                                            <option></option>
+                                                            <option v-for="item in uniteAdministratives" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                  
                   </div>
                 </div>
-              </td>
-              <td>
+             </td>
+             
+                <td>
                  <div class="control-group">
                   <label class="control-label">Destinataire</label>
                   <div class="controls">
@@ -130,8 +131,8 @@
                     </select>
                   </div>
                 </div>
-              </td>
-              <td>
+             </td>
+             <td>
                 <div class="control-group">
                   <label class="control-label">Ligne budgetaire</label>
                   <div class="controls">
@@ -145,12 +146,10 @@
                    
                   </div>
                 </div>
-              </td>
-               
-             
-            </tr>
-            <tr>
-              <td>
+             </td>
+           </tr>
+           <tr>
+             <td>
               
                <div class="control-group">
                   <label class="control-label">Montant transfert</label>
@@ -166,7 +165,7 @@
                   </div>
                 </div>
               </td>
-                 <td>
+              <td>
               
                <div class="control-group">
                   <label class="control-label">Cumul transfert</label>
@@ -214,14 +213,9 @@
                   </div>
                 </div>
               </td>
-             
-              
-            
-        
-              
-            </tr>
-       <tr>
-           <td>
+           </tr>
+           <tr>
+             <td>
               
                <div class="control-group">
                   <label class="control-label">	Solde</label>
@@ -237,8 +231,7 @@
                   </div>
                 </div>
               </td>
-             
-          <td>
+              <td>
               
                <div class="control-group">
                   <label class="control-label">grande nature</label>
@@ -263,8 +256,8 @@
                       <option
                         v-for="localgeo in fonctionDynamiques(formData.ua_id)"
                         :key="localgeo.id"
-                        :value="localgeo.fonction.id"
-                      >{{localgeo.fonction.libelle}}</option>
+                        :value="localgeo.fonctionDossier.id"
+                      >{{localgeo.fonctionDossier.libelle}}</option>
                     </select>
                    
                   </div>
@@ -286,8 +279,8 @@
                   </div>
                 </div>
               </td>
-       </tr>
-       <tr>
+           </tr>
+           <tr>
          <td>
               
                <div class="control-group">
@@ -344,9 +337,8 @@
       </div>
       <div class="modal-body">
          <table class="table table-bordered table-striped">
-         
-            <tr>
-               <td>
+         <tr>
+ <td>
               
                <div class="control-group">
                   <label class="control-label">Numero transfert</label>
@@ -362,7 +354,7 @@
                   </div>
                 </div>
               </td>
-                   <td>
+              <td>
                 <div class="control-group">
                   <label class="control-label">Unite d'administrative</label>
                   <div class="controls">
@@ -376,7 +368,7 @@
                   </div>
                 </div>
               </td>
-              <td>
+        <td>
                  <div class="control-group">
                   <label class="control-label">Destinataire</label>
                   <div class="controls">
@@ -390,7 +382,7 @@
                   </div>
                 </div>
               </td>
-              <td >
+               <td >
                 <div class="control-group">
                   <label class="control-label">Ligne budgetaire</label>
                   <div class="controls">
@@ -405,7 +397,9 @@
                   </div>
                 </div>
               </td>
-              <td>
+         </tr>
+<tr>
+  <td>
               
                <div class="control-group">
                   <label class="control-label">Montant transfert</label>
@@ -417,15 +411,17 @@
                      readonly
                       
                     />
+                     <input
+                      type="hidden"
+                 :value="typeFinancement(editTransfert.ligne_budgetaire_id)"
+                      class="span"
                    
+                      
+                    />
                   </div>
                 </div>
               </td>
-             
-            </tr>
-            <tr>
-              
-                 <td>
+               <td>
               
                <div class="control-group">
                   <label class="control-label">Cumul transfert</label>
@@ -457,7 +453,7 @@
                   </div>
                 </div>
               </td>
-                 <td>
+               <td>
               
                <div class="control-group">
                   <label class="control-label">Montant du contrat</label>
@@ -473,8 +469,9 @@
                   </div>
                 </div>
               </td>
-              
-        <td>
+</tr>
+           <tr>
+              <td>
               
                <div class="control-group">
                   <label class="control-label">	Solde</label>
@@ -482,7 +479,7 @@
                        <input
                       type="number"
                    :value="disponibleBudgetaireModifier"
-                      class="span4"
+                      class="span3"
                      readonly
                       
                     />
@@ -490,7 +487,7 @@
                   </div>
                 </div>
               </td>
-                <td>
+              <td>
               
                <div class="control-group">
                   <label class="control-label">grande nature</label>
@@ -506,10 +503,6 @@
                   </div>
                 </div>
               </td>
-            </tr>
-  <tr>
-             
-              
                <td>
               
                <div class="control-group">
@@ -519,8 +512,8 @@
                       <option
                         v-for="localgeo in fonctionDynamiquesModifier(editTransfert.ua_id)"
                         :key="localgeo.id"
-                        :value="localgeo.fonction.id"
-                      >{{localgeo.fonction.libelle}}</option>
+                        :value="localgeo.fonctionDossier.id"
+                      >{{localgeo.fonctionDossier.libelle}}</option>
                     </select>
                    
                   </div>
@@ -534,7 +527,7 @@
                        <input
                       type="text"
                   :value="afficheActeurDepenseModifier(editTransfert.fonction_id)"
-                      class="span6"
+                      class="span4"
                      readonly
                       
                     />
@@ -542,65 +535,7 @@
                   </div>
                 </div>
               </td> 
-              <td>
-              
-               <div class="control-group">
-                  <label class="control-label">Date reception</label>
-                  <div class="controls">
-                       <input
-                      type="date"
-                 v-model="editTransfert.date_jours"
-                      class="span4"
-                   
-                      
-                    />
-                   
-                  </div>
-                </div>
-              </td>
-              <!-- <td>
-              
-               <div class="control-group">
-                  <label class="control-label">Dur&eacute;e traitement</label>
-                  <div class="controls">
-                       <input
-                      type="hidden"
-                :value="nombreJourTraitementCalucle"
-                      class="span4"
-                     readonly
-                      
-                    />
-                   
-                  </div>
-                </div>
-              </td> -->
-                 <td >
-              
-               <div class="control-group">
-                  <label class="control-label">Fichier join</label>
-                  <div class="controls">
-                       <input
-                      type="file"
-                 
-                      class="span"
-                     readonly
-                      
-                    />
-                    <input
-                      type="hidden"
-                :value="nombreJourTraitementCalucle"
-                      class="span4"
-                     readonly
-                      
-                    />
-                  </div>
-                </div>
-              </td>
-         </tr>
-          
-       
-         
-      
+           </tr>
         </table>
       </div>
       <div class="modal-footer">
@@ -784,6 +719,8 @@ export default {
       "exercices_budgetaires",
       "afficheLocalisationGeoNiveau5"
     ]),
+    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
+  'types_financements']) ,
     ...mapGetters("parametreGenerauxFonctionnelle", [
       "plans_fonctionnels",
       "afficheNiveauPlanFonctionnel"
@@ -794,8 +731,19 @@ export default {
 
     ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  
- ...mapGetters('personnelUA', ['all_acteur_depense']),
+ ...mapGetters('personnelUA', ['personnaliseActeurDepense']),
 
+
+
+anneeAmort() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
+    },
  nombreJourTraitementCalucle(){
      const form = this.editTransfert
      if(form.date_jours == form.date_motif && form.date_motif !== "" && form.date_jours !== "") return 1 
@@ -821,11 +769,12 @@ montantCumul: function () {
                     return 0
                 }
             },
+
 montantCumulModifier: function () {
                 return id => {
                     if (id != "") {
                   
-                        return  this.afficheTransfertValider.filter(normeEquipe => normeEquipe.ligne_budgetaire_id == this.editTransfert.ligne_budgetaire_id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
+                        return  this.afficheTransfertValider.filter(normeEquipe => normeEquipe.ligne_budgetaire_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
                     }
                     return 0
                 }
@@ -870,28 +819,28 @@ const val = parseInt(this.dotationDisponible) - parseInt(this.formData.montant_t
     destinationDynamiques() {
       return id => {
         if (id != null && id != "") {
-          return this.uniteZones.filter(element => element.id_unite_administrative == this.formData.ua_id);
+          return this.uniteZones.filter(element => element.id_unite_administrative == id);
         }
       };
     },
 destinationDynamiquesModifier() {
       return id => {
         if (id != null && id != "") {
-          return this.uniteZones.filter(element => element.id_unite_administrative == this.editTransfert.ua_id);
+          return this.uniteZones.filter(element => element.id_unite_administrative == id);
         }
       };
     },
     ligneBudgetaireDynamiquesModifier() {
       return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParTransfert.filter(element => element.afficheUA.id == this.editTransfert.ua_id);
+          return this.getPersonnaliseBudgetGeneralParTransfert.filter(element => element.afficheUA.id == id);
         }
       };
     },
     afficheMontantTransfereModifier() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == this.editTransfert.ligne_budgetaire_id);
+           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == id);
 
       if (qtereel) {
         return qtereel.Dotation_Initiale;
@@ -913,10 +862,10 @@ destinationDynamiquesModifier() {
  afficheGrandeNatureModifier() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == this.editTransfert.ligne_budgetaire_id);
+           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == id);
 
       if (qtereel) {
-        return qtereel.testgdenature;
+        return qtereel.gdenature_id;
       }
       return 0
         }
@@ -924,9 +873,9 @@ destinationDynamiquesModifier() {
     },
     
     GnDynamiquesModifier() {
-      return id => {
+       return id => {
         if (id != null && id != "") {
-           const qtereel = this.grandes_natures.find(element => element.code == this.afficheGrandeNatureModifier(this.editTransfert.ligne_budgetaire_id));
+           const qtereel = this.grandes_natures.find(element => element.id == id);
 
       if (qtereel) {
         return qtereel.libelle
@@ -938,14 +887,14 @@ destinationDynamiquesModifier() {
      fonctionDynamiquesModifier() {
       return id => {
         if (id != null && id != "") {
-          return this.all_acteur_depense.filter(element => element.unite_administrative_id == this.editTransfert.ua_id);
+          return this.personnaliseActeurDepense.filter(element => element.uniteAdmin.id == id);
         }
       };
     },
     afficheActeurDepenseModifier() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.fonction.id == this.editTransfert.fonction_id);
+           const qtereel = this.personnaliseActeurDepense.find(qtreel => qtreel.fonctionDossier.id == id);
 
       if (qtereel) {
         return qtereel.matricule.concat('  ', qtereel.nom,'  ',qtereel.prenom)
@@ -958,7 +907,7 @@ destinationDynamiquesModifier() {
  afficheActeurDepense1() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.fonction.id == this.formData.fonction_id);
+           const qtereel = this.personnaliseActeurDepense.find(qtreel => qtreel.fonctionDossier.id == id);
 
       if (qtereel) {
         return qtereel.id
@@ -970,7 +919,7 @@ destinationDynamiquesModifier() {
  afficheActeurDepenseIdModifier() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.fonction.id == this.editTransfert.fonction_id);
+           const qtereel = this.personnaliseActeurDepense.find(qtreel => qtreel.fonctionDossier.id == id);
 
       if (qtereel) {
         return qtereel.id
@@ -1006,14 +955,14 @@ destinationDynamiquesModifier() {
  ligneBudgetaireDynamiques() {
       return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParTransfert.filter(element => element.afficheUA.id == this.formData.ua_id);
+          return this.getPersonnaliseBudgetGeneralParTransfert.filter(element => element.afficheUA.id == id);
         }
       };
     },
     afficheMontantTransfere() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == this.formData.ligne_budgetaire_id);
+           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == id);
 
       if (qtereel) {
         return qtereel.Dotation_Initiale;
@@ -1032,13 +981,32 @@ destinationDynamiquesModifier() {
       
     //   return 0
     // },
+typeFinancement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.budgetGeneral.find(element => element.economique_id == id);
+
+      if (qtereel) {
+        return qtereel.typefinancement_id
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+
+
      afficheGrandeNature() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == this.formData.ligne_budgetaire_id);
+           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == id);
 
       if (qtereel) {
-        return qtereel.testgdenature;
+        return qtereel.gdenature_id;
       }
       return 0
         }
@@ -1048,7 +1016,7 @@ destinationDynamiquesModifier() {
     GnDynamiques() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.grandes_natures.find(element => element.code == this.afficheGrandeNature(this.formData.ligne_budgetaire_id));
+           const qtereel = this.grandes_natures.find(element => element.id == id);
 
       if (qtereel) {
         return qtereel.libelle
@@ -1060,7 +1028,7 @@ destinationDynamiquesModifier() {
     afficheGrandeNatureid() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == this.formData.ligne_budgetaire_id);
+           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == id);
 
       if (qtereel) {
         return qtereel.afficheGdeNature.id;
@@ -1072,7 +1040,7 @@ destinationDynamiquesModifier() {
     afficheGrandeNatureidModifier() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == this.editTransfert.ligne_budgetaire_id);
+           const qtereel = this.getPersonnaliseBudgetGeneralParTransfert.find(qtreel => qtreel.afficheEconomique.id == id);
 
       if (qtereel) {
         return qtereel.afficheGdeNature.id;
@@ -1084,14 +1052,14 @@ destinationDynamiquesModifier() {
      fonctionDynamiques() {
       return id => {
         if (id != null && id != "") {
-          return this.all_acteur_depense.filter(element => element.unite_administrative_id == this.formData.ua_id);
+          return this.personnaliseActeurDepense.filter(element => element.uniteAdmin.id == id);
         }
       };
     },
     afficheActeurDepense() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.all_acteur_depense.find(qtreel => qtreel.fonction.id == this.formData.fonction_id);
+           const qtereel = this.personnaliseActeurDepense.find(qtreel => qtreel.fonctionDossier.id == id);
 
       if (qtereel) {
         return qtereel.matricule.concat('  ', qtereel.nom,'  ',qtereel.prenom)
@@ -1154,7 +1122,9 @@ destinationDynamiquesModifier() {
         montant_transfert: this.afficheMontantTransfere(this.formData.ligne_budgetaire_id),
          montant_restant: this.disponibleBudgetaire,
        acteurdepense_id:this.afficheActeurDepense1(this.formData.fonction_id),
-       grandnatire_id:this.afficheGrandeNatureid(this.formData.ligne_budgetaire_id)
+       grandnatire_id:this.afficheGrandeNatureid(this.formData.ligne_budgetaire_id),
+       typefinancement_id:this.typeFinancement(this.formData.ligne_budgetaire_id),
+       exerciceencours:this.anneeAmort
        
       };
       this.ajouterTransfert(nouvelObjet);
@@ -1196,7 +1166,9 @@ this.ajouterHistoriqueTransfert(nouvelObjet)
        acteurdepense_id:this.afficheActeurDepenseIdModifier(this.editTransfert.fonction_id),
        grandnatire_id:this.afficheGrandeNatureidModifier(this.editTransfert.ligne_budgetaire_id),
      delaitraitement:this.nombreJourTraitementCalucle,
-    
+    typefinancement_id:this.typeFinancement(this.editTransfert.ligne_budgetaire_id),
+    exerciceencours:this.anneeAmort
+
      
      
      };

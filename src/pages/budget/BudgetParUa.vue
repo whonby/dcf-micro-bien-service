@@ -15,11 +15,11 @@
             <thead>
               <tr>
                 <th>Unite administrative</th>
-                <th style>Budget du personnel</th>
+                <th title="Budget du personnel">B.Personnel</th>
 
-                <th style>Budget de bien et service</th>
-                <th style>Budget en inverstisement</th>
-                <th style>Budget en transfert</th>
+                <th title="Budget de bien et service">B.Bien et Service</th>
+                <th title="Budget en inverstisement">B.Inverstisement</th>
+                <th title="Budget en transfert">B.transfert</th>
 
                 <th style="background: forestgreen; color:#fff">Totaux</th>
                 <th style="background: deepskyblue; color:#fff">Consommé</th>

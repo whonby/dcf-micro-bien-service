@@ -30,7 +30,7 @@
                     <th title="grande nature depense">G.Nature</th>
                       <th>Programme</th>
                     <!--<th>Action</th> -->
-                    <!-- <th>Activite</th> -->
+                    <th title="type de financement">Type financ</th>
                      
                      <th title="classification fonctionnel">C.Fontionnel</th>
                      <th title="type procedure">Procedure de marché</th>
@@ -135,7 +135,7 @@ export default {
       // "chapitres",
       // "sections"
     ]),
-     ...mapGetters("bienService", ['getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+     ...mapGetters("bienService", ["getMandatPersonnaliserPersonnel",'getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -160,6 +160,7 @@ export default {
       if(isNaN(montant)) return null
       return montant
 }, 
+
 budgetConsommerBienService(){
   return id => {
     if(id !=""){
@@ -168,6 +169,19 @@ budgetConsommerBienService(){
     }
     
   }
+},
+budgetConsommerPersonnel(){
+  return id => {
+    if(id !=""){
+    var montant = this.getMandatPersonnaliserPersonnel.filter(element => element.ua_id == this.groupe.id && element.marchetype == "perso" ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+       if(isNaN(montant)) return null
+      return montant
+    }
+    
+  }
+    
+  
+  
 },
 budgetConsommerInvertissement(){
   return id => {
@@ -188,7 +202,7 @@ budgetConsommerTransfert(){
   }
 },
 budgetConsommerDesModule() {
-      const val = parseInt(this.budgetConsommerBienService(this.groupe.id)) + parseInt(this.budgetConsommerTransfert(this.groupe.id)) + parseInt(this.budgetConsommerInvertissement(this.groupe.id));
+      const val = parseInt(this.budgetConsommerBienService(this.groupe.id)) + parseInt(this.budgetConsommerTransfert(this.groupe.id)) + parseInt(this.budgetConsommerInvertissement(this.groupe.id))+parseInt(this.budgetConsommerPersonnel(this.groupe.id));
       
        if (val) {
         return parseInt(val).toFixed(0);

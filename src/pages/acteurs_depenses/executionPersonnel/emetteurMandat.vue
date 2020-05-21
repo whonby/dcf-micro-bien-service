@@ -702,7 +702,7 @@ activite_id:this.afficherIdActivite(this.PaiementPersoid),
  montant_emprunt:this.afficherMontantEmprunt(this.PaiementPersoid),
  
   ordrepaiemnet_id:this.afficherIdOrdrePaiement(this.PaiementPersoid),
-  marchetype:this.formNumeroEngagemt.engagemtPero,
+  marchetype:this.editMandatPerso.marchetype,
   paiementperso_id:this.PaiementPersoid,
  numero_engage:this.afficherNumeroEngagement(this.afficherIdOrdrePaiement(this.PaiementPersoid))
        };
