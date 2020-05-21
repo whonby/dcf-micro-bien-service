@@ -7,6 +7,24 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
+          <div>
+
+                                     <download-excel
+                                            class="btn btn-success pull-right"
+                                            style="cursor:pointer;"
+                                              :fields = "json_fields"
+                                              title="Liste type unité administrative "
+                                              name ="Liste type unité administrative"
+                                              worksheet = "type unité administrative"
+                                            :data="typeUniteAdminitrativeFiltre">
+                   <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+
+                                                 </download-excel> 
+
+                     <div align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+          </div>
+                                     </div> <br>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
@@ -18,6 +36,17 @@
                 <input type="text" v-model="search" />
               </div>
             </div>
+            <div class="span4">
+                    <br>
+                    Afficher
+                    <select name="pets" id="pet-select" v-model="size" class="span3">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    Entrer
+                </div>
 
             <div class="widget-content nopadding">
               <table class="table table-bordered table-striped">
@@ -30,7 +59,7 @@
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="(titre, index) in type_Unite_admins"
+                    v-for="(titre, index) in  partition (typeUniteAdminitrativeFiltre,size)[page]"
                     :key="titre.id"
                   >
                     <td
@@ -53,6 +82,15 @@
               </table>
             </div>
           </div>
+            <div class="pagination alternate">
+                    <ul>
+                        <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                        <li  v-for="(titre, index) in partition(typeUniteAdminitrativeFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+                            <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                        <li :class="{ disabled : page == partition(typeUniteAdminitrativeFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+                    </ul>
+                </div>
         </div>
       </div>
     </div>
@@ -124,10 +162,21 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import { mapGetters, mapActions } from "vuex";
+import {partition} from '../../../../src/Repositories/Repository'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 //import Filtrer from '../../../../utils/filtre'
 export default {
   data() {
     return {
+      page:0,
+      size:10,
+      active_el:0,
+       json_fields:{ 
+        'Libelle':'libelle',
+        // 'source de financement':'souce_financement.libelle'
+      },
+
       fabActions: [
         {
           name: "cache",
@@ -155,15 +204,34 @@ export default {
   },
   computed: {
     // methode pour maper notre guetter
-    ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"])
+    ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
 
-    // titreFiltres() {
+    // typeUniteAdminitrativeFiltre() {
     //   const searchTerm = this.search.toLowerCase();
 
     //   return this.type_Unite_admins.filter(item => {
     //     item.libelle.toLowerCase().includes(searchTerm);
     //   });
     // }
+
+
+   typeUniteAdminitrativeFiltre(){
+
+     const searchTerm = this.search.toLowerCase();
+
+return this.type_Unite_admins.filter((item) => {
+  
+    //return item.code.toLowerCase().includes(searchTerm) 
+    return item.libelle.toLowerCase().includes(searchTerm)
+
+   
+  
+
+   }
+)
+   }
+
+
   },
   methods: {
     // methode pour notre action
@@ -173,6 +241,40 @@ export default {
       "modifierTypeUniteAdministrative"
     ]),
 
+    // pagination
+    partition:partition,
+
+ getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+
+// impression en pdf
+genererEnPdf(){
+  var doc = new jsPDF('landscape')
+  // doc.autoTable({ html: this.natures_sections })
+   const data = this.types_financements;
+  doc.text(98,10,"Listes_types_unité_administrative")
+  doc.autoTable(this.getColspan(), data),
+  //doc.find("Action").remove()
+doc.save('type_unité_adminitrative.pdf')
+return 0
+},
+
+getColspan(){
+  return [
+    {title:"LIBELLE", dataKey:"libelle"},
+   
+  ]
+},
     afficherModalAjouterTitre() {
       this.$("#exampleModal").modal({
         backdrop: "static",

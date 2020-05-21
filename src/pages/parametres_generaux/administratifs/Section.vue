@@ -123,7 +123,7 @@
           <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste Section "
@@ -133,6 +133,9 @@
                     <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
+                      <div align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+          </div> 
                                      </div>
                                      
           <div class="widget-box">
@@ -192,6 +195,8 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import sectionItemComponent from './sectionItemComponent'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   name: 'Famille',
  components: {
@@ -269,6 +274,28 @@ export default {
    ...mapActions('parametreGenerauxAdministratif', ['getSection', 
     'ajouterSection', 
    'supprimerSection', 'modifierSection']),  
+
+
+   // exportation en pdf
+
+     genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.sections;
+    doc.text(98,10,"Listes sections")
+  doc.autoTable(this.getColumns(),data)
+doc.save('section.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "N° ORDRE", dataKey: "code"},
+        {title: "CODE ", dataKey: "code_section"},
+        {title: "LIBELLE ", dataKey: "nom_section"},
+        
+    ];
+},
 
     supprimerSect(id){
       this.supprimerSection(id)

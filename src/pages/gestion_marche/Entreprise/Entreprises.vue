@@ -17,6 +17,23 @@
                     <div id="tab1" class="tab-pane active">
                         <div class="row-fluid" style="margin: 0px !important;">
                             <div class="span12">
+                                 <div>
+
+                                        <download-excel
+                                            class="btn btn-success pull-right"
+                                            style="cursor:pointer;"
+                                              :fields = "json_fields"
+                                              title="Liste des entreprises "
+                                              name ="Liste des entreprises"
+                                              worksheet = "entreprise"
+                                            :data="titreFiltres">
+                    <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+
+                                                 </download-excel> 
+                       <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div> 
+                                     </div>
                                 <div class="widget-box">
                                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                                         <h5>Toute les entreprises</h5>
@@ -25,6 +42,17 @@
                                         </div>
 
                                     </div>
+                                      <div class="span4">
+                                        <br>
+                                    Afficher
+                                    <select name="pets" id="pet-select" v-model="size" class="span3">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                    Entrer
+                                </div>
 
                                     <div class="widget-content nopadding">
                                         <table class="table table-bordered table-striped">
@@ -44,7 +72,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr class="odd gradeX" v-for="item in titreFiltres" :key="item.id">
+                                            <tr class="odd gradeX" v-for="item in partition (titreFiltres,size)[page]" :key="item.id">
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_idu || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.raison_sociale || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_cc || 'Non renseigné'}}</td>
@@ -77,6 +105,15 @@
                                         </table>
                                     </div>
                                 </div>
+                                <div class="pagination alternate">
+                                <ul>
+                                    <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                                    <li  v-for="(titre, index) in partition(titreFiltres,size).length" :key="index" :class="{ active : active_el == index }">
+                                    <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                                    <li :class="{ disabled : page == partition(titreFiltres,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+                                </ul>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -84,6 +121,23 @@
 
                         <div class="row-fluid" style="margin: 0px !important;">
                             <div class="span12">
+                                 <div>
+
+                                        <download-excel
+                                            class="btn btn-success pull-right"
+                                            style="cursor:pointer;"
+                                              :fields = "json_fields"
+                                              title="Liste des entreprises non sanctionner "
+                                              name ="Liste des entreprises non sanctionner"
+                                              worksheet = "entreprise non sanctionner"
+                                            :data="nonSanctionner">
+                    <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+
+                                                 </download-excel> 
+                       <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div> 
+                                     </div>
                                 <div class="widget-box">
                                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                                         <h5>Toute les entreprises non sanctionner</h5>
@@ -92,6 +146,17 @@
                                         </div>
 
                                     </div>
+                                     <div class="span4">
+                                        <br>
+                                    Afficher
+                                    <select name="pets" id="pet-select" v-model="size" class="span3">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                    Entrer
+                                </div>
                                     <div class="widget-content nopadding"><table class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
@@ -109,7 +174,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr class="odd gradeX" v-for="item in nonSanctionner" :key="item.id">
+                                        <tr class="odd gradeX" v-for="item in partition (nonSanctionner,size)[page]" :key="item.id">
                                              <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_idu || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.raison_sociale || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_cc || 'Non renseigné'}}</td>
@@ -135,6 +200,15 @@
                                         </tbody>
                                     </table></div>
                                 </div>
+                                 <div class="pagination alternate">
+                                <ul>
+                                    <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                                    <li  v-for="(titre, index) in partition(nonSanctionner,size).length" :key="index" :class="{ active : active_el == index }">
+                                    <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                                    <li :class="{ disabled : page == partition(nonSanctionner,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+                                </ul>
+                            </div>
                             </div>
                         </div>
 
@@ -143,6 +217,23 @@
                     <div id="tab3" class="tab-pane">
                         <div class="row-fluid" style="margin: 0px !important;">
                             <div class="span12">
+                                <div>
+
+                                        <download-excel
+                                            class="btn btn-success pull-right"
+                                            style="cursor:pointer;"
+                                              :fields = "json_fields"
+                                              title="Liste des entreprises  sanctionner "
+                                              name ="Liste des entreprises sanctionner"
+                                              worksheet = "entreprise sanctionner"
+                                            :data="sanctionner">
+                    <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+
+                                                 </download-excel> 
+                       <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div> 
+                                     </div>
                                 <div class="widget-box">
                                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                                         <h5>Toute les entreprises sanctionner</h5>
@@ -151,6 +242,17 @@
                                         </div>
 
                                     </div>
+                                     <div class="span4">
+                                        <br>
+                                    Afficher
+                                    <select name="pets" id="pet-select" v-model="size" class="span3">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                    Entrer
+                                </div>
                                     <div class="widget-content nopadding">
                                         <table class="table table-bordered table-striped">
                                             <thead>
@@ -169,7 +271,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr class="odd gradeX" v-for="item in sanctionner" :key="item.id">
+                                            <tr class="odd gradeX" v-for="item in  partition(sanctionner,size)[page]" :key="item.id">
                                                  <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_idu || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.raison_sociale || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_cc || 'Non renseigné'}}</td>
@@ -196,6 +298,16 @@
                                         </table>
                                     </div>
                                 </div>
+
+                                <div class="pagination alternate">
+                                <ul>
+                                    <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                                    <li  v-for="(titre, index) in partition(sanctionner,size).length" :key="index" :class="{ active : active_el == index }">
+                                    <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                                    <li :class="{ disabled : page == partition(sanctionner,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+                                </ul>
+                            </div>
                             </div>
                         </div>
 
@@ -265,10 +377,29 @@
 <script>
 
     import {mapGetters, mapActions} from 'vuex'
+    import {partition} from '../../../../src/Repositories/Repository'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
     export default {
 
         data() {
             return {
+                        page:0,
+                       size:10,
+                        active_el:0,
+
+                json_fields:{
+                'N° IDU':'numero_idu',
+                 'N° CC ':'numero_cc',
+                  'N° RC':'numero_rc',
+                  'RAISON SOCIALE':'raison_sociale',
+                  'SIGLE':'sigle',
+                  'FORME JURIDIQUE':'forme_juridique',
+                  'CENTRE IMPOT':'centre_impot',
+                  'CAPITAL SOCIAL':'capitale_sociale',
+                  'IMMATRICULATION CNPS':'immatriculation_cnps',
+                  'E-MAIL':'email'
+                },
                 fabActions: [
                     {
                         name: 'cache',
@@ -399,7 +530,60 @@ this.getEntreprise()
         methods: {
             // methode pour notre action
             ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterSanction"]),
-            afficherModalAjouterTitre(){
+           
+           
+           
+                
+           // pagination
+   partition:partition,
+       getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+          
+          // exportation en pdf
+         genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.entreprises;
+    doc.text(98,10,"Liste des entreprises")
+  doc.autoTable(this.getColumns(),data)
+doc.save('entreprise.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "N°.IDU", dataKey: "numero_idu"},
+         {title: "N°.CC", dataKey: "numero_cc"},
+          {title: "N°.RC", dataKey: "numero_rc"},
+           {title: "R.SOCIALE", dataKey: "raison_sociale"},
+            {title: "SIGLE", dataKey: "sigle"},
+        {title: "F.JURIDIQUE", dataKey: "forme_juridique"}, 
+          {title: "C.IMPOT", dataKey: "centre_impot"},
+        {title: "C.SOCIAL", dataKey: "centre_impot"}, 
+          {title: "SIGLE", dataKey: "sigle"},
+        {title: "I.CNPS", dataKey: "immatriculation_cnps"}, 
+         {title: "E-MAIL", dataKey: "email"},  
+    ];  
+   
+},
+       
+       
+
+
+
+       
+           
+           afficherModalAjouterTitre(){
                 this.$router.push({ name: 'AjouterEntreprise' })
             },
             // fonction pour vider l'input

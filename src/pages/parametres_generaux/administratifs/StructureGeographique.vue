@@ -13,7 +13,7 @@
                                             <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste structure geographique "
@@ -23,7 +23,12 @@
                       <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
-                                     </div> <br>
+
+                           <div align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div>
+                 
+                                     </div> 
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste structures geographique</h5>
@@ -33,6 +38,17 @@
           </div>
              
           </div>
+          <div class="span4">
+                    <br>
+                    Afficher
+                    <select name="pets" id="pet-select" v-model="size" class="span3">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    Entrer
+                </div>
          
            <div class="widget-content nopadding">
             <table class="table table-bordered table-striped">
@@ -45,7 +61,7 @@
               </thead>
               <tbody>
                 <tr class="odd gradeX" v-for="(structure_geographique, index) 
-                in localisationsFiltre" :key="structure_geographique.id">
+                in partition (localisationsFiltre, size)[page]" :key="structure_geographique.id">
                   <td @dblclick="afficherModalModifierService(index)">
                     {{structure_geographique.niveau || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierService(index)">
@@ -75,6 +91,15 @@
             </div>
           </div>
         </div>
+        <div class="pagination alternate">
+              <ul>
+                <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                   <li  v-for="(titre, index) in partition(localisationsFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+                   <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                <li :class="{ disabled : page == partition(localisationsFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+              </ul>
+           </div>
       </div>
               </div>
             </div>
@@ -175,10 +200,17 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import {partition} from '../../../../src/Repositories/Repository'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   
   data() {
     return {
+      page:0,
+      size:10,
+      active_el:0,
+
       json_fields:{
          'Niveau':'niveau',
          'Libelle':'libelle'
@@ -237,7 +269,44 @@ return this.structures_geographiques.filter((item) => {
     // methode pour notre action
    ...mapActions('parametreGenerauxAdministratif', ['getStructureGeographique', 
    'ajouterStructureGeographique', 
-   'supprimerStructureGeographique', 'modifierStructureGeographique']),   
+   'supprimerStructureGeographique', 'modifierStructureGeographique']),  
+   
+   
+   //, pagination
+   partition:partition,
+
+   getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+
+
+         genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.structures_geographiques;
+    doc.text(98,10,"Liste strucres geographique")
+  doc.autoTable(this.getColumns(),data)
+doc.save('structure_geographique.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "NIVEAU", dataKey: "niveau"},
+        {title: "LIBELLE", dataKey: "libelle"},
+     
+        
+    ];
+},
    
     afficherModalAjouterStructureGeographique(){
        this.$('#exampleModal').modal({
