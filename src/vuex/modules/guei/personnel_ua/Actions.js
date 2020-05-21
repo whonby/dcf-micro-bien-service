@@ -88,7 +88,7 @@ export function modifierordrepaiement({ commit }, formData) {
 
 
 // ajouter type acte personnel
-export function ajouterpaiementPersonnel({ commit }, objetAjoute) {
+export function ajouterpaiementPersonnel({ commit, dispatch }, objetAjoute) {
     this.$app.$loading(true)
     axios.post('/addPaiementPersonnel', objetAjoute).then(res => {
         this.$app.$notify({
@@ -97,6 +97,7 @@ export function ajouterpaiementPersonnel({ commit }, objetAjoute) {
             type: "success"
         });
         commit('AJOUTER_PAIEMENTPERSONNEL', res.data)
+        dispatch('getpaiementPersonnel')
         this.$app.$loading(false)
     }).catch(error => {
         console.log(error)

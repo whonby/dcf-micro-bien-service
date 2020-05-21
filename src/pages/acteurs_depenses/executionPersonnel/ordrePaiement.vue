@@ -535,7 +535,7 @@
                             <table class="table table-bordered table-striped" v-if="PaiementPersoid">
                                             <thead>
                   <tr>
-                    <th>Exercice en cours </th>
+                    <th>Exercice en cours {{afficheButton(this.PaiementPersoid)}}</th>
                     <th title="unite administrative"> ua</th>
                     <th>programme</th>
                     <th>action</th>
@@ -739,7 +739,7 @@ editOrdrePaiement:{}
 
 
  DisponibleBudget() {
-      const val = parseFloat(this.dotationInite(this.afficherIdLigne(this.PaiementPersoid))) + parseFloat(this.sommeEgagementLigneTableau(this.afficherIdLigne(this.PaiementPersoid)));
+      const val = parseFloat(this.dotationInite(this.afficherIdLigne(this.PaiementPersoid))) - parseFloat(this.sommeEgagementLigneTableau(this.afficherIdLigne(this.PaiementPersoid)));
       
        if (val) {
         return parseFloat(val).toFixed(0);
@@ -1029,6 +1029,20 @@ editOrdrePaiement:{}
         }
       };
     },
+    
+              
+     afficheButton() {
+      return id2 => {
+        if (id2 != null && id2 != "") {
+           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id2);
+
+      if (qtereel) {
+        return qtereel.valisationvirement;
+      }
+      return 0
+        }
+      };
+    },
     },
     methods:{
        ...mapActions("personnelUA", [
@@ -1053,19 +1067,7 @@ editOrdrePaiement:{}
               
              
             },
-    
-     afficheButton() {
-      return id2 => {
-        if (id2 != null && id2 != "") {
-           const qtereel = this.paiementPersonnel.find(qtreel => qtreel.id == id2);
-
-      if (qtereel) {
-        return qtereel.valisationvirement;
-      }
-      return 0
-        }
-      };
-    },
+  
 afficherModalObservationChefProjet(index) {
       this.$("#modalDecisionChefProjet").modal({
         backdrop: "static",

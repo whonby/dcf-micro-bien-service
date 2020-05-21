@@ -697,7 +697,7 @@ genererEnPdf(){
   // doc.autoTable({ html: this.natures_sections })
   doc.text(98,10,"Listes Unites Administratives")
   doc.autoTable({ html: '#Nature_section'}),
-  doc.find("Action").remove()
+  
 doc.save('UniteAdministrative.pdf')
 return 0
 },

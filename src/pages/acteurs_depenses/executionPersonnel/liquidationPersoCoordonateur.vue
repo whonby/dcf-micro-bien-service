@@ -692,7 +692,7 @@ afficherModalObservationordonnateur(index) {
      
       var objetLiquidation = {
           ...this.editLiquidationOrdonnateur,
-         numero_demande : this.formNumeroEngagemt.numero_engage,
+         numero_demande : this.editLiquidationOrdonnateur.numero_engage,
         	exo_id:this.afficherAnneeBudgetaire(this.PaiementPersoid),
  imputation_budgetaire :this.CodeBudgetaire,
 programme_id:this.afficherIdProgramme(this.PaiementPersoid),
@@ -702,7 +702,7 @@ activite_id:this.afficherIdActivite(this.PaiementPersoid),
 
 plan_budgetaire_id:this.afficherIdLigne(this.PaiementPersoid),
    ordrepaiemnet_id:this.afficherIdOrdrePaiement(this.PaiementPersoid),
-  marchetype:this.formNumeroEngagemt.engagemtPero,
+  marchetype:this.editLiquidationOrdonnateur.marchetype,
 
 	paiementperso_id:this.PaiementPersoid,
        };

@@ -12,6 +12,7 @@
                     <td>{{CodeSection(article.section_id)|| 'Non renseigné'}}-{{afficherSection(article.section_id)|| 'Non renseigné'}}</td>
                     <td>{{CodeGdeNatureDep(article.gdenature_id) || 'Non renseigné'}}-{{afficherGdeNatureDep(article.gdenature_id) || 'Non renseigné'}}</td>
                     <td>{{Codeprogramme(article.program_id) || 'Non renseigné'}}-{{afficherprogramme(article.program_id) || 'Non renseigné'}}</td>
+                     <td>{{typeFinancement(article.typefinancement_id) || 'Non renseigné'}}</td>
                     <!-- <td>{{article.afficheAction.code || 'Non renseigné'}}-{{article.afficheAction.libelle || 'Non renseigné'}}</td>
                      <td>{{article.afficheActivite.code || 'Non renseigné'}}-{{article.afficheActivite.libelle || 'Non renseigné'}}</td> -->
                       <td>{{Codefonctionnel(article.fonctionnel_id) || 'Non renseigné'}}-{{afficherfonctionnel(article.fonctionnel_id) || 'Non renseigné'}}</td>
@@ -102,6 +103,8 @@ export default {
                 "getterligneExempter",
 
             ]),
+             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
+  'types_financements']) ,
            CodeExempte() {
       return id => {
         if (id != null && id != "") {
@@ -190,7 +193,18 @@ export default {
         }
       };
     },
+ typeFinancement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.types_financements.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
      afficherfonctionnel() {
       return id => {
         if (id != null && id != "") {

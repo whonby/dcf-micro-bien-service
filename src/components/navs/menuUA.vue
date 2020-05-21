@@ -115,6 +115,11 @@
               IMPORTATION DU BUDGET
             </router-link>
           </li>
+           <li>
+            <router-link :to="{name: 'Synthesebudg'}" tag="a">
+              SYNTHESE DU BUDGET
+            </router-link>
+          </li>
 <!-- <li class="dropdown" id="Affichebudget">
         <a
           title="OUT PUT"
