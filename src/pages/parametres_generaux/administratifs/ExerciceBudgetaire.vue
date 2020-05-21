@@ -13,7 +13,7 @@
           <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste exercice budgetaire "
@@ -22,8 +22,12 @@
                                             :data="exercices_budgetaires">
                      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
-                                                 </download-excel> 
-                                     </div> <br>
+                                        </download-excel> 
+                                     </div> 
+
+               <div align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+          </div>           
         <div class="widget-box">
           
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
@@ -34,9 +38,20 @@
           </div> -->
              
           </div>
+           <div class="span4">
+                    <br>
+                    Afficher
+                    <select name="pets" id="pet-select" v-model="size" class="span3">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    Entrer
+                </div>
          
            <div class="widget-content nopadding">
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" id="exercice_budgetaire">
               <thead>
                 <tr>
                   <th>Annee</th>
@@ -50,7 +65,7 @@
               </thead>
               <tbody>
                 <tr class="odd gradeX" v-for="(exercice_budgetaire, index) 
-                in exercices_budgetaires" :key="exercice_budgetaire.id">
+                in partition (exercices_budgetaires,size)[page]" :key="exercice_budgetaire.id">
                   <template v-if="!exercice_budgetaire.encours">
                          <td @dblclick="afficherModalModifierExerciceBudgetaire(index)">
                     {{exercice_budgetaire.annee || 'Non renseigné'}}</td>
@@ -105,6 +120,16 @@
              </div>
           </div>
         </div>
+
+        <div class="pagination alternate">
+              <ul>
+                <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                   <li  v-for="(titre, index) in partition(exercices_budgetaires,size).length" :key="index" :class="{ active : active_el == index }">
+                   <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                <li :class="{ disabled : page == partition(exercices_budgetaires,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+              </ul>
+           </div>
       </div>
               </div>
             </div>
@@ -252,18 +277,23 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import {partition} from '../../../../src/Repositories/Repository'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 import moment from "moment";
 export default {
   
   data() {
     return {
 
-      
+       page:0,
+       size:10,
+      active_el:0,
+
          json_fields: {
             'Annee': 'annee',
             'Date debut': 'date_debut',
             'Date fin': 'date_fin',
-            'Encours': 'encours',
            
            
         },
@@ -336,6 +366,42 @@ export default {
     // methode pour notre action
    ...mapActions('parametreGenerauxAdministratif', [ 'ajouterExerciceBudgetaire',
     'supprimerExerciceBudgetaire', 'modifierExerciceBudgetaire',"EncoursExerciceBudgetaire"]),   
+
+
+
+partition:partition,
+
+getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+
+    // importation en pdf
+     genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.exercices_budgetaires;
+    doc.text(98,10,"Listes Exercices Budgetaires")
+  doc.autoTable(this.getColumns(),data)
+doc.save('exercice_budgetaire.pdf')
+return 0
+},
+getColumns() {
+    return [
+        {title: "ANNEE", dataKey: "annee"},
+        {title: "DATE DEBUT", dataKey: "date_debut"},
+        {title: "DATE FIN", dataKey: "date_fin"},
+        
+    ];
+},
    
     afficherModalExerciceBudgetaire(){
        this.$('#exampleModal').modal({

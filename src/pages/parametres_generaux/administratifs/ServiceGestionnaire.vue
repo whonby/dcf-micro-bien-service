@@ -13,7 +13,7 @@
          <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste service gestionnaire "
@@ -23,6 +23,9 @@
                       <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
+                                  <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div> 
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
@@ -286,6 +289,8 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 import Tree from './Tree'
 export default {
   components: {
@@ -365,7 +370,27 @@ return this.services_gestionnaires.filter((item) => {
   methods: {
     // methode pour notre action
     ...mapActions('parametreGenerauxAdministratif', ['getServiceGestionnaire', 'ajouterServiceGestionnaire', 
-   'supprimerServiceGestionnaire', 'modifierServiceGestionnaire']),   
+   'supprimerServiceGestionnaire', 'modifierServiceGestionnaire']),  
+   
+
+      genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.services_gestionnaires;
+    doc.text(98,10,"Liste service gestionnaire ")
+  doc.autoTable(this.getColumns(),data)
+doc.save('service_gestionnaire.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "CODE", dataKey: "code"},
+        {title: "LIBELLE", dataKey: "libelle"},
+     
+        
+    ];
+},
    
     afficherModalAjouterPlanProgramme(){
        this.$('#exampleModal').modal({

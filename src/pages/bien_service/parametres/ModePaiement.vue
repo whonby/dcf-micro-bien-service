@@ -76,22 +76,29 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          <!-- <download-excel
-            class="btn btn-default pull-right"
-            style="cursor:pointer;"
-            :fields="json_fields"
-            title="Liste Types Ã©quipements"
-            :data="filtre_equipement"
-            name="Liste des types Ã©quipements"
-          >
-            <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-          </download-excel> -->
+            <div>
+
+                     <download-excel
+                       class="btn btn-success pull-right"
+                       style="cursor:pointer;"
+                         :fields = "json_fields"
+                           title="Liste des modes de paiement "
+                             name ="Liste des modes de paiement"
+                            worksheet = "mode de paiement"
+                         :data="filtre_equipement">
+                    <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+
+                                                 </download-excel> 
+                       <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div> 
+                                     </div>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des Modes paiements</h5>
+              <h5>Listes des Modes paiements </h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -109,7 +116,7 @@
                 </thead>
                 <tbody>
                   <tr class="odd gradeX" v-for="(typeappel, index) in 
-                filtre_equipement"
+                partition (filtre_equipement,size)[page]"
                  :key="typeappel.id">
 
                  <td @dblclick="afficherModalModifierFamille(index)">
@@ -133,6 +140,15 @@
               
             </div>
           </div>
+               <div class="pagination alternate">
+              <ul>
+                <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                   <li  v-for="(titre, index) in partition(filtre_equipement,size).length" :key="index" :class="{ active : active_el == index }">
+                   <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                <li :class="{ disabled : page == partition(filtre_equipement,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+              </ul>
+           </div>
         </div>
       </div>
     </div>
@@ -147,10 +163,17 @@
   
 <script>
  import { mapGetters, mapActions } from "vuex";
+     import {partition} from '../../../../src/Repositories/Repository'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   name:'banque',
   data() {
     return {
+      page:0,
+      size:10,
+      active_el:0,
+
       fabActions: [
         {
           name: "cache",
@@ -163,10 +186,10 @@ export default {
         //   class: ""
         // }
       ],
-    //   json_fields: {
-    //     CODE: "code",
-    //     LIBELLE: "libelle"
-    //   },
+      json_fields: {
+      
+        LIBELLE: "libelle"
+      },
 
       formData: {
         
@@ -197,6 +220,46 @@ export default {
      "modifierModePaiement",
      "supprimerModePaiement"
     ]),
+
+
+       // pagination
+   partition:partition,
+       getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+          
+          // exportation en pdf
+         genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.modepaiements;
+    doc.text(98,10,"Liste mode de paiement")
+  doc.autoTable(this.getColumns(),data)
+doc.save('mode_paiement.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+      
+        {title: "LIBELLE", dataKey: "libelle"},   
+    ];
+},
+   
+
+
+
+
+
     //afiicher modal ajouter
     afficherModalAjouterTitre() {
       this.$("#exampleModal").modal({

@@ -13,7 +13,7 @@
          <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste plan programme "
@@ -23,10 +23,13 @@
                      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
+                              <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div> 
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des plans économiques</h5>
+            <h5>Liste des plans économiques </h5>
              <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -269,6 +272,8 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 import Tree from './Tree'
 export default {
   components: {
@@ -350,6 +355,25 @@ return this.plans_budgetaires.filter((item) => {
     'ajouterPlanBudgetaire', 
    'supprimerPlanBudgetaire', 'modifierPlanbudgetaire']),      
    
+// exportation en pdf
+      genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.plans_budgetaires;
+    doc.text(98,10,"Liste plan budgetaire")
+  doc.autoTable(this.getColumns(),data)
+doc.save('plan_budgetaire.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "CODE", dataKey: "code"},
+        {title: "LIBELLE", dataKey: "libelle"},
+     
+        
+    ];
+},
     afficherModalAjouterPlanProgramme(){
        this.$('#exampleModal').modal({
               backdrop: 'static',

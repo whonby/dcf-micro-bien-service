@@ -440,7 +440,13 @@
                   </tr>
                 </tbody>
               </table>
-                <div class="pagination alternate">
+               
+            </div>
+            <div v-else>
+              <p style="text-align:center;font-size:20px;color:red;">Aucune Unite Administrative</p>
+            </div>
+          </div>
+           <div class="pagination alternate">
                     <ul>
                         <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
                         <li  v-for="(titre, index) in partition(filtre_unite_admin,size).length" :key="index" :class="{ active : active_el == index }">
@@ -449,11 +455,6 @@
 
                     </ul>
                 </div>
-            </div>
-            <div v-else>
-              <p style="text-align:center;font-size:20px;color:red;">Aucune Unite Administrative</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -647,6 +648,7 @@ codeuniteadministrative2(){
 
      return null
    },
+
 
  codeuniteadministrativeModifier2(){
       // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
