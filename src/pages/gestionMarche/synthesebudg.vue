@@ -579,12 +579,6 @@ doc.save('SynteseBudget.pdf')
 return 0
 
 
-
-
-
-
-
-
 },
 formatageSomme:formatageSomme
   }

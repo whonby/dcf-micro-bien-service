@@ -7,6 +7,7 @@ import listeuniteadministrative from "../../pages/unites_administratives/liste_u
 import listetypetexte from "../../pages/unites_administratives/liste_type_texte.vue";
 import ordonnedocua from "../../pages/unites_administratives/ordonne_doc_ua.vue";
 import budgetGenerals from "../../pages/unites_administratives/budgetGeneralComponent.vue";
+import DetailbudgetGeneralsNew from "../../pages/unites_administratives/detailBudgetParUa/budgetGeneralComponent.vue";
 import budgetGeneralParUa from "../../pages/unites_administratives/budgetGeneral.vue"
 import grpeBudgetSection from "../../pages/unites_administratives/grpeBudgetSection.vue"
 import grpeBudgetProgramme from "../../pages/unites_administratives/grpeBudgetProgramme.vue"
@@ -29,6 +30,11 @@ import LigneExempte from "../../pages/unites_administratives/LigneExempte";
 import Organigramme from "../../pages/unites_administratives/organigrammeUa.vue";
 import Synthesebudg from "../../pages/gestionMarche/synthesebudg.vue";
 const UniteAdministativeRoutes = [
+  {
+    path: "/Detail-Budget-Generals",
+    name: "DetailbudgetGeneralsNew",
+    component: DetailbudgetGeneralsNew
+  },
   {
     path: "/synthÃ¨se_budgÃ©taire",
     name: "Synthesebudg",
