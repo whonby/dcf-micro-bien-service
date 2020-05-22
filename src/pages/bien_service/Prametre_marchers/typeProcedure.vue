@@ -82,28 +82,48 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          <!-- <download-excel
-            class="btn btn-default pull-right"
+          <download-excel
+            class="btn btn-success pull-right"
             style="cursor:pointer;"
             :fields="json_fields"
-            title="Liste Types équipements"
-            :data="filtre_equipement"
-            name="Liste des types équipements"
+            title="Liste Types procedure"
+            :data="typeProcedureFiltre"
+            name="Liste des types procedure"
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-          </download-excel> -->
+          </download-excel>
+
+             <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+
+           <!-- <div>
+         <button v-on:click='saveAsDocx' >Save</button>
+        
+        <ejs-documenteditor ref="documenteditor" :enableSfdtExport='true' :enableWordExport='true' :enableSelection='true' :enableEditor='true' :isReadOnly='false' style="width: 100%;height: 100%;"></ejs-documenteditor>
+    </div> -->
+               </div>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Familles de procedure</h5>
+              <h5>Familles de procedure </h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>
-
+              <div class="span4">
+                    <br>
+                    Afficher
+                    <select name="pets" id="pet-select" v-model="size" class="span3">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    Entrer
+                </div>
             <div class="widget-content nopadding">
               <table class="table table-bordered table-striped">
                 <thead>
@@ -114,7 +134,7 @@
                 </thead>
                 <tbody>
                   <tr class="odd gradeX" v-for="(typeProcedure, index) in 
-                typeProcedureFiltre"
+                partition (typeProcedureFiltre,size)[page]"
                  :key="typeProcedure.id">
                  <td @dblclick="afficherModalModifiertextJuridique(index)">
                    {{typeProcedure.libelle || 'Non renseigné'}}</td>
@@ -133,7 +153,16 @@
               </table>
               
             </div>
-          </div>
+          </div> <div class="pagination alternate">
+              <ul>
+                <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                   <li  v-for="(titre, index) in partition(typeProcedureFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+                   <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                <li :class="{ disabled : page == partition(typeProcedureFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+              </ul>
+           </div>
+
         </div>
       </div>
     </div>
@@ -148,11 +177,21 @@
   
 <script>
  import { mapGetters, mapActions } from "vuex";
+ //import { DocumentEditorPlugin, Selection, Editor, SfdtExport, WordExport } from '@syncfusion/ej2-vue-documenteditor';
+ //import { DocumentEditorPlugin, Selection, Editor, SfdtExport, WordExport } from '@syncfusion/ej2-vue-documenteditor';
+
+ import {partition} from '../../../../src/Repositories/Repository'
+  import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 //  import moment from 'moment';
 export default {
   name:'type facture',
   data() {
     return {
+      page:0,
+      size:10,
+      active_el:0,
+
       fabActions: [
         {
           name: "cache",
@@ -165,10 +204,10 @@ export default {
         //   class: ""
         // }
       ],
-    //   json_fields: {
-    //     CODE: "code",
-    //     libelle: "libelle"
-    //   },
+      json_fields: {
+      
+        LIBELLE: "libelle"
+      },
 
       formData: {
             libelle:"",
@@ -202,13 +241,68 @@ return this.typeTypeProcedures.filter((item) => {
 
    }
 )
-    }
+    },
+    //  provide: {
+    //     DocumentEditor : [SfdtExport, WordExport, Selection, Editor]
+    // }
   },
   methods: {
     ...mapActions("bienService", ['ajouterTypeProcedure','modifierTypeProcedure',
     'supprimerTypeProcedure'
      
     ]),
+
+    //  exportBlob() {
+    //         this.$refs.documenteditor.saveAsBlob('Docx').then((exportedDocument:Blob) => {
+    //             // The blob can be processed further
+    //         });
+    //     },
+
+    // exporter en word
+
+        // saveAsDocx: function() {
+        //      this.$refs.documenteditor.save('sample', 'Docx');
+        // },
+
+
+ //pagination
+  partition:partition,
+
+getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+
+      // importation en pdf
+     genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.typeTypeProcedures;
+    doc.text(98,10,"Listes type procedure ")
+  doc.autoTable(this.getColumns(),data)
+//doc.save('type_marché.pdf')
+doc.output('save','type_procedure.pdf')
+doc.output('dataurlnewwindow');
+
+return 0
+},
+getColumns() {
+    return [
+        {title: "LIBELLE", dataKey: "libelle"},
+        
+        
+    ];
+},
+
+
     //afiicher modal ajouter
     afficherModalTypeProcedure() {
       this.$("#exampleModal").modal({
@@ -254,4 +348,5 @@ this.formData = {
   }
 };
 </script>
+
 

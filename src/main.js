@@ -86,6 +86,9 @@ Vue.use(Notifications)
 
 Vue.component('pagination', require('laravel-vue-pagination'));
 
+// import DocumentEditorPlugin from 'DocumentEditorPlugin'
+// Vue.use(DocumentEditorPlugin);
+
 import fab from 'vue-fab'
 Vue.component('fab', fab)
 
