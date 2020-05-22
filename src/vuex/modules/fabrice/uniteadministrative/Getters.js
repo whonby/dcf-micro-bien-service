@@ -711,7 +711,10 @@ export const afficheBudgetActive = state =>
 //     marcheNonAttribue => marcheNonAttribue.uatransfert.decision_cf == 3
 //   );
 
-
+export const groupBudgetGeneral = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.budgetGeneral, "ua_id");
+};
 export {
   // typeTextes,
   uniteAdministratives,
