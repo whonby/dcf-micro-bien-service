@@ -391,7 +391,10 @@ getDataPaginate(index){
    var data = this.exercices_budgetaires;
     doc.text(98,10,"Listes Exercices Budgetaires")
   doc.autoTable(this.getColumns(),data)
-doc.save('exercice_budgetaire.pdf')
+//   doc.output('exercice_budgetaire');
+// doc.save('exercice_budgetaire.pdf')
+doc.output('save', 'exercice_budgetaire.pdf');
+doc.output('dataurlnewwindow');
 return 0
 },
 getColumns() {

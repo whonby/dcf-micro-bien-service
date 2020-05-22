@@ -3,6 +3,7 @@
 <template>
 <div>
  
+
   
       <div class="accordion" >
         <!-- <h5>{{afficherUniteAdministrative(groupe.s_ua_id)}}</h5> -->
@@ -11,7 +12,7 @@
             <div class="accordion-heading">
               <div @click="toggle()" class="widget-title"> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
-                <h5>{{groupe.service_id}}</h5>
+                <h5>{{groupe.id}}</h5>
                
                  <!-- <span class="badge badge-info" >{{getNombreArticle}}</span>&nbsp;&nbsp; -->
                  <span class="badge badge-inverse" >{{getNombreArticle}}</span>

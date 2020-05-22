@@ -2,6 +2,7 @@
 <template>
   
 
+
   
                   <tr class="odd gradeX" v-if="article" @dblclick="$emit('modification', article)">
                      <!-- <td style="width:50%">{{article.direction_id|| 'Non renseigné'}}</td> -->
