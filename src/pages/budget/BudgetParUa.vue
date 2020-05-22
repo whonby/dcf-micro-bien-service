@@ -10,19 +10,36 @@
              </td>
            </tr> -->
             <tr>
-              
               <td>
+                 <div align="left" style="text-align:center;font-size:25px">
+               <label for="" style="text-align:center;font-size:25px"> Recherche</label>
+               </div>
+              </td>
+              <td>
+                
                   <div align="right">
-               <label for=""> Recherche</label>
+             
                 <!-- <input type="search"  :value="uaRecherche(uniteadministrative_id)" /> -->
-                <select v-model="uniteadministrative_id" class="span6">
+                <!-- <select v-model="uniteadministrative_id" class="span6">
                                 <option value>Selectionner</option>
                                 <option
                                   v-for="ua in uniteAdministratives"
                                   :key="ua.id"
                                   :value="ua.id"
                                 >{{ua.libelle}}</option>
-                              </select>
+                              </select> -->
+
+                                     <model-list-select style="background-color: rgb(255,255,255);"
+                                           class="wide"
+                                           :list="uniteAdministratives"
+                                           v-model="uniteadministrative_id"
+                                           option-value="id"
+                                           option-text="libelle"
+                                            
+                                           placeholder="Selectionner Unite administrative"
+                        >
+
+                        </model-list-select> 
               </div>
               </td>
             </tr>
@@ -240,6 +257,8 @@
 
     import { mapGetters, mapActions } from "vuex";
     import { formatageSomme } from "../../Repositories/Repository";
+    import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
     import jsPDF from 'jspdf'
 import 'jspdf-autotable'
     //import ProgressBar from "../component/ProgressBar"
@@ -247,6 +266,7 @@ import 'jspdf-autotable'
         name: 'budget',
         components:{
             //ProgressBar
+            ModelListSelect
         },
         data() {
             return {
