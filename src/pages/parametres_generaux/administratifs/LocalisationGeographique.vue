@@ -12,7 +12,7 @@
          <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste localisation geigraphique "
@@ -22,6 +22,9 @@
                                <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
+                             <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div> 
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
@@ -297,6 +300,8 @@
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
 import TreeLocalisation from '../administratifs/TreeLocalisation'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   components: {
     TreeLocalisation
@@ -373,6 +378,26 @@ return this.localisations_geographiques.filter((item) => {
 
 
   methods: {
+
+
+      genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.localisations_geographiques;
+    doc.text(98,10,"Liste localisation geographique")
+  doc.autoTable(this.getColumns(),data)
+doc.save('localisation_geographique.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "CODE", dataKey: "code"},
+        {title: "LIBELLE", dataKey: "libelle"},
+     
+        
+    ];
+},
         ajouterProgrammeLocalEnfant () {
       // console.log(this.nouvelElementEnfant)
       this.ajouterLocalisationGeographique(this.nouvelElementEnfant)

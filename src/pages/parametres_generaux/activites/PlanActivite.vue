@@ -12,17 +12,21 @@
       <div class="span12">
                                               <div>
 
-                                        <!-- <download-excel
-                                            class="btn btn-default pull-right"
+                                        <download-excel
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
-                                              title="Liste plan fonctionnel "
-                                              name ="Liste plan fonctionnel"
-                                              worksheet = "plan fonctionnel"
+                                              title="Liste plan activité "
+                                              name ="Liste plan activité"
+                                              worksheet = "plan activité"
                                             :data="localisationsFiltre">
                       <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
-                                                 </download-excel>  -->
+                                                 </download-excel> 
+
+                            <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div> 
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
@@ -285,6 +289,8 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 import Tree from '../administratifs/Tree'
 export default {
    components: {
@@ -378,6 +384,28 @@ return this.plans_activites.filter((item) => {
   },
   methods: {
 
+
+
+
+
+        genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.plans_activites;
+    doc.text(98,10,"Liste plan activité ")
+  doc.autoTable(this.getColumns(),data)
+doc.save('plan_activité.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "CODE", dataKey: "code"},
+        {title: "LIBELLE", dataKey: "libelle"},
+     
+        
+    ];
+},
          ajouterProgrammeLocalEnfant () {
       // console.log(this.nouvelElementEnfant)
       this.ajouterPlanActivite(this.nouvelElementEnfant)

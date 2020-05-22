@@ -110,9 +110,19 @@
               DETAIL DE BUDGET PAR UA
             </router-link>
           </li>
+           <!-- <li>
+            <router-link :to="{name: 'DetailbudgetGeneralsNew'}" tag="a">
+              DETAIL DE BUDGET PAR UA new
+            </router-link>
+          </li> -->
            <li>
             <router-link :to="{name: 'ImportBudget'}" tag="a">
               IMPORTATION DU BUDGET
+            </router-link>
+          </li>
+           <li>
+            <router-link :to="{name: 'Synthesebudg'}" tag="a">
+              SYNTHESE DU BUDGET
             </router-link>
           </li>
 <!-- <li class="dropdown" id="Affichebudget">

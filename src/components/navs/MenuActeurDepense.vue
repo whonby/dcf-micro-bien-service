@@ -44,12 +44,12 @@
           </li>
         </ul>
       </li>    -->
-          <!-- <li>
+           <!-- <li>
         <router-link :to="{name: 'Synthesebudg'}" tag="a">
           SYNTHESE BUDGET
         </router-link>
-     </li>
-       <li>
+     </li> -->
+     <!--  <li>
       <router-link :to="{name: 'cycledeVie'}" tag="a">
         CYCLE DE VIE
       </router-link>

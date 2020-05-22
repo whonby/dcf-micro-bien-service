@@ -9,8 +9,7 @@
                 <table class="table table-bordered table-striped" v-if="macheid">
                     <thead>
                     <tr>
-                        <!-- <th>Ref offre</th> -->
-                       
+                        <th>Ref offre</th>
                         <th>Date Analyse </th>
                         <th>Rang d'analyse</th>
                         <th>Note</th>
@@ -25,9 +24,10 @@
                     <tbody>
                     <tr class="odd gradeX" v-for="(appelOffre, index) in listeAnalyseDossier(macheid)"
                         :key="appelOffre.id">
-                        <!-- <td @click="afficheAnnalyseDossier(index)">
 
-                            {{affichierReferenceOffre(appelOffre.appel_offre_id)|| 'Non renseigné'}}</td> -->
+                        <td @click="afficheAnnalyseDossier(index)">
+
+                            {{listeAppelOffreLibelle(appelOffre.appel_offre_id)|| 'Non renseigné'}}</td>
 
 
                         <!-- <td @click="afficheAnnalyseDossier(index)">
@@ -235,7 +235,7 @@
 
                              <select v-model="edite_analyse_dossier.dossier_candidat_id" class="span">
                                 <option v-for="plans in afficherNumeroDossierCandidatMenuDeroulant(macheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.numero_dossier}}</option>
+                                        :value="plans.id">{{plans.numero_dossier}} => {{plans.nom_cand}} </option>
                             </select>
 
                             <!-- <input
@@ -396,18 +396,18 @@ export default {
             
             
     
- affichierReferenceOffre() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.appelOffres.find(qtreel => qtreel.id == id);
+//  affichierReferenceOffre() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.appelOffres.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.ref_appel;
-      }
-      return 0
-        }
-      };
-    },
+//       if (qtereel) {
+//         return qtereel.ref_appel;
+//       }
+//       return 0
+//         }
+//       };
+//     },
 
 
 
@@ -465,6 +465,21 @@ export default {
             // },
 
 
+
+listeAppelOffreLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.appelOffres.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ref_appel;
+      }
+      return 0
+        }
+      };
+    },
+
+
       affichierReferenceAppelOffre() {
       return id => {
         if (id != null && id != "") {
@@ -477,6 +492,7 @@ export default {
         }
       };
     },
+
 affichierAppelOffreid() {
       return id => {
         if (id != null && id != "") {
@@ -547,7 +563,7 @@ affichierAppelOffreid() {
                    var nouvelObjet ={
                        ...this.formAnalyseDossier,
                        marche_id:this.macheid,
-                     appel_offre_id :this.affichierAppelOffreid(this.macheid),
+                     appel_offre_id:this.affichierAppelOffreid(this.macheid),
                     //  dossier_candidat_id: this.afficherOffrefID(this.macheid)
                    }
               this.ajouterAnalyseDossier(nouvelObjet)

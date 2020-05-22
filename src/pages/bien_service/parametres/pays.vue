@@ -76,16 +76,23 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          <!-- <download-excel
-            class="btn btn-default pull-right"
-            style="cursor:pointer;"
-            :fields="json_fields"
-            title="Liste Types Ã©quipements"
-            :data="filtre_equipement"
-            name="Liste des types Ã©quipements"
-          >
-            <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-          </download-excel> -->
+          <div>
+            <download-excel
+                                       class="btn btn-success pull-right"
+                                            style="cursor:pointer;"
+                                              :fields = "json_fields"
+                                              title="Liste  des pays "
+                                              name ="Liste  des pays"
+                                              worksheet = "pays"
+                                            :data="filtre_equipement">
+                                 <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+
+                                                 </download-excel> 
+                      <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div>
+                                                 <br/>
+          </div>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
@@ -147,6 +154,8 @@
   
 <script>
  import { mapGetters, mapActions } from "vuex";
+ import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   name:'banque',
   data() {
@@ -163,10 +172,11 @@ export default {
         //   class: ""
         // }
       ],
-    //   json_fields: {
-    //     CODE: "code",
-    //     LIBELLE: "libelle"
-    //   },
+
+      json_fields: {
+
+        'LIBELLE': "libelle"
+      },
 
       formData: {
         
@@ -197,6 +207,27 @@ export default {
      "modifierPays",
      "supprimerPays"
     ]),
+
+
+
+    // exportation en pdf
+         genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.pays;
+    doc.text(98,10,"Liste des pays")
+  doc.autoTable(this.getColumns(),data)
+doc.save('pays.pdf')
+return 0
+},
+getColumns() {
+    return [
+      
+        {title: "LIBELLE", dataKey: "libelle"},
+     
+        
+    ];
+},
     //afiicher modal ajouter
     afficherModalAjouterTitre() {
       this.$("#exampleModal").modal({

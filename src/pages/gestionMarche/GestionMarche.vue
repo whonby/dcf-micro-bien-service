@@ -26,6 +26,9 @@
                      <li class="">
                         <a data-toggle="tab" href="#tab00008">Listes des marchés <span class="badge badge-important"></span></a>
                       </li>
+                      <!-- <li class="">
+                        <a data-toggle="tab" href="#tab000078">Synthese du budget <span class="badge badge-important"></span></a>
+                      </li> -->
                        <li class="">
                         <a data-toggle="tab" href="#tab00007">Importation ppm <span class="badge badge-important"></span></a>
                       </li>
@@ -39,7 +42,12 @@
                     </ul>
                   </div>
                   <div class="widget-content tab-content">
-
+<div id="tab000078" class="tab-pane">
+                <table class="table table-bordered table-striped">
+    
+                 <synthesebudg></synthesebudg>
+              </table>
+                  </div>
                     <div id="tab00007" class="tab-pane">
                 <table class="table table-bordered table-striped">
     
@@ -85,7 +93,8 @@
 import { mapGetters, mapActions } from "vuex";
  import PlanPassationMarche from '../bien_service/ppm/PlanPassationMarche';
  import historiqueMarche from '../gestionMarche/historiqueMarche';
- import tableauBord from '../gestionMarche/tableauBordMarche'
+ import tableauBord from '../gestionMarche/tableauBordMarche';
+  import synthesebudg from '../gestionMarche/synthesebudg'
 // import moment from "moment";
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
@@ -93,7 +102,8 @@ export default {
   components: {
     PlanPassationMarche,
     historiqueMarche,
-    tableauBord
+    tableauBord,
+    synthesebudg
   },
   data() {
     return {

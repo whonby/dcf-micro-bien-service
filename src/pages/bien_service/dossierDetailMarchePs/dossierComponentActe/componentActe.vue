@@ -88,7 +88,7 @@ afficherBanqueDynamique
                             <td>
 
                         <div class="control-group">
-                        <label class="control-label">Entreprise </label>
+                        <label class="control-label">Entreprise  </label>
                         <div class="controls" v-if="affichierNomEntreprise">
                           <!-- <select v-model="formEffetFinancier.entreprise_id" class="span">
                                 <option v-for="varText in affichierNomEntreprise(macheid)" :key="varText.id"
@@ -121,7 +121,7 @@ afficherBanqueDynamique
 
                     <td>
                       <div class="control-group">
-              <label class="control-label">Compte:</label>
+              <label class="control-label">Compte: {{afficherIdCompte(formEffetFinancier.banq_id)}}</label>
               <div class="controls " >
             <input type="text"  class="span" :value="afficherLeCompteEnFonctionDeLaBanque(formEffetFinancier.banq_id)" readonly >
       
@@ -916,6 +916,7 @@ AffichierElementParent() {
                 let objetMarche = this.marches.find(idMarche => idMarche.id ==id);
                 if(objetMarche){
                     return objetMarche.objet
+                   // console.log(objetMarche)
                 }
                  return 0
             }
@@ -924,8 +925,8 @@ AffichierElementParent() {
 
 
     affichierNomEntreprise() {
-     
-                let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv==null );
+                let resulta=this.getterAnalyseDossiers.filter(item=>item.reference_pv== this.afficherPv(this.macheid));
+               // console.log(resulta)
                 if (resulta.length>0){
                     resulta.sort(function (a, b) {
                         return a.note_analyse - b.note_analyse;
@@ -933,16 +934,13 @@ AffichierElementParent() {
                     let first=[...resulta].shift()
                    // const [ob1]=resulta
 
-                    //console.log(ob1)
+                    console.log(first)
                     // let objet=resulta[0]
                      let dossier=first.dossier_candidature
-                    // console.log(dossier)
+                      console.log(dossier)
                     return dossier
-                } else{
-                let message="veillez terminer l'analyse"
-                return message;
-                }
-              
+                } 
+             return 0
             
     },
 
@@ -958,6 +956,21 @@ AffichierElementParent() {
 //        }
 //    },
 
+
+// afficher la refernec_pv dans la table pv
+
+afficherPv(){
+    return macheid =>{
+        if(macheid!=null && macheid!=""){
+            const objetPv = this.getterProceVerballe.find(item => item.marche_id ==macheid)
+            if(objetPv){
+                return objetPv.reference
+            }
+            return null
+        }
+    }
+
+},
 
 
 

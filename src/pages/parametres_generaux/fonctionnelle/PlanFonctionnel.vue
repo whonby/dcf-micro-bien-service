@@ -13,7 +13,7 @@
                                               <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste plan fonctionnel "
@@ -23,14 +23,17 @@
                       <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
-                                     </div> <br>
+                             <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div>        
+                                     </div> 
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des plans fonctionnelles</h5>
-             <div align="right">
+             <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
-          </div>
+          </div> -->
              
           </div>
          
@@ -268,6 +271,8 @@
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
 import Tree from '../administratifs/Tree'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
    components: {
     Tree
@@ -320,6 +325,9 @@ export default {
 // methode pour maper notre guetter
   ...mapGetters('parametreGenerauxFonctionnelle', ['structures_fonctionnelles', 
   'plans_fonctionnels']),
+
+
+  
   
    lesPlansParents(){
      return this.plans_fonctionnels.filter(plan => plan.parent == null)
@@ -341,6 +349,25 @@ return this.plans_fonctionnels.filter((item) => {
    }
   },
   methods: {
+
+       genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.plans_fonctionnels;
+    doc.text(98,10,"Liste plan fonctionnel")
+  doc.autoTable(this.getColumns(),data)
+doc.save('plan_fonctionnel.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "CODE", dataKey: "code"},
+        {title: "LIBELLE", dataKey: "libelle"},
+     
+        
+    ];
+},
 
          ajouterProgrammeLocalEnfant () {
       // console.log(this.nouvelElementEnfant)

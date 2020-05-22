@@ -16,7 +16,8 @@
                   <table class="table table-bordered table-striped" v-if="macheid">
                       <thead>
                       <tr>
-                           <!-- <th>Ref offre</th> -->
+                           <th>Ref offre</th>
+                           <th>Montant </th>
                           <th>Date Composition </th>
                           <th>Date ouverture</th>
                           <th>Nmbr particiapnt</th>
@@ -25,17 +26,14 @@
                       
                       </thead>
                       <tbody>
-                      <tr class="odd gradeX" v-for="(appelOffre, index) in listeCojo(macheid.id)"
+                      <tr class="odd gradeX" v-for="(appelOffre, index) in listeCojo(macheid)"
                           :key="appelOffre.id">
-                           <!-- <td @click="afficheBouttonTechCojo(index)">
-                              {{appelOffre.varObjetCotation.ref_offre || 'Non renseigné'}}</td> -->
+                           <td @click="afficheBouttonTechCojo(index)">
+                              {{listeAppelOffreLibelle(appelOffre.appel_offre_id)|| 'Non renseigné'}}</td>
 
-                          <!--<td listeMembreCojo @click="afficheBouttonTechCojo(index)">
-                              {{appelOffre.controleur_finnancier || 'Non renseigné'}}</td>
-                          <td @click="afficheBouttonTechCojo(index)">
-                              {{appelOffre.dmp || 'Non renseigné'}}</td>
-                          <td @click="afficheBouttonTechCojo(index)">
-                              {{appelOffre.autorite_contractante || 'Non renseigné'}}</td>-->
+                          <td listeMembreCojo @click="afficheBouttonTechCojo(index)">
+                              {{formatageSomme(parseFloat( appelOffre.montant_ouverture)) || 'Non renseigné'}}</td>
+
                           <td @click="afficheBouttonTechCojo(index)">
                               {{formaterDate(appelOffre.date_composition) || 'Non renseigné'}}
                           </td>
@@ -112,26 +110,7 @@
                             />
                         </div>
                     </div>
-                    <!-- <div class="control-group">
-                          <label class="control-label">Controleur finnancier</label>
-                        <div class="controls">
-                            <input disabled
-                                    type="text"
-                                    v-model="formDataCojo.controleur_finnancier"
-                                    class="span"
-                                    placeholder="Controller Finnancier"
-                            />
-                        </div>
-                    </div> -->
-                   <!-- <div class="control-group">
-                        <label class="control-label">Condition</label>
-                        <div class="controls">
-                            <select v-model="formDataCojo.condition_id" class="span">
-                                <option v-for="plans in conditions" :key="plans.id"
-                                        :value="plans.id">{{plans.libelle}}</option>
-                            </select>
-                        </div>
-                    </div>-->
+                  
 
 
                     <div class="control-group">
@@ -145,16 +124,22 @@
                             />
                         </div>
                     </div>
-
-
-
-
                     <div class="control-group">
                         <label class="control-label">Nbre de participants</label>
                         <div class="controls">
                             <input
                                     type="text"
                                     v-model="formDataCojo.nbr_participant"
+                                    class="span"
+                            />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Montant</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formDataCojo.montant_ouverture"
                                     class="span"
                             />
                         </div>
@@ -195,16 +180,7 @@
                             />
                         </div>
                         </div>
-                    <!-- <div class="control-group">
-                        <label class="control-label">Lettre Invitation</label>
-                        <div class="controls">
-                            <select v-model="edite_cojo.lettre_invitation_id" class="span" disabled>
-                                <option v-for="plans in lettreInvitationAMarche(macheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.ref_lettre}}</option>
-                            </select>
-                        </div>
-                    </div> -->
-
+                   
 
                     <div class="control-group">
                         <label class="control-label">Date d'ouverture</label>
@@ -241,6 +217,17 @@
                             />
                         </div>
                     </div>
+
+                     <div class="control-group">
+                        <label class="control-label">Montant</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="edite_cojo.montant_ouverture"
+                                    class="span"
+                            />
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -261,6 +248,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import {formatageSomme} from '../../../../../src/Repositories/Repository'
 import moment from 'moment';
 export default {
     data(){
@@ -271,7 +259,7 @@ export default {
                 //         condition_id:'',
                 //         controleur_finnancier:"",
                 //         dmp:"",
-                //         autorite_contractante:"",
+                        montant_ouverture:"",
                         date_ouverture:"",
                         date_composition:"",
                         num_dossier_appel_offre:"",
@@ -315,18 +303,19 @@ export default {
 //         }
 //       };
 //     },
-// listeAppelOffreId() {
-//       return id => {
-//         if (id != null && id != "") {
-//            const qtereel = this.gettersCotations.find(qtreel => qtreel.marche_id == id);
 
-//       if (qtereel) {
-//         return qtereel.id;
-//       }
-//       return 0
-//         }
-//       };
-//     },
+  listeAppelOffreLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.appelOffres.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.ref_appel;
+      }
+      return 0
+        }
+      };
+    },
 
     affichierReferenceAppelOffre() {
       return id => {
@@ -352,26 +341,7 @@ affichierAppelOffreid() {
         }
       };
     },
-//   listeAppelOffre(){
-//                 return  macheid=>{
-//                     if (macheid!="") {
-//                         //console.log("Marche appel offre")
-//                        const vM=this;
-//                         let Objet=this.gettersCotations.find( idmarche => idmarche.marche_id == macheid)
-//                        // console.log("Marche appel offre 10")
-//                         if(Objet!=undefined){
-//                            // vM.formDossierCadidature.appel_offre_id=Objet.id;
-//                            // vM.formAnalyseDossier.appel_offre_id = Objet.id;
-//                             //vM.formLot.appel_offre_id=Objet.id;
-//                            // vM.formAno.appel_offre_id = Objet.id
-//                             //vM.formLettre.appel_offre_id=Objet.id;
-//                             vM.formDataCojo.cotation_id=Objet.ref_offre;
-//                         }
-//                        // console.log(Objet)
-//                     return this.gettersCotations.filter( idmarche => idmarche.marche_id == macheid)
-//                     }
-//                 }
-//             },
+
           
     },
     methods:{
@@ -393,7 +363,7 @@ affichierAppelOffreid() {
             backdrop: 'static',
             keyboard: false
         });
-        this.edite_cojo = this.listeCojo(this.macheid.id)[index];
+        this.edite_cojo = this.listeCojo(this.macheid)[index];
         //this.edite_lot.appel_offre_id=this.edite_lot. modifierDemandeAno
     },
     
@@ -402,7 +372,7 @@ affichierAppelOffreid() {
      ajouterCojoMarche(){
          var nouvelObjet ={
              ...this.formDataCojo,
-             marche_id:this.macheid.id,
+             marche_id:this.macheid,
              appel_offre_id :this.affichierAppelOffreid(this.macheid)
 
          }
@@ -412,7 +382,7 @@ affichierAppelOffreid() {
                         // condition_id:'',
                         // controleur_finnancier:"",
                         // dmp:"",
-                        // autorite_contractante:"",
+                        montant_ouverture:"",
                         date_ouverture:"",
                         date_composition:"",
                         num_dossier_appel_offre:"",
@@ -424,7 +394,7 @@ affichierAppelOffreid() {
  modificationCojo(){
       var nouvelObjet1 ={
              ...this.edite_cojo,
-             marche_id:this.macheid.id,
+             marche_id:this.macheid,
              appel_offre_id :this.affichierAppelOffreid(this.macheid)
 
          }
@@ -434,7 +404,11 @@ affichierAppelOffreid() {
             // fonction pour formater la date
             formaterDate(date){
                return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY"); 
-            }
+            },
+
+            // formatage du montant
+
+            formatageSomme:formatageSomme
     }
 }
 </script>

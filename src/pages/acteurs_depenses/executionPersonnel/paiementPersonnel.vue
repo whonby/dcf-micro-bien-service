@@ -952,7 +952,7 @@ return this.formData.action_id ==""
      afficherCompteBanque() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.banqueUa.find(qtreel => qtreel.id == id);
+           const qtereel = this.banqueUa.find(qtreel => qtreel.banq_id == id);
 
       if (qtereel) {
         return qtereel.rib;
@@ -1028,7 +1028,8 @@ return this.paiementPersonnel.filter((item) => {
       };
      
       this.ajouterpaiementPersonnel(nouvelObjet);
-     this.ajouterordrepaiement(nouvelObjet)
+      this.getpaiementPersonnel()
+    //  this.ajouterordrepaiement(nouvelObjet)
       this.formData = {
         
        

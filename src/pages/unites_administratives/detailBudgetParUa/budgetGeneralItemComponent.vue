@@ -7,14 +7,14 @@
             <div class="accordion-heading " >
               <div @click="toggle()" class="widget-title "> <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse"> 
                   <span class="icon"><i :class="iconClasses"></i></span>
-                <span class="taillegrand">{{groupe.code}} &nbsp;{{groupe.libelle}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                 <!-- <span class="badge badge-info" >{{getNombreArticle}}</span>&nbsp;&nbsp; -->
+                <span class="taillegrand">&nbsp;&nbsp;&nbsp;{{groupe.libelle}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 <!-- <span class="badge badge-info" >{{getNombreArticle}}</span>&nbsp;&nbsp;
                 
                  <span class="badge badge-info">{{formatageSomme(parseFloat(MontantTotal))}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
  
                  <span class="badge badge-success">{{formatageSomme(parseFloat(budgetConsommerDesModule))}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
 
-                 <span class="badge badge-important">{{formatageSomme(parseFloat(budgetConsommerDesModule) - parseFloat(MontantTotal))}}</span>
+                 <span class="badge badge-important">{{formatageSomme(parseFloat(budgetConsommerDesModule) - parseFloat(MontantTotal))}}</span> -->
                 </a> 
             </div>
             </div>
@@ -24,24 +24,18 @@
                 <thead>
                   <tr>
                        <th>Exercice</th>
-                    <th title="">Code Budget</th>
+                    <th title="">Budget Personnel</th>
                      <!-- <th title="unite administrative">ua</th> -->
-                    <th>Section</th>
-                    <th title="grande nature depense">G.Nature</th>
-                      <th>Programme</th>
+                    <th>Budget Bien Service</th>
+                    <th>Budget Investissement</th>
+                      <th>Budget Transfert</th>
                     <!--<th>Action</th> -->
-                    <th title="type de financement">Type financ</th>
+                    <th >Total</th>
                      
-                     <th title="classification fonctionnel">C.Fontionnel</th>
-                     <th title="type procedure">Procedure de marché</th>
-                     <th title="Statut">Statut</th>
-                     <th title="classification Economique">C.Economique</th>
-                    <th>D.Initial</th>
-                    <th>Version</th>
+                     <th >Consomme</th>
+                     <th >Disponible</th>
+                     <th >Taux execution</th>
                     
-
-
-                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -105,7 +99,7 @@
 <script>
 import { mapGetters} from "vuex";
 import budgetGeneralItem from './budgetGeneralItem'
-import { formatageSomme } from "../../../src/Repositories/Repository";
+import { formatageSomme } from "../../../Repositories/Repository";
 export default {
     name: 'budgetGeneralItemComponent',
      props: {

@@ -1,6 +1,6 @@
 import { groupBy } from "../../../../Repositories/Repository";
 
-
+getPersonnaliseBudgetGeneralParTransfert
 // const typeTextes = state =>
 //   state.typeTextes.sort((a, b) => (a.code > b.code ? 1 : -1));
 export const organigrammeUa = state => state.organigrammeUa;
@@ -503,7 +503,7 @@ export const getPersonnaliseTransfert = (
 
 export const afficheTransfert = state =>
   state.budgetGeneral.filter(
-    affichenaturedep => affichenaturedep.testgdenature == 3
+    affichenaturedep => affichenaturedep.gdenature_id == 6
   );
 
 
@@ -711,7 +711,10 @@ export const afficheBudgetActive = state =>
 //     marcheNonAttribue => marcheNonAttribue.uatransfert.decision_cf == 3
 //   );
 
-
+export const groupBudgetGeneral = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.budgetGeneral, "ua_id");
+};
 export {
   // typeTextes,
   uniteAdministratives,

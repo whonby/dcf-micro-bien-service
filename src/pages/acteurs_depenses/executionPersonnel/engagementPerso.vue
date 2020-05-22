@@ -166,7 +166,7 @@ fabActions: [
              engagemtPero:"perso"
          },
          formDataEngagementPerso:{},
-         editEngagementPerso:{},
+         editEngagementPerso:{engagemtPero:"perso"},
             formData: {
   // 
   
@@ -690,7 +690,7 @@ action_id:this.afficherIdAction(this.PaiementPersoid),
 activite_id:this.afficherIdActivite(this.PaiementPersoid),
   ua_id:this.afficherIdUa(this.PaiementPersoid),
   ordrepaiemnet_id:this.afficherIdOrdrePaiement(this.PaiementPersoid),
-  marchetype:this.editEngagementPerso.engagemtPero
+  marchetype:this.editEngagementPerso.marchetype
        };
 
  

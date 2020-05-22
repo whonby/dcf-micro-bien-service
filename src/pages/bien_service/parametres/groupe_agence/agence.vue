@@ -270,20 +270,23 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          <!-- <div>
+          <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
-                                              title="Liste Section "
-                                              name ="Liste section"
-                                              worksheet = "section"
-                                            :data="natures_sections">
+                                              title="Liste Agence banque "
+                                              name ="Liste agence banque"
+                                              worksheet = "agence banque"
+                                            :data="banques">
                     <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
-                                     </div> -->
+                       <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div> 
+                                     </div>
                                      
           <div class="widget-box">
             <div class="widget-title">
@@ -342,21 +345,24 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import agenceItemComponent from './agenceItemComponent'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   name: 'agence',
  components: {
       agenceItemComponent
   },
   data() {
+
     return {
-      // json_fields: {
-      //       'NATURE_SECTION': 'groupe.libelle',
-      //       'NUMERO_ORDRE_SECTION': 'article.code',
-      //     'CODE_SECTION':'article.code_section',
-      //   'LIBELLE_SECTION':'article.nom_section'
-           
-           
-      //   },
+      json_fields: {
+          
+            'CODE': 'article.code_agence',
+            'NOM':'article.nom_agence',
+          'TELEPHONE':'article.tel_agence',
+        'SITUATION':'article.situation_geo'
+                    
+        },
      fabActions: [
               {
                   name: 'cache',
@@ -435,7 +441,29 @@ export default {
   methods: {
    ...mapActions('gestionMarche', ['getAgence', 
     'ajouterAgence', 
-   'supprimerAgence', 'modifierAgence']),  
+   'supprimerAgence', 'modifierAgence']), 
+   
+   
+         genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.agences;
+    doc.text(98,10,"Liste des agence")
+  doc.autoTable(this.getColumns(),data)
+doc.save('agence.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "CODE", dataKey: "code_agence"},
+        {title: "NOM", dataKey: "nom_agence"},
+        {title: "TELEPHONE", dataKey: "tel_agence"},
+         {title: "SITUATION", dataKey: "situation_geo"},
+     
+        
+    ];
+},
 
     supprimerSect(id){
       this.supprimerAgence(id)
