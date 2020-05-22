@@ -94,20 +94,23 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          <!-- <div>
+           <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
-                                              title="Liste Section "
-                                              name ="Liste section"
-                                              worksheet = "section"
-                                            :data="natures_sections">
+                                              title="Liste des Villes "
+                                              name ="Liste des Villes"
+                                              worksheet = "ville"
+                                            :data="villes">
                     <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
-                                                 </download-excel> 
-                                     </div> -->
+                                                 </download-excel>
+                           <div align="right" style="cursor:pointer;">
+         <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+                   </div> 
+                                     </div> 
                                      
           <div class="widget-box">
             <div class="widget-title">
@@ -166,6 +169,8 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import villeItemComponent from './villeItemComponent'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   name: 'Famille',
  components: {
@@ -173,14 +178,11 @@ export default {
   },
   data() {
     return {
-      // json_fields: {
-      //       'NATURE_SECTION': 'groupe.libelle',
-      //       'NUMERO_ORDRE_SECTION': 'article.code',
-      //     'CODE_SECTION':'article.code_section',
-      //   'LIBELLE_SECTION':'article.nom_section'
-           
-           
-      //   },
+      json_fields: {
+        'LIBELLE':'libelle'
+          //  
+          //  
+        },
      fabActions: [
               {
                   name: 'cache',
@@ -220,7 +222,25 @@ export default {
   methods: {
    ...mapActions('bienService', ['getVille', 
     'ajouterVille', 
-   'supprimerVille', 'modifierVille']),  
+   'supprimerVille', 'modifierVille']), 
+   
+      genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.villes;
+    doc.text(98,10,"Listes des villes")
+  doc.autoTable(this.getColumns(),data)
+doc.save('Villes.pdf')
+return 0
+},
+getColumns() {
+    return [
+        {title: "LIBELLE", dataKey: "libelle"},
+       
+    ];
+},
+
+
 
     supprimerSect(id){
       this.supprimerVille(id)

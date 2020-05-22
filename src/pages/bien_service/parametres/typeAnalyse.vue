@@ -77,16 +77,25 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          <!-- <download-excel
-            class="btn btn-default pull-right"
+          <div>
+           <download-excel
+            class="btn btn-success pull-right"
             style="cursor:pointer;"
             :fields="json_fields"
-            title="Liste Types équipements"
-            :data="filtre_equipement"
-            name="Liste des types équipements"
+            title="Liste de Type d'analyse"
+            :data=" typeAnalyseFiltre"
+            name="Liste des types d'analyse"
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-          </download-excel> -->
+          </download-excel> 
+       <div align="right" style="cursor:pointer;">
+         <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+       </div> 
+         
+
+
+
+          </div>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
@@ -142,6 +151,8 @@
   
 <script>
  import { mapGetters, mapActions } from "vuex";
+   import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   name:'type facture',
   data() {
@@ -158,10 +169,9 @@ export default {
         //   class: ""
         // }
       ],
-    //   json_fields: {
-    //     CODE: "code",
-    //     libelle: "libelle"
-    //   },
+      json_fields: {
+        libelle: "libelle"
+      },
 
       formData: {
         	libelle:""
@@ -199,6 +209,23 @@ return this.typeAnalyses.filter((item) => {
     'supprimertypeAnalyse'
      
     ]),
+             genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.typeAnalyseFiltre;
+    doc.text(98,10,"Liste des types d'analyse")
+  doc.autoTable(this.getColumns(),data)
+doc.save('Type des Analyses.pdf')
+return 0
+},
+getColumns() {
+    return [
+        {title: "LIBELLE", dataKey: "libelle"},
+       
+    ];
+},
+
+
     //afiicher modal ajouter
     afficherModalAjouTypeAnalyse() {
       this.$("#exampleModal").modal({

@@ -77,16 +77,22 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          <!-- <download-excel
-            class="btn btn-default pull-right"
+          <div>
+           <download-excel
+            class="btn btn-success pull-right"
             style="cursor:pointer;"
             :fields="json_fields"
-            title="Liste Types Ã©quipements"
-            :data="filtre_equipement"
-            name="Liste des types Ã©quipements"
+            title="Liste des Types Acte de Depense"
+            :data="typeActeDepenseFiltre"
+            name="Liste des types Acte de Depense"
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-          </download-excel> -->
+          </download-excel>
+         <div align="right" style="cursor:pointer;">
+          <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+        </div> 
+
+        </div>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
@@ -144,6 +150,8 @@
   
 <script>
  import { mapGetters, mapActions } from "vuex";
+     import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   name:'type acte depense',
   data() {
@@ -160,10 +168,9 @@ export default {
         //   class: ""
         // }
       ],
-    //   json_fields: {
-    //     CODE: "code",
-    //     LIBELLE: "libelle"
-    //   },
+      json_fields: {
+        LIBELLE: "libelle"
+      },
 
       formData: {
         libelle:""
@@ -196,6 +203,21 @@ return this.typeActeDepenses.filter((item) => {
     'supprimerTypeActeDepense'
      
     ]),
+                    genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.typeActeDepenseFiltre;
+    doc.text(98,10,"Liste des types des actes depenses")
+  doc.autoTable(this.getColumns(),data)
+doc.save('Type des actes de depenses.pdf')
+return 0
+},
+getColumns() {
+    return [
+        {title: "LIBELLE", dataKey: "libelle"},
+       
+    ];
+},
     //afiicher modal ajouter
     afficherModalAjouterTypeActeDepense() {
       this.$("#exampleModal").modal({
