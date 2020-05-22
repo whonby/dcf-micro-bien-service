@@ -1,5 +1,227 @@
 <template>
   <div>
+    <div class="quick-actions_homepage">
+      <ul class="quick-actions">
+        <li class="bg_ls">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-important">{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel))}}</span> B.PERSONNEL
+          </a>
+        </li>
+        <li class="bg_lo">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-success">{{formatageSomme(parseFloat(afficherTotalBudgetModuleBienService))}}</span>B.BIENS ET SERVICES
+          </a>
+        </li>
+         <li class="bg_lo">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-success">{{formatageSomme(parseFloat(afficherTotalBudgetModuleTransfert))}}</span>B.TRANSFERTS
+          </a>
+        </li>
+         <li class="bg_lo">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-success">{{formatageSomme(parseFloat(afficherTotalBudgetModuleInvestissement))}}</span>B.INVESTISSEMEENT
+          </a>
+        </li>
+         <li class="bg_ls">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-important">{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) }}</span> B.TOTAL
+          </a>
+        </li>
+        <li class="bg_lo">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-success">{{formatageSomme((parseFloat(budgetConsommerPersonnelGlobal) +parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)))}}</span>B.CONSOMME
+          </a>
+        </li>
+         <li class="bg_lo">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-success">{{formatageSomme((parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) - (parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)+parseFloat(budgetConsommerPersonnelGlobal)) )}}</span>B.DISPONIBLE
+          </a>
+        </li>
+         <li class="bg_lo">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-success">{{(((parseFloat(budgetConsommerPersonnelGlobal)+parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)) / (parseFloat(afficherTotalBudgetModulePersonnel) + parseFloat(afficherTotalBudgetModuleBienService) + parseFloat(afficherTotalBudgetModuleInvestissement) + parseFloat(afficherTotalBudgetModuleTransfert))) * 100 ).toFixed(2) || 0}}%</span>TAUX EXECUTION
+          </a>
+        </li>
+        <!-- <li class="bg_ly">
+          <a href="#">
+            <i class="icon-list-ol"></i>
+            <span class="label label-important">{{nombreTypeText}}</span>Nombre de type texte
+          </a>
+        </li> -->
+      
+      </ul>
+    </div>
+<div id="modificationModal" class="modal hide tabFormulaire">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">�</button>
+        <h3>DETAIL BUDGET  </h3>
+      </div>
+      <div class="modal-body">
+         <table class="table table-bordered table-striped">
+             <thead>
+                   <tr style="background-color: red;color: #FFFFFF;">
+    <td style="width:10%;text-align:center;font-size:25px;"></td>
+    <th width="50px" colspan="5" style="text-align:center;font-size:25px;color: #000000;" class="marquee-rtl">UNITE ADMINISTRATIVE : {{editUniteAdministrative.libelle}}</th>
+     
+   
+ </tr>
+ </thead>
+ <tbody>
+    <!-- <tr >
+   
+    <td height="20px"> </td>
+      <th height="20px"  style="color: #000000;font-size:14px"></th>
+      <td height="20px" style="text-align:center"></td>
+    <td height="20px" style="text-align:center"></td>
+ <td height="20px" style="text-align:center"></td>
+  <td height="20px" style="text-align:center"></td>
+     
+ </tr>      -->
+                    <!-- <tr >
+    <td height="20px"  style="text-align:center;margin: 0px 0 50% 50%"></td>
+    <th height="20px"  style="color: #000000;font-size:14px">UNITE ADMINISTRATIVE</th>
+     <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;">{{editUniteAdministrative.libelle}}</th>
+     
+     
+ </tr> -->
+                    <tr >
+   
+    <td height="20px">  </td>
+      <td height="20px"></td>
+      <td height="20px" style="text-align:center"></td>
+    <td height="20px" style="text-align:center"></td>
+ <td height="20px" style="text-align:center"></td>
+  <td height="20px" style="text-align:center"></td>
+     
+ </tr>
+                    <tr >
+    
+    <td height="20px">  </td>
+     <th height="20px"  style="color: #000000;font-size:14px">BUDGET PERSONNEL</th>
+      <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;">{{formatageSomme(parseFloat(budgetPersonnel(editUniteAdministrative.id)))}}</th>
+     
+     
+ </tr>
+                    <tr >
+    <th height="20px"  style="color: #000000;font-size:14px"></th>
+    
+     <td height="20px"></td>
+     <td height="20px" ></td>
+     <td height="20px" ></td>
+     <td height="20px" ></td>
+     <td height="20px" style="text-align:center"></td>
+    
+ </tr>                  
+   <tr >
+   
+    <td height="20px">  </td>
+      <th height="20px"  style="color: #000000;font-size:14px"> BUDGET BIENS ET SERVICE</th>
+       <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;">{{formatageSomme(parseFloat(budgetBienService(editUniteAdministrative.id)))}}</th>
+     
+     
+ </tr>
+<tr >
+   
+    <td height="20px">  </td>
+      <td height="20px"></td>
+      <td height="20px" style="text-align:center"></td>
+    <td height="20px" style="text-align:center"></td>
+ <td height="20px" style="text-align:center"></td>
+  <td height="20px" style="text-align:center"></td>
+     
+ </tr>                         
+  <tr >
+   
+   
+    <td height="20px">  </td>
+      <th height="20px"  style="color: #000000;font-size:14px">BUDGET INVESTISSEMENT</th>
+      <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;">{{formatageSomme(parseFloat(budgetInverstisement(editUniteAdministrative.id)))}}</th>
+     
+     
+ </tr>            
+           <tr >
+   
+    <td height="20px">  </td>
+      <th height="20px"  style="color: #000000;font-size:14px"></th>
+      <td height="20px" style="text-align:center"></td>
+    <td height="20px" style="text-align:center"></td>
+ <td height="20px" style="text-align:center"></td>
+  <td height="20px" style="text-align:center"></td>
+     
+ </tr>     
+  <tr >
+   
+   
+    <td height="20px">  </td>
+      <th height="20px"  style="color: #000000;font-size:14px">BUDGET TANSFERTS</th>
+      <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;">{{formatageSomme(parseFloat(budgetTranfert(editUniteAdministrative.id)))}}</th>
+    
+ </tr>     
+ <tr >
+   
+    <td height="20px">  </td>
+      <th height="20px"  style="color: #000000;font-size:14px"></th>
+      <td height="20px" style="text-align:center"></td>
+    <td height="20px" style="text-align:center"></td>
+ <td height="20px" style="text-align:center"></td>
+  <td height="20px" style="text-align:center"></td>
+     
+ </tr>     
+   <tr >
+   
+   
+    <td height="20px">  </td>
+      <th height="20px"  style="color: #000000;font-size:14px;">TOTAL BUDGET</th>
+      <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;background-color: orange;">{{formatageSomme(parseFloat(MontantTotalPargdeNature(editUniteAdministrative.id)))}}</th>
+     
+    
+ </tr>     
+   <tr >
+   
+   
+    <td height="20px">  </td>
+      <th height="20px"  style="color: #000000;font-size:14px">MONTANT CONSOMMER</th>
+       <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;background-color: #ffffff;">{{formatageSomme(parseFloat(budgetConsommerTransfert(editUniteAdministrative.id)) + parseFloat(budgetConsommerBienService(editUniteAdministrative.id)) + parseFloat(budgetConsommerInvestissement(editUniteAdministrative.id))+parseFloat(budgetConsommerPersonnelle(editUniteAdministrative.id)))}}</th>
+     
+     
+ </tr>     
+   <tr >
+   
+   
+    <td height="20px">  </td>
+      <th height="20px"  style="color: #000000;font-size:14px">DISPONIBLE BUDGET</th>
+       <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #ffffff;background-color: green;">{{formatageSomme(parseFloat(MontantTotalPargdeNature(editUniteAdministrative.id))-(parseFloat(budgetConsommerBienService(editUniteAdministrative.id)) + parseFloat(budgetConsommerTransfert(editUniteAdministrative.id))+ parseFloat(budgetConsommerInvestissement(editUniteAdministrative.id))+parseFloat(budgetConsommerPersonnelle(editUniteAdministrative.id))))}}</th>
+
+ </tr>     
+  <tr >
+   
+    <td height="20px">  </td>
+      <th height="20px"  style="color: #000000;font-size:14px">TAUX EXECUTION</th>
+       <th width="50px" colspan="4" style="text-align:center;font-size:25px;color:green;background-color: #ffffff;">{{((((parseFloat(budgetConsommerBienService(editUniteAdministrative.id)) + parseFloat(budgetConsommerTransfert(editUniteAdministrative.id))+ parseFloat(budgetConsommerInvestissement(editUniteAdministrative.id))+parseFloat(budgetConsommerPersonnelle(editUniteAdministrative.id))))/MontantTotalPargdeNature(editUniteAdministrative.id))*100).toFixed(2)}}%</th>
+     
+ </tr>     
+                  </tbody>  
+         </table>
+      </div>
+      <div class="modal-footer">
+       
+        <a data-dismiss="modal" class="btn" href="#">FERMER</a>
+      </div>
+    </div>
+
+
+
+
+
+
     <div class="container-fluid">
       <notifications />
       <div class="widget-box">
@@ -24,55 +246,69 @@
         <div class="widget-content nopadding">
           <table class="table table-bordered table-striped">
             <thead>
-              <tr style="font-size:14px">
-                <th>Unite administrative</th>
-                <th title="Budget du personnel">B.Personnel</th>
+              <tr style="">
+                <th style="font-size:15px;">Unite administrative</th>
+                <th style="font-size:15px;" title="Budget du personnel">B.Personnel</th>
 
-                <th title="Budget de bien et service">B.Bien et Service</th>
-                <th title="Budget en inverstisement">B.Inverstisement</th>
-                <th title="Budget en transfert">B.transfert</th>
+                <th style="font-size:15px;" title="Budget de bien et service">B.Bien et Service</th>
+                <th style="font-size:15px;" title="Budget en inverstisement">B.Inverstisement</th>
+                <th style="font-size:15px;" title="Budget en transfert">B.transfert</th>
 
-                <th style="background: forestgreen; color:#fff">Totaux</th>
-                <th style="background: deepskyblue; color:#fff">Consommé</th>
-                <th style="background: #8b0000;color:#fff">Reste à Consommé</th>
-                <th style="background: orangered;color:#fff">Taux Exécution (%)</th>
+                <th style="font-size:15px;background: forestgreen; color:#fff">Total</th>
+                <th style="font-size:15px;background: deepskyblue; color:#fff">Consommé</th>
+                <th style="font-size:15px;background: #8b0000;color:#fff">Disponible</th>
+                <th style="font-size:15px;background: orangered;color:#fff">Taux Exécution (%)</th>
+                  <th style="font-size:15px;background: orangered;color:#fff">Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="unite in uniteAdministratives" :key="unite.id">
+              <tr v-for="(unite,index) in uniteAdministratives" :key="unite.id">
                 
-                <td style="font-weight:bold;font-size:12px">{{unite.libelle}}</td>
+                <td style="font-weight:bold;font-size:12px;text-align:center">{{unite.libelle}}</td>
                 <td
-                  style="font-weight:bold;font-size:15px"
+                  style="font-weight:bold;font-size:12px;text-align:center"
                 >{{formatageSomme(budgetPersonnel(unite.id))}}</td>
                 <td
-                  style="font-weight:bold;font-size:15px"
+                  style="font-weight:bold;font-size:12px;text-align:center"
                 >{{formatageSomme(budgetBienService(unite.id))}}</td>
                 <td
-                  style="font-weight:bold;font-size:15px"
+                  style="font-weight:bold;font-size:12px;text-align:center"
                 >{{formatageSomme(budgetInverstisement(unite.id))}}</td>
                 <td
-                  style="font-weight:bold;font-size:15px"
+                  style="font-weight:bold;font-size:12px;text-align:center"
                 >{{formatageSomme(budgetTranfert(unite.id))}}</td>
 
                 <td
-                  style="font-weight:bold;font-size:15px"
+                  style="font-weight:bold;font-size:12px;text-align:center"
                 >{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id)))}}</td>
-                <td style="font-weight:bold;font-size:15px"
+                <td style="font-weight:bold;font-size:12px;text-align:center"
                 >{{formatageSomme(parseFloat(budgetConsommerTransfert(unite.id)) + parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerInvestissement(unite.id))+parseFloat(budgetConsommerPersonnelle(unite.id)))}}</td>
                 <td
-                  style="font-weight:bold;font-size:15px"
+                  style="font-weight:bold;font-size:12px;text-align:center"
             
-                >{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id))-(parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))))}}</td>
+                >{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id))-(parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))+ parseFloat(budgetConsommerPersonnelle(unite.id))))}}</td>
                 
-                <td style="font-weight:bold;font-size:15px">{{((parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))) / (parseFloat(MontantTotalPargdeNature(unite.id))) * 100)}}</td>
+                <td style="font-weight:bold;font-size:12px;text-align:center">{{(((parseFloat(budgetConsommerPersonnelle(unite.id)) + parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))) / (parseFloat(MontantTotalPargdeNature(unite.id)))) * 100).toFixed(2)|| 0}}%</td>
+          
+             <td>
+               
+                <button
+                        class="btn btn-info"
+                        @click="afficherModalModifierUniteAdministrative(index)"
+                      >
+                        <span>
+                          <i class="icon-share-alt"></i>
+                        </span>
+                      </button>
+              
+             </td>
               </tr>
 
-              <tr>
+              <!-- <tr>
                 <td style="background: orangered;color:#fff">Total Budget des  UA</td>
 
                 <td
-                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
+                  style="text-align: center;color:red;font-weight:bold;font-size:12px;text-align:center"
                 >{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel))}}</td>
 
                 <td
@@ -102,7 +338,7 @@
                 <td
                   style="text-align: center;color:red;font-weight:bold;font-size:15px" 
                 > {{((parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)) / (parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) * 100 ) || 0}}</td>
-              </tr> 
+              </tr>  -->
               
               
             </tbody>
@@ -134,6 +370,7 @@
                     }
 
                 ],
+                editUniteAdministrative:{},
                 detailBudget:"",
                 budgetGeneralCharge:"",
                 progress:0,
@@ -326,7 +563,7 @@
                 }
             },
 
-
+ 
             
     budgetConsommerTransfert() {
       return id => {
@@ -384,7 +621,18 @@
         }
       };
     },
-
+  budgetConsommerPersonnelGlobal() {
+      
+          return this.getMandatPersonnaliserPersonnel
+            .filter(element => element.marchetype == "perso")
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+              0
+            )
+            .toFixed(0);
+        
+      
+    },
 //
 
    budgetConsommerInvestissementGlobal() {
@@ -445,7 +693,9 @@
       );
 
       return activeBudget;
-    }
+    },
+
+     
 
         },
         methods: {
@@ -463,6 +713,20 @@
                 "getAllHistoriqueBudgetGeneral",
                 "modifierLigneExempter",
             ]),
+
+
+ afficherModalModifierUniteAdministrative(index) {
+      this.$("#modificationModal").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+      this.editUniteAdministrative = this.uniteAdministratives[index];
+    },
+
+
+
+
             formatageSomme: formatageSomme,
             OnchangeFichier(e) {
                 const files = e.target.files;
@@ -581,5 +845,10 @@
 .tailleModalOffre2 {
   width: 1300px;
   margin: 0 -690px;
+}
+.tabFormulaire{
+   width: 1300px;
+   margin: 80px -690px;
+  
 }
 </style>

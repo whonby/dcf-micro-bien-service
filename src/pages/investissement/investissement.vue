@@ -1,4 +1,4 @@
-
+type_financement
 <template>
     <div class="container-fluid">
     
@@ -1222,7 +1222,8 @@
      <div class="controls">
        <input
          type="text"
-         :value="type_financement"
+         v-model="formData.type_financement"
+         
          class="span4"
         
          readonly
@@ -1241,7 +1242,8 @@
      <div class="controls">
        <input
          type="text"
-         :value="source_financement"
+         v-model="formData.source_financement"
+         
          class="span4"
          
          readonly

@@ -11856,16 +11856,12 @@ afficherModalModifierMotifMandat(index) {
 
 afficherModalProcedureFacture() {
 
-   if(this.DisponibleBudgetaireApresLiquidation < this.montantMarcheAvecAvenant)
- {
-alert("Montant du marche est supperieure au Budget")
-}
-else{
+  
   this.$("#modalTypeEngagement").modal({
         backdrop: "static",
         keyboard: false
       });
-}
+
     
     },
 

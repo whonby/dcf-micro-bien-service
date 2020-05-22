@@ -371,7 +371,7 @@ AfficheMontantTresor(){
   
   
     {
-    var montant = this.budgetGeneral.filter(element => element.gdenature_id == 2 && element.typefinancement_id == 14 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
+    var montant = this.budgetGeneral.filter(element =>element.actived==1 && element.gdenature_id == 2 && element.typefinancement_id == 14 && element.exercicebudget_id == this.anneeAmort && element.actived==1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
       if(isNaN(montant)) return null
       return montant
 
@@ -383,7 +383,7 @@ AfficheMontantDon(){
   
   
     {
-    var montant = this.budgetGeneral.filter(element => element.gdenature_id == 2 && element.typefinancement_id == 13 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
+    var montant = this.budgetGeneral.filter(element => element.actived==1 && element.gdenature_id == 2 && element.typefinancement_id == 13 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
       if(isNaN(montant)) return null
       return montant
 
@@ -395,7 +395,7 @@ AfficheMontantEmprunt(){
   
   
     {
-    var montant = this.budgetGeneral.filter(element => element.gdenature_id == 2 && element.typefinancement_id == 15 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
+    var montant = this.budgetGeneral.filter(element =>element.actived==1 && element.gdenature_id == 2 && element.typefinancement_id == 15 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
       if(isNaN(montant)) return null
       return montant
 
