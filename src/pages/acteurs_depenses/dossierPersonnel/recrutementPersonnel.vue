@@ -1075,7 +1075,7 @@
             <div class="controls">
               <select v-model="formData.gdenature_id" :readOnly="deverouGrandNature" class="span4">
                 <option
-                  v-for="gdeNature in groupgranNature"
+                  v-for="gdeNature in groupgranNaturePersonnel"
                   :key="gdeNature[0].id"
                   :value="gdeNature[0].afficheGdeNature.id"
                 >{{gdeNature[0].afficheGdeNature.libelle}}</option>

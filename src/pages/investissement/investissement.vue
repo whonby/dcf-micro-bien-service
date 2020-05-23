@@ -1223,7 +1223,6 @@ type_financement
        <input
          type="text"
          v-model="formData.type_financement"
-         
          class="span4"
         
          readonly
@@ -1243,7 +1242,6 @@ type_financement
        <input
          type="text"
          v-model="formData.source_financement"
-         
          class="span4"
          
          readonly
@@ -1562,7 +1560,7 @@ type_financement
             <div class="controls">
               <input
                 type="text"
-                :value="editMarche.type_financement"
+                v-model="editMarche.type_financement"
                 class="span4"
                
                 readonly
@@ -1581,7 +1579,7 @@ type_financement
             <div class="controls">
               <input
                 type="text"
-                :value="editMarche.source_financement"
+                v-model="editMarche.source_financement"
                 class="span4"
                 
                 readonly
