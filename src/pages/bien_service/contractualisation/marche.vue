@@ -551,13 +551,18 @@ source_financement
     <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
                 class="btn btn-default " title="continue la contratualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
-                    </router-link> 
+                    </router-link>
+    <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                 class="btn btn-inverse " title="Cycle de vie du marche">
+        <span class=""><i class=" icon-calendar"></i></span>
+    </router-link>
+    <button @click.prevent="modifierModalActeEffetFinancierLocal2(index)"  class="btn btn-info"  title="Basculer en Execution">
+        <span class=""><i class="icon-undo" ></i></span></button>
 </td>
 <td>
  
  
-   <button @click.prevent="modifierModalActeEffetFinancierLocal2(index)"  class="btn btn-info"  title="Basculer en Execution">
-                <span class=""><i class="icon-folder-open" ></i></span></button> 
+
 </td>
                        </tr>
                         <tr>
@@ -634,7 +639,7 @@ source_financement
                 afficherLaListeDesMarche"
                  :key="marche.id">
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.exo_id || 'Non renseigné'}}</td>
+                   {{marche.exo_id || 'Non renseigné'}} </td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -648,7 +653,7 @@ source_financement
                     <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                   {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
-                   {{marche.objet || 'Non renseigné'}}</td>
+                   {{marche.objet || 'Non renseigné'}} </td>
                      <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.reference_marche || 'Non renseigné'}}</td>
                     <td>
@@ -818,13 +823,16 @@ source_financement
                  
                  </td>
                    <td>
-           <button   class="btn btn-info " title="Ajouter marché resilié" @click="afficherModalMarcheResilier(index)">
+           <button   class="btn btn-default " title="Ajouter marché resilié" @click="afficherModalMarcheResilier(index)">
                 <span class=""><i class="icon-pencil"></i></span></button>
 
-   
-                    
-                <button @click.prevent="modifierModalActeEffetFinancierLocal(index)"  class="btn btn-success">
-                <span class=""><i class="icon-folder-open" title="Basculer en contratualisation"></i></span></button> 
+
+                       <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                                    class="btn btn-inverse " title="Cycle de vie du marche">
+                           <span class=""><i class=" icon-calendar"></i></span>
+                       </router-link>
+                <button @click.prevent="modifierModalActeEffetFinancierLocal(index)"  class="btn btn-info">
+                <span class=""><i class=" icon-undo" title="Basculer en contratualisation"></i></span></button>
 
 </td>
 

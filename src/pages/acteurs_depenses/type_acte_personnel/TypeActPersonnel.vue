@@ -22,13 +22,30 @@
             <div class="row-fluid">
                 <div class="span12">
                     <div class="widget-box">
-                        <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+                        <div class="widget-title">
+                <div class="span6">
+                    <span class="icon"> <i class="icon-th"></i> </span>
+                 <h5>Liste  type acte  personnel</h5>
+                </div>
+                            <div class="span6">
+                                <div align="right">
+                                    Search: <input type="text" v-model="search">
 
-                            <h5>Liste  type acte  personnel</h5>
-                            <div align="right">
-                                Search: <input type="text" v-model="search">
-
+                                </div>
                             </div>
+                            <div class="span4">
+                                <br>
+                                Afficher
+                                <select name="pets" id="pet-select" v-model="size" class="span3">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                Entrer
+                            </div>
+
+
 
                         </div>
                         <div class="widget-content nopadding" ref="content">
@@ -165,6 +182,8 @@
             return {
                 gridColumns: ["name", "power"],
                 active_el:0,
+                page:0,
+                size:10,
                 fabActions: [
                     {
                         name: 'cache',
@@ -175,8 +194,7 @@
                     //     icon: 'add_alert'
                     // }
                 ],
-                page:0,
-                size:1,
+
                 search:"",
                 liste:[],
                 formData : {
