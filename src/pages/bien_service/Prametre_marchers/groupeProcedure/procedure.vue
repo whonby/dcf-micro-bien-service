@@ -113,27 +113,27 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          <!-- <div>
+          <div>
 
-                                        <download-excel
-                                            class="btn btn-default pull-right"
+                                     <download-excel
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
-                                              title="Liste Section "
-                                              name ="Liste section"
-                                              worksheet = "section"
-                                            :data="natures_sections">
+                                              title="Liste procedure passation "
+                                              name ="Liste procedure passation"
+                                              worksheet = "procedure passation"
+                                            :data="typeTypeProcedures">
                     <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
-                                     </div> -->
+                                     </div>
                                      
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5 width="90%">Procedure passation</h5>
+              <h5 width="90%">Procedure passation 4</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
@@ -192,14 +192,12 @@ export default {
   },
   data() {
     return {
-      // json_fields: {
-      //       'NATURE_SECTION': 'groupe.libelle',
-      //       'NUMERO_ORDRE_SECTION': 'article.code',
-      //     'CODE_SECTION':'article.code_section',
-      //   'LIBELLE_SECTION':'article.nom_section'
-           
-           
-      //   },
+      json_fields: {
+            'TYPE_PROCEDURE': 'groupe.libelle',
+            'CODE': 'article.code',
+          'LIBELLE':'article.libelle',
+         
+        },
      fabActions: [
               {
                   name: 'cache',
