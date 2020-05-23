@@ -375,7 +375,7 @@ affichierActeurDepenseId() {
            const qtereel = this.personnaliseActeurDepense.find(qtreel => qtreel.acte_personnel_id == id);
 
       if (qtereel) {
-        return qtereel.matricule;
+        return qtereel.matricule.concat(' =>  ', qtereel.nom.concat('  ',qtereel.prenom));
       }
       return 0
         }

@@ -99,7 +99,7 @@
                   exo => exo.id == element.exercice_budgetaire_id
               ),
              objetActeurDepense:rootGetters['personnelUA/all_acteur_depense' ].find(
-                depens => depens.id == element.acte_personnel_id
+                depens => depens.acte_personnel_id == element.acte_personnel_id
              ),
              objetUniteAdministrative:rootGetters['uniteadministrative/uniteAdministratives'].find(
                  plans => plans.id == element.ua_id

@@ -1,4 +1,6 @@
 
+CodeExempte 
+
 <template>
     
 
@@ -55,10 +57,11 @@
                     </div>
                 </div>
             </div>
-             <template v-if="detail_marche.economique_id == CodeExempte(detail_marche.economique_id) ">
+
+             <!-- <template v-if="detail_marche.economique_id == CodeExempte(detail_marche.economique_id) ">
 <executionLigneExempte :macheid="detail_marche.id"></executionLigneExempte>
-        </template>
-        <template v-else>
+        </template> -->
+        <template >
 <h4 style="text-align:center;font-size:30px">{{afficheLeNomDesProcedure}}</h4>
             <div class="row-fluid">
                 <div class="span3">
@@ -228,7 +231,7 @@
                 <div id="tab4110" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterPv" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>
                     </div>
 
 
@@ -384,7 +387,7 @@
                  <div id="tab06125" class="tab-pane">
                  <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterPv" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>
                     </div>
 
 
@@ -545,7 +548,7 @@
                  <div id="tab0612" class="tab-pane">
                  <div align="right">
                     <div class="widget-content">
-                        <a href="#ajouterPv" data-toggle="modal" class="btn btn-primary">Ajouter</a>
+                        <a href="#ajouterPvBienservice" data-toggle="modal" class="btn btn-primary">Ajouter</a>
                     </div>
 
 
