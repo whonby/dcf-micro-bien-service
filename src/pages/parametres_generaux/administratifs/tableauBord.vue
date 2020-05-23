@@ -32,25 +32,25 @@
 
                              <ul class="quick-actions">
          <li class="bg_lb"> <a href="#"> <i class="icon-dashboard"></i> <span class="label label-important">{{formatageSomme(parseFloat(afficherBudgetInitialTranferst))}}</span> My Dashboard </a> </li>
-        <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Charts</a> </li>
-        <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> Widgets </a> </li>
-        <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i> Tables</a> </li>
-        <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>
-        <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Forms</a> </li>
-        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Buttons</a> </li>
-        <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i>Elements</a> </li>
-        <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i> Calendar</a> </li>
-        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Error</a> </li>
- <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> My Dashboard </a> </li>
-        <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Charts</a> </li>
-        <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> Widgets </a> </li>
-        <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i> Tables</a> </li>
-        <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>
-        <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Forms</a> </li>
-        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Buttons</a> </li>
-        <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i>Elements</a> </li>
-        <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i> Calendar</a> </li>
-        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Error</a> </li>
+        <li class="bg_lg span3"> <a href="#"> <i class="icon-signal"></i> Charts</a> </li>
+        <li class="bg_ly"> <a href="#"> <i class="icon-inbox"></i><span class="label label-success">101</span> Widgets </a> </li>
+        <li class="bg_lo"> <a href="#"> <i class="icon-th"></i> Tables</a> </li>
+        <li class="bg_ls"> <a href="#"> <i class="icon-fullscreen"></i> Full width</a> </li>
+        <li class="bg_lo span3"> <a href="#"> <i class="icon-th-list"></i> Forms</a> </li>
+        <li class="bg_ls"> <a href="#"> <i class="icon-tint"></i> Buttons</a> </li>
+        <li class="bg_lb"> <a href="#"> <i class="icon-pencil"></i>Elements</a> </li>
+        <li class="bg_lg"> <a href="#"> <i class="icon-calendar"></i> Calendar</a> </li>
+        <li class="bg_lr"> <a href="#"> <i class="icon-info-sign"></i> Error</a> </li>
+ <li class="bg_lb"> <a href="#"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> My Dashboard </a> </li>
+        <li class="bg_lg span3"> <a href="#"> <i class="icon-signal"></i> Charts</a> </li>
+        <li class="bg_ly"> <a href="#"> <i class="icon-inbox"></i><span class="label label-success">101</span> Widgets </a> </li>
+        <li class="bg_lo"> <a href="#"> <i class="icon-th"></i> Tables</a> </li>
+        <li class="bg_ls"> <a href="#"> <i class="icon-fullscreen"></i> Full width</a> </li>
+        <li class="bg_lo span3"> <a href="#"> <i class="icon-th-list"></i> Forms</a> </li>
+        <li class="bg_ls"> <a href="#"> <i class="icon-tint"></i> Buttons</a> </li>
+        <li class="bg_lb"> <a href="#"> <i class="icon-pencil"></i>Elements</a> </li>
+        <li class="bg_lg"> <a href="#"> <i class="icon-calendar"></i> Calendar</a> </li>
+        <li class="bg_lr"> <a href="#"> <i class="icon-info-sign"></i> Error</a> </li>
       </ul>
 
                           </div>
@@ -59,8 +59,8 @@
                                   <ul class="quick-actions">
              <li class="bg_lo span3"> <a href="#"> <i class="icon-th-list"></i><span class="label label-important">{{formatageSomme(parseFloat(afficherBudgetInitialPersonnel))}}</span>Budget Initail personnel</a> </li>
         <li class="bg_ls"> <a href="#"> <i class="icon-tint"></i> <span class="label label-warning"></span> budget executé personnel</a> </li>
-        <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i>  <span class="label label-success"></span>Reste du budget personnel</a> </li>
-        <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i> <span class="label label-important"> %</span>Taux d'execution personnel</a> </li>
+        <li class="bg_lb"> <a href="#"> <i class="icon-pencil"></i>  <span class="label label-success"></span>Reste du budget personnel</a> </li>
+        <li class="bg_lg"> <a href="#"> <i class="icon-calendar"></i> <span class="label label-important"> %</span>Taux d'execution personnel</a> </li>
 
                             </ul>
                  
@@ -70,25 +70,25 @@
                           <div id="tab4" class="tab-pane">
                            <ul class="quick-actions">
         <li class="bg_lb"> <a href="#"> <i class="icon-dashboard"></i> <span class="label label-important">{{formatageSomme(parseFloat(afficherBudgetInitialB))}}</span>Budget Total de Biens&service</a> </li>
-        <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i><span class="label label-warning">{{formatageSomme(parseFloat(afficherBudgetExcuterBienService))}}</span> Budget Executé de Biens & service</a> </li>
-        <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">{{formatageSomme(parseFloat(afficherBudgetInitialB) - (parseFloat(afficherBudgetExcuterBienService)))}}</span> Reste du budget bien & service </a> </li>
-        <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i><span class="label label-primary">{{((afficherBudgetInitialB)/(parseFloat(afficherBudgetExcuterBienService)) * 100)}} %</span> <table>Taux d'execution bien & service</table></a> </li>
-        <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>
-        <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Forms</a> </li>
-        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Buttons</a> </li>
-        <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i>Elements</a> </li>
-        <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i> Calendar</a> </li>
-        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Error</a> </li>
-      <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> My Dashboard </a> </li>
-        <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Charts</a> </li>
-        <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> Widgets </a> </li>
-        <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i> Tables</a> </li>
-        <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>
-        <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Forms</a> </li>
-        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Buttons</a> </li>
-        <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i>Elements</a> </li>
-        <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i> Calendar</a> </li>
-        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Error</a> </li>
+        <li class="bg_lg span3"> <a href="#"> <i class="icon-signal"></i><span class="label label-warning">{{formatageSomme(parseFloat(afficherBudgetExcuterBienService))}}</span> Budget Executé de Biens & service</a> </li>
+        <li class="bg_ly"> <a href="#"> <i class="icon-inbox"></i><span class="label label-success">{{formatageSomme(parseFloat(afficherBudgetInitialB) - (parseFloat(afficherBudgetExcuterBienService)))}}</span> Reste du budget bien & service </a> </li>
+        <li class="bg_lo"> <a href="#"> <i class="icon-th"></i><span class="label label-primary">{{((afficherBudgetInitialB)/(parseFloat(afficherBudgetExcuterBienService)) * 100)}} %</span> <table>Taux d'execution bien & service</table></a> </li>
+        <li class="bg_ls"> <a href="#"> <i class="icon-fullscreen"></i> Full width</a> </li>
+        <li class="bg_lo span3"> <a href="#"> <i class="icon-th-list"></i> Forms</a> </li>
+        <li class="bg_ls"> <a href="#"> <i class="icon-tint"></i> Buttons</a> </li>
+        <li class="bg_lb"> <a href="#"> <i class="icon-pencil"></i>Elements</a> </li>
+        <li class="bg_lg"> <a href="#"> <i class="icon-calendar"></i> Calendar</a> </li>
+        <li class="bg_lr"> <a href="#"> <i class="icon-info-sign"></i> Error</a> </li>
+      <li class="bg_lb"> <a href="#"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> My Dashboard </a> </li>
+        <li class="bg_lg span3"> <a href="#"> <i class="icon-signal"></i> Charts</a> </li>
+        <li class="bg_ly"> <a href="#"> <i class="icon-inbox"></i><span class="label label-success">101</span> Widgets </a> </li>
+        <li class="bg_lo"> <a href="#"> <i class="icon-th"></i> Tables</a> </li>
+        <li class="bg_ls"> <a href="#"> <i class="icon-fullscreen"></i> Full width</a> </li>
+        <li class="bg_lo span3"> <a href="#"> <i class="icon-th-list"></i> Forms</a> </li>
+        <li class="bg_ls"> <a href="#"> <i class="icon-tint"></i> Buttons</a> </li>
+        <li class="bg_lb"> <a href="#"> <i class="icon-pencil"></i>Elements</a> </li>
+        <li class="bg_lg"> <a href="#"> <i class="icon-calendar"></i> Calendar</a> </li>
+        <li class="bg_lr"> <a href="#"> <i class="icon-info-sign"></i> Error</a> </li>
       </ul>
 
 
@@ -99,8 +99,8 @@
                           <ul class="quick-actions">
              <li class="bg_lo span3"> <a href="#"> <i class="icon-th-list"></i><span class="label label-important">{{formatageSomme(parseFloat(afficherBudgetInitialInvetissement))}}</span>Budget Initail d'investissement</a> </li>
         <li class="bg_ls"> <a href="#"> <i class="icon-tint"></i> <span class="label label-warning">{{ formatageSomme(parseFloat(afficherBudgetExecutéInvestissement))}}</span> budget executé pour investissement</a> </li>
-        <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i>  <span class="label label-success">{{formatageSomme(parseFloat(afficherBudgetInitialInvetissement) - (parseFloat(afficherBudgetExecutéInvestissement)))}}</span>Reste du budget en ivestissement</a> </li>
-        <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i> <span class="label label-important">{{((afficherBudgetInitialInvetissement) / (parseFloat(afficherBudgetExecutéInvestissement)) * 100)}} %</span>Taux d'execution d'investissement</a> </li>
+        <li class="bg_lb"> <a href="#"> <i class="icon-pencil"></i>  <span class="label label-success">{{formatageSomme(parseFloat(afficherBudgetInitialInvetissement) - (parseFloat(afficherBudgetExecutéInvestissement)))}}</span>Reste du budget en ivestissement</a> </li>
+        <li class="bg_lg"> <a href="#"> <i class="icon-calendar"></i> <span class="label label-important">{{((afficherBudgetInitialInvetissement) / (parseFloat(afficherBudgetExecutéInvestissement)) * 100)}} %</span>Taux d'execution d'investissement</a> </li>
 
                             </ul>
                           </div>

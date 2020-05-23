@@ -247,7 +247,7 @@
                 </td>
                 <td>
                      <div class="control-group">
-                                                    <label class="control-label">Fonctions</label>
+                                                    <label class="control-label">Fonctions{{nombreDeFonction(formData.fonction_id)}}</label>
                                                     <div class="controls">
                                                         <select v-model="formData.fonction_id" :disabled="verrouilleFonction" class="span12">
                                                             <option></option>

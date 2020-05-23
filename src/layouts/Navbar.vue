@@ -114,7 +114,7 @@ export default {
         "getEntreprise","getEtapeMarche","getDocumentPTBAPPM","getMarcheContrat","getPresenceCF",
         "getDocumentPresence","getNombreMarcheByProcedure","sourcePersonnalise",
         "getSourceFinnancementByMarche","getMarcheContratExecution",
-        "getBanque", "getCompte","getAgence"]),
+        "getBanque", "getCompte","getAgence","getSanction"]),
 
         ...mapActions("SuiviImmobilisation", [
       "getAllNatureEntre",
@@ -209,7 +209,7 @@ this.getChoixProcedure()
 this.getTransmission()
 this.getCotation()
 this.getOuverture()    
-
+this.getSanction()
 this.getAllRealiteServiceFait()
      this.getAllLiquidation()
 // this.getTypeProcedure()

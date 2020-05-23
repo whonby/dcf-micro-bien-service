@@ -21,8 +21,8 @@ const financement_by_marche =state =>state.financement_by_marche;
 const detail_marche_finance=state =>state.detail_marche_finance;
 export const banques = state => state.banques;
 export const comptes = state => state.comptes;
-export const agenceBanques = state => state.agenceBanques
-
+export const agenceBanques = state => state.agenceBanques;
+export const sanctions = state => state.sanctions;
 
 
 const getPersonnaliseAgence = (state, getters, rootState, rootGetters) =>
