@@ -205,7 +205,7 @@
    
     <td height="20px">  </td>
       <th height="20px"  style="color: #000000;font-size:14px">TAUX EXECUTION</th>
-       <th width="50px" colspan="4" style="text-align:center;font-size:25px;color:green;background-color: #ffffff;">{{((((parseFloat(budgetConsommerBienService(editUniteAdministrative.id)) + parseFloat(budgetConsommerTransfert(editUniteAdministrative.id))+ parseFloat(budgetConsommerInvestissement(editUniteAdministrative.id))+parseFloat(budgetConsommerPersonnelle(editUniteAdministrative.id))))/MontantTotalPargdeNature(editUniteAdministrative.id))*100).toFixed(2)}}%</th>
+       <th width="50px" colspan="4" style="text-align:center;font-size:25px;color:green;background-color: #ffffff;">{{((((parseFloat(budgetConsommerBienService(editUniteAdministrative.id)) + parseFloat(budgetConsommerTransfert(editUniteAdministrative.id))+ parseFloat(budgetConsommerInvestissement(editUniteAdministrative.id))+parseFloat(budgetConsommerPersonnelle(editUniteAdministrative.id))))/(parseFloat(MontantTotalPargdeNature(editUniteAdministrative.id))))*100).toFixed(2)}}%</th>
      
  </tr>     
                   </tbody>  
