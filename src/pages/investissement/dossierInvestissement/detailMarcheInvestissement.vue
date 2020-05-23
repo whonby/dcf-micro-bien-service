@@ -977,7 +977,8 @@ created() {
       "budgetGeneral",
       "getPersonnaliseBudgetGeneral",
       "afficheTransfertValider",
-      "afficheBudgetActive"
+      "afficheBudgetActive",
+      "getterligneExempter"
       // "montantBudgetGeneral"
       // "chapitres",
       // "sections"
@@ -1114,7 +1115,18 @@ budgetDisponible() {
     },
 
 
+ CodeExempte() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getterligneExempter.find(qtreel => qtreel.economique_id == id);
 
+      if (qtereel) {
+        return qtereel.economique_id;
+      }
+      return 0
+        }
+      };
+    },
 
 
 

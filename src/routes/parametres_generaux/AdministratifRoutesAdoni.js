@@ -1,7 +1,7 @@
 import ExerciceBudgetaire from "../../pages/parametres_generaux/administratifs/tableauBord.vue";
 
 import ExerciceBudgetaire1 from "../../pages/parametres_generaux/administratifs/ExerciceBudgetaire.vue";
-import Titre from "../../pages/parametres_generaux/administratifs/Titre.vue";
+import Titre from "../../pages/parametres_generaux/administratifs/tableauBord.vue";
 import NatureSection from "../../pages/parametres_generaux/administratifs/NatureSection.vue";
 import Section from "../../pages/parametres_generaux/administratifs/Section.vue";
 import StructureProgramme from "../../pages/parametres_generaux/administratifs/StructureProgramme.vue";
@@ -33,7 +33,7 @@ const AdministratifRoutesAdoni = [
   },
     {
       // route pour le titre
-        path:"/titre",
+      path:"/tableauBord",
        name:"Titre",
        component: Titre
      },

@@ -287,6 +287,7 @@ export default {
       "plans_fonctionnels",
       "afficheNiveauPlanFonctionnel"
      
+     
     ]),
     ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),

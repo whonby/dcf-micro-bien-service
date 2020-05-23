@@ -1,81 +1,56 @@
 <template>
   <div>
-    <div class="quick-actions_homepage">
-      <ul class="quick-actions">
-        <li class="bg_ls">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-important">{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel))}}</span> B.PERSONNEL
-          </a>
-        </li>
-        <li class="bg_lo">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-success">{{formatageSomme(parseFloat(afficherTotalBudgetModuleBienService))}}</span>B.BIENS ET SERVICES
-          </a>
-        </li>
-         <li class="bg_lo">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-success">{{formatageSomme(parseFloat(afficherTotalBudgetModuleTransfert))}}</span>B.TRANSFERTS
-          </a>
-        </li>
-         <li class="bg_lo">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-success">{{formatageSomme(parseFloat(afficherTotalBudgetModuleInvestissement))}}</span>B.INVESTISSEMEENT
-          </a>
-        </li>
-         <li class="bg_ls">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-important">{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) }}</span> B.TOTAL
-          </a>
-        </li>
-        <li class="bg_lo">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-success">{{formatageSomme((parseFloat(budgetConsommerPersonnelGlobal) +parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)))}}</span>B.CONSOMME
-          </a>
-        </li>
-         <li class="bg_lo">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-success">{{formatageSomme((parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) - (parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)+parseFloat(budgetConsommerPersonnelGlobal)) )}}</span>B.DISPONIBLE
-          </a>
-        </li>
-         <li class="bg_lo">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-success">{{(((parseFloat(budgetConsommerPersonnelGlobal)+parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)) / (parseFloat(afficherTotalBudgetModulePersonnel) + parseFloat(afficherTotalBudgetModuleBienService) + parseFloat(afficherTotalBudgetModuleInvestissement) + parseFloat(afficherTotalBudgetModuleTransfert))) * 100 ).toFixed(2) || 0}}%</span>TAUX EXECUTION
-          </a>
-        </li>
-        <!-- <li class="bg_ly">
-          <a href="#">
-            <i class="icon-list-ol"></i>
-            <span class="label label-important">{{nombreTypeText}}</span>Nombre de type texte
-          </a>
-        </li> -->
-      
-      </ul>
-    </div>
-<div id="modificationModal" class="modal hide tabFormulaire">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">�</button>
-        <h3>DETAIL BUDGET  </h3>
-      </div>
-      <div class="modal-body">
-         <table class="table table-bordered table-striped">
-             <thead>
+    
+          <table class="table table-bordered table-striped" id="Exo">
+          
+            <tr>
+              <td>
+                 <div align="left" style="text-align:center;font-size:25px">
+               <label for="" style="text-align:center;font-size:25px"> Recherche</label>
+               </div>
+              </td>
+              <td>
+                
+                  <div align="right">
+             
+                <!-- <input type="search"  :value="uaRecherche(uniteadministrative_id)" /> -->
+                <!-- <select v-model="uniteadministrative_id" class="span6">
+                                <option value>Selectionner</option>
+                                <option
+                                  v-for="ua in uniteAdministratives"
+                                  :key="ua.id"
+                                  :value="ua.id"
+                                >{{ua.libelle}}</option>
+                              </select> -->
+
+                                     <model-list-select style="background-color: rgb(255,255,255);"
+                                           class="wide"
+                                           :list="uniteAdministratives"
+                                           v-model="uniteadministrative_id"
+                                           option-value="id"
+                                           option-text="libelle"
+                                            
+                                           placeholder="Selectionner Unite administrative"
+                        >
+
+                        </model-list-select> 
+              </div>
+              </td>
+            </tr>
+          </table>
+          
+           
+              <table class="table table-bordered table-striped" id="Exo">
+                <thead>
                    <tr style="background-color: red;color: #FFFFFF;">
-    <td style="width:10%;text-align:center;font-size:25px;"></td>
-    <th width="50px" colspan="5" style="text-align:center;font-size:25px;color: #000000;" class="marquee-rtl">UNITE ADMINISTRATIVE : {{editUniteAdministrative.libelle}}</th>
+    <td style="width:10%;text-align:center;font-size:25px;">SVP</td>
+    <th width="50px" colspan="5" style="text-align:center;font-size:25px;color: #000000;" class="marquee-rtl">SELECTIONNER UNITE ADMINISTRATIVE</th>
      
    
  </tr>
  </thead>
  <tbody>
-    <!-- <tr >
+    <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
    
     <td height="20px"> </td>
       <th height="20px"  style="color: #000000;font-size:14px"></th>
@@ -84,15 +59,15 @@
  <td height="20px" style="text-align:center"></td>
   <td height="20px" style="text-align:center"></td>
      
- </tr>      -->
-                    <!-- <tr >
+ </tr>     
+                    <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
     <td height="20px"  style="text-align:center;margin: 0px 0 50% 50%"></td>
     <th height="20px"  style="color: #000000;font-size:14px">UNITE ADMINISTRATIVE</th>
-     <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;">{{editUniteAdministrative.libelle}}</th>
+     <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;">{{unite.libelle}}</th>
      
      
- </tr> -->
-                    <tr >
+ </tr>
+                    <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
    
     <td height="20px">  </td>
       <td height="20px"></td>
@@ -102,15 +77,15 @@
   <td height="20px" style="text-align:center"></td>
      
  </tr>
-                    <tr >
+                    <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
     
     <td height="20px">  </td>
-     <th height="20px"  style="color: #000000;font-size:14px">BUDGET PERSONNEL</th>
-      <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;">{{formatageSomme(parseFloat(budgetPersonnel(editUniteAdministrative.id)))}}</th>
+     <th height="20px"  style="color: #000000;font-size:14px">PERSONNEL</th>
+      <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;">{{formatageSomme(parseFloat(budgetPersonnel(unite.id)))}}</th>
      
      
  </tr>
-                    <tr >
+                    <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
     <th height="20px"  style="color: #000000;font-size:14px"></th>
     
      <td height="20px"></td>
@@ -120,15 +95,15 @@
      <td height="20px" style="text-align:center"></td>
     
  </tr>                  
-   <tr >
+   <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
    
     <td height="20px">  </td>
-      <th height="20px"  style="color: #000000;font-size:14px"> BUDGET BIENS ET SERVICE</th>
-       <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;">{{formatageSomme(parseFloat(budgetBienService(editUniteAdministrative.id)))}}</th>
+      <th height="20px"  style="color: #000000;font-size:14px">BIENS ET SERVICE</th>
+       <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;">{{formatageSomme(parseFloat(budgetBienService(unite.id)))}}</th>
      
      
  </tr>
-<tr >
+<tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
    
     <td height="20px">  </td>
       <td height="20px"></td>
@@ -138,16 +113,16 @@
   <td height="20px" style="text-align:center"></td>
      
  </tr>                         
-  <tr >
+  <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
    
    
     <td height="20px">  </td>
-      <th height="20px"  style="color: #000000;font-size:14px">BUDGET INVESTISSEMENT</th>
-      <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;">{{formatageSomme(parseFloat(budgetInverstisement(editUniteAdministrative.id)))}}</th>
+      <th height="20px"  style="color: #000000;font-size:14px">INVESTISSEMENT</th>
+      <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;">{{formatageSomme(parseFloat(budgetInverstisement(unite.id)))}}</th>
      
      
  </tr>            
-           <tr >
+           <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
    
     <td height="20px">  </td>
       <th height="20px"  style="color: #000000;font-size:14px"></th>
@@ -157,15 +132,15 @@
   <td height="20px" style="text-align:center"></td>
      
  </tr>     
-  <tr >
+  <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
    
    
     <td height="20px">  </td>
-      <th height="20px"  style="color: #000000;font-size:14px">BUDGET TANSFERTS</th>
-      <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;">{{formatageSomme(parseFloat(budgetTranfert(editUniteAdministrative.id)))}}</th>
+      <th height="20px"  style="color: #000000;font-size:14px">TANSFERTS</th>
+      <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;">{{formatageSomme(parseFloat(budgetTranfert(unite.id)))}}</th>
     
  </tr>     
- <tr >
+ <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
    
     <td height="20px">  </td>
       <th height="20px"  style="color: #000000;font-size:14px"></th>
@@ -175,178 +150,44 @@
   <td height="20px" style="text-align:center"></td>
      
  </tr>     
-   <tr >
+   <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
    
    
     <td height="20px">  </td>
-      <th height="20px"  style="color: #000000;font-size:14px;">TOTAL BUDGET</th>
-      <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;background-color: orange;">{{formatageSomme(parseFloat(MontantTotalPargdeNature(editUniteAdministrative.id)))}}</th>
+      <th height="20px"  style="color: #000000;font-size:14px;">TOTAL</th>
+      <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;background-color: orange;">{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id)))}}</th>
      
     
  </tr>     
-   <tr >
+   <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
    
    
     <td height="20px">  </td>
       <th height="20px"  style="color: #000000;font-size:14px">MONTANT CONSOMMER</th>
-       <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;background-color: #ffffff;">{{formatageSomme(parseFloat(budgetConsommerTransfert(editUniteAdministrative.id)) + parseFloat(budgetConsommerBienService(editUniteAdministrative.id)) + parseFloat(budgetConsommerInvestissement(editUniteAdministrative.id))+parseFloat(budgetConsommerPersonnelle(editUniteAdministrative.id)))}}</th>
+       <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #000000;background-color: #ffffff;">{{formatageSomme(parseFloat(budgetConsommerTransfert(unite.id)) + parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerInvestissement(unite.id))+parseFloat(budgetConsommerPersonnelle(unite.id)))}}</th>
      
      
  </tr>     
-   <tr >
+   <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
    
    
     <td height="20px">  </td>
-      <th height="20px"  style="color: #000000;font-size:14px">DISPONIBLE BUDGET</th>
-       <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #ffffff;background-color: green;">{{formatageSomme(parseFloat(MontantTotalPargdeNature(editUniteAdministrative.id))-(parseFloat(budgetConsommerBienService(editUniteAdministrative.id)) + parseFloat(budgetConsommerTransfert(editUniteAdministrative.id))+ parseFloat(budgetConsommerInvestissement(editUniteAdministrative.id))+parseFloat(budgetConsommerPersonnelle(editUniteAdministrative.id))))}}</th>
+      <th height="20px"  style="color: #000000;font-size:14px">DISPONIBLE</th>
+       <th width="50px" colspan="4" style="text-align:center;font-size:25px;color: #ffffff;background-color: green;">{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id))-(parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))+parseFloat(budgetConsommerPersonnelle(unite.id))))}}</th>
 
  </tr>     
-  <tr >
+  <tr v-for="unite in filtre_type_teste(uniteadministrative_id)" :key="unite.id">
    
     <td height="20px">  </td>
       <th height="20px"  style="color: #000000;font-size:14px">TAUX EXECUTION</th>
-       <th width="50px" colspan="4" style="text-align:center;font-size:25px;color:green;background-color: #ffffff;">{{((((parseFloat(budgetConsommerBienService(editUniteAdministrative.id)) + parseFloat(budgetConsommerTransfert(editUniteAdministrative.id))+ parseFloat(budgetConsommerInvestissement(editUniteAdministrative.id))+parseFloat(budgetConsommerPersonnelle(editUniteAdministrative.id))))/MontantTotalPargdeNature(editUniteAdministrative.id))*100).toFixed(2)}}%</th>
+       <th width="50px" colspan="4" style="text-align:center;font-size:25px;color:green;background-color: #ffffff;">{{(((parseFloat(MontantTotalPargdeNature(unite.id))-(parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))+parseFloat(budgetConsommerPersonnelle(unite.id))))/MontantTotalPargdeNature(unite.id))).toFixed(2)}}%</th>
      
  </tr>     
                   </tbody>  
-         </table>
-      </div>
-      <div class="modal-footer">
-       
-        <a data-dismiss="modal" class="btn" href="#">FERMER</a>
-      </div>
-    </div>
-
-
-
-
-
-
-    <div class="container-fluid">
-      <notifications />
-      <div class="widget-box">
-        <div class="widget-title">
-          <span class="icon">
-            <i class="icon-th"></i>
-          </span>
-          <h5>Detail budget {{detailBudget}}</h5>
-        </div>
- <!-- <div align="right">
-                Recherche:
-                <input type="search"  :value="uaRecherche(uniteadministrative_id)" /> 
-                <select v-model="uniteadministrative_id" class="span12">
-                                <option value>Selectionner</option>
-                                <option
-                                  v-for="ua in uniteAdministratives"
-                                  :key="ua.id"
-                                  :value="ua.id"
-                                >{{ua.libelle}}</option>
-                              </select>
-              </div> -->
-        <div class="widget-content nopadding">
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr style="">
-                <th style="font-size:15px;">Unite administrative</th>
-                <th style="font-size:15px;" title="Budget du personnel">B.Personnel</th>
-
-                <th style="font-size:15px;" title="Budget de bien et service">B.Bien et Service</th>
-                <th style="font-size:15px;" title="Budget en inverstisement">B.Inverstisement</th>
-                <th style="font-size:15px;" title="Budget en transfert">B.transfert</th>
-
-                <th style="font-size:15px;background: forestgreen; color:#fff">Total</th>
-                <th style="font-size:15px;background: deepskyblue; color:#fff">Consommé</th>
-                <th style="font-size:15px;background: #8b0000;color:#fff">Disponible</th>
-                <th style="font-size:15px;background: orangered;color:#fff">Taux Exécution (%)</th>
-                  <th style="font-size:15px;background: orangered;color:#fff">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(unite,index) in uniteAdministratives" :key="unite.id">
-                
-                <td style="font-weight:bold;font-size:12px;text-align:center">{{unite.libelle}}</td>
-                <td
-                  style="font-weight:bold;font-size:12px;text-align:center"
-                >{{formatageSomme(budgetPersonnel(unite.id))}}</td>
-                <td
-                  style="font-weight:bold;font-size:12px;text-align:center"
-                >{{formatageSomme(budgetBienService(unite.id))}}</td>
-                <td
-                  style="font-weight:bold;font-size:12px;text-align:center"
-                >{{formatageSomme(budgetInverstisement(unite.id))}}</td>
-                <td
-                  style="font-weight:bold;font-size:12px;text-align:center"
-                >{{formatageSomme(budgetTranfert(unite.id))}}</td>
-
-                <td
-                  style="font-weight:bold;font-size:12px;text-align:center"
-                >{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id)))}}</td>
-                <td style="font-weight:bold;font-size:12px;text-align:center"
-                >{{formatageSomme(parseFloat(budgetConsommerTransfert(unite.id)) + parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerInvestissement(unite.id))+parseFloat(budgetConsommerPersonnelle(unite.id)))}}</td>
-                <td
-                  style="font-weight:bold;font-size:12px;text-align:center"
+              </table>
+             
+           
             
-                >{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id))-(parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))+ parseFloat(budgetConsommerPersonnelle(unite.id))))}}</td>
-                
-                <td style="font-weight:bold;font-size:12px;text-align:center">{{(((parseFloat(budgetConsommerPersonnelle(unite.id)) + parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))) / (parseFloat(MontantTotalPargdeNature(unite.id)))) * 100).toFixed(2)|| 0}}%</td>
-          
-             <td>
-               
-                <button
-                        class="btn btn-info"
-                        @click="afficherModalModifierUniteAdministrative(index)"
-                      >
-                        <span>
-                          <i class="icon-share-alt"></i>
-                        </span>
-                      </button>
-              
-             </td>
-              </tr>
-
-              <!-- <tr>
-                <td style="background: orangered;color:#fff">Total Budget des  UA</td>
-
-                <td
-                  style="text-align: center;color:red;font-weight:bold;font-size:12px;text-align:center"
-                >{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel))}}</td>
-
-                <td
-                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
-                >{{formatageSomme(parseFloat(afficherTotalBudgetModuleBienService))}}</td>
-
-                <td
-                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
-                >{{formatageSomme(parseFloat(afficherTotalBudgetModuleInvestissement))}}</td>
-
-                <td
-                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
-                >{{formatageSomme(parseFloat(afficherTotalBudgetModuleTransfert))}}</td>
-
-                <td
-                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
-                > {{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) }}</td>
-
-                <td
-                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
-                >{{formatageSomme(parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal))}}</td>
-
-                <td
-                  style="text-align: center;color:red;font-weight:bold;font-size:15px"
-                > {{formatageSomme((parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) - (parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)) )}}</td>
-
-                <td
-                  style="text-align: center;color:red;font-weight:bold;font-size:15px" 
-                > {{((parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)) / (parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) * 100 ) || 0}}</td>
-              </tr>  -->
-              
-              
-            </tbody>
-          </table>
-         
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -355,11 +196,16 @@
 
     import { mapGetters, mapActions } from "vuex";
     import { formatageSomme } from "../../Repositories/Repository";
+    import {  ModelListSelect } from 'vue-search-select'
+    import 'vue-search-select/dist/VueSearchSelect.css'
+    import jsPDF from 'jspdf'
+import 'jspdf-autotable'
     //import ProgressBar from "../component/ProgressBar"
     export default {
         name: 'budget',
         components:{
             //ProgressBar
+            ModelListSelect
         },
         data() {
             return {
@@ -370,7 +216,6 @@
                     }
 
                 ],
-                editUniteAdministrative:{},
                 detailBudget:"",
                 budgetGeneralCharge:"",
                 progress:0,
@@ -428,7 +273,7 @@
                 "exercices_budgetaires"
             ]),
 
-
+       
  filtre_type_teste() {
       return id2 => {
         if (id2 != null && id2 != "") {
@@ -563,12 +408,12 @@
                 }
             },
 
- 
+
             
     budgetConsommerTransfert() {
       return id => {
         if (id != "") {
-          return this.afficheTransfertValider
+          var montant = this.afficheTransfertValider
             .filter(element => element.ua_id == id)
             .reduce(
               (prec, cur) =>
@@ -576,6 +421,8 @@
               0
             )
             .toFixed(0);
+             if(isNaN(montant)) return 0
+            return montant
         }
       };
     },
@@ -584,13 +431,15 @@
  budgetConsommerBienService() {
       return id => {
         if (id != "") {
-          return this.getMandatPersonnaliserVise
+          var montant = this.getMandatPersonnaliserVise
             .filter(element => element.ua_id == id && element.typemarche == 2)
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
               0
             )
             .toFixed(0);
+             if(isNaN(montant)) return 0
+            return montant
         }
       };
     },
@@ -598,76 +447,72 @@
     budgetConsommerInvestissement() {
       return id => {
         if (id != "") {
-          return this.getMandatPersonnaliserVise
+          var montant = this.getMandatPersonnaliserVise
             .filter(element => element.ua_id == id && element.typemarche == 1)
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
               0
             )
             .toFixed(0);
+            if(isNaN(montant)) return 0
+            return montant
         }
       };
     },
  budgetConsommerPersonnelle() {
       return id => {
         if (id != "") {
-          return this.getMandatPersonnaliserPersonnel
+          var montant = this.getMandatPersonnaliserPersonnel
             .filter(element => element.ua_id == id && element.marchetype == "perso")
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
               0
             )
             .toFixed(0);
+             if(isNaN(montant)) return 0
+            return montant
         }
       };
     },
-  budgetConsommerPersonnelGlobal() {
-      
-          return this.getMandatPersonnaliserPersonnel
-            .filter(element => element.marchetype == "perso")
-            .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
-              0
-            )
-            .toFixed(0);
-        
-      
-    },
+
 //
 
    budgetConsommerInvestissementGlobal() {
       
-          return this.getMandatPersonnaliserVise
+          var montant = this.getMandatPersonnaliserVise
             .filter(element => element.typemarche == 1)
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
               0
             )
             .toFixed(0);
-        
+         if(isNaN(montant)) return 0
+            return montant
       
     },
     
 
      budgetConsommerBienServiceGlobal() {
-          return this.getMandatPersonnaliserVise
+          var montant = this.getMandatPersonnaliserVise
             .filter(element => element.typemarche == 2)
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
               0
             )
             .toFixed(0);
-      
+      if(isNaN(montant)) return 0
+            return montant
     },
 
              
     budgetConsommerTransfertGlobal() {
     
-          return this.afficheTransfertValider.reduce( (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat),
+          var montant = this.afficheTransfertValider.reduce( (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat),
               0
             )
             .toFixed(0);
-      
+      if(isNaN(montant)) return 0
+            return montant
     },
 
     MontantTotalPargdeNature() {
@@ -693,9 +538,7 @@
       );
 
       return activeBudget;
-    },
-
-     
+    }
 
         },
         methods: {
@@ -713,20 +556,6 @@
                 "getAllHistoriqueBudgetGeneral",
                 "modifierLigneExempter",
             ]),
-
-
- afficherModalModifierUniteAdministrative(index) {
-      this.$("#modificationModal").modal({
-        backdrop: "static",
-        keyboard: false
-      });
-
-      this.editUniteAdministrative = this.uniteAdministratives[index];
-    },
-
-
-
-
             formatageSomme: formatageSomme,
             OnchangeFichier(e) {
                 const files = e.target.files;
@@ -779,7 +608,17 @@
             
 
 
+   genererEnPdf(){
+  var doc = new jsPDF('landscape')
+  
+  doc.text(98,10,"BUDGET DETAILLE PAR UA")
+  doc.autoTable({html:'#Exo'})
+ 
+doc.save('BudgetDetail.pdf')
+return 0
 
+
+},
 
    
   },
@@ -846,9 +685,11 @@
   width: 1300px;
   margin: 0 -690px;
 }
-.tabFormulaire{
-   width: 1300px;
-   margin: 80px -690px;
-  
+.marquee-rtl {
+  max-width: 30em;                      /* largeur de la fenêtre */
+  margin: 1em auto 2em;
+  border: 10px solid #F0F0FF;
+  overflow: hidden;                     /* masque tout ce qui dépasse */
+  box-shadow: 0 .25em .5em #CCC,inset 0 0 1em .25em #CCC;
 }
 </style>
