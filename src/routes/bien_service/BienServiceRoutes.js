@@ -66,6 +66,7 @@ import PlanPassationMarche from "../../pages/bien_service/ppm/PlanPassationMarch
 import DetailPPM from "../../pages/bien_service/ppm/DetailPPM";
 import detailMarcheFsqc from "../../pages/bien_service/dossierFSQC/detailMarcheFsqc";
 import detailMarcheR3cv from "../../pages/bien_service/dossierR3CV/detailMarcheR3cv";
+import CycleDeVie from "../../pages/cycle_de_vie/CycleDeVie.vue"
 const BienServiceRoutes = [
    /* {
 
@@ -464,6 +465,12 @@ const BienServiceRoutes = [
         path:"/ppm/:id",
         name:"DetailPPM",
         component:DetailPPM
+    }
+    ,
+    {
+        path:"/cycle_de_vie/:id",
+        name:"CycleDeVie",
+        component:CycleDeVie
     }
 
 ]
