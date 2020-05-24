@@ -789,7 +789,7 @@ return this.paiementPersonnel.filter((item) => {
        fichierjoint:""
        
        
-      };
+      }
     },
     // fonction pour vider l'input modifier
     modifierpaiementPersonnelLocal() {
