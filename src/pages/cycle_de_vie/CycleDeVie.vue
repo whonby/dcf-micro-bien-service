@@ -790,7 +790,7 @@
                         doc.addImage(img, 'PNG', 0, position, imgWidth, imgHeight);
                         heightLeft -= pageHeight;
                     }
-                    doc.save( 'file.pdf');
+                    doc.save( 'file.pdf')
                 })
             },
             // formaterDate(date) {

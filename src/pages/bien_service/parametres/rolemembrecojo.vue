@@ -13,8 +13,9 @@
         
                                               <div>
 
+
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste de role membre Cojo "
@@ -24,6 +25,9 @@
                        <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
+                                 <div align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+          </div> 
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
@@ -34,6 +38,18 @@
           </div>
              
           </div>
+          
+          <div class="span4">
+                    <br>
+                    Afficher
+                    <select name="pets" id="pet-select" v-model="size" class="span3">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    Entrer
+                </div>
          
            <div class="widget-content nopadding">
             <table class="table table-bordered table-striped">
@@ -46,7 +62,7 @@
               </thead>
               <tbody>
                 <tr class="odd gradeX" v-for="(role, index) in
-                 roleFiltre"
+                 partition(roleFiltre,size)[page]"
                  :key="role.id">
                   <td @dblclick="afficherModalModifierType(index)">
                     {{role.code || 'Non renseigné'}}</td>
@@ -67,15 +83,18 @@
                 </tr>
               </tbody>
             </table>
-           
-           
-           
-           
-      
-           
-           
           </div>
         </div>
+
+           <div class="pagination alternate">
+              <ul>
+                <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                   <li  v-for="(titre, index) in partition(roleFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+                   <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                <li :class="{ disabled : page == partition(roleFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+              </ul>
+           </div>
       </div>
               </div>
             </div>
@@ -175,10 +194,16 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+ import {partition} from '../../../../src/Repositories/Repository'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   
   data() {
     return {
+      page:0,
+      size:10,
+      active_el:0,
       json_fields:{
         'Code':'code',
         'Libelle':'libelle'
@@ -235,7 +260,45 @@ return this.role_membrecojo.filter((item) => {
   methods: {
     // methode pour notre action
    ...mapActions('bienService', ['ajouterRolemembreCojo', 
-   'supprimerRolemembreCojo','modifierRolemembreCojo']),   
+   'supprimerRolemembreCojo','modifierRolemembreCojo']),
+   
+    //pagination
+  partition:partition,
+
+getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+
+   
+    // importation en pdf
+     genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.role_membrecojo;
+    doc.text(98,10,"Listes role membre cojo")
+  doc.autoTable(this.getColumns(),data)
+//doc.save('grande_nature_depense.pdf')
+ doc.output('save','role_membre_cojo.pdf')
+ doc.output('dataurlnewwindow')
+return 0
+},
+getColumns() {
+    return [
+        {title: "CODE", dataKey: "code"},
+        {title: "LIBELLE", dataKey: "libelle"},
+        
+        
+    ];
+},
    
     afficherModalAjouterRolemembreCojo(){
        this.$('#exampleModal').modal({
