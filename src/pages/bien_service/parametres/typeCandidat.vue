@@ -76,27 +76,53 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          <!-- <download-excel
-            class="btn btn-default pull-right"
+          <div>
+           <download-excel
+            class="btn btn-success pull-right"
             style="cursor:pointer;"
             :fields="json_fields"
-            title="Liste Types Ã©quipements"
+            title="Liste des types de Candidats"
             :data="typeCandidatFiltre"
-            name="Liste des types Ã©quipements"
+            name="Liste des types de Candidats"
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-          </download-excel> -->
+          </download-excel>
+
+         <div align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+          </div> 
+
+          </div>
+
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
               <h5>Liste type candidat</h5>
+
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>
+
+               <div class="span4">
+    <br>
+    
+    Afficher
+    <select name="pets" id="pet-select" v-model="size" class="span3">
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+    </select>
+    Entrer
+</div>
+
+
+
+
 
             <div class="widget-content nopadding">
               <table class="table table-bordered table-striped">
@@ -108,9 +134,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(typeappel, index) in 
-                typeCandidatFiltre"
-                 :key="typeappel.id">
+                  <tr class="odd gradeX" v-for="(typeappel, index) in partition (typeCandidatFiltre,size)[page]" :key="typeappel.id">
 
                  <td @dblclick="afficherModalAjoutertypecandiadt(index)">
                       {{typeappel.libelle || 'Non renseigné'}}</td>
@@ -133,6 +157,16 @@
               
             </div>
           </div>
+          <div class="pagination alternate">
+       <ul>
+         <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+            <li  v-for="(titre, index) in partition(typeCandidatFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+            <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+         <li :class="{ disabled : page == partition(typeCandidatFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+       </ul>
+    </div>
+
+
         </div>
       </div>
     </div>
@@ -147,10 +181,17 @@
   
 <script>
  import { mapGetters, mapActions } from "vuex";
+ import {partition} from '../../../../src/Repositories/Repository'
+ import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   name:'banque',
   data() {
     return {
+       page:0,
+       size:10,
+       active_el:0,
+
       fabActions: [
         {
           name: "cache",
@@ -163,10 +204,9 @@ export default {
         //   class: ""
         // }
       ],
-    //   json_fields: {
-    //     CODE: "code",
-    //     LIBELLE: "libelle"
-    //   },
+      json_fields: {
+        LIBELLE: "libelle"
+      },
 
       formData: {
         libelle:""
@@ -194,6 +234,44 @@ export default {
   methods: {
     ...mapActions("bienService", ["ajouterTypeCandidat", "modifierTypeCandidat","supprimerTypeCandidat"
     ]),
+
+          genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.typeCandidatFiltre;
+    doc.text(98,10,"Listes des types de Candidats")
+  doc.autoTable(this.getColumns(),data)
+// doc.save('Type de Candidat.pdf')
+doc.output('save','Type de Candidat.pdf');
+doc.output('dataurlnewwindow');
+return 0
+},
+getColumns() {
+    return [
+        {title: "LIBELLE", dataKey: "libelle"},
+       
+    ];
+},
+
+// pagination
+
+partition:partition,
+
+  getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+
+
+
     //afiicher modal ajouter
     afficherModalAjouterTitre() {
       this.$("#exampleModal").modal({

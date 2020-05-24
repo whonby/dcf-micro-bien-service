@@ -77,16 +77,23 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          <!-- <download-excel
-            class="btn btn-default pull-right"
+          <div>
+           <download-excel
+            class="btn btn-success pull-right"
             style="cursor:pointer;"
             :fields="json_fields"
-            title="Liste Types équipements"
-            :data="filtre_equipement"
-            name="Liste des types équipements"
+            title="Liste de Type d'analyse"
+            :data=" typeAnalyseFiltre"
+            name="Liste des types d'analyse"
           >
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-          </download-excel> -->
+          </download-excel> 
+       <div align="right" style="cursor:pointer;">
+         <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+       </div> 
+
+
+          </div>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
@@ -99,6 +106,19 @@
               </div>
             </div>
 
+          <div class="span4">
+         <br>
+        Afficher
+          <select name="pets" id="pet-select" v-model="size" class="span3">
+           <option value="10">10</option>
+           <option value="25">25</option>
+           <option value="50">50</option>
+           <option value="100">100</option>
+         </select>
+        Entrer
+       </div>
+
+
             <div class="widget-content nopadding">
               <table class="table table-bordered table-striped">
                 <thead>
@@ -108,9 +128,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(typeAnalyse, index) in 
-                typeAnalyseFiltre"
-                 :key="typeAnalyse.id">
+                  <tr class="odd gradeX" v-for="(typeAnalyse, index) in partition (typeAnalyseFiltre,size)[page]" :key="typeAnalyse.id">
+                 
                  <td @dblclick="afficherModalModifierTypeAnalyse(index)">
                    {{typeAnalyse.libelle || 'Non renseigné'}}</td>
                   
@@ -128,6 +147,18 @@
               
             </div>
           </div>
+
+        <div class="pagination alternate">
+          <ul>
+         <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+         <li  v-for="(titre, index) in partition(typeAnalyseFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+         <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+        <li :class="{ disabled : page == partition(typeAnalyseFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+        </ul>
+      </div>
+
+
+
         </div>
       </div>
     </div>
@@ -142,10 +173,18 @@
   
 <script>
  import { mapGetters, mapActions } from "vuex";
+ import {partition} from '../../../../src/Repositories/Repository'
+   import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   name:'type facture',
   data() {
     return {
+       page:0,
+       size:10,
+       active_el:0,
+
+
       fabActions: [
         {
           name: "cache",
@@ -158,10 +197,9 @@ export default {
         //   class: ""
         // }
       ],
-    //   json_fields: {
-    //     CODE: "code",
-    //     libelle: "libelle"
-    //   },
+      json_fields: {
+        libelle: "libelle"
+      },
 
       formData: {
         	libelle:""
@@ -199,6 +237,41 @@ return this.typeAnalyses.filter((item) => {
     'supprimertypeAnalyse'
      
     ]),
+             genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.typeAnalyseFiltre;
+    doc.text(98,10,"Liste des types d'analyse")
+  doc.autoTable(this.getColumns(),data)
+// doc.save('Type des Analyses.pdf')
+doc.output('save','Type des Analyses.pdf');
+doc.output('dataurlnewwindow');
+return 0
+},
+getColumns() {
+    return [
+        {title: "LIBELLE", dataKey: "libelle"},
+       
+    ];
+},
+// pagination
+
+partition:partition,
+
+  getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+
+
     //afiicher modal ajouter
     afficherModalAjouTypeAnalyse() {
       this.$("#exampleModal").modal({

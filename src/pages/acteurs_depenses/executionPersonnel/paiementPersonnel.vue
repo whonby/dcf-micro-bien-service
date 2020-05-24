@@ -1048,28 +1048,8 @@ return this.paiementPersonnel.filter((item) => {
     },
     // fonction pour vider l'input modifier
     modifierpaiementPersonnelLocal() {
-        //  var nouvelObjet = {
-        // ...this.editUniteAdministrative,
-        // code: this.codeuniteadministrativeModifier,
-        // code_ua: this.codeuniteadministrativeModifier2
-      // };
-      // this.modifierpaiementpersonnel(nouvelObjet);
 this.$("#modificationModal").modal('hide');
-      // this.editpaiementPersonnel = {
-        //  exercice_en_cours: "",
-        //  
-        //  activite_id: "",
-        //  programme_id: "",
-        //  action_id:"",
-        //  ua_id: "",
-        //  moispaiement: "",
-        //  montantsalaire: "",
-          // objetdepense:"",
-          // ligne_id:"",
-          // fichierjoint:""
 
-        // 
-      // };
     },
     // afficher modal de modification
     afficherModalModifierpaiementPersonnel(index) {

@@ -36,7 +36,7 @@
 
 <div id="modalDecisionChefProjet" class="modal hide">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
+        <button data-dismiss="modal" class="close" type="button">ï¿½</button>
         <h3>Ajouter Observation du Chef de projet</h3>
       </div>
       <div class="modal-body">
@@ -84,6 +84,8 @@
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
+
+
 <div id="ajouterMP1" class="modal hide tailgrand">
   <div class="row-fluid">
         <div class="span12">
@@ -530,7 +532,11 @@
           </div>
         </div>
       </div>
+      
 </div>
+
+
+
 
                             <table class="table table-bordered table-striped" v-if="PaiementPersoid">
                                             <thead>
@@ -552,19 +558,19 @@
                 </thead>
                 <tbody>
                    <tr class="odd gradeX" v-for="(item,index) in listeOrdrePaiement(PaiementPersoid)" :key="item.id">
-                                    <td>{{item.exerciceencours || 'Non renseign&eacute;'}}</td>
-                                    <td>{{afficherLibelleUa(item.ua_id) || 'Non renseign&eacute;'}}</td>
-                                     <td>{{afficherLibelleProgramme(item.programme_id) || 'Non renseign&eacute;'}}</td>
-                                    <td>{{afficherLibelleAction(item.action_id) || 'Non renseign&eacute;'}}</td>
+                                    <td @click="afficherModalModifierTitre(item.id)" >{{item.exerciceencours || 'Non renseign&eacute;'}}</td>
+                                    <td @click="afficherModalModifierTitre(item.id)">{{afficherLibelleUa(item.ua_id) || 'Non renseign&eacute;'}}</td>
+                                     <td @click="afficherModalModifierTitre(item.id)">{{afficherLibelleProgramme(item.programme_id) || 'Non renseign&eacute;'}}</td>
+                                    <td @click="afficherModalModifierTitre(item.id)">{{afficherLibelleAction(item.action_id) || 'Non renseign&eacute;'}}</td>
                                     
-                                     <td>{{afficherLibelleActivite(item.activite_id) || 'Non renseign&eacute;'}}</td>
-                                    <td>{{afficherLibelleLigne(item.ligne_id) || 'Non renseign&eacute;'}}</td>
+                                     <td @click="afficherModalModifierTitre(item.id)">{{afficherLibelleActivite(item.activite_id) || 'Non renseign&eacute;'}}</td>
+                                    <td @click="afficherModalModifierTitre(item.id)">{{afficherLibelleLigne(item.ligne_id) || 'Non renseign&eacute;'}}</td>
                                     
-                                     <td>{{item.objetdepense || 'Non renseign&eacute;'}}</td>
-                                    <td>{{item.moisdepaiement || 'Non renseign&eacute;'}}</td>
+                                     <td @click="afficherModalModifierTitre(item.id)">{{item.objetdepense || 'Non renseign&eacute;'}}</td>
+                                    <td @click="afficherModalModifierTitre(item.id)">{{item.moisdepaiement || 'Non renseign&eacute;'}}</td>
                                     
-                                     <td>{{formatageSomme(parseFloat(item.total_general)) || 'Non renseign&eacute;'}}</td>
-                                    <td>{{item.fichierjoint || 'Non renseign&eacute;'}}</td>
+                                     <td @click="afficherModalModifierTitre(item.id)">{{formatageSomme(parseFloat(item.total_general)) || 'Non renseign&eacute;'}}</td>
+                                    <td @click="afficherModalModifierTitre(item.id)">{{item.fichierjoint || 'Non renseign&eacute;'}}</td>
                                    
                                      <td>
                        <button v-if="item.motif_chef_projet == 1"  class="btn  btn-success"  @click="afficherModalObservationChefProjet(index)" >                        
@@ -653,7 +659,10 @@ fabActions: [
 
 
  },
-editOrdrePaiement:{}
+editOrdrePaiement:{
+
+  
+}
 
             
 
@@ -1050,6 +1059,19 @@ editOrdrePaiement:{}
       "ajouterordrepaiement",
       "modifierordrepaiement"
     ]),
+//     modifierOrdrepaiementLocal() {
+// this.$("#modificationModal").modal('hide');
+
+//     },
+
+  //  afficherModalModifierTitre(index) {
+    // this.$("#modificationModal").modal({
+      // backdrop: "static",
+      // keyboard: false
+    // });
+    // this.editOrdrePaiement = this.listeOrdrePaiement(this.PaiementPersoid)[index];
+  // },
+// 
      
  afficheToiSiPaiementNonVise(){
               if(this.afficheButton(this.PaiementPersoid) == 0){
