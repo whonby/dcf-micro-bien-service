@@ -230,7 +230,9 @@ export default {
    var data = this.villes;
     doc.text(98,10,"Listes des villes")
   doc.autoTable(this.getColumns(),data)
-doc.save('Villes.pdf')
+// doc.save('Villes.pdf')
+doc.output('save','Villes.pdf');
+doc.output('dataurlnewwindow');
 return 0
 },
 getColumns() {

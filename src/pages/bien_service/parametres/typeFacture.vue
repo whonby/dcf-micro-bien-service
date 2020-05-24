@@ -105,6 +105,22 @@
               </div>
             </div>
 
+         <div class="span4">
+            <br>
+    
+         Afficher
+           <select name="pets" id="pet-select" v-model="size" class="span3">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+           </select>
+          Entrer
+        </div>
+
+
+
+
             <div class="widget-content nopadding">
               <table class="table table-bordered table-striped">
                 <thead>
@@ -114,9 +130,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(typeFacture, index) in 
-                typeFacturesFiltre"
-                 :key="typeFacture.id">
+                  <tr class="odd gradeX" v-for="(typeFacture, index) in partition (typeFacturesFiltre,size)[page]" :key="typeFacture.id">
+                
                  <td @dblclick="afficherModalModifierTypefactiure(index)">
                    {{typeFacture.libelle || 'Non renseigné'}}</td>
                   
@@ -137,6 +152,15 @@
               
             </div>
           </div>
+     <div class="pagination alternate">
+       <ul>
+     <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+        <li  v-for="(titre, index) in partition(typeFacturesFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+        <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+     <li :class="{ disabled : page == partition(typeFacturesFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+     </ul>
+    </div>
+
         </div>
       </div>
     </div>
@@ -151,12 +175,18 @@
   
 <script>
  import { mapGetters, mapActions } from "vuex";
+ import {partition} from '../../../../src/Repositories/Repository'
   import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 export default {
   name:'type facture',
   data() {
     return {
+        page:0,
+        size:10,
+        active_el:0,
+
+
       fabActions: [
         {
           name: "cache",
@@ -215,7 +245,9 @@ return this.typeFactures.filter((item) => {
    var data = this.typeFacturesFiltre;
     doc.text(98,10,"Liste des types de factures")
   doc.autoTable(this.getColumns(),data)
-doc.save('Type de Facture.pdf')
+// doc.save('Type de Facture.pdf')
+doc.output('save','Type de Facture.pdf');
+doc.output('dataurlnewwindow');
 return 0
 },
 getColumns() {
@@ -224,6 +256,24 @@ getColumns() {
        
     ];
 },
+
+// pagination
+
+partition:partition,
+
+  getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+
 
 
     //afiicher modal ajouter

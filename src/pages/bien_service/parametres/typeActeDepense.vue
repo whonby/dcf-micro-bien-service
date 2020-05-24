@@ -104,6 +104,19 @@
                 <input type="search" placeholder v-model="search" />
               </div>
             </div>
+             
+            <div class="span4">
+            <br>
+    Afficher
+      <select name="pets" id="pet-select" v-model="size" class="span3">
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+     </select>
+   Entrer
+ </div>
+
 
             <div class="widget-content nopadding">
               <table class="table table-bordered table-striped">
@@ -115,9 +128,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd gradeX" v-for="(typeActe, index) in 
-                typeActeDepenseFiltre"
-                 :key="typeActe.id">
+                  <tr class="odd gradeX" v-for="(typeActe, index)  in partition (typeActeDepenseFiltre,size)[page]" :key="typeActe.id">
+                
                  <td @dblclick="afficherModalModifierTpeActeDepense(index)">
                    {{typeActe.libelle || 'Non renseigné'}}</td>
                   
@@ -136,6 +148,17 @@
               
             </div>
           </div>
+
+          <div class="pagination alternate">
+           <ul>
+            <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+            <li  v-for="(titre, index) in partition(typeActeDepenseFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+              <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+            <li :class="{ disabled : page == partition(typeActeDepenseFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+          </ul>
+        </div>
+
+
         </div>
       </div>
     </div>
@@ -150,12 +173,17 @@
   
 <script>
  import { mapGetters, mapActions } from "vuex";
+ import {partition} from '../../../../src/Repositories/Repository'
      import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 export default {
   name:'type acte depense',
   data() {
     return {
+         page:0,
+         size:10,
+         active_el:0,
+
       fabActions: [
         {
           name: "cache",
@@ -209,7 +237,9 @@ return this.typeActeDepenses.filter((item) => {
    var data = this.typeActeDepenseFiltre;
     doc.text(98,10,"Liste des types des actes depenses")
   doc.autoTable(this.getColumns(),data)
-doc.save('Type des actes de depenses.pdf')
+// doc.save('Type des actes de depenses.pdf')
+doc.output('save','Type des actes de depenses.pdf');
+doc.output('dataurlnewwindow');
 return 0
 },
 getColumns() {
@@ -218,6 +248,26 @@ getColumns() {
        
     ];
 },
+
+  // pagination
+
+partition:partition,
+
+  getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+
+
+
     //afiicher modal ajouter
     afficherModalAjouterTypeActeDepense() {
       this.$("#exampleModal").modal({
