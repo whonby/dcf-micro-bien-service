@@ -286,7 +286,13 @@ export function supprimerBanque({ commit, dispatch}, id) {
   
   }
   
+export  function  getSanction({commit}) {
 
+    queue.push(() => axios.get('/liste_sanction').then(response => {
+        commit('GET_SANCTION', response.data)
+    }).catch(error => console.log(error)));
+
+}
 
 // action pour compte
 
@@ -439,7 +445,7 @@ export function modifierEntreprise({ commit }, formData) {
             nbre_travailleur_journalier: formData.nbre_travailleur_journalier,
             service_assiette_impot: formData.service_assiette_impot,
             adresse: formData.adresse,
-
+active:formData.active
         }))
         .then(response => {
             commit("MODIFIER_ENTREPRISE", response.data);

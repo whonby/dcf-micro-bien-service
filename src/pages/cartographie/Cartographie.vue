@@ -78,7 +78,8 @@
                                     &lt;!&ndash;&ndash;&gt;
                                 </l-marker>-->
                             </v-marker-cluster>
-                        </l-map> </div>
+                        </l-map>
+                    </div>
                 </div>
             </div>
             <div class="span4">

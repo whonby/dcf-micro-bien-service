@@ -2,6 +2,9 @@
  * Mutation mode de passation
  */
 
+const GET_SANCTION = (state, data) => {
+    state.sanctions = data
+}
 
 const GET_MODE_PASSATION = (state, data) => {
     state.mode_passations = data
@@ -496,6 +499,7 @@ export const SUPPRIMER_AGENCE = (state, id) => {
 
 
 export {
+    GET_SANCTION,
     GET_MODE_PASSATION,
     AJOUTER_MODE_PASSATION,
     MODIFIER_MODE_PASSATION,

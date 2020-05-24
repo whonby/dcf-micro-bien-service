@@ -85,7 +85,7 @@
       <th height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">11</th> -->
  </tr>
                     <tr>
-    <th height="20px" colspan="2" style="color: #000000;font-size:14px">SOUS-TOTAL PERSONNEL</th>
+    <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUSTOTAL PERSONNEL">S.T.PERSONNEL</th>
     
      <td height="20px"></td>
      <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(AfficheMontantTresor)+parseFloat(AfficheMontantDon)+parseFloat(AfficheMontantEmprunt))}}</td>
@@ -134,7 +134,7 @@
      <th height="20px">78</th> -->
 </tr>
                    <tr>
-   <th height="20px" colspan="2" style="color: #000000;font-size:14px">SOUS-TOTAL  BIENS ET SERVICES</th>
+   <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="S.T.BIENS ET SERVICES">SOUS-TOTAL  BIENS ET SERVICES</th>
    
     <td height="20px"></td>
     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(AfficheMontantTresorBienEtService)+parseFloat(AfficheMontantDonBienEtService)+parseFloat(AfficheMontantEmpruntBienEtService))}}</td>
@@ -182,7 +182,7 @@
      <th height="20px"></th> -->
 </tr>
                    <tr>
-   <th height="20px" colspan="2" style="color: #000000;font-size:14px">SOUS-TOTAL TRANSFERT  </th>
+   <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUS-TOTAL TRANSFERT">S.T.TRANSFERT  </th>
    
     <td height="20px"></td>
    <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(AfficheMontantTresorTransfert)+parseFloat(AfficheMontantDonTransfert)+parseFloat(AfficheMontantEmpruntTransfert))}}</td>

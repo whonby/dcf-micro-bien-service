@@ -89,6 +89,7 @@
    
   
  
+
   export  const getMissionPersonnaliser = (state, getters,rootState, rootGetters) =>
   state.missions.map(element => {
       if(element.exercice_budgetaire_id !== null && element.acte_personnel_id !== null && element.ua_id !== null  
@@ -99,7 +100,7 @@
                   exo => exo.id == element.exercice_budgetaire_id
               ),
              objetActeurDepense:rootGetters['personnelUA/all_acteur_depense' ].find(
-                depens => depens.acte_personnel_id == element.acte_personnel_id
+                 depens => depens.acte_personnel_id == element.acte_personnel_id
              ),
              objetUniteAdministrative:rootGetters['uniteadministrative/uniteAdministratives'].find(
                  plans => plans.id == element.ua_id
