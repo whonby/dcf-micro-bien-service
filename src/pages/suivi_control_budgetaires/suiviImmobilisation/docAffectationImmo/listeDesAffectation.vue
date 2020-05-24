@@ -200,13 +200,13 @@
                         <a data-toggle="tab" href="#tab46">Listes des services non Equipé  <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
                       </li>
                       <li class="">
-                        <a data-toggle="tab" href="#tab89">Equipements Non Couverts   <span class="badge badge-warning">{{NombreafficheEquipementNonCouvert}}</span></a>
+                        <a data-toggle="tab" href="#tab89">Equipements Non Couverts   <span class="badge badge-warning">{{NombreafficheEquipementNonCouvertService}}</span></a>
                       </li>
                        <li class="">
                         <a data-toggle="tab" href="#tab63">Listes des services Equipé     <span class="badge badge-info">{{NombreaffichePersonneEquipe}}</span></a>
                       </li>
                       <li class="">
-                        <a data-toggle="tab" href="#tab6396">Taux equipement des services    <span class="badge badge-success">{{NombreTauxequipementParAgent}}</span></a>
+                        <a data-toggle="tab" href="#tab6396">Taux equipement des services  </a>
                       </li>
                  
                     </ul>
@@ -1520,7 +1520,10 @@ cause_directeur:""
 ...mapGetters("personnelUA", ["acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
 
 
-
+NombreafficheEquipementNonCouvertService() {
+     
+         return this.servicesua.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+    },
 
  afficheService() {
       return id => {

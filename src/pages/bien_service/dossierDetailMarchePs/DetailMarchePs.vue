@@ -1,4 +1,5 @@
 isButtunAddDossierCandidat
+CodeExempte
 <template>
     
 
@@ -80,7 +81,8 @@ isButtunAddDossierCandidat
                                  <li class="active"><a data-toggle="tab" href="#tab0145">Publication de l'offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab01">Reception de l'offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab1">Attribution</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab17">Attribution</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab2">Bailleur</a></li>
                                
                                 
                             </ul>
@@ -111,7 +113,7 @@ isButtunAddDossierCandidat
                       <component-cotation :macheid="detail_marche"></component-cotation>
                          </div>
 
-                        <div id="tab1" class="tab-pane">
+                        <div id="tab17" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning">Ajouter</a>
@@ -120,6 +122,19 @@ isButtunAddDossierCandidat
 
                 </div>
                 <component-acte :macheid="detail_marche.id"></component-acte>
+
+                </div>
+
+
+                     <div id="tab2" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+
+
+                </div>
+                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
 
                 </div>
 
@@ -159,7 +174,9 @@ isButtunAddDossierCandidat
                                 <li class=""><a data-toggle="tab" href="#tab78932">Jugement</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab4110">Rapport Jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab178">Attribution</a></li>
-                               
+                                <li class=""><a data-toggle="tab" href="#tab0142">bailleur</a></li>
+
+                            
                                 
                             </ul>
                         </div>
@@ -252,6 +269,17 @@ isButtunAddDossierCandidat
                 <component-acte :macheid="detail_marche.id"></component-acte>
 
                 </div>
+                   <div id="tab0142" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+
+
+                </div>
+                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+
+                </div>
                          </div>
 
                          
@@ -274,6 +302,7 @@ isButtunAddDossierCandidat
                                 <li class=""><a data-toggle="tab" href="#tab9563"> Jugement des offres </a></li>
                                 <li class=""><a data-toggle="tab" href="#tab06125">Rapport d'évaluation</a></li>
                                <li class=""><a data-toggle="tab" href="#tab067458">Attribution de l'Offre</a></li>
+                               <li class=""><a data-toggle="tab" href="#tab0143723">bailleur</a></li>
                                 
                             </ul>
                         </div>
@@ -400,6 +429,16 @@ isButtunAddDossierCandidat
                 <component-acte :macheid="detail_marche.id"></component-acte>
 
                 </div>
+
+                  <div id="tab0143723" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+                </div>
+                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+
+                </div>
                          </div>
 
                         
@@ -407,6 +446,7 @@ isButtunAddDossierCandidat
                     </div>
                     
                     </template>
+                    
                     <template v-else-if="this.budgetDisponible < 100000000 ">
                     <div class="widget-box">
                         <div class="widget-title">
@@ -422,6 +462,7 @@ isButtunAddDossierCandidat
                                 <li class=""><a data-toggle="tab" href="#tab5498"> Jugement des offres </a></li>
                                 <li class=""><a data-toggle="tab" href="#tab0612">Rapport d'évaluation</a></li>
                                <li class=""><a data-toggle="tab" href="#tab06745">Attribution de l'Offre</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab01432">bailleur</a></li>
                                 
                             </ul>
                         </div>
@@ -555,6 +596,18 @@ isButtunAddDossierCandidat
                 <component-acte :macheid="detail_marche.id"></component-acte>
 
                 </div>
+
+                   <div id="tab01432" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+
+
+                </div>
+                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+
+                </div>
                          </div>
 
                         
@@ -587,7 +640,9 @@ isButtunAddDossierCandidat
                                       <li class=""><a data-toggle="tab" href="#tab28" title="demande ANO Bailleur"> D.Bailleur </a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab0008" title="ANO bailleur attribution">A.Bailleur </a></li> -->
 
-                                <li class=""><a data-toggle="tab" href="#tab1">Attribution</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab10">Attribution</a></li>
+
+                                <li class=""><a data-toggle="tab" href="#tab0143720">bailleur</a></li>
                                
                                 
                             </ul>
@@ -803,7 +858,7 @@ isButtunAddDossierCandidat
 
                 </div>
 
-                        <div id="tab1" class="tab-pane">
+                        <div id="tab10" class="tab-pane">
 
 
                 <component-acte :macheid="detail_marche.id"></component-acte>
@@ -812,6 +867,17 @@ isButtunAddDossierCandidat
 
 
 
+                   <div id="tab0143720" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+
+
+                </div>
+                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+
+                </div>
 
 
                 
@@ -864,7 +930,7 @@ import dossierCandidat from '../DossierPso/dossierCandidat/dossierCandidat'
      import componentPv from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
 import rapportOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuverture';
      
-//   import componentCotation from '../dossierDetailMarchePs/dossierComponentPs/componentCotation';
+   import componentBailleur from '../dossierDetailMarchePs/dossierBailleur/componentBailleur';
 //      import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
 //       import componentOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
 //       import componentAnalyse from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
@@ -914,7 +980,7 @@ dossierCandidat,
 componentPv,
  
            
-          
+     componentBailleur,     
             
             
        

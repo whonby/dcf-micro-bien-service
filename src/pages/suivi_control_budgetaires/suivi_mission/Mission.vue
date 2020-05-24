@@ -1,4 +1,6 @@
 
+NombreDemissionsParActeurDepense
+
 <template>
     <div class="container-fluid">
            
@@ -1247,6 +1249,19 @@ NombreDemissionsParActeurDepense(){
   }
 },
 
+// afficher ID acteur depense
+afficherIdActeurDepense(){
+  return id =>{
+    if(id!=null && id!=""){
+      let objetId = this.personnaliseActeurDepense.find(item =>item.id==id)
+      if(objetId){
+        return objetId.id
+      }
+      return null
+    }
+  }
+},
+
 nomParActeurDepense(){
  return acte_personnel_id => {
    if(acte_personnel_id !=""){
@@ -1270,6 +1285,7 @@ affichierActeurDepenseId() {
       };
     },
 
+
    
 afficherMatriculeActePersonnel() {
       return id => {
@@ -1277,7 +1293,7 @@ afficherMatriculeActePersonnel() {
            const qtereel = this.personnaliseActeurDepense.find(qtreel => qtreel.acte_personnel_id == id);
 
       if (qtereel) {
-        return qtereel.matricule;
+        return qtereel.matricule.concat('   =>   ', qtereel.nom.concat('', qtereel.prenom));
       }
       return 0
         }

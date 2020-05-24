@@ -1,9 +1,4 @@
-afficherQuantiteEnStock
-afficherQuantiteEnRequise
-afficherAffectationParFonction
-afficherQuantiteSortir
-afficherActeurDepenseMatricule
-afficherUniteAdministrative
+
 <template>
 
 <div>

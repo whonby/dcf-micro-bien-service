@@ -72,7 +72,7 @@
                                Selectionner l'entreprise:
                         <model-list-select style="background-color: rgb(255,255,255);"
                                            class="wide"
-                                           :list="entreprises"
+                                           :list="listeEntreprise"
                                            v-model="search"
                                            option-value="id"
                                            option-text="raison_sociale"
@@ -187,7 +187,7 @@
                                Selectionner l'entreprise:
                         <model-list-select style="background-color: rgb(255,255,255);"
                                            class="wide"
-                                           :list="entreprises"
+                                           :list="listeEntreprise"
                                            v-model="search"
                                            option-value="id"
                                            option-text="raison_sociale"
@@ -391,6 +391,14 @@ afficherIdEntreprise() {
             },
 
 
+ listeEntreprise () {
+                
+                        // console.log("Marche lettre inviation marche")
+        return this.entreprises.filter(idmarche => idmarche.active == 1)
+                     
+             
+            },
+
 
             afficherLibelleEntreprise() {
       return id => {
@@ -513,7 +521,7 @@ affichierReferenceAppelOffre() {
                const formData = new FormData();
                 formData.append('nom_person', this.editCotation.nom_person);
                 formData.append('contact', this.editCotation.contact);
-               formData.append('entreprise_id', this.formCotation.id);
+               formData.append('entreprise_id', this.editCotation.id);
                 formData.append('date_cotation', this.editCotation.date_cotation);
                 formData.append('marche_id', this.marcheid);
                 formData.append('ref_offre', this.editCotation.ref_offre);

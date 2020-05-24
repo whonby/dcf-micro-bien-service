@@ -85,7 +85,7 @@
       <th height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">11</th> -->
  </tr>
                     <tr>
-    <th height="20px" colspan="2" style="color: #000000;font-size:14px">SOUS-TOTAL PERSONNEL</th>
+    <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUSTOTAL PERSONNEL">S.T.PERSONNEL</th>
     
      <td height="20px"></td>
      <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(AfficheMontantTresor)+parseFloat(AfficheMontantDon)+parseFloat(AfficheMontantEmprunt))}}</td>
@@ -134,7 +134,7 @@
      <th height="20px">78</th> -->
 </tr>
                    <tr>
-   <th height="20px" colspan="2" style="color: #000000;font-size:14px">SOUS-TOTAL  BIENS ET SERVICES</th>
+   <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="S.T.BIENS ET SERVICES">SOUS-TOTAL  BIENS ET SERVICES</th>
    
     <td height="20px"></td>
     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(AfficheMontantTresorBienEtService)+parseFloat(AfficheMontantDonBienEtService)+parseFloat(AfficheMontantEmpruntBienEtService))}}</td>
@@ -182,7 +182,7 @@
      <th height="20px"></th> -->
 </tr>
                    <tr>
-   <th height="20px" colspan="2" style="color: #000000;font-size:14px">SOUS-TOTAL TRANSFERT  </th>
+   <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUS-TOTAL TRANSFERT">S.T.TRANSFERT  </th>
    
     <td height="20px"></td>
    <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(AfficheMontantTresorTransfert)+parseFloat(AfficheMontantDonTransfert)+parseFloat(AfficheMontantEmpruntTransfert))}}</td>
@@ -371,7 +371,7 @@ AfficheMontantTresor(){
   
   
     {
-    var montant = this.budgetGeneral.filter(element => element.gdenature_id == 2 && element.typefinancement_id == 14 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
+    var montant = this.budgetGeneral.filter(element =>element.actived==1 && element.gdenature_id == 2 && element.typefinancement_id == 14 && element.exercicebudget_id == this.anneeAmort && element.actived==1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
       if(isNaN(montant)) return null
       return montant
 
@@ -383,7 +383,7 @@ AfficheMontantDon(){
   
   
     {
-    var montant = this.budgetGeneral.filter(element => element.gdenature_id == 2 && element.typefinancement_id == 13 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
+    var montant = this.budgetGeneral.filter(element => element.actived==1 && element.gdenature_id == 2 && element.typefinancement_id == 13 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
       if(isNaN(montant)) return null
       return montant
 
@@ -395,7 +395,7 @@ AfficheMontantEmprunt(){
   
   
     {
-    var montant = this.budgetGeneral.filter(element => element.gdenature_id == 2 && element.typefinancement_id == 15 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
+    var montant = this.budgetGeneral.filter(element =>element.actived==1 && element.gdenature_id == 2 && element.typefinancement_id == 15 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
       if(isNaN(montant)) return null
       return montant
 

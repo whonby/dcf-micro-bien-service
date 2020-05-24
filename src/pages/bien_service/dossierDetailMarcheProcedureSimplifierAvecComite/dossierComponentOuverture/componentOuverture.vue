@@ -17,7 +17,7 @@
                       <thead>
                       <tr>
                            <th>Ref offre</th>
-                           <th>Montant </th>
+                           <th>Montant Confidentiel </th>
                           <th>Date Composition </th>
                           <th>Date ouverture</th>
                           <th>Nmbr particiapnt</th>
@@ -135,7 +135,7 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Montant</label>
+                        <label class="control-label">Montant Confidentiel</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -219,7 +219,7 @@
                     </div>
 
                      <div class="control-group">
-                        <label class="control-label">Montant</label>
+                        <label class="control-label">Montant Confidentiel</label>
                         <div class="controls">
                             <input
                                     type="text"

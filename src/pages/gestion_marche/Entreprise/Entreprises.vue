@@ -1,16 +1,93 @@
 
 <template>
     <div>
-
+ <div id="exampleModal" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>SANCTION</h3>
+      </div>
+      <div class="modal-body">
+           <table class="table table-bordered table-striped">
+         <tr>
+             <td>
+                  <div class="control-group">
+            <label class="control-label">Entreprise</label>
+            <div class="controls">
+              <input type="text" :value="entrepriseSetect.raison_sociale" class="span5" readonly />
+            </div>
+          </div>
+             </td>
+         </tr>
+          <tr>
+              <td>
+                  <div class="control-group">
+            <label class="control-label">Date debut sanction</label>
+            <div class="controls">
+              <input
+                type="date"
+               :value="getDateDebuSanction(entrepriseSetect.id)"
+                class="span5"
+                readonly
+              />
+            </div>
+          </div>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <div class="control-group">
+            <label class="control-label">Date fin sanction{{entrepriseSetect.id}}</label>
+            <div class="controls">
+              <input
+                type="date"
+               :value="getDateFinSanction(entrepriseSetect.id)"
+                class="span5"
+                readonly
+              />
+            </div>
+          </div>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <div class="control-group">
+            <label class="control-label">Cause</label>
+            <div class="controls">
+                <textarea readonly :value="getDateMotifSanction(entrepriseSetect.id)" cols="2" rows="2" class="span5"></textarea>
+              
+            </div>
+          </div>
+              </td>
+          </tr>
+           </table>
+      </div>
+      <div class="modal-footer">
+       
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
         <div class="container-fluid">
             <hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             <div class="widget-box">
                 <div class="widget-title">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#tab1">LISTE DE TOUTE LES ENTREPRISES</a></li>
-                        <li><a data-toggle="tab" href="#tab2">ENTREPRISE NON SANCTIONNEE</a></li>
-                        <li><a data-toggle="tab" href="#tab3">ENTREPRISE SANCTIONNEE</a></li>
+                        <li class="active"><a data-toggle="tab" href="#tab1">LISTE DE TOUTE LES ENTREPRISES  <span class="badge badge-inverse">{{nbreEntreprise}}</span></a></li>
+                        <li><a data-toggle="tab" href="#tab2">ENTREPRISE NON SANCTIONNEE  <span class="badge badge-inverse">{{nbreEntrepriseNonSanctionner}}</span></a></li>
+                        <li><a data-toggle="tab" href="#tab3">ENTREPRISE SANCTIONNEE  <span class="badge badge-inverse">{{nbreEntrepriseSanctionner}}</span></a></li>
                     </ul>
                 </div>
                 <div class="widget-content tab-content">
@@ -52,8 +129,15 @@
                                         <option value="100">100</option>
                                     </select>
                                     Entrer
-                                </div>
 
+                                   
+                                </div>
+<div  align="right">
+     <span style="color:#FF0000;text-align:center;font-size:14px;font-weight: bold;">ES:Entreprise Sanctionné</span> 
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span style="color:#006400;text-align:center;font-size:14px;font-weight: bold;">ENS:Entreprise Non Sanctionné</span> 
+&nbsp;&nbsp;&nbsp;
+</div>
                                     <div class="widget-content nopadding">
                                         <table class="table table-bordered table-striped">
                                             <thead>
@@ -67,7 +151,7 @@
                                                 <th>Ville</th>
                                                 <th>Email </th>
                                                 <th>Telephone</th>
-                                                <!-- <th>Banque</th> -->
+                                                <th>Statut</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
@@ -82,6 +166,8 @@
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{getVille(item.ville) || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.email || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.telephone || 'Non renseigné'}}</td>
+                                                <td v-if="item.active == 1" style="color:#006400;text-align:center;font-size:14px;font-weight: bold;">ENS</td>
+                                                 <td v-else  style="color:#FF0000;text-align:center;font-size:14px;font-weight: bold;">ES</td>  
                                                 <!-- <td @dblclick="afficherModalModifierTitre(item.id)">{{item.banque || 'Non renseigné'}}</td> -->
                                                 <td>
                                                     <div class="btn-group">
@@ -130,7 +216,7 @@
                                               title="Liste des entreprises non sanctionner "
                                               name ="Liste des entreprises non sanctionner"
                                               worksheet = "entreprise non sanctionner"
-                                            :data="nonSanctionner">
+                                            :data="S">
                     <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
@@ -169,12 +255,12 @@
                                             <th>Ville</th>
                                             <th>Email </th>
                                             <th>Telephone</th>
-                                            <!-- <th>Banque</th> -->
+                                            <th>Statut</th>
                                             <th>Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr class="odd gradeX" v-for="item in partition (nonSanctionner,size)[page]" :key="item.id">
+                                        <tr class="odd gradeX" v-for="item in partition (S,size)[page]" :key="item.id">
                                              <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_idu || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.raison_sociale || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_cc || 'Non renseigné'}}</td>
@@ -185,8 +271,10 @@
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.email || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.telephone || 'Non renseigné'}}</td>
                                             <!-- <td @dblclick="afficherModalModifierTitre(item.id)">{{item.banque || 'Non renseigné'}}</td> -->
+                                           <td v-if="item.active == 1" style="color:#006400;text-align:center;font-size:14px;font-weight: bold;">ENS</td>
+                                                 
                                             <td>
-                                                <div class="btn-group">showEntreprise
+                                                <div class="btn-group">
                                                     <a href="#myModal2" data-toggle="modal" class="btn btn-info" @click.prevent="showEntreprise(item.id)"><i class="icon-lock"></i></a>
                                                     <button @click.prevent="supprimerEntreprise(item.id)"  class="btn btn-danger ">
                                                         <span class=""><i class="icon-trash"></i></span></button>
@@ -203,9 +291,9 @@
                                  <div class="pagination alternate">
                                 <ul>
                                     <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
-                                    <li  v-for="(titre, index) in partition(nonSanctionner,size).length" :key="index" :class="{ active : active_el == index }">
+                                    <li  v-for="(titre, index) in partition(S,size).length" :key="index" :class="{ active : active_el == index }">
                                     <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
-                                    <li :class="{ disabled : page == partition(nonSanctionner,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+                                    <li :class="{ disabled : page == partition(S,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
 
                                 </ul>
                             </div>
@@ -266,8 +354,8 @@
                                                 <th>Ville</th>
                                                 <th>Email </th>
                                                 <th>Telephone</th>
-                                                <!-- <th>Banque</th> -->
-                                                <th>Action</th>
+                                               <th>Statut</th>
+                                                <th colspan="3">Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -282,6 +370,12 @@
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.email || 'Non renseigné'}}</td>
                                                 <td @dblclick="afficherModalModifierTitre(item.id)">{{item.telephone || 'Non renseigné'}}</td>
                                                 <!-- <td @dblclick="afficherModalModifierTitre(item.id)">{{item.banque || 'Non renseigné'}}</td> -->
+                                                <td v-if="item.active == 0" style="color:#FF0000;text-align:center;font-size:14px;font-weight: bold;">ES</td>
+        <td>
+  <a href="#exampleModal" data-toggle="modal" class="btn btn-info" @click.prevent="showEntreprise(item.id)"><i class="icon-eye-open" title="Voir la Cause"></i></a>
+</td>
+<td> <button @click.prevent="modifierModalActeEffetFinancierLocal2(item.id)"  class="btn btn-info"  title="Retirer la sanction">
+                <span class=""><i class="icon-unlock" ></i></span></button> </td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <button @click.prevent="supprimerEntreprise(item.id)"  class="btn btn-danger ">
@@ -423,8 +517,8 @@ import 'jspdf-autotable'
                     fin_sanction:"",
                     motif:""
                 },
-                entrepriseSetect:''
-
+                entrepriseSetect:'',
+entrepre:""
             };
         },
 
@@ -436,7 +530,7 @@ this.getEntreprise()
         },
         computed: {
 // methode pour maper notre guetter
-            ...mapGetters('gestionMarche', ['entreprises',"secteur_activites"]),
+            ...mapGetters('gestionMarche', ['entreprises',"secteur_activites","sanctions"]),
             ...mapGetters("bienService", ['villes','pays']),
             titreFiltres() {
 
@@ -455,7 +549,7 @@ this.getEntreprise()
                 )
 
             },
-            nonSanctionner() {
+            S() {
                 const searchTerm = this.search1.toLowerCase();
                 let ObjetEntreprise=this.entreprises.filter((idm)=>idm.active===1)
                 return ObjetEntreprise.filter((item) => {
@@ -490,6 +584,56 @@ this.getEntreprise()
                 )
 
             },
+nbreEntrepriseSanctionner(){
+return this.sanctionner.length;
+},
+nbreEntrepriseNonSanctionner(){
+return this.S.length;
+},
+nbreEntreprise(){
+return this.entreprises.length;
+},
+
+ getDateDebuSanction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sanctions.find(qtreel => qtreel.entreprise_id == id);
+
+      if (qtereel) {
+        return qtereel.debut_sanction;
+      }
+      return 'Non renseignÃ©'
+        }
+      };
+    },
+getDateFinSanction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sanctions.find(qtreel => qtreel.entreprise_id == id);
+
+      if (qtereel) {
+        return qtereel.fin_sanction;
+      }
+      return 'Non renseignÃ©'
+        }
+      };
+    },
+    getDateMotifSanction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sanctions.find(qtreel => qtreel.entreprise_id == id);
+
+      if (qtereel) {
+        return qtereel.motif;
+      }
+      return 'Non renseignÃ©'
+        }
+      };
+    },
+
+
+
+
              getSecteurActivite() {
       return id => {
         if (id != null && id != "") {
@@ -641,6 +785,7 @@ getColumns() {
                     }
                 }
                 this.ajouterSanction(formData,config)
+                
                 this.sanction= {
                     entreprise_id: "",
                         debut_sanction: "",
@@ -649,9 +794,30 @@ getColumns() {
                 }
                 this.getEntreprise()
 
-            }
+            },
+            modifierModalActeEffetFinancierLocal2(id){
+   
+    if ( confirm( "voulez-vous retirer la sanction ?") ) {
+// this.entrepriseSetect=this.entreprises.find(entre=>entre.id===id);
+this.entrepriseSetect=this.sanctionner.find(entre=>entre.id===id);
+      let decisionEntreprise = this.entreprises.find(marche=>marche.id==this.entrepriseSetect.id)
+         decisionEntreprise.active = 1
 
-        }
+    this.modifierEntreprise(decisionEntreprise)
+     this.getEntreprise()
+    }
+else{
+ // Code à éxécuter si l'utilisateur clique sur "Annuler" 
+}
+    }
+   
+   
+   
+   
+   
+},
+
+        
     };
 </script>
 
