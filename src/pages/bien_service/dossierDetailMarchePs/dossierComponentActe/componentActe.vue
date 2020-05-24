@@ -40,7 +40,7 @@ afficherBanqueDynamique
                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{afficherEntrepriseId(effetFinancier.entreprise_id) || 'Non renseigné'}}</td>
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{formatageSomme(parseFloat(effetFinancier.montant_ttc ))|| 'Non renseigné'}}</td>
+                            {{formatageSomme(parseFloat(effetFinancier.montant_act ))|| 'Non renseigné'}}</td>
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{formatageSomme(parseFloat(effetFinancier.avance_demarrage_ttc )) || 'Non renseigné'}}</td>
                             
@@ -296,7 +296,7 @@ afficherBanqueDynamique
                      <div class="control-group">
                         <label class="control-label">Montant acte/réel du marché (HT)</label>
                         <div class="controls">
-                            <input type="text" v-model="formEffetFinancier.montant_act"
+                            <input type="text" v-model="formEffetFinancier.montant_ttc"
                                     class="span"
                                     placeholder="Saisir le montant "
                             />
@@ -618,7 +618,7 @@ afficherBanqueDynamique
                       <div class="control-group">
               <label class="control-label">Compte:</label>
               <div class="controls " >
-            <input type="text"  class="span" :value="afficherLeCompteEnFonctionDeLaBanque(formEffetFinancier.banq_id)" readonly >
+            <input type="text"  class="span" :value="afficherLeCompteEnFonctionDeLaBanque(editActeEffetFinancier.banq_id)" readonly >
       
               </div>
             </div>
@@ -765,7 +765,7 @@ afficherBanqueDynamique
                             </td>
                             <td>
                      <div class="control-group">
-                        <label class="control-label">Incidence financière</label>
+                        <label class="control-label">Montant Avance de demarrage</label>
                         <div class="controls">
                             <!-- <select  v-model="editActeEffetFinancier.incidence_financiere" class="span">
                                <option value="0">Oui</option>
@@ -785,7 +785,7 @@ afficherBanqueDynamique
                      <div class="control-group">
                         <label class="control-label">Montant acte/réel du marché</label>
                         <div class="controls">
-                            <input type="text" v-model="editActeEffetFinancier.montant_act"
+                            <input type="text" v-model="editActeEffetFinancier.montant_ttc"
                                     class="span"
                                     placeholder="Saisir le montant "
                             />
@@ -1358,7 +1358,7 @@ affcherTauxEnCours() {
 
 
     montantTva() {
-      const val = parseFloat((this.formEffetFinancier.montant_act) * parseFloat(this.afficherEnorere)/100);
+      const val = parseFloat((this.formEffetFinancier.montant_ttc) * parseFloat(this.afficherEnorere)/100);
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -1368,7 +1368,7 @@ affcherTauxEnCours() {
     },
 
     editMontantTva(){
-      const resulta = parseFloat ((this.editActeEffetFinancier.montant_act) * parseFloat(this.editAfficherEnorere)/100)
+      const resulta = parseFloat ((this.editActeEffetFinancier.montant_ttc) * parseFloat(this.editAfficherEnorere)/100)
        if(resulta){
          return parseInt(resulta).toFixed(0)
        }
@@ -1377,7 +1377,7 @@ affcherTauxEnCours() {
 
 
    editMontantHTt(){
-     let anwser = parseFloat(this.editActeEffetFinancier.montant_act) + parseFloat(this.editMontantTva)
+     let anwser = parseFloat(this.editActeEffetFinancier.montant_ttc) + parseFloat(this.editMontantTva)
      if(anwser){
        return parseInt(anwser).toFixed(0);
      }
@@ -1388,7 +1388,7 @@ affcherTauxEnCours() {
 
 
      montantHTt() {
-      const val = parseFloat(this.formEffetFinancier.montant_act) + parseFloat(this.montantTva);
+      const val = parseFloat(this.formEffetFinancier.montant_ttc) + parseFloat(this.montantTva);
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -1674,7 +1674,7 @@ getDateFinExécutionValueEdit(){
             duree: this.nombreDejourCalcule,
             taux:this.afficherEnorere,
             tva:this.montantTva,
-            montant_ttc:this.montantHTt,
+            montant_act:this.montantHTt,
            avance_demarrage_ttc:this.avanceDemarrage,
            tva_avance_demarage:this.avanceDemarrageMontantTva,
             entreprise_id:this.affichierNomEntreprise.entreprise_id,
@@ -1730,7 +1730,7 @@ modifierModalActeEffetFinancierLocal(){
   var nouvelObjet2 = {
             ...this.editActeEffetFinancier,
             duree: this.nombreDejourCalculeEdit,
-            montant_ttc:this.editMontantHTt,
+            montant_act:this.editMontantHTt,
              tva:this.editMontantTva,
              taux:this.editAfficherEnorere,
              avance_demarrage_ttc:this.editAvanceDemarrage,
