@@ -340,7 +340,7 @@ anneeAmort() {
       return 0
     },
 
-nombreDeFonction() {
+normeDuService() {
       return id => {
         if (id != null && id != "") {
           return this.normeImmo.filter(element => element.service_id == id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.norme),0).toFixed(0);
@@ -405,8 +405,8 @@ verroService() {
     ajouterUniteAdministrativeLocal() {
      var objetService = {
        ...this.formData,
-       normeequipement:this.nombreDeFonction(this.formData.serviceua_id),
-       historiqueequipement:this.nombreDeFonction(this.formData.serviceua_id),
+       normeequipement:this.normeDuService(this.formData.serviceua_id),
+       historiqueequipement:this.normeDuService(this.formData.serviceua_id),
        montantequipement:this.montantPourEtreEquipe(this.formData.serviceua_id),
        exercicebudget:this.anneeAmort
      }
@@ -428,8 +428,8 @@ verroService() {
     modifierUniteAdministrativeLocal() {
       var objetService = {
        ...this.editTransfert,
-       normeequipement:this.nombreDeFonction(this.editTransfert.serviceua_id),
-       historiqueequipement:this.nombreDeFonction(this.editTransfert.serviceua_id),
+       normeequipement:this.normeDuService(this.editTransfert.serviceua_id),
+       historiqueequipement:this.normeDuService(this.editTransfert.serviceua_id),
        montantequipement:this.montantPourEtreEquipe(this.editTransfert.serviceua_id),
        exercicebudget:this.anneeAmort
      }

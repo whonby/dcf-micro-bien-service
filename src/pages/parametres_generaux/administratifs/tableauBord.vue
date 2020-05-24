@@ -11,8 +11,17 @@
 <!--Action boxes-->
   <div class="container-fluid">
     <div class="quick-actions_homepage">
-      <h4 style="text-align: center;color:red;font-weight:bold;font-size:15px">TABLEAUX DE BORD</h4>
-
+      <h4 style="text-align: center;color:red;font-weight:bold;font-size:15px">TABLEAU DE BORD</h4>
+ <!-- <div class="flex">
+    <div class="square S" ><p>TA</p></div>
+    <div class="square I"><p>BL</p></div>
+    <div class="square D"><p>EAU</p></div>
+    <div class="square"><p></p></div>
+    <div class="square C"><p>DE</p></div>
+    <div class="square F"><p></p></div>
+    <div class="square F"><p>BO</p></div>
+    <div class="square F"><p>RD</p></div>
+  </div> -->
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
                                  <li class="active"><a data-toggle="tab" href="#tab0145">TRANSFERTS</a></li>
@@ -274,3 +283,42 @@ afficherBudgetExecutéInvestissement(){
   }
 }
 </script>
+<style>
+.flex{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  position: relative;
+}
+.square{
+  width: 50px;
+  height: 50px;
+ 
+  color: #FAFAFA;
+  text-align: center;
+  margin-right: 5px;
+  cursor: pointer;
+  line-height: 50px;
+}
+.square:hover{
+  opacity: 0.8;
+}
+.S{
+  background-color:orange;
+}
+.I{
+  background-color:orange;
+}
+.D{
+  background-color:white;
+  color: black;
+}
+.C{
+  background-color:green;
+  color: white;
+}
+.F{
+ background-color:green;
+  color: white;
+}
+</style>

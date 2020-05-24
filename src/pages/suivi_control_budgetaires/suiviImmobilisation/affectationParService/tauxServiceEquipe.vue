@@ -1,8 +1,4 @@
-afficherQuantiteEnStock
-afficherQuantiteEnRequise
-afficherAffectationParFonction
-afficherQuantiteSortir
-afficherActeurDepenseMatricule
+
 
 <template>
 
@@ -14,7 +10,10 @@ afficherActeurDepenseMatricule
                 <!-- Search:
                 <input type="search" placeholder v-model="search" />
               </div> -->
-                <table class="table table-bordered table-striped">
+                                                                  <div align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+          </div>
+                <table class="table table-bordered table-striped" id="TauxequipementParsService">
                     <thead>
                     <tr>
 
@@ -74,6 +73,8 @@ afficherActeurDepenseMatricule
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from '../../../../../src/Repositories/Repository';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 //import moment from 'moment';
 export default {
     data(){
@@ -235,6 +236,15 @@ afficherLibelleService() {
       
      
     ]),
+        genererEnPdf(){
+  var doc = new jsPDF('landscape')
+  // 
+  
+    doc.text(98,10,"Taux equipements par services")
+  doc.autoTable({ html: '#TauxequipementParsService'})
+doc.save('TauxEquipementsParService.pdf')
+return 0
+},
               fenetreAjouterAffectation(index) {
       this.$("#nonEquiper").modal({
         backdrop: "static",

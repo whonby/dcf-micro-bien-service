@@ -30,7 +30,7 @@
                   
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            
+             <h5>Listes natures sections</h5>
              <div align="right">
         Rechercher: <input type="text" v-model="search">
 

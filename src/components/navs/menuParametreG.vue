@@ -296,19 +296,19 @@
                     Ligne Exemptée
                 </router-link>
             </li>
-          <li>
+          <!-- <li>
             <router-link :to="{name: 'motifDecision'}" tag="a">
               <i class="icon-bar-chart"></i>
            Motifs de décision
             </router-link>
-          </li>
-           <li>
+          </li> -->
+           <!-- <li>
             <router-link :to="{name: 'typeActeEffetFinancier'}" tag="a">
              
               <i class="icon-bar-chart"></i>
            Type acte effet financier
             </router-link>
-          </li>
+          </li> -->
           <li>
             <router-link :to="{name: 'typeAnalyse'}" tag="a">
               <i class="icon-bar-chart"></i>
@@ -323,12 +323,12 @@
            Réferentiel des prix
             </router-link>
           </li> -->
-           <li>
+           <!-- <li>
             <router-link :to="{name: 'typeActeDepense'}" tag="a">
               <i class="icon-bar-chart"></i>
            Type d'acte de depense
             </router-link>
-          </li>
+          </li> -->
            <!-- <li>
             <router-link :to="{name: 'condition'}" tag="a">
               <i class="icon-bar-chart"></i>
