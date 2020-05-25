@@ -552,10 +552,10 @@ source_financement
                 class="btn btn-default " title="continue la contratualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
                     </router-link>
-    <!-- <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+     <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
                  class="btn btn-inverse " title="Cycle de vie du marche">
         <span class=""><i class=" icon-calendar"></i></span>
-    </router-link> -->
+    </router-link>
     <button @click.prevent="modifierModalActeEffetFinancierLocal2(index)"  class="btn btn-info"  title="Basculer en Execution">
         <span class=""><i class="icon-undo" ></i></span></button>
 </td>
@@ -827,10 +827,10 @@ source_financement
                 <span class=""><i class="icon-pencil"></i></span></button>
 
 
-                       <!-- <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                        <router-link :to="{ name: 'CycleDeVie', params: { id: marche.marche_id }}"
                                     class="btn btn-inverse " title="Cycle de vie du marche">
                            <span class=""><i class=" icon-calendar"></i></span>
-                       </router-link> -->
+                       </router-link>
                 <button @click.prevent="modifierModalActeEffetFinancierLocal(index)"  class="btn btn-info">
                 <span class=""><i class=" icon-undo" title="Basculer en contratualisation"></i></span></button>
 
