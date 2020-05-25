@@ -62,8 +62,30 @@ CodeExempte
                 </div>
             </div> 
         <template v-if="detail_marche.economique_id == CodeExempte(detail_marche.economique_id) ">
+            <div class="widget-title">
+            <ul class="nav nav-tabs">
+             <li class="active"><a data-toggle="tab" href="#tab0074">Attribution</a></li>
+             <li class=""><a data-toggle="tab" href="#tab00214">Bailleur</a></li>
+        </ul>
+          </div>
+    <div class="widget-content tab-content">
+<div id="tab0074" class="tab-pane active">
 <executionLigneExempte :macheid="detail_marche.id"></executionLigneExempte>
+    </div>
+
+
+       <div id="tab00214" class="tab-pane">
+                <div align="right">
+             <div class="widget-content">
+                 <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+                </div>
+                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+                </div>
+    </div>
+    
         </template>
+
         <template v-else>
 <h4 style="text-align:center;font-size:30px">{{afficheLeNomDesProcedure}}</h4>
  <div class="row-fluid">

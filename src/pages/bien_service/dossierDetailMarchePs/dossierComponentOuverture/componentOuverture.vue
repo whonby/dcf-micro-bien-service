@@ -17,7 +17,7 @@
                            
                   </div> -->
                   <div align="left">
-                  <h4> Infomation sur la cojo</h4>
+                  <h4> Infomation sur la cojo </h4>
                   </div>
                   <table class="table table-bordered table-striped" v-if="macheid">
                       <thead>

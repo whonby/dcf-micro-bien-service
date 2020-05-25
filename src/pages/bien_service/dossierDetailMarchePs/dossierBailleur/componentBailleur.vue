@@ -36,22 +36,28 @@
 
 
 
-             <div id="addBailleurMarche" class="modal hide" aria-hidden="true" style="display: none;">
+             <div id="addBailleurMarche" class="modal hide grdirModalActeEffet" aria-hidden="true" style="display: none;">
                                     <div class="modal-header">
                                         <button data-dismiss="modal" class="close" type="button">×</button>
                                         <h3>Ajouter bailleur </h3>
                                     </div>
-                                    <div class="modal-body">
-
-                                        <form action="#" method="get" v-if="macheid">
-                                            <label>Bailleur</label>
+                                     <table class="table table-bordered table-striped" v-if="macheid">
+                                       <tr>
+                                           <td>
+                                           <div class="control-group">
+                                            <label div class="control-label">Bailleur</label>
                                             <div class="controls">
                                                 <select v-model="formBailleur.bailleur_id" class="span" >
                                                     <option v-for="varText in sources_financements" :key="varText.id"
                                                             :value="varText.id">{{varText.libelle}}</option>
                                                 </select>
                                             </div>
-                                            <label>Type finnancement <code>*</code> </label>
+                                            </div>
+                                           </td>
+
+                                           <td>
+                                            <div class="control-group">
+                                            <label div class="control-label">Type finnancement <code>*</code> </label>
                                             <div class="controls">
 
                                                 <select v-model="formBailleur.type_finnancement_id" class="span">
@@ -59,37 +65,151 @@
                                                             :value="varText.id">{{varText.libelle}}</option>
                                                 </select>
                                             </div>
+                                            </div>
+                                           </td>
+                                           <td>
                                             <div class="control-group">
                                                 <label class="control-label">Montant <code>*</code> :</label>
                                                 <div class="controls">
-                                                    <input type="text" class="span5" placeholder="Montant" v-model="formBailleur.montant">
+                                                    <input type="text" class="span5" placeholder="Montant" v-model="formBailleur.montant_ht">
                                                 </div>
                                                 
                                             </div>
-                                        </form>
+                                           </td>
+                                        <td>
+              
+                                 <div class="control-group">
+                                        <label class="control-label">exonéré</label>
+                                        <div class="controls">
+                                        <select v-model="formBailleur.exonere" class="span">
+                                        
+                                            <option value="0">Oui</option>
+                                            <option value="1">Non</option>
+                                        </select>
+                                        
+                                        </div>
+                                    </div>
+                                    </td>
+                                       </tr>
+                                        <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Taux</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="afficherEnorere"
+                    class="span"
+                   readonly
+                  />
+                  
+                   <input
+                    type="hidden"
+                    
+                   
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">TVA</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    :value="montantTva"
+             
+                    class="span"
+                   readonly
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+         
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    :value="montantHTt"
+              
+                    class="span"
+                   readonly
+                  />
+                
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+                                     </table>
+                                   
                                         <div class="modal-footer" >
                                             <button @click.prevent="ajouterBailleur" class="btn btn-primary" >Valider</button>
                                             <button data-dismiss="modal" class="btn" href="#">Fermer</button>
                                         </div>
-                                    </div>
+                                   
                                 </div>
 
-  <div id="editBailleuMarche" class="modal hide" aria-hidden="true" style="display: none;">
+
+
+                                  <div id="editBailleuMarche" class="modal hide grdirModalActeEffet" aria-hidden="true" style="display: none;">
                                     <div class="modal-header">
                                         <button data-dismiss="modal" class="close" type="button">×</button>
-                                        <h3>Modification </h3>
+                                        <h3>Modification Bailleur </h3>
                                     </div>
-                                    <div class="modal-body">
-
-                                        <form action="#" method="get" v-if="macheid">
-                                            <label>Bailleur</label>
+                                     <table class="table table-bordered table-striped" v-if="macheid">
+                                       <tr>
+                                           <td>
+                                           <div class="control-group">
+                                            <label div class="control-label">Bailleur</label>
                                             <div class="controls">
                                                 <select v-model="edit_bailleur_marche.bailleur_id" class="span" >
                                                     <option v-for="varText in sources_financements" :key="varText.id"
                                                             :value="varText.id">{{varText.libelle}}</option>
                                                 </select>
                                             </div>
-                                            <label>Type finnancement <code>*</code> </label>
+                                            </div>
+                                           </td>
+
+                                           <td>
+                                            <div class="control-group">
+                                            <label div class="control-label">Type finnancement <code>*</code> </label>
                                             <div class="controls">
 
                                                 <select v-model="edit_bailleur_marche.type_finnancement_id" class="span">
@@ -97,19 +217,127 @@
                                                             :value="varText.id">{{varText.libelle}}</option>
                                                 </select>
                                             </div>
+                                            </div>
+                                           </td>
+                                           <td>
                                             <div class="control-group">
                                                 <label class="control-label">Montant <code>*</code> :</label>
                                                 <div class="controls">
-                                                    <input type="text" class="span5" placeholder="Libelle lot" v-model="edit_bailleur_marche.montant">
+                                                    <input type="text" class="span5" placeholder="Montant" v-model="edit_bailleur_marche.montant_ht">
                                                 </div>
+                                                
                                             </div>
-                                        </form>
-                                        <div class="modal-footer">
-                                            <button @click.prevent="modificationBailleurMarche" class="btn btn-primary">Modification</button>
-                                            <button data-dismiss="modal" class="btn" href="#">Fermer</button>
+                                           </td>
+                                        <td>
+              
+                                 <div class="control-group">
+                                        <label class="control-label">exonéré</label>
+                                        <div class="controls">
+                                        <select v-model="edit_bailleur_marche.exonere" class="span">
+                                        
+                                            <option value="0">Oui</option>
+                                            <option value="1">Non</option>
+                                        </select>
+                                        
                                         </div>
                                     </div>
+                                    </td>
+                                       </tr>
+                                        <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Taux</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="editAfficherEnorere"
+                    class="span"
+                   readonly
+                  />
+                  
+                   <input
+                    type="hidden"
+                    
+                   
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">TVA</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    :value="editMontantTva"
+             
+                    class="span"
+                   readonly
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+         
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    :value="editMontantHTt"
+              
+                    class="span"
+                   readonly
+                  />
+                
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+                                     </table>
+                                   
+                                        <div class="modal-footer" >
+                                           <button @click.prevent="modificationBailleurMarche" class="btn btn-primary">Modification</button>
+                                            <button data-dismiss="modal" class="btn" href="#">Fermer</button>
+                                        </div>
+                                   
                                 </div>
+
 
 <!--- fin modifier acte effet financier  -->
   <notifications/>
@@ -128,13 +356,14 @@ export default {
           formBailleur: {
                     type_finnancement_id:"",
                     bailleur_id:"",
-                   
+                   exonere:"",
                     montant:"",
                     
                 },
         edit_bailleur_marche:{
              type_finnancement_id:"",
                     bailleur_id:"",
+                    exonere:"",
                     montant:"",
 
         }
@@ -172,6 +401,80 @@ listeBailleurMarche: function () {
             },
 
 
+afficherEnorere(){
+if(this.formBailleur.exonere == 0){
+  return 0
+}
+else {
+  return this.affcherTauxEnCours
+  
+}
+},
+
+affcherTauxEnCours() {
+      
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
+    },
+
+  montantTva() {
+      const val = parseFloat((this.formBailleur.montant_ht) * parseFloat(this.afficherEnorere)/100);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+montantHTt() {
+      const val = parseFloat(this.formBailleur.montant_ht) + parseFloat(this.montantTva);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+
+    editAfficherEnorere(){
+        if(this.edit_bailleur_marche.exonere == 0){
+  return 0
+}
+else {
+  return this.affcherTauxEnCours
+  
+}
+
+    },
+
+    editMontantTva(){
+         const val = parseFloat((this.edit_bailleur_marche.montant_ht) * parseFloat(this.editAfficherEnorere)/100);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+
+    },
+
+    editMontantHTt(){
+          const val = parseFloat(this.edit_bailleur_marche.montant_ht) + parseFloat(this.editMontantTva);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+
+    }
 
       
       },
@@ -202,7 +505,11 @@ listeBailleurMarche: function () {
             },
 
          ajouterBailleur(){
+
                 this.formBailleur.marche_id=this.macheid
+                this.formBailleur.montant=this.montantHTt
+                this.formBailleur.tva=this.afficherEnorere
+                this.formBailleur.montant_tva= this.montantTva
                this.ajouterMarcherBailleur(this.formBailleur)
                 this.formBailleur={
                       type_finnancement_id:"",
@@ -214,6 +521,10 @@ listeBailleurMarche: function () {
 
 
   modificationBailleurMarche(){
+              this.edit_bailleur_marche.marche_id=this.macheid
+              this.edit_bailleur_marche.montant=this.editMontantHTt
+                this.edit_bailleur_marche.tva=this.editAfficherEnorere
+                this.edit_bailleur_marche.montant_tva= this.editMontantTva
                 this.modificationMarcheBailleur(this.edit_bailleur_marche)
                 this.$('#editBailleuMarche').modal('hide');
             },
@@ -239,10 +550,11 @@ formatageSomme:formatageSomme,
 </script>
 
 <style scoped>
+
 .grdirModalActeEffet{
-     width: 900px;
- margin: 0 -430px;
- 
+     width: 1250px;
+ margin: 0 -530px;
+ height: 400px;
 
 }
 </style>
