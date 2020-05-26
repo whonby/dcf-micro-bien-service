@@ -394,9 +394,7 @@ source_financement
                                 <!-- <li><a data-toggle="tab" href="#tab208">Marchés Terminés      <span class="badge badge" >     {{0}}</span></a></li> -->
                                  <li><a data-toggle="tab" href="#tab20002">Marchés Résiliés    <span class="badge badge-info" >     {{afficheNombreMarcheResilier}}</span></a></li>
                                   <li><a data-toggle="tab" href="#tab2000256">Marchés Terminé    <span class="badge badge-inverse" >     {{nombreAfficheMarcheSolde}}</span></a></li>
-                                  <!-- <li><a data-toggle="tab" href="#tab99999">Exemple2  </a></li>  -->
-                                <!-- <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li>-->
+                                 
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
