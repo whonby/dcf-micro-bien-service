@@ -1,5 +1,7 @@
 avenant
 affcherTauxEnCours
+engagement direct
+mandat
 <template>
   	<div>
 
@@ -1001,7 +1003,7 @@ affcherTauxEnCours
                     v-for="(Manda, index) in afficheMandatMarcheTableau(detail_marche.id)"
                     :key="Manda.id"
                   >
-                   <template v-if="validationLiquidation(Manda.marche_id) == 1">
+                   <!-- <template v-if="validationLiquidation(Manda.marche_id) == 1"> -->
                     <td @dblclick="afficherModalModifierMandat(index)">{{marcheMandat(Manda.marche_id) || 'Non renseigné'}}</td>
                    <td @dblclick="afficherModalModifierMandat(index)">{{Manda.numero_mandat || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierMandat(index)">{{Manda.numero_bordereau || 'Non renseigné'}}</td>
@@ -1090,11 +1092,11 @@ affcherTauxEnCours
                         </span>
                       </button>
                     </td>
-                     </template>
-                      <template v-else>
+                     <!-- </template> -->
+                      <!-- <template v-else>
                  <td colspan="10">   <h1 style="color:red;font-size:15px;text-align:center">veuillez valider la liquidation svp?</h1></td>
                    
-                     </template>
+                     </template> -->
               </tr>
 
                   
@@ -1233,7 +1235,7 @@ affcherTauxEnCours
                     <!-- <th>Reste a payer marché</th> -->
                     <!-- <th>Taux facturétauxFacturation</th> -->
                   </tr>
-                  
+
                                     </thead>
                                     <tbody>
                                    

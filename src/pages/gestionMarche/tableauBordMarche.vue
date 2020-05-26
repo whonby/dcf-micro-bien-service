@@ -4,26 +4,26 @@
       <!-- <h3 style="text-align:center">TABLEAU DE BORD : BIEN ET SERVICE</h3> -->
     <div class="quick-actions_homepage">
       <ul class="quick-actions">
-        <li class="bg_lb"> <a href="#"> <i class="icon-dashboard"></i> <span class="label label-important">{{nombreDeMarche}}</span> TOTAL MARCHE</a> </li>
+        <!-- <li class="bg_lb"> <a href="#"> <i class="icon-dashboard"></i> <span class="label label-important">{{nombreDeMarche}}</span> TOTAL MARCHE</a> </li>
         <li class="bg_lo"> <a href="#"> <i class="icon-signal"></i><span class="label label-important">{{nombreMarcheEnplanification}}</span>  MARCHE EN PLANIFICATION</a> </li>
         <li class="bg_lg"> <a href="#"> <i class="icon-inbox"></i><span class="label label-success">{{nombreDeMarcheEnContratualisation}}</span> MARCHE EN CONTRALISATION </a> </li>
         <li class="bg_ly"> <a href="#"> <i class="icon-th"></i> <span class="label label-important">{{nbreMarcheExecuter}}</span> MARCHE EN EXECUTION</a> </li>
         <li class="bg_ls "> <a href="#"> <i class="icon-fullscreen"></i><span class="label label-important">{{afficheNombreMarcheResilier}}</span>  MARCHE RESILIE</a> </li>
         <li class="bg_lo "> <a href="#"> <i class="icon-th-list"></i><span class="label label-important">{{nombreAfficheMarcheSolde}}</span>  MARCHE TERMINE</a> </li>
-        <!-- <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i><span class="label label-important">{{formatageSomme(parseFloat(montantMarchePrevu))}}</span>  MONTANT MARCHE PREVU</a> </li>
-        <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i><span class="label label-important">{{formatageSomme(parseFloat(montantMarcheAvecAvenant))}}</span> MONTANT MARCHE EN EXECUTION</a> </li>
-        <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i><span class="label label-important">{{formatageSomme(parseFloat(budgetConsommerBienService))}}</span>  MONTANT MARCHE CONSOMME</a> </li>
-        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i><span class="label label-important">{{formatageSomme(-(montantMarcheAvecAvenant - budgetConsommerBienService))}}</span> MONTANT MARCHE RESTANT </a> </li>
- <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">{{((parseFloat(budgetConsommerBienService)/parseFloat(montantMarcheAvecAvenant))*100).toFixed(2)}}%</span> TAUX MARCHE EN EXECUTION </a> </li> -->
-        <!-- <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Charts</a> </li>
-        <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> Widgets </a> </li>
-        <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i> Tables</a> </li>
-        <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>
-        <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Forms</a> </li>
-        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Buttons</a> </li>
-        <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i>Elements</a> </li>
-        <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i> Calendar</a> </li>
-        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Error</a> </li> -->
+         -->
+
+
+        <li class="bg_lb span3"> <a href="#" style="color:black;"><h4>TOTAL </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{nombreDeMarche}}</span><h4>MARCHE</h4></a> </li>
+
+        <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>MARCHE EN</h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{nombreMarcheEnplanification}}</span><h4>PLANIFICATION</h4>  </a> </li>
+<li class="bg_lg span3"> <a href="#" style="color:black;"><h4>MARCHE EN</h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{nombreDeMarcheEnContratualisation}}</span><h4> CONTRALISATION</h4>  </a> </li>
+<br/>
+<br/>
+<br/>
+<li class="bg_ly span3"> <a href="#" style="color:black;"><h4>MARCHE EN </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{nbreMarcheExecuter}}</span><h4>EXECUTION</h4>  </a> </li>
+<li class="bg_ls span3"> <a href="#" style="color:black;"><h4>MARCHE</h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{afficheNombreMarcheResilier}}</span><h4>RESILIE</h4>  </a> </li>
+        <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>MARCHE </h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{nombreAfficheMarcheSolde}}%</span> <h4> TERMINE</h4></a> </li>
+  
       </ul>
     </div>
     
