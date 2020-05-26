@@ -5,15 +5,15 @@
 
         <div class="container-fluid" v-if="detail">
             <hr />
-            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+
             <div class="row-fluid" >
                 <div class="span12" >
 
                     <div class="widget-box">
                         <div class="widget-title">
                             <div align="right">
-                                Recherche:
-                                <input type="search" placeholder="Saisie section ou libelle" v-model="search" />
+
+                                <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
 
 
                             </div>
@@ -66,12 +66,13 @@
                  </tr>
                  <tr>
                      <th style="width:10%">NOM DU BAILLEUR</th>
-                     <td style="width:15%"> {{detail.source_financement}} </td>
-                     <td style="width:15%">B1: </td>
-                     <td style="width:15%">B2: </td>
+                     <td style="width:15%" v-if="detailBailEtat"> {{detailBailEtat.typeFinnancement.souce_financement.libelle}} </td>
+                     <td style="width:15%" v-for="(baill, index) in detailBailleur" :key="baill.id">
+                         B{{index + 1}}: {{baill.bailleur.libelle}} </td>
+                    <!-- <td style="width:15%">B2: </td>
                      <td style="width:15%">B3: </td>
                      <td style="width:15%">B4: </td>
-                     <td style="width:15%">B5: </td>
+                     <td style="width:15%">B5: </td>-->
                  </tr>
                  <tr>
                      <th  style="width:10%">VOLET / COMPOSANTE</th>
@@ -84,49 +85,60 @@
                  </tr>
                  <tr>
                      <th  style="width:10%">DON / EMPRUNT / N-A</th>
-                     <td style="width:15%"> {{detail.type_financement}} </td>
+                     <td style="width:15%" v-if="detailBailEtat"> {{detailBailEtat.typeFinnancement.libelle}} </td>
+                     <td style="width:15%" v-for="baill in detailBailleur" :key="baill.id">
+                         {{baill.typeFinnancement.libelle}}
+                     </td>
+                     <!--<td style="width:15%"> </td>
                      <td style="width:15%"> </td>
                      <td style="width:15%"> </td>
-                     <td style="width:15%"> </td>
-                     <td style="width:15%"> </td>
-                     <td style="width:15%"> </td>
+                     <td style="width:15%"> </td>-->
                  </tr>
                  <tr>
                      <th  style="width:10%">POURCENTAGE (%)</th>
+                     <td style="width:15%" v-if="detailBailEtat">{{detailBailEtat.tva}} </td>
+                     <td style="width:15%" v-for="baill in detailBailleur" :key="baill.id">{{baill.tva}} </td>
+                     <!--<td style="width:15%"> </td>
                      <td style="width:15%"> </td>
                      <td style="width:15%"> </td>
-                     <td style="width:15%"> </td>
-                     <td style="width:15%"> </td>
-                     <td style="width:15%"> </td>
-                     <td style="width:15%"> </td>
+                     <td style="width:15%"> </td>-->
                  </tr>
                  <tr>
                      <th  style="width:10%">MONTANT  HT FCFA</th>
+                     <td style="width:15%" v-if="detailBailEtat">
+
+                         {{formatageSomme(parseFloat(detailBailEtat.montant_ht)) || 'Non renseigné'}}
+                     </td>
+                     <td style="width:15%" v-for="baill in detailBailleur" :key="baill.id">
+                         {{formatageSomme(parseFloat(baill.montant_ht)) || 'Non renseigné'}}
+                     </td>
+                    <!-- <td style="width:15%"> </td>
                      <td style="width:15%"> </td>
                      <td style="width:15%"> </td>
-                     <td style="width:15%"> </td>
-                     <td style="width:15%"> </td>
-                     <td style="width:15%"> </td>
-                     <td style="width:15%"> </td>
+                     <td style="width:15%"> </td>-->
                  </tr>
                  <tr>
                      <th  style="width:10%">MONTANT TTC FCFA</th>
+                     <td style="width:15%" v-if="detailBailEtat">
+                         {{formatageSomme(parseFloat(detailBailEtat.montant)) || 'Non renseigné'}}</td>
+                     <td style="width:15%" v-for="baill in detailBailleur" :key="baill.id">
+                         {{formatageSomme(parseFloat(baill.montant)) || 'Non renseigné'}}
+                     </td>
+                     <!--<td style="width:15%"> </td>
                      <td style="width:15%"> </td>
                      <td style="width:15%"> </td>
-                     <td style="width:15%"> </td>
-                     <td style="width:15%"> </td>
-                     <td style="width:15%"> </td>
-                     <td style="width:15%"> </td>
+                     <td style="width:15%"> </td>-->
                  </tr>
                  <tr>
                      <th  style="width:5%">MONTANT TOTAL DE  BASE DU MARCHE / CONTRAT FCFA(HT,TTC)</th>
-                     <td style="width:15%" colspan="3" >HT </td>
-                     <td style="width:15%" colspan="3" >TTC </td>
+
+                     <td style="width:15%" colspan="1" >  {{formatageSomme(parseFloat(detail.acte_effet_financiare[0].montant_act_ht)) || 'Non renseigné'}}  HT </td>
+                     <td style="width:15%" colspan="1" >{{formatageSomme(parseFloat(detail.acte_effet_financiare[0].montant_act)) || 'Non renseigné'}}   TTC </td>
                  </tr>
                  <tr>
                      <th  style="width:5%">AGENT CF DE SUIVI </th>
-                     <td style="width:15%" colspan="6" > </td>
-
+                     <td style="width:15%" colspan="6" v-if="detailCF" > {{detailCF.nom_mandat|| 'Non renseigné'}} {{detailCF.prenom_nom|| 'Non renseigné'}}</td>
+                     <td style="width:15%" colspan="6" v-else > Sans objet</td>
                  </tr>
 
                  </thead>
@@ -163,50 +175,57 @@
                  </tr>
                  <tr>
                      <th style="width:5%">NATURE DES PRIX</th>
-                     <td style="width:15%" colspan="6" > </td>
+                     <td style="width:15%" colspan="6" >{{detail.nature_prix}} </td>
                  </tr>
                  <tr>
                      <th style="width:5%">DATE D'OUVERTURE</th>
                      <td style="width:28%" colspan="1" >PLIS TECHNIQUE </td>
                      <td style="width:2%" colspan="1" > </td>
-                     <td style="width:15%" colspan="1" >30/12/2019 </td>
+                     <td style="width:15%" colspan="1" v-if="detailCojo">{{formaterDate(detailCojo.date_offre_tech)}} </td>
+                     <td style="width:15%" colspan="1" v-else>NON APPLICABLE </td>
                      <td style="width:28%" colspan="1" >PLIS FINANCIER</td>
                      <td style="width:2%" colspan="1" > </td>
-                     <td style="width:15%" colspan="1" >30/12/2019 </td>
+                     <td style="width:15%" colspan="1" v-if="detailCojo">{{formaterDate(detailCojo.date_offre_fin)}} </td>
+                     <td style="width:15%" colspan="1" v-else>NON APPLICABLE </td>
                  </tr>
 
                  <tr>
                      <th>MONTANT CONFIDENTIEL FCFA</th>
-                     <td style="width:15%" colspan="3" >HT</td>
-                     <td style="width:15%" colspan="3" >TTC</td>
+                     <td style="width:15%" colspan="3" v-if="detailCojo">{{formatageSomme(parseFloat(detailCojo.montant_ouverture_ht)) || 'Non renseigné'}} HT</td>
+                     <td style="width:15%" colspan="3" v-else>NON APPLICABLE </td>
+                     <td style="width:15%" colspan="3" v-if="detailCojo">{{formatageSomme(parseFloat(detailCojo.montant_ouverture)) || 'Non renseigné'}} TTC</td>
+                     <td style="width:15%" colspan="3" v-else>NON APPLICABLE </td>
 
                  </tr>
                  <tr>
                      <th style="width:5%">DATE D'OUVERTURE</th>
                      <td style="width:28%" colspan="1" >TECHNIQUE </td>
                      <td style="width:2%" colspan="1" > </td>
-                     <td style="width:15%" colspan="1" > </td>
+                     <td style="width:15%" colspan="1" v-if="detailCojo">{{formaterDate(detailCojo.date_ouverture)}} </td>
+                     <td style="width:15%" colspan="1" v-else>NON APPLICABLE </td>
                      <td style="width:28%" colspan="1" >COMBINE</td>
                      <td style="width:2%" colspan="1" > </td>
-                     <td style="width:15%" colspan="1" > </td>
+                     <td style="width:15%" colspan="1" v-if="detailCojo">{{formaterDate(detailCojo.date_ouverture)}} </td>
+                     <td style="width:15%" colspan="1" v-else>NON APPLICABLE </td>
                  </tr>
                  <tr>
                      <th style="width:5%">DATE D'ENVOI DEMANDE D'ANO</th>
-                     <td style="width:28%"  colspan="1" >NON APPLICABLE/ APPLICABLE </td>
-                     <td style="width:2%" colspan="1" > </td>
-                     <td style="width:15%" colspan="1" >DMP </td>
-                     <td style="width:28%"  colspan="1" >BAILLEUR</td>
-                     <td style="width:2%" colspan="1" > </td>
-                     <td style="width:15%" colspan="1" > </td>
+                     <td style="width:28%"  colspan="1" >DMP </td>
+                     <td style="width:15%" colspan="1" v-if="dernierDemandeAno"> {{formaterDate(dernierDemandeAno.date_demande)}} </td>
+                     <td style="width:15%" colspan="1" v-else>NON APPLICABLE </td>
+                     <td style="width:15%" colspan="1" > BAILLEUR</td>
+                     <td style="width:15%" colspan="1" v-if="dernierAnoBaille"> {{formaterDate(dernierAnoBaille.date_ano_dmp)}}</td>
+                     <td style="width:15%" colspan="1" v-else>NON APPLICABLE </td>
+
                  </tr>
                  <tr>
                      <th style="width:5%">DATE RETOUR DEMANDE D'ANO</th>
-                     <td style="width:28%" colspan="1" >NON APPLICABLE/ APPLICABLE </td>
-                     <td style="width:2%" colspan="1" > </td>
-                     <td style="width:15%" colspan="1" >DMP </td>
-                     <td style="width:28%" colspan="1" >BAILLEUR</td>
-                     <td style="width:2%" colspan="1" > </td>
-                     <td style="width:15%" colspan="1" > </td>
+                     <td style="width:28%"  colspan="1" >DMP </td>
+                     <td style="width:15%" colspan="1" v-if="dernierDemandeAno"> {{formaterDate(dernierDemandeAno.date_avis)}} </td>
+                     <td style="width:15%" colspan="1" v-else>NON APPLICABLE </td>
+                     <td style="width:15%" colspan="1" > BAILLEUR</td>
+                     <td style="width:15%" colspan="1" v-if="dernierAnoBaille"> {{formaterDate(dernierAnoBaille.date_avis)}}</td>
+                     <td style="width:15%" colspan="1" v-else>NON APPLICABLE </td>
                  </tr>
                  </thead>
                  <tbody>
@@ -221,24 +240,46 @@
                  </tr>
                  <tr>
                      <th style="width:5%">DATE D'ATTRIBUTION DEFINITIVE</th>
-                     <td style="width:15%" colspan="6" > </td>
+                     <td style="width:15%" colspan="6" v-if="detailActeEffet">
+{{detailActeEffet.date_attributaire}}
+                     </td>
+                     <td style="width:15%" colspan="6" v-else>
+                      NON APPLICABLE
+                     </td>
                  </tr>
                  <tr>
                      <th style="width:5%">ENTREPRISE ATTRIBUTAIRE</th>
-                     <td style="width:15%" colspan="3" > </td>
-                     <td style="width:15%" colspan="3" >N° COMPTE CONTRIBUABLE: </td>
+                     <td style="width:15%" colspan="3" v-if="detailActeEffet">{{detailActeEffet.varObjetEntreprise.raison_sociale}} </td>
+                     <td style="width:15%" colspan="3" v-else> NON APPLICABLE</td>
+                     <td style="width:15%" colspan="3" v-if="detailActeEffet">N° COMPTE CONTRIBUABLE: {{detailActeEffet.varObjetEntreprise.numero_cc}} </td>
+                     <td style="width:15%" colspan="3" v-else> NON APPLICABLE</td>
                  </tr>
                  <tr>
                      <th>AUTORITE APPROBATRICE DU MARCHE / CONTRAT</th>
-                     <td style="width:15%" colspan="6" > </td>
+                     <td style="width:15%" colspan="6" v-if="detailActeEffet">
+                         {{detailActeEffet.autorite_approbation}}
+                     </td>
+                     <td style="width:15%" colspan="6" v-else>
+                         NON APPLICABLE
+                     </td>
                  </tr>
                  <tr>
                      <th>DATE D'APPROBATION</th>
-                     <td style="width:15%" colspan="6" > </td>
+                     <td style="width:15%" colspan="6" v-if="detailActeEffet">
+                         {{detailActeEffet.date_attributaire}}
+                     </td>
+                     <td style="width:15%" colspan="6" v-else>
+                         NON APPLICABLE
+                     </td>
                  </tr>
                  <tr>
                      <th>NUMERO DE MARCHE</th>
-                     <td style="width:15%" colspan="6" > </td>
+                     <td style="width:15%" colspan="6" v-if="detailActeEffet">
+                         {{detailActeEffet.numero_marche}}
+                     </td>
+                     <td style="width:15%" colspan="6" v-else>
+                         NON APPLICABLE
+                     </td>
                  </tr>
                  <tr>
                      <th>CAUTIONNEMENT(%,HT,TTC)</th>
@@ -250,23 +291,48 @@
                  </tr>
                  <tr>
                      <th>AVANCE DE DEMARRAGE(%,HT,TTC)</th>
-                     <td style="width:15%" colspan="6" > </td>
+                     <td style="width:15%" colspan="6" v-if="detailActeEffet">
+                        ( {{formatageSomme(parseFloat(detailActeEffet.avance_demarrage_ht))}}  HT, {{formatageSomme(parseFloat(detailActeEffet.avance_demarrage_ttc))}} TTC )
+                     </td>
+                     <td style="width:15%" colspan="6" v-else>
+                         NON APPLICABLE
+                     </td>
                  </tr>
                  <tr>
                      <th>DATE DE NOTIFICATION DE L'ORDRE DE SERVICE</th>
-                     <td style="width:15%" colspan="6" > </td>
+                     <td style="width:15%" colspan="6" v-if="detailActeEffet">
+                         {{detailActeEffet.date_odre_service}}
+                     </td>
+                     <td style="width:15%" colspan="6" v-else>
+                         NON APPLICABLE
+                     </td>
                  </tr>
                  <tr>
                      <th>DATE PREVISIONELLE DE DEMARRAGE DES TRAVAUX</th>
-                     <td style="width:15%" colspan="6" > </td>
+                     <td style="width:15%" colspan="6" v-if="detail">
+                        {{detail.date_execution_marche_debut_prevue}}
+                     </td>
+                     <td style="width:15%" colspan="6" v-else>
+                         NON APPLICABLE
+                     </td>
                  </tr>
                  <tr>
                      <th>DELAI D'EXECUTION</th>
-                     <td style="width:15%" colspan="6" > </td>
+                     <td style="width:15%" colspan="6" v-if="detail">
+                         {{detail.durre_marche_prevue}}
+                     </td>
+                     <td style="width:15%" colspan="6" v-else>
+                         NON APPLICABLE
+                     </td>
                  </tr>
                  <tr>
                      <th>DATE PREVISIONNELLE DE FIN DES TRAVAUX</th>
-                     <td style="width:15%" colspan="6" > </td>
+                     <td style="width:15%" colspan="6" v-if="detail">
+                         {{detail.date_execution_fin_prevue}}
+                     </td>
+                     <td style="width:15%" colspan="6" v-else>
+                         NON APPLICABLE
+                     </td>
                  </tr>
                  <tr>
                      <th>DUREE TOTALE  DE LA CONTRACTUALISATION</th>
@@ -280,7 +346,13 @@
              <table class="table table-bordered table-striped">
                  <thead>
                  <tr>
-                     <th>SITUATION D'EXECUTION:EN COURS - ACHEVE - SUSPENDU-RESILIE </th>
+                     <th>SITUATION D'EXECUTION:
+                         <span title="MARCHE EN EXERCUTER"  v-if="detail.attribue == 2" style=" color: green; font-size: 15px">EN COURS</span>
+
+                         <span title="MARCHE EN EXERCUTER"  v-if="detail.attribue == 1"  style=" color: red; font-size: 15px">Non demarré</span>
+                         <span title="MARCHE EN EXERCUTER"  v-if="detail.attribue == 3"  style=" color: red; font-size: 15px">RESILIE</span>
+
+                     </th>
                  </tr>
                  </thead>
                  <tbody>
@@ -290,7 +362,12 @@
                  <thead>
                  <tr>
                      <th style="width:5%" >DATE EFFECTIVE DE DEMARRAGE DES TRAVAUX</th>
-                     <td style="width:15%" colspan="6" > </td>
+
+                     <td style="width:15%" v-if="detailBailEtat">
+                         {{formaterDate(detailActeEffet.date_odre_service)}} </td>
+                     <td style="width:15%" v-else colspan="6">
+                        NON APPLICABLE
+                     </td>
                  </tr>
                  <tr>
                      <th>REMBOURSEMENT AVANCE DE DEMARRAGE(%,HT,TTC)</th>
@@ -321,15 +398,25 @@
                  <thead>
                  <tr>
                      <th style="width:5%">NOMBRE:</th>
-                     <td style="width:15%" colspan="2" >1ou2ou3 </td>
-                     <td style="width:15%" colspan="2" >%</td>
-                     <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" >TTC</td>
+                     <td style="width:15%" colspan="2" v-if="detailAvenant">{{nbrAvenant}} </td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                     <td style="width:15%" colspan="2" v-if="nbrAvenant">{{detailAvenant.taux}} % </td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                     <td style="width:15%" colspan="2" v-if="nbrAvenant">
+                         {{formatageSomme(parseFloat(montantHtAvanant(detailAvenant))) || 'Non renseigné'}} HT</td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                     <td style="width:15%" colspan="2" v-if="nbrAvenant">
+                         {{formatageSomme(parseFloat(montantTtcAvanant(detailAvenant))) || 'Non renseigné'}} TTC</td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                  </tr>
                  <tr>
                      <th>MONTANT TOTAL DU MARCHE APRES AVENANT (S) FCFA</th>
-                     <td style="width:15%" colspan="4" >HT </td>
-                     <td style="width:15%" colspan="4" >TTC </td>
+                     <td style="width:15%" colspan="4" v-if="nbrAvenant"> {{formatageSomme(parseFloat(montantHtAvanant(detailAvenant)+parseFloat(detailActeEffet.montant_act_ht)))}} HT </td>
+                     <td style="width:15%" colspan="4" v-else>NON APPLICABLE </td>
+                     <td style="width:15%" colspan="4" v-if="nbrAvenant">
+                         {{formatageSomme(montantTtcAvanant(detailAvenant)+parseFloat(detailActeEffet.montant_act))}}
+                         <!--{{formatageSomme(parseFloat(montantTtcAvanant(detailAvenant)+parseFloat(detailActeEffet.montant_act)))}}--> HT </td>
+                     <td style="width:15%" colspan="4" v-else>NON APPLICABLE </td>
                  </tr>
                  </thead>
              </table>
@@ -351,17 +438,26 @@
                  </tr>
                  <tr>
                      <th>DERNIER / NUMERO</th>
-                     <td style="width:15%" colspan="2" ></td>
-                     <td style="width:15%" colspan="2" >%</td>
-                     <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" >TTC</td>
+                     <td style="width:15%" colspan="2" v-if="dernierDecompte">
+                         {{dernierDecompte.numero_mandat}}
+                     </td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                     <td style="width:15%" colspan="2" v-if="dernierDecompte">%</td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                     <td style="width:15%" colspan="2"   v-if="dernierDecompte">HT</td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
+                     <td style="width:15%" colspan="2" v-if="dernierDecompte">{{formatageSomme(parseFloat(dernierDecompte.total_general))}}</td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                  </tr>
                  <tr>
                      <th>CUMUL / NOMBRE</th>
-                     <td style="width:15%" colspan="2" ></td>
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{detailDecompte.length}}</td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                      <td style="width:15%" colspan="2" >%</td>
                      <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" >TTC</td>
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">
+                         {{formatageSomme(parseFloat(montantDecompte(detailDecompte)))}}TTC</td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                  </tr>
 
                  </thead>
@@ -386,50 +482,60 @@
                      <th style="width:10%" >TOTAL PAIEMENT  EXECUTE</th>
                      <td style="width:15%" colspan="2" >%</td>
                      <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" >TTC</td>
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantDecompte(detailDecompte)))}}TTC</td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                  </tr>
                  <tr>
                      <th style="width:10%" >PART ETAT</th>
                      <td style="width:15%" colspan="2" >%</td>
                      <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" >TTC</td>
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantPartEtat(detailDecompte)))}}TTC</td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                  </tr>
                  <tr>
                      <th style="width:10%" >PART BAILLEUR</th>
                      <td style="width:15%" colspan="2" >%</td>
                      <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" >TTC</td>
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(montantPartBailleur(detailDecompte)))}} TTC</td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                  </tr>
                  <tr>
                      <th style="width:10%" >TOTAL RESTE A PAYER</th>
                      <td style="width:15%" colspan="2" >%</td>
                      <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" >TTC</td>
+
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme((montantTtcAvanant(detailAvenant)+parseFloat(detailActeEffet.montant_act))-montantDecompte(detailDecompte))}} TTC</td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                  </tr>
                  <tr>
                      <th style="width:10%" >PART ETAT</th>
                      <td style="width:15%" colspan="2" >%</td>
                      <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" >TTC</td>
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(parseFloat(detailBailEtat.montant)-montantPartEtat(detailDecompte))}} TTC</td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                  </tr>
                  <tr>
                      <th style="width:10%" >PART BAILLEUR</th>
                      <td style="width:15%" colspan="2" >%</td>
                      <td style="width:15%" colspan="2" >HT</td>
-                     <td style="width:15%" colspan="2" >TTC</td>
+                     <td style="width:15%" colspan="2" v-if="detailDecompte.length">{{formatageSomme(montantActPartBailleurTTC(detailBailleur)-montantPartBailleur(detailDecompte))}} TTC</td>
+                     <td style="width:15%" colspan="2" v-else>NON APPLICABLE </td>
                  </tr>
 
                  <tr>
                      <th>DATE DE FIN D'EXECUTION DES TRAVAUX</th>
-                     <td style="width:15%" colspan="8" ></td>
+                     <td style="width:15%" colspan="8" v-if="detailActeEffet">{{detailActeEffet.date_fin_exe}}</td>
+                     <td style="width:15%" colspan="8" v-else>NON APPLICABLE</td>
                  </tr>
                  <tr>
                      <th>DATE RECEPTION PROVISOIRE</th>
-                     <td style="width:15%" colspan="8" ></td>
+                     <td style="width:15%" colspan="8" v-if="detailActeEffet">{{detailActeEffet.date_fin_exe}}</td>
+                     <td style="width:15%" colspan="8" v-else>NON APPLICABLE</td>
                  </tr>
                  <tr>
                      <th>DATE RECEPTION DEFINITIVE</th>
-                     <td style="width:15%" colspan="8" ></td>
+                     <td style="width:15%" colspan="8" v-if="detail">{{detail.date_execution_fin_prevue}}</td>
+                     <td style="width:15%" colspan="8" v-else>NON APPLICABLE</td>
                  </tr>
                  <tr>
                      <th>AUTRES</th>
@@ -448,10 +554,13 @@
                      <th>CONTROLEUR FINANCIER</th>
                  </tr>
                  <tr height="120px">
+                     <td v-if="detail">{{detail.objet}} / {{detail.livrable}} </td>
+                     <td v-else>OK</td>
                      <td > </td>
-                     <td > </td>
-                     <td > DCF N'DA KACOU ANGE JOSEPH
+                     <td v-if="detailCF"> {{detailCF.nom_mandat|| 'Non renseigné'}} {{detailCF.prenom_nom|| 'Non renseigné'}}
+
                      </td>
+                     <td v-else>NON APPLICABLE</td>
                  </tr>
                  </thead>
                  <tbody>
@@ -481,12 +590,14 @@
 </template>
 
 <script>
+    import moment from "moment";
     import { mapGetters, mapActions } from "vuex";
     import html2canvas from 'html2canvas'
     import * as JsPDF from 'jspdf'
     // import moment from "moment";
     // import { ModelListSelect } from "vue-search-select";
     // import "vue-search-select/dist/VueSearchSelect.css";
+    import { formatageSomme } from "../../../src/Repositories/Repository";
     export default {
         // components: {
         //   ModelListSelect
@@ -537,20 +648,71 @@
                     // LIBELLE: "libelle",
                     // DATE_CREATION: "date_creation"
                 },
-                search: ""
+                search: "",
+                detailBailEtat:"",
+                detailBailleur:"",
+                detailCF:"",
+                detailActeEffet:"",
+                detailAvenant:"",
+                nbrAvenant:"",
+                detailDecompte:"",
+                dernierDecompte:"",
+                detailCojo:"",
+                detailDetailAno:"",
+                dernierDemandeAno:"",
+                detailAnoBailleur:"",
+                dernierAnoBaille:"",
             };
         },
         created() {
          this.detail=this.marches.find(item=>item.id== this.$route.params.id)
-       //  console.log(this.marches)
+
+            this.detailBailEtat=this.personnaliseGetterMarcheBailleur.find(item=>{
+                if (item.typeFinnancement.code==1 && item.marche_id==this.$route.params.id ){
+                    return item
+                }
+            })
+
+            this.detailBailleur=this.personnaliseGetterMarcheBailleur.filter(item=>{
+                if (item.typeFinnancement.code!=1 && item.marche_id==this.$route.params.id){
+                    return item
+                }
+            })
+
+            this.detailCF=this.getterMandate.find(item=>item.marche_id==this.$route.params.id)
+
+            this.detailActeEffet=this.getActeEffetFinancierPersonnaliserContrat.find(item=>item.marche_id==this.$route.params.id)
+            this.detailAvenant=this.avenants.filter(item=>item.marche_id==this.$route.params.id)
+            this.nbrAvenant=this.detailAvenant.length
+            console.log(this.detailAvenant)
+             //console.log(this.detailActeEffet)
+           //console.log(this.getMandatPersonnaliserVise)
+            this.detailDecompte=this.getMandatPersonnaliserVise.filter(item=>item.marche_id==this.$route.params.id).reverse()
+            if(this.detailDecompte){
+             this.dernierDecompte=this.detailDecompte[0]
+             //   console.log(this.getterCojos)
+            }
+            this.detailCojo=this.getterCojos.find(item=>item.marche_id==this.$route.params.id)
+            this.detailDetailAno=this.getterDemandeAno.filter(item=>item.marche_id==this.$route.params.id).reverse()
+            if(this.detailDetailAno){
+                this.dernierDemandeAno=this.detailDetailAno[0]
+            }
+            this.detailAnoBailleur=this.getterAnoDMPBailleur.filter(item=>item.marche_id==this.$route.params.id).reverse()
+            if(this.detailAnoBailleur){
+                this.dernierAnoBaille =this.detailAnoBailleur[0]
+            }
+         //   console.log(this.getterAnoDMPBailleur)
+
         },
         computed: {
-            ...mapGetters("bienService", ["modepaiements",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
+            ...mapGetters("bienService", ["modepaiements",'mandats','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
                 'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
-                'nombremarchesExecute',
+                'nombremarchesExecute',"avenants","getMandatPersonnaliserVise",
                 'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
                 "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
-                "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
+                "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser",
+                "typeActeEffetFinanciers","personnaliseGetterMarcheBailleur","getterMandate",
+                "getActeEffetFinancierPersonnaliserContrat","getterCojos","getterDemandeAno","getterAnoDMPBailleur"]),
 
             ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
 
@@ -605,6 +767,83 @@
                         }
                         return 0
                     }
+                };
+            },
+            montantHtAvanant() {
+                return avenant => {
+                    console.log(avenant)
+                    if (avenant != null && avenant != "") {
+                        let initialValue = 0;
+                        let montant_ht=  avenant.reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.montant_ht) ;
+                        }, initialValue);
+                        return montant_ht
+                    }
+                    return 0
+
+                };
+            },
+            montantDecompte() {
+                return objet => {
+                    if (objet != null && objet != "") {
+                        let initialValue = 0;
+                        let montant_ht=  objet.reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.total_general) ;
+                        }, initialValue);
+                        return montant_ht
+                    }
+                    return 0
+
+                };
+            },
+            montantPartEtat() {
+                return objet => {
+                    if (objet != null && objet != "") {
+                        let initialValue = 0;
+                        let montant=  objet.reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.montant_tresor) ;
+                        }, initialValue);
+                        return montant
+                    }
+                    return 0
+                };
+            },
+            montantPartBailleur() {
+                return objet => {
+                    if (objet != null && objet != "") {
+                        let initialValue = 0;
+                        let montant=  objet.reduce(function (total, currentValue) {
+                            let montant=parseFloat(currentValue.montant_emprunt)+parseFloat(currentValue.montant_don)
+                            return total + parseFloat(montant) ;
+                        }, initialValue);
+                        return montant
+                    }
+                    return 0
+                };
+            },
+            montantActPartBailleurTTC() {
+                return objet => {
+                    if (objet != null && objet != "") {
+                        let initialValue = 0;
+                        let montant=  objet.reduce(function (total, currentValue) {
+                            let montant=parseFloat(currentValue.montant)
+                            return total + parseFloat(montant) ;
+                        }, initialValue);
+                        return montant
+                    }
+                    return 0
+                };
+            },
+            montantTtcAvanant() {
+                return avenant => {
+                    if (avenant != null && avenant != "") {
+                        let initialValue = 0;
+                        let montant_ttc=  avenant.reduce(function (total, currentValue) {
+                            return total + parseFloat(currentValue.montant_avenant) ;
+                        }, initialValue);
+                        return montant_ttc
+                    }
+                    return 0
                 };
             },
             Codeeconomique() {
@@ -696,7 +935,7 @@
                 "modifierpaiementPersonnel",
                 "supprimerpaiementPersonnel"
             ]),
-
+            formatageSomme:formatageSomme,
             afficherModalAjouterpaiementPersonnel() {
                 this.$("#exampleModal").modal({
                     backdrop: "static",
@@ -766,7 +1005,9 @@
             alert() {
                 console.log("ok");
             },
-
+            formaterDate(date) {
+                return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+            },
             genererEnPdf(){
 
                 html2canvas(document.querySelector('#app'), {imageTimeout: 5000, useCORS: true}).then(canvas => {
