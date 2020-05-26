@@ -43,7 +43,7 @@
  </tr>
                     <tr>
    
-   
+
     <td height="20px">DON  </td>
       <td height="20px"></td>
       <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(AfficheMontantDon))}}</td>
@@ -77,12 +77,12 @@
                            <table class="table table-bordered table-striped" id="bienService">
                <tbody>
                   <tr>
-   <td  height="20px" rowspan="3" style="text-align:center;">B.SERVICES</td>
-   <td height="20px" > CONTREPARTIE </td>
+   <td   rowspan="3" style="text-align:center;width:12%">B.SERVICES</td>
+   <td style="width:12%" > CONTREPARTIE </td>
     <td style="width:12%" >ETAT</td>
-    <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantTresorBienEtService))}}</td>
-    <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantTresorConsommerBienEtService))}}</td>
-    <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantTresorBienEtService)-parseFloat(AfficheMontantTresorConsommerBienEtService))}}</td>
+    <td  style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorBienEtService))}}</td>
+    <td  style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorConsommerBienEtService))}}</td>
+    <td  style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorBienEtService)-parseFloat(AfficheMontantTresorConsommerBienEtService))}}</td>
 <!--     
      <td style="width:12%">96</td>
      <th style="width:12%;text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">56</th> -->
@@ -90,7 +90,7 @@
                    <tr>
    
    <td height="20px">DON  </td>
-    <td style="width:12%"></td>
+    <td height="20px"></td>
     <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantDonBienEtService))}}</td>
     <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantDonConsommerBienEtService))}}</td>
    <td  height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantDonBienEtService)-parseFloat(AfficheMontantDonConsommerBienEtService))}}</td>
