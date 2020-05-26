@@ -43,6 +43,7 @@
  </tr>
                     <tr>
    
+   
     <td height="20px">DON  </td>
       <td height="20px"></td>
       <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(AfficheMontantDon))}}</td>
