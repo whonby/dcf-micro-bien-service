@@ -81,6 +81,34 @@
                         </l-map>
                     </div>
                 </div>
+                <div class="span12">
+                    <div class="widget-box">
+                        <div class="">
+                         <table>
+                             <tr style="border-bottom: 2px solid #fff">
+                                 <td style="width: 20px;height:20px;background: red" ></td>
+                                 <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Pas de budget</td>
+                                 <td style="width: 20px;height:20px;background: #0c2061" ></td>
+                                 <td style="text-align: center; border-right: 5px solid #fff" colspan="3"> Taux execution est de 0 %</td>
+                                 <td style="width: 20px;height:20px;background: #fffb13" ></td>
+                                 <td style="text-align: center; border-right: 5px solid #fff " colspan="3">Taux execution est compris entre 1 à 30 %</td>
+                                 <td style="width: 20px;height:20px;background: #8f1db7" ></td>
+                                 <td style="text-align: center; border-right: 5px solid #fff" colspan="3"> Taux execution est compris entre 31 à 50 %</td>
+                             </tr>
+                         </table>
+                            <table>
+                                <tr>
+                                    <td style="width: 20px;height:20px;background: #1285ff" ></td>
+                                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Taux execution est compris entre 51 à 80 %</td>
+                                    <td style="width: 20px;height:20px;background: #9dfd80" ></td>
+                                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Taux execution est compris entre 51 à 80 %</td>
+                                    <td style="width: 20px;height:20px;background: #209503" ></td>
+                                    <td style="text-align: center; border-right: 5px solid #fff" colspan="3">Taux execution est 100%</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="span4">
                 <div class="widget-box">
@@ -117,6 +145,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
         </div>
@@ -234,7 +263,7 @@
             "uniteAdministratives",
             "getterBudgeCharge"
         ]),
-        ...mapGetters("bienService", ['marches',"engagements"]),
+        ...mapGetters("bienService", ['marches',"engagements","getMandatPersonnaliserVise"]),
             localisationsFiltre(){
             const searchTerm = this.search.toLowerCase();
             console.log(this.localisations_geographiques.filter(item=>item.parent!==null))
@@ -248,7 +277,7 @@
         },
         localisation(){
         let localisation=[]
-
+          console.log(this.getMandatPersonnaliserVise)
             let vM=this;
             this.localisations_geographiques.forEach(function (value){
                 if(value.parent!=null){
@@ -293,7 +322,7 @@
                                      if(objetMarche!=""){
                                          objetMarche.forEach(function (val) {
                                              let initeVal = 0;
-                                             let montantEngament=  vM.engagements.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                                             let montantEngament=  vM.getMandatPersonnaliserVise.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
                                                  return total + parseFloat(currentValue.total_general) ;
                                              }, initeVal);
                                              montant_engagement_unite_admin=montant_engagement_unite_admin + montantEngament
@@ -337,8 +366,8 @@
                              }
 
                              if(31<=taux && taux<51){
-                                 color="#2affe1"
-                                 colorFill="#2affe1"
+                                 color="#8f1db7"
+                                 colorFill="#8f1db7"
                              }
 
                              if(51<=taux && taux<81){
@@ -398,7 +427,7 @@
                 if(objetMarche!=""){
                     objetMarche.forEach(function (val) {
                         let initeVal = 0;
-                        let montantEngament=  vM.engagements.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                        let montantEngament=  vM.getMandatPersonnaliserVise.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
                             return total + parseFloat(currentValue.total_general) ;
                         }, initeVal);
                         montant_engagement_unite_admin=montant_engagement_unite_admin + montantEngament
@@ -407,8 +436,10 @@
                 }
                 montant_engagement=montant_engagement + montant_engagement_unite_admin
             })
+
             vM.budgetGeneralExcecute=montant_engagement
             let tauxEx=(montant_engagement/budget_general)*100
+            //console.log(tauxEx)
                 vM.tauxExecutionBudgetGeneral=tauxEx.toFixed(2)
                 vM.bugdetGeneralRestant=budget_general - montant_engagement
             return budget_general;
@@ -443,7 +474,7 @@
                                 if(objetMarche!=""){
                                     objetMarche.forEach(function (val) {
                                         let initeVal = 0;
-                                        let montantEngament=  vM.engagements.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                                        let montantEngament=  vM.getMandatPersonnaliserVise.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
                                             return total + parseFloat(currentValue.total_general) ;
                                         }, initeVal);
                                         montant_engagement_unite_admin=montant_engagement_unite_admin + montantEngament
@@ -497,7 +528,7 @@
                     if(objetMarche!=""){
                         objetMarche.forEach(function (val) {
                             let initeVal = 0;
-                            let montantEngament=  vM.engagements.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
+                            let montantEngament=  vM.getMandatPersonnaliserVise.filter(item=>item.marche_id==val.id).reduce(function (total, currentValue) {
                                 return total + parseFloat(currentValue.total_general) ;
                             }, initeVal);
                             montant_engagement_unite_admin=montant_engagement_unite_admin + montantEngament
