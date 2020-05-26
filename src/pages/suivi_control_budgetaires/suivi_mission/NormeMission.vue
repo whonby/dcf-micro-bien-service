@@ -13,7 +13,7 @@
                                               <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste des normes de missions "
@@ -287,6 +287,10 @@ export default {
   data() {
     return {
       json_fields:{
+           'Fonction':'fonction',
+        'Source_financement':'source_financement',
+         'Perdiem':'perdiem',
+         'Zone':'zone',
              
       },
         fabActions: [
