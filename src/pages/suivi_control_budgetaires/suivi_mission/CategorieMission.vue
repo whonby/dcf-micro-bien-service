@@ -102,14 +102,14 @@
           </div>
         </div>
 
-                             <div class="pagination alternate">
+         <div class="pagination alternate">
              <ul>
-   <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
-  <li  v-for="(titre, index) in partition(categorieMissionFiltre,size).length" :key="index" :class="{ active : active_el == index }">
-  <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
-  <li :class="{ disabled : page == partition(categorieMissionFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
-  </ul>
- </div>
+           <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+           <li  v-for="(titre, index) in partition(categorieMissionFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+           <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+            <li :class="{ disabled : page == partition(categorieMissionFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+           </ul>
+        </div>
 
 
 
