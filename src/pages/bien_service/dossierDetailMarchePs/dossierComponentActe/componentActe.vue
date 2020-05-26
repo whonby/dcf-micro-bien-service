@@ -296,7 +296,7 @@ afficherBanqueDynamique
                      <div class="control-group">
                         <label class="control-label">Montant acte/réel du marché (HT)</label>
                         <div class="controls">
-                            <input type="text" v-model="formEffetFinancier.montant_ttc"
+                            <input type="text" v-model="formEffetFinancier.montant_act_ht"
                                     class="span"
                                     placeholder="Saisir le montant "
                             />
@@ -785,7 +785,7 @@ afficherBanqueDynamique
                      <div class="control-group">
                         <label class="control-label">Montant acte/réel du marché</label>
                         <div class="controls">
-                            <input type="text" v-model="editActeEffetFinancier.montant_ttc"
+                            <input type="text" v-model="editActeEffetFinancier.montant_act_ht"
                                     class="span"
                                     placeholder="Saisir le montant "
                             />
@@ -1039,7 +1039,7 @@ export default {
         
         formEffetFinancier:{
               exonere:"",
-              montant_ttc:"",
+              montant_act_ht:"",
               tva:"",
               taux:"",
               avance_demarrage_ht:"",
@@ -1071,7 +1071,7 @@ export default {
 
         editActeEffetFinancier:{
              exonere:"",
-              montant_ttc:"",
+              montant_act_ht:"",
               tva:"",
               taux:"",
               avance_demarrage_ht:"",
@@ -1358,7 +1358,7 @@ affcherTauxEnCours() {
 
 
     montantTva() {
-      const val = parseFloat((this.formEffetFinancier.montant_ttc) * parseFloat(this.afficherEnorere)/100);
+      const val = parseFloat((this.formEffetFinancier.montant_act_ht) * parseFloat(this.afficherEnorere)/100);
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -1368,7 +1368,7 @@ affcherTauxEnCours() {
     },
 
     editMontantTva(){
-      const resulta = parseFloat ((this.editActeEffetFinancier.montant_ttc) * parseFloat(this.editAfficherEnorere)/100)
+      const resulta = parseFloat ((this.editActeEffetFinancier.montant_act_ht) * parseFloat(this.editAfficherEnorere)/100)
        if(resulta){
          return parseInt(resulta).toFixed(0)
        }
@@ -1377,7 +1377,7 @@ affcherTauxEnCours() {
 
 
    editMontantHTt(){
-     let anwser = parseFloat(this.editActeEffetFinancier.montant_ttc) + parseFloat(this.editMontantTva)
+     let anwser = parseFloat(this.editActeEffetFinancier.montant_act_ht) + parseFloat(this.editMontantTva)
      if(anwser){
        return parseInt(anwser).toFixed(0);
      }
@@ -1388,7 +1388,7 @@ affcherTauxEnCours() {
 
 
      montantHTt() {
-      const val = parseFloat(this.formEffetFinancier.montant_ttc) + parseFloat(this.montantTva);
+      const val = parseFloat(this.formEffetFinancier.montant_act_ht) + parseFloat(this.montantTva);
       
        if (val) {
         return parseInt(val).toFixed(0);

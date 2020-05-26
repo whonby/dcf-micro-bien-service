@@ -18,9 +18,12 @@
                       <tr>
                            <th>Ref offre</th>
                            <th>Montant Confidentiel </th>
+                           <th>Nmbre particiapnt</th>
                           <th>Date Composition </th>
                           <th>Date ouverture</th>
-                          <th>Nmbr particiapnt</th>
+                          <th>Date offre technique</th>
+                          <th>Date offre financiere</th>
+                          
                           <th>Action</th>
                       </tr>
                       
@@ -34,14 +37,22 @@
                           <td listeMembreCojo @click="afficheBouttonTechCojo(index)">
                               {{formatageSomme(parseFloat( appelOffre.montant_ouverture)) || 'Non renseigné'}}</td>
 
+                         <td @click="afficheBouttonTechCojo(index)">
+                              {{appelOffre.nbr_participant || 'Non renseigné'}}</td>
+
                           <td @click="afficheBouttonTechCojo(index)">
                               {{formaterDate(appelOffre.date_composition) || 'Non renseigné'}}
                           </td>
                           <td @click="afficheBouttonTechCojo(index)">
                               {{formaterDate(appelOffre.date_ouverture) || 'Non renseigné'}}</td>
+
+                              <td @click="afficheBouttonTechCojo(index)">
+                              {{formaterDate(appelOffre.date_offre_tech) || 'Non renseigné'}}</td>
+
+                              <td @click="afficheBouttonTechCojo(index)">
+                              {{formaterDate(appelOffre.date_offre_fin) || 'Non renseigné'}}</td>
                          
-                          <td @click="afficheBouttonTechCojo(index)">
-                              {{appelOffre.nbr_participant || 'Non renseigné'}}</td>
+                          
 
                           <!-- <td @click="afficheBouttonTechCojo(index)">
                               {{appelOffre.cotation.ref_offre || 'Non renseigné'}}</td> -->
@@ -62,44 +73,58 @@
 
 
             <!-- add formulaire cojo -->
-              <div id="ajouterCojo" class="modal hide grdtaill">
+                <div id="ajouterCojo" class="modal hide grdirModalAnalyse">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter Cojo</h3>
+                 <h3>Ajouter Cojo</h3>
             </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
 
-
-
-                     <div class="control-group">
+                <table class="table table-bordered table-striped">
+                        <tr>
+                            <td>
+                        <div class="control-group">
                         <label class="control-label">Reference offre</label>
                         <div class="controls">
-                            <!-- <select v-model="formDataCojo.cotation_id" class="span" disabled>
-                                <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.ref_offre}}</option>
-                            </select> -->
-                             <input
+                            <input
                                     type="text"
                                     :value="affichierReferenceAppelOffre(macheid)"
                                     class="span"
                                    readonly
                             />
-                            
                         </div>
                         </div>
-
-                    <!-- <div class="control-group">
-                        <label class="control-label">Lettre Invitation</label>
+                            </td>
+                            <td>
+                     <div class="control-group">
+                        <label class="control-label">Nbre de participants</label>
                         <div class="controls">
-                            <select v-model="formDataCojo.lettre_invitation_id" class="span" disabled>
-                                <option v-for="plans in lettreInvitationAMarche(macheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.ref_lettre}}</option>
-                            </select>
+                            <input
+                                    type="text"
+                                    v-model="formDataCojo.nbr_participant"
+                                    class="span"
+                            />
                         </div>
-                    </div> -->
+                    </div>
+                            </td>
 
-                    <div class="control-group">
+
+                     <td>
+                       
+                     <div class="control-group">
+                        <label class="control-label">Montant Confidentiel</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="formDataCojo.montant_ouverture_ht"
+                                    class="span"
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+
+                              <td colspan="">
+                         <div class="control-group">
                         <label class="control-label">Date d'ouverture</label>
                         <div class="controls">
                             <input
@@ -110,10 +135,15 @@
                             />
                         </div>
                     </div>
-                  
-
-
-                    <div class="control-group">
+                            </td>
+                           
+                       
+                           </tr>
+                           
+                        <tr>
+                   
+                            <td>
+                       <div class="control-group">
                         <label class="control-label">Date de composition</label>
                         <div class="controls">
                             <input
@@ -124,30 +154,142 @@
                             />
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label">Nbre de participants</label>
+
+                            </td>
+                        
+                   
+                            <td>
+
+                     <div class="control-group">
+                        <label class="control-label">Date ouverture d'offre Technique</label>
                         <div class="controls">
                             <input
-                                    type="text"
-                                    v-model="formDataCojo.nbr_participant"
+                                    type="date"
+                                    v-model="formDataCojo.date_offre_tech"
+                                    class="span"
+                
+                            />
+                        </div>
+                    </div>
+                            </td>
+                            <td >
+                    <div class="control-group">
+                        <label class="control-label">Date ouverture d'offre financiere</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="formDataCojo.date_offre_fin"
                                     class="span"
                             />
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label">Montant Confidentiel</label>
-                        <div class="controls">
-                            <input
-                                    type="text"
-                                    v-model="formDataCojo.montant_ouverture"
-                                    class="span"
-                            />
-                        </div>
-                    </div>
+                            </td>
+                              <td>
+              
+                                 <div class="control-group">
+                                        <label class="control-label">exonéré</label>
+                                        <div class="controls">
+                                        <select v-model="formDataCojo.exonere" class="span">
+                                        
+                                            <option value="0">Oui</option>
+                                            <option value="1">Non</option>
+                                        </select>
+                                        
+                                        </div>
+                                    </div>
+                                    </td>
 
+                        </tr>
+                         
+                            <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Taux</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="afficherEnorere"
+                    class="span"
+                   readonly
+                  />
+                  
+                   <input
+                    type="hidden"
+                    
+                   
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">TVA</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    :value="montantTva"
+             
+                    class="span"
+                   readonly
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+         
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    :value="montantHTt"
+              
+                    class="span"
+                   readonly
+                  />
+                
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
 
-                </form>
-            </div>
+                    </table>
+            
             <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="ajouterCojoMarche()" href="#">Valider</a>
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
@@ -156,22 +298,20 @@
             <!-- end formulaire cojo  -->
 
             <!-- bigin modifie cojo  -->
-             <div id="modificationCojo" class="modal hide grdtaill">
+             <div id="modificationCojo" class="modal hide grdirModalAnalyse">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
                 <h3>Modification de cojo</h3>
             </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
+            
+                  <table class="table table-bordered table-striped">
+                      <tr>
 
 
-                     <div class="control-group">
+                          <td>
+                            <div class="control-group">
                         <label class="control-label">Reference offre</label>
                         <div class="controls">
-                            <!-- <select v-model="edite_cojo.cotation_id" class="span" disabled>
-                                <option v-for="plans in listeAppelOffre(macheid)" :key="plans.id"
-                                        :value="plans.id">{{plans.ref_offre}}</option>
-                            </select> -->
                              <input
                                     type="text"
                                     :value="affichierReferenceAppelOffre(macheid)"
@@ -180,8 +320,37 @@
                             />
                         </div>
                         </div>
-                   
+                          </td>
+                          <td>
+                     <div class="control-group">
+                        <label class="control-label">Nbre de participants</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="edite_cojo.nbr_participant"
+                                    class="span"
+                            />
+                        </div>
+                    </div>
+                          </td>
 
+                          
+                        <td>
+                       
+                   <div class="control-group">
+                        <label class="control-label">Montant Confidentiel</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    v-model="edite_cojo.montant_ouverture_ht"
+                                    class="span"
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+                          <td colspan="">
+                    
                     <div class="control-group">
                         <label class="control-label">Date d'ouverture</label>
                         <div class="controls">
@@ -193,9 +362,12 @@
                             />
                         </div>
                     </div>
+                          </td>
+                          </tr>
+                      <tr>
 
-
-                    <div class="control-group">
+                        <td>
+                         <div class="control-group">
                         <label class="control-label">Date composition</label>
                         <div class="controls">
                             <input
@@ -206,31 +378,139 @@
                             />
                         </div>
                     </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Nbre de participants</label>
-                        <div class="controls">
-                            <input
-                                    type="text"
-                                    v-model="edite_cojo.nbr_participant"
-                                    class="span"
-                            />
-                        </div>
-                    </div>
+                          </td>
+                          <td>
 
                      <div class="control-group">
-                        <label class="control-label">Montant Confidentiel</label>
+                        <label class="control-label">Date ouverture d'offre Technique</label>
                         <div class="controls">
                             <input
-                                    type="text"
-                                    v-model="edite_cojo.montant_ouverture"
+                                    type="date"
+                                    v-model="edite_cojo.date_offre_tech"
+                                    class="span"
+                
+                            />
+                        </div>
+                    </div>
+                            </td>
+                            <td >
+                    <div class="control-group">
+                        <label class="control-label">Date ouverture d'offre financiere</label>
+                        <div class="controls">
+                            <input
+                                    type="date"
+                                    v-model="edite_cojo.date_offre_fin"
                                     class="span"
                             />
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
+                            </td>
+
+                              <td>
+              
+                                 <div class="control-group">
+                                        <label class="control-label">exonéré</label>
+                                        <div class="controls">
+                                        <select v-model="edite_cojo.exonere" class="span">
+                                        
+                                            <option value="0">Oui</option>
+                                            <option value="1">Non</option>
+                                        </select>
+                                        
+                                        </div>
+                                    </div>
+                                    </td>
+                      </tr>
+                       <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Taux</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="editAfficherEnorere"
+                    class="span"
+                   readonly
+                  />
+                  
+                   <input
+                    type="hidden"
+                    
+                   
+                    class="span3"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">TVA</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    :value="editMontantTva"
+             
+                    class="span"
+                   readonly
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+         
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    :value="editMontantHTt"
+              
+                    class="span"
+                   readonly
+                  />
+                
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+                  </table>
+                
+            
+          <div class="modal-footer">
                 <a data-dismiss="modal" class="btn btn-primary" @click.prevent="modificationCojo()" href="#">Valider</a>
                 <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
@@ -255,10 +535,12 @@ export default {
         return{
            
             formDataCojo:{
-                //   lettre_invitation_id:"",
-                //         condition_id:'',
-                //         controleur_finnancier:"",
-                //         dmp:"",
+                   date_offre_fin:"",
+                   exonere:"",
+                   montant_tva:"",
+                   tva:"",
+                   montant_ouverture_ht:"",
+                        date_offre_tech:'',
                         montant_ouverture:"",
                         date_ouverture:"",
                         date_composition:"",
@@ -277,6 +559,7 @@ export default {
         ...mapGetters('bienService',['getterCojos','gettersCotations','appelOffres',
         'gettersCojoPersonnaliser']),
   ...mapGetters('personnelUA', ['acteur_depenses']),
+    ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
   
 
          listeCojo() {
@@ -342,6 +625,82 @@ affichierAppelOffreid() {
       };
     },
 
+    
+afficherEnorere(){
+if(this.formDataCojo.exonere == 0){
+  return 0
+}
+else {
+  return this.affcherTauxEnCours
+  
+}
+},
+
+affcherTauxEnCours() {
+      
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
+    },
+
+  montantTva() {
+      const val = parseFloat((this.formDataCojo.montant_ouverture_ht) * parseFloat(this.afficherEnorere)/100);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+montantHTt() {
+      const val = parseFloat(this.formDataCojo.montant_ouverture_ht) + parseFloat(this.montantTva);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+
+    editAfficherEnorere(){
+        if(this.edite_cojo.exonere == 0){
+  return 0
+}
+else {
+  return this.affcherTauxEnCours
+  
+}
+
+    },
+
+    editMontantTva(){
+         const val = parseFloat((this.edite_cojo.montant_ouverture_ht) * parseFloat(this.editAfficherEnorere)/100);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+
+    },
+
+    editMontantHTt(){
+          const val = parseFloat(this.edite_cojo.montant_ouverture_ht) + parseFloat(this.editMontantTva);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+
+    }
+
           
     },
     methods:{
@@ -373,15 +732,18 @@ affichierAppelOffreid() {
          var nouvelObjet ={
              ...this.formDataCojo,
              marche_id:this.macheid,
+             montant_ouverture:this.montantHTt,
+             montant_tva:this.montantTva,
+             tva:this.afficherEnorere,
              appel_offre_id :this.affichierAppelOffreid(this.macheid)
 
          }
               this.ajouterCojo(nouvelObjet)
                 this.formDataCojo={
                         appel_offre_id:"",
-                        // condition_id:'',
-                        // controleur_finnancier:"",
-                        // dmp:"",
+                      date_offre_fin:"",
+                      exonere:"",
+                        date_offre_tech:'',
                         montant_ouverture:"",
                         date_ouverture:"",
                         date_composition:"",
@@ -389,12 +751,15 @@ affichierAppelOffreid() {
                         nbr_participant:""
                 }
             },
-// la fonction pour afficher le modal du cojo
+// la fonction pour afficher le modal du cojo         editAfficherEnorere
            
  modificationCojo(){
       var nouvelObjet1 ={
              ...this.edite_cojo,
              marche_id:this.macheid,
+             montant_ouverture:this.editMontantHTt,
+             montant_tva:this.editMontantTva,
+             tva:this.editAfficherEnorere,
              appel_offre_id :this.affichierAppelOffreid(this.macheid)
 
          }
@@ -414,9 +779,10 @@ affichierAppelOffreid() {
 </script>
 
 <style scoped>
-/* .grdtaill{
- width: 1000px;
- margin: 0 -530px;
- height: 350px;
-} */
+ .grdirModalAnalyse{
+         width: 900px;
+ margin: 0 -500px;
+ height: 500px;
+    }
 </style>
+
