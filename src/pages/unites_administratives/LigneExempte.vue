@@ -6,6 +6,24 @@
             <hr>
             <div class="row-fluid">
                 <div class="span12">
+                    <div>
+                    <download-excel
+                      class="btn btn-success pull-right"
+                      style="cursor:pointer;"
+                     :fields="json_fields"
+                      title="Liste des Lignes exemptées"
+                     :data="getterligneExempter"
+                      name="Liste des Lignes exemptées"
+                    >
+                <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
+                </download-excel> 
+               <div align="right" style="cursor:pointer;">
+             <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+                </div> 
+
+                    </div>
+
+
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                             <h5>Listes des lignes exemptées</h5>
@@ -13,6 +31,17 @@
                                 Search: <input type="text" v-model="search">
                             </div>
                         </div>
+                            <div class="span4">
+                         <br>
+                          Afficher
+                        <select name="pets" id="pet-select" v-model="size" class="span3">
+                          <option value="10">10</option>
+                          <option value="25">25</option>
+                          <option value="50">50</option>
+                          <option value="100">100</option>
+                       </select>
+                        Entrer
+                       </div>
 
                         <div class="widget-content nopadding">
                             <table class="table table-bordered table-striped">
@@ -24,7 +53,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="odd gradeX" v-for="(item) in getterligneExempter" :key="item.id">
+                                <tr class="odd gradeX" v-for="(item)  in partition (getterligneExempter,size)[page]" :key="item.id">
                                     <td >{{codeLigneExemptee(item.economique_id) || 'Non renseigné'}}</td>
                                     <td >{{LibelleLigneExemptee(item.economique_id) || 'Non renseigné'}}</td>
                                     <td>
@@ -42,6 +71,17 @@
                             </table>
                         </div>
                     </div>
+
+                    <div class="pagination alternate">
+                  <ul>
+            <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+           <li  v-for="(titre, index) in partition(getterligneExempter,size).length" :key="index" :class="{ active : active_el == index }">
+             <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+            <li :class="{ disabled : page == partition(getterligneExempter,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+           </ul>
+          </div>
+
+
                 </div>
             </div>
         </div>
@@ -159,10 +199,24 @@
 <script>
 
     import {mapGetters, mapActions} from 'vuex'
+     import {partition} from '../../../src/Repositories/Repository'
+         import jsPDF from 'jspdf'
+       import 'jspdf-autotable'
     export default {
 
         data() {
             return {
+
+                 page:0,
+                 size:10,
+                 active_el:0,
+
+                 json_fields: {
+                  CODE: "code",
+                 LIBELLE: "libelle"
+                },
+
+
                 fabActions: [
                     {
                         name: 'cache',
@@ -251,6 +305,47 @@ return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
                 "modifierLigneExempter",
                 "supprimerLigneExempter",
             ]),
+         genererEnPdf(){
+         var doc = new jsPDF()
+        // doc.autoTable({ html: this.natures_sections })
+        var data = this.getterligneExempter;
+        doc.text(98,10,"Liste des Lignes exemptées")
+        doc.autoTable(this.getColumns(),data)
+       // doc.save('Type des actes de depenses.pdf')
+      doc.output('save','Type des lignes exemptées.pdf');
+      doc.output('dataurlnewwindow');
+     return 0
+     },
+getColumns() {
+    return [
+        {   title: "CODE",dataKey: "code"},
+        {    title: "LIBELLE", dataKey: "libelle"},
+       
+    ];
+},
+
+
+      // pagination
+
+partition:partition,
+
+  getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+
+
+
+
+
             afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',

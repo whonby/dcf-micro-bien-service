@@ -114,7 +114,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Famille</h5>
+              <h5>Liste des Familles</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
