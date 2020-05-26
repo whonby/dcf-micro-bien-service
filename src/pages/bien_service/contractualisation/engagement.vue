@@ -1,4 +1,5 @@
-
+avenant
+affcherTauxEnCours
 <template>
   	<div>
 
@@ -557,7 +558,7 @@
                      <td >{{afficheDateFacture(realiteService.facture_id) || 'Non renseigné'}}</td> 
                      
                     <td >{{detail_marche.imputation  || 'Non renseigné'}}</td>
-                     <td >{{formatageSomme(parseFloat(realiteService.montant)) || 'Non renseigné'}}</td>
+                     <td >{{formatageSomme(parseFloat(afficheMontantEngagementServiceRealiteEtLiquidation(realiteService.engagement_id))) || 'Non renseigné'}}</td>
                      <td >
                         <button v-if="realiteService.decision_service_beneficiaire == 1"  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
                      
@@ -628,7 +629,7 @@
                      <td >{{afficheDateFacture(realiteService.facture_id) || 'Non renseigné'}}</td> 
                      
                     <td >{{detail_marche.imputation  || 'Non renseigné'}}</td>
-                     <td >{{formatageSomme(parseFloat(realiteService.montant)) || 'Non renseigné'}}</td>
+                     <td >{{formatageSomme(parseFloat(afficheMontantEngagementServiceRealiteEtLiquidation(realiteService.engagement_id))) || 'Non renseigné'}}</td>
                      <td>
                         <button v-if="realiteService.decision_service_beneficiaire == 1"  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(index)" >                        
                      
@@ -918,7 +919,7 @@
                     >{{afficheNumeroMarcheAttribuer(type.marche_id) || 'Non renseigné'}}</td>
                      <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
-                    >{{afficheTypeActeFinancier(type.type_acte_financier) || 'Non renseigné'}}</td>
+                    >{{type.type_acte_financier || 'Non renseigné'}}</td>
                      <td
                       @dblclick="afficherModalModifierTypeTexte(index)"
                     >{{type.numero_avenant || 'Non renseigné'}}</td>
@@ -1872,84 +1873,147 @@
 <!--///////////////////////////////////////// DEBUT TABLEAU AVENANT//////////////////////////////-->
 <!--///////////////////////////////////////// DEBUT TABLEAU AVENANT//////////////////////////////-->
   <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
-    <div id="exampleModalAvenant" class="modal hide">
+    <div id="exampleModalAvenant" class="modal hide tailAvenant">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter Avenant</h3>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal">
-          <div class="control-group">
+         <table class="table table-bordered table-striped">
+       <tr>
+         <td>
+           <div class="control-group">
             <label class="control-label">Marché</label>
             <div class="controls">
               <input
                 type="text"
                 :value="afficheNumeroMarcheAttribuer(detail_marche.id)"
                 
-                class="span"
+                class="span4"
                readonly
               />
             </div>
             </div>
-            <div class="control-group">
+         </td>
+         <td>
+              <div class="control-group">
             <label class="control-label">Type Acte finnancier</label>
             <div class="controls">
-              <select v-model="formData.type_acte_financier">
+               <input
+                type="text"
+                v-model="formData.type_acte_financier"
+                class="span4"
+               readonly
+              />
+              <!-- <select v-model="formData.type_acte_financier" class="span4">
                       <option
                         v-for="typeUniteA in typeActeEffetFinanciers"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
-                    </select>
+                    </select> -->
             </div>
             </div>
-              <div class="control-group">
+         </td>
+         <td>
+           <div class="control-group">
             <label class="control-label">Numero avenant</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="formData.numero_avenant"
-                class="span"
+                class="span4"
                
               />
             </div>
           </div>
+         </td>
+       </tr>
+         <tr>
+           <td colspan="3">
+                
             <div class="control-group">
             <label class="control-label">Objet</label>
             <div class="controls">
-              <textarea rows="2"  v-model="formData.objet_avenant"  class="span" type="text">
+              <textarea rows="1"  v-model="formData.objet_avenant"  class="span10" type="text">
 
               </textarea>
-             
-             
-              
+
             </div>
           </div>
-         
-          <div class="control-group">
-            <label class="control-label">Montant</label>
+           </td>
+         </tr>
+         <tr>
+          <td>
+           <div class="control-group">
+            <label class="control-label">Montant ht</label>
             <div class="controls">
               <input
-                type="number"
-                v-model="formData.montant_avenant"
-                class="span"
+                type="text"
+                v-model="formData.montant_ht"
+                class="span4"
                
               />
             </div>
           </div>
+         </td>
+            <td>
+           <div class="control-group">
+            <label class="control-label">Taux</label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="affcherTauxEnCours"
+                class="span4"
+               readonly
+              />
+            </div>
+          </div>
+         </td>
+            <td>
+           <div class="control-group">
+            <label class="control-label">TVA</label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="affichierMontantTVA"
+                class="span4"
+               readonly
+              />
+            </div>
+          </div>
+         </td>
+         </tr>
+         <tr>
+            <td>
+           <div class="control-group">
+            <label class="control-label">Montant Avenant</label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="affichierMontantAvenantTTC"
+                class="span4"
+               readonly
+              />
+            </div>
+          </div>
+         </td>
+         <td>
             <div class="control-group">
             <label class="control-label">Date avenant</label>
             <div class="controls">
               <input
                 type="date"
                 v-model="formData.date_avenant"
-                class="span"
+                class="span4"
                
               />
             </div>
           </div>
-            
-        </form>
+         </td>
+         </tr>
+          </table>
+        
       </div>
       <div class="modal-footer">
         <a
@@ -1965,81 +2029,147 @@
 
  <!--///////////////////////////////////////// debut modal de modification //////////////////////////////-->
 
-    <div id="modificationModalAvenant" class="modal hide">
+    <div id="modificationModalAvenant" class="modal hide tailAvenant">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Modifier Avenant</h3>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal">
-          <div class="control-group">
+         <table class="table table-bordered table-striped">
+       <tr>
+         <td>
+           <div class="control-group">
             <label class="control-label">Marché</label>
             <div class="controls">
-            <input
+              <input
                 type="text"
                 :value="afficheNumeroMarcheAttribuer(detail_marche.id)"
                 
-                class="span"
+                class="span4"
                readonly
               />
             </div>
-          </div>
-           <div class="control-group">
+            </div>
+         </td>
+         <td>
+              <div class="control-group">
             <label class="control-label">Type Acte finnancier</label>
             <div class="controls">
-              <select v-model="editAvenant.type_acte_financier">
+               <!-- <div class="controls"> -->
+              <input
+                type="text"
+                v-model="editAvenant.type_acte_financier"
+                class="span4"
+               readonly
+              />
+              <!-- <select v-model="editAvenant.type_acte_financier" class="span4">
                       <option
                         v-for="typeUniteA in typeActeEffetFinanciers"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
-                    </select>
+                    </select> -->
             </div>
             </div>
-              <div class="control-group">
+         </td>
+         <td>
+           <div class="control-group">
             <label class="control-label">Numero avenant</label>
             <div class="controls">
               <input
                 type="text"
                 v-model="editAvenant.numero_avenant"
-                class="span"
+                class="span4"
                
               />
             </div>
           </div>
-             <div class="control-group">
+         </td>
+       </tr>
+         <tr>
+           <td colspan="3">
+                
+            <div class="control-group">
             <label class="control-label">Objet</label>
             <div class="controls">
-               <textarea rows="2"  v-model="editAvenant.objet_avenant"  class="span" type="text">
+              <textarea rows="1"  v-model="editAvenant.objet_avenant"  class="span10" type="text">
 
               </textarea>
+
             </div>
           </div>
-          
-          <div class="control-group">
-            <label class="control-label">Montant</label>
+           </td>
+         </tr>
+         <tr>
+          <td>
+           <div class="control-group">
+            <label class="control-label">Montant ht</label>
             <div class="controls">
               <input
-                type="number"
-                v-model="editAvenant.montant_avenant"
-                class="span"
+                type="text"
+                v-model="editAvenant.montant_ht"
+                class="span4"
                
               />
             </div>
           </div>
+         </td>
+            <td>
+           <div class="control-group">
+            <label class="control-label">Taux</label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="affcherTauxEnCours"
+                class="span4"
+               readonly
+              />
+            </div>
+          </div>
+         </td>
+            <td>
+           <div class="control-group">
+            <label class="control-label">TVA</label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="affichierMontantTVAModifier"
+                class="span4"
+               readonly
+              />
+            </div>
+          </div>
+         </td>
+         </tr>
+         <tr>
+            <td>
+           <div class="control-group">
+            <label class="control-label">Montant Avenant</label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="affichierMontantAvenantTTCModifier"
+                class="span4"
+               readonly
+              />
+            </div>
+          </div>
+         </td>
+         <td>
             <div class="control-group">
             <label class="control-label">Date avenant</label>
             <div class="controls">
               <input
                 type="date"
-                v-model="editAvenant.date_avenant"
-                class="span"
+                v-model="formData.date_avenant"
+                class="span4"
                
               />
             </div>
           </div>
-           
-        </form>
+         </td>
+         </tr>
+          </table>
       </div>
       <div class="modal-footer">
         <a
@@ -8181,7 +8311,8 @@ montant_emprunt:0,
     typefact:"",
 type_procedure_id:"",
 type_engagement_id:"",
-val:0
+val:0,
+type_acte_financier:"Avenant"
       },
 
 formData1: {
@@ -8340,8 +8471,64 @@ created() {
    
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
+afficheMontantEngagementServiceRealiteEtLiquidation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.total_general;
+      }
+      return 0
+        }
+      };
+    },
+
+affichierMontantAvenantTTCModifier() {
+      const val = (parseFloat(this.affichierMontantTVA) + parseFloat(this.editAvenant.montant_ht));
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+affichierMontantTVAModifier() {
+      const val = (parseFloat(this.editAvenant.montant_ht) * parseFloat(this.tauxArrondit));
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
 
 
+
+
+
+
+
+
+
+affichierMontantAvenantTTC() {
+      const val = (parseFloat(this.affichierMontantTVA) + parseFloat(this.formData.montant_ht));
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+    },
+affichierMontantTVA() {
+      const val = (parseFloat(this.formData.montant_ht) * parseFloat(this.tauxArrondit));
+      
+       if (val) {
+        return parseFloat(val).toFixed(0);
+      }
+      
+      return 0
+    },
 sommeTresor(){
   return id => {
     if(id !=""){
@@ -9367,7 +9554,7 @@ afficheTypeActeFinancier() {
            const qtereel = this.getterActeEffetFinanciers.find(qtreel => qtreel.marche_id == id);
 
       if (qtereel) {
-        return qtereel.marche.numero_marche;
+        return qtereel.numero_marche;
       }
       return "pas_numero"
         }
@@ -12286,8 +12473,12 @@ plan_budgetaire_id:this.idBudgetaire,
 fournisseur_id:this.AfficherFournisseur_id,
 marchetype:this.afficheMarcheType
        };
-      
+       let marcheObjet = this.mandats.find(marche=>marche.engagement_id==this.editEngagement.id)
+         marcheObjet.total_general = this.sommeMontantEngagement
+
+    
   this.modifierEngagement(nouvelObjet)
+  this.modifierMandat(marcheObjet)
   this.modifierRealiteServiceFait(realiteServiceFait)
   this.modifierLiquidation(odjetLiquisation)
       this.$('#ModifierEngage').modal('hide');
@@ -12777,11 +12968,23 @@ this.formDataMadat= {
       var nouvelObjet = {
       ...this.formData,
       marche_id :this.detail_marche.id,
-   marchetype:this.afficheMarcheType
+   marchetype:this.afficheMarcheType,
+   montant_avenant:this.affichierMontantAvenantTTC,
+   montant_ht:this.affichierMontantTVA,
+   taux:this.tauxArrondit,
        };
       this.ajouterAvenant(nouvelObjet);
 this.$("#exampleModalAvenant").modal('hide');
-     
+     this.formData = {
+            date_avenant:"",
+            montant_avenant:"",
+            objet_avenant:"",
+            type_acte_financier:"Avenant",
+                numero_avenant:"",
+                 montant_ht:"",
+                
+              
+}
     },
     // afficher modal de modification
     afficherModalModifierTypeTexte(index) {
@@ -12799,7 +13002,10 @@ this.$("#exampleModalAvenant").modal('hide');
       var nouvelObjet = {
       ...this.editAvenant,
       marche_id :this.detail_marche.id,
-   marchetype:this.afficheMarcheType
+   marchetype:this.afficheMarcheType,
+   montant_avenant:this.affichierMontantAvenantTTCModifier,
+   montant_ht:this.affichierMontantTVAModifier,
+   taux:this.tauxArrondit,
        };
       this.modifierAvenant(nouvelObjet);
 this.$("#modificationModalAvenant").modal('hide');
@@ -12901,5 +13107,9 @@ this.$("#modificationModalAvenant").modal('hide');
     .tailgrand{
   width: 89%;
   margin: 0 -45%;
+}
+.tailAvenant{
+  width: 75%;
+   margin: 0 -40%;
 }
 </style>

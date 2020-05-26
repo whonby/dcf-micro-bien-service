@@ -621,7 +621,7 @@
            <li>
             <router-link :to="{name:'NormeImmo'}" tag="a">
               <!-- <i class="icon-home"></i> -->
-               <i class="icon-user"></i> Equipement Type
+               <i class="icon-user"></i> Equipement Type(Norme)
              
             </router-link>
           </li>
