@@ -10,15 +10,41 @@
             <hr>
             <div class="row-fluid">
                 <div class="span12">
+                        <div>
+                                        <download-excel
+                                            class="btn btn-success pull-right"
+                                            style="cursor:pointer;"
+                                              :fields = "json_fields"
+                                              title="Liste des niveaux d'etudes"
+                                              name ="Liste des niveaux d'etudes"
+                                              worksheet = "niveau d'etude"
+                                            :data="niveauEtudeFiltre">
+                       <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+
+                                                 </download-excel> 
+                                 <div align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+          </div> 
+                                     </div> <br>
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                             <h5>Liste des nievau etude</h5>
                             <div align="right">
-                                Search: <input type="text">
+                                Search: <input type="text" v-model="search">
 
                             </div>
-
                         </div>
+                         <div class="span4">
+                    <br>
+                    Afficher
+                    <select name="pets" id="pet-select" v-model="size" class="span3">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    Entrer
+                </div>
 
                         <div class="widget-content nopadding">
                             <table class="table table-bordered table-striped">
@@ -30,7 +56,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="odd gradeX" v-for="(item, index) in niveau_etudes" :key="item.id">
+                                <tr class="odd gradeX" v-for="(item, index) in partition(niveauEtudeFiltre,size)[page]" :key="item.id">
                                     <td @dblclick="afficherModalModifierTitre(index)">{{item.code || 'Non renseigné'}}</td>
                                     <td @dblclick="afficherModalModifierTitre(index)">{{item.libelle || 'Non renseigné'}}</td>
                                     <td>
@@ -46,6 +72,15 @@
                             </table>
                         </div>
                     </div>
+                      <div class="pagination alternate">
+              <ul>
+                <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                   <li  v-for="(titre, index) in partition(niveauEtudeFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+                   <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                <li :class="{ disabled : page == partition(niveauEtudeFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+              </ul>
+           </div>
                 </div>
             </div>
         </div>
@@ -130,10 +165,22 @@
 <script>
 
     import {mapGetters, mapActions} from 'vuex'
+    import {partition} from '../../../../src/Repositories/Repository'
+    import jsPDF from 'jspdf'
+import 'jspdf-autotable'
     export default {
 
         data() {
             return {
+                search:"",
+                json_fields:{
+                    CODE:'code',
+                    LIBELLE:'libelle'
+                },
+                page:0,
+                size:10,
+                active_el:0,
+
                 fabActions: [
                     {
                         name: 'cache',
@@ -165,12 +212,76 @@
         },
         computed: {
 // methode pour maper notre guetter
-            ...mapGetters('personnelUA', ['niveau_etudes'])
+            ...mapGetters('personnelUA', ['niveau_etudes']),
+
+         
+             niveauEtudeFiltre(){
+
+     const searchTerm = this.search.toLowerCase();
+
+return this.niveau_etudes.filter((item) => {
+  
+    
+    return item.libelle.toLowerCase().includes(searchTerm) 
+   
+  
+
+   }
+)
+   }
+
+            
+            
         },
         methods: {
             // methode pour notre action
             ...mapActions('personnelUA', ['getNiveauEtude',"ajouterNiveauEtude","supprimerNiveauEtude","modifierNiveauEtude"]),
-            afficherModalAjouterTitre(){
+           
+           // pagination
+           partition:partition,
+
+           getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+
+           
+             genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.niveau_etudes;
+    doc.text("Listes des niveaux etudes",60,10)
+  doc.autoTable(this.getColumns(),data)
+//doc.save('grande_nature_depense.pdf')
+ doc.output('save','niveau_etude.pdf')
+ doc.output('dataurlnewwindow')
+return 0
+},
+getColumns() {
+    return [
+        {title: "CODE", dataKey: "code"},
+        {title: "LIBELLE", dataKey: "libelle"},
+        
+        
+    ];
+}, 
+           
+           
+           
+           
+           
+           
+           
+           
+           afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',
                     keyboard: false

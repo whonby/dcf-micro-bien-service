@@ -61,7 +61,7 @@
     </div>
 <div id="modificationModal" class="modal hide tabFormulaire">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
+        <button data-dismiss="modal" class="close" type="button">ï¿½</button>
         <h3>DETAIL BUDGET  </h3>
       </div>
       <div class="modal-body">
@@ -231,18 +231,8 @@
           </span>
           <h5>Detail budget {{detailBudget}}</h5>
         </div>
- <!-- <div align="right">
-                Recherche:
-                <input type="search"  :value="uaRecherche(uniteadministrative_id)" /> 
-                <select v-model="uniteadministrative_id" class="span12">
-                                <option value>Selectionner</option>
-                                <option
-                                  v-for="ua in uniteAdministratives"
-                                  :key="ua.id"
-                                  :value="ua.id"
-                                >{{ua.libelle}}</option>
-                              </select>
-              </div> -->
+
+
         <div class="widget-content nopadding">
           <table class="table table-bordered table-striped">
             <thead>
