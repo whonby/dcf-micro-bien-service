@@ -25,7 +25,9 @@
 
      <div id="app">
          <div  id="pdf">
-             <table class="table table-bordered table-striped">
+             <div align="center"> <h2>Cycle de vie du marché ({{detail.objet}})</h2> </div>
+             <br>
+             <table class="table table-bordered " id="app1">
                  <thead>
                  <tr>
                      <th style="width:10%">EXERCICE</th>
@@ -56,7 +58,7 @@
              </table>
 
 
-             <table class="table table-bordered table-striped">
+             <table class="table table-bordered table-striped" id="app2">
                  <thead>
                  <tr>
                      <th style="width:10%">SOURCE (S) DE FINANCEMENTS</th>
@@ -144,30 +146,22 @@
                  </thead>
 
              </table>
-             <hr>
-             <table class="table table-bordered table-striped">
+
+             <table class="table table-bordered table-striped" id="app3">
                  <thead>
                  <tr>
                      <th>ETAT DE LA CONTRACTUALISATION:
                          <span title="MARCHE EN EXERCUTER"  v-if="detail.attribue == 2" style=" color: red; font-size: 15px">ACHEVE</span>
 
                          <span title="MARCHE EN EXERCUTER"  v-else-if="detail.attribue == 1"  style=" color: green; font-size: 15px">En cours</span>
-                         <!--  <button
-                                   v-else-if="detail.attribue == 3"  class="btn  btn-info">
-                               <span title="MARCHE RESILIE" >Résilie</span>
-
-                           </button>
-                           <button v-else-if="detail.attribue == 5" class="btn  btn-inverse">
-
-                               <span title="MARCHE EN TERMINE">Termine</span>
-                           </button>--> </th>
+                     </th>
                  </tr>
                  </thead>
                  <tbody>
                  </tbody>
              </table>
 
-             <table class="table table-bordered table-striped">
+             <table class="table table-bordered table-striped" id="app4">
                  <thead>
                  <tr>
                      <th style="width:5%">TYPE ET REFERENCES DE LA  PROCEDURE</th>
@@ -179,14 +173,13 @@
                  </tr>
                  <tr>
                      <th style="width:5%">DATE D'OUVERTURE</th>
-                     <td style="width:28%" colspan="1" >PLIS TECHNIQUE </td>
-                     <td style="width:2%" colspan="1" > </td>
-                     <td style="width:15%" colspan="1" v-if="detailCojo">{{formaterDate(detailCojo.date_offre_tech)}} </td>
-                     <td style="width:15%" colspan="1" v-else>NON APPLICABLE </td>
-                     <td style="width:28%" colspan="1" >PLIS FINANCIER</td>
-                     <td style="width:2%" colspan="1" > </td>
-                     <td style="width:15%" colspan="1" v-if="detailCojo">{{formaterDate(detailCojo.date_offre_fin)}} </td>
-                     <td style="width:15%" colspan="1" v-else>NON APPLICABLE </td>
+                     <td style="width:10%"  >PLIS TECHNIQUE </td>
+
+                     <td style="width:15%"  v-if="detailCojo">{{formaterDate(detailCojo.date_offre_tech)}} </td>
+                     <td style="width:15%"  v-else>NON APPLICABLE </td>
+                     <td style="width:10%"  >PLIS FINANCIER</td>
+                     <td style="width:15%"  v-if="detailCojo">{{formaterDate(detailCojo.date_offre_fin)}} </td>
+                     <td style="width:15%" v-else>NON APPLICABLE </td>
                  </tr>
 
                  <tr>
@@ -200,11 +193,9 @@
                  <tr>
                      <th style="width:5%">DATE D'OUVERTURE</th>
                      <td style="width:28%" colspan="1" >TECHNIQUE </td>
-                     <td style="width:2%" colspan="1" > </td>
                      <td style="width:15%" colspan="1" v-if="detailCojo">{{formaterDate(detailCojo.date_ouverture)}} </td>
                      <td style="width:15%" colspan="1" v-else>NON APPLICABLE </td>
                      <td style="width:28%" colspan="1" >COMBINE</td>
-                     <td style="width:2%" colspan="1" > </td>
                      <td style="width:15%" colspan="1" v-if="detailCojo">{{formaterDate(detailCojo.date_ouverture)}} </td>
                      <td style="width:15%" colspan="1" v-else>NON APPLICABLE </td>
                  </tr>
@@ -232,7 +223,7 @@
                  </tbody>
              </table>
 
-             <table class="table table-bordered table-striped">
+             <table class="table table-bordered table-striped" id="app5">
                  <thead>
                  <tr>
                      <th style="width:5%">RESULTAT ET OBSERVATION DE L'ANO</th>
@@ -343,7 +334,7 @@
                  </tbody>
              </table>
 
-             <table class="table table-bordered table-striped">
+             <table class="table table-bordered table-striped" id="app6">
                  <thead>
                  <tr>
                      <th>SITUATION D'EXECUTION:
@@ -358,7 +349,7 @@
                  <tbody>
                  </tbody>
              </table>
-             <table class="table table-bordered table-striped">
+             <table class="table table-bordered table-striped" id="app7">
                  <thead>
                  <tr>
                      <th style="width:5%" >DATE EFFECTIVE DE DEMARRAGE DES TRAVAUX</th>
@@ -385,7 +376,7 @@
                  <tbody>
                  </tbody>
              </table>
-             <table class="table table-bordered table-striped">
+             <table class="table table-bordered table-striped" id="app8">
                  <thead>
                  <tr>
                      <th>AVENANT (S) APPROUVE (S) </th>
@@ -394,7 +385,7 @@
                  <tbody>
                  </tbody>
              </table>
-             <table class="table table-bordered table-striped">
+             <table class="table table-bordered table-striped" id="app9">
                  <thead>
                  <tr>
                      <th style="width:5%">NOMBRE:</th>
@@ -420,7 +411,7 @@
                  </tr>
                  </thead>
              </table>
-             <table class="table table-bordered table-striped">
+             <table class="table table-bordered table-striped" id="app10">
                  <thead>
                  <tr>
                      <th>DECOMPTE (S)  VISE (S) </th>
@@ -429,7 +420,7 @@
                  <tbody>
                  </tbody>
              </table>
-             <table class="table table-bordered table-striped">
+             <table class="table table-bordered table-striped" id="app11">
                  <thead>
 
                  <tr>
@@ -462,7 +453,7 @@
 
                  </thead>
              </table>
-             <table class="table table-bordered table-striped">
+             <table class="table table-bordered table-striped" id="app12">
                  <thead>
                  <tr>
                      <th>SITUATION FINANCIERE DU MARCHE/CONTRAT</th>
@@ -472,7 +463,7 @@
                  </tbody>
              </table>
 
-             <table class="table table-bordered table-striped">
+             <table class="table table-bordered table-striped" id="app13">
                  <thead>
                  <tr>
                      <th>DATE</th>
@@ -546,7 +537,7 @@
                  </tbody>
              </table>
 
-             <table class="table table-bordered table-striped">
+             <table class="table table-bordered table-striped" id="app14">
                  <thead>
                  <tr>
                      <th>OBJECTIFS DU MARCHE/CONTRAT / LIVRABLES ATTENDUS </th>
@@ -1010,16 +1001,44 @@
             },
             genererEnPdf(){
 
-                html2canvas(document.querySelector('#app'), {imageTimeout: 5000, useCORS: true}).then(canvas => {
+              /*  var doc = new JsPDF('landscape')
+
+                doc.text(98,10,"CYCLE DE VIE")*/
+               /* doc.autoTable({html:'#app1'})
+                doc.autoTable({ html: '#app2'})
+                    doc.autoTable({ html: '#app3'}),
+                    doc.autoTable({ html: '#app4'}),
+                    doc.autoTable({ html: '#app5'}),
+                        doc.autoTable({html:'#app6'})
+                doc.autoTable({ html: '#app7'})
+                doc.autoTable({ html: '#app8'}),
+                    doc.autoTable({ html: '#app9'}),
+                    doc.autoTable({ html: '#app10'}),
+                    doc.autoTable({html:'#app11'})
+                doc.autoTable({ html: '#app12'}),
+                doc.autoTable({ html: '#app13'}),
+                    doc.autoTable({ html: '#app14'}),
+
+
+                    doc.save('Cyscle.pdf')
+                doc.output('dataurlnewwindow')
+                return 0*/
+
+                html2canvas(document.querySelector('#app'), {imageTimeout: 3000, useCORS: true,scale: 0.8,
+                    logging: true,
+                    allowTaint: false,
+                    backgroundColor: null},).then(canvas => {
                     document.getElementById('pdf').appendChild(canvas)
-                    let img = canvas.toDataURL('image/png')
-                    var imgWidth = 210;
-                    var pageHeight = 295;
+                    var base64image =canvas.toDataURL('image/png');
+                   /* let img = canvas.toDataURL('image/png')
+                    var imgWidth = 205;
+                    var pageHeight = 290;
                     var imgHeight = canvas.height * imgWidth / canvas.width;
                     var heightLeft = imgHeight;
 
-
                     var doc = new JsPDF('p', 'mm');
+
+
                     var position = 0;
 
                     doc.addImage(img, 'PNG', 0, position, imgWidth, imgHeight);
@@ -1030,8 +1049,31 @@
                         doc.addPage();
                         doc.addImage(img, 'PNG', 0, position, imgWidth, imgHeight);
                         heightLeft -= pageHeight;
+                    }*/
+
+
+                    var margin = 2;
+                    var imgWidth = 210 - 2*margin;
+                    var pageHeight = 295;
+                    var imgHeight = canvas.height * imgWidth / canvas.width;
+                    var heightLeft = imgHeight;
+
+                    var doc = new JsPDF('p', 'mm');
+                    var position = 0;
+
+                    doc.addImage(base64image, 'PNG', margin, position, imgWidth, imgHeight);
+
+                    heightLeft -= pageHeight;
+
+                    while (heightLeft >= 0) {
+                        position = heightLeft - imgHeight;
+                        doc.addPage();
+                        doc.addImage(base64image, 'PNG', margin, position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
                     }
+
                     doc.save( 'file.pdf')
+                    return 0
                 })
             },
             // formaterDate(date) {
