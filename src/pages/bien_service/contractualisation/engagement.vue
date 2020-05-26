@@ -2,6 +2,7 @@ avenant
 affcherTauxEnCours
 engagement direct
 mandat
+Modifier Mandat
 <template>
   	<div>
 
@@ -1217,9 +1218,9 @@ mandat
                     <th>Date decompte</th>
                     <th>Montant decompte</th>
                     <th>Montant cumuler</th>
-                    <th>Dotation prévu</th>
+                    <!-- <th>Dotation prévu</th>
                     <th>Montant executé dotation</th>
-                    <th>Reste executé dotation</th>
+                    <th>Reste executé dotation</th> -->
                     <th>Montant executé marché</th>
                     <th>Reste executé marché</th>
                      
@@ -1231,7 +1232,7 @@ mandat
                       <th>Date</th> -->
                     <th>Paiement part Etat</th>
                     <th>Paiement part Bailleurs</th>
-                    <th>Taux execution</th>
+                    <!-- <th>Taux execution</th> -->
                     <!-- <th>Reste a payer marché</th> -->
                     <!-- <th>Taux facturétauxFacturation</th> -->
                   </tr>
@@ -1247,14 +1248,14 @@ mandat
                    <td style="text-align: center" >{{formaterDate(type.date_motif) || 0}}</td>
                    <td>{{formatageSomme(parseFloat(montantFactureMandat(type.facture_id))) || 0}}</td>
                     <td>{{formatageSomme(parseFloat(montantFactureMandat(type.facture_id))) || 0}}</td>
-                   <td>{{formatageSomme(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale)) || 0}}</td>
+                   <!-- <td>{{formatageSomme(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale)) || 0}}</td>
                   <td>{{formatageSomme(parseFloat(montantFactureMandat(type.facture_id)))}}</td>
-                   <td>{{formatageSomme(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale - montantFactureMandat(type.facture_id) )) || 0}}</td>
-                   <td>{{formatageSomme(parseFloat(montantMarcheAvecAvenant)-(parseFloat(restePayeMarche))) || 0}}</td>
+                   <td>{{formatageSomme(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale - montantFactureMandat(type.facture_id) )) || 0}}</td> -->
+                   <td>{{formatageSomme(parseFloat(montantMarcheAvecAvenant)-(parseFloat(montantFactureMandat(type.facture_id)))) || 0}}</td>
                    <td>{{formatageSomme(parseFloat(restePayeMarche)) || 0}}</td>
-                     <td style="text-align: center;color:red" >{{formatageSomme(parseFloat(sommeTresor(type.marche_id))) || 0}}</td>
+                     <td style="text-align: center;color:red" >{{formatageSomme(parseFloat(recupereMontantTresor(type.marche_id))) || 0}}</td>
                    <td  style="text-align: center">{{formatageSomme(parseFloat(montantTotalDonEtEmprunt))|| 0}}</td>
-                      <td style="text-align: center;color:red">{{(((parseFloat(montantMarcheAvecAvenant)-(parseFloat(restePayeMarche)))/parseFloat(montantMarcheAvecAvenant))*100).toFixed(2) || 0}}%</td>
+                      <!-- <td style="text-align: center;color:red">{{(((parseFloat(montantMarcheAvecAvenant)-(parseFloat(restePayeMarche)))/parseFloat(montantMarcheAvecAvenant))*100).toFixed(2) || 0}}%</td> -->
                     
                      <!-- <td>{{formatageSomme(parseFloat(objetfactureMontant(type.facture_id))) || 0}}</td>
                       -->
@@ -1282,9 +1283,9 @@ mandat
                     <td></td>
                     <td></td>
                     <td></td>
+                    <!-- <td></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
+                    <td></td> -->
                   <td                     
                      style="text-align: center;color:red;font-weight:bold;"
                     >{{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td> 
@@ -3323,8 +3324,8 @@ mandat
                            <div class="controls">
                               <input type="text" class="span4" :value="sommeEgagementLigne(detail_marche.id)" readonly/>
                             </div>
-                        //   <input    type="text"   class="span3" readonly :value="montantCumulerLiquidationMandat"  />
-                            //   <input    type="hidden"   class="span4" readonly :value="sommeEgagementLigne(detail_marche.id)"  />                
+                           <input    type="hidden"   class="span3" readonly :value="montantCumulerLiquidationMandat"  />
+                               <input    type="hidden"   class="span4" readonly :value="sommeEgagementLigne(detail_marche.id)"  />                
                              
                         </td>
                           <td>
@@ -8474,6 +8475,23 @@ created() {
    
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
+
+recupereMontantTresor() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.mandats.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.montant_tresor;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
 afficheMontantEngagementServiceRealiteEtLiquidation() {
       return id => {
         if (id != null && id != "") {
@@ -12478,8 +12496,9 @@ marchetype:this.afficheMarcheType
        };
        let marcheObjet = this.mandats.find(marche=>marche.engagement_id==this.editEngagement.id)
          marcheObjet.total_general = this.sommeMontantEngagement
-
-    
+          marcheObjet.montant_tresor = this.editEngagement.montant_tresor
+    marcheObjet.montant_don = this.editEngagement.montant_don
+    marcheObjet.montant_emprunt = this.editEngagement.montant_emprunt
   this.modifierEngagement(nouvelObjet)
   this.modifierMandat(marcheObjet)
   this.modifierRealiteServiceFait(realiteServiceFait)
