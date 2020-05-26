@@ -1233,6 +1233,7 @@ affcherTauxEnCours
                     <!-- <th>Reste a payer marché</th> -->
                     <!-- <th>Taux facturétauxFacturation</th> -->
                   </tr>
+                  
                                     </thead>
                                     <tbody>
                                    
