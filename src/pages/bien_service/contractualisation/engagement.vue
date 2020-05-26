@@ -1233,6 +1233,7 @@ affcherTauxEnCours
                     <!-- <th>Reste a payer marché</th> -->
                     <!-- <th>Taux facturétauxFacturation</th> -->
                   </tr>
+                  
                                     </thead>
                                     <tbody>
                                    
@@ -1242,11 +1243,11 @@ affcherTauxEnCours
                       <td>{{afficheNumeroMarche(detail_marche.id) || 'Non renseigné'}}</td>
                        <td>{{formatageSomme(parseFloat(montantMarcheAvecAvenant)) || 0}}</td>
                    <td style="text-align: center" >{{formaterDate(type.date_motif) || 0}}</td>
-                   <td>{{formatageSomme(parseFloat(montantFactureMandat(numeroFacture(type.engagement_id)))) || 0}}</td>
-                    <td>{{formatageSomme(parseFloat(sommeEgagementLigneTableau(detail_marche.id))) || 0}}</td>
+                   <td>{{formatageSomme(parseFloat(montantFactureMandat(type.facture_id))) || 0}}</td>
+                    <td>{{formatageSomme(parseFloat(montantFactureMandat(type.facture_id))) || 0}}</td>
                    <td>{{formatageSomme(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale)) || 0}}</td>
-                  <td>{{formatageSomme(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale)-(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale - sommeEgagementLigneTableau(detail_marche.imputation))))}}</td>
-                   <td>{{formatageSomme(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale - sommeEgagementLigneTableau(detail_marche.imputation))) || 0}}</td>
+                  <td>{{formatageSomme(parseFloat(montantFactureMandat(type.facture_id)))}}</td>
+                   <td>{{formatageSomme(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale - montantFactureMandat(type.facture_id) )) || 0}}</td>
                    <td>{{formatageSomme(parseFloat(montantMarcheAvecAvenant)-(parseFloat(restePayeMarche))) || 0}}</td>
                    <td>{{formatageSomme(parseFloat(restePayeMarche)) || 0}}</td>
                      <td style="text-align: center;color:red" >{{formatageSomme(parseFloat(sommeTresor(type.marche_id))) || 0}}</td>
@@ -9648,7 +9649,7 @@ numeroFacture() {
 montantFactureMandat() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.numero_facture == id);
+           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.prix_propose_ttc;
@@ -12633,7 +12634,8 @@ plan_budgetaire_id:this.idBudgetaire,
   
 
 fournisseur_id:this.AfficherFournisseur_id,
-marchetype:this.afficheMarcheType
+marchetype:this.afficheMarcheType,
+facture_id:this.formDataFacture.id,
   
 
        };
@@ -12928,7 +12930,7 @@ alert("Le montant engagé est superieure au montant de la facture")
          montant_cumul:this.montantCumuler,
        ligne_id:this.affichePlanEconomiqueId(this.editLiquidation.marche_id),
      banque_id:this.afficheIdBanque(this.afficheIdCompteBancaire(this.editLiquidation.marche_id)),
-        // facture_id:this.editEngagement.facture_id,
+        facture_id:this.editLiquidation.facture_id,
         type_procedure_id	:this.recupererTypeProcedure,
 engagement_id:this.editLiquidation.egagement_id,
 programme_id:this.afficheProgrammeId(this.editLiquidation.marche_id),

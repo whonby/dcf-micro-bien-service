@@ -1261,7 +1261,8 @@ export function modifierLiquidation({ commit, dispatch}, nouveau) {
       nom_controleur_financier: nouveau.nom_controleur_financier,
       date_controleur_financier: nouveau.date_controleur_financier,
       observation_controleur_financier: nouveau.observation_controleur_financier,
-      marchetype: nouveau.marchetype
+      marchetype: nouveau.marchetype,
+      facture_id: nouveau.facture_id
     })).then(response => {
       commit("MODIFIER_LIQUIDATION", response.data);
       dispatch('getAllLiquidation')

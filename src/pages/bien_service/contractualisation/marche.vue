@@ -396,6 +396,7 @@ source_financement
                                     <li><a data-toggle="tab" href="#tab20789">Marchés Suspendu   <span class="badge badge" >     {{nombreDeMarcheSuspendu}}</span></a></li>
                                   <li><a data-toggle="tab" href="#tab2000256">Marchés Terminé    <span class="badge badge-inverse" >     {{nombreAfficheMarcheSolde}}</span></a></li>
                                  
+                               
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
@@ -939,7 +940,7 @@ source_financement
                         <router-link :to="{ name: 'CycleDeVie', params: { id: marche.marche_id }}"
                                     class="btn btn-inverse " title="Cycle de vie du marche">
                            <span class=""><i class=" icon-calendar"></i></span>
-                       </router-link> -->
+                       </router-link> 
                 <button @click.prevent="modifierModalActeEffetFinancierLocal(index)"  class="btn btn-info">
                 <span class=""><i class=" icon-undo" title="Basculer en contratualisation"></i></span></button>
 
