@@ -3,28 +3,6 @@
   <div >
     
 
-    <!-- <div class="container-fluid"> -->
-      <!-- <hr /> -->
-      <!-- <div class="row-fluid">
-        <div class="span12"> -->
-         
-          <!-- <div class="widget-box"> -->
-            <!-- <div class="widget-title">
-              <div align="right">
-                Recherche:
-                <input type="search" placeholder="Saisie section ou libelle" v-model="search" />
-
-               
-              </div>
-              <span class="icon">
-                <i class="icon-th"></i>
-              </span>
-              <h5>Synthèse Budgétaire</h5>
-            </div> -->
-
-           
-            
-         
             <div align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
           </div>
@@ -47,7 +25,7 @@
     <td style="width:12%;text-align:center"> TYPE DE FINANCEMENT </td>
      <td style="width:12%;text-align:center">SOURCE DE FINANCEMENT</td>
      <td style="width:12%;text-align:center">TOTAL(FINANCEMENT)</td>
-    <td style="width:12%;text-align:center">RESTE A CONSOMMER</td>
+    <td style="width:12%;text-align:center">EXECUTE</td>
      <td style="width:12%;text-align:center">DISPONIBLE</td>
       <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
       <th style="width:12%;text-align:center">TOTAL</th> -->
@@ -55,14 +33,13 @@
  </thead>
  <tbody>
                     <tr>
-    <td height="20px" rowspan="3" style="text-align:center;margin: 0px 0 50% 50%">PERSONNEL</td>
+    <td height="20px" rowspan="3" style="text-align:center;">PERSONNEL</td>
     <td height="20px">CONTREPARTIE  </td>
-     <td height="20px">ETAT</td>
+     <td style="width:12%">ETAT</td>
      <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(AfficheMontantTresor))}}</td>
    <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(AfficheMontantTresorConsommer))}}</td>
      <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(AfficheMontantTresor)-parseFloat(AfficheMontantTresorConsommer))}}</td>
-      <!-- <td height="20px">2</td>
-      <th height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">3</th> -->
+      
  </tr>
                     <tr>
    
@@ -85,7 +62,7 @@
       <th height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">11</th> -->
  </tr>
                     <tr>
-    <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUSTOTAL PERSONNEL">S.T.PERSONNEL</th>
+    <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUS TOTAL PERSONNEL">S/T PERSONNEL</th>
     
      <td height="20px"></td>
      <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(AfficheMontantTresor)+parseFloat(AfficheMontantDon)+parseFloat(AfficheMontantEmprunt))}}</td>
@@ -99,13 +76,12 @@
                            <table class="table table-bordered table-striped" id="bienService">
                <tbody>
                   <tr>
-   <td  rowspan="3" style="text-align:center;width:10%">BIENS ET SERVICES</td>
-   <td style="width:12%"> CONTREPARTIE </td>
-    <td style="width:12%">ETAT</td>
-    <td style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorBienEtService))}}</td>
-    
-    <td style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorConsommerBienEtService))}}</td>
-    <td  style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorBienEtService)-parseFloat(AfficheMontantTresorConsommerBienEtService))}}</td>
+   <td  height="20px" rowspan="3" style="text-align:center;">B.SERVICES</td>
+   <td height="20px" > CONTREPARTIE </td>
+    <td style="width:12%" >ETAT</td>
+    <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantTresorBienEtService))}}</td>
+    <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantTresorConsommerBienEtService))}}</td>
+    <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantTresorBienEtService)-parseFloat(AfficheMontantTresorConsommerBienEtService))}}</td>
 <!--     
      <td style="width:12%">96</td>
      <th style="width:12%;text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">56</th> -->
@@ -113,10 +89,10 @@
                    <tr>
    
    <td height="20px">DON  </td>
-    <td height="20px"></td>
-    <td style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantDonBienEtService))}}</td>
-    <td style="text-align:center;height:20%">{{formatageSomme(parseFloat(AfficheMontantDonConsommerBienEtService))}}</td>
-   <td  style="text-align:center;height:20%">{{formatageSomme(parseFloat(AfficheMontantDonBienEtService)-parseFloat(AfficheMontantDonConsommerBienEtService))}}</td>
+    <td style="width:12%"></td>
+    <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantDonBienEtService))}}</td>
+    <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantDonConsommerBienEtService))}}</td>
+   <td  height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantDonBienEtService)-parseFloat(AfficheMontantDonConsommerBienEtService))}}</td>
 <!--     
      <td height="20px">45</td>
      <th height="20px">12</th> -->
@@ -124,8 +100,8 @@
                    <tr>
    
    <td height="20px">EMPRUNT  </td>
-    <td height="20px"></td>
-     <td style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantEmpruntBienEtService))}}</td>
+    <td style="width:12%"></td>
+     <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantEmpruntBienEtService))}}</td>
     
     <td style="text-align:center;height:20%">{{formatageSomme(parseFloat(AfficheMontantEmpruntConsommerBienEtService))}}</td>
       <td  style="text-align:center;height:20%">{{formatageSomme(parseFloat(AfficheMontantEmpruntBienEtService)-parseFloat(AfficheMontantEmpruntConsommerBienEtService))}}</td>
@@ -134,7 +110,7 @@
      <th height="20px">78</th> -->
 </tr>
                    <tr>
-   <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="S.T.BIENS ET SERVICES">SOUS-TOTAL  BIENS ET SERVICES</th>
+   <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="S.T.BIENS ET SERVICES">S/T B.SERVICES</th>
    
     <td height="20px"></td>
     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(AfficheMontantTresorBienEtService)+parseFloat(AfficheMontantDonBienEtService)+parseFloat(AfficheMontantEmpruntBienEtService))}}</td>
@@ -182,7 +158,7 @@
      <th height="20px"></th> -->
 </tr>
                    <tr>
-   <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUS-TOTAL TRANSFERT">S.T.TRANSFERT  </th>
+   <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUS-TOTAL TRANSFERT">S/T TRANSFERT  </th>
    
     <td height="20px"></td>
    <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(AfficheMontantTresorTransfert)+parseFloat(AfficheMontantDonTransfert)+parseFloat(AfficheMontantEmpruntTransfert))}}</td>
@@ -197,7 +173,7 @@
                                             <table class="table table-bordered table-striped" id="total">
                <tbody>
                   <tr>
-   <th style="width:10%" >TOTAL</th>
+   <th style="width:10%;font-size:14px;font-weight: bold;">TOTAL</th>
    <td style="width:12%"> CONTREPARTIE </td>
     <td style="width:12%">ETAT</td>
     <td width="12%" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresor))+parseFloat(parseFloat(AfficheMontantTresorBienEtService))+parseFloat(parseFloat(AfficheMontantTresorTransfert)))}}</td>
@@ -575,7 +551,9 @@ AfficheMontantEmpruntTransfert(){
   doc.autoTable({ html: '#bienService'}),
   doc.autoTable({ html: '#transfert'}),
   doc.autoTable({ html: '#total'}),
+  
 doc.save('SynteseBudget.pdf')
+doc.output('dataurlnewwindow')
 return 0
 
 

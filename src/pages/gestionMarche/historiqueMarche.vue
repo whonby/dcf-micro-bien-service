@@ -98,6 +98,10 @@ afficherModalAjouterTitre
               
                 <span title="MARCHE EN TERMINE">TE</span>
                 </button>
+                 <button v-else-if="marche.attribue == 7" class="btn  btn">
+              
+                <span title="MARCHE SUSPENDU">SU</span>
+                </button>
                    <button v-else class="btn  btn-danger">
               
                 <span title="MARCHE EN PLANIFICATION">PL</span>

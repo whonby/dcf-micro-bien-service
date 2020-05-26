@@ -5,7 +5,6 @@ var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
 
 
-modifierActeEffetFinancier
 
 
 export  function  getCandidatSelectionner({commit}) {

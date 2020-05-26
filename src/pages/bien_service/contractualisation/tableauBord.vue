@@ -129,7 +129,7 @@ nombreDeMarcheEnContratualisation(){
 return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 4 )
 },
     nbreMarcheExecuter(){
-  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.afficheCodeTypeMarche(recuper.marche.type_marche_id) == 4).length
+  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.afficheCodeTypeMarche(recuper.marche.type_marche_id) == 4 ||  this.afficherAttributMarche(recuper.marche_id) == 2 && this.afficheCodeTypeMarche(recuper.marche.type_marche_id) == 1).length
 },
 afficheNombreMarcheResilier(){
 return this.afficheMarcheResilier.length
