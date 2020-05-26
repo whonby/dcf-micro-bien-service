@@ -939,14 +939,10 @@ source_financement
                 <span class=""><i class="icon-pencil"></i></span></button>
 
 
-<<<<<<< HEAD
-                       <!-- <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
-=======
                         <router-link :to="{ name: 'CycleDeVie', params: { id: marche.marche_id }}"
->>>>>>> 94171b21947fc3b82695b1aa7b90561b2a50e9da
                                     class="btn btn-inverse " title="Cycle de vie du marche">
                            <span class=""><i class=" icon-calendar"></i></span>
-                       </router-link> -->
+                       </router-link> 
                 <button @click.prevent="modifierModalActeEffetFinancierLocal(index)"  class="btn btn-info">
                 <span class=""><i class=" icon-undo" title="Basculer en contratualisation"></i></span></button>
 
