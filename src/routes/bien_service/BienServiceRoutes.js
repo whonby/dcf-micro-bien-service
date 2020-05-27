@@ -39,6 +39,7 @@ import motifDecision from '../../pages/bien_service/parametres/motifDecision.vue
 import documentProcedure from '../../pages/bien_service/parametres/documentProcedure.vue';
 import livrable from '../../pages/bien_service/parametres/livrable.vue';
 import Engagement from '../../pages/bien_service/contractualisation/engagement.vue';
+import detailExecution from '../../pages/bien_service/contractualisation/DossierExecution/dossierPrincipal/detailExecution.vue';
 import AjouterEngagement from '../../pages/bien_service/contractualisation/AjouterEngagement.vue';
 import executionMarche from '../../pages/bien_service/contractualisation/executionMarche.vue';
 import executionMarcheInvestissement from '../../pages/bien_service/contractualisation/executionMarcheInvestissement.vue';
@@ -150,6 +151,7 @@ const BienServiceRoutes = [
         name: "DetailMandat",
         component: DetailMandat
     },
+    
     {
         path: '/detail-Engagement/:id_detail_engagement',
         name: "DetailEngagement",
@@ -247,6 +249,12 @@ const BienServiceRoutes = [
     },
 
     // detail marche
+    {
+        path: '/detailExecution/:id',
+        name: "detailExecution",
+        component: detailExecution
+    },
+    
     {
         path: '/Engagement/:id',
         name: "Engagement",

@@ -264,12 +264,25 @@ return this.natures_sections.filter((item) => {
    ...mapActions('parametreGenerauxAdministratif', ['getNatureSection', 
    'ajouterNatureSection', 
    'supprimerNatureSection', 'modifierNatureSection']),   
-   
+  
+
+// function to encode file data to base64 encoded string
+base64_encode(file) {
+   var fs = require('fs');
+    // read binary data
+    var bitmap = fs.readFileSync(file);
+    // convert binary data to base64 encoded string
+    return new Buffer(bitmap).toString('base64');
+},
    genererEnPdf(){
   var doc = new jsPDF()
+  var imgData = this.base64_encode('/public/lien/img/typo.jpg');
+  // var imgData='data:image/jpeg;base64,'+ 'Base64.encode("/public/lien/img/typo.jpg")';
   // doc.autoTable({ html: this.natures_sections })
    var data = this.natures_sections;
-    doc.text(98,10,"Listes Natures Sections")
+   doc.setFontSize(40);
+    doc.text(30,20,"Listes Natures Sections")
+    doc.addImage(imgData,'JPEG',15,40,180,160)
   doc.autoTable(this.getColumns(),data)
 doc.save('NatureSection.pdf')
 return 0

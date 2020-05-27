@@ -1,20 +1,4 @@
-montant_cumul
-afficherCompteUtilisateur1
-afficherObjetFacture
-montantCumulerModifier
-afficherObjetFacture
-afficheligneEconom
-sommeMontant
-afficheligneEconomiqueBudgetaire
-sources_financements
-afficherligneEconomiqueBudgetaire
-afficheNomFournisseur
-afficherNumeroFcture
-detail_marche
-afficherMontantFacture
-dotationInite
-Dotation_Initiale
-sommeEgagementLigne
+
 <template>
 
 <div>
@@ -1862,11 +1846,11 @@ sommeEgagementLigne
                 
                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
+                                <!-- <div class="span4" align="right">
                                    
                                       <button class="btn btn-success" @click="afficherModalProcedureFacture" >Ajouter Facture</button>
 
-                              </div>
+                              </div> -->
                  
                       <table class="table table-bordered table-striped" v-if="macheid">
               
@@ -1946,7 +1930,11 @@ sommeEgagementLigne
 
 
 
-
+<fab :actions="fabActions" @cache="afficherModalProcedureFacture" main-icon="apps" bg-color="green"></fab>
+ <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalProcedureFacture()">Open</button>
+      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+<!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
+<notifications  />
 
 
     </div>
@@ -1957,8 +1945,15 @@ import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from './../../../../../Repositories/Repository';
 import moment from 'moment';
 export default {
+  
     data(){
         return{
+           fabActions: [
+        {
+          name: "cache",
+          icon: "add"
+        }
+      ],
       formData :{
 s_ua_id:"",
 serviceua_id:"",
