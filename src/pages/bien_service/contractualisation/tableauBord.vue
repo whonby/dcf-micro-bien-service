@@ -14,7 +14,7 @@
           <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>MARCHE</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{nbreMarcheExecuter}}</span> <h4>EN EXECUTION</h4></a> </li>
                 <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>MARCHE</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{afficheNombreMarcheResilier}}</span><h4> RESILIE</h4></a> </li>
 
-        
+        <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>MARCHE</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{nombreDeMarchesuspendu}}</span> <h4> SUSPENDU</h4></a> </li>
 
         <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>MARCHE</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{nombreAfficheMarcheSolde}}</span> <h4> TERMINE</h4></a> </li>
   
@@ -129,6 +129,16 @@ budgetConsommerBienService(){
       
   
 },
+
+
+afficheMarcheSuspendu(){
+return this.afficherLaListeDesMarche.filter(element => element.attribue == 7)
+},
+nombreDeMarchesuspendu(){
+  return this.afficheMarcheSuspendu.length;
+},
+
+
 
 
 

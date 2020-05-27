@@ -23,7 +23,7 @@
 <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>MARCHE EN </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{nbreMarcheExecuter}}</span><h4>EXECUTION</h4>  </a> </li>
 <li class="bg_ls span3"> <a href="#" style="color:black;"><h4>MARCHE</h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{afficheNombreMarcheResilier}}</span><h4>RESILIE</h4>  </a> </li>
         <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>MARCHE </h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{nombreAfficheMarcheSolde}}</span> <h4> TERMINE</h4></a> </li>
-  
+     <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>MARCHE </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{nombreDeMarcheSuspendu}}</span><h4>SUSPENDU</h4>  </a> </li>
       </ul>
     </div>
     
@@ -90,6 +90,10 @@ budgetConsommerBienService(){
     return this.getMandatPersonnaliserVise.filter(element => element.marchetype == 2 ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(2); 
       
   
+},
+
+   nombreDeMarcheSuspendu(){
+return this.marches.filter(element => element.attribue == 7 ).length
 },
 
 
