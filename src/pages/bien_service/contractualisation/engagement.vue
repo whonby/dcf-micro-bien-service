@@ -1218,9 +1218,9 @@ Modifier Mandat
                     <th>Date decompte</th>
                     <th>Montant decompte</th>
                     <th>Montant cumuler</th>
-                    <!-- <th>Dotation prévu</th>
+                    <th>Dotation prévu</th>
                     <th>Montant executé dotation</th>
-                    <th>Reste executé dotation</th> -->
+                    <th>Reste executé dotation</th>
                     <th>Montant executé marché</th>
                     <th>Reste executé marché</th>
                      
@@ -1248,9 +1248,9 @@ Modifier Mandat
                    <td style="text-align: center" >{{formaterDate(type.date_motif) || 0}}</td>
                    <td>{{formatageSomme(parseFloat(montantFactureMandat(type.facture_id))) || 0}}</td>
                     <td>{{formatageSomme(parseFloat(montantFactureMandat(type.facture_id))) || 0}}</td>
-                   <!-- <td>{{formatageSomme(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale)) || 0}}</td>
+                   <td>{{formatageSomme(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale)) || 0}}</td>
                   <td>{{formatageSomme(parseFloat(montantFactureMandat(type.facture_id)))}}</td>
-                   <td>{{formatageSomme(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale - montantFactureMandat(type.facture_id) )) || 0}}</td> -->
+                   <td>{{formatageSomme(parseFloat(dotationInite(detail_marche.imputation).Dotation_Initiale - montantFactureMandat(type.facture_id) )) || 0}}</td>
                    <td>{{formatageSomme(parseFloat(montantMarcheAvecAvenant)-(parseFloat(montantFactureMandat(type.facture_id)))) || 0}}</td>
                    <td>{{formatageSomme(parseFloat(restePayeMarche)) || 0}}</td>
                      <td style="text-align: center;color:red" >{{formatageSomme(parseFloat(recupereMontantTresor(type.marche_id))) || 0}}</td>
@@ -1283,9 +1283,9 @@ Modifier Mandat
                     <td></td>
                     <td></td>
                     <td></td>
-                    <!-- <td></td>
                     <td></td>
-                    <td></td> -->
+                    <td></td>
+                    <td></td>
                   <td                     
                      style="text-align: center;color:red;font-weight:bold;"
                     >{{formatageSomme(parseFloat(montantMandatParMarche(detail_marche.id))) || 0}}</td> 
