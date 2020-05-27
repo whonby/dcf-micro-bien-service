@@ -14,6 +14,7 @@
              
                 
               
+
             </ul>
                             
           </div>
@@ -24,34 +25,18 @@
                    <div class="container-fluid">
 
                <ul class="quick-actions" style="margin: 0px !important;">
+<li class="bg_lb span4"> <a href="#" style="color:black;"><h4>NOMBRE DE</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{afficherLaListeDesContratsDuPersonnel}}</span><h4>CONTRAT</h4></a> </li>
 
-                <li class="bg_lb">
-                    <a href="#">
-                        <i class="icon-dashboard"></i> <span class="label label-important">{{afficherLaListeDesContratsDuPersonnel}}</span> Nombre de contrat
-                    </a>
-                </li>
-                <li class="bg_lg">
-                    <a href="#"> <i class="icon-signal"></i> <span class="label label-important">{{afficherContratPlanifier}}</span> Nombre de contrat planifier
-                    </a>
-                </li>
-                <li class="bg_ly">
-                    <a href="#">
-                        <i class="icon-inbox"></i><span class="label label-important">{{afficherNombreDeContratContratualisation}}</span> Nombre de contrat en contratualisation
-                    </a>
-                </li>
+        <li class="bg_lg span4"> <a href="#" style="color:black;"><h4>NOMBRE DE </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{afficherContratPlanifier}}</span><h4> CONTRAT PLANIFIER </h4>  </a> </li>
 
-                <li class="bg_lo">
-                    <a href="#">
-                        <i class="icon-inbox"></i><span class="label label-important">{{nbreMarcheContrat}}</span> Nombre de contrat en execution
-                    </a>
-                </li>
+        <li class="bg_ly span4"> <a href="#" style="color:black;"><h4>NOMBRE DE CONTRAT EN</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{afficherNombreDeContratContratualisation}}</span> <h4>CONTRATUALISATION</h4></a> </li>
+  
+                <li class="bg_lo span4"> <a href="#" style="color:black;"><h4>NOMBRE DE CONTRAT</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{nbreMarcheContrat}}</span><h4> EXECUTE</h4></a> </li>
 
+        
 
-                   <li class="bg_ls">
-                    <a href="#">
-                        <i class="icon-inbox"></i><span class="label label-important">{{afficheNombreMarcheResilier}}</span> Nombre de contrat resilié
-                    </a>
-                </li>
+        <li class="bg_ly span4"> <a href="#" style="color:black;"><h4>NOMBRE DE CONTRAT</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{afficheNombreMarcheResilier}}</span> <h4> RESILIE</h4></a> </li>
+  
                 
             </ul>            
             </div>
@@ -63,33 +48,24 @@
 
                <ul class="quick-actions" style="margin: 0px !important;">
 
-                <li class="bg_lb">
-                    <a href="#">
-                        <i class="icon-dashboard"></i> <span class="label label-important">{{totalActeurDepense}}</span> Total acteur depense
-                    </a>
-                </li>
-                <li class="bg_lg">
-                    <a href="#"> <i class="icon-signal"></i> <span class="label label-important">{{totalActeurEnctivite}}</span> Total acteur en activité
-                    </a>
-                </li>
-                <li class="bg_ly">
-                    <a href="#">
-                        <i class="icon-inbox"></i><span class="label label-important">{{totalActeurAccredite}}</span> Total acteur accredité
-                    </a>
-                </li>
-                <li class="bg_lb"> <a href="#"> <i class="icon-th"></i> <span class="label label-important">{{totalActeurNonAccredite}}</span> Total acteur non accredité</a> </li>
-                <li class="bg_ls"> <a href="#"> <i class="icon-fullscreen"></i> <span class="label label-important" v-if="tauxActeurAccredite!='NaN'">{{tauxActeurAccredite || '0' }} %</span>
-                    Taux acteurs acredité
-                </a> </li>
-                <li class="bg_ly">
-                    <a href="#">
-                        <i class="icon-inbox"></i><span class="label label-important">{{totalActeurAccredite}}</span> Total acteur accredité
-                    </a>
-                </li>
-                <li class="bg_lb"> <a href="#"> <i class="icon-th"></i> <span class="label label-important">{{totalActeurNonAccredite}}</span> Total acteur non accredité</a> </li>
-                <li class="bg_ls"> <a href="#"> <i class="icon-fullscreen"></i> <span class="label label-important" v-if="tauxActeurAccredite!='NaN'">{{tauxActeurAccredite || '0' }} %</span>
-                    Taux acteurs acredité
-                </a> </li>
+
+<li class="bg_lb span4"> <a href="#" style="color:black;"><h4>TOTAL </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{totalActeurDepense}}</span><h4>ACTEUR DEPENSE</h4></a> </li>
+
+        <li class="bg_lg span4"> <a href="#" style="color:black;"><h4>TOTAL </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{totalActeurEnctivite}}</span><h4> ACTEUR EN ACTIVITE </h4>  </a> </li>
+
+        <li class="bg_ly span4"> <a href="#" style="color:black;"><h4>TOTAL</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{totalActeurAccredite}}</span> <h4>ACTEUR ACCREDITE</h4></a> </li>
+          <li class="bg_ly span4"> <a href="#" style="color:black;"><h4>TOTAL</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{totalActeurNonAccredite}}</span> <h4>ACTEUR NON ACCREDITE</h4></a> </li>
+                <li class="bg_lo span4"> <a href="#" style="color:black;"><h4>TAUX</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px" v-if="tauxActeurAccredite!='NaN'">{{tauxActeurAccredite}}%</span><h4> ACTEUR ACCREDITE</h4></a> </li>
+
+        
+
+        <li class="bg_ly span4"> <a href="#" style="color:black;"><h4>TAUX</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px" v-if="tauxActeurNonAccredite!='NaN'">{{tauxActeurNonAccredite}}%</span> <h4> ACTEUR NON ACCREDITE</h4></a> </li>
+  
+
+
+
+
+             
             </ul>            
             </div>
             </div>
@@ -101,8 +77,7 @@
             <div class="container-fluid">
          <div class="quick-actions_homepage" style="position: center;">
       <ul class="quick-actions" >
-        
-        <li class="bg_lb" title="Nombre total de mission global">
+         <li class="bg_lb" title="Nombre total de mission global">
              <a href="#">
             <i class="icon-dashboard"></i> <span class="label label-important">{{nombreTotalDeTouteMissions}}
         </span> Nombre total de missions. </a> </li>
@@ -198,7 +173,7 @@
     ]),
   ...mapGetters('personnelUA', ['totalActeurNonAccredite','acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions",
                 "grades","niveau_etudes","nbr_acteur_actredite_taux","all_acteur_depense","totalActeurAccredite",
-                "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
+                "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","tauxActeurNonAccredite"]),
                 
 
     ...mapGetters("bienService",["getActeEffetFinancierPersonnaliser45","typeMarches","printMarcheNonAttribue","marches"]),

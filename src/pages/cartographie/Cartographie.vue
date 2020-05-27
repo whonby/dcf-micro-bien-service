@@ -277,7 +277,7 @@
         },
         localisation(){
         let localisation=[]
-          console.log(this.getMandatPersonnaliserVise)
+         // console.log(this.getMandatPersonnaliserVise)
             let vM=this;
             this.localisations_geographiques.forEach(function (value){
                 if(value.parent!=null){
