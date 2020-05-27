@@ -3,9 +3,6 @@
     <div>
         <notifications />
 
-
-        <!-- End Page Header -->
-        <!-- Default Light Table -->
         <div class="container-fluid">
             <hr>
             <div class="row-fluid">
@@ -129,10 +126,17 @@
 
 <script>
     import {mapGetters, mapActions} from 'vuex'
+    // import {partition} from '../../../../src/Repositories/Repository'
+    // import jsPDF from 'jspdf'
+    // import 'jspdf-autotable'
     export default {
 
         data() {
             return {
+                page:0,
+                size:10,
+                active_el:0,
+
                 fabActions: [
                     {
                         name: 'cache',
@@ -172,6 +176,14 @@
         methods: {
             // methode pour notre action
             ...mapActions('personnelUA', ["ajouterCategorieGrade","supprimerCategorieGrade","modifierCategorieGrade"]),
+            
+            
+            
+             
+            
+            
+            
+            
             afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',

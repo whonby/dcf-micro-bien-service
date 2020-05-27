@@ -9,7 +9,9 @@
                                     <tr>
                                         <th>Bailleur</th>
                                         <th>Type finanncement</th>
-                                        <th>Montant</th>
+                                         <th>Montant du bailleur TTC </th>
+                                        <th>Montant TTC du contrat </th>
+                                         <th>Taux % </th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -22,6 +24,15 @@
                                             {{appelOffre.typeFinnancement.libelle || 'Non renseigné'}}</td>
                                         <td @dblclick="editeMarcheBailleur(appelOffre.id)">
                                             {{formatageSomme(parseFloat(appelOffre.montant ))|| 'Non renseigné'}}</td>
+
+                                           <td @dblclick="editeMarcheBailleur(appelOffre.id)">
+                                            {{ formatageSomme(parseFloat(montantAct(appelOffre.acte_effet_id)))|| 'Non renseigné'}}</td>
+                                            
+
+                                             <td @dblclick="editeMarcheBailleur(appelOffre.id)">
+                                            {{((parseFloat(appelOffre.montant )) / parseFloat(montantAct(appelOffre.acte_effet_id)) * 100).toFixed(2)}}</td>
+
+
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerMarcheBailleur(appelOffre.id)"  class="btn btn-danger ">
                                                 <span class=""><i class="icon-trash"></i></span></button>
@@ -43,6 +54,49 @@
                                     </div>
                                      <table class="table table-bordered table-striped" v-if="macheid">
                                        <tr>
+
+                                            <td>
+                          <div class="control-group">
+                        <label class="control-label">N° marché</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    :value="afficherNumeroMarche(macheid)"
+                                    class="span"
+                                   readonly
+                            />
+                        </div>
+                        </div>
+                            </td>
+
+                                       <td>
+                          <div class="control-group">
+                        <label class="control-label">Refference Marché</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    :value="afficherReffeMarche(macheid)"
+                                    class="span"
+                                   readonly
+                            />
+                        </div>
+                        </div>
+                            </td>
+
+                                          <td>
+                          <div class="control-group">
+                        <label class="control-label">Montant Contrat/marché (TTC )</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    :value="afficherMontantTtcDeActe(macheid)"
+                                    class="span"
+                                   readonly
+                            />
+                        </div>
+                        </div>
+                            </td>
+
                                            <td>
                                            <div class="control-group">
                                             <label div class="control-label">Bailleur</label>
@@ -67,15 +121,20 @@
                                             </div>
                                             </div>
                                            </td>
+
+                                            </tr>
+
+                                            <tr>
                                            <td>
                                             <div class="control-group">
-                                                <label class="control-label">Montant <code>*</code> :</label>
+                                                <label class="control-label">Montant Hors Taxe (HT) <code>*</code> :</label>
                                                 <div class="controls">
-                                                    <input type="text" class="span5" placeholder="Montant" v-model="formBailleur.montant_ht">
+                                                    <input type="text" class="span" placeholder="Montant" v-model="formBailleur.montant_ht">
                                                 </div>
                                                 
                                             </div>
                                            </td>
+                                      
                                         <td>
               
                                  <div class="control-group">
@@ -90,15 +149,13 @@
                                         </div>
                                     </div>
                                     </td>
-                                       </tr>
-                                        <tr  class="odd gradeX" >
-            <td colspan="3">
+                                       
+            <td >
               <div class="control-group">
                 <label class="control-label" style="text-align:right;color:red">Taux</label>
                
               </div>
-            </td>
-            <td>
+            
               <div class="control-group">
                
                 <div class="controls">
@@ -109,29 +166,19 @@
                     class="span"
                    readonly
                   />
-                  
-                   <input
-                    type="hidden"
-                    
-                   
-                    class="span3"
-                   
-                  />
                 </div>
               </div>
             </td>
             
             
                   
-          </tr>
-          <tr  class="odd gradeX" >
-            <td colspan="3">
+          
+          
+            <td >
               <div class="control-group">
                 <label class="control-label" style="text-align:right;color:red">TVA</label>
                
               </div>
-            </td>
-            <td>
               <div class="control-group">
                
                 <div class="controls">
@@ -148,17 +195,15 @@
             </td>
             
             
-                  
-          </tr>
+       
          
-          <tr  class="odd gradeX" >
-            <td colspan="3">
+          
+            <td >
               <div class="control-group">
                 <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
                
               </div>
-            </td>
-            <td>
+           
               <div class="control-group">
                
                 <div class="controls">
@@ -193,8 +238,49 @@
                                         <button data-dismiss="modal" class="close" type="button">×</button>
                                         <h3>Modification Bailleur </h3>
                                     </div>
-                                     <table class="table table-bordered table-striped" v-if="macheid">
+                                     <table class="table table-bordered table-striped">
                                        <tr>
+                                                       <td>
+                          <div class="control-group">
+                        <label class="control-label">N° marché</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    :value="afficherNumeroMarche(macheid)"
+                                    class="span"
+                                   readonly
+                            />
+                        </div>
+                        </div>
+                            </td>
+
+                                       <td>
+                          <div class="control-group">
+                        <label class="control-label">Refference Marché</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    :value="afficherReffeMarche(macheid)"
+                                    class="span"
+                                   readonly
+                            />
+                        </div>
+                        </div>
+                            </td>
+
+                                          <td>
+                          <div class="control-group">
+                        <label class="control-label">Montant Contrat/marché (TTC )</label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    :value="afficherMontantTtcDeActe(macheid)"
+                                    class="span"
+                                   readonly
+                            />
+                        </div>
+                        </div>
+                            </td>
                                            <td>
                                            <div class="control-group">
                                             <label div class="control-label">Bailleur</label>
@@ -219,11 +305,14 @@
                                             </div>
                                             </div>
                                            </td>
+                                       </tr>
+
+                                       <tr>
                                            <td>
                                             <div class="control-group">
                                                 <label class="control-label">Montant <code>*</code> :</label>
                                                 <div class="controls">
-                                                    <input type="text" class="span5" placeholder="Montant" v-model="edit_bailleur_marche.montant_ht">
+                                                    <input type="text" class="span" placeholder="Montant" v-model="edit_bailleur_marche.montant_ht">
                                                 </div>
                                                 
                                             </div>
@@ -242,15 +331,13 @@
                                         </div>
                                     </div>
                                     </td>
-                                       </tr>
-                                        <tr  class="odd gradeX" >
-            <td colspan="3">
+                                      
+            <td >
               <div class="control-group">
                 <label class="control-label" style="text-align:right;color:red">Taux</label>
                
               </div>
-            </td>
-            <td>
+          
               <div class="control-group">
                
                 <div class="controls">
@@ -262,28 +349,21 @@
                    readonly
                   />
                   
-                   <input
-                    type="hidden"
-                    
                    
-                    class="span3"
-                   
-                  />
                 </div>
               </div>
             </td>
             
             
                   
-          </tr>
-          <tr  class="odd gradeX" >
-            <td colspan="3">
+         
+          
+            <td >
               <div class="control-group">
                 <label class="control-label" style="text-align:right;color:red">TVA</label>
                
               </div>
-            </td>
-            <td>
+           
               <div class="control-group">
                
                 <div class="controls">
@@ -301,16 +381,15 @@
             
             
                   
-          </tr>
+          
          
-          <tr  class="odd gradeX" >
-            <td colspan="3">
+       
+            <td >
               <div class="control-group">
                 <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
                
               </div>
-            </td>
-            <td>
+            
               <div class="control-group">
                
                 <div class="controls">
@@ -358,6 +437,9 @@ export default {
                     bailleur_id:"",
                    exonere:"",
                     montant:"",
+                    acte_effet_id:"",
+                    tva:"",
+                    montant_tva:"",
                     
                 },
         edit_bailleur_marche:{
@@ -365,6 +447,9 @@ export default {
                     bailleur_id:"",
                     exonere:"",
                     montant:"",
+                    acte_effet_id:"",
+                    tva:"",
+                    montant_tva:"",
 
         }
 
@@ -401,6 +486,74 @@ listeBailleurMarche: function () {
             },
 
 
+             afficherNumeroMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_marche;
+      }
+      return 0
+        }
+      };
+    },
+
+
+       afficherReffeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.reference_marche;
+      }
+      return 0
+        }
+      };
+    },
+
+
+     afficherMontantTtcDeActe() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.montant_act;
+      }
+      return 0
+        }
+      };
+    },
+
+    montantAct() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.montant_act;
+      }
+      return 0
+        }
+      };
+    },
+
+     enregistreIdActe() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+        }
+      };
+    },
+
+
 afficherEnorere(){
 if(this.formBailleur.exonere == 0){
   return 0
@@ -423,7 +576,7 @@ affcherTauxEnCours() {
     },
 
   montantTva() {
-      const val = parseFloat((this.formBailleur.montant_ht) * parseFloat(this.afficherEnorere)/100);
+      const val = parseFloat(((this.formBailleur.montant_ht) * parseFloat(this.afficherEnorere))/100);
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -505,7 +658,7 @@ else {
             },
 
          ajouterBailleur(){
-
+                 this.formBailleur.acte_effet_id=this.enregistreIdActe(this.macheid)
                 this.formBailleur.marche_id=this.macheid
                 this.formBailleur.montant=this.montantHTt
                 this.formBailleur.tva=this.afficherEnorere
@@ -522,6 +675,7 @@ else {
 
   modificationBailleurMarche(){
               this.edit_bailleur_marche.marche_id=this.macheid
+              this.edit_bailleur_marche.acte_effet_id=this.enregistreIdActe(this.macheid)
               this.edit_bailleur_marche.montant=this.editMontantHTt
                 this.edit_bailleur_marche.tva=this.editAfficherEnorere
                 this.edit_bailleur_marche.montant_tva= this.editMontantTva

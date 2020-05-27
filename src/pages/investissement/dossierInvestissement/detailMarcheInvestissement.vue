@@ -78,14 +78,15 @@ CodeExempte
                                  <li class="active"><a data-toggle="tab" href="#tab0145">Publication de l'offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab01">Reception de l'offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab1">Attribution</a></li>
+                                <li class=""><a data-toggle="tab" href="#801">Attribution</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab2">Bailleur</a></li>
                                
                                 
                             </ul>
                         </div>
                         
                          <div class="widget-content tab-content">
-<div id="tab0145" class="tab-pane active">
+                           <div id="tab0145" class="tab-pane active">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
@@ -109,7 +110,7 @@ CodeExempte
                       <component-cotation :macheid="detail_marche"></component-cotation>
                          </div>
 
-                        <div id="tab1" class="tab-pane">
+                        <div id="801" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning">Ajouter</a>
@@ -118,6 +119,19 @@ CodeExempte
 
                 </div>
                 <component-acte :macheid="detail_marche.id"></component-acte>
+
+                </div>
+
+                
+                     <div id="tab2" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+
+
+                </div>
+                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
 
                 </div>
 
@@ -154,9 +168,11 @@ CodeExempte
                                 <li class=""><a data-toggle="tab" href="#tab478">Reception des offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab498">Ouverture</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab411">Rapport d'ouverture</a></li>
+                                  <li class=""><a data-toggle="tab" href="#tab7081845">D.Candidats</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab78932">Jugement</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab4110">Rapport Jugement</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab178">Attribution</a></li>
+                                <li class=""><a data-toggle="tab" href="#80178">Attribution</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab012">Bailleur</a></li>
                                
                                 
                             </ul>
@@ -193,7 +209,7 @@ CodeExempte
                    <div id="tab498" class="tab-pane">
                 <div align="right">
                    
- <div class="widget-content">
+                       <div class="widget-content">
                         <a href="#ajouterOuverture" data-toggle="modal" class="btn btn-success">Ajouter</a>
                     </div>
 
@@ -215,6 +231,12 @@ CodeExempte
                 </div>
                 <rapportOuverture :macheid="detail_marche.id"></rapportOuverture>
 
+                </div>
+
+                <div id="tab7081845" class="tab-pane">
+                
+               
+                   <dossier-Candidat :macheid="detail_marche.id"></dossier-Candidat>
                 </div>
 
                    <div id="tab78932" class="tab-pane">
@@ -239,7 +261,7 @@ CodeExempte
                <component-pv :macheid="detail_marche.id"></component-pv>
 
                 </div>
-                 <div id="tab178" class="tab-pane">
+                 <div id="80178" class="tab-pane">
                <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning">Ajouter</a>
@@ -248,6 +270,18 @@ CodeExempte
 
                 </div>
                 <component-acte :macheid="detail_marche.id"></component-acte>
+
+                </div>
+
+                  <div id="tab012" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+
+
+                </div>
+                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
 
                 </div>
                          </div>
@@ -265,14 +299,14 @@ CodeExempte
                                 <li ><a data-toggle="tab" href="#tab5896">Lot</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab78458">Lettre d'invitation CF</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab21230">Le mandaté</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab1235">Reception des offres</a></li>
+                                <li class=""><a data-toggle="tab" href="#801235">Reception des offres</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab78477">Ouverture des offres</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab41011">Rapport d'ouverture</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab7845">D.Candidats</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab701845">D.Candidats</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab9563"> Jugement des offres </a></li>
                                 <li class=""><a data-toggle="tab" href="#tab06125">Rapport d'évaluation</a></li>
                                <li class=""><a data-toggle="tab" href="#tab067458">Attribution de l'Offre</a></li>
-                                
+                               <li class=""><a data-toggle="tab" href="#tab005412">Bailleur</a></li> 
                             </ul>
                         </div>
                         
@@ -317,7 +351,7 @@ CodeExempte
 
                       <mandate-Bs :macheid="detail_marche.id"></mandate-Bs>
                          </div>
-                          <div id="tab1235" class="tab-pane">
+                          <div id="801235" class="tab-pane">
                                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <div class="span4" align="right">
@@ -362,17 +396,12 @@ CodeExempte
                 </div>
 
 
-                 <div id="tab7845" class="tab-pane">
-                <div align="right">
-                    <div class="widget-content">
-                        <a href="" @click="isFormulaireDossierCand" v-if="isButtunAddDossierCandidat" data-toggle="modal" class="btn btn-success">Ajouter</a>
-                    </div>
-
-
-                </div>
+                 <div id="tab701845" class="tab-pane">
+                
                
                    <dossier-Candidat :macheid="detail_marche.id"></dossier-Candidat>
                 </div>
+
                   <div id="tab9563" class="tab-pane">
                 <div align="right">
                     <div class="widget-content">
@@ -407,6 +436,18 @@ CodeExempte
                 <component-acte :macheid="detail_marche.id"></component-acte>
 
                 </div>
+
+                <div id="tab005412" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+
+
+                </div>
+                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+
+                </div>
                          </div>
 
                         
@@ -425,11 +466,11 @@ CodeExempte
                                 <li class=""><a data-toggle="tab" href="#tab051">Reception des offres</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab784">Ouverture des offres</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab410131">Rapport d'ouverture</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab7884">D.Candidats</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab70884">D.Candidats</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab5498"> Jugement des offres </a></li>
                                 <li class=""><a data-toggle="tab" href="#tab0612">Rapport d'évaluation</a></li>
                                <li class=""><a data-toggle="tab" href="#tab06745">Attribution de l'Offre</a></li>
-                                
+                               <li class=""><a data-toggle="tab" href="#tab003412">Bailleur</a></li> 
                             </ul>
                         </div>
                         
@@ -523,14 +564,8 @@ CodeExempte
 
 
                 
-                 <div id="tab7884" class="tab-pane">
-                <div align="right">
-                    <div class="widget-content">
-                        <a href="" @click="isFormulaireDossierCand" v-if="isButtunAddDossierCandidat" data-toggle="modal" class="btn btn-success">Ajouter</a>
-                    </div>
-
-
-                </div>
+                 <div id="tab70884" class="tab-pane">
+              
                
                    <dossier-Candidat :macheid="detail_marche.id"></dossier-Candidat>
                 </div>
@@ -567,6 +602,18 @@ CodeExempte
                 <component-acte :macheid="detail_marche.id"></component-acte>
 
                 </div>
+
+                 <div id="tab003412" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
+
+
+                </div>
+                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+
+                </div>
                          </div>
 
                         
@@ -579,14 +626,16 @@ CodeExempte
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
                                    <li class="active"><a data-toggle="tab" href="#tab001" title="tansmission du DAO a la DMP">Transmission</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab010">ANO DMP sur DAO</a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab020">ANO Bailleur sur DAO</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab010">ANO DMP /DAO</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab020">ANO Bailleur /DAO</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab0145" title="publication des offres">Publication</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab0001" title="lettre d'invitation">Lettre I</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab0045" title="reception des offres">Reception</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab02">Reception de l'offre</a></li> -->
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab45">Rapport d'ouverture</a></li>
+                                
+                                <li class=""><a data-toggle="tab" href="#tab45" title="rapport d'ouverture">R. Ouverture</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab7884" title="dossier candidat">D.Candidat</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab6" title="jugement des offres">Jugement</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab7" title="rapport d'évaluation combiné">Rapport</a></li>
 
@@ -596,7 +645,8 @@ CodeExempte
                                       <li class=""><a data-toggle="tab" href="#tab28" title="demande ANO Bailleur"> D.Bailleur </a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab0008" title="ANO bailleur attribution">A.Bailleur </a></li> -->
 
-                                <li class=""><a data-toggle="tab" href="#tab1">Attribution</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab1801">Attribution</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab0013412">Bailleur</a></li> 
                                
                                 
                             </ul>
@@ -702,6 +752,12 @@ CodeExempte
 
                 </div>
 
+                 <div id="tab7884" class="tab-pane">
+               
+               
+                   <dossier-Candidat :macheid="detail_marche.id"></dossier-Candidat>
+                </div>
+
 
                    <div id="tab6" class="tab-pane">
                <div align="right">
@@ -793,7 +849,7 @@ CodeExempte
 
 
 
-                        <div id="tab1" class="tab-pane">
+                        <div id="tab1801" class="tab-pane">
                        <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" v-if="listeAvisAnoBailleur(macheid)">Ajouter</a>
@@ -810,7 +866,17 @@ CodeExempte
 
 
 
+                 <div id="tab0013412" class="tab-pane">
+                <div align="right">
+                    <div class="widget-content">
+                        <a href="#addBailleurMarche" data-toggle="modal" class="btn btn-success">Ajouter</a>
+                    </div>
 
+
+                </div>
+                <componentBailleur :macheid="detail_marche.id"></componentBailleur>
+
+                </div>
                 
 
                
@@ -858,6 +924,11 @@ import dossierCandidat from '../../bien_service/DossierPso/dossierCandidat/dossi
     import componentAnalyse from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentAnalyse/componentAnalyse';
      import componentPv from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentPv/componentPv';
   import rapportOuverture from '../../bien_service/dossierDetailMarcheProcedureSimplifierAvecComite/dossierRappportOuverture/rapportOuverture';
+
+  import componentBailleur from '../../bien_service/dossierDetailMarchePs/dossierBailleur/componentBailleur';
+
+//import dossierCandidat from '../../bien_service/DossierPso/dossierCandidat/dossierCandidat'
+
 //   import componentCotation from '../dossierDetailMarchePs/dossierComponentPs/componentCotation';
 //      import componentEtat from '../dossierDetailMarchePs/dossierComponentEtat/componentEtat';
 //       import componentOuverture from '../dossierDetailMarcheProcedureSimplifierAvecComite/dossierComponentOuverture/componentOuverture';
@@ -907,9 +978,9 @@ dossierCandidat,
 componentPv,
  
            
+     componentBailleur ,    
+            
           
-            
-            
        
          
           ///////
