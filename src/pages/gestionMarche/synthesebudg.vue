@@ -8,15 +8,17 @@
           </div>
            
 
- 
-          <table class="table table-bordered table-striped" id="Exo">
+ <div ref="document">
+
+
+          <!--<table class="table table-bordered table-striped" id="Exo">
             <tr>
               <td>
-                   <h3 style="text-align:center">EXERCICE EN COURS :<span style="color: red;font-size:50px">{{anneeAmort}}</span></h3>
+
               </td>
             </tr>
-          </table>
-          
+          </table>-->
+     <h3 style="text-align:center">Synthese budgetaire :<span style="color: red;">{{anneeAmort}}</span></h3>
            
               <table class="table table-bordered table-striped" id="titre">
                 <thead>
@@ -121,7 +123,8 @@
      <!-- <td height="20px">05</td>
      <th height="20px">08</th> -->
 </tr>                                                       
-               </tbody>    
+               </tbody>
+                               <div class="html2pdf__page-break"></div>
              </table>
                                <table class="table table-bordered table-striped" id="transfert">
                <tbody>
@@ -218,12 +221,12 @@
 </tr>                                                       
                </tbody>    
              </table>
-            
 
 
 
 
 
+ </div>
 
             <!-- <div v-else> -->
               <!-- <p style="text-align:center;font-size:20px;color:red;">Aucune Unite Administrative</p> -->
@@ -248,6 +251,7 @@ import 'jspdf-autotable'
 // import moment from "moment";
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
+import html2pdf from 'html2pdf.js'
 export default {
   // components: {
   //   ModelListSelect
@@ -544,7 +548,7 @@ AfficheMontantEmpruntTransfert(){
       "supprimerpaiementPersonnel"
     ]),
     genererEnPdf(){
-  var doc = new jsPDF('landscape')
+ /* var doc = new jsPDF('landscape')
   
   doc.text(98,10,"SYNTHESE DU BUDGET")
   doc.autoTable({html:'#Exo'})
@@ -555,8 +559,14 @@ AfficheMontantEmpruntTransfert(){
   
 doc.save('SynteseBudget.pdf')
 doc.output('dataurlnewwindow')
-return 0
-
+return 0*/
+        html2pdf(this.$refs.document, {
+            margin: 1,
+            filename:'SYNTHESE DU BUDGET.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { dpi: 192, letterRendering: true },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
+        })
 
 },
 formatageSomme:formatageSomme
