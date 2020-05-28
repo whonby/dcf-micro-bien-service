@@ -583,7 +583,7 @@ margin: 0 -48%;
   
 }
 td{
-font-size:14px;
+font-size:12px;
 font-weight: bold;
 }
 </style>

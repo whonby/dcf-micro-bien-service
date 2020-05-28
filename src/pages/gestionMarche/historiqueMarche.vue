@@ -43,6 +43,7 @@ afficherModalAjouterTitre
                      <th>Statut</th>
                     <th>Montant prévu</th>
                     <th>Etat du marché</th>
+                    <!-- <th>Action</th> -->
                    
                   </tr>
                 </thead>
@@ -109,6 +110,12 @@ afficherModalAjouterTitre
 
                    </td>
                  
+                   <!-- <td v-if="marche.type_marche_id == 6 ||marche.type_marche_id == 1"> 
+                     <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                                    class="btn btn-inverse " title="Cycle de vie du marche">
+                           <span class=""><i class=" icon-calendar"></i></span>
+                       </router-link></td> -->
+                
                    
  
 <!-- <td>
