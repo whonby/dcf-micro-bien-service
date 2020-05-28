@@ -127,7 +127,7 @@
                                             <tr>
                                            <td>
                                             <div class="control-group">
-                                                <label class="control-label">Montant Hors Taxe (HT) {{sommeBailleur(macheid)}} <code>*</code> :</label>
+                                                <label class="control-label">Montant Hors Taxe (HT)  {{sommeBailleur(macheid)}}<code>*</code> :</label>
                                                 <div class="controls">
                                                     <input type="text" class="span" placeholder="Montant" v-model="formBailleur.montant_ht">
                                                 </div>
@@ -200,7 +200,7 @@
           
             <td >
               <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
+                <label class="control-label" style="text-align:right;color:red">Montant TTC {{essaiMontant}}</label>
                
               </div>
            
@@ -615,6 +615,11 @@ montantHTt() {
    
   },
 
+  essaiMontant(){
+
+    return parseFloat(this.sommeBailleur(this.macheid)) + parseFloat(this.formBailleur.montant_ht)
+  },
+
   // fonction de comparaison du montant de l'acte et celui de bailleur 
 
 
@@ -689,7 +694,12 @@ else {
             },
 
          ajouterBailleur(){
-                 this.formBailleur.acte_effet_id=this.enregistreIdActe(this.macheid)
+
+           let sommeMontant= parseFloat(this.essaiMontant);
+           let montantActe= parseFloat(this.afficherMontantTtcDeActe);
+           
+           if(this.sommeBailleur(this.macheid) < this.afficherMontantTtcDeActe(this.macheid)){
+                this.formBailleur.acte_effet_id=this.enregistreIdActe(this.macheid)
                 this.formBailleur.marche_id=this.macheid
                 this.formBailleur.montant=this.montantHTt
                 this.formBailleur.tva=this.afficherEnorere
@@ -701,6 +711,11 @@ else {
                         marche_id:"",
                         bailleur_id:"",
                 }
+           }  else if( sommeMontant > montantActe ){
+            alert("le montant du bailleur est superieur au montant du contrat")    
+           }
+           else{ return 'ok' }
+                
             },
 
 

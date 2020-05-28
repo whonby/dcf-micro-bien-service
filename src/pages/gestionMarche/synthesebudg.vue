@@ -246,7 +246,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { formatageSomme } from "../../../src/Repositories/Repository";
-import jsPDF from 'jspdf'
+//import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 // import moment from "moment";
 // import { ModelListSelect } from "vue-search-select";
