@@ -127,7 +127,7 @@
                                             <tr>
                                            <td>
                                             <div class="control-group">
-                                                <label class="control-label">Montant Hors Taxe (HT) <code>*</code> :</label>
+                                                <label class="control-label">Montant Hors Taxe (HT) {{sommeBailleur(macheid)}} <code>*</code> :</label>
                                                 <div class="controls">
                                                     <input type="text" class="span" placeholder="Montant" v-model="formBailleur.montant_ht">
                                                 </div>
@@ -595,6 +595,37 @@ montantHTt() {
       return 0
     },
 
+
+// comparaison
+  // comparaisonMontantBailleur(){
+  //   if( this.formBailleur.montant_ht == this.afficherMontantTtcDeActe){
+  //     return this.formBailleur.montant_ht
+  //   }else{
+  //     alert('montant bailleur est superieur au montant du contrat')
+  //   }
+  //   return null
+  // },
+
+  sommeBailleur(){
+    return id =>{
+      if(id!=null && id!=""){
+ return this.personnaliseGetterMarcheBailleur.filter(item =>item.marche_id==id).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.montant), 0)
+      }
+    }
+   
+  },
+
+  // fonction de comparaison du montant de l'acte et celui de bailleur 
+
+
+  comparaisonSommeActeEtBailleur(){
+    if (this.sommeBailleur + this.formBailleur.montant_ht <= this.afficherMontantTtcDeActe){
+      return  parseFloat(this.sommeBailleur + this.formBailleur.montant_ht) + parseFloat(this.montantTva)
+    }else{
+      alert('le montant du bailleur est superieur au montant de l\'acte')
+    }
+    return null
+  },
 
     editAfficherEnorere(){
         if(this.edit_bailleur_marche.exonere == 0){
