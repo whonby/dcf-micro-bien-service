@@ -76,43 +76,35 @@
                      <div id="tab3" class="tab-pane">
             <div class="container-fluid">
          <div class="quick-actions_homepage" style="position: center;">
-      <ul class="quick-actions" >
-         <li class="bg_lb" title="Nombre total de mission global">
-             <a href="#">
-            <i class="icon-dashboard"></i> <span class="label label-important">{{nombreTotalDeTouteMissions}}
-        </span> Nombre total de missions. </a> </li>
-              
-        <li class="bg_lg " title="Duree moyenne de mission">
-             <a href="#">
-             <i class="icon-eject"></i> <span class="label label-important">{{dureeMoyenneDeTouteLesMissions}} jrs</span>
-                 Duree moyenne de missions 
-             </a> </li>
+                  <ul class="quick-actions" style="margin: 0px !important;"> 
 
-        <li class="bg_ly" title="Montant total des missions ">
-            <a href="#">
-        <i class="icon-user"></i><span class="label label-success">{{formatageSomme(parseFloat(coutTotalDemission))}}
-           </span> Cout total de missions . </a> </li>
+<li class="bg_lb span4"> <a href="#" style="color:black;"><h4>NOMBRE TOTAL </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{nombreTotalDeTouteMissions}}</span><h4>DE MISSION GLOBAL</h4></a> </li>
 
+        <li class="bg_lg span4"> <a href="#" style="color:black;"><h4>DUREE MOYENNE </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{dureeMoyenneDeTouteLesMissions}}</span><h4> DE MISSION </h4>  </a> </li>
 
-        <li class="bg_lo" title="cout moyen des billets d'avion globale de mission">
-             <a href="#">
-             <i class="icon-th"></i><span class="label label-warning">{{formatageSomme(parseFloat(coutMoyenDeBilletAvionDeMissions))}}
-              </span> Cout moyen des billets d'avion.</a> </li>
-
-        <li class="bg_ls" title="Taux de dossiers de missions rejetés">
-             <a href="#">
-            <i class="icon-fullscreen"></i><span class="label label-success">{{tauxDossierRejetMissions}}
-                %</span>
-             Tx de dossiers de m. rejetés.</a> </li>
-             
-
-                 <li class="bg_lg" title="cout moyen de mission "> 
-                <a href="#"> <i class="icon-info-sign"></i><span class="label label-primary">{{formatageSomme(parseFloat(coutMoyenDeMission))}}
-             </span> cout moyen de missions </a> </li>
-      
+        <li class="bg_ly span4"> <a href="#" style="color:black;"><h4>MONTANT TOTAL</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(coutTotalDemission))}}</span> <h4>DES MISSIONS</h4></a> </li>
+          <li class="bg_ly span4"> <a href="#" style="color:black;"><h4>COUT MOYEN DES BILLETS</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{formatageSomme(parseFloat(coutMoyenDeBilletAvionDeMissions))}}</span> <h4>D'AVION GLOBALE DE MISSION</h4></a> </li>
+                <li class="bg_lo span4"> <a href="#" style="color:black;"><h4>TAUX DE DOSSIERS</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px" v-if="tauxActeurAccredite!='NaN'">{{tauxDossierRejetMissions}}%</span><h4> DE MISSIONS REJETES</h4></a> </li>
 
         
-      </ul>
+
+        <li class="bg_ly span4"> <a href="#" style="color:black;"><h4>COUT MOYEN</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px" v-if="tauxActeurNonAccredite!='NaN'">{{formatageSomme(parseFloat(coutMoyenDeMission))}}%</span> <h4> DE MISSION</h4></a> </li>
+  
+
+
+
+
+             
+            </ul>            
+
+
+
+
+
+
+
+  
+  
     </div>
      
 
