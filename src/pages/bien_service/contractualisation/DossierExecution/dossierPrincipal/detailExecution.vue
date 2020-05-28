@@ -115,6 +115,7 @@ DisponibleBudgetaireApresLiquidation
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#tab2078">Avenant</a></li>
                                <li ><a data-toggle="tab" href="#tab100">Facture</a></li>
+                               <li ><a data-toggle="tab" href="#tab45785">Decompte</a></li>
                                 <li ><a data-toggle="tab" href="#tab10">Engagement</a></li>
                                 <li ><a data-toggle="tab" href="#tab15550">Réalité service fait</a></li>
                                 <li ><a data-toggle="tab" href="#tab120120">Liquidation</a></li>
@@ -127,7 +128,7 @@ DisponibleBudgetaireApresLiquidation
                         <div class="widget-content tab-content">
 <div id="tab2078" class="tab-pane active "><avenant :macheid="detail_marche.id"></avenant></div>             
 <div id="tab100" class="tab-pane  "><facture :macheid="detail_marche.id"></facture></div> 
-
+<div id="tab45785" class="tab-pane  "><decompte :macheid="detail_marche.id"></decompte></div>
                        
                         </div>
   
@@ -196,11 +197,13 @@ DisponibleBudgetaireApresLiquidation
     //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
 import avenant from "../../../../bien_service/contractualisation/DossierExecution/dossierAvenant/avenant";
 import facture from "../../../../bien_service/contractualisation/DossierExecution/dossierFacture/facture";
+import decompte from "../../../../bien_service/contractualisation/DossierExecution/dossierDecompte/decompte";
     export default {
         name: 'compte',
         components:{
             avenant,
-            facture
+            facture,
+            decompte
         },
         data() {
             return {

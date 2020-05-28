@@ -1,7 +1,48 @@
-
+ajouterChoixProcedure
+supprimerFacture
 <template>
 
 <div>
+  <div id="modalTypeEngagement" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Choisir le type de procedure</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+         
+                    <tr>
+                      <td>
+<div class="control-group">
+                            <label class="control-label">Type de procedure</label>
+                            <div class="controls">
+                             
+                              <select v-model="formData.tprocedure">
+                             
+                                 <option value="Engagement Direct">Engagement Direct</option>
+                               <option value="Engagement Bon de Commande">Engagement Bon de Commande</option>
+                               
+                              </select>
+                           
+                            </div>
+                          </div>
+                      </td>
+                      </tr>     
+                            
+                         
+         
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterChoixProcLocal"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
     <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
     <div id="modatFactureModifier" class="modal hide taillemodal45">
       <div class="modal-header">
@@ -17,7 +58,7 @@
               <div class="control-group">
                 <label class="control-label">Type facture</label>
                 <div class="controls">
-                  <select v-model="formData1.typfacture_id" class="span3" >
+                  <select v-model="formData1.typfacture_id" class="span" >
                     
                      <option
                         v-for="typeFact in typeFactures"
@@ -36,7 +77,7 @@
                     type="text"
                     
                    v-model="formData1.numero_facture"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -50,7 +91,7 @@
                     type="date"
                     v-model="formData1.date_facture"
                    
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -98,7 +139,7 @@
                     type="text"
                     
                  :value="afficheNomFournisseur(AfficherFournisseur_id)"
-                    class="span3"
+                    class="span"
                     readonly
                   />
                   
@@ -135,7 +176,7 @@
                     type="text"
                     
                   v-model="formData1.designation"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -149,7 +190,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -163,7 +204,7 @@
                     type="number"
                     
                   v-model="formData1.quantite"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -205,7 +246,7 @@
                     type="text"
                     
                   v-model="formData1.designation2"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -219,7 +260,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire2"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -234,7 +275,7 @@
                    
                        v-model="formData1.quantite2"
                  
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -271,7 +312,7 @@
                     type="text"
                     
                   v-model="formData1.designation3"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -285,7 +326,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire3"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -299,7 +340,7 @@
                     type="number"
                     
                   v-model="formData1.quantite3"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -336,7 +377,7 @@
                     type="text"
                     
                   v-model="formData1.designation4"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -350,7 +391,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire4"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -364,7 +405,7 @@
                     type="number"
                     
                   v-model="formData1.quantite4"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -401,7 +442,7 @@
                     type="text"
                     
                   v-model="formData1.designation5"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -415,7 +456,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire5"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -429,7 +470,7 @@
                     type="number"
                     
                   v-model="formData1.quantite5"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -466,7 +507,7 @@
                     type="text"
                     
                   v-model="formData1.designation6"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -480,7 +521,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire6"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -494,7 +535,7 @@
                     type="number"
                     
                   v-model="formData1.quantite6"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -531,7 +572,7 @@
                     type="text"
                     
                   v-model="formData1.designation7"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -545,7 +586,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire7"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -559,7 +600,7 @@
                     type="number"
                     
                   v-model="formData1.quantite7"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -596,7 +637,7 @@
                     type="text"
                     
                   v-model="formData1.designation8"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -610,7 +651,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire8"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -624,7 +665,7 @@
                     type="number"
                     
                   v-model="formData1.quantite8"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -661,7 +702,7 @@
                     type="text"
                     
                   v-model="formData1.designation9"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -675,7 +716,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire9"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -689,7 +730,7 @@
                     type="number"
                     
                   v-model="formData1.quantite9"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -726,7 +767,7 @@
                     type="text"
                     
                   v-model="formData1.designation10"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -740,7 +781,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire10"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -754,7 +795,7 @@
                     type="number"
                     
                   v-model="formData1.quantite10"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -829,7 +870,7 @@
                     type="hidden"
                     :value="afficherEnorere2"
                    
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -920,10 +961,10 @@
               <div class="control-group">
                 <label class="control-label">Type facture</label>
                 <div class="controls">
-                  <select v-model="formData1.typfacture_id" class="span3" >
+                  <select v-model="formData1.typfacture_id" class="span" >
                     
                      <option
-                        v-for="typeFact in typeFactures"
+                        v-for="typeFact in afficherTypeFactureDefinitive"
                         :key="typeFact.id"
                         :value="typeFact.id"
                       >{{typeFact.libelle}}</option>
@@ -939,7 +980,7 @@
                     type="text"
                     
                    v-model="formData1.numero_facture"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -953,7 +994,7 @@
                     type="date"
                     v-model="formData1.date_facture"
                    
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -987,7 +1028,7 @@
                 <label class="control-label">Objet facture</label>
                 <div class="controls">
                  
-                  <textarea rows="3"  class="span5">
+                  <textarea rows="3"  class="span10">
 
                   </textarea>
                 </div>
@@ -1001,7 +1042,7 @@
                     type="text"
                     
                  :value="afficheNomFournisseur(AfficherFournisseur_id)"
-                    class="span3"
+                    class="span"
                     readonly
                   />
                 </div>
@@ -1037,7 +1078,7 @@
                     type="text"
                     
                   v-model="formData1.designation"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1051,7 +1092,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1065,7 +1106,7 @@
                     type="number"
                     
                   v-model="formData1.quantite"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1107,7 +1148,7 @@
                     type="text"
                     
                   v-model="formData1.designation2"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1121,7 +1162,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire2"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1136,7 +1177,7 @@
                    
                        v-model="formData1.quantite2"
                  
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1173,7 +1214,7 @@
                     type="text"
                     
                   v-model="formData1.designation3"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1187,7 +1228,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire3"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1201,7 +1242,7 @@
                     type="number"
                     
                   v-model="formData1.quantite3"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1238,7 +1279,7 @@
                     type="text"
                     
                   v-model="formData1.designation4"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1252,7 +1293,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire4"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1266,7 +1307,7 @@
                     type="number"
                     
                   v-model="formData1.quantite4"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1303,7 +1344,7 @@
                     type="text"
                     
                   v-model="formData1.designation5"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1317,7 +1358,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire5"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1331,7 +1372,7 @@
                     type="number"
                     
                   v-model="formData1.quantite5"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1368,7 +1409,7 @@
                     type="text"
                     
                   v-model="formData1.designation6"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1382,7 +1423,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire6"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1396,7 +1437,7 @@
                     type="number"
                     
                   v-model="formData1.quantite6"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1433,7 +1474,7 @@
                     type="text"
                     
                   v-model="formData1.designation7"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1447,7 +1488,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire7"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1461,7 +1502,7 @@
                     type="number"
                     
                   v-model="formData1.quantite7"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1498,7 +1539,7 @@
                     type="text"
                     
                   v-model="formData1.designation8"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1512,7 +1553,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire8"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1526,7 +1567,7 @@
                     type="number"
                     
                   v-model="formData1.quantite8"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1563,7 +1604,7 @@
                     type="text"
                     
                   v-model="formData1.designation9"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1577,7 +1618,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire9"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1591,7 +1632,7 @@
                     type="number"
                     
                   v-model="formData1.quantite9"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1628,7 +1669,7 @@
                     type="text"
                     
                   v-model="formData1.designation10"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1642,7 +1683,7 @@
                     type="number"
                     
                   v-model="formData1.prix_unitaire10"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1656,7 +1697,7 @@
                     type="number"
                     
                   v-model="formData1.quantite10"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1731,7 +1772,7 @@
                     type="hidden"
                     :value="afficherEnorere2"
                    
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1806,42 +1847,7 @@
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
- <div id="modalTypeEngagement" class="modal hide">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Choisir le type de procedure</h3>
-      </div>
-      <div class="modal-body">
-        <form class="form-horizontal" >
-         
-                         
-                            <div class="control-group">
-                            <label class="control-label">Type de procedure</label>
-                            <div class="controls">
-                             
-                              <select v-model="formData.tprocedure">
-                             
-                                 <option value="Engagement Direct">Engagement Direct</option>
-                               <option value="Engagement Bon de Commande">Engagement Bon de Commande</option>
-                               
-                              </select>
-                           
-                            </div>
-                          </div>
-                         
-         
-        </form>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="ajouterChoixProcLocal"
-          class="btn btn-primary"
-          href="#"
-         
-        >Valider</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div>
+ 
     
                 
                 <div class="span4"></div>
@@ -2064,7 +2070,7 @@ search:""
     created(){},
 
               computed: {
-            ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+            ...mapGetters("bienService", ['decomptes','modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -2111,6 +2117,17 @@ search:""
        
     ]),
     ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+
+
+afficherTypeFactureDefinitive() {
+               
+                        return  this.typeFactures.filter(normeEquipe => normeEquipe.code == 2);
+                       
+                 
+            },
+
+
+
 
     sommeEgagementLigne: function () {
                 return id => {
@@ -2666,13 +2683,16 @@ montantTva() {
 
           ...mapActions('bienService',[  "ajouterAvenant",
       "modifierAvenant",
-      "supprimerAvenant",]),
+      "supprimerAvenant",
+      "modifierDecompte",
+      "ajouterDecompte"
+      ]),
  ...mapActions("uniteadministrative", [
      "getAllServiceua",
       "ajouterService",
       "modifierService",
       "supprimerService",
-     
+      "ajouterChoixProcedure",
       // "ajouterHistoriqueBudgetGeneral"
     ]),
 ...mapActions("SuiviImmobilisation", [
@@ -2889,4 +2909,9 @@ formatageSomme:formatageSomme,
   width: 77%;
   margin: 0 -38%;
 }
+.taillemodal45 {
+        width: 1500px;
+        margin: 0 -750px;
+      
+    }
 </style>

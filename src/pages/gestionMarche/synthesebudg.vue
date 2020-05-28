@@ -74,12 +74,8 @@
      <td height="10px" style="text-align:center;background-color: orange;color: #000000;font-size:12px">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresor)-parseFloat(AfficheMontantTresorConsommer))+parseFloat(parseFloat(AfficheMontantDon)-parseFloat(AfficheMontantDonConsommer))+parseFloat(parseFloat(AfficheMontantEmprunt)-parseFloat(AfficheMontantEmpruntConsommer)))}}</td>
       <!-- <td height="20px">14</td>
       <th height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">01</th> -->
- </tr>                                                       
-                  </tbody>  
-              </table>
-                           <table class="table table-bordered table-striped" id="bienService">
-               <tbody>
-                  <tr>
+ </tr>                
+   <tr>
    <td   rowspan="3" style="text-align:center;width:12%">B.SERVICES</td>
    <td style="width:12%" > CONTREPARTIE </td>
     <td style="width:12%" >ETAT</td>
@@ -120,16 +116,8 @@
     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(AfficheMontantTresorBienEtService)+parseFloat(AfficheMontantDonBienEtService)+parseFloat(AfficheMontantEmpruntBienEtService))}}</td>
      <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresorConsommerBienEtService)+parseFloat(AfficheMontantDonConsommerBienEtService)+parseFloat(AfficheMontantEmpruntConsommerBienEtService)))}}</td>
      <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresorBienEtService)-parseFloat(AfficheMontantTresorConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantDonBienEtService)-parseFloat(AfficheMontantDonConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntBienEtService)-parseFloat(AfficheMontantEmpruntConsommerBienEtService)))}}</td>
-    
-     <!-- <td height="20px">05</td>
-     <th height="20px">08</th> -->
-</tr>                                                       
-               </tbody>
-                               <div class="html2pdf__page-break"></div>
-             </table>
-                               <table class="table table-bordered table-striped" id="transfert">
-               <tbody>
-                  <tr>
+                   </tr>   
+                   <tr>
    <td  rowspan="3" style="text-align:center;width:10%">TRANSFERT </td>
    <td style="width:12%"> CONTREPARTIE </td>
     <td style="width:12%">ETAT</td>
@@ -172,12 +160,8 @@
     
      <!-- <td height="20px">23</td>
      <th height="20px"></th> -->
-</tr>                                                       
-               </tbody>    
-             </table>
-                                            <table class="table table-bordered table-striped" id="total">
-               <tbody>
-                  <tr>
+</tr>                    
+  <tr>
    <th style="width:10%;font-size:14px;font-weight: bold;">TOTAL</th>
    <td style="width:12%"> CONTREPARTIE </td>
     <td style="width:12%">ETAT</td>
@@ -219,10 +203,10 @@
      <td height="20px" style="text-align:center;background-color: green;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(parseFloat(AfficheMontantTresor)-parseFloat(AfficheMontantTresorConsommer))+parseFloat(parseFloat(AfficheMontantDon)-parseFloat(AfficheMontantDonConsommer))+parseFloat(parseFloat(AfficheMontantEmprunt)-parseFloat(AfficheMontantEmpruntConsommer)))+parseFloat(parseFloat(parseFloat(AfficheMontantTresorBienEtService)-parseFloat(AfficheMontantTresorConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantDonBienEtService)-parseFloat(AfficheMontantDonConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntBienEtService)-parseFloat(AfficheMontantEmpruntConsommerBienEtService)))+parseFloat(parseFloat(parseFloat(AfficheMontantTresorTransfert)-parseFloat(AfficheMontantTresorConsommerTransfert))+parseFloat(parseFloat(AfficheMontantDonTransfert)-parseFloat(AfficheMontantDonConsommerTransfert))+parseFloat(parseFloat(AfficheMontantEmpruntTransfert)-parseFloat(AfficheMontantEmpruntConsommerTransfert))))}}</td>
      <!-- <td height="20px">986</td>
      <th height="20px">78452</th> -->
-</tr>                                                       
-               </tbody>    
-             </table>
-
+</tr>                                       
+                  </tbody>  
+              </table>
+                 
 
 
 
@@ -562,7 +546,7 @@ doc.save('SynteseBudget.pdf')
 doc.output('dataurlnewwindow')
 return 0*/
         html2pdf(this.$refs.document, {
-            margin: 1,
+            margin: 0,
             filename:'SYNTHESE DU BUDGET.pdf',
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { dpi: 192, letterRendering: true },
