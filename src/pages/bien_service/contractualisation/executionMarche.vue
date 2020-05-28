@@ -319,10 +319,10 @@
                 class="btn btn-default " title="Detail execution">
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link> 
-<!-- <router-link :to="{ name: 'detailExecution', params: { id: marche.id }}"
+<router-link :to="{ name: 'detailExecution', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail execution Marche">
                   <span class=""><i class="  icon-random"></i></span>
-                   </router-link>  -->
+                   </router-link> 
 
             <!-- <router-link :to="{ name: 'DetailLivrable', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail livrable">
