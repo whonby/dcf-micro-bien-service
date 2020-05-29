@@ -23,6 +23,7 @@ export function login({commit}, user){
               
                     commit('LOGIN_USER', response.data.user)
                     localStorage.setItem('token', response.data.access_token)
+                     localStorage.setItem("Users",JSON.stringify(response.data.user))
                    // localStorage.setItem('user', response.data.user)
                   // commit('SET_LOADER_FALSE')
 
@@ -47,10 +48,9 @@ export function login({commit}, user){
 
     export function logoutUser({commit}){
       localStorage.removeItem('token')
-     // localStorage.removeItem('user')
+      localStorage.removeItem('Users')
       commit('LOGOUT_USER')
       router.push({ name: 'Login' })                   
-
 
     }
 
