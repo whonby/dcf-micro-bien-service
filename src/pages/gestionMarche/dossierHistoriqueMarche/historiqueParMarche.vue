@@ -4,7 +4,7 @@
    
     <div class="container-fluid">
 
-      <div id="exampleModal1" class="modal hide taillMarche">
+      <div id="marcheModal" class="modal hide taillMarche">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter Marché</h3>
@@ -276,7 +276,7 @@
 
 
 
- <div id="modificationModal" class="modal hide taillMarche">
+ <div id="modifierModalParmarche" class="modal hide taillMarche">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Modifier marché</h3>
@@ -616,34 +616,34 @@
                 </thead>
                 <tbody>
                    <tr class="odd gradeX" v-for="(marche, index) in 
-                printMarcheNonAttribue"
+                afficherLaListeDesMarche"
                  :key="marche.id">
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  <td @dblclick="afficherModalModification(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                 <td @dblclick="afficherModalModification(index)">
                    {{marche.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                 <td @dblclick="afficherModalModification(index)">
                    {{ELibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
+                 <td @dblclick="afficherModalModification(index)" style="text-align: center">
                    {{marche.procedure_passation.code || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  <td @dblclick="afficherModalModification(index)">
                    {{marche.afficheActivite.libelle || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <td @dblclick="afficherModalModification(index)">
                    {{marche.imputation || 'Non renseigné'}}</td>
-                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <!-- <td @dblclick="afficherModalModification(index)">
                   {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                     <td @dblclick="afficherModalModification(index)">
                    {{marche.objet || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                     <td @dblclick="afficherModalModification(index)">
                    {{marche.reference_marche || 'Non renseigné'}}</td>
                     <td>
 
                          <span v-if="marche.economique_id == CodeExempte(marche.economique_id) ">Exemptée procedure</span>
                          <span v-else>Ligne à marché</span>
                        </td>
-                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   <!-- <td @dblclick="afficherModalModification(index)">
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
+                     <td @dblclick="afficherModalModification(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
                   
            <td>
@@ -703,9 +703,9 @@
       </div>
     </div>
 
-    <!-- <fab :actions="fabActions" @cache="afficherModalAjoutTypaPrestation" main-icon="apps" bg-color="green"></fab>
- <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjoutTypaPrestation()">Open</button>
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button> -->
+     <fab :actions="fabActions" @cache="afficherModalParMarche" main-icon="apps" bg-color="green"></fab>
+ <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalParMarche()">Open</button>
+      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button> 
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
     
@@ -714,7 +714,7 @@
   
 <script>
  import { mapGetters, mapActions } from "vuex";
- import { formatageSomme } from "../../../src/Repositories/Repository";
+ import { formatageSomme } from "../../../../src/Repositories/Repository";
 export default {
   name:'type facture',
   data() {
@@ -990,12 +990,14 @@ getDateFinExécutionValue(){
 // )
 //     },
 
-
+afficherLaListeDesMarche(){
+return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
+},
 // afficher la liste des marche
 
-afficherLaListeDesMarche(){
-return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4)
-},
+// afficherLaListeDesMarche(){
+// return this.afficherLaListeDesMarche.filter(element => element.type_marche.code_type_marche == 4)
+// },
 
 
 // afficher le nombre du marché
@@ -1656,8 +1658,8 @@ recupererDateMiseService() {
       this.editActeEffetFinancier = this.afficheMarchExecuter[index];
     },
     //afiicher modal ajouter
-    afficherModalAjoutTypaPrestation() {
-      this.$("#exampleModal1").modal({
+    afficherModalParMarche() {
+      this.$("#marcheModal").modal({
         backdrop: "static",
         keyboard: false
       });
@@ -1685,14 +1687,14 @@ this.formData = {
     },
     formatageSomme:formatageSomme,
     // afficher modal de modification
-    // afficherModalModifierTypePrestation(index) {
-    //   this.$("#modificationModal").modal({
-    //     backdrop: "static",
-    //     keyboard: false
-    //   });
+    afficherModalModification(index) {
+      this.$("#modifierModalParmarche").modal({
+        backdrop: "static",
+        keyboard: false
+      });
 
-    //   this.editMarche = this.marches[index];
-    // },
+      this.editMarche = this.marches[index];
+    },
     // fonction pour vider l'input modification
     modifierModalTypeprestationLocal(){
        var nouvelObjet = {
@@ -1703,7 +1705,7 @@ this.formData = {
       economique_id:this.editMarche.economique_id
        };
       this.modifierMarche(nouvelObjet)
-      this.$('#modificationModal').modal('hide');
+      this.$('#modifierModalParmarche').modal('hide');
     },
     
 

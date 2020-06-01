@@ -139,7 +139,7 @@ afficherLaFonctionDActeurDepenseDynamique
               <div class="controls">
            <select v-model="formData.acte_personnel_id" class="span" :readOnly="veifEquipementExist">
                <option v-for="depense in acteurDepenseDynamiques(formData.ua_id )" :key="depense.id" 
-               :value="depense.acte_personnel_id">{{depense.matricule}}</option>
+               :value="depense.acte_personnel_id">{{depense.matricule}} =>{{depense.nom}} {{depense.prenom}}</option>
            </select>
               </div>
             </div>
