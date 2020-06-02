@@ -21,12 +21,13 @@ afficherBanqueDynamique
                         <th>Entreprise</th>
                         <th>Montant acte</th>
                         <th>Montant Avance Demarrage</th>
-
+                         <th>Montant retenue garantie</th>
+                         <th>Montant cautionnement</th>
                         <th>Type acte</th>
                         <th>Objet marche.</th>
                         
                         <th>Imputation</th>
-                        <!-- <th>Entreprise</th> -->
+                        <th>Durée du marché</th>
                        
                         <th>Action</th>
                     </tr>
@@ -43,6 +44,12 @@ afficherBanqueDynamique
                             {{formatageSomme(parseFloat(effetFinancier.montant_act ))|| 'Non renseigné'}}</td>
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{formatageSomme(parseFloat(effetFinancier.avance_demarrage_ttc )) || 'Non renseigné'}}</td>
+
+                             <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{formatageSomme(parseFloat(effetFinancier.montant_ttc_retenue_garantie )) || 'Non renseigné'}}</td>
+
+                            <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{formatageSomme(parseFloat(effetFinancier.montant_ttc_cautionnement )) || 'Non renseigné'}}</td>
                             
                               <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{affichierLibelleTypeActeFinancier(effetFinancier.type_act_effet_id) || 'Non renseigné'}}</td>
@@ -51,8 +58,8 @@ afficherBanqueDynamique
                             
                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
                             {{effetFinancier.marche.imputation || 'Non renseigné'}}</td>
-                              <!-- <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
-                            {{affichierNomEntreprise(effetFinancier.entreprise_id) || 'Non renseigné'}}</td> -->
+                              <td @click="afficherModalModifierActeEffetFinancier(effetFinancier.id)">
+                            {{effetFinancier.duree || 'Non renseigné'}} jrs</td>
 <td>
       <div class="btn-group">
                             <button @click.prevent="supprimerActeEffetFinancier(effetFinancier.id)"  class="btn btn-danger " title="Supprimer">
@@ -70,13 +77,26 @@ afficherBanqueDynamique
 
 
 <div id="ajouterActeEffetFinancier" class="modal hide grdirModalActeEffet">
-            <div class="modal-header">
+      <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter acte effet financier</h3>
+                <h3>Information sur l'attribution de l'acte</h3>
             </div>
-            <div class="modal-body">
+            
+                        <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                                 <li class="active"><a data-toggle="tab" href="#tab0145">Identification de L'acte</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab01">Informations financières</a></li>
+                                
+                               
+                                
+                                
+                            </ul>
+                        </div>
+                        <div class="widget-content tab-content">
 
-                    <table class="table table-bordered table-striped">
+                            <div id="tab0145" class="tab-pane active">
+                         
+                            <table class="table table-bordered table-striped">
                         <tr>
                             <td>
                         <div class="control-group">
@@ -103,9 +123,7 @@ afficherBanqueDynamique
                                     {{affichierNomEntreprise.nom_cand}}
                         </div>
 
-                          <!-- <div class="control-group" v-else>
-                                            <code>{{message_setion_vainqueur}}</code>
-                                        </div> -->
+                         
                     </div>
                             
                     
@@ -209,32 +227,23 @@ afficherBanqueDynamique
                     </div>
 
                             </td>
-                             <td>
-              
-              <div class="control-group">
-                <label class="control-label">exonéré</label>
-                <div class="controls">
-                  <select v-model="formEffetFinancier.exonere" class="span">
-                  
-                    <option value="0">Oui</option>
-                     <option value="1">Non</option>
-                  </select>
-                 <!-- <input
-                    type="hidden"
-                    
-                v-model="formData1.exonere"
-                    class="span"
-                    readonly
-                  /> -->
-                </div>
-              </div>
-            </td>
+                                       <td>
+                    <div class="control-group">
+                        <label class="control-label">Reference acte</label>
+                        <div class="controls">
+                            <input type="text" v-model="formEffetFinancier.reference_act"
+                                    class="span"
+                                    placeholder="refence acte"
+                            />
+                        </div>
+                    </div>
+                            </td>
 
                            </tr>
                         <tr>
                    
                       
-                          <td colspan="3" width="550">
+                          <td colspan="2" width="550">
                          <div class="control-group">
                             <label class="control-label">Objet offre :</label>
                             <div class="controls">
@@ -243,8 +252,7 @@ afficherBanqueDynamique
                             </div>
                         </div>
                             </td>
-
-                               <td>
+                                  <td>
                      <div class="control-group">
                         <label class="control-label">Incidence financière</label>
                         <div class="controls">
@@ -258,52 +266,9 @@ afficherBanqueDynamique
                         </div>
                     </div>
                             </td>
-                   
-                           
-                          
-                        </tr>
-                        <tr>
-                            <td>
-                    <div class="control-group">
-                        <label class="control-label">Reference acte</label>
-                        <div class="controls">
-                            <input type="text" v-model="formEffetFinancier.reference_act"
-                                    class="span"
-                                    placeholder="refence acte"
-                            />
-                        </div>
-                    </div>
-                            </td>
-                            <td>
-                     <div class="control-group">
-                        <label class="control-label">Avance Demarrage Ht</label>
-                        <div class="controls">
-                            <!-- <select  v-model="formEffetFinancier.avance_demarrage_ht" class="span">
-                               <option value="0">Oui</option>
-                               <option value="1">Non</option>
-                            </select> -->
-                                    
-                              <input type="text" v-model="formEffetFinancier.avance_demarrage_ht"
-                                    class="span"
-                                    placeholder="Saisir le montant "
-                            />     
-                            
-                        </div>
-                    </div>
-                            </td>
-                            <td>
 
-                     <div class="control-group">
-                        <label class="control-label">Montant acte/réel du marché (HT)</label>
-                        <div class="controls">
-                            <input type="text" v-model="formEffetFinancier.montant_act_ht"
-                                    class="span"
-                                    placeholder="Saisir le montant "
-                            />
-                        </div>
-                    </div>
-                            </td>
-                            <td>
+                            
+                             <td>
 
                             <div class="control-group">
                         <label class="control-label" >Date de signature attributaire</label>
@@ -316,10 +281,25 @@ afficherBanqueDynamique
                     </div>
                             </td>
                         </tr>
-                        <tr>
+                          <tr>
 
-                    
-                     <td>
+                         
+
+
+                                                    <td>
+                     <div class="control-group">
+                        <label class="control-label" title=" ">Date de reception definitive</label>
+                        <div class="controls">
+                            <input type="date" v-model="formEffetFinancier.date_reception"
+                                    class="span"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+                            </td>
+                   
+                           
+                           <td>
                      <div class="control-group">
                         <label class="control-label">Date ordre de service demarrage</label>
                         <div class="controls">
@@ -330,9 +310,7 @@ afficherBanqueDynamique
                         </div>
                     </div>
                             </td>
-
-
-                                         <td>
+                              <td>
                      <div class="control-group">
                         <label class="control-label" title=" ">Date fin exécution</label>
                         <div class="controls">
@@ -357,93 +335,118 @@ afficherBanqueDynamique
                         </div>
                     </div>
                             </td>
+                        </tr>
+                            </table>
+                         </div>
 
+                         <div id="tab01" class="tab-pane">
+                        <table class="table table-bordered table-striped">
+                             <tr>
 
-                                             <td>
+                  
+
+                                       
+
+                             <td>
                      <div class="control-group">
-                        <label class="control-label" title=" ">Date de reception definitive</label>
+                        <label class="control-label">Avance Demarrage Ht</label>
                         <div class="controls">
-                            <input type="date" v-model="formEffetFinancier.date_reception"
+                           
+                                    
+                              <input type="text" v-model="formEffetFinancier.avance_demarrage_ht"
                                     class="span"
-                                    placeholder=""
+                                    placeholder="Saisir le montant "
+                            />     
+                            
+                        </div>
+                    </div>
+                            </td>
+                              <td>
+
+                     <div class="control-group">
+                        <label class="control-label">Montant acte/réel du marché (HT)</label>
+                        <div class="controls">
+                            <input type="text" v-model="formEffetFinancier.montant_act_ht"
+                                    class="span"
+                                    placeholder="Saisir le montant "
                             />
                         </div>
                     </div>
                             </td>
+
+
+                        <td >
+              <div class="control-group">
+                <label class="control-label">Taux % de retenue de garantie</label>
+                <div class="controls">
+                  <input
+                    type="number"  v-model="formEffetFinancier.taux_retenue_garantie"
+                       placeholder="saisir le taux de retenue de garantie"
+              
+                    class="span"
+                 
+                  />
+                
+                </div>
+              </div>
+            </td> 
+
+
+               <td >
+              <div class="control-group">
+                <label class="control-label" >Taux % du cautionnement</label>
+                <div class="controls">
+                  <input
+                    type="number"  v-model="formEffetFinancier.taux_cautionnemt"
+                
+                       placeholder="saisir le taux du cautionnement"
+                    class="span"
+                  
+                  />
+                
+                </div>
+              </div>
+            </td>
+
                         </tr>
-<!-- 
-                          <tr  class="odd gradeX" >
-            <td colspan="3">
+                          <tr>
+  
+                              <td>
+              
               <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">Montant HT</label>
-               
+                <label class="control-label">exonéré</label>
+                <div class="controls">
+                  <select v-model="formEffetFinancier.exonere" class="span">
+                  
+                    <option value="0">Oui</option>
+                     <option value="1">Non</option>
+                  </select>
+                </div>
               </div>
             </td>
-            <td>
+             <td >
               <div class="control-group">
-               
+                <label class="control-label" >Taux</label>
                 <div class="controls">
                   <input
                     type="number"
                     
-                
+              :value="afficherEnorere" style="text-align:left;color:red"
                     class="span"
                    readonly
                   />
                 </div>
               </div>
             </td>
-            
-            
-                  
-          </tr> -->
-          <tr  class="odd gradeX" >
-            <td colspan="3">
+
+
+                         <td >
               <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">Taux</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-               
+                <label class="control-label" > Montant TVA du marché</label>
                 <div class="controls">
                   <input
                     type="number"
-                    
-              :value="afficherEnorere"
-                    class="span"
-                   readonly
-                  />
-                  
-                   <input
-                    type="hidden"
-                    
-                   
-                    class="span3"
-                   
-                  />
-                </div>
-              </div>
-            </td>
-            
-            
-                  
-          </tr>
-          <tr  class="odd gradeX" >
-            <td colspan="3">
-              <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">TVA</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-               
-                <div class="controls">
-                  <input
-                    type="number"
-                    :value="montantTva"
+                    :value="montantTva" style="text-align:left;color:red"
              
                     class="span"
                    readonly
@@ -452,25 +455,14 @@ afficherBanqueDynamique
                 </div>
               </div>
             </td>
-            
-            
-                  
-          </tr>
-         
-          <tr  class="odd gradeX" >
-            <td colspan="3">
+
+             <td>
               <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-               
+                <label class="control-label" >Montant TTC du marché</label>
                 <div class="controls">
                   <input
                     type="number"
-                    :value="montantHTt"
+                    :value="montantHTt" style="text-align:left;color:red"
               
                     class="span"
                    readonly
@@ -479,26 +471,16 @@ afficherBanqueDynamique
                 </div>
               </div>
             </td>
-            
-            
-                  
-          </tr>
+                </tr>
 
-
-          <tr  class="odd gradeX" >
-            <td colspan="3">
+                <tr>
+            <td >
               <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">TVA (Avance Demarrage)</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-               
+                <label class="control-label" >TVA (Avance Demarrage)</label>
                 <div class="controls">
                   <input
                     type="number"
-                    :value="avanceDemarrageMontantTva"
+                    :value="avanceDemarrageMontantTva" style="text-align:left;color:red"
              
                     class="span"
                    readonly
@@ -507,24 +489,13 @@ afficherBanqueDynamique
                 </div>
               </div>
             </td>
-            
-            
-                  
-          </tr>
-           <tr  class="odd gradeX" >
-            <td colspan="3">
+            <td >
               <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">Montant Avance Demarrage TTC</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-               
+                <label class="control-label" >Montant Avance Demarrage TTC</label>
                 <div class="controls">
                   <input
                     type="number"
-                    :value="avanceDemarrage"
+                    :value="avanceDemarrage" style="text-align:left;color:red"
               
                     class="span"
                    readonly
@@ -533,17 +504,132 @@ afficherBanqueDynamique
                 </div>
               </div>
             </td>
+               
+
+
             
+                                   <td >
+              <div class="control-group">
+                <label class="control-label" > Montant HT de retenue de garantie</label>
+                <div class="controls">
+                  <input
+                    type="text"  :value="afficherMontantHorsTaxeRetenuGarantie" style="text-align:left;color:red"
+                    placeholder="saisir le montant hors taxe du dispositif retenu"
+             
+                    class="span"
+                   readonly
+                  />
+                  
+                </div>
+              </div>
+            </td> 
+      
+             <td>
+              <div class="control-group">
+                <label class="control-label" >Montant TVA de retenue de garantie</label>
+                <div class="controls">
+                  <input
+                    type="number"  :value="afficherMontantTvaTaxeRetenuGarantie" style="text-align:left;color:red"
+                   
+              
+                    class="span"
+                   readonly
+                  />
+                
+                </div>
+              </div>
+            </td>
+
+                
+                </tr>
+
+                <tr>
+                  <td >
+              <div class="control-group">
+                <label class="control-label" >Montant TTC retenue de garantie </label>
+                <div class="controls">
+                  <input
+                    type="number"  :value="afficherMontantRetenueGarantie" style="text-align:left;color:red"
+                    
+             
+                    class="span"
+                   readonly
+                  />
+                  
+                </div>
+              </div>
+            </td>
+               
+               
+
+             <td >
+              <div class="control-group">
+                <label class="control-label" > Montant HT du cautionnement</label>
+                <div class="controls">
+                  <input type="text"  :value="afficheMontantHorsTaxeDuCautionnement" style="text-align:left;color:red"
+                    
+             
+                    class="span"
+                   readOnly
+                  />
+                 
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label" >Montant TVA du cautionnement</label>
+                <div class="controls">
+                  <input
+                    type="number"  :value="afficherMontantTvaDuCautionnement" style="text-align:left;color:red"
+                    
+              
+                    class="span"
+                   readonly
+                  />
+                
+                </div>
+              </div>
+            </td>
+
+            
+
+                     <td >
+              <div class="control-group">
+                <label class="control-label" >Montant TTC du cautionnement </label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                           :value="afficherMontantTTCDuCautionnement" style="text-align:left;color:red"
+                    class="span"
+                   readonly
+                  />
+                  
+                </div>
+              </div>
+            </td>
+
+             
             
                   
           </tr>
 
-                    </table>  
 
-                   
 
-                
-            </div>
+
+
+
+
+
+
+                        </table>
+                           
+                         </div>
+
+
+                         </div>
+          
             <div class="modal-footer">
                 <a  @click.prevent="ajouterModalActeEffetFinancierLocal"
                         class="btn btn-primary"
@@ -562,13 +648,26 @@ afficherBanqueDynamique
 
 
 <div id="modifierActeEF" class="modal hide grdirModalActeEffet">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier acte effet financier</h3>
-            </div>
-            <div class="modal-body">
 
-                 <table class="table table-bordered table-striped">
+       <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Modification des informations sur l'attribution de l'acte </h3>
+            </div>
+            
+                        <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                                 <li class="active"><a data-toggle="tab" href="#tab02045">Identification de L'acte</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab0001">Informations financières</a></li>
+                                
+                               
+                                
+                                
+                            </ul>
+                        </div>
+                        <div class="widget-content tab-content">
+
+                          <div id="tab02045" class="tab-pane active">
+                            <table class="table table-bordered table-striped">
                         <tr>
                             <td>
                         <div class="control-group">
@@ -595,9 +694,6 @@ afficherBanqueDynamique
                                     {{affichierNomEntreprise.nom_cand}}
                         </div>
 
-                          <!-- <div class="control-group" v-else>
-                                            <code>{{message_setion_vainqueur}}</code>
-                                        </div> -->
                     </div>
                             </td>
 
@@ -626,30 +722,6 @@ afficherBanqueDynamique
 
 
 
-                            <!-- <td>
-
-
-                        <div class="control-group">
-                        <label class="control-label">Text juridique </label>
-                        <div class="controls">
-                           <select v-model="formEffetFinancier.text_juridique_id" class="span">
-                                <option v-for="varText in text_juridiques" :key="varText.id"
-                                        :value="varText.id">{{varText.objet_text}}</option>
-                            </select>
-                        </div>
-                    </div>
-                            </td> -->
-
-                              <!-- <td>
-                        <div class="control-group">
-                        <label class="control-label">Ano bailleur dmp.</label>
-                        <div class="controls">
-                       <input :value="info_avis_bailleur" readonly>
-                        
-                        </div>
-                    </div>
-                            </td> -->
-                           
                        
                            </tr>
                            <tr>
@@ -698,32 +770,23 @@ afficherBanqueDynamique
                     </div>
 
                             </td>
-
-                            <td>
-              <div class="control-group">
-                <label class="control-label">exonéré</label>
-                <div class="controls">
-                  <select v-model="editActeEffetFinancier.exonere" class="span">
-                  
-                    <option value="0">Oui</option>
-                     <option value="1">Non</option>
-                  </select>
-                 <!-- <input
-                    type="hidden"
-                    
-                v-model="formData1.exonere"
-                    class="span"
-                    readonly
-                  /> -->
-                </div>
-              </div>
-            </td>
-
+                                 <td>
+                    <div class="control-group">
+                        <label class="control-label">Reference acte</label>
+                        <div class="controls">
+                            <input type="text" v-model="editActeEffetFinancier.reference_act"
+                                    class="span"
+                                    placeholder="refence acte"
+                            />
+                        </div>
+                    </div>
+                            </td>
                            </tr>
-                        <tr>
+
+                             <tr>
                    
                       
-                          <td colspan="3" width="550">
+                          <td colspan="2" width="550">
              <div class="control-group">
                             <label class="control-label">Objet offre :</label>
                             <div class="controls">
@@ -747,30 +810,88 @@ afficherBanqueDynamique
                         </div>
                     </div>
                             </td>
-                   
-                           
-                          
-                        </tr>
-                        <tr>
+
                             <td>
-                    <div class="control-group">
-                        <label class="control-label">Reference acte</label>
+
+                            <div class="control-group">
+                        <label class="control-label" >Date de signature attributaire</label>
                         <div class="controls">
-                            <input type="text" v-model="editActeEffetFinancier.reference_act"
+                            <input type="date" v-model="editActeEffetFinancier.date_attributaire"
                                     class="span"
-                                    placeholder="refence acte"
+                                    placeholder=""
                             />
                         </div>
                     </div>
                             </td>
+                        </tr>
+
+                                 <tr>
+                                 <td>
+                     <div class="control-group">
+                        <label class="control-label" title=" ">Date de reception definitive</label>
+                        <div class="controls">
+                            <input type="date" v-model="editActeEffetFinancier.date_reception"
+                                    class="span"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+                             <td>
+                     <div class="control-group">
+                        <label class="control-label">Date ordre de service demarrage</label>
+                        <div class="controls">
+                            <input type="date" v-model="editActeEffetFinancier.date_odre_service"
+                                    class="span"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+                            
+                                         <td>
+                     <div class="control-group">
+                        <label class="control-label" title=" ">Date fin exécution</label>
+                        <div class="controls">
+                            <input type="date" :min="editActeEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValueEdit" v-model="editActeEffetFinancier.date_fin_exe"
+                                    class="span"
+                                    placeholder=""
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+                            
+                             <td>
+                     <div class="control-group">
+                        <label class="control-label" title=" ">Durée d'exécution(jrs)</label>
+                        <div class="controls">
+                            <input type="text"  readonly :value="nombreDejourCalculeEdit"
+                                    class="span"
+                                   
+                            />
+                        </div>
+                    </div>
+                            </td>
+
+                            </tr>
+                            </table>
+                          
+                           </div>
+
+
+
+                           <div id="tab0001" class="tab-pane">
+                           <table class="table table-bordered table-striped">
+                              <tr>
+                       
                             <td>
                      <div class="control-group">
                         <label class="control-label">Montant Avance de demarrage</label>
                         <div class="controls">
-                            <!-- <select  v-model="editActeEffetFinancier.incidence_financiere" class="span">
-                               <option value="0">Oui</option>
-                               <option value="1">Non</option>
-                            </select> -->
+                           
                                     
                               <input type="text" v-model="editActeEffetFinancier.avance_demarrage_ht"
                                     class="span"
@@ -792,123 +913,78 @@ afficherBanqueDynamique
                         </div>
                     </div>
                             </td>
-                            <td>
 
-                            <div class="control-group">
-                        <label class="control-label" >Date de signature attributaire</label>
+
+                             <td>
+
+                     <div class="control-group">
+                        <label class="control-label">Taux % de retenue de garantie</label>
                         <div class="controls">
-                            <input type="date" v-model="editActeEffetFinancier.date_attributaire"
+                            <input type="text" v-model="editActeEffetFinancier.taux_retenue_garantie"
                                     class="span"
                                     placeholder=""
                             />
                         </div>
                     </div>
                             </td>
+
+                             <td>
+
+                     <div class="control-group">
+                        <label class="control-label">Taux % de cautionnement</label>
+                        <div class="controls">
+                            <input type="text" v-model="editActeEffetFinancier.taux_cautionnemt"
+                                    class="span"
+                                    placeholder=" "
+                            />
+                        </div>
+                    </div>
+                            </td>
+                            
                         </tr>
+                           
                         <tr>
-
-                    
-                     <td>
-                     <div class="control-group">
-                        <label class="control-label">Date ordre de service demarrage</label>
-                        <div class="controls">
-                            <input type="date" v-model="editActeEffetFinancier.date_odre_service"
-                                    class="span"
-                                    placeholder=""
-                            />
-                        </div>
-                    </div>
-                            </td>
-
-
-                                         <td>
-                     <div class="control-group">
-                        <label class="control-label" title=" ">Date fin exécution</label>
-                        <div class="controls">
-                            <input type="date" :min="editActeEffetFinancier.date_odre_service" :readonly="getDateFinExécutionValueEdit" v-model="editActeEffetFinancier.date_fin_exe"
-                                    class="span"
-                                    placeholder=""
-                            />
-                        </div>
-                    </div>
-                            </td>
-                        
-                        
-
-                                           <td>
-                     <div class="control-group">
-                        <label class="control-label" title=" ">Durée d'exécution(jrs)</label>
-                        <div class="controls">
-                            <input type="text"  readonly :value="nombreDejourCalculeEdit"
-                                    class="span"
-                                   
-                            />
-                        </div>
-                    </div>
-                            </td>
-
-
-                                             <td>
-                     <div class="control-group">
-                        <label class="control-label" title=" ">Date de reception definitive</label>
-                        <div class="controls">
-                            <input type="date" v-model="editActeEffetFinancier.date_reception"
-                                    class="span"
-                                    placeholder=""
-                            />
-                        </div>
-                    </div>
-                            </td>
-                        </tr>
-
-
-                        <tr  class="odd gradeX" >
-            <td colspan="3">
+                                <td>
               <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">Taux</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-               
+                <label class="control-label">exonéré</label>
                 <div class="controls">
-                  <input
-                    type="number"
-                    
-              :value="editAfficherEnorere"
-                    class="span"
-                   readonly
-                  />
+                  <select v-model="editActeEffetFinancier.exonere" class="span">
                   
-                   <input
-                    type="hidden"
-                    
-                   
-                    class="span3"
-                   
-                  />
+                    <option value="0">Oui</option>
+                     <option value="1">Non</option>
+                  </select>
+                
                 </div>
               </div>
             </td>
-            
-            
-                  
-          </tr>
-          <tr  class="odd gradeX" >
-            <td colspan="3">
+
+             <td >
               <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">TVA</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-               
+                <label class="control-label" >Taux</label>
+              
                 <div class="controls">
                   <input
                     type="number"
-                    :value="editMontantTva"
+                    
+              :value="editAfficherEnorere" style="text-align:right;color:red"
+                    class="span"
+                   readonly
+                  />
+                 
+                  
+                </div>
+              </div>
+            </td>
+
+              <td >
+              <div class="control-group">
+                <label class="control-label" >Montant TVA du marché</label>
+        
+            
+                <div class="controls">
+                  <input
+                    type="number"
+                    :value="editMontantTva" style="text-align:right;color:red"
              
                     class="span"
                    readonly
@@ -917,25 +993,14 @@ afficherBanqueDynamique
                 </div>
               </div>
             </td>
-            
-            
-                  
-          </tr>
-         
-          <tr  class="odd gradeX" >
-            <td colspan="3">
+
+              <td>
               <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-               
+                <label class="control-label" >Montant TTC du marché</label>
                 <div class="controls">
                   <input
                     type="number"
-                    :value="editMontantHTt"
+                    :value="editMontantHTt" style="text-align:right;color:red"
               
                     class="span"
                    readonly
@@ -944,26 +1009,17 @@ afficherBanqueDynamique
                 </div>
               </div>
             </td>
-            
-            
-                  
-          </tr>
+             </tr>
 
-
-           <tr  class="odd gradeX" >
-            <td colspan="3">
+                  <tr>
+                <td>
               <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">TVA (Avance Demarrage)</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-               
+                <label class="control-label" > Montant TVA (Avance Demarrage)</label>
+            
                 <div class="controls">
                   <input
                     type="number"
-                    :value="editAvanceDemarrageMontantTva"
+                    :value="editAvanceDemarrageMontantTva" style="text-align:right;color:red"
              
                     class="span"
                    readonly
@@ -972,24 +1028,15 @@ afficherBanqueDynamique
                 </div>
               </div>
             </td>
-            
-            
-                  
-          </tr>
-           <tr  class="odd gradeX" >
-            <td colspan="3">
+
+             <td>
               <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">Montant Avance Demarrage TTC</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
+                <label class="control-label">Montant Avance Demarrage TTC</label>
                
                 <div class="controls">
                   <input
                     type="number"
-                    :value="editAvanceDemarrage"
+                    :value="editAvanceDemarrage"  style="text-align:right;color:red"
               
                     class="span"
                    readonly
@@ -998,18 +1045,130 @@ afficherBanqueDynamique
                 </div>
               </div>
             </td>
+
+
             
+                                   <td >
+              <div class="control-group">
+                <label class="control-label" > Montant HT de retenue de garantie</label>
+                <div class="controls">
+                  <input
+                    type="text"  :value="editAfficherMontantHorsTaxeRetenuGarantie" style="text-align:left;color:red"
+                    placeholder=""
+             
+                    class="span"
+                   readonly
+                  />
+                  
+                </div>
+              </div>
+            </td> 
+      
+             <td>
+              <div class="control-group">
+                <label class="control-label" >Montant TVA de retenue de garantie</label>
+                <div class="controls">
+                  <input
+                    type="number"  :value="editAfficherMontantTvaTaxeRetenuGarantie" style="text-align:left;color:red"
+                   
+              
+                    class="span"
+                   readonly
+                  />
+                
+                </div>
+              </div>
+            </td>
+
+
+
+             </tr>
+
+
+             <tr>
+                  <td >
+              <div class="control-group">
+                <label class="control-label" >Montant TTC retenue de garantie </label>
+                <div class="controls">
+                  <input
+                    type="number"  :value="editAfficherMontantRetenueGarantie" style="text-align:left;color:red"
+                    
+             
+                    class="span"
+                   readonly
+                  />
+                  
+                </div>
+              </div>
+            </td>
+               
+               
+
+             <td >
+              <div class="control-group">
+                <label class="control-label" > Montant HT du cautionnement</label>
+                <div class="controls">
+                  <input type="text"  :value="editAfficheMontantHorsTaxeDuCautionnement" style="text-align:left;color:red"
+                    
+             
+                    class="span"
+                   readOnly
+                  />
+                 
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label" >Montant TVA du cautionnement</label>
+                <div class="controls">
+                  <input
+                    type="number"  :value="editAfficherMontantTvaDuCautionnement" style="text-align:left;color:red"
+                    
+              
+                    class="span"
+                   readonly
+                  />
+                
+                </div>
+              </div>
+            </td>
+
+            
+
+                     <td >
+              <div class="control-group">
+                <label class="control-label" >Montant TTC du cautionnement </label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                           :value="editAfficherMontantTTCDuCautionnement" style="text-align:left;color:red"
+                    class="span"
+                   readonly
+                  />
+                  
+                </div>
+              </div>
+            </td>
+
+             
             
                   
           </tr>
 
-                    </table> 
-
-
-              
+              </table>
+              </div>
 
 
             </div>
+
+               
+
+              
+
+
+       
              <div class="modal-footer">
                 <a
                         @click.prevent="modifierModalActeEffetFinancierLocal"
@@ -1032,14 +1191,19 @@ afficherBanqueDynamique
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from '../../../../../src/Repositories/Repository';
-//import moment from 'moment';
+import moment from 'moment';
 export default {
     data(){
         return{
         
         formEffetFinancier:{
+           tva_cautionnement:"",
+           montant_ttc_cautionnement:"",
+           montant_ht_cautionnement:"",
               exonere:"",
               montant_act_ht:"",
+              taux_cautionnemt:"",
+              taux_retenue_garantie:"",
               tva:"",
               taux:"",
               avance_demarrage_ht:"",
@@ -1319,6 +1483,165 @@ AffichierElementParent() {
     },
 
 
+   // calcul du montant ttc de retenu
+   afficherMontantRetenueGarantie(){
+     const montantttcRetenueGarantie = (parseFloat(this.montantHTt) * (this.formEffetFinancier.taux_retenue_garantie)/100)
+    if (montantttcRetenueGarantie) {
+        return parseInt(montantttcRetenueGarantie).toFixed(0);
+      }
+      return 0
+   },
+
+// calcul du montant tva de retenue de garantie
+
+// afficherMontantTvaTaxeRetenuGarantie(){
+
+//   const resultat = parseFloat (this.afficherMontantRetenueGarantie)/(1+ parseFloat(this.afficherTauxEnPourcentage))
+
+//   if(resultat){
+//     return parseInt( Math.round(resultat))
+//   }     
+//   return 0
+// },
+
+
+afficherMontantTvaTaxeRetenuGarantie(){
+
+   const val = parseFloat((this.afficherMontantHorsTaxeRetenuGarantie) * parseFloat(this.afficherEnorere)/100);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+
+},
+
+
+// calcul du montant hors taxe de retenu de garantie  afficherMontantHorsTaxeRetenuGarantie
+
+
+afficherMontantHorsTaxeRetenuGarantie(){
+
+  const anwser = parseFloat (this.afficherMontantRetenueGarantie)/(1+ parseFloat(this.afficherTauxEnPourcentage))
+
+  if(anwser){
+    return parseInt( Math.round(anwser))
+  }
+  return 0
+},
+
+//  calcul montant ttc de retenu de garantie pour la modification
+
+
+editAfficherMontantRetenueGarantie(){
+ const response = (parseFloat(this.editMontantHTt) * (this.editActeEffetFinancier.taux_retenue_garantie)/100)
+    if (response) {
+        return parseInt(response).toFixed(0);
+      }
+      return 0
+},
+
+// calcul le montant hors taxe de retenu de garantie pour la modification
+editAfficherMontantHorsTaxeRetenuGarantie(){
+
+  const tonyData = parseFloat (this.editAfficherMontantRetenueGarantie)/(1+ parseFloat(this.afficherTauxEnPourcentage))
+
+  if(tonyData){
+    return parseInt( Math.round(tonyData))
+  }
+  return 0
+},
+
+// calcul le montant de tva du retenu de garantie 
+editAfficherMontantTvaTaxeRetenuGarantie(){
+
+   const data = parseFloat((this.editAfficherMontantHorsTaxeRetenuGarantie) * parseFloat(this.editAfficherEnorere)/100);
+      
+       if (data) {
+        return parseInt(data).toFixed(0);
+      }
+      
+      return 0
+},
+
+
+
+// calcule du montant ttc du cautionnement
+
+afficherMontantTTCDuCautionnement(){
+ const result = (parseFloat(this.montantHTt) * (this.formEffetFinancier.taux_cautionnemt)/100)
+    if (result) {
+        return parseInt(result).toFixed(0);
+      }
+      
+      return 0
+
+},
+
+// calcul du montant de tva du cautionnement
+
+afficherMontantTvaDuCautionnement(){
+
+   const val = parseFloat((this.afficheMontantHorsTaxeDuCautionnement) * parseFloat(this.editAfficherEnorere)/100);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+
+},
+
+// calcul du montant hors taxe du cautionnement 
+
+afficheMontantHorsTaxeDuCautionnement(){
+
+  const anwser = parseFloat (this.afficherMontantTTCDuCautionnement)/(1+ parseFloat(this.afficherTauxEnPourcentage))
+
+  if(anwser){
+    return parseInt( Math.round(anwser))
+  }
+  return 0
+},
+
+// calcul le montant ttc du cautionnement
+editAfficherMontantTTCDuCautionnement(){
+
+  const res = (parseFloat(this.editMontantHTt) * (this.editActeEffetFinancier.taux_cautionnemt)/100)
+    if (res) {
+        return parseInt(res).toFixed(0);
+      }
+      
+      return 0
+
+},
+
+// calcul du montant hors taxe du cautionnement
+
+
+editAfficheMontantHorsTaxeDuCautionnement(){
+
+   const resulVal = parseFloat (this.editAfficherMontantTTCDuCautionnement)/(1+ parseFloat(this.afficherTauxEnPourcentage))
+
+  if(resulVal){
+    return parseInt( Math.round(resulVal))
+  }
+  return 0
+},
+
+// calcul du montant de tva du cautionnement
+editAfficherMontantTvaDuCautionnement(){
+  const val = parseFloat((this.editAfficheMontantHorsTaxeDuCautionnement) * parseFloat(this.editAfficherEnorere)/100);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+},
+
+
 // calcule du montant ttc
 
 afficherEnorere(){
@@ -1352,6 +1675,19 @@ affcherTauxEnCours() {
 
       if (norme) {
         return norme.libelle;
+      }
+      return 0
+    },
+
+
+
+    afficherTauxEnPourcentage() {
+      
+      
+      const tauxArrondi = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (tauxArrondi) {
+        return tauxArrondi.arrondit;
       }
       return 0
     },
@@ -1673,6 +2009,12 @@ getDateFinExécutionValueEdit(){
             ...this.formEffetFinancier,
             duree: this.nombreDejourCalcule,
             taux:this.afficherEnorere,
+            tva_cautionnement:this.afficherMontantTvaDuCautionnement,
+            montant_ttc_cautionnement:this.afficherMontantTTCDuCautionnement,
+            montant_ht_cautionnement:this.afficheMontantHorsTaxeDuCautionnement,
+             montant_ht_retenu_garantie:this.afficherMontantHorsTaxeRetenuGarantie,
+              montant_tva_retenu_garanti:this.afficherMontantTvaTaxeRetenuGarantie,
+              montant_ttc_retenue_garantie:this.afficherMontantRetenueGarantie,
             tva:this.montantTva,
             montant_act:this.montantHTt,
            avance_demarrage_ttc:this.avanceDemarrage,
@@ -1735,6 +2077,13 @@ modifierModalActeEffetFinancierLocal(){
              taux:this.editAfficherEnorere,
              avance_demarrage_ttc:this.editAvanceDemarrage,
            tva_avance_demarage:this.editAvanceDemarrageMontantTva,
+
+             tva_cautionnement:this.editAfficherMontantTvaDuCautionnement,
+            montant_ttc_cautionnement:this.editAfficherMontantTTCDuCautionnement,
+            montant_ht_cautionnement:this.editAfficheMontantHorsTaxeDuCautionnement,
+             montant_ht_retenu_garantie:this.editAfficherMontantHorsTaxeRetenuGarantie,
+              montant_tva_retenu_garanti:this.editAfficherMontantTvaTaxeRetenuGarantie,
+              montant_ttc_retenue_garantie:this.editAfficherMontantRetenueGarantie,
             entreprise_id:this.affichierNomEntreprise.entreprise_id,
             difference_personnel_bienService:this.afficheMarcheType,
             marche_id:this.macheid,
@@ -1764,9 +2113,9 @@ formatageSomme:formatageSomme,
         //         //console.log(this.resultaAnalysePv)
         //     },
 
-//  formaterDate(date) {
-//               return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
-//             },
+ formaterDate(date) {
+              return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
+            },
       }
 }
 </script>
@@ -1774,8 +2123,8 @@ formatageSomme:formatageSomme,
 <style scoped>
 .grdirModalActeEffet{
      width: 1200px;
- margin: 0 -530px;
- height: 550px;
+ margin: 0 -600px;
+ height: 600px;
 
 }
 </style>

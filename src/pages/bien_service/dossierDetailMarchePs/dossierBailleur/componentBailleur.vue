@@ -32,13 +32,34 @@
                                              <td @dblclick="editeMarcheBailleur(appelOffre.id)">
                                             {{((parseFloat(appelOffre.montant )) / parseFloat(montantAct(appelOffre.acte_effet_id)) * 100).toFixed(2)}}</td>
 
-
+                                           <td>
                                         <div class="btn-group">
                                             <button @click.prevent="supprimerMarcheBailleur(appelOffre.id)"  class="btn btn-danger ">
                                                 <span class=""><i class="icon-trash"></i></span></button>
                                         </div>
-
+                                           </td>
                                     </tr>
+
+                                     <tr>
+                                       <td></td>
+                              <td style="font-weight:bold;"> 
+                      </td>
+                       <td  style="text-align: center;color:red;font-weight:bold;">
+                           {{formatageSomme(parseFloat(sommeBailleur(macheid)))}}
+                           
+                      </td>
+                    
+                      <td  style="text-align: center;color:red;font-weight:bold;">
+                           {{formatageSomme(parseFloat(afficherMontantTtcDeActe(macheid)))}}
+                           
+                      </td>
+                      <td  style="text-align: center;color:red;font-weight:bold;">
+                        {{ ((parseFloat(sommeBailleur(macheid))) / parseFloat(afficherMontantTtcDeActe(macheid)) ) * 100}}   
+                           
+                      </td>
+                      <td></td>
+                      
+                    </tr>
                                     </tbody>
                                 </table>
               
@@ -85,7 +106,7 @@
 
                                           <td>
                           <div class="control-group">
-                        <label class="control-label">Montant Contrat/marché (TTC )</label>
+                        <label class="control-label">Montant marché (TTC )</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -129,9 +150,10 @@
                                             <div class="control-group">
                                                 <label class="control-label">Montant Hors Taxe (HT) <code>*</code> :</label>
                                                 <div class="controls">
-                                                    <input type="text" class="span" placeholder="Montant" v-model="formBailleur.montant_ht">
+                                                    <input type="text" class="span"  v-model="formBailleur.montant_ht"
+                                                     placeholder="saisir le montant hors taxe">
                                                 </div>
-                                                
+                                                   <code v-if="essaiMontant>afficherMontantTtcDeActe(macheid)">la somme des bailleurs > au montant du contrat</code>   
                                             </div>
                                            </td>
                                       
@@ -200,7 +222,7 @@
           
             <td >
               <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
+                <label class="control-label" style="text-align:right;color:red">Montant TTC </label>
                
               </div>
            
@@ -225,7 +247,7 @@
                                      </table>
                                    
                                         <div class="modal-footer" >
-                                            <button @click.prevent="ajouterBailleur" class="btn btn-primary" >Valider</button>
+                                            <button @click.prevent="ajouterBailleur" class="btn btn-primary" v-if="essaiMontant<=afficherMontantTtcDeActe(macheid)">Valider</button>
                                             <button data-dismiss="modal" class="btn" href="#">Fermer</button>
                                         </div>
                                    
@@ -596,6 +618,44 @@ montantHTt() {
     },
 
 
+// comparaison
+  // comparaisonMontantBailleur(){
+  //   if( this.formBailleur.montant_ht == this.afficherMontantTtcDeActe){
+  //     return this.formBailleur.montant_ht
+  //   }else{
+  //     alert('montant bailleur est superieur au montant du contrat')
+  //   }
+  //   return null
+  // },
+
+  sommeBailleur(){
+    return id =>{
+      if(id!=null && id!=""){
+ return this.personnaliseGetterMarcheBailleur.filter(item =>item.marche_id==id).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.montant), 0)
+      }
+    }
+   
+  },
+
+  // calcule du taux
+
+  essaiMontant(){
+
+    return parseFloat(this.sommeBailleur(this.macheid)) + parseFloat(this.formBailleur.montant_ht) + parseFloat(this.montantTva)
+  },
+
+  // fonction de comparaison du montant de l'acte et celui de bailleur 
+
+
+  comparaisonSommeActeEtBailleur(){
+    if (this.sommeBailleur + this.formBailleur.montant_ht <= this.afficherMontantTtcDeActe){
+      return  parseFloat(this.sommeBailleur + this.formBailleur.montant_ht) + parseFloat(this.montantTva)
+    }else{
+      alert('le montant du bailleur est superieur au montant de l\'acte')
+    }
+    return null
+  },
+
     editAfficherEnorere(){
         if(this.edit_bailleur_marche.exonere == 0){
   return 0
@@ -639,7 +699,11 @@ else {
                 "modificationMarcheBailleur","supprimerMarcheBailleur"
             
             ]),
-
+              //  rechercheMandater(){
+              //    if(sommeMontant > montantActe){
+                   
+              //    }
+              //  },
             //  afficherModalModifierTransmission(index){
             //     this.$('#modificationAajouterAnalys01').modal({
             //         backdrop: 'static',
@@ -658,7 +722,8 @@ else {
             },
 
          ajouterBailleur(){
-                 this.formBailleur.acte_effet_id=this.enregistreIdActe(this.macheid)
+
+                this.formBailleur.acte_effet_id=this.enregistreIdActe(this.macheid)
                 this.formBailleur.marche_id=this.macheid
                 this.formBailleur.montant=this.montantHTt
                 this.formBailleur.tva=this.afficherEnorere
@@ -670,6 +735,10 @@ else {
                         marche_id:"",
                         bailleur_id:"",
                 }
+            
+              
+           
+                
             },
 
 

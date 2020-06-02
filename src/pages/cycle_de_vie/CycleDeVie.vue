@@ -24,7 +24,7 @@
                         </div>
 
      <div id="app">
-         <div  id="pdf">
+         <div  id="pdf" ref="document">
              <div align="center"> <h2>Cycle de vie du marché ({{detail.objet}})</h2> </div>
              <br>
              <table class="table table-bordered " id="app1">
@@ -56,7 +56,7 @@
                  </thead>
 
              </table>
-
+             <div class="html2pdf__page-break"></div>
 
              <table class="table table-bordered table-striped" id="app2">
                  <thead>
@@ -146,7 +146,7 @@
                  </thead>
 
              </table>
-
+             <div class="html2pdf__page-break"></div>
              <table class="table table-bordered table-striped" id="app3">
                  <thead>
                  <tr>
@@ -222,7 +222,7 @@
                  <tbody>
                  </tbody>
              </table>
-
+             <div class="html2pdf__page-break"></div>
              <table class="table table-bordered table-striped" id="app5">
                  <thead>
                  <tr>
@@ -333,7 +333,7 @@
                  <tbody>
                  </tbody>
              </table>
-
+             <div class="html2pdf__page-break"></div>
              <table class="table table-bordered table-striped" id="app6">
                  <thead>
                  <tr>
@@ -376,6 +376,7 @@
                  <tbody>
                  </tbody>
              </table>
+
              <table class="table table-bordered table-striped" id="app8">
                  <thead>
                  <tr>
@@ -411,6 +412,7 @@
                  </tr>
                  </thead>
              </table>
+
              <table class="table table-bordered table-striped" id="app10">
                  <thead>
                  <tr>
@@ -453,6 +455,7 @@
 
                  </thead>
              </table>
+
              <table class="table table-bordered table-striped" id="app12">
                  <thead>
                  <tr>
@@ -536,7 +539,7 @@
                  <tbody>
                  </tbody>
              </table>
-
+             <div class="html2pdf__page-break"></div>
              <table class="table table-bordered table-striped" id="app14">
                  <thead>
                  <tr>
@@ -583,12 +586,14 @@
 <script>
     import moment from "moment";
     import { mapGetters, mapActions } from "vuex";
-    import html2canvas from 'html2canvas'
-    import * as JsPDF from 'jspdf'
+    //import html2canvas from 'html2canvas'
+    //import * as JsPDF from 'jspdf'
+    import html2pdf from 'html2pdf.js'
     // import moment from "moment";
     // import { ModelListSelect } from "vue-search-select";
     // import "vue-search-select/dist/VueSearchSelect.css";
     import { formatageSomme } from "../../../src/Repositories/Repository";
+
     export default {
         // components: {
         //   ModelListSelect
@@ -1000,7 +1005,13 @@
                 return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
             },
             genererEnPdf(){
-
+                html2pdf(this.$refs.document, {
+                    margin: 1,
+                    filename:'Cycle de vie '+this.detail.objet+'.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { dpi: 192, letterRendering: true },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+                })
               /*  var doc = new JsPDF('landscape')
 
                 doc.text(98,10,"CYCLE DE VIE")*/
@@ -1023,14 +1034,14 @@
                     doc.save('Cyscle.pdf')
                 doc.output('dataurlnewwindow')
                 return 0*/
-
+/*
                 html2canvas(document.querySelector('#app'), {imageTimeout: 3000, useCORS: true,scale: 0.8,
                     logging: true,
                     allowTaint: false,
                     backgroundColor: null},).then(canvas => {
                     document.getElementById('pdf').appendChild(canvas)
                     var base64image =canvas.toDataURL('image/png');
-                   /* let img = canvas.toDataURL('image/png')
+                   /!* let img = canvas.toDataURL('image/png')
                     var imgWidth = 205;
                     var pageHeight = 290;
                     var imgHeight = canvas.height * imgWidth / canvas.width;
@@ -1049,7 +1060,7 @@
                         doc.addPage();
                         doc.addImage(img, 'PNG', 0, position, imgWidth, imgHeight);
                         heightLeft -= pageHeight;
-                    }*/
+                    }*!/
 
 
                     var margin = 2;
@@ -1057,6 +1068,9 @@
                     var pageHeight = 295;
                     var imgHeight = canvas.height * imgWidth / canvas.width;
                     var heightLeft = imgHeight;
+
+
+
 
                     var doc = new JsPDF('p', 'mm');
                     var position = 0;
@@ -1074,7 +1088,7 @@
 
                     doc.save( 'file.pdf')
                     return 0
-                })
+                })*/
             },
             // formaterDate(date) {
             // return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
