@@ -168,7 +168,54 @@
     
      <!-- <td height="20px">23</td>
      <th height="20px"></th> -->
-</tr>                                                       
+</tr> 
+
+
+
+               </tbody>    
+             </table>
+                                            <table class="table table-bordered table-striped" id="total">
+               <tbody>
+                  <tr>
+   <th style="width:10%;font-size:14px;font-weight: bold;">INVESTISSEMENTS</th>
+   <td style="width:12%"> CONTREPARTIE </td>
+    <td style="width:12%">ETAT</td>
+    <td width="12%" style="text-align:center"></td>
+   <td width="12%" style="text-align:center"></td>
+     <td width="12%" style="text-align:center"></td>
+     <!-- <td style="width:12%">0231</td>
+     <th style="width:12%">7895</th> -->
+</tr>
+                   <tr>
+   <th height="20px"></th>
+   <td height="20px">DON  </td>
+    <td height="20px"></td>
+    <td height="20px" style="text-align:center"></td>
+    <td height="20px" style="text-align:center"></td>
+     <td height="20px" style="text-align:center"></td>
+  
+     <!-- <td height="20px">1233</td>
+     <th height="20px"></th> -->
+</tr>
+                   <tr>
+   <th height="20px"></th>
+   <td height="20px">EMPRUNT  </td> 
+    <td height="20px"></td>
+     <td height="20px" style="text-align:center"></td>
+   <td height="20px" style="text-align:center"></td>
+     <td height="20px" style="text-align:center"></td>
+  
+ 
+    <!-- <td height="20px">000055</td>
+     <th height="20px">00004</th> -->
+</tr>
+
+
+
+
+
+
+
                </tbody>    
              </table>
                                             <table class="table table-bordered table-striped" id="total">
@@ -206,6 +253,17 @@
     <!-- <td height="20px">000055</td>
      <th height="20px">00004</th> -->
 </tr>
+  
+
+
+   
+
+
+
+
+
+
+
                    <tr>
    <th height="20px" colspan="2" style="color: #000000;font-size:14px">TOTAL GENERAL </th>
    
