@@ -153,11 +153,19 @@
                                                 </div>
                                                 <div class="widget-content">
                                                     <div  v-for="(listeM,index) in uniteBySection(section)" :key="index" >
+                                                           <div v-if="uniteDejaAffecter(listeM.id)">
+                                                               <p-check class="pretty p-image p-plain "  checked   disabled style=" width: 100%; font-size: 20px !important;" v-model="unite" :value="listeM.id">
+                                                                   <img slot="extra" class="image" src="../../assets/002.png">
+                                                                   {{ listeM.libelle }}
+                                                               </p-check>
+                                                           </div>
+                                                        <div v-else>
+                                                            <p-check class="pretty p-image p-plain "  style=" width: 100%; font-size: 20px !important;"  v-model="unite" :value="listeM.id">
+                                                                <img slot="extra" class="image" src="../../assets/004.png">
+                                                                {{ listeM.libelle }}
+                                                            </p-check>
+                                                        </div>
 
-                                                        <p-check class="pretty p-image p-plain"   style=" width: 100%; font-size: 20px !important;"  v-model="unite" :value="listeM.id">
-                                                            <img slot="extra" class="image" src="../../assets/004.png">
-                                                            {{ listeM.libelle }}
-                                                        </p-check>
 
                                                     </div>
                                                     <div v-if="!uniteBySection(section).length">
@@ -256,7 +264,7 @@
             this.detail=this.getterUtilisateur.find(item=>item.id==this.$route.params.id)
             this.detailAffectation=this.getterAffectation.filter(item=>item.user_id==this.$route.params.id)
 
-            console.log(this.jointureUaChapitreSection)
+            console.log(this.detailAffectation)
         },
         computed: {
             ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation"]),
@@ -292,6 +300,21 @@
                console.log("Ok BBB")
                 return colect
            },
+            uniteDejaAffecter(){
+              return id=>{
+                  if (id){
+                    let affecter=this.getterAffectation.find(item=>{
+                        if (item.unite_administrative_id==id && item.user_id==this.detail.id && item.date_fin==null ){
+                         return item
+                        }
+                    })
+                      if (affecter){
+                          return true
+                      }
+                  return false
+                  }
+              }
+            },
             listeUniteSelectionner(){
                 let vm=this
                 let colect=[];
