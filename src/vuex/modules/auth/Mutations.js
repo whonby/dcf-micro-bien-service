@@ -75,3 +75,101 @@ export const MODIFIER_type_uas = (state, objetModifie) => {
     })
 }
 
+
+
+
+export const GET_UTILISATEUR = (state, tab_type_uas) => {
+    state.utilisateur = tab_type_uas
+}
+
+/**
+ * Ajouter personnel
+ * @param state
+ * @param nouvel_objet
+ * @constructor
+ */
+export const AJOUTER_UTILISATEUR = (state, nouvel_objet) => {
+    state.utilisateur.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+
+}
+
+/**
+ * Suppresions
+ * @param state
+ * @param id
+ * @constructor
+ */
+export const SUPPRIMER_UTILISATEUR= (state, id) => {
+    state.utilisateur = state.utilisateur.filter(type => type.id != id)
+}
+
+/**
+ * Modification
+ * @param state
+ * @param id
+ * @param objetModifie
+ * @constructor
+ */
+export const MODIFIER_UTILISATEUR = (state, objetModifie) => {
+    state.utilisateur = state.utilisateur.map(type => {
+        if(type.id == objetModifie.id){
+            type = {...objetModifie}
+        }
+        return type
+    })
+}
+
+
+
+
+export const GET_ROLES = (state, tab_type_uas) => {
+    state.roles = tab_type_uas
+}
+
+
+
+
+
+
+export const GET_AFFECTATION = (state, tab_type_uas) => {
+    state.affectation = tab_type_uas
+}
+
+/**
+ * Ajouter personnel
+ * @param state
+ * @param nouvel_objet
+ * @constructor
+ */
+export const AJOUTER_AFFECTATION = (state, nouvel_objet) => {
+    state.affectation.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+
+}
+
+/**
+ * Suppresions
+ * @param state
+ * @param id
+ * @constructor
+ */
+export const SUPPRIMER_AFFECTATION= (state, id) => {
+    state.affectation = state.affectation.filter(type => type.id != id)
+}
+
+/**
+ * Modification
+ * @param state
+ * @param id
+ * @param objetModifie
+ * @constructor
+ */
+export const MODIFIER_AFFECTATION = (state, objetModifie) => {
+    state.affectation = state.affectation.map(type => {
+        if(type.id == objetModifie.id){
+            type = {...objetModifie}
+        }
+        return type
+    })
+}
