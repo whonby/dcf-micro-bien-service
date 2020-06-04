@@ -7,7 +7,10 @@ const defaultstate = {
     loader: false,
     error: false,
     errorMessage: undefined,
-    type_uas: []
+    type_uas: [],
+    utilisateur:[],
+    roles:[],
+    affectation:[]
 
 
 };

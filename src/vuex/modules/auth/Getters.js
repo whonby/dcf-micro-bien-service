@@ -13,7 +13,9 @@ export const champVide = state => state.champVide
 export const errorMessage = state => state.errorMessage
 
 export const type_uas = state => state.type_uas
-
+export const getterUtilisateur= state =>state.utilisateur
+export const getterRoles= state =>state.roles
+export const getterAffectation =state =>state.affectation
 
 
   

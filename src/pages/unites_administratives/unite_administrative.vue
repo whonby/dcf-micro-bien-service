@@ -454,7 +454,7 @@
                         <li :class="{ disabled : page == partition(filtre_unite_admin,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
 
                     </ul>
-                </div>
+           </div>
         </div>
       </div>
     </div>
