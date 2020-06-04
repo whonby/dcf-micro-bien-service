@@ -32,7 +32,7 @@ import "fullcalendar-scheduler";
 import "fullcalendar/dist/fullcalendar.min.css";
 import "fullcalendar-scheduler/dist/scheduler.min.css";
 import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
-
+import PrettyCheckbox from 'pretty-checkbox-vue'
 // import PrettyInput from 'pretty-checkbox-vue/input';
 // import PrettyCheck from 'pretty-checkbox-vue/check';
 // import PrettyRadio from 'pretty-checkbox-vue/radio';
@@ -46,7 +46,7 @@ Vue.component('downloadExcel', JsonExcel)
 //Vue.component(Balloon)
 //import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
 var Jquery = require('jquery')
-
+Vue.use(PrettyCheckbox);
 Vue.config.devtools = true
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios;

@@ -56,7 +56,12 @@
               <i class="icon-user"></i> Type unite d'administrative
             </router-link>
           </li>
-          
+            <li class="divider"></li>
+            <li>
+                <router-link :to="{name: 'GestionCF'}" tag="a">
+                    <i class="icon-user"></i> Gestion des CF
+                </router-link>
+            </li>
         </ul>
       </li>
       <!--Source de financement-->
