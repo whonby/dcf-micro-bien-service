@@ -46,7 +46,7 @@
             <label class="control-label">Type marché </label>
             <div class="controls">
             <select v-model="formData.type_marche_id" class="span4">
-               <option v-for="plans in afficherTypeMarche" :key="plans.id" 
+               <option v-for="plans in typeMarches" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
@@ -55,7 +55,7 @@
               
              <td >
                <div class="control-group">
-            <label class="control-label">Objet marché</label>
+            <label class="control-label">Objet marché / contrat</label>
             <div class="controls">
               <textarea
                
@@ -84,13 +84,18 @@
                 <div class="control-group">
                   <label class="control-label">Grand Nature</label>
                   <div class="controls">
-                    <select v-model="formData.gdenature_id" :readOnly="deverouGrandNature" class="sapn5">
+                    <!-- <select v-model="formData.gdenature_id" :readOnly="deverouGrandNature" class="sapn5">
                       <option
                         v-for="gdeNature in groupgranNature"
                         :key="gdeNature[0].id"
                         :value="gdeNature[0].afficheGdeNature.id"
                       >{{gdeNature[0].afficheGdeNature.libelle}}</option>
-                    </select>
+                    </select> -->
+
+                     <select v-model="formData.gdenature_id" :readOnly="deverouGrandNature" class="sapn5">
+               <option v-for="plans in grandes_natures" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+               </select>
                   </div>
                 </div>
               </td>
@@ -355,13 +360,18 @@
                 <div class="control-group">
                   <label class="control-label">Grand Nature</label>
                   <div class="controls">
-                    <select v-model="editMarche.gdenature_id" :readOnly="deverouGrandNature" class="span4">
+                    <!-- <select v-model="editMarche.gdenature_id" :readOnly="deverouGrandNature" class="span4">
                       <option
                         v-for="gdeNature in grandeNatureDynamiques(editMarche.unite_administrative_id)"
                         :key="gdeNature.id"
                         :value="gdeNature.afficheGdeNature.id"
                       >{{gdeNature.afficheGdeNature.libelle}}</option>
-                    </select>
+                    </select> -->
+
+                      <select v-model="editMarche.gdenature_id"  class="sapn5">
+               <option v-for="plans in grandes_natures" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+               </select>
                   </div>
                 </div>
               </td>
@@ -703,9 +713,9 @@
       </div>
     </div>
 
-    <!-- <fab :actions="fabActions" @cache="afficherModalAjoutTypaPrestation" main-icon="apps" bg-color="green"></fab>
+    <fab :actions="fabActions" @cache="afficherModalAjoutTypaPrestation" main-icon="apps" bg-color="green"></fab>
  <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjoutTypaPrestation()">Open</button>
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button> -->
+      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
     
@@ -815,7 +825,7 @@ export default {
        ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
- ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
+ ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires',"grandes_natures"]),
    ...mapGetters("gestionMarche", ['entreprises']),
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
@@ -1685,14 +1695,14 @@ this.formData = {
     },
     formatageSomme:formatageSomme,
     // afficher modal de modification
-    // afficherModalModifierTypePrestation(index) {
-    //   this.$("#modificationModal").modal({
-    //     backdrop: "static",
-    //     keyboard: false
-    //   });
+    afficherModalModifierTypePrestation(index) {
+      this.$("#modificationModal").modal({
+        backdrop: "static",
+        keyboard: false
+      });
 
-    //   this.editMarche = this.marches[index];
-    // },
+      this.editMarche = this.marches[index];
+    },
     // fonction pour vider l'input modification
     modifierModalTypeprestationLocal(){
        var nouvelObjet = {

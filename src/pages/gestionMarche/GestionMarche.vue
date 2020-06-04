@@ -32,7 +32,7 @@
                       </li>
                        
 
-                            <li class="">
+                            <!-- <li class="">
                         <a data-toggle="tab" href="#tab00214">Liste des Marchés de Bien&Service et Fourniture   <span class="badge badge-warning">{{nombreMarcheBienServiceEtFourniture}}</span></a>
                       </li>
                      
@@ -41,7 +41,7 @@
                       </li>
                        <li class="">
                         <a data-toggle="tab" href="#tab000010">Liste des Contrats     <span class="badge badge-inverse">  {{nombreDeContrat}}</span></a>
-                      </li>
+                      </li> -->
                     </ul>
                   </div>
                   <div class="widget-content tab-content">

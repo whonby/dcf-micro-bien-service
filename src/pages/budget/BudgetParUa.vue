@@ -5,25 +5,25 @@
         <li class="bg_ls">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-important">{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel))}}</span> B.PERSONNEL
+            <span class="label label-info">{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel))}}</span> B.PERSONNEL
           </a>
         </li>
         <li class="bg_lo">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-success">{{formatageSomme(parseFloat(afficherTotalBudgetModuleBienService))}}</span>B.BIENS ET SERVICES
+            <span class="label label-info">{{formatageSomme(parseFloat(afficherTotalBudgetModuleBienService))}}</span>B.BIENS ET SERVICES
           </a>
         </li>
          <li class="bg_lo">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-success">{{formatageSomme(parseFloat(afficherTotalBudgetModuleTransfert))}}</span>B.TRANSFERTS
+            <span class="label label-info">{{formatageSomme(parseFloat(afficherTotalBudgetModuleTransfert))}}</span>B.TRANSFERTS
           </a>
         </li>
          <li class="bg_lo">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-success">{{formatageSomme(parseFloat(afficherTotalBudgetModuleInvestissement))}}</span>B.INVESTISSEMEENT
+            <span class="label label-info">{{formatageSomme(parseFloat(afficherTotalBudgetModuleInvestissement))}}</span>B.INVESTISSEMEENT
           </a>
         </li>
          <li class="bg_ls">
@@ -35,7 +35,7 @@
         <li class="bg_lo">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-success">{{formatageSomme((parseFloat(budgetConsommerPersonnelGlobal) +parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)))}}</span>B.CONSOMME
+            <span class="label label-inverse">{{formatageSomme((parseFloat(budgetConsommerPersonnelGlobal) +parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)))}}</span>B.CONSOMME
           </a>
         </li>
          <li class="bg_lo">
@@ -47,7 +47,7 @@
          <li class="bg_lo">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-success">{{(((parseFloat(budgetConsommerPersonnelGlobal)+parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)) / (parseFloat(afficherTotalBudgetModulePersonnel) + parseFloat(afficherTotalBudgetModuleBienService) + parseFloat(afficherTotalBudgetModuleInvestissement) + parseFloat(afficherTotalBudgetModuleTransfert))) * 100 ).toFixed(2) || 0}}%</span>TAUX EXECUTION
+            <span class="label label-default">{{(((parseFloat(budgetConsommerPersonnelGlobal)+parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)) / (parseFloat(afficherTotalBudgetModulePersonnel) + parseFloat(afficherTotalBudgetModuleBienService) + parseFloat(afficherTotalBudgetModuleInvestissement) + parseFloat(afficherTotalBudgetModuleTransfert))) * 100 ).toFixed(2) || 0}}%</span>TAUX EXECUTION
           </a>
         </li>
        
@@ -208,7 +208,7 @@
                 <td
                   style="font-weight:bold;font-size:12px;text-align:center"
             
-                >{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id))-(parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))+ parseFloat(budgetConsommerPersonnelle(unite.id))))}}</td>
+                >{{formatageSomme(parseFloat(MontantTotalPargdeNature(unite.id)) - ((parseFloat(budgetConsommerTransfert(unite.id)) + parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerInvestissement(unite.id)) +  parseFloat(budgetConsommerPersonnelle(unite.id)))) )}}</td>
                 
                 <td style="font-weight:bold;font-size:12px;text-align:center">{{(((parseFloat(budgetConsommerPersonnelle(unite.id)) + parseFloat(budgetConsommerBienService(unite.id)) + parseFloat(budgetConsommerTransfert(unite.id))+ parseFloat(budgetConsommerInvestissement(unite.id))) / (parseFloat(MontantTotalPargdeNature(unite.id)+0.01))) * 1000).toFixed(2)|| 0}}%</td>
           

@@ -1583,7 +1583,7 @@ afficherMontantTTCDuCautionnement(){
 
 afficherMontantTvaDuCautionnement(){
 
-   const val = parseFloat((this.afficheMontantHorsTaxeDuCautionnement) * parseFloat(this.editAfficherEnorere)/100);
+   const val = parseFloat((this.afficheMontantHorsTaxeDuCautionnement) * parseFloat(this.afficherEnorere)/100);
       
        if (val) {
         return parseInt(val).toFixed(0);
@@ -1592,6 +1592,7 @@ afficherMontantTvaDuCautionnement(){
       return 0
 
 },
+
 
 // calcul du montant hors taxe du cautionnement 
 
