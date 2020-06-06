@@ -1,9 +1,5 @@
-avenant
-affcherTauxEnCours
-engagement direct
-mandat
-Modifier Mandat
-taillemodal45
+Decision Emetteur
+fonctionModifierLiquidation
 <template>
   	<div>
 
@@ -980,8 +976,7 @@ taillemodal45
                                           <th>N° engagement</th>
                                         <th>Type procedure</th>
                                         
-                                        <!-- <th >Section</th> -->
-                                        <!-- <th title="unite administrative">Ua</th> -->
+                                       
                              
                                 <th>Montant Mandat</th>
                                  <th >Decision de emetteur</th>
@@ -5412,7 +5407,7 @@ taillemodal45
     <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
 
 
-
+Total général
 
 
 

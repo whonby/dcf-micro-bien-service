@@ -68,14 +68,32 @@ import DetailPPM from "../../pages/bien_service/ppm/DetailPPM";
 import detailMarcheFsqc from "../../pages/bien_service/dossierFSQC/detailMarcheFsqc";
 import detailMarcheR3cv from "../../pages/bien_service/dossierR3CV/detailMarcheR3cv";
 import CycleDeVie from "../../pages/cycle_de_vie/CycleDeVie.vue"
+import AjoutMandatDirect from "../../pages/bien_service/contractualisation/DossierExecution/dossierMandat/AjoutMandatDirect.vue";
+import AjouterMandatbon from "../../pages/bien_service/contractualisation/DossierExecution/dossierMandat/AjouterMandatbon.vue";
+import AjouterEngagementFactureProf from "../../pages/bien_service/contractualisation/DossierExecution/dossierEngagement/AjouterEngagement.vue";
 const BienServiceRoutes = [
    /* {
 
         path: "/creation-execution-marche-investissement",
         name: "executionMarcheInvestissement",
         component: executionMarcheInvestissement
-
+detailExecution
     },*/
+    {
+        path: "/Ajouter-Mandat-bon-Commande/:id",
+        name: "AjouterMandatbon",
+        component: AjouterMandatbon
+    },
+    {
+        path: "/ajouter-Engagement/:id",
+        name: "AjouterEngagementFactureProf",
+        component: AjouterEngagementFactureProf
+    },
+    {
+        path: "/ajouter-Mandat/:id",
+        name: "AjoutMandatDirect",
+        component: AjoutMandatDirect
+    },
     {
         path: "/historique-Marche",
         name: "historiqueMarche",

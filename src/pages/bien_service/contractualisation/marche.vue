@@ -747,7 +747,7 @@ source_financement
                      <th>Statut</th>
                     <th>Montant prévu</th>
                     <th>Etat du marché</th>
-                   <th colspan="">Action</th>
+                   <th colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -812,6 +812,7 @@ source_financement
                 <span title="MARCHE EN PLANIFICATION">PL</span>
                 </button>
                    </td>
+  
                    <!-- <td>
                       <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
                                     class="btn btn-inverse " title="Cycle de vie du marche">
@@ -819,8 +820,14 @@ source_financement
                        </router-link>
                    </td> -->
                    <td>
+                      <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+                class="btn btn-default " title="continue la contratualisation">
+                  <span class=""><i class=" icon-folder-open"></i></span>
+                    </router-link>
+                   </td>
+                   <td>
            
-                     
+                    
                      
 
 

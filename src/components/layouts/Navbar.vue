@@ -99,7 +99,8 @@ export default {
      "getLigneExempter",
      "getBudgeChager",
      "getAllRealiteServiceFait",
-     "getAllLiquidation"
+     "getAllLiquidation",
+     "getAllDecompteFacture"
     ]),
             ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
@@ -148,7 +149,7 @@ export default {
           "getExecutionMarche","getTypeAppel","getTypeCandidat","getFacture"
           ,"getMarcheBailleur","getMembreCojo","getProceVerbal","getModePaiement", 
           "getCotation","getOuverture","getTransmission","getPlanPassationMarche",
-          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getDecompte"])
+          "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner"])
 
   },
 
@@ -207,7 +208,7 @@ this.getAllRealiteServiceFait()
      this.getAllLiquidation()
 // this.getTypeProcedure()
 
-
+this.getAllDecompteFacture()
 
 
 
@@ -352,14 +353,14 @@ this.getLettreInvitation()
     this.getObservationBailleur()
 
    this.getAvenant()
-
+this.getDecompte()
     this.getMarcheBailleur()
 this.getMembreCojo()
     this.getProceVerbal()
       /**
        * fin missions
        */
-      this.getDecompte()
+      
   }
 
 };

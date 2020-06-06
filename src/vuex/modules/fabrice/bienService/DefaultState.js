@@ -90,7 +90,7 @@ const defaultState = {
     role_membrecojo: [],
     selectionner_candidats:[],
 
-decomptes:[],
+
     echeances:[]
   
 

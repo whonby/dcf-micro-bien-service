@@ -1,4 +1,4 @@
-DisponibleBudgetaireApresLiquidation
+
 <template>
   	<div>
 
@@ -115,20 +115,116 @@ DisponibleBudgetaireApresLiquidation
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#tab2078">Avenant</a></li>
                                <li ><a data-toggle="tab" href="#tab100">Facture</a></li>
-                               <li ><a data-toggle="tab" href="#tab45785">Decompte</a></li>
-                                <li ><a data-toggle="tab" href="#tab10">Engagement</a></li>
-                                <li ><a data-toggle="tab" href="#tab15550">Réalité service fait</a></li>
-                                <li ><a data-toggle="tab" href="#tab120120">Liquidation</a></li>
-                                <li><a data-toggle="tab" href="#tab20">Mandat</a></li>
-                                 <li><a data-toggle="tab" href="#tab20002">Décompte</a></li>
+                               
+                                <li ><a data-toggle="tab" href="#tab10" v-if="afficherTypeProcedure(detail_marche.id) == 2">Engagement</a></li>
+                                <li ><a data-toggle="tab" href="#tab15550" v-if="afficherTypeProcedure(detail_marche.id) == 2 && afficheTabulationServiceRealiteFait(detail_marche.id) == 1">Réalité service fait</a></li>
+                                <li ><a data-toggle="tab" href="#tab120120" v-if="afficherTypeProcedure(detail_marche.id) == 2 && afficheTabulationLiquidation(detail_marche.id) == 1 || afficherTypeProcedure(detail_marche.id) == 2 && afficheTabulationLiquidation(detail_marche.id) == 1">Liquidation</a></li>
+                                <li><a data-toggle="tab" href="#tab20" v-if="afficherTypeProcedure(detail_marche.id) == 2 && afficheTabulationMandat(detail_marche.id) == 1 || afficherTypeProcedure(detail_marche.id) == 1">Mandat</a></li>
+                               <li ><a data-toggle="tab" href="#tab45785" v-if=" afficheTabulationDecompte(detail_marche.id) == 8">Decompte</a></li>
+                                                              <li ><a data-toggle="tab" href="#Financement" v-if=" afficheTabulationDecompte(detail_marche.id) == 8">Financement</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li> -->
                             </ul>
                         </div>
                         <div class="widget-content tab-content">
+                          <div id="Financement" class="tab-pane "><financement :macheid="detail_marche.id"></financement></div> 
 <div id="tab2078" class="tab-pane active "><avenant :macheid="detail_marche.id"></avenant></div>             
 <div id="tab100" class="tab-pane  "><facture :macheid="detail_marche.id"></facture></div> 
 <div id="tab45785" class="tab-pane  "><decompte :macheid="detail_marche.id"></decompte></div>
+                       <div id="tab20" class="tab-pane  ">
+                          <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                               <!-- <li class="active"><a data-toggle="tab" href="#tab785545" v-if="afficherTypeProcedure(detail_marche.id) == 8">Facture Proforma</a></li> -->
+                               <li class="active"><a data-toggle="tab" href="#tab966333" v-if="afficherTypeProcedure(detail_marche.id) == 1">Facture Définitive</a></li>
+                                                    
+                            </ul>
+                        </div>
+                         <div class="widget-content tab-content">
+                         <!-- <div id="tab785545" class="tab-pane active" v-if="afficherTypeProcedure(detail_marche.id) == 8">
+                           <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                               <li class="active"><a data-toggle="tab" href="#tab9326">Decision Emetteur</a></li>
+                               <li ><a data-toggle="tab" href="#tab0123">Decision Controleur financier</a></li>
+                                                    
+                            </ul>
+                        </div>
+                         <div class="widget-content tab-content">
+                           <div id="tab9326" class="tab-pane active "><mandatFactureProformaEmetteur :macheid="detail_marche.id"></mandatFactureProformaEmetteur></div>
+                            <div id="tab0123" class="tab-pane  "><mandatFactureProformaCf :macheid="detail_marche.id"></mandatFactureProformaCf></div>
+                         </div>
+                         </div> -->
+                          <div id="tab966333" class="tab-pane active">
+                           <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                               <li class="active"><a data-toggle="tab" href="#tab8956">Decision Emetteur</a></li>
+                               <li ><a data-toggle="tab" href="#tab03215" v-if="afficheDecisionEmetteur(detail_marche.id) == 1">Decision Controleur financier</a></li>
+                                                    
+                            </ul>
+                        </div>
+                         <div class="widget-content tab-content">
+                           <div id="tab8956" class="tab-pane active "><mandatFactureDefinitiveEmetteur :macheid="detail_marche.id"></mandatFactureDefinitiveEmetteur></div>
+                            <div id="tab03215" class="tab-pane  "><mandatFactureDefinitiveCf :macheid="detail_marche.id"></mandatFactureDefinitiveCf></div>
+                         </div>
+                         </div>
+                           </div>
+                       </div>
+
+                       <div id="tab10" class="tab-pane  ">
+                        
+                         
+                         <div id="tab7896532" class="tab-pane active">
+                           <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                               <li class="active"><a data-toggle="tab" href="#tab9326">Decision Controlleur Financier</a></li>
+                                                  
+                            </ul>
+                        </div>
+                         <div class="widget-content tab-content">
+                           <div id="tab7896532" class="tab-pane active "><engagementCf :macheid="detail_marche.id"></engagementCf></div>
+                           
+                         </div>
+                         </div>
+          
+                           
+                       </div>
+                       
+                        
+                         
+                         <div id="tab15550" class="tab-pane">
+                           <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                               <li class="active"><a data-toggle="tab" href="#tab789654">Service Bénéficiaire</a></li>
+                                  <li class=""><a data-toggle="tab" href="#tab895632">Controlleur Financier</a></li>
+                                                  
+                            </ul>
+                        </div>
+                         <div class="widget-content tab-content">
+                           <div id="tab789654" class="tab-pane active "><realiteServiceFaitServiceB :macheid="detail_marche.id"></realiteServiceFaitServiceB></div>
+                           <div id="tab895632" class="tab-pane"><realiteServiceFaitCf :macheid="detail_marche.id"></realiteServiceFaitCf></div>
+                         </div>
+                         </div>
+          
+                      
+                        
+                        
+                         
+                         <div id="tab120120" class="tab-pane">
+                           <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                               <li class="active"><a data-toggle="tab" href="#tab000235">Emetteur</a></li>
+                                  <li class=""><a data-toggle="tab" href="#tab89752241" v-if="afficheDecisionEmetteurLiquidation(detail_marche.id) == 1">Controlleur Financier</a></li>
+                                  <li class=""><a data-toggle="tab" href="#tab452123" v-if="afficheDecisionCFLiquidation(detail_marche.id) == 1 || afficheDecisionCFLiquidation(detail_marche.id) == 9">Ordonnateur</a></li>
+                                                  
+                            </ul>
+                        </div>
+                         <div class="widget-content tab-content">
+                           <div id="tab000235" class="tab-pane active "><liquidationEmetteur :macheid="detail_marche.id"></liquidationEmetteur></div>
+                           <div id="tab89752241" class="tab-pane"><liquidationCf :macheid="detail_marche.id"></liquidationCf></div>
+                          <div id="tab452123" class="tab-pane"><liquidationOrdonnateur :macheid="detail_marche.id"></liquidationOrdonnateur></div>
+                         </div>
+                         </div>
+          
+                           
                        
                         </div>
   
@@ -198,12 +294,36 @@ DisponibleBudgetaireApresLiquidation
 import avenant from "../../../../bien_service/contractualisation/DossierExecution/dossierAvenant/avenant";
 import facture from "../../../../bien_service/contractualisation/DossierExecution/dossierFacture/facture";
 import decompte from "../../../../bien_service/contractualisation/DossierExecution/dossierDecompte/decompte";
-    export default {
+    // import mandatFactureProformaEmetteur from "../../../../bien_service/contractualisation/DossierExecution/dossierMandat/mandatFactureProformaEmetteur";
+    //  import mandatFactureProformaCf from "../../../../bien_service/contractualisation/DossierExecution/dossierMandat/mandatFactureProformaCf";
+    import mandatFactureDefinitiveEmetteur from "../../../../bien_service/contractualisation/DossierExecution/dossierMandat/mandatFactureDefinitiveEmetteur";
+     import mandatFactureDefinitiveCf from "../../../../bien_service/contractualisation/DossierExecution/dossierMandat/mandatFactureDefinitiveCf";
+      import engagementCf from "../../../../bien_service/contractualisation/DossierExecution/dossierEngagement/engagementCf";
+      import realiteServiceFaitServiceB from "../../../../bien_service/contractualisation/DossierExecution/dossierRealiteServiceFait/realiteServiceFaitServiceB";
+      import realiteServiceFaitCf from "../../../../bien_service/contractualisation/DossierExecution/dossierRealiteServiceFait/realiteServiceFaitCf";
+       import liquidationEmetteur from "../../../../bien_service/contractualisation/DossierExecution/dossierLiquidation/liquidationEmetteur";
+        import liquidationCf from "../../../../bien_service/contractualisation/DossierExecution/dossierLiquidation/liquidationCf";
+         import liquidationOrdonnateur from "../../../../bien_service/contractualisation/DossierExecution/dossierLiquidation/liquidationOrdonnateur";
+                  import financement from "../../../../bien_service/contractualisation/DossierExecution/dossierFinancement/financement";
+   export default {
         name: 'compte',
         components:{
             avenant,
             facture,
-            decompte
+            decompte,
+            // mandatFactureProformaEmetteur,
+            // mandatFactureProformaCf,
+            mandatFactureDefinitiveEmetteur,
+            mandatFactureDefinitiveCf,
+            engagementCf,
+            realiteServiceFaitServiceB,
+            realiteServiceFaitCf,
+            liquidationEmetteur,
+            liquidationCf,
+            liquidationOrdonnateur,
+            financement
+
+
         },
         data() {
             return {
@@ -285,6 +405,142 @@ created() {
    
  ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
 
+
+
+afficheTabulationServiceRealiteFait() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.decision_cf;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+afficheTabulationLiquidation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.realiteServiceFait.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.decision_controleur_financier;
+      }
+      return 0
+        }
+      };
+    },
+
+afficheTabulationMandat() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.liquidation.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.decision_ordonnateur;
+      }
+      return 0
+        }
+      };
+    },
+
+afficheTabulationDecompte() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.mandats.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.decision_cf;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+afficheDecisionEmetteurLiquidation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.liquidation.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.decision_emetteur;
+      }
+      return 0
+        }
+      };
+    },
+    afficheDecisionCFLiquidation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.liquidation.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.decision_controleur_financier;
+      }
+      return 0
+        }
+      };
+    },
+afficheDecisionEmetteur() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.mandats.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.decision_emetteur;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+afficheTabulationEngagement() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getMandatPersonnaliser.find(qtreel => qtreel.facture_id == id);
+
+      if (qtereel) {
+        return qtereel.decision_emetteur;
+      }
+      return 0
+        }
+      };
+    },
+afficherTypeFacture() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.typfacture_id;
+      }
+      return 0
+        }
+      };
+    },
+    
+afficherTypeProcedure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.typeProcedure;
+      }
+      return 0
+        }
+      };
+    },
 
 recupereMontantTresor() {
       return id => {

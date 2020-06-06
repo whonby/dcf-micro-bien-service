@@ -101,7 +101,8 @@ export default {
      "getAllRealiteServiceFait",
      "getAllLiquidation",
      "getOrganigrammeUa",
-     "getAllBanqueUa"
+     "getAllBanqueUa",
+     "getAllDecompteFacture"
     ]),
             ...mapActions('personnelUA', ["getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
@@ -235,6 +236,7 @@ this.getTypeAppel()
     this.getAllUniteAdministrative();
      this.getOrganigrammeUa()
      this.getAllBanqueUa()
+     this.getAllDecompteFacture()
     // this.getAllArchivageDocument();
 // this.getAllDirection()
 this.getAllServiceua()
