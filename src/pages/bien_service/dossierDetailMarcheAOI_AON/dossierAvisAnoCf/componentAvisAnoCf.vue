@@ -116,7 +116,7 @@
           
         </div>
 
-          <div class="control-group">
+          <!-- <div class="control-group">
                         <label class="control-label">Motif</label>
                         <div class="controls">
                           <select v-model="edite_demande_dao.plan_motif_decision_id" class="span">
@@ -125,7 +125,19 @@
                             </select>
                         
                         </div>
+                    </div> -->
+
+                        <div class="control-group">
+                        <label class="control-label">Motif</label>
+                        <div class="controls">
+                          <select v-model="edite_demande_dao.plan_motif_decision_id" class="span">
+                                <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                        
+                        </div>
                     </div>
+                            
 
                 </form>
             </div>
@@ -187,7 +199,8 @@ selectedFileDemandeAno:""
                 'types_financements']) ,
                 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
-            
+  ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision', 
+  'plans_Decision']),
 
             demandeAno: function () {
                 return macheid => {
@@ -220,20 +233,26 @@ verouillageObservation(){
                     }
                 }
             },
+affichierIdActeFinancierDansActePlan() {
+      const qtereel = this.plans_Decision.find(
+        qtreel => qtreel.code == "02",
+       
+      );
 
-            //          listePVDemandePV(){
-            //     return macheid=>{
-            //         if(macheid!=""){
-            //             return this.getterProceVerballe.find(item=>{
-            //                 if(item.appel_offre.marche_id==macheid && item.avie==null ){
-            //                     let vM=this;
-            //                     vM.formDemande.proce_verbal_jugement_offre_id=item.id
-            //                     return item;
-            //                 }
-            //             });
-            //         }
-            //     }
-            // },
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
+
+AffichierElementParent() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.parent == id);
+        }
+      };
+    },
 
 
 

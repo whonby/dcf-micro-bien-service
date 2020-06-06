@@ -34,7 +34,7 @@
             <span>TABLEAU DE BORD</span>
           </a>
         </li>
-        <li :class="{active: active_el == 17 }" @click.prevent="navigateToParametreGeneraux">
+        <li v-if="admin() || dcf()" :class="{active: active_el == 17 }" @click.prevent="navigateToParametreGeneraux">
           <a title="PARAMETRES GENERAUX" href="#">
             <i class="icon-cogs"></i>
             <span>PARAMETRES GENERAUX</span>
@@ -109,11 +109,13 @@
       </ul>
     </div>
     <!--sidebar-menu-->
+
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations, mapActions } from "vuex";
+import {admin,dcf} from "../Repositories/Auth"
 export default {
   mounted() {
     // console.log(this.$store.state);
@@ -129,7 +131,8 @@ export default {
    
       ...mapMutations('parametrageMenu', ['activate']),
       ...mapActions('Utilisateurs', ['logoutUser']),
-
+    admin:admin,
+    dcf:dcf,
  navigateToCatographieBudgetaire(){
         this.activate(8)
         this.$router.push({

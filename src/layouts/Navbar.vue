@@ -64,8 +64,8 @@ export default {
   },
 
   methods: {
-   
 
+    ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation"]),
       ...mapActions('parametreGenerauxFonctionnelle', 
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
 
@@ -156,11 +156,12 @@ export default {
           "getRapport", "getDocument","getRapportJugement","getRolemembreCojo","getCandidatSelectionner","getEcheances"])
 
 
-
-
   },
 
   created(){
+    this.getAffectation()
+    this.getRoles()
+    this.getUtilisateurs()
     this.getPlanPassationMarche()
     this.getRapport()
       this.getBudgeChager()

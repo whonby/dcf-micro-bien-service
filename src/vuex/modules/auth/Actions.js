@@ -23,6 +23,7 @@ export function login({commit}, user){
               
                     commit('LOGIN_USER', response.data.user)
                     localStorage.setItem('token', response.data.access_token)
+                     localStorage.setItem("Users",JSON.stringify(response.data.user))
                    // localStorage.setItem('user', response.data.user)
                   // commit('SET_LOADER_FALSE')
 
@@ -47,10 +48,9 @@ export function login({commit}, user){
 
     export function logoutUser({commit}){
       localStorage.removeItem('token')
-     // localStorage.removeItem('user')
+      localStorage.removeItem('Users')
       commit('LOGOUT_USER')
       router.push({ name: 'Login' })                   
-
 
     }
 
@@ -71,6 +71,7 @@ export function login({commit}, user){
       axios.post('/ajouter_type_ua', objetAjoute ).then(res => {
           if(res.status == 201){
               commit('AJOUTER_TYPE_UA', res.data)
+
           }
       }).catch(error => console.log(error))
   }
@@ -94,3 +95,111 @@ export function login({commit}, user){
   }
 
 
+
+
+
+export  function  getUtilisateurs({commit}) {
+
+    queue.push(() =>  apiGuest.get('/users').then(response => {
+            // console.log(response.data)
+            commit('GET_UTILISATEUR', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+// ajouter type acte personnel
+export  function ajouterUtilisateur({commit}, objetAjoute){
+    asyncLoading(apiGuest.post('/register', objetAjoute )).then(res => {
+        if(res.status == 201){
+            commit('AJOUTER_UTILISATEUR', res.data)
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+    }).catch(error => console.log(error))
+}
+
+// supprimer type act
+export function supprimerUtilisateur({commit}, id){
+
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_UTILISATEUR', id)
+            apiGuest.delete('/users/' + id).then(() => dialog.close() )
+
+        })
+}
+
+export function modifierUtilisateur({commit}, formData){
+    apiGuest.put('/users' ,formData).then(response => {
+        commit('MODIFIER_UTILISATEUR', response.data)
+    })
+
+}
+
+
+
+export  function  getRoles({commit}) {
+
+    queue.push(() =>  apiGuest.get('/roles').then(response => {
+            // console.log(response.data)
+            commit('GET_ROLES', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+
+
+
+
+
+export  function  getAffectation({commit}) {
+
+    queue.push(() =>  apiGuest.get('/affectations').then(response => {
+            // console.log(response.data)
+            commit('GET_AFFECTATION', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+// ajouter type acte personnel
+export  function ajouterAffectation({commit}, objetAjoute){
+   return  asyncLoading(apiGuest.post('/affectations', objetAjoute )).then(res => {
+        if(res.status == 201){
+            commit('AJOUTER_AFFECTATION', res.data)
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+    }).catch(error => console.log(error))
+}
+
+// supprimer type act
+export function supprimerAffectation({commit}, id){
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_AFFECTATION', id)
+            apiGuest.delete('/affectations/' + id).then(() => dialog.close() )
+
+        })
+}
+
+export function modifierAffection({commit}, formData){
+    apiGuest.put('/affectations' ,formData).then(response => {
+        commit('MODIFIER_AFFECTATION', response.data)
+    })
+
+}

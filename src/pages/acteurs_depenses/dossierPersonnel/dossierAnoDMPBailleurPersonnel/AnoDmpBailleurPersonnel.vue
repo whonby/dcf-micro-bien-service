@@ -541,7 +541,7 @@ affichierAppelOffreid() {
 
               ajouterDemandeAnoLocal(){
 
-                  if(confirm("chargement du fichier neccessaire ok mercie")){
+                 // if(confirm("chargement du fichier neccessaire ok mercie")){
                       const formData = new FormData();
                 formData.append('fichier', this.selectedFileDemandeAno, this.selectedFileDemandeAno.name);
               //  formData.append('proce_verbal_jugement_offre_id', this.formBailleur.proce_verbal_jugement_offre_id);
@@ -566,7 +566,7 @@ affichierAppelOffreid() {
                     
                    // proce_verbal_jugement_offre_id:""
                 }
-                  }else return "chargement du fichier neccessaire"
+                  //}else return "chargement du fichier neccessaire"
               
             },
 

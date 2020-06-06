@@ -157,7 +157,7 @@ export const getPersonnaliseBudgetGeneral = (
 
 export const afficheBienEtService = state =>
   state.budgetGeneral.filter(
-    affichenaturedep => affichenaturedep.gdenature_id == 5 || affichenaturedep.gdenature_id == 6
+    affichenaturedep => affichenaturedep.gdenature_id == 5
   );
 
 
