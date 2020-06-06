@@ -138,28 +138,18 @@ search:""
        
     ]),
 
-BudgetTrsor(){
-  return id => {
-    if(id !=""){
+
+// BudgetTrsor(){
+//   return id => {
+//     if(id !=""){
   
         
-    return this.budgetGeneral.filter(element => element.codebudget == id && element.typefinancement_id == 14).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0); 
+//     return this.budgetGeneral.filter(element => element.codebudget == id && element.typefinancement_id == 15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0); 
       
-    }
-    return 0
-  }
-},
-BudgetTrsor(){
-  return id => {
-    if(id !=""){
-  
-        
-    return this.budgetGeneral.filter(element => element.codebudget == id && element.typefinancement_id == 15).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0); 
-      
-    }
-    return 0
-  }
-},
+//     }
+//     return 0
+//   }
+// },
 
 
 
