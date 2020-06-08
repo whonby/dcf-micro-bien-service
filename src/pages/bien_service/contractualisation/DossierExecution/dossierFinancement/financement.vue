@@ -49,7 +49,7 @@
                   <td>{{formatageSomme(parseFloat(recupereMontantTresor(finance.facture_id)+(partEmpruntBailleur(finance.facture_id) + partDonBailleur(finance.facture_id))))}}</td>
                   <td>{{((parseFloat(recupereMontantTresor(finance.facture_id))/parseFloat(afficherMontantEtat(finance.marche_id)))*100).toFixed(2)}}%</td>
                   <td>{{((parseFloat((partEmpruntBailleur(finance.facture_id)) + (partDonBailleur(finance.facture_id))))/(parseFloat((afficherMontantDonBailler(finance.marche_id)))+parseFloat((afficherMontantEmpruntBailler(finance.marche_id))))*100).toFixed(2)}}</td>
-                  <td>{{((parseFloat((recupereMontantTresor(finance.facture_id)) + (partEmpruntBailleur(finance.facture_id))+(partDonBailleur(finance.facture_id))))/(parseFloat((afficherMontantEtat(finance.marche_id)))+parseFloat((afficherMontantEmpruntBailler(finance.marche_id)))+parseFloat((afficherMontantDonBailler(finance.marche_id))))*100).toFixed(2)}}</td>
+                  <td>{{((parseFloat((recupereMontantTresor(finance.facture_id)) + (partEmpruntBailleur(finance.facture_id))+(partDonBailleur(finance.facture_id))))/(parseFloat((afficherMontantEtat(finance.marche_id)))+parseFloat((afficherMontantEmpruntBailler(finance.marche_id)))+parseFloat((afficherMontantDonBailler(finance.marche_id))))*100).toFixed(2)}}%</td>
                   <!-- <td>{{}}</td> -->
                                     </tr>
                

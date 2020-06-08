@@ -1,4 +1,3 @@
-afficherIdRealiteServiceFait
 
 <template>
 
@@ -111,17 +110,17 @@ afficherIdRealiteServiceFait
                     :key="Engage.id"
                   >
          <td >{{Engage.exercice_budget || 'Non renseigné'}}</td>
-                    <td >{{Engage.numero_demande_engage || 'Non renseigné'}}</td>
-                    <td >{{Engage.numero_bordereau || 'Non renseigné'}}</td>
-                    <td >{{Engage.numero_engage || 'Non renseigné'}}</td>
-                     <td >{{afficheProgrammeDot(Engage.programme_id) || 'Non renseigné'}}</td> 
+                    <td @dblclick="afficheModalModificationEngagement(Engage.id)">{{Engage.numero_demande_engage || 'Non renseigné'}}</td>
+                    <td @dblclick="afficheModalModificationEngagement(Engage.id)">{{Engage.numero_bordereau || 'Non renseigné'}}</td>
+                    <td @dblclick="afficheModalModificationEngagement(Engage.id)">{{Engage.numero_engage || 'Non renseigné'}}</td>
+                     <td @dblclick="afficheModalModificationEngagement(Engage.id)">{{afficheProgrammeDot(Engage.programme_id) || 'Non renseigné'}}</td> 
                      <!-- <td >{{afficheActionProg(Engage.action_id)|| 'Non renseigné'}}</td> 
                       <td >{{afficheAtiviteProg(Engage.activite_id) || 'Non renseigné'}}</td> -->
-                    <td >{{uaMandat(Engage.ua_id) || 'Non renseigné'}}</td>
-                     <td >{{Engage.budget_general_id || 'Non renseigné'}}</td>
+                    <td @dblclick="afficheModalModificationEngagement(Engage.id)">{{uaMandat(Engage.ua_id) || 'Non renseigné'}}</td>
+                     <td @dblclick="afficheModalModificationEngagement(Engage.id)">{{Engage.budget_general_id || 'Non renseigné'}}</td>
                      
-                    <td >{{CodeSection(Engage.section_id) || 'Non renseigné'}}</td> 
-                  <td >{{formatageSomme(parseFloat(Engage.total_general)) || 0}}</td>
+                    <td @dblclick="afficheModalModificationEngagement(Engage.id)">{{CodeSection(Engage.section_id) || 'Non renseigné'}}</td> 
+                  <td @dblclick="afficheModalModificationEngagement(Engage.id)">{{formatageSomme(parseFloat(Engage.total_general)) || 0}}</td>
                   <td>
                         <button v-if="Engage.decision_cf == 1"  class="btn  btn-success" @click="afficheModalDecision(Engage.id)" >                        
                      
@@ -215,7 +214,17 @@ search:""
         }
     },
     props:["macheid"],
-    created(){},
+        created() {
+            this.marcheid=this.$route.params.id
+   this.detail_Facture = this.getFacturePersonnaliser.find(
+       idmarche => idmarche.id == this.$route.params.id
+         )
+         this.editEngagement=this.engagements.find(item=>item.marche_id==this.$route.params.id)
+  
+  
+  /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
+    console.log(this.appel_offre_marche)*/
+},
 
               computed: {
             ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
@@ -492,6 +501,11 @@ affichierMontantAvenant(){
     
   }
 },
+montantGeneralMandat() { 
+      const val = parseFloat(this.editEngagement.montant_tresor) + parseFloat(this.editEngagement.montant_don) + parseFloat(this.editEngagement.montant_emprunt);
+      return parseFloat(val).toFixed(2);
+      
+    },
     dotationDisponibleAnterieure() {
       const val =  parseFloat(this.afficherMontantBudgetaireInitial(this.afficherInputationBudgetaire(this.afficherIdMarche(this.editEngagement.facture_id)))) - parseFloat(this.montantCumulerMandatEngagement);
       
@@ -897,6 +911,7 @@ afficheLibelleUa() {
       }
       return ""
     },
+
       },
  
       methods:{ 
@@ -939,6 +954,19 @@ afficheLibelleUa() {
       
      
     ]),
+     afficheModalModificationEngagement(id) {
+      this.$router.push({
+        path: "/Modifier_Engagement/" + id
+      });
+    },
+    ModalModificationEngagement(id) {
+      this.$("#modalModificationEngagement").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+       this.editEngagement = this.engagements.find(item=>item.id==id);
+    },
 afficheModalDecision(id) {
       this.$("#decisionCfEngagement").modal({
         backdrop: "static",

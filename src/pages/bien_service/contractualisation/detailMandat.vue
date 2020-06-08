@@ -50,7 +50,7 @@
 
                    
                   <td>
-                        <button v-if="Manda.decision_cf == 1"  class="btn  btn-success">                        
+                        <button v-if="Manda.decision_cf == 8"  class="btn  btn-success">                        
                      
                       <span    >Viser</span>
                       
@@ -162,7 +162,7 @@
                    <td>{{Manda.observation || 'Non renseigné'}}</td>
                     <!-- <td>{{Engage.ligne_id ||'Non renseigné'}}</td> -->
                    
-                     <td>{{Manda.date_demande ||'Non renseigné'}}</td>
+                     <td>{{formaterDate(Manda.date_demande) ||'Non renseigné'}}</td>
                      <td>{{Manda.numero_op || 'Non renseigné'}}</td> 
                      <td>{{afficheFacture(Manda.facture_id)|| 'Non renseigné'}}</td> 
                       
@@ -176,15 +176,16 @@
             <!---/////////////////////// troisieme PARTIES ///////////////////////--->
           
           </div>
-          <!-- <div class="modal-footer">
+          <div class="modal-footer">
         
-        <a data-dismiss="modal" class="btn btn-danger" @click.prevent="retourEngagement" href="#">Voir Tableau</a>
+        <a data-dismiss="modal" class="btn btn-danger" @click.prevent="afficherModalListeExecution" href="#">Retour</a>
        
-      </div> -->
+      </div>
   
         </div>
       </div>
     </div>
+   
   </div>
 </template>
 <script>
@@ -415,7 +416,9 @@ uaMandat() {
         // retourEngagement(){
         //          this.$router.push({ name:'Engagement/:id' })
         //     },
-
+afficherModalListeExecution(){
+                window.history.back();
+            },
   }
 };
 </script>

@@ -118,6 +118,7 @@
                                 <th>Montant Mandat</th>
                                  <th >Emetteur</th>
                                 <th title="Date validation Emetteur">Date Emetteur</th>
+                                <th colspan="2">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -170,7 +171,18 @@
                     <td>{{formaterDate(factu.date_decision_emetteur) || 'Non renseigné'}}</td>
                    
                      
-                     
+                       <td>
+                       
+                       <router-link :to="{ name: 'DetailMandat', params: {id_detail_mandat:factu.id}}"
+                class="btn btn-default " title="Detail Mandat">
+                  <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link> 
+                      <button class="btn btn-danger" @click="supprimerMandat(factu.id)">
+                        <span>
+                          <i class="icon icon-trash"></i>
+                        </span>
+                      </button>
+                    </td>
                    
                   </tr>
                                     </tbody>
@@ -618,11 +630,13 @@ afficherIdSection() {
  
       methods:{ 
 
-       ...mapActions('bienService',[  "ajouterAvenant",
+         ...mapActions('bienService',[  "ajouterAvenant",
       "modifierAvenant",
       "supprimerAvenant",
+      "supprimerMandat",
       "modifierMandat",
-      "ajouterChoixProcedure"]),
+      "ajouterChoixProcedure",
+      "modifierMarche","getMarche","getActeEffetFinancier"]),
  ...mapActions("uniteadministrative", [
      "getAllServiceua",
       "ajouterService",

@@ -71,6 +71,8 @@ import CycleDeVie from "../../pages/cycle_de_vie/CycleDeVie.vue"
 import AjoutMandatDirect from "../../pages/bien_service/contractualisation/DossierExecution/dossierMandat/AjoutMandatDirect.vue";
 import AjouterMandatbon from "../../pages/bien_service/contractualisation/DossierExecution/dossierMandat/AjouterMandatbon.vue";
 import AjouterEngagementFactureProf from "../../pages/bien_service/contractualisation/DossierExecution/dossierEngagement/AjouterEngagement.vue";
+import modifierEngagement from "../../pages/bien_service/contractualisation/DossierExecution/dossierEngagement/modifierEngagement.vue";
+import modifierMandat from "../../pages/bien_service/contractualisation/DossierExecution/dossierMandat/modifierMandat.vue";
 const BienServiceRoutes = [
    /* {
 
@@ -79,6 +81,16 @@ const BienServiceRoutes = [
         component: executionMarcheInvestissement
 detailExecution
     },*/
+    {
+        path: "/Modifier_Mandat/:id",
+        name: "modifierMandat",
+        component: modifierMandat
+    },
+    {
+        path: "/Modifier_Engagement/:id",
+        name: "modifierEngagement",
+        component: modifierEngagement
+    },
     {
         path: "/Ajouter-Mandat-bon-Commande/:id",
         name: "AjouterMandatbon",
