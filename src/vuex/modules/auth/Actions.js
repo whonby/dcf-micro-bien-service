@@ -198,8 +198,18 @@ export function supprimerAffectation({commit}, id){
 }
 
 export function modifierAffection({commit}, formData){
-    apiGuest.put('/affectations' ,formData).then(response => {
+    /*apiGuest.put('/affectations' ,formData).then(response => {
         commit('MODIFIER_AFFECTATION', response.data)
-    })
+    })*/
+
+
+    return  asyncLoading(apiGuest.put('/affectations', formData )).then(res => {
+        commit('MODIFIER_AFFECTATION', res.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
 
 }
