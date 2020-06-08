@@ -345,12 +345,12 @@
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab2078">Toutes les contrats<span class="badge badge-inverse" >{{nombreDeContrat}}</span></a></li>
+                               <li class="active"><a data-toggle="tab" href="#tab2078"> Toutes les contrats<span class="badge badge-inverse" >{{nombreDeContrat}}</span></a></li>
                                
-                               <li ><a data-toggle="tab" href="#tab100">Contrat Planifiés <span class="badge badge-important" > {{nombreContratEnPlanification}}</span></a></li>
-                                <li ><a data-toggle="tab" href="#tab10"> Contrat en cours Contratualisation<span class="badge badge-success" >{{nombreContratEnContratualisation}}</span></a></li>
-                                <!-- <li><a data-toggle="tab" href="#tab20">Contrat en Exécution<span class="badge badge-warning" > {{nbreMarcheContrat}}</span></a></li>
-                                 <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{afficheNombreMarcheResilier}}</span></a></li>
+                               <li ><a data-toggle="tab" href="#tab100">  Contrat Planifiés <span class="badge badge-important" >   {{nombreContratEnPlanification}}</span></a></li>
+                                <li ><a data-toggle="tab" href="#tab10">    Contrat en cours Contratualisation  <span class="badge badge-success" >{{nombreContratEnContratualisation}}</span></a></li>
+                                <!-- <li><a data-toggle="tab" href="#tab20">  Contrat signé<span class="badge badge-warning" >   {{0}}   </span></a></li> -->
+                                 <!-- <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{afficheNombreMarcheResilier}}</span></a></li>
                                   <li><a data-toggle="tab" href="#tab208">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li> -->
                                 
                             </ul>
