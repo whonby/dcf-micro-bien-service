@@ -103,7 +103,7 @@
                   <div class="widget-content tab-content">
                     <!--ongle identification-->
                     <div id="tab1" class="tab-pane active">
-  
+  <tableauBordExecution :macheid="detail_marche.id"></tableauBordExecution>
           </div>
                             <div id="tab2" class="tab-pane ">
   <div class="widget-content nopadding" >
@@ -240,7 +240,7 @@
           </div>
         </div>
                       <div id="tab22" class="tab-pane ">
-                         
+                          <echeance-marche :marche="detail_marche"></echeance-marche>
                       </div>
       </div>
        </div>
@@ -305,7 +305,9 @@ import decompte from "../../../../bien_service/contractualisation/DossierExecuti
         import liquidationCf from "../../../../bien_service/contractualisation/DossierExecution/dossierLiquidation/liquidationCf";
          import liquidationOrdonnateur from "../../../../bien_service/contractualisation/DossierExecution/dossierLiquidation/liquidationOrdonnateur";
                   import financement from "../../../../bien_service/contractualisation/DossierExecution/dossierFinancement/financement";
-   export default {
+                   import tableauBordExecution from "../../../../bien_service/contractualisation/DossierExecution/tableauBordExecution/tableauBordExecution";
+  import EcheanceMarche from "../../../../../pages/echeanciers/EcheanceMarche";
+  export default {
         name: 'compte',
         components:{
             avenant,
@@ -321,7 +323,9 @@ import decompte from "../../../../bien_service/contractualisation/DossierExecuti
             liquidationEmetteur,
             liquidationCf,
             liquidationOrdonnateur,
-            financement
+            financement,
+            tableauBordExecution,
+            EcheanceMarche
 
 
         },

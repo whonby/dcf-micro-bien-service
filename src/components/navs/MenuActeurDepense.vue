@@ -6,7 +6,7 @@
 
        <li>
          <router-link :to="{name:'recrutementPersonnel'}" tag="a">
-           PLANIFICATION DE RECRUTEMENT PERSONNEL
+           SUIVI DE RECRUTEMENT PERSONNEL
          </router-link>
 
        </li>

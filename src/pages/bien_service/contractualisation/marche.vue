@@ -746,8 +746,8 @@ source_financement
                     <th>Reference marché</th>
                      <th>Statut</th>
                     <th>Montant prévu</th>
-                    <th>Etat du marché</th>
-                   <th colspan="2">Action</th>
+                    <th>Etat En cours</th>
+                   <th colspan="3">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -821,9 +821,15 @@ source_financement
                    </td> -->
                    <td>
                       <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
-                class="btn btn-default " title="continue la contratualisation">
+                class="btn btn-default " title="historique la contratualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
                     </router-link>
+                   </td>
+                   <td>
+                     <router-link :to="{ name: 'detailExecution', params: { id: marche.id }}"
+                class="btn btn-default " title="historique execution Marche">
+                  <span class=""><i class="  icon-random"></i></span>
+                   </router-link> 
                    </td>
                    <td>
            
@@ -2174,7 +2180,7 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficher
 
 
 afficheMarcheTerminer(){
-return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4 && element.difference_personnel_bienService == null|| this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 1 && element.difference_personnel_bienService == null)
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 4 || this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(element.marche.type_marche_id) == 1 )
 },
 // afficheMarcheTerminer(){
 // return this.afficheMarcheSolde.filter(element => element.indicateur_resilie != 1)

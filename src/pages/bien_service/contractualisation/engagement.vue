@@ -1,5 +1,6 @@
 Decision Emetteur
 fonctionModifierLiquidation
+affichierMontantAvenant
 <template>
   	<div>
 
@@ -98,6 +99,7 @@ fonctionModifierLiquidation
                       <!-- <li>
                         <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
                       </li> --> 
+                 
                      
                     </ul>
                   </div>

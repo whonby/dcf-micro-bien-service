@@ -16,7 +16,7 @@
                     <th colspan="3">LES TAUX DES PAIEMENTS</th>
                    
                     
-                    <th>STATUT</th>
+                    <!-- <th>STATUT</th> -->
                    
                    
                   </tr>
@@ -30,7 +30,7 @@
                       <th>Taux Etat</th>
                     <th>Taux Bailleur</th>
                     <th>Taux de Paiement</th>
-                   <th>test</th>
+                   <!-- <th>test</th> -->
                    
                   </tr>
                   
@@ -41,16 +41,16 @@
                     v-for="finance in AfficherFinancement(macheid)"
                     :key="finance.id"
                   >
-                  <td>{{0}}</td>
-                  <td>{{0}}</td>
-                  <td>{{0}}</td>
+                  <td>{{formatageSomme(parseFloat(afficherMontantEtat(finance.marche_id)))}}</td>
+                  <td>{{formatageSomme(parseFloat(parseFloat((afficherMontantDonBailler(finance.marche_id))) + parseFloat((afficherMontantEmpruntBailler(finance.marche_id)))))}}</td>
+                  <td>{{formatageSomme(parseFloat(parseFloat((afficherMontantDonBailler(finance.marche_id))) + parseFloat((afficherMontantEmpruntBailler(finance.marche_id))) + parseFloat((afficherMontantEtat(finance.marche_id)))))}}</td>
                   <td>{{formatageSomme(parseFloat(recupereMontantTresor(finance.facture_id)))}}</td>
                   <td>{{formatageSomme(parseFloat((partEmpruntBailleur(finance.facture_id) + partDonBailleur(finance.facture_id))))}}</td>
                   <td>{{formatageSomme(parseFloat(recupereMontantTresor(finance.facture_id)+(partEmpruntBailleur(finance.facture_id) + partDonBailleur(finance.facture_id))))}}</td>
-                  <td>{{}}</td>
-                  <td>{{}}</td>
-                  <td>{{}}</td>
-                  <td>{{}}</td>
+                  <td>{{((parseFloat(recupereMontantTresor(finance.facture_id))/parseFloat(afficherMontantEtat(finance.marche_id)))*100).toFixed(2)}}%</td>
+                  <td>{{((parseFloat((partEmpruntBailleur(finance.facture_id)) + (partDonBailleur(finance.facture_id))))/(parseFloat((afficherMontantDonBailler(finance.marche_id)))+parseFloat((afficherMontantEmpruntBailler(finance.marche_id))))*100).toFixed(2)}}</td>
+                  <td>{{((parseFloat((recupereMontantTresor(finance.facture_id)) + (partEmpruntBailleur(finance.facture_id))+(partDonBailleur(finance.facture_id))))/(parseFloat((afficherMontantEtat(finance.marche_id)))+parseFloat((afficherMontantEmpruntBailler(finance.marche_id)))+parseFloat((afficherMontantDonBailler(finance.marche_id))))*100).toFixed(2)}}</td>
+                  <!-- <td>{{}}</td> -->
                                     </tr>
                
                 
@@ -90,7 +90,7 @@ search:""
     created(){},
 
               computed: {
-            ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+            ...mapGetters("bienService", ["personnaliseGetterMarcheBailleur",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -152,7 +152,42 @@ search:""
 // },
 
 
+  afficherMontantEtat() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaliseGetterMarcheBailleur.find(qtreel => qtreel.marche_id == id && qtreel.type_finnancement_id == 14);
 
+      if (qtereel) {
+        return qtereel.montant;
+      }
+      return 0
+        }
+      };
+    },
+     afficherMontantDonBailler() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaliseGetterMarcheBailleur.find(qtreel => qtreel.marche_id == id && qtreel.type_finnancement_id == 13);
+
+      if (qtereel) {
+        return qtereel.montant;
+      }
+      return 0
+        }
+      };
+    },
+     afficherMontantEmpruntBailler() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.personnaliseGetterMarcheBailleur.find(qtreel => qtreel.marche_id == id && qtreel.type_finnancement_id == 15);
+
+      if (qtereel) {
+        return qtereel.montant;
+      }
+      return 0
+        }
+      };
+    },
 
 
 
