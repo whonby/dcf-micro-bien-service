@@ -292,7 +292,7 @@
 
                                           <td>
                           <div class="control-group">
-                        <label class="control-label">Montant Contrat/marché (TTC )</label>
+                        <label class="control-label">Montant marché (TTC )</label>
                         <div class="controls">
                             <input
                                     type="text"
@@ -336,7 +336,7 @@
                                                 <div class="controls">
                                                     <input type="text" class="span" placeholder="Montant" v-model="edit_bailleur_marche.montant_ht">
                                                 </div>
-                                                
+                                                 <code v-if="somme>EssaiMontant">la somme des bailleurs > au montant du contrat</code>
                                             </div>
                                            </td>
                                         <td>
@@ -408,7 +408,7 @@
        
             <td >
               <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
+                <label class="control-label" style="text-align:right;color:red">Montant TTC {{EssaiMontant}}</label>
                
               </div>
             
@@ -433,7 +433,7 @@
                                      </table>
                                    
                                         <div class="modal-footer" >
-                                           <button @click.prevent="modificationBailleurMarche" class="btn btn-primary">Modification</button>
+                                           <button @click.prevent="modificationBailleurMarche" class="btn btn-primary"  v-if=" somme<= EssaiMontant " >Modification</button>
                                             <button data-dismiss="modal" class="btn" href="#">Fermer</button>
                                         </div>
                                    
@@ -644,17 +644,30 @@ montantHTt() {
     return parseFloat(this.sommeBailleur(this.macheid)) + parseFloat(this.formBailleur.montant_ht) + parseFloat(this.montantTva)
   },
 
+
+  EssaiMontant(){
+
+    return  parseFloat(this.sommeBailleur(this.macheid)) 
+  },
+
+
+   somme(){
+
+    return parseFloat(this.edit_bailleur_marche.montant_ht) + parseFloat(this.editMontantTva)
+  },
+
+  
   // fonction de comparaison du montant de l'acte et celui de bailleur 
 
 
-  comparaisonSommeActeEtBailleur(){
-    if (this.sommeBailleur + this.formBailleur.montant_ht <= this.afficherMontantTtcDeActe){
-      return  parseFloat(this.sommeBailleur + this.formBailleur.montant_ht) + parseFloat(this.montantTva)
-    }else{
-      alert('le montant du bailleur est superieur au montant de l\'acte')
-    }
-    return null
-  },
+  // comparaisonSommeActeEtBailleur(){
+  //   if (this.sommeBailleur + this.formBailleur.montant_ht <= this.afficherMontantTtcDeActe){
+  //     return  parseFloat(this.sommeBailleur + this.formBailleur.montant_ht) + parseFloat(this.montantTva)
+  //   }else{
+  //     alert('le montant du bailleur est superieur au montant de l\'acte')
+  //   }
+  //   return null
+  // },
 
     editAfficherEnorere(){
         if(this.edit_bailleur_marche.exonere == 0){
