@@ -388,13 +388,13 @@ source_financement
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#tab2078">Toutes les marches    <span class="badge badge" >{{nombreDeMarche}}</span></a></li>
                                
-                               <li ><a data-toggle="tab" href="#tab100">Marchés Planifiés        <span class="badge badge-important" >    {{nombreMarcheEnplanification}}</span></a></li>
-                                <li ><a data-toggle="tab" href="#tab10">En cours Contratualisation        <span class="badge badge-success" >{{nombreDeMarcheEnContratualisation}}</span></a></li>
-                                <li><a data-toggle="tab" href="#tab20">Marchés en Exécution      <span class="badge badge-warning" >     {{nbreMarcheExecuter}}</span></a></li>
+                               <li ><a data-toggle="tab" href="#tab100"> Planifications        <span class="badge badge-important" >    {{nombreMarcheEnplanification}}</span></a></li>
+                                <li ><a data-toggle="tab" href="#tab10"> Contratualisations        <span class="badge badge-success" >{{nombreDeMarcheEnContratualisation}}</span></a></li>
+                                <li><a data-toggle="tab" href="#tab20"> Exécutions      <span class="badge badge-warning" >     {{nbreMarcheExecuter}}</span></a></li>
                                 <!-- <li><a data-toggle="tab" href="#tab208">Marchés Terminés      <span class="badge badge" >     {{0}}</span></a></li> -->
-                                 <li><a data-toggle="tab" href="#tab20002">Marchés Résiliés    <span class="badge badge-info" >     {{afficheNombreMarcheResilier}}</span></a></li>
-                                    <li><a data-toggle="tab" href="#tab20789">Marchés Suspendu   <span class="badge badge" >     {{nombreDeMarcheSuspendu}}</span></a></li>
-                                  <li><a data-toggle="tab" href="#tab2000256">Marchés Terminé    <span class="badge badge-inverse" >     {{nombreAfficheMarcheSolde}}</span></a></li>
+                                 <li><a data-toggle="tab" href="#tab20002">Résiliés    <span class="badge badge-info" >     {{afficheNombreMarcheResilier}}</span></a></li>
+                                    <li><a data-toggle="tab" href="#tab20789">Suspendu   <span class="badge badge" >     {{nombreDeMarcheSuspendu}}</span></a></li>
+                                  <li><a data-toggle="tab" href="#tab2000256"> Terminé    <span class="badge badge-inverse" >     {{nombreAfficheMarcheSolde}}</span></a></li>
                                  
                                
                             </ul>

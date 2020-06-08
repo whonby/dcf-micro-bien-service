@@ -52,6 +52,7 @@
         </li>
        
       
+
       </ul>
     </div>
 <div id="modificationModal" class="modal hide tabFormulaire">
@@ -164,6 +165,17 @@
           <h5>Detail budget {{detailBudget}}</h5>
         </div>
 
+       <div class="span4">
+                    <br>
+                    Afficher
+                    <select name="pets" id="pet-select" v-model="size" class="span3">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    Entrer
+                </div>
 
         <div class="widget-content nopadding">
           <table class="table table-bordered table-striped">
@@ -184,7 +196,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(unite,index) in uniteAdministratives" :key="unite.id">
+              <tr v-for="(unite,index) in partition(uniteAdministratives,size)[page]" :key="unite.id">
                 
                 <td style="font-weight:bold;font-size:12px;text-align:center">{{unite.libelle}}</td>
                 <td
@@ -268,7 +280,17 @@
          
         </div>
       </div>
+       
     </div>
+    <div class="pagination alternate">
+              <ul>
+                <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                   <li  v-for="(titre, index) in partition(uniteAdministratives,size).length" :key="index" :class="{ active : active_el == index }">
+                   <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                <li :class="{ disabled : page == partition(uniteAdministratives,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+              </ul>
+           </div>
   </div>
 </template>
 
@@ -277,6 +299,7 @@
 
     import { mapGetters, mapActions } from "vuex";
     import { formatageSomme } from "../../Repositories/Repository";
+    import {partition} from '../../../src/Repositories/Repository'
     //import ProgressBar from "../component/ProgressBar"
     export default {
         name: 'budget',
@@ -285,6 +308,9 @@
         },
         data() {
             return {
+              page:0,
+              size:10,
+              active_el:0,
                 fabActions: [
                     {
                         name: "cache",
@@ -636,6 +662,21 @@
                 "modifierLigneExempter",
             ]),
 
+
+partition:partition,
+
+getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
 
  afficherModalModifierUniteAdministrative(index) {
       this.$("#modificationModal").modal({

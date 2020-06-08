@@ -92,7 +92,7 @@
                                                 <tbody>
                                                 <tr
                                                         class="odd gradeX"
-                                                        v-for="(uniteadministrative, index) in partition(cfUniteAdmin,size)[page]"
+                                                        v-for="uniteadministrative in partition(cfUniteAdmin,size)[page]"
                                                         :key="uniteadministrative.id"
                                                 >
 

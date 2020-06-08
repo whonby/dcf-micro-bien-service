@@ -202,7 +202,7 @@
                 
                 readonly
               />
-               <!-- <select v-model="editMarche.procedure_passation_id" class="span" :readOnly="deverouPassationModi">
+               <!-- <select v-model="formData.procedure_passation_id" class="span" :readOnly="deverouPassation">
                <option v-for="plans in procedurePassationDynamiques(editMarche.typeappel_id)" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select> -->
@@ -635,7 +635,7 @@
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{ELibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
-                   {{marche.procedure_passation.code || 'Non renseigné'}}</td>
+                   {{ afficherCodeProcedure(marche.procedure_passation_id) || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.afficheActivite.libelle || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -746,10 +746,14 @@ export default {
     //     libelle: "libelle"
     //   },
 
-      formData: {
+    formData: {
+      libelle_procedure:"",
         type_financement:"",
         source_financement:"",
             objet:"",
+            economique_id:"",
+            //procedure_passation_id:"",
+            beneficiaire:"",
             livrable:"",
             reference_marche:"",
             montant_marche:"",
@@ -757,7 +761,7 @@ export default {
                 unite_administrative_id:"",
                 gdenature_id:"",
                 activite_id:"",
-                typeappel_id:"",
+               // typeappel_id:"",
                 exo_id:"",
         
       },
@@ -964,18 +968,18 @@ getDateFinExécutionValue(){
 
 
 
-//  affichierNomEntreprise() {
-//       return id => {
-//         if (id != null && id != "") {
-//            const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+ afficherCodeProcedure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.procedurePassations.find(qtreel => qtreel.id == id);
 
-//       if (qtereel) {
-//         return qtereel.raison_sociale;
-//       }
-//       return 0
-//         }
-//       };
-//     },
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 0
+        }
+      };
+    },
 
 
     // afficherEntrepriseRecep () {
@@ -1678,6 +1682,7 @@ recupererDateMiseService() {
        var nouvelObjet = {
       ...this.formData,
       imputation :this.ImputationBudget,
+      libelle_procedure:this.afficheLeNomDesProcedure,
       exo_id : this.anneeAmort
        };
 this.ajouterMarche(nouvelObjet)

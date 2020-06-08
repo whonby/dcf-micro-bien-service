@@ -238,7 +238,7 @@
         <div class="controls">
        <input
          type="text"
-         v-model="formData.Nature_des_prix"
+         v-model="formData.nature_prix"
          class="span4"
        />
      </div>
@@ -251,7 +251,7 @@
        <div class="controls">
          <input
            type="text"
-           v-model="formData.Bénéficiaire"
+           v-model="formData.beneficiaire"
            class="span4"
            placeholder="Saisir Bénéficiaire"
          />
@@ -529,7 +529,7 @@
             <div class="controls">
            <input
              type="text"
-             v-model="editMarche.Nature_des_prix"
+             v-model="editMarche.nature_prix"
              class="span4"
            />
          </div>
@@ -740,6 +740,9 @@ export default {
         type_financement:"",
         source_financement:"",
             objet:"",
+            economique_id:"",
+            procedure_passation_id:"",
+            beneficiaire:"",
             livrable:"",
             reference_marche:"",
             montant_marche:"",
@@ -747,7 +750,7 @@ export default {
                 unite_administrative_id:"",
                 gdenature_id:"",
                 activite_id:"",
-                typeappel_id:"",
+               // typeappel_id:"",
                 exo_id:"",
         
       },
@@ -781,6 +784,9 @@ export default {
       editMarche: {
            objet:"",
            livrable:"",
+           procedure_passation_id:"",
+            beneficiaire:"",
+            economique_id:"",
             reference_marche:"",
             montant_marche:"",
                 type_marche_id:"",
@@ -1311,12 +1317,12 @@ anneeAmort() {
 
 
 
-    deverouPassation() {
-      return this.formData.typeappel_id == "";
-    }, 
-     deverouPassationModi() {
-      return this.editMarche.typeappel_id == "";
-    }, 
+    // deverouPassation() {
+    //   return this.formData.typeappel_id == "";
+    // }, 
+    //  deverouPassationModi() {
+    //   return this.editMarche.typeappel_id == "";
+    // }, 
     deverouGrandNature() {
       return this.formData.unite_administrative_id == "";
     }, 
@@ -1663,14 +1669,17 @@ recupererDateMiseService() {
         backdrop: "static",
         keyboard: false
       });
-    },
+    }, 
     // fonction pour vider l'input ajouter
     ajouterModalTypePrestationLocal(){
       
        var nouvelObjet = {
       ...this.formData,
       imputation :this.ImputationBudget,
-      exo_id : this.anneeAmort
+      procedure_passation_id:this.afficheLeNomDesProcedure,
+      exo_id : this.anneeAmort,
+     // activite_id:this.activite_id,
+     // economique_id:this.economique_id
        };
 this.ajouterMarche(nouvelObjet)
 this.formData = {
