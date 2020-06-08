@@ -1,8 +1,6 @@
-avenant
-affcherTauxEnCours
-engagement direct
-mandat
-Modifier Mandat
+Decision Emetteur
+fonctionModifierLiquidation
+affichierMontantAvenant
 <template>
   	<div>
 
@@ -101,6 +99,7 @@ Modifier Mandat
                       <!-- <li>
                         <a data-toggle="tab" href="#tab3">AFFECTION DE LA DIRECTION</a>
                       </li> --> 
+                 
                      
                     </ul>
                   </div>
@@ -979,8 +978,7 @@ Modifier Mandat
                                           <th>N° engagement</th>
                                         <th>Type procedure</th>
                                         
-                                        <!-- <th >Section</th> -->
-                                        <!-- <th title="unite administrative">Ua</th> -->
+                                       
                              
                                 <th>Montant Mandat</th>
                                  <th >Decision de emetteur</th>
@@ -5411,7 +5409,7 @@ Modifier Mandat
     <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
 
 
-
+Total général
 
 
 

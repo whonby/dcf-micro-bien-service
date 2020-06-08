@@ -1,3 +1,32 @@
+// export const GET_ALL_DECOMPTE = (state, tableau_decompte) =>{
+//     state.decomptes = tableau_decompte
+// }
+
+
+// // add candidat selectionner
+
+// export const AJOUTER_DECOMPTE = (state, elementAjouter) => {
+//     state.decomptes.unshift(elementAjouter)
+// }
+
+
+// export const MODIFIER_DECOMPTE = (state,elementModif) => {
+//     state.decomptes = state.decomptes.map(response =>{
+//         if(response.id == elementModif.id){
+//            response = {...elementModif} 
+//         }
+//         return response
+//     })
+// }
+
+
+// export const SUPPRIMER_DECOMPTE = (state ,id) => {
+//     state.decomptes = state.decomptes.filter(select => 
+//         select.id !=id)
+// }
+
+
+
 export const GET_ALL_SELECTIONNER_CANDIDAT = (state, tableau_candidat_selectionner) =>{
     state.selectionner_candidats = tableau_candidat_selectionner
 }

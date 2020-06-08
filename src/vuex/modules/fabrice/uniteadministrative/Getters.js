@@ -1,6 +1,6 @@
 import { groupBy } from "../../../../Repositories/Repository";
 
-getPersonnaliseBudgetGeneralParTransfert
+
 // const typeTextes = state =>
 //   state.typeTextes.sort((a, b) => (a.code > b.code ? 1 : -1));
 export const organigrammeUa = state => state.organigrammeUa;
@@ -8,6 +8,7 @@ export const servicesua = state => state.servicesua;
 export const directions = state => state.directions;
 export const fonctionsua = state => state.fonctionsua;
 export const banqueUa = state => state.banqueUa;
+export const decomptefactures = state => state.decomptefactures;
 export const realiteServiceFait = state => state.realiteServiceFait;
 export const liquidation = state => state.liquidation;
 const uniteAdministratives = state =>

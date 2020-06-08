@@ -586,8 +586,8 @@
 <script>
     import moment from "moment";
     import { mapGetters, mapActions } from "vuex";
-    //import html2canvas from 'html2canvas'
-    //import * as JsPDF from 'jspdf'
+    // import html2canvas from 'html2canvas'
+    // import * as JsPDF from 'jspdf'
     import html2pdf from 'html2pdf.js'
     // import moment from "moment";
     // import { ModelListSelect } from "vue-search-select";

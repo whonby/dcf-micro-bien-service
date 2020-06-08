@@ -1182,7 +1182,7 @@
                         <td>
                           <label class="control-label">Service</label>
                           
-                              <input    type="text"   class="span3" readonly  :value="afficherLibelleService(formData.service_id)" />                
+                              <input    type="text"   class="span3" readonly  :value="afficherLibelleService(afficheService(formData.service_id))" />                
                              
                         </td>
                         
@@ -2660,7 +2660,7 @@ var nouvelobjet2 ={
       duree:this.afficherDureeVieFamille(this.formData2.famillearticle_id),
       acteurdepense_id : this.formData.acteur_depense_id,
      	uniteadministrative_id:this.formData.unite_administrative_id,
-      service_id:this.formData.service_id,
+      service_id:this.afficheService(this.formData.service_id),
       fonction_id:this.formData.fonction_id,
       anneamortiss:this.anneeAmortissement,
       

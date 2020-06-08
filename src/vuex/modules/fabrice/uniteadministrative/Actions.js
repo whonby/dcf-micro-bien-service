@@ -1126,6 +1126,39 @@ export function supprimerLigneExempter({ commit }, id) {
 
 
 
+
+export function getAllDecompteFacture({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listedecomptefacture")
+      .then(response => {
+        commit("GET_ALL_DECOMPTE_FACTURE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+
+// ajouter type texte
+export function ajouterDecompteFacture({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterdecomptefacture", nouveau)).then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_DECOMPTE_FACTURE", response.data);
+
+      }
+    }).catch(error => console.log(error))
+}
+
+
+
+
+
+
+
+
+
+
 export function getAllRealiteServiceFait({ commit }) {
   queue.push(() => {
     axios
@@ -1143,11 +1176,7 @@ export function ajouterRealiteServiceFait({ commit }, nouveau) {
     .post("/ajouterRealiteFait", nouveau)).then(response => {
       if (response.status == 201) {
         commit("AJOUTER_REALITE_SERVICE_FAIT", response.data);
-          this.$app.$notify({
-          title: 'Success',
-          text: 'Enregistrement Effectué avec Succès!',
-          type: "success"
-        })
+       
       }
     }).catch(error => console.log(error))
 }
@@ -1173,7 +1202,8 @@ export function modifierRealiteServiceFait({ commit }, nouveau) {
     	montant: nouveau.	montant,
       exercice_budget: nouveau.	exercice_budget,
     engagement_id: nouveau.engagement_id,
-    marchetype: nouveau.marchetype
+    marchetype: nouveau.marchetype,
+    motif_controleur: nouveau.motif_controleur
     }
   
   )).then(response => {
@@ -1218,11 +1248,7 @@ export function ajouterLiquidation({ commit }, nouveau) {
     .post("/ajouterLiquidation", nouveau)).then(response => {
       if (response.status == 201) {
         commit("AJOUTER_LIQUIDATION", response.data);
-        this.$app.$notify({
-          title: 'Success',
-          text: 'Enregistrement Effectué avec Succès!',
-          type: "success"
-        })
+        
       }
     }).catch(error => console.log(error))
 }
@@ -1262,7 +1288,8 @@ export function modifierLiquidation({ commit, dispatch}, nouveau) {
       date_controleur_financier: nouveau.date_controleur_financier,
       observation_controleur_financier: nouveau.observation_controleur_financier,
       marchetype: nouveau.marchetype,
-      facture_id: nouveau.facture_id
+      facture_id: nouveau.facture_id,
+      motif_controleur_f: nouveau.motif_controleur_f
     })).then(response => {
       commit("MODIFIER_LIQUIDATION", response.data);
       dispatch('getAllLiquidation')
