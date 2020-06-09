@@ -168,6 +168,7 @@
                       
  
  
+ 
                <td>{{afficheMarcheNumero(Manda.marche_id) || 'Non renseigné'}}</td>   
                   
                 </tr>

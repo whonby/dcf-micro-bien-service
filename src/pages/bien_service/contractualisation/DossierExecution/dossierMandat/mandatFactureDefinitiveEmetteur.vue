@@ -129,15 +129,15 @@
                     :key="factu.id"
                   >
                    
-                                     <td>{{afficheNumeroMarche(factu.marche_id) || 'Non renseigné'}}</td>
-                   <td>{{factu.numero_mandat || 'Non renseigné'}}</td>
-                   <td>{{factu.numero_bordereau || 'Non renseigné'}}</td>
-                    <td>{{afficherNumeroDemandeEngagemnt(factu.engagement_id)|| 'pas numero demande'}}</td>
-                     <td>{{afficherNumeroEngagemnt(factu.engagement_id) || 'pas numero engage'}}</td>
+                                     <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficheNumeroMarche(factu.marche_id) || 'Non renseigné'}}</td>
+                   <td @dblclick="afficheModalModificationMandat(Manda.id)">{{factu.numero_mandat || 'Non renseigné'}}</td>
+                   <td @dblclick="afficheModalModificationMandat(Manda.id)">{{factu.numero_bordereau || 'Non renseigné'}}</td>
+                    <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficherNumeroDemandeEngagemnt(factu.engagement_id)|| 'pas numero demande'}}</td>
+                     <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficherNumeroEngagemnt(factu.engagement_id) || 'pas numero engage'}}</td>
                      <!-- <td>{{factu.type_procedure_id || 'Non renseigné'}}</td> -->
             <!-- <td>{{uafactut(factu.ua_id) || 'Non renseigné'}}</td>
                                     -->
-                    <td>{{formatageSomme(parseFloat(factu.total_general))|| 'Non renseigné'}}</td>
+                    <td @dblclick="afficheModalModificationMandat(Manda.id)">{{formatageSomme(parseFloat(factu.total_general))|| 'Non renseigné'}}</td>
                     
                     <td>
                         <button v-if="factu.decision_emetteur == 1"  class="btn  btn-success" @click="afficheDecisionEmetteur(factu.id)" >                        
@@ -222,7 +222,9 @@ export default {
         }
     },
     props:["macheid"],
-    created(){},
+     created(){
+      this.editMandat=this.mandats.find(item=>item.marche_id==this.$route.params.id)
+    },
 
               computed: {
             ...mapGetters("bienService", ['decomptes','modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
@@ -654,6 +656,11 @@ afficherIdSection() {
       
      
     ]),
+      afficheModalModificationMandat(id) {
+      this.$router.push({
+        path: "/Modifier_Mandat/" + id
+      });
+    },
     afficheDecisionEmetteur(id) {
       this.$("#exampleModalMotifMandatEmetteur").modal({
         backdrop: "static",

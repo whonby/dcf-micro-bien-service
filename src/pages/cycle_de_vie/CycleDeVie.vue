@@ -10,7 +10,11 @@
                 <div class="span12" >
 
                     <div class="widget-box">
+                        <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Retour</button>
+
                         <div class="widget-title">
+                             
+                            
                             <div align="right">
 
                                 <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
@@ -1095,7 +1099,10 @@
             // },
             ExporterEnExel(){
                 this.$refs.excel.click()
-            }
+            },
+            afficherModalListeExecution(){
+                window.history.back();
+            },
         }
     };
 </script>

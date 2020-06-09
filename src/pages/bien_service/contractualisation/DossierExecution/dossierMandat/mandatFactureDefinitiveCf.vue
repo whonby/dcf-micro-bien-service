@@ -657,6 +657,7 @@ afficherIdSection() {
      
     ]),
 
+
        afficheModalModificationMandat(id) {
       this.$router.push({
         path: "/Modifier_Mandat/" + id
