@@ -106,15 +106,15 @@ afficherInputationBudgetaire
                     v-for="Manda in afficheFactureDefinitiveCf(macheid)"
                     :key="Manda.id"
                   >
-        <td >{{afficheNumeroMarche(Manda.marche_id) || 'Non renseigné'}}</td>
-                   <td >{{Manda.numero_mandat || 'Non renseigné'}}</td>
-                  <td >{{Manda.numero_bordereau || 'Non renseigné'}}</td>
-                    <td >{{afficherNumeroDemandeEngagemnt(Manda.engagement_id) || 'pas numero demande'}}</td>
-                     <td >{{afficherNumeroEngagemnt(Manda.engagement_id) || 'pas numero engage'}}</td>
+        <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficheNumeroMarche(Manda.marche_id) || 'Non renseigné'}}</td>
+                   <td @dblclick="afficheModalModificationMandat(Manda.id)">{{Manda.numero_mandat || 'Non renseigné'}}</td>
+                  <td @dblclick="afficheModalModificationMandat(Manda.id)">{{Manda.numero_bordereau || 'Non renseigné'}}</td>
+                    <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficherNumeroDemandeEngagemnt(Manda.engagement_id) || 'pas numero demande'}}</td>
+                     <td @dblclick="afficheModalModificationMandat(Manda.id)">{{afficherNumeroEngagemnt(Manda.engagement_id) || 'pas numero engage'}}</td>
                      
             <!-- <td >{{uaMandat(Manda.ua_id) || 'Non renseigné'}}</td>
                                     -->
-                    <td >{{formatageSomme(parseFloat(Manda.total_general))|| 'Non renseigné'}}</td>
+                    <td @dblclick="afficheModalModificationMandat(Manda.id)">{{formatageSomme(parseFloat(Manda.total_general))|| 'Non renseigné'}}</td>
                     
                     <td>
                         <button v-if="Manda.decision_emetteur == 1"  class="btn  btn-success"  >                        
@@ -243,7 +243,9 @@ search:""
         }
     },
     props:["macheid"],
-    created(){},
+    created(){
+      this.editMandat=this.mandats.find(item=>item.marche_id==this.$route.params.id)
+    },
 
               computed: {
             ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
@@ -293,6 +295,30 @@ search:""
       // "sections"
        
     ]),
+      afficherMontantTTCfacture() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.prix_propose_ttc;
+      }
+      return ""
+        }
+      };
+    },
+    afficherNumerofacture() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.numero_facture;
+      }
+      return ""
+        }
+      };
+    },
 afficheIdActivite() {
       return id => {
         if (id != null && id != "") {
@@ -611,6 +637,7 @@ afficherIdSection() {
       "supprimerAvenant",
       "supprimerMandat",
       "ajouterChoixProcedure",
+      "modifierMandat",
       "modifierMarche","getMarche","getActeEffetFinancier"]),
  ...mapActions("uniteadministrative", [
      "getAllServiceua",
@@ -629,6 +656,13 @@ afficherIdSection() {
       
      
     ]),
+
+
+       afficheModalModificationMandat(id) {
+      this.$router.push({
+        path: "/Modifier_Mandat/" + id
+      });
+    },
 
 afficheDecisionCf(id) {
       this.$("#validaDecisionCF").modal({

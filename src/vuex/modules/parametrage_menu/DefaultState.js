@@ -10,7 +10,7 @@ const defaultstate = {
     ControlPerfor: 6,
     OpRaportAct: 7,
     OpDispoContrInter: 8,
-    
+    rapport:20,
     active_el: 11
 };
 

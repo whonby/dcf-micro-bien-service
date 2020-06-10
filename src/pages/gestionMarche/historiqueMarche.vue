@@ -620,8 +620,8 @@
                     <th>Reference marché</th>
                      <th>Statut</th>
                     <th>Montant prévu</th>
-                    <th>Etat du marché</th>
-                    <!-- <th>Action</th> -->
+                    <th>Etat en cours</th>
+                    <th style="width:10%">Suivi-marche</th>
                    
                   </tr>
                 </thead>
@@ -687,7 +687,31 @@
                 </button>
 
                    </td>
-                 
+                   
+                <td v-if="marche.type_marche_id == 6 ||marche.type_marche_id == 1 || marche.type_marche_id == 5"> 
+                     <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+                class="btn btn-default " title="historique la contratualisation">
+                  <span class=""><i class=" icon-folder-open"></i></span>
+                    </router-link>
+                    
+             <router-link :to="{ name: 'detailExecution', params: { id: marche.id }}"
+                class="btn btn-default " title="historique execution Marche">
+                  <span class=""><i class="  icon-zoom-out"></i></span>
+                   </router-link> 
+                    
+                      <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                 class="btn btn-inverse " title="Cycle de vie du marche">
+        <span class=""><i class=" icon-calendar"></i></span>
+    </router-link>
+                    </td>
+                   
+                       <td v-else>
+  <router-link :to="{ name: 'detailPersonnel', params: { id: marche.id }}"
+                class="btn btn-default " title="Continué le processuce de contratualisation">
+                  <span class=""><i class=" icon-folder-open"></i></span>
+                   </router-link> 
+                       </td>
+                    
                    <!-- <td v-if="marche.type_marche_id == 6 ||marche.type_marche_id == 1"> 
                      <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
                                     class="btn btn-inverse " title="Cycle de vie du marche">

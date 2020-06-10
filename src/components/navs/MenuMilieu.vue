@@ -2,88 +2,115 @@
   <!--top-Header-menu-->
   <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
-      <!--Paramètres administratifs-->
-      <li class="dropdown" id="profile-messages">
+    
+        
+  <!-- <li class="dropdown" id="menuBUDGET">
         <a
-          title="Cartographie des opérations budgétaires"
+          title="UNITES ADMINISTRATIVES"
           href="#"
           data-toggle="dropdown"
-          data-target="#profile-messages"
+          data-target="#menuBUDGET"
           class="dropdown-toggle"
         >
-          <i class="icon icon-user"></i>
-          <span class="text">Cartographie op.</span>
+          <span class="text">UNITES ADMINISTRATIVES</span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-          
-          <li class="divider"></li>
-       
-          <li class="divider"></li>
           <li>
-            <a href="login.html">
-              <i class="icon-key"></i> Analyse des opérations
-            </a>
+            <router-link :to="{name: 'uniteadministrative'}" tag="a">
+              <i class="icon-user"></i>
+            Unite administrative
+            </router-link>
           </li>
 
-          
+          <li class="divider"></li>
+        
+            <li>
+            <router-link :to="{name: 'uniteZone'}" tag="a">
+              <i class="icon-key"></i>Unite zone
+            </router-link>
+          </li>
+           <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'ServicePrincipal'}" tag="a">
+              <i class="icon-key"></i>Service UA
+            </router-link>
+          </li>
+           <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'FonctionPrincipal'}" tag="a">
+              <i class="icon-key"></i>Fonction UA
+            </router-link>
+          </li>
+            <li class="divider"></li>
+        
+           <li class="divider"></li>
+         <li>
+           <router-link :to="{name: 'banqueUa'}" tag="a">
+             <i class="icon-key"></i>Banque UA
+            </router-link>
+         </li>
+           <li class="divider"></li>
+        
         </ul>
-      </li>
-      
-      <!--Paramètres programmes
-      -->
-      <li class="" id="out">
-        <a title="Out put" href="#" class="">
-          <i class="icon icon-users"></i>
-          <span class="text">Out put</span>
-        </a>
-      </li>
+      </li> -->
+        <li>
+            <router-link :to="{name: ''}" tag="a">
+              RAPPORT BIEN ET SERVICE
+            </router-link>
+          </li>
 
-<li class="" id="indicateur">
-        <a title="Indicateur" href="#" class="">
-          <i class="icon icon-users"></i>
-          <span class="text">Indicateur</span>
-        </a>
-      </li>
-       <li class="dropdown" id="tableau">
+
+           <li>
+            <router-link :to="{name: ''}" tag="a">
+              RAPPORT PERSONNEL
+            </router-link>
+          </li>
+         
+           <li>
+            <router-link :to="{name: ''}" tag="a">
+              RAPPORT TRANSFERT
+            </router-link>
+          </li>
+           <li>
+            <router-link :to="{name: ''}" tag="a">
+              RAPPORT INVESTISSEMENT
+            </router-link>
+          </li>
+
+
+<!-- <li class="dropdown" id="rechbudget">
         <a
-          title="Tableau de bord"
+          title="OUT PUT"
           href="#"
           data-toggle="dropdown"
-          data-target="#tableau"
+          data-target="#rechbudget"
           class="dropdown-toggle"
         >
-          <i class="icon icon-user"></i>
-          <span class="text">Tableau de bord</span>
+          <span class="text">OUT PUT</span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-          
-          <li class="divider"></li>
           <li>
-            <a href="login.html">
-              <i class="icon-key"></i> Tableau de bord
-            </a>
+            <router-link :to="{name: 'budgetGeneralParUa'}" tag="a">
+              <i class="icon-user"></i>
+              Budget General
+            </router-link>
           </li>
+
+          <li class="divider"></li>
+         
         </ul>
-      </li>
+      </li> -->
+
+
+
     </ul>
   </div>
 </template>
 
 <script>
-/*import Navbar from "./Navbar";
-import Milieu from "./Milieu";
-import Nfooter from "./Nfooter";*/
 
-export default {
-  /* components: {
-    Navbar,
-    Milieu,
-    Nfooter
-  },*/
-  mounted() {
-    console.log("Component mounted.");
-  }
-};
+
+export default {};
 </script>

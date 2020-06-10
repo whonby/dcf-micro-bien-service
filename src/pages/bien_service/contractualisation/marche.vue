@@ -747,7 +747,7 @@ source_financement
                      <th>Statut</th>
                     <th>Montant prévu</th>
                     <th>Etat En cours</th>
-                   <th colspan="3">Action</th>
+                   <th colspan="4">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -820,6 +820,13 @@ source_financement
                        </router-link>
                    </td> -->
                    <td>
+                        <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                 class="btn btn-inverse " title="Cycle de vie du marche">
+        <span class=""><i class=" icon-calendar"></i></span>
+    </router-link>
+                   </td>
+                   <td>
+                    
                       <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
                 class="btn btn-default " title="historique la contratualisation">
                   <span class=""><i class=" icon-folder-open"></i></span>
@@ -1087,7 +1094,12 @@ source_financement
                 class="btn btn-default " title="Detail marche">
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link>
-                   
+</td>
+<td>
+   <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                 class="btn btn-inverse " title="Cycle de vie du marche">
+        <span class=""><i class=" icon-calendar"></i></span>
+    </router-link>
 </td>
                   <!-- <td>
                      <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
@@ -1133,9 +1145,7 @@ source_financement
                         <td>
                           
                       </td>
-                      <td>
-                          
-                      </td>
+                      
                     </tr>
                 </tbody>
               </table>

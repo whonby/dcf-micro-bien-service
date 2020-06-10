@@ -76,35 +76,47 @@
                                                 class="widget-content nopadding"
                                                 v-if="type_Unite_admins.length && sections.length && chapitres.length"
                                         >
+
                                             <table class="table table-bordered table-striped" id="Nature_section">
                                                 <thead>
                                                 <tr>
-                                                    <th title="type unite administrative">Type ua</th>
-                                                    <th>nature Section</th>
+
                                                     <th>Section</th>
                                                     <th title="service gestionnaire">Service gest</th>
                                                     <th title="localisation geographique">Localisation geo</th>
                                                     <th>Code</th>
                                                     <th title="unite administrative">UA</th>
-                                                    <th>Date création</th>
+                                                    <th>Date affectation</th>
+                                                    <th>Date fin</th>
+                                                    <th>Action</th>
+
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 <tr
                                                         class="odd gradeX"
-                                                        v-for="uniteadministrative in partition(cfUniteAdmin,size)[page]"
+                                                        v-for="uniteadministrative in partition(cfUniteAdmin(detail.id),size)[page]"
                                                         :key="uniteadministrative.id"
                                                 >
-
-                                                    <!-- <template v-if="uniteadministrative.type_ua_id = type_Unite_admins.id"> -->
-                                                    <td >{{libelleUa(uniteadministrative.type_ua_id)}}</td>
-                                                    <td  >{{libelleNatureSection(uniteadministrative.nature_section_id) }}</td>
                                                     <td  >{{libelleSection(uniteadministrative.section_id)}}</td>
                                                     <td>{{libelleServiceGestionnaire(uniteadministrative.servicegest_id) }}</td>
                                                     <td  >{{libelleLocalGeographie(uniteadministrative.localisationgeo_id) }}</td>
                                                     <td >{{uniteadministrative.code }}</td>
                                                     <td >{{uniteadministrative.libelle }}</td>
-                                                    <td >{{ formaterDate(uniteadministrative.date_creation) }}</td>
+                                                    <td @dblclick="modificationDateDebut(uniteadministrative.affectation.id,uniteadministrative.libelle)">{{ formaterDate(uniteadministrative.affectation.date_debut) }}</td>
+                                                    <td  style="background: #99060b;color: #fff" v-if="uniteadministrative.affectation.date_fin">
+                                                        {{ formaterDate(uniteadministrative.affectation.date_fin) }}</td>
+                                                    <td  style="background: #069917;color: #fff" v-else>
+                                                        En-cours</td>
+                                                    <td > <div class="btn-group">
+                                                        <button @click.prevent="detacher(uniteadministrative.affectation.id,uniteadministrative.libelle)"  class="btn btn-warning ">
+                                                            <span class=""><i class="icon-remove"></i></span>
+                                                        </button>
+                                                        <button @click.prevent="supprimerAffectation(uniteadministrative.affectation.id)"  class="btn btn-danger ">
+                                                            <span class=""><i class="icon-trash"></i></span>
+                                                        </button>
+                                                    </div>
+                                                    </td>
 
 
 
@@ -120,9 +132,9 @@
                                     <div class="pagination alternate">
                                         <ul>
                                             <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
-                                            <li  v-for="(titre, index) in partition(cfUniteAdmin,size).length" :key="index" :class="{ active : active_el == index }">
+                                            <li  v-for="(titre, index) in partition(cfUniteAdmin(detail.id),size).length" :key="index" :class="{ active : active_el == index }">
                                                 <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
-                                            <li :class="{ disabled : page == partition(cfUniteAdmin,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+                                            <li :class="{ disabled : page == partition(cfUniteAdmin(detail.id),size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
 
                                         </ul>
                                     </div>
@@ -156,7 +168,7 @@
                                                            <div v-if="uniteDejaAffecter(listeM.id)">
                                                                <p-check class="pretty p-image p-plain "  checked   disabled style=" width: 100%; font-size: 20px !important;" v-model="unite" :value="listeM.id">
                                                                    <img slot="extra" class="image" src="../../assets/002.png">
-                                                                   {{ listeM.libelle }}
+                                                                  <p style="color: red">{{ listeM.libelle }}</p>
                                                                </p-check>
                                                            </div>
                                                         <div v-else>
@@ -187,17 +199,18 @@
                                                         <span class="icon">
                                                     <i class="icon-list"></i> </span> <h5>Unite administrative selectionner <code>({{listeUniteSelectionner.length}})</code></h5>
                                                     </div>
-                                                    <div class="span5" align="right" v-if="listeUniteSelectionner.length"><a  class="btn btn-primary"
-                                                                          href="#">Valider</a></div>
+                                                    <div class="span5" align="right" v-if="listeUniteSelectionner.length">
+
+                                                        <a href="#myAlert" data-toggle="modal" class="btn btn-primary" >Valider</a></div>
 
                                                 </div>
                                                 <div class="widget-content">
-                                                    <div  v-for="listeM in listeUniteSelectionner" :key="listeM" >
+                                                    <div  v-for="(uni,index) in listeUniteSelectionner" :key="index+458000000000000" >
 
                                                         <p-check class="pretty p-image p-plain"
-                                                                 style=" width: 100%; font-size: 20px !important;" v-model="unite"  :value="listeM.id">
+                                                                 style=" width: 100%; font-size: 20px !important;" v-model="unite"  :value="uni.id">
                                                             <img slot="extra" class="image" src="../../assets/003.png">
-                                                           {{ listeM.libelle }}
+                                                           {{ uni.libelle }}
                                                         </p-check>
 
                                                     </div>
@@ -219,6 +232,52 @@
 
                 </div>
             </div>
+        </div>
+
+        <div id="myAlert" class="modal hide" aria-hidden="true" style="display: none;">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Affectation du CF</h3>
+            </div>
+            <div class="modal-body">
+                <div class="controls">
+                    <label>Entrez la date d'affectation</label>
+                    <input type="date" v-model="formData.date_debut"  class="span5">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a data-dismiss="modal" @click.prevent="ajouer()" class="btn btn-primary" href="#">Confirm</a> <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
+        </div>
+
+
+        <div id="myAlert1" class="modal hide" aria-hidden="true" style="display: none;">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Fin d'activite pour {{libelleUniteAdmin}} </h3>
+            </div>
+            <div class="modal-body">
+                <div class="controls">
+                    <label>Entrez la date de fin</label>
+                    <input type="date" v-model="date_fin"  class="span5">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a data-dismiss="modal" @click.prevent="finActiviteCfSurUniteAdministrative()" class="btn btn-primary" href="#">Confirm</a> <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
+        </div>
+
+        <div id="modificationdateDebut" class="modal hide" aria-hidden="true" style="display: none;">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>Date debut d'activite pour {{libelleUniteAdmin}} </h3>
+            </div>
+            <div class="modal-body">
+                <div class="controls">
+                    <label>Entrez la date debut</label>
+                    <input type="date" v-model="edite.date_debut"  class="span5">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a data-dismiss="modal" @click.prevent="modficationDateDebutUnite()" class="btn btn-primary" href="#">Confirm</a> <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
         </div>
     </div>
 </template>
@@ -249,6 +308,12 @@
                     }
 
                 ],
+                formData:{
+                    role_id:"",
+                    user_id:"",
+                    date_debut:"",
+                    unite:""
+                },
                 active_el:0,
                 page:0,
                 size:10,
@@ -256,7 +321,10 @@
                 detailAffectation:"",
                 unite: [],
                 arrayUniteAdmin:[],
-                section:""
+                section:"",
+                edite:"",
+                libelleUniteAdmin:"",
+                date_fin:""
 
             };
         },
@@ -264,7 +332,7 @@
             this.detail=this.getterUtilisateur.find(item=>item.id==this.$route.params.id)
             this.detailAffectation=this.getterAffectation.filter(item=>item.user_id==this.$route.params.id)
 
-            console.log(this.detailAffectation)
+          //  console.log(this.detail)
         },
         computed: {
             ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation"]),
@@ -283,28 +351,40 @@
                 "natures_sections"
             ]),
            cfUniteAdmin(){
-                let vm=this
-               let colect=[];
-                if (this.detailAffectation.length>0){
 
-                    return this.jointureUaChapitreSection.filter(item=>{
-                     let val=   vm.detailAffectation.find(row=>row.unite_administrative_id==item.id)
-                       // console.log(val)
-                        if (val!=undefined){
-                            return item
-                        }
-                    })
+                return id=>{
+                   // let vm=this
+                    let colect=[];
+                    let uniteCF=this.getterAffectation.filter(item=>item.user_id==id)
+                    if (uniteCF.length>0){
 
+                         this.jointureUaChapitreSection.filter(item=>{
+                            let val=   uniteCF.find(row=>row.unite_administrative_id==item.id)
+                            // console.log(val)
+                            if (val!=undefined){
+                                item={
+                                    ...item,
+                                    affectation:val
+                                }
+                                colect.push(item)
+                              // console.log(colect)
+                                return item
+                            }
+                        })
+                       // console.log(colect)
+                        return colect
 
+                    }
+                  //   console.log("OK Guei Roland")
+                    return colect
                 }
-               console.log("Ok BBB")
-                return colect
+
            },
             uniteDejaAffecter(){
               return id=>{
                   if (id){
                     let affecter=this.getterAffectation.find(item=>{
-                        if (item.unite_administrative_id==id && item.user_id==this.detail.id && item.date_fin==null ){
+                        if (item.unite_administrative_id==id && item.date_fin==null ){
                          return item
                         }
                     })
@@ -329,7 +409,7 @@
 
 
                 }
-                console.log("Ok BBB")
+              //  console.log("Ok BBB")
                 return colect
             },
             libelleUa() {
@@ -358,11 +438,11 @@
             },
             uniteBySection(){
             return id=>{
-                let colect=[]
+                //let colect=[]
                 if(id){
                     return this.jointureUaChapitreSection.filter(item=>item.section_id==id)
                 }
-                return colect
+                return this.jointureUaChapitreSection
             }
             },
             libelleNatureSection() {
@@ -420,11 +500,71 @@
                 this.active_el++
                 this.page ++
             },
+            ajouer(){
+               /* formData:{
+                    role_id:"",
+                        user_id:"",
+                        date_debut:"",
+                        unite:""
+                }*/
+                this.formData.unite=this.unite
+                this.formData.user_id=this.detail.id
+                this.formData.role_id=this.detail.user_role.role_id
+                console.log(this.formData)
+               this.ajouterAffectation(this.formData).then(data=>{
+                   this.getAffectation()
+                   console.log(data)
+                   this.unite=[]
+                   this.formData={
+                       role_id:"",
+                       user_id:"",
+                       date_debut:"",
+                       unite:""
+                   }
+
+               })
+
+            },
+            detacher(id,libelle){
+                this.$('#myAlert1').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                 this.libelleUniteAdmin=libelle
+                 this.edite=  this.getterAffectation.find(item=>item.id==id)
+            },
+            modificationDateDebut(id,libelle){
+                this.$('#modificationdateDebut').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                this.libelleUniteAdmin=libelle
+                this.edite=  this.getterAffectation.find(item=>item.id==id)
+            },
         libelleUniteAdministrative(id){
             console.log(id)
             let uniteadmin=this.jointureUaChapitreSection.find(item=>item.id=id)
             return uniteadmin.libelle
         },
+            finActiviteCfSurUniteAdministrative(){
+                this.$('#myAlert1').modal('hide');
+                this.edite.date_fin=this.date_fin
+                console.log(this.edite)
+             this.modifierAffection(this.edite).then(data=>{
+                 console.log(data)
+                 this.getAffectation()
+
+             })
+            },
+            modficationDateDebutUnite(){
+                this.$('#modificationdateDebut').modal('hide');
+
+                this.modifierAffection(this.edite).then(data=>{
+                    console.log(data)
+                    this.getAffectation()
+
+                })
+            },
             addUnite(id){
                 console.log(id)
                 this.arrayUniteAdmin.push(id)
