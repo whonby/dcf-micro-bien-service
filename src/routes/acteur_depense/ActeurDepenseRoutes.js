@@ -23,6 +23,7 @@ import detailExecutionPersonnel from "../../pages/acteurs_depenses/executionPers
 import recrutementPersonnel from "../../pages/acteurs_depenses/dossierPersonnel/recrutementPersonnel.vue";
 import detailPersonnel from "../../pages/acteurs_depenses/dossierPersonnel/detailPersonnel";
 import cycledeVie from "../../pages/acteurs_depenses/Cycledevie/cycledeVie.vue";
+import RapportDepense from "../../pages/cycle_de_vie/RapportDepense.vue";
 // import Synthesebudg from "../../pages/gestionMarche/synthesebudg.vue";
 
 
@@ -36,6 +37,13 @@ const ActeurDepenseRoutes = [
   //   name: "Synthesebudg",
   //   component: Synthesebudg
   // },
+
+  {
+    path: "/rapport_depense",
+    name: "RapportDepense",
+    component: RapportDepense
+  },
+
 
 
   {

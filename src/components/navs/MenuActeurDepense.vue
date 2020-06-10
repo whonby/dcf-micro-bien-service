@@ -54,6 +54,14 @@
         CYCLE DE VIE
       </router-link>
     </li> -->
+
+           <li>
+            <router-link :to="{name: 'RapportDepense'}" tag="a">
+              RAPPORT DEPENSE
+            </router-link>
+          </li>
+
+
       
        <li>
             <router-link :to="{name: 'Acteur'}" tag="a">

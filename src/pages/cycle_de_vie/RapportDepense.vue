@@ -20,27 +20,31 @@
           </table>-->
      <h3 style="text-align:center">Synthese budgetaire :<span style="color: red;">{{anneeAmort}}</span></h3>
            
-              <table class="table table-bordered table-striped" id="titre">
+              <table class="table table-bordered table-striped" >
                 <thead>
                    <tr style="background-color: green;color: #FFFFFF;">
-    <td style="width:10%;text-align:center">LIGNE BUDGETAIRE</td>
-    <td style="width:12%;text-align:center"> TYPE DE FINANCEMENT </td>
-     <td style="width:12%;text-align:center">SOURCE DE FINANCEMENT</td>
-     <td style="width:12%;text-align:center">TOTAL(FINANCEMENT)</td>
-    <td style="width:12%;text-align:center">EXECUTE</td>
-     <td style="width:12%;text-align:center">DISPONIBLE</td>
+    <td style="width:10%;text-align:center">Exercice Budgétaire</td>
+    
+      <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
+      <th style="width:12%;text-align:center">TOTAL</th> -->
+ </tr>
+                    <tr style="background-color: green;color: #FFFFFF;">
+    <td style="width:10%;text-align:center">Exercice Budgétaire</td>
+    
       <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
       <th style="width:12%;text-align:center">TOTAL</th> -->
  </tr>
  </thead>
+ 
+ 
  <tbody>
                     <tr>
     <td height="10px" rowspan="3" style="text-align:center;">PERSONNEL</td>
     <td height="10px">CONTREPARTIE  </td>
      <td style="width:12%">ETAT</td>
-     <td height="10px" style="text-align:center;font-size:12px">{{formatageSomme(parseFloat(AfficheMontantTresor))}}</td>
-   <td height="10px" style="text-align:center;font-size:12px">{{formatageSomme(parseFloat(AfficheMontantTresorConsommer))}}</td>
-     <td height="10px" style="text-align:center;font-size:12px">{{formatageSomme(parseFloat(AfficheMontantTresor)-parseFloat(AfficheMontantTresorConsommer))}}</td>
+     <td height="10px" style="text-align:center;font-size:12px"></td>
+   <td height="10px" style="text-align:center;font-size:12px"></td>
+     <td height="10px" style="text-align:center;font-size:12px"></td>
       
  </tr>
                     <tr>
@@ -49,9 +53,9 @@
 
     <td height="10px">DON  </td>
       <td height="10px"></td>
-      <td height="10px" style="text-align:center;font-size:12px">{{formatageSomme(parseFloat(AfficheMontantDon))}}</td>
-    <td height="10px" style="text-align:center;font-size:12px">{{formatageSomme(parseFloat(AfficheMontantDonConsommer))}}</td>
- <td height="10px" style="text-align:center;font-size:12px">{{formatageSomme(parseFloat(AfficheMontantDon)-parseFloat(AfficheMontantDonConsommer))}}</td>
+      <td height="10px" style="text-align:center;font-size:12px"></td>
+    <td height="10px" style="text-align:center;font-size:12px"></td>
+ <td height="10px" style="text-align:center;font-size:12px"></td>
       <!-- <td height="20px">6</td>
       <th height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">7</th> -->
  </tr>
@@ -59,9 +63,9 @@
     
     <td height="10px">EMPRUNT  </td>
      <td height="10px"></td>
-      <td height="10px" style="text-align:center;font-size:12px">{{formatageSomme(parseFloat(AfficheMontantEmprunt))}}</td>
- <td height="10px" style="text-align:center;font-size:12px">{{formatageSomme(parseFloat(AfficheMontantEmpruntConsommer))}}</td>
-<td height="10px" style="text-align:center;font-size:12px">{{formatageSomme(parseFloat(AfficheMontantEmprunt)-parseFloat(AfficheMontantEmpruntConsommer))}}</td>
+      <td height="10px" style="text-align:center;font-size:12px"></td>
+ <td height="10px" style="text-align:center;font-size:12px"></td>
+<td height="10px" style="text-align:center;font-size:12px"></td>
      <!-- <td height="20px">10</td>
       <th height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">11</th> -->
  </tr>
@@ -69,9 +73,9 @@
     <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUS TOTAL PERSONNEL">S/T PERSONNEL</th>
     
      <td height="10px"></td>
-     <td height="10px" style="text-align:center;background-color: orange;color: #000000;font-size:12px">{{formatageSomme(parseFloat(AfficheMontantTresor)+parseFloat(AfficheMontantDon)+parseFloat(AfficheMontantEmprunt))}}</td>
-     <td height="10px" style="text-align:center;background-color: orange;color: #000000;font-size:12px">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresorConsommer)+parseFloat(AfficheMontantDonConsommer)+parseFloat(AfficheMontantEmpruntConsommer)))}}</td>
-     <td height="10px" style="text-align:center;background-color: orange;color: #000000;font-size:12px">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresor)-parseFloat(AfficheMontantTresorConsommer))+parseFloat(parseFloat(AfficheMontantDon)-parseFloat(AfficheMontantDonConsommer))+parseFloat(parseFloat(AfficheMontantEmprunt)-parseFloat(AfficheMontantEmpruntConsommer)))}}</td>
+     <td height="10px" style="text-align:center;background-color: orange;color: #000000;font-size:12px"></td>
+     <td height="10px" style="text-align:center;background-color: orange;color: #000000;font-size:12px"></td>
+     <td height="10px" style="text-align:center;background-color: orange;color: #000000;font-size:12px"></td>
       <!-- <td height="20px">14</td>
       <th height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">01</th> -->
  </tr>                
@@ -79,9 +83,9 @@
    <td   rowspan="3" style="text-align:center;width:12%">B.SERVICES</td>
    <td style="width:12%" > CONTREPARTIE </td>
     <td style="width:12%" >ETAT</td>
-    <td  style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorBienEtService))}}</td>
-    <td  style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorConsommerBienEtService))}}</td>
-    <td  style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorBienEtService)-parseFloat(AfficheMontantTresorConsommerBienEtService))}}</td>
+    <td  style="text-align:center;width:12%"></td>
+    <td  style="text-align:center;width:12%"></td>
+    <td  style="text-align:center;width:12%"></td>
 <!--     
      <td style="width:12%">96</td>
      <th style="width:12%;text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">56</th> -->
@@ -90,9 +94,9 @@
    
    <td height="20px">DON  </td>
     <td height="20px"></td>
-    <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantDonBienEtService))}}</td>
-    <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantDonConsommerBienEtService))}}</td>
-   <td  height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantDonBienEtService)-parseFloat(AfficheMontantDonConsommerBienEtService))}}</td>
+    <td height="20px" style="text-align:center;"></td>
+    <td height="20px" style="text-align:center;"></td>
+   <td  height="20px" style="text-align:center;"></td>
 <!--     
      <td height="20px">45</td>
      <th height="20px">12</th> -->
@@ -101,10 +105,10 @@
    
    <td height="20px">EMPRUNT  </td>
     <td style="width:12%"></td>
-     <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantEmpruntBienEtService))}}</td>
+     <td height="20px" style="text-align:center;"></td>
     
-    <td style="text-align:center;height:20%">{{formatageSomme(parseFloat(AfficheMontantEmpruntConsommerBienEtService))}}</td>
-      <td  style="text-align:center;height:20%">{{formatageSomme(parseFloat(AfficheMontantEmpruntBienEtService)-parseFloat(AfficheMontantEmpruntConsommerBienEtService))}}</td>
+    <td style="text-align:center;height:20%"></td>
+      <td  style="text-align:center;height:20%"></td>
     
     <!-- <td height="20px">03</td>
      <th height="20px">78</th> -->
@@ -113,18 +117,18 @@
    <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="S.T.BIENS ET SERVICES">S/T B.SERVICES</th>
    
     <td height="20px"></td>
-    <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(AfficheMontantTresorBienEtService)+parseFloat(AfficheMontantDonBienEtService)+parseFloat(AfficheMontantEmpruntBienEtService))}}</td>
-     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresorConsommerBienEtService)+parseFloat(AfficheMontantDonConsommerBienEtService)+parseFloat(AfficheMontantEmpruntConsommerBienEtService)))}}</td>
-     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresorBienEtService)-parseFloat(AfficheMontantTresorConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantDonBienEtService)-parseFloat(AfficheMontantDonConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntBienEtService)-parseFloat(AfficheMontantEmpruntConsommerBienEtService)))}}</td>
+    <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px"></td>
+     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px"></td>
+     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px"></td>
                    </tr>   
                    <tr>
    <td  rowspan="3" style="text-align:center;width:10%">TRANSFERT </td>
    <td style="width:12%"> CONTREPARTIE </td>
     <td style="width:12%">ETAT</td>
   
-    <td  style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorTransfert))}}</td>
-    <td style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorConsommerTransfert))}}</td>
-    <td  style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorTransfert)-parseFloat(AfficheMontantTresorConsommerTransfert))}}</td>
+    <td  style="text-align:center;width:12%"></td>
+    <td style="text-align:center;width:12%"></td>
+    <td  style="text-align:center;width:12%"></td>
      <!-- <td style="width:12%">1004</td>
      <th style="width:12%">1005</th> -->
 </tr>
@@ -133,9 +137,9 @@
    <td height="20px">DON  </td>
      
     <td height="20px"></td>
-    <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(AfficheMontantDonTransfert))}}</td>
-  <td style="text-align:center;height:20%">{{formatageSomme(parseFloat(AfficheMontantDonConsommerTransfert))}}</td>
-   <td  style="text-align:center;height:20%">{{formatageSomme(parseFloat(AfficheMontantDonTransfert)-parseFloat(AfficheMontantDonConsommerTransfert))}}</td>
+    <td height="20px" style="text-align:center"></td>
+  <td style="text-align:center;height:20%"></td>
+   <td  style="text-align:center;height:20%"></td>
      <!-- <td height="20px"></td>
      <th height="20px"></th> -->
 </tr>
@@ -144,9 +148,9 @@
    <td height="20px">EMPRUNT  </td>
    
     <td height="20px"></td>
-     <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(AfficheMontantEmpruntTransfert))}}</td>
-   <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantEmpruntConsommerTransfert))}}</td>
-    <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantEmpruntTransfert)-parseFloat(AfficheMontantEmpruntConsommerTransfert))}}</td>
+     <td height="20px" style="text-align:center"></td>
+   <td height="20px" style="text-align:center;"></td>
+    <td height="20px" style="text-align:center;"></td>
     <!-- <td height="20px"></td>
      <th height="20px"></th> -->
 </tr>
@@ -157,9 +161,9 @@
    <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUS-TOTAL TRANSFERT">S/T TRANSFERT  </th>
    
     <td height="20px"></td>
-   <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(AfficheMontantTresorTransfert)+parseFloat(AfficheMontantDonTransfert)+parseFloat(AfficheMontantEmpruntTransfert))}}</td>
-     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresorConsommerTransfert)+parseFloat(AfficheMontantDonConsommerTransfert)+parseFloat(AfficheMontantEmpruntConsommerTransfert)))}}</td>
-     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresorTransfert)-parseFloat(AfficheMontantTresorConsommerTransfert))+parseFloat(parseFloat(AfficheMontantDonTransfert)-parseFloat(AfficheMontantDonConsommerTransfert))+parseFloat(parseFloat(AfficheMontantEmpruntBienEtService)-parseFloat(AfficheMontantEmpruntConsommerBienEtService)))}}</td>
+   <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px"></td>
+     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px"></td>
+     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px"></td>
     
      <!-- <td height="20px">23</td>
      <th height="20px"></th> -->
@@ -170,9 +174,9 @@
    <td style="width:12%"> CONTREPARTIE </td>
     <td style="width:12%">ETAT</td>
 
-    <td  style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorIvestissement))}}</td>
-    <td style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorConsommerInvestissement))}}</td>
-    <td  style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorIvestissement)-parseFloat(AfficheMontantTresorConsommerInvestissement))}}</td>
+    <td  style="text-align:center;width:12%"></td>
+    <td style="text-align:center;width:12%"></td>
+    <td  style="text-align:center;width:12%"></td>
      <!-- <td style="width:12%">1004</td>
      <th style="width:12%">1005</th> -->
 </tr>
@@ -181,9 +185,9 @@
    <td height="20px">DON  </td>
      
     <td height="20px"></td>
-    <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(AfficheMontantDonIvestissement))}}</td>
-  <td style="text-align:center;height:20%">{{formatageSomme(parseFloat(AfficheMontantDonConsommerInvestissement))}}</td>
-   <td  style="text-align:center;height:20%">{{formatageSomme(parseFloat(AfficheMontantDonIvestissement)-parseFloat(AfficheMontantDonConsommerInvestissement))}}</td>
+    <td height="20px" style="text-align:center"></td>
+  <td style="text-align:center;height:20%"></td>
+   <td  style="text-align:center;height:20%"></td>
      <!-- <td height="20px"></td>
      <th height="20px"></th> -->
 </tr>
@@ -192,9 +196,9 @@
    <td height="20px">EMPRUNT  </td>
    
     <td height="20px"></td>
-     <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(AfficheMontantEmpruntIvestissement))}}</td>
-   <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantEmpruntConsommerInvestissement))}}</td>
-    <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantEmpruntIvestissement)-parseFloat(AfficheMontantEmpruntConsommerInvestissement))}}</td>
+     <td height="20px" style="text-align:center"></td>
+   <td height="20px" style="text-align:center;"></td>
+    <td height="20px" style="text-align:center;"></td>
     <!-- <td height="20px"></td>
      <th height="20px"></th> -->
 </tr>
@@ -203,9 +207,9 @@
    <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUS-TOTAL TRANSFERT">S/T INVESTISSEMENT  </th>
    
     <td height="20px"></td>
-   <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(AfficheMontantTresorIvestissement)+parseFloat(AfficheMontantDonIvestissement)+parseFloat(AfficheMontantEmpruntIvestissement))}}</td>
-     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresorConsommerInvestissement)+parseFloat(AfficheMontantDonConsommerInvestissement)+parseFloat(AfficheMontantEmpruntIvestissement)))}}</td>
-     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresorIvestissement)-parseFloat(AfficheMontantTresorConsommerInvestissement))+parseFloat(parseFloat(AfficheMontantDonIvestissement)-parseFloat(AfficheMontantDonConsommerInvestissement))+parseFloat(parseFloat(AfficheMontantEmpruntIvestissement)-parseFloat(AfficheMontantEmpruntConsommerInvestissement)))}}</td>
+   <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px"></td>
+     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px"></td>
+     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px"></td>
     
      <!-- <td height="20px">23</td>
      <th height="20px"></th> -->
@@ -219,49 +223,8 @@
 
 
 
-  <tr>
-   <th style="width:10%;font-size:14px;font-weight: bold;">TOTAL</th>
-   <td style="width:12%"> CONTREPARTIE </td>
-    <td style="width:12%">ETAT</td>
-    <td width="12%" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresor))+parseFloat(parseFloat(AfficheMontantTresorBienEtService))+parseFloat(parseFloat(AfficheMontantTresorTransfert)))}}</td>
-   <td width="12%" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresorConsommer))+parseFloat(parseFloat(AfficheMontantTresorConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantTresorConsommerTransfert)))}}</td>
-     <td width="12%" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresorBienEtService)-parseFloat(AfficheMontantTresorConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantTresor)-parseFloat(AfficheMontantTresorConsommer))+parseFloat(parseFloat(AfficheMontantTresorTransfert)-parseFloat(AfficheMontantTresorConsommerTransfert)))}}</td>
-     <!-- <td style="width:12%">0231</td>
-     <th style="width:12%">7895</th> -->
-</tr>
-                   <tr>
-   <th height="20px"></th>
-   <td height="20px">DON  </td>
-    <td height="20px"></td>
-    <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantDon))+parseFloat(parseFloat(AfficheMontantDonBienEtService))+parseFloat(parseFloat(AfficheMontantDonTransfert)))}}</td>
-    <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantDonConsommer))+parseFloat(parseFloat(AfficheMontantDonConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantDonConsommerTransfert)))}}</td>
-     <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantDon)-parseFloat(AfficheMontantDonConsommer))+parseFloat(parseFloat(AfficheMontantDonBienEtService)-parseFloat(AfficheMontantDonConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantDonTransfert)-parseFloat(AfficheMontantDonConsommerTransfert)))}}</td>
-  
-     <!-- <td height="20px">1233</td>
-     <th height="20px"></th> -->
-</tr>
-                   <tr>
-   <th height="20px"></th>
-   <td height="20px">EMPRUNT  </td> 
-    <td height="20px"></td>
-     <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantEmprunt))+parseFloat(parseFloat(AfficheMontantEmpruntBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntTransfert)))}}</td>
-   <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantEmpruntConsommer))+parseFloat(parseFloat(AfficheMontantEmpruntConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntConsommerTransfert)))}}</td>
-     <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(parseFloat(AfficheMontantEmpruntBienEtService)-parseFloat(AfficheMontantEmpruntConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntTransfert)-parseFloat(AfficheMontantEmpruntConsommerTransfert))+parseFloat(parseFloat(AfficheMontantEmprunt)-parseFloat(AfficheMontantEmpruntConsommer)))}}</td>
-  
- 
-    <!-- <td height="20px">000055</td>
-     <th height="20px">00004</th> -->
-</tr>
-                   <tr>
-   <th height="20px" colspan="2" style="color: #000000;font-size:14px">TOTAL GENERAL </th>
-   
-    <td height="20px"></td>
-    <td height="20px" style="text-align:center;background-color: green;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(parseFloat(AfficheMontantTresor))+parseFloat(parseFloat(AfficheMontantTresorBienEtService))+parseFloat(parseFloat(AfficheMontantTresorTransfert)))+parseFloat(parseFloat(parseFloat(AfficheMontantDon))+parseFloat(parseFloat(AfficheMontantDonBienEtService))+parseFloat(parseFloat(AfficheMontantDonTransfert)))+parseFloat(parseFloat(parseFloat(AfficheMontantEmprunt))+parseFloat(parseFloat(AfficheMontantEmpruntBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntTransfert))))}}</td>
-    <td height="20px" style="text-align:center;background-color: green;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(parseFloat(AfficheMontantTresorConsommer))+parseFloat(parseFloat(AfficheMontantDonConsommer))+parseFloat(parseFloat(AfficheMontantEmpruntConsommer)))+parseFloat(parseFloat(parseFloat(AfficheMontantTresorConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantDonConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntConsommerBienEtService)))+parseFloat(parseFloat(parseFloat(AfficheMontantEmpruntConsommerTransfert))+parseFloat(parseFloat(AfficheMontantTresorConsommerTransfert))+parseFloat(parseFloat(AfficheMontantDonConsommerTransfert))))}}</td>
-     <td height="20px" style="text-align:center;background-color: green;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(parseFloat(AfficheMontantTresor)-parseFloat(AfficheMontantTresorConsommer))+parseFloat(parseFloat(AfficheMontantDon)-parseFloat(AfficheMontantDonConsommer))+parseFloat(parseFloat(AfficheMontantEmprunt)-parseFloat(AfficheMontantEmpruntConsommer)))+parseFloat(parseFloat(parseFloat(AfficheMontantTresorBienEtService)-parseFloat(AfficheMontantTresorConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantDonBienEtService)-parseFloat(AfficheMontantDonConsommerBienEtService))+parseFloat(parseFloat(AfficheMontantEmpruntBienEtService)-parseFloat(AfficheMontantEmpruntConsommerBienEtService)))+parseFloat(parseFloat(parseFloat(AfficheMontantTresorTransfert)-parseFloat(AfficheMontantTresorConsommerTransfert))+parseFloat(parseFloat(AfficheMontantDonTransfert)-parseFloat(AfficheMontantDonConsommerTransfert))+parseFloat(parseFloat(AfficheMontantEmpruntTransfert)-parseFloat(AfficheMontantEmpruntConsommerTransfert))))}}</td>
-     <!-- <td height="20px">986</td>
-     <th height="20px">78452</th> -->
-</tr>                                       
+
+
                   </tbody>  
               </table>
                  
