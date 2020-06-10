@@ -746,6 +746,7 @@ source_financement
                     <th>Reference marché</th>
                      <th>Statut</th>
                     <th>Montant prévu</th>
+                    <th>Montant réel</th>
                     <th>Etat En cours</th>
                    <th colspan="4">Action</th>
                   </tr>
@@ -782,7 +783,8 @@ source_financement
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
-                  
+                  <td>
+                   {{formatageSomme(parseFloat(recupererMontantReel(marche.id))) || 'Non renseigné'}}</td>
            <td>
                      <button 
                       v-if="marche.attribue == 2"  class="btn  btn-warning">
