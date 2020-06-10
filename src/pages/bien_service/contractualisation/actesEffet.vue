@@ -2,6 +2,7 @@
 <template>
   <div>
     
+    
     <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
     <!-- End Page Header -->
     <!-- Default Light Table -->
@@ -9,7 +10,7 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-          
+
           <!-- <download-excel
             class="btn btn-default pull-right"
             style="cursor:pointer;"
