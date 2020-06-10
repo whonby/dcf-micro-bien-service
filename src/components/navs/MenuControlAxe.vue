@@ -39,11 +39,11 @@
              TRANSFERT
             </router-link>
           </li>
-           <li>
+           <!-- <li>
             <router-link :to="{name: 'suiviTransfert'}" tag="a">
              SUIVI DES TRANSFERTS
             </router-link>
-          </li>
+          </li> -->
 <!-- <li class="" id="indicateur">
         <a title="Indicateur" href="#" class="">
           <i class="icon icon-users"></i>

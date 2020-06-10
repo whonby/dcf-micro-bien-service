@@ -346,7 +346,7 @@
  <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                    <h5>Liste des unité d'administrative</h5>
+                    <h5>Liste des unité d'administrative </h5>
                 </div>
                 <div class="span6">
                     <div align="right">
