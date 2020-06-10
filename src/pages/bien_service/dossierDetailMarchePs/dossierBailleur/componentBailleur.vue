@@ -336,7 +336,7 @@
                                                 <div class="controls">
                                                     <input type="text" class="span" placeholder="Montant" v-model="edit_bailleur_marche.montant_ht">
                                                 </div>
-                                                 <code v-if="somme>EssaiMontant">la somme des bailleurs > au montant du contrat</code>
+                                                 <code v-if="somme>=EssaiMontant">la somme des bailleurs > au montant du contrat</code>
                                             </div>
                                            </td>
                                         <td>
@@ -408,7 +408,7 @@
        
             <td >
               <div class="control-group">
-                <label class="control-label" style="text-align:right;color:red">Montant TTC {{EssaiMontant}}</label>
+                <label class="control-label" style="text-align:right;color:red">Montant TTC </label>
                
               </div>
             
@@ -433,7 +433,7 @@
                                      </table>
                                    
                                         <div class="modal-footer" >
-                                           <button @click.prevent="modificationBailleurMarche" class="btn btn-primary"  v-if=" somme<= EssaiMontant " >Modification</button>
+                                           <button @click.prevent="modificationBailleurMarche" class="btn btn-primary"  v-if=" somme <= EssaiMontant " >Modification</button>
                                             <button data-dismiss="modal" class="btn" href="#">Fermer</button>
                                         </div>
                                    
@@ -647,7 +647,7 @@ montantHTt() {
 
   EssaiMontant(){
 
-    return  parseFloat(this.sommeBailleur(this.macheid)) 
+    return  parseFloat(this.sommeBailleur(this.macheid)) - parseFloat(this.somme)
   },
 
 
