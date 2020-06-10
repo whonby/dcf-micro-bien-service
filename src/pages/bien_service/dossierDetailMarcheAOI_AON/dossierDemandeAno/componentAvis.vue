@@ -120,11 +120,22 @@
           
         </div>
 
-          <div class="control-group">
-                        <label class="control-label">Motif</label>
+          <!-- <div class="control-group">
+                        <label class="control-label">Motif 7</label>
                         <div class="controls">
                           <select v-model="edit_transmission.plan_motif_decision_id" class="span">
                                 <option v-for="varText in motifDecisions" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                        
+                        </div>
+                    </div> -->
+
+                     <div class="control-group">
+                        <label class="control-label">Motif</label>
+                        <div class="controls">
+                          <select v-model="edit_transmission.plan_motif_decision_id" class="span">
+                                <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
                             </select>
                         
@@ -208,7 +219,8 @@ export default {
              ,"gettersCotations","gettersTransmissions","motifDecisions"]),
             // ...mapGetters('personnelUA', ['acteur_depenses']),
 
-
+         ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision', 
+  'plans_Decision']),
                ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
             // ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
             //     'types_financements']) ,
@@ -230,6 +242,27 @@ export default {
         verouillageObservation(){
             return this.edit_transmission.avis == 0
         },
+
+        affichierIdActeFinancierDansActePlan() {
+      const qtereel = this.plans_Decision.find(
+        qtreel => qtreel.code == "11",
+       
+      );
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
+
+AffichierElementParent() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.parent == id);
+        }
+      };
+    },
 
         },
     methods:{

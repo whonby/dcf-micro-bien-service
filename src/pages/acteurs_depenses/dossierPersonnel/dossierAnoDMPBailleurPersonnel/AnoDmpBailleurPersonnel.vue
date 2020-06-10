@@ -292,7 +292,7 @@
           
         </div>
 
-          <div class="control-group">
+          <!-- <div class="control-group">
                         <label class="control-label">Motif</label>
                         <div class="controls">
                           <select v-model="edit_bailleur.plan_motif_decision_id" class="span">
@@ -301,7 +301,19 @@
                             </select>
                         
                         </div>
+                    </div> -->
+
+                     <div class="control-group">
+                        <label class="control-label">Motif</label>
+                        <div class="controls">
+                          <select v-model="edit_bailleur.plan_motif_decision_id" class="span">
+                                <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                        
+                        </div>
                     </div>
+
 
                 </form>
             </div>
@@ -367,7 +379,7 @@ selectedFileDemandeAno:""
                 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
             
-
+          ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision', 'plans_Decision']),
                 listeAnoDMPBailleur: function () {
                 return macheid => {
                     if (macheid != "") {
@@ -380,24 +392,28 @@ selectedFileDemandeAno:""
             },
             
 
+     affichierIdActeFinancierDansActePlan() {
+      const qtereel = this.plans_Decision.find(
+        qtreel => qtreel.code == "11",
+       
+      );
 
-            //  listeAppelOffre(){
-            //     return  macheid=>{
-            //         if (macheid!="") {
-            //             //console.log("Marche appel offre")
-            //            const vM=this;
-            //             let Objet=this.gettersCotations.find( idmarche => idmarche.marche_id == macheid)
-                     
-            //             if(Objet!=undefined){
-                          
-            //                 vM.formBailleur.appel_offre_id = Objet.id;
-                         
-            //             }
-                       
-            //         return this.gettersCotations.filter( idmarche => idmarche.marche_id == macheid)
-            //         }
-            //     }
-            // },
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
+
+AffichierElementParent() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.parent == id);
+        }
+      };
+    },
+
+           
 
             // affichage du pv sur ANO Bailleur
 
@@ -541,7 +557,7 @@ affichierAppelOffreid() {
 
               ajouterDemandeAnoLocal(){
 
-                  if(confirm("chargement du fichier neccessaire ok mercie")){
+                 // if(confirm("chargement du fichier neccessaire ok mercie")){
                       const formData = new FormData();
                 formData.append('fichier', this.selectedFileDemandeAno, this.selectedFileDemandeAno.name);
               //  formData.append('proce_verbal_jugement_offre_id', this.formBailleur.proce_verbal_jugement_offre_id);
@@ -566,7 +582,7 @@ affichierAppelOffreid() {
                     
                    // proce_verbal_jugement_offre_id:""
                 }
-                  }else return "chargement du fichier neccessaire"
+                  //}else return "chargement du fichier neccessaire"
               
             },
 

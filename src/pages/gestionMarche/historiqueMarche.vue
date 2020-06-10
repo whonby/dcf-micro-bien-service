@@ -46,7 +46,7 @@
             <label class="control-label">Type marché </label>
             <div class="controls">
             <select v-model="formData.type_marche_id" class="span4">
-               <option v-for="plans in afficherTypeMarche" :key="plans.id" 
+               <option v-for="plans in typeMarches" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
@@ -55,7 +55,7 @@
               
              <td >
                <div class="control-group">
-            <label class="control-label">Objet marché</label>
+            <label class="control-label">Objet marché / contrat</label>
             <div class="controls">
               <textarea
                
@@ -84,13 +84,18 @@
                 <div class="control-group">
                   <label class="control-label">Grand Nature</label>
                   <div class="controls">
-                    <select v-model="formData.gdenature_id" :readOnly="deverouGrandNature" class="sapn5">
+                    <!-- <select v-model="formData.gdenature_id" :readOnly="deverouGrandNature" class="sapn5">
                       <option
                         v-for="gdeNature in groupgranNature"
                         :key="gdeNature[0].id"
                         :value="gdeNature[0].afficheGdeNature.id"
                       >{{gdeNature[0].afficheGdeNature.libelle}}</option>
-                    </select>
+                    </select> -->
+
+                     <select v-model="formData.gdenature_id" :readOnly="deverouGrandNature" class="sapn5">
+               <option v-for="plans in grandes_natures" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+               </select>
                   </div>
                 </div>
               </td>
@@ -197,7 +202,7 @@
                 
                 readonly
               />
-               <!-- <select v-model="editMarche.procedure_passation_id" class="span" :readOnly="deverouPassationModi">
+               <!-- <select v-model="formData.procedure_passation_id" class="span" :readOnly="deverouPassation">
                <option v-for="plans in procedurePassationDynamiques(editMarche.typeappel_id)" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select> -->
@@ -355,13 +360,18 @@
                 <div class="control-group">
                   <label class="control-label">Grand Nature</label>
                   <div class="controls">
-                    <select v-model="editMarche.gdenature_id" :readOnly="deverouGrandNature" class="span4">
+                    <!-- <select v-model="editMarche.gdenature_id" :readOnly="deverouGrandNature" class="span4">
                       <option
                         v-for="gdeNature in grandeNatureDynamiques(editMarche.unite_administrative_id)"
                         :key="gdeNature.id"
                         :value="gdeNature.afficheGdeNature.id"
                       >{{gdeNature.afficheGdeNature.libelle}}</option>
-                    </select>
+                    </select> -->
+
+                      <select v-model="editMarche.gdenature_id"  class="sapn5">
+               <option v-for="plans in grandes_natures" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+               </select>
                   </div>
                 </div>
               </td>
@@ -610,7 +620,8 @@
                     <th>Reference marché</th>
                      <th>Statut</th>
                     <th>Montant prévu</th>
-                    <th>Etat du marché</th>
+                    <th>Etat en cours</th>
+                    <th style="width:10%">Suivi-marche</th>
                    
                   </tr>
                 </thead>
@@ -625,7 +636,7 @@
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{ELibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
-                   {{marche.procedure_passation.code || 'Non renseigné'}}</td>
+                   {{ afficherCodeProcedure(marche.procedure_passation_id) || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.afficheActivite.libelle || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -676,7 +687,37 @@
                 </button>
 
                    </td>
-                 
+                   
+                <td v-if="marche.type_marche_id == 6 ||marche.type_marche_id == 1 || marche.type_marche_id == 5"> 
+                     <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
+                class="btn btn-default " title="historique la contratualisation">
+                  <span class=""><i class=" icon-folder-open"></i></span>
+                    </router-link>
+                    
+             <router-link :to="{ name: 'detailExecution', params: { id: marche.id }}"
+                class="btn btn-default " title="historique execution Marche">
+                  <span class=""><i class="  icon-zoom-out"></i></span>
+                   </router-link> 
+                    
+                      <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                 class="btn btn-inverse " title="Cycle de vie du marche">
+        <span class=""><i class=" icon-calendar"></i></span>
+    </router-link>
+                    </td>
+                   
+                       <td v-else>
+  <router-link :to="{ name: 'detailPersonnel', params: { id: marche.id }}"
+                class="btn btn-default " title="Continué le processuce de contratualisation">
+                  <span class=""><i class=" icon-folder-open"></i></span>
+                   </router-link> 
+                       </td>
+                    
+                   <!-- <td v-if="marche.type_marche_id == 6 ||marche.type_marche_id == 1"> 
+                     <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                                    class="btn btn-inverse " title="Cycle de vie du marche">
+                           <span class=""><i class=" icon-calendar"></i></span>
+                       </router-link></td> -->
+                
                    
  
 <!-- <td>
@@ -703,9 +744,9 @@
       </div>
     </div>
 
-    <!-- <fab :actions="fabActions" @cache="afficherModalAjoutTypaPrestation" main-icon="apps" bg-color="green"></fab>
+    <fab :actions="fabActions" @cache="afficherModalAjoutTypaPrestation" main-icon="apps" bg-color="green"></fab>
  <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjoutTypaPrestation()">Open</button>
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button> -->
+      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
     
@@ -736,10 +777,14 @@ export default {
     //     libelle: "libelle"
     //   },
 
-      formData: {
+    formData: {
+      libelle_procedure:"",
         type_financement:"",
         source_financement:"",
             objet:"",
+            economique_id:"",
+            //procedure_passation_id:"",
+            beneficiaire:"",
             livrable:"",
             reference_marche:"",
             montant_marche:"",
@@ -747,7 +792,7 @@ export default {
                 unite_administrative_id:"",
                 gdenature_id:"",
                 activite_id:"",
-                typeappel_id:"",
+               // typeappel_id:"",
                 exo_id:"",
         
       },
@@ -815,7 +860,7 @@ export default {
        ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
- ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
+ ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires',"grandes_natures"]),
    ...mapGetters("gestionMarche", ['entreprises']),
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
@@ -954,18 +999,18 @@ getDateFinExécutionValue(){
 
 
 
-//  affichierNomEntreprise() {
-//       return id => {
-//         if (id != null && id != "") {
-//            const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+ afficherCodeProcedure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.procedurePassations.find(qtreel => qtreel.id == id);
 
-//       if (qtereel) {
-//         return qtereel.raison_sociale;
-//       }
-//       return 0
-//         }
-//       };
-//     },
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 0
+        }
+      };
+    },
 
 
     // afficherEntrepriseRecep () {
@@ -1668,6 +1713,7 @@ recupererDateMiseService() {
        var nouvelObjet = {
       ...this.formData,
       imputation :this.ImputationBudget,
+      libelle_procedure:this.afficheLeNomDesProcedure,
       exo_id : this.anneeAmort
        };
 this.ajouterMarche(nouvelObjet)
@@ -1685,14 +1731,14 @@ this.formData = {
     },
     formatageSomme:formatageSomme,
     // afficher modal de modification
-    // afficherModalModifierTypePrestation(index) {
-    //   this.$("#modificationModal").modal({
-    //     backdrop: "static",
-    //     keyboard: false
-    //   });
+    afficherModalModifierTypePrestation(index) {
+      this.$("#modificationModal").modal({
+        backdrop: "static",
+        keyboard: false
+      });
 
-    //   this.editMarche = this.marches[index];
-    // },
+      this.editMarche = this.marches[index];
+    },
     // fonction pour vider l'input modification
     modifierModalTypeprestationLocal(){
        var nouvelObjet = {

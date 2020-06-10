@@ -99,7 +99,8 @@ export default {
      "getLigneExempter",
      "getBudgeChager",
      "getAllRealiteServiceFait",
-     "getAllLiquidation"
+     "getAllLiquidation",
+     "getAllDecompteFacture"
     ]),
             ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
@@ -207,7 +208,7 @@ this.getAllRealiteServiceFait()
      this.getAllLiquidation()
 // this.getTypeProcedure()
 
-
+this.getAllDecompteFacture()
 
 
 
@@ -352,13 +353,14 @@ this.getLettreInvitation()
     this.getObservationBailleur()
 
    this.getAvenant()
-
+this.getDecompte()
     this.getMarcheBailleur()
 this.getMembreCojo()
     this.getProceVerbal()
       /**
        * fin missions
        */
+      
   }
 
 };

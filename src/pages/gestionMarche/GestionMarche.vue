@@ -28,11 +28,11 @@
                         <a data-toggle="tab" href="#tab00007">Importation ppm <span class="badge badge-important"></span></a>
                       </li>
                      <li class="">
-                        <a data-toggle="tab" href="#tab00008">Listes de tout les marchés <span class="badge badge-info">{{nombreDeMarche}}</span></a>
+                        <a data-toggle="tab" href="#tab00008">Listes des marchés <span class="badge badge-info">{{nombreDeMarche}}</span></a>
                       </li>
                        
 
-                            <li class="">
+                            <!-- <li class="">
                         <a data-toggle="tab" href="#tab00214">Liste des Marchés de Bien&Service et Fourniture   <span class="badge badge-warning">{{nombreMarcheBienServiceEtFourniture}}</span></a>
                       </li>
                      
@@ -41,7 +41,7 @@
                       </li>
                        <li class="">
                         <a data-toggle="tab" href="#tab000010">Liste des Contrats     <span class="badge badge-inverse">  {{nombreDeContrat}}</span></a>
-                      </li>
+                      </li> -->
                     </ul>
                   </div>
                   <div class="widget-content tab-content">

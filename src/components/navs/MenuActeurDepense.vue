@@ -6,7 +6,7 @@
 
        <li>
          <router-link :to="{name:'recrutementPersonnel'}" tag="a">
-           PLANIFICATION DE RECRUTEMENT PERSONNEL
+           SUIVI DE RECRUTEMENT PERSONNEL
          </router-link>
 
        </li>
@@ -79,11 +79,17 @@
             </router-link>
           </li>
           
-     <li>
+           <li>
             <router-link :to="{name: 'Mission'}" tag="a">
               SUIVI DES MISSIONS
             </router-link>
           </li>
+<!-- 
+           <li>
+            <router-link :to="{name: 'executionMission'}" tag="a">
+             EXECUTION DE MISSION
+            </router-link>
+          </li> -->
 
 
 

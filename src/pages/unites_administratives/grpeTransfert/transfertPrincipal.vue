@@ -2,9 +2,9 @@
 
 <template>
   <div>
-      <div id="exampleModalMotifMandat" class="modal hide">
+      <!-- <div id="exampleModalMotifMandat" class="modal hide">
       <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">�</button>
+        <button data-dismiss="modal" class="close" type="button">�</button>
         <h3>Validation CF</h3>
       </div>
       <div class="modal-body">
@@ -67,7 +67,7 @@
         >Modifier</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
-    </div>
+    </div> -->
 <!----- ajouter modal   ---->
 
 
@@ -75,10 +75,22 @@
     <div id="exampleModal" class="modal hide tailgrand12">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">x</button>
-        <h3>Ajouter Tansfert</h3>
+        <h3>Information sur le Tansfert</h3>
       </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped">
+
+      <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                                 <li class="active"><a data-toggle="tab" href="#tab0145"> UA Emettrice</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab2"> UA receptrice</a></li>
+                               
+                                
+                                
+                            </ul>
+                        </div>
+
+       <div class="widget-content tab-content">
+<div id="tab0145" class="tab-pane active">
+ <table class="table table-bordered table-striped">
          
            <tr>
              <td>
@@ -88,7 +100,7 @@
                        <input
                       type="text"
                  v-model="formData.num_transfert"
-                      class="span3"
+                      class="span"
                      
                       
                     />
@@ -106,7 +118,7 @@
                 <div class="control-group">
                   <label class="control-label">Unite d'administrative</label>
                   <div class="controls">
-                     <select v-model="formData.ua_id" class="span3">
+                     <select v-model="formData.ua_id" class="span">
                                                             <option></option>
                                                             <option v-for="item in uniteAdministratives" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -117,26 +129,15 @@
                   </div>
                 </div>
              </td>
+
+
              
-                <td>
-                 <div class="control-group">
-                  <label class="control-label">Destinataire</label>
-                  <div class="controls">
-                    <select v-model="formData.unitezone_id" :readOnly="verrouDestinataire" class="span3">
-                      <option
-                        v-for="localgeo in destinationDynamiques(formData.ua_id)"
-                        :key="localgeo.id"
-                        :value="localgeo.id"
-                      >{{localgeo.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-             </td>
-             <td>
+               
+             <td colspan="">
                 <div class="control-group">
                   <label class="control-label">Ligne budgetaire</label>
                   <div class="controls">
-                        <select v-model="formData.ligne_budgetaire_id" :readOnly="verrouLigneBudgetaire" class="span5">
+                        <select v-model="formData.ligne_budgetaire_id" :readOnly="verrouLigneBudgetaire" class="span3">
                       <option
                         v-for="localgeo in ligneBudgetaireDynamiques(formData.ua_id)"
                         :key="localgeo.id"
@@ -152,12 +153,12 @@
              <td>
               
                <div class="control-group">
-                  <label class="control-label">Montant transfert</label>
+                  <label class="control-label">Dotation initiale</label>
                   <div class="controls">
                        <input
                       type="number"
                    :value="afficheMontantTransfere(formData.ligne_budgetaire_id)"
-                      class="span3"
+                      class="span"
                      readonly
                       
                     />
@@ -168,12 +169,12 @@
               <td>
               
                <div class="control-group">
-                  <label class="control-label">Cumul transfert</label>
+                  <label class="control-label">Cumul dotation transferé</label>
                   <div class="controls">
                        <input
                       type="number"
                    :value="montantCumul(formData.ligne_budgetaire_id)"
-                      class="span3"
+                      class="span"
                      readonly
                       
                     />
@@ -181,10 +182,10 @@
                   </div>
                 </div>
               </td>
-               <td>
+               <td colspan="2">
               
                <div class="control-group">
-                  <label class="control-label">Disponible</label>
+                  <label class="control-label">Dotation disponible</label>
                   <div class="controls">
                        <input
                       type="number"
@@ -197,15 +198,17 @@
                   </div>
                 </div>
               </td>
+           </tr>
+           <tr>
                <td>
               
                <div class="control-group">
-                  <label class="control-label">Montant du contrat</label>
+                  <label class="control-label">Montant à transferer</label>
                   <div class="controls">
                        <input
                       type="number"
                     v-model="formData.montant_total_contrat"
-                      class="span5"
+                      class="span"
                      :max="dotationDisponible"
                       
                     />
@@ -213,17 +216,16 @@
                   </div>
                 </div>
               </td>
-           </tr>
-           <tr>
+           
              <td>
               
                <div class="control-group">
-                  <label class="control-label">	Solde</label>
+                  <label class="control-label">	Dotation actuelle</label>
                   <div class="controls">
                        <input
                       type="number"
                    :value="soldeDisponible"
-                      class="span3"
+                      class="span"
                      readonly
                       
                     />
@@ -231,7 +233,7 @@
                   </div>
                 </div>
               </td>
-              <td>
+              <td colspan="2">
               
                <div class="control-group">
                   <label class="control-label">grande nature</label>
@@ -247,12 +249,15 @@
                   </div>
                 </div>
               </td>
+           </tr>
+
+           <tr>
                <td>
               
                <div class="control-group">
                   <label class="control-label">Fonction</label>
                   <div class="controls">
-                    <select v-model="formData.fonction_id" :readOnly="verrouDestinataire" class="span3">
+                    <select v-model="formData.fonction_id" :readOnly="verrouDestinataire" class="span">
                       <option
                         v-for="localgeo in fonctionDynamiques(formData.ua_id)"
                         :key="localgeo.id"
@@ -271,7 +276,7 @@
                        <input
                       type="text"
                   :value="afficheActeurDepense(formData.fonction_id)"
-                      class="span5"
+                      class="span"
                      readonly
                       
                     />
@@ -279,12 +284,11 @@
                   </div>
                 </div>
               </td>
-           </tr>
-           <tr>
+          
          <td>
               
                <div class="control-group">
-                  <label class="control-label">Date reception</label>
+                  <label class="control-label">Date du depot</label>
                   <div class="controls">
                        <input
                       type="date"
@@ -305,8 +309,8 @@
                        <input
                       type="file"
                  
-                      class="span"
-                     readonly
+                      class="span2"
+                    
                       
                     />
                    
@@ -315,7 +319,99 @@
               </td>
        </tr>
         </table>
-      </div>
+    </div>
+
+    <div id="tab2" class="tab-pane">
+  <table class="table table-bordered table-striped">
+   <tr>
+      <td>
+                 <div class="control-group">
+                  <label class="control-label">UA bénéficiaire</label>
+                  <div class="controls">
+                    <select v-model="formData.unitezone_id" :readOnly="verrouDestinataire" class="span3">
+                      <option
+                        v-for="localgeo in destinationDynamiques(formData.ua_id)"
+                        :key="localgeo.id"
+                        :value="localgeo.id"
+                      >{{localgeo.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+             </td>
+
+              <td colspan="">
+                <div class="control-group">
+                  <label class="control-label">Ligne budgetaire</label>
+                  <div class="controls">
+                        <select v-model="formData.inputation_id" class="span3">
+                      <option
+                        v-for="localgeo in derniereNivoPlanBudgetaire"
+                        :key="localgeo.id"
+                        :value="localgeo.id"
+                      >{{localgeo.code}}-{{localgeo.libelle}}</option>
+                    </select>
+                   
+                  </div>
+                </div>
+             </td>
+
+              <td colspan="">
+                <div class="control-group">
+                  <label class="control-label">Date reception</label>
+                  <div class="controls">
+                       <input
+                      type="date"
+                    v-model="formData.date_reception"
+                      class="span"
+                     
+                      
+                    />
+                   
+                  </div>
+                </div>
+             </td>
+   </tr>
+
+   <tr>
+       <td colspan="">
+                <div class="control-group">
+                  <label class="control-label">Grande nature </label>
+                  <div class="controls">
+                        <select v-model="formData.grande_natrue_id" class="span4">
+                      <option
+                        v-for="localgeo in grandes_natures"
+                        :key="localgeo.id"
+                        :value="localgeo.id"
+                      >{{localgeo.libelle}}</option>
+                    </select>
+                   
+                  </div>
+                </div>
+             </td>
+              <td colspan="2">
+              
+               <div class="control-group">
+                  <label class="control-label">Montant transferé</label>
+                  <div class="controls">
+                       <input
+                      type="number"
+                    v-model="formData.montant_total_contrat"
+                      class="span4"
+                     readonly
+                      
+                    />
+                   
+                  </div>
+                </div>
+              </td>
+   </tr>
+
+
+  </table>
+    </div>
+        </div>
+    
+     
       <div class="modal-footer">
         <a
           @click.prevent="ajouterUniteAdministrativeLocal(formData)"
@@ -333,20 +429,31 @@
     <div id="modificationModal" class="modal hide tailgrand121">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Transfert</h3>
+        <h3>Information sur la modification  du Transfert</h3>
       </div>
-      <div class="modal-body">
-         <table class="table table-bordered table-striped">
+      
+      <div class="widget-title">
+               <ul class="nav nav-tabs">
+             <li class="active"><a data-toggle="tab" href="#tab000"> UA Emettrice</a></li>
+             <li class=""><a data-toggle="tab" href="#tab20"> UA receptrice</a></li>
+                               
+                                
+                                
+                       </ul>
+                        </div>
+                 <div class="widget-content tab-content">
+                <div id="tab000" class="tab-pane active">
+                  <table class="table table-bordered table-striped">
          <tr>
- <td>
+         <td>
               
                <div class="control-group">
                   <label class="control-label">Numero transfert</label>
                   <div class="controls">
                        <input
                       type="text"
-                 v-model="editTransfert.num_transfert"
-                      class="span3"
+                       v-model="editTransfert.num_transfert"
+                      class="span"
                      
                       
                     />
@@ -358,7 +465,7 @@
                 <div class="control-group">
                   <label class="control-label">Unite d'administrative</label>
                   <div class="controls">
-                    <select v-model="editTransfert.ua_id" class="span3">
+                    <select v-model="editTransfert.ua_id" class="span">
                       <option
                         v-for="typeUniteA in uniteAdministratives"
                         :key="typeUniteA.id"
@@ -368,25 +475,12 @@
                   </div>
                 </div>
               </td>
-        <td>
-                 <div class="control-group">
-                  <label class="control-label">Destinataire</label>
-                  <div class="controls">
-                    <select v-model="editTransfert.unitezone_id" :readOnly="verrouDestinataire" class="span3">
-                      <option
-                        v-for="localgeo in destinationDynamiquesModifier(editTransfert.ua_id)"
-                        :key="localgeo.id"
-                        :value="localgeo.id"
-                      >{{localgeo.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-               <td >
+       
+               <td colspan="2">
                 <div class="control-group">
                   <label class="control-label">Ligne budgetaire</label>
                   <div class="controls">
-                        <select v-model="editTransfert.ligne_budgetaire_id" :readOnly="verrouLigneBudgetaire" class="span4">
+                        <select v-model="editTransfert.ligne_budgetaire_id" :readOnly="verrouLigneBudgetaire" class="span">
                       <option
                         v-for="localgeo in ligneBudgetaireDynamiquesModifier(editTransfert.ua_id)"
                         :key="localgeo.id"
@@ -398,11 +492,12 @@
                 </div>
               </td>
          </tr>
-<tr>
-  <td>
+
+             <tr>
+            <td>
               
                <div class="control-group">
-                  <label class="control-label">Montant transfert</label>
+                  <label class="control-label">Dotation initiale</label>
                   <div class="controls">
                        <input
                       type="number"
@@ -424,12 +519,12 @@
                <td>
               
                <div class="control-group">
-                  <label class="control-label">Cumul transfert</label>
+                  <label class="control-label">Cumul dotation transferée</label>
                   <div class="controls">
                        <input
                       type="number"
                    :value="montantCumulModifier(editTransfert.ligne_budgetaire_id)"
-                      class="span3"
+                      class="span"
                      readonly
                       
                     />
@@ -437,15 +532,15 @@
                   </div>
                 </div>
               </td>
+
                <td>
-              
                <div class="control-group">
-                  <label class="control-label">Disponible</label>
+                  <label class="control-label">Dotation disponible</label>
                   <div class="controls">
                        <input
                       type="number"
                    :value="dotationDisponibleModifier"
-                      class="span3"
+                      class="span"
                      readonly
                       
                     />
@@ -453,15 +548,18 @@
                   </div>
                 </div>
               </td>
+              </tr>
+
+              <tr>
                <td>
               
                <div class="control-group">
-                  <label class="control-label">Montant du contrat</label>
+                  <label class="control-label">Montant à transferer</label>
                   <div class="controls">
                        <input
                       type="number"
                     v-model="editTransfert.montant_total_contrat"
-                      class="span3"
+                      class="span"
                      :max="dotationDisponibleModifier"
                       
                     />
@@ -469,12 +567,11 @@
                   </div>
                 </div>
               </td>
-</tr>
-           <tr>
+            
               <td>
               
                <div class="control-group">
-                  <label class="control-label">	Solde</label>
+                  <label class="control-label">Dotation actuelle</label>
                   <div class="controls">
                        <input
                       type="number"
@@ -487,7 +584,7 @@
                   </div>
                 </div>
               </td>
-              <td>
+              <td colspan="2">
               
                <div class="control-group">
                   <label class="control-label">grande nature</label>
@@ -503,6 +600,8 @@
                   </div>
                 </div>
               </td>
+           </tr>
+           <tr>
                <td>
               
                <div class="control-group">
@@ -519,7 +618,7 @@
                   </div>
                 </div>
               </td>
-              <td colspan="2">
+              <td colspan="">
               
                <div class="control-group">
                   <label class="control-label">Acteur depense</label>
@@ -535,9 +634,117 @@
                   </div>
                 </div>
               </td> 
+              <td>
+              <div class="control-group">
+                  <label class="control-label">Fichier join</label>
+                  <div class="controls">
+                       <input
+                      type="file"
+                 
+                      class="span2"
+                     readonly
+                      
+                    />
+                   
+                  </div>
+                </div>
+              </td>
            </tr>
         </table>
-      </div>
+                    
+                   </div>
+                   <div id="tab20" class="tab-pane">
+                    
+                   <table class="table table-bordered table-striped">
+                       <tr>
+                      <td>
+                 <div class="control-group">
+                  <label class="control-label">Destinataire</label>
+                  <div class="controls">
+                    <select v-model="editTransfert.unitezone_id" :readOnly="verrouDestinataire" class="span">
+                      <option
+                        v-for="localgeo in destinationDynamiquesModifier(editTransfert.ua_id)"
+                        :key="localgeo.id"
+                        :value="localgeo.id"
+                      >{{localgeo.libelle}}</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+
+              <td colspan="">
+                <div class="control-group">
+                  <label class="control-label">Ligne budgetaire</label>
+                  <div class="controls">
+                        <select v-model="editTransfert.inputation_id" class="span">
+                      <option
+                        v-for="localgeo in derniereNivoPlanBudgetaire"
+                        :key="localgeo.id"
+                        :value="localgeo.id"
+                      >{{localgeo.code}}-{{localgeo.libelle}}</option>
+                    </select>
+                   
+                  </div>
+                </div>
+             </td>
+                
+                <td>
+              <div class="control-group">
+                  <label class="control-label">Date de reception</label>
+                  <div class="controls">
+                       <input
+                      type="date"
+                    v-model="editTransfert.date_reception"
+                      class="span"
+                     
+                      
+                    />
+                   
+                  </div>
+                </div>
+                </td>
+   </tr>
+
+        <tr>
+       <td colspan="">
+                <div class="control-group">
+                  <label class="control-label">Grande nature </label>
+                  <div class="controls">
+                        <select v-model="editTransfert.grande_natrue_id" class="span">
+                      <option
+                        v-for="localgeo in grandes_natures"
+                        :key="localgeo.id"
+                        :value="localgeo.id"
+                      >{{localgeo.libelle}}</option>
+                    </select>
+                   
+                  </div>
+                </div>
+             </td>
+              <td colspan="2">
+              
+               <div class="control-group">
+                  <label class="control-label">Montant transferé</label>
+                  <div class="controls">
+                       <input
+                      type="number"
+                    v-model="editTransfert.montant_total_contrat"
+                      class="span4"
+                     readonly
+                      
+                    />
+                   
+                  </div>
+                </div>
+              </td>
+              </tr>
+                   </table>
+
+                       </div>
+                    </div>
+   
+         
+      
       <div class="modal-footer">
         <a
           @click.prevent="modifierUniteAdministrativeLocal(editTransfert)"
@@ -580,7 +787,54 @@
              
             </div>
 
-            <div class="widget-content nopadding" v-if="uniteAdministratives.length" >
+            <table class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                      <th>Année</th>
+                                        <th>Numero T.</th>
+                                        <th>UA emettrice</th>
+                                        <th>Montant transféré</th>
+                                         <th>Ligne budgetaire </th>
+                                        
+                                         <th>UA receptrice</th>
+                                         		
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="odd gradeX" v-for="appelOffre in getPersonnaliseTransfert"
+                                        :key="appelOffre.id">
+                                        <td @dblclick="afficherModalTransfert(appelOffre.id)">
+                                            {{appelOffre.exerciceencours || 'Non renseigné'}}</td>
+
+                                             <td @dblclick="afficherModalTransfert(appelOffre.id)">
+                                            {{appelOffre.num_transfert || 'Non renseigné'}}</td>
+
+                                        <td @dblclick="afficherModalTransfert(appelOffre.id)">
+                                            {{afficherLibelleUa(appelOffre.ua_id) || 'Non renseigné'}}</td>
+
+                                            <td @dblclick="afficherModalTransfert(appelOffre.id)">
+                                            {{appelOffre.montant_total_contrat || 'Non renseigné'}}</td>
+
+                                             <td @dblclick="afficherModalTransfert(appelOffre.id)">
+                                            {{afficherImputation(appelOffre.ligne_budgetaire_id)|| 'Non renseigné'}} </td>
+
+                                            <td @dblclick="afficherModalTransfert(appelOffre.id)">
+                                            {{afficherUniteDeZone(appelOffre.unitezone_id )|| 'Non renseigné'}}</td>
+                                      
+                                           <td>
+                                        <div class="btn-group">
+                                            <button @click.prevent="supprimerTransfert(appelOffre.id)"  class="btn btn-danger ">
+                                                <span class=""><i class="icon-trash"></i></span></button>
+                                        </div>
+                                           </td>
+                                    </tr>
+
+                              
+                                    </tbody>
+                                </table>
+
+            <!-- <div class="widget-content nopadding" v-if="uniteAdministratives.length" >
               <transfertComponent v-for="equipement in uniteAdministratives"
                :key="equipement.id"
                 :groupe="equipement"
@@ -595,7 +849,7 @@
 
             
               
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -616,12 +870,12 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
-import transfertComponent from './transfertComponent'
+//import transfertComponent from './transfertComponent'
 import { formatageSomme } from "../../../../src/Repositories/Repository";
 export default {
   name: 'transfert',
  components: {
-      transfertComponent
+     // transfertComponent
   },
   data() {
     return {
@@ -654,11 +908,15 @@ export default {
       montant_restant: "",
       ligne_budgetaire_id: "",
       grandnatire_id: "",
+      grande_natrue_id:"",
+      inputation_id:"",
+      date_reception:"",
         ua_id: "",
         aj_transfert:"AJ"
       },
       editTransfert: {
        num_transfert:"",
+       date_reception:"",
       acteurdepense_id: "",
       unitezone_id: "",
       montant_total_contrat: "",
@@ -696,7 +954,8 @@ export default {
       "uniteZones",
       "getPersonnaliseBudgetGeneralParTransfert",
       "transferts",
-      "afficheTransfertValider"
+      "afficheTransfertValider",
+      "getPersonnaliseTransfert"
       // "chapitres",
       // "sections"
     ]),
@@ -798,6 +1057,41 @@ dotationDisponibleModifier() {
       return 0
     },
 
+    // afficher unite de 
+
+    afficherUniteDeZone(){
+      return id =>{
+        if(id!=null && id!=""){
+          const objet = this.uniteZones.find(item => item.id==id)
+          if(objet) return objet.libelle
+        }
+        return null
+      }
+    },
+
+    // afficher libelle ua
+
+    afficherLibelleUa(){
+      return id =>{
+        if(id!=null && id!=""){
+          const objet = this.uniteAdministratives.find(item => item.id==id)
+          if(objet) return objet.libelle
+        }
+        return null
+      }
+    },
+
+/// afficher imputation budgetaire
+
+afficherImputation(){
+  return id =>{
+        if(id!=null && id!=""){
+          const objet = this.plans_budgetaires.find(item => item.id==id)
+          if(objet) return objet.code.concat("    ", objet.libelle)
+        }
+        return null
+      }
+},
 soldeDisponible() {
 
   
@@ -1075,7 +1369,7 @@ typeFinancement() {
       return this.formData.ua_id == "";
     },
     verrouLigneBudgetaire() {
-      return this.formData.unitezone_id == "";
+      return this.formData.ua_id == "";
     },
   },
 
@@ -1093,13 +1387,21 @@ typeFinancement() {
       // "ajouterHistoriqueBudgetGeneral"
     ]),
 
-    afficherModalModifierMotifMandat(articles) {
+    // afficherModalModifierMotifMandat(articles) {
      
-      this.$("#exampleModalMotifMandat").modal({
+    //   this.$("#exampleModalMotifMandat").modal({
+    //     backdrop: "static",
+    //     keyboard: false
+    //   })
+    //   this.editTransfert = articles;
+    //   },
+
+      afficherModalTransfert(index){
+        this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       })
-      this.editTransfert = articles;
+      this.editTransfert = this.getPersonnaliseTransfert[index]
       },
 
  formatageSomme: formatageSomme,
@@ -1131,6 +1433,8 @@ typeFinancement() {
 this.ajouterHistoriqueTransfert(nouvelObjet)
       this.formData = {
         num_transfert:"",
+        inputation_id:"",
+        grande_natrue_id:"",
       acteurdepense_id: "",
       unitezone_id: "",
       montant_total_contrat: "",
@@ -1182,18 +1486,18 @@ this.$("#exampleModalMotifMandat").modal('hide');
     
     },
     // afficher modal de modification
-    afficherModalModifierUniteAdministrative(articles) {
-      this.$("#modificationModal").modal({
-        backdrop: "static",
-        keyboard: false
-      });
+    // afficherModalModifierUniteAdministrative(articles) {
+    //   this.$("#modificationModal").modal({
+    //     backdrop: "static",
+    //     keyboard: false
+    //   });
 
-      this.editTransfert = articles;
+    //   this.editTransfert = articles;
       
-    },
-    alert() {
-      console.log("ok");
-    },
+    // },
+    // alert() {
+    //   console.log("ok");
+    // },
 
     // formaterDate(date) {
     //   return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
@@ -1207,13 +1511,13 @@ this.$("#exampleModalMotifMandat").modal('hide');
 <style scoped>
 
 .tailgrand12{
-  width: 1500px;
-  margin: 0 -45%;
+  width: 1000px;
+  margin: 0 -20%;
  
 }
 .tailgrand121{
-  width: 1600px;
-  margin: 0 -48%;
+  width: 1000px;
+  margin: 0 -20%;
  
 }
 </style>

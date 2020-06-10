@@ -10,7 +10,11 @@
                 <div class="span12" >
 
                     <div class="widget-box">
+                        <button class="btn btn-danger" @click.prevent="afficherModalListeExecution">Retour</button>
+
                         <div class="widget-title">
+                             
+                            
                             <div align="right">
 
                                 <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
@@ -586,8 +590,8 @@
 <script>
     import moment from "moment";
     import { mapGetters, mapActions } from "vuex";
-    //import html2canvas from 'html2canvas'
-    //import * as JsPDF from 'jspdf'
+    // import html2canvas from 'html2canvas'
+    // import * as JsPDF from 'jspdf'
     import html2pdf from 'html2pdf.js'
     // import moment from "moment";
     // import { ModelListSelect } from "vue-search-select";
@@ -1095,7 +1099,10 @@
             // },
             ExporterEnExel(){
                 this.$refs.excel.click()
-            }
+            },
+            afficherModalListeExecution(){
+                window.history.back();
+            },
         }
     };
 </script>

@@ -12,6 +12,7 @@
     <MenuControlAxe v-if="active_el ==6"></MenuControlAxe>
     <MenuOperationRapport v-if="active_el ==7"></MenuOperationRapport>
     <MenuOpRisque v-if="active_el ==8"></MenuOpRisque>
+    <MenuMilieu v-if="active_el ==20"></MenuMilieu>
      <MenuDefaut v-if="active_el ==0"></MenuDefaut>
     <Search></Search>
     
@@ -36,6 +37,7 @@ import MenuControlAxe from "../components/navs/MenuControlAxe";
 import MenuOperationRapport from "../components/navs/MenuOperationRapport.vue";
 import MenuOpRisque from "../components/navs/MenuOpRisque.vue";
 import MenuDefaut from "../components/navs/MenuDefaut.vue";
+import MenuMilieu from "../components/navs/MenuMilieu.vue";
 import Search from "../components/Search";
 
 import { mapState, mapActions} from "vuex";
@@ -52,6 +54,7 @@ export default {
    MenuOperationRapport,
    MenuOpRisque,
    MenuDefaut,
+   MenuMilieu,
     Search
     
   },
@@ -101,7 +104,8 @@ export default {
      "getAllRealiteServiceFait",
      "getAllLiquidation",
      "getOrganigrammeUa",
-     "getAllBanqueUa"
+     "getAllBanqueUa",
+     "getAllDecompteFacture"
     ]),
             ...mapActions('personnelUA', ["getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
@@ -236,6 +240,7 @@ this.getTypeAppel()
     this.getAllUniteAdministrative();
      this.getOrganigrammeUa()
      this.getAllBanqueUa()
+     this.getAllDecompteFacture()
     // this.getAllArchivageDocument();
 // this.getAllDirection()
 this.getAllServiceua()

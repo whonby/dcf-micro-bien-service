@@ -5,6 +5,76 @@ var housecall= require('housecall')
 var queue = housecall({concurrency: 2, cooldown: 1000})
 
 
+// export function getDecompte({ commit }) {
+//   queue.push(() => axios.get('/Listedecompte').then((response) => {
+//     commit('GET_ALL_DECOMPTE', response.data.data)
+
+//   }).catch(error => console.log(error)))
+// }
+
+
+
+
+// // action pour modifier candidat selectionner
+// export function modifierDecompte({commit}, formData){
+//   asyncLoading(axios.post('/modifierDecompte',formData)).then(response =>{
+//       if(response.status == 201){
+//         console.log(response.data)
+//         commit('MODIFIER_DECOMPTE', response.data)
+          
+//           this.$app.$notify({
+//             title: '',
+//             text: 'Enregistrement effectué !',
+//             type:"success"
+//           })
+//       }
+
+//   }).catch(error => console.log(error))
+// }
+
+// // supprimer candidat selectionner
+// export function supprimerDecompte({commit}, id) {
+//   return this.$app.$dialog
+//  .confirm("Voulez vouz vraiment supprimer ?.")
+//  .then(dialog => {
+//    commit('SUPPRIMER_DECOMPTE', id)
+//    // // dialog.loading(false) // stops the proceed button's loader
+//    return axios.delete('/supprimerdecompte/' + id).then(() => dialog.close() )   
+//  })
+
+// }
+
+
+// export function ajouterDecompte({ commit }, formData) {
+//   asyncLoading(axios.post('/ajouterdecompte', formData)).then(response => {
+//     if (response.status == 201) {
+//       console.log(response.data)
+//       commit('AJOUTER_DECOMPTE', response.data)
+
+//       this.$app.$notify({
+//         title: 'success ',
+//         text: 'Enregistrement effectué !',
+//         type: "success"
+//       })
+//     }
+
+//   }).catch(error => console.log(error))
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 export  function  getCandidatSelectionner({commit}) {
@@ -4074,11 +4144,11 @@ export function ajouterChoixProcedure({ commit }, elementAjout) {
     if (response.status == 201) {
       commit('AJOUTER_CHOIX_PROCEDURE', response.data)
 
-      this.$app.$notify({
-        title: 'success ',
-        text: 'Enregistrement effectué !',
-        type: "success"
-      })
+      // this.$app.$notify({
+      //   title: 'success ',
+      //   text: 'Enregistrement effectué !',
+      //   type: "success"
+      // })
     }
 
   }).catch(error => console.log(error))

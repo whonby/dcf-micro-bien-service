@@ -497,7 +497,7 @@ typeProcedureLibelle() {
 
 
             ajouterLettreInv(){
-                if(confirm("veillez selectionner un fichier svp sinon la validation ne sera executé merci !")){
+               
 
 
                  const formData = new FormData();
@@ -525,9 +525,7 @@ typeProcedureLibelle() {
                     destination:"",
                     date_cojo:""
                 }
-                }else{
-                    return "possibilité de selectionner un veiller"
-                }
+               
                 
             },
 
@@ -537,7 +535,7 @@ typeProcedureLibelle() {
 
            
  modfications(){
-     if(confirm("veiller selectionner un fichier svp sinon la modifier ne sera paqs effectué merci!")){
+    // if(confirm("veiller selectionner un fichier svp sinon la modifier ne sera paqs effectué merci!")){
        //console.log(this.edite_demande_dao)
                 const formData = new FormData();
                formData.append('appel_offre_id', this.affichierAppelOffreid(this.macheid));
@@ -563,9 +561,10 @@ typeProcedureLibelle() {
                  this.modifierLettreInvitation(formData,config)
                   this.getLettreInvitation()
                this.$('#modifierActeEF').modal('hide');
-     }else{
-         return " merci d'avoir selectionner un ficier mercie!"
-     }
+    //  }
+    //  else{
+    //      return " merci d'avoir selectionner un ficier mercie!"
+    //  }
               
             },
 

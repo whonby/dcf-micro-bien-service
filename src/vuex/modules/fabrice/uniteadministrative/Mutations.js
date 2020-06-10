@@ -1,5 +1,18 @@
 
 
+const GET_ALL_DECOMPTE_FACTURE = (state, tableaudecomptes) => {
+  state.decomptefactures = tableaudecomptes;
+};
+
+// ajouter type_textes
+const AJOUTER_DECOMPTE_FACTURE = (state, nouveau_decomptes) => {
+  // state.typeTextes = [...nouveau_type, ...state.typeTextes]
+  state.decomptefactures.unshift(nouveau_decomptes);
+};
+
+
+
+
 const GET_ALL_BANQUE_UA = (state, tableauBanqueUa) => {
   state.banqueUa = tableauBanqueUa;
 };
@@ -579,7 +592,8 @@ export {
   MODIFIER_FONCTION,
   SUPPRIMER_FONCTION,
 
-
+  GET_ALL_DECOMPTE_FACTURE,
+  AJOUTER_DECOMPTE_FACTURE,
 
 
 

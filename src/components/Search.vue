@@ -19,7 +19,7 @@
                
               </ul>
             </div>
-                <input type="text" style="background-color: black;" readonly />
+                <!--<input type="text" style="background-color: black;" readonly />-->
 
   </div>
 </template>

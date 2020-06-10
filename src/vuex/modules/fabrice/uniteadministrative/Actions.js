@@ -602,8 +602,10 @@ export function getAllTransfert({ commit }) {
 export function ajouterTransfert({ commit, dispatch }, nouveau) {
   asyncLoading(axios
     .post("/ajouterTransfert", {
-      num_transfert: nouveau.num_transfert,
+      	num_transfert: nouveau.num_transfert,
       acteurdepense_id: nouveau.acteurdepense_id,
+      grande_natrue_id:nouveau.grande_natrue_id,
+      inputation_id:nouveau.inputation_id,
       unitezone_id: nouveau.unitezone_id,
       montant_total_contrat: nouveau.montant_total_contrat,
       montant_transfert: nouveau.montant_transfert,
@@ -634,27 +636,29 @@ export function ajouterTransfert({ commit, dispatch }, nouveau) {
 }
 
 // modifier
-export function modifierTransfert({ commit, dispatch }, nouveau) {
+export function modifierTransfert({ commit, dispatch }, elementModifie) {
   asyncLoading(axios
-    .put("/modifierTransfert/" + nouveau.id, {
-      num_transfert: nouveau.num_transfert,
-      acteurdepense_id: nouveau.acteurdepense_id,
-      unitezone_id: nouveau.unitezone_id,
-      montant_total_contrat: nouveau.montant_total_contrat,
-      montant_transfert: nouveau.montant_transfert,
-      fonction_id: nouveau.fonction_id,
-      montant_restant: nouveau.montant_restant,
-      ligne_budgetaire_id: nouveau.ligne_budgetaire_id,
-      grandnatire_id: nouveau.grandnatire_id,
-      ua_id: nouveau.ua_id,
-        	decision_cf: nouveau.decision_cf,
-      motif: nouveau.motif,
-      observation: nouveau.observation,
-      date_motif: nouveau.date_motif,
-      date_jours: nouveau.date_jours, 
-      delaitraitement: nouveau.delaitraitement,
-      typefinancement_id: nouveau.typefinancement_id,
-      exerciceencours: nouveau.exerciceencours
+    .put("/modifierTransfert/" + elementModifie.id, {
+      	num_transfert: elementModifie.num_transfert,
+      acteurdepense_id: elementModifie.acteurdepense_id,
+      grande_natrue_id:elementModifie.grande_natrue_id,
+      inputation_id:elementModifie.inputation_id,
+      unitezone_id: elementModifie.unitezone_id,
+      montant_total_contrat: elementModifie.montant_total_contrat,
+      montant_transfert: elementModifie.montant_transfert,
+      fonction_id: elementModifie.fonction_id,
+      montant_restant: elementModifie.montant_restant,
+      ligne_budgetaire_id:elementModifie.ligne_budgetaire_id,
+      grandnatire_id:elementModifie.grandnatire_id,
+      ua_id:elementModifie.ua_id,
+        	decision_cf:elementModifie.decision_cf,
+      motif:elementModifie.motif,
+      observation:elementModifie.observation,
+      date_motif:elementModifie.date_motif,
+      date_jours:elementModifie.date_jours, 
+      delaitraitement:elementModifie.delaitraitement,
+      typefinancement_id:elementModifie.typefinancement_id,
+      exerciceencours:elementModifie.exerciceencours
     }))
     .then(response => {
       commit("MODIFIER_TRANSFERT", response.data);
@@ -1126,6 +1130,39 @@ export function supprimerLigneExempter({ commit }, id) {
 
 
 
+
+export function getAllDecompteFacture({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listedecomptefacture")
+      .then(response => {
+        commit("GET_ALL_DECOMPTE_FACTURE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+
+// ajouter type texte
+export function ajouterDecompteFacture({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterdecomptefacture", nouveau)).then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_DECOMPTE_FACTURE", response.data);
+
+      }
+    }).catch(error => console.log(error))
+}
+
+
+
+
+
+
+
+
+
+
 export function getAllRealiteServiceFait({ commit }) {
   queue.push(() => {
     axios
@@ -1143,11 +1180,7 @@ export function ajouterRealiteServiceFait({ commit }, nouveau) {
     .post("/ajouterRealiteFait", nouveau)).then(response => {
       if (response.status == 201) {
         commit("AJOUTER_REALITE_SERVICE_FAIT", response.data);
-          this.$app.$notify({
-          title: 'Success',
-          text: 'Enregistrement Effectué avec Succès!',
-          type: "success"
-        })
+       
       }
     }).catch(error => console.log(error))
 }
@@ -1173,7 +1206,8 @@ export function modifierRealiteServiceFait({ commit }, nouveau) {
     	montant: nouveau.	montant,
       exercice_budget: nouveau.	exercice_budget,
     engagement_id: nouveau.engagement_id,
-    marchetype: nouveau.marchetype
+    marchetype: nouveau.marchetype,
+    motif_controleur: nouveau.motif_controleur
     }
   
   )).then(response => {
@@ -1218,11 +1252,7 @@ export function ajouterLiquidation({ commit }, nouveau) {
     .post("/ajouterLiquidation", nouveau)).then(response => {
       if (response.status == 201) {
         commit("AJOUTER_LIQUIDATION", response.data);
-        this.$app.$notify({
-          title: 'Success',
-          text: 'Enregistrement Effectué avec Succès!',
-          type: "success"
-        })
+        
       }
     }).catch(error => console.log(error))
 }
@@ -1262,7 +1292,8 @@ export function modifierLiquidation({ commit, dispatch}, nouveau) {
       date_controleur_financier: nouveau.date_controleur_financier,
       observation_controleur_financier: nouveau.observation_controleur_financier,
       marchetype: nouveau.marchetype,
-      facture_id: nouveau.facture_id
+      facture_id: nouveau.facture_id,
+      motif_controleur_f: nouveau.motif_controleur_f
     })).then(response => {
       commit("MODIFIER_LIQUIDATION", response.data);
       dispatch('getAllLiquidation')

@@ -149,13 +149,14 @@
         
   
         </div>
-          <!-- <div class="modal-footer">
-        
-        <a data-dismiss="modal" class="btn btn-danger" @click.prevent="retourListeEntreprise" href="#">Voir Tableau</a>
-       
-      </div> -->
+          
       </div>
     </div>
+<div class="modal-footer">
+        
+        <a data-dismiss="modal" class="btn btn-danger" @click.prevent="afficherModalListeExecution" href="#">Retour</a>
+       
+      </div>
   </div>
 </template>
 <script>
@@ -490,7 +491,9 @@ afficheTelephoneFournisseur() {
         // retourEngagement(){
         //          this.$router.push({ name:'Engagement/:id' })
         //     },
-
+afficherModalListeExecution(){
+                window.history.back();
+            },
   }
 };
 </script>

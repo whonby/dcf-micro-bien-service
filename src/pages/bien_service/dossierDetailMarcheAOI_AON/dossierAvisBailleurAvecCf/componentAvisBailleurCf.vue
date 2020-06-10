@@ -302,11 +302,22 @@
           
         </div>
 
-          <div class="control-group">
+          <!-- <div class="control-group">
                         <label class="control-label">Motif</label>
                         <div class="controls">
                           <select v-model="edit_bailleur.plan_motif_decision_id" class="span">
                                 <option v-for="varText in motifDecisions" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                        
+                        </div>
+                    </div> -->
+
+                     <div class="control-group">
+                        <label class="control-label">Motif</label>
+                        <div class="controls">
+                          <select v-model="edit_bailleur.plan_motif_decision_id" class="span">
+                                <option v-for="varText in AffichierElementParent(affichierIdActeFinancierDansActePlan)" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
                             </select>
                         
@@ -373,6 +384,9 @@ selectedFileDemandeAno:""
                 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises']),
             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
                 'types_financements']) ,
+
+                  ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision', 
+  'plans_Decision']),
                 
     ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
             
@@ -409,6 +423,29 @@ selectedFileDemandeAno:""
         return qtereel.reference;
       }
       return 0
+        }
+      };
+    },
+
+
+
+     affichierIdActeFinancierDansActePlan() {
+      const qtereel = this.plans_Decision.find(
+        qtreel => qtreel.code == "11",
+       
+      );
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
+
+AffichierElementParent() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.parent == id);
         }
       };
     },
@@ -526,7 +563,7 @@ affichierAppelOffreid() {
             },
 
               ajouterDemandeAnoLocal(){
-                  if(confirm("veiller charger le fichier")){
+                
                     const formData = new FormData();
                 formData.append('fichier', this.selectedFileDemandeAno, this.selectedFileDemandeAno.name);
               //  formData.append('proce_verbal_jugement_offre_id', this.formBailleur.proce_verbal_jugement_offre_id);
@@ -550,7 +587,7 @@ affichierAppelOffreid() {
                     
                    // proce_verbal_jugement_offre_id:""
                 }
-                  }else return "fichier neccessaire"
+                  
                 
             },
 

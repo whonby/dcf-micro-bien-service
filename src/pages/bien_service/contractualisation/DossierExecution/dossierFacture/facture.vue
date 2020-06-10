@@ -1,23 +1,48 @@
-montant_cumul
-afficherCompteUtilisateur1
-afficherObjetFacture
-montantCumulerModifier
-afficherObjetFacture
-afficheligneEconom
-sommeMontant
-afficheligneEconomiqueBudgetaire
-sources_financements
-afficherligneEconomiqueBudgetaire
-afficheNomFournisseur
-afficherNumeroFcture
-detail_marche
-afficherMontantFacture
-dotationInite
-Dotation_Initiale
-sommeEgagementLigne
+
 <template>
 
 <div>
+
+   <div id="modalTypeEngagement" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Choisir le type de procedure</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+         
+                    <tr>
+                      <td>
+<div class="control-group">
+                            <label class="control-label">Type de procedure</label>
+                            <div class="controls">
+                             
+                              <select v-model="formData.tprocedure" class="span12">
+                             
+                                 <option value="Engagement Direct">Engagement Direct</option>
+                               <option value="Engagement Bon de Commande">Engagement Bon de Commande</option>
+                               
+                              </select>
+                           
+                            </div>
+                          </div>
+                      </td>
+                      </tr>     
+                            
+                         
+         
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a
+          @click.prevent="ajouterChoixProcLocal"
+          class="btn btn-primary"
+          href="#"
+         
+        >Valider</a>
+        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
+      </div>
+    </div>
     <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
     <div id="modatFactureModifier" class="modal hide taillemodal45">
       <div class="modal-header">
@@ -33,7 +58,7 @@ sommeEgagementLigne
               <div class="control-group">
                 <label class="control-label">Type facture</label>
                 <div class="controls">
-                  <select v-model="formData1.typfacture_id" class="span3" >
+                  <select v-model="formData1.typfacture_id" class="span" >
                     
                      <option
                         v-for="typeFact in typeFactures"
@@ -52,7 +77,7 @@ sommeEgagementLigne
                     type="text"
                     
                    v-model="formData1.numero_facture"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -66,7 +91,7 @@ sommeEgagementLigne
                     type="date"
                     v-model="formData1.date_facture"
                    
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -80,7 +105,7 @@ sommeEgagementLigne
                 <div class="controls">
                  <input
                     type="text"
-                    
+                    :value="macheid"
                    readonly
                     class="span"
                    
@@ -100,7 +125,7 @@ sommeEgagementLigne
                 <label class="control-label">Objet facture</label>
                 <div class="controls">
                  
-                  <textarea rows="1" v-model="formData1.objet_facture" class="span5">
+                  <textarea rows="1" v-model="formData1.objet_facture" class="span6">
 
                   </textarea>
                 </div>
@@ -114,7 +139,7 @@ sommeEgagementLigne
                     type="text"
                     
                  :value="afficheNomFournisseur(AfficherFournisseur_id)"
-                    class="span3"
+                    class="span"
                     readonly
                   />
                   
@@ -151,7 +176,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -165,7 +190,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -179,7 +204,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.quantite"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -221,7 +246,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation2"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -235,7 +260,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire2"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -250,7 +275,7 @@ sommeEgagementLigne
                    
                        v-model="formData1.quantite2"
                  
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -287,7 +312,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation3"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -301,7 +326,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire3"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -315,7 +340,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.quantite3"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -352,7 +377,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation4"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -366,7 +391,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire4"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -380,7 +405,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.quantite4"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -417,7 +442,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation5"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -431,7 +456,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire5"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -445,7 +470,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.quantite5"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -482,7 +507,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation6"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -496,7 +521,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire6"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -510,7 +535,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.quantite6"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -547,7 +572,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation7"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -561,7 +586,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire7"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -575,7 +600,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.quantite7"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -612,7 +637,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation8"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -626,7 +651,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire8"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -640,7 +665,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.quantite8"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -677,7 +702,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation9"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -691,7 +716,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire9"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -705,7 +730,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.quantite9"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -742,7 +767,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation10"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -756,7 +781,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire10"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -770,7 +795,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.quantite10"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -845,7 +870,7 @@ sommeEgagementLigne
                     type="hidden"
                     :value="afficherEnorere2"
                    
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -936,10 +961,10 @@ sommeEgagementLigne
               <div class="control-group">
                 <label class="control-label">Type facture</label>
                 <div class="controls">
-                  <select v-model="formData1.typfacture_id" class="span3" >
+                  <select v-model="formData1.typfacture_id" class="span" >
                     
                      <option
-                        v-for="typeFact in typeFactures"
+                        v-for="typeFact in afficherTypeFactureDefinitive"
                         :key="typeFact.id"
                         :value="typeFact.id"
                       >{{typeFact.libelle}}</option>
@@ -955,7 +980,7 @@ sommeEgagementLigne
                     type="text"
                     
                    v-model="formData1.numero_facture"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -969,7 +994,7 @@ sommeEgagementLigne
                     type="date"
                     v-model="formData1.date_facture"
                    
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -983,7 +1008,8 @@ sommeEgagementLigne
                 <div class="controls">
                  <input
                     type="text"
-                    
+
+                    :value="afficheLibelleUa(afficheUa_id(macheid))"
                    readonly
                     class="span"
                    
@@ -1001,12 +1027,19 @@ sommeEgagementLigne
                <td colspan="2"> 
               <div class="control-group">
                 <label class="control-label">Objet facture</label>
-                <div class="controls">
+                <!-- <div class="controls">
                  
-                  <textarea rows="3"  class="span5">
+                  <textarea rows="1"  class="span4">
 
                   </textarea>
-                </div>
+                </div> -->
+                <input
+                    type="text"
+                    
+                 :value="afficheObjetMarche(macheid)"
+                    class="span"
+                    readonly
+                  />
               </div>
                </td>
                <td>
@@ -1017,7 +1050,7 @@ sommeEgagementLigne
                     type="text"
                     
                  :value="afficheNomFournisseur(AfficherFournisseur_id)"
-                    class="span3"
+                    class="span"
                     readonly
                   />
                 </div>
@@ -1053,7 +1086,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1067,7 +1100,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1081,7 +1114,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.quantite"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1095,7 +1128,7 @@ sommeEgagementLigne
                     type="number"
                   
                  :value="montantHT1"
-                    class="span"
+                    class="span5"
                     readonly
                   />
                   <button class="btn btn-success"  v-on:click="showPopup2()" >
@@ -1123,7 +1156,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation2"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1137,7 +1170,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire2"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1152,7 +1185,7 @@ sommeEgagementLigne
                    
                        v-model="formData1.quantite2"
                  
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1189,7 +1222,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation3"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1203,7 +1236,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire3"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1217,7 +1250,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.quantite3"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1254,7 +1287,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation4"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1268,7 +1301,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire4"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1282,7 +1315,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.quantite4"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1319,7 +1352,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation5"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1333,7 +1366,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire5"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1347,7 +1380,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.quantite5"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1384,7 +1417,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation6"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1398,7 +1431,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire6"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1412,7 +1445,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.quantite6"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1449,7 +1482,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation7"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1463,7 +1496,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire7"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1477,7 +1510,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.quantite7"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1514,7 +1547,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation8"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1528,7 +1561,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire8"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1542,7 +1575,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.quantite8"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1579,7 +1612,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation9"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1593,7 +1626,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire9"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1607,7 +1640,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.quantite9"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1644,7 +1677,7 @@ sommeEgagementLigne
                     type="text"
                     
                   v-model="formData1.designation10"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1658,7 +1691,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.prix_unitaire10"
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1672,7 +1705,7 @@ sommeEgagementLigne
                     type="number"
                     
                   v-model="formData1.quantite10"
-                    class="span3"
+                    class="span"
                     
                   />
                 </div>
@@ -1747,7 +1780,7 @@ sommeEgagementLigne
                     type="hidden"
                     :value="afficherEnorere2"
                    
-                    class="span3"
+                    class="span"
                    
                   />
                 </div>
@@ -1822,39 +1855,905 @@ sommeEgagementLigne
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
- <div id="modalTypeEngagement" class="modal hide">
+ 
+  <div id="modalFactureAjouterProforma" class="modal hide taillemodal45">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Choisir le type de procedure</h3>
+        <h3>Ajouter Facture</h3>
       </div>
-      <div class="modal-body">
-        <form class="form-horizontal" >
+      <div class="modal-body" >
+        <table class="table table-bordered table-striped ">
          
-                         
-                            <div class="control-group">
-                            <label class="control-label">Type de procedure</label>
-                            <div class="controls">
-                             
-                              <select v-model="formData.tprocedure">
-                             
-                                 <option value="Engagement Direct">Engagement Direct</option>
-                               <option value="Engagement Bon de Commande">Engagement Bon de Commande</option>
-                               
-                              </select>
-                           
-                            </div>
-                          </div>
-                         
+          <tr>
+              <td>
+              
+              <div class="control-group">
+                <label class="control-label">Type facture</label>
+                <div class="controls">
+                  <select v-model="formData1.typfacture_id" class="span" >
+                    
+                     <option
+                        v-for="typeFact in afficherTypeFactureProforma"
+                        :key="typeFact.id"
+                        :value="typeFact.id"
+                      >{{typeFact.libelle}}</option>
+                  </select>
+                </div>
+              </div>
+            </td>
+              <td>
+              <div class="control-group">
+                <label class="control-label">Numero facture</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                   v-model="formData1.numero_facture"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+               </td>
+               <td>
+              <div class="control-group">
+                <label class="control-label">Date de la facture</label>
+                <div class="controls">
+                  <input
+                    type="date"
+                    v-model="formData1.date_facture"
+                   
+                    class="span"
+                   
+                  />
+                </div>
+              </div>
+             
+            </td>
+             <td>
+              
+              <div class="control-group">
+                <label class="control-label">Unite administrative</label>
+                <div class="controls">
+                 <input
+                    type="text"
+
+                    :value="afficheLibelleUa(afficheUa_id(macheid))"
+                   readonly
+                    class="span"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             
+             
+            
+            
+
+          </tr>
+           <tr>
+               <td colspan="2"> 
+              <div class="control-group">
+                <label class="control-label">Objet facture</label>
+                <div class="controls">
+                 
+                  <textarea rows="1"  class="span4">
+
+                  </textarea>
+                </div>
+              </div>
+               </td>
+               <td>
+              <div class="control-group">
+                <label class="control-label">Fournisseur</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                 :value="afficheNomFournisseur(AfficherFournisseur_id)"
+                    class="span"
+                    readonly
+                  />
+                </div>
+              </div>
+            </td>
+               <td>
+              
+              <div class="control-group">
+                <label class="control-label">exonéré</label>
+                <div class="controls">
+                  <select v-model="formData1.exonere" class="span">
+                  
+                    <option value="0">Oui</option>
+                     <option value="1">Non</option>
+                  </select>
+                 <input
+                    type="hidden"
+                    
+                v-model="formData1.exonere"
+                    class="span"
+                    readonly
+                  />
+                </div>
+              </div>
+            </td>           
+          </tr>
+          <tr  class="odd gradeX">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire"
+                    class="span"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                  
+                 :value="montantHT1"
+                    class="span5"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup2()" >
+                        <span>
+                          <i class=" icon-plus"></i>
+                        </span>
+                      </button>
+                       <!-- <button class="btn btn-danger"  v-on:click="showPopup20()" >
+                        <span>
+                          <i class=" icon-remove"></i>
+                        </span>
+                      </button> -->
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+        <!-- 2 ligne -->
+         <tr  class="odd gradeX" v-show="popupState2">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation2"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire2"
+                    class="span"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                   
+                       v-model="formData1.quantite2"
+                 
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT2"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup3()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState3">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation3"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire3"
+                    class="span"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite3"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT3"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup4()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState4">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation4"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire4"
+                    class="span"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite4"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT4"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup5()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState5">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation5"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire5"
+                    class="span"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite5"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT5"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup6()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState6">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation6"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire6"
+                    class="span"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite6"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT6"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup7()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState7">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation7"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire7"
+                    class="span"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite7"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT7"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup8()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState8">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation8"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire8"
+                    class="span"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite8"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                 :value="montantHT8"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup9()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState9">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation9"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire9"
+                    class="span"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite9"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  :value="montantHT9"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup10()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+           <!-- 3 ligne -->
+         <tr  class="odd gradeX" v-show="popupState10">
+            <td>
+              <div class="control-group">
+                <label class="control-label">Désignation</label>
+                <div class="controls">
+                  <input
+                    type="text"
+                    
+                  v-model="formData1.designation10"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+                <label class="control-label">Prix unitaire</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.prix_unitaire10"
+                    class="span"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Quantité</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                  v-model="formData1.quantite10"
+                    class="span"
+                    
+                  />
+                </div>
+              </div>
+            </td>
+             <td>
+              <div class="control-group">
+                <label class="control-label">Total</label>
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                   :value="montantHT10"
+                    class="span"
+                    readonly
+                  />
+                  <button class="btn btn-success"  v-on:click="showPopup10()" >
+                        <span>
+                          <i class=" icon-plus-sign"></i>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </td>
+                  
+          </tr>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Montant HT</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+                :value="totalMontantHT"
+                    class="span"
+                   readonly
+                  />
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Taux</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="afficherEnorere"
+                    class="span"
+                   readonly
+                  />
+                  
+                   <input
+                    type="hidden"
+                    :value="afficherEnorere2"
+                   
+                    class="span"
+                   
+                  />
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">TVA</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="montantTva"
+                    class="span"
+                   readonly
+                  />
+                  
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
          
-        </form>
+          <tr  class="odd gradeX" >
+            <td colspan="3">
+              <div class="control-group">
+                <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
+               
+              </div>
+            </td>
+            <td>
+              <div class="control-group">
+               
+                <div class="controls">
+                  <input
+                    type="number"
+                    
+              :value="montantHTt"
+                    class="span"
+                   readonly
+                  />
+                
+                </div>
+              </div>
+            </td>
+            
+            
+                  
+          </tr>
+        </table>
       </div>
       <div class="modal-footer">
         <a
-          @click.prevent="ajouterChoixProcLocal"
+          @click.prevent="ajouterFactureLocal(formData1)"
           class="btn btn-primary"
           href="#"
-         
-        >Valider</a>
+           
+        >Valider</a> 
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div>
@@ -1862,11 +2761,11 @@ sommeEgagementLigne
                 
                 <div class="span4"></div>
                                 <div class="span4"></div>
-                                <div class="span4" align="right">
+                                <!-- <div class="span4" align="right">
                                    
                                       <button class="btn btn-success" @click="afficherModalProcedureFacture" >Ajouter Facture</button>
 
-                              </div>
+                              </div> -->
                  
                       <table class="table table-bordered table-striped" v-if="macheid">
               
@@ -1889,7 +2788,7 @@ sommeEgagementLigne
                               
                                 
                                 
-                                <th>Action</th>
+                                <th colspan="2">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -1914,23 +2813,34 @@ sommeEgagementLigne
                      <td @dblclick="afficherModalModifierFacture(index)">{{formatageSomme(parseFloat(factu.prix_propose_ttc))|| 'Non renseigné'}}</td>
                       
                      
-                     <td>
-                        <button class="btn "  @click="afficherModalAjouter(factu.id)" title="Ajouter engagement">
+                     <td v-if="factu.typeProcedure == 2">
+                       <router-link :to="{ name: 'AjouterEngagementFactureProf', params: { id: factu.id }}"
+                class="btn btn-default " title="Ajouter Engagement">
+                  <span class=""><i class="   icon-legal"></i></span>
+                   </router-link> 
+                      </td>
+                      <td v-else>
+                        <router-link :to="{ name: 'AjoutMandatDirect', params: { id: factu.id }}"
+                class="btn btn-default " title="Ajouter Mandat">
+                  <span class=""><i class="  icon-random"></i></span>
+                   </router-link> 
+                   
+                       
+                      </td>
+                      <td>
+                         <button class="btn btn-danger" @click="supprimerFacture(factu.id)">
                         <span>
-                          <i class="icon   icon-folder-close"></i>
+                          <i class="icon icon-trash"></i>
                         </span>
                       </button>
+                      </td>
                        <!-- <button class="btn "  @click="afficherModalAjouterMandatDirect(factu.id)" title="Ajouter Mandat">
                         <span>
                           <i class="icon   icon-folder-close"></i>
                         </span>
                       </button> -->
-                      <button class="btn btn-danger" @click="supprimerFacture(factu.id)">
-                        <span>
-                          <i class="icon icon-trash"></i>
-                        </span>
-                      </button>
-                    </td>
+                     
+                   
                   </tr>
                                     </tbody>
                                 
@@ -1946,7 +2856,11 @@ sommeEgagementLigne
 
 
 
-
+<fab :actions="fabActions" @cache="afficherModalProcedureFacture" main-icon="apps" bg-color="green"></fab>
+ <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalProcedureFacture()">Open</button>
+      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+<!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
+<notifications  />
 
 
     </div>
@@ -1957,8 +2871,15 @@ import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from './../../../../../Repositories/Repository';
 import moment from 'moment';
 export default {
+  
     data(){
         return{
+           fabActions: [
+        {
+          name: "cache",
+          icon: "add"
+        }
+      ],
       formData :{
 s_ua_id:"",
 serviceua_id:"",
@@ -2069,7 +2990,7 @@ search:""
     created(){},
 
               computed: {
-            ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+            ...mapGetters("bienService", ['decomptes','modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -2116,6 +3037,107 @@ search:""
        
     ]),
     ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+
+
+
+afficheProcedure() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.choixprocedure.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.tprocedure;
+      }
+      return 0
+        }
+      };
+    },
+afficheUa_id() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.unite_administrative_id;
+      }
+      return 0
+        }
+      };
+    },
+afficheLibelleUa() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+afficheObjetMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.objet;
+      }
+      return 0
+        }
+      };
+    },
+
+    afficheNomFournisseur() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.raison_sociale;
+      }
+      return 0
+        }
+      };
+    },
+numeroDecompte() {
+      const val = this.AfficheDecompte(this.macheid).length + 0;
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+
+ AfficheDecompte () {
+                return id => {
+                    if (id != "") {
+                        return  this.decomptes.filter(normeEquipe => normeEquipe.marche_id == id);
+                    }
+                }
+            },
+
+
+
+afficherTypeFactureProforma() {
+               
+                        return  this.typeFactures.filter(normeEquipe => normeEquipe.code == 1);
+                       
+                 
+            },
+
+afficherTypeFactureDefinitive() {
+               
+                        return  this.typeFactures.filter(normeEquipe => normeEquipe.code == 2);
+                       
+                 
+            },
+
+
 
     sommeEgagementLigne: function () {
                 return id => {
@@ -2491,18 +3513,18 @@ else {
       }
       return 0
     },
-    afficheNomFournisseur() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
+    // afficheNomFournisseur() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.entreprises.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.raison_sociale;
-      }
-      return 0
-        }
-      };
-    },
+    //   if (qtereel) {
+    //     return qtereel.raison_sociale;
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
      nomFournisseur() {
       
       const norme = this.getActeEffetFinancierPersonnaliser.find(normeEquipe => normeEquipe.marche_id == this.macheid);
@@ -2664,14 +3686,28 @@ montantTva() {
       
       return 0
     },
-
+afficheMarcheType(){
+if(this.detail_marche.type_marche.libelle == "Travaux"){
+return 1
+}
+else{
+  return 2
+}
+},
       },
  
       methods:{ 
 
           ...mapActions('bienService',[  "ajouterAvenant",
       "modifierAvenant",
-      "supprimerAvenant",]),
+      "supprimerAvenant",
+      "modifierDecompte",
+      "ajouterDecompte",
+      "ajouterChoixProcedure",
+       "ajouterFacture",
+                "modifierFacture",
+                "supprimerFacture",
+      ]),
  ...mapActions("uniteadministrative", [
      "getAllServiceua",
       "ajouterService",
@@ -2689,7 +3725,17 @@ montantTva() {
       
      
     ]),
-    
+    //  afficherFormulaireModalAjouterMandatDirect(){
+    //             this.$router.push({ name: 'AjoutMandatDirect' , params: { id:id: marche_id }})
+    //         },
+afficherModalAjouterMandatDirect(id) {
+      this.$("#exampleModalMandat").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+      // this.formDataEngage = this.afficheMarcheEngage(this.detail_marche.id).find(recupererObjet => recupererObjet.id == id)
+        this.formDataFactureDefinitif = this.afficheFactureTableau(this.detail_marche.id).find(recupererObjet => recupererObjet.id == id)
+    },
 afficherModalProcedureFacture() {
 
    if(this.DisponibleBudgetaireApresLiquidation < this.montantMarcheAvecAvenant)
@@ -2727,8 +3773,8 @@ this.ajouterChoixProcedure(nouvelObjet)
 this.formData= {
 tprocedure :""
 }
-this.$("#modalTypeEngagement").modal('hide');
- this.$("#modalFactureAjouterEngagementDirect").modal({
+ this.$("#modalTypeEngagement").modal('hide');
+ this.$("#modalFactureAjouterProforma").modal({
         backdrop: "static",
         keyboard: false
       });
@@ -2758,19 +3804,25 @@ tprocedure : ""
       }
  },
 ajouterFactureLocal(){
-       
-       var nouvelObjet = {
+
+var nouvelObjet = {
       ...this.formData1,
     fournisseur_id: this.AfficherFournisseur_id,
        	prix_propose_ht :this.totalMontantHT,
         prix_propose_ttc :this.montantHTt,
          taux :this.affcherTauxEnCours,
          tva :this.montantTva,
-          	ua :this.detail_marche.objetUniteAdministrative.id,
+          	ua :this.afficheUa_id(this.macheid),
     marche_id : this.macheid,
-    objet_facture:this.detail_marche.objet
+    objet_facture:this.afficheObjetMarche(this.macheid),
+      typeProcedure:this.afficheProcedure(this.macheid),
+      marchetype:this.afficheMarcheType
        };
-      
+      // var objetDecompte = {
+      //   numero_decompte:this.numeroDecompte,
+      //   marche_id : this.macheid,
+      //   typeProcedure:this.afficheProcedure(this.macheid)
+      // }
 this.ajouterFacture(nouvelObjet)
 
 this.$("#modatFactureAjouter").modal('hide');
@@ -2849,6 +3901,8 @@ numero_facture:"",
         
       
 };
+       
+       
 
     },
     ModifierFactureLocal(){
@@ -2894,4 +3948,17 @@ formatageSomme:formatageSomme,
   width: 77%;
   margin: 0 -38%;
 }
+.taillemodal45 {
+        width: 1500px;
+        margin: 0 -750px;
+      
+    }
+       .taillemodal6 {
+        width: 1600px;
+        margin: 0 -780px;
+    }
+    .taillemodal61 {
+        width: 1500px;
+        
+    }
 </style>

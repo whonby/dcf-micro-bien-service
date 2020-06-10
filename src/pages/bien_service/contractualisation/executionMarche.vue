@@ -1,167 +1,8 @@
+ImputationBudgetModifier
 
 <template>
   <div>
-    <!--///////////////////////////////////////// debut modal d ajout //////////////////////////////-->
-    <!-- <div id="exampleModal" class="modal hide taillModal">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3> marché en execution</h3>
-      </div>
-    <div class="modal-body">
-        <table class="table table-bordered table-striped">
-         
-            <tr>
-              <td>
-               <div class="control-group">
-            <label class="control-label" title="unite administrative">UA</label>
-            <div class="controls">
-            <select v-model="formData.unite_administrative_id" class="span">
-               <option v-for="plans in groupUa" 
-               :key="plans[0].id" 
-               :value="plans[0].afficheUA.id">{{plans[0].afficheUA.libelle}}</option>
-           </select>
-            </div>
-          </div>
-              </td>
-              <td>
-                <div class="control-group">
-                  <label class="control-label">Grand Nature</label>
-                  <div class="controls">
-                    <select v-model="formData.grdnature_id" :readOnly="deverouGrandNature">
-                      <option
-                        v-for="gdeNature in groupgranNature"
-                        :key="gdeNature[0].id"
-                        :value="gdeNature[0].afficheGdeNature.id"
-                      >{{gdeNature[0].afficheGdeNature.libelle}}</option>
-                    </select>
-                  </div>
-                </div>
-              </td>
-               <td>
-              
-               <div class="control-group">
-                  <label class="control-label">Activite</label>
-                  <div class="controls">
-                    <select v-model="formData.activite_id" :readOnly="deverouactivite">
-                     <option
-                        v-for="activite in activiteDynamiques(formData.unite_administrative_id)"
-                        :key="activite.id"
-                        :value="activite.afficheActivite.id"
-                      >{{activite.afficheActivite.code}} - {{activite.afficheActivite.libelle}}</option>
-                    </select>
-                    
-                  </div>
-                   
-                </div>
-              </td>
-               <td>
-              
-               <div class="control-group">
-                  <label class="control-label">Classification Economique</label>
-                  <div class="controls">
-                    <select v-model="formData.Economique" :readOnly="deveroueconomiq">
-                    <option
-                        v-for="eco in economiqueDynamiques(formData.activite_id)"
-                        :key="eco.id"
-                        :value="eco.afficheEconomique.id"
-                      >{{eco.afficheEconomique.code}} - {{eco.afficheEconomique.libelle}}</option>
-                    </select>
-                  </div>
-                   
-                </div>
-              </td>
-            </tr>
-            <tr>
-               <td colspan=2>
-                 <div class="control-group">
-            <label class="control-label">Imputation Budgetaire</label>
-            <div class="controls">
-              <input
-                type="text"
-                :value="ImputationBudget"
-                class="span5"
-                placeholder="Saisir le Imputation"
-                readonly
-              />
-            </div>
-          </div>
-              </td>
-              
-             
-                <td> -->
-              
-               <!-- <div class="control-group">
-            <label class="control-label">Type marché</label>
-            <div class="controls">
-            <select v-model="formData.type_marche_id" class="span">
-               <option v-for="plans in typeMarches" :key="plans.id" 
-               :value="plans.id">{{plans.libelle}}</option>
-           </select>
-            </div>
-          </div>
-              </td>
-           
-               <td>
-                 <div class="control-group">
-            <label class="control-label">Refencence marché</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="formData.reference_marche"
-                class="span"
-                placeholder="Saisir le libelle_type"
-              />
-            </div>
-          </div>
-              </td>
-            </tr>
-            <tr>
-               
-               <td>
-                 <div class="control-group">
-            <label class="control-label">Montant du marché</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="formData.montant_marche"
-                class="span"
-                placeholder="Saisir le libelle_type"
-               
-              />
-            </div>
-          </div>
-              </td>
-              <td>
-               <div class="control-group">
-            <label class="control-label">Objet marché</label>
-            <div class="controls">
-              <input
-                type="text"
-                v-model="formData.objet"
-                class="span"
-                placeholder="Saisir le libelle_type"
-              />
-            </div>
-          </div>
-              </td>
-           
-            </tr>
-          
-        </table>
-      </div>
-      <div class="modal-footer">
-        <a
-          @click.prevent="ajouterModalTypePrestationLocal"
-          class="btn btn-primary"
-          href="#"
-         
-        >Valider</a>
-        <a data-dismiss="modal" class="btn" href="#">Fermer</a>
-      </div>
-    </div> -->
-    <!--///////////////////////////////////////// fin modal d ajout //////////////////////////////-->
 
-     <!--///////////////////////////////////////// debut modal de modification //////////////////////////////-->
 
     <div id="modificationModal" class="modal hide taillModal">
       <div class="modal-header">
@@ -283,7 +124,7 @@
             <div class="controls">
               <input
                 type="text"
-                :value="ImputationBudgetModifier"
+                
                 class="span5"
                 placeholder="Saisir le Imputation"
                 readonly
@@ -475,11 +316,14 @@
                 class="btn btn-default " title="formulation de demamnde d'engagement">
                   <span class=""><i class="icon-folder-open"></i></span>
                    </router-link>  -->
- <router-link :to="{ name: 'Engagement', params: { id: marche.id }}"
+ <!-- <router-link :to="{ name: 'Engagement', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail execution">
                   <span class=""><i class=" icon-folder-close"></i></span>
+                   </router-link>  -->
+<router-link :to="{ name: 'detailExecution', params: { id: marche.id }}"
+                class="btn btn-default " title="Detail execution Marche">
+                  <span class=""><i class="  icon-random"></i></span>
                    </router-link> 
-
 
             <!-- <router-link :to="{ name: 'DetailLivrable', params: { id: marche.id }}"
                 class="btn btn-default " title="Detail livrable">
