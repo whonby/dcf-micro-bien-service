@@ -165,7 +165,28 @@ export  function  getAffectation({commit}) {
 
     queue.push(() =>  apiGuest.get('/affectations').then(response => {
             // console.log(response.data)
+        let objetData=response.data
             commit('GET_AFFECTATION', response.data)
+        let objet=localStorage.getItem('Users');
+        let user=JSON.parse(objet)
+        console.log(objetData)
+        if (user.user_role.role.code_role!="SUPER_ADMIN"){
+            let affectationUsers=objetData
+
+            if (objetData){
+                affectationUsers =objetData.filter(item=>{
+                    if(item.date_fin==null && item.user_id==user.id){
+                        return item
+                    }
+                })
+            }
+            console.log(affectationUsers)
+            commit('GET_UNITEADMIN_BY_USER', affectationUsers)
+        }else {
+            commit('GET_UNITEADMIN_BY_USER', objetData)
+        }
+
+
         }).catch(error => console.log(error))
     );
 
@@ -198,11 +219,6 @@ export function supprimerAffectation({commit}, id){
 }
 
 export function modifierAffection({commit}, formData){
-    /*apiGuest.put('/affectations' ,formData).then(response => {
-        commit('MODIFIER_AFFECTATION', response.data)
-    })*/
-
-
     return  asyncLoading(apiGuest.put('/affectations', formData )).then(res => {
         commit('MODIFIER_AFFECTATION', res.data)
         this.$app.$notify({
@@ -212,4 +228,10 @@ export function modifierAffection({commit}, formData){
         })
     }).catch(error => console.log(error))
 
+}
+
+
+export function getUniteAdminUser({commit}, objet){
+  //  console.log(id)
+    commit('GET_UNITEADMIN_BY_USER', objet)
 }

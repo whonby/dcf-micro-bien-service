@@ -235,6 +235,8 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import {formatageSomme} from '../../../../src/Repositories/Repository';
+import {admin,dcf} from "../../../Repositories/Auth"
+
 export default {
   data(){
     return{
@@ -247,7 +249,8 @@ export default {
    created() {
           //  this.detailBudget=this.getterBudgeCharge.find(item=>item.id== this.$route.params.id)
           this.budgetGeneralCharge=this.budgetGeneral.filter(item=>item.actived==1)
-            console.log(this.budgetGeneralCharge)
+            /*console.log(this.budgetGeneralCharge)*/
+       this.getAffectation()
         },
   computed:{
  ...mapGetters("uniteadministrative", [
@@ -442,7 +445,9 @@ affichierTauxExecutionInvestissement() {
 
   methods:{
 ...mapActions('',['']),
-
+      ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser"]),
+      admin:admin,
+      dcf:dcf,
 
  formatageSomme:formatageSomme
   }

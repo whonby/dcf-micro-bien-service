@@ -38,7 +38,7 @@
 </template>
   
 <script>
-import { mapGetters } from "vuex";
+    import {mapActions, mapGetters} from "vuex";
 
 import { formatageSomme } from "../../../src/Repositories/Repository";
 export default {
@@ -53,8 +53,12 @@ export default {
       ]
     };
   },
+created() {
+  
 
-  computed: {
+      console.log(this.getterUniteAdministrativeByUser)
+},
+    computed: {
     ...mapGetters("uniteadministrative", [
       "nombreTypeText",
       "nombreUniteAdministratives",
@@ -64,9 +68,10 @@ export default {
 
       // "nbreArchivageNotes"
     ]),
-  
+      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
   },
   methods: {
+      ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser"]),
     formatageSomme:formatageSomme
   }
 };
