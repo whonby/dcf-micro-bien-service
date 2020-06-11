@@ -203,7 +203,7 @@
                         <a data-toggle="tab" href="#tab89">Equipements Non Couverts   <span class="badge badge-warning">{{NombreafficheEquipementNonCouvertService}}</span></a>
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#tab63">Listes des services Equipé     <span class="badge badge-info">{{NombreaffichePersonneEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab63">Listes des services Equipé     <span class="badge badge-info">{{NombreafficheEquipementCouvertService}}</span></a>
                       </li>
                       <li class="">
                         <a data-toggle="tab" href="#tab6396">Taux equipement des services  </a>
@@ -768,7 +768,7 @@
                   
                   <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in tauxequipementParAgent"
+                    v-for="BesoinImmo in listeDesEquipementParAgent"
                     :key="BesoinImmo.id"
                   >
    
@@ -844,7 +844,7 @@
                  
                     <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in equipementNonCouvert"
+                    v-for="BesoinImmo in listeDesEquipementNonCouvert"
                     :key="BesoinImmo.id">
                     <td
                       
@@ -920,7 +920,7 @@
                   
                   <tr
                     class="odd gradeX"
-                    v-for="(BesoinImmo,index) in acte_personnels"
+                    v-for="(BesoinImmo,index) in listePersonnelAffectete"
                     :key="BesoinImmo.id"
                   >
                   <!-- <td
@@ -986,7 +986,7 @@
                   
                   <tr
                     class="odd gradeX"
-                    v-for="(BesoinImmo,index) in affichePersonneNonEquipe"
+                    v-for="(BesoinImmo,index) in listePersonnelNonEquipee"
                     :key="BesoinImmo.id"
                   >
                   <!-- <td
@@ -1391,6 +1391,7 @@ import listeServiceEquipe from '../affectationParService/listeServiceEquipe'
 import tauxServiceEquipe from '../affectationParService/tauxServiceEquipe'
 import affectationDemandeDuService from '../docAffectationImmo/affectationDemandeDuService'
 import { formatageSomme } from "../../../../Repositories/Repository";
+import {admin,dcf} from "../../../../Repositories/Auth"
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 export default {
@@ -1518,13 +1519,147 @@ cause_directeur:""
     ...mapGetters("uniteadministrative", ["uniteAdministratives","directions","servicesua","uniteZones"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins","exercices_budgetaires"]),
 ...mapGetters("personnelUA", ["acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
+admin:admin,
+      dcf:dcf,
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+listePersonnelAffectete() {
+      
 
 
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.acte_personnels.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          
+        }
+
+       return ""
+
+    },
+
+listePersonnelNonEquipee() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.affichePersonneNonEquipe.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          
+        }
+
+       return ""
+
+    },
+listeDesEquipementNonCouvert() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.equipementNonCouvert.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          
+        }
+
+       return ""
+
+    },
+    listeDesEquipementParAgent() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.tauxequipementParAgent.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          
+        }
+
+       return ""
+
+    },
+    listeDesPersonneEquipee() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.affichePersonneEquipe.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          
+        }
+
+       return ""
+
+    },
+
+
+
+
+AfficheTotalQteNonCouvert() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.acte_personnels.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+          
+        }
+
+       return "0"
+
+    },
+
+
+
+
+
+
+
+    NombreDeService() {
+     
+         return this.servicesua.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+    },
 NombreafficheEquipementNonCouvertService() {
      
          return this.servicesua.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
     },
-
+NombreafficheEquipementCouvertService() {
+     
+         return this.servicesua.filter(element => element.normeequipement == 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+    },
  afficheService() {
       return id => {
         if (id != null && id != "") {
@@ -1560,10 +1695,10 @@ AfficheTotalQteACouvrir() {
      
          return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
     },
-AfficheTotalQteNonCouvert() {
+// AfficheTotalQteNonCouvert() {
      
-         return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
-    },
+//          return this.acte_personnels.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+//     },
 
 afficherMontantRestant() {
       const val = this.affichierTotal(this.formData.fonction_id) - this.afficherValeurOrigine;
@@ -2070,20 +2205,20 @@ affichePersonneNonEquipe(){
 return this.acte_personnels.filter(element => element.normeequipement != 0)
 },
 NombreaffichePersonneEquipe(){
-return this.acte_personnels.filter(element => element.normeequipement == 0).length
+return this.listeDesPersonneEquipee.length
 },
 affichePersonneEquipe(){
 return this.acte_personnels.filter(element => element.normeequipement == 0)
 },
 afficheNombrePersonneNonEquipe(){
-return this.acte_personnels.filter(element => element.normeequipement != 0).length
+return this.listePersonnelNonEquipee.length
 },
 
 afficheNombrePersonneEquipe(){
 return this.acte_personnels.filter(element => element.normeequipement == 0).length
 },
 afficheNombreToutPersonne(){
-return this.acte_personnels.length
+return this.listePersonnelAffectete.length
 },
 exoEnCours(){
 return this.exercices_budgetaires.filter(element => element.encours == 1)

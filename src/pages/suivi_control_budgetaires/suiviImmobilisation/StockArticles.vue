@@ -431,13 +431,13 @@
                 <i class="icon-th"></i>
               </span>
               <h5>Gestion des stocks</h5>
-              <!-- <div align="right">
+              <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
-              </div> -->
+              </div>
             </div>
 
-            <div class="widget-content nopadding" v-if="getPersoStock.length && articles.length && familles.length && uniteAdministratives.length ">
+            <div class="widget-content nopadding" >
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
@@ -461,9 +461,10 @@
                 <tbody>
                      <tr
                     class="odd gradeX"
-                    v-for="(stock, index) in getPersoStock"
+                    v-for="(stock, index) in filtre_Stock"
                     :key="stock.id"
                   >
+
 
 
                    
@@ -525,14 +526,14 @@
                 
                       <td></td>
                    <td style="font-weight:bold;" title="total quantite entrant">Total en stock</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{totalQteEntrant || 0 }}</td>
+                    <td style="text-align: center;color:red;font-weight:bold;">{{nombreDeQuantiteEnStock || 0 }}</td>
                     <td></td>
                    
                      
                   
                      <td ></td>
                     <td style="font-weight:bold;" title="total quantite sortant">Total qte sortie</td>
-                    <td style="text-align: center;color:red;font-weight:bold;">{{ totalQteSortant || 0 }}</td>
+                    <td style="text-align: center;color:red;font-weight:bold;">{{ nombreDeQuantiteSortiEnStock || 0 }}</td>
                     
                    <td></td>
                      
@@ -558,7 +559,7 @@
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import { formatageSomme } from "../../../Repositories/Repository";
-
+import {admin,dcf} from "../../../Repositories/Auth"
 export default {
   name: 'besionImmolisation',
   data() {
@@ -634,18 +635,97 @@ quantite: {
     ]),
     ...mapGetters("uniteadministrative", ["uniteAdministratives"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
-
-
-     filtre_Stock() {
-      const st = this.search.toLowerCase();
-      return this.getPersoStock.filter(type => {
-        return (
-          type.typeUniteAdministrative.libelle.toLowerCase().includes(st) ||
-          type.uniteAdministrative.libelle.toLowerCase().includes(st)
+admin:admin,
+      dcf:dcf,
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+    //  filtre_Stock() {
+    //   const st = this.search.toLowerCase();
+    //   return this.getPersoStock.filter(type => {
+    //     return (
+    //       type.typeUniteAdministrative.libelle.toLowerCase().includes(st) ||
+    //       type.uniteAdministrative.libelle.toLowerCase().includes(st)
          
-        );
-      });
+    //     );
+    //   });
+    // },
+
+filtre_Stock() {
+        const st = this.search.toLowerCase();
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.getPersoStock.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(items => {
+                return (
+                    
+          items.uniteAdminist.libelle.toLowerCase().includes(st)
+                );
+            });
+        }
+
+        return this.getPersoStock.filter(items => {
+            return (
+                items.uniteAdminist.libelle.toLowerCase().includes(st)
+            );
+        });
+
     },
+
+nombreDeQuantiteEnStock() {
+       
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.getPersoStock.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+          
+        }
+return ""
+       
+
+    },
+nombreDeQuantiteSortiEnStock() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.getPersoStock.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
+          
+          
+        }
+
+       return ""
+
+    },
+
+
+
+
+
+
+
+
+
      libelleFamilleEquipement() {
       return id => {
         if (id != null && id != "") {
@@ -772,6 +852,38 @@ uniteAdministrativeDynamiques() {
         }
       };
     },
+// uniteAdministrativeDynamiques() {
+      
+
+// return id => {
+//    if (id != null && id != "") {
+//         if (!this.admin || !this.dcf){
+//             let colect=[];
+//             this.uniteAdministratives.filter(item=>{
+//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+//             })
+//           }
+//           return this.uniteAdministratives.filter(element => element.type_ua_id == id);
+//           }
+//            return ""
+//         }
+
+      
+
+//     },
+
+
+
+
+
+
+
+
+
 
  veiftypeuaExist() {
       return this.formData.typeua_id == "" ;
