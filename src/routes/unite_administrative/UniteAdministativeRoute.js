@@ -29,8 +29,13 @@ import DetailBudgetImporte from "../../pages/budget/DetailBudgetImporte.vue";
 import LigneExempte from "../../pages/unites_administratives/LigneExempte";
 import Organigramme from "../../pages/unites_administratives/organigrammeUa.vue";
 import Synthesebudg from "../../pages/gestionMarche/synthesebudg.vue";
-
+import decompte from "../../pages/bien_service/contractualisation/DossierExecution/dossierDecompte/decompte.vue";
 const UniteAdministativeRoutes = [
+  {
+    path: "/decompte",
+    name: "decompte",
+    component: decompte
+  },
   {
     path: "/Detail-Budget-Generals",
     name: "DetailbudgetGeneralsNew",

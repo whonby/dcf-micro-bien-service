@@ -365,7 +365,7 @@ affichierAppelOffreid() {
           
            ajouterRapportJugementLocal(){
 
-               if(confirm("veiller charger le fichier svp mercie")){
+               //if(confirm("veiller charger le fichier svp mercie")){
                 const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
                  formData.append('date_rapport_jugement', this.formJugement.date_rapport_jugement);
@@ -385,13 +385,13 @@ affichierAppelOffreid() {
                  difference_personnel_bienService:"personnel",
                  date_rapport_jugement:""
                }
-               }else return "chargement du fichier neccessaire ";
+              // }else return "chargement du fichier neccessaire ";
                 
            },
 
 
            modifierRapportOuverture(){
-               if(confirm("chargement du fichier neccessaire ")){
+              // if(confirm("chargement du fichier neccessaire ")){
                  const formData = new FormData();
                  formData.append('date_rapport_jugement', this.editRapport.date_rapport_jugement);
                  formData.append('marche_id', this.macheid);
@@ -414,7 +414,7 @@ affichierAppelOffreid() {
                this.modifierRapportJugement(formData,config)
               // this.getRapportJugement()
                this.$('#modifierRapportJugements').modal('hide');
-               } else return "chargement du fichier neccessaire";
+              // } else return "chargement du fichier neccessaire";
               
            },
            formaterDate(date){

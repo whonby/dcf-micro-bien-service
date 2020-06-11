@@ -385,13 +385,13 @@ type_financement
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab2078">Toutes les marches d'investissement  <span class="badge badge" > {{nombreDeMarcheI}}</span></a></li>
+                               <li class="active"><a data-toggle="tab" href="#tab2078"> Marchés <span class="badge badge" > {{nombreDeMarcheI}}</span></a></li>
                                
-                               <li ><a data-toggle="tab" href="#tab100" title="marché planifié en investissement">Marchés Planifiés I.   <span class="badge badge-important" >    {{nombreMarcheEnplanification}}</span></a></li>
-                                <li ><a data-toggle="tab" href="#tab10" title="marché en contratualisation d'investissement">Marché en cours Contratualisation I.   <span class="badge badge-success" >{{nombreDeMarcheEnContratualisation}}</span></a></li>
-                                <li><a data-toggle="tab" href="#tab20" title="marché en execution d'investiisement">Marchés en Exécution I.    <span class="badge badge-warning" >{{afficheNombreMarchExecuter}}</span></a></li>
-                                 <li><a data-toggle="tab" href="#tab20002" title="marché resilié d'investissement">Marchés Résiliés I.   <span class="badge badge-info" >     {{afficheNombreMarcheResilier}}</span></a></li>
-                                  <li><a data-toggle="tab" href="#tab2000256"  title="marché terminé d'investissement">Marchés Terminé I.   <span class="badge badge-inverse" >     {{nombreAfficheMarcheSolde}}</span></a></li>
+                               <li ><a data-toggle="tab" href="#tab100" title="marché planifié en investissement">Planifications  <span class="badge badge-important" >    {{nombreMarcheEnplanification}}</span></a></li>
+                                <li ><a data-toggle="tab" href="#tab10" title="marché en contratualisation d'investissement">Contratualisation  <span class="badge badge-success" >{{nombreDeMarcheEnContratualisation}}</span></a></li>
+                                <li><a data-toggle="tab" href="#tab20" title="marché en execution d'investiisement">Execution <span class="badge badge-warning" >{{afficheNombreMarchExecuter}}</span></a></li>
+                                 <li><a data-toggle="tab" href="#tab20002" title="marché resilié d'investissement">Resilié <span class="badge badge-info" >     {{afficheNombreMarcheResilier}}</span></a></li>
+                                  <li><a data-toggle="tab" href="#tab2000256"  title="marché terminé d'investissement">Terminé<span class="badge badge-inverse" >     {{nombreAfficheMarcheSolde}}</span></a></li>
 
                             </ul>
                         </div>

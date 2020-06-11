@@ -39,6 +39,7 @@ import motifDecision from '../../pages/bien_service/parametres/motifDecision.vue
 import documentProcedure from '../../pages/bien_service/parametres/documentProcedure.vue';
 import livrable from '../../pages/bien_service/parametres/livrable.vue';
 import Engagement from '../../pages/bien_service/contractualisation/engagement.vue';
+import detailExecution from '../../pages/bien_service/contractualisation/DossierExecution/dossierPrincipal/detailExecution.vue';
 import AjouterEngagement from '../../pages/bien_service/contractualisation/AjouterEngagement.vue';
 import executionMarche from '../../pages/bien_service/contractualisation/executionMarche.vue';
 import executionMarcheInvestissement from '../../pages/bien_service/contractualisation/executionMarcheInvestissement.vue';
@@ -67,14 +68,44 @@ import DetailPPM from "../../pages/bien_service/ppm/DetailPPM";
 import detailMarcheFsqc from "../../pages/bien_service/dossierFSQC/detailMarcheFsqc";
 import detailMarcheR3cv from "../../pages/bien_service/dossierR3CV/detailMarcheR3cv";
 import CycleDeVie from "../../pages/cycle_de_vie/CycleDeVie.vue"
+import AjoutMandatDirect from "../../pages/bien_service/contractualisation/DossierExecution/dossierMandat/AjoutMandatDirect.vue";
+import AjouterMandatbon from "../../pages/bien_service/contractualisation/DossierExecution/dossierMandat/AjouterMandatbon.vue";
+import AjouterEngagementFactureProf from "../../pages/bien_service/contractualisation/DossierExecution/dossierEngagement/AjouterEngagement.vue";
+import modifierEngagement from "../../pages/bien_service/contractualisation/DossierExecution/dossierEngagement/modifierEngagement.vue";
+import modifierMandat from "../../pages/bien_service/contractualisation/DossierExecution/dossierMandat/modifierMandat.vue";
 const BienServiceRoutes = [
    /* {
 
         path: "/creation-execution-marche-investissement",
         name: "executionMarcheInvestissement",
         component: executionMarcheInvestissement
-
+detailExecution
     },*/
+    {
+        path: "/Modifier_Mandat/:id",
+        name: "modifierMandat",
+        component: modifierMandat
+    },
+    {
+        path: "/Modifier_Engagement/:id",
+        name: "modifierEngagement",
+        component: modifierEngagement
+    },
+    {
+        path: "/Ajouter-Mandat-bon-Commande/:id",
+        name: "AjouterMandatbon",
+        component: AjouterMandatbon
+    },
+    {
+        path: "/ajouter-Engagement/:id",
+        name: "AjouterEngagementFactureProf",
+        component: AjouterEngagementFactureProf
+    },
+    {
+        path: "/ajouter-Mandat/:id",
+        name: "AjoutMandatDirect",
+        component: AjoutMandatDirect
+    },
     {
         path: "/historique-Marche",
         name: "historiqueMarche",
@@ -150,6 +181,7 @@ const BienServiceRoutes = [
         name: "DetailMandat",
         component: DetailMandat
     },
+    
     {
         path: '/detail-Engagement/:id_detail_engagement',
         name: "DetailEngagement",
@@ -247,6 +279,12 @@ const BienServiceRoutes = [
     },
 
     // detail marche
+    {
+        path: '/detailExecution/:id',
+        name: "detailExecution",
+        component: detailExecution
+    },
+    
     {
         path: '/Engagement/:id',
         name: "Engagement",

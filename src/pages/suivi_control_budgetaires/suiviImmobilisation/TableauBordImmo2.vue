@@ -38,28 +38,25 @@ sommeQuantiteGlobal
           </a>
         </li> -->
         <div class="quick-actions_homepage">
-      <ul class="quick-actions">
-        <li class="bg_lb"> <a href="#"> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{sommeQuantiteGlobal}}</span>QUANTITES GBOBALES</a> </li>
-        <li class="bg_lg"> <a href="charts.html"> <i class="icon-signal"></i><span class="label label-important" style="font-size:15px">{{parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteGlobalNonCouvert)}}</span> QUANTITES COUVERTES</a> </li>
-        <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{sommeQuantiteGlobalNonCouvert}}</span> QUANTITES NON COUVERTES </a> </li>
-        <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i><span class="label label-important" style="font-size:15px">{{(((parseFloat(sommeQuantiteGlobalNonCouvert))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span>TAUX QUANTITES NON COUVERTES</a> </li>
-        <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{(((parseFloat(parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteGlobalNonCouvert)))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span> TAUX QUANTITES COUVERTES</a> </li>
-        <!-- <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"><span class="label label-important" style="font-size:25px">{{nombreDupersonne}}</span></i> NOMBRES DU PERSONNEL</a> </li>
-        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"><span class="label label-important" style="font-size:25px">{{(parseFloat((quantiteTotalCouvertPersonnel)/(parseFloat(quantiteTotalPersonnel)))*100).toFixed(2)}}%</span></i> TAUX DU PERSONNEL COUVERT</a> </li> -->
-        <!-- <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"><span class="label label-success" style="font-size:25px">{{(parseFloat(quantiteTotalNonCouvertPersonnel)/(parseFloat(quantiteTotalPersonnel))*100).toFixed(2)}}%</span></i>TAUX DU PERSONNEL NON COUVERT </a></li>
-        <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i>NOMBRES DE SERVICE </a>  </li>
-        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> TAUX DU SERVICE COUVERT</a></li>
- <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> TAUX DU SERVICE NON COUVERT </a> </li>
-        <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Charts</a> </li>
-        <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> Widgets </a> </li>
-        <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i> Tables</a> </li>
-        <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>
-        <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Forms</a> </li>
-        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Buttons</a> </li>
-        <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i>Elements</a> </li>
-        <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i> Calendar</a> </li>
-        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Error</a> </li> -->
-      </ul>
+      
+                            <ul class="quick-actions" style="margin: 0px !important;"> 
+
+<li class="bg_lb span3"> <a href="#" style="color:black;"><h4>QUANTITES </h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{sommeQuantiteGlobal}}</span><h4>GLOBALES</h4></a> </li>
+
+        <li class="bg_lg span3"> <a href="#" style="color:black;"><h4>QUANTITES </h4> <i class="icon-inbox"></i><span class="label label-success" style="font-size:15px">{{parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteGlobalNonCouvert)}}</span><h4>COUVERTS</h4>  </a> </li>
+
+        <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>QUANTITES</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{sommeQuantiteGlobalNonCouvert}}</span> <h4>NON COUVERTES</h4></a> </li>
+          <li class="bg_ly span3"> <a href="#" style="color:black;"><h4>TAUX QUANTITES</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px">{{(((parseFloat(sommeQuantiteGlobalNonCouvert))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span> <h4>NON COUVERTES</h4></a> </li>
+                <li class="bg_lo span3"> <a href="#" style="color:black;"><h4>TAUX QUANTITES</h4> <i class="icon-dashboard"></i> <span class="label label-important" style="font-size:15px">{{(((parseFloat(parseFloat(sommeQuantiteGlobal)-parseFloat(sommeQuantiteGlobalNonCouvert)))/(parseFloat(sommeQuantiteGlobal)))*100).toFixed(2)}}%</span><h4> COUVERTES</h4></a> </li>
+
+      
+                            </ul>
+      
+      
+
+ 
+ 
+      
     </div> 
           <!-- <h1 style="text-align:center;margin:0 auto;color:red">EN COURS DE DEVELOPPEMENT TABLEAU DE BORD COMPTABILITE DES MATIERES</h1> -->
       </ul>

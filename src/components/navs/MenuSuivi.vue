@@ -5,7 +5,7 @@
       <!-- administratifs-->
        <li>
          <router-link :to="{name:'investissement'}" tag="a">
-           PLANIFICATION DES MARCHES 
+          SUIVI DES MARCHES 
          </router-link>
 
        </li>

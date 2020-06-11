@@ -23,21 +23,24 @@
                         <li class="active">
                         <a data-toggle="tab" href="#tab00001">Tableau de bord<span class="badge badge-info"></span></a>
                       </li>
-                     <li class="">
-                        <a data-toggle="tab" href="#tab00008">Listes des marchés <span class="badge badge-important"></span></a>
-                      </li>
-                      <!-- <li class="">
-                        <a data-toggle="tab" href="#tab000078">Synthese du budget <span class="badge badge-important"></span></a>
-                      </li> -->
-                       <li class="">
+
+                      <li class="">
                         <a data-toggle="tab" href="#tab00007">Importation ppm <span class="badge badge-important"></span></a>
                       </li>
+                     <li class="">
+                        <a data-toggle="tab" href="#tab00008">Listes des marchés <span class="badge badge-info">{{nombreDeMarche}}</span></a>
+                      </li>
+                       
+
+                            <!-- <li class="">
+                        <a data-toggle="tab" href="#tab00214">Liste des Marchés de Bien&Service et Fourniture   <span class="badge badge-warning">{{nombreMarcheBienServiceEtFourniture}}</span></a>
+                      </li>
                      
-                       <!-- <li class="">
-                        <a data-toggle="tab" href="#tab00009">Liquidation <span class="badge badge-important"></span></a>
+                       <li class="">
+                        <a data-toggle="tab" href="#tab00009">Liste des marchés en investissement    <span class="badge badge-important">  {{nombreDeMarcheI}}</span></a>
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#tab000010">Mandat <span class="badge badge-important"></span></a>
+                        <a data-toggle="tab" href="#tab000010">Liste des Contrats     <span class="badge badge-inverse">  {{nombreDeContrat}}</span></a>
                       </li> -->
                     </ul>
                   </div>
@@ -62,24 +65,31 @@
                 <tableauBord></tableauBord>
               </table>
                    </div>
- <div id="tab00008" class="tab-pane ">
+       <div id="tab00008" class="tab-pane ">
                      <table class="table table-bordered table-striped">
                
                 <historiqueMarche></historiqueMarche>
               </table>
                    </div>
-                    <!-- <div id="tab00009" class="tab-pane active">
+                    <div id="tab00009" class="tab-pane">
                      <table class="table table-bordered table-striped">
-               
+                 
+                       <historiqueInvestissement></historiqueInvestissement>
+              </table>
+                   </div>
+                    <div id="tab000010" class="tab-pane">
+                     <table class="table table-bordered table-striped">
+                    <historiquePersonnel></historiquePersonnel>
                 
               </table>
                    </div>
-                    <div id="tab000010" class="tab-pane active">
+
+                   <div id="tab00214" class="tab-pane">
                      <table class="table table-bordered table-striped">
-               
+                    <historiqueParMarche></historiqueParMarche>
                 
               </table>
-                   </div> -->
+                   </div>
                   </div>
                   <br />
               
@@ -95,6 +105,9 @@ import { mapGetters, mapActions } from "vuex";
  import historiqueMarche from '../gestionMarche/historiqueMarche';
  import tableauBord from '../gestionMarche/tableauBordMarche';
   import synthesebudg from '../gestionMarche/synthesebudg'
+  import  historiqueInvestissement from '../gestionMarche/dosierHistoriqueInvestissement/historiqueInestissement'
+  import historiquePersonnel from '../gestionMarche/dossierHistoriquePersonnel/historiquePersonnel'
+   import historiqueParMarche from '../gestionMarche/dossierHistoriqueMarche/historiqueParMarche'
 // import moment from "moment";
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
@@ -103,7 +116,10 @@ export default {
     PlanPassationMarche,
     historiqueMarche,
     tableauBord,
-    synthesebudg
+    synthesebudg,
+    historiqueInvestissement,
+    historiquePersonnel,
+    historiqueParMarche
   },
   data() {
     return {
@@ -178,6 +194,47 @@ created() {
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
 
+
+afficherLaListeDesMarche(){
+return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
+},
+
+
+nombreMarcheBienServiceEtFourniture(){
+  return this.afficherLaListeDesMarche.length;
+},
+
+
+// afficher le nombre du marché
+
+nombreDeMarche(){
+  return this.printMarcheNonAttribue.length;
+},
+
+
+
+afficherLaListeDesContratsDuPersonnel(){
+return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 2)
+},
+
+
+// afficher le nombre de contrat et contrat planifié dans le personnel
+nombreDeContrat(){
+  return this.afficherLaListeDesContratsDuPersonnel.length;
+},
+
+
+afficherLaListeDesMarcheDinvestissement(){
+return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 3)
+},
+
+
+
+// afficher le nombre du marché
+
+nombreDeMarcheI(){
+  return this.afficherLaListeDesMarcheDinvestissement.length;
+},
 
 afficherListeSalaireEnExecution(){
 return this.paiementPersonnel.filter(element => element.valisationvirement == 0)

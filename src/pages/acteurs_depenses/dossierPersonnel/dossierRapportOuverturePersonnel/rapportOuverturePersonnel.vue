@@ -230,7 +230,7 @@ export default {
          
           
            ajouterRapportOuverture(){
-               if(confirm("veiller charger le fichier svp !")){
+              // if(confirm("veiller charger le fichier svp !")){
                  const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
                  formData.append('date_rapport_ouverture', this.formRapport.date_rapport_ouverture);
@@ -247,15 +247,15 @@ export default {
                  difference_personnel_bienService:"personnel",
                  date_rapport_ouverture:""
                }
-               }else{
-                  // return "ok fichier neccessaire mercie"
-               }
+            //    }else{
+            //        return "ok fichier neccessaire mercie"
+            //    }
               
            },
 
 
            modifierRapportOuverture(){
-               if(confirm("veiller charger le fichier svp !")){
+              // if(confirm("veiller charger le fichier svp !")){
                     const formData = new FormData();
                  formData.append('date_rapport_ouverture', this.editRapport.date_rapport_ouverture);
                  formData.append('marche_id', this.macheid);
@@ -276,9 +276,9 @@ export default {
                this.modifierRapportJugement(formData,config)
               // this.getRapportJugement()
                this.$('#modifierModalRapportOuverture').modal('hide');
-               }else{
-                   return " chargemennt de fichier neccessaire "
-               }
+            //    }else{
+            //        return " chargemennt de fichier neccessaire "
+            //    }
          
            },
 

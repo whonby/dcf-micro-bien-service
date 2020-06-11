@@ -201,15 +201,10 @@
 
                         </tr>
                          
-                            <tr  class="odd gradeX" >
-            <td colspan="3">
+                            <tr>
+            <td >
               <div class="control-group">
                 <label class="control-label" style="text-align:right;color:red">Taux</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
                
                 <div class="controls">
                   <input
@@ -231,18 +226,11 @@
               </div>
             </td>
             
-            
-                  
-          </tr>
-          <tr  class="odd gradeX" >
-            <td colspan="3">
+          
+            <td>
               <div class="control-group">
                 <label class="control-label" style="text-align:right;color:red">TVA</label>
                
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
                
                 <div class="controls">
                   <input
@@ -258,18 +246,12 @@
             </td>
             
             
-                  
-          </tr>
          
-          <tr  class="odd gradeX" >
-            <td colspan="3">
+         
+            <td colspan="2" >
               <div class="control-group">
                 <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
+            
                
                 <div class="controls">
                   <input
@@ -421,15 +403,10 @@
                                     </div>
                                     </td>
                       </tr>
-                       <tr  class="odd gradeX" >
-            <td colspan="3">
+                       <tr >
+            <td >
               <div class="control-group">
                 <label class="control-label" style="text-align:right;color:red">Taux</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
                
                 <div class="controls">
                   <input
@@ -452,17 +429,10 @@
             </td>
             
             
-                  
-          </tr>
-          <tr  class="odd gradeX" >
-            <td colspan="3">
+              
+            <td >
               <div class="control-group">
                 <label class="control-label" style="text-align:right;color:red">TVA</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
                
                 <div class="controls">
                   <input
@@ -478,19 +448,11 @@
             </td>
             
             
-                  
-          </tr>
-         
-          <tr  class="odd gradeX" >
-            <td colspan="3">
+            <td colspan="2">
               <div class="control-group">
                 <label class="control-label" style="text-align:right;color:red">Montant TTC</label>
-               
-              </div>
-            </td>
-            <td>
-              <div class="control-group">
-               
+              
+             
                 <div class="controls">
                   <input
                     type="number"

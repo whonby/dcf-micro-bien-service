@@ -98,7 +98,13 @@
             <span class="label label-important"></span>
           </a>
         </li>
-         
+          <!-- <li @click.prevent="navigateToRapport" :class="{active: active_el ==20}">
+          <a title="CARTOGRAPHIE" href="#">
+            <i class=" icon-globe"></i>
+            <span>RAPPORT</span>
+            <span class="label label-important"></span>
+          </a>
+        </li> -->
           <li @click.prevent="logoutUser()" >
           <a title="DECONNEXION" href="#">
             <i class="icon icon-off"></i>
@@ -137,6 +143,12 @@ export default {
         this.activate(8)
         this.$router.push({
           name: 'CartographieBudget'
+        })
+      },
+       navigateToRapport(){
+        this.activate(20)
+        this.$router.push({
+          name: ''
         })
       },
  navigateToTransfert(){

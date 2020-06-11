@@ -551,6 +551,7 @@
                 this.edite.date_fin=this.date_fin
                 console.log(this.edite)
              this.modifierAffection(this.edite).then(data=>{
+                 console.log(data)
                  this.getAffectation()
 
              })
@@ -559,6 +560,7 @@
                 this.$('#modificationdateDebut').modal('hide');
 
                 this.modifierAffection(this.edite).then(data=>{
+                    console.log(data)
                     this.getAffectation()
 
                 })
