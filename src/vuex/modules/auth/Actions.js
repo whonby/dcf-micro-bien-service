@@ -169,7 +169,7 @@ export  function  getAffectation({commit}) {
             commit('GET_AFFECTATION', response.data)
         let objet=localStorage.getItem('Users');
         let user=JSON.parse(objet)
-        console.log(objetData)
+       // console.log(objetData)
         if (user.user_role.role.code_role!="SUPER_ADMIN"){
             let affectationUsers=objetData
 
@@ -180,7 +180,7 @@ export  function  getAffectation({commit}) {
                     }
                 })
             }
-            console.log(affectationUsers)
+          //  console.log(affectationUsers)
             commit('GET_UNITEADMIN_BY_USER', affectationUsers)
         }else {
             commit('GET_UNITEADMIN_BY_USER', objetData)
