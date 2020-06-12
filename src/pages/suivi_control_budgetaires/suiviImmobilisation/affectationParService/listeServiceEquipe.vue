@@ -64,6 +64,7 @@
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from '../../../../../src/Repositories/Repository';
+import {admin,dcf} from "../../../../../src/Repositories/Auth"
 //import moment from 'moment';
 export default {
     data(){
@@ -92,7 +93,9 @@ search:""
     created(){},
 
        computed: {
-
+  admin:admin,
+      dcf:dcf,
+     ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
             ...mapGetters("bienService", [ "gettersCotations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
@@ -166,9 +169,31 @@ search:""
     //     );
     //   });
     // },
-       ServiceEquipe (){
-return this.servicesua.filter(element => element.normeequipement == 0)
-},
+
+    ServiceEquipe() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                  item.normeequipement == 0
+            })
+          
+          
+        }
+
+       return 0
+
+    },
+//        ServiceEquipe (){
+// return this.servicesua.filter(element => element.normeequipement == 0)
+// },
 
 
 afficherUniteAdministrative() {

@@ -508,6 +508,7 @@
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import { formatageSomme } from "../../../../Repositories/Repository";
+import {admin,dcf} from "../../../../Repositories/Auth"
 
 export default {
   name: 'besionImmolisation',
@@ -625,6 +626,9 @@ created() {
       "historiqueAffectation",
       "EtatImmobilisations"
     ]),
+    admin:admin,
+      dcf:dcf,
+     ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
      ...mapGetters("uniteadministrative", ["uniteAdministratives","directions","servicesua","uniteZones"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
 ...mapGetters("personnelUA", ["all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
@@ -673,31 +677,106 @@ coutMonenArticle() {
     
     // return cur_day + " " + hours + ":" + minutes + ":" + seconds;
    },
-    filtreMatricule() {
-      const st = this.search.toLowerCase();
-      return this.afficheEquipementEnCoursUtilidation.filter(type => {
-        return (
-          type.matricule_auteur.toLowerCase().includes(st) 
-        );
-      });
+    // filtreMatricule() {
+    //   const st = this.search.toLowerCase();
+    //   return this.afficheEquipementEnCoursUtilidation.filter(type => {
+    //     return (
+    //       type.matricule_auteur.toLowerCase().includes(st) 
+    //     );
+    //   });
+    // },
+
+
+filtreMatricule() {
+        const st = this.search.toLowerCase();
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.historiqueAffectation.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                item.annee_amortissement >= this.nombreJourTraitementCalucle
+            })
+            return colect.filter(items => {
+                return (
+                     items.matricule_auteur.toLowerCase().includes(st) 
+                );
+            });
+        }
+
+        return this.historiqueAffectation.filter(items => {
+            return (
+                 items.matricule_auteur.toLowerCase().includes(st)
+            );
+        });
+
     },
 
+
+
+
+
 filtreMaterielAmortis() {
-      const st = this.search1.toLowerCase();
-      return this.afficheEquipementAmortie.filter(type => {
-        return (
-          type.matricule_auteur.toLowerCase().includes(st) 
-        );
-      });
+        const st = this.search1.toLowerCase();
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.historiqueAffectation.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                item.annee_amortissement < this.nombreJourTraitementCalucle
+            })
+            return colect.filter(items => {
+                return (
+                     items.matricule_auteur.toLowerCase().includes(st) 
+                );
+            });
+        }
+
+        return this.historiqueAffectation.filter(items => {
+            return (
+                 items.matricule_auteur.toLowerCase().includes(st)
+            );
+        });
+
     },
+
+
+
+
+
+
+
+
+
+
+
+
+
+// filtreMaterielAmortis() {
+//       const st = this.search1.toLowerCase();
+//       return this.afficheEquipementAmortie.filter(type => {
+//         return (
+//           type.matricule_auteur.toLowerCase().includes(st) 
+//         );
+//       });
+//     },
     afficheNombreEquipementEnCoursUtilidation() {
    
-    return this.historiqueAffectation.filter(qtreel => qtreel.annee_amortissement >= this.nombreJourTraitementCalucle).length;     
+    return this.filtreMatricule.length;     
       
     },
     afficheNombreEquipementAmortie() {
    
-    return this.historiqueAffectation.filter(qtreel => qtreel.annee_amortissement < this.nombreJourTraitementCalucle).length;     
+    return this.filtreMaterielAmortis.length;     
       
     },
 afficheEquipementEnCoursUtilidation() {

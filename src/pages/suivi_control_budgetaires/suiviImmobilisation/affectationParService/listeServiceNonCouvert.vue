@@ -1,9 +1,5 @@
-afficherQuantiteEnStock
-afficherQuantiteEnRequise
-afficherAffectationParFonction
-afficherQuantiteSortir
-afficherActeurDepenseMatricule
-
+afficheNombreQteACouvert
+afficheQteACouvert
 <template>
 
 <div>
@@ -32,7 +28,7 @@ afficherActeurDepenseMatricule
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for=" (affectService) in equipementNonCouvert"
+                    <tr class="odd gradeX" v-for=" (affectService) in listeDesEquipementNonCouvertDeUa"
                         :key="affectService.id">
                         
                               <td >
@@ -58,12 +54,12 @@ afficherActeurDepenseMatricule
                   
                   
                   
-                  <!-- <td></td> -->
+                
                   <td style="text-align: center;font-size:14px;font-weight:bold;">Total </td>
                   <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{afficheQteACouvert}}</td>
                    <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{(afficheQteACouvert)-(afficheQteNonCouvert)}}</td>
                   <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{afficheQteNonCouvert}}</td>
-                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{formatageSomme(parseFloat(afficheMontantTotalEquipementNonCouvert))}}</td>
+                  <td style="text-align: center; color:red;font-size:14px;font-weight:bold;">{{formatageSomme(parseFloat(afficheMontantTotalEquipementNonCouvert))}}</td> 
                  </tr>
                  
                     </tbody>
@@ -88,6 +84,7 @@ afficherActeurDepenseMatricule
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from '../../../../../src/Repositories/Repository';
+import {admin,dcf} from "../../../../../src/Repositories/Auth"
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 //import moment from 'moment';
@@ -148,6 +145,9 @@ search:""
       // "chapitres",
       // "sections"
     ]),
+     admin:admin,
+      dcf:dcf,
+     ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
    ...mapGetters("SuiviImmobilisation", ["services",
     "trieUaImmobilisation",
       "equipements",
@@ -182,30 +182,30 @@ search:""
       "demandeMateriel"
    
    ]),
-     afficheQteACouvert() {
+    //  afficheQteACouvert() {
      
-         return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
+    //      return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
 
      
       
      
-    },
-     afficheQteNonCouvert() {
+    // },
+    //  afficheQteNonCouvert() {
      
-         return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+    //      return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
 
      
       
      
-    },
-   afficheMontantTotalEquipementNonCouvert() {
+    // },
+  //  afficheMontantTotalEquipementNonCouvert() {
      
-         return this.servicesua.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+  //        return this.servicesua.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
 
      
       
      
-    },
+  //   },
     //   filtreServiceUniteAdministrative() {
     //   const st = this.search.toLowerCase();
     //   return this.servicesua.filter(type => {
@@ -215,9 +215,87 @@ search:""
     //     );
     //   });
     // },
-        equipementNonCouvert(){
-return this.servicesua.filter(element => element.normeequipement != 0)
-},
+    listeDesEquipementNonCouvertDeUa() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                item.normeequipement != 0
+            })
+          
+        }
+
+       return ""
+
+    },
+    afficheQteACouvert() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
+          
+        }
+
+       return 0
+
+    },
+    afficheQteNonCouvert() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+        }
+
+       return 0
+
+    },
+     afficheMontantTotalEquipementNonCouvert() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                item.normeequipement != 0
+            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+        }
+
+       return 0
+
+    },
+//         equipementNonCouvert(){
+// return this.servicesua.filter(element => element.normeequipement != 0)
+// },
 
 
 afficherUniteAdministrative() {

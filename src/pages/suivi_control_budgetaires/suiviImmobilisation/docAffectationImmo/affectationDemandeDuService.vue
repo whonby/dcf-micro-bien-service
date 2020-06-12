@@ -1,6 +1,4 @@
-afficheCauseInactivite
-verrouilleCause
-modifierDemandeMateriel
+
 <template>
 
 <div>
@@ -350,6 +348,7 @@ modifierDemandeMateriel
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from '../../../../../src/Repositories/Repository';
+import {admin,dcf} from "../../../../../src/Repositories/Auth"
 import moment from 'moment';
 export default {
     data(){
@@ -386,7 +385,9 @@ search:""
     created(){},
 
        computed: {
-
+admin:admin,
+      dcf:dcf,
+     ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
             ...mapGetters("bienService", [ "gettersCotations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
@@ -450,7 +451,98 @@ search:""
       "demandeMateriel"
    
    ]),
+
+   afficheToutDemande() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                  item.fonction_id == 0
+            })
+          
+          
+        }
+
+       return 0
+
+    },
+
+    validationDemandeDuServiceParDirecteur() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                  item.fonction_id == 0 && item.motif_directeur_sce != 10
+            })
+          
+          
+        }
+
+       return 0
+
+    },
   
+
+
+
+
+   nombreDemande() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                  item.fonction_id == 0
+            }).length
+          
+          
+        }
+
+       return 0
+
+    },
+
+    nombreValidationEnAttenteDirecteur() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                  item.fonction_id == 0 && item.motif_directeur_sce != 10
+            }).length
+          
+          
+        }
+
+       return 0
+
+    },
     //   filtreServiceUniteAdministrative() {
     //   const st = this.search.toLowerCase();
     //   return this.servicesua.filter(type => {
@@ -505,27 +597,27 @@ affichierService() {
 
 
 
-validationDemandeDuServiceParDirecteur() {
+// validationDemandeDuServiceParDirecteur() {
       
-          return this.demandeMateriel.filter(element => element.fonction_id == 0 && element.motif_directeur_sce != 10);
+//           return this.demandeMateriel.filter(element => element.fonction_id == 0 && element.motif_directeur_sce != 10);
        
-    },
-afficheToutDemande() {
+//     },
+// afficheToutDemande() {
       
-          return this.demandeMateriel.filter(element => element.fonction_id == 0 );
+//           return this.demandeMateriel.filter(element => element.fonction_id == 0 );
        
-    },
+//     },
 
-    nombreDemande() {
+//     nombreDemande() {
       
-          return this.afficheToutDemande.length;
+//           return this.afficheToutDemande.length;
        
-    },
-nombreValidationEnAttenteDirecteur() {
+//     },
+// nombreValidationEnAttenteDirecteur() {
       
-          return this.validationDemandeDuServiceParDirecteur.length;
+//           return this.validationDemandeDuServiceParDirecteur.length;
        
-    },
+//     },
 
 
 

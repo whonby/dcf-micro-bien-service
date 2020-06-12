@@ -1,4 +1,4 @@
-
+afficheQteACouvert
 <template>
   
    
@@ -194,13 +194,13 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab456">Listes des services   <span class="badge badge-inverse">{{afficheNombreToutPersonne}}</span></a>
+                        <a data-toggle="tab" href="#tab456">Listes des services   <span class="badge badge-inverse">{{NombreDeService}}</span></a>
                       </li>
                        <li class="">
                         <a data-toggle="tab" href="#tab46">Listes des services non Equipé  <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
                       </li>
                       <li class="">
-                        <a data-toggle="tab" href="#tab89">Equipements Non Couverts   <span class="badge badge-warning">{{NombreafficheEquipementNonCouvertService}}</span></a>
+                        <a data-toggle="tab" href="#tab89">Equipements Non Couverts   <span class="badge badge-warning">{{affichenbreEquipementNonCouvert}}</span></a>
                       </li>
                        <li class="">
                         <a data-toggle="tab" href="#tab63">Listes des services Equipé     <span class="badge badge-info">{{NombreafficheEquipementCouvertService}}</span></a>
@@ -328,7 +328,7 @@
                 <tbody>
                    <tr
                     class="odd gradeX"
-                    v-for="(BesoinImmo,index) in afficheValidationChefService"
+                    v-for="(BesoinImmo,index) in afficheValidationServiceDemandeDuPersonnel"
                     :key="BesoinImmo.id"
                   >
    
@@ -434,7 +434,7 @@
                   
                   <tr
                     class="odd gradeX"
-                    v-for="(BesoinImmo,index) in afficheValidationDirecteur"
+                    v-for="(BesoinImmo,index) in afficheValidationDirecteurDemandeDuPersonnel"
                     :key="BesoinImmo.id"
                   >
    
@@ -551,7 +551,7 @@
                  
                  <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in afficheToutDemande"
+                    v-for="BesoinImmo in afficheLesDemandeDuPersonnel"
                     :key="BesoinImmo.id"
                   >
    
@@ -1522,6 +1522,33 @@ cause_directeur:""
 admin:admin,
       dcf:dcf,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
+
+
+ affichenbreEquipementNonCouvert() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                item.normeequipement != 0
+            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+        }
+
+       return 0
+
+    },
+
+
+
+
+
 listePersonnelAffectete() {
       
 
@@ -1641,25 +1668,151 @@ AfficheTotalQteNonCouvert() {
        return "0"
 
     },
+AfficheTotalQteACouvrir() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.acte_personnels.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
+          
+        }
+
+       return "0"
+
+    },
+afficheMontantTotalEquipementNonCouvert() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficheMontantTotalEquipementNonCouv.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+          
+        }
+
+       return "0"
+
+    },
 
 
 
+afficheLesDemandeDuPersonnel() {
+      
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                item.service_id == 0
+            })
+        }
+
+       return "0"
+
+    },
+afficheValidationServiceDemandeDuPersonnel() {
+      
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficheValidationChefService.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+        }
+
+       return "0"
+
+    },
+    afficheValidationDirecteurDemandeDuPersonnel() {
+      
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficheValidationDirecteur.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+        }
+
+       return "0"
+
+    },
+
+listeDesServiceDeUa() {
+      
 
 
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          
+        }
+
+       return ""
+
+    },
 
 
     NombreDeService() {
      
-         return this.servicesua.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+         return this.listeDesServiceDeUa.length;
     },
 NombreafficheEquipementNonCouvertService() {
      
          return this.servicesua.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
     },
-NombreafficheEquipementCouvertService() {
-     
-         return this.servicesua.filter(element => element.normeequipement == 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+    NombreafficheEquipementCouvertService() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                  item.normeequipement == 0
+            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+          
+          
+        }
+
+       return 0
+
     },
+// NombreafficheEquipementCouvertService() {
+     
+//          return this.servicesua.filter(element => element.normeequipement == 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+//     },
  afficheService() {
       return id => {
         if (id != null && id != "") {
@@ -1686,15 +1839,11 @@ NombreafficheEquipementCouvertService() {
     },
 
 
- afficheMontantTotalEquipementNonCouvert() {
+ afficheMontantTotalEquipementNonCouv() {
      
-         return this.acte_personnels.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+         return this.acte_personnels.filter(element => element.normeequipement != 0);
     },
 
-AfficheTotalQteACouvrir() {
-     
-         return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
-    },
 // AfficheTotalQteNonCouvert() {
      
 //          return this.acte_personnels.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
@@ -1900,24 +2049,24 @@ afficheValidationDirecteur() {
           return this.demandeMateriel.filter(element => element.service_id == 0 && element.motif != 0 && element.motif != 5 && element.motif != 4 && element.motif != 10);
        
     },
-afficheToutDemande() {
+// afficheToutDemande() {
       
-          return this.demandeMateriel.filter(element => element.service_id == 0 );
+//           return this.demandeMateriel.filter(element => element.service_id == 0 );
        
-    },
+//     },
 nombreValidationEnAttenteChefService() {
       
-          return this.afficheValidationChefService.length;
+          return this.afficheValidationServiceDemandeDuPersonnel.length;
        
     },
-    nombreDemande() {
+    // nombreDemande() {
       
-          return this.afficheToutDemande.length;
+    //       return this.afficheLesDemandeDuPersonnel.length;
        
-    },
+    // },
 nombreValidationEnAttenteDirecteur() {
       
-          return this.afficheValidationDirecteur.length;
+          return this.afficheValidationDirecteurDemandeDuPersonnel.length;
        
     },
 

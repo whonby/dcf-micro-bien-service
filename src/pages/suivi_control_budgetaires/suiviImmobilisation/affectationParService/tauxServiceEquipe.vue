@@ -73,6 +73,7 @@
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from '../../../../../src/Repositories/Repository';
+import {admin,dcf} from "../../../../../src/Repositories/Auth"
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 //import moment from 'moment';
@@ -103,7 +104,9 @@ search:""
     created(){},
 
        computed: {
-
+ admin:admin,
+      dcf:dcf,
+     ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
             ...mapGetters("bienService", [ "gettersCotations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
@@ -167,6 +170,35 @@ search:""
       "demandeMateriel"
    
    ]),
+
+
+ tauxServiceEquipe() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                  item.normeequipement != null
+            })
+          
+          
+        }
+
+       return 0
+
+    },
+
+
+
+
+
+
    afficheMontantTotalEquipementNonCouvert() {
      
          return this.servicesua.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
@@ -184,9 +216,9 @@ search:""
     //     );
     //   });
     // },
-        tauxServiceEquipe(){
-return this.servicesua.filter(element => element.normeequipement != null)
-},
+//         tauxServiceEquipe(){
+// return this.servicesua.filter(element => element.normeequipement != null)
+// },
 
 
 afficherUniteAdministrative() {
