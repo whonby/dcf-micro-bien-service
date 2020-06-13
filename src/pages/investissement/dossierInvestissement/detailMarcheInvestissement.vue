@@ -117,6 +117,7 @@ CodeExempte
                     </div>
 
 
+
                 </div>
                 <component-acte :macheid="detail_marche.id"></component-acte>
 
@@ -138,13 +139,6 @@ CodeExempte
 
 
                    <div id="tab4" class="tab-pane">
-                <div align="right">
-                    <div class="widget-content">
-                        <a href="#ajouterOuverture" data-toggle="modal" class="btn btn-success">Ajouter</a>
-                    </div>
-
-
-                </div>
                
                    <component-ouverture :macheid="detail_marche.id"></component-ouverture>
                 </div>

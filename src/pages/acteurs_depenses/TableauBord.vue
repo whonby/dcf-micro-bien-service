@@ -88,7 +88,7 @@
 
         
 
-        <li class="bg_ly span4"> <a href="#" style="color:black;"><h4>COUT MOYEN</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px" v-if="tauxActeurNonAccredite!='NaN'">{{formatageSomme(parseFloat(coutMoyenDeMission))}}%</span> <h4> DE MISSION</h4></a> </li>
+        <li class="bg_ly span4"> <a href="#" style="color:black;"><h4>COUT MOYEN</h4> <i class="icon-fullscreen"></i><span class="label label-important" style="font-size:15px" v-if="tauxActeurNonAccredite!='NaN'">{{formatageSomme(parseFloat(coutMoyenDeMission))}}</span> <h4> DE MISSION</h4></a> </li>
   
 
 
