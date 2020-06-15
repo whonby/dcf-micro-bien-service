@@ -260,7 +260,7 @@ ImputationBudgetModifier
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des marches attribués</h5>
+              <h5>Liste des marches attribués </h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -285,7 +285,7 @@ ImputationBudgetModifier
                 </thead>
                 <tbody >
                   <tr class="odd gradeX" v-for="(marche, index) in 
-                  marcherAttribuerFiltre"
+                  afficherlisteMarcheExecutionParDroitAccess"
                  :key="marche.id">
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
@@ -391,6 +391,7 @@ ImputationBudgetModifier
 <script>
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../../src/Repositories/Repository";
+ import {admin,dcf} from '../../../../src/Repositories/Auth';
 export default {
   name:'type facture',
   data() {
@@ -440,6 +441,38 @@ export default {
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
+   ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
+  admin:admin,
+  dcf:dcf,
+  
+afficherlisteMarcheExecutionParDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.marcherAttribuerFiltre.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.marcherAttribuerFiltre
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+    },
+
+
  afficherAttributMarche() {
       return id => {
         if (id != null && id != "") {
