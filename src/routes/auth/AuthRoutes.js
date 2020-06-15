@@ -13,6 +13,7 @@ const AuthRoutes = [
        component: Login
      },
 
+     
      {
       path: '/logout',
      name:"Logout",

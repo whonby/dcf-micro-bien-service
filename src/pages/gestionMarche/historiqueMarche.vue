@@ -72,10 +72,9 @@
                <div class="control-group">
             <label class="control-label" title="unite administrative">UA</label>
             <div class="controls">
-            <select v-model="formData.unite_administrative_id" class="span4">
-               <option v-for="plans in groupUa" 
-               :key="plans[0].id" 
-               :value="plans[0].afficheUA.id">{{plans[0].afficheUA.libelle}}</option>
+            <select v-model="formData.ua_id" class="span">
+               <option v-for="plans in afficherParUAEnfonctiondesRole" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
            </select>
             </div>
           </div>
@@ -627,7 +626,7 @@
                 </thead>
                 <tbody>
                    <tr class="odd gradeX" v-for="(marche, index) in 
-                printMarcheNonAttribue"
+                afficherlisteMarcheParDroitAccess"
                  :key="marche.id">
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
@@ -756,6 +755,7 @@
 <script>
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../src/Repositories/Repository";
+ import {admin,dcf} from '../../../src/Repositories/Auth';
 export default {
   name:'type facture',
   data() {
@@ -864,6 +864,70 @@ export default {
    ...mapGetters("gestionMarche", ['entreprises']),
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
+
+  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
+     admin:admin,
+     dcf:dcf,
+
+afficherlisteMarcheParDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.printMarcheNonAttribue.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.printMarcheNonAttribue
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+    },
+
+     afficherParUAEnfonctiondesRole() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+             return colect;
+            // console.log(colect)
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return 0;
+        //return this.uniteAdministratives
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+        
+
+    },
+
+
 
       CodeExempte() {
       return id => {

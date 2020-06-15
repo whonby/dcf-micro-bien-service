@@ -81,6 +81,7 @@ export default {
     readerData(rawFile) {
       this.loading = true
       return new Promise((resolve, reject) => {
+        console.log(reject)
         const reader = new FileReader()
         reader.onload = e => {
           const data = e.target.result
@@ -95,6 +96,7 @@ export default {
         }
         reader.readAsArrayBuffer(rawFile)
       })
+      
     },
     getHeaderRow(sheet) {
       const headers = []
