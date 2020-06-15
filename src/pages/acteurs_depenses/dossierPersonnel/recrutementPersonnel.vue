@@ -382,11 +382,11 @@
                         <!-- <th>Montant prevue</th> -->
                                 <th>Status</th>
                                 <th>Action</th>
-                </tr>
+                </tr> 
                 </thead>
-                <tbody>
+                <tbody> 
                         <tr class="odd gradeX" v-for="(marche, index) in 
-                listeContratEnContratualisation"
+                afficherContratContratualisationParDroitAccess"
                  :key="marche.id">
                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.id || 'Non renseigné'}}</td> -->
@@ -472,7 +472,7 @@
                 <tbody>
                  
                         <tr class="odd gradeX" v-for="(marche, index) in 
-                afficherLaListeDesContratsDuPersonnel"
+                afficherContratParDroitAccess"
                  :key="marche.id">
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
@@ -703,12 +703,12 @@
                         <th>Reference march&eacute;</th> 
                           <!-- <th>Montant prevue</th> -->
                                 <th>Status</th>
-                                <th>Action</th>
+                                <th>Action</th> 
                 </tr>
                 </thead>
-                <tbody>
+                <tbody> 
                    <tr class="odd gradeX" v-for="(marche, index) in 
-                afficherContratPlanifier"
+                afficherContratPlanificationParDroitAccess"
                  :key="marche.id">
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
@@ -1654,9 +1654,9 @@
     </div>
     <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
 
-    <fab :actions="fabActions" @cache="afficherModalAjoutTypaPrestation" main-icon="apps" bg-color="green"></fab>
+    <!-- <fab :actions="fabActions" @cache="afficherModalAjoutTypaPrestation" main-icon="apps" bg-color="green"></fab>
  <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjoutTypaPrestation()">Open</button>
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button> -->
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
     </div>
@@ -1665,6 +1665,7 @@
 <script>
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../../src/Repositories/Repository";
+   import {admin,dcf} from "../../../../src/Repositories/Auth";
 export default {
   name:'type facture',
   data() {
@@ -1772,6 +1773,90 @@ export default {
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
    ...mapGetters("gestionMarche", ['entreprises']),
 ...mapGetters('personnelUA', ['acteur_depenses','dossierPersonnels']),
+
+admin:admin,
+dcf:dcf,
+...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
+ afficherContratParDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficherLaListeDesContratsDuPersonnel.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.afficherLaListeDesContratsDuPersonnel
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+    },
+
+ afficherContratPlanificationParDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficherContratPlanifier.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.afficherContratPlanifier
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+    },
+
+
+    
+ afficherContratContratualisationParDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.listeContratEnContratualisation.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.listeContratEnContratualisation
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+    },
 
 //  afficheIdTypeMarche() {
 //     return this.printMarcheNonAttribue.filter(element => element.type_marche.libelle == "Prestations Intellectuelles")

@@ -2,7 +2,10 @@
     <div>
         <div class="container-fluid">
 
-            <notifications  />
+
+
+
+
             <div class="widget-box">
                 <div class="widget-title">
               <span class="icon">
@@ -15,62 +18,131 @@
                      </div>-->
                 </div>
 
-                <div class="widget-content nopadding" >
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>Code budget</th>
-                            <th>Exercice budget</th>
-                            <th>Status</th>
-                           <th>Montant Global</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr v-for="passation in getterBudgeCharge" :key="passation.id">
+                <div class="">
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#tab1">Budget importer</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab2">Importation du budget</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="widget-content tab-content">
+                            <div id="tab1" class="tab-pane active">
+                                <div class="widget-content nopadding" >
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>Code budget</th>
+                                            <th>Exercice budget</th>
+                                            <th>Status</th>
+                                            <th>Montant Global</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-for="passation in getterBudgeCharge" :key="passation.id">
 
 
-                            <td v-if="passation.status=='init'" style="background-color: red; color:#fff">{{passation.code}}</td>
-                            <td v-else-if="passation.actived == 1 && passation.status=='actu' " style="background-color: green; color:#fff">{{passation.code}}</td>
-                            <td v-else-if="passation.actived == 0 && passation.status=='actu'"  >{{passation.code}}</td>
+                                            <td v-if="passation.status=='init'" style="background-color: red; color:#fff">{{passation.code}}</td>
+                                            <td v-else-if="passation.actived == 1 && passation.status=='actu' " style="background-color: green; color:#fff">{{passation.code}}</td>
+                                            <td v-else-if="passation.actived == 0 && passation.status=='actu'"  >{{passation.code}}</td>
 
-                            <td v-if="passation.status=='init'" style="background-color: red; color:#fff">{{passation.exercice}}</td>
-                            <td v-else-if="passation.actived == 1 && passation.status=='actu' " style="background-color: green; color:#fff">{{passation.exercice}}</td>
-                            <td v-else-if="passation.actived == 0 && passation.status=='actu'"  >{{passation.exercice}}</td>
-
-
-                            <td v-if="passation.status=='init'" style="background-color: red; color:#fff"> Budget initiale  </td>
-                            <td v-else-if="passation.actived == 1 && passation.status=='actu' " style="background-color: green; color:#fff"> Budget actuelle  </td>
-                            <td v-else-if="passation.actived == 0 && passation.status=='actu'"   > Version {{passation.version}} </td>
-                               <!-- <span v-if="passation.status=='init'" class="label label-important">Budget initiale</span>
-                                <span  v-else-if="passation.actived == 1 && passation.status=='actu' " class="label label-success">Budget actuelle</span>
-
-                                <span v-else-if="passation.actived == 0 && passation.status=='actu'" class="label label-warning">Version {{passation.version}}</span>-->
+                                            <td v-if="passation.status=='init'" style="background-color: red; color:#fff">{{passation.exercice}}</td>
+                                            <td v-else-if="passation.actived == 1 && passation.status=='actu' " style="background-color: green; color:#fff">{{passation.exercice}}</td>
+                                            <td v-else-if="passation.actived == 0 && passation.status=='actu'"  >{{passation.exercice}}</td>
 
 
+                                            <td v-if="passation.status=='init'" style="background-color: red; color:#fff"> Budget initiale  </td>
+                                            <td v-else-if="passation.actived == 1 && passation.status=='actu' " style="background-color: green; color:#fff"> Budget actuelle  </td>
+                                            <td v-else-if="passation.actived == 0 && passation.status=='actu'"   > Version {{passation.version}} </td>
+                                            <!-- <span v-if="passation.status=='init'" class="label label-important">Budget initiale</span>
+                                             <span  v-else-if="passation.actived == 1 && passation.status=='actu' " class="label label-success">Budget actuelle</span>
 
-                            <td v-if="passation.status=='init'" style="background-color: red; color:#fff">{{formatageSomme(montantGlobale(passation.id))}}</td>
-                            <td v-else-if="passation.actived == 1 && passation.status=='actu' " style="background-color: green; color:#fff">{{formatageSomme(montantGlobale(passation.id))}}</td>
-                            <td v-else-if="passation.actived == 0 && passation.status=='actu'"  >{{formatageSomme(montantGlobale(passation.id))}}</td>
+                                             <span v-else-if="passation.actived == 0 && passation.status=='actu'" class="label label-warning">Version {{passation.version}}</span>-->
 
 
-                            <td v-if="passation.status=='init'" style="background-color: red; color:#fff"> <router-link :to="{ name: 'DetailBudgetImporte', params: { id: passation.id }}"
-                                                                                                                        class="btn btn-default " title="Detail marches">
-                                <span class=""><i class="icon-folder-open"></i></span>
-                            </router-link></td>
-                            <td v-else-if="passation.actived == 1 && passation.status=='actu' " style="background-color: green; color:#fff">
-                                <router-link :to="{ name: 'DetailBudgetImporte', params: { id: passation.id }}"
-                                             class="btn btn-default " title="Detail marches">
-                                    <span class=""><i class="icon-folder-open"></i></span>
-                                </router-link></td>
-                            <td v-else-if="passation.actived == 0 && passation.status=='actu'" > <router-link :to="{ name: 'DetailBudgetImporte', params: { id: passation.id }}"
-                                                                                                                                                           class="btn btn-default " title="Detail marches">
-                                <span class=""><i class="icon-folder-open"></i></span>
-                            </router-link></td>
 
-                        </tr>
-                        </tbody>
-                    </table>
+                                            <td v-if="passation.status=='init'" style="background-color: red; color:#fff">{{formatageSomme(montantGlobale(passation.id))}}</td>
+                                            <td v-else-if="passation.actived == 1 && passation.status=='actu' " style="background-color: green; color:#fff">{{formatageSomme(montantGlobale(passation.id))}}</td>
+                                            <td v-else-if="passation.actived == 0 && passation.status=='actu'"  >{{formatageSomme(montantGlobale(passation.id))}}</td>
+
+
+                                            <td v-if="passation.status=='init'" style="background-color: red; color:#fff"> <router-link :to="{ name: 'DetailBudgetImporte', params: { id: passation.id }}"
+                                                                                                                                        class="btn btn-default " title="Detail marches">
+                                                <span class=""><i class="icon-folder-open"></i></span>
+                                            </router-link></td>
+                                            <td v-else-if="passation.actived == 1 && passation.status=='actu' " style="background-color: green; color:#fff">
+                                                <router-link :to="{ name: 'DetailBudgetImporte', params: { id: passation.id }}"
+                                                             class="btn btn-default " title="Detail marches">
+                                                    <span class=""><i class="icon-folder-open"></i></span>
+                                                </router-link></td>
+                                            <td v-else-if="passation.actived == 0 && passation.status=='actu'" > <router-link :to="{ name: 'DetailBudgetImporte', params: { id: passation.id }}"
+                                                                                                                              class="btn btn-default " title="Detail marches">
+                                                <span class=""><i class="icon-folder-open"></i></span>
+                                            </router-link></td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="tab2" class="tab-pane">
+                                    <input
+                                            type="text"
+                                            class="span"
+                                            readonly
+                                            :value="anneeAmort"
+                                    />
+                                <upload-excel-component :on-success="handleSuccess" :before-upload="beforeUpload" />
+                                <hr>
+                                <a align="right"
+                                        @click.prevent="ajouterFichier"
+                                        class="btn btn-primary"
+                                        href="#"
+                                      v-if="tableData.length"
+                                >Importer</a>
+                                <table class="table table-bordered table-striped" v-if="tableData.length">
+                                    <thead>
+                                    <tr>
+
+                                        <th>SECTION</th>
+                                        <th>PROGRAMME</th>
+                                        <th>GRANDE NATURE DE DEPENSE</th>
+                                        <th>UA </th>
+                                        <th>ZONE </th>
+                                        <th>ACTION</th>
+                                        <th>ACTIVITE</th>
+                                        <th>TYPE FINACEMENT</th>
+                                        <th>SOURCE FINANCEMENT</th>
+                                        <th>LIGNE</th>
+                                        <th>DOTATION</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="data in tableData" :key="data.id">
+                                        <td>{{data["SECTION"]}}</td>
+                                        <td>{{data["PROGRAMME"]}}</td>
+                                        <td>{{data["GRANDE NATURE DE DEPENSE"]}}</td>
+                                        <td>{{data["UA"]}}</td>
+                                        <td>{{data["ZONE"]}}</td>
+                                        <td>{{data["ACTION"]}}</td>
+                                        <td>{{data["ACTION"]}}</td>
+                                        <td>{{data["TYPE FINANCEMENT"]}}</td>
+                                        <td>{{data["SOURCE FINANCEMENT"]}}</td>
+                                        <td>{{data["LIGNE"]}}</td>
+                                        <td>{{data["DOTATION"]}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <hr>
+                               <!-- <el-table :data="tableData" border highlight-current-row style="width: 100%;margin-top:20px;">
+                                    <el-table-column v-for="item of tableHeader" :key="item" :prop="item" :label="item" />
+                                </el-table>-->
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
@@ -126,7 +198,7 @@
             </div>
         </div>
 
-        <fab :actions="fabActions" @cache="afficherModalAjouterStock" main-icon="apps" bg-color="green"></fab>
+      <!--  <fab :actions="fabActions" @cache="afficherModalAjouterStock" main-icon="apps" bg-color="green"></fab>-->
 
         <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
     </div>
@@ -135,11 +207,12 @@
 <script>
     import { mapGetters, mapActions } from "vuex";
     import { formatageSomme } from "../../Repositories/Repository";
+    import UploadExcelComponent from '@/components/UploadExcel/index.vue'
     //import ProgressBar from "../component/ProgressBar"
     export default {
         name: 'budget',
         components:{
-            //ProgressBar
+            UploadExcelComponent
         },
         data() {
             return {
@@ -150,6 +223,8 @@
                     }
 
                 ],
+                tableData: [],
+                tableHeader: [],
                 progress:0,
                 bgWidth: '0%',
                 bgHeight: '30px',
@@ -248,6 +323,24 @@
                 console.log(this.selectedFile)
                 Array.from(files).forEach(file => this.addFichier(file));
             },
+            beforeUpload(file) {
+                const isLt1M = file.size / 1024 / 1024 < 1
+
+                if (isLt1M) {
+                    return true
+                }
+
+                this.$message({
+                    message: 'Please do not upload files larger than 1m in size.',
+                    type: 'warning'
+                })
+                return false
+            },
+            handleSuccess({ results, header }) {
+               // console.log(results[0]["GRANDE NATURE DE DEPENSE"])
+                this.tableData = results
+                this.tableHeader = header
+            },
             addFichier(file) {
                 let reader = new FileReader();
                 let vm = this;
@@ -266,22 +359,30 @@
                 });
             },
             ajouterFichier(){
-                const formData = new FormData();
+               /* const formData = new FormData();
                 formData.append('fichier', this.selectedFile, this.selectedFile.name);
                 formData.append('exercicebudget_id', this.exercice_budget);
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'
                     }
+                }*/
+                let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
                 }
-
+                let formData={
+                    exercicebudget_id:this.exercice_budget,
+                    dataExcel:this.tableData
+                }
 
                 this.i= this.i+10;
                 this.bgWidth=this.i+"%"
                 this.$("#exampleModal").modal('hide');
                 this.ajouterBudgetCharge(formData,config).then(data=>{
                     console.log(data)
-                    //this.getAllBudgetGeneral()
+                    this.tableData=[]
                 }).catch(erro=>{
                     console.log(erro)
                     this.getAllBudgetGeneral()

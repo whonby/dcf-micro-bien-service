@@ -68,7 +68,7 @@ export default {
 
   methods: {
 
-    ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation"]),
+    ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser"]),
       ...mapActions('parametreGenerauxFonctionnelle', 
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
 
@@ -162,7 +162,12 @@ export default {
   },
 
   created(){
+    let objet=localStorage.getItem('Users');
+    let user=JSON.parse (objet)
+
     this.getAffectation()
+
+
     this.getRoles()
     this.getUtilisateurs()
     this.getPlanPassationMarche()
@@ -226,7 +231,7 @@ this.getAllRealiteServiceFait()
 
 
 
-
+    this.getUniteAdminUser(user.id)
 
 this.getTypeCandidat();
 this.getTypeAppel()

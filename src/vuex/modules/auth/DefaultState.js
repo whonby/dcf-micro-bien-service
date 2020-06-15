@@ -10,7 +10,8 @@ const defaultstate = {
     type_uas: [],
     utilisateur:[],
     roles:[],
-    affectation:[]
+    affectation:[],
+    uniteAdministrativeByUser:[]
 
 
 };

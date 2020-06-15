@@ -273,7 +273,7 @@ export default {
       // "chapitres",
       // "sections"
     ]),
-    
+      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
     ...mapGetters("parametreGenerauxAdministratif", [
       
       "sections",
@@ -331,7 +331,7 @@ export default {
     
   },
   methods: {
-    
+
  formatageSomme: formatageSomme,
     
     alert() {

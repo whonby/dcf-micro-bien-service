@@ -112,7 +112,7 @@
               <label class="control-label">Unite administrative:</label>
               <div class="controls">
            <select v-model="editMission.ua_id" class="span">
-               <option v-for="plans in uniteAdministratives" :key="plans.id" 
+               <option v-for="plans in afficherMissionParUAEnfonctiondesRole" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
               </div>
@@ -125,7 +125,7 @@
               <div class="controls">
            <select v-model="editMission.acte_personnel_id" class="span" >
                <option v-for="depense in all_acteur_depense" :key="depense.id" 
-               :value="depense.id">{{depense.matricule}}</option>
+               :value="depense.acte_personnel_id">{{depense.matricule}} =>{{depense.nom}} {{depense.prenom}}</option>
            </select>
               </div>
             </div>
@@ -151,7 +151,7 @@
             <div class="control-group">
               <label class="control-label">Fonction:</label>
               <div class="controls " >
-     <input type="text" class="span" :value="afficherLaFonctionDActeurDepenseDynamique(editMission.acte_personnel_id)"  >
+     <input type="text" class="span" :value="afficherLibelleFonction(afficherLaFonctionDActeurDepenseDynamique(editMission.acte_personnel_id))"  >
       
               </div>
             </div>
@@ -419,6 +419,7 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import {admin,dcf} from "../../../../src/Repositories/Auth"
 export default {
   
   data() {
@@ -482,21 +483,35 @@ export default {
   },
   computed: {
 
-
+// afficher ID de la fonction 
 
      afficherLaFonctionDActeurDepenseDynamique(){
      return acte_personnel_id => {
        if( acte_personnel_id != undefined) {
-    var acteur = this.all_acteur_depense.find(acteur => acteur.id == acte_personnel_id  )
+    var acteur = this.all_acteur_depense.find(acteur => acteur.acte_personnel_id == acte_personnel_id  )
     
      // this.fonctionActeur = acteur.fonction.id
-      // console.log(acteur)
-     return (acteur) ? acteur.fonction.libelle :null
+      // console.log(acteur).
+
+     return (acteur) ? acteur.fonction_id :null
        }
     return null
      }
   
    },
+
+// recuperer le libelle de la fonction
+
+afficherLibelleFonction(){
+  return id =>{
+    if(id!=null && id!=""){
+      let data = this.fonctions.find(item => item.id==id)
+      if(data) return data.libelle;
+    }
+    return null
+  }
+},
+
 
   anneeBugetaire(){
      const anneBudget = this.exercices_budgetaires.find(anneBudg =>anneBudg.encours == 1 );
@@ -510,7 +525,7 @@ export default {
    afficherNomPrenomActeurDepense(){
      return acte_personnel_id => {
        if( acte_personnel_id != undefined) {
-    var acteur = this.all_acteur_depense.find(acteur => acteur.id == acte_personnel_id  )
+    var acteur = this.all_acteur_depense.find(acteur => acteur.acte_personnel_id == acte_personnel_id  )
     
      // this.fonctionActeur = acteur.fonction.id
       // console.log(acteur)
@@ -559,6 +574,43 @@ deveroueconomiq() {
   ...mapGetters('personnelUA', ['all_acteur_depense','fonctions']),
   ...mapGetters('uniteadministrative', ['uniteAdministratives', 'getPersonnaliseBudgetGeneralParPersonnel']),
     ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
+
+     ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+    
+    admin:admin,
+    dcf:dcf,
+   
+   
+    afficherMissionParUAEnfonctiondesRole() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+             return colect;
+            // console.log(colect)
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return 0;
+        //return this.uniteAdministratives
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+        
+
+    }
    
   
   },

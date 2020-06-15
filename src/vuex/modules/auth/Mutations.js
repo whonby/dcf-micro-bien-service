@@ -173,3 +173,9 @@ export const MODIFIER_AFFECTATION = (state, objetModifie) => {
         return type
     })
 }
+
+
+export const GET_UNITEADMIN_BY_USER = (state, objetModifie) => {
+    state.uniteAdministrativeByUser = objetModifie
+
+}

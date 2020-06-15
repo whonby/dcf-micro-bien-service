@@ -385,13 +385,13 @@ type_financement
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab2078">Toutes les marches d'investissement  <span class="badge badge" > {{nombreDeMarcheI}}</span></a></li>
+                               <li class="active"><a data-toggle="tab" href="#tab2078"> Marchés <span class="badge badge" > {{nombreDeMarcheI}}</span></a></li>
                                
-                               <li ><a data-toggle="tab" href="#tab100" title="marché planifié en investissement">Marchés Planifiés I.   <span class="badge badge-important" >    {{nombreMarcheEnplanification}}</span></a></li>
-                                <li ><a data-toggle="tab" href="#tab10" title="marché en contratualisation d'investissement">Marché en cours Contratualisation I.   <span class="badge badge-success" >{{nombreDeMarcheEnContratualisation}}</span></a></li>
-                                <li><a data-toggle="tab" href="#tab20" title="marché en execution d'investiisement">Marchés en Exécution I.    <span class="badge badge-warning" >{{afficheNombreMarchExecuter}}</span></a></li>
-                                 <li><a data-toggle="tab" href="#tab20002" title="marché resilié d'investissement">Marchés Résiliés I.   <span class="badge badge-info" >     {{afficheNombreMarcheResilier}}</span></a></li>
-                                  <li><a data-toggle="tab" href="#tab2000256"  title="marché terminé d'investissement">Marchés Terminé I.   <span class="badge badge-inverse" >     {{nombreAfficheMarcheSolde}}</span></a></li>
+                               <li ><a data-toggle="tab" href="#tab100" title="marché planifié en investissement">Planifications  <span class="badge badge-important" >    {{nombreMarcheEnplanification}}</span></a></li>
+                                <li ><a data-toggle="tab" href="#tab10" title="marché en contratualisation d'investissement">Contratualisation  <span class="badge badge-success" >{{nombreDeMarcheEnContratualisation}}</span></a></li>
+                                <li><a data-toggle="tab" href="#tab20" title="marché en execution d'investiisement">Execution <span class="badge badge-warning" >{{afficheNombreMarchExecuter}}</span></a></li>
+                                 <li><a data-toggle="tab" href="#tab20002" title="marché resilié d'investissement">Resilié <span class="badge badge-info" >     {{afficheNombreMarcheResilier}}</span></a></li>
+                                  <li><a data-toggle="tab" href="#tab2000256"  title="marché terminé d'investissement">Terminé<span class="badge badge-inverse" >     {{nombreAfficheMarcheSolde}}</span></a></li>
 
                             </ul>
                         </div>
@@ -428,7 +428,7 @@ type_financement
                 </thead>
                 <tbody>
                     <tr class="odd gradeX" v-for="(marche, index) in 
-                afficheMarcheTerminer"
+                afficherMarcheInvestissementParTerminerDroitAccess"
                  :key="marche.id">
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{afficherAnneeBudget(marche.marche_id) || 'Non renseigné'}}</td>
@@ -500,8 +500,8 @@ type_financement
                    
                     <th>Activit&eacute;</th>
                     <th>Imputation</th>
-                       <th>Objet march&eacute;</th>
-                        <!-- <th>Reference march&eacute;</th>  -->
+                       <th>Objet march&eacute;</th> 
+                        <!-- <th>Reference march&eacute;</th>  -->    
                                     <th>Montant prevue</th>
                                 <th>Etat du marché</th>
                                 <th colspan="2">Action</th>
@@ -509,7 +509,7 @@ type_financement
                 </thead>
                 <tbody>
                         <tr class="odd gradeX" v-for="(marche, index) in 
-                afficheMarcheEnCoursContratualisation"
+                afficherMarcheInvestissementParEnContratualistationDroitAccess"
                  :key="marche.id">
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
@@ -626,7 +626,7 @@ type_financement
                 <tbody>
                  
                         <tr class="odd gradeX" v-for="(marche, index) in 
-                afficherLaListeDesMarcheDinvestissement"
+                afficherMarcheInvestissementParDroitAccess"
                  :key="marche.id">
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
@@ -762,14 +762,14 @@ type_financement
                     <th>Imputation</th>
                        <th>Objet march&eacute;</th>
                         <!-- <th>Reference march&eacute;</th>  -->
-                                    <th>Montant réel</th>
+                                    <th>Montant réel</th>  
                                 <th>Status</th>
                                 <th colspan="2">Action</th>
                 </tr>
                 </thead>
                 <tbody>
                  <tr class="odd gradeX" v-for="(marche, index) in 
-                afficheMarchExecuter"
+                afficherMarcheInvestissementParExecutionDroitAccess"
                  :key="marche.id">
                  
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -865,11 +865,11 @@ type_financement
                                     <th>Montant prevue</th>
                                 <th>Etat du marché</th>
                                 <th>Action</th>
-                </tr>
+                </tr>    
                 </thead>
-                <tbody>
+                <tbody> 
                    <tr class="odd gradeX" v-for="(marche, index) in 
-                afficheMarcheEnPlanification"
+                afficherMarcheInvestissementParPlanificationDroitAccess"
                  :key="marche.id">
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
@@ -989,13 +989,13 @@ type_financement
                        <th>Date r&eacute;siliation</th>
                          <th>Montant march&eacute;</th>
                                 
-                </tr>
+                </tr> 
                 </thead>
-                <tbody>
+                <tbody> 
                
                        <!-- <input type="text" :value="nombreJourTraitementCalucle"> -->
                   <tr class="odd gradeX" v-for="(marche, index) in 
-                afficheMarcheResilier"
+                afficherMarcheInvestissementParResilierDroitAccess"
                  :key="marche.id">
                  
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -1739,9 +1739,9 @@ type_financement
     </div>
     <!--///////////////////////////////////////// fin modal de modification //////////////////////////////-->
 
-    <fab :actions="fabActions" @cache="afficherModalAjoutTypaPrestation" main-icon="apps" bg-color="green"></fab>
+    <!-- <fab :actions="fabActions" @cache="afficherModalAjoutTypaPrestation" main-icon="apps" bg-color="green"></fab>
  <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjoutTypaPrestation()">Open</button>
-      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
+      <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button> -->
 <!-- <fab :actions="fabActions1" @cache="afficherModalModifierTypeTexte" bg-color="red"></fab> -->
 <notifications  />
     </div>
@@ -1750,6 +1750,7 @@ type_financement
 <script>
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../src/Repositories/Repository";
+  import {admin,dcf} from "../../../src/Repositories/Auth";
 export default {
   name:'type facture',
   data() {
@@ -1842,6 +1843,10 @@ export default {
   },
 
   computed: {
+
+     admin:admin,
+      dcf:dcf,
+
      ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
      'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
      'nombremarchesExecute',
@@ -1861,6 +1866,175 @@ export default {
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
 
+  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
+
+// pour tous les marches en investissement
+   afficherMarcheInvestissementParDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficherLaListeDesMarcheDinvestissement.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.afficherLaListeDesMarcheDinvestissement
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+    },
+
+
+
+afficherMarcheInvestissementParPlanificationDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficheMarcheEnPlanification.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.afficheMarcheEnPlanification
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+    },
+
+
+
+
+/// afficher marche en constratualisation pour investissement
+afficherMarcheInvestissementParEnContratualistationDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficheMarcheEnCoursContratualisation.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.afficheMarcheEnCoursContratualisation
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+    },
+
+
+    afficherMarcheInvestissementParExecutionDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficheMarchExecuter.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.afficheMarchExecuter
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+    },
+
+
+    
+    afficherMarcheInvestissementParResilierDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficheMarcheResilier.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.afficheMarcheResilier
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+    },
+
+    
+    afficherMarcheInvestissementParTerminerDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficheMarcheTerminer.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.afficheMarcheTerminer
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+    },
 
 afficheLeNomDesProcedureModifier(){
   if(this.afficherMontantImputation(this.ImputationBudgetModifier) == ""){
@@ -1989,7 +2163,7 @@ nombreDeMarcheI(){
 // afficher le montant de tout les marche
 
 montantMarcheInvestissement(){
-  return this.afficherLaListeDesMarcheDinvestissement.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+  return this.afficherMarcheInvestissementParDroitAccess.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
 },
 
 

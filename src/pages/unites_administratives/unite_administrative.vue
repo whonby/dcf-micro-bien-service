@@ -346,7 +346,7 @@
  <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                    <h5>Liste des unité d'administrative</h5>
+                    <h5>Liste des unité d'administrative </h5>
                 </div>
                 <div class="span6">
                     <div align="right">
@@ -474,6 +474,7 @@ import 'jspdf-autotable'
 import {partition} from "../../Repositories/Repository"
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
+import {admin,dcf} from "../../Repositories/Auth"
 export default {
   // components: {
   //   ModelListSelect
@@ -522,8 +523,13 @@ export default {
       search: ""
     };
   },
-
-  computed: {
+  
+created() {
+      console.log("INB")
+      console.log(this.getterUniteAdministrativeByUser)
+    console.log("INB14500")
+},
+    computed: {
     ...mapGetters("uniteadministrative", [
       "jointureUaChapitreSection",
       "uniteAdministratives"
@@ -544,7 +550,9 @@ export default {
       "plans_fonctionnels"
      
     ]),
-      
+      admin:admin,
+      dcf:dcf,
+      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
     libelleLocalGeographie() {
       return id => {
         if (id != null && id != "") {
@@ -605,14 +613,35 @@ export default {
         }
       };
     },
+    
     filtre_unite_admin() {
-      const st = this.search.toLowerCase();
-      return this.jointureUaChapitreSection.filter(items => {
-        return (
-          items.secti.nom_section.toLowerCase().includes(st) ||
-          items.libelle.toLowerCase().includes(st)
-        );
-      });
+        const st = this.search.toLowerCase();
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.jointureUaChapitreSection.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(items => {
+                return (
+                    items.secti.nom_section.toLowerCase().includes(st) ||
+                    items.libelle.toLowerCase().includes(st)
+                );
+            });
+        }
+
+        return this.jointureUaChapitreSection.filter(items => {
+            return (
+                items.secti.nom_section.toLowerCase().includes(st) ||
+                items.libelle.toLowerCase().includes(st)
+            );
+        });
+
     },
    
     sectionDynamiques() {
@@ -694,6 +723,7 @@ codeuniteadministrative2(){
       "modifierUniteAdministrative",
       "supprimerUniteAdministrative"
     ]),
+
 genererEnPdf(){
   var doc = new jsPDF('landscape')
   // doc.autoTable({ html: this.natures_sections })
