@@ -18,77 +18,101 @@
               </td>
             </tr>
           </table>-->
-     <h3 style="text-align:center">SITUATION PERIODIQUE DES BIENS CORPORELS :<span style="color: red;">{{anneeAmort}}</span></h3>
+     <h3 style="text-align:center">LIVRE SPECIAL :<span style="color: red;">{{anneeAmort}}</span></h3>
            
               <table class="table table-bordered table-striped" >
                 <thead>
                    <tr style=";color: #000000;">
-    <td style="width:10%;background-color: red" colspan="1">MINISTERE</td>
-    <td style="width:90%;" colspan="11"></td>
+    <td style="width:10%;background-color: red" colspan="1">Action</td>
+    <td style="width:90%;" colspan="9"></td>
       <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
       <th style="width:12%;text-align:center">TOTAL</th> -->
  </tr>
                     <tr style=";color: #000000;">
-    <td style="width:10%;background-color: red" colspan="1">PROGRAMME/DOTATION</td>
-    <td style="width:90%;" colspan="11"></td>
+    <td style="width:10%;background-color: red" colspan="1">Section </td>
+    <td style="width:90%;" colspan="9"></td>
       <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
       <th style="width:12%;text-align:center">TOTAL</th> -->
  </tr>
                      <tr style=";color: #000000;">
-    <td style="width:10%;background-color: red" colspan="1">SERVICE BENEFICIAIRE</td>
-    <td style="width:90%;" colspan="11"></td>
+    <td style="width:10%;background-color: red" colspan="1">Programme</td>
+    <td style="width:90%;" colspan="9"></td>
       <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
       <th style="width:12%;text-align:center">TOTAL</th> -->
  </tr>
                      <tr style=";color: #000000;">
-    <td style="width:10%;background-color: red" colspan="1">EXERCICE BUDGETAIRE</td>
-    <td style="width:90%;" colspan="11"></td>
+    <td style="width:10%;background-color: red" colspan="1">Action</td>
+    <td style="width:90%;" colspan="9"></td>
+      <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
+      <th style="width:12%;text-align:center">TOTAL</th> -->
+ </tr>
+                      <tr style=";color: #000000;">
+    <td style="width:10%;background-color: red" colspan="1">Activité</td>
+    <td style="width:90%;" colspan="9"></td>
       <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
       <th style="width:12%;text-align:center">TOTAL</th> -->
  </tr>
                      <tr style=";color: #000000;">
-    <td style="width:10%;background-color: red" colspan="1" >PERIODE</td>
-    <td style="width:90%;" colspan="11"></td>
+    <td style="width:10%;background-color: red" colspan="1" >Unité Administrative</td>
+    <td style="width:90%;" colspan="9"></td>
+      <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
+      <th style="width:12%;text-align:center">TOTAL</th> -->
+ </tr>
+                      <tr style=";color: #000000;">
+    <td style="width:100%;background-color: red;text-align:center" colspan="10" >ENGAGEMENT</td>
+    
       <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
       <th style="width:12%;text-align:center">TOTAL</th> -->
  </tr>
 
+
+
                     <tr style=";color: #000000;">
-   <td style="width:10%;" colspan="1">N° ORDRE</td> 
-     <td style="width:10%" colspan="1">IMPUTATION BUDGETAIRE</td>
-  <td style="width:10%" colspan="1">REFERENCE MANDANT OU OP</td>
-  <td style="width:10%" colspan="1">REFERENCES PIECES JUSTIFICATIVES</td>
- <td style="width:10%" colspan="1">MONTANT</td>
-  <td style="width:10%" colspan="1">SOURCE DE FINANCEMENT</td>
-  <td style="width:10%" colspan="1">NATURE DU BIEN </td>
- <td style="width:10%" colspan="1">DATE D'ACQUISITION</td>
- <td style="width:10%" colspan="1">DATE D'ENTREE DANS LE PATRIMOINE</td>
- <td style="width:10%" colspan="1">ETAT DU BIEN </td>
- <td style="width:10%" colspan="1">LOCALISATION </td>
- <td style="width:10%" colspan="1">DUREE </td>
-  
+   <td style="width:10%;" colspan="1">N° </td> 
+    <td style="width:10%" colspan="1">Exercices Concernés</td>
+    <td style="width:10%" colspan="1">N° Engagement</td>
+   <td style="width:10%" colspan="1">Nature Eco De La Depense</td>
+   <td style="width:10%" colspan="1">Créancier </td>
+   <td style="width:10%" colspan="1">Crédit Initial</td>
+   <td style="width:10%" colspan="1">Date Engagement</td>
+   <td style="width:10%" colspan="1">Montant de l'engagement</td>
+   <td style="width:10%" colspan="1">Cumul des engagements</td>
+   <td style="width:10%" colspan="1">Crédits Disponibles</td>
+ 
+     
+
+
+
   
      <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
      <th style="width:12%;text-align:center">TOTAL</th> -->
 </tr>
-                    <tr style=";color: #000000;">
-   <td style="width:10%;" colspan="1"></td> 
-     <td style="width:10%" colspan="1"></td>
-  <td style="width:10%" colspan="1"></td>
-  <td style="width:10%" colspan="1"></td>
- <td style="width:10%" colspan="1"></td>
-  <td style="width:10%" colspan="1"></td>
-  <td style="width:10%" colspan="1"> </td>
- <td style="width:10%" colspan="1"></td>
- <td style="width:10%" colspan="1"></td>
- <td style="width:10%" colspan="1"> </td>
- <td style="width:10%" colspan="1"> </td>
- <td style="width:10%" colspan="1"> </td>
-  
+                     <tr style=";color: #000000;">
+   <td style="width:10%;" colspan="1"> </td> 
+    <td style="width:10%" colspan="1"></td>
+    <td style="width:10%" colspan="1"></td>
+   <td style="width:10%" colspan="1"></td>
+   <td style="width:10%" colspan="1"> </td>
+   <td style="width:10%" colspan="1"> </td>
+   <td style="width:10%" colspan="1"> </td>
+   <td style="width:10%" colspan="1"> </td>
+   <td style="width:10%" colspan="1"> </td>
+   <td style="width:10%" colspan="1"> </td>
+ 
+     
+
+
+
   
      <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
      <th style="width:12%;text-align:center">TOTAL</th> -->
 </tr>
+ 
+ 
+ 
+ 
+ 
+
  </thead>
  
  

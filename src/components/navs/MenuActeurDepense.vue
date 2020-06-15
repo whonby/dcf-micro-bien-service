@@ -54,10 +54,28 @@
         CYCLE DE VIE
       </router-link>
     </li> -->
+             <li>
+           <router-link :to="{name: 'RegistreDepense'}" tag="a">  
+            REGISTRE DES DEPENSES
+           </router-link>
+         </li>
+
+            <li>
+          <router-link :to="{name: 'LivreEnregistrement'}" tag="a">
+           LIVRE D'ENREGISTREMENT
+          </router-link>
+        </li>
+
+        <li>
+          <router-link :to="{name: 'LivreSpecial'}" tag="a">
+           LIVRE SPECIAL
+          </router-link>
+        </li>
+
 
            <li>
             <router-link :to="{name: 'RapportDepense'}" tag="a">
-              RAPPORT DEPENSE
+              SITUATION PERIODIQUE
             </router-link>
           </li>
 

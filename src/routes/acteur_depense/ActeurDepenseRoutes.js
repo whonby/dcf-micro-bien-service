@@ -24,6 +24,9 @@ import recrutementPersonnel from "../../pages/acteurs_depenses/dossierPersonnel/
 import detailPersonnel from "../../pages/acteurs_depenses/dossierPersonnel/detailPersonnel";
 import cycledeVie from "../../pages/acteurs_depenses/Cycledevie/cycledeVie.vue";
 import RapportDepense from "../../pages/cycle_de_vie/RapportDepense.vue";
+import LivreSpecial from "../../pages/cycle_de_vie/RapportDepense1.vue";
+import LivreEnregistrement from "../../pages/cycle_de_vie/RapportDepense2.vue";
+import RegistreDepense from "../../pages/cycle_de_vie/RapportDepense3.vue";
 // import Synthesebudg from "../../pages/gestionMarche/synthesebudg.vue";
 
 
@@ -37,6 +40,25 @@ const ActeurDepenseRoutes = [
   //   name: "Synthesebudg",
   //   component: Synthesebudg
   // },
+
+  {
+    path: "/Registre_depense",
+    name: "RegistreDepense",
+    component: RegistreDepense
+  },
+
+  {
+    path: "/livre_enregistrement",
+    name: "LivreEnregistrement",
+    component: LivreEnregistrement
+  },
+
+  {
+    path: "/livre_special",
+    name: "LivreSpecial",
+    component: LivreSpecial
+  },
+
 
   {
     path: "/rapport_depense",
