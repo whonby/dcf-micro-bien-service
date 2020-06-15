@@ -693,13 +693,13 @@ filtreMatricule() {
 
         if (!this.admin || !this.dcf){
             let colect=[];
-            this.historiqueAffectation.filter(item=>{
+            this.afficheEquipementEnCoursUtilidation.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
-                item.annee_amortissement >= this.nombreJourTraitementCalucle
+                
             })
             return colect.filter(items => {
                 return (
@@ -708,7 +708,7 @@ filtreMatricule() {
             });
         }
 
-        return this.historiqueAffectation.filter(items => {
+        return this.afficheEquipementEnCoursUtilidation.filter(items => {
             return (
                  items.matricule_auteur.toLowerCase().includes(st)
             );
@@ -726,13 +726,13 @@ filtreMaterielAmortis() {
 
         if (!this.admin || !this.dcf){
             let colect=[];
-            this.historiqueAffectation.filter(item=>{
+            this.afficheEquipementAmortie.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
-                item.annee_amortissement < this.nombreJourTraitementCalucle
+               
             })
             return colect.filter(items => {
                 return (
@@ -741,7 +741,7 @@ filtreMaterielAmortis() {
             });
         }
 
-        return this.historiqueAffectation.filter(items => {
+        return this.afficheEquipementAmortie.filter(items => {
             return (
                  items.matricule_auteur.toLowerCase().includes(st)
             );

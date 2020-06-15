@@ -690,10 +690,11 @@ nombreDeQuantiteEnStock() {
                     colect.push(item)
                     return item
                 }
-            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+            })
+            return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
           
         }
-return ""
+return this.getPersoStock.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
        
 
     },
@@ -709,12 +710,12 @@ nombreDeQuantiteSortiEnStock() {
                     colect.push(item)
                     return item
                 }
-            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
+            })
           
-          
+          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
         }
 
-       return ""
+       return this.getPersoStock.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.qtesortie), 0).toFixed(0);
 
     },
 
@@ -845,36 +846,44 @@ quantiteEnt() {
 //         }
 //       };
 //     },
+// uniteAdministrativeDynamiques() {
+//       return id => {
+//         if (id != null && id != "") {
+//           return this.uniteAdministratives.filter(element => element.type_ua_id == id);
+//         }
+//       };
+//     },
 uniteAdministrativeDynamiques() {
-      return id => {
+      
+
+
+   
+        if (!this.admin || !this.dcf ){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+            return id => {
+        if (id != null && id != "") {
+          return colect.filter(element => element.type_ua_id == id);
+        }
+      };
+          }
+           return id => {
         if (id != null && id != "") {
           return this.uniteAdministratives.filter(element => element.type_ua_id == id);
         }
       };
+         
+
+
+
     },
-// uniteAdministrativeDynamiques() {
-      
-
-// return id => {
-//    if (id != null && id != "") {
-//         if (!this.admin || !this.dcf){
-//             let colect=[];
-//             this.uniteAdministratives.filter(item=>{
-//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
-//                 if (val!=undefined){
-//                     colect.push(item)
-//                     return item
-//                 }
-//             })
-//           }
-//           return this.uniteAdministratives.filter(element => element.type_ua_id == id);
-//           }
-//            return ""
-//         }
-
-      
-
-//     },
 
 
 

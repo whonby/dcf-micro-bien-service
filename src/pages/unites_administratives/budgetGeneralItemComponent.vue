@@ -106,6 +106,7 @@
 import { mapGetters} from "vuex";
 import budgetGeneralItem from './budgetGeneralItem'
 import { formatageSomme } from "../../../src/Repositories/Repository";
+import {admin,dcf} from "../../../src/Repositories/Auth"
 export default {
     name: 'budgetGeneralItemComponent',
      props: {
@@ -125,13 +126,18 @@ export default {
 
 
   computed: {
+      admin:admin,
+      dcf:dcf,
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
   ...mapGetters("uniteadministrative", [
       "jointureUaChapitreSection",
       "uniteAdministratives",
       "budgetGeneral",
       "getPersonnaliseBudgetGeneral",
       "montantBudgetGeneral",
-      "afficheTransfertValider"
+      "afficheTransfertValider",
+      "transferts"
       // "chapitres",
       // "sections"
     ]),
@@ -143,6 +149,30 @@ export default {
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
    
+
+// affichebudgetActive() {
+      
+
+
+//         if (!this.admin || !this.dcf){
+//             let colect=[];
+//             this.groupe.ua_budget_general.filter(item=>{
+//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.groupe.id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+                
+//             })
+//              return colect.filter(items=>items.actived==1);
+//         }
+
+//        return this.groupe.ua_budget_general.filter(items=>items.actived==1);
+
+//     },
+
+
+
    affichebudgetActive(){
   
     var activeBudget= this.groupe.ua_budget_general.filter(element => element.actived == 1); 
@@ -170,6 +200,31 @@ budgetConsommerBienService(){
     
   }
 },
+// budgetConsommerBienService() {
+      
+
+
+//         if (!this.admin || !this.dcf){
+//             let colect=[];
+//             this.getMandatPersonnaliserVise.filter(item=>{
+//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+                
+//             })
+//              return colect.filter(items=>items.marchetype == 2).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0);
+//         }
+// return id => {
+//     if(id !=""){
+//     return this.getMandatPersonnaliserVise.filter(element => element.ua_id == this.groupe.id && element.marchetype == 2 ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+      
+//     }
+    
+//   }
+//     },
+
 budgetConsommerPersonnel(){
   return id => {
     if(id !=""){
@@ -179,10 +234,32 @@ budgetConsommerPersonnel(){
     }
     
   }
-    
-  
-  
 },
+// budgetConsommerPersonnel() {
+      
+
+
+//         if (!this.admin || !this.dcf){
+//             let colect=[];
+//             this.getMandatPersonnaliserPersonnel.filter(item=>{
+//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+                
+//             })
+//              return colect.filter(element => element.marchetype == "perso" ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+//         }
+// return id => {
+//     if(id !=""){
+//     var montant = this.getMandatPersonnaliserPersonnel.filter(element => element.ua_id == this.groupe.id && element.marchetype == "perso" ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+//        if(isNaN(montant)) return null
+//       return montant
+//     }
+    
+//   }
+//     },
 budgetConsommerInvertissement(){
   return id => {
     if(id !=""){
@@ -192,15 +269,77 @@ budgetConsommerInvertissement(){
     
   }
 },
+// budgetConsommerInvertissement() {
+      
+
+
+//         if (!this.admin || !this.dcf){
+//             let colect=[];
+//             this.getMandatPersonnaliserVise.filter(item=>{
+//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+                
+//             })
+//              return colect.filter(element => element.marchetype == 1 ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+//         }
+// return id => {
+//     if(id !=""){
+//     var montant = this.getMandatPersonnaliserPersonnel.filter(element => element.ua_id == this.groupe.id && element.marchetype == 1 ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+//        if(isNaN(montant)) return null
+//       return montant
+//     }
+    
+//   }
+//     },
+
+
+
+
+
+
 budgetConsommerTransfert(){
   return id => {
     if(id !=""){
-    return this.afficheTransfertValider.filter(element => element.ua_id == this.groupe.id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
+    return this.transferts.filter(element => element.ua_id == this.groupe.id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
       
     }
     
   }
 },
+
+// budgetConsommerTransfert() {
+      
+
+
+//         if (!this.admin || !this.dcf){
+//             let colect=[];
+//             this.transferts.filter(item=>{
+//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+                
+//             })
+//              return colect.filter(element => element.marchetype == 1 ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
+//         }
+// return id => {
+//     if(id !=""){
+//     var montant = this.transferts.filter(element => element.ua_id == this.groupe.id).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+//        if(isNaN(montant)) return null
+//       return montant
+//     }
+    
+//   }
+//     },
+
+
+
+
+
 budgetConsommerDesModule() {
       const val = parseInt(this.budgetConsommerBienService(this.groupe.id)) + parseInt(this.budgetConsommerTransfert(this.groupe.id)) + parseInt(this.budgetConsommerInvertissement(this.groupe.id))+parseInt(this.budgetConsommerPersonnel(this.groupe.id));
       

@@ -558,16 +558,17 @@ afficheEquipementEnCoursUtilidation() {
             let colect=[];
             this.historiqueAffectationService.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
-                item.annee_amortissement >= this.nombreJourTraitementCalucle
+                
             })
-           
+           return colect.filter(items => items.annee_amortissement >= this.nombreJourTraitementCalucle);
         }
 
-      return ""
+      return this.historiqueAffectationService.filter(items => items.annee_amortissement >= this.nombreJourTraitementCalucle);
 
     },
 
@@ -580,16 +581,17 @@ afficheEquipementAmortie() {
             let colect=[];
             this.historiqueAffectationService.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-                if (val!=undefined){
+                
+               if (val!=undefined){
                     colect.push(item)
                     return item
                 }
-                item.annee_amortissement < this.nombreJourTraitementCalucle
+               
             })
-           
+           return colect.filter(items=>items.annee_amortissement < this.nombreJourTraitementCalucle)
         }
 
-      return ""
+      return this.historiqueAffectationService.filter(items=>items.annee_amortissement < this.nombreJourTraitementCalucle)
 
     },
 

@@ -1,7 +1,4 @@
-detail_Execution
-afficherIdOrdrePaiement
-CumulEngagement2
-afficherIdOrdrePaiement
+
 <template>
     <div>
 
@@ -657,6 +654,7 @@ afficherIdOrdrePaiement
 <script>
   import { mapGetters, mapActions } from "vuex";
   import { formatageSomme } from "../../../../src/Repositories/Repository";
+  import {admin,dcf} from "../../../Repositories/Auth"
   import moment from "moment";
 export default {
     props:["PaiementPersoid","exerciceBudgetaire"],
@@ -709,6 +707,10 @@ fabActions: [
 
     },
     computed:{
+        admin:admin,
+      dcf:dcf,
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
         ...mapGetters('uniteadministrative',[
     "plans_programmes",
  "uniteAdministratives",
@@ -768,14 +770,48 @@ afficherButtonEngagement() {
 
 
 
- listeOrdrePaiement: function () {
-                return id => {
+//  listeOrdrePaiement: function () {
+//                 return id => {
+//                     if (id != "") {
+//                       // console.log("Marche leste acte effect finnancier")
+//                         return this.ordre_paiement.filter(idmarche => idmarche.paiementperso_id == id)
+//                     }
+//                 }
+//             },
+
+
+            
+listeOrdrePaiement() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.ordre_paiement.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+             return id => {
                     if (id != "") {
-                      // console.log("Marche leste acte effect finnancier")
+                     
+                        return this.colect.filter(idmarche => idmarche.paiementperso_id == id)
+                    }
+                }
+            
+        }
+ return id => {
+                    if (id != "") {
+                     
                         return this.ordre_paiement.filter(idmarche => idmarche.paiementperso_id == id)
                     }
                 }
-            },
+     
+
+    },
  CumulEngagement() {
       const val = parseFloat(this.sommeEgagementLigneTableau(this.afficherIdLigne(this.PaiementPersoid))) + parseFloat(this.sommeMontant);
       

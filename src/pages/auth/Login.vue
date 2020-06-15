@@ -1,4 +1,6 @@
 <template>
+
+
     <div id="loginbox" class="spinner-border text-primary">
 
         <form id="loginform" :class="{'is-waiting': loader}" class="form-vertical">

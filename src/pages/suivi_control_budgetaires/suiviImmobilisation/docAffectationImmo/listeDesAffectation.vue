@@ -1,4 +1,5 @@
 afficheQteACouvert
+C11OA
 <template>
   
    
@@ -328,7 +329,7 @@ afficheQteACouvert
                 <tbody>
                    <tr
                     class="odd gradeX"
-                    v-for="(BesoinImmo,index) in afficheValidationServiceDemandeDuPersonnel"
+                    v-for="(BesoinImmo,index) in afficheValidationChefService"
                     :key="BesoinImmo.id"
                   >
    
@@ -434,7 +435,7 @@ afficheQteACouvert
                   
                   <tr
                     class="odd gradeX"
-                    v-for="(BesoinImmo,index) in afficheValidationDirecteurDemandeDuPersonnel"
+                    v-for="(BesoinImmo,index) in afficheValidationDirecteur"
                     :key="BesoinImmo.id"
                   >
    
@@ -551,7 +552,7 @@ afficheQteACouvert
                  
                  <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in afficheLesDemandeDuPersonnel"
+                    v-for="BesoinImmo in afficheToutDemande"
                     :key="BesoinImmo.id"
                   >
    
@@ -1523,6 +1524,47 @@ admin:admin,
       dcf:dcf,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
+nombreDesDemandePerso() {
+      
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+            return colect.filter(items=>items.service_id == 0).length
+        }
+
+       return this.demandeMateriel.filter(items=>items.service_id == 0).length;
+
+    },
+
+afficheToutDemande() {
+      
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+            return colect.filter(items=>items.service_id == 0);
+        }
+
+       return this.demandeMateriel.filter(items=>items.service_id == 0);
+
+    },
+
+
+
+
 
 
  affichenbreEquipementNonCouvert() {
@@ -1537,11 +1579,12 @@ admin:admin,
                     colect.push(item)
                     return item
                 }
-                item.normeequipement != 0
-            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
-        }
+                
+            })
+       return colect.filter(items=>items.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+       }
 
-       return 0
+       return this.servicesua.filter(items=>items.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
 
     },
 
@@ -1562,10 +1605,10 @@ listePersonnelAffectete() {
                     return item
                 }
             })
-          
+          return colect
         }
 
-       return ""
+       return this.acte_personnels
 
     },
 
@@ -1582,10 +1625,10 @@ listePersonnelNonEquipee() {
                     return item
                 }
             })
-          
+          return colect
         }
 
-       return ""
+       return this.affichePersonneNonEquipe
 
     },
 listeDesEquipementNonCouvert() {
@@ -1601,10 +1644,10 @@ listeDesEquipementNonCouvert() {
                     return item
                 }
             })
-          
+          return colect
         }
 
-       return ""
+       return this.equipementNonCouvert
 
     },
     listeDesEquipementParAgent() {
@@ -1620,10 +1663,10 @@ listeDesEquipementNonCouvert() {
                     return item
                 }
             })
-          
+          return colect
         }
 
-       return ""
+       return this.tauxequipementParAgent
 
     },
     listeDesPersonneEquipee() {
@@ -1639,10 +1682,10 @@ listeDesEquipementNonCouvert() {
                     return item
                 }
             })
-          
+          return colect
         }
 
-       return ""
+       return this.affichePersonneEquipe
 
     },
 
@@ -1661,11 +1704,11 @@ AfficheTotalQteNonCouvert() {
                     colect.push(item)
                     return item
                 }
-            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
-          
+            })
+          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
         }
 
-       return "0"
+       return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
 
     },
 AfficheTotalQteACouvrir() {
@@ -1680,11 +1723,11 @@ AfficheTotalQteACouvrir() {
                     colect.push(item)
                     return item
                 }
-            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
-          
+            })
+          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
         }
 
-       return "0"
+       return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
 
     },
 afficheMontantTotalEquipementNonCouvert() {
@@ -1699,11 +1742,11 @@ afficheMontantTotalEquipementNonCouvert() {
                     colect.push(item)
                     return item
                 }
-            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
-          
+            })
+          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
         }
 
-       return "0"
+       return this.afficheMontantTotalEquipementNonCouv.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
 
     },
 
@@ -1719,43 +1762,49 @@ afficheLesDemandeDuPersonnel() {
                     colect.push(item)
                     return item
                 }
-                item.service_id == 0
+                
             })
+            return colect
         }
 
-       return "0"
+       return this.demandeMateriel
 
     },
-afficheValidationServiceDemandeDuPersonnel() {
+afficheValidationChefService() {
       
         if (!this.admin || !this.dcf){
             let colect=[];
-            this.afficheValidationChefService.filter(item=>{
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+              
+               if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+            return colect.filter(items => items.service_id == 0 && items.motif != 3 && items.motif != 1 && items.motif != 10 )
+        }
+
+       
+ return this.demandeMateriel.filter(items => items.service_id == 0 && items.motif != 3 && items.motif != 1 && items.motif != 10 );
+
+    },
+    afficheValidationDirecteur() {
+     
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
+            return colect.filter(items=>items.service_id == 0 && items.motif != 0 && items.motif != 5 && items.motif != 4 && items.motif != 10);
         }
 
-       return "0"
-
-    },
-    afficheValidationDirecteurDemandeDuPersonnel() {
-      
-        if (!this.admin || !this.dcf){
-            let colect=[];
-            this.afficheValidationDirecteur.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-        }
-
-       return "0"
+       return this.demandeMateriel.filter(items=>items.service_id == 0 && items.motif != 0 && items.motif != 5 && items.motif != 4 && items.motif != 10);
 
     },
 
@@ -1772,10 +1821,10 @@ listeDesServiceDeUa() {
                     return item
                 }
             })
-          
+          return colect
         }
 
-       return ""
+       return this.servicesua
 
     },
 
@@ -1796,17 +1845,18 @@ NombreafficheEquipementNonCouvertService() {
             let colect=[];
             this.servicesua.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
-                if (val!=undefined){
+                
+              if (val!=undefined){
                     colect.push(item)
                     return item
                 }
-                  item.normeequipement == 0
-            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
-          
+                
+            })
+          return colect.filter(items => items.normeequipement == 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
           
         }
 
-       return 0
+         return this.servicesua.filter(items => items.normeequipement == 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
 
     },
 // NombreafficheEquipementCouvertService() {
@@ -2037,18 +2087,18 @@ verrouilleCause(){
 
 
 
-afficheValidationChefService() {
+// afficheValidationChefService() {
       
-          return this.demandeMateriel.filter(element => element.service_id == 0 && element.motif != 3 && element.motif != 1 && element.motif != 10 );
+//           return this.demandeMateriel.filter(element => element.service_id == 0 && element.motif != 3 && element.motif != 1 && element.motif != 10 );
        
-    },
+//     },
 
 
-afficheValidationDirecteur() {
+// afficheValidationDirecteur() {
       
-          return this.demandeMateriel.filter(element => element.service_id == 0 && element.motif != 0 && element.motif != 5 && element.motif != 4 && element.motif != 10);
+//           return this.demandeMateriel.filter(element => element.service_id == 0 && element.motif != 0 && element.motif != 5 && element.motif != 4 && element.motif != 10);
        
-    },
+//     },
 // afficheToutDemande() {
       
 //           return this.demandeMateriel.filter(element => element.service_id == 0 );
@@ -2056,17 +2106,17 @@ afficheValidationDirecteur() {
 //     },
 nombreValidationEnAttenteChefService() {
       
-          return this.afficheValidationServiceDemandeDuPersonnel.length;
+          return this.afficheValidationChefService.length;
        
     },
-    // nombreDemande() {
+    nombreDemande() {
       
-    //       return this.afficheLesDemandeDuPersonnel.length;
+          return this.afficheToutDemande.length;
        
-    // },
+    },
 nombreValidationEnAttenteDirecteur() {
       
-          return this.afficheValidationDirecteurDemandeDuPersonnel.length;
+          return this.afficheValidationDirecteur.length;
        
     },
 

@@ -1,5 +1,5 @@
 export const role_membrecojo = state => state.role_membrecojo
-
+printMarcheNonAttribue
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays

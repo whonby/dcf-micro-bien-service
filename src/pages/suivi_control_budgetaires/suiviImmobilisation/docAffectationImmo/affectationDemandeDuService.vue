@@ -508,17 +508,18 @@ admin:admin,
             let colect=[];
             this.demandeMateriel.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
-                if (val!=undefined){
+               
+               if (val!=undefined){
                     colect.push(item)
                     return item
                 }
-                  item.fonction_id == 0
-            }).length
+                  
+            })
           
-          
+          return colect.filter(items=> items.fonction_id == 0).length;
         }
 
-       return 0
+       return this.demandeMateriel.filter(items=> items.fonction_id == 0).length
 
     },
 
@@ -530,17 +531,18 @@ admin:admin,
             let colect=[];
             this.demandeMateriel.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
-                if (val!=undefined){
+               
+               if (val!=undefined){
                     colect.push(item)
                     return item
                 }
-                  item.fonction_id == 0 && item.motif_directeur_sce != 10
-            }).length
+                  
+            })
           
-          
+          return colect.filter(items=>items.fonction_id == 0 && items.motif_directeur_sce != 10).length;
         }
 
-       return 0
+       return this.demandeMateriel.filter(items=>items.fonction_id == 0 && items.motif_directeur_sce != 10).length;
 
     },
     //   filtreServiceUniteAdministrative() {

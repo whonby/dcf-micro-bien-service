@@ -20,6 +20,7 @@ import App from './App.vue'
 import router from './routes'
 import store from './vuex/store'
 
+
 import JsonExcel from 'vue-json-excel'
 import Datatable from 'vue2-datatable-component'
 

@@ -150,6 +150,7 @@ detail_Execution
 <script>
   import { mapGetters, mapActions } from "vuex";
   import { formatageSomme } from "../../../../src/Repositories/Repository";
+  import {admin,dcf} from "../../../Repositories/Auth"
   import moment from "moment";
 export default {
     props:["PaiementPersoid","exerciceBudgetaire"],
@@ -225,6 +226,10 @@ fabActions: [
  "afficheNiveauPlanProg",
  "exercices_budgetaires"
    ]),
+    admin:admin,
+      dcf:dcf,
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
  ...mapGetters("bienService", ["typeMarches",'modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
@@ -256,14 +261,51 @@ fabActions: [
         }
       };
     },
- listeEngagementPersonnel: function () {
-                return id => {
+//  listeEngagementPersonnel: function () {
+//                 return id => {
+//                     if (id != "") {
+//                       // console.log("Marche leste acte effect finnancier")
+//                         return this.engagements.filter(idmarche => idmarche.ordrepaiemnet_id == id)
+//                     }
+//                 }
+//             },
+
+ listeEngagementPersonnel() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.engagements.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+             return id => {
                     if (id != "") {
-                      // console.log("Marche leste acte effect finnancier")
+                     
+                        return this.colect.filter(idmarche => idmarche.ordrepaiemnet_id == id)
+                    }
+                }
+            
+        }
+ return id => {
+                    if (id != "") {
+                     
                         return this.engagements.filter(idmarche => idmarche.ordrepaiemnet_id == id)
                     }
                 }
-            },
+     
+
+    },
+
+
+
+
+
  CumulEngagement() {
       const val = parseFloat(this.sommeEgagementLigneTableau(this.afficherIdLigne(this.PaiementPersoid))) + parseFloat(this.sommeMontant);
       
