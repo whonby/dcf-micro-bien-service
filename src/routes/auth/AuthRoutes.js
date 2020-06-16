@@ -15,6 +15,7 @@ const AuthRoutes = [
     },
     
 
+     
      {
       path: '/logout',
      name:"Logout",

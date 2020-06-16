@@ -174,7 +174,7 @@ NombreDemissionsParActeurDepense
                                               title="Liste des Missions "
                                               name ="Liste des missions"
                                               worksheet = "Missions"
-                                            :data="missionFiltre">
+                                            :data="afficherMissionParUAEnfonctiondesRole">
                                     <i title="Exporter en excel" class="icon-table"> 
                                        Exporter en excel</i>
 
@@ -207,7 +207,7 @@ NombreDemissionsParActeurDepense
 
                                           <model-list-select style="background-color: rgb(222, 222, 222);"
                                            class="wide"
-                                            :list="uniteAdministratives"
+                                            :list="afficherMissionParUAEnfonct"
                                             v-model="ua_id"
                                                 option-value="id"
                                                 option-text="libelle"
@@ -228,6 +228,7 @@ NombreDemissionsParActeurDepense
                                                 option-text="matricule"
                                            placeholder="saisissez l'acteur de depense">
                                            
+            
                                     </model-list-select> 
                                            
                                          </div> 
@@ -251,7 +252,7 @@ NombreDemissionsParActeurDepense
               </thead> 
               <tbody>
                 <tr  class="odd gradeX" v-for="mission in 
-                missionFiltre"
+                afficherMissionParUAEnfonctiondesRole"
                 :style="getMissionStyles(mission)"
                  :key="mission.id">
                  
@@ -878,7 +879,7 @@ import {mapGetters, mapActions, mapMutations} from 'vuex'
   import 'vue-search-select/dist/VueSearchSelect.css'
   import moment from "moment";
   import {formatageSomme} from '../../../Repositories/Repository'
-  
+  import {admin,dcf} from "../../../../src/Repositories/Auth"
 
 
 export default {
@@ -1015,20 +1016,54 @@ export default {
     //   "tauxDossierRejetMissions",
     
     
-  
+   
    
     ]) ,
 
-  
+  admin:admin,
+  dcf:dcf,
 
        ...mapGetters('personnelUA', ['personnaliseActeurDepense',"all_acteur_depense"]),
    ...mapGetters('uniteadministrative', ['uniteAdministratives',"getPersonnaliseBudgetGeneralParPersonnel"]),
+   ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+  
   ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
 
   //  format(){
   //    return this.searchFormat(this.searchAnneeBudgetaire, this.searchUA, this.searchActeurDepense)
   //  },
     // methode pour trier un item
+
+    afficherMissionParUAEnfonctiondesRole() {
+       // const st = this.search.toLowerCase();
+
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.missionFiltre.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.missionFiltre
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+        
+
+    },
 
     //  listes des propriétes calculées de nombre pour les filtres
     total_mission(){
@@ -1087,7 +1122,36 @@ export default {
    },
 
 
+ afficherMissionParUAEnfonct() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+             return colect;
+            // console.log(colect)
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
 
+        return 0;
+        //return this.uniteAdministratives
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+        
+
+    },
 
 
    // fonction pour filtrer historique de mission
@@ -1430,6 +1494,7 @@ return mission => {
    
  }     
 },
+
 
   },
 

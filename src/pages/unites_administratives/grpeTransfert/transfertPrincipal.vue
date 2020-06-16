@@ -120,7 +120,7 @@
                   <div class="controls">
                      <select v-model="formData.ua_id" class="span">
                                                             <option></option>
-                                                            <option v-for="item in uniteAdministratives" :key="item.id" :value="item.id">
+                                                            <option v-for="item in afficherUAParDroitAccess" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -467,7 +467,7 @@
                   <div class="controls">
                     <select v-model="editTransfert.ua_id" class="span">
                       <option
-                        v-for="typeUniteA in uniteAdministratives"
+                        v-for="typeUniteA in afficherUAParDroitAccess"
                         :key="typeUniteA.id"
                         :value="typeUniteA.id"
                       >{{typeUniteA.libelle}}</option>
@@ -802,7 +802,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="odd gradeX" v-for="appelOffre in getPersonnaliseTransfert"
+                                    <tr class="odd gradeX" v-for="appelOffre in afficherlisteTransfertParDroitAccess"
                                         :key="appelOffre.id">
                                         <td @dblclick="afficherModalTransfert(appelOffre.id)">
                                             {{appelOffre.exerciceencours || 'Non renseigné'}}</td>
@@ -872,6 +872,7 @@
 import { mapGetters, mapActions } from "vuex";
 //import transfertComponent from './transfertComponent'
 import { formatageSomme } from "../../../../src/Repositories/Repository";
+import {admin,dcf} from '../../../../src/Repositories/Auth';
 export default {
   name: 'transfert',
  components: {
@@ -992,7 +993,40 @@ export default {
  
  ...mapGetters('personnelUA', ['personnaliseActeurDepense']),
 
+admin:admin,
+dcf:dcf,
+...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
+ afficherUAParDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+             return colect;
+            // console.log(colect)
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return 0;
+        //return this.uniteAdministratives
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+        
+
+    },
 
 anneeAmort() {
       
@@ -1227,6 +1261,31 @@ destinationDynamiquesModifier() {
 
 
 
+afficherlisteTransfertParDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.getPersonnaliseTransfert.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.getPersonnaliseTransfert
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+    },
 
 
 

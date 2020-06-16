@@ -127,7 +127,7 @@ afficherLaFonctionDActeurDepenseDynamique
               <label class="control-label">Unite administrative:<span style="color:red;">*</span></label>
               <div class="controls">
            <select v-model="formData.ua_id" class="span">
-               <option v-for="plans in uniteAdministratives" :key="plans.id" 
+               <option v-for="plans in afficherMissionParUAEnfonctiondesRole" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
               </div>
@@ -468,6 +468,7 @@ afficherLaFonctionDActeurDepenseDynamique
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import {admin,dcf} from "../../../../src/Repositories/Auth"
 export default {
   
   data() {
@@ -538,11 +539,52 @@ export default {
 // methode pour maper notre guetter
    ...mapGetters('suivi_controle_budgetaire', ['categories_missions','missions','getNormeMissionPersonnaliser']) ,
   ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
-  ...mapGetters('personnelUA', ['personnaliseActeurDepense',  'fonctions' ,"personnaliseActeurDepense"]),
+  ...mapGetters('personnelUA', ['personnaliseActeurDepense',  'fonctions']),
    ...mapGetters('uniteadministrative', ['uniteAdministratives', 'getPersonnaliseBudgetGeneralParPersonnel']),
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
    ...mapGetters('bienService', ['modepaiements']),
+  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+    
+    admin:admin,
+    dcf:dcf,
+   
 
+    afficherMissionParUAEnfonctiondesRole() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+             return colect;
+            // console.log(colect)
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return 0;
+        //return this.uniteAdministratives
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+        
+
+    },
+   
+   
+   
+   
+   
+   
    nombreJourCalucle(){
      const form = this.formData
      if(form.date_depart == form.date_retour && form.date_retour !== "" && form.date_depart !== "") return 1 

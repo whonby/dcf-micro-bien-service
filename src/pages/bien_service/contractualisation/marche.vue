@@ -427,10 +427,10 @@ source_financement
                                <th>Action</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody>   
                   
                         <tr class="odd gradeX" v-for="(marche, index) in 
-                afficheMarcheSuspendu"
+                afficherMarcheSupenduPAR_AU"   
                  :key="marche.id">
                   <td @dblclick="afficherModalModifierMarcgeContratualisation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
@@ -531,16 +531,16 @@ source_financement
                     <!-- <th>Activit&eacute;</th> -->
                     <th>Imputation</th>
                        <th>Objet march&eacute;</th>
-                        <!-- <th>Reference march&eacute;</th>  -->
+                        <!-- <th>Reference march&eacute;</th>  -->   
                                     <th>Montant réel</th>
-                                <th>Etat du marché</th>
+                                <th>Etat du marché</th> 
                                 
                 </tr>
                
                 </thead>
                 <tbody>
                     <tr class="odd gradeX" v-for="(marche) in 
-                afficheMarcheTerminer"
+                afficherMarcherTerminerParUA"
                  :key="marche.id">
                   <td>
                    {{afficherAnneeBudget(marche.marche_id) || 'Non renseigné'}}</td>
@@ -621,7 +621,7 @@ source_financement
                 </thead>
                 <tbody>
                         <tr class="odd gradeX" v-for="(marche, index) in 
-                afficheMarcheEnCoursContratualisation"
+                afficherContratualisationParUA"
                  :key="marche.id">
                   <td @dblclick="afficherModalModifierMarcgeContratualisation(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
@@ -732,7 +732,7 @@ source_financement
                 <input type="search"  v-model="search" />
               </div> -->
             </div>
-              <table class="table table-bordered table-striped">
+              <table class="table table-bordered table-striped" >
                 <thead>
                 <tr>
                     <th>Année</th>
@@ -754,7 +754,7 @@ source_financement
                 <tbody>
                  
                         <tr class="odd gradeX" v-for="(marche, index) in 
-                afficherLaListeDesMarche"
+                filtre_unite_admin"
                  :key="marche.id">
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.exo_id || 'Non renseigné'}} </td>
@@ -940,7 +940,7 @@ source_financement
                 </thead>
                 <tbody>
                  <tr class="odd gradeX" v-for="(marche, index) in 
-                afficheMarchExecuter"
+                afficherExecutionPAU"
                  :key="marche.id">
 
                  <template v-if="afficherCodeTypeMarche(afficherDifferentTypeMarche(marche.marche_id)) == 4 || afficherCodeTypeMarche(afficherDifferentTypeMarche(marche.marche_id)) == 1">
@@ -1053,7 +1053,7 @@ source_financement
                 </thead>
                 <tbody>
                    <tr class="odd gradeX" v-for="(marche, index) in 
-                afficheMarcheEnPlanification"
+                afficherPlanificationPA"
                  :key="marche.id">
                   <td @dblclick="afficherModalModifierMarcgePlanifier(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
@@ -1185,7 +1185,7 @@ source_financement
                
                        <!-- <input type="text" :value="nombreJourTraitementCalucle"> -->
                   <tr class="odd gradeX" v-for="marche in 
-                afficheMarcheResilier"
+                afficherResilierPUA"
                  :key="marche.id">
                  
                  <td>
@@ -1569,6 +1569,7 @@ source_financement
 <script>
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../../src/Repositories/Repository";
+ import {admin,dcf} from "../../../../src/Repositories/Auth"
 export default {
   name:'type facture',
   data() {
@@ -1660,8 +1661,16 @@ export default {
       search: ""
     };
   },
+  created() {
+      console.log("INB")
+      console.log(this.getterUniteAdministrativeByUser)
+    console.log("INB14500")
+},
 
   computed: {
+
+     ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
      ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
      'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
      'nombremarchesExecute',
@@ -1672,12 +1681,14 @@ export default {
 
      ...mapGetters("uniteadministrative",['getterligneExempter','uniteAdministratives',"budgetGeneral",
       "getPersonnaliseBudgetGeneral","groupUa","groupgranNature","getPersonnaliseBudgetGeneralParBienService",
-      "montantBudgetGeneral", ]),
+      "montantBudgetGeneral","jointureUaChapitreSection" , ]),
        ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
    ...mapGetters("gestionMarche", ['entreprises']),
+   admin:admin,
+      dcf:dcf,
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
 
@@ -1764,6 +1775,218 @@ getDateFinExécutionValue(){
     return this.editActeEffetFinancier.date_odre_service !=""
 },
 
+ filtre_unite_admin() {
+       // const st = this.search.toLowerCase();
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficherLaListeDesMarche.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.afficherLaListeDesMarche
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+        
+
+    },
+
+
+
+    afficherPlanificationPA() {
+       // const st = this.search.toLowerCase();
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficheMarcheEnPlanification.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.afficheMarcheEnPlanification
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+        
+
+    },
+
+
+
+ afficherContratualisationParUA() {
+       // const st = this.search.toLowerCase();
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficheMarcheEnCoursContratualisation.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.afficheMarcheEnCoursContratualisation
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+        
+
+    },
+
+ afficherExecutionPAU() {
+       // const st = this.search.toLowerCase();
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficheMarchExecuter.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.afficheMarchExecuter
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+        
+
+    },
+
+
+afficherResilierPUA() {
+       // const st = this.search.toLowerCase();
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficheMarcheResilier.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.afficheMarcheResilier
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+    },
+
+afficherMarcheSupenduPAR_AU() {
+       // const st = this.search.toLowerCase();
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficheMarcheSuspendu.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.afficheMarcheSuspendu
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+        
+
+    },
+
+afficherMarcherTerminerParUA() {
+       // const st = this.search.toLowerCase();
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficheMarcheTerminer.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            // return colect.filter(items => {
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.afficheMarcheTerminer
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+        
+
+    },
 
 
 
@@ -1781,7 +2004,7 @@ nombreDeMarche(){
 // afficher le montant de tout les marche
 
 montantMarche(){
-  return this.afficherLaListeDesMarche.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+  return this.filtre_unite_admin.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
 },
 
 
@@ -2258,7 +2481,7 @@ montantSuspendu(){
 
 // afficher le montant de marche en contratualisation
 montantEnContratualisation(){
-  return this.afficheMarcheEnCoursContratualisation.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+  return this.afficherContratualisationParUA.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
 },
 
 
@@ -2272,14 +2495,14 @@ return this.afficherLaListeDesMarche.filter(element => element.attribue == 0 && 
 // afficher le nombre des marches en planifications
 
 nombreMarcheEnplanification(){
-  return this.afficheMarcheEnPlanification.length;
+  return this.afficherPlanificationPA.length;
 },
 
 
 // afficher le montant en planification
 
 montantEnPlanification(){
-  return this.afficheMarcheEnPlanification.reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_marche), 0)
+  return this.afficherPlanificationPA.reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_marche), 0)
 },
 
 

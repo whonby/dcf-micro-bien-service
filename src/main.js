@@ -23,7 +23,8 @@ import store from './vuex/store'
 
 import JsonExcel from 'vue-json-excel'
 import Datatable from 'vue2-datatable-component'
-
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 // import jsPDF from 'jspdf'
 //  vue.component('')
 
@@ -34,10 +35,11 @@ import "fullcalendar/dist/fullcalendar.min.css";
 import "fullcalendar-scheduler/dist/scheduler.min.css";
 import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
 import PrettyCheckbox from 'pretty-checkbox-vue'
+//import jspartiondata from 'jspartiondata'
 // import PrettyInput from 'pretty-checkbox-vue/input';
 // import PrettyCheck from 'pretty-checkbox-vue/check';
 // import PrettyRadio from 'pretty-checkbox-vue/radio';
- 
+
 // Vue.component('p-input', PrettyInput);
 // Vue.component('p-check', PrettyCheck);
 // Vue.component('p-radio', PrettyRadio);
@@ -55,7 +57,7 @@ Vue.prototype.$ = Jquery
 
  Vue.component('default-layout', Default)
  Vue.component('no-sidebar-layout', NoSidebar)
-
+Vue.use(ElementUI);
 
 Vue.use(FullCalendar)
 Vue.use(Datatable)

@@ -523,6 +523,7 @@ export default {
       search: ""
     };
   },
+  
 created() {
       console.log("INB")
       console.log(this.getterUniteAdministrativeByUser)
@@ -612,6 +613,7 @@ created() {
         }
       };
     },
+    
     filtre_unite_admin() {
         const st = this.search.toLowerCase();
 
