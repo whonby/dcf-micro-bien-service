@@ -894,7 +894,7 @@ recrutement:""
 
 
  NombrePersonnelRecuActeNorm() {
-        const searchTerm = this.search.toLowerCase();
+       // const searchTerm = this.search.toLowerCase();
 
 
         if (!this.admin || !this.dcf){
