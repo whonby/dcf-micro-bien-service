@@ -70,6 +70,7 @@
                                                     </div>
                                                 </div>
                 </td>
+
                 <!-- <td colspan="2">
                      <div class="control-group">
                                                     <label class="control-label">Marché</label>
@@ -440,6 +441,7 @@
 <script>
 
     import {mapGetters, mapActions} from 'vuex'
+      import {admin,dcf} from "../../../Repositories/Auth"
     export default {
 
         data() {
@@ -511,6 +513,9 @@
       
       
     ]),
+      admin:admin,
+      dcf:dcf,
+      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
  ...mapGetters("bienService", ["getActeEffetFinancierPersonnaliserContrat","selectionner_candidats","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
