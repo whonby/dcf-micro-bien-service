@@ -300,7 +300,7 @@
                                                 </div>
                           </td>
                         
- <td>
+                         <td>
                               <div class="control-group">
                                                     <label class="control-label">Communes</label>
                                                     <div class="controls">
@@ -380,7 +380,7 @@
                             </div>
                         </div>
                           </td>
-<td>
+                    <td>
                         <div class="control-group">
                             <div class="controls">
                                 <label>Nature de compte</label>
