@@ -294,34 +294,34 @@ export default {
 
 
     
-     afficherMandatDroitAccess() {
-       // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
-            let colect=[];
-            this.getMandatPersonnaliserVise.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            return colect
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
-        }
+    //  afficherMandatDroitAccess() {
+    //    // const st = this.search.toLowerCase();
+    //     if (!this.admin || !this.dcf){
+    //         let colect=[];
+    //         this.getMandatPersonnaliserVise.filter(item=>{
+    //             let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+    //             if (val!=undefined){
+    //                 colect.push(item)
+    //                 return item
+    //             }
+    //         })
+    //         return colect
+    //         // return colect.filter(items => {
+    //         //     return (
+    //         //         items.secti.nom_section.toLowerCase().includes(st) ||
+    //         //         items.libelle.toLowerCase().includes(st)
+    //         //     );
+    //         // });
+    //     }
 
-        return this.getMandatPersonnaliserVise
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
+    //     return this.getMandatPersonnaliserVise
+    //         // return (
+    //         //     items.secti.nom_section.toLowerCase().includes(st) ||
+    //         //     items.libelle.toLowerCase().includes(st)
+    //         // );
         
 
-    },
+    // },
 
 
    afficherAttributMarche() {
@@ -345,7 +345,16 @@ montantMarcheAvecAvenant() {
 
 // recuperation de l'ID de UA 
 
-
+// afficherIdUAdansMarche(){
+//   return id =>{
+//     if(id!=null && id!=""){
+//       let objetID = this.marches.find(item => item.id==id)
+//        if(objetID){
+//          ret
+//        }
+//     }
+//   }
+// },
 
 
 
@@ -364,7 +373,7 @@ montantMarcheAvecAvenant() {
 },
 budgetConsommerBienService(){
   
-    return this.afficherMandatDroitAccess.filter(element => element.marchetype == 2 ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(2); 
+    return this.getMandatPersonnaliserVise.filter(element => element.marchetype == 2 ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(2); 
       
   
 },
@@ -465,8 +474,5 @@ montantEnSolde(){
 </script>
 
 
+budgetConsommerBienService
 
-<style>
-
-
-</style>

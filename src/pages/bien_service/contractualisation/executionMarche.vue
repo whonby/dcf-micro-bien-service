@@ -446,19 +446,20 @@ export default {
   admin:admin,
   dcf:dcf,
   
+
 afficherlisteMarcheExecutionParDroitAccess() {
        // const st = this.search.toLowerCase();
         if (!this.admin || !this.dcf){
             let colect=[];
-            this.marcherAttribuerFiltre.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+            this.getMarchePersonnaliser.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect
-            // return colect.filter(items => {
+            return colect.filter(recuper => recuper.attribue == 2 && recuper.type_marche.code_type_marche == 4 || recuper.attribue == 2 && recuper.type_marche.code_type_marche == 1)
+            // return colect.filter(items => {    
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
             //         items.libelle.toLowerCase().includes(st)
@@ -466,7 +467,7 @@ afficherlisteMarcheExecutionParDroitAccess() {
             // });
         }
 
-        return this.marcherAttribuerFiltre
+        return this.getMarchePersonnaliser.filter(recuper => recuper.attribue == 2 && recuper.type_marche.code_type_marche == 4 || recuper.attribue == 2 && recuper.type_marche.code_type_marche == 1)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -474,6 +475,34 @@ afficherlisteMarcheExecutionParDroitAccess() {
     },
 
 
+
+
+afficherMontantExecutionParDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.getActeEffetFinancierPersonnaliser45.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect
+            // return colect.filter(items => {    
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.getActeEffetFinancierPersonnaliser45
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+    },
     // afficherMontantParDroitAccess() {
     //    // const st = this.search.toLowerCase();
     //     if (!this.admin || !this.dcf){
@@ -594,7 +623,7 @@ return this. marcherAttribuer.filter((item) => {
 
     
     montantMarcheExecuter(){
-  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarche(recuper.marche.type_marche_id) == 4 && recuper.difference_personnel_bienService == 2 || this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarche(recuper.marche.type_marche_id) == 1 && recuper.difference_personnel_bienService == 2).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
+  return this.afficherMontantExecutionParDroitAccess.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarche(recuper.marche.type_marche_id) == 4 && recuper.difference_personnel_bienService == 2 || this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarche(recuper.marche.type_marche_id) == 1 && recuper.difference_personnel_bienService == 2).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
 },
     // MontatantImputationBudget() {
       
