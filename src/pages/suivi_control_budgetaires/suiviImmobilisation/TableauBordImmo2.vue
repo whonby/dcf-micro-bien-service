@@ -74,6 +74,7 @@ sommeQuantiteGlobal
 <script>
 import { mapGetters } from "vuex";
 import { formatageSomme } from "../../../Repositories/Repository";
+import {admin,dcf} from "../../../Repositories/Auth"
 export default {
   name:'TableauBordImmo',
   data() {
@@ -135,36 +136,114 @@ export default {
 
       // "nbreArchivageNotes"
     ]),
+    admin:admin,
+      dcf:dcf,
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
     ...mapGetters("personnelUA", ["acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
 
  ...mapGetters("uniteadministrative", ["uniteAdministratives","directions","servicesua","uniteZones"]),
-    filtre_archivage_document() {
-      const st = this.search.toLowerCase();
-      return this.archivageDocuments.filter(archivagedocument => {
-        return (
-          archivagedocument.reference.toLowerCase().includes(st) ||
-          archivagedocument.unite_administrative.libelle
-            .toLowerCase()
-            .includes(st) ||
-          archivagedocument.type_texte.libelle.toLowerCase().includes(st)
-        );
-      });
+  
+quantiteTotalDemande() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+        }
+
+       return this.demandeMateriel.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+
+    },
+quantiteTotalPersonnel() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.acte_personnels.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
+        }
+
+       return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
+        },
+
+    
+    quantiteTotalService() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
+          
+        }
+
+       return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
+          
     },
       nombreDupersonne(){
     return this.acte_personnels.length;
 },
-      quantiteEnStock(){
-    return this.stockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
-},
-    quantiteTotalDemande(){
-    return this.demandeMateriel.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
-},
- quantiteTotalPersonnel(){
-    return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
-},
- quantiteTotalService(){
-    return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0); 
-},
+//       quantiteEnStock(){
+//     return this.stockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+// },
+//     quantiteTotalDemande(){
+//     return this.demandeMateriel.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+// },
+
+
+quantiteEnStock() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.stockageArticles.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+        }
+
+       return this.stockageArticles.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantitestock), 0).toFixed(0);
+
+    },
+
+
+
+
+//  quantiteTotalPersonnel(){
+//     return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
+// },
+//  quantiteTotalService(){
+//     return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0); 
+// },
+
 sommeQuantiteGlobal(){
   const val = parseInt(this.quantiteTotalDemande) + parseInt(this.quantiteTotalPersonnel) + parseInt(this.quantiteTotalService);
       
@@ -175,24 +254,124 @@ sommeQuantiteGlobal(){
       return 0
 },
 
-quantiteTotalDemandeNonCouvertPersonnel(){
-    return this.demandeMateriel.filter(element => element.motif != 10).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
-},
-quantiteTotalDemandeNonCouvertService(){
-    return this.demandeMateriel.filter(element => element.motif_directeur_sce != 10).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
-},
+quantiteTotalDemandeNonCouvertPersonnel() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                item.motif != 10
+            })
+          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+        }
+
+       return this.demandeMateriel.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+
+    },
+// quantiteTotalDemandeNonCouvertPersonnel(){
+//     return this.demandeMateriel.filter(element => element.motif != 10).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+// },
+quantiteTotalDemandeNonCouvertService() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+          return colect.filter(items=>items.motif_directeur_sce != 10).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+        }
+
+       return this.demandeMateriel.filter(items=>items.motif_directeur_sce != 10).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+
+    },
+// quantiteTotalDemandeNonCouvertService(){
+//     return this.demandeMateriel.filter(element => element.motif_directeur_sce != 10).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.quantite), 0).toFixed(0);
+// },
 // quantiteTotalCouvertPersonnel(){
 //     return this.acte_personnels.filter(element => element.normeequipement == 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
 // },
-quantiteTotalCouvertPersonnel(){
-    return this.acte_personnels.filter(element => element.normeequipement == 0).length;
-},
- quantiteTotalNonCouvertPersonnel(){
-    return this.acte_personnels.filter(element => element.normeequipement != 0).length;
-},
- quantiteTotalNonCouvertService(){
-    return this.servicesua.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0); 
-},
+quantiteTotalCouvertPersonnel() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.acte_personnels.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+            return colect.filter(items=>items.normeequipement == 0).length;
+        }
+
+       return this.acte_personnels.length;
+
+    },
+// quantiteTotalCouvertPersonnel(){
+//     return this.acte_personnels.filter(element => element.normeequipement == 0).length;
+// },
+quantiteTotalNonCouvertPersonnel() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.acte_personnels.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+            return colect.filter(items=>items.normeequipement != 0).length;
+        }
+
+       return  this.acte_personnels.filter(items=>items.normeequipement != 0).length;
+
+    },
+//  quantiteTotalNonCouvertPersonnel(){
+//     return this.acte_personnels.filter(element => element.normeequipement != 0).length;
+// },
+//  quantiteTotalNonCouvertService(){
+//     return this.servicesua.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0); 
+// },
+quantiteTotalNonCouvertService() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+          return colect.filter(items=>items.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+        }
+
+       return this.servicesua.filter(items=>items.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+
+    },
 sommeQuantiteGlobalNonCouvert(){
   const val = parseInt(this.quantiteTotalDemandeNonCouvertPersonnel) + parseInt(this.quantiteTotalDemandeNonCouvertService) + parseInt(this.quantiteTotalNonCouvertPersonnel)+ parseInt(this.quantiteTotalNonCouvertService);
       

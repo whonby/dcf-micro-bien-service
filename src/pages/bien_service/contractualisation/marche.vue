@@ -1781,13 +1781,14 @@ getDateFinExécutionValue(){
 
         if (!this.admin || !this.dcf){
             let colect=[];
-            this.afficherLaListeDesMarche.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+            this.printMarcheNonAttribue.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
+            return colect.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1796,7 +1797,7 @@ getDateFinExécutionValue(){
             // });
         }
 
-        return this.afficherLaListeDesMarche
+        return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -1809,26 +1810,25 @@ getDateFinExécutionValue(){
 
     afficherPlanificationPA() {
        // const st = this.search.toLowerCase();
-
-
         if (!this.admin || !this.dcf){
             let colect=[];
-            this.afficheMarcheEnPlanification.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+            this.printMarcheNonAttribue.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
+            return colect.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 4 || element.attribue == 0 && element.type_marche.code_type_marche == 1)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
             //         items.libelle.toLowerCase().includes(st)
             //     );
-            // });
+            // }); 
         }
 
-        return this.afficheMarcheEnPlanification
+        return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 4 || element.attribue == 0 && element.type_marche.code_type_marche == 1)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -1846,12 +1846,13 @@ getDateFinExécutionValue(){
         if (!this.admin || !this.dcf){
             let colect=[];
             this.afficheMarcheEnCoursContratualisation.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
+            return colect.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1860,7 +1861,7 @@ getDateFinExécutionValue(){
             // });
         }
 
-        return this.afficheMarcheEnCoursContratualisation
+        return this.afficheMarcheEnCoursContratualisation.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -1882,6 +1883,7 @@ getDateFinExécutionValue(){
                     return item
                 }
             })
+            return colect 
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1913,6 +1915,7 @@ afficherResilierPUA() {
                     return item
                 }
             })
+            return colect
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1941,6 +1944,7 @@ afficherMarcheSupenduPAR_AU() {
                     return item
                 }
             })
+            return colect
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1971,6 +1975,7 @@ afficherMarcherTerminerParUA() {
                     return item
                 }
             })
+            return colect
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1998,7 +2003,7 @@ return this.printMarcheNonAttribue.filter(element => element.type_marche.code_ty
 // afficher le nombre du marché
 
 nombreDeMarche(){
-  return this.afficherLaListeDesMarche.length;
+  return this.filtre_unite_admin.length;
 },
 
 // afficher le montant de tout les marche
@@ -2401,7 +2406,7 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficher
       };
     },
     nbreMarcheExecuter(){
-  return this.afficheMarchExecuter.length
+  return this.afficherExecutionPAU.length
 },
 // afficheMarchExecuter(){
 // return this.afficheExercution.filter(element => element.indicateur_resilie != 1)
@@ -2421,10 +2426,10 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficher
 // return this.afficheMarcheSolde.filter(element => element.indicateur_resilie != 1)
 // },
 nombreAfficheMarcheSolde(){
-return this.afficheMarcheTerminer.length
+return this.afficherMarcherTerminerParUA.length
 },
 montantEnSolde(){
-  return this.afficheMarcheTerminer.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
+  return this.afficherMarcherTerminerParUA.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_marche), 0)
 },
 
 
@@ -2453,7 +2458,7 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficher
 
 
 afficheNombreMarcheResilier(){
-return this.afficheMarcheResilier.length
+return this.afficherResilierPUA.length
 },
 
 // afficher la liste de marche en contratualisation
@@ -2465,7 +2470,7 @@ afficheMarcheSuspendu(){
 return this.afficherLaListeDesMarche.filter(element => element.attribue == 7 &&  this.recupererCodeTypeMarche(element.type_marche_id) == 1 || element.attribue == 7 && this.recupererCodeTypeMarche(element.type_marche_id) == 4  )
 },
 nombreDeMarcheSuspendu(){
-   return this.afficheMarcheSuspendu.length;
+   return this.afficherMarcheSupenduPAR_AU.length;
 
  },
 // afficher le montant de marche en contratualisation
@@ -2475,7 +2480,7 @@ montantSuspendu(){
 
 // afficher le nombre de marche en contratualisation
  nombreDeMarcheEnContratualisation(){
-   return this.afficheMarcheEnCoursContratualisation.length;
+   return this.afficherContratualisationParUA.length;
 
  },
 

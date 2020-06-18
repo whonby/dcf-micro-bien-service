@@ -62,7 +62,7 @@
                                                     <div class="controls">
                                                        <select v-model="detail.unite_administrative_id" class="span12">
                                                             <option></option>
-                                                            <option v-for="item in uniteAdministratives" :key="item.id" :value="item.id">
+                                                            <option v-for="item in uniteAdmin" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -429,6 +429,7 @@
 <script>
 
     import {mapGetters, mapActions} from 'vuex'
+    import {admin,dcf} from "../../../Repositories/Auth"
     export default {
 
         data() {
@@ -490,6 +491,10 @@
             // console.log(this.getFonction)
         },
         computed: {
+           admin:admin,
+      dcf:dcf,
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
 // methode pour maper notre guetter
             ...mapGetters('personnelUA', ["salairesActeur","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction","personnaliseActeurDepense","affichePersonnelRecuActeNormination",
@@ -510,6 +515,29 @@
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
+
+
+    uniteAdmin() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+            return colect
+        }
+
+       return this.uniteAdministratives
+
+    },
+
 recupererMarcheUA() {
       return id => {
         if (id != null && id != "") {

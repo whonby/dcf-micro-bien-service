@@ -14,11 +14,11 @@
                 </li> -->
                 <li class="bg_ly">
                     <a href="#">
-                        <i class="icon-inbox"></i><span class="label label-important">{{totalActeurAccredite}}</span> Total acteur accredité
+                        <i class="icon-inbox"></i><span class="label label-important">{{nombreTotalActeurAcredite}}</span> Total acteur accredité
                     </a>
                 </li>
-                <li class="bg_lb"> <a href="#"> <i class="icon-th"></i> <span class="label label-important">{{totalActeurNonAccredite}}</span> Total acteur non accredité</a> </li>
-                <li class="bg_ls"> <a href="#"> <i class="icon-fullscreen"></i> <span class="label label-important" v-if="tauxActeurAccredite!='NaN'">{{tauxActeurAccredite || '0' }} %</span>
+                <li class="bg_lb"> <a href="#"> <i class="icon-th"></i> <span class="label label-important">{{nombretotalActeurNonAccredite}}</span> Total acteur non accredité</a> </li>
+                <li class="bg_ls"> <a href="#"> <i class="icon-fullscreen"></i> <span class="label label-important" v-if="tauxActeurAccredite!='NaN'">{{totalTaux || '0' }} %</span>
                     Taux acteurs acredité
                 </a> </li>
             </ul>
@@ -32,9 +32,9 @@
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab10">Listes personnel     <span class="badge badge-inverse">{{totalActeurDepense}}</span></a></li>
-                                 <li class=""><a data-toggle="tab" href="#tab78">Contrat Récrutement Direct      <span class="badge badge-info">{{nbreContratRecrutementDirect}}</span></a></li>
-                                <li class=""><a data-toggle="tab" href="#tab19">Listes des acteurs de depenses   <span class="badge badge-success">{{afficheNombrePersonnelRecuActeNormination}}</span></a> </li>
+                                <li class="active"><a data-toggle="tab" href="#tab10">Listes personnel     <span class="badge badge-inverse">{{nombreActeurActivite}}</span></a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab78">Contrat Récrutement Direct </a></li>
+                                <li class=""><a data-toggle="tab" href="#tab19">Listes des acteurs de depenses   <span class="badge badge-success">{{NombrePersonnelRecuActeNorm}}</span></a> </li>
                                 <li class=""><a data-toggle="tab" href="#tab30">Acteurs non actif</a></li>
                                   <!-- <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{0}}</span></a></li>
                                    <li><a data-toggle="tab" href="#tab301">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li>  -->
@@ -187,7 +187,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr class="odd gradeX" v-for="item in affichePersonnelRecuActeNormination" :key="item.id">
+                                            <tr class="odd gradeX" v-for="item in afficheActeNorminationPerso" :key="item.id">
                                                  
                                                 <td >{{afficheMatriculePersonnel(item.acteur_depense_id) || 'Non renseigné'}}</td>
                                                 <td >{{afficheNomPersonnel(item.acteur_depense_id) || 'Non renseigné'}}</td>
@@ -734,6 +734,7 @@
     import {formatageSomme} from "../../../vuex/modules/guei/Repositories/Repository"
     import {mapGetters, mapActions} from 'vuex'
     import moment from "moment";
+    import {admin,dcf} from "../../../Repositories/Auth"
     export default {
 
         data() {
@@ -868,6 +869,9 @@ recrutement:""
             // console.log(this.getFonction)
         },
         computed: {
+           admin:admin,
+      dcf:dcf,
+      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
             ...mapGetters('personnelUA', ["personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","personnaliseActeurDepense","affichePersonnelRecuActeNormination"]),
@@ -884,11 +888,154 @@ recrutement:""
  ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
    ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe','planActe']),
 
-         listeActeEffectFinnancier: function () {
+
+
+
+
+
+
+ NombrePersonnelRecuActeNorm() {
+       // const searchTerm = this.search.toLowerCase();
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.acte_personnels.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+           
+            return colect.filter(items=>items.fonction_budgetaire_id != null).length;
+        }
+
+      return this.acte_personnels.filter(items=>items.fonction_budgetaire_id != null).length;
+    },
+
+
+
+
+
+
+
+
+nombreTotalActeurAcredite() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.acte_personnels.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+            return colect.filter(acteur_depense=>acteur_depense.type_acte_id=='4' && acteur_depense.date_fin_contrat==null).length;
+        }
+
+       return this.acte_personnels.filter(acteur_depense=>acteur_depense.type_acte_id=='4' && acteur_depense.date_fin_contrat==null).length;
+
+    },
+
+totalTaux() {
+      const val = ((parseFloat(this.nombreTotalActeurAcredite) /parseFloat(this.totalActeurDepense))*100).toFixed(2);
+      return parseFloat(val).toFixed(0);
+    },
+nombretotalActeurNonAccredite() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.acte_personnels.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+            return colect.filter(acteur_depense=>acteur_depense.type_acte_id!='4' && acteur_depense.date_fin_contrat==null ).length;
+        }
+
+       return this.acte_personnels.filter(acteur_depense=>acteur_depense.type_acte_id!='4' && acteur_depense.date_fin_contrat==null ).length;
+
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+afficheActeNorminationPerso() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.acte_personnels.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+            return colect.filter(items=>items.fonction_budgetaire_id != null);
+        }
+
+       return this.acte_personnels.filter(items=>items.fonction_budgetaire_id != null);
+
+    },
+        //  listeActeEffectFinnancier: function () {
                
-                        return this.getActeEffetFinancierPersonnaliserContrat.filter(idmarche => idmarche.difference_personnel_bienService == 4)
+        //                 return this.getActeEffetFinancierPersonnaliserContrat.filter(idmarche => idmarche.difference_personnel_bienService == 4)
                  
-            },
+        //     },
+
+            listeActeEffectFinnancier() {
+      
+
+
+   
+        if (!this.admin || !this.dcf ){
+            let colect=[];
+            this.acteEffetFinanciers.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+            return colect.filter(items=>items.difference_personnel_bienService == 4);
+          }
+          return this.acteEffetFinanciers.filter(items=>items.difference_personnel_bienService == 4);
+         
+
+
+
+    },
             nbreContratRecrutementDirect() {
                
                         return this.listeActeEffectFinnancier.length
@@ -1062,42 +1209,144 @@ AffichierElementParent() {
       };
     },
 
+            // acteurActivite() {
+            //     const searchTerm = this.search.toLowerCase();
+            //    // let ObjetModepassation=this.document_pyba_ppm_personnalise.filter((idm)=>idm.exerciceBudgetaire.encours===1);
+            //     return this.personnaliseActeurDepense.filter((item) => {
+            //             return item.matricule.toLowerCase().includes(searchTerm)
+            //             || item.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
+            //             || item.prenom.toLowerCase().includes(searchTerm)
+            //             || item.nom.toLowerCase().includes(searchTerm)
 
+            //         }
+            //     )
 
-
-
-            acteurActivite() {
-                const searchTerm = this.search.toLowerCase();
-               // let ObjetModepassation=this.document_pyba_ppm_personnalise.filter((idm)=>idm.exerciceBudgetaire.encours===1);
-                return this.personnaliseActeurDepense.filter((item) => {
-                        return item.matricule.toLowerCase().includes(searchTerm)
-                        || item.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
-                        || item.prenom.toLowerCase().includes(searchTerm)
-                        || item.nom.toLowerCase().includes(searchTerm)
-
-                    }
-                )
-
-            },
+            // },
            
-  
+  acteurActivite() {
+        const searchTerm = this.search.toLowerCase();
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.personnaliseActeurDepense.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(items => {
+                return (
+                    items.matricule.toLowerCase().includes(searchTerm)
+                        || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
+                        || items.prenom.toLowerCase().includes(searchTerm)
+                        || items.nom.toLowerCase().includes(searchTerm)
+                );
+            });
+            
+        }
+
+        return this.personnaliseActeurDepense.filter(items => {
+            return (
+                items.matricule.toLowerCase().includes(searchTerm)
+                        || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
+                        || items.prenom.toLowerCase().includes(searchTerm)
+                        || items.nom.toLowerCase().includes(searchTerm)
+            );
+        });
+
+    },
+
+  nombreActeurActivite() {
+        const searchTerm = this.search.toLowerCase();
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.personnaliseActeurDepense.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(items => {
+                return (
+                    items.matricule.toLowerCase().includes(searchTerm)
+                        || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
+                        || items.prenom.toLowerCase().includes(searchTerm)
+                        || items.nom.toLowerCase().includes(searchTerm)
+                );
+            }).length;
+            
+        }
+
+        return this.personnaliseActeurDepense.filter(items => {
+            return (
+                items.matricule.toLowerCase().includes(searchTerm)
+                        || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
+                        || items.prenom.toLowerCase().includes(searchTerm)
+                        || items.nom.toLowerCase().includes(searchTerm)
+            );
+        }).length;
+
+    },
+
+
+
+            // acteurNonActivite() {
+            //     const searchTerm = this.search.toLowerCase();
+            //     return this.personnaliseActeurFinContrat.filter((item) => {
+            //             return item.matricule.toLowerCase().includes(searchTerm)
+            //                 || item.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
+            //                 || item.prenom.toLowerCase().includes(searchTerm)
+            //                 || item.nom.toLowerCase().includes(searchTerm)
+
+            //         }
+            //     )
+
+            // },
+
+acteurNonActivite() {
+        const searchTerm = this.search.toLowerCase();
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.personnaliseActeurFinContrat.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(items => {
+                return (
+                    items.matricule.toLowerCase().includes(searchTerm)
+                            || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
+                            || items.prenom.toLowerCase().includes(searchTerm)
+                            || items.nom.toLowerCase().includes(searchTerm)
+                );
+            });
+        }
+
+        return this.personnaliseActeurFinContrat.filter(items => {
+            return (
+                items.matricule.toLowerCase().includes(searchTerm)
+                            || items.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
+                            || items.prenom.toLowerCase().includes(searchTerm)
+                            || items.nom.toLowerCase().includes(searchTerm)
+            );
+        });
+
+    },
 
 
 
 
 
-            acteurNonActivite() {
-                const searchTerm = this.search.toLowerCase();
-                return this.personnaliseActeurFinContrat.filter((item) => {
-                        return item.matricule.toLowerCase().includes(searchTerm)
-                            || item.uniteAdmin.libelle.toLowerCase().includes(searchTerm)
-                            || item.prenom.toLowerCase().includes(searchTerm)
-                            || item.nom.toLowerCase().includes(searchTerm)
 
-                    }
-                )
-
-            },
 
             afficheNomPersonnel() {
       return id => {

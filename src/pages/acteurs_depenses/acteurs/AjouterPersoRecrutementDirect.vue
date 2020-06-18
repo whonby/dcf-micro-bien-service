@@ -62,7 +62,7 @@
                                                     <div class="controls">
                                                         <select v-model="formData.unite_administrative_id" class="span24">
                                                             <option></option>
-                                                            <option v-for="item in uniteAdministratives" :key="item.id" :value="item.id">
+                                                            <option v-for="item in uniteAdministrativeDynamiques" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -70,6 +70,7 @@
                                                     </div>
                                                 </div>
                 </td>
+
                 <!-- <td colspan="2">
                      <div class="control-group">
                                                     <label class="control-label">Marché</label>
@@ -440,6 +441,7 @@
 <script>
 
     import {mapGetters, mapActions} from 'vuex'
+      import {admin,dcf} from "../../../Repositories/Auth"
     export default {
 
         data() {
@@ -511,6 +513,9 @@
       
       
     ]),
+      admin:admin,
+      dcf:dcf,
+      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
  ...mapGetters("bienService", ["getActeEffetFinancierPersonnaliserContrat","selectionner_candidats","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation",
@@ -518,6 +523,30 @@
                 "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs","obseravtionBailleurs",
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
+ 
+ uniteAdministrativeDynamiques() {
+      
+        if (!this.admin || !this.dcf ){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+           return colect;
+          }
+          
+         return this.uniteAdministratives;
+
+
+
+    },
+
+ 
+ 
  recupererCandidatSel() {
       return id => {
         if (id != null && id != "") {

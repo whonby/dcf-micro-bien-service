@@ -426,6 +426,7 @@
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import { formatageSomme } from "../../../../Repositories/Repository";
+import {admin,dcf} from "../../../../Repositories/Auth"
 
 export default {
   name: 'besionImmolisation',
@@ -512,6 +513,9 @@ created() {
     //console.log(this.$router);
   },
   computed: {
+     admin:admin,
+      dcf:dcf,
+     ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
     ...mapGetters("SuiviImmobilisation", [
       "causeInactivite",
       "trieUaImmobilisation",
@@ -546,9 +550,50 @@ created() {
 
 
 
+afficheEquipementEnCoursUtilidation() {
+       
 
 
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.historiqueAffectationService.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+           return colect.filter(items => items.annee_amortissement >= this.nombreJourTraitementCalucle);
+        }
 
+      return this.historiqueAffectationService.filter(items => items.annee_amortissement >= this.nombreJourTraitementCalucle);
+
+    },
+
+
+afficheEquipementAmortie() {
+       
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.historiqueAffectationService.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                
+               if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+           return colect.filter(items=>items.annee_amortissement < this.nombreJourTraitementCalucle)
+        }
+
+      return this.historiqueAffectationService.filter(items=>items.annee_amortissement < this.nombreJourTraitementCalucle)
+
+    },
 
 
  nombreJourTraitementCalucle(){
@@ -582,24 +627,24 @@ created() {
 //     },
     afficheNombreEquipementEnCoursUtilidation() {
    
-    return this.historiqueAffectationService.filter(qtreel => qtreel.annee_amortissement >= this.nombreJourTraitementCalucle).length;     
+    return this.afficheEquipementEnCoursUtilidation.length;     
       
     },
     afficheNombreEquipementAmortie() {
    
-    return this.historiqueAffectationService.filter(qtreel => qtreel.annee_amortissement < this.nombreJourTraitementCalucle).length;     
+    return this.afficheEquipementAmortie.length;     
       
     },
-afficheEquipementEnCoursUtilidation() {
+// afficheEquipementEnCoursUtilidation() {
    
-    return this.historiqueAffectationService.filter(qtreel => qtreel.annee_amortissement >= this.nombreJourTraitementCalucle);     
+//     return this.historiqueAffectationService.filter(qtreel => qtreel.annee_amortissement >= this.nombreJourTraitementCalucle);     
       
-    },
-    afficheEquipementAmortie() {
+//     },
+//     afficheEquipementAmortie() {
    
-    return this.historiqueAffectationService.filter(qtreel => qtreel.annee_amortissement < this.nombreJourTraitementCalucle);     
+//     return this.historiqueAffectationService.filter(qtreel => qtreel.annee_amortissement < this.nombreJourTraitementCalucle);     
       
-    },
+//     },
 afficheEtatImmobilisation() {
       return id => {
         if (id != null && id != "") {

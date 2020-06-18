@@ -128,6 +128,7 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
+import {admin,dcf} from "../../../Repositories/Auth"
 // import moment from "moment";
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
@@ -185,6 +186,10 @@ export default {
   },
 
   computed: {
+    admin:admin,
+      dcf:dcf,
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
   ...mapGetters("bienService", ["modepaiements",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
      'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
      'nombremarchesExecute',
@@ -227,12 +232,33 @@ export default {
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
 
 
-afficherListeSalaireEnExecution(){
-return this.paiementPersonnel.filter(element => element.valisationvirement == 0)
-},
+// afficherListeSalaireEnExecution(){
+// return this.paiementPersonnel.filter(element => element.valisationvirement == 0)
+// },
 
 
 
+
+  afficherListeSalaireEnExecution() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.paiementPersonnel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+            return colect.filter(items=>items.valisationvirement == 0)
+        }
+
+       return this.paiementPersonnel.filter(items=>items.valisationvirement == 0)
+
+    },
 
 
  afficherUa() {

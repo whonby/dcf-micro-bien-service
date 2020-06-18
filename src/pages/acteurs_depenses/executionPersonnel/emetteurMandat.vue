@@ -142,6 +142,7 @@ afficherIdOrdrePaiement
 <script>
   import { mapGetters, mapActions } from "vuex";
   import { formatageSomme } from "../../../../src/Repositories/Repository";
+  import {admin,dcf} from "../../../Repositories/Auth"
   import moment from "moment";
 export default {
     props:["PaiementPersoid","exerciceBudgetaire"],
@@ -235,19 +236,54 @@ formNumeroEngagemt:{}
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
   ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
+     admin:admin,
+      dcf:dcf,
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
    sommeMontantMandat() { 
       const val = parseFloat(this.afficherMontantEmprunt(this.PaiementPersoid)) + parseFloat(this.afficherMontantDon(this.PaiementPersoid)) + parseFloat(this.afficherMontantTresor(this.PaiementPersoid));
       return parseFloat(val).toFixed(0);
       
     },
- listeMandatPerso: function () {
-                return id => {
+    listeMandatPerso() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.mandats.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+             return id => {
                     if (id != "") {
-                      // console.log("Marche leste acte effect finnancier")
+                     
+                        return this.colect.filter(idmarche => idmarche.paiementperso_id == id)
+                    }
+                }
+            
+        }
+ return id => {
+                    if (id != "") {
+                     
                         return this.mandats.filter(idmarche => idmarche.paiementperso_id == id)
                     }
                 }
-            },
+     
+
+    },
+//  listeMandatPerso: function () {
+//                 return id => {
+//                     if (id != "") {
+//                       // console.log("Marche leste acte effect finnancier")
+//                         return this.mandats.filter(idmarche => idmarche.paiementperso_id == id)
+//                     }
+//                 }
+//             },
  CumulEngagement() {
       const val = parseFloat(this.sommeEgagementLigneTableau(this.afficherIdLigne(this.PaiementPersoid))) + parseFloat(this.sommeMontant);
       

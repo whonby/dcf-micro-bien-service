@@ -72,7 +72,7 @@
                <div class="control-group">
             <label class="control-label" title="unite administrative">UA</label>
             <div class="controls">
-            <select v-model="formData.ua_id" class="span">
+            <select v-model="formData.unite_administrative_id" class="span4">
                <option v-for="plans in afficherParUAEnfonctiondesRole" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
            </select>
@@ -91,7 +91,7 @@
                       >{{gdeNature[0].afficheGdeNature.libelle}}</option>
                     </select> -->
 
-                     <select v-model="formData.gdenature_id" :readOnly="deverouGrandNature" class="sapn5">
+                     <select v-model="formData.gdenature_id" :readOnly="deverouGrandNature" class="sapn8">
                <option v-for="plans in grandes_natures" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
                </select>
@@ -347,11 +347,15 @@
                <div class="control-group">
             <label class="control-label" title="unite administrative">UA</label>
             <div class="controls">
-            <select v-model="editMarche.unite_administrative_id" class="span4">
+              <select v-model="editMarche.unite_administrative_id" class="span4">
+               <option v-for="plans in afficherParUAEnfonctiondesRole" :key="plans.id" 
+               :value="plans.id">{{plans.libelle}}</option>
+           </select>
+            <!-- <select v-model="editMarche.unite_administrative_id" class="span4">
                <option v-for="plans in groupUa" 
                :key="plans[0].id" 
                :value="plans[0].afficheUA.id">{{plans[0].afficheUA.libelle}}</option>
-           </select>
+           </select> -->
             </div>
           </div>
               </td>

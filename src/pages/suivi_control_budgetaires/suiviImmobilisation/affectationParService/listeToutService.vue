@@ -18,7 +18,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for=" serv in servicesua"
+                    <tr class="odd gradeX" v-for=" serv in listeDesServiceDeUa"
                         :key="serv.id">
                         
                               <td >
@@ -66,6 +66,7 @@
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from '../../../../../src/Repositories/Repository';
+import {admin,dcf} from "../../../../../src/Repositories/Auth"
 //import moment from 'moment';
 export default {
     data(){
@@ -88,7 +89,8 @@ search:""
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
             ...mapGetters('personnelUA', ['acteur_depenses']),
 
-
+admin:admin,
+      dcf:dcf,
                 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
                 'types_financements']) ,
@@ -109,6 +111,7 @@ search:""
       // "sections"
     ]),
    ...mapGetters("SuiviImmobilisation", ["services"]),
+   ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
     //   filtreServiceUniteAdministrative() {
     //   const st = this.search.toLowerCase();
     //   return this.servicesua.filter(type => {
@@ -118,6 +121,29 @@ search:""
     //     );
     //   });
     // },
+
+listeDesServiceDeUa() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          
+        }
+
+       return ""
+
+    },
+
+
+
  afficheToutUA() {
       return id => {
         if (id != null && id != "") {

@@ -188,6 +188,7 @@ afficherBanqueDynamique
                                     class="span"
                                     placeholder=" "
                             />
+                            <input type="hidden" v-model="formEffetFinancier.ua_id" />
                         </div>
                     </div>
 
@@ -726,6 +727,7 @@ afficherBanqueDynamique
                                     class="span"
                                     placeholder=" "
                             />
+                            <input type="hidden" v-model="editActeEffetFinancier.ua_id" />
                         </div>
                     </div>
 
@@ -1197,6 +1199,7 @@ export default {
               taux_retenue_garantie:"",
               tva:"",
               taux:"",
+              ua_id:"",
               avance_demarrage_ht:"",
               avance_demarrage_ttc:"",
               tva_avance_demarage:"",
@@ -1229,6 +1232,7 @@ export default {
               montant_act_ht:"",
               tva:"",
               taux:"",
+              ua_id:"",
               avance_demarrage_ht:"",
               avance_demarrage_ttc:"",
               tva_avance_demarage:"",
@@ -1349,8 +1353,23 @@ afficherNomCandidat(){
       }
   }  
 },
+// recuperation de l'ID  de UA dans la table marché
 
 
+
+afficherIDUA() { 
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.unite_administrative_id;
+      }
+      return null
+        }
+      };
+    },
+    ///
  afficherNumeroDossierCandidat1() { 
       return id => {
         if (id != null && id != "") {
@@ -2000,6 +2019,7 @@ getDateFinExécutionValueEdit(){
        var nouvelObjet = {
             ...this.formEffetFinancier,
             duree: this.nombreDejourCalcule,
+            ua_id:this.afficherIDUA(this.macheid),
             taux:this.afficherEnorere,
             tva_cautionnement:this.afficherMontantTvaDuCautionnement,
             montant_ttc_cautionnement:this.afficherMontantTTCDuCautionnement,
@@ -2014,6 +2034,7 @@ getDateFinExécutionValueEdit(){
             entreprise_id:this.affichierNomEntreprise.entreprise_id,
             difference_personnel_bienService:this.afficheMarcheType,
             marche_id:this.macheid,
+           // ua_id:this.ua_id,
             banq_id:this.affichierIdBanque(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id)),
             compte_id:this.afficherIdCompte(this.afficherLeCompteEnFonctionDeLaBanque(this.formEffetFinancier.banq_id))
         }
@@ -2042,7 +2063,7 @@ getDateFinExécutionValueEdit(){
              livrable_id:"",
         autorite_approbation:"",
         date_approbation:"",
-            // text_juridique_id:"",
+             ua_id:"",
              type_act_effet_id:"",
              analyse_dossier_id:"",
              entreprise_id:"",

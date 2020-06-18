@@ -65,7 +65,7 @@
                   <div class="controls">
                     <select v-model="formData.ua_id" class="span">
                       <option
-                        v-for="UniteA in uniteAdministratives"
+                        v-for="UniteA in uniteAdmin"
                         :key="UniteA.id"
                         :value="UniteA.id"
                       >{{UniteA.libelle}}</option>
@@ -370,7 +370,7 @@
                    <div class="controls">
                      <select v-model="editpaiementPersonnel.ua_id" class="span4">
                        <option
-                         v-for="UniteA in uniteAdministratives"
+                         v-for="UniteA in uniteAdmin"
                          :key="UniteA.id"
                          :value="UniteA.id"
                        >{{UniteA.libelle}}</option>
@@ -678,7 +678,7 @@
                 <tbody>
                   <tr
                     class="odd gradeX"
-                    v-for="(payepersonnel, index) in paiementPersonnel"
+                    v-for="(payepersonnel, index) in listePaiementPerssonnel"
                     :key="payepersonnel.id"
                   >
                    
@@ -761,6 +761,7 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
+import {admin,dcf} from "../../../Repositories/Auth"
 // import moment from "moment";
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
@@ -856,12 +857,64 @@ export default {
       "plans_fonctionnels",
  "afficheNiveauPlanFonctionnel"
    ]),
+ admin:admin,
+      dcf:dcf,
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
 ...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
   ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
- 
+  
+
+
+  listePaiementPerssonnel() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.paiementPersonnel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+            return colect
+        }
+
+       return "0"
+
+    },
+
+
+
+
+
+
+
+  uniteAdmin() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+            return colect
+        }
+
+       return "0"
+
+    },
   afficheImputation() {
       return id => {
         if (id != null && id != "") {

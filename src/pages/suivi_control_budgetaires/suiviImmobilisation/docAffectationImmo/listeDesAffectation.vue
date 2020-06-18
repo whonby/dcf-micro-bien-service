@@ -1,4 +1,5 @@
-
+afficheQteACouvert
+C11OA
 <template>
   
    
@@ -194,16 +195,16 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab456">Listes des services   <span class="badge badge-inverse">{{afficheNombreToutPersonne}}</span></a>
+                        <a data-toggle="tab" href="#tab456">Listes des services   <span class="badge badge-inverse">{{NombreDeService}}</span></a>
                       </li>
                        <li class="">
                         <a data-toggle="tab" href="#tab46">Listes des services non Equipé  <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
                       </li>
                       <li class="">
-                        <a data-toggle="tab" href="#tab89">Equipements Non Couverts   <span class="badge badge-warning">{{NombreafficheEquipementNonCouvertService}}</span></a>
+                        <a data-toggle="tab" href="#tab89">Equipements Non Couverts   <span class="badge badge-warning">{{affichenbreEquipementNonCouvert}}</span></a>
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#tab63">Listes des services Equipé     <span class="badge badge-info">{{NombreaffichePersonneEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab63">Listes des services Equipé     <span class="badge badge-info">{{NombreafficheEquipementCouvertService}}</span></a>
                       </li>
                       <li class="">
                         <a data-toggle="tab" href="#tab6396">Taux equipement des services  </a>
@@ -768,7 +769,7 @@
                   
                   <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in tauxequipementParAgent"
+                    v-for="BesoinImmo in listeDesEquipementParAgent"
                     :key="BesoinImmo.id"
                   >
    
@@ -844,7 +845,7 @@
                  
                     <tr
                     class="odd gradeX"
-                    v-for="BesoinImmo in equipementNonCouvert"
+                    v-for="BesoinImmo in listeDesEquipementNonCouvert"
                     :key="BesoinImmo.id">
                     <td
                       
@@ -920,7 +921,7 @@
                   
                   <tr
                     class="odd gradeX"
-                    v-for="(BesoinImmo,index) in acte_personnels"
+                    v-for="(BesoinImmo,index) in listePersonnelAffectete"
                     :key="BesoinImmo.id"
                   >
                   <!-- <td
@@ -986,7 +987,7 @@
                   
                   <tr
                     class="odd gradeX"
-                    v-for="(BesoinImmo,index) in affichePersonneNonEquipe"
+                    v-for="(BesoinImmo,index) in listePersonnelNonEquipee"
                     :key="BesoinImmo.id"
                   >
                   <!-- <td
@@ -1391,6 +1392,7 @@ import listeServiceEquipe from '../affectationParService/listeServiceEquipe'
 import tauxServiceEquipe from '../affectationParService/tauxServiceEquipe'
 import affectationDemandeDuService from '../docAffectationImmo/affectationDemandeDuService'
 import { formatageSomme } from "../../../../Repositories/Repository";
+import {admin,dcf} from "../../../../Repositories/Auth"
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 export default {
@@ -1518,13 +1520,349 @@ cause_directeur:""
     ...mapGetters("uniteadministrative", ["uniteAdministratives","directions","servicesua","uniteZones"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins","exercices_budgetaires"]),
 ...mapGetters("personnelUA", ["acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
+admin:admin,
+      dcf:dcf,
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
+nombreDesDemandePerso() {
+      
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+            return colect.filter(items=>items.service_id == 0).length
+        }
+
+       return this.demandeMateriel.filter(items=>items.service_id == 0).length;
+
+    },
+
+afficheToutDemande() {
+      
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+            return colect.filter(items=>items.service_id == 0);
+        }
+
+       return this.demandeMateriel.filter(items=>items.service_id == 0);
+
+    },
 
 
+
+
+
+
+ affichenbreEquipementNonCouvert() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+       return colect.filter(items=>items.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+       }
+
+       return this.servicesua.filter(items=>items.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+
+    },
+
+
+
+
+
+listePersonnelAffectete() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.acte_personnels.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect
+        }
+
+       return this.acte_personnels
+
+    },
+
+listePersonnelNonEquipee() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.affichePersonneNonEquipe.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect
+        }
+
+       return this.affichePersonneNonEquipe
+
+    },
+listeDesEquipementNonCouvert() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.equipementNonCouvert.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect
+        }
+
+       return this.equipementNonCouvert
+
+    },
+    listeDesEquipementParAgent() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.tauxequipementParAgent.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect
+        }
+
+       return this.tauxequipementParAgent
+
+    },
+    listeDesPersonneEquipee() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.affichePersonneEquipe.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect
+        }
+
+       return this.affichePersonneEquipe
+
+    },
+
+
+
+
+AfficheTotalQteNonCouvert() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.acte_personnels.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+        }
+
+       return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+
+    },
+AfficheTotalQteACouvrir() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.acte_personnels.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
+        }
+
+       return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
+
+    },
+afficheMontantTotalEquipementNonCouvert() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficheMontantTotalEquipementNonCouv.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+        }
+
+       return this.afficheMontantTotalEquipementNonCouv.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+
+    },
+
+
+
+afficheLesDemandeDuPersonnel() {
+      
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+            return colect
+        }
+
+       return this.demandeMateriel
+
+    },
+afficheValidationChefService() {
+      
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+              
+               if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+            return colect.filter(items => items.service_id == 0 && items.motif != 3 && items.motif != 1 && items.motif != 10 )
+        }
+
+       
+ return this.demandeMateriel.filter(items => items.service_id == 0 && items.motif != 3 && items.motif != 1 && items.motif != 10 );
+
+    },
+    afficheValidationDirecteur() {
+     
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.demandeMateriel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(items=>items.service_id == 0 && items.motif != 0 && items.motif != 5 && items.motif != 4 && items.motif != 10);
+        }
+
+       return this.demandeMateriel.filter(items=>items.service_id == 0 && items.motif != 0 && items.motif != 5 && items.motif != 4 && items.motif != 10);
+
+    },
+
+listeDesServiceDeUa() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect
+        }
+
+       return this.servicesua
+
+    },
+
+
+    NombreDeService() {
+     
+         return this.listeDesServiceDeUa.length;
+    },
 NombreafficheEquipementNonCouvertService() {
      
          return this.servicesua.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
     },
+    NombreafficheEquipementCouvertService() {
+      
 
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                
+              if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+          return colect.filter(items => items.normeequipement == 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+          
+        }
+
+         return this.servicesua.filter(items => items.normeequipement == 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+
+    },
+// NombreafficheEquipementCouvertService() {
+     
+//          return this.servicesua.filter(element => element.normeequipement == 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+//     },
  afficheService() {
       return id => {
         if (id != null && id != "") {
@@ -1551,19 +1889,15 @@ NombreafficheEquipementNonCouvertService() {
     },
 
 
- afficheMontantTotalEquipementNonCouvert() {
+ afficheMontantTotalEquipementNonCouv() {
      
-         return this.acte_personnels.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+         return this.acte_personnels.filter(element => element.normeequipement != 0);
     },
 
-AfficheTotalQteACouvrir() {
+// AfficheTotalQteNonCouvert() {
      
-         return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
-    },
-AfficheTotalQteNonCouvert() {
-     
-         return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
-    },
+//          return this.acte_personnels.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+//     },
 
 afficherMontantRestant() {
       const val = this.affichierTotal(this.formData.fonction_id) - this.afficherValeurOrigine;
@@ -1753,23 +2087,23 @@ verrouilleCause(){
 
 
 
-afficheValidationChefService() {
+// afficheValidationChefService() {
       
-          return this.demandeMateriel.filter(element => element.service_id == 0 && element.motif != 3 && element.motif != 1 && element.motif != 10 );
+//           return this.demandeMateriel.filter(element => element.service_id == 0 && element.motif != 3 && element.motif != 1 && element.motif != 10 );
        
-    },
+//     },
 
 
-afficheValidationDirecteur() {
+// afficheValidationDirecteur() {
       
-          return this.demandeMateriel.filter(element => element.service_id == 0 && element.motif != 0 && element.motif != 5 && element.motif != 4 && element.motif != 10);
+//           return this.demandeMateriel.filter(element => element.service_id == 0 && element.motif != 0 && element.motif != 5 && element.motif != 4 && element.motif != 10);
        
-    },
-afficheToutDemande() {
+//     },
+// afficheToutDemande() {
       
-          return this.demandeMateriel.filter(element => element.service_id == 0 );
+//           return this.demandeMateriel.filter(element => element.service_id == 0 );
        
-    },
+//     },
 nombreValidationEnAttenteChefService() {
       
           return this.afficheValidationChefService.length;
@@ -2070,20 +2404,20 @@ affichePersonneNonEquipe(){
 return this.acte_personnels.filter(element => element.normeequipement != 0)
 },
 NombreaffichePersonneEquipe(){
-return this.acte_personnels.filter(element => element.normeequipement == 0).length
+return this.listeDesPersonneEquipee.length
 },
 affichePersonneEquipe(){
 return this.acte_personnels.filter(element => element.normeequipement == 0)
 },
 afficheNombrePersonneNonEquipe(){
-return this.acte_personnels.filter(element => element.normeequipement != 0).length
+return this.listePersonnelNonEquipee.length
 },
 
 afficheNombrePersonneEquipe(){
 return this.acte_personnels.filter(element => element.normeequipement == 0).length
 },
 afficheNombreToutPersonne(){
-return this.acte_personnels.length
+return this.listePersonnelAffectete.length
 },
 exoEnCours(){
 return this.exercices_budgetaires.filter(element => element.encours == 1)

@@ -72,7 +72,7 @@
                     <select v-model="formData.ua_id" class="span4">
                         <option value>Sélectionner</option>
                     <option
-                      v-for="ua in uniteAdministratives"
+                      v-for="ua in uniteAdmin"
                       :key="ua.id"
                       :value="ua.id"
                     >{{ua.libelle}}</option>
@@ -338,7 +338,7 @@
                     <select v-model="editBudgetGeneral.ua_id" class="span4">
                         <option value>Sélectionner</option>
                     <option
-                      v-for="ua in uniteAdministratives"
+                      v-for="ua in uniteAdmin"
                       :key="ua.id"
                       :value="ua.id"
                     >{{ua.libelle}}</option>
@@ -608,6 +608,7 @@
 import { mapGetters, mapActions } from "vuex";
 import budgetGeneralItemComponent from './budgetGeneralItemComponent'
 import { formatageSomme } from "../../../src/Repositories/Repository";
+import {admin,dcf} from "../../../src/Repositories/Auth"
 export default {
   name: 'budgetgeneral',
  components: {
@@ -702,7 +703,56 @@ export default {
                 "getterligneExempter",
 
             ]),
+             admin:admin,
+      dcf:dcf,
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
+
+
+
+listedesuniteA() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+               
+            })
+             return colect
+        }
+
+       return this.uniteAdministratives
+
+    },
+
+
+
+uniteAdmin() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+            return colect
+        }
+
+       return this.uniteAdministratives
+
+    },
 //  codeBudgetGeneralModifier(){
 //       // const section = this.sections.find(sect => sect.id == this.editUniteAdministrative.section_id)
 //     const sectionBudget = this.sections.find(serviceg => serviceg.id == this.editBudgetGeneral.section_id)

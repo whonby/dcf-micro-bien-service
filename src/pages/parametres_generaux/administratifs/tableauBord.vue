@@ -1,9 +1,8 @@
+budgetConsommerPersonnel
+afficherBudgetInitialTranferst
+getterUniteAdministrativeByUser
 <template>
 
-
-
-
-   
 <!--breadcrumbs-->
   
 <!--End-breadcrumbs-->
@@ -235,7 +234,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import {formatageSomme} from '../../../../src/Repositories/Repository';
-import {admin,dcf} from "../../../Repositories/Auth"
+import {admin,dcf} from "../../../../src/Repositories/Auth"
 
 export default {
   data(){
@@ -259,10 +258,11 @@ export default {
                 "uniteAdministratives",
                 "getterBudgeCharge",
                 "budgetGeneral",
-                "afficheTransfertValider"
+                "afficheTransfertValider",
+                "transferts"
             ]),
             
-    ...mapGetters("bienService", ["getMandatPersonnaliserVise","getMandatPersonnaliserPersonnel"]),
+    ...mapGetters("bienService", ["getMandatPersonnaliserVise","getMandatPersonnaliserPersonnel","mandats"]),
 
        ...mapGetters("parametreGenerauxAdministratif", [
                 "sections",
@@ -273,10 +273,54 @@ export default {
                 "afficheNiveauPlanProg",
                 "exercices_budgetaires"
             ]),
-budgetConsommerPersonnel(){
+            admin:admin,
+      dcf:dcf,
+      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
  
-    return this.getMandatPersonnaliserPersonnel.filter(element => element.marchetype == "perso" ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+// budgetConsommerPersonnel(){
+ 
+//     return this.getMandatPersonnaliserPersonnel.filter(element => element.marchetype == "perso" ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0); 
+// },
+
+ affichebudgetActive(){
+  
+    var activeBudget= this.budgetGeneral.filter(element => element.actived == 1); 
+     
+      return activeBudget
+  
 },
+
+budgetConsommerPersonnel() {
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.getMandatPersonnaliserPersonnel.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.filter(element => element.marchetype == "perso" ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0);
+        }
+
+       return this.getMandatPersonnaliserPersonnel.filter(element => element.marchetype == "perso" ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(0);
+
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 affichierBudgetDisponiblePersonnel() {
       const val = parseFloat(this.afficherBudgetInitialPersonnel) - parseFloat(this.budgetConsommerPersonnel);
       
@@ -319,34 +363,127 @@ affichierTauxExecution() {
       
       return 0
     },
-afficherBudgetInitialTranferst(){
+// afficherBudgetInitialTranferst(){
     
-      return this.budgetGeneral.filter(item =>item.gdenature_id==6).reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0)
-},
-budgetConsommerTransfert(){
+//       return this.budgetGeneral.filter(item =>item.gdenature_id==6).reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0)
+// },
+
+afficherBudgetInitialTranferst() {
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.budgetGeneral.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+
+                 item.actived = 1
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.filter(items =>items.gdenature_id==6).reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0)
+        }
+
+       return this.budgetGeneral.filter(items1 =>items1.gdenature_id==6).reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0)
+
+    },
+
+
+// budgetConsommerTransfert(){
  
-    return this.afficheTransfertValider.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
-      
-  
-    
-  
-},
+//     return this.afficheTransfertValider.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
 
-afficherBudgetInitialPersonnel(){
- return this.budgetGeneral.filter(item =>item.gdenature_id==2).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
-},
+// },
+budgetConsommerTransfert() {
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.transferts.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.transfert_ua.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
+        }
+
+       return this.transferts.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(0); 
+
+    },
 
 
-afficherBudgetInitialB(){
- return this.budgetGeneral.filter(item => item.gdenature_id==5).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0) 
 
-},
 
+
+// afficherBudgetInitialPersonnel(){
+//  return this.budgetGeneral.filter(item =>item.gdenature_id==2).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
+// },
+
+
+afficherBudgetInitialPersonnel() {
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.budgetGeneral.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                item.actived == 1
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.filter(items =>items.gdenature_id==2 ).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
+        }
+
+       return this.budgetGeneral.filter(items1 =>items1.gdenature_id==2 && items1.actived == 1).reduce((prec,cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale),0)
+
+    },
+
+// afficherBudgetInitialB(){
+//  return this.budgetGeneral.filter(item => item.gdenature_id==5).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0) 
+
+// },
+afficherBudgetInitialB() {
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.budgetGeneral.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                item.actived == 1
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.filter(items => items.gdenature_id==5 ).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0);
+        }
+
+       return this.budgetGeneral.filter(items1 => items1.gdenature_id==5 && items1.actived == 1).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0);
+
+    },
 //calcule du budget executer pour bien service
 
-afficherBudgetExcuterBienService(){
-  return this.getMandatPersonnaliserVise.filter(item => item.marchetype==2).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general) , 0)
-},
+// afficherBudgetExcuterBienService(){
+//   return this.getMandatPersonnaliserVise.filter(item => item.marchetype==2).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general) , 0)
+// },
+
+afficherBudgetExcuterBienService() {
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.getMandatPersonnaliserVise.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.filter(item => item.marchetype==2).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general) , 0);
+        }
+
+       return this.getMandatPersonnaliserVise.filter(item => item.marchetype==2).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general) , 0);
+
+    },
+
+
+
+
 
 affichierBudgetDisponibleBienService() {
       const val = parseFloat(this.afficherBudgetInitialB) - parseFloat(this.afficherBudgetExcuterBienService);
@@ -369,18 +506,51 @@ affichierTauxExecutionBienService() {
 
 // afficher le montant du budget initial 
 
-afficherBudgetInitialInvetissement(){
-  return this.budgetGeneral.filter(item => item.gdenature_id==7).reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale) , 0)
-},
+// afficherBudgetInitialInvetissement(){
+//   return this.budgetGeneral.filter(item => item.gdenature_id==7).reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale) , 0)
+// },
 
+
+afficherBudgetInitialInvetissement() {
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.budgetGeneral.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+               item.actived == 1
+               if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.filter(items => items.gdenature_id==7).reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale) , 0);
+        }
+
+       return this.budgetGeneral.filter(items1 => items1.gdenature_id==7 && items1.actived == 1).reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale) , 0);
+
+    },
 
 // calcule du budget executé d'investissement
 
 
-afficherBudgetExecutéInvestissement(){
-  return this.getMandatPersonnaliserVise.filter(item => item.marchetype==1).reduce((prec, cur)=>parseFloat(prec) + parseFloat(cur.total_general), 0)
-},
+// afficherBudgetExecutéInvestissement(){
+//   return this.getMandatPersonnaliserVise.filter(item => item.marchetype==1).reduce((prec, cur)=>parseFloat(prec) + parseFloat(cur.total_general), 0)
+// },
+afficherBudgetExecutéInvestissement() {
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.getMandatPersonnaliserVise.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.filter(item => item.marchetype==1).reduce((prec, cur)=>parseFloat(prec) + parseFloat(cur.total_general), 0)
+        }
 
+       return this.getMandatPersonnaliserVise.filter(item => item.marchetype==1).reduce((prec, cur)=>parseFloat(prec) + parseFloat(cur.total_general), 0)
+
+    },
 
 affichierBudgetDisponibleInvestissement() {
       const val = parseFloat(this.afficherBudgetInitialInvetissement) - parseFloat(this.afficherBudgetExecutéInvestissement);
@@ -446,8 +616,8 @@ affichierTauxExecutionInvestissement() {
   methods:{
 ...mapActions('',['']),
       ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser"]),
-      admin:admin,
-      dcf:dcf,
+      // admin:admin,
+      // dcf:dcf,
 
  formatageSomme:formatageSomme
   }

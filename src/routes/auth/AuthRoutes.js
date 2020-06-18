@@ -4,6 +4,7 @@ import Logout from '../../pages/auth/Logout.vue'
 import GestionCF from "../../pages/gestionCF/GestionCF";
 import DetailCF from "../../pages/gestionCF/DetailCF";
 
+
 const AuthRoutes = [
     {
         path: '/connexion',
@@ -11,7 +12,8 @@ const AuthRoutes = [
        meta: {layout: "no-sidebar"},
 
        component: Login
-     },
+    },
+    
 
      
      {

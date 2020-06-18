@@ -124,6 +124,7 @@
 
     import {mapGetters, mapActions} from 'vuex'
     import {formatageSomme} from '../../Repositories/Repository'
+    import {admin,dcf} from "../../Repositories/Auth"
     export default {
 
         data() {
@@ -159,10 +160,15 @@
       "coutMoyenDeMission",
 
       
+      
  
 
       // "nbreArchivageNotes"
     ]),
+      admin:admin,
+      dcf:dcf,
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
   ...mapGetters('personnelUA', ['totalActeurNonAccredite','acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions",
                 "grades","niveau_etudes","nbr_acteur_actredite_taux","all_acteur_depense","totalActeurAccredite",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite","tauxActeurNonAccredite"]),
@@ -173,6 +179,7 @@
   nbreMarcheContrat(){
   return this.getActeEffetFinancierPersonnaliser45.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarcheEx(recuper.marche.type_marche_id) == 2 && recuper.difference_personnel_bienService == 3).length
 },
+
 
 
 afficherLaListeDesContratsDuPersonnel(){

@@ -21,7 +21,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for=" (affectService,index) in afficheServiceNonEquipe"
+                    <tr class="odd gradeX" v-for=" (affectService,index) in listeDesServiceNonEquipeDeUa"
                         :key="affectService.id">
                         
                               <td >
@@ -304,6 +304,7 @@
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from '../../../../../src/Repositories/Repository';
+import {admin,dcf} from "../../../../../src/Repositories/Auth"
 //import moment from 'moment';
 export default {
     data(){
@@ -362,6 +363,9 @@ search:""
       // "chapitres",
       // "sections"
     ]),
+    admin:admin,
+      dcf:dcf,
+     ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
    ...mapGetters("SuiviImmobilisation", ["services",
     "trieUaImmobilisation",
       "equipements",
@@ -405,6 +409,26 @@ search:""
     //     );
     //   });
     // },
+    
+listeDesServiceNonEquipeDeUa() {
+      
+
+
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.afficheServiceNonEquipe.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          
+        }
+
+       return ""
+
+    },
         afficherQuantiteSortir() {
       return id => {
         if (id != null && id != "") {

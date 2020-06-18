@@ -260,7 +260,7 @@ ImputationBudgetModifier
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des marches attribués</h5>
+              <h5>Liste des marches attribués </h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -285,7 +285,7 @@ ImputationBudgetModifier
                 </thead>
                 <tbody >
                   <tr class="odd gradeX" v-for="(marche, index) in 
-                  marcherAttribuerFiltre"
+                  afficherlisteMarcheExecutionParDroitAccess"
                  :key="marche.id">
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
@@ -391,6 +391,7 @@ ImputationBudgetModifier
 <script>
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../../src/Repositories/Repository";
+ import {admin,dcf} from '../../../../src/Repositories/Auth';
 export default {
   name:'type facture',
   data() {
@@ -440,6 +441,96 @@ export default {
   'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
  ...mapGetters('parametreGenerauxAdministratif', ['exercices_budgetaires']),
+   ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
+  admin:admin,
+  dcf:dcf,
+  
+
+afficherlisteMarcheExecutionParDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.getMarchePersonnaliser.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(recuper => recuper.attribue == 2 && recuper.type_marche.code_type_marche == 4 || recuper.attribue == 2 && recuper.type_marche.code_type_marche == 1)
+            // return colect.filter(items => {    
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.getMarchePersonnaliser.filter(recuper => recuper.attribue == 2 && recuper.type_marche.code_type_marche == 4 || recuper.attribue == 2 && recuper.type_marche.code_type_marche == 1)
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+    },
+
+
+
+
+afficherMontantExecutionParDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.getActeEffetFinancierPersonnaliser45.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect
+            // return colect.filter(items => {    
+            //     return (
+            //         items.secti.nom_section.toLowerCase().includes(st) ||
+            //         items.libelle.toLowerCase().includes(st)
+            //     );
+            // });
+        }
+
+        return this.getActeEffetFinancierPersonnaliser45
+            // return (
+            //     items.secti.nom_section.toLowerCase().includes(st) ||
+            //     items.libelle.toLowerCase().includes(st)
+            // );
+    },
+    // afficherMontantParDroitAccess() {
+    //    // const st = this.search.toLowerCase();
+    //     if (!this.admin || !this.dcf){
+    //         let colect=[];
+    //         this.montantMarcheExecuter.filter(item=>{
+    //             let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+    //             if (val!=undefined){
+    //                 colect.push(item)
+    //                 return item
+    //             }
+    //         })
+    //         return colect
+    //         // return colect.filter(items => {
+    //         //     return (
+    //         //         items.secti.nom_section.toLowerCase().includes(st) ||
+    //         //         items.libelle.toLowerCase().includes(st)
+    //         //     );
+    //         // });
+    //     }
+
+    //     return this.montantMarcheExecuter
+    //         // return (
+    //         //     items.secti.nom_section.toLowerCase().includes(st) ||
+    //         //     items.libelle.toLowerCase().includes(st)
+    //         // );
+    // },
+
+
  afficherAttributMarche() {
       return id => {
         if (id != null && id != "") {
@@ -532,7 +623,7 @@ return this. marcherAttribuer.filter((item) => {
 
     
     montantMarcheExecuter(){
-  return this.getActeEffetFinancierPersonnaliser45.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarche(recuper.marche.type_marche_id) == 4 && recuper.difference_personnel_bienService == 2 || this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarche(recuper.marche.type_marche_id) == 1 && recuper.difference_personnel_bienService == 2).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
+  return this.afficherMontantExecutionParDroitAccess.filter(recuper => this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarche(recuper.marche.type_marche_id) == 4 && recuper.difference_personnel_bienService == 2 || this.afficherAttributMarche(recuper.marche_id) == 2 && this.affichertypeMarche(recuper.marche.type_marche_id) == 1 && recuper.difference_personnel_bienService == 2).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_act), 0)
 },
     // MontatantImputationBudget() {
       
