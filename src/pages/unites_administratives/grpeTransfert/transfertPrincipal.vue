@@ -1018,7 +1018,7 @@ dcf:dcf,
             // });
         }
 
-        return 0;
+        return this.uniteAdministratives;
         //return this.uniteAdministratives
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1570,7 +1570,7 @@ this.$("#exampleModalMotifMandat").modal('hide');
 <style scoped>
 
 .tailgrand12{
-  width: 1000px;
+  width: 15000px;
   margin: 0 -20%;
  
 }
