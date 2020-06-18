@@ -205,7 +205,7 @@ export default {
     this.getTypeUniteAdministrative()
     // this. getPlanActivite()
     this.getAllUniteZone()
-    this.getAllTransfert()
+    
     this.getAllHistoriqueTransfert()
     this.getUnite()
     this.getZone()
@@ -328,6 +328,7 @@ this.getAllHistoriqueBudgetGeneral()
       this.getMission()
        this.getHistoriqueMission() 
 this.getAllBudgetGeneral()
+this.getAllTransfert()
  // debut du module de bien && service
 
 this.getBailleur()
