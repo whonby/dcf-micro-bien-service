@@ -163,7 +163,72 @@
     
      <!-- <td height="20px">23</td>
      <th height="20px"></th> -->
-</tr>                    
+</tr> 
+
+                   <tr>
+   <td  rowspan="3" style="text-align:center;width:10%">INVESTISSEMENTS </td>
+   <td style="width:12%"> CONTREPARTIE </td>
+    <td style="width:12%">ETAT</td>
+  
+    <td  style="text-align:center;width:12%"></td>
+    <td style="text-align:center;width:12%"></td>
+    <td  style="text-align:center;width:12%"></td>
+     <!-- <td style="width:12%">1004</td>
+     <th style="width:12%">1005</th> -->
+</tr>
+                   <tr>
+   
+   <td height="20px">DON  </td>
+     
+    <td height="20px"></td>
+    <td height="20px" style="text-align:center"></td>
+  <td style="text-align:center;height:20%"></td>
+   <td  style="text-align:center;height:20%"></td>
+     <!-- <td height="20px"></td>
+     <th height="20px"></th> -->
+</tr>
+                   <tr>
+  
+   <td height="20px">EMPRUNT  </td>
+   
+    <td height="20px"></td>
+     <td height="20px" style="text-align:center"></td>
+   <td height="20px" style="text-align:center;"></td>
+    <td height="20px" style="text-align:center;"></td>
+    <!-- <td height="20px"></td>
+     <th height="20px"></th> -->
+</tr>
+
+
+
+                   <tr>
+   <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUS-TOTAL TRANSFERT">S/T INVESTISSEMENTS  </th>
+   
+    <td height="20px"></td>
+   <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px"></td>
+     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px"></td>
+     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px"></td>
+    
+     <!-- <td height="20px">23</td>
+     <th height="20px"></th> -->
+</tr> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <tr>
    <th style="width:10%;font-size:14px;font-weight: bold;">TOTAL</th>
    <td style="width:12%"> CONTREPARTIE </td>
@@ -197,6 +262,15 @@
     <!-- <td height="20px">000055</td>
      <th height="20px">00004</th> -->
 </tr>
+
+
+
+
+
+
+
+
+
                    <tr>
    <th height="20px" colspan="2" style="color: #000000;font-size:14px">TOTAL GENERAL </th>
    
