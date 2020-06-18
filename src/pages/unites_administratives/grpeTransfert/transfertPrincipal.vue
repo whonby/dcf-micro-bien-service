@@ -137,7 +137,7 @@
                 <div class="control-group">
                   <label class="control-label">Ligne budgetaire</label>
                   <div class="controls">
-                        <select v-model="formData.ligne_budgetaire_id" :readOnly="verrouLigneBudgetaire" class="span3">
+                        <select v-model="formData.ligne_budgetaire_id" :readOnly="verrouLigneBudgetaire" class="span">
                       <option
                         v-for="localgeo in ligneBudgetaireDynamiques(formData.ua_id)"
                         :key="localgeo.id"
@@ -1570,13 +1570,13 @@ this.$("#exampleModalMotifMandat").modal('hide');
 <style scoped>
 
 .tailgrand12{
-  width: 15000px;
-  margin: 0 -20%;
+  width: 1000px;
+  margin: 0 -30%;
  
 }
 .tailgrand121{
   width: 1000px;
-  margin: 0 -20%;
+  margin: 0 -30%;
  
 }
 </style>
