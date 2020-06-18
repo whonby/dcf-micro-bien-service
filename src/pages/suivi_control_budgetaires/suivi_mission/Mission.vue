@@ -1036,9 +1036,6 @@ export default {
 
     afficherMissionParUAEnfonctiondesRole() {
        // const st = this.search.toLowerCase();
-
-
-
         if (!this.admin || !this.dcf){
             let colect=[];
             this.missionFiltre.filter(item=>{
@@ -1048,6 +1045,7 @@ export default {
                     return item
                 }
             })
+            return colect
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1067,22 +1065,22 @@ export default {
 
     //  listes des propriétes calculées de nombre pour les filtres
     total_mission(){
-      return this.getMissionPersonnaliser.length
+      return this.afficherMissionParUAEnfonctiondesRole.length
     },
     total_mission_attente(){
-          return this.getMissionPersonnaliser.filter(mis =>  !mis.historique_missions.length).length
+          return this.afficherMissionParUAEnfonctiondesRole.filter(mis =>  !mis.historique_missions.length).length
 
     },
       total_mission_vises(){
-        return this.getMissionPersonnaliser.filter(mis => mis.historique_missions.length && mis.historique_missions[0].type_operation == 0).length
+        return this.afficherMissionParUAEnfonctiondesRole.filter(mis => mis.historique_missions.length && mis.historique_missions[0].type_operation == 0).length
 
     },
       total_mission_differes(){
-        return this.getMissionPersonnaliser.filter(mis => mis.historique_missions.length && mis.historique_missions[0].type_operation == 1).length
+        return this.afficherMissionParUAEnfonctiondesRole.filter(mis => mis.historique_missions.length && mis.historique_missions[0].type_operation == 1).length
 
     },
       total_mission_rejetes(){
-         return this.getMissionPersonnaliser.filter(mis => mis.historique_missions.length && mis.historique_missions[0].type_operation == 2).length
+         return this.afficherMissionParUAEnfonctiondesRole.filter(mis => mis.historique_missions.length && mis.historique_missions[0].type_operation == 2).length
 
     },
 

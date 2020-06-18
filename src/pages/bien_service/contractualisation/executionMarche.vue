@@ -457,6 +457,7 @@ afficherlisteMarcheExecutionParDroitAccess() {
                     return item
                 }
             })
+            return colect
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -471,6 +472,34 @@ afficherlisteMarcheExecutionParDroitAccess() {
             //     items.libelle.toLowerCase().includes(st)
             // );
     },
+
+
+    // afficherMontantParDroitAccess() {
+    //    // const st = this.search.toLowerCase();
+    //     if (!this.admin || !this.dcf){
+    //         let colect=[];
+    //         this.montantMarcheExecuter.filter(item=>{
+    //             let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+    //             if (val!=undefined){
+    //                 colect.push(item)
+    //                 return item
+    //             }
+    //         })
+    //         return colect
+    //         // return colect.filter(items => {
+    //         //     return (
+    //         //         items.secti.nom_section.toLowerCase().includes(st) ||
+    //         //         items.libelle.toLowerCase().includes(st)
+    //         //     );
+    //         // });
+    //     }
+
+    //     return this.montantMarcheExecuter
+    //         // return (
+    //         //     items.secti.nom_section.toLowerCase().includes(st) ||
+    //         //     items.libelle.toLowerCase().includes(st)
+    //         // );
+    // },
 
 
  afficherAttributMarche() {

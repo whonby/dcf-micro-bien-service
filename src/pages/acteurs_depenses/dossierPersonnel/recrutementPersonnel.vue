@@ -1782,13 +1782,14 @@ dcf:dcf,
        // const st = this.search.toLowerCase();
         if (!this.admin || !this.dcf){
             let colect=[];
-            this.afficherLaListeDesContratsDuPersonnel.filter(item=>{
+            this.printMarcheNonAttribue.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
+            return colect.filter(element => element.type_marche.code_type_marche == 2)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1797,7 +1798,7 @@ dcf:dcf,
             // });
         }
 
-        return this.afficherLaListeDesContratsDuPersonnel
+        return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 2)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -1815,6 +1816,7 @@ dcf:dcf,
                     return item
                 }
             })
+            return colect
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1843,6 +1845,7 @@ dcf:dcf,
                     return item
                 }
             })
+            return colect
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1898,7 +1901,7 @@ return this.printMarcheNonAttribue.filter(element => element.type_marche.code_ty
 
 // afficher le nombre de contrat et contrat planifié dans le personnel
 nombreDeContrat(){
-  return this.afficherLaListeDesContratsDuPersonnel.length;
+  return this.afficherContratParDroitAccess.length;
 },
 
 // afficher le montant 
@@ -1910,7 +1913,7 @@ return this.afficherLaListeDesContratsDuPersonnel.filter(element => element.attr
 
 // afficher le nombre de contrat en planification
 nombreContratEnPlanification(){
-  return this.afficherContratPlanifier.length;
+  return this.afficherContratPlanificationParDroitAccess.length;
 },
 
 
@@ -1921,7 +1924,7 @@ listeContratEnContratualisation(){
 
 // afficher le nombre de contre en contratualisation
 nombreContratEnContratualisation(){
-  return this.listeContratEnContratualisation.length;
+  return this.afficherContratContratualisationParDroitAccess.length;
 },
 
   

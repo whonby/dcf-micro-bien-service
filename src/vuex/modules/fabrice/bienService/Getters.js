@@ -908,7 +908,7 @@ export const montantComtratualisation = (state, getters) =>
 
 export const getActeEffetFinancierPersonnaliser45 = (state, getters, rootState, rootGetters) =>
     state.acteEffetFinanciers.map(element => {
-        if (element.entreprise_id !== null && element.marche_id !== null) {
+        if (element.entreprise_id !== null && element.marche_id !== null && element.ua_id!==null) {
             element = {
                 ...element,
 
@@ -919,7 +919,9 @@ export const getActeEffetFinancierPersonnaliser45 = (state, getters, rootState, 
                     plans => plans.id == element.marche_id
                 ),
 
-               
+                afficheObjetUa: rootGetters['uniteadministrative/uniteAdministratives'].find(
+                    plans => plans.id == element.ua_id
+                ),               
 
 
             }
@@ -1072,3 +1074,4 @@ export const getMandatPersonnaliserPersonnel = (state, getters, rootState, rootG
         }
         return element;
     })
+    
