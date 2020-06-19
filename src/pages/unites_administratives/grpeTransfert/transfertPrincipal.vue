@@ -129,15 +129,12 @@
                   </div>
                 </div>
              </td>
-
-
-             
-               
-             <td colspan="">
+             <td >
                 <div class="control-group">
                   <label class="control-label">Ligne budgetaire</label>
                   <div class="controls">
-                        <select v-model="formData.ligne_budgetaire_id" :readOnly="verrouLigneBudgetaire" class="span">
+                        <select v-model="formData.ligne_budgetaire_id" :readOnly="verrouLigneBudgetaire"
+                         class="span3">
                       <option
                         v-for="localgeo in ligneBudgetaireDynamiques(formData.ua_id)"
                         :key="localgeo.id"
@@ -190,7 +187,7 @@
                        <input
                       type="number"
                    :value="dotationDisponible"
-                      class="span3"
+                      class="span5"
                      readonly
                       
                     />
@@ -241,7 +238,7 @@
                        <input
                       type="text"
                   :value="GnDynamiques(afficheGrandeNature(formData.ligne_budgetaire_id))"
-                      class="span3"
+                      class="span5"
                      readonly
                       
                     />
@@ -288,7 +285,7 @@
          <td>
               
                <div class="control-group">
-                  <label class="control-label">Date du depot</label>
+                  <label class="control-label">Date du transfert</label>
                   <div class="controls">
                        <input
                       type="date"
@@ -690,7 +687,7 @@
                 
                 <td>
               <div class="control-group">
-                  <label class="control-label">Date de reception</label>
+                  <label class="control-label">Date</label>
                   <div class="controls">
                        <input
                       type="date"
