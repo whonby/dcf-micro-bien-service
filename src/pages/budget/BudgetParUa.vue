@@ -201,16 +201,16 @@
                 <td style="font-weight:bold;font-size:12px;text-align:center">{{unite.libelle}}</td>
                 <td
                   style="font-weight:bold;font-size:12px;text-align:center"
-                >{{formatageSomme(budgetPersonnel(unite.id))}}</td>
+                >{{formatageSomme(parseFloat(budgetPersonnel(unite.id)))}}</td>
                 <td
                   style="font-weight:bold;font-size:12px;text-align:center"
-                >{{formatageSomme(budgetBienService(unite.id))}}</td>
+                >{{formatageSomme(parseFloat(budgetBienService(unite.id)))}}</td>
                 <td
                   style="font-weight:bold;font-size:12px;text-align:center"
-                >{{formatageSomme(budgetInverstisement(unite.id))}}</td>
+                >{{formatageSomme(parseFloat(budgetInverstisement(unite.id)))}}</td>
                 <td
                   style="font-weight:bold;font-size:12px;text-align:center"
-                >{{formatageSomme(budgetTranfert(unite.id))}}</td>
+                >{{formatageSomme(parseFloat(budgetTranfert(unite.id)))}}</td>
 
                 <td
                   style="font-weight:bold;font-size:12px;text-align:center"
@@ -390,30 +390,43 @@
 
 
 
+ budgetBienService() {
+      return id => {
+        if (id != "") {
+          return this.budgetGeneral
+            .filter(element => element.ua_id == id  && element.gdenature_id==5 && element.actived ==1) 
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+    },
 
 
+            // budgetBienService(){
+            //   return unite_id=>{
+            //       let vM=this;
+            //       if(unite_id!='' && vM.budgetGeneralCharge!=""){
 
-            budgetBienService(){
-              return unite_id=>{
-                  let vM=this;
-                  if(unite_id!='' && vM.budgetGeneralCharge!=""){
 
+            //           let budget=vM.budgetGeneralCharge.filter(item=>{
+            //               if(item.gdenature_id==5 && item.ua_id==unite_id ){
+            //                   return item
+            //               }
+            //           })
 
-                      let budget=vM.budgetGeneralCharge.find(item=>{
-                          if(item.gdenature_id==5 && item.ua_id==unite_id ){
-                              return item
-                          }
-                      })
+            //           if(budget!=undefined){
 
-                      if(budget!=undefined){
-
-                          return parseFloat(budget.Dotation_Initiale);
-                      }
-                      return 0
-                  }
-                  return 0
-              }
-            },
+            //               return parseFloat(budget.Dotation_Initiale);
+            //           }
+            //           return 0
+            //       }
+            //       return 0
+            //   }
+            // },
 
 
 
@@ -449,67 +462,117 @@
 
               },
 
-            budgetPersonnel(){
-                return unite_id=>{
-                    let vM=this;
-                    if(unite_id!='' && vM.budgetGeneralCharge!=""){
 
-                        let budget=vM.budgetGeneralCharge.find(item=>{
-                            if(item.gdenature_id==2  && item.ua_id==unite_id ){
-                                return item
-                            }
-                        })
 
-                        if(budget!=undefined){
+              budgetPersonnel() {
+      return id => {
+        if (id != "") {
+          return this.budgetGeneral
+            .filter(element => element.ua_id == id  && element.gdenature_id==2 && element.actived ==1) 
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+    },
 
-                            return parseFloat(budget.Dotation_Initiale);
-                        }
-                        return 0
-                    }
-                    return 0
-                }
-            },
-            budgetInverstisement(){
-                return unite_id=>{
-                    let vM=this;
-                    if(unite_id!='' && vM.budgetGeneralCharge!=""){
-                        console.log("------65")
-                        console.log(vM.budgetGeneralCharge)
-                        let budget=vM.budgetGeneralCharge.find(item=>{
-                            if(item.gdenature_id==7  && item.ua_id==unite_id ){
-                                return item
-                            }
-                        })
-                        console.log(budget)
-                        if(budget!=undefined){
 
-                            return parseFloat(budget.Dotation_Initiale);
-                        }
-                        return 0
-                    }
-                    return 0
-                }
-            },
-            budgetTranfert(){
-                return unite_id=>{
-                    let vM=this;
-                    if(unite_id!='' && vM.budgetGeneralCharge!=""){
+            // budgetPersonnel(){
+            //     return unite_id=>{
+            //         let vM=this;
+            //         if(unite_id!='' && vM.budgetGeneralCharge!=""){
 
-                        let budget=vM.budgetGeneral.find(item=>{
-                            if(item.gdenature_id==6  && item.ua_id==unite_id){
-                                return item
-                            }
-                        })
+            //             let budget=vM.budgetGeneralCharge.find(item=>{
+            //                 if(item.gdenature_id==2  && item.ua_id==unite_id ){
+            //                     return item
+            //                 }
+            //             })
 
-                        if(budget!=undefined){
+            //             if(budget!=undefined){
 
-                            return parseFloat(budget.Dotation_Initiale);
-                        }
-                        return 0
-                    }
-                    return 0
-                }
-            },
+            //                 return parseFloat(budget.Dotation_Initiale);
+            //             }
+            //             return 0
+            //         }
+            //         return 0
+            //     }
+            // },
+
+
+    budgetInverstisement() {
+      return id => {
+        if (id != "") {
+          return this.budgetGeneral
+            .filter(element => element.ua_id == id  && element.gdenature_id==7 && element.actived ==1) 
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+    },
+            
+            // budgetInverstisement(){
+            //     return unite_id=>{
+            //         let vM=this;
+            //         if(unite_id!='' && vM.budgetGeneralCharge!=""){
+            //             console.log("------65")
+            //             console.log(vM.budgetGeneralCharge)
+            //             let budget=vM.budgetGeneralCharge.find(item=>{
+            //                 if(item.gdenature_id==7  && item.ua_id==unite_id ){
+            //                     return item
+            //                 }
+            //             })
+            //             console.log(budget)
+            //             if(budget!=undefined){
+
+            //                 return parseFloat(budget.Dotation_Initiale);
+            //             }
+            //             return 0
+            //         }
+            //         return 0
+            //     }
+            // },
+
+            budgetTranfert() {
+      return id => {
+        if (id != "") {
+          return this.budgetGeneral
+            .filter(element => element.ua_id == id  && element.gdenature_id==6 && element.actived ==1) 
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+    },
+            // budgetTranfert(){
+            //     return unite_id=>{
+            //         let vM=this;
+            //         if(unite_id!='' && vM.budgetGeneralCharge!=""){
+
+            //             let budget=vM.budgetGeneral.find(item=>{
+            //                 if(item.gdenature_id==6  && item.ua_id==unite_id){
+            //                     return item
+            //                 }
+            //             })
+
+            //             if(budget!=undefined){
+
+            //                 return parseFloat(budget.Dotation_Initiale);
+            //             }
+            //             return 0
+            //         }
+            //         return 0
+            //     }
+            // },
 
  
             
