@@ -170,9 +170,9 @@
    <td style="width:12%"> CONTREPARTIE </td>
     <td style="width:12%">ETAT</td>
   
-    <td  style="text-align:center;width:12%"></td>
-    <td style="text-align:center;width:12%"></td>
-    <td  style="text-align:center;width:12%"></td>
+    <td  style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorIvestissement))}}</td>
+    <td style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorConsommerInvestissement))}}</td>
+    <td  style="text-align:center;width:12%">{{formatageSomme(parseFloat(AfficheMontantTresorIvestissement)-parseFloat(AfficheMontantTresorConsommerInvestissement))}}</td>
      <!-- <td style="width:12%">1004</td>
      <th style="width:12%">1005</th> -->
 </tr>
@@ -181,9 +181,9 @@
    <td height="20px">DON  </td>
      
     <td height="20px"></td>
-    <td height="20px" style="text-align:center"></td>
-  <td style="text-align:center;height:20%"></td>
-   <td  style="text-align:center;height:20%"></td>
+    <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(AfficheMontantDonIvestissement))}}</td>
+  <td style="text-align:center;height:20%">{{formatageSomme(parseFloat(AfficheMontantDonConsommerInvestissement))}}</td>
+   <td  style="text-align:center;height:20%">{{formatageSomme(parseFloat(AfficheMontantDonIvestissement)-parseFloat(AfficheMontantDonConsommerInvestissement))}}</td>
      <!-- <td height="20px"></td>
      <th height="20px"></th> -->
 </tr>
@@ -192,9 +192,9 @@
    <td height="20px">EMPRUNT  </td>
    
     <td height="20px"></td>
-     <td height="20px" style="text-align:center"></td>
-   <td height="20px" style="text-align:center;"></td>
-    <td height="20px" style="text-align:center;"></td>
+     <td height="20px" style="text-align:center">{{formatageSomme(parseFloat(AfficheMontantEmpruntIvestissement))}}</td>
+   <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantEmpruntConsommerInvestissement))}}</td>
+    <td height="20px" style="text-align:center;">{{formatageSomme(parseFloat(AfficheMontantEmpruntIvestissement)-parseFloat(AfficheMontantEmpruntConsommerInvestissement))}}</td>
     <!-- <td height="20px"></td>
      <th height="20px"></th> -->
 </tr>
@@ -205,21 +205,13 @@
    <th height="20px" colspan="2" style="color: #000000;font-size:14px" title="SOUS-TOTAL TRANSFERT">S/T INVESTISSEMENTS  </th>
    
     <td height="20px"></td>
-   <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px"></td>
-     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px"></td>
-     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px"></td>
+   <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(AfficheMontantTresorIvestissement)+parseFloat(AfficheMontantDonIvestissement)+parseFloat(AfficheMontantEmpruntIvestissement))}}</td>
+     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresorConsommerInvestissement)+parseFloat(AfficheMontantDonConsommerInvestissement)+parseFloat(AfficheMontantEmpruntConsommerInvestissement)))}}</td>
+     <td height="20px" style="text-align:center;background-color: orange;color: #FFFFFF;font-size:14px">{{formatageSomme(parseFloat(parseFloat(AfficheMontantTresorIvestissement)-parseFloat(AfficheMontantTresorConsommerInvestissement))+parseFloat(parseFloat(AfficheMontantDonIvestissement)-parseFloat(AfficheMontantDonConsommerTransfert))+parseFloat(parseFloat(AfficheMontantEmpruntBienEtService)-parseFloat(AfficheMontantEmpruntConsommerBienEtService)))}}</td>
     
      <!-- <td height="20px">23</td>
      <th height="20px"></th> -->
 </tr> 
-
-
-
-
-
-
-
-
 
 
 

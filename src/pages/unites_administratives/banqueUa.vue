@@ -431,7 +431,7 @@
                             </div>
                         </div>
                           </td>
-<td>
+                     <td>
 
                         <div class="control-group">
                             <div class="controls">
@@ -465,29 +465,6 @@
             <div class="modal-footer">  <a @click.prevent="modifierBanqueUaLocal(editBanqueUa)"   class="btn btn-primary"
               href="#">Modifier</a> <a data-dismiss="modal" class="btn" href="#">Cancel</a> </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
