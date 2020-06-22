@@ -14,6 +14,7 @@ export const groupBy = (objectArray, ...properties) => {
   ];
 };
 
+
 export const partition=(items, size)=> {
     var result = items.reduce((resultArray, item, index) => {
         const chunkIndex = Math.floor(index/size)

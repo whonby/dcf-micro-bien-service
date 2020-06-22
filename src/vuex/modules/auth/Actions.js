@@ -8,7 +8,6 @@ import { asyncLoading } from 'vuejs-loading-plugin'
 
 
 
-
 export function login({commit}, user){
     if(user.email && user.password){
        // this.loader = true;

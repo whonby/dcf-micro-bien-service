@@ -19,16 +19,14 @@ afficherLaFonctionDActeurDepenseDynamique
             <div id="tab1" class="tab-pane active">
 
                   <table class="table table-bordered table-striped">
-               
-                     
-                        
+                    
                           <tr>
-
 
                             <td width="120">
                        <div class="control-group">
                                 <label class="control-label">Année Budgetaire</label>
                                 <div class="controls ">
+                                  
                              <!-- <select v-model="formData.exercice_budgetaire_id" class="span">
                            <option v-for="exoBudget in exoEnCours" :key="exoBudget.id"
                            :value="exoBudget.id" >{{exoBudget.annee}}</option>

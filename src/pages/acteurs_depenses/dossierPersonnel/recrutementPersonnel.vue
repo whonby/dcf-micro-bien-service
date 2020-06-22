@@ -1817,7 +1817,7 @@ dcf:dcf,
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 0)
+            return colect.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 2)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1826,7 +1826,7 @@ dcf:dcf,
             // });
         }
 
-        return this.printMarcheNonAttribue.filter(element => element.attribue == 0)
+        return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 2)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -1896,7 +1896,7 @@ getDateFinExécutionValue(){
 // afficher la liste des contrats du personnel
 
 afficherLaListeDesContratsDuPersonnel(){
-return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 2)
+return this.afficherContratParDroitAccess.filter(element => element.type_marche.code_type_marche == 2)
 },
 
 
