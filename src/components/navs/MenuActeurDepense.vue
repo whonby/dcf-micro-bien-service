@@ -54,7 +54,7 @@
         CYCLE DE VIE
       </router-link>
     </li> -->
-             <li>
+             <!-- <li>
            <router-link :to="{name: 'RegistreDepense'}" tag="a">  
             REGISTRE DES DEPENSES
            </router-link>
@@ -77,7 +77,7 @@
             <router-link :to="{name: 'RapportDepense'}" tag="a">
               SITUATION PERIODIQUE
             </router-link>
-          </li>
+          </li> -->
 
 
       
