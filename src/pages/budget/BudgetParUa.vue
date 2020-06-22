@@ -2,49 +2,49 @@
   <div>
     <div class="quick-actions_homepage">
       <ul class="quick-actions">
-        <li class="bg_ls">
+        <li class="bg_lo">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-info">{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel))}}</span> B.PERSONNEL
+            <span class="label label-inverse">{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel))}}</span> B.PERSONNEL
           </a>
         </li>
         <li class="bg_lo">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-info">{{formatageSomme(parseFloat(afficherTotalBudgetModuleBienService))}}</span>B.BIENS ET SERVICES
+            <span class="label label-inverse">{{formatageSomme(parseFloat(afficherTotalBudgetModuleBienService))}}</span>B.BIENS ET SERVICES
           </a>
         </li>
          <li class="bg_lo">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-info">{{formatageSomme(parseFloat(afficherTotalBudgetModuleTransfert))}}</span>B.TRANSFERTS
+            <span class="label label-inverse">{{formatageSomme(parseFloat(afficherTotalBudgetModuleTransfert))}}</span>B.TRANSFERTS
           </a>
         </li>
          <li class="bg_lo">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-info">{{formatageSomme(parseFloat(afficherTotalBudgetModuleInvestissement))}}</span>B.INVESTISSEMEENT
+            <span class="label label-inverse">{{formatageSomme(parseFloat(afficherTotalBudgetModuleInvestissement))}}</span>B.INVESTISSEMEENT
           </a>
         </li>
          <li class="bg_ls">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-important">{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) }}</span> B.TOTAL
+            <span class="label label-info">{{formatageSomme(parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) }}</span> B.TOTAL
           </a>
         </li>
-        <li class="bg_lo">
+        <li class="bg_lg">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-inverse">{{formatageSomme((parseFloat(budgetConsommerPersonnelGlobal) +parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)))}}</span>B.CONSOMME
+            <span class="label label-success">{{formatageSomme((parseFloat(budgetConsommerPersonnelGlobal) +parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)))}}</span>B.CONSOMME
           </a>
         </li>
-         <li class="bg_lo">
+         <li class="bg_lr">
           <a href="#">
             <i class="icon-list-ol"></i>
-            <span class="label label-success">{{formatageSomme((parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) - (parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)+parseFloat(budgetConsommerPersonnelGlobal)) )}}</span>B.DISPONIBLE
+            <span class="label label-important">{{formatageSomme((parseFloat(afficherTotalBudgetModulePersonnel) + (parseFloat(afficherTotalBudgetModuleBienService)) + (parseFloat(afficherTotalBudgetModuleInvestissement)) + (parseFloat(afficherTotalBudgetModuleTransfert))) - (parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)+parseFloat(budgetConsommerPersonnelGlobal)) )}}</span>B.DISPONIBLE
           </a>
         </li>
-         <li class="bg_lo">
+         <li class="bg_lb">
           <a href="#">
             <i class="icon-list-ol"></i>
             <span class="label label-default">{{(((parseFloat(budgetConsommerPersonnelGlobal)+parseFloat(budgetConsommerBienServiceGlobal) + parseFloat(budgetConsommerInvestissementGlobal) + parseFloat(budgetConsommerTransfertGlobal)) / (parseFloat(afficherTotalBudgetModulePersonnel) + parseFloat(afficherTotalBudgetModuleBienService) + parseFloat(afficherTotalBudgetModuleInvestissement) + parseFloat(afficherTotalBudgetModuleTransfert))) * 100 ).toFixed(2) || 0}}%</span>TAUX EXECUTION
@@ -188,11 +188,11 @@
                 <th style="font-size:15px;" title="Budget en inverstisement">B.Inverstisement</th>
                 <th style="font-size:15px;" title="Budget en transfert">B.transfert</th>
 
-                <th style="font-size:15px;background: forestgreen; color:#fff">Total</th>
-                <th style="font-size:15px;background: deepskyblue; color:#fff">Consommé</th>
-                <th style="font-size:15px;background: #8b0000;color:#fff">Disponible</th>
-                <th style="font-size:15px;background: orangered;color:#fff">Taux Exécution (%)</th>
-                  <th style="font-size:15px;background: orangered;color:#fff">Action</th>
+                <th style="font-size:15px;background: blue; color:#fff">Total</th>
+                <th style="font-size:15px;background: forestgreen; color:#fff">Consommé</th>
+                <th style="font-size:15px;background: red;color:#fff">Disponible</th>
+                <th style="font-size:15px;background:deepskyblue;color:#fff">Taux Exécution (%)</th>
+                  <th style="font-size:15px;background: default;color:#fff">Action</th>
               </tr>
             </thead>
             <tbody>

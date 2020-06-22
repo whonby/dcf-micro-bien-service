@@ -6,7 +6,7 @@
 
        <li>
          <router-link :to="{name:'recrutementPersonnel'}" tag="a">
-           SUIVI DE RECRUTEMENT PERSONNEL
+           SUIVI DE RECRUTEMENT
          </router-link>
 
        </li>

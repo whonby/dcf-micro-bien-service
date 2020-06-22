@@ -1778,12 +1778,13 @@ admin:admin,
 dcf:dcf,
 ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
+
  afficherContratParDroitAccess() {
        // const st = this.search.toLowerCase();
         if (!this.admin || !this.dcf){
             let colect=[];
             this.printMarcheNonAttribue.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -1809,14 +1810,14 @@ dcf:dcf,
        // const st = this.search.toLowerCase();
         if (!this.admin || !this.dcf){
             let colect=[];
-            this.afficherContratPlanifier.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+            this.printMarcheNonAttribue.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect
+            return colect.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 2)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1825,7 +1826,7 @@ dcf:dcf,
             // });
         }
 
-        return this.afficherContratPlanifier
+        return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 2)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -1838,14 +1839,14 @@ dcf:dcf,
        // const st = this.search.toLowerCase();
         if (!this.admin || !this.dcf){
             let colect=[];
-            this.listeContratEnContratualisation.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+            this.printMarcheNonAttribue.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect
+            return colect.filter(element => element.attribue == 1)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1854,7 +1855,7 @@ dcf:dcf,
             // });
         }
 
-        return this.listeContratEnContratualisation
+        return this.printMarcheNonAttribue.filter(element => element.attribue == 1)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -1895,7 +1896,7 @@ getDateFinExécutionValue(){
 // afficher la liste des contrats du personnel
 
 afficherLaListeDesContratsDuPersonnel(){
-return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 2)
+return this.afficherContratParDroitAccess.filter(element => element.type_marche.code_type_marche == 2)
 },
 
 

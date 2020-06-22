@@ -194,17 +194,17 @@
                <div class="control-group">
             <label class="control-label">procedure passation</label>
             <div class="controls">
-            <input
+            <!-- <input
                 type="text"
                 :value="afficheLeNomDesProcedure"
                 class="span4"
                 
                 readonly
-              />
-               <!-- <select v-model="formData.procedure_passation_id" class="span" :readOnly="deverouPassation">
-               <option v-for="plans in procedurePassationDynamiques(editMarche.typeappel_id)" :key="plans.id" 
+              /> -->
+               <select v-model="formData.procedure_passation_id" class="span4" >
+               <option v-for="plans in procedurePassations" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
-           </select> -->
+           </select>
             </div>
           </div>
               </td>
@@ -639,7 +639,7 @@
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{ELibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
-                   {{ afficherCodeProcedure(marche.procedure_passation_id) || 'Non renseigné'}}</td>
+                   {{ marche.procedure_passation_id || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.afficheActivite.libelle || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -787,7 +787,7 @@ export default {
         source_financement:"",
             objet:"",
             economique_id:"",
-            //procedure_passation_id:"",
+            procedure_passation_id:"",
             beneficiaire:"",
             livrable:"",
             reference_marche:"",
@@ -1387,7 +1387,7 @@ anneeAmort() {
      return id => {
         if (id != null && id != "") {
           return this.getPersonnaliseBudgetGeneralParBienService.filter(
-            element => element.afficheUA.id == id
+            element => element.afficheUA.id == id 
           );
         }
       };
@@ -1441,7 +1441,7 @@ anneeAmort() {
      return id => {
         if (id != null && id != "") {
           return this.getPersonnaliseBudgetGeneralParBienService.filter(
-            element => element.ua_id == id
+            element => element.ua_id == id && element.actived==1
           );
         }
       };
