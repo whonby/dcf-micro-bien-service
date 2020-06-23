@@ -98,6 +98,23 @@
                   </div>
                 </div>
               </td>
+
+              <td>
+              
+               <div class="control-group">
+                  <label class="control-label">Classification Economique</label>
+                  <div class="controls">
+                    <select v-model="formData.economique_id" :readOnly="deveroueconomiq" class="span4">
+                    <option
+                        v-for="eco in economiqueDynamiques(formData.unite_administrative_id)"
+                        :key="eco.id"
+                        :value="eco.afficheEconomique.id"
+                      >{{eco.afficheEconomique.code}} - {{eco.afficheEconomique.libelle}}</option>
+                    </select>
+                  </div>
+                   
+                </div>
+              </td>
               
                <td>
               
@@ -117,22 +134,7 @@
                 </div>
               </td>
 
-              <td>
               
-               <div class="control-group">
-                  <label class="control-label">Classification Economique</label>
-                  <div class="controls">
-                    <select v-model="formData.economique_id" :readOnly="deveroueconomiq" class="span4">
-                    <option
-                        v-for="eco in economiqueDynamiques(formData.unite_administrative_id)"
-                        :key="eco.id"
-                        :value="eco.afficheEconomique.id"
-                      >{{eco.afficheEconomique.code}} - {{eco.afficheEconomique.libelle}}</option>
-                    </select>
-                  </div>
-                   
-                </div>
-              </td>
             </tr>
 
              <tr>
@@ -1431,17 +1433,17 @@ anneeAmort() {
     deverouGrandNature() {
       return this.formData.unite_administrative_id == "";
     }, 
-    deverouactivite() {
+     deveroueconomiq() {
       return this.formData.gdenature_id == "";
     },
-     deveroueconomiq() {
-      return this.formData.activite_id == "";
+     deverouactivite() {
+      return this.formData.economique_id == "";
     },
      economiqueDynamiques() {
      return id => {
         if (id != null && id != "") {
           return this.getPersonnaliseBudgetGeneralParBienService.filter(
-            element => element.ua_id == id && element.actived==1
+            element => element.ua_id == id 
           );
         }
       };
@@ -1469,7 +1471,7 @@ anneeAmort() {
      ImputationBudget() {
 
       
-      const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.afficheEconomique.id == this.formData.economique_id);
+      const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.afficheActivite.id == this.formData.activite_id);
 
       if (norme) {
         return norme.codebudget;
