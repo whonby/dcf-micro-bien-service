@@ -22,7 +22,7 @@
     import {mapActions, mapGetters} from "vuex";
 
 import { formatageSomme } from "../../../src/Repositories/Repository";
-    import {admin,dcf} from "../../../src/Repositories/Auth"
+    import {admin,dcf,cf} from "../../../src/Repositories/Auth"
 export default {
   name:'tableaudebord',
   data() {
@@ -53,14 +53,14 @@ created() {
       // "nbreArchivageNotes"
     ]),
       admin:admin,
-      dcf:dcf,
+      dcf:dcf,cf,
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
  
  nbreUniteAdministratives() {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.cf){
             let colect=[];
             this.uniteAdministratives.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
@@ -71,8 +71,10 @@ created() {
             })
           return colect.length;
         }
-
-       return this.demandeMateriel.length;
+else{
+return this.uniteAdministratives.length;
+}
+       
 
     },
  montantBudgetGeneralUa() {
@@ -90,9 +92,11 @@ created() {
             })
           return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0);
         }
+else{
+ return this.budgetGeneral.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0);
 
-       return this.budgetGeneral.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0);
-
+}
+      
     },
  
  

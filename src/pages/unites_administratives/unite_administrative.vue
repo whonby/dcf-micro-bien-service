@@ -634,13 +634,15 @@ created() {
                 );
             });
         }
-
-        return this.jointureUaChapitreSection.filter(items => {
+else{
+return this.jointureUaChapitreSection.filter(items => {
             return (
                 items.secti.nom_section.toLowerCase().includes(st) ||
                 items.libelle.toLowerCase().includes(st)
             );
         });
+}
+        
 
     },
    

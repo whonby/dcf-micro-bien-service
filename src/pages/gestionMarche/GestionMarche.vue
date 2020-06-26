@@ -32,7 +32,7 @@
                       </li>
                        
                      <li class="">
-                        <a data-toggle="tab" href="#marchehppm">Liste des Marchés Hors PPM   <span class="badge badge-warning"></span></a>
+                        <a data-toggle="tab" href="#marchehppm">Listes des Marchés Hors PPM   <span class="badge badge-warning">{{afficherNombreMarcheHorsPPM}}</span></a>
                       </li>
                             <!-- <li class="">
                         <a data-toggle="tab" href="#tab00214">Liste des Marchés de Bien&Service et Fourniture   <span class="badge badge-warning">{{nombreMarcheBienServiceEtFourniture}}</span></a>
@@ -207,6 +207,28 @@ created() {
      admin:admin,
      dcf:dcf,
 
+
+
+afficherNombreMarcheHorsPPM() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.printMarcheNonAttribue.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(items=>items.mvtmarche == 1).length;
+        
+        }
+else{
+return this.printMarcheNonAttribue.filter(items=>items.mvtmarche == 1).length;
+}
+        
+           
+    },
 // 0() {
 //        // const st = this.search.toLowerCase();
 //         if (!this.admin || !this.dcf){

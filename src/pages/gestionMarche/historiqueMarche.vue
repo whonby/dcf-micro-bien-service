@@ -60,7 +60,7 @@
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{ELibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
-                   {{ marche.procedure_passation_id || 'Non renseigné'}}</td>
+                   {{ afficherCodeProcedure(marche.procedure_passation_id) || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.afficheActivite.libelle || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -80,10 +80,7 @@
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
-                      <span v-if="marche.mvtmarche == 'hppm'">Marche hors PPM</span>
-                      <span v-else>Marche PPM</span>
-                    </td>
+                   
                   
            <td>
                      <button 
@@ -115,7 +112,10 @@
                 </button>
 
                    </td>
-                   
+                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                      <span v-if="marche.mvtmarche == 1">Hors PPM</span>
+                      <span v-else>PPM</span>
+                    </td>
                 <td v-if="marche.type_marche_id == 6 ||marche.type_marche_id == 1 || marche.type_marche_id == 5"> 
                      <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
                 class="btn btn-default " title="historique la contratualisation">
@@ -373,7 +373,7 @@ afficherlisteMarcheParDroitAccess() {
         if (!this.admin || !this.dcf){
             let colect=[];
             this.printMarcheNonAttribue.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -387,14 +387,28 @@ afficherlisteMarcheParDroitAccess() {
             //     );
             // });
         }
-
-        return this.printMarcheNonAttribue
+else{
+return this.printMarcheNonAttribue
+}
+        
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
             // );
     },
 
+// afficherModePassation() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.procedurePassations.find(qtreel => qtreel.id == id);
+
+//       if (qtereel) {
+//         return qtereel.code;
+//       }
+//       return 0
+//         }
+//       };
+//     },
      afficherParUAEnfonctiondesRole() {
        // const st = this.search.toLowerCase();
         if (!this.admin || !this.dcf){

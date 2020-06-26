@@ -1269,6 +1269,7 @@ afficherlisteTransfertParDroitAccess() {
                     return item
                 }
             })
+            return colect
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1276,8 +1277,10 @@ afficherlisteTransfertParDroitAccess() {
             //     );
             // });
         }
-
-        return this.getPersonnaliseTransfert
+else{
+return this.getPersonnaliseTransfert
+}
+        
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)

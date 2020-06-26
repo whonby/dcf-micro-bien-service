@@ -1,4 +1,4 @@
-
+reference_marche
 <template>
   <div>
 <div id="modificationModal" class="modal hide taillMarche">
@@ -111,9 +111,9 @@
                 class="span4"
                 readonly
               /> -->
-                    <select v-model="formData.economique_id" :readOnly="deveroueconomiq" class="span4">
+                    <select v-model="editMarche.economique_id" :readOnly="deveroueconomiq" class="span4">
                     <option
-                        v-for="eco in afficherPlanEconomiqueBienService(formData.unite_administrative_id)"
+                        v-for="eco in afficherPlanEconomiqueBienService(editMarche.unite_administrative_id)"
                         :key="eco.economique_id"
                         :value="eco.economique_id"
                       >{{afficherPlanEconomique(eco.economique_id)}}</option>
@@ -171,17 +171,17 @@
                <div class="control-group">
             <label class="control-label">Type de financement</label>
             <div class="controls">
-              <input
+              <!-- <input
                 type="text"
                 v-model="editMarche.type_financement"
                 class="span4"
                
                 readonly
-              />
-            <!-- <select v-model="editMarche.typeappel_id" class="span4">
+              /> -->
+            <select v-model="editMarche.type_financement" class="span4">
                <option v-for="plans in types_financements" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
-           </select> -->
+           </select>
             </div>
           </div>
               </td>
@@ -190,17 +190,17 @@
                <div class="control-group">
             <label class="control-label">Source de financement</label>
             <div class="controls">
-              <input
+              <!-- <input
                 type="text"
                 v-model="editMarche.source_financement"
                 class="span4"
                 
                 readonly
-              />
-            <!-- <select v-model="editMarche.typeappel_id" class="span4">
+              /> -->
+            <select v-model="editMarche.source_financement" class="span4">
                <option v-for="plans in sources_financements" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
-           </select> -->
+           </select>
             </div>
           </div>
               </td>
@@ -209,17 +209,17 @@
                <div class="control-group">
             <label class="control-label">procedure passation</label>
             <div class="controls">
-            <input
+            <!-- <input
                 type="text"
                 :value="afficheLeNomDesProcedureModifier"
                 class="span4"
                 
                 readonly
-              />
-               <!-- <select v-model="editMarche.procedure_passation_id" class="span" :readOnly="deverouPassationModi">
-               <option v-for="plans in procedurePassationDynamiques(editMarche.typeappel_id)" :key="plans.id" 
+              /> -->
+               <select v-model="editMarche.procedure_passation_id" class="span" :readOnly="deverouPassationModi">
+               <option v-for="plans in procedurePassations" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
-           </select> -->
+           </select>
             </div>
           </div>
               </td>
@@ -264,7 +264,7 @@
             <div class="controls">
            <input
              type="text"
-             v-model="editMarche.Nature_des_prix"
+             v-model="editMarche.nature_prix"
              class="span4"
            />
          </div>
@@ -493,13 +493,7 @@
                <div class="control-group">
             <label class="control-label">procedure passation</label>
             <div class="controls">
-            <!-- <input
-                type="text"
-                :value="afficheLeNomDesProcedure"
-                class="span4"
-                
-                readonly
-              /> -->
+            
                <select v-model="formData.procedure_passation_id" class="span4" >
                <option v-for="plans in procedurePassations" :key="plans.id" 
                :value="plans.id">{{plans.libelle}}</option>
@@ -541,7 +535,7 @@
         <div class="controls">
        <input
          type="text"
-         v-model="formData.Nature_des_prix"
+         v-model="formData.nature_prix"
          class="span4"
        />
      </div>
@@ -611,41 +605,38 @@
                   </tr>
                 </thead>
                 <tbody>
-                   <tr class="odd gradeX" v-for="marche in 
+                   <tr class="odd gradeX" v-for="(marche,index) in 
                 afficherlisteMarcheParDroitAccess"
                  :key="marche.id">
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                  <td @dblclick="ModalModifierMarcheHorsPPM(index)">
                    {{marche.exo_id || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                 <td @dblclick="ModalModifierMarcheHorsPPM(index)">
                    {{marche.objetUniteAdministrative.libelle || 'Non renseigné'}}</td>
-                 <td @dblclick="afficherModalModifierTypePrestation(index)">
+                 <td @dblclick="ModalModifierMarcheHorsPPM(index)">
                    {{ELibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
                  
-                   <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
-                   {{ marche.procedure_passation_id || 'Non renseigné'}}</td>
-                  <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   <td @dblclick="ModalModifierMarcheHorsPPM(index)" style="text-align: center">
+                   {{ afficherModePassation(marche.procedure_passation_id) || 'Non renseigné'}}</td>
+                  <td @dblclick="ModalModifierMarcheHorsPPM(index)">
                    {{marche.afficheActivite.libelle || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <td @dblclick="ModalModifierMarcheHorsPPM(index)">
                    {{marche.imputation || 'Non renseigné'}}</td>
-                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <!-- <td @dblclick="ModalModifierMarcheHorsPPM(index)">
                   {{marche.afficheEconomique.code || 'Non renseigné'}}- {{marche.afficheEconomique.libelle || 'Non renseigné'}}</td> -->
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                     <td @dblclick="ModalModifierMarcheHorsPPM(index)">
                    {{marche.objet || 'Non renseigné'}}</td>
-                     <td @dblclick="afficherModalModifierTypePrestation(index)">
+                     <td @dblclick="ModalModifierMarcheHorsPPM(index)">
                    {{marche.reference_marche || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                    <td @dblclick="ModalModifierMarcheHorsPPM(index)">
 
                          <span v-if="marche.economique_id == CodeExempte(marche.economique_id) ">Exemptée procedure</span>
                          <span v-else>Ligne à marché</span>
                        </td>
-                   <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
+                   <!-- <td @dblclick="ModalModifierMarcheHorsPPM(index)">
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
                      <td style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
-                    <td>
-                      <span v-if="marche.mvtmarche == 'hppm'">Marche hors PPM</span>
-                      <span v-else>Marche PPM</span>
-                    </td>
+                  
                   
            <td>
                      <button 
@@ -677,7 +668,10 @@
                 </button>
 
                    </td>
-                   
+                     <td>
+                      <span v-if="marche.mvtmarche == 1">Hors PPM</span>
+                      <span v-else>PPM</span>
+                    </td>
                 <td v-if="marche.type_marche_id == 6 ||marche.type_marche_id == 1 || marche.type_marche_id == 5"> 
                      <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
                 class="btn btn-default " title="historique la contratualisation">
@@ -785,7 +779,7 @@ export default {
                 activite_id:"",
                // typeappel_id:"",
                 exo_id:"",
-                mvtmarche:"hppm"
+                mvtmarche:1
         
       },
         editActeEffetFinancier:{
@@ -837,7 +831,7 @@ export default {
                 
                // typeappel_id:"",
                
-                mvtmarche:"hppm"
+                mvtmarche:1
       },
       
 //       editActeEffetFinancier:{
@@ -869,10 +863,36 @@ export default {
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
 
-  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+  ...mapGetters("Utilisateurs", ["user","getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
      admin:admin,
      dcf:dcf,
+
+
+ImputationBudget() {
+
+      const norme = this.budgetGeneral.find(normeEquipe => normeEquipe.economique_id == this.formData.economique_id && normeEquipe.activite_id == this.formData.activite_id && normeEquipe.status == 'actu');
+     
+
+      if (norme) {
+        return norme.codebudget;
+      }
+      return 0
+    },
+     ImputationBudgetModifier() {
+      
+      const norme = this.budgetGeneral.find(normeEquipe => normeEquipe.economique_id == this.editMarche.economique_id && normeEquipe.activite_id == this.editMarche.activite_id && normeEquipe.status == 'actu');
+
+      if (norme) {
+        return norme.codebudget;
+      }
+      return 0
+    },
+
+
+
+
+
 
 ligneBudgeteyuy() {
      return id => {
@@ -927,6 +947,18 @@ ligneBudgeteyuy() {
         }
       };
     },
+      afficherModePassation() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.procedurePassations.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.code;
+      }
+      return 0
+        }
+      };
+    },
    afficheMarcheHorsPPM(){
      return this.printMarcheNonAttribue.filter(items=>items.mvtmarche == 1);
    },
@@ -934,18 +966,20 @@ afficherlisteMarcheParDroitAccess() {
        // const st = this.search.toLowerCase();
         if (!this.admin || !this.dcf){
             let colect=[];
-            this.afficheMarcheHorsPPM.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+            this.printMarcheNonAttribue.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return this.colect;
-           
+            return colect.filter(items=>items.mvtmarche == 1);
+        
         }
-
-        return this.afficheMarcheHorsPPM;
+else{
+return this.printMarcheNonAttribue.filter(items=>items.mvtmarche == 1);
+}
+        
            
     },
 
@@ -961,21 +995,14 @@ afficherlisteMarcheParDroitAccess() {
                 }
             })
              return colect;
-            // console.log(colect)
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            
         }
 
-        return 0;
-        //return this.uniteAdministratives
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
+        else{
+ return this.uniteAdministratives
+        }
+       
+          
         
 
     },
@@ -1116,18 +1143,7 @@ getDateFinExécutionValue(){
 
 
 
- afficherCodeProcedure() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.procedurePassations.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.code;
-      }
-      return 0
-        }
-      };
-    },
 
 
     // afficherEntrepriseRecep () {
@@ -1507,25 +1523,7 @@ return this.budgetGeneral.filter(items=>items.actived == 1)
 
 
 
-     ImputationBudget() {
-
-      
-      const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.afficheActivite.id == this.formData.activite_id);
-
-      if (norme) {
-        return norme.codebudget;
-      }
-      return 0
-    },
-     ImputationBudgetModifier() {
-      
-      const norme = this.getPersonnaliseBudgetGeneralParBienService.find(normeEquipe => normeEquipe.afficheEconomique.id == this.editMarche.economique_id);
-
-      if (norme) {
-        return norme.codebudget;
-      }
-      return 0
-    },
+     
     nombreJourTraitementCalucle(){
    let date = new Date();
         let aaaa = date.getFullYear();
@@ -1823,7 +1821,9 @@ recupererDateMiseService() {
       ...this.formData,
       imputation :this.ImputationBudget,
       libelle_procedure:this.afficheLeNomDesProcedure,
-      exo_id : this.anneeAmort
+      exo_id : this.anneeAmort,
+      mvtmarche:this.formData.mvtmarche
+
        };
 this.ajouterMarche(nouvelObjet)
 this.formData = {
@@ -1843,19 +1843,19 @@ this.formData = {
                 activite_id:"",
                // typeappel_id:"",
                 exo_id:"",
-                mvtmarche:"hppm"
+                mvtmarche:1
 }
 
     },
     formatageSomme:formatageSomme,
     // afficher modal de modification
-    afficherModalModifierTypePrestation(index) {
+    ModalModifierMarcheHorsPPM(index) {
       this.$("#modificationModal").modal({
         backdrop: "static",
         keyboard: false
       });
 
-      this.editMarche = this.marches[index];
+      this.editMarche = this.printMarcheNonAttribue[index];
     },
     // fonction pour vider l'input modification
     modifierModalTypeprestationLocal(){
@@ -1864,7 +1864,8 @@ this.formData = {
       imputation :this.ImputationBudgetModifier,
       exo_id : this.anneeAmort,
       activite_id:this.editMarche.activite_id,
-      economique_id:this.editMarche.economique_id
+      economique_id:this.editMarche.economique_id,
+      mvtmarche:this.editMarche.mvtmarche
        };
       this.modifierMarche(nouvelObjet)
       this.$('#modificationModal').modal('hide');
