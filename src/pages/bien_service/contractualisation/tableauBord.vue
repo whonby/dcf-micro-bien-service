@@ -200,7 +200,7 @@ return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && el
         if (!this.admin || !this.dcf){
             let colect=[];
             this.getActeEffetFinancierPersonnaliser45.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.afficheObjetUa.id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -227,7 +227,7 @@ return this.getActeEffetFinancierPersonnaliser45
         if (!this.admin || !this.dcf){
             let colect=[];
             this.getActeEffetFinancierPersonnaliser45.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.afficheObjetUa.id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -251,7 +251,7 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficher
         if (!this.admin || !this.dcf){
             let colect=[];
             this.getActeEffetFinancierPersonnaliser45.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.afficheObjetUa.id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
