@@ -60,13 +60,10 @@
                      <div class="control-group">
                                                     <label class="control-label">L'unite administrative:</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.unite_administrative_id" class="span24">
-                                                            <option></option>
-                                                            <option v-for="item in uniteAdministrativeDynamiques" :key="item.id" :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
+                                                       
 
-                                                        </select>
+                                                         <input type="text" readonly :value="afficheUA(DetailRecrutement.ua_id)"  placeholder="Saisir le matricule" class="span12"/>
+
                                                     </div>
                                                 </div>
                 </td>
@@ -217,7 +214,7 @@
                                                     <div class="controls">
                                                         <select v-model="formData.uniteZone_id" :disabled="verrouilleUniteZone" class="span12">
                                                             <option></option>
-                                                            <option v-for="item in afficheUniteZone(formData.unite_administrative_id)" :key="item.id" :value="item.id">
+                                                            <option v-for="item in afficheUniteZone(DetailRecrutement.ua_id)" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -232,7 +229,7 @@
                                                     <div class="controls">
                                                         <select v-model="formData.service_id" :disabled="verrouilleService" class="span12">
                                                             <option></option>
-                                                            <option v-for="item in afficheService(formData.unite_administrative_id)" :key="item.id" :value="item.id">
+                                                            <option v-for="item in afficheService(DetailRecrutement.ua_id)" :key="item.id" :value="item.id">
                                                                 {{afficheServicelibelle(item.serviceua_id)}}
                                                             </option>
 
@@ -524,6 +521,25 @@
                  "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables",
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers", "personnaliseGetterMarcheBailleur","getterMembreCojo","getterProceVerballe"]),
  
+
+afficheUA() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+
+
+
+
+
  uniteAdministrativeDynamiques() {
       
         if (!this.admin || !this.dcf ){
@@ -839,7 +855,8 @@ exoEnCours() {
                 historiquenormequipement:this.nombreDeFonction(this.formData.fonction_id),
                 montantequipement:this.montantPourEtreEquipe(this.formData.fonction_id),
                  reference_acte:this.DetailRecrutement.reference_act,
-                  salaires:this.afficheSalairePersonnel
+                  salaires:this.afficheSalairePersonnel,
+                  unite_administrative_id:this.DetailRecrutement.ua_id
                
               }
                let modact=this.acteEffetFinanciers.find(marche=>marche.id == this.afficheIdActeFin(this.DetailRecrutement.reference_act))

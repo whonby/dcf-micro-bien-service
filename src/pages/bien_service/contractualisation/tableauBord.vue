@@ -122,8 +122,10 @@ export default {
             //     );
             // });
         }
-
-        return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
+else{
+ return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
+}
+       
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -154,8 +156,10 @@ export default {
             //     );
             // }); 
         }
-
-        return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 4 || element.attribue == 0 && element.type_marche.code_type_marche == 1)
+else{
+return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 4 || element.attribue == 0 && element.type_marche.code_type_marche == 1)
+}
+        
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -172,27 +176,19 @@ export default {
 
         if (!this.admin || !this.dcf){
             let colect=[];
-            this.afficheMarcheEnCoursContratualisation.filter(item=>{
+            this.printMarcheNonAttribue.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            return colect.filter(element => element.type_marche.code_type_marche == 4 && element.attribue == 1 || element.type_marche.code_type_marche == 1 && element.attribue == 1 )
+         
         }
 
-        return this.afficheMarcheEnCoursContratualisation.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
+        return this.afficheMarcheEnCoursContratualisation.filter(element1 => element1.type_marche.code_type_marche == 4 && element1.attribue == 1|| element1.type_marche.code_type_marche == 1 && element1.attribue == 1)
+           
     },
 
 
@@ -211,19 +207,13 @@ export default {
                 }
             })
             return colect 
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+          
         }
-
-        return this.getActeEffetFinancierPersonnaliser45
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
+else{
+return this.getActeEffetFinancierPersonnaliser45
+}
+        
+           
         
 
     },
@@ -244,20 +234,13 @@ export default {
                 }
             })
             return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 4 ) 
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            
         }
-
-        return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 4 )
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
-        
+else{
+return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.afficheCodeTypeMarche(element.marche.type_marche_id) == 4 )
+          
+}
+                 
 
     },
 
@@ -274,20 +257,14 @@ export default {
                     return item
                 }
             })
-            return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 5)
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 5);
+           
         }
-
-        return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5)
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
+else{
+  return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5);
+          
+}
+       
         
 
     },
@@ -371,12 +348,33 @@ montantMarcheAvecAvenant() {
  montantMarcheExecuter(){
   return this.afficherExecutionPAU.filter(element => element.difference_personnel_bienService == 2 ).reduce((prec, cur) => parseFloat(prec)+ parseFloat(cur.montant_act), 0)
 },
-budgetConsommerBienService(){
-  
-    return this.getMandatPersonnaliserVise.filter(element => element.marchetype == 2 ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(2); 
-      
-  
-},
+
+
+
+budgetConsommerBienService() {
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.getMandatPersonnaliserVise.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.afficheUa.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+          return colect.filter(element => element.marchetype == 2 ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(2);
+        }
+else{
+ return this.getMandatPersonnaliserVise.filter(element => element.marchetype == 2 ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(2);
+
+}
+     
+    },
+
+
+
+
+
+
 
 
 afficheMarcheSuspendu(){

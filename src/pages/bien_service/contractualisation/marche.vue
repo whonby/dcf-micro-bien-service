@@ -747,6 +747,7 @@ source_financement
                      <th>Statut</th>
                     <th>Montant prévu</th>
                     <th>Montant réel</th>
+                    <th title="mouvement du marché">Mvt marché</th>
                     <th>Etat En cours</th>
                    <th colspan="4">Action</th>
                   </tr>
@@ -779,12 +780,17 @@ source_financement
                          <span v-if="marche.economique_id == CodeExempte(marche.economique_id) ">Exemptée procedure</span>
                          <span v-else>Ligne à marché</span>
                        </td>
+                        
                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
                   <td>
                    {{formatageSomme(parseFloat(recupererMontantReel(marche.id))) || 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifierTypePrestation(index)">
+                      <span v-if="marche.mvtmarche == 1">Hors PPM</span>
+                      <span v-else>PPM</span>
+                    </td>
            <td>
                      <button 
                       v-if="marche.attribue == 2"  class="btn  btn-warning">
@@ -889,6 +895,7 @@ source_financement
                       <td>
                           
                       </td>
+                      
                        <td style="font-weight:bold;"> Total Marché
                       </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
@@ -902,7 +909,21 @@ source_financement
                           
                       </td>
                       
-                      
+                      <td>
+                          
+                      </td>
+                      <td>
+                          
+                      </td>
+                       <td>
+                          
+                      </td>
+                       <td>
+                          
+                      </td>
+                       <td>
+                          
+                      </td>
                     </tr>
                 </tbody>
               </table>
@@ -1120,6 +1141,9 @@ source_financement
                           
                       </td>
                       <td>
+                          
+                      </td>
+                       <td>
                           
                       </td>
                        <td>
@@ -1796,8 +1820,10 @@ getDateFinExécutionValue(){
             //     );
             // });
         }
-
-        return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
+else{
+ return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
+}
+       
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
