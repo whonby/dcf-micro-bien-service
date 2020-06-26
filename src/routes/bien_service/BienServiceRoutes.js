@@ -166,6 +166,7 @@ detailExecution
     },
 
 
+    
     {
         path:"/detail-marche-psc/:id",
         name:"detailMarcheProcedureSimplifierComite",
