@@ -1,3 +1,4 @@
+Type de Recrutement
 <template>
     <div id="">
         <notifications />
@@ -362,6 +363,21 @@
 
                     <table class="table table-bordered table-striped">
                         <tr>
+                                                    <td>
+                    <div class="control-group">
+                        <label class="control-label">Unite administrative</label>
+                        <div class="controls">
+                             <select v-model="formEffetFinancier.ua_id" class="span4">
+                                                            <option></option>
+                                                            <option v-for="item in afficherUAParDroitAccess" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                        </div>
+                    </div>
+
+                            </td>
                           <td colspan="">
                         <div class="control-group">
                         <label class="control-label">Type acte effet financier.</label>
@@ -407,7 +423,13 @@
                     </div>
 
                             </td>
-                                                   <td>
+                           
+                        </tr>
+
+                       
+                
+                        <tr>
+                                                         <td>
                     <div class="control-group">
                         <label class="control-label"> date d'approbation</label>
                         <div class="controls">
@@ -421,12 +443,6 @@
                     </div>
 
                             </td>
-                        </tr>
-
-                       
-                
-                        <tr>
-                           
                             <td>
                      <div class="control-group">
                         <label class="control-label">Incidence financière</label>
@@ -441,13 +457,13 @@
                         </div>
                     </div>
                             </td>
-                            <td colspan="2">
+                            <td colspan="">
 
                      <div class="control-group">
                         <label class="control-label">Montant Contrat</label>
                         <div class="controls">
                             <input type="text" v-model="formEffetFinancier.montant_act"
-                                    class="span7"
+                                    class="span4"
                                     placeholder="Saisir le montant "
                             />
                         </div>
@@ -556,6 +572,21 @@
  <div class="modal-body">
          <table class="table table-bordered table-striped">
              <tr>
+                    <td>
+                    <div class="control-group">
+                        <label class="control-label">Unite administrative</label>
+                        <div class="controls">
+                           <select v-model="editEffetFinancier.ua_id" class="span4">
+                                                            <option></option>
+                                                            <option v-for="item in afficherUAParDroitAccess" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                        </div>
+                    </div>
+
+                            </td>
                <td colspan="">
              <div class="control-group">
              <label class="control-label">Type acte effet financier.</label>
@@ -597,7 +628,12 @@
              </div>
          </div>
                  </td>
-                                        <td>
+                                
+             </tr>
+            
+     
+             <tr>
+                        <td>
          <div class="control-group">
              <label class="control-label"> date d'approbation</label>
              <div class="controls">
@@ -610,11 +646,6 @@
              </div>
          </div>
                  </td>
-             </tr>
-            
-     
-             <tr>
-                
                  <td>
           <div class="control-group">
              <label class="control-label">Incidence financière</label>
@@ -629,12 +660,12 @@
              </div>
          </div>
                  </td>
-                 <td colspan="2">
+                 <td colspan="">
           <div class="control-group">
              <label class="control-label">Montant Contrat</label>
              <div class="controls">
                  <input type="text" v-model="editEffetFinancier.montant_act"
-                         class="span7"
+                         class="span4"
                          placeholder="Saisir le montant "
                  />
              </div>
@@ -756,7 +787,7 @@
 recrutement:""
                 },
                   formEffetFinancier:{
-              
+              ua_id:"",
              date_reception:"",
              reference_act:"",
             
@@ -774,13 +805,22 @@ recrutement:""
              type_act_effet_id:"",
              
             // entreprise_id:"",
-             
+             montant_act_tva:0,
+             montant_act_ht:0,
+             avance_demarrage_ttc:0,
+             avance_demarrage_ht:0,
+
              
              
              difference_personnel_bienService:"4"
         },
 
          editEffetFinancier:{
+             ua_id:"",
+             montant_act_tva:0,
+             montant_act_ht:0,
+             avance_demarrage_ttc:0,
+             avance_demarrage_ht:0,
                    date_reception:"",
         reference_act:"",
        
@@ -890,7 +930,25 @@ recrutement:""
 
 
 
+afficherUAParDroitAccess() {
+       // const st = this.search.toLowerCase();
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+             return colect;
+            
+        }
 
+        return this.uniteAdministratives;
+        
+
+    },
 
 
 
@@ -1012,16 +1070,14 @@ afficheActeNorminationPerso() {
         //                 return this.getActeEffetFinancierPersonnaliserContrat.filter(idmarche => idmarche.difference_personnel_bienService == 4)
                  
         //     },
-
+afficheActeFinancierRecrutementD(){
+    return this.acteEffetFinanciers.filter(items2=>items2.difference_personnel_bienService == 4);
+},
             listeActeEffectFinnancier() {
-      
-
-
-   
         if (!this.admin || !this.dcf ){
             let colect=[];
             this.acteEffetFinanciers.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -1032,9 +1088,6 @@ afficheActeNorminationPerso() {
           }
           return this.acteEffetFinanciers.filter(items=>items.difference_personnel_bienService == 4);
          
-
-
-
     },
             nbreContratRecrutementDirect() {
                
@@ -1448,7 +1501,10 @@ acteurNonActivite() {
     this.ajouterActeEffetFinancier(nouveauObjet)
    
     this.formEffetFinancier = {
-             
+             montant_act_tva:0,
+             montant_act_ht:0,
+             avance_demarrage_ttc:0,
+             avance_demarrage_ht:0,
              
              reference_act:"",
             

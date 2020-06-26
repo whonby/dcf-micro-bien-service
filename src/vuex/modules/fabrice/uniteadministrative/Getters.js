@@ -1,6 +1,6 @@
 import { groupBy } from "../../../../Repositories/Repository";
 
-montantBudgetGeneral
+
 // const typeTextes = state =>
 //   state.typeTextes.sort((a, b) => (a.code > b.code ? 1 : -1));
 export const organigrammeUa = state => state.organigrammeUa;
@@ -23,6 +23,10 @@ const uniteAdministratives = state =>
 //   state.fonctionsua.sort((a, b) => (a.id > b.id ? 1 : -1));
 
 
+// export const afficheBudgetActive = state =>
+//   state.budgetGeneral.filter(
+//     affichenaturedep => affichenaturedep.affichenaturedep.actived==1
+//   );
 //export const banqueUa = state => state.banqueUa;
 export const nombreUniteAdministratives = state =>
   state.uniteAdministratives.length;
@@ -224,6 +228,10 @@ export const getPersonnaliseBudgetGeneralParBienService = (
     return element;
   });
 
+
+
+getPersonnaliseBudgetGeneral
+  
 
 // afficher le 
 
@@ -727,7 +735,10 @@ export {
   // nbreUniteAdministratives,
   // nbreTypeTextes
 };
-
+export const groupePlanEconomique = (state, getters) => {
+  //delete getters.trieUaImmobilisation.
+  return groupBy(getters.afficheBudgetActive, "economique_id");
+};
 
 export const getterBudgeCharge = state => state.budgeCharge;
 export const getterligneExempter = state => state.ligneExempter;

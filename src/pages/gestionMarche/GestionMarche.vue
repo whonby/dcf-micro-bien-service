@@ -31,7 +31,9 @@
                         <a data-toggle="tab" href="#tab00008">Listes des marchés <span class="badge badge-info">{{nombreDeMarche}}</span></a>
                       </li>
                        
-
+                     <li class="">
+                        <a data-toggle="tab" href="#marchehppm">Liste des Marchés Hors PPM   <span class="badge badge-warning"></span></a>
+                      </li>
                             <!-- <li class="">
                         <a data-toggle="tab" href="#tab00214">Liste des Marchés de Bien&Service et Fourniture   <span class="badge badge-warning">{{nombreMarcheBienServiceEtFourniture}}</span></a>
                       </li>
@@ -71,22 +73,28 @@
                 <historiqueMarche></historiqueMarche>
               </table>
                    </div>
-                    <div id="tab00009" class="tab-pane">
+                    <!-- <div id="tab00009" class="tab-pane">
                      <table class="table table-bordered table-striped">
                  
                        <historiqueInvestissement></historiqueInvestissement>
               </table>
-                   </div>
-                    <div id="tab000010" class="tab-pane">
+                   </div> -->
+                    <!-- <div id="tab000010" class="tab-pane">
                      <table class="table table-bordered table-striped">
                     <historiquePersonnel></historiquePersonnel>
                 
               </table>
-                   </div>
+                   </div> -->
 
-                   <div id="tab00214" class="tab-pane">
+                   <!-- <div id="tab00214" class="tab-pane">
                      <table class="table table-bordered table-striped">
                     <historiqueParMarche></historiqueParMarche>
+                
+              </table>
+                   </div> -->
+                    <div id="marchehppm" class="tab-pane">
+                     <table class="table table-bordered table-striped">
+                    <marcheHorsppm></marcheHorsppm>
                 
               </table>
                    </div>
@@ -101,13 +109,14 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
+import {admin,dcf} from '../../../src/Repositories/Auth';
  import PlanPassationMarche from '../bien_service/ppm/PlanPassationMarche';
  import historiqueMarche from '../gestionMarche/historiqueMarche';
  import tableauBord from '../gestionMarche/tableauBordMarche';
   import synthesebudg from '../gestionMarche/synthesebudg'
-  import  historiqueInvestissement from '../gestionMarche/dosierHistoriqueInvestissement/historiqueInestissement'
-  import historiquePersonnel from '../gestionMarche/dossierHistoriquePersonnel/historiquePersonnel'
-   import historiqueParMarche from '../gestionMarche/dossierHistoriqueMarche/historiqueParMarche'
+  // import  historiqueInvestissement from '../gestionMarche/dosierHistoriqueInvestissement/historiqueInestissement'
+  // import historiquePersonnel from '../gestionMarche/dossierHistoriquePersonnel/historiquePersonnel'
+   import marcheHorsppm from '../gestionMarche/marcheHorsppm'
 // import moment from "moment";
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
@@ -117,9 +126,9 @@ export default {
     historiqueMarche,
     tableauBord,
     synthesebudg,
-    historiqueInvestissement,
-    historiquePersonnel,
-    historiqueParMarche
+    // historiqueInvestissement,
+    // historiquePersonnel,
+    marcheHorsppm
   },
   data() {
     return {
@@ -193,8 +202,29 @@ created() {
 ...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
+     admin:admin,
+     dcf:dcf,
 
+// 0() {
+//        // const st = this.search.toLowerCase();
+//         if (!this.admin || !this.dcf){
+//             let colect=[];
+//             this.printMarcheNonAttribue.filter(item=>{
+//                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+//             })
+//             return this.colect.filter(items=>items.mvtmarche== 'hppm').length;
+           
+//         }
+
+//         return this.printMarcheNonAttribue.filter(items=>items.mvtmarche== 'hppm').length;
+           
+//     },
 afficherLaListeDesMarche(){
 return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
 },

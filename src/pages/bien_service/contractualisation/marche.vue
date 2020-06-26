@@ -747,6 +747,7 @@ source_financement
                      <th>Statut</th>
                     <th>Montant prévu</th>
                     <th>Montant réel</th>
+                    <th title="mouvement du marché">Mvt marché</th>
                     <th>Etat En cours</th>
                    <th colspan="4">Action</th>
                   </tr>
@@ -779,6 +780,10 @@ source_financement
                          <span v-if="marche.economique_id == CodeExempte(marche.economique_id) ">Exemptée procedure</span>
                          <span v-else>Ligne à marché</span>
                        </td>
+                        <td @dblclick="afficherModalModifierTypePrestation(index)">
+                      <span v-if="marche.mvtmarche == 1">Marche hors PPM</span>
+                      <span v-else>Marche PPM</span>
+                    </td>
                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
@@ -1120,6 +1125,9 @@ source_financement
                           
                       </td>
                       <td>
+                          
+                      </td>
+                       <td>
                           
                       </td>
                        <td>
