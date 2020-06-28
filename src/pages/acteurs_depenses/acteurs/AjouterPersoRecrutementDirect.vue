@@ -212,7 +212,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Unite de Zone</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.uniteZone_id" :disabled="verrouilleUniteZone" class="span12">
+                                                        <select v-model="formData.uniteZone_id"  class="span12">
                                                             <option></option>
                                                             <option v-for="item in afficheUniteZone(DetailRecrutement.ua_id)" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -330,7 +330,7 @@
                                                     <label class="control-label">Ligne budgetaires</label>
                                                     <div class="controls">
                                                         <select v-model="formData.plan_budgetaire_id" class="span">
-                                                            <option v-for="item in afficheBudgetPersonnel(formData.unite_administrative_id)" :key="item.id" :value="item.economique_id">
+                                                            <option v-for="item in afficheBudgetPersonnel(DetailRecrutement.ua_id)" :key="item.id" :value="item.economique_id">
                                                                {{item.afficheEconomique.code}} - {{item.afficheEconomique.libelle}}
                                                             </option>
 
@@ -895,4 +895,3 @@ exoEnCours() {
     };
 </script>
 
-verrouilleService
