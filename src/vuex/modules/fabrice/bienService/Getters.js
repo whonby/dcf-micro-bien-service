@@ -1074,4 +1074,4 @@ export const getMandatPersonnaliserPersonnel = (state, getters, rootState, rootG
         }
         return element;
     })
-    
+getMandatPersonnaliserVise

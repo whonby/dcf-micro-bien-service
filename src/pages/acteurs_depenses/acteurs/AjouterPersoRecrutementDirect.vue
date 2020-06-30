@@ -767,7 +767,7 @@ exoEnCours() {
     afficheBudgetPersonnel() {
       return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.ua_id == id);
+          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.ua_id == id  && element.status=='actu');
         }
       };
     },

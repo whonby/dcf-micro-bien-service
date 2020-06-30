@@ -19,31 +19,38 @@
           data-target="#personnel"
           class="dropdown-toggle"
         >
-          <span class="text">  PLANIFICATION DE RECRUTEMENT PERSONNEL </span>
+          <span class="text">  ETAT TEST </span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
           <li class="divider"></li>
-          <li>
-            <router-link :to ="{name: 'recrutementPersonnel'}" tag="a">
-              <i class="icon-key"></i> Recrutement  du personnel
-            </router-link>
-          
-          </li>
+         <li>
+           <router-link :to="{name: 'RegistreDepense'}" tag="a">  
+            REGISTRE DES DEPENSES
+           </router-link>
+         </li>
 
             <li class="divider"></li>
-          <li>
-            <router-link :to ="{name: ''}" tag="a">
-              <i class="icon-key"></i> Norme de missions
-            </router-link>
-          
-          </li>
+         <li>
+          <router-link :to="{name: 'LivreEnregistrement'}" tag="a">
+           LIVRE D'ENREGISTREMENT
+          </router-link>
+        </li>
         
-          <li>
-            
+        <li>
+          <router-link :to="{name: 'LivreSpecial'}" tag="a">
+           LIVRE SPECIAL
+          </router-link>
+        </li>
+
+
+           <li>
+            <router-link :to="{name: 'RapportDepense'}" tag="a">
+              SITUATION PERIODIQUE
+            </router-link>
           </li>
         </ul>
-      </li>    -->
+      </li>     -->
            <!-- <li>
         <router-link :to="{name: 'Synthesebudg'}" tag="a">
           SYNTHESE BUDGET
@@ -102,6 +109,11 @@
               SUIVI DES MISSIONS
             </router-link>
           </li>
+          <!-- <li>
+           <router-link :to="{name: 'RegistreDepense'}" tag="a">  
+            REGISTRE DES DEPENSES
+           </router-link>
+         </li> -->
 <!-- 
            <li>
             <router-link :to="{name: 'executionMission'}" tag="a">

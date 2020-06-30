@@ -710,26 +710,7 @@ export default {
 
 
 
-listedesuniteA() {
-      
 
-
-        if (!this.admin || !this.dcf){
-            let colect=[];
-            this.uniteAdministratives.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-               
-            })
-             return colect
-        }
-
-       return this.uniteAdministratives
-
-    },
 
 
 
@@ -749,8 +730,10 @@ uniteAdmin() {
             })
             return colect
         }
-
-       return this.uniteAdministratives
+else{
+return this.uniteAdministratives
+}
+       
 
     },
 //  codeBudgetGeneralModifier(){
