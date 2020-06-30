@@ -749,7 +749,8 @@ source_financement
                     <th>Montant réel</th>
                     <th title="mouvement du marché">Mvt marché</th>
                     <th>Etat En cours</th>
-                   <th colspan="4">Action</th>
+                    <th>Cycle de vie</th>
+                   <th colspan="3">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -827,12 +828,13 @@ source_financement
                            <span class=""><i class=" icon-calendar"></i></span>
                        </router-link>
                    </td> -->
-                   <td>
+                   <td v-if="marche.attribue == 2">
                         <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
                  class="btn btn-inverse " title="Cycle de vie du marche">
         <span class=""><i class=" icon-calendar"></i></span>
     </router-link>
                    </td>
+                   <td v-else></td>
                    <td>
                     
                       <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
@@ -846,12 +848,8 @@ source_financement
                   <span class=""><i class="  icon-random"></i></span>
                    </router-link> 
                    </td>
-                   <td>
-           
-                    
-                     
-
-
+           <td>
+          
                      <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
                    </td>
@@ -871,6 +869,7 @@ source_financement
                        </tr>
                         <tr>
                      
+                      
                        <td>
                           
                       </td>

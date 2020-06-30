@@ -79,6 +79,7 @@
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div> 
+    
                      <table class="table table-bordered table-striped" v-if="macheid">
                                     <thead>
                                    <tr>
