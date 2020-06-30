@@ -1,74 +1,250 @@
 
 <template>
-  <div >
-    
+    <div class="container-fluid">
+         <div class="row-fluid">
+                <div class="span12">
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <ul class="nav nav-tabs">
+                               <li class="active"><a data-toggle="tab" href="#tab2078">RECHERCHE <span class="badge badge-inverse" ></span></a></li>
+                               <li v-show="Activite_id != ''"><a data-toggle="tab" href="#tab100">RAPPORT    <span class="badge badge-info" ></span></a></li>
+                                <!-- <li ><a data-toggle="tab" href="#tab10">Transferts visés  <span class="badge badge-success" >{{afficheNbreTransfertValider}}</span></a></li>
+                                -->
+                            </ul>
+                        </div>
+                        <div class="widget-content tab-content">
+                         <div id="tab2078" class="tab-pane active">
+                             <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              
+              <!-- <div align="right">
+                Recherche:
+                <input type="search"  v-model="search" />
+              </div> -->
+            </div>
 
-            <div align="right" style="cursor:pointer;">
-           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
-          </div>
-           
+              <table class="table table-bordered table-striped">
+                <tr>
+                  <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Exercice budgetaire:</label>
+                                                    <div class="controls">
+                                                       
+                                                      <select v-model="exo_id" class="span" >
+                                                           
+                                                           
+                                                            <option v-for="situation in exercices_budgetaires" :key="situation.id" :value="situation.annee">{{situation.annee}}</option>
+                                                           
+                                                        </select>
+                                                    </div>
+                                                </div>
+                  </td>
+                  <td>
+                     <div class="control-group">
+                                                     <label class="control-label">Unite Administrative</label>
+                                                    <div class="controls">
+                                                        <select v-model="uniteAdministrativeSelect_id" class="span" >
+                                                           
+                                                           
+                                                            <option v-for="situation in uniteAdministrativeSelect" :key="situation.id" :value="situation.id">
+                                                              {{situation.libelle}}</option>
+                                                           
+                                                        </select>
+                                                    </div>
+                                                </div>
+                  </td>
+                </tr>
+      
+                <tr>
+                  <td>
+                      <div class="control-group">
+                                                       <label class="control-label">Section</label>
+                                                    <div class="controls">
+                     <input
+                                type="text"
+                                class="span"
+                               readonly
+                              :value="afficheLibelleSection(sectionDynamiquesId(uniteAdministrativeSelect_id))"
+                              />
+                            
+                  </div>
+                                                </div>
+                  </td>
+                  <td>
+                      <div class="control-group">
+                        <label class="control-label">Programme</label>
+                                                    
+                                                    <div class="controls">
+                                                        <select v-model="programm_id" class="span" >
+                                                           
+                                                           
+                                                            <option v-for="situation in programmeDynamiquesId(uniteAdministrativeSelect_id)" :key="situation.id" :value="situation.id">
+                                                              {{afficheLibelleProgramme(situation.program_id)}}</option>
+                                                           
+                                                        </select>
+                                                    </div>
+                                                </div>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                      <div class="control-group">
+                        <label class="control-label">Action</label>
+                                                    
+                                                    <div class="controls">
+                                                        <select v-model="action_id" class="span" >
+                                                           
+                                                           
+                                                            <option v-for="situation in ActionId(uniteAdministrativeSelect_id)" :key="situation.id" :value="situation.id">
+                                                              {{afficheLibelleAction(situation.action_id)}}</option>
+                                                           
+                                                        </select>
+                                                    </div>
+                                                </div>
+                  </td>
+                  <td>
+                      <div class="control-group">
+                        <label class="control-label">Activite</label>
+                                                    
+                                                    <div class="controls">
+                                                        <select v-model="Activite_id" class="span" >
+                                                           
+                                                           
+                                                            <option v-for="situation in ActiviteId(uniteAdministrativeSelect_id)" :key="situation.id" :value="situation.id">
+                                                              {{afficheLibelleActivite(situation.activite_id)}}</option>
+                                                           
+                                                        </select>
+                                                    </div>
+                                                </div>
+                  </td>
+                </tr>
+               
+              </table>
+          
 
- <div ref="document">
 
-
-          <!--<table class="table table-bordered table-striped" id="Exo">
-            <tr>
-              <td>
-
-              </td>
-            </tr>
-          </table>-->
-     <h3 style="text-align:center">LIVRE D'ENREGISTREMENT :<span style="color: red;">{{anneeAmort}}</span></h3>
-           
-              <table class="table table-bordered table-striped" >
-                <thead>
-                   <tr style=";color: #000000;">
-    <td style="width:10%;background-color: red" colspan="1">Exercice Budgétaire</td>
-    <td style="width:90%;" colspan="15"></td>
+                        </div>
+                      
+<div id="tab100" class="tab-pane ">
+                                <div class="widget-title">
+              <span class="icon">
+                <i class="icon-th"></i>
+              </span>
+              <h5>LIVRE D'ENREGISTREMENT</h5>
+              <!-- <div align="right">
+                Recherche:
+                <input type="search"  v-model="search" />
+              </div> -->
+            </div>
+              <table class="table table-bordered table-striped">
+                <tr>
+                  <td>
+                     <div class="control-group">
+                                                    <label class="control-label">Exercice budgetaire:</label>
+                                                    <div class="controls">
+                                                       
+                                                      <select v-model="exo_id" class="span"  readonly>
+                                                           
+                                                           
+                                                            <option v-for="situation in exercices_budgetaires" :key="situation.id" :value="situation.annee">{{situation.annee}}</option>
+                                                           
+                                                        </select>
+                                                    </div>
+                                                </div>
+                  </td>
+                  <td>
+                     <div class="control-group">
+                                                     <label class="control-label">Unite Administrative</label>
+                                                    <div class="controls">
+                                                        <select v-model="uniteAdministrativeSelect_id" class="span" readonly>
+                                                           
+                                                           
+                                                            <option v-for="situation in uniteAdministrativeSelect" :key="situation.id" :value="situation.id">
+                                                              {{situation.libelle}}</option>
+                                                           
+                                                        </select>
+                                                    </div>
+                                                </div>
+                  </td>
+                </tr>
+      
+                <tr>
+                  <td>
+                      <div class="control-group">
+                                                       <label class="control-label">Section</label>
+                                                    <div class="controls">
+                     <input
+                                type="text"
+                                class="span"
+                               readonly
+                              :value="afficheLibelleSection(sectionDynamiquesId(uniteAdministrativeSelect_id))"
+                              />
+                            
+                  </div>
+                                                </div>
+                  </td>
+                  <td>
+                      <div class="control-group">
+                        <label class="control-label">Programme</label>
+                                                    
+                                                    <div class="controls">
+                                                        <select v-model="programm_id" class="span" readonly>
+                                                           
+                                                           
+                                                            <option v-for="situation in programmeDynamiquesId(uniteAdministrativeSelect_id)" :key="situation.id" :value="situation.id">
+                                                              {{afficheLibelleProgramme(situation.program_id)}}</option>
+                                                           
+                                                        </select>
+                                                    </div>
+                                                </div>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                      <div class="control-group">
+                        <label class="control-label">Action</label>
+                                                    
+                                                    <div class="controls">
+                                                        <select v-model="action_id" class="span" readonly>
+                                                           
+                                                           
+                                                            <option v-for="situation in ActionId(uniteAdministrativeSelect_id)" :key="situation.id" :value="situation.id">
+                                                              {{afficheLibelleAction(situation.action_id)}}</option>
+                                                           
+                                                        </select>
+                                                    </div>
+                                                </div>
+                  </td>
+                  <td>
+                      <div class="control-group">
+                        <label class="control-label">Activite</label>
+                                                    
+                                                    <div class="controls">
+                                                        <select v-model="Activite_id" class="span" readonly>
+                                                           
+                                                           
+                                                            <option v-for="situation in ActiviteId(uniteAdministrativeSelect_id)" :key="situation.id" :value="situation.id">
+                                                              {{afficheLibelleActivite(situation.activite_id)}}</option>
+                                                           
+                                                        </select>
+                                                    </div>
+                                                </div>
+                  </td>
+                </tr>
+               
+              </table>
+                          <table class="table table-bordered table-striped">
+   <thead>
+<tr style=";color: #000000;">
+    <td style="width:100%;color:#000000;font-size:14px" colspan="8" >ENGAGEMENT</td>
+  
       <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
       <th style="width:12%;text-align:center">TOTAL</th> -->
  </tr>
-                    <tr style=";color: #000000;">
-    <td style="width:10%;background-color: red" colspan="1">Section </td>
-    <td style="width:90%;" colspan="15"></td>
-      <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
-      <th style="width:12%;text-align:center">TOTAL</th> -->
- </tr>
-                     <tr style=";color: #000000;">
-    <td style="width:10%;background-color: red" colspan="1">Programme</td>
-    <td style="width:90%;" colspan="15"></td>
-      <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
-      <th style="width:12%;text-align:center">TOTAL</th> -->
- </tr>
-                     <tr style=";color: #000000;">
-    <td style="width:10%;background-color: red" colspan="1">Action</td>
-    <td style="width:90%;" colspan="15"></td>
-      <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
-      <th style="width:12%;text-align:center">TOTAL</th> -->
- </tr>
-                     <tr style=";color: #000000;">
-   <td style="width:10%;background-color: red" colspan="1">Activité</td>
-   <td style="width:90%;" colspan="15"></td>
-     <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
-     <th style="width:12%;text-align:center">TOTAL</th> -->
-</tr>
-                     <tr style=";color: #000000;">
-    <td style="width:10%;background-color: red" colspan="1" >Unité Administrative</td>
-    <td style="width:90%;" colspan="15"></td>
-      <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
-      <th style="width:12%;text-align:center">TOTAL</th> -->
- </tr>
-                      <tr style=";color: #000000;">
-    <td style="width:100%;background-color: red;text-align:center" colspan="8" >ENGAGEMENT</td>
-    <td style="width:100%;background-color: red;text-align:center" colspan="4" >LIQUIDATION</td>
-    <td style="width:100%;background-color: red;text-align:center" colspan="4" >MANDATEMENT</td>
-    
-      <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
-      <th style="width:12%;text-align:center">TOTAL</th> -->
- </tr>
-
-
-
                     <tr style=";color: #000000;">
    <td style="width:10%;" colspan="1">N° Engagement </td> 
     <td style="width:10%" colspan="1">Date</td>
@@ -78,498 +254,348 @@
    <td style="width:10%" colspan="1">Montant de l'impact validé </td>
    <td style="width:10%" colspan="1">Cumul des Engagements</td>
    <td style="width:10%" colspan="1">Crédits Disponibles</td>
-   <td style="width:10%" colspan="1">N° Liquidation</td>
-   <td style="width:10%" colspan="1">Date</td>
-   <td style="width:10%" colspan="1">Montant</td>
-   <td style="width:10%" colspan="1">Cumul</td>
-    <td style="width:10%" colspan="1">N° du Mandat</td>
-     <td style="width:10%" colspan="1">Date du Mandat</td>
-      <td style="width:10%" colspan="1">Montant du Mandat</td>
-       <td style="width:10%" colspan="1">Cumul des Mandats Disponibles</td>
- 
-     
-
-
-
-  
-     <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
-     <th style="width:12%;text-align:center">TOTAL</th> -->
+   
 </tr>
-                     <tr style=";color: #000000;">
-   <td style="width:10%;" colspan="1"> </td> 
-    <td style="width:10%" colspan="1"></td>
-    <td style="width:10%" colspan="1"></td>
-   <td style="width:10%" colspan="1"></td>
-   <td style="width:10%" colspan="1"> </td>
-   <td style="width:10%" colspan="1"> </td>
-   <td style="width:10%" colspan="1"> </td>
-   <td style="width:10%" colspan="1"> </td>
-   <td style="width:10%" colspan="1"> </td>
-   <td style="width:10%" colspan="1"> </td>
-    <td style="width:10%" colspan="1"> </td>
- <td style="width:10%" colspan="1"> </td>
- <td style="width:10%" colspan="1"> </td>
- <td style="width:10%" colspan="1"> </td>
- <td style="width:10%" colspan="1"> </td>
- <td style="width:10%" colspan="1"> </td>
- 
-     
-
-
-
-  
-     <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
-     <th style="width:12%;text-align:center">TOTAL</th> -->
-</tr>
- 
- 
- 
- 
- 
-
  </thead>
+  <tbody>
+    <tr  v-for="Manda in ListeFilterMandat(Activite_id)" :key="Manda.id">
+                    
+      <td>{{Manda.engagement_id}}</td>
+       <td>{{Manda.engagement_id}}</td>
+        <td>{{Manda.engagement_id}}</td>
+         <td>{{Manda.engagement_id}}</td>
+          <td>{{Manda.engagement_id}}</td>
+           <td>{{Manda.engagement_id}}</td>
+            <td>{{Manda.engagement_id}}</td>
+             <td>{{Manda.engagement_id}}</td>
+    </tr>
+  </tbody>
+ <thead>
+<tr style=";color: #000000;">
+    
+    <td style="width:100%;color:#000000;font-size:14px" colspan="8" >LIQUIDATION</td>
+   
+    
+      <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
+      <th style="width:12%;text-align:center">TOTAL</th> -->
+ </tr>
+                    <tr style=";color: #000000;">
  
- 
-
-
-
-
-
-                  
-              </table>
-                 
-
-
-
-
- </div>
-
-            <!-- <div v-else> -->
-              <!-- <p style="text-align:center;font-size:20px;color:red;">Aucune Unite Administrative</p> -->
-            <!-- </div> -->
-          <!-- </div> -->
-        <!-- </div>
-      </div> -->
-    <!-- </div> -->
-
-    <!-- <fab :actions="fabActions" @cache="afficherModalAjouterpaiementPersonnel" main-icon="apps" bg-color="green"></fab>
-        <button style="display:none;" v-shortkey.once="['ctrl', 'f']" @shortkey="afficherModalAjouterpaiementPersonnel()">Open</button>
-  <button style="display:none;" v-shortkey.once="['ctrl', 'e']" @shortkey="ExporterEnExel()">Open</button>
-  <notifications  /> -->
-  </div>
-</template>
+   <td style="width:10%" colspan="2">N° Liquidation</td>
+   <td style="width:10%" colspan="2">Date</td>
+   <td style="width:10%" colspan="2">Montant</td>
+   <td style="width:10%" colspan="2">Cumul</td>
+   
+</tr>
+ </thead>
   
+    
+    <tbody>
+    <tr  v-for="Manda in ListeFilterMandat(Activite_id)" :key="Manda.id">
+                    
+      <td colspan="2">{{Manda.engagement_id}}</td>
+       <td colspan="2">{{Manda.engagement_id}}</td>
+        <td colspan="2">{{Manda.engagement_id}}</td>
+         <td colspan="2">{{Manda.engagement_id}}</td>
+          
+    </tr>
+  </tbody>
+  
+ <thead>
+<tr style=";color: #000000;">
+    
+    <td style="width:100%;color:#000000;font-size:14px" colspan="8" >MANDATEMENT</td>
+    
+      <!-- <td style="width:12%;text-align:center">MODIFICATION BUDGETAIRE</td>
+      <th style="width:12%;text-align:center">TOTAL</th> -->
+ </tr>
+                    <tr style=";color: #000000;">
+  
+    <td style="width:10%" colspan="2">N° du Mandat</td>
+     <td style="width:10%" colspan="2">Date du Mandat</td>
+      <td style="width:10%" colspan="2">Montant du Mandat</td>
+       <td style="width:10%" colspan="2">Cumul des Mandats Disponibles</td>
+</tr>
+ </thead>
+  <tbody>
+    
+   <tr  v-for="Manda in ListeFilterMandat(Activite_id)" :key="Manda.id">
+      npm <td colspan="2">{{Manda.engagement_id}}</td>
+       <td colspan="2">{{Manda.engagement_id}}</td>
+        <td colspan="2">{{Manda.engagement_id}}</td>
+         <td colspan="2">{{Manda.engagement_id}}</td>
+    </tr>
+  </tbody>
+              </table>
+
+
+                        </div>
+
+                       
+                    </div>
+
+<!--   
+<div class="modal-footer">
+        
+        <a data-dismiss="modal" class="btn btn-danger" @click.prevent="" href="#">Voir Tableau</a>
+       
+      </div> -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
 <script>
-import { mapGetters, mapActions } from "vuex";
-import { formatageSomme } from "../../../src/Repositories/Repository";
-// import jsPDF from 'jspdf'
-import 'jspdf-autotable'
-// import moment from "moment";
-// import { ModelListSelect } from "vue-search-select";
-// import "vue-search-select/dist/VueSearchSelect.css";
-import html2pdf from 'html2pdf.js'
+import { mapGetters} from "vuex";
+import { formatageSomme } from "../../.././src/Repositories/Repository.js";
+import {admin,dcf} from "../../.././src/Repositories/Auth"
 export default {
-  // components: {
-  //   ModelListSelect
-  // },
-  data() {
+    // name: 'transfertItem',
+    data() {
     return {
-      fabActions: [
-        {
-          name: "cache",
-          icon: "add"
-        }
-      ],
-     
+     exo_id:"",
+     programm_id:"",
+     uniteAdministrativeSelect_id:"",
+     Activite_id:"",
+     action_id:"",
       search: ""
     };
+    
   },
-
-  computed: {
-  ...mapGetters("bienService", ["getMandatPersonnaliserPersonnel","modepaiements",'mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
-     'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
-     'nombremarchesExecute',
-     'AfficheMarcheNonAttribue','nombreTotalMarche','marches','typeMarches', 'getMarchePersonnaliser',
-      "printMarcheNonAttribue","procedurePassations","typeTypeProcedures",
-     "montantComtratualisation","text_juridiques", "gettersOuverturePersonnaliser", "typeActeEffetFinanciers"]),
-
-   ...mapGetters('personnelUA', ['acteur_depenses',"paiementPersonnel"]),
-   
-   ...mapGetters('uniteadministrative',[
-    "plans_programmes",
- "uniteAdministratives",
- "afficheNiveauAction",
- "afficheNiveauActivite",
- "derniereNivoPlanBudgetaire",
- "getPersonnaliseBudgetGeneralParPersonnel",
- "budgetGeneral",
- "afficheTransfertValider"
-   
-   
-   ]),
-
-   ...mapGetters('parametreGenerauxAdministratif',[
-
- "sections",
- "type_Unite_admins",
- "plans_programmes",
- "natures_sections",
- "grandes_natures",
- "afficheNiveauPlanProg",
- "exercices_budgetaires"
-   ]),
-
-   ...mapGetters('parametreGenerauxFonctionnelle',[
-
-      "plans_fonctionnels",
- "afficheNiveauPlanFonctionnel"
-   ]),
-
-...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
-
-...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
-
-anneeAmort() {
+  //    props: {
+  //   article: Object,
+  // },
+ 
+ computed: {
+     ...mapGetters("parametreGenerauxAdministratif", [
+      "chapitres",
+      "sections",
+      "type_Unite_admins",
+      "services_gestionnaires",
+      "localisations_geographiques",
+      "afficheServiceGestionnaireNiveau4",
+      "afficheLocalisationGeoNiveau5",
+      "natures_sections"
+    ]),
+...mapGetters("parametreGenerauxAdministratif", [
       
-      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
+      "sections",
+      "type_Unite_admins",
+      "plans_programmes",
+      "natures_sections",
+      "grandes_natures",
+      "afficheNiveauPlanProg",
+      "exercices_budgetaires"
+    ]),
+    ...mapGetters("uniteadministrative", [
+      "jointureUaChapitreSection",
+      "uniteAdministratives",
+      "budgetGeneral",
+      "getPersonnaliseBudgetGeneral",
+      "montantBudgetGeneral",
+      "uniteZones",
+      "getPersonnaliseBudgetGeneralParTransfert",
+      "transferts",
+      "montantTransfererGlobal",
+      "afficheTransfertEnAnttente",
+      "montantTransfererGlobalAttente",
+      "afficheTransfertDiffere",
+      "montantTransfererGlobalDifferer",
+      "afficheTransfertRejeter",
+      "montantTransfererGlobalRejeter",
+      "montantTransferer",
+      "affichenbreTransfertRejeter",
+"afficheNbreTransfertDiffere",
+"afficheNbreTransfertEnAnttente",
+"afficheNbreTransfertValider",
+"nombreTransfert",
+"afficheTransfertValider",
+"historiquetransferts",
+"getPersonnaliseHistoriqueTransfert"
+      // "chapitres",
+      // "sections"
+    ]),
+    ...mapGetters("parametreGenerauxFonctionnelle", [
+      "plans_fonctionnels",
+      "afficheNiveauPlanFonctionnel"
+     
+    ]),
+    ...mapGetters('parametreGenerauxActivite', ['structures_activites', 
+  'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
-      if (norme) {
-        return norme.annee;
+    ...mapGetters("parametreGenerauxBudgetaire",["plans_budgetaires","derniereNivoPlanBudgetaire"]),
+  ...mapGetters('personnelUA', ['all_acteur_depense',  'fonctions']),
+ ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+                "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
+                "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
+                "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
+                "documentProcedures","getterAnalyseDMP","getterAnoDMPBailleur" ,"getterObseravtionBailleurs",
+                 "typeActeEffetFinanciers", "analyseDossiers","text_juridiques", "livrables","motifDecisions",
+                "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
+
+ admin:admin,
+      dcf:dcf,
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+
+sectionDynamiquesId() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.section_id;
       }
       return 0
+        }
+      };
     },
-AfficheMontantTresorConsommer(){
-    {
-    var montant = this.getMandatPersonnaliserPersonnel.filter(element => element.marchetype == "perso" && element.montant_tresor != 0 && element.exercice_budget == this.anneeAmort ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_tresor), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-     }
-}, 
-AfficheMontantDonConsommer(){
-    {
-    var montant = this.getMandatPersonnaliserPersonnel.filter(element => element.marchetype == "perso" && element.montant_don != 0 && element.exercice_budget == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_don), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-     }
-}, 
-AfficheMontantEmpruntConsommer(){
-    {
-    var montant = this.getMandatPersonnaliserPersonnel.filter(element => element.marchetype == "perso" && element.montant_emprunt != 0 && element.exercice_budget == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_emprunt), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
+    afficheLibelleSection() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sections.find(qtreel => qtreel.id == id);
 
-     }
-  
-  
-},
+      if (qtereel) {
+        return qtereel.code_section.concat('  ', qtereel.nom_section)
+      }
+      return 0
+        }
+      };
+    },
+   
+uniteAdministrativeSelect() {
+      
 
 
-AfficheMontantTresor(){
-  
-  
-    {
-    var montant = this.budgetGeneral.filter(element =>element.actived==1 && element.gdenature_id == 2 && element.typefinancement_id == 14 && element.exercicebudget_id == this.anneeAmort && element.actived==1).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-
-     }
-  
-  
-}, 
-AfficheMontantDon(){
-  
-  
-    {
-    var montant = this.budgetGeneral.filter(element => element.actived==1 && element.gdenature_id == 2 && element.typefinancement_id == 13 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-
-     }
-  
-  
-}, 
-AfficheMontantEmprunt(){
-  
-  
-    {
-    var montant = this.budgetGeneral.filter(element =>element.actived==1 && element.gdenature_id == 2 && element.typefinancement_id == 15 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-
-     }
-  
-  
-}, 
+        if (!this.admin || !this.dcf){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
                 
-            // MODULE BIEN ET SERVICE   
-            
-            
-  AfficheMontantTresorConsommerInvestissement(){
-    {
-    var montant = this.getMandatPersonnaliserVise.filter(element => element.marchetype == 1 && element.montant_tresor != 0 && element.exercice_budget == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_tresor), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-     }
-}, 
+            })
+            return colect
+        }
+else{
+return this.uniteAdministratives
+}
 
-
-
-
-
-
-
-
-AfficheMontantDonConsommerInvestissement(){
-    {
-   var montant = this.getMandatPersonnaliserVise.filter(element => element.marchetype == 1 && element.montant_don != 0 && element.exercice_budget == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_don), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-     }
-}, 
-AfficheMontantEmpruntConsommerInvestissement(){
-    {
-    var montant = this.getMandatPersonnaliserVise.filter(element => element.marchetype == 1 && element.montant_emprunt != 0 && element.exercice_budget == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_emprunt), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-
-     }
-  
-  
 },
 
+sectionDynamiquesId() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.section_id;
+      }
+      return 0
+        }
+      };
+    },
+    afficheLibelleSection() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sections.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.code_section.concat('  ', qtereel.nom_section)
+      }
+      return 0
+        }
+      };
+    },
+  programmeDynamiquesId() {
+      return id => {
+        if (id != null && id != "") {
+           return this.budgetGeneral.filter(qtreel => qtreel.ua_id == id && qtreel.status == 'actu' && qtreel.exercicebudget_id == this.exo_id);
+        }
+      };
+    },
+    afficheLibelleProgramme() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.plans_programmes.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle)
+      }
+      return 0
+        }
+      };
+    },
+     ActionId() {
+      return id => {
+        if (id != null && id != "") {
+           return this.budgetGeneral.filter(qtreel => qtreel.ua_id == id && qtreel.status == 'actu' && qtreel.exercicebudget_id == this.exo_id);
+        }
+      };
+    },
+    afficheLibelleAction() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.afficheNiveauAction.find(qtreel => qtreel.id == id);
 
-AfficheMontantTresorConsommerBienEtService(){
-    {
-    var montant = this.getMandatPersonnaliserVise.filter(element => element.marchetype == 2 && element.montant_tresor != 0 && element.exercice_budget == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_tresor), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-     }
-}, 
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle)
+      }
+      return 0
+        }
+      };
+    },
+    ActiviteId() {
+      return id => {
+        if (id != null && id != "") {
+           return this.budgetGeneral.filter(qtreel => qtreel.ua_id == id && qtreel.status == 'actu' && qtreel.exercicebudget_id == this.exo_id);
+        }
+      };
+    },
+    afficheLibelleActivite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.afficheNiveauActivite.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.code.concat('  ', qtereel.libelle)
+      }
+      return 0
+        }
+      };
+    },
 
-
-
-
-
-
-
-AfficheMontantDonConsommerBienEtService(){
-    {
-   var montant = this.getMandatPersonnaliserVise.filter(element => element.marchetype == 2 && element.montant_don != 0 && element.exercice_budget == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_don), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-     }
-}, 
-AfficheMontantEmpruntConsommerBienEtService(){
-    {
-    var montant = this.getMandatPersonnaliserVise.filter(element => element.marchetype == 2 && element.montant_emprunt != 0 && element.exercice_budget == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_emprunt), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-
-     }
-  
-  
-},
-
-
-AfficheMontantTresorBienEtService(){
-  
-  
-    {
-    var montant = this.budgetGeneral.filter(element => element.gdenature_id == 5 && element.typefinancement_id == 14 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-
-     }
-  
-  
-}, 
-AfficheMontantDonBienEtService(){
-  
-  
-    {
-    var montant = this.budgetGeneral.filter(element => element.gdenature_id == 5 && element.typefinancement_id == 13 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-
-     }
-  
-  
-}, 
-AfficheMontantEmpruntBienEtService(){
-  
-  
-    {
-    var montant = this.budgetGeneral.filter(element => element.gdenature_id == 5 && element.typefinancement_id == 15 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-
-     }
-  
-  
-}, 
-
-// AFFICHE MODULE TRANSFERT
-
-
-
-
-AfficheMontantTresorConsommerTransfert(){
-    {
-    var montant = this.afficheTransfertValider.filter(element => element.typefinancement_id == 14 && element.exerciceencours == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-     }
-}, 
-
-
-
-
-
-
-
-
-AfficheMontantDonConsommerTransfert(){
-    {
-   var montant = this.afficheTransfertValider.filter(element => element.typefinancement_id == 13 && element.exerciceencours == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-     }
-}, 
-AfficheMontantEmpruntConsommerTransfert(){
-    {
-    var montant = this.afficheTransfertValider.filter(element => element.typefinancement_id == 15 && element.exerciceencours == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-
-     }
-  
-  
-},
-
-
-AfficheMontantTresorTransfert(){
-  
-  
-    {
-    var montant = this.budgetGeneral.filter(element => element.gdenature_id == 6 && element.typefinancement_id == 14 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-
-     }
-  
-  
-}, 
-AfficheMontantDonTransfert(){
-  
-  
-    {
-    var montant = this.budgetGeneral.filter(element => element.gdenature_id == 6 && element.typefinancement_id == 13 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-
-     }
-  
-  
-}, 
-AfficheMontantEmpruntTransfert(){
-  
-  
-    {
-    var montant = this.budgetGeneral.filter(element => element.gdenature_id == 6 && element.typefinancement_id == 15 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-
-     }
-  
-  
-}, 
-AfficheMontantTresorIvestissement(){
-  
-  
-    {
-    var montant = this.budgetGeneral.filter(element => element.gdenature_id == 7 && element.typefinancement_id == 14 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-
-     }
-  
-  
-}, 
-AfficheMontantDonIvestissement(){
-  
-  
-    {
-    var montant = this.budgetGeneral.filter(element => element.gdenature_id == 7 && element.typefinancement_id == 13 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-
-     }
-  
-  
-}, 
-AfficheMontantEmpruntIvestissement(){
-  
-  
-    {
-    var montant = this.budgetGeneral.filter(element => element.gdenature_id == 7 && element.typefinancement_id == 15 && element.exercicebudget_id == this.anneeAmort).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(2); 
-      if(isNaN(montant)) return null
-      return montant
-
-     }
-  
-  
-}, 
-
-
-
+    ListeFilterMandat() {
+      return id => {
+        if (id != null && id != "") {
+           return this.getMandatPersonnaliserVise.filter(qtreel => qtreel.afficheActivite.id == id &&  qtreel.exercice_budget == this.exo_id && qtreel.afficheUa.id == this.uniteAdministrativeSelect_id && qtreel.afficheProgramme.id ==this.programm_id && qtreel.afficheAction.id==this.action_id);
+        }
+      };
+    },
   },
   methods: {
-    ...mapActions("personnelUA", [
-      "getpaiementPersonnel",
-      "ajouterpaiementPersonnel",
-      "modifierpaiementPersonnel",
-      "supprimerpaiementPersonnel"
-    ]),
-    genererEnPdf(){
- /* var doc = new jsPDF('landscape')
-  
-  doc.text(98,10,"SYNTHESE DU BUDGET")
-  doc.autoTable({html:'#Exo'})
-  doc.autoTable({ html: '#titre'}),
-  doc.autoTable({ html: '#bienService'}),
-  doc.autoTable({ html: '#transfert'}),
-  doc.autoTable({ html: '#total'}),
-  
-doc.save('SynteseBudget.pdf')
-doc.output('dataurlnewwindow')
-return 0*/
-        html2pdf(this.$refs.document, {
-            margin: 0,
-            filename:'SYNTHESE DU BUDGET.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { dpi: 192, letterRendering: true },
-            jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
-        })
-
-},
-formatageSomme:formatageSomme
+    formatageSomme:formatageSomme
   }
-};
+}
 </script>
-<style scoped>
-
-.tailgrand{
-      width: 95%;
-margin: 0 -48%;
-
-  
-}
-td{
-font-size:12px;
-font-weight: bold;
-}
-</style>
+    

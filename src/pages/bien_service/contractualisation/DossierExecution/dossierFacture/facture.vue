@@ -1,4 +1,5 @@
-
+detail_marche
+Objet facture
 <template>
 
 <div>
@@ -19,8 +20,8 @@
                              
                               <select v-model="formData.tprocedure" class="span12">
                              
-                                 <option value="Engagement Direct">Engagement Direct</option>
-                               <option value="Engagement Bon de Commande">Engagement Bon de Commande</option>
+                                 <option value= 1>Engagement Direct</option>
+                               <option value= 2>Engagement Bon de Commande</option>
                                
                               </select>
                            
@@ -125,9 +126,13 @@
                 <label class="control-label">Objet facture</label>
                 <div class="controls">
                  
-                  <textarea rows="1" v-model="formData1.objet_facture" class="span6">
-
-                  </textarea>
+                 <input
+                    type="text"
+                    
+                 :value="afficheObjetMarche(macheid)"
+                    class="span"
+                    readonly
+                  />
                 </div>
               </div>
                </td>
@@ -1937,10 +1942,17 @@
               <div class="control-group">
                 <label class="control-label">Objet facture</label>
                 <div class="controls">
-                 
-                  <textarea rows="1"  class="span4">
+                  
+                  <!-- <textarea rows="1"  class="span4">
 
-                  </textarea>
+                  </textarea> -->
+                  <input
+                    type="text"
+                    
+                 :value="afficheObjetMarche(macheid)"
+                    class="span"
+                    readonly
+                  />
                 </div>
               </div>
                </td>
@@ -2990,7 +3002,7 @@ search:""
     created(){},
 
               computed: {
-            ...mapGetters("bienService", ['decomptes','modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
+            ...mapGetters("bienService", ['typeMarches','decomptes','modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",
                 "lots","modePassations", "procedurePassations","getterDossierCandidats","marches",
                 "getterOffreFinanciers","gettersOffreTechniques","getterLettreInvitation","typeFactures",
                 "getterMandate","getterCojos","conditions","getterAnalyseDossiers","typeAnalyses","getterDemandeAno",
@@ -3687,13 +3699,37 @@ montantTva() {
       return 0
     },
 afficheMarcheType(){
-if(this.detail_marche.type_marche.libelle == "Travaux"){
+if(this.afficherLibelleTypeMarche(this.afficheridTypeMarche(this.macheid)) == "Travaux"){
 return 1
 }
 else{
   return 2
 }
 },
+afficheridTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_marche_id;
+      }
+      return ""
+        }
+      };
+    },
+    afficherLibelleTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return ""
+        }
+      };
+    },
       },
  
       methods:{ 
@@ -3762,7 +3798,7 @@ else{
    },
   ajouterChoixProcLocal(){
 
-   if(this.formData.tprocedure =="Engagement Bon de Commande"){
+   if(this.formData.tprocedure == 2){
  var nouvelObjet = {
       ...this.formData,
       marche_id :this.macheid,
@@ -3780,7 +3816,7 @@ tprocedure :""
       });
    }
        
-      else if(this.formData.tprocedure =="Engagement Direct"){
+      else if(this.formData.tprocedure == 1){
      var nouvelObjet1 = {
       ...this.formData,
       marche_id :this.macheid,
