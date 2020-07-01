@@ -45,6 +45,7 @@
                             <button class="btn btn-success btn-mini" v-else-if="avisPv(appelOffre.reference_pv)== 1">Non Objection</button>
                             <button class="btn btn-danger btn-mini" v-else>Objection</button>
           </td>-->
+          
 
           <td>
             <button

@@ -77,6 +77,7 @@
                   </template>
 
 
+
                     <template v-else>
                          <td >
                     {{exercice_budgetaire.annee || 'Non renseigné'}}</td>
@@ -99,6 +100,7 @@
                 </button>
                    </td>
                   <td>
+                   
                     
                     
               
