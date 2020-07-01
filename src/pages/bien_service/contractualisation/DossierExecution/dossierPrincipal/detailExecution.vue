@@ -194,7 +194,7 @@
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#tab789654">Service Bénéficiaire</a></li>
-                                  <li class=""><a data-toggle="tab" href="#tab895632">Controlleur Financier</a></li>
+                                  <li class=""><a data-toggle="tab" href="#tab895632" v-if="afficheDecisionSBServiceRealite(detail_marche.id) == 1">Controlleur Financier</a></li>
                                                   
                             </ul>
                         </div>
@@ -464,7 +464,18 @@ afficheTabulationDecompte() {
         }
       };
     },
+afficheDecisionSBServiceRealite() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.realiteServiceFait.find(qtreel => qtreel.marche_id == id);
 
+      if (qtereel) {
+        return qtereel.decision_service_beneficiaire;
+      }
+      return 0
+        }
+      };
+    },
 
 
 afficheDecisionEmetteurLiquidation() {
