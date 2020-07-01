@@ -503,30 +503,30 @@ return this.uniteAdministratives
 
 },
 
-sectionDynamiquesId() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
+// sectionDynamiquesId() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.uniteAdministratives.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.section_id;
-      }
-      return 0
-        }
-      };
-    },
-    afficheLibelleSection() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.sections.find(qtreel => qtreel.id == id);
+//       if (qtereel) {
+//         return qtereel.section_id;
+//       }
+//       return 0
+//         }
+//       };
+//     },
+    // afficheLibelleSection() {
+    //   return id => {
+    //     if (id != null && id != "") {
+    //        const qtereel = this.sections.find(qtreel => qtreel.id == id);
 
-      if (qtereel) {
-        return qtereel.code_section.concat('  ', qtereel.nom_section)
-      }
-      return 0
-        }
-      };
-    },
+    //   if (qtereel) {
+    //     return qtereel.code_section.concat('  ', qtereel.nom_section)
+    //   }
+    //   return 0
+    //     }
+    //   };
+    // },
   programmeDynamiquesId() {
       return id => {
         if (id != null && id != "") {
