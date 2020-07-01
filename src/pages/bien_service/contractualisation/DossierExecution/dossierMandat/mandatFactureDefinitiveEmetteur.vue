@@ -125,7 +125,7 @@
                                             
                  <tr
                     class="odd gradeX"
-                    v-for="factu in afficheFactureDefinitiveEmetteur(macheid)"
+                    v-for="factu in getMandatPersonnaliser"
                     :key="factu.id"
                   >
                    

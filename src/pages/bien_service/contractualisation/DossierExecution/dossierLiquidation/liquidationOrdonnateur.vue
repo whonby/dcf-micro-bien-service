@@ -221,7 +221,7 @@ afficheUAId
                     </td>
                     
                     <td>
-                       <router-link :to="{ name: 'AjouterMandatbon', params: { id: liquida.id }}"
+                       <router-link :to="{ name: 'AjouterMandatbon', params: { id: liquida.facture_id }}"
                 class="btn btn-default " title="Ajouter Mandat">
                   <span class=""><i class="  icon-random"></i></span>
                    </router-link> 

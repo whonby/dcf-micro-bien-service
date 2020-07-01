@@ -132,13 +132,13 @@
 <div id="tab100" class="tab-pane  "><facture :macheid="detail_marche.id"></facture></div> 
 <div id="tab45785" class="tab-pane  "><decompte :macheid="detail_marche.id"></decompte></div>
                        <div id="tab20" class="tab-pane  ">
-                          <div class="widget-title">
+                          <!-- <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <!-- <li class="active"><a data-toggle="tab" href="#tab785545" v-if="afficherTypeProcedure(detail_marche.id) == 8">Facture Proforma</a></li> -->
-                               <li class="active"><a data-toggle="tab" href="#tab966333" v-if="afficherTypeProcedure(detail_marche.id) == 1">Facture Définitive</a></li>
+                               <li class="active"><a data-toggle="tab" href="#tab785545" v-if="afficherTypeProcedure(detail_marche.id) == 8">Facture Proforma</a></li> 
+                               <li class="active"><a data-toggle="tab" href="" v-if="afficherTypeProcedure(detail_marche.id) == 1">Facture Définitive</a></li>
                                                     
                             </ul>
-                        </div>
+                        </div> -->
                          <div class="widget-content tab-content">
                          <!-- <div id="tab785545" class="tab-pane active" v-if="afficherTypeProcedure(detail_marche.id) == 8">
                            <div class="widget-title">
@@ -153,16 +153,16 @@
                             <div id="tab0123" class="tab-pane  "><mandatFactureProformaCf :macheid="detail_marche.id"></mandatFactureProformaCf></div>
                          </div>
                          </div> -->
-                          <div id="tab966333" class="tab-pane active">
+                          <div id="tab20" class="tab-pane active">
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#tab8956">Decision Emetteur</a></li>
-                               <li ><a data-toggle="tab" href="#tab03215" v-if="afficheDecisionEmetteur(detail_marche.id) == 1">Decision Controleur financier</a></li>
+                               <li ><a data-toggle="tab" href="#tab03215" >Decision Controleur financier</a></li>
                                                     
                             </ul>
                         </div>
                          <div class="widget-content tab-content">
-                           <div id="tab8956" class="tab-pane active "><mandatFactureDefinitiveEmetteur :macheid="detail_marche.id"></mandatFactureDefinitiveEmetteur></div>
+                           <div id="tab8956" class="tab-pane active "><mandatFactureDefinitiveEmetteur></mandatFactureDefinitiveEmetteur></div>
                             <div id="tab03215" class="tab-pane  "><mandatFactureDefinitiveCf :macheid="detail_marche.id"></mandatFactureDefinitiveCf></div>
                          </div>
                          </div>
