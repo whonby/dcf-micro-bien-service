@@ -431,10 +431,10 @@
                 <i class="icon-th"></i>
               </span>
               <h5>Gestion des stocks</h5>
-              <div align="right">
+              <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
-              </div>
+              </div> -->
             </div>
 
             <div class="widget-content nopadding" >
@@ -662,19 +662,10 @@ filtre_Stock() {
                     return item
                 }
             })
-            return colect.filter(items => {
-                return (
-                    
-          items.uniteAdminist.libelle.toLowerCase().includes(st)
-                );
-            });
+            return colect;
         }
 
-        return this.getPersoStock.filter(items => {
-            return (
-                items.uniteAdminist.libelle.toLowerCase().includes(st)
-            );
-        });
+        return this.getPersoStock;
 
     },
 
