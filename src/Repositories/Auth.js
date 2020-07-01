@@ -44,3 +44,14 @@ export const pool=()=>{
         return false
     }
 }
+
+
+
+export const noDCfNoAdmin=()=>{
+    if(!admin()){
+        if(!dcf()){
+            return true
+        }
+    }
+    return false
+}

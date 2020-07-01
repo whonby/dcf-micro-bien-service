@@ -474,7 +474,7 @@ import 'jspdf-autotable'
 import {partition} from "../../Repositories/Repository"
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
-import {admin,dcf} from "../../Repositories/Auth"
+import {admin,dcf,cf,noDCfNoAdmin} from "../../Repositories/Auth"
 export default {
   // components: {
   //   ModelListSelect
@@ -551,6 +551,8 @@ created() {
     ]),
       admin:admin,
       dcf:dcf,
+        cf:cf,
+        noDCfNoAdmin:noDCfNoAdmin,
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
     libelleLocalGeographie() {
       return id => {
@@ -616,24 +618,22 @@ created() {
         const st = this.search.toLowerCase();
 
 
-        if (!this.admin ){
-            if(!this.dcf){
-                let colect=[];
-                console.log("GUEI EST")
-                this.jointureUaChapitreSection.filter(item=>{
-                    let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
-                    if (val!=undefined){
-                        colect.push(item)
-                        return item
-                    }
-                })
-                return colect.filter(items => {
-                    return (
-                        items.secti.nom_section.toLowerCase().includes(st) ||
-                        items.libelle.toLowerCase().includes(st)
-                    );
-                });
-            }
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            console.log("GUEI EST")
+            this.jointureUaChapitreSection.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(items => {
+                return (
+                    items.secti.nom_section.toLowerCase().includes(st) ||
+                    items.libelle.toLowerCase().includes(st)
+                );
+            });
         }
         return this.jointureUaChapitreSection.filter(items => {
             return (
