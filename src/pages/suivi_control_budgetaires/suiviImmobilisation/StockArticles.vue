@@ -650,9 +650,7 @@ admin:admin,
     // },
 
 filtre_Stock() {
-        const st = this.search.toLowerCase();
-
-
+       
         if (!this.admin || !this.dcf){
             let colect=[];
             this.getPersoStock.filter(item=>{
@@ -668,6 +666,7 @@ filtre_Stock() {
         return this.getPersoStock;
 
     },
+
 
 nombreDeQuantiteEnStock() {
        

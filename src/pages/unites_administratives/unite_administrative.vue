@@ -474,7 +474,7 @@ import 'jspdf-autotable'
 import {partition} from "../../Repositories/Repository"
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
-import {admin,dcf} from "../../Repositories/Auth"
+import {admin,dcf,cf} from "../../Repositories/Auth"
 export default {
   // components: {
   //   ModelListSelect
@@ -615,34 +615,20 @@ created() {
     },
     
     filtre_unite_admin() {
-        const st = this.search.toLowerCase();
-
-
-        if (!this.admin || !this.dcf){
+        
+        if (!this.admin){
+          console.log("ADDDDDD")
             let colect=[];
-            this.jointureUaChapitreSection.filter(item=>{
+            this.uniteAdministratives.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(items => {
-                return (
-                    items.secti.nom_section.toLowerCase().includes(st) ||
-                    items.libelle.toLowerCase().includes(st)
-                );
-            });
+            return colect
         }
-else{
-return this.jointureUaChapitreSection.filter(items => {
-            return (
-                items.secti.nom_section.toLowerCase().includes(st) ||
-                items.libelle.toLowerCase().includes(st)
-            );
-        });
-}
-        
+return this.uniteAdministratives
 
     },
    
