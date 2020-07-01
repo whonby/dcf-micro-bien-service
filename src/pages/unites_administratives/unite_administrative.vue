@@ -616,23 +616,25 @@ created() {
         const st = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
-            let colect=[];
-            this.jointureUaChapitreSection.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-            })
-            return colect.filter(items => {
-                return (
-                    items.secti.nom_section.toLowerCase().includes(st) ||
-                    items.libelle.toLowerCase().includes(st)
-                );
-            });
+        if (!this.admin ){
+            if(!this.dcf){
+                let colect=[];
+                console.log("GUEI EST")
+                this.jointureUaChapitreSection.filter(item=>{
+                    let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                    if (val!=undefined){
+                        colect.push(item)
+                        return item
+                    }
+                })
+                return colect.filter(items => {
+                    return (
+                        items.secti.nom_section.toLowerCase().includes(st) ||
+                        items.libelle.toLowerCase().includes(st)
+                    );
+                });
+            }
         }
-
         return this.jointureUaChapitreSection.filter(items => {
             return (
                 items.secti.nom_section.toLowerCase().includes(st) ||

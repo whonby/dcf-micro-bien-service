@@ -24,6 +24,7 @@
     "html2canvas": "^1.0.0-rc.5",
     "html2pdf.js": "^0.9.2",
     "jquery": "^3.3.1",
+    "jspartiondata": "^1.0.0",
     "jspdf": "^1.5.3",
     "jspdf-autotable": "^3.5.3",
     "jspdf-html2canvas": "^1.1.0",
@@ -52,7 +53,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",
     "@vue/cli-plugin-eslint": "^3.11.0",
-    "@vue/cli-service": "^3.11.0",
+    "@vue/cli-service": "^4.4.4",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
