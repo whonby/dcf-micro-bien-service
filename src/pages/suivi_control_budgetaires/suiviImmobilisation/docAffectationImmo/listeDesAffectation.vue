@@ -1,5 +1,4 @@
-afficheQteACouvert
-C11OA
+
 <template>
   
    
@@ -1392,7 +1391,7 @@ import listeServiceEquipe from '../affectationParService/listeServiceEquipe'
 import tauxServiceEquipe from '../affectationParService/tauxServiceEquipe'
 import affectationDemandeDuService from '../docAffectationImmo/affectationDemandeDuService'
 import { formatageSomme } from "../../../../Repositories/Repository";
-import {admin,dcf} from "../../../../Repositories/Auth"
+import {admin,dcf,noDCfNoAdmin} from "../../../../Repositories/Auth"
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 export default {
@@ -1522,11 +1521,12 @@ cause_directeur:""
 ...mapGetters("personnelUA", ["acte_personnels","all_acteur_depense","acteur_depenses","personnaFonction","fonctions"]),
 admin:admin,
       dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
 nombreDesDemandePerso() {
       
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.demandeMateriel.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
@@ -1545,7 +1545,7 @@ nombreDesDemandePerso() {
 
 afficheToutDemande() {
       
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.demandeMateriel.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
@@ -1571,7 +1571,7 @@ afficheToutDemande() {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.servicesua.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
@@ -1596,7 +1596,7 @@ listePersonnelAffectete() {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.acte_personnels.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
@@ -1616,7 +1616,7 @@ listePersonnelNonEquipee() {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.affichePersonneNonEquipe.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
@@ -1635,7 +1635,7 @@ listeDesEquipementNonCouvert() {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.equipementNonCouvert.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
@@ -1654,7 +1654,7 @@ listeDesEquipementNonCouvert() {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.tauxequipementParAgent.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
@@ -1673,7 +1673,7 @@ listeDesEquipementNonCouvert() {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.affichePersonneEquipe.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
@@ -1696,7 +1696,7 @@ AfficheTotalQteNonCouvert() {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.acte_personnels.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
@@ -1715,7 +1715,7 @@ AfficheTotalQteACouvrir() {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.acte_personnels.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
@@ -1724,17 +1724,17 @@ AfficheTotalQteACouvrir() {
                     return item
                 }
             })
-          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
+          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
         }
 
-       return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiquenormequipement), 0).toFixed(0);
+       return this.acte_personnels.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
 
     },
 afficheMontantTotalEquipementNonCouvert() {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.afficheMontantTotalEquipementNonCouv.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
@@ -1754,7 +1754,7 @@ afficheMontantTotalEquipementNonCouvert() {
 
 afficheLesDemandeDuPersonnel() {
       
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.demandeMateriel.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
@@ -1772,7 +1772,7 @@ afficheLesDemandeDuPersonnel() {
     },
 afficheValidationChefService() {
       
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.demandeMateriel.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
@@ -1792,7 +1792,7 @@ afficheValidationChefService() {
     },
     afficheValidationDirecteur() {
      
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.demandeMateriel.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uniteadmin_id)
@@ -1812,7 +1812,7 @@ listeDesServiceDeUa() {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.servicesua.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
@@ -1841,7 +1841,7 @@ NombreafficheEquipementNonCouvertService() {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.servicesua.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)

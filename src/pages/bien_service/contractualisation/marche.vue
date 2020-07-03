@@ -1592,7 +1592,7 @@ source_financement
 <script>
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../../src/Repositories/Repository";
- import {admin,dcf} from "../../../../src/Repositories/Auth"
+ import {admin,dcf,noDCfNoAdmin} from "../../../../src/Repositories/Auth"
 export default {
   name:'type facture',
   data() {
@@ -1712,6 +1712,7 @@ export default {
    ...mapGetters("gestionMarche", ['entreprises']),
    admin:admin,
       dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
 
@@ -1802,16 +1803,16 @@ getDateFinExécutionValue(){
        // const st = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.printMarcheNonAttribue.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 || this.recupererCodeTypeMarche(element.type_marche_id) == 1)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1819,9 +1820,8 @@ getDateFinExécutionValue(){
             //     );
             // });
         }
-else{
- return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
-}
+
+ return this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 1 || this.recupererCodeTypeMarche(element.type_marche_id) == 4)
        
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1835,16 +1835,16 @@ else{
 
     afficherPlanificationPA() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.printMarcheNonAttribue.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 4 || element.attribue == 0 && element.type_marche.code_type_marche == 1)
+            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1853,7 +1853,7 @@ else{
             // }); 
         }
 
-        return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 4 || element.attribue == 0 && element.type_marche.code_type_marche == 1)
+        return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -1868,29 +1868,21 @@ else{
        // const st = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
-            this.afficheMarcheEnCoursContratualisation.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
+            this.printMarcheNonAttribue.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1)
+            
         }
 
-        return this.afficheMarcheEnCoursContratualisation.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
+        return this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1)
+           
         
 
     },
@@ -1899,29 +1891,21 @@ else{
        // const st = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
-            this.afficheMarchExecuter.filter(item=>{
+            this.getActeEffetFinancierPersonnaliser45.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect 
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 4 &&  element.difference_personnel_bienService == 2||this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 1 && element.difference_personnel_bienService == 2) 
+           
         }
 
-        return this.afficheMarchExecuter
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
+        return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 4 &&  element.difference_personnel_bienService == 2||this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 1 && element.difference_personnel_bienService == 2)
+            
         
 
     },
@@ -1931,58 +1915,42 @@ afficherResilierPUA() {
        // const st = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
-            this.afficheMarcheResilier.filter(item=>{
+            this.getActeEffetFinancierPersonnaliser45.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 4 && element.difference_personnel_bienService == null|| this.afficherAttributMarche(element.marche_id) == 3 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 1 && element.difference_personnel_bienService == null)
+           
         }
 
-        return this.afficheMarcheResilier
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
+        return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 4 && element.difference_personnel_bienService == null|| this.afficherAttributMarche(element.marche_id) == 3 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 1 && element.difference_personnel_bienService == null)
+            
     },
 
 afficherMarcheSupenduPAR_AU() {
        // const st = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
-            this.afficheMarcheSuspendu.filter(item=>{
+            this.printMarcheNonAttribue.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            return colect.filter(element => element.attribue == 7 &&  this.recupererCodeTypeMarche(element.type_marche_id) == 1 || element.attribue == 7 && this.recupererCodeTypeMarche(element.type_marche_id) == 4)
+           
         }
 
-        return this.afficheMarcheSuspendu
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
+        return this.printMarcheNonAttribue.filter(element => element.attribue == 7 &&  this.recupererCodeTypeMarche(element.type_marche_id) == 1 || element.attribue == 7 && this.recupererCodeTypeMarche(element.type_marche_id) == 4)
+            
         
 
     },
@@ -1991,25 +1959,20 @@ afficherMarcherTerminerParUA() {
        // const st = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
-            this.afficheMarcheTerminer.filter(item=>{
+            this.getActeEffetFinancierPersonnaliser45.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 4 || this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 1 )
+            
         }
 
-        return this.afficheMarcheTerminer
+        return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 4 || this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 1 )
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -2018,7 +1981,18 @@ afficherMarcherTerminerParUA() {
 
     },
 
+    CodeTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.code_type_marche;
+      }
+      return 0
+        }
+      };
+    },
 
 afficherLaListeDesMarche(){
 return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
@@ -2425,6 +2399,18 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficher
 
       if (qtereel) {
         return qtereel.code_type_marche;
+      }
+      return 0
+        }
+      };
+    },
+    affichertypeMarcheID() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_marche_id;
       }
       return 0
         }

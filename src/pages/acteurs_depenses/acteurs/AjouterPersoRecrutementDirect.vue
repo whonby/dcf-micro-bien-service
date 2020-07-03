@@ -438,7 +438,7 @@
 <script>
 
     import {mapGetters, mapActions} from 'vuex'
-      import {admin,dcf} from "../../../Repositories/Auth"
+      import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth"
     export default {
 
         data() {
@@ -512,6 +512,7 @@
     ]),
       admin:admin,
       dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
  ...mapGetters("bienService", ["getActeEffetFinancierPersonnaliserContrat","selectionner_candidats","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
@@ -542,7 +543,7 @@ afficheUA() {
 
  uniteAdministrativeDynamiques() {
       
-        if (!this.admin || !this.dcf ){
+        if (this.noDCfNoAdmin ){
             let colect=[];
             this.uniteAdministratives.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)

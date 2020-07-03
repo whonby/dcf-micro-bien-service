@@ -12,7 +12,7 @@ afficheIdActeurDepense
       <div class="modal-body">
         <table class="table table-bordered table-striped">
           <tr>
-            <td colspan="2">
+            <!-- <td colspan="2">
                <div class="control-group">
                             <label class="control-label">Décision Emetteur </label>
                             <div class="controls">
@@ -29,7 +29,7 @@ afficheIdActeurDepense
                           </div>
             </td>
              
-          </tr>
+          </tr> -->
         
                <tr>
                 <td >
@@ -87,7 +87,7 @@ afficheIdActeurDepense
           class="btn btn-primary"
           href="#"
          
-        >Modifier</a>
+        >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div> 
@@ -109,7 +109,7 @@ afficheIdActeurDepense
                                   <th>Imputation</th>
                                 
                                 <!-- <th>Service béneficiaire</th> -->
-                                <th>Emmetteur</th>
+                                <th >Date validation Emmetteur</th>
                                 
                                
                                 <th>Action</th>
@@ -129,8 +129,8 @@ afficheIdActeurDepense
                      
                      
                     <td >{{liquida.imputation_budgetaire || 'Non renseigné'}}</td>
-                   
-                     <td>
+                   <td >{{(formaterDate(liquida.date_emetteur)) || 'Non renseigné'}}</td>
+                     <!-- <td>
                         <button v-if="liquida.decision_emetteur == 1"  class="btn  btn-success" @click="afficherModalObservationEmetteurLiquidation(liquida.id)" >                        
                      
                       <span    >Visé</span>
@@ -157,8 +157,13 @@ afficheIdActeurDepense
                       
                     
                       </button>
-                    </td>
+                    </td> -->
                     <td>
+                       <button  class="btn  btn-success" @click="afficherModalObservationEmetteurLiquidation(liquida.id)">
+                        <span>
+                          <i class="icon icon-ok"></i>
+                        </span>
+                      </button>
                          <button class="btn btn-danger"  @click="supprimerLiquidation(liquida.id)">
                         <span>
                           <i class="icon icon-trash"></i>

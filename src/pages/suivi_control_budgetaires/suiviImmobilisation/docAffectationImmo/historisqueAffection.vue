@@ -508,7 +508,7 @@
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import { formatageSomme } from "../../../../Repositories/Repository";
-import {admin,dcf} from "../../../../Repositories/Auth"
+import {admin,dcf,noDCfNoAdmin} from "../../../../Repositories/Auth"
 
 export default {
   name: 'besionImmolisation',
@@ -628,6 +628,7 @@ created() {
     ]),
     admin:admin,
       dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
      ...mapGetters("uniteadministrative", ["uniteAdministratives","directions","servicesua","uniteZones"]),
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
@@ -691,7 +692,7 @@ filtreMatricule() {
         const st = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.afficheEquipementEnCoursUtilidation.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
@@ -724,7 +725,7 @@ filtreMaterielAmortis() {
         const st = this.search1.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.afficheEquipementAmortie.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)

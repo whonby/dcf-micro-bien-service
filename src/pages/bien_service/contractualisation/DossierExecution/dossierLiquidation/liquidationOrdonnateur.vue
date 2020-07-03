@@ -10,7 +10,7 @@ afficheUAId
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
-          <tr>
+          <!-- <tr>
             <td colspan="2">
                <div class="control-group">
                             <label class="control-label">Décision Ordonnateur </label>
@@ -28,7 +28,7 @@ afficheUAId
                           </div>
             </td>
              
-          </tr>
+          </tr> -->
         
                <tr>
                 <td >
@@ -86,7 +86,7 @@ afficheUAId
           class="btn btn-primary"
           href="#"
          
-        >Modifier</a>
+        >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div> 
@@ -107,10 +107,11 @@ afficheUAId
                                   <th>Imputation </th>
                                 
                                 <!-- <th>Service béneficiaire</th> -->
-                                <th>Emmetteur</th>
-                                
+                                <th>Date validation Emmetteur</th>
+                                <th>Date validation CF</th>
+                                <th title="Date validation Ordonnateur">Date validation Ordo</th>
                                 <th title="Decision Controleur financier">Decision CF</th>
-                                <th>Ordonnateur</th>
+                                <!-- <th>Ordonnateur</th> -->
                                 <th>Action</th>
                                     </tr>
                                     </thead>
@@ -129,7 +130,7 @@ afficheUAId
                      
                     <td >{{liquida.imputation_budgetaire || 'Non renseigné'}}</td>
                    
-                     <td>
+                     <!-- <td>
                         <button v-if="liquida.decision_emetteur == 1"  class="btn  btn-success"  >                        
                      
                       <span    >Visé</span>
@@ -156,7 +157,10 @@ afficheUAId
                       
                     
                       </button>
-                    </td>
+                    </td> -->
+                    <td >{{(formaterDate(liquida.date_emetteur)) || 'Non renseigné'}}</td>
+                    <td >{{(formaterDate(liquida.date_controleur_financier)) || 'Non renseigné'}}</td>
+                    <td >{{(formaterDate(liquida.date_ordonnateur)) || 'Non renseigné'}}</td>
                     <td >
                         <button v-if="liquida.decision_controleur_financier == 1"  class="btn  btn-success"  >                        
                      
@@ -190,7 +194,7 @@ afficheUAId
                       </button>
                       
                     </td>
-                    <td >
+                    <!-- <td >
                         <button v-if="liquida.decision_ordonnateur == 1"  class="btn  btn-success"  @click="afficherModalObservationOrdonnateurLiquidation(liquida.id)">                        
                      
                       <span    >Visé</span>
@@ -218,9 +222,14 @@ afficheUAId
                     
                       </button>
                       
-                    </td>
+                    </td> -->
                     
                     <td>
+                       <button  class="btn  btn-success" @click="afficherModalObservationOrdonnateurLiquidation(liquida.id)">
+                        <span>
+                          <i class="icon icon-ok"></i>
+                        </span>
+                      </button>
                        <router-link :to="{ name: 'AjouterMandatbon', params: { id: liquida.facture_id }}"
                 class="btn btn-default " title="Ajouter Mandat">
                   <span class=""><i class="  icon-random"></i></span>

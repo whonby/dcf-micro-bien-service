@@ -426,7 +426,7 @@
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import { formatageSomme } from "../../../../Repositories/Repository";
-import {admin,dcf} from "../../../../Repositories/Auth"
+import {admin,dcf,noDCfNoAdmin} from "../../../../Repositories/Auth"
 
 export default {
   name: 'besionImmolisation',
@@ -515,6 +515,7 @@ created() {
   computed: {
      admin:admin,
       dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
     ...mapGetters("SuiviImmobilisation", [
       "causeInactivite",
@@ -554,7 +555,7 @@ afficheEquipementEnCoursUtilidation() {
        
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.historiqueAffectationService.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
@@ -577,7 +578,7 @@ afficheEquipementAmortie() {
        
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.historiqueAffectationService.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)

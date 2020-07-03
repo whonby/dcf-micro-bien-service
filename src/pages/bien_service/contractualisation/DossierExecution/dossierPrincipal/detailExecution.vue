@@ -117,9 +117,9 @@
                                <li ><a data-toggle="tab" href="#tab100">Facture</a></li>
                                
                                 <li ><a data-toggle="tab" href="#tab10" v-if="afficherTypeProcedure(detail_marche.id) == 2">Engagement</a></li>
-                                <li ><a data-toggle="tab" href="#tab15550" v-if="afficherTypeProcedure(detail_marche.id) == 2 && afficheTabulationServiceRealiteFait(detail_marche.id) == 1">Réalité service fait</a></li>
-                                <li ><a data-toggle="tab" href="#tab120120" v-if="afficherTypeProcedure(detail_marche.id) == 2 && afficheTabulationLiquidation(detail_marche.id) == 1 || afficherTypeProcedure(detail_marche.id) == 2 && afficheTabulationLiquidation(detail_marche.id) == 1">Liquidation</a></li>
-                                <li><a data-toggle="tab" href="#tab20" v-if="afficherTypeProcedure(detail_marche.id) == 2 && afficheTabulationMandat(detail_marche.id) == 1 || afficherTypeProcedure(detail_marche.id) == 1">Mandat</a></li>
+                                <li ><a data-toggle="tab" href="#tab15550" v-if="afficherTypeProcedure(detail_marche.id) == 2">Réalité service fait</a></li>
+                                <li ><a data-toggle="tab" href="#tab120120" v-if="afficherTypeProcedure(detail_marche.id) == 2 || afficherTypeProcedure(detail_marche.id) == 2">Liquidation</a></li>
+                                <li><a data-toggle="tab" href="#tab20" v-if="afficherTypeProcedure(detail_marche.id) == 2  || afficherTypeProcedure(detail_marche.id) == 1">Mandat</a></li>
                                <li ><a data-toggle="tab" href="#tab45785" v-if=" afficheTabulationDecompte(detail_marche.id) == 8">Decompte</a></li>
                                                               <li ><a data-toggle="tab" href="#Financement" v-if=" afficheTabulationDecompte(detail_marche.id) == 8">Financement</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
@@ -132,20 +132,21 @@
 <div id="tab100" class="tab-pane  "><facture :macheid="detail_marche.id"></facture></div> 
 <div id="tab45785" class="tab-pane  "><decompte :macheid="detail_marche.id"></decompte></div>
                        
-<div id="tab20" class="tab-pane  ">
+ <div id="tab20" class="tab-pane  ">
                         
                          
                          <div id="tab9563" class="tab-pane active">
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab9326">Decision Emetteur</a></li>
-                                <li ><a data-toggle="tab" href="#tab03215">Decision Controleur financier</a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab9326">Decision Emetteur</a></li>
+                                <li ><a data-toggle="tab" href="#tab03215">Decision Controleur financier</a></li>                 
                             </ul>
                         </div>
                          <div class="widget-content tab-content">
-                          
-                           <div id="tab9326" class="tab-pane active "><mandatFactureDefinitiveEmetteur></mandatFactureDefinitiveEmetteur></div>
+                           
+                         <div id="tab9326" class="tab-pane active "><mandatFactureDefinitiveEmetteur :macheid="detail_marche.id"></mandatFactureDefinitiveEmetteur></div>
                             <div id="tab03215" class="tab-pane  "><mandatFactureDefinitiveCf :macheid="detail_marche.id"></mandatFactureDefinitiveCf></div>
+                        
                          </div>
                          </div>
           

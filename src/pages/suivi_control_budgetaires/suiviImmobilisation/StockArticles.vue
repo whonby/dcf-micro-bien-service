@@ -559,7 +559,7 @@
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import { formatageSomme } from "../../../Repositories/Repository";
-import {admin,dcf} from "../../../Repositories/Auth"
+import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth"
 export default {
   name: 'besionImmolisation',
   data() {
@@ -637,6 +637,7 @@ quantite: {
     ...mapGetters("parametreGenerauxAdministratif", ["type_Unite_admins"]),
 admin:admin,
       dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
     //  filtre_Stock() {
     //   const st = this.search.toLowerCase();
@@ -651,7 +652,7 @@ admin:admin,
 
 filtre_Stock() {
        
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.getPersoStock.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
@@ -672,7 +673,7 @@ nombreDeQuantiteEnStock() {
        
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.getPersoStock.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
@@ -692,7 +693,7 @@ nombreDeQuantiteSortiEnStock() {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.getPersoStock.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.uAdministrative_id)
@@ -848,7 +849,7 @@ uniteAdministrativeDynamiques() {
 
 
    
-        if (!this.admin || !this.dcf ){
+        if (this.noDCfNoAdmin ){
             let colect=[];
             this.uniteAdministratives.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)

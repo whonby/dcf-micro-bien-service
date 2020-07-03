@@ -20,7 +20,7 @@
 import { mapGetters } from "vuex";
 
 import { formatageSomme } from "../../../src/Repositories/Repository";
-import {admin,dcf} from '../../../src/Repositories/Auth';
+import {admin,dcf,noDCfNoAdmin,cf} from '../../../src/Repositories/Auth';
 export default {
   name:'tableaudebord',
   data() {
@@ -53,6 +53,8 @@ export default {
     
 admin:admin,
 dcf:dcf,
+noDCfNoAdmin:noDCfNoAdmin,
+cf:cf,
 ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
    TauxTransfert() {
@@ -65,12 +67,11 @@ dcf:dcf,
 
     },
   afficherBudgetInitialTranferst() {
-        if (!this.admin || !this.dcf){
+        if (this.cf){
             let colect=[];
             this.budgetGeneral.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-
-                 item.actived = 1
+                item.actived == 1
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -79,19 +80,19 @@ dcf:dcf,
           return colect.filter(items =>items.gdenature_id==6).reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0)
         }
 
-       return this.budgetGeneral.filter(items1 =>items1.gdenature_id==6).reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0)
+       return this.budgetGeneral.filter(items1 =>items1.gdenature_id==6 ).reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0)
 
     },
     MonantTransferer() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.cf){
             let colect=[];
             this.transferts.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
-                }
+                 }
             })
              return colect.reduce((prec, cur)=> parseFloat(prec) + parseFloat(cur.montant_total_contrat), 0);
            

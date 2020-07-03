@@ -66,7 +66,7 @@
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from '../../../../../src/Repositories/Repository';
-import {admin,dcf} from "../../../../../src/Repositories/Auth"
+import {admin,dcf,noDCfNoAdmin} from "../../../../../src/Repositories/Auth"
 //import moment from 'moment';
 export default {
     data(){
@@ -91,6 +91,7 @@ search:""
 
 admin:admin,
       dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
                 ...mapGetters("gestionMarche", ['secteur_activites', 'entreprises','banques','comptes','getCompte']),
             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
                 'types_financements']) ,
@@ -126,7 +127,7 @@ listeDesServiceDeUa() {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.servicesua.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
@@ -135,10 +136,10 @@ listeDesServiceDeUa() {
                     return item
                 }
             })
-          
+          return colect
         }
 
-       return ""
+       return this.servicesua
 
     },
 

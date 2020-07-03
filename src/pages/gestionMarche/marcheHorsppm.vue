@@ -743,7 +743,7 @@ reference_marche
 <script>
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../src/Repositories/Repository";
- import {admin,dcf} from '../../../src/Repositories/Auth';
+ import {admin,dcf,noDCfNoAdmin} from '../../../src/Repositories/Auth';
 export default {
   name:'type facture',
   data() {
@@ -870,6 +870,7 @@ export default {
 
      admin:admin,
      dcf:dcf,
+     noDCfNoAdmin:noDCfNoAdmin,
 
 
 ImputationBudget() {
@@ -967,7 +968,7 @@ ligneBudgeteyuy() {
    },
 afficherlisteMarcheParDroitAccess() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.printMarcheNonAttribue.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
@@ -988,7 +989,7 @@ return this.printMarcheNonAttribue.filter(items=>items.mvtmarche == 1);
 
      afficherParUAEnfonctiondesRole() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.uniteAdministratives.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)

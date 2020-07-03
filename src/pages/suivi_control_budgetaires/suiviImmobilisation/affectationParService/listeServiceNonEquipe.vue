@@ -304,7 +304,7 @@
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from '../../../../../src/Repositories/Repository';
-import {admin,dcf} from "../../../../../src/Repositories/Auth"
+import {admin,dcf,noDCfNoAdmin} from "../../../../../src/Repositories/Auth"
 //import moment from 'moment';
 export default {
     data(){
@@ -365,6 +365,7 @@ search:""
     ]),
     admin:admin,
       dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
    ...mapGetters("SuiviImmobilisation", ["services",
     "trieUaImmobilisation",
@@ -414,7 +415,7 @@ listeDesServiceNonEquipeDeUa() {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.afficheServiceNonEquipe.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
@@ -423,10 +424,10 @@ listeDesServiceNonEquipeDeUa() {
                     return item
                 }
             })
-          
+          return colect
         }
 
-       return ""
+       return this.afficheServiceNonEquipe
 
     },
         afficherQuantiteSortir() {

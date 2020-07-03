@@ -617,12 +617,10 @@ created() {
     },
     
     filtre_unite_admin() {
-        const st = this.search.toLowerCase();
-
-
+        
         if(this.noDCfNoAdmin){
             let colect=[];
-            console.log("GUEI EST")
+            
             this.jointureUaChapitreSection.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
                 if (val!=undefined){
@@ -632,12 +630,7 @@ created() {
             })
             return colect
         }
-        return this.jointureUaChapitreSection.filter(items => {
-            return (
-                items.secti.nom_section.toLowerCase().includes(st) ||
-                items.libelle.toLowerCase().includes(st)
-            );
-        });
+        return this.jointureUaChapitreSection
 
     },
    

@@ -2,30 +2,14 @@
 <template>
 
 <div>
-  
-                <div id="exampleModalMotifMandatEmetteur" class="modal hide">
+  <div id="exampleModalMotifMandatEmetteur" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Decision CF</h3>
+        <h3>ObServation Emetteur</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
-          <tr>
-            <td colspan="2">
-              <div class="control-group">
-                            <label class="control-label">Décision Emetteur </label>
-                            <div class="controls">
-                              <select v-model="editMandat.decision_emetteur" class="span">
-                                <option value=""></option>
-                              <option value="1">Visé</option>
-                             <option value="2">Différé</option>
-                             <option value="3">Réjeté</option>
-    </select>
-                           
-                            </div>
-                          </div>
-            </td>
-          </tr>
+         
                <tr>
                  <td colspan="2">
                     <div class="control-group">
@@ -47,17 +31,7 @@
                             </div>
                           </div>
                        </td></tr>      
-                         <!-- <tr>
-                           <td>
-                                    <div class="control-group">
-                            <label class="control-label">Nom Emetteur :</label>
-                            <div class="controls">
-                              <input type="text" class="span"  v-model="editMandat.nom_emetteur"/>
-                                <input type="hidden" class="span"  :value="recuperer"/> 
-                            </div>
-                          </div>
-                           </td>
-                         </tr> -->
+                       
                                 <tr>
                  <td>
                     <div class="control-group">
@@ -90,10 +64,11 @@
           class="btn btn-primary"
           href="#"
          
-        >Modifier</a>
+        >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div> 
+                
                 <div class="span4"></div>
                                 <div class="span4"></div>
                                 <!-- <div class="span4" align="right">
@@ -108,7 +83,7 @@
                                     <tr>
 
                                          
-                      <th>N° du marche {{macheid}}</th>
+                      <th>N° du marche</th>
                                          <th>N° du mandat</th>
                                         <th>N° bordereau mandat</th>
                                         <th>N° demande engagement</th>
@@ -116,7 +91,7 @@
                                         <!-- <th>Type procedure</th> -->
                                                     
                                 <th>Montant Mandat</th>
-                                 <th >Emetteur</th>
+                                 <!-- <th >Emetteur</th> -->
                                 <th title="Date validation Emetteur">Date Emetteur</th>
                                 <th colspan="2">Action</th>
                                     </tr>
@@ -125,7 +100,7 @@
                                             
                  <tr
                     class="odd gradeX"
-                    v-for="factu in getMandatPersonnaliser"
+                    v-for="factu in afficheFactureDefinitiveEmetteur(macheid)"
                     :key="factu.id"
                   >
                    
@@ -139,7 +114,7 @@
                                     -->
                     <td @dblclick="afficheModalModificationMandat(Manda.id)">{{formatageSomme(parseFloat(factu.total_general))|| 'Non renseigné'}}</td>
                     
-                    <td>
+                    <!-- <td>
                         <button v-if="factu.decision_emetteur == 1"  class="btn  btn-success" @click="afficheDecisionEmetteur(factu.id)" >                        
                      
                       <span    >Visé</span>
@@ -166,13 +141,17 @@
                       
                     
                       </button>
-                    </td>
+                    </td> -->
                     
                     <td>{{formaterDate(factu.date_decision_emetteur) || 'Non renseigné'}}</td>
                    
                      
                        <td>
-                       
+                       <button  class="btn  btn-success" @click="afficheDecisionEmetteur(factu.id)">
+                        <span>
+                          <i class="icon icon-ok"></i>
+                        </span>
+                      </button>
                        <router-link :to="{ name: 'DetailMandat', params: {id_detail_mandat:factu.id}}"
                 class="btn btn-default " title="Detail Mandat">
                   <span class=""><i class=" icon-folder-close"></i></span>
@@ -212,7 +191,7 @@ export default {
     data(){
         return{
          editMandat: {
-         decision_emetteur:"",
+        
          observation_emetteur:"",
          date_decision_emetteur:"",
          nom_emetteur:""

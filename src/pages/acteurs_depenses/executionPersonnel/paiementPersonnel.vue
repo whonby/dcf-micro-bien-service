@@ -761,7 +761,7 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
-import {admin,dcf} from "../../../Repositories/Auth"
+import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth"
 // import moment from "moment";
 // import { ModelListSelect } from "vue-search-select";
 // import "vue-search-select/dist/VueSearchSelect.css";
@@ -859,6 +859,7 @@ export default {
    ]),
  admin:admin,
       dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
 ...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
@@ -872,7 +873,7 @@ export default {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.paiementPersonnel.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
@@ -899,7 +900,7 @@ export default {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.uniteAdministratives.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
