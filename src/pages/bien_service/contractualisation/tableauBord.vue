@@ -355,7 +355,7 @@ budgetConsommerBienService() {
         if (!this.admin || !this.dcf){
             let colect=[];
             this.getMandatPersonnaliserVise.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.afficheUa.id)
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.afficheUa.id)
                 if (val!=undefined){
                     colect.push(item)
                     return item

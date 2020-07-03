@@ -5,7 +5,7 @@ var housecall = require('housecall');
 var queue = housecall({ concurrency: 2, cooldown: 1000 });
 import { asyncLoading } from 'vuejs-loading-plugin'
 
-
+GET_UNITEADMIN_BY_USER
 
 
 export function login({commit}, user){
@@ -154,9 +154,6 @@ export  function  getRoles({commit}) {
 
 
 }
-
-
-
 
 
 

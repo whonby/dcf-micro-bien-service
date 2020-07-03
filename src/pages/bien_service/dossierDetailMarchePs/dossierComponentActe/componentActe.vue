@@ -1,7 +1,7 @@
-afficherBanqueDynamique
+
 <template>
     <div>
-                  
+            	      
                     <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" v-if="listeAvisAnoBailleur(macheid)">Ajouter</a>
