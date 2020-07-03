@@ -173,7 +173,20 @@
 
             ...mapActions('personnelUA', ['getTypeSalarie',"getEchelons","getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel","getClasses","getEchelons","getActeur","getGrades","getNbrActeurAcrediteTaux","getActPersonnel","getConges","allActeurDepense"]),
 
-
+             /* connexion(){
+                this.login(this.user).then(data=>{
+                    this.$notify({
+                        title: 'Success',
+                        message: 'Ceci est un message de succès',
+                        type: 'success'
+                    });
+                }).catch((error) => {
+                    this.$notify.error({
+                        title: 'Error',
+                        message: 'Ceci est une erreur'
+                    });
+                })
+              }*/
         }
     }
 </script>

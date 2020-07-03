@@ -280,45 +280,45 @@ formNumeroEngagemt:{engagemtPero:"perso"}
       
     },
     
-listeMandatPerso() {
+// listeMandatPerso() {
       
 
 
-        if (!this.admin || !this.dcf){
-            let colect=[];
-            this.mandats.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
+//         if (!this.admin || !this.dcf){
+//             let colect=[];
+//             this.mandats.filter(item=>{
+//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
                
-            })
-             return id => {
-                    if (id != "") {
-                     
-                        return this.colect.filter(idmarche => idmarche.paiementperso_id == id)
-                    }
-                }
-            
-        }
- return id => {
-                    if (id != "") {
-                     
-                        return this.mandats.filter(idmarche => idmarche.paiementperso_id == id)
-                    }
-                }
-     
-
-    },
-//  listeMandatPerso: function () {
-//                 return id => {
+//             })
+//              return id => {
 //                     if (id != "") {
-//                       // console.log("Marche leste acte effect finnancier")
+                     
+//                         return this.colect.filter(idmarche => idmarche.paiementperso_id == id)
+//                     }
+//                 }
+            
+//         }
+//  return id => {
+//                     if (id != "") {
+                     
 //                         return this.mandats.filter(idmarche => idmarche.paiementperso_id == id)
 //                     }
 //                 }
-//             },
+     
+
+//     },
+ listeMandatPerso: function () {
+                return id => {
+                    if (id != "") {
+                      // console.log("Marche leste acte effect finnancier")
+                        return this.mandats.filter(idmarche => idmarche.paiementperso_id == id)
+                    }
+                }
+            },
  CumulEngagement() {
       const val = parseFloat(this.sommeEgagementLigneTableau(this.afficherIdLigne(this.PaiementPersoid))) + parseFloat(this.sommeMontant);
       

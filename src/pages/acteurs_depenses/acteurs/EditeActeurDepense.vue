@@ -429,7 +429,7 @@
 <script>
 
     import {mapGetters, mapActions} from 'vuex'
-    import {admin,dcf} from "../../../Repositories/Auth"
+    import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth"
     export default {
 
         data() {
@@ -493,6 +493,7 @@
         computed: {
            admin:admin,
       dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
 // methode pour maper notre guetter
@@ -521,7 +522,7 @@
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.uniteAdministratives.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)

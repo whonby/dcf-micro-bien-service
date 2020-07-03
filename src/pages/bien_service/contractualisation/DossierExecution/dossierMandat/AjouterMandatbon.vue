@@ -45,7 +45,7 @@
                        <td>
                          <div class="control-group">
                             <label class="control-label">Total général</label>
-                            <div class="controls">
+                            <div class ="controls">
                               <input type="number" class="span" :value="commparerMontantGleEtMontantFacture" readonly/>
                             </div>
                           </div>

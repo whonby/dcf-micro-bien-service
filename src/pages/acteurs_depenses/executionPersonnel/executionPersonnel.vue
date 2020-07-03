@@ -232,33 +232,33 @@ export default {
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
 
 
-// afficherListeSalaireEnExecution(){
-// return this.paiementPersonnel.filter(element => element.valisationvirement == 0)
-// },
+afficherListeSalaireEnExecution(){
+return this.paiementPersonnel.filter(element => element.valisationvirement == 0)
+},
 
 
 
 
-  afficherListeSalaireEnExecution() {
+  // afficherListeSalaireEnExecution() {
       
 
 
-        if (!this.admin || !this.dcf){
-            let colect=[];
-            this.paiementPersonnel.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
+  //       if (!this.admin || !this.dcf){
+  //           let colect=[];
+  //           this.paiementPersonnel.filter(item=>{
+  //               let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+  //               if (val!=undefined){
+  //                   colect.push(item)
+  //                   return item
+  //               }
                
-            })
-            return colect.filter(items=>items.valisationvirement == 0)
-        }
+  //           })
+  //           return colect.filter(items=>items.valisationvirement == 0)
+  //       }
 
-       return this.paiementPersonnel.filter(items=>items.valisationvirement == 0)
+  //      return this.paiementPersonnel.filter(items=>items.valisationvirement == 0)
 
-    },
+  //   },
 
 
  afficherUa() {

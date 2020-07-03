@@ -61,7 +61,7 @@
 import { mapGetters } from "vuex";
 
 import { formatageSomme } from "../../../Repositories/Repository";
-import {admin,dcf} from '../../../../src/Repositories/Auth';
+import {admin,dcf,noDCfNoAdmin} from '../../../../src/Repositories/Auth';
 
 export default {
   name:'tableaudebord',
@@ -99,22 +99,23 @@ export default {
 
    admin:admin,
    dcf:dcf,
+   noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
  filtre_unite_admin() {
        // const st = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.printMarcheNonAttribue.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
+            return colect.filter(element => element.type_marche_id == 6 || element.type_marche_id == 1)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -122,9 +123,9 @@ export default {
             //     );
             // });
         }
-else{
- return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
-}
+
+ return this.printMarcheNonAttribue.filter(element => element.type_marche_id == 6 || element.type_marche_id == 1)
+
        
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
@@ -139,16 +140,16 @@ else{
 
  afficherPlanificationPA() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.printMarcheNonAttribue.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 4 || element.attribue == 0 && element.type_marche.code_type_marche == 1)
+            return colect.filter(element => element.attribue == 0 && element.type_marche_id == 6 || element.attribue == 0 && element.type_marche_id == 1)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -157,7 +158,7 @@ else{
             // }); 
         }
 else{
-return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 4 || element.attribue == 0 && element.type_marche.code_type_marche == 1)
+return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && element.type_marche_id == 6 || element.attribue == 0 && element.type_marche_id == 1)
 }
         
             // return (
@@ -174,20 +175,20 @@ return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && el
        // const st = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.printMarcheNonAttribue.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.type_marche_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(element => element.type_marche.code_type_marche == 4 && element.attribue == 1 || element.type_marche.code_type_marche == 1 && element.attribue == 1 )
+            return colect.filter(element => element.	type_marche_id == 6 && element.attribue == 1 || element.	type_marche_id == 1 && element.attribue == 1 )
          
         }
 
-        return this.afficheMarcheEnCoursContratualisation.filter(element1 => element1.type_marche.code_type_marche == 4 && element1.attribue == 1|| element1.type_marche.code_type_marche == 1 && element1.attribue == 1)
+        return this.printMarcheNonAttribue.filter(element1 => element1.type_marche_id == 6 && element1.attribue == 1|| element1.	type_marche_id == 1 && element1.attribue == 1)
            
     },
 
@@ -197,7 +198,7 @@ return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && el
        // const st = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.getActeEffetFinancierPersonnaliser45.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
@@ -219,12 +220,11 @@ return this.getActeEffetFinancierPersonnaliser45
     },
 
 
-
      afficherResilitieDroitAccess() {
        // const st = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.getActeEffetFinancierPersonnaliser45.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
@@ -248,7 +248,7 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficher
 
      afficherTerminerDroitAccess() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.getActeEffetFinancierPersonnaliser45.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
@@ -273,7 +273,7 @@ else{
     
     //  afficherMandatDroitAccess() {
     //    // const st = this.search.toLowerCase();
-    //     if (!this.admin || !this.dcf){
+    //     if (this.noDCfNoAdmin){
     //         let colect=[];
     //         this.getMandatPersonnaliserVise.filter(item=>{
     //             let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
@@ -352,19 +352,19 @@ montantMarcheAvecAvenant() {
 
 
 budgetConsommerBienService() {
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.getMandatPersonnaliserVise.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.afficheUa.id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-          return colect.filter(element => element.marchetype == 2 ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(2);
+          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(2);
         }
 else{
- return this.getMandatPersonnaliserVise.filter(element => element.marchetype == 2 ).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(2);
+ return this.getMandatPersonnaliserVise.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(2);
 
 }
      

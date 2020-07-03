@@ -391,7 +391,7 @@ ImputationBudgetModifier
 <script>
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../../src/Repositories/Repository";
- import {admin,dcf} from '../../../../src/Repositories/Auth';
+ import {admin,dcf,noDCfNoAdmin} from '../../../../src/Repositories/Auth';
 export default {
   name:'type facture',
   data() {
@@ -445,11 +445,12 @@ export default {
 
   admin:admin,
   dcf:dcf,
-  
+  noDCfNoAdmin:noDCfNoAdmin,
+
 
 afficherlisteMarcheExecutionParDroitAccess() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.getMarchePersonnaliser.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
@@ -479,7 +480,7 @@ afficherlisteMarcheExecutionParDroitAccess() {
 
 afficherMontantExecutionParDroitAccess() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.getActeEffetFinancierPersonnaliser45.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
@@ -505,7 +506,7 @@ afficherMontantExecutionParDroitAccess() {
     },
     // afficherMontantParDroitAccess() {
     //    // const st = this.search.toLowerCase();
-    //     if (!this.admin || !this.dcf){
+    //     if (this.noDCfNoAdmin){
     //         let colect=[];
     //         this.montantMarcheExecuter.filter(item=>{
     //             let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)

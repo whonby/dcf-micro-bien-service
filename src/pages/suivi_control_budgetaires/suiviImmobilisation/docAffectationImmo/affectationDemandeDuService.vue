@@ -348,7 +348,7 @@
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import { formatageSomme } from '../../../../../src/Repositories/Repository';
-import {admin,dcf} from "../../../../../src/Repositories/Auth"
+import {admin,dcf,noDCfNoAdmin} from "../../../../../src/Repositories/Auth"
 import moment from 'moment';
 export default {
     data(){
@@ -387,6 +387,7 @@ search:""
        computed: {
 admin:admin,
       dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
      ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
             ...mapGetters("bienService", [ "gettersCotations","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
@@ -456,7 +457,7 @@ admin:admin,
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.demandeMateriel.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
@@ -478,7 +479,7 @@ admin:admin,
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.demandeMateriel.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
@@ -504,7 +505,7 @@ admin:admin,
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.demandeMateriel.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
@@ -527,7 +528,7 @@ admin:admin,
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.demandeMateriel.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)

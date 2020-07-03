@@ -219,7 +219,67 @@ search:""
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+          return colect.filter(items=>items.normeequipement != 0)
+        }
+
+       return this.servicesua.filter(items=>items.normeequipement != 0)
+
+    },
+    afficheQteACouvert() {
+      
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+        }
+
+       return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+
+    },
+    afficheQteNonCouvert() {
+      
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.servicesua.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+        return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+        }
+
+       return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+
+    },
+     afficheMontantTotalEquipementNonCouvert() {
+      
+
+
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.servicesua.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
@@ -229,74 +289,16 @@ search:""
                 }
                 item.normeequipement != 0
             })
-          
+        return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
         }
 
-       return ""
-
-    },
-    afficheQteACouvert() {
-      
-
-
-        if (!this.admin || !this.dcf){
-            let colect=[];
-            this.servicesua.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-                
-            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
-          
-        }
-
-       return 0
-
-    },
-    afficheQteNonCouvert() {
-      
-
-
-        if (!this.admin || !this.dcf){
-            let colect=[];
-            this.servicesua.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-                
-            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
-        }
-
-       return 0
-
-    },
-     afficheMontantTotalEquipementNonCouvert() {
-      
-
-
-        if (!this.admin || !this.dcf){
-            let colect=[];
-            this.servicesua.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-                item.normeequipement != 0
-            }).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
-        }
-
-       return 0
+       return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
 
     },
 //         equipementNonCouvert(){
 // return this.servicesua.filter(element => element.normeequipement != 0)
 // },
-
+ 
 
 afficherUniteAdministrative() {
       return id => {
