@@ -75,7 +75,7 @@
           class="btn btn-primary"
           href="#"
          
-        >Modifier</a>
+        >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div> 
@@ -97,7 +97,8 @@
                                   <th>Imputation</th>
                                 
                                 <!-- <th>Service béneficiaire</th> -->
-                                <th>Emmetteur</th>
+                                <th>Date validation Emmetteur</th>
+                                <th>Date validation CF</th>
                                 <th>Controleur financier</th>
                                
                                 <th>Action</th>
@@ -118,7 +119,7 @@
                      
                     <td >{{liquida.imputation_budgetaire || 'Non renseigné'}}</td>
                    
-                     <td>
+                     <!-- <td>
                         <button v-if="liquida.decision_emetteur == 1"  class="btn  btn-success"  >                        
                      
                       <span    >Visé</span>
@@ -145,7 +146,9 @@
                       
                     
                       </button>
-                    </td>
+                    </td> -->
+                     <td >{{(formaterDate(liquida.date_emetteur)) || 'Non renseigné'}}</td>
+                    <td >{{(formaterDate(liquida.date_controleur_financier)) || 'Non renseigné'}}</td>
                      <td >
                         <button v-if="liquida.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationDCFLiquidation(liquida.id)" >                        
                      

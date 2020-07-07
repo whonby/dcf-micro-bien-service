@@ -749,7 +749,8 @@ source_financement
                     <th>Montant réel</th>
                     <th title="mouvement du marché">Mvt marché</th>
                     <th>Etat En cours</th>
-                   <th colspan="4">Action</th>
+                    <th>Cycle de vie</th>
+                   <th colspan="3">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -780,16 +781,17 @@ source_financement
                          <span v-if="marche.economique_id == CodeExempte(marche.economique_id) ">Exemptée procedure</span>
                          <span v-else>Ligne à marché</span>
                        </td>
-                        <td @dblclick="afficherModalModifierTypePrestation(index)">
-                      <span v-if="marche.mvtmarche == 1">Marche hors PPM</span>
-                      <span v-else>Marche PPM</span>
-                    </td>
+                        
                    <!-- <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
                   <td>
                    {{formatageSomme(parseFloat(recupererMontantReel(marche.id))) || 'Non renseigné'}}</td>
+                   <td @dblclick="afficherModalModifierTypePrestation(index)">
+                      <span v-if="marche.mvtmarche == 1">Hors PPM</span>
+                      <span v-else>PPM</span>
+                    </td>
            <td>
                      <button 
                       v-if="marche.attribue == 2"  class="btn  btn-warning">
@@ -826,12 +828,13 @@ source_financement
                            <span class=""><i class=" icon-calendar"></i></span>
                        </router-link>
                    </td> -->
-                   <td>
+                   <td v-if="marche.attribue == 2">
                         <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
                  class="btn btn-inverse " title="Cycle de vie du marche">
         <span class=""><i class=" icon-calendar"></i></span>
     </router-link>
                    </td>
+                   <td v-else></td>
                    <td>
                     
                       <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
@@ -845,12 +848,8 @@ source_financement
                   <span class=""><i class="  icon-random"></i></span>
                    </router-link> 
                    </td>
-                   <td>
-           
-                    
-                     
-
-
+           <td>
+          
                      <button @click.prevent="supprimerMarche(marche.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
                    </td>
@@ -870,6 +869,7 @@ source_financement
                        </tr>
                         <tr>
                      
+                      
                        <td>
                           
                       </td>
@@ -894,6 +894,7 @@ source_financement
                       <td>
                           
                       </td>
+                      
                        <td style="font-weight:bold;"> Total Marché
                       </td>
                        <td  style="text-align: center;color:red;font-weight:bold;">
@@ -907,7 +908,21 @@ source_financement
                           
                       </td>
                       
-                      
+                      <td>
+                          
+                      </td>
+                      <td>
+                          
+                      </td>
+                       <td>
+                          
+                      </td>
+                       <td>
+                          
+                      </td>
+                       <td>
+                          
+                      </td>
                     </tr>
                 </tbody>
               </table>
@@ -1577,7 +1592,7 @@ source_financement
 <script>
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../../src/Repositories/Repository";
- import {admin,dcf} from "../../../../src/Repositories/Auth"
+ import {admin,dcf,noDCfNoAdmin} from "../../../../src/Repositories/Auth"
 export default {
   name:'type facture',
   data() {
@@ -1697,6 +1712,7 @@ export default {
    ...mapGetters("gestionMarche", ['entreprises']),
    admin:admin,
       dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements', 
   'types_financements']) ,
 
@@ -1787,16 +1803,16 @@ getDateFinExécutionValue(){
        // const st = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.printMarcheNonAttribue.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 || this.recupererCodeTypeMarche(element.type_marche_id) == 1)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1805,7 +1821,8 @@ getDateFinExécutionValue(){
             // });
         }
 
-        return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
+ return this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 1 || this.recupererCodeTypeMarche(element.type_marche_id) == 4)
+       
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -1818,16 +1835,16 @@ getDateFinExécutionValue(){
 
     afficherPlanificationPA() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.printMarcheNonAttribue.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 4 || element.attribue == 0 && element.type_marche.code_type_marche == 1)
+            return colect.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1)
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1836,7 +1853,7 @@ getDateFinExécutionValue(){
             // }); 
         }
 
-        return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && element.type_marche.code_type_marche == 4 || element.attribue == 0 && element.type_marche.code_type_marche == 1)
+        return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 4 || element.attribue == 0 && this.recupererCodeTypeMarche(element.type_marche_id) == 1)
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -1851,29 +1868,21 @@ getDateFinExécutionValue(){
        // const st = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
-            this.afficheMarcheEnCoursContratualisation.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
+            this.printMarcheNonAttribue.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1)
+            
         }
 
-        return this.afficheMarcheEnCoursContratualisation.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
+        return this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 4 && element.attribue == 1 || element.attribue == 1 && this.recupererCodeTypeMarche(element.type_marche_id) == 1)
+           
         
 
     },
@@ -1882,29 +1891,21 @@ getDateFinExécutionValue(){
        // const st = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
-            this.afficheMarchExecuter.filter(item=>{
+            this.getActeEffetFinancierPersonnaliser45.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect 
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 4 &&  element.difference_personnel_bienService == 2||this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 1 && element.difference_personnel_bienService == 2) 
+           
         }
 
-        return this.afficheMarchExecuter
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
+        return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 4 &&  element.difference_personnel_bienService == 2||this.afficherAttributMarche(element.marche_id) == 2 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 1 && element.difference_personnel_bienService == 2)
+            
         
 
     },
@@ -1914,58 +1915,42 @@ afficherResilierPUA() {
        // const st = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
-            this.afficheMarcheResilier.filter(item=>{
+            this.getActeEffetFinancierPersonnaliser45.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 4 && element.difference_personnel_bienService == null|| this.afficherAttributMarche(element.marche_id) == 3 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 1 && element.difference_personnel_bienService == null)
+           
         }
 
-        return this.afficheMarcheResilier
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
+        return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 3 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 4 && element.difference_personnel_bienService == null|| this.afficherAttributMarche(element.marche_id) == 3 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 1 && element.difference_personnel_bienService == null)
+            
     },
 
 afficherMarcheSupenduPAR_AU() {
        // const st = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
-            this.afficheMarcheSuspendu.filter(item=>{
+            this.printMarcheNonAttribue.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            return colect.filter(element => element.attribue == 7 &&  this.recupererCodeTypeMarche(element.type_marche_id) == 1 || element.attribue == 7 && this.recupererCodeTypeMarche(element.type_marche_id) == 4)
+           
         }
 
-        return this.afficheMarcheSuspendu
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
+        return this.printMarcheNonAttribue.filter(element => element.attribue == 7 &&  this.recupererCodeTypeMarche(element.type_marche_id) == 1 || element.attribue == 7 && this.recupererCodeTypeMarche(element.type_marche_id) == 4)
+            
         
 
     },
@@ -1974,25 +1959,20 @@ afficherMarcherTerminerParUA() {
        // const st = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
-            this.afficheMarcheTerminer.filter(item=>{
+            this.getActeEffetFinancierPersonnaliser45.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            return colect
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            return colect.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 4 || this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 1 )
+            
         }
 
-        return this.afficheMarcheTerminer
+        return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 4 || this.afficherAttributMarche(element.marche_id) == 5 && this.affichertypeMarcheEx(this.affichertypeMarcheID(element.marche_id)) == 1 )
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
@@ -2001,7 +1981,18 @@ afficherMarcherTerminerParUA() {
 
     },
 
+    CodeTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.code_type_marche;
+      }
+      return 0
+        }
+      };
+    },
 
 afficherLaListeDesMarche(){
 return this.printMarcheNonAttribue.filter(element => element.type_marche.code_type_marche == 4 || element.type_marche.code_type_marche == 1)
@@ -2408,6 +2399,18 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficher
 
       if (qtereel) {
         return qtereel.code_type_marche;
+      }
+      return 0
+        }
+      };
+    },
+    affichertypeMarcheID() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.marches.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.type_marche_id;
       }
       return 0
         }

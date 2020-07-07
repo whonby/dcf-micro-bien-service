@@ -212,7 +212,7 @@
                      <div class="control-group">
                                                     <label class="control-label">Unite de Zone</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.uniteZone_id" :disabled="verrouilleUniteZone" class="span12">
+                                                        <select v-model="formData.uniteZone_id"  class="span12">
                                                             <option></option>
                                                             <option v-for="item in afficheUniteZone(DetailRecrutement.ua_id)" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -330,7 +330,7 @@
                                                     <label class="control-label">Ligne budgetaires</label>
                                                     <div class="controls">
                                                         <select v-model="formData.plan_budgetaire_id" class="span">
-                                                            <option v-for="item in afficheBudgetPersonnel(formData.unite_administrative_id)" :key="item.id" :value="item.economique_id">
+                                                            <option v-for="item in afficheBudgetPersonnel(DetailRecrutement.ua_id)" :key="item.id" :value="item.economique_id">
                                                                {{item.afficheEconomique.code}} - {{item.afficheEconomique.libelle}}
                                                             </option>
 
@@ -438,7 +438,7 @@
 <script>
 
     import {mapGetters, mapActions} from 'vuex'
-      import {admin,dcf} from "../../../Repositories/Auth"
+      import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth"
     export default {
 
         data() {
@@ -512,6 +512,7 @@
     ]),
       admin:admin,
       dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
  ...mapGetters("bienService", ["getActeEffetFinancierPersonnaliserContrat","selectionner_candidats","gettersCotationPersonnaliser","typeCandidat",'acteDepense',"getMarchePersonnaliser","appelOffres","lots",
                 "modePassations", "procedurePassations","getterDossierCandidats","marches",
@@ -542,7 +543,7 @@ afficheUA() {
 
  uniteAdministrativeDynamiques() {
       
-        if (!this.admin || !this.dcf ){
+        if (this.noDCfNoAdmin ){
             let colect=[];
             this.uniteAdministratives.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
@@ -767,7 +768,7 @@ exoEnCours() {
     afficheBudgetPersonnel() {
       return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.ua_id == id);
+          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.ua_id == id  && element.status=='actu');
         }
       };
     },
@@ -895,4 +896,3 @@ exoEnCours() {
     };
 </script>
 
-verrouilleService

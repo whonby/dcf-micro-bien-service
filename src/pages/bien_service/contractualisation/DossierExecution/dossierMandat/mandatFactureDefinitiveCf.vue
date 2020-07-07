@@ -1,4 +1,4 @@
-afficherInputationBudgetaire
+
 
 <template>
 
@@ -75,7 +75,7 @@ afficherInputationBudgetaire
           class="btn btn-primary"
           href="#"
          
-        >Modifier</a>
+        >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div> 
@@ -91,11 +91,11 @@ afficherInputationBudgetaire
                                        
                                    
                                 <th>Montant Mandat</th>
-                                 <th >Emetteur</th>
+                                 <!-- <th >Emetteur</th> -->
                                 <th title="Date validation Emetteur">Date Emetteur</th>
-                                
-                                <th>Décision CF</th>
                                 <th title="Date validation Cf">Date validation CF</th>
+                                <th>Décision CF</th>
+                                
 
                                 <th>Action</th>
                                     </tr>
@@ -116,7 +116,7 @@ afficherInputationBudgetaire
                                     -->
                     <td @dblclick="afficheModalModificationMandat(Manda.id)">{{formatageSomme(parseFloat(Manda.total_general))|| 'Non renseigné'}}</td>
                     
-                    <td>
+                    <!-- <td>
                         <button v-if="Manda.decision_emetteur == 1"  class="btn  btn-success"  >                        
                      
                       <span    >Visé</span>
@@ -143,10 +143,10 @@ afficherInputationBudgetaire
                       
                     
                       </button>
-                    </td>
+                    </td> -->
                     
                     <td >{{formaterDate(Manda.date_decision_emetteur) || 'Non renseigné'}}</td>
-                      
+                        <td >{{formaterDate(Manda.date_motif) || 'Non renseigné'}}</td>
               <td >
                         <button v-if="Manda.decision_cf == 8"  class="btn  btn-success" @click="afficheDecisionCf(Manda.id)" >                        
                      
@@ -181,7 +181,7 @@ afficherInputationBudgetaire
                       </button>
                     </td>
                      
-                    <td >{{formaterDate(Manda.date_motif) || 'Non renseigné'}}</td>
+                  
                        <td>
                        
                        <router-link :to="{ name: 'DetailMandat', params: {id_detail_mandat:Manda.id}}"

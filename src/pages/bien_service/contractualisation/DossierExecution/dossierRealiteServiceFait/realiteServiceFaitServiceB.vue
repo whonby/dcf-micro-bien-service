@@ -12,7 +12,7 @@ detail_marche
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
-          <tr>
+          <!-- <tr>
             <td colspan="2">
                <div class="control-group">
                             <label class="control-label">Décision Chef de service </label>
@@ -30,7 +30,7 @@ detail_marche
                           </div>
             </td>
              
-          </tr>
+          </tr> -->
         
                <tr>
                 <td >
@@ -88,7 +88,7 @@ detail_marche
           class="btn btn-primary"
           href="#"
          
-        >Modifier</a>
+        >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div> 
@@ -106,7 +106,7 @@ detail_marche
                                   <!-- <th>Imputation</th> -->
                                 <th>Montant</th>
                                 <!-- <th>Service béneficiaire</th> -->
-                                <th title="Observation service beneficiaire">Observation S-B</th>
+                                <th title="Observation service beneficiaire">Date validation</th>
                                 <!-- <th title="Observation Controleur financier">Observation CF</th> -->
                                 <th>Action</th>
                                     </tr>
@@ -125,7 +125,9 @@ detail_marche
                      
                     <!-- <td >{{detail_marche.imputation  || 'Non renseigné'}}</td> -->
                      <td >{{formatageSomme(parseFloat(realiteService.montant)) || 'Non renseigné'}}</td>
-                     <td>
+                     
+                       <td >{{(formaterDate(realiteService.date_service_beneficiaire)) || 'Non renseigné'}}</td>
+                     <!-- <td>
                         <button v-if="realiteService.decision_service_beneficiaire == 1"  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(realiteService.id)" >                        
                      
                       <span    >Visé</span>
@@ -150,10 +152,16 @@ detail_marche
                       
                        <span  >Attente</span>
                       
+                      
                     
                       </button>
-                    </td>
+                    </td> -->
                     <td>
+                      <button  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(realiteService.id)">
+                        <span>
+                          <i class="icon icon-ok"></i>
+                        </span>
+                      </button>
                         <router-link :to="{ name: 'detailRealiteServiceFait', params: {id_detailRealiteServiceFait:realiteService.id}}"
                 class="btn btn-default " title="Detail Realite service fait">
                   <span class=""><i class=" icon-folder-close"></i></span>

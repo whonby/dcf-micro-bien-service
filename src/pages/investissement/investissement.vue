@@ -1750,7 +1750,7 @@ type_financement
 <script>
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../src/Repositories/Repository";
-  import {admin,dcf} from "../../../src/Repositories/Auth";
+  import {admin,dcf,noDCfNoAdmin} from "../../../src/Repositories/Auth";
 export default {
   name:'type facture',
   data() {
@@ -1846,6 +1846,7 @@ export default {
 
      admin:admin,
       dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
 
      ...mapGetters("bienService", ['mandats','getMandatPersonnaliserVise','getActeEffetFinancierPersonnaliser45','getActeEffetFinancierPersonnaliser',
      'acteEffetFinanciers','montantPlanification','montantContratualisation','afficheContratualisation','affichePlanifier',
@@ -1872,35 +1873,27 @@ export default {
 // pour tous les marches en investissement
    afficherMarcheInvestissementParDroitAccess() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
-            this.afficherLaListeDesMarcheDinvestissement.filter(item=>{
+            this.printMarcheNonAttribue.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            return colect.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3)
+           
         }
-
-        return this.afficherLaListeDesMarcheDinvestissement
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
+           return  this.printMarcheNonAttribue.filter(element => this.recupererCodeTypeMarche(element.type_marche_id) == 3)
+       
     },
 
 
 
 afficherMarcheInvestissementParPlanificationDroitAccess() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.afficheMarcheEnPlanification.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
@@ -1930,7 +1923,7 @@ afficherMarcheInvestissementParPlanificationDroitAccess() {
 /// afficher marche en constratualisation pour investissement
 afficherMarcheInvestissementParEnContratualistationDroitAccess() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.afficheMarcheEnCoursContratualisation.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
@@ -1939,25 +1932,17 @@ afficherMarcheInvestissementParEnContratualistationDroitAccess() {
                     return item
                 }
             })
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            return colect;
         }
 
         return this.afficheMarcheEnCoursContratualisation
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
+           
     },
 
 
     afficherMarcheInvestissementParExecutionDroitAccess() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.afficheMarchExecuter.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
@@ -1966,12 +1951,7 @@ afficherMarcheInvestissementParEnContratualistationDroitAccess() {
                     return item
                 }
             })
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            return colect
         }
 
         return this.afficheMarchExecuter
@@ -1985,7 +1965,7 @@ afficherMarcheInvestissementParEnContratualistationDroitAccess() {
     
     afficherMarcheInvestissementParResilierDroitAccess() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.afficheMarcheResilier.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
@@ -1994,25 +1974,17 @@ afficherMarcheInvestissementParEnContratualistationDroitAccess() {
                     return item
                 }
             })
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            return colect
         }
 
         return this.afficheMarcheResilier
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
+           
     },
 
     
     afficherMarcheInvestissementParTerminerDroitAccess() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.afficheMarcheTerminer.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
@@ -2021,19 +1993,11 @@ afficherMarcheInvestissementParEnContratualistationDroitAccess() {
                     return item
                 }
             })
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            return colect
         }
 
         return this.afficheMarcheTerminer
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
+            
     },
 
 afficheLeNomDesProcedureModifier(){
@@ -2107,7 +2071,18 @@ getDateFinExécutionValue(){
     return this.editActeEffetFinancier.date_odre_service !=""
 },
 
+recupererCodeTypeMarche() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.typeMarches.find(qtreel => qtreel.id == id);
 
+      if (qtereel) {
+        return qtereel.code_type_marche;
+      }
+      return 0
+        }
+      };
+    },
 
 //  affichierNomEntreprise() {
 //       return id => {

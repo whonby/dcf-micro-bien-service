@@ -765,7 +765,7 @@ Type de Recrutement
     import {formatageSomme} from "../../../vuex/modules/guei/Repositories/Repository"
     import {mapGetters, mapActions} from 'vuex'
     import moment from "moment";
-    import {admin,dcf} from "../../../Repositories/Auth"
+    import {admin,dcf,noDCfNoAdmin} from "../../../Repositories/Auth"
     export default {
 
         data() {
@@ -911,6 +911,7 @@ recrutement:""
         computed: {
            admin:admin,
       dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
             ...mapGetters('personnelUA', ["personnaFonction","afficheNombrePersonnelRecuActeNormination","fonctionBudgetaire","type_salaries","type_contrats","acte_personnels","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","personnaliseActeurFinContrat",
@@ -932,7 +933,7 @@ recrutement:""
 
 afficherUAParDroitAccess() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.uniteAdministratives.filter(item=>{
                 let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
@@ -956,7 +957,7 @@ afficherUAParDroitAccess() {
        // const searchTerm = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.acte_personnels.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
@@ -983,7 +984,7 @@ nombreTotalActeurAcredite() {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.acte_personnels.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
@@ -1008,7 +1009,7 @@ nombretotalActeurNonAccredite() {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.acte_personnels.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
@@ -1049,7 +1050,7 @@ afficheActeNorminationPerso() {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.acte_personnels.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
@@ -1074,7 +1075,7 @@ afficheActeFinancierRecrutementD(){
     return this.acteEffetFinanciers.filter(items2=>items2.difference_personnel_bienService == 4);
 },
             listeActeEffectFinnancier() {
-        if (!this.admin || !this.dcf ){
+        if (this.noDCfNoAdmin ){
             let colect=[];
             this.acteEffetFinanciers.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
@@ -1280,7 +1281,7 @@ AffichierElementParent() {
         const searchTerm = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.personnaliseActeurDepense.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
@@ -1315,7 +1316,7 @@ AffichierElementParent() {
         const searchTerm = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.personnaliseActeurDepense.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
@@ -1365,7 +1366,7 @@ acteurNonActivite() {
         const searchTerm = this.search.toLowerCase();
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.personnaliseActeurFinContrat.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)

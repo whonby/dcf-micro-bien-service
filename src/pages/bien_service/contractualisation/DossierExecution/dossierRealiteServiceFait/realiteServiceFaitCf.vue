@@ -75,10 +75,11 @@
           class="btn btn-primary"
           href="#"
          
-        >Modifier</a>
+        >Valider</a>
         <a data-dismiss="modal" class="btn" href="#">Fermer</a>
       </div>
     </div> 
+    
                      <table class="table table-bordered table-striped" v-if="macheid">
                                     <thead>
                                    <tr>
@@ -92,7 +93,8 @@
                                   <!-- <th>Imputation</th> -->
                                 <th>Montant</th>
                                 <!-- <th>Service béneficiaire</th> -->
-                                <th title="Observation service beneficiaire">Observation S-B</th>
+                                <th title="Date validation du service beneficiaire">Date validation S-B</th>
+                                <th title="Date validation du CF">Date validation CF</th>
                                 <th title="Observation Controleur financier">Observation CF</th>
                                 <th>Action</th>
                                     </tr>
@@ -111,7 +113,7 @@
                      
                     <!-- <td >{{detail_marche.imputation  || 'Non renseigné'}}</td> -->
                      <td >{{formatageSomme(parseFloat(realiteService.montant)) || 'Non renseigné'}}</td>
-                     <td>
+                     <!-- <td>
                         <button v-if="realiteService.decision_service_beneficiaire == 1"  class="btn  btn-success"  >                        
                      
                       <span    >Visé</span>
@@ -138,7 +140,9 @@
                       
                     
                       </button>
-                    </td>
+                    </td> -->
+                     <td >{{(formaterDate(realiteService.date_service_beneficiaire)) || 'Non renseigné'}}</td>
+                      <td >{{(formaterDate(realiteService.date_controleur_financier)) || 'Non renseigné'}}</td>
                     <td >
                         <button v-if="realiteService.decision_controleur_financier == 1"  class="btn  btn-success" @click="afficherModalObservationControlleurFinancier(realiteService.id)" >                        
                      

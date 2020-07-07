@@ -10,7 +10,6 @@ const AuthRoutes = [
         path: '/connexion',
        name:"Login",
        meta: {layout: "no-sidebar"},
-
        component: Login
     },
     

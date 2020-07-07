@@ -263,47 +263,47 @@ formNumeroEngagemt:{}
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
   ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
    
-//  listeLiquidationPerso: function () {
-//                 return id => {
-//                     if (id != "") {
-//                       // console.log("Marche leste acte effect finnancier")
-//                         return this.liquidation.filter(idmarche => idmarche.paiementperso_id == id)
-//                     }
-//                 }
-//             },
-
-
-listeLiquidationPerso() {
-      
-
-
-        if (!this.admin || !this.dcf){
-            let colect=[];
-            this.liquidation.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-               
-            })
-             return id => {
+ listeLiquidationPerso: function () {
+                return id => {
                     if (id != "") {
-                     
-                        return this.colect.filter(idmarche => idmarche.paiementperso_id == id)
-                    }
-                }
-            
-        }
- return id => {
-                    if (id != "") {
-                     
+                      // console.log("Marche leste acte effect finnancier")
                         return this.liquidation.filter(idmarche => idmarche.paiementperso_id == id)
                     }
                 }
+            },
+
+
+// listeLiquidationPerso() {
+      
+
+
+//         if (!this.admin || !this.dcf){
+//             let colect=[];
+//             this.liquidation.filter(item=>{
+//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+//                 if (val!=undefined){
+//                     colect.push(item)
+//                     return item
+//                 }
+               
+//             })
+//              return id => {
+//                     if (id != "") {
+                     
+//                         return this.colect.filter(idmarche => idmarche.paiementperso_id == id)
+//                     }
+//                 }
+            
+//         }
+//  return id => {
+//                     if (id != "") {
+                     
+//                         return this.liquidation.filter(idmarche => idmarche.paiementperso_id == id)
+//                     }
+//                 }
      
 
-    },
+//     },
 
 
 

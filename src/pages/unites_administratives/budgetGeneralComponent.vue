@@ -608,7 +608,7 @@
 import { mapGetters, mapActions } from "vuex";
 import budgetGeneralItemComponent from './budgetGeneralItemComponent'
 import { formatageSomme } from "../../../src/Repositories/Repository";
-import {admin,dcf} from "../../../src/Repositories/Auth"
+import {admin,dcf,noDCfNoAdmin} from "../../../src/Repositories/Auth"
 export default {
   name: 'budgetgeneral',
  components: {
@@ -705,31 +705,13 @@ export default {
             ]),
              admin:admin,
       dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
 
 
 
-listedesuniteA() {
-      
 
-
-        if (!this.admin || !this.dcf){
-            let colect=[];
-            this.uniteAdministratives.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
-                if (val!=undefined){
-                    colect.push(item)
-                    return item
-                }
-               
-            })
-             return colect
-        }
-
-       return this.uniteAdministratives
-
-    },
 
 
 
@@ -737,7 +719,7 @@ uniteAdmin() {
       
 
 
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.uniteAdministratives.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
@@ -750,7 +732,9 @@ uniteAdmin() {
             return colect
         }
 
-       return this.uniteAdministratives
+return this.uniteAdministratives
+
+       
 
     },
 //  codeBudgetGeneralModifier(){

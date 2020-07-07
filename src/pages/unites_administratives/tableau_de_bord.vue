@@ -1,5 +1,6 @@
 
 
+
 <template>
   <div class="container-fluid">
      <!-- <h3 style="text-align:center">TABLEAU DE BORD : UNITE ADMINISTRATIVE</h3> -->
@@ -22,7 +23,7 @@
     import {mapActions, mapGetters} from "vuex";
 
 import { formatageSomme } from "../../../src/Repositories/Repository";
-    import {admin,dcf} from "../../../src/Repositories/Auth"
+    import {admin,dcf,cf,noDCfNoAdmin} from "../../../src/Repositories/Auth"
 export default {
   name:'tableaudebord',
   data() {
@@ -47,39 +48,39 @@ created() {
       "nombreArchivageDocument",
       "montantBudgetGeneral",
       "uniteAdministratives",
-      "budgetGeneral"
+      "budgetGeneral",
+      "jointureUaChapitreSection"
       // "nbreNouveauProjet"
 
       // "nbreArchivageNotes"
     ]),
       admin:admin,
       dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
+      cf:cf,
       ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
  
  nbreUniteAdministratives() {
-      
 
-
-        if (!this.admin || !this.dcf){
+          if(this.cf){
             let colect=[];
+            
             this.uniteAdministratives.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-          return colect.length;
+            return colect.length
         }
-
-       return this.demandeMateriel.length;
+        return this.uniteAdministratives.length
 
     },
+ 
  montantBudgetGeneralUa() {
       
-
-
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.budgetGeneral.filter(item=>{
                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
@@ -91,8 +92,9 @@ created() {
           return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0);
         }
 
-       return this.budgetGeneral.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0);
+ return this.budgetGeneral.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.Dotation_Initiale), 0).toFixed(0);
 
+      
     },
  
  

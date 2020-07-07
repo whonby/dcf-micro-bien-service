@@ -869,7 +869,7 @@
 import { mapGetters, mapActions } from "vuex";
 //import transfertComponent from './transfertComponent'
 import { formatageSomme } from "../../../../src/Repositories/Repository";
-import {admin,dcf} from '../../../../src/Repositories/Auth';
+import {admin,dcf,cf} from '../../../../src/Repositories/Auth';
 export default {
   name: 'transfert',
  components: {
@@ -992,11 +992,12 @@ export default {
 
 admin:admin,
 dcf:dcf,
+cf:cf,
 ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
  afficherUAParDroitAccess() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.cf){
             let colect=[];
             this.uniteAdministratives.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
@@ -1260,7 +1261,7 @@ destinationDynamiquesModifier() {
 
 afficherlisteTransfertParDroitAccess() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.cf){
             let colect=[];
             this.getPersonnaliseTransfert.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
@@ -1269,6 +1270,7 @@ afficherlisteTransfertParDroitAccess() {
                     return item
                 }
             })
+            return colect
             // return colect.filter(items => {
             //     return (
             //         items.secti.nom_section.toLowerCase().includes(st) ||
@@ -1276,8 +1278,10 @@ afficherlisteTransfertParDroitAccess() {
             //     );
             // });
         }
-
-        return this.getPersonnaliseTransfert
+else{
+return this.getPersonnaliseTransfert
+}
+        
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)

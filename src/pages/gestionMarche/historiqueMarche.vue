@@ -46,7 +46,7 @@
                     <th>Etat en cours</th>
                     <th title="mouvement du marché">Mvt marché</th>
                     <th style="width:10%">Suivi-marche</th>
-                   
+                   <th>Cycle de vie</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -60,7 +60,7 @@
                  <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{ELibelle(marche.type_marche_id) || 'Non renseigné'}}</td>
                  <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center">
-                   {{ marche.procedure_passation_id || 'Non renseigné'}}</td>
+                   {{ afficherCodeProcedure(marche.procedure_passation_id) || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierTypePrestation(index)">
                    {{marche.afficheActivite.libelle || 'Non renseigné'}}</td>
                     <td @dblclick="afficherModalModifierTypePrestation(index)">
@@ -80,10 +80,7 @@
                    {{marche.numero_marche || 'Non renseigné'}}</td> -->
                      <td @dblclick="afficherModalModifierTypePrestation(index)" style="text-align: center;">
                    {{formatageSomme(parseFloat(marche.montant_marche)) || 'Non renseigné'}}</td>
-                    <td @dblclick="afficherModalModifierTypePrestation(index)">
-                      <span v-if="marche.mvtmarche == 'hppm'">Marche hors PPM</span>
-                      <span v-else>Marche PPM</span>
-                    </td>
+                   
                   
            <td>
                      <button 
@@ -115,7 +112,10 @@
                 </button>
 
                    </td>
-                   
+                    <td @dblclick="afficherModalModifierTypePrestation(index)">
+                      <span v-if="marche.mvtmarche == 1">Hors PPM</span>
+                      <span v-else>PPM</span>
+                    </td>
                 <td v-if="marche.type_marche_id == 6 ||marche.type_marche_id == 1 || marche.type_marche_id == 5"> 
                      <router-link :to="{ name: 'DetailMarchePs', params: { id: marche.id }}"
                 class="btn btn-default " title="historique la contratualisation">
@@ -127,10 +127,7 @@
                   <span class=""><i class="  icon-zoom-out"></i></span>
                    </router-link> 
                     
-                      <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
-                 class="btn btn-inverse " title="Cycle de vie du marche">
-        <span class=""><i class=" icon-calendar"></i></span>
-    </router-link>
+                     
                     </td>
                    
                        <td v-else>
@@ -139,7 +136,13 @@
                   <span class=""><i class=" icon-folder-open"></i></span>
                    </router-link> 
                        </td>
-                    
+                    <td v-if="marche.type_marche_id == 6 && marche.attribue == 2 ||marche.type_marche_id == 1 && marche.attribue == 2|| marche.type_marche_id == 5 && marche.attribue == 2">
+                       <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
+                 class="btn btn-inverse " title="Cycle de vie du marche">
+        <span class=""><i class=" icon-calendar"></i></span>
+    </router-link>
+                    </td>
+                    <td v-else></td>
                    <!-- <td v-if="marche.type_marche_id == 6 ||marche.type_marche_id == 1"> 
                      <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
                                     class="btn btn-inverse " title="Cycle de vie du marche">
@@ -184,7 +187,7 @@
 <script>
  import { mapGetters, mapActions } from "vuex";
  import { formatageSomme } from "../../../src/Repositories/Repository";
- import {admin,dcf} from '../../../src/Repositories/Auth';
+ import {admin,dcf,noDCfNoAdmin} from '../../../src/Repositories/Auth';
 export default {
   name:'type facture',
   data() {
@@ -311,7 +314,7 @@ export default {
 
      admin:admin,
      dcf:dcf,
-
+noDCfNoAdmin:noDCfNoAdmin,
 
   affichebudgetActive(){
   
@@ -370,10 +373,10 @@ export default {
     },
 afficherlisteMarcheParDroitAccess() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.printMarcheNonAttribue.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.objetUniteAdministrative.id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -387,17 +390,31 @@ afficherlisteMarcheParDroitAccess() {
             //     );
             // });
         }
-
-        return this.printMarcheNonAttribue
+else{
+return this.printMarcheNonAttribue
+}
+        
             // return (
             //     items.secti.nom_section.toLowerCase().includes(st) ||
             //     items.libelle.toLowerCase().includes(st)
             // );
     },
 
+// afficherModePassation() {
+//       return id => {
+//         if (id != null && id != "") {
+//            const qtereel = this.procedurePassations.find(qtreel => qtreel.id == id);
+
+//       if (qtereel) {
+//         return qtereel.code;
+//       }
+//       return 0
+//         }
+//       };
+//     },
      afficherParUAEnfonctiondesRole() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.uniteAdministratives.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
@@ -940,14 +957,6 @@ anneeAmort() {
         }
       };
     },
-
-
-
-
-
-
-
-
 
 
      ImputationBudget() {

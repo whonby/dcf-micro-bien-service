@@ -30,13 +30,20 @@ export function login({commit}, user){
                    
                }).catch((error) => {
                   // this.loginError = true
+
                    if (error.response.status === 401 || error.response.status === 403) {
+                       this.$app.$notify({
+                           title: 'error',
+                           text: error.response.data.message,
+                           type:"error"
+                       })
                    commit('SET_ERROR_MESSAGE', error.response.data.message)
                      commit('SET_LOADER_FALSE')
                   //   //  this.error = false
                      commit('SET_ERROR_TRUE')
                     //this.$router.push({name: 'login'})
                 }
+
                });
       }else if(!user.email){
         commit('SET_CHAMP_VIDE_TRUE')
