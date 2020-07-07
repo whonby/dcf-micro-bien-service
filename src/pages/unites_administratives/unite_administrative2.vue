@@ -13,7 +13,7 @@
             <tr>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Type Unite d'administrative</label>
+                  <label class="control-label">Type Unité d'administrative</label>
                   <div class="controls">
                     <select v-model="formData.type_ua_id">
                       <option

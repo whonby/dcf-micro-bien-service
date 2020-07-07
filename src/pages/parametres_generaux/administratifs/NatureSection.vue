@@ -57,7 +57,7 @@
                 
                 <tr>
                   <th>Code</th>
-                  <th>Libelle</th>
+                  <th>Libellé</th>
                    <th>Action</th>
                 </tr>
               </thead>
@@ -121,7 +121,7 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
               </div>
@@ -157,7 +157,7 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="editTitre.libelle" class="span" placeholder="" />
               </div>
@@ -280,8 +280,8 @@ base64_encode(file) {
   // var imgData='data:image/jpeg;base64,'+ 'Base64.encode("/public/lien/img/typo.jpg")';
   // doc.autoTable({ html: this.natures_sections })
    var data = this.natures_sections;
-  //  doc.setFontSize(40);
-    doc.text(30,20,"Listes Natures Sections")
+   doc.setFontSize(8)
+    doc.text(75,10,"LISTES DES NATURES SECTIONS")
     // doc.addImage(imgData,'JPEG',15,40,180,160)
   doc.autoTable(this.getColumns(),data)
 doc.save('NatureSection.pdf')

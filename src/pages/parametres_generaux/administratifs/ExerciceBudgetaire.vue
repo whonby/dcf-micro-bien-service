@@ -31,7 +31,7 @@
         <div class="widget-box">
           
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste exercice budgetaire</h5>
+            <h5>Liste exercice budgétaire</h5>
              <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -54,8 +54,8 @@
             <table class="table table-bordered table-striped" id="exercice_budgetaire">
               <thead>
                 <tr>
-                  <th>Annee</th>
-                  <th>Date debut</th>
+                  <th>Année</th>
+                  <th>Date début</th>
                   <th>Date fin</th>
                   <!-- <th>Encours</th> -->
                   <th>En cours</th>
@@ -115,7 +115,7 @@
              
             <div v-else>
               <div align="center">
-              <h6 style="color:red;">Aucun exercice budgetaire enregistré !</h6>
+              <h6 style="color:red;">Aucun exercice budgétaire enregistré !</h6>
             </div>
              </div>
           </div>
@@ -142,18 +142,18 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter un exrcice budgetaire</h3>
+                <h3>Ajouter un exrcice budgétaire</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
             <div class="control-group">
-              <label class="control-label">Annee:</label>
+              <label class="control-label">Année:</label>
               <div class="controls">
                 <input type="number" v-model="formData.annee" class="span" placeholder="" />
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Date debut:</label>
+              <label class="control-label">Date début:</label>
               <div class="controls">
                 <input type="date" v-model="formData.date_debut" class="span" placeholder="" />
               </div>
@@ -201,19 +201,19 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier exrcice budgetaire</h3>
+                <h3>Modifier exrcice budgétaire</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
             <div class="control-group">
-              <label class="control-label">Annee:</label>
+              <label class="control-label">Année:</label>
               <div class="controls">
                 <input type="number" v-model="editExerciceBudgetaire.annee"
                  class="span" placeholder="" />
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Date debut:</label>
+              <label class="control-label">Date début:</label>
               <div class="controls">
                 <input type="date" v-model="editExerciceBudgetaire.date_debut"
                  class="span" placeholder="" />

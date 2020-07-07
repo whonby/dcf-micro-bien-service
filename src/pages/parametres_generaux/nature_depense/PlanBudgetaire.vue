@@ -159,7 +159,7 @@
             </div>
 
              <div class="control-group">
-              <label class="control-label">Libéllé parent:</label>
+              <label class="control-label">Libellé parent:</label>
               <div class="controls">
                 <input type="text" readonly :value="parentDossier.libelle" class="span"  />
               </div>
@@ -185,7 +185,7 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="nouvelElementEnfant.libelle" class="span3" placeholder="Saisir le libelle" />
               </div>
@@ -216,7 +216,7 @@
                 <form class="form-horizontal">
 
                   <div class="control-group">
-              <label class="control-label">Structure budgetaire:</label>
+              <label class="control-label">Structure budgétaire:</label>
               <div class="controls">
                 <select  v-model="editTitre.structure_budgetaire_id">
             <option v-for="budget in structures_budgetaires" :key="budget.id" 
@@ -231,7 +231,7 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="editTitre.libelle" class="span" placeholder="" />
               </div>
@@ -360,7 +360,8 @@ return this.plans_budgetaires.filter((item) => {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.plans_budgetaires;
-    doc.text(98,10,"Liste plan budgetaire")
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTES DES PLANS BUDGETAIRES")
   doc.autoTable(this.getColumns(),data)
 doc.save('plan_budgetaire.pdf')
 return 0

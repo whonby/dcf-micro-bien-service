@@ -9,12 +9,15 @@
 
 
             <div class="row-fluid">
-                <div class="span12">
+                <div class="span12">          
+
+
+                    
                     <div class="widget-box">
                         <div class="widget-title">
                             <div class="span6">
                                 <span class="icon"> <i class="icon-th"></i> </span>
-                                <h5>Liste des contrôleurs financier</h5>
+                                <h5>Liste des contrôleurs financiers</h5>
                             </div>
                             <div class="span6">
                                 <div align="right">
@@ -110,7 +113,7 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Nom et prenom:</label>
+                        <label class="control-label">Nom et prénom:</label>
                         <div class="controls">
                             <input type="text" v-model="formData.name" class="span" placeholder="" />
                         </div>
@@ -122,7 +125,7 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Role</label>
+                        <label class="control-label">Rôle</label>
                         <div class="controls">
                             <select v-model="formData.role_id">
                                 <option></option>
@@ -151,7 +154,7 @@
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modification du controleur financier</h3>
+                <h3>Modification du contrôleur financier</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -162,7 +165,7 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Nom et prenom:</label>
+                        <label class="control-label">Nom et prénom:</label>
                         <div class="controls">
                             <input type="text" v-model="editTitre.name" class="span" placeholder="" />
                         </div>
@@ -174,7 +177,7 @@
                         </div>
                     </div>
                     <div class="control-group" v-if="editTitre.user_role">
-                        <label class="control-label">Role</label>
+                        <label class="control-label">Rôle</label>
                         <div class="controls">
                             <select v-model="editTitre.user_role.role_id">
                                 <option></option>

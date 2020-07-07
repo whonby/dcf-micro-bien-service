@@ -41,7 +41,7 @@
                 <tr>
                  <th>Code</th>
                   <th>Libelle</th>
-                  <th>Structure budgetaire</th>
+                  <th>Structure budgétaire</th>
                    <th>Action</th>
                 </tr>
               </thead>
@@ -74,7 +74,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucun plan budgetaire enregistré ! </h6>
+                <h6 style="color:red;">Aucun plan budgétaire enregistré ! </h6>
               </div>
             </div>
           </div>
@@ -91,13 +91,13 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter plans  budgetaire</h3>
+                <h3>Ajouter plan budgétaire</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
 
                  <div class="control-group">
-              <label class="control-label">Structure budgetaire:</label>
+              <label class="control-label">Structure budgétaire:</label>
               <div class="controls">
                 <select  v-model="formData.structure_budgetaire_id">
             <option v-for="budget in structures_budgetaires" :key="budget.id" 
@@ -140,13 +140,13 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier plan budgetaire</h3>
+                <h3>Modifier plan budgétaire</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
 
                   <div class="control-group">
-              <label class="control-label">Structure budgetaire:</label>
+              <label class="control-label">Structure budgétaire:</label>
               <div class="controls">
                 <select  v-model="editTitre.structure_budgetaire_id">
             <option v-for="budget in structures_budgetaires" :key="budget.id" 

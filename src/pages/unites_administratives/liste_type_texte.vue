@@ -23,7 +23,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des type text</h5>
+              <h5>Liste de type texte</h5>
               <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie Code ou libelle" v-model="search" />

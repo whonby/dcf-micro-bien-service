@@ -29,7 +29,7 @@
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste service gestionnaires</h5>
+            <h5>Liste service gestionnaire</h5>
              <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -155,7 +155,7 @@
  <div id="modalAjouterElementEnfant" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter service gestionnaires</h3>
+                <h3>Ajouter service gestionnaire</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -218,7 +218,7 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier service gestionnaires</h3>
+                <h3>Modifier service gestionnaire</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -377,7 +377,8 @@ return this.services_gestionnaires.filter((item) => {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.services_gestionnaires;
-    doc.text(98,10,"Liste service gestionnaire ")
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTES DES SERVICES GESTIONNAIRES")
   doc.autoTable(this.getColumns(),data)
 doc.save('service_gestionnaire.pdf')
 return 0

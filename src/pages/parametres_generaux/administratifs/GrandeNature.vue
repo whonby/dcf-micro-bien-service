@@ -51,7 +51,7 @@
               <thead>
                 <tr>
                   <th>Code</th>
-                  <th>Libelle</th>
+                  <th>Libellé</th>
                    <th>Action</th>
                 </tr>
               </thead>
@@ -77,7 +77,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucune grande nature de depense enregistrée</h6>
+                <h6 style="color:red;">Aucune grande nature de dépense enregistrée</h6>
               </div>
             </div>
             
@@ -116,7 +116,7 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
               </div>
@@ -152,7 +152,7 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="editTitre.libelle" class="span" placeholder="" />
               </div>
@@ -289,7 +289,9 @@ getDataPaginate(index){
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.grandes_natures;
-    doc.text(98,10,"Listes grande natiure de depense")
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES GRANDES NATURES DE DEPENSES")
+   
   doc.autoTable(this.getColumns(),data)
 doc.save('grande_nature_depense.pdf')
 return 0

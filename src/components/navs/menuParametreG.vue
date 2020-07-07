@@ -62,6 +62,12 @@
                     <i class="icon-user"></i> Gestion des CF
                 </router-link>
             </li>
+              <li class="divider"></li>
+  <li>
+      <router-link :to="{name: 'Profil'}" tag="a">
+          <i class="icon-user"></i>Profil
+      </router-link>
+  </li>
         </ul>
       </li>
       <!--Source de financement-->

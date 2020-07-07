@@ -17,7 +17,7 @@
 
                                     <th>Matricule</th>
                                     <th>Email</th>
-                                    <th>Role</th>
+                                    <th>Rôle</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -36,7 +36,7 @@
                         <div class="widget-box">
                             <div class="widget-title">
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a data-toggle="tab" href="#tab1">Liste Unite adminitrative</a></li>
+                                    <li class="active"><a data-toggle="tab" href="#tab1">Liste Unité adminitrative</a></li>
                                     <li class=""><a data-toggle="tab" href="#tab2">Affectation du CF</a></li>
 
                                 </ul>
@@ -49,7 +49,7 @@
  <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                                                <h5>Liste des unité d'administrative</h5>
+                                                <h5>Liste des unités administratives</h5>
                                             </div>
                                             <div class="span6">
                                                 <div align="right">
@@ -126,7 +126,7 @@
 
                                         </div>
                                         <div v-else>
-                                            <p style="text-align:center;font-size:20px;color:red;">Aucune Unite Administrative</p>
+                                            <p style="text-align:center;font-size:20px;color:red;">Aucune Unité Administrative</p>
                                         </div>
                                     </div>
                                     <div class="pagination alternate">
@@ -149,7 +149,7 @@
                                                 <div class="widget-title">
                                                     <div class="span6">
                                                         <span class="icon"> <i class="icon-list"></i> </span>
-                                                        <h5>Veillez selectionner la section</h5>
+                                                        <h5>Veuillez selectionner la section</h5>
                                                     </div>
                                                     <div class="span6">
 
@@ -181,7 +181,7 @@
 
                                                     </div>
                                                     <div v-if="!uniteBySection(section).length">
-                                                        Pas de donnee disponible
+                                                        Pas de donnée disponible
                                                     </div>
                                                    </div>
                                             </div>
@@ -197,7 +197,7 @@
 
                                                     <div class="span7">
                                                         <span class="icon">
-                                                    <i class="icon-list"></i> </span> <h5>Unite administrative selectionner <code>({{listeUniteSelectionner.length}})</code></h5>
+                                                    <i class="icon-list"></i> </span> <h5>Unite administrative selectionné <code>({{listeUniteSelectionner.length}})</code></h5>
                                                     </div>
                                                     <div class="span5" align="right" v-if="listeUniteSelectionner.length">
 
@@ -215,7 +215,7 @@
 
                                                     </div>
                                                     <div v-if="!listeUniteSelectionner.length">
-                                                        Pas d'unite administrative selectionner
+                                                        Pas d'unité administrative selectionnée
                                                     </div>
                                                      </div>
                                             </div>
@@ -253,7 +253,7 @@
         <div id="myAlert1" class="modal hide" aria-hidden="true" style="display: none;">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Fin d'activite pour {{libelleUniteAdmin}} </h3>
+                <h3>Fin d'activité pour {{libelleUniteAdmin}} </h3>
             </div>
             <div class="modal-body">
                 <div class="controls">
@@ -268,11 +268,11 @@
         <div id="modificationdateDebut" class="modal hide" aria-hidden="true" style="display: none;">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Date debut d'activite pour {{libelleUniteAdmin}} </h3>
+                <h3>Date début d'activité pour {{libelleUniteAdmin}} </h3>
             </div>
             <div class="modal-body">
                 <div class="controls">
-                    <label>Entrez la date debut</label>
+                    <label>Entrez la date début</label>
                     <input type="date" v-model="edite.date_debut"  class="span5">
                 </div>
             </div>
