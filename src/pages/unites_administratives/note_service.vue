@@ -133,7 +133,7 @@
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label">Unite Administrative:</label>
+            <label class="control-label">Unité Administrative:</label>
             <div class="controls">
               <select v-model="editNoteService.unite_administrative_id">
                 <option

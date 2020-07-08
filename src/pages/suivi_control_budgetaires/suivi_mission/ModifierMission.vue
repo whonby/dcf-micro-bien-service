@@ -21,7 +21,7 @@
 
                 <td width="120">
                        <div class="control-group">
-                         <label class="control-label">Année Budgetaire</label>
+                         <label class="control-label">Année Budgétaire</label>
                                 <div class="controls ">
                              <!-- <select v-model="formData.exercice_budgetaire_id" class="span">
                            <option v-for="exoBudget in exoEnCours" :key="exoBudget.id"
@@ -51,8 +51,8 @@
               <div class="controls">
                 <select v-model="editMission.type_mission" class="span">
        
-                  <option value="mission civ">Mission en cote d'ivoire</option>
-                  <option value="mission hors civ">Mission hors cote d'ivoire</option>
+                  <option value="mission civ">Mission en côte d'ivoire</option>
+                  <option value="mission hors civ">Mission hors côte d'ivoire</option>
                   
                 </select>
               </div>
@@ -64,7 +64,7 @@
 
                           <td width="250"> 
             <div class="control-group">
-              <label class="control-label" title="categorie de mission">Categorie de mission:</label>
+              <label class="control-label" title="categorie de mission">Catégorie de mission:</label>
               <div class="controls">
            <select v-model="editMission.categorie_missions_id" class="span">
                <option v-for="budget in categories_missions" :key="budget.id" 
@@ -134,7 +134,7 @@
              <td width="250">
                           
                <div class="control-group">
-              <label class="control-label">Nom Prenom:</label>
+              <label class="control-label">Nom Prénom:</label>
               <div class="controls">
             
             <input type="text"  class="span" 
@@ -179,7 +179,7 @@
 
                      <td colspan="3" width="550">
                       <div class="control-group">
-              <label class="control-label">Imputation budgetaire:</label>
+              <label class="control-label">Imputation budgétaire:</label>
               <div class="controls " >
             <input
                 type="text"
@@ -347,7 +347,7 @@
 
                   <td >           
                <div class="control-group">
-              <label class="control-label">Date depart:</label>
+              <label class="control-label">Date départ:</label>
               <div class="controls">
                 <input type="date" v-model="editMission.date_depart" class="span"/>
               </div>

@@ -76,7 +76,7 @@ CodeExempte
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
                                  <li class="active"><a data-toggle="tab" href="#tab0145">Publication de l'offre</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab01">Reception de l'offre</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab01">Réception de l'offre</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab4">Ouverture</a></li>
                                 <li class=""><a data-toggle="tab" href="#801">Attribution</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab2">Bailleur</a></li>
@@ -159,7 +159,7 @@ CodeExempte
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tab01">Publication de l'offre</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab478">Reception des offre</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab478">Reception des offres</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab498">Ouverture</a></li>
                                  <li class=""><a data-toggle="tab" href="#tab411">Rapport d'ouverture</a></li>
                                   <li class=""><a data-toggle="tab" href="#tab7081845">D.Candidats</a></li>

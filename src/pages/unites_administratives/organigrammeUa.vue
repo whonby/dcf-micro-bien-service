@@ -102,7 +102,7 @@
                 <form class="form-horizontal">
 
                <div class="control-group">
-              <label class="control-label">Unite d'administrative</label>
+              <label class="control-label">Unité administrative</label>
               <div class="controls">
               <select v-model="formData.uniteua_id" >
                 <option v-for="structure in uniteAdministratives " :key="structure.id" 

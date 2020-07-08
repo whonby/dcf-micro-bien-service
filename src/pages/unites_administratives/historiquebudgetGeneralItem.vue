@@ -22,7 +22,7 @@
                      
                      <span v-if="article.version == 0">Original </span>
                       <span 
-                     v-else>Premiere modification</span>
+                     v-else>Première modification</span>
                      </td>
                     <td>
                       <button

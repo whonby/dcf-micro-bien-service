@@ -9,7 +9,7 @@ NombreDemissionsParActeurDepense
           <table class="table table-bordered table-striped">
             <tr>
    
-        <h5 align="center"> Tableau de bord de missions par Unité Administrative</h5>
+        <h5 align="center"> Tableau de bord des missions par Unité Administrative</h5>
 <hr> 
         <li class="bg_lg " title="Nombre total de mission par unite administrative">
              <a href="#"> <span style="font-size:0.8em">nbre m. par UA </span>
@@ -21,7 +21,7 @@ NombreDemissionsParActeurDepense
              </a> </li>
                
               <li class="bg_lo" title="duree moynenne de missions par unite administrative ">
-             <a href="#"> <span style="font-size: 0.8em;">durée m. par UA </span>
+             <a href="#"> <span style="font-size: 0.8em;">durée moyenne par UA </span>
         <i class="icon-eject"></i><span class="label label-important">
             {{dureeMoyenneDemissionsParUA(ua_id)}} jrs 
             </span> 
@@ -31,7 +31,7 @@ NombreDemissionsParActeurDepense
 
 
              <li class="bg_ls" title="cout total de missions effectuée par unite administrative ">
-             <a href="#"><span style="font-size:0.8em">CT par UA</span>
+             <a href="#"><span style="font-size:0.8em">Coût Total par UA</span>
         <i class="icon-pencil"></i><span class="label label-important">
             {{formatageSomme(parseFloat(coutTotalParUA(ua_id)))}}  
             </span> 
@@ -39,7 +39,7 @@ NombreDemissionsParActeurDepense
               </a> </li>
 
               <li class="bg_ls" title="cout moynen de missions par unite administrative ">
-             <a href="#"> <span style="font-size: 0.8em;">cout moyen par UA </span>
+             <a href="#"> <span style="font-size: 0.8em;">coût moyen par UA </span>
         <i class="icon-eject"></i><span class="label label-important">
             {{formatageSomme(parseFloat(coutMoyenParUA(ua_id)))}}  
             </span> 
@@ -68,7 +68,7 @@ NombreDemissionsParActeurDepense
               
 
 <tr>
-<h5> Tableau de bord de missions par acteur de depense</h5>
+<h5> Tableau de bord de missions par acteur de dépense</h5>
         <hr>
         <li class="bg_ly" title="Nombre total de mission par acteur ">
              <a href="#"> <span style="font-size:0.8em">nbre m. par agent.</span> 
@@ -562,7 +562,7 @@ NombreDemissionsParActeurDepense
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste de tous les dossiers de missions differés</h5>
+            <h5>Liste de tous les dossiers de missions différés</h5>
              <div align="right">
           </div>
              
@@ -625,7 +625,7 @@ NombreDemissionsParActeurDepense
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucun dossier de missions differés </h6>
+                <h6 style="color:red;">Aucun dossier de mission differé </h6>
               </div>
             </div>
           </div>
@@ -663,7 +663,7 @@ NombreDemissionsParActeurDepense
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste de tous les dossiers de missions rejetés</h5>
+            <h5>Liste de tous les dossiers des missions rejetés</h5>
              <div align="right">
           </div>
              

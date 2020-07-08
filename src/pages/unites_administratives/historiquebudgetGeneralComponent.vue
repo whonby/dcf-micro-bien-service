@@ -18,7 +18,7 @@
             <tr>
                  <td>
                 <div class="control-group">
-                  <label class="control-label">Exercice budgetaire</label>
+                  <label class="control-label">Exercice budgétaire</label>
                 
                   <div class="controls">
                      <input
@@ -38,7 +38,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Grande nature depense</label>
+                  <label class="control-label">Grande nature dépense</label>
                   <div class="controls">
                     <select v-model="formData.gdenature_id">
                       <option
@@ -67,7 +67,7 @@
                <td>
               
                <div class="control-group">
-                  <label class="control-label">Unite administrative</label>
+                  <label class="control-label">Unité administrative</label>
                   <div class="controls">
                     <select v-model="formData.ua_id">
                         <option value>Sélectionner</option>
@@ -86,7 +86,7 @@
                  <td>
               
                <div class="control-group">
-                   <label class="control-label">Type Unite administrative</label>
+                   <label class="control-label">Type Unité administrative</label>
                   <div class="controls">
                     <select v-model="formData.typeua_id">
                       <option
@@ -195,7 +195,7 @@
                             <div class="controls">
                               <select v-model="formData.version">
                               <option value="0">Original</option>
-                          <option value="1">Premiere modification</option>
+                          <option value="1">Première modification</option>
    
     </select>
                             </div>
@@ -206,7 +206,7 @@
           <tr>
              <td>
                  <div class="control-group">
-                  <label class="control-label">Activite</label>
+                  <label class="control-label">Activité</label>
                   <div class="controls">
                     <select v-model="formData.activite_id">
                       <option
@@ -267,7 +267,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Grande nature depense</label>
+                  <label class="control-label">Grande nature dépense</label>
                   <div class="controls">
                     <select v-model="editBudgetGeneral.gdenature_id">
                       <option
@@ -296,7 +296,7 @@
                 <td>
               
                <div class="control-group">
-                  <label class="control-label">Unite administrative</label>
+                  <label class="control-label">Unité administrative</label>
                   <div class="controls">
                     <select v-model="editBudgetGeneral.ua_id">
                         <option value>Sélectionner</option>
@@ -314,7 +314,7 @@
               <td>
               
                <div class="control-group">
-                   <label class="control-label">Type Unite administrative</label>
+                   <label class="control-label">Type Unité administrative</label>
                   <div class="controls">
                     <select v-model="editBudgetGeneral.typeua_id">
                       <option
@@ -390,7 +390,7 @@
               </td>
                 <td>
                 <div class="control-group">
-                  <label class="control-label">Code Budget general</label>
+                  <label class="control-label">Code Budget général</label>
                   <div class="controls">
                     <input
                       type="text"
@@ -434,7 +434,7 @@
              <tr>
              <td>
                  <div class="control-group">
-                  <label class="control-label">Activite</label>
+                  <label class="control-label">Activité</label>
                   <div class="controls">
                     <select v-model="editBudgetGeneral.activite_id">
                       <option
@@ -494,7 +494,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Historique Budget general par ua</h5>
+              <h5>Historique Budget général par ua</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
