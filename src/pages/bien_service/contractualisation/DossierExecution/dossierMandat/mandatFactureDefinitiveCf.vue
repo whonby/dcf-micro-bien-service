@@ -243,9 +243,9 @@ search:""
         }
     },
     props:["macheid"],
-    created(){
-      this.editMandat=this.mandats.find(item=>item.marche_id==this.$route.params.id)
-    },
+    // created(){
+    //   this.editMandat=this.mandats.find(item=>item.marche_id==this.$route.params.id)
+    // },
 
               computed: {
             ...mapGetters("bienService", ['modepaiements','getMandatPersonnaliserVise','getMandatPersonnaliser','choixprocedure','acteDepense',"getMarchePersonnaliser","appelOffres","getFacturePersonnaliser",

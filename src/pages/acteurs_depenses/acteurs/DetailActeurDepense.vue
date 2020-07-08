@@ -1151,8 +1151,8 @@ type_acte_id
                                                     <label class="control-label">Pays</label>
                                                     <div class="controls">
                                                         <select v-model="formData1.pays_id" class="span4" >
-                                                            <option></option>
-                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
+                                                             <option></option>
+                                                            <option v-for="item in affichePays" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -1166,7 +1166,7 @@ type_acte_id
                                                     <div class="controls">
                                                         <select v-model="formData1.ville_id" class="span4" :readOnly="verroVille">
                                                             <option></option>
-                                                            <option v-for="item in VilleDynamiques(formData1.pays_id)" 
+                                                            <option v-for="item in villesdyna(formData1.pays_id)" 
                                                             :key="item.id" 
                                                             :value="item.id">
                                                                 {{item.libelle}}
@@ -1391,7 +1391,7 @@ type_acte_id
                                                     <div class="controls">
                                                         <select v-model="editCompte.pays_id" class="span4" >
                                                             <option></option>
-                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
+                                                            <option v-for="item in affichePays" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -1405,7 +1405,7 @@ type_acte_id
                                                     <div class="controls">
                                                         <select v-model="editCompte.ville_id" class="span4" :readOnly="verroVille">
                                                             <option></option>
-                                                            <option v-for="item in VilleDynamiques(editCompte.pays_id)" 
+                                                            <option v-for="item in villesdyna(editCompte.pays_id)" 
                                                             :key="item.id" 
                                                             :value="item.id">
                                                                 {{item.libelle}}
@@ -1793,7 +1793,7 @@ type_acte_id
    ...mapGetters("SuiviImmobilisation", ["services"]),
 
     ...mapGetters('suivi_controle_budgetaire', ["categories_missions" ,"getMissionPersonnaliser", "missions", "historiques_missions","getHistoriqueMissionpersonnaliser"]),
-
+...mapGetters("parametreGenerauxAdministratif", ["getterformeJuridique","getterregimeImpositions","getterplan_pays"]),
 // historiqueMissionParActeur(){
 //    return acte_personnel_id =>{
 //        if(acte_personnel_id !=""){
@@ -1962,7 +1962,7 @@ afficheService() {
       };
     },
     
-    //  VilleDynamiques() {
+    //  villesdyna() {
     //  return id => {
     //     if (id != null && id != "") {
     //       return this.villes.filter(
@@ -2172,27 +2172,7 @@ afficherListeContratResilie(){
 
 
 
-
-         VilleDynamiques() {
-     return id => {
-        if (id != null && id != "") {
-          return this.villes.filter(
-            element => element.pays_id == id
-          );
-        }
-      };
-    },
-
-
-         commuDynamiques() {
-     return id => {
-        if (id != null && id != "") {
-          return this.communes.filter(
-            element => element.ville_id == id
-          );
-        }
-      };
-    },
+   
 
 
         banqueDynamiques() {
@@ -2381,6 +2361,7 @@ enregistreIdPersonnel(){
         }
       };
     },
+
       afficheLibelle() {
       return id => {
         if (id != null && id != "") {
@@ -2390,6 +2371,30 @@ enregistreIdPersonnel(){
         return qtereel.libelle;
       }
       return 0
+        }
+      };
+    },
+
+    villesdyna() {
+     return id => {
+        if (id != null && id != "") {
+          return this.getterplan_pays.filter(
+            element => element.parent == id
+          );
+        }
+      };
+    },
+    affichePays(){
+        return this.getterplan_pays.filter(items=>items.parent == null );
+    },
+
+
+         commuDynamiques() {
+     return id => {
+        if (id != null && id != "") {
+          return this.getterplan_pays.filter(
+            element => element.parent == id
+          );
         }
       };
     },

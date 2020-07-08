@@ -283,8 +283,8 @@ export function supprimerSection({ commit, dispatch}, id){
 // Action de structure programme
  // get all struture programme
  export  function getStructureProgramme({commit}){
-    queue.push(() => axios.get('/liste_Structure_Programme').then(tony => {
-         commit('GET_STRUCTURE_PROGRAMME', tony.data)
+    queue.push(() => axios.get('/liste_Structure_Programme').then(response => {
+         commit('GET_STRUCTURE_PROGRAMME', response.data)
      }).catch(error => console.log(error)))
  }
  // ajouter structure programme
@@ -891,7 +891,7 @@ export function modifierTaux({ commit }, exercice_budgetaire) {
 
 }
 
-
+  
 // supprimer exercice budgetaire
 
 export function supprimerTaux({ commit }, id) {
@@ -902,5 +902,378 @@ export function supprimerTaux({ commit }, id) {
             commit('SUPPRIMER_TAUX', id)
             // // dialog.loading(false) // stops the proceed button's loader
             axios.delete('/delete_taux/' + id).then(() => dialog.close())
+        })
+}
+
+
+
+
+
+export function getRegimeImpositions({ commit }) {
+    queue.push(() => axios.get('/liste_RegimeImposition').then((response) => {
+        commit('GET_REGIMEIMPOSITION', response.data)
+
+    }).catch(error => console.log(error)))
+}
+
+
+// ajouter titre
+export function ajouterRegimeImpositions({ commit }, objetAjoute) {
+    asyncLoading(axios.post('/ajouter_RegimeImposition', {
+       
+        libelle: objetAjoute.libelle
+    })).then(res => {
+        if (res.status == 201) {
+            commit('AJOUTER_REGIMEIMPOSITION', res.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué avec success !',
+                type: "success"
+            })
+
+        }
+    }).catch(error => console.log(error))
+}
+
+// supprimer titre
+export function supprimerRegimeImpositions({ commit }, id) {
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_REGIMEIMPOSITION', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/supprimer_RegimeImposition/' + id).then(() => dialog.close())
+        })
+}
+
+// modifier titre 
+export function modifierRegimeImpositions({ commit }, titre) {
+    asyncLoading(axios.put('/modifier_RegimeImposition/' + titre.id, {
+        code: titre.code,
+        libelle: titre.libelle
+    })).then(response => {
+        commit('MODIFIER_REGIMEIMPOSITION', response.data)
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué avec success !',
+            type: "success"
+        })
+    }).catch(error => console.log(error))
+
+}
+
+
+
+
+
+
+
+
+export function getFormeJuridiques({ commit }) {
+    queue.push(() => axios.get('/liste_Formejuridique').then((response) => {
+        commit('GET_FORMEJURIDIQUE', response.data)
+
+    }).catch(error => console.log(error)))
+}
+
+
+// ajouter titre
+export function ajouterFormeJuridiques({ commit }, objetAjoute) {
+    asyncLoading(axios.post('/ajouter_Formejuridique', {
+
+        libelle: objetAjoute.libelle
+    })).then(res => {
+        if (res.status == 201) {
+            commit('AJOUTER_FORMEJURIDIQUE', res.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué avec success !',
+                type: "success"
+            })
+
+        }
+    }).catch(error => console.log(error))
+}
+
+// supprimer titre
+export function supprimerFormeJuridiques({ commit }, id) {
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_FORMEJURIDIQUE', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/supprimer_Formejuridique/' + id).then(() => dialog.close())
+        })
+}
+
+// modifier titre 
+export function modifierFormeJuridiques({ commit }, titre) {
+    asyncLoading(axios.put('/modifier_Formejuridique/' + titre.id, {
+        code: titre.code,
+        libelle: titre.libelle
+    })).then(response => {
+        commit('MODIFIER_FORMEJURIDIQUE', response.data)
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué avec success !',
+            type: "success"
+        })
+    }).catch(error => console.log(error))
+
+}
+
+
+
+
+
+
+
+
+
+// Action de structure programme
+// get all struture programme
+export function getStructurePays({ commit }) {
+    queue.push(() => axios.get('/liste_Structure_Pays').then(response => {
+        commit('GET_STRUCTURE_PAYS', response.data)
+    }).catch(error => console.log(error)))
+}
+// ajouter structure Pays
+export function ajouterStructurePays({ commit }, elementAjout) {
+    asyncLoading(axios.post('/ajouter_Structure_Pays', {
+        niveau: elementAjout.niveau,
+        libelle: elementAjout.libelle
+    })).then(response => {
+        if (response.status == 201) {
+            commit('AJOUTER_STRUCTURE_PAYS', response.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué avec success !',
+                type: "success"
+            })
+        }
+    }).catch(error => console.log(error))
+}
+
+// modifier la structure Pays
+export function modifierStructurePays({ commit }, objetModifie) {
+    asyncLoading(axios.put('/modifier_Structure_Pays/' + objetModifie.id, {
+
+        niveau: objetModifie.niveau,
+        libelle: objetModifie.libelle
+    })).then(res => {
+        commit('MODIFIER_STRUCTURE_PAYS', res.data)
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué avec success !',
+            type: "success"
+        })
+    }).catch(error => console.log(error))
+
+}
+
+
+// souprime structure Pays
+export function supprimerStructurePays({ commit }, id) {
+
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_STRUCTURE_PAYS', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/supprimer_Structure_Pays/' + id).then(() => dialog.close())
+        })
+}
+
+
+
+
+// get all plan programme
+export function getPlanPays({ commit }) {
+    queue.push(() => axios.get('/liste_Plan_Pays').then(response => {
+        commit('GET_PLAN_PAYS', response.data)
+    }).catch(error => console.log(error)))
+
+
+}
+// ajouter plan Pays
+export function ajouterPlanPays({ commit, dispatch }, nouveauObjet) {
+    asyncLoading(axios.post('/ajouterPlan_Pays', nouveauObjet)).then(response => {
+        commit('AJOUTER_PLAN_PAYS', response.data)
+        dispatch('getPlanPays')
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué avec success !',
+            type: "success"
+        })
+    }).catch(error => console.log(error))
+}
+
+
+// modifier plan Pays
+export function modifierPlanPays({ commit, dispatch }, nouveauObjet) {
+    asyncLoading(axios.put('/modifier_Plan_Pays/' + nouveauObjet.id, {
+        code: nouveauObjet.code,
+        libelle: nouveauObjet.libelle,
+        structurepays_id: nouveauObjet.structurepays_id
+    })).then(resultat => {
+        commit('MODIFIER_PLAN_PAYS', resultat.data)
+        dispatch('getPlanPays')
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué avec success !',
+            type: "success"
+        })
+    })
+}
+// supprimer le plan Pays
+export function supprimerPlanPays({ commit, dispatch }, id) {
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_PLAN_PAYS', id)
+            dispatch('getPlanPays')
+
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/supprimer_Plan_Pays/' + id).then(() => dialog.close())
+        })
+}
+
+
+
+
+
+
+
+// Action de structure programme
+// get all struture programme
+export function getStructureOrganigrammeUa({ commit }) {
+    queue.push(() => axios.get('/liste_Structure_OrganigrammeUa').then(response => {
+        commit('GET_STRUCTURE_ORGANIGRAMME_UA', response.data)
+    }).catch(error => console.log(error)))
+}
+// ajouter structure Pays
+export function ajouterStructureOrganigrammeUa({ commit }, elementAjout) {
+    asyncLoading(axios.post('/ajouter_Structure_OrganigrammeUa', {
+        niveau: elementAjout.niveau,
+        libelle: elementAjout.libelle
+    })).then(response => {
+        if (response.status == 201) {
+            commit('AJOUTER_STRUCTURE_ORGANIGRAMME_UA', response.data)
+
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué avec success !',
+                type: "success"
+            })
+        }
+    }).catch(error => console.log(error))
+}
+
+// modifier la structure Pays
+export function modifierStructureOrganigrammeUa({ commit }, objetModifie) {
+    asyncLoading(axios.put('/modifier_Structure_OrganigrammeUa/' + objetModifie.id, {
+
+        niveau: objetModifie.niveau,
+        libelle: objetModifie.libelle
+    })).then(res => {
+        commit('MODIFIER_STRUCTURE_ORGANIGRAMME_UA', res.data)
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué avec success !',
+            type: "success"
+        })
+    }).catch(error => console.log(error))
+
+}
+
+
+// souprime structure Pays
+export function supprimerStructureOrganigrammeUa({ commit }, id) {
+
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_STRUCTURE_ORGANIGRAMME_UA', id)
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/supprimer_Structure_OrganigrammeUa/' + id).then(() => dialog.close())
+        })
+}
+
+
+
+
+// get all plan programme
+export function getPlanOrganigrammeUa({ commit }) {
+    queue.push(() => axios.get('/liste_Plan_OrganigrammeUa').then(response => {
+        commit('GET_PLAN_ORGANIGRAMME_UA', response.data)
+    }).catch(error => console.log(error)))
+
+
+}
+// ajouter plan Pays
+export function ajouterPlanOrganigrammeUa({ commit, dispatch }, nouveauObjet) {
+    asyncLoading(axios.post('/ajouterPlan_OrganigrammeUa', nouveauObjet)).then(response => {
+        commit('AJOUTER_PLAN_ORGANIGRAMME_UA', response.data)
+        dispatch('getPlanOrganigrammeUa')
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué avec success !',
+            type: "success"
+        })
+    }).catch(error => console.log(error))
+}
+
+
+// modifier plan Pays
+export function modifierPlanOrganigrammeUa({ commit, dispatch }, nouveauObjet) {
+    asyncLoading(axios.put('/modifier_Plan_OrganigrammeUa/' + nouveauObjet.id, {
+        code: nouveauObjet.code,
+        libelle: nouveauObjet.libelle,
+        structure_organigramme_ua_id: nouveauObjet.structure_organigramme_ua_id,
+        ua_id: nouveauObjet.ua_id,
+        serviceua_id: nouveauObjet.serviceua_id,
+        normeequipement: nouveauObjet.normeequipement,
+        historiqueequipement: nouveauObjet.historiqueequipement,
+        montantequipement: nouveauObjet.montantequipement
+    })).then(resultat => {
+        commit('MODIFIER_PLAN_ORGANIGRAMME_UA', resultat.data)
+        dispatch('getPlanOrganigrammeUa')
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué avec success !',
+            type: "success"
+        })
+    })
+}
+// supprimer le plan Pays
+export function supprimerPlanOrganigrammeUa({ commit, dispatch }, id) {
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_PLAN_ORGANIGRAMME_UA', id)
+            dispatch('getPlanOrganigrammeUa')
+            dispatch('getPlanOrganigrammeUa')
+            dispatch('getPlanOrganigrammeUa')
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/supprimer_Plan_OrganigrammeUa/' + id).then(() => dialog.close())
+
+           
         })
 }

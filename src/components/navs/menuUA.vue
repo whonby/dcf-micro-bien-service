@@ -65,6 +65,18 @@
             </router-link>
           </li>
            <li class="divider"></li>
+            <li>
+            <router-link :to="{name: 'structureOrganigrammeUa'}" tag="a">
+              <i class="icon-key"></i>Structure Organigramme 
+            </router-link>
+          </li>
+           <li class="divider"></li>
+            <li>
+            <router-link :to="{name: 'PlanOrganigrammeUa'}" tag="a">
+              <i class="icon-key"></i>Organigramme
+            </router-link>
+          </li>
+           <!-- <li class="divider"></li>
           <li>
             <router-link :to="{name: 'ServicePrincipal'}" tag="a">
               <i class="icon-key"></i>Service UA
@@ -75,7 +87,7 @@
             <router-link :to="{name: 'FonctionPrincipal'}" tag="a">
               <i class="icon-key"></i>Fonction UA
             </router-link>
-          </li>
+          </li> -->
             <li class="divider"></li>
         <!-- <li>
             <router-link :to="{name: 'banqueUa'}" tag="a">

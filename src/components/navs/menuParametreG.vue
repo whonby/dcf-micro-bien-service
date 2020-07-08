@@ -240,7 +240,24 @@
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
+
+ <li>
+            <router-link :to="{name: 'StructurePays'}" tag="a">
+              <i class="icon-bar-chart"></i>
+           Structure Pays
+            </router-link>
+          </li>
            <li>
+            <router-link :to="{name: 'PlanPays'}" tag="a">
+              <i class="icon-bar-chart"></i>
+           Plan Pays
+            </router-link>
+          </li>
+
+
+
+
+           <!-- <li>
             <router-link :to="{name: 'pays'}" tag="a">
               <i class="icon-bar-chart"></i>
            Pays
@@ -257,7 +274,7 @@
               <i class="icon-bar-chart"></i>
            Commune
             </router-link>
-          </li>
+          </li> -->
              <li>
             <router-link :to="{name: 'typeCandidat'}" tag="a">
               <i class="icon-bar-chart"></i>
@@ -381,7 +398,7 @@
            <li>
             <router-link :to="{name: 'agence'}" tag="a">
               <i class="icon-bar-chart"></i>
-           Agence de la banque
+           Agence bancaire
             </router-link>
           </li>
           <li class="divider"></li>
@@ -389,6 +406,20 @@
             <router-link :to="{name: 'SecteurActivite'}" tag="a">
               <i class="icon-user"></i>
             Secteur d'activité
+            </router-link>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'Formejuridique'}" tag="a">
+              <i class="icon-check"></i>
+            Forme juridique
+            </router-link>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <router-link :to="{name: 'RegimeImposition'}" tag="a">
+              <i class="icon-check"></i>
+            Regime imposition
             </router-link>
           </li>
           <li class="divider"></li>

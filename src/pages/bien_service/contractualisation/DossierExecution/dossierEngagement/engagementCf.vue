@@ -16,7 +16,7 @@
               <div class="control-group">
                             <label class="control-label">Décision CF </label>
                             <div class="controls">
-                              <select v-model="editEngagement.decision_cf" class="span">
+                              <select v-model="editEngagement.decisionengagement_cf" class="span">
                                 <option value=""></option>
                               <option value="1">Visé</option>
                               <option value="9">Visé avec Observation</option>
@@ -123,19 +123,19 @@
                     <td @dblclick="afficheModalModificationEngagement(Engage.id)">{{CodeSection(Engage.section_id) || 'Non renseigné'}}</td> 
                   <td @dblclick="afficheModalModificationEngagement(Engage.id)">{{formatageSomme(parseFloat(Engage.total_general)) || 0}}</td>
                   <td>
-                        <button v-if="Engage.decision_cf == 1"  class="btn  btn-success" @click="afficheModalDecision(Engage.id)" >                        
+                        <button v-if="Engage.decisionengagement_cf == 1"  class="btn  btn-success" @click="afficheModalDecision(Engage.id)" >                        
                      
                       <span    >Visé</span>
                       
                       </button>
-                       <button v-else-if="Engage.decision_cf == 2" class="btn  btn-warning" @click="afficheModalDecision(Engage.id)" >                        
+                       <button v-else-if="Engage.decisionengagement_cf == 2" class="btn  btn-warning" @click="afficheModalDecision(Engage.id)" >                        
                      
                       
                        <span  >Différé</span>
                       
                     
                       </button>
-                        <button v-else-if="Engage.decision_cf == 3" class="btn  btn-danger" @click="afficheModalDecision(Engage.id)" >                        
+                        <button v-else-if="Engage.decisionengagement_cf == 3" class="btn  btn-danger" @click="afficheModalDecision(Engage.id)" >                        
                      
                       
                        <span  >Réjeté</span>
@@ -157,12 +157,12 @@
                 class="btn btn-default " title="Detail Engagement">
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link> 
-                    <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterRealiteServiceFait(index)" title="Ajouter Réalité Service Fait">
+                    <!-- <button v-if="Engage.decisionengagement_cf == 1" class="btn " @click="afficherModalAjouterRealiteServiceFait(index)" title="Ajouter Réalité Service Fait">
                         <span>
                           <i class="icon icon-book"></i>
                         </span>
                       </button> -->
-                      <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Mandat">
+                      <!-- <button v-if="Engage.decisionengagement_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Mandat">
                         <span>
                           <i class="icon icon-book"></i>
                         </span>
@@ -220,7 +220,7 @@ search:""
    this.detail_Facture = this.getFacturePersonnaliser.find(
        idmarche => idmarche.id == this.$route.params.id
          )
-         this.editEngagement=this.engagements.find(item=>item.marche_id==this.$route.params.id)
+        //  this.editEngagement=this.engagements.find(item=>item.marche_id==this.$route.params.id)
   
   
   /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
@@ -1210,7 +1210,7 @@ val:0,
          ligne_id:"",
          
          date_reception_cf:"",
-          decision_cf:"",
+          decisionengagement_cf:"",
            numero_demande:"",
               numero_op:"",
               autre_engagement:"",

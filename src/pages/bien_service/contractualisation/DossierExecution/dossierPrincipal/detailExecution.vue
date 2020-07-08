@@ -1,4 +1,4 @@
-
+decision_cf
 <template>
   	<div>
 
@@ -120,8 +120,8 @@
                                 <li ><a data-toggle="tab" href="#tab15550" v-if="afficherTypeProcedure(detail_marche.id) == 2">Réalité service fait</a></li>
                                 <li ><a data-toggle="tab" href="#tab120120" v-if="afficherTypeProcedure(detail_marche.id) == 2 || afficherTypeProcedure(detail_marche.id) == 2">Liquidation</a></li>
                                 <li><a data-toggle="tab" href="#tab20" v-if="afficherTypeProcedure(detail_marche.id) == 2  || afficherTypeProcedure(detail_marche.id) == 1">Mandat</a></li>
-                               <li ><a data-toggle="tab" href="#tab45785" v-if=" afficheTabulationDecompte(detail_marche.id) == 8">Decompte</a></li>
-                                                              <li ><a data-toggle="tab" href="#Financement" v-if=" afficheTabulationDecompte(detail_marche.id) == 8">Financement</a></li>
+                               <li ><a data-toggle="tab" href="#tab45785" >Decompte</a></li>
+                                                              <li ><a data-toggle="tab" href="#Financement" >Financement</a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li> -->
                             </ul>
@@ -179,7 +179,7 @@
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#tab789654">Service Bénéficiaire</a></li>
-                                  <li class=""><a data-toggle="tab" href="#tab895632" v-if="afficheDecisionSBServiceRealite(detail_marche.id) == 1">Controlleur Financier</a></li>
+                                  <li class=""><a data-toggle="tab" href="#tab895632">Controlleur Financier</a></li>
                                                   
                             </ul>
                         </div>
@@ -197,8 +197,8 @@
                            <div class="widget-title">
                             <ul class="nav nav-tabs">
                                <li class="active"><a data-toggle="tab" href="#tab000235">Emetteur</a></li>
-                                  <li class=""><a data-toggle="tab" href="#tab89752241" v-if="afficheDecisionEmetteurLiquidation(detail_marche.id) == 1">Controlleur Financier</a></li>
-                                  <li class=""><a data-toggle="tab" href="#tab452123" v-if="afficheDecisionCFLiquidation(detail_marche.id) == 1 || afficheDecisionCFLiquidation(detail_marche.id) == 9">Ordonnateur</a></li>
+                                  <li class=""><a data-toggle="tab" href="#tab89752241" >Controlleur Financier</a></li>
+                                  <li class=""><a data-toggle="tab" href="#tab452123" >Ordonnateur</a></li>
                                                   
                             </ul>
                         </div>
@@ -396,46 +396,7 @@ created() {
 
 
 
-afficheTabulationServiceRealiteFait() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
 
-      if (qtereel) {
-        return qtereel.decision_cf;
-      }
-      return 0
-        }
-      };
-    },
-
-
-
-afficheTabulationLiquidation() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.realiteServiceFait.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.decision_controleur_financier;
-      }
-      return 0
-        }
-      };
-    },
-
-afficheTabulationMandat() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.liquidation.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.decision_ordonnateur;
-      }
-      return 0
-        }
-      };
-    },
 
 afficheTabulationDecompte() {
       return id => {
@@ -449,73 +410,12 @@ afficheTabulationDecompte() {
         }
       };
     },
-afficheDecisionSBServiceRealite() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.realiteServiceFait.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.decision_service_beneficiaire;
-      }
-      return 0
-        }
-      };
-    },
-
-
-afficheDecisionEmetteurLiquidation() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.liquidation.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.decision_emetteur;
-      }
-      return 0
-        }
-      };
-    },
-    afficheDecisionCFLiquidation() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.liquidation.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.decision_controleur_financier;
-      }
-      return 0
-        }
-      };
-    },
-afficheDecisionEmetteur() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.mandats.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.decision_emetteur;
-      }
-      return 0
-        }
-      };
-    },
 
 
 
 
 
-afficheTabulationEngagement() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.getMandatPersonnaliser.find(qtreel => qtreel.facture_id == id);
 
-      if (qtereel) {
-        return qtereel.decision_emetteur;
-      }
-      return 0
-        }
-      };
-    },
 afficherTypeFacture() {
       return id => {
         if (id != null && id != "") {
@@ -731,18 +631,6 @@ DisponibleBudgetaireApresLiquidation() {
 
 
 
- validationDeEngagement() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.engagements.find(qtreel => qtreel.marche_id == id);
-
-      if (qtereel) {
-        return qtereel.decision_cf;
-      }
-      return 0
-        }
-      };
-    },
  validationRealiteServiceFait() {
       return id => {
         if (id != null && id != "") {
@@ -767,18 +655,7 @@ afficheIdEngagementDansRealiteFait() {
         }
       };
     },
-validationLiquidation() {
-      return id => {
-        if (id != null && id != "") {
-           const qtereel = this.liquidation.find(qtreel => qtreel.marche_id == id);
 
-      if (qtereel) {
-        return qtereel.decision_ordonnateur;
-      }
-      return 0
-        }
-      };
-    },
 afficheNumerodemande_engage() {
       return id => {
         if (id != null && id != "") {

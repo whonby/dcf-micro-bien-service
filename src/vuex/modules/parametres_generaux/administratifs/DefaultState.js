@@ -15,8 +15,13 @@ const defaultstate = {
   chapitres:[],
   grandes_natures:[],
   type_Unite_admins: [],
-  taux: []
-
+  taux: [],
+  regimeImpositions: [],
+  formejuridiques:[],
+  strutures_pays: [],
+  plan_pays:[],
+structureOrganigrammeUa: [],
+planOrganigrammeUa:[]
 };
 
  export default defaultstate

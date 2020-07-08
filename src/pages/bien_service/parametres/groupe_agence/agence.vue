@@ -8,7 +8,7 @@
  <div id="exampleModal" class="modal hide gdeModalAgence">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter Agence</h3>
+                <h3>Ajouter Agence bancaire</h3>
               </div>
               <div class="modal-body">
                  <table class="table table-bordered table-striped">
@@ -63,13 +63,14 @@
                  <div class="control-group">
                   <label class="control-label">Pays</label>
                   <div class="controls">
-                    <select v-model="formData.pays_id">
-                      <option
-                        v-for="localgeo in pays"
-                        :key="localgeo.id"
-                        :value="localgeo.id"
-                      >{{localgeo.libelle}}</option>
-                    </select>
+                    
+                    <select v-model="formData.pays_id" class="span">
+                                                            <option></option>
+                                                            <option v-for="item in affichePays" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
                   </div>
                 </div>
               </td>
@@ -78,11 +79,10 @@
                   <label class="control-label">Ville</label>
                   <div class="controls">
                     <select v-model="formData.ville_id" :readOnly="verroPays">
-                      <option
-                        v-for="localgeo in VilleDynamiques(formData.pays_id)"
-                        :key="localgeo.id"
-                        :value="localgeo.id"
-                      >{{localgeo.libelle}}</option>
+                     <option></option>
+                                                            <option v-for="item in villeDynamiques(formData.pays_id)" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
                     </select>
                   </div>
                 </div>
@@ -139,7 +139,7 @@
  <div id="modifierModal" class="modal hide gdeModalAgence">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier Agence</h3>
+                <h3>Modifier Agence bancaire</h3>
               </div>
               <div class="modal-body">
               <table class="table table-bordered table-striped">
@@ -195,11 +195,10 @@
                   <label class="control-label">Pays</label>
                   <div class="controls">
                     <select v-model="editAgence.pays_id">
-                      <option
-                        v-for="localgeo in pays"
-                        :key="localgeo.id"
-                        :value="localgeo.id"
-                      >{{localgeo.libelle}}</option>
+                     <option></option>
+                                                            <option v-for="item in affichePays" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
                     </select>
                   </div>
                 </div>
@@ -209,11 +208,10 @@
                   <label class="control-label">Ville</label>
                   <div class="controls">
                     <select v-model="editAgence.ville_id" :readOnly="verroPays">
-                      <option
-                        v-for="localgeo in VilleDynamiques(editAgence.pays_id)"
-                        :key="localgeo.id"
-                        :value="localgeo.id"
-                      >{{localgeo.libelle}}</option>
+                      <option></option>
+                                                            <option v-for="item in villeDynamiques(formData.pays)" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
                     </select>
                   </div>
                 </div>
@@ -293,7 +291,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Agences banques</h5>
+              <h5>Listes des Agences bancaires</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
@@ -404,23 +402,27 @@ export default {
   computed: {
       ...mapGetters("bienService", ['villes','pays','communes']),
  ...mapGetters('gestionMarche', ['banques','agences']) ,
+   ...mapGetters("parametreGenerauxAdministratif", ["getterformeJuridique","getterregimeImpositions","getterplan_pays"]),
   
 
 
-  VilleDynamiques() {
+    villeDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.villes.filter(
-            element => element.pays_id == id
+          return this.getterplan_pays.filter(
+            element => element.parent == id
           );
         }
       };
     },
+    affichePays(){
+        return this.getterplan_pays.filter(items=>items.parent == null );
+    },
     CommuneDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.communes.filter(
-            element => element.ville_id == id
+          return this.getterplan_pays.filter(
+            element => element.parent == id
           );
         }
       };

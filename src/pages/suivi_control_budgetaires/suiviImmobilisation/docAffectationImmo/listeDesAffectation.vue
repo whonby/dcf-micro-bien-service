@@ -194,16 +194,20 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab456">Listes des services   <span class="badge badge-inverse">{{NombreDeService}}</span></a>
+                        <a data-toggle="tab" href="#tab456">Listes des services   </a>
+                        <!-- <span class="badge badge-inverse">{{NombreDeService}}</span> -->
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#tab46">Listes des services non Equipé  <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span></a>
+                        <a data-toggle="tab" href="#tab46">Listes des services non Equipé  </a>
+                        <!-- <span class="badge badge-important">{{afficheNombrePersonneNonEquipe}}</span> -->
                       </li>
                       <li class="">
-                        <a data-toggle="tab" href="#tab89">Equipements Non Couverts   <span class="badge badge-warning">{{affichenbreEquipementNonCouvert}}</span></a>
+                        <a data-toggle="tab" href="#tab89">Equipements Non Couverts   </a>
+                        <!-- <span class="badge badge-warning">{{affichenbreEquipementNonCouvert}}</span> -->
                       </li>
                        <li class="">
-                        <a data-toggle="tab" href="#tab63">Listes des services Equipé     <span class="badge badge-info">{{NombreafficheEquipementCouvertService}}</span></a>
+                        <a data-toggle="tab" href="#tab63">Listes des services Equipé     </a>
+                        <!-- <span class="badge badge-info">{{NombreafficheEquipementCouvertService}}</span> -->
                       </li>
                       <li class="">
                         <a data-toggle="tab" href="#tab6396">Taux equipement des services  </a>

@@ -35,10 +35,9 @@
                                                     <div class="controls">
                                                         <select v-model="formData.pays_id" class="span4" >
                                                             <option></option>
-                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
+                                                            <option v-for="item in affichePays" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
-
                                                         </select>
                                                     </div>
                                                 </div>
@@ -49,9 +48,7 @@
                                                     <div class="controls">
                                                         <select v-model="formData.ville_id" class="span4" :readOnly="verroVille">
                                                             <option></option>
-                                                            <option v-for="item in VilleDynamiques(formData.pays_id)" 
-                                                            :key="item.id" 
-                                                            :value="item.id">
+                                                            <option v-for="item in villeDynamiques(formData.pays_id)" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -65,12 +62,11 @@
                                                     <label class="control-label">Communes</label>
                                                     <div class="controls">
                                                         <select v-model="formData.commune_id" class="span4" :readOnly="verroCommune">
-                                                            <option></option>
-                                                            <option v-for="item in commuDynamiques(formData.ville_id)" 
-                                                            :key="item.id" 
-                                                            :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
+                                                            <option
+                        v-for="localgeo in CommuneDynamiques(formData.ville_id)"
+                        :key="localgeo.id"
+                        :value="localgeo.id"
+                      >{{localgeo.libelle}}</option>
 
                                                         </select>
                                                     </div>
@@ -275,7 +271,7 @@
                                                     <div class="controls">
                                                         <select v-model="editBanqueUa.pays_id" class="span4" >
                                                             <option></option>
-                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
+                                                            <option v-for="item in affichePays" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -288,10 +284,8 @@
                                                     <label class="control-label">Ville:</label>
                                                     <div class="controls">
                                                         <select v-model="editBanqueUa.ville_id" class="span4" :readOnly="verroVille">
-                                                            <option></option>
-                                                            <option v-for="item in VilleDynamiques(editBanqueUa.pays_id)" 
-                                                            :key="item.id" 
-                                                            :value="item.id">
+                                                           <option></option>
+                                                            <option v-for="item in villeDynamiques(editBanqueUa.pays_id)" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -306,7 +300,7 @@
                                                     <div class="controls">
                                                         <select v-model="editBanqueUa.commune_id" class="span4" :readOnly="verroCommune">
                                                             <option></option>
-                                                            <option v-for="item in commuDynamiques(editBanqueUa.ville_id)" 
+                                                            <option v-for="item in CommuneDynamiques(editBanqueUa.ville_id)" 
                                                             :key="item.id" 
                                                             :value="item.id">
                                                                 {{item.libelle}}
@@ -687,6 +681,7 @@ created() {
    
    
    ]),
+    ...mapGetters("parametreGenerauxAdministratif", ["getterformeJuridique","getterregimeImpositions","getterplan_pays"]),
     afficherUa() {
       return id => {
         if (id != null && id != "") {
@@ -760,24 +755,28 @@ afficherCodeRibeditBanqueUa(){
                   // })
               // },
 
-                 VilleDynamiques() {
+     villeDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.villes.filter(
-            element => element.pays_id == id
+          return this.getterplan_pays.filter(
+            element => element.parent == id
           );
         }
       };
     },
-            commuDynamiques() {
+    affichePays(){
+        return this.getterplan_pays.filter(items=>items.parent == null );
+    },
+    CommuneDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.communes.filter(
-            element => element.ville_id == id
+          return this.getterplan_pays.filter(
+            element => element.parent == id
           );
         }
       };
     },
+
                  banqueDynamiques() {
      return id => {
         if (id != null && id != "") {

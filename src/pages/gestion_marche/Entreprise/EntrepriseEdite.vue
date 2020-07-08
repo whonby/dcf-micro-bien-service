@@ -92,9 +92,9 @@
                                                  <div class="control-group">
                                                     <label class="control-label">Pays:</label>
                                                     <div class="controls">
-                                                       <select v-model="formData.pays" class="span11">
+                                                        <select v-model="formData.pays" class="span11">
                                                             <option></option>
-                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
+                                                            <option v-for="item in affichePays" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -116,7 +116,7 @@
                                                  <div class="control-group">
                                                     <label class="control-label">Ville:</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.ville" class="span11">
+                                                       <select v-model="formData.ville" class="span11">
                                                             <option></option>
                                                             <option v-for="item in villeDynamiques(formData.pays)" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -143,15 +143,10 @@
                                                     <label class="control-label">Form juridique:</label>
                                                     <div class="controls">
                                                         <select v-model="formData.forme_juridique" class="span11">
-                                                            <option></option>
-                                                            <option value="SNC">Société en Nom Collectif</option>
-                                                            <option value="SCS">Société en Commandite Simple</option>
-                                                            <option value="SP">Société en Participation</option>
-                                                            <option value="SARL">Société à Responsabilité Limitée </option>
-                                                            <option value="SRLU">Société à Responsabilité Limitée Unipersonnelle</option>
-                                                            <option value="SA">Société Anonyme</option>
-                                                            <option value="SAU">Société Anonyme Unipersonnelle </option>
-                                                            <option value="GIE">Groupement d’intérêt Economique</option>
+                                                           <option></option>
+                                                            <option v-for="item in getterformeJuridique" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -171,12 +166,17 @@
                                                     <label class="control-label">Regime d'imposition</label>
                                                     <div class="controls">
                                                         <select v-model="formData.regime_impossition" class="span11">
-                                                            <option></option>
-                                                            <option value="0">régime de l’impôt synthétique (IS) </option>
-                                                            <option value="1">régime du réel simplifié d’imposition (RSI)</option>
-                                                            <option value="2">régime du réel normal d’imposition (RNI)</option>
-                                                            
+                                                             <option></option>
+                                                            <option v-for="item in getterregimeImpositions" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
                                                         </select>
+                                                    </div>
+                                                </div>
+                                                 <div class="control-group">
+                                                    <label class="control-label">Carte d'identité de l'entreprise</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="" v-model="formData.carteidentite">
                                                     </div>
                                                 </div>
                                             </div>
@@ -342,6 +342,7 @@
 // methode pour maper notre guetter
             ...mapGetters('gestionMarche', ['entreprises',"secteur_activites"]),
             ...mapGetters("bienService", ['villes','pays']),
+              ...mapGetters("parametreGenerauxAdministratif", ["getterformeJuridique","getterregimeImpositions","getterplan_pays"]),
             titreFiltres() {
 
                 const searchTerm = this.search.toLowerCase();
@@ -356,14 +357,18 @@
                 )
 
             },
-             villeDynamiques() {
+                   villeDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.villes.filter(
-            element => element.pays_id == id
+          return this.getterplan_pays.filter(
+            element => element.parent == id
           );
         }
-      }}
+      };
+    },
+    affichePays(){
+        return this.getterplan_pays.filter(items=>items.parent == null );
+    }
              
         },
         methods: {
