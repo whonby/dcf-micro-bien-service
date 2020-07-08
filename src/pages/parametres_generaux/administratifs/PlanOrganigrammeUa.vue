@@ -714,14 +714,14 @@ this.$("#modalAjouterElementEnfant").modal('hide');
 
       // console.log(this.nouvelElementEnfant)
      else{
-        var nouvelObjet = {
+        var nouvelObjet2 = {
         ...this.nouvelElementEnfant,
       
       fonction_id:this.afficheIdFonctionLibelle(this.nouvelElementEnfant.libelle),
        serviceua_id:this.afficheidServiceLibelle(this.parentDossier.libelle),
        ua_id:this.afficherIdUaparDossierParent(this.parentDossier.libelle)
       };
-       this.ajouterPlanOrganigrammeUa(nouvelObjet)
+       this.ajouterPlanOrganigrammeUa(nouvelObjet2)
 this.$("#modalAjouterElementEnfant").modal('hide');
         this.nouvelElementEnfant = {
                 code: "",
