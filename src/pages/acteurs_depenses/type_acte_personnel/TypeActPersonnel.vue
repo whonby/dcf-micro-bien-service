@@ -21,6 +21,24 @@
             </gr-data-table>-->
             <div class="row-fluid">
                 <div class="span12">
+                                                <div>
+                       <download-excel
+                           class="btn btn-success pull-right"
+                           style="cursor:pointer;"
+                             :fields = "json_fields"
+                             title="Typeactepersonnels"
+                             name ="Typeactepersonnels"
+                             worksheet = "Typeacte_personnels"
+                           :data="type_acte_personnels">
+      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+                                </download-excel>
+         <div  align="right" style="cursor:pointer;">
+            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+        </div>
+                    </div> <br>
+
+
+
                     <div class="widget-box">
                         <div class="widget-title">
                 <div class="span6">
@@ -238,6 +256,31 @@
         methods: {
             // methode pour notre action
             ...mapActions('personnelUA', ['getTypeActPersonnel',"ajouterTypeActPersonnel","supprimerTypeActPersonnel","modifierTypeAct"]),
+
+
+
+
+
+
+                       genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.type_acte_personnels;
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTES DES TYPES DES ACTES PERSONNELS")
+  doc.autoTable(this.getColumns(),data)
+doc.save('type_acte_personnels.pdf')
+return 0
+},
+getColumns() {
+    return [
+      
+        
+        {title: "LIBELLE", dataKey: "libelle"},
+     
+        
+    ];
+},
 
             afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
