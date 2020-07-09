@@ -107,7 +107,7 @@ export default {
      "getAllBanqueUa",
      "getAllDecompteFacture"
     ]),
-            ...mapActions('personnelUA', ["getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
+            ...mapActions('personnelUA', ["getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
             "getClasses","getEchelons","getpaiementPersonnel","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite","getCategorieGrade",
@@ -282,7 +282,7 @@ this.getClassificationGradeFonction()
         this.getordrepaiement()
         this.getSalaire()
             /**Gestion des marche*/
-            
+            this.getPermissionConge()
       this.getTypeMarche()
       // this.s()
       this.getSecteurActivite()

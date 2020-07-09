@@ -24,7 +24,7 @@
                         <a data-toggle="tab" href="#tab00001">Tableau de bord<span class="badge badge-info"></span></a>
                       </li>
 
-                      <li class="">
+                      <li class="" v-if="admin() || dcf()">
                         <a data-toggle="tab" href="#tab00007">Importation ppm <span class="badge badge-important"></span></a>
                       </li>
                      <li class="">
@@ -202,11 +202,9 @@ created() {
 ...mapGetters('parametreGenerauxActivite',[ 'plans_activites','afficheNiveauAction','afficheNiveauActivite']),
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
-...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+...mapGetters("Utilisateurs", ["logoutUser","getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
-     admin:admin,
-     dcf:dcf,
-
+    
 
 
 afficherNombreMarcheHorsPPM() {
@@ -326,7 +324,8 @@ Codeeconomique() {
       "modifierpaiementPersonnel",
       "supprimerpaiementPersonnel"
     ]),
-
+ admin:admin,
+     dcf:dcf,
    
   }
 };

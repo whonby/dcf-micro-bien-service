@@ -570,8 +570,8 @@
             </div>
             
 
-            <div class="widget-content nopadding" v-if="uniteAdministratives.length" >
-              <budgetGeneralItemComponent v-for="equipement in uniteAdministratives"
+            <div class="widget-content nopadding" v-if="uniteAdmin.length" >
+              <budgetGeneralItemComponent v-for="equipement in uniteAdmin"
                :key="equipement.id"
                 :groupe="equipement"
                 @modification="afficherModalModifierUniteAdministrative" 

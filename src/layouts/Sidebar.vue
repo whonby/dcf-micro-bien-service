@@ -151,6 +151,7 @@ export default {
           name: ''
         })
       },
+      
  navigateToTransfert(){
         this.activate(6)
         this.$router.push({

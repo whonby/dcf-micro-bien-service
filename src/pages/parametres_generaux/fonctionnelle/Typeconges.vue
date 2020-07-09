@@ -27,7 +27,7 @@
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Typeconges</h5>
+            <h5>Type conges</h5>
              <div align="right">
         Rechercher: <input type="text" v-model="search"  placeholder="Searche...">
 
@@ -40,6 +40,7 @@
               <thead>
                 <tr>
                   <th>libelle</th>
+                  <th>Duree</th>
                    <th>Action</th>
                 </tr>     
               </thead>
@@ -50,6 +51,8 @@
                   <td @dblclick="afficherModalModifierType(index)">
                     {{type.libelle || 'Non renseignÃ©'}}</td>
                  
+                  <td @dblclick="afficherModalModifierType(index)">
+                    {{type.dure || 'Non renseignÃ©'}}</td>
                   <td>
 
 
@@ -95,11 +98,16 @@
                 <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
               </div>
             </div>
-              
+               <div class="control-group">
+              <label class="control-label">Durée</label>
+              <div class="controls">
+                <input type="text" v-model="formData.dure" class="span" placeholder="Saisir le dure" />
+              </div>
+            </div>
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button v-show=" formData.libelle.length" 
+             <button v-show=" formData.dure.length" 
              @click.prevent="ajouterTypeLocal" class="btn btn-primary"
               href="#">Valider</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
@@ -124,7 +132,12 @@
                 <input type="text" v-model="editType.libelle" class="span" placeholder="" />
               </div>
             </div>
-            
+             <div class="control-group">
+              <label class="control-label">Durée</label>
+              <div class="controls">
+                <input type="text" v-model="editType.dure" class="span" placeholder="Saisir le dure" />
+              </div>
+            </div>
             
           </form>              
           </div>
@@ -180,12 +193,13 @@ export default {
      
         formData : {
              libelle: "",
+             dure:""
             
         },
 
         editType: {
              libelle: "",
-        
+        dure:""
         },
       search:""
     };
@@ -230,6 +244,7 @@ return this.Typeconges.filter((item) => {
      this.ajouterTypeconges(this.formData)
         this.formData = {
              libelle: "",
+             dure:""
            
         }
     },
