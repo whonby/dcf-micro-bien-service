@@ -281,7 +281,7 @@ base64_encode(file) {
   // doc.autoTable({ html: this.natures_sections })
    var data = this.natures_sections;
    doc.setFontSize(8)
-    doc.text(75,10,"LISTES DES NATURES SECTIONS")
+    doc.text(75,10,"LISTE DES NATURES DES SECTIONS")
     // doc.addImage(imgData,'JPEG',15,40,180,160)
   doc.autoTable(this.getColumns(),data)
 doc.save('NatureSection.pdf')

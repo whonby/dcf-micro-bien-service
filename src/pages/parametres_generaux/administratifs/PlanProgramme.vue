@@ -361,7 +361,7 @@ return this.plans_programmes.filter((item) => {
   // doc.autoTable({ html: this.natures_sections })
    var data = this.plans_programmes;
     doc.setFontSize(8)
-    doc.text(75,10,"LISTES DES PLANS PROGRAMMES")
+    doc.text(75,10,"LISTE DES PLANS PROGRAMMES")
   doc.autoTable(this.getColumns(),data)
 doc.save('plan_programme.pdf')
 return 0

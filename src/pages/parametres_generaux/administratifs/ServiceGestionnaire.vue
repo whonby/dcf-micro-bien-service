@@ -378,7 +378,7 @@ return this.services_gestionnaires.filter((item) => {
   // doc.autoTable({ html: this.natures_sections })
    var data = this.services_gestionnaires;
     doc.setFontSize(8)
-    doc.text(75,10,"LISTES DES SERVICES GESTIONNAIRES")
+    doc.text(75,10,"LISTE DES SERVICES GESTIONNAIRES")
   doc.autoTable(this.getColumns(),data)
 doc.save('service_gestionnaire.pdf')
 return 0

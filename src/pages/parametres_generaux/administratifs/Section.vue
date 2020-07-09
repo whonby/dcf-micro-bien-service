@@ -283,7 +283,7 @@ export default {
   // doc.autoTable({ html: this.natures_sections })
    var data = this.sections;
     doc.setFontSize(8)
-    doc.text(75,10,"LISTES DES SECTIONS")
+    doc.text(75,10,"LISTE DES SECTIONS")
   doc.autoTable(this.getColumns(),data)
 doc.save('section.pdf')
 return 0

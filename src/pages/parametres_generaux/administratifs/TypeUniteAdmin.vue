@@ -263,7 +263,7 @@ genererEnPdf(){
   // doc.autoTable({ html: this.natures_sections })
    const data = this.types_financements;
     doc.setFontSize(8)
-  doc.text(75,10,"LISTES DES TYPES D'UNITE ADMINISTRATIFS")
+  doc.text(115,10,"LISTE DES TYPES DES UNITES ADMINISTRATIFS")
   doc.autoTable(this.getColspan(), data),
   //doc.find("Action").remove()
 doc.save('type_unité_adminitrative.pdf')

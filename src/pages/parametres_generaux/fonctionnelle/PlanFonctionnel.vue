@@ -29,7 +29,7 @@
                                      </div> 
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des plans fonctionnelles</h5>
+            <h5>Liste des plans fonctionnels</h5>
              <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -355,7 +355,7 @@ return this.plans_fonctionnels.filter((item) => {
   // doc.autoTable({ html: this.natures_sections })
    var data = this.plans_fonctionnels;
     doc.setFontSize(8)
-    doc.text(75,10,"LISTES DES PLANS FONCTIONNELS")
+    doc.text(75,10,"LISTE DES PLANS FONCTIONNELS")
   doc.autoTable(this.getColumns(),data)
 doc.save('plan_fonctionnel.pdf')
 return 0

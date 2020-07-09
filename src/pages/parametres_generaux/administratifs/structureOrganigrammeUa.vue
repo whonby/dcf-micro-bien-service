@@ -300,7 +300,8 @@ return this.getterstructuresOrganisationUa.filter((item) => {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.getterstructuresOrganisationUa;
-    doc.text(98,10,"Liste strucres pays")
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES STRUCTURES DES PAYS")
   doc.autoTable(this.getColumns(),data)
 doc.save('structure_pays.pdf')
 return 0
