@@ -1,4 +1,5 @@
-
+budgetConsommerTransfert
+budgetConsommerBienService
 <template>
   <div class="container-fluid">
       <!-- <h3 style="text-align:center">TABLEAU DE BORD : BIEN ET SERVICE</h3> -->
@@ -354,20 +355,16 @@ montantMarcheAvecAvenant() {
 budgetConsommerBienService() {
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.getMandatPersonnaliserVise.filter(item=>{
+            this.mandats.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(2);
+         return colect.filter(item9 => item9.marchetype==2 && item9.decision_cf==8).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general) , 0)
         }
-else{
- return this.getMandatPersonnaliserVise.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.total_general), 0).toFixed(2);
-
-}
-     
+        return this.mandats.filter(item4 => item4.marchetype==2 && item4.decision_cf==8).reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.total_general) , 0)
     },
 
 

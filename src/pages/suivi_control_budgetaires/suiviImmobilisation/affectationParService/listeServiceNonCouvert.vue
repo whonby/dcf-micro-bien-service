@@ -28,11 +28,11 @@ afficheQteACouvert
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" v-for=" (affectService) in listeDesEquipementNonCouvertDeUa"
+                    <tr class="odd gradeX" v-for="affectService in listeDesEquipementNonCouvertDeUa"
                         :key="affectService.id">
                         
                               <td >
-                            {{afficherUniteAdministrative(affectService.s_ua_id) || 'Non renseigné'}}</td>
+                            {{afficherUniteAdministrative(affectService.ua_id) || 'Non renseigné'}}</td>
                             <td >
                             {{afficherLibelleService(affectService.serviceua_id) || 'Non renseigné'}}</td>
                      
@@ -92,7 +92,7 @@ export default {
     data(){
         return{
       formData :{
-s_ua_id:"",
+ua_id:"",
 serviceua_id:"",
 
       },
@@ -130,12 +130,12 @@ search:""
             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
                 'types_financements']) ,
                 
-    ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
+    ...mapGetters("parametreGenerauxAdministratif", ["getterplanOrganisationUa","exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
        ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe', 
   'planActe']),
  ...mapGetters("uniteadministrative", [
       "directions",
-      "servicesua",
+      
       "fonctionsua",
       "getPersonnaliseBudgetGeneral",
       "montantBudgetGeneral",
@@ -184,7 +184,7 @@ search:""
    ]),
     //  afficheQteACouvert() {
      
-    //      return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
+    //      return this.getterplanOrganisationUa.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
 
      
       
@@ -192,7 +192,7 @@ search:""
     // },
     //  afficheQteNonCouvert() {
      
-    //      return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+    //      return this.getterplanOrganisationUa.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
 
      
       
@@ -200,7 +200,7 @@ search:""
     // },
   //  afficheMontantTotalEquipementNonCouvert() {
      
-  //        return this.servicesua.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+  //        return this.getterplanOrganisationUa.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
 
      
       
@@ -208,7 +208,7 @@ search:""
   //   },
     //   filtreServiceUniteAdministrative() {
     //   const st = this.search.toLowerCase();
-    //   return this.servicesua.filter(type => {
+    //   return this.getterplanOrganisationUa.filter(type => {
     //     return (
          
     //       type.afficherLibelleService(this.libelle).toLowerCase().includes(st)
@@ -217,22 +217,20 @@ search:""
     // },
     listeDesEquipementNonCouvertDeUa() {
       
-
-
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.servicesua.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+            this.getterplanOrganisationUa.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
                 
             })
-          return colect.filter(items=>items.normeequipement != 0)
+          return colect.filter(items=>items.normeequipement != 0 && items.normeequipement != null);
         }
 
-       return this.servicesua.filter(items=>items.normeequipement != 0)
+       return this.getterplanOrganisationUa.filter(items1=>items1.normeequipement != 0 && items1.normeequipement != null);
 
     },
     afficheQteACouvert() {
@@ -241,18 +239,18 @@ search:""
 
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.servicesua.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+            this.getterplanOrganisationUa.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
                 
             })
-          return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+          return colect.filter(items=>items.normeequipement != 0 && items.normeequipement != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
         }
 
-       return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+       return this.getterplanOrganisationUa.filter(items=>items.normeequipement != 0 && items.normeequipement != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.historiqueequipement), 0).toFixed(0);
 
     },
     afficheQteNonCouvert() {
@@ -261,18 +259,18 @@ search:""
 
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.servicesua.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+            this.getterplanOrganisationUa.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
                 
             })
-        return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+        return colect.filter(items=>items.normeequipement != 0 && items.normeequipement != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
         }
 
-       return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
+       return this.getterplanOrganisationUa.filter(items=>items.normeequipement != 0 && items.normeequipement != null).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.normeequipement), 0).toFixed(0);
 
     },
      afficheMontantTotalEquipementNonCouvert() {
@@ -281,22 +279,22 @@ search:""
 
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.servicesua.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+            this.getterplanOrganisationUa.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
-                item.normeequipement != 0
+                
             })
-        return colect.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+        return colect.filter(items=>items.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
         }
 
-       return this.servicesua.reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+       return this.getterplanOrganisationUa.filter(items1=>items1.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
 
     },
 //         equipementNonCouvert(){
-// return this.servicesua.filter(element => element.normeequipement != 0)
+// return this.getterplanOrganisationUa.filter(element => element.normeequipement != 0)
 // },
  
 

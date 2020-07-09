@@ -1105,7 +1105,7 @@ export function ajouterNormeImmob({ commit, dispatch }, nouveau) {
       fonction_id: nouveau.fonction_id,
       cout_moyen: nouveau.cout_moyen,
       total: nouveau.total,
-
+      libelle: nouveau.libelle
 
     }))
     .then(response => {
@@ -1137,7 +1137,7 @@ export function modifierNormeImmob({ commit, dispatch }, nouveau) {
       fonction_id: nouveau.fonction_id,
       cout_moyen: nouveau.cout_moyen,
       total: nouveau.total,
-
+      libelle: nouveau.libelle
 
     }))
     .then(response => {

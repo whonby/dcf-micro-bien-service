@@ -17,9 +17,9 @@
                                             class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
-                                              title="Liste structure programme "
-                                              name ="Liste structure programme"
-                                              worksheet = "structure programme"
+                                              title="Liste structure Organigramme Ua "
+                                              name ="Liste structure Organigramme Ua"
+                                              worksheet = "structure Organigramme Ua"
                                             :data="localisationsFiltre">
                   <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
@@ -30,7 +30,7 @@
                                      </div> 
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des structures programmes</h5>
+            <h5>Liste des structures Organigramme Ua</h5>
              <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -56,22 +56,22 @@
                 <tr>
                   <th>Niveau</th>
                   <th>Libelle</th>
-                   <th>Action</th>
+                   <th style="width:10%">Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(structure_programme, index) in 
-              partition (localisationsFiltre,size)[page]" :key="structure_programme.id">
+                <tr class="odd gradeX" v-for="(structure_pays, index) in 
+              partition (localisationsFiltre,size)[page]" :key="structure_pays.id">
                   <td @dblclick="afficherModalModifierStructure(index)">
-                    {{structure_programme.niveau || 'Non renseigné'}}</td>
+                    {{structure_pays.niveau || 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierStructure(index)">
-                    {{structure_programme.libelle || 'Non renseigné'}}</td>
+                    {{structure_pays.libelle || 'Non renseigné'}}</td>
                   <td>
 
 
 
               <div class="btn-group">
-              <button @click.prevent="supprimerStructureProgramme(structure_programme.id)"  class="btn btn-danger ">
+              <button @click.prevent="supprimerStructureOrganigrammeUa(structure_pays.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
@@ -84,7 +84,7 @@
             </div>
             <div v-else>
               <div align="center">
-              <h4 style="color:red;">Aucune structure programme trouvée</h4>
+              <h4 style="color:red;">Aucune structure Organigramme Ua trouvée</h4>
               </div>
           </div>
            </div>
@@ -109,29 +109,36 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter structure programme</h3>
+                <h3>Ajouter structure Organigramme Ua</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-            <div class="control-group">
+                        <table class="table table-bordered table-striped">
+                          <tr>
+                            <td>
+<div class="control-group">
               <label class="control-label">Niveau:</label>
               <div class="controls">
-                <input type="number" v-model="formData.niveau" class="span" placeholder="Saisir le niveau" />
+                <input type="number" v-model="formData.niveau" class="span5" placeholder="Saisir le niveau" />
               </div>
             </div>
-            <div class="control-group">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+<div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span5" placeholder="Saisir le libelle" />
               </div>
             </div>
-            
-
-          </form>              
+                            </td>
+                          </tr>
+                        </table>
+                             
           </div>
            <div class="modal-footer"> 
              <button v-show="formData.niveau.length && formData.libelle.length"
-              @click.prevent="ajouetProgrammeLocal" class="btn btn-primary"
+              @click.prevent="ajouetpaysLocal" class="btn btn-primary"
               >Valider</button>
               <a data-dismiss="modal" class="btn" >Fermer</a> </div>
             </div>
@@ -145,29 +152,37 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier structure programme</h3>
+                <h3>Modifier structure Organigramme Ua</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal">
-            <div class="control-group">
+                <table class="table table-bordered table-striped">
+           <tr>
+             <td>
+                <div class="control-group">
               <label class="control-label">Niveau:</label>
               <div class="controls">
-                <input type="number" v-model="editProgramme.niveau" class="span" placeholder="" />
+                <input type="number" v-model="editOrganigrammeUa.niveau" class="span5" placeholder="" />
               </div>
             </div>
-            <div class="control-group">
+             </td>
+           </tr>
+           <tr>
+             <td>
+                <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="editProgramme.libelle" class="span" placeholder="" />
+                <input type="text" v-model="editOrganigrammeUa.libelle" class="span5" placeholder="" />
               </div>
             </div>
+             </td>
+           </tr>
             
 
-          </form>              
+                </table>              
           </div>
            <div class="modal-footer"> 
              <button
-              @click.prevent="modifierModalStructureprogrammeLocal(editProgramme)" class="btn btn-primary"
+              @click.prevent="modifierModalStructurepaysLocal(editOrganigrammeUa)" class="btn btn-primary"
               >Modifier</button>
               <button data-dismiss="modal" class="btn" >Fermer</button> </div>
             </div>
@@ -179,11 +194,11 @@
 
 
 <button style="display:none;" v-shortkey.once="['ctrl', 'f']"
-  @shortkey="afficherModalAjouterStructureProgramme()">Open</button>
+  @shortkey="afficherModalajouterStructureOrganigrammeUa()">Open</button>
 
  <fab :actions="fabActions"
                 main-icon="apps"
-          @cache="afficherModalAjouterStructureProgramme"
+          @cache="afficherModalajouterStructureOrganigrammeUa"
         bg-color="green"
 
   ></fab>
@@ -228,7 +243,7 @@ export default {
              libelle: ""
         },
 
-        editProgramme: {
+        editOrganigrammeUa: {
             niveau: "",
              libelle: ""
         },
@@ -237,17 +252,17 @@ export default {
   },
  
   created() {
-   // this.getStructureProgramme()
+   // this.getStructurePays()
   },
   computed: {
 // methode pour maper le guetter
-   ...mapGetters('parametreGenerauxAdministratif', ['structures_programmes']) ,
+   ...mapGetters('parametreGenerauxAdministratif', ['getterstructuresOrganisationUa']) ,
    // methode pour trier le tableau
        localisationsFiltre(){
 
      const searchTerm = this.search.toLowerCase();
 
-return this.structures_programmes.filter((item) => {
+return this.getterstructuresOrganisationUa.filter((item) => {
   
     return item.libelle.toLowerCase().includes(searchTerm) 
     // || item.libelle.toLowerCase().includes(searchTerm) 
@@ -261,8 +276,8 @@ return this.structures_programmes.filter((item) => {
   },
   methods: {
     // methode pour l'action
-   ...mapActions('parametreGenerauxAdministratif', ['getStructureProgramme', 
-   'ajouterStructureProgramme','modifierStructureProgramme','supprimerStructureProgramme']), 
+   ...mapActions('parametreGenerauxAdministratif', ['getStructurePays', 
+   'ajouterStructureOrganigrammeUa','modifierStructureOrganigrammeUa','supprimerStructureOrganigrammeUa']), 
    
    
     //, pagination
@@ -284,11 +299,10 @@ return this.structures_programmes.filter((item) => {
          genererEnPdf(){
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
-   var data = this.structures_programmes;
-    doc.setFontSize(8)
-    doc.text(75,10,"LISTES DES STRUCTURES PROGRAMMES")
+   var data = this.getterstructuresOrganisationUa;
+    doc.text(98,10,"Liste strucres pays")
   doc.autoTable(this.getColumns(),data)
-doc.save('structure_programme.pdf')
+doc.save('structure_pays.pdf')
 return 0
 },
 getColumns() {
@@ -301,15 +315,15 @@ getColumns() {
     ];
 },
    
-    afficherModalAjouterStructureProgramme(){
+    afficherModalajouterStructureOrganigrammeUa(){
        this.$('#exampleModal').modal({
               backdrop: 'static',
               keyboard: false
              });
     },
    // fonction pour vider l'input
-    ajouetProgrammeLocal () {
-      this.ajouterStructureProgramme(this.formData)
+    ajouetpaysLocal () {
+      this.ajouterStructureOrganigrammeUa(this.formData)
 
         this.formData = {
                 niveau: "",
@@ -324,15 +338,15 @@ afficherModalModifierStructure(index){
          keyboard: false
         });
 
-        this.editProgramme = this.structures_programmes[index];
+        this.editOrganigrammeUa = this.getterstructuresOrganisationUa[index];
 
 
         
  },
- modifierModalStructureprogrammeLocal(){
-   this.modifierStructureProgramme(this.editProgramme)
+ modifierModalStructurepaysLocal(){
+   this.modifierStructureOrganigrammeUa(this.editOrganigrammeUa)
    this.$('#modifierModal').modal('hide');
-  //  this.editProgramme = {
+  //  this.editOrganigrammeUa = {
   //               niveau: "",
   //              libelle: ""
   //  }

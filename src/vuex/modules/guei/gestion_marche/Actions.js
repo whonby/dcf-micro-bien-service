@@ -5,6 +5,7 @@ import { asyncLoading } from 'vuejs-loading-plugin'
 /**
  *Action mode de passation
  */
+modifierBanque
 export async function  getModePassation({commit}) {
     queue.push(() =>  axios.get('/liste_mode_passation').then(response => {
         commit('GET_MODE_PASSATION', response.data)
@@ -258,19 +259,48 @@ export function ajouterBanque({ commit, dispatch}, elementAjout){
   // action pour modifier banque
   
   
-export function modifierBanque({ commit, dispatch}, element_modifie) {
-    asyncLoading( axios.put('/banques',element_modifie)).then(response => {
-         commit('MODIFIER_BANQUE', response.data)
-        dispatch('getBanque')
-        dispatch('getAgence')
+
+// export function modifierBanque({ commit, dispatch}, element_modifie) {
+//     asyncLoading( axios.put('/banques',element_modifie)).then(response => {
+//          commit('MODIFIER_BANQUE', response.data)
+//         dispatch('getBanque')
+//         dispatch('getAgence')
   
-         this.$app.$notify({
-           title: 'success ',
-           text: 'Modification effectué !',
-           type:"success"
-         })
-     }).catch(error => console.log(error))
-  }
+//          this.$app.$notify({
+//            title: 'success ',
+//            text: 'Modification effectué !',
+//            type:"success"
+//          })
+//      }).catch(error => console.log(error))
+//   }
+
+export function modifierBanque({ commit, dispatch }, formData) {
+    asyncLoading(axios
+        .put("/banques/" + formData.id, {
+            code_banque: formData.code_banque,
+            numero_banque: formData.numero_banque,
+            libelle: formData.libelle,
+            telephone: formData.telephone,
+            situation_geographique: formData.situation_geographique
+        }))
+        .then(response => {
+            commit("MODIFIER_BANQUE", response.data);
+            dispatch('getBanque')
+            dispatch('getAgence')
+            this.$app.$notify({
+                title: 'Success',
+                text: 'Modification Effectu� avec Succ�s!',
+                type: "success"
+            })
+        });
+}
+
+
+
+
+
+
+
   // supprimer banque
   
 export function supprimerBanque({ commit, dispatch}, id) {
@@ -445,7 +475,8 @@ export function modifierEntreprise({ commit }, formData) {
             nbre_travailleur_journalier: formData.nbre_travailleur_journalier,
             service_assiette_impot: formData.service_assiette_impot,
             adresse: formData.adresse,
-active:formData.active
+active:formData.active,
+            carteidentite: formData.carteidentite
         }))
         .then(response => {
             commit("MODIFIER_ENTREPRISE", response.data);

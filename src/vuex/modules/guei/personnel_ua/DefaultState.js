@@ -33,7 +33,8 @@ const defaultstate = {
     ordre_paiement:[],
 
     contrat_resilie:[],
-    salairesActeur:[]
+    salairesActeur:[],
+    permissionConge:[]
 
 };
 

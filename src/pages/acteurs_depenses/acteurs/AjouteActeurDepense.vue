@@ -233,11 +233,11 @@
                
                 <td>
                      <div class="control-group">
-                                                    <label class="control-label">Service</label>
+                                                    <label class="control-label">Service{{formData.service_id}}</label>
                                                     <div class="controls">
                                                         <select v-model="formData.service_id" :disabled="verrouilleService" class="span12">
                                                             <option></option>
-                                                            <option v-for="item in afficheService(formData.unite_administrative_id)" :key="item.id" :value="item.id">
+                                                            <option v-for="item in afficheService(formData.unite_administrative_id)" :key="item.id" :value="item.serviceua_id">
                                                                 {{afficheServicelibelle(item.serviceua_id)}}
                                                             </option>
 
@@ -247,7 +247,7 @@
                 </td>
                 <td>
                      <div class="control-group">
-                                                    <label class="control-label">Fonctions{{nombreDeFonction(formData.fonction_id)}}</label>
+                                                    <label class="control-label">Fonctions</label>
                                                     <div class="controls">
                                                         <select v-model="formData.fonction_id" :disabled="verrouilleFonction" class="span12">
                                                             <option></option>
@@ -514,7 +514,7 @@
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
             ...mapGetters("uniteadministrative", ["fonctionsua","servicesua","directions","uniteZones","uniteAdministratives","getPersonnaliseBudgetGeneralParPersonnel"]),
-            ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires"]),
+            ...mapGetters("parametreGenerauxAdministratif", ["groupeService","getterplanOrganisationUa","exercices_budgetaires"]),
             ...mapGetters("parametreGenerauxBudgetaire", ["plans_budgetaires"]),
  ...mapGetters("SuiviImmobilisation", [
       "services",
@@ -707,7 +707,7 @@ nombreDeFonction() {
  afficheService() {
       return id => {
         if (id != null && id != "") {
-          return this.servicesua.filter(element => element.s_ua_id == id);
+          return this.getterplanOrganisationUa.filter(element => element.ua_id == id && element.fonction_id != null);
         }
       };
     },
@@ -726,7 +726,7 @@ nombreDeFonction() {
 afficheFonction() {
       return id => {
         if (id != null && id != "") {
-          return this.fonctionsua.filter(element => element.service_id == id);
+          return this.getterplanOrganisationUa.filter(element => element.serviceua_id == id && element.fonction_id != null);
         }
       };
     },

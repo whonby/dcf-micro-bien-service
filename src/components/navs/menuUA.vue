@@ -65,6 +65,18 @@
             </router-link>
           </li>
            <li class="divider"></li>
+            <li>
+            <router-link :to="{name: 'structureOrganigrammeUa'}" tag="a">
+              <i class="icon-key"></i>Structure Organigramme 
+            </router-link>
+          </li>
+           <li class="divider"></li>
+            <li>
+            <router-link :to="{name: 'PlanOrganigrammeUa'}" tag="a">
+              <i class="icon-key"></i>Organigramme
+            </router-link>
+          </li>
+           <!-- <li class="divider"></li>
           <li>
             <router-link :to="{name: 'ServicePrincipal'}" tag="a">
               <i class="icon-key"></i>Service UA
@@ -75,7 +87,7 @@
             <router-link :to="{name: 'FonctionPrincipal'}" tag="a">
               <i class="icon-key"></i>Fonction UA
             </router-link>
-          </li>
+          </li> -->
             <li class="divider"></li>
         <!-- <li>
             <router-link :to="{name: 'banqueUa'}" tag="a">
@@ -115,164 +127,43 @@
               DETAIL DE BUDGET PAR UA new
             </router-link>
           </li> -->
-           <li>
+           <li v-if="admin() || dcf()">
             <router-link :to="{name: 'ImportBudget'}" tag="a">
               IMPORTATION DU BUDGET
             </router-link>
           </li>
-           <li>
+           <li v-if="admin() || dcf()">
             <router-link :to="{name: 'Synthesebudg'}" tag="a">
               SYNTHESE DU BUDGET
             </router-link>
           </li>
-<!-- <li class="dropdown" id="Affichebudget">
-        <a
-          title="OUT PUT"
-          href="#"
-          data-toggle="dropdown"
-          data-target="#Affichebudget"
-          class="dropdown-toggle"
-        >
-          <span class="text"> BUDGET</span>
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-           <li>
-            <router-link :to="{name: 'ImportBudget'}" tag="a">
-              <i class="icon-user"></i>
-            Importe le budget
-            </router-link>
-          </li>
-          <li>
-            <router-link :to="{name: 'grpeBudgetSection'}" tag="a">
-              <i class="icon-user"></i>
-              Budget General par section
-            </router-link>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'historiquebudgetGeneralComponent'}" tag="a">
-              <i class="icon-key"></i>Historique Budget General 
-            </router-link>
-          </li>
-        </ul>
-      </li> -->
 
-
-<li class="dropdown" id="rechbudget">
-        <a
-          title="OUT PUT"
-          href="#"
-          data-toggle="dropdown"
-          data-target="#rechbudget"
-          class="dropdown-toggle"
-        >
-          <span class="text">OUT PUT</span>
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <router-link :to="{name: 'budgetGeneralParUa'}" tag="a">
-              <i class="icon-user"></i>
-              Budget General
-            </router-link>
-          </li>
-<!-- <li>
-            <router-link :to="{name: 'grpeBudgetProg'}" tag="a">
-              <i class="icon-user"></i>
-              Budget par Programme
-            </router-link>
-          </li> -->
-          <li class="divider"></li>
-          <!-- <li>
-            <router-link :to="{name: ''}" tag="a">
-              <i class="icon-key"></i>Budget global
-            </router-link>
-          </li> -->
-        </ul>
-      </li>
-
-
-
-      <!--Source de financement-->
-      <!-- <li class="dropdown" id="menu-messages">
-        <a
-          title="Documentation"
-          href="#"
-          data-toggle="dropdown"
-          data-target="#menu-messages"
-          class="dropdown-toggle"
-        >
-          <span class="text">DOCUMENTATION </span>
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <router-link :to="{name: 'typetext'}" tag="a">
-              <i class="icon-user"></i>
-              Type de texte
-            </router-link>
-          </li>
-
-          <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'archivagedocument'}" tag="a">
-              <i class="icon-key"></i>Archivage Document
-            </router-link>
-          </li>
-        </ul>
-      </li> -->
-      <!--Paramètres programmes
-      -->
-<!-- 
-      <li class="dropdown" id="listeua">
-        <a
-          title="Out put"
-          href="#"
-          data-toggle="dropdown"
-          data-target="#listeua"
-          class="dropdown-toggle"
-        >
-          <span class="text">OUT PUT</span>
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <router-link :to="{name: 'listeuniteadministrative'}" tag="a">
-              <i class="icon-user"></i>
-              Listes Unites Administratives
-            </router-link>
-          </li>
-          <li>
-            <router-link :to="{name: 'listetypetexte'}" tag="a">
-              <i class="icon-user"></i>
-              Listes Types Textes
-            </router-link>
-          </li>
-
-          <li>
-            <router-link :to="{name: 'ordonnedocua'}" tag="a">
-              <i class="icon-user"></i>
-              Listes Archivages Documents
-            </router-link>
-          </li>
-        </ul>
-      </li>
-    -->
-
-      <!--- tableau de bord -->
-        <!-- <li>
-            <router-link :to="{name: 'tableaudebord'}" tag="a">
-              TABLEAU DE BOARD
-            </router-link>
-          </li>
-      -->
     </ul>
   </div>
 </template>
 
 <script>
+import { mapMutations, mapActions } from "vuex";
+import {admin,dcf} from "../../Repositories/Auth"
+export default {
+  mounted() {
+    // console.log(this.$store.state);
+  },
+
+  computed: {
+     
+  },
+
+  methods: {
+   
+      ...mapMutations('parametrageMenu', ['activate']),
+      ...mapActions('Utilisateurs', ['logoutUser']),
+    admin:admin,
+    dcf:dcf,
+ 
 
 
-export default {};
+  }
+};
 </script>
+

@@ -435,6 +435,125 @@ const ENCOURS_TAUX = (state, objetModifie) => {
 
 
 
+const GET_REGIMEIMPOSITION = (state, tableau_titres) => {
+    state.regimeImpositions = tableau_titres
+}
+
+// ajouter un titre 
+const AJOUTER_REGIMEIMPOSITION = (state, nouvel_objet) => {
+    state.regimeImpositions.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+
+}
+
+// supprimer titre
+const SUPPRIMER_REGIMEIMPOSITION = (state, id) => {
+    state.regimeImpositions = state.regimeImpositions.filter(titre => titre.id != id)
+}
+
+// modifier titre
+const MODIFIER_REGIMEIMPOSITION = (state, objetModifie) => {
+    state.regimeImpositions = state.regimeImpositions.map(titre => {
+
+        if (titre.id == objetModifie.id) {
+            titre = { ...objetModifie }
+        }
+        return titre
+    })
+}
+
+
+
+
+
+
+const GET_FORMEJURIDIQUE = (state, tableau_titres) => {
+    state.formejuridiques = tableau_titres
+}
+
+// ajouter un titre 
+const AJOUTER_FORMEJURIDIQUE = (state, nouvel_objet) => {
+    state.formejuridiques.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+
+}
+
+// supprimer titre
+const SUPPRIMER_FORMEJURIDIQUE = (state, id) => {
+    state.formejuridiques = state.formejuridiques.filter(titre => titre.id != id)
+}
+
+// modifier titre
+const MODIFIER_FORMEJURIDIQUE = (state, objetModifie) => {
+    state.formejuridiques = state.formejuridiques.map(titre => {
+
+        if (titre.id == objetModifie.id) {
+            titre = { ...objetModifie }
+        }
+        return titre
+    })
+}
+
+
+
+
+
+
+// get all structure programme
+const GET_STRUCTURE_PAYS = (state, tableau_structure_pays) => {
+
+    state.strutures_pays = tableau_structure_pays
+}
+// ajouter structure pays
+const AJOUTER_STRUCTURE_PAYS = (state, nouveau_element) => {
+
+    state.strutures_pays.unshift(nouveau_element)
+}
+
+
+// mopdifier structure pays
+const MODIFIER_STRUCTURE_PAYS = (state, elementModif) => {
+    state.strutures_pays = state.strutures_pays.map(structure_pays => {
+        if (structure_pays.id == elementModif.id) {
+            structure_pays = { ...elementModif }
+        }
+        return structure_pays
+    })
+}
+
+// supprimer structure pays
+const SUPPRIMER_STRUCTURE_PAYS = (state, id) => {
+    state.strutures_pays =
+        state.strutures_pays.filter(structure_pays => structure_pays.id != id)
+}
+
+
+// get all plan programme
+const GET_PLAN_PAYS = (state, tableau_plan_programme) => {
+
+    state.plan_pays = tableau_plan_programme
+}
+
+// ajouter plan programme
+const AJOUTER_PLAN_PAYS = (state, objetAjout) => {
+    state.plan_pays.unshift(objetAjout)
+}
+// modifier plan programme
+const MODIFIER_PLAN_PAYS = (state, nouveau_objet) => {
+    state.plan_pays = state.plan_pays.map(plan_programme => {
+        if (plan_programme.id == nouveau_objet.id) {
+            plan_programme = { ...nouveau_objet }
+        }
+        return plan_programme
+    })
+}
+
+// supprimer plan programme
+const SUPPRIMER_PLAN_PAYS = (state, id) => {
+    state.plan_pays = state.plan_pays.filter(plan_proramme =>
+        plan_proramme.id != id
+    )
+}
 
 
 
@@ -444,21 +563,95 @@ const ENCOURS_TAUX = (state, objetModifie) => {
 
 
 
+// get all structure programme
+export const GET_STRUCTURE_ORGANIGRAMME_UA = (state, tableau_structure_pays) => {
+
+    state.structureOrganigrammeUa = tableau_structure_pays
+}
+// ajouter structure pays
+export const AJOUTER_STRUCTURE_ORGANIGRAMME_UA = (state, nouveau_element) => {
+
+    state.structureOrganigrammeUa.unshift(nouveau_element)
+}
 
 
+// mopdifier structure pays
+export const MODIFIER_STRUCTURE_ORGANIGRAMME_UA = (state, elementModif) => {
+    state.structureOrganigrammeUa = state.structureOrganigrammeUa.map(structure_pays => {
+        if (structure_pays.id == elementModif.id) {
+            structure_pays = { ...elementModif }
+        }
+        return structure_pays
+    })
+}
 
+// supprimer structure pays
+export const SUPPRIMER_STRUCTURE_ORGANIGRAMME_UA = (state, id) => {
+    state.structureOrganigrammeUa =
+        state.structureOrganigrammeUa.filter(structure_pays => structure_pays.id != id)
+}
+
+
+// get all plan programme
+export const GET_PLAN_ORGANIGRAMME_UA = (state, tableau_plan_programme) => {
+
+    state.planOrganigrammeUa = tableau_plan_programme
+}
+
+// ajouter plan programme
+export const AJOUTER_PLAN_ORGANIGRAMME_UA = (state, objetAjout) => {
+    state.planOrganigrammeUa.unshift(objetAjout)
+}
+// modifier plan programme
+export const MODIFIER_PLAN_ORGANIGRAMME_UA = (state, nouveau_objet) => {
+    state.planOrganigrammeUa = state.planOrganigrammeUa.map(plan_programme => {
+        if (plan_programme.id == nouveau_objet.id) {
+            plan_programme = { ...nouveau_objet }
+        }
+        return plan_programme
+    })
+}
+
+// supprimer plan programme
+export const SUPPRIMER_PLAN_ORGANIGRAMME_UA = (state, id) => {
+    state.planOrganigrammeUa = state.planOrganigrammeUa.filter(plan_proramme =>
+        plan_proramme.id != id
+    )
+}
 
 export {
+    
+    GET_PLAN_PAYS,
+    AJOUTER_PLAN_PAYS,
+    MODIFIER_PLAN_PAYS,
+    SUPPRIMER_PLAN_PAYS,
+
+    GET_STRUCTURE_PAYS,
+    AJOUTER_STRUCTURE_PAYS,
+    MODIFIER_STRUCTURE_PAYS,
+    SUPPRIMER_STRUCTURE_PAYS,
+
+
+
+
+
+
+    GET_FORMEJURIDIQUE,
+    AJOUTER_FORMEJURIDIQUE,
+    MODIFIER_FORMEJURIDIQUE,
+    SUPPRIMER_FORMEJURIDIQUE,
+
+    GET_REGIMEIMPOSITION,
+    AJOUTER_REGIMEIMPOSITION,
+    MODIFIER_REGIMEIMPOSITION,
+    SUPPRIMER_REGIMEIMPOSITION,
+    
 
     GET_TAUX,
     AJOUTER_TAUX,
     MODIFIER_TAUX,
     SUPPRIMER_TAUX,
     ENCOURS_TAUX,
-
-
-
-
 
     // exportation titre
 GET_TITRES,

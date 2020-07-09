@@ -465,7 +465,7 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
-import {admin,dcf} from "../../../../src/Repositories/Auth"
+import {admin,dcf,noDCfNoAdmin} from "../../../../src/Repositories/Auth"
 export default {
   
   data() {
@@ -541,14 +541,14 @@ export default {
    ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements']),
    ...mapGetters('bienService', ['modepaiements']),
   ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
-    
+    noDCfNoAdmin:noDCfNoAdmin,
     admin:admin,
     dcf:dcf,
    
 
     afficherMissionParUAEnfonctiondesRole() {
        // const st = this.search.toLowerCase();
-        if (!this.admin || !this.dcf){
+        if (this.noDCfNoAdmin){
             let colect=[];
             this.uniteAdministratives.filter(item=>{
                 let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
@@ -558,22 +558,11 @@ export default {
                 }
             })
              return colect;
-            // console.log(colect)
-            // return colect.filter(items => {
-            //     return (
-            //         items.secti.nom_section.toLowerCase().includes(st) ||
-            //         items.libelle.toLowerCase().includes(st)
-            //     );
-            // });
+            
         }
 
-        return 0;
-        //return this.uniteAdministratives
-            // return (
-            //     items.secti.nom_section.toLowerCase().includes(st) ||
-            //     items.libelle.toLowerCase().includes(st)
-            // );
-        
+        return this.uniteAdministratives;
+       
 
     },
    

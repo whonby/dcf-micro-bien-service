@@ -817,6 +817,19 @@ DureeAffcheModifier() {
         }
       };
     },
+
+    afficheServiceLibelle() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.services.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
   },
 
 
@@ -866,6 +879,7 @@ ajouterTypeTexteLocal() {
        ...this.formData,
         cout_moyen: this.MontantMoyen,
       total: this.MontantTotal,
+      libelle:this.afficheServiceLibelle(this.formData.service_id)
      }
       this.ajouterNormeImmob(objetNorme);
 
@@ -889,6 +903,7 @@ ajouterTypeTexteLocal() {
        ...this.editTransfert,
         cout_moyen: this.MontantMoyenModifier,
       total: this.MontantTotalModifier,
+      libelle:this.afficheServiceLibelle(this.editTransfert.service_id)
      }
       this.modifierNormeImmob(objetNorme);
    

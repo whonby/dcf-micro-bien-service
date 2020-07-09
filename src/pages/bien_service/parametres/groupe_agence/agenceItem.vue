@@ -52,10 +52,12 @@ export default {
  computed: {
   ...mapGetters("bienService", ['villes','pays','communes']),
  ...mapGetters('gestionMarche', ['banques','agenceBanques']) ,
+ ...mapGetters("parametreGenerauxAdministratif", ["getterformeJuridique","getterregimeImpositions","getterplan_pays"]),
+  
   paysAfficher() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.pays.find(qtreel => qtreel.id == id);
+           const qtereel = this.getterplan_pays.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.libelle;
@@ -67,7 +69,7 @@ export default {
     villeAfficher() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.villes.find(qtreel => qtreel.id == id);
+           const qtereel = this.getterplan_pays.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.libelle;
@@ -91,7 +93,7 @@ export default {
      communeAfficher() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.communes.find(qtreel => qtreel.id == id);
+           const qtereel = this.getterplan_pays.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.libelle;

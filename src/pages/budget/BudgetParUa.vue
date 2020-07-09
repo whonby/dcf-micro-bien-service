@@ -196,7 +196,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(unite,index) in partition(uniteAdministratives,size)[page]" :key="unite.id">
+              <tr v-for="(unite,index) in partition(uniteAdmin,size)[page]" :key="unite.id">
                 
                 <td style="font-weight:bold;font-size:12px;text-align:center">{{unite.libelle}}</td>
                 <td
@@ -285,9 +285,9 @@
     <div class="pagination alternate">
               <ul>
                 <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
-                   <li  v-for="(titre, index) in partition(uniteAdministratives,size).length" :key="index" :class="{ active : active_el == index }">
+                   <li  v-for="(titre, index) in partition(uniteAdmin,size).length" :key="index" :class="{ active : active_el == index }">
                    <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
-                <li :class="{ disabled : page == partition(uniteAdministratives,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+                <li :class="{ disabled : page == partition(uniteAdmin,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
 
               </ul>
            </div>
@@ -298,8 +298,9 @@
 <script>
 
     import { mapGetters, mapActions } from "vuex";
-    import { formatageSomme } from "../../Repositories/Repository";
-    import {partition} from '../../../src/Repositories/Repository'
+    import { formatageSomme,partition } from "../../Repositories/Repository";
+    import {admin,dcf,noDCfNoAdmin} from "../../Repositories/Auth"
+    
     //import ProgressBar from "../component/ProgressBar"
     export default {
         name: 'budget',
@@ -361,10 +362,10 @@
                 "uniteAdministratives",
                 "getterBudgeCharge",
                 "budgetGeneral",
-                "afficheTransfertValider"
+                "transferts"
             ]),
             
-    ...mapGetters("bienService", ["getMandatPersonnaliserVise","getMandatPersonnaliserPersonnel"]),
+    ...mapGetters("bienService", ["getMandatPersonnaliserVise","getMandatPersonnaliserPersonnel","mandats"]),
 
        ...mapGetters("parametreGenerauxAdministratif", [
                 "sections",
@@ -375,8 +376,34 @@
                 "afficheNiveauPlanProg",
                 "exercices_budgetaires"
             ]),
+ admin:admin,
+      dcf:dcf,
+      noDCfNoAdmin:noDCfNoAdmin,
+ ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
 
+uniteAdmin() {
+      
+
+
+        if (this.noDCfNoAdmin){
+            let colect=[];
+            this.uniteAdministratives.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+                
+            })
+            return colect
+        }
+
+return this.uniteAdministratives
+
+       
+
+    },
  filtre_type_teste() {
       return id2 => {
         if (id2 != null && id2 != "") {
@@ -437,35 +464,138 @@
             // },
 
             // afficher les totaux du budget pour le module personnel
-              afficherTotalBudgetModulePersonnel(){
-               return this.budgetGeneral.filter(idGrand => idGrand.gdenature_id==2 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
+              // afficherTotalBudgetModulePersonnel(){
+              //  return this.budgetGeneral.filter(idGrand => idGrand.gdenature_id==2 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
 
-              },
+              // },
+afficherTotalBudgetModulePersonnel() {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.budgetGeneral.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(idGrand => idGrand.gdenature_id==2 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
+        }
+        return this.budgetGeneral.filter(idGrand1 => idGrand1.gdenature_id==2 && idGrand1.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
 
+    },
               
             // afficher les totaux du budget pour le module bien && service
-              afficherTotalBudgetModuleBienService(){
-               return this.budgetGeneral.filter(idGrand => idGrand.gdenature_id==5 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
+              // afficherTotalBudgetModuleBienService(){
+              //  return this.budgetGeneral.filter(idGrand => idGrand.gdenature_id==5 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
 
-              },
+              // },
+afficherTotalBudgetModuleBienService() {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.budgetGeneral.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(idGrand => idGrand.gdenature_id==5 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
+        }
+        return this.budgetGeneral.filter(idGrand => idGrand.gdenature_id==5 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
 
+    },
                  // afficher les totaux du budget pour le module investissement
-              afficherTotalBudgetModuleInvestissement(){
-               return this.budgetGeneral.filter(idGrand => idGrand.gdenature_id==7 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
+              // afficherTotalBudgetModuleInvestissement(){
+              //  return this.budgetGeneral.filter(idGrand => idGrand.gdenature_id==7 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
 
-              },
+              // },
 
+afficherTotalBudgetModuleInvestissement() {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.budgetGeneral.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(idGrand => idGrand.gdenature_id==7 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
+        }
+        return this.budgetGeneral.filter(idGrand => idGrand.gdenature_id==7 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
 
+    },
                    // afficher les totaux du budget pour le module de transfert
-              afficherTotalBudgetModuleTransfert(){
-               return this.budgetGeneral.filter(idGrand =>idGrand.gdenature_id==6 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
+              // afficherTotalBudgetModuleTransfert(){
+              //  return this.budgetGeneral.filter(idGrand =>idGrand.gdenature_id==6 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
 
-              },
+              // },
+afficherTotalBudgetModuleTransfert() {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.budgetGeneral.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(idGrand => idGrand.gdenature_id==6 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
+        }
+        return this.budgetGeneral.filter(idGrand => idGrand.gdenature_id==6 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
+
+    },
 
 
-
-              budgetPersonnel() {
-      return id => {
+    //           budgetPersonnel() {
+    //   return id => {
+    //     if (id != "") {
+    //       return this.budgetGeneral
+    //         .filter(element => element.ua_id == id  && element.gdenature_id==2 && element.actived ==1) 
+    //         .reduce(
+    //           (prec, cur) =>
+    //             parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+    //           0
+    //         )
+    //         .toFixed(0);
+    //     }
+    //   };
+    // },
+budgetPersonnel() {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.budgetGeneral.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return id => {
+        if (id != "") {
+          return colect
+            .filter(element => element.ua_id == id  && element.gdenature_id==2 && element.actived ==1) 
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+           
+        }
+         return id => {
         if (id != "") {
           return this.budgetGeneral
             .filter(element => element.ua_id == id  && element.gdenature_id==2 && element.actived ==1) 
@@ -477,8 +607,8 @@
             .toFixed(0);
         }
       };
+       
     },
-
 
             // budgetPersonnel(){
             //     return unite_id=>{
@@ -502,8 +632,48 @@
             // },
 
 
+    // budgetInverstisement() {
+    //   return id => {
+    //     if (id != "") {
+    //       return this.budgetGeneral
+    //         .filter(element => element.ua_id == id  && element.gdenature_id==7 && element.actived ==1) 
+    //         .reduce(
+    //           (prec, cur) =>
+    //             parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+    //           0
+    //         )
+    //         .toFixed(0);
+    //     }
+    //   };
+    // },
+
     budgetInverstisement() {
-      return id => {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.budgetGeneral.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+             return id => {
+        if (id != "") {
+          return colect
+            .filter(element => element.ua_id == id  && element.gdenature_id==7 && element.actived ==1) 
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+            
+        }
+          return id => {
         if (id != "") {
           return this.budgetGeneral
             .filter(element => element.ua_id == id  && element.gdenature_id==7 && element.actived ==1) 
@@ -515,6 +685,8 @@
             .toFixed(0);
         }
       };
+        // return this.budgetGeneral.filter(idGrand => idGrand.gdenature_id==2 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
+
     },
             
             // budgetInverstisement(){
@@ -539,8 +711,47 @@
             //     }
             // },
 
-            budgetTranfert() {
-      return id => {
+    //         budgetTranfert() {
+    //   return id => {
+    //     if (id != "") {
+    //       return this.budgetGeneral
+    //         .filter(element => element.ua_id == id  && element.gdenature_id==6 && element.actived ==1) 
+    //         .reduce(
+    //           (prec, cur) =>
+    //             parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+    //           0
+    //         )
+    //         .toFixed(0);
+    //     }
+    //   };
+    // },
+     budgetTranfert() {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.budgetGeneral.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+             return id => {
+        if (id != "") {
+          return colect
+            .filter(element => element.ua_id == id  && element.gdenature_id==6 && element.actived ==1) 
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+            
+        }
+          return id => {
         if (id != "") {
           return this.budgetGeneral
             .filter(element => element.ua_id == id  && element.gdenature_id==6 && element.actived ==1) 
@@ -552,6 +763,8 @@
             .toFixed(0);
         }
       };
+        // return this.budgetGeneral.filter(idGrand => idGrand.gdenature_id==2 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
+
     },
             // budgetTranfert(){
             //     return unite_id=>{
@@ -576,10 +789,35 @@
 
  
             
-    budgetConsommerTransfert() {
-      return id => {
+    // budgetConsommerTransfert() {
+    //   return id => {
+    //     if (id != "") {
+    //       return this.transferts
+    //         .filter(element => element.ua_id == id)
+    //         .reduce(
+    //           (prec, cur) =>
+    //             parseFloat(prec) + parseFloat(cur.montant_total_contrat),
+    //           0
+    //         )
+    //         .toFixed(0);
+    //     }
+    //   };
+    // },
+budgetConsommerTransfert() {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.transferts.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+   return id => {
         if (id != "") {
-          return this.afficheTransfertValider
+          return colect
             .filter(element => element.ua_id == id)
             .reduce(
               (prec, cur) =>
@@ -589,102 +827,391 @@
             .toFixed(0);
         }
       };
-    },
-
-
- budgetConsommerBienService() {
-      return id => {
+            
+        }
+        return id => {
         if (id != "") {
-          return this.getMandatPersonnaliserVise
-            .filter(element => element.ua_id == id && element.typemarche == 2)
+          return this.transferts
+            .filter(element => element.ua_id == id)
             .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.montant_total_contrat),
               0
             )
             .toFixed(0);
         }
       };
+        // return this.budgetGeneral.filter(idGrand => idGrand.gdenature_id==2 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
+
     },
 
+//  budgetConsommerBienService() {
+//       return id => {
+//         if (id != "") {
+//           return this.getMandatPersonnaliserVise
+//             .filter(element => element.ua_id == id && element.typemarche == 2)
+//             .reduce(
+//               (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+//               0
+//             )
+//             .toFixed(0);
+//         }
+//       };
+//     },
+
+budgetConsommerBienService() {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.mandats.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+   return id => {
+        if (id != "") {
+          return colect
+            .filter(element => element.ua_id == id && element.typemarche == 2 && element.decision_cf == 8)
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.total_general),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+            
+        }
+        return id => {
+        if (id != "") {
+          return this.mandats
+            .filter(element => element.ua_id == id && element.typemarche == 2 && element.decision_cf == 8)
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.total_general),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+        // return this.budgetGeneral.filter(idGrand => idGrand.gdenature_id==2 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
+
+    },
+
+
+
+
+
+    // budgetConsommerInvestissement() {
+    //   return id => {
+    //     if (id != "") {
+    //       return this.getMandatPersonnaliserVise
+    //         .filter(element => element.ua_id == id && element.typemarche == 1)
+    //         .reduce(
+    //           (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+    //           0
+    //         )
+    //         .toFixed(0);
+    //     }
+    //   };
+    // },
     budgetConsommerInvestissement() {
-      return id => {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.mandats.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+   return id => {
         if (id != "") {
-          return this.getMandatPersonnaliserVise
-            .filter(element => element.ua_id == id && element.typemarche == 1)
+          return colect
+            .filter(element => element.ua_id == id && element.typemarche == 1 && element.decision_cf == 8)
             .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.total_general),
               0
             )
             .toFixed(0);
         }
       };
-    },
- budgetConsommerPersonnelle() {
-      return id => {
+            
+        }
+        return id => {
         if (id != "") {
-          return this.getMandatPersonnaliserPersonnel
+          return this.mandats
+            .filter(element => element.ua_id == id && element.typemarche == 1 && element.decision_cf == 8)
+            .reduce(
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.total_general),
+              0
+            )
+            .toFixed(0);
+        }
+      };
+        // return this.budgetGeneral.filter(idGrand => idGrand.gdenature_id==2 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
+
+    },
+//  budgetConsommerPersonnelle() {
+//       return id => {
+//         if (id != "") {
+//           return this.getMandatPersonnaliserPersonnel
+//             .filter(element => element.ua_id == id && element.marchetype == "perso")
+//             .reduce(
+//               (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+//               0
+//             )
+//             .toFixed(0);
+//         }
+//       };
+//     },
+     budgetConsommerPersonnelle() {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.mandats.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+   return id => {
+        if (id != "") {
+          return colect
             .filter(element => element.ua_id == id && element.marchetype == "perso")
             .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.total_general),
               0
             )
             .toFixed(0);
         }
       };
-    },
-  budgetConsommerPersonnelGlobal() {
-      
-          return this.getMandatPersonnaliserPersonnel
-            .filter(element => element.marchetype == "perso")
+            
+        }
+        return id => {
+        if (id != "") {
+          return this.mandats
+            .filter(element => element.ua_id == id && element.marchetype == "perso")
             .reduce(
-              (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+              (prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.total_general),
               0
             )
             .toFixed(0);
+        }
+      };
+        // return this.budgetGeneral.filter(idGrand => idGrand.gdenature_id==2 && idGrand.actived==1).reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.Dotation_Initiale), 0)
+
+    },
+  // budgetConsommerPersonnelGlobal() {
+      
+  //         return this.getMandatPersonnaliserPersonnel
+  //           .filter(element => element.marchetype == "perso")
+  //           .reduce(
+  //             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+  //             0
+  //           )
+  //           .toFixed(0);
         
       
-    },
+  //   },
 //
-
-   budgetConsommerInvestissementGlobal() {
-      
-          return this.getMandatPersonnaliserVise
-            .filter(element => element.typemarche == 1)
-            .reduce(
+ budgetConsommerPersonnelGlobal() {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.mandats.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+  return colect.filter(element => element.marchetype == "perso").reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
               0
             )
             .toFixed(0);
+            
+        }
+       
+        return this.mandats.filter(element => element.marchetype == "perso").reduce((prec,cur)=> parseFloat(prec)+ parseFloat(cur.total_general), 0)
+
+    },
+  //  budgetConsommerInvestissementGlobal() {
+      
+  //         return this.getMandatPersonnaliserVise
+  //           .filter(element => element.typemarche == 1)
+  //           .reduce(
+  //             (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+  //             0
+  //           )
+  //           .toFixed(0);
         
       
-    },
-    
-
-     budgetConsommerBienServiceGlobal() {
-          return this.getMandatPersonnaliserVise
-            .filter(element => element.typemarche == 2)
+  //   },
+    budgetConsommerInvestissementGlobal() {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.mandats.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+  return colect.filter(element => element.typemarche == 1 && element.decision_cf == 8)
             .reduce(
               (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
               0
             )
             .toFixed(0);
-      
-    },
-
-             
-    budgetConsommerTransfertGlobal() {
-    
-          return this.afficheTransfertValider.reduce( (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat),
+            
+        }
+       
+      return this.mandats.filter(element => element.typemarche == 1 && element.decision_cf == 8)
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
               0
             )
             .toFixed(0);
-      
     },
 
-    MontantTotalPargdeNature() {
-      return id => {
+    //  budgetConsommerBienServiceGlobal() {
+    //       return this.getMandatPersonnaliserVise
+    //         .filter(element => element.typemarche == 2)
+    //         .reduce(
+    //           (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+    //           0
+    //         )
+    //         .toFixed(0);
+      
+    // },
+  budgetConsommerBienServiceGlobal() {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.mandats.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+  return colect.filter(element => element.typemarche == 2 && element.decision_cf == 8)
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+              0
+            )
+            .toFixed(0);
+            
+        }
+       
+      return this.mandats.filter(element => element.typemarche == 2 && element.decision_cf == 8)
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.total_general),
+              0
+            )
+            .toFixed(0);
+    },
+             
+    // budgetConsommerTransfertGlobal() {
+    
+    //       return this.transferts.reduce( (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat),
+    //           0
+    //         )
+    //         .toFixed(0);
+      
+    // },
+    budgetConsommerTransfertGlobal() {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.transferts.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+  return colect
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat),
+              0
+            )
+            .toFixed(0);
+            
+        }
+       
+      return this.transferts
+            .reduce(
+              (prec, cur) => parseFloat(prec) + parseFloat(cur.montant_total_contrat),
+              0
+            )
+            .toFixed(0);
+    },
+
+//     MontantTotalPargdeNature() {
+//       return id => {
+//         if (id != null && id != "") {
+//  var montant = this.affichebudgetActive.filter(idUa => idUa.ua_id == id).reduce((prec, cur) =>
+//                 parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+//               0
+//             )
+//             .toFixed(0);
+//           if (isNaN(montant)) return null;
+//           return montant;
+//         }
+//         return 0;
+//       };
+//     },
+
+MontantTotalPargdeNature() {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.budgetGeneral.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+  
+                return id => {
         if (id != null && id != "") {
- var montant = this.affichebudgetActive.filter(idUa => idUa.ua_id == id).reduce((prec, cur) =>
+ var montant = colect.filter(idUa => idUa.ua_id == id && idUa.actived == 1).reduce((prec, cur) =>
+                parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
+              0
+            )
+            .toFixed(0);
+          if (isNaN(montant)) return null;
+          return montant;
+        }
+        return 0;
+      };
+            
+        }
+       
+               return id => {
+        if (id != null && id != "") {
+ var montant = this.budgetGeneral.filter(idUa => idUa.ua_id == id && idUa.actived == 1).reduce((prec, cur) =>
                 parseFloat(prec) + parseFloat(cur.Dotation_Initiale),
               0
             )
@@ -695,8 +1222,6 @@
         return 0;
       };
     },
-
-
 
     affichebudgetActive() {
       var activeBudget = this.budgetGeneral.filter(

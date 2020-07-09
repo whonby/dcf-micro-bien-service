@@ -82,9 +82,9 @@ export default {
 
     ...mapActions('parametreGenerauxAdministratif',
      ['getExercicesBudgetaires', 'getTitres', 'getTaux',
-    'getNatureSection', 'getSection', 'getStructureProgramme', 'getPlanProgramme', 
+    'getNatureSection', 'getSection', 'getStructureProgramme', 'getPlanProgramme', 'getStructurePays', 'getPlanPays','getPlanOrganigrammeUa','getStructureOrganigrammeUa', 
     'getStructureAdministrative', 'getServiceGestionnaire', 'getStructureGeographique',
-    'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature"]),
+    'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature","getFormeJuridiques","getRegimeImpositions"]),
 
  ...mapActions("uniteadministrative", [
       // "getAllTypeTextes",
@@ -107,7 +107,7 @@ export default {
      "getAllBanqueUa",
      "getAllDecompteFacture"
     ]),
-            ...mapActions('personnelUA', ["getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
+            ...mapActions('personnelUA', ["getPermissionConge","getSalaire","getordrepaiement",'getTypeSalarie',"getEchelons",
             "getTypeContrat","getNiveauEtude","getFonctions","getTypeActPersonnel",
             "getClasses","getEchelons","getpaiementPersonnel","getActeur","getGrades","getNbrActeurAcrediteTaux",
             "getActPersonnel","getConges","allActeurDepense","getListeSalaireActuelAll","getActeurFinContratAndActivite","getCategorieGrade",
@@ -166,8 +166,8 @@ export default {
     let user=JSON.parse (objet)
 
     this.getAffectation()
-
-
+this.getFormeJuridiques()
+this.getRegimeImpositions()
     this.getRoles()
     this.getUtilisateurs()
     this.getPlanPassationMarche()
@@ -182,6 +182,8 @@ export default {
    this.getSection()
    this.getStructureProgramme()
    this.getPlanProgramme()
+    this.getStructurePays()
+   this.getPlanPays()
    this.getStructureAdministrative()
    this.getServiceGestionnaire()
    this.getStructureGeographique()
@@ -246,6 +248,8 @@ this.getTypeAppel()
      this.getOrganigrammeUa()
      this.getAllBanqueUa()
      this.getAllDecompteFacture()
+       this.getStructureOrganigrammeUa()
+   this.getPlanOrganigrammeUa()
     // this.getAllArchivageDocument();
 // this.getAllDirection()
 this.getAllServiceua()
@@ -278,7 +282,7 @@ this.getClassificationGradeFonction()
         this.getordrepaiement()
         this.getSalaire()
             /**Gestion des marche*/
-            
+            this.getPermissionConge()
       this.getTypeMarche()
       // this.s()
       this.getSecteurActivite()

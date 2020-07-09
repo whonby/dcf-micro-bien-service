@@ -25,7 +25,7 @@
                         :key="affectService.id">
                         
                               <td >
-                            {{afficherUniteAdministrative(affectService.s_ua_id) || 'Non renseigné'}}</td>
+                            {{afficherUniteAdministrative(affectService.ua_id) || 'Non renseigné'}}</td>
                             <td >
                             {{afficherLibelleService(affectService.serviceua_id) || 'Non renseigné'}}</td>
                              <td style="text-align: center;">
@@ -310,7 +310,7 @@ export default {
     data(){
         return{
       formData :{
-s_ua_id:"",
+ua_id:"",
 serviceua_id:"",
 
       },
@@ -348,7 +348,7 @@ search:""
             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
                 'types_financements']) ,
                 
-    ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
+    ...mapGetters("parametreGenerauxAdministratif", ["getterplanOrganisationUa","exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
        ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe', 
   'planActe']),
  ...mapGetters("uniteadministrative", [
@@ -417,17 +417,17 @@ listeDesServiceNonEquipeDeUa() {
 
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.afficheServiceNonEquipe.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+            this.getterplanOrganisationUa.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-          return colect
+          return colect.filter(element => element.normeequipement != 0 && element.serviceua_id != null)
         }
 
-       return this.afficheServiceNonEquipe
+       return this.getterplanOrganisationUa.filter(element => element.normeequipement != 0 && element.serviceua_id != null)
 
     },
         afficherQuantiteSortir() {
