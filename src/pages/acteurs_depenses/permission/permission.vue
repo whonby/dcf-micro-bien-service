@@ -22,6 +22,13 @@
                                                         <td @dblclick="afficherModalModifierTypeTexte(index)">{{formaterDate(item.datedebut) }}</td>
                                                         <td @dblclick="afficherModalModifierTypeTexte(index)">{{formaterDate(item.datefin)  }}</td>
                                                         <td @dblclick="afficherModalModifierTypeTexte(index)">{{item.dure}}  Jour(s)</td>
+                                                    <td>
+                      <button class="btn btn-danger" @click="supprimerPermissionConge(item.id)">
+                        <span>
+                          <i class="icon icon-trash"></i>
+                        </span>
+                      </button>
+                    </td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
