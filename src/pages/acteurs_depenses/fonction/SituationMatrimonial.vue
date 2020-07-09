@@ -10,9 +10,29 @@
             <hr>
             <div class="row-fluid">
                 <div class="span12">
+
+                                                <div>
+                      <download-excel
+                          class="btn btn-success pull-right"
+                          style="cursor:pointer;"
+                            :fields = "json_fields"
+                            title="SituationMatrimoniale"
+                            name ="SituationMatrimoniale"
+                            worksheet = "Situation_Matrimoniale"
+                          :data="situation_matrimonial">
+     <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+                               </download-excel>
+        <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+       </div>
+                   </div> <br>
+
+
+
+
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Liste des situations matrimoniale</h5>
+                            <h5>Liste des situations matrimoniales</h5>
                             <!-- <div align="right">
                                 Search: <input type="text" v-model="search">
 
@@ -47,6 +67,20 @@
                                 </tr>
                                 </tbody>
                             </table>
+
+                                    <div class="pagination alternate">
+     <ul>
+       <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+          <li  v-for="(titre, index) in partition(situation_matrimonial,size).length" :key="index" :class="{ active : active_el == index }">
+          <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+       <li :class="{ disabled : page == partition(situation_matrimonial,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+     </ul>
+  </div>
+
+
+
+
+
                         </div>
                     </div>
                 </div>
@@ -139,10 +173,26 @@
 <script>
 
     import {mapGetters, mapActions} from 'vuex'
+      import {partition} from '../../../../src/Repositories/Repository'
+  import jsPDF from 'jspdf'
+  import 'jspdf-autotable'
     export default {
 
         data() {
             return {
+
+                  page:0,
+                size:10,
+              active_el:0,
+
+
+          json_fields:{
+            'libelle':'libelle'
+          },
+
+
+
+
                 fabActions: [
                     {
                         name: 'cache',
@@ -194,6 +244,47 @@
         methods: {
             // methode pour notre action
             ...mapActions('personnelUA', ['getFonctions',"ajouterSituationMatrimonial","supprimerSituationMatrimonial","modifierSituationMatrimonial"]),
+
+                 // pagination
+          partition:partition,
+             getDataPaginate(index){
+                 this.active_el = index;
+                 this.page=index
+             },
+             precedent(){
+                 this.active_el--
+                 this.page --
+             },
+             suivant(){
+                 this.active_el++
+                 this.page ++
+             },
+        
+                          
+           
+                   genererEnPdf(){
+          var doc = new jsPDF()
+          // doc.autoTable({ html: this.natures_sections })
+           var data = this.situation_matrimonial;
+            doc.setFontSize(8)
+            doc.text(75,10,"LISTES DES SITUATIONS MATRIMONIALES")
+          doc.autoTable(this.getColumns(),data)
+        doc.save('situation_matrimoniale.pdf')
+        return 0
+        },
+        getColumns() {
+            return [
+              
+                
+                {title: "LIBELLE", dataKey: "libelle"},
+             
+                
+            ];
+        },
+        
+
+
+
             afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',
