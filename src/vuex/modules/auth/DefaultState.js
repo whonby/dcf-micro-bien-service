@@ -11,7 +11,9 @@ const defaultstate = {
     utilisateur:[],
     roles:[],
     affectation:[],
-    uniteAdministrativeByUser:[]
+    uniteAdministrativeByUser:[],
+    menu:[],
+    groupe:[]
 
 
 };

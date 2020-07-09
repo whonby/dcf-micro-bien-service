@@ -98,13 +98,22 @@
             <span class="label label-important"></span>
           </a>
         </li>
-          <!-- <li @click.prevent="navigateToRapport" :class="{active: active_el ==20}">
+           <li @click.prevent="navigateToRapport" :class="{active: active_el ==20}">
           <a title="CARTOGRAPHIE" href="#">
             <i class=" icon-globe"></i>
             <span>RAPPORT</span>
             <span class="label label-important"></span>
           </a>
-        </li> -->
+        </li>
+
+        <li @click.prevent="navigateToGestionAccess()" :class="{active: active_el ==101}">
+          <a title="GESTION ACCESS" href="#">
+            <i class=" icon-key"></i>
+            <span>GESTION ACCESS</span>
+            <span class="label label-important"></span>
+          </a>
+        </li>
+
           <li @click.prevent="logoutUser()" >
           <a title="DECONNEXION" href="#">
             <i class="icon icon-off"></i>
@@ -212,10 +221,15 @@ navigateToGestionMarche(){
         this.$router.push({
           name: 'tableauBord'
         })
+      },
+
+
+      navigateToGestionAccess(){
+          this.activate(101)
+          this.$router.push({
+              name: 'GestionAccess'
+          })
       }
-    
-
-
   }
 };
 </script>

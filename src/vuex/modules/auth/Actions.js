@@ -241,3 +241,26 @@ export function getUniteAdminUser({commit}, objet){
   //  console.log(id)
     commit('GET_UNITEADMIN_BY_USER', objet)
 }
+
+
+export function getMenu({commit}){
+    //  console.log(id)
+
+    queue.push(() =>  apiGuest.get('/menu').then(response => {
+            // console.log(response.data)
+        commit('GET_MENU', response.data)
+        }).catch(error => console.log(error))
+    );
+
+}
+
+export function getGroupe({commit}){
+    //  console.log(id)
+
+
+    queue.push(() =>  apiGuest.get('/groupe').then(response => {
+            // console.log(response.data)
+            commit('GET_GROUPE', response.data)
+        }).catch(error => console.log(error))
+    );
+}
