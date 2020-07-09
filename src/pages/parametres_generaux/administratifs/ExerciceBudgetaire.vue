@@ -391,7 +391,8 @@ getDataPaginate(index){
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.exercices_budgetaires;
-    doc.text(98,10,"Listes Exercices Budgetaires")
+   doc.setFontSize(8)
+    doc.text(75,10,"Listes Exercices Budgetaires")
   doc.autoTable(this.getColumns(),data)
 //   doc.output('exercice_budgetaire');
 // doc.save('exercice_budgetaire.pdf')

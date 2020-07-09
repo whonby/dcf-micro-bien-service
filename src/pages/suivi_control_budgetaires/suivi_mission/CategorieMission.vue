@@ -127,7 +127,7 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter categorie mission</h3>
+                <h3>Ajouter catégorie mission</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -163,7 +163,7 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier categorie mission</h3>
+                <h3>Modifier catégorie mission</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">

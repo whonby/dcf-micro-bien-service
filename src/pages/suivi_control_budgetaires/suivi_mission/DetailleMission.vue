@@ -67,10 +67,10 @@
               <thead>
                 <tr>
 
-                   <th>Mode de paiment</th>
+                   <th>Mode de paiement</th>
                    <th>Frais de restauration</th>
                   <th>Frais d'hebergement</th>
-                  <th>frais de deplacement</th>
+                  <th>frais de déplacement</th>
                   <th> Autre frais</th>
                   <th>Signataire</th>
                   <th> Cout de billet avion</th>
@@ -131,7 +131,7 @@
                 <tr>
 
                    <th>Date de retour</th>
-                   <th>Duree</th>
+                   <th>Durée</th>
                   <th>Numero autorisation</th>
                   <th>Numero ccm</th>
                   <th>Classe voyage</th>
