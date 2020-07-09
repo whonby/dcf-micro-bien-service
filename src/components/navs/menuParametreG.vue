@@ -637,16 +637,18 @@
           </li>
           <li class="divider"></li>
            <li>
+            <router-link :to="{name: 'taux'}" tag="a">
+              <i class="icon-user"></i> Taux
+            </router-link>
+          </li>
+          <li class="divider"></li>
+           <li>
             <router-link :to="{name: 'ReferentielDesPrix'}" tag="a">
               <i class="icon-bar-chart"></i>
            Référentiel des prix
             </router-link>
           </li>
-           <li>
-            <router-link :to="{name: 'taux'}" tag="a">
-              <i class="icon-user"></i> Taux
-            </router-link>
-          </li>
+          <li class="divider"></li>
            <!-- <li>
             <router-link :to="{name:'StockArticles'}" tag="a">
               <i class="icon-home"></i> 
