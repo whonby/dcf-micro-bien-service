@@ -695,10 +695,11 @@ getDateFinSanction() {
           
           // exportation en pdf
          genererEnPdf(){
-  var doc = new jsPDF()
+  var doc = new jsPDF('landscape')
   // doc.autoTable({ html: this.natures_sections })
    var data = this.entreprises;
-    doc.text(98,10,"Liste des entreprises")
+    doc.setFontSize(8)
+    doc.text(78,10,"LISTE DES ENTREPRISES")
   doc.autoTable(this.getColumns(),data)
 doc.save('entreprise.pdf')
 return 0

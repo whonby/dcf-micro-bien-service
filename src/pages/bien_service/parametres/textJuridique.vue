@@ -69,7 +69,7 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Text juridique</h3>
+        <h3>Modifier Texte juridique</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">

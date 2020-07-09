@@ -1101,7 +1101,7 @@ AffichierSituationGeoAgenceModifier() {
   // doc.autoTable({ html: this.natures_sections })
    var data = this.banqueUa;
     doc.setFontSize(8)
-    doc.text(75,10,"LISTES DES COMPTES BANCAIRES")
+    doc.text(75,10,"LISTE DES COMPTES BANCAIRES")
   doc.autoTable(this.getColumns(),data)
 doc.save('banque_Ua.pdf')
 return 0

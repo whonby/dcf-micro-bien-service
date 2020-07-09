@@ -239,7 +239,8 @@ export default {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.typeCandidatFiltre;
-    doc.text(98,10,"Listes des types de Candidats")
+   doc.setFontSize(8)
+    doc.text(78,10,"LISTE DES TYPES DE CANDIDATS")
   doc.autoTable(this.getColumns(),data)
 // doc.save('Type de Candidat.pdf')
 doc.output('save','Type de Candidat.pdf');

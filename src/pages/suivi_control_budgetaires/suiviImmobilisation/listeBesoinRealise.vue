@@ -30,7 +30,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Bessoins Couvert</h5>
+              <h5>Liste des Besoins CouvertS</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />

@@ -272,7 +272,7 @@ return 0
 
 getColspan(){
   return [
-    {title:"LIBELLE", dataKey:"libelle"},
+    {title:"LIBELLE", dataKey:"Libelle"},
    
   ]
 },

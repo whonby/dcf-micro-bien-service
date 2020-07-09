@@ -355,7 +355,8 @@ return this.banques.filter((item) => {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.banques;
-    doc.text(98,10,"Liste des banques")
+   doc.setFontSize(8)
+    doc.text(78,10,"LISTE DES BANQUES")
   doc.autoTable(this.getColumns(),data)
 doc.save('banque.pdf')
 return 0
@@ -363,8 +364,10 @@ return 0
 getColumns() {
     return [
         
-        {title: "NIVEAU", dataKey: "niveau"},
+        {title: "CODE", dataKey: "code_banque"},
         {title: "LIBELLE", dataKey: "libelle"},
+         {title: "TELEPHONE", dataKey: "telephone"},
+          {title: "SITUATION_GEO", dataKey: "situation_geographique"},
      
         
     ];

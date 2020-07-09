@@ -717,6 +717,7 @@ codeuniteadministrative2(){
 genererEnPdf(){
   var doc = new jsPDF('landscape')
   // doc.autoTable({ html: this.natures_sections })
+  
   doc.text(98,10,"Listes Unites Administratives")
   doc.autoTable({ html: '#Nature_section'}),
   

@@ -228,7 +228,8 @@ export default {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.communes;
-    doc.text(98,10,"Listes des communes")
+   doc.setFontSize(8)
+    doc.text(75,10,"Listes des communes")
   doc.autoTable(this.getColumns(),data)
 // doc.save('Villes.pdf')
 doc.output('save','Communes.pdf');
