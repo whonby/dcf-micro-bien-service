@@ -267,7 +267,7 @@
   // doc.autoTable({ html: this.natures_sections })
    var data = this.type_acte_personnels;
     doc.setFontSize(8)
-    doc.text(75,10,"LISTES DES TYPES DES ACTES PERSONNELS")
+    doc.text(75,10,"LISTE DES TYPES DES ACTES PERSONNELS")
   doc.autoTable(this.getColumns(),data)
 doc.save('type_acte_personnels.pdf')
 return 0

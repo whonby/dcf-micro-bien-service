@@ -240,7 +240,7 @@
         // doc.autoTable({ html: this.natures_sections })
          var data = this.fonctionBudgetaire;
           doc.setFontSize(8)
-          doc.text(75,10,"LISTES DES FONCTIONS BUDGETAIRES")
+          doc.text(75,10,"LISTE DES FONCTIONS BUDGETAIRES")
         doc.autoTable(this.getColumns(),data)
       doc.save('fonctionBudgetaire.pdf')
       return 0

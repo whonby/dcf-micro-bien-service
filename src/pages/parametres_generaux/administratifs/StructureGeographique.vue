@@ -294,7 +294,7 @@ return this.structures_geographiques.filter((item) => {
   // doc.autoTable({ html: this.natures_sections })
    var data = this.structures_geographiques;
     doc.setFontSize(8)
-    doc.text(75,10,"LISTES DES STRUCTURES GEOGRAPHIQUES")
+    doc.text(75,10,"LISTE DES STRUCTURES GEOGRAPHIQUES")
   doc.autoTable(this.getColumns(),data)
 doc.save('structure_geographique.pdf')
 return 0

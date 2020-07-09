@@ -237,7 +237,7 @@
           // doc.autoTable({ html: this.natures_sections })
            var data = this.categorieGrade;
             doc.setFontSize(8)
-            doc.text(75,10,"LISTES DES CATEGORIES DES GRADES")
+            doc.text(75,10,"LISTE DES CATEGORIES DES GRADES")
           doc.autoTable(this.getColumns(),data)
         doc.save('categorie_grade.pdf')
         return 0

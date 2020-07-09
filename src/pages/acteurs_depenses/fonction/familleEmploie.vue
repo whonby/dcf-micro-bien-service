@@ -259,7 +259,8 @@ import 'jspdf-autotable'
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.familleFonction;
-    doc.text("Listes famille d'emploi",60,10)
+    doc.setFontSize(8)
+ doc.text(75,10,"LISTE DES FAMILLES DES EMPLOIS")
   doc.autoTable(this.getColumns(),data)
 //doc.save('grande_nature_depense.pdf')
  doc.output('save','famille_emploi.pdf')

@@ -290,7 +290,7 @@ return this.structures_fonctionnelles.filter((item) => {
   // doc.autoTable({ html: this.natures_sections })
    var data = this.structures_fonctionnelles;
     doc.setFontSize(8)
-    doc.text(75,10,"LISTES STRUCTURES FONCTIONNELLES")
+    doc.text(75,10,"LISTE DES STRUCTURES FONCTIONNELLES")
   doc.autoTable(this.getColumns(),data)
 doc.save('structure_fonctionnelle.pdf')
 return 0

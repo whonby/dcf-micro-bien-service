@@ -98,7 +98,7 @@
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter fonctions</h3>
+                <h3>Ajouter fonction</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -132,7 +132,7 @@
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier fonctions</h3>
+                <h3>Modifier fonction</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -263,7 +263,7 @@
         // doc.autoTable({ html: this.natures_sections })
          var data = this.fonctions;
           doc.setFontSize(8)
-          doc.text(75,10,"LISTES DES FONCTIONS")
+          doc.text(75,10,"LISTE DES FONCTIONS")
         doc.autoTable(this.getColumns(),data)
       doc.save('fonctions.pdf')
       return 0

@@ -267,7 +267,7 @@
           // doc.autoTable({ html: this.natures_sections })
            var data = this.situation_matrimonial;
             doc.setFontSize(8)
-            doc.text(75,10,"LISTES DES SITUATIONS MATRIMONIALES")
+            doc.text(75,10,"LISTE DES SITUATIONS MATRIMONIALES")
           doc.autoTable(this.getColumns(),data)
         doc.save('situation_matrimoniale.pdf')
         return 0

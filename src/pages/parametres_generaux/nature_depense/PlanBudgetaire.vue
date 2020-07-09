@@ -361,7 +361,7 @@ return this.plans_budgetaires.filter((item) => {
   // doc.autoTable({ html: this.natures_sections })
    var data = this.plans_budgetaires;
     doc.setFontSize(8)
-    doc.text(75,10,"LISTES DES PLANS BUDGETAIRES")
+    doc.text(75,10,"LISTE DES PLANS BUDGETAIRES")
   doc.autoTable(this.getColumns(),data)
 doc.save('plan_budgetaire.pdf')
 return 0

@@ -288,7 +288,7 @@ return this.structures_administratives.filter((item) => {
   // doc.autoTable({ html: this.natures_sections })
    var data = this.structures_administratives;
     doc.setFontSize(8)
-    doc.text(75,10,"LISTES DES STRUCTURES ADMINISTRATIVES")
+    doc.text(75,10,"LISTE DES STRUCTURES ADMINISTRATIVES")
   doc.autoTable(this.getColumns(),data)
 doc.save('structure_administrative.pdf')
 return 0

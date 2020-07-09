@@ -392,7 +392,7 @@ getDataPaginate(index){
   // doc.autoTable({ html: this.natures_sections })
    var data = this.exercices_budgetaires;
    doc.setFontSize(8)
-    doc.text(75,10,"Listes Exercices Budgetaires")
+    doc.text(75,10,"LISTE DES EXERCICES BUDGETAIRES")
   doc.autoTable(this.getColumns(),data)
 //   doc.output('exercice_budgetaire');
 // doc.save('exercice_budgetaire.pdf')
