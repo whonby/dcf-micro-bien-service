@@ -175,6 +175,19 @@
                     <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel>  -->
+                                                                                <download-excel
+                                   class="btn btn-success pull-right"
+                                   style="cursor:pointer;"
+                                     :fields = "json_fields"
+                                     title="Liste des  Grades et Emplois dans l'administration de l'ETAT "
+                                     name ="Liste des  Grades et Emplois dans l'administration de l'ETAT"
+                                     worksheet = "entreprise non sanctionner"
+                                   :data="familleFonction">
+           <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+                                        </download-excel> 
+              <div  align="right" style="cursor:pointer;">
+  <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+      </div> 
                                      </div>
                                      
           <div class="widget-box">
@@ -234,6 +247,8 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import ClassificationEmploisGradeItemComponent from './ClassificationEmploisGradeItemComponent'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   name: 'gradePrincipal',
  components: {
@@ -290,7 +305,33 @@ export default {
 
   
   methods: {
-    ...mapActions('personnelUA', ["ajouterClassificationGradeFonction","supprimerClassificationGradeFonction", "modifierClassificationGradeFonction"]),  
+    ...mapActions('personnelUA', ["ajouterClassificationGradeFonction","supprimerClassificationGradeFonction", "modifierClassificationGradeFonction"]),
+    
+              // exportation en pdf
+         genererEnPdf(){
+  var doc = new jsPDF('landscape')
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.familleFonction;
+    doc.setFontSize(8)
+    doc.text(115,10,"LISTE DES GRADES ET EMPLOIS DANS L'ADMINISTRATION DE L'ETAT")
+  doc.autoTable(this.getColumns(),data)
+doc.save('liste des grades et emplois.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "LIBELLE", dataKey: "libelle"},
+
+
+
+
+    ]
+   
+},
+
+
+
 
     supprimerSect(id){
       this.supprimerClassificationGradeFonction(id)

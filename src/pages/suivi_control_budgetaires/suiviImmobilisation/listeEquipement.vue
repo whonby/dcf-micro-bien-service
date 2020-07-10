@@ -138,7 +138,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste Groupe Equipement Type</h5>
+              <h5>Liste des Types de Groupe d'Equipement </h5>
                <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -353,7 +353,8 @@ afficheLibellePlanEconomique() {
          var doc = new jsPDF()
         // doc.autoTable({ html: this.natures_sections })
         var data = this.equipements;
-        doc.text(65,10,"Liste des types Equipements")
+         doc.setFontSize(8)
+        doc.text(75,10,"LISTE DES TYPES D'EQUIPEMENTS")
         doc.autoTable(this.getColumns(),data)
        // doc.save('Type des actes de depenses.pdf')
       doc.output('save','Liste des Types Equipements.pdf');

@@ -98,7 +98,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des Modes paiements </h5>
+              <h5>Liste des Modes paiements </h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -253,7 +253,8 @@ export default {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.modepaiements;
-    doc.text(98,10,"Liste mode de paiement")
+    doc.setFontSize(8)
+    doc.text(78,10,"LISTE DES MODES DE PAIEMENT")
   doc.autoTable(this.getColumns(),data)
 doc.save('mode_paiement.pdf')
 return 0

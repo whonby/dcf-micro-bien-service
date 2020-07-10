@@ -699,7 +699,7 @@ getDateFinSanction() {
   // doc.autoTable({ html: this.natures_sections })
    var data = this.entreprises;
     doc.setFontSize(8)
-    doc.text(78,10,"LISTE DES ENTREPRISES")
+    doc.text(115,10,"LISTE DES ENTREPRISES")
   doc.autoTable(this.getColumns(),data)
 doc.save('entreprise.pdf')
 return 0
@@ -710,15 +710,14 @@ getColumns() {
         {title: "N°.IDU", dataKey: "numero_idu"},
          {title: "N°.CC", dataKey: "numero_cc"},
           {title: "N°.RC", dataKey: "numero_rc"},
+           {title: "SIGLE", dataKey: "sigle"},
            {title: "R.SOCIALE", dataKey: "raison_sociale"},
-            {title: "SIGLE", dataKey: "sigle"},
         {title: "F.JURIDIQUE", dataKey: "forme_juridique"}, 
-          {title: "C.IMPOT", dataKey: "centre_impot"},
-        {title: "C.SOCIAL", dataKey: "centre_impot"}, 
-          {title: "SIGLE", dataKey: "sigle"},
-        {title: "I.CNPS", dataKey: "immatriculation_cnps"}, 
-         {title: "E-MAIL", dataKey: "email"},  
-    ];  
+
+
+
+
+    ]
    
 },
        

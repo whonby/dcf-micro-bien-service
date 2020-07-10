@@ -28,7 +28,7 @@
                                      </div> <br>
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Liste type salairié</h5>
+                            <h5>Liste des types salariés</h5>
                             <div align="right">
                                 Search: <input type="text" v-model="search">
                             </div>
@@ -100,7 +100,7 @@
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter type salairié</h3>
+                <h3>Ajouter type salarié</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -133,7 +133,7 @@
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier type salairié</h3>
+                <h3>Modifier type salarié</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -265,7 +265,8 @@ import 'jspdf-autotable'
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.type_salaries;
-    doc.text("Listes des types de salaires",60,10)
+    doc.setFontSize(8)
+    doc.text("LISTE DES TYPES DE SALARIES",80,10)
   doc.autoTable(this.getColumns(),data)
 //doc.save('grande_nature_depense.pdf')
  doc.output('save','type_salaire.pdf')

@@ -12,7 +12,7 @@
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Liste type marche</h5>
+                            <h5>Liste des types marchés</h5>
                             <div align="right">
                                 Search: <input type="text" v-model="search">
 
@@ -100,7 +100,7 @@
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier un fonctions</h3>
+                <h3>Modifier fonction</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">

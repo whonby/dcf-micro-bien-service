@@ -353,7 +353,7 @@ return this.planActe.filter((item) => {
   // doc.autoTable({ html: this.natures_sections })
    var data = this.planActe;
    doc.setFontSize(8)
-    doc.text(78,10,"LISTE DES PLAN DES ACTES")
+    doc.text(78,10,"LISTE DES PLANS DES ACTES")
   doc.autoTable(this.getColumns(),data)
 doc.save('plan_acte.pdf')
 return 0

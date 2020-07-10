@@ -122,6 +122,7 @@
               DETAIL DE BUDGET PAR UA
             </router-link>
           </li>
+          <li class="divider"></li>
            <!-- <li>
             <router-link :to="{name: 'DetailbudgetGeneralsNew'}" tag="a">
               DETAIL DE BUDGET PAR UA new
@@ -132,6 +133,7 @@
               IMPORTATION DU BUDGET
             </router-link>
           </li>
+          <li class="divider"></li>
            <li v-if="admin() || dcf()">
             <router-link :to="{name: 'Synthesebudg'}" tag="a">
               SYNTHESE DU BUDGET

@@ -459,10 +459,10 @@ return 0
 getColumns() {
     return [
         
-        {title: "CODE", dataKey: "code_agence"},
-        {title: "NOM", dataKey: "nom_agence"},
-        {title: "TELEPHONE", dataKey: "tel_agence"},
-         {title: "SITUATION", dataKey: "situation_geo"},
+        {title: "LIBELLE", dataKey: "libelle"},
+       
+       
+       
      
         
     ];
