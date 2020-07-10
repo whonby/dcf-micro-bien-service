@@ -107,7 +107,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Familles de procedure </h5>
+              <h5>Familles de procédure </h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -286,7 +286,8 @@ getDataPaginate(index){
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.typeTypeProcedures;
-    doc.text(98,10,"Listes type procedure ")
+    doc.setFontSize(8)
+    doc.text(78,10,"LISTE DES TYPES DE PROCEDURE")
   doc.autoTable(this.getColumns(),data)
 //doc.save('type_marché.pdf')
 doc.output('save','type_procedure.pdf')

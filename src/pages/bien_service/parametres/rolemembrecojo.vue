@@ -284,7 +284,8 @@ getDataPaginate(index){
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.role_membrecojo;
-    doc.text(98,10,"LISTES DES ROLES MEMBRES COJO ")
+    doc.setFontSize(8)
+    doc.text(78,10,"LISTE DES ROLES MEMBRES COJO ")
   doc.autoTable(this.getColumns(),data)
 //doc.save('grande_nature_depense.pdf')
  doc.output('save','role_membre_cojo.pdf')
