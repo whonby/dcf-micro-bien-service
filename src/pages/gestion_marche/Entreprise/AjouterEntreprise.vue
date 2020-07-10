@@ -195,7 +195,6 @@
                                                 </div>
              </td>
               <td>
-
                      <div class="control-group">
                                                     <label class="control-label">Regime d'imposition</label>
                                                     <div class="controls">

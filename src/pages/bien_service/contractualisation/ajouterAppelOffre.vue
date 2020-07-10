@@ -91,7 +91,7 @@
             
                   <td> 
             <div class="control-group">
-              <label class="control-label">Date émmission:</label>
+              <label class="control-label">Date emmission:</label>
               <div class="controls " >
      <input type="date" class="span" v-model="formData.date_emission" >
       

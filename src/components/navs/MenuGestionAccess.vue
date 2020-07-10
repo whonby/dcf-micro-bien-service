@@ -13,8 +13,18 @@
                     </a>
                   </li> -->
             <li>
-                <router-link :to="{name: 'CartographieBudget'}" tag="a">
-                    CATOGRAPHIE BUDGETAIRE
+                <router-link :to="{name: 'GestionAccess'}" tag="a">
+                    GESTION ACCESS
+                </router-link>
+            </li>
+            <li>
+                <router-link :to="{name: 'Groupe'}" tag="a">
+                   GROUPES
+                </router-link>
+            </li>
+            <li>
+                <router-link :to="{name: 'MonEquipe'}" tag="a">
+                    MON EQUIPE
                 </router-link>
             </li>
             <!-- <li class="" id="out">

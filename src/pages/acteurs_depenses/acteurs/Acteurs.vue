@@ -20,7 +20,11 @@ Type de Recrutement
                 </li>
                 <li class="bg_lb"> <a href="#"> <i class="icon-th"></i> <span class="label label-important">{{nombretotalActeurNonAccredite}}</span> Total acteur non accredité</a> </li>
                 <li class="bg_ls"> <a href="#"> <i class="icon-fullscreen"></i> <span class="label label-important" v-if="tauxActeurAccredite!='NaN'">{{totalTaux || '0' }} %</span>
+<<<<<<< HEAD
                     Taux acteur accredité
+=======
+                    Taux acteurs acredité
+>>>>>>> 97da18f618c1166541ee7b5a9d9fa12efbe78da7
                 </a> </li>
             </ul>
         </div>
@@ -33,10 +37,17 @@ Type de Recrutement
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
+<<<<<<< HEAD
                                 <li class="active"><a data-toggle="tab" href="#tab10">Liste personnel     <span class="badge badge-inverse">{{nombreActeurActivite}}</span></a></li>
                                  <li class=""><a data-toggle="tab" href="#tab78">Contrat Récrutement Direct </a></li>
                                 <li class=""><a data-toggle="tab" href="#tab19">Listes des acteurs de dépenses   <span class="badge badge-success">{{NombrePersonnelRecuActeNorm}}</span></a> </li>
                                 <li class=""><a data-toggle="tab" href="#tab30">Acteurs non actifs</a></li>
+=======
+                                <li class="active"><a data-toggle="tab" href="#tab10">Listes personnel     <span class="badge badge-inverse">{{nombreActeurActivite}}</span></a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab78">Contrat Récrutement Direct </a></li>
+                                <li class=""><a data-toggle="tab" href="#tab19">Listes des acteurs de depenses   <span class="badge badge-success">{{NombrePersonnelRecuActeNorm}}</span></a> </li>
+                                <li class=""><a data-toggle="tab" href="#tab30">Acteurs non actif</a></li>
+>>>>>>> 97da18f618c1166541ee7b5a9d9fa12efbe78da7
                                   <!-- <li><a data-toggle="tab" href="#tab20002">Contrat Résiliés<span class="badge badge-info" > {{0}}</span></a></li>
                                    <li><a data-toggle="tab" href="#tab301">Contrat Terminés <span class="badge badge" > {{0}}</span></a></li>  -->
                                    
