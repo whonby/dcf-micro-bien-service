@@ -193,7 +193,7 @@
             <div class="control-group">
               <label class="control-label">Code</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.code" class="span5" placeholder="Saisir le code" />
+                <input type="text" v-model="parentDossier.code" class="span5" placeholder="Saisir le code" />
               </div>
             </div>
             <!-- <div class="control-group">
@@ -701,7 +701,8 @@ this.$("#exampleModal").modal('hide');
        historiqueequipement:this.normeDuService(this.afficheidServiceLibelle(this.nouvelElementEnfant.libelle)),
        montantequipement:this.montantPourEtreEquipe(this.afficheidServiceLibelle(this.nouvelElementEnfant.libelle)),
       serviceua_id:this.afficheidServiceLibelle(this.nouvelElementEnfant.libelle),
-       ua_id:this.afficherIdUniteAdministrative(this.parentDossier.libelle)
+       ua_id:this.afficherIdUniteAdministrative(this.parentDossier.libelle),
+       code:this.parentDossier.code
       };
        this.ajouterPlanOrganigrammeUa(nouvelObjet)
 this.$("#modalAjouterElementEnfant").modal('hide');
@@ -719,7 +720,8 @@ this.$("#modalAjouterElementEnfant").modal('hide');
       
       fonction_id:this.afficheIdFonctionLibelle(this.nouvelElementEnfant.libelle),
        serviceua_id:this.afficheidServiceLibelle(this.parentDossier.libelle),
-       ua_id:this.afficherIdUaparDossierParent(this.parentDossier.libelle)
+       ua_id:this.afficherIdUaparDossierParent(this.parentDossier.libelle),
+         code:this.parentDossier.code
       };
        this.ajouterPlanOrganigrammeUa(nouvelObjet2)
 this.$("#modalAjouterElementEnfant").modal('hide');
