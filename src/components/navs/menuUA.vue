@@ -35,8 +35,6 @@
           </li> -->
         
   <li class="dropdown" id="menuBUDGET">
-<<<<<<< HEAD
-=======
         <a
           title="UNITES ADMINISTRATIVES"
           href="#"
@@ -66,196 +64,10 @@
               <i class="icon-key"></i>Unite zone
             </router-link>
           </li>
-           <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'ServicePrincipal'}" tag="a">
-              <i class="icon-key"></i>Service UA
-            </router-link>
-          </li>
-           <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'FonctionPrincipal'}" tag="a">
-              <i class="icon-key"></i>Fonction UA
-            </router-link>
-          </li>
-            <li class="divider"></li>
-        <!-- <li>
-            <router-link :to="{name: 'banqueUa'}" tag="a">
-              <i class="icon-key"></i>Banque UA
-            </router-link>
-          </li> -->
-           <!-- <li class="divider"></li>
-        <li>
-            <router-link :to="{name: 'Organigramme'}" tag="a">
-              <i class="icon-key"></i>Organigramme UA
-            </router-link>
-          </li> -->
-           <li class="divider"></li>
-         <li>
-           <router-link :to="{name: 'banqueUa'}" tag="a">
-             <i class="icon-key"></i>Banque UA
-            </router-link>
-         </li>
-           <li class="divider"></li>
-        
-        </ul>
-      </li>
-        <li>
-            <router-link :to="{name: 'budgetGenerals'}" tag="a">
-              BUDGET PAR UA
-            </router-link>
-          </li>
-
-
-           <li>
-            <router-link :to="{name: 'BudgetParUa'}" tag="a">
-              DETAIL DE BUDGET PAR UA
-            </router-link>
-          </li>
-           <!-- <li>
-            <router-link :to="{name: 'DetailbudgetGeneralsNew'}" tag="a">
-              DETAIL DE BUDGET PAR UA new
-            </router-link>
-          </li> -->
-           <li>
-            <router-link :to="{name: 'ImportBudget'}" tag="a">
-              IMPORTATION DU BUDGET
-            </router-link>
-          </li>
-           <li>
-            <router-link :to="{name: 'Synthesebudg'}" tag="a">
-              SYNTHESE DU BUDGET
-            </router-link>
-          </li>
-<!-- <li class="dropdown" id="Affichebudget">
-        <a
-          title="OUT PUT"
-          href="#"
-          data-toggle="dropdown"
-          data-target="#Affichebudget"
-          class="dropdown-toggle"
-        >
-          <span class="text"> BUDGET</span>
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-           <li>
-            <router-link :to="{name: 'ImportBudget'}" tag="a">
-              <i class="icon-user"></i>
-            Importe le budget
-            </router-link>
-          </li>
-          <li>
-            <router-link :to="{name: 'grpeBudgetSection'}" tag="a">
-              <i class="icon-user"></i>
-              Budget General par section
-            </router-link>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'historiquebudgetGeneralComponent'}" tag="a">
-              <i class="icon-key"></i>Historique Budget General 
-            </router-link>
-          </li>
-        </ul>
-      </li> -->
-
-
-<li class="dropdown" id="rechbudget">
-        <a
-          title="OUT PUT"
-          href="#"
-          data-toggle="dropdown"
-          data-target="#rechbudget"
-          class="dropdown-toggle"
-        >
-          <span class="text">OUT PUT</span>
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <router-link :to="{name: 'budgetGeneralParUa'}" tag="a">
-              <i class="icon-user"></i>
-              Budget General
-            </router-link>
-          </li>
-<!-- <li>
-            <router-link :to="{name: 'grpeBudgetProg'}" tag="a">
-              <i class="icon-user"></i>
-              Budget par Programme
-            </router-link>
-          </li> -->
-          <li class="divider"></li>
-          <!-- <li>
-            <router-link :to="{name: ''}" tag="a">
-              <i class="icon-key"></i>Budget global
-            </router-link>
-          </li> -->
-        </ul>
-      </li>
-
-
-
-      <!--Source de financement-->
-      <!-- <li class="dropdown" id="menu-messages">
->>>>>>> 97da18f618c1166541ee7b5a9d9fa12efbe78da7
-        <a
-          title="UNITES ADMINISTRATIVES"
-          href="#"
-          data-toggle="dropdown"
-          data-target="#menuBUDGET"
-          class="dropdown-toggle"
-        >
-          <span class="text">UNITES ADMINISTRATIVES</span>
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <router-link :to="{name: 'uniteadministrative'}" tag="a">
-              <i class="icon-user"></i>
-            Unite administrative
-            </router-link>
-          </li>
-
-          <li class="divider"></li>
-          <!-- <li>
-            <router-link :to="{name: 'DirectionPrincipal'}" tag="a">
-              <i class="icon-key"></i>Direction UA
-            </router-link>
-          </li> -->
-            <li>
-            <router-link :to="{name: 'uniteZone'}" tag="a">
-              <i class="icon-key"></i>Unite zone
-            </router-link>
-          </li>
-<<<<<<< HEAD
            <li class="divider"></li>
             <li>
             <router-link :to="{name: 'structureOrganigrammeUa'}" tag="a">
               <i class="icon-key"></i>Structure Organigramme 
-=======
-        </ul>
-      </li> -->
-      <!--Paramètres programmes
-      -->
-<!-- 
-      <li class="dropdown" id="listeua">
-        <a
-          title="Out put"
-          href="#"
-          data-toggle="dropdown"
-          data-target="#listeua"
-          class="dropdown-toggle"
-        >
-          <span class="text">OUT PUT</span>
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <router-link :to="{name: 'listeuniteadministrative'}" tag="a">
-              <i class="icon-user"></i>
-              Listes Unites Administratives
->>>>>>> 97da18f618c1166541ee7b5a9d9fa12efbe78da7
             </router-link>
           </li>
            <li class="divider"></li>
@@ -298,7 +110,6 @@
         
         </ul>
       </li>
-<<<<<<< HEAD
         <li>
             <router-link :to="{name: 'budgetGenerals'}" tag="a">
               BUDGET PAR UA
@@ -327,17 +138,6 @@
             </router-link>
           </li>
 
-=======
-    -->
-
-      <!--- tableau de bord -->
-        <!-- <li>
-            <router-link :to="{name: 'tableaudebord'}" tag="a">
-              TABLEAU DE BOARD
-            </router-link>
-          </li>
-      -->
->>>>>>> 97da18f618c1166541ee7b5a9d9fa12efbe78da7
     </ul>
   </div>
 </template>

@@ -233,11 +233,11 @@
                
                 <td>
                      <div class="control-group">
-                                                    <label class="control-label">Service</label>
+                                                    <label class="control-label">Service{{formData.service_id}}</label>
                                                     <div class="controls">
                                                         <select v-model="formData.service_id" :disabled="verrouilleService" class="span12">
                                                             <option></option>
-                                                            <option v-for="item in afficheService(formData.unite_administrative_id)" :key="item.id" :value="item.id">
+                                                            <option v-for="item in afficheService(formData.unite_administrative_id)" :key="item.id" :value="item.serviceua_id">
                                                                 {{afficheServicelibelle(item.serviceua_id)}}
                                                             </option>
 

@@ -200,6 +200,7 @@ navigateToGestionMarche(){
         })
       },
 
+
       navigateToInvestissement(){
         this.activate(4)
         this.$router.push({
@@ -212,18 +213,10 @@ navigateToGestionMarche(){
         this.$router.push({
           name: 'tableauBord'
         })
-      },
+      }
     
 
 
-
-
-      navigateToGestionAccess(){
-          this.activate(101)
-          this.$router.push({
-              name: 'GestionAccess'
-          })
-      }
   }
 };
 </script>

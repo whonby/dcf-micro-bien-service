@@ -1,8 +1,5 @@
 type_acte_id
-<<<<<<< HEAD
 congeActeur
-=======
->>>>>>> 97da18f618c1166541ee7b5a9d9fa12efbe78da7
 <template>
     <div>
 
@@ -2357,6 +2354,7 @@ enregistreIdPersonnel(){
         }
       };
     },
+
       afficheLibelle() {
       return id => {
         if (id != null && id != "") {

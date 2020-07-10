@@ -8,15 +8,12 @@
     <MenuActeurDepense v-if="active_el == 2"></MenuActeurDepense>
     <MenuPlanification v-if="active_el ==3"></MenuPlanification>
     <MenuSuivi v-if="active_el == 4"></MenuSuivi>
-    <MenuCatographie v-if="active_el ==8"></MenuCatographie>
-    <MenuComptaMatiers v-if="active_el ==5"></MenuComptaMatiers>
+    <MenuCatographie v-if="active_el ==5"></MenuCatographie>
     <MenuControlAxe v-if="active_el ==6"></MenuControlAxe>
     <MenuOperationRapport v-if="active_el ==7"></MenuOperationRapport>
     <MenuOpRisque v-if="active_el ==8"></MenuOpRisque>
-    <MenuGestionAccess v-if="active_el ==101"></MenuGestionAccess>
     <MenuMilieu v-if="active_el ==20"></MenuMilieu>
      <MenuDefaut v-if="active_el ==0"></MenuDefaut>
-
     <Search></Search>
     
     
@@ -29,7 +26,6 @@
 // var housecall = require('housecall');
 
 // var queue = housecall({ concurrency: 2, cooldown: 1000 });
-import MenuComptaMatiers from "../components/navs/MenuComptaMatieres.vue";
 import MenuTableau from "../components/navs/menuTableauBord";
 import MenuParamG from "../components/navs/menuParametreG";
 import MenuUA from "../components/navs/menuUA";
@@ -39,11 +35,11 @@ import MenuSuivi from "../components/navs/MenuSuivi";
 import MenuCatographie from "../components/navs/MenuCatographie";
 import MenuControlAxe from "../components/navs/MenuControlAxe";
 import MenuOperationRapport from "../components/navs/MenuOperationRapport.vue";
-/*import MenuOpRisque from "../components/navs/MenuOpRisque.vue";*/
+import MenuOpRisque from "../components/navs/MenuOpRisque.vue";
 import MenuDefaut from "../components/navs/MenuDefaut.vue";
 import MenuMilieu from "../components/navs/MenuMilieu.vue";
 import Search from "../components/Search";
-import MenuGestionAccess from "../components/navs/MenuGestionAccess.vue";
+
 import { mapState, mapActions} from "vuex";
 export default {
   components: {
@@ -56,12 +52,10 @@ export default {
     MenuCatographie,
    MenuControlAxe,
    MenuOperationRapport,
-  /* MenuOpRisque,*/
+   MenuOpRisque,
    MenuDefaut,
    MenuMilieu,
-    Search,
-      MenuComptaMatiers,
-      MenuGestionAccess
+    Search
     
   },
 
@@ -74,7 +68,7 @@ export default {
 
   methods: {
 
-    ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser","getMenu","getGroupe"]),
+    ...mapActions('Utilisateurs', ['getUtilisateurs',"getRoles","getAffectation","getUniteAdminUser"]),
       ...mapActions('parametreGenerauxFonctionnelle', 
     [ 'getStructureFonctionnelle', 'getPlanFonctionnelle','getStructureDecision','getPlanDecision','getStructureActe','getPlanActe','getTypeconges','getlisteNaturePrix']),
 

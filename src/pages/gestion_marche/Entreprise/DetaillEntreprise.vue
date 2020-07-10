@@ -173,6 +173,7 @@
                             </div>
                         </div>
                           </td>
+
                            <td>
                               <div class="control-group">
                                                     <label class="control-label">Pays</label>
@@ -215,6 +216,7 @@
                                                             :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
+
 
                                                         </select>
                                                     </div>
@@ -446,6 +448,7 @@
                                                             :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
+
 
                                                         </select>
                                                     </div>
