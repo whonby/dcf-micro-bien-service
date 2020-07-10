@@ -261,7 +261,7 @@ return this.type_Unite_admins.filter((item) => {
 genererEnPdf(){
   var doc = new jsPDF('landscape')
   // doc.autoTable({ html: this.natures_sections })
-   const data = this.types_financements;
+   const data = this.typeUniteAdminitrativeFiltre;
     doc.setFontSize(8)
   doc.text(115,10,"LISTE DES TYPES DES UNITES ADMINISTRATIFS")
   doc.autoTable(this.getColspan(), data),
@@ -272,7 +272,7 @@ return 0
 
 getColspan(){
   return [
-    {title:"LIBELLE", dataKey:"Libelle"},
+    {title:"LIBELLE", dataKey:"libelle"},
    
   ]
 },

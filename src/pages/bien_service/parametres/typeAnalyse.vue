@@ -241,7 +241,8 @@ return this.typeAnalyses.filter((item) => {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.typeAnalyseFiltre;
-    doc.text(98,10,"Liste des types d'analyse")
+   doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES TYPES D'ANALYSE")
   doc.autoTable(this.getColumns(),data)
 // doc.save('Type des Analyses.pdf')
 doc.output('save','Type des Analyses.pdf');

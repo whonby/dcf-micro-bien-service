@@ -385,7 +385,7 @@ return this.localisations_geographiques.filter((item) => {
   // doc.autoTable({ html: this.natures_sections })
    var data = this.localisations_geographiques;
    doc.setFontSize(8)
-    doc.text(75,10,"LISTES DES LOCALISATIONS GEOGRAPHIQUES")
+    doc.text(75,10,"LISTE DES LOCALISATIONS GEOGRAPHIQUES")
   doc.autoTable(this.getColumns(),data)
 doc.save('localisation_geographique.pdf')
 return 0
