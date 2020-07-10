@@ -24,7 +24,7 @@
                                      </div> <br>
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Liste  type contrat</h5>
+                            <h5>Liste des types de contrats</h5>
                             <div align="right">
                                 Search: <input type="text" v-model="search">
                             </div>
@@ -245,7 +245,8 @@ import 'jspdf-autotable'
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.type_contrats;
-    doc.text("Listes des types de contrats",60,10)
+    doc.setFontSize(8)
+    doc.text("LISTE DES TYPES DE CONTRATS",80,10)
   doc.autoTable(this.getColumns(),data)
 //doc.save('grande_nature_depense.pdf')
  doc.output('save','type_contrat.pdf')

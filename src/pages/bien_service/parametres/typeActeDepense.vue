@@ -235,7 +235,8 @@ return this.typeActeDepenses.filter((item) => {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.typeActeDepenseFiltre;
-    doc.text(98,10,"Liste des types des actes depenses")
+    doc.setFontSize(8)
+    doc.text(98,10,"LISTE DES TYPES DES ACTES DE DEPENSES")
   doc.autoTable(this.getColumns(),data)
 // doc.save('Type des actes de depenses.pdf')
 doc.output('save','Type des actes de depenses.pdf');

@@ -16,7 +16,7 @@
                                               title="Listes Regimes Impositions "
                                               name ="Listes Regimes Impositions"
                                               worksheet = "Regime Impositions"
-                                            :data="tableRegimesImpositions">
+                                            :data="getterregimeImpositions">
                    <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
@@ -30,7 +30,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des Regimes Impositions</h5>
+              <h5>Liste des Regimes Impositions</h5>
               <div align="right">
                 Rechercher:
                 <input type="text" v-model="search" />
@@ -85,9 +85,9 @@
             <div class="pagination alternate">
                     <ul>
                         <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
-                        <li  v-for="(titre, index) in partition(tableRegimesImpositions,size).length" :key="index" :class="{ active : active_el == index }">
+                        <li  v-for="(titre, index) in partition(getterregimeImpositions,size).length" :key="index" :class="{ active : active_el == index }">
                             <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
-                        <li :class="{ disabled : page == partition(tableRegimesImpositions,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+                        <li :class="{ disabled : page == partition(getterregimeImpositions,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
 
                     </ul>
                 </div>
@@ -275,10 +275,11 @@ return this.getterregimeImpositions.filter((item) => {
 
 // impression en pdf
 genererEnPdf(){
-  var doc = new jsPDF('landscape')
+  var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
-   const data = this.types_financements;
-  doc.text(98,10,"Regime-Imposition")
+   const data = this.getterregimeImpositions;
+    doc.setFontSize(8)
+  doc.text(75,10,"LISTE DES REGIMES D'IMPOSITION")
   doc.autoTable(this.getColspan(), data),
   //doc.find("Action").remove()
 doc.save('RegimeImposition.pdf')

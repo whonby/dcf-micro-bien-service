@@ -28,7 +28,7 @@
                                      </div> <br>
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Liste des nievau etude</h5>
+                            <h5>Liste des niveaux d'étude</h5>
                             <div align="right">
                                 Search: <input type="text" v-model="search">
 
@@ -97,7 +97,7 @@
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter niveau d'etude</h3>
+                <h3>Ajouter niveau d'étude</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -132,7 +132,7 @@
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier  niveau d'etude</h3>
+                <h3>Modifier  niveau d'étude</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -258,7 +258,8 @@ return this.niveau_etudes.filter((item) => {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.niveau_etudes;
-    doc.text("Listes des niveaux etudes",60,10)
+    doc.setFontSize(8)
+    doc.text("LISTE DES NIVEAUX DES ETUDES",75,10)
   doc.autoTable(this.getColumns(),data)
 //doc.save('grande_nature_depense.pdf')
  doc.output('save','niveau_etude.pdf')
