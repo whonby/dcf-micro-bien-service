@@ -81,7 +81,8 @@
                 <div class="controls">
                   <input
                     type="number"
-                    v-model="formData.taux"
+                  
+                    :value="affcherTauxEnCours"
                     readonly
                     class="span"
                     placeholder="Saisir la taux"
@@ -395,6 +396,7 @@ export default {
 
   computed: {
     ...mapGetters("SuiviImmobilisation", ["familles","equipements","getAfficheArticle"]),
+        ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections","plans_programmes"]),
     // filtre_equipement() {
     //   const st = this.search.toLowerCase();
     //   return this.familles.filter(type => {
@@ -404,6 +406,35 @@ export default {
     //     );
     //   });
     // }
+    affcherTauxEnCours() {
+      
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.libelle;
+      }
+      return 0
+    },
+    tauxArrondit() {
+      
+      const norme = this.taux.find(normeEquipe => normeEquipe.encours == 1);
+
+      if (norme) {
+        return norme.arrondit;
+      }
+      return 0
+    },
+
+
+
+
+
+
+
+
+
+
     ArticleDynamiques() {
       return id => {
         if (id != null && id != "") {
@@ -414,7 +445,7 @@ export default {
     montantTva() {
       const val =
         parseFloat(this.formData.prix_ht) *
-        parseFloat(this.formData.taux);
+        parseFloat(this.tauxArrondit);
       // parseFloat(this.formData.taux_id);
       if (isNaN(val)) return null;
       return parseFloat(val).toFixed(2);
@@ -466,10 +497,27 @@ export default {
     },
     // fonction pour vider l'input ajouter
     ajouterFamilleLocal() {
-      var nouvelObjet = {
+      if (this.formData.equipement_id == ""){
+        alert("veuillez Selectionner le type d'equipement")
+     
+      }
+      else if (this.formData.famille_id =="" ) {
+alert("veuillez Selectionner la famille")
+      }
+      else if (this.formData.libelle =="" ) {
+alert("veuillez remplir la designation")
+      }
+       else if (this.formData.prix_ht =="" ) {
+alert("veuillez remplir le prix Unitaire")
+      }
+     
+      else
+      {
+        var nouvelObjet = {
         ...this.formData,
         montant_ttc: this.montantTtc,
         tva: this.montantTva,
+        taux:this.affcherTauxEnCours
       };
       this.ajouterArticles(nouvelObjet);
 
@@ -479,10 +527,12 @@ export default {
         equipement_id:"",
         prix_ht:"",
         libelle: "",
-        taux:"0.18",
+        // taux:"0.18",
         tva:"",
         montant_ttc:""
       };
+      }
+      
     },
     // afficher modal de modification
     afficherModalModifierFamille(articles) {
@@ -495,14 +545,33 @@ export default {
     },
     // fonction pour vider l'input modification
     modifierFamilleLocal() {
-      var nouvelObjet1 = {
+         if (this.editReferentielPrix.equipement_id == ""){
+        alert("veuillez Selectionner le type d'equipement")
+     
+      }
+      else if (this.editReferentielPrix.famille_id =="" ) {
+alert("veuillez Selectionner la famille")
+      }
+      else if (this.editReferentielPrix.libelle =="" ) {
+alert("veuillez remplir la designation")
+      }
+       else if (this.editReferentielPrix.prix_ht =="" ) {
+alert("veuillez remplir le prix Unitaire")
+      }
+     
+      else
+      {
+        var nouvelObjet1 = {
         ...this.editReferentielPrix,
         montant_ttc: this.editmontantTtc,
         tva: this.editmontantTva,
+         taux:this.affcherTauxEnCours
         
       };
       this.modifierArticles(nouvelObjet1);
       this.$("#modificationModal").modal('hide');
+      }
+      
     },
     alert() {
       console.log("ok");

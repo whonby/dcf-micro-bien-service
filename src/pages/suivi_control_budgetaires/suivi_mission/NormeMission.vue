@@ -13,7 +13,7 @@
                                               <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste des normes de missions "
@@ -23,6 +23,10 @@
                         <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
+
+                                 <div align="right" style="cursor:pointer;">
+                           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+                              </div>              
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
@@ -33,8 +37,19 @@
           </div>
              
           </div>
+              <div class="span4">
+            <br>
+         Afficher
+          <select name="pets" id="pet-select" v-model="size" class="span3">
+           <option value="10">10</option>
+           <option value="25">25</option>
+           <option value="50">50</option>
+            <option value="100">100</option>
+       </select>
+        Entrer
+         </div>
          
-           <div class="widget-content nopadding">
+           <div class="widget-content nopadding" v-if="sources_financements.length && fonctions.length">
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -46,20 +61,28 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd gradeX" v-for="(norme_mission, index) in 
-                getNormeMissionPersonnaliser"
+                <tr class="odd gradeX" v-for="(norme_mission, index) in partition(getNormeMissionPersonnaliser,size)[page]"
                  :key="norme_mission.id">
                   <td @dblclick="afficherModalModifierNormeMission(index)">
-                      {{norme_mission.objetSourceFinancement.libelle || 'Non renseigné'}}</td>
+                      {{norme_mission.varObjetSourceFinancement.libelle|| 'Non renseigné'}}</td>
                   <td @dblclick="afficherModalModifierNormeMission(index)">
-                      {{norme_mission.objetFonction.libelle || 'Non renseigné'}}</td>
+                      {{norme_mission.varObjetFonction.libelle || 'Non renseigné'}}</td>
                    
                     <td @dblclick="afficherModalModifierNormeMission(index)">
-                      {{norme_mission.perdiem || 'Non renseigné'}}</td>
+                      {{formatageSomme(parseFloat(norme_mission.perdiem)) || 'Non renseigné'}}</td>
 
-                  <td  @dblclick="afficherModalModifierNormeMission(index)">
-                      {{norme_mission.zone || 'Non renseigné'}}</td>
+               
+                        <td  @dblclick="afficherModalModifierNormeMission(index)">
+                            <span 
+                             v-if="norme_mission.zone == 0"> Côte d'ivoire</span>
+                              <span v-else-if="norme_mission.zone == 1" > Afrique</span>
+                            
+                          <span v-else >Hors Afrique</span>
+    
+                          </td>
+                   
                   <td>
+
 
 
 
@@ -82,6 +105,17 @@
             </div>
           </div>
         </div>
+
+        <div class="pagination alternate">
+      <ul>
+    <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+    <li  v-for="(titre, index) in partition(getNormeMissionPersonnaliser,size).length" :key="index" :class="{ active : active_el == index }">
+    <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+     <li :class="{ disabled : page == partition(getNormeMissionPersonnaliser,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+    </ul>
+   </div>
+
+
       </div>                    
               </div>
             </div>
@@ -94,12 +128,12 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter norme de missions</h3>
+                <h3>Ajouter norme de mission</h3>
               </div>
             
 
               <div class="modal-body">
-                <form class="form-horizontal">
+                <form class="form-horizontal" enctype="multipart/form-data">
                 
            
               <div class="control-group">
@@ -127,9 +161,9 @@
               <div class="controls">
                 <select v-model="formData.zone" class="span">
               
-                  <option value="Cote d'ivoire">Cote d'ivoire</option>
-                  <option value="Afrique">Afrique</option>
-                   <option value="hors Afrique">hors Afrique</option>
+                  <option value="0">Cote d'ivoire</option>
+                  <option value="1">Afrique</option>
+                   <option value="2">hors Afrique</option>
                 </select>
               </div>
             </div>
@@ -204,7 +238,7 @@
             </div>
               
             <div class="control-group">
-              <label class="control-label">Acteur de depense:</label>
+              <label class="control-label">Fonction:</label>
               <div class="controls">
            <select v-model="editNormeMission.fonction_id" class="span">
                <option v-for="norme in fonctions" :key="norme.id" 
@@ -215,14 +249,14 @@
             
 
 
-    <div class="control-group">
+              <div class="control-group">
               <label class="control-label">Zone:</label>
               <div class="controls">
                 <select v-model="editNormeMission.zone" class="span">
               
-                  <option value="Cote d'ivoire">Cote d'ivoire</option>
-                  <option value="Afrique">Afrique</option>
-                   <option value="hors Afrique">hors Afrique</option>
+                  <option value="0">Cote d'ivoire</option>
+                  <option value="1">Afrique</option>
+                   <option value="2">hors Afrique</option>
                 </select>
               </div>
             </div>
@@ -236,14 +270,13 @@
                   </div>
                    
                    
-                 
+              
               
         
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="editNormeMission.source_financement_id  && editNormeMission.fonction_id && 
-             editNormeMission.perdiem.length && editNormeMission.zone "
+             <button 
              @click.prevent="modifierModalNormeMissionLocal(editNormeMission)" class="btn btn-primary"
               href="#">Modifier</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
@@ -260,7 +293,8 @@
         bg-color="green"
 
   ></fab>
-<notifications  />
+
+<notifications />
 
 
 
@@ -272,11 +306,22 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import {partition} from '../../../../src/Repositories/Repository'
+import {formatageSomme} from '../../../Repositories/Repository'
+  import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   
   data() {
     return {
+             page:0,
+            size:10,
+             active_el:0,
       json_fields:{
+           'Fonction':'varObjetFonction.libelle',
+        'Source_financement':"varObjetSourceFinancement.libelle",
+         'Perdiem':'perdiem',
+         'Zone':'zone',
              
       },
         fabActions: [
@@ -295,7 +340,13 @@ export default {
         fonction_id:"",
      source_financement_id: "",
       perdiem:"",
-      zone:""
+      zone:"",
+      fichier_joint:"",
+      // selectedFile:"",
+      // imagePDF:"",
+      // namePDF:"",
+      // fichierPDF:""
+
             
         },
 
@@ -303,7 +354,12 @@ export default {
     fonction_id:"",
      source_financement_id: "",
       perdiem:"",
-      zone:""
+      zone:"",
+      fichier_joint:"",
+      // selectedFile:"",
+      // imagePDF:"",
+      // namePDF:"",
+      // fichierPDF:""
             
         },
             search:""
@@ -316,7 +372,7 @@ export default {
   },
   computed: {
 //  parcourir le getters personnaliser
-   ...mapGetters('suivi_controle_budgetaire', ['getNormeMissionPersonnaliser']) ,
+   ...mapGetters('suivi_controle_budgetaire', ['getNormeMissionPersonnaliser', 'normes_missions']) ,
 
 
 
@@ -327,27 +383,66 @@ export default {
   
    
     // methode pour trier un item
-//            normeMissionFiltre(){
+//            getNormeMissionPersonnaliser(){
 
 //       const searchTerm = this.search.toLowerCase();
 
 // return this.getNormeMissionPersonnaliser.filter((item) => {
   
-//      return item.zone.toLowerCase().includes(searchTerm) 
+//     //  return item.zone.toLowerCase().includes(searchTerm) 
+//    return item.varObjetFonction.libelle.toLowerCase().includes(searchTerm)
     
-
-   
-  
 
 //    }
 // )
-//    }
+//    },
+
+    
   },
 
   methods: {
     // methode pour notre action
    ...mapActions('suivi_controle_budgetaire', ['getNormeMission', 'ajouterNormeMission', 
-   'modifierNormeMission','supprimerNormeMission']),   
+   'modifierNormeMission','supprimerNormeMission']), 
+   
+           genererEnPdf(){
+         var doc = new jsPDF()
+        // doc.autoTable({ html: this.natures_sections })
+        var data = this.getNormeMissionPersonnaliser;
+        doc.text(60,10,"Liste des normes de mission")
+        doc.autoTable(this.getColumns(),data)
+       // doc.save('Type des actes de depenses.pdf')
+      doc.output('save','Liste des normes de mission.pdf');
+      doc.output('dataurlnewwindow');
+     return 0
+     },
+getColumns() {
+    return [
+       {    title: "FONCTION", dataKey: "fonction"},
+        {    title: "SOURCE_FINANCEMENT", dataKey: "source_financement"},
+      {    title: "PERDIEM", dataKey: "perdiem"},
+      {    title: "ZONE", dataKey: "zone"},
+       
+    ];
+},
+
+       // pagination
+
+partition:partition,
+
+  getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },  
+
    
     afficherModalAjouterFinancement(){
        this.$('#exampleModal').modal({
@@ -359,15 +454,47 @@ export default {
     onFichierChange(e){
       this.formData.fichier_joint = e.target.files[0]
     },
+
+    //  OnchangeFichier(e) {
+    //             const files = e.target.files;
+    //             this.selectedFile = event.target.files[0];
+    //             console.log(this.selectedFile)
+    //             Array.from(files).forEach(file => this.addFichierPDF(file));
+    //         },
+    //         addFichierPDF(file) {
+    //             let reader = new FileReader();
+    //             let vm = this;
+    //             reader.onload = e => {
+    //                 vm.imagePDF = "pdf.png";
+    //                 vm.namePDF = file.name;
+    //                 vm.fichierPDF = e.target.result;
+    //             };
+    //             reader.readAsDataURL(file);
+    //         },
    // fonction pour vider l'input
      ajouterNormeMissionLocal () {
-     this.ajouterNormeMission(this.formData)
 
+      //  const formData = new FormData();
+      //  formData.append('fichier_joint', this.selectedFile, this.selectedFile.name);
+      //  formData.append('fonction_id', this.formData.fonction_id);
+      //  formData.append('zone', this.formData.zone);
+      //  formData.append('perdiem', this.formData.perdiem);
+      //  formData.append('source_financement_id', this.formData.source_financement_id);
+      //   let config = {
+      //     header :{
+      //          'Content-Type': 'multipart/form-data'
+      //     }
+
+      //   }
+
+     this.ajouterNormeMission(this.formData)
+     this.getNormeMission()
         this.formData = {
              fonction_id:"",
         source_financement_id: "",
         perdiem:"",
-        zone:""
+        fichier_joint:"",
+          zone:""
             
          }
      },
@@ -386,14 +513,31 @@ afficherModalModifierNormeMission(index){
  },  
 // 
 modifierModalNormeMissionLocal(){
+  // const formData = new FormData();
+                
+  //      formData.append('fonction_id', this.editNormeMission.fonction_id);
+  //      formData.append('zone', this.editNormeMission.zone);
+  //      formData.append('perdiem', this.editNormeMission.perdiem);
+  //      formData.append('source_financement_id', this.editNormeMission.source_financement_id);
+  //               console.log(formData)
+  //               if ( this.selectedFile!==""){
+  //                   formData.append('fichier_joint', this.selectedFile, this.selectedFile.name);
+  //               }
+  //               let config = {
+  //                   header : {
+  //                       'Content-Type' : 'multipart/form-data'
+  //                   }
+  //               }
   this.modifierNormeMission(this.editNormeMission)
-  this.editNormeMission = {
-     fonction_id:"",
-        source_financement_id: "",
-        perdiem:"",
-        zone:""
-  }
-}
+  this.$('#modifierModal').modal('hide');
+  // this.editNormeMission = {
+  //    fonction_id:"",
+  //       source_financement_id: "",
+  //       perdiem:"",
+  //       zone:""
+  // }
+},
+formatageSomme:formatageSomme
 
   }
 };

@@ -16,8 +16,8 @@
               <thead>
                 <tr>
                   <!-- <th>Code</th> -->
-                       <th title="Exercice Budgetaire">Exercice Budgetaire</th>
-                  <th>Exercice Budgetaire</th>
+                       <th title="Exercice Budgetaire">Exercice Budgétaire</th>
+                  <th>Exercice Budgétaire</th>
                   <th>Grande Nature Depense</th>
                   <th>Section</th>
                   <th>Plan Programme</th>

@@ -4,5 +4,6 @@ import axios from "axios";
 //  baseURL: "http://localhost:3000/api"
 // });
 export default axios.create({
- baseURL: "http://uniteadministrative.kognishare.com/api"
+  baseURL: "http://uniteadministrative.kognishare.com/api"
+ //baseURL: "http://localhost:76/api/"
 });

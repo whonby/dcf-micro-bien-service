@@ -1,12 +1,14 @@
 import Famille from "../../pages/suivi_control_budgetaires/suiviImmobilisation/Famille.vue";
 import Service from "../../pages/suivi_control_budgetaires/suiviImmobilisation/Service.vue";
 import Amortissement from "../../pages/suivi_control_budgetaires/suiviImmobilisation/Amortissement.vue";
-import Immobilisation from "../../pages/suivi_control_budgetaires/suiviImmobilisation/Immobilisation.vue";
+import AmortissementService from "../../pages/suivi_control_budgetaires/suiviImmobilisation/AmortissementService.vue";
+import Immobilisation from "../../pages/suivi_control_budgetaires/suiviImmobilisation/docAffectationImmo/listeDesAffectation.vue";
 import AjouterImmobilisation from "../../pages/suivi_control_budgetaires/suiviImmobilisation/AffectationImmobilisation.vue";
 import ModifierImmobilisation from "../../pages/suivi_control_budgetaires/suiviImmobilisation/ModifierImmobilisation.vue";
 // import immobilisationParService from "../../pages/suivi_control_budgetaires/suiviImmobilisation/immobilisationParService.vue";
 // import VoirImmoParService from "../../pages/suivi_control_budgetaires/suiviImmobilisation/VoirImmoParService.vue";
 import TableauBordImmo from "../../pages/suivi_control_budgetaires/suiviImmobilisation/TableauBordImmo.vue";
+import TableauBordImmo2 from "../../pages/suivi_control_budgetaires/suiviImmobilisation/TableauBordImmo2.vue";
 import RechercheTauxParUniteAdm from "../../pages/suivi_control_budgetaires/suiviImmobilisation/RechercheTauxParUniteAdm.vue";
 import DetailImmobilisation from "../../pages/suivi_control_budgetaires/suiviImmobilisation/DetailImmobilisation.vue";
 import besionImmolisation from "../../pages/suivi_control_budgetaires/suiviImmobilisation/besionImmolisation.vue";
@@ -25,16 +27,72 @@ import NormeEquipement from "../../pages/suivi_control_budgetaires/suiviImmobili
 import stockageArticle from "../../pages/suivi_control_budgetaires/suiviImmobilisation/stockageEquipement.vue"
 import DetailBesoinImmo from '../../pages/suivi_control_budgetaires/suiviImmobilisation/DetailBesoinImmo.vue';
 import StockArticles from '../../pages/suivi_control_budgetaires/suiviImmobilisation/StockArticles.vue'
-import demandeEquipement from '../../pages/suivi_control_budgetaires/suiviImmobilisation/demandeEquipement.vue'
+import demandeEquipement from '../../pages/suivi_control_budgetaires/suiviImmobilisation/demandeImmobilisat.vue'
 import ficheAnalyse from '../../pages/suivi_control_budgetaires/suiviImmobilisation/resultatFinal.vue'
+import listeBesoinRealise from '../../pages/suivi_control_budgetaires/suiviImmobilisation/listeBesoinRealise.vue'
+import historiqueDemande from '../../pages/suivi_control_budgetaires/suiviImmobilisation/historiqueDemande.vue'
+import EtatImmobilisation from '../../pages/suivi_control_budgetaires/suiviImmobilisation/EtatImmobilisation.vue'
+import CauseInactivite from '../../pages/suivi_control_budgetaires/suiviImmobilisation/CauseInactivite.vue'
+import natureEntre from '../../pages/suivi_control_budgetaires/suiviImmobilisation/natureEntre.vue'
+import NormeImmo from '../../pages/suivi_control_budgetaires/suiviImmobilisation/GrpeNorme/NormeImmoPrincipal.vue'
+import historisqueAffection from '../../pages/suivi_control_budgetaires/suiviImmobilisation/docAffectationImmo/ficheDemandeEquipement.vue'
 const suiviImmobilisationRoutes = [
+
+  {
+    path: "/AmortissementService/:id",
+    name: "AmortissementService",
+    component: AmortissementService
+  },
+  {
+    path: "/historisque-Affection",
+    name: "historisqueAffection",
+    component: historisqueAffection
+  },
+  {
+    path: "/equipement-type",
+    name: "NormeImmo",
+    component: NormeImmo
+  },
+  {
+    path: "/Etat-Immobilisation",
+    name: "EtatImmobilisation",
+    component: EtatImmobilisation
+  },
+  {
+    path: "/Cause-Inactivite",
+    name: "CauseInactivite",
+    component: CauseInactivite
+  },
+  {
+    path: "/nature-Entre",
+    name: "natureEntre",
+    component: natureEntre
+  },
+
+
+
+
+
+
+
+
+  {
+    path: "/historique-Demande",
+    name: "historiqueDemande",
+    component: historiqueDemande
+  },
+  {
+    path: "/liste-Besoin-Realise",
+    name: "listeBesoinRealise",
+    component: listeBesoinRealise
+  },
   {
     path: "/ficheAnalyse",
     name: "ficheAnalyse",
     component: ficheAnalyse
   },
   {
-    path: "/demandeEquipement", 
+    path: "/demande-Equipement", 
     name: "demandeEquipement",
     component: demandeEquipement
   },
@@ -155,7 +213,11 @@ const suiviImmobilisationRoutes = [
   //   name: "afficherImmobilisation",
   //   component: VoirImmoParService
   // },
-  
+  {
+    path: "/Tableau-Bord-Immobilisation",
+    name: "TableauBordImmo2",
+    component: TableauBordImmo2
+  },
   {
     path: "/TableauBordImmo",
     name: "TableauBordImmo",

@@ -3,109 +3,149 @@
   <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
       <!--Paramètres administratifs-->
-      <li class="dropdown" id="profile-messages">
-        <a
-          title="Parametres"
-          href="#"
-          data-toggle="dropdown"
-          data-target="#profile-messages"
-          class="dropdown-toggle"
-        >
-          <span class="text">PARAMETRES </span> 
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <router-link :to="{name: 'TypeActePersonnels'}" tag="a">
-              <i class="icon-user"></i>
-              Type d'acte
-            </router-link>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'Fonction'}" tag="a">
-              <i class="icon-check"></i>
-              Fonction
-            </router-link>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'Classe'}" tag="a">
-              <i class="icon-key"></i> Classe
-            </router-link>
-          </li>
 
-           <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'Echelons'}" tag="a">
-              <i class="icon-check"></i>
-              Echelons
-            </router-link>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'Grades'}" tag="a">
-              <i class="icon-key"></i> Grades
-            </router-link>
-          </li>
-           <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'NiveauEtude'}" tag="a">
-              <i class="icon-check"></i>
-              Niveau d'étude
-            </router-link>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'TypeSalarie'}" tag="a">
-              <i class="icon-key"></i> Type de salarié
-            </router-link>
-          </li>
-           <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'TypeContrat'}" tag="a">
-              <i class="icon-key"></i> Type de contrat
-            </router-link>
-          </li>
-        </ul>
-      </li>
-      <!--Source de financement  -->
-      <li class="dropdown" id="depense">
+       <li>
+         <router-link :to="{name:'recrutementPersonnel'}" tag="a">
+           SUIVI DE RECRUTEMENT
+         </router-link>
+
+       </li>
+
+              <!-- <li class="dropdown" id="personnel">
         <a
-          title="Acteur de la depense"
+          title=""
           href="#"
           data-toggle="dropdown"
-          data-target="#depense"
+          data-target="#personnel"
           class="dropdown-toggle"
         >
-          <span class="text">ACTEURS DE LA DEPENSE </span>
+          <span class="text">  ETAT TEST </span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-          <li>
-            <router-link :to="{name: 'Acteur'}" tag="a">
-              <i class="icon-user"></i>
-              Acteurs
-            </router-link>
-          </li>
-         <!-- <li class="divider"></li>
-          <li>
-            <a href="#">
-              <i class="icon-check"></i>
-             Acte de personnel
-            </a>
-          </li>
           <li class="divider"></li>
-          <li>
-            <router-link :to="{name: 'Conge'}" tag="a">
-              <i class="icon-key"></i> Suivi des congés
+         <li>
+           <router-link :to="{name: 'RegistreDepense'}" tag="a">  
+            REGISTRE DES DEPENSES
+           </router-link>
+         </li>
+
+            <li class="divider"></li>
+         <li>
+          <router-link :to="{name: 'LivreEnregistrement'}" tag="a">
+           LIVRE D'ENREGISTREMENT
+          </router-link>
+        </li>
+        
+        <li>
+          <router-link :to="{name: 'LivreSpecial'}" tag="a">
+           LIVRE SPECIAL
+          </router-link>
+        </li>
+
+
+           <li>
+            <router-link :to="{name: 'RapportDepense'}" tag="a">
+              SITUATION PERIODIQUE
             </router-link>
-          </li>-->
+          </li>
         </ul>
-      </li>
-      <!--Paramètres programmes
-      -->
+      </li>     -->
+           <!-- <li>
+        <router-link :to="{name: 'Synthesebudg'}" tag="a">
+          SYNTHESE BUDGET
+        </router-link>
+     </li> -->
+     <!--  <li>
+      <router-link :to="{name: 'cycledeVie'}" tag="a">
+        CYCLE DE VIE
+      </router-link>
+    </li> -->
+             <!-- <li>
+           <router-link :to="{name: 'RegistreDepense'}" tag="a">  
+            REGISTRE DES DEPENSES
+           </router-link>
+         </li>
+
+            <li>
+          <router-link :to="{name: 'LivreEnregistrement'}" tag="a">
+           LIVRE D'ENREGISTREMENT
+          </router-link>
+        </li>
+
+        <li>
+          <router-link :to="{name: 'LivreSpecial'}" tag="a">
+           LIVRE SPECIAL
+          </router-link>
+        </li>
+
+
+           <li>
+            <router-link :to="{name: 'RapportDepense'}" tag="a">
+              SITUATION PERIODIQUE
+            </router-link>
+          </li> -->
+
+
+      
+       <li>
+            <router-link :to="{name: 'Acteur'}" tag="a">
+              PERSONNEL
+            </router-link>
+          </li>
+<li>
+            <router-link :to="{name: 'paiementPersonnel'}" tag="a">
+              PAIEMENT PERSONNEL
+            </router-link>
+          </li>
+          <li>
+            <router-link :to="{name: 'executionPersonnel'}" tag="a">
+              EXECUTION PERSONNEL
+            </router-link>
+          </li>
+          
+           <li>
+            <router-link :to="{name: 'Mission'}" tag="a">
+              SUIVI DES MISSIONS
+            </router-link>
+          </li>
+          <!-- <li>
+           <router-link :to="{name: 'RegistreDepense'}" tag="a">  
+            REGISTRE DES DEPENSES
+           </router-link>
+         </li> -->
+<!-- 
+           <li>
+            <router-link :to="{name: 'executionMission'}" tag="a">
+             EXECUTION DE MISSION
+            </router-link>
+          </li> -->
+
+
+
+                
+    
+   
+   
+   
+   
+   
+  
+
+          
      
+
+  
+     
+     
+
+     
+     
+
+
+
+
+
 
       <!--Tableau de bord acteur de depense-->
        <li >

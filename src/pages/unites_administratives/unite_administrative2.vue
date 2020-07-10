@@ -5,7 +5,7 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Unité d'Administrative</h3>
+        <h3>Ajouter Unité Administrative</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -13,7 +13,7 @@
             <tr>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Type Unite d'administrative</label>
+                  <label class="control-label">Type d'unité administrative</label>
                   <div class="controls">
                     <select v-model="formData.type_ua_id">
                       <option
@@ -110,7 +110,7 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Unité d'Administrative</h3>
+        <h3>Modifier Unité Administrative</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">

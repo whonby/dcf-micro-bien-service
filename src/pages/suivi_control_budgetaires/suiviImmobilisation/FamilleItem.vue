@@ -9,7 +9,9 @@
                     <td
                     
                     > {{article.libelle || 'Non renseigné'}}</td>
+                     <td
                     
+                    > {{article.dureVie || 'Non renseigné'}}</td>
                    
 
                     <td>

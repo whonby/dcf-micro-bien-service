@@ -5,7 +5,7 @@ import store from '../vuex/store'
 
 import ActeurDepenseRoutes from "./acteur_depense/ActeurDepenseRoutes"
 
-
+import CartographieRoute from "./cartographie/CartographieRoute"
 // les routes module unite administrative = gestion unite administrative
 import UniteAdministativeRoute from "./unite_administrative/UniteAdministativeRoute";
 
@@ -38,8 +38,11 @@ import MissionRoutes from './suivi_control/MissionRoutes';
 // route planification budgetaire
 import planificationBudgetaireRoutes from './planification_budgetaire/planificationBudgetaireRoute';
 
+// route pour le bien et bservice
+import BienServiceRoutes from './bien_service/BienServiceRoutes';
 
-
+// la route de l'investissement
+import investissementRoutes from './investissement/investissementRoutes';
 
 // authentitification 
 import AuthRoutes from './auth/AuthRoutes' 
@@ -55,10 +58,6 @@ const regroupementDesRoutes = [
 
   UniteAdministativeRoute,
 
-
-
-
-
   AdministratifRoutesAdoni,
   SourceFinancementRoutesAdoni,
   parametreUniteRoutesAdoni,
@@ -68,7 +67,10 @@ const regroupementDesRoutes = [
   GestionMarcheRoutes,
   suiviImmobilisationRoute,
   MissionRoutes,
-planificationBudgetaireRoutes
+planificationBudgetaireRoutes,
+BienServiceRoutes,
+investissementRoutes,
+  CartographieRoute
 
 ];
 const routes = [].concat(...regroupementDesRoutes);

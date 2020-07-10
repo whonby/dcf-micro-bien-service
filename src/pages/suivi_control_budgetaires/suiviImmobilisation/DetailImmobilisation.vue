@@ -35,9 +35,9 @@
                   <td>{{immobilisat.familleImmo.reletion__equipement.code || 'Non renseigné'}}</td>  
                     <td>{{immobilisat.familleImmo.reletion__equipement.libelle || 'Non renseigné'}}</td>
                     <td>{{immobilisat.familleImmo.libelle || 'Non renseigné'}}</td>
-                  <td>{{immobilisat.qte_reel || 'Non renseigné'}}</td>
-                  <td>{{immobilisat.qte_affecte || 'Non renseigné'}}</td>
-                  <td>{{immobilisat.qte_actuel || 'Non renseigné'}}</td>
+                  <td>{{immobilisat.qte_reel || 0}}</td>
+                  <td>{{immobilisat.qte_affecte || 0}}</td>
+                  <td>{{immobilisat.qte_actuel || 0}}</td>
                   <td>{{formatageSomme(immobilisat.prixUnitaire)|| 'Non renseigné'}}</td>
                   
                 </tr>
@@ -50,9 +50,9 @@
                   <!-- <th>Code</th> -->
                    <th>Total Actuel</th>
                   <th>Type immobilisation</th>
-                  <th>Service</th>
+                  <!-- <th>Service</th> -->
                   <th>Durée</th>
-                  <th>Numero CC</th>
+                  <!-- <th>Numero CC</th> -->
 
                   <th>Acteur Depense</th>
 
@@ -66,11 +66,11 @@
                   <td>{{formatageSomme(immobilisat.total_actuel) || 'Non renseigné'}}</td>
                   <td v-if="immobilisat.type_immo == 1" >Corporelle</td>
                   <td v-else>Incorporelle</td>
-                  <td>{{immobilisat.serviceImmo.libelle || 'Non renseigné'}}</td>
+                  <!-- <td>{{immobilisat.serviceImmo.libelle || 'Non renseigné'}}</td> -->
                   <td>{{immobilisat.duree || 'Non renseigné'}} ans</td>
-                  <td>{{immobilisat.numero_CC || 'Non renseigné'}}</td>
+                  <!-- <td>{{immobilisat.numero_CC || 'Non renseigné'}}</td> -->
 
-                  <td>{{immobilisat.acteurDepense.matricule || 'Non renseigné'}}</td>
+                  <td>{{immobilisat.acteurDepense.matricule || 'Non renseigné'}}-{{immobilisat.acteurDepense.nom || 'Non renseigné'}}--{{immobilisat.acteurDepense.prenom || 'Non renseigné'}}</td>
 
                   <!-- <td>{{immobilisat.exoBudgetaire.annee || 'Non renseigné'}}</td> -->
                  
@@ -102,9 +102,9 @@
                    <td>{{immobilisat.nature_bien || 'Non renseigné'}}</td>
                   <td>{{immobilisat.nature_dentree || 'Non renseigné'}}</td>
                    <!-- <td>{{immobilisat.TVA_id || 'Non renseigné'}} %</td> -->
-                  <td>{{formatageSomme(immobilisat.montant_evaluation) || 'Non renseigné'}}</td>
+                  <td>{{formatageSomme(immobilisat.montant_evaluation) || 0 }}</td>
                   <td>{{formaterDate(immobilisat.date_evaluation) || 'Non renseigné'}}</td>
-                  <td>{{formatageSomme(immobilisat.montant_cession)|| 'Non renseigné'}}</td>
+                  <td>{{formatageSomme(immobilisat.montant_cession)|| 0 }}</td>
                   <td>{{formaterDate(immobilisat.date_cession) || 'Non renseigné'}}</td>
 
                  
@@ -135,9 +135,9 @@
                    
                    
 
-                  <td>{{formatageSomme(immobilisat.montant_amortissement_anterieur) || 'Non renseigné'}}</td>
+                  <td>{{formatageSomme(immobilisat.montant_amortissement_anterieur) || 0}}</td>
                   <td>{{formaterDate(formaterDate(immobilisat.date_amortissement_anterieur)) || 'Non renseigné'}}</td>
-                   <td>{{formatageSomme(immobilisat.valeurorigine) || 'Non renseigné'}}</td>
+                   <td>{{formatageSomme(immobilisat.valeurorigine) || 0}}</td>
                 </tr>
               </tbody>
             </table>

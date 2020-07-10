@@ -1,4 +1,3 @@
-
 <template>
   <div>
   
@@ -13,20 +12,23 @@
          <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
-                                              title="Liste localisation geigraphique "
+                                              title="Liste localisation geographique "
                                               name ="Liste localistaion geographique"
                                               worksheet = "localisation geographique"
                                             :data="localisationsFiltre">
                                <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
+                             <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div> 
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des localisations geographiques</h5>
+            <h5>Liste des localisations géographiques</h5>
              <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -55,31 +57,27 @@
                    <td @dblclick="afficherMoadlModifierLocalisation(index)">
                       {{geographique.structure_localisation_geographique.libelle || 'Non renseigné'}}</td>
                   <td>
-
-
-
               <div class="btn-group">
               <button @click.prevent="supprimerLocalisationGeographique(geographique.id)"  class="btn btn-danger ">
                 <span class=""><i class="icon-trash"></i></span></button>
              
             </div>
-
                   </td>
                 </tr>
               </tbody>
             </table> -->
                 <ul id="demo">
-            <Tree class="item" v-for="plan in lesPlansParents"
+            <TreeLocalisation class="item" v-for="plan in lesPlansParents"
             :key="plan.id" :item="plan"   
-              @ajouterElementEnfant="ajouterElementEnfant(plan)" 
+              @ajouterElementEnfant="ajouterElementEnfant" 
               @supprimer="supprimerPlanProgrammeLocal"
-              @modifier="afficherMoadlModifierLocalisation(plan)"></Tree>
+              @modifier="afficherMoadlModifierLocalisation"></TreeLocalisation>
           </ul>
             <div v-if="lesPlansParents.length">
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucune localisattion géogrphique enregistrée</h6>
+                <h6 style="color:red;">Aucune localisattion géographique enregistrée</h6>
               </div>
             </div>
           </div>
@@ -96,13 +94,13 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter localisation geographique</h3>
+                <h3>Ajouter localisation géographique</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
 
                          <div class="control-group">
-              <label class="control-label">Structure geographique:</label>
+              <label class="control-label">Structure géographique:</label>
               <div class="controls">
                 <select  v-model="formData.structure_localisation_geographique_id">
             <option v-for="localisation in structures_geographiques" :key="localisation.id" 
@@ -117,13 +115,25 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
               </div>
             </div>
-    
-            
+     
+             
+<div class="control-group">
+              <label class="control-label">Longitude</label>
+              <div class="controls">
+                <input type="number" v-model="formData.longitude" class="span" placeholder="Saisir le longitude" />
+              </div>
+            </div>
+              <div class="control-group">
+              <label class="control-label">Latitude</label>
+              <div class="controls">
+                <input type="number" v-model="formData.latitude" class="span" placeholder="Saisir le Latitude" />
+              </div>
+            </div>
 
           </form>              
           </div>
@@ -144,12 +154,12 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier localisation geographique</h3>
+                <h3>Modifier localisation géographique</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
                           <div class="control-group">
-              <label class="control-label">Structure geographique:</label>
+              <label class="control-label">Structure géographique:</label>
               <div class="controls">
                 <select  v-model="editTitre.structure_localisation_geographique_id">
             <option v-for="localisation in structures_geographiques" :key="localisation.id" 
@@ -164,13 +174,24 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="editTitre.libelle" class="span" placeholder="" />
               </div>
             </div>
      
-
+<div class="control-group">
+              <label class="control-label">Longitude</label>
+              <div class="controls">
+                <input type="number" v-model="editTitre.longitude" class="span" placeholder="Saisir le longitude" />
+              </div>
+            </div>
+              <div class="control-group">
+              <label class="control-label">Latitude</label>
+              <div class="controls">
+                <input type="number" v-model="editTitre.latitude" class="span" placeholder="Saisir le Latitude" />
+              </div>
+            </div>
           </form>              
           </div>
            <div class="modal-footer"> 
@@ -190,7 +211,7 @@
  <div id="modalAjouterElementEnfant" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter plan programme</h3>
+                <h3>Ajouter localisation geographique</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -203,14 +224,14 @@
             </div>
 
              <div class="control-group">
-              <label class="control-label">Libéllé parent:</label>
+              <label class="control-label">Libellé parent:</label>
               <div class="controls">
                 <input type="text" readonly :value="parentDossier.libelle" class="span"  />
               </div>
             </div>
 
                <div class="control-group">
-              <label class="control-label">Structure programme:</label>
+              <label class="control-label">Structure localisation géographique:</label>
               
               <div class="controls">
               <select v-model="nouvelElementEnfant.structure_localisation_geographique_id" >
@@ -228,17 +249,28 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="nouvelElementEnfant.libelle" class="span" placeholder="Saisir le libelle" />
               </div>
             </div>
-           
+            <div class="control-group">
+              <label class="control-label">Longitude</label>
+              <div class="controls">
+                <input type="number" v-model="nouvelElementEnfant.longitude" class="span" placeholder="Saisir le longitude" />
+              </div>
+            </div>
+              <div class="control-group">
+              <label class="control-label">Latitude</label>
+              <div class="controls">
+                <input type="number" v-model="nouvelElementEnfant.latitude" class="span" placeholder="Saisir le Latitude" />
+              </div>
+            </div>
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="nouvelElementEnfant.code.length && nouvelElementEnfant.libelle.length && 
-             nouvelElementEnfant.structure_programme_id"
+             <button v-show=" nouvelElementEnfant.libelle.length && 
+             nouvelElementEnfant.structure_localisation_geographique_id"
               @click.prevent="ajouterProgrammeLocalEnfant()" class="btn btn-primary"
               >Valider</button>
               <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
@@ -267,10 +299,12 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
-import Tree from '../administratifs/Tree'
+import TreeLocalisation from '../administratifs/TreeLocalisation'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   components: {
-    Tree
+    TreeLocalisation
   },
   data() {
     return {
@@ -278,13 +312,16 @@ export default {
       nouvelElementEnfant: {
          code: "",
              libelle: "",
-          structure_localisation_geographique_id:""
+          structure_localisation_geographique_id:"",
+          latitude:"",
+          longitude:""
       },
-
       json_fields:{
                'Code':'code',
                'Libelle':'lielle',
-               'structure localistion':'structure_localisation_geographique.libelle'
+               'structure localistion':'structure_localisation_geographique.libelle',
+               'Longitude':'longitude',
+               'Latitude':'latitude'
       },
         fabActions: [
               {
@@ -300,13 +337,16 @@ export default {
         formData : {
                 code: "",
              libelle: "",
-             structure_localisation_geographique_id:""
+             structure_localisation_geographique_id:"",
+              latitude:"",
+          longitude:""
         },
-
         editTitre: {
             code: "",
              libelle: "",
-   structure_localisation_geographique_id:""
+   structure_localisation_geographique_id:"",
+    latitude:"",
+          longitude:""
         },
         search:""
  
@@ -320,11 +360,8 @@ export default {
 // methode pour maper notre guetter
   ...mapGetters('parametreGenerauxAdministratif', ['structures_geographiques', 
   'localisations_geographiques']),
-
    localisationsFiltre(){
-
      const searchTerm = this.search.toLowerCase();
-
 return this.localisations_geographiques.filter((item) => {
   
     return item.code.toLowerCase().includes(searchTerm) 
@@ -333,44 +370,63 @@ return this.localisations_geographiques.filter((item) => {
    }
 )
    },
-
     lesPlansParents(){
      return this.localisations_geographiques.filter(plan => plan.parent == null)
    },
   },
+  
+
+
   methods: {
 
+
+      genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.localisations_geographiques;
+   doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES LOCALISATIONS GEOGRAPHIQUES")
+  doc.autoTable(this.getColumns(),data)
+doc.save('localisation_geographique.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "CODE", dataKey: "code"},
+        {title: "LIBELLE", dataKey: "libelle"},
+     
+        
+    ];
+},
         ajouterProgrammeLocalEnfant () {
       // console.log(this.nouvelElementEnfant)
       this.ajouterLocalisationGeographique(this.nouvelElementEnfant)
-
         this.nouvelElementEnfant = {
                 code: "",
              libelle: "",
-          structure_localisation_geographique_id:""
+          structure_localisation_geographique_id:"",
+          latitude:"",
+          longitude:""
         }
     },
-
     supprimerPlanProgrammeLocal(item){
       this.supprimerLocalisationGeographique(item.id)
     },
 // afficher modal
-
  //afficher modal pour ajouter element enfant
 	 ajouterElementEnfant(item) {
     this.parentDossier = this.localisations_geographiques.find(plan => plan.id == item.id)
+    // this.nouvelElementEnfant = this.localisations_geographiques.find(plan => plan.id == item.id)
+    
+    this.nouvelElementEnfant.code = this.parentDossier.code
      this.nouvelElementEnfant.parent = this.parentDossier.id
-
       this.$('#modalAjouterElementEnfant').modal({
               backdrop: 'static',
               keyboard: false
              });
-
     },
-
  // fin
-
-
     // methode pour notre action
     ...mapActions('parametreGenerauxAdministratif', ['getLocalisationGeographique', 
     'ajouterLocalisationGeographique', 
@@ -385,24 +441,22 @@ return this.localisations_geographiques.filter((item) => {
    // fonction pour vider l'input
     ajouterTitreLocal () {
       this.ajouterLocalisationGeographique(this.formData)
-
         this.formData = {
                 code: "",
              libelle: "",
-              structure_localisation_geographique_id:""
+              structure_localisation_geographique_id:"",
+              latitude:"",
+          longitude:""
         }
     },
 // afficher modal
 afficherMoadlModifierLocalisation(item){
-
  this.$('#modifierModal').modal({
          backdrop: 'static',
          keyboard: false
         });
-
        
 this.editTitre = this.localisations_geographiques.find(plan => plan.id == item.id);
-
         
  },
 modifierLocalisationLocal(){
@@ -411,11 +465,11 @@ modifierLocalisationLocal(){
   this.editTitre = {
                 code: "",
              libelle: "",
-        structure_localisation_geographique_id:""
+        structure_localisation_geographique_id:"",
+        latitude:"",
+          longitude:""
   }
 }
-
   }
 };
 </script>
-

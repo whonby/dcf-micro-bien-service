@@ -2,71 +2,36 @@
   <!--top-Header-menu-->
   <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
-      <!--Paramètres administratifs-->
-      <li class="dropdown" id="profile-messages">
-        <a
-          title="Cartographie des opérations budgétaires"
-          href="#"
-          data-toggle="dropdown"
-          data-target="#profile-messages"
-          class="dropdown-toggle"
-        >
-          <i class="icon icon-user"></i>
-          <span class="text">Cartographie op.</span>
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          
-          <li class="divider"></li>
-        
-          <li class="divider"></li>
-          <li>
-            <a href="login.html">
-              <i class="icon-key"></i> Analyse des opérations
-            </a>
+   
+           <li title="Stock">
+            <router-link :to="{name:'StockArticles'}" tag="a">
+              <!-- <i class="icon-list"></i> -->
+              <span class="text">GESTIONS DE STOCK</span>   
+             
+            </router-link>
           </li>
-
           
-        </ul>
-      </li>
+           <li>
+            <router-link :to="{name:'immobilisation'}" tag="a">
+              <!-- <i class="icon-money"></!--> 
+              <span class="text">AFFECTATION</span>
+            </router-link>
+          </li>
+            <li title="Immobilisation">
+            <router-link :to="{name:'historisqueAffection'}" tag="a">
+              <!-- <i class="icon-list"></i> -->
+              <span class="text">DEMANDE EQUIPEMENT</span>   
+             
+            </router-link>
+          </li>
+         
+           <li>
+            <router-link :to="{name:'simulationAmortissement'}" tag="a">
+              <!-- <i class="icon-table"></i> -->
+              <span class="text">SIMULATION AMORTISSEMENT</span>
+            </router-link>
+          </li>
       
-      <!--Paramètres programmes
-      -->
-      <li class="" id="out">
-        <a title="Out put" href="#" class="">
-          <i class="icon icon-users"></i>
-          <span class="text">Out put</span>
-        </a>
-      </li>
-
-<li class="" id="indicateur">
-        <a title="Indicateur" href="#" class="">
-          <i class="icon icon-users"></i>
-          <span class="text">Indicateur</span>
-        </a>
-      </li>
-       <li class="dropdown" id="tableau">
-        <a
-          title="Tableau de bord"
-          href="#"
-          data-toggle="dropdown"
-          data-target="#tableau"
-          class="dropdown-toggle"
-        >
-          <i class="icon icon-user"></i>
-          <span class="text">Tableau de bord</span>
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          
-          <li class="divider"></li>
-          <li>
-            <a href="login.html">
-              <i class="icon-key"></i> Tableau de bord
-            </a>
-          </li>
-        </ul>
-      </li>
     </ul>
   </div>
 </template>

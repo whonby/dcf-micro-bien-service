@@ -71,7 +71,7 @@
                       
                     >
                      <div class="control-group">
-                                <label class="control-label">Nature depense(en Transfert)</label>
+                                <label class="control-label">Nature dépense(en Transfert)</label>
                                 <div class="controls " >
                                     <select v-model="formData.nature_dep_id" size=1 style="width:100%" v-if="budgetGeneralUniteAdministrative.length">
                                      
@@ -179,8 +179,8 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th title="Année Budgetaire">Grande nature depense</th>
-                  <th title="Grande Nature Depense">Nature economique</th>
+                    <th title="Année Budgetaire">Grande nature dépense</th>
+                  <th title="Grande Nature Depense">Nature économique</th>
                   <th>Dotation</th>
                  <th>Action</th>
                   </tr>
@@ -191,6 +191,7 @@
                     
                   >
                     <td
+                     
                      
                     > <div class="controls ">
                                     <select v-model="formData.gdeNaturedepense_id1" size=1 style="width:100%">

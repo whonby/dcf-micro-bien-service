@@ -13,7 +13,7 @@
          <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste service gestionnaire "
@@ -23,10 +23,13 @@
                       <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
+                                  <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div> 
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste service gestionnaires</h5>
+            <h5>Liste service gestionnaire</h5>
              <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -139,7 +142,7 @@
            <div class="modal-footer"> 
              <button  v-show="formData.code.length && formData.libelle.length && 
             formData.structure_administrative_id" 
-             @click.prevent="ajouterTitreLocal" class="btn btn-primary"
+             @click.prevent="ajouetProgrammeLocal" class="btn btn-primary"
               href="#">Valider</button>
               <button data-dismiss="modal" class="btn" href="#">Fermer</button> </div>
             </div>
@@ -152,7 +155,7 @@
  <div id="modalAjouterElementEnfant" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter service gestionnaires</h3>
+                <h3>Ajouter service gestionnaire</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -215,7 +218,7 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier service gestionnaires</h3>
+                <h3>Modifier service gestionnaire</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -286,6 +289,8 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 import Tree from './Tree'
 export default {
   components: {
@@ -365,7 +370,28 @@ return this.services_gestionnaires.filter((item) => {
   methods: {
     // methode pour notre action
     ...mapActions('parametreGenerauxAdministratif', ['getServiceGestionnaire', 'ajouterServiceGestionnaire', 
-   'supprimerServiceGestionnaire', 'modifierServiceGestionnaire']),   
+   'supprimerServiceGestionnaire', 'modifierServiceGestionnaire']),  
+   
+
+      genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.services_gestionnaires;
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES SERVICES GESTIONNAIRES")
+  doc.autoTable(this.getColumns(),data)
+doc.save('service_gestionnaire.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "CODE", dataKey: "code"},
+        {title: "LIBELLE", dataKey: "libelle"},
+     
+        
+    ];
+},
    
     afficherModalAjouterPlanProgramme(){
        this.$('#exampleModal').modal({
@@ -403,6 +429,7 @@ return this.services_gestionnaires.filter((item) => {
  //afficher modal pour ajouter element enfant
 	 ajouterElementEnfant(item) {
     this.parentDossier = this.services_gestionnaires.find(plan => plan.id == item.id)
+    this.nouvelElementEnfant.code = this.parentDossier.code
      this.nouvelElementEnfant.parent = this.parentDossier.id
 
       this.$('#modalAjouterElementEnfant').modal({

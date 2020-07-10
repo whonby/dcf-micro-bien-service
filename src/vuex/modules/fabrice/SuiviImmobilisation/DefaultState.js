@@ -12,7 +12,15 @@ const defaultState = {
   normeEquipements:[],
   
   articles: [],
-  stockageArticles:[]
+  stockageArticles: [],
+  natureEntres: [],
+  causeInactivite: [],
+  EtatImmobilisations: [],
+  normeImmo:[],
+  historiqueAffectation:[],
+  demandeMateriel:[],
+  historiqueAffectationService:[],
+  demandeService:[]
 };
 
 export default defaultState;

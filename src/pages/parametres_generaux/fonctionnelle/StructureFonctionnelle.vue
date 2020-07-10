@@ -14,7 +14,7 @@
                                               <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste structure fonctionnelle "
@@ -24,16 +24,30 @@
                        <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
-                                     </div> <br>
+                        <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div>
+                                     </div>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
             <h5>Liste des structures fonctionnelles</h5>
              <div align="right">
         Rechercher: <input type="text" v-model="search"  placeholder="Searche...">
 
+          </div>  
           </div>
-             
-          </div>
+
+          <div class="span4">
+                    <br>
+                    Afficher
+                    <select name="pets" id="pet-select" v-model="size" class="span3">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    Entrer
+                </div>
          
            <div class="widget-content nopadding">
             <table class="table table-bordered table-striped">
@@ -42,11 +56,11 @@
                   <th>Niveau</th>
                   <th>Libelle</th>
                    <th>Action</th>
-                </tr>
+                </tr>     
               </thead>
               <tbody>
                 <tr class="odd gradeX" v-for="(structure_fonctionnelle, index) in
-                 localisationsFiltre"
+                partition  (localisationsFiltre, size)[page]"
                  :key="structure_fonctionnelle.id">
                   <td @dblclick="afficherModalModifierType(index)">
                     {{structure_fonctionnelle.niveau || 'Non renseigné'}}</td>
@@ -76,6 +90,15 @@
             </div>
           </div>
         </div>
+         <div class="pagination alternate">
+              <ul>
+                <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+                   <li  v-for="(titre, index) in partition(localisationsFiltre,size).length" :key="index" :class="{ active : active_el == index }">
+                   <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+                <li :class="{ disabled : page == partition(localisationsFiltre,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
+              </ul>
+           </div>
       </div>
               </div>
             </div>
@@ -144,8 +167,7 @@
           </form>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="editFonctionnelle.niveau.length &&
-              editFonctionnelle.libelle.length" 
+             <button 
              @click.prevent="modifierTypeLocal(editFonctionnelle)" class="btn btn-primary"
               >Modifier</button>
               <button data-dismiss="modal" class="btn" >Fermer</button> </div>
@@ -176,13 +198,21 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import {partition} from '../../../../src/Repositories/Repository'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   
   data() {
     return {
+
+      page:0,
+      size:10,
+      active_el:0,
+
       json_fields:{
         'Code':'code',
-        'Libelle':'libelle'
+        'Libelle':'libelle',
       },
         fabActions: [
               {
@@ -238,7 +268,45 @@ return this.structures_fonctionnelles.filter((item) => {
    ...mapActions('parametreGenerauxFonctionnelle', ['getStructureFonctionnelle', 
    'ajouterStructureFonctionnelle','modifierStructureFonctionnelle','supprimerStructureFonctionnelle']),   
    
-    afficherModalAjouterStructureFonctionnelle(){
+   
+
+   // pagination
+   partition:partition,
+
+      getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+        genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.structures_fonctionnelles;
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES STRUCTURES FONCTIONNELLES")
+  doc.autoTable(this.getColumns(),data)
+doc.save('structure_fonctionnelle.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "NIVEAU", dataKey: "niveau"},
+        {title: "LIBELLE", dataKey: "libelle"},
+     
+        
+    ];
+},
+   
+   
+   afficherModalAjouterStructureFonctionnelle(){
        this.$('#exampleModal').modal({
               backdrop: 'static',
               keyboard: false
@@ -270,10 +338,11 @@ afficherModalModifierType(index){
 
 modifierTypeLocal(){
   this.modifierStructureFonctionnelle(this.editFonctionnelle)
-  this.editFonctionnelle = {
-    niveau:"",
-    libelle:""
-  }
+  this.$('#modifierModal').modal('hide');
+  // this.editFonctionnelle = {
+  //   niveau:"",
+  //   libelle:""
+  // }
 }
   }
 };

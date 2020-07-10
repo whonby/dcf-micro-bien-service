@@ -1,5 +1,6 @@
 <template>
   
+  
     <!-- End Page Header -->
     <!-- Default Light Table -->
     <div class="container-fluid">
@@ -39,7 +40,7 @@
                     <!--ongle identification-->
                     <div id="tab1" class="tab-pane active">
                       <tr>
-                        <td>
+                        <!-- <td>
                           <div class="control-group">
                             <label class="control-label">Exercice Budgetaire</label>
                             <div class="controls">
@@ -53,7 +54,19 @@
                               </select>
                             </div>
                           </div>
-                        </td>
+                        </td> -->
+                        <div class="control-group">
+                            <label class="control-label">Exercice Budgetaire</label>
+                            <div class="controls">
+                              <input
+                                type="number"
+                                class="span"
+                                 :value="anneeAmort"
+                                readonly
+                              />
+                            </div>
+                          </div>
+                       
                         <td>
                           <div class="control-group">
                             <label class="control-label">Type Unite administrative:</label>
@@ -541,7 +554,15 @@ exoEnCours(){
 return this.exercices_budgetaires.filter(element => element.encours == 1)
 },
 
+anneeAmort() {
+      
+      const norme = this.exercices_budgetaires.find(normeEquipe => normeEquipe.encours == 1);
 
+      if (norme) {
+        return norme.annee;
+      }
+      return 0
+    },
 typeUniteAdministrativeDynamiques() {
      return id => {
         if (id != null && id != "") {

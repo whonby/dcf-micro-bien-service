@@ -8,7 +8,6 @@ import { asyncLoading } from 'vuejs-loading-plugin'
 
 
 
-
 export function login({commit}, user){
     if(user.email && user.password){
        // this.loader = true;
@@ -23,6 +22,7 @@ export function login({commit}, user){
               
                     commit('LOGIN_USER', response.data.user)
                     localStorage.setItem('token', response.data.access_token)
+                     localStorage.setItem("Users",JSON.stringify(response.data.user))
                    // localStorage.setItem('user', response.data.user)
                   // commit('SET_LOADER_FALSE')
 
@@ -30,13 +30,20 @@ export function login({commit}, user){
                    
                }).catch((error) => {
                   // this.loginError = true
+
                    if (error.response.status === 401 || error.response.status === 403) {
+                       this.$app.$notify({
+                           title: 'error',
+                           text: error.response.data.message,
+                           type:"error"
+                       })
                    commit('SET_ERROR_MESSAGE', error.response.data.message)
                      commit('SET_LOADER_FALSE')
                   //   //  this.error = false
                      commit('SET_ERROR_TRUE')
                     //this.$router.push({name: 'login'})
                 }
+
                });
       }else if(!user.email){
         commit('SET_CHAMP_VIDE_TRUE')
@@ -47,10 +54,9 @@ export function login({commit}, user){
 
     export function logoutUser({commit}){
       localStorage.removeItem('token')
-     // localStorage.removeItem('user')
+      localStorage.removeItem('Users')
       commit('LOGOUT_USER')
       router.push({ name: 'Login' })                   
-
 
     }
 
@@ -71,6 +77,7 @@ export function login({commit}, user){
       axios.post('/ajouter_type_ua', objetAjoute ).then(res => {
           if(res.status == 201){
               commit('AJOUTER_TYPE_UA', res.data)
+
           }
       }).catch(error => console.log(error))
   }
@@ -94,3 +101,143 @@ export function login({commit}, user){
   }
 
 
+
+
+
+export  function  getUtilisateurs({commit}) {
+
+    queue.push(() =>  apiGuest.get('/users').then(response => {
+            // console.log(response.data)
+            commit('GET_UTILISATEUR', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+// ajouter type acte personnel
+export  function ajouterUtilisateur({commit}, objetAjoute){
+    asyncLoading(apiGuest.post('/register', objetAjoute )).then(res => {
+        if(res.status == 201){
+            commit('AJOUTER_UTILISATEUR', res.data)
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+    }).catch(error => console.log(error))
+}
+
+// supprimer type act
+export function supprimerUtilisateur({commit}, id){
+
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_UTILISATEUR', id)
+            apiGuest.delete('/users/' + id).then(() => dialog.close() )
+
+        })
+}
+
+export function modifierUtilisateur({commit}, formData){
+    apiGuest.put('/users' ,formData).then(response => {
+        commit('MODIFIER_UTILISATEUR', response.data)
+    })
+
+}
+
+
+
+export  function  getRoles({commit}) {
+
+    queue.push(() =>  apiGuest.get('/roles').then(response => {
+            // console.log(response.data)
+            commit('GET_ROLES', response.data)
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+
+
+
+
+
+export  function  getAffectation({commit}) {
+
+    queue.push(() =>  apiGuest.get('/affectations').then(response => {
+            // console.log(response.data)
+        let objetData=response.data
+            commit('GET_AFFECTATION', response.data)
+        let objet=localStorage.getItem('Users');
+        let user=JSON.parse(objet)
+       // console.log(objetData)
+        if (user.user_role.role.code_role!="SUPER_ADMIN"){
+            let affectationUsers=objetData
+
+            if (objetData){
+                affectationUsers =objetData.filter(item=>{
+                    if(item.date_fin==null && item.user_id==user.id){
+                        return item
+                    }
+                })
+            }
+          //  console.log(affectationUsers)
+            commit('GET_UNITEADMIN_BY_USER', affectationUsers)
+        }else {
+            commit('GET_UNITEADMIN_BY_USER', objetData)
+        }
+
+
+        }).catch(error => console.log(error))
+    );
+
+
+}
+
+// ajouter type acte personnel
+export  function ajouterAffectation({commit}, objetAjoute){
+   return  asyncLoading(apiGuest.post('/affectations', objetAjoute )).then(res => {
+        if(res.status == 201){
+            commit('AJOUTER_AFFECTATION', res.data)
+            this.$app.$notify({
+                title: 'success ',
+                text: 'Enregistrement effectué !',
+                type:"success"
+            })
+        }
+    }).catch(error => console.log(error))
+}
+
+// supprimer type act
+export function supprimerAffectation({commit}, id){
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_AFFECTATION', id)
+            apiGuest.delete('/affectations/' + id).then(() => dialog.close() )
+
+        })
+}
+
+export function modifierAffection({commit}, formData){
+    return  asyncLoading(apiGuest.put('/affectations', formData )).then(res => {
+        commit('MODIFIER_AFFECTATION', res.data)
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué !',
+            type:"success"
+        })
+    }).catch(error => console.log(error))
+
+}
+
+
+export function getUniteAdminUser({commit}, objet){
+  //  console.log(id)
+    commit('GET_UNITEADMIN_BY_USER', objet)
+}

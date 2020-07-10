@@ -13,7 +13,7 @@
          <div>
 
                                         <download-excel
-                                            class="btn btn-default pull-right"
+                                            class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
                                               title="Liste plan programme "
@@ -23,6 +23,9 @@
                      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
+                                                        <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div> 
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
@@ -121,7 +124,7 @@
             <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="formData.libelle" class="span3" placeholder="Saisir le libelle" />
               </div>
             </div>
            
@@ -183,7 +186,7 @@
             <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.libelle" class="span" placeholder="Saisir le libelle" />
+                <input type="text" v-model="nouvelElementEnfant.libelle" class="span3" placeholder="Saisir le libelle" />
               </div>
             </div>
            
@@ -229,7 +232,7 @@
             <div class="control-group">
               <label class="control-label">Libelle:</label>
               <div class="controls">
-                <input type="text" v-model="editPlanProgramme.libelle" class="span" placeholder="" />
+                <input type="text" v-model="editPlanProgramme.libelle" class="span3" placeholder="" />
               </div>
             </div>
            
@@ -268,6 +271,8 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 import Tree from './Tree'
 export default {
   components: {
@@ -347,7 +352,29 @@ return this.plans_programmes.filter((item) => {
   methods: {
     // methode pour notre action
    ...mapActions('parametreGenerauxAdministratif', ['getPlanProgramme', 
-   'ajouterPlanProgramme','modifierPlanProgramme','supprimerPlanProgramme']),   
+   'ajouterPlanProgramme','modifierPlanProgramme','supprimerPlanProgramme']), 
+   
+   
+
+        genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.plans_programmes;
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES PLANS PROGRAMMES")
+  doc.autoTable(this.getColumns(),data)
+doc.save('plan_programme.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "CODE", dataKey: "code"},
+        {title: "LIBELLE", dataKey: "libelle"},
+     
+        
+    ];
+},
    
     afficherModalAjouterPlanProgramme(){
        this.$('#exampleModal').modal({
@@ -385,6 +412,7 @@ return this.plans_programmes.filter((item) => {
  //afficher modal pour ajouter element enfant
 	 ajouterElementEnfant(item) {
     this.parentDossier = this.plans_programmes.find(plan => plan.id == item.id)
+    this.nouvelElementEnfant.code = this.parentDossier.code
      this.nouvelElementEnfant.parent = this.parentDossier.id
 
       this.$('#modalAjouterElementEnfant').modal({

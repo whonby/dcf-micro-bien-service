@@ -1,6 +1,7 @@
+import ExerciceBudgetaire from "../../pages/parametres_generaux/administratifs/tableauBord.vue";
 
-import ExerciceBudgetaire from "../../pages/parametres_generaux/administratifs/ExerciceBudgetaire.vue";
-import Titre from "../../pages/parametres_generaux/administratifs/Titre.vue";
+import ExerciceBudgetaire1 from "../../pages/parametres_generaux/administratifs/ExerciceBudgetaire.vue";
+import Titre from "../../pages/parametres_generaux/administratifs/tableauBord.vue";
 import NatureSection from "../../pages/parametres_generaux/administratifs/NatureSection.vue";
 import Section from "../../pages/parametres_generaux/administratifs/Section.vue";
 import StructureProgramme from "../../pages/parametres_generaux/administratifs/StructureProgramme.vue";
@@ -12,8 +13,71 @@ import GrandeNature from "../../pages/parametres_generaux/administratifs/GrandeN
 import StructureGeographique from "../../pages/parametres_generaux/administratifs/StructureGeographique.vue";
 import LocalisationGeographique from "../../pages/parametres_generaux/administratifs/LocalisationGeographique.vue";
 import TypeUniteAdmin from "../../pages/parametres_generaux/administratifs/TypeUniteAdmin.vue";
+import taux from "../../pages/parametres_generaux/administratifs/taux.vue";
+import Formejuridique from "../../pages/parametres_generaux/administratifs/Formejuridique.vue";
+import RegimeImposition from "../../pages/parametres_generaux/administratifs/RegimeImposition.vue";
+import StructurePays from "../../pages/parametres_generaux/administratifs/StructurePays.vue";
+import PlanPays from "../../pages/parametres_generaux/administratifs/PlanPays.vue";
+
+import structureOrganigrammeUa from "../../pages/parametres_generaux/administratifs/structureOrganigrammeUa.vue";
+import PlanOrganigrammeUa from "../../pages/parametres_generaux/administratifs/PlanOrganigrammeUa.vue";
 const AdministratifRoutesAdoni = [
   // route type unite administrative
+
+
+  {
+    path: "/structure-Organigramme-Ua",
+    name: "structureOrganigrammeUa",
+    component: structureOrganigrammeUa
+  },
+  // chemin du plan programme
+  {
+    path: "/Plan-Organigramme-Ua",
+    name: "PlanOrganigrammeUa",
+    component: PlanOrganigrammeUa
+  },
+  {
+    path: "/structure-pays",
+    name: "StructurePays",
+    component: StructurePays
+  },
+  // chemin du plan programme
+  {
+    path: "/plan-pays",
+    name: "PlanPays",
+    component: PlanPays
+  },
+
+
+
+
+
+
+  {
+    path: "/Forme-juridique",
+    name: "Formejuridique",
+    component: Formejuridique
+  },
+  {
+    path: "/RegimeImposition",
+    name: "RegimeImposition",
+    component: RegimeImposition
+  },
+
+
+
+
+
+  {
+    path: "/tableau-Bord-General",
+    name: "ExerciceBudgetaire",
+    component: ExerciceBudgetaire
+  },
+  {
+    path: "/taux",
+    name: "taux",
+    component: taux
+  },
   {
     path: "/type-Unite-Administrative",
     name: "typeUniteAdministrative",
@@ -21,7 +85,7 @@ const AdministratifRoutesAdoni = [
   },
     {
       // route pour le titre
-        path:"/titre",
+      path:"/tableauBord",
        name:"Titre",
        component: Titre
      },
@@ -41,8 +105,8 @@ const AdministratifRoutesAdoni = [
      {
       // route pour l'exercice budgetaire 
       path:"/exercice-budgetaire",
-        name:"ExerciceBudgetaire",
-        component:ExerciceBudgetaire
+        name:"ExerciceBudgetaire1",
+        component:ExerciceBudgetaire1
 
      },
      // route pour la nature de section

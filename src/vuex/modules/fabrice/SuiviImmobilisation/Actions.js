@@ -28,12 +28,13 @@ export function ajouterNormeArticle({ commit, dispatch }, nouveau) {
       equipe_id: nouveau.equipe_id,
       famil_id: nouveau.famil_id,
       fonction_id: nouveau.fonction_id,
-      montant_ttc: nouveau.montant_ttc,
+      // montant_ttc: nouveau.montant_ttc,
       quantite: nouveau.quantite,
-      total_ttc: nouveau.total_ttc,
-      articl_id: nouveau.articl_id,
-      stock_id: nouveau.stock_id,
-      qtestock: nouveau.qtestock,
+      normedmd: nouveau.normedmd,
+      // total_ttc: nouveau.total_ttc,
+      // articl_id: nouveau.articl_id,
+      // stock_id: nouveau.stock_id,
+      // qtestock: nouveau.qtestock,
       dureviearticle: nouveau.dureviearticle
     })).then(response => {
       if (response.status == 201) {
@@ -59,12 +60,13 @@ export function modifierNormeArticle({ commit, dispatch }, nouveau) {
       equipe_id: nouveau.equipe_id,
       famil_id: nouveau.famil_id,
       fonction_id: nouveau.fonction_id,
-      montant_ttc: nouveau.montant_ttc,
+      // montant_ttc: nouveau.montant_ttc,
       quantite: nouveau.quantite,
-      total_ttc: nouveau.total_ttc,
-      articl_id: nouveau.articl_id,
-      stock_id: nouveau.stock_id,
-      qtestock: nouveau.qtestock,
+      normedmd: nouveau.normedmd,
+      // total_ttc: nouveau.total_ttc,
+      // articl_id: nouveau.articl_id,
+      // stock_id: nouveau.stock_id,
+      // qtestock: nouveau.qtestock,
       dureviearticle: nouveau.dureviearticle
     }))
     .then(response => {
@@ -80,7 +82,7 @@ export function modifierNormeArticle({ commit, dispatch }, nouveau) {
 //supprimer
 export function supprimerNormeArticle({ commit, dispatch }, id) {
   this.$app.$dialog
-    .confirm("Voulez vouz vraiment supprimer ?.")
+    .confirm("Voulez vous vraiment supprimer ?.")
     .then(dialog => {
       commit("SUPPRIMER_NORME_EQUIPEMENTS", id);
       dispatch('getAllNormeArticle')
@@ -124,6 +126,7 @@ export function ajouterFamille({ commit, dispatch }, nouveau) {
       if (response.status == 201) {
         commit("AJOUTER_FAMILLE", response.data);
         dispatch('getAllFamille')
+        dispatch('getAllEquipement')
         this.$app.$notify({
           title: 'Success',
           text: 'Enregistrement Effectué avec Succès!',
@@ -147,6 +150,7 @@ export function modifierFamille({ commit, dispatch }, nouveau) {
     .then(response => {
       commit("MODIFIER_FAMILLE", response.data);
       dispatch('getAllFamille')
+      dispatch('getAllEquipement')
       this.$app.$notify({
         title: 'Success',
         text: 'Modification Effectué avec Succès!',
@@ -155,13 +159,13 @@ export function modifierFamille({ commit, dispatch }, nouveau) {
     });
 }
 //supprimer
-export function supprimerFamille({ commit }, id) {
+export function supprimerFamille({ commit,dispatch }, id) {
   this.$app.$dialog
-    .confirm("Voulez vouz vraiment supprimer ?.")
+    .confirm("Voulez vous vraiment supprimer ?.")
     .then(dialog => {
       commit("SUPPRIMER_FAMILLE", id);
-      //dispatch('getAllFamille')
-
+      dispatch('getAllFamille')
+      dispatch('getAllEquipement')
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete("/supprimer_famille/" + id).then(() => dialog.close());
     });
@@ -242,16 +246,21 @@ export function getAllImmobilisation({ commit }) {
       .get("/liste_immobilisation")
       .then(response => {
         commit("GET_ALL_IMMOBILISATION", response.data);
+       
       })
       .catch(error => console.log(error));
   });
 }
 
 // ajouter
-export function ajouterImmobilisation({ commit }, formData) {
+export function ajouterImmobilisation({ commit, dispatch}, formData) {
   asyncLoading(axios.post("/ajouter_immobilisation", formData)).then(response => {
     if (response.status == 201) {
       commit("AJOUTER_IMMOBILISATION", response.data);
+      dispatch("getAllBesoinImmo");
+      dispatch("getAllStock");
+      dispatch('getActPersonnel')
+      dispatch('allActeurDepense')
       this.$app.$notify({
         title: 'Success',
         text: 'Enregistrement Effectué avec Succès!',
@@ -262,9 +271,11 @@ export function ajouterImmobilisation({ commit }, formData) {
 }
 
 // modifier
-export function modifierImmobilisation({ commit }, nouveau) {
+export function modifierImmobilisation({ commit, dispatch}, nouveau) {
   asyncLoading(axios
     .put("/modifier_immobilisation/" + nouveau.id, {
+      
+      date_enregis : nouveau.date_enregis,
       type_immo: nouveau.type_immo,
       besoinimmo_id: nouveau.besoinimmo_id,
       identification: nouveau.identification,
@@ -275,7 +286,7 @@ export function modifierImmobilisation({ commit }, nouveau) {
       qte_reel: nouveau.qte_reel,
       qte_affecte: nouveau.qte_affecte,
       qte_stock: nouveau.qte_stock,      
-
+      anneamortiss: nouveau.anneamortiss,
       prixUnitaire: nouveau.prixUnitaire,
       total_actuel: nouveau.total_actuel,
       valeurorigine: nouveau.valeurorigine,
@@ -285,6 +296,7 @@ export function modifierImmobilisation({ commit }, nouveau) {
       exercice_budgetaire_id: nouveau.exercice_budgetaire_id,
       service_id: nouveau.service_id,
       nature_bien: nouveau.nature_bien,
+      unitezon_id: nouveau.unitezon_id,
       nature_dentree: nouveau.nature_dentree,
       acteur_depense_id: nouveau.acteur_depense_id,
       // TVA_id: nouveau.TVA_id,
@@ -299,6 +311,9 @@ export function modifierImmobilisation({ commit }, nouveau) {
  
     .then(response => {
       commit("MODIFIER_IMMOBILISATION", response.data);
+      dispatch("getAllBesoinImmo");
+      dispatch("getAllStock");
+      dispatch("getAllHistoAffectation")
       this.$app.$notify({
         title: 'Success',
         text: 'Modification Effectué avec Succès!',
@@ -365,21 +380,29 @@ export function ajouterBesoinImmo({ commit, dispatch }, nouveau) {
       montant_total: nouveau.montant_total,
       date_jour: nouveau.date_jour,
       historiqueqte: nouveau.historiqueqte,
-      qtestock: nouveau.qtestock,
-      qte_recu: nouveau.qte_recu,
-      qteactuelstock: nouveau.qteactuelstock,
+      // qtestock: nouveau.qtestock,
+      // qte_recu: nouveau.qte_recu,
+      // qteactuelstock: nouveau.qteactuelstock,
       motif_demande: nouveau.motif_demande,
       service_id: nouveau.service_id,
+      stock_id: nouveau.stock_id,
       norme_id: nouveau.norme_id,
       normearticle: nouveau.normearticle,
       fonction_id: nouveau.fonction_id,
       qterealise: nouveau.qterealise,
-      dure_vie: nouveau.dure_vie
+      dure_vie: nouveau.dure_vie,
+      demandeur_id: nouveau.demandeur_id,
+      uniteZone_id: nouveau.uniteZone_id,
+      direction: nouveau.direction,
+      identifier_dmd_service: nouveau.identifier_dmd_service,
+      identifier_dmd_fonction: nouveau.identifier_dmd_fonction
+      
     })
   ).then(response => {
     if (response.status == 201) {
       commit("AJOUTER_BESOIN_IMMO", response.data);
       dispatch("getAllBesoinImmo");
+      dispatch('getAllNormeArticle');
       this.$app.$notify({
         title: "Success",
         text: "Enregistrement Effectué avec Succès!",
@@ -398,23 +421,33 @@ export function modifierBesoinImmo({ commit, dispatch }, nouveau) {
       famille_id: nouveau.famille_id,
       quantite: nouveau.quantite,
       article_id: nouveau.article_id,
-      qtestock: nouveau.qtestock,
-      qteactuelstock: nouveau.qteactuelstock,
-      date_livraison: nouveau.date_livraison,
+      // qtestock: nouveau.qtestock,
+      // qteactuelstock: nouveau.qteactuelstock,
+      // date_livraison: nouveau.date_livraison,
       prix_unitaire: nouveau.prix_unitaire,
       montant_total: nouveau.montant_total,
       date_jour: nouveau.date_jour,
       historiqueqte: nouveau.historiqueqte,
       motif_demande: nouveau.motif_demande,
-      service_id: nouveau.service_id,
-      qte_recu: nouveau.qte_recu,
+      stock_id: nouveau.stock_id,
+      // service_id: nouveau.service_id,
+      // qte_recu: nouveau.qte_recu,
       date_motif: nouveau.date_motif,
       motif_ua: nouveau.motif_ua,
       date_motif_ua: nouveau.date_motif_ua,
-      norme_id: nouveau.norme_id,
+       norme_id: nouveau.norme_id,
       normearticle: nouveau.normearticle,
       fonction_id: nouveau.fonction_id,
-      dure_vie: nouveau.dure_vie
+      dure_vie: nouveau.dure_vie,
+      demandeur_id: nouveau.demandeur_id,
+      direction: nouveau.direction,
+      service_id: nouveau.service_id,
+      uniteZone_id: nouveau.uniteZone_id,
+      identifier_dmd_service: nouveau.identifier_dmd_service,
+      identifier_dmd_fonction: nouveau.identifier_dmd_fonction,
+      qte_actuel: nouveau.qte_actuel,
+      total_actuel: nouveau.total_actuel
+      
     })
   ).then(response => {
     commit("MODIFIER_BESOIN_IMMO", response.data);
@@ -426,8 +459,6 @@ export function modifierBesoinImmo({ commit, dispatch }, nouveau) {
     });
   });
 }
-
-
 
 
 
@@ -447,7 +478,11 @@ export function modifierMontantActuel({ commit, dispatch }, objet) {
 export function modifierQteRealisebesoin({ commit, dispatch}, objet) {
   // console.log(id_besoinImmo_a_modifier, qte_actu);
   axios.put("/modifier_besoin_immo/" + objet.id, {
-    qterealise: objet.qte_real
+    qterealise: objet.qte_real,
+    quantite: objet.qte_actu,
+    totalrealise: objet.total_qte_real,
+    montant_total : objet.montant_actu
+    
     // ,
     // montant_total = objet.montant_actu
   })
@@ -468,7 +503,7 @@ export function modifierQteRealisebesoin({ commit, dispatch}, objet) {
 //supprimer
 export function supprimerBesoinImmo({ commit }, id) {
   this.$app.$dialog
-    .confirm("Voulez vouz vraiment supprimer ?.")
+    .confirm("Voulez vous vraiment supprimer ?.")
     .then(dialog => {
       commit("SUPPRIMER_BESOIN_IMMO", id);
       // // dialog.loading(false) // stops the proceed button's loader
@@ -494,7 +529,7 @@ export function getAllEquipement({ commit }) {
 export function ajouterEquipement({ commit, dispatch }, nouveau) {
   asyncLoading(axios
     .post("/ajouter_equipement", {
-     
+      code: nouveau.code,
       libelle: nouveau.libelle
     }))
  
@@ -515,7 +550,7 @@ export function ajouterEquipement({ commit, dispatch }, nouveau) {
 export function modifierEquipement({ commit, dispatch }, nouveau) {
   asyncLoading(axios
     .put("/modifier_equipement/" + nouveau.id, {
-     
+      code: nouveau.code,
       libelle: nouveau.libelle
     }))
     .then(response => {
@@ -569,6 +604,7 @@ export function ajouterArticles({ commit, dispatch }, nouveau) {
       if (response.status == 201) {
         commit("AJOUTER_ARTICLES", response.data);
         dispatch('getAllArticles')
+        dispatch('getAllFamille')
         this.$app.$notify({
           title: 'Success',
           text: 'Enregistrement Effectué avec Succès!',
@@ -597,6 +633,7 @@ export function modifierArticles({ commit, dispatch }, nouveau) {
     .then(response => {
       commit("MODIFIER_ARTICLES", response.data);
       dispatch('getAllArticles')
+      dispatch('getAllFamille')
       this.$app.$notify({
         title: 'Success',
         text: 'Modification Effectué avec Succès!',
@@ -604,14 +641,15 @@ export function modifierArticles({ commit, dispatch }, nouveau) {
       })
     });
 }
+
 //supprimer
-export function supprimerArticles({ commit}, id) {
+export function supprimerArticles({ commit, dispatch}, id) {
   this.$app.$dialog
     .confirm("Voulez vouz vraiment supprimer ?.")
     .then(dialog => {
       commit("SUPPRIMER_ARTICLES", id);
-      // dispatch('getAllArticles')
-
+      dispatch('getAllArticles')
+      dispatch('getAllFamille')
       // // dialog.loading(false) // stops the proceed button's loader
       axios.delete("/supprimer_Articles/" + id).then(() => dialog.close());
     });
@@ -637,13 +675,14 @@ export function ajouterStock({ commit, dispatch }, nouveau) {
     axios.post("/ajouter_Stockage", {
       famill_id: nouveau.famill_id,
       quantitestock: nouveau.quantitestock,
-      articlestock_id: nouveau.articlestock_id,
-      // typeua_id: nouveau.typeua_id,
+      // articlestock_id: nouveau.articlestock_id,
+      typeua_id: nouveau.typeua_id,
       uAdministrative_id: nouveau.uAdministrative_id,
       typeequipe_id: nouveau.typeequipe_id,
-      durevie: nouveau.durevie,
+      // durevie: nouveau.durevie,
       histo_qte: nouveau.histo_qte,
-      date_entre: nouveau.date_entre
+      date_entre: nouveau.date_entre,
+      qtesortie: nouveau.qtesortie
     })
   ).then(response => {
     if (response.status == 201) {
@@ -665,15 +704,16 @@ export function modifierStock({ commit, dispatch }, nouveau) {
     axios.put("/modifier_Stockage/" + nouveau.id, {
       famill_id: nouveau.famill_id,
       quantitestock: nouveau.quantitestock,
-      articlestock_id: nouveau.articlestock_id,
-      // typeua_id: nouveau.typeua_id,
-      // uAdministrative_id: nouveau.uAdministrative_id,
+      // articlestock_id: nouveau.articlestock_id,
+      typeua_id: nouveau.typeua_id,
+      uAdministrative_id: nouveau.uAdministrative_id,
       typeequipe_id: nouveau.typeequipe_id,
-      durevie: nouveau.durevie,
+      // durevie: nouveau.durevie,
       histo_qte: nouveau.histo_qte,
       date_entre: nouveau.date_entre,
       date_sortie: nouveau.date_sortie,
-      qteentrant: nouveau.qteentrant
+      qteentrant: nouveau.qteentrant,
+      qtesortie: nouveau.qtesortie
     })
   ).then(response => {
     commit("MODIFIER_STOCKAGE", response.data);
@@ -719,6 +759,37 @@ export function modifierQuantiteEnStock2({ commit,dispatch }, objet) {
     
 }
 
+
+
+export function modifierQuantiteEnStock3({ commit, dispatch }, objet) {
+  // console.log(id_besoinImmo_a_modifier, qte_actu);
+  axios
+    .put("/modifier_Stockage/" + objet.id, {
+      quantitestock: objet.qteactuelstock,
+      date_sortie: objet.date_jour,
+      qtesortie: objet.qte_recu,
+      // ,
+      // montant_total = objet.montant_actu
+    })
+    .then(response => {
+      commit("MODIFIER_QUANTITE_EN_STOCK2", response.data);
+      dispatch("getAllStock");
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
 export function modifierQuantiteEnStockNorme({ commit, dispatch }, objet) {
   // console.log(id_besoinImmo_a_modifier, qte_actu);
   axios
@@ -734,17 +805,7 @@ export function modifierQuantiteEnStockNorme({ commit, dispatch }, objet) {
 
     });
 
-
-
 }
-
-
-
-
-
-
-
-
 
 export function modifierQuantiteEnStock({ commit }, objet) {
   // console.log(id_besoinImmo_a_modifier, qte_actu);
@@ -754,7 +815,7 @@ export function modifierQuantiteEnStock({ commit }, objet) {
     // montant_total = objet.montant_actu
   })
     .then(response => {
-      commit("MODIFIER_QUANTITE_EN_STOCK", response.objet)
+      commit("MODIFIER_QUANTITE_EN_STOCK", response.data)
     });
 }
 export function modifierQuantiteReel({ commit, dispatch }, objet) {
@@ -766,8 +827,653 @@ export function modifierQuantiteReel({ commit, dispatch }, objet) {
       // montant_total = objet.montant_actu
     })
     .then(response => {
-      commit("MODIFIER_QUANTITE_REEL", response.objet);
+      commit("MODIFIER_QUANTITE_REEL", response.data);
       dispatch("getAllBesoinImmo");
       
+    });
+}
+
+
+export function modifierQuantiteNormeDmd({ commit, dispatch }, objet) {
+  // console.log(id_besoinImmo_a_modifier, qte_actu);
+  axios
+    .put("/modifier_normeArticle/" + objet.id, {
+      normedmd : objet.qtedmd
+      // ,
+      // montant_total = objet.montant_actu
+    })
+    .then(response => {
+      commit("MODIFIER_NORME_REALISE", response.data);
+      dispatch("getAllNormeArticle");
+
+    });
+}
+
+
+
+// afficher liste famille
+export function getAllNatureEntre({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeNatureEntre")
+      .then(response => {
+        commit("GET_ALL_NATURE_ENTRE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+//ajouter
+export function ajouterNatureEntre({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterNatureEntre", {
+     
+
+      libelle: nouveau.libelle,
+      
+
+    }))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_NATURE_ENTRE", response.data);
+        dispatch('getAllNatureEntre')
+        
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+
+// modifier
+export function modifierNatureEntre({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierNatureEntre/" + nouveau.id, {
+
+    
+      libelle: nouveau.libelle,
+     
+
+    }))
+    .then(response => {
+      commit("MODIFIER_NATURE_ENTRE", response.data);
+      dispatch('getAllNatureEntre')
+    
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerNatureEntre({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vous vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_NATURE_ENTRE", id);
+      dispatch('getAllNatureEntre')
+      
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerNatureEntre/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
+
+
+// afficher liste famille
+export function getAllCauseInactivite({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeCause")
+      .then(response => {
+        commit("GET_ALL_CAUSE_INACTIVITE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+//ajouter
+export function ajouterCauseInactivite({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterCause", {
+
+
+      libelle: nouveau.libelle,
+
+
+    }))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_CAUSE_INACTIVITE", response.data);
+        dispatch('getAllCauseInactivite')
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+
+// modifier
+export function modifierCauseInactivite({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierCause/" + nouveau.id, {
+
+
+      libelle: nouveau.libelle,
+
+
+    }))
+    .then(response => {
+      commit("MODIFIER_CAUSE_INACTIVITE", response.data);
+      dispatch('getAllCauseInactivite')
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerCauseInactivite({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vous vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_CAUSE_INACTIVITE", id);
+      dispatch('getAllCauseInactivite')
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerCause/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
+
+
+// afficher liste famille
+export function getAllEtatImmo({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeEtatImmo")
+      .then(response => {
+        commit("GET_ALL_ETAT_IMMOBILISATION", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+//ajouter
+export function ajouterEtatImmobilisation({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterEtatImmo", {
+
+
+      libelle: nouveau.libelle,
+
+
+    }))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_ETAT_IMMOBILISATION", response.data);
+        dispatch('getAllEtatImmo')
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+
+// modifier
+export function modifierEtatImmo({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierEtatImmo/" + nouveau.id, {
+
+
+      libelle: nouveau.libelle,
+
+
+    }))
+    .then(response => {
+      commit("MODIFIER_ETAT_IMMOBILISATION", response.data);
+      dispatch('getAllEtatImmo')
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerEtatImmo({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vous vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_ETAT_IMMOBILISATION", id);
+      dispatch('getAllEtatImmo')
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerEtatImmo/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
+
+
+
+// afficher liste famille
+export function getAllNormeImmob({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeNormeImmo")
+      .then(response => {
+        commit("GET_ALL_NORMEIMMOB", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+//ajouter
+export function ajouterNormeImmob({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterNormeImmo", {
+
+      statut: nouveau.statut,
+      famille_id: nouveau.famille_id,
+      norme: nouveau.norme,
+      direction_id: nouveau.direction_id,
+      service_id: nouveau.service_id,
+      fonction_id: nouveau.fonction_id,
+      cout_moyen: nouveau.cout_moyen,
+      total: nouveau.total,
+      libelle: nouveau.libelle
+
+    }))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_NORMEIMMOB", response.data);
+        dispatch('getAllFamille')
+        dispatch('getAllNormeImmob')
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+
+// modifier
+export function modifierNormeImmob({ commit, dispatch }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierNormeImmo/" + nouveau.id, {
+
+      statut: nouveau.statut,
+      famille_id: nouveau.famille_id,
+      norme: nouveau.norme,
+      direction_id: nouveau.direction_id,
+      service_id: nouveau.service_id,
+      fonction_id: nouveau.fonction_id,
+      cout_moyen: nouveau.cout_moyen,
+      total: nouveau.total,
+      libelle: nouveau.libelle
+
+    }))
+    .then(response => {
+      commit("MODIFIER_NORMEIMMOB", response.data);
+      dispatch('getAllFamille')
+      dispatch('getAllNormeImmob')
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerNormeImmob({ commit, dispatch }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vous vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_NORMEIMMOB", id);
+      dispatch('getAllFamille')
+      dispatch('getAllNormeImmob')
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerNormeImmo/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// afficher liste famille
+export function getAllHistoAffectation({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeAffectionH")
+      .then(response => {
+        commit("GET_ALL_HISTORIQUE_AFFECTATION", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+//ajouter
+export function ajouterHistotorisqueAffection({ commit}, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterAffectionHisto", {
+      
+      acteur_id: nouveau.acteur_id,
+      ua_id: nouveau.ua_id,
+      unitezone_id: nouveau.unitezone_id,
+      fonction_id: nouveau.fonction_id,
+      article_id: nouveau.article_id,
+      qte: nouveau.qte,
+      dure_vie: nouveau.dure_vie,
+      etatimmo_id: nouveau.etatimmo_id,
+      matricule_auteur: nouveau.matricule_auteur,
+      annee: nouveau.annee,
+      annee_amortissement: nouveau.annee_amortissement,
+      valeurorigine: nouveau.valeurorigine,
+      date_mise_service: nouveau.date_mise_service,
+      service_id: nouveau.service_id
+
+    }))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_HISTORIQUE_AFFECTATION", response.data);
+        // dispatch('getAllFamille')
+        // dispatch('getAllNormeImmob')
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+
+// modifier
+export function modifierHistoAffectation({ commit}, nouveau) {
+  asyncLoading(axios
+    .put("/modifierAffectionHisto/" + nouveau.id, {
+
+      acteur_id: nouveau.acteur_id,
+      ua_id: nouveau.ua_id,
+      unitezone_id: nouveau.unitezone_id,
+      fonction_id: nouveau.fonction_id,
+      article_id: nouveau.article_id,
+      qte: nouveau.qte,
+      dure_vie: nouveau.dure_vie,
+      etatimmo_id: nouveau.etatimmo_id,
+      matricule_auteur: nouveau.matricule_auteur,
+      service_id: nouveau.service_id
+
+    }))
+    .then(response => {
+      commit("MODIFIER_HISTORIQUE_AFFECTATION", response.data);
+      // dispatch('getAllFamille')
+      // dispatch('getAllNormeImmob')
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerHistoAffectation({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vous vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_HISTORIQUE_AFFECTATION", id);
+      // dispatch('getAllFamille')
+      // dispatch('getAllNormeImmob')
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerAffectionHisto/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
+
+
+
+
+
+// afficher liste famille
+export function getAllHistoAffectationService({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeAffectionHistoService")
+      .then(response => {
+        commit("GET_ALL_HISTORIQUE_AFFECTATION_SERVICE", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+//ajouter
+export function ajouterHistotorisqueAffectionService({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterAffectionHistoService", {
+
+      
+      ua_id: nouveau.ua_id,
+      unitezone_id: nouveau.unitezone_id,
+     
+      qte: nouveau.qte,
+      dure_vie: nouveau.dure_vie,
+      etatimmo_id: nouveau.etatimmo_id,
+      
+      annee: nouveau.annee,
+      annee_amortissement: nouveau.annee_amortissement,
+      valeurorigine: nouveau.valeurorigine,
+      date_mise_service: nouveau.date_mise_service,
+      service_id: nouveau.service_id
+
+    }))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_HISTORIQUE_AFFECTATION_SERVICE", response.data);
+        // dispatch('getAllFamille')
+        // dispatch('getAllNormeImmob')
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+
+// modifier
+export function modifierHistoAffectationService({ commit }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierAffectionHistoService/" + nouveau.id, {
+
+      ua_id: nouveau.ua_id,
+      unitezone_id: nouveau.unitezone_id,
+
+      qte: nouveau.qte,
+      dure_vie: nouveau.dure_vie,
+      etatimmo_id: nouveau.etatimmo_id,
+      
+      annee: nouveau.annee,
+      annee_amortissement: nouveau.annee_amortissement,
+      valeurorigine: nouveau.valeurorigine,
+      date_mise_service: nouveau.date_mise_service,
+      service_id: nouveau.service_id
+
+    }))
+    .then(response => {
+      commit("MODIFIER_HISTORIQUE_AFFECTATION_SERVICE", response.data);
+      // dispatch('getAllFamille')
+      // dispatch('getAllNormeImmob')
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerHistoAffectationService({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vous vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_HISTORIQUE_AFFECTATION_SERVICE", id);
+      // dispatch('getAllFamille')
+      // dispatch('getAllNormeImmob')
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerAffectionHistoService/" + id).then(() => dialog.close());
+    });
+}
+
+
+
+
+// afficher liste famille
+export function getAllDemandeMateriel({ commit }) {
+  queue.push(() => {
+    axios
+      .get("/listeDmdMateriel")
+      .then(response => {
+        commit("GET_ALL_DEMANDE_MATERIEL", response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+//ajouter
+export function ajouterDemandeMateriel({ commit }, nouveau) {
+  asyncLoading(axios
+    .post("/ajouterDmdMateriel", {
+      annee_budgetaire: nouveau.annee_budgetaire,
+      uniteadmin_id: nouveau.uniteadmin_id,
+      famille_id: nouveau.famille_id,
+      fonction_id: nouveau.fonction_id,
+
+      article_id: nouveau.article_id,
+      quantite: nouveau.quantite,
+      date_demande: nouveau.date_demande,
+
+      dure_vie: nouveau.dure_vie,
+      acteur_id: nouveau.acteur_id,
+      uniteZone_id: nouveau.uniteZone_id,
+      cause_demande: nouveau.cause_demande,
+      cause_inactivite: nouveau.cause_inactivite,
+service_id: nouveau.service_id,
+      valeurorigine: nouveau.valeurorigine
+
+    }))
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_DEMANDE_MATERIEL", response.data);
+        // dispatch('getAllFamille')
+        // dispatch('getAllNormeImmob')
+
+        this.$app.$notify({
+          title: 'Success',
+          text: 'Enregistrement Effectué avec Succès!',
+          type: "success"
+        })
+      }
+    });
+}
+
+
+export function modifierDemandeMateriel({ commit }, nouveau) {
+  asyncLoading(axios
+    .put("/modifierDmdMateriel/" + nouveau.id, {
+
+      annee_budgetaire: nouveau.annee_budgetaire,
+      uniteadmin_id: nouveau.uniteadmin_id,
+      famille_id: nouveau.famille_id,
+      fonction_id: nouveau.fonction_id,
+
+      article_id: nouveau.article_id,
+      quantite: nouveau.quantite,
+      date_demande: nouveau.date_demande,
+
+      dure_vie: nouveau.dure_vie,
+      acteur_id: nouveau.acteur_id,
+      uniteZone_id: nouveau.uniteZone_id,
+      cause_demande: nouveau.cause_demande,
+      cause_inactivite: nouveau.cause_inactivite,
+      service_id: nouveau.service_id,
+      	dure_traitement_directeur: nouveau.dure_traitement_directeur,
+      motif_directeur_sce: nouveau.motif_directeur_sce,
+      date_directeur_sce: nouveau.date_directeur_sce,
+      cause_directeur_sce: nouveau.cause_directeur_sce,
+      valeurorigine : nouveau.valeurorigine
+    }))
+    .then(response => {
+      commit("MODIFIER_DEMANDE_MATERIEL", response.data);
+      // dispatch('getAllFamille')
+      // dispatch('getAllNormeImmob')
+
+      this.$app.$notify({
+        title: 'Success',
+        text: 'Modification Effectué avec Succès!',
+        type: "success"
+      })
+    });
+}
+//supprimer
+export function supprimerDemandeMateriel({ commit }, id) {
+  this.$app.$dialog
+    .confirm("Voulez vous vraiment supprimer ?.")
+    .then(dialog => {
+      commit("SUPPRIMER_DEMANDE_MATERIEL", id);
+      // dispatch('getAllFamille')
+      // dispatch('getAllNormeImmob')
+
+      // // dialog.loading(false) // stops the proceed button's loader
+      axios.delete("/supprimerDmdMateriel/" + id).then(() => dialog.close());
     });
 }

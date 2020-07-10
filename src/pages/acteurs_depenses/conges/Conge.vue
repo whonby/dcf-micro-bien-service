@@ -85,40 +85,10 @@
                     <div class="control-group">
                         <label class="control-label">Type de congés</label>
                         <div class="controls">
-                            <select v-model="conges.type_conge">
-                                <option></option>
-                                <option value="congés payés">
-                                    Congés payés
-                                </option>
-                                <option value="congé maternité">
-                                    Congés maternité
-                                </option>
-                                <option value="Congés paternité">
-                                    Congés paternité
-                                </option>
-                                <option value="congé sabbatique">
-                                    Congés sabbatique
-                                </option>
-                                <option value="congé pour raisons familiales">
-                                    Congé pour raisons familiales
-                                </option>
-                                <option value="congé parental d'éducation">
-                                    Congé parental d'éducation
-                                </option>
-                                <option value="congé de reclassement">
-                                    Congé de reclassement
-                                </option>
-
-                                <option value="congé d'adoption">
-                                    Congé d'adoption
-                                </option>
-                                <option value="congé de longue maladie">
-                                    Congé de longue maladie
-                                </option>
-                                <option value="congé pour engagement associatif">
-                                    Congé pour engagement associatif
-                                </option>
-                            </select>
+                             <select v-model="conge.type_conge_id" class="span3">
+                                        <option v-for="varText in Typeconges" :key="varText.id"
+                                          :value="varText.id">{{varText.libelle}}</option>
+                                    </select>
                         </div>
                     </div>
                     <div class="control-group">
@@ -205,6 +175,7 @@
                     date_debut: "",
                     date_fin: "",
                     acte_personnel_id: "",
+                    type_conge_id:""
                 },
                 editTitre: {
                     code: "",
@@ -222,7 +193,8 @@
         },
         computed: {
 // methode pour maper notre guetter
-            ...mapGetters('personnelUA', ['conges'])
+            ...mapGetters('personnelUA', ['conges']),
+            ...mapGetters('parametreGenerauxFonctionnelle', ['Typeconges']),
         },
         methods: {
             // methode pour notre action

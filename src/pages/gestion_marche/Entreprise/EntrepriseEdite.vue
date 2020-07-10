@@ -15,11 +15,19 @@
                             <h5>Formulaire de modification </h5>
                         </div>
                         <div class="widget-content nopadding">
-                            <form action="#" method="get" class="form-horizontal" @submit.prevent="ajouterTitreLocal" enctype="multipart/form-data">
+                            <form action="#" method="get" class="form-horizontal" enctype="multipart/form-data">
                                 <div class="row-fluid">
                                     <div class="span6">
                                         <div class="widget-box">
                                             <div class="widget-content nopadding">
+
+                                                <div class="control-group">
+                                                    <label class="control-label">Numero IDU:</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="" v-model="formData.numero_idu">
+                                                    </div>
+                                                </div>
+
 
                                                 <div class="control-group">
                                                     <label class="control-label">Raison social :</label>
@@ -36,7 +44,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label">Secteur activite</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.secteur_activite_id">
+                                                        <select v-model="formData.secteur_activite_id" class="span11">
                                                             <option></option>
                                                             <option v-for="item in secteur_activites" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
@@ -63,12 +71,12 @@
                                                         <input type="text" class="span11" placeholder="Capitale social" v-model="formData.capitale_sociale">
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
+                                                <!-- <div class="control-group">
                                                     <label class="control-label">Banque:</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Banque"  v-model="formData.banque">
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <div class="control-group">
                                                     <label class="control-label">Telephone:</label>
                                                     <div class="controls">
@@ -81,16 +89,40 @@
                                                         <input type="text" class="span11" placeholder="Email" v-model="formData.email">
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
+                                                 <div class="control-group">
+                                                    <label class="control-label">Pays:</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.pays" class="span11">
+                                                            <option></option>
+                                                            <option v-for="item in affichePays" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="control-group">
                                                     <label class="control-label">Pays:</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Pays" v-model="formData.pays">
                                                     </div>
-                                                </div>
-                                                <div class="control-group">
+                                                </div> -->
+                                                <!-- <div class="control-group">
                                                     <label class="control-label">Ville:</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Ville" v-model="formData.ville">
+                                                    </div>
+                                                </div> -->
+                                                 <div class="control-group">
+                                                    <label class="control-label">Ville:</label>
+                                                    <div class="controls">
+                                                       <select v-model="formData.ville" class="span11">
+                                                            <option></option>
+                                                            <option v-for="item in villeDynamiques(formData.pays)" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
@@ -110,16 +142,11 @@
                                                 <div class="control-group">
                                                     <label class="control-label">Form juridique:</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.forme_juridique">
-                                                            <option></option>
-                                                            <option value="SNC">Société en Nom Collectif</option>
-                                                            <option value="SCS">Société en Commandite Simple</option>
-                                                            <option value="SP">Société en Participation</option>
-                                                            <option value="SARL">Société à Responsabilité Limitée </option>
-                                                            <option value="SRLU">Société à Responsabilité Limitée Unipersonnelle</option>
-                                                            <option value="SA">Société Anonyme</option>
-                                                            <option value="SAU">Société Anonyme Unipersonnelle </option>
-                                                            <option value="GIE">Groupement d’intérêt Economique</option>
+                                                        <select v-model="formData.forme_juridique" class="span11">
+                                                           <option></option>
+                                                            <option v-for="item in getterformeJuridique" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -135,7 +162,23 @@
                                                         <input type="text" class="span11" placeholder="Service assiette" v-model="formData.service_assiette_impot">
                                                     </div>
                                                 </div>
-
+     <div class="control-group">
+                                                    <label class="control-label">Regime d'imposition</label>
+                                                    <div class="controls">
+                                                        <select v-model="formData.regime_impossition" class="span11">
+                                                             <option></option>
+                                                            <option v-for="item in getterregimeImpositions" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                 <div class="control-group">
+                                                    <label class="control-label">Carte d'identité de l'entreprise</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="" v-model="formData.carteidentite">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="widget-box">
@@ -170,11 +213,21 @@
                                                         <input type="text" class="span11" placeholder="Nombre travailleur journalier" v-model="formData.nbre_travailleur_journalier">
                                                     </div>
                                                 </div>
+                                             
                                             </div>
                                         </div>
-                                        <div class="form-actions">
+                                         <div class="modal-footer">
+        <a
+          @click.prevent="ajouterTitreLocal(formData)"
+          class="btn btn-primary"
+          href="#"
+        
+        >Modifier</a>
+        <a data-dismiss="modal" class="btn" @click.prevent="retourListeEntreprise" href="#">Fermer</a>
+      </div>
+                                        <!-- <div class="form-actions">
                                             <button type="submit" class="btn btn-success">Enregistrement</button>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
 
@@ -223,6 +276,7 @@
                 liste:[],
                 formData : {
                     id:"",
+                    numero_idu:"",
                     numero_cc: "",
                     numero_rc: "",
                     raison_sociale: "",
@@ -233,7 +287,7 @@
                     ville: "",
                     forme_juridique:"",
                     centre_impot:"",
-                    regime_imposition:"",
+                    regime_impossition:"",
                     capitale_sociale:"",
                     immatriculation_cnps:"",
                     date_enregistrement_cnps:"",
@@ -260,6 +314,7 @@
             var ObjetEntreprise=this.entreprises.find(element=> element.id === this.$route.params.id)
             this.formData = {
                     id:ObjetEntreprise.id,
+                    numero_idu:ObjetEntreprise.numero_idu,
                     numero_cc: ObjetEntreprise.numero_cc,
                     numero_rc: ObjetEntreprise.numero_rc,
                     raison_sociale: ObjetEntreprise.raison_sociale,
@@ -270,7 +325,7 @@
                     ville: ObjetEntreprise.ville,
                     forme_juridique:ObjetEntreprise.forme_juridique,
                     centre_impot:ObjetEntreprise.centre_impot,
-                    regime_imposition:ObjetEntreprise.regime_imposition,
+                    regime_impossition:ObjetEntreprise.regime_impossition,
                     capitale_sociale:ObjetEntreprise.capitale_sociale,
                     immatriculation_cnps:ObjetEntreprise.immatriculation_cnps,
                     date_enregistrement_cnps:ObjetEntreprise.date_enregistrement_cnps,
@@ -286,6 +341,8 @@
         computed: {
 // methode pour maper notre guetter
             ...mapGetters('gestionMarche', ['entreprises',"secteur_activites"]),
+            ...mapGetters("bienService", ['villes','pays']),
+              ...mapGetters("parametreGenerauxAdministratif", ["getterformeJuridique","getterregimeImpositions","getterplan_pays"]),
             titreFiltres() {
 
                 const searchTerm = this.search.toLowerCase();
@@ -299,7 +356,20 @@
                     }
                 )
 
-            }
+            },
+                   villeDynamiques() {
+     return id => {
+        if (id != null && id != "") {
+          return this.getterplan_pays.filter(
+            element => element.parent == id
+          );
+        }
+      };
+    },
+    affichePays(){
+        return this.getterplan_pays.filter(items=>items.parent == null );
+    }
+             
         },
         methods: {
             // methode pour notre action
@@ -309,6 +379,9 @@
                     backdrop: 'static',
                     keyboard: false
                 });
+            },
+             retourListeEntreprise(){
+                 this.$router.push({ name: 'Entreprise' })
             },
             // fonction pour vider l'input
             ajouterTitreLocal () {

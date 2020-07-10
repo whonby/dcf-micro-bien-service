@@ -44,6 +44,11 @@ export const SUPPRIMER_CATEGORIE_MISSION = (state, id) => {
     state.missions.unshift(nouveau_element)
 }
 
+// upload file 
+
+// export const AJOUTER_UPLOADS = (state, upload_file) => {
+//     state.missions.unshift(upload_file)
+// }
 // modifier  mission
  export const MODIFIER_MISSION = (state, element_ajout) =>{
     state.missions = state.missions.map(response =>{
@@ -170,7 +175,7 @@ export const MODIFIER_HISTORIQUE_MISSION = (state, objetModifie) => {
 
 //supprimer historque mission
 export const SUPPRIMER_HISTORIQUE_MISSION = (state , id) => {
-    state.historiqueMission = state.historiqueMission.filter(history => history.id != id)
+    state.historiques_missions = state.historiques_missions.filter(history => history.id != id)
 }
 
 
