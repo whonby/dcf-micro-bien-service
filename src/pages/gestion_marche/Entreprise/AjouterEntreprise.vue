@@ -74,7 +74,7 @@
              </td>
              <td>
                   <div class="control-group">
-                                                    <label class="control-label">Carte d'identité de l'entreprise</label>
+                                                    <label class="control-label">Nationalit&eacute; de l'entreprise</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Carte d'identité de l'entreprise" v-model="formData.carteidentite">
                                                     </div>
