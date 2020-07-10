@@ -179,3 +179,18 @@ export const GET_UNITEADMIN_BY_USER = (state, objetModifie) => {
     state.uniteAdministrativeByUser = objetModifie
 
 }
+
+
+
+export const GET_MENU = (state, tab_type_uas) => {
+    state.menu = tab_type_uas
+}
+
+
+
+
+
+
+export const GET_GROUPE = (state, tab_type_uas) => {
+    state.groupe = tab_type_uas
+}
