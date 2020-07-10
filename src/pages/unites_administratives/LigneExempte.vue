@@ -26,7 +26,7 @@
 
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Listes des lignes exemptées</h5>
+                            <h5>Liste des lignes exemptées</h5>
                             <div align="right">
                                 Search: <input type="text" v-model="search">
                             </div>
@@ -309,7 +309,8 @@ return this.derniereNivoPlanBudgetaire.filter(x => isClassDe3(x.code));
          var doc = new jsPDF()
         // doc.autoTable({ html: this.natures_sections })
         var data = this.getterligneExempter;
-        doc.text(98,10,"Liste des Lignes exemptées")
+         doc.setFontSize(8)
+        doc.text(78,10,"LISTE DES LIGNES EXEMPTEES")
         doc.autoTable(this.getColumns(),data)
        // doc.save('Type des actes de depenses.pdf')
       doc.output('save','Type des lignes exemptées.pdf');

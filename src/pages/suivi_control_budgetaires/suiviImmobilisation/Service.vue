@@ -75,16 +75,31 @@
       <hr />
       <div class="row-fluid">
         <div class="span12">
-           <download-excel
-            class="btn btn-default pull-right"
-            style="cursor:pointer;"
-            :fields="json_fields"
-            title="Liste des services"
-            :data="filtre_service"
-            name="Liste des services"
-          >
-            <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
-          </download-excel>
+           <!-- <download-excel -->
+            <!-- class="btn btn-default pull-right" -->
+            <!-- style="cursor:pointer;" -->
+            <!-- :fields="json_fields" -->
+            <!-- title="Liste des services" -->
+            <!-- :data="filtre_service" -->
+            <!-- name="Liste des services" -->
+          <!-- > -->
+            <!-- <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i> -->
+          <!-- </download-excel> -->
+                                    <div>
+                                 <download-excel
+                                     class="btn btn-success pull-right"
+                                     style="cursor:pointer;"
+                                       :fields = "json_fields"
+                                       title="Liste des services"
+                                       name ="Liste des services"
+                                       worksheet = "entreprise non sanctionner"
+                                     :data="filtre_service">
+             <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+                                          </download-excel> 
+                <div  align="right" style="cursor:pointer;">
+    <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+        </div> 
+                              </div>
           <div class="widget-box">
             <div class="widget-title">
               <span class="icon">
@@ -127,6 +142,17 @@
                   </tr>
                 </tbody>
               </table>
+                 <div class="pagination alternate">
+       <ul>
+           <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+           <li  v-for="(titre, index) in partition(filtre_service,size).length" :key="index" :class="{ active : active_el == index }">
+           <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+           <li :class="{ disabled : page == partition(filtre_service,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+       </ul>
+   </div>
+
+
+
               <div v-if="filtre_service.length"></div>
               <div v-else>
                 <p style="text-align:center;font-size:20px;color:red;">Aucun Service</p>
@@ -146,6 +172,9 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
+  import {partition} from '../../../../src/Repositories/Repository'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 export default {
   name:'service',
   data() {
@@ -197,6 +226,49 @@ json_fields: {
       "modifierService",
       "supprimerService"
     ]),
+              // pagination
+   partition:partition,
+       getDataPaginate(index){
+          this.active_el = index;
+          this.page=index
+      },
+      precedent(){
+          this.active_el--
+          this.page --
+      },
+      suivant(){
+          this.active_el++
+          this.page ++
+      },
+          
+          // exportation en pdf
+         genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.filtre_service;
+    doc.setFontSize(8)
+    doc.text(80,10,"LISTE DES SERVICES")
+  doc.autoTable(this.getColumns(),data)
+doc.save('services.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: "LIBELLE", dataKey: "libelle"},
+
+    ]
+   
+},
+       
+
+
+
+
+
+
+
+
     //afiicher modal ajouter
     afficherModalAjouterService() {
       this.$("#exampleModal").modal({
