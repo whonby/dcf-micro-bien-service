@@ -2,37 +2,7 @@
   <!--top-Header-menu-->
   <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
-      <!--Paramètres administratifs-->
-      <!-- <li class="dropdown" id="profile-messages">
-        <a
-          title="Unité administrative"
-          href="#"
-          data-toggle="dropdown"
-          data-target="#profile-messages"
-          class="dropdown-toggle"
-        >
-          <span class="text">UNITES ADMINISTRATIVES </span>
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <router-link :to="{name: 'uniteadministrative'}" tag="a">
-              <i class="icon-user"></i>
-              Gestion des unites administratives
-            </router-link>
-          </li>
-        </ul>
-      </li> -->
-
-       <!-- <li>
-            <router-link :to="{name: 'uniteadministrative'}" tag="a">
-              UNITES ADMINISTRATIVES
-            </router-link>
-          </li>
-           <li>
-            <router-link :to="{name: 'uniteZone'}" tag="a">
-              UNITES DE ZONE
-            </router-link>
-          </li> -->
+    
         
   <li class="dropdown" id="menuBUDGET">
         <a

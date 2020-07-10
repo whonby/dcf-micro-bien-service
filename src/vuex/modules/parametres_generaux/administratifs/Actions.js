@@ -1277,3 +1277,62 @@ export function supprimerPlanOrganigrammeUa({ commit, dispatch }, id) {
            
         })
 }
+
+
+// get all plan programme
+export function getPlanNormeImmo({ commit }) {
+    queue.push(() => axios.get('/listePlanNormeImmo').then(response => {
+        commit('GET_PLAN_NORME_IMMO', response.data)
+    }).catch(error => console.log(error)))
+
+
+}
+// ajouter plan Pays
+export function ajouterPlanNormeImmo({ commit, dispatch }, nouveauObjet) {
+    asyncLoading(axios.post('/ajouterPlanNormeImmo', nouveauObjet)).then(response => {
+        commit('AJOUTER_PLAN_NORME_IMMO', response.data)
+        dispatch('getPlanNormeImmo')
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Enregistrement effectué avec success !',
+            type: "success"
+        })
+    }).catch(error => console.log(error))
+}
+
+
+// modifier plan Pays
+export function modifierPlanNormeImmo({ commit, dispatch }, nouveauObjet) {
+    asyncLoading(axios.put('/modifierPlanNormeImmo/' + nouveauObjet.id, {
+        section_id: nouveauObjet.section_id,
+        famille_id: nouveauObjet.famille_id,
+        statut: nouveauObjet.statut,
+        libelle: nouveauObjet.libelle,
+        structurepays_id: nouveauObjet.structurepays_id,
+        coutmoyen: nouveauObjet.coutmoyen,
+        	durevie: nouveauObjet.	durevie
+    })).then(resultat => {
+        commit('MODIFIER_PLAN_NORME_IMMO', resultat.data)
+        dispatch('getPlanNormeImmo')
+
+        this.$app.$notify({
+            title: 'success ',
+            text: 'Modification effectué avec success !',
+            type: "success"
+        })
+    })
+}
+// supprimer le plan Pays
+export function supprimerPlanNormeImmo({ commit, dispatch }, id) {
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+            commit('SUPPRIMER_PLAN_NORME_IMMO', id)
+            dispatch('getPlanNormeImmo')
+
+            // // dialog.loading(false) // stops the proceed button's loader
+            axios.delete('/supprimerPlanNormeImmo/' + id).then(() => dialog.close())
+        })
+}

@@ -363,7 +363,7 @@ return 0
 getColumns() {
     return [
         
-        {title: "NIVEAU", dataKey: "niveau"},
+        {title: "NIVEAU", dataKey: "code_banque"},
         {title: "LIBELLE", dataKey: "libelle"},
      
         

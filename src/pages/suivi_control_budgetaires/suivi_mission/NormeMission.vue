@@ -74,7 +74,7 @@
                
                         <td  @dblclick="afficherModalModifierNormeMission(index)">
                             <span 
-                             v-if="norme_mission.zone == 0"> Cote d'ivoire</span>
+                             v-if="norme_mission.zone == 0"> Côte d'ivoire</span>
                               <span v-else-if="norme_mission.zone == 1" > Afrique</span>
                             
                           <span v-else >Hors Afrique</span>
@@ -128,7 +128,7 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter norme de missions</h3>
+                <h3>Ajouter norme de mission</h3>
               </div>
             
 

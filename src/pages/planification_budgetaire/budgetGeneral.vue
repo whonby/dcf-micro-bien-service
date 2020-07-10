@@ -15,7 +15,7 @@
                     <tr>
                         <td>
                                         <div class="control-group">
-                                <label class="control-label">Année Budgetaire</label>
+                                <label class="control-label">Année Budgétaire</label>
                                 <div class="controls">
                                     <select v-model="formData.exercicebudget_id">
                                      
@@ -47,7 +47,7 @@
                         </td>
                         <td>
    <div class="control-group">
-                                <label class="control-label">Type Unite administrative</label>
+                                <label class="control-label">Type Unité administrative</label>
                                 <div class="controls">
                                     <select v-model="formData.type_ua_id">
                                     <option
@@ -205,7 +205,7 @@
                         </td>
                          <td>
                            <div class="control-group">
-                  <label class="control-label">Imputation Budgetaire</label>
+                  <label class="control-label">Imputation Budgétaire</label>
                 
                   <div class="controls">
                     <input
@@ -226,7 +226,7 @@
                     <td>
 
                       <div class="control-group">
-                                <label class="control-label">Sous Financement</label>
+                                <label class="control-label">Source Financement</label>
                                 <div class="controls">
                                     <select v-model="formData.sousfinancement_id">
                                   <option
@@ -329,7 +329,7 @@
                     <tr>
                         <td>
                                         <div class="control-group">
-                                <label class="control-label">Année Budgetaire</label>
+                                <label class="control-label">Année Budgétaire</label>
                                 <div class="controls">
                                     <select v-model="editBudgetGeneral.exercicebudget_id">
                                       <option>dddddd</option>
@@ -361,7 +361,7 @@
                         </td>
                         <td>
    <div class="control-group">
-                                <label class="control-label">Type Unite administrative</label>
+                                <label class="control-label">Type Unité administrative</label>
                                 <div class="controls">
                                     <select v-model="editBudgetGeneral.type_ua_id">
                                     <option
@@ -379,7 +379,7 @@
                          <td>
 
                             <div class="control-group">
-                                <label class="control-label">Unite administrative</label>
+                                <label class="control-label">Unité administrative</label>
                                 <div class="controls">
                                     <select v-model="editBudgetGeneral.ua_id">
                                   <option
@@ -541,7 +541,7 @@
                         </td>
                          <td>
                            <div class="control-group">
-                  <label class="control-label">Imputation Budgetaire</label>
+                  <label class="control-label">Imputation Budgétaire</label>
                 
                   <div class="controls">
                     <input
@@ -563,7 +563,7 @@
                     <td>
 
                       <div class="control-group">
-                                <label class="control-label">Sous Financement</label>
+                                <label class="control-label">Source Financement</label>
                                 <div class="controls">
                                     <select v-model="editBudgetGeneral.sousfinancement_id">
                                   <option
@@ -592,7 +592,7 @@
                         </td>
                         <td>
                                         <div class="control-group">
-                                <label class="control-label">Grande Nature Depense</label>
+                                <label class="control-label">Grande Nature Dépense</label>
                                 <div class="controls">
                                     <select v-model="editBudgetGeneral.gdnaturedepense_id">
                                     <option
@@ -673,7 +673,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste du budget general</h5>
+              <h5>Liste du budget général</h5>
               <div align="right">
                 Recherche:
                 <input type="search" placeholder="Saisie code ou libelle" v-model="search" />
@@ -698,7 +698,7 @@
                 <thead>
                   <tr>
                     <th title="Année Budgetaire">Année Budget</th>
-                  <th title="Grande Nature Depense">Nature Depense</th>
+                  <th title="Grande Nature Depense">Nature Dépense</th>
                   <th>Section</th>
                   <th title="Plan programme">P.Programme</th>
                   <th>Destination</th>

@@ -21,7 +21,8 @@ const defaultstate = {
   strutures_pays: [],
   plan_pays:[],
 structureOrganigrammeUa: [],
-planOrganigrammeUa:[]
+planOrganigrammeUa:[],
+planNormeImmo:[],
 };
 
  export default defaultstate

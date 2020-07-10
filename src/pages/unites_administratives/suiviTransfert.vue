@@ -6,12 +6,12 @@
                     <div class="widget-box">
                         <div class="widget-title">
                             <ul class="nav nav-tabs">
-                               <li class="active"><a data-toggle="tab" href="#tab2078">Toutes les transferts <span class="badge badge-inverse" >{{nombreTransfert}}</span></a></li>
+                               <li class="active"><a data-toggle="tab" href="#tab2078">Touts les transferts <span class="badge badge-inverse" >{{nombreTransfert}}</span></a></li>
                                <li ><a data-toggle="tab" href="#tab100">Transferts en attentes    <span class="badge badge-info" >{{afficheNbreTransfertEnAnttente}}</span></a></li>
                                 <li ><a data-toggle="tab" href="#tab10">Transferts visés  <span class="badge badge-success" >{{afficheNbreTransfertValider}}</span></a></li>
                                 <li><a data-toggle="tab" href="#tab20">Transferts différés  <span class="badge badge-warning" >{{afficheNbreTransfertDiffere}}</span></a></li>
-                                 <li><a data-toggle="tab" href="#tab20002">Transferts rejétes  <span class="badge badge-important" >{{affichenbreTransfertRejeter}}</span></a></li>
-                                  <li><a data-toggle="tab" href="#tab99999">Recherches Transferts  </a></li>
+                                 <li><a data-toggle="tab" href="#tab20002">Transferts réjetés  <span class="badge badge-important" >{{affichenbreTransfertRejeter}}</span></a></li>
+                                  <li><a data-toggle="tab" href="#tab99999">Recherche des Transferts  </a></li>
                                 <!-- <li class=""><a data-toggle="tab" href="#tab2">Liste des lots</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab3">Contratualisation</a></li> -->
                             </ul>
@@ -24,7 +24,7 @@
               </span>
               <h5>Recherche</h5>
               <div align="right">
-                Recherche Par numero de Transfert:
+                Recherche Par numéro de Transfert:
                 <input type="search"  v-model="search" />
               </div>
             </div>
@@ -32,10 +32,10 @@
                 <thead>
                 <tr>
                       <th>Numero transfert</th>
-                 <th>Matricule Acteurs</th>
+                 <th>Matricule Acteur</th>
                       <th>Destinataire</th>
                    
-                    <th>Ligne budgetaire</th>
+                    <th>Ligne budgétaire</th>
                     <th>Grande nature</th>
                        <th>UA</th>
                         <th>Montant Contrat</th> 
@@ -142,7 +142,7 @@
                     
                      <th >Numero transfert</th>
                    
-                    <th>Matricule Acteurs</th>
+                    <th>Matricule Acteur</th>
                       <th>Destinataire</th>
                    
                     <th>Ligne budgetaire</th>
@@ -329,7 +329,7 @@
                     
                      <th >Numero transfert</th>
                    
-                    <th>Matricule Acteurs</th>
+                    <th>Matricule Acteur</th>
                       <th>Destinataire</th>
                    
                     <th>Ligne budgetaire</th>
@@ -409,7 +409,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Transferts en attentes</h5>
+              <h5>Liste des Transferts en attente</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />

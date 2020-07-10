@@ -10,34 +10,7 @@
         <hr>
     <div class="row-fluid">
       <div class="span12">
-         <div>
 
-
-                                        <download-excel
-                                            class="btn btn-success pull-right"
-                                            style="cursor:pointer;"
-                                              :fields = "json_fields"
-                                              title="Liste plan Organigramme Ua "
-                                              name ="Liste plan Organigramme Ua"
-                                              worksheet = "plan Organigramme Ua"
-                                            :data="getterplanOrganisationUa">
-                     <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
-
-                                                 </download-excel> 
-                                                        <div  align="right" style="cursor:pointer;">
-           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
-               </div> 
-                                     </div> <br>
-        <div class="widget-box">
-             <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Organigramme De l'Unité d'Administrative</h5>
-             <!-- <div align="right">
-        Rechercher: <input type="text" v-model="search">
-
-          </div> -->
-             
-          </div>
-         
           <div class="widget-content"> 
             <!-- <table class="table table-bordered table-striped">
               <thead>
@@ -87,7 +60,7 @@
               </div>
           </div>
            </div>
-        </div>
+       
       </div>
               </div>
             </div>

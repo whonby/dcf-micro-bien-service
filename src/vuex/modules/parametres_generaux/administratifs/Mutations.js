@@ -619,6 +619,38 @@ export const SUPPRIMER_PLAN_ORGANIGRAMME_UA = (state, id) => {
     )
 }
 
+
+// get all plan programme
+export const GET_PLAN_NORME_IMMO = (state, tableau_plan_programme) => {
+
+    state.planNormeImmo = tableau_plan_programme
+}
+
+// ajouter plan programme
+export const AJOUTER_PLAN_NORME_IMMO = (state, objetAjout) => {
+    state.planNormeImmo.unshift(objetAjout)
+}
+// modifier plan programme
+export const MODIFIER_PLAN_NORME_IMMO = (state, nouveau_objet) => {
+    state.planNormeImmo = state.planNormeImmo.map(plan_programme => {
+        if (plan_programme.id == nouveau_objet.id) {
+            plan_programme = { ...nouveau_objet }
+        }
+        return plan_programme
+    })
+}
+
+// supprimer plan programme
+export const SUPPRIMER_PLAN_NORME_IMMO = (state, id) => {
+    state.planNormeImmo = state.planNormeImmo.filter(plan_proramme =>
+        plan_proramme.id != id
+    )
+}
+
+
+
+
+
 export {
     
     GET_PLAN_PAYS,

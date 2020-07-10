@@ -20,7 +20,7 @@ export const getterregimeImpositions = state => state.regimeImpositions
 export const getterstructures_pays = state => state.strutures_pays.sort((a, b) => (a.niveau > b.niveau) ? 1 : -1)
 export const getterplan_pays = state => state.plan_pays.sort((a, b) => (a.code > b.code) ? 1 : -1)
 // export const titreFiltres = (state, search) => {
-
+export const planNormeImmo = state => state.planNormeImmo
 export const getterstructuresOrganisationUa = state => state.structureOrganigrammeUa.sort((a, b) => (a.niveau > b.niveau) ? 1 : -1)
 export const getterplanOrganisationUa = state => state.planOrganigrammeUa.sort((a, b) => (a.code > b.code) ? 1 : -1)
 // const searchTerm = search.toLowerCase();

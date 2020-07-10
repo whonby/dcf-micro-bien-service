@@ -413,7 +413,7 @@ this.ajouterMarche
                         </td>
                         <td colspan="2">
                           <div class="control-group">
-                            <label class="control-label">Code Budgetaire</label>
+                            <label class="control-label">Code Budgétaire</label>
                             <div class="controls">
                               <input type="text" class="span12" :value="CodeBudgetaire" readonly/>
                             </div>

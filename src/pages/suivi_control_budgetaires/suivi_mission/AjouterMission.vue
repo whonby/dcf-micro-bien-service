@@ -1,5 +1,4 @@
 
-afficherLaFonctionDActeurDepenseDynamique
 <template>
    <div class="container-fluid">
         <hr>
@@ -24,7 +23,7 @@ afficherLaFonctionDActeurDepenseDynamique
 
                             <td width="120">
                        <div class="control-group">
-                                <label class="control-label">Année Budgetaire</label>
+                                <label class="control-label">Année Budgétaire</label>
                                 <div class="controls ">
                                   
                              <!-- <select v-model="formData.exercice_budgetaire_id" class="span">
@@ -57,8 +56,8 @@ afficherLaFonctionDActeurDepenseDynamique
               <div class="controls">
                 <select v-model="formData.type_mission" class="span">
        
-                  <option value="mission civ">Mission en cote d'ivoire</option>
-                  <option value="mission hors civ">Mission hors cote d'ivoire</option>
+                  <option value="mission civ">Mission en côte d'ivoire</option>
+                  <option value="mission hors civ">Mission hors côte d'ivoire</option>
                   
                 </select>
               </div>
@@ -71,7 +70,7 @@ afficherLaFonctionDActeurDepenseDynamique
 
                               <td width="250"> 
             <div class="control-group">
-              <label class="control-label" title="categorie de mission">Categorie de mission:<span style="color:red;">*</span></label>
+              <label class="control-label" title="categorie de mission">Catégorie de mission:<span style="color:red;">*</span></label>
               <div class="controls">
            <select v-model="formData.categorie_missions_id" class="span">
                <option v-for="budget in categories_missions" :key="budget.id" 
@@ -122,7 +121,7 @@ afficherLaFonctionDActeurDepenseDynamique
                   <tr>
                      <td width="250">
                         <div class="control-group">
-              <label class="control-label">Unite administrative:<span style="color:red;">*</span></label>
+              <label class="control-label">Unité administrative:<span style="color:red;">*</span></label>
               <div class="controls">
            <select v-model="formData.ua_id" class="span">
                <option v-for="plans in afficherMissionParUAEnfonctiondesRole" :key="plans.id" 
@@ -133,7 +132,7 @@ afficherLaFonctionDActeurDepenseDynamique
                     </td>
                      <td width="250">
                          <div class="control-group">
-              <label class="control-label">Acteur de depense:</label>
+              <label class="control-label">Acteur de dépense:</label>
               <div class="controls">
            <select v-model="formData.acte_personnel_id" class="span" :readOnly="veifEquipementExist">
                <option v-for="depense in acteurDepenseDynamiques(formData.ua_id )" :key="depense.id" 
@@ -198,7 +197,7 @@ afficherLaFonctionDActeurDepenseDynamique
                     
                     <td colspan="2" width="250">
                       <div class="control-group">
-              <label class="control-label">Imputation budgetaire:</label>
+              <label class="control-label">Imputation budgétaire:</label>
               <div class="controls " >
             <input
                 type="text"
@@ -266,7 +265,7 @@ afficherLaFonctionDActeurDepenseDynamique
                    
                           <td>           
                <div class="control-group">
-              <label class="control-label">Itineraire retenu:</label>
+              <label class="control-label">Itinéraire retenu:</label>
               <div class="controls">
                 <input type="text" v-model="formData.itineraire_retenu" 
                 class="span"/>
@@ -277,7 +276,7 @@ afficherLaFonctionDActeurDepenseDynamique
                  <td>         
                   
                <div class="control-group">
-              <label class="control-label">Class voyage:</label>
+              <label class="control-label">Classe voyage:</label>
               <div class="controls">
                 <input type="text" v-model="formData.classe_voyage" :readonly="affichageDeLaClasseVoyageEtCoutBilletAvionEnFonctionDuMoyenneDeTransport "
                 
@@ -303,7 +302,7 @@ afficherLaFonctionDActeurDepenseDynamique
                                              
                          <td >           
                <div class="control-group">
-              <label class="control-label">frais d'hebergement:</label>
+              <label class="control-label">frais d'hébergement:</label>
               <div class="controls">
                 <input type="number" v-model="formData.frais_hebergement" 
                 class="span"/>
@@ -351,7 +350,7 @@ afficherLaFonctionDActeurDepenseDynamique
                 
                        <td> 
             <div class="control-group">
-              <label class="control-label">Cout du billet d'avion:</label>
+              <label class="control-label">Coût du billet d'avion:</label>
               <div class="controls">
      <input type="number" v-model="formData.cout_billet_avion"
      :readonly="affichageDeLaClasseVoyageEtCoutBilletAvionEnFonctionDuMoyenneDeTransport" 

@@ -27,7 +27,7 @@ type_financement
               </td>
               <td colspan="3">
                  <div class="control-group">
-            <label class="control-label">Objet Marche</label>
+            <label class="control-label">Objet du Marché</label>
             <div class="controls">
               <textarea name="" id="" cols="2" rows="2"  readonly class="span6" :value="afficherObjetMarche(editActeEffetFinancier.marche_id)"></textarea>
               
@@ -64,7 +64,7 @@ type_financement
             
               <td>
                  <div class="control-group">
-            <label class="control-label">Fichier join</label>
+            <label class="control-label">Fichier joint</label>
             <div class="controls">
               <input
                 type="file"
@@ -78,7 +78,7 @@ type_financement
               </td>
                <td>
                  <div class="control-group">
-            <label class="control-label">Date resiliation</label>
+            <label class="control-label">Date résiliation</label>
             <div class="controls">
               <input
                 type="date"
@@ -249,7 +249,7 @@ type_financement
                        
 <td>
                             <div class="control-group">
-                                <label class="control-label">Reference acte</label>
+                                <label class="control-label">Réference acte</label>
                                 <div class="controls">
                                     <input type="text" v-model="editActeEffetFinancier.reference_act"
                                            class="span3"
@@ -303,7 +303,7 @@ type_financement
 
                         <td>
                             <div class="control-group">
-                                <label class="control-label">Date ordre de service demarrage</label>
+                                <label class="control-label">Date ordre de service démarrage</label>
                                 <div class="controls">
                                     <input type="date" v-model="editActeEffetFinancier.date_odre_service"
                                            class="span3"
@@ -342,7 +342,7 @@ type_financement
 
                         <td>
                             <div class="control-group">
-                                <label class="control-label" title=" ">Date de reception definitive</label>
+                                <label class="control-label" title=" ">Date de réception définitive</label>
                                 <div class="controls">
                                     <input type="date" v-model="editActeEffetFinancier.date_reception"
                                            class="span3"
@@ -485,7 +485,7 @@ type_financement
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Marches En cours de Contratualisation</h5>
+              <h5>Liste des Marchés En cours de Contratualisation</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search"  v-model="search" />
@@ -502,7 +502,7 @@ type_financement
                     <th>Imputation</th>
                        <th>Objet march&eacute;</th> 
                         <!-- <th>Reference march&eacute;</th>  -->    
-                                    <th>Montant prevue</th>
+                                    <th>Montant prévue</th>
                                 <th>Etat du marché</th>
                                 <th colspan="2">Action</th>
                 </tr>

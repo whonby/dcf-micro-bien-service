@@ -21,7 +21,7 @@
                                  <th title="numero de l'engagement">N°engagement</th>
                                 <th title="programme/dotation">Prog/Dotat</th>
                                 <th>Action Programmatique</th>
-                                <th>Activite</th>
+                                <th>Activité</th>
                                 <th title="unite administrative">Ua</th>
                                  <th>Imputation</th>
                                   <th title="ligne budgetaire">Section</th>
@@ -85,16 +85,16 @@
               <thead>
                 <tr>
                  
-                   <th>type procedure</th>
+                   <th>type procédure</th>
                   <th>mode paiement</th>
                   <th>montant don</th>
-                   <th>montant tresor</th>
+                   <th>montant trésor</th>
                    <th >montant emprunt</th>
-                  <th>reference juridique</th>
+                  <th>référence juridique</th>
                   <th>Numero CC</th>
 
                   <th>nom_entreprise</th>
- <th>Bailleur</th>
+               <th>Bailleur</th>
                   
                <th>Object depense</th>   
                   <th>piece_justificative</th>

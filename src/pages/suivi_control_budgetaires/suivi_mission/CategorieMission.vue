@@ -30,7 +30,7 @@
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste categorie missions</h5>
+            <h5>Liste des categories de missions</h5>
              <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -127,7 +127,7 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter categorie mission</h3>
+                <h3>Ajouter catégorie mission</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -163,7 +163,7 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier categorie mission</h3>
+                <h3>Modifier catégorie mission</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">

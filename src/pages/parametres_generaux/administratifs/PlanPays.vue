@@ -20,7 +20,7 @@
                                               title="Liste plan pays "
                                               name ="Liste plan pays"
                                               worksheet = "plan pays"
-                                            :data="localisationsFiltre">
+                                            :data="getterplan_pays">
                      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
@@ -181,7 +181,7 @@
             <div class="control-group">
               <label class="control-label">Code:</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.code" class="span5" placeholder="Saisir le code" />
+                <input type="text" v-model="parentDossier.code" class="span5" placeholder="Saisir le code" />
               </div>
             </div>
             <div class="control-group">
@@ -194,8 +194,7 @@
           </table>              
           </div>
            <div class="modal-footer"> 
-             <button v-show="nouvelElementEnfant.code.length && nouvelElementEnfant.libelle.length && 
-             nouvelElementEnfant.structurepays_id"
+             <button v-show="nouvelElementEnfant.libelle.length"
               @click.prevent="ajouterpaysLocalEnfant()" class="btn btn-primary"
               >Valider</button>
               <a data-dismiss="modal" class="btn" href="#">Fermer</a> </div>
@@ -331,19 +330,19 @@ export default {
    ...mapGetters('parametreGenerauxAdministratif', [ 'getterstructures_pays',
     'getterplan_pays']) ,
 
-       localisationsFiltre(){
+//        localisationsFiltre(){
 
-     const searchTerm = this.search.toLowerCase();
+//      const searchTerm = this.search.toLowerCase();
 
-return this.getterplan_pays.filter((item) => {
+// return this.getterplan_pays.filter((item) => {
   
-    return item.code.toLowerCase().includes(searchTerm) 
-    || item.libelle.toLowerCase().includes(searchTerm) 
+//     return item.code.toLowerCase().includes(searchTerm) 
+//     || item.libelle.toLowerCase().includes(searchTerm) 
   
 
-   }
-)
-   },
+//    }
+// )
+//    },
 
    lesPlansParents(){
      return this.getterplan_pays.filter(plan => plan.parent == null)
@@ -394,8 +393,12 @@ this.$("#exampleModal").modal('hide');
     },
 
      ajouterpaysLocalEnfant () {
+       var nouvelObjet2 = {
+        ...this.nouvelElementEnfant,
+code:this.parentDossier.code
+      };
       // console.log(this.nouvelElementEnfant)
-      this.ajouterPlanPays(this.nouvelElementEnfant)
+      this.ajouterPlanPays(nouvelObjet2)
 this.$("#modalAjouterElementEnfant").modal('hide');
         this.nouvelElementEnfant = {
                 code: "",

@@ -15,7 +15,7 @@
                                             class="btn btn-success pull-right"
                                             style="cursor:pointer;"
                                               :fields = "json_fields"
-                                              title="Liste localisation geigraphique "
+                                              title="Liste localisation geographique "
                                               name ="Liste localistaion geographique"
                                               worksheet = "localisation geographique"
                                             :data="localisationsFiltre">
@@ -28,7 +28,7 @@
                                      </div> <br>
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des localisations geographiques</h5>
+            <h5>Liste des localisations géographiques</h5>
              <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -77,7 +77,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucune localisattion géogrphique enregistrée</h6>
+                <h6 style="color:red;">Aucune localisattion géographique enregistrée</h6>
               </div>
             </div>
           </div>
@@ -94,13 +94,13 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter localisation geographique</h3>
+                <h3>Ajouter localisation géographique</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
 
                          <div class="control-group">
-              <label class="control-label">Structure geographique:</label>
+              <label class="control-label">Structure géographique:</label>
               <div class="controls">
                 <select  v-model="formData.structure_localisation_geographique_id">
             <option v-for="localisation in structures_geographiques" :key="localisation.id" 
@@ -115,7 +115,7 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
               </div>
@@ -154,12 +154,12 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier localisation geographique</h3>
+                <h3>Modifier localisation géographique</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
                           <div class="control-group">
-              <label class="control-label">Structure geographique:</label>
+              <label class="control-label">Structure géographique:</label>
               <div class="controls">
                 <select  v-model="editTitre.structure_localisation_geographique_id">
             <option v-for="localisation in structures_geographiques" :key="localisation.id" 
@@ -174,7 +174,7 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="editTitre.libelle" class="span" placeholder="" />
               </div>
@@ -224,14 +224,14 @@
             </div>
 
              <div class="control-group">
-              <label class="control-label">Libéllé parent:</label>
+              <label class="control-label">Libellé parent:</label>
               <div class="controls">
                 <input type="text" readonly :value="parentDossier.libelle" class="span"  />
               </div>
             </div>
 
                <div class="control-group">
-              <label class="control-label">Structure localisation geographique:</label>
+              <label class="control-label">Structure localisation géographique:</label>
               
               <div class="controls">
               <select v-model="nouvelElementEnfant.structure_localisation_geographique_id" >
@@ -249,7 +249,7 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="nouvelElementEnfant.libelle" class="span" placeholder="Saisir le libelle" />
               </div>
@@ -384,7 +384,8 @@ return this.localisations_geographiques.filter((item) => {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.localisations_geographiques;
-    doc.text(98,10,"Liste localisation geographique")
+   doc.setFontSize(8)
+    doc.text(75,10,"LISTES DES LOCALISATIONS GEOGRAPHIQUES")
   doc.autoTable(this.getColumns(),data)
 doc.save('localisation_geographique.pdf')
 return 0

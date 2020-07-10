@@ -200,7 +200,7 @@
                <td>
               
                <div class="control-group">
-                  <label class="control-label">Montant à transferer</label>
+                  <label class="control-label">Montant à transférer</label>
                   <div class="controls">
                        <input
                       type="number"
@@ -301,7 +301,7 @@
               <td>
               
                <div class="control-group">
-                  <label class="control-label">Fichier join</label>
+                  <label class="control-label">Fichier joint</label>
                   <div class="controls">
                        <input
                       type="file"
@@ -338,7 +338,7 @@
 
               <td colspan="">
                 <div class="control-group">
-                  <label class="control-label">Ligne budgetaire</label>
+                  <label class="control-label">Ligne budgétaire</label>
                   <div class="controls">
                         <select v-model="formData.inputation_id" class="span3">
                       <option
@@ -445,7 +445,7 @@
          <td>
               
                <div class="control-group">
-                  <label class="control-label">Numero transfert</label>
+                  <label class="control-label">Numéro transfert</label>
                   <div class="controls">
                        <input
                       type="text"
@@ -618,7 +618,7 @@
               <td colspan="">
               
                <div class="control-group">
-                  <label class="control-label">Acteur depense</label>
+                  <label class="control-label">Acteur dépense</label>
                   <div class="controls">
                        <input
                       type="text"
@@ -633,7 +633,7 @@
               </td> 
               <td>
               <div class="control-group">
-                  <label class="control-label">Fichier join</label>
+                  <label class="control-label">Fichier joint</label>
                   <div class="controls">
                        <input
                       type="file"
@@ -671,7 +671,7 @@
 
               <td colspan="">
                 <div class="control-group">
-                  <label class="control-label">Ligne budgetaire</label>
+                  <label class="control-label">Ligne budgétaire</label>
                   <div class="controls">
                         <select v-model="editTransfert.inputation_id" class="span">
                       <option

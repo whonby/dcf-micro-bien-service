@@ -12,7 +12,7 @@
           <tr>
             <td>
                   <div class="control-group">
-                                <label class="control-label">Année Budgetaire</label>
+                                <label class="control-label">Année Budgétaire</label>
                                 <div class="controls ">
                             
                              <input

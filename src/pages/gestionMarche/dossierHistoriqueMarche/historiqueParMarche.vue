@@ -300,7 +300,7 @@
               </td>
                <td>
                  <div class="control-group">
-            <label class="control-label">Refencence marché</label>
+            <label class="control-label">Référence marché</label>
             <div class="controls">
               <input
                 type="text"

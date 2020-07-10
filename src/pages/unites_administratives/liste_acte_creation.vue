@@ -20,7 +20,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des acte de création</h5>
+              <h5>Liste des actes de création</h5>
               <div align="right">
                 Search:
                 <input
@@ -56,7 +56,7 @@
               </table>
               <div v-if="filtreActeCreation.length"></div>
               <div v-else>
-                <p style="text-align:center;font-size:30px;color:red;">Aucun Acte Creation</p>
+                <p style="text-align:center;font-size:30px;color:red;">Aucun Acte Création</p>
               </div>
             </div>
           </div>

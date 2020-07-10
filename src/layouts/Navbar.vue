@@ -31,11 +31,11 @@ import MenuParamG from "../components/navs/menuParametreG";
 import MenuUA from "../components/navs/menuUA";
 import MenuActeurDepense from "../components/navs/MenuActeurDepense";
 import MenuPlanification from "../components/navs/MenuPlanification";
-import MenuSuivi from "../components/navs/MenuSuivi";
-import MenuCatographie from "../components/navs/MenuCatographie";
-import MenuControlAxe from "../components/navs/MenuControlAxe";
+import MenuSuivi from "../components/navs/MenuBienetService";
+import MenuCatographie from "../components/navs/MenuComptaMatiere";
+import MenuControlAxe from "../components/navs/MenuTransfert";
 import MenuOperationRapport from "../components/navs/MenuOperationRapport.vue";
-import MenuOpRisque from "../components/navs/MenuOpRisque.vue";
+import MenuOpRisque from "../components/navs/MenuCatographieBudgetaire";
 import MenuDefaut from "../components/navs/MenuDefaut.vue";
 import MenuMilieu from "../components/navs/MenuMilieu.vue";
 import Search from "../components/Search";
@@ -82,7 +82,7 @@ export default {
 
     ...mapActions('parametreGenerauxAdministratif',
      ['getExercicesBudgetaires', 'getTitres', 'getTaux',
-    'getNatureSection', 'getSection', 'getStructureProgramme', 'getPlanProgramme', 'getStructurePays', 'getPlanPays','getPlanOrganigrammeUa','getStructureOrganigrammeUa', 
+    'getNatureSection', 'getSection', 'getStructureProgramme', 'getPlanProgramme', 'getStructurePays', 'getPlanPays','getPlanOrganigrammeUa','getStructureOrganigrammeUa','getPlanNormeImmo', 
     'getStructureAdministrative', 'getServiceGestionnaire', 'getStructureGeographique',
     'getLocalisationGeographique', 'getChapitre','getTypeUniteAdministrative',"getGrandeNature","getFormeJuridiques","getRegimeImpositions"]),
 
@@ -250,6 +250,7 @@ this.getTypeAppel()
      this.getAllDecompteFacture()
        this.getStructureOrganigrammeUa()
    this.getPlanOrganigrammeUa()
+   this.getPlanNormeImmo()
     // this.getAllArchivageDocument();
 // this.getAllDirection()
 this.getAllServiceua()

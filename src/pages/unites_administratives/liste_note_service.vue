@@ -20,7 +20,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des notes de services</h5>
+              <h5>Liste des notes de service</h5>
               <div align="right">
                 Search:
                 <input

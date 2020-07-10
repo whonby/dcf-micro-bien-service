@@ -872,6 +872,7 @@ ajouterTypeTexteLocal() {
         keyboard: false
       });
     },
+    
     // fonction pour vider l'input ajouter
     ajouterUniteAdministrativeLocal() {
      
