@@ -1,6 +1,7 @@
 afficherBanqueDynamique
 <template>
-    <div>
+    <div class="container-fluid">
+
                   
                     <!-- <div align="right">
                     <div class="widget-content">
@@ -2135,9 +2136,8 @@ formatageSomme:formatageSomme,
 
 <style scoped>
 .grdirModalActeEffet{
-     width: 1200px;
- margin: 0 -600px;
- height: 600px;
+     width: 95%;
+ margin: 0 -800px;
 
 }
 </style>

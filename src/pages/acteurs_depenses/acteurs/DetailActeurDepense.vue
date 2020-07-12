@@ -1596,7 +1596,7 @@ congeActeur
     import moment from "moment";
     import {formatageSomme} from "../../../vuex/modules/guei/Repositories/Repository"
     import {mapGetters, mapActions} from 'vuex'
-    import permission from "../../../pages/acteurs_depenses/permission/permission";
+    import permission from "../../../pages/acteurs_depenses/permissionConge/permission";
     export default {
          components:{
              permission
