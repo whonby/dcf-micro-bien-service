@@ -103,6 +103,7 @@ import {mapGetters} from 'vuex'
 export default {
 
 created(){
+  
  // console.log(JSON.stringify(this.$store.state.Utilisateurs.user))
 //console.log(this)
 

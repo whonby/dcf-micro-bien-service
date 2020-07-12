@@ -50,7 +50,7 @@
          </div>
          
            <div class="widget-content nopadding" v-if="sources_financements.length && fonctions.length">
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" id="natures_sections">
               <thead>
                 <tr>
                     <th>Source de financement</th>
@@ -407,10 +407,12 @@ export default {
    
            genererEnPdf(){
          var doc = new jsPDF()
-        // doc.autoTable({ html: this.natures_sections })
-        var data = this.getNormeMissionPersonnaliser;
+        //doc.autoTable({ html: this.natures_sections })
+         
+        // var data = this.getNormeMissionPersonnaliser;
         doc.text(60,10,"Liste des normes de mission")
-        doc.autoTable(this.getColumns(),data)
+        doc.autoTable({ html: '#natures_sections' })
+        // doc.autoTable(this.getColumns(),data)
        // doc.save('Type des actes de depenses.pdf')
       doc.output('save','Liste des normes de mission.pdf');
       doc.output('dataurlnewwindow');

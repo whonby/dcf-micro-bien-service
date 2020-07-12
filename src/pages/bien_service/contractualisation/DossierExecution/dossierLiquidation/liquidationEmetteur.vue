@@ -159,7 +159,12 @@ afficheIdActeurDepense
                       </button>
                     </td> -->
                     <td>
-                       <button  class="btn  btn-success" @click="afficherModalObservationEmetteurLiquidation(liquida.id)">
+                       <button v-if="liquida.decision_emetteur == 0" class="btn  btn-danger" @click="afficherModalObservationEmetteurLiquidation(liquida.id)">
+                        <span>
+                          <i class="icon icon-ok"></i>
+                        </span>
+                      </button>
+                       <button v-else class="btn  btn-success" @click="afficherModalObservationEmetteurLiquidation(liquida.id)">
                         <span>
                           <i class="icon icon-ok"></i>
                         </span>
@@ -601,7 +606,8 @@ afficheDateFacture() {
         mode_paiement_id:this.afficheIdModePaiement(this.editLiquidation.marche_id),
 fournisseur_id:this.afficheIdFournisseur(this.editLiquidation.marche_id),
 egagement_id:this.afficheIdEngagement(this.editLiquidation.marche_id),
-marchetype:this.editLiquidation.marchetype
+marchetype:this.editLiquidation.marchetype,
+	decision_emetteur:1
  
        };
  this.modifierLiquidation(nouvelObjet);

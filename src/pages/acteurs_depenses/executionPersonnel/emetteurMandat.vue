@@ -9,7 +9,7 @@ afficherIdOrdrePaiement
       </div>
       <div class="modal-body">
         <form class="form-horizontal" >
-          <div class="control-group">
+          <!-- <div class="control-group">
                             <label class="control-label">D&eacute;cision Emetteur </label>
                             <div class="controls">
                               <select v-model="editMandatPerso.decision_emetteur">
@@ -22,7 +22,7 @@ afficherIdOrdrePaiement
     </select>
                            
                             </div>
-                          </div>
+                          </div> -->
                         
                           <div class="control-group">
                             <label class="control-label">Observation Emetteur</label>
@@ -66,7 +66,7 @@ afficherIdOrdrePaiement
                     <th>Numero Engagement</th>
                     <th>Numero mandat</th>
                     <th>Montant autorisé</th>
-                       <th>Decision Emetteur</th>
+                       <!-- <th>Decision Emetteur</th> -->
                       <th>Date Decision</th>
                     <th>Action</th>
                   </tr>
@@ -89,7 +89,7 @@ afficherIdOrdrePaiement
                                    
                   
                     
-                                       <td>
+                                       <!-- <td>
                        <button v-if="item.decision_emetteur == 2017"  class="btn  btn-success"  @click="afficheMandatPerso(index)" >                        
                      
                       <span    >Vis&eacute;</span>
@@ -116,10 +116,14 @@ afficherIdOrdrePaiement
                       
                     
                       </button>
-                    </td>
+                    </td> -->
                     <td>{{formaterDate(item.date_decision_emetteur) || 'Non renseign&eacute;'}}</td>
                                     <td>
-                                         
+                                   <button  class="btn  btn-success" @click="afficheMandatPerso(index)">
+                        <span>
+                          <i class="icon icon-ok"></i>
+                        </span>
+                      </button>         
       <div class="btn-group">
         
                             <button @click.prevent="supprimerLiquidation(item.id)"  class="btn btn-danger " title="Supprimer">

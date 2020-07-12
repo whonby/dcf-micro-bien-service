@@ -508,7 +508,16 @@
                            
                             </div>
                           </div>
-                        
+                        <div class="control-group">
+                            <label class="control-label">Motif CF </label>
+                            <div class="controls">
+                               <select v-model="editLiquidationCf.motif_cf" class="span">
+                                <option v-for="varText in AffichierElementParent(affichierIdPlanDecission)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
                           <div class="control-group">
                             <label class="control-label">Observation CF</label>
                             <div class="controls">
@@ -549,9 +558,9 @@
                     <th>activit&eacute;</th>
                     <th>Ligne budgetaire</th>
                     <th>Montant autorisé</th>
-                       <th>Decision Emetteur</th>
+                       <!-- <th>Decision Emetteur</th> -->
                       <th>Date Decision</th>
-                      <th>Decision ordonnateur</th>
+                      <!-- <th>Decision ordonnateur</th> -->
                       <th>Date ordonnateur</th>
                       <th>Decision CF</th>
                       <th>Date CF</th>
@@ -569,11 +578,11 @@
                                     <td>{{afficherLibelleLigne(item.plan_budgetaire_id) || 'Non renseign&eacute;'}}</td>
                                      <td>{{formatageSomme(parseFloat(afficherMontantAutorise(item.ordrepaiemnet_id))) || 'Non renseign&eacute;'}}</td>
                                     
-                                    
+                                     <td>{{formaterDate(item.date_emetteur) || 'Non renseign&eacute;'}}</td>
                                    
                   
                     
-                                       <td>
+                                       <!-- <td>
                        <button v-if="item.decision_emetteur == 201"  class="btn  btn-success"  @click="afficherModalObservationEmetteur(index)" >                        
                      
                       <span    >Vis&eacute;</span>
@@ -631,7 +640,7 @@
                       
                     
                       </button>
-                    </td>
+                    </td> -->
                     <td>{{formaterDate(item.date_ordonnateur) || 'Non renseign&eacute;'}}</td>
                                    
                                          
@@ -775,7 +784,7 @@ editLiquidationCf:{}
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
 
    ...mapGetters('parametreGenerauxFonctionnelle',[
-
+"plans_Decision",
       "plans_fonctionnels",
  "afficheNiveauPlanFonctionnel"
    ]),
@@ -789,7 +798,27 @@ editLiquidationCf:{}
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
   ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
    
-   
+   AffichierElementParent() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.parent == id);
+        }
+      };
+    },
+
+affichierIdPlanDecission() {
+      const qtereel = this.plans_Decision.find(
+        qtreel => qtreel.code == "12",
+       
+      );
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
+
      afficherMontantTresor() {
       return id2=> {
         if (id2!= null && id2!= "") {
