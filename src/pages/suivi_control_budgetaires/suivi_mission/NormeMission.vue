@@ -409,7 +409,8 @@ export default {
          var doc = new jsPDF()
         // doc.autoTable({ html: this.natures_sections })
         var data = this.getNormeMissionPersonnaliser;
-        doc.text(60,10,"Liste des normes de mission")
+         doc.setFontSize(8)
+        doc.text(75,10,"LISTE DES NORMES DE MISSIONS")
         doc.autoTable(this.getColumns(),data)
        // doc.save('Type des actes de depenses.pdf')
       doc.output('save','Liste des normes de mission.pdf');
@@ -419,7 +420,7 @@ export default {
 getColumns() {
     return [
        {    title: "FONCTION", dataKey: "fonction"},
-        {    title: "SOURCE_FINANCEMENT", dataKey: "source_financement"},
+        {    title: "SOURCE FINANCEMENT", dataKey: "source_financement"},
       {    title: "PERDIEM", dataKey: "perdiem"},
       {    title: "ZONE", dataKey: "zone"},
        
