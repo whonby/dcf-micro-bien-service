@@ -2539,10 +2539,10 @@
                     supprimer:false,
                     exporter:false,
                     importer:false,
-                }
+                },
 
 
-
+              tableGroupe:[]
             };
         },
 
@@ -2557,7 +2557,6 @@
         methods: {
             // methode pour notre action
             ...mapActions('personnelUA', ['getTypeSalarie',"ajouterTypeSalarie","supprimerTypeSalarie","modifieTypeSalaire"]),
-
 
         }
     };
