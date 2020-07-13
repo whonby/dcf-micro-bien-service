@@ -301,7 +301,7 @@ return this.getterstructuresOrganisationUa.filter((item) => {
   // doc.autoTable({ html: this.natures_sections })
    var data = this.getterstructuresOrganisationUa;
     doc.setFontSize(8)
-    doc.text(75,10,"LISTE DES STRUCTURES DES PAYS")
+    doc.text(75,10,"LISTE DES STRUCTURES ORGANIGRAMMES")
   doc.autoTable(this.getColumns(),data)
 doc.save('structure_pays.pdf')
 return 0

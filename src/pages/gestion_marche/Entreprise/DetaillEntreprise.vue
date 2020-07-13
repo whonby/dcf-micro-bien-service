@@ -195,7 +195,7 @@
                                                     <div class="controls">
                                                         <select v-model="formData.ville_id" class="span4" :readOnly="verroVille">
                                                             <option></option>
-                                                            <option v-for="item in villesdyna(formData1.pays_id)" 
+                                                            <option v-for="item in villesdyna(formData.pays_id)" 
                                                             :key="item.id" 
                                                             :value="item.id">
                                                                 {{item.libelle}}
@@ -1185,3 +1185,4 @@ villesdyna() {
         font-weight:bold;
     }
 </style>
+pays_id

@@ -67,7 +67,7 @@
 
        <div class="btn-group" v-if="$store.state.Utilisateurs.user !== null">
               <button data-toggle="dropdown"
-                style="color: white;" 
+                style="color: white;"
               class="tip-bottom btn dropdown-toggle">{{$store.state.Utilisateurs.user.name}} <span class="caret"></span></button>
               <ul class="dropdown-menu">
                 <!-- <li><a href="#">Profil</a></li> -->
@@ -103,6 +103,7 @@ import {mapGetters} from 'vuex'
 export default {
 
 created(){
+  
  // console.log(JSON.stringify(this.$store.state.Utilisateurs.user))
 //console.log(this)
 

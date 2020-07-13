@@ -31,7 +31,7 @@
             <div class="controls">
                <input
                 type="text"
-                v-model="formData.type_acte_financier"
+                :value="affichierLibelleTypeActeFinancier(afficheIdTypeActeAffet(macheid))"
                 class="span"
                readonly
               />
@@ -72,6 +72,19 @@
             </div>
           </div>
            </td>
+           <!-- <td>
+           <div class="control-group">
+            <label class="control-label">Montant du marche</label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="afficheMontantMarcheReel(macheid)"
+                class="span"
+               readonly
+              />
+            </div>
+          </div>
+         </td> -->
          </tr>
          <tr>
           <td>
@@ -141,6 +154,19 @@
             </div>
           </div>
          </td>
+          <!-- <td>
+            <div class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+              <input
+                type="text"
+                :value="quinzePourcentDuMarche"
+                class="span"
+               
+              />
+            </div>
+          </div>
+         </td> -->
          </tr>
           </table>
         
@@ -187,7 +213,7 @@
                <!-- <div class="controls"> -->
               <input
                 type="text"
-                v-model="editAvenant.type_acte_financier"
+                 :value="affichierLibelleTypeActeFinancier(afficheIdTypeActeAffet(macheid))"
                 class="span"
                readonly
               />
@@ -477,6 +503,58 @@ search:""
       // "sections"
        
     ]),
+      ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe', 
+  'planActe']),
+
+quinzePourcentDuMarche() {
+      const val = (parseFloat(this.afficheMontantMarcheReel(this.macheid)) * 0.15);
+      
+       if (val) {
+        return parseInt(val).toFixed(0);
+      }
+      
+      return 0
+    },
+
+
+
+affichierLibelleTypeActeFinancier() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.planActe.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
+
+     afficheMontantMarcheReel() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.montant_act;
+      }
+      return ""
+        }
+      };
+    },
+    afficheIdTypeActeAffet() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.acteEffetFinanciers.find(qtreel => qtreel.marche_id == id);
+
+      if (qtereel) {
+        return qtereel.type_act_effet_id;
+      }
+      return ""
+        }
+      };
+    },
     affcherTauxEnCours() {
       
       
@@ -653,14 +731,22 @@ afficherLibelleService() {
       });
     },
        ajouterTypeTexteLocal() {
-      var nouvelObjet = {
+         if(parseFloat(this.quinzePourcentDuMarche) < parseFloat(this.affichierMontantAvenantTTC)){
+alert("Montant Avenant est supperieure au 15% du marche")
+         }
+else
+{
+  var nouvelObjet = {
       ...this.formData,
       marche_id :this.macheid,
-   
+   type_acte_financier:this.afficheIdTypeActeAffet(this.macheid),
+   montant_avenant:this.affichierMontantAvenantTTC
        };
       this.ajouterAvenant(nouvelObjet);
 this.$("#exampleModalAvenant").modal('hide');
      
+}
+    
     },
 afficherModalModifierTypeTexte(index) {
 
@@ -673,17 +759,21 @@ afficherModalModifierTypeTexte(index) {
       this.editAvenant = this.afficheMarcheAvenant(this.macheid)[index];
     },
     modifierTypeTexteLocal() {
-      var nouvelObjet = {
+             if(parseFloat(this.quinzePourcentDuMarche) < parseFloat(this.affichierMontantAvenantTTCModifier)){
+alert("Montant Avenant est supperieure au 15% du marche")
+         }
+else
+{
+  var nouvelObjet = {
       ...this.editAvenant,
       marche_id :this.macheid,
-   
+   type_acte_financier:this.afficheIdTypeActeAffet(this.macheid),
+   montant_avenant:this.affichierMontantAvenantTTCModifier
        };
       this.modifierAvenant(nouvelObjet);
 this.$("#modificationModalAvenant").modal('hide');
-      // this.editTypeTexte = {
-      //   code: "",
-      //   libelle: ""
-      // };
+     
+}
        
     },
 formatageSomme:formatageSomme,

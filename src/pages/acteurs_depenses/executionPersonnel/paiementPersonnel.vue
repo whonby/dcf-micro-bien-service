@@ -52,7 +52,7 @@
                    <input
                      type="text"
                      :value="anneeAmort"
-                     
+                     class="span"
                       placeholder="Saisir l'exercice en cours"
                       readonly
                    />
@@ -883,10 +883,10 @@ export default {
                 }
                 
             })
-            return colect
+            return colect.filter(items=>items.valisationvirement==0)
         }
 
-       return "0"
+       return this.paiementPersonnel.filter(items=>items.valisationvirement==0)
 
     },
 
@@ -913,7 +913,7 @@ export default {
             return colect
         }
 
-       return "0"
+       return this.uniteAdministratives
 
     },
   afficheImputation() {
@@ -985,14 +985,14 @@ return this.formData.action_id ==""
   afficheActiviteParAction() {
       return id => {
         if (id != null && id != "") {
-          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.afficheAction.id == id);
+          return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.afficheAction.id == id && element.status=="actu");
         }
       };
     },
     afficheUaParLignePersonnel() {
     return id => {
       if (id != null && id != "") {
-        return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.afficheUA.id == id);
+        return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.afficheUA.id == id && element.status=="actu");
       }
     };
   },
@@ -1026,7 +1026,7 @@ return this.formData.action_id ==""
    afficheProgrammeParLigne() {
     return id => {
       if (id != null && id != "") {
-        return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.afficheEconomique.id == id);
+        return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.afficheEconomique.id == id && element.status=="actu");
       }
     };
   },
@@ -1034,7 +1034,7 @@ return this.formData.action_id ==""
 afficheActionParProgramme() {
     return id => {
       if (id != null && id != "") {
-        return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.afficheProgramme.id == id);
+        return this.getPersonnaliseBudgetGeneralParPersonnel.filter(element => element.afficheProgramme.id == id && element.status=="actu");
       }
     };
   },

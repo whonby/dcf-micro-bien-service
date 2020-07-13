@@ -8,7 +8,7 @@ detail_Execution
       </div>
       <div class="modal-body">
         <form class="form-horizontal" >
-          <div class="control-group">
+          <!-- <div class="control-group">
                             <label class="control-label">D&eacute;cision ordonnateur </label>
                             <div class="controls">
                               <select v-model="editLiquidationOrdonnateur.decision_ordonnateur">
@@ -21,7 +21,7 @@ detail_Execution
     </select>
                            
                             </div>
-                          </div>
+                          </div> -->
                         
                           <div class="control-group">
                             <label class="control-label">Observation ordonnateur</label>
@@ -63,9 +63,9 @@ detail_Execution
                     <th>activit&eacute;</th>
                     <th>Ligne budgetaire</th>
                     <th>Montant autoris&eacute;</th>
-                       <th>Decision Emetteur</th>
+                       <!-- <th>Decision Emetteur</th> -->
                       <th>Date Decision</th>
-                      <th>Decision ordonnateur</th>
+                      <!-- <th>Decision ordonnateur</th> -->
                       <th>Date ordonnateur</th>
                     <th>Action</th>
                   </tr>
@@ -84,7 +84,7 @@ detail_Execution
                                    
                   
                     
-                                       <td>
+                                       <!-- <td>
                        <button v-if="item.decision_emetteur == 201"  class="btn  btn-success"  @click="afficherModalObservationEmetteur(index)" >                        
                      
                       <span    >Vis&eacute;</span>
@@ -111,11 +111,11 @@ detail_Execution
                       
                     
                       </button>
-                    </td>
+                    </td> -->
                     <td>{{formaterDate(item.date_emetteur) || 'Non renseign&eacute;'}}</td>
                                   
                                          
-                                                      <td>
+                                                      <!-- <td>
                        <button v-if="item.decision_ordonnateur == 2011"  class="btn  btn-success"  @click="afficherModalObservationordonnateur(index)" >                        
                      
                       <span    >Vis&eacute;</span>
@@ -142,9 +142,14 @@ detail_Execution
                       
                     
                       </button>
-                    </td>
+                    </td> -->
                     <td>{{formaterDate(item.date_ordonnateur) || 'Non renseign&eacute;'}}</td>
                                     <td>
+                                       <button  class="btn  btn-success" @click="afficherModalObservationordonnateur(index)">
+                        <span>
+                          <i class="icon icon-ok"></i>
+                        </span>
+                      </button>   
       <div class="btn-group">
         
                             <button @click.prevent="supprimerLiquidation(item.id)"  class="btn btn-danger " title="Supprimer">

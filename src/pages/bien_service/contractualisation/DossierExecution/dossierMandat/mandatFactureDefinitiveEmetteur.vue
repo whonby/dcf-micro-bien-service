@@ -147,7 +147,12 @@
                    
                      
                        <td>
-                       <button  class="btn  btn-success" @click="afficheDecisionEmetteur(factu.id)">
+                       <button v-if="factu.decision_emetteur == 0" class="btn  btn-danger" @click="afficheDecisionEmetteur(factu.id)">
+                        <span>
+                          <i class="icon icon-ok"></i>
+                        </span>
+                      </button>
+                       <button v-else class="btn  btn-success" @click="afficheDecisionEmetteur(factu.id)">
                         <span>
                           <i class="icon icon-ok"></i>
                         </span>
@@ -697,7 +702,8 @@ section_id:this.afficherIdSection(this.afficherIdUa(this.afficherIdMarche(this.e
   total_general:this.montantGeneralMandatModifier,
    	entreprise_id:this.editMandat.fournisseur_id,
     	
- marchetype:this.afficheMarcheType
+ marchetype:this.afficheMarcheType,
+ decision_emetteur:1
 
        };
   this.modifierMandat(nouvelObjet)

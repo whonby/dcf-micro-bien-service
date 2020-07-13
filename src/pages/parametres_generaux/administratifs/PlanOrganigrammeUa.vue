@@ -193,7 +193,7 @@
             <div class="control-group">
               <label class="control-label">Code</label>
               <div class="controls">
-                <input type="text" v-model="nouvelElementEnfant.code" class="span5" placeholder="Saisir le code" />
+                <input type="text" v-model="parentDossier.code" class="span5" placeholder="Saisir le code" />
               </div>
             </div>
             <!-- <div class="control-group">
@@ -653,7 +653,8 @@ normeDuService() {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.getterplanOrganisationUa;
-    doc.text(98,10,"Liste Plan Organigramme Ua")
+    doc.setFontSize(8)
+    doc.text(78,10,"LISTE DES PLANS ORGANIGRAMMES DES UA")
   doc.autoTable(this.getColumns(),data)
 doc.save('PlanOrganigrammeUa.pdf')
 return 0
@@ -701,7 +702,8 @@ this.$("#exampleModal").modal('hide');
        historiqueequipement:this.normeDuService(this.afficheidServiceLibelle(this.nouvelElementEnfant.libelle)),
        montantequipement:this.montantPourEtreEquipe(this.afficheidServiceLibelle(this.nouvelElementEnfant.libelle)),
       serviceua_id:this.afficheidServiceLibelle(this.nouvelElementEnfant.libelle),
-       ua_id:this.afficherIdUniteAdministrative(this.parentDossier.libelle)
+       ua_id:this.afficherIdUniteAdministrative(this.parentDossier.libelle),
+       code:this.parentDossier.code
       };
        this.ajouterPlanOrganigrammeUa(nouvelObjet)
 this.$("#modalAjouterElementEnfant").modal('hide');
@@ -719,7 +721,8 @@ this.$("#modalAjouterElementEnfant").modal('hide');
       
       fonction_id:this.afficheIdFonctionLibelle(this.nouvelElementEnfant.libelle),
        serviceua_id:this.afficheidServiceLibelle(this.parentDossier.libelle),
-       ua_id:this.afficherIdUaparDossierParent(this.parentDossier.libelle)
+       ua_id:this.afficherIdUaparDossierParent(this.parentDossier.libelle),
+         code:this.parentDossier.code
       };
        this.ajouterPlanOrganigrammeUa(nouvelObjet2)
 this.$("#modalAjouterElementEnfant").modal('hide');

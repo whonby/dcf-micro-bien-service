@@ -16,7 +16,7 @@
                                               title="Listes Regimes Impositions "
                                               name ="Listes Regimes Impositions"
                                               worksheet = "Regime Impositions"
-                                            :data="getterregimeImpositions">
+                                            :data="tableRegimesImpositions">
                    <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel> 
@@ -30,7 +30,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des Regimes Impositions</h5>
+              <h5>Listes des Regimes Impositions</h5>
               <div align="right">
                 Rechercher:
                 <input type="text" v-model="search" />

@@ -3761,17 +3761,27 @@ afficheridTypeMarche() {
       
      
     ]),
-    //  afficherFormulaireModalAjouterMandatDirect(){
-    //             this.$router.push({ name: 'AjoutMandatDirect' , params: { id:id: marche_id }})
-    //         },
-afficherModalAjouterMandatDirect(id) {
-      this.$("#exampleModalMandat").modal({
+
+    afficherModalModifierFacture(index) {
+      this.$("#modatFactureModifier").modal({
         backdrop: "static",
         keyboard: false
       });
-      // this.formDataEngage = this.afficheMarcheEngage(this.detail_marche.id).find(recupererObjet => recupererObjet.id == id)
-        this.formDataFactureDefinitif = this.afficheFactureTableau(this.detail_marche.id).find(recupererObjet => recupererObjet.id == id)
+
+     
+      this.formData1 = this.afficheFactureTableau(this.macheid)[index];
     },
+    //  afficherFormulaireModalAjouterMandatDirect(){
+    //             this.$router.push({ name: 'AjoutMandatDirect' , params: { id:id: marche_id }})
+    //         },
+// afficherModalAjouterMandatDirect(id) {
+//       this.$("#exampleModalMandat").modal({
+//         backdrop: "static",
+//         keyboard: false
+//       });
+//       // this.formDataEngage = this.afficheMarcheEngage(this.detail_marche.id).find(recupererObjet => recupererObjet.id == id)
+//         this.formDataFactureDefinitif = this.afficheFactureTableau(this.detail_marche.id).find(recupererObjet => recupererObjet.id == id)
+//     },
 afficherModalProcedureFacture() {
 
    if(this.DisponibleBudgetaireApresLiquidation < this.montantMarcheAvecAvenant)
@@ -3786,16 +3796,16 @@ else{
 }
     
     },
-         afficherModalAjouter(id) {
+  //        afficherModalAjouter(id) {
           
-      this.$("#AjouterEngage").modal({
-        backdrop: "static",
-        keyboard: false
-      });
+  //     this.$("#AjouterEngage").modal({
+  //       backdrop: "static",
+  //       keyboard: false
+  //     });
      
-       this.formDataFacture = this.afficheFactureTableau(this.macheid).find(recupererObjet => recupererObjet.id == id)
+  //      this.formDataFacture = this.afficheFactureTableau(this.macheid).find(recupererObjet => recupererObjet.id == id)
   
-   },
+  //  },
   ajouterChoixProcLocal(){
 
    if(this.formData.tprocedure == 2){
@@ -3946,14 +3956,29 @@ numero_facture:"",
        var nouvelObjet = {
       ...this.formData1,
      
-       fournisseur_id: this.AfficherFournisseur_id,
+      //  fournisseur_id: this.AfficherFournisseur_id,
+      //  	prix_propose_ht :this.totalMontantHT,
+      //   prix_propose_ttc :this.montantHTt,
+      //    taux :this.affcherTauxEnCours,
+      //    tva :this.montantTva,
+      //     	ua :this.detail_marche.objetUniteAdministrative.id,
+      // marche_id : this.macheid,
+      // objet_facture:this.detail_marche.objet,
+
+
+
+
+
+      fournisseur_id: this.AfficherFournisseur_id,
        	prix_propose_ht :this.totalMontantHT,
         prix_propose_ttc :this.montantHTt,
          taux :this.affcherTauxEnCours,
          tva :this.montantTva,
-          	ua :this.detail_marche.objetUniteAdministrative.id,
-      marche_id : this.macheid,
-      objet_facture:this.detail_marche.objet
+          	ua :this.afficheUa_id(this.macheid),
+    marche_id : this.macheid,
+    objet_facture:this.afficheObjetMarche(this.macheid),
+      typeProcedure:this.afficheProcedure(this.macheid),
+      marchetype:this.afficheMarcheType
        };
       
 this.modifierFacture(nouvelObjet)

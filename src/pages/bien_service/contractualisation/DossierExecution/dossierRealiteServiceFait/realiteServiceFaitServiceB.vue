@@ -140,7 +140,7 @@ detail_marche
                       
                     
                       </button>
-                        <button v-else-if="realiteService.decision_service_beneficiaire == 3" class="btn  btn-danger" @click="afficherModalObservationServiceBeneficiaire(realiteService.id)" >                        
+                        <button v-else-if="realiteService.decision_service_beneficiaire == 3" class="btn  btn-rr" @click="afficherModalObservationServiceBeneficiaire(realiteService.id)" >                        
                      
                       
                        <span  >Réjeté</span>
@@ -157,7 +157,12 @@ detail_marche
                       </button>
                     </td> -->
                     <td>
-                      <button  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(realiteService.id)">
+                      <button  class="btn  btn-danger" v-if="realiteService.decision_service_beneficiaire == 0" @click="afficherModalObservationServiceBeneficiaire(realiteService.id)">
+                        <span>
+                          <i class="icon icon-ok"></i>
+                        </span>
+                      </button>
+                      <button  v-else  class="btn  btn-success" @click="afficherModalObservationServiceBeneficiaire(realiteService.id)">
                         <span>
                           <i class="icon icon-ok"></i>
                         </span>
@@ -176,7 +181,7 @@ detail_marche
                           <i class="icon icon-book"></i>
                         </span>
                       </button> -->
-                      <button  class="btn btn-danger" @click="supprimerRealiteServiceFait(realiteService.id)">
+                      <button  class="btn btn-rr" @click="supprimerRealiteServiceFait(realiteService.id)">
                         <span>
                           <i class="icon icon-trash"></i>
                         </span>
@@ -219,7 +224,9 @@ export default {
         }
       ],
       
-       EditServiceRealite: {},
+       EditServiceRealite: {
+         decision_service_beneficiaire : 1
+       },
 search:""
         }
     },
@@ -532,10 +539,12 @@ formatageSomme:formatageSomme,
   ua_id:this.EditServiceRealite.ua_id,
   
 
+
 section_id:this.afficherSectId,
 // id:this.afficherIdRealiteServiceFait(this.EditServiceRealite.marche_id),
   engagement_id:this.EditServiceRealite.id,
-  marchetype:this.EditServiceRealite.marchetype
+  marchetype:this.EditServiceRealite.marchetype,
+  decision_service_beneficiaire:1
        };
  this.modifierRealiteServiceFait(nouvelObjet);
 this.$("#DecisionServiceBeneficiaire").modal('hide');

@@ -25,7 +25,16 @@ detail_Execution
                            
                             </div>
                           </div>
-                        
+                        <div class="control-group">
+                            <label class="control-label">Motif CF </label>
+                            <div class="controls">
+                               <select v-model="editEngagementPerso.motif_cf" class="span">
+                                <option v-for="varText in AffichierElementParent(affichierIdPlanDecission)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
                           <div class="control-group">
                             <label class="control-label">Observation CF</label>
                             <div class="controls">
@@ -239,7 +248,8 @@ fabActions: [
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
 
    ...mapGetters('parametreGenerauxFonctionnelle',[
-
+"structuresDecision",
+"plans_Decision",
       "plans_fonctionnels",
  "afficheNiveauPlanFonctionnel"
    ]),
@@ -248,7 +258,26 @@ fabActions: [
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
   ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
-   
+   AffichierElementParent() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.parent == id);
+        }
+      };
+    },
+
+affichierIdPlanDecission() {
+      const qtereel = this.plans_Decision.find(
+        qtreel => qtreel.code == "12",
+       
+      );
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
       afficherIdOrdrePaiement() {
       return id2=> {
         if (id2!= null && id2!= "") {

@@ -23,7 +23,16 @@ afficherIdOrdrePaiement
                            
                             </div>
                           </div>
-                        
+                              <div class="control-group">
+                            <label class="control-label">Motif CF </label>
+                            <div class="controls">
+                               <select v-model="editMandatPerso.motif_cf" class="span">
+                                <option v-for="varText in AffichierElementParent(affichierIdPlanDecission)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
                           <div class="control-group">
                             <label class="control-label">Observation CF</label>
                             <div class="controls">
@@ -66,7 +75,7 @@ afficherIdOrdrePaiement
                     <th>Numero Engagement</th>
                     <th>Numero mandat</th>
                     <th>Montant autorisé</th>
-                       <th>Decision Emetteur</th>
+                       <!-- <th>Decision Emetteur</th> -->
                       <th>Date Decision</th>
                        <th>Decision Cf</th>
                       <th>Date Cf</th>
@@ -91,7 +100,7 @@ afficherIdOrdrePaiement
                                    
                   
                     
-                                       <td>
+                                       <!-- <td>
                        <button v-if="item.decision_emetteur == 2017"  class="btn  btn-success"   >                        
                      
                       <span    >Vis&eacute;</span>
@@ -118,7 +127,7 @@ afficherIdOrdrePaiement
                       
                     
                       </button>
-                    </td>
+                    </td> -->
                     <td>{{formaterDate(item.date_decision_emetteur) || 'Non renseign&eacute;'}}</td>
                      <td>
                        <button v-if="item.decision_cf == 8"  class="btn  btn-success"  @click="afficheModalCf(index)" >                        
@@ -260,7 +269,7 @@ formNumeroEngagemt:{engagemtPero:"perso"}
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
 
    ...mapGetters('parametreGenerauxFonctionnelle',[
-
+"plans_Decision",
       "plans_fonctionnels",
  "afficheNiveauPlanFonctionnel"
    ]),
@@ -273,7 +282,27 @@ formNumeroEngagemt:{engagemtPero:"perso"}
       dcf:dcf,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
-  
+   AffichierElementParent() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.parent == id);
+        }
+      };
+    },
+
+affichierIdPlanDecission() {
+      const qtereel = this.plans_Decision.find(
+        qtreel => qtreel.code == "12",
+       
+      );
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
+
   sommeMontantMandat() { 
       const val = parseFloat(this.afficherMontantEmprunt(this.PaiementPersoid)) + parseFloat(this.afficherMontantDon(this.PaiementPersoid)) + parseFloat(this.afficherMontantTresor(this.PaiementPersoid));
       return parseFloat(val).toFixed(0);

@@ -2,14 +2,6 @@
 <template>
     <div>
 
-
-
-
-
-
-
-      
-
 <div id="ModalEngagement" class="modal hide tailgrand">
   <div class="row-fluid">
         <div class="span12">
@@ -498,6 +490,18 @@
                            
                             </div>
                           </div>
+                           
+                    <div class="control-group">
+                            <label class="control-label">Motif CF </label>
+                            <div class="controls">
+                               <select v-model="editOrdrePaiement.motif_cf" class="span">
+                                <option v-for="varText in AffichierElementParent(affichierIdPlanDecission)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 
                         
                           <div class="control-group">
                             <label class="control-label">Observation CF</label>
@@ -542,8 +546,8 @@
                     <th>Objet Depense</th>
                     <th>Mois de Paiement</th>
                     <th>Montant des Salaires</th>
-                    <th>Fichier Joint</th>
-                      <th>Validation Chef de projet</th>
+                    <!-- <th>Fichier Joint</th> -->
+                      <!-- <th>Validation Chef de projet</th> -->
                       <th title="date validation chef projet">Date validation CP</th>
                        <th>Validation CF</th>
                       <th>Date validation CF</th>
@@ -566,9 +570,9 @@
                                     <td>{{item.moisdepaiement || 'Non renseign&eacute;'}}</td>
                                     
                                      <td>{{formatageSomme(parseFloat(item.total_general)) || 'Non renseign&eacute;'}}</td>
-                                    <td>{{item.fichierjoint || 'Non renseign&eacute;'}}</td>
-                                   
-                                     <td>
+                                    <!-- <td>{{item.fichierjoint || 'Non renseign&eacute;'}}</td>
+                                    -->
+                                     <!-- <td>
                        <button v-if="item.motif_chef_projet == 1"  class="btn  btn-success"   >                        
                      
                       <span    >Valid&eacute;</span>
@@ -595,7 +599,7 @@
                       
                     
                       </button>
-                    </td>
+                    </td> -->
                     <td>{{formaterDate(item.date_motif_chef_projet) || 'Non renseign&eacute;'}}</td>
                                        <td>
                        <button v-if="item.decision_cf == 6"  class="btn  btn-success"  @click="afficherModalObservationCF(index)" >                        
@@ -742,7 +746,8 @@ fabActions: [
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
 
    ...mapGetters('parametreGenerauxFonctionnelle',[
-
+"structuresDecision",
+"plans_Decision",
       "plans_fonctionnels",
  "afficheNiveauPlanFonctionnel"
    ]),
@@ -751,7 +756,8 @@ fabActions: [
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
   ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
-   
+  
+
 afficherButtonEngagement() {
       return id => {
         if (id != null && id != "") {
@@ -764,9 +770,26 @@ afficherButtonEngagement() {
         }
       };
     },
+AffichierElementParent() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.parent == id);
+        }
+      };
+    },
 
+affichierIdPlanDecission() {
+      const qtereel = this.plans_Decision.find(
+        qtreel => qtreel.code == "12",
+       
+      );
 
-
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
 
 
 
