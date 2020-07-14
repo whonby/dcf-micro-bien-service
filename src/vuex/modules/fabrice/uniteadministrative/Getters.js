@@ -30,8 +30,8 @@ const uniteAdministratives = state =>
 //export const banqueUa = state => state.banqueUa;
 export const nombreUniteAdministratives = state =>
   state.uniteAdministratives.length;
-export const nombreArchivageDocument = state => state.archivageDocuments.length;
-export const nombreTypeText = state => state.typeTextes.length;
+// export const nombreArchivageDocument = state => state.archivageDocuments.length;
+// export const nombreTypeText = state => state.typeTextes.length;
 const budgetGeneral = state =>
   state.budgetGeneral.sort((a, b) => (a.code > b.code ? 1 : -1));
 export const nombreTransfert = state => state.transferts.length;

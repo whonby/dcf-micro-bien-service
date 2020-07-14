@@ -1,18 +1,20 @@
 detail_Execution
 <template>
-    <div>
+    <div class="container-fluid">
 
 
 
-<div id="modalVal" class="modal hide">
+<div id="modalVal" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">Ã—</button>
         <h3>Ajouter Observation du CF</h3>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" >
-          <div class="control-group">
-                            <label class="control-label">D&eacute;cision CF </label>
+         <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              <div class="control-group">
+                            <label class="control-label">Décision CF </label>
                             <div class="controls">
                               <select v-model="editEngagementPerso.decision_cf">
                                 <option value="0">Attente</option>
@@ -25,33 +27,68 @@ detail_Execution
                            
                             </div>
                           </div>
-                        <div class="control-group">
+            </td>
+            <td>
+                    <div class="control-group">
                             <label class="control-label">Motif CF </label>
                             <div class="controls">
-                               <select v-model="editEngagementPerso.motif_cf" class="span">
-                                <option v-for="varText in AffichierElementParent(affichierIdPlanDecission)" :key="varText.id"
+                               <select v-model="editEngagementPerso.motifcf" class="span">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementParent" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
                             </select>
                             
                             </div>
                           </div>
-                          <div class="control-group">
+                 </td>
+          </tr>
+                
+                  <tr>
+                 <td>
+                    <div class="control-group">
+                            <label class="control-label">Libelle motif </label>
+                            <div class="controls">
+                               <select v-model="editEngagementPerso.motif_cf" class="span">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementEnfant(editEngagementPerso.motifcf)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+                 <td>
+                               <div class="control-group">
+                            <label class="control-label">Date Decision CF :</label>
+                            <div class="controls">
+                              <input type="date" class="span"  v-model="editEngagementPerso.date_motif"/>
+                            </div>
+                          </div>
+                           </td>
+                 </tr>             
+                   <tr>
+                     <td colspan="">
+                        <div class="control-group">
                             <label class="control-label">Observation CF</label>
                             <div class="controls">
-                              <textarea  class="span" row = "6" v-model="editEngagementPerso.observation_cf">
+                              <textarea  class="span6" row = "6" v-model="editEngagementPerso.observation_cf">
                               </textarea>
                             </div>
                           </div>
-                           <div class="control-group">
-                            <label class="control-label">Date Observation:</label>
+                       </td>
+                       <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Nom du CF</label>
                             <div class="controls">
-                              <input type="date" class="span"  v-model="editEngagementPerso.date_motif"/>
-                             
+                              <input type="text" class="span6"  :value="afficheNomUtilisateur" readonly/>
                             </div>
                           </div>
-                              
+                       </td>
+                       </tr>      
+                        
+                           
          
-        </form>
+        </table>
       </div>
       <div class="modal-footer">
         <a
@@ -258,7 +295,22 @@ fabActions: [
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
   ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
-   AffichierElementParent() {
+  
+  afficheNomUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.name
+
+},
+AffichierElementParent() {
+      
+      // return id => {
+      //   if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.code == 11 || element.code == 12 || element.code == 13 || element.code == 14 || element.code == 15 || element.code == 16 || element.code == 17 || element.code == 18 || element.code == 19 || element.code == 20);
+      //   }
+      // };
+    },
+AffichierElementEnfant() {
       
       return id => {
         if (id != null && id != "") {
@@ -266,6 +318,15 @@ fabActions: [
         }
       };
     },
+  
+  // AffichierElementParent() {
+      
+  //     return id => {
+  //       if (id != null && id != "") {
+  //         return this.plans_Decision.filter(element => element.parent == id);
+  //       }
+  //     };
+  //   },
 
 affichierIdPlanDecission() {
       const qtereel = this.plans_Decision.find(
@@ -299,37 +360,7 @@ affichierIdPlanDecission() {
                 }
             },
 
-//  listeEngagementPersonnel() {
-      
 
-
-//         if (!this.admin || !this.dcf){
-//             let colect=[];
-//             this.engagements.filter(item=>{
-//                 let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
-//                 if (val!=undefined){
-//                     colect.push(item)
-//                     return item
-//                 }
-               
-//             })
-//              return id => {
-//                     if (id != "") {
-                     
-//                         return this.colect.filter(idmarche => idmarche.ordrepaiemnet_id == id)
-//                     }
-//                 }
-            
-//         }
-//  return id => {
-//                     if (id != "") {
-                     
-//                         return this.engagements.filter(idmarche => idmarche.ordrepaiemnet_id == id)
-//                     }
-//                 }
-     
-
-//     },
 
 
 
@@ -842,8 +873,8 @@ montant_emprunt:0,
 <style  scoped>
 
 .tailgrand{
-      width: 95%;
-margin: 0 -48%;
+    width: 50%;
+  margin: 0 -25%;
 
   
 }

@@ -118,7 +118,7 @@ export default {
         "getEntreprise","getEtapeMarche","getDocumentPTBAPPM","getMarcheContrat","getPresenceCF",
         "getDocumentPresence","getNombreMarcheByProcedure","sourcePersonnalise",
         "getSourceFinnancementByMarche","getMarcheContratExecution",
-        "getBanque", "getCompte","getAgence","getSanction"]),
+        "getBanque", "getCompte","getAgence","getSanction","getHistoriqueEntreprise"]),
 
         ...mapActions("SuiviImmobilisation", [
       "getAllNatureEntre",
@@ -287,6 +287,7 @@ this.getClassificationGradeFonction()
       // this.s()
       this.getSecteurActivite()
       this.getEntreprise()
+      this.getHistoriqueEntreprise()
       this.getEtapeMarche()
       this.getDocumentPTBAPPM()
     this.getMarcheContrat()

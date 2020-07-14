@@ -1,16 +1,18 @@
 detail_Execution
 afficherIdOrdrePaiement
 <template>
-    <div>
-<div id="modalCfMandat" class="modal hide">
+   <div class="container-fluid">
+<div id="modalCfMandat" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">X</button>
         <h3>Ajouter Observation CF</h3>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" >
-          <div class="control-group">
-                            <label class="control-label">D&eacute;cision CF </label>
+       <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              <div class="control-group">
+                            <label class="control-label">Décision CF </label>
                             <div class="controls">
                               <select v-model="editMandatPerso.decision_cf">
                                 <option value="0">Attente</option>
@@ -23,33 +25,68 @@ afficherIdOrdrePaiement
                            
                             </div>
                           </div>
-                              <div class="control-group">
+            </td>
+            <td>
+                    <div class="control-group">
                             <label class="control-label">Motif CF </label>
                             <div class="controls">
-                               <select v-model="editMandatPerso.motif_cf" class="span">
-                                <option v-for="varText in AffichierElementParent(affichierIdPlanDecission)" :key="varText.id"
+                               <select v-model="editMandatPerso.motifcf" class="span">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementParent" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
                             </select>
                             
                             </div>
                           </div>
-                          <div class="control-group">
+                 </td>
+          </tr>
+                
+                  <tr>
+                 <td>
+                    <div class="control-group">
+                            <label class="control-label">Libelle motif </label>
+                            <div class="controls">
+                               <select v-model="editMandatPerso.motif_cf" class="span">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementEnfant(editMandatPerso.motifcf)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+                 <td>
+                               <div class="control-group">
+                            <label class="control-label">Date Decision CF :</label>
+                            <div class="controls">
+                              <input type="date" class="span"  v-model="editMandatPerso.date_motif"/>
+                            </div>
+                          </div>
+                           </td>
+                 </tr>             
+                   <tr>
+                     <td colspan="">
+                        <div class="control-group">
                             <label class="control-label">Observation CF</label>
                             <div class="controls">
-                              <textarea  class="span" row = "6" v-model="editMandatPerso.observation">
+                              <textarea  class="span6" row = "6" v-model="editMandatPerso.observation">
                               </textarea>
                             </div>
                           </div>
-                           <div class="control-group">
-                            <label class="control-label">Date Observation:</label>
+                       </td>
+                       <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Nom du CF</label>
                             <div class="controls">
-                              <input type="date" class="span"  v-model="editMandatPerso.date_motif"/>
-                             
+                              <input type="text" class="span6"  :value="afficheNomUtilisateur" readonly/>
                             </div>
                           </div>
-                              
+                       </td>
+                       </tr>      
+                        
+                           
          
-        </form>
+        </table>
       </div>
       <div class="modal-footer">
         <a
@@ -281,8 +318,29 @@ formNumeroEngagemt:{engagemtPero:"perso"}
     admin:admin,
       dcf:dcf,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
+afficheNomUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.name
 
-   AffichierElementParent() {
+},
+  //  AffichierElementParent() {
+      
+  //     return id => {
+  //       if (id != null && id != "") {
+  //         return this.plans_Decision.filter(element => element.parent == id);
+  //       }
+  //     };
+  //   },
+ AffichierElementParent() {
+      
+      // return id => {
+      //   if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.code == 11 || element.code == 12 || element.code == 13 || element.code == 14 || element.code == 15 || element.code == 16 || element.code == 17 || element.code == 18 || element.code == 19 || element.code == 20);
+      //   }
+      // };
+    },
+AffichierElementEnfant() {
       
       return id => {
         if (id != null && id != "") {
@@ -290,7 +348,6 @@ formNumeroEngagemt:{engagemtPero:"perso"}
         }
       };
     },
-
 affichierIdPlanDecission() {
       const qtereel = this.plans_Decision.find(
         qtreel => qtreel.code == "12",
@@ -832,11 +889,8 @@ this.formData= {
 }
 </script>
 <style  scoped>
-
 .tailgrand{
-      width: 95%;
-margin: 0 -48%;
-
-  
+  width: 50%;
+  margin: 0 -25%;
 }
 </style>

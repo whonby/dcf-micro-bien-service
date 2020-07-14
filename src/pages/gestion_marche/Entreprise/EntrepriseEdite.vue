@@ -144,7 +144,7 @@
                                                     <div class="controls">
                                                         <select v-model="formData.forme_juridique" class="span11">
                                                            <option></option>
-                                                            <option v-for="item in getterformeJuridique" :key="item.id" :value="item.id">
+                                                            <option v-for="item in getterformeJuridique" :key="item.id" :value="item.id" readonly>
                                                                 {{item.libelle}}
                                                             </option>
                                                         </select>
@@ -167,7 +167,7 @@
                                                     <div class="controls">
                                                         <select v-model="formData.regime_impossition" class="span11">
                                                              <option></option>
-                                                            <option v-for="item in getterregimeImpositions" :key="item.id" :value="item.id">
+                                                            <option v-for="item in getterregimeImpositions" :key="item.id" :value="item.id" readonly>
                                                                 {{item.libelle}}
                                                             </option>
                                                         </select>
@@ -211,6 +211,18 @@
                                                     <label class="control-label">Nombre travailleur journalier :</label>
                                                     <div class="controls">
                                                         <input type="text" class="span11" placeholder="Nombre travailleur journalier" v-model="formData.nbre_travailleur_journalier">
+                                                    </div>
+                                                </div>
+                                                 <div class="control-group">
+                                                    <label class="control-label">Date Création</label>
+                                                    <div class="controls">
+                                                        <input type="date" class="span11"  v-model="formData.datecreation">
+                                                    </div>
+                                                </div>
+                                                 <div class="control-group">
+                                                    <label class="control-label">Date debut activité</label>
+                                                    <div class="controls">
+                                                        <input type="date" class="span11"  v-model="formData.dateactivite">
                                                     </div>
                                                 </div>
                                              
@@ -335,7 +347,10 @@
                     nbre_travailleur_journalier:ObjetEntreprise.nbre_travailleur_journalier,
                     service_assiette_impot:ObjetEntreprise.service_assiette_impot,
                     adresse:ObjetEntreprise.adresse,
-                    banque:ObjetEntreprise.banque
+                    banque:ObjetEntreprise.banque,
+                    carteidentite:ObjetEntreprise.carteidentite,
+                    datecreation:ObjetEntreprise.datecreation,
+                    dateactivite:ObjetEntreprise.dateactivite,
             }
         },
         computed: {
@@ -373,7 +388,7 @@
         },
         methods: {
             // methode pour notre action
-            ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise"]),
+            ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterHistoriqueEntreprise"]),
             afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',
@@ -386,6 +401,7 @@
             // fonction pour vider l'input
             ajouterTitreLocal () {
                 this.modifierEntreprise(this.formData)
+                this.ajouterHistoriqueEntreprise(this.formData)
                 this.getEntreprise()
                 this.$router.push({ name: 'Entreprise' })
             },

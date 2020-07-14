@@ -69,15 +69,24 @@
                            </td>
                  </tr>             
                    <tr>
-                     <td colspan="2">
+                     <td colspan="">
                         <div class="control-group">
                             <label class="control-label">Observation CF</label>
                             <div class="controls">
-                              <textarea  class="span12" row = "6" v-model="editLiquidation.observation_controleur_financier">
+                              <textarea  class="span6" row = "6" v-model="editLiquidation.observation_controleur_financier">
                               </textarea>
                             </div>
                           </div>
-                       </td></tr>      
+                       </td>
+                       <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Nom du CF</label>
+                            <div class="controls">
+                              <input type="text" class="span6"  :value="afficheNomUtilisateur" readonly/>
+                            </div>
+                          </div>
+                       </td>
+                       </tr>      
                         
                            
          
@@ -297,6 +306,13 @@ search:""
     ]),
      ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision', 
   'plans_Decision']),
+
+  afficheNomUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.name
+
+},
     affichierIdPlanDecission() {
       const qtereel = this.plans_Decision.find(
         qtreel => qtreel.code == "11",

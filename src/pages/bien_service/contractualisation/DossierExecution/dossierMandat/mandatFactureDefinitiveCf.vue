@@ -72,11 +72,21 @@
                         <div class="control-group">
                             <label class="control-label">Observation CF</label>
                             <div class="controls">
-                              <textarea  class="span" row = "6" v-model="editMandat.observation">
+                              <textarea  class="span6" row = "6" v-model="editMandat.observation">
                               </textarea>
                             </div>
                           </div>
-                       </td></tr>      
+                       </td>
+                        <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Nom du CF</label>
+                            <div class="controls">
+                              <input type="text" class="span6"  :value="afficheNomUtilisateur" readonly/>
+                            </div>
+                          </div>
+                       </td>
+                       
+                       </tr>      
                         
                            
          
@@ -308,6 +318,12 @@ search:""
       // "sections"
        
     ]),
+     afficheNomUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.name
+
+},
       afficherMontantTTCfacture() {
       return id => {
         if (id != null && id != "") {

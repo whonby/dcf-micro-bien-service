@@ -23,7 +23,7 @@ export const banques = state => state.banques;
 export const comptes = state => state.comptes;
 export const agenceBanques = state => state.agenceBanques;
 export const sanctions = state => state.sanctions;
-
+export const getterHistoriqueEntreprise = state => state.historiqueEntreprise;
 
 const getPersonnaliseAgence = (state, getters, rootState, rootGetters) =>
     state.agenceBanques.map(element => {
