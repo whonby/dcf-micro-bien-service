@@ -1,7 +1,7 @@
 
 <template>
 
-<div class="container-fluid">
+<div >
 
      <div id="DECISIONcF" class="modal hide tailgrand">
       <div class="modal-header">
@@ -73,7 +73,7 @@
                         <div class="control-group">
                             <label class="control-label">Observation CF</label>
                             <div class="controls">
-                              <textarea  class="span6" row = "6" v-model="editLiquidation.observation_controleur_financier">
+                              <textarea  class="span" row = "6" v-model="editLiquidation.observation_controleur_financier">
                               </textarea>
                             </div>
                           </div>
@@ -82,7 +82,7 @@
                         <div class="control-group">
                             <label class="control-label">Nom du CF</label>
                             <div class="controls">
-                              <input type="text" class="span6"  :value="afficheNomUtilisateur" readonly/>
+                              <input type="text" class="span"  :value="afficheNomUtilisateur" readonly/>
                             </div>
                           </div>
                        </td>

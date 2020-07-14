@@ -1,5 +1,4 @@
-detail_Execution
-afficherIdOrdrePaiement
+
 <template>
    <div class="container-fluid">
 <div id="modalCfMandat" class="modal hide tailgrand">

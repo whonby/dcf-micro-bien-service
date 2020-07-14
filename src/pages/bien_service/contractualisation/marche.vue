@@ -829,7 +829,7 @@ source_financement
                            <span class=""><i class=" icon-calendar"></i></span>
                        </router-link>
                    </td> -->
-                   <td v-if="marche.attribue == 2">
+                   <td v-if="marche.attribue == 2 || marche.attribue == 5">
                         <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
                  class="btn btn-inverse " title="Cycle de vie du marche">
         <span class=""><i class=" icon-calendar"></i></span>

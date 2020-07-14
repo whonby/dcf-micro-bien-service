@@ -1,7 +1,7 @@
 
 <template>
 
-<div class="container-fluid">
+<div>
 
 
 
@@ -75,7 +75,7 @@
                         <div class="control-group">
                             <label class="control-label">Observation CF</label>
                             <div class="controls">
-                              <textarea  class="span6" row = "6" v-model="editEngagement.observation">
+                              <textarea  class="span" row = "6" v-model="editEngagement.observation">
                               </textarea>
                             </div>
                           </div>
@@ -84,7 +84,7 @@
                         <div class="control-group">
                             <label class="control-label">Nom du CF</label>
                             <div class="controls">
-                              <input type="text" class="span6"  :value="afficheNomUtilisateur" readonly/>
+                              <input type="text" class="span"  :value="afficheNomUtilisateur" readonly/>
                             </div>
                           </div>
                        </td>
