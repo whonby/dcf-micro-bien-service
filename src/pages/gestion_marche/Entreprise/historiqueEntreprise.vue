@@ -49,6 +49,17 @@
                                         </div>
 
                                     </div>
+                                           <div class="span4">
+                                        <br>
+                                    Afficher
+                                    <select name="pets" id="pet-select" v-model="size" class="span3">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                    Entrer
+                                </div>
                                      <!-- <div class="span4">
                                         <br>
                                     Afficher
@@ -77,7 +88,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr class="odd gradeX" v-for="item in filtre_type_teste" :key="item.id">
+                                        <tr class="odd gradeX" v-for="item in partition(filtre_type_teste,size)[page]" :key="item.id">
                                              <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_idu || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.raison_sociale || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_cc || 'Non renseigné'}}</td>
@@ -109,6 +120,7 @@
                                     <li  v-for="(titre, index) in partition(S,size).length" :key="index" :class="{ active : active_el == index }">
                                     <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
                                     <li :class="{ disabled : page == partition(S,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+
 
                                 </ul>
                             </div> -->

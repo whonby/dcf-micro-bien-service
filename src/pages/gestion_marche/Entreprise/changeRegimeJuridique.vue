@@ -154,6 +154,18 @@
                                     </select>
                                     Entrer
                                 </div> -->
+
+                         <div class="span4">
+                                 <br>
+                             Afficher
+                             <select name="pets" id="pet-select" v-model="size" class="span3">
+                                 <option value="10">10</option>
+                                 <option value="25">25</option>
+                                 <option value="50">50</option>
+                                 <option value="100">100</option>
+                             </select>
+                             Entrer
+                         </div>
                                     <div class="widget-content nopadding"><table class="table table-bordered table-striped " id="natures_sections">
                                         <thead>
                                         <tr>
@@ -171,7 +183,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr class="odd gradeX" v-for="(item,index) in entrepriseNonSentionner" :key="item.id">
+                                        <tr class="odd gradeX" v-for="(item,index) in partition(entrepriseNonSentionner,size)[page]" :key="item.id">
                                              <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_idu || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.raison_sociale || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_cc || 'Non renseigné'}}</td>
