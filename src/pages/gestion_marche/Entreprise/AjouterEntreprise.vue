@@ -99,6 +99,7 @@
                                                 </div>
              </td>
              <!-- <td>
+                 
                    <div class="control-group">
                                                     <label class="control-label">Banque:</label>
                                                     <div class="controls">
@@ -252,7 +253,26 @@
                                                 </div>
              </td>
                  </tr>
-         
+         <tr>
+            
+             <td>
+                   <div class="control-group">
+                                                    <label class="control-label">Date Creation</label>
+                                                    <div class="controls">
+                                                        <input type="date" class="span11"  v-model="formData.datecreation">
+                                                    </div>
+                                                </div>
+             </td>
+             <td>
+                   <div class="control-group">
+                                                    <label class="control-label">Date debut activite</label>
+                                                    <div class="controls">
+                                                        <input type="date" class="span11"  v-model="formData.dateactivite">
+                                                    </div>
+                                                </div>
+             </td>
+             
+                 </tr>
         </table>
          <div class="modal-footer">
         <a
@@ -381,7 +401,7 @@
         },
         methods: {
             // methode pour notre action
-            ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise"]),
+            ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterHistoriqueEntreprise"]),
             afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',
@@ -394,7 +414,7 @@
             // fonction pour vider l'input
             ajouterTitreLocal () {
                 this.ajouterEntreprise(this.formData)
-
+                this.ajouterHistoriqueEntreprise(this.formData)
                 this.$router.push({ name: 'Entreprise' })
             },
 // afficher modal

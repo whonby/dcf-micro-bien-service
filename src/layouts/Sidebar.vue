@@ -28,6 +28,17 @@
           
           </ul>
        </li> -->
+       <li>
+  <center>
+      <router-link tag="a" :to="{ name: 'Profil' }">
+        <img src="../../public/lien/img/imgUser/photoDefo.png" name="aboutme" width="100" height="20" class="img-circle">
+        </router-link>
+      <h6 style="color:orange;font-size:14px">{{afficheNomUtilisateur}}   <span style="color:#ffffff">({{afficheRoleUtilisateur}})</span></h6>
+
+		</center>
+       </li>
+       
+       
         <li :class="{active: active_el == 11 }" @click.prevent="navigateToTableauBord">
           <a title="TABLEAU DE BORD" href="#">
             <i class="icon-dashboard"></i>
@@ -122,7 +133,9 @@
 <script>
 import { mapState, mapMutations, mapActions } from "vuex";
 import {admin,dcf} from "../Repositories/Auth"
+
 export default {
+   
   mounted() {
     // console.log(this.$store.state);
   },
@@ -130,7 +143,19 @@ export default {
   computed: {
       ...mapState('parametrageMenu', {
      active_el: state => state.active_el
-  })
+  }),
+  afficheNomUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.name
+
+},
+afficheRoleUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.user_role.role.libelle
+
+},
   },
 
   methods: {

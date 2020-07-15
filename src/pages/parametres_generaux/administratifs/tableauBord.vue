@@ -1,4 +1,5 @@
  budgetConsommerTransfert
+ afficherBudgetInitialTranferst
 <template>
 
 

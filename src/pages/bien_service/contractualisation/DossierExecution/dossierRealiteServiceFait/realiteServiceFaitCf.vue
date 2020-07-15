@@ -3,7 +3,7 @@
 <template>
 
 <div>
-<div id="decisionServiceRealite" class="modal hide">
+<div id="decisionServiceRealite" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Decision CF</h3>
@@ -28,33 +28,35 @@
                             </div>
                           </div>
             </td>
-          </tr>
-               <tr>
-                 <td>
+             <td>
                     <div class="control-group">
                             <label class="control-label">Motif CF </label>
                             <div class="controls">
-                               <select v-model="editServiceRealite.motif_controleur" class="span">
-                                <option v-for="varText in AffichierElementParent(affichierIdPlanDecission)" :key="varText.id"
+                               <select v-model="editServiceRealite.motifcf" class="span">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementParent" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
                             </select>
                             
                             </div>
                           </div>
                  </td>
-                 </tr>            
-                   <tr>
-                     <td>
-                        <div class="control-group">
-                            <label class="control-label">Observation CF</label>
+          </tr>
+               <tr>
+                 <td>
+                    <div class="control-group">
+                            <label class="control-label">Libelle motif </label>
                             <div class="controls">
-                              <textarea  class="span" row = "6" v-model="editServiceRealite.observation_controleur_financier">
-                              </textarea>
+                               <select v-model="editServiceRealite.motif_controleur" class="span">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementEnfant(editServiceRealite.motifcf)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
                             </div>
                           </div>
-                       </td></tr>      
-                         <tr>
-                           <td>
+                 </td>
+                  <td>
                                <div class="control-group">
                             <label class="control-label">Date Decision CF :</label>
                             <div class="controls">
@@ -64,7 +66,27 @@
                             </div>
                           </div>
                            </td>
-                         </tr>
+                 </tr>            
+                   <tr>
+                     <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Observation CF</label>
+                            <div class="controls">
+                              <textarea  class="span" row = "6" v-model="editServiceRealite.observation_controleur_financier">
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
+                        <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Nom du CF</label>
+                            <div class="controls">
+                              <input type="text" class="span"  :value="afficheNomUtilisateur" readonly/>
+                            </div>
+                          </div>
+                       </td>
+                       </tr>      
+                         
                            
          
         </table>
@@ -277,6 +299,12 @@ search:""
     ]),
          ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision', 
   'plans_Decision']),
+     afficheNomUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.name
+
+},
     affichierIdPlanDecission() {
       const qtereel = this.plans_Decision.find(
         qtreel => qtreel.code == "11",
@@ -289,14 +317,14 @@ search:""
       return 0
     },
 
-AffichierElementParent() {
+// AffichierElementParent() {
       
-      return id => {
-        if (id != null && id != "") {
-          return this.plans_Decision.filter(element => element.parent == id);
-        }
-      };
-    },
+//       return id => {
+//         if (id != null && id != "") {
+//           return this.plans_Decision.filter(element => element.parent == id);
+//         }
+//       };
+//     },
     afficheMontantEngagementServiceRealiteEtLiquidation() {
       return id => {
         if (id != null && id != "") {
@@ -381,7 +409,22 @@ afficheDateFacture() {
         }
       };
     },
-   
+   AffichierElementParent() {
+      
+      // return id => {
+      //   if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.code == 11 || element.code == 12 || element.code == 13 || element.code == 14 || element.code == 15 || element.code == 16 || element.code == 17 || element.code == 18 || element.code == 19 || element.code == 20);
+      //   }
+      // };
+    },
+AffichierElementEnfant() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.parent == id);
+        }
+      };
+    },
       },
  
       methods:{ 
@@ -529,8 +572,8 @@ formatageSomme:formatageSomme,
 
 }
 .tailgrand{
-  width: 77%;
-  margin: 0 -38%;
+  width: 50%;
+  margin: 0 -25%;
 }
 .tailAvenant{
   width: 75%;

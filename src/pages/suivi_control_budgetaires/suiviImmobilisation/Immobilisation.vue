@@ -514,6 +514,7 @@ nbreEquipementRealiseParTypeUa(){
         date_amortissement_anterieur: ""
       };
     },
+    
     // afficher modal de modification
     afficherModalModifierImmobilisation(id) {
       this.$router.push({

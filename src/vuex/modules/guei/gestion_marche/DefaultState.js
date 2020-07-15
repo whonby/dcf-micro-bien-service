@@ -22,7 +22,8 @@ const defaultstate = {
     banques:[],
     comptes:[],
     agenceBanques: [],
-    sanctions:[]
+    sanctions: [],
+    historiqueEntreprise:[]
 
 };
 

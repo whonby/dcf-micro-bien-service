@@ -476,7 +476,9 @@ export function modifierEntreprise({ commit }, formData) {
             service_assiette_impot: formData.service_assiette_impot,
             adresse: formData.adresse,
 active:formData.active,
-            carteidentite: formData.carteidentite
+            carteidentite: formData.carteidentite,
+            datecreation: formData.datecreation,
+            dateactivite: formData.dateactivite,
         }))
         .then(response => {
             commit("MODIFIER_ENTREPRISE", response.data);
@@ -1062,6 +1064,55 @@ export function supprimerAgence({ commit, dispatch }, id) {
             dispatch('getBanque')
             // // dialog.loading(false) // stops the proceed button's loader
             axios.delete('/agence/' + id).then(() => dialog.close())
+        })
+
+}
+
+
+
+
+/**Entreprise**/
+export async function getHistoriqueEntreprise({ commit }) {
+
+    queue.push(() => axios.get('/listeHistoEntreprise').then(response => {
+        commit('GET_HISTORIQUE_ENTREPRISE', response.data)
+    }).catch(error => console.log(error)));
+
+}
+
+export function ajouterHistoriqueEntreprise({ commit }, objetAjoute) {
+    this.$app.$loading(true)
+    axios.post('/ajouteHistoEntreprise', objetAjoute).then(res => {
+        if (res.status == 201) {
+            this.$app.$notify({
+                title: 'success',
+                text: 'Enregistrement effectuer',
+                type: "success"
+            });
+            commit('AJOUTER_HISTORIQUE_ENTREPRISE', res.data)
+            this.$app.$loading(false)
+        }
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(false)
+        this.$app.$notify({
+            title: 'Success',
+            text: "Enregistrement effectué avec success",
+            type: "success"
+        });
+    })
+}
+
+export function supprimerHistoriqueEntreprise({ commit }, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
+            this.$app.$notify({
+                title: 'Suppression',
+                text: 'Suppression effectuer',
+                type: "error"
+            });
+            commit('SUPPRIMER_HISTORIQUE_ENTREPRISE', id)
+            axios.delete('/deleteHistoEntreprise/' + id).then(() => dialog.close())
         })
 
 }
