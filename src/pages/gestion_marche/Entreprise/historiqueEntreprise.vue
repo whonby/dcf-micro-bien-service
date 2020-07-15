@@ -25,10 +25,25 @@
                        <!-- <div  align="right" style="cursor:pointer;">
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div>  -->
+                                             <download-excel
+                                  class="btn btn-success pull-right"
+                                  style="cursor:pointer;"
+                                    :fields = "json_fields"
+                                    title="Liste des entreprises non sanctionner "
+                                    name ="Liste des entreprises non sanctionner"
+                                    worksheet = "entreprise non sanctionner"
+                                  :data="filtre_type_teste">
+          <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+                                       </download-excel> 
+             <div  align="right" style="cursor:pointer;">
+ <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+     </div> 
+
+
                                      </div>
                                 <div class="widget-box">
                                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                                        <h5>Toute les entreprises non sanctionner</h5>
+                                        <h5>Toutes les entreprises non sanctionner</h5>
                                         <div align="right">
                                             Recherche: <input type="text" v-model="search">
                                         </div>
@@ -97,6 +112,18 @@
 
                                 </ul>
                             </div> -->
+           <div class="pagination alternate">
+     <ul>
+       <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+          <li  v-for="(titre, index) in partition(filtre_type_teste,size).length" :key="index" :class="{ active : active_el == index }">
+          <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+       <li :class="{ disabled : page == partition(filtre_type_teste,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+     </ul>
+  </div>
+
+
+
+
                             </div>
                         </div>
     </div>
@@ -107,11 +134,17 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
+ import {partition} from '../../../../src/Repositories/Repository'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 // import {admin,dcf} from '../../../Repositories/Auth';
 export default {
   name:'typetext',
   data() {
     return {
+          page:0,
+       size:10,
+       active_el:0,
       fabActions: [
         {
           name: "cache",
@@ -221,6 +254,62 @@ return objJson.name
   },
   methods: {
      ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerHistoriqueEntreprise","modifierEntreprise","ajouterHistoriqueEntreprise"]),
+
+
+                   // pagination
+   partition:partition,
+      getDataPaginate(index){
+         this.active_el = index;
+         this.page=index
+     },
+     precedent(){
+         this.active_el--
+         this.page --
+     },
+     suivant(){
+         this.active_el++
+         this.page ++
+     },
+
+
+
+
+               // exportation en pdf
+         genererEnPdf(){
+  var doc = new jsPDF('landscape')
+  // doc.autoTable({ html: this.natures_sections })
+  //  var data = this.entrepriseNonSentionner;
+    doc.setFontSize(8)
+    doc.text(115,10,"LISTE DES ENTREPRISES NON SANCTIONNEES")
+      doc.autoTable({ html: '#natures_sections' })
+//   doc.autoTable(this.getColumns(),data)
+// doc.save('entreprise.pdf')
+ doc.output('save','Liste des entreprises non sanctionner.pdf');
+ doc.output('dataurlnewwindow');
+return 0
+},
+getColumns() {
+    return [
+        
+         {title: "N°.IDU", dataKey: "numero_idu"},
+   {title: "R.SOCIALE", dataKey: "raison_sociale"},
+    {title: "N°.CC", dataKey: "numero_cc"},
+     {title: "N°.RC", dataKey: "numero_rc"},
+      {title: "SECTEUR ACTIVITE", dataKey: "secteur_activite"},
+      {title: "DATE DE CREATION", dataKey: "datecreation"},
+      {title: "DATE ACTIVITE", dataKey: "dateactivite"},
+   {title: "REGIME IMPOSITION", dataKey: "regime_impossition"}, 
+    {title: "FORME JURIDIQUE", dataKey: "forme_juridique"}, 
+       
+                    
+
+    ]
+   
+},
+
+
+
+
    afficheModalDecision(id) {
       this.$("#decisionCfEngagement").modal({
         backdrop: "static",
