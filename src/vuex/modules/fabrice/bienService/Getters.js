@@ -1,5 +1,7 @@
+import { groupBy } from "../../../../Repositories/Repository";
+
 export const role_membrecojo = state => state.role_membrecojo
-printMarcheNonAttribue
+
 export const modepaiements = state => state.modepaiements
 export const avenants = state => state.avenants
 export const pays = state => state.pays
@@ -31,15 +33,15 @@ export const natureFonctions = state => state.natureFonctions
 export const signatures = state => state.signatures
 export const typeActeEffetFinanciers = state => state.typeActeEffetFinanciers
 export const typeAnalyses = state => state.typeAnalyses
-export const typeUa = state => state.typeUa
-export const uniteAdministratives = state => state.uniteAdministratives
-export const uniteZones = state => state.uniteZones
+// export const typeUa = state => state.typeUa
+// export const uniteAdministratives = state => state.uniteAdministratives
+// export const uniteZones = state => state.uniteZones
 export const ligneBudgetaires = state => state.ligneBudgetaires
 export const getterDossierCandidats = state => state.DossierCandidats
 export const livrables = state => state.livrables
 export const zoneGeographiques = state => state.zoneGeographiques
 export const typeTextJuridiques = state => state.typeTextJuridiques
-export const realiteServiceFaits = state => state.realiteServiceFaits
+// export const realiteServiceFaits = state => state.realiteServiceFaits
 export const text_juridiques = state => state.text_juridiques
 export const autresTexteJuridiques = state => state.autresTexteJuridiques
 export const typeTypeProcedures = state => state.typeTypeProcedures
@@ -1074,4 +1076,7 @@ export const getMandatPersonnaliserPersonnel = (state, getters, rootState, rootG
         }
         return element;
     })
-getMandatPersonnaliserVise
+export const groupeEntreprise = (state) => {
+  
+    return groupBy(state.acteEffetFinanciers, "entreprise_id");
+};

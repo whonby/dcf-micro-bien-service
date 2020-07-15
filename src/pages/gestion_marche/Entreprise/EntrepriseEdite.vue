@@ -142,9 +142,9 @@
                                                 <div class="control-group">
                                                     <label class="control-label">Form juridique:</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.forme_juridique" class="span11">
+                                                        <select v-model="formData.forme_juridique" class="span11" disabled>
                                                            <option></option>
-                                                            <option v-for="item in getterformeJuridique" :key="item.id" :value="item.id" readonly>
+                                                            <option v-for="item in getterformeJuridique" :key="item.id" :value="item.id" >
                                                                 {{item.libelle}}
                                                             </option>
                                                         </select>
@@ -165,7 +165,7 @@
      <div class="control-group">
                                                     <label class="control-label">Regime d'imposition</label>
                                                     <div class="controls">
-                                                        <select v-model="formData.regime_impossition" class="span11">
+                                                        <select v-model="formData.regime_impossition" class="span11" disabled>
                                                              <option></option>
                                                             <option v-for="item in getterregimeImpositions" :key="item.id" :value="item.id" readonly>
                                                                 {{item.libelle}}

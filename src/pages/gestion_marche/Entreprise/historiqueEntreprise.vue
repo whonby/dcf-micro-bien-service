@@ -49,7 +49,7 @@
                                         <thead>
                                         <tr>
                                             <th>IDU</th>
-                                            <th>Raison social {{afficheNomUtilisateur}}</th>
+                                            <th>Raison social</th>
                                             <th>Compte contribuable</th>
                                             <th>Registe commerce </th>
                                             <th>Secteur activite</th>

@@ -34,6 +34,9 @@
                      <li class="">
                         <a data-toggle="tab" href="#marchehppm">Listes des Marchés Hors PPM   <span class="badge badge-warning">{{afficherNombreMarcheHorsPPM}}</span></a>
                       </li>
+                       <li class="">
+                        <a data-toggle="tab" href="#marcheEntreprise">Marche par entreprise  <span class="badge badge-warning"></span></a>
+                      </li>
                             <!-- <li class="">
                         <a data-toggle="tab" href="#tab00214">Liste des Marchés de Bien&Service et Fourniture   <span class="badge badge-warning">{{nombreMarcheBienServiceEtFourniture}}</span></a>
                       </li>
@@ -73,25 +76,12 @@
                 <historiqueMarche></historiqueMarche>
               </table>
                    </div>
-                    <!-- <div id="tab00009" class="tab-pane">
+                   <div id="marcheEntreprise" class="tab-pane">
                      <table class="table table-bordered table-striped">
-                 
-                       <historiqueInvestissement></historiqueInvestissement>
+                    
+                <marcheParEntreprise></marcheParEntreprise>
               </table>
-                   </div> -->
-                    <!-- <div id="tab000010" class="tab-pane">
-                     <table class="table table-bordered table-striped">
-                    <historiquePersonnel></historiquePersonnel>
-                
-              </table>
-                   </div> -->
-
-                   <!-- <div id="tab00214" class="tab-pane">
-                     <table class="table table-bordered table-striped">
-                    <historiqueParMarche></historiqueParMarche>
-                
-              </table>
-                   </div> -->
+                   </div>
                     <div id="marchehppm" class="tab-pane">
                      <table class="table table-bordered table-striped">
                     <marcheHorsppm></marcheHorsppm>
@@ -114,6 +104,7 @@ import {admin,dcf} from '../../../src/Repositories/Auth';
  import historiqueMarche from '../gestionMarche/historiqueMarche';
  import tableauBord from '../gestionMarche/tableauBordMarche';
   import synthesebudg from '../gestionMarche/synthesebudg'
+   import marcheParEntreprise from '../gestionMarche/marcheParEntreprise';
   // import  historiqueInvestissement from '../gestionMarche/dosierHistoriqueInvestissement/historiqueInestissement'
   // import historiquePersonnel from '../gestionMarche/dossierHistoriquePersonnel/historiquePersonnel'
    import marcheHorsppm from '../gestionMarche/marcheHorsppm'
@@ -126,6 +117,7 @@ export default {
     historiqueMarche,
     tableauBord,
     synthesebudg,
+    marcheParEntreprise,
     // historiqueInvestissement,
     // historiquePersonnel,
     marcheHorsppm
