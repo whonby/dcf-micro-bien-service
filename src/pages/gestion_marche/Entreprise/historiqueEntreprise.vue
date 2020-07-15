@@ -26,28 +26,29 @@
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div>  -->
                                      </div>
+                                     <div align="right">
+                                             <button v-show="selection.length>0" @click.prevent="supprimerHistoriqueEntreprise(item.id)" title="Supprimer un" class="btn btn-danger ">
+                                                            <span class="">Supprimer tout</span></button>
+                                        </div>
                                 <div class="widget-box">
+                                  
+                                   
                                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                                         <h5>Toute les entreprises non sanctionner</h5>
                                         <div align="right">
                                             Recherche: <input type="text" v-model="search">
                                         </div>
 
+
                                     </div>
-                                     <!-- <div class="span4">
-                                        <br>
-                                    Afficher
-                                    <select name="pets" id="pet-select" v-model="size" class="span3">
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select>
-                                    Entrer
-                                </div> -->
+                                   
                                     <div class="widget-content nopadding"><table class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
+                                          <th>
+              <input type="checkbox" v-model="selectAll" @click="select" />
+              
+            </th>
                                             <th>IDU</th>
                                             <th>Raison social</th>
                                             <th>Compte contribuable</th>
@@ -63,6 +64,13 @@
                                         </thead>
                                         <tbody>
                                         <tr class="odd gradeX" v-for="item in filtre_type_teste" :key="item.id">
+                                            <td>
+              <label class="form-checkbox">
+                <input type="checkbox" v-model="selection" :value="item.id" />
+                <i class="form-icon"></i>
+              </label>
+            </td>
+                                            
                                              <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_idu || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.raison_sociale || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_cc || 'Non renseigné'}}</td>
@@ -77,10 +85,11 @@
                                                   <td v-else  style="color:#FF0000;text-align:center;font-size:14px;font-weight: bold;">ES</td>  
                                             <td>
                                                
-                                                        <button @click.prevent="supprimerHistoriqueEntreprise(item.id)"  class="btn btn-danger ">
+                                                        <button  @click.prevent="supprimerHistoriqueEntreprise(item.id)" title="Supprimer un" class="btn btn-danger ">
                                                             <span class=""><i class="icon-trash"></i></span></button>
-
+                                                      
                                             </td>
+
                                         </tr>
                                         <!-- <tr v-if="titreFiltres.length==0" align="right">
                                             <h6>Pas de donnée disponible</h6>
@@ -126,7 +135,9 @@ export default {
       
       editEntrepriseNonSantionner:{},
       search: "",
-      name: null
+      name: null,
+      selectAll: false,
+      selection: [],
     };
   },
   
@@ -138,8 +149,7 @@ export default {
 //   entrepriseNonSentionner(){
 //       return this.entreprises.filter(items=>items.active==1)
 //   },
-
-
+ 
 afficheNomUtilisateur(){
   let objLinea = localStorage.getItem("Users");
 let objJson = JSON.parse(objLinea);
@@ -220,8 +230,20 @@ return objJson.name
    
   },
   methods: {
-     ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerHistoriqueEntreprise","modifierEntreprise","ajouterHistoriqueEntreprise"]),
-   afficheModalDecision(id) {
+     ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerHistoriqueEntreprise","modifierEntreprise","ajouterHistoriqueEntreprise","supprimerToutHistoriqueEntreprise"]),
+  
+  select() {
+      this.selection = [];
+
+      if ((this.selectAll = !this.selectAll)) {
+        for (let index in this.filtre_type_teste) {
+          this.selection.push(this.filtre_type_teste[index].id);
+        }
+      }
+    },
+  
+  
+  afficheModalDecision(id) {
       this.$("#decisionCfEngagement").modal({
         backdrop: "static",
         keyboard: false
@@ -231,12 +253,9 @@ return objJson.name
     },
   
   },
-  addCat() {
-      // s'assurer que l'utilisateur a entré quelque chose
-      if (!this.newCat) {
-        return;
-      }
-  }
+ 
+   
+
 };
 </script>
 
