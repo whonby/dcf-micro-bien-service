@@ -298,7 +298,7 @@ return this.categories_missions.filter((item) => {
         // doc.autoTable({ html: this.natures_sections })
         var data = this.categorieMissionFiltre;
          doc.setFontSize(8)
-        doc.text(75,10,"Liste des catégories des missions")
+        doc.text(75,10,"LISTE DES CATEGORIES DE MISSIONS")
         doc.autoTable(this.getColumns(),data)
        // doc.save('Type des actes de depenses.pdf')
       doc.output('save','Liste des Categories des missions.pdf');

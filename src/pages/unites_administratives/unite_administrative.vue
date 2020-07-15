@@ -5,7 +5,7 @@
     <div id="exampleModal" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Unité d'Administrative</h3>
+        <h3>Ajouter Unité Administrative</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -169,7 +169,7 @@
     <div id="modificationModal" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Unité d'Administrative</h3>
+        <h3>Modifier Unité Administrative</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -346,7 +346,7 @@
  <span class="icon">
                 <i class="icon-th"></i>
               </span>
-                    <h5>Liste des unité d'administrative </h5>
+                    <h5>Liste des unités administratives </h5>
                 </div>
                 <div class="span6">
                     <div align="right">
@@ -443,7 +443,7 @@
                
             </div>
             <div v-else>
-              <p style="text-align:center;font-size:20px;color:red;">Aucune Unite Administrative</p>
+              <p style="text-align:center;font-size:20px;color:red;">Aucune Unité Administrative</p>
             </div>
           </div>
            <div class="pagination alternate">
@@ -717,8 +717,8 @@ codeuniteadministrative2(){
 genererEnPdf(){
   var doc = new jsPDF('landscape')
   // doc.autoTable({ html: this.natures_sections })
-  
-  doc.text(98,10,"Listes Unites Administratives")
+   doc.setFontSize(8)
+  doc.text(115,10,"LISTE DES UNITES ADMINISTRATIVES")
   doc.autoTable({ html: '#Nature_section'}),
   
 doc.save('UniteAdministrative.pdf')

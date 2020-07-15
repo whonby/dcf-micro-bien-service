@@ -10,7 +10,7 @@
     <div id="exampleModal" class="modal hide tailgrand12">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Unites de zones</h3>
+        <h3>Ajouter Unité de zone</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -392,14 +392,29 @@
                     <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel>  -->
+                                                 
+                                        <!-- <download-excel -->
+                                            <!-- class="btn btn-success pull-right" -->
+                                            <!-- style="cursor:pointer;" -->
+                                              <!-- :fields = "json_fields" -->
+                                              <!-- title="Liste plan Organigramme Ua " -->
+                                              <!-- name ="Liste plan Organigramme Ua" -->
+                                              <!-- worksheet = "plan Organigramme Ua" -->
+                                            <!-- > -->
+                     <!-- <i title="Exporter en excel" class="icon-table"> Exporter en excel</i> -->
+
+                                                 <!-- </download-excel>  -->
+                                                        <div  align="right" style="cursor:pointer;">
+           <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+               </div> 
                                      </div>
                                      
-          <div class="widget-box">
+          <div class="widget-box" id="natures_sections">
             <div class="widget-title">
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des unites de zones</h5>
+              <h5>Liste des unités de zones</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />
@@ -407,7 +422,7 @@
               </div> -->
             </div>
 
-            <div class="widget-content nopadding" v-if="uniteAdministratives.length" >
+            <div class="widget-content nopadding"  >
               <uniteZoneComponent v-for="equipement in uniteAdministratives"
                :key="equipement.id"
                 :groupe="equipement"
@@ -444,6 +459,8 @@
   
 <script>
 import { mapGetters, mapActions } from "vuex";
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 import uniteZoneComponent from './uniteZoneComponent'
 import { formatageSomme } from "../../../../src/Repositories/Repository";
 export default {
@@ -555,6 +572,42 @@ export default {
       "supprimerUniteZone",
       // "ajouterHistoriqueBudgetGeneral"
     ]),
+
+
+
+
+
+
+
+
+          genererEnPdf(){
+        var doc = new jsPDF()
+       //doc.autoTable({ html: this.natures_sections })
+        
+       // var data = this.getNormeMissionPersonnaliser;
+        doc.setFontSize(8)
+       doc.text(75,10,"LISTE DES NORMES DE MISSION ")
+       doc.autoTable({ html: '#natures_sections' })
+       // doc.autoTable(this.getColumns(),data)
+      // doc.save('Type des actes de depenses.pdf')
+     doc.output('save','Liste des normes de mission.pdf');
+     doc.output('dataurlnewwindow');
+    return 0
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
      isEmailValid: function() {
       return (this.email == "")? "" : (this.reg.test(this.email)) ? 'has-success' : 'has-error';
     },

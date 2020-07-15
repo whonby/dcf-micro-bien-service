@@ -275,10 +275,11 @@ return this.getterformeJuridique.filter((item) => {
 
 // impression en pdf
 genererEnPdf(){
-  var doc = new jsPDF('landscape')
+  var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
-   const data = this.types_financements;
-  doc.text(98,10,"Forme-Juridique")
+   const data = this.tableformejuridique;
+     doc.setFontSize(8)
+  doc.text(78,10,"LISTE DES FORMES JURIDIQUES")
   doc.autoTable(this.getColspan(), data),
   //doc.find("Action").remove()
 doc.save('formeJuridique.pdf')
