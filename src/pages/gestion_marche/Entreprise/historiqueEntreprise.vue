@@ -26,10 +26,10 @@
            <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
                </div>  -->
                                      </div>
-                                     <div align="right">
-                                             <button v-show="selection.length>0" @click.prevent="supprimerHistoriqueEntreprise(item.id)" title="Supprimer un" class="btn btn-danger ">
+                                     <!-- <div align="right">
+                                             <button v-show="selection.length>0" @click.prevent="supprimerToutHistoriqueEntreprise(id)" title="Supprimer un" class="btn btn-danger ">
                                                             <span class="">Supprimer tout</span></button>
-                                        </div>
+                                        </div> -->
                                 <div class="widget-box">
                                   
                                    
@@ -45,10 +45,10 @@
                                     <div class="widget-content nopadding"><table class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
-                                          <th>
+                                          <!-- <th>
               <input type="checkbox" v-model="selectAll" @click="select" />
               
-            </th>
+            </th> -->
                                             <th>IDU</th>
                                             <th>Raison social</th>
                                             <th>Compte contribuable</th>
@@ -64,12 +64,12 @@
                                         </thead>
                                         <tbody>
                                         <tr class="odd gradeX" v-for="item in filtre_type_teste" :key="item.id">
-                                            <td>
+                                            <!-- <td>
               <label class="form-checkbox">
                 <input type="checkbox" v-model="selection" :value="item.id" />
                 <i class="form-icon"></i>
               </label>
-            </td>
+            </td> -->
                                             
                                              <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_idu || 'Non renseigné'}}</td>
                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.raison_sociale || 'Non renseigné'}}</td>
@@ -241,7 +241,7 @@ return objJson.name
         }
       }
     },
-  
+   
   
   afficheModalDecision(id) {
       this.$("#decisionCfEngagement").modal({
@@ -251,7 +251,11 @@ return objJson.name
 
        this.editEntrepriseNonSantionner = this.entrepriseNonSentionner.find(item=>item.id==id);
     },
-  
+  // afficherToutSupprimer(id) {
+     
+
+  //     this.supprimerToutHistoriqueEntreprise({id:this.selection});
+  //   },
   },
  
    
