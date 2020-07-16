@@ -59,6 +59,18 @@
                                     </select>
                                     Entrer
                                 </div> -->
+
+                         <div class="span4">
+                                 <br>
+                             Afficher
+                             <select name="pets" id="pet-select" v-model="size" class="span3">
+                                 <option value="10">10</option>
+                                 <option value="25">25</option>
+                                 <option value="50">50</option>
+                                 <option value="100">100</option>
+                             </select>
+                             Entrer
+                         </div>
                                     <div class="widget-content nopadding"><table class="table table-bordered table-striped " id="natures_sections">
                                         <thead>
                                         <tr>
@@ -76,16 +88,16 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr class="odd gradeX" v-for="item in entrepriseNonSentionner" :key="item.id">
-                                             <td>{{item.numero_idu || 'Non renseigné'}}</td>
-                                            <td>{{item.raison_sociale || 'Non renseigné'}}</td>
-                                            <td>{{item.numero_cc || 'Non renseigné'}}</td>
-                                            <td>{{item.numero_rc || 'Non renseigné'}}</td>
-                                            <td>{{getSecteurActivite(item.secteur_activite_id) || 'Non renseigné'}}</td>
-                                             <td>{{getPays(item.pays )|| 'Non renseigné'}}</td>
-                                                <td>{{getVille(item.ville) || 'Non renseigné'}}</td>
-                                            <td>{{item.email || 'Non renseigné'}}</td>
-                                            <td>{{item.telephone || 'Non renseigné'}}</td>
+                                        <tr class="odd gradeX" v-for="item in partition(entrepriseNonSentionner,size)[page]" :key="item.id">
+                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_idu || 'Non renseigné'}}</td>
+                                            <td @dblclick="afficherModalModifierTitre(item.id)">{{item.raison_sociale || 'Non renseigné'}}</td>
+                                            <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_cc || 'Non renseigné'}}</td>
+                                            <td @dblclick="afficherModalModifierTitre(item.id)">{{item.numero_rc || 'Non renseigné'}}</td>
+                                            <td @dblclick="afficherModalModifierTitre(item.id)">{{getSecteurActivite(item.secteur_activite_id) || 'Non renseigné'}}</td>
+                                             <td @dblclick="afficherModalModifierTitre(item.id)">{{getPays(item.pays )|| 'Non renseigné'}}</td>
+                                                <td @dblclick="afficherModalModifierTitre(item.id)">{{getVille(item.ville) || 'Non renseigné'}}</td>
+                                            <td @dblclick="afficherModalModifierTitre(item.id)">{{item.email || 'Non renseigné'}}</td>
+                                            <td @dblclick="afficherModalModifierTitre(item.id)">{{item.telephone || 'Non renseigné'}}</td>
                                             <!-- <td @dblclick="afficherModalModifierTitre(item.id)">{{item.banque || 'Non renseigné'}}</td> -->
                                            <td v-if="item.active == 1" style="color:#006400;text-align:center;font-size:14px;font-weight: bold;">ENS</td>
                                                  
