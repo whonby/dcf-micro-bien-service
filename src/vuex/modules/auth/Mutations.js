@@ -179,3 +179,12 @@ export const GET_UNITEADMIN_BY_USER = (state, objetModifie) => {
     state.uniteAdministrativeByUser = objetModifie
 
 }
+
+export const MODIFIER_PHOTO_PROFIL_USER = (state, objetModifie) => {
+    state.utilisateur = state.utilisateur.map(acte_personnel => {
+        if (acte_personnel.id == objetModifie.id) {
+            acte_personnel = { ...objetModifie }
+        }
+        return acte_personnel
+    })
+}

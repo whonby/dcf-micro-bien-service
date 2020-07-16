@@ -11,10 +11,7 @@
                 <i class="icon-th"></i>
               </span>
               <h5> Profil </h5>
-              <!-- <div align="right">
-                Search:
-                <input type="search" placeholder />
-              </div>-->
+             
             </div>
 
             <div class="table-responsive text-nowrap">
@@ -26,15 +23,7 @@
                         <a data-toggle="tab" href="#tab1">Information utilisateur</a>
                       </li>
                        
-                      <li>
-                        <a data-toggle="tab" href="#tab2">Modification</a>
-                      </li>
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab3">Descriptif3</a>
-                      </li> -->
-                      <!-- <li>
-                        <a data-toggle="tab" href="#tab3">Autres Information</a>
-                      </li> -->
+                     
                      
                     </ul>
                   </div>
@@ -43,380 +32,41 @@
                     <div id="tab1" class="tab-pane active">
                       <div class="modal-body">
         <table class="table table-bordered table-striped">
-            <!-- <tr> -->
- <!-- <td> -->
-                    <!-- <div class="control-group"> -->
-                                                    <!-- <label class="control-label">Exercice budgetaire:</label> -->
-                                                    <!-- <div class="controls"> -->
-<!--                                                         -->
-<!--                                                          -->
-<!--                                                       -->
-                                                        <!-- <input type="text" :value="exoEnCours" readonly class="span12"/> -->
-<!--                                                     -->
-                                                    <!-- </div> -->
-                                                <!-- </div> -->
-                <!-- </td> -->
-                <!-- <td colspan="2"> -->
-                     <!-- <div class="control-group"> -->
-                                                    <!-- <label class="control-label">L'unite administrative:</label> -->
-                                                    <!-- <div class="controls"> -->
-                                                        <!-- <select v-model="formData.unite_administrative_id" class="span12"> -->
-                                                            <!-- <option></option> -->
-                                                            <!-- <option v-for="item in uniteAdmin" :key="item.id" :value="item.id"> -->
-                                                                <!-- {{item.libelle}} -->
-                                                            <!-- </option> -->
-
-                                                        <!-- </select> -->
-                                                    <!-- </div> -->
-                                                <!-- </div> -->
-                <!-- </td> -->
-                <!-- <td colspan="2"> -->
-                     <!-- <div class="control-group"> -->
-                                                    <!-- <label class="control-label">Marché</label> -->
-                                                    <!-- <div class="controls"> -->
-                                                        <!-- <select v-model="formData.marche_id" class="span12"> -->
-                                                            <!-- <option></option> -->
-                                                            <!-- <option v-for="item in recupererMarcheUA(formData.unite_administrative_id)" :key="item.id" :value="item.id"> -->
-                                                                <!-- {{item.objet}} -->
-                                                            <!-- </option> -->
-
-                                                        <!-- </select> -->
-                                                    <!-- </div> -->
-                                                <!-- </div> -->
-                <!-- </td> -->
-<!--                  -->
-<!--                        -->
-<!--                  -->
-<!--                 -->
-<!--                -->
-<!--                  -->
-            <!-- </tr> -->
-            <tr>
-              
-              
-              
-              
-                <td>
-        <div class="control-group">
-                                       <label class="control-label">Matricule</label>
-                                       <div class="controls">
-                                           <input type="text" v-model="formData.matricule"  placeholder="Saisir le matricule" class="span12"/>
-                                       </div>
-                                   </div>
-   </td>
-              
-              
-                       
-                                                      
-                                                                                                                                                                                     
-              
-              
-                
-               
-           
-           
-                   <td>
-                     <div class="control-group">
-                                                    <label class="control-label">Nom et Prenom:</label>
-                                                    <div class="controls">
-                                                        <input type="text" v-model="formData.nom_prenom"  placeholder="Saisir nom et prenom" class="span12"/>
-                                                    </div>
-                                                </div>
-                </td>
-             </tr>
-            <tr>
-              <td>
-                     <div class="control-group">
-                                                    <label class="control-label">E-mail:</label>
-                                                    <div class="controls">
-                                                        <input type="text" v-model="formData.email"  placeholder="Saisir Email" class="span12"/>
-                                                    </div>
-                                                </div>
-                </td>
-          
-          
-                <td>
-                    <div class="control-group">
-                                                    <label class="control-label">Rôle:</label>
-                                                    <div class="controls">
-                                                        <input type="text" v-model="formData.role"  placeholder="Saisir le rôle" class="span12"/>
-                                                    </div>
-                                                </div>
-                </td>
-               
-                
-                        
-            </tr>
-            <tr>
-               <td colspan="2">
-                     <div class="control-group">
-                                                    <label class="control-label">Mot de passe:</label>
-                                                    <div class="controls">
-                                                        <input type="text" v-model="formData.mot_passe"  placeholder="Saisir mot de passe" class="span12"/>
-                                                    </div>
-                                                </div>
-                </td>
-                </tr> 
-               <!-- <td> -->
-                     <!-- <div class="control-group"> -->
-                                                    <!-- <label class="control-label">Nom de la mere:</label> -->
-                                                    <!-- <div class="controls"> -->
-                                                        <!-- <input type="text" v-model="formData.nom_mere"  placeholder="Saisir le nom de la mere" class="span12"/> -->
-                                                    <!-- </div> -->
-                                                <!-- </div> -->
-                <!-- </td> -->
-                <!-- <td> -->
-                     <!-- <div class="control-group"> -->
-                                                    <!-- <label class="control-label">Situation matrimoniale</label> -->
-                                                    <!-- <div class="controls"> -->
-                                                        <!-- <select v-model="formData.situation_matrimonial" class="span12" > -->
-<!--                                                             -->
-<!--                                                             -->
-                                                            <!-- <option v-for="situation in situation_matrimonial" :key="situation.id" :value="situation.id">{{situation.libelle}}</option> -->
-<!--                                                             -->
-                                                        <!-- </select> -->
-                                                    <!-- </div> -->
-                                                <!-- </div> -->
-                <!-- </td> -->
-            <!-- </tr> -->
-            </table>
+           <tr>
+             <td style="text-align:center">
+                <div class="control-group">
+                 
+                  <div class="controls">
+                     <img src="../../../../public/lien/img/imgUser/photoDefo.png" name="aboutme" width="200" height="2000" class="img-circle">
+                  </div>
+                </div>
+              </td>
+           </tr>
+              <tr>
+                 <td style="text-align:center">
+                  <div class="control-group">
+                 
+                  <div class="controls">
+                  <input type="file" @change="OnchangeImage"  class="span11 form-control" placeholder="Enter specimen">
+                  <code v-if="info_img">Le fichier doit etre une image (.png,.jpg,jpeg,gif)</code>
+                  </div>
+                </div>
+              </td>
+              </tr>
+               </table>
           </div>
           
                     </div>
-                    <!--ongle descriptif-->
-                    <div id="tab2" class="tab-pane">
-                      
-  <div class="modal-body">
-        <table class="table table-bordered table-striped">
-            <!-- <tr> -->
-                           <!-- <td> -->
-                     <!-- <div class="control-group"> -->
-                                                    <!-- <label class="control-label">Unite de Zone</label> -->
-                                                    <!-- <div class="controls"> -->
-                                                        <!-- <select v-model="formData.uniteZone_id" :disabled="verrouilleUniteZone" class="span12"> -->
-                                                            <!-- <option></option> -->
-                                                            <!-- <option v-for="item in afficheUniteZone(formData.unite_administrative_id)" :key="item.id" :value="item.id"> -->
-                                                                <!-- {{item.libelle}} -->
-                                                            <!-- </option> -->
-<!--  -->
-                                                        <!-- </select> -->
-                                                    <!-- </div> -->
-                                                <!-- </div> -->
-                <!-- </td> -->
-<!--                 -->
-                <!-- <td> -->
-                     <!-- <div class="control-group"> -->
-                                                    <!-- <label class="control-label">Service</label> -->
-                                                    <!-- <div class="controls"> -->
-                                                        <!-- <select v-model="formData.service_id" :disabled="verrouilleService" class="span12"> -->
-                                                            <!-- <option></option> -->
-                                                            <!-- <option v-for="item in afficheService(formData.unite_administrative_id)" :key="item.id" :value="item.id"> -->
-                                                                <!-- {{afficheServicelibelle(item.serviceua_id)}} -->
-                                                            <!-- </option> -->
-<!--  -->
-                                                        <!-- </select> -->
-                                                    <!-- </div> -->
-                                                <!-- </div> -->
-                <!-- </td> -->
-                <!-- <td> -->
-                     <!-- <div class="control-group"> -->
-                                                    <!-- <label class="control-label">Fonctions{{nombreDeFonction(formData.fonction_id)}}</label> -->
-                                                    <!-- <div class="controls"> -->
-                                                        <!-- <select v-model="formData.fonction_id" :disabled="verrouilleFonction" class="span12"> -->
-                                                            <!-- <option></option> -->
-                                                            <!-- <option v-for="item in afficheFonction(formData.service_id)" :key="item.id" :value="item.fonction_id"> -->
-                                                                <!-- {{afficheLibelleFonction(item.fonction_id)}} -->
-                                                            <!-- </option> -->
-<!--  -->
-                                                        <!-- </select> -->
-                                                        <!-- <input type="hidden" :value="nombreDeFonction(formData.fonction_id)" readonly class="span12"/> -->
-                                                    <!-- </div> -->
-                                                <!-- </div> -->
-                <!-- </td> -->
-                <!-- <td> -->
-<!--                       -->
-                                                <!-- <div class="control-group"> -->
-                                                    <!-- <label class="control-label">Grades</label> -->
-                                                    <!-- <div class="controls"> -->
-<!--  -->
-<!--                                                          -->
-                                                         <!-- <input type="text" :value="afficheLibelle(afficheGrade(formData.fonction_id))" readonly class="span12"/> -->
-                                                    <!-- </div> -->
-                                                <!-- </div> -->
-                <!-- </td> -->
-            <!-- </tr> -->
-            <!-- <tr> -->
-<!--                  -->
-<!--                -->
-                <!-- <td> -->
-                     <!-- <div class="control-group"> -->
-                                                    <!-- <label class="control-label">Type contrat</label> -->
-                                                    <!-- <div class="controls"> -->
-                                                        <!-- <select v-model="formData.type_contrat_id" class="span12"> -->
-                                                            <!-- <option></option> -->
-                                                            <!-- <option v-for="item in type_contrats" :key="item.id" :value="item.id"> -->
-                                                                <!-- {{item.libelle}} -->
-                                                            <!-- </option> -->
-
-                                                        <!-- </select> -->
-                                                    <!-- </div> -->
-                                                <!-- </div> -->
-                <!-- </td> -->
-                <!-- <td> -->
-                      <!-- <div class="control-group"> -->
-                                                    <!-- <label class="control-label">Date debut contrat:</label> -->
-                                                    <!-- <div class="controls"> -->
-                                                        <!-- <input type="date" v-model="formData.date_debut_contrat"  placeholder="" class="span12"/> -->
-                                                    <!-- </div> -->
-                                                <!-- </div> -->
-                <!-- </td> -->
-    <!-- <td> -->
-                     <!-- <div class="control-group"> -->
-                                                    <!-- <label class="control-label">Type niveau etude</label> -->
-                                                    <!-- <div class="controls"> -->
-                                                        <!-- <select v-model="formData.niveau_etude_id" class="span12"> -->
-                                                            <!-- <option></option> -->
-                                                            <!-- <option v-for="item in niveau_etudes" :key="item.id" :value="item.id"> -->
-                                                                <!-- {{item.libelle}} -->
-                                                            <!-- </option> -->
-
-                                                        <!-- </select> -->
-                                                    <!-- </div> -->
-                                                <!-- </div> -->
-                <!-- </td> -->
-                             <!-- <td> -->
-                     <!-- <div class="control-group"> -->
-                                                    <!-- <label class="control-label">Type salarie</label> -->
-                                                    <!-- <div class="controls"> -->
-                                                        <!-- <select v-model="formData.type_salarie_id" class="span12"> -->
-                                                            <!-- <option></option> -->
-                                                            <!-- <option v-for="item in type_salaries" :key="item.id" :value="item.id"> -->
-                                                                <!-- {{item.libelle}} -->
-                                                            <!-- </option> -->
-                                                        <!-- </select> -->
-                                                    <!-- </div> -->
-                                                <!-- </div> -->
-                <!-- </td> -->
-            <!-- </tr> -->
-
-              <tr>
-           
-           
-           
-           
-             <td>
-     <div class="control-group">
-                                    <label class="control-label">Matricule</label>
-                                    <div class="controls">
-                                        <input type="text" v-model="formData.matricule"  placeholder="Saisir le matricule" class="span12"/>
-                                    </div>
-                                </div>
-</td>
-           
-           
-                    
-                                                   
-                                                                                                                                                                                  
-           
-           
-             
-            
-        
-        
-                <td>
-                  <div class="control-group">
-                                                 <label class="control-label">Nom et Prenom:</label>
-                                                 <div class="controls">
-                                                     <input type="text" v-model="formData.nom_prenom"  placeholder="Saisir nom et prenom" class="span12"/>
-                                                 </div>
-                                             </div>
-             </td>
-          </tr>
-         <tr>
-           <td>
-                  <div class="control-group">
-                                                 <label class="control-label">E-mail:</label>
-                                                 <div class="controls">
-                                                     <input type="text" v-model="formData.email"  placeholder="Saisir Email" class="span12"/>
-                                                 </div>
-                                             </div>
-             </td>
-       
-       
-             <td>
-                 <div class="control-group">
-                                                 <label class="control-label">Rôle:</label>
-                                                 <div class="controls">
-                                                     <input type="text" v-model="formData.role"  placeholder="Saisir le rôle" class="span12"/>
-                                                 </div>
-                                             </div>
-             </td>
-            
-             
-                     
-         </tr>
-         <tr>
-            <td colspan="2">
-                  <div class="control-group">
-                                                 <label class="control-label">Ancien mot de passe:</label>
-                                                 <div class="controls">
-                                                     <input type="text" v-model="formData.mot_passe"  placeholder="Saisir mot de passe" class="span12"/>
-                                                 </div>
-                                             </div>
-             </td>
-             </tr> 
-
-
-
-            <tr>
-               
-              <td colspan="2">
-                <div class="control-group">
-                                                    <label class="control-label">Nouveau mot de passe:</label>
-                                                    <div class="controls">
-                                                         <input type="text" v-model="formData.mot_passe"  placeholder="Saisir mot de passe" class="span12"/>
-                                    </div>
-
-                                                </div>
-              </td>
-                
-                    
-
-            </tr>
-             <tr>
-    
-   <td colspan="2">
-     <div class="control-group">
-                                         <label class="control-label">Confirmer nouveau mot de passe:</label>
-                                         <div class="controls">
-                                              <input type="text" v-model="formData.mot_passe"  placeholder="Saisir mot de passe" class="span12"/>
-                         </div>
-                                     </div>
-   </td>
-     
-         
- </tr>
-        </table>
-  </div>
-                    </div>
-                     <!-- <div id="tab3" class="tab-pane">
-                      
-
-                    </div> -->
-                    <!--ongle 3 -->
-                    <!-- <div id="tab3" class="tab-pane">
-                    
-                      
-                    </div> -->
+                   
                   </div>
                   <br />
                   <div align="right">
                     <div class="controls">
                       <div data-toggle="buttons-checkbox" class="btn-group">
-                        <!-- <a -->
-                          <!-- class="btn btn-primary" -->
-                          <!-- @click.prevent="ajouterTitreLocal" -->
-                        <!-- >Valider</a> -->
+                        <a
+                          class="btn btn-primary" 
+                          
+                        >Valider</a>
                         <a
                           @click.prevent="afficherModalListePersonnel()"
                           class="btn"
@@ -435,3 +85,102 @@
     </div>
 
 </template>
+
+<script>
+import { mapState, mapMutations, mapActions } from "vuex";
+// import {admin,dcf} from "../Repositories/Auth"
+
+
+export default {
+   
+  mounted() {
+    // console.log(this.$store.state);
+  },
+
+  computed: {
+      ...mapState('parametrageMenu', {
+     active_el: state => state.active_el
+  }),
+    service: {
+       
+        name: "",
+        image: "",
+        description: ""
+      },
+
+        afficheNomUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.name
+
+},
+  afficheEmail(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.email
+
+},
+  afficheMatricule(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.matricule
+
+},
+  afficheActived(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.actived
+
+},
+
+  },
+
+  methods: {
+   
+      ...mapMutations('parametrageMenu', ['activate']),
+      ...mapActions('Utilisateurs', ['logoutUser']),
+   
+ OnchangeImage(e) {
+                const files = e.target.files;
+                this.selectedImage = event.target.files[0];
+                Array.from(files).forEach(file => this.addImage(file));
+            },
+             addImage(file) {
+                if (!file.type.match("image.*")) {
+                    this.info_img=true;
+                    console.log(`${file.name} le fichier doit etre une image`);
+                    return;
+                }
+                this.info_img=false;
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = e => {
+                    vm.image = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
+
+            modifierPhotoProfil () {
+                const formData = new FormData();
+                formData.append('photouser', this.selectedImage, this.selectedImage.name);
+    
+                formData.append('name', this.afficheNomUtilisateur);
+                 formData.append('email', this.afficheEmail);
+                  formData.append('matricule', this.afficheMatricule);
+                   formData.append('actived', this.afficheActived);
+                
+                
+                let config = {
+                    header : {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                }
+                this.modifierActeurDepense(formData,config)
+                setTimeout(function () {  this.delaiMiseDispositionAct(this.acteur_id) }.bind(this), 3000)
+                setTimeout(function () {  this.getLoadActeurDepense(this.acteur_id) }.bind(this), 3000)
+
+            },
+  }
+};
+</script>
+

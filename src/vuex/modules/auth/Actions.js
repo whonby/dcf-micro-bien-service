@@ -241,3 +241,29 @@ export function getUniteAdminUser({commit}, objet){
   //  console.log(id)
     commit('GET_UNITEADMIN_BY_USER', objet)
 }
+
+
+
+export function modifierPhotoProfilUser({ commit, dispatch }, objetModifie, config) {
+    this.$app.$loading(true)
+    axios.post('/add_act_nomination', objetModifie, config).then(res => {
+        this.$app.$notify({
+            title: 'success',
+            text: 'Modification effectuer',
+            type: "success"
+        });
+        commit('MODIFIER_PHOTO_PROFIL_USER', res.data)
+        dispatch('getActeur')
+        dispatch('getActPersonnel')
+        dispatch('allActeurDepense')
+        this.$app.$loading(false)
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(false)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type: "error"
+        });
+    })
+}

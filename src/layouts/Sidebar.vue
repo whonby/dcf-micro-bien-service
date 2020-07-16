@@ -30,7 +30,7 @@
        </li> -->
        <li>
   <center>
-      <router-link tag="a" :to="{ name: 'Profil' }">
+      <router-link tag="a" :to="{ name: 'photoProfil' }">
         <img src="../../public/lien/img/imgUser/photoDefo.png" name="aboutme" width="100" height="20" class="img-circle">
         </router-link>
       <h6 style="color:orange;font-size:14px">{{afficheNomUtilisateur}}   <span style="color:#ffffff">({{afficheRoleUtilisateur}})</span></h6>
