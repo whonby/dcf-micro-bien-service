@@ -230,7 +230,7 @@ export const getPersonnaliseBudgetGeneralParBienService = (
 
 
 
-getPersonnaliseBudgetGeneral
+
   
 
 // afficher le 

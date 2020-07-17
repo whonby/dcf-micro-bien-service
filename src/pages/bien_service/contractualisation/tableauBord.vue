@@ -1,5 +1,4 @@
-budgetConsommerTransfert
-budgetConsommerBienService
+
 <template>
   <div class="container-fluid">
       <!-- <h3 style="text-align:center">TABLEAU DE BORD : BIEN ET SERVICE</h3> -->
@@ -110,7 +109,7 @@ export default {
         if (this.noDCfNoAdmin){
             let colect=[];
             this.printMarcheNonAttribue.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -144,7 +143,7 @@ export default {
         if (this.noDCfNoAdmin){
             let colect=[];
             this.printMarcheNonAttribue.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
+                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.unite_administrative_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -179,7 +178,7 @@ return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && el
         if (this.noDCfNoAdmin){
             let colect=[];
             this.printMarcheNonAttribue.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.type_marche_id)
+                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.type_marche_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -202,7 +201,7 @@ return this.printMarcheNonAttribue.filter(element => element.attribue == 0 && el
         if (this.noDCfNoAdmin){
             let colect=[];
             this.getActeEffetFinancierPersonnaliser45.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -228,7 +227,7 @@ return this.getActeEffetFinancierPersonnaliser45
         if (this.noDCfNoAdmin){
             let colect=[];
             this.getActeEffetFinancierPersonnaliser45.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -252,7 +251,7 @@ return this.getActeEffetFinancierPersonnaliser45.filter(element => this.afficher
         if (this.noDCfNoAdmin){
             let colect=[];
             this.getActeEffetFinancierPersonnaliser45.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -277,7 +276,7 @@ else{
     //     if (this.noDCfNoAdmin){
     //         let colect=[];
     //         this.getMandatPersonnaliserVise.filter(item=>{
-    //             let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+    //             let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
     //             if (val!=undefined){
     //                 colect.push(item)
     //                 return item
@@ -356,7 +355,7 @@ budgetConsommerBienService() {
         if (this.noDCfNoAdmin){
             let colect=[];
             this.mandats.filter(item=>{
-                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                let val=this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item

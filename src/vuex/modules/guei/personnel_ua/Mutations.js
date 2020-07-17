@@ -950,6 +950,35 @@ const MODIFIER_SITUATION_MATRIMONIAL = (state, objetModifie) => {
     })
 }
 
+
+
+
+
+
+export const GET_SAUVEGARDE_PHOTO = (state, data) => {
+    state.sauvegardePhoto = data
+}
+
+
+export const AJOUTER_SAUVEGARDE_PHOTO = (state, nouvel_objet) => {
+    state.sauvegardePhoto.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+}
+
+
+export const SUPPRIMER_SAUVEGARDE_PHOTO = (state, id) => {
+    state.sauvegardePhoto = state.sauvegardePhoto.filter(fonction => fonction.id != id)
+}
+
+
+export const MODIFIER_SAUVEGARDE_PHOTO = (state, objetModifie) => {
+    state.sauvegardePhoto = state.sauvegardePhoto.map(fonction => {
+        if (fonction.id == objetModifie.id) {
+            fonction = { ...objetModifie }
+        }
+        return fonction
+    })
+}
 /**
  * Fin de type acte
  */

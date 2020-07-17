@@ -84,7 +84,7 @@ congeActeur
                                         <li class="active"><a data-toggle="tab" href="#tab1">Information</a></li>
                                         <li class=""><a data-toggle="tab" href="#tab2">L’acte de nomination et du spécimen</a></li>
                                         <li class=""><a data-toggle="tab" href="#tab3">Toutes les rémunérations</a></li>
-                                        <li class=""><a data-toggle="tab" href="#tab4">Congés Annuel</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tab4">Congé Annuel</a></li>
                                         <li class=""><a data-toggle="tab" href="#tab47854">Permission de Congé</a></li>
                                          <li class=""><a data-toggle="tab" href="#tab5">Mission</a></li>
                                          <li class=""><a data-toggle="tab" href="#tab301">Compte bancaire </a></li>

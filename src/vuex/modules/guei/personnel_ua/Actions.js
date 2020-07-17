@@ -2000,3 +2000,79 @@ export function modifierSituationMatrimonial({ commit }, formData) {
     })
 
 }
+
+
+
+
+
+
+export function getSauvegardePhoto({ commit }) {
+
+    queue.push(() => axios.get('/affichePhoto').then(response => {
+        // console.log(response.data)
+        commit('GET_SAUVEGARDE_PHOTO', response.data)
+    }).catch(error => console.log(error))
+    );
+
+}
+
+
+// ajouter type acte personnel
+export function ajouterSauvegardePhoto({ commit, dispatch }, objetAjoute,config) {
+    this.$app.$loading(true)
+    axios.post('/affichePhoto', objetAjoute, config).then(res => {
+        if (res.status == 201) {
+            this.$app.$notify({
+                title: 'success',
+                text: 'Enregistrement effectuer',
+                type: "success"
+            });
+            commit('AJOUTER_SAUVEGARDE_PHOTO', res.data)
+            dispatch("getSauvegardePhoto");
+            dispatch("getSauvegardePhoto");
+            this.$app.$loading(false)
+        }
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(false)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type: "error"
+        });
+    })
+}
+
+// supprimer type act
+export function supprimerSauvegardePhoto({ commit }, id) {
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
+            this.$app.$notify({
+                title: 'Suppression',
+                text: 'Suppression effectuer',
+                type: "error"
+            });
+            commit('SUPPRIMER_SAUVEGARDE_PHOTO', id)
+            axios.delete('/affichePhoto/' + id).then(() => dialog.close())
+        })
+}
+
+export function modifieSauvegardePhoto({ commit, dispatch }, formData, config) {
+    this.$app.$loading(true)
+    axios.put('/affichePhoto', formData, config).then(response => {
+        commit('MODIFIER_SAUVEGARDE_PHOTO', response.data)
+        dispatch("getSauvegardePhoto");
+        dispatch("getSauvegardePhoto");
+        this.$app.$loading(false)
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type: "error"
+        });
+    })
+
+}

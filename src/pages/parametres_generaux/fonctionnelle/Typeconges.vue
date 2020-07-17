@@ -44,7 +44,7 @@
               <thead>
                 <tr>
                   <th>libelle</th>
-                  <th>Duree</th>
+                  <th>Durée(jour)</th>
                    <th>Action</th>
                 </tr>     
               </thead>

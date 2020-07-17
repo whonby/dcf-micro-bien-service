@@ -20,7 +20,7 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1">Information utilisateur</a>
+                        <a data-toggle="tab" href="#tab1">Information utilisateur{{afficheidUtilisateur}}</a>
                       </li>
                        
                      
@@ -47,7 +47,7 @@
                   <div class="control-group">
                  
                   <div class="controls">
-                  <input type="file" @change="OnchangeImage"  class="span11 form-control" placeholder="Enter specimen">
+                  <input type="file" @change="OnchangeImage"  class="span11 form-control" >
                   <code v-if="info_img">Le fichier doit etre une image (.png,.jpg,jpeg,gif)</code>
                   </div>
                 </div>
@@ -65,10 +65,10 @@
                       <div data-toggle="buttons-checkbox" class="btn-group">
                         <a
                           class="btn btn-primary" 
-                          
+                           @click.prevent="modifierPhotoProfil()"
                         >Valider</a>
                         <a
-                          @click.prevent="afficherModalListePersonnel()"
+                         
                           class="btn"
                           href="#"
                         >Fermer</a>
@@ -87,31 +87,30 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from "vuex";
-// import {admin,dcf} from "../Repositories/Auth"
+    import { mapGetters, mapActions} from 'vuex'
+    export default {
+        data(){
+            return {
+              
+                formData: {
+                   
+                },
+                selectedImage:"",
+info_img:false,
+            }
+        },
 
+        created(){
+           
+        },
 
-export default {
-   
-  mounted() {
-    // console.log(this.$store.state);
-  },
+        computed: {
+            ...mapGetters('Utilisateurs', ['loader', 'champVide', 'error', 'errorMessage']),
 
-  computed: {
-      ...mapState('parametrageMenu', {
-     active_el: state => state.active_el
-  }),
-    service: {
-       
-        name: "",
-        image: "",
-        description: ""
-      },
-
-        afficheNomUtilisateur(){
+                afficheidUtilisateur(){
   let objLinea = localStorage.getItem("Users");
 let objJson = JSON.parse(objLinea);
-return objJson.name
+return objJson.id
 
 },
   afficheEmail(){
@@ -132,19 +131,18 @@ let objJson = JSON.parse(objLinea);
 return objJson.actived
 
 },
+        },
 
-  },
+        methods: {
 
-  methods: {
-   
-      ...mapMutations('parametrageMenu', ['activate']),
       ...mapActions('Utilisateurs', ['logoutUser']),
-   
+    ...mapActions('personnelUA', ["getSauvegardePhoto","ajouterSauvegardePhoto","supprimerSauvegardePhoto","modifieSauvegardePhoto"]),
  OnchangeImage(e) {
                 const files = e.target.files;
                 this.selectedImage = event.target.files[0];
                 Array.from(files).forEach(file => this.addImage(file));
             },
+            
              addImage(file) {
                 if (!file.type.match("image.*")) {
                     this.info_img=true;
@@ -159,28 +157,47 @@ return objJson.actived
                 };
                 reader.readAsDataURL(file);
             },
-
+addFichierPDF(file) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = e => {
+                    vm.imagePDF = "pdf.png";
+                    vm.namePDF = file.name;
+                    vm.fichierPDF = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
             modifierPhotoProfil () {
                 const formData = new FormData();
-                formData.append('photouser', this.selectedImage, this.selectedImage.name);
+                formData.append('fichier', this.selectedImage, this.selectedImage.name);
     
-                formData.append('name', this.afficheNomUtilisateur);
-                 formData.append('email', this.afficheEmail);
-                  formData.append('matricule', this.afficheMatricule);
-                   formData.append('actived', this.afficheActived);
-                
-                
+                formData.append('user_id', this.afficheidUtilisateur);
+                 
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'
                     }
                 }
-                this.modifierActeurDepense(formData,config)
-                setTimeout(function () {  this.delaiMiseDispositionAct(this.acteur_id) }.bind(this), 3000)
-                setTimeout(function () {  this.getLoadActeurDepense(this.acteur_id) }.bind(this), 3000)
+                this.ajouterSauvegardePhoto(formData,config)
+                // setTimeout(function () {  this.delaiMiseDispositionAct(this.acteur_id) }.bind(this), 3000)
+                // setTimeout(function () {  this.getLoadActeurDepense(this.acteur_id) }.bind(this), 3000)
 
             },
-  }
-};
+        }
+    }
 </script>
+
+<style  lang="scss" type="text/scss">
+    
+
+    
+
+</style>
+
+
+<style  scoped>
+    
+
+</style>
+
 

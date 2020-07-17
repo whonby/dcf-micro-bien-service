@@ -34,7 +34,8 @@ const defaultstate = {
 
     contrat_resilie:[],
     salairesActeur:[],
-    permissionConge:[]
+    permissionConge:[],
+    sauvegardePhoto:[]
 
 };
 
