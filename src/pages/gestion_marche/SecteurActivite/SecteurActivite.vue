@@ -29,7 +29,7 @@
                                      </div>
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Liste secteur activite</h5>
+                            <h5>Listes des secteurs d'activité</h5>
                             <div align="right">
                                 Search: <input type="text" v-model="search">
 
@@ -138,7 +138,7 @@
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier un fonctions</h3>
+                <h3>Modifier fonction</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -265,7 +265,8 @@ import 'jspdf-autotable'
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.secteur_activites;
-    doc.text(98,10,"Liste secteurs d'activité")
+    doc.setFontSize(8)
+    doc.text(78,10,"LISTE DES SECTEURS D'ACTIVITE")
   doc.autoTable(this.getColumns(),data)
 doc.save('secteur_activité.pdf')
 return 0

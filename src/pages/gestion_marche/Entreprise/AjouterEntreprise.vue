@@ -63,6 +63,24 @@
  
            
          </tr>
+                       <tr>
+                        <td colspan="3" width="250">
+                  <div class="control-group">
+     <label class="control-label">Raison sociale :</label>
+            <div class="controls">
+         <input type="text" class="span11" placeholder="Raison social" v-model="formData.raison_sociale">
+                     </div>
+                 </div>
+             </td>
+             <td>
+                  <div class="control-group">
+                                                    <label class="control-label">Nationalit&eacute; de l'entreprise</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span11" placeholder="Carte d'identité de l'entreprise" v-model="formData.carteidentite">
+                                                    </div>
+                                                </div>
+             </td>
+         </tr>
          <tr>
                <td>
                   <div class="control-group">
@@ -81,6 +99,7 @@
                                                 </div>
              </td>
              <!-- <td>
+                 
                    <div class="control-group">
                                                     <label class="control-label">Banque:</label>
                                                     <div class="controls">
@@ -114,7 +133,7 @@
                                                     <div class="controls">
                                                        <select v-model="formData.pays" class="span11">
                                                             <option></option>
-                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
+                                                            <option v-for="item in affichePays" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -149,15 +168,10 @@
                                                     <label class="control-label">Forme juridique:</label>
                                                     <div class="controls">
                                                         <select v-model="formData.forme_juridique" class="span11">
-                                                            <option></option>
-                                                            <option value="SNC">Société en Nom Collectif</option>
-                                                            <option value="SCS">Société en Commandite Simple</option>
-                                                            <option value="SP">Société en Participation</option>
-                                                            <option value="SARL">Société à Responsabilité Limitée </option>
-                                                            <option value="SRLU">Société à Responsabilité Limitée Unipersonnelle</option>
-                                                            <option value="SA">Société Anonyme</option>
-                                                            <option value="SAU">Société Anonyme Unipersonnelle </option>
-                                                            <option value="GIE">Groupement d’intérêt Economique</option>
+                                                           <option></option>
+                                                            <option v-for="item in getterformeJuridique" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -182,15 +196,15 @@
                                                 </div>
              </td>
               <td>
+
                      <div class="control-group">
                                                     <label class="control-label">Regime d'imposition</label>
                                                     <div class="controls">
                                                         <select v-model="formData.regime_impossition" class="span11">
-                                                            <option></option>
-                                                            <option value="0">régime de l’impôt synthétique (IS) </option>
-                                                            <option value="1">régime du réel simplifié d’imposition (RSI)</option>
-                                                            <option value="2">régime du réel normal d’imposition (RNI)</option>
-                                                            
+                                                             <option></option>
+                                                            <option v-for="item in getterregimeImpositions" :key="item.id" :value="item.id">
+                                                                {{item.libelle}}
+                                                            </option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -239,16 +253,26 @@
                                                 </div>
              </td>
                  </tr>
-                       <tr>
-                        <td colspan="5" width="350">
-                  <div class="control-group">
-     <label class="control-label">Raison sociale :</label>
-            <div class="controls">
-         <input type="text" class="span11" placeholder="Raison social" v-model="formData.raison_sociale">
-                     </div>
-                 </div>
+         <tr>
+            
+             <td>
+                   <div class="control-group">
+                                                    <label class="control-label">Date Creation</label>
+                                                    <div class="controls">
+                                                        <input type="date" class="span11"  v-model="formData.datecreation">
+                                                    </div>
+                                                </div>
              </td>
-         </tr>
+             <td>
+                   <div class="control-group">
+                                                    <label class="control-label">Date debut activite</label>
+                                                    <div class="controls">
+                                                        <input type="date" class="span11"  v-model="formData.dateactivite">
+                                                    </div>
+                                                </div>
+             </td>
+             
+                 </tr>
         </table>
          <div class="modal-footer">
         <a
@@ -325,7 +349,8 @@
                     nbre_travailleur_journalier:"",
                     service_assiette_impot:"",
                     adresse:"",
-                    banque:""
+                    banque:"",
+                    carteidentite:""
                 },
                 editTitre: {
                     code: "",
@@ -344,6 +369,7 @@
         computed: {
 // methode pour maper notre guetter
             ...mapGetters('gestionMarche', ['entreprises',"secteur_activites"]),
+            ...mapGetters("parametreGenerauxAdministratif", ["getterformeJuridique","getterregimeImpositions","getterplan_pays"]),
               ...mapGetters("bienService", ['villes','pays']),
             titreFiltres() {
 
@@ -359,19 +385,23 @@
                 )
 
             },
+            
                villeDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.villes.filter(
-            element => element.pays_id == id
+          return this.getterplan_pays.filter(
+            element => element.parent == id
           );
         }
       };
     },
+    affichePays(){
+        return this.getterplan_pays.filter(items=>items.parent == null );
+    }
         },
         methods: {
             // methode pour notre action
-            ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise"]),
+            ...mapActions('gestionMarche', ['getEntreprise',"ajouterEntreprise","supprimerEntreprise","modifierEntreprise","ajouterHistoriqueEntreprise"]),
             afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',
@@ -384,7 +414,7 @@
             // fonction pour vider l'input
             ajouterTitreLocal () {
                 this.ajouterEntreprise(this.formData)
-
+                this.ajouterHistoriqueEntreprise(this.formData)
                 this.$router.push({ name: 'Entreprise' })
             },
 // afficher modal

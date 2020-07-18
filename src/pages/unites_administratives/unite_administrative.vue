@@ -106,7 +106,7 @@
              
               <td>
                 <div class="control-group">
-                  <label class="control-label">Code Unite administrative:</label>
+                  <label class="control-label">Code Unité administrative:</label>
                 
                   <div class="controls">
                     <input
@@ -121,7 +121,7 @@
               </td>
               <td>
                 <div class="control-group">
-                  <label class="control-label">Nom unite administrative:</label>
+                  <label class="control-label">Nom unité administrative:</label>
                     
                
                   <div class="controls">
@@ -238,7 +238,7 @@
               </td>
               <td>
                   <div class="control-group">
-                  <label class="control-label">Localisation geographique</label>
+                  <label class="control-label">Localisation géographique</label>
                   <div class="controls">
                     <select v-model="editUniteAdministrative.localisationgeo_id" class="span5">
                       <option
@@ -717,6 +717,7 @@ codeuniteadministrative2(){
 genererEnPdf(){
   var doc = new jsPDF('landscape')
   // doc.autoTable({ html: this.natures_sections })
+  
   doc.text(98,10,"Listes Unites Administratives")
   doc.autoTable({ html: '#Nature_section'}),
   

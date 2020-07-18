@@ -35,10 +35,9 @@
                                                     <div class="controls">
                                                         <select v-model="formData.pays_id" class="span4" >
                                                             <option></option>
-                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
+                                                            <option v-for="item in affichePays" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
-
                                                         </select>
                                                     </div>
                                                 </div>
@@ -49,9 +48,7 @@
                                                     <div class="controls">
                                                         <select v-model="formData.ville_id" class="span4" :readOnly="verroVille">
                                                             <option></option>
-                                                            <option v-for="item in VilleDynamiques(formData.pays_id)" 
-                                                            :key="item.id" 
-                                                            :value="item.id">
+                                                            <option v-for="item in villeDynamiques(formData.pays_id)" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -65,12 +62,11 @@
                                                     <label class="control-label">Communes</label>
                                                     <div class="controls">
                                                         <select v-model="formData.commune_id" class="span4" :readOnly="verroCommune">
-                                                            <option></option>
-                                                            <option v-for="item in commuDynamiques(formData.ville_id)" 
-                                                            :key="item.id" 
-                                                            :value="item.id">
-                                                                {{item.libelle}}
-                                                            </option>
+                                                            <option
+                        v-for="localgeo in CommuneDynamiques(formData.ville_id)"
+                        :key="localgeo.id"
+                        :value="localgeo.id"
+                      >{{localgeo.libelle}}</option>
 
                                                         </select>
                                                     </div>
@@ -275,7 +271,7 @@
                                                     <div class="controls">
                                                         <select v-model="editBanqueUa.pays_id" class="span4" >
                                                             <option></option>
-                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
+                                                            <option v-for="item in affichePays" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -288,10 +284,8 @@
                                                     <label class="control-label">Ville:</label>
                                                     <div class="controls">
                                                         <select v-model="editBanqueUa.ville_id" class="span4" :readOnly="verroVille">
-                                                            <option></option>
-                                                            <option v-for="item in VilleDynamiques(editBanqueUa.pays_id)" 
-                                                            :key="item.id" 
-                                                            :value="item.id">
+                                                           <option></option>
+                                                            <option v-for="item in villeDynamiques(editBanqueUa.pays_id)" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -306,7 +300,7 @@
                                                     <div class="controls">
                                                         <select v-model="editBanqueUa.commune_id" class="span4" :readOnly="verroCommune">
                                                             <option></option>
-                                                            <option v-for="item in commuDynamiques(editBanqueUa.ville_id)" 
+                                                            <option v-for="item in CommuneDynamiques(editBanqueUa.ville_id)" 
                                                             :key="item.id" 
                                                             :value="item.id">
                                                                 {{item.libelle}}
@@ -477,6 +471,32 @@
   <hr />
   <div class="row-fluid">
     <div class="span12">
+
+
+
+                                <div>
+                     <download-excel
+                         class="btn btn-success pull-right"
+                         style="cursor:pointer;"
+                           :fields = "json_fields"
+                           title="BanqueUa"
+                           name ="BanqueUa"
+                           worksheet = "Banque_Ua"
+                         :data="banqueUa">
+    <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+                              </download-excel>
+       <div  align="right" style="cursor:pointer;">
+          <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+      </div>
+                  </div> <br>
+
+
+
+
+
+
+
+
       <div class="widget-box">
         <div class="widget-title">
           <div align="right">
@@ -574,6 +594,26 @@
             </tbody>
           </table>
         </div>
+
+               <!-- <div class="pagination alternate">
+       <ul>
+         <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+            <li  v-for="(titre, index) in partition(banqueUa,size).length" :key="index" :class="{ active : active_el == index }">
+            <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+         <li :class="{ disabled : page == partition(banqueUa,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+       </ul>
+    </div>
+ -->
+
+
+
+
+
+
+
+
+
+
         <!-- <div v-else> -->
           <!-- <p style="text-align:center;font-size:20px;color:red;">Aucune Unite Administrative</p> -->
         <!-- </div> -->
@@ -594,6 +634,9 @@
 </template>
 <script>
     import { mapGetters, mapActions } from "vuex";
+    // import {partition} from '../../../../src/Repositories/Repository'
+    import jsPDF from 'jspdf'
+    import 'jspdf-autotable'
     import moment from 'moment';
     //import {getterDossierCandidats} from "../../../vuex/modules/fabrice/bienService/Getters";
 
@@ -687,6 +730,7 @@ created() {
    
    
    ]),
+    ...mapGetters("parametreGenerauxAdministratif", ["getterformeJuridique","getterregimeImpositions","getterplan_pays"]),
     afficherUa() {
       return id => {
         if (id != null && id != "") {
@@ -760,24 +804,28 @@ afficherCodeRibeditBanqueUa(){
                   // })
               // },
 
-                 VilleDynamiques() {
+     villeDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.villes.filter(
-            element => element.pays_id == id
+          return this.getterplan_pays.filter(
+            element => element.parent == id
           );
         }
       };
     },
-            commuDynamiques() {
+    affichePays(){
+        return this.getterplan_pays.filter(items=>items.parent == null );
+    },
+    CommuneDynamiques() {
      return id => {
         if (id != null && id != "") {
-          return this.communes.filter(
-            element => element.ville_id == id
+          return this.getterplan_pays.filter(
+            element => element.parent == id
           );
         }
       };
     },
+
                  banqueDynamiques() {
      return id => {
         if (id != null && id != "") {
@@ -1031,6 +1079,52 @@ AffichierSituationGeoAgenceModifier() {
             // formatageSomme: formatageSomme,
             
            ...mapActions('uniteadministrative',["ajouterBanqueUa","modifierBanqueUa","supprimerBanqueUa"]),
+
+// 
+              //  pagination
+          //  partition:partition,
+
+            //  getDataPaginate(index){
+            //  this.active_el = index;
+            //  this.page=index
+          //  },
+          //  precedent(){
+            //  this.active_el--
+            //  this.page --
+            // },
+          // suivant(){
+            //  this.active_el++
+            //  this.page ++
+          //  },
+        genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.banqueUa;
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES COMPTES BANCAIRES")
+  doc.autoTable(this.getColumns(),data)
+doc.save('banque_Ua.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        {title: " Ua", dataKey: "ua_id"},
+        {title: "BANQUE", dataKey: "banq_id"},
+      {title: "Nature de compte", dataKey: "nature_compte"},
+ {title: " Code SWIFT", dataKey: "  swift"},
+   {title: "IBAN", dataKey: "iban"},                                  
+ {title: "RIB", dataKey: "rib"},
+  {title: "Date d'ouverture de compte", dataKey: "date_ouverture_compte"},
+
+
+
+        
+    ];
+},
+
+
+
 
             //afiicher modal ajouter
             afficherModalAjouterActeDepense() {

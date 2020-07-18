@@ -30,7 +30,7 @@
                                      </div> 
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des structures Acte</h5>
+            <h5>Liste des structures des Actes</h5>
              <div align="right">
         Rechercher: <input type="text" v-model="search"  placeholder="Searche...">
 
@@ -85,7 +85,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucune structures Acte enregistrée </h6>
+                <h6 style="color:red;">Aucune structure d'Acte enregistrée </h6>
               </div>
             </div>
           </div>
@@ -287,7 +287,8 @@ return this.structureActe.filter((item) => {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.structureActe;
-    doc.text(98,10,"Liste structures Acte")
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES STRUCTURES DES ACTES")
   doc.autoTable(this.getColumns(),data)
 doc.save('structure_acte.pdf')
 return 0

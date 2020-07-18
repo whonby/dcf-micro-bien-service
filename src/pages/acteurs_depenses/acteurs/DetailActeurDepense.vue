@@ -1,4 +1,5 @@
 type_acte_id
+congeActeur
 <template>
     <div>
 
@@ -83,9 +84,10 @@ type_acte_id
                                         <li class="active"><a data-toggle="tab" href="#tab1">Information</a></li>
                                         <li class=""><a data-toggle="tab" href="#tab2">L’acte de nomination et du spécimen</a></li>
                                         <li class=""><a data-toggle="tab" href="#tab3">Toutes les rémunérations</a></li>
-                                        <li class=""><a data-toggle="tab" href="#tab4">Tous les conges</a></li>
-                                         <li class=""><a data-toggle="tab" href="#tab5">Historique de mission par acteur</a></li>
-                                         <li class=""><a data-toggle="tab" href="#tab301">Gestion des Compte bancaire </a></li>
+                                        <li class=""><a data-toggle="tab" href="#tab4">Congés Annuel</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tab47854">Permission de Congé</a></li>
+                                         <li class=""><a data-toggle="tab" href="#tab5">Mission</a></li>
+                                         <li class=""><a data-toggle="tab" href="#tab301">Compte bancaire </a></li>
                                          <li class=""><a data-toggle="tab" href="#tab20002"> Contrat resilié </a></li>
                                          <!-- <li class=""><a data-toggle="tab" href="#tab200"> Contrat Terminé </a></li> -->
                                     </ul>
@@ -473,7 +475,7 @@ type_acte_id
                                             </table>
                                         </div>
                                     </div>
-
+<div id="tab47854" class="tab-pane" ><permission :acteurid="acteurDetail.id"></permission></div>
                                     <div id="tab4" class="tab-pane">
 
                                         <div class="widget-box span6" v-if="acteurDetail">
@@ -491,7 +493,7 @@ type_acte_id
                                                     </thead>
                                                     <tbody>
                                                     <tr v-for="item in acteurDetail.congeActeur" :key="item.id" >
-                                                        <td>{{item.type_conge || "Pas de conge" }}</td>
+                                                        <td>{{afficheTypeConge(item.type_conge) || "Pas de conge" }}</td>
                                                         <td>{{item.code || "Pas de conges"}}</td>
                                                         <td>{{formaterDate(item.date_debut) }}</td>
                                                         <td>{{formaterDate(item.date_fin)  }}</td>
@@ -516,39 +518,10 @@ type_acte_id
                                                         <div class="control-group">
                                                             <label class="control-label">Type de congés</label>
                                                             <div class="controls">
-                                                                <select v-model="conges.type_conge">
+                                                                <select v-model="conges.type_conge" class="span11">
                                                                     <option></option>
-                                                                    <option value="congés payés">
-                                                                        Congés payés
-                                                                    </option>
-                                                                    <option value="congé maternité">
-                                                                        Congés maternité
-                                                                    </option>
-                                                                    <option value="Congés paternité">
-                                                                        Congés paternité
-                                                                    </option>
-                                                                    <option value="congé sabbatique">
-                                                                        Congés sabbatique
-                                                                    </option>
-                                                                    <option value="congé pour raisons familiales">
-                                                                        Congé pour raisons familiales
-                                                                    </option>
-                                                                    <option value="congé parental d'éducation">
-                                                                        Congé parental d'éducation
-                                                                    </option>
-                                                                    <option value="congé de reclassement">
-                                                                        Congé de reclassement
-                                                                    </option>
-
-                                                                    <option value="congé d'adoption">
-                                                                        Congé d'adoption
-                                                                    </option>
-                                                                    <option value="congé de longue maladie">
-                                                                        Congé de longue maladie
-                                                                    </option>
-                                                                    <option value="congé pour engagement associatif">
-                                                                        Congé pour engagement associatif
-                                                                    </option>
+                                                                    <option v-for="varText in congeAnnuel" :key="varText.id"
+                                          :value="varText.id">{{varText.libelle}}</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -1151,8 +1124,8 @@ type_acte_id
                                                     <label class="control-label">Pays</label>
                                                     <div class="controls">
                                                         <select v-model="formData1.pays_id" class="span4" >
-                                                            <option></option>
-                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
+                                                             <option></option>
+                                                            <option v-for="item in affichePays" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -1166,7 +1139,7 @@ type_acte_id
                                                     <div class="controls">
                                                         <select v-model="formData1.ville_id" class="span4" :readOnly="verroVille">
                                                             <option></option>
-                                                            <option v-for="item in VilleDynamiques(formData1.pays_id)" 
+                                                            <option v-for="item in villesdyna(formData1.pays_id)" 
                                                             :key="item.id" 
                                                             :value="item.id">
                                                                 {{item.libelle}}
@@ -1391,7 +1364,7 @@ type_acte_id
                                                     <div class="controls">
                                                         <select v-model="editCompte.pays_id" class="span4" >
                                                             <option></option>
-                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
+                                                            <option v-for="item in affichePays" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -1405,7 +1378,7 @@ type_acte_id
                                                     <div class="controls">
                                                         <select v-model="editCompte.ville_id" class="span4" :readOnly="verroVille">
                                                             <option></option>
-                                                            <option v-for="item in VilleDynamiques(editCompte.pays_id)" 
+                                                            <option v-for="item in villesdyna(editCompte.pays_id)" 
                                                             :key="item.id" 
                                                             :value="item.id">
                                                                 {{item.libelle}}
@@ -1623,7 +1596,11 @@ type_acte_id
     import moment from "moment";
     import {formatageSomme} from "../../../vuex/modules/guei/Repositories/Repository"
     import {mapGetters, mapActions} from 'vuex'
+    import permission from "../../../pages/acteurs_depenses/permissionConge/permission";
     export default {
+         components:{
+             permission
+         },
         data() {
             return {
                 fabActions: [
@@ -1757,7 +1734,7 @@ type_acte_id
                 acteurDetail:"",
                 salaire_actuel:"",
 
-
+ acteurid:""
             };
         },
 
@@ -1783,7 +1760,7 @@ type_acte_id
 
         },
         computed: {
-
+...mapGetters('parametreGenerauxFonctionnelle', ['Typeconges']),
  ...mapGetters('personnelUA', ["acte_personnels","dossierPersonnels","situation_matrimonial",'acteur_depenses',"type_salaries","type_contrats","type_acte_personnels","fonctions","grades","niveau_etudes",
                 "nbr_acteur_actredite_taux","all_acteur_depense","classificationGradeFonction",
                 "totalActeurEnctivite","totalActeurDepense","totalActeurAccredite","tauxActeurAccredite","totalActeurNonAccredite"]),
@@ -1793,7 +1770,7 @@ type_acte_id
    ...mapGetters("SuiviImmobilisation", ["services"]),
 
     ...mapGetters('suivi_controle_budgetaire', ["categories_missions" ,"getMissionPersonnaliser", "missions", "historiques_missions","getHistoriqueMissionpersonnaliser"]),
-
+...mapGetters("parametreGenerauxAdministratif", ["getterformeJuridique","getterregimeImpositions","getterplan_pays"]),
 // historiqueMissionParActeur(){
 //    return acte_personnel_id =>{
 //        if(acte_personnel_id !=""){
@@ -1815,7 +1792,11 @@ historiqueMissionParActeur(){
 },
 
 
-
+congeAnnuel(){
+   
+            return this.Typeconges.filter(element =>element.statutconge==3)
+    
+},
 
 
 
@@ -1962,7 +1943,7 @@ afficheService() {
       };
     },
     
-    //  VilleDynamiques() {
+    //  villesdyna() {
     //  return id => {
     //     if (id != null && id != "") {
     //       return this.villes.filter(
@@ -2172,27 +2153,7 @@ afficherListeContratResilie(){
 
 
 
-
-         VilleDynamiques() {
-     return id => {
-        if (id != null && id != "") {
-          return this.villes.filter(
-            element => element.pays_id == id
-          );
-        }
-      };
-    },
-
-
-         commuDynamiques() {
-     return id => {
-        if (id != null && id != "") {
-          return this.communes.filter(
-            element => element.ville_id == id
-          );
-        }
-      };
-    },
+   
 
 
         banqueDynamiques() {
@@ -2321,6 +2282,18 @@ enregistreIdPersonnel(){
       };
     },
 
+   afficheTypeConge() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.Typeconges.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.libelle;
+      }
+      return 0
+        }
+      };
+    },
    afficheTypeSalaire() {
       return id => {
         if (id != null && id != "") {
@@ -2381,6 +2354,7 @@ enregistreIdPersonnel(){
         }
       };
     },
+
       afficheLibelle() {
       return id => {
         if (id != null && id != "") {
@@ -2390,6 +2364,30 @@ enregistreIdPersonnel(){
         return qtereel.libelle;
       }
       return 0
+        }
+      };
+    },
+
+    villesdyna() {
+     return id => {
+        if (id != null && id != "") {
+          return this.getterplan_pays.filter(
+            element => element.parent == id
+          );
+        }
+      };
+    },
+    affichePays(){
+        return this.getterplan_pays.filter(items=>items.parent == null );
+    },
+
+
+         commuDynamiques() {
+     return id => {
+        if (id != null && id != "") {
+          return this.getterplan_pays.filter(
+            element => element.parent == id
+          );
         }
       };
     },

@@ -28,7 +28,7 @@
                                      </div> <br>
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                            <h5>Listes des Familles d' emploies </h5>
+                            <h5>Listes des Familles d' emplois </h5>
                              <div align="right">
                                 Search: <input type="text" v-model="search">
                             </div>
@@ -99,7 +99,7 @@
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter Familles d' emplois</h3>
+                <h3>Ajouter Famille d' emploi</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -129,7 +129,7 @@
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier Familles d' emplois</h3>
+                <h3>Modifier Famille d' emploi</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -259,7 +259,8 @@ import 'jspdf-autotable'
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.familleFonction;
-    doc.text("Listes famille d'emploi",60,10)
+    doc.setFontSize(8)
+ doc.text(75,10,"LISTE DES FAMILLES DES EMPLOIS")
   doc.autoTable(this.getColumns(),data)
 //doc.save('grande_nature_depense.pdf')
  doc.output('save','famille_emploi.pdf')

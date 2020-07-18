@@ -1,4 +1,4 @@
-
+getSecteurActivite
 <template>
     <div>
  <div id="exampleModal" class="modal hide">
@@ -88,9 +88,25 @@
                         <li class="active"><a data-toggle="tab" href="#tab1">LISTE DE TOUTE LES ENTREPRISES  <span class="badge badge-inverse">{{nbreEntreprise}}</span></a></li>
                         <li><a data-toggle="tab" href="#tab2">ENTREPRISE NON SANCTIONNEE  <span class="badge badge-inverse">{{nbreEntrepriseNonSanctionner}}</span></a></li>
                         <li><a data-toggle="tab" href="#tab3">ENTREPRISE SANCTIONNEE  <span class="badge badge-inverse">{{nbreEntrepriseSanctionner}}</span></a></li>
+                        <li><a data-toggle="tab" href="#tab378">CHANGE IMPOSITION OU JURIDIQUES  <span class="badge badge-inverse"></span></a></li>
+                        <li><a data-toggle="tab" href="#tab39865">HISTORIQUE D'ENTREPRISE  <span class="badge badge-inverse"></span></a></li>
                     </ul>
                 </div>
                 <div class="widget-content tab-content">
+
+<div id="tab378" class="tab-pane">
+                      <changeRegimeJuridique></changeRegimeJuridique>
+                    </div>
+
+<div id="tab39865" class="tab-pane">
+                      <historiqueEntreprise></historiqueEntreprise>
+                    </div>
+
+
+
+
+
+
                     <div id="tab1" class="tab-pane active">
                         <div class="row-fluid" style="margin: 0px !important;">
                             <div class="span12">
@@ -472,10 +488,15 @@
 
     import {mapGetters, mapActions} from 'vuex'
     import {partition} from '../../../../src/Repositories/Repository'
+    import changeRegimeJuridique from './changeRegimeJuridique.vue'
+        import historiqueEntreprise from './historiqueEntreprise.vue'
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
     export default {
-
+components:{
+changeRegimeJuridique,
+historiqueEntreprise
+},
         data() {
             return {
                         page:0,
@@ -532,6 +553,7 @@ this.getEntreprise()
 // methode pour maper notre guetter
             ...mapGetters('gestionMarche', ['entreprises',"secteur_activites","sanctions"]),
             ...mapGetters("bienService", ['villes','pays']),
+            ...mapGetters("parametreGenerauxAdministratif", ["getterformeJuridique","getterregimeImpositions","getterplan_pays"]),
             titreFiltres() {
 
                 const searchTerm = this.search.toLowerCase();
@@ -649,7 +671,7 @@ getDateFinSanction() {
      getPays() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.pays.find(qtreel => qtreel.id == id);
+           const qtereel = this.getterplan_pays.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.libelle;
@@ -661,7 +683,7 @@ getDateFinSanction() {
      getVille() {
       return id => {
         if (id != null && id != "") {
-           const qtereel = this.villes.find(qtreel => qtreel.id == id);
+           const qtereel = this.getterplan_pays.find(qtreel => qtreel.id == id);
 
       if (qtereel) {
         return qtereel.libelle;
@@ -695,10 +717,11 @@ getDateFinSanction() {
           
           // exportation en pdf
          genererEnPdf(){
-  var doc = new jsPDF()
+  var doc = new jsPDF('landscape')
   // doc.autoTable({ html: this.natures_sections })
    var data = this.entreprises;
-    doc.text(98,10,"Liste des entreprises")
+    doc.setFontSize(8)
+    doc.text(115,10,"LISTE DES ENTREPRISES")
   doc.autoTable(this.getColumns(),data)
 doc.save('entreprise.pdf')
 return 0
@@ -709,15 +732,14 @@ getColumns() {
         {title: "N°.IDU", dataKey: "numero_idu"},
          {title: "N°.CC", dataKey: "numero_cc"},
           {title: "N°.RC", dataKey: "numero_rc"},
+           {title: "SIGLE", dataKey: "sigle"},
            {title: "R.SOCIALE", dataKey: "raison_sociale"},
-            {title: "SIGLE", dataKey: "sigle"},
         {title: "F.JURIDIQUE", dataKey: "forme_juridique"}, 
-          {title: "C.IMPOT", dataKey: "centre_impot"},
-        {title: "C.SOCIAL", dataKey: "centre_impot"}, 
-          {title: "SIGLE", dataKey: "sigle"},
-        {title: "I.CNPS", dataKey: "immatriculation_cnps"}, 
-         {title: "E-MAIL", dataKey: "email"},  
-    ];  
+
+
+
+
+    ]
    
 },
        

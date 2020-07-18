@@ -106,7 +106,8 @@
 import { mapGetters} from "vuex";
 import budgetGeneralItem from './budgetGeneralItem'
 import { formatageSomme } from "../../../src/Repositories/Repository";
-import {admin,dcf} from "../../../src/Repositories/Auth"
+import {admin,dcf,noDCfNoAdmin} from "../../../src/Repositories/Auth"
+
 export default {
     name: 'budgetGeneralItemComponent',
      props: {
@@ -128,6 +129,7 @@ export default {
   computed: {
       admin:admin,
       dcf:dcf,
+       noDCfNoAdmin:noDCfNoAdmin,
  ...mapGetters("Utilisateurs", ["getterUtilisateur","getterAffectation","getterUniteAdministrativeByUser"]),
 
   ...mapGetters("uniteadministrative", [
@@ -171,15 +173,31 @@ export default {
 
 //     },
 
+ affichebudgetActive() {
+        
+        if(this.noDCfNoAdmin){
+            let colect=[];
+            
+            this.groupe.ua_budget_general.filter(item=>{
+                let val=   this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
+                if (val!=undefined){
+                    colect.push(item)
+                    return item
+                }
+            })
+            return colect.filter(element => element.actived == 1);
+        }
+        return this.groupe.ua_budget_general.filter(element => element.actived == 1); 
 
+    },
 
-   affichebudgetActive(){
+//    affichebudgetActive(){
   
-    var activeBudget= this.groupe.ua_budget_general.filter(element => element.actived == 1); 
+//     var activeBudget= this.groupe.ua_budget_general.filter(element => element.actived == 1); 
      
-      return activeBudget
+//       return activeBudget
   
-},
+// },
    
    
    

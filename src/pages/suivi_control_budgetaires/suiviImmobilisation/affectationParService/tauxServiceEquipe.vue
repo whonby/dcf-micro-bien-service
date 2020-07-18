@@ -32,7 +32,7 @@
                         :key="affectService.id">
                         
                               <td >
-                            {{afficherUniteAdministrative(affectService.s_ua_id) || 'Non renseigné'}}</td>
+                            {{afficherUniteAdministrative(affectService.ua_id) || 'Non renseigné'}}</td>
                             <td >
                             {{afficherLibelleService(affectService.serviceua_id) || 'Non renseigné'}}</td>
                      
@@ -81,7 +81,7 @@ export default {
     data(){
         return{
       formData :{
-s_ua_id:"",
+ua_id:"",
 serviceua_id:"",
 
       },
@@ -122,7 +122,7 @@ search:""
             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
                 'types_financements']) ,
                 
-    ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
+    ...mapGetters("parametreGenerauxAdministratif", ["getterplanOrganisationUa","exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
        ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe', 
   'planActe']),
  ...mapGetters("uniteadministrative", [
@@ -179,8 +179,8 @@ search:""
 
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.servicesua.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+            this.getterplanOrganisationUa.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
@@ -191,7 +191,7 @@ search:""
           
         }
 
-       return this.servicesua.filter(elment=>elment.normeequipement != null)
+       return this.getterplanOrganisationUa.filter(elment=>elment.normeequipement != null)
 
     },
 
@@ -202,7 +202,7 @@ search:""
 
    afficheMontantTotalEquipementNonCouvert() {
      
-         return this.servicesua.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
+         return this.getterplanOrganisationUa.filter(element => element.normeequipement != 0).reduce((prec,cur) => parseFloat(prec) + parseFloat(cur.montantequipement), 0).toFixed(0);
 
      
       
@@ -210,7 +210,7 @@ search:""
     },
     //   filtreServiceUniteAdministrative() {
     //   const st = this.search.toLowerCase();
-    //   return this.servicesua.filter(type => {
+    //   return this.getterplanOrganisationUa.filter(type => {
     //     return (
          
     //       type.afficherLibelleService(this.libelle).toLowerCase().includes(st)
@@ -218,7 +218,7 @@ search:""
     //   });
     // },
 //         tauxServiceEquipe(){
-// return this.servicesua.filter(element => element.normeequipement != null)
+// return this.getterplanOrganisationUa.filter(element => element.normeequipement != null)
 // },
 
 

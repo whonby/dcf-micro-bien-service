@@ -42,7 +42,7 @@
                       <tr>
                         <td>
                           <div class="control-group">
-                            <label class="control-label">Exercice Budgetaire</label>
+                            <label class="control-label">Exercice Budgétaire</label>
                             
                                  <!-- <div class="controls" 
                                   v-for="exoBudget in exoEnCours" 

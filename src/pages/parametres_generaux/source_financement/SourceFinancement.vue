@@ -310,7 +310,8 @@ return this.sources_financements.filter((item) => {
   var doc = new jsPDF('landscape')
   // doc.autoTable({ html: this.natures_sections })
    const data = this.sources_financements;
-  doc.text(98,10,"Listes des sources de financements")
+   doc.setFontSize(8)
+  doc.text(78,10,"LISTE DES SOURCES DES FINANCEMENTS")
   doc.autoTable(this.getColspan(), data),
   //doc.find("Action").remove()
 doc.save('soure de financement.pdf')

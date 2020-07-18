@@ -23,13 +23,13 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des unité d'administrative</h5>
+              <h5>Liste des unités administratives</h5>
               <div align="right">
                 Recherche:
                 <input
                   type="search"
                   v-model="search"
-                  placeholder="Saisie unites administratives"
+                  placeholder="Saisie unite administrative"
                 />
               </div>
             </div>
@@ -71,7 +71,7 @@
               </table>
             </div>
             <div v-else>
-              <p style="text-align:center;font-size:20px;color:red;">Aucune Unite Administrative</p>
+              <p style="text-align:center;font-size:20px;color:red;">Aucune Unité Administrative</p>
             </div>
           </div>
         </div>

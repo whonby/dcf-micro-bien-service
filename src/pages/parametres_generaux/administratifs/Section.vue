@@ -80,7 +80,7 @@
             </div>
 
             <div class="control-group">
-              <label class="control-label">Numero ordre</label>
+              <label class="control-label">Numéro ordre</label>
               <div class="controls">
                 <input type="text" v-model="editSection.code" class="span" placeholder="" />
               </div>
@@ -282,7 +282,8 @@ export default {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.sections;
-    doc.text(98,10,"Listes sections")
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES SECTIONS")
   doc.autoTable(this.getColumns(),data)
 doc.save('section.pdf')
 return 0

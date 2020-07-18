@@ -569,8 +569,9 @@ source_financement
                       v-if="afficherAttributMarche(marche.marche_id) == 5"  class="btn  btn-inverse">
                 <span >TE</span>
        
+       
                 </button>
-                 <router-link :to="{ name: 'Engagement', params: { id: marche.marche_id }}"
+                 <router-link :to="{ name: 'detailExecution', params: { id: marche.marche_id }}"
                 class="btn btn-default " title="Detail Payement marche">
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link> 
@@ -828,7 +829,7 @@ source_financement
                            <span class=""><i class=" icon-calendar"></i></span>
                        </router-link>
                    </td> -->
-                   <td v-if="marche.attribue == 2">
+                   <td v-if="marche.attribue == 2 || marche.attribue == 5">
                         <router-link :to="{ name: 'CycleDeVie', params: { id: marche.id }}"
                  class="btn btn-inverse " title="Cycle de vie du marche">
         <span class=""><i class=" icon-calendar"></i></span>

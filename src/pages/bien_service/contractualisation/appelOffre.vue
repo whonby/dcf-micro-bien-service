@@ -117,13 +117,13 @@
                        <table class="table table-bordered table-striped">
                           <thead>
                           <tr>
-                   <th>Type marcher</th>
+                   <th>Type marché</th>
                   <th> UA</th>
                    <th>Reference appel</th>
                   <th> Type apple</th>
                   <th>Financement</th>
                   <th>Nom bailleur</th>
-                  <th>Date emmission</th>
+                  <th>Date émmission</th>
                   <th>Date limite</th>
                    <th>Action</th>
                 </tr>                              

@@ -104,7 +104,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste type marche </h5>
+              <h5>Liste des types marchés </h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -265,7 +265,8 @@ getDataPaginate(index){
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.typeMarches;
-    doc.text(98,10,"Listes type de marché")
+    doc.setFontSize(8)
+    doc.text(78,10,"LISTE DES TYPES DE MARCHES")
   doc.autoTable(this.getColumns(),data)
 //doc.save('type_marché.pdf')
 doc.output('save','type_marché.pdf')

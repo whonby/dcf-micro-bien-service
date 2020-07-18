@@ -392,7 +392,8 @@ return this.plans_activites.filter((item) => {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.plans_activites;
-    doc.text(98,10,"Liste plan activité ")
+   doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES PLANS DES ACTIVITES ")
   doc.autoTable(this.getColumns(),data)
 doc.save('plan_activité.pdf')
 return 0

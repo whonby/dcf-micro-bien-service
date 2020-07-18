@@ -243,7 +243,8 @@ return this.typeFactures.filter((item) => {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.typeFacturesFiltre;
-    doc.text(98,10,"Liste des types de factures")
+   doc.setFontSize(8)
+    doc.text(78,10,"LISTE DES TYPES DE FACTURES")
   doc.autoTable(this.getColumns(),data)
 // doc.save('Type de Facture.pdf')
 doc.output('save','Type de Facture.pdf');

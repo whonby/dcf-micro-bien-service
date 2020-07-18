@@ -3,6 +3,7 @@
   <div>
   
        
+       
     
       <!-- End Page Header -->
             <!-- Default Light Table -->
@@ -284,7 +285,8 @@ return this.structures_programmes.filter((item) => {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.structures_programmes;
-    doc.text(98,10,"Liste strucres programmes")
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTES DES STRUCTURES PROGRAMMES")
   doc.autoTable(this.getColumns(),data)
 doc.save('structure_programme.pdf')
 return 0

@@ -22,7 +22,7 @@
                         :key="serv.id">
                         
                               <td >
-                            {{afficheToutUA(serv.s_ua_id) || 'Non renseigné'}}</td>
+                            {{afficheToutUA(serv.ua_id) || 'Non renseigné'}}</td>
                             <td >
                             {{afficheToutService(serv.serviceua_id) || 'Non renseigné'}}</td>
                              <td style="text-align: center;">
@@ -96,7 +96,7 @@ admin:admin,
             ...mapGetters('parametreGenerauxSourceDeFinancement', ['sources_financements',
                 'types_financements']) ,
                 
-    ...mapGetters("parametreGenerauxAdministratif", ["exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
+    ...mapGetters("parametreGenerauxAdministratif", ["getterplanOrganisationUa","exercices_budgetaires","type_Unite_admins","grandes_natures","taux","sections"]),
        ...mapGetters('parametreGenerauxFonctionnelle', ['structureActe', 
   'planActe']),
  ...mapGetters("uniteadministrative", [
@@ -124,22 +124,20 @@ admin:admin,
     // },
 
 listeDesServiceDeUa() {
-      
-
-
+  
         if (this.noDCfNoAdmin){
             let colect=[];
-            this.servicesua.filter(item=>{
-                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.s_ua_id)
+            this.getterplanOrganisationUa.filter(item=>{
+                let val= this.getterUniteAdministrativeByUser.find(row=>row.unite_administrative_id==item.ua_id)
                 if (val!=undefined){
                     colect.push(item)
                     return item
                 }
             })
-          return colect
+          return colect.filter(items=>items.serviceua_id !=null);
         }
 
-       return this.servicesua
+       return this.getterplanOrganisationUa.filter(items=>items.serviceua_id !=null);
 
     },
 

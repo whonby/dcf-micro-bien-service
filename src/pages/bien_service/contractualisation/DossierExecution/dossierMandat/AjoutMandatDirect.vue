@@ -264,8 +264,8 @@
                                 type="text"
                                 class="span"
                                 readonly
-                             :value="CodeGdeNatureDep(afficherIdGrandeNature(afficherIdMarche(detail_Facture.id)))"
-                             
+                            
+                             v-model="ndepense"
                               />
                           
                         
@@ -331,7 +331,7 @@
                                 type="text"
                                 class="span"
                                readonly
-                             :value="recupererTypeProcedure"
+                             :value="AfficheTypeProcedure"
                               
                               />
                         
@@ -665,8 +665,8 @@
                 editTitre: {
                     code: "",
                     libelle: ""
-                }
-
+                },
+ndepense:"Bien et service"
             };
         },
  props:["macheid"],
@@ -1243,6 +1243,32 @@ afficheLibelleUa() {
         return norme.tprocedure;
       }
       return ""
+
+    
+    },
+    AfficheTypeProcedure(){
+      if(this.recupererIdTypeFacture(this.detail_Facture.id) == 1){
+
+      return "Engagement Direct" ;
+
+    }
+    else{
+      return "Engagement Bon de Commande"
+    }
+    },
+
+      recupererIdTypeFacture() {
+      
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.getFacturePersonnaliser.find(qtreel => qtreel.id == id);
+
+      if (qtereel) {
+        return qtereel.typfacture_id;
+      }
+      return 0
+        }
+      };
     },
         },
         methods: {

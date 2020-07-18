@@ -83,7 +83,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucun plan décisionnelles enregistré ! </h6>
+                <h6 style="color:red;">Aucun plan décisionnel enregistré ! </h6>
               </div>
             </div>
           </div>
@@ -99,12 +99,12 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter plan décisionnelles</h3>
+                <h3>Ajouter plan décisionnel</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
                    <div class="control-group">
-              <label class="control-label">Structure décisionnelles:</label>
+              <label class="control-label">Structure décisionnelle:</label>
               <div class="controls">
                 <select  v-model="formData.structure_motif_decission_id">
             <option v-for="plan in structuresDecision" :key="plan.id" 
@@ -146,7 +146,7 @@
  <div id="modalAjouterElementEnfant" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter plan décisionnelles</h3>
+                <h3>Ajouter plan décisionnel</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -166,7 +166,7 @@
             </div>
 
                <div class="control-group">
-              <label class="control-label">Structure décisionnelles:</label>
+              <label class="control-label">Structure décisionnelle:</label>
               
               <div class="controls">
               <select v-model="nouvelElementEnfant.structure_motif_decission_id" >
@@ -209,12 +209,12 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier plan décisionnelles</h3>
+                <h3>Modifier plan décisionnelle</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
                    <div class="control-group">
-              <label class="control-label">Structure décisionnelles:</label>
+              <label class="control-label">Structure décisionnelle:</label>
               <div class="controls">
                 <select  v-model="editTitre.structure_motif_decission_id">
             <option v-for="plan in structuresDecision" :key="plan.id" 
@@ -352,7 +352,8 @@ return this.plans_Decision.filter((item) => {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.plans_Decision;
-    doc.text(98,10,"Liste plan decisionnnel")
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTES DES PLANS DECISIONNELS")
   doc.autoTable(this.getColumns(),data)
 doc.save('plan_decisionnel.pdf')
 return 0

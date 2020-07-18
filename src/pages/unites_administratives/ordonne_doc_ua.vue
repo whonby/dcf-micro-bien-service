@@ -31,7 +31,7 @@
             <i title="Exporter en excel" ref="excel" class="icon-table">&nbsp;&nbsp;Exporter en excel</i>
           </download-excel>
           <div class="widget-box">
-            <h5>Liste Documents</h5>
+            <h5>Liste des Documents</h5>
             <div class="widget-title">
               <div align="right">
                 <div class="span3">

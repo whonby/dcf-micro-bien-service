@@ -105,7 +105,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des Etats des Immobilisations</h5>
+              <h5>Liste des Etats des Immobilisations</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -246,7 +246,8 @@ json_fields: {
          var doc = new jsPDF()
         // doc.autoTable({ html: this.natures_sections })
         var data = this.filtre_service;
-        doc.text(60,10,"Liste des états des immobilisations")
+         doc.setFontSize(8)
+        doc.text(75,10,"LISTE DES ETATS DES IMMOBILISATIONS")
         doc.autoTable(this.getColumns(),data)
        // doc.save('Type des actes de depenses.pdf')
       doc.output('save','Liste des Etats des Immobilisations.pdf');

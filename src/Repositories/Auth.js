@@ -34,6 +34,16 @@ export const cf=()=>{
     }
 }
 
+export const isAuthenticate=()=>{
+    let objet=localStorage.getItem('Users');
+    let user=JSON.parse (objet)
+    // console.log("GUEIR")
+    if(user){
+        return true
+    }else{
+        return false
+    }
+}
 
 export const pool=()=>{
     let objet=localStorage.getItem('Users');

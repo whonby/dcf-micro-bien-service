@@ -5,6 +5,7 @@ import { asyncLoading } from 'vuejs-loading-plugin'
 /**
  *Action mode de passation
  */
+modifierBanque
 export async function  getModePassation({commit}) {
     queue.push(() =>  axios.get('/liste_mode_passation').then(response => {
         commit('GET_MODE_PASSATION', response.data)
@@ -258,19 +259,48 @@ export function ajouterBanque({ commit, dispatch}, elementAjout){
   // action pour modifier banque
   
   
-export function modifierBanque({ commit, dispatch}, element_modifie) {
-    asyncLoading( axios.put('/banques',element_modifie)).then(response => {
-         commit('MODIFIER_BANQUE', response.data)
-        dispatch('getBanque')
-        dispatch('getAgence')
+
+// export function modifierBanque({ commit, dispatch}, element_modifie) {
+//     asyncLoading( axios.put('/banques',element_modifie)).then(response => {
+//          commit('MODIFIER_BANQUE', response.data)
+//         dispatch('getBanque')
+//         dispatch('getAgence')
   
-         this.$app.$notify({
-           title: 'success ',
-           text: 'Modification effectué !',
-           type:"success"
-         })
-     }).catch(error => console.log(error))
-  }
+//          this.$app.$notify({
+//            title: 'success ',
+//            text: 'Modification effectué !',
+//            type:"success"
+//          })
+//      }).catch(error => console.log(error))
+//   }
+
+export function modifierBanque({ commit, dispatch }, formData) {
+    asyncLoading(axios
+        .put("/banques/" + formData.id, {
+            code_banque: formData.code_banque,
+            numero_banque: formData.numero_banque,
+            libelle: formData.libelle,
+            telephone: formData.telephone,
+            situation_geographique: formData.situation_geographique
+        }))
+        .then(response => {
+            commit("MODIFIER_BANQUE", response.data);
+            dispatch('getBanque')
+            dispatch('getAgence')
+            this.$app.$notify({
+                title: 'Success',
+                text: 'Modification Effectu� avec Succ�s!',
+                type: "success"
+            })
+        });
+}
+
+
+
+
+
+
+
   // supprimer banque
   
 export function supprimerBanque({ commit, dispatch}, id) {
@@ -445,7 +475,10 @@ export function modifierEntreprise({ commit }, formData) {
             nbre_travailleur_journalier: formData.nbre_travailleur_journalier,
             service_assiette_impot: formData.service_assiette_impot,
             adresse: formData.adresse,
-active:formData.active
+active:formData.active,
+            carteidentite: formData.carteidentite,
+            datecreation: formData.datecreation,
+            dateactivite: formData.dateactivite,
         }))
         .then(response => {
             commit("MODIFIER_ENTREPRISE", response.data);
@@ -1031,6 +1064,55 @@ export function supprimerAgence({ commit, dispatch }, id) {
             dispatch('getBanque')
             // // dialog.loading(false) // stops the proceed button's loader
             axios.delete('/agence/' + id).then(() => dialog.close())
+        })
+
+}
+
+
+
+
+/**Entreprise**/
+export async function getHistoriqueEntreprise({ commit }) {
+
+    queue.push(() => axios.get('/listeHistoEntreprise').then(response => {
+        commit('GET_HISTORIQUE_ENTREPRISE', response.data)
+    }).catch(error => console.log(error)));
+
+}
+
+export function ajouterHistoriqueEntreprise({ commit }, objetAjoute) {
+    this.$app.$loading(true)
+    axios.post('/ajouteHistoEntreprise', objetAjoute).then(res => {
+        if (res.status == 201) {
+            this.$app.$notify({
+                title: 'success',
+                text: 'Enregistrement effectuer',
+                type: "success"
+            });
+            commit('AJOUTER_HISTORIQUE_ENTREPRISE', res.data)
+            this.$app.$loading(false)
+        }
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(false)
+        this.$app.$notify({
+            title: 'Success',
+            text: "Enregistrement effectué avec success",
+            type: "success"
+        });
+    })
+}
+
+export function supprimerHistoriqueEntreprise({ commit }, id) {
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
+            this.$app.$notify({
+                title: 'Suppression',
+                text: 'Suppression effectuer',
+                type: "error"
+            });
+            commit('SUPPRIMER_HISTORIQUE_ENTREPRISE', id)
+            axios.delete('/deleteHistoEntreprise/' + id).then(() => dialog.close())
         })
 
 }

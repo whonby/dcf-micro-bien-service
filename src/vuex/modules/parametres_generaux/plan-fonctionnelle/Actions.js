@@ -73,7 +73,7 @@ export  function getTypeconges({commit}){
 export function ajouterTypeconges({commit}, objetAjout){
  asyncLoading(axios.post('/ajouterTypeconges' ,{
     libelle:objetAjout.libelle,
-   
+     dure: objetAjout.dure,
 })).then(tony => {
      if(tony.status == 201){
          commit('AJOUTER_TYPECONGES', tony.data)
@@ -102,7 +102,7 @@ export function modifierTypeconges({commit},elementModifie){
 
    asyncLoading( axios.put('/modifierTypeconges/' +elementModifie.id ,{
     libelle:elementModifie.libelle,
-
+dure:elementModifie.dure
 })).then(response => {
         commit('MODIFIER_TYPECONGES', response.data)
 

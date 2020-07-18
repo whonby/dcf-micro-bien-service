@@ -29,7 +29,7 @@
                                      </div> 
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste des plans fonctionnelles</h5>
+            <h5>Liste des plans fonctionnels</h5>
              <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -104,7 +104,7 @@
               <div class="modal-body">
                 <form class="form-horizontal">
                    <div class="control-group">
-              <label class="control-label">Structure foctionnelle:</label>
+              <label class="control-label">Structure foNctionnelle:</label>
               <div class="controls">
                 <select  v-model="formData.structure_fonctionnelle_id">
             <option v-for="plan in structures_fonctionnelles" :key="plan.id" 
@@ -354,7 +354,8 @@ return this.plans_fonctionnels.filter((item) => {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.plans_fonctionnels;
-    doc.text(98,10,"Liste plan fonctionnel")
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES PLANS FONCTIONNELS")
   doc.autoTable(this.getColumns(),data)
 doc.save('plan_fonctionnel.pdf')
 return 0

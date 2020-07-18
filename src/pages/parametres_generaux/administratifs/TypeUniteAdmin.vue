@@ -30,7 +30,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des type unite d'administrative</h5>
+              <h5>Liste des types d'unité administrative</h5>
               <div align="right">
                 Rechercher:
                 <input type="text" v-model="search" />
@@ -102,7 +102,7 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter type Unite administrative</h3>
+        <h3>Ajouter type d'unité administrative</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
@@ -137,7 +137,7 @@
     <div id="modifierModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier type unite administrative</h3>
+        <h3>Modifier type d'unité administrative</h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal">
@@ -261,8 +261,9 @@ return this.type_Unite_admins.filter((item) => {
 genererEnPdf(){
   var doc = new jsPDF('landscape')
   // doc.autoTable({ html: this.natures_sections })
-   const data = this.types_financements;
-  doc.text(98,10,"Listes_types_unité_administrative")
+   const data = this.typeUniteAdminitrativeFiltre;
+    doc.setFontSize(8)
+  doc.text(115,10,"LISTE DES TYPES DES UNITES ADMINISTRATIFS")
   doc.autoTable(this.getColspan(), data),
   //doc.find("Action").remove()
 doc.save('type_unité_adminitrative.pdf')

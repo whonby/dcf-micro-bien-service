@@ -305,7 +305,8 @@ return this.structures_budgetaires.filter((item) => {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.structures_budgetaires;
-    doc.text(98,10,"Liste structures economique")
+   doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES STRUCTURES ECONOMIQUES")
   doc.autoTable(this.getColumns(),data)
 doc.save('structure_economique.pdf')
 return 0

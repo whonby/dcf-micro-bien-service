@@ -101,7 +101,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Liste des type acte effet financier</h5>
+              <h5>Liste des types des actes à effets financiers</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -243,7 +243,8 @@ export default {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.typeActeEffetFinanciers;
-    doc.text(98,10,"Liste des types actes effets financiers")
+    doc.setFontSize(8)
+    doc.text(78,10,"LISTE DES TYPES DES ACTES A EFFETS FINANCIERS")
   doc.autoTable(this.getColumns(),data)
 // doc.save('Type actes effets financiers.pdf')
 doc.output('save','Type actes effets financiers.pdf');

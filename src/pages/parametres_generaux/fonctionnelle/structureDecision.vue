@@ -85,7 +85,7 @@
             </div>
             <div v-else>
               <div align="center">
-                <h6 style="color:red;">Aucune structures décisionnelles enregistrée </h6>
+                <h6 style="color:red;">Aucune structure décisionnelle enregistrée </h6>
               </div>
             </div>
           </div>
@@ -286,7 +286,8 @@ return this.structuresDecision.filter((item) => {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.structuresDecision;
-    doc.text(98,10,"Liste structures decisionnelle")
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES STRUCTURES DECISIONNELLES")
   doc.autoTable(this.getColumns(),data)
 doc.save('structure_decisionnelle.pdf')
 return 0

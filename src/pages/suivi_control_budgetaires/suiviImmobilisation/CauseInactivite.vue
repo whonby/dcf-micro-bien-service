@@ -5,7 +5,7 @@
     <div id="exampleModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Ajouter Cause d'inactivite</h3>
+        <h3>Ajouter Cause d'inactivité</h3>
       </div>
       <div class="modal-body">
            <table class="table table-bordered table-striped">
@@ -44,7 +44,7 @@
     <div id="modificationModal" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Modifier Cause d'inactivite</h3>
+        <h3>Modifier Cause d'inactivité</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -104,7 +104,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Listes des Cause d'inactivites</h5>
+              <h5>Liste des Causes d'inactivités</h5>
               <div align="right">
                 Search:
                 <input type="search" placeholder v-model="search" />
@@ -248,7 +248,8 @@ json_fields: {
          var doc = new jsPDF()
         // doc.autoTable({ html: this.natures_sections })
         var data = this.filtre_service;
-        doc.text(65,10,"Liste des causes des inactivites")
+         doc.setFontSize(8)
+        doc.text(75,10,"LISTE DES CAUSES DES INACTIVITES")
         doc.autoTable(this.getColumns(),data)
        // doc.save('Type des actes de depenses.pdf')
       doc.output('save','Liste des Causes des inactivites.pdf');

@@ -21,7 +21,7 @@ isButtunAddDossierCandidat
                                 <th>Montant marché</th>
                                 <th>Type de marché</th>
                                 <th>Unite administrative</th>
-                                <th>Exercice Budgetaire</th>
+                                <th>Exercice Budgétaire</th>
                             </tr>
                             </thead>
                             <tbody>

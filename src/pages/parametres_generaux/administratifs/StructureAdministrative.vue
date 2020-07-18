@@ -287,7 +287,8 @@ return this.structures_administratives.filter((item) => {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.structures_administratives;
-    doc.text(98,10,"Liste strucres administrative")
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES STRUCTURES ADMINISTRATIVES")
   doc.autoTable(this.getColumns(),data)
 doc.save('structure_administrative.pdf')
 return 0

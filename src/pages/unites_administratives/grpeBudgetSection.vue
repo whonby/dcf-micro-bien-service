@@ -37,7 +37,7 @@
               <span class="icon">
                 <i class="icon-th"></i>
               </span>
-              <h5>Budget general par section</h5>
+              <h5>Budget général par section</h5>
               <!-- <div align="right">
                 Recherche:
                 <input type="search" placeholder v-model="search" />

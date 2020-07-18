@@ -31,7 +31,7 @@
                                      </div> 
         <div class="widget-box">
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Liste structures geographique</h5>
+            <h5>Liste des structures geographiques</h5>
              <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -111,7 +111,7 @@
  <div id="exampleModal" class="modal hide">
               <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter structure geographique</h3>
+                <h3>Ajouter structure géographique</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -122,7 +122,7 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="formData.libelle" class="span" placeholder="Saisir le libelle" />
               </div>
@@ -148,7 +148,7 @@
  <div id="modifierModal" class="modal hide">
               <div class="modal-header">
              <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier structure geographique</h3>
+                <h3>Modifier structure géographique</h3>
               </div>
               <div class="modal-body">
                 <form class="form-horizontal">
@@ -159,7 +159,7 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Libelle:</label>
+              <label class="control-label">Libellé:</label>
               <div class="controls">
                 <input type="text" v-model="editStructure.libelle" class="span" placeholder="" />
               </div>
@@ -293,7 +293,8 @@ return this.structures_geographiques.filter((item) => {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.structures_geographiques;
-    doc.text(98,10,"Liste strucres geographique")
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES STRUCTURES GEOGRAPHIQUES")
   doc.autoTable(this.getColumns(),data)
 doc.save('structure_geographique.pdf')
 return 0

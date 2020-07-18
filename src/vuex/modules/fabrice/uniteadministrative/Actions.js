@@ -299,63 +299,63 @@ export function supprimerBudgetGeneral({ commit, dispatch}, id) {
 //////////////////////////*debut action type texte */////////////////////////////
 
 // afficher liste des type de textes
-export function getAllTypeTextes({ commit }) {
-  queue.push(() => {
-    axios
-      .get("/liste_type_text")
-      .then(response => {
-        commit("GET_ALL_TYPES_TEXTES", response.data);
-      })
-      .catch(error => console.log(error));
-  });
-}
+// export function getAllTypeTextes({ commit }) {
+//   queue.push(() => {
+//     axios
+//       .get("/liste_type_text")
+//       .then(response => {
+//         commit("GET_ALL_TYPES_TEXTES", response.data);
+//       })
+//       .catch(error => console.log(error));
+//   });
+// }
 
-// ajouter type texte
-export function ajouterTypeTexte({ commit }, nouveau) {
-  asyncLoading(axios
-    .post("/ajouter_type_text", {
-      code: nouveau.code,
-      libelle: nouveau.libelle
-    }))
+// // ajouter type texte
+// export function ajouterTypeTexte({ commit }, nouveau) {
+//   asyncLoading(axios
+//     .post("/ajouter_type_text", {
+//       code: nouveau.code,
+//       libelle: nouveau.libelle
+//     }))
   
-    .then(response => {
-      if (response.status == 201) {
-        commit("AJOUTER_TYPE_TEXTE", response.data);
-        this.$app.$notify({
-          title: 'Success',
-          text: 'Enregistrement Effectué avec Succès!',
-          type: "success"
-        })
-      }
-    });
-}
+//     .then(response => {
+//       if (response.status == 201) {
+//         commit("AJOUTER_TYPE_TEXTE", response.data);
+//         this.$app.$notify({
+//           title: 'Success',
+//           text: 'Enregistrement Effectué avec Succès!',
+//           type: "success"
+//         })
+//       }
+//     });
+// }
 
-// modifier
-export function modifierTypeTexte({ commit }, nouveau) {
-  asyncLoading(axios
-    .put("/modifier_type_text/" + nouveau.id, {
-      code: nouveau.code,
-      libelle: nouveau.libelle
-    }))
-    .then(response => {
-      commit("MODIFIER_TYPE_TEXTES", response.data);
-      this.$app.$notify({
-        title: 'Success',
-        text: 'Modification Effectué avec Succès!',
-        type: "success"
-      })
-    });
-}
-//supprimer
-export function supprimerTypeTexte({ commit }, id) {
-  this.$app.$dialog
-    .confirm("Voulez vouz vraiment supprimer ?.")
-    .then(dialog => {
-      commit("SUPPRIMER_TYPE_TEXTE", id);
-      // // dialog.loading(false) // stops the proceed button's loader
-      axios.delete("/supprimer_typetext/" + id).then(() => dialog.close());
-    });
-}
+// // modifier
+// export function modifierTypeTexte({ commit }, nouveau) {
+//   asyncLoading(axios
+//     .put("/modifier_type_text/" + nouveau.id, {
+//       code: nouveau.code,
+//       libelle: nouveau.libelle
+//     }))
+//     .then(response => {
+//       commit("MODIFIER_TYPE_TEXTES", response.data);
+//       this.$app.$notify({
+//         title: 'Success',
+//         text: 'Modification Effectué avec Succès!',
+//         type: "success"
+//       })
+//     });
+// }
+// //supprimer
+// export function supprimerTypeTexte({ commit }, id) {
+//   this.$app.$dialog
+//     .confirm("Voulez vouz vraiment supprimer ?.")
+//     .then(dialog => {
+//       commit("SUPPRIMER_TYPE_TEXTE", id);
+//       // // dialog.loading(false) // stops the proceed button's loader
+//       axios.delete("/supprimer_typetext/" + id).then(() => dialog.close());
+//     });
+// }
 
 /*fin action type texte */
 
@@ -441,65 +441,65 @@ export function supprimerUniteAdministrative({ commit, dispatch }, id) {
 
 // afficher liste des archivage note se service
 
-export function getAllArchivageDocument({ commit }) {
-  queue.push(() => {
-    axios
-      .get("/liste_archivage_document")
-      .then(response => {
-        commit("GET_ALL_ARCHIVAGE_DOCUMENT", response.data);
-      })
-      .catch(error => console.log(error));
-  });
-}
-// ajouter archivage note se service
-export function ajouterArchivageDocument({ commit }, nouveau) {
-  asyncLoading(axios
-    .post("/ajouter_archivage_document", {
-      reference: nouveau.reference,
-      uniteadministrative_id: nouveau.uniteadministrative_id,
-      typetexte_id: nouveau.typetexte_id,
-      fichier_join: nouveau.fichier_join,
-      date_jours: nouveau.date_jours,
-      // url_fichier_join: nouveau.url_fichier_join,
-    }))
-    .then(response => {
-      if (response.status == 201) {
-        commit("AJOUTER_ARCHIVAGE_DOCUMENT", response.data);
-      }
-    });
-}
-// modifier archivage note se service
-export function modifierArchivageDocument({ commit }, nouveau) {
-  asyncLoading(axios
-    .put("/modifier_archivage_document/" + nouveau.id, {
-      reference: nouveau.reference,
-      uniteadministrative_id: nouveau.uniteadministrative_id,
-      typetexte_id: nouveau.typetexte_id,
-      fichier_join: nouveau.fichier_join,
-      date_jours: nouveau.date_jours
-    }))
-    .then(response => {
-      commit("MODIFIER_ARCHIVAGE_DOCUMENT", response.data);
-      this.$app.$notify({
-        title: 'Success',
-        text: 'Modification Effectué avec Succès!',
-        type: "success"
-      })
-    });
-}
-//supprimer archivage note se service
+// export function getAllArchivageDocument({ commit }) {
+//   queue.push(() => {
+//     axios
+//       .get("/liste_archivage_document")
+//       .then(response => {
+//         commit("GET_ALL_ARCHIVAGE_DOCUMENT", response.data);
+//       })
+//       .catch(error => console.log(error));
+//   });
+// }
+// // ajouter archivage note se service
+// export function ajouterArchivageDocument({ commit }, nouveau) {
+//   asyncLoading(axios
+//     .post("/ajouter_archivage_document", {
+//       reference: nouveau.reference,
+//       uniteadministrative_id: nouveau.uniteadministrative_id,
+//       typetexte_id: nouveau.typetexte_id,
+//       fichier_join: nouveau.fichier_join,
+//       date_jours: nouveau.date_jours,
+//       // url_fichier_join: nouveau.url_fichier_join,
+//     }))
+//     .then(response => {
+//       if (response.status == 201) {
+//         commit("AJOUTER_ARCHIVAGE_DOCUMENT", response.data);
+//       }
+//     });
+// }
+// // modifier archivage note se service
+// export function modifierArchivageDocument({ commit }, nouveau) {
+//   asyncLoading(axios
+//     .put("/modifier_archivage_document/" + nouveau.id, {
+//       reference: nouveau.reference,
+//       uniteadministrative_id: nouveau.uniteadministrative_id,
+//       typetexte_id: nouveau.typetexte_id,
+//       fichier_join: nouveau.fichier_join,
+//       date_jours: nouveau.date_jours
+//     }))
+//     .then(response => {
+//       commit("MODIFIER_ARCHIVAGE_DOCUMENT", response.data);
+//       this.$app.$notify({
+//         title: 'Success',
+//         text: 'Modification Effectué avec Succès!',
+//         type: "success"
+//       })
+//     });
+// }
+// //supprimer archivage note se service
 
-export function supprimerArchivageDocument({ commit }, id) {
-  this.$app.$dialog
-    .confirm("Voulez vouz vraiment supprimer ?.")
-    .then(dialog => {
-      commit("SUPPRIMER_ARCHIVAGE_DOCUMENT", id);
-      // // dialog.loading(false) // stops the proceed button's loader
-      axios
-        .delete("/supprimer_archivage_document/" + id)
-        .then(() => dialog.close());
-    });
-}
+// export function supprimerArchivageDocument({ commit }, id) {
+//   this.$app.$dialog
+//     .confirm("Voulez vouz vraiment supprimer ?.")
+//     .then(dialog => {
+//       commit("SUPPRIMER_ARCHIVAGE_DOCUMENT", id);
+//       // // dialog.loading(false) // stops the proceed button's loader
+//       axios
+//         .delete("/supprimer_archivage_document/" + id)
+//         .then(() => dialog.close());
+//     });
+// }
 // afficher liste des archivage note se service
 /*fin action archivage note se service */
 

@@ -32,9 +32,9 @@
                     <!--<th>Action</th> -->
                     <th >Total</th>
                      
-                     <th >Consomme</th>
+                     <th >Consommé</th>
                      <th >Disponible</th>
-                     <th >Taux execution</th>
+                     <th >Taux execution</th>s
                     
                   </tr>
                 </thead>

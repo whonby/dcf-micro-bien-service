@@ -173,13 +173,15 @@
                             </div>
                         </div>
                           </td>
+
                            <td>
                               <div class="control-group">
                                                     <label class="control-label">Pays</label>
                                                     <div class="controls">
                                                         <select v-model="formData.pays_id" class="span4" >
-                                                            <option></option>
-                                                            <option v-for="item in pays" :key="item.id" :value="item.id">
+                                                            
+                                                             <option></option>
+                                                            <option v-for="item in affichePays" :key="item.id" :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
 
@@ -193,7 +195,7 @@
                                                     <div class="controls">
                                                         <select v-model="formData.ville_id" class="span4" :readOnly="verroVille">
                                                             <option></option>
-                                                            <option v-for="item in VilleDynamiques(formData.pays_id)" 
+                                                            <option v-for="item in villesdyna(formData.pays_id)" 
                                                             :key="item.id" 
                                                             :value="item.id">
                                                                 {{item.libelle}}
@@ -209,12 +211,12 @@
                                                     <label class="control-label">Communes</label>
                                                     <div class="controls">
                                                         <select v-model="formData.commune_id" class="span4" :readOnly="verroCommune">
-                                                            <option></option>
-                                                            <option v-for="item in commuDynamiques(formData.ville_id)" 
+                                                            <option v-for="item in communeDynamiques(formData.ville_id)" 
                                                             :key="item.id" 
                                                             :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
+
 
                                                         </select>
                                                     </div>
@@ -441,12 +443,12 @@
                                                     <label class="control-label">Communes</label>
                                                     <div class="controls">
                                                         <select v-model="editCompte.commune_id" class="span4" :readOnly="verroCommune">
-                                                            <option></option>
-                                                            <option v-for="item in commuDynamiques(editCompte.ville_id)" 
+                                                           <option v-for="item in communeDynamiques(editCompte.ville_id)" 
                                                             :key="item.id" 
                                                             :value="item.id">
                                                                 {{item.libelle}}
                                                             </option>
+
 
                                                         </select>
                                                     </div>
@@ -697,7 +699,7 @@ created() {
             ...mapGetters("bienService", [ "getMarchePersonnaliser","appelOffres","villes","communes","pays" ]),
 
                 ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
-
+...mapGetters("parametreGenerauxAdministratif", ["getterformeJuridique","getterregimeImpositions","getterplan_pays"]),
 afficherCodeRib(){
       //  const section = this.sections.find(sect => sect.id == this.formData.section_id)
     
@@ -981,7 +983,29 @@ AffichierSituationGeoAgenceModifier() {
 
             },
            
+villesdyna() {
+     return id => {
+        if (id != null && id != "") {
+          return this.getterplan_pays.filter(
+            element => element.parent == id
+          );
+        }
+      };
+    },
+    affichePays(){
+        return this.getterplan_pays.filter(items=>items.parent == null );
+    },
 
+
+         communeDynamiques() {
+     return id => {
+        if (id != null && id != "") {
+          return this.getterplan_pays.filter(
+            element => element.parent == id
+          );
+        }
+      };
+    },
             
           
           
@@ -1161,3 +1185,4 @@ AffichierSituationGeoAgenceModifier() {
         font-weight:bold;
     }
 </style>
+pays_id

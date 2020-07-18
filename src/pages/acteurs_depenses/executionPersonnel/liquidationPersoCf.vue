@@ -1,6 +1,6 @@
 
 <template>
-    <div>
+   <div class="container-fluid">
 
 
 <div id="ModalMandatLiqu" class="modal hide tailgrand">
@@ -487,15 +487,17 @@
 
 
 
-<div id="modalLiquidationCf" class="modal hide">
+<div id="modalLiquidationCf" class="modal hide agrdirModal">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Ajouter Observation Cf</h3>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" >
-          <div class="control-group">
-                            <label class="control-label">D&eacute;cision ordonnateur </label>
+         <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              <div class="control-group">
+                            <label class="control-label">D�cision CF </label>
                             <div class="controls">
                               <select v-model="editLiquidationCf.decision_controleur_financier">
                                 <option value="0">Attente</option>
@@ -505,27 +507,70 @@
                             
     
     </select>
-                           
                             </div>
                           </div>
-                        
-                          <div class="control-group">
+            </td>
+            <td>
+                    <div class="control-group">
+                            <label class="control-label">Motif CF </label>
+                            <div class="controls">
+                               <select v-model="editLiquidationCf.motifcf" class="span">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementParent" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+          </tr>
+                
+                  <tr>
+                 <td>
+                    <div class="control-group">
+                            <label class="control-label">Libelle motif </label>
+                            <div class="controls">
+                               <select v-model="editLiquidationCf.motif_cf" class="span">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementEnfant(editLiquidationCf.motifcf)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+                 <td>
+                               <div class="control-group">
+                            <label class="control-label">Date Decision CF :</label>
+                            <div class="controls">
+                              <input type="date" class="span"  v-model="editLiquidationCf.date_controleur_financier"/>
+                            </div>
+                          </div>
+                           </td>
+                 </tr>             
+                   <tr>
+                     <td colspan="">
+                        <div class="control-group">
                             <label class="control-label">Observation CF</label>
                             <div class="controls">
-                              <textarea  class="span" row = "6" v-model="editLiquidationCf.observation_controleur_financier">
+                              <textarea  class="span6" row = "6" v-model="editLiquidationCf.observation_controleur_financier">
                               </textarea>
                             </div>
                           </div>
-                           <div class="control-group">
-                            <label class="control-label">Date Observation:</label>
+                       </td>
+                       <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Nom du CF</label>
                             <div class="controls">
-                              <input type="date" class="span"  v-model="editLiquidationCf.date_controleur_financier"/>
-                             
+                              <input type="text" class="span6"  :value="afficheNomUtilisateur" readonly/>
                             </div>
                           </div>
-                              
+                       </td>
+                       </tr>      
+                        
+                           
          
-        </form>
+        </table>
       </div>
       <div class="modal-footer">
         <a
@@ -549,9 +594,9 @@
                     <th>activit&eacute;</th>
                     <th>Ligne budgetaire</th>
                     <th>Montant autorisé</th>
-                       <th>Decision Emetteur</th>
+                       <!-- <th>Decision Emetteur</th> -->
                       <th>Date Decision</th>
-                      <th>Decision ordonnateur</th>
+                      <!-- <th>Decision ordonnateur</th> -->
                       <th>Date ordonnateur</th>
                       <th>Decision CF</th>
                       <th>Date CF</th>
@@ -569,11 +614,11 @@
                                     <td>{{afficherLibelleLigne(item.plan_budgetaire_id) || 'Non renseign&eacute;'}}</td>
                                      <td>{{formatageSomme(parseFloat(afficherMontantAutorise(item.ordrepaiemnet_id))) || 'Non renseign&eacute;'}}</td>
                                     
-                                    
+                                     <td>{{formaterDate(item.date_emetteur) || 'Non renseign&eacute;'}}</td>
                                    
                   
                     
-                                       <td>
+                                       <!-- <td>
                        <button v-if="item.decision_emetteur == 201"  class="btn  btn-success"  @click="afficherModalObservationEmetteur(index)" >                        
                      
                       <span    >Vis&eacute;</span>
@@ -631,7 +676,7 @@
                       
                     
                       </button>
-                    </td>
+                    </td> -->
                     <td>{{formaterDate(item.date_ordonnateur) || 'Non renseign&eacute;'}}</td>
                                    
                                          
@@ -775,7 +820,7 @@ editLiquidationCf:{}
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
 
    ...mapGetters('parametreGenerauxFonctionnelle',[
-
+"plans_Decision",
       "plans_fonctionnels",
  "afficheNiveauPlanFonctionnel"
    ]),
@@ -788,8 +833,48 @@ editLiquidationCf:{}
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
   ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
-   
-   
+   afficheNomUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.name
+
+},
+  //  AffichierElementParent() {
+      
+  //     return id => {
+  //       if (id != null && id != "") {
+  //         return this.plans_Decision.filter(element => element.parent == id);
+  //       }
+  //     };
+  //   },
+ AffichierElementParent() {
+      
+      // return id => {
+      //   if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.code == 11 || element.code == 12 || element.code == 13 || element.code == 14 || element.code == 15 || element.code == 16 || element.code == 17 || element.code == 18 || element.code == 19 || element.code == 20);
+      //   }
+      // };
+    },
+AffichierElementEnfant() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.parent == id);
+        }
+      };
+    },
+affichierIdPlanDecission() {
+      const qtereel = this.plans_Decision.find(
+        qtreel => qtreel.code == "12",
+       
+      );
+
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
+
      afficherMontantTresor() {
       return id2=> {
         if (id2!= null && id2!= "") {
@@ -1454,5 +1539,9 @@ this.formData= {
 margin: 0 -48%;
 
   
+}
+.agrdirModal{
+   width: 50%;
+  margin: 0 -25%;
 }
 </style>

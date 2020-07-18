@@ -2,6 +2,94 @@ import axios from "./url/api_personnel_ua/api"
 var housecall = require('housecall');
 var queue = housecall({ concurrency: 2, cooldown: 1000 });
 import { asyncLoading } from "vuejs-loading-plugin";
+
+
+
+
+
+
+
+export function getPermissionConge({ commit }) {
+
+    queue.push(() => axios.get('/listePermissionConge').then(response => {
+        // console.log(response.data)
+        commit('GET_PERMISSION_CONGE', response.data)
+    }).catch(error => console.log(error))
+    );
+
+
+}
+
+// ajouter type acte personnel
+export function ajouterPermissionConge({ commit }, objetAjoute) {
+    this.$app.$loading(true)
+    axios.post('/addPermissionConge', objetAjoute).then(res => {
+        if (res.status == 201) {
+            this.$app.$notify({
+                title: 'success',
+                text: 'Enregistrement effectuer',
+                type: "success"
+            });
+            commit('AJOUTER_PERMISSION_CONGE', res.data)
+            this.$app.$loading(false)
+
+        }
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'Erreur',
+            text: "Erreur c'est produit lors de l'enregistrement",
+            type: "error"
+        });
+    })
+}
+
+
+export function modifierPermissionConge({ commit }, formData) {
+    this.$app.$loading(true)
+    axios.put('/updatePermissionConge', formData).then(response => {
+        commit('MODIFIER_PERMISSION_CONGE', response.data)
+        this.$app.$loading(false)
+    }).catch(error => {
+        console.log(error)
+        this.$app.$loading(true)
+        this.$app.$notify({
+            title: 'success',
+            text: "Modification effectuée !",
+            type: "success"
+        });
+    })
+
+        .then(response => {
+            commit("MODIFIER_PERMISSION_CONGE", response.data);
+
+            this.$app.$notify({
+                title: "Success",
+                text: "Modification Effectu� avec Succ�s!",
+                type: "success"
+            });
+        });
+
+}
+
+// supprimer type act
+export function supprimerPermissionConge({ commit }, id) {
+
+    this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.").then(dialog => {
+            this.$app.$notify({
+                title: 'Suppression',
+                text: 'Suppression effectuer',
+                type: "error"
+            });
+            commit('SUPPRIMER_PERMISSION_CONGE', id)
+            axios.delete('/deletePermissionConge/' + id).then(() => dialog.close())
+        })
+}
+
+
+
 /**
  * acteur_depenses
  * Gestion type acteur

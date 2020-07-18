@@ -8,6 +8,69 @@
  * @param data
  * @constructor
  */
+export const GET_PERMISSION_CONGE = (state, data) => {
+    state.permissionConge = data
+}
+
+
+export const AJOUTER_PERMISSION_CONGE = (state, nouvel_objet) => {
+    state.permissionConge.unshift(nouvel_objet)
+    // state.titres = [...nouvel_objet, ...state.titres]
+}
+
+/**
+ * Suppresions
+ * @param state
+ * @param id
+ * @constructor
+ */
+export const SUPPRIMER_PERMISSION_CONGE = (state, id) => {
+    state.permissionConge = state.permissionConge.filter(op => op.id != id)
+}
+
+
+export const MODIFIER_PERMISSION_CONGE = (state, objetModifie) => {
+    state.permissionConge = state.permissionConge.map(op => {
+        if (op.id == objetModifie.id) {
+            op = { ...objetModifie }
+        }
+        return op
+    })
+}
+
+/**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Mutation echelons
+ */
+/**
+ *
+ * @param state
+ * @param data
+ * @constructor
+ */
 const GET_ORDRE_DE_PAIEMENT = (state, data) => {
     state.ordre_paiement = data
 }

@@ -1,14 +1,6 @@
 
 <template>
-    <div>
-
-
-
-
-
-
-
-      
+   <div class="container-fluid">
 
 <div id="ModalEngagement" class="modal hide tailgrand">
   <div class="row-fluid">
@@ -477,15 +469,17 @@
 
 
 
-<div id="modalDecisionCf" class="modal hide">
+<div id="modalDecisionCf" class="modal hide tailgrand_2">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">Ã—</button>
         <h3>Ajouter Observation du CF</h3>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" >
-          <div class="control-group">
-                            <label class="control-label">D&eacute;cision CF </label>
+        <table class="table table-bordered table-striped">
+          <tr>
+            <td>
+              <div class="control-group">
+                            <label class="control-label">Décision CF </label>
                             <div class="controls">
                               <select v-model="editOrdrePaiement.decision_cf">
                                 <option value="0">Attente</option>
@@ -498,24 +492,68 @@
                            
                             </div>
                           </div>
-                        
-                          <div class="control-group">
+            </td>
+            <td>
+                    <div class="control-group">
+                            <label class="control-label">Motif CF </label>
+                            <div class="controls">
+                               <select v-model="editOrdrePaiement.motifcf" class="span">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementParent" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+          </tr>
+                
+                  <tr>
+                 <td>
+                    <div class="control-group">
+                            <label class="control-label">Libelle motif </label>
+                            <div class="controls">
+                               <select v-model="editOrdrePaiement.motif_cf" class="span">
+                                 <option value=""></option>
+                                <option v-for="varText in AffichierElementEnfant(editOrdrePaiement.motifcf)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
+                            </div>
+                          </div>
+                 </td>
+                 <td>
+                               <div class="control-group">
+                            <label class="control-label">Date Decision CF :</label>
+                            <div class="controls">
+                              <input type="date" class="span"  v-model="editOrdrePaiement.date_motif_cf"/>
+                            </div>
+                          </div>
+                           </td>
+                 </tr>             
+                   <tr>
+                     <td colspan="">
+                        <div class="control-group">
                             <label class="control-label">Observation CF</label>
                             <div class="controls">
-                              <textarea  class="span" row = "6" v-model="editOrdrePaiement.observation_cf">
+                              <textarea  class="span6" row = "6" v-model="editOrdrePaiement.observation_cf">
                               </textarea>
                             </div>
                           </div>
-                           <div class="control-group">
-                            <label class="control-label">Date Observation:</label>
+                       </td>
+                       <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Nom du CF</label>
                             <div class="controls">
-                              <input type="date" class="span"  v-model="editOrdrePaiement.date_motif_cf"/>
-                             
+                              <input type="text" class="span6"  :value="afficheNomUtilisateur" readonly/>
                             </div>
                           </div>
-                              
+                       </td>
+                       </tr>      
+                        
+                           
          
-        </form>
+        </table>
       </div>
       <div class="modal-footer">
         <a
@@ -542,8 +580,8 @@
                     <th>Objet Depense</th>
                     <th>Mois de Paiement</th>
                     <th>Montant des Salaires</th>
-                    <th>Fichier Joint</th>
-                      <th>Validation Chef de projet</th>
+                    <!-- <th>Fichier Joint</th> -->
+                      <!-- <th>Validation Chef de projet</th> -->
                       <th title="date validation chef projet">Date validation CP</th>
                        <th>Validation CF</th>
                       <th>Date validation CF</th>
@@ -566,9 +604,9 @@
                                     <td>{{item.moisdepaiement || 'Non renseign&eacute;'}}</td>
                                     
                                      <td>{{formatageSomme(parseFloat(item.total_general)) || 'Non renseign&eacute;'}}</td>
-                                    <td>{{item.fichierjoint || 'Non renseign&eacute;'}}</td>
-                                   
-                                     <td>
+                                    <!-- <td>{{item.fichierjoint || 'Non renseign&eacute;'}}</td>
+                                    -->
+                                     <!-- <td>
                        <button v-if="item.motif_chef_projet == 1"  class="btn  btn-success"   >                        
                      
                       <span    >Valid&eacute;</span>
@@ -595,7 +633,7 @@
                       
                     
                       </button>
-                    </td>
+                    </td> -->
                     <td>{{formaterDate(item.date_motif_chef_projet) || 'Non renseign&eacute;'}}</td>
                                        <td>
                        <button v-if="item.decision_cf == 6"  class="btn  btn-success"  @click="afficherModalObservationCF(index)" >                        
@@ -742,7 +780,8 @@ fabActions: [
                 "getActeEffetFinancierPersonnaliser", "acteEffetFinanciers",'getEngagementPersonnaliser',"engagements","getEngagementPersonnaliser1","mandats","avenants","getterActeEffetFinanciers"]),
 
    ...mapGetters('parametreGenerauxFonctionnelle',[
-
+"structuresDecision",
+"plans_Decision",
       "plans_fonctionnels",
  "afficheNiveauPlanFonctionnel"
    ]),
@@ -751,7 +790,29 @@ fabActions: [
 
 ...mapGetters('parametreGenerauxBudgetaire',["plans_budgetaires","derniereNivoPlanBudgetaire"]),
   ...mapGetters("gestionMarche", [ 'groupeVille','entreprises','banques','comptes','getCompte', 'getEntreptise','getPersonnaliseAgence','agenceBanques']),
-   
+  
+afficheNomUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.name
+
+},
+ AffichierElementParent() {
+      
+      // return id => {
+      //   if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.code == 11 || element.code == 12 || element.code == 13 || element.code == 14 || element.code == 15 || element.code == 16 || element.code == 17 || element.code == 18 || element.code == 19 || element.code == 20);
+      //   }
+      // };
+    },
+AffichierElementEnfant() {
+      
+      return id => {
+        if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.parent == id);
+        }
+      };
+    },
 afficherButtonEngagement() {
       return id => {
         if (id != null && id != "") {
@@ -764,9 +825,26 @@ afficherButtonEngagement() {
         }
       };
     },
+// AffichierElementParent() {
+      
+//       return id => {
+//         if (id != null && id != "") {
+//           return this.plans_Decision.filter(element => element.parent == id);
+//         }
+//       };
+//     },
 
+affichierIdPlanDecission() {
+      const qtereel = this.plans_Decision.find(
+        qtreel => qtreel.code == "12",
+       
+      );
 
-
+      if (qtereel) {
+        return qtereel.id;
+      }
+      return 0
+    },
 
 
 
@@ -1384,5 +1462,9 @@ montant_emprunt:0,
 margin: 0 -48%;
 
   
+}
+.tailgrand_2{
+  width: 50%;
+  margin: 0 -25%;
 }
 </style>

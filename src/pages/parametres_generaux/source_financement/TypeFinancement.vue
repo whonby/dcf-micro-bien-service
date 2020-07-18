@@ -318,7 +318,8 @@ genererEnPdf(){
   var doc = new jsPDF('landscape')
   // doc.autoTable({ html: this.natures_sections })
    const data = this.types_financements;
-  doc.text(98,10,"Listes_types_financements")
+   doc.setFontSize(8)
+  doc.text(75,10,"LISTE DES TYPES DE FINANCEMENTS")
   doc.autoTable(this.getColspan(), data),
   //doc.find("Action").remove()
 doc.save('type_de_financement.pdf')

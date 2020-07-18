@@ -37,7 +37,7 @@ export const categorieGrade = state =>
   state.categorieGrade.sort((a, b) => (a.id > b.id ? 1 : -1));
 export const familleFonction = state =>
   state.familleFonction.sort((a, b) => (a.id > b.id ? 1 : -1));
-
+export const getterpermissionConge = state => state.permissionConge;
 // export const categorieGrade = state => state.categorieGrade;
 //export const familleFonction = state => state.familleFonction;
 export const classificationGradeFonction = state => state.classificationGradeFonction;

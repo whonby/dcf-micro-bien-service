@@ -1,6 +1,4 @@
-credit_auto
-ligne_id
-marcheid
+
 <template>
   <div>
       <div class="row-fluid">
@@ -102,13 +100,13 @@ marcheid
                        <li class="">
                         <a data-toggle="tab" href="#tab00007">Ordre de paiement <span class="badge badge-important"></span></a>
                       </li>
-                      <li class="" v-if="afficheTabulationEngagement(detail_Execution.id) == 6">
+                      <li class="">
                         <a data-toggle="tab" href="#tab00008">Engagement <span class="badge badge-important"></span></a>
                       </li>
-                       <li class="" v-if="afficheTabulationLiquidation(afficherIdOrdrePaiement(detail_Execution.id)) == 10">
+                       <li class="">
                         <a data-toggle="tab" href="#tab00009">Liquidation <span class="badge badge-important"></span></a>
                       </li>
-                       <li class="" v-if="afficheTabulationMandat(afficherIdOrdrePaiement(detail_Execution.id)) == 20112">
+                       <li class="" >
                         <a data-toggle="tab" href="#tab000010">Mandat <span class="badge badge-important"></span></a>
                       </li>
                     </ul>
@@ -132,7 +130,7 @@ marcheid
                        <!-- <li class="" v-if="prendreDecisionEmetteur(detail_Execution.id) == 201">
                         <a data-toggle="tab" href="#tab0078">ORDONNATEUR <span class="badge badge-important"></span></a>
                       </li> -->
-                     <li class="" v-if="prendreDecisionCFMandat(detail_Execution.id) == 2017"    >
+                     <li class=""   >
                         <a data-toggle="tab" href="#tab12023">CONTROLEUR FINANCIER <span class="badge badge-important"></span></a>
                       </li>
                     
@@ -169,10 +167,10 @@ marcheid
                         <a data-toggle="tab" href="#tab0098">EMETTEUR<span class="badge badge-info"></span></a>
                       </li>
                     
-                       <li class="" v-if="prendreDecisionEmetteur(detail_Execution.id) == 201">
+                       <li class="">
                         <a data-toggle="tab" href="#tab0078">ORDONNATEUR <span class="badge badge-important"></span></a>
                       </li>
-                     <li class="" v-if="prendreDecisionOrdonnateur(detail_Execution.id) == 2011"    >
+                     <li class="" >
                         <a data-toggle="tab" href="#tab4785">CONTROLEUR FINANCIER <span class="badge badge-important"></span></a>
                       </li>
                     
@@ -242,7 +240,7 @@ marcheid
                         <a data-toggle="tab" href="#tab4569">CHEF DE PROJET<span class="badge badge-info"></span></a>
                       </li>
                     
-                       <li class="" v-if="prendreDecision(detail_Execution.id) == 1">
+                       <li class="" >
                         <a data-toggle="tab" href="#tab7458">CONTROLEUR FINANCIER <span class="badge badge-important"></span></a>
                       </li>
                     

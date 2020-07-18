@@ -41,7 +41,7 @@
                         <th>Libelle acte</th>
                         <th>Reference acte</th>
                         <!-- <th>Objet acte</th> -->
-                        <th>Incendice financière</th>
+                        <th>Incidence financière</th>
                         <th>Montant acte</th>
                      <th title="type effet financier">Type E.</th>
                         <!-- <th>Type modif doc</th> -->

@@ -41,7 +41,7 @@
       </div>
       <div class="modal-body">
         <form class="form-horizontal" >
-          <div class="control-group">
+          <!-- <div class="control-group">
                             <label class="control-label">D&eacute;cision Chef de projet </label>
                             <div class="controls">
                               <select v-model="editOrdrePaiement.motif_chef_projet">
@@ -54,7 +54,7 @@
     </select>
                            
                             </div>
-                          </div>
+                          </div> -->
                         
                           <div class="control-group">
                             <label class="control-label">Observation Chef de projet</label>
@@ -551,8 +551,8 @@
                     <th>Objet Depense</th>
                     <th>Mois de Paiement</th>
                     <th>Montant des Salaires</th>
-                    <th>Fichier Joint</th>
-                      <th>Chez de projet</th>
+                    <th>Date observation</th>
+                      <!-- <th>Chez de projet</th> -->
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -570,9 +570,9 @@
                                     <td @click="afficherModalModifierTitre(item.id)">{{item.moisdepaiement || 'Non renseign&eacute;'}}</td>
                                     
                                      <td @click="afficherModalModifierTitre(item.id)">{{formatageSomme(parseFloat(item.total_general)) || 'Non renseign&eacute;'}}</td>
-                                    <td @click="afficherModalModifierTitre(item.id)">{{item.fichierjoint || 'Non renseign&eacute;'}}</td>
+                                    <td @click="afficherModalModifierTitre(item.id)">{{formaterDate(item.date_motif_chef_projet) || 'Non renseign&eacute;'}}</td>
                                    
-                                     <td>
+                                     <!-- <td>
                        <button v-if="item.motif_chef_projet == 1"  class="btn  btn-success"  @click="afficherModalObservationChefProjet(index)" >                        
                      
                       <span    >Valid&eacute;</span>
@@ -599,8 +599,13 @@
                       
                     
                       </button>
-                    </td>
+                    </td> -->
                                     <td>
+                                        <button  class="btn  btn-success" @click="afficherModalObservationChefProjet(index)">
+                        <span>
+                          <i class="icon icon-ok"></i>
+                        </span>
+                      </button>
       <div class="btn-group">
                             <button @click.prevent="supprimerordrepaiement(item.id)"  class="btn btn-danger " title="Supprimer">
                                 <span class=""><i class="icon-trash"></i></span>

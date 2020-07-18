@@ -10,7 +10,7 @@
         <hr>
     <div class="row-fluid">
       <div class="span12">
-          <div>
+          <!-- <div> -->
 
                                         <!-- <download-excel
                                             class="btn btn-default pull-right"
@@ -23,12 +23,28 @@
                      <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
 
                                                  </download-excel>  -->
-                                                 <input type="button" @click.prevent="imprimerBPdf"/>
-                                     </div> <br>
+
+                                                                                      <div>
+                              <download-excel
+                                  class="btn btn-success pull-right"
+                                  style="cursor:pointer;"
+                                    :fields = "json_fields"
+                                    title="Liste structure Organigramme Ua "
+                                    name ="Liste structure Organigramme Ua"
+                                    worksheet = "structure Organigramme Ua"
+                                  :data="localisationsFiltre">
+        <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+                                       </download-excel> 
+             <div  align="right" style="cursor:pointer;">
+ <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+     </div>
+                           </div> 
+                                                 <!-- <input type="button" @click.prevent="imprimerBPdf"/> -->
+                                     <!-- </div> <br> -->
         <div class="widget-box">
           
              <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>Listes Taux TVA</h5>
+            <h5>Liste Taux TVA</h5>
              <!-- <div align="right">
         Rechercher: <input type="text" v-model="search">
 
@@ -188,6 +204,8 @@
 <script>
 //import axios from '../../../../urls/api_parametrage/api'
 import {mapGetters, mapActions} from 'vuex'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 
 export default {
   
@@ -270,7 +288,29 @@ imprimerBPdf(){
 
     // methode pour notre action
    ...mapActions('parametreGenerauxAdministratif', [ 'ajouterTaux',
-    'supprimerTaux', 'modifierTaux',"EncoursTaux"]),   
+    'supprimerTaux', 'modifierTaux',"EncoursTaux"]), 
+    
+    
+        genererEnPdf(){
+  var doc = new jsPDF()
+  // doc.autoTable({ html: this.natures_sections })
+   var data = this.taux;
+    doc.setFontSize(8)
+    doc.text(95,10,"LISTE DES TAUX")
+  doc.autoTable(this.getColumns(),data)
+doc.save('taux.pdf')
+return 0
+},
+getColumns() {
+    return [
+        
+        
+        {title: "LIBELLE", dataKey: "libelle"},
+     
+        
+    ];
+ },
+
    
     afficherModalExerciceBudgetaire(){
        this.$('#exampleModal').modal({

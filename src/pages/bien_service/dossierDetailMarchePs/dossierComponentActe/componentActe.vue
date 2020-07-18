@@ -1,7 +1,13 @@
 
 <template>
+<<<<<<< HEAD
     <div>
             	      
+=======
+    <div class="container-fluid">
+
+                  
+>>>>>>> a94b1fc6cff92232193e01ef4484d24ac2c5b019
                     <!-- <div align="right">
                     <div class="widget-content">
                         <a href="#ajouterActeEffetFinancier" data-toggle="modal" class="btn btn-warning" v-if="listeAvisAnoBailleur(macheid)">Ajouter</a>
@@ -2135,9 +2141,8 @@ formatageSomme:formatageSomme,
 
 <style scoped>
 .grdirModalActeEffet{
-     width: 1200px;
- margin: 0 -600px;
- height: 600px;
+     width: 95%;
+ margin: 0 -800px;
 
 }
 </style>

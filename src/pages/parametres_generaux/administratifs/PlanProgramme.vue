@@ -360,7 +360,8 @@ return this.plans_programmes.filter((item) => {
   var doc = new jsPDF()
   // doc.autoTable({ html: this.natures_sections })
    var data = this.plans_programmes;
-    doc.text(98,10,"Liste plan programme")
+    doc.setFontSize(8)
+    doc.text(75,10,"LISTE DES PLANS PROGRAMMES")
   doc.autoTable(this.getColumns(),data)
 doc.save('plan_programme.pdf')
 return 0

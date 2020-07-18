@@ -4,7 +4,8 @@
 <div>
 
 
- <div id="decisionCfEngagement" class="modal hide">
+
+ <div id="decisionCfEngagement" class="modal hide tailgrand">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button">×</button>
         <h3>Decision CF</h3>
@@ -16,7 +17,7 @@
               <div class="control-group">
                             <label class="control-label">Décision CF </label>
                             <div class="controls">
-                              <select v-model="editEngagement.decision_cf" class="span">
+                              <select v-model="editEngagement.decisionengagement_cf" class="span">
                                 <option value=""></option>
                               <option value="1">Visé</option>
                               <option value="9">Visé avec Observation</option>
@@ -29,33 +30,36 @@
                             </div>
                           </div>
             </td>
-          </tr>
-               <tr>
-                 <td>
+            <td>
                     <div class="control-group">
                             <label class="control-label">Motif CF </label>
                             <div class="controls">
-                               <select v-model="editEngagement.motif" class="span">
-                                <option v-for="varText in AffichierElementParent(affichierIdPlanDecission)" :key="varText.id"
+                               <select v-model="editEngagement.motifcf" class="span">
+                                <option value=""></option>
+                                <option v-for="varText in AffichierElementParent" :key="varText.id"
                                         :value="varText.id">{{varText.libelle}}</option>
                             </select>
                             
                             </div>
                           </div>
                  </td>
-                 </tr>            
-                   <tr>
-                     <td>
-                        <div class="control-group">
-                            <label class="control-label">Observation CF</label>
+          </tr>
+           
+               <tr>
+                 <td>
+                    <div class="control-group">
+                            <label class="control-label">Libelle motif </label>
                             <div class="controls">
-                              <textarea  class="span" row = "6" v-model="editEngagement.observation">
-                              </textarea>
+                               <select v-model="editEngagement.motif" class="span">
+                               <option value=""></option>
+                                <option v-for="varText in AffichierElementEnfant(editEngagement.motifcf)" :key="varText.id"
+                                        :value="varText.id">{{varText.libelle}}</option>
+                            </select>
+                            
                             </div>
                           </div>
-                       </td></tr>      
-                         <tr>
-                           <td>
+                 </td>
+                  <td>
                                <div class="control-group">
                             <label class="control-label">Date Decision CF :</label>
                             <div class="controls">
@@ -65,7 +69,27 @@
                             </div>
                           </div>
                            </td>
-                         </tr>
+                 </tr>            
+                   <tr>
+                     <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Observation CF</label>
+                            <div class="controls">
+                              <textarea  class="span" row = "6" v-model="editEngagement.observation">
+                              </textarea>
+                            </div>
+                          </div>
+                       </td>
+                       <td colspan="">
+                        <div class="control-group">
+                            <label class="control-label">Nom du CF</label>
+                            <div class="controls">
+                              <input type="text" class="span"  :value="afficheNomUtilisateur" readonly/>
+                            </div>
+                          </div>
+                       </td>
+                       </tr>      
+                        
                          
                            
          
@@ -123,19 +147,19 @@
                     <td @dblclick="afficheModalModificationEngagement(Engage.id)">{{CodeSection(Engage.section_id) || 'Non renseigné'}}</td> 
                   <td @dblclick="afficheModalModificationEngagement(Engage.id)">{{formatageSomme(parseFloat(Engage.total_general)) || 0}}</td>
                   <td>
-                        <button v-if="Engage.decision_cf == 1"  class="btn  btn-success" @click="afficheModalDecision(Engage.id)" >                        
+                        <button v-if="Engage.decisionengagement_cf == 1"  class="btn  btn-success" @click="afficheModalDecision(Engage.id)" >                        
                      
                       <span    >Visé</span>
                       
                       </button>
-                       <button v-else-if="Engage.decision_cf == 2" class="btn  btn-warning" @click="afficheModalDecision(Engage.id)" >                        
+                       <button v-else-if="Engage.decisionengagement_cf == 2" class="btn  btn-warning" @click="afficheModalDecision(Engage.id)" >                        
                      
                       
                        <span  >Différé</span>
                       
                     
                       </button>
-                        <button v-else-if="Engage.decision_cf == 3" class="btn  btn-danger" @click="afficheModalDecision(Engage.id)" >                        
+                        <button v-else-if="Engage.decisionengagement_cf == 3" class="btn  btn-danger" @click="afficheModalDecision(Engage.id)" >                        
                      
                       
                        <span  >Réjeté</span>
@@ -157,12 +181,12 @@
                 class="btn btn-default " title="Detail Engagement">
                   <span class=""><i class=" icon-folder-close"></i></span>
                    </router-link> 
-                    <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterRealiteServiceFait(index)" title="Ajouter Réalité Service Fait">
+                    <!-- <button v-if="Engage.decisionengagement_cf == 1" class="btn " @click="afficherModalAjouterRealiteServiceFait(index)" title="Ajouter Réalité Service Fait">
                         <span>
                           <i class="icon icon-book"></i>
                         </span>
                       </button> -->
-                      <!-- <button v-if="Engage.decision_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Mandat">
+                      <!-- <button v-if="Engage.decisionengagement_cf == 1" class="btn " @click="afficherModalAjouterMandat(index)" title="Ajouter Mandat">
                         <span>
                           <i class="icon icon-book"></i>
                         </span>
@@ -220,7 +244,7 @@ search:""
    this.detail_Facture = this.getFacturePersonnaliser.find(
        idmarche => idmarche.id == this.$route.params.id
          )
-         this.editEngagement=this.engagements.find(item=>item.marche_id==this.$route.params.id)
+        //  this.editEngagement=this.engagements.find(item=>item.marche_id==this.$route.params.id)
   
   
   /*  this.appel_offre_marche=this.appelOffres.filter( idmarche => idmarche.marche.id == this.$route.params.id)
@@ -276,7 +300,12 @@ search:""
     ]),
 ...mapGetters('parametreGenerauxFonctionnelle', ['structuresDecision', 
   'plans_Decision']),
+afficheNomUtilisateur(){
+  let objLinea = localStorage.getItem("Users");
+let objJson = JSON.parse(objLinea);
+return objJson.name
 
+},
 afficherIdLiquidation() {
       return id => {
         if (id != null && id != "") {
@@ -314,8 +343,15 @@ afficherIdRealiteServiceFait() {
       }
       return 0
     },
-
 AffichierElementParent() {
+      
+      // return id => {
+      //   if (id != null && id != "") {
+          return this.plans_Decision.filter(element => element.code == 11 || element.code == 12 || element.code == 13 || element.code == 14 || element.code == 15 || element.code == 16 || element.code == 17 || element.code == 18 || element.code == 19 || element.code == 20);
+      //   }
+      // };
+    },
+AffichierElementEnfant() {
       
       return id => {
         if (id != null && id != "") {
@@ -1210,7 +1246,7 @@ val:0,
          ligne_id:"",
          
          date_reception_cf:"",
-          decision_cf:"",
+          decisionengagement_cf:"",
            numero_demande:"",
               numero_op:"",
               autre_engagement:"",
@@ -1232,10 +1268,11 @@ val:0,
  margin: 0 -530px;
  height: 550px;
 
+
 }
 .tailgrand{
-  width: 77%;
-  margin: 0 -38%;
+  width: 50%;
+  margin: 0 -25%;
 }
 .tailAvenant{
   width: 75%;

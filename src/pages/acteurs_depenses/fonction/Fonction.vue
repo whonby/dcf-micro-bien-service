@@ -10,6 +10,27 @@
             <hr>
             <div class="row-fluid">
                 <div class="span12">
+
+                                  <div>
+                 <download-excel
+                     class="btn btn-success pull-right"
+                     style="cursor:pointer;"
+                       :fields = "json_fields"
+                       title="Fonctions"
+                       name ="Fonctions"
+                       worksheet = "fonctions"
+                     :data="fonctions">
+          <i title="Exporter en excel" class="icon-table"> Exporter en excel</i>
+                                    </download-excel>
+             <div  align="right" style="cursor:pointer;">
+                <button class="btn btn-info" @click.prevent="genererEnPdf()">Exporter en PDF</button>
+            </div>
+                        </div> <br>
+          
+
+
+
+
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                             <h5>Listes des fonctions</h5>
@@ -47,6 +68,18 @@
                                 </tr>
                                 </tbody>
                             </table>
+                                                  <div class="pagination alternate">
+      <ul>
+        <li :class="{ disabled : page == 0 }"><a @click.prevent="precedent()" href="#">Précedent</a></li>
+           <li  v-for="(titre, index) in partition(fonctions,size).length" :key="index" :class="{ active : active_el == index }">
+           <a @click.prevent="getDataPaginate(index)" href="#">{{index + 1}}</a></li>
+        <li :class="{ disabled : page == partition(fonctions,size).length -1 }"><a @click.prevent="suivant()" href="#">Suivant</a></li>
+      </ul>
+   </div>
+  
+
+
+
                         </div>
                     </div>
                 </div>
@@ -65,7 +98,7 @@
         <div id="exampleModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Ajouter fonctions</h3>
+                <h3>Ajouter fonction</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -99,7 +132,7 @@
         <div id="modifierModal" class="modal hide">
             <div class="modal-header">
                 <button data-dismiss="modal" class="close" type="button">×</button>
-                <h3>Modifier fonctions</h3>
+                <h3>Modifier fonction</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -141,10 +174,21 @@
 <script>
 
     import {mapGetters, mapActions} from 'vuex'
+         import {partition} from '../../../../src/Repositories/Repository'
+       import jsPDF from 'jspdf'
+       import 'jspdf-autotable'
     export default {
 
         data() {
             return {
+                  page:0,
+               size:10,
+             active_el:0,
+
+         json_fields:{
+             'code':'code',
+           'libelle':'libelle'
+         },
                 fabActions: [
                     {
                         name: 'cache',
@@ -196,6 +240,47 @@
         methods: {
             // methode pour notre action
             ...mapActions('personnelUA', ['getFonctions',"ajouterFonction","supprimerFonction","modifierFonction"]),
+
+                           // pagination
+        partition:partition,
+           getDataPaginate(index){
+               this.active_el = index;
+               this.page=index
+           },
+           precedent(){
+               this.active_el--
+               this.page --
+           },
+           suivant(){
+               this.active_el++
+               this.page ++
+           },
+      
+                        
+         
+                 genererEnPdf(){
+        var doc = new jsPDF()
+        // doc.autoTable({ html: this.natures_sections })
+         var data = this.fonctions;
+          doc.setFontSize(8)
+          doc.text(75,10,"LISTE DES FONCTIONS")
+        doc.autoTable(this.getColumns(),data)
+      doc.save('fonctions.pdf')
+      return 0
+      },
+      getColumns() {
+          return [
+            
+              {title: "CODE", dataKey: "code"},
+              {title: "LIBELLE", dataKey: "libelle"},
+           
+              
+          ];
+      },
+      
+
+
+
             afficherModalAjouterTitre(){
                 this.$('#exampleModal').modal({
                     backdrop: 'static',
