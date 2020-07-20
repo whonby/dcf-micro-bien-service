@@ -20,7 +20,7 @@
                   <div class="widget-title">
                     <ul class="nav nav-tabs">
                       <li class="active">
-                        <a data-toggle="tab" href="#tab1">Information utilisateur{{afficheidUtilisateur}}</a>
+                        <a data-toggle="tab" href="#tab1">Information utilisateur</a>
                       </li>
                        
                      
@@ -37,7 +37,7 @@
                 <div class="control-group">
                  
                   <div class="controls">
-                     <img src="../../../../public/lien/img/imgUser/photoDefo.png" name="aboutme" width="200" height="2000" class="img-circle">
+                     <img v-bind:src="AffichePhoto(afficheidUtilisateur)" name="aboutme" width="100" height="20" class="img-circle">
                   </div>
                 </div>
               </td>
@@ -106,7 +106,22 @@ info_img:false,
 
         computed: {
             ...mapGetters('Utilisateurs', ['loader', 'champVide', 'error', 'errorMessage']),
+...mapGetters('personnelUA', ['sauvegardePhoto']),
 
+
+  AffichePhoto() {
+      return id => {
+        if (id != null && id != "") {
+           const qtereel = this.sauvegardePhoto.find(qtreel => qtreel.user_id == id);
+
+      if (qtereel) {
+        return qtereel.fichier;
+      }
+      return "http://dcf-personnel-ua.kognishare.com/savephotoprofil/1_!1595119277.jpg "
+        }
+      };
+    },
+    
                 afficheidUtilisateur(){
   let objLinea = localStorage.getItem("Users");
 let objJson = JSON.parse(objLinea);
@@ -179,6 +194,7 @@ addFichierPDF(file) {
                     }
                 }
                 this.ajouterSauvegardePhoto(formData,config)
+                this.logoutUser()
                 // setTimeout(function () {  this.delaiMiseDispositionAct(this.acteur_id) }.bind(this), 3000)
                 // setTimeout(function () {  this.getLoadActeurDepense(this.acteur_id) }.bind(this), 3000)
 

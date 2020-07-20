@@ -2019,27 +2019,29 @@ export function getSauvegardePhoto({ commit }) {
 
 // ajouter type acte personnel
 export function ajouterSauvegardePhoto({ commit, dispatch }, objetAjoute,config) {
-    this.$app.$loading(true)
+    // this.$app.$loading(true)
     axios.post('/affichePhoto', objetAjoute, config).then(res => {
         if (res.status == 201) {
-            this.$app.$notify({
-                title: 'success',
-                text: 'Enregistrement effectuer',
-                type: "success"
-            });
+            // this.$app.$notify({
+            //     title: 'success',
+            //     text: 'Enregistrement effectuer',
+            //     type: "success"
+            // });
             commit('AJOUTER_SAUVEGARDE_PHOTO', res.data)
             dispatch("getSauvegardePhoto");
             dispatch("getSauvegardePhoto");
-            this.$app.$loading(false)
+            dispatch("getSauvegardePhoto");
+            dispatch("getSauvegardePhoto");
+            // this.$app.$loading(false)
         }
     }).catch(error => {
         console.log(error)
-        this.$app.$loading(false)
-        this.$app.$notify({
-            title: 'Erreur',
-            text: "Erreur c'est produit lors de l'enregistrement",
-            type: "error"
-        });
+        // this.$app.$loading(false)
+        // this.$app.$notify({
+        //     title: 'Erreur',
+        //     text: "Erreur c'est produit lors de l'enregistrement",
+        //     type: "error"
+        // });
     })
 }
 
