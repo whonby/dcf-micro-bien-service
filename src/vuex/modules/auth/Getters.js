@@ -19,6 +19,7 @@ export const getterAffectation =state =>state.affectation
 export const getterUniteAdministrativeByUser=state=>state.uniteAdministrativeByUser
 
 
+
   
 
 
